@@ -180,6 +180,34 @@ export class ContractsUserDevice {
         let validate = (this.blockTimeServices.find(item => !item.validate)) ? false : true;
         return validateDuplicated && validate;
     }
+
+    public checkProductExpenses() {
+        this.productExpenses.forEach(item => {
+            item.validate = true;
+        });
+        this.productExpenses.forEach((item) => {
+            if (item.description.length === 0 || item.productId.length === 0) item.validate = false;
+          
+        })
+        
+        let validate = (this.productExpenses.find(item => !item.validate)) ? false : true;
+        return   validate;
+    }
+    public checkServiceExpenses() {
+        this.serviceExpenses.forEach(item => {
+            item.validate = true;
+            item.validateDescription = true;
+        });
+        this.serviceExpenses.forEach((item) => {
+            if (item.serviceId.length === 0) item.validate = false;
+            if (item.description.length === 0) item.validateDescription = false;
+          
+        })
+        
+        let validate = (this.serviceExpenses.find(item => !item.validate)) ? false : true;
+        let validateDescription = (this.serviceExpenses.find(item => !item.validateDescription)) ? false : true;
+        return   validate && validateDescription;
+    }
     public getDataForCreate(toggleMaximumAmountHours) {
 
         return {

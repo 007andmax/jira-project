@@ -114,6 +114,9 @@
     <button class="qt-btn --outline --small" (click)="addProduct()" *ngIf="type === 'PRODUCTS'">+ Add Product</button>
     <button class="qt-btn --outline --small" (click)="addService()" *ngIf="type === 'SERVICES'">+ Add Service</button>
 
+    <mat-error   *ngIf="!validate.getServicesOrProducts()">
+      At least one {{(type === 'PRODUCTS' ? 'product' : 'service')}} should be added
+    </mat-error>
   </div>
 
   <div class="qt-pt-16 qt-pl-32 qt-pr-32 qt-pb-32">

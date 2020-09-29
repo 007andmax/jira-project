@@ -4,11 +4,16 @@ export class ContractsOtherService {
     description: string;
     quantity: number;
     serviceId: string;
+    validate:boolean = true;
+    validateDescription:boolean = true;
     constructor(date, description, quantity, serviceId) {
         this.date = date;
         this.description = description;
         this.quantity = quantity;
         this.serviceId = serviceId;
+    }
+    public resetValidateDescription () {
+        this.validateDescription = true;
     }
     public setQuantity(data) {
         this.quantity = data;

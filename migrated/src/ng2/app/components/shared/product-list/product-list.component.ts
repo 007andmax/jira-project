@@ -18,6 +18,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
   itemList: any;
   @Input() editItem: any;
   @Input() type: string;
+  @Input() validate: boolean = true;
+  
   classAddProduct: string
   public isFormValid = false;
   isCreateproduct: boolean = false;

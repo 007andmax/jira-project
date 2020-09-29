@@ -28,6 +28,9 @@ export class ContractsAsideOtherServiceComponent implements OnInit {
       this.defaultServices.sort((a, b) => a.name.localeCompare(b.name));
     })
   }
+  public onChangeDescription() {
+    this.service.resetValidateDescription();
+  }
   public onChangeDurationService(data) {
     console.log("data", data);
     this.service.setQuantity(data);
@@ -40,6 +43,7 @@ export class ContractsAsideOtherServiceComponent implements OnInit {
     this.service.quantity = 0;
     this.service.date = new Date().getTime();
     this.service.serviceId = data.versionedId.id;
+    this.service.validate = true;
   }
   onChangeDatePickerService(data) {
     console.log("data", data);

@@ -1,8 +1,9 @@
 export class ContractsOtherProduct {
-    description:string;
+    description:string = "";
     productId: string;
     quantity: number;
     salePrice: number;
+    validate:boolean = true;
     constructor(productId,quantity,salePrice) {
         this.productId = productId;
         this.quantity = quantity;

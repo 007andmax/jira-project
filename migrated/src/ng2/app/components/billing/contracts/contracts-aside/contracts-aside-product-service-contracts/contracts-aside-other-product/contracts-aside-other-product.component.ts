@@ -16,10 +16,19 @@ export class ContractsAsideOtherProductComponent implements OnInit {
   }
   public onChangeProduct(data) {
     console.log("data", data);
-    this.product.description = data.description;
-    this.product.quantity = 0;
-    this.product.salePrice = data.sale;
-    this.product.productId = data.versionedId.id;
+    if (data) {
+      this.product.description = data.description;
+      this.product.quantity = 0;
+      this.product.salePrice = data.sale;
+      this.product.productId = data.versionedId.id;
+      this.product.validate = true;
+    } else {
+      this.product.description = "";
+      this.product.quantity = 0;
+      this.product.salePrice = 0;
+      this.product.productId = "";
+    }
+
   }
   public onChangeQuantity(val) {
     let value = Number(val);

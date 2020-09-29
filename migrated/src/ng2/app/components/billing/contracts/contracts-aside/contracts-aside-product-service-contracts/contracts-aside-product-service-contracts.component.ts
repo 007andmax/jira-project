@@ -17,6 +17,8 @@ import { ContractsOtherProduct } from '../class/contracts-other-product';
 import { ContractsOtherService } from '../class/contracts-other-service';
 import * as moment from "moment";
 import { ContractsAsideTopComponent } from '../contracts-aside-top/contracts-aside-top.component';
+import { ContractsOtherValidate } from '../class/contracts-other-validate';
+import { ContractsConfirmComponent } from '../../contracts-confirm/contracts-confirm.component';
 
 @Component({
   selector: 'app-contracts-aside-product-service-contracts',
@@ -35,7 +37,7 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit {
   formatDate: string = FORMAT_DATE_2;
   startDate = new Date().getTime();
   reviewDate = new Date().getTime();
-  validate: ContractsBlockTimeValidate = new ContractsBlockTimeValidate();
+  validate: ContractsOtherValidate = new ContractsOtherValidate();
   intervals: Array<string> = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days'];
   selectedInterval: string = 'MONTHLY';
   minStartDate: number = null;
@@ -61,6 +63,11 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit {
     this.contractsOther.setReviewDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
 
     this.minStartDate = this.getMinStartDate('MONTHLY', this.contractsOther.startDate);
+    let getConfirm = this.сontractsStateService.getConfirm().subscribe(data => {
+      console.log("data", data);
+      this.onCheckServicesForAdd(data);
+    })
+    this.sub.add(getConfirm);
     /* if (this.taxesStateService.getTaxes().length > 0) this.setDefaultTaxes(this.taxesStateService.getTaxes());
      let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
        this.setDefaultTaxes(data);
@@ -75,11 +82,22 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit {
      new ContractsUserDeviceService(0, "Managed servers", 0, this.defaultSelectedTax.map(item => item.id))]
      if (this.сontractsStateService.getContractForCopy()) this.onInitCopy();*/
   }
+  onCheckServicesForAdd(createBillableItem) {
+    if ( !this.contractsOther.checkProductExpenses() ||  !this.contractsOther.checkServiceExpenses()) {
+      this.cd.detectChanges();
+      return;
+    }
+   /* this.contractsService.createContract(createBillableItem, this.contractsBlockTime.getDataForCreate()).subscribe(res => {
+      this.onClose.emit(null);
+    })*/
+  }
   addService() {
     this.contractsOther.serviceExpenses.push(new ContractsOtherService(new Date().getTime(),"",0,""));
+    this.validate.resetServicesOrProducts();
   }
   addProduct() {
     this.contractsOther.productExpenses.push(new ContractsOtherProduct("",0,0));
+    this.validate.resetServicesOrProducts();
   }
   onRemoveService(i) {
     this.contractsOther.serviceExpenses.splice(i, 1);
@@ -128,5 +146,12 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit {
   }
   parsedateForTotal(date) {
     return moment(date).format('DD MMM YYYY');
+  }
+  public onCreate() {
+    if (!this.validate.isValidate(this.contractsOther)) return;
+    const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: false });
+
+    modalRef.componentInstance.message = `Do we need to create the billable item now?`;
+    console.log("modalRef", modalRef);
   }
 }
