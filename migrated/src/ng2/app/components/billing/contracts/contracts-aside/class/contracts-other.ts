@@ -34,6 +34,7 @@ export class ContractsOther extends ContractsUserDevice {
             services: [],
             startDate: this.startDate,
             taxIds: null,
+            reviewDate: this.reviewDate,
             type: "SERVICE_CONTRACT"
         }
     }
