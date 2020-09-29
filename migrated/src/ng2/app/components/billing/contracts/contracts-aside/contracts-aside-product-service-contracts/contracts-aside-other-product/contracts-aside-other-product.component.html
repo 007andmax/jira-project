@@ -1,11 +1,11 @@
 <tr>
-  <td class="contract-product-products-table__name" >
+  <td class="contract-product-products-table__name --editable" >
     <app-product-list  [editItem]="editProduct"   class="product-item__prodect-list" [validate]="product.validate"
     (selectedProductItem)="onChangeProduct($event)"></app-product-list></td>
-  <td class="contract-product-products-table__quantity"><input   class="payment-input qt-input-in-table"   decimalNumber
+  <td class="contract-product-products-table__quantity --editable"><input   class="payment-input qt-input-in-table"   decimalNumber
     [value]="product.quantity"
     (onChange)="onChangeQuantity($event)" /></td>
-  <td class="contract-product-products-table__price"><input   class="payment-input qt-input-in-table"   number
+  <td class="contract-product-products-table__price --editable"><input   class="payment-input qt-input-in-table"   number
     [money]="true"
     [ngModel]="product.salePrice"
     (ngModelChange)="onChangeSalePrice($event)"

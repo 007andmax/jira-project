@@ -395,39 +395,72 @@
       width: 109px;
       padding: 0 12px !important;
       text-align: right !important;
+      .date-picker {
+        height: 100%;
+        input.dropdown-toggle {
+          height: 100%;
+          border-color: transparent;
+        }
+      }
     }
 
     &__duration {
       width: 90px;
       padding: 0 12px !important;
       text-align: right !important;
+      &.--editable {
+        width: 100px;
+      }
+      igx-time-picker {
+        border-color: transparent;
+      }
     }
 
     &__description {
       padding: 0 12px !important;
+      input {
+        height: 100%;
+      }
     }
 
     &__service {
       padding: 0 12px !important;
       width: 223px;
+      input {
+        height: 100%;
+        border-color: transparent;
+      }
+
+    }
+    .--editable {
+      padding: 0 !important;
     }
   }
 
   .contract-product-products-table{
     &__name {
       padding: 0 12px !important;
+      &.--editable {
+        padding: 0 !important;
+      }
     }
 
     &__quantity {
       width: 110px;
       padding: 0 12px !important;
       text-align: right !important;
+      &.--editable {
+        padding: 0 !important;
+      }
     }
 
     &__price {
       width: 109px;
       padding: 0 12px !important;
       text-align: right !important;
+      &.--editable {
+        padding: 0 !important;
+      }
     }
   }
 
@@ -571,7 +604,11 @@ app-contracts-filter {
     margin-top: 0;
   }
 }
-app-contracts-aside-hourly-billing-default-service,app-contracts-aside-hourly-billing-edit-default-service {
+app-contracts-aside-hourly-billing-default-service,
+app-contracts-aside-hourly-billing-edit-default-service,
+app-contracts-aside-other-product,
+app-contracts-aside-other-service,
+app-ticket-profile-updates-service-duration {
   display: contents;
 }
 

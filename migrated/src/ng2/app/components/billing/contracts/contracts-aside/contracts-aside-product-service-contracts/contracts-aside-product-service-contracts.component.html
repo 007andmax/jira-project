@@ -14,6 +14,7 @@
         <label>Start Date</label>
         <app-date-picker #startDateDP [formatDate]="formatDate" [editMode]="true" [editDate]="startDate" [minDate]="minStartDate" (onChange)="onChangeStartDate($event)"></app-date-picker>
 
+
       </div>
 
       <div class="qt-input-block --required qt-w25 qt-mr-16">
@@ -30,7 +31,7 @@
 
       </div>
 
-     
+
       <div class="qt-input-block --required  qt-w25">
         <label>Review Date</label>
         <app-date-picker #reviewDateDP [formatDate]="formatDate" [editMode]="true"[editDate]="reviewDate"  [useMinDate]="false"   (onChange)="onChangeReviewDate($event)"></app-date-picker>
@@ -81,13 +82,13 @@
            >
             <app-contracts-aside-other-service [service]="item" (onRemove)="onRemoveService(i)"  ></app-contracts-aside-other-service>
            </ng-template>
-          
-         
+
+
 
 
         </tbody>
       </table>
-     
+
     </div>
 
     <div class="table-last-icon-wrapper qt-mb-16" *ngIf="type === 'PRODUCTS'">
@@ -107,7 +108,7 @@
            >
             <app-contracts-aside-other-product [productsList]="productList" [product]="item" (onRemove)="onRemoveProduct(i)"  ></app-contracts-aside-other-product>
            </ng-template>
-        
+
         </tbody>
       </table>
     </div>
