@@ -8,12 +8,12 @@
     </mat-error>
     <input type="text" class="qt-input-in-table" [ngClass]="{'--input-error' : !service.validate || !service.validateDuplicated}" [(ngModel)]="service.name" (blur)="checkName()" (input)="onChange()" />
   </td>
-  <td class="col-count --editable"> <input type="text" class="qt-input-in-table"   decimalNumber
+  <td class="col-count --editable"> <input type="text" class="qt-input-in-table qt-text-right" decimalNumber
     placeholder="1"
     [value]="service.count"
     (onChange)="service.count=$event"  /></td>
   <td class="col-tax --editable"><app-invoice-form-ticket-edit-taxes   class="qt-taxes-multiselect" #taxesDropDown (taxesChange)="onTaxesChange($event)"></app-invoice-form-ticket-edit-taxes></td>
-  <td class="col-price --editable"><input type="text" class="payment-input qt-input-in-table"   number
+  <td class="col-price --editable "><input type="text" class="payment-input qt-input-in-table qt-text-right"   number
     [money]="true"
     [ngModel]="service.rate"
     (ngModelChange)="onChangeRate($event,invoice)"
