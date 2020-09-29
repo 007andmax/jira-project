@@ -1,5 +1,5 @@
 export class ContractsOtherProduct {
-    description: string = "";
+     
     productId: string;
     quantity: number;
     salePrice: number;

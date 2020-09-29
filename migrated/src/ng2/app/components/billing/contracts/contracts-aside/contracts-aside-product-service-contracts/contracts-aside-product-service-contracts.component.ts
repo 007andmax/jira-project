@@ -19,6 +19,8 @@ import * as moment from "moment";
 import { ContractsAsideTopComponent } from '../contracts-aside-top/contracts-aside-top.component';
 import { ContractsOtherValidate } from '../class/contracts-other-validate';
 import { ContractsConfirmComponent } from '../../contracts-confirm/contracts-confirm.component';
+import { ProductService } from 'src/ng2/app/services/product/product.service';
+import { InventoryItem } from 'src/ng2/app/components/inventory/class/inventory-item';
 
 @Component({
   selector: 'app-contracts-aside-product-service-contracts',
@@ -41,10 +43,10 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit,On
   intervals: Array<string> = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days'];
   selectedInterval: string = 'MONTHLY';
   minStartDate: number = null;
-  taxes: Array<Tax> = [];
+  productList:Array<InventoryItem> = [];
   toggleMaximumAmountHours: boolean = false;
   toggleContractServices: boolean = false;
-  defaultSelectedTax: Array<Tax> = [];
+   
   type:string = "PRODUCTS";
   sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
@@ -53,7 +55,7 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit,On
     private contractsService: ContractsService,
     private modalService: NgbModal,
     private сontractsStateService: ContractsStateService,
-
+    private productService:ProductService,
     public cd: ChangeDetectorRef) { }
 
 
@@ -62,15 +64,32 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit,On
     today.setMonth(today.getMonth() + 1);
     this.contractsOther.setStartDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.contractsOther.setReviewDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-
+    this.productService.getProducts().subscribe(data => {
+      this.productList = data;
+    })
     this.minStartDate = this.getMinStartDate('MONTHLY', this.contractsOther.startDate);
     let getConfirm = this.сontractsStateService.getConfirm().subscribe(data => {
       console.log("data", data);
       this.onCheckServicesForAdd(data);
     })
     this.sub.add(getConfirm);
-    /*  
-     if (this.сontractsStateService.getContractForCopy()) this.onInitCopy();*/
+     
+     if (this.сontractsStateService.getContractForCopy()) this.onInitCopy(); 
+  }
+  onInitCopy() {
+    this.contractsOther.setDataFromCopy(this.сontractsStateService.getContractForCopy());
+    this.selectedInterval = this.contractsOther.intervalstring;
+
+    this.startDate = this.сontractsStateService.getContractForCopy().getStartDateByMilliseconds();
+    this.startDateDP.minDate = this.сontractsStateService.getContractForCopy().getStartDateByMilliseconds();
+    this.reviewDate = this.сontractsStateService.getContractForCopy().getReviewDateByMilliseconds();
+    this.reviewDateDP.minDate = this.сontractsStateService.getContractForCopy().getReviewDateByMilliseconds();
+    this.startDateDP.setEditDate(this.сontractsStateService.getContractForCopy().getStartDateByMilliseconds());
+    this.reviewDateDP.setEditDate(this.сontractsStateService.getContractForCopy().getReviewDateByMilliseconds());
+    this.topContract.companiesDP.selectedItem = this.companiesStateService.getCompanies().find(item => item.id === this.contractsOther.companyId);
+   
+     
+    
   }
   onCheckServicesForAdd(createBillableItem) {
     if ( !this.contractsOther.checkProductExpenses() ||  !this.contractsOther.checkServiceExpenses()) {

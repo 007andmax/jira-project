@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { InventoryItem } from 'src/ng2/app/components/inventory/class/inventory-item';
 import { Product } from 'src/ng2/app/interfaces/product/product';
 import { ContractsOtherProduct } from '../../class/contracts-other-product';
 
@@ -9,21 +10,26 @@ import { ContractsOtherProduct } from '../../class/contracts-other-product';
 })
 export class ContractsAsideOtherProductComponent implements OnInit {
   @Input() product: ContractsOtherProduct;
+  editProduct: InventoryItem;
+  @Input() productsList: Array<InventoryItem> = [];
   @Output() onRemove = new EventEmitter<any>();
   constructor() { }
 
   ngOnInit() {
+   this.editProduct = this.productsList.find(item => item.versionedId.id === this.product.productId);
+   console.log("this.editProduct",this.editProduct);
+   console.log("this.productsList",this.productsList);
   }
   public onChangeProduct(data) {
     console.log("data", data);
     if (data) {
-      this.product.description = data.description;
+     
       this.product.quantity = 0;
       this.product.salePrice = data.sale;
       this.product.productId = data.versionedId.id;
       this.product.validate = true;
     } else {
-      this.product.description = "";
+     
       this.product.quantity = 0;
       this.product.salePrice = 0;
       this.product.productId = "";

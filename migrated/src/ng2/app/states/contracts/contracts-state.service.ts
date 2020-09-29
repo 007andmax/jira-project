@@ -19,6 +19,7 @@ export class ContractsStateService {
   onChangeType: EventEmitter<any> = new EventEmitter();
   onDefaultServices: EventEmitter<any> = new EventEmitter();
   onConfirm: EventEmitter<any> = new EventEmitter();
+  productList = [];
   constructor() { }
 
   public getContractForCopy() {
@@ -96,5 +97,11 @@ export class ContractsStateService {
   }
   public getSort() {
     return this.onSort;
+  }
+  public setProductsList (data) {
+    this.productList = data;
+  }
+  public getProductsList () {
+    return this.productList;
   }
 }

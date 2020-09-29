@@ -50,9 +50,9 @@ export class InventoryStateService {
     });
   }
   public getListProducts() {
-   return this.productList;
+    return this.productList;
   }
- 
+
   public setproducts(data) {
     this.productList = data;
   }

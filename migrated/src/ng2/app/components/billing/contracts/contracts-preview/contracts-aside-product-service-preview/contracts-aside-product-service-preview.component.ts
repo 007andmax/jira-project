@@ -31,8 +31,6 @@ export class ContractsAsideProductServicePreviewComponent implements OnInit {
     this.productService.getProducts().subscribe(data => {
       this.productList = data;
     })
-    
-    
     this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.contractsOther.companyId);
     this.getSelectedInterval();
   }

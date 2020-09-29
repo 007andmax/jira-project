@@ -4,6 +4,9 @@ import { ServiceAgreementBlockTimeServices } from './service-agreement-block-tim
 import { СontractsBlockTimeShare } from '../contracts-aside/class/contracts-block-time-share';
 import { v4 as uuidv4 } from 'uuid';
 import { ContractsBlockTimeDefaultService } from '../contracts-aside/class/contracts-block-time-default-service';
+ 
+import { ContractsOtherProduct } from '../contracts-aside/class/contracts-other-product';
+import { ServiceAgreementServiceExpenses } from './service-agreement-service-expenses';
 export class ServiceAgreement {
     amount: number;
     billType: string;
@@ -23,12 +26,12 @@ export class ServiceAgreement {
     intervalstring: string;
     invoiceAsSingleItem: boolean;
     maxRolloverHours: any;
-    productExpenses: any;
+    productExpenses: Array<ContractsOtherProduct> = [];
     rateExceeding: string;
     reviewDate: string;
     serviceContractServices: Array<ServiceAgreementBlockTimeServices> = [];
     serviceContractServicesToTrack: Array<ServiceAgreementBlockTimeServices> = [];
-    serviceExpenses: any;
+    serviceExpenses: Array<ServiceAgreementServiceExpenses> = [];
     services: Array<ContractsBlockTimeDefaultService> = [];
     shares: Array<СontractsBlockTimeShare> = [];
     startDate: string;
@@ -78,7 +81,8 @@ export class ServiceAgreement {
             this.maxRolloverHours = (data.maxRolloverHours) ? String(data.maxRolloverHours) : "";
             this.rateExceeding = (data.rateExceeding) ? String(data.rateExceeding) : "";
             this.blockRate = (typeof data.blockRate === "number") ? String(data.blockRate) : "";
-
+            this.productExpenses = data.productExpenses.map(item => new ContractsOtherProduct(item.productId, item.quantity, item.salePrice));
+            this.serviceExpenses = data.serviceExpenses.map(item => new ServiceAgreementServiceExpenses(item));
         }
     }
     public setReviewDate(day, month, year, timeOffset) {
@@ -218,7 +222,7 @@ export class ServiceAgreement {
         return {
             id: this.id,
             billType: this.billType,
-            blockRate: (this.blockRate) ? this.blockRate  : undefined,
+            blockRate: (this.blockRate) ? this.blockRate : undefined,
             blockTimeServices: (toggleMaximumAmountHours) ? this.blockTimeServices.map(item => item.getDataForUpdate()) : null,
             companyId: this.companyId,
             contractWithBlockTime: toggleMaximumAmountHours,

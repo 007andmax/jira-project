@@ -186,7 +186,7 @@ export class ContractsUserDevice {
             item.validate = true;
         });
         this.productExpenses.forEach((item) => {
-            if (item.description.length === 0 || item.productId.length === 0) item.validate = false;
+            if (item.productId.length === 0) item.validate = false;
 
         })
 

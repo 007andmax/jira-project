@@ -13,7 +13,8 @@ export class ContractsComponent implements OnInit {
   showPreview = false;
   showEdit = false;
   serviceAgreement: ServiceAgreement;
-  constructor(private contractsStateService: ContractsStateService) { }
+  constructor(private contractsStateService: ContractsStateService,
+    ) { }
 
   ngOnInit() {
    
