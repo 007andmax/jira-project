@@ -12,6 +12,14 @@ export class ContractsOtherService {
         this.quantity = quantity;
         this.serviceId = serviceId;
     }
+    public getDataForCrate() {
+        return {
+            date: this.date,
+            description: this.description,
+            quantity: this.quantity,
+            serviceId: this.serviceId,
+        }
+    }
     public resetValidateDescription () {
         this.validateDescription = true;
     }

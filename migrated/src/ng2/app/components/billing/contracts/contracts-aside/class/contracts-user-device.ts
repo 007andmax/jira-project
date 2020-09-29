@@ -41,7 +41,7 @@ export class ContractsUserDevice {
         this.blockRate = (data.blockRate.length > 0) ? Number(data.blockRate) : undefined;
         this.blockTimeServices = (data.blockTimeServices.length > 0) ? data.blockTimeServices.map(item => new ContractsBlockTimeService(item.name, item.rate)) : data.serviceContractServicesToTrack.map(item => new ContractsBlockTimeService(item.name, item.rate));
         this.companyId = data.companyId;
-        this.contractWithBlockTime = (data.rateExceeding && data.includedHours) ? true  : false;
+        this.contractWithBlockTime = (data.rateExceeding && data.includedHours) ? true : false;
         this.customInterval = data.customInterval;
         this.description = data.description;
         this.endDate = data.endDate;
@@ -187,11 +187,11 @@ export class ContractsUserDevice {
         });
         this.productExpenses.forEach((item) => {
             if (item.description.length === 0 || item.productId.length === 0) item.validate = false;
-          
+
         })
-        
+
         let validate = (this.productExpenses.find(item => !item.validate)) ? false : true;
-        return   validate;
+        return validate;
     }
     public checkServiceExpenses() {
         this.serviceExpenses.forEach(item => {
@@ -201,12 +201,12 @@ export class ContractsUserDevice {
         this.serviceExpenses.forEach((item) => {
             if (item.serviceId.length === 0) item.validate = false;
             if (item.description.length === 0) item.validateDescription = false;
-          
+
         })
-        
+
         let validate = (this.serviceExpenses.find(item => !item.validate)) ? false : true;
         let validateDescription = (this.serviceExpenses.find(item => !item.validateDescription)) ? false : true;
-        return   validate && validateDescription;
+        return validate && validateDescription;
     }
     public getDataForCreate(toggleMaximumAmountHours) {
 
@@ -232,6 +232,7 @@ export class ContractsUserDevice {
             type: "SERVICE_CONTRACT"
         }
     }
+    
     public checkDuplicatedServices() {
         this.services.forEach(item => {
             item.validateDuplicated = true;

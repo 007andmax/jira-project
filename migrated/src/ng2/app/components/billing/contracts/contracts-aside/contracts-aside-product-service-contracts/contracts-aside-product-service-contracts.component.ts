@@ -87,9 +87,9 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit {
       this.cd.detectChanges();
       return;
     }
-   /* this.contractsService.createContract(createBillableItem, this.contractsBlockTime.getDataForCreate()).subscribe(res => {
+    this.contractsService.createContract(createBillableItem, this.contractsOther.getDataForCreateOther()).subscribe(res => {
       this.onClose.emit(null);
-    })*/
+    })
   }
   addService() {
     this.contractsOther.serviceExpenses.push(new ContractsOtherService(new Date().getTime(),"",0,""));

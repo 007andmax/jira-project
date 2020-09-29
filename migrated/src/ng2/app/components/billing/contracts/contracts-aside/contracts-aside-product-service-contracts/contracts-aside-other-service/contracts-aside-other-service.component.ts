@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-state.service';
 import { DefaultServices } from '../../../../default-services/class/default-service';
@@ -12,6 +12,7 @@ import { DefaultServicesHourlyContract } from '../../class/default-service-hourl
 })
 export class ContractsAsideOtherServiceComponent implements OnInit {
   @Input() service: ContractsOtherService;
+  @Output() onRemove = new EventEmitter<any>();
   defaultServices: Array<DefaultServicesHourlyContract> = [];
   constructor(private contractsStateService: ContractsStateService,
     private companiesStateService: CompaniesStateService) { }
@@ -49,5 +50,8 @@ export class ContractsAsideOtherServiceComponent implements OnInit {
     console.log("data", data);
     this.service.setDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
  
+  }
+  remove() {
+    this.onRemove.emit(null);
   }
 }
