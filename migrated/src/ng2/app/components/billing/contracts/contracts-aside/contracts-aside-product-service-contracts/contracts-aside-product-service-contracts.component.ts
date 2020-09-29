@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { DatePickerComponent } from 'src/ng2/app/components/shared/date-picker/date-picker.component';
@@ -25,7 +25,7 @@ import { ContractsConfirmComponent } from '../../contracts-confirm/contracts-con
   templateUrl: './contracts-aside-product-service-contracts.component.html',
   styleUrls: ['./contracts-aside-product-service-contracts.component.scss']
 })
-export class ContractsAsideProductServiceContractsComponent implements OnInit {
+export class ContractsAsideProductServiceContractsComponent implements OnInit,OnDestroy {
   selectedType = new ContractsFilterType('Service Contract/by other', 'SERVICE_CONTRACT', 'OTHER');
   @ViewChild('taxes') taxesDP: InvoiceFormTicketEditTaxesComponent;
   @ViewChild('startDateDP') startDateDP: DatePickerComponent;
@@ -56,6 +56,7 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit {
 
     public cd: ChangeDetectorRef) { }
 
+
   ngOnInit() {
     let today = new Date();
     today.setMonth(today.getMonth() + 1);
@@ -68,18 +69,7 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit {
       this.onCheckServicesForAdd(data);
     })
     this.sub.add(getConfirm);
-    /* if (this.taxesStateService.getTaxes().length > 0) this.setDefaultTaxes(this.taxesStateService.getTaxes());
-     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
-       this.setDefaultTaxes(data);
- 
-     })
-     let getConfirm = this.сontractsStateService.getConfirm().subscribe(data => {
-       console.log("data", data);
-       this.onCheckServicesForAdd(data);
-     })
-     this.sub.add(getConfirm);
-     this.contractsUserDevice.serviceContractServices = [new ContractsUserDeviceService(0, "Managed workstations", 0, this.defaultSelectedTax.map(item => item.id)),
-     new ContractsUserDeviceService(0, "Managed servers", 0, this.defaultSelectedTax.map(item => item.id))]
+    /*  
      if (this.сontractsStateService.getContractForCopy()) this.onInitCopy();*/
   }
   onCheckServicesForAdd(createBillableItem) {
@@ -153,5 +143,8 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit {
 
     modalRef.componentInstance.message = `Do we need to create the billable item now?`;
     console.log("modalRef", modalRef);
+  }
+  ngOnDestroy(): void {
+   this.sub.unsubscribe();
   }
 }

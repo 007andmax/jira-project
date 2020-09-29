@@ -39,12 +39,8 @@ export class ContractsAsideOtherServiceComponent implements OnInit {
   }
   select(data: DefaultServices) {
     console.log("data", data);
-    this.service.name = data.name;
-    this.service.description = "";
-    this.service.quantity = 0;
-    this.service.date = new Date().getTime();
-    this.service.serviceId = data.versionedId.id;
-    this.service.validate = true;
+    this.service.setData(data);
+    
   }
   onChangeDatePickerService(data) {
     console.log("data", data);

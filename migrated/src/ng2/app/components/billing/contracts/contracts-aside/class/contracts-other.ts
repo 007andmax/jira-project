@@ -12,6 +12,12 @@ export class ContractsOther extends ContractsUserDevice {
                 totalAmount = totalAmount + productCost;
             }
         }
+        if (this.serviceExpenses.length > 0) {
+            for (var i = 0; i < this.serviceExpenses.length; i++) {
+                var serviceCost = this.serviceExpenses[i].quantity * this.serviceExpenses[i].rate;
+                totalAmount = totalAmount + serviceCost;
+            }
+        }
         return totalAmount;
     }
     public getDataForCreateOther() {

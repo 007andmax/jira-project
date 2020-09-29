@@ -1,4 +1,5 @@
 export class ContractsOtherService {
+    rate:number = 0;
     name: string = "";
     date: number;
     description: string;
@@ -11,6 +12,15 @@ export class ContractsOtherService {
         this.description = description;
         this.quantity = quantity;
         this.serviceId = serviceId;
+    }
+    public setData (data) {
+        this.name = data.name;
+        this.description = "";
+        this.quantity = 0;
+        this.date = new Date().getTime();
+        this.serviceId = data.versionedId.id;
+        this.validate = true;
+        this.rate = data.rate;
     }
     public getDataForCrate() {
         return {
