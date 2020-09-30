@@ -639,6 +639,13 @@ app-contracts-aside-block-time-billing-default-service {
   display: contents;
 }
 
+.contract-aside-product-list {
+  .select-product__dropdown {
+    top: unset !important;
+    bottom: 83px;
+  }
+}
+
 @media (min-width: 1920px) {
   .contracts-table {
     width: 100% !important;
