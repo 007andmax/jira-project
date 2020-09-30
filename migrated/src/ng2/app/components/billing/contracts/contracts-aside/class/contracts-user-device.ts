@@ -182,6 +182,7 @@ export class ContractsUserDevice {
     }
 
     public checkProductExpenses() {
+        console.log("checkProductExpenses");
         this.productExpenses.forEach(item => {
             item.validate = true;
         });
@@ -194,6 +195,7 @@ export class ContractsUserDevice {
         return validate;
     }
     public checkServiceExpenses() {
+        console.log("checkServiceExpenses");
         this.serviceExpenses.forEach(item => {
             item.validate = true;
             item.validateDescription = true;

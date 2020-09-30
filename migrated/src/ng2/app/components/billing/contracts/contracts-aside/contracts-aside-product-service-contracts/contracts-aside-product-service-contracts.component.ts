@@ -88,10 +88,13 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit,On
     
   }
   onCheckServicesForAdd(createBillableItem) {
-    if ( !this.contractsOther.checkProductExpenses() ||  !this.contractsOther.checkServiceExpenses()) {
+    let checkProductExpenses = this.contractsOther.checkProductExpenses();
+    let checkServiceExpenses = this.contractsOther.checkServiceExpenses();
+    if ( !checkProductExpenses ||  !checkServiceExpenses) {
       this.cd.detectChanges();
       return;
     }
+     
     this.contractsService.createContract(createBillableItem, this.contractsOther.getDataForCreateOther()).subscribe(res => {
       this.onClose.emit(null);
     })

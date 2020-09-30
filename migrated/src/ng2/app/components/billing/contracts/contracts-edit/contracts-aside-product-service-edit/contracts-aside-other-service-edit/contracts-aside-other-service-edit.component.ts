@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FORMAT_DATE_2 } from 'src/ng2/app/const/date-picker';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-state.service';
 import { DefaultServices } from '../../../../default-services/class/default-service';
@@ -12,6 +13,7 @@ import { DefaultServicesHourlyContract } from '../../../contracts-aside/class/de
   styleUrls: ['./contracts-aside-other-service-edit.component.scss']
 })
 export class ContractsAsideOtherServiceEditComponent implements OnInit {
+  formatDate: string = FORMAT_DATE_2;
   @Input() service: ServiceAgreementServiceExpenses;
   editItem:DefaultServices = null;
   @Output() onRemove = new EventEmitter<any>();
