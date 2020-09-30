@@ -1,3 +1,162 @@
-<p>
-  contracts-aside-product-service-edit works!
-</p>
+<div class="contracts-page-scroll-content">
+  <div class="qt-pr-32 qt-pl-32 qt-pb-24 qt-pt-16">
+
+    <div class="qt-df qt-mb-16">
+      <div class="qt-w50 qt-input-block qt-mr-16">
+        <label>Company Name</label>
+        <app-select-search class="search-company"     [placeholder]="'Select Company'"
+         [editItem]="selectedCompany" [class]="['qt-dropdown']" [field]="'name'" [isDisabled]="true"
+        ></app-select-search>
+      </div>
+    
+    
+      <div class="contracts-page__contract-type-name-input qt-input-block">
+        <label>Contract Type</label>
+      <app-select-search  class="search-users "  [isDisabled]="true"  [placeholder]="'Contract Type'"
+      [editItem]="selectedType" [class]="['qt-dropdown']"   [field]="'title'"
+    ></app-select-search>
+      </div>
+    </div>
+
+    <div class="qt-pl-12 qt-pr-12 qt-df qt-ai-c contract-tipe-info qt-mb-16">
+      <div class="qt-sz-16 icon__tips qt-mr-5"></div>
+      <div>Contact time can be based on the amount of users or devices, these number generated automaticaly</div>
+    </div>
+
+    <div class="qt-df qt-mb-16">
+      <div class="qt-input-block --required qt-w25 qt-mr-16">
+        <label>Start Date</label>
+        <app-date-picker #startDateDP [formatDate]="formatDate" [editMode]="true" [editDate]="contractsOther.getStartDateByMilliseconds()" [minDate]="minStartDate" (onChange)="onChangeStartDate($event)"></app-date-picker>
+
+
+      </div>
+
+      <div class="qt-input-block --required qt-w25 qt-mr-16">
+        <app-drop-down
+        [title]="'Interval'"
+        [sort]="false"
+        [placeholder]="'Interval'"
+        [dropdownHeight]="'180px'"
+        [editItem]="selectedInterval"
+        [list]="intervals"
+        [isBlockClear]="true"
+        (onSelectedItem)="onSelectInterval($event)"
+  ></app-drop-down>
+
+      </div>
+
+
+      <div class="qt-input-block --required  qt-w25">
+        <label>Review Date</label>
+        <app-date-picker #reviewDateDP [formatDate]="formatDate" [editMode]="true" [editDate]="contractsOther.getReviewDateByMilliseconds()"  [useMinDate]="false"   (onChange)="onChangeReviewDate($event)"></app-date-picker>
+
+      </div>
+    </div>
+
+    <div>
+      <div class="qt-input-block --required qt-w100">
+        <label>Description</label>
+        <input [ngClass]="{'--input-error' : !validate.getDescription()}" placeholder="Write contract description" type="text" [(ngModel)]="contractsOther.description" (input)="validate.resetDescription()">
+        <mat-error class="qt-tooltip-error" *ngIf="!validate.getDescription()">
+          Description is required
+        </mat-error>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="qt-pt-15 qt-pl-32 qt-pr-32 qt-pb-24 contracts-page__gray-block">
+    <div class="qt-fs-15 qt-ff-sb qt-lh-147 qt-color-dark qt-mb-20">
+      Select how you bill your customer. Managed Services will be added to Service time
+    </div>
+
+    <ul class="product-bill-customer-select-nav qt-mb-16">
+      <li [ngClass]="{'--selected' :type === 'PRODUCTS'}" (click)="type = 'PRODUCTS'">Products ({{contractsOther.productExpenses.length}})</li>
+      <li  [ngClass]="{'--selected' :type === 'SERVICES'}" (click)="type = 'SERVICES'">Service ({{contractsOther.serviceExpenses.length}})</li>
+    </ul>
+
+
+
+    <div class="table-last-icon-wrapper qt-mb-16" *ngIf="type === 'SERVICES'">
+      <table class="qt-gray-table contract-product-service-table --last-icon">
+        <thead>
+          <tr>
+            <th class="contract-product-service-table__service">Service Expense</th>
+            <th class="contract-product-service-table__description">Description</th>
+            <th class="contract-product-service-table__duration">Duration</th>
+            <th class="contract-product-service-table__date">Date</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-template ngFor let-item
+          [ngForOf]="contractsOther.serviceExpenses"
+          let-i="index"
+           >
+            <app-contracts-aside-other-service [service]="item" (onRemove)="onRemoveService(i)"  ></app-contracts-aside-other-service>
+           </ng-template>
+
+
+
+
+        </tbody>
+      </table>
+
+    </div>
+
+    <div class="table-last-icon-wrapper qt-mb-16" *ngIf="type === 'PRODUCTS'">
+      <table class="qt-gray-table contract-product-products-table --last-icon">
+        <thead>
+          <tr>
+            <th class="contract-product-products-table__name">Product Name</th>
+            <th class="contract-product-products-table__quantity">Quantity</th>
+            <th class="contract-product-products-table__price">Price</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-template ngFor let-item
+          [ngForOf]="contractsOther.productExpenses"
+          let-i="index"
+           >
+            <app-contracts-aside-other-product   [product]="item" (onRemove)="onRemoveProduct(i)"  ></app-contracts-aside-other-product>
+           </ng-template>
+
+        </tbody>
+      </table>
+    </div>
+    <button class="qt-btn --outline --small" (click)="addProduct()" *ngIf="type === 'PRODUCTS'">+ Add Product</button>
+    <button class="qt-btn --outline --small" (click)="addService()" *ngIf="type === 'SERVICES'">+ Add Service</button>
+
+    <mat-error   *ngIf="!validate.getServicesOrProducts()">
+      At least one {{(type === 'PRODUCTS' ? 'product' : 'service')}} should be added
+    </mat-error>
+  </div>
+
+  <div class="qt-pt-16 qt-pl-32 qt-pr-32 qt-pb-32">
+
+    <div class="qt-df qt-jc-fe">
+      <div class="contract-total qt-color-dark" >
+
+        <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
+          <div>Start Date</div>
+          <div [textContent]="parsedateForTotal(contractsOther.startDate)"></div>
+        </div>
+        <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
+          <div>Review Date</div>
+          <div [textContent]="parsedateForTotal(contractsOther.reviewDate)"></div>
+        </div>
+
+        <div class="contract-total__divider qt-mt-15 qt-mb-15"></div>
+
+        <div class="qt-df qt-jc-sb invoice-total__total-line">
+          <div class="qt-fs-13 qt-fw-b">Total</div>
+          <div class="qt-fs-16 qt-fw-b" [textContent]="contractsOther.amount | currency"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>

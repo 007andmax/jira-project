@@ -30,7 +30,7 @@ export class ContractsOtherValidate {
         return this.description;
     }
 
-    public isValidate(contractsOther:ContractsOther) {
+    public isValidate(contractsOther) {
         console.log("contractsOther", contractsOther);
         if (!contractsOther.companyId) this.company = false;
         if (contractsOther.description === "") this.description = false;

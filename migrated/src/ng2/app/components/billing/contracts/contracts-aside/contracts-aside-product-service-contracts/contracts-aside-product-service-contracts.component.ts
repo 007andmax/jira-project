@@ -29,7 +29,7 @@ import { InventoryItem } from 'src/ng2/app/components/inventory/class/inventory-
 })
 export class ContractsAsideProductServiceContractsComponent implements OnInit,OnDestroy {
   selectedType = new ContractsFilterType('Service Contract/by other', 'SERVICE_CONTRACT', 'OTHER');
-  @ViewChild('taxes') taxesDP: InvoiceFormTicketEditTaxesComponent;
+  
   @ViewChild('startDateDP') startDateDP: DatePickerComponent;
   @ViewChild('reviewDateDP') reviewDateDP: DatePickerComponent;
   @ViewChild('topContract') topContract: ContractsAsideTopComponent;

@@ -4,7 +4,7 @@ import { ServiceAgreementBlockTimeServices } from './service-agreement-block-tim
 import { СontractsBlockTimeShare } from '../contracts-aside/class/contracts-block-time-share';
 import { v4 as uuidv4 } from 'uuid';
 import { ContractsBlockTimeDefaultService } from '../contracts-aside/class/contracts-block-time-default-service';
- 
+
 import { ContractsOtherProduct } from '../contracts-aside/class/contracts-other-product';
 import { ServiceAgreementServiceExpenses } from './service-agreement-service-expenses';
 export class ServiceAgreement {
@@ -38,6 +38,33 @@ export class ServiceAgreement {
     status: string;
     taxIds: Array<string> = [];
     type: string;
+    public checkServiceExpenses() {
+        this.serviceExpenses.forEach(item => {
+            item.validate = true;
+            item.validateDescription = true;
+        });
+        this.serviceExpenses.forEach((item) => {
+            if (item.serviceId.length === 0) item.validate = false;
+            if (item.description.length === 0) item.validateDescription = false;
+
+        })
+
+        let validate = (this.serviceExpenses.find(item => !item.validate)) ? false : true;
+        let validateDescription = (this.serviceExpenses.find(item => !item.validateDescription)) ? false : true;
+        return validate && validateDescription;
+    }
+    public checkProductExpenses() {
+        this.productExpenses.forEach(item => {
+            item.validate = true;
+        });
+        this.productExpenses.forEach((item) => {
+            if (item.productId.length === 0) item.validate = false;
+
+        })
+
+        let validate = (this.productExpenses.find(item => !item.validate)) ? false : true;
+        return validate;
+    }
     public setIntervalString(data) {
         this.intervalstring = data;
     }
@@ -81,7 +108,7 @@ export class ServiceAgreement {
             this.maxRolloverHours = (data.maxRolloverHours) ? String(data.maxRolloverHours) : "";
             this.rateExceeding = (data.rateExceeding) ? String(data.rateExceeding) : "";
             this.blockRate = (typeof data.blockRate === "number") ? String(data.blockRate) : "";
-            this.productExpenses = data.productExpenses.map(item => new ContractsOtherProduct(item.productId, item.quantity, item.salePrice,item.description));
+            this.productExpenses = data.productExpenses.map(item => new ContractsOtherProduct(item.productId, item.quantity, item.salePrice, item.description));
             this.serviceExpenses = data.serviceExpenses.map(item => new ServiceAgreementServiceExpenses(item));
         }
     }
@@ -264,6 +291,23 @@ export class ServiceAgreement {
             taxIds: this.taxIds,
             reviewDate: this.reviewDate,
             type: "BLOCK_TIME"
+        }
+    }
+
+    public getDataForUpdateOtherContract() {
+        return {
+            billType: this.billType,
+            companyId: this.companyId,
+            customInterval: (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') ? null : (this.intervalstring === '30 days') ? 30 : (this.intervalstring === '15 days') ? 15 : 7,
+            description: this.description,
+            endDate: this.endDate,
+            id: this.id,
+            interval: (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') ? this.intervalstring : null,
+            productExpenses: this.productExpenses.map(item => item.getDataForCrate()),
+            serviceExpenses: this.serviceExpenses.map(item => item.getDataForUpdate()),
+            reviewDate: this.reviewDate,
+            startDate: this.startDate,
+            type: this.type
         }
     }
     public calculateTotalAmount() {

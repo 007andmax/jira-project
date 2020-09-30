@@ -66,7 +66,7 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
     } else {
       this.selectedInterval = (this.contractsBlockTime.customInterval === 30) ? '30 days' : (this.contractsBlockTime.customInterval === 15) ? '15 days' : '7 days';
     }
-    
+
     this.getUsers();
     this.contractsBlockTime.setIntervalString(this.selectedInterval);
     this.taxesDP.setEditItems(this.taxes.filter(item => {
@@ -83,17 +83,17 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
       this.toggleNotifyAgentsUser = true;
     }
     this.minStartDate = this.getMinStartDate(this.contractsBlockTime.intervalstring, this.contractsBlockTime.startDate);
-  //  this.contractsBlockTime.calculateEndDate();
+    //  this.contractsBlockTime.calculateEndDate();
     console.log("this.taxes", this.taxes);
     console.log("contractsBlockTime", this.contractsBlockTime);
 
   }
-  
+
   public onEdit() {
     if (this.contractsBlockTime.blockTimeServices.length === 0 || !this.contractsBlockTime.checkDuplicatedBlockTimeServices() && !this.contractsBlockTime.checkDuplicatedServices()) return;
     this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
       moment(this.contractsBlockTime.endDate).format('DD MMM YYYY'), this.contractsBlockTime.companyId, this.contractsBlockTime.id, this.contractsBlockTime.getAllServicesName()).subscribe(data => {
-console.log('this.contractsBlockTime',this.contractsBlockTime);
+        console.log('this.contractsBlockTime', this.contractsBlockTime);
 
         if (Object.keys(data).length === 0) {
 
