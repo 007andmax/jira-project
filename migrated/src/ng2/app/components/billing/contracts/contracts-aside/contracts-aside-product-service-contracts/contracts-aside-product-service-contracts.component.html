@@ -106,7 +106,7 @@
           [ngForOf]="contractsOther.productExpenses"
           let-i="index"
            >
-            <app-contracts-aside-other-product [productsList]="productList" [product]="item" (onRemove)="onRemoveProduct(i)"  ></app-contracts-aside-other-product>
+            <app-contracts-aside-other-product   [product]="item" (onRemove)="onRemoveProduct(i)"  ></app-contracts-aside-other-product>
            </ng-template>
 
         </tbody>

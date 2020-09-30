@@ -81,7 +81,7 @@ export class ServiceAgreement {
             this.maxRolloverHours = (data.maxRolloverHours) ? String(data.maxRolloverHours) : "";
             this.rateExceeding = (data.rateExceeding) ? String(data.rateExceeding) : "";
             this.blockRate = (typeof data.blockRate === "number") ? String(data.blockRate) : "";
-            this.productExpenses = data.productExpenses.map(item => new ContractsOtherProduct(item.productId, item.quantity, item.salePrice));
+            this.productExpenses = data.productExpenses.map(item => new ContractsOtherProduct(item.productId, item.quantity, item.salePrice,item.description));
             this.serviceExpenses = data.serviceExpenses.map(item => new ServiceAgreementServiceExpenses(item));
         }
     }

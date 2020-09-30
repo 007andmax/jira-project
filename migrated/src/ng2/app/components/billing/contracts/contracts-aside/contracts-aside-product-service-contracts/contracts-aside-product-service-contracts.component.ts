@@ -43,7 +43,6 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit,On
   intervals: Array<string> = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days'];
   selectedInterval: string = 'MONTHLY';
   minStartDate: number = null;
-  productList:Array<InventoryItem> = [];
   toggleMaximumAmountHours: boolean = false;
   toggleContractServices: boolean = false;
    
@@ -55,7 +54,6 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit,On
     private contractsService: ContractsService,
     private modalService: NgbModal,
     private сontractsStateService: ContractsStateService,
-    private productService:ProductService,
     public cd: ChangeDetectorRef) { }
 
 
@@ -64,9 +62,7 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit,On
     today.setMonth(today.getMonth() + 1);
     this.contractsOther.setStartDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.contractsOther.setReviewDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-    this.productService.getProducts().subscribe(data => {
-      this.productList = data;
-    })
+    
     this.minStartDate = this.getMinStartDate('MONTHLY', this.contractsOther.startDate);
     let getConfirm = this.сontractsStateService.getConfirm().subscribe(data => {
       console.log("data", data);
@@ -101,11 +97,11 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit,On
     })
   }
   addService() {
-    this.contractsOther.serviceExpenses.push(new ContractsOtherService(new Date().getTime(),"",0,""));
+    this.contractsOther.serviceExpenses.push(new ContractsOtherService(new Date().getTime(),"",0,"",null));
     this.validate.resetServicesOrProducts();
   }
   addProduct() {
-    this.contractsOther.productExpenses.push(new ContractsOtherProduct("",0,0));
+    this.contractsOther.productExpenses.push(new ContractsOtherProduct("",0,0,null));
     this.validate.resetServicesOrProducts();
   }
   onRemoveService(i) {

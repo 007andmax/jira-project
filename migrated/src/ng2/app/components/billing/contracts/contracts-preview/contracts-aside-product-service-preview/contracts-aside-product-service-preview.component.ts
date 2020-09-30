@@ -4,10 +4,9 @@ import { ContractsFilterType } from '../../class/contracts-filter-type';
 import { ServiceAgreement } from '../../class/service-agreement';
 import * as moment from "moment";
 import { InventoryStateService } from 'src/ng2/app/states/inventory/inventory-state.service';
-import { CategoryProductitem } from 'src/ng2/class/category-product-item';
+ 
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
-import { ProductService } from 'src/ng2/app/services/product/product.service';
-import { InventoryItem } from 'src/ng2/app/components/inventory/class/inventory-item';
+ 
 
 @Component({
   selector: 'app-contracts-aside-product-service-preview',
@@ -20,17 +19,15 @@ export class ContractsAsideProductServicePreviewComponent implements OnInit {
   selectedInterval: string = 'MONTHLY';
   selectedType = new ContractsFilterType('Service Contract/by other', 'SERVICE_CONTRACT', 'OTHER');
   @Input() contractsOther: ServiceAgreement = new ServiceAgreement();
-  productList:Array<InventoryItem> = [];
+  
   formatDate: string = FORMAT_DATE_2;
   type:string = "PRODUCTS";
   constructor(private inventoryStateService: InventoryStateService,
-    private productService:ProductService,
+     
     private companiesStateService: CompaniesStateService,) { }
 
   ngOnInit() {
-    this.productService.getProducts().subscribe(data => {
-      this.productList = data;
-    })
+    
     this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.contractsOther.companyId);
     this.getSelectedInterval();
   }
@@ -52,7 +49,5 @@ export class ContractsAsideProductServicePreviewComponent implements OnInit {
 
   }
   
-  public getProduct(id) {
-    return (this.productList.length > 0) ? this.productList.find(item => item.versionedId.id === id).description : "";
-  }
+  
 }

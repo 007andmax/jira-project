@@ -7,20 +7,30 @@ export class ContractsOtherService {
     serviceId: string;
     validate:boolean = true;
     validateDescription:boolean = true;
-    constructor(date, description, quantity, serviceId) {
+    constructor(date, description, quantity, serviceId,name) {
         this.date = date;
         this.description = description;
         this.quantity = quantity;
         this.serviceId = serviceId;
+        this.name = name;
     }
     public setData (data) {
-        this.name = data.name;
-        this.description = "";
+        if (data) {
+            this.name = data.name;
+            this.description = "";
+            this.serviceId = data.versionedId.id;
+            this.rate = data.rate;
+        } else {
+            this.name = "";
+            this.description = "";
+            this.serviceId = "";
+            this.rate = 0;
+        }
+     
+
+        this.validate = true;
         this.quantity = 0;
         this.date = new Date().getTime();
-        this.serviceId = data.versionedId.id;
-        this.validate = true;
-        this.rate = data.rate;
     }
     public getDataForCrate() {
         return {

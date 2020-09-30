@@ -19,7 +19,7 @@ export class ContractsOther extends ContractsUserDevice {
             this.intervalstring = (data.customInterval === 30) ? '30 days' : (data.customInterval === 15) ? '15 days' : '7 days';
         }
         this.productExpenses = data.productExpenses;
-        this.serviceExpenses = data.serviceExpenses.map(item => new ContractsOtherService(item.date, item.description, item.quantity, item.serviceId));
+        this.serviceExpenses = data.serviceExpenses.map(item => new ContractsOtherService(item.date, item.description, item.quantity, item.serviceId,item.name));
         this.startDate = data.startDate;
         this.reviewDate = data.reviewDate;
         this.calculateEndDate();

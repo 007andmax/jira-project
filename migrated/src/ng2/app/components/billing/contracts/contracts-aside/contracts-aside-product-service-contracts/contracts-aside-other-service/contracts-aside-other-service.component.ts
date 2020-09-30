@@ -12,6 +12,7 @@ import { DefaultServicesHourlyContract } from '../../class/default-service-hourl
 })
 export class ContractsAsideOtherServiceComponent implements OnInit {
   @Input() service: ContractsOtherService;
+  editItem:DefaultServices = null;
   @Output() onRemove = new EventEmitter<any>();
   defaultServices: Array<DefaultServicesHourlyContract> = [];
   constructor(private contractsStateService: ContractsStateService,
@@ -28,6 +29,18 @@ export class ContractsAsideOtherServiceComponent implements OnInit {
       this.defaultServices = data.map(item => new DefaultServicesHourlyContract(item));
       this.defaultServices.sort((a, b) => a.name.localeCompare(b.name));
     })
+    if (this.service.serviceId.length > 0) this.editItem = new DefaultServices(this.service);
+  }
+  public getHours() {
+    let timeInMinutes = this.service.quantity * 60;
+    return Math.floor(timeInMinutes / 60);
+
+  }
+  public getMinutes() {
+    let timeInMinutes = this.service.quantity * 60;
+    let hours = Math.floor(timeInMinutes / 60);
+    return Math.round(timeInMinutes - (hours * 60));
+
   }
   public onChangeDescription() {
     this.service.resetValidateDescription();
@@ -39,6 +52,7 @@ export class ContractsAsideOtherServiceComponent implements OnInit {
   }
   select(data: DefaultServices) {
     console.log("data", data);
+    this.editItem = data;
     this.service.setData(data);
     
   }

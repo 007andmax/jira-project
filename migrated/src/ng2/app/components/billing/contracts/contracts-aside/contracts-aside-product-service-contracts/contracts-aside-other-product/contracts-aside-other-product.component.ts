@@ -11,28 +11,31 @@ import { ContractsOtherProduct } from '../../class/contracts-other-product';
 export class ContractsAsideOtherProductComponent implements OnInit {
   @Input() product: ContractsOtherProduct;
   editProduct: InventoryItem;
-  @Input() productsList: Array<InventoryItem> = [];
+   
   @Output() onRemove = new EventEmitter<any>();
   constructor() { }
 
   ngOnInit() {
-   this.editProduct = this.productsList.find(item => item.versionedId.id === this.product.productId);
+  if (this.product.productId.length > 0) this.editProduct = new InventoryItem(this.product);
    console.log("this.editProduct",this.editProduct);
-   console.log("this.productsList",this.productsList);
+   console.log("this.product",this.product);
   }
   public onChangeProduct(data) {
     console.log("data", data);
+    this.editProduct = data;
     if (data) {
      
       this.product.quantity = 0;
       this.product.salePrice = data.sale;
       this.product.productId = data.versionedId.id;
       this.product.validate = true;
+      this.product.description = data.description;
     } else {
      
       this.product.quantity = 0;
       this.product.salePrice = 0;
       this.product.productId = "";
+      this.product.description = null;
     }
 
   }

@@ -5,6 +5,7 @@ export class ServiceAgreementServiceExpenses {
     serviceExpenseDurationEnd: number;
     serviceExpenseDurationStart: number;
     serviceId: string;
+    name:string;
     constructor(data) {
         this.date = data.date;
         this.description = data.description;
@@ -12,5 +13,6 @@ export class ServiceAgreementServiceExpenses {
         this.serviceExpenseDurationEnd = data.serviceExpenseDurationEnd;
         this.serviceExpenseDurationStart = data.serviceExpenseDurationStart;
         this.serviceId = data.serviceId;
+        this.name = data.name;
     }
 }
