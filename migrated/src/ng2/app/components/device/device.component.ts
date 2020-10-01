@@ -29,6 +29,9 @@ export class DeviceComponent implements OnInit {
   deviceType = '';
   deviceImg = '/html/ng2/assets/img/device/device.svg';
   closeResult = '';
+  play_pause_path = '/html/ng2/assets/img/device/pause.svg';
+  playTimer = true;
+  interval;
   constructor(private modalService: NgbModal, private commonHttpServices: CommonHttpServices,
     private commonServices: CommonServices, private toastr: ToastrService,
     private hardwareService: HardwareService,
@@ -77,7 +80,7 @@ export class DeviceComponent implements OnInit {
     $('body').addClass('ng7-device');
     this.getCurrentCompany();
     
-    setInterval(() => {
+    this.interval = setInterval(() => {
       this.updateTime();
     },1000);
   }
@@ -189,9 +192,7 @@ export class DeviceComponent implements OnInit {
           this.getConstant(resp.sessionId);
         } else {
           this.getConstant(resp.sessionId);
-          
         }
-        
       },
       error => {
         this.toastr.error('Something went wrong please try again.');
@@ -204,5 +205,18 @@ export class DeviceComponent implements OnInit {
       return '0' + value;
     }
     return value;
+  }
+
+  timerControl() {
+    this.playTimer = !this.playTimer
+    if (this.interval && !this.playTimer) {
+      clearInterval(this.interval);
+      this.play_pause_path = '/html/ng2/assets/img/device/play.svg';
+    } else {
+      this.play_pause_path = '/html/ng2/assets/img/device/pause.svg';
+      this.interval = setInterval(() => {
+        this.updateTime();
+      },1000);
+    }
   }
 }

@@ -25,7 +25,9 @@
             <a href="javascript:;" class="head-btn-info btn-shutDown"><img src="/html/ng2/assets/img/device/shutdown.svg" alt="shutdown" /></a>
         </div>
       </div>
-      <div class="head-counter"><img src="/html/ng2/assets/img/device/counter.svg" alt="Print" /> <span id="counter">{{padNumber(this.totalHours)}} hr : {{padNumber(this.totalMinutes)}} min : {{padNumber(this.totalSeconds)}} sec</span></div>
+      <div class="head-counter">
+        <div class="sub-head-counter pointer"><img src="{{play_pause_path}}" alt="Play" (click)="timerControl()" /></div>
+        <div class="sub-head-counter"><img src="/html/ng2/assets/img/device/counter.svg" alt="Print" /> <span id="counter">{{padNumber(this.totalHours)}} hr : {{padNumber(this.totalMinutes)}} min : {{padNumber(this.totalSeconds)}} sec</span></div></div>
       <!-- <div class="head-counter"><img src="/html/ng2/assets/img/device/counter.svg" alt="Print" /> 00 hr : 00 min : 00 sec</div> -->
   </header>
 <!-- left sidebar nav -->
