@@ -25,7 +25,7 @@ export class ContractsAsideOtherServiceComponent implements OnInit {
     today.setMonth(today.getMonth() + 1);
     this.service.setDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
 
-    if (this.contractsStateService.getDefaultService().length > 0) this.defaultServices = this.contractsStateService.getDefaultService();
+    if (this.contractsStateService.getDefaultService().length > 0) this.defaultServices = this.contractsStateService.getDefaultService().map(item => new DefaultServicesHourlyContract(item));
     this.defaultServices.sort((a, b) => a.name.localeCompare(b.name));
     this.contractsStateService.getOnDefaultServices().subscribe(data => {
       this.defaultServices = data.map(item => new DefaultServicesHourlyContract(item));

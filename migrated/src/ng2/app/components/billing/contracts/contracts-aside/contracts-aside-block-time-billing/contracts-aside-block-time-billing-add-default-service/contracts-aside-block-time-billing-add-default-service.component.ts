@@ -14,7 +14,7 @@ export class ContractsAsideBlockTimeBillingAddDefaultServiceComponent implements
   constructor(private contractsStateService: ContractsStateService,) { }
 
   ngOnInit() {
-    if (this.contractsStateService.getDefaultService().length > 0) this.defaultServices = this.contractsStateService.getDefaultService();
+    if (this.contractsStateService.getDefaultService().length > 0) this.defaultServices = this.contractsStateService.getDefaultService().map(item => new DefaultServicesHourlyContract(item));
     this.defaultServices.sort((a, b) => a.name.localeCompare(b.name));
     this.contractsStateService.getOnDefaultServices().subscribe(data => {
       this.defaultServices = data.map(item => new DefaultServicesHourlyContract(item));

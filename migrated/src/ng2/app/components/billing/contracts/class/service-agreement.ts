@@ -110,6 +110,7 @@ export class ServiceAgreement {
             this.blockRate = (typeof data.blockRate === "number") ? String(data.blockRate) : "";
             this.productExpenses = data.productExpenses.map(item => new ContractsOtherProduct(item.productId, item.quantity, item.salePrice, item.description));
             this.serviceExpenses = data.serviceExpenses.map(item => new ServiceAgreementServiceExpenses(item));
+            this.shares = data.shares.map(item => new СontractsBlockTimeShare(item.userId));
         }
     }
     public setReviewDate(day, month, year, timeOffset) {
