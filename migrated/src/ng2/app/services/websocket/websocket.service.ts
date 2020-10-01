@@ -19,6 +19,7 @@ import { InvoiceRealTimeService } from '../../states/invoice/invoice-real-time.s
 import { PaymentsRealTimeService } from '../../states/payments/payments-real-time.service';
 import { DefaultServicesRealTimeService } from '../../states/default-services/default-services-real-time.service';
 import { ContractsRealTimeService } from '../../states/contracts/contracts-real-time.service';
+ 
 
 /**
  * Websocket service to work with api
@@ -57,7 +58,6 @@ export class WebsocketService {
     private invoiceRealTimeService: InvoiceRealTimeService,
     private defaultServicesRealTimeService: DefaultServicesRealTimeService,
     private contractsRealTimeService: ContractsRealTimeService
-
   ) {
   }
 

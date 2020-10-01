@@ -277,6 +277,7 @@ import { InvoicesItemComponent } from './components/billing/invoices/invoices-it
 import { InvoicesHeaderComponent } from './components/billing/invoices/invoices-header/invoices-header.component';
 import { InvoicesFilterComponent } from './components/billing/invoices/invoices-header/invoices-filter/invoices-filter.component';
 import { InvoicesAsidePreviewComponent } from './components/billing/invoices/invoices-aside-preview/invoices-aside-preview.component';
+ 
 import { PaymentsComponent } from './components/billing/payments/payments.component';
 import { PaymentsHeaderComponent } from './components/billing/payments/payments-header/payments-header.component';
 import { PaymentItemComponent } from './components/billing/payments/payment-item/payment-item.component';
@@ -343,6 +344,7 @@ import { ContractsAsideProductServicePreviewComponent } from './components/billi
 import { ContractsAsideProductServiceEditComponent } from './components/billing/contracts/contracts-edit/contracts-aside-product-service-edit/contracts-aside-product-service-edit.component';
 import { ContractsAsideOtherServiceEditComponent } from './components/billing/contracts/contracts-edit/contracts-aside-product-service-edit/contracts-aside-other-service-edit/contracts-aside-other-service-edit.component';
 
+ 
 
 
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
@@ -790,6 +792,11 @@ angular.module('quicktech')
     InvoicesHeaderComponent,
     InvoicesFilterComponent,
     InvoicesAsidePreviewComponent,
+    DefaultServicesComponent,
+    DefaultServicesAddComponent,
+    DefaultServicesItemComponent,
+    DefaultServicesContractsComponent,
+    DefaultServicesEditComponent,
     PaymentsComponent,
     PaymentsHeaderComponent,
     PaymentItemComponent,
@@ -865,6 +872,7 @@ angular.module('quicktech')
     ContractsAsideProductServiceEditComponent,
     
     ContractsAsideOtherServiceEditComponent
+   
   ],
   imports: [
     BrowserModule,
@@ -939,6 +947,7 @@ angular.module('quicktech')
     ContractsComponent,
     InvoicesComponent,
     BillableTicketsComponent,
+    DefaultServicesComponent,
     PaymentsComponent,
     DefaultServicesComponent,
     AppComponent,

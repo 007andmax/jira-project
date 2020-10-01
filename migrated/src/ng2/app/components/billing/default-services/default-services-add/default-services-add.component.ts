@@ -23,7 +23,7 @@ export class DefaultServicesAddComponent implements OnInit {
   validate: DefaultServiceValidate = new DefaultServiceValidate();
   defaultSelectedTax: Array<Tax> = [];
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;
-  @ViewChild('glNumberSelect') glNumberSelect: SelectSearchComponent;
+  
   @Output() onClose = new EventEmitter<any>();
   constructor(private glNumberStateService: GlNumberStateService,
     private defaultServicesService: DefaultServicesService,

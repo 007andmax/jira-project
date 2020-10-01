@@ -16,7 +16,6 @@ import { DefaultServiceValidate } from '../class/default-service-validate';
   styleUrls: ['./default-services-edit.component.scss']
 })
 export class DefaultServicesEditComponent implements OnInit {
-
   glNumbers: Array<GlNumber> = [];
   validate: DefaultServiceValidate = new DefaultServiceValidate();
   @Input() service: DefaultServices;
@@ -37,7 +36,6 @@ export class DefaultServicesEditComponent implements OnInit {
     this.sub.add(getOnGlNumbers);
     console.log("service", this.service);
     this.taxSelect.setEditItem(this.service.taxes);
-
   }
   private sortGlNumbers(data) {
     return data.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?

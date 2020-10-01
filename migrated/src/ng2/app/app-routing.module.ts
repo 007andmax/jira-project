@@ -34,8 +34,8 @@ import { BillableComponent } from './components/billing/billable/billable.compon
 import { BillableTicketsComponent } from './components/billing/billable/billable-tickets/billable-tickets.component';
 import { ContractsComponent } from './components/billing/contracts/contracts.component';
 import { InvoicesComponent } from './components/billing/invoices/invoices.component';
-import { PaymentsComponent } from './components/billing/payments/payments.component';
 import { DefaultServicesComponent } from './components/billing/default-services/default-services.component';
+import { PaymentsComponent } from './components/billing/payments/payments.component';
 import { DashboardComponent } from './components/device/dashboard/dashboard.component';
 import { HardwareComponent } from './components/device/hardware/hardware.component';
 import { SoftwareComponent } from './components/device/software/software.component';

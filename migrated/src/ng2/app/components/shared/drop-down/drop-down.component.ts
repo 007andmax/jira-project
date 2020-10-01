@@ -28,9 +28,11 @@ export class DropDownComponent implements OnInit {
   @Input() isBlockClear: boolean = false;
   @Input() maxlength: number = null;
   @Input() isDisabled: boolean = false;
+  @Input() reducerItem: Function = (item) => (this.field) ? item[this.field] : item;
 
   @Input() list = [];
   @Input() placeholder = '';
+
   @Output() onAddItem = new EventEmitter<any>();
   @Output() onSelectedItem = new EventEmitter<any>();
   reqList = [];
@@ -88,4 +90,13 @@ export class DropDownComponent implements OnInit {
     this.isAdd = false;
     this.selectedItem = null;
   }
+
+  dividePosition(position) {
+    return `${(parseInt(position) / 2)}px`;
+  }
+
+  reduceItemName(item) {
+    return this.reducerItem(item);
+  }
+
 }

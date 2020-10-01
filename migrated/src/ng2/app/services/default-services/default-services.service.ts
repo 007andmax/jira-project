@@ -31,7 +31,7 @@ export class DefaultServicesService {
   }
   public changeService(data){
    
-    return this.http.put(this.apiUrl + `services/${data.versionedId.id}`,data);
+    return this.http.put(this.apiUrl + `services/${data.id}`,data);
   }
   public addService(data){
    
