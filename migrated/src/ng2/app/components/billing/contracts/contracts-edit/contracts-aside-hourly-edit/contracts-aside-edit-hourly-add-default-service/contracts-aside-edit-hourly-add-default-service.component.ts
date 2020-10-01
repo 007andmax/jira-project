@@ -29,6 +29,7 @@ export class ContractsAsideEditHourlyAddDefaultServiceComponent implements OnIni
   @ViewChild('serviceDropDown') serviceDropDown: DropDownComponent;
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   @Input() contractsHourly: ServiceAgreement;
+  @Input() editMode: boolean = false;
   @Output() onClose = new EventEmitter<any>();
   @Output() onAdd = new EventEmitter<any>();
   constructor(private taxesStateService: TaxesStateService,
@@ -88,7 +89,7 @@ export class ContractsAsideEditHourlyAddDefaultServiceComponent implements OnIni
     if (find) this.service.versionedId = find.versionedId;
     this.validate.resetDuplicateName();
     this.validate.resetValidate();
-    if (!this.validate.isValidate(this.service) || !this.checkDuplicatedContractService()) {
+    if (!this.validate.isValidate(this.service) || !this.checkDuplicatedContractServiceByName()) {
 
       console.log("this.validate", this.validate);
       return
@@ -104,14 +105,20 @@ export class ContractsAsideEditHourlyAddDefaultServiceComponent implements OnIni
         this.validate.setValidate(false);
       })
   }
-  checkDuplicatedContractService() {
+  checkDuplicatedContractServiceByName() {
     let find = this.contractsHourly.services.find(item => item.name === this.service.name);
     if (find) this.validate.setDuplicateName(false);
     console.log("find", find);
     return (find) ? false : true;
   }
+  checkDuplicatedContractServiceById() {
+    let find = (this.editMode) ?  this.contractsHourly.services.find(item => item.id === this.service.versionedId.id) : this.defaultServices.find(item => item.versionedId.id === this.service.versionedId.id);
+    if (find) this.validate.setDuplicateName(false);
+    console.log("find", find);
+    return (find) ? false : true;
+  }
   checkDuplicatedService() {
-    let find = this.defaultServices.find(item => item.name === this.service.name);
+    let find =  this.defaultServices.find(item => item.name === this.service.name);
     if (find) this.validate.setDuplicateName(false);
     console.log("find", find);
     return (find) ? false : true;
@@ -131,7 +138,7 @@ export class ContractsAsideEditHourlyAddDefaultServiceComponent implements OnIni
         this.addBtn.setDisabled(false);
       })
     } else {
-      this.onAdd.emit(this.service);
+    if (this.checkDuplicatedContractServiceById())  this.onAdd.emit(this.service);
     }
 
   }
