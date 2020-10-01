@@ -28,6 +28,7 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+
     if (this.companiesStateService.getCompanies().length > 0) this.getServiceAgreements(this.companiesStateService.getCompanies());
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.getServiceAgreements(data);
@@ -86,11 +87,16 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
   }
   getServiceAgreements(companies) {
     this.contractsService.getServiceAgreements().subscribe(data => {
+      let showNotificationReview = false;
       this.reqList = data.map(contact => {
+        let current = new Date().getTime();
+        let reviewDate = new Date(contact.reviewDate).getTime();
+        if ((reviewDate - current) < (30 * 86400000))  showNotificationReview = true;
         let company = companies.find(item => item.id === contact.company.id);
         contact.company.name = company.name;
         return contact;
       });
+      if (showNotificationReview) this.contractsStateService.showNotificationReview();
       this.list = JSON.parse(JSON.stringify(this.reqList));
       this.filter.onSort('company', this.list);
       if (!this.cd['destroyed']) {

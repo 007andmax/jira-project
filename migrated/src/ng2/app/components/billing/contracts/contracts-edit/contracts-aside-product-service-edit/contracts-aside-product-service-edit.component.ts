@@ -50,11 +50,7 @@ export class ContractsAsideProductServiceEditComponent implements OnInit {
     } else {
       this.selectedInterval = (this.contractsOther.customInterval === 30) ? '30 days' : (this.contractsOther.customInterval === 15) ? '15 days' : '7 days';
     }
-
-
     this.contractsOther.setIntervalString(this.selectedInterval);
-
-
     this.minStartDate = this.getMinStartDate(this.contractsOther.intervalstring, this.contractsOther.startDate);
     //  this.contractsBlockTime.calculateEndDate();
 
@@ -105,7 +101,7 @@ export class ContractsAsideProductServiceEditComponent implements OnInit {
     this.selectedInterval = data;
     this.minStartDate = this.getMinStartDate(data, this.contractsOther.startDate);
     console.log("this.minStartDate", this.minStartDate);
-    this.contractsOther.setInterval(data);
+    this.contractsOther.setIntervalString(data);
     this.contractsOther.calculateEndDate();
     this.cd.detectChanges();
     console.log("this.contractsOther.includedHours", this.contractsOther);

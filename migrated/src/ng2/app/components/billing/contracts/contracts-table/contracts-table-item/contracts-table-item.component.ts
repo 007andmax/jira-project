@@ -31,7 +31,7 @@ export class ContractsTableItemComponent implements OnInit {
     USER: '/by user',
     OTHER: '/by other'
   };
-
+  showNotificationReview: boolean = false;
   contractStatusDictionary = {
     CURRENT: 'Current',
     PENDING: 'Pending',
@@ -45,6 +45,9 @@ export class ContractsTableItemComponent implements OnInit {
     private permissionsService: PermissionsService,) { }
 
   ngOnInit() {
+    let current = new Date().getTime();
+    let reviewDate = new Date(this.contract.reviewDate).getTime();
+    if ((reviewDate - current) < (30 * 86400000)) this.showNotificationReview = true;
 
   }
   public getPermissions(action) {
@@ -55,7 +58,7 @@ export class ContractsTableItemComponent implements OnInit {
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
     modalRef.componentInstance.message = `Are you sure you want to delete agreement?`;
     this.contractsStateService.setContractForDelete(this.contract);
-    
+
   }
   terminateContract() {
     this.onTerminate.emit(this.contract);

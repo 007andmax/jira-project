@@ -1,6 +1,6 @@
  
 <div class="archive-modal" *ngIf="action !== 'ARCHIVE_USER' && action !== 'ARCHIVE_COMPANY' && action !== 'DEARCHIVE_COMPANY'">
-  <button class="close-modal" (click)=cancelConfirm()></button>
+  <button class="close-modal" (click)=closeModal()></button>
   <div class="archive-modal__body modal-body">
     <p [textContent]="message"></p>
   </div>

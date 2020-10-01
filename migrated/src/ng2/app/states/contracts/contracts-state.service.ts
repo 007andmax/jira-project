@@ -10,6 +10,7 @@ export class ContractsStateService {
   contractForCopy:ServiceAgreement;
   defaultServices: any = [];
   onFilter: EventEmitter<any> = new EventEmitter();
+  onShowNotificationReview: EventEmitter<any> = new EventEmitter();
   onSort: EventEmitter<any> = new EventEmitter();
   onPreview: EventEmitter<any> = new EventEmitter();
   onEdit: EventEmitter<any> = new EventEmitter();
@@ -22,6 +23,12 @@ export class ContractsStateService {
   productList = [];
   constructor() { }
 
+  public showNotificationReview () {
+    this.onShowNotificationReview.emit(null);
+  }
+  public getOnShowNotificationReview () {
+    return this.onShowNotificationReview;
+  }
   public getContractForCopy() {
     return this.contractForCopy;
   }

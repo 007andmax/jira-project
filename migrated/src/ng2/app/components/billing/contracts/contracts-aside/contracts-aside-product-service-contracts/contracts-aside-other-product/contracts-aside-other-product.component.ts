@@ -11,7 +11,6 @@ import { ContractsOtherProduct } from '../../class/contracts-other-product';
 export class ContractsAsideOtherProductComponent implements OnInit {
   @Input() product: ContractsOtherProduct;
   editProduct: InventoryItem;
-   
   @Output() onRemove = new EventEmitter<any>();
   constructor() { }
 

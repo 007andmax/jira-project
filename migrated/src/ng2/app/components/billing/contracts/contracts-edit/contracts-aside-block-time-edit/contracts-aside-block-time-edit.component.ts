@@ -66,9 +66,8 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
     } else {
       this.selectedInterval = (this.contractsBlockTime.customInterval === 30) ? '30 days' : (this.contractsBlockTime.customInterval === 15) ? '15 days' : '7 days';
     }
-
-    this.getUsers();
     this.contractsBlockTime.setIntervalString(this.selectedInterval);
+    this.getUsers();
     this.taxesDP.setEditItems(this.taxes.filter(item => {
       let find = this.contractsBlockTime.taxIds.find(taxId => taxId === item.id);
       return (find) ? true : false;

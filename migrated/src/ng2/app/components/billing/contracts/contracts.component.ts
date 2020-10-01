@@ -13,11 +13,14 @@ export class ContractsComponent implements OnInit {
   showPreview = false;
   showEdit = false;
   serviceAgreement: ServiceAgreement;
+  showNotificationReview:boolean = false;
   constructor(private contractsStateService: ContractsStateService,
     ) { }
 
   ngOnInit() {
-   
+   this.contractsStateService.getOnShowNotificationReview().subscribe(data => {
+     this.showNotificationReview = true;
+   })
     this.contractsStateService.getOnToggleCreate().subscribe(data => {
       this.showCreate = data;
     })

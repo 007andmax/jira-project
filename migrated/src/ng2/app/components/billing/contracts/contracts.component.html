@@ -2,6 +2,10 @@
 
   <div class="qt-df qt-fd-c qt-jc-sb contracts-page__list-container">
     <div class="qt-w100">
+      <div class="notification" *ngIf="showNotificationReview">
+        <p>Some contracts are about to expire, please review</p>
+        <button (click)="showNotificationReview = false">Okay, Got it</button>
+      </div>
       <app-contracts-header ></app-contracts-header>
       <app-contracts-table></app-contracts-table>
     </div>

@@ -19,11 +19,13 @@ import { DatePickerComponent } from 'src/ng2/app/components/shared/date-picker/d
 import { ContractsAsideTopComponent } from '../contracts-aside-top/contracts-aside-top.component';
 import { ContractsBlockTimeService } from '../class/contracts-block-time-service';
 import { Subscription } from 'rxjs';
+import { ContractsListService } from '../../services/contracts-list.service';
 
 @Component({
   selector: 'app-contracts-aside-user-device-billing',
   templateUrl: './contracts-aside-user-device-billing.component.html',
-  styleUrls: ['./contracts-aside-user-device-billing.component.scss']
+  styleUrls: ['./contracts-aside-user-device-billing.component.scss'],
+  providers: [ContractsListService]
 })
 export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestroy {
   @ViewChild('taxes') taxesDP: InvoiceFormTicketEditTaxesComponent;
@@ -52,7 +54,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     private contractsService: ContractsService,
     private modalService: NgbModal,
     private сontractsStateService: ContractsStateService,
-
+    private contractsListService:ContractsListService,
     public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -296,10 +298,13 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
   }
   public onCreate() {
     if (!this.validate.isValidate(this.contractsUserDevice)) return;
-    const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: false });
-
-    modalRef.componentInstance.message = `Do we need to create the billable item now?`;
-    console.log("modalRef", modalRef);
+    if (this.contractsListService.compareDateNowWithDate(this.contractsUserDevice.startDate)) {
+      const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal',backdrop: false });
+      modalRef.componentInstance.message = `Do we need to create the billable item now?`;
+      console.log("modalRef", modalRef);
+    } else {
+      this.onCheckServicesForAdd(false);
+    }
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

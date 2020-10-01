@@ -21,11 +21,13 @@ import { InvoiceFormTicketEditTaxesComponent } from '../../../billable/billable-
 import { TaxesStateService } from 'src/ng2/app/states/taxes/taxes-state.service';
 import { Tax } from 'src/ng2/class/taxes/tax';
 import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-state.service';
+import { ContractsListService } from '../../services/contracts-list.service';
 
 @Component({
   selector: 'app-contracts-aside-block-time-billing',
   templateUrl: './contracts-aside-block-time-billing.component.html',
-  styleUrls: ['./contracts-aside-block-time-billing.component.scss']
+  styleUrls: ['./contracts-aside-block-time-billing.component.scss'],
+  providers: [ContractsListService]
 })
 export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestroy {
   @Output() onClose = new EventEmitter<any>();
@@ -57,7 +59,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     private tehState: TehUsersSateService,
     private modalService: NgbModal,
     private taxesStateService: TaxesStateService,
-    
+    private contractsListService:ContractsListService,
     public cd: ChangeDetectorRef) { }
 
 
@@ -68,7 +70,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     this.contractsBlockTime.setReviewDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
 
     this.minStartDate = this.getMinStartDate('MONTHLY', this.contractsBlockTime.startDate);
-    console.log("this.minStartDate", this.minStartDate);
+    
     this.getUsers();
     let getConfirm = this.сontractsStateService.getConfirm().subscribe(data => {
       console.log("data", data);
@@ -282,10 +284,14 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
   }
   public onCreate() {
     if (!this.validate.isValidate(this.contractsBlockTime)) return;
-    const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal',backdrop: false });
+    if (this.contractsListService.compareDateNowWithDate(this.contractsBlockTime.startDate)) {
+      const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal',backdrop: false });
+      modalRef.componentInstance.message = `Do we need to create the billable item now?`;
+      console.log("modalRef", modalRef);
+    } else {
+      this.onCheckServicesForAdd(false);
+    }
     
-    modalRef.componentInstance.message = `Do we need to create the billable item now?`;
-    console.log("modalRef", modalRef);
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

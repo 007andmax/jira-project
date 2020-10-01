@@ -255,10 +255,10 @@ console.log("this.contractsUserDevice",this.contractsUserDevice);
     this.selectedInterval = data;
     this.minStartDate = this.getMinStartDate(data, this.contractsUserDevice.startDate);
     console.log("this.minStartDate", this.minStartDate);
-    this.contractsUserDevice.setInterval(data);
+    this.contractsUserDevice.setIntervalString(data);
     this.contractsUserDevice.calculateEndDate();
     this.cd.detectChanges();
-    console.log("this.contractsUserDevice.includedHours", this.contractsUserDevice);
+    console.log("this.contractsOther.includedHours", this.contractsUserDevice);
   }
   public onCreate() {
     if (!this.validate.isValidate(this.contractsUserDevice)) return;

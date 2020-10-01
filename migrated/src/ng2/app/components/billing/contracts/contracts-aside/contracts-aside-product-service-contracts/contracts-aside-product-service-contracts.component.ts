@@ -21,11 +21,13 @@ import { ContractsOtherValidate } from '../class/contracts-other-validate';
 import { ContractsConfirmComponent } from '../../contracts-confirm/contracts-confirm.component';
 import { ProductService } from 'src/ng2/app/services/product/product.service';
 import { InventoryItem } from 'src/ng2/app/components/inventory/class/inventory-item';
+import { ContractsListService } from '../../services/contracts-list.service';
 
 @Component({
   selector: 'app-contracts-aside-product-service-contracts',
   templateUrl: './contracts-aside-product-service-contracts.component.html',
-  styleUrls: ['./contracts-aside-product-service-contracts.component.scss']
+  styleUrls: ['./contracts-aside-product-service-contracts.component.scss'],
+  providers: [ContractsListService]
 })
 export class ContractsAsideProductServiceContractsComponent implements OnInit,OnDestroy {
   selectedType = new ContractsFilterType('Service Contract/by other', 'SERVICE_CONTRACT', 'OTHER');
@@ -54,6 +56,7 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit,On
     private contractsService: ContractsService,
     private modalService: NgbModal,
     private сontractsStateService: ContractsStateService,
+    private contractsListService:ContractsListService,
     public cd: ChangeDetectorRef) { }
 
 
@@ -157,10 +160,13 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit,On
   }
   public onCreate() {
     if (!this.validate.isValidate(this.contractsOther)) return;
-    const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: false });
-
-    modalRef.componentInstance.message = `Do we need to create the billable item now?`;
-    console.log("modalRef", modalRef);
+    if (this.contractsListService.compareDateNowWithDate(this.contractsOther.startDate)) {
+      const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal',backdrop: false });
+      modalRef.componentInstance.message = `Do we need to create the billable item now?`;
+      console.log("modalRef", modalRef);
+    } else {
+      this.onCheckServicesForAdd(false);
+    }
   }
   ngOnDestroy(): void {
    this.sub.unsubscribe();
