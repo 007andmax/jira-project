@@ -12,6 +12,17 @@ app-drop-down {
       color: #9ca5b6;
     }
   }
+  .--dark {
+    input {
+      border: none;
+      background: #f4f6f8;
+    }
+  }
+  .--small-padding {
+    input {
+      padding: 0 25px 0 10px;
+    }
+  }
 }
 
 .app-drop-down {
@@ -63,14 +74,4 @@ app-drop-down {
 
   }
 }
-.--dark {
-  input {
-    border: none;
-    background: #f4f6f8;
-  }
-
-.--small-padding {
-  input {
-    padding: 0 25px 0 10px;
-  }
-}
+ 

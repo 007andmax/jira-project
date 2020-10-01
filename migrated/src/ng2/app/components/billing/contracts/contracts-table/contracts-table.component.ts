@@ -86,6 +86,7 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
         if (findIndexReq > -1) this.reqList.splice(findIndexReq,1);
         if (findIndex > -1) this.list.splice(findIndex,1);
       }
+      this.cd.detectChanges();
     })
   }
   getServiceAgreements(companies) {
