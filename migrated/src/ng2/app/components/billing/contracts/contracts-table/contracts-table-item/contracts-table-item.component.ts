@@ -8,12 +8,14 @@ import { REMOVE_CONTRACT } from 'src/ng2/app/const/confirm';
 import { ConfirmComponent } from 'src/ng2/app/components/shared/confirm/confirm.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-state.service';
+import { ContractsListService } from '../../services/contracts-list.service';
 
 
 @Component({
   selector: 'app-contracts-table-item',
   templateUrl: './contracts-table-item.component.html',
-  styleUrls: ['./contracts-table-item.component.scss']
+  styleUrls: ['./contracts-table-item.component.scss'],
+  providers: [ContractsListService]
 })
 export class ContractsTableItemComponent implements OnInit {
   @Input() contract: ContractItem;
@@ -41,13 +43,14 @@ export class ContractsTableItemComponent implements OnInit {
   constructor(private companiesStateService: CompaniesStateService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
+    private contractsListService:ContractsListService,
     private contractsStateService: ContractsStateService,
     private permissionsService: PermissionsService,) { }
 
   ngOnInit() {
-    let current = new Date().getTime();
-    let reviewDate = new Date(this.contract.reviewDate).getTime();
-    if ((reviewDate - current) < (30 * 86400000)) this.showNotificationReview = true;
+    
+    
+    this.showNotificationReview = this.contractsListService.isShowNotificationReview(this.contract.reviewDate);
 
   }
   public getPermissions(action) {

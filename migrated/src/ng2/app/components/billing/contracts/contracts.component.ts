@@ -6,7 +6,7 @@ import { DataType } from 'igniteui-angular';
 @Component({
   selector: 'contracts',
   templateUrl: './contracts.component.html',
-  styleUrls: ['./contracts.component.scss']
+  styleUrls: ['./contracts.component.scss'],
 })
 export class ContractsComponent implements OnInit {
   showCreate = false;

@@ -8,11 +8,13 @@ import { ConfirmStateService } from '../../../shared/confirm/services/confirm-st
 import { REMOVE_CONTRACT } from 'src/ng2/app/const/confirm';
 import { Subscription } from 'rxjs';
 import { ContractsRealTimeService } from 'src/ng2/app/states/contracts/contracts-real-time.service';
+import { ContractsListService } from '../services/contracts-list.service';
 
 @Component({
   selector: 'app-contracts-table',
   templateUrl: './contracts-table.component.html',
-  styleUrls: ['./contracts-table.component.scss']
+  styleUrls: ['./contracts-table.component.scss'],
+  providers: [ContractsListService]
 })
 export class ContractsTableComponent implements OnInit, OnDestroy {
   filter: ContractsFilter = new ContractsFilter();
@@ -24,6 +26,7 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
     private companiesStateService: CompaniesStateService,
     private confirmStateService: ConfirmStateService,
     private contractsRealTimeService: ContractsRealTimeService,
+    private contractsListService:ContractsListService,
     public cd: ChangeDetectorRef,) { }
 
 
@@ -89,9 +92,7 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
     this.contractsService.getServiceAgreements().subscribe(data => {
       let showNotificationReview = false;
       this.reqList = data.map(contact => {
-        let current = new Date().getTime();
-        let reviewDate = new Date(contact.reviewDate).getTime();
-        if ((reviewDate - current) < (30 * 86400000))  showNotificationReview = true;
+        if (!showNotificationReview)  showNotificationReview = this.contractsListService.isShowNotificationReview(contact.reviewDate);
         let company = companies.find(item => item.id === contact.company.id);
         contact.company.name = company.name;
         return contact;
