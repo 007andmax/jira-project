@@ -3,6 +3,7 @@ import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { InventoryStateService } from 'src/ng2/app/states/inventory/inventory-state.service';
 import { InventoryChange } from '../../inventory/class/inventory-change';
 import { Subscription } from 'rxjs';
+import { CategoryProductitem } from 'src/ng2/class/category-product-item';
 
 /**
  * Product list component
@@ -15,7 +16,7 @@ import { Subscription } from 'rxjs';
 export class ProductListComponent implements OnInit, OnDestroy {
   @ViewChild('products') products_dropDown: NgbDropdown;
   @Output() selectedProductItem = new EventEmitter<any>();
-  itemList: any;
+  itemList: Array<CategoryProductitem> = [];
   @Input() editItem: any;
   @Input() type: string;
   @Input() validate: boolean = true;
@@ -59,10 +60,13 @@ export class ProductListComponent implements OnInit, OnDestroy {
     }
 
     let getChangeProducts = this.inventoryStateService.getChangeProducts().subscribe((data: InventoryChange) => {
+      console.log("data",data);
       if (data.action === 'PRODUCT_SAVED') {
         const categoryIndex = this.itemList.findIndex((item) => item.id === data.data.category.id);
+        console.log("categoryIndex",categoryIndex);
         if (categoryIndex > -1) {
-          const index =  this.itemList[categoryIndex].products.find(item => item.versionedId.id === data.data.versionedId.id)
+          let index =  this.itemList[categoryIndex].products.findIndex(item => item.versionedId.id === data.data.versionedId.id)
+          console.log("index",index);
           if (index > -1) {
             this.itemList[categoryIndex].products[index] = data.data;
           } else {

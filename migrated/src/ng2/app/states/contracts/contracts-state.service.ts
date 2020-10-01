@@ -1,6 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { ContractItem } from '../../components/billing/contracts/class/contract-item';
 import { ServiceAgreement } from '../../components/billing/contracts/class/service-agreement';
+import { DefaultServices } from '../../components/billing/default-services/class/default-service';
  
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { ServiceAgreement } from '../../components/billing/contracts/class/servi
 export class ContractsStateService {
   contractForDelete:ContractItem;
   contractForCopy:ServiceAgreement;
-  defaultServices: any = [];
+  defaultServices: Array<DefaultServices> = [];
   onFilter: EventEmitter<any> = new EventEmitter();
   onShowNotificationReview: EventEmitter<any> = new EventEmitter();
   onSort: EventEmitter<any> = new EventEmitter();

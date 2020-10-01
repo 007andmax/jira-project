@@ -65,6 +65,7 @@ export class ContractsAsideHourlyBillingComponent implements OnInit {
       service.selected = true;
       return service;
     });
+    console.log("this.defaultServices",this.defaultServices);
   }
   public onInitCopy() {
     this.contractsHourly.setDataFromCopy(this.contractsStateService.getContractForCopy());

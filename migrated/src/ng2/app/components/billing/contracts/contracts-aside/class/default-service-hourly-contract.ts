@@ -5,7 +5,7 @@ import { ContractsHourlyService } from './contracts-hourly-service';
 
 export class DefaultServicesHourlyContract extends DefaultServices {
     selected: boolean = false;
-    versionedId: VersionedId = new VersionedId();
+    
     public setDataFromCopy(data: ContractsHourlyService, taxesList: Array<Tax>) {
         this.selected = true;
         this.billable = data.billable;
