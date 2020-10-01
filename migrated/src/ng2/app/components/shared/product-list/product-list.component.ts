@@ -60,9 +60,14 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
     let getChangeProducts = this.inventoryStateService.getChangeProducts().subscribe((data: InventoryChange) => {
       if (data.action === 'PRODUCT_SAVED') {
-        const Index = this.itemList.findIndex((item) => item.id === data.data.category.id);
-        if (Index > -1) {
-          this.itemList[Index].products.push(data.data);
+        const categoryIndex = this.itemList.findIndex((item) => item.id === data.data.category.id);
+        if (categoryIndex > -1) {
+          const index =  this.itemList[categoryIndex].products.find(item => item.versionedId.id === data.data.versionedId.id)
+          if (index > -1) {
+            this.itemList[categoryIndex].products[index] = data.data;
+          } else {
+            this.itemList[categoryIndex].products.push(data.data);
+          }
         }
       }
       this.onUpdateList();

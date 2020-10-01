@@ -29,9 +29,9 @@ import { ContractsListService } from '../../services/contracts-list.service';
   styleUrls: ['./contracts-aside-product-service-contracts.component.scss'],
   providers: [ContractsListService]
 })
-export class ContractsAsideProductServiceContractsComponent implements OnInit,OnDestroy {
+export class ContractsAsideProductServiceContractsComponent implements OnInit, OnDestroy {
   selectedType = new ContractsFilterType('Service Contract/by other', 'SERVICE_CONTRACT', 'OTHER');
-  
+
   @ViewChild('startDateDP') startDateDP: DatePickerComponent;
   @ViewChild('reviewDateDP') reviewDateDP: DatePickerComponent;
   @ViewChild('topContract') topContract: ContractsAsideTopComponent;
@@ -47,8 +47,8 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit,On
   minStartDate: number = null;
   toggleMaximumAmountHours: boolean = false;
   toggleContractServices: boolean = false;
-   
-  type:string = "PRODUCTS";
+
+  type: string = "PRODUCTS";
   sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
     private taxesStateService: TaxesStateService,
@@ -56,7 +56,7 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit,On
     private contractsService: ContractsService,
     private modalService: NgbModal,
     private сontractsStateService: ContractsStateService,
-    private contractsListService:ContractsListService,
+    private contractsListService: ContractsListService,
     public cd: ChangeDetectorRef) { }
 
 
@@ -65,15 +65,15 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit,On
     today.setMonth(today.getMonth() + 1);
     this.contractsOther.setStartDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.contractsOther.setReviewDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-    
+
     this.minStartDate = this.getMinStartDate('MONTHLY', this.contractsOther.startDate);
     let getConfirm = this.сontractsStateService.getConfirm().subscribe(data => {
       console.log("data", data);
       this.onCheckServicesForAdd(data);
     })
     this.sub.add(getConfirm);
-     
-     if (this.сontractsStateService.getContractForCopy()) this.onInitCopy(); 
+
+    if (this.сontractsStateService.getContractForCopy()) this.onInitCopy();
   }
   onInitCopy() {
     this.contractsOther.setDataFromCopy(this.сontractsStateService.getContractForCopy());
@@ -86,28 +86,23 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit,On
     this.startDateDP.setEditDate(this.сontractsStateService.getContractForCopy().getStartDateByMilliseconds());
     this.reviewDateDP.setEditDate(this.сontractsStateService.getContractForCopy().getReviewDateByMilliseconds());
     this.topContract.companiesDP.selectedItem = this.companiesStateService.getCompanies().find(item => item.id === this.contractsOther.companyId);
-   
-     
-    
+
+
+
   }
   onCheckServicesForAdd(createBillableItem) {
-    let checkProductExpenses = this.contractsOther.checkProductExpenses();
-    let checkServiceExpenses = this.contractsOther.checkServiceExpenses();
-    if ( !checkProductExpenses ||  !checkServiceExpenses) {
-      this.cd.detectChanges();
-      return;
-    }
-     
+
+
     this.contractsService.createContract(createBillableItem, this.contractsOther.getDataForCreateOther()).subscribe(res => {
       this.onClose.emit(null);
     })
   }
   addService() {
-    this.contractsOther.serviceExpenses.push(new ContractsOtherService(new Date().getTime(),"",0,"",null));
+    this.contractsOther.serviceExpenses.push(new ContractsOtherService(new Date().getTime(), "", 0, "", null));
     this.validate.resetServicesOrProducts();
   }
   addProduct() {
-    this.contractsOther.productExpenses.push(new ContractsOtherProduct("",0,0,null));
+    this.contractsOther.productExpenses.push(new ContractsOtherProduct("", 0, 0, null));
     this.validate.resetServicesOrProducts();
   }
   onRemoveService(i) {
@@ -159,16 +154,23 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit,On
     return moment(date).format('DD MMM YYYY');
   }
   public onCreate() {
-    if (!this.validate.isValidate(this.contractsOther)) return;
+    let checkProductExpenses = this.contractsOther.checkProductExpenses();
+    let checkServiceExpenses = this.contractsOther.checkServiceExpenses();
+    let isValidate = this.validate.isValidate(this.contractsOther);
+    if (!checkProductExpenses || !checkServiceExpenses || !isValidate) {
+      this.cd.detectChanges();
+      return;
+    }
     if (this.contractsListService.compareDateNowWithDate(this.contractsOther.startDate)) {
-      const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal',backdrop: false });
+      const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: false });
       modalRef.componentInstance.message = `Do we need to create the billable item now?`;
       console.log("modalRef", modalRef);
     } else {
       this.onCheckServicesForAdd(false);
     }
+
   }
   ngOnDestroy(): void {
-   this.sub.unsubscribe();
+    this.sub.unsubscribe();
   }
 }
