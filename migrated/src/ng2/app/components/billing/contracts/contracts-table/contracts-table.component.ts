@@ -132,6 +132,9 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
       this.contractsStateService.setEdit(data);
     })
   }
+  public trackById(index, item) {
+    return item.id;
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

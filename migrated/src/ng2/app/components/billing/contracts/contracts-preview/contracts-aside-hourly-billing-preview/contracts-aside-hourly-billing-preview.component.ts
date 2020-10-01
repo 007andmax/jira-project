@@ -43,4 +43,7 @@ export class ContractsAsideHourlyBillingPreviewComponent implements OnInit {
       return `${item.name} ${item.rate}%`;
     }).join(",");
   }
+  public trackById(index, item) {
+    return item.id;
+  }
 }

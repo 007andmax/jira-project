@@ -267,6 +267,9 @@ console.log("this.contractsUserDevice",this.contractsUserDevice);
     modalRef.componentInstance.message = `Do we need to create the billable item now?`;
     console.log("modalRef", modalRef);
   }
+  public trackById(index, item) {
+    return item.id;
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

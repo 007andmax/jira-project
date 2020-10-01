@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-state.service';
 import { ServiceAgreement } from './class/service-agreement';
 import { DataType } from 'igniteui-angular';
@@ -13,20 +13,22 @@ export class ContractsComponent implements OnInit {
   showPreview = false;
   showEdit = false;
   serviceAgreement: ServiceAgreement;
-  showNotificationReview:boolean = false;
+  showNotificationReview: boolean = false;
   constructor(private contractsStateService: ContractsStateService,
-    ) { }
+    public cd: ChangeDetectorRef
+  ) { }
 
   ngOnInit() {
-   this.contractsStateService.getOnShowNotificationReview().subscribe(data => {
-     this.showNotificationReview = true;
-   })
+    this.contractsStateService.getOnShowNotificationReview().subscribe(data => {
+      this.showNotificationReview = true;
+    })
     this.contractsStateService.getOnToggleCreate().subscribe(data => {
       this.showCreate = data;
     })
     this.contractsStateService.getOnPreview().subscribe(data => {
       this.serviceAgreement = data;
       this.showPreview = true;
+      this.cd.detectChanges();
     })
     this.contractsStateService.getOnTogglePreview().subscribe(data => {
 
@@ -38,7 +40,7 @@ export class ContractsComponent implements OnInit {
       this.showEdit = true;
     })
     this.contractsStateService.getOnToggleEdit().subscribe(data => {
-      
+
       this.showEdit = data;
     })
   }

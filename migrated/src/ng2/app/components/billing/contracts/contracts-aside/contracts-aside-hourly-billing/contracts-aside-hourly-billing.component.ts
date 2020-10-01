@@ -146,4 +146,7 @@ export class ContractsAsideHourlyBillingComponent implements OnInit {
   onChangeReviewDate(data) {
     this.contractsHourly.setReviewDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
   }
+  public trackById(index, item) {
+    return item.id;
+  }
 }

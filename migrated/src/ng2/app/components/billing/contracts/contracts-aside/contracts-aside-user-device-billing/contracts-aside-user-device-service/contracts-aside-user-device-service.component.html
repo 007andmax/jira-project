@@ -16,7 +16,7 @@
   <td class="col-price --editable "><input type="text" class="payment-input qt-input-in-table qt-text-right"   number
     [money]="true"
     [ngModel]="service.rate"
-    (ngModelChange)="onChangeRate($event,invoice)"
+    (ngModelChange)="onChangeRate($event)"
     appToFixed  /></td>
   <td><div class="icon__raw-clear qt-ic-c qt-sz-16" (click)="remove()"></div></td>
 </tr>

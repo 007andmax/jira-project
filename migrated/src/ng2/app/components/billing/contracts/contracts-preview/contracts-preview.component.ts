@@ -19,11 +19,9 @@ export class ContractsPreviewComponent implements OnInit {
 
   }
   copy() {
-
     this.closed();
     this.contractsStateService.setContractForCopy(this.serviceAgreement);
     this.contractsStateService.toggleCreate(true);
-
   }
   terminateAndCopy() {
     this.contractsService.terminate(this.serviceAgreement.id).subscribe(data => {
@@ -34,8 +32,8 @@ export class ContractsPreviewComponent implements OnInit {
     this.contractsStateService.togglePreview(false);
   }
   edit() {
-      this.closed();
-      this.contractsStateService.setEdit(this.serviceAgreement);
+    this.closed();
+    this.contractsStateService.setEdit(this.serviceAgreement);
   }
   terminateAndClose() {
     this.contractsService.terminate(this.serviceAgreement.id).subscribe(data => {

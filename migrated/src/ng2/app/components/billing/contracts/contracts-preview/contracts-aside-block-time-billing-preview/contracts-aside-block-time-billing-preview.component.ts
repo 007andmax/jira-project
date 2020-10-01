@@ -23,7 +23,7 @@ export class ContractsAsideBlockTimeBillingPreviewComponent implements OnInit {
   selectedInterval: string = 'MONTHLY';
   @Input() contractsBlockTime: ServiceAgreement = new ServiceAgreement();
   formatDate: string = FORMAT_DATE_2;
-
+  toggleTimeRollover: boolean = false;
 
   constructor(private companiesStateService: CompaniesStateService,
     private usersStateService: UsersStateService,
@@ -38,6 +38,8 @@ export class ContractsAsideBlockTimeBillingPreviewComponent implements OnInit {
       this.taxes = data;
     });
     this.getSelectedInterval();
+    if (this.contractsBlockTime.maxRolloverHours) this.toggleTimeRollover = true;
+  
   }
   getSelectedInterval() {
     if (this.contractsBlockTime.interval) {

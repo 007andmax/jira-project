@@ -58,4 +58,7 @@ export class ContractsAsideUserDeviceBillingPreviewComponent implements OnInit {
       return `${item.name} ${item.rate}%`;
     }).join(",");
   }
+  public trackById(index, item) {
+    return item.id;
+  }
 }

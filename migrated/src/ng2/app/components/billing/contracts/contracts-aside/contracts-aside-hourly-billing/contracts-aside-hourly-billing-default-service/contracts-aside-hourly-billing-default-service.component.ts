@@ -26,4 +26,7 @@ export class ContractsAsideHourlyBillingDefaultServiceComponent implements OnIni
     let value = Number(val);
     this.defaultService.rate = value;
   }
+  public trackById(index, item) {
+    return item.id;
+  }
 }

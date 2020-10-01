@@ -306,6 +306,9 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
       this.onCheckServicesForAdd(false);
     }
   }
+  public trackById(index, item) {
+    return item.id;
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
