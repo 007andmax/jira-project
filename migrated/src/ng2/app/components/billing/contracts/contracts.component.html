@@ -2,9 +2,9 @@
 
   <div class="qt-df qt-fd-c qt-jc-sb contracts-page__list-container">
     <div class="qt-w100">
-      <div class="notification" *ngIf="showNotificationReview">
-        <p>Some contracts are about to expire, please review</p>
-        <button (click)="showNotificationReview = false">Okay, Got it</button>
+      <div class="expire-contract-notification" *ngIf="showNotificationReview">
+        <div>Some contracts are about to expire, please review</div>
+        <button class="expire-contract-notification__button" (click)="showNotificationReview = false">Okay, Got it</button>
       </div>
       <app-contracts-header ></app-contracts-header>
       <app-contracts-table></app-contracts-table>
@@ -14,7 +14,7 @@
 </div>
 
 <!-- <button (click)="showCreate = true">Create</button> -->
- <!-- <app-create-contracts *ngIf="showCreate" (onClose)="showCreate = false"></app-create-contracts> -->  
+ <!-- <app-create-contracts *ngIf="showCreate" (onClose)="showCreate = false"></app-create-contracts> -->
 <app-contracts-preview *ngIf="showPreview" [serviceAgreement]="serviceAgreement"  ></app-contracts-preview>
 <app-contracts-aside *ngIf="showCreate" (onClose)="showCreate = false"></app-contracts-aside>
 <app-contracts-edit *ngIf="showEdit" [serviceAgreement]="serviceAgreement"></app-contracts-edit>

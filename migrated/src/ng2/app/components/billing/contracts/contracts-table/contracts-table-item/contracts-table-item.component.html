@@ -1,4 +1,4 @@
-<tr [ngClass]="(showNotificationReview) ? 'no-valid' : ''">
+<tr class="contracts-table-row-item" [ngClass]="(showNotificationReview) ? 'no-valid' : ''">
   <td class="contracts-table__company" [textContent]="contract.company.name" (click)="preview()"></td>
   <td class="contracts-table__description" [textContent]="contract.description" (click)="preview()"></td>
   <td class="contracts-table__contract-type" [textContent]="getType()" (click)="preview()"></td>
