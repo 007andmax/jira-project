@@ -24,6 +24,7 @@ export class ContractsComponent implements OnInit {
     })
     this.contractsStateService.getOnToggleCreate().subscribe(data => {
       this.showCreate = data;
+      this.cd.detectChanges();
     })
     this.contractsStateService.getOnPreview().subscribe(data => {
       this.serviceAgreement = data;
@@ -38,6 +39,7 @@ export class ContractsComponent implements OnInit {
     this.contractsStateService.getOnEdit().subscribe(data => {
       this.serviceAgreement = data;
       this.showEdit = true;
+      this.cd.detectChanges();
     })
     this.contractsStateService.getOnToggleEdit().subscribe(data => {
 

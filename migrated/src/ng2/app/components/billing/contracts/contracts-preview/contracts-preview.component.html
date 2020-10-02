@@ -18,9 +18,9 @@
  <div class="aside-footer qt-pr-30 qt-pl-30 qt-pb-16 qt-pt-16 qt-df qt-ai-c qt-jc-sb">
     <div class="qt-df">
       <button class="qt-button qt-mr-12"  (click)="copy()">Copy</button>
-      <button class="qt-button qt-mr-12" (click)="edit()">Edit</button>
-      <button class="qt-button qt-mr-12" (click)="terminateAndCopy()">Terminate and copy</button>
-      <button class="qt-button qt-mr-12" (click)="terminateAndClose()">Terminate and close</button>
+      <button class="qt-button qt-mr-12" (click)="edit()" *ngIf="serviceAgreement.status !== 'TERMINATED'">Edit</button>
+      <button class="qt-button qt-mr-12" (click)="terminateAndCopy()" *ngIf="serviceAgreement.status !== 'TERMINATED'">Terminate and copy</button>
+      <button class="qt-button qt-mr-12" (click)="terminateAndClose()" *ngIf="serviceAgreement.status !== 'TERMINATED'">Terminate and close</button>
       <button class="qt-button --gray" (click)="closed()">Cancel</button>
     </div>
    </div>

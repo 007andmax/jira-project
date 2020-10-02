@@ -9,6 +9,7 @@ import { REMOVE_CONTRACT } from 'src/ng2/app/const/confirm';
 import { Subscription } from 'rxjs';
 import { ContractsRealTimeService } from 'src/ng2/app/states/contracts/contracts-real-time.service';
 import { ContractsListService } from '../services/contracts-list.service';
+import { NotificationStateService } from '../../../shared/notification/services/notification-state.service';
 
 @Component({
   selector: 'app-contracts-table',
@@ -26,7 +27,8 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
     private companiesStateService: CompaniesStateService,
     private confirmStateService: ConfirmStateService,
     private contractsRealTimeService: ContractsRealTimeService,
-    private contractsListService:ContractsListService,
+    private contractsListService: ContractsListService,
+    private notificationStateService: NotificationStateService,
     public cd: ChangeDetectorRef,) { }
 
 
@@ -83,17 +85,18 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
       } else if (data.action === 'SERVICE_AGREEMENT_DELETED') {
         let findIndexReq = this.reqList.findIndex(item => item.id === data.data.id);
         let findIndex = this.list.findIndex(item => item.id === data.data.id);
-        if (findIndexReq > -1) this.reqList.splice(findIndexReq,1);
-        if (findIndex > -1) this.list.splice(findIndex,1);
+        if (findIndexReq > -1) this.reqList.splice(findIndexReq, 1);
+        if (findIndex > -1) this.list.splice(findIndex, 1);
       }
       this.cd.detectChanges();
     })
   }
+
   getServiceAgreements(companies) {
     this.contractsService.getServiceAgreements().subscribe(data => {
       let showNotificationReview = false;
       this.reqList = data.map(contact => {
-        if (!showNotificationReview)  showNotificationReview = this.contractsListService.isShowNotificationReview(contact.reviewDate);
+        if (!showNotificationReview) showNotificationReview = this.contractsListService.isShowNotificationReview(contact.reviewDate);
         let company = companies.find(item => item.id === contact.company.id);
         contact.company.name = company.name;
         return contact;
@@ -104,6 +107,11 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
       }
+    })
+  }
+  onForceCreate(data) {
+    this.contractsService.forceCreate(data.id).subscribe(data => {
+      this.notificationStateService.oninitShowNotification("Billable item created");
     })
   }
   onDelete(data) {

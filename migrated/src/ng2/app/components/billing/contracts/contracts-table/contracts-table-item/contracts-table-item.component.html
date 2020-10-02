@@ -14,6 +14,7 @@
 
     <ul class="qt-dropdown-menu invoice-items-dropdown"  ngbDropdownMenu aria-labelledby="dropdownBasic1">
       <li class="pointer" ngbDropdownItem (click)="copyContract()"  >Copy contract</li>
+      <li class="pointer" ngbDropdownItem   [hidden]="contract.status == 'TERMINATED' || contract.status == 'EXPIRED' || contract.type == 'HOURLY'" (click)="forceCreate()">Force create</li>
       <li class="pointer" ngbDropdownItem (click)="editContract()"  *ngIf="contract.status !== 'TERMINATED'">Edit contract</li>
       <li class="pointer" ngbDropdownItem (click)="terminateContract()"  *ngIf="contract.status !== 'TERMINATED'">Terminate</li>
       <li class="pointer" ngbDropdownItem (click)="deleteContract()"  *ngIf="getPermissions('DELETE_SERVICE_AGREEMENTS') && contract.status !== 'CURRENT'">Delete agreement</li>

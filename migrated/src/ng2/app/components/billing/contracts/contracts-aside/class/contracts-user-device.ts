@@ -230,7 +230,7 @@ export class ContractsUserDevice {
             services: this.services.map(item => item.getDataForCreate()),
             reviewDate: this.reviewDate,
             startDate: this.startDate,
-            taxIds: this.taxIds,
+            taxIds: (toggleMaximumAmountHours) ? this.taxIds : null,
             type: "SERVICE_CONTRACT"
         }
     }

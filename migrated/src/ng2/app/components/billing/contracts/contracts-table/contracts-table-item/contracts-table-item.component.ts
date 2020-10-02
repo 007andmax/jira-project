@@ -22,6 +22,7 @@ export class ContractsTableItemComponent implements OnInit {
   @Output() onPreview = new EventEmitter();
   @Output() onEdit = new EventEmitter();
   @Output() onCopy = new EventEmitter();
+  @Output() onForceCreate = new EventEmitter();
   @Output() onTerminate = new EventEmitter();
   contractTypeDictionary = {
     HOURLY: 'Hourly',
@@ -43,17 +44,17 @@ export class ContractsTableItemComponent implements OnInit {
   constructor(private companiesStateService: CompaniesStateService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
-    private contractsListService:ContractsListService,
+    private contractsListService: ContractsListService,
     private contractsStateService: ContractsStateService,
     private permissionsService: PermissionsService,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
-    
-    
+
+
     this.showNotificationReview = this.contractsListService.isShowNotificationReview(this.contract.reviewDate);
-console.log("this.showNotificationReview",this.showNotificationReview);
-this.cd.detectChanges();
+    console.log("this.showNotificationReview", this.showNotificationReview);
+    this.cd.detectChanges();
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
@@ -64,6 +65,9 @@ this.cd.detectChanges();
     modalRef.componentInstance.message = `Are you sure you want to delete agreement?`;
     this.contractsStateService.setContractForDelete(this.contract);
 
+  }
+  forceCreate() {
+    this.onForceCreate.emit(this.contract);
   }
   terminateContract() {
     this.onTerminate.emit(this.contract);

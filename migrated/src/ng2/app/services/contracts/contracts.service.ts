@@ -19,6 +19,9 @@ export class ContractsService {
   public constructor(
     private http: HttpClient
   ) {}
+  public forceCreate( id) {
+    return this.http.get(this.apiUrl + `serviceAgreements/forceCreate?id=${id}`);
+  }
   public delete( id) {
     return this.http.delete(this.apiUrl + `serviceAgreements/${id}`,{});
   }
