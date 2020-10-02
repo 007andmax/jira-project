@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { ContractItem } from '../../class/contract-item';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import * as moment from "moment";
@@ -45,13 +45,15 @@ export class ContractsTableItemComponent implements OnInit {
     private modalService: NgbModal,
     private contractsListService:ContractsListService,
     private contractsStateService: ContractsStateService,
-    private permissionsService: PermissionsService,) { }
+    private permissionsService: PermissionsService,
+    public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
     
     
     this.showNotificationReview = this.contractsListService.isShowNotificationReview(this.contract.reviewDate);
-
+console.log("this.showNotificationReview",this.showNotificationReview);
+this.cd.detectChanges();
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
