@@ -81,26 +81,18 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
       this.toggleNotifyAgentsUser = true;
     }
     this.minStartDate = this.getMinStartDate(this.contractsBlockTime.intervalstring, this.contractsBlockTime.startDate);
-    console.log("this.taxes", this.taxes);
-    console.log("contractsBlockTime", this.contractsBlockTime);
-
   }
 
   public onEdit() {
     if (this.contractsBlockTime.blockTimeServices.length === 0 || !this.contractsBlockTime.checkDuplicatedBlockTimeServices() && !this.contractsBlockTime.checkDuplicatedServices()) return;
     this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
       moment(this.contractsBlockTime.endDate).format('DD MMM YYYY'), this.contractsBlockTime.companyId, this.contractsBlockTime.id, this.contractsBlockTime.getAllServicesName()).subscribe(data => {
-        console.log('this.contractsBlockTime', this.contractsBlockTime);
-
         if (Object.keys(data).length === 0) {
-
           this.contractsService.updateContract(this.contractsBlockTime.getDataForUpdateBlockTime()).subscribe(res => {
             this.onClose.emit(null);
           })
-
         } else {
           let names = Object.keys(data);
-          console.log("names", names);
           this.contractsBlockTime.blockTimeServices.forEach(item => {
             let find = names.find(name => name === item.name);
             if (find) item.validate = false;
@@ -151,12 +143,8 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
     if (this.contractsBlockTime.blockTimeServices.length === 0 || !this.contractsBlockTime.checkDuplicatedBlockTimeServices()) return;
     this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
       moment(this.contractsBlockTime.endDate).format('DD MMM YYYY'), this.contractsBlockTime.companyId, this.contractsBlockTime.id, this.contractsBlockTime.getBlockTimeServicesName()).subscribe(data => {
-
-        if (Object.keys(data).length === 0) {
-
-        } else {
+        if (Object.keys(data).length > 0) {
           let names = Object.keys(data);
-          console.log("names", names);
           this.contractsBlockTime.blockTimeServices.forEach(item => {
             let find = names.find(name => name === item.name);
             if (find) item.validate = false;
@@ -170,12 +158,8 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
     if (this.contractsBlockTime.services.length === 0 || !this.contractsBlockTime.checkDuplicatedServices()) return;
     this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
       moment(this.contractsBlockTime.endDate).format('DD MMM YYYY'), this.contractsBlockTime.companyId, this.contractsBlockTime.id, this.contractsBlockTime.getServicesName()).subscribe(data => {
-
-        if (Object.keys(data).length === 0) {
-
-        } else {
+        if (Object.keys(data).length > 0) {
           let names = Object.keys(data);
-          console.log("names", names);
           this.contractsBlockTime.services.forEach(item => {
             let find = names.find(name => name === item.name);
             if (find) item.validate = false;
@@ -200,7 +184,6 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
     return this.selectedInterval.toLowerCase();
   }
   public onChangeUser(data) {
-    console.log("data", data);
     this.selectedUsers = data;
     this.contractsBlockTime.setShares(this.selectedUsers.map(item => new СontractsBlockTimeShare(item.id)));
   }
@@ -235,11 +218,9 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
   onSelectInterval(data) {
     this.selectedInterval = data;
     this.minStartDate = this.getMinStartDate(data, this.contractsBlockTime.startDate);
-    console.log("this.minStartDate", this.minStartDate);
     this.contractsBlockTime.setIntervalString(data);
     this.contractsBlockTime.calculateEndDate();
     this.cd.detectChanges();
-    console.log("this.contractsBlockTime.includedHours", this.contractsBlockTime);
   }
   onChangeStartDate(data) {
     this.contractsBlockTime.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
@@ -252,7 +233,6 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
     if (!this.validate.isValidate(this.contractsBlockTime)) return;
     const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal' });
     modalRef.componentInstance.message = `Do we need to create the billable item now?`;
-    console.log("modalRef", modalRef);
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

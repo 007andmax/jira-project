@@ -159,7 +159,6 @@ export class ContractsFilter {
       1 : ((b.description.toLowerCase() > a.description.toLowerCase()) ? -1 : 0));
   }
   private onFilterCompanyName(list) {
-    console.log("list", list);
     list.sort((a, b) => (a.company.name.toLowerCase() > b.company.name.toLowerCase()) ?
       1 : ((b.company.name.toLowerCase() > a.company.name.toLowerCase()) ? -1 : 0));
   }

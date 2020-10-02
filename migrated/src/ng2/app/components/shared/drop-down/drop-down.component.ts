@@ -79,8 +79,6 @@ export class DropDownComponent implements OnInit {
   clearClient() {
     this.isAdd = false;
     this.selectedItem = null;
-
-    console.log("clearClient");
     this.onSelectedItem.emit(null);
   }
   public getInputText() {

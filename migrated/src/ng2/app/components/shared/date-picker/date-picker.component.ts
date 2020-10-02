@@ -100,7 +100,6 @@ export class DatePickerComponent implements OnInit, OnDestroy {
     this.datepicker = this.sericeDatePicker.getDateForDatePicker(data);
     if (this.navDate) this.sericeDatePicker.updateMonthAndYearDatePicker(this.datepicker, this.navDate);
     this.date.setTitle(this.datepicker,this.formatDate);
-    console.log("this.datepicker",this.datepicker);
   }
 
   public geTextDate() {
@@ -111,7 +110,6 @@ export class DatePickerComponent implements OnInit, OnDestroy {
   */
   private oninitreset() {
     let reset = this.stateDatePicker.getOnReset().subscribe((data) => {
-
       this.selectDate(this.sericeDatePicker.getDateForDatePicker(null));
     })
     this.sericeDatePicker.addSubscription(reset);

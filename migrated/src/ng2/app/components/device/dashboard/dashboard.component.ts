@@ -76,11 +76,9 @@ export class DashboardComponent implements OnInit {
     } else if (output.type === 'drop') {
       this.dragOver = false;
     } else if (output.type === 'rejected' && typeof output.file !== 'undefined') {
-      console.log(output.file.name + ' rejected');
+       
     }
-
-    // this.files = this.files.filter(file => file.progress.status !== UploadStatus.Done);
-  }
+   }
 
   startUpload(): void {
     const event: UploadInput = {
@@ -199,7 +197,7 @@ export class DashboardComponent implements OnInit {
   }
 
   onDateChange(newDate: Date) {
-    console.log(newDate);
+     
   }
 
   updateDashboard(type: any) {

@@ -32,7 +32,6 @@ export class ContractsAsideHourlyEditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log("contractsHourly", this.contractsHourly);
     this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.contractsHourly.companyId);
   }
   public onEdit() {
@@ -42,33 +41,26 @@ export class ContractsAsideHourlyEditComponent implements OnInit {
         this.validate.resetDate();
         this.searchDuplicatedServiceNames();
       } else {
-
         this.validate.setDate(false);
       }
     })
   }
   public searchDuplicatedServiceNames() {
-    let servicesName = this.contractsHourly.services.filter(item =>  item.selected).map(item =>  item.name);
-    console.log("servicesName", servicesName);
-    console.log("this.contractsHourly.services", this.contractsHourly.services);
+    let servicesName = this.contractsHourly.services.filter(item => item.selected).map(item => item.name);
     this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsHourly.startDate).format('DD MMM YYYY'),
       moment(this.contractsHourly.endDate).format('DD MMM YYYY'), this.contractsHourly.companyId, this.contractsHourly.id, servicesName).subscribe(data => {
         if (Object.keys(data).length === 0) {
           this.contractsService.updateContract(this.contractsHourly.getDataForUpdateHourly()).subscribe(contract => {
             this.onClose.emit(null);
           })
-        } else {
-
         }
       }, err => {
 
       })
   }
   onAddService(data: DefaultServicesHourlyContract) {
-    console.log("data", data);
     this.contractsHourly.services.push(new ContractsBlockTimeDefaultService(true, data.billable, data.commissionRate, data.versionedId.id, data.name, data.rate, data.taxes.map(item => item.id)));
     this.showAddService = false;
-    console.log("this.contractsHourly.services", this.contractsHourly.services);
   }
   onToggleAllServices(event) {
     this.contractsHourly.services.forEach(item => {

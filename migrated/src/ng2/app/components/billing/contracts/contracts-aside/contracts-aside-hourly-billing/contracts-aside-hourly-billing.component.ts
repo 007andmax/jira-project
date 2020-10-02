@@ -52,19 +52,18 @@ export class ContractsAsideHourlyBillingComponent implements OnInit {
     if (this.contractsStateService.getContractForCopy()) {
       this.onInitCopy();
     } else {
-      if (this.contractsStateService.getDefaultService().length > 0)  this.setDefaultServices(this.contractsStateService.getDefaultService());
+      if (this.contractsStateService.getDefaultService().length > 0) this.setDefaultServices(this.contractsStateService.getDefaultService());
       this.contractsStateService.getOnDefaultServices().subscribe(data => {
-      this.setDefaultServices(data);
+        this.setDefaultServices(data);
       })
     }
   }
-  public setDefaultServices (data) {
+  public setDefaultServices(data) {
     this.defaultServices = data.map(item => {
       let service = new DefaultServicesHourlyContract(item);
       service.selected = true;
       return service;
     });
-    console.log("this.defaultServices",this.defaultServices);
   }
   public onInitCopy() {
     this.contractsHourly.setDataFromCopy(this.contractsStateService.getContractForCopy());
@@ -97,17 +96,13 @@ export class ContractsAsideHourlyBillingComponent implements OnInit {
   }
   public searchDuplicatedServiceNames() {
     let servicesName = this.contractsHourly.services.map(item => item.name);
-    console.log("servicesName", servicesName);
-    console.log("this.contractsHourly.services", this.contractsHourly.services);
     this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsHourly.startDate).format('DD MMM YYYY'),
       moment(this.contractsHourly.endDate).format('DD MMM YYYY'), this.contractsHourly.companyId, null, servicesName).subscribe(data => {
         if (Object.keys(data).length === 0) {
           this.contractsService.createContract(false, this.contractsHourly.getDataForCreate()).subscribe(contract => {
             this.onClose.emit(null);
           })
-        } else {
-
-        }
+        } 
       }, err => {
 
       })

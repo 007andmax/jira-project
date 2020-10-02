@@ -66,7 +66,6 @@ export class DefaultServicesItemComponent implements OnInit {
   }
   onSelectGlNumbers(data) {
     this.service.glNumber = data;
-    console.log("this.service",this.service);
     if (data == null) {
       this.glNumberSelect.clearWithOutChanges();
       this.onChangeDefault();

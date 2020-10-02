@@ -39,19 +39,15 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnCompanies);
     this.contractsStateService.getSort().subscribe(data => {
-      console.log("data", data);
       this.filter.onSort(data, this.list);
-      console.log("this.list", this.list);
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
       }
     })
     this.contractsStateService.getFilter().subscribe(data => {
-      console.log("data", data);
       this.filter.setFilters(data)
       this.list = this.filter.getFilterList(this.reqList);
       this.filter.onSort('company', this.list);
-      console.log("this.list", this.list);
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
       }

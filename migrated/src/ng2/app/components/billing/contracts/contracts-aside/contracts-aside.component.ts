@@ -31,7 +31,6 @@ export class ContractsAsideComponent implements OnInit {
       this.type = `${data.type}${(data.billType) ? "_" + data.billType : ""}`;
     })
     this.defaultServicesService.getDefaultServices().subscribe(data => {
-      console.log("data",data);
       this.contractsStateService.setDefaultService(data);
     })
   }

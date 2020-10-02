@@ -18,7 +18,6 @@ export class TehUsersComponent implements OnInit, OnDestroy {
   set setUsers(value) {
     this.users = JSON.parse(JSON.stringify(value));
     this.usersList = JSON.parse(JSON.stringify(value));
-    console.log("this.usersList",this.usersList);
   }
   public usersList: Array<TechUserItem> = [];
   public showSelect = false;
@@ -29,7 +28,6 @@ export class TehUsersComponent implements OnInit, OnDestroy {
   @Input() type: string = RECURRING_TICEKTS;
   users: Array<TechUserItem> = [];
   sub = new Subscription();
-
   @Output() usersChange = new EventEmitter();
 
   /**
@@ -122,9 +120,7 @@ export class TehUsersComponent implements OnInit, OnDestroy {
    * @param event event
    */
   public onSearch(event) {
-    console.log("event.target.value", event.target.value);
     this.usersList = this.users.filter(item => (item.firstName.toLowerCase() + ' ' + item.lastName.toLowerCase()).includes(event.target.value.toLowerCase()));
-    console.log("this.usersList", this.usersList);
     this.cd.detectChanges();
   }
 

@@ -39,7 +39,6 @@ export class ContractsAsideHourlyBillingAddServiceComponent implements OnInit {
   }
   onChangeRate(event) {
     this.service.rate = Number(event.target.value);
-    console.log("this.service.rate", this.service.rate);
     if (this.service.rate >= 0) this.validate.resetRate();
   }
   private setDefaultTaxes(lsitTaxes) {
@@ -61,7 +60,6 @@ export class ContractsAsideHourlyBillingAddServiceComponent implements OnInit {
       })
   }
   add() {
-    console.log("this.service", this.service);
     if (!this.validate.isValidate(this.service)) return;
     this.addBtn.setDisabled(true);
     this.defaultServicesService.addService(this.service.getDataForAddDefault()).subscribe((data: any) => {

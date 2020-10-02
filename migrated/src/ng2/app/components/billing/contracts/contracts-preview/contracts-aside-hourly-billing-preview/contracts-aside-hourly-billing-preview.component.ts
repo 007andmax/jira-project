@@ -24,7 +24,6 @@ export class ContractsAsideHourlyBillingPreviewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log("contractsHourly", this.contractsHourly);
     this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.contractsHourly.companyId);
     if (this.taxesStateService.getTaxes().length > 0) this.taxes = this.taxesStateService.getTaxes();
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {

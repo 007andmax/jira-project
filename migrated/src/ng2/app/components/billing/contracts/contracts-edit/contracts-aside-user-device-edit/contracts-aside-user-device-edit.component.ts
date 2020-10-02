@@ -80,15 +80,12 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit {
   };
   this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
     moment(this.contractsUserDevice.endDate).format('DD MMM YYYY'), this.contractsUserDevice.companyId, this.contractsUserDevice.id, this.contractsUserDevice.getAllServicesName()).subscribe(data => {
-
       if (Object.keys(data).length === 0) {
-console.log("this.contractsUserDevice",this.contractsUserDevice);
         this.contractsService.updateContract(this.contractsUserDevice.getDataForUpdateServiceContract(this.toggleMaximumAmountHours)).subscribe(res => {
           this.onClose.emit(null);
         })
       } else {
         let names = Object.keys(data);
-        console.log("names", names);
         this.contractsUserDevice.blockTimeServices.forEach(item => {
           let find = names.find(name => name === item.name);
           if (find) item.validate = false;
@@ -118,12 +115,8 @@ console.log("this.contractsUserDevice",this.contractsUserDevice);
     if (this.contractsUserDevice.services.length === 0 || !this.contractsUserDevice.checkDuplicatedServices()) return;
     this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
       moment(this.contractsUserDevice.endDate).format('DD MMM YYYY'), this.contractsUserDevice.companyId, this.contractsUserDevice.id, this.contractsUserDevice.getServicesName()).subscribe(data => {
-
-        if (Object.keys(data).length === 0) {
-
-        } else {
+        if (Object.keys(data).length > 0) {
           let names = Object.keys(data);
-          console.log("names", names);
           this.contractsUserDevice.services.forEach(item => {
             let find = names.find(name => name === item.name);
             if (find) item.validate = false;
@@ -137,12 +130,8 @@ console.log("this.contractsUserDevice",this.contractsUserDevice);
     if (this.contractsUserDevice.blockTimeServices.length === 0 || !this.contractsUserDevice.checkDuplicatedBlockTimeServices()) return;
     this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
       moment(this.contractsUserDevice.endDate).format('DD MMM YYYY'), this.contractsUserDevice.companyId, this.contractsUserDevice.id, this.contractsUserDevice.getBlockTimeServicesName()).subscribe(data => {
-
-        if (Object.keys(data).length === 0) {
-
-        } else {
+        if (Object.keys(data).length > 0)  {
           let names = Object.keys(data);
-          console.log("names", names);
           this.contractsUserDevice.blockTimeServices.forEach(item => {
             let find = names.find(name => name === item.name);
             if (find) item.validate = false;
@@ -156,12 +145,8 @@ console.log("this.contractsUserDevice",this.contractsUserDevice);
     if (this.contractsUserDevice.serviceContractServices.length === 0 || !this.contractsUserDevice.checkDuplicatedServiceContractServices()) return;
     this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
       moment(this.contractsUserDevice.endDate).format('DD MMM YYYY'), this.contractsUserDevice.companyId, this.contractsUserDevice.id, this.contractsUserDevice.getServiceContractServicesName()).subscribe(data => {
-
-        if (Object.keys(data).length === 0) {
-
-        } else {
+        if (Object.keys(data).length > 0)  {
           let names = Object.keys(data);
-          console.log("names", names);
           this.contractsUserDevice.serviceContractServices.forEach(item => {
             let find = names.find(name => name === item.name);
             if (find) item.validate = false;
@@ -247,18 +232,14 @@ console.log("this.contractsUserDevice",this.contractsUserDevice);
   onSelectInterval(data) {
     this.selectedInterval = data;
     this.minStartDate = this.getMinStartDate(data, this.contractsUserDevice.startDate);
-    console.log("this.minStartDate", this.minStartDate);
     this.contractsUserDevice.setIntervalString(data);
     this.contractsUserDevice.calculateEndDate();
     this.cd.detectChanges();
-    console.log("this.contractsOther.includedHours", this.contractsUserDevice);
   }
   public onCreate() {
     if (!this.validate.isValidate(this.contractsUserDevice)) return;
     const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: false });
-
     modalRef.componentInstance.message = `Do we need to create the billable item now?`;
-    console.log("modalRef", modalRef);
   }
   public trackById(index, item) {
     return item.id;

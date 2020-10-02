@@ -51,7 +51,6 @@ export class ContractsTableItemComponent implements OnInit {
 
   ngOnInit() {
     this.showNotificationReview = this.contractsListService.isShowNotificationReview(this.contract.reviewDate);
-    console.log("this.showNotificationReview", this.showNotificationReview);
     this.cd.detectChanges();
   }
   public getPermissions(action) {

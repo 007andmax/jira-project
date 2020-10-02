@@ -14,22 +14,17 @@ export class ContractsAsideOtherProductComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-  if (this.product.productId.length > 0) this.editProduct = new InventoryItem(this.product);
-   console.log("this.editProduct",this.editProduct);
-   console.log("this.product",this.product);
+    if (this.product.productId.length > 0) this.editProduct = new InventoryItem(this.product);
   }
   public onChangeProduct(data) {
-    console.log("data", data);
     this.editProduct = data;
     if (data) {
-     
       this.product.quantity = 0;
       this.product.salePrice = data.sale;
       this.product.productId = data.versionedId.id;
       this.product.validate = true;
       this.product.description = data.description;
     } else {
-     
       this.product.quantity = 0;
       this.product.salePrice = 0;
       this.product.productId = "";

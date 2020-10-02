@@ -65,7 +65,6 @@ export class TaxesComponent implements OnInit, OnDestroy {
     let getTagsFromEdit = this.taxesStateService.getTaxesFromEdit().subscribe((data) => {
       this.selectedTax = data;
       this.cd.detectChanges();
-      console.log("this.selectedTax",this.selectedTax);
     });
     this.sub.add(getTagsFromEdit);
   }

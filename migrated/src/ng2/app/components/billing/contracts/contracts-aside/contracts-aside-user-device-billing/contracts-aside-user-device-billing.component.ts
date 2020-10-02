@@ -61,15 +61,12 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     today.setMonth(today.getMonth() + 1);
     this.contractsUserDevice.setStartDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.contractsUserDevice.setReviewDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-
     this.minStartDate = this.getMinStartDate('MONTHLY', this.contractsUserDevice.startDate);
     if (this.taxesStateService.getTaxes().length > 0) this.setDefaultTaxes(this.taxesStateService.getTaxes());
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
       this.setDefaultTaxes(data);
-
     })
     let getConfirm = this.сontractsStateService.getConfirm().subscribe(data => {
-      console.log("data", data);
       this.onCheckServicesForAdd(data);
     })
     this.sub.add(getConfirm);
@@ -93,13 +90,11 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     }))
     if (this.contractsUserDevice.services.length > 0) this.toggleContractServices = true;
     if (this.contractsUserDevice.includedHours && this.contractsUserDevice.rateExceeding) this.toggleMaximumAmountHours = true;
-    console.log("contractsUserDevice", this.contractsUserDevice);
   }
   private setDefaultTaxes(lsitTaxes) {
     this.taxes = lsitTaxes;
     let taxes = lsitTaxes.filter(item => item.isDefault === true);
     this.defaultSelectedTax = taxes;
-    console.log("taxes", taxes);
     this.taxesDP.setEditItems(taxes);
   }
   parsedateForTotal(date) {
@@ -117,16 +112,12 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     };
     this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
       moment(this.contractsUserDevice.endDate).format('DD MMM YYYY'), this.contractsUserDevice.companyId, null, this.contractsUserDevice.getAllServicesName()).subscribe(data => {
-
         if (Object.keys(data).length === 0) {
-
           this.contractsService.createContract(createBillableItem, this.contractsUserDevice.getDataForCreate(this.toggleMaximumAmountHours)).subscribe(res => {
             this.onClose.emit(null);
           })
-
         } else {
           let names = Object.keys(data);
-          console.log("names", names);
           this.contractsUserDevice.blockTimeServices.forEach(item => {
             let find = names.find(name => name === item.name);
             if (find) item.validate = false;
@@ -148,12 +139,8 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     if (this.contractsUserDevice.services.length === 0 || !this.contractsUserDevice.checkDuplicatedServices()) return;
     this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
       moment(this.contractsUserDevice.endDate).format('DD MMM YYYY'), this.contractsUserDevice.companyId, null, this.contractsUserDevice.getServicesName()).subscribe(data => {
-
-        if (Object.keys(data).length === 0) {
-
-        } else {
+        if (Object.keys(data).length > 0) {
           let names = Object.keys(data);
-          console.log("names", names);
           this.contractsUserDevice.services.forEach(item => {
             let find = names.find(name => name === item.name);
             if (find) item.validate = false;
@@ -167,12 +154,8 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     if (this.contractsUserDevice.blockTimeServices.length === 0 || !this.contractsUserDevice.checkDuplicatedBlockTimeServices()) return;
     this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
       moment(this.contractsUserDevice.endDate).format('DD MMM YYYY'), this.contractsUserDevice.companyId, null, this.contractsUserDevice.getBlockTimeServicesName()).subscribe(data => {
-
-        if (Object.keys(data).length === 0) {
-
-        } else {
+        if (Object.keys(data).length > 0) {
           let names = Object.keys(data);
-          console.log("names", names);
           this.contractsUserDevice.blockTimeServices.forEach(item => {
             let find = names.find(name => name === item.name);
             if (find) item.validate = false;
@@ -186,12 +169,8 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     if (this.contractsUserDevice.serviceContractServices.length === 0 || !this.contractsUserDevice.checkDuplicatedServiceContractServices()) return;
     this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
       moment(this.contractsUserDevice.endDate).format('DD MMM YYYY'), this.contractsUserDevice.companyId, null, this.contractsUserDevice.getServiceContractServicesName()).subscribe(data => {
-
-        if (Object.keys(data).length === 0) {
-
-        } else {
+        if (Object.keys(data).length > 0) {
           let names = Object.keys(data);
-          console.log("names", names);
           this.contractsUserDevice.serviceContractServices.forEach(item => {
             let find = names.find(name => name === item.name);
             if (find) item.validate = false;
@@ -202,14 +181,12 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
       })
   }
   onSetServiceContractServicesType(event, type) {
-    console.log("event", event.target.checked);
     if (event.target.checked) {
       this.contractsUserDevice.billType = type;
       if (type === "DEVICE") this.contractsUserDevice.serviceContractServices = [new ContractsUserDeviceService(0, "Managed workstations", 0, this.defaultSelectedTax.map(item => item.id)),
       new ContractsUserDeviceService(0, "Managed servers", 0, this.defaultSelectedTax.map(item => item.id))];
       if (type === "USER") this.contractsUserDevice.serviceContractServices = [new ContractsUserDeviceService(0, "Managed users", 0, this.defaultSelectedTax.map(item => item.id))];
     }
-
   }
   setToggleMaximumAmountHours(data) {
     this.toggleMaximumAmountHours = data;
@@ -284,18 +261,15 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
   onSelectInterval(data) {
     this.selectedInterval = data;
     this.minStartDate = this.getMinStartDate(data, this.contractsUserDevice.startDate);
-    console.log("this.minStartDate", this.minStartDate);
     this.contractsUserDevice.setInterval(data);
     this.contractsUserDevice.calculateEndDate();
     this.cd.detectChanges();
-    console.log("this.contractsUserDevice.includedHours", this.contractsUserDevice);
   }
   public onCreate() {
     if (!this.validate.isValidate(this.contractsUserDevice)) return;
     if (this.contractsListService.compareDateNowWithDate(this.contractsUserDevice.startDate)) {
       const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal',backdrop: false });
       modalRef.componentInstance.message = `Do we need to create the billable item now?`;
-      console.log("modalRef", modalRef);
     } else {
       this.onCheckServicesForAdd(false);
     }

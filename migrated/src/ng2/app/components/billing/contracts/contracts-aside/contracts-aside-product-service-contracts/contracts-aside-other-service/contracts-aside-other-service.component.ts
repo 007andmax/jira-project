@@ -14,7 +14,7 @@ import { DefaultServicesHourlyContract } from '../../class/default-service-hourl
 export class ContractsAsideOtherServiceComponent implements OnInit {
   formatDate: string = FORMAT_DATE_2;
   @Input() service: ContractsOtherService;
-  editItem:DefaultServices = null;
+  editItem: DefaultServices = null;
   @Output() onRemove = new EventEmitter<any>();
   defaultServices: Array<DefaultServicesHourlyContract> = [];
   constructor(private contractsStateService: ContractsStateService,
@@ -48,20 +48,14 @@ export class ContractsAsideOtherServiceComponent implements OnInit {
     this.service.resetValidateDescription();
   }
   public onChangeDurationService(data) {
-    console.log("data", data);
     this.service.setQuantity(data);
-
   }
   select(data: DefaultServices) {
-    console.log("data", data);
     this.editItem = data;
     this.service.setData(data);
-    
   }
   onChangeDatePickerService(data) {
-    console.log("data", data);
     this.service.setDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
- 
   }
   remove() {
     this.onRemove.emit(null);

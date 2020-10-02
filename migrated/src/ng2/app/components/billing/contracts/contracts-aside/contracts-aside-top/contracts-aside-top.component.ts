@@ -36,7 +36,6 @@ export class ContractsAsideTopComponent implements OnInit {
   }
   onSelectType(data) {
     this.contractsStateService.setType(data);
-    console.log("data", data);
   }
   selectCompany(item) {
     this.onSelectCompany.emit(item);

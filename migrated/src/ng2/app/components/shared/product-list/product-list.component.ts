@@ -56,17 +56,12 @@ export class ProductListComponent implements OnInit, OnDestroy {
       let value = this.getNameOrDescription(this.editItem);
       this.elRef.nativeElement.querySelector('#dropdownProducts').value = value;
       if (value !== '') this.selectedItem = true;
-
     }
-
     let getChangeProducts = this.inventoryStateService.getChangeProducts().subscribe((data: InventoryChange) => {
-      console.log("data",data);
       if (data.action === 'PRODUCT_SAVED') {
         const categoryIndex = this.itemList.findIndex((item) => item.id === data.data.category.id);
-        console.log("categoryIndex",categoryIndex);
         if (categoryIndex > -1) {
           let index =  this.itemList[categoryIndex].products.findIndex(item => item.versionedId.id === data.data.versionedId.id)
-          console.log("index",index);
           if (index > -1) {
             this.itemList[categoryIndex].products[index] = data.data;
           } else {

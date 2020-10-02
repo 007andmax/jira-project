@@ -56,7 +56,6 @@ export class InvoiceFormTicketEditTaxesComponent implements OnInit, OnDestroy {
   }
   public setEditItems(data) {
     this.selectedTax = data;
-    console.log("this.selectedTax",this.selectedTax);
     this.cd.detectChanges();
   }
 

@@ -113,7 +113,7 @@ export class TicketTaskComponent implements OnInit, OnDestroy {
     } else if (output.type === 'drop') {
       this.dragOver = false;
     } else if (output.type === 'rejected' && typeof output.file !== 'undefined') {
-      console.log(output.file.name + ' rejected');
+       
     }
 
     // this.files = this.files.filter(file => file.progress.status !== UploadStatus.Done);
@@ -142,7 +142,7 @@ export class TicketTaskComponent implements OnInit, OnDestroy {
     this.uploadInput.emit({ type: 'removeAll' });
   }
   onDateChange(newDate: Date) {
-    console.log(newDate);
+     
   }
 
   getAllTicketList () {

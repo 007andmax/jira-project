@@ -60,10 +60,8 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit, O
     today.setMonth(today.getMonth() + 1);
     this.contractsOther.setStartDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.contractsOther.setReviewDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-
     this.minStartDate = this.getMinStartDate('MONTHLY', this.contractsOther.startDate);
     let getConfirm = this.сontractsStateService.getConfirm().subscribe(data => {
-      console.log("data", data);
       this.onCheckServicesForAdd(data);
     })
     this.sub.add(getConfirm);
@@ -113,11 +111,9 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit, O
   onSelectInterval(data) {
     this.selectedInterval = data;
     this.minStartDate = this.getMinStartDate(data, this.contractsOther.startDate);
-    console.log("this.minStartDate", this.minStartDate);
     this.contractsOther.setInterval(data);
     this.contractsOther.calculateEndDate();
     this.cd.detectChanges();
-    console.log("this.contractsOther.includedHours", this.contractsOther);
   }
   getMinStartDate(interval, startDate) {
     let newMinStartDate;
@@ -153,7 +149,6 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit, O
     if (this.contractsListService.compareDateNowWithDate(this.contractsOther.startDate)) {
       const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: false });
       modalRef.componentInstance.message = `Do we need to create the billable item now?`;
-      console.log("modalRef", modalRef);
     } else {
       this.onCheckServicesForAdd(false);
     }

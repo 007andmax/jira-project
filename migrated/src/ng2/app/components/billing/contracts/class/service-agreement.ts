@@ -169,11 +169,8 @@ export class ServiceAgreement {
             let endDate = new Date(this.startDate);
             endDate.setFullYear(endDate.getFullYear() + 50);
             endDate.setDate(endDate.getDate() - 7);
-            //   endDate.setDate(endDate.getDate() - 1);
             this.endDate = moment(endDate).format('YYYY/MM/DD');
-
         }
-        console.log("this.endDate",this.endDate);
     }
     public checkDuplicatedBlockTimeServices() {
         this.blockTimeServices.forEach(item => {
@@ -187,7 +184,6 @@ export class ServiceAgreement {
         this.blockTimeServices.forEach(item => {
             item.validate = (item.name.length > 0);
         })
-        console.log("blockTimeServices", this.blockTimeServices);
         let validateDuplicated = (this.blockTimeServices.find(item => !item.validateDuplicated)) ? false : true;
         let validate = (this.blockTimeServices.find(item => !item.validate)) ? false : true;
         return validateDuplicated && validate;
@@ -204,7 +200,6 @@ export class ServiceAgreement {
         this.services.forEach(item => {
             item.validate = (item.name.length > 0);
         })
-        console.log("services", this.services);
         let validateDuplicated = (this.services.find(item => !item.validateDuplicated)) ? false : true;
         let validate = (this.services.find(item => !item.validate)) ? false : true;
         return validateDuplicated && validate;
@@ -221,7 +216,6 @@ export class ServiceAgreement {
         this.serviceContractServices.forEach(item => {
             item.validate = (item.name.length > 0);
         })
-        console.log("serviceContractServices", this.serviceContractServices);
         let validateDuplicated = (this.serviceContractServices.find(item => !item.validateDuplicated)) ? false : true;
         let validate = (this.serviceContractServices.find(item => !item.validate)) ? false : true;
         return validateDuplicated && validate;

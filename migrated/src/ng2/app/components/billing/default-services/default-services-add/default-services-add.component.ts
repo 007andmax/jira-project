@@ -34,7 +34,6 @@ export class DefaultServicesAddComponent implements OnInit {
     if (this.glNumberStateService.getGLNumbers().length > 0) this.glNumbers = this.sortGlNumbers(this.glNumberStateService.getGLNumbers());
     let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe((data) => {
       this.glNumbers = this.sortGlNumbers(data);
-      console.log("this.glNumbers",this.glNumbers);
       this.cd.detectChanges();
     })
     this.sub.add(getOnGlNumbers);
@@ -54,7 +53,6 @@ export class DefaultServicesAddComponent implements OnInit {
   }
   onChangeRate(event) {
     this.service.rate = Number(event.target.value);
-    console.log("this.service.rate",this.service.rate);
     if (this.service.rate >= 0) this.validate.resetRate();
   }
   private setDefaultTaxes(lsitTaxes) {
@@ -72,7 +70,6 @@ export class DefaultServicesAddComponent implements OnInit {
     })
   }
   add() {
-    console.log("this.service",this.service);
     if (!this.validate.isValidate(this.service)) return;
     this.addBtn.setDisabled(true);
     this.defaultServicesService.addService(this.service.getDataForAdd()).subscribe(data => {

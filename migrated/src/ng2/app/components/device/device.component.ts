@@ -156,7 +156,7 @@ export class DeviceComponent implements OnInit {
         this.loading = false;
       },
       error => {
-        console.log('Something went wrong please try again.');
+         
       });
     }
 
@@ -170,7 +170,7 @@ export class DeviceComponent implements OnInit {
         window.open(url, '_self');
       },
       error => {
-        console.log('Something went wrong please try again.');
+         
       });
     }
 

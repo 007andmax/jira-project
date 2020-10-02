@@ -24,7 +24,6 @@ export class ContractsEditComponent implements OnInit {
     private defaultServicesService: DefaultServicesService,) { }
 
   ngOnInit() {
-    console.log("serviceAgreement", this.serviceAgreement);
     this.defaultServicesService.getDefaultServices().subscribe(data => {
       this.contractsStateService.setDefaultService(data);
     })

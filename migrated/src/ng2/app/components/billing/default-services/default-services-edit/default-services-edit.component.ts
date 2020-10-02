@@ -34,7 +34,6 @@ export class DefaultServicesEditComponent implements OnInit {
       this.glNumbers = this.sortGlNumbers(data);
     })
     this.sub.add(getOnGlNumbers);
-    console.log("service", this.service);
     this.taxSelect.setEditItem(this.service.taxes);
   }
   private sortGlNumbers(data) {
@@ -46,7 +45,6 @@ export class DefaultServicesEditComponent implements OnInit {
   }
   onChangeRate(event) {
     this.service.rate = Number(event.target.value);
-    console.log("this.service.rate",this.service.rate);
     if (this.service.rate >= 0) this.validate.resetRate();
   }
   onTaxesChange(data) {

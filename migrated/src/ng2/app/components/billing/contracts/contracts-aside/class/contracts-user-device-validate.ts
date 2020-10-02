@@ -32,15 +32,12 @@ export class ContractsUserDeviceValidate {
         return this.rateExceeding;
     }
     public isValidate(contractsBlockTime) {
-        console.log("contractsBlockTime",contractsBlockTime);
         if (!contractsBlockTime.companyId) this.company = false;
         if (contractsBlockTime.description === "") this.description = false;
         if (contractsBlockTime.contractWithBlockTime) {
             if (contractsBlockTime.includedHours === "") this.includedHours = false;
             if (contractsBlockTime.rateExceeding === "") this.rateExceeding = false;
         }
-       
-       
         return this.company && this.description && this.includedHours  && this.rateExceeding;
     }
 }

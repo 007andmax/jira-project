@@ -112,10 +112,7 @@ export class CompanyPasswordManagerTableComponent implements OnInit {
    * @param item - item for edit
    */
   public editRecord(item) {
-    console.log("editRecord",item);
-    console.log("VIEW_PASSWORD",this.permissionsService.isAllowed('VIEW_PASSWORD'));
-    if (this.permissionsService.isAllowed('VIEW_PASSWORD')) {
-      console.log("VIEW_PASSWORD");
+     if (this.permissionsService.isAllowed('VIEW_PASSWORD')) {
       this.passwordManagerService.addRecord(item);
     }
   }

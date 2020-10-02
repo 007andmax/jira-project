@@ -38,13 +38,11 @@ export class ContractsBlockTimeValidate {
         return this.rateExceeding;
     }
     public isValidate(contractsBlockTime) {
-        console.log("contractsBlockTime",contractsBlockTime);
         if (!contractsBlockTime.companyId) this.company = false;
         if (contractsBlockTime.description === "") this.description = false;
         if (contractsBlockTime.includedHours === "") this.includedHours = false;
         if (contractsBlockTime.blockRate === "") this.blockRate = false;
         if (contractsBlockTime.rateExceeding === "") this.rateExceeding = false;
-       
         return this.company && this.description && this.includedHours && this.blockRate && this.rateExceeding;
     }
 }

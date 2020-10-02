@@ -155,7 +155,6 @@ export class ContractsUserDevice {
         this.serviceContractServices.forEach(item => {
             item.validate = (item.name.length > 0);
         })
-        console.log("serviceContractServices", this.serviceContractServices);
         let validateDuplicated = (this.serviceContractServices.find(item => !item.validateDuplicated)) ? false : true;
         let validate = (this.serviceContractServices.find(item => !item.validate)) ? false : true;
         return validateDuplicated && validate;
@@ -169,7 +168,6 @@ export class ContractsUserDevice {
                 if (i != u && item1.name === item2.name && item1.validateDuplicated && item2.validateDuplicated) item2.validateDuplicated = false;
             })
         })
-        console.log("blockTimeServices", this.blockTimeServices);
         this.blockTimeServices.forEach(item => {
             item.validate = (item.name.length > 0);
         })
@@ -179,20 +177,16 @@ export class ContractsUserDevice {
     }
 
     public checkProductExpenses() {
-        console.log("checkProductExpenses");
         this.productExpenses.forEach(item => {
             item.validate = true;
         });
         this.productExpenses.forEach((item) => {
             if (item.productId.length === 0) item.validate = false;
-
         })
-
         let validate = (this.productExpenses.find(item => !item.validate)) ? false : true;
         return validate;
     }
     public checkServiceExpenses() {
-        console.log("checkServiceExpenses");
         this.serviceExpenses.forEach(item => {
             item.validate = true;
             item.validateDescription = true;
@@ -200,15 +194,12 @@ export class ContractsUserDevice {
         this.serviceExpenses.forEach((item) => {
             if (item.serviceId.length === 0) item.validate = false;
             if (item.description.length === 0) item.validateDescription = false;
-
         })
-
         let validate = (this.serviceExpenses.find(item => !item.validate)) ? false : true;
         let validateDescription = (this.serviceExpenses.find(item => !item.validateDescription)) ? false : true;
         return validate && validateDescription;
     }
     public getDataForCreate(toggleMaximumAmountHours) {
-
         return {
             billType: this.billType,
             blockRate: this.blockRate,
@@ -241,7 +232,6 @@ export class ContractsUserDevice {
                 if (i != u && item1.name === item2.name && item1.validateDuplicated && item2.validateDuplicated) item2.validateDuplicated = false;
             })
         })
-        console.log("services", this.services);
         let validateDuplicated = (this.services.find(item => !item.validateDuplicated)) ? false : true;
         let validate = (this.services.find(item => !item.validate)) ? false : true;
         return validateDuplicated && validate;

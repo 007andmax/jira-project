@@ -110,7 +110,7 @@ export class SoftwareComponent implements OnInit, OnDestroy {
     );
   }
   onDateChange(newDate: Date) {
-    console.log(newDate);
+     
   }
 
   selectedRecord(flag: string, index) {
