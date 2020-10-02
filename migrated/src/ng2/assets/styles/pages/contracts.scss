@@ -698,7 +698,7 @@ app-contracts-aside-block-time-billing-default-service {
     justify-content: center;
   }
 }
-.contracts-table-row-item {
+.contracts-table-row-item::before {
   content: '';
 }
 .contracts-table-row-item.no-valid::before {
