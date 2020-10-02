@@ -698,7 +698,9 @@ app-contracts-aside-block-time-billing-default-service {
     justify-content: center;
   }
 }
-
+.contracts-table-row-item {
+  content: '';
+}
 .contracts-table-row-item.no-valid::before {
     background: url("assets/img/icons/update-label.png") no-repeat;
     width: 44px;
@@ -709,6 +711,16 @@ app-contracts-aside-block-time-billing-default-service {
     bottom: unset !important;
     left: unset !important;
     padding-left: 5px;
+    z-index: 0 !important;
+}
+
+thead tr.contracts-table-row-item::before {
+  content: '';
+  width: 10px;
+  height: 105px;
+  background: #edf2f6;
+  position: absolute;
+  transform: translate(-10px, -50px);
 }
 
 @media (min-width: 1920px) {
