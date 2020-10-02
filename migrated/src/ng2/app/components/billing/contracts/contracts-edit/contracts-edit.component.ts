@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { ServiceAgreement } from '../class/service-agreement';
 import { ContractsAsideHourlyEditComponent } from './contracts-aside-hourly-edit/contracts-aside-hourly-edit.component';
 import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-state.service';
@@ -17,13 +17,14 @@ export class ContractsEditComponent implements OnInit {
   @ViewChild('blockTimeContract') blockTimeContract: ContractsAsideBlockTimeEditComponent;
   @ViewChild('serviceContract') serviceContract: ContractsAsideUserDeviceEditComponent;
   @ViewChild('otherContract') otherContract: ContractsAsideProductServiceEditComponent;
-  
+
   @Input() serviceAgreement: ServiceAgreement;
   constructor(private contractsStateService: ContractsStateService,
+    public cd: ChangeDetectorRef,
     private defaultServicesService: DefaultServicesService,) { }
 
   ngOnInit() {
-    console.log("serviceAgreement",this.serviceAgreement);
+    console.log("serviceAgreement", this.serviceAgreement);
     this.defaultServicesService.getDefaultServices().subscribe(data => {
       this.contractsStateService.setDefaultService(data);
     })
@@ -36,5 +37,6 @@ export class ContractsEditComponent implements OnInit {
   }
   closed() {
     this.contractsStateService.toggleEdit(false);
+    this.cd.detectChanges();
   }
 }

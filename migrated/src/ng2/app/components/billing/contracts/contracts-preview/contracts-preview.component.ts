@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, ChangeDetectorRef } from '@angular/core';
 import { ConstantsService } from 'src/ng2/app/services/constants/constants.service';
 import { ContractsService } from 'src/ng2/app/services/contracts/contracts.service';
 import { ServiceAgreement } from '../class/service-agreement';
@@ -13,6 +13,7 @@ export class ContractsPreviewComponent implements OnInit {
   @Input() serviceAgreement: ServiceAgreement;
 
   constructor(private contractsService: ContractsService,
+    public cd: ChangeDetectorRef,
     private contractsStateService: ContractsStateService,) { }
 
   ngOnInit() {
@@ -30,6 +31,7 @@ export class ContractsPreviewComponent implements OnInit {
   }
   closed() {
     this.contractsStateService.togglePreview(false);
+    this.cd.detectChanges();
   }
   edit() {
     this.closed();

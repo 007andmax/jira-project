@@ -46,7 +46,6 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit {
     private contractsService: ContractsService,
     private modalService: NgbModal,
     private сontractsStateService: ContractsStateService,
-
     public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
