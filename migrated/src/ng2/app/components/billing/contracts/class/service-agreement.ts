@@ -172,6 +172,7 @@ export class ServiceAgreement {
             this.endDate = moment(endDate).format('YYYY/MM/DD');
 
         }
+        console.log("this.endDate",this.endDate);
     }
     public checkDuplicatedBlockTimeServices() {
         this.blockTimeServices.forEach(item => {

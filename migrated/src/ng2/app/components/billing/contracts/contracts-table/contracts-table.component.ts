@@ -18,6 +18,7 @@ import { NotificationStateService } from '../../../shared/notification/services/
   providers: [ContractsListService]
 })
 export class ContractsTableComponent implements OnInit, OnDestroy {
+  showPreloader:boolean = true;
   filter: ContractsFilter = new ContractsFilter();
   list: Array<ContractItem> = [];
   reqList: Array<ContractItem> = [];
@@ -104,6 +105,7 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
       if (showNotificationReview) this.contractsStateService.showNotificationReview();
       this.list = JSON.parse(JSON.stringify(this.reqList));
       this.filter.onSort('company', this.list);
+      this.showPreloader = false;
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
       }
