@@ -3,7 +3,6 @@ export class ContractsUserDeviceValidate {
     description:boolean = true;
     includedHours:boolean = true;
     rateExceeding:boolean = true;
-
     constructor() {}
 
     public resetRateExceeding() {

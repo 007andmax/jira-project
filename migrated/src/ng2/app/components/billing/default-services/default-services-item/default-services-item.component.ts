@@ -10,7 +10,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
 import { DefaultServicesStateService } from 'src/ng2/app/states/default-services/default-services-state.service';
 import { GlNumberService } from 'src/ng2/app/services/gl-number/gl-number.service';
-import { SelectSearchComponent } from '../../../shared/select-search/select-search.component';
 import { DropDownComponent } from '../../../shared/drop-down/drop-down.component';
 
 @Component({

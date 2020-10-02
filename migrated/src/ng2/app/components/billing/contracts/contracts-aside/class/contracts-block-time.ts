@@ -179,7 +179,6 @@ export class ContractsBlockTime {
             let endDate = new Date(this.startDate);
             endDate.setFullYear(endDate.getFullYear() + 50);
             endDate.setDate(endDate.getDate() - 7);
-            //   endDate.setDate(endDate.getDate() - 1);
             this.endDate = moment(endDate).format('YYYY/MM/DD');
 
         }

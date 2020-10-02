@@ -4,8 +4,6 @@ import { ContractsUserDevice } from './contracts-user-device';
 
 export class ContractsOther extends ContractsUserDevice {
     billType: string = "OTHER";
-
-
     public setDataFromCopy(data: ServiceAgreement) {
         this.billType = data.billType;
         this.companyId = data.companyId;

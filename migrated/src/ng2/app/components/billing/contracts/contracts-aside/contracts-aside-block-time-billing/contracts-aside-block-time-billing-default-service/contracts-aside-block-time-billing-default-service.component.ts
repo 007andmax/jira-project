@@ -1,9 +1,7 @@
 import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
-
 import { ContractsBlockTimeDefaultService } from '../../class/contracts-block-time-default-service';
 import { InvoiceFormTicketEditTaxesComponent } from '../../../../billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.component';
 import { TaxesStateService } from 'src/ng2/app/states/taxes/taxes-state.service';
-
 
 @Component({
   selector: 'app-contracts-aside-block-time-billing-default-service',

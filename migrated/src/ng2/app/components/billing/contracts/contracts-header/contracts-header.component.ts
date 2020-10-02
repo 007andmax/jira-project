@@ -1,7 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-state.service';
 import { ContractsFilterComponent } from '../contracts-filter/contracts-filter.component';
-import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 
 @Component({
   selector: 'app-contracts-header',

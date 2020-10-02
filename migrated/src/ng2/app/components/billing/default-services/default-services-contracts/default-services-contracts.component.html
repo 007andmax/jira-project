@@ -22,43 +22,8 @@
       (onSelectedItem)="onSelectGlNumbers($event)"
     >
     </app-drop-down>
-
-
-    <!-- <app-default-services-gl-number
-    [class]="['light-dropdown', 'new-product-gl-select', '--fixed']" [list]="glNumbers" #glNumberSelect
-    [placeholder]="'Select GL'"
-    [change]="true"
-    [container]="'body'"
-            [editItem]="selectedGlNumber"
-            [add]="true" [field]="'glNumber'"
-            (onAddItem)="onAddGlNumber($event)"
-            (onSelectedItem)="onSelectGlNumbers($event)"
-    ></app-default-services-gl-number> -->
-   <!-- <app-select-search [class]="['light-dropdown', 'new-product-gl-select', '--fixed']" [list]="glNumbers" #glNumberSelect
-    [placeholder]="'Select GL'"
-    [change]="false"
-    [container]="'body'"
-            [editItem]="selectedGlNumber"
-            [add]="true" [field]="'glNumber'"
-            (onAddItem)="onAddGlNumber($event)"
-            (onSelectedItem)="onSelectGlNumbers($event)"></app-select-search>-->
   </td>
- <!--  <td class="default-service-table__gl" ngbDropdown placement="bottom-right">
-    <div class="gl-number-dropdown">
-      <p ngbDropdownToggle [textContent]="(selectedGlNumber) ? selectedGlNumber.glNumber : ''"></p>
-      <span *ngIf="glNumbers">
-        <i class="icn-sm report-caret-icon" ngbDropdownToggle></i>
-      </span>
-
-      <div class="qt-number-dropdown-menu" ngbDropdownMenu aria-labelledby="dropdown1">
-        <ng-template ngFor let-item [ngForOf]="glNumbers" let-i="index">
-          <button ngbDropdownItem [textContent]="item.glNumber" (click)="setGlNumberContract(item)"></button>
-        </ng-template>
-      </div>
-    </div>
-
-
-  </td>-->
+ 
   <td class="default-service-table__billable">
 
   </td>

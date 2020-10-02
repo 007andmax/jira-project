@@ -44,11 +44,6 @@
 
       </div>
 
-      <!--<div class="qt-input-block qt-w25 qt-mr-16">
-        <label>Num.of Intervals</label>
-        <input value="1" type="text">
-      </div>
-    -->
       <div class="qt-input-block --required  qt-w25">
         <label>Review Date</label>
         <app-date-picker #reviewDateDP [formatDate]="formatDate" [editMode]="true" [editDate]="contractsBlockTime.getReviewDateByMilliseconds()"  [useMinDate]="false"   (onChange)="onChangeReviewDate($event)"></app-date-picker>

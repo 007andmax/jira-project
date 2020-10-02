@@ -50,8 +50,6 @@ export class ContractsTableItemComponent implements OnInit {
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
-
-
     this.showNotificationReview = this.contractsListService.isShowNotificationReview(this.contract.reviewDate);
     console.log("this.showNotificationReview", this.showNotificationReview);
     this.cd.detectChanges();
@@ -64,7 +62,6 @@ export class ContractsTableItemComponent implements OnInit {
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
     modalRef.componentInstance.message = `Are you sure you want to delete agreement?`;
     this.contractsStateService.setContractForDelete(this.contract);
-
   }
   forceCreate() {
     this.onForceCreate.emit(this.contract);

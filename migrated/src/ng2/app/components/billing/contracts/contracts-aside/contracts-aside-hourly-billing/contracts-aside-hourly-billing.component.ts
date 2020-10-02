@@ -4,7 +4,6 @@ import { FORMAT_DATE_2 } from 'src/ng2/app/const/date-picker';
 import { ContractsHourly } from '../class/contracts-hourly';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-state.service';
-import { DefaultServices } from '../../../default-services/class/default-service';
 import { ContractsHourlyValidate } from '../class/contracts-hourly-validate';
 import { ContractsService } from 'src/ng2/app/services/contracts/contracts.service';
 import * as moment from "moment";

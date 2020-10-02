@@ -13,8 +13,6 @@ import { ContractsFilterType } from '../../class/contracts-filter-type';
 import { ServiceAgreement } from '../../class/service-agreement';
 import { ContractsUserDeviceValidate } from '../../contracts-aside/class/contracts-user-device-validate';
 import * as moment from "moment";
-import { ContractsUserDeviceService } from '../../contracts-aside/class/contracts-user-device-service';
-import { ContractsBlockTimeService } from '../../contracts-aside/class/contracts-block-time-service';
 import { ContractsConfirmComponent } from '../../contracts-confirm/contracts-confirm.component';
 import { ServiceAgreementBlockTimeServices } from '../../class/service-agreement-block-time-services';
 
@@ -59,24 +57,19 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit {
     } else {
       this.selectedInterval = (this.contractsUserDevice.customInterval === 30) ? '30 days' : (this.contractsUserDevice.customInterval === 15) ? '15 days' : '7 days';
     }
-
-
     this.contractsUserDevice.setIntervalString(this.selectedInterval);
     this.taxesDP.setEditItems(this.taxes.filter(item => {
       let find = this.contractsUserDevice.taxIds.find(taxId => taxId === item.id);
       return (find) ? true : false;
     }))
     if (this.contractsUserDevice.services.length > 0) this.toggleContractServices = true;
-
     this.minStartDate = this.getMinStartDate(this.contractsUserDevice.intervalstring, this.contractsUserDevice.startDate);
     if (this.contractsUserDevice.includedHours && this.contractsUserDevice.rateExceeding) {
      this.contractsUserDevice.blockTimeServices =  this.contractsUserDevice.blockTimeServices;
      this.toggleMaximumAmountHours = true;
-    
     } else {
       this.contractsUserDevice.blockTimeServices =  this.contractsUserDevice.serviceContractServicesToTrack;
     }
-    console.log("contractsUserDevice", this.contractsUserDevice);
    }
   
   public onEdit() { 

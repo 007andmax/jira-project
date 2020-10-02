@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { User } from 'src/ng2/app/components/users/class/user';
- 
+
 @Component({
   selector: 'app-contracts-aside-block-time-billing-users',
   templateUrl: './contracts-aside-block-time-billing-users.component.html',
@@ -11,7 +11,6 @@ export class ContractsAsideBlockTimeBillingUsersComponent implements OnInit {
   @Output() onSelected = new EventEmitter<any>();
   selectable = true;
   removable = true;
-  
   constructor() { }
 
   ngOnInit() {
@@ -43,5 +42,5 @@ export class ContractsAsideBlockTimeBillingUsersComponent implements OnInit {
   public getUserName(user) {
     return (user) ? `${user.firstName} ${user.lastName}` : '';
   }
- 
+
 }

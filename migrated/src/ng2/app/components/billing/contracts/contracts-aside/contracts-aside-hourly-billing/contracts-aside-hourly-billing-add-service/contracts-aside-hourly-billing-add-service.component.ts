@@ -1,11 +1,9 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter, Input } from '@angular/core';
 import { TaxesStateService } from 'src/ng2/app/states/taxes/taxes-state.service';
-import { DefaultServices } from '../../../../default-services/class/default-service';
 import { Subscription } from 'rxjs';
 import { DefaultServiceValidate } from '../../../../default-services/class/default-service-validate';
 import { Tax } from 'src/ng2/class/taxes/tax';
 import { DisabledBtnDirective } from 'src/ng2/app/directives/disabled-btn.directive';
-import { SelectSearchComponent } from 'src/ng2/app/components/shared/select-search/select-search.component';
 import { DefaultServicesService } from 'src/ng2/app/services/default-services/default-services.service';
 import * as moment from "moment";
 import { ContractsHourly } from '../../class/contracts-hourly';
@@ -17,7 +15,6 @@ import { DefaultServicesHourlyContract } from '../../class/default-service-hourl
 })
 export class ContractsAsideHourlyBillingAddServiceComponent implements OnInit {
   service: DefaultServicesHourlyContract = new DefaultServicesHourlyContract();
-
   sub: Subscription = new Subscription();
   validate: DefaultServiceValidate = new DefaultServiceValidate();
   defaultSelectedTax: Array<Tax> = [];

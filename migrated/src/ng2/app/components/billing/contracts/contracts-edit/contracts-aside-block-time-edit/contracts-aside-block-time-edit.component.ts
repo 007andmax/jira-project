@@ -15,7 +15,6 @@ import * as moment from "moment";
 import { TehUsersSateService } from 'src/ng2/app/components/shared/teh-users/services/teh-users-sate.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { СontractsBlockTimeShare } from '../../contracts-aside/class/contracts-block-time-share';
-import { ContractsBlockTimeService } from '../../contracts-aside/class/contracts-block-time-service';
 import { ContractsConfirmComponent } from '../../contracts-confirm/contracts-confirm.component';
 import { Subscription } from 'rxjs';
 import { ServiceAgreementBlockTimeServices } from '../../class/service-agreement-block-time-services';
@@ -82,7 +81,6 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
       this.toggleNotifyAgentsUser = true;
     }
     this.minStartDate = this.getMinStartDate(this.contractsBlockTime.intervalstring, this.contractsBlockTime.startDate);
-    //  this.contractsBlockTime.calculateEndDate();
     console.log("this.taxes", this.taxes);
     console.log("contractsBlockTime", this.contractsBlockTime);
 

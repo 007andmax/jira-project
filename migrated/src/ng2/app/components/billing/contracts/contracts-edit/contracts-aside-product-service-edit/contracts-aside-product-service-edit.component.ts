@@ -1,15 +1,9 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { DatePickerComponent } from 'src/ng2/app/components/shared/date-picker/date-picker.component';
-import { TehUsersSateService } from 'src/ng2/app/components/shared/teh-users/services/teh-users-sate.service';
 import { FORMAT_DATE_2 } from 'src/ng2/app/const/date-picker';
 import { ContractsService } from 'src/ng2/app/services/contracts/contracts.service';
-import { DefaultServicesService } from 'src/ng2/app/services/default-services/default-services.service';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
-import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-state.service';
-import { TaxesStateService } from 'src/ng2/app/states/taxes/taxes-state.service';
-import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { ContractsFilterType } from '../../class/contracts-filter-type';
 import { ServiceAgreement } from '../../class/service-agreement';
 import { ContractsOtherValidate } from '../../contracts-aside/class/contracts-other-validate';
@@ -44,7 +38,6 @@ export class ContractsAsideProductServiceEditComponent implements OnInit {
 
   ngOnInit() {
     this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.contractsOther.companyId);
-
     if (this.contractsOther.interval) {
       this.selectedInterval = this.contractsOther.interval;
     } else {
@@ -52,9 +45,6 @@ export class ContractsAsideProductServiceEditComponent implements OnInit {
     }
     this.contractsOther.setIntervalString(this.selectedInterval);
     this.minStartDate = this.getMinStartDate(this.contractsOther.intervalstring, this.contractsOther.startDate);
-    //  this.contractsBlockTime.calculateEndDate();
-
-    console.log("contractsBlockTime", this.contractsOther);
   }
   public onEdit() {
     if (!this.validate.isValidate(this.contractsOther) || !this.contractsOther.checkProductExpenses() || !this.contractsOther.checkServiceExpenses()) {

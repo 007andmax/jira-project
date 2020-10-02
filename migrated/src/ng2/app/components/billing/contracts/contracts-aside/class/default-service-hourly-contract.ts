@@ -1,5 +1,4 @@
 import { Tax } from 'src/ng2/app/interfaces/service/tax';
-import { VersionedId } from 'src/ng2/app/interfaces/versioned-id';
 import { DefaultServices } from '../../../default-services/class/default-service';
 import { ContractsHourlyService } from './contracts-hourly-service';
 

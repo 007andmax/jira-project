@@ -2,7 +2,6 @@ import { ContractsBlockTimeService } from './contracts-block-time-service';
 import { ContractsUserDeviceService } from './contracts-user-device-service';
 import * as moment from "moment";
 import { ContractsBlockTimeDefaultService } from './contracts-block-time-default-service';
-import { Tax } from 'src/ng2/class/taxes/tax';
 import { ServiceAgreement } from '../../class/service-agreement';
 import { ContractsOtherProduct } from './contracts-other-product';
 import { ContractsOtherService } from './contracts-other-service';
@@ -141,9 +140,7 @@ export class ContractsUserDevice {
             let endDate = new Date(this.startDate);
             endDate.setFullYear(endDate.getFullYear() + 50);
             endDate.setDate(endDate.getDate() - 7);
-            //   endDate.setDate(endDate.getDate() - 1);
             this.endDate = moment(endDate).format('YYYY/MM/DD');
-
         }
     }
     public checkDuplicatedServiceContractServices() {

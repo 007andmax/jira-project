@@ -15,18 +15,16 @@ import { Tax } from 'src/ng2/class/taxes/tax';
 export class ContractsAsideHourlyBillingPreviewComponent implements OnInit {
   selectedCompany: any;
   selectedTaxes = [];
-  taxes:Array<Tax> = [];
+  taxes: Array<Tax> = [];
   selectedType = new ContractsFilterType('Hourly', 'HOURLY', null);
   @Input() contractsHourly: ServiceAgreement = new ServiceAgreement();
   formatDate: string = FORMAT_DATE_2;
-  
-
   constructor(private companiesStateService: CompaniesStateService,
     private taxesStateService: TaxesStateService,
-    ) { }
+  ) { }
 
   ngOnInit() {
-    console.log("contractsHourly",this.contractsHourly);
+    console.log("contractsHourly", this.contractsHourly);
     this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.contractsHourly.companyId);
     if (this.taxesStateService.getTaxes().length > 0) this.taxes = this.taxesStateService.getTaxes();
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {

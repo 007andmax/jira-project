@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-state.service';
 import { ServiceAgreement } from './class/service-agreement';
-import { DataType } from 'igniteui-angular';
 import { Subscription } from 'rxjs';
 
 @Component({

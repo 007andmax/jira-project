@@ -31,11 +31,9 @@ import { ContractsListService } from '../../services/contracts-list.service';
 })
 export class ContractsAsideProductServiceContractsComponent implements OnInit, OnDestroy {
   selectedType = new ContractsFilterType('Service Contract/by other', 'SERVICE_CONTRACT', 'OTHER');
-
   @ViewChild('startDateDP') startDateDP: DatePickerComponent;
   @ViewChild('reviewDateDP') reviewDateDP: DatePickerComponent;
   @ViewChild('topContract') topContract: ContractsAsideTopComponent;
-
   @Output() onClose = new EventEmitter<any>();
   contractsOther: ContractsOther = new ContractsOther();
   formatDate: string = FORMAT_DATE_2;
@@ -47,12 +45,9 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit, O
   minStartDate: number = null;
   toggleMaximumAmountHours: boolean = false;
   toggleContractServices: boolean = false;
-
   type: string = "PRODUCTS";
   sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
-    private taxesStateService: TaxesStateService,
-    private defaultServicesService: DefaultServicesService,
     private contractsService: ContractsService,
     private modalService: NgbModal,
     private сontractsStateService: ContractsStateService,
@@ -78,7 +73,6 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit, O
   onInitCopy() {
     this.contractsOther.setDataFromCopy(this.сontractsStateService.getContractForCopy());
     this.selectedInterval = this.contractsOther.intervalstring;
-
     this.startDate = this.сontractsStateService.getContractForCopy().getStartDateByMilliseconds();
     this.startDateDP.minDate = this.сontractsStateService.getContractForCopy().getStartDateByMilliseconds();
     this.reviewDate = this.сontractsStateService.getContractForCopy().getReviewDateByMilliseconds();
@@ -86,13 +80,8 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit, O
     this.startDateDP.setEditDate(this.сontractsStateService.getContractForCopy().getStartDateByMilliseconds());
     this.reviewDateDP.setEditDate(this.сontractsStateService.getContractForCopy().getReviewDateByMilliseconds());
     this.topContract.companiesDP.selectedItem = this.companiesStateService.getCompanies().find(item => item.id === this.contractsOther.companyId);
-
-
-
   }
   onCheckServicesForAdd(createBillableItem) {
-
-
     this.contractsService.createContract(createBillableItem, this.contractsOther.getDataForCreateOther()).subscribe(res => {
       this.onClose.emit(null);
     })

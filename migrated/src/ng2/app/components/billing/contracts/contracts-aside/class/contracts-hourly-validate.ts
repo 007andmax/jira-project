@@ -2,7 +2,6 @@ import { ContractsHourly } from './contracts-hourly';
 
 export class ContractsHourlyValidate {
     description: boolean = true;
-
     company:boolean = true;
     date: boolean = true;
     constructor() {

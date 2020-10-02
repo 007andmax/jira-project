@@ -4,9 +4,7 @@ import { ContractsFilterType } from '../../class/contracts-filter-type';
 import { ServiceAgreement } from '../../class/service-agreement';
 import * as moment from "moment";
 import { InventoryStateService } from 'src/ng2/app/states/inventory/inventory-state.service';
- 
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
- 
 
 @Component({
   selector: 'app-contracts-aside-product-service-preview',
@@ -19,15 +17,12 @@ export class ContractsAsideProductServicePreviewComponent implements OnInit {
   selectedInterval: string = 'MONTHLY';
   selectedType = new ContractsFilterType('Service Contract/by other', 'SERVICE_CONTRACT', 'OTHER');
   @Input() contractsOther: ServiceAgreement = new ServiceAgreement();
-  
   formatDate: string = FORMAT_DATE_2;
   type:string = "PRODUCTS";
   constructor(private inventoryStateService: InventoryStateService,
-     
     private companiesStateService: CompaniesStateService,) { }
 
   ngOnInit() {
-    
     this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.contractsOther.companyId);
     this.getSelectedInterval();
   }

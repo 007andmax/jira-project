@@ -2,7 +2,6 @@ import { Component, OnInit, Output, EventEmitter, ViewChild, ChangeDetectorRef }
 import { GlNumber } from 'src/ng2/class/gl-number/gl-number';
 import { Subscription } from 'rxjs';
 import { GlNumberStateService } from 'src/ng2/app/states/gl-number/gl-number-state.service';
-import { SelectSearchComponent } from '../../../shared/select-search/select-search.component';
 import { DefaultServices } from '../class/default-service';
 import { DefaultServiceValidate } from '../class/default-service-validate';
 import { GlNumberService } from 'src/ng2/app/services/gl-number/gl-number.service';
@@ -23,7 +22,6 @@ export class DefaultServicesAddComponent implements OnInit {
   validate: DefaultServiceValidate = new DefaultServiceValidate();
   defaultSelectedTax: Array<Tax> = [];
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;
-  
   @Output() onClose = new EventEmitter<any>();
   constructor(private glNumberStateService: GlNumberStateService,
     private defaultServicesService: DefaultServicesService,

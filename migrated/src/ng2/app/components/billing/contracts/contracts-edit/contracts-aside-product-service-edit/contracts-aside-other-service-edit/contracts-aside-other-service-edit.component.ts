@@ -4,7 +4,6 @@ import { CompaniesStateService } from 'src/ng2/app/states/company/companies-stat
 import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-state.service';
 import { DefaultServices } from '../../../../default-services/class/default-service';
 import { ServiceAgreementServiceExpenses } from '../../../class/service-agreement-service-expenses';
-import { ContractsBlockTimeDefaultService } from '../../../contracts-aside/class/contracts-block-time-default-service';
 import { DefaultServicesHourlyContract } from '../../../contracts-aside/class/default-service-hourly-contract';
 
 @Component({
@@ -25,7 +24,6 @@ export class ContractsAsideOtherServiceEditComponent implements OnInit {
     let today = new Date();
     today.setMonth(today.getMonth() + 1);
     this.service.setDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-
     if (this.contractsStateService.getDefaultService().length > 0) this.defaultServices = this.contractsStateService.getDefaultService().map(item => new DefaultServicesHourlyContract(item));
     this.defaultServices.sort((a, b) => a.name.localeCompare(b.name));
     this.contractsStateService.getOnDefaultServices().subscribe(data => {

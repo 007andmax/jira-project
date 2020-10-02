@@ -4,8 +4,6 @@ import { DisabledBtnDirective } from 'src/ng2/app/directives/disabled-btn.direct
 import { Tax } from 'src/ng2/app/interfaces/service/tax';
 import { DefaultServicesService } from 'src/ng2/app/services/default-services/default-services.service';
 import { TaxesStateService } from 'src/ng2/app/states/taxes/taxes-state.service';
-import { DefaultServiceValidate } from '../../../../default-services/class/default-service-validate';
-import { ContractsHourly } from '../../../contracts-aside/class/contracts-hourly';
 import { DefaultServicesHourlyContract } from '../../../contracts-aside/class/default-service-hourly-contract';
 import * as moment from "moment";
 import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-state.service';
@@ -25,7 +23,6 @@ export class ContractsAsideEditHourlyAddDefaultServiceComponent implements OnIni
   validate: ContractsHourlyAddDefaultServiceValidate = new ContractsHourlyAddDefaultServiceValidate();
   defaultSelectedTax: Array<Tax> = [];
   defaultServices: Array<DefaultServicesHourlyContract> = [];
-
   @ViewChild('serviceDropDown') serviceDropDown: DropDownComponent;
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   @Input() contractsHourly: ServiceAgreement;

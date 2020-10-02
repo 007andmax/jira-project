@@ -9,7 +9,6 @@ import { ContractsUserDeviceService } from '../../class/contracts-user-device-se
   styleUrls: ['./contracts-aside-user-device-service.component.scss']
 })
 export class ContractsAsideUserDeviceServiceComponent implements OnInit {
-
   @Input() service: ContractsUserDeviceService;
   @Output() onRemove = new EventEmitter<any>();
   @Output() onCheckName = new EventEmitter<any>();
@@ -20,11 +19,9 @@ export class ContractsAsideUserDeviceServiceComponent implements OnInit {
     if (this.taxesStateService.getTaxes().length > 0) this.getTaxes(this.taxesStateService.getTaxes());
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
       this.getTaxes(data);
-
     })
   }
   getTaxes(taxes) {
-
     let listTaxes = [];
     this.service.taxIds.forEach(id => {
       let find = taxes.find(tax => tax.id === id);

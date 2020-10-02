@@ -18,7 +18,7 @@ import { NotificationStateService } from '../../../shared/notification/services/
   providers: [ContractsListService]
 })
 export class ContractsTableComponent implements OnInit, OnDestroy {
-  showPreloader:boolean = true;
+  showPreloader: boolean = true;
   filter: ContractsFilter = new ContractsFilter();
   list: Array<ContractItem> = [];
   reqList: Array<ContractItem> = [];
@@ -32,9 +32,7 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
     private notificationStateService: NotificationStateService,
     public cd: ChangeDetectorRef,) { }
 
-
   ngOnInit() {
-
     if (this.companiesStateService.getCompanies().length > 0) this.getServiceAgreements(this.companiesStateService.getCompanies());
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.getServiceAgreements(data);
@@ -51,7 +49,6 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
     this.contractsStateService.getFilter().subscribe(data => {
       console.log("data", data);
       this.filter.setFilters(data)
-
       this.list = this.filter.getFilterList(this.reqList);
       this.filter.onSort('company', this.list);
       console.log("this.list", this.list);
@@ -118,12 +115,12 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
   }
   onDelete(data) {
     this.contractsService.delete(data.id).subscribe(data => {
-      //  this.contractsStateService.setPreview(data);
+      
     })
   }
   onTerminate(data) {
     this.contractsService.terminate(data.id).subscribe(data => {
-      //  this.contractsStateService.setPreview(data);
+     
     })
   }
   onCopy(data) {

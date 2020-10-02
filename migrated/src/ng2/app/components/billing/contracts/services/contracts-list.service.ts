@@ -12,12 +12,10 @@ export class ContractsListService {
   }
   public isShowNotificationReview(review) {
     let current = new Date();
-
     current.setHours(0);
     current.setMinutes(0);
     current.setSeconds(0);
     current.setMilliseconds(0);
-
     let reviewDate = new Date(review);
     reviewDate.setHours(0);
     reviewDate.setMinutes(0);

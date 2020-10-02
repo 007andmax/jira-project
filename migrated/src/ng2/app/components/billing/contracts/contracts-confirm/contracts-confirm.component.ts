@@ -9,16 +9,11 @@ import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-st
 })
 export class ContractsConfirmComponent implements OnInit {
   @Input() public message = '';
-  
-  
   constructor(private сontractsStateService: ContractsStateService,
     public activeModal: NgbActiveModal, private eRef: ElementRef, ) {
-
   }
 
   ngOnInit() {
-    
-
   }
   closeModal() {
     this.activeModal.close();
@@ -33,6 +28,4 @@ export class ContractsConfirmComponent implements OnInit {
     this.activeModal.close();
     this.сontractsStateService.setConfirm(true);
   };
-
-
 }

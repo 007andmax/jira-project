@@ -7,7 +7,6 @@ import { ServiceAgreementBlockTimeServices } from '../../../class/service-agreem
   styleUrls: ['./contracts-aside-block-time-edit-customer-service.component.scss']
 })
 export class ContractsAsideBlockTimeEditCustomerServiceComponent implements OnInit {
-
   @Input() service: ServiceAgreementBlockTimeServices;
   @Output() onRemove = new EventEmitter<any>();
   @Output() onCheckName = new EventEmitter<any>();

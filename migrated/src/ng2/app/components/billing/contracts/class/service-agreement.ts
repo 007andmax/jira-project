@@ -38,6 +38,27 @@ export class ServiceAgreement {
     status: string;
     taxIds: Array<string> = [];
     type: string;
+    constructor(data = null) {
+        if (data) {
+            for (const key in data) {
+                this[key] = data[key];
+            }
+            this.services = data.services.map(item => {
+                return new ContractsBlockTimeDefaultService(item.basedOnDefault, item.billable, item.commissionRate, item.id, item.name, item.rate, item.taxIds);
+            })
+            this.services.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+                1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+            this.blockTimeServices = data.blockTimeServices.map(item => new ServiceAgreementBlockTimeServices(item));
+            this.serviceContractServicesToTrack = data.serviceContractServicesToTrack.map(item => new ServiceAgreementBlockTimeServices(item));
+            this.serviceContractServices = data.serviceContractServices.map(item => new ServiceAgreementBlockTimeServices(item))
+            this.maxRolloverHours = (data.maxRolloverHours) ? String(data.maxRolloverHours) : "";
+            this.rateExceeding = (data.rateExceeding) ? String(data.rateExceeding) : "";
+            this.blockRate = (typeof data.blockRate === "number") ? String(data.blockRate) : "";
+            this.productExpenses = data.productExpenses.map(item => new ContractsOtherProduct(item.productId, item.quantity, item.salePrice, item.description));
+            this.serviceExpenses = data.serviceExpenses.map(item => new ServiceAgreementServiceExpenses(item));
+            this.shares = data.shares.map(item => new СontractsBlockTimeShare(item.userId));
+        }
+    }
     public checkServiceExpenses() {
         this.serviceExpenses.forEach(item => {
             item.validate = true;
@@ -92,27 +113,7 @@ export class ServiceAgreement {
     public getServiceContractServicesName() {
         return this.serviceContractServices.map(item => item.name);
     }
-    constructor(data = null) {
-        if (data) {
-            for (const key in data) {
-                this[key] = data[key];
-            }
-            this.services = data.services.map(item => {
-                return new ContractsBlockTimeDefaultService(item.basedOnDefault, item.billable, item.commissionRate, item.id, item.name, item.rate, item.taxIds);
-            })
-            this.services.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-                1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-            this.blockTimeServices = data.blockTimeServices.map(item => new ServiceAgreementBlockTimeServices(item));
-            this.serviceContractServicesToTrack = data.serviceContractServicesToTrack.map(item => new ServiceAgreementBlockTimeServices(item));
-            this.serviceContractServices = data.serviceContractServices.map(item => new ServiceAgreementBlockTimeServices(item))
-            this.maxRolloverHours = (data.maxRolloverHours) ? String(data.maxRolloverHours) : "";
-            this.rateExceeding = (data.rateExceeding) ? String(data.rateExceeding) : "";
-            this.blockRate = (typeof data.blockRate === "number") ? String(data.blockRate) : "";
-            this.productExpenses = data.productExpenses.map(item => new ContractsOtherProduct(item.productId, item.quantity, item.salePrice, item.description));
-            this.serviceExpenses = data.serviceExpenses.map(item => new ServiceAgreementServiceExpenses(item));
-            this.shares = data.shares.map(item => new СontractsBlockTimeShare(item.userId));
-        }
-    }
+
     public setReviewDate(day, month, year, timeOffset) {
         let current = new Date();
 

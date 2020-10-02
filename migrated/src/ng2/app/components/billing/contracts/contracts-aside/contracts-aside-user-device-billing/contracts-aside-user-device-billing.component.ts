@@ -9,7 +9,6 @@ import { ContractsUserDevice } from '../class/contracts-user-device';
 import { ContractsUserDeviceService } from '../class/contracts-user-device-service';
 import { ContractsUserDeviceValidate } from '../class/contracts-user-device-validate';
 import * as moment from "moment";
-
 import { InvoiceFormTicketEditTaxesComponent } from '../../../billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.component';
 import { ContractsService } from 'src/ng2/app/services/contracts/contracts.service';
 import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-state.service';
@@ -81,7 +80,6 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
   public onInitCopy() {
     this.contractsUserDevice.setDataFromCopy(this.сontractsStateService.getContractForCopy());
     this.selectedInterval = this.contractsUserDevice.intervalstring;
-
     this.startDate = this.сontractsStateService.getContractForCopy().getStartDateByMilliseconds();
     this.startDateDP.minDate = this.сontractsStateService.getContractForCopy().getStartDateByMilliseconds();
     this.reviewDate = this.сontractsStateService.getContractForCopy().getReviewDateByMilliseconds();
@@ -95,7 +93,6 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     }))
     if (this.contractsUserDevice.services.length > 0) this.toggleContractServices = true;
     if (this.contractsUserDevice.includedHours && this.contractsUserDevice.rateExceeding) this.toggleMaximumAmountHours = true;
-
     console.log("contractsUserDevice", this.contractsUserDevice);
   }
   private setDefaultTaxes(lsitTaxes) {
@@ -104,8 +101,6 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     this.defaultSelectedTax = taxes;
     console.log("taxes", taxes);
     this.taxesDP.setEditItems(taxes);
-
-    // this.taxesStateService.setTaxesFromtEdit(taxes);
   }
   parsedateForTotal(date) {
     return moment(date).format('DD MMM YYYY');
@@ -218,7 +213,6 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
   }
   setToggleMaximumAmountHours(data) {
     this.toggleMaximumAmountHours = data;
-
     if (data) {
       this.contractsUserDevice.blockRate = 0;
       this.contractsUserDevice.includedHours = "";

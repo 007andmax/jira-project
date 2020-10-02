@@ -20,9 +20,7 @@ export class ContractsAsideHourlyBillingEditDefaultServiceComponent implements O
     if (this.taxesStateService.getTaxes().length > 0) this.getTaxes(this.taxesStateService.getTaxes());
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
       this.getTaxes(data);
-
     })
-
   }
   getTaxes(taxes) {
     this.taxes = taxes;

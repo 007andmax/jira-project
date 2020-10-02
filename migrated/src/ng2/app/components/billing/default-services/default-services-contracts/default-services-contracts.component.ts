@@ -25,7 +25,6 @@ export class DefaultServicesContractsComponent implements OnInit {
       this.selectedGlNumber = this.glNumbers.find(item => (this.type === 'BLOCK_TIME') ?  item.blockTime : item.serviceContract);
     })
     this.selectedGlNumber = this.glNumbers.find(item => (this.type === 'BLOCK_TIME') ?  item.blockTime : item.serviceContract);
-     console.log("selectedGlNumber",this.selectedGlNumber);
   }
   private sortGlNumbers(data) {
     return data.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?
@@ -34,7 +33,6 @@ export class DefaultServicesContractsComponent implements OnInit {
   onSelectGlNumbers(glNumber) {
     console.log("onSelectGlNumbers");
     if (glNumber == null) {
-
       this.glNumberService.resetContract((this.type === 'BLOCK_TIME') ? 'blockTime' : 'serviceContract').subscribe(data => {
         this.selectedGlNumber = null;
         this.glNumberSelect.clearWithOutChanges();

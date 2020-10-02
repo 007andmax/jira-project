@@ -3,7 +3,6 @@
 
     <app-contracts-aside-top #topContract (onSelectCompany)="onSelectCompany($event)" [validateCompany]="validate.company" [selectedType]="selectedType" ></app-contracts-aside-top>
 
-
     <div class="qt-pl-12 qt-pr-12 qt-df qt-ai-c contract-tipe-info qt-mb-16">
       <div class="qt-sz-16 icon__tips qt-mr-5"></div>
       <div>Contract time can be based on the amount of users or devices</div>
@@ -30,12 +29,6 @@
       ></app-drop-down>
       </div>
 
-     <!-- <div class="qt-input-block qt-w25 qt-mr-16">
-        <label>Num.of Intervals</label>
-        <app-date-picker #reviewDateDP [formatDate]="formatDate" [editMode]="true" [editDate]="reviewDate" [useMinDate]="false"  (onChange)="onChangeReviewDate($event)"></app-date-picker>
-
-      </div>
--->
       <div class="qt-input-block qt-w25">
         <label>Review Date</label>
         <app-date-picker #reviewDateDP [formatDate]="formatDate" [editMode]="true"[editDate]="reviewDate"  [useMinDate]="false"   (onChange)="onChangeReviewDate($event)"></app-date-picker>

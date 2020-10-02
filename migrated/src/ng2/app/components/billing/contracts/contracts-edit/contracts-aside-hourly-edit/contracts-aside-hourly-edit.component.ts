@@ -4,7 +4,6 @@ import { ServiceAgreement } from '../../class/service-agreement';
 import { FORMAT_DATE_2 } from 'src/ng2/app/const/date-picker';
 import { ContractsHourlyValidate } from '../../contracts-aside/class/contracts-hourly-validate';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
-import { ContractsHourlyService } from '../../contracts-aside/class/contracts-hourly-service';
 import { DefaultServicesHourlyContract } from '../../contracts-aside/class/default-service-hourly-contract';
 import { ContractsService } from 'src/ng2/app/services/contracts/contracts.service';
 import * as moment from "moment";
@@ -35,11 +34,8 @@ export class ContractsAsideHourlyEditComponent implements OnInit {
   ngOnInit() {
     console.log("contractsHourly", this.contractsHourly);
     this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.contractsHourly.companyId);
-    
-
   }
   public onEdit() {
-    //this.contractsHourly.onAddServices(this.defaultServices);
     if (this.contractsHourly.services.filter(item => item.selected).length === 0 || !this.validate.isValidate(this.contractsHourly)) return;
     this.contractsService.validateCrossingDatesHourly(moment(this.contractsHourly.startDate).format('DD MMM YYYY'), moment(this.contractsHourly.endDate).format('DD MMM YYYY'), this.contractsHourly.companyId, this.contractsHourly.id).subscribe((data: any) => {
       if (data.valid) {
@@ -75,7 +71,6 @@ export class ContractsAsideHourlyEditComponent implements OnInit {
     console.log("this.contractsHourly.services", this.contractsHourly.services);
   }
   onToggleAllServices(event) {
-
     this.contractsHourly.services.forEach(item => {
       item.selected = event.target.checked;
     })

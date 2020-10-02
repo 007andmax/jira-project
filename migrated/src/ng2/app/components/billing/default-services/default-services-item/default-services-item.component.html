@@ -22,35 +22,7 @@
       (onSelectedItem)="onSelectGlNumbers($event)"
     >
     </app-drop-down>
-
-
-            <!-- <app-default-services-gl-number
-            [class]="['light-dropdown', 'new-product-gl-select', '--gray']" [list]="glNumbers" #glNumberSelect
-            [placeholder]="'Select GL'"
-            [container]="'body'"
-            [change]="false"
-            [editItem]="service.glNumber"
-            [add]="true"
-            [field]="'glNumber'"
-            (onAddItem)="onAddGlNumber($event)"
-            (onSelectedItem)="onSelectGlNumbers($event)"></app-default-services-gl-number> -->
-  </td>
- <!--  <td class="default-service-table__gl" ngbDropdown >
-    <div class="gl-number-dropdown">
-      <p ngbDropdownToggle [textContent]="(service.glNumber) ? service.glNumber.glNumber : ''"></p>
-      <span *ngIf="glNumbers">
-        <i class="icn-sm report-caret-icon" ngbDropdownToggle></i>
-      </span>
-
-      <div class="qt-number-dropdown-menu" ngbDropdownMenu aria-labelledby="dropdown1">
-        <ng-template ngFor let-item [ngForOf]="glNumbers" let-i="index">
-          <button ngbDropdownItem [textContent]="item.glNumber + ((item.description != '') ?  ' (' + item.description + ')' : '')" (click)="changeGlNumber(item)"></button>
-        </ng-template>
-      </div>
-    </div>
-
-
-  </td> -->
+   </td>
   <td class="default-service-table__billable">
     <div class="d-f qt-jc-c">
       <label class="qt-checkbox pointer" [attr.for]="'service-billable-' + service.versionedId.id">

@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { InventoryItem } from 'src/ng2/app/components/inventory/class/inventory-item';
-import { Product } from 'src/ng2/app/interfaces/product/product';
 import { ContractsOtherProduct } from '../../class/contracts-other-product';
 
 @Component({

@@ -1,13 +1,7 @@
-import { ContractsBlockTimeValidate } from './contracts-block-time-validate';
-import { ContractsOther } from './contracts-other';
-
 export class ContractsOtherValidate {
-
     company: boolean = true;
     description: boolean = true;
     servicesOrProducts: boolean = true;
-
-
     constructor() { }
 
     public getServicesOrProducts() {
@@ -35,8 +29,6 @@ export class ContractsOtherValidate {
         if (!contractsOther.companyId) this.company = false;
         if (contractsOther.description === "") this.description = false;
         if (contractsOther.productExpenses.length  === 0 && contractsOther.serviceExpenses.length  === 0) this.servicesOrProducts = false;
-        
-
         return this.company && this.description && this.servicesOrProducts;
     }
 
