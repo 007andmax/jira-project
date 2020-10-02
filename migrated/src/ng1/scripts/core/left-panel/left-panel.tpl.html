@@ -892,17 +892,17 @@
              ng-click="stateGo($event, 'credits')">
           Credits
         </div> -->
-        <div class="center-category__category"
+       <!--  <div class="center-category__category"
              ng-class="{active: $state.includes('service-agreements')}"
              ng-click="stateGo($event, 'service-agreements')"
              ng-show="PermissionsService.isAllowed('VIEW_SERVICE_AGREEMENTS')">
           Contracts
-        </div>
+        </div> -->
         <div class="center-category__category"
           ng-class="{active: $state.includes('new-contracts')}"
           ng-click="stateGo($event, 'new-contracts')"
           ng-show="PermissionsService.isAllowed('VIEW_SERVICE_AGREEMENTS')">
-          Contracts 2
+          Contracts
         </div>
       </div>
     </div>

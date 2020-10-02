@@ -14,8 +14,8 @@ export class ServiceAgreement {
     blockTimeServices: Array<ServiceAgreementBlockTimeServices> = [];
     companyId: string;
     contractWithBlockTime: boolean;
-    customBillingDate: any;
-    customInterval: any;
+    customBillingDate: string;
+    customInterval: number;
     description: string;
     enableTimeRollover: boolean;
     endDate: string;
