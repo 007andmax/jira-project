@@ -10,6 +10,7 @@ import { first } from 'rxjs/operators';
 import { v4 as uuidv4 } from 'uuid';
 import { WebsocketService } from 'src/ng2/app/services/websocket/websocket.service';
 import { ShellStateService } from 'src/ng2/app/states/shell/shell-state.service';
+import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 declare var $:any;
 @Component({
   selector: 'app-root',
@@ -38,6 +39,7 @@ export class DeviceComponent implements OnInit {
     private deviceDetailService: DeviceDetailService, 
     private remoteControlService: RemoteControlService,
     private socketService: WebsocketService,
+    private usersStateService: UsersStateService,
     private shellStateService: ShellStateService) {}
   openModal(template) {
     if (this.deviceDetail.online === true) {
@@ -68,6 +70,7 @@ export class DeviceComponent implements OnInit {
   }
   
   ngOnInit(): void {
+    this.usersStateService.onInit();
     this.shellStateService.onInit();
     this.socketService.initializeWebSocketConnection();
     localStorage.setItem('uuid', uuidv4());

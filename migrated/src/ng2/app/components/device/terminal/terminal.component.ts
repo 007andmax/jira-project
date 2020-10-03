@@ -48,7 +48,9 @@ export class TerminalComponent implements OnInit {
     type: '',
     command: '',
     default: false,
-    id: ''
+    id: '',
+    category: '',
+    categoryId: ''
   };
   editCmd = '';
   lineNumber = [1];
@@ -321,7 +323,7 @@ export class TerminalComponent implements OnInit {
       this.lineNumber.push(index);
     }
     this.commandModal.id = data.id;
-    this.commandModal.categoryId = data.cateogryId;
+    this.commandModal.categoryId = data.categoryId;
     let res = this.cmdCategoryReadList.filter(x => x.id == data.categoryId);
     this.commandModal.category = res[0].name;
     this.create = !this.create;
@@ -468,6 +470,15 @@ export class TerminalComponent implements OnInit {
     for (let index = 1; index <= data.command.split(/\r*\n/).length; index++) {
       this.lineNumberDetail.push(index);
     }
+    this.scriptDetailModal.id = data.id;
+    this.scriptDetailModal.categoryId = data.categoryId;
+    let res = this.cmdCategoryReadList.filter(x => x.id == data.categoryId);
+    if (res.length > 0) {
+      this.scriptDetailModal.category = res[0].name;
+    } else {
+      this.scriptDetailModal.category = '';
+    }
+    
   }
 
   copyToTerminal(cmd) {
@@ -541,5 +552,33 @@ export class TerminalComponent implements OnInit {
     }
   }
 
-
+  updateMyScript() {
+    let id = '';
+    let arr = this.cmdCategoryReadList.filter(val => val.name === this.scriptDetailModal.category);
+    if (arr.length > 0) {
+      id = arr[0].id;
+    }
+    if (id !== '') {
+      let data = {
+        title: this.scriptDetailModal.title,
+        categoryId: this.scriptDetailModal.categoryId !== undefined ? this.scriptDetailModal.categoryId : id,
+        command: this.scriptDetailModal.command,
+        id: this.scriptDetailModal.id
+      }
+      this.terminalService.updateCommand(data)
+      .pipe(first())
+      .subscribe(resp => {
+        this.loading = false;
+        if (resp.id !== '') {
+          this.toastr.success('Command Updated Successfully');
+          this.scriptDetail=!this.scriptDetail;
+          this.getCommandList();
+        }
+      },
+      error => {
+        const statusError = error;
+        this.loading = false;
+      });
+    }
+  }
 }

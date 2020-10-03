@@ -408,7 +408,7 @@
                       href="javascript:;"
                       class="view-btn"
                       data-tooltip="View Script"
-                      (click)="viewScriptDetail(shared)"
+                      (click)="viewScriptDetail(shared);"
                     >
                       <img
                         src="/html/ng2/assets/img/device/view-script.svg"
@@ -513,7 +513,7 @@
                     <ul id="cmd_detail_line">
                       <li *ngFor="let line of lineNumberDetail">{{line}}</li>
                     </ul>
-                    <textarea wrap="off" class="form-input" [(ngModel)]="scriptDetailModal.command" name="command" (keyup)="countLineNumberDetail()" disabled="true">
+                    <textarea wrap="off" class="form-input" [(ngModel)]="scriptDetailModal.command" name="command" (keyup)="countLineNumberDetail()" [disabled]="scriptDetailModal.default === true">
                  
                     </textarea>
                   </div>
@@ -521,10 +521,11 @@
               </div>
             </div>
               <div class="f-row">
-              <div class="f-col col-100" *ngIf="scriptDetailModal.default === true">
+              <div class="f-col col-100">
                 <div class="form-row">
-                   <button type="button" class="btn btn-primary" (click)="cloneScript(scriptDetailModal.id)">Clone Script</button>
-                   <button type="button" class="btn btn-secondary" (click)="scriptDetail = !scriptDetail">Back</button>
+                    <button type="button" *ngIf="scriptDetailModal.default === false" class="btn btn-primary" (click)="updateMyScript()">Save</button>
+                    <button type="button" *ngIf="scriptDetailModal.default === true" class="btn btn-primary" (click)="cloneScript(scriptDetailModal.id)">Clone Script</button>
+                    <button type="button" class="btn btn-secondary" (click)="scriptDetail = !scriptDetail">Back</button>
                 </div>
               </div>
             </div>

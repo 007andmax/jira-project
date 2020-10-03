@@ -103,7 +103,7 @@ p{margin:0 0 20px 0;}
 
 ul{margin:0px 0px 30px;padding:0;}
 ul li{list-style:none;margin:0px 0px 20px;padding:0px 0px 0px 15px;position:relative;}
-ul li:before{content:"";width:4px;height:4px;position:absolute;left:0px;top:7px;background:$secondary-color;@include border-radius(50%);}
+ul li:not(.cps-block__nav-item):before{content:"";width:4px;height:4px;position:absolute;left:0px;top:7px;background:$secondary-color;@include border-radius(50%);}
 ul.list-unstyled li{margin:0px;padding:0px;}
 ul.list-unstyled li:before{content:normal;}
 ol{margin:0px 0px 30px;padding:0px;list-style:none;}
@@ -2816,6 +2816,9 @@ table.dataTable thead tr th.sorting_desc, table.dataTable thead tr th.sorting_as
     
             }
         }
+    }
+    ul.cps-block__nav {
+        margin-bottom: 0 !important;
     }
 }
 

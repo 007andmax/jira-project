@@ -10,6 +10,8 @@ import { searchTextPipe } from './../_pipe/searchText.pipe';
 import { CommonServices } from '../_services/common.service';
 import { DeviceDetailService } from '../_services/device_detail.service';
 import { CONFIGCONSTANTS } from '../config/app-constants';
+import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.service';
+import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 declare  var $:any;
 
 @Component({
@@ -72,11 +74,14 @@ export class TicketTaskComponent implements OnInit, OnDestroy {
   ticketList = [];
   initial = true;
   linkedAgentList = [];
+  idEditTicket:string = '';
 
   constructor(private ticketService: TicketService,
       private toastr: ToastrService,
       public commonService: CommonServices,
-      private deviceDetailService: DeviceDetailService) {
+      private deviceDetailService: DeviceDetailService,
+      private ticketsService: TicketsService,
+      private ticketsStateService: TicketsStateService) {
     this.options = { concurrency: 1, maxUploads: 10, maxFileSize: 1000000 };
     this.files = [];
     this.uploadInput = new EventEmitter<UploadInput>();
@@ -391,6 +396,14 @@ export class TicketTaskComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     $("body").removeClass("expandTicket");
+  }
+
+  editTicket(id) {
+    this.idEditTicket = id;
+    this.ticketsStateService.onOpenTicket();
+    this.ticketsService.getTicket(id).subscribe(data => {
+      this.ticketsStateService.onEditTicket(data);
+    })
   }
 
 }
