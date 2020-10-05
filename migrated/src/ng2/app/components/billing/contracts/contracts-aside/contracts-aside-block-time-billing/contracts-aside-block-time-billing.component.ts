@@ -95,7 +95,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
   }
   private setMinMaxCustomDate() {
     let today = new Date(this.startDate);
-    this.minCustomDate =new Date(today.getFullYear(),today.getMonth(),1).getTime();
+    this.minCustomDate =today.getTime();
     this.maxCustomDate =new Date(today.getFullYear(),today.getMonth(),new Date(today.getFullYear(), today.getMonth() +1, 0).getDate()).getTime();
 
   }
