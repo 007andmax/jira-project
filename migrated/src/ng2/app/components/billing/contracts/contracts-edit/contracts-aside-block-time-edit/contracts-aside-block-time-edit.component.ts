@@ -43,6 +43,9 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
   toggleNotifyAgentsUser: boolean = false;
   selectedUsers: any = [];
   userList = [];
+  customDate = new Date().getTime();
+  minCustomDate = new Date().getTime();
+  maxCustomDate = new Date().getTime();
   sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
     private contractsService: ContractsService,
@@ -81,8 +84,17 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
       this.toggleNotifyAgentsUser = true;
     }
     this.minStartDate = this.getMinStartDate(this.contractsBlockTime.intervalstring, this.contractsBlockTime.startDate);
+    this.setMinMaxCustomDate();
   }
+  private setMinMaxCustomDate() {
+    let today = new Date(this.contractsBlockTime.startDate);
+    this.minCustomDate =new Date(today.getFullYear(),today.getMonth(),1).getTime();
+    this.maxCustomDate =new Date(today.getFullYear(),today.getMonth(),new Date(today.getFullYear(), today.getMonth() +1, 0).getDate()).getTime();
 
+  }
+  onChangeCustomDate(data) {
+    this.contractsBlockTime.setCustomDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+  }
   public onEdit() {
     if (this.contractsBlockTime.blockTimeServices.length === 0 || !this.contractsBlockTime.checkDuplicatedBlockTimeServices() && !this.contractsBlockTime.checkDuplicatedServices()) return;
     this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
@@ -105,6 +117,15 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
       }, err => {
 
       })
+  }
+  setToggleCustomBillingDate (data) {
+    this.contractsBlockTime.withCustomBillingDate = data;
+    if (!data) {
+      this.contractsBlockTime.clearCustomBillingDate();
+    } else {
+      this.contractsBlockTime.customBillingDate = this.contractsBlockTime.startDate;
+      this.customDate = new Date(this.contractsBlockTime.startDate).getTime();
+    }
   }
   selectAllUsers() {
     this.tehState.setUsersFromtEdit(JSON.parse(JSON.stringify(this.userList)));

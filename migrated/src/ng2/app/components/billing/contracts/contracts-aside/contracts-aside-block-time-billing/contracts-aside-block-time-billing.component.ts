@@ -48,7 +48,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
   toggleContractServices: boolean = false;
   toggleTimeRollover: boolean = false;
   toggleNotifyAgentsUser: boolean = false;
-  toggleCustomBillingDate:boolean = false;
+  
   selectedUsers = [];
   userList = [];
   taxes: Array<Tax> = [];
@@ -71,9 +71,11 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     let today = new Date();
       
     today.setMonth(today.getMonth() + 1);
-   this.setMinMaxCustomDate();
+  
     this.contractsBlockTime.setStartDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.contractsBlockTime.setReviewDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.contractsBlockTime.setCustomDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+   
     this.minStartDate = this.getMinStartDate('MONTHLY', this.contractsBlockTime.startDate);
     this.getUsers();
     let getConfirm = this.сontractsStateService.getConfirm().subscribe(data => {
@@ -89,12 +91,14 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
       this.setDefaultTaxes(data);
     })
     if (this.сontractsStateService.getContractForCopy()) this.onInitCopy();
+    this.setMinMaxCustomDate();
+    
   }
   private setMinMaxCustomDate() {
-    let today = new Date();
+    let today = new Date(this.startDate);
     this.minCustomDate =new Date(today.getFullYear(),today.getMonth(),1).getTime();
     this.maxCustomDate =new Date(today.getFullYear(),today.getMonth(),new Date(today.getFullYear(), today.getMonth() +1, 0).getDate()).getTime();
-   
+
   }
   private setDefaultTaxes(lsitTaxes) {
     let taxes = lsitTaxes.filter(item => item.isDefault === true);
@@ -103,6 +107,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
   }
   public onInitCopy() {
     this.contractsBlockTime.setDataFromCopy(this.сontractsStateService.getContractForCopy());
+    this.customDate = this.сontractsStateService.getContractForCopy().getCustomDateByMilliseconds();
     this.selectedInterval = this.contractsBlockTime.intervalstring;
     this.startDate = this.сontractsStateService.getContractForCopy().getStartDateByMilliseconds();
     this.startDateDP.minDate = this.сontractsStateService.getContractForCopy().getStartDateByMilliseconds();
@@ -124,6 +129,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
       })
       this.toggleNotifyAgentsUser = true;
     }
+    this.setMinMaxCustomDate();
   }
   selectAllUsers() {
     this.tehState.setUsersFromtEdit(JSON.parse(JSON.stringify(this.userList)));
@@ -234,11 +240,12 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     this.contractsBlockTime.setShares(this.selectedUsers.map(item => new СontractsBlockTimeShare(item.id)));
   }
   setToggleCustomBillingDate (data) {
-    this.toggleCustomBillingDate = data;
+    this.contractsBlockTime.withCustomBillingDate = data;
     if (!data) {
       this.contractsBlockTime.clearCustomBillingDate();
     } else {
       this.contractsBlockTime.customBillingDate = this.contractsBlockTime.startDate;
+      this.customDate = new Date(this.contractsBlockTime.startDate).getTime();
     }
   }
   setToggleNotifyAgentsUser(data) {
@@ -278,6 +285,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
   }
   onChangeStartDate(data) {
     this.contractsBlockTime.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.setMinMaxCustomDate();
   }
   onChangeCustomDate(data) {
     this.contractsBlockTime.setCustomDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);

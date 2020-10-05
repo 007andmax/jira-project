@@ -29,6 +29,7 @@ export class ServiceAgreement {
     productExpenses: Array<ContractsOtherProduct> = [];
     rateExceeding: string;
     reviewDate: string;
+    withCustomBillingDate:boolean;
     serviceContractServices: Array<ServiceAgreementBlockTimeServices> = [];
     serviceContractServicesToTrack: Array<ServiceAgreementBlockTimeServices> = [];
     serviceExpenses: Array<ServiceAgreementServiceExpenses> = [];
@@ -58,6 +59,9 @@ export class ServiceAgreement {
             this.serviceExpenses = data.serviceExpenses.map(item => new ServiceAgreementServiceExpenses(item));
             this.shares = data.shares.map(item => new СontractsBlockTimeShare(item.userId));
         }
+    }
+    public clearCustomBillingDate () {
+        this.customBillingDate  = undefined;
     }
     public checkServiceExpenses() {
         this.serviceExpenses.forEach(item => {
@@ -95,6 +99,9 @@ export class ServiceAgreement {
     public setCompanyId(data) {
         this.companyId = data;
     }
+    public getCustomDateByMilliseconds() {
+        return new Date(this.customBillingDate).getTime();
+    }
     public getStartDateByMilliseconds() {
         return new Date(this.startDate).getTime();
     }
@@ -113,7 +120,22 @@ export class ServiceAgreement {
     public getServiceContractServicesName() {
         return this.serviceContractServices.map(item => item.name);
     }
+    public setCustomDate(day, month, year, timeOffset) {
+        let current = new Date();
 
+        if (day !== current.getDate() || current.getMonth() !== (month - 1)) {
+            let dateDatePicker = new Date(year, month - 1, day).getTime(); // timestamp from calendar
+            let finalDate = new Date(dateDatePicker - (current.getTimezoneOffset() * 60000/* dont touch*/) - timeOffset /* timezone.timeOffset */);
+            this.customBillingDate = moment(finalDate.getTime()).format('YYYY/MM/DD');
+            
+        } else {
+            let currentTime = new Date(current.getFullYear(), current.getMonth(), current.getDate()).getTime();
+            let finalDate = new Date(currentTime - (current.getTimezoneOffset() * 60000) - timeOffset);
+            this.customBillingDate = moment(finalDate.getTime()).format('YYYY/MM/DD');
+           
+        }
+
+    }
     public setReviewDate(day, month, year, timeOffset) {
         let current = new Date();
 
@@ -287,6 +309,8 @@ export class ServiceAgreement {
             startDate: this.startDate,
             taxIds: this.taxIds,
             reviewDate: this.reviewDate,
+            withCustomBillingDate:this.withCustomBillingDate,
+            customBillingDate:this.customBillingDate,
             type: "BLOCK_TIME"
         }
     }
