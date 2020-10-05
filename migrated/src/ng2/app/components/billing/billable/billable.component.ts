@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { BillableService } from 'src/ng2/app/services/billable/billable.service';
 import { BillableProfile } from './class/billable-profile';
-import { CompanyFilterTop } from '../../companies/class/copany-filter-top';
+import { CompanyFilterTop } from '../../companies/class/company-filter-top';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
@@ -137,7 +137,10 @@ export class BillableComponent implements OnInit, OnDestroy {
       }
       this.onFilterName();
       this.showPreloader = false;
-      this.cd.detectChanges();
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+    }
+     
     })
   }
   onFilter(field) {

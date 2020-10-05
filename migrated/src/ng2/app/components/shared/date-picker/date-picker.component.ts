@@ -19,6 +19,7 @@ export class DatePickerComponent implements OnInit, OnDestroy {
   @Input() type: string = TYPE_INPUT;
   @Input() formatDate: string = FORMAT_DATE_1;
   @Input() editMode: boolean = false;
+  @Input() disabled: boolean = false;
   @Input() editDate: number = 0;
   @Input() useMinDate: boolean = true;
   @Input() useMaxDate: boolean = false;
@@ -50,8 +51,8 @@ export class DatePickerComponent implements OnInit, OnDestroy {
   ngOnInit() {
     
 
-    if (this.useMinDate) this.minDateDP = this.sericeDatePicker.getDateStruct(this.minDate);
-    if (this.useMaxDate) this.maxDateDP = this.sericeDatePicker.getDateStruct(this.maxDate);
+   // if (this.useMinDate) this.minDateDP = this.sericeDatePicker.getDateStruct(this.minDate);
+  //  if (this.useMaxDate) this.maxDateDP = this.sericeDatePicker.getDateStruct(this.maxDate);
 
     this.oninitreset();
     this.onInitEditMode();
@@ -60,7 +61,13 @@ export class DatePickerComponent implements OnInit, OnDestroy {
     if (this.editMode) this.setEditDate(this.editDate);
 
   }
+  ngDoCheck() {
+    if (this.useMinDate) this.minDateDP = this.sericeDatePicker.getDateStruct(this.minDate);
+    if (this.useMaxDate) this.maxDateDP = this.sericeDatePicker.getDateStruct(this.maxDate);
 
+  }
+
+   
   /**
   * Subscribe to clear date picker
   */
@@ -87,7 +94,7 @@ export class DatePickerComponent implements OnInit, OnDestroy {
     })
     this.sericeDatePicker.addSubscription(edit);
   }
-  private setEditDate(data: number) {
+  public setEditDate(data: number) {
     let date = new Date(data);
     this.navDate = this.sericeDatePicker.getNavDate(date);
     this.datepicker = this.sericeDatePicker.getDateForDatePicker(data);
@@ -103,7 +110,6 @@ export class DatePickerComponent implements OnInit, OnDestroy {
   */
   private oninitreset() {
     let reset = this.stateDatePicker.getOnReset().subscribe((data) => {
-
       this.selectDate(this.sericeDatePicker.getDateForDatePicker(null));
     })
     this.sericeDatePicker.addSubscription(reset);

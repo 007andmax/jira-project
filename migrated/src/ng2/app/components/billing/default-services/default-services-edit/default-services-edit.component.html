@@ -1,0 +1,83 @@
+<div class="default-services-page__aside">
+  <div class="aside-header qt-df qt-ai-c qt-jc-sb qt-pr-16 qt-pl-32">
+    <div class="aside-header__title qt-fs-20 qt-ff-gm qt-color-dark">
+      Edit Service
+    </div>
+
+    <div class="icon__close qt-sz-24 qt-ic-c qt-pointer" (click)="close()"></div>
+  </div>
+
+  <div class="default-services-scroll-content qt-pt-24 qt-pl-32 qt-pr-32 qt-pb-24">
+    <div class="qt-w100 qt-mb-16">
+      <div class="qt-input-block" [ngClass]="{'--input-error':!validate.getName()}">
+        <label>Customer Name</label>
+        <input  [value]="'Checks & System Maintenance'" [(ngModel)]="service.name" type="text" (input)="onChangeName()">
+        <mat-error class="qt-tooltip-error" *ngIf="!validate.getName()">
+          Service name is required
+        </mat-error>
+      </div>
+    </div>
+
+    <div class="qt-df">
+      <div class="qt-w50 qt-mb-16 qt-mr-16">
+        <div class="qt-input-block" [ngClass]="{'--input-error':!validate.getRate()}">
+          <label>Hourly Rate($)</label>
+          <input   [(ngModel)]="service.rate" type="text" number
+          [money]="true"
+           (input)="onChangeRate($event)" appToFixed>
+           <mat-error class="qt-tooltip-error" *ngIf="!validate.getRate()">
+            Hour rate is required
+          </mat-error>
+        </div>
+      </div>
+
+
+      <div class="qt-w50 qt-mb-16">
+        <div class="create-product-taxes-select">
+          <app-taxes #taxSelect (taxesChange)="onTaxesChange($event)"></app-taxes>
+        </div>
+      </div>
+    </div>
+
+    <div class="qt-df">
+      <div class="qt-w50 qt-mb-16 qt-mr-16">
+        <div class="qt-input-block">
+          <label>GL Number</label>
+          <app-select-search [class]="['light-dropdown', 'new-product-gl-select', 'qt-select-input-40']" [list]="glNumbers" #glNumberSelect
+          [placeholder]="'Select GL'"
+          [container]="'body'"
+          [editItem]="service.glNumber"
+          [add]="true" [field]="'glNumber'"
+          (onAddItem)="onAddGlNumber($event)"
+          (onSelectedItem)="onSelectGlNumbers($event)"></app-select-search>
+        </div>
+      </div>
+
+      <div class="qt-w50"></div>
+    </div>
+
+
+    <div class="qt-df qt-ai-c">
+      <label class="qt-checkbox receive-full-amount-check qt-mb-0 pointer" for="email-payment">
+        <input id="email-payment" type="checkbox"  [(ngModel)]="service.billable"  >
+        <span></span>
+      </label>
+
+      <div class="qt-fs-12 qt-ml-5">
+        Make this service billable
+      </div>
+    </div>
+
+  </div>
+
+
+
+ <div class="aside-footer qt-pr-30 qt-pl-30 qt-pb-16 qt-pt-16 qt-df qt-ai-c qt-jc-sb">
+  <div class="qt-df">
+    <button class="qt-button qt-mr-12" (click)="save()">Edit Service</button>
+    <button class="qt-button --gray" (click)="close()">Cancel</button>
+  </div>
+
+ </div>
+
+</div>

@@ -6,6 +6,7 @@ import { ConstantsService } from '../../services/constants/constants.service';
 })
 export class ConstantsStateService {
   constants;
+ 
   constructor(private constantsService: ConstantsService) { }
 
   public onInit() {
@@ -14,6 +15,7 @@ export class ConstantsStateService {
     })
 
   }
+
   public getConstant(constantName) {
     return this.constants[constantName];
 

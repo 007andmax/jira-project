@@ -1,0 +1,51 @@
+<tr>
+  <td class="default-service-table__service-name" [textContent]="service.name"></td>
+  <td class="default-service-table__rate" [textContent]="service.rate | currency"></td>
+  <td class="default-service-table__taxes" [textContent]="getSelectedTaxNames(service.taxes)"></td>
+
+  <td class="default-service-table__gl">
+    <app-drop-down
+    #glNumberSelect
+      [class]="['--small-padding']"
+      [list]="glNumbers"
+      [placeholder]="'Select GL'"
+      [container]="'body'"
+      [change]="false"
+      [editItem]="service.glNumber"
+      [add]="true"
+      [field]="'glNumber'"
+      uiType="dark"
+      heightInput="32px"
+      dropdownWidth="192px"
+      [reducerItem]="glDropDownItemName"
+      (onAddItem)="onAddGlNumber($event)"
+      (onSelectedItem)="onSelectGlNumbers($event)"
+    >
+    </app-drop-down>
+   </td>
+  <td class="default-service-table__billable">
+    <div class="d-f qt-jc-c">
+      <label class="qt-checkbox pointer" [attr.for]="'service-billable-' + service.versionedId.id">
+        <input [attr.id]="'service-billable-' + service.versionedId.id" type="checkbox" [(ngModel)]="service.billable" [disabled]="!getPermissions('MANAGE_SERVICES')" (change)="onChangeBillalble()">
+        <span></span>
+      </label>
+    </div>
+  </td>
+  <td class="default-service-table__default">
+    <div class="d-f qt-jc-c">
+      <label class="qt-checkbox pointer" [attr.for]="'service-default-' + service.versionedId.id">
+        <input [attr.id]="'service-default-' + service.versionedId.id" type="checkbox" [(ngModel)]="service.canUseInTicket" [disabled]="!getPermissions('MANAGE_SERVICES')" (change)="onChangeDefault()">
+        <span></span>
+      </label>
+    </div>
+  </td>
+  <td class="default-service-table__menu" >
+    <div ngbDropdown ngbDropdown container="body">
+      <div class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain" ngbDropdownToggle></div>
+      <ul class="qt-dropdown-menu default-services-items-dropdown" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <li class="pointer" ngbDropdownItem (click)="edit()"> <div class="icon__edit qt-sz-16 qt-mr-8"></div> Edit</li>
+        <li class="pointer" ngbDropdownItem (click)="delete()"> <div class="icon__remove qt-sz-16 qt-mr-8"></div> Delete</li>
+      </ul>
+  </div>
+  </td>
+</tr>

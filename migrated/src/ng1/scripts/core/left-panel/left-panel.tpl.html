@@ -844,11 +844,12 @@
              ng-click="stateGo($event, 'accounting.dashboard')">
           Dashboard
         </div>
+      
         <div class="center-category__category"
-             ng-class="{active: $state.includes('services')}"
-             ng-click="stateGo($event, 'services', { tabName: 'default' })">
-          Default Services
-        </div>
+        ng-class="{active: $state.includes('new-services')}"
+        ng-click="stateGo($event, 'new-services')">
+     Default Services
+   </div>
       <!--   <div class="center-category__category"
              ng-class="{active: $state.includes('accounting.billable')}"
              ng-click="stateGo($event, 'accounting.billable')">
@@ -859,6 +860,8 @@
         ng-click="stateGo($event, 'new-billable')">
      Billable Items
    </div>
+
+
         <div class="center-category__category"
         ng-class="{active: $state.includes('new-billable-invoices')}"
         ng-click="stateGo($event, 'new-billable-invoices')">
@@ -889,10 +892,16 @@
              ng-click="stateGo($event, 'credits')">
           Credits
         </div> -->
-        <div class="center-category__category"
+       <!--  <div class="center-category__category"
              ng-class="{active: $state.includes('service-agreements')}"
              ng-click="stateGo($event, 'service-agreements')"
              ng-show="PermissionsService.isAllowed('VIEW_SERVICE_AGREEMENTS')">
+          Contracts
+        </div> -->
+        <div class="center-category__category"
+          ng-class="{active: $state.includes('new-contracts')}"
+          ng-click="stateGo($event, 'new-contracts')"
+          ng-show="PermissionsService.isAllowed('VIEW_SERVICE_AGREEMENTS')">
           Contracts
         </div>
       </div>

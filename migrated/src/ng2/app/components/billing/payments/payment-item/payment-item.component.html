@@ -9,7 +9,7 @@
   <td class="billable-payment-table__payment-mode pointer" [textContent]="parsePaymentMethod(payment.paymentMethod)" (click)="showDetailsPayment()"></td>
   <td class="billable-payment-table__reference pointer" [textContent]="payment.reference" (click)="showDetailsPayment()"></td>
   <td class="billable-payment-table__payment"  ><ng-template #tipContent><div [textContent]="payment.note"></div></ng-template>
-    <div class="icon__payment-note qt-sz-24 qt-ic-c qt-mr-8 payments-page__payment-note-table-icon pointer" *ngIf="payment.note && payment.note.length > 0" placement="top" [ngbTooltip]="tipContent"></div></td>
+    <div class="icon__payment-note qt-sz-24 qt-ic-c qt-mr-8 payments-page__payment-note-table-icon pointer" *ngIf="payment.note && payment.note.length > 0" placement="left" [ngbTooltip]="tipContent"></div></td>
   <td class="billable-payment-table__amount pointer" [textContent]="(payment.partialPaidAmount || payment.totalSum ) | currency" (click)="showDetailsPayment()"></td>
   <td class="billable-payment-table__status pointer"   (click)="showDetailsPayment()">
     <span class="tag__modern" [ngClass]="payment.refundMethod ? '--error' : '--success'" [textContent]="payment.refundMethod ? 'Refund' : 'Paid'">
@@ -18,7 +18,7 @@
   <td class="billable-payment-table__menu" ngbDropdown [container]="'body'">
     <div class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"  id="dropdownBasic1" ngbDropdownToggle></div>
     <ul class="qt-dropdown-menu invoice-items-dropdown"  ngbDropdownMenu aria-labelledby="dropdownBasic1">
-      <li class="pointer" ngbDropdownItem (click)="showEditPayment()" *ngIf="!payment.refundMethod">Edit payment</li>  
+      <li class="pointer" ngbDropdownItem (click)="showEditPayment()" *ngIf="!payment.refundMethod">Edit payment</li>
       <li class="pointer" ngbDropdownItem (click)="showRefundPayment()" *ngIf="!payment.refundMethod">Refund payment</li>
       <li class="pointer" ngbDropdownItem (click)="deletePayment()">Delete payment</li>
     </ul>

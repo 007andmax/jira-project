@@ -266,12 +266,18 @@ import { InvoiceFormTicketEditServiceComponent } from './components/billing/bill
 import { InvoiceFormTicketEditProductComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-product/invoice-form-ticket-edit-product.component';
 import { InvoiceFormTicketEditTaxesComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.component';
 import { InvoiceDiscountComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-discount/invoice-discount.component';
+import { ContractsComponent } from './components/billing/contracts/contracts.component';
+import { CreateContractsComponent } from './components/billing/contracts/create-contracts/create-contracts.component';
+import { ContractsHeaderComponent } from './components/billing/contracts/contracts-header/contracts-header.component';
+import { ContractsTableComponent } from './components/billing/contracts/contracts-table/contracts-table.component';
+import { ContractsAsideComponent } from './components/billing/contracts/contracts-aside/contracts-aside.component';
 import { InvoicesComponent } from './components/billing/invoices/invoices.component';
 import { InvoicesAsideComponent } from './components/billing/invoices/invoices-aside/invoices-aside.component';
 import { InvoicesItemComponent } from './components/billing/invoices/invoices-item/invoices-item.component';
 import { InvoicesHeaderComponent } from './components/billing/invoices/invoices-header/invoices-header.component';
 import { InvoicesFilterComponent } from './components/billing/invoices/invoices-header/invoices-filter/invoices-filter.component';
 import { InvoicesAsidePreviewComponent } from './components/billing/invoices/invoices-aside-preview/invoices-aside-preview.component';
+ 
 import { PaymentsComponent } from './components/billing/payments/payments.component';
 import { PaymentsHeaderComponent } from './components/billing/payments/payments-header/payments-header.component';
 import { PaymentItemComponent } from './components/billing/payments/payment-item/payment-item.component';
@@ -281,6 +287,23 @@ import { RefundPaymentComponent } from './components/billing/payments/refund-pay
 import { EditPaymentComponent } from './components/billing/payments/edit-payment/edit-payment.component';
 import { TechServiceReportComponent } from './components/reports/reports/tech-service-report/tech-service-report.component';
 import { AccountingReportComponent } from './components/reports/reports/accounting-report/accounting-report.component';
+import { ContractsTableItemComponent } from './components/billing/contracts/contracts-table/contracts-table-item/contracts-table-item.component';
+import { ContractsAsideSelectTypeComponent } from './components/billing/contracts/contracts-aside/contracts-aside-select-type/contracts-aside-select-type.component';
+import { ContractsAsideHourlyBillingComponent } from './components/billing/contracts/contracts-aside/contracts-aside-hourly-billing/contracts-aside-hourly-billing.component';
+import { ContractsAsideBlockTimeBillingComponent } from './components/billing/contracts/contracts-aside/contracts-aside-block-time-billing/contracts-aside-block-time-billing.component';
+import { ContractsAsideUserDeviceBillingComponent } from './components/billing/contracts/contracts-aside/contracts-aside-user-device-billing/contracts-aside-user-device-billing.component';
+import { ContractsAsideProductServiceContractsComponent } from './components/billing/contracts/contracts-aside/contracts-aside-product-service-contracts/contracts-aside-product-service-contracts.component';
+import { ContractsFilterComponent } from './components/billing/contracts/contracts-filter/contracts-filter.component';
+import { ContractsAsideTopComponent } from './components/billing/contracts/contracts-aside/contracts-aside-top/contracts-aside-top.component';
+import { ContractsAsideHourlyBillingDefaultServiceComponent } from './components/billing/contracts/contracts-aside/contracts-aside-hourly-billing/contracts-aside-hourly-billing-default-service/contracts-aside-hourly-billing-default-service.component';
+import { ContractsAsideHourlyBillingAddServiceComponent } from './components/billing/contracts/contracts-aside/contracts-aside-hourly-billing/contracts-aside-hourly-billing-add-service/contracts-aside-hourly-billing-add-service.component';
+
+import { DefaultServicesComponent } from './components/billing/default-services/default-services.component';
+import { DefaultServicesAddComponent } from './components/billing/default-services/default-services-add/default-services-add.component';
+import { DefaultServicesItemComponent } from './components/billing/default-services/default-services-item/default-services-item.component';
+import { DefaultServicesContractsComponent } from './components/billing/default-services/default-services-contracts/default-services-contracts.component';
+import { DefaultServicesEditComponent } from './components/billing/default-services/default-services-edit/default-services-edit.component';
+
 import { DashboardComponent } from './components/device/dashboard/dashboard.component';
 import { HardwareComponent } from './components/device/hardware/hardware.component';
 import { SoftwareComponent } from './components/device/software/software.component';
@@ -296,7 +319,32 @@ import { NavComponent } from './components/device/nav/nav.component';
 import { TicketTaskComponent } from './components/device/ticket-task/ticket-task.component';
 import { searchTextPipe } from './components/device/_pipe/searchText.pipe';
 import { SoftwarePipe } from './pipe/software.pipe';
+import { DropDownComponent } from './components/shared/drop-down/drop-down.component';
+import { ContractsAsideHourlyBillingPreviewComponent } from './components/billing/contracts/contracts-preview/contracts-aside-hourly-billing-preview/contracts-aside-hourly-billing-preview.component';
+import { ContractsPreviewComponent } from './components/billing/contracts/contracts-preview/contracts-preview.component';
+import { ContractsEditComponent } from './components/billing/contracts/contracts-edit/contracts-edit.component';
+import { ContractsAsideHourlyEditComponent } from './components/billing/contracts/contracts-edit/contracts-aside-hourly-edit/contracts-aside-hourly-edit.component';
+import { ContractsAsideHourlyBillingEditDefaultServiceComponent } from './components/billing/contracts/contracts-edit/contracts-aside-hourly-edit/contracts-aside-hourly-billing-edit-default-service/contracts-aside-hourly-billing-edit-default-service.component';
+import { ContractsAsideBlockTimeBillingCustomerServiceComponent } from './components/billing/contracts/contracts-aside/contracts-aside-block-time-billing/contracts-aside-block-time-billing-customer-service/contracts-aside-block-time-billing-customer-service.component';
+import { DecimalNumberDirective } from './directives/decimal-number.directive';
+import { ContractsAsideBlockTimeBillingDefaultServiceComponent } from './components/billing/contracts/contracts-aside/contracts-aside-block-time-billing/contracts-aside-block-time-billing-default-service/contracts-aside-block-time-billing-default-service.component';
+import { ContractsAsideBlockTimeBillingAddDefaultServiceComponent } from './components/billing/contracts/contracts-aside/contracts-aside-block-time-billing/contracts-aside-block-time-billing-add-default-service/contracts-aside-block-time-billing-add-default-service.component';
+import { ContractsAsideBlockTimeBillingUsersComponent } from './components/billing/contracts/contracts-aside/contracts-aside-block-time-billing/contracts-aside-block-time-billing-users/contracts-aside-block-time-billing-users.component';
+import { ContractsConfirmComponent } from './components/billing/contracts/contracts-confirm/contracts-confirm.component';
+ import { ContractsAsideEditHourlyAddDefaultServiceComponent } from './components/billing/contracts/contracts-edit/contracts-aside-hourly-edit/contracts-aside-edit-hourly-add-default-service/contracts-aside-edit-hourly-add-default-service.component';
+import { ContractsAsideBlockTimeBillingPreviewComponent } from './components/billing/contracts/contracts-preview/contracts-aside-block-time-billing-preview/contracts-aside-block-time-billing-preview.component';
+import { ContractsAsideBlockTimeEditComponent } from './components/billing/contracts/contracts-edit/contracts-aside-block-time-edit/contracts-aside-block-time-edit.component';
+import { ContractsAsideBlockTimeEditCustomerServiceComponent } from './components/billing/contracts/contracts-edit/contracts-aside-block-time-edit/contracts-aside-block-time-edit-customer-service/contracts-aside-block-time-edit-customer-service.component';
+import { ContractsAsideUserDeviceServiceComponent } from './components/billing/contracts/contracts-aside/contracts-aside-user-device-billing/contracts-aside-user-device-service/contracts-aside-user-device-service.component';
+import { ContractsAsideUserDeviceBillingPreviewComponent } from './components/billing/contracts/contracts-preview/contracts-aside-user-device-billing-preview/contracts-aside-user-device-billing-preview.component';
+import { ContractsAsideUserDeviceEditComponent } from './components/billing/contracts/contracts-edit/contracts-aside-user-device-edit/contracts-aside-user-device-edit.component';
+import { ContractsAsideOtherProductComponent } from './components/billing/contracts/contracts-aside/contracts-aside-product-service-contracts/contracts-aside-other-product/contracts-aside-other-product.component';
+import { ContractsAsideOtherServiceComponent } from './components/billing/contracts/contracts-aside/contracts-aside-product-service-contracts/contracts-aside-other-service/contracts-aside-other-service.component';
+import { ContractsAsideProductServicePreviewComponent } from './components/billing/contracts/contracts-preview/contracts-aside-product-service-preview/contracts-aside-product-service-preview.component';
+import { ContractsAsideProductServiceEditComponent } from './components/billing/contracts/contracts-edit/contracts-aside-product-service-edit/contracts-aside-product-service-edit.component';
+import { ContractsAsideOtherServiceEditComponent } from './components/billing/contracts/contracts-edit/contracts-aside-product-service-edit/contracts-aside-other-service-edit/contracts-aside-other-service-edit.component';
 
+ 
 
 /**
  * declare angular
@@ -436,6 +484,9 @@ angular.module('quicktech')
     'billableComponent',
     downgradeComponent({ component: BillableComponent }))
   .directive(
+    'defaultServicesComponent',
+    downgradeComponent({ component: DefaultServicesComponent }))
+  .directive(
     'invoicesComponent',
     downgradeComponent({ component: InvoicesComponent }))
   .directive(
@@ -450,6 +501,9 @@ angular.module('quicktech')
   .directive(
     'companyProducts',
     downgradeComponent({ component: CompanyProductsComponent }))
+  .directive(
+    'contractsComponent',
+    downgradeComponent({ component: ContractsComponent }))
   .directive(
     'dashboardComponent',
     downgradeComponent({ component: DashboardComponent }))
@@ -731,12 +785,22 @@ angular.module('quicktech')
     InvoiceFormTicketEditProductComponent,
     InvoiceFormTicketEditTaxesComponent,
     InvoiceDiscountComponent,
+    ContractsComponent,
+    CreateContractsComponent,
+    ContractsHeaderComponent,
+    ContractsTableComponent,
+    ContractsAsideComponent,
     InvoicesComponent,
     InvoicesAsideComponent,
     InvoicesItemComponent,
     InvoicesHeaderComponent,
     InvoicesFilterComponent,
     InvoicesAsidePreviewComponent,
+    DefaultServicesComponent,
+    DefaultServicesAddComponent,
+    DefaultServicesItemComponent,
+    DefaultServicesContractsComponent,
+    DefaultServicesEditComponent,
     PaymentsComponent,
     PaymentsHeaderComponent,
     PaymentItemComponent,
@@ -746,6 +810,21 @@ angular.module('quicktech')
     EditPaymentComponent,
     TechServiceReportComponent,
     AccountingReportComponent,
+    ContractsTableItemComponent,
+    ContractsAsideSelectTypeComponent,
+    ContractsAsideHourlyBillingComponent,
+    ContractsAsideBlockTimeBillingComponent,
+    ContractsAsideUserDeviceBillingComponent,
+    ContractsAsideProductServiceContractsComponent,
+    ContractsFilterComponent,
+    ContractsAsideTopComponent,
+    ContractsAsideHourlyBillingDefaultServiceComponent,
+    ContractsAsideHourlyBillingAddServiceComponent,
+    DefaultServicesComponent,
+    DefaultServicesAddComponent,
+    DefaultServicesItemComponent,
+    DefaultServicesContractsComponent,
+    DefaultServicesEditComponent,
     DeviceComponent,
     NavComponent,
     DashboardComponent,
@@ -760,7 +839,44 @@ angular.module('quicktech')
     PasswordComponent,
     TicketTaskComponent,
     searchTextPipe,
-    SoftwarePipe
+    SoftwarePipe,
+    DropDownComponent,
+    ContractsAsideHourlyBillingPreviewComponent,
+    ContractsPreviewComponent,
+    ContractsEditComponent,
+    ContractsAsideHourlyEditComponent,
+    ContractsAsideBlockTimeBillingCustomerServiceComponent,
+    DecimalNumberDirective,
+    ContractsAsideBlockTimeBillingDefaultServiceComponent,
+    ContractsAsideBlockTimeBillingAddDefaultServiceComponent,
+    ContractsAsideHourlyBillingEditDefaultServiceComponent,
+    ContractsAsideBlockTimeBillingUsersComponent,
+    ContractsConfirmComponent,
+    
+    ContractsAsideEditHourlyAddDefaultServiceComponent,
+    
+    ContractsAsideBlockTimeBillingPreviewComponent,
+    
+    ContractsAsideBlockTimeEditComponent,
+    
+    ContractsAsideBlockTimeEditCustomerServiceComponent,
+    
+    ContractsAsideUserDeviceServiceComponent,
+    
+    ContractsAsideUserDeviceBillingPreviewComponent,
+    
+    ContractsAsideUserDeviceEditComponent,
+    
+    ContractsAsideOtherProductComponent,
+    
+    ContractsAsideOtherServiceComponent,
+    
+    ContractsAsideProductServicePreviewComponent,
+    
+    ContractsAsideProductServiceEditComponent,
+    
+    ContractsAsideOtherServiceEditComponent
+   
   ],
   imports: [
     BrowserModule,
@@ -832,9 +948,13 @@ angular.module('quicktech')
     CompanyProductsComponent,
     ModalCustomShareScreenComponent,
     BillableComponent,
+    BillableTicketsComponent,
+    ContractsComponent,
     InvoicesComponent,
     BillableTicketsComponent,
+    DefaultServicesComponent,
     PaymentsComponent,
+    DefaultServicesComponent,
     AppComponent,
     DeviceComponent,
     NavComponent,
@@ -849,6 +969,7 @@ angular.module('quicktech')
     FileComponent,
     PasswordComponent,
     TicketTaskComponent,
+    ContractsConfirmComponent
     // RecurringTicketsComponent
   ],
   exports: [
@@ -865,12 +986,12 @@ angular.module('quicktech')
     { provide: UrlHandlingStrategy, useClass: CustomHandlingStrategy },
     ApiPasswordManagerService
   ],
- // bootstrap: [AppComponent]
+  // bootstrap: [AppComponent]
 })
 export class AppModule {
   ngDoBootstrap(app) {
     fetch('url/to/fetch/component/name')
-      .then((name)=>{ bootstrapRootComponent(app, name)});
+      .then((name) => { bootstrapRootComponent(app, name) });
   }
 }
 
@@ -889,12 +1010,12 @@ function bootstrapRootComponent(app, name) {
 function fetch(url) {
   return new Promise((resolve) => {
     setTimeout(() => {
-      if (window.location.href.includes('/device/') === true) { 
+      if (window.location.href.includes('/device/') === true) {
         resolve('device');
       } else {
         resolve('app');
       }
-      
+
     }, 2000);
   });
 }

@@ -3,6 +3,7 @@ import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { InventoryStateService } from 'src/ng2/app/states/inventory/inventory-state.service';
 import { InventoryChange } from '../../inventory/class/inventory-change';
 import { Subscription } from 'rxjs';
+import { CategoryProductitem } from 'src/ng2/class/category-product-item';
 
 /**
  * Product list component
@@ -15,9 +16,11 @@ import { Subscription } from 'rxjs';
 export class ProductListComponent implements OnInit, OnDestroy {
   @ViewChild('products') products_dropDown: NgbDropdown;
   @Output() selectedProductItem = new EventEmitter<any>();
-  itemList: any;
+  itemList: Array<CategoryProductitem> = [];
   @Input() editItem: any;
   @Input() type: string;
+  @Input() validate: boolean = true;
+  
   classAddProduct: string
   public isFormValid = false;
   isCreateproduct: boolean = false;
@@ -54,14 +57,18 @@ export class ProductListComponent implements OnInit, OnDestroy {
       let value = this.getNameOrDescription(this.editItem);
       this.elRef.nativeElement.querySelector('#dropdownProducts').value = value;
       if (value !== '') this.selectedItem = true;
-
     }
 
  /*   let getChangeProducts = this.inventoryStateService.getChangeProducts().subscribe((data: InventoryChange) => {
       if (data.action === 'PRODUCT_SAVED') {
-        const Index = this.itemList.findIndex((item) => item.id === data.data.category.id);
-        if (Index > -1) {
-          this.itemList[Index].products.push(data.data);
+        const categoryIndex = this.itemList.findIndex((item) => item.id === data.data.category.id);
+        if (categoryIndex > -1) {
+          let index =  this.itemList[categoryIndex].products.findIndex(item => item.versionedId.id === data.data.versionedId.id)
+          if (index > -1) {
+            this.itemList[categoryIndex].products[index] = data.data;
+          } else {
+            this.itemList[categoryIndex].products.push(data.data);
+          }
         }
       }
       this.onUpdateList();

@@ -2915,6 +2915,7 @@ app-ticket-edit-aside-devices  {
   font-size: 12px;
   line-height: 1.33;
   top: calc(100% + 6px);
+  height: fit-content;
   &:before {
     content: '';
     position: absolute;
@@ -2953,3 +2954,6 @@ input.--input-error {
 .text-transparent {
   color: transparent !important;
 }
+
+
+

@@ -10,28 +10,26 @@ import { CompaniesStateService } from 'src/ng2/app/states/company/companies-stat
 export class AccountingReportComponent implements OnInit {
   loadingInProgress: boolean = false;
   onInit = false;
-  company:any;
+  company: any;
   accountingReport: AccountingReport = new AccountingReport();
-  constructor(private companiesStateService:CompaniesStateService,
+  constructor(private companiesStateService: CompaniesStateService,
     public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
   }
   public onRequest(data) {
     this.loadingInProgress = data;
-      this.cd.detectChanges();
+    this.cd.detectChanges();
   }
   public checkExistPayments() {
-   return this.accountingReport.list.find(item => item.type === 'PAYMENT');
+    return this.accountingReport.list.find(item => item.type === 'PAYMENT');
   }
   public getReport(data) {
     this.accountingReport.setData(JSON.parse(JSON.stringify(data)));
     this.company = this.companiesStateService.getCompanies().find(item => item.id === this.accountingReport.companyId);
-    // this.techUser = this.usersStateService.getAllUsers().find(item => item.id === this.techService.techUserId);
     this.onInit = true;
   }
   public getDate(date) {
-   
     return moment((date) ? new Date(date) : new Date()).format('DD/MM/YYYY');
   }
   public getDateForHeader(data) {

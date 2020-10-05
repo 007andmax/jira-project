@@ -1,4 +1,4 @@
-<div class="col-md-6 light-dropdown new-taxes-area-edit" ngbDropdown #taxesDropDown="ngbDropdown">
+<div class="light-dropdown new-taxes-area-edit taxes-dropdown" ngbDropdown #taxesDropDown="ngbDropdown"  [container]="'body'">
 
   <i class="icn-sm report-caret-icon"></i>
   <input type="text" [value]="getSelectedTaxes()"
@@ -7,12 +7,12 @@
          placeholder="Taxes"
          id="dropdownTypeTaxes"
          ngbDropdownToggle />
-  <div ngbDropdownMenu
+  <div ngbDropdownMenu  class="taxes-dropdown__dropdown"
        aria-labelledby="dropdownTypeTaxes">
     <ng-template ngFor let-tax [ngForOf]="taxes" [ngForTrackBy]="trackById">
       <div class="dropdown-item" ngbDropdownItem  (click)="selected(tax)">
         <button  [textContent]="tax.name + ' ' + tax.rate + '%'"></button>
-        <i class="icn-sm icn-label-save" *ngIf="checkTaxIsSelected(tax)" style="right: 13px"></i>
+        <i class="icn-sm icn-label-save taxes-dropdown__check-icon" *ngIf="checkTaxIsSelected(tax)" style="right: 13px"></i>
       </div>
     </ng-template>
   </div>

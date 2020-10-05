@@ -1,0 +1,16 @@
+<tr>
+  <td class="contract-product-products-table__name --editable" >
+    <app-product-list  [editItem]="editProduct"   class="product-item__prodect-list contract-aside-product-list" [validate]="product.validate"
+    (selectedProductItem)="onChangeProduct($event)"></app-product-list></td>
+  <td class="contract-product-products-table__quantity --editable"><input   class="payment-input qt-input-in-table"   decimalNumber
+    [value]="product.quantity"
+    (onChange)="onChangeQuantity($event)" /></td>
+  <td class="contract-product-products-table__price --editable"><input   class="payment-input qt-input-in-table"   number
+    [money]="true"
+    [ngModel]="product.salePrice"
+    (ngModelChange)="onChangeSalePrice($event)"
+    appToFixed /></td>
+  <td>
+    <div class="icon__raw-clear qt-ic-c qt-sz-16" (click)="remove()"></div>
+  </td>
+</tr>

@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { BillableStateService } from 'src/ng2/app/states/billable/billable-state.service';
 import { BillableProfile } from '../class/billable-profile';
 import * as moment from "moment";
-import { CompanyFilterTop } from '../../../companies/class/copany-filter-top';
+import { CompanyFilterTop } from '../../../companies/class/company-filter-top';
 import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.service';
 import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 import { REMOVE_TICKET_BILLABLE } from 'src/ng2/app/const/confirm';

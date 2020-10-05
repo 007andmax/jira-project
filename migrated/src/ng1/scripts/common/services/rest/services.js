@@ -166,29 +166,7 @@
   
         Utils.handleCallback(future, callback);
         }
-
-      function resetContractGlNumber (id,contractType,callback) {
-       
-
-        var future = $http({
-          url: `/glNumber/resetContract/${contractType}`,
-          method: 'POST'
-        });
-  
-        Utils.handleCallback(future, callback);
-        }
-
-      function setContractGlNumber (id,contractType,callback) {
-       
-
-      var future = $http({
-        url: `/glNumber/${id}/${contractType}`,
-        method: 'POST'
-      });
-
-      Utils.handleCallback(future, callback);
-      }
-
+ 
       function save(service, callback) {
 
         if (!service) throw 'service is required!';
@@ -211,53 +189,11 @@
         Utils.handleCallback(future, callback);
       }
 
-      function deleteService(serviceId, callback) {
-        if (!serviceId) throw 'serviceId is required argument!';
-
-        var future = $http({
-          url: '/services/' + serviceId,
-          method: 'DELETE'
-        });
-
-        Utils.handleCallback(future, callback);
-      }
-
-      function deleteCompany(companyId, callback) {
-        if (!companyId) throw 'companyId is required argument!';
-
-        var future = $http({
-          url: '/services/company/' + companyId,
-          method: 'DELETE'
-        });
-
-        Utils.handleCallback(future, callback);
-      }
-
+ 
      
-      function move(mapping, callback) {
-        if (!mapping) throw 'mapping is required argument!';
+ 
 
-        var future = $http({
-          url: '/services/move',
-          method: 'POST',
-          data: mapping
-        });
-
-        Utils.handleCallback(future, callback);
-      }
-
-      function changeBillableStatus(id, toBillable, callback) {
-
-        if (!id) throw 'ids is required argument!';
-        if (toBillable === undefined) throw 'toBillable is required argument!';
-
-        var future = $http({
-          url: '/services/changeBillableStatus?id=' + id + '&toBillable=' + !!toBillable,
-          method: 'POST'
-        });
-
-        Utils.handleCallback(future, callback);
-      }
+ 
 
       function getActualMapping(data) {
         var actualMapping = {};
@@ -331,18 +267,12 @@
       }
       return {    
         createGlNumber: createGlNumber,
-        resetContractGlNumber : resetContractGlNumber,
-        setContractGlNumber: setContractGlNumber,
         getAllByCompany: getAllByCompany,
         getServicesData: getServicesData,
         save: save,
         addCompanyToServiceData: addCompanyToServiceData,
         deleteCompanyFromServiceData: deleteCompanyFromServiceData,
-        deleteService: deleteService,
-        deleteCompany: deleteCompany,
-        move: move,
         getActualMapping: getActualMapping,
-        changeBillableStatus: changeBillableStatus,
         isNameUnique: isNameUnique,
         searchDuplicatedServiceNames: searchDuplicatedServiceNames,
         getServicesDataWithoutRealTime: getServicesDataWithoutRealTime

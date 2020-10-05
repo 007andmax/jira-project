@@ -6,7 +6,7 @@ import { UsersService } from '../../services/users/users.service';
 import { CompaniesStateService } from '../../states/company/companies-state.service';
 import { ConfirmStateService } from '../shared/confirm/services/confirm-state.service';
 import { Subscription } from 'rxjs';
-import { CompanyFilterTop } from './class/copany-filter-top';
+import { CompanyFilterTop } from './class/company-filter-top';
 import { DevicesSateService } from '../../states/devices/devices-sate.service';
 import { UsersStateService } from '../../states/users/users-state.service';
 import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';

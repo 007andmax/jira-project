@@ -358,6 +358,29 @@
   &__verified {
     background-image: url("assets/img/icons/verified.svg");
   }
+
+  &__block-time-billing {
+    background-image: url('assets/img/icons/block-time-billing.svg');
+  }
+  &__contract-claim-ticket {
+    background-image: url('assets/img/icons/contract-claim-ticket.svg');
+  }
+  &__per-user {
+    background-image: url('assets/img/icons/per-user.svg');
+  }
+  &__product-contract {
+    background-image: url('assets/img/icons/product-contract.svg');
+  }
+
+  &__question-help {
+    background-image: url('assets/img/icons/question-help.svg');
+  }
+  &__info-question {
+    background-image: url("assets/img/icons/info-question.svg");
+  }
+
+  // email-dark.svg
+  // edit.svg
 }
 
 .icn-20 {

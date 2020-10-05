@@ -1,16 +1,18 @@
 <div [ngClass]="class" >
   <input
-  [ngClass]="{'disabled': isDisabled}"
-  [disabled]="isDisabled"
+ 
+    [ngClass]="{'qt-select':true,'disabled': isDisabled}"
+    [disabled]="isDisabled"
     [id]="id"
     [placeholder]="placeholder"
     type="text"
     [(ngModel)]="selectedItem"
     class="pointer typeahead-focus1"
-    [ngClass]="(!valid) ? 'no-valid' : ''"
+    [ngClass]="(!valid) ? 'no-valid' : 'AAAAAAAAAAAAAAAAA'"
     [inputFormatter]="formatter"
     [resultFormatter]="formatter"
     [ngbTypeahead]="search"
+    [container]="container"
     (selectItem)="selectItem($event)"
     (input)="onCheckAdd($event)"
     (focus)="focus$.next('')"
@@ -20,6 +22,7 @@
     [attr.maxlength]="maxlength"
     (blur)="onChange($event)"
     (isPopupOpen)="isDropDownOpen()"
+    [readonly]="!isSearch"
   />
   <span *ngIf="list && !isDisabled">
     <i *ngIf="selectedItem && !isAdd && !isBlockClear"

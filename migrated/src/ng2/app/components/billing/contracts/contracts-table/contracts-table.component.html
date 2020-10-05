@@ -1,0 +1,14 @@
+<div class="table-container">
+  <table class="qt-table-modern contracts-table">
+    <tbody>
+
+      <ng-template ngFor let-item
+      [ngForOf]="list"
+      [ngForTrackBy]="trackById">
+    <app-contracts-table-item [contract]="item" (onEdit)="onEdit($event)" (onPreview)="onPreview($event)" (onTerminate)="onTerminate($event)" (onCopy)="onCopy($event)" (onForceCreate)="onForceCreate($event)"></app-contracts-table-item>
+    </ng-template>
+      
+    </tbody>
+  </table>
+  <div class="loading" *ngIf="showPreloader"></div>
+</div>

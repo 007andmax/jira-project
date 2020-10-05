@@ -7,9 +7,16 @@
 @import './components/tables.scss';
 @import './components/tags.scss';
 @import './components/aside.scss';
+@import './components/tooltip.scss';
+
+@import './components/app-drop-down.scss';
+@import './components/taxes-dropdown.scss';
 
 @import './pages/billable.scss';
 @import './pages/invoices.scss';
 @import './pages/billing-payments.scss';
+@import './pages/default-services.scss';
 @import './components/pagelist';
+@import './pages/contracts.scss';
+
 

@@ -1,0 +1,25 @@
+<div class="contracts-page__aside">
+  <div class="aside-header qt-df qt-ai-c qt-jc-sb qt-pr-16 qt-pl-32">
+
+    <div class="qt-fs-20 qt-ff-gm qt-color-dark">
+      Edit Contract
+    </div>
+
+    <div class="qt-df qt-ai-c">
+      <div class="icon__close qt-sz-24 qt-pointer qt-ic-c" (click)="closed()"></div>
+    </div>
+
+  </div>
+
+   <app-contracts-aside-hourly-edit *ngIf="serviceAgreement.type === 'HOURLY'" #hourlyContract [contractsHourly]="serviceAgreement" (onClose)="closed()"></app-contracts-aside-hourly-edit> 
+   <app-contracts-aside-block-time-edit *ngIf="serviceAgreement.type === 'BLOCK_TIME'" #blockTimeContract [contractsBlockTime]="serviceAgreement" (onClose)="closed()"></app-contracts-aside-block-time-edit>
+   <app-contracts-aside-user-device-edit *ngIf="serviceAgreement.type === 'SERVICE_CONTRACT' && serviceAgreement.billType !== 'OTHER'" #serviceContract [contractsUserDevice]="serviceAgreement" (onClose)="closed()"></app-contracts-aside-user-device-edit>
+   <app-contracts-aside-product-service-edit *ngIf="serviceAgreement.type === 'SERVICE_CONTRACT' && serviceAgreement.billType === 'OTHER'" #otherContract [contractsOther]="serviceAgreement" (onClose)="closed()"></app-contracts-aside-product-service-edit>
+ 
+   <div class="aside-footer qt-pr-30 qt-pl-30 qt-pb-16 qt-pt-16 qt-df qt-ai-c qt-jc-sb">
+    <div class="qt-df">
+      <button class="qt-button qt-mr-12"   (click)="edit()">Edit</button>
+        <button class="qt-button --gray" (click)="closed()">Cancel</button>
+    </div>
+   </div>
+</div>

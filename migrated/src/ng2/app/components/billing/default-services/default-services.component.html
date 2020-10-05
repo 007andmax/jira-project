@@ -1,0 +1,90 @@
+<div class="page-list default-services-page" >
+  <div class="qt-list-header sticky-list-header default-services-page__header">
+    <div>
+      <h3 class="list-title">Default Services</h3>
+    </div>
+
+    <div class="d-f ai-c">
+      <button class="qt-btn --outline-blue" (click)="showCreateService = true">Create Service</button>
+    </div>
+  </div>
+
+
+  <div class="sticky-list-table-header default-service-table-header-titles">
+    <table class="qt-table-modern">
+      <thead>
+        <tr>
+          <th class="default-service-table__service-name pointer" (click)="onFilter('name')">
+            Service Name
+            <span class="qt-table-modern__sorting"></span>
+          </th>
+          <th class="default-service-table__rate pointer" (click)="onFilter('rate')">
+            Hourly Rate($)
+            <span class="qt-table-modern__sorting"></span>
+          </th>
+          <th class="default-service-table__taxes pointer" (click)="onFilter('taxes')">
+            Taxes
+            <span class="qt-table-modern__sorting"></span>
+          </th>
+          <th class="default-service-table__gl">
+            GL Number
+            <ng-template #tipContent class="tooltip">General ledger Number <br/>
+               are numerals you assign<br/> to different debit or<br/> credit entries to make<br/> accounting easier and<br/> more functional.</ng-template>
+            <span class="icon__info-question default-services-page__question-icon qt-sz-12 qt-ic-c" placement="top" [ngbTooltip]="tipContent"  ></span>
+            <span class="qt-table-modern__sorting"></span>
+          </th>
+          <th class="default-service-table__billable">
+            Make Billable
+          </th>
+          <th class="default-service-table__default">
+            Set as Default
+          </th>
+          <th class="default-service-table__menu"></th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+
+
+
+  <div class="default-services-page__table-container services-list">
+    <table class="qt-table-modern default-service-table">
+      <tbody>
+        <ng-template ngFor let-item
+        [ngForOf]="list"
+        [ngForTrackBy]="trackById">
+        <app-default-services-item [service]="item" (onEditService)="onEditService($event)" ></app-default-services-item>
+      </ng-template>
+      </tbody>
+    </table>
+    <div class="loading" *ngIf="showPreloader"></div>
+  </div>
+
+
+  <div class="default-services-page__table-container --visible"  *ngIf="!showPreloader">
+    <table class="qt-table-modern default-service-table">
+      <thead>
+        <tr>
+          <th class="default-service-table__contracts  qt-ff-sb">
+            Contracts
+          </th>
+          <th class="default-service-table__rate"></th>
+          <th class="default-service-table__taxes"></th>
+          <th class="default-service-table__gl"></th>
+          <th class="default-service-table__billable"></th>
+          <th class="default-service-table__default"></th>
+          <th class="default-service-table__menu"></th>
+        </tr>
+      </thead>
+      <tbody>
+       <app-default-services-contracts [type]="'BLOCK_TIME'"></app-default-services-contracts>
+       <app-default-services-contracts [type]="'USER_DEVICE'"></app-default-services-contracts>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+  <app-default-services-add *ngIf="showCreateService" (onClose)="showCreateService = false"></app-default-services-add>
+
+<app-default-services-edit *ngIf="showEditService" [service]="editService" (onClose)="showEditService = false"></app-default-services-edit>

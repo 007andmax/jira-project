@@ -11,7 +11,6 @@
       'quicktech.common.directives',
       'quicktech.core.companies',
       'quicktech.core.products',
-      'quicktech.core.services',
       'quicktech.core.billable',
       'quicktech.core.leftPanel',
       'quicktech.core.rightPanel',
@@ -183,15 +182,28 @@
           templateUrl: '/ng1/scripts/core/dashboards/billing-dashboard/billing-dashboard.tpl.html',
           controller: 'quicktech.core.dashboards.billingDashboardCtrl'
         }))
-        .state('services', waitForServices({
-          url: '/accounting/services',
-          templateUrl: '/ng1/scripts/core/services/services.tpl.html',
-          controller: 'quicktech.core.services.servicesCtrl'
+        .state('new-services', waitForServices({
+          url: '/ng2/default-services',
+          template: '<default-services-component></default-services-component>'
         }))
         .state('service-agreements', waitForServices({
           url: '/accounting/service-agreements',
           templateUrl: '/ng1/scripts/core/service-agreements/service-agreements.tpl.html',
           controller: 'quicktech.core.serviceAgreements.serviceAgreementsCtrl'
+        }))
+        .state('new-contracts', waitForServices({
+          url: '/ng2/contracts',
+          template: '<contracts-component></contracts-component>'
+        }))
+        .state('credits', waitForServices({
+          url: '/accounting/credits',
+          templateUrl: '/ng1/scripts/core/billable/credits/credits.tpl.html',
+          controller: 'quicktech.core.billable.creditsCtrl'
+        }))
+        .state('new-payments', waitForServices({
+          url: '/accounting/new-payments',
+          templateUrl: '/ng1/scripts/core/billable/new-payments/new-payments.tpl.html',
+          controller: 'quicktech.core.billable.newPaymentsCtrl'
         }))
         .state('quickSupport', waitForServices({
           url: '/quickSupport',
