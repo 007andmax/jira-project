@@ -74,8 +74,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
   
     this.contractsBlockTime.setStartDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.contractsBlockTime.setReviewDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-    this.contractsBlockTime.setCustomDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-   
+    
     this.minStartDate = this.getMinStartDate('MONTHLY', this.contractsBlockTime.startDate);
     this.getUsers();
     let getConfirm = this.сontractsStateService.getConfirm().subscribe(data => {
@@ -242,10 +241,14 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
   setToggleCustomBillingDate (data) {
     this.contractsBlockTime.withCustomBillingDate = data;
     if (!data) {
-      this.contractsBlockTime.resetCustomBillingDate();
+      this.contractsBlockTime.clearCustomBillingDate();
     } else {
       this.contractsBlockTime.customBillingDate = this.contractsBlockTime.startDate;
-      this.customDate = new Date(this.contractsBlockTime.startDate).getTime();
+      let startDate = new Date(this.contractsBlockTime.startDate);
+      this.customDate = startDate.getTime();
+      startDate.setMonth(startDate.getMonth() + 1);
+      this.contractsBlockTime.setCustomDate(startDate.getDate(), startDate.getMonth(), startDate.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+   
     }
   }
   setToggleNotifyAgentsUser(data) {

@@ -57,6 +57,9 @@ export class ContractsBlockTime {
     public resetCustomBillingDate () {
         this.customBillingDate  = JSON.parse(JSON.stringify(this.startDate));
     }
+    public clearCustomBillingDate () {
+        this.customBillingDate  = undefined;
+    }
     public setShares(data) {
         this.shares = data;
     }
@@ -94,7 +97,6 @@ export class ContractsBlockTime {
             rateExceeding: Number(this.rateExceeding),
             services: this.services.map(item => item.getDataForCreate()),
             shares: this.shares,
-            withCustomBillingDate:this.withCustomBillingDate,
             customBillingDate:this.customBillingDate,
             startDate: this.startDate,
             reviewDate: this.reviewDate,

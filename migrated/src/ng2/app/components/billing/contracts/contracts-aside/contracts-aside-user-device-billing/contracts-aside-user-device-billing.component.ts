@@ -64,7 +64,6 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     today.setMonth(today.getMonth() + 1);
     this.contractsUserDevice.setStartDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.contractsUserDevice.setReviewDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-    this.contractsUserDevice.setCustomDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
    
     this.minStartDate = this.getMinStartDate('MONTHLY', this.contractsUserDevice.startDate);
     if (this.taxesStateService.getTaxes().length > 0) this.setDefaultTaxes(this.taxesStateService.getTaxes());
@@ -222,11 +221,16 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
   setToggleCustomBillingDate (data) {
     this.contractsUserDevice.withCustomBillingDate = data;
     if (!data) {
-      this.contractsUserDevice.resetCustomBillingDate();
+      this.contractsUserDevice.clearCustomBillingDate();
     } else {
       this.contractsUserDevice.customBillingDate = this.contractsUserDevice.startDate;
-      this.customDate = new Date(this.contractsUserDevice.startDate).getTime();
+      let startDate = new Date(this.contractsUserDevice.startDate);
+      this.customDate = startDate.getTime();
+      startDate.setMonth(startDate.getMonth() + 1);
+      this.contractsUserDevice.setCustomDate(startDate.getDate(), startDate.getMonth(), startDate.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+   
     }
+    
   }
   onTaxesChange(data) {
     this.contractsUserDevice.setTaxIds(data.map(item => item.id));

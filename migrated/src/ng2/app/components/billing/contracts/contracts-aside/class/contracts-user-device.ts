@@ -67,6 +67,9 @@ export class ContractsUserDevice {
     public resetCustomBillingDate () {
         this.customBillingDate  = JSON.parse(JSON.stringify(this.startDate));
     }
+    public clearCustomBillingDate () {
+        this.customBillingDate  = undefined;
+    }
     public calculateTotalAmount() {
         let sum = 0;
         this.serviceContractServices.forEach(item => {
@@ -239,7 +242,7 @@ export class ContractsUserDevice {
             serviceContractServices: this.serviceContractServices.map(item => item.getDataForCreate()),
             serviceContractServicesToTrack: (!toggleMaximumAmountHours) ? this.blockTimeServices.map(item => item.getDataForCreate()) : [],
             services: this.services.map(item => item.getDataForCreate()),
-            withCustomBillingDate:this.withCustomBillingDate,
+           
             customBillingDate:this.customBillingDate,
             reviewDate: this.reviewDate,
             startDate: this.startDate,
