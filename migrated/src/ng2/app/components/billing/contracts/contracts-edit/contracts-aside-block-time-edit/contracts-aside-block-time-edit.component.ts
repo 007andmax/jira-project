@@ -18,6 +18,7 @@ import { СontractsBlockTimeShare } from '../../contracts-aside/class/contracts-
 import { ContractsConfirmComponent } from '../../contracts-confirm/contracts-confirm.component';
 import { Subscription } from 'rxjs';
 import { ServiceAgreementBlockTimeServices } from '../../class/service-agreement-block-time-services';
+import { DatePickerComponent } from 'src/ng2/app/components/shared/date-picker/date-picker.component';
 
 
 @Component({
@@ -27,6 +28,7 @@ import { ServiceAgreementBlockTimeServices } from '../../class/service-agreement
 })
 export class ContractsAsideBlockTimeEditComponent implements OnInit {
   @ViewChild('taxes') taxesDP: InvoiceFormTicketEditTaxesComponent;
+  @ViewChild('customDateDP') customDateDP: DatePickerComponent;
   selectedCompany: any;
   selectedTaxes = [];
   selectedType = new ContractsFilterType('Block Time', 'BLOCK_TIME', null);
@@ -124,8 +126,16 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
       this.contractsBlockTime.resetCustomBillingDate();
     } else {
       this.contractsBlockTime.customBillingDate = this.contractsBlockTime.startDate;
-      this.customDate = new Date(this.contractsBlockTime.startDate).getTime();
+      this.resetCustomDate();
     }
+  }
+  private resetCustomDate() {
+    let startDate = new Date(this.contractsBlockTime.startDate);
+    this.customDate = startDate.getTime();
+    if (this.customDateDP) this.customDateDP.setEditDate(startDate.getTime());
+    startDate.setMonth(startDate.getMonth() + 1);
+    this.contractsBlockTime.setCustomDate(startDate.getDate(), startDate.getMonth(), startDate.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+
   }
   selectAllUsers() {
     this.tehState.setUsersFromtEdit(JSON.parse(JSON.stringify(this.userList)));
@@ -245,7 +255,8 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
   }
   onChangeStartDate(data) {
     this.contractsBlockTime.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-    this.contractsBlockTime.calculateEndDate();
+    if (this.contractsBlockTime.withCustomBillingDate) this.resetCustomDate();
+    this.setMinMaxCustomDate();
   }
   onChangeReviewDate(data) {
     this.contractsBlockTime.setReviewDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);

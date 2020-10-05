@@ -241,7 +241,7 @@
         <div class="qt-fs-13 qt-ff-gm qt-lh-154 qt-color-dark-light">Custom Billing Date</div>
       </div>
 
-      <div class="notify-to-agents-assign-icon qt-df qt-ai-c" *ngIf="contractsUserDevice.withCustomBillingDate">
+      <div class="notify-to-agents-assign-icon qt-df qt-ai-c qt-input-block" *ngIf="contractsUserDevice.withCustomBillingDate">
         <app-date-picker #customDateDP [formatDate]="formatDate" [editMode]="true" [editDate]="contractsUserDevice.getCustomDateByMilliseconds()" [minDate]="minCustomDate" [maxDate]="maxCustomDate" [useMaxDate]="true" (onChange)="onChangeCustomDate($event)"></app-date-picker>
 
       </div>

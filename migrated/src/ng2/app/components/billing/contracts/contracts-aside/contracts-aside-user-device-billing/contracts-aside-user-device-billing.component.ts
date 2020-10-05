@@ -31,7 +31,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
   @ViewChild('startDateDP') startDateDP: DatePickerComponent;
   @ViewChild('reviewDateDP') reviewDateDP: DatePickerComponent;
   @ViewChild('topContract') topContract: ContractsAsideTopComponent;
-
+  @ViewChild('customDateDP') customDateDP: DatePickerComponent;
   @Output() onClose = new EventEmitter<any>();
   selectedType = new ContractsFilterType('Service Contract/by device/by user', 'SERVICE_CONTRACT_DEVICE_USER', null);
   contractsUserDevice: ContractsUserDevice = new ContractsUserDevice();
@@ -224,13 +224,17 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
       this.contractsUserDevice.clearCustomBillingDate();
     } else {
       this.contractsUserDevice.customBillingDate = this.contractsUserDevice.startDate;
-      let startDate = new Date(this.contractsUserDevice.startDate);
-      this.customDate = startDate.getTime();
-      startDate.setMonth(startDate.getMonth() + 1);
-      this.contractsUserDevice.setCustomDate(startDate.getDate(), startDate.getMonth(), startDate.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-   
+      this.resetCustomDate();
     }
     
+  }
+  private resetCustomDate() {
+    let startDate = new Date(this.contractsUserDevice.startDate);
+    this.customDate = startDate.getTime();
+    if (this.customDateDP) this.customDateDP.setEditDate(startDate.getTime());
+    startDate.setMonth(startDate.getMonth() + 1);
+    this.contractsUserDevice.setCustomDate(startDate.getDate(), startDate.getMonth(), startDate.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+
   }
   onTaxesChange(data) {
     this.contractsUserDevice.setTaxIds(data.map(item => item.id));
@@ -259,6 +263,8 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
   }
   onChangeStartDate(data) {
     this.contractsUserDevice.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    if (this.contractsUserDevice.withCustomBillingDate) this.resetCustomDate();
+    this.setMinMaxCustomDate();
   }
   onChangeReviewDate(data) {
     this.contractsUserDevice.setReviewDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
