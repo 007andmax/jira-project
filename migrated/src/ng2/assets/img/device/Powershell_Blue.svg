@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="16px" viewBox="0 0 18 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Actions / Hide_Update_Blue</title>
+    <g id="Devices" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="4a-Terminal" transform="translate(-996.000000, -115.000000)" stroke="#16A4FA" stroke-width="1.5">
+            <g id="Actions-/-Powe-Shell_Blue" transform="translate(996.000000, 115.000000)">
+                <rect id="Rectangle" x="1.125" y="1" width="15.75" height="14" rx="2"></rect>
+                <g id="Group-19" transform="translate(9.000000, 9.000000) scale(1, -1) translate(-9.000000, -9.000000) translate(4.500000, 5.000000)">
+                    <line x1="9" y1="1" x2="4.5" y2="1" id="Path-2"></line>
+                    <polyline id="Path-3" transform="translate(2.250000, 4.465210) scale(-1, 1) rotate(90.000000) translate(-2.250000, -4.465210) " points="-0.75 2.73857117 2.25 6.19184875 5.25 2.73857117"></polyline>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
