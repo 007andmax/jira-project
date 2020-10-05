@@ -54,8 +54,8 @@ export class ContractsBlockTime {
         this.reviewDate = data.reviewDate;
         this.calculateEndDate();
     }
-    public clearCustomBillingDate () {
-        this.customBillingDate  = undefined;
+    public resetCustomBillingDate () {
+        this.customBillingDate  = JSON.parse(JSON.stringify(this.startDate));
     }
     public setShares(data) {
         this.shares = data;

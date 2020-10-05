@@ -37,6 +37,9 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit {
   toggleMaximumAmountHours: boolean = false;
   toggleContractServices: boolean = false;
   defaultSelectedTax: Array<Tax> = [];
+  customDate = new Date().getTime();
+  minCustomDate = new Date().getTime();
+  maxCustomDate = new Date().getTime();
   sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
     private taxesStateService: TaxesStateService,
@@ -70,8 +73,14 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit {
     } else {
       this.contractsUserDevice.blockTimeServices =  this.contractsUserDevice.serviceContractServicesToTrack;
     }
+    this.setMinMaxCustomDate();
    }
-  
+   private setMinMaxCustomDate() {
+    let today = new Date(this.contractsUserDevice.startDate);
+    this.minCustomDate =new Date(today.getFullYear(),today.getMonth(),1).getTime();
+    this.maxCustomDate =new Date(today.getFullYear(),today.getMonth(),new Date(today.getFullYear(), today.getMonth() +1, 0).getDate()).getTime();
+
+  }
   public onEdit() { 
     if (this.contractsUserDevice.blockTimeServices.length === 0 || !this.contractsUserDevice.checkDuplicatedBlockTimeServices() || !this.contractsUserDevice.checkDuplicatedServiceContractServices()
     || !this.contractsUserDevice.checkDuplicatedServices()) {
@@ -102,6 +111,9 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit {
     }, err => {
 
     })
+  }
+  onChangeCustomDate(data) {
+    this.contractsUserDevice.setCustomDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
   }
   parsedateForTotal(date) {
     return moment(date).format('DD MMM YYYY');
@@ -236,11 +248,16 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit {
     this.contractsUserDevice.calculateEndDate();
     this.cd.detectChanges();
   }
-  public onCreate() {
-    if (!this.validate.isValidate(this.contractsUserDevice)) return;
-    const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: false });
-    modalRef.componentInstance.message = `Do we need to create the billable item now?`;
+  setToggleCustomBillingDate (data) {
+    this.contractsUserDevice.withCustomBillingDate = data;
+    if (!data) {
+      this.contractsUserDevice.resetCustomBillingDate();
+    } else {
+      this.contractsUserDevice.customBillingDate = this.contractsUserDevice.startDate;
+      this.customDate = new Date(this.contractsUserDevice.startDate).getTime();
+    }
   }
+  
   public trackById(index, item) {
     return item.id;
   }

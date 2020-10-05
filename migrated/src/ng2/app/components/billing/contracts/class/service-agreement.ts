@@ -60,8 +60,8 @@ export class ServiceAgreement {
             this.shares = data.shares.map(item => new СontractsBlockTimeShare(item.userId));
         }
     }
-    public clearCustomBillingDate () {
-        this.customBillingDate  = undefined;
+    public resetCustomBillingDate () {
+        this.customBillingDate  = JSON.parse(JSON.stringify(this.startDate));
     }
     public checkServiceExpenses() {
         this.serviceExpenses.forEach(item => {
@@ -284,6 +284,8 @@ export class ServiceAgreement {
             serviceContractServices: this.serviceContractServices.map(item => item.getDataForUpdate()),
             serviceContractServicesToTrack: (!toggleMaximumAmountHours) ? this.blockTimeServices.map(item => item.getDataForUpdate()) : [],
             services: this.services.map(item => item.getDataForCreate()),
+            withCustomBillingDate:this.withCustomBillingDate,
+            customBillingDate:this.customBillingDate,
             reviewDate: this.reviewDate,
             startDate: this.startDate,
             taxIds: (toggleMaximumAmountHours) ? this.taxIds : null,

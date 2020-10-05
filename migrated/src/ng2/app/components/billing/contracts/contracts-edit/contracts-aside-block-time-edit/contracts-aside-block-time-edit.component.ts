@@ -121,7 +121,7 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
   setToggleCustomBillingDate (data) {
     this.contractsBlockTime.withCustomBillingDate = data;
     if (!data) {
-      this.contractsBlockTime.clearCustomBillingDate();
+      this.contractsBlockTime.resetCustomBillingDate();
     } else {
       this.contractsBlockTime.customBillingDate = this.contractsBlockTime.startDate;
       this.customDate = new Date(this.contractsBlockTime.startDate).getTime();

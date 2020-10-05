@@ -23,6 +23,8 @@ export class ContractsUserDevice {
     invoiceAsSingleItem: boolean = false;
     productExpenses: Array<ContractsOtherProduct> = [];
     rateExceeding: string;
+    customBillingDate:string;
+    withCustomBillingDate:boolean = false;
     serviceContractServices: Array<ContractsUserDeviceService> = [];
     serviceContractServicesToTrack: Array<ContractsBlockTimeService> = [];
     serviceExpenses: Array<ContractsOtherService> = [];
@@ -44,6 +46,8 @@ export class ContractsUserDevice {
         this.customInterval = data.customInterval;
         this.description = data.description;
         this.endDate = data.endDate;
+        this.withCustomBillingDate = data.withCustomBillingDate;
+        this.customBillingDate = data.customBillingDate;
         this.invoiceAsSingleItem = data.invoiceAsSingleItem;
         this.includedHours = String(data.includedHours);
         if (data.interval) {
@@ -59,6 +63,9 @@ export class ContractsUserDevice {
 
         this.reviewDate = data.reviewDate;
         this.calculateEndDate();
+    }
+    public resetCustomBillingDate () {
+        this.customBillingDate  = JSON.parse(JSON.stringify(this.startDate));
     }
     public calculateTotalAmount() {
         let sum = 0;
@@ -116,6 +123,22 @@ export class ContractsUserDevice {
             let finalDate = new Date(currentTime - (current.getTimezoneOffset() * 60000) - timeOffset);
             this.reviewDate = moment(finalDate.getTime()).format('YYYY/MM/DD');
         }
+    }
+    public setCustomDate(day, month, year, timeOffset) {
+        let current = new Date();
+
+        if (day !== current.getDate() || current.getMonth() !== (month - 1)) {
+            let dateDatePicker = new Date(year, month - 1, day).getTime(); // timestamp from calendar
+            let finalDate = new Date(dateDatePicker - (current.getTimezoneOffset() * 60000/* dont touch*/) - timeOffset /* timezone.timeOffset */);
+            this.customBillingDate = moment(finalDate.getTime()).format('YYYY/MM/DD');
+            
+        } else {
+            let currentTime = new Date(current.getFullYear(), current.getMonth(), current.getDate()).getTime();
+            let finalDate = new Date(currentTime - (current.getTimezoneOffset() * 60000) - timeOffset);
+            this.customBillingDate = moment(finalDate.getTime()).format('YYYY/MM/DD');
+           
+        }
+
     }
     public calculateEndDate() {
         if (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') {
@@ -216,6 +239,8 @@ export class ContractsUserDevice {
             serviceContractServices: this.serviceContractServices.map(item => item.getDataForCreate()),
             serviceContractServicesToTrack: (!toggleMaximumAmountHours) ? this.blockTimeServices.map(item => item.getDataForCreate()) : [],
             services: this.services.map(item => item.getDataForCreate()),
+            withCustomBillingDate:this.withCustomBillingDate,
+            customBillingDate:this.customBillingDate,
             reviewDate: this.reviewDate,
             startDate: this.startDate,
             taxIds: (toggleMaximumAmountHours) ? this.taxIds : null,

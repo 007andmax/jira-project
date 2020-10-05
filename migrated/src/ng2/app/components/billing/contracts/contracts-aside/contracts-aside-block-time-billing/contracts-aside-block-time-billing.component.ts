@@ -129,7 +129,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
       })
       this.toggleNotifyAgentsUser = true;
     }
-    this.setMinMaxCustomDate();
+    
   }
   selectAllUsers() {
     this.tehState.setUsersFromtEdit(JSON.parse(JSON.stringify(this.userList)));
@@ -242,7 +242,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
   setToggleCustomBillingDate (data) {
     this.contractsBlockTime.withCustomBillingDate = data;
     if (!data) {
-      this.contractsBlockTime.clearCustomBillingDate();
+      this.contractsBlockTime.resetCustomBillingDate();
     } else {
       this.contractsBlockTime.customBillingDate = this.contractsBlockTime.startDate;
       this.customDate = new Date(this.contractsBlockTime.startDate).getTime();
