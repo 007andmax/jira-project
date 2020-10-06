@@ -395,6 +395,9 @@ export class TerminalComponent implements OnInit {
     if (category !== undefined) {
       this.myScriptModal.category = category.name;
       this.myScriptModal.categoryId = category.id;
+    } else {
+      this.myScriptModal.category = '';
+      this.myScriptModal.categoryId = '';
     }
     if (this.myScriptModal.search === '' && this.myScriptModal.category === '') {
       this.myScriptListFilter = this.myScriptList;
@@ -411,6 +414,9 @@ export class TerminalComponent implements OnInit {
     if (category !== undefined) {
       this.sharedScriptModal.category = category.name;
       this.sharedScriptModal.categoryId = category.id;
+    } else {
+      this.sharedScriptModal.category = '';
+      this.sharedScriptModal.categoryId = '';
     }
     if (this.sharedScriptModal.search === '' && this.sharedScriptModal.category === '') {
       this.sharedScriptListFilter = this.sharedScriptList;
