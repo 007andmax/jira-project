@@ -31,7 +31,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
   @ViewChild('startDateDP') startDateDP: DatePickerComponent;
   @ViewChild('reviewDateDP') reviewDateDP: DatePickerComponent;
   @ViewChild('topContract') topContract: ContractsAsideTopComponent;
-
+  @ViewChild('customDateDP') customDateDP: DatePickerComponent;
   @Output() onClose = new EventEmitter<any>();
   selectedType = new ContractsFilterType('Service Contract/by device/by user', 'SERVICE_CONTRACT_DEVICE_USER', null);
   contractsUserDevice: ContractsUserDevice = new ContractsUserDevice();
@@ -44,7 +44,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
   minStartDate: number = null;
   customDate = new Date().getTime();
   minCustomDate = new Date().getTime();
-  maxCustomDate = new Date().getTime();
+
   taxes: Array<Tax> = [];
   toggleMaximumAmountHours: boolean = false;
   toggleContractServices: boolean = false;
@@ -56,7 +56,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     private contractsService: ContractsService,
     private modalService: NgbModal,
     private сontractsStateService: ContractsStateService,
-    private contractsListService:ContractsListService,
+    private contractsListService: ContractsListService,
     public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -64,7 +64,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     today.setMonth(today.getMonth() + 1);
     this.contractsUserDevice.setStartDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.contractsUserDevice.setReviewDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-   
+
     this.minStartDate = this.getMinStartDate('MONTHLY', this.contractsUserDevice.startDate);
     if (this.taxesStateService.getTaxes().length > 0) this.setDefaultTaxes(this.taxesStateService.getTaxes());
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
@@ -77,12 +77,13 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     this.contractsUserDevice.serviceContractServices = [new ContractsUserDeviceService(0, "Managed workstations", 0, this.defaultSelectedTax.map(item => item.id)),
     new ContractsUserDeviceService(0, "Managed servers", 0, this.defaultSelectedTax.map(item => item.id))]
     if (this.сontractsStateService.getContractForCopy()) this.onInitCopy();
-    this.setMinMaxCustomDate();
+    this.setMinCustomDate();
   }
-  private setMinMaxCustomDate() {
-    let today = new Date(this.startDate);
-    this.minCustomDate =today.getTime();
-    this.maxCustomDate =new Date(today.getFullYear(),today.getMonth(),new Date(today.getFullYear(), today.getMonth() +1, 0).getDate()).getTime();
+  private setMinCustomDate() {
+    let today = new Date(this.contractsUserDevice.startDate);
+    this.minCustomDate = today.getTime();
+    if (this.customDateDP) this.customDateDP.minDate = this.minCustomDate;
+    this.cd.detectChanges();
 
   }
   public onInitCopy() {
@@ -218,19 +219,22 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     this.validate.resetIncludedHours();
     this.validate.resetRateExceeding();
   }
-  setToggleCustomBillingDate (data) {
+  setToggleCustomBillingDate(data) {
     this.contractsUserDevice.withCustomBillingDate = data;
     if (!data) {
       this.contractsUserDevice.clearCustomBillingDate();
     } else {
       this.contractsUserDevice.customBillingDate = this.contractsUserDevice.startDate;
-      let startDate = new Date(this.contractsUserDevice.startDate);
-      this.customDate = startDate.getTime();
-      startDate.setMonth(startDate.getMonth() + 1);
-      this.contractsUserDevice.setCustomDate(startDate.getDate(), startDate.getMonth(), startDate.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-   
+      this.resetCustomDate();
     }
-    
+  }
+  private resetCustomDate() {
+    let startDate = new Date(this.contractsUserDevice.startDate);
+    this.customDate = startDate.getTime();
+    if (this.customDateDP) this.customDateDP.setEditDate(startDate.getTime());
+    startDate.setMonth(startDate.getMonth() + 1);
+    this.contractsUserDevice.setCustomDate(startDate.getDate(), startDate.getMonth(), startDate.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+
   }
   onTaxesChange(data) {
     this.contractsUserDevice.setTaxIds(data.map(item => item.id));
@@ -259,7 +263,10 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
   }
   onChangeStartDate(data) {
     this.contractsUserDevice.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    if (this.contractsUserDevice.withCustomBillingDate) this.resetCustomDate();
+    this.setMinCustomDate();
   }
+
   onChangeReviewDate(data) {
     this.contractsUserDevice.setReviewDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
   }
@@ -297,7 +304,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
   public onCreate() {
     if (!this.validate.isValidate(this.contractsUserDevice)) return;
     if (this.contractsListService.compareDateNowWithDate(this.contractsUserDevice.startDate)) {
-      const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal',backdrop: false });
+      const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: false });
       modalRef.componentInstance.message = `Do we need to create the billable item now?`;
     } else {
       this.onCheckServicesForAdd(false);

@@ -228,7 +228,7 @@
       </div>
 
       <div class="notify-to-agents-assign-icon qt-df qt-ai-c qt-input-block" *ngIf="contractsUserDevice.withCustomBillingDate">
-        <app-date-picker #customDateDP [formatDate]="formatDate" [editMode]="true" [editDate]="customDate" [minDate]="minCustomDate" [maxDate]="maxCustomDate" [useMaxDate]="true" (onChange)="onChangeCustomDate($event)"></app-date-picker>
+        <app-date-picker #customDateDP [formatDate]="formatDate" [editMode]="true" [editDate]="customDate" [minDate]="minCustomDate"     (onChange)="onChangeCustomDate($event)"></app-date-picker>
 
       </div>
 

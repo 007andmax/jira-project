@@ -15,7 +15,7 @@ export class ContractsAsideProductServicePreviewComponent implements OnInit {
   selectedCompany: any;
   intervals: Array<string> = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days'];
   selectedInterval: string = 'MONTHLY';
-  selectedType = new ContractsFilterType('Service Contract/by other', 'SERVICE_CONTRACT', 'OTHER');
+  selectedType = new ContractsFilterType('Subscriptions', 'SERVICE_CONTRACT', 'OTHER');
   @Input() contractsOther: ServiceAgreement = new ServiceAgreement();
   formatDate: string = FORMAT_DATE_2;
   type:string = "PRODUCTS";
@@ -23,6 +23,9 @@ export class ContractsAsideProductServicePreviewComponent implements OnInit {
     private companiesStateService: CompaniesStateService,) { }
 
   ngOnInit() {
+   
+  }
+  ngDoCheck() {
     this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.contractsOther.companyId);
     this.getSelectedInterval();
   }

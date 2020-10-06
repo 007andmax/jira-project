@@ -24,7 +24,7 @@ export class ContractsFilterComponent implements OnInit, OnDestroy {
   new ContractsFilterType('Block Time', 'BLOCK_TIME', null),
   new ContractsFilterType('Service Contract/by device', 'SERVICE_CONTRACT', 'DEVICE'),
   new ContractsFilterType('Service Contract/by user', 'SERVICE_CONTRACT', 'USER'),
-  new ContractsFilterType('Service Contract/by other', 'SERVICE_CONTRACT', 'OTHER')];
+  new ContractsFilterType('Subscriptions', 'SERVICE_CONTRACT', 'OTHER')];
   listsStatus = [new ContractsFilterStatus('Current', 'CURRENT'),
   new ContractsFilterStatus('Pending', 'PENDING'),
   new ContractsFilterStatus('Terminated', 'TERMINATED'),
