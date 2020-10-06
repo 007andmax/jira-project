@@ -139,6 +139,15 @@ main {
                                                 }
                                             }
                                         }
+                                        .cmd-details{
+                                            width: 100%;
+                                            span{
+                                                display: block;
+                                                max-width: 100%;
+                                                word-break: break-all;
+                                            }
+                                        }
+
                                     }
                                 }
                                 &.history-cmd {
@@ -217,14 +226,17 @@ main {
                         //     overflow-x: hidden;
                         // }
                         .modal-body {
-                            @media only screen and (max-height: 700px) {
+                            @media only screen and (max-height: 900px) {
+                                max-height: 500px;
                                 padding: 0;
-                                max-height: 410px;
                                 overflow-y: auto;
                                 overflow-x: hidden;
                                 flex-direction: column;
                                 float: left;
                                 width: 100%;
+                            }
+                            @media only screen and (max-height: 700px) {
+                                max-height: 410px;
                             }
                             form {
                                 .f-row {
