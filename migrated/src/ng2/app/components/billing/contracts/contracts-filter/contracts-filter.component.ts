@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy, Output, EventEmitter, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, Output, EventEmitter, ElementRef, ChangeDetectorRef, Input } from '@angular/core';
 import { SelectSearchComponent } from '../../../shared/select-search/select-search.component';
 import { ContractsFilterStatus } from '../class/contracts-filter-status';
 import { ContractsFilterType } from '../class/contracts-filter-type';
@@ -7,6 +7,8 @@ import { Subscription } from 'rxjs';
 import { MultiDatepickerComponent } from '../../../shared/multi-datepicker/multi-datepicker.component';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-state.service';
+import { DropDownComponent } from '../../../shared/drop-down/drop-down.component';
+import { Company } from 'src/ng2/app/interfaces/company/company';
 
 @Component({
   selector: 'app-contracts-filter',
@@ -14,10 +16,11 @@ import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-st
   styleUrls: ['./contracts-filter.component.scss']
 })
 export class ContractsFilterComponent implements OnInit, OnDestroy {
-  @ViewChild('typesDp') typesDp: SelectSearchComponent;
-  @ViewChild('companyDp') companyDp: SelectSearchComponent;
+  @Input() companyContracts:Company = null;
+  @ViewChild('typesDp') typesDp: DropDownComponent;
+  @ViewChild('companyDp') companyDp: DropDownComponent;
   @ViewChild('datesDp') datesDp: MultiDatepickerComponent;
-  @ViewChild('statusDp') statusDp: SelectSearchComponent;
+  @ViewChild('statusDp') statusDp: DropDownComponent;
   public contractsFilter: ContractsFilter = new ContractsFilter();
   companies = [];
   listsTypes = [new ContractsFilterType('Hourly', 'HOURLY', null),
@@ -40,6 +43,14 @@ export class ContractsFilterComponent implements OnInit, OnDestroy {
       this.getClientsList(data);
     })
     this.sub.add(getOnCompanies);
+     
+    if (this.companyContracts) {
+      this.companyDp.editItem = this.companyContracts;
+      this.companyDp.isDisabled = true;
+      this.onSelectCompany(this.companyContracts);
+      console.log("this.contractsStateService.getCompanyContracts()",this.companyContracts);
+      this.cd.detectChanges();
+    }
   }
   public onClearAll() {
     this.contractsFilter.setCompany(null);
