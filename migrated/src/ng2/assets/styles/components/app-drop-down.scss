@@ -8,6 +8,7 @@ app-drop-down {
     padding: 0 25px 0 15px;
     font-size: 13px;
     color: #4f5f79;
+    cursor: pointer;
     &::placeholder {
       color: #9ca5b6;
     }
@@ -47,7 +48,7 @@ app-drop-down {
     font-size: 11px;
     bottom: 35px;
   }
-  
+
 
   &__dropdown {
     background-color: white;
@@ -74,4 +75,3 @@ app-drop-down {
 
   }
 }
- 
