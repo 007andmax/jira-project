@@ -46,6 +46,10 @@ main {
                     }
 
                     .tab-content {
+                        height: auto;
+                        max-height: calc(100% - 50px);
+                        overflow-y: auto;
+                        overflow-x: hidden;
                         .tab-pane {
                             .cmn-tbs-content {
                                 & > ul {

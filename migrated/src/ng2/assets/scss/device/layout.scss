@@ -436,7 +436,7 @@ header{
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 11px;
+        font-size: 13px;
         font-weight: normal;
         line-height: 1.45;
         letter-spacing: normal;
@@ -452,10 +452,14 @@ header{
             justify-content: center;
             align-items: center;
             color: $white-color;
-            padding: 7.5px 7px;
+            padding: 4px;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            height: 32px;
             &:last-child {
                 margin-left: 12px;
-                min-width: 160px;
+                min-width: 180px;
                 img {
                     margin-right: 4px;
                 }
