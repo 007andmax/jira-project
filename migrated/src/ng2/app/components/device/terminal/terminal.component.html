@@ -508,9 +508,9 @@
           <span class="clone-cat">Cloned Scripts</span>
         </div>
         <div class="script-details-area">
-          <h2>
+          <!-- <h2>
             {{scriptDetailModal.title}}
-          </h2>
+          </h2> -->
           <!-- <div class="script-info">
             <div class="script-col">
               <h5>File Type</h5>
@@ -531,6 +531,23 @@
           </div> -->
           <form method="POST">
             <div class="f-row">
+              <div class="f-col col-100">
+                <label for="Title">Command Title</label>
+                <div class="form-row">
+                  <input
+                    type="text"
+                    id="title"
+                    class="form-input"
+                    placeholder="Command Title"
+                    [(ngModel)]="scriptDetailModal.title" 
+                    name="title" 
+                    #Title="ngModel" 
+                    [disabled]="scriptDetailModal.default === true"
+                    required 
+                    [class.validation-error]="submitted == true && Title.errors && Title.errors.required"
+                  />
+                </div>
+              </div>
               <div class="f-col col-70">
                 <label for="command">Category</label>
                 <div class="form-row">
@@ -553,6 +570,18 @@
                          <button *ngFor="let category of cmdCategoryReadList" ngbDropdownItem (click)="scriptDetailModal.category = category.name;scriptDetailModal.categoryId = category.id;">{{category.name}}</button>
                     </div>
                   </div>
+                </div>
+              </div>
+              <div class="f-col col-30">
+                <label for="command">Script Type</label>
+                <div class="form-row">
+                  <select class="form-input cmn-select"
+                    name="type" [disabled]="scriptDetailModal.default === true"
+                  >
+                    <option value="">Select Script Type</option>
+                    <option>Command line</option>
+                    <option>Powershell</option>
+                  </select>
                 </div>
               </div>
               <div class="f-col col-100">
