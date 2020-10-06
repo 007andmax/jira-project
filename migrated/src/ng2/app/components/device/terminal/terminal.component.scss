@@ -572,6 +572,13 @@ main {
                     width: 100%;
                     flex-direction: column;
                     padding: 15px 32px;
+                    height: calc(100% - 57px);
+                    form{
+                        height: auto;
+                        max-height: 100%;
+                        overflow-y: auto;
+                        overflow-x: hidden;
+                    }
                     .f-row {
                         display: -ms-flexbox;
                         display: -webkit-flex;
