@@ -844,7 +844,12 @@
              ng-click="stateGo($event, 'accounting.dashboard')">
           Dashboard
         </div>
-      
+        <div class="center-category__category"
+        ng-class="{active: $state.includes('billing-dashboard')}"
+        ng-click="stateGo($event, 'billing-dashboard')"
+       >
+        Dashboard 2
+      </div>
         <div class="center-category__category"
         ng-class="{active: $state.includes('new-services')}"
         ng-click="stateGo($event, 'new-services')">

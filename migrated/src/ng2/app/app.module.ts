@@ -343,6 +343,7 @@ import { ContractsAsideOtherServiceComponent } from './components/billing/contra
 import { ContractsAsideProductServicePreviewComponent } from './components/billing/contracts/contracts-preview/contracts-aside-product-service-preview/contracts-aside-product-service-preview.component';
 import { ContractsAsideProductServiceEditComponent } from './components/billing/contracts/contracts-edit/contracts-aside-product-service-edit/contracts-aside-product-service-edit.component';
 import { ContractsAsideOtherServiceEditComponent } from './components/billing/contracts/contracts-edit/contracts-aside-product-service-edit/contracts-aside-other-service-edit/contracts-aside-other-service-edit.component';
+import { DashboardBillingComponent } from './components/billing/dashboard-billing/dashboard-billing.component';
 
  
 
@@ -534,6 +535,10 @@ angular.module('quicktech')
   .directive(
     'fileComponent',
     downgradeComponent({ component: FileComponent }))
+    .directive(
+      'dashboardBillingComponent',
+      downgradeComponent({ component: DashboardBillingComponent })
+    )
   .factory('ngZone', downgradeInjectable(NgZone));
 
 /**
@@ -875,7 +880,8 @@ angular.module('quicktech')
     
     ContractsAsideProductServiceEditComponent,
     
-    ContractsAsideOtherServiceEditComponent
+    ContractsAsideOtherServiceEditComponent,
+    DashboardBillingComponent
    
   ],
   imports: [
@@ -969,7 +975,8 @@ angular.module('quicktech')
     FileComponent,
     PasswordComponent,
     TicketTaskComponent,
-    ContractsConfirmComponent
+    ContractsConfirmComponent,
+    DashboardBillingComponent
     // RecurringTicketsComponent
   ],
   exports: [

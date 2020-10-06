@@ -349,6 +349,10 @@
         .state('device-file', waitForServices({
           url: '/ng2/device/file',
           template: '<file-component></file-component>'
+        }))
+        .state('billing-dashboard', waitForServices({
+          url: '/ng2/billing-dashboard',
+          template: '<dashboard-billing-component></dashboard-billing-component>'
         }));
 
       function waitForServices(conf) {

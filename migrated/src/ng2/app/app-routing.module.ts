@@ -46,6 +46,7 @@ import { PasswordComponent } from './components/device/password/password.compone
 import { WindowsComponent } from './components/device/windows-update/windows-update.component';
 import { StartupComponent } from './components/device/startup-programes/startup-programes.component';
 import { FileComponent } from './components/device/file-explorer/file-explorer.component';
+import { DashboardBillingComponent } from './components/billing/dashboard-billing/dashboard-billing.component';
 
 const routes: Routes = [
   {
@@ -253,6 +254,10 @@ const routes: Routes = [
   {
     path: 'ng2/device/file',
     component: FileComponent
+  },
+  {
+    path: 'ng2/billing-dashboard',
+    component: DashboardBillingComponent
   }
 ];
 
