@@ -368,6 +368,8 @@ main {
                         }
                         .tab-content {
                             padding: 24px 32px 100px 32px;
+                            height: auto;
+                            max-height:calc(100% - 100px);
                             ul {
                                 &.list-unstyled {
                                     &.script-list {
