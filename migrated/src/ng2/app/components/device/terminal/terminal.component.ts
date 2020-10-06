@@ -315,17 +315,21 @@ export class TerminalComponent implements OnInit {
     
   }
 
-  openEditCommand(data: any) {
+  openEditCommand(data: any, flag) {
     this.commandModal.title = data.title;
     this.commandModal.command = data.command;
     this.lineNumber = [];
     for (let index = 1; index <= data.command.split(/\r*\n/).length; index++) {
       this.lineNumber.push(index);
     }
-    this.commandModal.id = data.id;
+    if (flag === 'copy') {
+      this.commandModal.id = '';
+    } else {
+      this.commandModal.id = data.id;
+    }
     this.commandModal.categoryId = data.categoryId;
     let res = this.cmdCategoryReadList.filter(x => x.id == data.categoryId);
-    this.commandModal.category = res[0].name;
+    this.commandModal.category = res.length > 0 ? res[0].name : '';
     this.create = !this.create;
   }
 

@@ -173,7 +173,7 @@
                           aria-labelledby="button-basic"
                         >
                           <li role="menuitem" ngbDropdownItem>
-                            <a class="dropdown-item" href="javascript:void(0);" (click)="submitted = false;openEditCommand(cmd)">
+                            <a class="dropdown-item" href="javascript:void(0);" (click)="submitted = false;openEditCommand(cmd, 'edit')">
                               <img
                                 src="/html/ng2/assets/img/device/edit-cmd.svg"
                                 alt="edit-cmd"
@@ -496,7 +496,7 @@
               href="javascript:;"
               class="close-btn"
               title="Close"
-              (click)="scriptDetail = !scriptDetail"
+              (click)="scriptDetail = !scriptDetail;scriptDetailModal = {}"
             >
               <img
                 src="/html/ng2/assets/img/device/back.svg"
@@ -550,8 +550,7 @@
                     <img class="icn-sm report-caret-icon" src="./..//html/ng2/assets/img/device/selct-arrow.svg"/>
                     <div ngbDropdownMenu
                          aria-labelledby="dropdownBasic1">
-                         <button *ngFor="let category of cmdCategoryReadList" ngbDropdownItem (click)="commandModal.category = category.name;commandModal.categoryId = category.id;">{{category.name}}</button>
-                         <button ngbDropdownItem (click)="manageCategory(templateManageCategory);">Manage Category</button>
+                         <button *ngFor="let category of cmdCategoryReadList" ngbDropdownItem (click)="scriptDetailModal.category = category.name;scriptDetailModal.categoryId = category.id;">{{category.name}}</button>
                     </div>
                   </div>
                 </div>
@@ -574,6 +573,7 @@
                 <div class="form-row">
                     <button type="button" *ngIf="scriptDetailModal.default === false" class="btn btn-primary" (click)="updateMyScript()">Save</button>
                     <button type="button" *ngIf="scriptDetailModal.default === true" class="btn btn-primary" (click)="cloneScript(scriptDetailModal.id)">Clone Script</button>
+                    <button type="button" class="btn btn-primary" (click)="runScript = !runScript;scriptDetail = !scriptDetail;submitted = false;openEditCommand(scriptDetailModal, 'copy')">Copy Script</button>
                     <button type="button" class="btn btn-secondary" (click)="scriptDetail = !scriptDetail">Back</button>
                 </div>
               </div>
