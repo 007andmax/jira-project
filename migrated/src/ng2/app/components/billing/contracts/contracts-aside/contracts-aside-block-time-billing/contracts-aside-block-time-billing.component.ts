@@ -97,7 +97,6 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     let today = new Date(this.contractsBlockTime.startDate);
     this.minCustomDate = today.getTime();
     if (this.customDateDP) this.customDateDP.minDate = this.minCustomDate;
-    console.log("this.customDateDP", this.customDateDP);
     this.cd.detectChanges();
   }
   private setDefaultTaxes(lsitTaxes) {

@@ -47,7 +47,7 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
   userList = [];
   customDate = new Date().getTime();
   minCustomDate = new Date().getTime();
-  
+
   sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
     private contractsService: ContractsService,
@@ -92,9 +92,8 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
     let today = new Date(this.contractsBlockTime.startDate);
     this.minCustomDate = today.getTime();
     if (this.customDateDP) this.customDateDP.minDate = this.minCustomDate;
-   console.log("this.customDateDP",this.customDateDP);
-   this.cd.detectChanges();
-   
+    this.cd.detectChanges();
+
   }
   onChangeCustomDate(data) {
     this.contractsBlockTime.setCustomDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);

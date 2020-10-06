@@ -44,7 +44,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
   minStartDate: number = null;
   customDate = new Date().getTime();
   minCustomDate = new Date().getTime();
-  
+
   taxes: Array<Tax> = [];
   toggleMaximumAmountHours: boolean = false;
   toggleContractServices: boolean = false;
@@ -56,7 +56,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     private contractsService: ContractsService,
     private modalService: NgbModal,
     private сontractsStateService: ContractsStateService,
-    private contractsListService:ContractsListService,
+    private contractsListService: ContractsListService,
     public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -64,7 +64,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     today.setMonth(today.getMonth() + 1);
     this.contractsUserDevice.setStartDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.contractsUserDevice.setReviewDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-   
+
     this.minStartDate = this.getMinStartDate('MONTHLY', this.contractsUserDevice.startDate);
     if (this.taxesStateService.getTaxes().length > 0) this.setDefaultTaxes(this.taxesStateService.getTaxes());
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
@@ -83,9 +83,8 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     let today = new Date(this.contractsUserDevice.startDate);
     this.minCustomDate = today.getTime();
     if (this.customDateDP) this.customDateDP.minDate = this.minCustomDate;
-   console.log("this.customDateDP",this.customDateDP);
-   this.cd.detectChanges();
-    
+    this.cd.detectChanges();
+
   }
   public onInitCopy() {
     this.contractsUserDevice.setDataFromCopy(this.сontractsStateService.getContractForCopy());
@@ -267,7 +266,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     if (this.contractsUserDevice.withCustomBillingDate) this.resetCustomDate();
     this.setMinCustomDate();
   }
-   
+
   onChangeReviewDate(data) {
     this.contractsUserDevice.setReviewDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
   }
@@ -305,7 +304,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
   public onCreate() {
     if (!this.validate.isValidate(this.contractsUserDevice)) return;
     if (this.contractsListService.compareDateNowWithDate(this.contractsUserDevice.startDate)) {
-      const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal',backdrop: false });
+      const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: false });
       modalRef.componentInstance.message = `Do we need to create the billable item now?`;
     } else {
       this.onCheckServicesForAdd(false);
