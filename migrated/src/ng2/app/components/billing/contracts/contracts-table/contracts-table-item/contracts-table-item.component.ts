@@ -25,14 +25,13 @@ export class ContractsTableItemComponent implements OnInit {
   @Output() onForceCreate = new EventEmitter();
   @Output() onTerminate = new EventEmitter();
   contractTypeDictionary = {
-    HOURLY: 'Hourly',
+    HOURLY: 'Custom Hourly',
     BLOCK_TIME: 'Block Time',
     SERVICE_CONTRACT: 'Service Contract'
   };
   billTypeDictionary = {
     DEVICE: '/by device',
     USER: '/by user',
-    OTHER: '/by other'
   };
   showNotificationReview: boolean = false;
   contractStatusDictionary = {
@@ -81,6 +80,7 @@ export class ContractsTableItemComponent implements OnInit {
     return moment(new Date(date)).format('DD MMM YYYY');
   }
   public getType() {
+    if (this.contract.type  === "SERVICE_CONTRACT" && this.contract.billType === "OTHER") return 'Subscriptions';
     return `${this.contractTypeDictionary[this.contract.type]}${(this.contract.billType) ? this.billTypeDictionary[this.contract.billType] : ""}`
   }
 }

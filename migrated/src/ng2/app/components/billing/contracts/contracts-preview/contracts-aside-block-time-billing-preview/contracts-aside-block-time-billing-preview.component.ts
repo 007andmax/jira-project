@@ -31,6 +31,10 @@ export class ContractsAsideBlockTimeBillingPreviewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+   
+  
+  }
+  ngDoCheck() {
     this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.contractsBlockTime.companyId);
     if (this.taxesStateService.getTaxes().length > 0) this.taxes = this.taxesStateService.getTaxes();
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
@@ -38,7 +42,6 @@ export class ContractsAsideBlockTimeBillingPreviewComponent implements OnInit {
     });
     this.getSelectedInterval();
     if (this.contractsBlockTime.maxRolloverHours) this.toggleTimeRollover = true;
-  
   }
   getSelectedInterval() {
     if (this.contractsBlockTime.interval) {

@@ -29,6 +29,8 @@ export class ContractsAsideUserDeviceBillingPreviewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+  }
+  ngDoCheck() {
     this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.contractsUserDevice.companyId);
     if (this.taxesStateService.getTaxes().length > 0) this.taxes = this.taxesStateService.getTaxes();
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
@@ -36,6 +38,7 @@ export class ContractsAsideUserDeviceBillingPreviewComponent implements OnInit {
     });
     this.getSelectedInterval();
     this.toggleContractServices = (this.contractsUserDevice.services.length > 0);
+
   }
   getSelectedInterval() {
     if (this.contractsUserDevice.interval) {

@@ -30,7 +30,7 @@ import { ContractsListService } from '../../services/contracts-list.service';
   providers: [ContractsListService]
 })
 export class ContractsAsideProductServiceContractsComponent implements OnInit, OnDestroy {
-  selectedType = new ContractsFilterType('Service Contract/by other', 'SERVICE_CONTRACT', 'OTHER');
+  selectedType = new ContractsFilterType('Subscriptions', 'SERVICE_CONTRACT', 'OTHER');
   @ViewChild('startDateDP') startDateDP: DatePickerComponent;
   @ViewChild('reviewDateDP') reviewDateDP: DatePickerComponent;
   @ViewChild('topContract') topContract: ContractsAsideTopComponent;
