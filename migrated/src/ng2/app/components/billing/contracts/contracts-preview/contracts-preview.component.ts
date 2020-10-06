@@ -29,7 +29,7 @@ export class ContractsPreviewComponent implements OnInit {
   }
   closed() {
     this.contractsStateService.togglePreview(false);
-    this.cd.detectChanges();
+   
   }
   edit() {
     this.closed();

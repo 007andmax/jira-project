@@ -252,7 +252,7 @@
         </div>
   
         <div class="notify-to-agents-assign-icon qt-df qt-ai-c qt-input-block" *ngIf="contractsBlockTime.withCustomBillingDate">
-          <app-date-picker #customDateDP [formatDate]="formatDate" [editMode]="true" [editDate]="contractsBlockTime.getCustomDateByMilliseconds()" [minDate]="minCustomDate" [maxDate]="maxCustomDate" [useMaxDate]="true" (onChange)="onChangeCustomDate($event)"></app-date-picker>
+          <app-date-picker #customDateDP [formatDate]="formatDate" [editMode]="true" [editDate]="contractsBlockTime.getCustomDateByMilliseconds()" [minDate]="minCustomDate"  (onChange)="onChangeCustomDate($event)"></app-date-picker>
 
         </div>
   

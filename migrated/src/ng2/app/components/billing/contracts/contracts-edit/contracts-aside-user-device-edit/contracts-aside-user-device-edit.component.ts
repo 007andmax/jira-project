@@ -15,6 +15,7 @@ import { ContractsUserDeviceValidate } from '../../contracts-aside/class/contrac
 import * as moment from "moment";
 import { ContractsConfirmComponent } from '../../contracts-confirm/contracts-confirm.component';
 import { ServiceAgreementBlockTimeServices } from '../../class/service-agreement-block-time-services';
+import { DatePickerComponent } from 'src/ng2/app/components/shared/date-picker/date-picker.component';
 
 @Component({
   selector: 'app-contracts-aside-user-device-edit',
@@ -23,6 +24,7 @@ import { ServiceAgreementBlockTimeServices } from '../../class/service-agreement
 })
 export class ContractsAsideUserDeviceEditComponent implements OnInit {
   @ViewChild('taxes') taxesDP: InvoiceFormTicketEditTaxesComponent;
+  @ViewChild('customDateDP') customDateDP: DatePickerComponent;
   selectedCompany: any;
   selectedTaxes = [];
   selectedType = new ContractsFilterType('Service Contract/by device/by user', 'SERVICE_CONTRACT_DEVICE_USER', null);
@@ -39,7 +41,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit {
   defaultSelectedTax: Array<Tax> = [];
   customDate = new Date().getTime();
   minCustomDate = new Date().getTime();
-  maxCustomDate = new Date().getTime();
+  
   sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
     private taxesStateService: TaxesStateService,
@@ -73,13 +75,14 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit {
     } else {
       this.contractsUserDevice.blockTimeServices =  this.contractsUserDevice.serviceContractServicesToTrack;
     }
-    this.setMinMaxCustomDate();
+    this.setMinCustomDate();
    }
-   private setMinMaxCustomDate() {
+   private setMinCustomDate() {
     let today = new Date(this.contractsUserDevice.startDate);
-    this.minCustomDate =new Date(today.getFullYear(),today.getMonth(),1).getTime();
-    this.maxCustomDate =new Date(today.getFullYear(),today.getMonth(),new Date(today.getFullYear(), today.getMonth() +1, 0).getDate()).getTime();
-
+    this.minCustomDate = today.getTime();
+    if (this.customDateDP) this.customDateDP.minDate = this.minCustomDate;
+   console.log("this.customDateDP",this.customDateDP);
+   this.cd.detectChanges();
   }
   public onEdit() { 
     if (this.contractsUserDevice.blockTimeServices.length === 0 || !this.contractsUserDevice.checkDuplicatedBlockTimeServices() || !this.contractsUserDevice.checkDuplicatedServiceContractServices()
@@ -212,7 +215,16 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit {
   }
   onChangeStartDate(data) {
     this.contractsUserDevice.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-    this.contractsUserDevice.calculateEndDate();
+    if (this.contractsUserDevice.withCustomBillingDate) this.resetCustomDate();
+    this.setMinCustomDate();
+  }
+  private resetCustomDate() {
+    let startDate = new Date(this.contractsUserDevice.startDate);
+    this.customDate = startDate.getTime();
+    if (this.customDateDP) this.customDateDP.setEditDate(startDate.getTime());
+    startDate.setMonth(startDate.getMonth() + 1);
+    this.contractsUserDevice.setCustomDate(startDate.getDate(), startDate.getMonth(), startDate.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+
   }
   onChangeReviewDate(data) {
     this.contractsUserDevice.setReviewDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
@@ -254,7 +266,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit {
       this.contractsUserDevice.resetCustomBillingDate();
     } else {
       this.contractsUserDevice.customBillingDate = this.contractsUserDevice.startDate;
-      this.customDate = new Date(this.contractsUserDevice.startDate).getTime();
+      this.resetCustomDate();
     }
   }
   

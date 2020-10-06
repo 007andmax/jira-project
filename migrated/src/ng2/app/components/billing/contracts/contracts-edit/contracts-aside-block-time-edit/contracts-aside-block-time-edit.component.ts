@@ -47,7 +47,7 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
   userList = [];
   customDate = new Date().getTime();
   minCustomDate = new Date().getTime();
-  maxCustomDate = new Date().getTime();
+  
   sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
     private contractsService: ContractsService,
@@ -86,13 +86,15 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
       this.toggleNotifyAgentsUser = true;
     }
     this.minStartDate = this.getMinStartDate(this.contractsBlockTime.intervalstring, this.contractsBlockTime.startDate);
-    this.setMinMaxCustomDate();
+    this.setMinCustomDate();
   }
-  private setMinMaxCustomDate() {
+  private setMinCustomDate() {
     let today = new Date(this.contractsBlockTime.startDate);
-    this.minCustomDate =new Date(today.getFullYear(),today.getMonth(),1).getTime();
-    this.maxCustomDate =new Date(today.getFullYear(),today.getMonth(),new Date(today.getFullYear(), today.getMonth() +1, 0).getDate()).getTime();
-
+    this.minCustomDate = today.getTime();
+    if (this.customDateDP) this.customDateDP.minDate = this.minCustomDate;
+   console.log("this.customDateDP",this.customDateDP);
+   this.cd.detectChanges();
+   
   }
   onChangeCustomDate(data) {
     this.contractsBlockTime.setCustomDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
@@ -120,7 +122,7 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
 
       })
   }
-  setToggleCustomBillingDate (data) {
+  setToggleCustomBillingDate(data) {
     this.contractsBlockTime.withCustomBillingDate = data;
     if (!data) {
       this.contractsBlockTime.resetCustomBillingDate();
@@ -256,7 +258,7 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
   onChangeStartDate(data) {
     this.contractsBlockTime.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     if (this.contractsBlockTime.withCustomBillingDate) this.resetCustomDate();
-    this.setMinMaxCustomDate();
+    this.setMinCustomDate();
   }
   onChangeReviewDate(data) {
     this.contractsBlockTime.setReviewDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);

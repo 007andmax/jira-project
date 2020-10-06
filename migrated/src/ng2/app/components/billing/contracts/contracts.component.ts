@@ -27,29 +27,41 @@ export class ContractsComponent implements OnInit, OnDestroy {
     this.sub.add(getOnShowNotificationReview);
     let getOnToggleCreate = this.contractsStateService.getOnToggleCreate().subscribe(data => {
       this.showCreate = data;
-      this.cd.detectChanges();
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+      }
     })
     this.sub.add(getOnToggleCreate);
     let getOnPreview = this.contractsStateService.getOnPreview().subscribe(data => {
       this.serviceAgreement = data;
       this.showPreview = true;
-      this.cd.detectChanges();
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+      }
     })
     this.sub.add(getOnPreview);
     let getOnTogglePreview = this.contractsStateService.getOnTogglePreview().subscribe(data => {
 
       this.showPreview = false;
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+      }
     })
     this.sub.add(getOnTogglePreview);
     let getOnEdit = this.contractsStateService.getOnEdit().subscribe(data => {
       this.serviceAgreement = data;
       this.showEdit = true;
-      this.cd.detectChanges();
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+      }
     })
     this.sub.add(getOnEdit);
     let getOnToggleEdit = this.contractsStateService.getOnToggleEdit().subscribe(data => {
 
       this.showEdit = data;
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+      }
     })
     this.sub.add(getOnToggleEdit);
   }

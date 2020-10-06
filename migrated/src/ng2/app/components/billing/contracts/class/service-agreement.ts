@@ -156,17 +156,14 @@ export class ServiceAgreement {
             let dateDatePicker = new Date(year, month - 1, day).getTime(); // timestamp from calendar
             let finalDate = new Date(dateDatePicker - (current.getTimezoneOffset() * 60000/* dont touch*/) - timeOffset /* timezone.timeOffset */);
             this.startDate = moment(finalDate.getTime()).format('YYYY/MM/DD');
-            let endDate = new Date(finalDate.getTime());
-            endDate.setFullYear(endDate.getFullYear() + 10);
-            this.endDate = moment(endDate).format('YYYY/MM/DD');
+            this.calculateEndDate();
         } else {
             let currentTime = new Date(current.getFullYear(), current.getMonth(), current.getDate()).getTime();
             let finalDate = new Date(currentTime - (current.getTimezoneOffset() * 60000) - timeOffset);
             this.startDate = moment(finalDate.getTime()).format('YYYY/MM/DD');
-            let endDate = new Date(finalDate.getTime());
-            endDate.setFullYear(endDate.getFullYear() + 10);
-            this.endDate = moment(endDate).format('YYYY/MM/DD');
+            this.calculateEndDate();
         }
+
     }
     public calculateEndDate() {
         if (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') {
@@ -192,6 +189,7 @@ export class ServiceAgreement {
             endDate.setFullYear(endDate.getFullYear() + 50);
             endDate.setDate(endDate.getDate() - 7);
             this.endDate = moment(endDate).format('YYYY/MM/DD');
+
         }
     }
     public checkDuplicatedBlockTimeServices() {

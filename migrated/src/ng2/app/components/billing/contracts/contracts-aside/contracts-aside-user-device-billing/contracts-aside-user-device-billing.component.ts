@@ -44,7 +44,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
   minStartDate: number = null;
   customDate = new Date().getTime();
   minCustomDate = new Date().getTime();
-  maxCustomDate = new Date().getTime();
+  
   taxes: Array<Tax> = [];
   toggleMaximumAmountHours: boolean = false;
   toggleContractServices: boolean = false;
@@ -77,13 +77,15 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     this.contractsUserDevice.serviceContractServices = [new ContractsUserDeviceService(0, "Managed workstations", 0, this.defaultSelectedTax.map(item => item.id)),
     new ContractsUserDeviceService(0, "Managed servers", 0, this.defaultSelectedTax.map(item => item.id))]
     if (this.сontractsStateService.getContractForCopy()) this.onInitCopy();
-    this.setMinMaxCustomDate();
+    this.setMinCustomDate();
   }
-  private setMinMaxCustomDate() {
-    let today = new Date(this.startDate);
-    this.minCustomDate =today.getTime();
-    this.maxCustomDate =new Date(today.getFullYear(),today.getMonth(),new Date(today.getFullYear(), today.getMonth() +1, 0).getDate()).getTime();
-
+  private setMinCustomDate() {
+    let today = new Date(this.contractsUserDevice.startDate);
+    this.minCustomDate = today.getTime();
+    if (this.customDateDP) this.customDateDP.minDate = this.minCustomDate;
+   console.log("this.customDateDP",this.customDateDP);
+   this.cd.detectChanges();
+    
   }
   public onInitCopy() {
     this.contractsUserDevice.setDataFromCopy(this.сontractsStateService.getContractForCopy());
@@ -218,7 +220,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     this.validate.resetIncludedHours();
     this.validate.resetRateExceeding();
   }
-  setToggleCustomBillingDate (data) {
+  setToggleCustomBillingDate(data) {
     this.contractsUserDevice.withCustomBillingDate = data;
     if (!data) {
       this.contractsUserDevice.clearCustomBillingDate();
@@ -226,7 +228,6 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
       this.contractsUserDevice.customBillingDate = this.contractsUserDevice.startDate;
       this.resetCustomDate();
     }
-    
   }
   private resetCustomDate() {
     let startDate = new Date(this.contractsUserDevice.startDate);
@@ -264,8 +265,9 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
   onChangeStartDate(data) {
     this.contractsUserDevice.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     if (this.contractsUserDevice.withCustomBillingDate) this.resetCustomDate();
-    this.setMinMaxCustomDate();
+    this.setMinCustomDate();
   }
+   
   onChangeReviewDate(data) {
     this.contractsUserDevice.setReviewDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
   }
