@@ -19,15 +19,17 @@
               <p *ngFor="let split of splitCommand"><span>{{split}}</span></p>
               <!-- <textarea>C:\Users\Sam\Desktop></textarea> -->
             </div>
-            <textarea class="editCmd" [(ngModel)]="editCmd" rows="4" placeholder="> Enter a command"></textarea>
-            <button
-              id="button-cmd"
-              type="button"
-              class="btn btn-primary"
-              (click)="copyToTerminal(editCmd);editCmd = ''"
-            >
-              Run Command
-            </button>
+            <div class="terminal-btn-row">
+              <textarea class="editCmd" [(ngModel)]="editCmd" rows="4" placeholder="> Enter a command"></textarea>
+              <button
+                id="button-cmd"
+                type="button"
+                class="btn btn-primary"
+                (click)="copyToTerminal(editCmd);editCmd = ''"
+              >
+                Run Command
+              </button>
+            </div>
           </div>
         </div>
       </div>
