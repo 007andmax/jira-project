@@ -587,7 +587,8 @@ main {
                         display: -ms-flexbox;
                         display: -webkit-flex;
                         display: flex;
-                        flex-direction: column;
+                        flex-direction: row;
+                        flex-wrap: wrap;
                         textarea {
                             height: 200px;
                         }
@@ -600,6 +601,14 @@ main {
                                     border: solid 1px #c5cdd5;
                                     background-color: #ffffff !important;
                                 }
+                            }
+                        }
+                        .f-col{
+                            &.col-70{
+                                width: 65%;
+                            }
+                            &.col-30{
+                                width: 35%;
                             }
                         }
                     }
@@ -1007,5 +1016,19 @@ body {
                 }
             }
         }
+    }
+}
+
+.drp-black{
+    .dropdown{
+            .dropdown-menu{
+                button.dropdown-item{
+                    &:last-child{
+                        color: #364656 !important;
+                        font-family: $font-body !important;
+                        font-weight: normal !important;
+                    }
+                }
+            }
     }
 }
