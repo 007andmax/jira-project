@@ -48,8 +48,7 @@ export class ContractsFilterComponent implements OnInit, OnDestroy {
       this.companyDp.editItem = this.companyContracts;
       this.companyDp.isDisabled = true;
       this.onSelectCompany(this.companyContracts);
-      console.log("this.contractsStateService.getCompanyContracts()",this.companyContracts);
-      this.cd.detectChanges();
+       this.cd.detectChanges();
     }
   }
   public onClearAll() {
