@@ -25,7 +25,7 @@
                 id="button-cmd"
                 type="button"
                 class="btn btn-primary"
-                (click)="copyToTerminal(editCmd);editCmd = ''"
+                (click)="copyToTerminal(editCmd, '', false);editCmd = ''"
               >
                 Run Command
               </button>
@@ -97,7 +97,7 @@
                     <div class="grey-dropdown w-100" ngbDropdown>
                       <input type="text"
                         placeholder="Select Script Type"
-                        [(ngModel)]="commandModal.type"
+                        [(ngModel)]="commandModal.typeName"
                         id="scriptType"
                         ngbDropdownToggle
                         autocomplete="off"
@@ -109,8 +109,8 @@
                       <img class="icn-sm report-caret-icon" src="./..//html/ng2/assets/img/device/selct-arrow.svg"/>
                       <div ngbDropdownMenu
                            aria-labelledby="dropdownType1">
-                           <button ngbDropdownItem (click)="commandModal.type = 'cmd';">Command Line</button>
-                           <button ngbDropdownItem (click)="commandModal.type = 'powershell';">Powershell</button>
+                           <button ngbDropdownItem (click)="commandModal.type = 'CMD'; commandModal.typeName = 'Command Line';">Command Line</button>
+                           <button ngbDropdownItem (click)="commandModal.type = 'POWERSHELL'; commandModal.typeName = 'Powershell';">Powershell</button>
                       </div>
                     </div>
                   </div>
@@ -164,7 +164,7 @@
                         href="javascript:;"
                         class="copy"
                         data-tooltip="Run script"
-                        (click)="copyToTerminal(cmd.command);"
+                        (click)="copyToTerminal(cmd.command, cmd.type, true);"
                         >Run script</a
                       >
                       <div class="btn-group" ngbDropdown>
@@ -338,7 +338,7 @@
                       href="javascript:;"
                       class="play-btn"
                       data-tooltip="Run Script"
-                      (click)="copyToTerminal(script.command)"
+                      (click)="copyToTerminal(script.command, script.type, true)"
                     >
                       <img
                         src="/html/ng2/assets/img/device/play-script.svg"
@@ -590,7 +590,7 @@
                   <div class="grey-dropdown w-100" ngbDropdown>
                     <input type="text"
                       placeholder="Select Script Type"
-                      [(ngModel)]="scriptDetailModal.type"
+                      [(ngModel)]="scriptDetailModal.typeName"
                       id="scriptType"
                       ngbDropdownToggle
                       autocomplete="off"
@@ -602,8 +602,8 @@
                     <img class="icn-sm report-caret-icon" src="./..//html/ng2/assets/img/device/selct-arrow.svg"/>
                     <div ngbDropdownMenu
                          aria-labelledby="dropdownType2">
-                         <button ngbDropdownItem (click)="scriptDetailModal.type = 'cmd';">Command Line</button>
-                         <button ngbDropdownItem (click)="scriptDetailModal.type = 'powershell';">Powershell</button>
+                         <button ngbDropdownItem (click)="scriptDetailModal.type = 'CMD'; scriptDetailModal.typeName = 'Command Line';">Command Line</button>
+                         <button ngbDropdownItem (click)="scriptDetailModal.type = 'POWERSHELL'; scriptDetailModal.typeName = 'Powershell';">Powershell</button>
                     </div>
                   </div>
                 </div>
