@@ -52,7 +52,7 @@ export class TicketStateService {
     this.serviceAgreementsService.getServiceAgreements().subscribe((data: any) => {
       let Agreements = data.filter((el) => el.company.id === ticketProfile.company.id)
       this.areTicketsPresented = (Agreements.length > 0) ? true : false;
-      this.servicesForTicket.filter(item => item.canUseInTicket);
+      this.servicesForTicket =  this.servicesForTicket.filter(item => item.canUseInTicket);
       this.areTicketsTerminated = Agreements.every((el) => {
         return el.status === 'EXPIRED' || el.status === 'TERMINATED'
       })
