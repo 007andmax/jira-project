@@ -94,13 +94,25 @@
                 <div class="f-col col-30">
                   <label for="command">Script Type</label>
                   <div class="form-row">
-                    <select class="form-input cmn-select"
-                      name="type" 
-                    >
-                      <option value="">Select Script Type</option>
-                      <option>Command line</option>
-                      <option>Powershell</option>
-                    </select>
+                    <div class="grey-dropdown w-100" ngbDropdown>
+                      <input type="text"
+                        placeholder="Select Script Type"
+                        [(ngModel)]="commandModal.type"
+                        id="scriptType"
+                        ngbDropdownToggle
+                        autocomplete="off"
+                        class="cmn-select form-input"
+                        name="scriptType" 
+                        #scriptType="ngModel"  
+                        required readonly
+                        [class.validation-error]="submitted == true && scriptType.errors && scriptType.errors.required">
+                      <img class="icn-sm report-caret-icon" src="./..//html/ng2/assets/img/device/selct-arrow.svg"/>
+                      <div ngbDropdownMenu
+                           aria-labelledby="dropdownType1">
+                           <button ngbDropdownItem (click)="commandModal.type = 'cmd';">Command Line</button>
+                           <button ngbDropdownItem (click)="commandModal.type = 'powershell';">Powershell</button>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="f-col col-100">
@@ -575,13 +587,25 @@
               <div class="f-col col-30">
                 <label for="command">Script Type</label>
                 <div class="form-row">
-                  <select class="form-input cmn-select"
-                    name="type" [disabled]="scriptDetailModal.default === true"
-                  >
-                    <option value="">Select Script Type</option>
-                    <option>Command line</option>
-                    <option>Powershell</option>
-                  </select>
+                  <div class="grey-dropdown w-100" ngbDropdown>
+                    <input type="text"
+                      placeholder="Select Script Type"
+                      [(ngModel)]="scriptDetailModal.type"
+                      id="scriptType"
+                      ngbDropdownToggle
+                      autocomplete="off"
+                      class="cmn-select form-input"
+                      name="scriptType" 
+                      #scriptType="ngModel"  
+                      required readonly
+                      [class.validation-error]="submitted == true && scriptType.errors && scriptType.errors.required">
+                    <img class="icn-sm report-caret-icon" src="./..//html/ng2/assets/img/device/selct-arrow.svg"/>
+                    <div ngbDropdownMenu
+                         aria-labelledby="dropdownType2">
+                         <button ngbDropdownItem (click)="scriptDetailModal.type = 'cmd';">Command Line</button>
+                         <button ngbDropdownItem (click)="scriptDetailModal.type = 'powershell';">Powershell</button>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="f-col col-100">
