@@ -31,7 +31,9 @@ export class TerminalComponent implements OnInit {
     command: '',
     category: '',
     categoryId: '',
-    id: ''
+    id: '',
+    type: '',
+    typeName: ''
   };
   myScriptModal = {
     category: '',
@@ -50,7 +52,8 @@ export class TerminalComponent implements OnInit {
     default: false,
     id: '',
     category: '',
-    categoryId: ''
+    categoryId: '', 
+    typeName: ''
   };
   editCmd = '';
   lineNumber = [1];
@@ -174,7 +177,9 @@ export class TerminalComponent implements OnInit {
       command: '',
       category: '',
       categoryId: '',
-      id: ''
+      id: '',
+      type: '',
+      typeName: ''
     };
     this.command = '';
   }
@@ -278,7 +283,8 @@ export class TerminalComponent implements OnInit {
       title: this.commandModal.title,
       categoryId: this.commandModal.categoryId !== undefined ? this.commandModal.categoryId : this.cmdCategoryReadList.filter(val => val.name === this.commandModal.category)[0].id,
       command: this.commandModal.command,
-      id: this.commandModal.id
+      id: this.commandModal.id,
+      type: this.commandModal.type
     }
     if (this.commandModal.id == '') {
       delete data.id;
@@ -315,8 +321,9 @@ export class TerminalComponent implements OnInit {
     
   }
 
-  openEditCommand(data: any, flag) {
+  openEditCommand(data: any, flag: string) {
     this.commandModal.title = data.title;
+    this.commandModal.type = data.type;
     this.commandModal.command = data.command;
     this.lineNumber = [];
     for (let index = 1; index <= data.command.split(/\r*\n/).length; index++) {
@@ -328,6 +335,11 @@ export class TerminalComponent implements OnInit {
       this.commandModal.id = data.id;
     }
     this.commandModal.categoryId = data.categoryId;
+    if(this.commandModal.type === 'CMD') {
+      this.commandModal.typeName = 'Command Line'
+    } else if(this.commandModal.type === 'POWERSHELL') {
+      this.commandModal.typeName = 'Powershell'
+    }
     let res = this.cmdCategoryReadList.filter(x => x.id == data.categoryId);
     this.commandModal.category = res.length > 0 ? res[0].name : '';
     this.create = !this.create;
@@ -482,6 +494,11 @@ export class TerminalComponent implements OnInit {
     }
     this.scriptDetailModal.id = data.id;
     this.scriptDetailModal.categoryId = data.categoryId;
+    if(this.scriptDetailModal.type === 'CMD') {
+      this.scriptDetailModal.typeName = 'Command Line'
+    } else if(this.scriptDetailModal.type === 'POWERSHELL') {
+      this.scriptDetailModal.typeName = 'Powershell'
+    }
     let res = this.cmdCategoryReadList.filter(x => x.id == data.categoryId);
     if (res.length > 0) {
       this.scriptDetailModal.category = res[0].name;
@@ -491,7 +508,7 @@ export class TerminalComponent implements OnInit {
     
   }
 
-  copyToTerminal(cmd) {
+  copyToTerminal(cmd, type, file) {
     if (JSON.parse(localStorage.getItem('deviceDetail')).online === true) {
       this.finalCommand = cmd;
       // let arr = cmd.split(/\r*\n/)
@@ -500,21 +517,21 @@ export class TerminalComponent implements OnInit {
       //   this.splitCommand = this.splitCommand.concat(arr.splice(0, 1));
       // }
       this.sessionId = localStorage.getItem('uuid');
-      this.sendCommand();
+      this.sendCommand(type, file);
     } else {
       this.toastr.error('The device is offline');
     }
     
   }
 
-  sendCommand() {
+  sendCommand(type, file) {
     let data = {
       "companyId": localStorage.getItem('company_id'),
       "agentId": localStorage.getItem('agentId'),
       "sessionId": this.sessionId,
-      "scriptType": this.scriptType, // 'powershell'
+      "scriptType": type === '' ? this.scriptType.toUpperCase() : type, // 'powershell'
       "script": this.finalCommand,
-      "file": true,
+      "file": file,
       "keepOpen": true
     }
 
@@ -573,7 +590,8 @@ export class TerminalComponent implements OnInit {
         title: this.scriptDetailModal.title,
         categoryId: this.scriptDetailModal.categoryId !== undefined ? this.scriptDetailModal.categoryId : id,
         command: this.scriptDetailModal.command,
-        id: this.scriptDetailModal.id
+        id: this.scriptDetailModal.id,
+        type: this.scriptDetailModal.type
       }
       this.terminalService.updateCommand(data)
       .pipe(first())

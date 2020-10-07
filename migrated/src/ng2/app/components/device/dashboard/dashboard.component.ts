@@ -121,7 +121,8 @@ export class DashboardComponent implements OnInit {
         this.system = resp.reports[0].system || {};
         let caption = this.system.caption.replace('Microsoft ', '')
         let release_id = this.system.release_id === '' ? '' : ` Version ${this.system.release_id}`;
-        this.windows_info = `${caption} ( ${this.system.architecture} )${release_id}`;
+        let architecture = this.system.architecture === '' ? '' : ` ( ${this.system.architecture} )`;
+        this.windows_info = `${caption}${architecture}${release_id}`;
         if (this.system.install_date !== '') {
           this.system.install_date = {
             "day": new Date(this.system.install_date).getDate(),
