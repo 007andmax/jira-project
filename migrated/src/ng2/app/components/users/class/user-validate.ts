@@ -5,6 +5,7 @@ export class UserValidate {
     company: boolean = true;
     firstName: boolean = true;
     primaryContactEmail: boolean = true;
+    existPrimaryContactEmail: boolean = true;
     phoneNumber: Array<boolean> = [true];
     reEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
     rePhoneNumber = /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/;
@@ -61,6 +62,12 @@ export class UserValidate {
 
     }
 
+    public getExistPrimaryContactEmail () {
+        return this.existPrimaryContactEmail;
+    }
+    public setExistPrimaryContactEmail (data) {
+        this.existPrimaryContactEmail = data;
+    }
 
     public checkValidPrimaryEmail(primaryEmail) {
         if (!primaryEmail || !primaryEmail.match(this.reEmail)) {
