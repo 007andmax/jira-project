@@ -38,7 +38,7 @@ export class UserValidate {
     }
 
     public checkValidFirstName(firstname) {
-        if (firstname.length < 2) {
+        if (!firstname || firstname.length < 2) {
             this.firstName = false;
         } else {
             this.firstName = true;

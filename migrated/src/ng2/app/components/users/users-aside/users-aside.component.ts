@@ -89,7 +89,8 @@ export class UsersAsideComponent implements OnInit {
   //  this.user.setSubscriptions(data);
   }
   onCheckEmail() {
-    this.validate.checkValidPrimaryEmail(this.user.primaryEmail);
+
+    if (this.user.primaryEmail && this.user.primaryEmail.length > 0) this.validate.checkValidPrimaryEmail(this.user.primaryEmail);
   }
   onCheckPhoneNumber(i) {
     this.validate.checkValidPhoneNumber(i, this.user.phoneNumbers[i].number);
@@ -136,7 +137,9 @@ export class UsersAsideComponent implements OnInit {
     this.user = new UserProfile();
     this.validate = new UserValidate();
     this.companiesState.onInitClear();
-    this.cd.detectChanges();
+    if (!this.cd['destroyed']) {
+      this.cd.detectChanges();
+    }
   }
   removePhoneNumber (i) {
     this.user.phoneNumbers.splice(i);
