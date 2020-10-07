@@ -1,4 +1,7 @@
 .taxes-dropdown {
+  input {
+    cursor: pointer;
+  }
   &__dropdown {
     .report-caret-icon {
       position: absolute;

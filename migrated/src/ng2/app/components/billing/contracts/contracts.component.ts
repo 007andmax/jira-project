@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-state.service';
 import { ServiceAgreement } from './class/service-agreement';
 import { Subscription } from 'rxjs';
+import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 
 @Component({
   selector: 'contracts',
@@ -15,7 +16,8 @@ export class ContractsComponent implements OnInit, OnDestroy {
   serviceAgreement: ServiceAgreement;
   showNotificationReview: boolean = false;
   sub: Subscription = new Subscription();
-  constructor(private contractsStateService: ContractsStateService,
+  constructor(public contractsStateService: ContractsStateService,
+    public companiesStateService:CompaniesStateService,
     public cd: ChangeDetectorRef
   ) { }
 

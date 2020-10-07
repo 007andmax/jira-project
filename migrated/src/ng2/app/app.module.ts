@@ -277,7 +277,7 @@ import { InvoicesItemComponent } from './components/billing/invoices/invoices-it
 import { InvoicesHeaderComponent } from './components/billing/invoices/invoices-header/invoices-header.component';
 import { InvoicesFilterComponent } from './components/billing/invoices/invoices-header/invoices-filter/invoices-filter.component';
 import { InvoicesAsidePreviewComponent } from './components/billing/invoices/invoices-aside-preview/invoices-aside-preview.component';
- 
+
 import { PaymentsComponent } from './components/billing/payments/payments.component';
 import { PaymentsHeaderComponent } from './components/billing/payments/payments-header/payments-header.component';
 import { PaymentItemComponent } from './components/billing/payments/payment-item/payment-item.component';
@@ -331,7 +331,7 @@ import { ContractsAsideBlockTimeBillingDefaultServiceComponent } from './compone
 import { ContractsAsideBlockTimeBillingAddDefaultServiceComponent } from './components/billing/contracts/contracts-aside/contracts-aside-block-time-billing/contracts-aside-block-time-billing-add-default-service/contracts-aside-block-time-billing-add-default-service.component';
 import { ContractsAsideBlockTimeBillingUsersComponent } from './components/billing/contracts/contracts-aside/contracts-aside-block-time-billing/contracts-aside-block-time-billing-users/contracts-aside-block-time-billing-users.component';
 import { ContractsConfirmComponent } from './components/billing/contracts/contracts-confirm/contracts-confirm.component';
- import { ContractsAsideEditHourlyAddDefaultServiceComponent } from './components/billing/contracts/contracts-edit/contracts-aside-hourly-edit/contracts-aside-edit-hourly-add-default-service/contracts-aside-edit-hourly-add-default-service.component';
+import { ContractsAsideEditHourlyAddDefaultServiceComponent } from './components/billing/contracts/contracts-edit/contracts-aside-hourly-edit/contracts-aside-edit-hourly-add-default-service/contracts-aside-edit-hourly-add-default-service.component';
 import { ContractsAsideBlockTimeBillingPreviewComponent } from './components/billing/contracts/contracts-preview/contracts-aside-block-time-billing-preview/contracts-aside-block-time-billing-preview.component';
 import { ContractsAsideBlockTimeEditComponent } from './components/billing/contracts/contracts-edit/contracts-aside-block-time-edit/contracts-aside-block-time-edit.component';
 import { ContractsAsideBlockTimeEditCustomerServiceComponent } from './components/billing/contracts/contracts-edit/contracts-aside-block-time-edit/contracts-aside-block-time-edit-customer-service/contracts-aside-block-time-edit-customer-service.component';
@@ -343,8 +343,9 @@ import { ContractsAsideOtherServiceComponent } from './components/billing/contra
 import { ContractsAsideProductServicePreviewComponent } from './components/billing/contracts/contracts-preview/contracts-aside-product-service-preview/contracts-aside-product-service-preview.component';
 import { ContractsAsideProductServiceEditComponent } from './components/billing/contracts/contracts-edit/contracts-aside-product-service-edit/contracts-aside-product-service-edit.component';
 import { ContractsAsideOtherServiceEditComponent } from './components/billing/contracts/contracts-edit/contracts-aside-product-service-edit/contracts-aside-other-service-edit/contracts-aside-other-service-edit.component';
+import { CompanyContractsComponent } from './components/companies/company-contracts/company-contracts.component';
 
- 
+
 
 /**
  * declare angular
@@ -534,6 +535,9 @@ angular.module('quicktech')
   .directive(
     'fileComponent',
     downgradeComponent({ component: FileComponent }))
+  .directive(
+    'companyContractsComponent',
+    downgradeComponent({ component: CompanyContractsComponent }))
   .factory('ngZone', downgradeInjectable(NgZone));
 
 /**
@@ -852,31 +856,33 @@ angular.module('quicktech')
     ContractsAsideHourlyBillingEditDefaultServiceComponent,
     ContractsAsideBlockTimeBillingUsersComponent,
     ContractsConfirmComponent,
-    
+
     ContractsAsideEditHourlyAddDefaultServiceComponent,
-    
+
     ContractsAsideBlockTimeBillingPreviewComponent,
-    
+
     ContractsAsideBlockTimeEditComponent,
-    
+
     ContractsAsideBlockTimeEditCustomerServiceComponent,
-    
+
     ContractsAsideUserDeviceServiceComponent,
-    
+
     ContractsAsideUserDeviceBillingPreviewComponent,
-    
+
     ContractsAsideUserDeviceEditComponent,
-    
+
     ContractsAsideOtherProductComponent,
-    
+
     ContractsAsideOtherServiceComponent,
-    
+
     ContractsAsideProductServicePreviewComponent,
-    
+
     ContractsAsideProductServiceEditComponent,
-    
-    ContractsAsideOtherServiceEditComponent
-   
+
+    ContractsAsideOtherServiceEditComponent,
+
+    CompanyContractsComponent
+
   ],
   imports: [
     BrowserModule,
@@ -969,7 +975,8 @@ angular.module('quicktech')
     FileComponent,
     PasswordComponent,
     TicketTaskComponent,
-    ContractsConfirmComponent
+    ContractsConfirmComponent,
+    CompanyContractsComponent
     // RecurringTicketsComponent
   ],
   exports: [

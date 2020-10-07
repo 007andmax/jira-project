@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy, Input } from '@angular/core';
 import { ContractsService } from 'src/ng2/app/services/contracts/contracts.service';
 import { ContractItem } from '../class/contract-item';
 import { ContractsFilter } from '../class/contracts-filter';
@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 import { ContractsRealTimeService } from 'src/ng2/app/states/contracts/contracts-real-time.service';
 import { ContractsListService } from '../services/contracts-list.service';
 import { NotificationStateService } from '../../../shared/notification/services/notification-state.service';
+import { Company } from 'src/ng2/app/interfaces/company/company';
 
 @Component({
   selector: 'app-contracts-table',
@@ -22,6 +23,7 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
   filter: ContractsFilter = new ContractsFilter();
   list: Array<ContractItem> = [];
   reqList: Array<ContractItem> = [];
+  @Input() companyContracts:Company = null;
   sub: Subscription = new Subscription();
   constructor(private contractsService: ContractsService,
     private contractsStateService: ContractsStateService,
@@ -84,6 +86,7 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
       }
       this.cd.detectChanges();
     })
+   
   }
 
   getServiceAgreements(companies) {
@@ -95,6 +98,7 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
         contact.company.name = company.name;
         return contact;
       });
+      if (this.companyContracts) this.reqList = this.reqList.filter(item => item.company.id === this.companyContracts.id);
       if (showNotificationReview) this.contractsStateService.showNotificationReview();
       this.list = JSON.parse(JSON.stringify(this.reqList));
       this.filter.onSort('company', this.list);

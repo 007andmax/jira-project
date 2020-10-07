@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { ContractItem } from '../../components/billing/contracts/class/contract-item';
 import { ServiceAgreement } from '../../components/billing/contracts/class/service-agreement';
 import { DefaultServices } from '../../components/billing/default-services/class/default-service';
+import { Company } from '../../interfaces/company/company';
  
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,7 @@ export class ContractsStateService {
   onConfirm: EventEmitter<any> = new EventEmitter();
   productList = [];
   constructor() { }
+
 
   public showNotificationReview () {
     this.onShowNotificationReview.emit(null);
