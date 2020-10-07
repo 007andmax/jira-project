@@ -709,18 +709,18 @@
         <!--</div>-->
         <!--</div>-->
         <!--  ui-sref="companyProfile({ tabName: 'contracts' })"-->
-        <div class="left-panel-hide-filter" ng-class="{'active': getOpenedUsersTab() ==='contracts'}"
+      <!--   <div class="left-panel-hide-filter" ng-class="{'active': getOpenedUsersTab() ==='contracts'}"
           ng-if="isShowContractsTabOnCompanyPage() && PermissionsService.isAllowed('VIEW_SERVICE_AGREEMENTS') && companyForCompanyProfile.clientType !== 'LEAD' && companyForCompanyProfile.clientType !== 'VENDOR'">
           <a class="left-panel-title left-panel-title-hover"
             href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=contracts">
             Service Agreements
           </a>
-        </div>
+        </div> -->
         <div class="left-panel-hide-filter" ng-class="{'active': getOpenedUsersTab() ==='contracts'}"
         ng-if="isShowContractsTabOnCompanyPage() && PermissionsService.isAllowed('VIEW_SERVICE_AGREEMENTS') && companyForCompanyProfile.clientType !== 'LEAD' && companyForCompanyProfile.clientType !== 'VENDOR'">
         <a class="left-panel-title left-panel-title-hover"
         ng-click="stateGo($event, 'company-contracts')">
-          Service Agreements 2
+          Service Agreements
         </a>
       </div>
       </div>

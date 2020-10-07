@@ -53,7 +53,7 @@ export class ContractsFilterComponent implements OnInit, OnDestroy {
     }
   }
   public onClearAll() {
-    this.contractsFilter.setCompany(null);
+   if (!this.companyContracts) this.contractsFilter.setCompany(null);
     this.contractsFilter.setStatus(null);
     this.contractsFilter.setType(null);
     this.contractsFilter.resetDates();
