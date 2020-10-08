@@ -40,7 +40,7 @@
       <img src="/html/ng2/assets/img/device/panel-open.svg" alt="Open" title="Ticket" />
     </a> -->
       <div>
-        <a href="javascript:;" class="add-btn" (click)="resetCmdModal();submitted = false;create = !create"
+        <a href="javascript:;" class="add-btn" (click)="resetCmdModal();submitted = false;create = !create;showDescription = false;"
           ><img src="/html/ng2/assets/img/device/add.svg" alt="add"
         /></a>
         <!-- Modal Add New Command -->
@@ -115,10 +115,10 @@
                     </div>
                   </div>
                 </div>
-                <div class="f-col col-100">
-                  <label for="Title">Command</label>
+                <div class="f-col col-100 cmd-description">
+                  <div class="label"><a (click)="showDescription = false" href="javascript:;" [ngClass]="{'active': showDescription == false}">Command</a> | <a (click)="showDescription = true" href="javascript:;" [ngClass]="{'active': showDescription == true}">Description</a></div>
                   <div class="form-row">
-                        <div id="cmd">
+                        <div id="cmd" *ngIf="showDescription === false">
                           <ul id="cmd_line">
                             <li *ngFor="let line of lineNumber">{{line}}</li>
                           </ul>
@@ -126,6 +126,7 @@
                        
                           </textarea>
                         </div>
+                        <textarea class="form-input" [(ngModel)]="commandModal.description" name="description" *ngIf="showDescription === true"></textarea>
                   </div>
                 </div>
                 <div class="m-btn-row">
@@ -185,7 +186,7 @@
                           aria-labelledby="button-basic"
                         >
                           <li role="menuitem" ngbDropdownItem>
-                            <a class="dropdown-item" href="javascript:void(0);" (click)="submitted = false;openEditCommand(cmd, 'edit')">
+                            <a class="dropdown-item" href="javascript:void(0);" (click)="submitted = false;showDescription = false;openEditCommand(cmd, 'edit')">
                               <img
                                 src="/html/ng2/assets/img/device/edit-cmd.svg"
                                 alt="edit-cmd"
@@ -572,10 +573,10 @@
                       autocomplete="off"
                       class="cmn-select form-input"
                       name="category" 
-                      #Category="ngModel" 
+                      #Category1="ngModel" 
                       [disabled]="scriptDetailModal.default === true"
                       required readonly
-                      [class.validation-error]="submitted == true && Category.errors && Category.errors.required">
+                      [class.validation-error]="Category1.errors && Category1.errors.required">
                     <img class="icn-sm report-caret-icon" src="./..//html/ng2/assets/img/device/selct-arrow.svg"/>
                     <div ngbDropdownMenu
                          aria-labelledby="dropdownBasic1">
@@ -596,9 +597,9 @@
                       autocomplete="off"
                       class="cmn-select form-input"
                       name="scriptType" 
-                      #scriptType="ngModel"  
+                      #scriptType1="ngModel"  
                       required readonly
-                      [class.validation-error]="submitted == true && scriptType.errors && scriptType.errors.required">
+                      [class.validation-error]="scriptType1.errors && scriptType1.errors.required">
                     <img class="icn-sm report-caret-icon" src="./..//html/ng2/assets/img/device/selct-arrow.svg"/>
                     <div ngbDropdownMenu
                          aria-labelledby="dropdownType2">
@@ -608,9 +609,10 @@
                   </div>
                 </div>
               </div>
-              <div class="f-col col-100">
+              <div class="f-col col-100 cmd-description">
+                <div class="label"><a (click)="showDescription = false" href="javascript:;" [ngClass]="{'active': showDescription == false}">Command</a> | <a (click)="showDescription = true" href="javascript:;" [ngClass]="{'active': showDescription == true}">Description</a></div>
                 <div class="form-row">
-                  <div id="cmd_detail">
+                  <div id="cmd_detail" *ngIf="showDescription === false">
                     <ul id="cmd_detail_line">
                       <li *ngFor="let line of lineNumberDetail">{{line}}</li>
                     </ul>
@@ -618,6 +620,7 @@
                  
                     </textarea>
                   </div>
+                  <textarea *ngIf="showDescription === true" class="form-input" [(ngModel)]="scriptDetailModal.description" name="description" [disabled]="scriptDetailModal.default === true"></textarea>
                 </div>
               </div>
             </div>

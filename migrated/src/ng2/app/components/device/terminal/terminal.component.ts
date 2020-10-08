@@ -33,7 +33,8 @@ export class TerminalComponent implements OnInit {
     categoryId: '',
     id: '',
     type: '',
-    typeName: ''
+    typeName: '',
+    description: ''
   };
   myScriptModal = {
     category: '',
@@ -53,7 +54,8 @@ export class TerminalComponent implements OnInit {
     id: '',
     category: '',
     categoryId: '', 
-    typeName: ''
+    typeName: '',
+    description: ''
   };
   editCmd = '';
   lineNumber = [1];
@@ -75,6 +77,7 @@ export class TerminalComponent implements OnInit {
   finalCommand = '';
   splitCommand = ["C:\\>"];
   scriptType = 'cmd';
+  showDescription = false;
   @ViewChild('editor') editorElement:ElementRef;
   code = '';
   config = {
@@ -179,7 +182,8 @@ export class TerminalComponent implements OnInit {
       categoryId: '',
       id: '',
       type: '',
-      typeName: ''
+      typeName: '',
+      description: ''
     };
     this.command = '';
   }
@@ -284,7 +288,8 @@ export class TerminalComponent implements OnInit {
       categoryId: this.commandModal.categoryId !== undefined ? this.commandModal.categoryId : this.cmdCategoryReadList.filter(val => val.name === this.commandModal.category)[0].id,
       command: this.commandModal.command,
       id: this.commandModal.id,
-      type: this.commandModal.type
+      type: this.commandModal.type,
+      description: this.commandModal.description
     }
     if (this.commandModal.id == '') {
       delete data.id;
@@ -324,6 +329,7 @@ export class TerminalComponent implements OnInit {
   openEditCommand(data: any, flag: string) {
     this.commandModal.title = data.title;
     this.commandModal.type = data.type;
+    this.commandModal.description = data.description;
     this.commandModal.command = data.command;
     this.lineNumber = [];
     for (let index = 1; index <= data.command.split(/\r*\n/).length; index++) {
@@ -487,6 +493,7 @@ export class TerminalComponent implements OnInit {
 
   viewScriptDetail(data) {
     this.scriptDetail = !this.scriptDetail;
+    this.showDescription = false;
     this.scriptDetailModal = data;
     this.lineNumberDetail = [];
     for (let index = 1; index <= data.command.split(/\r*\n/).length; index++) {
@@ -529,7 +536,7 @@ export class TerminalComponent implements OnInit {
       "companyId": localStorage.getItem('company_id'),
       "agentId": localStorage.getItem('agentId'),
       "sessionId": this.sessionId,
-      "scriptType": type === '' ? this.scriptType.toUpperCase() : type, // 'powershell'
+      "scriptType": type === '' ? this.scriptType.toLowerCase() : type.toLowerCase(), // 'powershell'
       "script": this.finalCommand,
       "file": file,
       "keepOpen": true
@@ -543,7 +550,6 @@ export class TerminalComponent implements OnInit {
           let arr = data.data.output.split(/\r*\n/)
           let arr1 = this.splitCommand.concat(arr);
           this.splitCommand = arr1;
-          console.log(this.splitCommand)
           this.cd.detectChanges();
           setTimeout(() => {
             $('#terminal').scrollTop($('#terminal')[0].scrollHeight);
@@ -591,7 +597,8 @@ export class TerminalComponent implements OnInit {
         categoryId: this.scriptDetailModal.categoryId !== undefined ? this.scriptDetailModal.categoryId : id,
         command: this.scriptDetailModal.command,
         id: this.scriptDetailModal.id,
-        type: this.scriptDetailModal.type
+        type: this.scriptDetailModal.type,
+        description: this.scriptDetailModal.description
       }
       this.terminalService.updateCommand(data)
       .pipe(first())

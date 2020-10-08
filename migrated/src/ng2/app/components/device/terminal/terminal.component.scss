@@ -1016,6 +1016,27 @@ body {
                 }
             }
         }
+        .cmd-description {
+            a {
+                font-family: "Graphik-Medium";
+                font-size: 13px;
+                font-weight: 500;
+                font-style: normal;
+                line-height: 1.54;
+                letter-spacing: normal;
+                color: #4f5f79;
+                text-transform: capitalize;
+                margin-bottom: 10px;
+                &.active {
+                    color: #16a4fa;
+                }
+            }
+            .label {
+                margin-bottom: 10px;
+                padding-bottom: 0;
+                color: #4f5f79;
+            }
+        }
     }
 }
 
@@ -1032,3 +1053,4 @@ body {
             }
     }
 }
+
