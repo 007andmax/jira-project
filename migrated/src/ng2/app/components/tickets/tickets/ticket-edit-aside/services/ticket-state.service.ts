@@ -57,6 +57,8 @@ export class TicketStateService {
         return el.status === 'EXPIRED' || el.status === 'TERMINATED'
       })
     })
+    this.servicesForTicket.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+    1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
     this.servicesList.emit(this.servicesForTicket);
   }
   public setProductForRemove(data) {
