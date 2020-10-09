@@ -49,7 +49,7 @@ export class ContractsTableItemComponent implements OnInit {
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
-    this.showNotificationReview = this.contractsListService.isShowNotificationReview(this.contract.reviewDate);
+    this.showNotificationReview = this.contractsListService.isShowUpdateNotificationReview(this.contract.reviewDate);
     this.cd.detectChanges();
   }
   public getPermissions(action) {

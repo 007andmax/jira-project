@@ -93,12 +93,14 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
     this.contractsService.getServiceAgreements().subscribe(data => {
       let showNotificationReview = false;
       this.reqList = data.map(contact => {
-        if (!showNotificationReview) showNotificationReview = this.contractsListService.isShowNotificationReview(contact.reviewDate);
-        let company = companies.find(item => item.id === contact.company.id);
+         let company = companies.find(item => item.id === contact.company.id);
         contact.company.name = company.name;
         return contact;
       });
       if (this.companyContracts) this.reqList = this.reqList.filter(item => item.company.id === this.companyContracts.id);
+      this.reqList.forEach(item => {
+        if (!showNotificationReview) showNotificationReview = this.contractsListService.isShowNotificationReview(item.reviewDate);
+      })
       if (showNotificationReview) this.contractsStateService.showNotificationReview();
       this.list = JSON.parse(JSON.stringify(this.reqList));
       this.filter.onSort('company', this.list);
