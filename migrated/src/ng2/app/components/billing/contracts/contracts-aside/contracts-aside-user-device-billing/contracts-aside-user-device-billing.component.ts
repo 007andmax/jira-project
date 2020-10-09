@@ -61,9 +61,12 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
 
   ngOnInit() {
     let today = new Date();
+    let reviewDate = new Date();
+    reviewDate.setFullYear(reviewDate.getFullYear() + 1);
+    this.reviewDate = reviewDate.getTime();
     today.setMonth(today.getMonth() + 1);
     this.contractsUserDevice.setStartDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-    this.contractsUserDevice.setReviewDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.contractsUserDevice.setReviewDate(today.getDate(), today.getMonth(), today.getFullYear() + 1, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
 
     this.minStartDate = this.getMinStartDate('MONTHLY', this.contractsUserDevice.startDate);
     if (this.taxesStateService.getTaxes().length > 0) this.setDefaultTaxes(this.taxesStateService.getTaxes());

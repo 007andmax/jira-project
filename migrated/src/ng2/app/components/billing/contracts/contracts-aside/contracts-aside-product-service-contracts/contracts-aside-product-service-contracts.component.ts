@@ -57,9 +57,12 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit, O
 
   ngOnInit() {
     let today = new Date();
+    let reviewDate = new Date();
+    reviewDate.setFullYear(reviewDate.getFullYear() + 1);
+    this.reviewDate = reviewDate.getTime();
     today.setMonth(today.getMonth() + 1);
     this.contractsOther.setStartDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-    this.contractsOther.setReviewDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.contractsOther.setReviewDate(today.getDate(), today.getMonth(), today.getFullYear() + 1, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.minStartDate = this.getMinStartDate('MONTHLY', this.contractsOther.startDate);
     let getConfirm = this.сontractsStateService.getConfirm().subscribe(data => {
       this.onCheckServicesForAdd(data);

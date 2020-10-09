@@ -69,9 +69,13 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
 
   ngOnInit() {
     let today = new Date();
+    let reviewDate = new Date();
+    reviewDate.setFullYear(reviewDate.getFullYear() + 1);
+    this.reviewDate = reviewDate.getTime();
     today.setMonth(today.getMonth() + 1);
+    console.log("reviewDate",reviewDate);
     this.contractsBlockTime.setStartDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-    this.contractsBlockTime.setReviewDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.contractsBlockTime.setReviewDate(today.getDate(), today.getMonth(), today.getFullYear() + 1, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
 
     this.minStartDate = this.getMinStartDate('MONTHLY', this.contractsBlockTime.startDate);
     this.getUsers();
