@@ -46,7 +46,7 @@ export class ContractsAsideHourlyBillingComponent implements OnInit {
     this.reviewDate = reviewDate.getTime();
     today.setMonth(today.getMonth() + 1);
     this.contractsHourly.setStartDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-    this.contractsHourly.setReviewDate(today.getDate(), today.getMonth() + 1, today.getFullYear() + 1, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.contractsHourly.setReviewDate(today.getDate(), today.getMonth(), today.getFullYear() + 1, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
 
     if (this.taxesStateService.getTaxes().length > 0) this.taxes = this.taxesStateService.getTaxes();
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
