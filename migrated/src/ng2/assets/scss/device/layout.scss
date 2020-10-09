@@ -464,6 +464,12 @@ header{
                     margin-right: 4px;
                 }
             }
+            &:nth-last-child(2) {
+                margin-left: 12px;
+                img {
+                    margin-right: 4px;
+                }
+            }
         }
     }
    
