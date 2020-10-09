@@ -3,69 +3,13 @@
     <h3 class="list-title qt-mt-0 qt-mb-16 qt-fs-16 qt-ff-sb">Dashboard</h3>
 
     <div class="qt-df qt-jc-sb qt-mb-16">
-      <div class="contract-info-card qt-mr-16">
-        <div class="contract-info-card__container" >
-          <div class="contract-info-card__circle-outer">
-            <div class="contract-info-card__circle-inner icon__total-sales"></div>
-          </div>
-          <div class="contract-info-card__text-info">
-            <div class="contract-info-card__title">$96,540</div>
-            <div class="contract-info-card__subtitle">Total Sales</div>
-          </div>
-        </div>
-        <div class="contract-info-card__grow-info --up">
-          <div class="contract-info-card__arrow-icon"></div>
-          <div>4.46%</div>
-        </div>
-      </div>
+     <app-dashboard-total-sales [totalSales]="dashboard.totalSales"></app-dashboard-total-sales>
 
-      <div class="contract-info-card qt-mr-16">
-        <div class="contract-info-card__container" >
-          <div class="contract-info-card__circle-outer">
-            <div class="contract-info-card__circle-inner icon__unpaid-invoice"></div>
-          </div>
-          <div class="contract-info-card__text-info">
-            <div class="contract-info-card__title">$96,540</div>
-            <div class="contract-info-card__subtitle">Unpaid Invoices</div>
-          </div>
-        </div>
-        <div class="contract-info-card__grow-info --down">
-          <div class="contract-info-card__arrow-icon"></div>
-          <div>4.46%</div>
-        </div>
-      </div>
+     <app-dashboard-unpaid-invoices [totalReceivableUnpaid]="dashboard.totalReceivableUnpaid"></app-dashboard-unpaid-invoices>
 
-      <div class="contract-info-card qt-mr-16">
-        <div class="contract-info-card__container" >
-          <div class="contract-info-card__circle-outer">
-            <div class="contract-info-card__circle-inner icon__unbilled-amount"></div>
-          </div>
-          <div class="contract-info-card__text-info">
-            <div class="contract-info-card__title">$96,540</div>
-            <div class="contract-info-card__subtitle">Unbilled Amount</div>
-          </div>
-        </div>
-        <div class="contract-info-card__grow-info --up">
-          <div class="contract-info-card__arrow-icon"></div>
-          <div>4.46%</div>
-        </div>
-      </div>
+      <app-dashboard-unbilled-amount [totalBillable]="dashboard.totalBillable"></app-dashboard-unbilled-amount>
 
-      <div class="contract-info-card">
-        <div class="contract-info-card__container" >
-          <div class="contract-info-card__circle-outer">
-            <div class="contract-info-card__circle-inner icon__quotes"></div>
-          </div>
-          <div class="contract-info-card__text-info">
-            <div class="contract-info-card__title">$96,540</div>
-            <div class="contract-info-card__subtitle">Total Quotes</div>
-          </div>
-        </div>
-        <div class="contract-info-card__grow-info --up">
-          <div class="contract-info-card__arrow-icon"></div>
-          <div>4.46%</div>
-        </div>
-      </div>
+     <app-dashboard-total-quotes [saleQuotesPossibleRevenue]="dashboard.saleQuotesPossibleRevenue"></app-dashboard-total-quotes>
     </div>
 
     <div class="qt-df qt-jc-sb">
