@@ -113,6 +113,9 @@
   border-radius: 4px;
   width: 100%;
   background: white;
+  &::placeholder {
+    color: #b0b6c4;
+  }
 }
 
  .submit-tax-item {
