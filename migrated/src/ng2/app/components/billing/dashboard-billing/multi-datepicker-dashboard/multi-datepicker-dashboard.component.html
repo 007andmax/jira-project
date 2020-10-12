@@ -13,7 +13,7 @@
   <i *ngIf="!selectedDateModel"
      class="icn-16 icn-calendar-light pointer"></i>
   <div  class="dropdown-menu show" *ngIf="showDatePicker">
-    <ngb-datepicker #dp (select)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" [outsideDays]="outsideDays" [placement]="'top-right'">
+    <ngb-datepicker #dp (select)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" [outsideDays]="outsideDays"  >
     </ngb-datepicker>
     <ng-template #t let-date let-focused="focused">
         <span class="custom-day"
