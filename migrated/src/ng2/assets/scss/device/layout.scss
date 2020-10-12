@@ -459,16 +459,21 @@ header{
             height: 32px;
             &:last-child {
                 margin-left: 12px;
-                min-width: 180px;
+                min-width: 190px;
+                position: relative;
+                right: 0;
+                padding-left: 30px;
                 img {
                     margin-right: 4px;
+                    position: absolute;
+                    left: 7px;
                 }
             }
             &:nth-last-child(2) {
                 margin-left: 12px;
-                img {
-                    margin-right: 4px;
-                }
+                // img {
+                //     margin-right: 4px;
+                // }
             }
         }
     }
