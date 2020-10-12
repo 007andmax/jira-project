@@ -1,0 +1,11 @@
+<div class="donalt-chart-wrapper">
+   <nvd3 [options]="chartOptions" [data]="data" #nvd3></nvd3>
+    <div class="chart-content">
+        <div class="h1" [textContent]="contractsDashboard.getTotal()"></div>
+        <span>Total Generated</span>
+    </div>
+    <p >On Going <span [textContent]="contractsDashboard.CURRENT"></span></p>
+    <p >Expiring <span [textContent]="contractsDashboard.EXPIRED"></span></p>
+    <p >Terminated <span [textContent]="contractsDashboard.TERMINATED"></span></p>
+    <p >Pending <span [textContent]="contractsDashboard.PENDING"></span></p>
+</div>

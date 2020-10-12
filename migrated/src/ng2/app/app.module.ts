@@ -354,6 +354,7 @@ import 'd3';
 import 'nvd3';
 import { InvoiceRevenueComponent } from './components/billing/dashboard-billing/invoice-revenue/invoice-revenue.component';
 import { MultiDatepickerDashboardComponent } from './components/billing/dashboard-billing/multi-datepicker-dashboard/multi-datepicker-dashboard.component';
+import { ContractsDashboardComponent } from './components/billing/dashboard-billing/contracts-dashboard/contracts-dashboard.component';
 /**
  * declare angular
  */
@@ -894,7 +895,8 @@ angular.module('quicktech')
     DashboardUnbilledAmountComponent,
     DashboardTotalQuotesComponent,
     InvoiceRevenueComponent,
-    MultiDatepickerDashboardComponent
+    MultiDatepickerDashboardComponent,
+    ContractsDashboardComponent
    
   ],
   imports: [
