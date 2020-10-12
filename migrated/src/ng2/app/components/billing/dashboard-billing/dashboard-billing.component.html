@@ -14,6 +14,10 @@
     </div>
     <div class="qt-df qt-jc-sb qt-mb-16">
 <app-invoice-revenue [accountingStartDate]="accountingStartDate" ></app-invoice-revenue>
+
+<!-- remove this after create middle block -->
+<div class="contract-dashboard-chart-card"></div>
+
 <app-contracts-dashboard #contractsDb [contractsDashboard]="contractsDashboard"></app-contracts-dashboard>
     </div>
     <div class="qt-df qt-jc-sb">
@@ -24,7 +28,7 @@
       <div class="contract-info-list qt-mr-16">
         <app-top-dashboard [title]="'Top Outstanding Customer'" [list]="topDashboard.top5OutstandingInvoicesSum"></app-top-dashboard>
       </div>
-      <div class="contract-info-list qt-mr-16">
+      <div class="contract-info-list">
       <app-top-dashboard [title]="'Top Selling Products'" [list]="topDashboard.top5SellingProducts"></app-top-dashboard>
       </div>
     </div>

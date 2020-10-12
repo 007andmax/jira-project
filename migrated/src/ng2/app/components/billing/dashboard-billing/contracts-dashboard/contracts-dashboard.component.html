@@ -1,11 +1,59 @@
-<div class="donalt-chart-wrapper">
-   <nvd3 [options]="chartOptions" [data]="data" #nvd3></nvd3>
-    <div class="chart-content">
-        <div class="h1" [textContent]="contractsDashboard.getTotal()"></div>
-        <span>Total Generated</span>
+<div class="contract-dashboard-chart-card qt-ml-16">
+  <div class="contract-dashboard-chart-card__header">
+    <div class="contract-dashboard-chart-card__header-title">Contracts</div>
+  </div>
+
+  <div class="contract-dashboard-chart-card__chart-content">
+    <nvd3 [options]="chartOptions" [data]="data" #nvd3></nvd3>
+
+    <div class="contract-dashboard-chart-card__chart-info">
+      <div class="contract-dashboard-chart-card__title" [textContent]="contractsDashboard.getTotal()"></div>
+      <div class="contract-dashboard-chart-card__subtitle">Total Generated</div>
     </div>
-    <p >On Going <span [textContent]="contractsDashboard.CURRENT"></span></p>
-    <p >Expiring <span [textContent]="contractsDashboard.EXPIRED"></span></p>
-    <p >Terminated <span [textContent]="contractsDashboard.TERMINATED"></span></p>
-    <p >Pending <span [textContent]="contractsDashboard.PENDING"></span></p>
+  </div>
+
+  <div class="contract-dashboard-chart-card__footer">
+
+    <div class="contract-dashboard-chart-card__footer-item">
+      <div class="contract-dashboard-chart-card__footer-item-title-block">
+        <div style="background-color: #0747a6;" class="contract-dashboard-chart-card__footer-item-box"></div>
+        <div>
+          <div class="contract-dashboard-chart-card__footer-item-title">On Going</div>
+          <div class="contract-dashboard-chart-card__footer-item-value" [textContent]="contractsDashboard.CURRENT"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="contract-dashboard-chart-card__footer-item">
+      <div class="contract-dashboard-chart-card__footer-item-title-block">
+        <div style="background-color: #00ccff;" class="contract-dashboard-chart-card__footer-item-box"></div>
+        <div>
+          <div class="contract-dashboard-chart-card__footer-item-title">Expiring</div>
+          <div class="contract-dashboard-chart-card__footer-item-value" [textContent]="contractsDashboard.EXPIRED"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contract-dashboard-chart-card__footer-item">
+      <div class="contract-dashboard-chart-card__footer-item-title-block">
+        <div style="background-color: #cdecff;" class="contract-dashboard-chart-card__footer-item-box"></div>
+        <div>
+          <div class="contract-dashboard-chart-card__footer-item-title">Terminated</div>
+          <div class="contract-dashboard-chart-card__footer-item-value" [textContent]="contractsDashboard.TERMINATED"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contract-dashboard-chart-card__footer-item">
+      <div class="contract-dashboard-chart-card__footer-item-title-block">
+        <div style="background-color: #0747a6;"  class="contract-dashboard-chart-card__footer-item-box"></div>
+        <div>
+          <div class="contract-dashboard-chart-card__footer-item-title">Pending</div>
+          <div class="contract-dashboard-chart-card__footer-item-value" [textContent]="contractsDashboard.PENDING"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>

@@ -8,6 +8,117 @@
     padding: 36px 0;
   }
 
+  app-dashboard-total-sales,
+  app-dashboard-unpaid-invoices,
+  app-dashboard-unbilled-amount,
+  app-dashboard-total-quotes,
+  app-invoice-revenue,
+  app-contracts-dashboard {
+    display: contents;
+  }
+
+  .contract-dashboard-chart-card {
+    width: 33.33%;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &__header {
+      padding: 16px 12px 0 24px;
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+
+      app-multi-datepicker-dashboard .date-picker {
+        overflow: visible;
+        p.pointer {
+          font-size: 12px;
+          margin-right: 20px;
+          margin-top: 3px;
+          color: #4f5f79;
+        }
+        i.icn-calendar-light {
+          top: 2px;
+          left: auto;
+          right: 0;
+        }
+      }
+    }
+    &__header-title {
+      font-size: 18px;
+      line-height: 1.56;
+      letter-spacing: -0.5px;
+      color: #364656;
+      font-family: Graphik-Medium, sans-serif;
+      white-space: nowrap;
+    }
+    &__chart-content {
+      width: 100%;
+      position: relative;
+      padding-top: 28px;
+      padding-bottom: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    &__title {
+      font-family: Graphik-Semibold, sans-serif;
+      font-size: 22px;
+      line-height: 1.27;
+      color: #364656;
+    }
+    &__subtitle {
+      font-size: 12px;
+      line-height: 1.33;
+      color: #9ca5b6;
+    }
+    &__chart-info {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    &__footer {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 32px;
+      border-top: 1px solid #edf0f2;
+    }
+    &__footer-item-title-block {
+      display: flex;
+
+    }
+
+    &__footer-item-title {
+      font-size: 11px;
+      line-height: 1.09;
+      color: #9ca5b6;
+      margin-bottom: 3px;
+    }
+
+    &__footer-item-value {
+      font-size: 12px;
+      color: #364656;
+      line-height: 1.33;
+      font-family: Graphik-Medium, sans-serif;
+  }
+
+
+    &__footer-item-box {
+      width: 8px;
+      height: 8px;
+      margin-right: 8px;
+      border-radius: 3px;
+      margin-top: 1px;
+
+      text-align: center;
+    }
+  }
+
   .contract-info-card {
     width: 50%;
     height: 96px;
