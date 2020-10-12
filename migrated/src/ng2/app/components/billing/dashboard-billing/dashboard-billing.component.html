@@ -1,5 +1,6 @@
 <div class="billing-dashboard-page">
-  <div class="billing-dashboard-page__content">
+  <div class="loading" *ngIf="showPreloader"></div>
+  <div class="billing-dashboard-page__content" *ngIf="!showPreloader">
     <h3 class="list-title qt-mt-0 qt-mb-16 qt-fs-16 qt-ff-sb">Dashboard</h3>
 
     <div class="qt-df qt-jc-sb qt-mb-16">
@@ -11,7 +12,10 @@
 
      <app-dashboard-total-quotes [saleQuotesPossibleRevenue]="dashboard.saleQuotesPossibleRevenue"></app-dashboard-total-quotes>
     </div>
+    <div class="qt-df qt-jc-sb qt-mb-16">
+<app-invoice-revenue  ></app-invoice-revenue>
 
+    </div>
     <div class="qt-df qt-jc-sb">
       <div class="contract-info-list qt-mr-16">
         <div class="contract-info-list__title">Top Customer Sale</div>

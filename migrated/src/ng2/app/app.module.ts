@@ -348,9 +348,12 @@ import { DashboardTotalSalesComponent } from './components/billing/dashboard-bil
 import { DashboardUnpaidInvoicesComponent } from './components/billing/dashboard-billing/dashboard-unpaid-invoices/dashboard-unpaid-invoices.component';
 import { DashboardUnbilledAmountComponent } from './components/billing/dashboard-billing/dashboard-unbilled-amount/dashboard-unbilled-amount.component';
 import { DashboardTotalQuotesComponent } from './components/billing/dashboard-billing/dashboard-total-quotes/dashboard-total-quotes.component';
-
  
-
+ 
+import 'd3';
+import 'nvd3';
+import { InvoiceRevenueComponent } from './components/billing/dashboard-billing/invoice-revenue/invoice-revenue.component';
+import { MultiDatepickerDashboardComponent } from './components/billing/dashboard-billing/multi-datepicker-dashboard/multi-datepicker-dashboard.component';
 /**
  * declare angular
  */
@@ -889,7 +892,9 @@ angular.module('quicktech')
     DashboardTotalSalesComponent,
     DashboardUnpaidInvoicesComponent,
     DashboardUnbilledAmountComponent,
-    DashboardTotalQuotesComponent
+    DashboardTotalQuotesComponent,
+    InvoiceRevenueComponent,
+    MultiDatepickerDashboardComponent
    
   ],
   imports: [
@@ -933,7 +938,8 @@ angular.module('quicktech')
     IgxTimePickerModule,
     DisabledBtnModule,
     NgxUploaderModule,
-    AngularEditorModule
+    AngularEditorModule,
+   
 
   ],
   entryComponents: [

@@ -12,6 +12,7 @@ export class Dashboard {
     totalReceivableUnpaid: number;
     totalSales: number;
     constructor(data) {
+        
         this.chartData = data.chartData.map(item => new DashboardChartData(item));
         this.saleQuoteCounters = new DashboardSaleQuoteCounters(data.saleQuoteCounters);
         this.saleQuotesPossibleRevenue = data.saleQuotesPossibleRevenue;

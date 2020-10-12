@@ -1,0 +1,11 @@
+<div class="donalt-chart-wrapper">
+  <app-multi-datepicker-dashboard class="qt-input-block contracts-date-filter search-type" #datesDp (selectedDate)="filterByDate($event)"></app-multi-datepicker-dashboard>
+  <nvd3 [options]="chartOptions" [data]="data" #nvd3></nvd3>
+    <div class="chart-content">
+        <div class="h1" [textContent]="invoiceRevenue.getTotal() | currency"></div>
+        <span>Total Revenue</span>
+    </div>
+    <p >Invoiced <span [textContent]="invoiceRevenue.invoicedSum | currency"></span></p>
+    <p >Collected <span [textContent]="invoiceRevenue.collectedSum | currency"></span></p>
+    <p >Outstanding <span [textContent]="invoiceRevenue.outstandingSum | currency"></span></p>
+</div>
