@@ -78,6 +78,8 @@ export class TerminalComponent implements OnInit {
   splitCommand = ["C:\\>"];
   scriptType = 'cmd';
   showDescription = false;
+  terminalHeight = 0;
+  cmdHeight = 0;
   @ViewChild('editor') editorElement:ElementRef;
   code = '';
   config = {
@@ -106,7 +108,8 @@ export class TerminalComponent implements OnInit {
     $('#cmd textarea').scroll(function(){
       $('#cmd_line').scrollTop($('#cmd textarea').scrollTop());
     });
-    
+    this.terminalHeight = document.getElementById("terminal").offsetHeight;
+    this.cmdHeight = document.getElementById("editCmd").offsetHeight;
   }
 
   getCommandList () {
@@ -616,8 +619,20 @@ export class TerminalComponent implements OnInit {
       });
     }
   }
-  setHeight() {
-    document.getElementById("terminal").style.height = (document.getElementById("terminal").offsetHeight - 10) + "px";
-    document.getElementById("editCmd").style.height = (document.getElementById("editCmd").offsetHeight + 10) + "px";
+  setHeight(flag) {
+    if(flag === 'enter' && document.getElementById("editCmd").offsetHeight < 150 ) {
+      document.getElementById("terminal").style.height = (document.getElementById("terminal").offsetHeight - 10) + "px";
+      document.getElementById("editCmd").style.height = (document.getElementById("editCmd").offsetHeight + 10) + "px";
+    } else if(flag === 'backspace'){
+      let arr = this.editCmd.split(/\r*\n/)
+      if (arr.length > 1 && document.getElementById("editCmd").offsetHeight > 120) {
+        document.getElementById("terminal").style.height = (document.getElementById("terminal").offsetHeight + 10) + "px";
+        document.getElementById("editCmd").style.height = (document.getElementById("editCmd").offsetHeight - 10) + "px";
+      } else {
+        document.getElementById("terminal").style.height = this.terminalHeight + "px";
+        document.getElementById("editCmd").style.height = this.cmdHeight + "px";
+      }
+    }
+    
   }
 }

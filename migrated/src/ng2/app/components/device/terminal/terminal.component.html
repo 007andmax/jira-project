@@ -20,7 +20,7 @@
               <!-- <textarea>C:\Users\Sam\Desktop></textarea> -->
             </div>
             <div class="terminal-btn-row">
-              <textarea id="editCmd" class="editCmd" [(ngModel)]="editCmd" rows="4" placeholder="> Enter a command" (keyup.enter)="setHeight();"></textarea>
+              <textarea id="editCmd" class="editCmd" [(ngModel)]="editCmd" rows="4" placeholder="> Enter a command" (keyup.enter)="setHeight('enter');" (keyup.backspace)="setHeight('backspace');"></textarea>
               <button
                 id="button-cmd"
                 type="button"
