@@ -25,4 +25,7 @@ export class DashboardBillingService {
   public getInvoiceRevenue(data) {
     return this.http.post(this.apiUrl + `reports/sales/invoiceRevenue`, data);
   }
+  public getTops(data) {
+    return this.http.post(this.apiUrl + `reports/sales/top5`, data);
+  }
 }

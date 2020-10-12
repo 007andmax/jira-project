@@ -13,6 +13,7 @@ import { MultiDatepickerDashboardComponent } from '../multi-datepicker-dashboard
 })
 export class InvoiceRevenueComponent implements OnInit {
   invoiceRevenue: InvoiceRevenue = new InvoiceRevenue();
+  @Input() accountingStartDate:string;
   @ViewChild('datesDp') datesDp: MultiDatepickerDashboardComponent;
   @ViewChild('nvd3') nvd3:any;
   chartOptions: any;
@@ -64,13 +65,13 @@ export class InvoiceRevenueComponent implements OnInit {
       }
     ];
     this.invoiceRevenue.companyId = this.companiesStateService.getCurrentCompany().id;
-    this.reportsService.getAccountingStartDate().subscribe((data: any) => {
-      this.invoiceRevenue.startDate = moment(data.accountingStartDate).format('YYYY-MM-DD');
+    
+      this.invoiceRevenue.startDate = moment(this.accountingStartDate).format('YYYY-MM-DD');
       this.invoiceRevenue.endDate = moment(new Date()).format('YYYY-MM-DD');
-      this.datesDp.setStartDate(new Date(data.accountingStartDate));
+      this.datesDp.setStartDate(new Date(this.accountingStartDate));
       this.datesDp.setEndDate(new Date());
       this.getInvoiceRevenue();
-    })
+    
   }
   getInvoiceRevenue() {
     this.dashboardBillingService.getInvoiceRevenue(this.invoiceRevenue.getDataForRequest()).subscribe(data => {
