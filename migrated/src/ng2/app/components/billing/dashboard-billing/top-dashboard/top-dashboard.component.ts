@@ -7,8 +7,8 @@ import { TopDashboardSum } from '../class/top-dashboard-sum';
   styleUrls: ['./top-dashboard.component.scss']
 })
 export class TopDashboardComponent implements OnInit {
-@Input() title:string;
-@Input() list:Array<TopDashboardSum> = [];
+  @Input() title: string;
+  @Input() list: Array<TopDashboardSum> = [];
   constructor() { }
 
   ngOnInit() {

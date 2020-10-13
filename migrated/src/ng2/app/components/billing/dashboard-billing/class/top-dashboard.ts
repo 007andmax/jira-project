@@ -1,9 +1,10 @@
+import { TopDashboardProductSum } from './top-dashboard-product-sum';
 import { TopDashboardSum } from './top-dashboard-sum';
 
 export class TopDashboard {
     top5InvoicesSum: Array<TopDashboardSum> = [];
     top5OutstandingInvoicesSum: Array<TopDashboardSum> = [];
-    top5SellingProducts: Array<TopDashboardSum> = [];
+    top5SellingProducts: Array<TopDashboardProductSum> = [];
     invoiceAmountsStartDate:string;
     invoiceAmountsEndDate:string;
     constructor() {
@@ -12,7 +13,7 @@ export class TopDashboard {
     public setData(data) {
         this.top5InvoicesSum = data.top5InvoicesSum.map(item => new TopDashboardSum(item));
         this.top5OutstandingInvoicesSum = data.top5OutstandingInvoicesSum.map(item => new TopDashboardSum(item));
-        this.top5SellingProducts = data.top5SellingProducts.map(item => new TopDashboardSum(item));
+        this.top5SellingProducts = data.top5SellingProducts.map(item => new TopDashboardProductSum(item));
     }
     public getDataForRequest() {
         return {

@@ -1,0 +1,33 @@
+<div class="contract-info-list__title" [textContent]="title"></div>
+
+<table class="contract-info-list__table-head contract-info-list__table">
+  <thead>
+    <tr>
+      <th class="contract-info-list__table--number">#</th>
+      <th class="contract-info-list__table--name">Name</th>
+      <th class="contract-info-list__table--revenue">revenue</th>
+    </tr>
+  </thead>
+</table>
+
+<table class="contract-info-list__table-body contract-info-list__table">
+  <tbody>
+    <ng-template ngFor let-item
+    let-i="index"
+    [ngForOf]="list"
+    >
+    <tr>
+      <td class="contract-info-list__table--number">
+        <div class="contract-info-list__table--number-circle-outer">
+          <div class="contract-info-list__table--number-circle-inner" [textContent]=" i + 1"></div>
+        </div>
+      </td>
+      <td class="contract-info-list__table--name" [textContent]="item.productName"></td>
+      <td class="contract-info-list__table--revenue" [textContent]="item.sellingAmount | currency"></td>
+    </tr>
+
+   </ng-template>
+    
+   
+  </tbody>
+</table>

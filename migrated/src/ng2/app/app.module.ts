@@ -356,6 +356,7 @@ import { InvoiceRevenueComponent } from './components/billing/dashboard-billing/
 import { MultiDatepickerDashboardComponent } from './components/billing/dashboard-billing/multi-datepicker-dashboard/multi-datepicker-dashboard.component';
 import { ContractsDashboardComponent } from './components/billing/dashboard-billing/contracts-dashboard/contracts-dashboard.component';
 import { TopDashboardComponent } from './components/billing/dashboard-billing/top-dashboard/top-dashboard.component';
+import { TopProductDashboardComponent } from './components/billing/dashboard-billing/top-product-dashboard/top-product-dashboard.component';
 /**
  * declare angular
  */
@@ -898,7 +899,8 @@ angular.module('quicktech')
     InvoiceRevenueComponent,
     MultiDatepickerDashboardComponent,
     ContractsDashboardComponent,
-    TopDashboardComponent
+    TopDashboardComponent,
+    TopProductDashboardComponent
    
   ],
   imports: [
