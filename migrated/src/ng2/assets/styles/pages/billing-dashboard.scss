@@ -20,6 +20,16 @@
   app-dashboard-stats {
     display: contents;
   }
+  app-dashboard-stats {
+    .contract-info-card {
+      margin-right: 16px;
+    }
+    &:last-child {
+      .contract-info-card {
+        margin-right: 0;
+      }
+    }
+  }
 
   .contract-dashboard-chart-card {
     width: 33.33%;
@@ -38,6 +48,9 @@
 
       app-multi-datepicker-dashboard .date-picker {
         overflow: visible;
+        .dropdown-menu {
+          overflow: visible;
+        }
         p.pointer {
           font-size: 12px;
           margin-right: 20px;
@@ -354,4 +367,42 @@
       font-family: Graphik-Medium, sans-serif;
     }
   }
+
+  app-dashboard-sales-analytics {
+    .nvd3 .nv-x .nv-axis line {
+      opacity: 0 !important;
+    }
+
+    .nvd3 .nv-y .nv-axis {
+      .domain {
+        opacity: 0;
+      }
+      line {
+        stroke: #edf0f2;
+      }
+    }
+    .nvd3 text {
+      font-size: 12px;
+      fill: #4f5f79;
+      font-family: Graphik-Regular, sans-serif;
+    }
+    .nv-axisMaxMin, .nv-axisMaxMin, .nv-axisMaxMin, .nv-axisMinMax {
+      opacity: 0;
+    }
+  }
 }
+
+@media only screen and (max-width: 1400px) {
+  .billing-dashboard-page {
+    .contract-dashboard-chart-card {
+      app-multi-datepicker-dashboard .date-picker {
+        p.pointer {
+          max-width: 80px;
+          line-height: 1.2;
+        }
+      }
+    }
+  }
+}
+
+

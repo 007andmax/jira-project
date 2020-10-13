@@ -8,20 +8,20 @@
     <!-- <app-dashboard-total-sales [totalSales]="dashboard.totalSales"></app-dashboard-total-sales>
 -->
 <app-dashboard-stats [title]="'Unpaid Invoices'" [total]="dashboard.totalReceivableUnpaid" [class]="'icon__unpaid-invoice'"></app-dashboard-stats>
-    
+
     <!-- <app-dashboard-unpaid-invoices [totalReceivableUnpaid]="dashboard.totalReceivableUnpaid"></app-dashboard-unpaid-invoices>-->
     <app-dashboard-stats [title]="'Unbilled Amount'" [total]="dashboard.totalBillable" [class]="'icon__unbilled-amount'"></app-dashboard-stats>
-  
+
     <!--  <app-dashboard-unbilled-amount [totalBillable]="dashboard.totalBillable"></app-dashboard-unbilled-amount>-->
     <app-dashboard-stats [title]="'Total Quotes'" [total]="dashboard.saleQuotesPossibleRevenue" [class]="'icon__quotes'"></app-dashboard-stats>
-  
+
     <!-- <app-dashboard-total-quotes [saleQuotesPossibleRevenue]="dashboard.saleQuotesPossibleRevenue"></app-dashboard-total-quotes>-->
     </div>
     <app-dashboard-sales-analytics></app-dashboard-sales-analytics>
     <div class="qt-df qt-jc-sb qt-mb-16">
 <app-invoice-revenue [accountingStartDate]="accountingStartDate" ></app-invoice-revenue>
 
- 
+
 <app-dashboard-quotes [stats]="dashboard.saleQuoteCounters"></app-dashboard-quotes>
 
 <app-contracts-dashboard #contractsDb [contractsDashboard]="contractsDashboard"></app-contracts-dashboard>
