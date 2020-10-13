@@ -10,6 +10,7 @@ import { CONFIGCONSTANTS } from '../config/app-constants';
 import { UserListService } from '../../users/services/user-list.service';
 import { CompaniesRealTimeService } from 'src/ng2/app/states/company/companies-real-time.service';
 import { ShellStateService } from 'src/ng2/app/states/shell/shell-state.service';
+import { command } from './../class/device';
 
 @Component({
   selector: 'app-terminal',
@@ -535,7 +536,7 @@ export class TerminalComponent implements OnInit {
   }
 
   sendCommand(type, file) {
-    let data = {
+    let data: command = {
       "companyId": localStorage.getItem('company_id'),
       "agentId": localStorage.getItem('agentId'),
       "sessionId": this.sessionId,
@@ -634,5 +635,65 @@ export class TerminalComponent implements OnInit {
       }
     }
     
+  }
+
+  openAddModal() {
+    this.resetCmdModal();
+    this.submitted = false;
+    this.create = !this.create;
+    this.showDescription = false;
+  }
+
+  openEditModal(cmd, type) {
+    this.submitted = false;
+    this.showDescription = false;
+    this.openEditCommand(cmd, type);
+  }
+
+  copyToTerminalFunc(editCmd, type, file) {
+    this.copyToTerminal(editCmd, type, file);
+    this.editCmd = ''
+  }
+
+  toggleTerminal(type, typeName) {
+    this.commandModal.type = type; 
+    this.commandModal.typeName = typeName; 
+  }
+
+  toggleDetailTerminal(type, typeName) {
+    this.scriptDetailModal.type = type; 
+    this.scriptDetailModal.typeName = typeName; 
+  }
+
+  emptyScriptDetail() {
+    this.scriptDetail = !this.scriptDetail;
+    this.scriptDetailModal = {
+      title: '',
+      type: '',
+      command: '',
+      default: false,
+      id: '',
+      category: '',
+      categoryId: '', 
+      typeName: '',
+      description: ''
+    }
+  }
+
+  setScriptDetail(name, id) {
+    this.scriptDetailModal.category = name;
+    this.scriptDetailModal.categoryId = id;
+  }
+
+  setCommand(name, id) {
+    this.commandModal.category = name;
+    this.commandModal.categoryId = id;
+  }
+
+  copyScriptToggle(data, type) {
+    this.runScript = !this.runScript;
+    this.scriptDetail = !this.scriptDetail;
+    this.submitted = false;
+    this.openEditCommand(data, type);
   }
 }
