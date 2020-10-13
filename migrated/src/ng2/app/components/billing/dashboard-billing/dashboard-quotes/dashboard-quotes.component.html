@@ -1,64 +1,79 @@
-<div class="contract-dashboard-chart-card qt-ml-16">
-  <div class="contract-dashboard-chart-card__header">
-    <div class="contract-dashboard-chart-card__header-title" [textContent]="stats.getTotal() + ' Quotes'"></div>
+<div class="dashboard-quotes">
+
+  <div class="dashboard-quotes__header qt-mb-16">
+    <span [textContent]="stats.getTotal()" class="dashboard-quotes__header-title qt-mr-5"></span>
+    <span class="dashboard-quotes__header-subtitle" [textContent]="'Quotes'"></span>
   </div>
-   
-  <div class="cmp-board-progresbbar d-flex">
-      <span [ngStyle]="{'background-color': '#0747a6','width' :getProcent(stats.APPROVED) + '%'}" *ngIf="stats.APPROVED" ></span>
-      <span [ngStyle]="{'background-color': '#00ccff','width' :getProcent(stats.ARCHIVED) + '%'}" *ngIf="stats.ARCHIVED" ></span>
-      <span [ngStyle]="{'background-color': '#052e6b','width' :getProcent(stats.CANCELED) + '%'}" *ngIf="stats.CANCELED" ></span>
-      <span [ngStyle]="{'background-color': '#16a4fa','width' :getProcent(stats.EXPIRED) + '%'}" *ngIf="stats.EXPIRED" ></span>
-      <span [ngStyle]="{'background-color': '#cdecff','width' :getProcent(stats.INVOICED) + '%'}" *ngIf="stats.INVOICED" ></span>
-      <span [ngStyle]="{'background-color': '#0747a6','width' :getProcent(stats.READ) + '%'}" *ngIf="stats.READ" ></span>
-      <span [ngStyle]="{'background-color': '#00ccff','width' :getProcent(stats.SAVED) + '%'}" *ngIf="stats.SAVED" ></span>
-      <span [ngStyle]="{'background-color': '#052e6b','width' :getProcent(stats.TICKETED) + '%'}" *ngIf="stats.TICKETED" ></span>
-      <span [ngStyle]="{'background-color': '#16a4fa','width' :getProcent(stats.UNREAD) + '%'}" *ngIf="stats.UNREAD" ></span>
-      
+
+  <div class="dashboard-quotes__progress-bar">
+      <div class="dashboard-quotes__progress-bar-item" [ngStyle]="{'background-color': '#0747a6','width' :getProcent(stats.APPROVED) + '%'}" *ngIf="stats.APPROVED" ></div>
+      <div class="dashboard-quotes__progress-bar-item" [ngStyle]="{'background-color': '#00ccff','width' :getProcent(stats.ARCHIVED) + '%'}" *ngIf="stats.ARCHIVED" ></div>
+      <div class="dashboard-quotes__progress-bar-item" [ngStyle]="{'background-color': '#052e6b','width' :getProcent(stats.CANCELED) + '%'}" *ngIf="stats.CANCELED" ></div>
+      <div class="dashboard-quotes__progress-bar-item" [ngStyle]="{'background-color': '#16a4fa','width' :getProcent(stats.EXPIRED) + '%'}" *ngIf="stats.EXPIRED" ></div>
+      <div class="dashboard-quotes__progress-bar-item" [ngStyle]="{'background-color': '#cdecff','width' :getProcent(stats.INVOICED) + '%'}" *ngIf="stats.INVOICED" ></div>
+      <div class="dashboard-quotes__progress-bar-item" [ngStyle]="{'background-color': '#ffb937','width' :getProcent(stats.READ) + '%'}" *ngIf="stats.READ" ></div>
+      <div class="dashboard-quotes__progress-bar-item" [ngStyle]="{'background-color': '#2ec866','width' :getProcent(stats.SAVED) + '%'}" *ngIf="stats.SAVED" ></div>
+      <div class="dashboard-quotes__progress-bar-item" [ngStyle]="{'background-color': '#7c77cb','width' :getProcent(stats.TICKETED) + '%'}" *ngIf="stats.TICKETED" ></div>
+      <div class="dashboard-quotes__progress-bar-item" [ngStyle]="{'background-color': '#ff5263','width' :getProcent(stats.UNREAD) + '%'}" *ngIf="stats.UNREAD" ></div>
+
   </div>
-  <ul class="list-unstyled d-flex">
-      <li class="onsite d-flex" *ngIf="stats.APPROVED">
-          <span>Approved</span>
-          <b [textContent]="stats.APPROVED"></b>
+
+  <div class="qt-df">
+    <ul class="dashboard-quotes__list d-flex">
+      <li class="dashboard-quotes__list-item" *ngIf="stats.APPROVED">
+        <span style="background-color: #0747a6" class="dashboard-quotes__list-item-box"></span>
+        <span class="dashboard-quotes__list-item-label">Approved</span>
+        <span class="dashboard-quotes__list-item-value" [textContent]="stats.APPROVED"></span>
       </li>
-      <li class="remote-service d-flex" *ngIf="stats.ARCHIVED">
-        <span>Archived</span>
-        <b [textContent]="stats.ARCHIVED"></b>
+      <li class="dashboard-quotes__list-item" *ngIf="stats.ARCHIVED">
+        <span style="background-color: #00ccff" class="dashboard-quotes__list-item-box"></span>
+        <span class="dashboard-quotes__list-item-label">Archived</span>
+        <span class="dashboard-quotes__list-item-value" [textContent]="stats.ARCHIVED"></span>
       </li>
-      <li class="block-tile d-flex" *ngIf="stats.CANCELED">
-        <span>Canceled</span>
-        <b [textContent]="stats.CANCELED"></b>
+      <li class="dashboard-quotes__list-item" *ngIf="stats.CANCELED">
+        <span style="background-color: #052e6b" class="dashboard-quotes__list-item-box"></span>
+        <span class="dashboard-quotes__list-item-label">Canceled</span>
+        <span class="dashboard-quotes__list-item-value" [textContent]="stats.CANCELED"></span>
        </li>
-      <li class="manage-fully d-flex" *ngIf="stats.EXPIRED">
-        <span>Expired</span>
-        <b [textContent]="stats.EXPIRED"></b>
-      </li>  
-      <li class="manage-fully d-flex" *ngIf="stats.INVOICED">
-        <span>Invoiced</span>
-        <b [textContent]="stats.INVOICED"></b>
+      <li class="dashboard-quotes__list-item" *ngIf="stats.EXPIRED">
+        <span style="background-color: #16a4fa" class="dashboard-quotes__list-item-box"></span>
+        <span class="dashboard-quotes__list-item-label">Expired</span>
+        <span class="dashboard-quotes__list-item-value" [textContent]="stats.EXPIRED"></span>
       </li>
-      
-      <li class="manage-fully d-flex" *ngIf="stats.READ">
-        <span>Read</span>
-        <b [textContent]="stats.READ"></b>
+      <li class="dashboard-quotes__list-item" *ngIf="stats.INVOICED">
+        <span style="background-color: #cdecff" class="dashboard-quotes__list-item-box"></span>
+        <span class="dashboard-quotes__list-item-label">Invoiced</span>
+        <span class="dashboard-quotes__list-item-value" [textContent]="stats.INVOICED"></span>
       </li>
-      <li class="manage-fully d-flex" *ngIf="stats.SAVED">
-        <span>Draft</span>
-        <b [textContent]="stats.SAVED"></b>
-      </li>
-      <li class="manage-fully d-flex" *ngIf="stats.TICKETED">
-        <span>Ticketed</span>
-        <b [textContent]="stats.TICKETED"></b>
-      </li>
-      <li class="manage-fully d-flex" *ngIf="stats.UNREAD">
-        <span>Unread</span>
-        <b [textContent]="stats.UNREAD"></b>
-      </li>
-
- 
   </ul>
-  
-  
- 
 
- 
+  <ul class="dashboard-quotes__list d-flex">
+    <li class="dashboard-quotes__list-item" *ngIf="stats.READ">
+      <span style="background-color: #ffb937" class="dashboard-quotes__list-item-box"></span>
+      <span class="dashboard-quotes__list-item-label">Read</span>
+      <span class="dashboard-quotes__list-item-value" [textContent]="stats.READ"></span>
+    </li>
+    <li class="dashboard-quotes__list-item" *ngIf="stats.SAVED">
+      <span style="background-color: #2ec866" class="dashboard-quotes__list-item-box"></span>
+      <span class="dashboard-quotes__list-item-label">Draft</span>
+      <span class="dashboard-quotes__list-item-value" [textContent]="stats.SAVED"></span>
+    </li>
+    <li class="dashboard-quotes__list-item" *ngIf="stats.TICKETED">
+      <span style="background-color: #7c77cb" class="dashboard-quotes__list-item-box"></span>
+      <span class="dashboard-quotes__list-item-label">Ticketed</span>
+      <span class="dashboard-quotes__list-item-value" [textContent]="stats.TICKETED"></span>
+    </li>
+    <li class="dashboard-quotes__list-item" *ngIf="stats.UNREAD">
+      <span style="background-color: #ff5263" class="dashboard-quotes__list-item-box"></span>
+      <span class="dashboard-quotes__list-item-label">Unread</span>
+      <span class="dashboard-quotes__list-item-value" [textContent]="stats.UNREAD"></span>
+    </li>
+  </ul>
+  </div>
+
+
+
+
+
+
 </div>

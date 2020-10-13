@@ -18,8 +18,14 @@ export class ContractsDashboardComponent implements OnInit {
     this.chartOptions = {
       chart: {
         type: 'pieChart',
-        height: 250,
-        width: 250,
+        height: 180,
+        width: 180,
+        margin: {
+          top: -5,
+          right: -5,
+          bottom: -5,
+          left: -5
+        },
         donut: true,
         x: (d: any) => { return d.label; },
         y: (d: any) => { return d.value; },
@@ -27,7 +33,7 @@ export class ContractsDashboardComponent implements OnInit {
         color: (d: any, i: any) => {
           return this.chartColors[i]
         },
-        showLegend: true,
+        showLegend: false,
         duration: 500,
         legend: {
           margin: {

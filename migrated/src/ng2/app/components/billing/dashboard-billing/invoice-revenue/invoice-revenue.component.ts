@@ -19,7 +19,7 @@ export class InvoiceRevenueComponent implements OnInit {
   chartOptions: any;
   chartColors = ["#0646a4", "#00ccff", '#2bc7c6'];
   data: any;
-   
+
   constructor(private companiesStateService: CompaniesStateService,
     private reportsService: ReportsService,
     public cd: ChangeDetectorRef,
@@ -29,8 +29,14 @@ export class InvoiceRevenueComponent implements OnInit {
     this.chartOptions = {
       chart: {
         type: 'pieChart',
-        height: 250,
-        width: 250,
+        height: 180,
+        width: 180,
+        margin: {
+          top: -5,
+          right: -5,
+          bottom: -5,
+          left: -5
+        },
         donut: true,
         x: (d: any) => { return d.label; },
         y: (d: any) => { return d.value; },
@@ -38,13 +44,13 @@ export class InvoiceRevenueComponent implements OnInit {
         color: (d: any, i: any) => {
           return this.chartColors[i]
         },
-        showLegend: true,
+        showLegend: false,
         duration: 500,
         legend: {
           margin: {
             top: 0,
             right: -100,
-            bottom: 0,
+            bottom: 50,
             left: -100
           }
         },
@@ -66,13 +72,13 @@ export class InvoiceRevenueComponent implements OnInit {
       }
     ];
     this.invoiceRevenue.companyId = this.companiesStateService.getCurrentCompany().id;
-    
+
       this.invoiceRevenue.startDate = moment(this.accountingStartDate).format('YYYY-MM-DD');
       this.invoiceRevenue.endDate = moment(new Date()).format('YYYY-MM-DD');
       this.datesDp.setStartDate(new Date(this.accountingStartDate));
       this.datesDp.setEndDate(new Date());
       this.getInvoiceRevenue();
-    
+
   }
   getInvoiceRevenue() {
     this.dashboardBillingService.getInvoiceRevenue(this.invoiceRevenue.getDataForRequest()).subscribe(data => {

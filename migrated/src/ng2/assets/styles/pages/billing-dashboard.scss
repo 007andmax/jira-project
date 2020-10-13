@@ -7,8 +7,8 @@
     margin: 0 auto;
     padding: 36px 0;
   }
- 
- 
+
+
   app-dashboard-total-sales,
   app-dashboard-unpaid-invoices,
   app-dashboard-unbilled-amount,
@@ -62,8 +62,8 @@
     &__chart-content {
       width: 100%;
       position: relative;
-      padding-top: 28px;
-      padding-bottom: 30px;
+      padding-top: 21px;
+      padding-bottom: 21px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -292,6 +292,66 @@
       width: calc(100% - 42px);
     }
   }
+
+  .dashboard-quotes {
+    padding: 16px 24px;
+    width: 33.33%;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    background-color: #ffffff;
+    &__header-title {
+      font-family: Graphik-Medium, sans-serif;
+      font-size: 26px;
+      line-height: 1.31;
+      letter-spacing: -0.5px;
+      color: #364656;
+    }
+    &__header-subtitle {
+      font-size: 12px;
+      line-height: 1.33;
+      color: #9ca5b6;
+    }
+    &__progress-bar {
+      height: 10px;
+      border-radius: 5px;
+      overflow: hidden;
+      display: flex;
+      margin-bottom: 32px;
+    }
+    &__progress-bar-item {
+      height: 100%;
+    }
+    &__list {
+      list-style: none;
+      padding: 0;
+      width: 50%;
+    }
+    &__list-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 0px;
+      border-bottom: 1px solid #edf0f2;
+    }
+    &__list-item-box {
+      width: 10px;
+      height: 10px;
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      margin-right: 16px;
+    }
+    &__list-item-label {
+      min-width: 80px;
+      font-size: 12px;
+      line-height: 1.33;
+      color: #4f5f79;
+    }
+    &__list-item-value {
+      font-size: 12px;
+      line-height: 1.33;
+      color: #364656;
+      font-family: Graphik-Medium, sans-serif;
+    }
+  }
 }
-
-
