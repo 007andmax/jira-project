@@ -1,11 +1,5 @@
 <div class="date-picker" (clickOutside)="hideDatePicker()">
- <!-- <input type="text"
-         placeholder="Filter by date"
-         (click)="toggleDatePicker()"
-         [(ngModel)]="selectedDateModel"
-         [ngClass]="{'disabled': isDisabled}"
-         [disabled]="isDisabled"
-         class="pointer">-->
+  
          <p  class="pointer" [textContent]="getSelectedInterval()"  (click)="toggleDatePicker()"></p>
   <i *ngIf="selectedDateModel"
      class="icn-sm icn-remove-old"
@@ -29,11 +23,10 @@
       <div class="col-md-12 p-0 mb-5 d-f">
         <button class="btn-new btn-primary-white" (click)="selectCurrentMonth();">this month</button>
         <button class="btn-new btn-primary-white" (click)="selectLastMonth();">last month</button>
-      </div>
-      <div class="col-md-12 p-0 d-f">
         <button class="btn-new btn-primary-white" (click)="selectLast90Days();">90 day</button>
         <button class="btn-new btn-primary-white" (click)="selectYearToDate();">year to date</button>
       </div>
+      
     </div>
   </div>
 </div>
