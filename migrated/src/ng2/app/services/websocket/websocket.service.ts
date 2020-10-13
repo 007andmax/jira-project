@@ -58,8 +58,7 @@ export class WebsocketService {
     private billableRealTimeService: BillableRealTimeService,
     private invoiceRealTimeService: InvoiceRealTimeService,
     private defaultServicesRealTimeService: DefaultServicesRealTimeService,
-    private contractsRealTimeService: ContractsRealTimeService
-    private paymentsRealTimeService: PaymentsRealTimeService,
+    private contractsRealTimeService: ContractsRealTimeService,
     private shellRealTimeService: ShellRealTimeService
 
   ) {
