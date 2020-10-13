@@ -354,6 +354,7 @@ import { ContractsDashboardComponent } from './components/billing/dashboard-bill
 import { TopDashboardComponent } from './components/billing/dashboard-billing/top-dashboard/top-dashboard.component';
 import { TopProductDashboardComponent } from './components/billing/dashboard-billing/top-product-dashboard/top-product-dashboard.component';
 import { DashboardStatsComponent } from './components/billing/dashboard-billing/dashboard-stats/dashboard-stats.component';
+import { DashboardQuotesComponent } from './components/billing/dashboard-billing/dashboard-quotes/dashboard-quotes.component';
 /**
  * declare angular
  */
@@ -898,7 +899,8 @@ angular.module('quicktech')
     ContractsDashboardComponent,
     TopDashboardComponent,
     TopProductDashboardComponent,
-    DashboardStatsComponent
+    DashboardStatsComponent,
+    DashboardQuotesComponent
    
   ],
   imports: [

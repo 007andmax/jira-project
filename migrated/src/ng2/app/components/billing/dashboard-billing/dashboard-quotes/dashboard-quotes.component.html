@@ -1,0 +1,28 @@
+ 
+    <div class="cmp-board-revenue cmn-box d-flex">
+       <div class="cmp-board-title-wrap d-flex">
+        <h2>Invoice Revenue</h2> 
+       
+       </div>
+        <div class="donalt-chart-wrapper">
+          <nvd3 [options]="chartOptions" [data]="data"></nvd3>
+            <div class="chart-content">
+                <div class="h1">$6,820</div>
+                <span>Total Revenue</span>
+            </div>
+        </div>
+        <ul class=" list-unstyled chart-status">
+            <li class="invoice">
+                <span class="title">Invoiced</span>
+                <span class="title-data">$4200</span>
+            </li>
+            <li class="collect">
+              <span class="title">Collected</span>
+              <span class="title-data">$1269</span>
+           </li>
+            <li class="out-standing">
+              <span class="title">Outstanding</span>
+              <span class="title-data">$251</span>
+            </li>
+        </ul>
+    </div>
