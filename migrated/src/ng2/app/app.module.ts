@@ -344,10 +344,6 @@ import { ContractsAsideProductServicePreviewComponent } from './components/billi
 import { ContractsAsideProductServiceEditComponent } from './components/billing/contracts/contracts-edit/contracts-aside-product-service-edit/contracts-aside-product-service-edit.component';
 import { ContractsAsideOtherServiceEditComponent } from './components/billing/contracts/contracts-edit/contracts-aside-product-service-edit/contracts-aside-other-service-edit/contracts-aside-other-service-edit.component';
 import { DashboardBillingComponent } from './components/billing/dashboard-billing/dashboard-billing.component';
-import { DashboardTotalSalesComponent } from './components/billing/dashboard-billing/dashboard-total-sales/dashboard-total-sales.component';
-import { DashboardUnpaidInvoicesComponent } from './components/billing/dashboard-billing/dashboard-unpaid-invoices/dashboard-unpaid-invoices.component';
-import { DashboardUnbilledAmountComponent } from './components/billing/dashboard-billing/dashboard-unbilled-amount/dashboard-unbilled-amount.component';
-import { DashboardTotalQuotesComponent } from './components/billing/dashboard-billing/dashboard-total-quotes/dashboard-total-quotes.component';
  
  
 import 'd3';
@@ -357,6 +353,7 @@ import { MultiDatepickerDashboardComponent } from './components/billing/dashboar
 import { ContractsDashboardComponent } from './components/billing/dashboard-billing/contracts-dashboard/contracts-dashboard.component';
 import { TopDashboardComponent } from './components/billing/dashboard-billing/top-dashboard/top-dashboard.component';
 import { TopProductDashboardComponent } from './components/billing/dashboard-billing/top-product-dashboard/top-product-dashboard.component';
+import { DashboardStatsComponent } from './components/billing/dashboard-billing/dashboard-stats/dashboard-stats.component';
 /**
  * declare angular
  */
@@ -892,15 +889,16 @@ angular.module('quicktech')
     
     ContractsAsideOtherServiceEditComponent,
     DashboardBillingComponent,
-    DashboardTotalSalesComponent,
-    DashboardUnpaidInvoicesComponent,
-    DashboardUnbilledAmountComponent,
-    DashboardTotalQuotesComponent,
+    
+   
+    
+    
     InvoiceRevenueComponent,
     MultiDatepickerDashboardComponent,
     ContractsDashboardComponent,
     TopDashboardComponent,
-    TopProductDashboardComponent
+    TopProductDashboardComponent,
+    DashboardStatsComponent
    
   ],
   imports: [

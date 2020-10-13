@@ -29,7 +29,8 @@ export class InvoiceRevenueComponent implements OnInit {
     this.chartOptions = {
       chart: {
         type: 'pieChart',
-        height: 200,
+        height: 250,
+        width: 250,
         donut: true,
         x: (d: any) => { return d.label; },
         y: (d: any) => { return d.value; },
@@ -37,14 +38,14 @@ export class InvoiceRevenueComponent implements OnInit {
         color: (d: any, i: any) => {
           return this.chartColors[i]
         },
-        showLegend: false,
+        showLegend: true,
         duration: 500,
         legend: {
           margin: {
             top: 0,
-            right: 0,
+            right: -100,
             bottom: 0,
-            left: 0
+            left: -100
           }
         },
         donutRatio: '0.68'
