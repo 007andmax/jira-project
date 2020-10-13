@@ -8,6 +8,10 @@ import { HardwareService } from './_services/hardware.service';
 import { DeviceDetailService } from './_services/device_detail.service';
 import { first } from 'rxjs/operators';
 import { v4 as uuidv4 } from 'uuid';
+import { WebsocketService } from 'src/ng2/app/services/websocket/websocket.service';
+import { ShellStateService } from 'src/ng2/app/states/shell/shell-state.service';
+import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
+import { TerminalService } from './_services/terminal.service';
 declare var $:any;
 @Component({
   selector: 'app-root',
@@ -27,11 +31,18 @@ export class DeviceComponent implements OnInit {
   deviceType = '';
   deviceImg = '/html/ng2/assets/img/device/device.svg';
   closeResult = '';
+  play_pause_path = '/html/ng2/assets/img/device/pause.svg';
+  playTimer = true;
+  interval;
   constructor(private modalService: NgbModal, private commonHttpServices: CommonHttpServices,
     private commonServices: CommonServices, private toastr: ToastrService,
     private hardwareService: HardwareService,
     private deviceDetailService: DeviceDetailService, 
-    private remoteControlService: RemoteControlService) {}
+    private remoteControlService: RemoteControlService,
+    private socketService: WebsocketService,
+    private usersStateService: UsersStateService,
+    private shellStateService: ShellStateService,
+    private terminalService: TerminalService) {}
   openModal(template) {
     if (this.deviceDetail.online === true) {
       this.modalService.open(template, {ariaLabelledBy: 'modal-basic-title' , centered:true}).result.then((result) => {
@@ -61,6 +72,9 @@ export class DeviceComponent implements OnInit {
   }
   
   ngOnInit(): void {
+    this.usersStateService.onInit();
+    this.shellStateService.onInit();
+    this.socketService.initializeWebSocketConnection();
     localStorage.setItem('uuid', uuidv4());
     this.deviceType = localStorage.getItem('type');
     if (this.deviceType === 'printer') {
@@ -71,7 +85,7 @@ export class DeviceComponent implements OnInit {
     $('body').addClass('ng7-device');
     this.getCurrentCompany();
     
-    setInterval(() => {
+    this.interval = setInterval(() => {
       this.updateTime();
     },1000);
   }
@@ -183,9 +197,7 @@ export class DeviceComponent implements OnInit {
           this.getConstant(resp.sessionId);
         } else {
           this.getConstant(resp.sessionId);
-          
         }
-        
       },
       error => {
         this.toastr.error('Something went wrong please try again.');
@@ -198,5 +210,53 @@ export class DeviceComponent implements OnInit {
       return '0' + value;
     }
     return value;
+  }
+
+  timerControl() {
+    this.playTimer = !this.playTimer
+    if (this.interval && !this.playTimer) {
+      clearInterval(this.interval);
+      this.play_pause_path = '/html/ng2/assets/img/device/play.svg';
+    } else {
+      this.play_pause_path = '/html/ng2/assets/img/device/pause.svg';
+      this.interval = setInterval(() => {
+        this.updateTime();
+      },1000);
+    }
+  }
+
+  restartTimerControl() {
+    clearInterval(this.interval);
+    this.totalSeconds = 0;
+    this.totalMinutes = 0;
+    this.totalHours = 0;
+    this.interval = setInterval(() => {
+      this.updateTime();
+    }, 1000);
+  }
+
+  sendCommand(command) {
+    if (JSON.parse(localStorage.getItem('deviceDetail')).online === true) {
+      let data = {
+        "companyId": localStorage.getItem('company_id'),
+        "agentId": localStorage.getItem('agentId'),
+        "sessionId": localStorage.getItem('uuid'),
+        "scriptType": 'cmd', // 'powershell'
+        "script": 'shutdown /' + command,
+        "file": false,
+        "keepOpen": true
+      }
+  
+      this.terminalService.sendCommand(data)
+      .pipe(first())
+      .subscribe(resp => {
+      },
+      error => {
+        const statusError = error;
+      });
+    } else {
+      this.toastr.error('The device is offline');
+    }
+    
   }
 }

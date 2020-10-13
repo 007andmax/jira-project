@@ -20,6 +20,7 @@ import { PaymentsRealTimeService } from '../../states/payments/payments-real-tim
 import { DefaultServicesRealTimeService } from '../../states/default-services/default-services-real-time.service';
 import { ContractsRealTimeService } from '../../states/contracts/contracts-real-time.service';
  
+import { ShellRealTimeService } from '../../states/shell/shell-real-time.service';
 
 /**
  * Websocket service to work with api
@@ -58,6 +59,9 @@ export class WebsocketService {
     private invoiceRealTimeService: InvoiceRealTimeService,
     private defaultServicesRealTimeService: DefaultServicesRealTimeService,
     private contractsRealTimeService: ContractsRealTimeService
+    private paymentsRealTimeService: PaymentsRealTimeService,
+    private shellRealTimeService: ShellRealTimeService
+
   ) {
   }
 
@@ -307,7 +311,8 @@ export class WebsocketService {
     setTimeout(() => {
       this.stompClient.subscribe(`/user/watch/cmdShellOutput`, (message) => {
         var newChange = JSON.parse(message.body);
-        console.log("newChange", newChange);
+        // console.log("newChange", newChange);
+        this.shellRealTimeService.handleRealTimeChanges(newChange);
       });
 
     }, 3000);

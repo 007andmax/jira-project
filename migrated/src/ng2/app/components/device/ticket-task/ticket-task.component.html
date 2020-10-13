@@ -11,7 +11,7 @@
           <ng-template ngbTabContent>
             <div class="cmn-tbs-content device-tickets">
                 <ul class="list-unstyled">
-                    <li *ngFor="let ticket of ticketList">
+                    <li *ngFor="let ticket of ticketList" (click)="editTicket(ticket.id)" class="pointer">
                       <div class="create-by"><span class="id">Tkt# {{ticket.number}}</span><span class="name">{{ticket.name}}</span></div>
                       <h5>{{ticket.subject}}</h5>
                       <div class="task-status-row">
@@ -621,3 +621,4 @@
   </div> 
 </div>
 </div>
+<app-ticket-edit-aside></app-ticket-edit-aside>

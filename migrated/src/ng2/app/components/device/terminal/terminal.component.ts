@@ -1,28 +1,40 @@
-import { Component, OnInit ,ViewEncapsulation, ViewChild, ElementRef  } from '@angular/core';
+import { Component, OnInit ,ViewEncapsulation, ViewChild, ElementRef, ChangeDetectorRef  } from '@angular/core';
 import { TerminalService } from '../_services/terminal.service';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { isArray } from 'util';
+import { Subscription } from 'rxjs';
+import { WebsocketService } from 'src/ng2/app/services/websocket/websocket.service';
+import { CONFIGCONSTANTS } from '../config/app-constants';
+import { UserListService } from '../../users/services/user-list.service';
+import { CompaniesRealTimeService } from 'src/ng2/app/states/company/companies-real-time.service';
+import { ShellStateService } from 'src/ng2/app/states/shell/shell-state.service';
 
 @Component({
   selector: 'app-terminal',
   templateUrl: './terminal.component.html',
   styleUrls: ['./terminal.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  providers: [UserListService]
 })
 export class TerminalComponent implements OnInit {
   create = false;
   closeResult = '';
   submitted = false;
   loading = false;
+  his = '';
+  sub: Subscription = new Subscription();
   @ViewChild('commandFrm') form: any;
   commandModal = {
     title: '',
     command: '',
     category: '',
     categoryId: '',
-    id: ''
+    id: '',
+    type: '',
+    typeName: '',
+    description: ''
   };
   myScriptModal = {
     category: '',
@@ -39,8 +51,13 @@ export class TerminalComponent implements OnInit {
     type: '',
     command: '',
     default: false,
-    id: ''
+    id: '',
+    category: '',
+    categoryId: '', 
+    typeName: '',
+    description: ''
   };
+  editCmd = '';
   lineNumber = [1];
   lineNumberDetail = [1];
   deleteId = '';
@@ -58,25 +75,41 @@ export class TerminalComponent implements OnInit {
   scriptDetail = false;
   sessionId = '';
   finalCommand = '';
-  splitCommand = [];
+  splitCommand = ["C:\\>"];
+  scriptType = 'cmd';
+  showDescription = false;
+  terminalHeight = 0;
+  cmdHeight = 0;
   @ViewChild('editor') editorElement:ElementRef;
   code = '';
   config = {
     lineNumbers: true,
     lineWrapping: true,
   };
+  terminalHit = false;
+  DateTimeHistoryFormat = CONFIGCONSTANTS.DateTimeHistoryFormat;
   constructor(private terminalService: TerminalService,
     private toastr: ToastrService,
-    private modalService: NgbModal  
+    private modalService: NgbModal,
+    private socketService: WebsocketService,
+    private userListService: UserListService,
+    private companiesRealTimeService: CompaniesRealTimeService,
+    private shellStateService: ShellStateService,
+    public cd: ChangeDetectorRef,
     ) { }
 
   ngOnInit() {
+    
+    // this.socketService.initializeWebSocketConnection();
     this.getCommandList();
     this.getCmdCategoryRead();
     this.getHistory();
+    // this.socketService.subsribeToCmdShellOutput();
     $('#cmd textarea').scroll(function(){
       $('#cmd_line').scrollTop($('#cmd textarea').scrollTop());
     });
+    this.terminalHeight = document.getElementById("terminal").offsetHeight;
+    this.cmdHeight = document.getElementById("editCmd").offsetHeight;
   }
 
   getCommandList () {
@@ -113,6 +146,26 @@ export class TerminalComponent implements OnInit {
     this.terminalService.getHistory(localStorage.getItem('agentId'))
     .pipe(first())
     .subscribe(data => {
+      if (Object.keys(data).length > 0) {
+      let obj = data[localStorage.getItem('agentId')]
+      this.his = obj;
+      let arr = obj.split(/\r*\n/);
+      let index = 0;
+      let arr1 = [];
+      
+      arr.forEach(element => {
+        if (Date.parse(element)) {
+          if (index !== 0) {
+            this.historyList.push(arr1);
+            arr1 = [];
+            index += 1;
+          } else {
+            index += 1;
+          }
+        }
+        arr1.push(element);
+      });
+    }
     },
     error => {
       const statusError = error;
@@ -130,7 +183,10 @@ export class TerminalComponent implements OnInit {
       command: '',
       category: '',
       categoryId: '',
-      id: ''
+      id: '',
+      type: '',
+      typeName: '',
+      description: ''
     };
     this.command = '';
   }
@@ -234,7 +290,9 @@ export class TerminalComponent implements OnInit {
       title: this.commandModal.title,
       categoryId: this.commandModal.categoryId !== undefined ? this.commandModal.categoryId : this.cmdCategoryReadList.filter(val => val.name === this.commandModal.category)[0].id,
       command: this.commandModal.command,
-      id: this.commandModal.id
+      id: this.commandModal.id,
+      type: this.commandModal.type,
+      description: this.commandModal.description
     }
     if (this.commandModal.id == '') {
       delete data.id;
@@ -271,17 +329,28 @@ export class TerminalComponent implements OnInit {
     
   }
 
-  openEditCommand(data: any) {
+  openEditCommand(data: any, flag: string) {
     this.commandModal.title = data.title;
+    this.commandModal.type = data.type;
+    this.commandModal.description = data.description;
     this.commandModal.command = data.command;
     this.lineNumber = [];
     for (let index = 1; index <= data.command.split(/\r*\n/).length; index++) {
       this.lineNumber.push(index);
     }
-    this.commandModal.id = data.id;
-    this.commandModal.categoryId = data.cateogryId;
+    if (flag === 'copy') {
+      this.commandModal.id = '';
+    } else {
+      this.commandModal.id = data.id;
+    }
+    this.commandModal.categoryId = data.categoryId;
+    if(this.commandModal.type === 'CMD') {
+      this.commandModal.typeName = 'Command Line'
+    } else if(this.commandModal.type === 'POWERSHELL') {
+      this.commandModal.typeName = 'Powershell'
+    }
     let res = this.cmdCategoryReadList.filter(x => x.id == data.categoryId);
-    this.commandModal.category = res[0].name;
+    this.commandModal.category = res.length > 0 ? res[0].name : '';
     this.create = !this.create;
   }
 
@@ -351,6 +420,9 @@ export class TerminalComponent implements OnInit {
     if (category !== undefined) {
       this.myScriptModal.category = category.name;
       this.myScriptModal.categoryId = category.id;
+    } else {
+      this.myScriptModal.category = '';
+      this.myScriptModal.categoryId = '';
     }
     if (this.myScriptModal.search === '' && this.myScriptModal.category === '') {
       this.myScriptListFilter = this.myScriptList;
@@ -367,6 +439,9 @@ export class TerminalComponent implements OnInit {
     if (category !== undefined) {
       this.sharedScriptModal.category = category.name;
       this.sharedScriptModal.categoryId = category.id;
+    } else {
+      this.sharedScriptModal.category = '';
+      this.sharedScriptModal.categoryId = '';
     }
     if (this.sharedScriptModal.search === '' && this.sharedScriptModal.category === '') {
       this.sharedScriptListFilter = this.sharedScriptList;
@@ -420,42 +495,72 @@ export class TerminalComponent implements OnInit {
   }
 
   viewScriptDetail(data) {
-    debugger;
     this.scriptDetail = !this.scriptDetail;
+    this.showDescription = false;
     this.scriptDetailModal = data;
     this.lineNumberDetail = [];
     for (let index = 1; index <= data.command.split(/\r*\n/).length; index++) {
       this.lineNumberDetail.push(index);
     }
+    this.scriptDetailModal.id = data.id;
+    this.scriptDetailModal.categoryId = data.categoryId;
+    if(this.scriptDetailModal.type === 'CMD') {
+      this.scriptDetailModal.typeName = 'Command Line'
+    } else if(this.scriptDetailModal.type === 'POWERSHELL') {
+      this.scriptDetailModal.typeName = 'Powershell'
+    }
+    let res = this.cmdCategoryReadList.filter(x => x.id == data.categoryId);
+    if (res.length > 0) {
+      this.scriptDetailModal.category = res[0].name;
+    } else {
+      this.scriptDetailModal.category = '';
+    }
+    
   }
 
-  copyToTerminal(cmd) {
+  copyToTerminal(cmd, type, file) {
     if (JSON.parse(localStorage.getItem('deviceDetail')).online === true) {
       this.finalCommand = cmd;
-      this.splitCommand = cmd.split(/\r*\n/);
+      // let arr = cmd.split(/\r*\n/)
+      // this.splitCommand[this.splitCommand.length - 1] = this.splitCommand[this.splitCommand.length - 1] + arr[0];
+      // if (arr.splice(0, 1).length > 0) {
+      //   this.splitCommand = this.splitCommand.concat(arr.splice(0, 1));
+      // }
       this.sessionId = localStorage.getItem('uuid');
-      this.sendCommand();
+      this.sendCommand(type, file);
     } else {
       this.toastr.error('The device is offline');
     }
     
   }
 
-  sendCommand() {
+  sendCommand(type, file) {
     let data = {
       "companyId": localStorage.getItem('company_id'),
       "agentId": localStorage.getItem('agentId'),
       "sessionId": this.sessionId,
-      "scriptType": "cmd", // 'powershell'
+      "scriptType": type === '' ? this.scriptType.toLowerCase() : type.toLowerCase(), // 'powershell'
       "script": this.finalCommand,
-      "file": this.splitCommand.length > 1 ? true : false,
+      "file": file,
       "keepOpen": true
     }
 
     this.terminalService.sendCommand(data)
     .pipe(first())
     .subscribe(resp => {
-      debugger;
+      if (!this.terminalHit) {
+        let getCmdOutput = this.shellStateService.getCmdOutput().subscribe((data) => {
+          let arr = data.data.output.split(/\r*\n/)
+          let arr1 = this.splitCommand.concat(arr);
+          this.splitCommand = arr1;
+          this.cd.detectChanges();
+          setTimeout(() => {
+            $('#terminal').scrollTop($('#terminal')[0].scrollHeight);
+          }, 50);
+        })
+        this.sub.add(getCmdOutput);
+        this.terminalHit = true;
+      }
     },
     error => {
       const statusError = error;
@@ -474,5 +579,60 @@ export class TerminalComponent implements OnInit {
     });
   }
 
+  switchTerminal(type) {
+    this.scriptType = type;
+    if (this.terminalHit === true) {
+      this.splitCommand = [this.splitCommand[this.splitCommand.length - 1]];
+    } else {
+      this.splitCommand = ["C:\\>"];
+    }
+  }
 
+  updateMyScript() {
+    let id = '';
+    let arr = this.cmdCategoryReadList.filter(val => val.name === this.scriptDetailModal.category);
+    if (arr.length > 0) {
+      id = arr[0].id;
+    }
+    if (id !== '') {
+      let data = {
+        title: this.scriptDetailModal.title,
+        categoryId: this.scriptDetailModal.categoryId !== undefined ? this.scriptDetailModal.categoryId : id,
+        command: this.scriptDetailModal.command,
+        id: this.scriptDetailModal.id,
+        type: this.scriptDetailModal.type,
+        description: this.scriptDetailModal.description
+      }
+      this.terminalService.updateCommand(data)
+      .pipe(first())
+      .subscribe(resp => {
+        this.loading = false;
+        if (resp.id !== '') {
+          this.toastr.success('Command Updated Successfully');
+          this.scriptDetail=!this.scriptDetail;
+          this.getCommandList();
+        }
+      },
+      error => {
+        const statusError = error;
+        this.loading = false;
+      });
+    }
+  }
+  setHeight(flag) {
+    if(flag === 'enter' && document.getElementById("editCmd").offsetHeight < 150 ) {
+      document.getElementById("terminal").style.height = (document.getElementById("terminal").offsetHeight - 10) + "px";
+      document.getElementById("editCmd").style.height = (document.getElementById("editCmd").offsetHeight + 10) + "px";
+    } else if(flag === 'backspace'){
+      let arr = this.editCmd.split(/\r*\n/)
+      if (arr.length > 1 && document.getElementById("editCmd").offsetHeight > 120) {
+        document.getElementById("terminal").style.height = (document.getElementById("terminal").offsetHeight + 10) + "px";
+        document.getElementById("editCmd").style.height = (document.getElementById("editCmd").offsetHeight - 10) + "px";
+      } else {
+        document.getElementById("terminal").style.height = this.terminalHeight + "px";
+        document.getElementById("editCmd").style.height = this.cmdHeight + "px";
+      }
+    }
+    
+  }
 }
