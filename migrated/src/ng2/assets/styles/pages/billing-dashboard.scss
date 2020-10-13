@@ -7,7 +7,8 @@
     margin: 0 auto;
     padding: 36px 0;
   }
-
+ 
+ 
   app-dashboard-total-sales,
   app-dashboard-unpaid-invoices,
   app-dashboard-unbilled-amount,
@@ -15,6 +16,7 @@
   app-invoice-revenue,
   app-contracts-dashboard,
   app-dashboard-quotes,
+  app-dashboard-sales-analytics,
   app-dashboard-stats {
     display: contents;
   }

@@ -355,6 +355,7 @@ import { TopDashboardComponent } from './components/billing/dashboard-billing/to
 import { TopProductDashboardComponent } from './components/billing/dashboard-billing/top-product-dashboard/top-product-dashboard.component';
 import { DashboardStatsComponent } from './components/billing/dashboard-billing/dashboard-stats/dashboard-stats.component';
 import { DashboardQuotesComponent } from './components/billing/dashboard-billing/dashboard-quotes/dashboard-quotes.component';
+import { DashboardSalesAnalyticsComponent } from './components/billing/dashboard-billing/dashboard-sales-analytics/dashboard-sales-analytics.component';
 /**
  * declare angular
  */
@@ -900,7 +901,8 @@ angular.module('quicktech')
     TopDashboardComponent,
     TopProductDashboardComponent,
     DashboardStatsComponent,
-    DashboardQuotesComponent
+    DashboardQuotesComponent,
+    DashboardSalesAnalyticsComponent
    
   ],
   imports: [
