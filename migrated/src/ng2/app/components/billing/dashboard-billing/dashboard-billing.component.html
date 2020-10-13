@@ -20,8 +20,8 @@
     <div class="qt-df qt-jc-sb qt-mb-16">
 <app-invoice-revenue [accountingStartDate]="accountingStartDate" ></app-invoice-revenue>
 
-<!-- remove this after create middle block -->
-<div class="contract-dashboard-chart-card"></div>
+ 
+<app-dashboard-quotes [stats]="dashboard.saleQuoteCounters"></app-dashboard-quotes>
 
 <app-contracts-dashboard #contractsDb [contractsDashboard]="contractsDashboard"></app-contracts-dashboard>
     </div>
