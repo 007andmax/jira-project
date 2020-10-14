@@ -10,7 +10,7 @@ import { CONFIGCONSTANTS } from '../config/app-constants';
 import { UserListService } from '../../users/services/user-list.service';
 import { CompaniesRealTimeService } from 'src/ng2/app/states/company/companies-real-time.service';
 import { ShellStateService } from 'src/ng2/app/states/shell/shell-state.service';
-import { command } from './../class/device';
+import { command, script, commandModal, scriptModal } from './../class/device';
 
 @Component({
   selector: 'app-terminal',
@@ -27,7 +27,7 @@ export class TerminalComponent implements OnInit {
   his = '';
   sub: Subscription = new Subscription();
   @ViewChild('commandFrm') form: any;
-  commandModal = {
+  commandModal: commandModal = {
     title: '',
     command: '',
     category: '',
@@ -37,17 +37,17 @@ export class TerminalComponent implements OnInit {
     typeName: '',
     description: ''
   };
-  myScriptModal = {
+  myScriptModal: scriptModal = {
     category: '',
     categoryId: '',
     search: ''
   };
-  sharedScriptModal = {
+  sharedScriptModal: scriptModal = {
     category: '',
     categoryId: '',
     search: ''
   };
-  scriptDetailModal = {
+  scriptDetailModal: script = {
     title: '',
     type: '',
     command: '',
@@ -677,7 +677,7 @@ export class TerminalComponent implements OnInit {
       categoryId: '', 
       typeName: '',
       description: ''
-    }
+    };
   }
 
   setScriptDetail(name, id) {
