@@ -6,9 +6,9 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./dashboard-stats.component.scss']
 })
 export class DashboardStatsComponent implements OnInit {
-@Input() class:string;
-@Input() total:number;
-@Input() title:string;
+  @Input() class: string;
+  @Input() total: number;
+  @Input() title: string;
   constructor() { }
 
   ngOnInit() {

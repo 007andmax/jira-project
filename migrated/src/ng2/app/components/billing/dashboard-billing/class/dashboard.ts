@@ -2,7 +2,7 @@ import { DashboardChartData } from './dashboard-chart-data';
 import { DashboardSaleQuoteCounters } from './dashboard-sale-quote-counters';
 
 export class Dashboard {
-    chartData: Array<DashboardChartData> = []
+    chartData: Array<DashboardChartData> = [];
     saleQuoteCounters: DashboardSaleQuoteCounters;
     saleQuotesPossibleRevenue: number;
     serviceAgreementCounters: {CURRENT: 2}

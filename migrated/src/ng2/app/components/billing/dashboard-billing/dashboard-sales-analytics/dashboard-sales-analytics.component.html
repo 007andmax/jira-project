@@ -1,10 +1,14 @@
-<div class="contract-dashboard-chart-card qt-mb-16">
+<div class="contract-dashboard-chart-card qt-mb-16" ngbDropdown>
   <div class="contract-dashboard-chart-card__header">
     <div class="contract-dashboard-chart-card__header-title">Invoice Revenue</div>
-
+    <p id="dropdown1" ngbDropdownToggle [textContent]="getSelectedType()"></p>
+    <div class="drop-down-list-type" ngbDropdownMenu aria-labelledby="dropdown1">
+      <ng-template ngFor let-item [ngForOf]="listType" let-i="index">
+        <button ngbDropdownItem [textContent]="item.title" (click)="selectType(item.value)"></button>
+      </ng-template>
+    </div>
   </div>
-
-  <div class="contract-dashboard-chart-card__chart-content">
-    <nvd3 class="sales-analytic" [options]="options" [data]="data" #nvd3></nvd3>
+    <div class="contract-dashboard-chart-card__chart-content">
+      <nvd3 #nvd3 class="sales-analytic" [options]="options" [data]="data" #nvd3></nvd3>
     </div>
-    </div>
+  </div>

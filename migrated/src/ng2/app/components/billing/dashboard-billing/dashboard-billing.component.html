@@ -17,7 +17,7 @@
 
     <!-- <app-dashboard-total-quotes [saleQuotesPossibleRevenue]="dashboard.saleQuotesPossibleRevenue"></app-dashboard-total-quotes>-->
     </div>
-    <app-dashboard-sales-analytics></app-dashboard-sales-analytics>
+    <app-dashboard-sales-analytics #dashboardStats (onSelectType)="getDashboard($event)" [chartData]="dashboard.chartData"></app-dashboard-sales-analytics>
     <div class="qt-df qt-jc-sb qt-mb-16">
 <app-invoice-revenue [accountingStartDate]="accountingStartDate" ></app-invoice-revenue>
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { DashboardBillingService } from 'src/ng2/app/services/dashboard-billing/dashboard-billing.service';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { Dashboard } from './class/dashboard';
@@ -8,6 +8,7 @@ import { ContractsDashboard } from './class/contracts-dashboard';
 import { ContractsDashboardComponent } from './contracts-dashboard/contracts-dashboard.component';
 import { ReportsService } from 'src/ng2/app/services/reports/reports.service';
 import { TopDashboard } from './class/top-dashboard';
+import { DashboardSalesAnalyticsComponent } from './dashboard-sales-analytics/dashboard-sales-analytics.component';
 
 @Component({
   selector: 'app-dashboard-billing',
@@ -16,6 +17,7 @@ import { TopDashboard } from './class/top-dashboard';
 })
 export class DashboardBillingComponent implements OnInit {
   @ViewChild('contractsDb') contractsDb: ContractsDashboardComponent;
+  @ViewChild('dashboardStats') dashboardStats: DashboardSalesAnalyticsComponent;
   accountingStartDate: string;
   dashboard: Dashboard;
   topDashboard: TopDashboard = new TopDashboard();
@@ -24,15 +26,20 @@ export class DashboardBillingComponent implements OnInit {
 
   constructor(private dashboardBillingService: DashboardBillingService,
     private reportsService: ReportsService,
+    public cd: ChangeDetectorRef,
     private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
-    this.dashboardBillingService.getDashboard("WEEKLY").subscribe(data => {
+    this.getAccountingStartDate();
+  }
+  getDashboard(type) {
+    this.dashboardBillingService.getDashboard(type).subscribe(data => {
       console.log("data", data);
       this.dashboard = data;
       this.contractsDashboard = new ContractsDashboard(this.dashboard.serviceAgreementCounters);
-      this.getAccountingStartDate();
-
+      this.showPreloader = false;
+      this.cd.detectChanges();
+      if (this.dashboardStats) this.dashboardStats.updateDataChart();
     });
   }
   getAccountingStartDate() {
@@ -46,7 +53,8 @@ export class DashboardBillingComponent implements OnInit {
   getTops() {
     this.dashboardBillingService.getTops(this.topDashboard.getDataForRequest()).subscribe(data => {
       this.topDashboard.setData(data);
-      this.showPreloader = false;
+      this.getDashboard("WEEKLY");
+
     })
   }
 
