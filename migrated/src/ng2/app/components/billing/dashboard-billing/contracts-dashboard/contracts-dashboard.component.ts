@@ -35,14 +35,7 @@ export class ContractsDashboardComponent implements OnInit {
         },
         showLegend: false,
         duration: 500,
-        legend: {
-          margin: {
-            top: 0,
-            right: -100,
-            bottom: 0,
-            left: -100
-          }
-        },
+        
         donutRatio: '0.68'
       }
     }

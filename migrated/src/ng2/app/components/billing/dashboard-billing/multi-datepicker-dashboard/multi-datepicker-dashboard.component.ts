@@ -1,7 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbCalendar, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { DateService } from 'src/ng2/app/services/date/date.service';
 import * as moment from "moment";
+ 
 @Component({
   selector: 'app-multi-datepicker-dashboard',
   templateUrl: './multi-datepicker-dashboard.component.html',
@@ -11,6 +12,7 @@ export class MultiDatepickerDashboardComponent implements OnInit {
 
   hoveredDate: NgbDate;
   fromDate: NgbDate;
+  @Input() accountingStartDate:string;
   toDate: NgbDate;
   public navigation = 'select';
   public showDatePicker = false;
@@ -26,7 +28,8 @@ export class MultiDatepickerDashboardComponent implements OnInit {
    */
   constructor(
     private calendar: NgbCalendar,
-    private dateService: DateService
+    private dateService: DateService,
+    public cd: ChangeDetectorRef,
   ) { }
 
   ngOnInit() { }
@@ -113,12 +116,13 @@ export class MultiDatepickerDashboardComponent implements OnInit {
    * Clear date picker date
    */
   public clearDate() {
+    this.fromDate = undefined;
+    this.toDate = undefined;
     this.selectedDate.next({
       start: '',
       end: ''
     });
-    this.fromDate = undefined;
-    this.toDate = undefined;
+   
     this.setSelectedDateModel('', '');
     this.hideDatePicker();
   }
@@ -179,6 +183,7 @@ export class MultiDatepickerDashboardComponent implements OnInit {
   }
   public setStartDate(data) {
     this.fromDate = new NgbDate(data.getFullYear(),data.getMonth() + 1,data.getDate());
+   
   }
   public setEndDate(data) {
     this.toDate = new NgbDate(data.getFullYear(),data.getMonth() + 1,data.getDate());

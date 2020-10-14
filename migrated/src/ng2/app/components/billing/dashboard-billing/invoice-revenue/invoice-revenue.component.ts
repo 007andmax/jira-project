@@ -46,14 +46,7 @@ export class InvoiceRevenueComponent implements OnInit {
         },
         showLegend: false,
         duration: 500,
-        legend: {
-          margin: {
-            top: 0,
-            right: -100,
-            bottom: 50,
-            left: -100
-          }
-        },
+        
         donutRatio: '0.68'
       }
     }
@@ -95,9 +88,20 @@ export class InvoiceRevenueComponent implements OnInit {
 
   public filterByDate(value) {
     console.log("value", value);
-    this.invoiceRevenue.startDate = moment(value.start).format('YYYY-MM-DD');
-    this.invoiceRevenue.endDate = moment(value.end).format('YYYY-MM-DD');
-    this.getInvoiceRevenue();
+    if (value.start !== '' && value.end !== '') {
+    
+      this.invoiceRevenue.startDate = moment(value.start).format('YYYY-MM-DD');
+      this.invoiceRevenue.endDate = moment(value.end).format('YYYY-MM-DD');
+    
+    } else {
+      this.invoiceRevenue.startDate = moment(this.accountingStartDate).format('YYYY-MM-DD');
+      this.invoiceRevenue.endDate = moment(new Date()).format('YYYY-MM-DD');
+      this.datesDp.setStartDate(new Date(this.accountingStartDate));
+      this.datesDp.setEndDate(new Date());
+    
+    }
+    this.cd.detectChanges();
+     this.getInvoiceRevenue();
 
   }
 

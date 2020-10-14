@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { CompanySetting } from '../../../companies/class/company-setting';
 import { DashboardChartData } from '../class/dashboard-chart-data';
+import * as moment from "moment";
 
 @Component({
   selector: 'app-dashboard-sales-analytics',
@@ -10,22 +11,25 @@ import { DashboardChartData } from '../class/dashboard-chart-data';
 export class DashboardSalesAnalyticsComponent implements OnInit {
   @Output() onSelectType = new EventEmitter<any>();
   @Input() chartData: Array<DashboardChartData> = [];
-  @ViewChild('nvd3') nvd3:any;
+  type: string = "WEEKLY";
+  @ViewChild('nvd3') nvd3: any;
   options;
   data;
-  listType: Array<CompanySetting> = [new CompanySetting('Weekly', 'WEEKLY'),
-  new CompanySetting('Daily', 'DAILY'),
-  new CompanySetting('Monthly', 'MONTHLY')];
+  listType: Array<CompanySetting> = [
+    new CompanySetting('Daily', 'DAILY'),
+    new CompanySetting('Weekly', 'WEEKLY'),
+    new CompanySetting('Monthly', 'MONTHLY')];
   /*Random Data Generator */
 
   constructor() { }
 
   ngOnInit() {
-    this.listType[0].selected = true;
+    this.listType[1].selected = true;
+    let currentDate = new Date();
     this.options = {
       chart: {
         type: 'lineChart',
-        height: 450,
+        height: 300,
 
         margin: {
           top: 20,
@@ -33,33 +37,42 @@ export class DashboardSalesAnalyticsComponent implements OnInit {
           bottom: 40,
           left: 55
         },
-        x:   (d) =>{
-
-          return d.x;
-        },
-        y:   (d)=> {
-          return d.y;
-        },
+        x: (d) => d.x,
+        y: (d) => d.y,
         useInteractiveGuideline: true,
-         
         showXAxis: true,
         xAxis: {
           axisLabel: '',
-          tickFormat:  (d) => {
-            return this.chartData[this.chartData.length - d].date;
+          tickFormat: (d) => {
+            
+            if (this.type === "MONTHLY") {
+              if (currentDate.getFullYear() === new Date(this.chartData[d].date).getFullYear()) {
+                return moment(this.chartData[d].date).format('MMM');
+              } else {
+                return moment(this.chartData[d].date).format('MMM YYYY');
+              }
+
+            }
+            if (this.type === "WEEKLY" || this.type === "DAILY") return moment(this.chartData[d].date).format('DD MMM');
+            
+
           },
           showMaxMin: false,
-          staggerLabels: true,
-          axisLabelDistance: -10
+          staggerLabels: false,
+          axisLabelDistance: 0,
+          ticks: 10,
         },
         yAxis: {
           axisLabel: '',
-          
+
           axisLabelDistance: -10
-        },
-        callback: function (chart) {
-          console.log("chart", chart);
-          console.log("!!! lineChart callback !!!");
+        }
+      },
+      legend: {
+        css: {
+          'text-align': 'left',
+          'margin': '10px 13px 0px 7px',
+          className: "test-class-tamara"
         }
       },
       title: {
@@ -76,33 +89,34 @@ export class DashboardSalesAnalyticsComponent implements OnInit {
       }
     };
     console.log("this.chartData", this.chartData);
-   this.updateDataChart();
+    this.updateDataChart();
     console.log("this.data", this.data);
   }
   public updateDataChart() {
     this.data = this.getDataForChart();
-    this.nvd3.chart.update();
+    if (this.nvd3.char) this.nvd3.chart.update();
   }
   getDataForChart() {
-    let sin = [],sin2 = [];
-
+    let sin = [], sin2 = [];
+    this.chartData= this.chartData.splice(this.chartData.length - 30,this.chartData.length);
+  //  this.chartData = JSON.parse(JSON.stringify(this.chartData.reverse()));
     //Data is represented as an array of {x,y} pairs.
     for (let i = 1; i < 30; i++) {
-      sin.push({ x: i, y: this.chartData[this.chartData.length - i].totalSales });
-      sin2.push({ x: i, y: this.chartData[this.chartData.length - i].totalReceivable });
+      sin.push({ x: i, y: this.chartData[i].totalSales });
+      sin2.push({ x: i, y: this.chartData[i].totalReceivable });
     }
 
     //Line chart data should be sent as an array of series objects.
     return [
       {
         values: sin,      //values - represents the array of {x,y} data points
-        key: 'Total Sales', //key  - the name of the series.
-        color: '#ff7f0e'  //color - optional: choose your own line color.
+        key: 'Sales', //key  - the name of the series.
+        color: '#0747a6'  //color - optional: choose your own line color.
       },
       {
         values: sin2,      //values - represents the array of {x,y} data points
-        key: 'Total Receivable', //key  - the name of the series.
-        color: '#2ca02c'  //color - optional: choose your own line color.
+        key: 'Revenue', //key  - the name of the series.
+        color: '#00ccff'  //color - optional: choose your own line color.
       },
     ];
   };
@@ -115,6 +129,7 @@ export class DashboardSalesAnalyticsComponent implements OnInit {
       }
     })
     this.onSelectType.emit(type);
+    this.type = type;
   }
   getSelectedType() {
     return this.listType.find(item => item.selected).title;
