@@ -390,6 +390,20 @@
       opacity: 0;
     }
   }
+  app-dashboard-sales-analytics {
+    .contract-dashboard-chart-card__chart-content {
+      padding-top: 0;
+    }
+    .contract-dashboard-chart-card__header {
+      padding: 16px 22px 0 24px;
+    }
+    svg.nvd3-svg {
+      overflow: visible;
+    }
+    .nv-legend {
+      transform: translate(calc(-50% + 120px), -21px);
+    }
+  }
 }
 
 @media only screen and (max-width: 1400px) {

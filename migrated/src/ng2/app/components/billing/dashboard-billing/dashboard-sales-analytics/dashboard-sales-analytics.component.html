@@ -1,12 +1,16 @@
 <div class="contract-dashboard-chart-card qt-mb-16" ngbDropdown>
   <div class="contract-dashboard-chart-card__header">
     <div class="contract-dashboard-chart-card__header-title">Invoice Revenue</div>
-    <p id="dropdown1" ngbDropdownToggle [textContent]="getSelectedType()"></p>
-    <div class="drop-down-list-type" ngbDropdownMenu aria-labelledby="dropdown1">
-      <ng-template ngFor let-item [ngForOf]="listType" let-i="index">
-        <button ngbDropdownItem [textContent]="item.title" (click)="selectType(item.value)"></button>
-      </ng-template>
+    <div class="qt-color-dark-light qt-fs-12 qt-df qt-ai-c" id="dropdown1" ngbDropdownToggle>
+      <div [textContent]="getSelectedType()" class="qt-mr-5"></div> <div class="icon__profile-dropdown qt-ic-c qt-sz-16"></div>
     </div>
+
+    <ul class="qt-dropdown-menu --border" ngbDropdownMenu aria-labelledby="dropdown1">
+      <ng-template ngFor let-item [ngForOf]="listType" let-i="index">
+        <li class="pointer" ngbDropdownItem [textContent]="item.title" (click)="selectType(item.value)"></li>
+      </ng-template>
+    </ul>
+
   </div>
     <div class="contract-dashboard-chart-card__chart-content">
       <nvd3 #nvd3 class="sales-analytic" [options]="options" [data]="data" #nvd3></nvd3>
