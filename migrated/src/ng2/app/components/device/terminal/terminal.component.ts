@@ -77,7 +77,7 @@ export class TerminalComponent implements OnInit {
   sessionId = '';
   finalCommand = '';
   splitCommand = ["C:\\>"];
-  scriptType = 'cmd';
+  scriptTyped = 'cmd';
   showDescription = false;
   terminalHeight = 0;
   cmdHeight = 0;
@@ -540,7 +540,7 @@ export class TerminalComponent implements OnInit {
       "companyId": localStorage.getItem('company_id'),
       "agentId": localStorage.getItem('agentId'),
       "sessionId": this.sessionId,
-      "scriptType": type === '' ? this.scriptType.toLowerCase() : type.toLowerCase(), // 'powershell'
+      "scriptType": type === '' ? this.scriptTyped.toLowerCase() : type.toLowerCase(), // 'powershell'
       "script": this.finalCommand,
       "file": file,
       "keepOpen": true
@@ -581,7 +581,7 @@ export class TerminalComponent implements OnInit {
   }
 
   switchTerminal(type) {
-    this.scriptType = type;
+    this.scriptTyped = type;
     if (this.terminalHit === true) {
       this.splitCommand = [this.splitCommand[this.splitCommand.length - 1]];
     } else {
