@@ -30,17 +30,17 @@ main {
                         font-family: $sourceCode;
                         margin-bottom: 16px;
                         height: 310px;
-                        max-height: 310px !important;
+                        // max-height: 310px !important;
                         overflow-y: auto;
                         overflow-x: hidden;
-                        @media only screen and (min-height:900px) {
-                            height: 580px;
-                            max-height: 440px !important;
-                        }
-                        @media only screen and (min-height:1080px) {
-                            height: 650px;
-                            max-height: 650px !important;
-                        }
+                        // @media only screen and (min-height:900px) {
+                        //     height: 580px;
+                        //     max-height: 440px !important;
+                        // }
+                        // @media only screen and (min-height:1080px) {
+                        //     height: 650px;
+                        //     max-height: 650px !important;
+                        // }
                         p {
                             margin-bottom: 0;
                             font-family: $sourceCode;
@@ -62,16 +62,16 @@ main {
                             color: #4f5f79 !important;
                             font-family: $sourceCode;
                             height: 120px;
-                            max-height: 150px !important;
+                            // max-height: 150px !important;
                             margin-bottom: 0;
-                            @media only screen and (min-height:900px) {
-                                height: 280px;
-                                max-height: 280px !important;
-                            }
-                            @media only screen and (min-height:1080px) {
-                                height: 400px;
-                                max-height: 400px !important;
-                            }
+                            // @media only screen and (min-height:900px) {
+                            //     height: 280px;
+                            //     max-height: 280px !important;
+                            // }
+                            // @media only screen and (min-height:1080px) {
+                            //     height: 400px;
+                            //     max-height: 400px !important;
+                            // }
                             &:focus{
                                 outline: none !important;
                             }
