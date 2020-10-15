@@ -36,8 +36,8 @@ export class NavComponent implements OnInit {
         
         this.currentUser = (resp.firstName + ' ' + resp.lastName).trim();
         localStorage.setItem('currentUser', this.currentUser);
-        localStorage.setItem('imId', resp.avatar.cropped.id);
-        this.imgUrl = `/users/${resp.id}/image.jpg?t=${resp.avatar.updatedAt}`;
+        localStorage.setItem('imId', resp.avatar === null ? '' : resp.avatar.cropped.id);
+        this.imgUrl = resp.avatar === null ? '' : `/users/${resp.id}/image.jpg?t=${resp.avatar.updatedAt}`;
       },
       error => {
       this.toastr.error('Something went wrong please try again.');

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, Input, ChangeDetectorRef } from '@angular/core';
 import { CompanyTagsStateService } from './states/company-tags-state.service';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { FormControl } from '@angular/forms';
@@ -39,7 +39,8 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
    */
   public constructor(
     private tagsService: TagsService,
-    private tagsState: CompanyTagsStateService
+    private tagsState: CompanyTagsStateService,
+    public cd: ChangeDetectorRef
   ) { }
 
   /**
@@ -119,7 +120,9 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
     if (index >= 0) {
       this.selectedTag.splice(index, 1);
       this.tagsChange.emit(this.selectedTag);
+      this.cd.detectChanges();
     }
+
   }
 
   /**

@@ -9,6 +9,91 @@ main {
         @media only screen and (min-width: 1601px) {
             margin-right: 512px !important;
         }
+        .page-container{
+            &.terminal{
+                margin-bottom: 0;
+                .terminal-area {
+                    float: left;
+                    width: 100%;
+                    .terminal-box {
+                        float: left;
+                        width: 100%;
+                        background-color: #151b21;
+                        padding: 22px 20px;
+                        font-size: 13px;
+                        font-weight: normal;
+                        font-stretch: normal;
+                        font-style: normal;
+                        line-height: 1.54;
+                        letter-spacing: normal;
+                        color: $white-color;
+                        font-family: $sourceCode;
+                        margin-bottom: 16px;
+                        height: 310px;
+                        max-height: 310px !important;
+                        overflow-y: auto;
+                        overflow-x: hidden;
+                        @media only screen and (min-height:900px) {
+                            height: 580px;
+                            max-height: 440px !important;
+                        }
+                        @media only screen and (min-height:1080px) {
+                            height: 650px;
+                            max-height: 650px !important;
+                        }
+                        p {
+                            margin-bottom: 0;
+                            font-family: $sourceCode;
+                        }
+                    }
+                    .terminal-btn-row {
+                        display: flex;
+                        display: -ms-flexbox;
+                        display: -webkit-flex;
+                        flex-direction: column;
+                        width: 100%;
+                        margin-bottom: 16px;
+                        position: relative;
+                        .editCmd {
+                            width: 100%;
+                            @include border-radius(4px);
+                            border: solid 1px #c4cbd5;
+                            padding: 10px 14px;
+                            color: #4f5f79 !important;
+                            font-family: $sourceCode;
+                            height: 120px;
+                            max-height: 150px !important;
+                            margin-bottom: 0;
+                            padding-right: 150px;
+                            @media only screen and (min-height:900px) {
+                                height: 280px;
+                                max-height: 280px !important;
+                            }
+                            @media only screen and (min-height:1080px) {
+                                height: 400px;
+                                max-height: 400px !important;
+                            }
+                            &:focus{
+                                outline: none !important;
+                            }
+                        }
+                        .btn.btn-primary{
+                            height: 40px;
+                            @include border-radius(4px);
+                            padding: 11.5px 10px;
+                            width: 125px;
+                            text-align: center; 
+                            font-size: 13px;
+                            position: absolute;
+                            right: 8px;
+                            bottom: 8px;
+                        }
+                    }
+                   
+                    
+                }
+            }
+        } 
         .right-sidebar {
             & > div {
                 & > .btn.btn-primary {
@@ -46,6 +131,10 @@ main {
                     }
 
                     .tab-content {
+                        height: auto;
+                        max-height: calc(100% - 50px);
+                        overflow-y: auto;
+                        overflow-x: hidden;
                         .tab-pane {
                             .cmn-tbs-content {
                                 & > ul {
@@ -95,7 +184,7 @@ main {
                                                         background-color: #ffffff;
                                                         padding: 6px 0;
                                                         right: 0 !important;
-                                                        top: 25px !important;
+                                                        top: 3px !important;
                                                         min-width: initial !important;
                                                         li {
                                                             padding: 0;
@@ -139,6 +228,15 @@ main {
                                                 }
                                             }
                                         }
+                                        .cmd-details{
+                                            width: 100%;
+                                            span{
+                                                display: block;
+                                                max-width: 100%;
+                                                word-break: break-all;
+                                            }
+                                        }
+
                                     }
                                 }
                                 &.history-cmd {
@@ -217,14 +315,17 @@ main {
                         //     overflow-x: hidden;
                         // }
                         .modal-body {
-                            @media only screen and (max-height: 700px) {
+                            @media only screen and (max-height: 900px) {
+                                max-height: 500px;
                                 padding: 0;
-                                max-height: 410px;
                                 overflow-y: auto;
                                 overflow-x: hidden;
                                 flex-direction: column;
                                 float: left;
                                 width: 100%;
+                            }
+                            @media only screen and (max-height: 700px) {
+                                max-height: 410px;
                             }
                             form {
                                 .f-row {
@@ -242,11 +343,16 @@ main {
                                         }
                                         textarea {
                                             height: 315px;
+                                            font-family: $sourceCode;
                                         }
                                     }
                                     .btn {
                                         min-width: inherit;
                                         padding: 13px 16px;
+                                        &.btn-secondary {
+                                            border: solid 1px #c5cdd5;
+                                            background-color: #ffffff !important;
+                                        }
                                     }
                                 }
                             }
@@ -274,6 +380,7 @@ main {
                                         padding: 0;
                                         text-align: center;
                                         color: #151b21;
+                                        font-family: $sourceCode;
                                         &::before {
                                             width: 0;
                                         }
@@ -361,7 +468,9 @@ main {
                             padding: 18px 32px 0 32px;
                         }
                         .tab-content {
-                            padding: 67px 32px 100px 32px;
+                            padding: 24px 32px 100px 32px;
+                            height: auto;
+                            max-height:calc(100% - 100px);
                             ul {
                                 &.list-unstyled {
                                     &.script-list {
@@ -552,11 +661,19 @@ main {
                     width: 100%;
                     flex-direction: column;
                     padding: 15px 32px;
+                    height: calc(100% - 57px);
+                    form{
+                        height: auto;
+                        max-height: 100%;
+                        overflow-y: auto;
+                        overflow-x: hidden;
+                    }
                     .f-row {
                         display: -ms-flexbox;
                         display: -webkit-flex;
                         display: flex;
-                        flex-direction: column;
+                        flex-direction: row;
+                        flex-wrap: wrap;
                         textarea {
                             height: 200px;
                         }
@@ -569,6 +686,14 @@ main {
                                     border: solid 1px #c5cdd5;
                                     background-color: #ffffff !important;
                                 }
+                            }
+                        }
+                        .f-col{
+                            &.col-70{
+                                width: 65%;
+                            }
+                            &.col-30{
+                                width: 35%;
                             }
                         }
                     }
@@ -672,7 +797,8 @@ main {
                 }
                 &.Command {
                     margin-left: 0;
-                    background: url("../../../../assets/img/device/command-line-blue.svg") no-repeat left 0;
+                    background: url("../../../../assets/img/device/Commandline.svg") no-repeat left 0;
+                    cursor: pointer;
                     &.active {
                         background: url("../../../../assets/img/device/command-line-blue.svg") no-repeat left 0;
                         color: #16a4fa;
@@ -680,38 +806,16 @@ main {
                 }
                 &.Power {
                     background: url("../../../../assets/img/device/power-shell.svg") no-repeat left 0;
+                    cursor: pointer;
                     &.active {
-                        background: url("../../../../assets/img/device/power-shell.svg") no-repeat left 0;
+                        background: url("../../../../assets/img/device/Powershell_Blue.svg") no-repeat left 0;
                         color: #16a4fa;
                     }
                 }
             }
         }
 
-        .terminal-area {
-            float: left;
-            width: 100%;
-            .terminal-box {
-                float: left;
-                width: 100%;
-                height: 460px;
-                background-color: #151b21;
-                overflow: auto;
-                padding: 22px 20px;
-                font-size: 13px;
-                font-weight: normal;
-                font-stretch: normal;
-                font-style: normal;
-                line-height: 1.54;
-                letter-spacing: normal;
-                color: $white-color;
-                font-family: $sourceCode;
-                p {
-                    margin-bottom: 0;
-                    font-family: $sourceCode;
-                }
-            }
-        }
+       
         .cmn-tbs-content {
             &.command {
                 li {
@@ -747,6 +851,7 @@ main {
                     &::before {
                         font-weight: 400;
                         font-family: $font-body;
+                        width: 85px;
                     }
                 }
             }
@@ -829,7 +934,7 @@ body {
                                     font-size:13px;
                                     &.btn-secondary{
                                         border: solid 1px #c5cdd5;
-
+                                        background-color: #ffffff !important;
                                     }
                                     &.btn-remove{
                                         background-color: #ff5263;
@@ -930,5 +1035,41 @@ body {
                 }
             }
         }
+        .cmd-description {
+            a {
+                font-family: "Graphik-Medium";
+                font-size: 13px;
+                font-weight: 500;
+                font-style: normal;
+                line-height: 1.54;
+                letter-spacing: normal;
+                color: #4f5f79;
+                text-transform: capitalize;
+                margin-bottom: 10px;
+                &.active {
+                    color: #16a4fa;
+                }
+            }
+            .label {
+                margin-bottom: 10px;
+                padding-bottom: 0;
+                color: #4f5f79;
+            }
+        }
     }
 }
+
+.drp-black{
+    .dropdown{
+            .dropdown-menu{
+                button.dropdown-item{
+                    &:last-child{
+                        color: #364656 !important;
+                        font-family: $font-body !important;
+                        font-weight: normal !important;
+                    }
+                }
+            }
+    }
+}
+

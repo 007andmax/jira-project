@@ -93,6 +93,10 @@
           url: '/ng2/company-password-manager',
           template: '<company-password-manager></company-password-manager>'
         }))
+        .state('company-contracts', waitForServices({
+          url: '/ng2/company-contracts',
+          template: '<company-contracts-component></company-contracts-component>'
+        }))
         .state('company-user', waitForServices({
           url: '/ng2/company-user',
           template: '<company-user></company-user>'

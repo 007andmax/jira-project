@@ -210,7 +210,7 @@ export class ContractsBlockTime {
     public setReviewDate(day, month, year, timeOffset) {
         let current = new Date();
 
-        if (day !== current.getDate() || current.getMonth() !== (month - 1)) {
+        if (day !== current.getDate() || current.getMonth() !== (month - 1) || year !== current.getFullYear()) {
             let dateDatePicker = new Date(year, month - 1, day).getTime(); // timestamp from calendar
             let finalDate = new Date(dateDatePicker - (current.getTimezoneOffset() * 60000/* dont touch*/) - timeOffset /* timezone.timeOffset */);
             this.reviewDate = moment(finalDate.getTime()).format('YYYY/MM/DD');

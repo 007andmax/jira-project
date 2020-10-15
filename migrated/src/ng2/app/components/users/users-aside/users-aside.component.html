@@ -37,6 +37,9 @@
           <mat-error *ngIf="!validate.getPrimaryContactEmail()">
             Please enter a valid email address
           </mat-error>
+          <mat-error *ngIf="!validate.getExistPrimaryContactEmail()">
+            The email address is already occupied
+          </mat-error>
           <p>
             Email
           </p>

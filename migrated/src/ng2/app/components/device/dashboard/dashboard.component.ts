@@ -33,7 +33,8 @@ export class DashboardComponent implements OnInit {
     architecture: '',
     model: '',
     caption: '',
-    version: ''
+    version: '',
+    release_id: ''
   };
   networkAdapters = {
     ip_address: ''
@@ -118,7 +119,10 @@ export class DashboardComponent implements OnInit {
         this.logicalDisk = resp.reports[0].logicalDisks;
         this.virusInfo = resp.reports[0].antivirus[0];
         this.system = resp.reports[0].system || {};
-        this.windows_info = this.system.caption + '(' + this.system.architecture + ') Version ' + this.system.version;
+        let caption = this.system.caption.replace('Microsoft ', '')
+        let release_id = this.system.release_id === '' ? '' : ` Version ${this.system.release_id}`;
+        let architecture = this.system.architecture === '' ? '' : ` ( ${this.system.architecture} )`;
+        this.windows_info = `${caption}${architecture}${release_id}`;
         if (this.system.install_date !== '') {
           this.system.install_date = {
             "day": new Date(this.system.install_date).getDate(),

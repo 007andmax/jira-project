@@ -1,9 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
     <g fill="#FFF" fill-rule="evenodd" stroke="#4F5F79" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
-<<<<<<< HEAD
-        <path d="M17.94 6.06L6.06 17.94M6.06 6.06l11.88 11.88"/>
-=======
-        <path d="M8.4 0L8.4 16.8M0 8.4L16.8 8.4" transform="rotate(45 5.854 14.546)"/>
->>>>>>> e411bae07... Image achnages and datatype changes added
+        <path d="M7 0L7 14M0 7L14 7" transform="rotate(45 4.879 12.121)"/>
     </g>
 </svg>

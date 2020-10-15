@@ -9,7 +9,7 @@ export class ContractsHourly {
     services: Array<ContractsHourlyService> = [];
     startDate: string;
     type: string = "HOURLY";
-    reviewDate: number;
+    reviewDate: string;
     constructor() {
 
 
@@ -21,7 +21,7 @@ export class ContractsHourly {
         this.services = data.services;
         this.startDate = data.startDate;
         this.type = data.type;
-        this.reviewDate = new Date(data.reviewDate).getTime();
+        this.reviewDate = data.reviewDate;
     }
     public getDataForCreate() {
         return {
@@ -46,14 +46,14 @@ export class ContractsHourly {
     public setReviewDate(day, month, year, timeOffset) {
         let current = new Date();
 
-        if (day !== current.getDate() || current.getMonth() !== (month - 1)) {
+        if (day !== current.getDate() || current.getMonth() !== (month - 1) || year !== current.getFullYear()) {
             let dateDatePicker = new Date(year, month - 1, day).getTime(); // timestamp from calendar
             let finalDate = new Date(dateDatePicker - (current.getTimezoneOffset() * 60000/* dont touch*/) - timeOffset /* timezone.timeOffset */);
-            this.reviewDate = finalDate.getTime();
+            this.reviewDate = moment(finalDate.getTime()).format('YYYY/MM/DD');
         } else {
             let currentTime = new Date(current.getFullYear(), current.getMonth(), current.getDate()).getTime();
             let finalDate = new Date(currentTime - (current.getTimezoneOffset() * 60000) - timeOffset);
-            this.reviewDate = finalDate.getTime()
+            this.reviewDate = moment(finalDate.getTime()).format('YYYY/MM/DD');
         }
     }
     public setStartDate(day, month, year, timeOffset) {

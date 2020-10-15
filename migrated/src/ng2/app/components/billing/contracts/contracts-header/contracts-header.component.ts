@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, Input } from '@angular/core';
+import { Company } from 'src/ng2/app/interfaces/company/company';
 import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-state.service';
 import { ContractsFilterComponent } from '../contracts-filter/contracts-filter.component';
 
@@ -8,6 +9,7 @@ import { ContractsFilterComponent } from '../contracts-filter/contracts-filter.c
   styleUrls: ['./contracts-header.component.scss']
 })
 export class ContractsHeaderComponent implements OnInit {
+  @Input() companyContracts:Company = null;
   @ViewChild('filter') filter: ContractsFilterComponent;
   count = 0;
   toggleFilter: boolean = true;

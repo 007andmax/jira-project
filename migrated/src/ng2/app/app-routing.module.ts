@@ -47,6 +47,7 @@ import { WindowsComponent } from './components/device/windows-update/windows-upd
 import { StartupComponent } from './components/device/startup-programes/startup-programes.component';
 import { FileComponent } from './components/device/file-explorer/file-explorer.component';
 import { DashboardBillingComponent } from './components/billing/dashboard-billing/dashboard-billing.component';
+import { CompanyContractsComponent } from './components/companies/company-contracts/company-contracts.component';
 
 const routes: Routes = [
   {
@@ -258,6 +259,10 @@ const routes: Routes = [
   {
     path: 'ng2/billing-dashboard',
     component: DashboardBillingComponent
+  },
+  {
+    path: 'ng2/company-contracts',
+    component: CompanyContractsComponent
   }
 ];
 

@@ -17,7 +17,7 @@ import { ContractsOtherProduct } from '../../contracts-aside/class/contracts-oth
   styleUrls: ['./contracts-aside-product-service-edit.component.scss']
 })
 export class ContractsAsideProductServiceEditComponent implements OnInit {
-  selectedType = new ContractsFilterType('Service Contract/by other', 'SERVICE_CONTRACT', 'OTHER');
+  selectedType = new ContractsFilterType('Subscriptions', 'SERVICE_CONTRACT', 'OTHER');
   selectedCompany: any;
   @ViewChild('startDateDP') startDateDP: DatePickerComponent;
   @ViewChild('reviewDateDP') reviewDateDP: DatePickerComponent;

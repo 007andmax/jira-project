@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Play</title>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linejoin="round">
+        <g id="Play" stroke="#FFFFFF" stroke-width="1.5">
+            <g>
+                <path d="M21,12 C21,16.9705627 16.9705627,21 12,21 C7.02943725,21 3,16.9705627 3,12 C3,7.02943725 7.02943725,3 12,3 C16.9705627,3 21,7.02943725 21,12 Z" id="Rectangle-13"></path>
+                <polygon id="Path-2" fill="#FFFFFF" stroke-linecap="round" points="11 15 15 12 11 9"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

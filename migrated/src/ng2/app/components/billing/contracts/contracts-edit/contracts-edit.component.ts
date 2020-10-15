@@ -36,6 +36,6 @@ export class ContractsEditComponent implements OnInit {
   }
   closed() {
     this.contractsStateService.toggleEdit(false);
-    this.cd.detectChanges();
+   
   }
 }

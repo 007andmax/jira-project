@@ -15,6 +15,7 @@ import { ContractsUserDeviceValidate } from '../../contracts-aside/class/contrac
 import * as moment from "moment";
 import { ContractsConfirmComponent } from '../../contracts-confirm/contracts-confirm.component';
 import { ServiceAgreementBlockTimeServices } from '../../class/service-agreement-block-time-services';
+import { DatePickerComponent } from 'src/ng2/app/components/shared/date-picker/date-picker.component';
 
 @Component({
   selector: 'app-contracts-aside-user-device-edit',
@@ -23,6 +24,7 @@ import { ServiceAgreementBlockTimeServices } from '../../class/service-agreement
 })
 export class ContractsAsideUserDeviceEditComponent implements OnInit {
   @ViewChild('taxes') taxesDP: InvoiceFormTicketEditTaxesComponent;
+  @ViewChild('customDateDP') customDateDP: DatePickerComponent;
   selectedCompany: any;
   selectedTaxes = [];
   selectedType = new ContractsFilterType('Service Contract/by device/by user', 'SERVICE_CONTRACT_DEVICE_USER', null);
@@ -39,7 +41,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit {
   defaultSelectedTax: Array<Tax> = [];
   customDate = new Date().getTime();
   minCustomDate = new Date().getTime();
-  maxCustomDate = new Date().getTime();
+
   sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
     private taxesStateService: TaxesStateService,
@@ -68,49 +70,49 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit {
     if (this.contractsUserDevice.services.length > 0) this.toggleContractServices = true;
     this.minStartDate = this.getMinStartDate(this.contractsUserDevice.intervalstring, this.contractsUserDevice.startDate);
     if (this.contractsUserDevice.includedHours && this.contractsUserDevice.rateExceeding) {
-     this.contractsUserDevice.blockTimeServices =  this.contractsUserDevice.blockTimeServices;
-     this.toggleMaximumAmountHours = true;
+      this.contractsUserDevice.blockTimeServices = this.contractsUserDevice.blockTimeServices;
+      this.toggleMaximumAmountHours = true;
     } else {
-      this.contractsUserDevice.blockTimeServices =  this.contractsUserDevice.serviceContractServicesToTrack;
+      this.contractsUserDevice.blockTimeServices = this.contractsUserDevice.serviceContractServicesToTrack;
     }
-    this.setMinMaxCustomDate();
-   }
-   private setMinMaxCustomDate() {
-    let today = new Date(this.contractsUserDevice.startDate);
-    this.minCustomDate =new Date(today.getFullYear(),today.getMonth(),1).getTime();
-    this.maxCustomDate =new Date(today.getFullYear(),today.getMonth(),new Date(today.getFullYear(), today.getMonth() +1, 0).getDate()).getTime();
-
+    this.setMinCustomDate();
   }
-  public onEdit() { 
-    if (this.contractsUserDevice.blockTimeServices.length === 0 || !this.contractsUserDevice.checkDuplicatedBlockTimeServices() || !this.contractsUserDevice.checkDuplicatedServiceContractServices()
-    || !this.contractsUserDevice.checkDuplicatedServices()) {
+  private setMinCustomDate() {
+    let today = new Date(this.contractsUserDevice.startDate);
+    this.minCustomDate = today.getTime();
+    if (this.customDateDP) this.customDateDP.minDate = this.minCustomDate;
     this.cd.detectChanges();
-    return;
-  };
-  this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
-    moment(this.contractsUserDevice.endDate).format('DD MMM YYYY'), this.contractsUserDevice.companyId, this.contractsUserDevice.id, this.contractsUserDevice.getAllServicesName()).subscribe(data => {
-      if (Object.keys(data).length === 0) {
-        this.contractsService.updateContract(this.contractsUserDevice.getDataForUpdateServiceContract(this.toggleMaximumAmountHours)).subscribe(res => {
-          this.onClose.emit(null);
-        })
-      } else {
-        let names = Object.keys(data);
-        this.contractsUserDevice.blockTimeServices.forEach(item => {
-          let find = names.find(name => name === item.name);
-          if (find) item.validate = false;
-        })
-        this.contractsUserDevice.services.forEach(item => {
-          let find = names.find(name => name === item.name);
-          if (find) item.validate = false;
-        })
-        this.contractsUserDevice.serviceContractServices.forEach(item => {
-          let find = names.find(name => name === item.name);
-          if (find) item.validate = false;
-        })
-      }
-    }, err => {
+  }
+  public onEdit() {
+    if (this.contractsUserDevice.blockTimeServices.length === 0 || !this.contractsUserDevice.checkDuplicatedBlockTimeServices() || !this.contractsUserDevice.checkDuplicatedServiceContractServices()
+      || !this.contractsUserDevice.checkDuplicatedServices()) {
+      this.cd.detectChanges();
+      return;
+    };
+    this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
+      moment(this.contractsUserDevice.endDate).format('DD MMM YYYY'), this.contractsUserDevice.companyId, this.contractsUserDevice.id, this.contractsUserDevice.getAllServicesName()).subscribe(data => {
+        if (Object.keys(data).length === 0) {
+          this.contractsService.updateContract(this.contractsUserDevice.getDataForUpdateServiceContract(this.toggleMaximumAmountHours)).subscribe(res => {
+            this.onClose.emit(null);
+          })
+        } else {
+          let names = Object.keys(data);
+          this.contractsUserDevice.blockTimeServices.forEach(item => {
+            let find = names.find(name => name === item.name);
+            if (find) item.validate = false;
+          })
+          this.contractsUserDevice.services.forEach(item => {
+            let find = names.find(name => name === item.name);
+            if (find) item.validate = false;
+          })
+          this.contractsUserDevice.serviceContractServices.forEach(item => {
+            let find = names.find(name => name === item.name);
+            if (find) item.validate = false;
+          })
+        }
+      }, err => {
 
-    })
+      })
   }
   onChangeCustomDate(data) {
     this.contractsUserDevice.setCustomDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
@@ -122,7 +124,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit {
     this.toggleContractServices = data;
     this.contractsUserDevice.services = [];
   }
- 
+
   onCheckDuplicatedServices() {
     if (this.contractsUserDevice.services.length === 0 || !this.contractsUserDevice.checkDuplicatedServices()) return;
     this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
@@ -142,7 +144,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit {
     if (this.contractsUserDevice.blockTimeServices.length === 0 || !this.contractsUserDevice.checkDuplicatedBlockTimeServices()) return;
     this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
       moment(this.contractsUserDevice.endDate).format('DD MMM YYYY'), this.contractsUserDevice.companyId, this.contractsUserDevice.id, this.contractsUserDevice.getBlockTimeServicesName()).subscribe(data => {
-        if (Object.keys(data).length > 0)  {
+        if (Object.keys(data).length > 0) {
           let names = Object.keys(data);
           this.contractsUserDevice.blockTimeServices.forEach(item => {
             let find = names.find(name => name === item.name);
@@ -157,7 +159,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit {
     if (this.contractsUserDevice.serviceContractServices.length === 0 || !this.contractsUserDevice.checkDuplicatedServiceContractServices()) return;
     this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
       moment(this.contractsUserDevice.endDate).format('DD MMM YYYY'), this.contractsUserDevice.companyId, this.contractsUserDevice.id, this.contractsUserDevice.getServiceContractServicesName()).subscribe(data => {
-        if (Object.keys(data).length > 0)  {
+        if (Object.keys(data).length > 0) {
           let names = Object.keys(data);
           this.contractsUserDevice.serviceContractServices.forEach(item => {
             let find = names.find(name => name === item.name);
@@ -168,7 +170,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit {
 
       })
   }
-  
+
   setToggleMaximumAmountHours(data) {
     this.toggleMaximumAmountHours = data;
 
@@ -212,7 +214,16 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit {
   }
   onChangeStartDate(data) {
     this.contractsUserDevice.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-    this.contractsUserDevice.calculateEndDate();
+    if (this.contractsUserDevice.withCustomBillingDate) this.resetCustomDate();
+    this.setMinCustomDate();
+  }
+  private resetCustomDate() {
+    let startDate = new Date(this.contractsUserDevice.startDate);
+    this.customDate = startDate.getTime();
+    if (this.customDateDP) this.customDateDP.setEditDate(startDate.getTime());
+    startDate.setMonth(startDate.getMonth() + 1);
+    this.contractsUserDevice.setCustomDate(startDate.getDate(), startDate.getMonth(), startDate.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+
   }
   onChangeReviewDate(data) {
     this.contractsUserDevice.setReviewDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
@@ -248,21 +259,21 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit {
     this.contractsUserDevice.calculateEndDate();
     this.cd.detectChanges();
   }
-  setToggleCustomBillingDate (data) {
+  setToggleCustomBillingDate(data) {
     this.contractsUserDevice.withCustomBillingDate = data;
     if (!data) {
       this.contractsUserDevice.resetCustomBillingDate();
     } else {
       this.contractsUserDevice.customBillingDate = this.contractsUserDevice.startDate;
-      this.customDate = new Date(this.contractsUserDevice.startDate).getTime();
+      this.resetCustomDate();
     }
   }
-  
+
   public trackById(index, item) {
     return item.id;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
-  
+
 }

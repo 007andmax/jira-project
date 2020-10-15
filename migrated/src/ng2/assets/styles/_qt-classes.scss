@@ -1,5 +1,6 @@
 .qt-checkbox {
   margin: 0;
+  cursor: pointer;
 
   span {
     border: 1px solid #C4CBD5;
@@ -498,7 +499,7 @@
     align-items: center;
     color: #4f5f79;
     font-size: 13px;
-    cursor: default;
+    cursor: pointer;
     position: relative;
     &:hover {
       background-color: #edf2f6;

@@ -53,6 +53,12 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit {
       this.timePickerStart.on('selectTime', (data) => {
         this.changeStart();
         let startDate = new Date(this.timePickerStart.timepicker('getTime'));
+        if (this.editMode) {
+          let editStartDate = new Date(this.start);
+          startDate.setFullYear(editStartDate.getFullYear());
+          startDate.setMonth(editStartDate.getMonth());
+          startDate.setDate(editStartDate.getDate());
+        }
         this.onChangeStart.emit(startDate.getTime());
       });
       this.timePickerStart.on('showTimepicker', (data) => {
@@ -66,6 +72,13 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit {
       });
       this.timePickerEnd.on('selectTime', (data) => {
         let endDate = new Date(this.timePickerEnd.timepicker('getTime'));
+        if (this.editMode) {
+          let editEdnDate = new Date(this.end);
+          endDate.setFullYear(editEdnDate.getFullYear());
+          endDate.setMonth(editEdnDate.getMonth());
+          endDate.setDate(editEdnDate.getDate());
+        }
+        console.log("endDate",endDate);
         this.onChangeEnd.emit(endDate.getTime());
       });
       this.timePickerEnd.on('showTimepicker', (data) => {
@@ -81,6 +94,8 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit {
       if (this.editMode) {
         let startDate = new Date(this.start);
         let endDate = new Date(this.end);
+        console.log("startDate",startDate);
+        console.log("endDate",endDate);
         this.timePickerStart.timepicker('setTime', startDate);
         this.timePickerEnd.timepicker('setTime', endDate);
       } else {
@@ -120,6 +135,10 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit {
   public changeStart() {
     if (this.editMode) {
       let startDate = this.timePickerStart.timepicker('getTime');
+      let editStartDate = new Date(this.start);
+      startDate.setFullYear(editStartDate.getFullYear());
+      startDate.setMonth(editStartDate.getMonth());
+      startDate.setDate(editStartDate.getDate());
       let endDate = new Date(new Date(startDate).getTime() + (this.quantity * 3600000));
       this.timePickerEnd.timepicker('setTime', endDate);
       this.onSetEnd.emit(endDate.getTime());

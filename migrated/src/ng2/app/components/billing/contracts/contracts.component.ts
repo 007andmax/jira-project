@@ -3,6 +3,7 @@ import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-st
 import { ServiceAgreement } from './class/service-agreement';
 import { Subscription } from 'rxjs';
 import { LeftPanelStateService } from 'src/ng2/app/states/left-panel/left-panel-state.service';
+import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 
 @Component({
   selector: 'contracts',
@@ -18,6 +19,7 @@ export class ContractsComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   constructor(private contractsStateService: ContractsStateService,
     private leftPanelStateService:LeftPanelStateService,
+    public companiesStateService:CompaniesStateService,
     public cd: ChangeDetectorRef
   ) { }
 
@@ -30,29 +32,41 @@ export class ContractsComponent implements OnInit, OnDestroy {
     this.sub.add(getOnShowNotificationReview);
     let getOnToggleCreate = this.contractsStateService.getOnToggleCreate().subscribe(data => {
       this.showCreate = data;
-      this.cd.detectChanges();
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+      }
     })
     this.sub.add(getOnToggleCreate);
     let getOnPreview = this.contractsStateService.getOnPreview().subscribe(data => {
       this.serviceAgreement = data;
       this.showPreview = true;
-      this.cd.detectChanges();
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+      }
     })
     this.sub.add(getOnPreview);
     let getOnTogglePreview = this.contractsStateService.getOnTogglePreview().subscribe(data => {
 
       this.showPreview = false;
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+      }
     })
     this.sub.add(getOnTogglePreview);
     let getOnEdit = this.contractsStateService.getOnEdit().subscribe(data => {
       this.serviceAgreement = data;
       this.showEdit = true;
-      this.cd.detectChanges();
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+      }
     })
     this.sub.add(getOnEdit);
     let getOnToggleEdit = this.contractsStateService.getOnToggleEdit().subscribe(data => {
 
       this.showEdit = data;
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+      }
     })
     this.sub.add(getOnToggleEdit);
   }
