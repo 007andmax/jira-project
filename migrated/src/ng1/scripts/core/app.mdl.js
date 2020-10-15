@@ -109,6 +109,10 @@
           url: '/ng2/inventory/products',
           template: '<inventory-component></inventory-component>'
         }))
+        .state('new-tickets-dashboard', waitForServices({
+          url: '/ng2/tickets-dashboard',
+          template: '<tickets-dashboard-component></tickets-dashboard-component>'
+        }))
         .state('quotes-component', {
           url: '/ng2/quotes',
           template: '<quotes-component></quotes-component>'

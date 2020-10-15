@@ -357,6 +357,9 @@ import { DashboardStatsComponent } from './components/billing/dashboard-billing/
 import { DashboardQuotesComponent } from './components/billing/dashboard-billing/dashboard-quotes/dashboard-quotes.component';
 import { DashboardSalesAnalyticsComponent } from './components/billing/dashboard-billing/dashboard-sales-analytics/dashboard-sales-analytics.component';
 import { CompanyContractsComponent } from './components/companies/company-contracts/company-contracts.component';
+import { TicketsDashboardComponent } from './components/tickets/tickets-dashboard/tickets-dashboard.component';
+import { TicketPriorityDashboardComponent } from './components/tickets/tickets-dashboard/ticket-priority-dashboard/ticket-priority-dashboard.component';
+import { RecurringTicketDashboardComponent } from './components/tickets/tickets-dashboard/recurring-ticket-dashboard/recurring-ticket-dashboard.component';
 
 
 
@@ -555,6 +558,9 @@ angular.module('quicktech')
   .directive(
     'companyContractsComponent',
     downgradeComponent({ component: CompanyContractsComponent }))
+    .directive(
+      'ticketsDashboardComponent',
+      downgradeComponent({ component: TicketsDashboardComponent }))
   .factory('ngZone', downgradeInjectable(NgZone));
 
 /**
@@ -914,7 +920,27 @@ angular.module('quicktech')
 
 
 
-    CompanyContractsComponent
+    CompanyContractsComponent,
+
+
+
+
+    TicketsDashboardComponent,
+
+
+
+
+ 
+
+
+
+
+    TicketPriorityDashboardComponent,
+
+
+
+
+    RecurringTicketDashboardComponent
 
   ],
   imports: [
@@ -1011,7 +1037,8 @@ angular.module('quicktech')
     TicketTaskComponent,
     ContractsConfirmComponent,
     DashboardBillingComponent,
-    CompanyContractsComponent
+    CompanyContractsComponent,
+    TicketsDashboardComponent
     // RecurringTicketsComponent
   ],
   exports: [

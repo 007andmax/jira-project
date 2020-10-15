@@ -7,6 +7,7 @@ import { StatusColor } from './tickets-status/class/status-color';
 import { TicketsColor } from './tickets-status/class/tickets-color';
 import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 import { TicketsCounts } from '../../tickets/tickets/class/tickets-counts';
+import { QuoteStateService } from '../../billing/quotes/quote-create/quote-state.service';
 
 @Component({
   selector: 'app-left-panel-tickets',
@@ -22,6 +23,7 @@ export class LeftPanelTicketsComponent implements OnInit {
   constructor(private ticketsStateService: TicketsStateService,
     private ticketsService: TicketsService,
     public cd: ChangeDetectorRef,
+    private quoteStateService: QuoteStateService,
     private leftPanelService: LeftPanelService) { }
 
   ngOnInit() {
@@ -36,7 +38,10 @@ export class LeftPanelTicketsComponent implements OnInit {
     })
     if (window.innerWidth < 1280) $("app-left-panel-tickets .left-panel-ng2").css({ zIndex: 990 });
   }
+  public goToState(state) {
  
+    this.quoteStateService.goToState(state);
+  }
   getCountByField(field) {
     return (this.ticketsCounts) ? this.ticketsCounts[field] : 0;
   }
