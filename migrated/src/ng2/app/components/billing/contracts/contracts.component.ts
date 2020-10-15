@@ -17,7 +17,7 @@ export class ContractsComponent implements OnInit, OnDestroy {
   serviceAgreement: ServiceAgreement;
   showNotificationReview: boolean = false;
   sub: Subscription = new Subscription();
-  constructor(private contractsStateService: ContractsStateService,
+  constructor(public contractsStateService: ContractsStateService,
     private leftPanelStateService:LeftPanelStateService,
     public companiesStateService:CompaniesStateService,
     public cd: ChangeDetectorRef
