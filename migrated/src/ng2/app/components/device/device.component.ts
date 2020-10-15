@@ -12,6 +12,7 @@ import { WebsocketService } from 'src/ng2/app/services/websocket/websocket.servi
 import { ShellStateService } from 'src/ng2/app/states/shell/shell-state.service';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { TerminalService } from './_services/terminal.service';
+import { command } from './class/device';
 declare var $:any;
 @Component({
   selector: 'app-root',
@@ -237,7 +238,7 @@ export class DeviceComponent implements OnInit {
 
   sendCommand(command) {
     if (JSON.parse(localStorage.getItem('deviceDetail')).online === true) {
-      let data = {
+      let data: command = {
         "companyId": localStorage.getItem('company_id'),
         "agentId": localStorage.getItem('agentId'),
         "sessionId": localStorage.getItem('uuid'),

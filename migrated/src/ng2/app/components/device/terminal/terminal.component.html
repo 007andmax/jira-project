@@ -25,7 +25,7 @@
                 id="button-cmd"
                 type="button"
                 class="btn btn-primary"
-                (click)="copyToTerminal(editCmd, '', false);editCmd = ''"
+                (click)="copyToTerminalFunc(editCmd, '', false);"
               >
                 Run Command
               </button>
@@ -40,7 +40,7 @@
       <img src="/html/ng2/assets/img/device/panel-open.svg" alt="Open" title="Ticket" />
     </a> -->
       <div>
-        <a href="javascript:;" class="add-btn" (click)="resetCmdModal();submitted = false;create = !create;showDescription = false;"
+        <a href="javascript:;" class="add-btn" (click)="openAddModal();"
           ><img src="/html/ng2/assets/img/device/add.svg" alt="add"
         /></a>
         <!-- Modal Add New Command -->
@@ -85,7 +85,7 @@
                       <img class="icn-sm report-caret-icon" src="./..//html/ng2/assets/img/device/selct-arrow.svg"/>
                       <div ngbDropdownMenu
                            aria-labelledby="dropdownBasic1">
-                           <button *ngFor="let category of cmdCategoryReadList" ngbDropdownItem (click)="commandModal.category = category.name;commandModal.categoryId = category.id;">{{category.name}}</button>
+                           <button *ngFor="let category of cmdCategoryReadList" ngbDropdownItem (click)="setCommand(category.name, category.id)">{{category.name}}</button>
                            <button ngbDropdownItem (click)="manageCategory(templateManageCategory);">Manage Category</button>
                       </div>
                     </div>
@@ -109,8 +109,8 @@
                       <img class="icn-sm report-caret-icon" src="./..//html/ng2/assets/img/device/selct-arrow.svg"/>
                       <div ngbDropdownMenu
                            aria-labelledby="dropdownType1">
-                           <button ngbDropdownItem (click)="commandModal.type = 'CMD'; commandModal.typeName = 'Command Line';">Command Line</button>
-                           <button ngbDropdownItem (click)="commandModal.type = 'POWERSHELL'; commandModal.typeName = 'Powershell';">Powershell</button>
+                           <button ngbDropdownItem (click)="toggleTerminal('CMD', 'Command Line')">Command Line</button>
+                           <button ngbDropdownItem (click)="toggleTerminal('POWERSHELL', 'Powershell')">Powershell</button>
                       </div>
                     </div>
                   </div>
@@ -186,7 +186,7 @@
                           aria-labelledby="button-basic"
                         >
                           <li role="menuitem" ngbDropdownItem>
-                            <a class="dropdown-item" href="javascript:void(0);" (click)="submitted = false;showDescription = false;openEditCommand(cmd, 'edit')">
+                            <a class="dropdown-item" href="javascript:void(0);" (click)="openEditModal(cmd, 'edit')">
                               <img
                                 src="/html/ng2/assets/img/device/edit-cmd.svg"
                                 alt="edit-cmd"
@@ -509,7 +509,7 @@
               href="javascript:;"
               class="close-btn"
               title="Close"
-              (click)="scriptDetail = !scriptDetail;scriptDetailModal = {}"
+              (click)="emptyScriptDetail()"
             >
               <img
                 src="/html/ng2/assets/img/device/back.svg"
@@ -580,7 +580,7 @@
                     <img class="icn-sm report-caret-icon" src="./..//html/ng2/assets/img/device/selct-arrow.svg"/>
                     <div ngbDropdownMenu
                          aria-labelledby="dropdownBasic1">
-                         <button *ngFor="let category of cmdCategoryReadList" ngbDropdownItem (click)="scriptDetailModal.category = category.name;scriptDetailModal.categoryId = category.id;">{{category.name}}</button>
+                         <button *ngFor="let category of cmdCategoryReadList" ngbDropdownItem (click)="setScriptDetail(category.name, category.id)">{{category.name}}</button>
                     </div>
                   </div>
                 </div>
@@ -603,8 +603,8 @@
                     <img class="icn-sm report-caret-icon" src="./..//html/ng2/assets/img/device/selct-arrow.svg"/>
                     <div ngbDropdownMenu
                          aria-labelledby="dropdownType2">
-                         <button ngbDropdownItem (click)="scriptDetailModal.type = 'CMD'; scriptDetailModal.typeName = 'Command Line';">Command Line</button>
-                         <button ngbDropdownItem (click)="scriptDetailModal.type = 'POWERSHELL'; scriptDetailModal.typeName = 'Powershell';">Powershell</button>
+                         <button ngbDropdownItem (click)="toggleDetailTerminal('CMD', 'Command Line')">Command Line</button>
+                         <button ngbDropdownItem (click)="toggleDetailTerminal('POWERSHELL', 'Powershell')">Powershell</button>
                     </div>
                   </div>
                 </div>
@@ -629,7 +629,7 @@
                 <div class="form-row">
                     <button type="button" *ngIf="scriptDetailModal.default === false" class="btn btn-primary" (click)="updateMyScript()">Save</button>
                     <button type="button" *ngIf="scriptDetailModal.default === true" class="btn btn-primary" (click)="cloneScript(scriptDetailModal.id)">Clone Script</button>
-                    <button type="button" class="btn btn-primary" (click)="runScript = !runScript;scriptDetail = !scriptDetail;submitted = false;openEditCommand(scriptDetailModal, 'copy')">Copy Script</button>
+                    <button type="button" class="btn btn-primary" (click)="copyScriptToggle(scriptDetailModal, 'copy')">Copy Script</button>
                     <button type="button" class="btn btn-secondary" (click)="scriptDetail = !scriptDetail">Back</button>
                 </div>
               </div>
