@@ -22,6 +22,7 @@ import { ModalImageCropperStateService } from 'src/ng2/app/services/modal/modal-
 import { ImageCroper } from 'src/ng2/app/services/modal/modal-image-cropper/class/image-croper';
 import { CompanyEditLogo } from '../class/company-edit-logo';
 import { ImageCropper } from '../../shared/image-cropper/class/image-cropper';
+import { UsersService } from 'src/ng2/app/services/users/users.service';
 
 @Component({
   selector: 'app-company-edit-aside',
@@ -57,6 +58,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   constructor(private companiesStateService: CompaniesStateService, private companiesService: CompaniesService,
     private usersStateService: UsersStateService, private modalService: NgbModal, private imageCropperStateService: ImageCropperStateService,
     private elRef: ElementRef,
+    private usersService: UsersService,
     private companySubscriptionState: CompanySubscriptionStateService,
     private companyTimeZoneState: CompanyTimeZoneStateService,
     private companyTagsStateService: CompanyTagsStateService,
@@ -224,7 +226,17 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     this.serviceTypes[index].selected = true;
     this.company.serviceType = this.serviceTypes[index].value;
   }
+  onCheckEmail() {
+    
+    if (this.company.contacts[0].primaryEmail && this.company.contacts[0].primaryEmail.length > 0) this.onCheckValidPrimaryEmail();
+  }
+  onCheckValidPrimaryEmail() {
+    this.usersService.checkValidPrimaryEmail(this.company.contacts[0].primaryEmail, this.company.id).subscribe((data: any) => {
 
+      this.validate.setExistPrimaryContactEmail(data.value);
+      this.cd.detectChanges();
+    })
+  }
   public onChangePrimaryEmail() {
     this.validate.checkValidPrimaryEmail(this.company.contacts[0].primaryEmail);
   }
