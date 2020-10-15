@@ -131,9 +131,7 @@ export class MultiDatepickerDashboardComponent implements OnInit {
     current.month = 1;
     current.day = 1;
     this.fromDate = current;
-    console.log("this.fromDate", this.fromDate);
     this.toDate = this.calendar.getToday();
-    console.log("this.toDate", this.toDate);
     this.selectedDate.next({
       start: this.dateService.getDateFromBootstrap(this.fromDate),
       end: this.dateService.getDateFromBootstrap(this.toDate),
@@ -147,9 +145,7 @@ export class MultiDatepickerDashboardComponent implements OnInit {
   public selectLast90Days() {
     let current = this.calendar.getToday();
     this.fromDate = this.calendar.getPrev(current, "d", 90);
-    console.log("this.fromDate", this.fromDate);
     this.toDate = current;
-    console.log("this.toDate", this.toDate);
     this.selectedDate.next({
       start: this.dateService.getDateFromBootstrap(this.fromDate),
       end: this.dateService.getDateFromBootstrap(this.toDate),
@@ -159,10 +155,8 @@ export class MultiDatepickerDashboardComponent implements OnInit {
     let current = this.calendar.getToday();
     this.fromDate = this.calendar.getPrev(current, "m", 1);
     this.fromDate.day = 1;
-    console.log("this.fromDate", this.fromDate);
     this.toDate = this.calendar.getPrev(current, "m", 1);
     this.toDate.day = new Date(current.year, current.month - 1, 0).getDate();
-    console.log("this.toDate", this.toDate);
     this.selectedDate.next({
       start: this.dateService.getDateFromBootstrap(this.fromDate),
       end: this.dateService.getDateFromBootstrap(this.toDate),

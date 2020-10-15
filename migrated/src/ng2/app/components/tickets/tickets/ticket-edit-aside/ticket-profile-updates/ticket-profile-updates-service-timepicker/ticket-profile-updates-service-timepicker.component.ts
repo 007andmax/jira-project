@@ -78,7 +78,6 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit {
           endDate.setMonth(editEdnDate.getMonth());
           endDate.setDate(editEdnDate.getDate());
         }
-        console.log("endDate",endDate);
         this.onChangeEnd.emit(endDate.getTime());
       });
       this.timePickerEnd.on('showTimepicker', (data) => {
@@ -94,8 +93,6 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit {
       if (this.editMode) {
         let startDate = new Date(this.start);
         let endDate = new Date(this.end);
-        console.log("startDate",startDate);
-        console.log("endDate",endDate);
         this.timePickerStart.timepicker('setTime', startDate);
         this.timePickerEnd.timepicker('setTime', endDate);
       } else {

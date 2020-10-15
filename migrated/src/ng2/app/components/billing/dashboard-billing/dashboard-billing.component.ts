@@ -40,7 +40,6 @@ export class DashboardBillingComponent implements OnInit {
   }
   getDashboard(type) {
     this.dashboardBillingService.getDashboard(type).subscribe(data => {
-      console.log("data", data);
       this.dashboard = data;
       this.contractsDashboard = new ContractsDashboard(this.dashboard.serviceAgreementCounters);
       this.showPreloader = false;

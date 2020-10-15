@@ -47,13 +47,11 @@
             lastCanBeShown = 0;
             if (attrs.fetchFunc) {
               StatisticsService[attrs.fetchFunc](params, function (data) {
-                console.log("attrs",attrs);
                 if (attrs.handleData && $scope[attrs.handleData]) {
                   handledData = $scope[attrs.handleData](data);
                 } else {
                   handledData = data;
                 }
-                console.log("handledData",handledData);
                 setChartData(handledData);
               });
             } else if ($scope[attrs.handleData]) {
@@ -78,7 +76,6 @@
               }
               $scope.chartTicks = $scope.parseDate($scope.chartData);
             }
-console.log("$scope.chartData",$scope.chartData);
             lastCanBeShown = canBeShown;
           }
 

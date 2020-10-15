@@ -88,9 +88,7 @@ export class DashboardSalesAnalyticsComponent implements OnInit {
 
       }
     };
-    console.log("this.chartData", this.chartData);
     this.updateDataChart();
-    console.log("this.data", this.data);
   }
   public updateDataChart() {
     this.data = this.getDataForChart();

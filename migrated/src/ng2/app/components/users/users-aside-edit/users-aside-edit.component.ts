@@ -128,7 +128,6 @@ export class UsersAsideEditComponent implements OnInit {
     // this.user.setSubscriptions(data);
   }
   onCheckEmail() {
-    console.log("this.user.primaryEmail", this.user.primaryEmail);
     if (this.user.primaryEmail && this.user.primaryEmail.length > 0) this.validate.checkValidPrimaryEmail(this.user.primaryEmail);
   }
   onCheckPhoneNumber(i) {

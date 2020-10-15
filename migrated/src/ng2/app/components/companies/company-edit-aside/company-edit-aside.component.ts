@@ -183,7 +183,6 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
 
       this.tagsState.setTagsFromtEdit(this.company.tags);
       this.elRef.nativeElement.querySelector("#company-description").value = this.company.description;
-      console.log("this.company", this.company);
       this.opened = true;
       //this.company.
       this.cd.detectChanges();

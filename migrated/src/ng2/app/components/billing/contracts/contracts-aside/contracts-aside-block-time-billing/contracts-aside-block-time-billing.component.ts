@@ -73,7 +73,6 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     reviewDate.setFullYear(reviewDate.getFullYear() + 1);
     this.reviewDate = reviewDate.getTime();
     today.setMonth(today.getMonth() + 1);
-    console.log("reviewDate",reviewDate);
     this.contractsBlockTime.setStartDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.contractsBlockTime.setReviewDate(today.getDate(), today.getMonth(), today.getFullYear() + 1, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
 

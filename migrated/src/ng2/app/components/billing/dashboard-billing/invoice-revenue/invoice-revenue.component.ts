@@ -75,19 +75,16 @@ export class InvoiceRevenueComponent implements OnInit {
   }
   getInvoiceRevenue() {
     this.dashboardBillingService.getInvoiceRevenue(this.invoiceRevenue.getDataForRequest()).subscribe(data => {
-      console.log("data", data);
       this.invoiceRevenue.setData(data);
       this.data[0].value = this.invoiceRevenue.invoicedSum;
       this.data[1].value = this.invoiceRevenue.collectedSum;
       this.data[2].value = this.invoiceRevenue.outstandingSum;
-      console.log("chart",this.nvd3);
       this.nvd3.chart.update();
       this.cd.detectChanges();
     })
   }
 
   public filterByDate(value) {
-    console.log("value", value);
     if (value.start !== '' && value.end !== '') {
     
       this.invoiceRevenue.startDate = moment(value.start).format('YYYY-MM-DD');
