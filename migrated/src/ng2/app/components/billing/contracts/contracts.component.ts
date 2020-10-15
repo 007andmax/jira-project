@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-state.service';
 import { ServiceAgreement } from './class/service-agreement';
 import { Subscription } from 'rxjs';
+import { LeftPanelStateService } from 'src/ng2/app/states/left-panel/left-panel-state.service';
 
 @Component({
   selector: 'contracts',
@@ -16,11 +17,13 @@ export class ContractsComponent implements OnInit, OnDestroy {
   showNotificationReview: boolean = false;
   sub: Subscription = new Subscription();
   constructor(private contractsStateService: ContractsStateService,
+    private leftPanelStateService:LeftPanelStateService,
     public cd: ChangeDetectorRef
   ) { }
 
 
   ngOnInit() {
+    this.leftPanelStateService.setBillingpage('new-contracts');
     let getOnShowNotificationReview = this.contractsStateService.getOnShowNotificationReview().subscribe(data => {
       this.showNotificationReview = true;
     })

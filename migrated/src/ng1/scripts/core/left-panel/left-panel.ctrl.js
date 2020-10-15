@@ -1608,7 +1608,7 @@
             return 'companyProfile';
           } else if (url.indexOf('users') > -1) {
             return 'users';
-          } else if (url.indexOf('accounting') > -1 || url.indexOf('new-services') > -1 ||  url.indexOf('new-contracts') > -1) {
+          } else if (url.indexOf('accounting') > -1 || url.indexOf('new-services') > -1 ||  url.indexOf('new-contracts') > -1 ||  url.indexOf('billing-dashboard') > -1) {
             return 'billing';
           } else if (url.indexOf('inventory') > -1) {
             return 'inventory';

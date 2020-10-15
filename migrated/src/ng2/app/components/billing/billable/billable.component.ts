@@ -9,6 +9,7 @@ import { AppService } from 'src/ng2/app/states/app/app.service';
 import { BillableRealTimeService } from 'src/ng2/app/states/billable/billable-real-time.service';
 import { Subscription } from 'rxjs';
 import { BillableProfileTicket } from './class/billable-profile-ticket';
+import { LeftPanelStateService } from 'src/ng2/app/states/left-panel/left-panel-state.service';
 
 @Component({
   selector: 'billable',
@@ -32,10 +33,12 @@ export class BillableComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     private appService: AppService,
     private billableRealTimeService: BillableRealTimeService,
+    private leftPanelStateService:LeftPanelStateService,
     private usersStateService: UsersStateService) { }
 
 
   ngOnInit() {
+    this.leftPanelStateService.setBillingpage('new-billable');
     if (this.appService.getIsInit()) this.getList();
     this.appService.getOnInit().subscribe(data => {
       this.getList();

@@ -7,6 +7,7 @@ import { REMOVE_DEFAULT_SERVICE } from 'src/ng2/app/const/confirm';
 import { DefaultServicesStateService } from 'src/ng2/app/states/default-services/default-services-state.service';
 import { Subscription } from 'rxjs';
 import { DefaultServicesRealTimeService } from 'src/ng2/app/states/default-services/default-services-real-time.service';
+import { LeftPanelStateService } from 'src/ng2/app/states/left-panel/left-panel-state.service';
 
 @Component({
   selector: 'default-services',
@@ -25,10 +26,12 @@ export class DefaultServicesComponent implements OnInit, OnDestroy {
     private defaultServicesStateService: DefaultServicesStateService,
     private defaultServicesRealTimeService: DefaultServicesRealTimeService,
     private confirmStateService: ConfirmStateService,
+    private leftPanelStateService:LeftPanelStateService,
     public cd: ChangeDetectorRef,) { }
 
 
   ngOnInit() {
+    this.leftPanelStateService.setBillingpage('new-services');
     this.defaultServicesService.getDefaultServices().subscribe((data: Array<DefaultServices>) => {
       this.list = data;
       this.filter.onFilter('name', this.list);

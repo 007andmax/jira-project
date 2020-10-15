@@ -6,25 +6,25 @@
     <span class="left-panel-full__head--header">Billing</span>
   </div>
   <div class="center-category collapsed-nav nano-content">
-    <div class="center-category__category" (click)="goToState('accounting.dashboard')">
+    <div class="center-category__category" [ngClass]="{'active':activePage === 'billing-dashboard'}" (click)="goToState('billing-dashboard')">
       Dashboard
     </div>
-    <div class="center-category__category" (click)="goToState('services')">
+    <div class="center-category__category" [ngClass]="{'active':activePage === 'new-services'}" (click)="goToState('new-services')">
       Default Services
     </div>
-    <div class="center-category__category active" (click)="goToState('accounting.billable')">
+    <div class="center-category__category" [ngClass]="{'active':activePage === 'new-billable'}" (click)="goToState('new-billable')">
       Billable Items
     </div>
-    <div class="center-category__category" (click)="goToState('receivable')">
+    <div class="center-category__category" [ngClass]="{'active':activePage === 'new-billable-invoices'}" (click)="goToState('new-billable-invoices')">
       Invoices
     </div>
-    <div class="center-category__category" (click)="goToState('quotes-component')">
+    <div class="center-category__category" [ngClass]="{'active':activePage === 'quotes-component'}" (click)="goToState('quotes-component')">
       Quotes
     </div>
-    <div class="center-category__category" (click)="goToState('new-payments')">
+    <div class="center-category__category" [ngClass]="{'active':activePage === 'new-payments-ng2'}" (click)="goToState('new-payments-ng2')">
       Payments
     </div>
-    <div class="center-category__category" (click)="goToState('service-agreements')">
+    <div class="center-category__category" [ngClass]="{'active':activePage === 'new-contracts'}" (click)="goToState('new-contracts')">
       Contracts
     </div>
   </div>

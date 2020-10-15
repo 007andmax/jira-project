@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs';
 import { QuoteResult } from './class/quote-result';
 
 import { NotificationStateService } from '../../shared/notification/services/notification-state.service';
+import { LeftPanelStateService } from 'src/ng2/app/states/left-panel/left-panel-state.service';
 
 /**
  * Password quotes component
@@ -61,7 +62,7 @@ export class QuotesComponent implements OnInit, OnDestroy {
     private quoteStateService: QuoteStateService,
     private quoteRealTimeService: QuoteRealTimeService,
     private modalService: NgbModal,
-
+    private leftPanelStateService:LeftPanelStateService,
     private notificationStateService: NotificationStateService,
     config: NgbModalConfig,
   ) {
@@ -73,6 +74,7 @@ export class QuotesComponent implements OnInit, OnDestroy {
    * Initializes quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
+    this.leftPanelStateService.setBillingpage('quotes-component');
     this.getQuotes();
 
     this.changeQuotesListItem();

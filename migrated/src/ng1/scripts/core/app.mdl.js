@@ -177,11 +177,6 @@
           template: '<div ui-view></div>',
           redirectTo: 'accounting.dashboard'
         }))
-        .state('accounting.dashboard', waitForServices({
-          url: '/dashboard',
-          templateUrl: '/ng1/scripts/core/dashboards/billing-dashboard/billing-dashboard.tpl.html',
-          controller: 'quicktech.core.dashboards.billingDashboardCtrl'
-        }))
         .state('new-services', waitForServices({
           url: '/ng2/default-services',
           template: '<default-services-component></default-services-component>'

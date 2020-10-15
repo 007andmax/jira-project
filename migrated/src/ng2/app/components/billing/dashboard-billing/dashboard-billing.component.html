@@ -1,9 +1,10 @@
+<app-left-panel-billing></app-left-panel-billing>
 <div class="billing-dashboard-page">
   <div class="loading" *ngIf="showPreloader"></div>
   <div class="billing-dashboard-page__content" *ngIf="!showPreloader">
     <div class="qt-df qt-ai-c qt-jc-sb qt-mb-16">
       <h3 class="list-title qt-mt-0 qt-mb-0 qt-fs-16 qt-ff-sb">Dashboard</h3>
-      <div>Accounting date: 15 Jan 2019</div>
+      <div [textContent]="'Accounting date: ' + getTextAccountingStartDate()"></div>
     </div>
 
     <div class="qt-df qt-jc-sb qt-mb-16">

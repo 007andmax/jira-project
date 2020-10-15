@@ -9,6 +9,7 @@ import { ContractsDashboardComponent } from './contracts-dashboard/contracts-das
 import { ReportsService } from 'src/ng2/app/services/reports/reports.service';
 import { TopDashboard } from './class/top-dashboard';
 import { DashboardSalesAnalyticsComponent } from './dashboard-sales-analytics/dashboard-sales-analytics.component';
+import { LeftPanelStateService } from 'src/ng2/app/states/left-panel/left-panel-state.service';
 
 @Component({
   selector: 'app-dashboard-billing',
@@ -27,10 +28,15 @@ export class DashboardBillingComponent implements OnInit {
   constructor(private dashboardBillingService: DashboardBillingService,
     private reportsService: ReportsService,
     public cd: ChangeDetectorRef,
+    private leftPanelStateService:LeftPanelStateService,
     private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
+    this.leftPanelStateService.setBillingpage('billing-dashboard');
     this.getAccountingStartDate();
+  }
+  getTextAccountingStartDate() {
+    return moment(this.accountingStartDate).format('DD MMM YYYY');
   }
   getDashboard(type) {
     this.dashboardBillingService.getDashboard(type).subscribe(data => {

@@ -11,6 +11,7 @@ import { DELETE_PAYMENT } from 'src/ng2/app/const/confirm';
 import { Invoice } from '../invoices/class/invoice';
 import { InvoicesAsidePreviewComponent } from '../invoices/invoices-aside-preview/invoices-aside-preview.component';
 import { PaymentsRealTimeService } from 'src/ng2/app/states/payments/payments-real-time.service';
+import { LeftPanelStateService } from 'src/ng2/app/states/left-panel/left-panel-state.service';
 
 @Component({
   selector: 'payments',
@@ -48,9 +49,11 @@ export class PaymentsComponent implements OnInit {
     private paymentsStateService: PaymentsStateService,
     private confirmStateService: ConfirmStateService,
     private paymentsRealTimeService: PaymentsRealTimeService,
+    private leftPanelStateService:LeftPanelStateService,
     private paymentsListService: PaymentsListService) { }
 
   ngOnInit() {
+    this.leftPanelStateService.setBillingpage('new-payments-ng2');
     window.scrollTo(0, 0);
     if (this.companiesStateService.getCompanies().length > 0) this.onScroll();
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {

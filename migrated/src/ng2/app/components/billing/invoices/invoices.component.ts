@@ -10,6 +10,7 @@ import { ConfirmStateService } from '../../shared/confirm/services/confirm-state
 import { DELETE_INVOICE, ROLLBACK_INVOICE, REFUND_PAYMENTS } from 'src/ng2/app/const/confirm';
 import { InvoiceRealTimeService } from 'src/ng2/app/states/invoice/invoice-real-time.service';
 import { InvoicesAsidePreviewComponent } from './invoices-aside-preview/invoices-aside-preview.component';
+import { LeftPanelStateService } from 'src/ng2/app/states/left-panel/left-panel-state.service';
 
 @Component({
   selector: 'app-invoices',
@@ -40,9 +41,11 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     private companiesStateService: CompaniesStateService,
     private invoiceStateService: InvoiceStateService,
     private confirmStateService: ConfirmStateService,
+    private leftPanelStateService:LeftPanelStateService,
     private invoicesListService: InvoicesListService) { }
 
   ngOnInit() {
+    this.leftPanelStateService.setBillingpage('new-billable-invoices');
     window.scrollTo(0, 0);
     if (this.companiesStateService.getCompanies().length > 0) this.onScroll();
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
