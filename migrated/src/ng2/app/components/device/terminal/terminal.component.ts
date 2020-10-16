@@ -109,6 +109,7 @@ export class TerminalComponent implements OnInit {
     $('#cmd textarea').scroll(function(){
       $('#cmd_line').scrollTop($('#cmd textarea').scrollTop());
     });
+    document.getElementById("terminal").style.height = window.innerHeight - document.getElementById('deviceHeader').offsetHeight - 250 + 'px';
     this.terminalHeight = document.getElementById("terminal").offsetHeight;
     this.cmdHeight = document.getElementById("editCmd").offsetHeight;
   }
