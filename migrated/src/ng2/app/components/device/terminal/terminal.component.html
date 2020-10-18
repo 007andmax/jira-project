@@ -116,7 +116,7 @@
                   </div>
                 </div>
                 <div class="f-col col-100 cmd-description">
-                  <div class="label"><a (click)="showDescription = false" href="javascript:;" [ngClass]="{'active': showDescription == false}">Command</a> | <a (click)="showDescription = true" href="javascript:;" [ngClass]="{'active': showDescription == true}">Description</a></div>
+                  <div class="label cmn-tabs"><a (click)="showDescription = false" href="javascript:;" [ngClass]="{'active': showDescription == false}">Command</a><a (click)="showDescription = true" href="javascript:;" [ngClass]="{'active': showDescription == true}">Description</a></div>
                   <div class="form-row">
                         <div id="cmd" *ngIf="showDescription === false">
                           <ul id="cmd_line">
@@ -610,7 +610,7 @@
                 </div>
               </div>
               <div class="f-col col-100 cmd-description">
-                <div class="label"><a (click)="showDescription = false" href="javascript:;" [ngClass]="{'active': showDescription == false}">Command</a> | <a (click)="showDescription = true" href="javascript:;" [ngClass]="{'active': showDescription == true}">Description</a></div>
+                <div class="label cmn-tabs"><a (click)="showDescription = false" href="javascript:;" [ngClass]="{'active': showDescription == false}">Command</a> <a (click)="showDescription = true" href="javascript:;" [ngClass]="{'active': showDescription == true}">Description</a></div>
                 <div class="form-row">
                   <div id="cmd_detail" *ngIf="showDescription === false">
                     <ul id="cmd_detail_line">

@@ -1035,25 +1035,53 @@ body {
             }
         }
         .cmd-description {
-            a {
-                font-family: "Graphik-Medium";
-                font-size: 13px;
-                font-weight: 500;
-                font-style: normal;
-                line-height: 1.54;
-                letter-spacing: normal;
-                color: #4f5f79;
-                text-transform: capitalize;
-                margin-bottom: 10px;
-                &.active {
-                    color: #16a4fa;
-                }
-            }
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            padding: 0 8px;
+            justify-content: center;
+            // a {
+            //     font-family: "Graphik-Medium";
+            //     font-size: 13px;
+            //     font-weight: 500;
+            //     font-style: normal;
+            //     line-height: 1.54;
+            //     letter-spacing: normal;
+            //     color: #4f5f79;
+            //     text-transform: capitalize;
+            //     margin-bottom: 10px;
+            //     &.active {
+            //         color: #16a4fa;
+            //     }
+            // }
             .label {
-                margin-bottom: 10px;
-                padding-bottom: 0;
+                margin-bottom: 0;
+                padding: 0 0 10px 0;
                 color: #4f5f79;
+                display: -ms-flexbox;
+                display: -webkit-flex;
+                display: flex;
             }
+            .cmn-tabs{
+                   a{
+                    padding-bottom: 10px;
+                    border-bottom: 2px solid transparent;
+                    margin-right: 15px;
+                    font-size: 12px;
+                    font-weight: 600;
+                    line-height: 1.33;
+                    letter-spacing: normal;
+                    color: #4f5f79;
+                    font-family: "Graphik-Medium";
+                    font-weight: 600;
+                    &.active{
+                        color: #16a4fa;
+                        border-color: #16a4fa;
+                    }
+                   }
+                }
         }
     }
 }
