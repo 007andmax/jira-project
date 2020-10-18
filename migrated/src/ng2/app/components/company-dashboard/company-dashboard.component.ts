@@ -36,6 +36,11 @@ export class CompanyDashboardComponent implements OnInit {
       this.closeResult = `Closed with: ${result}`;
     });
   }
+  openMap(content: any) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title',centered: true , windowClass: 'cmp-comapny-modal map'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    });
+  }
 
   ngOnInit() {
     this.currentService = new TicketProfileFormService();
