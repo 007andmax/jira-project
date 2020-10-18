@@ -16,7 +16,7 @@
                     <img src="/html/ng2/assets/img/computer.svg" alt="computer" />
                   </span>
                   <!-- <h3 (mouseenter)="showInput = true;" [ngStyle]="{'display':showInput === true ? 'none' : 'block' }">{{label}}</h3> -->
-                  <span class="edit-field">
+                  <span class="edit-field" data-tooltip="1111-2222-3333-4444-5555-6666-77">
                     <input type="text" class="form-control label-field" [(ngModel)]="label" (blur)="saveLabel();">
                   </span>
       
@@ -48,7 +48,7 @@
                   <li>
                     <span>Manufacturer</span>
                     <!-- <div>{{system?.manufacturer || 'N/A'}}</div> -->
-                    <span class="edit-field">
+                    <span class="edit-field" data-tooltip="1111-2222-3333-4444-5555-6666-77">
                       <input type="text" class="form-control sub-label-field" [(ngModel)]="system.manufacturer" (blur)="updateDashboard('manufacturer')">
                     </span>
                   </li>
@@ -62,20 +62,20 @@
                     <!-- <ngb-datepicker class="dropdown-menu p-0"
                     [class.show]="visible">
                   </ngb-datepicker> -->
-                  <span class="edit-field">
+                  <span class="edit-field" data-tooltip="1111-2222-3333-4444-5555-6666-77">
                     <input type="text" class="form-control sub-label-field" [(ngModel)]="system.install_date" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" (dateSelect)="updateDashboard('install_date')">
                   </span>
                   </li>
                   <!-- <li>
                     <span>Warranty Date</span>
-                    <span class="edit-field">
+                    <span class="edit-field" data-tooltip="1111-2222-3333-4444-5555-6666-77">
                       <input type="text" class="form-control sub-label-field" [(ngModel)]="system.warranty" (dateSelect)="updateDashboard('warranty')" ngbDatepicker #dWarranty="ngbDatepicker" (click)="dWarranty.toggle()">
                     </span>
                   </li> -->
                   <li>
                     <span>Computer Model</span>
                     <!-- <div>{{system?.model || 'N/A'}}</div> -->
-                    <span class="edit-field">
+                    <span class="edit-field" data-tooltip="1111-2222-3333-4444-5555-6666-77">
                       <input type="text" class="form-control sub-label-field" [(ngModel)]="system.model" (blur)="updateDashboard('model')">
                     </span>
                   </li>
@@ -85,7 +85,7 @@
                   </li> -->
                   <!-- <li>
                     <span>Bought Date</span>
-                    <span class="edit-field">
+                    <span class="edit-field" data-tooltip="1111-2222-3333-4444-5555-6666-77">
                       <input type="text" class="form-control sub-label-field" [(ngModel)]="system.install_date" (dateSelect)="updateDashboard('install_date')" ngbDatepicker #dInstall="ngbDatepicker" (click)="dInstall.toggle()">
                     </span>
                   </li> -->
@@ -93,7 +93,7 @@
                     <span>System Type</span>
                     <!-- <div *ngIf="system?.architecture != undefined && system?.architecture != ''">({{system?.architecture}}) system</div>
                     <div *ngIf="system?.architecture == undefined || system?.architecture == ''">N/A</div> -->
-                    <span class="edit-field">
+                    <span class="edit-field" data-tooltip="1111-2222-3333-4444-5555-6666-77">
                       <input type="text" class="form-control sub-label-field" [(ngModel)]="system.architecture" (blur)="updateDashboard('architecture')">
                     </span>
                   </li>
