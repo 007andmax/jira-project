@@ -30,7 +30,7 @@ export class DashboardSalesAnalyticsComponent implements OnInit {
       chart: {
         type: 'lineChart',
         height: 300,
-
+        duration: 1000,
         margin: {
           top: 20,
           right: 20,
