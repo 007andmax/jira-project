@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
 import { QuoteStateService } from "../../components/billing/quotes/quote-create/quote-state.service";
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { QuoteResult } from '../../components/billing/quotes/class/quote-result';
 import { NotificationStateService } from '../../components/shared/notification/services/notification-state.service';
+import { Quote } from '../../components/billing/quotes/class/quote';
  
 
 /**
@@ -263,18 +264,10 @@ export class QuoteService {
   public getQuotes(data) {
     //data.type && this.getSortType(data.type);
     
-    return this.http.post(this.apiUrl + 'saleQuotes/search', {
-      "companyName": data.company || null,
-      "quoteNumber": data.number || null,
-      "status": data.status || null,
-      "date": data.startDate || '',
-      "endDate": data.endDate || '',
-      "sortBy": this.sortType || 'DATE_DESC',
-      "offset": this.offset * data.page,
-      "limit": this.offset
-    }).pipe(
-      tap(data => data),
+    return this.http.post(this.apiUrl + 'saleQuotes/search', data).pipe(
+      map((data: any) => data.map(item => new Quote(item))),
       catchError(this.handleError));
+      
   }
 
   /**

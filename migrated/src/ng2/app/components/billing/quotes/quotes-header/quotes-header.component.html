@@ -1,0 +1,67 @@
+<div class="qt-list-header sticky-list-header invoices-list-header">
+  <div>
+    <h3 class="list-title" [textContent]="'Quotes'"></h3>
+  </div>
+
+  <div class="d-f ai-c">
+    <button class="qt-btn --transparent" (click)="clearAll()" *ngIf="countFilter > 0">Clear All</button>
+    <button class="qt-btn filter-button qt-ml-8" [ngClass]="{'active':!toggleFilter}" (click)="toggleFilter  = !toggleFilter"> <span class="filter-counter qt-circle qt-sz-18 qt-ff-sb qt-fs-10 qt-color-white qt-bg-info qt-mr-8 qt-df qt-ai-c qt-jc-c" *ngIf="countFilter > 0" [textContent]="countFilter"></span> Filters</button>
+    <button class="qt-btn --outline-blue qt-ml-8" (click)="onShowCreatePayment()">Record Payment</button>
+  </div>
+  <app-payments-filter #filter (changeCountFilter)="onChangeCountFilter($event)" [hidden]="toggleFilter"></app-payments-filter>
+
+</div>
+<div class="sticky-list-table-header invoice-list-table-header" [ngClass]="{'--filters-open':!toggleFilter}">
+
+
+  <table class="qt-table-modern invoice-table">
+    <thead>
+      <tr>
+        <th class="billable-payment-table__date pointer"  >
+              <div class="d-f">
+            <label class="qt-checkbox">
+              <input type="checkbox">
+              <span></span>
+            </label>
+          </div>  
+        </th>
+        <th class="billable-payment-table__date pointer" (click)="sortBy('PAYMENT_DATE')">
+          Date
+          <span class="qt-table-modern__sorting"></span>
+        </th>
+
+        <th class="billable-payment-table__invoice">
+          Quote#
+        </th>
+
+        <th class="billable-payment-table__company pointer" (click)="sortBy('COMPANY_NAME')">
+          Company
+          <span class="qt-table-modern__sorting"></span>
+        </th>
+
+        <th class="billable-payment-table__payment-mode pointer" (click)="sortBy('PAYMENT_METHOD')">
+          Description
+          <span class="qt-table-modern__sorting"></span>
+        </th>
+
+        <th class="billable-payment-table__reference" >
+          Created By
+        </th>
+
+        <th class="billable-payment-table__payment"  >
+          Status
+
+        </th>
+        <th class="billable-payment-table__amount pointer" (click)="sortBy('AMOUNT')">
+          Valid Until
+          <span class="qt-table-modern__sorting"></span>
+        </th>
+        <th class="billable-payment-table__status pointer" (click)="sortBy('STATUS')">
+          Amount
+          <span class="qt-table-modern__sorting"></span>
+        </th>
+        <th class="billable-payment-table__menu"></th>
+      </tr>
+    </thead>
+  </table>
+</div>

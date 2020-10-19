@@ -357,6 +357,9 @@ import { DashboardStatsComponent } from './components/billing/dashboard-billing/
 import { DashboardQuotesComponent } from './components/billing/dashboard-billing/dashboard-quotes/dashboard-quotes.component';
 import { DashboardSalesAnalyticsComponent } from './components/billing/dashboard-billing/dashboard-sales-analytics/dashboard-sales-analytics.component';
 import { CompanyContractsComponent } from './components/companies/company-contracts/company-contracts.component';
+import { QuotesTableComponent } from './components/billing/quotes/quotes-table/quotes-table.component';
+import { QuotesHeaderComponent } from './components/billing/quotes/quotes-header/quotes-header.component';
+import { QuotesItemComponent } from './components/billing/quotes/quotes-table/quotes-item/quotes-item.component';
 
 
 
@@ -914,7 +917,22 @@ angular.module('quicktech')
 
 
 
-    CompanyContractsComponent
+    CompanyContractsComponent,
+
+
+
+
+    QuotesTableComponent,
+
+
+
+
+    QuotesHeaderComponent,
+
+
+
+
+    QuotesItemComponent
 
   ],
   imports: [

@@ -1,0 +1,32 @@
+<app-left-panel-billing></app-left-panel-billing>
+<div class="payments-page page-list invoices-page" >
+
+  <div class="qt-df qt-fd-c qt-jc-sb invoices-page__list-container">
+    <div>
+      <app-quotes-header (onCreatePayment)="onCreatePayment()" (onSortBy)="sortBy($event)"></app-quotes-header>
+      <div class="table-container"  *ngIf="!showPreloader">
+        <table class="qt-table-modern billable-table">
+          <tbody
+          infiniteScroll
+          [infiniteScrollDistance]="2"
+          [infiniteScrollThrottle]="50"
+          [infiniteScrollDisabled]="infiniteScrollDisabled"
+          (scrolled)="onScroll()">
+       <ng-template ngFor let-quote
+                    [ngForOf]="quotes"
+                    [ngForTrackBy]="trackById">
+                    <app-quotes-item [quote]="quote" ></app-quotes-item>
+       </ng-template>
+     </tbody>
+        </table>
+        <div class="loading" *ngIf="showPreloader"></div>
+      </div>
+    </div>
+
+    <div class="total-info">
+      <div class="loading pengind-loading" *ngIf="showPendingPreloader"></div>
+    </div>
+
+  </div>
+</div>
+ 

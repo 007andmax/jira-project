@@ -796,6 +796,9 @@ ngb-typeahead-window {
   }
 }
 // GLOBAL STYLES FOR QUOTES
+app-quotes-item {
+  display: contents;
+}
 .quote-create {
   &__content {
     &--top,

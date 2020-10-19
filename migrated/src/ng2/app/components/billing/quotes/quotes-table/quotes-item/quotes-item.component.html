@@ -1,0 +1,33 @@
+<tr >
+  <td class="billable-payment-table__date pointer"   ></td>
+  <td class="billable-payment-table__date pointer"   >
+    <div class="d-f">
+      <label class="qt-checkbox"   [attr.for]="'quote-' + quote.id">
+        <input [attr.id]="'quote-' + quote.id"  [(ngModel)]="quote.selected"  type="checkbox" (change)="onChangeSelect()"  >
+        <span ></span>
+      </label>
+    </div>
+  </td>
+  <td class="billable-payment-table__invoice pointer" [textContent]="getDate(quote.date)">
+  </td>
+  <td class="billable-payment-table__company pointer" [textContent]="'#' + quote.number"  ></td>
+  <td class="billable-payment-table__payment-mode pointer" [textContent]="quote.company.name"  ></td>
+  <td class="billable-payment-table__reference pointer" [textContent]="quote.description"  ></td>
+  <td class="billable-payment-table__reference pointer" [textContent]="'create by'"  ></td>
+  <td class="billable-payment-table__status pointer"  >
+    <span class="tag__modern"  [textContent]="quote.status"> <!-- [ngClass]="payment.refundMethod ? '--error' : '--success'"-->
+    </span>
+  </td>
+  <td class="billable-payment-table__payment"  [textContent]="getDate(quote.validUntil)"> </td>
+  <td class="billable-payment-table__amount pointer" [textContent]="quote.totalAmount | currency"  ></td>
+ 
+  <td class="billable-payment-table__menu" ngbDropdown [container]="'body'">
+   <!--  <div class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"  id="dropdownBasic1" ngbDropdownToggle></div>
+    <ul class="qt-dropdown-menu invoice-items-dropdown"  ngbDropdownMenu aria-labelledby="dropdownBasic1">
+      <li class="pointer" ngbDropdownItem (click)="showEditPayment()" *ngIf="!payment.refundMethod">Edit payment</li>
+      <li class="pointer" ngbDropdownItem (click)="showRefundPayment()" *ngIf="!payment.refundMethod">Refund payment</li>
+      <li class="pointer" ngbDropdownItem (click)="deletePayment()">Delete payment</li>
+    </ul> -->
+  </td>
+
+</tr>
