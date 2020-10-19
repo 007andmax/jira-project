@@ -88,12 +88,15 @@
   position: relative;
   width: 100%;
   padding-left: 25px;
-  margin-bottom: 10px;
   cursor: pointer;
   color: #fff;
   display: block;
   transition: all .3s;
   font-size: 13px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  border-left: 2px solid transparent;
 }
 
 .center-category__category--item {
@@ -208,7 +211,8 @@
 
 .collapsed-nav > .center-category__category.active,
 .collapsed-nav > .center-category__category:hover {
-  color: #16a4fa;
+  background: #3e4b61;
+  border-left: 2px solid #16a4fa;
 }
 
 .tickets-left-panel .center-category__category span:not(.tag-span),
