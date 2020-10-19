@@ -1,11 +1,12 @@
 <div class="date-picker" (clickOutside)="hideDatePicker()">
-  
-         <p  class="pointer" [textContent]="getSelectedInterval()"  (click)="toggleDatePicker()"></p>
+  <div class="date-picker-header" (click)="toggleDatePicker()">
+         <p  class="pointer" [textContent]="getSelectedInterval()"  ></p>
   <i *ngIf="selectedDateModel"
      class="icn-sm icn-remove-old"
      (click)="clearDate()"></i>
-  <i *ngIf="!selectedDateModel"
+  <i *ngIf="!selectedDateModel"  
      class="icn-16 icn-calendar-light pointer"></i>
+    </div>
   <div  class="dropdown-menu show" *ngIf="showDatePicker">
     <ngb-datepicker #dp (select)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" [outsideDays]="outsideDays"  >
     </ngb-datepicker>
