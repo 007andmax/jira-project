@@ -14,7 +14,6 @@ import { QuoteResult } from './class/quote-result';
 
 import { NotificationStateService } from '../../shared/notification/services/notification-state.service';
 import { LeftPanelStateService } from 'src/ng2/app/states/left-panel/left-panel-state.service';
-import { Quote } from './class/quote';
 
 /**
  * Password quotes component
@@ -23,12 +22,12 @@ import { Quote } from './class/quote';
   selector: 'app-quotes',
   templateUrl: './quotes.component.html',
   styleUrls: ['./quotes.component.scss'],
-  providers: [Location, { provide: LocationStrategy, useClass: PathLocationStrategy }, NgbModalConfig, NgbModal],
+  
 })
 export class QuotesComponent implements OnInit, OnDestroy {
 
 
-  public quotesList:Array<Quote> = [];
+  public quotesList = [];
   public page = 0;
   public searchNumber: number;
   public quoteStatuses = QUOTE_STATUS;
@@ -75,10 +74,11 @@ export class QuotesComponent implements OnInit, OnDestroy {
    * Initializes quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
-  /*  this.leftPanelStateService.setBillingpage('quotes-component');
-    this.getQuotes();
+    console.log("QuotesComponent");
+    this.leftPanelStateService.setBillingpage('quotes-component');
+ //   this.getQuotes();
 
-    this.changeQuotesListItem();*/
+    this.changeQuotesListItem();
     //this.onInitCheackQuoteSent();
   }
 
