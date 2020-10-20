@@ -249,12 +249,7 @@ export class QuotesComponent implements OnInit, OnDestroy {
   * move to edit quote component
   * @param quote - quote
   */
-  goToQuoteEdit(quote) {
-    this.quoteServices.getQuote(quote.id).subscribe((data) => {
-      this.quoteStateService.setEditQuote(data);
-    })
 
-  }
 
   /**
    * Change state to preview
@@ -277,53 +272,29 @@ export class QuotesComponent implements OnInit, OnDestroy {
   /**
    * convert Quote to invoice
    */
-  convertToInvoice(item) {
-    this.quoteServices.convertToInvoice({ companyInfo: item.company }, item.id).subscribe((res) => {
-
-    });
-  }
+ 
 
   /**
    * convert Quote to ticket
    */
-  convertToTicket(item) {
-    this.quoteServices.convertToTicket(item.company, item.id).subscribe((res) => {
-
-    });
-  }
+ 
 
   /**
    * cancel quote
    */
-  cancelQuote(item) {
-    this.quoteServices.cancelQuote(item.company, item.id).subscribe((res) => {
 
-    });
-  }
 
   /**
    * archive quote
    */
-  archiveQuote(item) {
-    this.quoteServices.archiveQuote(item.company, item.id).subscribe((res) => {
 
-    });
-  }
 
-  markAsRead(item) {
-    this.quoteServices.markAsRead(item.company, item.id).subscribe((res) => {
-
-    });
-  }
+ 
 
   /**
    * archive quote
    */
-  approveQuote(item) {
-    this.quoteServices.approveQuote(item.company, item.id).subscribe((res) => {
 
-    });
-  }
 
   /**
    * Subscribe to real time quote
@@ -347,20 +318,7 @@ export class QuotesComponent implements OnInit, OnDestroy {
   /**
    * open send modal for resend
    */
-  public resend(item) {
-    if (item.status === 'TICKETED' || item.status === 'INVOICED') {
-      this.quoteServices.repeatSend(item.id).subscribe();
-    } else {
-      let recipients = item.recipients;
-      if (typeof recipients === "string") item.recipients = recipients.split(',');
-      this.quoteServices.getQuote(item.id).subscribe((data) => {
-        const modalRef = this.modalService.open(ModalQuoteComponent, data);
-        modalRef.componentInstance.data = data;
-      })
-
-    }
-
-  }
+ 
 
   public trackById(index, item) {
     return item.id;

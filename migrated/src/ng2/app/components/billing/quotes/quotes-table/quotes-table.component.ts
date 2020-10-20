@@ -1,5 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
+import { ModalQuoteComponent } from 'src/ng2/app/services/modal/modal-quote/modal-quote.component';
 import { QuoteService } from 'src/ng2/app/services/quote/quote.service';
 import { Quote } from '../class/quote';
 import { QuoteFilter } from '../class/quote-filter';
@@ -22,6 +24,7 @@ export class QuotesTableComponent implements OnInit {
   sub: Subscription = new Subscription();
   constructor(private quotesListService: QuotesListService,
     public cd: ChangeDetectorRef,
+    private modalService: NgbModal,
     private quoteStateService: QuoteStateService,
     private quoteServices: QuoteService,) { }
 
@@ -66,5 +69,57 @@ export class QuotesTableComponent implements OnInit {
     this.infiniteScrollDisabled = true;
     this.getQuotes();
   }
+  downloadPdf(item) {
+    this.quoteServices.downloadPdf(item.id).subscribe((res) => this.quoteServices.downLoadFile(res, item.id, item.company.name, item.quoteNumber));
+  }
+  public resend(item) {
+    if (item.status === 'TICKETED' || item.status === 'INVOICED') {
+      this.quoteServices.repeatSend(item.id).subscribe();
+    } else {
+      let recipients = item.recipients;
+      if (typeof recipients === "string") item.recipients = recipients.split(',');
+      this.quoteServices.getQuote(item.id).subscribe((data) => {
+        const modalRef = this.modalService.open(ModalQuoteComponent, data);
+        modalRef.componentInstance.data = data;
+      })
 
+    }
+
+  }
+  goToQuoteEdit(quote) {
+    this.quoteServices.getQuote(quote.id).subscribe((data) => {
+      this.quoteStateService.setEditQuote(data);
+    })
+
+  }
+  archiveQuote(item) {
+    this.quoteServices.archiveQuote(item.company, item.id).subscribe((res) => {
+
+    });
+  }
+  cancelQuote(item) {
+    this.quoteServices.cancelQuote(item.company, item.id).subscribe((res) => {
+
+    });
+  }
+  markAsRead(item) {
+    this.quoteServices.markAsRead(item.company, item.id).subscribe((res) => {
+
+    });
+  }
+  approveQuote(item) {
+    this.quoteServices.approveQuote(item.company, item.id).subscribe((res) => {
+
+    });
+  }
+  convertToTicket(item) {
+    this.quoteServices.convertToTicket(item.company, item.id).subscribe((res) => {
+
+    });
+  }
+  convertToInvoice(item) {
+    this.quoteServices.convertToInvoice({ companyInfo: item.company }, item.id).subscribe((res) => {
+
+    });
+  }
 }

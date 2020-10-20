@@ -9,7 +9,7 @@ import { QUOTE_STATUS } from 'src/ng2/app/const/quote-status';
   styleUrls: ['./quotes-item.component.scss']
 })
 export class QuotesItemComponent implements OnInit {
-  
+
   @Input() quote: Quote;
   @Output() onResend = new EventEmitter<any>();
   @Output() onConvertToInvoice = new EventEmitter<any>();
@@ -19,6 +19,7 @@ export class QuotesItemComponent implements OnInit {
   @Output() onCancelQuote = new EventEmitter<any>();
   @Output() onArchiveQuote = new EventEmitter<any>();
   @Output() onGoToQuoteEdit = new EventEmitter<any>();
+  @Output() onDownloadPdf = new EventEmitter<any>();
   constructor() { }
 
   ngOnInit() {
@@ -28,6 +29,9 @@ export class QuotesItemComponent implements OnInit {
   }
   public getDate(date) {
     return moment(new Date(date)).format('DD MMM YYYY');
+  }
+  downloadPdf() {
+    this.onDownloadPdf.emit(this.quote);
   }
   goToQuoteEdit() {
     this.onGoToQuoteEdit.emit(this.quote);

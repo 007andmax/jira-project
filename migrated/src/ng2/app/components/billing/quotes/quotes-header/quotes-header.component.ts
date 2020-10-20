@@ -1,5 +1,4 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { PaymentsFilterComponent } from '../../payments/payments-header/payments-filter/payments-filter.component';
 import { QuotesFilterComponent } from './quotes-filter/quotes-filter.component';
 
 @Component({
