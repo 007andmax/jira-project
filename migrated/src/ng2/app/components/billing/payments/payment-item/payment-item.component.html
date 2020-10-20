@@ -18,9 +18,9 @@
   <td class="billable-payment-table__menu" ngbDropdown [container]="'body'">
     <div class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"  id="dropdownBasic1" ngbDropdownToggle></div>
     <ul class="qt-dropdown-menu invoice-items-dropdown"  ngbDropdownMenu aria-labelledby="dropdownBasic1">
-      <li class="pointer" ngbDropdownItem (click)="showEditPayment()" *ngIf="!payment.refundMethod">Edit payment</li>
-      <li class="pointer" ngbDropdownItem (click)="showRefundPayment()" *ngIf="!payment.refundMethod">Refund payment</li>
-      <li class="pointer" ngbDropdownItem (click)="deletePayment()">Delete payment</li>
+      <li class="pointer" ngbDropdownItem (click)="showEditPayment()" *ngIf="!payment.refundMethod"><div class="icon__edit qt-bg-contain  qt-sz-16 qt-mr-8"></div>Edit payment</li>
+      <li class="pointer" ngbDropdownItem (click)="showRefundPayment()" *ngIf="!payment.refundMethod"><div class="icon__refund-payment qt-bg-contain  qt-sz-16 qt-mr-8"></div>Refund payment</li>
+      <li class="pointer" ngbDropdownItem (click)="deletePayment()"><div class="icon__remove qt-bg-contain  qt-sz-16 qt-mr-8"></div>Delete payment</li>
     </ul>
   </td>
 

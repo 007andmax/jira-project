@@ -38,6 +38,10 @@
   // overflow: auto;
   max-width: 1320px;
   margin: 0 auto;
+  z-index: 1;
+  &.--filters-open {
+    top: 198px;
+  }
 }
 
 
