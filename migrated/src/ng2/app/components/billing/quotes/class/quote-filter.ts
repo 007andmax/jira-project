@@ -8,8 +8,23 @@ export class QuoteFilter {
     offset: number = 0;
     limit: number = 30;
     constructor() { }
+    public setStatus(data) {
+        this.status = data;
+    }
     public setOffset(offset) {
         this.offset = offset;
+    }
+    public setEndDate(data) {
+        this.endDate = data;
+    }
+    public setStartDate(data) {
+        this.date = data;
+    }
+    public setCompanyName(data) {
+        this.companyName = data;
+    }
+    public setQuoteNumber(data) {
+        this.quoteNumber = data;
     }
     public getFIlter() {
         return {

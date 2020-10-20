@@ -15,7 +15,15 @@
        <ng-template ngFor let-quote
                     [ngForOf]="quotes"
                     [ngForTrackBy]="trackById">
-                    <app-quotes-item [quote]="quote" ></app-quotes-item>
+                    <app-quotes-item [quote]="quote" 
+                    (onResend)="resend($event)" 
+                    (onConvertToInvoice)="convertToInvoice($event)" 
+                    (onConvertToTicket)="convertToTicket($event)"
+                    (onApproveQuote)="approveQuote($event)"
+                    (onMarkAsRead)="markAsRead($event)"
+                    (onCancelQuote)="cancelQuote($event)"
+                    (onArchiveQuote)="archiveQuote($event)"
+                    (onGoToQuoteEdit)="goToQuoteEdit($event)" ></app-quotes-item>
        </ng-template>
      </tbody>
         </table>

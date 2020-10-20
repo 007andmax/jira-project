@@ -12,7 +12,7 @@ import { ProductService } from 'src/ng2/app/services/product/product.service';
   providedIn: 'root'
 })
 export class QuoteStateService {
-
+  filter: EventEmitter<any> = new EventEmitter();
   public client: any;
   public itemsArray: any;
   public type = false;
@@ -720,6 +720,13 @@ public onInitServices(data) {
   public resetquoteForCreate() {
     this.selectedNoteFull = null;
     this.quoteForCreate = this.getDefaultquoteForCreate();
+  }
+
+  public onInitFilter(data) {
+    this.filter.emit(data);
+  }
+  public getOnInitFilter() {
+    return this.filter;
   }
 
    /**

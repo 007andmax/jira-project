@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { PaymentsFilterComponent } from '../../payments/payments-header/payments-filter/payments-filter.component';
+import { QuotesFilterComponent } from './quotes-filter/quotes-filter.component';
 
 @Component({
   selector: 'app-quotes-header',
@@ -7,9 +9,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuotesHeaderComponent implements OnInit {
 
+  @ViewChild('filter') filter: QuotesFilterComponent;
+  countFilter: number = 0;
+  toggleFilter: boolean = true;
+  @Output() onCreatePayment = new EventEmitter<any>();
+  @Output() onSortBy = new EventEmitter<any>();
   constructor() { }
 
   ngOnInit() {
+  }
+  sortBy(data) {
+    this.onSortBy.emit(data);
+  }
+  clearAll() {
+    this.filter.onClearAll();
+  }
+  onChangeCountFilter(data) {
+    this.countFilter = data;
+  }
+  onShowCreatePayment() {
+    this.onCreatePayment.emit(null);
   }
 
 }

@@ -1,7 +1,9 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { QuoteService } from 'src/ng2/app/services/quote/quote.service';
 import { Quote } from '../class/quote';
 import { QuoteFilter } from '../class/quote-filter';
+import { QuoteStateService } from '../quote-create/quote-state.service';
 import { QuotesListService } from './services/quotes-list.service';
 
 @Component({
@@ -17,14 +19,31 @@ export class QuotesTableComponent implements OnInit {
   showPreloader: boolean = true;
   public page_number: number = 0;
   public infiniteScrollDisabled = true;
+  sub: Subscription = new Subscription();
   constructor(private quotesListService: QuotesListService,
     public cd: ChangeDetectorRef,
+    private quoteStateService: QuoteStateService,
     private quoteServices: QuoteService,) { }
 
   ngOnInit() {
     console.log("QuotesTableComponent");
     window.scrollTo(0, 0);
     this.onScroll();
+    let getOnInitFilter = this.quoteStateService.getOnInitFilter().subscribe(data => {
+    //  this.selectedPayments = [];
+    //  this.selectedCompanyId = null;
+      this.filter = data;
+      this.showPreloader = true;
+      window.scrollTo(0, 0);
+      this.setDefaultScoll();
+      this.onScroll();
+    })
+    this.sub.add(getOnInitFilter);
+  }
+  public setDefaultScoll() {
+    this.page_number = 0;
+    this.quotesListService.setBlockList(false);
+    this.quotes = [];
   }
   getQuotes() {
     if (this.quotesListService.getBlockList()) {

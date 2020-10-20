@@ -15,19 +15,26 @@
   <td class="billable-payment-table__reference pointer" [textContent]="quote.description"  ></td>
   <td class="billable-payment-table__reference pointer" [textContent]="'create by'"  ></td>
   <td class="billable-payment-table__status pointer"  >
-    <span class="tag__modern"  [textContent]="quote.status"> <!-- [ngClass]="payment.refundMethod ? '--error' : '--success'"-->
+    <span class="tag__modern" [ngClass]="getStatusClass(quote.status)"  [textContent]="quote.status"> <!-- [ngClass]="payment.refundMethod ? '--error' : '--success'"-->
     </span>
   </td>
   <td class="billable-payment-table__payment"  [textContent]="getDate(quote.validUntil)"> </td>
   <td class="billable-payment-table__amount pointer" [textContent]="quote.totalAmount | currency"  ></td>
  
   <td class="billable-payment-table__menu" ngbDropdown [container]="'body'">
-   <!--  <div class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"  id="dropdownBasic1" ngbDropdownToggle></div>
+    <div class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"  id="dropdownBasic1" ngbDropdownToggle></div>
     <ul class="qt-dropdown-menu invoice-items-dropdown"  ngbDropdownMenu aria-labelledby="dropdownBasic1">
-      <li class="pointer" ngbDropdownItem (click)="showEditPayment()" *ngIf="!payment.refundMethod">Edit payment</li>
-      <li class="pointer" ngbDropdownItem (click)="showRefundPayment()" *ngIf="!payment.refundMethod">Refund payment</li>
-      <li class="pointer" ngbDropdownItem (click)="deletePayment()">Delete payment</li>
-    </ul> -->
+      <li class="pointer" ngbDropdownItem  (click)="resend(quote)"><div class="icon__email-dark qt-sz-16 qt-mr-8"></div> Resend quote</li>
+      <li class="pointer" ngbDropdownItem  (click)="resend(quote)"><div class="icon__download-pdf qt-sz-16 qt-mr-8"></div> Export as PDF</li>
+      <li class="pointer" ngbDropdownItem  (click)="convertToInvoice(quote)" *ngIf="checkStatus(quote, ['APPROVED'])"><div class="icon__convert-invoice qt-sz-16 qt-mr-8"></div> Convert to Invoice</li>
+      <li class="pointer" ngbDropdownItem (click)="convertToTicket(quote)"  *ngIf="checkStatus(quote, ['APPROVED'])"><div class="icon__convert-ticket qt-sz-16 qt-mr-8"></div> Convert to Ticket</li>
+      <li class="pointer" ngbDropdownItem (click)="approveQuote(quote)"  *ngIf="checkStatus(quote, ['SAVED', 'READ', 'EXPIRED', 'UNREAD'])"><div class="icon__approve-quote qt-sz-16 qt-mr-8"></div> Approve a quote</li>
+      <li class="pointer" ngbDropdownItem  (click)="markAsRead(quote)"  *ngIf="checkStatus(quote, ['UNREAD'])"><div class="icon__mark-as-read qt-sz-16 qt-mr-8"></div> Mark as Read</li>
+      <li class="pointer" ngbDropdownItem  (click)="cancelQuote(quote)"  *ngIf="checkStatus(quote, ['READ','UNREAD'])"> Cancel quote</li>
+      <li class="pointer" ngbDropdownItem  (click)="archiveQuote(quote)"  *ngIf="checkStatus(quote, ['UNREAD','SAVED', 'EXPIRED', 'INVOICED', 'TICKETED','CANCELED'])"><div class="icon__remove qt-sz-16 qt-mr-8"></div> Archive a quote</li>
+      <li class="pointer" ngbDropdownItem  (click)="goToQuoteEdit(quote)"  *ngIf="checkStatus(quote, ['READ','UNREAD','SAVED', 'APPROVED', 'CANCELED', 'EXPIRED'])"><i class="icn-16 edit-grey-ng2 qt-mr-8"></i> Edit a quote</li>
+      
+    </ul>  
   </td>
 
 </tr>

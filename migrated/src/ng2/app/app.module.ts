@@ -340,6 +340,7 @@ import { CompanyContractsComponent } from './components/companies/company-contra
 import { QuotesTableComponent } from './components/billing/quotes/quotes-table/quotes-table.component';
 import { QuotesHeaderComponent } from './components/billing/quotes/quotes-header/quotes-header.component';
 import { QuotesItemComponent } from './components/billing/quotes/quotes-table/quotes-item/quotes-item.component';
+import { QuotesFilterComponent } from './components/billing/quotes/quotes-header/quotes-filter/quotes-filter.component';
 
 
 
@@ -842,7 +843,8 @@ angular.module('quicktech')
     CompanyContractsComponent,
     QuotesTableComponent,
     QuotesHeaderComponent,
-    QuotesItemComponent
+    QuotesItemComponent,
+    QuotesFilterComponent
   ],
   imports: [
     BrowserModule,
