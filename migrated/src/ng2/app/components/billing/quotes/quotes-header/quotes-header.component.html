@@ -1,4 +1,4 @@
-<div class="qt-list-header sticky-list-header invoices-list-header">
+<div class="qt-list-header sticky-list-header quotes-list-header">
   <div>
     <h3 class="list-title" [textContent]="'Quotes'"></h3>
   </div>
@@ -11,13 +11,13 @@
   <app-quotes-filter class="qt-w100" #filter (changeCountFilter)="onChangeCountFilter($event)" [hidden]="toggleFilter"></app-quotes-filter>
 
 </div>
-<div class="sticky-list-table-header invoice-list-table-header" [ngClass]="{'--filters-open':!toggleFilter}">
+<div class="sticky-list-table-header quotes-list-table-header" [ngClass]="{'--filters-open':!toggleFilter}">
 
 
   <table class="qt-table-modern invoice-table">
     <thead>
       <tr>
-        <th class="billable-payment-table__date pointer"  >
+        <th class="quotes__check pointer"  >
               <div class="d-f">
             <label class="qt-checkbox">
               <input type="checkbox">
@@ -25,42 +25,42 @@
             </label>
           </div>
         </th>
-        <th class="billable-payment-table__date pointer" (click)="sortBy('PAYMENT_DATE')">
+        <th class="quotes__date pointer" (click)="sortBy('PAYMENT_DATE')">
           Date
           <span class="qt-table-modern__sorting"></span>
         </th>
 
-        <th class="billable-payment-table__invoice">
+        <th class="quotes__number">
           Quote#
         </th>
 
-        <th class="billable-payment-table__company pointer" (click)="sortBy('COMPANY_NAME')">
+        <th class="quotes__company pointer" (click)="sortBy('COMPANY_NAME')">
           Company
           <span class="qt-table-modern__sorting"></span>
         </th>
 
-        <th class="billable-payment-table__payment-mode pointer" (click)="sortBy('PAYMENT_METHOD')">
+        <th class="quotes__description pointer" (click)="sortBy('PAYMENT_METHOD')">
           Description
           <span class="qt-table-modern__sorting"></span>
         </th>
 
-        <th class="billable-payment-table__reference" >
+        <th class="quotes__create-by" >
           Created By
         </th>
 
-        <th class="billable-payment-table__payment"  >
+        <th class="quotes__status"  >
           Status
 
         </th>
-        <th class="billable-payment-table__amount pointer" (click)="sortBy('AMOUNT')">
+        <th class="quotes__valid pointer" (click)="sortBy('AMOUNT')">
           Valid Until
           <span class="qt-table-modern__sorting"></span>
         </th>
-        <th class="billable-payment-table__status pointer" (click)="sortBy('STATUS')">
+        <th class="quotes__total pointer" (click)="sortBy('STATUS')">
           Amount
           <span class="qt-table-modern__sorting"></span>
         </th>
-        <th class="billable-payment-table__menu"></th>
+        <th class="quotes__menu"></th>
       </tr>
     </thead>
   </table>
