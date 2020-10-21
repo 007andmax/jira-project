@@ -174,6 +174,8 @@ export class DashboardComponent implements OnInit {
           }
           return 0;
         });
+        document.getElementById("tag").setAttribute("data-tooltip", this.system.asset_tag);
+        document.getElementById("manufacture").setAttribute("data-tooltip", this.system.manufacturer);
       },
       error => {
       this.toastr.error('Something went wrong please try again.');

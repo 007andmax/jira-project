@@ -41,14 +41,14 @@
                   <li>
                     <span>Asset Tag</span>
                     <div>{{system?.asset_tag || 'N/A'}}</div>
-                    <span class="edit-field">
-                      <input id="ankit" type="text" class="form-control sub-label-field" [(ngModel)]="system.asset_tag" (blur)="updateDashboard('asset_tag')">
+                    <span id="tag" class="edit-field" data-tooltip="">
+                      <input type="text" class="form-control sub-label-field" [(ngModel)]="system.asset_tag" (blur)="updateDashboard('asset_tag')">
                     </span>
                   </li>
                   <li>
                     <span>Manufacturer</span>
                     <!-- <div>{{system?.manufacturer || 'N/A'}}</div> -->
-                    <span class="edit-field">
+                    <span id="manufacture" class="edit-field" data-tooltip="">
                       <input type="text" class="form-control sub-label-field" [(ngModel)]="system.manufacturer" (blur)="updateDashboard('manufacturer')">
                     </span>
                   </li>
