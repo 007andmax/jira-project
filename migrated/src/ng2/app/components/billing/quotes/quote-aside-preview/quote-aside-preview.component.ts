@@ -79,8 +79,8 @@ this.close();
 
     });
   }
-  convertToTicket() {
-    this.quoteServices.convertToTicket(this.quote.company, this.quote.id).subscribe((res) => {
+  archiveQuote() {
+    this.quoteServices.archiveQuote(this.quote.company, this.quote.id).subscribe((res) => {
 
     });
   }

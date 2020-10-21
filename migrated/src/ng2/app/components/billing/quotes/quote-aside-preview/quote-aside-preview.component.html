@@ -13,7 +13,7 @@
       <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__email-dark" (click)="resend()"></div>
       
       <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__download-pdf" (click)="downloadPdf()"></div>
-      <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__remove"  *ngIf="checkStatus(quote, ['READ','UNREAD'])" (click)="cancelQuote()"></div>
+      <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__remove"  *ngIf="checkStatus(quote, ['UNREAD','SAVED', 'EXPIRED', 'INVOICED', 'TICKETED','CANCELED'])" (click)="archiveQuote()"></div>
       <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__convert-invoice" *ngIf="checkStatus(quote, ['APPROVED'])"  (click)="convertToInvoice()"></div>
       <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__convert-ticket" *ngIf="checkStatus(quote, ['APPROVED'])"  (click)="convertToTicket()"></div>
      
