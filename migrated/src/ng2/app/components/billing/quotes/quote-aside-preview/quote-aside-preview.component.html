@@ -7,17 +7,17 @@
   
     </div>
   
-   <!--  <div class="qt-df qt-ai-c"  >
+     <div class="qt-df qt-ai-c"  >
   
      
-      <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__email-dark" (click)="resendInvoices()"></div>
+    <!--  <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__email-dark" (click)="resendInvoices()"></div>
       <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__print" (click)="print()"></div>
       <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__download-pdf" (click)="downloadPDF()"></div>
       <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__remove" *ngIf="!invoiceProfile.paidOn" (click)="rollbackInvoice()"></div>
       <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__restart" *ngIf="invoiceProfile.paidOn" (click)="refundPayments()"></div>
-    
+    -->
       <div class="icon__close qt-sz-24 qt-pointer qt-ic-c " (click)="close()"></div>
-    </div> -->
+    </div> 
   
   </div>
   
@@ -87,8 +87,12 @@
         <div class="qt-lh-154">
           <img class="company-logo qt-mb-8" [src]="getCompanyLogoUrl()" alt="">
           <div class="qt-fs-13 qt-color-dark qt-ff-gm" [textContent]="currentCompany.name"></div>
-          <div class="qt-fs-13" [textContent]="currentCompany.senderAddress"></div>
-          <div class="qt-fs-13" [textContent]="(currentCompany.phoneNumbers && currentCompany.phoneNumbers.length > 0) ? currentCompany.phoneNumbers[0].number : ''"></div>
+          <div class="qt-fs-13" [textContent]="(currentCompany.addresses.length > 0 && currentCompany.addresses[0].address) ? currentCompany.addresses[0].address : ''"></div>
+          <ng-container *ngIf="currentCompany.addresses.length > 0 && currentCompany.addresses[0].phoneNumbers">
+            <ng-template  ngFor let-item [ngForOf]="currentCompany.addresses[0].phoneNumbers"   >
+           <div class="qt-fs-13"  [textContent]="item.number"></div>
+           </ng-template> 
+         </ng-container>
         </div>
   
         <div class="qt-color-dark qt-lh-131 qt-pr-24 qt-fs-26 qt-text-upper qt-ff-gm" [textContent]="'Quote#' + quote.number">
@@ -99,13 +103,12 @@
       <div class="qt-mt-24 qt-mb-32 qt-df qt-jc-sb">
         <div class="qt-lh-154">
           <div class="qt-fs-10 qt-color-light qt-mb-8 qt-ff-sb qt-lh-12">BILLING ADDRESS</div>
-          <div class="qt-fs-13 qt-color-dark qt-ff-gm" [textContent]="quote.company.name"></div>
-          <div class="qt-fs-13"    [textContent]="(quote.company.addresses.length > 0 && quote.company.addresses[0].address) ? quote.company.addresses[0].address : ''"></div>
-          <ng-container *ngIf="quote.company.addresses.length > 0 && quote.company.addresses[0].phoneNumbers">
-            <ng-template  ngFor let-item [ngForOf]="quote.company.addresses[0].phoneNumbers"   >
-           <div class="qt-fs-13"  [textContent]="item.number"></div>
-           </ng-template> 
-         </ng-container>
+          <div class="qt-fs-13 qt-color-dark qt-ff-gm" [textContent]="quoteCompany.name"></div>
+          <div class="qt-fs-13"    [textContent]="(quoteCompany.companyInfo.contacts.length > 0) ? quoteCompany.companyInfo.contacts[0].firstName + ' ' + quoteCompany.companyInfo.contacts[0].lastName : ''"></div>
+          <div class="qt-fs-13"    [textContent]="(quoteCompany.companyInfo.addresses.length > 0) ? quoteCompany.companyInfo.addresses[0].address : ''"></div>
+          <div class="qt-fs-13"    [textContent]="(quoteCompany.companyInfo.contacts.length > 0) ? quoteCompany.companyInfo.contacts[0].primaryEmail : ''"></div>
+        
+          
           
           </div>
   
@@ -113,15 +116,15 @@
           
           <div class="qt-df qt-jc-sb qt-mb-8">
             <div class="qt-ff-gm qt-text-right invoice-info-title">Estimate Date:</div>
-            <div class="invoice-info-value" [textContent]="getDate(quote.startDate)"></div>
+            <div class="invoice-info-value" [textContent]="getDate(quote.date)"></div>
           </div>
           <div class="qt-df qt-jc-sb qt-mb-8">
             <div class="qt-ff-gm qt-text-right invoice-info-title">Expiry Date:</div>
-            <div class="invoice-info-value" [textContent]="getDate(quote.endDate)"></div>
+            <div class="invoice-info-value" [textContent]="getDate(quote.validUntil)"></div>
           </div>
           <div class="qt-df qt-jc-sb qt-mb-8">
             <div class="qt-ff-gm qt-text-right invoice-info-title">Grand Total:</div>
-            <div class="invoice-info-value" [textContent]="quote.total | currency"></div>
+            <div class="invoice-info-value" [textContent]="quote.totalAmount | currency"></div>
           </div>
         </div>
       </div>
@@ -129,8 +132,10 @@
       <div class="invoice-preview__items">
        
         <div class="qt-mb-16">
+          <div class="invoice-preview__item-header qt-color-dark qt-df qt-pt-8 qt-pb-8 qt-pl-12 qt-pr-12 qt-ai-c">
+              </div>
           <table class="invoice-preview__table">
-            <thead class=" qt-lh-127">
+            <thead class=" qt-lh-127 qt-color-dark">
               <tr>
                 <th class="invoice-preview__col-item">Item</th>
                 <th class="invoice-preview__col-desc">Description</th>
@@ -179,37 +184,34 @@
       </div>
   
   
-     <!--  <div   class="qt-df qt-w100 qt-jc-sb qt-color-dark qt-fs-12 qt-ff-gm qt-mb-20 qt-lh-133">
+      <div   class="qt-df qt-w100 qt-jc-sb qt-color-dark qt-fs-12 qt-ff-gm qt-mb-20 qt-lh-133">
   
         <div class="qt-mb-20 invoice-preview-notes">
           <div class="qt-fs-12 qt-mb-4 qt-ff-qm qt-color-dark qt-ff-gm qt-lh-133">Customer Note</div>
-          <div class="qt-fs-13 qt-lh-154 note qt-ff-gr" *ngIf="invoiceProfile.regularNote" [textContent]="invoiceProfile.regularNote.line1 +
-          (invoiceProfile.regularNote.line2 || '')"></div>
+          <div class="qt-fs-13 qt-lh-154 note qt-ff-gr" *ngIf="quote.regularNote" [textContent]="(quote.regularNote && quote.regularNote.line1) ? quote.regularNote.line1 :(quote.regularNote) ? quote.regularNote : ''"></div>
         </div>
   
   
         <div class="invoice-preview__total-block">
           <div class="qt-df qt-jc-sb qt-pl-12 qt-pr-12">
-            <div class="qt-text-left">Sub Total</div>
-            <div class="invoice-info-value qt-text-right" [textContent]="(invoiceProfile.totalSum - invoiceProfile.taxSum ) |
-            currency"></div>
+            <div class="qt-text-left">Sub Total Services</div>
+            <div class="invoice-info-value qt-text-right" [textContent]="getSubTotalServices() | currency"></div>
           </div>
   
-          <div class="qt-df qt-jc-sb qt-pl-12 qt-pt-10 qt-pr-12" *ngIf="invoiceProfile.invoiceDiscount">
-            <div class="qt-text-left">Discount</div>
-            <div class="invoice-info-value qt-text-right" [textContent]="(-invoiceProfile.invoiceDiscount.amount) |
-            currency"></div>
+          <div class="qt-df qt-jc-sb qt-pl-12 qt-pt-10 qt-pr-12"  >
+            <div class="qt-text-left">Sub Total Products</div>
+            <div class="invoice-info-value qt-text-right" [textContent]="getSubTotalProducts() | currency"></div>
           </div>
           <div class="qt-df qt-jc-sb qt-pl-12 qt-pt-10 qt-pr-12 qt-pb-10">
             <div class=" qt-text-left">Tax</div>
-            <div class="invoice-info-value  qt-text-right" [textContent]="invoiceProfile.taxSum | currency"></div>
+            <div class="invoice-info-value  qt-text-right" [textContent]="getTotalTaxes() | currency"></div>
           </div>
           <div class="qt-df qt-jc-sb qt-pl-12 qt-pr-12  qt-ai-c invoice-preview__total-price">
             <div class=" qt-text-left">Total</div>
-            <div class="invoice-info-value qt-text-right qt-fs-16 qt-lh-15" [textContent]="invoiceProfile.totalSum | currency"></div>
+            <div class="invoice-info-value qt-text-right qt-fs-16 qt-lh-15" [textContent]="quote.totalAmount | currency"></div>
           </div>
         </div>
-      </div> -->
+      </div>  
   
       <div  >
         <div>

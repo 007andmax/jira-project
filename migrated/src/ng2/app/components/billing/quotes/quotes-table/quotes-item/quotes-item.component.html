@@ -9,7 +9,7 @@
   </td>
   <td class="quotes-table__date pointer" [textContent]="getDate(quote.date)">
   </td>
-  <td class="quotes-table__number pointer" [textContent]="'#' + quote.number"  ></td>
+  <td class="quotes-table__number pointer" [textContent]="'#' + quote.number" (click)="preview()" ></td>
   <td class="quotes-table__company pointer" [textContent]="quote.company.name"  ></td>
   <td class="quotes-table__description pointer" [textContent]="quote.description"  ></td>
   <td class="quotes-table__create-by pointer" [textContent]="'create by'"  ></td>

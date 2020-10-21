@@ -7,5 +7,17 @@ export class QuotePreview extends Quote {
     products: Array<QuoteProduct> = [];
     services: Array<QuoteService> = []
     termsAndConditions: string;
+    regularNote:any;
+    constructor(data = null) {
+        super();
+        if (data) {
+            for (const key in data) {
+                this[key] = data[key];
+            }
+            this.products = data.products.map(item => new QuoteProduct(item));
+            this.services = data.services.map(item => new QuoteService(item));
+
+        }
+    }
    
 }

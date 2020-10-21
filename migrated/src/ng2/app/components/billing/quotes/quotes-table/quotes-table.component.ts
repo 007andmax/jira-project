@@ -68,9 +68,9 @@ export class QuotesTableComponent implements OnInit {
     })
   }
   preview(item) {
-    this.quoteServices.getQuote(item.id).subscribe((data) => {
-      this.quoteStateService.setPreview(new QuotePreview(data));
-    })
+   
+      this.quoteStateService.setPreview(item);
+    
   }
   public onScroll() {
     this.infiniteScrollDisabled = true;
