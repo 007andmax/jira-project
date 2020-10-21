@@ -109,4 +109,23 @@ public setСustomStorage (customKey,value) {
   });
 }
 
+public getRecentInvoice () {
+  return this.http.post(this.apiUrl + 'receivable',{
+    limit: 5,
+    offset: 0
+  });
+}
+
+public getContractsList (id) {
+  return this.http.get(this.apiUrl + `serviceAgreements/${id}/dashboard`);
+}
+
+public getInvoiceRevenue (data) {
+  return this.http.post(this.apiUrl + 'reports/sales/invoiceRevenue',{
+    startDate: data.startDate,
+    endDate: data.endDate,
+    companyId: data.id
+  });
+}
+
 }
