@@ -1,6 +1,5 @@
 <tr >
-  <td class="billable-payment-table__date pointer"   ></td>
-  <td class="billable-payment-table__date pointer"   >
+  <td class="quotes-table__check pointer"   >
     <div class="d-f">
       <label class="qt-checkbox"   [attr.for]="'quote-' + quote.id">
         <input [attr.id]="'quote-' + quote.id"  [(ngModel)]="quote.selected"  type="checkbox" (change)="onChangeSelect()"  >
@@ -8,20 +7,20 @@
       </label>
     </div>
   </td>
-  <td class="billable-payment-table__invoice pointer" [textContent]="getDate(quote.date)">
+  <td class="quotes-table__date pointer" [textContent]="getDate(quote.date)">
   </td>
-  <td class="billable-payment-table__company pointer" [textContent]="'#' + quote.number" (click)="preview()" ></td>
-  <td class="billable-payment-table__payment-mode pointer" [textContent]="quote.company.name"  ></td>
-  <td class="billable-payment-table__reference pointer" [textContent]="quote.description"  ></td>
-  <td class="billable-payment-table__reference pointer" [textContent]="'create by'"  ></td>
-  <td class="billable-payment-table__status pointer"  >
+  <td class="quotes-table__number pointer" [textContent]="'#' + quote.number"  ></td>
+  <td class="quotes-table__company pointer" [textContent]="quote.company.name"  ></td>
+  <td class="quotes-table__description pointer" [textContent]="quote.description"  ></td>
+  <td class="quotes-table__create-by pointer" [textContent]="'create by'"  ></td>
+  <td class="quotes-table__status pointer"  >
     <span class="tag__modern" [ngClass]="getStatusClass(quote.status)"  [textContent]="quote.status"> <!-- [ngClass]="payment.refundMethod ? '--error' : '--success'"-->
     </span>
   </td>
-  <td class="billable-payment-table__payment"  [textContent]="getDate(quote.validUntil)"> </td>
-  <td class="billable-payment-table__amount pointer" [textContent]="quote.totalAmount | currency"  ></td>
- 
-  <td class="billable-payment-table__menu" ngbDropdown [container]="'body'">
+  <td class="quotes-table__valid"  [textContent]="getDate(quote.validUntil)"> </td>
+  <td class="quotes-table__total pointer" [textContent]="quote.totalAmount | currency"  ></td>
+
+  <td class="quotes-table__menu" ngbDropdown [container]="'body'">
     <div class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"  id="dropdownBasic1" ngbDropdownToggle></div>
     <ul class="qt-dropdown-menu invoice-items-dropdown"  ngbDropdownMenu aria-labelledby="dropdownBasic1">
       <li class="pointer" ngbDropdownItem  (click)="resend(quote)"><div class="icon__email-dark qt-sz-16 qt-mr-8"></div> Resend quote</li>
@@ -33,8 +32,8 @@
       <li class="pointer" ngbDropdownItem  (click)="cancelQuote(quote)"  *ngIf="checkStatus(quote, ['READ','UNREAD'])"><div class="icon__uninstall qt-sz-16 qt-mr-8"></div> Cancel quote</li>
       <li class="pointer" ngbDropdownItem  (click)="archiveQuote(quote)"  *ngIf="checkStatus(quote, ['UNREAD','SAVED', 'EXPIRED', 'INVOICED', 'TICKETED','CANCELED'])"><div class="icon__remove qt-sz-16 qt-mr-8"></div> Archive a quote</li>
       <li class="pointer" ngbDropdownItem  (click)="goToQuoteEdit(quote)"  *ngIf="checkStatus(quote, ['READ','UNREAD','SAVED', 'APPROVED', 'CANCELED', 'EXPIRED'])"><i class="icn-16 edit-grey-ng2 qt-mr-8"></i> Edit a quote</li>
-      
-    </ul>  
+
+    </ul>
   </td>
 
 </tr>

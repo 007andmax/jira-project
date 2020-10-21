@@ -228,6 +228,7 @@
 
 .qt-bg-contain {
   background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .qt-pointer {
@@ -713,6 +714,8 @@
     padding-right: 8px;
   }
 }
+
+
 
 .qt-toggle {
   width: 32px;

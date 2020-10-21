@@ -1,11 +1,11 @@
- 
-<div class="payments-page page-list invoices-page" >
 
-  <div class="qt-df qt-fd-c qt-jc-sb invoices-page__list-container">
+<div class="page-list quotes-page">
+
+  <div class="qt-df qt-fd-c qt-jc-sb quotes-page__list-container">
     <div>
       <app-quotes-header (onCreatePayment)="onCreatePayment()" (onSortBy)="sortBy($event)"></app-quotes-header>
       <div class="table-container"  *ngIf="!showPreloader">
-        <table class="qt-table-modern billable-table">
+        <table class="qt-table-modern quotes-table">
           <tbody
           infiniteScroll
           [infiniteScrollDistance]="2"
@@ -15,9 +15,9 @@
        <ng-template ngFor let-quote
                     [ngForOf]="quotes"
                     [ngForTrackBy]="trackById">
-                    <app-quotes-item [quote]="quote" 
-                    (onResend)="resend($event)" 
-                    (onConvertToInvoice)="convertToInvoice($event)" 
+                    <app-quotes-item [quote]="quote"
+                    (onResend)="resend($event)"
+                    (onConvertToInvoice)="convertToInvoice($event)"
                     (onConvertToTicket)="convertToTicket($event)"
                     (onApproveQuote)="approveQuote($event)"
                     (onMarkAsRead)="markAsRead($event)"
@@ -39,4 +39,3 @@
 
   </div>
 </div>
- 

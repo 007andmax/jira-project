@@ -10,7 +10,7 @@
     <!-- <button class="qt-btn --outline-blue qt-ml-8" (click)="onShowCreateInvoice()">Create Invoice</button> -->
     <button class="qt-btn --outline-blue qt-ml-8" (click)="onShowCreateInvoice()">Record Payment</button>
   </div>
-  <app-invoices-filter #filter (changeCountFilter)="onChangeCountFilter($event)" [hidden]="toggleFilter"></app-invoices-filter>
+  <app-invoices-filter class="qt-w100" #filter (changeCountFilter)="onChangeCountFilter($event)" [hidden]="toggleFilter"></app-invoices-filter>
 
 </div>
 <div class="sticky-list-table-header invoice-list-table-header" [ngClass]="{'--filters-open':!toggleFilter}">

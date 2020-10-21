@@ -1,14 +1,14 @@
 <div class="qt-df qt-ai-c">
-  <app-select-search class="search-company invoices-company-filter"  #companyDp  [placeholder]="'Select Company'"
+  <app-select-search class="search-company quotes-company-filter"  #companyDp  [placeholder]="'Select Company'"
     [change]="false" [class]="['qt-dropdown']" [field]="'name'" [list]="companies"
     (onSelectedItem)="onSelectCompany($event)"></app-select-search>
 
-    <input type="text" (blur)="onSetNumberQuote($event)" placeholder="Enter Quote #" class="qt-mr-8 qt-input h36 filter-invoice invoices-number-filter" [(ngModel)]="quotesFilter.quoteNumber">
+    <input type="text" (blur)="onSetNumberQuote($event)" placeholder="Enter Quote #" class="qt-mr-8 qt-input h36 filter-quotes quotes-number-filter" [(ngModel)]="quotesFilter.quoteNumber">
 
-    <app-multi-datepicker class="qt-input-block invoices-date-filter" #datesDp (selectedDate)="filterByDate($event)"></app-multi-datepicker>
+    <app-multi-datepicker class="qt-input-block quotes-date-filter" #datesDp (selectedDate)="filterByDate($event)"></app-multi-datepicker>
 
-    <app-select-search class="search-company invoices-status-filter"  #statusDp  [placeholder]="'Sort by Status'"
+    <app-select-search class="search-company quotes-status-filter"  #statusDp  [placeholder]="'Sort by Status'"
     [change]="false" [class]="['qt-dropdown']" [field]="'title'" [list]="statusTypes"
     (onSelectedItem)="onSelectStatus($event)"></app-select-search>
-   
+
 </div>

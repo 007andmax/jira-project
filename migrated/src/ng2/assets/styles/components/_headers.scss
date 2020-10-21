@@ -1,5 +1,7 @@
 .qt-list-header {
   display: flex;
   justify-content: space-between;
-  align-item: center;
+  align-items: center;
+  flex-wrap: wrap;
+  z-index: 2;
 }
