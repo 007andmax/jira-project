@@ -158,9 +158,13 @@
           <mat-error *ngIf="!validate.getPrimaryContactEmail()">
             Please enter a valid email address
           </mat-error>
+          <mat-error *ngIf="!validate.getExistPrimaryContactEmail()">
+            The email address is already occupied
+          </mat-error>
           <p>Primary Contact Email</p>
           <input type="text" (input)="onChangePrimaryEmail()"
                  [(ngModel)]="company.contacts[0].primaryEmail"
+                 (blur)="onCheckEmail()"
                  placeholder="Primary Email Address">
         </div>
         <div class="col-md-12">

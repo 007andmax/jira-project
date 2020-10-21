@@ -2,7 +2,7 @@
   <ng-sidebar [(opened)]="opened" [position]="'right'">
     <div class="new-users-content__modal open">
       <div class="new-users-content__modal--header">
-        <h3>Create New User</h3>
+        <h3>Edit user</h3>
         <button class="close-modal" (click)="close()"></button>
       </div>
 
@@ -37,6 +37,9 @@
         <div class="col-md-6 with-new-link">
           <mat-error *ngIf="!validate.getPrimaryContactEmail()">
             Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="!validate.getExistPrimaryContactEmail()">
+            The email address is already occupied
           </mat-error>
           <p>
             Email
