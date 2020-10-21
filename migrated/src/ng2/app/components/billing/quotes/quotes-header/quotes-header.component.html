@@ -17,7 +17,7 @@
   <table class="qt-table-modern invoice-table">
     <thead>
       <tr>
-        <th class="quotes__check pointer"  >
+        <th class="quotes-table__check pointer"  >
               <div class="d-f">
             <label class="qt-checkbox">
               <input type="checkbox">
@@ -25,42 +25,42 @@
             </label>
           </div>
         </th>
-        <th class="quotes__date pointer" (click)="sortBy('date')">
+        <th class="quotes-table__date pointer" (click)="sortBy('date')">
           Date
           <span class="qt-table-modern__sorting"></span>
         </th>
 
-        <th class="quotes__number" (click)="sortBy('number')">
+        <th class="quotes-table__number" (click)="sortBy('number')">
           Quote#
         </th>
 
-        <th class="quotes__company pointer" (click)="sortBy('customerName')">
+        <th class="quotes-table__company pointer" (click)="sortBy('customerName')">
           Company
           <span class="qt-table-modern__sorting"></span>
         </th>
 
-        <th class="quotes__description pointer"  >
+        <th class="quotes-table__description pointer"  >
           Description
           <span class="qt-table-modern__sorting"></span>
         </th>
 
-        <th class="quotes__create-by" >
+        <th class="quotes-table__create-by" >
           Created By
         </th>
 
-        <th class="quotes__status"  >
+        <th class="quotes-table__status"  >
           Status
 
         </th>
-        <th class="quotes__valid pointer" (click)="sortBy('validUntil')">
+        <th class="quotes-table__valid pointer" (click)="sortBy('validUntil')">
           Valid Until
           <span class="qt-table-modern__sorting"></span>
         </th>
-        <th class="quotes__total pointer" (click)="sortBy('amount')">
+        <th class="quotes-table__total pointer" (click)="sortBy('amount')">
           Amount
           <span class="qt-table-modern__sorting"></span>
         </th>
-        <th class="quotes__menu"></th>
+        <th class="quotes-table__menu"></th>
       </tr>
     </thead>
   </table>

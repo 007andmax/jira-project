@@ -3,6 +3,7 @@ table.qt-table-modern {
   border-collapse: separate;
   border-spacing: 0 2px;
 
+
   thead {
     font-size: 12px;
     th {
@@ -70,7 +71,6 @@ table.qt-table-modern {
     }
 }
 
-
 .qt-table-modern__sorting {
   position: relative;
   width: 8px;
@@ -98,4 +98,25 @@ table.qt-table-modern {
 
 .h100 {
   height: 100%;
+}
+
+.page-list {
+  .qt-table-modern {
+    max-width: 1320px;
+    margin: 0 auto;
+    min-width: 1064px;
+  }
+
+  .table-container {
+    overflow-x: auto;
+    min-height: calc(100vh - 346px);
+    overflow-x: auto;
+  }
+
+  .sticky-list-table-header .qt-table-modern {
+    min-width: unset;
+    th {
+      white-space: nowrap;
+    }
+  }
 }

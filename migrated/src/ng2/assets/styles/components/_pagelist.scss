@@ -1,6 +1,7 @@
 .page-list {
   padding: 0 24px 24px 24px;
   background-color: #edf2f6;
+  min-height: calc(100vh - 80px);
 
   .list-title {
     font-size: 16px;

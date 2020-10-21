@@ -1,28 +1,36 @@
 .approved {
-color: #2ec866;
+  color: #2ec866;
+  background-color: #2ec86626;
 }
 .archived {
-    color: #ff5263;
+  color: #ff5263;
+  background-color: #ff526326;
 }
 .expired {
-    color: #ff5263;
+  color: #ff5263;
+  background-color: #ff526326;
 }
 .invoiced {
-    color: #16a4fa;
+  color: #16a4fa;
+  background-color: #16a4fa26;
 }
- 
 .read {
-color: #7c77cb;
+  color: #7c77cb;
+  background-color: #7c77cb26;
 }
 .cancelled {
-    color: #ff5263; 
+  color: #ff5263;
+  background-color: #ff526326;
 }
 .saved {
-    color: #4f5f79;
+  color: #4f5f79;
+  background-color: #4f5f7926;
 }
 .ticketed {
-    color:  #16a4fa;
+  color:  #16a4fa;
+  background-color:  #16a4fa26;
 }
 .unread {
-    color: #ffb937;
+  color: #ffb937;
+  background-color: rgba(255, 185, 55, 0.1);
 }
