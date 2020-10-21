@@ -1,4 +1,5 @@
 import { CompanyProfile } from '../../../companies/class/company-profile';
+import { QuoteReviewNotes } from './quote-review-note';
 
 export class Quote {
     company: CompanyProfile;
@@ -12,7 +13,7 @@ export class Quote {
     readAt: number;
     recipients: Array<string>;
     requestPayment: false
-    reviewNotes: Array<any>;
+    reviewNotes: Array<QuoteReviewNotes>;
     services: Array<any>;
     status: string;
     subject: string;

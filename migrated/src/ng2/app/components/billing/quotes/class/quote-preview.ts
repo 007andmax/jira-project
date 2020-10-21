@@ -8,6 +8,7 @@ export class QuotePreview extends Quote {
     services: Array<QuoteService> = []
     termsAndConditions: string;
     regularNote:any;
+    message:string;
     constructor(data = null) {
         super();
         if (data) {
