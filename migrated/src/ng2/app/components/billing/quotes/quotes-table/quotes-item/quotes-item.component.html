@@ -10,7 +10,7 @@
   </td>
   <td class="billable-payment-table__invoice pointer" [textContent]="getDate(quote.date)">
   </td>
-  <td class="billable-payment-table__company pointer" [textContent]="'#' + quote.number"  ></td>
+  <td class="billable-payment-table__company pointer" [textContent]="'#' + quote.number" (click)="preview()" ></td>
   <td class="billable-payment-table__payment-mode pointer" [textContent]="quote.company.name"  ></td>
   <td class="billable-payment-table__reference pointer" [textContent]="quote.description"  ></td>
   <td class="billable-payment-table__reference pointer" [textContent]="'create by'"  ></td>

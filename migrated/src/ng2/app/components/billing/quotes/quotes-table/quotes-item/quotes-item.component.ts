@@ -20,9 +20,13 @@ export class QuotesItemComponent implements OnInit {
   @Output() onArchiveQuote = new EventEmitter<any>();
   @Output() onGoToQuoteEdit = new EventEmitter<any>();
   @Output() onDownloadPdf = new EventEmitter<any>();
+  @Output() onPreview = new EventEmitter<any>();
   constructor() { }
 
   ngOnInit() {
+  }
+  preview() {
+    this.onPreview.emit(this.quote);
   }
   getStatusClass(status) {
     return status.toLowerCase();

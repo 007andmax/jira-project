@@ -5,6 +5,7 @@ import { ModalQuoteComponent } from 'src/ng2/app/services/modal/modal-quote/moda
 import { QuoteService } from 'src/ng2/app/services/quote/quote.service';
 import { Quote } from '../class/quote';
 import { QuoteFilter } from '../class/quote-filter';
+import { QuotePreview } from '../class/quote-preview';
 import { QuoteStateService } from '../quote-create/quote-state.service';
 import { QuotesListService } from './services/quotes-list.service';
 
@@ -23,6 +24,7 @@ export class QuotesTableComponent implements OnInit {
   public infiniteScrollDisabled = true;
   sub: Subscription = new Subscription();
   constructor(private quotesListService: QuotesListService,
+     
     public cd: ChangeDetectorRef,
     private modalService: NgbModal,
     private quoteStateService: QuoteStateService,
@@ -63,6 +65,11 @@ export class QuotesTableComponent implements OnInit {
       this.showPreloader = false;
       this.showPendingPreloader = false;
       this.cd.detectChanges();
+    })
+  }
+  preview(item) {
+    this.quoteServices.getQuote(item.id).subscribe((data) => {
+      this.quoteStateService.setPreview(new QuotePreview(data));
     })
   }
   public onScroll() {

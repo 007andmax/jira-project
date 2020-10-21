@@ -341,6 +341,7 @@ import { QuotesTableComponent } from './components/billing/quotes/quotes-table/q
 import { QuotesHeaderComponent } from './components/billing/quotes/quotes-header/quotes-header.component';
 import { QuotesItemComponent } from './components/billing/quotes/quotes-table/quotes-item/quotes-item.component';
 import { QuotesFilterComponent } from './components/billing/quotes/quotes-header/quotes-filter/quotes-filter.component';
+ import { QuoteAsidePreviewComponent } from './components/billing/quotes/quote-aside-preview/quote-aside-preview.component';
 
 
 
@@ -844,7 +845,9 @@ angular.module('quicktech')
     QuotesTableComponent,
     QuotesHeaderComponent,
     QuotesItemComponent,
-    QuotesFilterComponent
+    QuotesFilterComponent,
+    
+    QuoteAsidePreviewComponent
   ],
   imports: [
     BrowserModule,

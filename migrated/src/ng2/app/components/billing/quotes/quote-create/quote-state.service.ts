@@ -13,6 +13,7 @@ import { ProductService } from 'src/ng2/app/services/product/product.service';
 })
 export class QuoteStateService {
   filter: EventEmitter<any> = new EventEmitter();
+  onPreview: EventEmitter<any> = new EventEmitter();
   public client: any;
   public itemsArray: any;
   public type = false;
@@ -23,7 +24,7 @@ export class QuoteStateService {
   public handleServices: EventEmitter<any> = new EventEmitter();
   public handleProducts: EventEmitter<any> = new EventEmitter();
   public handleClearProduct: EventEmitter<any> = new EventEmitter();
- // public quoteHasSent: boolean = false;
+  // public quoteHasSent: boolean = false;
   public quoteNumber: number;
   public startQuoteNumber: number;
   public state;
@@ -38,30 +39,35 @@ export class QuoteStateService {
   servicesList = [];
   productsList = [];
   public quoteForCreate: any = this.getDefaultquoteForCreate();
- // public subGetCompaniesList: ISubscription;
+  // public subGetCompaniesList: ISubscription;
   public quoteForm: FormGroup;
-  public clientsList:any;
+  public clientsList: any;
   private quoteResult: QuoteResult;
-  
+
   constructor(
     @Inject('$state') $state: any,
     private dateService: DateService,
     private companiesService: CompaniesService,
-    private companiesState:CompaniesStateService,
+    private companiesState: CompaniesStateService,
     private productService: ProductService,
   ) {
     this.state = $state;
-   this.onInitCLientsList();
-  
-  }
+    this.onInitCLientsList();
 
+  }
+  public setPreview(data) {
+    this.onPreview.emit(data);
+  }
+  public getOnPreview() {
+    return this.onPreview;
+  }
   public onClearProduct() {
     this.handleClearProduct.emit(null);
   }
   public getProducts() {
     this.productService.getCategories().subscribe((res: any) => {
-       this.handleProducts.emit(res);
-       this.productsList = res;
+      this.handleProducts.emit(res);
+      this.productsList = res;
     });
   }
 
@@ -69,48 +75,48 @@ export class QuoteStateService {
     return this.productsList;
   }
 
-  public setDescription (description) {
+  public setDescription(description) {
     this.quoteForCreate.description = description;
   }
   public getDescription() {
     return this.quoteForCreate.description;
   }
 
-public setServices(data) {
-  this.servicesList = data;
-}
-public getServices () {
-  return this.servicesList;
-}
+  public setServices(data) {
+    this.servicesList = data;
+  }
+  public getServices() {
+    return this.servicesList;
+  }
 
-public onInitServices(data) {
-  this.handleServices.emit(data);
-}
+  public onInitServices(data) {
+    this.handleServices.emit(data);
+  }
 
   /**
    * Set result after request for alert
    */
-  public setQuoteResult (message) {
+  public setQuoteResult(message) {
     this.quoteResult = new QuoteResult(message);
   }
 
-   /**
-   * Get result for alert
-   */
-  public getQuoteResult () {
+  /**
+  * Get result for alert
+  */
+  public getQuoteResult() {
     return this.quoteResult;
   }
 
-   /**
-   * Get subscribe for check quote has benn sent
-   */
+  /**
+  * Get subscribe for check quote has benn sent
+  */
   public getHandleQuoteHasSent() {
     return this.handleQuoteHasSent;
   }
 
-   /**
-   * Initializes subscribe for check quote has benn sent
-   */
+  /**
+  * Initializes subscribe for check quote has benn sent
+  */
   public setHandleQuoteHasSent() {
     this.handleQuoteHasSent.emit(null);
   }
@@ -119,24 +125,24 @@ public onInitServices(data) {
    * Initializes subscribe on clients 
    */
   private onInitCLientsList() {
-    if (this.companiesState.getCompanies().length > 0)   this.clientsList = this.companiesState.getCompanies()
-    .sort((a, b) => a.name.localeCompare(b.name))
-    .filter((item) => !item.deletedAt)
-      this.companiesState.getOnCompanies().subscribe((data) => {
-        this.clientsList = data
+    if (this.companiesState.getCompanies().length > 0) this.clientsList = this.companiesState.getCompanies()
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .filter((item) => !item.deletedAt)
+    this.companiesState.getOnCompanies().subscribe((data) => {
+      this.clientsList = data
         .sort((a, b) => a.name.localeCompare(b.name))
         .filter((item) => !item.deletedAt)
-      })
-    
+    })
+
   }
 
   /**
    * Return client 
    */
-  public getClent () {
+  public getClent() {
     let index: number = this.clientsList.findIndex(item => item.id === this.client.id);
     if (index > (-1)) {
-     return this.clientsList[index];
+      return this.clientsList[index];
     } else {
       return this.client;
     }
@@ -145,27 +151,27 @@ public onInitServices(data) {
    * set quote form
    * @param quoteForm quote form
    */
-  public setQuoteForm (quoteForm) {
+  public setQuoteForm(quoteForm) {
     this.quoteForm = quoteForm;
   }
 
   /**
    * Return quote form
    */
-  public getQuoteForm () {return this.quoteForm;}
+  public getQuoteForm() { return this.quoteForm; }
 
   /**
    * set error when edit/create
    * @param error error
    */
-  public setError (error) {
+  public setError(error) {
     this.handleErrors.emit(error);
   }
 
   /**
    * return error handle
    */
-  public getErrorHandle () { return this.handleErrors;}
+  public getErrorHandle() { return this.handleErrors; }
 
   /**
    * set client
@@ -176,28 +182,28 @@ public onInitServices(data) {
     this.quoteForCreate.client = client;
   }
 
-   /**
-   * set company
-   *  @param company company
-   */
+  /**
+  * set company
+  *  @param company company
+  */
   public setCompany(company) {
     this.client = company;
     this.quoteForCreate.company = company;
   }
 
-   /**
-   * return client
-   */
+  /**
+  * return client
+  */
   public getClient() {
     return this.client;
   }
 
-   /**
-   * return price quote
-   * @param cost cost
-   * @param count cost
-   * @param tax tax 
-   */
+  /**
+  * return price quote
+  * @param cost cost
+  * @param count cost
+  * @param tax tax 
+  */
   public getPrice(cost, count, tax) {
     let price = 0;
     if (tax && tax.rate) {
@@ -241,17 +247,17 @@ public onInitServices(data) {
     return this.itemsArray;
   }
 
-   /**
-   * set type for add product / service quote
-   * @param value type
-   */
+  /**
+  * set type for add product / service quote
+  * @param value type
+  */
   public setType(value) {
     this.type = value;
   }
 
-   /**
-   * get type for add product / service quote
-   */
+  /**
+  * get type for add product / service quote
+  */
   public getType() {
     return this.type;
   }
@@ -272,10 +278,10 @@ public onInitServices(data) {
     this.quoteForCreate.quoteNumber = value;
   }
 
-    /**
-   * set start number quote
-   * @param value number quote
-   */
+  /**
+ * set start number quote
+ * @param value number quote
+ */
   public setStartQuoteNumber(value) {
     this.startQuoteNumber = value;
   }
@@ -302,9 +308,9 @@ public onInitServices(data) {
     this.state.go('quotes-component');
   }
 
-   /**
-   * return state
-   */
+  /**
+  * return state
+  */
   public getState() {
     return this.state;
   }
@@ -354,113 +360,113 @@ public onInitServices(data) {
     this.quoteForCreate.subTotalProducts = value;
   }
 
-   /**
-   * set total taxes
-   * @param value tax
-   */
+  /**
+  * set total taxes
+  * @param value tax
+  */
   public setTotalTaxes(value) {
     this.totalTaxes = value;
     this.quoteForCreate.totalTaxes = value;
   }
 
-   /**
-   * set total quote
-   * @param value total
-   */
+  /**
+  * set total quote
+  * @param value total
+  */
   public setTotal(value) {
     this.total = value;
     this.quoteForCreate.total = value;
   }
 
-   /**
-   * set sub total services
-   * @param value total services
-   */
+  /**
+  * set sub total services
+  * @param value total services
+  */
   public setSubTotalServices(value) {
     this.subTotalServices = value;
     this.quoteForCreate.subTotalServices = value;
   }
 
-   /**
-   * Set start date
-   * @param value date
-   */
+  /**
+  * Set start date
+  * @param value date
+  */
   public setStartDate(value) {
     this.quoteForCreate.startDate = value;
   }
 
-   /**
-   * Set end date
-   * @param value date
-   */
+  /**
+  * Set end date
+  * @param value date
+  */
   public setEndDate(value) {
     this.quoteForCreate.endDate = value;
   }
 
-    /**
-   * return quote for create
-   */
+  /**
+ * return quote for create
+ */
   getQuoteCreate() {
     return this.quoteForCreate;
   }
 
-   /**
-   * set global note 
-   * @param value note
-   */
+  /**
+  * set global note 
+  * @param value note
+  */
   public setGlobalNote(value) {
     this.quoteForCreate.globalNote = value;
   }
 
-    /**
-   * return global note 
-   */
+  /**
+ * return global note 
+ */
   public getGlobalNote() {
     return this.quoteForCreate.globalNote;
   }
 
-   /**
-   * set note
-   * @param value note
-   */
+  /**
+  * set note
+  * @param value note
+  */
   public setSelectedNote(value) {
     this.quoteForCreate.selectedNote = value;
   }
 
-   /**
-   * Set note
-   * @param value note
-   */
+  /**
+  * Set note
+  * @param value note
+  */
   public setSelectedNoteFull(value) {
     this.selectedNoteFull = value;
   }
 
-   /**
-   * return note
-   */
+  /**
+  * return note
+  */
   public getSelectedNote() {
     return this.selectedNoteFull;
   }
 
-   /**
-   * Set deposit
-   * @param value deposit
-   */
+  /**
+  * Set deposit
+  * @param value deposit
+  */
   public setPartialDeposit(value) {
     this.quoteForCreate.partialDeposit = value;
   }
 
-    /**
-   * Get deposit
-   */
+  /**
+ * Get deposit
+ */
   public getPartialDeposit() {
     return this.quoteForCreate.partialDeposit
   }
 
-   /**
-   * Set order
-   * @param value order
-   */
+  /**
+  * Set order
+  * @param value order
+  */
   public setPurchaseOrder(value) {
     this.quoteForCreate.purchaseOrder = value;
   }
@@ -480,24 +486,24 @@ public onInitServices(data) {
     this.quoteForCreate.requestPayment = value;
   }
 
-   /**
-   * Get payment
-   */
+  /**
+  * Get payment
+  */
   public getRequestPayment() {
     return this.quoteForCreate.requestPayment
   }
 
-   /**
-   * set edit quote
-   * @param quote quote
-   */
+  /**
+  * set edit quote
+  * @param quote quote
+  */
   public setEditQuote(quote) {
     this.quoteForCreate = quote;
     this.startQuoteNumber = quote.number;
     this.quoteNumber = quote.number;
     this.setClient(quote.company);
     quote.client = this.getClent();
- 
+
     if (quote.products) quote.products.forEach(element => element.markup = this.setMarkups(element));
     const itemsArray = [...quote.products, ...quote.services];
     this.setItemArray(itemsArray);
@@ -517,9 +523,9 @@ public onInitServices(data) {
     this.setUsersEmail(quote.recipients);
   }
 
-    /**
-   * Get start quote number
-   */
+  /**
+ * Get start quote number
+ */
   public getStartQuotenumber() {
     return this.startQuoteNumber;
   }
@@ -548,18 +554,18 @@ public onInitServices(data) {
     this.goToState('quote-preview-component', { editMode: true, editable: editable ? editable : true });
   }
 
-   /**
-   * Set products / services
-   */
+  /**
+  * Set products / services
+  */
   public divideArray() {
     this.itemsArray = this.getItemArray();
     this.productsArray = this.getProductItems(this.itemsArray, 'product');
     this.servicesArray = this.getProductItems(this.itemsArray, 'service');
   }
 
-   /**
-   * Reset data quote
-   */
+  /**
+  * Reset data quote
+  */
   public resolveTotal() {
     this.divideArray();
     this.subTotalServices = 0;
@@ -635,13 +641,13 @@ public onInitServices(data) {
   }
 
   public getProductsQuote(itemsAray) {
-   return itemsAray.filter((item) => !item.hasOwnProperty('rate'));
+    return itemsAray.filter((item) => !item.hasOwnProperty('rate'));
   }
 
   public getServicesQuote(itemsAray) {
     return itemsAray.filter((item) => item.hasOwnProperty('rate'));
-   }
- 
+  }
+
   /**
    * set subject
    * @param value subject
@@ -650,17 +656,17 @@ public onInitServices(data) {
     this.quoteForCreate.subject = value;
   }
 
-   /**
-   * set message
-   * @param value message
-   */
+  /**
+  * set message
+  * @param value message
+  */
   public setMessage(value) {
     this.quoteForCreate.message = value;
   }
 
-   /**
-   * Initializes subscribe to save mod
-   */
+  /**
+  * Initializes subscribe to save mod
+  */
   public saveSandMode() {
     this.handleSendMode.emit();
   }
@@ -673,17 +679,17 @@ public onInitServices(data) {
     }
   }
 
-   /**
-   * set emails recipients
-   * @param value emails
-   */
+  /**
+  * set emails recipients
+  * @param value emails
+  */
   public setUsersEmail(value) {
     this.usersEmail = value;
   }
 
-   /**
-   * return emails recipients
-   */
+  /**
+  * return emails recipients
+  */
   public getUsersEmail() {
     return this.usersEmail;
   }
@@ -693,9 +699,9 @@ public onInitServices(data) {
    * @param item markup
    */
   public setMarkups(item) {
-    if (item.sale > 0 && item.cost > 0)  return this.roundToOne((item.sale - item.cost) / item.cost * 100);
+    if (item.sale > 0 && item.cost > 0) return this.roundToOne((item.sale - item.cost) / item.cost * 100);
     return 0;
-     
+
   }
 
   /**
@@ -706,17 +712,17 @@ public onInitServices(data) {
     return parseFloat((Math.round(Number(num + 'e+2')) + "e-2")).toFixed(2);
   }
 
-   /**
-   * Round val
-   * @param num val
-   */
+  /**
+  * Round val
+  * @param num val
+  */
   public roundToOne(num) {
     return parseFloat((Math.round(Number(num + 'e+2')) + "e-2")).toFixed(2);
   }
 
-   /**
-   * Reset quote for create
-   */
+  /**
+  * Reset quote for create
+  */
   public resetquoteForCreate() {
     this.selectedNoteFull = null;
     this.quoteForCreate = this.getDefaultquoteForCreate();
@@ -729,9 +735,9 @@ public onInitServices(data) {
     return this.filter;
   }
 
-   /**
-   * return structure quote for create
-   */
+  /**
+  * return structure quote for create
+  */
   private getDefaultquoteForCreate(): any {
     return {
       startDate: '',
