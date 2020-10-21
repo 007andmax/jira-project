@@ -4,16 +4,16 @@
       <div class="cmp-dboard-col left-profilebar cmn-box d-flex">
         <div class="profile-cmp-board d-flex">
           <div class="cmp-profile-dp d-flex">
-            <figure class="d-flex">DD</figure>
+            <figure class="d-flex">{{getCharacter(companyDetail.name)}}</figure>
           </div>
           <div class="cmp-profile-user d-flex">
-            <h1>Dimension Dentistry</h1>
+            <h1>{{companyDetail.name}}</h1>
             <a href="mailto:info@dimensiondentistry.com"
               >info@dimensiondentistry.com</a
             >
           </div>
           <div class="cmp-dboard-rating d-flex">
-            <span class="d-flex">
+            <!-- <span class="d-flex">
               <img
                 src="../../../../../ng2/assets/img/company-details/rating-filled.svg"
                 alt="rating"
@@ -34,22 +34,28 @@
                 src="../../../../../ng2/assets/img/company-details/rating.svg"
                 alt="rating"
               />
+            </span> -->
+            <span class="d-flex" *ngIf="companyDetail.reputation === undefined || companyDetail.reputation === null ">
+              <img *ngFor="let item of arrayOne(5); let i = index;"
+                src="../../../../../ng2/assets/img/company-details/rating.svg"
+                alt="rating"
+              />
             </span>
             <div class="cmp-user-info d-flex">
-              <span class="user-info-pt d-flex">Vender</span>
+              <span class="user-info-pt d-flex" *ngIf="companyDetail.clientType">{{companyDetail.clientType}}</span>
               <span class="user-info-pt d-flex">Hourly</span>
             </div>
           </div>
         </div>
         <div class="profile-cmp-board other-info d-flex">
-          <div class="other-info-col d-flex">
+          <div class="other-info-col d-flex" *ngIf="companyDetail?.addresses[0]?.phoneNumbers.length !== 0">
             <div class="small-title">Telephone</div>
-            <a href="tel:+1 403-201-3248">+1 403-201-3248</a>
+            <a href="tel:{{companyDetail.addresses[0].phoneNumbers[0].number}}">{{companyDetail.addresses[0].phoneNumbers[0].number}}</a>
           </div>
           <div class="other-info-col d-flex">
             <div class="small-title">Address</div>
             <address>
-              51 Sunpark Dr SE #302, Calgary, AB T2X 3V4, Canada
+              {{companyDetail.addresses[0].address}}
             </address>
             <a href="javascript:;" class="btn btn-outline">
               <img
@@ -69,15 +75,10 @@
             <div class="small-title">Working Hours</div>
             <div class="working-hrs d-flex">
                 <div ngbDropdown class="d-flex">
-                  <button class="selected-item" id="dropdownBasic1" ngbDropdownToggle>Opens  9:30 AM</button>
+                  <!-- <button class="selected-item" id="dropdownBasic1" ngbDropdownToggle>Opens  9:30 AM</button> -->
+                  <button class="selected-item" id="dropdownBasic1" ngbDropdownToggle>{{companyOpen}}</button>
                   <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                    <button class="item" ngbDropdownItem>Monday<span>10 AM - 7 PM</span></button>
-                    <button class="item" ngbDropdownItem>Tuesday<span>10 AM - 7 PM</span></button>
-                    <button class="item" ngbDropdownItem>Wednesday<span>10 AM - 7 PM</span></button>
-                    <button class="item" ngbDropdownItem>Thursday<span>10 AM - 7 PM</span></button>
-                    <button class="item" ngbDropdownItem>Friday<span>10 AM - 7 PM</span></button>
-                    <button class="item" ngbDropdownItem>Saturday<span>10 AM - 7 PM</span></button>
-                    <button class="item" ngbDropdownItem>Sunday<span>Close</span></button>
+                    <button class="item" ngbDropdownItem *ngFor="let hours of companyDetail?.workingDays">{{hours.dayOfWeek}}<span *ngIf="hours.startTime !== 0 && hours.endTime !== 0">10 AM - 7 PM</span><span *ngIf="hours.startTime === 0 && hours.endTime === 0">Close</span></button>
                     <div class="item"> 
                       <button class="btn btn-outline" (click)="open(content)"> 
                         <img src="../../../../../ng2/assets/img/company-details/edit-blue.svg" alt="user" />  
@@ -88,15 +89,14 @@
                 <span class="closing-tag">Closing Soon</span>
             </div>  
           </div>
-          <div class="other-info-col d-flex">
+          <div class="other-info-col d-flex" *ngIf="companyDetail.clientIndustry !== undefined && companyDetail.clientIndustry !== null && companyDetail.clientIndustry !== ''">
             <div class="small-title">Industry</div>
-            <p>Dentist</p>
+            <p>{{companyDetail.clientIndustry}}</p>
           </div>
-          <div class="other-info-col d-flex">
+          <div class="other-info-col d-flex" *ngIf="companyDetail.description !== undefined && companyDetail.description !== null && companyDetail.description !== ''">
             <div class="small-title">Notes</div>
             <p>
-              We will return your request as soon as possible during business
-              hours or within 24 to 48 hours after hours.
+              {{companyDetail.description}}
             </p>
           </div>
         </div>
@@ -212,7 +212,7 @@
                 </figure>
               </div>
               <div class="stastics-info d-flex">
-                <div class="h1">1150</div>
+                <div class="h1">{{countUsers}}</div>
                 <span>Total Users</span>
               </div>
             </li>
@@ -226,7 +226,7 @@
                 </figure>
               </div>
               <div class="stastics-info d-flex">
-                <div class="h1">681</div>
+                <div class="h1">{{countDevices}}</div>
                 <span>Total Devices</span>
               </div>
             </li>
@@ -240,7 +240,7 @@
                 </figure>
               </div>
               <div class="stastics-info d-flex">
-                <div class="h1">11,246</div>
+                <div class="h1">{{totalTickets}}</div>
                 <span>Total Tickets</span>
               </div>
             </li>
@@ -254,7 +254,7 @@
                 </figure>
               </div>
               <div class="stastics-info d-flex">
-                <div class="h1">12 min</div>
+                <div class="h1">{{averageResponseTime}} min</div>
                 <span>Avg. Response time</span>
               </div>
             </li>
@@ -294,16 +294,16 @@
                   <div ngbDropdown class="d-flex">
                     <button class="selected-item" id="dropdownBasic1" ngbDropdownToggle>Last 12 months</button>
                     <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                      <button class="item" ngbDropdownItem>Last 12 months</button>
-                      <button class="item" ngbDropdownItem>Last 6 months</button>
-                      <button class="item" ngbDropdownItem>Last 3 months</button>
+                      <button class="item" ngbDropdownItem (click)="getInvoiceRevenue('12')">Last 12 months</button>
+                      <button class="item" ngbDropdownItem (click)="getInvoiceRevenue('6')">Last 6 months</button>
+                      <button class="item" ngbDropdownItem (click)="getInvoiceRevenue('3')">Last 3 months</button>
                     </div> 
                   </div>
                  </div>
                   <div class="donalt-chart-wrapper">
                     <nvd3 [options]="chartOptions" [data]="data"></nvd3>
                       <div class="chart-content">
-                          <div class="h1">$6,820</div>
+                          <div class="h1">${{totalRevenue}}</div>
                           <span>Total Revenue</span>
                       </div>
                   </div>
@@ -325,7 +325,7 @@
               <div class="cmp-board-invoice cmn-box d-flex">
                 <h2>Recent Invoices</h2>
                  <div class="cmp-dash-table-wrap">
-                        <table>
+                        <table *ngIf="recentInvoiceList.length > 0">
                            <thead> 
                               <tr>
                                  <th>Invoice#</th>
@@ -335,35 +335,13 @@
                               </tr>
                            </thead>
                            <tbody>
-                              <tr>
-                                <td>55478</td>
-                                <td>06 Nov 2018</td>
-                                <td class="paid">Paid</td>
-                                <td>$864.00</td>
-                              </tr>
-                              <tr>
-                                <td>55479</td>
-                                <td>07 Jun 2018</td>
-                                <td class="ov-d">Over Due</td>
-                                <td>$710.00</td>
-                              </tr>
-                              <tr>
-                                <td>55478</td>
-                                <td>06 Nov 2018</td>
-                                <td class="paid">Paid</td>
-                                <td>$864.00</td>
-                              </tr>
-                              <tr>
-                                <td>55479</td>
-                                <td>07 Jun 2018</td>
-                                <td class="ov-d">Over Due</td>
-                                <td>$710.00</td>
-                              </tr>
-                              <tr>
-                                <td>55478</td>
-                                <td>06 Nov 2018</td>
-                                <td class="paid">Paid</td>
-                                <td>$864.00</td>
+                              <tr *ngFor="let invoice of recentInvoiceList">
+                                <td>{{invoice.number}}</td>
+                                <td>{{invoice.dateName}}</td>
+                                <td *ngIf="invoice.paidOn" class="paid">Paid</td>
+                                <td *ngIf="invoice.isOverDue && !invoice.paidOn" class="ov-d">Over Due</td>
+                                <td *ngIf="!invoice.isOverDue && !invoice.paidOn" class="outstanding">Outstanding</td>
+                                <td>${{invoice.sum}}</td>
                               </tr>
                            </tbody>
                         </table>
@@ -417,7 +395,7 @@
                           </div>
                           <h2>Contracts</h2>
                       <div class="cmp-dash-table-wrap">
-                        <table>
+                        <table *ngIf="contractsList.length > 0">
                            <thead> 
                               <tr>
                                  <th>Contract</th>
@@ -427,37 +405,13 @@
                               </tr>
                            </thead>
                            <tbody>
-                              <tr>
-                                <td>Block Time</td>
-                                <td>06 Nov 2018</td>
-                                <td>06 May 2019</td>
-                                <td class="hold">On Hold</td>
-                                
-
-                              </tr>
-                              <tr>
-                                <td>Device Billing</td>
-                                <td>07 Jun 2018</td>
-                                <td>18 Mar 2019</td>
-                                <td class="going">On Going</td>
-                              </tr>
-                              <tr>
-                                <td>Hourly</td>
-                                <td>01 Mar 2019</td>
-                                <td>01 Apr 2019</td>
-                                <td class="hold">On Hold</td>
-                              </tr>
-                              <tr>
-                                <td>Service </td>
-                                <td>23 Oct 2019</td>
-                                <td>04 Feb 2019</td>
-                                <td class="expired">Expired</td>
-                              </tr>
-                              <tr>
-                                <td>Device Billing </td>
-                                <td>23 Oct 2019</td>
-                                <td>04 Feb 2019</td>
-                                <td class="expired">Expired</td>
+                              <tr *ngFor="let contract of contractsList">
+                                <td>{{contract.serviceAgreement.type}}</td>
+                                <td>{{contract.serviceAgreement.startDateName}}</td>
+                                <td>{{contract.serviceAgreement.endDateName}}</td>
+                                <td class="hold" *ngIf="contract.serviceAgreement.status == 'On Hold'">On Hold</td>
+                                <td class="going" *ngIf="contract.serviceAgreement.status == 'On Going'">On Going</td>
+                                <td class="expired" *ngIf="contract.serviceAgreement.status == 'Expired'">Expired</td>
                               </tr>
                            </tbody>
                         </table>

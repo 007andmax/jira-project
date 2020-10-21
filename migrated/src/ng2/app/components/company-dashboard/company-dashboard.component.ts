@@ -1,8 +1,15 @@
 import { NgModule, ViewChild } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Component, OnInit,ViewEncapsulation  } from '@angular/core';
 import {NgbDropdownToggle,NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { TicketProfileFormService } from '../../../../ng2/app/components/tickets/tickets/ticket-edit-aside/class/ticket-profile-form-service';
 import { TicketProfileUpdatesServiceTimepickerComponent } from '../../components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-timepicker/ticket-profile-updates-service-timepicker.component';
+import { CompaniesService } from 'src/ng2/app/services/company/companies.service';
+import { CompanyProfile } from '../companies/class/company-profile';
+import { Subscription } from 'rxjs';
+import * as moment from "moment";
+import { DevicesSateService } from '../../states/devices/devices-sate.service';
+import { UsersStateService } from '../../states/users/users-state.service';
 declare let d3: any;
 @Component({
   selector: 'company-dashboard',
@@ -28,7 +35,23 @@ export class CompanyDashboardComponent implements OnInit {
   data: any;
   lineData: any;
   chartColors = ["#0646a4", "#00ccff", '#2bc7c6'];
-  constructor(private modalService: NgbModal) {}
+  _id = '';
+  companyOpen = 'Close';
+  totalTickets = 0;
+  averageResponseTime = '';
+  public countUsers: number = 0;
+  public countDevices: number = 0;
+  showArchivedCompanies = false;
+  recentInvoiceList = [];
+  contractsList = [];
+  sub: Subscription = new Subscription();
+  totalRevenue = 0;
+  public companyDetail: CompanyProfile;
+  constructor(private modalService: NgbModal,
+    private companiesService: CompaniesService,
+    private devicesState: DevicesSateService,
+    private usersStateService: UsersStateService,
+    private route: ActivatedRoute) {}
   closeResult = '';
 
   open(content: any) {
@@ -43,6 +66,29 @@ export class CompanyDashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.route.params
+    .subscribe(params => {
+      this._id = params['id'];
+      setTimeout(() => {
+        this.getCompanyDetails();
+        this.getRecentInvoiceList();
+        this.getContractsList();
+        this.getInvoiceRevenue('12')
+        if (this.usersStateService.getAllUsers().length > 0) this.onGetUsersCount(this.usersStateService.getAllUsers());
+        let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
+          this.showArchivedCompanies = false;
+          this.onGetUsersCount(data);
+        })
+        this.sub.add(getOnUsers);
+        if (this.devicesState.getAllDevices()) this.onGetDevicesCount(this.devicesState.getAllDevices());
+        let getOnDevices = this.devicesState.getOnDevices().subscribe((data) => {
+          this.showArchivedCompanies = false;
+          this.onGetDevicesCount(data);
+        })
+        this.sub.add(getOnDevices);
+      }, 100);
+    });
+    
     this.currentService = new TicketProfileFormService();
     this.chartOptions = {
       chart: {
@@ -104,20 +150,7 @@ export class CompanyDashboardComponent implements OnInit {
         }
       }
     }
-    this.data = [ 
-        {
-          "label" : "B" ,
-          "value" : 8
-        } ,
-        {
-          "label" : "C" ,
-          "value" : 32
-        } ,
-        {
-          "label" : "D" ,
-          "value" : 60
-        }
-    ];
+    this.data = [];
     this.lineData = [
       {
           key: "Long",
@@ -162,6 +195,102 @@ export class CompanyDashboardComponent implements OnInit {
 
   public onChangeEndTimePicker(data) {
     this.currentService.setDurationEnd(data);
+  }
+
+  getCompanyDetails() {
+    // 07ed6152-997c-4389-81f9-a261e262e307
+    // d9adf435-0f98-41cc-98a2-22ddf4a83a2f
+    let getCompany = this.companiesService.getCompany('07ed6152-997c-4389-81f9-a261e262e307').subscribe((data: CompanyProfile) => {
+      this.companyDetail = data;
+      this.totalTickets = this.companyDetail['companyTicketStatistic'].totalTickets;
+      this.averageResponseTime = this.companyDetail['companyTicketStatistic'].averageResponseTime;
+      let day = moment(new Date()).format('dddd');
+      let workingDays = [];
+      workingDays = this.companyDetail.workingDays;
+      if (workingDays.length !== 0) {
+        let arr = workingDays.filter(val => val.dayOfWeek.toLowerCase() === day.toLowerCase)
+        if (arr.length !== 0 && arr[0].startTime !== 0 && arr[0].endTime !== 0) {
+          this.companyOpen = 'Opens';
+        } else {
+          this.companyOpen = 'Close';
+        }
+      }
+      
+    })
+    this.sub.add(getCompany);
+  }
+
+  getCharacter(name) { 
+    return name[0] + name[1];
+  }
+
+  arrayOne(n: number): any[] {
+    return Array(n);
+  }
+
+  private onGetDevicesCount(data) {
+
+    let devices = data;
+
+    this.countDevices = (devices && devices['07ed6152-997c-4389-81f9-a261e262e307']) ? devices['07ed6152-997c-4389-81f9-a261e262e307'].length : 0;
+
+  }
+  private onGetUsersCount(data) {
+
+    let users = data;
+    this.countUsers = users.filter((user) => {
+      var isArchived = user.deletedAt;
+      return !isArchived && !this.showArchivedCompanies && user.company.id === '07ed6152-997c-4389-81f9-a261e262e307' || this.showArchivedCompanies && isArchived && user.company.id === '07ed6152-997c-4389-81f9-a261e262e307';
+    }).length;
+  }
+
+  getRecentInvoiceList() {
+    let getInvoice = this.companiesService.getRecentInvoice().subscribe((data: any) => {
+      data.forEach(element => {
+        let obj = element;
+        obj.dateName = moment(new Date(obj.date)).format('DD MMM YYYY');
+        this.recentInvoiceList.push(obj);
+      });
+    });
+    this.sub.add(getInvoice);
+  }
+
+  getContractsList() {
+    let getInvoice = this.companiesService.getContractsList('07ed6152-997c-4389-81f9-a261e262e307').subscribe((data: any) => {
+      data.forEach(element => {
+        let obj = element;
+        obj.serviceAgreement.startDateName = moment(new Date(obj.serviceAgreement.startDate)).format('DD MMM YYYY');
+        obj.serviceAgreement.endDateName = moment(new Date(obj.serviceAgreement.endDate)).format('DD MMM YYYY');
+        this.contractsList.push(obj);
+      });
+    });
+    this.sub.add(getInvoice);
+  }
+
+  getInvoiceRevenue(month) {
+    let obj = {
+      startDate: moment(new Date()).subtract(month, 'months').format('YYYY-MM-DD'),
+      endDate: moment(new Date()).format('YYYY-MM-DD'),
+      id: '07ed6152-997c-4389-81f9-a261e262e307'
+    };
+    let getInvoice = this.companiesService.getInvoiceRevenue(obj).subscribe((data: any) => {
+      this.totalRevenue = data.collectedSum + data.invoicedSum + data.outstandingSum;
+      this.data = [ 
+        {
+          "label" : "Collected Sum" ,
+          "value" : data.collectedSum
+        } ,
+        {
+          "label" : "Invoiced Sum" ,
+          "value" : data.invoicedSum
+        } ,
+        {
+          "label" : "Outstanding Sum" ,
+          "value" : data.outstandingSum
+        }
+    ]
+    });
+    this.sub.add(getInvoice);
   }
 
 }
