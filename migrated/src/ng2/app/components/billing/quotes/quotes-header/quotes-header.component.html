@@ -25,21 +25,21 @@
             </label>
           </div>
         </th>
-        <th class="quotes__date pointer" (click)="sortBy('PAYMENT_DATE')">
+        <th class="quotes__date pointer" (click)="sortBy('date')">
           Date
           <span class="qt-table-modern__sorting"></span>
         </th>
 
-        <th class="quotes__number">
+        <th class="quotes__number" (click)="sortBy('number')">
           Quote#
         </th>
 
-        <th class="quotes__company pointer" (click)="sortBy('COMPANY_NAME')">
+        <th class="quotes__company pointer" (click)="sortBy('customerName')">
           Company
           <span class="qt-table-modern__sorting"></span>
         </th>
 
-        <th class="quotes__description pointer" (click)="sortBy('PAYMENT_METHOD')">
+        <th class="quotes__description pointer"  >
           Description
           <span class="qt-table-modern__sorting"></span>
         </th>
@@ -52,11 +52,11 @@
           Status
 
         </th>
-        <th class="quotes__valid pointer" (click)="sortBy('AMOUNT')">
+        <th class="quotes__valid pointer" (click)="sortBy('validUntil')">
           Valid Until
           <span class="qt-table-modern__sorting"></span>
         </th>
-        <th class="quotes__total pointer" (click)="sortBy('STATUS')">
+        <th class="quotes__total pointer" (click)="sortBy('amount')">
           Amount
           <span class="qt-table-modern__sorting"></span>
         </th>

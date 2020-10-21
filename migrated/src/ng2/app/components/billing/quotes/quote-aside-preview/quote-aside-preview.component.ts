@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { QuotePreview } from '../class/quote-preview';
 import { QuoteStateService } from '../quote-create/quote-state.service';
@@ -7,28 +7,31 @@ import { Company } from 'src/ng2/app/interfaces/company/company';
 import { QuoteService } from 'src/ng2/app/services/quote/quote.service';
 import { ModalQuoteComponent } from 'src/ng2/app/services/modal/modal-quote/modal-quote.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-quote-aside-preview',
   templateUrl: './quote-aside-preview.component.html',
   styleUrls: ['./quote-aside-preview.component.scss']
 })
-export class QuoteAsidePreviewComponent implements OnInit {
+export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
   quote: QuotePreview;
   showPreloader: boolean = true;
-  toggleQuoteMessage:boolean = true;
-  toggleStatus:boolean = true;
+  toggleQuoteMessage: boolean = true;
+  toggleStatus: boolean = true;
   currentCompany: any;
   quoteCompany: Company;
   open: boolean = false;
+  sub: Subscription = new Subscription();
   constructor(private quoteStateService: QuoteStateService,
     private quoteServices: QuoteService,
     private modalService: NgbModal,
     private companiesStateService: CompaniesStateService) { }
 
+
   ngOnInit() {
 
-    this.quoteStateService.getOnPreview().subscribe(quote => {
+   let getOnPreview =  this.quoteStateService.getOnPreview().subscribe(quote => {
       this.currentCompany = this.companiesStateService.getCurrentCompany();
       this.quoteCompany = this.companiesStateService.getCompanies().find(item => item.id === quote.company.id);
       this.open = true;
@@ -41,6 +44,7 @@ export class QuoteAsidePreviewComponent implements OnInit {
         console.log("this.currentCompany", this.currentCompany);
       })
     })
+    this.sub.add(getOnPreview);
   }
   close() {
     this.open = false;
@@ -71,7 +75,7 @@ export class QuoteAsidePreviewComponent implements OnInit {
   }
   cancelQuote() {
     this.quoteServices.cancelQuote(this.quote.company, this.quote.id).subscribe((res) => {
-this.close();
+      this.close();
     });
   }
   convertToInvoice() {
@@ -89,7 +93,7 @@ this.close();
       this.quoteServices.repeatSend(this.quote.id).subscribe();
     } else {
       let recipients = this.quote.recipients;
-    //  if (typeof recipients === "string") this.quote.recipients = recipients.split(',');
+      //  if (typeof recipients === "string") this.quote.recipients = recipients.split(',');
       this.quoteServices.getQuote(this.quote.id).subscribe((data) => {
         const modalRef = this.modalService.open(ModalQuoteComponent, data);
         modalRef.componentInstance.data = data;
@@ -108,5 +112,8 @@ this.close();
     if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.cropped && this.currentCompany.logo.cropped.id) return `/file/${this.currentCompany.logo.cropped.id}`;
     if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.origin && this.currentCompany.logo.origin.id) return `/file/${this.currentCompany.logo.origin.id}`;
     return '/company/default/logo.jpg';
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

@@ -7,6 +7,8 @@ export class QuoteFilter {
     sortBy: string = "DATE_DESC";
     offset: number = 0;
     limit: number = 30;
+
+    
     constructor() { }
     public setStatus(data) {
         this.status = data;

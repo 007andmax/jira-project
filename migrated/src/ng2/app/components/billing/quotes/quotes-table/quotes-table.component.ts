@@ -6,6 +6,7 @@ import { QuoteService } from 'src/ng2/app/services/quote/quote.service';
 import { Quote } from '../class/quote';
 import { QuoteFilter } from '../class/quote-filter';
 import { QuotePreview } from '../class/quote-preview';
+import { QuoteSort } from '../class/quote-sort';
 import { QuoteStateService } from '../quote-create/quote-state.service';
 import { QuoteRealTimeService } from '../quote-realtime/quote-realtime.service';
 import { QuotesListService } from './services/quotes-list.service';
@@ -18,6 +19,7 @@ import { QuotesListService } from './services/quotes-list.service';
 })
 export class QuotesTableComponent implements OnInit {
   filter: QuoteFilter = new QuoteFilter();
+  sort: QuoteSort = new QuoteSort();
   quotes: Array<Quote> = [];
   showPendingPreloader: boolean = false;
   showPreloader: boolean = true;
@@ -36,8 +38,8 @@ export class QuotesTableComponent implements OnInit {
     window.scrollTo(0, 0);
     this.onScroll();
     let getOnInitFilter = this.quoteStateService.getOnInitFilter().subscribe(data => {
-    //  this.selectedPayments = [];
-    //  this.selectedCompanyId = null;
+      //  this.selectedPayments = [];
+      //  this.selectedCompanyId = null;
       this.filter = data;
       this.showPreloader = true;
       window.scrollTo(0, 0);
@@ -59,12 +61,21 @@ export class QuotesTableComponent implements OnInit {
       }
     })
   }
+  public sortBy(value) {
+    console.log("value",value);
+    this.showPreloader = true;
+    window.scrollTo(0, 0);
+    this.setDefaultScoll();
+    this.filter.sortBy = this.sort.getSortType(value);
+    console.log("this.filter.sortBy",this.filter.sortBy);
+    this.getQuotes()
+  }
   public setDefaultScoll() {
     this.page_number = 0;
     this.quotesListService.setBlockList(false);
     this.quotes = [];
   }
-   
+
   getQuotes() {
     if (this.quotesListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
@@ -83,9 +94,9 @@ export class QuotesTableComponent implements OnInit {
     })
   }
   preview(item) {
-   
-      this.quoteStateService.setPreview(item);
-    
+
+    this.quoteStateService.setPreview(item);
+
   }
   public onScroll() {
     this.infiniteScrollDisabled = true;
