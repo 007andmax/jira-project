@@ -7,6 +7,7 @@ import { Quote } from '../class/quote';
 import { QuoteFilter } from '../class/quote-filter';
 import { QuotePreview } from '../class/quote-preview';
 import { QuoteStateService } from '../quote-create/quote-state.service';
+import { QuoteRealTimeService } from '../quote-realtime/quote-realtime.service';
 import { QuotesListService } from './services/quotes-list.service';
 
 @Component({
@@ -24,7 +25,7 @@ export class QuotesTableComponent implements OnInit {
   public infiniteScrollDisabled = true;
   sub: Subscription = new Subscription();
   constructor(private quotesListService: QuotesListService,
-     
+    private quoteRealTimeService: QuoteRealTimeService,
     public cd: ChangeDetectorRef,
     private modalService: NgbModal,
     private quoteStateService: QuoteStateService,
@@ -44,12 +45,26 @@ export class QuotesTableComponent implements OnInit {
       this.onScroll();
     })
     this.sub.add(getOnInitFilter);
+    this.quoteRealTimeService.changeQuotesArray.subscribe((newChange) => {
+      if (newChange.action === 'SALE_QUOTE_CREATED') {
+        return this.quotes.push(newChange.data);
+      } else {
+        const elemIndex = this.quotes.findIndex((item) => item.id === newChange.data.id);
+        if (newChange.data.status !== 'ARCHIVED') {
+          return this.quotes[elemIndex] = newChange.data;
+        } else {
+          this.quotes.splice(elemIndex, 1);
+        }
+
+      }
+    })
   }
   public setDefaultScoll() {
     this.page_number = 0;
     this.quotesListService.setBlockList(false);
     this.quotes = [];
   }
+   
   getQuotes() {
     if (this.quotesListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
