@@ -622,7 +622,7 @@ export class TerminalComponent implements OnInit {
     }
   }
   setHeight(flag) {
-    if(flag === 'enter' && document.getElementById("editCmd").offsetHeight < 150 ) {
+    if(flag === 'enter' && document.getElementById("editCmd").offsetHeight < 280 ) {
       document.getElementById("terminal").style.height = (document.getElementById("terminal").offsetHeight - 10) + "px";
       document.getElementById("editCmd").style.height = (document.getElementById("editCmd").offsetHeight + 10) + "px";
     } else if(flag === 'backspace'){
