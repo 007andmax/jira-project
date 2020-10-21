@@ -124,7 +124,8 @@
                    </div>
                     <div class="drive-status">
                       <span class="drive-name">{{drive.device_id}} ({{drive.file_system}} on drive {{drive.disk_index + 1}})</span>
-                      <span class="drive-limit" *ngIf="drive.free_space != '' && drive.size != ''">{{convertToGB(drive.size) - convertToGB(drive.free_space)}}GB / {{convertToGB(drive.size)}}GB</span>
+                      <!-- <span class="drive-limit" *ngIf="drive.free_space != '' && drive.size != ''">{{convertToGB(drive.size) - convertToGB(drive.free_space)}}GB / {{convertToGB(drive.size)}}GB</span> -->
+                      <span class="drive-limit" *ngIf="drive.free_space != '' && drive.size != ''">{{diskSpaceDiff(drive.size, drive.free_space)}}GB / {{convertToGB('242609225728')}}GB</span>
                     </div>
                   </li>
     
