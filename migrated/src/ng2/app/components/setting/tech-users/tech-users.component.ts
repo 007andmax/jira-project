@@ -310,7 +310,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
         lastName: techUser.lastName,
         primaryEmail: techUser.primaryEmail,
         techRole: techUser.techRole,
-        newDevice: notification === undefined ? [''] : notification.newDevice,
+        newDevice: notification === undefined || notification.newDevice === undefined ? [''] : notification.newDevice,
         ticketCreated: notification === undefined ? [''] : notification.ticketCreated,
         myTicketUpdated: notification === undefined ? [''] : notification.myTicketUpdated,
         ticketCloseNotifications: notification === undefined ? [''] : notification.ticketCloseNotifications,
