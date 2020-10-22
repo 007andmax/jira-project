@@ -9,7 +9,7 @@
       <ng-container *ngIf="currentCompany.addresses.length > 0 && currentCompany.addresses[0].phoneNumbers">
         <ng-template  ngFor let-item [ngForOf]="currentCompany.addresses[0].phoneNumbers"   >
        <div class="qt-fs-13"  [textContent]="item.number"></div>
-       </ng-template> 
+       </ng-template>
      </ng-container>
     </div>
 
@@ -25,13 +25,10 @@
       <div class="qt-fs-13"    [textContent]="(quoteCompany.companyInfo.contacts.length > 0) ? quoteCompany.companyInfo.contacts[0].firstName + ' ' + quoteCompany.companyInfo.contacts[0].lastName : ''"></div>
       <div class="qt-fs-13"    [textContent]="(quoteCompany.companyInfo.addresses.length > 0) ? quoteCompany.companyInfo.addresses[0].address : ''"></div>
       <div class="qt-fs-13"    [textContent]="(quoteCompany.companyInfo.contacts.length > 0) ? quoteCompany.companyInfo.contacts[0].primaryEmail : ''"></div>
-    
-      
-      
       </div>
 
     <div class="qt-fs-13 qt-text-right qt-lh-154">
-      
+
       <div class="qt-df qt-jc-sb qt-mb-8">
         <div class="qt-ff-gm qt-text-right invoice-info-title">Estimate Date:</div>
         <div class="invoice-info-value" [textContent]="getDate(quote.date)"></div>
@@ -48,11 +45,9 @@
   </div>
 
   <div class="invoice-preview__items">
-   
+
     <div class="qt-mb-16">
-      <div class="invoice-preview__item-header qt-color-dark qt-df qt-pt-8 qt-pb-8 qt-pl-12 qt-pr-12 qt-ai-c">
-          </div>
-      <table class="invoice-preview__table">
+      <table class="quote-aside-preview-table invoice-preview__table">
         <thead class=" qt-lh-127 qt-color-dark">
           <tr>
             <th class="invoice-preview__col-item">Item</th>
@@ -129,7 +124,7 @@
         <div class="invoice-info-value qt-text-right qt-fs-16 qt-lh-15" [textContent]="quote.totalAmount | currency"></div>
       </div>
     </div>
-  </div>  
+  </div>
 
   <div  >
     <div>

@@ -1,0 +1,38 @@
+.quote-message-block {
+  border-radius: 6px;
+  border: solid 1px #dfe3e8;
+  background-color: #ffffff;
+  &.--closed {
+    max-height: 40px;
+    overflow: hidden;
+    .toggle-message-block {
+      transform: rotate(-90deg);
+    }
+  }
+}
+
+.quote-message-block__header {
+  margin-bottom: 2px;
+}
+
+.quote-message-list-item {
+  border-radius: 8px;
+  border: solid 1px #edf0f2;
+  background-color: #f9fafb;
+  padding: 12px;
+  border-top-left-radius: 0;
+  margin-bottom: 4px;
+  margin-left: 29px;
+}
+
+.quote-message {
+  margin-bottom: 24px;
+  margin-left: 29px;
+}
+
+.toggle-message-block {
+  background-image: url(/ng2/assets/img/icons/collapse-task.svg);
+  cursor: pointer;
+  background-size: 12px;
+  background-position: bottom center;
+}
