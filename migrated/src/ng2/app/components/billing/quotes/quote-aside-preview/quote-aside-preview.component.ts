@@ -19,8 +19,8 @@ export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
   showPreloader: boolean = true;
   toggleQuoteMessage: boolean = true;
   toggleStatus: boolean = true;
-  currentCompany: any;
-  quoteCompany: Company;
+   
+  
   open: boolean = false;
   sub: Subscription = new Subscription();
   constructor(private quoteStateService: QuoteStateService,
@@ -32,16 +32,16 @@ export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
    let getOnPreview =  this.quoteStateService.getOnPreview().subscribe(quote => {
-      this.currentCompany = this.companiesStateService.getCurrentCompany();
-      this.quoteCompany = this.companiesStateService.getCompanies().find(item => item.id === quote.company.id);
+     
+     
       this.open = true;
       this.quoteServices.getQuote(quote.id).subscribe((data) => {
-        console.log("this.quoteCompany", this.quoteCompany);
+     
         this.quote = new QuotePreview(data);
         this.open = true;
         this.showPreloader = false;
         console.log("this.quote", this.quote);
-        console.log("this.currentCompany", this.currentCompany);
+        
       })
     })
     this.sub.add(getOnPreview);
@@ -51,18 +51,8 @@ export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
     this.showPreloader = true;
 
   }
-  getTotalTaxes() {
-    let totalTaxes = 0;
-    totalTaxes += this.quote.services.reduce((a, b) => a + b.taxSum, 0);
-    totalTaxes += this.quote.products.reduce((a, b) => a + b.taxSum, 0);
-    return totalTaxes;
-  }
-  getSubTotalServices() {
-    return this.quote.services.reduce((a, b) => a + b.sum, 0);
-  }
-  getSubTotalProducts() {
-    return this.quote.products.reduce((a, b) => a + b.sum, 0);
-  }
+ 
+ 
   public getDate(date) {
     return moment(new Date(date)).format('DD MMM YYYY');
   }
@@ -102,17 +92,8 @@ export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
     }
 
   }
-  getSelectedTaxes(taxes) {
-    return taxes.map(item => {
-      return `${item.name} ${item.rate}%`;
-    }).join("<br>");
-  }
-  getCompanyLogoUrl() {
-    if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo && this.currentCompany.logo.base64 && !this.currentCompany.logo.cropped) return this.currentCompany.logo.base64;
-    if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.cropped && this.currentCompany.logo.cropped.id) return `/file/${this.currentCompany.logo.cropped.id}`;
-    if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.origin && this.currentCompany.logo.origin.id) return `/file/${this.currentCompany.logo.origin.id}`;
-    return '/company/default/logo.jpg';
-  }
+ 
+ 
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

@@ -14,6 +14,7 @@ import { ProductService } from 'src/ng2/app/services/product/product.service';
 export class QuoteStateService {
   filter: EventEmitter<any> = new EventEmitter();
   onPreview: EventEmitter<any> = new EventEmitter();
+  onCreate: EventEmitter<any> = new EventEmitter();
   public client: any;
   public itemsArray: any;
   public type = false;
@@ -54,6 +55,12 @@ export class QuoteStateService {
     this.state = $state;
     this.onInitCLientsList();
 
+  }
+  public onInitAdd() {
+    this.onCreate.emit(null);
+  }
+  public getOnCreate() {
+    return this.onCreate;
   }
   public setPreview(data) {
     this.onPreview.emit(data);

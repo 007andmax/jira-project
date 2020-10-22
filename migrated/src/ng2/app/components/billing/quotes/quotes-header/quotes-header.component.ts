@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { QuoteStateService } from '../quote-create/quote-state.service';
 import { QuotesFilterComponent } from './quotes-filter/quotes-filter.component';
 
 @Component({
@@ -13,7 +14,7 @@ export class QuotesHeaderComponent implements OnInit {
   toggleFilter: boolean = true;
   @Output() onCreatePayment = new EventEmitter<any>();
   @Output() onSortBy = new EventEmitter<any>();
-  constructor() { }
+  constructor(private quoteStateService: QuoteStateService) { }
 
   ngOnInit() {
   }
@@ -28,6 +29,9 @@ export class QuotesHeaderComponent implements OnInit {
   }
   onShowCreatePayment() {
     this.onCreatePayment.emit(null);
+  }
+  onShowCreateQuote() {
+    this.quoteStateService.onInitAdd();
   }
 
 }

@@ -6,7 +6,7 @@
   <div class="d-f ai-c">
     <button class="qt-btn --transparent" (click)="clearAll()" *ngIf="countFilter > 0">Clear All</button>
     <button class="qt-btn btn-filter qt-ml-8" [ngClass]="{'active':!toggleFilter}" (click)="toggleFilter  = !toggleFilter"> <span class="filter-counter qt-circle qt-sz-18 qt-ff-sb qt-fs-10 qt-color-white qt-bg-info qt-mr-8 qt-df qt-ai-c qt-jc-c" *ngIf="countFilter > 0" [textContent]="countFilter"></span> Filters</button>
-    <button class="qt-btn --outline-blue qt-ml-8" (click)="onShowCreatePayment()"> Сreate Quotation</button>
+    <button class="qt-btn --outline-blue qt-ml-8" (click)="onShowCreateQuote()"> Сreate Quotation</button>
   </div>
   <app-quotes-filter class="qt-w100" #filter (changeCountFilter)="onChangeCountFilter($event)" [hidden]="toggleFilter"></app-quotes-filter>
 
