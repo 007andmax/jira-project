@@ -34,7 +34,7 @@ export class CompanyDashboardComponent implements OnInit {
   lineChartOptions: any;
   data: any;
   lineData: any;
-  chartColors = ["#0646a4", "#00ccff", '#2bc7c6'];
+  chartColors = ["#0747a6", "#00ccff", '#cdecff'];
   _id = '';
   companyOpen = 'Close';
   totalTickets = 0;
@@ -46,6 +46,14 @@ export class CompanyDashboardComponent implements OnInit {
   contractsList = [];
   sub: Subscription = new Subscription();
   totalRevenue = 0;
+  invoicedSum = 0;
+  collectedSum = 0;
+  outstandingSum = 0;
+  addresses = '';
+  phoneNumber = '';
+  name = '';
+  month = '12'
+  ticketFrequency = 'Monthly';
   public companyDetail: CompanyProfile;
   constructor(private modalService: NgbModal,
     private companiesService: CompaniesService,
@@ -73,7 +81,8 @@ export class CompanyDashboardComponent implements OnInit {
         this.getCompanyDetails();
         this.getRecentInvoiceList();
         this.getContractsList();
-        this.getInvoiceRevenue('12')
+        this.getInvoiceRevenue('12');
+        this.getTicketGraph(this.ticketFrequency);
         if (this.usersStateService.getAllUsers().length > 0) this.onGetUsersCount(this.usersStateService.getAllUsers());
         let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
           this.showArchivedCompanies = false;
@@ -202,6 +211,9 @@ export class CompanyDashboardComponent implements OnInit {
     // d9adf435-0f98-41cc-98a2-22ddf4a83a2f
     let getCompany = this.companiesService.getCompany('07ed6152-997c-4389-81f9-a261e262e307').subscribe((data: CompanyProfile) => {
       this.companyDetail = data;
+      this.name = this.companyDetail.name == undefined ? '' : this.companyDetail.name;
+      this.addresses = this.companyDetail.addresses.length > 0 ? this.companyDetail.addresses[0].address : '';
+      this.phoneNumber = this.companyDetail.addresses.length > 0 && this.companyDetail.addresses[0].phoneNumbers.length !== 0 ? this.companyDetail.addresses[0].phoneNumbers[0].number : '';
       this.totalTickets = this.companyDetail['companyTicketStatistic'].totalTickets;
       this.averageResponseTime = this.companyDetail['companyTicketStatistic'].averageResponseTime;
       let day = moment(new Date()).format('dddd');
@@ -273,16 +285,20 @@ export class CompanyDashboardComponent implements OnInit {
       endDate: moment(new Date()).format('YYYY-MM-DD'),
       id: '07ed6152-997c-4389-81f9-a261e262e307'
     };
-    let getInvoice = this.companiesService.getInvoiceRevenue(obj).subscribe((data: any) => {
+    let getRevenue = this.companiesService.getInvoiceRevenue(obj).subscribe((data: any) => {
       this.totalRevenue = data.collectedSum + data.invoicedSum + data.outstandingSum;
+      this.invoicedSum = data.invoicedSum;
+      this.collectedSum = data.collectedSum;
+      this.outstandingSum = data.outstandingSum;
+      this.month = month;
       this.data = [ 
-        {
-          "label" : "Collected Sum" ,
-          "value" : data.collectedSum
-        } ,
         {
           "label" : "Invoiced Sum" ,
           "value" : data.invoicedSum
+        } ,
+        {
+          "label" : "Collected Sum" ,
+          "value" : data.collectedSum
         } ,
         {
           "label" : "Outstanding Sum" ,
@@ -290,7 +306,15 @@ export class CompanyDashboardComponent implements OnInit {
         }
     ]
     });
-    this.sub.add(getInvoice);
+    this.sub.add(getRevenue);
+  }
+
+  getTicketGraph(frequency: string) {
+    let getTicket = this.companiesService.getTicketGraph('07ed6152-997c-4389-81f9-a261e262e307', frequency.toUpperCase()).subscribe((data: any) => {
+      this.ticketFrequency = frequency;
+      debugger;
+    });
+    this.sub.add(getTicket);
   }
 
 }

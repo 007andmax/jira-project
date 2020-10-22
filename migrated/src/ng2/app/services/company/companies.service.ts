@@ -128,4 +128,8 @@ public getInvoiceRevenue (data) {
   });
 }
 
+public getTicketGraph (id, frequency) {
+  return this.http.get(this.apiUrl + `dashboard/company?companyId=${id}&frequency=${frequency}`);
+}
+
 }

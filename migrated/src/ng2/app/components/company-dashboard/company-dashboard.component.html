@@ -3,11 +3,11 @@
     <div class="cmp-dboard-row d-flex">
       <div class="cmp-dboard-col left-profilebar cmn-box d-flex">
         <div class="profile-cmp-board d-flex">
-          <div class="cmp-profile-dp d-flex">
-            <figure class="d-flex">{{getCharacter(companyDetail.name)}}</figure>
+          <div class="cmp-profile-dp d-flex" *ngIf="name !== ''">
+            <figure class="d-flex">{{getCharacter(name)}}</figure>
           </div>
           <div class="cmp-profile-user d-flex">
-            <h1>{{companyDetail.name}}</h1>
+            <h1>{{name}}</h1>
             <a href="mailto:info@dimensiondentistry.com"
               >info@dimensiondentistry.com</a
             >
@@ -35,27 +35,27 @@
                 alt="rating"
               />
             </span> -->
-            <span class="d-flex" *ngIf="companyDetail.reputation === undefined || companyDetail.reputation === null ">
+            <span class="d-flex" *ngIf="companyDetail?.reputation === undefined || companyDetail?.reputation === null ">
               <img *ngFor="let item of arrayOne(5); let i = index;"
                 src="../../../../../ng2/assets/img/company-details/rating.svg"
                 alt="rating"
               />
             </span>
             <div class="cmp-user-info d-flex">
-              <span class="user-info-pt d-flex" *ngIf="companyDetail.clientType">{{companyDetail.clientType}}</span>
+              <span class="user-info-pt d-flex" *ngIf="companyDetail?.clientType">{{companyDetail.clientType}}</span>
               <span class="user-info-pt d-flex">Hourly</span>
             </div>
           </div>
         </div>
         <div class="profile-cmp-board other-info d-flex">
-          <div class="other-info-col d-flex" *ngIf="companyDetail?.addresses[0]?.phoneNumbers.length !== 0">
+          <div class="other-info-col d-flex" *ngIf="phoneNumber !== ''">
             <div class="small-title">Telephone</div>
-            <a href="tel:{{companyDetail.addresses[0].phoneNumbers[0].number}}">{{companyDetail.addresses[0].phoneNumbers[0].number}}</a>
+            <a href="tel:{{companyDetail?.addresses[0].phoneNumbers[0].number}}">{{companyDetail.addresses[0].phoneNumbers[0].number}}</a>
           </div>
           <div class="other-info-col d-flex">
             <div class="small-title">Address</div>
             <address>
-              {{companyDetail.addresses[0].address}}
+              {{addresses}}
             </address>
             <a href="javascript:;" class="btn btn-outline">
               <img
@@ -89,11 +89,11 @@
                 <span class="closing-tag">Closing Soon</span>
             </div>  
           </div>
-          <div class="other-info-col d-flex" *ngIf="companyDetail.clientIndustry !== undefined && companyDetail.clientIndustry !== null && companyDetail.clientIndustry !== ''">
+          <div class="other-info-col d-flex" *ngIf="companyDetail?.clientIndustry !== undefined && companyDetail?.clientIndustry !== null && companyDetail?.clientIndustry !== ''">
             <div class="small-title">Industry</div>
             <p>{{companyDetail.clientIndustry}}</p>
           </div>
-          <div class="other-info-col d-flex" *ngIf="companyDetail.description !== undefined && companyDetail.description !== null && companyDetail.description !== ''">
+          <div class="other-info-col d-flex" *ngIf="companyDetail?.description !== undefined && companyDetail?.description !== null && companyDetail?.description !== ''">
             <div class="small-title">Notes</div>
             <p>
               {{companyDetail.description}}
@@ -275,11 +275,11 @@
               </li>
           </ul>
             <div ngbDropdown class="d-flex">
-              <button class="selected-item" id="dropdownBasic1" ngbDropdownToggle>Last 12 months</button>
+              <button class="selected-item" id="dropdownBasic1" ngbDropdownToggle>{{ticketFrequency}}</button>
               <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                <button class="item" ngbDropdownItem>Last 7 days</button>
-                <button class="item" ngbDropdownItem>Last 6 days</button>
-                <button class="item" ngbDropdownItem>Last 3 days</button>
+                <button class="item" ngbDropdownItem (click)="getTicketGraph('Monthly')">Monthly</button>
+                <button class="item" ngbDropdownItem (click)="getTicketGraph('Weekly')">Weekly</button>
+                <button class="item" ngbDropdownItem (click)="getTicketGraph('Daily')">Daily</button>
               </div> 
             </div>
            </div>
@@ -292,7 +292,7 @@
                  <div class="cmp-board-title-wrap d-flex">
                   <h2>Invoice Revenue</h2> 
                   <div ngbDropdown class="d-flex">
-                    <button class="selected-item" id="dropdownBasic1" ngbDropdownToggle>Last 12 months</button>
+                    <button class="selected-item" id="dropdownBasic1" ngbDropdownToggle>Last {{month}} months</button>
                     <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                       <button class="item" ngbDropdownItem (click)="getInvoiceRevenue('12')">Last 12 months</button>
                       <button class="item" ngbDropdownItem (click)="getInvoiceRevenue('6')">Last 6 months</button>
@@ -310,15 +310,15 @@
                   <ul class=" list-unstyled chart-status">
                       <li class="invoice">
                           <span class="title">Invoiced</span>
-                          <span class="title-data">$4200</span>
+                          <span class="title-data">${{invoicedSum}}</span>
                       </li>
                       <li class="collect">
                         <span class="title">Collected</span>
-                        <span class="title-data">$1269</span>
+                        <span class="title-data">${{collectedSum}}</span>
                      </li>
                       <li class="out-standing">
                         <span class="title">Outstanding</span>
-                        <span class="title-data">$251</span>
+                        <span class="title-data">${{outstandingSum}}</span>
                       </li>
                   </ul>
               </div>
