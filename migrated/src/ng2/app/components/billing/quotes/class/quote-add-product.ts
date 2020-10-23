@@ -5,4 +5,12 @@ export class QuoteAddProduct {
     item: Product;
     itemOrder: number;
     quantity: number;
+    markup:number;
+    constructor(discountType,item,itemOrder,quantity,markup) {
+        this.discountType = discountType;
+        this.item = item;
+        this.itemOrder = itemOrder;
+        this.quantity = quantity;
+        this.markup = markup;
+    }
 }

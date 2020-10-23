@@ -6,5 +6,12 @@ export class QuoteAddService {
     item: Service;
     itemOrder: number;
     quantity: number;
+    constructor(description, discountType, item, itemOrder, quantity) {
+        this.description = description;
+        this.discountType = discountType;
+        this.item = item;
+        this.itemOrder = itemOrder;
+        this.quantity = quantity;
+    }
 
 }

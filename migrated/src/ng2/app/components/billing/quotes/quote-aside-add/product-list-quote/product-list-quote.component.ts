@@ -7,8 +7,4 @@ import { ProductListComponent } from 'src/ng2/app/components/shared/product-list
   styleUrls: ['./product-list-quote.component.scss']
 })
 export class ProductListQuoteComponent extends ProductListComponent {
-
-  
- 
-
 }

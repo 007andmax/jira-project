@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CompanyProfile } from 'src/ng2/app/components/companies/class/company-profile';
 import { CompanyUpdate } from 'src/ng2/app/components/companies/class/company-update';
@@ -9,6 +9,8 @@ import { BillableStateService } from 'src/ng2/app/states/billable/billable-state
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { InvoiceFormEditCustomerComponent } from '../../../billable/billable-aside/invoice-form/invoice-form-edit-customer/invoice-form-edit-customer.component';
 import { QuoteAdd } from '../../class/quote-add';
+import { QuoteStateService } from '../../quote-create/quote-state.service';
+import { ServiceListQuoteComponent } from '../service-list-quote/service-list-quote.component';
 
 @Component({
   selector: 'app-quote-aside-add-body',
@@ -17,16 +19,20 @@ import { QuoteAdd } from '../../class/quote-add';
 })
 export class QuoteAsideAddBodyComponent implements OnInit {
   @ViewChild('companyEdit') companyEdit: InvoiceFormEditCustomerComponent;
+  @ViewChild('servicesList') servicesList: ServiceListQuoteComponent;
   quoteCompany: any;
-  sub:Subscription = new Subscription();
+
   formatDate: string = FORMAT_DATE_2;
   today = new Date().getTime();
   quote: QuoteAdd = new QuoteAdd();
   companies = [];
+  sub: Subscription = new Subscription();
   constructor(private companiesState: CompaniesStateService,
     private billableStateService: BillableStateService,
     private companiesService: CompaniesService,
     private companiesStateService: CompaniesStateService,
+    private quoteStateService: QuoteStateService,
+    public cd: ChangeDetectorRef,
     private quoteServices: QuoteService,) { }
 
   ngOnInit() {
@@ -50,33 +56,49 @@ export class QuoteAsideAddBodyComponent implements OnInit {
     this.sub.add(getChangeCompanies);
   }
   selectProduct(data) {
-console.log("data",data);
+    console.log("data", data);
+
+    this.quote.addProduct(data);
+    console.log("this.quote",this.quote.products);
+  }
+  onAddDefaultService(data) {
+    console.log("data", data);
+    this.quote.addService(data);
   }
   private getCLientsList(data) {
     this.companies = data
       .sort((a, b) => a.name.localeCompare(b.name))
       .filter((item) => !item.deletedAt)
   }
-  onUpdateCompany() {
-  /*  let data = this.companyEdit.getCompany();
-    this.customerCompany = data;*/
+  getPriceService(service) {
+    return this.quoteStateService.roundToTwo(this.quoteStateService.getPrice(service.item.rate, service.quantity, service.item.taxes) + this.quoteStateService.getTaxPrice(service.item.rate, service.quantity, service.item.taxes));
+
+  }
+  getPriceProduct(product) {
+      return this.quoteStateService.roundToTwo(this.quoteStateService.getPrice(product.item.sale, product.quantity, product.item.taxes) + this.quoteStateService.getTaxPrice(product.item.sale, product.quantity, product.item.taxes));
   }
   onEditCustomer() {
     this.companiesService.getCompany(this.quoteCompany.id).subscribe((data: any) => {
-     let customerCompany:CompanyProfile = new CompanyProfile();
-       customerCompany.onEditMode(data);
-      this.billableStateService.onEditCustomer( customerCompany);
+      let customerCompany: CompanyProfile = new CompanyProfile();
+      customerCompany.onEditMode(data);
+      this.billableStateService.onEditCustomer(customerCompany);
     })
-   
+
   }
   onChangeQuoteDate(data) {
-   this.quote.setQuoteDate((data) ? data : new Date().getTime());
+    this.quote.setQuoteDate((data) ? data : new Date().getTime());
   }
   onChangeExpiryDate(data) {
     this.quote.setExpiryDate((data) ? data : new Date().getTime());
   }
   onSelectCompany(data) {
     this.quoteCompany = data;
+    this.cd.detectChanges();
+    if (data) {
+      this.servicesList.getServicesList();
+    } else {
+      this.servicesList.resetServicesList();
+    }
   }
 
 }

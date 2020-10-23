@@ -23,6 +23,17 @@ export class QuoteAdd {
     constructor() {
         
     }
+    public addProduct(item) {
+        this.products.push(new QuoteAddProduct("",item,0,1,this.getMarkups(item)))
+    }
+    public addService(item) {
+        this.services.push(new QuoteAddService("","",item,0,1))
+    }
+    public getMarkups(item) {
+        if (item.sale > 0 && item.cost > 0 )  return Math.round((item.sale - item.cost)/item.cost* 100);
+        return 0;
+         
+      }
     public setQuoteDate(data) {
         this.date = data;
     }

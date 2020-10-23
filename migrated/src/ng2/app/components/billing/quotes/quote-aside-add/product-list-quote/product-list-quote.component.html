@@ -2,11 +2,9 @@
   <mat-error  class="qt-tooltip-error qt-w-auto-important" *ngIf="!validate">
     Product is required
   </mat-error>
-  <div class="qt-green-label" id="dropdownProducts" ngbDropdownToggle>Add Product</div>
- 
+  <button class="qt-btn --outline --small"   id="dropdownProducts" ngbDropdownToggle>+ Add Product</button>
   <div class=select-product__dropdown ngbDropdownMenu aria-labelledby="dropdownProducts" >
     <div class="select-product__header">
-        
         <input class="pointer select-product__input" type="text"
         [ngClass]="{'--input-error' : !validate}" placeholder="Search or Add product" (input)="onSearch($event)"
           id="dropdownProducts"  >
@@ -14,9 +12,7 @@
             <i *ngIf="selectedItem"
                class="icn-sm icn-remove-old"
                (click)="clear($event)"></i>
-           
           </span>
-        
     </div>
     <ngb-accordion #acc="ngbAccordion" class="item-list products-accordion"  >
       <ngb-panel   *ngFor="let item of itemList | filter : resetSearch : search"  > <!--| filter :'name' : search -->
@@ -35,7 +31,6 @@
                 <div class="title">{{ productItem.description }}</div>
                 <div class="text-right total-count">{{ productItem.sale | currency: '$' }}</div>
               </div>
-
               <div class="manufacture">
                 <span *ngIf="productItem.ilc">ILC: {{ productItem.ilc }}</span>
                 <span *ngIf="productItem.manufacture">P/N: {{ productItem.manufacture }}</span>
@@ -43,13 +38,11 @@
             </div>
             <div class="button-add">Add this</div>
           </div>
-
         </ng-template>
       </ngb-panel>
     </ngb-accordion>
     <div class="select-product__header-add-product" (click)="onCreateProduct()">+ Add New Item</div>
   </div>
-
   <div *ngIf="isCreateproduct" [ngClass]="classAddProduct">
     <div class="create-product --modal">
       <h3 class="create-product__title">Create Product</h3>
@@ -57,5 +50,4 @@
     </div>
     <div class="product-popup-triangle"></div>
   </div>
-
   </div>
