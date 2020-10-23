@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CompanyProfile } from 'src/ng2/app/components/companies/class/company-profile';
+import { CompanyUpdate } from 'src/ng2/app/components/companies/class/company-update';
 import { FORMAT_DATE_2 } from 'src/ng2/app/const/date-picker';
 import { CompaniesService } from 'src/ng2/app/services/company/companies.service';
 import { QuoteService } from 'src/ng2/app/services/quote/quote.service';
