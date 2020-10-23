@@ -49,6 +49,9 @@ export class QuoteAsideAddBodyComponent implements OnInit {
     })
     this.sub.add(getChangeCompanies);
   }
+  selectProduct(data) {
+console.log("data",data);
+  }
   private getCLientsList(data) {
     this.companies = data
       .sort((a, b) => a.name.localeCompare(b.name))
