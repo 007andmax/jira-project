@@ -1,4 +1,4 @@
-<div class="invoice-preview qt-pos-rel">
+<div class="qt-pos-rel">
   <div class="invoice-preview__status" ></div> <!--[ngClass]="{'--paid': invoiceProfile.paidOn, '--overdue': invoiceProfile.isOverDue && !invoiceProfile.paidOn}"-->
 
   <div class="qt-df qt-jc-sb qt-pb-24 company-info">
@@ -8,18 +8,22 @@
 [change]="false" [class]="['qt-dropdown']" [field]="'name'" [editItem]="quoteCompany" [list]="companies"
 (onSelectedItem)="onSelectCompany($event)"></app-select-search>
 
-<div>
-  <textarea class="summary-info__textarea qt-textarea" [(ngModel)]="quote.description" placeholder="Quote description in short words" appTextArea    maxlength="250"   cols="30" rows="1"></textarea>
+<div class="quote-description editable-description"  >
+  <textarea [(ngModel)]="quote.description" placeholder="Quote description in short words" appTextArea></textarea>
 </div>
+ 
     </div>
 
-    <div class="qt-color-dark qt-lh-131 qt-pr-24 qt-fs-26 qt-text-upper qt-ff-gm"  >
+    <div class="qt-color-dark qt-lh-131 qt-pr-24 qt-fs-26 qt-text-upper qt-ff-gm" ngbDropdown [autoClose]="'inside'" #editCustomer="ngbDropdown">
       <div class="qt-fs-10 qt-color-light qt-mb-8 qt-ff-sb qt-lh-12">BILLING ADDRESS</div>
       <div class="qt-fs-13 qt-color-dark qt-ff-gm" *ngIf="quoteCompany" [textContent]="quoteCompany.name"></div>
       <div class="qt-fs-13"  *ngIf="quoteCompany"  [textContent]="(quoteCompany.companyInfo.contacts.length > 0) ? quoteCompany.companyInfo.contacts[0].firstName + ' ' + quoteCompany.companyInfo.contacts[0].lastName : ''"></div>
       <div class="qt-fs-13"  *ngIf="quoteCompany"  [textContent]="(quoteCompany.companyInfo.addresses.length > 0) ? quoteCompany.companyInfo.addresses[0].address : ''"></div>
       <div class="qt-fs-13"  *ngIf="quoteCompany"  [textContent]="(quoteCompany.companyInfo.contacts.length > 0) ? quoteCompany.companyInfo.contacts[0].primaryEmail : ''"></div>
-    
+      <div class="qt-fs-13 qt-color-info  qt-pointer" id="dropdownForm1" *ngIf="quoteCompany" ngbDropdownToggle (click)="onEditCustomer()">Edit Customer</div>
+      <div ngbDropdownMenu aria-labelledby="dropdownForm1" >
+      <app-invoice-form-edit-customer #companyEdit (onUpdateCompany)="onUpdateCompany()"  [dropDown]="editCustomer"></app-invoice-form-edit-customer>
+        </div>
     </div>
   </div>
 
@@ -28,13 +32,9 @@
     <div class="qt-input-block qt-mr-16 qt-w100">
       <label class="qt-lh-154">Quote#</label>
       <div class="qt-df"   >
-         <input class="qt-input-prepend" number
-        [money]="true"
-        [(ngModel)]="amountReceived"
-        (change)="onChangeAmountReceived($event)"
-        appToFixed >
-
-        
+         <input class="qt-input-prepend" decimalNumber
+         [value]="quote.number"
+         (onChange)="quote.number=$event" >
       </div>
     </div>
 
@@ -42,7 +42,8 @@
       <label class="qt-lh-154">PO#
       </label>
       <div class="qt-df"  >
-         <input class="qt-input-prepend"  type="text">
+        
+         <input class="qt-input-prepend" [(ngModel)]="quote.purchaseOrder" type="text">
 
       
       </div>
@@ -53,13 +54,13 @@
 
     <div class="qt-input-block qt-mr-16 qt-w100">
       <label class="qt-lh-154">Quote Date</label>
-      <app-date-picker [formatDate]="formatDate" [editMode]="true" [editDate]="today" [useMinDate]="false" [useMaxDate]="true" (onChange)="onChangeDate($event)"></app-date-picker>
+      <app-date-picker [formatDate]="formatDate" [editMode]="true" [editDate]="today" [useMinDate]="false" [useMaxDate]="true" (onChange)="onChangeQuoteDate($event)"></app-date-picker>
 
     </div>
 
     <div class="qt-input-block qt-w100">
       <label class="qt-lh-154">Expiry Date</label>
-      <app-date-picker [formatDate]="formatDate" [editMode]="true" [editDate]="today" [useMinDate]="false" [useMaxDate]="true" (onChange)="onChangeDate($event)"></app-date-picker>
+      <app-date-picker [formatDate]="formatDate" [editMode]="true" [editDate]="today" [useMinDate]="false" [useMaxDate]="true" (onChange)="onChangeExpiryDate($event)"></app-date-picker>
 
     </div>
   </div>

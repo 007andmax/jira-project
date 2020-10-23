@@ -9,9 +9,9 @@ export class QuoteAdd {
     draft: boolean;
     globalNote: InvoiceNote;
     message: string;
-    number: string;
+    number: string = "0";
     partialDeposit: string;
-    purchaseOrder: string;
+    purchaseOrder: string = "";
     products: Array<QuoteAddProduct> = [];
     services: Array<QuoteAddService> = [];
     recipients: Array<string> = [];
@@ -23,4 +23,11 @@ export class QuoteAdd {
     constructor() {
         
     }
+    public setQuoteDate(data) {
+        this.date = data;
+    }
+    public setExpiryDate(data) {
+        this.validUntil = data;
+    }
+
 }
