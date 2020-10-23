@@ -133,7 +133,7 @@ export class UsersAsideEditComponent implements OnInit {
     if (this.user.primaryEmail && this.user.primaryEmail.length > 0 && this.user.companyId) this.onCheckValidPrimaryEmail();
   }
   onCheckValidPrimaryEmail() {
-    this.usersService.checkValidPrimaryEmail(this.user.primaryEmail, this.user.companyId).subscribe((data: any) => {
+    this.usersService.checkValidPrimaryEmail(this.user.primaryEmail, this.user.companyId,this.usersStateService.getuserForEdit().id).subscribe((data: any) => {
 
       this.validate.setExistPrimaryContactEmail(data.value);
       this.cd.detectChanges();

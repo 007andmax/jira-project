@@ -5,6 +5,7 @@ export class CompanyProfileContact {
     primaryEmail:string;
     subscription:any;
     designation:string;
+    id:string;
     constructor () {
         this.firstName = null;
         this.phoneNumbers = [{

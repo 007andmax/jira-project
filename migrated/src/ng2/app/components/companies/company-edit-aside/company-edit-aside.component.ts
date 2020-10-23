@@ -230,7 +230,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     if (this.company.contacts[0].primaryEmail && this.company.contacts[0].primaryEmail.length > 0) this.onCheckValidPrimaryEmail();
   }
   onCheckValidPrimaryEmail() {
-    this.usersService.checkValidPrimaryEmail(this.company.contacts[0].primaryEmail, this.company.id).subscribe((data: any) => {
+    this.usersService.checkValidPrimaryEmail(this.company.contacts[0].primaryEmail, this.company.id,this.company.contacts[0].id).subscribe((data: any) => {
 
       this.validate.setExistPrimaryContactEmail(data.value);
       this.cd.detectChanges();
