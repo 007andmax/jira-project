@@ -43,7 +43,7 @@ export class QuoteAsideAddBodyComponent implements OnInit {
         this.quoteCompany.name = data.data.name;
         this.quoteCompany.companyInfo.contacts[0].firstName = data.data.companyInfo.contacts[0].firstName;
         this.quoteCompany.companyInfo.contacts[0].lastName = data.data.companyInfo.contacts[0].lastName;
-        this.quoteCompany.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode = data.data.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode;
+        this.quoteCompany.companyInfo.addresses[0].address = data.data.companyInfo.addresses[0].address;
         this.quoteCompany.companyInfo.contacts[0].primaryEmail = data.data.companyInfo.contacts[0].primaryEmail;
       }
     })
