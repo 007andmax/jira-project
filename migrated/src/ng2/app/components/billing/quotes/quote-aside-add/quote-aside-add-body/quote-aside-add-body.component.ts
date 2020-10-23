@@ -41,10 +41,10 @@ export class QuoteAsideAddBodyComponent implements OnInit {
     let getChangeCompanies = this.companiesStateService.getChangeCompanies().subscribe((data: CompanyUpdate) => {
       if (data.action === 'COMPANY_SAVED' && this.quoteCompany.id === data.data.id) {
         this.quoteCompany.name = data.data.name;
-        this.quoteCompany.contacts[0].firstName = data.data.companyInfo.contacts[0].firstName;
-        this.quoteCompany.contacts[0].lastName = data.data.companyInfo.contacts[0].lastName;
-        this.quoteCompany.addresses[0].addressWithSuitNumberAndPostalCode = data.data.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode;
-        this.quoteCompany.contacts[0].primaryEmail = data.data.companyInfo.contacts[0].primaryEmail;
+        this.quoteCompany.companyInfo.contacts[0].firstName = data.data.companyInfo.contacts[0].firstName;
+        this.quoteCompany.companyInfo.contacts[0].lastName = data.data.companyInfo.contacts[0].lastName;
+        this.quoteCompany.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode = data.data.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode;
+        this.quoteCompany.companyInfo.contacts[0].primaryEmail = data.data.companyInfo.contacts[0].primaryEmail;
       }
     })
     this.sub.add(getChangeCompanies);
