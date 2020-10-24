@@ -654,6 +654,10 @@ export class TerminalComponent implements OnInit {
   copyToTerminalFunc(editCmd, type, file) {
     this.copyToTerminal(editCmd, type, file);
     this.editCmd = ''
+    document.getElementById("terminal").style.height = window.innerHeight - document.getElementById('deviceHeader').offsetHeight - 250 + 'px';
+    document.getElementById("editCmd").style.height = '120px';
+    this.terminalHeight = document.getElementById("terminal").offsetHeight;
+    this.cmdHeight = document.getElementById("editCmd").offsetHeight;
   }
 
   toggleTerminal(type, typeName) {
