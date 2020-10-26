@@ -6,6 +6,8 @@ export class QuoteAddProduct {
     itemOrder: number;
     quantity: number;
     markup:number;
+    sum:number;
+    taxSum:number;
     constructor(discountType,item,itemOrder,quantity,markup) {
         this.discountType = discountType;
         this.item = item;

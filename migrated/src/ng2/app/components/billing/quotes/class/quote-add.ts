@@ -26,7 +26,9 @@ export class QuoteAdd {
 
     }
     public getDataForPreview(company) {
-
+        let totalAmount = 0;
+        totalAmount += this.services.reduce((a, b) => a + b.sum, 0);
+        totalAmount += this.products.reduce((a, b) => a + b.sum, 0);
         return {
             company: company,
             //createdAt: new Date().getTime(),
@@ -38,7 +40,7 @@ export class QuoteAdd {
             reviewNotes: [],
             //   status: string;
             subject: this.subject,
-            totalAmount: 0,
+            totalAmount: totalAmount,
             validUntil: this.validUntil,
             products: this.products.map(item => new QuoteProduct({ ...item, ...item.item })),
             services: this.services.map(item => new QuoteService({ ...item, ...item.item })),

@@ -140,11 +140,15 @@ export class QuoteAsideAddBodyComponent implements OnInit {
     this.quote.products.splice(i,1);
   }
   getPriceService(service) {
-    return this.quoteStateService.roundToTwo(this.quoteStateService.getPrice(service.item.rate, service.quantity, service.item.taxes) + this.quoteStateService.getTaxPrice(service.item.rate, service.quantity, service.item.taxes));
+    service.sum =  this.quoteStateService.getPrice(service.item.rate, service.quantity, service.item.taxes) + service.item.taxes.reduce((a, b) => a + (b.rate * service.quantity), 0);
+    service.taxSum =    service.item.taxes.reduce((a, b) => a + (b.rate * service.quantity), 0);
+    return this.quoteStateService.roundToTwo(this.quoteStateService.getPrice(service.item.rate, service.quantity, service.item.taxes) + service.item.taxes.reduce((a, b) => a + (b.rate * service.quantity), 0));
 
   }
   getPriceProduct(product) {
-      return this.quoteStateService.roundToTwo(this.quoteStateService.getPrice(product.item.sale, product.quantity, product.item.taxes) + this.quoteStateService.getTaxPrice(product.item.sale, product.quantity, product.item.taxes));
+    product.sum = this.quoteStateService.getPrice(product.item.sale, product.quantity, product.item.taxes) + product.item.taxes.reduce((a, b) => a + (b.rate * product.quantity), 0);;
+    product.taxSum =  product.item.taxes.reduce((a, b) => a + (b.rate * product.quantity), 0);
+    return this.quoteStateService.roundToTwo(this.quoteStateService.getPrice(product.item.sale, product.quantity, product.item.taxes) + product.item.taxes.reduce((a, b) => a + (b.rate * product.quantity), 0));
   }
   onEditCustomer() {
     this.companiesService.getCompany(this.quoteCompany.id).subscribe((data: any) => {
