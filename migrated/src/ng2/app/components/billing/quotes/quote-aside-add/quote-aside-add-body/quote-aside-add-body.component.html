@@ -100,7 +100,7 @@
               [value]="service.quantity"
               (onChange)="service.quantity=$event"
               /></td>
-            <td class="invoice-preview__col-tax"><app-invoice-form-ticket-edit-taxes class="qt-taxes-multiselect" [selectedTax]="service.item.taxes" (taxesChange)="onTaxesChange($event)"></app-invoice-form-ticket-edit-taxes></td>
+            <td class="invoice-preview__col-tax" [innerHTML]="getSelectedTaxes(service.item.taxes)"> </td>
           <td class="invoice-preview__col-amount" [textContent]="getPriceService(service) | currency"></td>
           <td> <div class="icon__raw-clear qt-ic-c qt-sz-16" (click)="removeService(i)"></div></td>
           </tr>
@@ -144,7 +144,7 @@ let-i="index"
           (onChange)="product.quantity=$event"
           />
          </td>
-        <td class="invoice-preview__col-tax"  >   <app-invoice-form-ticket-edit-taxes class="qt-taxes-multiselect" [selectedTax]="product.item.taxes" (taxesChange)="onTaxesChange($event)"></app-invoice-form-ticket-edit-taxes>
+        <td class="invoice-preview__col-tax"  [innerHTML]="getSelectedTaxes(product.item.taxes)">   
         </td>
         <td class="invoice-preview__col-amount" [textContent]="getPriceProduct(product) | currency"></td>
         <td> <div class="icon__raw-clear qt-ic-c qt-sz-16" (click)="removeProduct(i)"></div></td>

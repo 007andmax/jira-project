@@ -158,6 +158,11 @@ export class QuoteAsideAddBodyComponent implements OnInit {
     })
 
   }
+  getSelectedTaxes(taxes) {
+    return taxes.map(item => {
+      return `${item.name} ${item.rate}%`;
+    }).join("<br>");
+  }
   onChangeQuoteDate(data) {
     this.quote.setQuoteDate((data) ? data : new Date().getTime());
   }
