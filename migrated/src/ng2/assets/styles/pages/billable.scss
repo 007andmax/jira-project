@@ -122,6 +122,7 @@
     top: 79px;
     right: 0;
     height: calc(100vh - 79px);
+    z-index: 5;
 
     .billing-aside-scroll-content {
       overflow: auto;
@@ -145,11 +146,17 @@
         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
         border: solid 1px #dfe3e8;
         background-color: #ffffff;
+        padding-top: 7px;
+        padding-bottom: 7px;
       }
 
       &__number {
         background-color: #637382;
         line-height: 1.2;
+      }
+
+      &__subject {
+        max-width: 680px;
       }
 
       .delete-item-container {
