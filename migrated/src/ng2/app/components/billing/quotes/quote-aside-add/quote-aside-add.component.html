@@ -8,8 +8,33 @@
   </div>
   <div class="billing-invoice-preview-scroll-content" >
   <div class="qt-pl-30 qt-pr-30 qt-pt-24 qt-pb-50"  >
-    <app-quote-aside-add-body></app-quote-aside-add-body>
+    <app-quote-aside-add-body #quoteAdd [hidden]="showPreview"></app-quote-aside-add-body>
+    <app-quote-aside-preview-body *ngIf="showPreview" [quote]="quotePreview"></app-quote-aside-preview-body>
+
   </div>
+  <div class="aside-footer qt-pr-30 qt-pl-30 qt-pb-16 qt-pt-16 qt-df qt-ai-c qt-jc-sb">
+    <div class="qt-df">
+      <div class="qt-pos-rel" ngbDropdown [placement]="'top-right'">
+        <ul class="qt-dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownSave">
+          <li ngbDropdownItem appDisabledBtn #saveAndPrintBtn="disabled" (onClick)="saveAndPrint()"  ><div class="icon__print qt-sz-16 qt-mr-8"></div>Save and Print</li>
+          <li ngbDropdownItem appDisabledBtn #saveAndDownloadBtn="disabled" (onClick)="saveAndDownload()"  ><div class="icon__download qt-sz-16 qt-mr-8"></div>Save and Download</li>
+        </ul>
+        <button class=" qt-button --with-menu qt-mr-12" >
+          <span class="save-billable-aside-btn" appDisabledBtn #saveAndSendBtn="disabled" (onClick)="saveAndSend()"  >
+            <span  *ngIf="!saveAndSendBtn.isBlock() && !saveAndPrintBtn.isBlock() && !saveAndDownloadBtn.isBlock()">Save and Send</span>
+            <app-preloader-ticket *ngIf="saveAndSendBtn.isBlock() || saveAndPrintBtn.isBlock() || saveAndDownloadBtn.isBlock()"></app-preloader-ticket>
+          </span>
+          <div class="button-menu"  id="dropdownSave" ngbDropdownToggle>
+            <div class="qt-sz-16 qt-ic-c icon__dropdown-arrow-up"></div>
+          </div>
+        </button>
+      </div>
+      <button class="qt-button --outline" *ngIf="!showPreview" (click)="onPreview()">Preview</button>
+        <button class="qt-button --outline" *ngIf="showPreview" (click)="showPreview = false">Edit</button>
+    </div>
+     
+   </div>
   </div>
+
   </div>
   

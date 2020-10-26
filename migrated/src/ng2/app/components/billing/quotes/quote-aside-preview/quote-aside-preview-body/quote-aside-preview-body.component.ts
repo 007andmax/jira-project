@@ -18,6 +18,7 @@ export class QuoteAsidePreviewBodyComponent implements OnInit {
   ngOnInit() {
     this.currentCompany = this.companiesStateService.getCurrentCompany();
     this.quoteCompany = this.companiesStateService.getCompanies().find(item => item.id === this.quote.company.id);
+    console.log("this.quoteCompany",this.quoteCompany);
   }
   public getDate(date) {
     return moment(new Date(date)).format('DD MMM YYYY');

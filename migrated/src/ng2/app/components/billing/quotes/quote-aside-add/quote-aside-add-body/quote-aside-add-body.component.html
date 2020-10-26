@@ -81,10 +81,12 @@
             <th class="invoice-preview__col-qty">Quantity</th>
             <th class="invoice-preview__col-tax">Tax</th>
             <th class="invoice-preview__col-amount">Amount</th>
+            <th></th>
           </tr>
         </thead>
         <tbody class=" qt-lh-133">
           <ng-template ngFor let-service
+          let-i="index"
           [ngForOf]="quote.services"
           [ngForTrackBy]="trackById">
           <tr>
@@ -100,9 +102,11 @@
               /></td>
             <td class="invoice-preview__col-tax"><app-invoice-form-ticket-edit-taxes class="qt-taxes-multiselect" [selectedTax]="service.item.taxes" (taxesChange)="onTaxesChange($event)"></app-invoice-form-ticket-edit-taxes></td>
           <td class="invoice-preview__col-amount" [textContent]="getPriceService(service) | currency"></td>
+          <td> <div class="icon__raw-clear qt-ic-c qt-sz-16" (click)="removeService(i)"></div></td>
           </tr>
 </ng-template>
 <ng-template ngFor let-product
+let-i="index"
 [ngForOf]="quote.products"
 [ngForTrackBy]="trackById">
       <tr>
@@ -143,6 +147,7 @@
         <td class="invoice-preview__col-tax"  >   <app-invoice-form-ticket-edit-taxes class="qt-taxes-multiselect" [selectedTax]="product.item.taxes" (taxesChange)="onTaxesChange($event)"></app-invoice-form-ticket-edit-taxes>
         </td>
         <td class="invoice-preview__col-amount" [textContent]="getPriceProduct(product) | currency"></td>
+        <td> <div class="icon__raw-clear qt-ic-c qt-sz-16" (click)="removeProduct(i)"></div></td>
       </tr>
       </ng-template>
 
@@ -159,42 +164,45 @@
 
   </div> 
 
-<!-- 
+ 
   <div   class="qt-df qt-w100 qt-jc-sb qt-color-dark qt-fs-12 qt-ff-gm qt-mb-20 qt-lh-133">
 
-    <div class="qt-mb-20 invoice-preview-notes">
-      <div class="qt-fs-12 qt-mb-4 qt-ff-qm qt-color-dark qt-ff-gm qt-lh-133">Customer Note</div>
-      <div class="qt-fs-13 qt-lh-154 note qt-ff-gr" *ngIf="quote.regularNote" [textContent]="(quote.regularNote && quote.regularNote.line1) ? quote.regularNote.line1 :(quote.regularNote) ? quote.regularNote : ''"></div>
-    </div>
-
-
-    <div class="invoice-preview__total-block">
-      <div class="qt-df qt-jc-sb qt-pl-12 qt-pr-12">
-        <div class="qt-text-left">Sub Total Services</div>
-        <div class="invoice-info-value qt-text-right" [textContent]="getSubTotalServices() | currency"></div>
-      </div>
-
-      <div class="qt-df qt-jc-sb qt-pl-12 qt-pt-10 qt-pr-12"  >
-        <div class="qt-text-left">Sub Total Products</div>
-        <div class="invoice-info-value qt-text-right" [textContent]="getSubTotalProducts() | currency"></div>
-      </div>
-      <div class="qt-df qt-jc-sb qt-pl-12 qt-pt-10 qt-pr-12 qt-pb-10">
-        <div class=" qt-text-left">Tax</div>
-        <div class="invoice-info-value  qt-text-right" [textContent]="getTotalTaxes() | currency"></div>
-      </div>
-      <div class="qt-df qt-jc-sb qt-pl-12 qt-pr-12  qt-ai-c invoice-preview__total-price">
-        <div class=" qt-text-left">Total</div>
-        <div class="invoice-info-value qt-text-right qt-fs-16 qt-lh-15" [textContent]="quote.totalAmount | currency"></div>
-      </div>
-    </div>
-  </div>  -->
-
-<!--    <div  >
     <div>
-      <div class="qt-fs-12 qt-mb-4 qt-ff-qm qt-color-dark qt-ff-gm qt-lh-133">Terms & Conditions</div>
-      <div class="qt-fs-13 qt-lh-154 note" *ngIf="quote.termsAndConditions" [textContent]="quote.termsAndConditions"></div>
+      
+ <app-invoice-regular-note *ngIf="notes"   [invoiceNotes]="notes" (onUpdateInvoiceData)="updateInvoiceData($event)"></app-invoice-regular-note>
     </div>
+
+    <div>
+      <div class="invoice-total qt-color-dark" >
+        <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-15">
+          <div>Sub Total Services</div>
+          <div [textContent]="getSubTotalServices() | currency"></div>
+        </div>
+        <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-15"  >
+          <div>Sub Total Products</div>
+          <div [textContent]="getSubTotalProducts() | currency"></div>
+        </div>
+        <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-15">
+          <div>Tax</div>
+          <div [textContent]="getTotalTaxes() | currency"></div>
+        </div>
+        <div class="qt-df qt-jc-sb qt-pt-15 invoice-total__total-line">
+          <div class="qt-fs-13 qt-fw-b">Total</div>
+          <div class="qt-fs-16 qt-fw-b" [textContent]="getSubTotal() | currency"></div>
+        </div>  
+      </div>
+
+    </div>
+
+  </div>  
+
+  <div class="terms-n-conditions qt-pl-30 qt-pr-30 qt-pb-24 qt-pt-16">
+
+    <div class="qt-fs-13 qt-ff-gm qt-mb-12">Terms & Conditions</div>
+    <div class="qt-fs-12 qt-color-info qt-ff-gm pointer"  *ngIf="changeGlobalNote" (click)="onUpdateGlobalNote()">Save Terms & Conditions</div>
+
+    <textarea id="description-global-note" (input)="onCheckUpdateGlobalNote()" class="terms-n-conditions__textarea qt-textarea" placeholder="Enter the terms and conditions of your business to be displayed in your transaction" appTextArea    maxlength="250"   cols="30" rows="1"></textarea>
+
   </div>
--->
 
 </div>
