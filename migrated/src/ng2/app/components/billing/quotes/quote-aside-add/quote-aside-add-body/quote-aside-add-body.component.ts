@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CompanyProfile } from 'src/ng2/app/components/companies/class/company-profile';
 import { CompanyUpdate } from 'src/ng2/app/components/companies/class/company-update';
@@ -12,6 +12,7 @@ import { CompaniesStateService } from 'src/ng2/app/states/company/companies-stat
 import { InvoiceFormEditCustomerComponent } from '../../../billable/billable-aside/invoice-form/invoice-form-edit-customer/invoice-form-edit-customer.component';
 import { InvoiceNote } from '../../../billable/class/invoice-note';
 import { QuoteAdd } from '../../class/quote-add';
+import { QuoteValdiate } from '../../class/quote-vildate';
 import { QuoteStateService } from '../../quote-create/quote-state.service';
 import { ServiceListQuoteComponent } from '../service-list-quote/service-list-quote.component';
 
@@ -23,6 +24,7 @@ import { ServiceListQuoteComponent } from '../service-list-quote/service-list-qu
 export class QuoteAsideAddBodyComponent implements OnInit {
   @ViewChild('companyEdit') companyEdit: InvoiceFormEditCustomerComponent;
   @ViewChild('servicesList') servicesList: ServiceListQuoteComponent;
+  @Input() validate:QuoteValdiate = new QuoteValdiate();
   quoteCompany: any;
   notes: Array<InvoiceNote>;
   formatDate: string = FORMAT_DATE_2;
@@ -65,6 +67,9 @@ export class QuoteAsideAddBodyComponent implements OnInit {
     this.quote.regularNote.setDefault();
     this.sub.add(getChangeCompanies);
   }
+  public getValidate() {
+    return this.validate;
+  }
   public getQuote() {
     return this.quote;
   }
@@ -89,6 +94,7 @@ export class QuoteAsideAddBodyComponent implements OnInit {
         noteType: this.globalNote.noteType,
         title: this.globalNote.title
       })
+      this.validate.resetValidate();
     })
   }
   onCheckUpdateGlobalNote() {
@@ -118,18 +124,22 @@ export class QuoteAsideAddBodyComponent implements OnInit {
   public updateInvoiceData(request) {
     console.log("request",request.regularInvoiceNote);
     this.quote.setRegulatNote(request.regularInvoiceNote);
-   /* this.billableService.updateInvoiceData(this.invoice.lockId, request).subscribe(data => {
-    })*/
+    this.validate.resetValidate();
+   
   }
   selectProduct(data) {
     console.log("data", data);
 
     this.quote.addProduct(data);
+    this.validate.resetServicesProducts();
+    this.validate.resetValidate();
     console.log("this.quote",this.quote.products);
   }
-  onAddDefaultService(data) {
+  onAddService(data) {
     console.log("data", data);
     this.quote.addService(data);
+    this.validate.resetServicesProducts();
+    this.validate.resetValidate();
   }
   private getCLientsList(data) {
     this.companies = data
@@ -148,16 +158,13 @@ export class QuoteAsideAddBodyComponent implements OnInit {
     return this.quoteStateService.roundToTwo(this.quoteStateService.getPrice(service.item.rate, service.quantity, service.item.taxes) + service.item.taxes.reduce((a, b) => a + (b.rate * service.quantity), 0));
 
   }
-  getPriceProduct(product) {
-    product.sum = this.quoteStateService.getPrice(product.item.sale, product.quantity, product.item.taxes) + product.item.taxes.reduce((a, b) => a + (b.rate * product.quantity), 0);;
-    product.taxSum =  product.item.taxes.reduce((a, b) => a + (b.rate * product.quantity), 0);
-    return this.quoteStateService.roundToTwo(this.quoteStateService.getPrice(product.item.sale, product.quantity, product.item.taxes) + product.item.taxes.reduce((a, b) => a + (b.rate * product.quantity), 0));
-  }
+ 
   onEditCustomer() {
     this.companiesService.getCompany(this.quoteCompany.id).subscribe((data: any) => {
       let customerCompany: CompanyProfile = new CompanyProfile();
       customerCompany.onEditMode(data);
       this.billableStateService.onEditCustomer(customerCompany);
+      this.validate.resetValidate();
     })
 
   }
@@ -168,19 +175,24 @@ export class QuoteAsideAddBodyComponent implements OnInit {
   }
   onChangeQuoteDate(data) {
     this.quote.setQuoteDate((data) ? data : new Date().getTime());
+    this.validate.resetValidate();
   }
   onChangeExpiryDate(data) {
     this.quote.setExpiryDate((data) ? data : new Date().getTime());
+    this.validate.resetValidate();
   }
   onSelectCompany(data) {
     this.quoteCompany = data;
     this.quote.setCompanyId((data) ? data.id : null);
     this.cd.detectChanges();
     if (data) {
+      this.validate.resetCompany();
       this.servicesList.getServicesList();
     } else {
       this.servicesList.resetServicesList();
     }
+    this.quote.resetServices();
+    this.validate.resetValidate();
   }
 
 }

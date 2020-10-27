@@ -25,6 +25,9 @@ export class QuoteAdd {
     constructor() {
 
     }
+    public resetServices() {
+        this.services = [];
+    }
     public setCompanyId (data) {
         this.companyId = data;
     }

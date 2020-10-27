@@ -10,6 +10,7 @@ import { NotificationStateService } from '../../../shared/notification/services/
 import { BillableAsideComponent } from '../../billable/billable-aside/billable-aside.component';
 import { QuoteAdd } from '../class/quote-add';
 import { QuotePreview } from '../class/quote-preview';
+import { QuoteValdiate } from '../class/quote-vildate';
 import { QuoteStateService } from '../quote-create/quote-state.service';
 import { QuoteAsideAddBodyComponent } from './quote-aside-add-body/quote-aside-add-body.component';
 
@@ -24,6 +25,7 @@ export class QuoteAsideAddComponent implements OnInit {
   @ViewChild('saveAndApproveBtn') saveAndApproveBtn: DisabledBtnDirective;
   @ViewChild('saveAndDownloadBtn') saveAndDownloadBtn: DisabledBtnDirective;
   @ViewChild('quoteAdd') quoteAdd: QuoteAsideAddBodyComponent;
+  validate:QuoteValdiate = new QuoteValdiate();
   showPreview: boolean = false;
   quotePreview: QuotePreview;
   open: boolean = false;
@@ -44,6 +46,9 @@ export class QuoteAsideAddComponent implements OnInit {
       this.quoteService.createQuote(data, true).subscribe((res) => {
         this.saveAndSendBtn.setDisabled(false);
         this.close();
+      },err => {
+        this.validate.setErrorMessage(err.error.validationResults.saleQuotePostDto);
+        this.saveAndSendBtn.setDisabled(false);
       });
     })
   }
@@ -52,14 +57,17 @@ export class QuoteAsideAddComponent implements OnInit {
     this.showPreview = false;
   }
   saveAndSend() {
+   
     let quote: QuoteAdd = this.quoteAdd.getQuote();
+    if (!this.quoteAdd.getValidate().isValidate(quote)) return;
     const modalRef = this.modalService.open(ModalQuoteComponent);
     let data = JSON.parse(JSON.stringify(quote.getDataForCreate(true)));
     modalRef.componentInstance.data = data;
   }
   saveAndDownload() {
-    this.saveAndDownloadBtn.setDisabled(true);
     let quote: QuoteAdd = this.quoteAdd.getQuote();
+    if (!this.quoteAdd.getValidate().isValidate(quote)) return;
+    this.saveAndDownloadBtn.setDisabled(true);
     this.quoteService.createQuote(quote.getDataForCreate(false), false).subscribe((data: any) => {
       const id = data['id'];
       this.quoteService.downloadPdf(data['id']).subscribe((res) => {
@@ -68,19 +76,27 @@ export class QuoteAsideAddComponent implements OnInit {
         this.saveAndDownloadBtn.setDisabled(false);
         this.close();
       });
+    },err => {
+      this.validate.setErrorMessage(err.error.validationResults.saleQuotePostDto);
+      this.saveAndDownloadBtn.setDisabled(false);
     });
   }
   public saveAndContinue() {
-    this.saveAndContinueBtn.setDisabled(true);
     let quote: QuoteAdd = this.quoteAdd.getQuote();
+    if (!this.quoteAdd.getValidate().isValidate(quote)) return;
+    this.saveAndContinueBtn.setDisabled(true);
     this.quoteService.createQuote(quote.getDataForCreate(false), false).subscribe((data) => {
       this.saveAndContinueBtn.setDisabled(false);
       this.close();
+    },err => {
+      this.validate.setErrorMessage(err.error.validationResults.saleQuotePostDto);
+      this.saveAndContinueBtn.setDisabled(false);
     });
   }
   public saveAndApprove() {
-    this.saveAndApproveBtn.setDisabled(true);
     let quote: QuoteAdd = this.quoteAdd.getQuote();
+    if (!this.quoteAdd.getValidate().isValidate(quote)) return;
+    this.saveAndApproveBtn.setDisabled(true);
     this.quoteService.createQuote(quote.getDataForCreate(false), false)
       .subscribe((res) => {
         this.quoteService.approveQuote(res['company'], res['id'])
@@ -89,6 +105,9 @@ export class QuoteAsideAddComponent implements OnInit {
             this.close();
 
           });
+      },err => {
+        this.validate.setErrorMessage(err.error.validationResults.saleQuotePostDto);
+        this.saveAndApproveBtn.setDisabled(false);
       });
   }
 

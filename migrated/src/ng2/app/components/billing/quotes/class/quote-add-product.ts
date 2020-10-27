@@ -8,6 +8,7 @@ export class QuoteAddProduct {
     markup: number;
     sum: number;
     taxSum: number;
+    validateSaleCost: boolean = true;
     constructor(discountType, item, itemOrder, quantity, markup) {
         this.discountType = discountType;
         this.item = item;
@@ -22,5 +23,8 @@ export class QuoteAddProduct {
             itemOrder: this.itemOrder,
             quantity: this.quantity
         }
+    }
+    public checkSaleCost() {
+        this.validateSaleCost = this.item.sale >= this.item.cost;
     }
 }

@@ -3,13 +3,23 @@
 
   <div class="qt-df qt-jc-sb qt-pb-24 company-info">
     <div class="qt-input-block">
-      <label class="qt-lh-154">Customer Name</label>
-      <app-select-search class="search-company invoices-company-filter"  #companyDp  [placeholder]="'Select Company'"
-[change]="false" [class]="['qt-dropdown']" [field]="'name'" [editItem]="quoteCompany" [list]="companies"
-(onSelectedItem)="onSelectCompany($event)"></app-select-search>
+     
+      <app-drop-down
+      #companyDp
+        [title]="'Company Name'"
+        [placeholder]="'Select Company'"
+        [list]="companies"
+        [validate]="validate.getCompany()"
+        [errorMessage]="'Company is required'"
+        [field]="'name'"
+        [search]="true"
+        [change]="true"
+        (onSelectedItem)="onSelectCompany($event)"
+      ></app-drop-down>
+      
 
 <div class="quote-description editable-description"  >
-  <textarea [(ngModel)]="quote.description" placeholder="Quote description in short words" appTextArea></textarea>
+  <textarea [(ngModel)]="quote.description" placeholder="Quote description in short words" appTextArea  maxlength="255"></textarea>
 </div>
  
     </div>
@@ -34,7 +44,7 @@
       <div class="qt-df"   >
          <input class="qt-input-prepend" decimalNumber
          [value]="quote.number"
-         (onChange)="quote.number=$event" >
+         (onChange)="quote.number=$event;validate.resetValidate();" >
       </div>
     </div>
 
@@ -109,58 +119,23 @@
 let-i="index"
 [ngForOf]="quote.products"
 [ngForTrackBy]="trackById">
-      <tr>
-        <td class="invoice-preview__col-item" [textContent]="product.item.manufacture"> </td>
-        <td class="invoice-preview__col-desc"  ><input type="text" [(ngModel)]="product.item.description"  /></td>
-        <td class="invoice-preview__col-price"  ><input class="qt-input-prepend" 
-            decimalNumber
-          [useFixed]="true"
-          placeholder="0.00"
-          [value]="product.item.cost"
-          (onChange)="product.item.cost=$event"
-            /></td>
-        <td class="invoice-preview__col-price"  >
-          <input class="qt-input-prepend" 
-            decimalNumber
-          [useFixed]="true"
-          placeholder="0.00"
-          [value]="product.markup"
-          (onChange)="product.markup=$event"
-            />
-        </td>
-        <td class="invoice-preview__col-price"  >
-          <input class="qt-input-prepend" 
-          decimalNumber
-        [useFixed]="true"
-        placeholder="0.00"
-        [value]="product.item.sale"
-        (onChange)="product.item.sale=$event"
-          />
-        </td>
-         <td class="invoice-preview__col-qty"    >
-          <input class="qt-input-prepend" 
-          decimalNumber
-          [value]="product.quantity"
-          (onChange)="product.quantity=$event"
-          />
-         </td>
-        <td class="invoice-preview__col-tax"  [innerHTML]="getSelectedTaxes(product.item.taxes)">   
-        </td>
-        <td class="invoice-preview__col-amount" [textContent]="getPriceProduct(product) | currency"></td>
-        <td> <div class="icon__raw-clear qt-ic-c qt-sz-16" (click)="removeProduct(i)"></div></td>
-      </tr>
+     <app-product-item-quote [product]="product"></app-product-item-quote>
       </ng-template>
 
         </tbody>
       </table>
 
-
-
+      <mat-error   *ngIf="!validate.getServicesProducts()">
+        You need to select one product/service at least.
+      </mat-error>
+      <mat-error   *ngIf="!validate.getValidate()">
+        {{validate.errorMessage}}
+      </mat-error>
     </div>
 
    
 <app-product-list-quote (selectedProductItem)="selectProduct($event)"></app-product-list-quote>
-<app-service-list-quote #servicesList [quoteCompany]="quoteCompany" (onSelect)="onAddDefaultService($event)"></app-service-list-quote>
+<app-service-list-quote #servicesList [quoteCompany]="quoteCompany" (onSelect)="onAddService($event)"></app-service-list-quote>
 
   </div> 
 

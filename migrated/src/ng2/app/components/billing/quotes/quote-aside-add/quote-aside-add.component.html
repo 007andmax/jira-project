@@ -8,7 +8,7 @@
   </div>
   <div class="billing-invoice-preview-scroll-content" >
   <div class="qt-pl-30 qt-pr-30 qt-pt-24 qt-pb-50"  >
-    <app-quote-aside-add-body #quoteAdd [hidden]="showPreview" *ngIf="open"></app-quote-aside-add-body>
+    <app-quote-aside-add-body #quoteAdd [validate]="validate" [hidden]="showPreview" *ngIf="open"></app-quote-aside-add-body>
     <app-quote-aside-preview-body *ngIf="showPreview" [quote]="quotePreview"></app-quote-aside-preview-body>
 
   </div>
