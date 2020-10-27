@@ -2,10 +2,11 @@
   width: 100%;
   background-color: #edf2f6;
   min-height: 100vh;
+  overflow: auto;
   &__content {
-    max-width: 1064px;
+    max-width: 1144px;
     margin: 0 auto;
-    padding: 36px 0;
+    padding: 36px 20px;
   }
 
 
@@ -61,6 +62,9 @@
           top: 2px;
           left: auto;
           right: 0;
+        }
+        i.icn-remove-old {	
+          right: 2px;	
         }
       }
     }
