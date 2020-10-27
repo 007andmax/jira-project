@@ -1,10 +1,10 @@
-<div class="invoices-page__aside aside-preview" [hidden]="!open" >
+<div class="quotes-page__aside aside-preview" [hidden]="!open" >
   <div class="aside-header qt-df qt-ai-c qt-jc-sb qt-pr-16 qt-pl-20"  >
     <div class="qt-fs-20 qt-ff-gm qt-color-dark"  [textContent]="'New Quote'">
     </div>
-     <div class="qt-df qt-ai-c"  >      
+     <div class="qt-df qt-ai-c">
       <div class="icon__close qt-sz-24 qt-pointer qt-ic-c " (click)="close()"></div>
-    </div> 
+    </div>
   </div>
   <div class="billing-invoice-preview-scroll-content" >
   <div class="qt-pl-30 qt-pr-30 qt-pt-24 qt-pb-50"  >
@@ -19,7 +19,7 @@
           <li ngbDropdownItem appDisabledBtn #saveAndApproveBtn="disabled" (onClick)="saveAndApprove()"  ><div class="icon__print qt-sz-16 qt-mr-8"></div>Save and Approve</li>
           <li ngbDropdownItem appDisabledBtn #saveAndDownloadBtn="disabled" (onClick)="saveAndDownload()"  ><div class="icon__download qt-sz-16 qt-mr-8"></div>Save and Download</li>
           <li ngbDropdownItem appDisabledBtn #saveAndSendBtn="disabled" (onClick)="saveAndContinue()"  ><div class="icon__download qt-sz-16 qt-mr-8"></div>Save and Continue</li>
-     
+
         </ul>
         <button class=" qt-button --with-menu qt-mr-12" >
           <span class="save-billable-aside-btn" appDisabledBtn #saveAndContinueBtn="disabled" (onClick)="saveAndSend()"  >
@@ -34,9 +34,8 @@
       <button class="qt-button --outline" *ngIf="!showPreview" (click)="onPreview()">Preview</button>
         <button class="qt-button --outline" *ngIf="showPreview" (click)="showPreview = false">Edit</button>
     </div>
-     
+
    </div>
   </div>
 
   </div>
-  

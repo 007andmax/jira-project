@@ -1,11 +1,9 @@
 <div class="qt-pos-rel">
-  <div class="invoice-preview__status" ></div> <!--[ngClass]="{'--paid': invoiceProfile.paidOn, '--overdue': invoiceProfile.isOverDue && !invoiceProfile.paidOn}"-->
 
   <div class="qt-df qt-jc-sb qt-pb-24 company-info">
-    <div class="qt-input-block">
-     
+    <div class="qt-w50 qt-pr-24 company-info-left-side">
       <app-drop-down
-      #companyDp
+        #companyDp
         [title]="'Company Name'"
         [placeholder]="'Select Company'"
         [list]="companies"
@@ -14,30 +12,26 @@
         [field]="'name'"
         [search]="true"
         [change]="true"
-        (onSelectedItem)="onSelectCompany($event)"
-      ></app-drop-down>
-      
+        (onSelectedItem)="onSelectCompany($event)">
+      </app-drop-down>
 
-<div class="quote-description editable-description"  >
-  <textarea [(ngModel)]="quote.description" placeholder="Quote description in short words" appTextArea  maxlength="255"></textarea>
-</div>
- 
+      <textarea class="company-info-description qt-mt-8 qt-w100" [(ngModel)]="quote.description" placeholder="Quote description in short words" appTextArea  maxlength="255"></textarea>
     </div>
 
-    <div class="qt-color-dark qt-lh-131 qt-pr-24 qt-fs-26 qt-text-upper qt-ff-gm" ngbDropdown [autoClose]="'inside'" #editCustomer="ngbDropdown">
-      <div class="qt-fs-10 qt-color-light qt-mb-8 qt-ff-sb qt-lh-12">BILLING ADDRESS</div>
-      <div class="qt-fs-13 qt-color-dark qt-ff-gm" *ngIf="quoteCompany" [textContent]="quoteCompany.name"></div>
-      <div class="qt-fs-13"  *ngIf="quoteCompany"  [textContent]="(quoteCompany.companyInfo.contacts.length > 0) ? quoteCompany.companyInfo.contacts[0].firstName + ' ' + quoteCompany.companyInfo.contacts[0].lastName : ''"></div>
-      <div class="qt-fs-13"  *ngIf="quoteCompany"  [textContent]="(quoteCompany.companyInfo.addresses.length > 0) ? quoteCompany.companyInfo.addresses[0].address : ''"></div>
-      <div class="qt-fs-13"  *ngIf="quoteCompany"  [textContent]="(quoteCompany.companyInfo.contacts.length > 0) ? quoteCompany.companyInfo.contacts[0].primaryEmail : ''"></div>
-      <div class="qt-fs-13 qt-color-info  qt-pointer" id="dropdownForm1" *ngIf="quoteCompany" ngbDropdownToggle (click)="onEditCustomer()">Edit Customer</div>
+    <div class="qt-w50 qt-pl-24" ngbDropdown [autoClose]="'inside'" #editCustomer="ngbDropdown">
+      <div class="qt-fs-10 qt-ff-sb  qt-df qt-ai-c qt-mb-4 qt-lh-12"><div class="qt-sz-16 icon__company-address qt-ic-c qt-mr-4"></div> BILLING ADDRESS</div>
+      <div class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-dark" *ngIf="quoteCompany" [textContent]="quoteCompany.name"></div>
+      <div class="qt-fs-13 qt-lh-154" *ngIf="quoteCompany" [textContent]="(quoteCompany.companyInfo.contacts.length > 0) ? quoteCompany.companyInfo.contacts[0].firstName + ' ' + quoteCompany.companyInfo.contacts[0].lastName : ''"></div>
+      <div class="qt-fs-13 qt-lh-154" *ngIf="quoteCompany" [textContent]="(quoteCompany.companyInfo.addresses.length > 0) ? quoteCompany.companyInfo.addresses[0].address : ''"></div>
+      <div class="qt-fs-13 qt-lh-154" *ngIf="quoteCompany" [textContent]="(quoteCompany.companyInfo.contacts.length > 0) ? quoteCompany.companyInfo.contacts[0].primaryEmail : ''"></div>
+      <div class="qt-ff-gm qt-mt-10 qt-fs-12 qt-lh-133 qt-color-info qt-pointer" id="dropdownForm1" *ngIf="quoteCompany" ngbDropdownToggle (click)="onEditCustomer()">Edit Customer</div>
       <div ngbDropdownMenu aria-labelledby="dropdownForm1" >
       <app-invoice-form-edit-customer #companyEdit   [dropDown]="editCustomer"></app-invoice-form-edit-customer>
         </div>
     </div>
   </div>
 
-  <div class="qt-df qt-pt-16 qt-pl-30 qt-pr-30 qt-mb-16">
+  <div class="qt-df qt-mb-16 qt-mt-16">
 
     <div class="qt-input-block qt-mr-16 qt-w100">
       <label class="qt-lh-154">Quote#</label>
@@ -52,45 +46,34 @@
       <label class="qt-lh-154">PO#
       </label>
       <div class="qt-df"  >
-        
-         <input class="qt-input-prepend" [(ngModel)]="quote.purchaseOrder" type="text">
-
-      
+        <input class="qt-input-prepend" [(ngModel)]="quote.purchaseOrder" type="text">
       </div>
-
-    
-
     </div>
 
     <div class="qt-input-block qt-mr-16 qt-w100">
       <label class="qt-lh-154">Quote Date</label>
       <app-date-picker [formatDate]="formatDate" [editMode]="true" [editDate]="today" [useMinDate]="false" [useMaxDate]="true" (onChange)="onChangeQuoteDate($event)"></app-date-picker>
-
     </div>
 
     <div class="qt-input-block qt-w100">
       <label class="qt-lh-154">Expiry Date</label>
       <app-date-picker [formatDate]="formatDate" [editMode]="true" [editDate]="today" [useMinDate]="false" [useMaxDate]="true" (onChange)="onChangeExpiryDate($event)"></app-date-picker>
-
     </div>
   </div>
 
-   <div class="invoice-preview__items">
-   
+
     <div class="qt-mb-16">
-      <div class="invoice-preview__item-header qt-color-dark qt-df qt-pt-8 qt-pb-8 qt-pl-12 qt-pr-12 qt-ai-c">
-          </div>
-      <table class="invoice-preview__table">
+      <table class="new-quote-table qt-gray-table --last-icon">
         <thead class=" qt-lh-127 qt-color-dark">
           <tr>
-            <th class="invoice-preview__col-item">Item</th>
-            <th class="invoice-preview__col-desc">Description</th>
-            <th class="invoice-preview__col-price">Unit Price</th>
-            <th class="invoice-preview__col-price">Markup</th>
-            <th class="invoice-preview__col-price">Sales Price</th>
-            <th class="invoice-preview__col-qty">Quantity</th>
-            <th class="invoice-preview__col-tax">Tax</th>
-            <th class="invoice-preview__col-amount">Amount</th>
+            <th class="ew-quote-table__col-item">Item</th>
+            <th class="ew-quote-table__col-desc">Description</th>
+            <th class="ew-quote-table__col-price">Unit Price</th>
+            <th class="ew-quote-table__col-price">Markup</th>
+            <th class="ew-quote-table__col-price">Sales Price</th>
+            <th class="ew-quote-table__col-qty">Quantity</th>
+            <th class="ew-quote-table__col-tax">Tax</th>
+            <th class="ew-quote-table__col-amount">Amount</th>
             <th></th>
           </tr>
         </thead>
@@ -100,18 +83,18 @@
           [ngForOf]="quote.services"
           [ngForTrackBy]="trackById">
           <tr>
-            <td class="invoice-preview__col-item" [textContent]="service.item.name"></td>
-            <td class="invoice-preview__col-desc"  ><input type="text" [(ngModel)]="service.description"  /></td>
-            <td class="invoice-preview__col-price" ></td>
-            <td class="invoice-preview__col-price" ></td>
-            <td class="invoice-preview__col-price" [textContent]="service.rate | currency"></td>
-            <td class="invoice-preview__col-qty"    >  <input class="qt-input-prepend" 
+            <td class="ew-quote-table__col-item" [textContent]="service.item.name"></td>
+            <td class="ew-quote-table__col-desc"><input type="text" [(ngModel)]="service.description"  /></td>
+            <td class="ew-quote-table__col-price" ></td>
+            <td class="ew-quote-table__col-price" ></td>
+            <td class="ew-quote-table__col-price" [textContent]="service.rate | currency"></td>
+            <td class="ew-quote-table__col-qty"    >  <input class="qt-input-prepend"
               decimalNumber
               [value]="service.quantity"
               (onChange)="service.quantity=$event"
               /></td>
-            <td class="invoice-preview__col-tax" [innerHTML]="getSelectedTaxes(service.item.taxes)"> </td>
-          <td class="invoice-preview__col-amount" [textContent]="getPriceService(service) | currency"></td>
+            <td class="ew-quote-table__col-tax" [innerHTML]="getSelectedTaxes(service.item.taxes)"> </td>
+          <td class="ew-quote-table__col-amount" [textContent]="getPriceService(service) | currency"></td>
           <td> <div class="icon__raw-clear qt-ic-c qt-sz-16" (click)="removeService(i)"></div></td>
           </tr>
 </ng-template>
@@ -131,19 +114,16 @@ let-i="index"
       <mat-error   *ngIf="!validate.getValidate()">
         {{validate.errorMessage}}
       </mat-error>
-    </div>
 
-   
-<app-product-list-quote (selectedProductItem)="selectProduct($event)"></app-product-list-quote>
-<app-service-list-quote #servicesList [quoteCompany]="quoteCompany" (onSelect)="onAddService($event)"></app-service-list-quote>
+      <app-product-list-quote (selectedProductItem)="selectProduct($event)"></app-product-list-quote>
+      <app-service-list-quote #servicesList [quoteCompany]="quoteCompany" (onSelect)="onAddService($event)"></app-service-list-quote>
+  </div>
 
-  </div> 
 
- 
-  <div   class="qt-df qt-w100 qt-jc-sb qt-color-dark qt-fs-12 qt-ff-gm qt-mb-20 qt-lh-133">
+  <div class="qt-df qt-w100 qt-jc-sb qt-color-dark qt-fs-12 qt-ff-gm qt-mb-20 qt-lh-133">
 
     <div>
-      
+
  <app-invoice-regular-note *ngIf="notes"   [invoiceNotes]="notes" (onUpdateInvoiceData)="updateInvoiceData($event)"></app-invoice-regular-note>
     </div>
 
@@ -164,12 +144,12 @@ let-i="index"
         <div class="qt-df qt-jc-sb qt-pt-15 invoice-total__total-line">
           <div class="qt-fs-13 qt-fw-b">Total</div>
           <div class="qt-fs-16 qt-fw-b" [textContent]="getSubTotal() | currency"></div>
-        </div>  
+        </div>
       </div>
 
     </div>
 
-  </div>  
+  </div>
 
   <div class="terms-n-conditions qt-pl-30 qt-pr-30 qt-pb-24 qt-pt-16">
 
