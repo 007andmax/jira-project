@@ -8,7 +8,7 @@
     <nvd3 [options]="chartOptions" [data]="data" #nvd3></nvd3>
 
     <div class="contract-dashboard-chart-card__chart-info">
-      <div class="contract-dashboard-chart-card__title" [textContent]="invoiceRevenue.getTotal() | currency"></div>
+      <div class="contract-dashboard-chart-card__title" [textContent]="invoiceRevenue.collectedSum | currency"></div>
       <div class="contract-dashboard-chart-card__subtitle">Total Revenue</div>
     </div>
   </div>
