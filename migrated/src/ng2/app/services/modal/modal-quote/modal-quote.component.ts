@@ -89,7 +89,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
    */
   public ngOnInit() {
     (this.data) && this.initResendMode();
-    this.getAllUsers();
+    this.getAllUsers(this.data.companyId);
     this.userInput.nativeElement.onblur = (e) => {
       if (this.matAutocomplete.isOpen) {
         let modal = this.matAutocomplete.panel.nativeElement;
@@ -175,28 +175,13 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
   /**
    * Get user list
    */
-  private getAllUsers() {
+  private getAllUsers(companyId) {
     this.showErrorClient = false;
-    const company = (this.data && this.data.company && this.data.company.id) || this.quoteStateService.getClient();
-    if (company || company.id) {
-      let userList = this.usersStateService.getAllUsers();
-      this.initialized = true;
-      const techUser = userList.filter((item) => item.accountType === USER.TYPE.TECH && !item.deletedAt);
-      let clientUser = [];
-      if (typeof company === 'string' || company instanceof String) {
-        clientUser = userList.filter((item) => {
-          return item.accountType === USER.TYPE.CLIENT && item.company.id == company && !item.deletedAt
-        });
-      } else {
-        clientUser = userList.filter((item) => {
-          return item.accountType === USER.TYPE.CLIENT && item.company.id == company.id && !item.deletedAt
-        });
-      }
-      this.users = [...techUser, ...clientUser];
-      //   })
-    } else {
-      this.showErrorClient = true;
-    }
+    let userList = this.usersStateService.getAllUsers();
+    this.initialized = true;
+    const techUser = userList.filter((item) => item.accountType === USER.TYPE.TECH && !item.deletedAt);
+    let clientUser = userList.filter((item) => item.accountType === USER.TYPE.CLIENT && item.company.id == companyId && !item.deletedAt);
+    this.users = [...techUser, ...clientUser];
   }
 
   /**
@@ -216,8 +201,8 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
   }
 
   private onInitSubjectAndMessage() {
-    this.quoteStateService.setSubject(this.subject);
-    this.quoteStateService.setMessage(this.message);
+    this.data.message = this.message;
+    this.data.subject = this.subject;
   }
 
   public onCheckForClose() {
@@ -233,11 +218,15 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
     if ((this.data && this.data.recipients.length > 0 && !!this.data.recipients[0]) || (this.usersEmails && this.usersEmails.length > 0)) {
       if (!this.isResend) {
         this.onInitSubjectAndMessage();
-        this.quoteStateService.saveSandMode();
+        this.data.recipients = this.usersEmails;
+        
+        this.quoteStateService.saveSandMode(this.data);
       } else {
         if (!this.data.id) {
           this.onInitSubjectAndMessage();
-          this.quoteStateService.saveSandMode();
+          this.data.recipients = this.usersEmails;
+         
+          this.quoteStateService.saveSandMode(this.data);
         } else {
           this.data.message = this.message;
           this.data.subject = this.subject;
@@ -267,20 +256,14 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
    */
   public initResendMode() {
     this.isResend = true;
-    if (this.data.recipients && this.data.recipients.length === 0) {
-      this.message = this.data.message && this.data.message !== "null" ? JSON.parse(JSON.stringify(this.data.message)) : '';
-      this.subject = this.data.subject && this.data.subject !== "null" ? JSON.parse(JSON.stringify(this.data.subject)) : '';
+    if (this.data.recipients && this.data.recipients.length > 0 && this.data.recipients[0] !== "") {
+      this.selectedUsers = JSON.parse(JSON.stringify([...this.data.recipients]));
     } else {
-      if (this.data.recipients && this.data.recipients.length > 0 && this.data.recipients[0] !== "") {
-        this.selectedUsers = JSON.parse(JSON.stringify([...this.data.recipients]));
-      } else {
-        this.data.recipients = [];
-        this.selectedUsers = JSON.parse(JSON.stringify([...this.data.recipients]));
-      }
-      this.message = this.data.message && this.data.message !== "null" ? JSON.parse(JSON.stringify(this.data.message)) : '';
-      this.subject = this.data.subject && this.data.subject !== "null" ? JSON.parse(JSON.stringify(this.data.subject)) : '';
+      this.data.recipients = [];
+      this.selectedUsers = JSON.parse(JSON.stringify([...this.data.recipients]));
     }
-
+    this.message = this.data.message && this.data.message !== "null" ? JSON.parse(JSON.stringify(this.data.message)) : '';
+    this.subject = this.data.subject && this.data.subject !== "null" ? JSON.parse(JSON.stringify(this.data.subject)) : '';
   }
 
   /**

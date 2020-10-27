@@ -48,35 +48,10 @@ export class QuoteService {
    * @param value - quote info
    * @param notification - quote notification info
    */
-  public createQuote(value, notification) {
-    this.itemsListArray = this.quoteStateService.getItemArray();
-    this.productsArray = this.getProductItems(this.itemsListArray, 'product');
-    this.servicesArray = this.getProductItems(this.itemsListArray, 'service', true);
+  public createQuote(data, notification) {
+   
      
-    return this.http.post(`${this.apiUrl}saleQuotes`, {
-      "companyId": (value.client && value.client.item) ? value.client.item.id : value.client.id,
-      "number": this.quoteStateService.getQuoteNumber(),
-      "quoteItems": {
-        "type": "MIXED",
-        "shares": [],
-        "ticket": null,
-        "products": this.productsArray,
-        "services": this.servicesArray
-      },
-      "description" : this.quoteStateService.getDescription(),
-      "requestPayment": this.quoteStateService.getRequestPayment() ? this.quoteStateService.getRequestPayment() : false,
-      "draft": false,
-      "purchaseOrder": this.quoteStateService.getPurchaseOrder() || null,
-      "partialDeposit": this.quoteStateService.getPartialDeposit() || null,
-      "validUntil": this.getMsDate(value.endDate),
-      "date": this.getMsDate(value.startDate),
-      "recipients": this.quoteStateService.getUsersEmail() ? this.quoteStateService.getUsersEmail() : [],
-      "message": notification ? this.quoteStateService.getQuoteCreate()['message'] : null,
-      "subject": notification ? this.quoteStateService.getQuoteCreate()['subject'] : null,
-      "globalNote": value.globalNote ? value.globalNote : this.quoteStateService.getGlobalNote(),
-      "regularNote":  this.quoteStateService.getSelectedNote() ? this.quoteStateService.getSelectedNote() : (value.selectedNote !== '') ? this.quoteStateService.getRegularNote(value.selectedNote) : null,
-      "sendNotification": notification
-    }).pipe(
+    return this.http.post(`${this.apiUrl}saleQuotes`, data).pipe(
       tap(data => this.handleQuoteSent(data, (notification) ? 'Quote has been sent' : 'Quote has been saved')),
       catchError(this.handleError));
   }

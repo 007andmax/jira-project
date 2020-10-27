@@ -5,14 +5,22 @@ export class QuoteAddProduct {
     item: Product;
     itemOrder: number;
     quantity: number;
-    markup:number;
-    sum:number;
-    taxSum:number;
-    constructor(discountType,item,itemOrder,quantity,markup) {
+    markup: number;
+    sum: number;
+    taxSum: number;
+    constructor(discountType, item, itemOrder, quantity, markup) {
         this.discountType = discountType;
         this.item = item;
         this.itemOrder = itemOrder;
         this.quantity = quantity;
         this.markup = markup;
+    }
+    public getDataForCreate() {
+        return {
+            discountType: this.discountType,
+            item: this.item,
+            itemOrder: this.itemOrder,
+            quantity: this.quantity
+        }
     }
 }

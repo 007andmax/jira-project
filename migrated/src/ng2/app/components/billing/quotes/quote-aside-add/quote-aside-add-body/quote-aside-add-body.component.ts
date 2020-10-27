@@ -174,6 +174,7 @@ export class QuoteAsideAddBodyComponent implements OnInit {
   }
   onSelectCompany(data) {
     this.quoteCompany = data;
+    this.quote.setCompanyId((data) ? data.id : null);
     this.cd.detectChanges();
     if (data) {
       this.servicesList.getServicesList();

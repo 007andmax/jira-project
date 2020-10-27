@@ -25,30 +25,33 @@ export class QuoteAdd {
     constructor() {
 
     }
+    public setCompanyId (data) {
+        this.companyId = data;
+    }
     public getDataForCreate(notification) {
         return {
-            "companyId": this.companyId,
-            "number": this.number,
-            "quoteItems": {
-                "type": "MIXED",
-                "shares": [],
-                "ticket": null,
-                "products": this.products,
-                "services": this.services
+            companyId: this.companyId,
+            number: this.number,
+            quoteItems: {
+                type: "MIXED",
+                shares: [],
+                ticket: null,
+                products: this.products.map(item => item.getDataForCreate()),
+                services: this.services.map(item => item.getDataForCreate()),
             },
-            "description": this.description,
-            "requestPayment": false,
-            "draft": false,
-            "purchaseOrder": this.purchaseOrder,
-            "partialDeposit": null,
-            "validUntil": moment(this.validUntil).format('YYYY/MM/DD'),
-            "date": moment(this.date).format('YYYY/MM/DD'),
-            "recipients": this.recipients,
-            "message": this.message,
-            "subject": this.subject,
-            "globalNote": this.globalNote,
-            "regularNote": this.regularNote,
-            "sendNotification": notification
+            description: this.description,
+            requestPayment: false,
+            draft: false,
+            purchaseOrder: this.purchaseOrder,
+            partialDeposit: null,
+            validUntil: this.validUntil,
+            date: this.date,
+            recipients: this.recipients,
+            message: this.message,
+            subject: this.subject,
+            globalNote: this.globalNote,
+            regularNote: this.regularNote,
+            sendNotification: notification
         }
     }
     public getDataForPreview(company) {
@@ -82,10 +85,10 @@ export class QuoteAdd {
         this.globalNote = new InvoiceNote(data);
     }
     public addProduct(item) {
-        this.products.push(new QuoteAddProduct("", item, 0, 1, this.getMarkups(item)))
+        this.products.push(new QuoteAddProduct("PERCENT", item, 0, 1, this.getMarkups(item)))
     }
     public addService(item) {
-        this.services.push(new QuoteAddService("", "", item, 0, 1))
+        this.services.push(new QuoteAddService("", "PERCENT", item, 0, 1))
     }
     public getMarkups(item) {
         if (item.sale > 0 && item.cost > 0) return Math.round((item.sale - item.cost) / item.cost * 100);

@@ -674,8 +674,11 @@ export class QuoteStateService {
   /**
   * Initializes subscribe to save mod
   */
-  public saveSandMode() {
-    this.handleSendMode.emit();
+  public saveSandMode(data) {
+    this.handleSendMode.emit(data);
+  }
+  public getHandleSendMode () {
+    return this.handleSendMode;
   }
 
   public getRegularNote(value) {

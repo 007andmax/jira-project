@@ -1,9 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DisabledBtnDirective } from 'src/ng2/app/directives/disabled-btn.directive';
+import { ModalQuoteComponent } from 'src/ng2/app/services/modal/modal-quote/modal-quote.component';
 import { QuoteService } from 'src/ng2/app/services/quote/quote.service';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
+import { NotificationStateService } from '../../../shared/notification/services/notification-state.service';
 import { BillableAsideComponent } from '../../billable/billable-aside/billable-aside.component';
 import { QuoteAdd } from '../class/quote-add';
 import { QuotePreview } from '../class/quote-preview';
@@ -16,41 +19,81 @@ import { QuoteAsideAddBodyComponent } from './quote-aside-add-body/quote-aside-a
   styleUrls: ['./quote-aside-add.component.scss']
 })
 export class QuoteAsideAddComponent implements OnInit {
+  @ViewChild('saveAndSendBtn') saveAndSendBtn: DisabledBtnDirective;
   @ViewChild('saveAndContinueBtn') saveAndContinueBtn: DisabledBtnDirective;
   @ViewChild('saveAndApproveBtn') saveAndApproveBtn: DisabledBtnDirective;
   @ViewChild('saveAndDownloadBtn') saveAndDownloadBtn: DisabledBtnDirective;
   @ViewChild('quoteAdd') quoteAdd: QuoteAsideAddBodyComponent;
   showPreview: boolean = false;
   quotePreview: QuotePreview;
-  open:boolean = false;
-  sub:Subscription = new Subscription();
+  open: boolean = false;
+  sub: Subscription = new Subscription();
   constructor(private quoteStateService: QuoteStateService,
     private companiesStateService: CompaniesStateService,
+    private notificationStateService: NotificationStateService,
+    private modalService: NgbModal,
     private quoteService: QuoteService,) { }
 
   ngOnInit() {
-    let getOnCreate =  this.quoteStateService.getOnCreate().subscribe(quote => {
+    let getOnCreate = this.quoteStateService.getOnCreate().subscribe(quote => {
       this.open = true;
     })
     this.sub.add(getOnCreate);
+    this.quoteStateService.getHandleSendMode().subscribe(data => {
+      this.saveAndSendBtn.setDisabled(true);
+      this.quoteService.createQuote(data, true).subscribe((res) => {
+        this.saveAndSendBtn.setDisabled(false);
+        this.close();
+      });
+    })
+  }
+  close() {
+    this.open = false;
+    this.showPreview = false;
+  }
+  saveAndSend() {
+    let quote: QuoteAdd = this.quoteAdd.getQuote();
+    const modalRef = this.modalService.open(ModalQuoteComponent);
+    let data = JSON.parse(JSON.stringify(quote.getDataForCreate(true)));
+    modalRef.componentInstance.data = data;
+  }
+  saveAndDownload() {
+    this.saveAndDownloadBtn.setDisabled(true);
+    let quote: QuoteAdd = this.quoteAdd.getQuote();
+    this.quoteService.createQuote(quote.getDataForCreate(false), false).subscribe((data: any) => {
+      const id = data['id'];
+      this.quoteService.downloadPdf(data['id']).subscribe((res) => {
+        this.quoteService.downLoadFile(res, id, data.company.name, data.number);
+        this.notificationStateService.oninitShowNotification('Quote has been saved');
+        this.saveAndDownloadBtn.setDisabled(false);
+        this.close();
+      });
+    });
   }
   public saveAndContinue() {
     this.saveAndContinueBtn.setDisabled(true);
-    let quote:QuoteAdd = this.quoteAdd.getQuote();
-    this.quoteService.createQuote(quote.getDataForCreate(false)).subscribe();
+    let quote: QuoteAdd = this.quoteAdd.getQuote();
+    this.quoteService.createQuote(quote.getDataForCreate(false), false).subscribe((data) => {
+      this.saveAndContinueBtn.setDisabled(false);
+      this.close();
+    });
   }
   public saveAndApprove() {
-    this.quoteService.createQuote(quote.getDataForCreate(false))
+    this.saveAndApproveBtn.setDisabled(true);
+    let quote: QuoteAdd = this.quoteAdd.getQuote();
+    this.quoteService.createQuote(quote.getDataForCreate(false), false)
       .subscribe((res) => {
         this.quoteService.approveQuote(res['company'], res['id'])
           .subscribe((res) => {
-            this.quoteStateService.goToQuote();
+            this.saveAndApproveBtn.setDisabled(false);
+            this.close();
+
           });
       });
   }
 
   onPreview() {
-    
+
     this.quotePreview = new QuotePreview(this.quoteAdd.getQuotePreview());
     this.showPreview = true;
   }
