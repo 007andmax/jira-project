@@ -7,11 +7,13 @@ import { CompaniesService } from 'src/ng2/app/services/company/companies.service
 import { QuoteResult } from '../class/quote-result';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { ProductService } from 'src/ng2/app/services/product/product.service';
+import { QuotePreview } from '../class/quote-preview';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuoteStateService {
+  
   filter: EventEmitter<any> = new EventEmitter();
   onPreview: EventEmitter<any> = new EventEmitter();
   onCreate: EventEmitter<any> = new EventEmitter();

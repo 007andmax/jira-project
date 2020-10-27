@@ -65,4 +65,7 @@ export class QuotesItemComponent implements OnInit {
     const elems = statusForShowingArray.filter((item) => item.toLowerCase() === quote.status.toLowerCase());
     return elems.length > 0;
   }
+  public getStatusText(status) {
+    return status.toLowerCase()
+  }
 }

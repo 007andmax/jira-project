@@ -8,6 +8,9 @@ import { QuoteService } from 'src/ng2/app/services/quote/quote.service';
 import { ModalQuoteComponent } from 'src/ng2/app/services/modal/modal-quote/modal-quote.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
+import { ConfirmStateService } from '../../../shared/confirm/services/confirm-state.service';
+import { ARCHIVE_QUOTE } from 'src/ng2/app/const/confirm';
+import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
 
 @Component({
   selector: 'app-quote-aside-preview',
@@ -26,17 +29,15 @@ export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
   constructor(private quoteStateService: QuoteStateService,
     private quoteServices: QuoteService,
     private modalService: NgbModal,
+    private confirmStateService: ConfirmStateService,
     private companiesStateService: CompaniesStateService) { }
 
 
   ngOnInit() {
 
    let getOnPreview =  this.quoteStateService.getOnPreview().subscribe(quote => {
-     
-     
       this.open = true;
       this.quoteServices.getQuote(quote.id).subscribe((data) => {
-     
         this.quote = new QuotePreview(data);
         this.open = true;
         this.showPreloader = false;
@@ -45,6 +46,13 @@ export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
       })
     })
     this.sub.add(getOnPreview);
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === ARCHIVE_QUOTE)  this.onArchiveQuote();
+       
+      }
+    })
+    this.sub.add(getConfirm);
   }
   close() {
     this.open = false;
@@ -73,10 +81,17 @@ export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
 
     });
   }
-  archiveQuote() {
+  onArchiveQuote() {
     this.quoteServices.archiveQuote(this.quote.company, this.quote.id).subscribe((res) => {
 
     });
+  }
+  archiveQuote() {
+    this.confirmStateService.setConfirmAction(ARCHIVE_QUOTE);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    modalRef.componentInstance.message = `Do you want to archive a quote?`;
+   
+  
   }
   public resend() {
     if (this.quote.status === 'TICKETED' || this.quote.status === 'INVOICED') {
