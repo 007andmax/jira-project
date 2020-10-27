@@ -65,6 +65,9 @@ export class QuoteAsideAddBodyComponent implements OnInit {
     this.quote.regularNote.setDefault();
     this.sub.add(getChangeCompanies);
   }
+  public getQuote() {
+    return this.quote;
+  }
   public getQuotePreview() {
     return this.quote.getDataForPreview(this.quoteCompany);
   }

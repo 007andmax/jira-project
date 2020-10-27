@@ -16,13 +16,13 @@
     <div class="qt-df">
       <div class="qt-pos-rel" ngbDropdown [placement]="'top-right'">
         <ul class="qt-dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownSave">
-          <li ngbDropdownItem appDisabledBtn #saveAndPrintBtn="disabled" (onClick)="saveAndPrint()"  ><div class="icon__print qt-sz-16 qt-mr-8"></div>Save and Print</li>
+          <li ngbDropdownItem appDisabledBtn #saveAndApproveBtn="disabled" (onClick)="saveAndApprove()"  ><div class="icon__print qt-sz-16 qt-mr-8"></div>Save and Approve</li>
           <li ngbDropdownItem appDisabledBtn #saveAndDownloadBtn="disabled" (onClick)="saveAndDownload()"  ><div class="icon__download qt-sz-16 qt-mr-8"></div>Save and Download</li>
         </ul>
         <button class=" qt-button --with-menu qt-mr-12" >
-          <span class="save-billable-aside-btn" appDisabledBtn #saveAndSendBtn="disabled" (onClick)="saveAndSend()"  >
-            <span  *ngIf="!saveAndSendBtn.isBlock() && !saveAndPrintBtn.isBlock() && !saveAndDownloadBtn.isBlock()">Save and Send</span>
-            <app-preloader-ticket *ngIf="saveAndSendBtn.isBlock() || saveAndPrintBtn.isBlock() || saveAndDownloadBtn.isBlock()"></app-preloader-ticket>
+          <span class="save-billable-aside-btn" appDisabledBtn #saveAndContinueBtn="disabled" (onClick)="saveAndContinue()"  >
+            <span  *ngIf="!saveAndContinueBtn.isBlock() && !saveAndApproveBtn.isBlock() && !saveAndDownloadBtn.isBlock()">Save and Continue</span>
+            <app-preloader-ticket *ngIf="saveAndContinueBtn.isBlock() || saveAndApproveBtn.isBlock() || saveAndDownloadBtn.isBlock()"></app-preloader-ticket>
           </span>
           <div class="button-menu"  id="dropdownSave" ngbDropdownToggle>
             <div class="qt-sz-16 qt-ic-c icon__dropdown-arrow-up"></div>

@@ -3,7 +3,7 @@ import { QuoteAddProduct } from './quote-add-product';
 import { QuoteAddService } from './quote-add-service';
 import { QuoteProduct } from './quote-product';
 import { QuoteService } from './quote-service';
-
+import * as moment from "moment";
 export class QuoteAdd {
     companyId: string;
     date: number = new Date().getTime();
@@ -24,6 +24,32 @@ export class QuoteAdd {
     validUntil: number = new Date().getTime();
     constructor() {
 
+    }
+    public getDataForCreate(notification) {
+        return {
+            "companyId": this.companyId,
+            "number": this.number,
+            "quoteItems": {
+                "type": "MIXED",
+                "shares": [],
+                "ticket": null,
+                "products": this.products,
+                "services": this.services
+            },
+            "description": this.description,
+            "requestPayment": false,
+            "draft": false,
+            "purchaseOrder": this.purchaseOrder,
+            "partialDeposit": null,
+            "validUntil": moment(this.validUntil).format('YYYY/MM/DD'),
+            "date": moment(this.date).format('YYYY/MM/DD'),
+            "recipients": this.recipients,
+            "message": this.message,
+            "subject": this.subject,
+            "globalNote": this.globalNote,
+            "regularNote": this.regularNote,
+            "sendNotification": notification
+        }
     }
     public getDataForPreview(company) {
         let totalAmount = 0;
