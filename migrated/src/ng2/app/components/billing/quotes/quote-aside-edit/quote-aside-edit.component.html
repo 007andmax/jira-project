@@ -6,7 +6,7 @@
       <div class="icon__close qt-sz-24 qt-pointer qt-ic-c " (click)="close()"></div>
     </div>
   </div>
-  <div class="billing-invoice-preview-scroll-content" >
+  <div class="billing-aside-scroll-content" >
     <div class="loading" *ngIf="showPreloader"></div>
     <div class="qt-pl-30 qt-pr-30 qt-pt-24 qt-pb-50"  >
       <app-quote-aside-edit-body #quoteEdit [validate]="validate" [hidden]="showPreview"  (onStopPreloader)="showPreloader = false"></app-quote-aside-edit-body>
