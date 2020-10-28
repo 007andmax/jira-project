@@ -62,18 +62,19 @@
   </div>
 
 
-    <div class="qt-mb-16">
-      <table class="new-quote-table qt-gray-table --last-icon">
+    <div class="qt-mb-16 new-quote-table-container">
+      <table class="new-quote-table qt-gray-table --last-icon --first-icon ">
         <thead class=" qt-lh-127 qt-color-dark">
           <tr>
-            <th class="ew-quote-table__col-item">Item</th>
-            <th class="ew-quote-table__col-desc">Description</th>
-            <th class="ew-quote-table__col-price">Unit Price</th>
-            <th class="ew-quote-table__col-price">Markup</th>
-            <th class="ew-quote-table__col-price">Sales Price</th>
-            <th class="ew-quote-table__col-qty">Quantity</th>
-            <th class="ew-quote-table__col-tax">Tax</th>
-            <th class="ew-quote-table__col-amount">Amount</th>
+            <th class="new-quote-table__move"></th>
+            <th class="new-quote-table__col-item">Item</th>
+            <th class="new-quote-table__col-desc">Description</th>
+            <th class="new-quote-table__col-unit-price">Unit Price</th>
+            <th class="new-quote-table__col-markup">Markup</th>
+            <th class="new-quote-table__col-sales-price">Sales Price</th>
+            <th class="new-quote-table__col-quantify">Quantity</th>
+            <th class="new-quote-table__col-tax">Tax</th>
+            <th class="new-quote-table__col-amount">Amount</th>
             <th></th>
           </tr>
         </thead>
@@ -83,19 +84,22 @@
           [ngForOf]="quote.services"
           [ngForTrackBy]="trackById">
           <tr>
-            <td class="ew-quote-table__col-item" [textContent]="service.item.name"></td>
-            <td class="ew-quote-table__col-desc"><input type="text" [(ngModel)]="service.description"  /></td>
-            <td class="ew-quote-table__col-price" ></td>
-            <td class="ew-quote-table__col-price" ></td>
-            <td class="ew-quote-table__col-price" [textContent]="service.rate | currency"></td>
-            <td class="ew-quote-table__col-qty"    >  <input class="qt-input-prepend"
+            <td class="new-quote-table__move">
+              <div class="qt-pointer qt-sz-20 icon__move-light qt-ic-c"></div>
+            </td>
+            <td class="new-quote-table__col-item" [textContent]="service.item.name"></td>
+            <td class="new-quote-table__col-desc"><input type="text" [(ngModel)]="service.description" class="qt-input-in-table" /></td>
+            <td class="new-quote-table__col-unit-price" ></td>
+            <td class="new-quote-table__col-markup" ></td>
+            <td class="new-quote-table__col-sales-price" [textContent]="service.rate | currency"></td>
+            <td class="new-quote-table__col-quantify">  <input class="qt-input-in-table"
               decimalNumber
               [value]="service.quantity"
               (onChange)="service.quantity=$event"
               /></td>
-            <td class="ew-quote-table__col-tax" [innerHTML]="getSelectedTaxes(service.item.taxes)"> </td>
-          <td class="ew-quote-table__col-amount" [textContent]="getPriceService(service) | currency"></td>
-          <td> <div class="icon__raw-clear qt-ic-c qt-sz-16" (click)="removeService(i)"></div></td>
+            <td class="new-quote-table__col-tax" [innerHTML]="getSelectedTaxes(service.item.taxes)"> </td>
+            <td class="new-quote-table__col-amount" [textContent]="getPriceService(service) | currency"></td>
+            <td> <div class="icon__raw-clear qt-ic-c qt-sz-16" (click)="removeService(i)"></div></td>
           </tr>
 </ng-template>
 <ng-template ngFor let-product

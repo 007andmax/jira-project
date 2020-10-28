@@ -189,8 +189,68 @@
     }
   }
 
-  app-product-item-quote {
+  app-product-item-quote,
+  app-product-item-quote-edit {
     display: contents;
+  }
+
+  .new-quote-table-container {
+    margin-left: -20px;
+    margin-right: -20px;
+  }
+  .new-quote-table {
+    td, th {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+    &__move {
+      width: 16px;
+    }
+
+    &__col-item {
+      width: 128px;
+      max-width: 128px;
+    }
+    &__col-desc {
+      width: 300px;
+      max-width: 300px;
+    }
+
+    &__col-unit-price {
+      width: 84px;
+      max-width: 84px;
+    }
+    &__col-markup {
+      width: 60px;
+      max-width: 60px;
+    }
+    &__col-sales-price {
+      width: 85px;
+      max-width: 85px;
+    }
+    &__col-quantify {
+      width: 70px;
+      max-width: 70px;
+    }
+    &__col-tax {
+      width: 70px;
+      max-width: 70px;
+    }
+    &__col-amount {
+      width: 89px;
+      max-width: 89px;
+    }
+    td.new-quote-table {
+      &__col-desc,
+      &__col-unit-price,
+      &__col-markup,
+      &__col-sales-price,
+      &__col-quantify
+      {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
   }
 
   // .receive-full-amount-check {

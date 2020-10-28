@@ -1,16 +1,20 @@
 <tr>
-  <td class="invoice-preview__col-item" [textContent]="product.manufacture"> </td>
-  <td class="invoice-preview__col-desc"  ><input type="text" [(ngModel)]="product.description"  /></td>
-  <td class="invoice-preview__col-price"  ><input class="qt-input-prepend" 
+  <td class="new-quote-table__move">
+    <div class="qt-pointer qt-sz-20 icon__move-light qt-ic-c"></div>
+  </td>
+  <td class="new-quote-table__col-item" [textContent]="product.manufacture"> </td>
+  <td class="new-quote-table__col-desc" ><input type="text" [(ngModel)]="product.description" class="qt-input-in-table" /></td>
+  <td class="new-quote-table__col-unit-price">
+    <input class="qt-input-in-table"
       decimalNumber
-    [useFixed]="true"
-    placeholder="0.00"
-    [value]="product.cost"
-    (blur)="onCheckSaleCost()"
-    (onChange)="product.cost=$event"
-      /></td>
-  <td class="invoice-preview__col-price"  >
-    <input class="qt-input-prepend" 
+      [useFixed]="true"
+      placeholder="0.00"
+      [value]="product.cost"
+      (blur)="onCheckSaleCost()"
+      (onChange)="product.cost=$event"/>
+    </td>
+  <td class="new-quote-table__col-markup">
+    <input class="qt-input-in-table"
       decimalNumber
     [useFixed]="true"
     placeholder="0.00"
@@ -18,28 +22,28 @@
     (onChange)="product.markup=$event"
       />
   </td>
-  <td class="invoice-preview__col-price"  >
-    <input class="qt-input-prepend" 
-    [ngClass]="{'--input-error':!product.validateSaleCost}"
-    decimalNumber
-  [useFixed]="true"
-  placeholder="0.00"
-  [value]="product.sale"
-  (onChange)="product.sale=$event"
-  (blur)="onCheckSaleCost()"
+  <td class="new-quote-table__col-sales-price">
+    <input class="qt-input-in-table"
+      [ngClass]="{'--input-error':!product.validateSaleCost}"
+      decimalNumber
+      [useFixed]="true"
+      placeholder="0.00"
+      [value]="product.sale"
+      (onChange)="product.sale=$event"
+      (blur)="onCheckSaleCost()"
     />
     <mat-error class="qt-tooltip-error" *ngIf="!product.validateSaleCost">
       Product price can not be lower than cost
     </mat-error>
   </td>
-   <td class="invoice-preview__col-qty"    >
-    <input class="qt-input-prepend" 
+   <td class="new-quote-table__col-quantify">
+    <input class="qt-input-in-table"
     decimalNumber
     [value]="product.quantity"
     (onChange)="product.quantity=$event"
     />
    </td>
-  <td class="invoice-preview__col-tax"  [innerHTML]="getSelectedTaxes(product.taxes)">   
+  <td class="new-quote-table__col-tax"  [innerHTML]="getSelectedTaxes(product.taxes)">
   </td>
   <td class="invoice-preview__col-amount" [textContent]="getPriceProduct(product) | currency"></td>
   <td> <div class="icon__raw-clear qt-ic-c qt-sz-16" (click)="removeProduct(i)"></div></td>
