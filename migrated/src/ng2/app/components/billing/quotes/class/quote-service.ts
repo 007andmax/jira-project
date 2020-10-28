@@ -42,5 +42,29 @@ export class QuoteService implements Service {
         }
 
     }
+    public getDataForUpdate() {
+        let service:Service = {
+            blockTimeServiceAgreement: this.blockTimeServiceAgreement,
+            canUseInTicket: this.canUseInTicket,
+            commissionRate: this.commissionRate,
+            createdAt: this.createdAt,
+            deletedAt: this.deletedAt,
+            name: this.name,
+            oldVersion: this.oldVersion,
+            rate: this.rate,
+            serviceAgreement: this.serviceAgreement,
+            serviceContractServiceAgreement: this.serviceContractServiceAgreement,
+            taxes: this.taxes,
+            updatedAt: this.updatedAt,
+            versionedId: this.versionedId
+        }
+        return {
+            description: this.description,
+            discountType: this.discountType,
+            item: service,
+            itemOrder: this.itemOrder,
+            quantity: this.quantity
+        }
+    }
 
 }

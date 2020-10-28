@@ -16,12 +16,14 @@ export class QuoteStateService {
   
   filter: EventEmitter<any> = new EventEmitter();
   onPreview: EventEmitter<any> = new EventEmitter();
+  onEdit: EventEmitter<any> = new EventEmitter();
   onCreate: EventEmitter<any> = new EventEmitter();
   public client: any;
   public itemsArray: any;
   public type = false;
   public validateForm: EventEmitter<any> = new EventEmitter();
   public handleSendMode: EventEmitter<any> = new EventEmitter();
+  public handleSendModeEdit: EventEmitter<any> = new EventEmitter();
   public handleErrors: EventEmitter<any> = new EventEmitter();
   public handleQuoteHasSent: EventEmitter<any> = new EventEmitter();
   public handleServices: EventEmitter<any> = new EventEmitter();
@@ -57,6 +59,12 @@ export class QuoteStateService {
     this.state = $state;
     this.onInitCLientsList();
 
+  }
+  public getOnEdit() {
+    return this.onEdit;
+  }
+  public setEdit(data) {
+    this.onEdit.emit(data);
   }
   public onInitAdd() {
     this.onCreate.emit(null);
@@ -681,6 +689,13 @@ export class QuoteStateService {
   }
   public getHandleSendMode () {
     return this.handleSendMode;
+  }
+
+  public saveSandModeEdit(data) {
+    this.handleSendModeEdit.emit(data);
+  }
+  public getHandleSendModeEdit () {
+    return this.handleSendModeEdit;
   }
 
   public getRegularNote(value) {

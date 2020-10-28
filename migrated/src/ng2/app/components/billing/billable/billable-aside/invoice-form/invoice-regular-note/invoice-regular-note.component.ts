@@ -28,6 +28,7 @@ export class InvoiceRegularNoteComponent implements OnInit {
       this.toogleCustomerNote = true;
       this.elRef.nativeElement.querySelector("#description-regular-note").value = this.selectedNote.line1;
     }
+    console.log("this.selectedNote",this.selectedNote);
     this.regularNotes = this.invoiceNotes.filter(item => item.noteType === "REGULAR");
   }
   getLenRegularNotes() {

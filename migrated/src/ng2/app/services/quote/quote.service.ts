@@ -62,36 +62,10 @@ export class QuoteService {
    * @param quoteId - quote id
    * @param notification - quote notification info
    */
-  public editQuote(value, quoteId, notification) {
-    this.itemsListArray = this.quoteStateService.getItemArray();
-    this.productsArray = this.getProductItems(this.itemsListArray, 'product');
-    this.servicesArray = this.getProductItems(this.itemsListArray, 'service', true);
+  public editQuote(data) {
+    
      
-    return this.http.put(`${this.apiUrl}saleQuotes/${quoteId}`, {
-      "companyId": (value.client && value.client.item) ? value.client.item.id : value.client.id,
-      "number": this.quoteStateService.getQuoteNumber(),
-      "id": quoteId,
-      "quoteItems": {
-        "type": "MIXED",
-        "shares": [],
-        "ticket": null,
-        "products": this.productsArray,
-        "services": this.servicesArray
-      },
-      "description" : this.quoteStateService.getDescription(),
-      "requestPayment": this.quoteStateService.getRequestPayment() ? this.quoteStateService.getRequestPayment() : false,
-      "draft": false,
-      "purchaseOrder": this.quoteStateService.getPurchaseOrder() || null,
-      "partialDeposit": this.quoteStateService.getPartialDeposit() || null,
-      "validUntil": this.getMsDate(value.endDate),
-      "date": this.getMsDate(value.startDate),
-      "recipients": this.quoteStateService.getUsersEmail() ? this.quoteStateService.getUsersEmail() : [],
-      "message": notification ? this.quoteStateService.getQuoteCreate()['message'] : null,
-      "subject": notification ? this.quoteStateService.getQuoteCreate()['subject'] : null,
-      "globalNote": value.globalNote ? value.globalNote : this.quoteStateService.getGlobalNote(),
-      "regularNote":  this.quoteStateService.getSelectedNote() ? this.quoteStateService.getSelectedNote() : (value.selectedNote && value.selectedNote !== '' ) ? this.quoteStateService.getRegularNote(value.selectedNote) : null,
-      "sendNotification": notification
-    }).pipe(
+    return this.http.put(`${this.apiUrl}saleQuotes/${data.id}`, data).pipe(
       tap(data => this.handleQuoteSent(data, 'Quote has been saved')),
       catchError(this.handleError));
   }

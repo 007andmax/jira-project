@@ -31,6 +31,8 @@ export class QuoteProduct implements Product {
     sum:number;
     taxSum:number;
     totalSum:number;
+    validateSaleCost:boolean = true;
+    markup:number = 0;
     constructor(data = null) {
         if (data) {
             for (const key in data) {
@@ -38,5 +40,33 @@ export class QuoteProduct implements Product {
             }
         }
 
+    }
+    public checkSaleCost() {
+        this.validateSaleCost = this.sale >= this.cost;
+    }
+    public getDataForUpdate() {
+        let product :Product = {
+            versionedId: this.versionedId,
+            createdAt: this.createdAt,
+            updatedAt: this.updatedAt,
+            deletedAt: this.deletedAt,
+            company: this.company,
+            cost: this.cost,
+            sale: this.sale,
+            category: this.category,
+            ilc: this.ilc,
+            glNumber: this.glNumber,
+            manufacture: this.manufacture,
+            description: this.description,
+            billable: this.billable,
+            taxes: this.taxes,
+            oldVersion: this.oldVersion,
+        }
+        return {
+            discountType: this.discountType,
+            item: product,
+            itemOrder: this.itemOrder,
+            quantity: this.quantity
+        }
     }
 }

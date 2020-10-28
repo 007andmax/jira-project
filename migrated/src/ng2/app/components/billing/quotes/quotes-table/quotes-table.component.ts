@@ -120,9 +120,7 @@ export class QuotesTableComponent implements OnInit {
 
   }
   goToQuoteEdit(quote) {
-    this.quoteServices.getQuote(quote.id).subscribe((data) => {
-      this.quoteStateService.setEditQuote(data);
-    })
+    this.quoteStateService.setEdit(quote);
 
   }
   archiveQuote(item) {

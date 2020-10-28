@@ -225,22 +225,11 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
         if (!this.data.id) {
           this.onInitSubjectAndMessage();
           this.data.recipients = this.usersEmails;
-         
           this.quoteStateService.saveSandMode(this.data);
         } else {
-          this.data.message = this.message;
-          this.data.subject = this.subject;
-          this.quoteService.resend(this.data, this.selectedUsers)
-            .pipe(takeUntil(this.unsubscribe))
-            .subscribe((res) => {
-              if (res) {
-                this.quoteService.repeatSend(res['id']).subscribe((res) => { })
-                if (!this.onlySendMode) this.quoteStateService.goToQuote();
-
-              }
-              this.unsubscribe.next();
-              this.unsubscribe.complete();
-            })
+          this.onInitSubjectAndMessage();
+          this.data.recipients = this.usersEmails;
+          this.quoteStateService.saveSandModeEdit(this.data);
         }
 
 

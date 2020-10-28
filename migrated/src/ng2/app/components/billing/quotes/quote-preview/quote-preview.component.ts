@@ -170,7 +170,7 @@ console.log("this.quoteForCreate",this.quoteForCreate);
    * Create quote and save
    */
   public save() {
-    const isFormReady = this.quoteStateService.getType();
+    /*const isFormReady = this.quoteStateService.getType();
     if (isFormReady) {
       if (this.editMode && this.quoteForCreate.id) {
         this.quoteService.editQuote(this.quoteForCreate, this.quoteForCreate.id, false)
@@ -190,14 +190,14 @@ console.log("this.quoteForCreate",this.quoteForCreate);
       }
     } else {
       this.quoteStateService.emitValidation();
-    }
+    }*/
   }
 
   /**
    * Create quote and approve
    */
   public approveQuote() {
-    const isFormReady = this.quoteStateService.getType();
+   /* const isFormReady = this.quoteStateService.getType();
     if (isFormReady && this.editMode && this.quoteStateService.getQuoteCreate()['id']) {
       const currentQuote = this.quoteStateService.getQuoteCreate();
       this.quoteService.editQuote(currentQuote, currentQuote['id'], true)
@@ -228,7 +228,7 @@ console.log("this.quoteForCreate",this.quoteForCreate);
         });
     } else {
       this.quoteStateService.emitValidation();
-    }
+    }*/
   }
 
   onlySend() {
@@ -248,7 +248,7 @@ console.log("this.quoteForCreate",this.quoteForCreate);
    * Create quote and approve
    */
   public downloadPdf() {
-    const isFormReady = this.quoteStateService.getType();
+ /*   const isFormReady = this.quoteStateService.getType();
 
     if (isFormReady && this.editMode && this.quoteStateService.getQuoteCreate().id) {
       const currentQuote = this.quoteStateService.getQuoteCreate();
@@ -282,7 +282,7 @@ console.log("this.quoteForCreate",this.quoteForCreate);
         });
     } else {
       this.quoteStateService.emitValidation();
-    }
+    }*/
   }
 
   /**

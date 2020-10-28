@@ -1,4 +1,5 @@
 import { Product } from 'src/ng2/app/interfaces/product/product'
+import { InvoiceNote } from '../../billable/class/invoice-note';
 import { Quote } from './quote'
 import { QuoteProduct } from './quote-product';
 import { QuoteService } from './quote-service';
@@ -7,8 +8,9 @@ export class QuotePreview extends Quote {
     products: Array<QuoteProduct> = [];
     services: Array<QuoteService> = []
     termsAndConditions: string;
-    regularNote:any;
+    regularNote:InvoiceNote;
     message:string;
+    purchaseOrder:string;
     constructor(data = null) {
         super();
         if (data) {

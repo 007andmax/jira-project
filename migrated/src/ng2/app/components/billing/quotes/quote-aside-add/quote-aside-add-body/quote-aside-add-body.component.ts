@@ -37,7 +37,6 @@ export class QuoteAsideAddBodyComponent implements OnInit {
   constructor(private companiesState: CompaniesStateService,
     private billableStateService: BillableStateService,
     private companiesService: CompaniesService,
-    private companiesStateService: CompaniesStateService,
     private quoteStateService: QuoteStateService,
     public cd: ChangeDetectorRef,
     private elRef: ElementRef,
@@ -54,7 +53,7 @@ export class QuoteAsideAddBodyComponent implements OnInit {
       console.log("data", data);
       this.quote.number = data.number;
     });
-    let getChangeCompanies = this.companiesStateService.getChangeCompanies().subscribe((data: CompanyUpdate) => {
+    let getChangeCompanies = this.companiesState.getChangeCompanies().subscribe((data: CompanyUpdate) => {
       if (data.action === 'COMPANY_SAVED' && this.quoteCompany.id === data.data.id) {
         this.quoteCompany.name = data.data.name;
         this.quoteCompany.companyInfo.contacts[0].firstName = data.data.companyInfo.contacts[0].firstName;

@@ -22,8 +22,6 @@ export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
   showPreloader: boolean = true;
   toggleQuoteMessage: boolean = true;
   toggleStatus: boolean = true;
-   
-  
   open: boolean = false;
   sub: Subscription = new Subscription();
   constructor(private quoteStateService: QuoteStateService,
@@ -32,24 +30,23 @@ export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService,
     private companiesStateService: CompaniesStateService) { }
 
-
   ngOnInit() {
 
-   let getOnPreview =  this.quoteStateService.getOnPreview().subscribe(quote => {
+    let getOnPreview = this.quoteStateService.getOnPreview().subscribe(quote => {
       this.open = true;
       this.quoteServices.getQuote(quote.id).subscribe((data) => {
         this.quote = new QuotePreview(data);
         this.open = true;
         this.showPreloader = false;
         console.log("this.quote", this.quote);
-        
+
       })
     })
     this.sub.add(getOnPreview);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
-        if (this.confirmStateService.getConfirmAction() === ARCHIVE_QUOTE)  this.onArchiveQuote();
-       
+        if (this.confirmStateService.getConfirmAction() === ARCHIVE_QUOTE) this.onArchiveQuote();
+
       }
     })
     this.sub.add(getConfirm);
@@ -57,10 +54,7 @@ export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
   close() {
     this.open = false;
     this.showPreloader = true;
-
   }
- 
- 
   public getDate(date) {
     return moment(new Date(date)).format('DD MMM YYYY');
   }
@@ -90,9 +84,8 @@ export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
     this.confirmStateService.setConfirmAction(ARCHIVE_QUOTE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
     modalRef.componentInstance.message = `Do you want to archive a quote?`;
-   
-  
   }
+  
   public resend() {
     if (this.quote.status === 'TICKETED' || this.quote.status === 'INVOICED') {
       this.quoteServices.repeatSend(this.quote.id).subscribe();
@@ -103,12 +96,9 @@ export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
         const modalRef = this.modalService.open(ModalQuoteComponent, data);
         modalRef.componentInstance.data = data;
       })
-
     }
-
   }
- 
- 
+
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

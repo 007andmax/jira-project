@@ -30,7 +30,7 @@ export class QuoteValdiate {
     public resetCompany() {
         this.company = true;
     }
-    public isValidate(quote: QuoteAdd) {
+    public isValidate(quote) {
         if (!quote.companyId) this.company = false;
         if (quote.services.length === 0 && quote.products.length === 0) this.servicesProducts = false;
         if (quote.products.find(item => !item.validateSaleCost)) {

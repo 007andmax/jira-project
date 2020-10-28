@@ -348,6 +348,9 @@ import { QuoteAsideAddBodyComponent } from './components/billing/quotes/quote-as
 import { ProductListQuoteComponent } from './components/billing/quotes/quote-aside-add/product-list-quote/product-list-quote.component';
 import { ServiceListQuoteComponent } from './components/billing/quotes/quote-aside-add/service-list-quote/service-list-quote.component';
 import { ProductItemQuoteComponent } from './components/billing/quotes/quote-aside-add/product-item-quote/product-item-quote.component';
+import { QuoteAsideEditComponent } from './components/billing/quotes/quote-aside-edit/quote-aside-edit.component';
+import { ProductItemQuoteEditComponent } from './components/billing/quotes/quote-aside-edit/product-item-quote-edit/product-item-quote-edit.component';
+ import { QuoteAsideEditBodyComponent } from './components/billing/quotes/quote-aside-edit/quote-aside-edit-body/quote-aside-edit-body.component';
 
 
 
@@ -858,7 +861,10 @@ angular.module('quicktech')
     QuoteAsideAddBodyComponent,
     ProductListQuoteComponent,
     ServiceListQuoteComponent,
-    ProductItemQuoteComponent
+    ProductItemQuoteComponent,
+    QuoteAsideEditComponent,
+    ProductItemQuoteEditComponent,
+    QuoteAsideEditBodyComponent
   ],
   imports: [
     BrowserModule,

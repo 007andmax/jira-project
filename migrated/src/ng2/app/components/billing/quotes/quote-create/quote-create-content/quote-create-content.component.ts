@@ -130,7 +130,7 @@ export class QuoteCreateContentComponent implements OnInit {
    * Create quote
    */
   saveAndContinue(notification?: boolean) {
-    const isFormReady = this.quoteStateService.getType();
+   /* const isFormReady = this.quoteStateService.getType();
     const currentQuote = this.quoteStateService.getQuoteCreate();
     if (isFormReady) {
       if (this.editMode && currentQuote && currentQuote['id']) {
@@ -166,14 +166,14 @@ export class QuoteCreateContentComponent implements OnInit {
       }
     } else {
       this.quoteStateService.emitValidation();
-    }
+    }*/
   }
 
   /**
    * Create quote and approve
    */
   approveQuote() {
-    const isFormReady = this.quoteStateService.getType();
+   /* const isFormReady = this.quoteStateService.getType();
     const currentQuote = this.quoteStateService.getQuoteCreate();
     if (isFormReady && this.editMode && currentQuote['id']) {
   
@@ -199,14 +199,14 @@ export class QuoteCreateContentComponent implements OnInit {
     })
   } else {
       this.quoteStateService.emitValidation();
-    }
+    }*/
   }
 
   /**
    * Create quote and download
    */
   public downloadPdf() {
-    const isFormReady = this.quoteStateService.getType();
+   /* const isFormReady = this.quoteStateService.getType();
      
     const currentQuote = this.quoteStateService.getQuoteCreate();
     if (isFormReady && this.editMode && currentQuote.id) {
@@ -232,7 +232,7 @@ export class QuoteCreateContentComponent implements OnInit {
     }  else {
       this.quoteStateService.emitValidation();
     }
-
+*/
   }
 
   /**
