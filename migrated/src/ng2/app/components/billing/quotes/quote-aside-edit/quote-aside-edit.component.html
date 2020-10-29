@@ -6,12 +6,12 @@
       <div class="icon__close qt-sz-24 qt-pointer qt-ic-c " (click)="close()"></div>
     </div>
   </div>
-  <div class="billing-aside-scroll-content" >
+  <div class="aside-body-container">
     <div class="loading" *ngIf="showPreloader"></div>
-    <div class="qt-pl-30 qt-pr-30 qt-pt-24 qt-pb-50"  >
+    <div class="qt-pl-30 qt-pr-30 qt-pt-24 quote-aside-scroll-content">
       <app-quote-aside-edit-body #quoteEdit [validate]="validate" [hidden]="showPreview"  (onStopPreloader)="showPreloader = false"></app-quote-aside-edit-body>
       <app-quote-aside-preview-body *ngIf="showPreview" [quote]="quotePreview"></app-quote-aside-preview-body>
-      </div>
+    </div>
 
   <div class="aside-footer qt-pr-30 qt-pl-30 qt-pb-16 qt-pt-16 qt-df qt-ai-c qt-jc-sb" *ngIf="!showPreloader">
     <div class="qt-df">
