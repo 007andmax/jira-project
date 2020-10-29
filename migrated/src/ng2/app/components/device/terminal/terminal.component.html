@@ -7,15 +7,15 @@
           <h3>Terminal</h3>
           <div class="page-header-opt">
             <div class="update-info">
-              <a class="Command" [ngClass]="{'active': scriptType == 'cmd'}" (click)="switchTerminal('cmd')">Command Line</a>
-              <a class="Power" [ngClass]="{'active': scriptType == 'powershell'}" (click)="switchTerminal('powershell')">Power Shell</a>
+              <a class="Command" [ngClass]="{'active': scriptTyped == 'cmd'}" (click)="switchTerminal('cmd')">Command Line</a>
+              <a class="Power" [ngClass]="{'active': scriptTyped == 'powershell'}" (click)="switchTerminal('powershell')">Power Shell</a>
             </div>
           </div>
         </div>
         <!-- Page Content -->
         <div class="contant-area">
           <div class="terminal-area">
-            <div id="terminal" class="terminal-box" [ngStyle]="{'background-color':scriptType === 'powershell' ? '#012456' : '#151b21' }">
+            <div id="terminal" class="terminal-box" [ngStyle]="{'background-color':scriptTyped == 'powershell' ? '#012456' : '#151b21' }">
               <p *ngFor="let split of splitCommand"><span>{{split}}</span></p>
               <!-- <textarea>C:\Users\Sam\Desktop></textarea> -->
             </div>
@@ -116,7 +116,7 @@
                   </div>
                 </div>
                 <div class="f-col col-100 cmd-description">
-                  <div class="label"><a (click)="showDescription = false" href="javascript:;" [ngClass]="{'active': showDescription == false}">Command</a> | <a (click)="showDescription = true" href="javascript:;" [ngClass]="{'active': showDescription == true}">Description</a></div>
+                  <div class="label cmn-tabs"><a (click)="showDescription = false" href="javascript:;" [ngClass]="{'active': showDescription == false}">Command</a><a (click)="showDescription = true" href="javascript:;" [ngClass]="{'active': showDescription == true}">Description</a></div>
                   <div class="form-row">
                         <div id="cmd" *ngIf="showDescription === false">
                           <ul id="cmd_line">
@@ -610,7 +610,7 @@
                 </div>
               </div>
               <div class="f-col col-100 cmd-description">
-                <div class="label"><a (click)="showDescription = false" href="javascript:;" [ngClass]="{'active': showDescription == false}">Command</a> | <a (click)="showDescription = true" href="javascript:;" [ngClass]="{'active': showDescription == true}">Description</a></div>
+                <div class="label cmn-tabs"><a (click)="showDescription = false" href="javascript:;" [ngClass]="{'active': showDescription == false}">Command</a> <a (click)="showDescription = true" href="javascript:;" [ngClass]="{'active': showDescription == true}">Description</a></div>
                 <div class="form-row">
                   <div id="cmd_detail" *ngIf="showDescription === false">
                     <ul id="cmd_detail_line">

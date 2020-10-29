@@ -174,6 +174,8 @@ export class DashboardComponent implements OnInit {
           }
           return 0;
         });
+        document.getElementById("tag").setAttribute("data-tooltip", this.system.asset_tag);
+        document.getElementById("manufacture").setAttribute("data-tooltip", this.system.manufacturer);
       },
       error => {
       this.toastr.error('Something went wrong please try again.');
@@ -234,6 +236,12 @@ export class DashboardComponent implements OnInit {
   convertToGB(value) {
     return (parseInt(value)/1024/1024/1024).toFixed(2)
   }
+  diskSpaceDiff(v1, v2) {
+    let val1 = (parseInt(v1)/1024/1024/1024).toFixed(2)
+    let val2 = (parseInt(v2)/1024/1024/1024).toFixed(2)
+    return (parseFloat(val1) - parseFloat(val2)).toFixed(2)
+  }
+  
   saveLabel() {
     this.label = this.label.toUpperCase();
     const data = {
