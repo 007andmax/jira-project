@@ -49,7 +49,7 @@ export class QuotesTableComponent implements OnInit {
     this.sub.add(getOnInitFilter);
     this.quoteRealTimeService.changeQuotesArray.subscribe((newChange) => {
       if (newChange.action === 'SALE_QUOTE_CREATED') {
-        return this.quotes.push(newChange.data);
+        return this.quotes.unshift(newChange.data);
       } else {
         const elemIndex = this.quotes.findIndex((item) => item.id === newChange.data.id);
         if (newChange.data.status !== 'ARCHIVED') {
