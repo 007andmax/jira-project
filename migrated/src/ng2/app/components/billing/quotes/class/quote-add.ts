@@ -51,12 +51,11 @@ export class QuoteAdd {
             recipients: this.recipients,
             message: this.message,
             subject: this.subject,
-            globalNote: this.globalNote,
             regularNote: this.regularNote,
             sendNotification: notification
         }
     }
-    public getDataForPreview(company) {
+    public getDataForPreview(company,termsAndConditions) {
         let totalAmount = 0;
         totalAmount += this.services.reduce((a, b) => a + b.sum, 0);
         totalAmount += this.products.reduce((a, b) => a + b.sum, 0);
@@ -75,7 +74,7 @@ export class QuoteAdd {
             validUntil: this.validUntil,
             products: this.products.map(item => new QuoteProduct({ ...item, ...item.item })),
             services: this.services.map(item => new QuoteService({ ...item, ...item.item })),
-            termsAndConditions: this.globalNote.line1,
+            termsAndConditions: termsAndConditions,
             regularNote: this.regularNote,
             message: this.message
         }

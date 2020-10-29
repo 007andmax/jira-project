@@ -79,7 +79,7 @@ export class QuoteAsideAddBodyComponent implements OnInit {
     return this.quote;
   }
   public getQuotePreview() {
-    return this.quote.getDataForPreview(this.quoteCompany);
+    return this.quote.getDataForPreview(this.quoteCompany,this.termsAndConditions);
   }
   private getInvoiceNote() {
     this.billableService.getInvoiceNote().subscribe(data => {
