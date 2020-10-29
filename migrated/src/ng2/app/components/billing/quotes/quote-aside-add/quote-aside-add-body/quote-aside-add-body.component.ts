@@ -11,6 +11,7 @@ import { BillableStateService } from 'src/ng2/app/states/billable/billable-state
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { InvoiceFormEditCustomerComponent } from '../../../billable/billable-aside/invoice-form/invoice-form-edit-customer/invoice-form-edit-customer.component';
 import { InvoiceNote } from '../../../billable/class/invoice-note';
+import { Quote } from '../../class/quote';
 import { QuoteAdd } from '../../class/quote-add';
 import { QuoteValdiate } from '../../class/quote-vildate';
 import { QuoteStateService } from '../../quote-create/quote-state.service';
@@ -28,7 +29,6 @@ export class QuoteAsideAddBodyComponent implements OnInit {
   quoteCompany: any;
   notes: Array<InvoiceNote>;
   formatDate: string = FORMAT_DATE_2;
-  today = new Date().getTime();
   quote: QuoteAdd = new QuoteAdd();
   changeGlobalNote: boolean = false;
   termsAndConditions:string;
@@ -63,9 +63,21 @@ export class QuoteAsideAddBodyComponent implements OnInit {
         this.quoteCompany.companyInfo.contacts[0].primaryEmail = data.data.companyInfo.contacts[0].primaryEmail;
       }
     });
+    if (this.quoteStateService.getQuoteForCopy()) this.onInitCopy();
     this.getInvoiceNote();
     this.quote.regularNote.setDefault();
     this.sub.add(getChangeCompanies);
+  }
+  onInitCopy() {
+  
+    this.quote.setCopyData(this.quoteStateService.getQuoteForCopy());
+    this.quoteCompany = this.companiesState.getCompanies().find(item => item.id === this.quote.companyId);
+    this.cd.detectChanges();
+    if (this.quote.regularNote && this.quote.regularNote.line1.length > 0) this.billableStateService.setRegulatNote(this.quote.regularNote);
+    this.servicesList.getServicesList();
+    console.log("this.quote",this.quote);
+   
+
   }
   public onChangeQuoteNumber(data) {
     this.quote.number=data;

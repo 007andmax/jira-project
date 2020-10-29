@@ -25,13 +25,14 @@ export class QuotesItemComponent implements OnInit {
   @Output() onGoToQuoteEdit = new EventEmitter<any>();
   @Output() onDownloadPdf = new EventEmitter<any>();
   @Output() onPreview = new EventEmitter<any>();
+  @Output() onCopy = new EventEmitter<any>();
   constructor(private usersStateService: UsersStateService,
     public ticketsListService: TicketsListService,) { }
 
   ngOnInit() {
     this.createdUser = this.usersStateService.getAllUsers().find(item => item.id === this.quote.createdBy);
   }
-  
+
   getNameForAvatar() {
     if (!this.createdUser) return '';
     if (!this.createdUser.avatar) return `${(this.createdUser.firstName) ? this.createdUser.firstName[0].toUpperCase() : ''}${(this.createdUser.lastName) ? this.createdUser.lastName[0].toUpperCase() : ''}`;
@@ -72,6 +73,9 @@ export class QuotesItemComponent implements OnInit {
   }
   convertToInvoice() {
     this.onConvertToInvoice.emit(this.quote);
+  }
+  copy() {
+    this.onCopy.emit(this.quote);
   }
   resend() {
     this.onResend.emit(this.quote);

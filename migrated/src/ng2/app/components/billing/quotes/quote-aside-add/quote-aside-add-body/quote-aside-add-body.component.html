@@ -7,6 +7,7 @@
         [title]="'Company Name'"
         [placeholder]="'Select Company'"
         [list]="companies"
+        [editItem]="quoteCompany"
         [validate]="validate.getCompany()"
         [errorMessage]="'Company is required'"
         [field]="'name'"
@@ -56,12 +57,12 @@
 
     <div class="qt-input-block qt-mr-16 qt-w100">
       <label class="qt-lh-154">Quote Date</label>
-      <app-date-picker [formatDate]="formatDate" [editMode]="true" [editDate]="today" [useMinDate]="false" [useMaxDate]="true" (onChange)="onChangeQuoteDate($event)"></app-date-picker>
+      <app-date-picker [formatDate]="formatDate" [editMode]="true" [editDate]="quote.date" [useMinDate]="false"   (onChange)="onChangeQuoteDate($event)"></app-date-picker>
     </div>
 
     <div class="qt-input-block qt-w100">
       <label class="qt-lh-154">Expiry Date</label>
-      <app-date-picker [formatDate]="formatDate" [editMode]="true" [editDate]="today" [useMinDate]="false" [useMaxDate]="true" (onChange)="onChangeExpiryDate($event)"></app-date-picker>
+      <app-date-picker [formatDate]="formatDate" [editMode]="true" [editDate]="quote.validUntil" [useMinDate]="false"   (onChange)="onChangeExpiryDate($event)"></app-date-picker>
     </div>
   </div>
 

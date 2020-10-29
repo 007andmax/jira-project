@@ -8,9 +8,9 @@ export class QuotePreview extends Quote {
     products: Array<QuoteProduct> = [];
     services: Array<QuoteService> = []
     termsAndConditions: string;
-    regularNote:InvoiceNote;
-    message:string;
-    purchaseOrder:string;
+    regularNote: InvoiceNote;
+    message: string;
+    purchaseOrder: string;
     constructor(data = null) {
         super();
         if (data) {
@@ -19,8 +19,8 @@ export class QuotePreview extends Quote {
             }
             this.products = data.products.map(item => new QuoteProduct(item));
             this.services = data.services.map(item => new QuoteService(item));
-
+           if (data.regularNote) this.regularNote = new InvoiceNote(data.regularNote);
         }
     }
-   
+
 }

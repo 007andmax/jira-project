@@ -93,10 +93,15 @@ export class QuotesTableComponent implements OnInit {
       this.cd.detectChanges();
     })
   }
+  copy(item) {
+    this.quoteServices.getQuote(item.id).subscribe((data) => {
+      let quote = new  QuotePreview(data)
+      this.quoteStateService.setCopy(quote);
+    })
+  
+  }
   preview(item) {
-
     this.quoteStateService.setPreview(item);
-
   }
   public onScroll() {
     this.infiniteScrollDisabled = true;

@@ -4,6 +4,8 @@ import { QuoteAddService } from './quote-add-service';
 import { QuoteProduct } from './quote-product';
 import { QuoteService } from './quote-service';
 import * as moment from "moment";
+import { Quote } from './quote';
+import { QuotePreview } from './quote-preview';
 export class QuoteAdd {
     companyId: string;
     date: number = new Date().getTime();
@@ -23,6 +25,21 @@ export class QuoteAdd {
     validUntil: number = new Date().getTime();
     constructor() {
 
+    }
+    public setCopyData(quote:QuotePreview) {
+        this.companyId = quote.company.id;
+        this.date = quote.date;
+        this.description = quote.description;
+        this.message = quote.message;
+        this.number = quote.number;
+        this.purchaseOrder = quote.purchaseOrder;
+        this.products = quote.products.map(item => new QuoteAddProduct("PERCENT", item, item.itemOrder, item.quantity, this.getMarkups(item)));
+        this.services = quote.services.map(item => new QuoteAddService(item.description, "PERCENT", item, item.itemOrder, item.quantity));
+        this.recipients = quote.recipients;
+        this.regularNote = quote.regularNote;
+        this.requestPayment = quote.requestPayment;
+        this.subject = quote.subject;
+        this.validUntil = quote.validUntil;
     }
     public resetServices() {
         this.services = [];

@@ -30,7 +30,7 @@
       <li class="pointer" ngbDropdownItem  (click)="cancelQuote(quote)"  *ngIf="checkStatus(quote, ['READ','UNREAD'])"><div class="icon__uninstall qt-sz-16 qt-mr-8"></div> Cancel quote</li>
       <li class="pointer" ngbDropdownItem  (click)="archiveQuote(quote)"  *ngIf="checkStatus(quote, ['UNREAD','SAVED', 'EXPIRED', 'INVOICED', 'TICKETED','CANCELED'])"><div class="icon__remove qt-sz-16 qt-mr-8"></div> Archive a quote</li>
       <li class="pointer" ngbDropdownItem  (click)="goToQuoteEdit(quote)"  *ngIf="checkStatus(quote, ['READ','UNREAD','SAVED', 'APPROVED', 'CANCELED', 'EXPIRED'])"><i class="icn-16 edit-grey-ng2 qt-mr-8"></i> Edit a quote</li>
-
+      <li class="pointer" ngbDropdownItem  (click)="copy(quote)"   >  Copy a quote</li>
     </ul>
   </td>
 

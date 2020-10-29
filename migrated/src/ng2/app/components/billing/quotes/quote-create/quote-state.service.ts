@@ -17,7 +17,9 @@ export class QuoteStateService {
   filter: EventEmitter<any> = new EventEmitter();
   onPreview: EventEmitter<any> = new EventEmitter();
   onEdit: EventEmitter<any> = new EventEmitter();
+  onCopy: EventEmitter<any> = new EventEmitter();
   onCreate: EventEmitter<any> = new EventEmitter();
+  quoteForCopy:QuotePreview;
   public client: any;
   public itemsArray: any;
   public type = false;
@@ -59,6 +61,19 @@ export class QuoteStateService {
     this.state = $state;
     this.onInitCLientsList();
 
+  }
+  public resetQuoteForCopy() {
+    this.quoteForCopy = null;
+  }
+  public getQuoteForCopy() {
+    return this.quoteForCopy;
+  }
+  public setCopy(data) {
+    this.quoteForCopy = data;
+    this.onCopy.emit(null);
+  }
+  public getOnCopy() {
+    return this.onCopy;
   }
   public getOnEdit() {
     return this.onEdit;

@@ -42,6 +42,10 @@ export class QuoteAsideAddComponent implements OnInit {
       this.open = true;
     })
     this.sub.add(getOnCreate);
+    let getOnCopy = this.quoteStateService.getOnCopy().subscribe(quote => {
+      this.open = true;
+    })
+    this.sub.add(getOnCopy);
     this.quoteStateService.getHandleSendMode().subscribe(data => {
       this.saveAndSendBtn.setDisabled(true);
       this.quoteService.createQuote(data, true).subscribe((res) => {
@@ -58,6 +62,7 @@ export class QuoteAsideAddComponent implements OnInit {
     this.showPreview = false;
     this.billableStateService.setRegulatNote(null);
     this.validate = new QuoteValdiate();
+    this.quoteStateService.resetQuoteForCopy();
   }
   saveAndSend() {
    
