@@ -57,6 +57,7 @@ export class QuoteAsideAddComponent implements OnInit {
     this.open = false;
     this.showPreview = false;
     this.billableStateService.setRegulatNote(null);
+    this.validate = new QuoteValdiate();
   }
   saveAndSend() {
    

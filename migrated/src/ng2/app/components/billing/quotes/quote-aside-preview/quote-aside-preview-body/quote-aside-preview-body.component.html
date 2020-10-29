@@ -21,10 +21,10 @@
   <div class="qt-mt-24 qt-mb-32 qt-df qt-jc-sb">
     <div class="qt-lh-154">
       <div class="qt-fs-10 qt-color-light qt-mb-8 qt-ff-sb qt-lh-12">BILLING ADDRESS</div>
-      <div class="qt-fs-13 qt-color-dark qt-ff-gm" [textContent]="quoteCompany.name"></div>
-      <div class="qt-fs-13"    [textContent]="(quoteCompany.companyInfo.contacts.length > 0) ? quoteCompany.companyInfo.contacts[0].firstName + ' ' + quoteCompany.companyInfo.contacts[0].lastName : ''"></div>
-      <div class="qt-fs-13"    [textContent]="(quoteCompany.companyInfo.addresses.length > 0) ? quoteCompany.companyInfo.addresses[0].address : ''"></div>
-      <div class="qt-fs-13"    [textContent]="(quoteCompany.companyInfo.contacts.length > 0) ? quoteCompany.companyInfo.contacts[0].primaryEmail : ''"></div>
+      <div class="qt-fs-13 qt-color-dark qt-ff-gm" *ngIf="quoteCompany" [textContent]="quoteCompany.name"></div>
+      <div class="qt-fs-13"  *ngIf="quoteCompany"  [textContent]="(quoteCompany.companyInfo.contacts.length > 0) ? quoteCompany.companyInfo.contacts[0].firstName + ' ' + quoteCompany.companyInfo.contacts[0].lastName : ''"></div>
+      <div class="qt-fs-13"  *ngIf="quoteCompany"  [textContent]="(quoteCompany.companyInfo.addresses.length > 0) ? quoteCompany.companyInfo.addresses[0].address : ''"></div>
+      <div class="qt-fs-13"  *ngIf="quoteCompany"  [textContent]="(quoteCompany.companyInfo.contacts.length > 0) ? quoteCompany.companyInfo.contacts[0].primaryEmail : ''"></div>
       </div>
 
     <div class="qt-fs-13 qt-text-right qt-lh-154">

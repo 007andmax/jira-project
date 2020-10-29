@@ -67,7 +67,7 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
       this.quoteServices.getQuote(quote.id).subscribe((data) => {
         this.quote = new QuoteEdit(data);
         // this.elRef.nativeElement.querySelector("#description-global-note").value = this.quote.termsAndConditions;
-        this.billableStateService.setRegulatNote(this.quote.regularNote);
+       if (this.quote.regularNote && this.quote.regularNote.line1.length > 0) this.billableStateService.setRegulatNote(this.quote.regularNote);
         this.quoteCompany = this.companiesState.getCompanies().find(item => item.id === this.quote.company.id);
         this.cd.detectChanges();
         this.servicesList.getServicesList();
@@ -198,19 +198,7 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
     this.quote.setExpiryDate((data) ? data : new Date().getTime());
     this.validate.resetValidate();
   }
-  onSelectCompany(data) {
-    this.quoteCompany = data;
-    this.quote.setCompany(data);
-    this.cd.detectChanges();
-    if (data) {
-      this.validate.resetCompany();
-      this.servicesList.getServicesList();
-    } else {
-      this.servicesList.resetServicesList();
-    }
-    this.quote.resetServices();
-    this.validate.resetValidate();
-  }
+ 
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

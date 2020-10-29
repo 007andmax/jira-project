@@ -9,7 +9,7 @@
 
      <div class="qt-df qt-ai-c"  >
 
-      <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon edit-grey-ng2" *ngIf="checkStatus(quote, ['READ','UNREAD','SAVED', 'APPROVED', 'CANCELED', 'EXPIRED'])" (click)="resend()"></div>
+      <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon edit-grey-ng2" *ngIf="checkStatus(quote, ['READ','UNREAD','SAVED', 'APPROVED', 'CANCELED', 'EXPIRED'])" (click)="editQuote()"></div>
       <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__email-dark" (click)="resend()"></div>
 
       <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__download-pdf" (click)="downloadPdf()"></div>

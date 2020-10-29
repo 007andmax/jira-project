@@ -62,6 +62,10 @@ export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
     const elems = statusForShowingArray.filter((item) => item.toLowerCase() === quote.status.toLowerCase());
     return elems.length > 0;
   }
+  editQuote() {
+    this.close();
+    this.quoteStateService.setEdit(this.quote);
+  }
   downloadPdf() {
     this.quoteServices.downloadPdf(this.quote.id).subscribe((res) => this.quoteServices.downLoadFile(res, this.quote.id, this.quote.company.name, this.quote.number));
   }
@@ -82,7 +86,7 @@ export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
   }
   archiveQuote() {
     this.confirmStateService.setConfirmAction(ARCHIVE_QUOTE);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
     modalRef.componentInstance.message = `Do you want to archive a quote?`;
   }
   
@@ -92,10 +96,10 @@ export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
     } else {
       let recipients = this.quote.recipients;
       //  if (typeof recipients === "string") this.quote.recipients = recipients.split(',');
-      this.quoteServices.getQuote(this.quote.id).subscribe((data) => {
-        const modalRef = this.modalService.open(ModalQuoteComponent, data);
-        modalRef.componentInstance.data = data;
-      })
+     // this.quoteServices.getQuote(this.quote.id).subscribe((data) => {
+        const modalRef = this.modalService.open(ModalQuoteComponent);
+        modalRef.componentInstance.data = this.quote;
+      //})
     }
   }
 
