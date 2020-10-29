@@ -57,7 +57,7 @@
             <address>
               {{addresses}}
             </address>
-            <a href="javascript:;" class="btn btn-outline">
+            <a (click)="openMap(content)" class="btn btn-outline">
               <img
                 src="../../../../../ng2/assets/img/company-details/location.svg"
                 alt="location"
@@ -67,7 +67,7 @@
           </div>
           <div class="other-info-col d-flex">
             <div class="small-title">Website</div>
-            <a (click)="openMap(content)" href="javascript:;"
+            <a href="javascript:;"
               >http://www.dimensiondentistry.com</a
             >
           </div>
@@ -78,9 +78,9 @@
                   <!-- <button class="selected-item" id="dropdownBasic1" ngbDropdownToggle>Opens  9:30 AM</button> -->
                   <button class="selected-item" id="dropdownBasic1" ngbDropdownToggle>{{companyOpen}}</button>
                   <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                    <button class="item" ngbDropdownItem *ngFor="let hours of companyDetail?.workingDays">{{hours.dayOfWeek}}<span *ngIf="hours.startTime !== 0 && hours.endTime !== 0">10 AM - 7 PM</span><span *ngIf="hours.startTime === 0 && hours.endTime === 0">Close</span></button>
+                    <button class="item" ngbDropdownItem *ngFor="let hours of workingDays">{{hours.dayOfWeek}}<span *ngIf="hours.startTime !== 0 && hours.endTime !== 0">{{hours.timing}}</span><span *ngIf="hours.startTime === 0 && hours.endTime === 0">Close</span></button>
                     <div class="item"> 
-                      <button class="btn btn-outline" (click)="open(content)"> 
+                      <button class="btn btn-outline" (click)="open(contentHour)"> 
                         <img src="../../../../../ng2/assets/img/company-details/edit-blue.svg" alt="user" />  
                         Edit Suggestions</button>
                     </div> 
@@ -104,14 +104,14 @@
           <div class="small-title">Primary Contact</div>
           <div class="contact-info d-flex">
             <figure class="d-flex">
-              <img src="../../../../../ng2/assets/img/user.jpg" alt="user" />
+              <img src="{{primaryContact.avatar}}" alt="user" />
             </figure>
             <div class="primary-contact-info d-flex">
-              <div class="h5">Alexander Goodwin</div>
-              <a href="mailto:alexander@summitdental.ca"
-                >alexander@summitdental.ca</a
+              <div class="h5">{{primaryContact.firstName}} {{primaryContact.lastName}}</div>
+              <a href="mailto:{{primaryContact.email}}"
+                >{{primaryContact.email}}</a
               >
-              <a href="tel:+1 (403) 201-0588">+1 (403) 201-0588</a>
+              <a *ngIf="primaryContact.phoneNumber !== ''" href="tel:{{primaryContact.phoneNumber}}">{{primaryContact.phoneNumber}}</a>
             </div>
           </div>
         </div>
@@ -121,63 +121,9 @@
             <a href="javascript:;">+Add</a>
           </div>
           <div class="tags-tab d-flex">
-            <span class="tag"
-              >Server Exchange Server
-              <a href="javascript:;" class="close">
-                <img
-                  src="../../../../../ng2/assets/img/company-details/tag-close-12.svg"
-                  alt="tags"
-                />
-              </a>
-            </span>
-            <span class="tag"
-              >DNS
-              <a href="javascript:;" class="close">
-                <img
-                  src="../../../../../ng2/assets/img/company-details/tag-close-12.svg"
-                  alt="tags"
-                />
-              </a>
-            </span>
-            <span class="tag"
-              >SQL
-              <a href="javascript:;" class="close">
-                <img
-                  src="../../../../../ng2/assets/img/company-details/tag-close-12.svg"
-                  alt="tags"
-                />
-              </a>
-            </span>
-            <span class="tag"
-              >FIle Server
-              <a href="javascript:;" class="close">
-                <img
-                  src="../../../../../ng2/assets/img/company-details/tag-close-12.svg"
-                  alt="tags"
-                />
-              </a>
-            </span>
-            <span class="tag"
-              >Support Files
-              <a href="javascript:;" class="close">
-                <img
-                  src="../../../../../ng2/assets/img/company-details/tag-close-12.svg"
-                  alt="tags"
-                />
-              </a>
-            </span>
-            <span class="tag"
-              >Carestream
-              <a href="javascript:;" class="close">
-                <img
-                  src="../../../../../ng2/assets/img/company-details/tag-close-12.svg"
-                  alt="tags"
-                />
-              </a>
-            </span>
-            <span class="tag"
-              >Server Cleardent
-              <a href="javascript:;" class="close">
+            <span class="tag" *ngFor="let tag of tags; let i = index;"
+              >{{tag.word}}
+              <a href="javascript:;" (click)="deleteTag(i)" class="close">
                 <img
                   src="../../../../../ng2/assets/img/company-details/tag-close-12.svg"
                   alt="tags"
@@ -194,7 +140,7 @@
             />
             Download Agent
           </a>
-          <a href="javascript:;" class="btn btn-primary">
+          <a (click)="edit()" class="btn btn-primary">
             Edit Company
           </a>
         </div>
@@ -265,13 +211,13 @@
             <h2>Tickets</h2> 
             <ul class=" list-unstyled chart-status">
               <li class="progress-in">
-                In Progress
+                Average Time
               </li>
               <li class="hold">
-                On Hold
+                New Tickets Count
              </li>
               <li class="complete">
-                Completed
+                Response Time
               </li>
           </ul>
             <div ngbDropdown class="d-flex">
@@ -513,7 +459,7 @@
 
 <!-- Modal -->
 
-<ng-template #content let-modal>
+<ng-template #contentHour let-modal>
   <div class="modal-header d-flex">
     <h1>Edit Hours</h1>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -524,74 +470,20 @@
       <h5>Select days with correct hours</h5>
       <form method="post" class="d-flex">
             <ul class="list-unstyled d-flex">
-                <li class="d-flex">
-                  <div class="cmn-checkbox">
-                      <input type="checkbox" id="1">
-                      <label for="1">Monday</label>
-                  </div>
-                  <div class="hours-row">
-                    <app-ticket-profile-updates-service-timepicker #timePicker1  (onChangeStart)="onChangeStartTimePicker($event)" (onChangeEnd)="onChangeEndTimePicker($event)"></app-ticket-profile-updates-service-timepicker>
-                  </div>
-                </li>
-                <li class="d-flex">
-                  <div class="cmn-checkbox">
-                      <input type="checkbox" id="Tuesday">
-                      <label for="Tuesday">Tuesday</label>
-                  </div>
-                  <div class="hours-row">
-                    <app-ticket-profile-updates-service-timepicker #timePicker2  (onChangeStart)="onChangeStartTimePicker($event)" (onChangeEnd)="onChangeEndTimePicker($event)"></app-ticket-profile-updates-service-timepicker>
-                  </div>
-                </li>
-                <li class="d-flex">
-                  <div class="cmn-checkbox">
-                      <input type="checkbox" id="Wednesday">
-                      <label for="Wednesday">Wednesday</label>
-                  </div>
-                  <div class="hours-row">
-                    <app-ticket-profile-updates-service-timepicker #timePicker3  (onChangeStart)="onChangeStartTimePicker($event)" (onChangeEnd)="onChangeEndTimePicker($event)"></app-ticket-profile-updates-service-timepicker>
-                  </div>
-                </li>
-                <li class="d-flex">
-                  <div class="cmn-checkbox">
-                      <input type="checkbox" id="Thursday">
-                      <label for="1">Thursday</label>
-                  </div>
-                  <div class="hours-row">
-                    <app-ticket-profile-updates-service-timepicker #timePicker4  (onChangeStart)="onChangeStartTimePicker($event)" (onChangeEnd)="onChangeEndTimePicker($event)"></app-ticket-profile-updates-service-timepicker>
-                  </div>
-                </li>
-                <li class="d-flex">
-                  <div class="cmn-checkbox">
-                      <input type="checkbox" id="Friday">
-                      <label for="1">Friday</label>
-                  </div>
-                  <div class="hours-row">
-                    <app-ticket-profile-updates-service-timepicker #timePicker5  (onChangeStart)="onChangeStartTimePicker($event)" (onChangeEnd)="onChangeEndTimePicker($event)"></app-ticket-profile-updates-service-timepicker>
-                  </div>
-                </li>
-                <li class="d-flex">
-                  <div class="cmn-checkbox">
-                      <input type="checkbox" id="Saturday">
-                      <label for="1">Saturday</label>
-                  </div>
-                  <div class="hours-row">
-                    <app-ticket-profile-updates-service-timepicker #timePicker6  (onChangeStart)="onChangeStartTimePicker($event)" (onChangeEnd)="onChangeEndTimePicker($event)"></app-ticket-profile-updates-service-timepicker>
-                  </div>
-                </li>
-                <li class="d-flex">
-                  <div class="cmn-checkbox">
-                      <input type="checkbox" id="Sunday">
-                      <label for="1">Sunday</label>
-                  </div>
-                  <div class="hours-row">
-                    <app-ticket-profile-updates-service-timepicker #timePicker7  (onChangeStart)="onChangeStartTimePicker($event)" (onChangeEnd)="onChangeEndTimePicker($event)"></app-ticket-profile-updates-service-timepicker>
-                  </div>
-                </li>
+              <li class="d-flex" *ngFor="let work of workingDays; let i = index;">
+                <div class="cmn-checkbox">
+                    <input type="checkbox" id="hour_{{i}}" [checked]="work.checked">
+                    <label for="hour_{{i}}">{{work.dayOfWeek}}</label>
+                </div>
+                <div class="hours-row">
+                  <app-ticket-profile-updates-service-timepicker (onChangeStart)="onChangeStartTimePicker($event)" (onChangeEnd)="onChangeEndTimePicker($event)" [start]="work.sTime" [editMode]="true" [end]="work.eTime"></app-ticket-profile-updates-service-timepicker>
+                </div>
+              </li>
             </ul>
       </form>
       <div class="footer-area-modal d-flex">
         <button type="button" class="btn btn-secondary" aria-label="Close" (click)="modal.dismiss('Cross click')">Cancel</button>
-        <button type="button" class="btn btn-primary" (click)="modal.close('Save click')">Save Changes</button>
+        <button type="button" class="btn btn-primary" (click)="saveHours()">Save Changes</button>
       </div>
   </div>
   
@@ -607,13 +499,20 @@
     </button>
   <div class="modal-body d-flex">
     <div class="h1">Get Direction</div>
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.1540367862735!2d73.17326731426874!3d22.310013448181586!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fc958ff6590c3%3A0x9f62b57f71c67142!2sQuickTech!5e0!3m2!1sen!2sin!4v1603043257699!5m2!1sen!2sin"  frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-      
+    <!-- <agm-map [latitude]="companyDetail.addresses[0].locationLat" [longitude]="companyDetail.addresses[0].locationLng" [mapTypeControl]='true'
+    [zoom]="15" [title]="title">
+      <agm-marker [latitude]="companyDetail.addresses[0].locationLat" [longitude]="companyDetail.addresses[0].locationLng"></agm-marker>
+    </agm-map> -->
+    <agm-map [latitude]="companyDetail.addresses[0].locationLat" [longitude]="companyDetail.addresses[0].locationLng" 
+    [mapTypeControl]='true' [zoom]="15">
+    <agm-marker [latitude]="companyDetail.addresses[0].locationLat" [longitude]="companyDetail.addresses[0].locationLng"></agm-marker>
+  </agm-map>
   </div>
   
 </ng-template>
 
 
 </div>
+<app-company-edit-aside></app-company-edit-aside>
 
 

@@ -132,4 +132,8 @@ public getTicketGraph (id, frequency) {
   return this.http.get(this.apiUrl + `dashboard/company?companyId=${id}&frequency=${frequency}`);
 }
 
+public removeTag (id, data) {
+  return this.http.put(this.apiUrl + 'company/tags?companyId=' + id, data);
+}
+
 }
