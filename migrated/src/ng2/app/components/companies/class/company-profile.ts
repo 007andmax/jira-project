@@ -11,6 +11,7 @@ import { ImageCropper } from '../../shared/image-cropper/class/image-cropper';
 import { Company } from 'src/ng2/app/interfaces/company/company';
 import { Tag } from 'src/ng2/app/interfaces/tag/tag';
 import { CompanyLogoCropped } from './company-logo-cropped';
+import { CompanyConditions } from './company-conditions';
 
 export class CompanyProfile {
     accountNumber: any;
@@ -27,7 +28,7 @@ export class CompanyProfile {
     maxAgents: number = 0;
     name: string = "";
     password: string = "";
-
+    conditions:CompanyConditions;
     paymentTerms: number;
     serviceType: string;
     removeOfflineTime: number = 30;

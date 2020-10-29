@@ -9,7 +9,6 @@ export class QuoteAdd {
     date: number = new Date().getTime();
     description: string;
     draft: boolean;
-    globalNote: InvoiceNote;
     message: string;
     number: string = "0";
     partialDeposit: string;
@@ -84,9 +83,7 @@ export class QuoteAdd {
     public setRegulatNote(data) {
         this.regularNote = new InvoiceNote(data);
     }
-    public setGlobalNote(data) {
-        this.globalNote = new InvoiceNote(data);
-    }
+  
     public addProduct(item) {
         this.products.push(new QuoteAddProduct("PERCENT", item, 0, 1, this.getMarkups(item)))
     }

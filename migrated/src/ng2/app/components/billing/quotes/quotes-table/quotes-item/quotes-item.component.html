@@ -4,7 +4,13 @@
   <td class="quotes-table__number pointer" [textContent]="'#' + quote.number" (click)="preview()" ></td>
   <td class="quotes-table__company" [textContent]="quote.company.name"  ></td>
   <td class="quotes-table__description" [textContent]="quote.description"  ></td>
-  <td class="quotes-table__create-by" [textContent]="'create by'"  ></td>
+  <td class="quotes-table__create-by"    >
+    <div class="qt-table-modern__circle-avatar" [ngClass]="!getNameForAvatar().length ? 'transparent-text' : ''" [textContent]="getNameForAvatar()"
+    [ngStyle]="{'background': ticketsListService.getStyleAvatar(createdUser) }"></div>
+
+
+  <div [textContent]="getUserName(createdUser)" class="ellipsis"></div>
+  </td>
   <td class="quotes-table__status"  >
     <span class="tag__modern" [ngClass]="getStatusClass(quote.status)"  [textContent]="getStatusText(quote.status)"> <!-- [ngClass]="payment.refundMethod ? '--error' : '--success'"-->
     </span>

@@ -66,12 +66,13 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
     let getOnEdit = this.quoteStateService.getOnEdit().subscribe(quote => {
       this.quoteServices.getQuote(quote.id).subscribe((data) => {
         this.quote = new QuoteEdit(data);
-        // this.elRef.nativeElement.querySelector("#description-global-note").value = this.quote.termsAndConditions;
+       
        if (this.quote.regularNote && this.quote.regularNote.line1.length > 0) this.billableStateService.setRegulatNote(this.quote.regularNote);
         this.quoteCompany = this.companiesState.getCompanies().find(item => item.id === this.quote.company.id);
         this.cd.detectChanges();
         this.servicesList.getServicesList();
         this.onStopPreloader.emit(null);
+        this.elRef.nativeElement.querySelector("#description-global-note").value = this.quote.termsAndConditions;
       })
     })
     this.sub.add(getOnEdit);

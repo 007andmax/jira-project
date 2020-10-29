@@ -19,6 +19,7 @@ export class Quote {
     subject: string;
     totalAmount: number;
     validUntil: number;
+    createdBy:string;
     constructor(data = null) {
         if (data) {
             for (const key in data) {

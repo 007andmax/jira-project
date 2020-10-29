@@ -31,8 +31,9 @@ export class QuoteAsideAddBodyComponent implements OnInit {
   today = new Date().getTime();
   quote: QuoteAdd = new QuoteAdd();
   changeGlobalNote: boolean = false;
-  globalNote: InvoiceNote = null;
+  termsAndConditions:string;
   companies = [];
+   
   sub: Subscription = new Subscription();
   constructor(private companiesState: CompaniesStateService,
     private billableStateService: BillableStateService,
@@ -83,26 +84,19 @@ export class QuoteAsideAddBodyComponent implements OnInit {
   private getInvoiceNote() {
     this.billableService.getInvoiceNote().subscribe(data => {
       this.notes = data;
-      this.globalNote = this.notes.filter(item => item.noteType === "GLOBAL")[0];
-      this.quote.setGlobalNote(this.notes.filter(item => item.noteType === "GLOBAL")[0]);
-      this.elRef.nativeElement.querySelector("#description-global-note").value = this.quote.globalNote.line1;
+      this.termsAndConditions = this.companiesState.getCurrentCompany().conditions.content;
+      this.elRef.nativeElement.querySelector("#description-global-note").value = this.termsAndConditions;
     })
   }
   onUpdateGlobalNote() {
     this.invoiceTicketsService.updateTermsAndConditions(this.elRef.nativeElement.querySelector("#description-global-note").value).subscribe(data => {
       this.changeGlobalNote = false;
-      this.quote.setGlobalNote({
-        id: this.globalNote.id,
-        line1: this.elRef.nativeElement.querySelector("#description-global-note").value,
-        line2: "",
-        noteType: this.globalNote.noteType,
-        title: this.globalNote.title
-      })
+      this.termsAndConditions = this.elRef.nativeElement.querySelector("#description-global-note").value;
       this.validate.resetValidate();
     })
   }
   onCheckUpdateGlobalNote() {
-    if (this.globalNote) this.changeGlobalNote = true;
+    if (this.termsAndConditions) this.changeGlobalNote = true;
   }
 
   getSubTotalServices() {

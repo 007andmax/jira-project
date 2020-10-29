@@ -2,14 +2,18 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Quote } from '../../class/quote';
 import * as moment from "moment";
 import { QUOTE_STATUS } from 'src/ng2/app/const/quote-status';
+import { User } from 'src/ng2/app/components/users/class/user';
+import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
+import { TicketsListService } from 'src/ng2/app/components/tickets/tickets/services/tickets-list.service';
 
 @Component({
   selector: 'app-quotes-item',
   templateUrl: './quotes-item.component.html',
-  styleUrls: ['./quotes-item.component.scss']
+  styleUrls: ['./quotes-item.component.scss'],
+  providers: [TicketsListService]
 })
 export class QuotesItemComponent implements OnInit {
-
+  createdUser: User;
   @Input() quote: Quote;
   @Output() onResend = new EventEmitter<any>();
   @Output() onConvertToInvoice = new EventEmitter<any>();
@@ -21,9 +25,20 @@ export class QuotesItemComponent implements OnInit {
   @Output() onGoToQuoteEdit = new EventEmitter<any>();
   @Output() onDownloadPdf = new EventEmitter<any>();
   @Output() onPreview = new EventEmitter<any>();
-  constructor() { }
+  constructor(private usersStateService: UsersStateService,
+    public ticketsListService: TicketsListService,) { }
 
   ngOnInit() {
+    this.createdUser = this.usersStateService.getAllUsers().find(item => item.id === this.quote.createdBy);
+  }
+  
+  getNameForAvatar() {
+    if (!this.createdUser) return '';
+    if (!this.createdUser.avatar) return `${(this.createdUser.firstName) ? this.createdUser.firstName[0].toUpperCase() : ''}${(this.createdUser.lastName) ? this.createdUser.lastName[0].toUpperCase() : ''}`;
+    return '';
+  }
+  public getUserName(user) {
+    return (user) ? `${user.firstName} ${user.lastName}` : '';
   }
   preview() {
     this.onPreview.emit(this.quote);
