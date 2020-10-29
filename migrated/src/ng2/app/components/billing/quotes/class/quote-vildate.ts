@@ -1,6 +1,7 @@
 import { QuoteAdd } from './quote-add';
 
 export class QuoteValdiate {
+    number:boolean =  true;
     company: boolean = true;
     servicesProducts: boolean = true;
     validateSaleCostProduct:boolean = true;
@@ -8,6 +9,12 @@ export class QuoteValdiate {
     errorMessage:string = "";
     constructor() { }
 
+    public resetNumber() {
+        this.number = true;
+    }
+    public getNumber() {
+        return this.number;
+    }
     public getValidate() {
         return this.validate;
     }
@@ -31,6 +38,7 @@ export class QuoteValdiate {
         this.company = true;
     }
     public isValidate(quote) {
+        if (quote.number.length === 0) this.number = false;
         if (!quote.companyId) this.company = false;
         if (quote.services.length === 0 && quote.products.length === 0) this.servicesProducts = false;
         if (quote.products.find(item => !item.validateSaleCost)) {
@@ -38,6 +46,6 @@ export class QuoteValdiate {
         } else {
             this.validateSaleCostProduct = true;
         }
-        return this.company && this.servicesProducts && this.validateSaleCostProduct;
+        return this.company && this.servicesProducts && this.validateSaleCostProduct && this.number;
     }
 }

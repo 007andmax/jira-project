@@ -43,8 +43,12 @@
         <label class="qt-lh-154">Quote#</label>
         <div class="qt-df"   >
            <input class="qt-input-prepend" decimalNumber
+           [ngClass]="{'--input-error' : !validate.getNumber()}"
            [value]="quote.number"
-           (onChange)="quote.number=$event;validate.resetValidate();" >
+           (onChange)="onChangeQuoteNumber($event)" >
+           <mat-error class="qt-tooltip-error" *ngIf="!validate.getNumber()">
+            Quote number is required
+          </mat-error>
         </div>
       </div>
 
@@ -116,7 +120,7 @@
   let-i="index"
   [ngForOf]="quote.products"
   [ngForTrackBy]="trackById">
-       <app-product-item-quote-edit [product]="product"></app-product-item-quote-edit>
+       <app-product-item-quote-edit [product]="product" (onRemoveProduct)="removeProduct(i)"></app-product-item-quote-edit>
         </ng-template>
 
           </tbody>

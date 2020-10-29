@@ -5,6 +5,7 @@ import { takeUntil } from 'rxjs/operators';
 import { DisabledBtnDirective } from 'src/ng2/app/directives/disabled-btn.directive';
 import { ModalQuoteComponent } from 'src/ng2/app/services/modal/modal-quote/modal-quote.component';
 import { QuoteService } from 'src/ng2/app/services/quote/quote.service';
+import { BillableStateService } from 'src/ng2/app/states/billable/billable-state.service';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { NotificationStateService } from '../../../shared/notification/services/notification-state.service';
 import { BillableAsideComponent } from '../../billable/billable-aside/billable-aside.component';
@@ -31,7 +32,7 @@ export class QuoteAsideAddComponent implements OnInit {
   open: boolean = false;
   sub: Subscription = new Subscription();
   constructor(private quoteStateService: QuoteStateService,
-    private companiesStateService: CompaniesStateService,
+    private billableStateService: BillableStateService,
     private notificationStateService: NotificationStateService,
     private modalService: NgbModal,
     private quoteService: QuoteService,) { }
@@ -55,6 +56,7 @@ export class QuoteAsideAddComponent implements OnInit {
   close() {
     this.open = false;
     this.showPreview = false;
+    this.billableStateService.setRegulatNote(null);
   }
   saveAndSend() {
    

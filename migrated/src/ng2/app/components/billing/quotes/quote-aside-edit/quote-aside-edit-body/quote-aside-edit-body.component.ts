@@ -79,6 +79,7 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
   }
   public resetQuote() {
     this.quote = null;
+    this.billableStateService.setRegulatNote(null);
   }
 
   public getValidate() {
@@ -131,11 +132,17 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
 
     return totalTaxes;
   }
+  
   public updateInvoiceData(request) {
     console.log("request", request.regularInvoiceNote);
     this.quote.setRegulatNote(request.regularInvoiceNote);
     this.validate.resetValidate();
 
+  }
+  public onChangeQuoteNumber(data) {
+    this.quote.number=data;
+    this.validate.resetValidate();
+    this.validate.resetNumber();
   }
   selectProduct(data) {
     console.log("data", data);
