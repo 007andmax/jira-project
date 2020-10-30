@@ -3,7 +3,7 @@
 
   <div class="qt-df qt-fd-c qt-jc-sb quotes-page__list-container">
     <div>
-      <app-quotes-header (onCreatePayment)="onCreatePayment()" (onSortBy)="sortBy($event)"></app-quotes-header>
+      <app-quotes-header   (onSortBy)="sortBy($event)"></app-quotes-header>
       <div class="table-container"  *ngIf="!showPreloader">
         <table class="qt-table-modern quotes-table">
           <tbody

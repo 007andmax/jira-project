@@ -1,25 +1,14 @@
 import { ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
-import { FORMAT_DATE_2 } from 'src/ng2/app/const/date-picker';
 import { DisabledBtnDirective } from 'src/ng2/app/directives/disabled-btn.directive';
-import { BillableService } from 'src/ng2/app/services/billable/billable.service';
-import { CompaniesService } from 'src/ng2/app/services/company/companies.service';
 import { ModalQuoteComponent } from 'src/ng2/app/services/modal/modal-quote/modal-quote.component';
 import { QuoteService } from 'src/ng2/app/services/quote/quote.service';
-import { BillableStateService } from 'src/ng2/app/states/billable/billable-state.service';
-import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
-import { CompanyProfile } from '../../../companies/class/company-profile';
-import { CompanyUpdate } from '../../../companies/class/company-update';
-import { InvoiceTicketsService } from '../../../setting/invoice-tickets/invoice-tickets.service';
+import { QuoteStateService } from 'src/ng2/app/states/quote/quote-state.service';
 import { NotificationStateService } from '../../../shared/notification/services/notification-state.service';
-import { InvoiceNote } from '../../billable/class/invoice-note';
 import { QuoteEdit } from '../class/quote-edit';
 import { QuotePreview } from '../class/quote-preview';
-import { QuoteValdiate } from '../class/quote-vildate';
 import { QuoteValdiateEdit } from '../class/quote-vildate-edit';
-import { ServiceListQuoteComponent } from '../quote-aside-add/service-list-quote/service-list-quote.component';
-import { QuoteStateService } from '../quote-create/quote-state.service';
 import { QuoteAsideEditBodyComponent } from './quote-aside-edit-body/quote-aside-edit-body.component';
 
 @Component({

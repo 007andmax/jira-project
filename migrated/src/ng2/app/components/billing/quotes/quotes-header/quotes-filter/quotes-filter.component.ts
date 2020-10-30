@@ -4,10 +4,8 @@ import { CompanySetting } from 'src/ng2/app/components/companies/class/company-s
 import { MultiDatepickerComponent } from 'src/ng2/app/components/shared/multi-datepicker/multi-datepicker.component';
 import { SelectSearchComponent } from 'src/ng2/app/components/shared/select-search/select-search.component';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
-import { PaymentsStateService } from 'src/ng2/app/states/payments/payments-state.service';
- 
+import { QuoteStateService } from 'src/ng2/app/states/quote/quote-state.service';
 import { QuoteFilter } from '../../class/quote-filter';
-import { QuoteStateService } from '../../quote-create/quote-state.service';
 
 @Component({
   selector: 'app-quotes-filter',

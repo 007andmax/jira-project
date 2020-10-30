@@ -1,18 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 import { DisabledBtnDirective } from 'src/ng2/app/directives/disabled-btn.directive';
 import { ModalQuoteComponent } from 'src/ng2/app/services/modal/modal-quote/modal-quote.component';
 import { QuoteService } from 'src/ng2/app/services/quote/quote.service';
 import { BillableStateService } from 'src/ng2/app/states/billable/billable-state.service';
-import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
+import { QuoteStateService } from 'src/ng2/app/states/quote/quote-state.service';
 import { NotificationStateService } from '../../../shared/notification/services/notification-state.service';
-import { BillableAsideComponent } from '../../billable/billable-aside/billable-aside.component';
 import { QuoteAdd } from '../class/quote-add';
 import { QuotePreview } from '../class/quote-preview';
 import { QuoteValdiate } from '../class/quote-vildate';
-import { QuoteStateService } from '../quote-create/quote-state.service';
 import { QuoteAsideAddBodyComponent } from './quote-aside-add-body/quote-aside-add-body.component';
 
 @Component({

@@ -9,13 +9,12 @@ import { CompaniesService } from 'src/ng2/app/services/company/companies.service
 import { QuoteService } from 'src/ng2/app/services/quote/quote.service';
 import { BillableStateService } from 'src/ng2/app/states/billable/billable-state.service';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
+import { QuoteStateService } from 'src/ng2/app/states/quote/quote-state.service';
 import { InvoiceNote } from '../../../billable/class/invoice-note';
 import { QuoteEdit } from '../../class/quote-edit';
-
-import { QuoteValdiate } from '../../class/quote-vildate';
 import { QuoteValdiateEdit } from '../../class/quote-vildate-edit';
 import { ServiceListQuoteComponent } from '../../quote-aside-add/service-list-quote/service-list-quote.component';
-import { QuoteStateService } from '../../quote-create/quote-state.service';
+
 
 @Component({
   selector: 'app-quote-aside-edit-body',
@@ -43,7 +42,6 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
     private companiesService: CompaniesService,
     private invoiceTicketsService: InvoiceTicketsService,
     public cd: ChangeDetectorRef,
-
     private quoteServices: QuoteService,) { }
 
 

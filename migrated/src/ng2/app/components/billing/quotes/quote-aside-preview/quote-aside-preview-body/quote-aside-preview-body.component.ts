@@ -46,4 +46,7 @@ export class QuoteAsidePreviewBodyComponent implements OnInit {
     if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.origin && this.currentCompany.logo.origin.id) return `/file/${this.currentCompany.logo.origin.id}`;
     return '/company/default/logo.jpg';
   }
+  public trackById(index, item) {
+    return item.versionedId.id;
+  }
 }

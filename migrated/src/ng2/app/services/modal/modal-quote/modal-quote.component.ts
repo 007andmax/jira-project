@@ -4,21 +4,13 @@ import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { NgbActiveModal, NgbModalConfig, NgbModal } from "@ng-bootstrap/ng-bootstrap";
-
 import { USER } from "../../../const/users";
-import { UsersService } from "../../users/users.service";
-import { QuoteStateService } from "../../../components/billing/quotes/quote-create/quote-state.service";
-import { QuoteService } from "../../quote/quote.service";
-import { takeUntil } from "rxjs/operators";
 import { Subject, Subscription } from "rxjs";
-
 import { ConfirmStateService } from 'src/ng2/app/components/shared/confirm/services/confirm-state.service';
 import { ConfirmComponent } from 'src/ng2/app/components/shared/confirm/confirm.component';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
-import { NotificationStateService } from 'src/ng2/app/components/shared/notification/services/notification-state.service';
 import { SAVE_AND_SEND } from 'src/ng2/app/const/confirm';
-
-
+import { QuoteStateService } from 'src/ng2/app/states/quote/quote-state.service';
 
 /**
  * Modal quote component
@@ -69,11 +61,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
    */
   public constructor(
     public activeModal: NgbActiveModal,
-    private userService: UsersService,
     private quoteStateService: QuoteStateService,
-    private quoteService: QuoteService,
-    private notificationStateService: NotificationStateService,
-    private eRef: ElementRef,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     config: NgbModalConfig,

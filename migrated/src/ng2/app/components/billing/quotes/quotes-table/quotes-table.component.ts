@@ -3,11 +3,11 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { ModalQuoteComponent } from 'src/ng2/app/services/modal/modal-quote/modal-quote.component';
 import { QuoteService } from 'src/ng2/app/services/quote/quote.service';
+import { QuoteStateService } from 'src/ng2/app/states/quote/quote-state.service';
 import { Quote } from '../class/quote';
 import { QuoteFilter } from '../class/quote-filter';
 import { QuotePreview } from '../class/quote-preview';
 import { QuoteSort } from '../class/quote-sort';
-import { QuoteStateService } from '../quote-create/quote-state.service';
 import { QuoteRealTimeService } from '../quote-realtime/quote-realtime.service';
 import { QuotesListService } from './services/quotes-list.service';
 

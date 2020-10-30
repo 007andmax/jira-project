@@ -1,9 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { QuotePreview } from '../class/quote-preview';
-import { QuoteStateService } from '../quote-create/quote-state.service';
 import * as moment from "moment";
-import { Company } from 'src/ng2/app/interfaces/company/company';
 import { QuoteService } from 'src/ng2/app/services/quote/quote.service';
 import { ModalQuoteComponent } from 'src/ng2/app/services/modal/modal-quote/modal-quote.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -11,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { ConfirmStateService } from '../../../shared/confirm/services/confirm-state.service';
 import { ARCHIVE_QUOTE } from 'src/ng2/app/const/confirm';
 import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
+import { QuoteStateService } from 'src/ng2/app/states/quote/quote-state.service';
 
 @Component({
   selector: 'app-quote-aside-preview',
@@ -27,8 +25,7 @@ export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
   constructor(private quoteStateService: QuoteStateService,
     private quoteServices: QuoteService,
     private modalService: NgbModal,
-    private confirmStateService: ConfirmStateService,
-    private companiesStateService: CompaniesStateService) { }
+    private confirmStateService: ConfirmStateService) { }
 
   ngOnInit() {
 

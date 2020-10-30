@@ -9,12 +9,13 @@ import { CompaniesService } from 'src/ng2/app/services/company/companies.service
 import { QuoteService } from 'src/ng2/app/services/quote/quote.service';
 import { BillableStateService } from 'src/ng2/app/states/billable/billable-state.service';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
+import { QuoteStateService } from 'src/ng2/app/states/quote/quote-state.service';
 import { InvoiceFormEditCustomerComponent } from '../../../billable/billable-aside/invoice-form/invoice-form-edit-customer/invoice-form-edit-customer.component';
 import { InvoiceNote } from '../../../billable/class/invoice-note';
 import { Quote } from '../../class/quote';
 import { QuoteAdd } from '../../class/quote-add';
 import { QuoteValdiate } from '../../class/quote-vildate';
-import { QuoteStateService } from '../../quote-create/quote-state.service';
+ 
 import { ServiceListQuoteComponent } from '../service-list-quote/service-list-quote.component';
 
 @Component({
@@ -204,5 +205,7 @@ export class QuoteAsideAddBodyComponent implements OnInit {
     this.quote.resetServices();
     this.validate.resetValidate();
   }
-
+  public trackById(index, item) {
+    return item.item.versionedId.id;
+  }
 }

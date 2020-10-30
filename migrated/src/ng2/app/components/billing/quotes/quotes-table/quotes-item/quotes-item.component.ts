@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Quote } from '../../class/quote';
 import * as moment from "moment";
-import { QUOTE_STATUS } from 'src/ng2/app/const/quote-status';
 import { User } from 'src/ng2/app/components/users/class/user';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { TicketsListService } from 'src/ng2/app/components/tickets/tickets/services/tickets-list.service';

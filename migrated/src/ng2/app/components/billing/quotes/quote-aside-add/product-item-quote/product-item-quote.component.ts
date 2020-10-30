@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { QuoteStateService } from 'src/ng2/app/states/quote/quote-state.service';
 import { QuoteAddProduct } from '../../class/quote-add-product';
-import { QuoteStateService } from '../../quote-create/quote-state.service';
+ 
 
 @Component({
   selector: 'app-product-item-quote',

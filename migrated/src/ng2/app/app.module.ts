@@ -37,13 +37,6 @@ import { PasswordManagerTableComponent } from './components/password-manager/pas
 import { PasswoordManagerHeaderComponent } from './components/password-manager/passwoord-manager-header/passwoord-manager-header.component';
 import { ApiPasswordManagerService } from './services/password-manager/api-password-manager.service';
 import { QuotesComponent } from './components/billing/quotes/quotes.component';
-import { QuoteCreateComponent } from './components/billing/quotes/quote-create/quote-create.component';
-import { QuoteCreateContentComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content.component';
-import { QuoteCreateHeaderComponent } from './components/billing/quotes/quote-create/quote-create-header/quote-create-header.component';
-import { QuoteCreateContentTopComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-top/quote-create-content-top.component';
-import { QuoteCreateContentBottomComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-bottom/quote-create-content-bottom.component';
-import { QuoteCreateContentNotesComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-notes/quote-create-content-notes.component';
-import { QuotePreviewComponent } from './components/billing/quotes/quote-preview/quote-preview.component';
 import { UserPipe } from './pipe/user.pipe';
 import { DateFormatPipe } from './pipe/date-format.pipe';
 import { CompanyPipe } from './pipe/company.pipe';
@@ -54,8 +47,6 @@ import { SanitizeHtmlPipe } from './pipe/sanitize-html.pipe';
 import { SelectClientCompanyComponent } from './components/shared/select-client-company/select-client-company.component';
 import { ProductListComponent } from './components/shared/product-list/product-list.component';
 import { ServicesListComponent } from './components/shared/services-list/services-list.component';
-import { ProductTableComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-bottom/product-table/product-table.component';
-import { AddItemComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-bottom/add-item/add-item.component';
 import { MultiDatepickerComponent } from './components/shared/multi-datepicker/multi-datepicker.component';
 import { LeftPanelBillingComponent } from './components/left-panel/left-panel-billing/left-panel-billing.component';
 import { ToNumerPipe } from './pipe/to-numer.pipe';
@@ -397,12 +388,6 @@ angular.module('quicktech')
     'quotesComponent',
     downgradeComponent({ component: QuotesComponent }))
   .directive(
-    'quoteCreateComponent',
-    downgradeComponent({ component: QuoteCreateComponent }))
-  .directive(
-    'quotePreviewComponent',
-    downgradeComponent({ component: QuotePreviewComponent }))
-  .directive(
     'recurringTicketsComponent',
     downgradeComponent({ component: RecurringTicketsComponent }))
   .directive(
@@ -569,18 +554,9 @@ angular.module('quicktech')
     PasswordCategoryPipe,
     SanitizeHtmlPipe,
     QuotesComponent,
-    QuoteCreateComponent,
-    QuoteCreateContentComponent,
-    QuoteCreateHeaderComponent,
-    QuoteCreateContentTopComponent,
-    QuoteCreateContentBottomComponent,
-    QuoteCreateContentNotesComponent,
-    QuotePreviewComponent,
     SelectClientCompanyComponent,
     ProductListComponent,
     ServicesListComponent,
-    ProductTableComponent,
-    AddItemComponent,
     MultiDatepickerComponent,
     LeftPanelBillingComponent,
     ToNumerPipe,
@@ -914,8 +890,6 @@ angular.module('quicktech')
     ModalQuoteComponent,
     ConfirmComponent,
     QuotesComponent,
-    QuoteCreateComponent,
-    QuotePreviewComponent,
     PasswordManagerComponent,
     CompaniesComponent,
     DownloadAgentComponent,

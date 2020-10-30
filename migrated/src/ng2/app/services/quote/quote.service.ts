@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
-import { QuoteStateService } from "../../components/billing/quotes/quote-create/quote-state.service";
 import { catchError, map, tap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { QuoteResult } from '../../components/billing/quotes/class/quote-result';
 import { NotificationStateService } from '../../components/shared/notification/services/notification-state.service';
 import { Quote } from '../../components/billing/quotes/class/quote';
+import { QuoteStateService } from '../../states/quote/quote-state.service';
  
 
 /**
@@ -18,18 +17,6 @@ import { Quote } from '../../components/billing/quotes/class/quote';
 export class QuoteService {
 
   private apiUrl = environment.apiUrl;
-  private itemsListArray = [];
-  private productsArray = [];
-  private servicesArray = [];
-  private offset = 30;
-  private quoteNumber = 'QUOTE_NUMBER_DESC';
-  private customerName = 'CUSTOMER_NAME_DESC';
-  private date = 'DATE_DESC';
-  private validUntil = 'VALID_UNTIL_DESC';
-  private amount = 'AMOUNT_DESC';
-  private deposit = 'DEPOSIT_DESC';
-  private sortType = null;
-
 
   /**
    * Product api service constructor
@@ -49,8 +36,6 @@ export class QuoteService {
    * @param notification - quote notification info
    */
   public createQuote(data, notification) {
-   
-     
     return this.http.post(`${this.apiUrl}saleQuotes`, data).pipe(
       tap(data => this.handleQuoteSent(data, (notification) ? 'Quote has been sent' : 'Quote has been saved')),
       catchError(this.handleError));
@@ -63,50 +48,8 @@ export class QuoteService {
    * @param notification - quote notification info
    */
   public editQuote(data) {
-    
-     
     return this.http.put(`${this.apiUrl}saleQuotes/${data.id}`, data).pipe(
       tap(data => this.handleQuoteSent(data, 'Quote has been saved')),
-      catchError(this.handleError));
-  }
-
-  /**
-   * Resend quote
-   * @param item - item list
-   * @param recipients - users list
-   */
-  public resend(item, recipients) {
-   /* this.itemsListArray = this.quoteStateService.getItemArray();
-    this.productsArray = this.getProductItems(this.itemsListArray, 'product');
-    this.servicesArray = this.getProductItems(this.itemsListArray, 'service');*/
-
-    this.productsArray = this.getProductItems([...item.products], 'product');
-    this.servicesArray = this.getProductItems([...item.services], 'service');
-    return this.http.put(`${this.apiUrl}saleQuotes/${item.id}`, {
-      "companyId": item.company.id,
-      "number": item.number,
-      "id": item.id,
-      "quoteItems": {
-        "type": "MIXED",
-        "shares": [],
-        "ticket": null,
-        "products": this.productsArray,
-        "services": this.servicesArray,
-      },
-      "requestPayment": item.requestPayment,
-      "draft": false,
-      "purchaseOrder": item.purchaseOrder,
-      "partialDeposit": item.partialDeposit,
-      "validUntil": item.validUntil,
-      "date": item.date,
-      "recipients": recipients,
-      "message": item.message,
-      "subject": item.subject,
-      "globalNote": item.globalNote,
-      "regularNote": item.regularNote,
-      "sendNotification": true
-    }).pipe(
-      tap(data => this.handleQuoteSent(data, 'Quote has been sent')),
       catchError(this.handleError));
   }
 
@@ -138,24 +81,6 @@ export class QuoteService {
       catchError(this.handleError));
   }
 
-
-  /**
-   * Get quote note
-   */
-  public getQuoteNote() {
-    return this.http.get(this.apiUrl + `invoice/invoiceNote/getAll`).pipe(
-      tap(data => data),
-      catchError(this.handleError));
-  }
-
-  /**
-   * Get time in ms
-   */
-  public getMsDate(value) {
-    const date = new Date(`${value.year}/${value.month}/${value.day}`);
-    return date.getTime()
-  }
-
   /**
    * Get services list
    * @param clientCompanyId - client company id
@@ -167,56 +92,13 @@ export class QuoteService {
   }
 
   /**
-   * Get product items by type
-   * @param itemsAray - items array
-   * @param type - item type
-   * @param onInitSaveOrCreate - onInitSaveOrCreate
-   */
-  public getProductItems(itemsAray, type, onInitSaveOrCreate = false) {
-    if (type === 'service') {
-      itemsAray = itemsAray.filter((item) => item.hasOwnProperty('rate'));
-      return itemsAray.map((item, index) => {
-        let quantity = JSON.parse(JSON.stringify(item.quantity));
-        let description = "";
-        try {
-          description = JSON.parse(JSON.stringify(item.description));
-        } catch (error) {
-
-        }
-        if (onInitSaveOrCreate) {
-          item.quantity = '1';
-          delete item.description;
-        }
-        return {
-          item: item,
-          "itemOrder": index,
-          "quantity": quantity,
-          "discountType": "PERCENT",
-          "description": description
-        }
-      })
-    } else {
-      itemsAray = itemsAray.filter((item) => !item.hasOwnProperty('rate'));
-      return itemsAray.map((item, index) => ({
-        item: item,
-        "itemOrder": index,
-        "quantity": item.quantity,
-        "discountType": "PERCENT"
-      }))
-    }
-  }
-
-  /**
    * Get quote object
    * @param data - quote info
    */
   public getQuotes(data) {
-    //data.type && this.getSortType(data.type);
-    
     return this.http.post(this.apiUrl + 'saleQuotes/search', data).pipe(
       map((data: any) => data.map(item => new Quote(item))),
       catchError(this.handleError));
-      
   }
 
   /**
@@ -338,68 +220,18 @@ export class QuoteService {
     
   }
 
-  public backToQuoteList() {
-    this.quoteStateService.goToQuote();
-  }
-
-  /**
-   * Get sort type
-   * @param type - type of sort
-   */
-  public getSortType(type) {
-    switch (type) {
-      case 'number':
-        this.sortType = this.quoteNumber === 'QUOTE_NUMBER_ASC' ? 'QUOTE_NUMBER_DESC' : 'QUOTE_NUMBER_ASC';
-        this.quoteNumber = this.sortType;
-        break;
-      case 'customerName':
-        this.sortType = this.customerName === 'CUSTOMER_NAME_DESC' ? 'CUSTOMER_NAME_ASC' : 'CUSTOMER_NAME_DESC';
-        this.customerName = this.sortType;
-        break;
-      case 'date':
-        this.sortType = this.date === 'DATE_DESC' ? 'DATE_ASC' : 'DATE_DESC';
-        this.date = this.sortType;
-        break;
-      case 'validUntil':
-        this.sortType = this.validUntil === 'VALID_UNTIL_DESC' ? 'VALID_UNTIL_ASC' : 'VALID_UNTIL_DESC';
-        this.validUntil = this.sortType;
-        break;
-      case 'amount':
-        this.sortType = this.amount === 'AMOUNT_DESC' ? 'AMOUNT_ASC' : 'AMOUNT_DESC';
-        this.amount = this.sortType;
-        break;
-      case 'deposit':
-        this.sortType = this.deposit === 'DEPOSIT_DESC' ? 'DEPOSIT_ASC' : 'DEPOSIT_DESC';
-        this.deposit = this.sortType;
-        break;
-    }
-  }
   /**
    * check error
    * @param error - error
    */
   private handleError = (error) => {
     let err = error.error;
-    this.quoteStateService.setError((err.validationResults && err.validationResults.saleQuotePostDto) ? err.validationResults.saleQuotePostDto : err.message);
     return throwError(error);
   }
 
   private handleQuoteSent = (data, message) => {
     this.notificationStateService.oninitShowNotification(message);
-    // this.quoteStateService.setQuoteResult(message);
-    // this.quoteStateService.setHandleQuoteHasSent();
     return data;
   }
-
-  public setDefaultTypes() {
-    this.offset = 30;
-    this.quoteNumber = 'QUOTE_NUMBER_DESC';
-    this.customerName = 'CUSTOMER_NAME_DESC';
-    this.date = 'DATE_DESC';
-    this.validUntil = 'VALID_UNTIL_DESC';
-    this.amount = 'AMOUNT_DESC';
-    this.deposit = 'DEPOSIT_DESC';
-    this.sortType = null;
-  }
-
+ 
 }
