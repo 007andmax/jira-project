@@ -122,13 +122,16 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
   }
   getTotalTaxes() {
     let totalTaxes = 0;
-    this.quote.services.forEach(service => {
-      totalTaxes += service.taxes.reduce((a, b) => a + (b.rate * service.quantity), 0);
+
+    totalTaxes += this.quote.services.reduce((a, b) => a + b.taxSum, 0);
+    totalTaxes += this.quote.products.reduce((a, b) => a + b.taxSum, 0);
+  /*  this.quote.services.forEach(service => {
+      totalTaxes += service.item.taxes.reduce((a, b) => a + (b.rate * service.quantity), 0);
     })
     this.quote.products.forEach(product => {
-      totalTaxes += product.taxes.reduce((a, b) => a + (b.rate * product.quantity), 0);
-    })
-
+      totalTaxes += product.item.taxes.reduce((a, b) => a + (b.rate * product.quantity), 0);
+    })*/
+    
     return totalTaxes;
   }
   
@@ -169,12 +172,14 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
     this.quote.products.splice(i, 1);
   }
   getPriceService(service) {
-    service.sum = this.quoteStateService.getPrice(service.rate, service.quantity, service.taxes) + service.taxes.reduce((a, b) => a + (b.rate * service.quantity), 0);
-    service.taxSum = service.taxes.reduce((a, b) => a + (b.rate * service.quantity), 0);
-    return this.quoteStateService.roundToTwo(this.quoteStateService.getPrice(service.rate, service.quantity, service.taxes) + service.taxes.reduce((a, b) => a + (b.rate * service.quantity), 0));
+    service.sum = this.quoteStateService.getPrice(service.rate, service.quantity, service.taxes) + this.getTaxPrice(service);
+    service.taxSum = this.getTaxPrice(service);
+    return this.quoteStateService.roundToTwo(this.quoteStateService.getPrice(service.rate, service.quantity, service.taxes) + this.getTaxPrice(service));
 
   }
-
+  public getTaxPrice(service) {
+    return service.taxes.reduce((a, b) => a + ((b.rate / 100) * service.rate * service.quantity), 0);;
+  }
   onEditCustomer() {
     this.companiesService.getCompany(this.quoteCompany.id).subscribe((data: any) => {
       let customerCompany: CompanyProfile = new CompanyProfile();

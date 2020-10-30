@@ -14,12 +14,14 @@ export class ProductItemQuoteEditComponent implements OnInit {
   constructor(  private quoteStateService: QuoteStateService,) { }
 
   ngOnInit() {
-
+    this.product.markup = this.getMarkups();
   }
   ngDoCheck() {
-    this.product.sum = this.quoteStateService.getPrice(this.product.sale, this.product.quantity, this.product.taxes) + this.product.taxes.reduce((a, b) => a + (b.rate * this.product.quantity), 0);;
-    this.product.taxSum = this.product.taxes.reduce((a, b) => a + (b.rate * this.product.quantity), 0);
-
+    this.product.sum = this.quoteStateService.getPrice(this.product.sale, this.product.quantity, this.product.taxes) + this.getTaxPrice();
+    this.product.taxSum = this.getTaxPrice();
+  }
+  public getTaxPrice() {
+    return this.product.taxes.reduce((a, b) => a + ((b.rate / 100) * this.product.sale * this.product.quantity), 0);;
   }
   changeSales(val) {
     let value = Number(val);
@@ -45,8 +47,9 @@ export class ProductItemQuoteEditComponent implements OnInit {
     this.onRemoveProduct.emit(null);
   }
   getPriceProduct(product) {
-       return this.quoteStateService.roundToTwo(this.quoteStateService.getPrice(product.sale, product.quantity, product.taxes) + product.taxes.reduce((a, b) => a + (b.rate * product.quantity), 0));
+       return this.quoteStateService.roundToTwo(this.quoteStateService.getPrice(product.sale, product.quantity, product.taxes) + this.getTaxPrice());
   }
+  
   onCheckSaleCost() {
     this.product.checkSaleCost();
   }

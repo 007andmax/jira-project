@@ -113,7 +113,7 @@ export class QuoteAsideAddBodyComponent implements OnInit {
   }
 
   getSubTotalServices() {
-    return this.quote.services.reduce((a, b) => a + (b.item.rate  * b.quantity), 0);
+    return this.quote.services.reduce((a, b) => a + (b.item.rate * b.quantity), 0);
   }
   getSubTotalProducts() {
     return this.quote.products.reduce((a, b) => a + (b.item.sale * b.quantity), 0);
@@ -123,12 +123,15 @@ export class QuoteAsideAddBodyComponent implements OnInit {
   }
   getTotalTaxes() {
     let totalTaxes = 0;
-    this.quote.services.forEach(service => {
+
+    totalTaxes += this.quote.services.reduce((a, b) => a + b.taxSum, 0);
+    totalTaxes += this.quote.products.reduce((a, b) => a + b.taxSum, 0);
+  /*  this.quote.services.forEach(service => {
       totalTaxes += service.item.taxes.reduce((a, b) => a + (b.rate * service.quantity), 0);
     })
     this.quote.products.forEach(product => {
       totalTaxes += product.item.taxes.reduce((a, b) => a + (b.rate * product.quantity), 0);
-    })
+    })*/
     
     return totalTaxes;
   }
@@ -164,12 +167,14 @@ export class QuoteAsideAddBodyComponent implements OnInit {
     this.quote.products.splice(i,1);
   }
   getPriceService(service) {
-    service.sum =  this.quoteStateService.getPrice(service.item.rate, service.quantity, service.item.taxes) + service.item.taxes.reduce((a, b) => a + (b.rate * service.quantity), 0);
-    service.taxSum =    service.item.taxes.reduce((a, b) => a + (b.rate * service.quantity), 0);
-    return this.quoteStateService.roundToTwo(this.quoteStateService.getPrice(service.item.rate, service.quantity, service.item.taxes) + service.item.taxes.reduce((a, b) => a + (b.rate * service.quantity), 0));
+    service.sum =  this.quoteStateService.getPrice(service.item.rate, service.quantity, service.item.taxes) + this.getTaxPrice(service);
+    service.taxSum =    this.getTaxPrice(service);
+    return this.quoteStateService.roundToTwo(this.quoteStateService.getPrice(service.item.rate, service.quantity, service.item.taxes) + this.getTaxPrice(service));
 
   }
- 
+  public getTaxPrice(service) {
+    return service.item.taxes.reduce((a, b) => a + ((b.rate / 100) * service.item.rate * service.quantity), 0);;
+  }
   onEditCustomer() {
     this.companiesService.getCompany(this.quoteCompany.id).subscribe((data: any) => {
       let customerCompany: CompanyProfile = new CompanyProfile();
