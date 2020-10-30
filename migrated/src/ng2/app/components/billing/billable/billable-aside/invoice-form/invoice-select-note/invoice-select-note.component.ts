@@ -62,6 +62,7 @@ export class InvoiceSelectNoteComponent implements OnInit, OnDestroy {
       this.onClosedDropDown.emit(null);
     }   
   }
+  
   onCheckChange(event) {
     this.onChangeInput.emit(event.target.value);
   }

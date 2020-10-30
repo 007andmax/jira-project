@@ -1,6 +1,6 @@
 <tr>
   <td class="new-quote-table__col-item" [textContent]="product.manufacture"> </td>
-  <td class="new-quote-table__col-desc" ><input type="text" [(ngModel)]="product.description" class="qt-input-in-table" /></td>
+  <td class="new-quote-table__col-desc"  [textContent]="product.description"></td>
   <td class="new-quote-table__col-unit-price">
     <input class="qt-input-in-table"
       decimalNumber
@@ -8,7 +8,7 @@
       placeholder="0.00"
       [value]="product.cost"
       (blur)="onCheckSaleCost()"
-      (onChange)="product.cost=$event"/>
+      (onChange)="changeCost($event)"/>
     </td>
   <td class="new-quote-table__col-markup">
     <input class="qt-input-in-table"
@@ -16,7 +16,7 @@
     [useFixed]="true"
     placeholder="0.00"
     [value]="product.markup"
-    (onChange)="product.markup=$event"
+    (onChange)="changeMarkup($event)"
       />
   </td>
   <td class="new-quote-table__col-sales-price">
@@ -26,7 +26,7 @@
       [useFixed]="true"
       placeholder="0.00"
       [value]="product.sale"
-      (onChange)="product.sale=$event"
+      (onChange)="changeSales($event)"
       (blur)="onCheckSaleCost()"
     />
     <mat-error class="qt-tooltip-error" *ngIf="!product.validateSaleCost">

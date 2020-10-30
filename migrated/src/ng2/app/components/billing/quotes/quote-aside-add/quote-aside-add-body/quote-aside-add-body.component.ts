@@ -66,7 +66,7 @@ export class QuoteAsideAddBodyComponent implements OnInit {
     });
     if (this.quoteStateService.getQuoteForCopy()) this.onInitCopy();
     this.getInvoiceNote();
-    this.quote.regularNote.setDefault();
+    if (!this.quoteStateService.getQuoteForCopy()) this.quote.regularNote.setDefault();
     this.sub.add(getChangeCompanies);
   }
   onInitCopy() {
@@ -185,11 +185,11 @@ export class QuoteAsideAddBodyComponent implements OnInit {
     }).join("<br>");
   }
   onChangeQuoteDate(data) {
-    this.quote.setQuoteDate((data) ? data : new Date().getTime());
+    this.quote.setQuoteDate(data.day, data.month, data.year, this.companiesState.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.validate.resetValidate();
   }
   onChangeExpiryDate(data) {
-    this.quote.setExpiryDate((data) ? data : new Date().getTime());
+    this.quote.setExpiryDate(data.day, data.month, data.year, this.companiesState.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.validate.resetValidate();
   }
   onSelectCompany(data) {

@@ -19,7 +19,8 @@ export class QuotePreview extends Quote {
             }
             this.products = data.products.map(item => new QuoteProduct(item));
             this.services = data.services.map(item => new QuoteService(item));
-           if (data.regularNote) this.regularNote = new InvoiceNote(data.regularNote);
+            if (data.regularNote) this.regularNote = new InvoiceNote(data.regularNote);
+        console.log("data",data);
         }
     }
 

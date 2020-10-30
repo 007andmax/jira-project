@@ -190,11 +190,12 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
     }).join("<br>");
   }
   onChangeQuoteDate(data) {
-    this.quote.setQuoteDate((data) ? data : new Date().getTime());
+    this.quote.setQuoteDate(data.day, data.month, data.year, this.companiesState.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.validate.resetValidate();
   }
   onChangeExpiryDate(data) {
-    this.quote.setExpiryDate((data) ? data : new Date().getTime());
+    this.quote.setExpiryDate(data.day, data.month, data.year, this.companiesState.getCurrentCompany().addresses[0].timeZone.timeOffset);
+ 
     this.validate.resetValidate();
   }
  

@@ -63,11 +63,31 @@ export class QuoteEdit extends QuotePreview {
     public setCompany(data) {
         this.company = data;
     }
-    public setQuoteDate(data) {
-        this.date = data;
+    public setQuoteDate(day, month, year, timeOffset) {
+        let current = new Date();
+
+        if (day !== current.getDate() || current.getMonth() !== (month - 1)) {
+            let dateDatePicker = new Date(year, month - 1, day).getTime(); // timestamp from calendar
+            let finalDate = new Date(dateDatePicker - (current.getTimezoneOffset() * 60000/* dont touch*/) - timeOffset /* timezone.timeOffset */);
+            this.date = finalDate.getTime();
+        } else {
+            let currentTime = new Date(current.getFullYear(), current.getMonth(), current.getDate()).getTime();
+            let finalDate = new Date(currentTime - (current.getTimezoneOffset() * 60000) - timeOffset);
+            this.date = finalDate.getTime();
+        }
     }
-    public setExpiryDate(data) {
-        this.validUntil = data;
+    public setExpiryDate(day, month, year, timeOffset) {
+        let current = new Date();
+
+        if (day !== current.getDate() || current.getMonth() !== (month - 1)) {
+            let dateDatePicker = new Date(year, month - 1, day).getTime(); // timestamp from calendar
+            let finalDate = new Date(dateDatePicker - (current.getTimezoneOffset() * 60000/* dont touch*/) - timeOffset /* timezone.timeOffset */);
+            this.validUntil = finalDate.getTime();
+        } else {
+            let currentTime = new Date(current.getFullYear(), current.getMonth(), current.getDate()).getTime();
+            let finalDate = new Date(currentTime - (current.getTimezoneOffset() * 60000) - timeOffset);
+            this.validUntil = finalDate.getTime();
+        }
     }
     public setRegulatNote(data) {
         this.regularNote = new InvoiceNote(data);
