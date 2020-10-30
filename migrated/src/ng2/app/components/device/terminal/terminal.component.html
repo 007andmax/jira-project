@@ -554,10 +554,10 @@
                     placeholder="Command Title"
                     [(ngModel)]="scriptDetailModal.title" 
                     name="title" 
-                    #Title="ngModel" 
+                    #Title1="ngModel" 
                     [disabled]="scriptDetailModal.default === true"
                     required 
-                    [class.validation-error]="submitted == true && Title.errors && Title.errors.required"
+                    [class.validation-error]="submitted == true && Title1.errors && Title1.errors.required"
                   />
                 </div>
               </div>
@@ -616,11 +616,11 @@
                     <ul id="cmd_detail_line">
                       <li *ngFor="let line of lineNumberDetail">{{line}}</li>
                     </ul>
-                    <textarea wrap="off" class="form-input" [(ngModel)]="scriptDetailModal.command" name="command" (keyup)="countLineNumberDetail()" [disabled]="scriptDetailModal.default === true">
+                    <textarea wrap="off" class="form-input" [(ngModel)]="scriptDetailModal.command" name="command1" (keyup)="countLineNumberDetail()" [disabled]="scriptDetailModal.default === true">
                  
                     </textarea>
                   </div>
-                  <textarea *ngIf="showDescription === true" class="form-input" [(ngModel)]="scriptDetailModal.description" name="description" [disabled]="scriptDetailModal.default === true"></textarea>
+                  <textarea *ngIf="showDescription === true" class="form-input" [(ngModel)]="scriptDetailModal.description" name="description1" [disabled]="scriptDetailModal.default === true"></textarea>
                 </div>
               </div>
             </div>

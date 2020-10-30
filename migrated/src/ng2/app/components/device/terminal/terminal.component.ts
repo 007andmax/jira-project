@@ -284,10 +284,10 @@ export class TerminalComponent implements OnInit {
   
   createCommand() {
     this.submitted = true;
-    this.loading = true;
     if (this.form.invalid) {
       return;
     }
+    this.loading = true;
     let data = {
       title: this.commandModal.title,
       categoryId: this.commandModal.categoryId !== undefined ? this.commandModal.categoryId : this.cmdCategoryReadList.filter(val => val.name === this.commandModal.category)[0].id,
