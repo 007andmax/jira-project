@@ -151,11 +151,14 @@ export class TerminalComponent implements OnInit {
       if (Object.keys(data).length > 0) {
       let obj = data[localStorage.getItem('agentId')]
       this.his = obj;
-      let arr = obj.split(/\r*\n/);
+      let arr = obj.split('↵');
+      if (arr.length == 1) {
+        arr = obj.split(/\r*\n/);
+      }
       let index = 0;
       let arr1 = [];
       
-      arr.forEach(element => {
+      arr.forEach((element, index) => {
         if (Date.parse(element)) {
           if (index !== 0) {
             this.historyList.push(arr1);
@@ -166,6 +169,9 @@ export class TerminalComponent implements OnInit {
           }
         }
         arr1.push(element);
+        if (index === arr.length - 1) {
+          this.historyList.push(arr1);
+        }
       });
     }
     },
@@ -284,10 +290,10 @@ export class TerminalComponent implements OnInit {
   
   createCommand() {
     this.submitted = true;
-    this.loading = true;
     if (this.form.invalid) {
       return;
     }
+    this.loading = true;
     let data = {
       title: this.commandModal.title,
       categoryId: this.commandModal.categoryId !== undefined ? this.commandModal.categoryId : this.cmdCategoryReadList.filter(val => val.name === this.commandModal.category)[0].id,
