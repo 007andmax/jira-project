@@ -30,7 +30,6 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   templeteInfo: any;
   emailPreviewHtml: any;
   gettingEmailTemplatePreview: boolean;
-
   type = '';
   emailPages: any;
   elEditor: any = "";

@@ -95,8 +95,14 @@ export class ProductComponent implements OnInit {
     if (this.rate || this.rate === 0) {
       data = {
         rate: this.rate,
-        setForOldExpenses: this.factItem
+        setForOldExpenses: false
       };
+
+      if (this.category.commissionRate === null) {
+        if (this.factItem === true) {
+          data.setForOldExpenses = true;
+        }
+      }
       this.loading = true;$(".loading").css("display", "block");
       this.commissionService
         .setCategoryRate(this.id, data.rate, data.setForOldExpenses)
@@ -106,11 +112,15 @@ export class ProductComponent implements OnInit {
             this.loading = false;$(".loading").css("display", "none");
             this.category.commissionRate = res.commissionRate.toFixed(2);
             this.selectedIdx = -1;
+            this.factItem = false;
+            this.confirmPopup = false;
           },
           error => {
             this.selectedIdx = -1;
             this.loading = false;$(".loading").css("display", "none");
             this.toastrService.error('Bad Request');
+            this.factItem = false;
+            this.confirmPopup = false;
           }
         );
     } else {
@@ -118,22 +128,22 @@ export class ProductComponent implements OnInit {
     }
   }
 
-  confirmDelete(data: any){	
-        this.category = data;	
-        this.deletePopup = true;	
-      }	
-    	
-      confirmEdit(rate, id: string, category: any){	
-        this.rate = rate;	
-        this.id = id;	
-        this.category = category;	
-        if (this.category.commissionRate === null) {	
-          this.confirmPopup = true;	
-        } else {	
-          this.confirmPopup = false;	
-          this.factItem = false;	
-          this.setCategoryRate();	
-        }	
-        	
-      }
+  confirmDelete(data: any){
+    this.category = data;
+    this.deletePopup = true;
+  }
+
+  confirmEdit(rate, id: string, category: any){
+    this.rate = rate;
+    this.id = id;
+    this.category = category;
+    if (this.category.commissionRate === null) {
+      this.confirmPopup = true;
+    } else {
+      this.confirmPopup = false;
+      this.factItem = false;
+      this.setCategoryRate();
+    }
+    
+  }
 }
