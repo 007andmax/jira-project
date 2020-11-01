@@ -13,11 +13,11 @@
     <div class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"  id="dropdownBasic1" ngbDropdownToggle></div>
 
     <ul class="qt-dropdown-menu invoice-items-dropdown"  ngbDropdownMenu aria-labelledby="dropdownBasic1">
-      <li class="pointer" ngbDropdownItem (click)="copyContract()"  >Copy contract</li>
-      <li class="pointer" ngbDropdownItem   [hidden]="contract.status == 'TERMINATED' || contract.status == 'EXPIRED' || contract.type == 'HOURLY'" (click)="forceCreate()">Force create</li>
-      <li class="pointer" ngbDropdownItem (click)="editContract()"  *ngIf="contract.status !== 'TERMINATED'">Edit contract</li>
-      <li class="pointer" ngbDropdownItem (click)="terminateContract()"  *ngIf="contract.status !== 'TERMINATED'">Terminate</li>
-      <li class="pointer" ngbDropdownItem (click)="deleteContract()"  *ngIf="getPermissions('DELETE_SERVICE_AGREEMENTS') && contract.status !== 'CURRENT'">Delete agreement</li>
+      <li class="pointer" ngbDropdownItem (click)="copyContract()"><div class="icon__copy-gray qt-sz-16 qt-bg-contain qt-mr-8"></div>Copy contract</li>
+      <li class="pointer" ngbDropdownItem [hidden]="contract.status == 'TERMINATED' || contract.status == 'EXPIRED' || contract.type == 'HOURLY'" (click)="forceCreate()"><div class="icon__payment-note qt-sz-16 qt-bg-contain qt-mr-8"></div>Force create</li>
+      <li class="pointer" ngbDropdownItem (click)="editContract()"  *ngIf="contract.status !== 'TERMINATED'"><div class="icon__edit qt-sz-16 qt-bg-contain qt-mr-8"></div>Edit contract</li>
+      <li class="pointer" ngbDropdownItem (click)="terminateContract()"  *ngIf="contract.status !== 'TERMINATED'"><div class="icon__terminate qt-sz-16 qt-bg-contain qt-mr-8"></div>Terminate</li>
+      <li class="pointer" ngbDropdownItem (click)="deleteContract()"  *ngIf="getPermissions('DELETE_SERVICE_AGREEMENTS') && contract.status !== 'CURRENT'"><div class="icon__remove qt-sz-16 qt-bg-contain qt-mr-8"></div>Delete agreement</li>
     </ul>
   </td>
 </tr>

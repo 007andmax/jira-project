@@ -89,14 +89,16 @@
           <tr>
             <td class="new-quote-table__col-item" [textContent]="service.item.name"></td>
             <td class="new-quote-table__col-desc"><input type="text" [(ngModel)]="service.description" class="qt-input-in-table" /></td>
-            <td class="new-quote-table__col-unit-price" ></td>
-            <td class="new-quote-table__col-markup" ></td>
-            <td class="new-quote-table__col-sales-price" [textContent]="service.rate | currency"></td>
-            <td class="new-quote-table__col-quantify">  <input class="qt-input-in-table"
-              decimalNumber
-              [value]="service.quantity"
-              (onChange)="service.quantity=$event"
-              /></td>
+            <td class="new-quote-table__col-unit-price td-padding-side" ></td>
+            <td class="new-quote-table__col-markup td-padding-side" ></td>
+            <td class="new-quote-table__col-sales-price td-padding-side" [textContent]="service.rate | currency"></td>
+            <td class="new-quote-table__col-quantify">
+              <input class="qt-input-in-table"
+                decimalNumber
+                [value]="service.quantity"
+                (onChange)="service.quantity=$event"
+                />
+            </td>
             <td class="new-quote-table__col-tax" [innerHTML]="getSelectedTaxes(service.item.taxes)"> </td>
             <td class="new-quote-table__col-amount" [textContent]="getPriceService(service) | currency"></td>
             <td> <div class="icon__raw-clear qt-ic-c qt-sz-16" (click)="removeService(i)"></div></td>

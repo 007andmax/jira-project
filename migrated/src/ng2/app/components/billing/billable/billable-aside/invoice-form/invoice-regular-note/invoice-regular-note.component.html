@@ -6,7 +6,7 @@
   </div>
   <div >
     <div class="qt-mb-16 qt-df" style="display: flex !important;" *ngIf="toogleCustomerNote" ngbDropdown [autoClose]="'inside'" #addNoteDd="ngbDropdown">
-      <app-invoice-select-note [editItem]="selectedNote"  [placeholder]="'Select Saved Notes'"   [class]="['light-dropdown']"
+      <app-invoice-select-note [editItem]="selectedNote"  [placeholder]="'Select Saved Notes'"    [class]="['light-dropdown']"
       [field]="'title'"   [list]="regularNotes" (onChangeInput)="onCheckUpdateTitleNote($event)"
         (onSelectedItem)="onSelectNotes($event)"></app-invoice-select-note>
 

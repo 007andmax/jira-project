@@ -1,6 +1,6 @@
 <tr>
   <td class="new-quote-table__col-item" [textContent]="product.item.manufacture"> </td>
-  <td class="new-quote-table__col-desc" [textContent]="product.item.description"></td>
+  <td class="new-quote-table__col-desc td-padding-side" [textContent]="product.item.description"></td>
   <td class="new-quote-table__col-unit-price">
     <input class="qt-input-in-table"
       decimalNumber
@@ -14,7 +14,7 @@
   <td class="new-quote-table__col-markup">
     <input class="qt-input-in-table"
       decimalNumber
- 
+
       placeholder="0.00"
       [value]="product.markup"
       (onChange)="changeMarkup($event)"

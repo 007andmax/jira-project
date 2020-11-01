@@ -34,10 +34,10 @@
     }
 
     &__date {
-      max-width: 96px;
-      min-width: 96px;
-      width: 96px;
-      padding-left: 8px;
+      max-width: 113px;
+      min-width: 113px;
+      width: 113px;
+      padding-left: 16px;
       padding-right: 8px;
       padding-top: 14px;
     }
@@ -153,6 +153,16 @@
     z-index: 5;
 
 
+    app-invoice-regular-note .dropdown-menu{
+      min-height: 190px;
+      app-invoice-select-note {
+        min-width: 100%;
+      }
+    }
+    app-invoice-select-note {
+      width: 100% !important;
+    }
+
     .quote-aside-scroll-content {
       overflow: auto;
       height: calc(100% - 127px);
@@ -224,8 +234,8 @@
         max-width: 60px;
       }
       &__col-sales-price {
-        width: 85px;
-        max-width: 85px;
+        width: 90px;
+        max-width: 90px;
       }
       &__col-quantify {
         width: 70px;
@@ -250,6 +260,12 @@
           padding-right: 0;
         }
       }
+
+      .td-padding-side {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+      }
+
     }
 
     app-product-list-quote {
@@ -259,11 +275,9 @@
     }
     app-service-list-quote {
       .list-services {
-        min-width: 180px;
         li {
           white-space: nowrap;
           overflow: hidden;
-          max-width: 180px;
           text-overflow: ellipsis;
         }
       }

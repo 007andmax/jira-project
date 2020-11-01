@@ -1,18 +1,20 @@
-<div class="product-dropdown-new-ng light-dropdown select-product" ngbDropdown [autoClose]="'outside'" #products="ngbDropdown" (openChange)="onCloseProducts($event)" >
+<div class="product-list-quote product-dropdown-new-ng light-dropdown select-product" ngbDropdown [autoClose]="'outside'" #products="ngbDropdown" (openChange)="onCloseProducts($event)" >
   <mat-error  class="qt-tooltip-error qt-w-auto-important" *ngIf="!validate">
     Product is required
   </mat-error>
   <button class="qt-btn --outline --small"   id="dropdownProducts" ngbDropdownToggle>+ Add Product</button>
   <div class=select-product__dropdown ngbDropdownMenu aria-labelledby="dropdownProducts" >
     <div class="select-product__header">
+      <div class="qt-pos-rel qt-w100">
+        <div class="icon__search product-search-icon qt-sz-16 qt-bg-contain"></div>
         <input class="pointer select-product__input" type="text"
-        [ngClass]="{'--input-error' : !validate}" placeholder="Search or Add product" (input)="onSearch($event)"
-          id="dropdownProducts"  >
-          <span *ngIf="itemList">
-            <i *ngIf="selectedItem"
-               class="icn-sm icn-remove-old"
-               (click)="clear($event)"></i>
-          </span>
+          [ngClass]="{'--input-error' : !validate}" placeholder="Type an item name" (input)="onSearch($event)"
+          id="dropdownProducts">
+      </div>
+      <span class="qt-sz-16" *ngIf="itemList && selectedItem">
+        <i  class="icn-sm icn-remove-old"
+            (click)="clear($event)"></i>
+      </span>
     </div>
     <ngb-accordion #acc="ngbAccordion" class="item-list products-accordion"  >
       <ngb-panel   *ngFor="let item of itemList | filter : resetSearch : search"  > <!--| filter :'name' : search -->
@@ -41,7 +43,7 @@
         </ng-template>
       </ngb-panel>
     </ngb-accordion>
-    <div class="select-product__header-add-product" (click)="onCreateProduct()">+ Add New Item</div>
+    <div class="select-product__footer-add-product qt-ff-gm" (click)="onCreateProduct()">+ Add New Item</div>
   </div>
   <div *ngIf="isCreateproduct" [ngClass]="classAddProduct">
     <div class="create-product --modal">

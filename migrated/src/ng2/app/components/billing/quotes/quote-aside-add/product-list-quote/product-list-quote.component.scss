@@ -1,13 +1,10 @@
 .products-accordion {
     position: static;
   }
-  
   .dropdown-menu {
     min-height: 350px;
     width: 100%;
   }
-  
-  
   .select-product {
     &__input {
       width: 100%;
@@ -22,7 +19,6 @@
         color: #9ca5b6;
       }
     }
-  
     &__dropdown {
       &::-webkit-scrollbar-thumb {
         background: #929eac;
@@ -31,7 +27,6 @@
       box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
       border: solid 1px #dfe3e8;
     }
-  
     &__header {
       padding: 20px 24px;
       display: flex;
@@ -43,20 +38,30 @@
       box-shadow: 0px 0px 7px 1px #c4cbd5;
       justify-content: space-between;
     }
-  
+
     &__header-title {
       font-size: 11px;
       font-weight: 600;
       text-transform: uppercase;
     }
-  
+
     &__header-add-product {
       font-size: 12px;
       font-weight: 500;
       color: #16a4fa;
       cursor: pointer;
     }
-  
+
+    &__footer-add-product {
+      font-size: 12px;
+      font-weight: 500;
+      color: #16a4fa;
+      cursor: pointer;
+      padding: 12px 16px;
+      border-top: 1px solid #dfe3e8;
+
+    }
+
     &__item-title {
       padding: 8px 24px !important;
       display: flex !important;
@@ -64,18 +69,18 @@
       justify-content: space-between;
       font-weight: 500;
     }
-  
+
     &__expand {
       width: 16px;
       height: 16px;
       cursor: pointer;
     }
-  
+
     /deep/ .card {
       &.opened-card {
         padding: 0 24px 16px 24px;
         background-color: #f4f6f8;
-  
+
         .select-product {
           &__item-title {
             background: transparent;
@@ -84,12 +89,12 @@
             padding-left: 0 !important;
             padding-right: 0 !important;
           }
-  
+
           &__expand {
             background-image: url("../../../../../../assets/img/icons/collapse.svg");
           }
         }
-  
+
         .category-product {
             padding: 11px 16px !important;
             background: white;
@@ -131,11 +136,11 @@
                 white-space: nowrap;
               }
             }
-  
+
             &__title-price {
               width: 100%;
             }
-  
+
             .title {
               margin-right: 30px;
               font-size: 13px;
@@ -165,4 +170,21 @@
       display: none;
     }
    }
-  
+
+
+.product-list-quote {
+  .select-product__header {
+    padding: 16px;
+  }
+  .product-search-icon {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    z-index: 1;
+  }
+  .select-product__input {
+    background: #f4f6f8;
+    position: relative;
+    padding-left: 32px;
+  }
+}

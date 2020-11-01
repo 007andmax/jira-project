@@ -89,9 +89,9 @@
           <tr>
             <td class="new-quote-table__col-item" [textContent]="service.name"></td>
             <td class="new-quote-table__col-desc"><input type="text" [(ngModel)]="service.description" class="qt-input-in-table" /></td>
-            <td class="new-quote-table__col-unit-price" ></td>
-            <td class="new-quote-table__col-markup" ></td>
-            <td class="new-quote-table__col-sales-price" [textContent]="service.rate | currency"></td>
+            <td class="new-quote-table__col-unit-price td-padding-side" ></td>
+            <td class="new-quote-table__col-markup td-padding-side" ></td>
+            <td class="new-quote-table__col-sales-price td-padding-side" [textContent]="service.rate | currency"></td>
             <td class="new-quote-table__col-quantify">
               <input class="qt-input-in-table"
                 decimalNumber
@@ -128,7 +128,7 @@
         <app-product-list-quote class="qt-mr-8" (selectedProductItem)="selectProduct($event)"></app-product-list-quote>
         <app-service-list-quote #servicesList [quoteCompany]="quoteCompany" (onSelect)="onAddService($event)"></app-service-list-quote>
       </div>
-      <app-invoice-regular-note *ngIf="notes"   [invoiceNotes]="notes" (onUpdateInvoiceData)="updateInvoiceData($event)"></app-invoice-regular-note>
+      <app-invoice-regular-note *ngIf="notes"  [invoiceNotes]="notes" (onUpdateInvoiceData)="updateInvoiceData($event)"></app-invoice-regular-note>
     </div>
     <div>
       <div class="quote-total qt-color-dark" >
