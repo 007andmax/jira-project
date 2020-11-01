@@ -152,6 +152,12 @@
     height: calc(100vh - 79px);
     z-index: 5;
 
+    &.additional-padding {
+      .quote-aside-scroll-content {
+        padding-top: 100px !important;
+      }
+    }
+
 
     app-invoice-regular-note .dropdown-menu{
       min-height: 190px;
