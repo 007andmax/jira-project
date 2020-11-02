@@ -1,8 +1,9 @@
 <div class="invoice-preview qt-pos-rel">
 
-  <!-- <div class="invoice-preview__status --invoiced"></div> -->
-  <!-- <div class="invoice-preview__status --ticket"></div> -->
-  <!-- <div class="invoice-preview__status --approved"></div> -->
+  <div class="invoice-preview__status" [ngClass]="{'--invoiced' :quote.status === 'INVOICED',
+  '--ticket' :quote.status === 'TICKETED',
+  '--approved' :quote.status === 'APPROVED'}"></div>  
+   
 
   <div class="qt-df qt-jc-sb qt-pb-24 company-info">
     <div class="qt-lh-154">

@@ -61,7 +61,7 @@ export class QuoteAsideEditComponent implements OnInit,OnDestroy {
   saveAndSend() {
     let quote: QuoteEdit = this.quoteEdit.getQuote();
     if (!this.quoteEdit.getValidate().isValidate(quote)) return;
-    const modalRef = this.modalService.open(ModalQuoteComponent);
+    const modalRef = this.modalService.open(ModalQuoteComponent,{ windowClass: 'quote-send-modal' });
     let data = JSON.parse(JSON.stringify(quote.getDataForUpdate(true)));
     modalRef.componentInstance.data = data;
   }

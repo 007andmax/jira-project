@@ -94,7 +94,7 @@ export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
       let recipients = this.quote.recipients;
       //  if (typeof recipients === "string") this.quote.recipients = recipients.split(',');
      // this.quoteServices.getQuote(this.quote.id).subscribe((data) => {
-        const modalRef = this.modalService.open(ModalQuoteComponent);
+        const modalRef = this.modalService.open(ModalQuoteComponent,{ windowClass: 'quote-send-modal' });
         modalRef.componentInstance.data = this.quote;
       //})
     }

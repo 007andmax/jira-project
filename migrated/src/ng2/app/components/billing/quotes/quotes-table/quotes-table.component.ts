@@ -117,7 +117,7 @@ export class QuotesTableComponent implements OnInit {
       let recipients = item.recipients;
       if (typeof recipients === "string") item.recipients = recipients.split(',');
       this.quoteServices.getQuote(item.id).subscribe((data) => {
-        const modalRef = this.modalService.open(ModalQuoteComponent, data);
+        const modalRef = this.modalService.open(ModalQuoteComponent, { windowClass: 'quote-send-modal' });
         modalRef.componentInstance.data = data;
       })
 

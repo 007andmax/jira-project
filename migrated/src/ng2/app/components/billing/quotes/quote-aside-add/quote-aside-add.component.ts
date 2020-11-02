@@ -65,7 +65,7 @@ export class QuoteAsideAddComponent implements OnInit {
    
     let quote: QuoteAdd = this.quoteAdd.getQuote();
     if (!this.quoteAdd.getValidate().isValidate(quote)) return;
-    const modalRef = this.modalService.open(ModalQuoteComponent);
+    const modalRef = this.modalService.open(ModalQuoteComponent,{ windowClass: 'quote-send-modal' });
     let data = JSON.parse(JSON.stringify(quote.getDataForCreate(true)));
     modalRef.componentInstance.data = data;
   }
