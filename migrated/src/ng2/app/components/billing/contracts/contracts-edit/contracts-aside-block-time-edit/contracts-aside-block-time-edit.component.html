@@ -233,12 +233,12 @@
           Select All
         </div>
 
-        <app-teh-users [type]="'CONTRACT'" [selectedMode]="'MULTIPLE'" [users]="userList" (usersChange)="onChangeUser($event)" placement="left" ngbTooltip="Add Users to this update"></app-teh-users>
+        <app-teh-users [type]="'CONTRACT'" [selectedMode]="'MULTIPLE'" [users]="userList" (usersChange)="onChangeUser($event)" [editMode]="true" [editUsers]="selectedUsers" placement="left" ngbTooltip="Add Users to this update"></app-teh-users>
 
       </div>
 
       </div>
-      <app-contracts-aside-block-time-billing-users *ngIf="toggleNotifyAgentsUser" (onSelected)="onChangeUser($event)"  [selectedUsers]="selectedUsers"></app-contracts-aside-block-time-billing-users>
+      <app-contracts-aside-block-time-billing-users *ngIf="toggleNotifyAgentsUser" (onSelected)="onChangeUser($event)"  [selectedUsers]="selectedUsers" ></app-contracts-aside-block-time-billing-users>
 
       <hr class="qt-horisontal-line qt-mb-16 qt-mt-16">
 

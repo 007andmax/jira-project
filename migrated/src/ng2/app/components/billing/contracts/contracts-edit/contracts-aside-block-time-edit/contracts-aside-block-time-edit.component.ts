@@ -85,6 +85,7 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
       })
       this.toggleNotifyAgentsUser = true;
     }
+    
     this.minStartDate = this.getMinStartDate(this.contractsBlockTime.intervalstring, this.contractsBlockTime.startDate);
     this.setMinCustomDate();
   }
@@ -207,6 +208,8 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit {
     let techusers = userList.filter((item) => item.accountType === "TECH" && !item.deletedAt);
     let clientUsers = userList.filter((item) => item.accountType === "CLIENT" && !item.deletedAt && item.company.id === this.contractsBlockTime.companyId);
     this.userList = [...techusers, ...clientUsers];
+
+  
 
   }
   parsedateForTotal(date) {

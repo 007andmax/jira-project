@@ -4,7 +4,7 @@
   </td>
   <td class="invoice-item__col-item" [textContent]="service.item.name"></td>
   <td class="invoice-item__col-desc ">
-    <textarea  appTextArea  [minHeight]="48"  cols="5" rows="1" id="service-description" placeholder="Write ticket conversation here…"
+    <textarea  appTextArea  [minHeight]="48"  cols="5" rows="1" id="service-description" placeholder="Write service description here..."
     (input)="onChangeDescription($event)" (onPast)="onPastDescription($event)"></textarea>
   </td>
   <td class="invoice-item__col-price" [textContent]="service.item.rate | currency"></td>
