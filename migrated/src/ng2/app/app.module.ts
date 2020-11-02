@@ -360,6 +360,7 @@ import { CompanyContractsComponent } from './components/companies/company-contra
 import { TicketsDashboardComponent } from './components/tickets/tickets-dashboard/tickets-dashboard.component';
 import { TicketPriorityDashboardComponent } from './components/tickets/tickets-dashboard/ticket-priority-dashboard/ticket-priority-dashboard.component';
 import { RecurringTicketDashboardComponent } from './components/tickets/tickets-dashboard/recurring-ticket-dashboard/recurring-ticket-dashboard.component';
+import { TicketsDashboardAnalyticsComponent } from './components/tickets/tickets-dashboard/tickets-dashboard-analytics/tickets-dashboard-analytics.component';
 
 
 
@@ -940,7 +941,12 @@ angular.module('quicktech')
 
 
 
-    RecurringTicketDashboardComponent
+    RecurringTicketDashboardComponent,
+
+
+
+
+    TicketsDashboardAnalyticsComponent
 
   ],
   imports: [
