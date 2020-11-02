@@ -23,7 +23,8 @@ export class QuoteAsideAddComponent implements OnInit {
   @ViewChild('saveAndApproveBtn') saveAndApproveBtn: DisabledBtnDirective;
   @ViewChild('saveAndDownloadBtn') saveAndDownloadBtn: DisabledBtnDirective;
   @ViewChild('quoteAdd') quoteAdd: QuoteAsideAddBodyComponent;
-  validate:QuoteValdiate = new QuoteValdiate();
+  isOpenProducts: boolean = false;
+  validate: QuoteValdiate = new QuoteValdiate();
   showPreview: boolean = false;
   quotePreview: QuotePreview;
   open: boolean = false;
@@ -48,11 +49,15 @@ export class QuoteAsideAddComponent implements OnInit {
       this.quoteService.createQuote(data, true).subscribe((res) => {
         this.saveAndSendBtn.setDisabled(false);
         this.close();
-      },err => {
+      }, err => {
         this.validate.setErrorMessage(err.error.validationResults.saleQuotePostDto);
         this.saveAndSendBtn.setDisabled(false);
       });
+    });
+    let getOnOpenProducts = this.quoteStateService.getOnOpenProducts().subscribe(data => {
+      this.isOpenProducts = data;
     })
+    this.sub.add(getOnOpenProducts);
   }
   close() {
     this.open = false;
@@ -62,10 +67,10 @@ export class QuoteAsideAddComponent implements OnInit {
     this.quoteStateService.resetQuoteForCopy();
   }
   saveAndSend() {
-   
+
     let quote: QuoteAdd = this.quoteAdd.getQuote();
     if (!this.quoteAdd.getValidate().isValidate(quote)) return;
-    const modalRef = this.modalService.open(ModalQuoteComponent,{ windowClass: 'quote-send-modal' });
+    const modalRef = this.modalService.open(ModalQuoteComponent, { windowClass: 'quote-send-modal' });
     let data = JSON.parse(JSON.stringify(quote.getDataForCreate(true)));
     modalRef.componentInstance.data = data;
   }
@@ -81,7 +86,7 @@ export class QuoteAsideAddComponent implements OnInit {
         this.saveAndDownloadBtn.setDisabled(false);
         this.close();
       });
-    },err => {
+    }, err => {
       this.validate.setErrorMessage(err.error.validationResults.saleQuotePostDto);
       this.saveAndDownloadBtn.setDisabled(false);
     });
@@ -93,7 +98,7 @@ export class QuoteAsideAddComponent implements OnInit {
     this.quoteService.createQuote(quote.getDataForCreate(false), false).subscribe((data) => {
       this.saveAndContinueBtn.setDisabled(false);
       this.close();
-    },err => {
+    }, err => {
       this.validate.setErrorMessage(err.error.validationResults.saleQuotePostDto);
       this.saveAndContinueBtn.setDisabled(false);
     });
@@ -110,7 +115,7 @@ export class QuoteAsideAddComponent implements OnInit {
             this.close();
 
           });
-      },err => {
+      }, err => {
         this.validate.setErrorMessage(err.error.validationResults.saleQuotePostDto);
         this.saveAndApproveBtn.setDisabled(false);
       });
