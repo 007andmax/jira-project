@@ -118,7 +118,7 @@
         <div class="profile-cmp-board tags-area d-flex">
           <div class="small-title d-flex">
             Tags
-            <a href="javascript:;">+Add</a>
+            <!-- <a href="javascript:;">+Add</a> -->
           </div>
           <div class="tags-tab d-flex">
             <span class="tag" *ngFor="let tag of tags; let i = index;"
@@ -133,7 +133,7 @@
           </div>
         </div>
         <div class="btn-row d-flex">
-          <a href="javascript:;" class="btn btn-outline">
+          <a href="javascript:;" (click)="downloadAgent()" class="btn btn-outline">
             <img
               src="../../../../../ng2/assets/img/company-details/download.svg"
               alt="download"
@@ -472,11 +472,11 @@
             <ul class="list-unstyled d-flex">
               <li class="d-flex" *ngFor="let work of workingDays; let i = index;">
                 <div class="cmn-checkbox">
-                    <input type="checkbox" id="hour_{{i}}" [checked]="work.checked">
+                    <input type="checkbox" name="hour_{{i}}" id="hour_{{i}}" [ngModel]="work.checked" (change)="resetTime(i);">
                     <label for="hour_{{i}}">{{work.dayOfWeek}}</label>
                 </div>
                 <div class="hours-row">
-                  <app-ticket-profile-updates-service-timepicker (onChangeStart)="onChangeStartTimePicker($event)" (onChangeEnd)="onChangeEndTimePicker($event)" [start]="work.sTime" [editMode]="true" [end]="work.eTime"></app-ticket-profile-updates-service-timepicker>
+                  <app-ticket-profile-updates-service-timepicker (onChangeStart)="onChangeStartTime($event, i)" (onChangeEnd)="onChangeEndTime($event, i)" [start]="work.sTime" [editMode]="true" [end]="work.eTime"></app-ticket-profile-updates-service-timepicker>
                 </div>
               </li>
             </ul>
@@ -503,10 +503,18 @@
     [zoom]="15" [title]="title">
       <agm-marker [latitude]="companyDetail.addresses[0].locationLat" [longitude]="companyDetail.addresses[0].locationLng"></agm-marker>
     </agm-map> -->
-    <agm-map [latitude]="companyDetail.addresses[0].locationLat" [longitude]="companyDetail.addresses[0].locationLng" 
+    <!-- <agm-map [latitude]="companyDetail.addresses[0].locationLat" [longitude]="companyDetail.addresses[0].locationLng" 
     [mapTypeControl]='true' [zoom]="15">
     <agm-marker [latitude]="companyDetail.addresses[0].locationLat" [longitude]="companyDetail.addresses[0].locationLng"></agm-marker>
-  </agm-map>
+  </agm-map> -->
+  <iframe
+  frameborder="0" 
+  scrolling="no" 
+  marginheight="0" 
+  marginwidth="0" 
+  [src]="mapUrl()"
+ >
+ </iframe>
   </div>
   
 </ng-template>
@@ -514,5 +522,3 @@
 
 </div>
 <app-company-edit-aside></app-company-edit-aside>
-
-

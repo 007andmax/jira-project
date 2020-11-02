@@ -47,7 +47,6 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     private elRef: ElementRef) { }
 
   ngOnInit() {
-
     /*  this.companiesStateService.getOnShowArchived().subscribe(data => {
         this.showArchivedCompanies = data;
       })*/

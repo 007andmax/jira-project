@@ -11,6 +11,10 @@ import * as moment from "moment";
 import { DevicesSateService } from '../../states/devices/devices-sate.service';
 import { UsersStateService } from '../../states/users/users-state.service';
 import { CompaniesStateService } from '../../states/company/companies-state.service';
+import { DownloadAgentStateService } from '../../states/download-agent/download-agent-state.service';
+import { DownloadAgentComponent } from '../companies/download-agent/download-agent.component';
+import { Company } from '../../interfaces/company/company';
+import { DomSanitizer } from "@angular/platform-browser";
 declare let d3: any;
 @Component({
   selector: 'company-dashboard',
@@ -39,6 +43,7 @@ export class CompanyDashboardComponent implements OnInit {
   lineChartColors = ["#0747a6", "#00ccff", '#2bc7c6'];
   _id = '';
   companyOpen = 'Close';
+  company: Company;
   totalTickets = 0;
   averageResponseTime = '';
   public countUsers: number = 0;
@@ -64,6 +69,7 @@ export class CompanyDashboardComponent implements OnInit {
     avatar: ''
   };
   tags = [];
+  mapSrc = '';
   aa;
   workingDays = [];
   public companyDetail: CompanyProfile;
@@ -72,7 +78,9 @@ export class CompanyDashboardComponent implements OnInit {
     private devicesState: DevicesSateService,
     private usersStateService: UsersStateService,
     private route: ActivatedRoute,
-    private companiesStateService: CompaniesStateService) {}
+    private companiesStateService: CompaniesStateService,
+    private downloadAgentStateService: DownloadAgentStateService,
+    private sanitizer: DomSanitizer) {}
   closeResult = '';
 
   open(content: any) {
@@ -202,6 +210,8 @@ export class CompanyDashboardComponent implements OnInit {
         phoneNumber: this.companyDetail.contacts[0].phoneNumbers[0],
         avatar: this.companyDetail.contacts[0].avatar
       }
+      // this.mapSrc = `https://maps.google.com/maps?q=${this.companyDetail.addresses[0].locationLat},${this.companyDetail.addresses[0].locationLng}&z=15&amp;output=embed`;
+      this.mapSrc = "https://maps.google.com/maps/embed/v1/place?key=AIzaSyAbP4DFpz4f9YcXMWUjdkOdyArX2peNt8s&q="+this.companyDetail.addresses[0].locationLat +","+this.companyDetail.addresses[0].locationLng+"";
       let day = moment(new Date()).format('dddd');
       this.workingDays = this.companyDetail.workingDays;
       if (this.workingDays.length !== 0) {
@@ -212,6 +222,7 @@ export class CompanyDashboardComponent implements OnInit {
           this.companyOpen = 'Close';
         }
         this.workingDays.forEach((element, index) => {
+          element.checked = false;
           if (element.startTime !== 0 && element.endTime !== 0) {
             element.timing = `${this.timeFormatter(element.startTime)} ${this.getTimeFormat(element.startTime)} - ${this.timeFormatter(element.endTime)} ${this.getTimeFormat(element.endTime)}`
             let s1 = this.timeFormatter(element.startTime) + ':00 ' + this.getTimeFormat(element.startTime)
@@ -392,6 +403,32 @@ export class CompanyDashboardComponent implements OnInit {
   saveHours() {
     this.workingDays;
     debugger;
+  }
+
+  public onChangeStartTime(data, i) {
+    this.workingDays[i].sTime = data;
+  }
+  public onChangeEndTime(data, i) {
+    this.workingDays[i].eTime = data;
+  }
+
+  resetTime(index: number) {
+    this.workingDays[index].checked = !this.workingDays[index].checked;
+    if (this.workingDays[index].checked === false) {
+      this.workingDays[index].sTime = 0;
+      this.workingDays[index].eTime = 0;
+    }
+  }
+
+  downloadAgent() {
+
+    this.downloadAgentStateService.setCompnay(this.companyDetail);
+    const modalRef = this.modalService.open(DownloadAgentComponent, { windowClass: 'download-modal' });
+
+  }
+
+  mapUrl() {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(this.mapSrc);
   }
 
 }
