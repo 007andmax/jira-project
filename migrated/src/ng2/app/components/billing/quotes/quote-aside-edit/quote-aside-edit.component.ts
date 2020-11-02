@@ -22,7 +22,6 @@ export class QuoteAsideEditComponent implements OnInit,OnDestroy {
   @ViewChild('saveAndApproveBtn') saveAndApproveBtn: DisabledBtnDirective;
   @ViewChild('saveAndDownloadBtn') saveAndDownloadBtn: DisabledBtnDirective;
   @ViewChild('quoteEdit') quoteEdit: QuoteAsideEditBodyComponent;
-  isOpenProducts: boolean = false;
   validate: QuoteValdiateEdit = new QuoteValdiateEdit();
   showPreloader: boolean = true;
   quotePreview: QuotePreview;
@@ -52,10 +51,6 @@ export class QuoteAsideEditComponent implements OnInit,OnDestroy {
       });
     })
     this.sub.add(getHandleSendModeEdit);
-    let getOnOpenProducts = this.quoteStateService.getOnOpenProducts().subscribe(data => {
-      this.isOpenProducts = data;
-    })
-    this.sub.add(getOnOpenProducts);
   }
   close() {
     this.open = false;

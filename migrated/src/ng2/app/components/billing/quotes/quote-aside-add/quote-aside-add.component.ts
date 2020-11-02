@@ -23,7 +23,6 @@ export class QuoteAsideAddComponent implements OnInit {
   @ViewChild('saveAndApproveBtn') saveAndApproveBtn: DisabledBtnDirective;
   @ViewChild('saveAndDownloadBtn') saveAndDownloadBtn: DisabledBtnDirective;
   @ViewChild('quoteAdd') quoteAdd: QuoteAsideAddBodyComponent;
-  isOpenProducts: boolean = false;
   validate: QuoteValdiate = new QuoteValdiate();
   showPreview: boolean = false;
   quotePreview: QuotePreview;
@@ -54,10 +53,6 @@ export class QuoteAsideAddComponent implements OnInit {
         this.saveAndSendBtn.setDisabled(false);
       });
     });
-    let getOnOpenProducts = this.quoteStateService.getOnOpenProducts().subscribe(data => {
-      this.isOpenProducts = data;
-    })
-    this.sub.add(getOnOpenProducts);
   }
   close() {
     this.open = false;

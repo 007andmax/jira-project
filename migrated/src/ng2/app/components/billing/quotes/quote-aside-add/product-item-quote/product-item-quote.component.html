@@ -1,7 +1,7 @@
 <tr>
   <td class="new-quote-table__col-item" [textContent]="product.item.manufacture"> </td>
   <td class="new-quote-table__col-desc td-padding-side" [textContent]="product.item.description"></td>
-  <td class="new-quote-table__col-unit-price">
+  <td class="new-quote-table__col-unit-price with-dollar" >
     <input class="qt-input-in-table"
       decimalNumber
       [useFixed]="true"
@@ -11,7 +11,7 @@
       (onChange)="changeCost($event)"
     />
   </td>
-  <td class="new-quote-table__col-markup">
+  <td class="new-quote-table__col-markup with-percent">
     <input class="qt-input-in-table"
       decimalNumber
 
@@ -20,7 +20,7 @@
       (onChange)="changeMarkup($event)"
     />
   </td>
-  <td class="new-quote-table__col-sales-price">
+  <td class="new-quote-table__col-sales-price with-dollar">
     <input class="qt-input-in-table"
       [ngClass]="{'--input-error':!product.validateSaleCost}"
       decimalNumber

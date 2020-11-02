@@ -11,7 +11,6 @@ export class QuoteStateService {
   onEdit: EventEmitter<any> = new EventEmitter();
   onCopy: EventEmitter<any> = new EventEmitter();
   onCreate: EventEmitter<any> = new EventEmitter();
-  onOpenProducts: EventEmitter<any> = new EventEmitter();
   quoteForCopy:QuotePreview;
   public handleSendMode: EventEmitter<any> = new EventEmitter();
   public handleSendModeEdit: EventEmitter<any> = new EventEmitter();
@@ -22,12 +21,6 @@ export class QuoteStateService {
     @Inject('$state') $state: any
   ) {
     this.state = $state;
-  }
-  public getOnOpenProducts() {
-    return this.onOpenProducts;
-  }
-  public setOpenProducts(data) {
-    this.onOpenProducts.emit(data);
   }
   public resetQuoteForCopy() {
     this.quoteForCopy = null;

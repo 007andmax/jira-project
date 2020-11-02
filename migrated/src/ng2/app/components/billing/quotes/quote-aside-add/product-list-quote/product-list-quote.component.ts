@@ -9,10 +9,4 @@ import { InventoryStateService } from 'src/ng2/app/states/inventory/inventory-st
 })
 export class ProductListQuoteComponent extends ProductListComponent {
  
- 
-  onCloseProducts(open) {
-    this.resetSearch = true;
-    // this.cd.detectChanges();
-    this.quoteStateService.setOpenProducts(open);
-  }
 }
