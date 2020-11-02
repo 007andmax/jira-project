@@ -47,8 +47,8 @@ export class UsersService {
     return this.http.get(this.apiUrl + 'users/current');
   }
 
-  public checkValidPrimaryEmail(email,companyId) {
-    return this.http.get(this.apiUrl + 'users/isEmailUnique?email=' + email + '&id=&isTechUser=false&companyId=' + companyId);
+  public checkValidPrimaryEmail(email,companyId,idUser = null) {
+    return this.http.get(this.apiUrl + 'users/isEmailUnique?email=' + email + '&id=' + idUser + '&isTechUser=false&companyId=' + companyId);
   }
 
   getUser() {

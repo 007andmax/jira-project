@@ -40,15 +40,15 @@
                   </li>
                   <li>
                     <span>Asset Tag</span>
-                    <div>{{system?.asset_tag || 'N/A'}}</div>
-                    <span class="edit-field">
-                      <input id="ankit" type="text" class="form-control sub-label-field" [(ngModel)]="system.asset_tag" (blur)="updateDashboard('asset_tag')">
+                    <!-- <div>{{system?.asset_tag || 'N/A'}}</div> -->
+                    <span id="tag" class="edit-field" data-tooltip="">
+                      <input type="text" class="form-control sub-label-field" [(ngModel)]="system.asset_tag" (blur)="updateDashboard('asset_tag')">
                     </span>
                   </li>
                   <li>
                     <span>Manufacturer</span>
                     <!-- <div>{{system?.manufacturer || 'N/A'}}</div> -->
-                    <span class="edit-field">
+                    <span id="manufacture" class="edit-field" data-tooltip="">
                       <input type="text" class="form-control sub-label-field" [(ngModel)]="system.manufacturer" (blur)="updateDashboard('manufacturer')">
                     </span>
                   </li>
@@ -124,7 +124,8 @@
                    </div>
                     <div class="drive-status">
                       <span class="drive-name">{{drive.device_id}} ({{drive.file_system}} on drive {{drive.disk_index + 1}})</span>
-                      <span class="drive-limit" *ngIf="drive.free_space != '' && drive.size != ''">{{convertToGB(drive.size) - convertToGB(drive.free_space)}}GB / {{convertToGB(drive.size)}}GB</span>
+                      <!-- <span class="drive-limit" *ngIf="drive.free_space != '' && drive.size != ''">{{convertToGB(drive.size) - convertToGB(drive.free_space)}}GB / {{convertToGB(drive.size)}}GB</span> -->
+                      <span class="drive-limit" *ngIf="drive.free_space != '' && drive.size != ''">{{diskSpaceDiff(drive.size, drive.free_space)}}GB / {{convertToGB(drive.size)}}GB</span>
                     </div>
                   </li>
     

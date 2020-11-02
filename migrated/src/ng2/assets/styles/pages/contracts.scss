@@ -614,13 +614,17 @@ app-contracts-filter {
     margin-top: 0;
   }
 }
-app-contracts-aside-hourly-billing-default-service,
-app-contracts-aside-hourly-billing-edit-default-service,
-app-contracts-aside-other-product,
-app-contracts-aside-other-service,
-app-ticket-profile-updates-service-duration {
-  display: contents;
+
+.contracts-page__aside {
+  app-contracts-aside-hourly-billing-default-service,
+  app-contracts-aside-hourly-billing-edit-default-service,
+  app-contracts-aside-other-product,
+  app-contracts-aside-other-service,
+  app-ticket-profile-updates-service-duration {
+    display: contents;
+  }
 }
+
 
 .contracts-aside-block-time-tabble-td.--editable {
   padding: 0 !important;

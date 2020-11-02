@@ -77,7 +77,7 @@ export class TerminalComponent implements OnInit {
   sessionId = '';
   finalCommand = '';
   splitCommand = ["C:\\>"];
-  scriptType = 'cmd';
+  scriptTyped = 'cmd';
   showDescription = false;
   terminalHeight = 0;
   cmdHeight = 0;
@@ -109,6 +109,7 @@ export class TerminalComponent implements OnInit {
     $('#cmd textarea').scroll(function(){
       $('#cmd_line').scrollTop($('#cmd textarea').scrollTop());
     });
+    document.getElementById("terminal").style.height = window.innerHeight - document.getElementById('deviceHeader').offsetHeight - 250 + 'px';
     this.terminalHeight = document.getElementById("terminal").offsetHeight;
     this.cmdHeight = document.getElementById("editCmd").offsetHeight;
   }
@@ -150,11 +151,14 @@ export class TerminalComponent implements OnInit {
       if (Object.keys(data).length > 0) {
       let obj = data[localStorage.getItem('agentId')]
       this.his = obj;
-      let arr = obj.split(/\r*\n/);
+      let arr = obj.split('↵');
+      if (arr.length == 1) {
+        arr = obj.split(/\r*\n/);
+      }
       let index = 0;
       let arr1 = [];
       
-      arr.forEach(element => {
+      arr.forEach((element, index) => {
         if (Date.parse(element)) {
           if (index !== 0) {
             this.historyList.push(arr1);
@@ -165,6 +169,9 @@ export class TerminalComponent implements OnInit {
           }
         }
         arr1.push(element);
+        if (index === arr.length - 1) {
+          this.historyList.push(arr1);
+        }
       });
     }
     },
@@ -283,10 +290,10 @@ export class TerminalComponent implements OnInit {
   
   createCommand() {
     this.submitted = true;
-    this.loading = true;
     if (this.form.invalid) {
       return;
     }
+    this.loading = true;
     let data = {
       title: this.commandModal.title,
       categoryId: this.commandModal.categoryId !== undefined ? this.commandModal.categoryId : this.cmdCategoryReadList.filter(val => val.name === this.commandModal.category)[0].id,
@@ -540,7 +547,7 @@ export class TerminalComponent implements OnInit {
       "companyId": localStorage.getItem('company_id'),
       "agentId": localStorage.getItem('agentId'),
       "sessionId": this.sessionId,
-      "scriptType": type === '' ? this.scriptType.toLowerCase() : type.toLowerCase(), // 'powershell'
+      "scriptType": type === '' ? this.scriptTyped.toLowerCase() : type.toLowerCase(), // 'powershell'
       "script": this.finalCommand,
       "file": file,
       "keepOpen": true
@@ -581,7 +588,7 @@ export class TerminalComponent implements OnInit {
   }
 
   switchTerminal(type) {
-    this.scriptType = type;
+    this.scriptTyped = type;
     if (this.terminalHit === true) {
       this.splitCommand = [this.splitCommand[this.splitCommand.length - 1]];
     } else {
@@ -621,7 +628,7 @@ export class TerminalComponent implements OnInit {
     }
   }
   setHeight(flag) {
-    if(flag === 'enter' && document.getElementById("editCmd").offsetHeight < 150 ) {
+    if(flag === 'enter' && document.getElementById("editCmd").offsetHeight < 280 ) {
       document.getElementById("terminal").style.height = (document.getElementById("terminal").offsetHeight - 10) + "px";
       document.getElementById("editCmd").style.height = (document.getElementById("editCmd").offsetHeight + 10) + "px";
     } else if(flag === 'backspace'){
@@ -653,6 +660,10 @@ export class TerminalComponent implements OnInit {
   copyToTerminalFunc(editCmd, type, file) {
     this.copyToTerminal(editCmd, type, file);
     this.editCmd = ''
+    document.getElementById("terminal").style.height = window.innerHeight - document.getElementById('deviceHeader').offsetHeight - 250 + 'px';
+    document.getElementById("editCmd").style.height = '120px';
+    this.terminalHeight = document.getElementById("terminal").offsetHeight;
+    this.cmdHeight = document.getElementById("editCmd").offsetHeight;
   }
 
   toggleTerminal(type, typeName) {

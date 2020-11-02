@@ -24,11 +24,12 @@ export class DashboardBillingComponent implements OnInit {
   topDashboard: TopDashboard = new TopDashboard();
   contractsDashboard: ContractsDashboard = new ContractsDashboard();
   showPreloader: boolean = true;
-
+  isDashboardReady: boolean = false;
+  isTopReady: boolean = false;
   constructor(private dashboardBillingService: DashboardBillingService,
     private reportsService: ReportsService,
     public cd: ChangeDetectorRef,
-    private leftPanelStateService:LeftPanelStateService,
+    private leftPanelStateService: LeftPanelStateService,
     private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
@@ -42,10 +43,15 @@ export class DashboardBillingComponent implements OnInit {
     this.dashboardBillingService.getDashboard(type).subscribe(data => {
       this.dashboard = data;
       this.contractsDashboard = new ContractsDashboard(this.dashboard.serviceAgreementCounters);
-      this.showPreloader = false;
+     
       this.cd.detectChanges();
       if (this.dashboardStats) this.dashboardStats.updateDataChart();
+      this.isDashboardReady = true;
+      this.checkReadyState();
     });
+  }
+  checkReadyState() {
+    if (this.isDashboardReady && this.isTopReady) this.showPreloader = false;
   }
   getAccountingStartDate() {
     this.reportsService.getAccountingStartDate().subscribe((data: any) => {
@@ -53,13 +59,14 @@ export class DashboardBillingComponent implements OnInit {
       this.topDashboard.setInvoiceAmountsStartDate(moment(this.accountingStartDate).format('YYYY/MM/DD'));
       this.topDashboard.setInvoiceAmountsEndDate(moment(new Date()).format('YYYY/MM/DD'));
       this.getTops();
+      this.getDashboard("WEEKLY");
     })
   }
   getTops() {
     this.dashboardBillingService.getTops(this.topDashboard.getDataForRequest()).subscribe(data => {
       this.topDashboard.setData(data);
-      this.getDashboard("WEEKLY");
-
+      this.isTopReady = true;
+      this.checkReadyState();
     })
   }
 

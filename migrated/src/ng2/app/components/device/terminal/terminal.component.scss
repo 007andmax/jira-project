@@ -30,17 +30,17 @@ main {
                         font-family: $sourceCode;
                         margin-bottom: 16px;
                         height: 310px;
-                        max-height: 310px !important;
+                        // max-height: 310px !important;
                         overflow-y: auto;
                         overflow-x: hidden;
-                        @media only screen and (min-height:900px) {
-                            height: 580px;
-                            max-height: 440px !important;
-                        }
-                        @media only screen and (min-height:1080px) {
-                            height: 650px;
-                            max-height: 650px !important;
-                        }
+                        // @media only screen and (min-height:900px) {
+                        //     height: 580px;
+                        //     max-height: 440px !important;
+                        // }
+                        // @media only screen and (min-height:1080px) {
+                        //     height: 650px;
+                        //     max-height: 650px !important;
+                        // }
                         p {
                             margin-bottom: 0;
                             font-family: $sourceCode;
@@ -62,16 +62,16 @@ main {
                             color: #4f5f79 !important;
                             font-family: $sourceCode;
                             height: 120px;
-                            max-height: 150px !important;
+                            // max-height: 150px !important;
                             margin-bottom: 0;
-                            @media only screen and (min-height:900px) {
-                                height: 280px;
-                                max-height: 280px !important;
-                            }
-                            @media only screen and (min-height:1080px) {
-                                height: 400px;
-                                max-height: 400px !important;
-                            }
+                            // @media only screen and (min-height:900px) {
+                            //     height: 280px;
+                            //     max-height: 280px !important;
+                            // }
+                            // @media only screen and (min-height:1080px) {
+                            //     height: 400px;
+                            //     max-height: 400px !important;
+                            // }
                             &:focus{
                                 outline: none !important;
                             }
@@ -1035,25 +1035,53 @@ body {
             }
         }
         .cmd-description {
-            a {
-                font-family: "Graphik-Medium";
-                font-size: 13px;
-                font-weight: 500;
-                font-style: normal;
-                line-height: 1.54;
-                letter-spacing: normal;
-                color: #4f5f79;
-                text-transform: capitalize;
-                margin-bottom: 10px;
-                &.active {
-                    color: #16a4fa;
-                }
-            }
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            padding: 0 8px;
+            justify-content: center;
+            // a {
+            //     font-family: "Graphik-Medium";
+            //     font-size: 13px;
+            //     font-weight: 500;
+            //     font-style: normal;
+            //     line-height: 1.54;
+            //     letter-spacing: normal;
+            //     color: #4f5f79;
+            //     text-transform: capitalize;
+            //     margin-bottom: 10px;
+            //     &.active {
+            //         color: #16a4fa;
+            //     }
+            // }
             .label {
-                margin-bottom: 10px;
-                padding-bottom: 0;
+                margin-bottom: 0;
+                padding: 0 0 10px 0;
                 color: #4f5f79;
+                display: -ms-flexbox;
+                display: -webkit-flex;
+                display: flex;
             }
+            .cmn-tabs{
+                   a{
+                    padding-bottom: 10px;
+                    border-bottom: 2px solid transparent;
+                    margin-right: 15px;
+                    font-size: 12px;
+                    font-weight: 600;
+                    line-height: 1.33;
+                    letter-spacing: normal;
+                    color: #4f5f79;
+                    font-family: "Graphik-Medium";
+                    font-weight: 600;
+                    &.active{
+                        color: #16a4fa;
+                        border-color: #16a4fa;
+                    }
+                   }
+                }
         }
     }
 }

@@ -133,6 +133,62 @@
                                 color: #4f5f79;
                             }
                         }
+                        span.edit-field[data-tooltip]{
+                            &::before{
+                                position: absolute;
+                                padding:9px 7px;
+                                content: attr(data-tooltip);
+                                text-align: center;
+                                width: 216px;
+                                border-radius: 3px;
+                                background-color: #4f5f79;
+                                font-size: 12px;
+                                font-weight: 500;
+                                font-style: normal;
+                                font-stretch: normal;
+                                line-height: 1.33;
+                                letter-spacing: normal;
+                                color: #ffffff;
+                                left: 0;
+                                top: -45px;
+                                visibility: hidden;
+                                white-space: nowrap;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                @media only screen and (max-width:1199px){
+                                    display: none;
+                                }
+                            }
+                            &::after{
+                                top: auto;
+                                left: 50%;
+                                border: solid transparent;
+                                content: " ";
+                                height: 0;
+                                width: 0;
+                                position: absolute;
+                                pointer-events: none;
+                                border-color: rgba(79, 95, 121, 0);
+                                border-top-color: #4f5f79;
+                                border-width: 6px;
+                                margin-left: -80px;
+                                bottom: 32px;
+                                z-index: 1;
+                                visibility: hidden;
+                                @media only screen and (max-width:1199px){
+                                    display: none;
+                                }
+                            }
+                            &:hover,&:focus{
+                                &::after,&::before{
+                                    visibility: visible;
+                                }
+                                .sub-label-field {
+                                    border: solid 1px #c4cbd5;
+                                    outline: 0;
+                                }
+                            }
+                        }
                         
                     }
                 }

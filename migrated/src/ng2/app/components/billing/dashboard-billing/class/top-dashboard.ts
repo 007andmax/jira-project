@@ -5,10 +5,10 @@ export class TopDashboard {
     top5InvoicesSum: Array<TopDashboardSum> = [];
     top5OutstandingInvoicesSum: Array<TopDashboardSum> = [];
     top5SellingProducts: Array<TopDashboardProductSum> = [];
-    invoiceAmountsStartDate:string;
-    invoiceAmountsEndDate:string;
+    invoiceAmountsStartDate: string;
+    invoiceAmountsEndDate: string;
     constructor() {
-        
+
     }
     public setData(data) {
         this.top5InvoicesSum = data.top5InvoicesSum.map(item => new TopDashboardSum(item));
@@ -17,14 +17,16 @@ export class TopDashboard {
     }
     public getDataForRequest() {
         return {
-            invoiceAmountsStartDate:this.invoiceAmountsStartDate,
-            invoiceAmountsEndDate:this.invoiceAmountsEndDate
+            invoiceAmountsStartDate: this.invoiceAmountsStartDate,
+            invoiceAmountsEndDate: this.invoiceAmountsEndDate,
+            invoiceOutstandingStartDate: this.invoiceAmountsStartDate,
+            invoiceOutstandingEndDate: this.invoiceAmountsEndDate
         }
     }
-    public setInvoiceAmountsStartDate (data) {
+    public setInvoiceAmountsStartDate(data) {
         this.invoiceAmountsStartDate = data;
     }
-    public setInvoiceAmountsEndDate (data) {
+    public setInvoiceAmountsEndDate(data) {
         this.invoiceAmountsEndDate = data;
     }
 }

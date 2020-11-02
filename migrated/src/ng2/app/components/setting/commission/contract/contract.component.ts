@@ -215,25 +215,25 @@ export class ContractComponent implements OnInit {
           this.loading = false;$(".loading").css("display", "none");
         }
       );
+  }
+
+  confirmDelete(flag: string, rate: string){
+    this.flag = flag;
+    this.rate = rate;
+    this.deletePopup = true;
+  }
+
+  confirmEdit(){
+    if (
+      !this.oldAgreementsCommissions[this.rate] &&
+      this.oldAgreementsCommissions[this.rate] != 0
+    ) {
+      this.confirmPopup = true;
+    } else {
+      this.confirmPopup = false;
+      this.factItem = false;
+      this.setAgreementRate();
     }
-  
-    confirmDelete(flag: string, rate: string){	
-      this.flag = flag;	
-      this.rate = rate;	
-      this.deletePopup = true;	
-    }	
-      	
-    confirmEdit(){	
-      if (	
-        !this.oldAgreementsCommissions[this.rate] &&	
-        this.oldAgreementsCommissions[this.rate] != 0	
-      ) {	
-        this.confirmPopup = true;	
-      } else {	
-        this.confirmPopup = false;	
-        this.factItem = false;	
-        this.setAgreementRate();	
-        }	
-        
-      }	
-    }
+    
+  }
+}

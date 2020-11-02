@@ -65,7 +65,6 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       word: ["", Validators.required],
       id: [""]
     });
-
     this.getCurrentCompany();
     this.serviceAllTickets = this.tagsService.getAllTickets();
     this.serviceAllCompany = this.tagsService.getAllCompany();
@@ -167,6 +166,11 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     } else if (this.tabSet['activeId'] === 'tab3') {	
       this.setActiveTab = "device";	
     }
+    // if (this.tickets.nativeElement.className.indexOf("active") > -1) {
+    //   this.setActiveTab = "ticket";
+    // } else {
+    //   this.setActiveTab = "company";
+    // }
   }
 
   // convenience getter for easy access to form fields

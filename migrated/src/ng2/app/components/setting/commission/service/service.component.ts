@@ -14,15 +14,14 @@ export class ServiceComponent implements OnInit {
   selectedSpecIdx = -1;
   companyId = '';
   services: any;
-  specialService: any[] = [];
-  public deleteServicePopup = false;	
-  public confirmServicePopup = false;	
-  service: any;	
-  isSpecialService: boolean;	
+  public deleteServicePopup = false;
+  public confirmServicePopup = false;
+  service: any;
+  isSpecialService: boolean;
   factItem = false;
-  rate: any;	
+  specialService: any[] = [];
+  rate: any;
   id: string;
-
   constructor(
     private commissionService: CommissionService,
     private toastrService: ToastrService
@@ -116,8 +115,14 @@ export class ServiceComponent implements OnInit {
     if (this.rate || this.rate === 0) {
       var data = {
         rate: this.rate,
-        setForOldExpenses: this.factItem
+        setForOldExpenses: false
       };
+
+      if (this.service.commissionRate === null) {
+        if (this.factItem === true) {
+          data.setForOldExpenses = true;
+        }
+      }
       this.loading = true;$(".loading").css("display", "block");
       this.commissionService
         .setServiceRate(this.id, data.rate, data.setForOldExpenses)
