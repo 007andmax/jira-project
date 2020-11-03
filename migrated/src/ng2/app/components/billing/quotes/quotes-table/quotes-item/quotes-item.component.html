@@ -13,7 +13,7 @@
 
   </td>
   <td class="quotes-table__status"  >
-    <span class="tag__modern" [ngClass]="getStatusClass(quote.status)"  [textContent]="getStatusText(quote.status)" (click)="openInvoiceTikcet()"> <!-- [ngClass]="payment.refundMethod ? '--error' : '--success'"-->
+    <span class="tag__modern" [ngClass]="[getStatusClass(quote.status),(quote.status === 'TICKETED' || quote.status === 'INVOICED') ? 'pointer' : '']"  [textContent]="getStatusText(quote.status)" (click)="openInvoiceTikcet()"> <!-- [ngClass]="payment.refundMethod ? '--error' : '--success'"-->
     </span>
   </td>
   <td class="quotes-table__valid"  [textContent]="getDate(quote.validUntil)"> </td>

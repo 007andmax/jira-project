@@ -6,6 +6,7 @@
       decimalNumber
       [useFixed]="true"
       placeholder="0.00"
+      appToFixed
       [value]="product.item.cost"
       (blur)="onCheckSaleCost()"
       (onChange)="changeCost($event)"
@@ -26,6 +27,7 @@
       decimalNumber
       [useFixed]="true"
       placeholder="0.00"
+      appToFixed
       [value]="product.item.sale"
       (onChange)="changeSales($event)"
       (blur)="onCheckSaleCost()"

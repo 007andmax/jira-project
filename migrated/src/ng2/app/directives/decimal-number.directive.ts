@@ -17,12 +17,12 @@ export class DecimalNumberDirective {
     });
     this.element.nativeElement.addEventListener("blur", (event) => {
       if (event.target.value) {
-          event.target.value = (this.useFixed) ?  parseFloat(event.target.value).toFixed(2) : event.target.value;
+        event.target.value = (this.useFixed) ? parseFloat(event.target.value).toFixed(2) : event.target.value;
       } else {
-          event.target.value = "";
+        event.target.value = "";
       }
       this.onChange.emit(event.target.value);
-  });
+    });
   }
 
   ValidateMoney(event: any) {

@@ -45,7 +45,6 @@ export class QuotePreview extends Quote {
             recipients: this.recipients,
             message: this.message,
             subject: this.subject,
-            globalNote: this.termsAndConditions,
             regularNote: this.regularNote,
             sendNotification: notification
         }

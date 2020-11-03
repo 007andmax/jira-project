@@ -27,19 +27,15 @@ export class QuoteAdd {
 
     }
     public setCopyData(quote:QuotePreview) {
-        console.log('quote',quote);
         this.companyId = quote.company.id;
         this.date = quote.date;
         this.description = quote.description;
-        this.message = quote.message;
         this.number = quote.number;
         this.purchaseOrder = quote.purchaseOrder;
         this.products = quote.products.map(item => new QuoteAddProduct("PERCENT", item, item.itemOrder, item.quantity, this.getMarkups(item)));
         this.services = quote.services.map(item => new QuoteAddService(item.description, "PERCENT", item, item.itemOrder, item.quantity));
-        this.recipients = quote.recipients;
         this.regularNote = quote.regularNote;
         this.requestPayment = quote.requestPayment;
-        this.subject = quote.subject;
         this.validUntil = quote.validUntil;
     }
     public resetServices() {

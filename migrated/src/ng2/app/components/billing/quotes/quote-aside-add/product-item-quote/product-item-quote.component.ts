@@ -15,6 +15,7 @@ export class ProductItemQuoteComponent implements OnInit {
 
   ngOnInit() {
     this.product.markup = this.getMarkups();
+    
   }
   ngDoCheck() {
     this.product.sum = this.quoteStateService.getPrice(this.product.item.sale, this.product.quantity, this.product.item.taxes) + this.getTaxPrice();

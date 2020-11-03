@@ -111,7 +111,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
     if (this.isChange) {
       this.showConfirm = true;
       this.confirmStateService.setConfirmAction(SAVE_AND_SEND);
-      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
 
       modalRef.componentInstance.message = 'Do you want to close this window? All entered information will be lost.';
     }
@@ -240,6 +240,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
  
     if (this.data.recipients && this.data.recipients.length > 0 && this.data.recipients[0] !== "") {
       this.selectedUsers = JSON.parse(JSON.stringify([...this.data.recipients]));
+      this.usersEmails = JSON.parse(JSON.stringify([...this.data.recipients]));
     } else {
       this.data.recipients = [];
       this.selectedUsers = JSON.parse(JSON.stringify([...this.data.recipients]));

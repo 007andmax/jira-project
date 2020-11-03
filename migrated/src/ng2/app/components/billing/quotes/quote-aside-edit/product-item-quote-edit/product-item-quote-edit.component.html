@@ -4,7 +4,7 @@
   <td class="new-quote-table__col-unit-price with-dollar">
     <input class="qt-input-in-table"
       decimalNumber
-      [useFixed]="true"
+      appToFixed
       placeholder="0.00"
       [value]="product.cost"
       (blur)="onCheckSaleCost()"
@@ -23,7 +23,7 @@
     <input class="qt-input-in-table"
       [ngClass]="{'--input-error':!product.validateSaleCost}"
       decimalNumber
-      [useFixed]="true"
+      appToFixed
       placeholder="0.00"
       [value]="product.sale"
       (onChange)="changeSales($event)"

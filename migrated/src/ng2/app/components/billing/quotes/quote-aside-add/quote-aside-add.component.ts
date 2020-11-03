@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { QUOTE_MODAL_ACTION_ADD } from 'src/ng2/app/const/quote';
@@ -18,7 +18,7 @@ import { QuoteAsideAddBodyComponent } from './quote-aside-add-body/quote-aside-a
   templateUrl: './quote-aside-add.component.html',
   styleUrls: ['./quote-aside-add.component.scss']
 })
-export class QuoteAsideAddComponent implements OnInit {
+export class QuoteAsideAddComponent implements OnInit,OnDestroy {
   @ViewChild('saveAndSendBtn') saveAndSendBtn: DisabledBtnDirective;
   @ViewChild('saveAndContinueBtn') saveAndContinueBtn: DisabledBtnDirective;
   @ViewChild('saveAndApproveBtn') saveAndApproveBtn: DisabledBtnDirective;
@@ -127,5 +127,7 @@ export class QuoteAsideAddComponent implements OnInit {
     this.quotePreview = new QuotePreview(this.quoteAdd.getQuotePreview());
     this.showPreview = true;
   }
-
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }

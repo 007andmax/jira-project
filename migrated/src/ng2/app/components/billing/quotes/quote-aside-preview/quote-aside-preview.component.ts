@@ -29,7 +29,6 @@ export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService) { }
 
   ngOnInit() {
-
     let getOnPreview = this.quoteStateService.getOnPreview().subscribe(quote => {
       this.open = true;
       this.quoteServices.getQuote(quote.id).subscribe((data) => {

@@ -28,7 +28,6 @@ export class QuoteEdit extends QuotePreview {
             recipients: this.recipients,
             message: this.message,
             subject: this.subject,
-            globalNote: this.termsAndConditions,
             regularNote: this.regularNote,
             sendNotification: notification
         }
