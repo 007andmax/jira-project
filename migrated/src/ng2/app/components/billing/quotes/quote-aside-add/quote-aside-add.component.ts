@@ -44,19 +44,20 @@ export class QuoteAsideAddComponent implements OnInit {
       this.open = true;
     })
     this.sub.add(getOnCopy);
-    this.quoteStateService.getHandleSendMode().subscribe(data => {
+    let getHandleSendMode = this.quoteStateService.getHandleSendMode().subscribe(data => {
       this.saveAndSendBtn.setDisabled(true);
-      this.quoteService.createQuote(data, true).subscribe((res:any) => {
+      this.quoteService.createQuote(data, true).subscribe((res: any) => {
         this.quoteService.repeatSend(res.id).subscribe(sendRes => {
           this.saveAndSendBtn.setDisabled(false);
           this.close();
         })
-       
+
       }, err => {
         this.validate.setErrorMessage(err.error.validationResults.saleQuotePostDto);
         this.saveAndSendBtn.setDisabled(false);
       });
     });
+    this.sub.add(getHandleSendMode);
   }
   close() {
     this.open = false;

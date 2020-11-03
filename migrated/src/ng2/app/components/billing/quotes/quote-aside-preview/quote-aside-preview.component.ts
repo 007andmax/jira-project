@@ -48,14 +48,15 @@ export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
-    this.quoteStateService.getHandleSendModePreview().subscribe(data => {
+    let getHandleSendModePreview = this.quoteStateService.getHandleSendModePreview().subscribe(data => {
       this.quote = data;
       this.quoteServices.editQuote(this.quote.getDataForUpdate(true)).subscribe((res) => {
         this.quoteServices.repeatSend(this.quote.id).subscribe(sendRes => {
-        
+
         })
       });
     });
+    this.sub.add(getHandleSendModePreview);
   }
   close() {
     this.open = false;
@@ -95,17 +96,17 @@ export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
     modalRef.componentInstance.message = `Do you want to archive a quote?`;
   }
-  
+
   public resend() {
     if (this.quote.status === 'TICKETED' || this.quote.status === 'INVOICED') {
       this.quoteServices.repeatSend(this.quote.id).subscribe();
     } else {
       let recipients = this.quote.recipients;
       //  if (typeof recipients === "string") this.quote.recipients = recipients.split(',');
-     // this.quoteServices.getQuote(this.quote.id).subscribe((data) => {
-        const modalRef = this.modalService.open(ModalQuoteComponent,{ windowClass: 'quote-send-modal' });
-        modalRef.componentInstance.data = this.quote;
-        modalRef.componentInstance.action = QUOTE_MODAL_ACTION_PREVIEW;
+      // this.quoteServices.getQuote(this.quote.id).subscribe((data) => {
+      const modalRef = this.modalService.open(ModalQuoteComponent, { windowClass: 'quote-send-modal' });
+      modalRef.componentInstance.data = this.quote;
+      modalRef.componentInstance.action = QUOTE_MODAL_ACTION_PREVIEW;
       //})
     }
   }
