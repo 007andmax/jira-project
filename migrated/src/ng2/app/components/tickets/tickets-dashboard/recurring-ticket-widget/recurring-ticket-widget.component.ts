@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
-  selector: 'app-recurring-ticket-dashboard',
-  templateUrl: './recurring-ticket-dashboard.component.html',
-  styleUrls: ['./recurring-ticket-dashboard.component.scss']
+  selector: 'app-recurring-ticket-widget',
+  templateUrl: './recurring-ticket-widget.component.html',
+  styleUrls: ['./recurring-ticket-widget.component.scss']
 })
-export class RecurringTicketDashboardComponent implements OnInit {
-
+export class RecurringTicketWidgetComponent implements OnInit {
   @ViewChild('nvd3') nvd3:any;
   chartOptions: any;
   chartColors = ["#0646a4", "#00ccff", '#2bc7c6'];

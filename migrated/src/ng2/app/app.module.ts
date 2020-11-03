@@ -358,9 +358,10 @@ import { DashboardQuotesComponent } from './components/billing/dashboard-billing
 import { DashboardSalesAnalyticsComponent } from './components/billing/dashboard-billing/dashboard-sales-analytics/dashboard-sales-analytics.component';
 import { CompanyContractsComponent } from './components/companies/company-contracts/company-contracts.component';
 import { TicketsDashboardComponent } from './components/tickets/tickets-dashboard/tickets-dashboard.component';
-import { TicketPriorityDashboardComponent } from './components/tickets/tickets-dashboard/ticket-priority-dashboard/ticket-priority-dashboard.component';
-import { RecurringTicketDashboardComponent } from './components/tickets/tickets-dashboard/recurring-ticket-dashboard/recurring-ticket-dashboard.component';
-import { TicketsDashboardAnalyticsComponent } from './components/tickets/tickets-dashboard/tickets-dashboard-analytics/tickets-dashboard-analytics.component';
+import { RecurringTicketWidgetComponent } from './components/tickets/tickets-dashboard/recurring-ticket-widget/recurring-ticket-widget.component';
+import { TicketsAnalyticsWidgetComponent } from './components/tickets/tickets-dashboard/tickets-analytics-widget/tickets-analytics-widget.component';
+ import { TicketPriorityWidgetComponent } from './components/tickets/tickets-dashboard/ticket-priority-widget/ticket-priority-widget.component';
+ import { TimeOnTicketsWidgetComponent } from './components/tickets/tickets-dashboard/time-on-tickets-widget/time-on-tickets-widget.component';
 
 
 
@@ -898,17 +899,10 @@ angular.module('quicktech')
     ContractsAsideOtherProductComponent,
 
     ContractsAsideOtherServiceComponent,
-
     ContractsAsideProductServicePreviewComponent,
-
     ContractsAsideProductServiceEditComponent,
-
     ContractsAsideOtherServiceEditComponent,
     DashboardBillingComponent,
-
-
-
-
     InvoiceRevenueComponent,
     MultiDatepickerDashboardComponent,
     ContractsDashboardComponent,
@@ -917,37 +911,12 @@ angular.module('quicktech')
     DashboardStatsComponent,
     DashboardQuotesComponent,
     DashboardSalesAnalyticsComponent,
-
-
-
-
     CompanyContractsComponent,
-
-
-
-
     TicketsDashboardComponent,
-
-
-
-
- 
-
-
-
-
-    TicketPriorityDashboardComponent,
-
-
-
-
-    RecurringTicketDashboardComponent,
-
-
-
-
-    TicketsDashboardAnalyticsComponent
-
+    RecurringTicketWidgetComponent,
+    TicketsAnalyticsWidgetComponent,
+    TicketPriorityWidgetComponent,
+    TimeOnTicketsWidgetComponent
   ],
   imports: [
     BrowserModule,

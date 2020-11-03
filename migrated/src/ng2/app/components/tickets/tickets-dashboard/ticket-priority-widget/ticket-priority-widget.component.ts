@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
-  selector: 'app-ticket-priority-dashboard',
-  templateUrl: './ticket-priority-dashboard.component.html',
-  styleUrls: ['./ticket-priority-dashboard.component.scss']
+  selector: 'app-ticket-priority-widget',
+  templateUrl: './ticket-priority-widget.component.html',
+  styleUrls: ['./ticket-priority-widget.component.scss']
 })
-export class TicketPriorityDashboardComponent implements OnInit {
+export class TicketPriorityWidgetComponent implements OnInit {
 
   @ViewChild('nvd3') nvd3:any;
   chartOptions: any;

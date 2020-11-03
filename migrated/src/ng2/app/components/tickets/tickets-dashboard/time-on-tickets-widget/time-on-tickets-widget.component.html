@@ -1,0 +1,28 @@
+<div class="contract-dashboard-chart-card qt-mr-16">
+  <div class="contract-dashboard-chart-card__header">
+    <div class="contract-dashboard-chart-card__header-title">Time on Tickets</div>
+    <div class="list-type" ngbDropdown>
+      <span ngbDropdownToggle [textContent]="currentInterval.title"  id="dropdownIntervals"></span>
+      <div ngbDropdownMenu aria-labelledby="dropdownIntervals">
+        <ng-template ngFor let-item [ngForOf]="listIntervals" >
+          <a tabindex="-1" href="javascript:void(0)" ngbDropdownItem (click)="onSelectInterval(item)">
+            {{item.title}}
+          </a>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+
+  <div class="contract-dashboard-chart-card__chart-content" *ngIf="!showPreloader">
+    <div class="contract-info-card__text-info">
+      <div class="contract-info-card__title"  [textContent]="dashboardTicketsTime.getAverageResponseTime()"></div>
+      <div class="contract-info-card__subtitle" >Average Ticket Time</div>
+    </div>
+    <div class="contract-info-card__text-info">
+      <div class="contract-info-card__title" [textContent]="dashboardTicketsTime.getAverageLifeTime()" ></div>
+      <div class="contract-info-card__subtitle" >Average Response Time</div>
+    </div>
+  </div>
+ 
+  <div class="loading" *ngIf="showPreloader"></div>
+</div>

@@ -37,12 +37,12 @@ export class TicketsDashboardComponent implements OnInit {
     return moment(this.accountingStartDate).format('DD MMM YYYY');
   }
   getDashboard(type) {
-    this.ticketsService.getDashboard(type).subscribe(data => {
+   /* this.ticketsService.getDashboard(type).subscribe(data => {
       console.log("data", data);
-      this.dashboard = data;
+      this.dashboard = data;*/
       this.showPreloader = false;
       this.cd.detectChanges();
-    });
+ //  });
   }
 
 }

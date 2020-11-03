@@ -6,13 +6,9 @@ export class DashboardTickets {
     openTickets: number;
     totalTickets: number;
     constructor(data) {
-        
         this.chartData = data.chartData.map(item => new DashboardTicketsChartData(item));
-       
         this.onHoldTickets = data.onHoldTickets;
         this.openTickets = data.openTickets;
         this.totalTickets = data.totalTickets;
-        
     }
-    
 }

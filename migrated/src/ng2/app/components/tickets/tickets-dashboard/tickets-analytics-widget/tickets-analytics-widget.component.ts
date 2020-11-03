@@ -4,11 +4,11 @@ import { DashboardChartData } from '../../../billing/dashboard-billing/class/das
 import { CompanySetting } from '../../../companies/class/company-setting';
 
 @Component({
-  selector: 'app-tickets-dashboard-analytics',
-  templateUrl: './tickets-dashboard-analytics.component.html',
-  styleUrls: ['./tickets-dashboard-analytics.component.scss']
+  selector: 'app-tickets-analytics-widget',
+  templateUrl: './tickets-analytics-widget.component.html',
+  styleUrls: ['./tickets-analytics-widget.component.scss']
 })
-export class TicketsDashboardAnalyticsComponent implements OnInit {
+export class TicketsAnalyticsWidgetComponent implements OnInit {
   @Output() onSelectType = new EventEmitter<any>();
   @Input() chartData: Array<DashboardChartData> = [];
   type: string = "WEEKLY";
@@ -101,4 +101,5 @@ export class TicketsDashboardAnalyticsComponent implements OnInit {
   getSelectedType() {
     return this.listType.find(item => item.selected).title;
   }
+
 }

@@ -6,30 +6,25 @@
       <div [textContent]="'Accounting date: ' + getTextAccountingStartDate()"></div>
     </div>
 
-    <div class="qt-df qt-jc-sb qt-mb-16">
+  <!--   <div class="qt-df qt-jc-sb qt-mb-16">
       <app-dashboard-stats [title]="'Open Tickets'" [total]="dashboard.openTickets" [class]="'icon__total-sales'"></app-dashboard-stats>
-    <!-- <app-dashboard-total-sales [totalSales]="dashboard.totalSales"></app-dashboard-total-sales>
--->
+    
 <app-dashboard-stats [title]="'On-hold Tickets'" [total]="dashboard.onHoldTickets" [class]="'icon__unpaid-invoice'"></app-dashboard-stats>
 
-    <!-- <app-dashboard-unpaid-invoices [totalReceivableUnpaid]="dashboard.totalReceivableUnpaid"></app-dashboard-unpaid-invoices>-->
+   
     <app-dashboard-stats [title]="'New Tickets'" [total]="0" [class]="'icon__unbilled-amount'"></app-dashboard-stats>
 
-    <!--  <app-dashboard-unbilled-amount [totalBillable]="dashboard.totalBillable"></app-dashboard-unbilled-amount>-->
+   
     <app-dashboard-stats [title]="'Completed Tickets'" [total]="0" [class]="'icon__quotes'"></app-dashboard-stats>
 
     <app-dashboard-stats [title]="'Recurring Tickets'" [total]="0" [class]="'icon__quotes'"></app-dashboard-stats>
 
-    <!-- <app-dashboard-total-quotes [saleQuotesPossibleRevenue]="dashboard.saleQuotesPossibleRevenue"></app-dashboard-total-quotes>-->
-    </div>
-    <app-tickets-dashboard-analytics></app-tickets-dashboard-analytics>
+      </div>
+    <app-tickets-analytics-widget></app-tickets-analytics-widget> -->
     <div class="qt-df qt-jc-sb qt-mb-16">
-      <app-ticket-priority-dashboard   ></app-ticket-priority-dashboard>
-      
-      
-      
-      
-      <app-recurring-ticket-dashboard  ></app-recurring-ticket-dashboard>
+      <app-ticket-priority-widget  ></app-ticket-priority-widget>
+      <app-recurring-ticket-widget  ></app-recurring-ticket-widget>
+      <app-time-on-tickets-widget></app-time-on-tickets-widget>
           </div>
    
   </div>
