@@ -437,3 +437,15 @@
     }
   }
 }
+
+
+@media (max-height: 900px) {
+  .quotes-page__aside {
+    app-quote-aside-add-body {
+      .select-product__dropdown {
+        min-height: 300px;
+        height: 300px;
+      }
+    }
+  }
+}

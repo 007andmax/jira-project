@@ -102,7 +102,7 @@ table.qt-table-modern {
 
 .page-list {
   .qt-table-modern {
-    // max-width: 1320px;
+    max-width: 1320px;
     margin: 0 auto;
     min-width: 1064px;
   }
@@ -117,6 +117,14 @@ table.qt-table-modern {
     min-width: unset;
     th {
       white-space: nowrap;
+    }
+  }
+}
+
+@media (min-width: 1920px) {
+  .page-list {
+    .qt-table-modern {
+      max-width: unset;
     }
   }
 }
