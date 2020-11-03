@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
+import { QUOTE_MODAL_ACTION_EDIT } from 'src/ng2/app/const/quote';
 import { DisabledBtnDirective } from 'src/ng2/app/directives/disabled-btn.directive';
 import { ModalQuoteComponent } from 'src/ng2/app/services/modal/modal-quote/modal-quote.component';
 import { QuoteService } from 'src/ng2/app/services/quote/quote.service';
@@ -41,21 +42,17 @@ export class QuoteAsideEditComponent implements OnInit,OnDestroy {
     })
     this.sub.add(getOnEdit);
     let getHandleSendModeEdit = this.quoteStateService.getHandleSendModeEdit().subscribe(data => {
-      if (this.open) {
+     
         this.saveAndSendBtn.setDisabled(true);
         this.quoteService.editQuote(data).subscribe((res) => {
-          this.saveAndSendBtn.setDisabled(false);
-          this.close();
+          this.quoteService.repeatSend(data.id).subscribe(sendRes => {
+            this.saveAndSendBtn.setDisabled(false);
+            this.close();
+          })
         }, err => {
           this.validate.setErrorMessage(err.error.validationResults.saleQuotePostDto);
           this.saveAndSendBtn.setDisabled(false);
         });
-      } else {
-        let quote: QuoteEdit = data;
-        this.quoteService.editQuote(quote.getDataForUpdate(true)).subscribe((res) => { 
-        });
-      }
-     
     })
     this.sub.add(getHandleSendModeEdit);
   }
@@ -71,6 +68,7 @@ export class QuoteAsideEditComponent implements OnInit,OnDestroy {
     const modalRef = this.modalService.open(ModalQuoteComponent,{ windowClass: 'quote-send-modal' });
     let data = JSON.parse(JSON.stringify(quote.getDataForUpdate(true)));
     modalRef.componentInstance.data = data;
+    modalRef.componentInstance.action = QUOTE_MODAL_ACTION_EDIT;
   }
   saveAndDownload() {
     let quote: QuoteEdit = this.quoteEdit.getQuote();

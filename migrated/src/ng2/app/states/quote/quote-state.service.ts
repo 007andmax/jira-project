@@ -14,6 +14,8 @@ export class QuoteStateService {
   onInvoice: EventEmitter<any> = new EventEmitter();
   quoteForCopy:QuotePreview;
   public handleSendMode: EventEmitter<any> = new EventEmitter();
+  public handleSendModeList: EventEmitter<any> = new EventEmitter();
+  public handleSendModePreview: EventEmitter<any> = new EventEmitter();
   public handleSendModeEdit: EventEmitter<any> = new EventEmitter();
   public state;
   public usersEmail: any;
@@ -125,6 +127,21 @@ export class QuoteStateService {
 
   public getHandleSendMode () {
     return this.handleSendMode;
+  }
+  public saveSandModeList(data) {
+    this.handleSendModeList.emit(data);
+  }
+
+  public getHandleSendModeList () {
+    return this.handleSendModeList;
+  }
+
+  public saveSandModePreview(data) {
+    this.handleSendModePreview.emit(data);
+  }
+
+  public getHandleSendModePreview () {
+    return this.handleSendModePreview;
   }
 
   public saveSandModeEdit(data) {

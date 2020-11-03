@@ -9,6 +9,7 @@ import { ConfirmStateService } from '../../../shared/confirm/services/confirm-st
 import { ARCHIVE_QUOTE } from 'src/ng2/app/const/confirm';
 import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
 import { QuoteStateService } from 'src/ng2/app/states/quote/quote-state.service';
+import { QUOTE_MODAL_ACTION_PREVIEW } from 'src/ng2/app/const/quote';
 
 @Component({
   selector: 'app-quote-aside-preview',
@@ -47,6 +48,14 @@ export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
+    this.quoteStateService.getHandleSendModePreview().subscribe(data => {
+      this.quote = data;
+      this.quoteServices.editQuote(this.quote.getDataForUpdate(true)).subscribe((res) => {
+        this.quoteServices.repeatSend(this.quote.id).subscribe(sendRes => {
+        
+        })
+      });
+    });
   }
   close() {
     this.open = false;
@@ -96,6 +105,7 @@ export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
      // this.quoteServices.getQuote(this.quote.id).subscribe((data) => {
         const modalRef = this.modalService.open(ModalQuoteComponent,{ windowClass: 'quote-send-modal' });
         modalRef.componentInstance.data = this.quote;
+        modalRef.componentInstance.action = QUOTE_MODAL_ACTION_PREVIEW;
       //})
     }
   }

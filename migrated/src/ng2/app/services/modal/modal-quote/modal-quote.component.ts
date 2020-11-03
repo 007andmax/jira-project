@@ -11,6 +11,7 @@ import { ConfirmComponent } from 'src/ng2/app/components/shared/confirm/confirm.
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { SAVE_AND_SEND } from 'src/ng2/app/const/confirm';
 import { QuoteStateService } from 'src/ng2/app/states/quote/quote-state.service';
+import {  QUOTE_MODAL_ACTION_ADD, QUOTE_MODAL_ACTION_EDIT, QUOTE_MODAL_ACTION_LIST, QUOTE_MODAL_ACTION_PREVIEW } from 'src/ng2/app/const/quote';
 
 /**
  * Modal quote component
@@ -32,12 +33,10 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
   message: string;
   subject: string;
   focus = false;
-  isResend = false;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   userCtrl = new FormControl();
   selectedUsers = [];
   showError = false;
-  showErrorClient = false;
   usersEmails = [];
   users = [];
   initialized: boolean = false;
@@ -48,7 +47,8 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
 
   private unsubscribe: Subject<void> = new Subject();
   @Input() public data;
-  @Input() public onlySendMode = false;
+  @Input() public action;
+  
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
@@ -76,7 +76,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-    (this.data) && this.initResendMode();
+    this.initResendMode();
     this.getAllUsers(this.data.companyId);
     this.userInput.nativeElement.onblur = (e) => {
       if (this.matAutocomplete.isOpen) {
@@ -164,7 +164,6 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
    * Get user list
    */
   private getAllUsers(companyId) {
-    this.showErrorClient = false;
     let userList = this.usersStateService.getAllUsers();
     this.initialized = true;
     const techUser = userList.filter((item) => item.accountType === USER.TYPE.TECH && !item.deletedAt);
@@ -204,10 +203,16 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
   public save() {
     this.showError = false;
     if ((this.data && this.data.recipients.length > 0 && !!this.data.recipients[0]) || (this.usersEmails && this.usersEmails.length > 0)) {
-      if (!this.isResend) {
+      this.onInitSubjectAndMessage();
+      this.data.recipients = this.usersEmails;
+      if (this.action === QUOTE_MODAL_ACTION_PREVIEW) this.quoteStateService.saveSandModePreview(this.data);
+      if (this.action === QUOTE_MODAL_ACTION_EDIT) this.quoteStateService.saveSandModeEdit(this.data);
+      if (this.action === QUOTE_MODAL_ACTION_ADD) this.quoteStateService.saveSandMode(this.data);
+      if (this.action === QUOTE_MODAL_ACTION_LIST) this.quoteStateService.saveSandModeList(this.data);
+      
+    /*  if (!this.isResend) {
         this.onInitSubjectAndMessage();
         this.data.recipients = this.usersEmails;
-        
         this.quoteStateService.saveSandMode(this.data);
       } else {
         if (!this.data.id) {
@@ -221,7 +226,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
         }
 
 
-      }
+      }*/
       this.activeModal.close();
     } else {
       this.showError = true;
@@ -232,7 +237,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
    * Init resend mode
    */
   public initResendMode() {
-    this.isResend = true;
+ 
     if (this.data.recipients && this.data.recipients.length > 0 && this.data.recipients[0] !== "") {
       this.selectedUsers = JSON.parse(JSON.stringify([...this.data.recipients]));
     } else {

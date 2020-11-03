@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
+import { QUOTE_MODAL_ACTION_ADD } from 'src/ng2/app/const/quote';
 import { DisabledBtnDirective } from 'src/ng2/app/directives/disabled-btn.directive';
 import { ModalQuoteComponent } from 'src/ng2/app/services/modal/modal-quote/modal-quote.component';
 import { QuoteService } from 'src/ng2/app/services/quote/quote.service';
@@ -45,9 +46,12 @@ export class QuoteAsideAddComponent implements OnInit {
     this.sub.add(getOnCopy);
     this.quoteStateService.getHandleSendMode().subscribe(data => {
       this.saveAndSendBtn.setDisabled(true);
-      this.quoteService.createQuote(data, true).subscribe((res) => {
-        this.saveAndSendBtn.setDisabled(false);
-        this.close();
+      this.quoteService.createQuote(data, true).subscribe((res:any) => {
+        this.quoteService.repeatSend(res.id).subscribe(sendRes => {
+          this.saveAndSendBtn.setDisabled(false);
+          this.close();
+        })
+       
       }, err => {
         this.validate.setErrorMessage(err.error.validationResults.saleQuotePostDto);
         this.saveAndSendBtn.setDisabled(false);
@@ -68,6 +72,7 @@ export class QuoteAsideAddComponent implements OnInit {
     const modalRef = this.modalService.open(ModalQuoteComponent, { windowClass: 'quote-send-modal' });
     let data = JSON.parse(JSON.stringify(quote.getDataForCreate(true)));
     modalRef.componentInstance.data = data;
+    modalRef.componentInstance.action = QUOTE_MODAL_ACTION_ADD;
   }
   saveAndDownload() {
     let quote: QuoteAdd = this.quoteAdd.getQuote();

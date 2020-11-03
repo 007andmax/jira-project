@@ -42,7 +42,6 @@
         </mat-autocomplete>
       </mat-form-field>
       <p *ngIf="showError" class="qt-modal-bot-error">at least 1 user</p>
-      <p *ngIf="showErrorClient" class="qt-modal-bot-error">please choose Client</p>
     </div>
 
 
@@ -58,8 +57,7 @@
   </div>
   <div class="qt-modal__footer">
     <button class="qt-button --gray qt-mr-12" (click)="onCheckForClose()">Cancel</button>
-    <button class="qt-button qt-mr-12" (click)="save()" *ngIf="onlySendMode">Send</button>
-    <button class="qt-button qt-mr-12" (click)="save()" *ngIf="!onlySendMode">Send Message</button>
+    <button class="qt-button qt-mr-12" (click)="save()"  >Send Message</button>
   </div>
 </div>
 

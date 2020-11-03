@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
+import { QUOTE_MODAL_ACTION_LIST } from 'src/ng2/app/const/quote';
 import { ModalQuoteComponent } from 'src/ng2/app/services/modal/modal-quote/modal-quote.component';
 import { QuoteService } from 'src/ng2/app/services/quote/quote.service';
 import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
@@ -20,7 +21,7 @@ import { QuotesListService } from './services/quotes-list.service';
   styleUrls: ['./quotes-table.component.scss'],
   providers: [QuotesListService]
 })
-export class QuotesTableComponent implements OnInit,OnDestroy {
+export class QuotesTableComponent implements OnInit, OnDestroy {
   filter: QuoteFilter = new QuoteFilter();
   sort: QuoteSort = new QuoteSort();
   quotes: Array<Quote> = [];
@@ -67,6 +68,15 @@ export class QuotesTableComponent implements OnInit,OnDestroy {
       }
     })
     this.sub.add(changeQuotesArray);
+    let getHandleSendModeEdit = this.quoteStateService.getHandleSendModeList().subscribe(data => {
+      let quote: QuoteEdit = data;
+      this.quoteServices.editQuote(quote.getDataForUpdate(true)).subscribe((res) => {
+        this.quoteServices.repeatSend(quote.id).subscribe(sendRes => {
+
+        })
+      });
+    })
+    this.sub.add(getHandleSendModeEdit);
   }
   onInvoice(invoiceId) {
     this.quoteStateService.setInvoice(invoiceId);
@@ -130,6 +140,7 @@ export class QuotesTableComponent implements OnInit,OnDestroy {
         let quote: QuoteEdit = new QuoteEdit(data);
         const modalRef = this.modalService.open(ModalQuoteComponent, { windowClass: 'quote-send-modal' });
         modalRef.componentInstance.data = quote;
+        modalRef.componentInstance.action = QUOTE_MODAL_ACTION_LIST;
       })
 
     }

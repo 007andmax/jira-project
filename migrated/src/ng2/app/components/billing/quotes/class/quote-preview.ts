@@ -23,5 +23,32 @@ export class QuotePreview extends Quote {
         console.log("data",data);
         }
     }
+    public getDataForUpdate(notification) {
+        return {
+            companyId: this.company.id,
+            number: this.number,
+            quoteItems: {
+                type: "MIXED",
+                shares: [],
+                ticket: null,
+                products: this.products.map(item => item.getDataForUpdate()),
+                services: this.services.map(item => item.getDataForUpdate()),
+            },
+            id:this.id,
+            description: this.description,
+            requestPayment: false,
+            draft: false,
+            purchaseOrder: this.purchaseOrder,
+            partialDeposit: null,
+            validUntil: this.validUntil,
+            date: this.date,
+            recipients: this.recipients,
+            message: this.message,
+            subject: this.subject,
+            globalNote: this.termsAndConditions,
+            regularNote: this.regularNote,
+            sendNotification: notification
+        }
+    }
 
 }
