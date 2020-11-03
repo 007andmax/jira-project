@@ -52,7 +52,7 @@ export class CompanyDashboardComponent implements OnInit {
   recentInvoiceList = [];
   contractsList = [];
   sub: Subscription = new Subscription();
-  totalRevenue = 0;
+  totalRevenue = '';
   invoicedSum = 0;
   collectedSum = 0;
   outstandingSum = 0;
@@ -144,7 +144,7 @@ export class CompanyDashboardComponent implements OnInit {
     this.lineChartOptions = {
       chart: {
         type: 'lineChart',
-        height: 450,
+        height: 250,
         margin : {
           top: 20,
           right: 20,
@@ -161,12 +161,12 @@ export class CompanyDashboardComponent implements OnInit {
           return this.lineChartColors[i]
         },
         xAxis: {
-            axisLabel: 'X Axis',
+            axisLabel: '',
             tickFormat: function(d) {
-                return d3.time.format('%d/%m/%y')(new Date(d))
+                return d3.time.format('%e %b')(new Date(d))
             },
             showMaxMin: false,
-            staggerLabels: true
+            staggerLabels: false
         },
 
         yAxis: {
@@ -302,7 +302,13 @@ export class CompanyDashboardComponent implements OnInit {
       id: this._id
     };
     let getRevenue = this.companiesService.getInvoiceRevenue(obj).subscribe((data: any) => {
-      this.totalRevenue = data.collectedSum + data.invoicedSum + data.outstandingSum;
+      let totalRevenue = data.collectedSum + data.invoicedSum + data.outstandingSum;
+      this.totalRevenue = totalRevenue;
+      if (totalRevenue > 100000) {
+        this.totalRevenue = (totalRevenue / 100000).toFixed(2) + 'L'
+      } else if (totalRevenue > 1000) {
+        this.totalRevenue = (totalRevenue / 1000).toFixed(2) + 'k'
+      }
       this.invoicedSum = data.invoicedSum;
       this.collectedSum = data.collectedSum;
       this.outstandingSum = data.outstandingSum;

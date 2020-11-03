@@ -15,29 +15,29 @@
           <div class="cmp-dboard-rating d-flex">
             <!-- <span class="d-flex">
               <img
-                src="../../../../../ng2/assets/img/company-details/rating-filled.svg"
+                src="html/ng2/assets/img/company-details/rating-filled.svg"
                 alt="rating"
               />
               <img
-                src="../../../../../ng2/assets/img/company-details/rating-filled.svg"
+                src="html/ng2/assets/img/company-details/rating-filled.svg"
                 alt="rating"
               />
               <img
-                src="../../../../../ng2/assets/img/company-details/rating-filled.svg"
+                src="html/ng2/assets/img/company-details/rating-filled.svg"
                 alt="rating"
               />
               <img
-                src="../../../../../ng2/assets/img/company-details/rating-filled.svg"
+                src="html/ng2/assets/img/company-details/rating-filled.svg"
                 alt="rating"
               />
               <img
-                src="../../../../../ng2/assets/img/company-details/rating.svg"
+                src="html/ng2/assets/img/company-details/rating.svg"
                 alt="rating"
               />
             </span> -->
             <span class="d-flex" *ngIf="companyDetail?.reputation === undefined || companyDetail?.reputation === null ">
               <img *ngFor="let item of arrayOne(5); let i = index;"
-                src="../../../../../ng2/assets/img/company-details/rating.svg"
+                src="html/ng2/assets/img/company-details/rating.svg"
                 alt="rating"
               />
             </span>
@@ -59,7 +59,7 @@
             </address>
             <a (click)="openMap(content)" class="btn btn-outline">
               <img
-                src="../../../../../ng2/assets/img/company-details/location.svg"
+                src="html/ng2/assets/img/company-details/location.svg"
                 alt="location"
               />
               Get Direction</a
@@ -81,7 +81,7 @@
                     <button class="item" ngbDropdownItem *ngFor="let hours of workingDays">{{hours.dayOfWeek}}<span *ngIf="hours.startTime !== 0 && hours.endTime !== 0">{{hours.timing}}</span><span *ngIf="hours.startTime === 0 && hours.endTime === 0">Close</span></button>
                     <div class="item"> 
                       <button class="btn btn-outline" (click)="open(contentHour)"> 
-                        <img src="../../../../../ng2/assets/img/company-details/edit-blue.svg" alt="user" />  
+                        <img src="html/ng2/assets/img/company-details/edit-blue.svg" alt="user" />  
                         Edit Suggestions</button>
                     </div> 
                   </div> 
@@ -118,14 +118,14 @@
         <div class="profile-cmp-board tags-area d-flex">
           <div class="small-title d-flex">
             Tags
-            <!-- <a href="javascript:;">+Add</a> -->
+            <a href="javascript:;">+Add</a>
           </div>
           <div class="tags-tab d-flex">
             <span class="tag" *ngFor="let tag of tags; let i = index;"
               >{{tag.word}}
               <a href="javascript:;" (click)="deleteTag(i)" class="close">
                 <img
-                  src="../../../../../ng2/assets/img/company-details/tag-close-12.svg"
+                  src="html/ng2/assets/img/company-details/tag-close-12.svg"
                   alt="tags"
                 />
               </a>
@@ -135,7 +135,7 @@
         <div class="btn-row d-flex">
           <a href="javascript:;" (click)="downloadAgent()" class="btn btn-outline">
             <img
-              src="../../../../../ng2/assets/img/company-details/download.svg"
+              src="html/ng2/assets/img/company-details/download.svg"
               alt="download"
             />
             Download Agent
@@ -152,7 +152,7 @@
               <div class="cmp-profile-dp d-flex">
                 <figure class="d-flex">
                   <img
-                    src="../../../../../ng2/assets/img/company-details/total-user.svg"
+                    src="html/ng2/assets/img/company-details/total-user.svg"
                     alt="total-user"
                   />
                 </figure>
@@ -166,7 +166,7 @@
               <div class="cmp-profile-dp d-flex">
                 <figure class="d-flex">
                   <img
-                    src="../../../../../ng2/assets/img/company-details/total-devices.svg"
+                    src="html/ng2/assets/img/company-details/total-devices.svg"
                     alt="total-devices"
                   />
                 </figure>
@@ -180,7 +180,7 @@
               <div class="cmp-profile-dp d-flex">
                 <figure class="d-flex">
                   <img
-                    src="../../../../../ng2/assets/img/company-details/total-tickets.svg"
+                    src="html/ng2/assets/img/company-details/total-tickets.svg"
                     alt="total-tickets"
                   />
                 </figure>
@@ -194,7 +194,7 @@
               <div class="cmp-profile-dp d-flex">
                 <figure class="d-flex">
                   <img
-                    src="../../../../../ng2/assets/img/company-details/avg-response.svg"
+                    src="html/ng2/assets/img/company-details/avg-response.svg"
                     alt="avg-response"
                   />
                 </figure>
@@ -339,9 +339,9 @@
                                 <h6>Hourly Contract</h6>
                                 <p>Bill your customers by the hour, or create custom service that work for you and your customers</p>
                           </div>
-                          <h2>Contracts</h2>
-                      <div class="cmp-dash-table-wrap">
-                        <table *ngIf="contractsList.length > 0">
+                          <h2 *ngIf="contractsList.length > 0">Contracts</h2>
+                      <div class="cmp-dash-table-wrap" *ngIf="contractsList.length > 0">
+                        <table>
                            <thead> 
                               <tr>
                                  <th>Contract</th>
@@ -384,7 +384,7 @@
       <ul class="list-unstyled d-flex">
           <li class="d-flex">
             <figure class="d-flex">
-              <img src="../../../../../ng2/assets/img/user.jpg" alt="user" />
+              <img src="html/ng2/assets/img/user.jpg" alt="user" />
             </figure>
             <div class="user-list-info d-flex">
                 <h6><a href="javascript:;">Charles Garner</a> Assigned
@@ -394,7 +394,7 @@
           </li>
           <li class="d-flex">
             <figure class="d-flex">
-              <img src="../../../../../ng2/assets/img/user.jpg" alt="user" />
+              <img src="html/ng2/assets/img/user.jpg" alt="user" />
             </figure>
             <div class="user-list-info d-flex">
                 <h6><a href="javascript:;">Charles Garner</a> Assigned
@@ -404,7 +404,7 @@
           </li>
           <li class="d-flex">
             <figure class="d-flex">
-              <img src="../../../../../ng2/assets/img/user.jpg" alt="user" />
+              <img src="html/ng2/assets/img/user.jpg" alt="user" />
             </figure>
             <div class="user-list-info d-flex">
                 <h6><a href="javascript:;">Charles Garner</a> Assigned
@@ -414,7 +414,7 @@
           </li>
           <li class="d-flex">
             <figure class="d-flex">
-              <img src="../../../../../ng2/assets/img/user.jpg" alt="user" />
+              <img src="html/ng2/assets/img/user.jpg" alt="user" />
             </figure>
             <div class="user-list-info d-flex">
                 <h6><a href="javascript:;">Charles Garner</a> Assigned
@@ -424,7 +424,7 @@
           </li>
           <li class="d-flex">
             <figure class="d-flex">
-              <img src="../../../../../ng2/assets/img/user.jpg" alt="user" />
+              <img src="html/ng2/assets/img/user.jpg" alt="user" />
             </figure>
             <div class="user-list-info d-flex">
                 <h6><a href="javascript:;">Charles Garner</a> Assigned
@@ -434,7 +434,7 @@
           </li>
           <li class="d-flex">
             <figure class="d-flex">
-              <img src="../../../../../ng2/assets/img/user.jpg" alt="user" />
+              <img src="html/ng2/assets/img/user.jpg" alt="user" />
             </figure>
             <div class="user-list-info d-flex">
                 <h6><a href="javascript:;">Charles Garner</a> Assigned
@@ -444,7 +444,7 @@
           </li>
           <li class="d-flex">
             <figure class="d-flex">
-              <img src="../../../../../ng2/assets/img/user.jpg" alt="user" />
+              <img src="html/ng2/assets/img/user.jpg" alt="user" />
             </figure>
             <div class="user-list-info d-flex">
                 <h6><a href="javascript:;">Charles Garner</a> Assigned
