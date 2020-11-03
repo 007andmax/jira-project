@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LeftPanelStateService } from 'src/ng2/app/states/left-panel/left-panel-state.service';
+import { QuoteStateService } from 'src/ng2/app/states/quote/quote-state.service';
 
 /**
  * Password quotes component
@@ -8,12 +9,14 @@ import { LeftPanelStateService } from 'src/ng2/app/states/left-panel/left-panel-
   selector: 'app-quotes',
   templateUrl: './quotes.component.html',
   styleUrls: ['./quotes.component.scss'],
-  
+
 })
 export class QuotesComponent implements OnInit {
-
+  invoiceId: string;
+  showPreviewInvoice: boolean = false;
   constructor(
-    private leftPanelStateService:LeftPanelStateService,
+    private leftPanelStateService: LeftPanelStateService,
+    private quoteStateService: QuoteStateService,
   ) {
   }
 
@@ -22,5 +25,10 @@ export class QuotesComponent implements OnInit {
    */
   ngOnInit() {
     this.leftPanelStateService.setBillingpage('quotes-component');
+    this.quoteStateService.getOnInvoice().subscribe(data => {
+      this.invoiceId = data;
+      this.showPreviewInvoice = true;
+    })
+
   }
 }

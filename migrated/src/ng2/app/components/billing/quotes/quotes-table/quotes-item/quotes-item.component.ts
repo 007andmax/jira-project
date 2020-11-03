@@ -25,13 +25,18 @@ export class QuotesItemComponent implements OnInit {
   @Output() onDownloadPdf = new EventEmitter<any>();
   @Output() onPreview = new EventEmitter<any>();
   @Output() onCopy = new EventEmitter<any>();
+  @Output() onTicket = new EventEmitter<any>();
+  @Output() onInvoice = new EventEmitter<any>();
   constructor(private usersStateService: UsersStateService,
     public ticketsListService: TicketsListService,) { }
 
   ngOnInit() {
     this.createdUser = this.usersStateService.getAllUsers().find(item => item.id === this.quote.createdBy);
   }
-
+  openInvoiceTikcet() {
+    if (this.quote.status === "TICKETED") this.onTicket.emit(this.quote.ticketId);
+    if (this.quote.status === "INVOICED") this.onInvoice.emit(this.quote.invoiceId);
+  }
   getNameForAvatar() {
     if (!this.createdUser) return '';
     if (!this.createdUser.avatar) return `${(this.createdUser.firstName) ? this.createdUser.firstName[0].toUpperCase() : ''}${(this.createdUser.lastName) ? this.createdUser.lastName[0].toUpperCase() : ''}`;

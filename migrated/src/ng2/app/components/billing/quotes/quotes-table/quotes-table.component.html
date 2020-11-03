@@ -26,7 +26,10 @@
                     (onGoToQuoteEdit)="goToQuoteEdit($event)"
                     (onDownloadPdf)="downloadPdf($event)"
                     (onCopy)="copy($event)"
-                    (onPreview)="preview($event)" ></app-quotes-item>
+                    (onPreview)="preview($event)" 
+                    (onTicket)="openTikcet($event)"
+                    (onInvoice)="onInvoice($event)"
+                    ></app-quotes-item>
        </ng-template>
      </tbody>
         </table>

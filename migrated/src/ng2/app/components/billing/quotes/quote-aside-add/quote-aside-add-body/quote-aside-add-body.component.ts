@@ -74,7 +74,6 @@ export class QuoteAsideAddBodyComponent implements OnInit {
     this.quote.setCopyData(this.quoteStateService.getQuoteForCopy());
     this.quoteCompany = this.companiesState.getCompanies().find(item => item.id === this.quote.companyId);
     this.cd.detectChanges();
-    if (this.quote.regularNote && this.quote.regularNote.line1.length > 0) this.billableStateService.setRegulatNote(this.quote.regularNote);
     this.servicesList.getServicesList();
     console.log("this.quote",this.quote);
    
@@ -96,6 +95,11 @@ export class QuoteAsideAddBodyComponent implements OnInit {
   }
   private getInvoiceNote() {
     this.billableService.getInvoiceNote().subscribe(data => {
+      if (this.quoteStateService.getQuoteForCopy() && this.quote.regularNote && this.quote.regularNote.line1.length > 0) {
+        let find = data.find(item => item.id === this.quote.regularNote.id);
+        if (!find) this.quote.regularNote.id = "";
+        this.billableStateService.setRegulatNote(this.quote.regularNote);
+      }
       this.notes = data;
       this.termsAndConditions = this.companiesState.getCurrentCompany().conditions.content;
       this.elRef.nativeElement.querySelector("#description-global-note").value = this.termsAndConditions;

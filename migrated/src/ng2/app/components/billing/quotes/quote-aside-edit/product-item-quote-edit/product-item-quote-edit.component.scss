@@ -1,7 +1,7 @@
 .with-dollar,.with-percent {
     position: relative;
     &:before {
-        left: 8px;
+        left: 10px;
         top: calc(50% - 8px);
     }
 }

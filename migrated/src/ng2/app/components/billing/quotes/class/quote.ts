@@ -20,6 +20,8 @@ export class Quote {
     totalAmount: number;
     validUntil: number;
     createdBy:string;
+    invoiceId:string;
+    ticketId:string;
     constructor(data = null) {
         if (data) {
             for (const key in data) {

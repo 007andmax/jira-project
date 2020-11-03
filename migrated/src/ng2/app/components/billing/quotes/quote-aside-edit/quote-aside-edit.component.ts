@@ -41,14 +41,21 @@ export class QuoteAsideEditComponent implements OnInit,OnDestroy {
     })
     this.sub.add(getOnEdit);
     let getHandleSendModeEdit = this.quoteStateService.getHandleSendModeEdit().subscribe(data => {
-      this.saveAndSendBtn.setDisabled(true);
-      this.quoteService.editQuote(data).subscribe((res) => {
-        this.saveAndSendBtn.setDisabled(false);
-        this.close();
-      }, err => {
-        this.validate.setErrorMessage(err.error.validationResults.saleQuotePostDto);
-        this.saveAndSendBtn.setDisabled(false);
-      });
+      if (this.open) {
+        this.saveAndSendBtn.setDisabled(true);
+        this.quoteService.editQuote(data).subscribe((res) => {
+          this.saveAndSendBtn.setDisabled(false);
+          this.close();
+        }, err => {
+          this.validate.setErrorMessage(err.error.validationResults.saleQuotePostDto);
+          this.saveAndSendBtn.setDisabled(false);
+        });
+      } else {
+        let quote: QuoteEdit = data;
+        this.quoteService.editQuote(quote.getDataForUpdate(true)).subscribe((res) => { 
+        });
+      }
+     
     })
     this.sub.add(getHandleSendModeEdit);
   }

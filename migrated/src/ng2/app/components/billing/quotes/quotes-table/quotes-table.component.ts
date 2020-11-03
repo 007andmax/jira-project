@@ -1,10 +1,13 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { ModalQuoteComponent } from 'src/ng2/app/services/modal/modal-quote/modal-quote.component';
 import { QuoteService } from 'src/ng2/app/services/quote/quote.service';
+import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 import { QuoteStateService } from 'src/ng2/app/states/quote/quote-state.service';
+import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.service';
 import { Quote } from '../class/quote';
+import { QuoteEdit } from '../class/quote-edit';
 import { QuoteFilter } from '../class/quote-filter';
 import { QuotePreview } from '../class/quote-preview';
 import { QuoteSort } from '../class/quote-sort';
@@ -17,7 +20,7 @@ import { QuotesListService } from './services/quotes-list.service';
   styleUrls: ['./quotes-table.component.scss'],
   providers: [QuotesListService]
 })
-export class QuotesTableComponent implements OnInit {
+export class QuotesTableComponent implements OnInit,OnDestroy {
   filter: QuoteFilter = new QuoteFilter();
   sort: QuoteSort = new QuoteSort();
   quotes: Array<Quote> = [];
@@ -30,8 +33,11 @@ export class QuotesTableComponent implements OnInit {
     private quoteRealTimeService: QuoteRealTimeService,
     public cd: ChangeDetectorRef,
     private modalService: NgbModal,
+    private ticketsService: TicketsService,
+    private ticketsStateService: TicketsStateService,
     private quoteStateService: QuoteStateService,
     private quoteServices: QuoteService,) { }
+
 
   ngOnInit() {
     console.log("QuotesTableComponent");
@@ -47,7 +53,7 @@ export class QuotesTableComponent implements OnInit {
       this.onScroll();
     })
     this.sub.add(getOnInitFilter);
-    this.quoteRealTimeService.changeQuotesArray.subscribe((newChange) => {
+    let changeQuotesArray = this.quoteRealTimeService.changeQuotesArray.subscribe((newChange) => {
       if (newChange.action === 'SALE_QUOTE_CREATED') {
         return this.quotes.unshift(newChange.data);
       } else {
@@ -60,14 +66,18 @@ export class QuotesTableComponent implements OnInit {
 
       }
     })
+    this.sub.add(changeQuotesArray);
+  }
+  onInvoice(invoiceId) {
+    this.quoteStateService.setInvoice(invoiceId);
   }
   public sortBy(value) {
-    console.log("value",value);
+    console.log("value", value);
     this.showPreloader = true;
     window.scrollTo(0, 0);
     this.setDefaultScoll();
     this.filter.sortBy = this.sort.getSortType(value);
-    console.log("this.filter.sortBy",this.filter.sortBy);
+    console.log("this.filter.sortBy", this.filter.sortBy);
     this.getQuotes()
   }
   public setDefaultScoll() {
@@ -95,10 +105,10 @@ export class QuotesTableComponent implements OnInit {
   }
   copy(item) {
     this.quoteServices.getQuote(item.id).subscribe((data) => {
-      let quote = new  QuotePreview(data)
+      let quote = new QuotePreview(data)
       this.quoteStateService.setCopy(quote);
     })
-  
+
   }
   preview(item) {
     this.quoteStateService.setPreview(item);
@@ -117,12 +127,19 @@ export class QuotesTableComponent implements OnInit {
       let recipients = item.recipients;
       if (typeof recipients === "string") item.recipients = recipients.split(',');
       this.quoteServices.getQuote(item.id).subscribe((data) => {
+        let quote: QuoteEdit = new QuoteEdit(data);
         const modalRef = this.modalService.open(ModalQuoteComponent, { windowClass: 'quote-send-modal' });
-        modalRef.componentInstance.data = data;
+        modalRef.componentInstance.data = quote;
       })
 
     }
 
+  }
+  openTikcet(id) {
+    this.ticketsStateService.onOpenTicket();
+    this.ticketsService.getTicket(id).subscribe(data => {
+      this.ticketsStateService.onEditTicket(data);
+    })
   }
   goToQuoteEdit(quote) {
     this.quoteStateService.setEdit(quote);
@@ -157,5 +174,8 @@ export class QuotesTableComponent implements OnInit {
     this.quoteServices.convertToInvoice({ companyInfo: item.company }, item.id).subscribe((res) => {
 
     });
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }
