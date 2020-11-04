@@ -362,6 +362,7 @@ import { RecurringTicketWidgetComponent } from './components/tickets/tickets-das
 import { TicketsAnalyticsWidgetComponent } from './components/tickets/tickets-dashboard/tickets-analytics-widget/tickets-analytics-widget.component';
  import { TicketPriorityWidgetComponent } from './components/tickets/tickets-dashboard/ticket-priority-widget/ticket-priority-widget.component';
  import { TimeOnTicketsWidgetComponent } from './components/tickets/tickets-dashboard/time-on-tickets-widget/time-on-tickets-widget.component';
+import { TicketsBillableHoursWidgetComponent } from './components/tickets/tickets-dashboard/tickets-billable-hours-widget/tickets-billable-hours-widget.component';
 
 
 
@@ -916,7 +917,8 @@ angular.module('quicktech')
     RecurringTicketWidgetComponent,
     TicketsAnalyticsWidgetComponent,
     TicketPriorityWidgetComponent,
-    TimeOnTicketsWidgetComponent
+    TimeOnTicketsWidgetComponent,
+    TicketsBillableHoursWidgetComponent
   ],
   imports: [
     BrowserModule,

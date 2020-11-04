@@ -1,0 +1,39 @@
+<div class="contract-dashboard-chart-card qt-mr-16"  >
+  <div class="contract-dashboard-chart-card__header">
+    <div class="contract-dashboard-chart-card__header-title">Billable Hours</div>
+    <div class="list-type" ngbDropdown>
+      <span ngbDropdownToggle [textContent]="currentInterval.title"  id="dropdownIntervals"></span>
+      <div ngbDropdownMenu aria-labelledby="dropdownIntervals">
+        <ng-template ngFor let-item [ngForOf]="listIntervals" >
+          <a tabindex="-1" href="javascript:void(0)" ngbDropdownItem (click)="onSelectInterval(item)">
+            {{item.title}}
+          </a>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+
+ 
+   <div class="list-titles">
+    <ng-template ngFor let-item
+    [ngForOf]="dashboardTicketsBillableHours.lines"
+     >
+    <p [textContent]="item.title"></p>
+ </ng-template>
+   </div>
+   <div class="list-values">
+    <ng-template ngFor let-item
+    [ngForOf]="dashboardTicketsBillableHours.lines"
+     >
+    <div class="line-value" [ngStyle]="{'width': item.percent + '%'}" [textContent]="item.value"></div>
+ </ng-template>
+   </div>
+   <div class="list-counters">
+    <ng-template ngFor let-item
+    [ngForOf]="dashboardTicketsBillableHours.counters"
+     >
+    <span class="qt-mr-16" [textContent]="item"></span>
+ </ng-template>
+   </div>
+  
+</div>

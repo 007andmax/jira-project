@@ -13,6 +13,9 @@ export class TicketsService {
   private apiUrl = environment.apiUrl;
   constructor(private http: HttpClient) { }
 
+  public getDashboardByServices(data) {
+    return this.http.post(this.apiUrl + `dashboard/ticket/byServices`,data);
+  }
   public getDashboard(frequency) {
     return this.http.get(this.apiUrl + `dashboard/ticket?frequency=${frequency}`).pipe(map((data: any) => new DashboardTickets(data)));
   }

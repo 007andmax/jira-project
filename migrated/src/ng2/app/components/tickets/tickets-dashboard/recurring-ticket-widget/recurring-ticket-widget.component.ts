@@ -30,8 +30,11 @@ export class RecurringTicketWidgetComponent implements OnInit {
           left: -5
         },
         donut: true,
+        valueFormat: (n) =>{
+          return n;
+        },
         x: (d: any) => { return d.label; },
-        y: (d: any) => { return d.value; },
+        y: (d: any) => {  return d.value; },
         showLabels: false,
         color: (d: any, i: any) => {
           return this.chartColors[i]

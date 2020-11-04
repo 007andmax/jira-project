@@ -27,6 +27,9 @@ export class TicketPriorityWidgetComponent implements OnInit {
           bottom: -5,
           left: -5
         },
+        valueFormat: (n) =>{
+          return n;
+        },
         donut: true,
         x: (d: any) => { return d.label; },
         y: (d: any) => { return d.value; },

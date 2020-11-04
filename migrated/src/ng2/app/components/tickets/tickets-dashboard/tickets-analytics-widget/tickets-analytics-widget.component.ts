@@ -102,12 +102,12 @@ export class TicketsAnalyticsWidgetComponent implements OnInit {
     return [
       {
         values: sin,      //values - represents the array of {x,y} data points
-        key: 'totalTickets', //key  - the name of the series.
+        key: 'Created tickets', //key  - the name of the series.
         color: '#0747a6'  //color - optional: choose your own line color.
       },
       {
         values: sin2,      //values - represents the array of {x,y} data points
-        key: 'completedTickets', //key  - the name of the series.
+        key: 'Completed tickets', //key  - the name of the series.
         color: '#00ccff'  //color - optional: choose your own line color.
       },
     ];
