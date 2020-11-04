@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import * as moment from 'moment';
+import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 import { DashboardChartData } from '../../../billing/dashboard-billing/class/dashboard-chart-data';
 import { CompanySetting } from '../../../companies/class/company-setting';
+import { DashboardTickets } from '../class/dashboard-tickets';
 
 @Component({
   selector: 'app-tickets-analytics-widget',
@@ -10,16 +12,17 @@ import { CompanySetting } from '../../../companies/class/company-setting';
 })
 export class TicketsAnalyticsWidgetComponent implements OnInit {
   @Output() onSelectType = new EventEmitter<any>();
-  @Input() chartData: Array<DashboardChartData> = [];
+ 
   type: string = "WEEKLY";
   @ViewChild('nvd3') nvd3: any;
   options;
   data;
+  dashboard: DashboardTickets;
   listType: Array<CompanySetting> = [
     new CompanySetting('Daily', 'DAILY'),
     new CompanySetting('Weekly', 'WEEKLY'),
     new CompanySetting('Monthly', 'MONTHLY')];
-  constructor() { }
+  constructor(private ticketsService:TicketsService) { }
 
   ngOnInit() {
     this.listType[1].selected = true;
@@ -42,18 +45,15 @@ export class TicketsAnalyticsWidgetComponent implements OnInit {
         xAxis: {
           axisLabel: '',
           tickFormat: (d) => {
-            
+            if (d >= this.dashboard.chartData.length) return "";
             if (this.type === "MONTHLY") {
-              if (currentDate.getFullYear() === new Date(this.chartData[d].date).getFullYear()) {
-                return moment(this.chartData[d].date).format('MMM');
+              if (currentDate.getFullYear() === new Date(this.dashboard.chartData[d].date).getFullYear()) {
+                return moment(this.dashboard.chartData[d].date).format('MMM');
               } else {
-                return moment(this.chartData[d].date).format('MMM YYYY');
+                return moment(this.dashboard.chartData[d].date).format('MMM YYYY');
               }
-
             }
-            if (this.type === "WEEKLY" || this.type === "DAILY") return moment(this.chartData[d].date).format('DD MMM');
-            
-
+            if (this.type === "WEEKLY" || this.type === "DAILY") return moment(this.dashboard.chartData[d].date).format('DD MMM');
           },
           showMaxMin: false,
           staggerLabels: false,
@@ -62,7 +62,6 @@ export class TicketsAnalyticsWidgetComponent implements OnInit {
         },
         yAxis: {
           axisLabel: '',
-
           axisLabelDistance: -10
         }
       },
@@ -75,17 +74,50 @@ export class TicketsAnalyticsWidgetComponent implements OnInit {
       },
       title: {
         enable: false,
-
       },
       subtitle: {
         enable: false,
-
       },
       caption: {
         enable: false,
-
       }
     };
+    this.getDashboard();
+  }
+  public updateDataChart() {
+    this.data = this.getDataForChart();
+    if (this.nvd3.char) this.nvd3.chart.update();
+  }
+  getDataForChart() {
+    let sin = [], sin2 = [];
+    this.dashboard.chartData= this.dashboard.chartData.splice(this.dashboard.chartData.length - 30,this.dashboard.chartData.length);
+  //  this.chartData = JSON.parse(JSON.stringify(this.chartData.reverse()));
+    //Data is represented as an array of {x,y} pairs.
+    for (let i = 1; i < 30; i++) {
+      sin.push({ x: i, y: this.dashboard.chartData[i].totalTickets });
+      sin2.push({ x: i, y: this.dashboard.chartData[i].completedTickets });
+    }
+
+    //Line chart data should be sent as an array of series objects.
+    return [
+      {
+        values: sin,      //values - represents the array of {x,y} data points
+        key: 'totalTickets', //key  - the name of the series.
+        color: '#0747a6'  //color - optional: choose your own line color.
+      },
+      {
+        values: sin2,      //values - represents the array of {x,y} data points
+        key: 'completedTickets', //key  - the name of the series.
+        color: '#00ccff'  //color - optional: choose your own line color.
+      },
+    ];
+  };
+  getDashboard() {
+    this.ticketsService.getDashboard(this.type).subscribe(data => {
+      console.log("data",data);
+      this.dashboard = data;
+      this.updateDataChart();
+    })
   }
   selectType(type) {
     this.listType.forEach(item => {
@@ -95,8 +127,9 @@ export class TicketsAnalyticsWidgetComponent implements OnInit {
         item.selected = false;
       }
     })
-    this.onSelectType.emit(type);
+   
     this.type = type;
+    this.getDashboard();
   }
   getSelectedType() {
     return this.listType.find(item => item.selected).title;

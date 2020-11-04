@@ -12,11 +12,11 @@ export class TimeOnTicketsWidgetComponent implements OnInit {
   dashboardTicketsTime: DashboardTicketsTime = new DashboardTicketsTime();
   showPreloader: boolean = true;
   listIntervals = [new CompanySetting('last month', 'LAST_MONTH'), new CompanySetting('current month', 'CURRENT_MONTH'), new CompanySetting('year to date', 'YEAR_TO_DATE')];
-  currentInterval = new CompanySetting('year to date', 'YEAR_TO_DATE');
+  currentInterval = new CompanySetting('last month', 'LAST_MONTH');
   constructor(private ticketsDashboardService: TicketsDashboardService) { }
 
   ngOnInit() {
-  this.onGetTicketsTime();
+    this.onGetTicketsTime();
   }
   onSelectInterval(item) {
     this.currentInterval = item;

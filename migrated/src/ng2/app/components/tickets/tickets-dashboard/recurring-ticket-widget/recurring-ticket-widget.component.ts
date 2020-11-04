@@ -1,4 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { DashboardTicketsStats } from '../class/dashboard-tickets-stats';
+
+import { DashboardTicketsTime } from '../class/dashboard-tickets-time';
 
 @Component({
   selector: 'app-recurring-ticket-widget',
@@ -6,12 +9,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
   styleUrls: ['./recurring-ticket-widget.component.scss']
 })
 export class RecurringTicketWidgetComponent implements OnInit {
-  @ViewChild('nvd3') nvd3:any;
+  @ViewChild('nvd3') nvd3: any;
+  @Input() dashboardTicketsStats: DashboardTicketsStats = new DashboardTicketsStats();
   chartOptions: any;
   chartColors = ["#0646a4", "#00ccff", '#2bc7c6'];
   data: any;
 
-  constructor( ) { }
+  constructor() { }
 
   ngOnInit() {
     this.chartOptions = {
@@ -34,30 +38,23 @@ export class RecurringTicketWidgetComponent implements OnInit {
         },
         showLegend: false,
         duration: 500,
-        
+
         donutRatio: '0.68'
       }
     }
     this.data = [
       {
-        "label": "Invoiced",
-        "value": 8
+        "label": "Recurring Open Tickets",
+        "value": this.dashboardTicketsStats.RECURRING_TICKETS_OPEN
       },
       {
-        "label": "Collected",
-        "value": 32
+        "label": "Recurirng Close Tickets",
+        "value": this.dashboardTicketsStats.RECURRING_TICKETS_CLOSED
       },
-      {
-        "label": "Outstanding",
-        "value": 60
-      }
+
     ];
-    
-
   }
-  
-
-
-
-
+  getTotal() {
+    return this.dashboardTicketsStats.RECURRING_TICKETS_OPEN + this.dashboardTicketsStats.RECURRING_TICKETS_CLOSED;
+  }
 }

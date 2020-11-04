@@ -7,9 +7,14 @@ export class DashboardTicketsTime {
   endDate: string;
   constructor() {
     let startDate = new Date();
-    startDate = new Date(startDate.getFullYear(), 0, 1);
+    let endDate = new Date();
+    startDate.setDate(1);
+    startDate.setMonth(startDate.getMonth() - 1);
+    endDate.setMonth(endDate.getMonth() - 1);
+    let lastDayOfMonth = new Date(endDate.getFullYear(), endDate.getMonth() + 1, 0).getDate();
+    endDate.setDate(lastDayOfMonth);
     this.startDate = moment(startDate).format('YYYY/MM/DD');
-    this.endDate = moment(new Date()).format('YYYY/MM/DD');
+    this.endDate = moment(endDate).format('YYYY/MM/DD');
   }
   public onSetDates(value) {
     let startDate = new Date();
@@ -47,9 +52,9 @@ export class DashboardTicketsTime {
     return `${(hours < 10) ? '0' + hours : hours} : ${(minutes < 10) ? '0' + minutes : minutes} hrs`
   }
   public getAverageLifeTime() {
-    var timeInMinutes = this.averageResponseTime * 60,
+    var timeInMinutes = this.averageLifeTime * 60,
       hours = Math.floor(timeInMinutes / 60),
       minutes = Math.round(timeInMinutes - (hours * 60));
-    return `${(minutes < 10) ? '0' + minutes : minutes} min`
+    return `${(hours < 10) ? '0' + hours : hours} : ${(minutes < 10) ? '0' + minutes : minutes} hrs`
   }
 }

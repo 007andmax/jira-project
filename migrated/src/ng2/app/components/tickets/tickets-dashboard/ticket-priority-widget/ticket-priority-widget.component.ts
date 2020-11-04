@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { DashboardTicketsStats } from '../class/dashboard-tickets-stats';
 
 @Component({
   selector: 'app-ticket-priority-widget',
@@ -6,7 +7,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
   styleUrls: ['./ticket-priority-widget.component.scss']
 })
 export class TicketPriorityWidgetComponent implements OnInit {
-
+  @Input() dashboardTicketsStats: DashboardTicketsStats = new DashboardTicketsStats();
   @ViewChild('nvd3') nvd3:any;
   chartOptions: any;
   chartColors = ["#0646a4", "#00ccff", '#2bc7c6'];
@@ -41,22 +42,24 @@ export class TicketPriorityWidgetComponent implements OnInit {
     }
     this.data = [
       {
-        "label": "Invoiced",
-        "value": 8
+        "label": "High",
+        "value": this.dashboardTicketsStats.HIGH
       },
       {
-        "label": "Collected",
-        "value": 32
+        "label": "Medium",
+        "value": this.dashboardTicketsStats.MEDIUM
       },
       {
-        "label": "Outstanding",
-        "value": 60
+        "label": "Low",
+        "value": this.dashboardTicketsStats.LOW
       }
     ];
     
 
   }
-  
+  getTotal() {
+    return this.dashboardTicketsStats.HIGH + this.dashboardTicketsStats.MEDIUM + this.dashboardTicketsStats.LOW;
+  }
 
 
 

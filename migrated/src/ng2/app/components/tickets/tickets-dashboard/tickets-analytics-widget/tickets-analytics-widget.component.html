@@ -1,6 +1,6 @@
 <div class="contract-dashboard-chart-card qt-mb-16" ngbDropdown>
   <div class="contract-dashboard-chart-card__header">
-    <div class="contract-dashboard-chart-card__header-title">Sales Analytics</div>
+    <div class="contract-dashboard-chart-card__header-title">Tickets</div>
     <div class="qt-color-dark-light qt-fs-12 qt-df qt-ai-c pointer" id="dropdown1" ngbDropdownToggle>
       <div [textContent]="getSelectedType()" class="qt-mr-5"></div> <div class="icon__profile-dropdown qt-ic-c qt-sz-16"></div>
     </div>
@@ -12,7 +12,7 @@
     </ul>
 
   </div>
-    <div class="contract-dashboard-chart-card__chart-content">
-      <nvd3 #nvd3 class="sales-analytic" [options]="options" [data]="data" #nvd3></nvd3>
-    </div>
+  <div class="contract-dashboard-chart-card__chart-content">
+    <nvd3 #nvd3 class="sales-analytic" [options]="options" [data]="data" #nvd3></nvd3>
+  </div>
   </div>

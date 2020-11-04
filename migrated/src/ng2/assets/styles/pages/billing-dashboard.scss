@@ -21,6 +21,7 @@
   app-contracts-dashboard,
   app-dashboard-quotes,
   app-dashboard-sales-analytics,
+  app-tickets-analytics-widget,
   app-dashboard-stats {
     display: contents;
   }
@@ -375,7 +376,7 @@
     }
   }
 
-  app-dashboard-sales-analytics {
+  app-dashboard-sales-analytics,app-tickets-analytics-widget {
     .nvd3 .nv-x .nv-axis line {
       opacity: 0 !important;
     }
@@ -397,7 +398,7 @@
       opacity: 0;
     }
   }
-  app-dashboard-sales-analytics {
+  app-dashboard-sales-analytics,app-tickets-analytics-widget {
     .contract-dashboard-chart-card__chart-content {
       padding-top: 0;
     }
