@@ -70,6 +70,14 @@ export class CompanyDashboardComponent implements OnInit {
   };
   tags = [];
   mapSrc = '';
+  serviceType = '';
+  domain = '';
+  serviceTypesMap = {
+    HOURLY: 'Hourly',
+    BLOCK_TIME: 'Block time',
+    SEMI_MANAGED: 'Semi managed',
+    FULLY_MANAGED: 'Fully managed'
+  }
   aa;
   workingDays = [];
   public companyDetail: CompanyProfile;
@@ -203,6 +211,8 @@ export class CompanyDashboardComponent implements OnInit {
       this.totalTickets = this.companyDetail['companyTicketStatistic'].totalTickets;
       this.averageResponseTime = this.companyDetail['companyTicketStatistic'].averageResponseTime;
       this.tags = this.companyDetail.tags;
+      this.serviceType = (this.companyDetail.serviceType == undefined || this.companyDetail.serviceType == null) ? '' : this.companyDetail.serviceType;
+      this.domain = (this.companyDetail.domain == undefined || this.companyDetail.domain == null) ? '' : this.companyDetail.domain;
       this.primaryContact = {
         firstName: this.companyDetail.contacts[0].firstName,
         lastName: this.companyDetail.contacts[0].lastName,
@@ -407,8 +417,45 @@ export class CompanyDashboardComponent implements OnInit {
   }
 
   saveHours() {
-    this.workingDays;
-    debugger;
+    let data = [];
+    this.workingDays.forEach(element => {
+      data.push({
+        dayOfWeek: element.dayOfWeek,
+        startTime: element.sTime == undefined ? 0 : this.gotSecondFromTimeAndFormatObject(moment(element.sTime).format('hh:mm'), moment(element.sTime).format('A')),
+        endTime: element.eTime == undefined ? 0 : this.gotSecondFromTimeAndFormatObject(moment(element.eTime).format('hh:mm'), moment(element.eTime).format('A'))
+      });
+    });
+    this.companyDetail.workingDays = data;
+    this.saveCompany();
+  }
+
+  gotSecondFromTimeAndFormatObject(objectTime, objectTimeFormat) {
+    if (objectTime && objectTimeFormat) {
+      
+      let hours, minutes, separateTime;
+
+      if (typeof objectTime === 'string') {
+        separateTime = objectTime.split(':');
+        hours = parseInt(separateTime[0]);
+        minutes = parseInt(separateTime[1]);
+      } else {
+     /*   hours = Math.floor(objectTime / 60);
+        minutes = objectTime % 60;*/
+        let timeInMinutes = objectTime * 60,
+        hours = Math.floor(timeInMinutes / 60),
+        minutes = Math.round(timeInMinutes - (hours * 60));
+    
+      }
+
+      return (objectTimeFormat === 'AM' ? hours * 3600 + minutes * 60 : hours * 3600 + minutes * 60 + 12 * 3600);
+    }
+  }
+
+  saveCompany() {
+    let savecompany = this.companiesService.editWoringHours(this.companyDetail).subscribe((data: any) => {
+      
+    });
+    this.sub.add(savecompany);
   }
 
   public onChangeStartTime(data, i) {
@@ -424,7 +471,7 @@ export class CompanyDashboardComponent implements OnInit {
       this.workingDays[index].sTime = 0;
       this.workingDays[index].eTime = 0;
     }
-  }
+  } 
 
   downloadAgent() {
 

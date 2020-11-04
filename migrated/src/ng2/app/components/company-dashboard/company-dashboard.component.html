@@ -43,7 +43,7 @@
             </span>
             <div class="cmp-user-info d-flex">
               <span class="user-info-pt d-flex" *ngIf="companyDetail?.clientType">{{companyDetail.clientType}}</span>
-              <span class="user-info-pt d-flex">Hourly</span>
+              <span class="user-info-pt d-flex" *ngIf="serviceType !== '' ">{{serviceTypesMap[serviceType]}}</span>
             </div>
           </div>
         </div>
@@ -67,8 +67,8 @@
           </div>
           <div class="other-info-col d-flex">
             <div class="small-title">Website</div>
-            <a href="javascript:;"
-              >http://www.dimensiondentistry.com</a
+            <a href="{{domain}}" target="_blank"
+              >{{domain}}</a
             >
           </div>
           <div class="other-info-col d-flex">
@@ -483,7 +483,7 @@
       </form>
       <div class="footer-area-modal d-flex">
         <button type="button" class="btn btn-secondary" aria-label="Close" (click)="modal.dismiss('Cross click')">Cancel</button>
-        <button type="button" class="btn btn-primary" (click)="saveHours()">Save Changes</button>
+        <button type="button" class="btn btn-primary" (click)="saveHours();">Save Changes</button>
       </div>
   </div>
   

@@ -1193,23 +1193,24 @@ body {
                     background-size: 16px;
                     display: flex;
                 }
-                .dropdown-menu {
-                    width: 200px;
-                    height: 284px;
-                    .item {
-                        &:last-child {
-                            justify-content: center;
-                        }
-                        &.selected,
-                        &:hover {
-                            color: #364656;
-                            font-family: $graphicMedBold;
-                        }
-                        span {
-                            width: 80px;
-                            display: inline-block;
-                            text-align: left;
-                        }
+                
+            }
+            .dropdown-menu {
+                width: 200px;
+                height: 284px;
+                .item {
+                    &:last-child {
+                        justify-content: center;
+                    }
+                    &.selected,
+                    &:hover {
+                        color: #364656;
+                        font-family: $graphicMedBold;
+                    }
+                    span {
+                        width: 80px;
+                        display: inline-block;
+                        text-align: left;
                     }
                 }
             }
