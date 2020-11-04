@@ -152,6 +152,10 @@
     height: calc(100vh - 79px);
     z-index: 5;
 
+    .new-quote-table tbody * {
+      font-size: 12px;
+    }
+
     &.additional-padding {
       .quote-aside-scroll-content {
         padding-top: 100px !important;

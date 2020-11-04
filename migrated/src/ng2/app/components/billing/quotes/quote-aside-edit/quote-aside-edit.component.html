@@ -23,7 +23,7 @@
 
         </ul>
         <button class=" qt-button --with-menu qt-mr-12" >
-          <span class="save-billable-aside-btn" appDisabledBtn #saveAndContinueBtn="disabled" (onClick)="saveAndSend()"  >
+          <span class="save-billable-aside-btn left-side" appDisabledBtn #saveAndContinueBtn="disabled" (onClick)="saveAndSend()"  >
             <span  *ngIf="!saveAndSendBtn.isBlock() && !saveAndContinueBtn.isBlock() && !saveAndApproveBtn.isBlock() && !saveAndDownloadBtn.isBlock()">Save and Send</span>
             <app-preloader-ticket *ngIf="saveAndSendBtn.isBlock() || saveAndContinueBtn.isBlock() || saveAndApproveBtn.isBlock() || saveAndDownloadBtn.isBlock()"></app-preloader-ticket>
           </span>

@@ -38,7 +38,7 @@
         <li ngbDropdownItem appDisabledBtn #saveAndDownloadBtn="disabled" (onClick)="saveAndDownload()"  ><div class="icon__download qt-sz-16 qt-mr-8"></div>Save and Download</li>
       </ul>
       <button class="qt-button --with-menu qt-mr-12" >
-        <span class="save-billable-aside-btn" appDisabledBtn #saveAndSendBtn="disabled" (onClick)="saveAndSend()"  >
+        <span class="save-billable-aside-btn left-side" appDisabledBtn #saveAndSendBtn="disabled" (onClick)="saveAndSend()"  >
           <span  *ngIf="!saveAndSendBtn.isBlock() && !saveAndPrintBtn.isBlock() && !saveAndDownloadBtn.isBlock()">Save and Send</span>
           <app-preloader-ticket *ngIf="saveAndSendBtn.isBlock() || saveAndPrintBtn.isBlock() || saveAndDownloadBtn.isBlock()"></app-preloader-ticket>
         </span>
