@@ -1,39 +1,39 @@
-<div class="contract-dashboard-chart-card qt-mr-16"  >
+<div class="qt-card billing-hours">
   <div class="contract-dashboard-chart-card__header">
-    <div class="contract-dashboard-chart-card__header-title">Billable Hours</div>
+    <div class="billing-hours__header-title">Billable Hours</div>
     <div class="list-type" ngbDropdown>
-      <span ngbDropdownToggle [textContent]="currentInterval.title"  id="dropdownIntervals"></span>
-      <div ngbDropdownMenu aria-labelledby="dropdownIntervals">
+      <div class="billing-hours__interval-title" ngbDropdownToggle [textContent]="currentInterval.title"  id="dropdownIntervals"></div>
+
+      <ul class="qt-dropdown-menu --border" ngbDropdownMenu aria-labelledby="dropdownIntervals">
         <ng-template ngFor let-item [ngForOf]="listIntervals" >
-          <a tabindex="-1" href="javascript:void(0)" ngbDropdownItem (click)="onSelectInterval(item)">
-            {{item.title}}
-          </a>
+          <li class="pointer" tabindex="-1" href="javascript:void(0)" ngbDropdownItem  [textContent]="item.title"(click)="onSelectInterval(item)"></li>
+        </ng-template>
+      </ul>
+    </div>
+  </div>
+
+  <div class="qt-pl-24 qt-pr-24 qt-pb-24 qt-pt-12 qt-df">
+    <div class="labels-container">
+      <ng-template ngFor let-item [ngForOf]="dashboardTicketsBillableHours.lines">
+        <div class="labels-container-item qt-ff-gm">{{ item.title }}</div>
+      </ng-template>
+    </div>
+    <div class="cols-container">
+      <ng-template ngFor let-item [ngForOf]="dashboardTicketsBillableHours.counters">
+        <div class="cols-container-item">
+          <div class="cols-container-item-number">{{ item }}</div>
+        </div>
+      </ng-template>
+
+      <div class="lines-container">
+        <ng-template ngFor let-item [ngForOf]="dashboardTicketsBillableHours.lines">
+          <ng-template #tipContent class="tooltip lines-container-tooltip">
+            <div class="lines-container-tooltip-header qt-ff-gm">{{ item.title }}</div>
+            <div class="lines-container-tooltip-header">5:20 hrs</div>
+          </ng-template>
+          <div class="lines-container__line" [ngStyle]="{'width': item.percent + '%'}" placement="right" [ngbTooltip]="tipContent"></div>
         </ng-template>
       </div>
     </div>
   </div>
-
- 
-   <div class="list-titles">
-    <ng-template ngFor let-item
-    [ngForOf]="dashboardTicketsBillableHours.lines"
-     >
-    <p [textContent]="item.title"></p>
- </ng-template>
-   </div>
-   <div class="list-values">
-    <ng-template ngFor let-item
-    [ngForOf]="dashboardTicketsBillableHours.lines"
-     >
-    <div class="line-value" [ngStyle]="{'width': item.percent + '%'}" [textContent]="item.value"></div>
- </ng-template>
-   </div>
-   <div class="list-counters">
-    <ng-template ngFor let-item
-    [ngForOf]="dashboardTicketsBillableHours.counters"
-     >
-    <span class="qt-mr-16" [textContent]="item"></span>
- </ng-template>
-   </div>
-  
 </div>

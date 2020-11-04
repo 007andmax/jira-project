@@ -7,7 +7,7 @@
 
     <ul class="qt-dropdown-menu --border" ngbDropdownMenu aria-labelledby="dropdown1">
       <ng-template ngFor let-item [ngForOf]="listType" let-i="index">
-        <li class="pointer" ngbDropdownItem [textContent]="item.title" (click)="selectType(item.value)"></li>
+        <li class="pointer" ngbDropdownItem  (click)="selectType(item.value)"></li>
       </ng-template>
     </ul>
 
