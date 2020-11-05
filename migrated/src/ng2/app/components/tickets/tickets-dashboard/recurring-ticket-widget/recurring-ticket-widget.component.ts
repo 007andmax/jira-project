@@ -30,11 +30,11 @@ export class RecurringTicketWidgetComponent implements OnInit {
           left: -5
         },
         donut: true,
-        valueFormat: (n) =>{
+        valueFormat: (n) => {
           return n;
         },
         x: (d: any) => { return d.label; },
-        y: (d: any) => {  return d.value; },
+        y: (d: any) => { return d.value; },
         showLabels: false,
         color: (d: any, i: any) => {
           return this.chartColors[i]
@@ -45,6 +45,8 @@ export class RecurringTicketWidgetComponent implements OnInit {
         donutRatio: '0.68'
       }
     }
+  }
+  setDataForChart() {
     this.data = [
       {
         "label": "Recurring Open Tickets",
@@ -54,8 +56,11 @@ export class RecurringTicketWidgetComponent implements OnInit {
         "label": "Recurirng Close Tickets",
         "value": this.dashboardTicketsStats.RECURRING_TICKETS_CLOSED
       },
-
     ];
+  }
+  public updateDataChart() {
+    this.setDataForChart();
+    if (this.nvd3.char) this.nvd3.chart.update();
   }
   getTotal() {
     return this.dashboardTicketsStats.RECURRING_TICKETS_OPEN + this.dashboardTicketsStats.RECURRING_TICKETS_CLOSED;

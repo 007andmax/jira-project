@@ -1,10 +1,13 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import * as moment from 'moment';
 import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.service';
 import { CompanySetting } from '../../companies/class/company-setting';
 import { DashboardTickets } from './class/dashboard-tickets';
 import { DashboardTicketsStats } from './class/dashboard-tickets-stats';
+import { RecurringTicketWidgetComponent } from './recurring-ticket-widget/recurring-ticket-widget.component';
+import { TicketPriorityWidgetComponent } from './ticket-priority-widget/ticket-priority-widget.component';
+import { TicketsAnalyticsWidgetComponent } from './tickets-analytics-widget/tickets-analytics-widget.component';
 
 @Component({
   selector: 'tickets-dashboard',
@@ -12,12 +15,20 @@ import { DashboardTicketsStats } from './class/dashboard-tickets-stats';
   styleUrls: ['./tickets-dashboard.component.scss']
 })
 export class TicketsDashboardComponent implements OnInit {
+  @ViewChild('ticketPriority') ticketPriority:TicketPriorityWidgetComponent;
+  @ViewChild('recurringTicket') recurringTicket:RecurringTicketWidgetComponent;
+  @ViewChild('ticketsAnalytics') ticketsAnalytics:TicketsAnalyticsWidgetComponent;
+ 
   showPreloader: boolean = true;
   accountingStartDate: string;
   dashboard: DashboardTickets;
   dashboardTicketsStats: DashboardTicketsStats = new DashboardTicketsStats();
   listIntervals = [new CompanySetting('last month', 'LAST_MONTH'), new CompanySetting('current month', 'CURRENT_MONTH'), new CompanySetting('year to date', 'YEAR_TO_DATE')];
   currentInterval = new CompanySetting('last month', 'LAST_MONTH');
+  countIsReady: boolean = false;
+  timeOnTicketsIsReady: boolean = false;
+  ticketsAnalyticsReady: boolean = false;
+  ticketsBillableHoursIsReady: boolean = false;
   constructor(
     public cd: ChangeDetectorRef,
     private ticketsStateService: TicketsStateService,
@@ -36,10 +47,32 @@ export class TicketsDashboardComponent implements OnInit {
   private getCounts() {
     this.ticketsService.getCounts(this.dashboardTicketsStats.getDataForRequest()).subscribe(data => {
       this.dashboardTicketsStats.setData(data);
-      this.showPreloader = false;
-  
+      this.countIsReady = true;
+      this.onCheckREadyState();
       this.cd.detectChanges();
     })
+  }
+  onTimeOnTicketsIsReady() {
+    this.timeOnTicketsIsReady = true;
+    this.onCheckREadyState();
+  }
+  onTicketsBillableHoursIsReady() {
+    this.ticketsBillableHoursIsReady = true;
+    this.onCheckREadyState();
+  }
+  onTicketsAnalyticsReady() {
+    this.ticketsAnalyticsReady = true;
+    this.onCheckREadyState();
+  }
+  onCheckREadyState() {
+    if (this.countIsReady && this.timeOnTicketsIsReady && this.ticketsBillableHoursIsReady && this.ticketsAnalyticsReady && this.showPreloader) {
+      this.showPreloader = false;
+      this.cd.detectChanges();
+      this.ticketPriority.updateDataChart();
+      this.recurringTicket.updateDataChart();
+      this.ticketsAnalytics.updateDataChart();
+     
+    }
   }
   getTextAccountingStartDate() {
     return moment(this.accountingStartDate).format('DD MMM YYYY');

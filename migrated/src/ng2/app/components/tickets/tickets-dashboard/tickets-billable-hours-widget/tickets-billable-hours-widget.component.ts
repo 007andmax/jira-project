@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 import { CompanySetting } from '../../../companies/class/company-setting';
 import { DashboardTicketsBillableHours } from '../class/dashboard-tickets-billable-hours';
@@ -9,6 +9,7 @@ import { DashboardTicketsBillableHours } from '../class/dashboard-tickets-billab
   styleUrls: ['./tickets-billable-hours-widget.component.scss']
 })
 export class TicketsBillableHoursWidgetComponent implements OnInit {
+  @Output() onTicketsBillableHoursIsReady = new EventEmitter<any>();
   listIntervals = [new CompanySetting('today', 'TODAY'),new CompanySetting('this week', 'WEEK'),new CompanySetting('this month', 'CURRENT_MONTH'), new CompanySetting('last month', 'LAST_MONTH'),new CompanySetting('year to date', 'YEAR_TO_DATE')];
   currentInterval = new CompanySetting('today', 'TODAY');
   dashboardTicketsBillableHours: DashboardTicketsBillableHours = new DashboardTicketsBillableHours();
@@ -20,6 +21,7 @@ export class TicketsBillableHoursWidgetComponent implements OnInit {
   getDashboardByServices() {
     this.ticketsService.getDashboardByServices(this.dashboardTicketsBillableHours.getDataForRequest()).subscribe(data => {
       this.dashboardTicketsBillableHours.setData(data);
+      this.onTicketsBillableHoursIsReady.emit(null);
       console.log('this.dashboardTicketsBillableHours',this.dashboardTicketsBillableHours);
     })
   }

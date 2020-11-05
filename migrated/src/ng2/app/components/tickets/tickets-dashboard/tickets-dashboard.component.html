@@ -1,7 +1,7 @@
 <app-left-panel-tickets></app-left-panel-tickets>
  <div class="tickets-dashboard-page billing-dashboard-page">
   <div class="loading" *ngIf="showPreloader"></div>
-  <div class="billing-dashboard-page__content" *ngIf="!showPreloader">
+  <div class="billing-dashboard-page__content" [hidden]="showPreloader">
     <div class="qt-df qt-ai-c qt-jc-sb qt-mb-16">
       <h3 class="list-title qt-mt-0 qt-mb-0 qt-fs-16 qt-ff-sb">Dashboard</h3>
       <div class="list-type" ngbDropdown>
@@ -23,13 +23,13 @@
     <app-dashboard-stats [title]="'Completed Tickets'" [total]="dashboardTicketsStats.CLOSED" [class]="'icon__quotes'"></app-dashboard-stats>
     <app-dashboard-stats [title]="'Recurring Tickets'" [total]="dashboardTicketsStats.RECURRING_TICKETS" [class]="'icon__quotes'"></app-dashboard-stats>
       </div>
-    <app-tickets-analytics-widget></app-tickets-analytics-widget>
+    <app-tickets-analytics-widget #ticketsAnalytics (onTicketsAnalyticsReady)="onTicketsAnalyticsReady()"></app-tickets-analytics-widget>
     <div class="qt-df qt-jc-sb qt-mb-16">
-      <app-ticket-priority-widget  [dashboardTicketsStats]="dashboardTicketsStats"></app-ticket-priority-widget>
-      <app-recurring-ticket-widget [dashboardTicketsStats]="dashboardTicketsStats" ></app-recurring-ticket-widget>
-      <app-time-on-tickets-widget></app-time-on-tickets-widget>
+      <app-ticket-priority-widget #ticketPriority [dashboardTicketsStats]="dashboardTicketsStats"></app-ticket-priority-widget>
+      <app-recurring-ticket-widget #recurringTicket [dashboardTicketsStats]="dashboardTicketsStats" ></app-recurring-ticket-widget>
+      <app-time-on-tickets-widget (onTimeOnTicketsIsReady)="onTimeOnTicketsIsReady()"></app-time-on-tickets-widget>
           </div>
-    <app-tickets-billable-hours-widget></app-tickets-billable-hours-widget>
+    <app-tickets-billable-hours-widget  (onTicketsBillableHoursIsReady)="onTicketsBillableHoursIsReady()"></app-tickets-billable-hours-widget>
 
   </div>
 </div>

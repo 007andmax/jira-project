@@ -8,12 +8,12 @@ import { DashboardTicketsStats } from '../class/dashboard-tickets-stats';
 })
 export class TicketPriorityWidgetComponent implements OnInit {
   @Input() dashboardTicketsStats: DashboardTicketsStats = new DashboardTicketsStats();
-  @ViewChild('nvd3') nvd3:any;
+  @ViewChild('nvd3') nvd3: any;
   chartOptions: any;
   chartColors = ["#0646a4", "#00ccff", '#2bc7c6'];
   data: any;
 
-  constructor( ) { }
+  constructor() { }
 
   ngOnInit() {
     this.chartOptions = {
@@ -27,7 +27,7 @@ export class TicketPriorityWidgetComponent implements OnInit {
           bottom: -5,
           left: -5
         },
-        valueFormat: (n) =>{
+        valueFormat: (n) => {
           return n;
         },
         donut: true,
@@ -39,10 +39,13 @@ export class TicketPriorityWidgetComponent implements OnInit {
         },
         showLegend: false,
         duration: 500,
-        
+
         donutRatio: '0.68'
       }
     }
+
+  }
+  setDataForChart() {
     this.data = [
       {
         "label": "High",
@@ -57,13 +60,12 @@ export class TicketPriorityWidgetComponent implements OnInit {
         "value": this.dashboardTicketsStats.LOW
       }
     ];
-    
-
+  }
+  public updateDataChart() {
+    this.setDataForChart();
+    if (this.nvd3.char) this.nvd3.chart.update();
   }
   getTotal() {
     return this.dashboardTicketsStats.HIGH + this.dashboardTicketsStats.MEDIUM + this.dashboardTicketsStats.LOW;
   }
-
-
-
 }

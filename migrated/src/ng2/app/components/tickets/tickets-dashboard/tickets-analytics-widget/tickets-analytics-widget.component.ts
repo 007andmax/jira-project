@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import * as moment from 'moment';
 import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 import { DashboardChartData } from '../../../billing/dashboard-billing/class/dashboard-chart-data';
@@ -11,8 +11,8 @@ import { DashboardTickets } from '../class/dashboard-tickets';
   styleUrls: ['./tickets-analytics-widget.component.scss']
 })
 export class TicketsAnalyticsWidgetComponent implements OnInit {
-  @Output() onSelectType = new EventEmitter<any>();
- 
+  @Output() onTicketsAnalyticsReady = new EventEmitter<any>();
+  isReady:boolean = false;
   type: string = "WEEKLY";
   @ViewChild('nvd3') nvd3: any;
   options;
@@ -22,7 +22,8 @@ export class TicketsAnalyticsWidgetComponent implements OnInit {
     new CompanySetting('Daily', 'DAILY'),
     new CompanySetting('Weekly', 'WEEKLY'),
     new CompanySetting('Monthly', 'MONTHLY')];
-  constructor(private ticketsService:TicketsService) { }
+  constructor(private ticketsService: TicketsService,
+    public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
     this.listType[1].selected = true;
@@ -87,15 +88,19 @@ export class TicketsAnalyticsWidgetComponent implements OnInit {
   public updateDataChart() {
     this.data = this.getDataForChart();
     if (this.nvd3.char) this.nvd3.chart.update();
+    this.cd.detectChanges();
+    this.isReady = true;
   }
+  
   getDataForChart() {
     let sin = [], sin2 = [];
-    this.dashboard.chartData= this.dashboard.chartData.splice(this.dashboard.chartData.length - 30,this.dashboard.chartData.length);
-  //  this.chartData = JSON.parse(JSON.stringify(this.chartData.reverse()));
+    let chartData = JSON.parse(JSON.stringify(this.dashboard.chartData.splice(this.dashboard.chartData.length - 30, this.dashboard.chartData.length)));
+   
+    //  this.chartData = JSON.parse(JSON.stringify(this.chartData.reverse()));
     //Data is represented as an array of {x,y} pairs.
     for (let i = 1; i < 30; i++) {
-      sin.push({ x: i, y: this.dashboard.chartData[i].totalTickets });
-      sin2.push({ x: i, y: this.dashboard.chartData[i].completedTickets });
+      sin.push({ x: i, y: chartData[i].totalTickets });
+      sin2.push({ x: i, y: chartData[i].completedTickets });
     }
 
     //Line chart data should be sent as an array of series objects.
@@ -114,9 +119,10 @@ export class TicketsAnalyticsWidgetComponent implements OnInit {
   };
   getDashboard() {
     this.ticketsService.getDashboard(this.type).subscribe(data => {
-      console.log("data",data);
+      console.log("data", data);
       this.dashboard = data;
-      this.updateDataChart();
+     if (this.isReady) this.updateDataChart();
+      this.onTicketsAnalyticsReady.emit(null);
     })
   }
   selectType(type) {
@@ -127,7 +133,7 @@ export class TicketsAnalyticsWidgetComponent implements OnInit {
         item.selected = false;
       }
     })
-   
+
     this.type = type;
     this.getDashboard();
   }
