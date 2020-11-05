@@ -18,7 +18,7 @@ import { QuoteAsideAddBodyComponent } from './quote-aside-add-body/quote-aside-a
   templateUrl: './quote-aside-add.component.html',
   styleUrls: ['./quote-aside-add.component.scss']
 })
-export class QuoteAsideAddComponent implements OnInit,OnDestroy {
+export class QuoteAsideAddComponent implements OnInit, OnDestroy {
   @ViewChild('saveAndSendBtn') saveAndSendBtn: DisabledBtnDirective;
   @ViewChild('saveAndContinueBtn') saveAndContinueBtn: DisabledBtnDirective;
   @ViewChild('saveAndApproveBtn') saveAndApproveBtn: DisabledBtnDirective;
@@ -51,7 +51,6 @@ export class QuoteAsideAddComponent implements OnInit,OnDestroy {
           this.saveAndSendBtn.setDisabled(false);
           this.close();
         })
-
       }, err => {
         this.validate.setErrorMessage(err.error.validationResults.saleQuotePostDto);
         this.saveAndSendBtn.setDisabled(false);
@@ -67,7 +66,6 @@ export class QuoteAsideAddComponent implements OnInit,OnDestroy {
     this.quoteStateService.resetQuoteForCopy();
   }
   saveAndSend() {
-
     let quote: QuoteAdd = this.quoteAdd.getQuote();
     if (!this.quoteAdd.getValidate().isValidate(quote)) return;
     const modalRef = this.modalService.open(ModalQuoteComponent, { windowClass: 'quote-send-modal' });
@@ -123,7 +121,6 @@ export class QuoteAsideAddComponent implements OnInit,OnDestroy {
   }
 
   onPreview() {
-
     this.quotePreview = new QuotePreview(this.quoteAdd.getQuotePreview());
     this.showPreview = true;
   }

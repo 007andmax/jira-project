@@ -13,7 +13,6 @@ import { QuoteFilter } from '../../class/quote-filter';
   styleUrls: ['./quotes-filter.component.scss']
 })
 export class QuotesFilterComponent implements OnInit {
-
   companies = [];
   @ViewChild('companyDp') companyDp: SelectSearchComponent;
   @ViewChild('statusDp') statusDp: SelectSearchComponent;
@@ -54,11 +53,9 @@ export class QuotesFilterComponent implements OnInit {
     this.quotesFilter.setStartDate(null);
     this.quotesFilter.setEndDate(null);
     this.quotesFilter.setQuoteNumber(null);
-
     this.quoteStateService.onInitFilter(this.quotesFilter);
     this.onChangeCounterFilter();
   }
-
   public onSelectCompany(item) {
     if (!item) {
       this.quotesFilter.setCompanyName(null);
@@ -75,7 +72,6 @@ export class QuotesFilterComponent implements OnInit {
   }
   public filterByDate(value) {
     if (value.start !== '' && value.end !== '') {
-      console.log("value",value);
       this.quotesFilter.setStartDate(new Date(value.start).getTime());
       this.quotesFilter.setEndDate(new Date(value.end).getTime());
     } else {
@@ -93,6 +89,4 @@ export class QuotesFilterComponent implements OnInit {
     if (this.quotesFilter.status) count++;
     this.changeCountFilter.emit(count);
   }
-
-
 }

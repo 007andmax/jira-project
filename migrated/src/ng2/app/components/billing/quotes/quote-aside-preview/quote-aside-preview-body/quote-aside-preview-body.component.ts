@@ -13,12 +13,11 @@ export class QuoteAsidePreviewBodyComponent implements OnInit {
   @Input() quote: QuotePreview;
   currentCompany: any;
   quoteCompany: Company;
-  constructor( private companiesStateService: CompaniesStateService) { }
+  constructor(private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
     this.currentCompany = this.companiesStateService.getCurrentCompany();
-   if (this.quote.company) this.quoteCompany = this.companiesStateService.getCompanies().find(item => item.id === this.quote.company.id);
-    console.log("this.quote",this.quote);
+    if (this.quote.company) this.quoteCompany = this.companiesStateService.getCompanies().find(item => item.id === this.quote.company.id);
   }
   public getDate(date) {
     return moment(new Date(date)).format('DD MMM YYYY');

@@ -3,8 +3,6 @@ import { QuoteAddProduct } from './quote-add-product';
 import { QuoteAddService } from './quote-add-service';
 import { QuoteProduct } from './quote-product';
 import { QuoteService } from './quote-service';
-import * as moment from "moment";
-import { Quote } from './quote';
 import { QuotePreview } from './quote-preview';
 export class QuoteAdd {
     companyId: string;
@@ -26,7 +24,7 @@ export class QuoteAdd {
     constructor() {
 
     }
-    public setCopyData(quote:QuotePreview) {
+    public setCopyData(quote: QuotePreview) {
         this.companyId = quote.company.id;
         this.date = quote.date;
         this.description = quote.description;
@@ -41,7 +39,7 @@ export class QuoteAdd {
     public resetServices() {
         this.services = [];
     }
-    public setCompanyId (data) {
+    public setCompanyId(data) {
         this.companyId = data;
     }
     public getDataForCreate(notification) {
@@ -69,20 +67,17 @@ export class QuoteAdd {
             sendNotification: notification
         }
     }
-    public getDataForPreview(company,termsAndConditions) {
+    public getDataForPreview(company, termsAndConditions) {
         let totalAmount = 0;
         totalAmount += this.services.reduce((a, b) => a + b.sum, 0);
         totalAmount += this.products.reduce((a, b) => a + b.sum, 0);
         return {
             company: company,
-            //createdAt: new Date().getTime(),
             date: this.date,
             description: this.description,
             number: this.number,
-            // readAt: number;
             recipients: [],
             reviewNotes: [],
-            //   status: string;
             subject: this.subject,
             totalAmount: totalAmount,
             validUntil: this.validUntil,
@@ -96,7 +91,6 @@ export class QuoteAdd {
     public setRegulatNote(data) {
         this.regularNote = new InvoiceNote(data);
     }
-  
     public addProduct(item) {
         this.products.push(new QuoteAddProduct("PERCENT", item, 0, 1, this.getMarkups(item)))
     }
@@ -106,11 +100,9 @@ export class QuoteAdd {
     public getMarkups(item) {
         if (item.sale > 0 && item.cost > 0) return Math.round((item.sale - item.cost) / item.cost * 100);
         return 0;
-
     }
     public setQuoteDate(day, month, year, timeOffset) {
         let current = new Date();
-
         if (day !== current.getDate() || current.getMonth() !== (month - 1)) {
             let dateDatePicker = new Date(year, month - 1, day).getTime(); // timestamp from calendar
             let finalDate = new Date(dateDatePicker - (current.getTimezoneOffset() * 60000/* dont touch*/) - timeOffset /* timezone.timeOffset */);
@@ -123,7 +115,6 @@ export class QuoteAdd {
     }
     public setExpiryDate(day, month, year, timeOffset) {
         let current = new Date();
-
         if (day !== current.getDate() || current.getMonth() !== (month - 1)) {
             let dateDatePicker = new Date(year, month - 1, day).getTime(); // timestamp from calendar
             let finalDate = new Date(dateDatePicker - (current.getTimezoneOffset() * 60000/* dont touch*/) - timeOffset /* timezone.timeOffset */);

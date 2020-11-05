@@ -19,20 +19,20 @@ export class QuoteProduct implements Product {
     billable: boolean;
     taxes: Tax[];
     oldVersion: boolean;
-    categoryId:string;
-    commissionRate:any;
-    discountAmount:number;
-    discountSum:number;
-    discountType:string;
-    itemOrder:number;
-    quantity:number;
-    serialNumber:string;
-    serviceExpense:boolean;
-    sum:number;
-    taxSum:number;
-    totalSum:number;
-    validateSaleCost:boolean = true;
-    markup:number = 0;
+    categoryId: string;
+    commissionRate: any;
+    discountAmount: number;
+    discountSum: number;
+    discountType: string;
+    itemOrder: number;
+    quantity: number;
+    serialNumber: string;
+    serviceExpense: boolean;
+    sum: number;
+    taxSum: number;
+    totalSum: number;
+    validateSaleCost: boolean = true;
+    markup: number = 0;
     constructor(data = null) {
         if (data) {
             for (const key in data) {
@@ -45,7 +45,7 @@ export class QuoteProduct implements Product {
         this.validateSaleCost = this.sale >= this.cost;
     }
     public getDataForUpdate() {
-        let product :Product = {
+        let product: Product = {
             versionedId: this.versionedId,
             createdAt: this.createdAt,
             updatedAt: this.updatedAt,

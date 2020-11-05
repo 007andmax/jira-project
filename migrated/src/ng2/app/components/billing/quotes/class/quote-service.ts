@@ -18,22 +18,22 @@ export class QuoteService implements Service {
     taxes: Tax[];
     updatedAt: number;
     versionedId: VersionedId;
-    billable:boolean;
-    billableQuantity:number;
-    description:string;
-    discountAmount:number;
-    discountSum:number;
-    discountType:string;
-    editedExpense:boolean;
-    glNumber:GlNumber;
-    isDefault:boolean;
-    itemOrder:number;
-    quantity:number;
-    serviceExpense:boolean;
-    sum:number;
-    taxSum:number;
-    totalSum:number;
- 
+    billable: boolean;
+    billableQuantity: number;
+    description: string;
+    discountAmount: number;
+    discountSum: number;
+    discountType: string;
+    editedExpense: boolean;
+    glNumber: GlNumber;
+    isDefault: boolean;
+    itemOrder: number;
+    quantity: number;
+    serviceExpense: boolean;
+    sum: number;
+    taxSum: number;
+    totalSum: number;
+
     constructor(data = null) {
         if (data) {
             for (const key in data) {
@@ -43,7 +43,7 @@ export class QuoteService implements Service {
 
     }
     public getDataForUpdate() {
-        let service:Service = {
+        let service: Service = {
             blockTimeServiceAgreement: this.blockTimeServiceAgreement,
             canUseInTicket: this.canUseInTicket,
             commissionRate: this.commissionRate,

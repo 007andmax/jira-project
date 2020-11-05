@@ -8,7 +8,6 @@ export class QuoteFilter {
     offset: number = 0;
     limit: number = 30;
 
-    
     constructor() { }
     public setStatus(data) {
         this.status = data;

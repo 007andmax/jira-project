@@ -1,6 +1,5 @@
 
   <div class="qt-pos-rel" *ngIf="quote">
-
     <div class="qt-df qt-jc-sb qt-pb-24 company-info">
       <div class="qt-w50 qt-pr-24 company-info-left-side">
         <app-drop-down
@@ -16,10 +15,8 @@
           [change]="true"
           [isDisabled]="true"
         ></app-drop-down>
-
         <textarea class="company-info-description qt-mt-8 qt-w100" [(ngModel)]="quote.description" placeholder="Quote description in short words" appTextArea  maxlength="255"></textarea>
       </div>
-
       <div class="qt-w50 qt-pl-24" ngbDropdown [autoClose]="'inside'" #editCustomer="ngbDropdown">
         <div class="qt-fs-10 qt-ff-sb  qt-df qt-ai-c qt-mb-4 qt-lh-12"><div class="qt-sz-16 icon__company-address qt-ic-c qt-mr-4"></div> BILLING ADDRESS</div>
         <div class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-dark" *ngIf="quoteCompany" [textContent]="quoteCompany.name"></div>
@@ -32,7 +29,6 @@
           </div>
       </div>
     </div>
-
     <div class="qt-df qt-mb-16 qt-mt-16">
       <div class="qt-input-block qt-mr-16 qt-w100">
         <label class="qt-lh-154">Quote#</label>
@@ -46,7 +42,6 @@
           </mat-error>
         </div>
       </div>
-
       <div class="qt-input-block qt-mr-16 qt-w100">
         <label class="qt-lh-154">PO#
         </label>
@@ -54,18 +49,15 @@
            <input class="qt-input-prepend" [(ngModel)]="quote.purchaseOrder" type="text">
         </div>
       </div>
-
       <div class="qt-input-block qt-mr-16 qt-w100">
         <label class="qt-lh-154">Quote Date</label>
         <app-date-picker [formatDate]="formatDate" [editMode]="true" [editDate]="quote.date" [useMinDate]="false"   (onChange)="onChangeQuoteDate($event)"></app-date-picker>
       </div>
-
       <div class="qt-input-block qt-w100">
         <label class="qt-lh-154">Expiry Date</label>
         <app-date-picker [formatDate]="formatDate" [editMode]="true" [editDate]="quote.validUntil" [useMinDate]="false"  (onChange)="onChangeExpiryDate($event)"></app-date-picker>
       </div>
     </div>
-
     <div class="qt-mb-16 new-quote-table-container">
       <table class="new-quote-table qt-gray-table --last-icon">
         <thead class=" qt-lh-127 qt-color-dark">
@@ -113,7 +105,6 @@
         </ng-template>
       </tbody>
     </table>
-
       <mat-error class="mt-10"  *ngIf="!validate.getServicesProducts()">
         You need to select one product/service at least.
       </mat-error>
@@ -121,7 +112,6 @@
         {{validate.errorMessage}}
       </mat-error>
     </div>
-
   <div class="qt-df qt-jc-sb qt-mb-40">
     <div>
       <div class="qt-df qt-mb-25">
@@ -151,7 +141,6 @@
       </div>
     </div>
   </div>
-
   <div class="terms-n-conditions qt-pl-30 qt-pr-30 qt-pb-24 qt-pt-16">
     <div class="qt-fs-13 qt-ff-gm qt-mb-12">Terms & Conditions</div>
     <div class="qt-fs-12 qt-color-info qt-ff-gm pointer"  *ngIf="changeGlobalNote" (click)="onUpdateGlobalNote()">Save Terms & Conditions</div>

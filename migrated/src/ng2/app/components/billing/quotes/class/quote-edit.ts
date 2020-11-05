@@ -4,8 +4,6 @@ import { QuoteProduct } from './quote-product';
 import { QuoteService } from './quote-service';
 
 export class QuoteEdit extends QuotePreview {
-  
-
     public getDataForUpdate(notification) {
         return {
             companyId: this.company.id,
@@ -17,7 +15,7 @@ export class QuoteEdit extends QuotePreview {
                 products: this.products.map(item => item.getDataForUpdate()),
                 services: this.services.map(item => item.getDataForUpdate()),
             },
-            id:this.id,
+            id: this.id,
             description: this.description,
             requestPayment: false,
             draft: false,
@@ -38,14 +36,11 @@ export class QuoteEdit extends QuotePreview {
         totalAmount += this.products.reduce((a, b) => a + b.sum, 0);
         return {
             company: company,
-            //createdAt: new Date().getTime(),
             date: this.date,
             description: this.description,
             number: this.number,
-            // readAt: number;
             recipients: [],
             reviewNotes: [],
-            //   status: string;
             subject: this.subject,
             totalAmount: totalAmount,
             validUntil: this.validUntil,
@@ -64,7 +59,6 @@ export class QuoteEdit extends QuotePreview {
     }
     public setQuoteDate(day, month, year, timeOffset) {
         let current = new Date();
-
         if (day !== current.getDate() || current.getMonth() !== (month - 1)) {
             let dateDatePicker = new Date(year, month - 1, day).getTime(); // timestamp from calendar
             let finalDate = new Date(dateDatePicker - (current.getTimezoneOffset() * 60000/* dont touch*/) - timeOffset /* timezone.timeOffset */);
@@ -77,7 +71,6 @@ export class QuoteEdit extends QuotePreview {
     }
     public setExpiryDate(day, month, year, timeOffset) {
         let current = new Date();
-
         if (day !== current.getDate() || current.getMonth() !== (month - 1)) {
             let dateDatePicker = new Date(year, month - 1, day).getTime(); // timestamp from calendar
             let finalDate = new Date(dateDatePicker - (current.getTimezoneOffset() * 60000/* dont touch*/) - timeOffset /* timezone.timeOffset */);
@@ -97,9 +90,8 @@ export class QuoteEdit extends QuotePreview {
     public getMarkups(item) {
         if (item.sale > 0 && item.cost > 0) return Math.round((item.sale - item.cost) / item.cost * 100);
         return 0;
-
     }
     public addService(item) {
-        this.services.push(new QuoteService({...item,discountType: "PERCENT", itemOrder: 0, quantity: 1}));
+        this.services.push(new QuoteService({ ...item, discountType: "PERCENT", itemOrder: 0, quantity: 1 }));
     }
 }

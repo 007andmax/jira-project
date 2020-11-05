@@ -1,10 +1,7 @@
 <div class="invoice-preview qt-pos-rel">
-
   <div class="invoice-preview__status" [ngClass]="{'--invoiced' :quote.status === 'INVOICED',
   '--ticket' :quote.status === 'TICKETED',
   '--approved' :quote.status === 'APPROVED'}"></div>  
-   
-
   <div class="qt-df qt-jc-sb qt-pb-24 company-info">
     <div class="qt-lh-154">
       <img class="company-logo qt-mb-8" [src]="getCompanyLogoUrl()" alt="">
@@ -16,12 +13,9 @@
        </ng-template>
      </ng-container>
     </div>
-
     <div class="qt-color-dark qt-lh-131 qt-pr-24 qt-fs-26 qt-text-upper qt-ff-gm" [textContent]="'Quote#' + quote.number">
-
     </div>
   </div>
-
   <div class="qt-mt-24 qt-mb-32 qt-df qt-jc-sb">
     <div class="qt-lh-154">
       <div class="qt-fs-10 qt-color-light qt-mb-8 qt-ff-sb qt-lh-12">BILLING ADDRESS</div>
@@ -30,9 +24,7 @@
       <div class="qt-fs-13"  *ngIf="quoteCompany"  [textContent]="(quoteCompany.companyInfo.addresses.length > 0) ? quoteCompany.companyInfo.addresses[0].address : ''"></div>
       <div class="qt-fs-13"  *ngIf="quoteCompany"  [textContent]="(quoteCompany.companyInfo.contacts.length > 0) ? quoteCompany.companyInfo.contacts[0].primaryEmail : ''"></div>
       </div>
-
     <div class="qt-fs-13 qt-text-right qt-lh-154">
-
       <div class="qt-df qt-jc-sb qt-mb-8">
         <div class="qt-ff-gm qt-text-right invoice-info-title">Estimate Date:</div>
         <div class="invoice-info-value" [textContent]="getDate(quote.date)"></div>
@@ -47,9 +39,7 @@
       </div>
     </div>
   </div>
-
   <div class="invoice-preview__items">
-
     <div class="qt-mb-16">
       <table class="quote-aside-preview-table invoice-preview__table">
         <thead class=" qt-lh-127 qt-color-dark">
@@ -87,34 +77,20 @@
         <td class="invoice-preview__col-amount" [textContent]="product.sum | currency"></td>
       </tr>
       </ng-template>
-
         </tbody>
       </table>
-
-
-
     </div>
-
-
-
-
   </div>
-
-
   <div   class="qt-df qt-w100 qt-jc-sb qt-color-dark qt-fs-12 qt-ff-gm qt-mb-20 qt-lh-133">
-
     <div class="qt-mb-20 invoice-preview-notes">
       <div class="qt-fs-12 qt-mb-4 qt-ff-qm qt-color-dark qt-ff-gm qt-lh-133">Customer Note</div>
       <div class="qt-fs-13 qt-lh-154 note qt-ff-gr" *ngIf="quote.regularNote" [textContent]="(quote.regularNote && quote.regularNote.line1) ? quote.regularNote.line1 : ''"></div>
     </div>
-
-
     <div class="invoice-preview__total-block">
       <div class="qt-df qt-jc-sb qt-pl-12 qt-pr-12">
         <div class="qt-text-left">Sub Total Services</div>
         <div class="invoice-info-value qt-text-right" [textContent]="getSubTotalServices() | currency"></div>
       </div>
-
       <div class="qt-df qt-jc-sb qt-pl-12 qt-pt-10 qt-pr-12"  >
         <div class="qt-text-left">Sub Total Products</div>
         <div class="invoice-info-value qt-text-right" [textContent]="getSubTotalProducts() | currency"></div>
@@ -129,13 +105,10 @@
       </div>
     </div>
   </div>
-
   <div  >
     <div>
       <div class="qt-fs-12 qt-mb-4 qt-ff-qm qt-color-dark qt-ff-gm qt-lh-133">Terms & Conditions</div>
       <div class="qt-fs-13 qt-lh-154 note" *ngIf="quote.termsAndConditions" [textContent]="quote.termsAndConditions"></div>
     </div>
   </div>
-
-
 </div>

@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { QuoteStateService } from 'src/ng2/app/states/quote/quote-state.service';
 import { QuoteProduct } from '../../class/quote-product';
 
-
 @Component({
   selector: 'app-product-item-quote-edit',
   templateUrl: './product-item-quote-edit.component.html',
@@ -11,7 +10,7 @@ import { QuoteProduct } from '../../class/quote-product';
 export class ProductItemQuoteEditComponent implements OnInit {
   @Input() product: QuoteProduct;
   @Output() onRemoveProduct = new EventEmitter<any>();
-  constructor(  private quoteStateService: QuoteStateService,) { }
+  constructor(private quoteStateService: QuoteStateService,) { }
 
   ngOnInit() {
     this.product.markup = this.getMarkups();
@@ -36,7 +35,6 @@ export class ProductItemQuoteEditComponent implements OnInit {
   public getMarkups() {
     if (this.product.sale > 0 && this.product.cost > 0) return Math.round((this.product.sale - this.product.cost) / this.product.cost * 100);
     return 0;
-
   }
   changeMarkup(val) {
     let value = Number(val);
@@ -47,9 +45,8 @@ export class ProductItemQuoteEditComponent implements OnInit {
     this.onRemoveProduct.emit(null);
   }
   getPriceProduct(product) {
-       return this.quoteStateService.roundToTwo(this.quoteStateService.getPrice(product.sale, product.quantity, product.taxes) + this.getTaxPrice());
+    return this.quoteStateService.roundToTwo(this.quoteStateService.getPrice(product.sale, product.quantity, product.taxes) + this.getTaxPrice());
   }
-  
   onCheckSaleCost() {
     this.product.checkSaleCost();
   }

@@ -17,7 +17,7 @@ import { QuoteAsideEditBodyComponent } from './quote-aside-edit-body/quote-aside
   templateUrl: './quote-aside-edit.component.html',
   styleUrls: ['./quote-aside-edit.component.scss']
 })
-export class QuoteAsideEditComponent implements OnInit,OnDestroy {
+export class QuoteAsideEditComponent implements OnInit, OnDestroy {
   @ViewChild('saveAndSendBtn') saveAndSendBtn: DisabledBtnDirective;
   @ViewChild('saveAndContinueBtn') saveAndContinueBtn: DisabledBtnDirective;
   @ViewChild('saveAndApproveBtn') saveAndApproveBtn: DisabledBtnDirective;
@@ -34,7 +34,6 @@ export class QuoteAsideEditComponent implements OnInit,OnDestroy {
     public cd: ChangeDetectorRef,
     private modalService: NgbModal,
     private quoteService: QuoteService,) { }
- 
 
   ngOnInit() {
     let getOnEdit = this.quoteStateService.getOnEdit().subscribe(quote => {
@@ -42,17 +41,16 @@ export class QuoteAsideEditComponent implements OnInit,OnDestroy {
     })
     this.sub.add(getOnEdit);
     let getHandleSendModeEdit = this.quoteStateService.getHandleSendModeEdit().subscribe(data => {
-     
-        this.saveAndSendBtn.setDisabled(true);
-        this.quoteService.editQuote(data).subscribe((res) => {
-          this.quoteService.repeatSend(data.id).subscribe(sendRes => {
-            this.saveAndSendBtn.setDisabled(false);
-            this.close();
-          })
-        }, err => {
-          this.validate.setErrorMessage(err.error.validationResults.saleQuotePostDto);
+      this.saveAndSendBtn.setDisabled(true);
+      this.quoteService.editQuote(data).subscribe((res) => {
+        this.quoteService.repeatSend(data.id).subscribe(sendRes => {
           this.saveAndSendBtn.setDisabled(false);
-        });
+          this.close();
+        })
+      }, err => {
+        this.validate.setErrorMessage(err.error.validationResults.saleQuotePostDto);
+        this.saveAndSendBtn.setDisabled(false);
+      });
     })
     this.sub.add(getHandleSendModeEdit);
   }
@@ -65,7 +63,7 @@ export class QuoteAsideEditComponent implements OnInit,OnDestroy {
   saveAndSend() {
     let quote: QuoteEdit = this.quoteEdit.getQuote();
     if (!this.quoteEdit.getValidate().isValidate(quote)) return;
-    const modalRef = this.modalService.open(ModalQuoteComponent,{ windowClass: 'quote-send-modal' });
+    const modalRef = this.modalService.open(ModalQuoteComponent, { windowClass: 'quote-send-modal' });
     let data = JSON.parse(JSON.stringify(quote.getDataForUpdate(true)));
     modalRef.componentInstance.data = data;
     modalRef.componentInstance.action = QUOTE_MODAL_ACTION_EDIT;
@@ -109,18 +107,15 @@ export class QuoteAsideEditComponent implements OnInit,OnDestroy {
           .subscribe((res) => {
             this.saveAndApproveBtn.setDisabled(false);
             this.close();
-
           });
       }, err => {
         this.validate.setErrorMessage(err.error.validationResults.saleQuotePostDto);
         this.saveAndApproveBtn.setDisabled(false);
       });
   }
-
   onPreview() {
-
-     this.quotePreview = new QuotePreview(this.quoteEdit.getQuotePreview());
-     this.showPreview = true; 
+    this.quotePreview = new QuotePreview(this.quoteEdit.getQuotePreview());
+    this.showPreview = true;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

@@ -35,8 +35,6 @@ export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
         this.quote = new QuotePreview(data);
         this.open = true;
         this.showPreloader = false;
-        console.log("this.quote", this.quote);
-
       })
     })
     this.sub.add(getOnPreview);
@@ -82,12 +80,10 @@ export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
   }
   convertToInvoice() {
     this.quoteServices.convertToInvoice({ companyInfo: this.quote.company }, this.quote.id).subscribe((res) => {
-
     });
   }
   onArchiveQuote() {
     this.quoteServices.archiveQuote(this.quote.company, this.quote.id).subscribe((res) => {
-
     });
   }
   archiveQuote() {
@@ -95,21 +91,15 @@ export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
     modalRef.componentInstance.message = `Do you want to archive a quote?`;
   }
-
   public resend() {
     if (this.quote.status === 'TICKETED' || this.quote.status === 'INVOICED') {
       this.quoteServices.repeatSend(this.quote.id).subscribe();
     } else {
-      let recipients = this.quote.recipients;
-      //  if (typeof recipients === "string") this.quote.recipients = recipients.split(',');
-      // this.quoteServices.getQuote(this.quote.id).subscribe((data) => {
       const modalRef = this.modalService.open(ModalQuoteComponent, { windowClass: 'quote-send-modal' });
       modalRef.componentInstance.data = this.quote;
       modalRef.componentInstance.action = QUOTE_MODAL_ACTION_PREVIEW;
-      //})
     }
   }
-
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

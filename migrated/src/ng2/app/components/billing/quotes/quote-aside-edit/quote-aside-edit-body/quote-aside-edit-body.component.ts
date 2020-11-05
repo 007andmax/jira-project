@@ -15,7 +15,6 @@ import { QuoteEdit } from '../../class/quote-edit';
 import { QuoteValdiateEdit } from '../../class/quote-vildate-edit';
 import { ServiceListQuoteComponent } from '../../quote-aside-add/service-list-quote/service-list-quote.component';
 
-
 @Component({
   selector: 'app-quote-aside-edit-body',
   templateUrl: './quote-aside-edit-body.component.html',
@@ -44,7 +43,6 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     private quoteServices: QuoteService,) { }
 
-
   ngOnInit() {
     if (this.companiesState.getCompanies().length > 0) this.getCLientsList(this.companiesState.getCompanies());
     this.companiesState.getOnCompanies().subscribe((data) => {
@@ -64,8 +62,7 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
     let getOnEdit = this.quoteStateService.getOnEdit().subscribe(quote => {
       this.quoteServices.getQuote(quote.id).subscribe((data) => {
         this.quote = new QuoteEdit(data);
-       
-       if (this.quote.regularNote && this.quote.regularNote.line1.length > 0) this.billableStateService.setRegulatNote(this.quote.regularNote);
+        if (this.quote.regularNote && this.quote.regularNote.line1.length > 0) this.billableStateService.setRegulatNote(this.quote.regularNote);
         this.quoteCompany = this.companiesState.getCompanies().find(item => item.id === this.quote.company.id);
         this.cd.detectChanges();
         this.servicesList.getServicesList();
@@ -74,7 +71,6 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
       })
     })
     this.sub.add(getOnEdit);
-
   }
   public resetQuote() {
     this.quote = null;
@@ -87,23 +83,18 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
   public getQuote() {
     return this.quote;
   }
-   public getQuotePreview() {
-     return this.quote.getDataForPreview(this.quoteCompany);
-   } 
+  public getQuotePreview() {
+    return this.quote.getDataForPreview(this.quoteCompany);
+  }
   private getInvoiceNote() {
     this.billableService.getInvoiceNote().subscribe(data => {
       this.notes = data;
-
-
-
     })
   }
-
   onUpdateGlobalNote() {
     this.invoiceTicketsService.updateTermsAndConditions(this.elRef.nativeElement.querySelector("#description-global-note").value).subscribe(data => {
       this.changeGlobalNote = false;
       this.quote.termsAndConditions = this.elRef.nativeElement.querySelector("#description-global-note").value;
-
       this.validate.resetValidate();
     })
   }
@@ -122,40 +113,25 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
   }
   getTotalTaxes() {
     let totalTaxes = 0;
-
     totalTaxes += this.quote.services.reduce((a, b) => a + b.taxSum, 0);
     totalTaxes += this.quote.products.reduce((a, b) => a + b.taxSum, 0);
-  /*  this.quote.services.forEach(service => {
-      totalTaxes += service.item.taxes.reduce((a, b) => a + (b.rate * service.quantity), 0);
-    })
-    this.quote.products.forEach(product => {
-      totalTaxes += product.item.taxes.reduce((a, b) => a + (b.rate * product.quantity), 0);
-    })*/
-    
     return totalTaxes;
   }
-  
   public updateInvoiceData(request) {
-    console.log("request", request.regularInvoiceNote);
     this.quote.setRegulatNote(request.regularInvoiceNote);
     this.validate.resetValidate();
-
   }
   public onChangeQuoteNumber(data) {
-    this.quote.number=data;
+    this.quote.number = data;
     this.validate.resetValidate();
     this.validate.resetNumber();
   }
   selectProduct(data) {
-    console.log("data", data);
-
     this.quote.addProduct(data);
     this.validate.resetServicesProducts();
     this.validate.resetValidate();
-    console.log("this.quote", this.quote.products);
   }
   onAddService(data) {
-    console.log("data", data);
     this.quote.addService(data);
     this.validate.resetServicesProducts();
     this.validate.resetValidate();
@@ -175,7 +151,6 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
     service.sum = this.quoteStateService.getPrice(service.rate, service.quantity, service.taxes) + this.getTaxPrice(service);
     service.taxSum = this.getTaxPrice(service);
     return this.quoteStateService.roundToTwo(this.quoteStateService.getPrice(service.rate, service.quantity, service.taxes) + this.getTaxPrice(service));
-
   }
   public getTaxPrice(service) {
     return service.taxes.reduce((a, b) => a + ((b.rate / 100) * service.rate * service.quantity), 0);;
@@ -187,7 +162,6 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
       this.billableStateService.onEditCustomer(customerCompany);
       this.validate.resetValidate();
     })
-
   }
   getSelectedTaxes(taxes) {
     return taxes.map(item => {
@@ -200,10 +174,8 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
   }
   onChangeExpiryDate(data) {
     this.quote.setExpiryDate(data.day, data.month, data.year, this.companiesState.getCurrentCompany().addresses[0].timeZone.timeOffset);
- 
     this.validate.resetValidate();
   }
- 
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

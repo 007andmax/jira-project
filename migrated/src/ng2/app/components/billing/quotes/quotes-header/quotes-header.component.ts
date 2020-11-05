@@ -7,7 +7,6 @@ import { QuotesFilterComponent } from './quotes-filter/quotes-filter.component';
   styleUrls: ['./quotes-header.component.scss']
 })
 export class QuotesHeaderComponent implements OnInit {
-
   @ViewChild('filter') filter: QuotesFilterComponent;
   countFilter: number = 0;
   toggleFilter: boolean = true;

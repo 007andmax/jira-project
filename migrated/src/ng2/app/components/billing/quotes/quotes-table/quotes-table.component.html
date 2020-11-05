@@ -1,6 +1,5 @@
 
 <div class="page-list quotes-page">
-
   <div class="qt-df qt-fd-c qt-jc-sb quotes-page__list-container">
     <div>
       <app-quotes-header   (onSortBy)="sortBy($event)"></app-quotes-header>
@@ -33,14 +32,11 @@
        </ng-template>
      </tbody>
         </table>
-      
       </div>
       <div class="loading" *ngIf="showPreloader"></div>
     </div>
-
     <div class="total-info">
       <div class="loading pengind-loading" *ngIf="showPendingPreloader"></div>
     </div>
-
   </div>
 </div>

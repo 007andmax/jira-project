@@ -19,15 +19,14 @@ export class Quote {
     subject: string;
     totalAmount: number;
     validUntil: number;
-    createdBy:string;
-    invoiceId:string;
-    ticketId:string;
+    createdBy: string;
+    invoiceId: string;
+    ticketId: string;
     constructor(data = null) {
         if (data) {
             for (const key in data) {
                 this[key] = data[key];
             }
-
         }
     }
 }

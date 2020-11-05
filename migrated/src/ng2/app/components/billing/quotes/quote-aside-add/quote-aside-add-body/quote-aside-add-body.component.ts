@@ -12,10 +12,8 @@ import { CompaniesStateService } from 'src/ng2/app/states/company/companies-stat
 import { QuoteStateService } from 'src/ng2/app/states/quote/quote-state.service';
 import { InvoiceFormEditCustomerComponent } from '../../../billable/billable-aside/invoice-form/invoice-form-edit-customer/invoice-form-edit-customer.component';
 import { InvoiceNote } from '../../../billable/class/invoice-note';
-import { Quote } from '../../class/quote';
 import { QuoteAdd } from '../../class/quote-add';
 import { QuoteValdiate } from '../../class/quote-vildate';
- 
 import { ServiceListQuoteComponent } from '../service-list-quote/service-list-quote.component';
 
 @Component({
@@ -26,15 +24,14 @@ import { ServiceListQuoteComponent } from '../service-list-quote/service-list-qu
 export class QuoteAsideAddBodyComponent implements OnInit {
   @ViewChild('companyEdit') companyEdit: InvoiceFormEditCustomerComponent;
   @ViewChild('servicesList') servicesList: ServiceListQuoteComponent;
-  @Input() validate:QuoteValdiate = new QuoteValdiate();
+  @Input() validate: QuoteValdiate = new QuoteValdiate();
   quoteCompany: any;
   notes: Array<InvoiceNote>;
   formatDate: string = FORMAT_DATE_2;
   quote: QuoteAdd = new QuoteAdd();
   changeGlobalNote: boolean = false;
-  termsAndConditions:string;
+  termsAndConditions: string;
   companies = [];
-   
   sub: Subscription = new Subscription();
   constructor(private companiesState: CompaniesStateService,
     private billableStateService: BillableStateService,
@@ -52,7 +49,6 @@ export class QuoteAsideAddBodyComponent implements OnInit {
       this.getCLientsList(data);
     })
     this.quoteServices.getQuoteNumber().subscribe((data: any) => {
-      console.log("data", data);
       this.quote.number = data.number;
     });
     let getChangeCompanies = this.companiesState.getChangeCompanies().subscribe((data: CompanyUpdate) => {
@@ -70,17 +66,13 @@ export class QuoteAsideAddBodyComponent implements OnInit {
     this.sub.add(getChangeCompanies);
   }
   onInitCopy() {
-  
     this.quote.setCopyData(this.quoteStateService.getQuoteForCopy());
     this.quoteCompany = this.companiesState.getCompanies().find(item => item.id === this.quote.companyId);
     this.cd.detectChanges();
     this.servicesList.getServicesList();
-    console.log("this.quote",this.quote);
-   
-
   }
   public onChangeQuoteNumber(data) {
-    this.quote.number=data;
+    this.quote.number = data;
     this.validate.resetValidate();
     this.validate.resetNumber();
   }
@@ -91,7 +83,7 @@ export class QuoteAsideAddBodyComponent implements OnInit {
     return this.quote;
   }
   public getQuotePreview() {
-    return this.quote.getDataForPreview(this.quoteCompany,this.termsAndConditions);
+    return this.quote.getDataForPreview(this.quoteCompany, this.termsAndConditions);
   }
   private getInvoiceNote() {
     this.billableService.getInvoiceNote().subscribe(data => {
@@ -127,34 +119,20 @@ export class QuoteAsideAddBodyComponent implements OnInit {
   }
   getTotalTaxes() {
     let totalTaxes = 0;
-
     totalTaxes += this.quote.services.reduce((a, b) => a + b.taxSum, 0);
     totalTaxes += this.quote.products.reduce((a, b) => a + b.taxSum, 0);
-  /*  this.quote.services.forEach(service => {
-      totalTaxes += service.item.taxes.reduce((a, b) => a + (b.rate * service.quantity), 0);
-    })
-    this.quote.products.forEach(product => {
-      totalTaxes += product.item.taxes.reduce((a, b) => a + (b.rate * product.quantity), 0);
-    })*/
-    
     return totalTaxes;
   }
   public updateInvoiceData(request) {
-    console.log("request",request.regularInvoiceNote);
     this.quote.setRegulatNote(request.regularInvoiceNote);
     this.validate.resetValidate();
-   
   }
   selectProduct(data) {
-    console.log("data", data);
-
     this.quote.addProduct(data);
     this.validate.resetServicesProducts();
     this.validate.resetValidate();
-    console.log("this.quote",this.quote.products);
   }
   onAddService(data) {
-    console.log("data", data);
     this.quote.addService(data);
     this.validate.resetServicesProducts();
     this.validate.resetValidate();
@@ -165,16 +143,15 @@ export class QuoteAsideAddBodyComponent implements OnInit {
       .filter((item) => !item.deletedAt)
   }
   removeService(i) {
-    this.quote.services.splice(i,1);
+    this.quote.services.splice(i, 1);
   }
   removeProduct(i) {
-    this.quote.products.splice(i,1);
+    this.quote.products.splice(i, 1);
   }
   getPriceService(service) {
-    service.sum =  this.quoteStateService.getPrice(service.item.rate, service.quantity, service.item.taxes) + this.getTaxPrice(service);
-    service.taxSum =    this.getTaxPrice(service);
+    service.sum = this.quoteStateService.getPrice(service.item.rate, service.quantity, service.item.taxes) + this.getTaxPrice(service);
+    service.taxSum = this.getTaxPrice(service);
     return this.quoteStateService.roundToTwo(this.quoteStateService.getPrice(service.item.rate, service.quantity, service.item.taxes) + this.getTaxPrice(service));
-
   }
   public getTaxPrice(service) {
     return service.item.taxes.reduce((a, b) => a + ((b.rate / 100) * service.item.rate * service.quantity), 0);;
@@ -186,7 +163,6 @@ export class QuoteAsideAddBodyComponent implements OnInit {
       this.billableStateService.onEditCustomer(customerCompany);
       this.validate.resetValidate();
     })
-
   }
   getSelectedTaxes(taxes) {
     return taxes.map(item => {

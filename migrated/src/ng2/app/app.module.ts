@@ -343,15 +343,9 @@ import { QuoteAsideEditComponent } from './components/billing/quotes/quote-aside
 import { ProductItemQuoteEditComponent } from './components/billing/quotes/quote-aside-edit/product-item-quote-edit/product-item-quote-edit.component';
  import { QuoteAsideEditBodyComponent } from './components/billing/quotes/quote-aside-edit/quote-aside-edit-body/quote-aside-edit-body.component';
 
-
-
 /**
  * declare angular
  */
-declare var angular: any;
-
-// import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-
 declare var angular: any;
 declare var $: any;
 export class CustomHandlingStrategy implements UrlHandlingStrategy {
@@ -362,7 +356,6 @@ export class CustomHandlingStrategy implements UrlHandlingStrategy {
   extract(url) { return url }
   merge(url, whole) { return url }
 }
-
 
 /**
  * Component downgrade
@@ -957,7 +950,6 @@ export class AppModule {
       .then((name) => { bootstrapRootComponent(app, name) });
   }
 }
-
 
 function bootstrapRootComponent(app, name) {
   // define the possible bootstrap components 

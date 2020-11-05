@@ -45,7 +45,6 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     private invoicesListService: InvoicesListService) { }
 
   ngOnInit() {
-    console.log("InvoicesComponent");
     this.leftPanelStateService.setBillingpage('new-billable-invoices');
     window.scrollTo(0, 0);
     if (this.companiesStateService.getCompanies().length > 0) this.onScroll();

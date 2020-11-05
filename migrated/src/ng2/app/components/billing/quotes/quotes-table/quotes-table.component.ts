@@ -39,14 +39,10 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
     private quoteStateService: QuoteStateService,
     private quoteServices: QuoteService,) { }
 
-
   ngOnInit() {
-    console.log("QuotesTableComponent");
     window.scrollTo(0, 0);
     this.onScroll();
     let getOnInitFilter = this.quoteStateService.getOnInitFilter().subscribe(data => {
-      //  this.selectedPayments = [];
-      //  this.selectedCompanyId = null;
       this.filter = data;
       this.showPreloader = true;
       window.scrollTo(0, 0);
@@ -64,7 +60,6 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
         } else {
           this.quotes.splice(elemIndex, 1);
         }
-
       }
     })
     this.sub.add(changeQuotesArray);
@@ -72,7 +67,6 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
       let quote: QuoteEdit = data;
       this.quoteServices.editQuote(quote.getDataForUpdate(true)).subscribe((res) => {
         this.quoteServices.repeatSend(quote.id).subscribe(sendRes => {
-
         })
       });
     })
@@ -82,12 +76,10 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
     this.quoteStateService.setInvoice(invoiceId);
   }
   public sortBy(value) {
-    console.log("value", value);
     this.showPreloader = true;
     window.scrollTo(0, 0);
     this.setDefaultScoll();
     this.filter.sortBy = this.sort.getSortType(value);
-    console.log("this.filter.sortBy", this.filter.sortBy);
     this.getQuotes()
   }
   public setDefaultScoll() {
@@ -95,7 +87,6 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
     this.quotesListService.setBlockList(false);
     this.quotes = [];
   }
-
   getQuotes() {
     if (this.quotesListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
@@ -118,7 +109,6 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
       let quote = new QuotePreview(data)
       this.quoteStateService.setCopy(quote);
     })
-
   }
   preview(item) {
     this.quoteStateService.setPreview(item);
@@ -142,9 +132,7 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
         modalRef.componentInstance.data = quote;
         modalRef.componentInstance.action = QUOTE_MODAL_ACTION_LIST;
       })
-
     }
-
   }
   openTikcet(id) {
     this.ticketsStateService.onOpenTicket();
@@ -154,36 +142,29 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
   }
   goToQuoteEdit(quote) {
     this.quoteStateService.setEdit(quote);
-
   }
   archiveQuote(item) {
     this.quoteServices.archiveQuote(item.company, item.id).subscribe((res) => {
-
     });
   }
   cancelQuote(item) {
     this.quoteServices.cancelQuote(item.company, item.id).subscribe((res) => {
-
     });
   }
   markAsRead(item) {
     this.quoteServices.markAsRead(item.company, item.id).subscribe((res) => {
-
     });
   }
   approveQuote(item) {
     this.quoteServices.approveQuote(item.company, item.id).subscribe((res) => {
-
     });
   }
   convertToTicket(item) {
     this.quoteServices.convertToTicket(item.company, item.id).subscribe((res) => {
-
     });
   }
   convertToInvoice(item) {
     this.quoteServices.convertToInvoice({ companyInfo: item.company }, item.id).subscribe((res) => {
-
     });
   }
   ngOnDestroy(): void {

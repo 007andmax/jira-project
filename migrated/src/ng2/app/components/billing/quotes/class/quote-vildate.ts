@@ -1,12 +1,12 @@
 import { QuoteAdd } from './quote-add';
 
 export class QuoteValdiate {
-    number:boolean =  true;
+    number: boolean = true;
     company: boolean = true;
     servicesProducts: boolean = true;
-    validateSaleCostProduct:boolean = true;
-    validate:boolean = true;
-    errorMessage:string = "";
+    validateSaleCostProduct: boolean = true;
+    validate: boolean = true;
+    errorMessage: string = "";
     constructor() { }
 
     public resetNumber() {
@@ -31,7 +31,7 @@ export class QuoteValdiate {
     public getServicesProducts() {
         return this.servicesProducts;
     }
-    public resetServicesProducts () {
+    public resetServicesProducts() {
         this.servicesProducts = true;
     }
     public resetCompany() {

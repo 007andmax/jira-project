@@ -24,5 +24,4 @@ export class QuoteAddService {
             quantity: this.quantity
         }
     }
-
 }

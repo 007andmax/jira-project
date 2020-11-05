@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { QuoteStateService } from 'src/ng2/app/states/quote/quote-state.service';
 import { QuoteAddProduct } from '../../class/quote-add-product';
 
-
 @Component({
   selector: 'app-product-item-quote',
   templateUrl: './product-item-quote.component.html',
@@ -15,12 +14,10 @@ export class ProductItemQuoteComponent implements OnInit {
 
   ngOnInit() {
     this.product.markup = this.getMarkups();
-    
   }
   ngDoCheck() {
     this.product.sum = this.quoteStateService.getPrice(this.product.item.sale, this.product.quantity, this.product.item.taxes) + this.getTaxPrice();
     this.product.taxSum = this.getTaxPrice();
-
   }
   public getTaxPrice() {
     return this.product.item.taxes.reduce((a, b) => a + ((b.rate / 100) * this.product.item.sale * this.product.quantity), 0);;
@@ -38,7 +35,6 @@ export class ProductItemQuoteComponent implements OnInit {
   public getMarkups() {
     if (this.product.item.sale > 0 && this.product.item.cost > 0) return Math.round((this.product.item.sale - this.product.item.cost) / this.product.item.cost * 100);
     return 0;
-
   }
   changeMarkup(val) {
     let value = Number(val);

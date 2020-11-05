@@ -12,7 +12,6 @@
       <app-quote-aside-edit-body #quoteEdit [validate]="validate" [hidden]="showPreview"  (onStopPreloader)="showPreloader = false"></app-quote-aside-edit-body>
       <app-quote-aside-preview-body *ngIf="showPreview" [quote]="quotePreview"></app-quote-aside-preview-body>
     </div>
-
   <div class="aside-footer qt-pr-30 qt-pl-30 qt-pb-16 qt-pt-16 qt-df qt-ai-c qt-jc-sb" *ngIf="!showPreloader">
     <div class="qt-df">
       <div class="qt-pos-rel" ngbDropdown [placement]="'top-right'">
@@ -20,7 +19,6 @@
           <li ngbDropdownItem appDisabledBtn #saveAndApproveBtn="disabled" (onClick)="saveAndApprove()"  ><div class="icon__print qt-sz-16 qt-mr-8"></div>Save and Approve</li>
           <li ngbDropdownItem appDisabledBtn #saveAndDownloadBtn="disabled" (onClick)="saveAndDownload()"  ><div class="icon__download qt-sz-16 qt-mr-8"></div>Save and Download</li>
           <li ngbDropdownItem appDisabledBtn #saveAndSendBtn="disabled" (onClick)="saveAndContinue()"  ><div class="icon__download qt-sz-16 qt-mr-8"></div>Save and Continue</li>
-
         </ul>
         <button class=" qt-button --with-menu qt-mr-12" >
           <span class="save-billable-aside-btn left-side" appDisabledBtn #saveAndContinueBtn="disabled" (onClick)="saveAndSend()"  >
@@ -35,8 +33,6 @@
       <button class="qt-button --outline" *ngIf="!showPreview" (click)="onPreview()">Preview</button>
         <button class="qt-button --outline" *ngIf="showPreview" (click)="showPreview = false">Edit</button>
     </div>
-
    </div>
   </div>
-
   </div>
