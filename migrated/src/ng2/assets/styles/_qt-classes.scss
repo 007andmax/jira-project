@@ -473,6 +473,7 @@
   background-color: #ffffff;
   padding: 8px 0;
   margin: 0;
+  position: relative;
   &.--open-top {
     top: unset;
     bottom: calc(100% + 4px);
@@ -480,6 +481,10 @@
   &.--open-bot {
     top: calc(100% - 4px) !important;
     transform: none !important;
+  }
+  &.--open-left {
+    right: 0 !important;
+    left: auto !important;
   }
   &.--fixed {
     position: fixed !important;

@@ -1,12 +1,12 @@
 <app-left-panel-tickets></app-left-panel-tickets>
  <div class="tickets-dashboard-page billing-dashboard-page">
   <div class="loading" *ngIf="showPreloader"></div>
-  <div class="billing-dashboard-page__content" [hidden]="showPreloader">
+  <div class="billing-dashboard-page__content tickets-dashboard-page__content" [hidden]="showPreloader">
     <div class="qt-df qt-ai-c qt-jc-sb qt-mb-16">
       <h3 class="list-title qt-mt-0 qt-mb-0 qt-fs-16 qt-ff-sb">Dashboard</h3>
       <div class="list-type" ngbDropdown>
-        <div class="pointer" class="tickets-dashboard-page__dropdown" ngbDropdownToggle [textContent]="currentInterval.title"  id="dropdownIntervals"></div>
-        <ul class="qt-dropdown-menu --border" ngbDropdownMenu aria-labelledby="dropdownIntervals">
+        <div class="tickets-dashboard-page__dropdown pointer" ngbDropdownToggle [textContent]="currentInterval.title"  id="dropdownIntervals"></div>
+        <ul class="qt-dropdown-menu --border --open-left" ngbDropdownMenu aria-labelledby="dropdownIntervals">
           <ng-template ngFor let-item [ngForOf]="listIntervals" >
             <li class="pointer" tabindex="-1" href="javascript:void(0)" [textContent]="item.title" ngbDropdownItem (click)="onSelectInterval(item)"></li>
           </ng-template>

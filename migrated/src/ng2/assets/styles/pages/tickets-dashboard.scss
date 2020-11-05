@@ -1,4 +1,7 @@
 .tickets-dashboard-page {
+  &__content {
+    max-width: 1208px;
+  }
   &__dropdown {
     height: 20px;
     border-radius: 3px;
@@ -164,6 +167,12 @@
       font-family: 'Graphik-Light', sans-serif;
       margin-bottom: 2px;
     }
+  }
+
+  .analystic-widget__dropdown-title {
+    min-width: 80px;
+    display: flex;
+    justify-content: flex-end;
   }
 }
 
