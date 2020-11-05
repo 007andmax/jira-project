@@ -78,7 +78,7 @@ export class CompanyDashboardComponent implements OnInit {
     SEMI_MANAGED: 'Semi managed',
     FULLY_MANAGED: 'Fully managed'
   }
-  aa;
+  closingSoon = false;
   workingDays = [];
   public companyDetail: CompanyProfile;
   constructor(private modalService: NgbModal,
@@ -92,6 +92,11 @@ export class CompanyDashboardComponent implements OnInit {
   closeResult = '';
 
   open(content: any) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title',centered: true , windowClass: 'cmp-comapny-modal'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    });
+  }
+  openTag(content: any) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title',centered: true , windowClass: 'cmp-comapny-modal'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     });
@@ -233,29 +238,31 @@ export class CompanyDashboardComponent implements OnInit {
         }
         this.workingDays.forEach((element, index) => {
           element.checked = false;
+          let e1: any, s1: any;
           if (element.startTime !== 0 && element.endTime !== 0) {
             element.timing = `${this.timeFormatter(element.startTime)} ${this.getTimeFormat(element.startTime)} - ${this.timeFormatter(element.endTime)} ${this.getTimeFormat(element.endTime)}`
-            let s1 = this.timeFormatter(element.startTime) + ':00 ' + this.getTimeFormat(element.startTime)
+            s1 = this.timeFormatter(element.startTime) + ':00 ' + this.getTimeFormat(element.startTime)
             element.sTime = new Date('01/01/1990 ' + s1)
-            let e1 = this.timeFormatter(element.endTime) + ':00 ' + this.getTimeFormat(element.endTime)
+            e1 = this.timeFormatter(element.endTime) + ':00 ' + this.getTimeFormat(element.endTime)
             element.eTime = new Date('01/01/1990 ' + e1)
             element.checked = true
+            let current = parseInt(moment(new Date()).format('hh'));
+            if (day.toLowerCase() === element.dayOfWeek.toLowerCase() && this.getTimeFormat(element.startTime) == moment(new Date()).format('A') && this.timeFormatter(element.endTime) - 1 == current) {
+              this.closingSoon = true;
+            }
           }
-          
-          // let abc = this.timeFormatter(element.endTime) + ':00 ' + this.getTimeFormat(element.endTime)
-          // this.aa = new Date('01/01/1990 ' + abc)
-          // let end1 = new Date();
-          // let time = aa.getTime();
-          // var diff =(end1.getTime() - aa.getTime()) / 1000;
-          // diff /= 60;
-          // if () {
 
-          // }
+          
         });
       }
       
     })
     this.sub.add(getCompany);
+  }
+
+  public onChangeTags(tags) {
+     
+    // this.company.setTags(tags);
   }
 
   getCharacter(name) { 

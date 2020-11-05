@@ -86,7 +86,7 @@
                     </div> 
                   </div> 
                 </div>
-                <span class="closing-tag">Closing Soon</span>
+                <span class="closing-tag" *ngIf="closingSoon == true">Closing Soon</span>
             </div>  
           </div>
           <div class="other-info-col d-flex" *ngIf="companyDetail?.clientIndustry !== undefined && companyDetail?.clientIndustry !== null && companyDetail?.clientIndustry !== ''">
@@ -118,7 +118,7 @@
         <div class="profile-cmp-board tags-area d-flex">
           <div class="small-title d-flex">
             Tags
-            <a href="javascript:;">+Add</a>
+            <!-- <a href="javascript:;" (click)="openTag(tag)">+Add</a> -->
           </div>
           <div class="tags-tab d-flex">
             <span class="tag" *ngFor="let tag of tags; let i = index;"
@@ -499,24 +499,28 @@
     </button>
   <div class="modal-body d-flex">
     <div class="h1">Get Direction</div>
-    <!-- <agm-map [latitude]="companyDetail.addresses[0].locationLat" [longitude]="companyDetail.addresses[0].locationLng" [mapTypeControl]='true'
-    [zoom]="15" [title]="title">
-      <agm-marker [latitude]="companyDetail.addresses[0].locationLat" [longitude]="companyDetail.addresses[0].locationLng"></agm-marker>
-    </agm-map> -->
-    <!-- <agm-map [latitude]="companyDetail.addresses[0].locationLat" [longitude]="companyDetail.addresses[0].locationLng" 
-    [mapTypeControl]='true' [zoom]="15">
-    <agm-marker [latitude]="companyDetail.addresses[0].locationLat" [longitude]="companyDetail.addresses[0].locationLng"></agm-marker>
-  </agm-map> -->
-  <iframe
-  frameborder="0" 
-  scrolling="no" 
-  marginheight="0" 
-  marginwidth="0" 
-  [src]="mapUrl()"
- >
- </iframe>
+    <iframe
+      frameborder="0" 
+      scrolling="no" 
+      marginheight="0" 
+      marginwidth="0" 
+      [src]="mapUrl()"
+    >
+    </iframe>
   </div>
   
+</ng-template>
+
+<ng-template #tag let-modal class="map-modal">
+  
+  <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    close
+  </button>
+<div class="modal-body d-flex">
+  <div class="h1">Tags</div>
+  <app-company-tags (tagsChange)="onChangeTags($event)"></app-company-tags>
+</div>
+
 </ng-template>
 
 
