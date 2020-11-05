@@ -6,7 +6,7 @@
   <div class="left-panel-ng2__content">
     
     <div class="left-panel-ng2__content--lists">
-      <div class="list-item d-f jc-sb" (click)="goToState('new-tickets-dashboard')">Dashboard</div>  
+      <div class="list-item d-f jc-sb" [ngClass]="{'active': listType === 'DASHBOARD'}" (click)="goToState('new-tickets-dashboard')">Dashboard</div>  
       <div class="list-item d-f jc-sb" [ngClass]="{'active': listType === 'USERS'}" (click)="setTypeFilter('USERS')">My Tickets <div>{{getCountByField('USER')}}</div></div>
       <div class="list-item d-f jc-sb" [ngClass]="{'active': listType === 'ALL'}" (click)="setTypeFilter('ALL')">All Tickets <div>{{getCountByField('ALL')}}</div></div>
       <div class="list-item d-f jc-sb" [ngClass]="{'active': listType === 'UNASSIGNED'}" (click)="setTypeFilter('UNASSIGNED')">Unassigned <div>{{getCountByField('UNASSIGNED')}}</div></div>
@@ -22,7 +22,7 @@
     
   
   
-    <div class="left-panel-ng2__content--tags clearfix">
+    <div class="left-panel-ng2__content--tags clearfix" *ngIf="listType !== 'DASHBOARD'">
       <div class="tags-header">
         By tags
       </div>

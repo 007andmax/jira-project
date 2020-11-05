@@ -5,7 +5,6 @@
   var app = angular.module('quicktech',
     [
       'main.services',
-      'quicktech.core.dashboards',
       'quicktech.core.tickets',
       'quicktech.common.services',
       'quicktech.common.directives',
@@ -71,11 +70,6 @@
       $urlRouterProvider.when('/accounting', '/accounting/billable');
 
       $stateProvider
-        .state('tickets-dashboard', waitForServices({
-          url: '/tickets-dashboard',
-          templateUrl: '/ng1/scripts/core/dashboards/tickets-dashboard/tickets-dashboard.tpl.html',
-          controller: 'quicktech.core.dashboards.ticketsDashboardCtrl'
-        }))
         .state('companyProfile', waitForServices({
           url: '/clients/companyProfile/:companyId?tabName',
           params: {

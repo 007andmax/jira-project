@@ -31,6 +31,8 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
+    this.selectedListType = this.titleListTypes.find(item => item.type === this.ticketsStateService.getListType());
+    this.title = `${(this.selectedListType) ? this.selectedListType.title : ''} (${this.count})`;
     let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
       this.selectedListType = this.titleListTypes.find(item => item.type === data.listType);
       if (this.selectedListType) this.title = `${this.selectedListType.title} (${this.count})`

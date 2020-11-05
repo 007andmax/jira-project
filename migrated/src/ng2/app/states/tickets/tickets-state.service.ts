@@ -9,6 +9,7 @@ import { WebsocketService } from '../../services/websocket/websocket.service';
   providedIn: 'root'
 })
 export class TicketsStateService {
+  listType: string = "USERS";
   clearFormUpdate: EventEmitter<any> = new EventEmitter();
   actualNumber: EventEmitter<any> = new EventEmitter();
   addTicket: EventEmitter<any> = new EventEmitter();
@@ -55,6 +56,7 @@ export class TicketsStateService {
 
   }
   public onChangeLeftPanelFilter(data) {
+    this.listType = data;
     this.leftPanelFilter.emit(data);
   }
   public getOnChangeLeftPanelFilter() {
@@ -67,8 +69,11 @@ export class TicketsStateService {
   public getOnChangeTagsFilter() {
     return this.tagsFilter;
   }
-
+  public getListType() {
+    return this.listType;
+  }
   public onChangeTypeFilter(data) {
+    this.listType = data;
     this.typeFilter.emit(data);
   }
   public getOnChangeTypeFilter() {

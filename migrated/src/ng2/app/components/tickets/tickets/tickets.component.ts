@@ -17,6 +17,7 @@ export class TicketsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     window.scrollTo(0,0);
+    this.listType = this.ticketsStateService.getListType();
     let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe((data:any) => {
       this.listType = data.listType;
     })
