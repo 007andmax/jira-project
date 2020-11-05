@@ -5,23 +5,21 @@
     <div class="qt-df qt-ai-c qt-jc-sb qt-mb-16">
       <h3 class="list-title qt-mt-0 qt-mb-0 qt-fs-16 qt-ff-sb">Dashboard</h3>
       <div class="list-type" ngbDropdown>
-        <span ngbDropdownToggle [textContent]="currentInterval.title"  id="dropdownIntervals"></span>
-        <div ngbDropdownMenu aria-labelledby="dropdownIntervals">
+        <div class="pointer" class="tickets-dashboard-page__dropdown" ngbDropdownToggle [textContent]="currentInterval.title"  id="dropdownIntervals"></div>
+        <ul class="qt-dropdown-menu --border" ngbDropdownMenu aria-labelledby="dropdownIntervals">
           <ng-template ngFor let-item [ngForOf]="listIntervals" >
-            <a tabindex="-1" href="javascript:void(0)" ngbDropdownItem (click)="onSelectInterval(item)">
-              {{item.title}}
-            </a>
+            <li class="pointer" tabindex="-1" href="javascript:void(0)" [textContent]="item.title" ngbDropdownItem (click)="onSelectInterval(item)"></li>
           </ng-template>
-        </div>
+        </ul>
       </div>
     </div>
 
       <div class="qt-df qt-jc-sb qt-mb-16">
-    <app-dashboard-stats [title]="'Open Tickets'" [total]="dashboardTicketsStats.OPEN" [class]="'icon__total-sales'"></app-dashboard-stats>
-    <app-dashboard-stats [title]="'On-hold Tickets'" [total]="dashboardTicketsStats.ON_HOLD" [class]="'icon__unpaid-invoice'"></app-dashboard-stats>
-    <app-dashboard-stats [title]="'New Tickets'" [total]="dashboardTicketsStats.UNASSIGNED" [class]="'icon__unbilled-amount'"></app-dashboard-stats>
-    <app-dashboard-stats [title]="'Completed Tickets'" [total]="dashboardTicketsStats.CLOSED" [class]="'icon__quotes'"></app-dashboard-stats>
-    <app-dashboard-stats [title]="'Recurring Tickets'" [total]="dashboardTicketsStats.RECURRING_TICKETS" [class]="'icon__quotes'"></app-dashboard-stats>
+    <app-dashboard-stats [title]="'Open Tickets'" [total]="dashboardTicketsStats.OPEN" [class]="'icon__tickets-on-time'"></app-dashboard-stats>
+    <app-dashboard-stats [title]="'On-hold Tickets'" [total]="dashboardTicketsStats.ON_HOLD" [class]="'icon__on-hold-tickets'"></app-dashboard-stats>
+    <app-dashboard-stats [title]="'New Tickets'" [total]="dashboardTicketsStats.UNASSIGNED" [class]="'icon__new-tickets'"></app-dashboard-stats>
+    <app-dashboard-stats [title]="'Completed Tickets'" [total]="dashboardTicketsStats.CLOSED" [class]="'icon__solved-tickets'"></app-dashboard-stats>
+    <app-dashboard-stats [title]="'Recurring Tickets'" [total]="dashboardTicketsStats.RECURRING_TICKETS" [class]="'icon__recurring-tickets'"></app-dashboard-stats>
       </div>
     <app-tickets-analytics-widget #ticketsAnalytics (onTicketsAnalyticsReady)="onTicketsAnalyticsReady()"></app-tickets-analytics-widget>
     <div class="qt-df qt-jc-sb qt-mb-16">

@@ -1,4 +1,16 @@
 .tickets-dashboard-page {
+  &__dropdown {
+    height: 20px;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+    background-color: #ffffff;
+    font-size: 10px;
+    color: #4f5f79;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    font-family: Graphik-Medium, sans-serif;
+  }
   .billing-hours {
     width: 66%;
     &__header-title {
@@ -9,96 +21,148 @@
     font-family: Graphik-Medium, sans-serif;
     white-space: nowrap;
     }
-
     &__interval-title {
       font-size: 12px;
       color: #9ca5b6;
       padding-right: 10px;
     }
-  }
-  .cols-container {
-    display: flex;
-    min-height: 223px;
-    flex-grow: 1;
-    position: relative;
-  }
-  .cols-container-item {
-    border-left: 1px solid #edf2f6;
-    flex-grow: 1;
-    height: calc(100% - 30px);
-    position: relative;
-    &:nth-last-child(2) {
-      max-width: 0;
-      .cols-container-item-number {
-        right: -1px;
-        left: unset;
+    .cols-container {
+      display: flex;
+      min-height: 223px;
+      flex-grow: 1;
+      position: relative;
+    }
+    .cols-container-item {
+      border-left: 1px solid #edf2f6;
+      flex-grow: 1;
+      height: calc(100% - 30px);
+      position: relative;
+      &:nth-last-child(2) {
+        max-width: 0;
+        .cols-container-item-number {
+          right: -1px;
+          left: unset;
+        }
       }
     }
-  }
-  .cols-container-item-number {
-    position: absolute;
-    bottom: -17px;
-    line-height: 1;
-    left: -1px;
-    font-size: 12px;
-    color: #4f5f79;
-  }
-  .lines-container {
-    position: absolute;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-top: 10px;
-    padding-bottom: 40px;
-    width: 100%;
-  }
-  .lines-container__line {
-    height: 12px;
-    background: #00ccff;
-    border-top-right-radius: 100px;
-    border-bottom-right-radius: 100px;
-  }
-
-  .labels-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-top: 10px;
-    padding-bottom: 40px;
-    font-size: 12px;
-    margin-right: 8px;
-    max-width: 112px;
-  }
-
-  .labels-container-item {
-    line-height: 1;
-    color: #4f5f79;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  }
-  .lines-container {
-    ngb-tooltip-window {
-      opacity: 1;
-
-      .arrow::before {
-        border-right-color: #dfe3e8;
-      }
-    }
-    .tooltip .tooltip-inner {
-      color: #364656;
-      padding: 12px 16px;
-      font-size: 12px;
-      background-color: white;
-      border: 1px solid #dfe3e8;
-      border-radius: 8px;
+    .cols-container-item-number {
+      position: absolute;
+      bottom: -17px;
       line-height: 1;
-      box-shadow: 0 16px 24px 0 rgba(0, 0, 0, 0.1);
-      .lines-container-tooltip-header {
-        color: #4f5f79;
-        padding-top: 4px;
+      left: -1px;
+      font-size: 12px;
+      color: #4f5f79;
+    }
+    .lines-container {
+      position: absolute;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-top: 10px;
+      padding-bottom: 40px;
+      width: 100%;
+    }
+    .lines-container__line {
+      height: 12px;
+      background: #00ccff;
+      border-top-right-radius: 100px;
+      border-bottom-right-radius: 100px;
+    }
+    .labels-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-top: 10px;
+      padding-bottom: 40px;
+      font-size: 12px;
+      margin-right: 8px;
+      max-width: 112px;
+    }
+    .labels-container-item {
+      line-height: 1;
+      color: #4f5f79;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    .lines-container {
+      ngb-tooltip-window {
+        opacity: 1;
+        .arrow::before {
+          border-right-color: #dfe3e8;
+        }
       }
+      .tooltip .tooltip-inner {
+        color: #364656;
+        padding: 12px 16px;
+        font-size: 12px;
+        background-color: white;
+        border: 1px solid #dfe3e8;
+        border-radius: 8px;
+        line-height: 1;
+        box-shadow: 0 16px 24px 0 rgba(0, 0, 0, 0.1);
+        .lines-container-tooltip-header {
+          color: #4f5f79;
+          padding-top: 4px;
+        }
+      }
+    }
+  }
+
+  .time-on-tickets {
+    position: relative;
+    &__header {
+      padding: 16px 24px 0 24px;
+      display: flex;
+      width: 100%;
+      -webkit-box-pack: justify;
+      justify-content: space-between;
+    }
+    &__interval-title {
+      font-size: 12px;
+      color: #9ca5b6;
+    }
+    &__content {
+      height: 100%;
+      width: 100%;
+      padding: 12px 24px 16px 24px;
+    }
+    &__icon {
+      width: 40px;
+      border-radius: 50%;
+      height: 40px;
+      background-color: #f4f6f8;
+      margin-right: 16px;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+    &__time-container {
+      padding-top: 28px;
+      &:last-child {
+        .time-on-tickets__info {
+          border-bottom: none;
+        }
+      }
+    }
+    &__info {
+      padding-bottom: 24px;
+      flex-grow: 1;
+      border-bottom: 1px solid #edf0f2;
+    }
+    &__info-title {
+      font-size: 14px;
+      line-height: 1.43;
+      color: #4f5f79;
+    }
+    &__info-value {
+      font-size: 40px;
+      font-style: normal;
+      line-height: 1.2;
+      letter-spacing: -2.5px;
+      color: #364656;
+      font-family: 'Graphik-Light', sans-serif;
+      margin-bottom: 2px;
     }
   }
 }

@@ -2,11 +2,10 @@
   <div class="contract-dashboard-chart-card__header">
     <div class="billing-hours__header-title">Billable Hours</div>
     <div class="list-type" ngbDropdown>
-      <div class="billing-hours__interval-title" ngbDropdownToggle [textContent]="currentInterval.title"  id="dropdownIntervals"></div>
-
+      <div class="billing-hours__interval-title pointer" ngbDropdownToggle [textContent]="currentInterval.title"  id="dropdownIntervals"></div>
       <ul class="qt-dropdown-menu --border" ngbDropdownMenu aria-labelledby="dropdownIntervals">
         <ng-template ngFor let-item [ngForOf]="listIntervals" >
-          <li class="pointer" tabindex="-1" href="javascript:void(0)" ngbDropdownItem  [textContent]="item.title"(click)="onSelectInterval(item)"></li>
+          <li class="pointer" tabindex="-1" href="javascript:void(0)" ngbDropdownItem [textContent]="item.title" (click)="onSelectInterval(item)"></li>
         </ng-template>
       </ul>
     </div>
