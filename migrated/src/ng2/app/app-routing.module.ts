@@ -18,8 +18,6 @@ import { CommissionComponent } from './components/setting/commission/commission.
 import { SubscriptionComponent } from './components/setting/subscription/subscription.component';
 import { CompanyPasswordManagerComponent } from './components/company-password-manager/company-password-manager.component';
 import { CompanyUserComponent } from './components/company-user/company-user.component';
-import { QuoteCreateComponent } from './components/billing/quotes/quote-create/quote-create.component';
-import { QuotePreviewComponent } from './components/billing/quotes/quote-preview/quote-preview.component';
 import { RecurringTicketsComponent } from './components/tickets/recurring-tickets/recurring-tickets.component';
 import { GlNumberSettingsComponent } from './components/setting/gl-number/gl-number.component';
 import { CompaniesComponent } from './components/companies/companies.component';
@@ -78,16 +76,6 @@ const routes: Routes = [
   {
     path: 'ng2/quotes',
     component: QuotesComponent,
-    pathMatch: 'full'
-  },
-  {
-    path: 'ng2/quotes/quote-create',
-    component: QuoteCreateComponent,
-    pathMatch: 'full'
-  },
-  {
-    path: 'ng2/quotes/quote-preview',
-    component: QuotePreviewComponent,
     pathMatch: 'full'
   },
   {

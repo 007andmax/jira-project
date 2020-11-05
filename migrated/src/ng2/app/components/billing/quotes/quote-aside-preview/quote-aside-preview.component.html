@@ -1,0 +1,79 @@
+<div class="invoices-page__aside aside-preview" [hidden]="!open" >
+  <div class="aside-header qt-df qt-ai-c qt-jc-sb qt-pr-16 qt-pl-20" *ngIf="!showPreloader">
+    <div class="qt-fs-20 qt-ff-gm qt-color-dark"  [textContent]="'Quote#' + quote.number">
+    </div>
+     <div class="qt-df qt-ai-c"  >
+      <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon edit-grey-ng2" *ngIf="checkStatus(quote, ['READ','UNREAD','SAVED', 'APPROVED', 'CANCELED', 'EXPIRED'])" (click)="editQuote()"></div>
+      <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__email-dark" (click)="resend()"></div>
+      <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__download-pdf" (click)="downloadPdf()"></div>
+      <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__remove"  *ngIf="checkStatus(quote, ['UNREAD','SAVED', 'EXPIRED', 'INVOICED', 'TICKETED','CANCELED'])" (click)="archiveQuote()"></div>
+      <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__convert-invoice" *ngIf="checkStatus(quote, ['APPROVED'])"  (click)="convertToInvoice()"></div>
+      <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__convert-ticket" *ngIf="checkStatus(quote, ['APPROVED'])"  (click)="convertToTicket()"></div>
+      <div class="icon__close qt-sz-24 qt-pointer qt-ic-c " (click)="close()"></div>
+    </div>
+  </div>
+  <div class="billing-invoice-preview-scroll-content" >
+    <div class="loading" *ngIf="showPreloader"></div>
+  <div class="qt-pl-30 qt-pr-30 qt-pt-24 qt-pb-50" *ngIf="!showPreloader">
+     <div class="invoice-status-timeline qt-pt-10 qt-pl-16 qt-pr-16 qt-pb-20 qt-mb-24" [ngClass]="{'--closed': !toggleStatus}">
+      <div class="invoice-status-timeline__header qt-df qt-jc-sb">
+        <div class="qt-fs-13 qt-lh-154 qt-color-dark qt-mb-15 qt-ff-gm">Quote Status</div>
+        <div class="qt-ic-c qt-sz-16 toggle-invoice-timeline" (click)="toggleStatus = !toggleStatus"></div>
+      </div>
+      <div class="invoice-status-timeline__line" *ngIf="toggleStatus">
+        <div class="invoice-status-timeline__line-point"></div>
+        <div class="invoice-status-timeline__line-point"></div>
+        <div class="invoice-status-timeline__line-point" ></div> <!--[ngClass]="{'not-completed-status':!invoiceProfile.readedAt}"-->
+        <div class="invoice-status-timeline__line-point"  ></div>
+      </div>
+      <div class="invoice-status-timeline__steps qt-df" *ngIf="toggleStatus">
+        <div class="qt-df qt-ai-c invoice-status-timeline__steps-info" >
+          <div class="step-citcle qt-mr-5 icon__invoice-check"></div>
+          <div>
+            <div class="qt-fs-12 qt-ff-gm qt-lh-133  qt-color-dark ">Quote Created</div>
+            <div class="qt-fs-11 qt-lh-145 qt-color-dark-light" [textContent]="getDate(quote.createdAt)"></div>
+          </div>
+        </div>
+        <div class="qt-df qt-ai-c invoice-status-timeline__steps-info" >
+          <div class="step-citcle qt-mr-5 icon__invoice-email"></div>
+          <div>
+            <div class="qt-fs-12 qt-ff-gm qt-lh-133  qt-color-dark ">Quote sent</div>
+          </div>
+        </div>
+        <div class="qt-df qt-ai-c invoice-status-timeline__steps-info" >
+          <div class="step-citcle qt-mr-5 icon__read-on"></div>
+          <div>
+            <div class="qt-fs-12 qt-ff-gm qt-lh-133  qt-color-dark ">Quote Read</div>
+            <div class="qt-fs-11 qt-lh-145 qt-color-dark-light"  ></div>
+          </div>
+        </div>
+        <div class="qt-df qt-ai-c invoice-status-timeline__steps-info" >
+          <div class="step-citcle qt-mr-5 icon__get-paid"></div>
+          <div>
+            <div class="qt-fs-12 qt-ff-gm qt-lh-133  qt-color-dark ">Quote Approved</div>
+            <div class="qt-fs-11 qt-lh-145 qt-color-dark-light"  ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="quote-message-block qt-pt-10 qt-pl-16 qt-pr-16 qt-pb-20 qt-mb-24" *ngIf="quote.message" [ngClass]="{'--closed': !toggleQuoteMessage}">
+      <div class="quote-message-block__header qt-df qt-jc-sb">
+        <div class="qt-fs-13 qt-lh-154 qt-color-dark qt-ff-gm qt-df qt-ai-c"><div class="qt-sz-16 qt-ic-c qt-mr-12 icon__message-forward"></div> Quote Message</div>
+        <div class="qt-ic-c qt-sz-16 toggle-message-block" (click)="toggleQuoteMessage = !toggleQuoteMessage"></div>
+      </div>
+      <div class="quote-message">
+        <div [textContent]="quote.message"></div>
+      </div>
+      <div class="quote-message-list">
+        <div class="qt-fs-13 qt-lh-154 qt-color-dark qt-mb-8 qt-ff-gm qt-df qt-ai-c"><div class="qt-sz-16 qt-ic-c qt-mr-12 icon__message-response"></div>Response Message</div>
+        <ng-template  ngFor let-item [ngForOf]="quote.reviewNotes"   >
+        <div class="quote-message-list-item">
+          <div [textContent]="item.note"></div>
+        </div>
+      </ng-template>
+      </div>
+    </div>
+  <app-quote-aside-preview-body [quote]="quote"></app-quote-aside-preview-body>
+  </div>
+  </div>
+  </div>

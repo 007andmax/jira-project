@@ -2051,12 +2051,6 @@ span.sort-span {
   padding: 0 10px;
 }
 
-.archived {
-  margin-top: 40px;
-  padding-top: 40px;
-  border-top: 1px solid #eee;
-}
-
 .unverified-user-mark {
   position: absolute;
   width: 18px !important;

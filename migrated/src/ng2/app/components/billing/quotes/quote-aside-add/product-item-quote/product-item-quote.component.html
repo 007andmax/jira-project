@@ -1,0 +1,50 @@
+<tr>
+  <td class="new-quote-table__col-item" [textContent]="product.item.manufacture"> </td>
+  <td class="new-quote-table__col-desc td-padding-side" [textContent]="product.item.description"></td>
+  <td class="new-quote-table__col-unit-price with-dollar" >
+    <input class="qt-input-in-table"
+      decimalNumber
+      [useFixed]="true"
+      placeholder="0.00"
+      appToFixed
+      [value]="product.item.cost"
+      (blur)="onCheckSaleCost()"
+      (onChange)="changeCost($event)"
+    />
+  </td>
+  <td class="new-quote-table__col-markup with-percent">
+    <input class="qt-input-in-table"
+      decimalNumber
+
+      placeholder="0.00"
+      [value]="product.markup"
+      (onChange)="changeMarkup($event)"
+    />
+  </td>
+  <td class="new-quote-table__col-sales-price with-dollar">
+    <input class="qt-input-in-table"
+      [ngClass]="{'--input-error':!product.validateSaleCost}"
+      decimalNumber
+      [useFixed]="true"
+      placeholder="0.00"
+      appToFixed
+      [value]="product.item.sale"
+      (onChange)="changeSales($event)"
+      (blur)="onCheckSaleCost()"
+    />
+    <mat-error class="qt-tooltip-error" *ngIf="!product.validateSaleCost">
+      Product price can not be lower than cost
+    </mat-error>
+  </td>
+   <td class="new-quote-table__col-quantify">
+    <input class="qt-input-in-table"
+      decimalNumber
+      [value]="product.quantity"
+      (onChange)="product.quantity=$event"
+    />
+   </td>
+  <td class="new-quote-table__col-tax"[innerHTML]="getSelectedTaxes(product.item.taxes)">
+  </td>
+  <td class="invoice-preview__col-amount" [textContent]="getPriceProduct(product) | currency"></td>
+  <td> <div class="icon__raw-clear qt-ic-c qt-sz-16" (click)="removeProduct()"></div></td>
+</tr>

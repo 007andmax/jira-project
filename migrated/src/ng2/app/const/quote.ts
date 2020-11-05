@@ -1,0 +1,4 @@
+export const QUOTE_MODAL_ACTION_PREVIEW = "PREVIEW";
+export const QUOTE_MODAL_ACTION_EDIT = "EDIT";
+export const QUOTE_MODAL_ACTION_ADD = "ADD";
+export const QUOTE_MODAL_ACTION_LIST = "LSIT";

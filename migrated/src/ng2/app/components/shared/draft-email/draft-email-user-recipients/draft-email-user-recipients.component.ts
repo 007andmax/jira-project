@@ -1,16 +1,8 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { FormControl } from '@angular/forms';
-import { Subject } from 'rxjs';
-import { MatAutocomplete, MatChipInputEvent, MatAutocompleteSelectedEvent } from '@angular/material';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { UsersService } from 'src/ng2/app/services/users/users.service';
-import { QuoteStateService } from '../../../billing/quotes/quote-create/quote-state.service';
-import { QuoteService } from 'src/ng2/app/services/quote/quote.service';
+import { MatAutocomplete,  } from '@angular/material';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
-import { USER } from 'src/ng2/app/const/users';
-import { takeUntil } from 'rxjs/operators';
-import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { DraftEmailStateService } from 'src/ng2/app/states/draft-email/draft-email-state.service';
 import { User } from '../../../users/class/user';
 

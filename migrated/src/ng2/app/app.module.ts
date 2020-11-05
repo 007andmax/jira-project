@@ -27,7 +27,6 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { NgxSelectModule } from 'ngx-select-ex';
 // import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
 import { AppComponent } from './app.component';
 import { PasswordManagerComponent } from './components/password-manager/password-manager.component';
 import { LeftPanelComponent } from './components/left-panel/left-panel.component';
@@ -36,17 +35,8 @@ import { MainComponent } from './components/main/main.component';
 import { PasswordRecordsTypesComponent } from './components/left-panel/left-panel-password-manager/password-records-types/password-records-types.component';
 import { PasswordManagerTableComponent } from './components/password-manager/password-manager-table/password-manager-table.component';
 import { PasswoordManagerHeaderComponent } from './components/password-manager/passwoord-manager-header/passwoord-manager-header.component';
-
 import { ApiPasswordManagerService } from './services/password-manager/api-password-manager.service';
-
 import { QuotesComponent } from './components/billing/quotes/quotes.component';
-import { QuoteCreateComponent } from './components/billing/quotes/quote-create/quote-create.component';
-import { QuoteCreateContentComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content.component';
-import { QuoteCreateHeaderComponent } from './components/billing/quotes/quote-create/quote-create-header/quote-create-header.component';
-import { QuoteCreateContentTopComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-top/quote-create-content-top.component';
-import { QuoteCreateContentBottomComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-bottom/quote-create-content-bottom.component';
-import { QuoteCreateContentNotesComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-notes/quote-create-content-notes.component';
-import { QuotePreviewComponent } from './components/billing/quotes/quote-preview/quote-preview.component';
 import { UserPipe } from './pipe/user.pipe';
 import { DateFormatPipe } from './pipe/date-format.pipe';
 import { CompanyPipe } from './pipe/company.pipe';
@@ -57,8 +47,6 @@ import { SanitizeHtmlPipe } from './pipe/sanitize-html.pipe';
 import { SelectClientCompanyComponent } from './components/shared/select-client-company/select-client-company.component';
 import { ProductListComponent } from './components/shared/product-list/product-list.component';
 import { ServicesListComponent } from './components/shared/services-list/services-list.component';
-import { ProductTableComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-bottom/product-table/product-table.component';
-import { AddItemComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-bottom/add-item/add-item.component';
 import { MultiDatepickerComponent } from './components/shared/multi-datepicker/multi-datepicker.component';
 import { LeftPanelBillingComponent } from './components/left-panel/left-panel-billing/left-panel-billing.component';
 import { ToNumerPipe } from './pipe/to-numer.pipe';
@@ -139,14 +127,10 @@ import { InventoryAddAsideComponent } from './components/inventory/inventory-add
 import { InventoryEditAsideComponent } from './components/inventory/inventory-edit-aside/inventory-edit-aside.component';
 import { LeftPanelInventoryComponent } from './components/left-panel/left-panel-inventory/left-panel-inventory.component';
 import { AddCategoryProductComponent } from './components/left-panel/left-panel-inventory/add-category-product/add-category-product.component';
-
 import { MyProfileComponent } from './components/setting/my-profile/my-profile.component';
 import { SettingComponent } from './components/setting/setting.component';
 import { ManageTagsComponent } from './components/setting/manage-tags/manage-tags.component';
 import { CompanyProfileComponent } from './components/setting/company-profile/company-profile.component';
-
-import 'd3';
-import 'nvd3';
 import { TicketReportComponent } from './components/reports/reports/ticket-report/ticket-report.component';
 import { TechUsersListReportComponent } from './components/reports/report-menu/tech-users-list-report/tech-users-list-report.component';
 import { ReportTimePipe } from './pipe/report-time.pipe';
@@ -156,9 +140,7 @@ import { CompanyProductsComponent } from './components/companies/company-product
  * declare angular
  */
 declare var angular: any;
-
 import { LeftPanelSettingComponent } from './components/left-panel/left-panel-setting/left-panel-setting.component';
-
 import { TechUsersComponent } from './components/setting/tech-users/tech-users.component';
 import { EmailSettingComponent } from './components/setting/email-setting/email-setting.component';
 import { TaxesSettingsComponent } from './components/setting/taxes/taxes.component';
@@ -168,16 +150,13 @@ import { IntegrationsComponent } from './components/setting/integrations/integra
 import { InvoiceTicketsComponent } from './components/setting/invoice-tickets/invoice-tickets.component';
 import { CommissionComponent } from './components/setting/commission/commission.component';
 import { SubscriptionComponent } from './components/setting/subscription/subscription.component';
-
 import { DataTablesModule } from 'angular-datatables';
 import { AccountComponent } from './components/setting/my-profile/account/account.component';
 import { EmailNotificationsComponent } from './components/setting/my-profile/email-notifications/email-notifications.component';
 import { ActivityHistoryComponent } from './components/setting/my-profile/activity-history/activity-history.component';
-
 import { AgmCoreModule } from '@agm/core';
 import { ProfileComponent } from './components/setting/my-profile/profile/profile.component';
 import { TagPipe } from './pipe/tag.pipe';
-
 import { NgxUploaderModule } from 'ngx-uploader';
 import { ToastrModule } from 'ngx-toastr';
 // import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
@@ -221,7 +200,6 @@ import { TicketProfileUpdatesProductComponent } from './components/tickets/ticke
 import { TicketProfileUpdatesFooterComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-footer/ticket-profile-updates-footer.component';
 import { TicketProfileUpdatesServiceComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service/ticket-profile-updates-service.component';
 import { TicketProfileUpdatesServiceDurationComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-duration/ticket-profile-updates-service-duration.component';
-
 import { TicketProfileUpdatesServiceTimepickerComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-timepicker/ticket-profile-updates-service-timepicker.component';
 import { TicketProfileUpdatesServiceInfoComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service/ticket-profile-updates-service-info/ticket-profile-updates-service-info.component';
 import { TicketProfileUpdatesServiceEditComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service/ticket-profile-updates-service-edit/ticket-profile-updates-service-edit.component';
@@ -256,8 +234,6 @@ import { InvoicePreviewComponent } from './components/billing/billable/billable-
 import { InvoiceAddNoteComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-add-note/invoice-add-note.component';
 import { InvoiceSelectNoteComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-select-note/invoice-select-note.component';
 import { InvoiceRegularNoteComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-regular-note/invoice-regular-note.component';
-
-
 import { TicketsFilterComponent } from './components/tickets/tickets/tickets-header/tickets-filter/tickets-filter.component';
 import { DisabledBtnModule } from './modules/disabled-btn/disabled-btn.module';
 import { InvoiceFormTicketInfoComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-info/invoice-form-ticket-info.component';
@@ -277,7 +253,6 @@ import { InvoicesItemComponent } from './components/billing/invoices/invoices-it
 import { InvoicesHeaderComponent } from './components/billing/invoices/invoices-header/invoices-header.component';
 import { InvoicesFilterComponent } from './components/billing/invoices/invoices-header/invoices-filter/invoices-filter.component';
 import { InvoicesAsidePreviewComponent } from './components/billing/invoices/invoices-aside-preview/invoices-aside-preview.component';
-
 import { PaymentsComponent } from './components/billing/payments/payments.component';
 import { PaymentsHeaderComponent } from './components/billing/payments/payments-header/payments-header.component';
 import { PaymentItemComponent } from './components/billing/payments/payment-item/payment-item.component';
@@ -297,13 +272,11 @@ import { ContractsFilterComponent } from './components/billing/contracts/contrac
 import { ContractsAsideTopComponent } from './components/billing/contracts/contracts-aside/contracts-aside-top/contracts-aside-top.component';
 import { ContractsAsideHourlyBillingDefaultServiceComponent } from './components/billing/contracts/contracts-aside/contracts-aside-hourly-billing/contracts-aside-hourly-billing-default-service/contracts-aside-hourly-billing-default-service.component';
 import { ContractsAsideHourlyBillingAddServiceComponent } from './components/billing/contracts/contracts-aside/contracts-aside-hourly-billing/contracts-aside-hourly-billing-add-service/contracts-aside-hourly-billing-add-service.component';
-
 import { DefaultServicesComponent } from './components/billing/default-services/default-services.component';
 import { DefaultServicesAddComponent } from './components/billing/default-services/default-services-add/default-services-add.component';
 import { DefaultServicesItemComponent } from './components/billing/default-services/default-services-item/default-services-item.component';
 import { DefaultServicesContractsComponent } from './components/billing/default-services/default-services-contracts/default-services-contracts.component';
 import { DefaultServicesEditComponent } from './components/billing/default-services/default-services-edit/default-services-edit.component';
-
 import { DashboardComponent } from './components/device/dashboard/dashboard.component';
 import { HardwareComponent } from './components/device/hardware/hardware.component';
 import { SoftwareComponent } from './components/device/software/software.component';
@@ -344,8 +317,6 @@ import { ContractsAsideProductServicePreviewComponent } from './components/billi
 import { ContractsAsideProductServiceEditComponent } from './components/billing/contracts/contracts-edit/contracts-aside-product-service-edit/contracts-aside-product-service-edit.component';
 import { ContractsAsideOtherServiceEditComponent } from './components/billing/contracts/contracts-edit/contracts-aside-product-service-edit/contracts-aside-other-service-edit/contracts-aside-other-service-edit.component';
 import { DashboardBillingComponent } from './components/billing/dashboard-billing/dashboard-billing.component';
-
-
 import 'd3';
 import 'nvd3';
 import { InvoiceRevenueComponent } from './components/billing/dashboard-billing/invoice-revenue/invoice-revenue.component';
@@ -357,16 +328,24 @@ import { DashboardStatsComponent } from './components/billing/dashboard-billing/
 import { DashboardQuotesComponent } from './components/billing/dashboard-billing/dashboard-quotes/dashboard-quotes.component';
 import { DashboardSalesAnalyticsComponent } from './components/billing/dashboard-billing/dashboard-sales-analytics/dashboard-sales-analytics.component';
 import { CompanyContractsComponent } from './components/companies/company-contracts/company-contracts.component';
-
-
+import { QuotesTableComponent } from './components/billing/quotes/quotes-table/quotes-table.component';
+import { QuotesHeaderComponent } from './components/billing/quotes/quotes-header/quotes-header.component';
+import { QuotesItemComponent } from './components/billing/quotes/quotes-table/quotes-item/quotes-item.component';
+import { QuotesFilterComponent } from './components/billing/quotes/quotes-header/quotes-filter/quotes-filter.component';
+ import { QuoteAsidePreviewComponent } from './components/billing/quotes/quote-aside-preview/quote-aside-preview.component';
+import { QuoteAsidePreviewBodyComponent } from './components/billing/quotes/quote-aside-preview/quote-aside-preview-body/quote-aside-preview-body.component';
+import { QuoteAsideAddComponent } from './components/billing/quotes/quote-aside-add/quote-aside-add.component';
+import { QuoteAsideAddBodyComponent } from './components/billing/quotes/quote-aside-add/quote-aside-add-body/quote-aside-add-body.component';
+import { ProductListQuoteComponent } from './components/billing/quotes/quote-aside-add/product-list-quote/product-list-quote.component';
+import { ServiceListQuoteComponent } from './components/billing/quotes/quote-aside-add/service-list-quote/service-list-quote.component';
+import { ProductItemQuoteComponent } from './components/billing/quotes/quote-aside-add/product-item-quote/product-item-quote.component';
+import { QuoteAsideEditComponent } from './components/billing/quotes/quote-aside-edit/quote-aside-edit.component';
+import { ProductItemQuoteEditComponent } from './components/billing/quotes/quote-aside-edit/product-item-quote-edit/product-item-quote-edit.component';
+ import { QuoteAsideEditBodyComponent } from './components/billing/quotes/quote-aside-edit/quote-aside-edit-body/quote-aside-edit-body.component';
 
 /**
  * declare angular
  */
-declare var angular: any;
-
-// import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-
 declare var angular: any;
 declare var $: any;
 export class CustomHandlingStrategy implements UrlHandlingStrategy {
@@ -377,7 +356,6 @@ export class CustomHandlingStrategy implements UrlHandlingStrategy {
   extract(url) { return url }
   merge(url, whole) { return url }
 }
-
 
 /**
  * Component downgrade
@@ -403,12 +381,6 @@ angular.module('quicktech')
     'quotesComponent',
     downgradeComponent({ component: QuotesComponent }))
   .directive(
-    'quoteCreateComponent',
-    downgradeComponent({ component: QuoteCreateComponent }))
-  .directive(
-    'quotePreviewComponent',
-    downgradeComponent({ component: QuotePreviewComponent }))
-  .directive(
     'recurringTicketsComponent',
     downgradeComponent({ component: RecurringTicketsComponent }))
   .directive(
@@ -424,10 +396,6 @@ angular.module('quicktech')
   .directive(
     'leftPanelComponent',
     downgradeComponent({ component: LeftPanelComponent })
-  )
-  .directive(
-    'quotesComponent',
-    downgradeComponent({ component: QuotesComponent })
   )
   .directive(
     'settingComponent',
@@ -579,18 +547,9 @@ angular.module('quicktech')
     PasswordCategoryPipe,
     SanitizeHtmlPipe,
     QuotesComponent,
-    QuoteCreateComponent,
-    QuoteCreateContentComponent,
-    QuoteCreateHeaderComponent,
-    QuoteCreateContentTopComponent,
-    QuoteCreateContentBottomComponent,
-    QuoteCreateContentNotesComponent,
-    QuotePreviewComponent,
     SelectClientCompanyComponent,
     ProductListComponent,
     ServicesListComponent,
-    ProductTableComponent,
-    AddItemComponent,
     MultiDatepickerComponent,
     LeftPanelBillingComponent,
     ToNumerPipe,
@@ -731,73 +690,39 @@ angular.module('quicktech')
     TicketProfileUpdatesFooterComponent,
     TicketProfileUpdatesServiceComponent,
     TicketProfileUpdatesServiceDurationComponent,
-
     TicketProfileUpdatesServiceTimepickerComponent,
-
     TicketProfileUpdatesServiceInfoComponent,
-
     TicketProfileUpdatesServiceEditComponent,
-
     TicketProfileUpdatesServiceItemComponent,
-
     TicketProfileUpdatesProductItemComponent,
-
     TicketProfileUpdatesProductInfoComponent,
-
     TicketProfileUpdatesProductEditComponent,
-
     TicketChangeStatusComponent,
-
     PreloaderTicketComponent,
-
     TicketProfileAttachmentsComponent,
-
     ErrorNotificationComponent,
-
     PreviewAttachmentComponent,
-
     TicketProfileUpdatesNoteItemComponent,
-
     TicketProfileUpdatesNoteInfoComponent,
-
     TicketProfileUpdatesNoteEditComponent,
-
     ToFixedDirective,
-
     MapModalComponent,
-
     CompanyInfoHistoryComponent,
-
     TicketEditAsideRightPanelComponent,
-
     ModalCustomShareScreenComponent,
-
     CompanyTicketsComponent,
-
     InventoryAddBodyComponent,
-
     ServicePipe,
-
     LeftPanelSettingsComponent,
-
     BillableComponent,
-
     BillableItemComponent,
-
     BillableAsideComponent,
-
     InvoiceFormComponent,
-
     BillableTicketsComponent,
-
     InvoiceFormEditCustomerComponent,
-
     InvoicePreviewComponent,
-
     InvoiceAddNoteComponent,
-
     InvoiceSelectNoteComponent,
-
     InvoiceRegularNoteComponent,
     TicketsFilterComponent,
     InvoiceFormTicketInfoComponent,
@@ -873,35 +798,19 @@ angular.module('quicktech')
     ContractsAsideHourlyBillingEditDefaultServiceComponent,
     ContractsAsideBlockTimeBillingUsersComponent,
     ContractsConfirmComponent,
-
     ContractsAsideEditHourlyAddDefaultServiceComponent,
-
     ContractsAsideBlockTimeBillingPreviewComponent,
-
     ContractsAsideBlockTimeEditComponent,
-
     ContractsAsideBlockTimeEditCustomerServiceComponent,
-
     ContractsAsideUserDeviceServiceComponent,
-
     ContractsAsideUserDeviceBillingPreviewComponent,
-
     ContractsAsideUserDeviceEditComponent,
-
     ContractsAsideOtherProductComponent,
-
     ContractsAsideOtherServiceComponent,
-
     ContractsAsideProductServicePreviewComponent,
-
     ContractsAsideProductServiceEditComponent,
-
     ContractsAsideOtherServiceEditComponent,
     DashboardBillingComponent,
-
-
-
-
     InvoiceRevenueComponent,
     MultiDatepickerDashboardComponent,
     ContractsDashboardComponent,
@@ -910,12 +819,21 @@ angular.module('quicktech')
     DashboardStatsComponent,
     DashboardQuotesComponent,
     DashboardSalesAnalyticsComponent,
-
-
-
-
-    CompanyContractsComponent
-
+    CompanyContractsComponent,
+    QuotesTableComponent,
+    QuotesHeaderComponent,
+    QuotesItemComponent,
+    QuotesFilterComponent,
+    QuoteAsidePreviewComponent,
+    QuoteAsidePreviewBodyComponent,
+    QuoteAsideAddComponent,
+    QuoteAsideAddBodyComponent,
+    ProductListQuoteComponent,
+    ServiceListQuoteComponent,
+    ProductItemQuoteComponent,
+    QuoteAsideEditComponent,
+    ProductItemQuoteEditComponent,
+    QuoteAsideEditBodyComponent
   ],
   imports: [
     BrowserModule,
@@ -959,16 +877,12 @@ angular.module('quicktech')
     DisabledBtnModule,
     NgxUploaderModule,
     AngularEditorModule,
-
-
   ],
   entryComponents: [
     LeftPanelComponent,
     ModalQuoteComponent,
     ConfirmComponent,
     QuotesComponent,
-    QuoteCreateComponent,
-    QuotePreviewComponent,
     PasswordManagerComponent,
     CompaniesComponent,
     DownloadAgentComponent,
@@ -1036,7 +950,6 @@ export class AppModule {
       .then((name) => { bootstrapRootComponent(app, name) });
   }
 }
-
 
 function bootstrapRootComponent(app, name) {
   // define the possible bootstrap components 

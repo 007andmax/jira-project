@@ -1,0 +1,147 @@
+<div class="qt-pos-rel">
+  <div class="qt-df qt-jc-sb qt-pb-24 company-info">
+    <div class="qt-w50 qt-pr-24 company-info-left-side">
+      <app-drop-down
+        #companyDp
+        [title]="'Company Name'"
+        [placeholder]="'Select Company'"
+        [list]="companies"
+        [editItem]="quoteCompany"
+        [validate]="validate.getCompany()"
+        [errorMessage]="'Company is required'"
+        [field]="'name'"
+        [search]="true"
+        [change]="true"
+        (onSelectedItem)="onSelectCompany($event)">
+      </app-drop-down>
+      <textarea class="company-info-description qt-mt-8 qt-w100" [(ngModel)]="quote.description" placeholder="Quote description in short words" appTextArea  maxlength="255"></textarea>
+    </div>
+    <div class="qt-w50 qt-pl-24" ngbDropdown [autoClose]="'inside'" #editCustomer="ngbDropdown">
+      <div class="qt-fs-10 qt-ff-sb  qt-df qt-ai-c qt-mb-4 qt-lh-12"><div class="qt-sz-16 icon__company-address qt-ic-c qt-mr-4"></div> BILLING ADDRESS</div>
+      <div class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-dark" *ngIf="quoteCompany" [textContent]="quoteCompany.name"></div>
+      <div class="qt-fs-13 qt-lh-154" *ngIf="quoteCompany" [textContent]="(quoteCompany.companyInfo.contacts.length > 0) ? quoteCompany.companyInfo.contacts[0].firstName + ' ' + quoteCompany.companyInfo.contacts[0].lastName : ''"></div>
+      <div class="qt-fs-13 qt-lh-154" *ngIf="quoteCompany" [textContent]="(quoteCompany.companyInfo.addresses.length > 0) ? quoteCompany.companyInfo.addresses[0].address : ''"></div>
+      <div class="qt-fs-13 qt-lh-154" *ngIf="quoteCompany" [textContent]="(quoteCompany.companyInfo.contacts.length > 0) ? quoteCompany.companyInfo.contacts[0].primaryEmail : ''"></div>
+      <div class="qt-ff-gm qt-mt-10 qt-fs-12 qt-lh-133 qt-color-info qt-pointer" id="dropdownForm1" *ngIf="quoteCompany" ngbDropdownToggle (click)="onEditCustomer()">Edit Customer</div>
+      <div ngbDropdownMenu aria-labelledby="dropdownForm1" >
+      <app-invoice-form-edit-customer #companyEdit   [dropDown]="editCustomer"></app-invoice-form-edit-customer>
+        </div>
+    </div>
+  </div>
+  <div class="qt-df qt-mb-16 qt-mt-16">
+    <div class="qt-input-block qt-mr-16 qt-w100">
+      <label class="qt-lh-154">Quote#</label>
+      <div class="qt-df"   >
+         <input class="qt-input-prepend" decimalNumber
+         [ngClass]="{'--input-error' : !validate.getNumber()}"
+         [value]="quote.number"
+         (onChange)="onChangeQuoteNumber($event)" >
+         <mat-error class="qt-tooltip-error" *ngIf="!validate.getNumber()">
+          Quote number is required
+        </mat-error>
+      </div>
+    </div>
+    <div class="qt-input-block qt-mr-16 qt-w100">
+      <label class="qt-lh-154">PO#
+      </label>
+      <div class="qt-df"  >
+        <input class="qt-input-prepend" [(ngModel)]="quote.purchaseOrder" type="text">
+      </div>
+    </div>
+    <div class="qt-input-block qt-mr-16 qt-w100">
+      <label class="qt-lh-154">Quote Date</label>
+      <app-date-picker [formatDate]="formatDate" [editMode]="true" [editDate]="quote.date" [useMinDate]="false"   (onChange)="onChangeQuoteDate($event)"></app-date-picker>
+    </div>
+    <div class="qt-input-block qt-w100">
+      <label class="qt-lh-154">Expiry Date</label>
+      <app-date-picker [formatDate]="formatDate" [editMode]="true" [editDate]="quote.validUntil" [useMinDate]="false"   (onChange)="onChangeExpiryDate($event)"></app-date-picker>
+    </div>
+  </div>
+  <div class="qt-mb-16 new-quote-table-container">
+      <table class="new-quote-table qt-gray-table --last-icon">
+        <thead class=" qt-lh-127 qt-color-dark">
+          <tr>
+            <th class="new-quote-table__col-item">Item</th>
+            <th class="new-quote-table__col-desc">Description</th>
+            <th class="new-quote-table__col-unit-price">Unit Price</th>
+            <th class="new-quote-table__col-markup">Markup</th>
+            <th class="new-quote-table__col-sales-price">Sales Price</th>
+            <th class="new-quote-table__col-quantify">Quantity</th>
+            <th class="new-quote-table__col-tax">Tax</th>
+            <th class="new-quote-table__col-amount">Amount</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody class=" qt-lh-133">
+          <ng-template ngFor let-service
+          let-i="index"
+          [ngForOf]="quote.services"
+          [ngForTrackBy]="trackById">
+          <tr>
+            <td class="new-quote-table__col-item" [textContent]="service.item.name"></td>
+            <td class="new-quote-table__col-desc"><input type="text" [(ngModel)]="service.description" class="qt-input-in-table" /></td>
+            <td class="new-quote-table__col-unit-price td-padding-side" ></td>
+            <td class="new-quote-table__col-markup td-padding-side" ></td>
+            <td class="new-quote-table__col-sales-price td-padding-side" [textContent]="service.item.rate | currency"></td>
+            <td class="new-quote-table__col-quantify">
+              <input class="qt-input-in-table"
+                decimalNumber
+                [value]="service.quantity"
+                (onChange)="service.quantity=$event"
+                />
+            </td>
+            <td class="new-quote-table__col-tax" [innerHTML]="getSelectedTaxes(service.item.taxes)"> </td>
+            <td class="new-quote-table__col-amount" [textContent]="getPriceService(service) | currency"></td>
+            <td> <div class="icon__raw-clear qt-ic-c qt-sz-16" (click)="removeService(i)"></div></td>
+          </tr>
+</ng-template>
+<ng-template ngFor let-product
+let-i="index"
+[ngForOf]="quote.products"
+[ngForTrackBy]="trackById">
+     <app-product-item-quote [product]="product" (onRemoveProduct)="removeProduct(i)"></app-product-item-quote>
+      </ng-template>
+        </tbody>
+      </table>
+      <mat-error class="mt-10" *ngIf="!validate.getServicesProducts()">
+        You need to select one product/service at least.
+      </mat-error>
+      <mat-error class="mt-10" *ngIf="!validate.getValidate()">
+        {{validate.errorMessage}}
+      </mat-error>
+  </div>
+  <div class="qt-df qt-jc-sb qt-mb-40">
+    <div>
+      <div class="qt-df qt-mb-25">
+        <app-product-list-quote class="qt-mr-8" (selectedProductItem)="selectProduct($event)"></app-product-list-quote>
+        <app-service-list-quote #servicesList [quoteCompany]="quoteCompany" (onSelect)="onAddService($event)"></app-service-list-quote>
+      </div>
+      <app-invoice-regular-note *ngIf="notes" [invoiceNotes]="notes" (onUpdateInvoiceData)="updateInvoiceData($event)"></app-invoice-regular-note>
+    </div>
+    <div>
+      <div class="quote-total qt-color-dark" >
+        <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12">
+          <div>Sub Total Services</div>
+          <div [textContent]="getSubTotalServices() | currency"></div>
+        </div>
+        <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12">
+          <div>Sub Total Products</div>
+          <div [textContent]="getSubTotalProducts() | currency"></div>
+        </div>
+        <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-15">
+          <div>Taxes</div>
+          <div [textContent]="getTotalTaxes() | currency"></div>
+        </div>
+        <div class="qt-df qt-jc-sb qt-pt-15 quote-total__total-line">
+          <div class="qt-fs-13 qt-fw-b">Total</div>
+          <div class="qt-fs-16 qt-fw-b" [textContent]="getSubTotal() | currency"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="terms-n-conditions qt-pl-30 qt-pr-30 qt-pb-24 qt-pt-16">
+    <div class="qt-fs-13 qt-ff-gm qt-mb-12">Terms & Conditions</div>
+    <div class="qt-fs-12 qt-color-info qt-ff-gm pointer"  *ngIf="changeGlobalNote" (click)="onUpdateGlobalNote()">Save Terms & Conditions</div>
+    <textarea id="description-global-note" (input)="onCheckUpdateGlobalNote()" class="terms-n-conditions__textarea qt-textarea" placeholder="Enter the terms and conditions of your business to be displayed in your transaction" appTextArea    maxlength="250"   cols="30" rows="1"></textarea>
+  </div>
+</div>

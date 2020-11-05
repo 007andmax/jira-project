@@ -238,6 +238,18 @@
   &__email-dark {
     background-image: url("assets/img/icons/email-dark.svg");
   }
+  &__convert-ticket {
+    background-image: url("assets/img/icons/convert-ticket.svg");
+  }
+  &__convert-invoice {
+    background-image: url("assets/img/icons/convert-invoice.svg");
+  }
+  &__approve-quote {
+    background-image: url("assets/img/icons/approve-quote.svg");
+  }
+  &__uninstall {
+    background-image: url("assets/img/icons/uninstall.svg");
+  }
   &__set-privilege {
     background-image: url("assets/img/icons/set-privilege.svg");
   }
@@ -398,6 +410,24 @@
   }
   &__profile-dropdown {
     background-image: url('assets/img/icons/profile-dropdown.svg');
+  }
+  &__message-forward {
+    background-image: url('assets/img/icons/message-forward.svg');
+  }
+  &__message-response {
+    background-image: url('assets/img/icons/message-response.svg');
+  }
+  &__copy-gray {
+    background-image: url('assets/img/icons/copy-gray.svg');
+  }
+  &__terminate {
+    background-image: url('assets/img/icons/terminate.svg');
+  }
+  &__search {
+    background-image: url('assets/img/icons/search.svg');
+  }
+  &__force-create {
+    background-image: url('assets/img/icons/force-create.svg');
   }
 }
 

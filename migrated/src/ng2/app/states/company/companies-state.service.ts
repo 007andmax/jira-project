@@ -24,7 +24,7 @@ export class CompaniesStateService {
   onCalculateCount: EventEmitter<CompanyCalculateCount> = new EventEmitter();
   calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
   currentCompany:any = null;
-  
+  onCurrentCompany: EventEmitter<any> = new EventEmitter();
   constructor(private companiesService: CompaniesService, 
     private companiesRealTimeService: CompaniesRealTimeService,
     private websocketService: WebsocketService,) {
@@ -32,6 +32,7 @@ export class CompaniesStateService {
   public onInit() {
     this.companiesService.getTechCompany().subscribe(data => {
       this.currentCompany= data;
+      this.onCurrentCompany.emit(data);
       this.websocketService.subsribeToGlNumber(this.currentCompany.id);
     })
     this.companiesService.getCompaniesList().subscribe((data:any) => {
@@ -56,6 +57,9 @@ export class CompaniesStateService {
       this.industries = data.sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
       1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
     })
+  }
+  public getOnCurrentCompany() {
+    return this.onCurrentCompany;
   }
   public getCurrentCompany() {
     return this.currentCompany;

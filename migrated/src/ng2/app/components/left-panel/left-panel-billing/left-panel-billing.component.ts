@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LeftPanelStateService } from 'src/ng2/app/states/left-panel/left-panel-state.service';
-import { QuoteStateService } from "../../billing/quotes/quote-create/quote-state.service";
-
+import { QuoteStateService } from 'src/ng2/app/states/quote/quote-state.service';
+ 
 /**
  * Left panel billing component
  */

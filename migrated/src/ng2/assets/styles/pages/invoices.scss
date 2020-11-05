@@ -217,7 +217,7 @@
   &__aside {
     color: #4f5f79;
     background: white;
-    width: 880px;;
+    width: 880px;
     position: absolute;
     border-left: 1px solid #dfe3e8;
     height: 100%;
@@ -544,7 +544,7 @@ app-invoices-item,app-payment-item {
     }
 
     &__total-block {
-      width: 247px;
+      width: 260px;
     }
 
     &__total-price {
@@ -571,7 +571,15 @@ app-invoices-item,app-payment-item {
     &.--overdue {
       background: url(../ng2/assets/img/overdue.svg);
     }
-
+    &.--invoiced {
+      background: url(../ng2/assets/img/invoiced-label.svg);
+    }
+    &.--ticket {
+      background: url(../ng2/assets/img/ticket-label.svg);
+    }
+    &.--approved {
+      background: url(../ng2/assets/img/approved-label.svg);
+    }
   }
 
   .invoice-status-timeline {

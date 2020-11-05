@@ -49,8 +49,6 @@
   &:before {
     position: absolute;
     content: '$';
-    left: 22px;
-    top: 8px;
   }
 }
 .with-percent {
@@ -796,6 +794,9 @@ ngb-typeahead-window {
   }
 }
 // GLOBAL STYLES FOR QUOTES
+app-quotes-item {
+  display: contents;
+}
 .quote-create {
   &__content {
     &--top,

@@ -4,6 +4,7 @@ import { InventoryStateService } from 'src/ng2/app/states/inventory/inventory-st
 import { InventoryChange } from '../../inventory/class/inventory-change';
 import { Subscription } from 'rxjs';
 import { CategoryProductitem } from 'src/ng2/class/category-product-item';
+import { QuoteStateService } from 'src/ng2/app/states/quote/quote-state.service';
 
 /**
  * Product list component
@@ -34,6 +35,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
    */
   constructor(private elRef: ElementRef,
     public cd: ChangeDetectorRef,
+    public quoteStateService: QuoteStateService,
     private inventoryStateService: InventoryStateService) { }
 
 

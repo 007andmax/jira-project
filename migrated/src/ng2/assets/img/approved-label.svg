@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="88" height="89" viewBox="0 0 88 89">
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g>
+                <g>
+                    <path fill="#22944B" d="M15 74.109L20 69 20 89 15 85z" transform="translate(-534 -283) translate(500 72) translate(34 211)"/>
+                    <path fill="#22944B" d="M78 15L88 15 88 21 75 21z" transform="translate(-534 -283) translate(500 72) translate(34 211) matrix(-1 0 0 1 163 0)"/>
+                    <path fill="#2EC866" d="M13.759 32.497L71.741 32.497 92.247 53.003 -6.747 53.003z" transform="translate(-534 -283) translate(500 72) translate(34 211) rotate(-45 42.75 42.75)"/>
+                    <text fill="#FFF" font-family="Graphik-Semibold, Graphik" font-size="10" font-weight="500" transform="translate(-534 -283) translate(500 72) translate(34 211) rotate(-45 44 41)">
+                        <tspan x="16.59" y="43">APPROVED</tspan>
+                    </text>
+                    <path stroke="#FFF" stroke-dasharray="2" stroke-linecap="round" stroke-linejoin="round" d="M58.882 15L15 58.399M82.333 15L15 83" opacity=".4" transform="translate(-534 -283) translate(500 72) translate(34 211)"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

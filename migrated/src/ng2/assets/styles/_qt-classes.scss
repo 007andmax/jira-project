@@ -228,6 +228,7 @@
 
 .qt-bg-contain {
   background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .qt-pointer {
@@ -272,6 +273,7 @@
     font-size: 13px;
     margin-bottom: 12px;
     color: #4f5f79;
+    line-height: 12px;
   }
 
   mat-error {
@@ -363,6 +365,17 @@
 
   &.--with-menu {
     padding-right: 0;
+    .left-side {
+      display: flex;
+      align-items: center;
+      position: relative;
+      height: 40px;
+      margin-left: -20px;
+      padding-left: 20px;
+      margin-right: -20px;
+      padding-right: 20px;
+    }
+
   }
   .button-menu {
     border-left: 1px solid #ffffff57;
@@ -659,7 +672,7 @@
     th, td {
       &:last-child {
         border: none;
-        width: 18px;
+        width: 21px;
         background-color: transparent;
         padding: 0;
         .icon__raw-clear {
@@ -681,6 +694,36 @@
       td {
         &:nth-last-child(2) {
           border-bottom-right-radius: 4px;
+        }
+      }
+    }
+  }
+   &.--first-icon {
+    th, td {
+      &:first-child {
+        border: none;
+        width: 18px;
+        background-color: transparent;
+        padding: 0;
+        .icon__raw-clear {
+          border-radius: 50%;
+          margin-left: 4px;
+          cursor: pointer;
+        }
+      }
+      &:nth-child(2) {
+        border-left: solid 1px #dfe3e8;
+      }
+    }
+    th {
+      &:nth-child(2) {
+        border-top-left-radius: 4px;
+      }
+    }
+    tr:first-child {
+      td {
+        &:nth-child(2) {
+          border-bottom-left-radius: 4px;
         }
       }
     }
@@ -713,6 +756,8 @@
     padding-right: 8px;
   }
 }
+
+
 
 .qt-toggle {
   width: 32px;

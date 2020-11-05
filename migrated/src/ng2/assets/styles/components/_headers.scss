@@ -1,5 +1,26 @@
 .qt-list-header {
   display: flex;
   justify-content: space-between;
-  align-item: center;
+  align-items: center;
+  flex-wrap: wrap;
+  z-index: 2;
+
+  .qt-header-date-filter .dropdown-menu {
+    left: auto;
+    right: 0;
+    margin-top: 0;
+  }
+
+  app-select-search {
+    input::placeholder {
+      color: #4f5f79;
+      font-size: 12px;
+    }
+  }
+  input::placeholder {
+    color: #4f5f79;
+    font-size: 12px;
+  }
 }
+
+

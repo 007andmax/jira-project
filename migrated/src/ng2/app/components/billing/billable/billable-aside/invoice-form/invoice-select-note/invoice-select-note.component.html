@@ -1,4 +1,4 @@
-<div [ngClass]="class" >
+<div [ngClass]="class" class="invoice-select-note" >
   <input
     [id]="id"
     [placeholder]="placeholder"
@@ -24,7 +24,7 @@
        (click)="clearClient($event)"></i>
     <i *ngIf="!selectedItem"
        class="icn-sm report-caret-icon"></i>
-    
+
   </span>
   <i class="loading xs" *ngIf="!list"></i>
 </div>
