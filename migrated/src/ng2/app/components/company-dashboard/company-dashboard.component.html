@@ -8,8 +8,8 @@
           </div>
           <div class="cmp-profile-user d-flex">
             <h1>{{name}}</h1>
-            <a href="mailto:info@dimensiondentistry.com"
-              >info@dimensiondentistry.com</a
+            <a href="mailto:{{primaryContact.email}}"
+              >{{primaryContact.email}}</a
             >
           </div>
           <div class="cmp-dboard-rating d-flex">
@@ -67,7 +67,7 @@
           </div>
           <div class="other-info-col d-flex">
             <div class="small-title">Website</div>
-            <a href="{{domain}}" target="_blank"
+            <a href="https://{{domain}}" target="_blank"
               >{{domain}}</a
             >
           </div>
@@ -108,9 +108,9 @@
             </figure>
             <div class="primary-contact-info d-flex">
               <div class="h5">{{primaryContact.firstName}} {{primaryContact.lastName}}</div>
-              <a href="mailto:{{primaryContact.email}}"
+              <!-- <a href="mailto:{{primaryContact.email}}"
                 >{{primaryContact.email}}</a
-              >
+              > -->
               <a *ngIf="primaryContact.phoneNumber !== ''" href="tel:{{primaryContact.phoneNumber}}">{{primaryContact.phoneNumber}}</a>
             </div>
           </div>
