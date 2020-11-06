@@ -93,8 +93,11 @@ export class QuoteAsideAddBodyComponent implements OnInit {
         this.billableStateService.setRegulatNote(this.quote.regularNote);
       }
       this.notes = data;
-      this.termsAndConditions = this.companiesState.getCurrentCompany().conditions.content;
-      this.elRef.nativeElement.querySelector("#description-global-note").value = this.termsAndConditions;
+    })
+    this.invoiceTicketsService.termsAndConditions().subscribe((data:any) => {
+      console.log("data",data);
+      this.termsAndConditions = data.conditions;
+      this.elRef.nativeElement.querySelector("#description-global-note").value = data.conditions;
     })
   }
   onUpdateGlobalNote() {

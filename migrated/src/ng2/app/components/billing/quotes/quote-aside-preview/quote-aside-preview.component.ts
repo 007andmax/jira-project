@@ -38,18 +38,10 @@ export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
       })
     })
     this.sub.add(getOnPreview);
-    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
-      if (data) {
-        if (this.confirmStateService.getConfirmAction() === ARCHIVE_QUOTE) this.onArchiveQuote();
-
-      }
-    })
-    this.sub.add(getConfirm);
     let getHandleSendModePreview = this.quoteStateService.getHandleSendModePreview().subscribe(data => {
       this.quote = data;
       this.quoteServices.editQuote(this.quote.getDataForUpdate(true)).subscribe((res) => {
         this.quoteServices.repeatSend(this.quote.id).subscribe(sendRes => {
-
         })
       });
     });
@@ -82,14 +74,12 @@ export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
     this.quoteServices.convertToInvoice({ companyInfo: this.quote.company }, this.quote.id).subscribe((res) => {
     });
   }
-  onArchiveQuote() {
-    this.quoteServices.archiveQuote(this.quote.company, this.quote.id).subscribe((res) => {
-    });
-  }
+  
   archiveQuote() {
     this.confirmStateService.setConfirmAction(ARCHIVE_QUOTE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
     modalRef.componentInstance.message = `Do you want to archive a quote?`;
+    this.quoteStateService.setQuoteForArchive(this.quote);
   }
   public resend() {
     if (this.quote.status === 'TICKETED' || this.quote.status === 'INVOICED') {
