@@ -40,11 +40,20 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
     this.sub.add(getOnInitFilter);
     this.ticketsStateService.getOnInitCount().subscribe(data => {
       this.count = data;
-      this.title = `${(this.selectedListType) ? this.selectedListType.title : ''} (${this.count})`;
-      if (!this.cd['destroyed']) {
-        this.cd.detectChanges();
-      }
+      this.onSetCount();
     })
+    if (this.ticketsStateService.getListType()) {
+      let listType = this.ticketsStateService.getListType();
+      this.selectedListType = this.titleListTypes.find(item => item.type === listType);
+      this.count = this.ticketsStateService.getTicketsCounts()[( listType === 'USERS') ? 'USER' :  listType];
+      this.onSetCount();
+    }
+  }
+  onSetCount() {
+    this.title = `${(this.selectedListType) ? this.selectedListType.title : ''} (${this.count})`;
+    if (!this.cd['destroyed']) {
+      this.cd.detectChanges();
+    }
   }
   clearAll() {
     this.filter.onClearAll();

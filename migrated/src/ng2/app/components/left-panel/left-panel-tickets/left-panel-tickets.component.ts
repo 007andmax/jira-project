@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { TicketsFilter } from '../../tickets/tickets/class/tickets-filter';
 import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.service';
 import { LeftPanelService } from 'src/ng2/app/services/left-panel/left-panel.service';
@@ -12,7 +12,7 @@ import { QuoteStateService } from '../../billing/quotes/quote-create/quote-state
   templateUrl: './left-panel-tickets.component.html',
   styleUrls: ['./left-panel-tickets.component.scss']
 })
-export class LeftPanelTicketsComponent implements OnInit {
+export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
   @ViewChild('usersDp') usersDp: SelectSearchComponent;
   ticketsFilter: TicketsFilter = new TicketsFilter();
   listType: string = "USERS";
@@ -24,41 +24,49 @@ export class LeftPanelTicketsComponent implements OnInit {
     private quoteStateService: QuoteStateService,
     private leftPanelService: LeftPanelService) { }
 
+
   ngOnInit() {
     this.listType = this.ticketsStateService.getListType();
     this.ticketsStateService.getOnChangeLeftPanelFilter().subscribe(data => {
       this.listType = data;
     })
-    this.getCounts();
+    if (!this.ticketsStateService.isMoveToTickets) this.getCounts();
+    if (this.ticketsStateService.isMoveToTickets) {
+      this.ticketsCounts = this.ticketsStateService.getTicketsCounts();
+      this.ticketsStateService.onInitCount(this.ticketsCounts[(this.listType === 'USERS') ? 'USER' : this.listType]);
+      console.log("this.ticketsCounts",this.ticketsCounts);
+      console.log("this.ticketsCounts[(this.listType === 'USERS') ? 'USER' : this.listType]",this.ticketsCounts[(this.listType === 'USERS') ? 'USER' : this.listType]);
+      this.cd.detectChanges();
+    }
     this.ticketsStateService.getOnUpdateCounts().subscribe(data => {
       this.ticketsCounts = new TicketsCounts(data);
       this.ticketsStateService.onInitCount(this.ticketsCounts[(this.listType === 'USERS') ? 'USER' : this.listType]);
       this.cd.detectChanges();
     })
     if (window.innerWidth < 1280) $("app-left-panel-tickets .left-panel-ng2").css({ zIndex: 990 });
+    this.ticketsStateService.setIsMoveToTickets(false);
   }
   public goToBashboard() {
+    this.ticketsStateService.setIsMoveToTickets(true);
     this.goToState('new-tickets-dashboard');
-    this.listType = "DASHBOARD";
+    this.ticketsStateService.onChangeTypeFilter("DASHBOARD");
   }
   public goToState(state) {
-
+    this.ticketsStateService.setIsMoveToTickets(true);
     this.quoteStateService.goToState(state);
   }
   getCountByField(field) {
     return (this.ticketsCounts) ? this.ticketsCounts[field] : 0;
   }
   public setTypeFilter(type) {
-    this.goToState('new-tickets');
     this.listType = type;
     this.ticketsStateService.onChangeTypeFilter(type);
+    this.goToState('new-tickets');
+   
   }
   private getCounts() {
-    this.ticketsService.getCounts(this.ticketsFilter.getDataForCounts()).subscribe(data => {
-      this.ticketsCounts = new TicketsCounts(data);
-      this.ticketsStateService.onInitCount(this.ticketsCounts[(this.listType === 'USERS') ? 'USER' : this.listType]);
-      this.cd.detectChanges();
-    })
+    this.ticketsStateService.getCounts(this.ticketsFilter.getDataForCounts());
+    this.cd.detectChanges();
   }
   onChangeTags(tags) {
     this.ticketsStateService.onChangeTagsFilter(tags);
@@ -66,5 +74,8 @@ export class LeftPanelTicketsComponent implements OnInit {
   }
   public trackByIndex(index, item) {
     return index;
+  }
+  ngOnDestroy(): void {
+    if (!this.ticketsStateService.isMoveToTickets) this.ticketsStateService.onChangeTypeFilter("USERS");
   }
 }

@@ -44,7 +44,7 @@ export class DashboardSalesAnalyticsComponent implements OnInit {
         xAxis: {
           axisLabel: '',
           tickFormat: (d) => {
-            
+
             if (this.type === "MONTHLY") {
               if (currentDate.getFullYear() === new Date(this.chartData[d].date).getFullYear()) {
                 return moment(this.chartData[d].date).format('MMM');
@@ -54,7 +54,7 @@ export class DashboardSalesAnalyticsComponent implements OnInit {
 
             }
             if (this.type === "WEEKLY" || this.type === "DAILY") return moment(this.chartData[d].date).format('DD MMM');
-            
+
 
           },
           showMaxMin: false,
@@ -96,8 +96,8 @@ export class DashboardSalesAnalyticsComponent implements OnInit {
   }
   getDataForChart() {
     let sin = [], sin2 = [];
-    this.chartData= this.chartData.splice(this.chartData.length - 30,this.chartData.length);
-  //  this.chartData = JSON.parse(JSON.stringify(this.chartData.reverse()));
+    this.chartData = this.chartData.splice(this.chartData.length - 30, this.chartData.length);
+    //  this.chartData = JSON.parse(JSON.stringify(this.chartData.reverse()));
     //Data is represented as an array of {x,y} pairs.
     for (let i = 1; i < 30; i++) {
       sin.push({ x: i, y: this.chartData[i].totalSales });

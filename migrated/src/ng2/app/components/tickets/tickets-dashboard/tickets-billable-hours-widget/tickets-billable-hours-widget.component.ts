@@ -23,6 +23,8 @@ export class TicketsBillableHoursWidgetComponent implements OnInit {
       this.dashboardTicketsBillableHours.setData(data);
       this.onTicketsBillableHoursIsReady.emit(null);
       console.log('this.dashboardTicketsBillableHours',this.dashboardTicketsBillableHours);
+    }, (err) => {
+      this.onTicketsBillableHoursIsReady.emit(null);
     })
   }
   onSelectInterval(item) {

@@ -123,6 +123,8 @@ export class TicketsAnalyticsWidgetComponent implements OnInit {
       this.dashboard = data;
      if (this.isReady) this.updateDataChart();
       this.onTicketsAnalyticsReady.emit(null);
+    },(err) => {
+      this.onTicketsAnalyticsReady.emit(null);
     })
   }
   selectType(type) {

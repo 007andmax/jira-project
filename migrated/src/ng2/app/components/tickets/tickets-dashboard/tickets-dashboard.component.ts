@@ -50,6 +50,9 @@ export class TicketsDashboardComponent implements OnInit {
       this.countIsReady = true;
       this.onCheckREadyState();
       this.cd.detectChanges();
+    },(err) => {
+      this.countIsReady = true;
+      this.onCheckREadyState();
     })
   }
   onTimeOnTicketsIsReady() {

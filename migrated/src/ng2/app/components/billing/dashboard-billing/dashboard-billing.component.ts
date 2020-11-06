@@ -48,6 +48,10 @@ export class DashboardBillingComponent implements OnInit {
       if (this.dashboardStats) this.dashboardStats.updateDataChart();
       this.isDashboardReady = true;
       this.checkReadyState();
+    },(err) => {
+      this.dashboard = new Dashboard();
+      this.isDashboardReady = true;
+      this.checkReadyState();
     });
   }
   checkReadyState() {
@@ -65,6 +69,9 @@ export class DashboardBillingComponent implements OnInit {
   getTops() {
     this.dashboardBillingService.getTops(this.topDashboard.getDataForRequest()).subscribe(data => {
       this.topDashboard.setData(data);
+      this.isTopReady = true;
+      this.checkReadyState();
+    }, err => {
       this.isTopReady = true;
       this.checkReadyState();
     })

@@ -30,6 +30,8 @@ export class TimeOnTicketsWidgetComponent implements OnInit {
       this.dashboardTicketsTime.setData(data);
       this.showPreloader = false;
       this.onTimeOnTicketsIsReady.emit(null);
+    },(err) => {
+      this.onTimeOnTicketsIsReady.emit(null);
     })
   }
 
