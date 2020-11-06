@@ -13,6 +13,7 @@ export class QuoteStateService {
   onCreate: EventEmitter<any> = new EventEmitter();
   onInvoice: EventEmitter<any> = new EventEmitter();
   quoteForCopy:QuotePreview;
+  quoteForArchive:QuotePreview;
   public handleSendMode: EventEmitter<any> = new EventEmitter();
   public handleSendModeList: EventEmitter<any> = new EventEmitter();
   public handleSendModePreview: EventEmitter<any> = new EventEmitter();
@@ -24,6 +25,12 @@ export class QuoteStateService {
     @Inject('$state') $state: any
   ) {
     this.state = $state;
+  }
+  public setQuoteForArchive(data) {
+    this.quoteForArchive = data;
+  }
+  public getQuoteForArchive() {
+    return this.quoteForArchive;
   }
   public getOnInvoice() {
     return this.onInvoice;

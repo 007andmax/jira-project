@@ -1,12 +1,15 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
+import { ARCHIVE_QUOTE } from 'src/ng2/app/const/confirm';
 import { QUOTE_MODAL_ACTION_LIST } from 'src/ng2/app/const/quote';
 import { ModalQuoteComponent } from 'src/ng2/app/services/modal/modal-quote/modal-quote.component';
 import { QuoteService } from 'src/ng2/app/services/quote/quote.service';
 import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 import { QuoteStateService } from 'src/ng2/app/states/quote/quote-state.service';
 import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.service';
+import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
+import { ConfirmStateService } from '../../../shared/confirm/services/confirm-state.service';
 import { Quote } from '../class/quote';
 import { QuoteEdit } from '../class/quote-edit';
 import { QuoteFilter } from '../class/quote-filter';
@@ -37,6 +40,7 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
     private ticketsService: TicketsService,
     private ticketsStateService: TicketsStateService,
     private quoteStateService: QuoteStateService,
+    private confirmStateService: ConfirmStateService,
     private quoteServices: QuoteService,) { }
 
   ngOnInit() {
@@ -71,6 +75,12 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
       });
     })
     this.sub.add(getHandleSendModeEdit);
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === ARCHIVE_QUOTE) this.onArchiveQuote();
+      }
+    })
+    this.sub.add(getConfirm);
   }
   onInvoice(invoiceId) {
     this.quoteStateService.setInvoice(invoiceId);
@@ -143,9 +153,16 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
   goToQuoteEdit(quote) {
     this.quoteStateService.setEdit(quote);
   }
-  archiveQuote(item) {
-    this.quoteServices.archiveQuote(item.company, item.id).subscribe((res) => {
+  onArchiveQuote() {
+    let quote = this.quoteStateService.getQuoteForArchive();
+    this.quoteServices.archiveQuote(quote.company, quote.id).subscribe((res) => {
     });
+  }
+  archiveQuote(item) {
+    this.confirmStateService.setConfirmAction(ARCHIVE_QUOTE);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    modalRef.componentInstance.message = `Do you want to archive a quote?`;
+    this.quoteStateService.setQuoteForArchive(item);
   }
   cancelQuote(item) {
     this.quoteServices.cancelQuote(item.company, item.id).subscribe((res) => {
