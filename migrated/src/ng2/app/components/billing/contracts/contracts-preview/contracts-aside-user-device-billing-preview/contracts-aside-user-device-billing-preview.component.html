@@ -136,10 +136,19 @@
             <td class="contracts-aside-block-time-tabble-td" [textContent]="item.name">
              </td>
             <td>
-
             </td>
           </tr>
-
+          </ng-template>
+          <ng-template ngFor let-item
+          [ngForOf]="contractsUserDevice.serviceContractServicesToTrack"
+          let-i="index"
+           >
+           <tr>
+            <td class="contracts-aside-block-time-tabble-td" [textContent]="item.name">
+             </td>
+            <td>
+            </td>
+          </tr>
           </ng-template>
         </tbody>
       </table>
