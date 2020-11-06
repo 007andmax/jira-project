@@ -28,9 +28,9 @@
         <ng-template ngFor let-item [ngForOf]="dashboardTicketsBillableHours.lines">
           <ng-template #tipContent class="tooltip lines-container-tooltip">
             <div class="lines-container-tooltip-header qt-ff-gm">{{ item.title }}</div>
-            <div class="lines-container-tooltip-header">5:20 hrs</div>
+            <div class="lines-container-tooltip-header" [textContent]="getTime(item.value)"></div>
           </ng-template>
-          <div class="lines-container__line" [ngStyle]="{'width': item.percent + '%'}" placement="right" [ngbTooltip]="tipContent"></div>
+          <div class="lines-container__line pointer" placement="top" [ngbTooltip]="tipContent"  [ngStyle]="{'width': item.percent + '%'}" placement="right" [ngbTooltip]="tipContent"></div>
         </ng-template>
       </div>
     </div>

@@ -27,7 +27,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
   statusColor: TicketsColor;
   offset: number = 15;
   showPendingPreloader: boolean = false;
-  idEditTicket:string = '';
+  idEditTicket: string = '';
   constructor(private ticketsService: TicketsService,
     private ticketsListService: TicketsListService,
     private ticketStateService: TicketStateService,
@@ -35,7 +35,10 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     private ticketsStateService: TicketsStateService) { }
 
   ngOnInit() {
+    /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
+    /* START */
     this.ticketsFilter.setListType(this.ticketsStateService.getListType());
+    /* END */
     this.ticketsStateService.getOnAddTicket().subscribe(data => {
       if (this.ticketsListService.isTicketMatchesFilters(this.ticketsFilter, data)) {
         this.tickets.unshift(data);

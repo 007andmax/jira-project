@@ -31,7 +31,10 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
+    /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
+    /* START */
     this.selectedListType = this.titleListTypes.find(item => item.type === this.ticketsStateService.getListType());
+    /* END */
     this.title = `${(this.selectedListType) ? this.selectedListType.title : ''} (${this.count})`;
     let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
       this.selectedListType = this.titleListTypes.find(item => item.type === data.listType);
@@ -42,12 +45,15 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
       this.count = data;
       this.onSetCount();
     })
+     /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
+    /* START */
     if (this.ticketsStateService.getListType()) {
       let listType = this.ticketsStateService.getListType();
       this.selectedListType = this.titleListTypes.find(item => item.type === listType);
-      this.count = this.ticketsStateService.getTicketsCounts()[( listType === 'USERS') ? 'USER' :  listType];
+      this.count = this.ticketsStateService.getTicketsCounts()[(listType === 'USERS') ? 'USER' : listType];
       this.onSetCount();
     }
+      /* END */
   }
   onSetCount() {
     this.title = `${(this.selectedListType) ? this.selectedListType.title : ''} (${this.count})`;

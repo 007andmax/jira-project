@@ -30,29 +30,42 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
     this.ticketsStateService.getOnChangeLeftPanelFilter().subscribe(data => {
       this.listType = data;
     })
+    /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
+    /* START */
     if (!this.ticketsStateService.isMoveToTickets) this.getCounts();
     if (this.ticketsStateService.isMoveToTickets) {
       this.ticketsCounts = this.ticketsStateService.getTicketsCounts();
       this.ticketsStateService.onInitCount(this.ticketsCounts[(this.listType === 'USERS') ? 'USER' : this.listType]);
-      console.log("this.ticketsCounts",this.ticketsCounts);
-      console.log("this.ticketsCounts[(this.listType === 'USERS') ? 'USER' : this.listType]",this.ticketsCounts[(this.listType === 'USERS') ? 'USER' : this.listType]);
       this.cd.detectChanges();
     }
+    /* END */
     this.ticketsStateService.getOnUpdateCounts().subscribe(data => {
       this.ticketsCounts = new TicketsCounts(data);
       this.ticketsStateService.onInitCount(this.ticketsCounts[(this.listType === 'USERS') ? 'USER' : this.listType]);
       this.cd.detectChanges();
     })
     if (window.innerWidth < 1280) $("app-left-panel-tickets .left-panel-ng2").css({ zIndex: 990 });
+    /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
+    /* START */
     this.ticketsStateService.setIsMoveToTickets(false);
+    /* END */
   }
   public goToBashboard() {
+    /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
+    /* START */
     this.ticketsStateService.setIsMoveToTickets(true);
+    /* END */
     this.goToState('new-tickets-dashboard');
+    /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
+    /* START */
     this.ticketsStateService.onChangeTypeFilter("DASHBOARD");
+    /* END */
   }
   public goToState(state) {
+    /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
+    /* START */
     this.ticketsStateService.setIsMoveToTickets(true);
+    /* END */
     this.quoteStateService.goToState(state);
   }
   getCountByField(field) {
@@ -62,10 +75,13 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
     this.listType = type;
     this.ticketsStateService.onChangeTypeFilter(type);
     this.goToState('new-tickets');
-   
+
   }
   private getCounts() {
+    /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
+    /* START - return last version to get counts */
     this.ticketsStateService.getCounts(this.ticketsFilter.getDataForCounts());
+    /* END */
     this.cd.detectChanges();
   }
   onChangeTags(tags) {
@@ -76,6 +92,9 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
     return index;
   }
   ngOnDestroy(): void {
+    /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
+    /* START */
     if (!this.ticketsStateService.isMoveToTickets) this.ticketsStateService.onChangeTypeFilter("USERS");
+    /* END */
   }
 }

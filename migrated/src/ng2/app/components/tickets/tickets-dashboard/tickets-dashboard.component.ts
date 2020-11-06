@@ -18,7 +18,6 @@ export class TicketsDashboardComponent implements OnInit {
   @ViewChild('ticketPriority') ticketPriority:TicketPriorityWidgetComponent;
   @ViewChild('recurringTicket') recurringTicket:RecurringTicketWidgetComponent;
   @ViewChild('ticketsAnalytics') ticketsAnalytics:TicketsAnalyticsWidgetComponent;
- 
   showPreloader: boolean = true;
   accountingStartDate: string;
   dashboard: DashboardTickets;

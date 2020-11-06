@@ -25,8 +25,9 @@ export class DashboardTicketsBillableHours {
             this.endDate = moment(new Date()).format('YYYY-MM-DD');
         }
         if (value === "WEEK") {
-            startDate = this.getMonday(1)
-            endDate.setDate(startDate.getDate() + 7);
+            startDate = this.getMonday(new Date());
+            console.log("startDate",startDate);
+            endDate.setDate(startDate.getDate() + 6);
             this.startDate = moment(startDate).format('YYYY-MM-DD');
             this.endDate = moment(endDate).format('YYYY-MM-DD');
         }

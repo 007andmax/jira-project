@@ -27,6 +27,12 @@ export class TicketsBillableHoursWidgetComponent implements OnInit {
       this.onTicketsBillableHoursIsReady.emit(null);
     })
   }
+  getTime(input) {
+    let timeInMinutes = input * 60,
+      hours = Math.floor(timeInMinutes / 60),
+      minutes = Math.round(timeInMinutes - (hours * 60));
+    return (hours >= 10 ? hours : '0' + hours) + ':' + (minutes >= 10 ? minutes : '0' + minutes) + ' hrs';
+  }
   onSelectInterval(item) {
     this.currentInterval = item;
     this.dashboardTicketsBillableHours.onSetDates(item.value);

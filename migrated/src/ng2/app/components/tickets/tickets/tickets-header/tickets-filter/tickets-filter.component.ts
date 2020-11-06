@@ -53,8 +53,11 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+    /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
+    /* START */
     this.listType = this.ticketsStateService.getListType();
     this.ticketsFilter.setListType(this.listType);
+    /* END */
     let getOnChangeTypeFilter = this.ticketsStateService.getOnChangeTypeFilter().subscribe(type => {
       this.listType = type;
       this.ticketsFilter.setListType(type);
