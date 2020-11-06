@@ -194,11 +194,17 @@ export class CompanyDashboardComponent implements OnInit {
             tickFormat: function(d){
                 return d3.format(',.1')(d);
             },
-            axisLabelDistance: -10,
             showMaxMin: false,
+            axisLabelDistance: 20
         },
         showLegend: false,
-        interpolate: 'cardinal'
+        interpolate: 'cardinal',
+        tooltip: {
+          contentGenerator: function (key, x, y, e, graph) { 
+            //return html content
+            return '<h1>Test</h1>';
+          }
+        }
       }
     }
     this.data = [];
@@ -274,7 +280,7 @@ export class CompanyDashboardComponent implements OnInit {
   }
 
   getCharacter(name) { 
-    return name[0] + name[1];
+    return (name[0] + name[1]).toUpperCase();
   }
 
   arrayOne(n: number): any[] {

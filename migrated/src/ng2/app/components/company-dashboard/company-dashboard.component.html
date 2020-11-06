@@ -103,11 +103,11 @@
         <div class="profile-cmp-board primary-contact d-flex">
           <div class="small-title">Primary Contact</div>
           <div class="contact-info d-flex">
-            <!-- <figure class="d-flex">
+            <figure class="d-flex" *ngIf="primaryContact.avatar != null && primaryContact.avatar != undefined && primaryContact.avatar != ''">
               <img src="{{primaryContact.avatar}}" alt="user" />
-            </figure> -->
-            <figure class="d-flex no-user-init">
-              AG
+            </figure>
+            <figure class="d-flex no-user-init" *ngIf="primaryContact.avatar == null || primaryContact.avatar == undefined || primaryContact.avatar == ''">
+              {{getCharacter(primaryContact.firstName)}}
             </figure>
             <div class="primary-contact-info d-flex">
               <div class="h5">{{primaryContact.firstName}} {{primaryContact.lastName}}</div>
