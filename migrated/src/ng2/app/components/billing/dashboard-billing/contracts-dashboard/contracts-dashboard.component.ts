@@ -10,7 +10,7 @@ export class ContractsDashboardComponent implements OnInit {
   @Input() contractsDashboard: ContractsDashboard = new ContractsDashboard();
   @ViewChild('nvd3') nvd3:any;
   chartOptions: any;
-  chartColors = ["#0646a4", "#00ccff", '#2bc7c6','#052e6b'];
+  chartColors = ["#0747a6", "#00ccff", "#cdecff","#052e6b"];
   data: any;
   constructor() { }
 

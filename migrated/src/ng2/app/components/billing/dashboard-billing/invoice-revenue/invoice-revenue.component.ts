@@ -17,7 +17,7 @@ export class InvoiceRevenueComponent implements OnInit {
   @ViewChild('datesDp') datesDp: MultiDatepickerDashboardComponent;
   @ViewChild('nvd3') nvd3: any;
   chartOptions: any;
-  chartColors = ["#0646a4", "#00ccff", '#2bc7c6'];
+  chartColors = ["#0747a6", "#00ccff", "#cdecff"];
   data: any;
 
   constructor(private companiesStateService: CompaniesStateService,

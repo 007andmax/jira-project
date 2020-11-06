@@ -178,11 +178,11 @@ export class InvoicesAsideComponent implements OnInit {
         this.invoices.forEach(item => {
           let find = this.selectedInvoices.find(selectInvoice => selectInvoice.id === item.id);
           if (find) item.selected = true;
-          if (item.selected && !this.isChangeAmountReceived) item.paymentAmount = Math.floor((item.sum - item.paidSum)*100)/100;
+          if (item.selected && !this.isChangeAmountReceived) item.paymentAmount = parseFloat((item.sum - item.paidSum).toFixed(2)); ///Math.floor((item.sum - item.paidSum)*100)/100;
         })
         if (!this.isChangeAmountReceived) {
           this.amountReceived = this.invoices.reduce((a, b) => {
-            if (b.selected) return  Math.floor((a + (b.sum - b.paidSum))*100)/100;;
+            if (b.selected) return parseFloat((a + (b.sum - b.paidSum)).toFixed(2));// Math.floor((a + (b.sum - b.paidSum))*100)/100;;
             return a + 0;
           }, 0);
         }
