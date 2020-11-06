@@ -40,7 +40,6 @@ export class TicketsDashboardComponent implements OnInit {
   onSelectInterval(item) {
     this.currentInterval = item;
     this.dashboardTicketsStats.onSetDates(item.value);
-    // this.showPreloader = true;
     this.getCounts();
   }
   private getCounts() {
@@ -73,7 +72,6 @@ export class TicketsDashboardComponent implements OnInit {
       this.ticketPriority.updateDataChart();
       this.recurringTicket.updateDataChart();
       this.ticketsAnalytics.updateDataChart();
-     
     }
   }
   getTextAccountingStartDate() {

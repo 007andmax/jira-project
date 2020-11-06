@@ -1,8 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { DashboardTicketsStats } from '../class/dashboard-tickets-stats';
 
-import { DashboardTicketsTime } from '../class/dashboard-tickets-time';
-
 @Component({
   selector: 'app-recurring-ticket-widget',
   templateUrl: './recurring-ticket-widget.component.html',
@@ -14,7 +12,6 @@ export class RecurringTicketWidgetComponent implements OnInit {
   chartOptions: any;
   chartColors = ["#0646a4", "#00ccff", '#2bc7c6'];
   data: any;
-
   constructor() { }
 
   ngOnInit() {

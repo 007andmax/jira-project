@@ -1,7 +1,6 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import * as moment from 'moment';
 import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
-import { DashboardChartData } from '../../../billing/dashboard-billing/class/dashboard-chart-data';
 import { CompanySetting } from '../../../companies/class/company-setting';
 import { DashboardTickets } from '../class/dashboard-tickets';
 
@@ -12,7 +11,7 @@ import { DashboardTickets } from '../class/dashboard-tickets';
 })
 export class TicketsAnalyticsWidgetComponent implements OnInit {
   @Output() onTicketsAnalyticsReady = new EventEmitter<any>();
-  isReady:boolean = false;
+  isReady: boolean = false;
   type: string = "WEEKLY";
   @ViewChild('nvd3') nvd3: any;
   options;
@@ -91,19 +90,14 @@ export class TicketsAnalyticsWidgetComponent implements OnInit {
     this.cd.detectChanges();
     this.isReady = true;
   }
-  
+
   getDataForChart() {
     let sin = [], sin2 = [];
     let chartData = JSON.parse(JSON.stringify(this.dashboard.chartData.splice(this.dashboard.chartData.length - 30, this.dashboard.chartData.length)));
-   
-    //  this.chartData = JSON.parse(JSON.stringify(this.chartData.reverse()));
-    //Data is represented as an array of {x,y} pairs.
     for (let i = 1; i < 30; i++) {
       sin.push({ x: i, y: chartData[i].totalTickets });
       sin2.push({ x: i, y: chartData[i].completedTickets });
     }
-
-    //Line chart data should be sent as an array of series objects.
     return [
       {
         values: sin,      //values - represents the array of {x,y} data points
@@ -119,11 +113,10 @@ export class TicketsAnalyticsWidgetComponent implements OnInit {
   };
   getDashboard() {
     this.ticketsService.getDashboard(this.type).subscribe(data => {
-      console.log("data", data);
       this.dashboard = data;
-     if (this.isReady) this.updateDataChart();
+      if (this.isReady) this.updateDataChart();
       this.onTicketsAnalyticsReady.emit(null);
-    },(err) => {
+    }, (err) => {
       this.onTicketsAnalyticsReady.emit(null);
     })
   }
@@ -135,7 +128,6 @@ export class TicketsAnalyticsWidgetComponent implements OnInit {
         item.selected = false;
       }
     })
-
     this.type = type;
     this.getDashboard();
   }

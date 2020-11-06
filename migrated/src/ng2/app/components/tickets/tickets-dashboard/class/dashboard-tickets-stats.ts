@@ -337,5 +337,4 @@ export class DashboardTicketsStats {
             }
         }
     }
-
 }

@@ -13,7 +13,6 @@
         </ul>
       </div>
     </div>
-
       <div class="qt-df qt-jc-sb qt-mb-16">
     <app-dashboard-stats [title]="'Open Tickets'" [total]="dashboardTicketsStats.OPEN" [class]="'icon__tickets-on-time'"></app-dashboard-stats>
     <app-dashboard-stats [title]="'On-hold Tickets'" [total]="dashboardTicketsStats.ON_HOLD" [class]="'icon__on-hold-tickets'"></app-dashboard-stats>
@@ -28,6 +27,5 @@
       <app-time-on-tickets-widget (onTimeOnTicketsIsReady)="onTimeOnTicketsIsReady()"></app-time-on-tickets-widget>
           </div>
     <app-tickets-billable-hours-widget  (onTicketsBillableHoursIsReady)="onTicketsBillableHoursIsReady()"></app-tickets-billable-hours-widget>
-
   </div>
 </div>

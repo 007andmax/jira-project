@@ -47,9 +47,9 @@ export class DashboardTicketsTime {
   }
   public getAverageResponseTime() {
     if (this.averageResponseTime >= 60) {
-     let hours = Math.floor(this.averageResponseTime / 60),
-      minutes = Math.round(this.averageResponseTime - (hours * 60));
-    return `${(hours < 10) ? '0' + hours : hours} : ${(minutes < 10) ? '0' + minutes : minutes} hrs`
+      let hours = Math.floor(this.averageResponseTime / 60),
+        minutes = Math.round(this.averageResponseTime - (hours * 60));
+      return `${(hours < 10) ? '0' + hours : hours} : ${(minutes < 10) ? '0' + minutes : minutes} hrs`
     }
     let minutes = Math.round(this.averageResponseTime);
     return `${(minutes < 10) ? '0' + minutes : minutes} min`
@@ -57,10 +57,10 @@ export class DashboardTicketsTime {
   public getAverageLifeTime() {
     if (this.averageLifeTime >= 60) {
       let hours = Math.floor(this.averageLifeTime / 60),
-       minutes = Math.round(this.averageLifeTime - (hours * 60));
-     return `${(hours < 10) ? '0' + hours : hours} : ${(minutes < 10) ? '0' + minutes : minutes} hrs`
-     }
-     let minutes = Math.round(this.averageLifeTime);
-     return `${(minutes < 10) ? '0' + minutes : minutes} min`
+        minutes = Math.round(this.averageLifeTime - (hours * 60));
+      return `${(hours < 10) ? '0' + hours : hours} : ${(minutes < 10) ? '0' + minutes : minutes} hrs`
+    }
+    let minutes = Math.round(this.averageLifeTime);
+    return `${(minutes < 10) ? '0' + minutes : minutes} min`
   }
 }

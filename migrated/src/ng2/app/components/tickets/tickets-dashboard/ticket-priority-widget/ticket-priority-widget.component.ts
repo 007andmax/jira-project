@@ -12,7 +12,6 @@ export class TicketPriorityWidgetComponent implements OnInit {
   chartOptions: any;
   chartColors = ["#0646a4", "#00ccff", '#2bc7c6'];
   data: any;
-
   constructor() { }
 
   ngOnInit() {
@@ -43,7 +42,6 @@ export class TicketPriorityWidgetComponent implements OnInit {
         donutRatio: '0.68'
       }
     }
-
   }
   setDataForChart() {
     this.data = [
