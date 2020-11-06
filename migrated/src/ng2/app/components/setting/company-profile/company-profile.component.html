@@ -439,6 +439,30 @@
         </div>
         </ng-template>
       </ngb-tab>
+      <ngb-tab title="Accounting Year">
+        <ng-template ngbTabContent>
+          
+          <form (ngSubmit)="saveAccountingDate()">
+            <div class="f-row">
+                <div class="f-col col-50">
+                    <label>Start Date</label>
+                    <div class="form-row">
+                      <input name="start_date" type="text" class="form-control sub-label-field" [(ngModel)]="accountingStartDate" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()">
+                      <a href="javascript:;" (click)="resetAccountingDate()">Reset</a>
+                    </div>
+                </div>
+                <div class="f-col col-50">
+                  <label>End Date</label>
+                  <div class="form-row">
+                    <input name="end_date" type="text" class="form-control sub-label-field" [(ngModel)]="accountingEndDate" ngbDatepicker #dd="ngbDatepicker" (click)="dd.toggle()" disabled>
+                 </div>
+              </div>
+
+            </div>
+            <input type="submit" class="btn btn-primary" value="Save Changes" />
+          </form>
+        </ng-template>
+      </ngb-tab>
     </ngb-tabset>
     <!-- <div class="loading" *ngIf="loading"></div> -->
   </div>
