@@ -798,8 +798,11 @@ body {
                         }
                         .cmp-board-title-wrap {
                             .dropdown {
-                                width: 105px;
-                            }
+                                width: 90px;
+                                padding-left: 22px;
+                                background: url("../../../assets/img/cmp-calander.svg") no-repeat left top;
+                                min-height: 16px;
+                            } 
                         }
                     }
                     &.cmp-board-revenue {
