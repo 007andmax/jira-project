@@ -802,6 +802,9 @@ body {
                                 padding-left: 22px;
                                 background: url("../../../assets/img/cmp-calander.svg") no-repeat left top;
                                 min-height: 16px;
+                                .dropdown-toggle{
+                                    margin-top: 2px;
+                                }
                             } 
                         }
                     }
@@ -1745,5 +1748,20 @@ body {
     }
     .domain {
         display: none;
+    }
+    .tick {
+        text{
+            font-size: 12px;
+            line-height: 1.33;
+            letter-spacing: normal;
+            color: #4f5f79;
+            font-family: 'Graphik-Regular';
+            fill: #4f5f79;
+        }
+        line{
+            fill: #edf0f2;
+            stroke: #edf0f2;
+            stroke-width: 0.8px;
+        }
     }
 }
