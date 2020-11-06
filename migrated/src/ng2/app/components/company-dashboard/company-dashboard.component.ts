@@ -172,7 +172,7 @@ export class CompanyDashboardComponent implements OnInit {
         x: function(d){ return d[0]; },
         y: function(d){ return d[1]; },
 
-        duration: 300,
+        duration: 1000,
         useInteractiveGuideline: true,
         clipVoronoi: false,
         color: (d: any, i: any) => {
@@ -184,15 +184,18 @@ export class CompanyDashboardComponent implements OnInit {
                 return d3.time.format('%e %b')(new Date(d))
             },
             showMaxMin: false,
-            staggerLabels: false
+            staggerLabels: false,
+            axisLabelDistance: 0,
+            ticks: 10,
         },
 
         yAxis: {
-            axisLabel: 'Y Axis',
+            axisLabel: '',
             tickFormat: function(d){
                 return d3.format(',.1')(d);
             },
-            axisLabelDistance: 20
+            axisLabelDistance: -10,
+            showMaxMin: false,
         },
         showLegend: false,
         interpolate: 'cardinal'
