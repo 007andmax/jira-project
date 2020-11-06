@@ -78,6 +78,11 @@ export class CompanyDashboardComponent implements OnInit {
     SEMI_MANAGED: 'Semi managed',
     FULLY_MANAGED: 'Fully managed'
   }
+  contractType = {
+    HOURLY: 'Custom Hourly',
+    BLOCK_TIME: 'Block Time',
+    SERVICE_CONTRACT: 'Service Contract',
+  };
   closingSoon = false;
   workingDays = [];
   public companyDetail: CompanyProfile;

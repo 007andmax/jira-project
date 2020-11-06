@@ -352,12 +352,13 @@
                            </thead>
                            <tbody>
                               <tr *ngFor="let contract of contractsList">
-                                <td>{{contract.serviceAgreement.type}}</td>
+                                <td>{{contractType[contract.serviceAgreement.type]}}</td>
                                 <td>{{contract.serviceAgreement.startDateName}}</td>
                                 <td>{{contract.serviceAgreement.endDateName}}</td>
-                                <td class="hold" *ngIf="contract.serviceAgreement.status == 'On Hold'">On Hold</td>
-                                <td class="going" *ngIf="contract.serviceAgreement.status == 'On Going'">On Going</td>
-                                <td class="expired" *ngIf="contract.serviceAgreement.status == 'Expired'">Expired</td>
+                                <td class="hold" *ngIf="contract.serviceAgreement.status == 'PENDING'">Pending</td>
+                                <td class="going" *ngIf="contract.serviceAgreement.status == 'CURRENT'">Current</td>
+                                <td class="expired" *ngIf="contract.serviceAgreement.status == 'TERMINATED'">Terminated</td>
+                                <td class="expired" *ngIf="contract.serviceAgreement.status == 'EXPIRED'">Expired</td>
                               </tr>
                            </tbody>
                         </table>
