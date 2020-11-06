@@ -1739,6 +1739,11 @@ body {
 .nv-axis.nv-x .tick line {
     display:none;
 }
-.nvd3.nv-pie path {
-    fill-opacity: 1;
+.nvd3 {
+    &.nv-pie path {
+        fill-opacity: 1;
+    }
+    .domain {
+        display: none;
+    }
 }
