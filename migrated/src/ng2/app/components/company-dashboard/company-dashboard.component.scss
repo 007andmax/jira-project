@@ -990,6 +990,7 @@ body {
                                             letter-spacing: normal;
                                             color: #4f5f79;
                                             position: relative;
+                                            justify-content: space-between;
                                             &::before {
                                                 position: absolute;
                                                 left: 0;
@@ -1018,13 +1019,13 @@ body {
                                                 background-color: #cdecff;
                                             }
                                             &.color4::before {
-                                                background-color: #0747a6;
+                                                background-color: #16A4FA;
                                             }
                                             &.color5::before {
-                                                background-color: #00ccff;
+                                                background-color: #7C77CB;
                                             }
                                             &.color6::before {
-                                                background-color: #052e6b;
+                                                background-color: #2BC7C6;
                                             }
                                             &.block-tile {
                                                 &::before {
@@ -1037,7 +1038,7 @@ body {
                                                 }
                                             }
                                             span {
-                                                width: 120px;
+                                                // width: 120px;
                                                 font-size: 12px;
                                                 font-weight: normal;
                                                 line-height: 1.33;

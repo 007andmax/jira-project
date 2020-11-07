@@ -88,7 +88,7 @@ export class CompanyDashboardComponent implements OnInit {
   };
   closingSoon = false;
   workingDays = [];
-  statisticsColor = ['0747a6', '00ccff', '052e6b', 'cdecff', '0747a6', '00ccff', '052e6b', 'cdecff']
+  statisticsColor = ['0747a6', '00ccff', '052e6b', 'cdecff', '16A4FA', '7C77CB', '2BC7C6']
   public companyDetail: CompanyProfile;
   constructor(private modalService: NgbModal,
     private companiesService: CompaniesService,
@@ -200,7 +200,7 @@ export class CompanyDashboardComponent implements OnInit {
                 return d3.format(',.1')(d);
             },
             showMaxMin: false,
-            axisLabelDistance: 20
+            axisLabelDistance: -10
         },
         showLegend: false,
         interpolate: 'cardinal'
