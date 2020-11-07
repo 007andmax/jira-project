@@ -15,6 +15,7 @@ import { DownloadAgentStateService } from '../../states/download-agent/download-
 import { DownloadAgentComponent } from '../companies/download-agent/download-agent.component';
 import { Company } from '../../interfaces/company/company';
 import { DomSanitizer } from "@angular/platform-browser";
+import { ToastrService } from 'ngx-toastr';
 declare let d3: any;
 @Component({
   selector: 'company-dashboard',
@@ -69,6 +70,8 @@ export class CompanyDashboardComponent implements OnInit {
     avatar: ''
   };
   tags = [];
+  statistics = [];
+  statisticsCount = 0;
   mapSrc = '';
   serviceType = '';
   domain = '';
@@ -85,6 +88,7 @@ export class CompanyDashboardComponent implements OnInit {
   };
   closingSoon = false;
   workingDays = [];
+  statisticsColor = ['0747a6', '00ccff', '052e6b', 'cdecff', '0747a6', '00ccff', '052e6b', 'cdecff']
   public companyDetail: CompanyProfile;
   constructor(private modalService: NgbModal,
     private companiesService: CompaniesService,
@@ -93,6 +97,7 @@ export class CompanyDashboardComponent implements OnInit {
     private route: ActivatedRoute,
     private companiesStateService: CompaniesStateService,
     private downloadAgentStateService: DownloadAgentStateService,
+    private toaster: ToastrService,
     private sanitizer: DomSanitizer) {}
   closeResult = '';
 
@@ -198,13 +203,7 @@ export class CompanyDashboardComponent implements OnInit {
             axisLabelDistance: 20
         },
         showLegend: false,
-        interpolate: 'cardinal',
-        tooltip: {
-          contentGenerator: function (key, x, y, e, graph) { 
-            //return html content
-            return '<h1>Test</h1>';
-          }
-        }
+        interpolate: 'cardinal'
       }
     }
     this.data = [];
@@ -232,11 +231,12 @@ export class CompanyDashboardComponent implements OnInit {
       this.tags = this.companyDetail.tags;
       this.serviceType = (this.companyDetail.serviceType == undefined || this.companyDetail.serviceType == null) ? '' : this.companyDetail.serviceType;
       this.domain = (this.companyDetail.domain == undefined || this.companyDetail.domain == null) ? '' : this.companyDetail.domain;
+      let type = typeof this.companyDetail.contacts[0].phoneNumbers[0];
       this.primaryContact = {
         firstName: this.companyDetail.contacts[0].firstName,
         lastName: this.companyDetail.contacts[0].lastName,
         email: this.companyDetail.contacts[0].primaryEmail,
-        phoneNumber: this.companyDetail.contacts[0].phoneNumbers[0],
+        phoneNumber: type === 'object' ? this.companyDetail.contacts[0].phoneNumbers[0].number : this.companyDetail.contacts[0].phoneNumbers[0],
         avatar: this.companyDetail.contacts[0].avatar
       }
       // this.mapSrc = `https://maps.google.com/maps?q=${this.companyDetail.addresses[0].locationLat},${this.companyDetail.addresses[0].locationLng}&z=15&amp;output=embed`;
@@ -280,7 +280,7 @@ export class CompanyDashboardComponent implements OnInit {
   }
 
   getCharacter(name) { 
-    return (name[0] + name[1]).toUpperCase();
+    return name[0] + name[1];
   }
 
   arrayOne(n: number): any[] {
@@ -316,11 +316,28 @@ export class CompanyDashboardComponent implements OnInit {
 
   getContractsList() {
     let getInvoice = this.companiesService.getContractsList(this._id).subscribe((data: any) => {
+      
+      let statistics = [];
       data.forEach(element => {
         let obj = element;
         obj.serviceAgreement.startDateName = moment(new Date(obj.serviceAgreement.startDate)).format('DD MMM YYYY');
         obj.serviceAgreement.endDateName = moment(new Date(obj.serviceAgreement.endDate)).format('DD MMM YYYY');
         this.contractsList.push(obj);
+        if (element.statistics !== null)
+        statistics = statistics.concat(element.statistics);
+      });
+      statistics.forEach(element => {
+        this.statisticsCount += Math.round(element.quantity);
+      });
+      statistics.forEach((element, index) => {
+        this.statistics.push({
+          itemId: element.itemId,
+          itemName: element.itemName,
+          quantity: Math.round(element.quantity),
+          width: ((Math.round(element.quantity) / this.statisticsCount) * 100) + '%',
+          color: '#' + this.statisticsColor[index],
+          code: this.statisticsColor[index]
+        })
       });
     });
     this.sub.add(getInvoice);
@@ -442,11 +459,16 @@ export class CompanyDashboardComponent implements OnInit {
     this.workingDays.forEach(element => {
       data.push({
         dayOfWeek: element.dayOfWeek,
-        startTime: element.sTime == undefined ? 0 : this.gotSecondFromTimeAndFormatObject(moment(element.sTime).format('hh:mm'), moment(element.sTime).format('A')),
-        endTime: element.eTime == undefined ? 0 : this.gotSecondFromTimeAndFormatObject(moment(element.eTime).format('hh:mm'), moment(element.eTime).format('A'))
+        startTime: element.checked === true ? element.startTime : 0,
+        endTime: element.checked === true ? element.endTime : 0
       });
     });
     this.companyDetail.workingDays = data;
+    this.workingDays.forEach((element, index) => {
+      if (element.startTime !== 0 && element.endTime !== 0) {
+        element.timing = `${this.timeFormatter(element.startTime)} ${this.getTimeFormat(element.startTime)} - ${this.timeFormatter(element.endTime)} ${this.getTimeFormat(element.endTime)}`
+      }
+    });
     this.saveCompany();
   }
 
@@ -474,7 +496,9 @@ export class CompanyDashboardComponent implements OnInit {
 
   saveCompany() {
     let savecompany = this.companiesService.editWoringHours(this.companyDetail).subscribe((data: any) => {
-      
+      this.toaster.success('Working hours updated successfully', null, {
+        timeOut: 5000
+      });
     });
     this.sub.add(savecompany);
   }
@@ -503,6 +527,104 @@ export class CompanyDashboardComponent implements OnInit {
 
   mapUrl() {
     return this.sanitizer.bypassSecurityTrustResourceUrl(this.mapSrc);
+  }
+
+  startTimeChange(workingday: any, startTime: any) {
+    const splitTime = startTime.split(':');
+    if (!Number(splitTime[0])) {
+      return;
+    }
+    let hours = parseInt(splitTime[0]) || 0;
+    let minutes =
+      (!splitTime[1] || splitTime[1].length > 1
+        ? parseInt(splitTime[1])
+        : parseInt(splitTime[1] + '0')) || 0;
+
+    if (minutes > 59) {
+      minutes = 0;
+    }
+
+    if (hours > 23) {
+      hours = 23;
+    }
+    const itemIndex = this.workingDays.findIndex(
+      item => item.id == workingday.id
+    );
+    this.workingDays[itemIndex].startTime = hours * 3600 + minutes * 60;
+  }
+
+  endTimeChange(workingday: any, endTime: any) {
+    const splitTime = endTime.split(':');
+    if (!Number(splitTime[0])) {
+      return;
+    }
+    let hours = parseInt(splitTime[0]) || 0;
+    let minutes =
+      (!splitTime[1] || splitTime[1].length > 1
+        ? parseInt(splitTime[1])
+        : parseInt(splitTime[1] + '0')) || 0;
+
+    if (minutes > 59) {
+      minutes = 0;
+    }
+
+    if (hours > 23) {
+      hours = 23;
+    }
+    const itemIndex = this.workingDays.findIndex(
+      item => item.id == workingday.id
+    );
+    this.workingDays[itemIndex].endTime =
+      hours * 3600 + minutes * 60;
+  }
+
+  fromTime_convert(from) {
+    const startWith = 'from ',
+      splitWith = ' to ';
+    const fromHours = Math.floor(from / 3600);
+    const fromMinutes = Math.round(from / 60 - fromHours * 60);
+
+    let fHours = '';
+    if (fromHours < 10) {
+      fHours = '0' + fromHours;
+    }
+
+    let fMinutes = '';
+    if (fromMinutes < 10) {
+      fMinutes = '0' + fromMinutes;
+    }
+
+    const h = fHours ? fHours : Number(fromHours) ? fromHours : 0;
+    const m = fMinutes ? fMinutes : Number(fromMinutes) ? fromMinutes : 0;
+
+    const value = h + ':' + m;
+
+    return value;
+  }
+
+  /**
+   * display to time
+   * @param to
+   */
+  toTime_convert(to) {
+    const toHours = Math.floor(to / 3600);
+    const toMinutes = Math.round(to / 60 - toHours * 60);
+
+    let tHours = '';
+    if (toHours < 10) {
+      tHours = '0' + toHours;
+    }
+
+    let tMinutes = '';
+    if (toMinutes < 10) {
+      tMinutes = '0' + toMinutes;
+    }
+
+    const h = tHours !== '' ? tHours : toHours;
+    const m = tMinutes !== '' ? tMinutes : toMinutes;
+
+    const value = h + ':' + m;
+    return value;
   }
 
 }

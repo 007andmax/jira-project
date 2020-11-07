@@ -1005,10 +1005,26 @@ body {
                                                 border-bottom: 0;
                                                 padding-bottom: 0;
                                             }
-                                            &.remote-service {
-                                                &::before {
-                                                    background-color: #00ccff;
-                                                }
+                                            &.color0::before {
+                                                background-color: #0747a6;
+                                            }
+                                            &.color1::before {
+                                                background-color: #00ccff;
+                                            }
+                                            &.color2::before {
+                                                background-color: #052e6b;
+                                            }
+                                            &.color3::before {
+                                                background-color: #cdecff;
+                                            }
+                                            &.color4::before {
+                                                background-color: #0747a6;
+                                            }
+                                            &.color5::before {
+                                                background-color: #00ccff;
+                                            }
+                                            &.color6::before {
+                                                background-color: #052e6b;
                                             }
                                             &.block-tile {
                                                 &::before {
@@ -1563,56 +1579,140 @@ body {
                     form {
                         flex-direction: column;
                         width: 100%;
-                        ul {
+                        // ul {
+                        //     width: 100%;
+                        //     flex-direction: column;
+                        //     margin-bottom: 28px;
+                        //     li {
+                        //         width: 100%;
+                        //         align-items: center;
+                        //         justify-content: space-between;
+                        //         margin-bottom: 12px;
+
+                        //         .hours-row {
+                        //             width: 268px;
+                        //             @include flexbox;
+                        //             align-items: center;
+                        //             app-ticket-profile-updates-service-timepicker {
+                        //                 width: 100%;
+                        //             }
+                        //             p {
+                        //                 width: 100%;
+                        //                 align-items: center;
+                        //                 justify-content: space-between;
+                        //                 position: relative;
+                        //                 &::after {
+                        //                     content: "";
+                        //                     width: 12px;
+                        //                     height: 1px;
+                        //                     background-color: #dfe3e8;
+                        //                     position: absolute;
+                        //                     top: 0;
+                        //                     bottom: 0;
+                        //                     left: 0;
+                        //                     right: 0;
+                        //                     margin: auto;
+                        //                 }
+                        //             }
+                        //             .ui-timepicker-input {
+                        //                 width: 120px;
+                        //                 font-size: 13px;
+                        //                 line-height: 1.54;
+                        //                 letter-spacing: normal;
+                        //                 padding: 10px 10px;
+                        //                 @include flexbox;
+                        //                 @include border-radius(4px);
+                        //                 align-items: center;
+                        //                 margin: 0;
+                        //                 font-family: $font-body;
+                        //                 text-transform: uppercase;
+                        //                 outline: none !important;
+                        //             }
+                        //         }
+                        //     }
+                        // }
+                        ul{
                             width: 100%;
                             flex-direction: column;
                             margin-bottom: 28px;
-                            li {
-                                width: 100%;
-                                align-items: center;
-                                justify-content: space-between;
-                                margin-bottom: 12px;
-
-                                .hours-row {
-                                    width: 268px;
-                                    @include flexbox;
+                            &.list-unstyled {
+                                display: block;
+                                @media only screen and (max-width:576px){
+                                    margin-bottom: 20px;
+                                }
+                                li {
+                                    -webkit-display: flex;
+                                    display: flex;
                                     align-items: center;
-                                    app-ticket-profile-updates-service-timepicker {
-                                        width: 100%;
+                                    flex-direction: row;
+                                    margin-bottom: 16px !important;
+                                    @media only screen and (max-width:576px){
+                                        flex-direction: column;
+                                        align-items: flex-start;
                                     }
-                                    p {
-                                        width: 100%;
-                                        align-items: center;
-                                        justify-content: space-between;
+                                    &:last-child{
+                                        margin-bottom: 0 !important;
+                                    }
+                                & > div {
                                         position: relative;
-                                        &::after {
-                                            content: "";
-                                            width: 12px;
-                                            height: 1px;
-                                            background-color: #dfe3e8;
-                                            position: absolute;
-                                            top: 0;
-                                            bottom: 0;
-                                            left: 0;
-                                            right: 0;
-                                            margin: auto;
+                                        &.cmn-checkbox {
+                                            width: 173px;
+                                            padding-right: 15px;
+                                            @media only screen and (max-width:576px){
+                                                margin-bottom: 15px;
+                                                width: 100%;
+                                            }
+                                        }
+                                        &.time-zone {
+                                            display: inline-block;
+                                            vertical-align: middle;
+                                            @media only screen and (max-width:576px){
+                                                display: block;
+                                                width: 100%;
+                                            }
+                                            .tl-col {
+                                                display: inline-block;
+                                                vertical-align: middle;
+                                                width: 110px;
+                                                margin-right: 55px;
+                                                position: relative;
+                                                @media only screen and (max-width:576px){
+                                                    width: 41%;
+                                                }
+                                                select.form-input {
+                                                    padding: 9px 10px;
+                                                    width: 100%;
+                                                    border-radius: 4px;
+                                                    border: solid 1px #c4cbd5;
+                                                    line-height: 1.54;
+                                                    letter-spacing: normal;
+                                                    height: auto;
+                                                }
+                                                &:last-child {
+                                                    margin-right: 0;
+                                                    &::after {
+                                                        display: none;
+                                                    }
+                                                }
+                                                &::after {
+                                                    content: "";
+                                                    width: 12px;
+                                                    height: 1px;
+                                                    background-color: #9ca5b6;
+                                                    display: inline-block;
+                                                    vertical-align: middle;
+                                                    position: absolute;
+                                                    left: auto;
+                                                    right: -28px;
+                                                    top: 0;
+                                                    bottom: 0;
+                                                    margin: auto;
+                                                }
+                                            }
                                         }
                                     }
-                                    .ui-timepicker-input {
-                                        width: 120px;
-                                        font-size: 13px;
-                                        line-height: 1.54;
-                                        letter-spacing: normal;
-                                        padding: 10px 10px;
-                                        @include flexbox;
-                                        @include border-radius(4px);
-                                        align-items: center;
-                                        margin: 0;
-                                        font-family: $font-body;
-                                        text-transform: uppercase;
-                                        outline: none !important;
-                                    }
                                 }
+                                
                             }
                         }
                     }
@@ -1737,6 +1837,10 @@ body {
             }
         }
     }
+}
+
+.uppercase {
+    text-transform: uppercase;
 }
 
 .nv-axis.nv-x .tick line {

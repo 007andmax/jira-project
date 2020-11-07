@@ -106,7 +106,7 @@
             <figure class="d-flex" *ngIf="primaryContact.avatar != null && primaryContact.avatar != undefined && primaryContact.avatar != ''">
               <img src="{{primaryContact.avatar}}" alt="user" />
             </figure>
-            <figure class="d-flex no-user-init" *ngIf="primaryContact.avatar == null || primaryContact.avatar == undefined || primaryContact.avatar == ''">
+            <figure class="d-flex no-user-init uppercase" *ngIf="primaryContact.avatar == null || primaryContact.avatar == undefined || primaryContact.avatar == ''">
               {{getCharacter(primaryContact.firstName)}}
             </figure>
             <div class="primary-contact-info d-flex">
@@ -271,7 +271,7 @@
                       </li>
                   </ul>
               </div>
-              <div class="cmp-board-invoice cmn-box d-flex">
+              <div class="cmp-board-invoice cmn-box d-flex" *ngIf="recentInvoiceList.length > 0">
                 <h2>Recent Invoices</h2>
                  <div class="cmp-dash-table-wrap">
                         <table *ngIf="recentInvoiceList.length > 0">
@@ -301,13 +301,12 @@
               <div class="cmp-board-contract cmn-box d-flex">
                     <div class="progress-contract d-flex">
                           <div class="progress-count d-flex">
-                            <span class="h1">894 hr</span>
+                            <span class="h1">{{statisticsCount}} hr</span>
                             <span class="st-hrs">Hours Spent</span>
                           </div>
                           <div class="cmp-board-progresbbar d-flex">
-                              <span style=" background-color: #0747a6;
-                              width: 27%;">First cell</span>
-                              <span style="
+                              <span *ngFor="let stat of statistics; let i = index;" [style.backgroundColor]="stat.color" [style.width]="stat.width">{{i}}</span>
+                              <!-- <span style="
                               background-color: #00ccff;
                               width: 25%;
                           ">Second cell</span>
@@ -318,14 +317,14 @@
                               <span style="
                               background-color: #cdecff;
                               width: 20%;
-                          ">Fourth cell</span>
+                          ">Fourth cell</span> -->
                           </div>
                           <ul class="list-unstyled d-flex">
-                              <li class="onsite d-flex">
-                                  <span>Onsite Service</span>
-                                  <b>156 hr</b>
+                              <li class="d-flex color{{i}}" *ngFor="let stat of statistics; let i = index;">
+                                  <span>{{stat.itemName}}</span>
+                                  <b>{{stat.quantity}} hr</b>
                               </li>
-                              <li class="remote-service d-flex">
+                              <!-- <li class="remote-service d-flex">
                                 <span>Remote Service</span>
                                 <b>254</b>
                               </li>
@@ -336,7 +335,7 @@
                               <li class="manage-fully d-flex">
                                 <span>Fully Managed</span>
                                 <b>156 hr</b>
-                              </li>  
+                              </li>   -->
                           </ul>
                           <div class="contract-info d-flex">
                                 <h6>Hourly Contract</h6>
@@ -476,11 +475,51 @@
             <ul class="list-unstyled d-flex">
               <li class="d-flex" *ngFor="let work of workingDays; let i = index;">
                 <div class="cmn-checkbox">
-                    <input type="checkbox" name="hour_{{i}}" id="hour_{{i}}" [ngModel]="work.checked" (change)="resetTime(i);">
-                    <label for="hour_{{i}}">{{work.dayOfWeek}}</label>
+                  <input
+                    type="checkbox"
+                    id="{{ work.dayOfWeek }}"
+                    [(ngModel)]="work.checked"
+                    name="{{ work.dayOfWeek | titlecase }}"
+                    [ngModelOptions]="{ standalone: true }"
+                  />
+                  <label for="{{ work.dayOfWeek }}">{{
+                    work.dayOfWeek
+                  }}</label>
                 </div>
-                <div class="hours-row">
-                  <app-ticket-profile-updates-service-timepicker (onChangeStart)="onChangeStartTime($event, i)" (onChangeEnd)="onChangeEndTime($event, i)" [start]="work.sTime" [editMode]="true" [end]="work.eTime"></app-ticket-profile-updates-service-timepicker>
+
+                <div class="time-zone">
+                  <div class="tl-col">
+                    <select #startTime class="cmn-select form-input" [id]=" 'from-'+work.dayOfWeek"
+                    (change)="startTimeChange(work, startTime.value)"
+                    name="{{work.dayOfWeek}}" [attr.disabled]="!work.checked ? 'disabled' : null" [ngModel]="fromTime_convert(work.startTime)" >
+                      <option value="06:00">6:00 AM</option>
+                      <option value="06:30">6:30 AM</option>
+                      <option value="07:00">07:00 AM</option>
+                      <option value="07:30">7:30 AM</option>
+                      <option value="08:00">08:00 AM</option>
+                      <option value="08:30">8:30 AM</option>
+                      <option value="09:00">9:00 AM</option>
+                      <option value="09:30">9:30 AM</option>
+                      <option value="10:00">10:00 AM</option>
+                      <option value="10:30">10:30 AM</option>
+                      <option value="11:00">11:00 AM</option>
+                      <option value="11:30">11:30 AM</option>
+                      <option value="12:00">12:00 PM</option>
+                    </select>
+                  </div>
+                  <div class="tl-col">
+                    <select #endTime class="cmn-select form-input"
+                    (change)="endTimeChange(work,endTime.value)" [id]="'to-'+work.dayOfWeek"
+                    name="{{work.dayOfWeek+i}}" [attr.disabled]="!work.checked ? 'disabled' : null" [ngModel]="toTime_convert(work.endTime)" >
+                      <option value="17:00">17:00 PM</option>
+                      <option value="17:30">17:30 PM</option>
+                      <option value="18:00">18:00 PM</option>
+                      <option value="18:30">18:30 PM</option>
+                      <option value="19:00">19:00 PM</option>
+                      <option value="19:30">19:30 PM</option>
+                      <option value="20:00">20:00 PM</option>
+                    </select>
+                  </div>
                 </div>
               </li>
             </ul>
