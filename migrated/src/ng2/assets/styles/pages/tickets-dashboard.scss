@@ -61,7 +61,7 @@
       height: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: space-around;
       padding-top: 10px;
       padding-bottom: 40px;
       width: 100%;
@@ -75,7 +75,7 @@
     .labels-container {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: space-around;
       padding-top: 10px;
       padding-bottom: 40px;
       font-size: 12px;
