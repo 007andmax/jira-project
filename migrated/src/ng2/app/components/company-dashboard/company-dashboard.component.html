@@ -91,7 +91,7 @@
           </div>
           <div class="other-info-col d-flex" *ngIf="companyDetail?.clientIndustry !== undefined && companyDetail?.clientIndustry !== null && companyDetail?.clientIndustry !== ''">
             <div class="small-title">Industry</div>
-            <p>{{companyDetail.clientIndustry}}</p>
+            <p>{{clientIndustry}}</p>
           </div>
           <div class="other-info-col d-flex" *ngIf="companyDetail?.description !== undefined && companyDetail?.description !== null && companyDetail?.description !== ''">
             <div class="small-title">Notes</div>
@@ -526,7 +526,7 @@
       </form>
       <div class="footer-area-modal d-flex">
         <button type="button" class="btn btn-secondary" aria-label="Close" (click)="modal.dismiss('Cross click')">Cancel</button>
-        <button type="button" class="btn btn-primary" (click)="saveHours();">Save Changes</button>
+        <button type="button" class="btn btn-primary" (click)="saveHours();modal.dismiss();">Save Changes</button>
       </div>
   </div>
   

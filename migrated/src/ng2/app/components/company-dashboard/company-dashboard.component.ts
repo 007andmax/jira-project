@@ -88,7 +88,9 @@ export class CompanyDashboardComponent implements OnInit {
   };
   closingSoon = false;
   workingDays = [];
-  statisticsColor = ['0747a6', '00ccff', '052e6b', 'cdecff', '16A4FA', '7C77CB', '2BC7C6']
+  statisticsColor = ['0747a6', '00ccff', '052e6b', 'cdecff', '16A4FA', '7C77CB', '2BC7C6'];
+  clientIndustry: string = '';
+  modalReference: any;
   public companyDetail: CompanyProfile;
   constructor(private modalService: NgbModal,
     private companiesService: CompaniesService,
@@ -102,7 +104,7 @@ export class CompanyDashboardComponent implements OnInit {
   closeResult = '';
 
   open(content: any) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title',centered: true , windowClass: 'cmp-comapny-modal'}).result.then((result) => {
+    this.modalReference = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title',centered: true , windowClass: 'cmp-comapny-modal'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     });
   }
@@ -202,7 +204,15 @@ export class CompanyDashboardComponent implements OnInit {
             showMaxMin: false,
             axisLabelDistance: -10
         },
-        showLegend: false,
+        showLegend: true,
+        legend: {
+          margin: {
+              top: 5,
+              right: 60,
+              bottom: 10,
+              left: 0
+          }
+        },
         interpolate: 'cardinal'
       }
     }
@@ -232,6 +242,8 @@ export class CompanyDashboardComponent implements OnInit {
       this.serviceType = (this.companyDetail.serviceType == undefined || this.companyDetail.serviceType == null) ? '' : this.companyDetail.serviceType;
       this.domain = (this.companyDetail.domain == undefined || this.companyDetail.domain == null) ? '' : this.companyDetail.domain;
       let type = typeof this.companyDetail.contacts[0].phoneNumbers[0];
+      let typeIndustry = typeof this.companyDetail.clientIndustry;
+      this.clientIndustry = typeIndustry === 'object' ? this.companyDetail.clientIndustry.name : this.companyDetail.clientIndustry;
       this.primaryContact = {
         firstName: this.companyDetail.contacts[0].firstName,
         lastName: this.companyDetail.contacts[0].lastName,
