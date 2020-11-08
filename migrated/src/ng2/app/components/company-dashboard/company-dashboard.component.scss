@@ -314,8 +314,8 @@ body {
         }
         select.cmn-select {
             @include app-none();
-            background: url("/ng2/assets/img/selct-arrow.svg") no-repeat right 15px center;
-            padding-right: 30px;
+            background: url("/ng2/assets/img/selct-arrow.svg") no-repeat right 7px center;
+            padding-right: 25px;
             option {
                 padding: 10px;
                 background-color: $white-color;
@@ -745,7 +745,7 @@ body {
                     &.cmp-board-tickets {
                         flex-direction: column;
                         .cmp-board-title-wrap {
-                            margin-bottom: 35px;
+                            margin-bottom: 16px;
                             h2 {
                                 width: auto;
                             }
@@ -1226,8 +1226,9 @@ body {
                 
             }
             .dropdown-menu {
-                width: 200px;
-                height: 284px;
+                width: 220px;
+                height: auto;
+                max-height: 284px;
                 .item {
                     &:last-child {
                         justify-content: center;
@@ -1688,6 +1689,14 @@ body {
                                                     line-height: 1.54;
                                                     letter-spacing: normal;
                                                     height: auto;
+                                                    background: url("/ng2/assets/img/selct-arrow.svg") no-repeat right 15px center;
+                                                    padding-right: 30px;
+                                                    -webkit-appearance: none;
+                                                    -moz-appearance: none;
+                                                    outline: none;
+                                                    ::-ms-expand{
+                                                        display: none;
+                                                    }
                                                 }
                                                 &:last-child {
                                                     margin-right: 0;
@@ -1704,7 +1713,7 @@ body {
                                                     vertical-align: middle;
                                                     position: absolute;
                                                     left: auto;
-                                                    right: -28px;
+                                                    right: -31px;
                                                     top: 0;
                                                     bottom: 0;
                                                     margin: auto;
