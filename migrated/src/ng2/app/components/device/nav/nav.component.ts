@@ -16,12 +16,16 @@ export class NavComponent implements OnInit {
   currentCompany = '';
   imgUrl = '';
   deviceType = '';
+  _id: string = '';
+  type: string = '';
   constructor(private commonHttpServices: CommonHttpServices,
     private toastr: ToastrService,
     public commonServices: CommonServices) { }
 
   ngOnInit() {
-    this.deviceType = localStorage.getItem('type');
+    this.type = window.location.href.split('/')[window.location.href.split('/').length - 2];
+    this._id = window.location.href.split('/')[window.location.href.split('/').length - 1];
+    this.deviceType = this.type;
     // this.deviceType = 'printer';
     this.getCurrentUser();
     this.getCurrentCompany();

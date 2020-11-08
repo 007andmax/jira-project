@@ -55,6 +55,8 @@ export class SoftwareComponent implements OnInit, OnDestroy {
         orderable: true
       }]
   };
+  _id: string = '';
+  type: string = '';
   pipe = new DatePipe('en-US');
   dtTrigger = new Subject();
   constructor(private softwareListService: SoftwareListService,
@@ -72,12 +74,13 @@ export class SoftwareComponent implements OnInit, OnDestroy {
     // } else {
     //   $('main').css('margin-right', '352px')
     // }
-    
-    if(localStorage.getItem('type') === 'printer') {
-      this.router.navigate(['/ng2/device/dashboard']);
+    this.type = window.location.href.split('/')[window.location.href.split('/').length - 2];
+    this._id = window.location.href.split('/')[window.location.href.split('/').length - 1];
+    if(this.type === 'printer') {
+      this.router.navigate([`/ng2/device/dashboard/${this.type}/${this._id}`]);
     }
     this.myDateValue = new Date();
-    this.deviceDetail = JSON.parse(localStorage.getItem('deviceDetail'));
+    this.deviceDetail = JSON.parse(localStorage.getItem('deviceDetail_' + this._id));
     if (Object.keys(this.deviceDetailService.getDevice()).length === 0) {
       this.getDeviceDetail();
     } else {

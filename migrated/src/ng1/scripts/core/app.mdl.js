@@ -299,15 +299,15 @@
           url: '/ng2/setting/glnumber',
           template: '<glnumber-settings-component></glnumber-settings-component>'
         })) .state('device-dashboard', waitForServices({
-          url: '/ng2/device/dashboard',
+          url: '/ng2/device/dashboard/:type/:id',
           template: '<dashboard-component></dashboard-component>'
         }))
         .state('device-hardware', waitForServices({
-          url: '/ng2/device/hardware',
+          url: '/ng2/device/hardware/:type/:id',
           template: '<hardware-component></hardware-component>'
         }))
         .state('device-software', waitForServices({
-          url: '/ng2/device/software',
+          url: '/ng2/device/software/:type/:id',
           template: '<software-component></software-component>'
         }))
         .state('device-service', waitForServices({
@@ -319,7 +319,7 @@
           template: '<antivirus-component></antivirus-component>'
         }))
         .state('device-terminal', waitForServices({
-          url: '/ng2/device/terminal',
+          url: '/ng2/device/terminal/:type/:id',
           template: '<terminal-component></terminal-component>'
         }))
         .state('device-password', waitForServices({

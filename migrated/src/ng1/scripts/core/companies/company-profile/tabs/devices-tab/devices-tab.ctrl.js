@@ -214,9 +214,9 @@
         };
         $scope.redirectDevice = function (agent) {
           if (agent.agentId) {
-            localStorage.setItem('agentId', agent.agentId);
-            localStorage.setItem('type', agent.type);
-            var url = '/#/ng2/device/dashboard';
+            // localStorage.setItem('agentId', agent.agentId);
+            // localStorage.setItem('type', agent.type);
+            var url = `/#/ng2/device/dashboard/${agent.type}/${agent.agentId}`;
             window.open(url,'_blank');
           }
           

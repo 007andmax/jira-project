@@ -205,15 +205,15 @@ const routes: Routes = [
     component: PaymentsComponent,
   },
   {
-    path: 'ng2/device/dashboard',
+    path: 'ng2/device/dashboard/:type/:id',
     component: DashboardComponent
   },
   {
-    path: 'ng2/device/hardware',
+    path: 'ng2/device/hardware/:type/:id',
     component: HardwareComponent
   },
   {
-    path: 'ng2/device/software',
+    path: 'ng2/device/software/:type/:id',
     component: SoftwareComponent
   },
   {
@@ -225,7 +225,7 @@ const routes: Routes = [
     component: AntivirusComponent
   },
   {
-    path: 'ng2/device/terminal',
+    path: 'ng2/device/terminal/:type/:id',
     component: TerminalComponent
   },
   {
