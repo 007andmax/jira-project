@@ -1286,7 +1286,7 @@ body {
                 display: flex;
             }
             .dropdown-menu {
-                width: 200px;
+                width: 220px;
                 height: 284px;
                 border-radius: 4px;
                 box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
@@ -1316,6 +1316,9 @@ body {
                         color: #364656;
                         font-family: $graphicMedBold;
                         background-color: #edf2f6;
+                    }
+                    &:last-child{
+                        background-color: #fff !important;
                     }
                     span {
                         width: 80px;
@@ -1856,9 +1859,6 @@ body {
 .nv-axis.nv-x .tick line {
     display:none;
 }
-svg.nvd3-svg {
-    overflow: visible;
-}
 .nvd3 {
     &.nv-pie path {
         fill-opacity: 1;
@@ -1890,9 +1890,5 @@ svg.nvd3-svg {
             font-family: 'Graphik-Regular';
             fill: #4f5f79;
         }
-    }
-    .nv-legend {
-        -webkit-transform: translate(calc(-50% + 260px), -40px);
-        transform: translate(calc(-50% + 260px), -40px);
     }
 }
