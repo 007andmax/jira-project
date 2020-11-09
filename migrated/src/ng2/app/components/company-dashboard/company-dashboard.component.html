@@ -78,7 +78,7 @@
                   <!-- <button class="selected-item" id="dropdownBasic1" ngbDropdownToggle>Opens  9:30 AM</button> -->
                   <button class="selected-item" id="dropdownBasic1" ngbDropdownToggle>{{companyOpen}}</button>
                   <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                    <button class="item" ngbDropdownItem *ngFor="let hours of workingDays">{{hours.dayOfWeek}}<span *ngIf="hours.startTime !== 0 && hours.endTime !== 0">{{hours.timing}}</span><span *ngIf="hours.startTime === 0 && hours.endTime === 0">Close</span></button>
+                    <button class="item" ngbDropdownItem *ngFor="let hours of workingDays">{{hours.dayOfWeek}}<span *ngIf="hours.startTime !== 0 && hours.endTime !== 0">{{hours.timing}}</span><span *ngIf="(hours.startTime === 0 || hours.startTime === null) && (hours.endTime === 0 || hours.endTime === null)">Close</span></button>
                     <div class="item"> 
                       <button class="btn btn-outline" (click)="open(contentHour)"> 
                         <img src="html/ng2/assets/img/company-details/edit-blue.svg" alt="user" />  

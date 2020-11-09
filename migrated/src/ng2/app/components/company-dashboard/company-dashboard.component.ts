@@ -273,12 +273,10 @@ export class CompanyDashboardComponent implements OnInit {
             element.eTime = new Date('01/01/1990 ' + e1)
             element.checked = true
             let current = parseInt(moment(new Date()).format('hh'));
-            if (day.toLowerCase() === element.dayOfWeek.toLowerCase() && this.getTimeFormat(element.startTime) == moment(new Date()).format('A') && this.timeFormatter(element.endTime) - 1 == current) {
+            if (day.toLowerCase() === element.dayOfWeek.toLowerCase() && this.getTimeFormat(element.startTime) == moment(new Date()).format('A') && this.timeFormat(element.endTime) - 1 == current) {
               this.closingSoon = true;
             }
           }
-
-          
         });
       }
       
@@ -440,6 +438,19 @@ export class CompanyDashboardComponent implements OnInit {
   }
 
   timeFormatter(time) {
+    if (time && time > 0) {
+      var seconds = time > 43200 ? time - 43200 : time;
+      var hours = Math.floor(seconds / 3600);
+      var hoursToReturn = hours.toString().length > 1 ? hours : '0' + hours;
+      var minutes = Math.floor((seconds - (hours * 3600)) / 60);
+      var minutesToreturn = minutes.toString().length > 1 ? minutes : '0' + minutes;
+      return hoursToReturn  + ':' + minutesToreturn;
+    } else {
+      return 0;
+    }
+  }
+
+  timeFormat(time) {
     if (time && time > 0) {
       var seconds = time > 43200 ? time - 43200 : time;
       var hours = Math.floor(seconds / 3600);

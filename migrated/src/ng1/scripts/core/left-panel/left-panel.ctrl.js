@@ -311,7 +311,7 @@
           }
 
           if (tabToActivate == 'CompanyDashboardPage') {
-            $scope.goToTab(`#/ng2/company-dashboard`);
+            $scope.goToTab(`#/ng2/company-dashboard/${company_id}`);
             return;
           }
 
