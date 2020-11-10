@@ -46,7 +46,7 @@
     <div class="select-product__footer-add-product qt-ff-gm" (click)="onCreateProduct()">+ Add New Item</div>
   </div>
   <div *ngIf="isCreateproduct" [ngClass]="classAddProduct">
-    <div class="create-product --modal">
+    <div class="create-product --modal quote-create-product-modal">
       <h3 class="create-product__title">Create Product</h3>
       <app-inventory-add-body   #body (onClose)="isCreateproduct = false"></app-inventory-add-body>
     </div>
