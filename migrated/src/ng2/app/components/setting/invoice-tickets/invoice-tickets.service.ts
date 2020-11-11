@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class InvoiceTicketsService {
   private apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   /**
    * get company profile
@@ -22,7 +22,7 @@ export class InvoiceTicketsService {
   /**
    * get current company
    */
-  currentCompany(){
+  currentCompany() {
     return this.http.get(`${this.apiUrl}company/current`);
   }
 
@@ -62,6 +62,14 @@ export class InvoiceTicketsService {
     return this.http
       .put(`${this.apiUrl}settings/emailPages/taxNumber`, taxIds)
       .pipe(map(data => data));
+  }
+
+  public updateTermsAndConditions(termsAndConditions) {
+    return this.http.put(this.apiUrl + `settings/companyProfile/invoiceSettings`, {
+      emailSettingPageNumberFormDto: {
+        termsAndConditions: termsAndConditions
+      }
+    });
   }
 
   /**

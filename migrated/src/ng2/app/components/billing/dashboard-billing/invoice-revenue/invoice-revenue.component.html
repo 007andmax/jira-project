@@ -1,0 +1,52 @@
+<div class="contract-dashboard-chart-card qt-mr-16">
+  <div class="contract-dashboard-chart-card__header">
+    <div class="contract-dashboard-chart-card__header-title">Invoice Revenue</div>
+    <app-multi-datepicker-dashboard  #datesDp (selectedDate)="filterByDate($event)"></app-multi-datepicker-dashboard>
+  </div>
+
+  <div class="contract-dashboard-chart-card__chart-content">
+    <nvd3 [options]="chartOptions" [data]="data" #nvd3></nvd3>
+
+    <div class="contract-dashboard-chart-card__chart-info">
+      <div class="contract-dashboard-chart-card__title" [textContent]="invoiceRevenue.collectedSum | currency"></div>
+      <div class="contract-dashboard-chart-card__subtitle">Total Revenue</div>
+    </div>
+  </div>
+
+
+  <div class="contract-dashboard-chart-card__footer">
+
+    <div class="contract-dashboard-chart-card__footer-item">
+      <div class="contract-dashboard-chart-card__footer-item-title-block">
+        <div style="background-color: #0747a6;" class="contract-dashboard-chart-card__footer-item-box"></div>
+        <div>
+          <div class="contract-dashboard-chart-card__footer-item-title">Invoiced</div>
+          <div class="contract-dashboard-chart-card__footer-item-value" [textContent]="invoiceRevenue.invoicedSum | currency"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="contract-dashboard-chart-card__footer-item">
+      <div class="contract-dashboard-chart-card__footer-item-title-block">
+        <div style="background-color: #00ccff;" class="contract-dashboard-chart-card__footer-item-box"></div>
+        <div>
+          <div class="contract-dashboard-chart-card__footer-item-title">Collected</div>
+          <div class="contract-dashboard-chart-card__footer-item-value" [textContent]="invoiceRevenue.collectedSum | currency"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contract-dashboard-chart-card__footer-item">
+      <div class="contract-dashboard-chart-card__footer-item-title-block">
+        <div style="background-color: #cdecff;" class="contract-dashboard-chart-card__footer-item-box"></div>
+        <div>
+          <div class="contract-dashboard-chart-card__footer-item-title">Outstanding</div>
+          <div class="contract-dashboard-chart-card__footer-item-value" [textContent]="invoiceRevenue.outstandingSum | currency"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

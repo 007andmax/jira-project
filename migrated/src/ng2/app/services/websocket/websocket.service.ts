@@ -14,6 +14,13 @@ import { TaxesRealTimeService } from '../../states/taxes/taxes-real-time.service
 import { GlNumberRealTimeService } from '../../states/gl-number/gl-number-real-time.service';
 import { InventoryRealTimeService } from '../../states/inventory/inventory-real-time.service';
 import { TicketsRealTimeService } from '../../states/tickets/tickets-real-time.service';
+import { BillableRealTimeService } from '../../states/billable/billable-real-time.service';
+import { InvoiceRealTimeService } from '../../states/invoice/invoice-real-time.service';
+import { PaymentsRealTimeService } from '../../states/payments/payments-real-time.service';
+import { DefaultServicesRealTimeService } from '../../states/default-services/default-services-real-time.service';
+import { ContractsRealTimeService } from '../../states/contracts/contracts-real-time.service';
+ 
+import { ShellRealTimeService } from '../../states/shell/shell-real-time.service';
 
 /**
  * Websocket service to work with api
@@ -46,8 +53,13 @@ export class WebsocketService {
     private taxesRealTimeService: TaxesRealTimeService,
     private glNumberRealTimeService: GlNumberRealTimeService,
     private inventoryRealTimeService: InventoryRealTimeService,
-    private ticketsRealTimeService: TicketsRealTimeService
-
+    private ticketsRealTimeService: TicketsRealTimeService,
+    private paymentsRealTimeService: PaymentsRealTimeService,
+    private billableRealTimeService: BillableRealTimeService,
+    private invoiceRealTimeService: InvoiceRealTimeService,
+    private defaultServicesRealTimeService: DefaultServicesRealTimeService,
+    private contractsRealTimeService: ContractsRealTimeService,
+    private shellRealTimeService: ShellRealTimeService
 
   ) {
   }
@@ -70,6 +82,14 @@ export class WebsocketService {
       that.subsribeToTicketActualNumber();
       that.subsribeToTickets();
       that.subsribeToCmdShellOutput();
+      that.subsribeToBillable();
+      that.subsribeToInvoiceNumber();
+      that.subsribeToBillableCount();
+      that.subsribeToInvoice();
+      that.subsribeToSubmittedTicket();
+      that.subsribeToPayments();
+      that.subsribeToSubmittedService();
+      that.subsribeToSubmittedServiceAgreement();
     });
   }
   private subsribeToDevices() {
@@ -273,11 +293,89 @@ export class WebsocketService {
     }, 3000);
   }
 
+  public subsribeToBillable() {
+
+    setTimeout(() => {
+
+      this.stompClient.subscribe(`/user/watch/billablePage`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.billableRealTimeService.handleRealTimeChangesBillable(newChange);
+
+      });
+
+    }, 3000);
+  }
+
   public subsribeToCmdShellOutput() {
     setTimeout(() => {
       this.stompClient.subscribe(`/user/watch/cmdShellOutput`, (message) => {
         var newChange = JSON.parse(message.body);
-        console.log("newChange", newChange);
+        // console.log("newChange", newChange);
+        this.shellRealTimeService.handleRealTimeChanges(newChange);
+      });
+
+    }, 3000);
+  }
+  public subsribeToInvoiceNumber() {
+    setTimeout(() => {
+      this.stompClient.subscribe(`/user/watch/number/INVOICE`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.invoiceRealTimeService.handleRealTimeChangesNumber(newChange);
+      });
+
+    }, 3000);
+  }
+  public subsribeToBillableCount() {
+    setTimeout(() => {
+      this.stompClient.subscribe(`/user/watch/leftPanelCounts`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.billableRealTimeService.handleRealTimeChangesBillableCount(newChange);
+      });
+
+    }, 3000);
+  }
+  public subsribeToInvoice() {
+    setTimeout(() => {
+      this.stompClient.subscribe(`/user/watch/receivableInvoice`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.invoiceRealTimeService.handleRealTimeChangesInvoice(newChange);
+      });
+
+    }, 3000);
+  }
+  public subsribeToSubmittedTicket() {
+    setTimeout(() => {
+      this.stompClient.subscribe(`/user/watch/userSubmittedTicket`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.usersRealTimeService.handleRealTimeSubmittedTicket(newChange);
+      });
+
+    }, 3000);
+  }
+  public subsribeToPayments() {
+    setTimeout(() => {
+      this.stompClient.subscribe(`/user/watch/payments`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.paymentsRealTimeService.handleRealTimeChanges(newChange);
+      });
+    });
+  }
+
+  public subsribeToSubmittedService() {
+    setTimeout(() => {
+      this.stompClient.subscribe(`/user/watch/service`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.defaultServicesRealTimeService.handleRealTimeChanges(newChange);
+      });
+
+    }, 3000);
+  }
+
+  public subsribeToSubmittedServiceAgreement() {
+    setTimeout(() => {
+      this.stompClient.subscribe(`/user/watch/serviceAgreement`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.contractsRealTimeService.handleRealTimeChanges(newChange);
       });
 
     }, 3000);

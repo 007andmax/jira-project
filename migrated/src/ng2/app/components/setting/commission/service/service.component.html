@@ -32,7 +32,7 @@
               href="javascript:;"
               data-tooltip="Remove"
               class="remove"
-              (click)="removeServiceRate(i, service, false)"
+              (click)="confirmServiceDelete(i, service, false)"
               ><img src="../../../../../../ng1/images/setting-module/remove.svg" alt="Remove"
             /></a>
 
@@ -67,7 +67,7 @@
                           <input
                             type="submit"
                             (click)="
-                              setServiceRate(
+                            confirmServiceEdit(
                                 commissionRate.value,
                                 service.versionedId.id,
                                 service,
@@ -164,7 +164,7 @@
                           <input
                             type="submit"
                             (click)="
-                              setServiceRate(
+                            confirmServiceEdit(
                                 commissionRate.value,
                                 service.id,
                                 service,
@@ -195,3 +195,75 @@
   </div>
   <!-- <div class="loading" *ngIf="loading"></div> -->
 </div>
+<div class="img-croparea deletePopup" *ngIf="deleteServicePopup">	
+    <div class="crop-inner">	
+      <div class="cropping">	
+        <div class="popup-message">	
+          <span class="icon-part">	
+            <img	
+              src="../../../../../ng1/images/setting-module/delete-red.svg"	
+              alt="delete"	
+          />	
+          </span>	
+          <div class="message-right">	
+            <h1>Delete Service Commission Rate</h1>	
+            <p>Are you sure you want {{this.service.name}} commission rate to zero?</p>	
+          </div>	
+          <a class="close-ico" href="javascript:;" (click)="deleteServicePopup = false"	
+            ><img	
+              src="../../../../../ng1/images/setting-module/close.svg"	
+              alt="close"	
+          /></a>	
+        </div>	
+        <div class="btn-crops">	
+          <button	
+            type="button"	
+            class="btn btn-primary"	
+            (click)="deleteServicePopup = false;removeServiceRate()"	
+          >	
+            Yes, I am sure	
+          </button>	
+          <button	
+            type="button"	
+            class="btn btn-secondary"	
+            (click)="deleteServicePopup = false"	
+          >	
+            Cancel	
+          </button>	
+        </div>	
+      </div>	
+    </div>	
+  </div>	
+  	
+  <div class="img-croparea deletePopup" *ngIf="confirmServicePopup">	
+    <div class="crop-inner">	
+      <div class="cropping">	
+        <div class="popup-message">	
+          <div class="message-right">	
+            <p>Do you want this commission to fact old items?</p>	
+          </div>	
+          <a class="close-ico" href="javascript:;" (click)="factItem = false;confirmServicePopup = false;setServiceRate()"	
+            ><img	
+              src="../../../../../ng1/images/setting-module/close.svg"	
+            alt="close"	
+          /></a>	
+        </div>	
+        <div class="btn-crops">	
+          <button	
+            type="button"	
+            class="btn btn-primary"	
+            (click)="factItem = true;confirmServicePopup = false;setServiceRate()"	
+          >	
+            Yes, I want	
+          </button>	
+          <button	
+            type="button"	
+            class="btn btn-secondary"	
+            (click)="factItem = false;confirmServicePopup = false;setServiceRate()"	
+          >	
+            Cancel	
+          </button>	
+        </div>	
+      </div>	
+    </div>	
+  </div>

@@ -4,21 +4,14 @@ import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { NgbActiveModal, NgbModalConfig, NgbModal } from "@ng-bootstrap/ng-bootstrap";
-
 import { USER } from "../../../const/users";
-import { UsersService } from "../../users/users.service";
-import { QuoteStateService } from "../../../components/billing/quotes/quote-create/quote-state.service";
-import { QuoteService } from "../../quote/quote.service";
-import { takeUntil } from "rxjs/operators";
 import { Subject, Subscription } from "rxjs";
- 
 import { ConfirmStateService } from 'src/ng2/app/components/shared/confirm/services/confirm-state.service';
 import { ConfirmComponent } from 'src/ng2/app/components/shared/confirm/confirm.component';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
-import { NotificationStateService } from 'src/ng2/app/components/shared/notification/services/notification-state.service';
 import { SAVE_AND_SEND } from 'src/ng2/app/const/confirm';
- 
- 
+import { QuoteStateService } from 'src/ng2/app/states/quote/quote-state.service';
+import {  QUOTE_MODAL_ACTION_ADD, QUOTE_MODAL_ACTION_EDIT, QUOTE_MODAL_ACTION_LIST, QUOTE_MODAL_ACTION_PREVIEW } from 'src/ng2/app/const/quote';
 
 /**
  * Modal quote component
@@ -40,23 +33,22 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
   message: string;
   subject: string;
   focus = false;
-  isResend = false;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   userCtrl = new FormControl();
   selectedUsers = [];
   showError = false;
-  showErrorClient = false;
   usersEmails = [];
   users = [];
   initialized: boolean = false;
   showConfirm: boolean = false;
   sub: Subscription = new Subscription();
-  isChange:boolean = false;
+  isChange: boolean = false;
 
 
   private unsubscribe: Subject<void> = new Subject();
   @Input() public data;
-  @Input() public onlySendMode = false;
+  @Input() public action;
+  
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
@@ -69,30 +61,24 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
    */
   public constructor(
     public activeModal: NgbActiveModal,
-    private userService: UsersService,
     private quoteStateService: QuoteStateService,
-    private quoteService: QuoteService,
-    private notificationStateService: NotificationStateService,
-    private eRef: ElementRef,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     config: NgbModalConfig,
-    private usersStateService:UsersStateService
+    private usersStateService: UsersStateService
   ) {
     config.backdrop = 'static';
     config.keyboard = false;
-    
+
   }
 
   /**
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-   
-    (this.data) && this.initResendMode();
-    this.getAllUsers();
+    this.initResendMode();
+    this.getAllUsers(this.data.companyId);
     this.userInput.nativeElement.onblur = (e) => {
-      
       if (this.matAutocomplete.isOpen) {
         let modal = this.matAutocomplete.panel.nativeElement;
         modal.parentNode.style.width = 'max-content';
@@ -101,8 +87,6 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) this.close();
       this.showConfirm = false;
-    
-
     })
     this.sub.add(getConfirm);
   }
@@ -127,8 +111,8 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
     if (this.isChange) {
       this.showConfirm = true;
       this.confirmStateService.setConfirmAction(SAVE_AND_SEND);
-      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
-      
+      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+
       modalRef.componentInstance.message = 'Do you want to close this window? All entered information will be lost.';
     }
   }
@@ -160,7 +144,6 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
       this.selectedUsers.splice(index, 1);
       this.usersEmails.splice(index, 1);
       this.quoteStateService.setUsersEmail(this.usersEmails);
-      // this.isResend && (this.data.recipients = this.usersEmails);
     }
   }
 
@@ -180,28 +163,12 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
   /**
    * Get user list
    */
-  private getAllUsers() {
-    this.showErrorClient = false;
-    const company = (this.data && this.data.company && this.data.company.id) || this.quoteStateService.getClient();
-    if (company || company.id) {
-     let userList =  this.usersStateService.getAllUsers();
-        this.initialized = true;
-        const techUser = userList.filter((item) => item.accountType === USER.TYPE.TECH && !item.deletedAt);
-        let clientUser = [];
-        if (typeof company === 'string' || company instanceof String) {
-          clientUser = userList.filter((item) => {
-            return item.accountType === USER.TYPE.CLIENT && item.company.id == company && !item.deletedAt
-          });
-        } else {
-          clientUser = userList.filter((item) => {
-            return item.accountType === USER.TYPE.CLIENT && item.company.id == company.id && !item.deletedAt
-          });
-        }
-        this.users = [...techUser, ...clientUser];
-   //   })
-    } else {
-      this.showErrorClient = true;
-    }
+  private getAllUsers(companyId) {
+    let userList = this.usersStateService.getAllUsers();
+    this.initialized = true;
+    const techUser = userList.filter((item) => item.accountType === USER.TYPE.TECH && !item.deletedAt);
+    let clientUser = userList.filter((item) => item.accountType === USER.TYPE.CLIENT && item.company.id == companyId && !item.deletedAt);
+    this.users = [...techUser, ...clientUser];
   }
 
   /**
@@ -210,8 +177,6 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
    */
   public setSubject(value) {
     this.subject = value;
-    // this.quoteStateService.setSubject(value);
-    // this.isResend && (this.data.subject = value);
   }
 
   /**
@@ -220,19 +185,17 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
    */
   public setMessage(value) {
     this.message = value;
-    //  this.quoteStateService.setMessage(value);
-    // this.isResend && (this.data.message = value);
   }
 
   private onInitSubjectAndMessage() {
-    this.quoteStateService.setSubject(this.subject);
-    this.quoteStateService.setMessage(this.message);
+    this.data.message = this.message;
+    this.data.subject = this.subject;
   }
 
-public onCheckForClose() {
-  this.onCheckChange();
-  if (!this.isChange) this.close();
-}
+  public onCheckForClose() {
+    this.onCheckChange();
+    if (!this.isChange) this.close();
+  }
 
   /**
    * Save quote
@@ -240,32 +203,30 @@ public onCheckForClose() {
   public save() {
     this.showError = false;
     if ((this.data && this.data.recipients.length > 0 && !!this.data.recipients[0]) || (this.usersEmails && this.usersEmails.length > 0)) {
-      if (!this.isResend) {
+      this.onInitSubjectAndMessage();
+      this.data.recipients = this.usersEmails;
+      if (this.action === QUOTE_MODAL_ACTION_PREVIEW) this.quoteStateService.saveSandModePreview(this.data);
+      if (this.action === QUOTE_MODAL_ACTION_EDIT) this.quoteStateService.saveSandModeEdit(this.data);
+      if (this.action === QUOTE_MODAL_ACTION_ADD) this.quoteStateService.saveSandMode(this.data);
+      if (this.action === QUOTE_MODAL_ACTION_LIST) this.quoteStateService.saveSandModeList(this.data);
+      
+    /*  if (!this.isResend) {
         this.onInitSubjectAndMessage();
-        this.quoteStateService.saveSandMode();
+        this.data.recipients = this.usersEmails;
+        this.quoteStateService.saveSandMode(this.data);
       } else {
         if (!this.data.id) {
           this.onInitSubjectAndMessage();
-          this.quoteStateService.saveSandMode();
+          this.data.recipients = this.usersEmails;
+          this.quoteStateService.saveSandMode(this.data);
         } else {
-          this.data.message = this.message;
-          this.data.subject = this.subject;
-
-          this.quoteService.resend(this.data, this.selectedUsers)
-            .pipe(takeUntil(this.unsubscribe))
-            .subscribe((res) => {
-              if (res) {
-                this.quoteService.repeatSend(res['id']).subscribe((res) => { })
-                if (!this.onlySendMode) this.quoteStateService.goToQuote();
-
-              }
-              this.unsubscribe.next();
-              this.unsubscribe.complete();
-            })
+          this.onInitSubjectAndMessage();
+          this.data.recipients = this.usersEmails;
+          this.quoteStateService.saveSandModeEdit(this.data);
         }
 
 
-      }
+      }*/
       this.activeModal.close();
     } else {
       this.showError = true;
@@ -276,21 +237,16 @@ public onCheckForClose() {
    * Init resend mode
    */
   public initResendMode() {
-    this.isResend = true;
-    if (this.data.recipients && this.data.recipients.length === 0) {
-      this.message = this.data.message && this.data.message !== "null" ? JSON.parse(JSON.stringify(this.data.message)) : '';
-      this.subject = this.data.subject && this.data.subject !== "null" ? JSON.parse(JSON.stringify(this.data.subject)) : '';
+ 
+    if (this.data.recipients && this.data.recipients.length > 0 && this.data.recipients[0] !== "") {
+      this.selectedUsers = JSON.parse(JSON.stringify([...this.data.recipients]));
+      this.usersEmails = JSON.parse(JSON.stringify([...this.data.recipients]));
     } else {
-      if (this.data.recipients && this.data.recipients.length > 0 && this.data.recipients[0] !== "") {
-        this.selectedUsers = JSON.parse(JSON.stringify([...this.data.recipients]));
-      } else {
-        this.data.recipients = [];
-        this.selectedUsers = JSON.parse(JSON.stringify([...this.data.recipients]));
-      }
-      this.message = this.data.message && this.data.message !== "null" ? JSON.parse(JSON.stringify(this.data.message)) : '';
-      this.subject = this.data.subject && this.data.subject !== "null" ? JSON.parse(JSON.stringify(this.data.subject)) : '';
+      this.data.recipients = [];
+      this.selectedUsers = JSON.parse(JSON.stringify([...this.data.recipients]));
     }
-
+    this.message = this.data.message && this.data.message !== "null" ? JSON.parse(JSON.stringify(this.data.message)) : '';
+    this.subject = this.data.subject && this.data.subject !== "null" ? JSON.parse(JSON.stringify(this.data.subject)) : '';
   }
 
   /**
@@ -304,9 +260,7 @@ public onCheckForClose() {
   }
 
   public keyup(e) {
-
     if (e.keyCode === 13) {
-
       if (this.userInput.nativeElement.value.length > 0) {
         this.selectedUsers.push(this.userInput.nativeElement.value);
         this.usersEmails.push(this.userInput.nativeElement.value);

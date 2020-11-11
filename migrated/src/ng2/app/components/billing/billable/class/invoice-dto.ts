@@ -1,0 +1,51 @@
+import { CompanyProfileAddress } from '../../../companies/class/company-profile-address';
+import { User } from '../../../users/class/user';
+import { BillableProfileTicket } from './billable-profile-ticket';
+import { InvoiceNote } from './invoice-note';
+import { UserPhoneNumber } from '../../../users/class/user-phone-number';
+import { InvoiceCompany } from './invoice-company';
+import { InvoiceDtoBillTo } from './invoice-dto-bill-to';
+import { InvoiceDtoShipTo } from './invoice-dto-ship-to';
+import { InvoiceProfileTicket } from './invoice-profile-ticket';
+import { InvoiceDiscount } from '../billable-aside/invoice-form/invoice-discount/class/invoice-discount';
+
+export class InvoiceDto {
+    billTo: Array<InvoiceDtoBillTo> = [];
+    billingAddress: string;
+    company: InvoiceCompany;
+    companyName: string;
+    date: number;
+    defaultBillTo: number;
+    defaultShipTo: number;
+    discountSum: number;
+    dueDate: number;
+    globalNote: InvoiceNote;
+    hasDiscount: boolean;
+    hasTaxRates: boolean;
+    invoiceContact: User;
+    number: string;
+    phoneNumbers: Array<UserPhoneNumber> = [];
+    productsSum: number;
+    regularNote: any;
+    senderAddress: string;
+    senderUser: User;
+    servicesSum: number;
+    shipTo: Array<InvoiceDtoShipTo> = [];
+    shippingAddress: string;
+    taxId: string;
+    taxIdDescription: string;
+    taxSum: number;
+    techCompanyName: string;
+    termsAndConditions: string;
+    tickets: Array<InvoiceProfileTicket>;
+    totalSum: number;
+    invoiceDiscount:InvoiceDiscount;
+    constructor(data) {
+        for (const key in data) {
+            this[key] = data[key];
+        }
+        this.tickets = (data.tickets) ? data.tickets.map(item => {
+            return new InvoiceProfileTicket(item);
+        }) : [];
+    }
+}

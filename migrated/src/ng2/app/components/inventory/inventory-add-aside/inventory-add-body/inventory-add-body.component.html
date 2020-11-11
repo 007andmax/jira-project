@@ -7,7 +7,7 @@
       </mat-error>
 
       <p class="label-name">Item number</p>
-      <input type="text" class="qt-input-40" [(ngModel)]="inventory.manufacture" (blur)="onCheckManufacture()" placeholder="Enter Item number">
+      <input type="text" class="qt-input-40 inventory-add-body__input" [(ngModel)]="inventory.manufacture" (blur)="onCheckManufacture()" placeholder="Enter Item number">
     </div>
 
     <div class="create-product__col">
@@ -15,7 +15,7 @@
         This number already occupied
       </mat-error>
       <p class="label-name">ILC number</p>
-      <input type="text" class="qt-input-40" [(ngModel)]="inventory.ilc"  (blur)="onCheckILC()" placeholder="Enter ILC number">
+      <input type="text" class="qt-input-40 inventory-add-body__input" [(ngModel)]="inventory.ilc"  (blur)="onCheckILC()" placeholder="Enter ILC number">
     </div>
 
     <div class="create-product__col">
@@ -42,13 +42,13 @@
 
   <div class="qt-inputs-row">
     <div class="create-product-taxes-select">
-      <app-taxes (taxesChange)="onTaxesChange($event)"></app-taxes>
+      <app-taxes [selectedTax]="defaultSelectedTax" (taxesChange)="onTaxesChange($event)"></app-taxes>
     </div>
   <!--        <div class="col-md-6"  *ngIf="!validate.getCostSale()">-->
   <!--        </div>-->
     <div class="create-product__col">
       <p class="label-name">Cost</p>
-      <input class="qt-input-40"  type="text" number [money]="true" (blur)="validate.checkPriceCost(inventory.sale,inventory.cost)" [(ngModel)]="inventory.cost"  placeholder="Enter Cost">
+      <input class="qt-input-40 inventory-add-body__input"  type="text" number [money]="true" (blur)="validate.checkPriceCost(inventory.sale,inventory.cost)" [(ngModel)]="inventory.cost"  placeholder="Enter Cost">
       <mat-error style="top: 73px; left: 15px; width: 200px;" *ngIf="!validate.getCostSale()">
         Cost cannot be higher than Price
       </mat-error>
@@ -59,7 +59,7 @@
         Price is required
       </mat-error>
       <p class="label-name">Price</p>
-      <input class="qt-input-40"  type="text" number [money]="true"  [(ngModel)]="inventory.sale" (blur)="validate.checkPriceCost(inventory.sale,inventory.cost)" (input)="validate.resetSale()"  placeholder="Enter Price">
+      <input class="qt-input-40 inventory-add-body__input"  type="text" number [money]="true"  [(ngModel)]="inventory.sale" (blur)="validate.checkPriceCost(inventory.sale,inventory.cost)" (input)="validate.resetSale()"  placeholder="Enter Price">
     </div>
   </div>
 

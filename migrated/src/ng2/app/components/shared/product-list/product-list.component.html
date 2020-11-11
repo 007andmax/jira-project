@@ -1,6 +1,9 @@
 <div class="product-dropdown-new-ng light-dropdown select-product" ngbDropdown [autoClose]="'outside'" #products="ngbDropdown" (openChange)="onCloseProducts($event)" >
+  <mat-error  class="qt-tooltip-error qt-w-auto-important" *ngIf="!validate">
+    Product is required
+  </mat-error>
   <input class="pointer select-product__input" type="text"
-    [ngClass]="{'no-valid': isFormValid}" placeholder="Search or Add product" (input)="onSearch($event)"
+  [ngClass]="{'--input-error' : !validate}" placeholder="Search or Add product" (input)="onSearch($event)"
     id="dropdownProducts" ngbDropdownToggle>
     <span *ngIf="itemList">
       <i *ngIf="selectedItem"

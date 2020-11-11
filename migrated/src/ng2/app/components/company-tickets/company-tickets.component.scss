@@ -3,8 +3,8 @@
     min-width: 1064px;
     width: auto;
     margin: 0 auto;
-  
-  
+
+
     th {
      white-space: nowrap;
     }
@@ -18,16 +18,16 @@
     overflow-x: auto;
     min-height: calc(100vh - 165px);
   }
-  
+
   .priority-icon {
     margin-left: 8px;
   }
-  
+
   app-tickets-table-item {
     display: contents;
   }
-  
-  
+
+
   @media (min-width: 1920px) {
     /deep/ .ticket-table {
       width: 100%;
@@ -39,8 +39,8 @@
       margin: 0 auto;
     }
   }
-  
-  
+
+
   .pengind-loading {
     bottom: 20px;
     top: auto;
@@ -49,16 +49,13 @@
   /deep/.main-container {
     background-color: #edf2f6;
   }
-  
+
   .ticket-fileupload {
     margin-top: 32px;
   }
-  
-  .page-list-ticket {
-    padding: 0 24px 24px 24px;
-  }
-  
-  
+
+ 
+
   /deep/ .ticket-table {
     &__requested-by {
       max-width: 166px;
@@ -74,7 +71,7 @@
       max-width: 148px;
       width: 148px;
       min-width: 148px;
-  
+
     }
     &__assignee {
        max-width: 147px;
@@ -93,7 +90,7 @@
        min-width: 100px;
     }
   }
-  
+
   @media (min-width: 1920px) {
     /deep/ .ticket-table {
       &__requested-by {
@@ -128,4 +125,3 @@
       }
     }
   }
-  

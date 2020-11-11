@@ -1,0 +1,33 @@
+<div class="date-picker" (clickOutside)="hideDatePicker()">
+  <div class="date-picker-header" (click)="toggleDatePicker()">
+         <p  class="pointer" [textContent]="getSelectedInterval()"  ></p>
+  <i *ngIf="selectedDateModel"
+     class="icn-sm icn-remove-old"
+     (click)="clearDate()"></i>
+  <i *ngIf="!selectedDateModel"  
+     class="icn-16 icn-calendar-light pointer"></i>
+    </div>
+  <div  class="dropdown-menu show" *ngIf="showDatePicker">
+    <ngb-datepicker #dp (select)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" [outsideDays]="outsideDays"  >
+    </ngb-datepicker>
+    <ng-template #t let-date let-focused="focused">
+        <span class="custom-day"
+              [class.focused]="focused"
+              [class.range]="isRange(date)"
+              [class.faded]="isHovered(date) || isInside(date)"
+              (mouseenter)="hoveredDate = date"
+              (mouseleave)="hoveredDate = null">
+          {{ date.day }}
+        </span>
+    </ng-template>
+    <div class="date-picker-actions clearfix">
+      <div class="col-md-12 p-0 mb-5 d-f">
+        <button class="btn-new btn-primary-white" (click)="selectCurrentMonth();">this month</button>
+        <button class="btn-new btn-primary-white" (click)="selectLastMonth();">last month</button>
+        <button class="btn-new btn-primary-white" (click)="selectLast90Days();">90 day</button>
+        <button class="btn-new btn-primary-white" (click)="selectYearToDate();">year to date</button>
+      </div>
+      
+    </div>
+  </div>
+</div>

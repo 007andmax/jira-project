@@ -5,13 +5,12 @@
   angular.module('quicktech.core.leftPanel').controller('quicktech.core.leftPanel.leftPanelCtrl',
     ['$scope', 'quicktech.common.services.SharedStateService', '$state', '$rootScope', 'DevicesService',
       'quicktech.common.services.PermissionsService',
-      'CompaniesService', 'TutorialsService', '$uibModal',
+      'CompaniesService', '$uibModal',
       'TicketsService', 'ColorsService', 'TagsService', 'CustomStorageService', 'UsersService',
-      '$timeout', '$location', 'ReceivableService', 'TaxesService', 'PaymentsService', 'ProductsService',
+      '$timeout', '$location', 'TaxesService', 'ProductsService',
       'quicktech.common.services.UserConfirmationsService', '$stateParams',
-      function ($scope, SharedStateService, $state, $rootScope, DevicesService, PermissionsService, CompaniesService,
-        TutorialsService, $uibModal, TicketsService, ColorsService, TagsService,
-        CustomStorageService, UsersService, $timeout, $location, ReceivableService, TaxesService, PaymentsService,
+      function ($scope, SharedStateService, $state, $rootScope, DevicesService, PermissionsService, CompaniesService, $uibModal, TicketsService, ColorsService, TagsService,
+        CustomStorageService, UsersService, $timeout, $location, TaxesService,
         ProductsService, UserConfirmationsService, $stateParams) {
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession'),
@@ -60,7 +59,7 @@
         //categories start
         $scope.countOfCategories = 10;
         $scope.inventoryCategoryList = ProductsService.getCategories($scope);
-         
+
         var company_id = localStorage.getItem('company_id') || null;
         $scope.checkDublicateCategory = function () {
           var duplicateCategory = $scope.inventoryCategoryList.filter(function (item) {
@@ -283,7 +282,7 @@
           return $rootScope.exampleCompanyDeleted;
         }, function (val) {
           if (val) {
-           
+
          /*   TicketsService.getAllCounts(function (resp) {
               $scope.ticketsCounter = resp;
             });*/
@@ -315,6 +314,10 @@
             return;
           }
 
+          if (tabToActivate == 'billablePageNew') {
+            $scope.goToTab(`#/ng2/billable`);
+            return;
+          }
           if (tabToActivate == 'CompanyProfileUsersPage') {
             $scope.goToTab(`#/ng2/company-user`);
             return;
@@ -353,7 +356,7 @@
           link.dispatchEvent(e);
         }
 
-        $scope.goToTab = function (url) {
+      /*  $scope.goToTab = function (url) {
           let body = document.querySelector('.left-panel__category-wrap');
           var link = document.createElement('a');
           body.appendChild(link);
@@ -362,7 +365,7 @@
           e.initEvent('click', true, true);
           link.dispatchEvent(e);
         }
-
+*/
         $scope.companyIconClick = function () {
           $scope.isLeftPanelHidden = !$scope.isLeftPanelHidden
         };
@@ -758,14 +761,14 @@
         });
 
         $scope.$watch('ticketFilterTags', function (value) {
-         
+
 
           // var data = value.map(function(el) {
           //   return el.id;
           // })
           //
           // TicketsService.ticketSearch(data, function(resp) {
-          
+
           // })
           // if (value !== "" && value !== " " && value.length > 0) {
           //   ticketsSharedState.filter.completed = false;
@@ -828,7 +831,7 @@
         // $scope.stateBack(null, 'tickets', {
         //   listType: getTicketsListType()
         // });
-        
+
 
         $scope.$watch('ticketsSharedState.filter.techUserId', function (value) {
 
@@ -1059,9 +1062,7 @@
           $scope.companyProfilePasswordsFilter.userId = getUserIdByUserFullName(value)
         };
 
-        TutorialsService.getTypes(function (resp) {
-          $scope.tutorialTypes = resp;
-        });
+        
 
 
         $scope.changeTicketsTagColor = function (type, colorCode) {
@@ -1073,7 +1074,7 @@
             value: jsonObj
           };
           CustomStorageService.saveUserCustomStorageItem(itemToSend, function (resp) {
-            
+
           })
         };
 
@@ -1083,7 +1084,7 @@
             colorCode: colorCode
           };
           ColorsService.putCompaniesColors(dataToSend, function (resp) {
-          
+
           })
         };
 
@@ -1092,13 +1093,13 @@
         });
 
         $scope.changeUserColor = function (type, colorCode) {
-         
+
           var dataToSend = {
             type: type,
             colorCode: colorCode
           };
           ColorsService.putUsersColors(dataToSend, function (resp) {
-            
+
           })
         };
 
@@ -1136,9 +1137,7 @@
         }, function (value) {
           if (value && value !== '^ ') {
 
-            if (!$rootScope.uploadedReceivable || !$rootScope.uploadedReceivable.list) {
-              uploadReceivable();
-            }
+            
 
             $scope.openedCategory = getOpenedCategory(value);
             if ($scope.openedCategory) {
@@ -1160,12 +1159,10 @@
         });
 
         $scope.toggleLeftPanel = function (section, ifIconPart) {
-        
+
           $scope.clearAllFilters()
 
-          if (section === 'billing') {
-            uploadReceivable();
-          }
+          
 
           if (ifIconPart) {
             deactivateAllCompanyProfileTabs();
@@ -1185,20 +1182,7 @@
 
 
 
-        function uploadReceivable() {
-          ReceivableService.getReceivableInvoicesData($scope, function (resp) {
-            $rootScope.uploadedReceivable = resp;
-          })
-        }
-
-        $scope.$watch(function () {
-          return $rootScope.shouldUpdateReceivable;
-        }, function (val) {
-          if (val) {
-            $rootScope.shouldUpdateReceivable = false;
-            uploadReceivable();
-          }
-        })
+       
 
         $scope.showLeftArrowToggleLeftPanel = function () {
           return window.outerWidth <= 1024
@@ -1218,7 +1202,7 @@
 
         $scope.onClickReports = function () {
           $rootScope.isLeftPanelHidden = true;
-       
+
           $scope.openedCategory = getOpenedCategory($state.current.url + ' ' + $state.current.name);
           document.title = 'Reports'
         };
@@ -1295,7 +1279,7 @@
         $scope.clearTicketsFilters = function () {
           clearFilter(ticketsSharedState.filter);
         };
- 
+
         $scope.clearCompaniesFilters = function () {
           clearFilter(companiesSharedState.filter);
           $rootScope.showArchivedCompanies = false;
@@ -1482,7 +1466,7 @@
           }
         });
 
-       
+
 
         $scope.userReadable = function (text) {
           if (!text) {
@@ -1631,11 +1615,11 @@
             return 'inbox';
           } else if (url.indexOf('companies') > -1) {
             return 'companies';
-          } else if (url.indexOf('companyProfile') > -1 || url.indexOf('company-password-manager') > -1 || url.indexOf('company-user') > -1 || url.indexOf('company-dashboard') > -1 || url.indexOf('company-products') > -1 || url.indexOf('company-tickets') > -1) {
+          } else if (url.indexOf('companyProfile') > -1 || url.indexOf('company-password-manager') > -1 || url.indexOf('company-user') > -1 || url.indexOf('company-products') > -1 || url.indexOf('company-tickets') > -1 || url.indexOf('company-contracts') > -1) {
             return 'companyProfile';
           } else if (url.indexOf('users') > -1) {
             return 'users';
-          } else if (url.indexOf('accounting') > -1) {
+          } else if (url.indexOf('accounting') > -1 || url.indexOf('new-services') > -1 ||  url.indexOf('new-contracts') > -1 ||  url.indexOf('billing-dashboard') > -1) {
             return 'billing';
           } else if (url.indexOf('inventory') > -1) {
             return 'inventory';
@@ -1646,6 +1630,8 @@
           } else if (url.indexOf('reports') > -1) {
             return 'reports';
           } else if (url.indexOf('quotes') > -1) {
+            return 'billing';
+          } else if (url.indexOf('billable') > -1 || url.indexOf('payments') > -1) {
             return 'billing';
           } else if (url.indexOf('tickets') > -1) {
             return 'tickets';
@@ -1689,7 +1675,7 @@
         }
 
 
-    
+
         $rootScope.$on('onInitConpaiesList', function(){
           if (company_id) {
              $scope.companyProfilePageUsersList = UsersService.getAllByCompanyIdNonArchived(company_id);

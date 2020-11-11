@@ -1,0 +1,36 @@
+<app-left-panel-billing></app-left-panel-billing>
+<div class="payments-page page-list invoices-page">
+
+  <div class="qt-df qt-fd-c qt-jc-sb invoices-page__list-container">
+    <div>
+      <app-payments-header (onCreatePayment)="onCreatePayment()" (onSortBy)="sortBy($event)"></app-payments-header>
+      <div class="table-container">
+        <table class="qt-table-modern billable-table">
+          <tbody
+          infiniteScroll
+          [infiniteScrollDistance]="2"
+          [infiniteScrollThrottle]="50"
+          [infiniteScrollDisabled]="infiniteScrollDisabled"
+          (scrolled)="onScroll()">
+       <ng-template ngFor let-payment
+                    [ngForOf]="payments"
+                    [ngForTrackBy]="trackById">
+                    <app-payment-item (onRefundPayment)="onRefundPayment($event)" (onEditPayment)="onEditPayment($event)" (onPreviewInvoice)="onPreviewInvoice($event)" (onDetailsPayment)="onDetailsPayment($event)" [payment]="payment"></app-payment-item>
+       </ng-template>
+     </tbody>
+        </table>
+        <div class="loading" *ngIf="showPreloader"></div>
+      </div>
+    </div>
+
+    <div class="total-info">
+      <div class="loading pengind-loading" *ngIf="showPendingPreloader"></div>
+    </div>
+
+  </div>
+</div>
+<app-refund-payment *ngIf="showRefundPayment" [payment]="refundPayment" (onClose)="showRefundPayment = false"></app-refund-payment>
+<app-payments-aside *ngIf="showDetailsPayment" [payment]="detailsPayment" (onClose)="showDetailsPayment = false" (onEditPayment)="onEditPayment($event)" (onRefundPayment)="onRefundPayment($event)"></app-payments-aside>
+<app-invoices-aside-preview #previewInvoiceAside *ngIf="showPreviewInvoice" (onClose)="showPreviewInvoice = false" [invoiceId]="previewInvoiceId"></app-invoices-aside-preview>
+<app-edit-payment *ngIf="showEditPayment" [payment]="editPayment" (onClose)="showEditPayment = false"></app-edit-payment>
+<app-invoices-aside *ngIf="showCreatePayment" (onClose)="onCloseCreatePayment()"></app-invoices-aside>

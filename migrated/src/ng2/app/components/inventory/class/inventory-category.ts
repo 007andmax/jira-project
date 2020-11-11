@@ -6,11 +6,14 @@ export class InventoryCategory   {
     isDefault: boolean;
     default: boolean;
     constructor(data) {
-        this.id = data.id;
-        this.name= data.name;
-        this.productsAmount= data.productsAmount;
-        this.commissionRate= data.commissionRate;
-        this.isDefault= data.isDefault;
-        this.default= data.default;
+        if (data) {
+            this.id = data.id;
+            this.name= data.name;
+            this.productsAmount= data.productsAmount;
+            this.commissionRate= data.commissionRate;
+            this.isDefault= data.isDefault;
+            this.default= data.default;
+        }
+      
     }
 }

@@ -111,7 +111,7 @@
                 >
                   <div
                     class="email-note-wrape"
-                    *ngIf="techUseremailNotificationList"
+                    *ngIf="techUseremailNotificationList && techUseremailNotificationList[techUser.id]"
                   >
                     <h5>Set Email Notification for Tech User</h5>
                     <ul class="list-unstyled">
@@ -276,7 +276,7 @@
                 >
                   <div
                     class="email-note-wrape"
-                    *ngIf="archivedtechUseremailNotificationList"
+                    *ngIf="archivedtechUseremailNotificationList && archivedtechUseremailNotificationList[techUser.id]"
                   >
                     <h5>Set Email Notification for Tech User</h5>
                     <ul class="list-unstyled">
@@ -661,8 +661,16 @@
           </div>
           <div class="cropping">
             <div class="img-crop">
-              <image-cropper
+              <!-- <image-cropper
                 [imageBase64]="imageBase64"
+                [imageChangedEvent]="imageChangedEvent"
+                [maintainAspectRatio]="false"
+                [aspectRatio]="4 / 3"
+                [resizeToWidth]="128"
+                format="png"
+                (imageCropped)="imageCropped($event)"
+              ></image-cropper> -->
+              <image-cropper
                 [imageChangedEvent]="imageChangedEvent"
                 [maintainAspectRatio]="false"
                 [aspectRatio]="4 / 3"

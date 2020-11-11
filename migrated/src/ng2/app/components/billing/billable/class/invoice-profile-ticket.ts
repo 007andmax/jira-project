@@ -1,0 +1,77 @@
+import { BillableProfileTicketProductExpense } from './billable-profile-ticket-product-expense';
+import { BillableProfileTicketServiceExpense } from './billable-profile-ticket-service-expense';
+
+export class InvoiceProfileTicket {
+    id:string;
+    closedAt: number;
+    discountSum: number;
+    number: string;
+    productExpenses: Array<BillableProfileTicketProductExpense>;
+    productsSum: number;
+    serviceExpenses: Array<BillableProfileTicketServiceExpense>;
+    servicesSum: number;
+    subject: string;
+    note: string;
+    taxSum: number;
+    totalSum: number;
+   
+    constructor(data) {
+        for (const key in data) {
+            this[key] = data[key];
+        }
+        this.productExpenses  = data.productExpenses.map(item => {
+            return new BillableProfileTicketProductExpense(item);
+        })
+        this.serviceExpenses  = data.serviceExpenses.map(item => {
+            return new BillableProfileTicketServiceExpense(item);
+        })
+    }
+    public getDateForUpdate() {
+        let productExpenses = [];
+        this.productExpenses.forEach(item => {
+            let taxes = item.taxes.map(tax => {
+                return {id: tax.id};
+            });
+            productExpenses.push({
+                productExpense: {
+                    completed: item.completed,
+                    date: item.date,
+                    discountAmount: item.discountAmount,
+                    discountType: item.discountType,
+                    id: item.id,
+                    item: item.item,
+                    quantity: item.quantity,
+                    serialNumber: null,
+                    taxes: taxes,
+                    user: item.user,
+                },
+                ticketUpdateId: item.ticketUpdate.id
+            })
+        });
+
+        let serviceExpenses = [];
+        this.serviceExpenses.forEach(item => {
+            let taxes = item.taxes.map(tax => {
+                return {id: tax.id};
+            });
+            serviceExpenses.push({
+                serviceExpense: {
+                    completed: item.completed,
+                    date: item.date,
+                    description: item.description,
+                    discountAmount: item.discountAmount,
+                    discountType: item.discountType,
+                    durationEnd: item.durationEnd,
+                    durationStart: item.durationStart,
+                    id: item.id,
+                    item: item.item,
+                    quantity: item.quantity,
+                    user: item.user,
+                    taxes:taxes
+                },
+                ticketUpdateId: item.ticketUpdate.id
+            })
+        });
+        return [...productExpenses,...serviceExpenses];
+    }
+}

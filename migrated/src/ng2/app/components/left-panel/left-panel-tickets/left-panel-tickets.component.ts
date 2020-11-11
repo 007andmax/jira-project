@@ -25,25 +25,10 @@ export class LeftPanelTicketsComponent implements OnInit {
     private leftPanelService: LeftPanelService) { }
 
   ngOnInit() {
-    
     this.ticketsStateService.getOnChangeLeftPanelFilter().subscribe(data => {
       this.listType = data;
     })
-  
-    this.leftPanelService.getColors().subscribe((data: any) => {
-      let listColors = data.map(item => {
-        return new StatusColor(item.backgroundColor, item.borderColor);
-      })
-      this.ticketsStateService.onColorStatus(listColors);
-
-    })
-    this.leftPanelService.getTicketsStatus().subscribe((data: any) => {
-
-      let ticketsColor = new TicketsColor(data);
-      this.ticketsStateService.onInitStatus(ticketsColor);
-    })
     this.getCounts();
-
     this.ticketsStateService.getOnUpdateCounts().subscribe(data => {
       this.ticketsCounts = new TicketsCounts(data);
       this.ticketsStateService.onInitCount(this.ticketsCounts[(this.listType === 'USERS') ? 'USER' : this.listType]);

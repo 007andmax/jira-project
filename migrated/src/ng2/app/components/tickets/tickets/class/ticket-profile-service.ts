@@ -63,6 +63,9 @@ export class TicketProfileService {
     public setQuantity(data) {
         this.quantity = data;
     }
+    public setBillableQuantity(data) {
+        this.billableQuantity = data;
+    }
     public setCompleted (data) {
         this.completed = data;
     }

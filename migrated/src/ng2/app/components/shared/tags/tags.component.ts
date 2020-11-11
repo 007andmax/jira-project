@@ -44,9 +44,10 @@ export class TagsComponent implements OnInit, OnDestroy {
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-    this.tagsService.getTags().subscribe((data) => {
+   let getTags =  this.tagsService.getTags().subscribe((data) => {
       this.tags = data;
     })
+    this.sub.add(getTags);
     this.onInitClearState();
     this.onCheckEditItem();
   }

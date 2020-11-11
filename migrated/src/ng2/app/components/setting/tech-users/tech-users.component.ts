@@ -30,8 +30,8 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
   techUserIdList: any[] = [];
   techRoles: any;
   selectedTechUser: any;
-  techUseremailNotificationList: any;
-  archivedtechUseremailNotificationList: any;
+  techUseremailNotificationList: any = [];
+  archivedtechUseremailNotificationList: any = [];
   techUserForm: FormGroup;
 
   imageBase64 = '';
@@ -43,6 +43,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
   popup: boolean;
   deletepopup: boolean;
   userId: any;
+  IdList: any;
   constructor(
     private techUsersService: TechUsersService,
     private formBuilder: FormBuilder,
@@ -161,14 +162,19 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       .subscribe(
         (techUsers: any) => {
           this.loading = false;$(".loading").css("display", "none");
-          this.archivedemailNotification(this.userlist);
+          // this.archivedemailNotification(this.userlist);
+          let users = this.userlist.filter(user => user.accountType.toLowerCase() === 'tech');
+          this.IdList = users.map(({ id }) => id);
           if (techUsers) {
             this.techUsers = techUsers;
             this.techUserIdList = techUsers.map(({ id }) => id);
+            var IdList1 = [];
             if (this.techUserIdList) {
-              this.emailNotification(this.techUserIdList);
+              // this.emailNotification(this.techUserIdList);
+              IdList1 = this.IdList.concat(this.techUserIdList);
             }
           }
+          this.allEmailNotification(IdList1);
         },
         error => {
           this.loading = false;$(".loading").css("display", "none");
@@ -189,6 +195,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
             this.techUseremailNotificationList = eNotifications;
           }
         })
+        
       )
       .subscribe();
   }
@@ -201,6 +208,24 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
         map(eNotifications => {
           if (eNotifications) {
             this.archivedtechUseremailNotificationList = eNotifications;
+          }
+        })
+      )
+      .subscribe();
+  }
+
+  allEmailNotification(techUserIdList: any) {
+    this.techUsersService
+      .getUsersEmailNotifications(techUserIdList)
+      .pipe(
+        map(eNotifications => {
+          if (eNotifications) {
+            this.IdList.forEach(element => {
+              this.archivedtechUseremailNotificationList.push(eNotifications[element]);
+            });
+            this.techUserIdList.forEach(element => {
+              this.techUseremailNotificationList.push(eNotifications[element]);
+            });
           }
         })
       )
@@ -285,10 +310,10 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
         lastName: techUser.lastName,
         primaryEmail: techUser.primaryEmail,
         techRole: techUser.techRole,
-        newDevice: notification.newDevice,
-        ticketCreated: notification.ticketCreated,
-        myTicketUpdated: notification.myTicketUpdated,
-        ticketCloseNotifications: notification.ticketCloseNotifications,
+        newDevice: notification === undefined || notification.newDevice === undefined ? [''] : notification.newDevice,
+        ticketCreated: notification === undefined ? [''] : notification.ticketCreated,
+        myTicketUpdated: notification === undefined ? [''] : notification.myTicketUpdated,
+        ticketCloseNotifications: notification === undefined ? [''] : notification.ticketCloseNotifications,
         id: techUser.id
       });
     }

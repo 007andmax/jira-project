@@ -10,6 +10,9 @@ import { ToastrService } from 'ngx-toastr';
 export class ContractComponent implements OnInit {
   agreementsCommissions: any;
   oldAgreementsCommissions: any;
+  public deletePopup = false;	
+  public confirmPopup = false;	
+  factItem = false;
   agreementsFlags = {
     commissionRateSetOldSalesBlockTime: false,
     commissionRateSetOldSalesBlockTimeExceeding: false,
@@ -116,7 +119,7 @@ export class ContractComponent implements OnInit {
       !this.oldAgreementsCommissions[this.rate] &&
       this.oldAgreementsCommissions[this.rate] != 0
     ) {
-      if (confirm('Do you want this commission to fact old items?')) {
+      if (this.factItem === true) {
         data[this.flag] = true;
         this.commissionService.setAgreementRates(data, true).subscribe(
           res => {
@@ -165,14 +168,7 @@ export class ContractComponent implements OnInit {
     }
   }
 
-  removeContract(flag: string, rate: string) {
-    this.flag = flag;
-    this.rate = rate;
-    if (
-      confirm(
-        'Are tou want to change rate to be zero & this rate to fact old items?'
-      )
-    ) {
+  removeContract() {
       if (this.rate === 'blockTimeContractCommission') {
         this.isBlockTimeModel = false;
         this.agreementsCommissions.blockTimeContractCommission = 0;
@@ -219,6 +215,25 @@ export class ContractComponent implements OnInit {
           this.loading = false;$(".loading").css("display", "none");
         }
       );
+  }
+
+  confirmDelete(flag: string, rate: string){
+    this.flag = flag;
+    this.rate = rate;
+    this.deletePopup = true;
+  }
+
+  confirmEdit(){
+    if (
+      !this.oldAgreementsCommissions[this.rate] &&
+      this.oldAgreementsCommissions[this.rate] != 0
+    ) {
+      this.confirmPopup = true;
+    } else {
+      this.confirmPopup = false;
+      this.factItem = false;
+      this.setAgreementRate();
     }
+    
   }
 }

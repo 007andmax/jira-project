@@ -208,11 +208,11 @@
             return 'Company Profile';
           } else if ($state.includes("products")) {
             return 'Products';
-          } else if ($state.includes("services")) {
+          } else if ($state.includes("default-services")) {
             return 'Services';
-          } else if ($state.includes("accounting.billable")) {
+          } else if ($state.includes("accounting.billable") || $state.includes("new-billable")) {
             return 'Billable';
-          } else if ($state.includes("receivable")) {
+          } else if ($state.includes("receivable") || $state.includes("new-billable-invoices")) {
             return 'Receivable';
           } else if ($state.includes("receipt-archive")) {
             return 'Receipt Archive';

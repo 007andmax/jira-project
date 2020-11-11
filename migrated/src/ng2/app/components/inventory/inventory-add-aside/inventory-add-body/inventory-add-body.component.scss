@@ -3,3 +3,9 @@
        width: 208px;
     }
   }
+
+.inventory-add-body__input {
+  &::placeholder {
+    color: #9ca5b6;
+  }
+}

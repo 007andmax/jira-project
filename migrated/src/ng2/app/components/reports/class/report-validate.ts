@@ -64,4 +64,13 @@ export class ReportValidate {
         return this.dates && this.monthlyDetailed;
 
     }
+    public isValidateTechService(start, end) {
+        if (start === '' && end === '')  this.dates = false;
+        return this.dates;
+    }
+    public isValidateAccounting(start, end,company) {
+        if (start === '' && end === '')  this.dates = false;
+        if (!company)  this.company = false;
+        return this.dates && this.company;
+    }
 }

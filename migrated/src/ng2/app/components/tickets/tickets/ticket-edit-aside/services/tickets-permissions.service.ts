@@ -154,6 +154,7 @@ export class TicketsPermissionsService {
   }
 
   isSharedToCurrentUser(ticket) {
+    let ab = this.usersStateService.getCurrentUser().id;
     return ticket.shares && ticket.shares.some((share) => {
       return share.user && share.user.id === this.usersStateService.getCurrentUser().id;
     });

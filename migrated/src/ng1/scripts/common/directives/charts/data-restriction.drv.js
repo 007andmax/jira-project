@@ -76,7 +76,6 @@
               }
               $scope.chartTicks = $scope.parseDate($scope.chartData);
             }
-
             lastCanBeShown = canBeShown;
           }
 

@@ -1,0 +1,49 @@
+.contract-time-users {
+    mat-chip {
+      border-radius: 16px !important;
+      border: solid 1px #dfe3e8;
+      background-color: #f4f6f8;
+      padding: 4px;
+      height: 32px;
+  
+      .assigne-user-item {
+        display: flex;
+        align-items: center;
+      }
+  
+      .assigne-user-avatar {
+        height: 24px;
+        width: 24px;
+        border-radius: 50%;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        margin-right: 6px;
+        font-family: Graphik-Medium, sans-serif;
+      }
+  
+      .assigne-user-name {
+        line-height: 1.33;
+        color: #4f5f79;
+        font-size: 12px;
+        margin-right: 4px;
+        opacity: 1;
+      }
+  
+      .assigne-user-cancel-icon {
+        width: 16px;
+        height: 16px;
+        &::before {
+          top: 0;
+          right: 0;
+          width: 16px;
+          height: 16px;
+          background-image: url(/ng2/assets/img/icons/close.svg);
+        }
+      }
+  
+    }
+  }
+  

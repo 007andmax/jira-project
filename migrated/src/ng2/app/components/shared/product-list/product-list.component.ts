@@ -3,6 +3,8 @@ import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { InventoryStateService } from 'src/ng2/app/states/inventory/inventory-state.service';
 import { InventoryChange } from '../../inventory/class/inventory-change';
 import { Subscription } from 'rxjs';
+import { CategoryProductitem } from 'src/ng2/class/category-product-item';
+import { QuoteStateService } from 'src/ng2/app/states/quote/quote-state.service';
 
 /**
  * Product list component
@@ -12,26 +14,29 @@ import { Subscription } from 'rxjs';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss']
 })
-export class ProductListComponent implements OnInit,OnDestroy {
+export class ProductListComponent implements OnInit, OnDestroy {
   @ViewChild('products') products_dropDown: NgbDropdown;
   @Output() selectedProductItem = new EventEmitter<any>();
-  itemList: any;
+  itemList: Array<CategoryProductitem> = [];
   @Input() editItem: any;
   @Input() type: string;
-  classAddProduct:string
+  @Input() validate: boolean = true;
+  
+  classAddProduct: string
   public isFormValid = false;
   isCreateproduct: boolean = false;
   search: string = '';
   resetSearch: boolean = false;
   selectedItem = false;
-  sub:Subscription = new Subscription();
+  sub: Subscription = new Subscription();
   /**
    * Creates an instance of the ProductListComponent with the injected services
    * @param {ElementRef} elRef Service to work with template
    */
-  constructor(private elRef: ElementRef, 
-    public cd: ChangeDetectorRef, 
-    private inventoryStateService:InventoryStateService) { }
+  constructor(private elRef: ElementRef,
+    public cd: ChangeDetectorRef,
+    public quoteStateService: QuoteStateService,
+    private inventoryStateService: InventoryStateService) { }
 
 
   /**
@@ -43,9 +48,10 @@ export class ProductListComponent implements OnInit,OnDestroy {
     if (this.type === 'RECURRING-TICKET') this.classAddProduct = 'recurring-ticket-add-product';
     if (this.type === 'TICKET') this.classAddProduct = 'ticket-add-product';
     if (this.inventoryStateService.getListProducts().length > 0) this.itemList = this.inventoryStateService.getListProducts();
-   let getOnProducts =  this.inventoryStateService.getOnProducts().subscribe(data => {
+    let getOnProducts = this.inventoryStateService.getOnProducts().subscribe(data => {
       this.itemList = data;
       this.onUpdateList();
+      this.cd.detectChanges();
     })
     this.sub.add(getOnProducts);
     this.onUpdateList();
@@ -53,20 +59,24 @@ export class ProductListComponent implements OnInit,OnDestroy {
       let value = this.getNameOrDescription(this.editItem);
       this.elRef.nativeElement.querySelector('#dropdownProducts').value = value;
       if (value !== '') this.selectedItem = true;
-
     }
 
-    let getChangeProducts = this.inventoryStateService.getChangeProducts().subscribe((data: InventoryChange) => {
+ /*   let getChangeProducts = this.inventoryStateService.getChangeProducts().subscribe((data: InventoryChange) => {
       if (data.action === 'PRODUCT_SAVED') {
-        const Index = this.itemList.findIndex((item) => item.id === data.data.category.id);
-        if (Index > -1) {
-          this.itemList[Index].products.push(data.data);
+        const categoryIndex = this.itemList.findIndex((item) => item.id === data.data.category.id);
+        if (categoryIndex > -1) {
+          let index =  this.itemList[categoryIndex].products.findIndex(item => item.versionedId.id === data.data.versionedId.id)
+          if (index > -1) {
+            this.itemList[categoryIndex].products[index] = data.data;
+          } else {
+            this.itemList[categoryIndex].products.push(data.data);
+          }
         }
       }
       this.onUpdateList();
       this.cd.detectChanges();
     })
-    this.sub.add(getChangeProducts);
+    this.sub.add(getChangeProducts);*/
 
   }
   public onUpdateList() {
@@ -77,7 +87,7 @@ export class ProductListComponent implements OnInit,OnDestroy {
 
   }
 
-  
+
   onCreateProduct() {
     this.products_dropDown.close();
     this.isCreateproduct = true;

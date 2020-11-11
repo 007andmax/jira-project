@@ -137,6 +137,7 @@ export class CompanyAddAsideComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(item => item.selected = false);
     //  this.listPersons.forEach(item => item.selected = false);
     this.validate = new CompanyValdiate();
+    this.cd.detectChanges();
 
   }
   public onSelectTechLead(event) {

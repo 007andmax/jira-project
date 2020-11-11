@@ -11,12 +11,15 @@ var $ = require("jquery");
 })
 export class SelectSearchComponent implements OnInit, OnDestroy {
 
-
+  
+  @Input() isSearch: boolean = true;
+  @Input() container: string = null;
   @Input() field: string = null;
   @Input() change: boolean = true;
   @Input() add: boolean = false;
-  @Input() class: string = null;
+  @Input() class: Array<string> = [];
   @Input() editItem: any = null;
+  @Input() isBlockClear: boolean = false;
   @Input() maxlength: number = null;
   @Input() placeholder: string = '';
   @Input() list = [];

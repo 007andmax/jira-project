@@ -72,14 +72,17 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       this.ticketStateService.unsubscribeTicket();
       if (this.updateForm) this.updateForm.reset();
       this.ticketProfile = data;
-      this.elRef.nativeElement.querySelector("#ticket-note").innerHTML = this.ticketProfile.note;
+      this.elRef.nativeElement.querySelector("#ticket-note").innerHTML = (this.ticketProfile.note) ? this.ticketProfile.note : "";
       this.updateListAssignedUser();
       this.updateLisUpdateUser();
       this.opened = true;
       this.showPreloader = false;
       this.ticketStateService.getServicesList(this.ticketProfile);
       this.ticketStateService.subsribeToTicket(this.ticketProfile.id);
-      this.cd.detectChanges();
+      this.ticketMessage.reset();
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+    }
     })
     this.sub.add(getOnEditTicket);
     this.ticketsStateService.getOnInitColor().subscribe(data => {
@@ -99,6 +102,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
 
       }
     })
+    this.sub.add(getConfirm);
     this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
 
       if (this.opened) {
@@ -108,8 +112,8 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
           this.elRef.nativeElement.querySelector("#ticket-note").innerHTML = this.ticketProfile.note;
           this.updateListAssignedUser();
           this.updateLisUpdateUser();
-
         }
+        this.cd.detectChanges();
       }
 
 
@@ -127,7 +131,8 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     });
     this.ticketStateService.getOnChangeUpdatesTicket().subscribe(newChange => {
 
-      if (newChange.action == 'UPDATE_SAVED' || newChange.action == 'UPDATE_CREATED') {
+      
+      if (newChange.action == 'UPDATE_SAVED' || newChange.action == 'UPDATE_CREATED' || newChange.action === 'UPDATE_EXPENSE_DELETED') {
         let update = this.ticketProfile.updates.find(item => item.id === newChange.data.id),
           attachments = newChange.data.attachments;
         if (update) {
@@ -192,6 +197,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     this.ticketProfile.updates = updates;
     this.cd.detectChanges();
   }
+   
   onChangeTags(data) {
     if (!this.opened) return;
     this.ticketProfile.tags = data;
@@ -226,7 +232,8 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
   }
   toggleNote() {
     var textCurrent = this.elRef.nativeElement.querySelector("#ticket-note").innerHTML.replace(/<\/?[^>]+>/ig, "");
-    var textOld = this.ticketProfile.note.replace(/<\/?[^>]+>/ig, "");
+    var textOld = (this.ticketProfile.note) ?  this.ticketProfile.note.replace(/<\/?[^>]+>/ig, "") : "";
+    this.modeDescription = 'view';
     if (textCurrent != textOld) {
       this.ticketProfile.note = this.elRef.nativeElement.querySelector("#ticket-note").innerHTML;
       this.onChangeSubjectNote();
@@ -300,12 +307,13 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       value.push(currentUser.id);
     }
     this.ticketsService.assignUserToTicket(this.ticketProfile.id, value.join(",")).subscribe(res => {
-      this.ticketMessage.isClaimTicket = false;
+     // this.ticketMessage.isClaimTicket = false;
     })
 
   };
-  getCompantName() {
-    let find = this.companiesStateService.getCompanies().find(item => item.id === this.ticketProfile.companyId);
+  getCompanyName() {
+    if (!this.ticketProfile.company) return '';
+    let find = this.companiesStateService.getCompanies().find(item => item.id === this.ticketProfile.company.id);
     return (find) ? find.name : '';
   }
   getNameCreateUser() {
@@ -352,6 +360,10 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     this.rightPanel.close();
     this.ticketStateService.unsubscribeTicket();
     this.ticketStateService.onTicketClosed();
+    this.ticketMessage.reset();
+    if (!this.cd['destroyed']) {
+      this.cd.detectChanges();
+  }
   }
   getClassType() {
     return `priority-icon ticket-edit-aside__ticket-subject-flag ${(this.ticketProfile.priorityLevel && this.ticketProfile.priorityLevel !== "MEDIUM") ? '--' + this.ticketProfile.priorityLevel.toLowerCase() : ''}`;

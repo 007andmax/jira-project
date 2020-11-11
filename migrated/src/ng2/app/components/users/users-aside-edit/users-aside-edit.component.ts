@@ -23,7 +23,7 @@ import { CompanySubscriptionStateService } from '../../companies/company-subscri
   providers: [UsersAsideService]
 })
 export class UsersAsideEditComponent implements OnInit {
-  
+
   @ViewChild('role') role: any;
   public opened = false;
   user: UserProfile = new UserProfile();
@@ -31,7 +31,8 @@ export class UsersAsideEditComponent implements OnInit {
   validate: UserValidate = new UserValidate();
   phoneTypes = ['Office', 'Mobile', 'Fax'];
   constructor(private imageCropperStateService: ImageCropperStateService, private usersStateService: UsersStateService,
-    private usersAsideService: UsersAsideService, private usersService: UsersService,
+    private usersAsideService: UsersAsideService,
+     private usersService: UsersService,
     private companiesState: SelectClientCompanyStateService,
     private companiesStateService: CompaniesStateService,
     private modalImageCropperStateService: ModalImageCropperStateService,
@@ -49,18 +50,18 @@ export class UsersAsideEditComponent implements OnInit {
     this.onCroppImage();
     this.usersStateService.getOpenEditAside().subscribe(data => {
       this.role.clearClient()
-       
+
       this.opened = true;
       this.user.onEdit(this.usersStateService.getuserForEdit());
       this.validate.addPhoneNumbers(this.user.phoneNumbers);
       let company = this.companiesStateService.getCompanies().find(item => item.id === this.user.companyId);
-       
+
       this.companiesState.setCompanyFromtEdit(company);
       this.companySubscriptionState.onEditMode(this.user.subscription);
-       
-      
+
+
     })
-    
+
   }
   public onCroppImage() {
     let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
@@ -123,16 +124,24 @@ export class UsersAsideEditComponent implements OnInit {
     this.validate.addPhoneNumber();
   }
   onChangeSubscriptions(data) {
-     
+
     data.forEach(item => this.user.subscription[item.field] = item.selected);
     // this.user.setSubscriptions(data);
   }
   onCheckEmail() {
-    this.validate.checkValidPrimaryEmail(this.user.primaryEmail);
+    if (this.user.primaryEmail && this.user.primaryEmail.length > 0) this.validate.checkValidPrimaryEmail(this.user.primaryEmail);
+    if (this.user.primaryEmail && this.user.primaryEmail.length > 0 && this.user.companyId) this.onCheckValidPrimaryEmail();
+  }
+  onCheckValidPrimaryEmail() {
+    this.usersService.checkValidPrimaryEmail(this.user.primaryEmail, this.user.companyId,this.usersStateService.getuserForEdit().id).subscribe((data: any) => {
+
+      this.validate.setExistPrimaryContactEmail(data.value);
+      this.cd.detectChanges();
+    })
   }
   onCheckPhoneNumber(i) {
     this.validate.checkValidPhoneNumber(i, this.user.phoneNumbers[i].number);
-     
+
   }
   onSelectDesignation(data) {
     this.user.setDesignation(data);
@@ -151,13 +160,14 @@ export class UsersAsideEditComponent implements OnInit {
 
     this.user.serCompanyId((selectClient === 'null') ? null : selectClient.item.id);
     if (selectClient !== 'null') this.validate.setCompanyValid();
-
+    if (this.user.primaryEmail && this.user.primaryEmail.length > 0 && this.user.companyId) this.onCheckValidPrimaryEmail();
+ 
   }
 
   onSave() {
     if (!this.validate.isValidate(this.user)) return;
 
-     
+
     this.usersService.updateUser(this.user.getUserForUpdate(this.usersStateService.getuserForEdit())).subscribe(data => {
       this.close();
     })
@@ -165,10 +175,10 @@ export class UsersAsideEditComponent implements OnInit {
   }
   public onChangeAvatar() {
     this.imageCropperStateService.setAction(CROPP_AVATAR_USER);
-     
+
     this.downloadCompanyLogo().then(data => {
       //   const modalRef = this.modalService.open(ImageCropperComponent);
-       
+
       //  modalRef.componentInstance.imageBase64 = data;
       //  modalRef.componentInstance.id = this.user.avatar.origin.id;
       this.modalImageCropperStateService.onInitOpen(new ImageCroper(data, this.user.avatar.origin.id, true));
@@ -207,7 +217,7 @@ export class UsersAsideEditComponent implements OnInit {
       reader.onerror = error => reject(error);
     });
   }
-  removePhoneNumber (i) {
+  removePhoneNumber(i) {
     this.user.phoneNumbers.splice(i);
     this.validate.removePhoneNumber(i);
   }
@@ -216,6 +226,9 @@ export class UsersAsideEditComponent implements OnInit {
     this.user = new UserProfile();
     this.validate = new UserValidate();
     this.companiesState.onInitClear();
+    if (!this.cd['destroyed']) {
+      this.cd.detectChanges();
+    }
   }
   public trackByIndex(index, item) {
     return index;

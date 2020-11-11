@@ -1,0 +1,36 @@
+<tr>
+  <td class="default-service-table__service-name" [textContent]="(type === 'BLOCK_TIME') ? 'Block Time Contracts' : 'User / Device Contracts'"></td>
+  <td class="default-service-table__rate"  ></td>
+  <td class="default-service-table__taxes"  ></td>
+
+  <td class="default-service-table__gl">
+
+    <app-drop-down
+      [class]="['--small-padding']"
+      [list]="glNumbers"
+      [placeholder]="'Select GL'"
+      [container]="'body'"
+      [change]="false"
+      [editItem]="selectedGlNumber"
+      [add]="true"
+      [field]="'glNumber'"
+      uiType="dark"
+      heightInput="32px"
+      dropdownWidth="192px"
+      [reducerItem]="glDropDownItemName"
+      (onAddItem)="onAddGlNumber($event)"
+      (onSelectedItem)="onSelectGlNumbers($event)"
+    >
+    </app-drop-down>
+  </td>
+ 
+  <td class="default-service-table__billable">
+
+  </td>
+  <td class="default-service-table__default">
+
+  </td>
+  <td class="default-service-table__menu">
+
+  </td>
+</tr>

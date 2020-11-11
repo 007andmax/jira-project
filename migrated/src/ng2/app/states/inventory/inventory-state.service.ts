@@ -4,6 +4,7 @@ import { CategoryProduct } from '../../interfaces/product/category-product';
 import { ProductService } from '../../services/product/product.service';
 import { InventoryRealTimeService } from './inventory-real-time.service';
 import { InventoryChange } from '../../components/inventory/class/inventory-change';
+import { CategoryProductitem } from 'src/ng2/class/category-product-item';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class InventoryStateService {
   onGetProducts: EventEmitter<any> = new EventEmitter();
   onChangeProducts: EventEmitter<InventoryChange> = new EventEmitter();
   categories = [];
-  productList = [];
+  productList:Array<CategoryProductitem> = [];
   constructor(private productService: ProductService,
     private inventoryRealTimeService: InventoryRealTimeService) { }
   public onInit() {
@@ -40,6 +41,13 @@ export class InventoryStateService {
       this.onInitGetCategoriess(this.categories);
     })
     this.inventoryRealTimeService.changeProductsArray.subscribe(newChange => {
+      if (newChange.action === 'PRODUCT_SAVED') {
+        const Index = this.productList.findIndex((item) => item.id === newChange.data.category.id);
+        if (Index > -1) {
+          this.productList[Index].products.push(newChange.data);
+        }
+      }
+      this.onInitGetProducts(this.productList);
       this.onChangeProducts.emit(new InventoryChange(newChange.action, newChange.data, []));
     })
     this.productService.getCategories().subscribe((res: any) => {
@@ -50,9 +58,9 @@ export class InventoryStateService {
     });
   }
   public getListProducts() {
-   return this.productList;
+    return this.productList;
   }
- 
+
   public setproducts(data) {
     this.productList = data;
   }

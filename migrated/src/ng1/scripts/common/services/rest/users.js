@@ -127,44 +127,12 @@
           }
         });
 
-        RealTimeService.subscribe('/userSubmittedTicket', serviceScope, function (newChange) {
-
-          if (newChange.action === 'USER_SUBMITTED_TICKET') {
-            var user = getOneById(newChange.data);
-
-            var prevValue = user.userStatistic.ticketsSubmitted || 0;
-            Utils.defineReadOnlyProperty(user.userStatistic, 'ticketsSubmitted', prevValue + 1);
-          }
-        });
-
-        RealTimeService.subscribe('/subscription/' + CompaniesService.getCurrentCompany().id, serviceScope, function (newChange) {
-
-          if (!newChange.data.user) {
-            return;
-          }
-
-          var user = Utils.findById(storage.users, newChange.data.user.id);
-
-          if (user) {
-
-            if (newChange.action == 'SUBSCRIPTION_SAVED') {
-              Utils.defineReadOnlyProperty(user, 'subscription', Utils.customizeObj(newChange.data));
-            } else if (newChange.action == 'SUBSCRIPTION_DELETED') {
-              delete user.subscription;
-            }
-          }
-        });
-
         RealTimeService.subscribe('/lockScreen/' + getCookie('LOCK_SCREEN_ID'), serviceScope, function (newChange) {
           if (newChange.action === 'LOCK_SCREEN' && !$rootScope.isUnlockShowed) {
             $rootScope.showLockModal();
           }
         });
       }
-
-
-
-
 
       function getCookie(name) {
         var matches = document.cookie.match(new RegExp(
@@ -373,10 +341,6 @@
         Utils.handleCallback(future, callback);
       }
 
-
- 
- 
-     
       function isEmailUnique(email, id, isTechUser, companyId, callback) {
 
         if (!email) {

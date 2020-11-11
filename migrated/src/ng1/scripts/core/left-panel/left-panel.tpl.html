@@ -231,7 +231,7 @@
              tooltip-append-to-body="true"></div>
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'billing'}"
-           ui-sref="accounting.billable" ng-click="toggleLeftPanel('billing', true)"
+           ui-sref="new-billable" ng-click="toggleLeftPanel('billing', true)"
            ng-if="PermissionsService.isAllowed('VIEW_ACCOUNTING')">
         <div class="left-panel-icn left-panel-icons-billing"
              uib-tooltip="billing"
@@ -709,13 +709,20 @@
         <!--</div>-->
         <!--</div>-->
         <!--  ui-sref="companyProfile({ tabName: 'contracts' })"-->
-        <div class="left-panel-hide-filter" ng-class="{'active': getOpenedUsersTab() ==='contracts'}"
+      <!--   <div class="left-panel-hide-filter" ng-class="{'active': getOpenedUsersTab() ==='contracts'}"
           ng-if="isShowContractsTabOnCompanyPage() && PermissionsService.isAllowed('VIEW_SERVICE_AGREEMENTS') && companyForCompanyProfile.clientType !== 'LEAD' && companyForCompanyProfile.clientType !== 'VENDOR'">
           <a class="left-panel-title left-panel-title-hover"
             href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=contracts">
             Service Agreements
           </a>
-        </div>
+        </div> -->
+        <div class="left-panel-hide-filter" ng-class="{'active': getOpenedUsersTab() ==='contracts'}"
+        ng-if="isShowContractsTabOnCompanyPage() && PermissionsService.isAllowed('VIEW_SERVICE_AGREEMENTS') && companyForCompanyProfile.clientType !== 'LEAD' && companyForCompanyProfile.clientType !== 'VENDOR'">
+        <a class="left-panel-title left-panel-title-hover"
+        ng-click="stateGo($event, 'company-contracts')">
+          Service Agreements
+        </a>
+      </div>
       </div>
     </div>
     <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'users' && !isLeftPanelHidden">
@@ -839,61 +846,88 @@
         <span class="left-panel-full__head--header">Billing</span>
       </div>
       <div class="center-category collapsed-nav nano-content">
-        <div class="center-category__category"
-             ng-class="{active: $state.includes('accounting.dashboard')}"
-             ng-click="stateGo($event, 'accounting.dashboard')">
-          Dashboard
-        </div>
-        <div class="center-category__category"
-             ng-class="{active: $state.includes('services')}"
-             ng-click="stateGo($event, 'services', { tabName: 'default' })">
-          Default Services
-        </div>
-        <div class="center-category__category"
-             ng-class="{active: $state.includes('accounting.billable')}"
-             ng-click="stateGo($event, 'accounting.billable')">
-          Billable Items
-        </div>
-        <div class="center-category__category"
-             ng-class="{active: $state.includes('receivable')}"
-             ng-click="stateGo($event, 'receivable', {mode: 'list'})">
-          Invoices
-        </div>
-        <div class="center-category__category"
-             ng-class="{active: $state.includes('quotes-component')}"
-             ng-click="stateGo($event, 'quotes-component')">
-          Quotes
-        </div>
-        <!-- <div class="center-category__category"
-             ng-class="{active: $state.includes('payments')}"
-             ng-click="stateGo($event, 'payments', {mode: 'payments-list'})">
-          Payments
-        </div>
-        <div class="center-category__category"
-             ng-class="{active: $state.includes('receipt-archive')}"
-             ng-click="stateGo($event, 'receipt-archive', {mode: 'group-by-company'})">
-          Receipt Archive
-        </div> -->
-        <div class="center-category__category"
-             ng-class="{active: $state.includes('new-payments')}"
-             ng-click="stateGo($event, 'new-payments')">
-          Payments
-        </div>
-        <!-- <div class="center-category__category"
-             ng-class="{active: $state.includes('credits')}"
-             ng-click="stateGo($event, 'credits')">
-          Credits
-        </div> -->
-        <div class="center-category__category"
-             ng-class="{active: $state.includes('service-agreements')}"
-             ng-click="stateGo($event, 'service-agreements')"
-             ng-show="PermissionsService.isAllowed('VIEW_SERVICE_AGREEMENTS')">
-          Contracts
-        </div>
+         
       </div>
     </div>
     <div class="ng7">
       <div class="left-sidebar left-panel-full-wrapper nano" ng-show="openedCategory === 'ng2-setting' && !isLeftPanelHidden">
+ 
+        <div class="brand">
+          <a ng-click="stateGo($event, 'myprofile-component')" class="logo">
+          <span>Settings</span>
+        </a>
+        </div>
+        <div class="back"><a href="javascript:;" ng-click="stateGo($event, 'quickSupport');"><span class="nav-ico" 
+          ><img src="ng1/images/setting-module/prev.svg"
+                alt="back" /></span>back</a></div>
+        <nav>
+        <ul class="list-unstyled">
+          <li ng-class="{active: $state.includes('myprofile-component')}"><a
+              ng-click="stateGo($event, 'myprofile-component')"><span class="nav-ico"><img
+                  src="ng1/images/setting-module/my-profile.svg" alt="My Profile" /></span>My Profile Settings</a></li>
+          <li ng-class="{active: $state.includes('manage-tags-component')}"
+          ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_TAGS_SETTINGS')"
+          ><a
+              ng-click="stateGo($event, 'manage-tags-component')"><span class="nav-ico"><img
+                  src="ng1/images/setting-module/manage-tags.svg" alt="Tags" /></span>Manage Tags</a></li>
+                  <li ng-class="{active: $state.includes('glnumber-component')}">
+                    <a ng-click="stateGo($event, 'glnumber-component')"><span class="nav-ico"><img
+                        src="ng1/images/setting-module/gl-number.svg" alt="Glnumber" /></span>Income Accounts</a>
+                  </li>
+          <li ng-class="{active: $state.includes('company-profile-component')}">
+            <a ng-click="stateGo($event, 'company-profile-component')" 
+            ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_COMPANY_PROFILE_SETTINGS')"><span class="nav-ico"><img
+                  src="ng1/images/setting-module/company-profile.svg" alt="Company" /></span>Company Profile</a>
+          </li>
+   
+          <li ng-class="{active: $state.includes('tech-component')}">
+            <a ng-click="stateGo($event, 'tech-component')"><span class="nav-ico"><img
+              src="ng1/images/setting-module/manage-users.svg"
+                   alt="Tech" /></span>Manage Tech Users</a>
+          </li>
+   
+          <li ng-class="{active: $state.includes('email-setting-component')}">
+              <a ng-click="stateGo($event, 'email-setting-component')"><span class="nav-ico"><img
+                  src="ng1/images/setting-module/email-settings.svg" alt="Email" /></span>Email Settings</a>
+          </li>
+   
+          <li ng-class="{active: $state.includes('taxes-component')}">
+            <a ng-click="stateGo($event, 'taxes-component')"><span class="nav-ico"><img
+                  src="ng1/images/setting-module/taxes.svg" alt="Taxes" /></span>Taxes</a>
+          </li>
+   
+          <li ng-class="{active: $state.includes('permission-manage-component')}" 
+          ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_PERMISSIONS_SETTINGS')">
+            <a  ng-click="stateGo($event, 'permission-manage-component')"><span class="nav-ico"><img
+                  src="ng1/images/setting-module/permission-management.svg" alt="Permission" /></span>Permission Management</a>
+          </li>
+   
+          <li ng-class="{active: $state.includes('email-templete-component')}">
+              <a ng-click="stateGo($event, 'email-templete-component')"><span class="nav-ico"><img
+                  src="ng1/images/setting-module/email-templates.svg" alt="Templetes" /></span>Email Templetes</a>
+          </li>
+   
+          <li ng-class="{active: $state.includes('integrations-component')}">
+              <a ng-click="stateGo($event, 'integrations-component')"><span class="nav-ico"><img
+                  src="ng1/images/setting-module/integrations.svg" alt="Integrations" /></span>Integrations</a>
+          </li>
+   
+          <li ng-class="{active: $state.includes('invoice-ticket-component')}">
+              <a ng-click="stateGo($event, 'invoice-ticket-component')"><span class="nav-ico"><img
+                  src="ng1/images/setting-module/invoice.svg" alt="Commissions" /></span>Invoice and Ticket</a>
+          </li>
+          <li ng-class="{active: $state.includes('commission-component')}">
+            <a ng-click="stateGo($event, 'commission-component')"><span class="nav-ico"><img
+                  src="ng1/images/setting-module/commissions.svg" alt="Commissions" /></span>Commissions</a>
+          </li>
+   
+          <li ng-class="{active: $state.includes('subscription-component')}">
+              <a ng-click="stateGo($event, 'subscription-component')"><span class="nav-ico"><img
+                  src="ng1/images/setting-module/subscription.svg" alt="Subscription" /></span>Subscription</a>
+          </li>
+        </ul>
+        </nav>
+   
       </div>
     </div>
     <div class="left-panel-full-wrapper nano inventory" ng-show="openedCategory === 'inventory' && !isLeftPanelHidden">

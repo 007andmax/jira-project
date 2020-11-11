@@ -20,7 +20,6 @@ export class ConfirmComponent implements OnInit {
 
   ngOnInit() {
     this.action = this.confirmStateService.getConfirmAction();
-
   }
   closeModal() {
     this.activeModal.close();

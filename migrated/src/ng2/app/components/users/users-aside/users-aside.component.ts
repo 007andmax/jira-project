@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ImageCropperStateService } from 'src/ng2/app/states/image-cropper/image-cropper-state.service';
 import { CROPP_AVATAR_USER } from 'src/ng2/app/const/image-cropp';
 import { UserProfile } from '../class/user-profile';
@@ -26,10 +26,13 @@ export class UsersAsideComponent implements OnInit {
   allTitles: Array<string> = [];
   validate: UserValidate = new UserValidate();
   phoneTypes = ['Office', 'Mobile', 'Fax'];
-  constructor(private imageCropperStateService: ImageCropperStateService, private usersStateService: UsersStateService,
-    private usersAsideService: UsersAsideService, private usersService: UsersService,
+  constructor(private imageCropperStateService: ImageCropperStateService,
+    private usersStateService: UsersStateService,
+    private usersAsideService: UsersAsideService,
+    private usersService: UsersService,
     private companiesState: SelectClientCompanyStateService,
-    private companySubscriptionState:CompanySubscriptionStateService,
+    private companySubscriptionState: CompanySubscriptionStateService,
+    public cd: ChangeDetectorRef,
     private modalService: NgbModal,) { }
 
   ngOnInit() {
@@ -75,7 +78,7 @@ export class UsersAsideComponent implements OnInit {
 
         return acc;
       }, []).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
-      1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
+        1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
 
   }
   addPhoneNumber() {
@@ -83,20 +86,29 @@ export class UsersAsideComponent implements OnInit {
     this.validate.addPhoneNumber();
   }
   onChangeSubscriptions(data) {
-     
+
     data.forEach(item => this.user.subscription[item.field] = item.selected);
-  //  this.user.setSubscriptions(data);
+    //  this.user.setSubscriptions(data);
   }
   onCheckEmail() {
-    this.validate.checkValidPrimaryEmail(this.user.primaryEmail);
+
+    if (this.user.primaryEmail && this.user.primaryEmail.length > 0) this.validate.checkValidPrimaryEmail(this.user.primaryEmail);
+    if (this.user.primaryEmail && this.user.primaryEmail.length > 0 && this.user.companyId) this.onCheckValidPrimaryEmail();
+  }
+  onCheckValidPrimaryEmail() {
+    this.usersService.checkValidPrimaryEmail(this.user.primaryEmail, this.user.companyId).subscribe((data: any) => {
+
+      this.validate.setExistPrimaryContactEmail(data.value);
+      this.cd.detectChanges();
+    })
   }
   onCheckPhoneNumber(i) {
     this.validate.checkValidPhoneNumber(i, this.user.phoneNumbers[i].number);
-     
+
   }
-  
+
   onSelectDesignation(data) {
-     
+
     this.user.setDesignation(data);
   }
   onSelectRole(data) {
@@ -113,7 +125,7 @@ export class UsersAsideComponent implements OnInit {
 
     this.user.serCompanyId((selectClient === 'null') ? null : selectClient.item.id);
     if (selectClient !== 'null') this.validate.setCompanyValid();
-
+    if (this.user.primaryEmail && this.user.primaryEmail.length > 0 && this.user.companyId) this.onCheckValidPrimaryEmail();
   }
   getUserType() {
     if (this.user.role === 'USER') return 'Standar User';
@@ -125,7 +137,7 @@ export class UsersAsideComponent implements OnInit {
     this.usersService.addUser(this.user.getUserForAdd()).subscribe(data => {
       this.close();
       this.addBtn.setDisabled(false);
-    },err => {
+    }, err => {
       this.addBtn.setDisabled(false);
     })
 
@@ -135,8 +147,11 @@ export class UsersAsideComponent implements OnInit {
     this.user = new UserProfile();
     this.validate = new UserValidate();
     this.companiesState.onInitClear();
+    if (!this.cd['destroyed']) {
+      this.cd.detectChanges();
+    }
   }
-  removePhoneNumber (i) {
+  removePhoneNumber(i) {
     this.user.phoneNumbers.splice(i);
     this.validate.removePhoneNumber(i);
   }

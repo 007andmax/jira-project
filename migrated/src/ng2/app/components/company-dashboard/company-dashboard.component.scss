@@ -1855,7 +1855,9 @@ body {
 .uppercase {
     text-transform: uppercase;
 }
-
+svg.nvd3-svg {	
+    overflow: visible;	
+}
 .nv-axis.nv-x .tick line {
     display:none;
 }
@@ -1890,5 +1892,9 @@ body {
             font-family: 'Graphik-Regular';
             fill: #4f5f79;
         }
+    }
+    .nv-legend {	
+       -webkit-transform: translate(calc(-50% + 260px), -40px);	
+       transform: translate(calc(-50% + 260px), -40px);	
     }
 }

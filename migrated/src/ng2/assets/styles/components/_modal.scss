@@ -1,0 +1,39 @@
+.qt-modal {
+  &__header {
+    padding: 24px 24px 12px 24px;
+  }
+  &__header-title {
+    font-size: 20px;
+    line-height: 1.4;
+    letter-spacing: -0.5px;
+    color: #364656;
+  }
+  &__close.icon__close {
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    background-size: 23px;
+    background-position: center;
+  }
+  &__body {
+    padding: 12px 24px;
+  }
+  &__footer {
+    padding: 12px 24px 24px 24px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .qt-modal-bot-error {
+    font-size: 12px;
+    color: #f44336;
+  }
+}
+.quote-send-modal {
+  .modal-dialog {
+    width: 512px;
+  }
+  
+}

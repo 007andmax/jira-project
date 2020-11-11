@@ -12,7 +12,15 @@ export class CompanyValdiate {
     rePhoneNumber = /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/;
     reDomain = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
     nameIsExist: boolean = false;
+    existPrimaryContactEmail: boolean = true;
     constructor() { }
+
+    public getExistPrimaryContactEmail () {
+        return this.existPrimaryContactEmail;
+    }
+    public setExistPrimaryContactEmail (data) {
+        this.existPrimaryContactEmail = data;
+    }
     public getDomain(){
         return this.domain;
     }

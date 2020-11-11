@@ -49,8 +49,6 @@
   &:before {
     position: absolute;
     content: '$';
-    left: 22px;
-    top: 8px;
   }
 }
 .with-percent {
@@ -317,8 +315,8 @@ app-left-panel-tags {
   }
   .editor-container-attachments {
     position: absolute;
-    bottom: 25px;
-    right: 325px;
+    bottom: 16px;
+    right: 40px;
     cursor: pointer;
     #upload-file-email {
       width: 16px;
@@ -796,6 +794,9 @@ ngb-typeahead-window {
   }
 }
 // GLOBAL STYLES FOR QUOTES
+app-quotes-item {
+  display: contents;
+}
 .quote-create {
   &__content {
     &--top,
@@ -2679,6 +2680,18 @@ app-ticket-profile-form-update {
   }
 }
 
+.tooltip.left {
+  margin-left: -6px;
+  padding: 0;
+}
+
+.tooltip.left .tooltip-inner:after {
+  top: calc(50% - 2.5px);
+  left: 100%;
+  transform: rotate(-90deg);
+}
+
+
 .collapse-arrow {
   width: 28px;
   height: 28px;
@@ -2903,6 +2916,7 @@ app-ticket-edit-aside-devices  {
   font-size: 12px;
   line-height: 1.33;
   top: calc(100% + 6px);
+  height: fit-content;
   &:before {
     content: '';
     position: absolute;
@@ -2918,8 +2932,20 @@ app-ticket-edit-aside-devices  {
   }
 }
 
-.--input-error {
+input.--input-error {
   border: solid 1px #ff5263 !important;
+
+}
+
+.--input-error {
+  input {
+    border: solid 1px #ff5263 !important;
+    border-left: none !important;
+  }
+  .qt-input-prefix {
+    border: solid 1px #ff5263 !important;
+    border-right: none !important;
+  }
 }
 
 .relative {
@@ -2929,3 +2955,6 @@ app-ticket-edit-aside-devices  {
 .text-transparent {
   color: transparent !important;
 }
+
+
+

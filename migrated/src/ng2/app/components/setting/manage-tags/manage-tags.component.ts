@@ -3,13 +3,15 @@ import {
   OnInit,
   ViewChild,
   ElementRef,
-  OnDestroy
+  OnDestroy,
+  ViewContainerRef
 } from "@angular/core";
 import { TagsService } from "src/ng2/app/services/setting/tags.service";
 import { forkJoin, Observable, Subject } from "rxjs";
 import { map } from "rxjs/operators";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
+import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 declare var $:any;
 @Component({
   selector: "app-manage-tags",
@@ -22,7 +24,8 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
   companyTags: any[] = [];
   serviceAllTickets: Observable<any>;
   serviceAllCompany: Observable<any>;
-
+  serviceCreateCustomTags: Observable<any>;	
+  allowCreateTags: any;
   compnayForm: FormGroup;
   submitted = false;
   edit = false;
@@ -38,6 +41,11 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     info: false
   };
   @ViewChild("tickets") tickets: ElementRef;
+  private tabSet: ViewContainerRef;
+
+  @ViewChild(NgbTabset) set content(content: ViewContainerRef) {
+    this.tabSet = content;
+  };
   dtTrigger = new Subject();
 
   constructor(
@@ -57,7 +65,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       word: ["", Validators.required],
       id: [""]
     });
-
+    this.getCurrentCompany();
     this.serviceAllTickets = this.tagsService.getAllTickets();
     this.serviceAllCompany = this.tagsService.getAllCompany();
 
@@ -85,6 +93,27 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
           this.loading = false;$(".loading").css("display", "none");
         }
       );
+  }
+
+  getCurrentCompany() {	
+    this.tagsService.getCurrentCompany().subscribe(	
+      res => {	
+        this.allowCreateTags = res['allowCreateTags'];	
+      },	
+      error => {	
+      }	
+    ); 	
+  }	
+	
+  saveAllowingCreateCustomTags() {	
+    this.tagsService.saveAllowingCreateCustomTags(this.allowCreateTags).subscribe(	
+      res => {	
+        	
+      },	
+      error => {	
+        this.allowCreateTags = !this.allowCreateTags;	
+      }	
+    ); 	
   }
 
   /**
@@ -130,11 +159,18 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     }
     this.searchTag = "";
     this.compnayForm.patchValue({ word: "" });
-    if (this.tickets.nativeElement.className.indexOf("active") > -1) {
-      this.setActiveTab = "ticket";
-    } else {
-      this.setActiveTab = "company";
+    if (this.tabSet['activeId'] === 'tab1') {	
+      this.setActiveTab = "company";	
+    } else if (this.tabSet['activeId'] === 'tab2') {	
+      this.setActiveTab = "ticket";	
+    } else if (this.tabSet['activeId'] === 'tab3') {	
+      this.setActiveTab = "device";	
     }
+    // if (this.tickets.nativeElement.className.indexOf("active") > -1) {
+    //   this.setActiveTab = "ticket";
+    // } else {
+    //   this.setActiveTab = "company";
+    // }
   }
 
   // convenience getter for easy access to form fields

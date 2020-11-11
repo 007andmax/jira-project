@@ -1,0 +1,147 @@
+<div class="qt-pl-30 qt-pr-30 qt-pt-24 qt-pb-50"  >
+  <div class="invoice-info qt-mr-20 qt-ml-20 qt-fs-13 qt-pl-12 qt-pr-12 qt-pt-8 qt-pb-8 qt-color-dark qt-mb-24 qt-df qt-ai-c">
+    <div class="icon__company-info qt-sz-24 qt-ic-c qt-mr-4 qt-mb-0" style="margin-bottom: 0;"></div>
+    This is a preview of your invoice. Switch back to Edit if you need to make changes.
+  </div>
+
+  <div class="invoice-preview">
+
+    <div class="qt-df qt-jc-sb qt-pb-24 company-info">
+      <div class="qt-lh-154">
+        <img class="company-logo qt-mb-8" [src]="getCompanyLogoUrl()" alt="">
+        <div class="qt-fs-13 qt-color-dark qt-ff-gm" [textContent]="currentCompany.name"></div>
+        <div class="qt-fs-13" [textContent]="currentCompany.addresses[0].addressWithSuitNumberAndPostalCode"></div>
+        <div class="qt-fs-13" [textContent]="(currentCompany.addresses[0].phoneNumbers.length > 0) ? currentCompany.addresses[0].phoneNumbers[0].number : ''"></div>
+      </div>
+
+      <div class="qt-color-dark qt-lh-131 qt-pr-24 qt-fs-26 qt-text-upper qt-ff-gm" [textContent]="'Invoice#' + invoiceNumber">
+
+      </div>
+    </div>
+
+    <div class="qt-mt-24 qt-mb-32 qt-df qt-jc-sb">
+      <div class="qt-lh-154">
+        <div class="qt-fs-10 qt-color-light qt-mb-8 qt-ff-sb qt-lh-12">BILLING ADDRESS</div>
+        <div class="qt-fs-13 qt-color-dark qt-ff-gm" [textContent]="company.name"></div>
+        <div class="qt-fs-13" [textContent]="company.contacts[0].firstName + ' ' +
+        company.contacts[0].lastName"></div>
+        <div class="qt-fs-13" [textContent]="company.addresses[0].addressWithSuitNumberAndPostalCode"></div>
+        <div class="qt-fs-13" [textContent]="company.contacts[0].primaryEmail"></div>
+        <div class="qt-fs-13" [textContent]="(company.contacts[0].phoneNumbers && company.contacts[0].phoneNumbers.length > 0) ? company.contacts[0].phoneNumbers[0].number : ''"></div>
+      </div>
+
+      <div class="qt-fs-13 qt-text-right qt-lh-154">
+        <div class="qt-df qt-jc-sb qt-mb-8" *ngIf="invoiceTaxNumber">
+          <div class="qt-ff-gm qt-text-right invoice-info-title" [textContent]="invoiceTaxNumber.taxIdDescription + ':'"></div>
+          <div class="invoice-info-value" [textContent]="invoiceTaxNumber.taxId"></div>
+        </div>
+        <div class="qt-df qt-jc-sb qt-mb-8">
+          <div class="qt-ff-gm qt-text-right invoice-info-title">Invoice Date:</div>
+          <div class="invoice-info-value" [textContent]="getDate(invoice.invoiceDataDto.date)"></div>
+        </div>
+        <div class="qt-df qt-jc-sb qt-mb-8">
+          <div class="qt-ff-gm qt-text-right invoice-info-title">Due Date:</div>
+          <div class="invoice-info-value" [textContent]="getDate(invoice.invoiceDataDto.dueDate)"></div>
+        </div>
+        <div class="qt-df qt-jc-sb qt-mb-8">
+          <div class="qt-ff-gm qt-text-right invoice-info-title">Balance Due:</div>
+          <div class="invoice-info-value" [textContent]="invoice.invoiceDataDto.totalSum | currency"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="invoice-preview__items">
+      <ng-template ngFor let-ticket
+      [ngForOf]="invoice.invoiceDataDto.tickets"
+      let-i="index"
+      [ngForTrackBy]="trackByIndex">
+      <div class="qt-mb-16">
+        <div class="invoice-preview__item-header qt-color-dark qt-df qt-pt-8 qt-pb-8 qt-pl-12 qt-pr-12 qt-ai-c">
+          <div class="invoice-preview__item-header-number qt-fs-10 qt-ff-gm qt-mr-16 qt-lh-12">#Ticket {{ticket.number}}</div>
+          <div class="invoice-preview__item-header-date qt-fs-12 qt-mr-12 qt-lh-133"><span class="qt-fs-11 qt-mr-4 qt-ff-sb qt-lh-127">Date</span>{{getDateTicket(ticket.closedAt)}}</div>
+          <div class="qt-fs-12 qt-lh-133"><span class="qt-fs-11 qt-mr-4 qt-ff-sb qt-lh-127">Subject:</span>{{ticket.subject}}</div>
+        </div>
+        <table class="invoice-preview__table">
+          <thead class=" qt-lh-127">
+            <tr>
+              <th class="invoice-preview__col-item">Item</th>
+              <th class="invoice-preview__col-desc">Description</th>
+              <th class="invoice-preview__col-price">Unit Price</th>
+              <th class="invoice-preview__col-qty">Quantity</th>
+              <th class="invoice-preview__col-tax">Tax</th>
+              <th class="invoice-preview__col-amount">Amount</th>
+            </tr>
+          </thead>
+          <tbody class=" qt-lh-133">
+            <ng-template ngFor let-service
+    [ngForOf]="ticket.serviceExpenses"
+    [ngForTrackBy]="trackById">
+            <tr>
+              <td class="invoice-preview__col-item" [textContent]="service.item.name"></td>
+              <td class="invoice-preview__col-desc" [textContent]="service.description"></td>
+              <td class="invoice-preview__col-price" [textContent]="service.item.rate | currency"></td>
+              <td class="invoice-preview__col-qty" *ngIf="service.description =='By User' || service.description =='By Device' || service.description =='Managed Service Contract'" [textContent]="service.billableQuantity"></td>
+            <td class="invoice-preview__col-qty"  *ngIf="service.description !=='By User' && service.description !=='By Device' && service.description !=='Managed Service Contract'" [textContent]="getDuration(service.billableQuantity)"></td>
+            <td class="invoice-preview__col-tax" [innerHTML]="getSelectedTaxes(service.taxes)"></td>
+            <td class="invoice-preview__col-amount" [textContent]="service.sum | currency"></td>
+            </tr>
+            </ng-template>
+             <ng-template ngFor let-product
+    [ngForOf]="ticket.productExpenses"
+    [ngForTrackBy]="trackById">
+            <tr>
+              <td class="invoice-preview__col-item" [textContent]="product.item.manufacture"> </td>
+              <td class="invoice-preview__col-desc" [textContent]="product.item.description"></td>
+              <td class="invoice-preview__col-price" [textContent]="product.item.sale | currency"></td>
+               <td class="invoice-preview__col-qty"   [textContent]="product.billableQuantity"></td>
+              <td class="invoice-preview__col-tax" [innerHTML]="getSelectedTaxes(product.taxes)"></td>
+              <td class="invoice-preview__col-amount" [textContent]="product.sum | currency"></td>
+            </tr>
+            </ng-template>
+          </tbody>
+        </table>
+
+      </div>
+
+    </ng-template>
+    </div>
+
+    <div class="qt-df qt-w100 qt-jc-sb qt-color-dark qt-fs-12 qt-ff-gm qt-mb-20 qt-lh-133">
+
+      <div class="qt-mb-20 invoice-preview-notes">
+        <div class="qt-fs-12 qt-mb-4 qt-ff-qm qt-color-dark qt-ff-gm qt-lh-133">Customer Note</div>
+        <div class="qt-fs-13 qt-lh-154 note qt-ff-gr" *ngIf="selectedNote" [textContent]="selectedNote.line1"></div>
+      </div>
+
+      <div class="invoice-preview__total-block">
+        <div class="qt-df qt-jc-sb qt-pl-12 qt-pr-12">
+          <div class="qt-text-left">Sub Total</div>
+          <div class="invoice-info-value qt-text-right" [textContent]="(invoice.invoiceDataDto.productsSum + invoice.invoiceDataDto.servicesSum ) |
+          currency"></div>
+        </div>
+
+        <div class="qt-df qt-jc-sb qt-pl-12 qt-pt-10 qt-pr-12" *ngIf="invoice.invoiceDataDto.invoiceDiscount">
+          <div class="qt-text-left">Discount</div>
+          <div class="invoice-info-value qt-text-right" [textContent]="(-invoice.invoiceDataDto.invoiceDiscount.amount) |
+          currency"></div>
+        </div>
+        <div class="qt-df qt-jc-sb qt-pl-12 qt-pt-10 qt-pr-12 qt-pb-10">
+          <div class=" qt-text-left">Tax</div>
+          <div class="invoice-info-value  qt-text-right" [textContent]="invoice.invoiceDataDto.taxSum | currency"></div>
+        </div>
+        <div class="qt-df qt-jc-sb qt-pl-12 qt-pr-12  qt-ai-c invoice-preview__total-price">
+          <div class=" qt-text-left">Total</div>
+          <div class="invoice-info-value qt-text-right qt-fs-16 qt-lh-15" [textContent]="invoice.invoiceDataDto.totalSum | currency"></div>
+        </div>
+      </div>
+    </div>
+
+
+    <div>
+      <div>
+        <div class="qt-fs-12 qt-mb-4 qt-ff-qm qt-color-dark qt-ff-gm qt-lh-133">Terms & Conditions</div>
+        <div class="qt-fs-13 qt-lh-154 note" *ngIf="invoice.invoiceDataDto.termsAndConditions" [textContent]="invoice.invoiceDataDto.termsAndConditions"></div>
+      </div>
+    </div>
+
+  </div>

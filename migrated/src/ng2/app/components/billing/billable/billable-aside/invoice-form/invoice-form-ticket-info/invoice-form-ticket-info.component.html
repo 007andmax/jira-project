@@ -1,0 +1,72 @@
+<div class="invoice-item qt-mb-16 qt-w100">
+  <div class="qt-df qt-ai-c">
+    <div class="invoice-item__header qt-w100 qt-ml-30 qt-df qt-ai-c qt-pt-10 qt-pb-10">
+      <div class="invoice-item__number qt-color-white qt-fs-10 qt-pt-4 qt-pb-4 qt-pl-4 qt-pr-4 qt-mr-16" [textContent]="'Tkt# ' + ticket.number"></div>
+      <div class="qt-fs-12 qt-mr-16" ><span class="qt-fs-11 qt-ff-sb">Date</span> {{getDate(ticket.closedAt)}}</div>
+      <div class="qt-fs-12 invoice-item__subject"><span class="qt-fs-11 qt-ff-sb">Subject:</span> {{ticket.subject}}</div>
+    </div>
+    <div class="delete-item-container qt-pl-4">
+      <div class="qt-pointer  qt-sz-16 icon__raw-clear qt-ic-c " *ngIf="ticketsLength > 1" placement="left" ngbTooltip="Remove Ticket" (click)="delete()"></div>
+    </div>
+  </div>
+
+  <table class="invoice-item__table">
+    <thead >
+      <tr>
+        <th></th>
+        <th class="invoice-item__col-item  qt-ff-sb">Item</th>
+        <th class="invoice-item__col-desc  qt-ff-sb" >Description</th>
+        <th class="invoice-item__col-price qt-ff-sb">Unit Price</th>
+        <th class="invoice-item__col-quentity qt-ff-sb">Quantity</th>
+        <th class="invoice-item__col-tax qt-ff-sb">Tax</th>
+        <th class="invoice-item__col-amount qt-ff-sb">Amount</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-template ngFor let-service
+[ngForOf]="ticket.serviceExpenses"
+[ngForTrackBy]="trackById">
+
+
+      <tr>
+        <td>
+        <!--  <div class=" qt-pointer qt-sz-20 icon__move-light qt-ic-c"></div>-->
+        </td>
+        <td class="invoice-item__col-item" [textContent]="service.item.name"></td>
+        <td class="invoice-item__col-desc" [textContent]="service.description"></td>
+        <td class="invoice-item__col-price" [textContent]="service.item.rate | currency"></td>
+        <td class="invoice-item__col-quentity" *ngIf="service.description =='By User' || service.description =='By Device' || service.description =='Managed Service Contract'" [textContent]="service.billableQuantity"></td>
+        <td class="invoice-item__col-quentity"  *ngIf="service.description !=='By User' && service.description !=='By Device' && service.description !=='Managed Service Contract'" [textContent]="getDuration(service.billableQuantity)"></td>
+        <td class="invoice-item__col-tax" [innerHTML]="getSelectedTaxes(service.taxes)"></td>
+        <td class="invoice-item__col-amount" [textContent]="service.sum | currency"></td>
+        <td>
+
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template ngFor let-product
+[ngForOf]="ticket.productExpenses"
+[ngForTrackBy]="trackById">
+
+
+      <tr>
+        <td>
+       <!--   <div class=" qt-pointer qt-sz-20 icon__move-light qt-ic-c"></div>-->
+        </td>
+        <td class="invoice-item__col-item" [textContent]="product.item.manufacture"> </td>
+        <td class="invoice-item__col-desc" [textContent]="product.item.description"></td>
+        <td class="invoice-item__col-price" [textContent]="product.item.sale | currency"></td>
+         <td class="invoice-item__col-quentity"   [textContent]="product.billableQuantity"></td>
+        <td class="invoice-item__col-tax" [innerHTML]="getSelectedTaxes(product.taxes)"></td>
+        <td class="invoice-item__col-amount" [textContent]="product.sum | currency"></td>
+        <td>
+
+        </td>
+      </tr>
+    </ng-template>
+
+    </tbody>
+  </table>
+</div>

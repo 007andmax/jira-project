@@ -6,7 +6,7 @@
       </div>
       <div class="new-companies-content__modal--content">
        
-         <draft-email-user-recipients [selectedClient]="selectedClient" [accountType]="null" [usersSelected]="usersSelected"  (onCompanyEmails)="onChangeCompanyEmails($event)"></draft-email-user-recipients>
+         <draft-email-user-recipients [selectedClient]="selectedClient" [accountType]="accountType" [usersSelected]="usersSelected"  (onCompanyEmails)="onChangeCompanyEmails($event)"></draft-email-user-recipients>
         <div class="col-md-12 tab-btns">
           <div [ngClass]="{active: tab == 'plain'}" (click)="tab = 'plain'">
             Plain Text
@@ -17,8 +17,7 @@
           <!--EDITOR-->
 
           <div style="position:relative;">
-            <app-ngx-editor *ngIf="tab == 'plain'" [config]="editorConfig" [spellcheck]="true"
-                            [(ngModel)]="messageContent"></app-ngx-editor>
+            <angular-editor *ngIf="tab == 'plain'"  [(ngModel)]="messageContent" [config]="editorConfig"></angular-editor>
            <!--<div *ngIf="tab == 'plain'" class="editor-container-attachments">
               <i class="icn-16 icn-text-attachment"></i>
               <input id="upload-file-email" type="file" (input)="uploadFileOnBrower($event)" />

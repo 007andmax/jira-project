@@ -1,11 +1,12 @@
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from "@angular/core";
-import { BsModalRef, BsModalService } from "ngx-bootstrap";
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy, TemplateRef } from "@angular/core";
 import { EmailTempleteService } from "./email-templete.service";
 import { map, catchError } from "rxjs/operators";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { of } from "rxjs";
 import { ToastrService } from "ngx-toastr";
-
+import { DomSanitizer } from '@angular/platform-browser';	
+import { SanitizeHtmlPipe } from './../../../pipe/sanitize-html.pipe';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 // import { AngularEditorConfig } from "@kolkov/angular-editor";
 
 declare var $: any;
@@ -29,7 +30,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   templeteInfo: any;
   emailPreviewHtml: any;
   gettingEmailTemplatePreview: boolean;
-
+  type = '';
   emailPages: any;
   elEditor: any = "";
   templeteForm: FormGroup;
@@ -37,7 +38,6 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   public show = false;
   public buttonName: any = "Show Keyword Description + ";
   templatesData = { subject: {}, body: {} };
-  modalRef: BsModalRef;
   @ViewChild("body") body: ElementRef;
   @ViewChild("subject") subject: ElementRef;
 
@@ -55,21 +55,15 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   // };
 
   constructor(
-    private modalService: BsModalService,
+    private modalService: NgbModal,
     private emailService: EmailTempleteService,
     private formBuilder: FormBuilder,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private sanitizer: DomSanitizer
   ) {
     this.ticketTemplates = this.emailService.getTicketTemplates();
     this.agentTemplates = this.emailService.getAgentTemplates();
     this.invoiceTemplates = this.emailService.getInvoiceTemplates();
-  }
-
-  openModal(template) {
-    this.modalRef = this.modalService.show(
-      template,
-      Object.assign({}, { class: "manage-tags modal-dialog-centered" })
-    );
   }
 
   ngOnInit() {
@@ -98,11 +92,9 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   }
 
   onReady(eventData) {
-    
     eventData.plugins.get("FileRepository").createUploadAdapter = function(
       loader
     ) {
-    
       return new UploadAdapter(loader);
     };
   }
@@ -150,6 +142,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
             this.templatesData.body = res.body;
             this.templatesData.subject = res.subject;
             this.keywords = res.keywords;
+            this.type = res.type
 
             this.templeteForm.controls["subject"].clearValidators();
 
@@ -187,10 +180,8 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
    */
   insertAtCaret(text) {
     var el = document.activeElement;
-   
 
     if (el.id === "subject") {
-     
       var startPos = this.subject.nativeElement.selectionStart;
 
       this.subject.nativeElement.value =
@@ -285,21 +276,25 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     }
   }
 
-  emailPreview(templateKey: any) {
-    this.emailPreviewHtml = undefined;
+  emailPreview(template: TemplateRef<any>) {	
+    this.emailPreviewHtml = '';
     this.gettingEmailTemplatePreview = true;
 
-    alert("Api is remaining for our new design template");
-
-    // this.emailService
-    //   .getHtmlForPreview(templateKey, this.templatesData)
-    //   .pipe(
-    //     map(resp => {
-    //       this.emailPreviewHtml = resp;
-    //       this.gettingEmailTemplatePreview = false;
-    //     })
-    //   )
-    //   .subscribe();
+    this.emailService	
+      .getHtmlForPreview(this.type, this.templatesData)	
+      .pipe(	
+        map(resp => {	
+          this.emailPreviewHtml = resp;	
+          this.emailPreviewHtml = this.emailPreviewHtml.replace(/font-family: Graphik, sans-serif;/gi, '')	
+          this.gettingEmailTemplatePreview = false;	
+          this.modalService.open(template, {ariaLabelledBy: 'modal-basic-title', windowClass: "manage-tags", centered:true}).result.then((result) => {
+             
+          }, (reason) => {
+            
+          });
+        })	
+      )	
+      .subscribe();
   }
 
   closeTemplete() {
@@ -436,7 +431,6 @@ export class UploadAdapter {
   private loader;
   constructor(loader: any) {
     this.loader = loader;
-    
   }
 
   // upload() {

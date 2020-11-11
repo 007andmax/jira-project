@@ -243,7 +243,11 @@ export class CompanyDashboardComponent implements OnInit {
       this.domain = (this.companyDetail.domain == undefined || this.companyDetail.domain == null) ? '' : this.companyDetail.domain;
       let type = typeof this.companyDetail.contacts[0].phoneNumbers[0];
       let typeIndustry = typeof this.companyDetail.clientIndustry;
-      this.clientIndustry = typeIndustry === 'object' ? this.companyDetail.clientIndustry.name : this.companyDetail.clientIndustry;
+      let name = '';
+      if (typeIndustry === 'object' && this.companyDetail.clientIndustry !== null) {
+        this.name = this.companyDetail.clientIndustry.name;
+      }
+      this.clientIndustry = typeIndustry === 'object' ? name : this.companyDetail.clientIndustry;
       this.primaryContact = {
         firstName: this.companyDetail.contacts[0].firstName,
         lastName: this.companyDetail.contacts[0].lastName,
@@ -361,7 +365,7 @@ export class CompanyDashboardComponent implements OnInit {
     };
     let getRevenue = this.companiesService.getInvoiceRevenue(obj).subscribe((data: any) => {
       let totalRevenue = data.collectedSum + data.invoicedSum + data.outstandingSum;
-      this.totalRevenue = totalRevenue;
+      this.totalRevenue = totalRevenue.toFixed(2);
       if (totalRevenue > 100000) {
         this.totalRevenue = (totalRevenue / 100000).toFixed(2) + 'L'
       } else if (totalRevenue > 1000) {

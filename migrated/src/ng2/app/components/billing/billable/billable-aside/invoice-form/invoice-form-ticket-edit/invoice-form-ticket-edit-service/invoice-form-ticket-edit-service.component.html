@@ -1,0 +1,24 @@
+<tr class="invoice-ticket-edit-service-product">
+  <td>
+   <!-- <div class=" qt-pointer qt-sz-20 icon__move-light qt-ic-c"></div>-->
+  </td>
+  <td class="invoice-item__col-item" [textContent]="service.item.name"></td>
+  <td class="invoice-item__col-desc ">
+    <textarea  appTextArea  [minHeight]="48"  cols="5" rows="1" id="service-description" placeholder="Write service description here..."
+    (input)="onChangeDescription($event)" (onPast)="onPastDescription($event)"></textarea>
+  </td>
+  <td class="invoice-item__col-price" [textContent]="service.item.rate | currency"></td>
+
+  <td class="invoice-item__col-quentity">
+    <app-ticket-profile-updates-service-timepicker *ngIf="currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'" (onChangeStart)="onChangeStartTimePicker($event)" (onChangeEnd)="onChangeEndTimePicker($event)" #editTimePicker [quantity]="service.quantity" [editMode]="true" [start]="durationStart" [end]="durationEnd" ></app-ticket-profile-updates-service-timepicker>
+    <app-ticket-profile-updates-service-duration (onChange)="onChangeDuration($event)" [editMode]="true" [hour]="hours" [minute]="minutes" *ngIf="currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER'"></app-ticket-profile-updates-service-duration>
+
+  </td>
+   <td class="invoice-item__col-tax"  >
+    <app-invoice-form-ticket-edit-taxes #taxes (taxesChange)="onTaxesChange($event)"></app-invoice-form-ticket-edit-taxes>
+   </td>
+  <td class="invoice-item__col-amount" [textContent]="service.sum | currency"></td>
+  <td>
+
+  </td>
+</tr>

@@ -1,0 +1,29 @@
+<tr>
+  <td class="contract-product-service-table__service --editable"  >
+
+    <app-drop-down
+    
+    [editItem]="editItem"
+      [placeholder]="'Select Service'"
+      [list]="defaultServices"
+      [validate]="service.validate"
+      [errorMessage]="'Service is required'"
+      [field]="'name'"
+      [search]="true"
+      [change]="true"
+      (onSelectedItem)="select($event)"
+    ></app-drop-down>
+  </td>
+  <td class="contract-product-service-table__description --editable qt-pos-rel">
+    <mat-error  class="qt-tooltip-error qt-w-auto-important" *ngIf="!service.validateDescription">
+      Description is required
+    </mat-error>
+    <input type="text" [ngClass]="{'--input-error' : !service.validateDescription}"  class="qt-w100" [(ngModel)]="service.description" (input)="onChangeDescription()" /></td>
+  <td class="contract-product-service-table__duration --editable">   <app-ticket-profile-updates-service-duration [editMode]="true" [hour]="getHours()" [minute]="getMinutes()"  (onChange)="onChangeDurationService($event)"    ></app-ticket-profile-updates-service-duration>
+  </td>
+  <td class="contract-product-service-table__date --editable"> <app-date-picker [formatDate]="formatDate" [placement]="'top'"  [editMode]="true" [editDate]="service.date" [useMinDate]="false"  (onChange)="onChangeDatePickerService($event)"></app-date-picker>
+  </td>
+  <td>
+    <div class="icon__raw-clear qt-ic-c qt-sz-16" (click)="remove()"></div>
+  </td>
+</tr>

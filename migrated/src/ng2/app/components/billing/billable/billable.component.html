@@ -1,0 +1,54 @@
+<app-left-panel-billing></app-left-panel-billing>
+<div class="page-list page-list-billable billing-page">
+
+  <div class="qt-list-header sticky-list-header">
+    <div>
+      <h3 class="list-title" [textContent]="'Billable Items (' + count + ')'"></h3>
+    </div>
+
+    <div class="d-f ai-c">
+      <span  class="qt-input-search" >
+        <input class="qt-input-search billable-list-search" name="ticket_search" placeholder="Search Company…" title="Company Search" type="text" (input)="onSearch($event)"></span>
+      </div>
+  </div>
+
+  <div class="sticky-list-table-header">
+    <table class="qt-table-modern">
+      <thead>
+        <tr>
+          <th class="billable-table__company-name" (click)="onFilter('name')">
+            Company Name
+            <span class="qt-table-modern__sorting"></span>
+          </th>
+          <th class="billable-table__tickets" (click)="onFilter('salesPerson')">Sales Person
+            <span class="qt-table-modern__sorting"></span>
+          </th>
+          <th class="billable-table__sales" (click)="onFilter('countTickets')">Tickets
+            <span class="qt-table-modern__sorting"></span>
+          </th>
+          <th class="billable-table__billable" (click)="onFilter('total')">Billable Amount
+            <span class="qt-table-modern__sorting"></span>
+          </th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+
+  <div class="table-container">
+    <table class="qt-table-modern billable-table" *ngIf="!showPreloader">
+      <tbody>
+        <ng-template ngFor let-item
+        [ngForOf]="list"
+        [ngForTrackBy]="trackById">
+      <app-billable-item [item]="item"  *ngIf="!item.isDefault"></app-billable-item>
+      </ng-template>
+
+      </tbody>
+    </table>
+    <div class="loading" *ngIf="showPreloader"></div>
+  </div>
+
+
+
+
+</div>

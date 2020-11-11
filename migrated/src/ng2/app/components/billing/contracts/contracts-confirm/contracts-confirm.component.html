@@ -1,0 +1,14 @@
+ 
+<div class="archive-modal"  >
+  <button class="close-modal" (click)=closeModal()></button>
+  <div class="archive-modal__body modal-body">
+    <p [textContent]="message"></p>
+  </div>
+  <div class="archive-modal__footer">
+    <div class="d-f">
+      <button class="btn-new btn-primary"  (click)=approveConfirm()>Yes, create</button>
+      <button class="btn-new disabled" (click)=cancelConfirm()>No, don't create</button>
+    </div>
+  </div>
+</div>
+

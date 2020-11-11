@@ -18,8 +18,6 @@ import { CommissionComponent } from './components/setting/commission/commission.
 import { SubscriptionComponent } from './components/setting/subscription/subscription.component';
 import { CompanyPasswordManagerComponent } from './components/company-password-manager/company-password-manager.component';
 import { CompanyUserComponent } from './components/company-user/company-user.component';
-import { QuoteCreateComponent } from './components/billing/quotes/quote-create/quote-create.component';
-import { QuotePreviewComponent } from './components/billing/quotes/quote-preview/quote-preview.component';
 import { RecurringTicketsComponent } from './components/tickets/recurring-tickets/recurring-tickets.component';
 import { GlNumberSettingsComponent } from './components/setting/gl-number/gl-number.component';
 import { CompaniesComponent } from './components/companies/companies.component';
@@ -31,6 +29,24 @@ import { CompanyProductsComponent } from './components/companies/company-product
 import { TicketsComponent } from './components/tickets/tickets/tickets.component';
 import { CompanyTicketsComponent } from './components/company-tickets/company-tickets.component';
 import { CompanyDashboardComponent } from './components/company-dashboard/company-dashboard.component';
+import { BillableComponent } from './components/billing/billable/billable.component';
+import { BillableTicketsComponent } from './components/billing/billable/billable-tickets/billable-tickets.component';
+import { ContractsComponent } from './components/billing/contracts/contracts.component';
+import { InvoicesComponent } from './components/billing/invoices/invoices.component';
+import { DefaultServicesComponent } from './components/billing/default-services/default-services.component';
+import { PaymentsComponent } from './components/billing/payments/payments.component';
+import { DashboardComponent } from './components/device/dashboard/dashboard.component';
+import { HardwareComponent } from './components/device/hardware/hardware.component';
+import { SoftwareComponent } from './components/device/software/software.component';
+import { ServicesComponent } from './components/device/services/services.component';
+import { AntivirusComponent } from './components/device/antivirus/antivirus.component';
+import { TerminalComponent } from './components/device/terminal/terminal.component';
+import { PasswordComponent } from './components/device/password/password.component';
+import { WindowsComponent } from './components/device/windows-update/windows-update.component';
+import { StartupComponent } from './components/device/startup-programes/startup-programes.component';
+import { FileComponent } from './components/device/file-explorer/file-explorer.component';
+import { DashboardBillingComponent } from './components/billing/dashboard-billing/dashboard-billing.component';
+import { CompanyContractsComponent } from './components/companies/company-contracts/company-contracts.component';
 
 const routes: Routes = [
   {
@@ -69,16 +85,6 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'ng2/quotes/quote-create',
-    component: QuoteCreateComponent,
-    pathMatch: 'full'
-  },
-  {
-    path: 'ng2/quotes/quote-preview',
-    component: QuotePreviewComponent,
-    pathMatch: 'full'
-  },
-  {
     path: 'ng2/recurring-tickets',
     component: RecurringTicketsComponent,
     pathMatch: 'full'
@@ -97,7 +103,7 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'ng2/report/:id', 
+    path: 'ng2/report/:id',
     component: ItemReportComponent
   },
   {
@@ -180,6 +186,78 @@ const routes: Routes = [
     path: 'ng2/tickets',
     component: TicketsComponent,
   },
+  {
+    path: 'ng2/billable',
+    component: BillableComponent,
+  },
+  {
+    path: 'ng2/default-services',
+    component: DefaultServicesComponent,
+  },
+  {
+    path: 'ng2/invoices',
+    component: InvoicesComponent,
+  },
+  {
+    path: 'ng2/billable-tickets',
+    component: BillableTicketsComponent,
+  },
+  {
+    path: 'ng2/contracts',
+    component: ContractsComponent,
+  },
+  {
+    path: 'ng2/payments',
+    component: PaymentsComponent,
+  },
+  {
+    path: 'ng2/device/dashboard',
+    component: DashboardComponent
+  },
+  {
+    path: 'ng2/device/hardware',
+    component: HardwareComponent
+  },
+  {
+    path: 'ng2/device/software',
+    component: SoftwareComponent
+  },
+  {
+    path: 'ng2/device/service',
+    component: ServicesComponent
+  },
+  {
+    path: 'ng2/device/antivirus',
+    component: AntivirusComponent
+  },
+  {
+    path: 'ng2/device/terminal',
+    component: TerminalComponent
+  },
+  {
+    path: 'ng2/device/password',
+    component: PasswordComponent
+  },
+  {
+    path: 'ng2/device/window',
+    component: WindowsComponent
+  },
+  {
+    path: 'ng2/device/startup',
+    component: StartupComponent
+  },
+  {
+    path: 'ng2/device/file',
+    component: FileComponent
+  },
+  {
+    path: 'ng2/billing-dashboard',
+    component: DashboardBillingComponent
+  },
+  {
+    path: 'ng2/company-contracts',
+    component: CompanyContractsComponent
+  }
 ];
 
 /**

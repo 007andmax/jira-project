@@ -112,19 +112,29 @@ export class TicketsFilter {
         if (this.selectedCompany) {
             payload.groupFieldFilters[0].fieldFilterDtos.push({
                 operator: "EQ",
-                path: "companyId",
+                path: "company.id",
                 values: [this.selectedCompany.id]
             });
             payload.groupFieldFilters[0].predicateRule = "AND";
 
         }
         if (this.selectedTechUser) {
-            payload.groupFieldFilters[0].fieldFilterDtos.push({
-                operator: "EQ",
-                path: "assignedUser.id",
-                values: [this.selectedTechUser.id]
-            });
-            payload.groupFieldFilters[0].predicateRule = "AND";
+            payload.groupFieldFilters.push({
+                fieldFilterDtos: [{
+                    operator: "EQ",
+                    path: "assignedUser.id",
+                    values: [this.selectedTechUser.id]
+                },
+                {
+                    path: "multiAssignedUsers.id",
+                    operator: "IN",
+                    values: [
+                        this.selectedTechUser.id
+                    ]
+                }],
+                predicateRule: "OR"
+            })
+           
         }
         if (this.selectedUser) {
 

@@ -1,0 +1,34 @@
+.details-header,.details-content {
+    display: flex;
+}
+.time-header,.time-content {
+    width: 60px !important;
+}
+.time-header {
+    text-align: left;
+    padding: 0px 6px 0px 10px !important;
+}
+.time-content {
+    text-align: right;
+}
+.details-header-company,.details-header-service,.details-content-company {
+    width: auto !important;
+    flex: 1;
+}
+.details-content-service {
+    widows: 20% !important;
+    flex: 1;
+}
+.total-hours {
+    display: flex;
+    margin: 0px 20px;
+    .total-hours-content {
+        padding: 0px 5px 0px 0px !important;
+        flex: 1;
+        float: none !important;
+        margin: 0px -7px 20px 0px;
+    }
+}
+.details-content-user {
+    width:  15% !important;
+}

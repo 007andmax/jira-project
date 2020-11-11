@@ -14,6 +14,7 @@
     color: white;
     line-height: 36px;
     white-space: nowrap;
+    border: none;
 
     &.--loading {
       color: transparent !important;
@@ -34,6 +35,15 @@
       color: #16a4fa;
     }
 
+    &.--transparent {
+      border: none;
+      background: transparent;
+      text-decoration: underline;
+      color: #16a4fa;
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+
     &.--btn40h {
       padding-left: 20px;
       padding-right: 20px;
@@ -46,4 +56,22 @@
       cursor: default;
       background-color: #d1d2d5;
     }
+}
+
+.btn-filter {
+  padding-left: 30px;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  background-size: 16px;
+  background-color: white;
+  color: #364656;
+  border: none;
+  background-image: url(assets/img/icons/filter.svg);
+  &.active {
+    background-color: #16a4fa10;
+    color: #16a4fa;
+    padding-left: 16px;
+    border: none;
+    background-image: none;
+  }
 }

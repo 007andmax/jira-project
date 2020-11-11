@@ -23,4 +23,5 @@ export class ConstantsService {
     return this.http.get(this.apiUrl + `/data/getConstants`);
     
   }
+ 
 }

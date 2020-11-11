@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { TicketProfileUpdate } from '../../class/ticket-profile-update';
 import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 import { TicketProfile } from '../../class/ticket-profile';
@@ -7,6 +7,7 @@ import { ConfirmStateService } from 'src/ng2/app/components/shared/confirm/servi
 import { REMOVE_UPDATE_TICKET, REMOVE_UPDATE_TICKET_SERVICE, REMOVE_UPDATE_TICKET_PRODUCT } from 'src/ng2/app/const/confirm';
 import { TicketStateService } from '../services/ticket-state.service';
 import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-ticket-profile-updates',
@@ -23,7 +24,8 @@ export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
   constructor(private ticketsService: TicketsService,
     private confirmStateService: ConfirmStateService,
     private ticketStateService: TicketStateService,
-    private notificationStateService: NotificationStateService, ) { }
+    public cd: ChangeDetectorRef,
+    private notificationStateService: NotificationStateService,) { }
   ngOnInit() {
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
@@ -61,6 +63,7 @@ export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
       this.onFetchUpdates.emit(resp);
       this.showPreloader = false;
       this.showLoadMoreUpdates = false;
+      this.cd.detectChanges();
     })
   }
   getCountUpdates() {

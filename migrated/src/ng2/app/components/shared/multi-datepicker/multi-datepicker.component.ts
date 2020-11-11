@@ -41,7 +41,7 @@ export class MultiDatepickerComponent implements OnInit {
   onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {
       this.fromDate = date;
-    } else if (this.fromDate && !this.toDate && date.after(this.fromDate)) {
+    } else if (this.fromDate && !this.toDate) {
       this.toDate = date;
     } else {
       this.toDate = null;
@@ -120,6 +120,14 @@ export class MultiDatepickerComponent implements OnInit {
       start: '',
       end: ''
     });
+    this.fromDate = undefined;
+    this.toDate = undefined;
+    this.setSelectedDateModel('', '');
+    this.hideDatePicker();
+  }
+
+  public clearWithOutChanges() {
+    
     this.fromDate = undefined;
     this.toDate = undefined;
     this.setSelectedDateModel('', '');

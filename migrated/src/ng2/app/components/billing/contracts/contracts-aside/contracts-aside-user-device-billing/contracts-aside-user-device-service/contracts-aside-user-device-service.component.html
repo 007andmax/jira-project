@@ -1,0 +1,22 @@
+<tr>
+  <td class="--editable">
+    <mat-error class="qt-tooltip-error qt-w-auto-important" *ngIf="!service.validate">
+      An agreement with current service name already using for current company
+    </mat-error>
+    <mat-error class="qt-tooltip-error qt-w-auto-important" *ngIf="!service.validateDuplicated">
+      The duplicated service name
+    </mat-error>
+    <input type="text" class="qt-input-in-table" [ngClass]="{'--input-error' : !service.validate || !service.validateDuplicated}" [(ngModel)]="service.name" (blur)="checkName()" (input)="onChange()" />
+  </td>
+  <td class="col-count --editable"> <input type="text" class="qt-input-in-table qt-text-right" decimalNumber
+    placeholder="1"
+    [value]="service.count"
+    (onChange)="service.count=$event"  /></td>
+  <td class="col-tax --editable"><app-invoice-form-ticket-edit-taxes   class="qt-taxes-multiselect" #taxesDropDown (taxesChange)="onTaxesChange($event)"></app-invoice-form-ticket-edit-taxes></td>
+  <td class="col-price --editable "><input type="text" class="payment-input qt-input-in-table qt-text-right"   number
+    [money]="true"
+    [ngModel]="service.rate"
+    (ngModelChange)="onChangeRate($event)"
+    appToFixed  /></td>
+  <td><div class="icon__raw-clear qt-ic-c qt-sz-16" (click)="remove()"></div></td>
+</tr>

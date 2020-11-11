@@ -1,0 +1,121 @@
+
+
+  <div class="qt-df qt-pos-rel address-block">
+    <hr class="address-block__horisontal-divider">
+    <div class="qt-w50 qt-pt-16 qt-pr-24 qt-pl-32 qt-pb-16">
+      <div class="qt-input-block">
+        <label>Customer Name</label>
+        <input  [value]="company.name" type="text" disabled>
+      </div>
+    </div>
+
+    <div class="qt-w50 qt-pt-30 qt-pl-24 qt-pr-24 qt-pb-30" ngbDropdown [autoClose]="'inside'" #editCustomer="ngbDropdown">
+      <div class="qt-fs-10 qt-ff-sb  qt-df qt-ai-c qt-mb-4 qt-lh-154"><div class="qt-sz-16 icon__company-address qt-ic-c qt-mr-4"></div> BILLING ADDRESS</div>
+      <div class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-dark" [textContent]="company.name"></div>
+      <div class="qt-fs-13 qt-lh-154" [textContent]="company.contacts[0].firstName + ' ' +
+      company.contacts[0].lastName"></div>
+      <div class="qt-fs-13 qt-lh-154" [textContent]="company.addresses[0].addressWithSuitNumberAndPostalCode"></div>
+      <div class="qt-fs-13 qt-lh-154" [textContent]="company.contacts[0].primaryEmail"></div>
+      <div class="qt-fs-13 qt-mb-4" [textContent]="(company.contacts[0].phoneNumbers && company.contacts[0].phoneNumbers.length > 0) ? company.contacts[0].phoneNumbers[0].number : ''"></div>
+    <!--  <div class="qt-fs-13 qt-mb-10">AB T3S 0B5</div>-->
+      <div class="qt-fs-13 qt-color-info  qt-pointer" id="dropdownForm1" ngbDropdownToggle (click)="onEditCustomer()">Edit Customer</div>
+      <div ngbDropdownMenu aria-labelledby="dropdownForm1" >
+      <app-invoice-form-edit-customer #companyEdit (onUpdateCompany)="onUpdateCompany()"  [dropDown]="editCustomer"></app-invoice-form-edit-customer>
+        </div>
+    </div>
+  </div>
+
+  <div class="infoice-info-row qt-df qt-pt-16 qt-pl-30 qt-pr-30 qt-mb-24 ">
+
+    <div  class="qt-input-block qt-mr-16 qt-w100">
+      <label>Invoice#</label>
+      <input  [ngClass]="{'--input-error':!validate.getNumber()}" [(ngModel)]="invoiceNumber" (blur)="onChangeInvoiceNumber()" type="text">
+      <mat-error class="qt-tooltip-error" *ngIf="!validate.getNumber()" [textContent]="'Invoice with number ' + invoiceNumber + ' is already occupied'">
+      </mat-error>
+    </div>
+
+    <div class="qt-input-block qt-mr-16 qt-w100" *ngIf="invoiceTaxNumber">
+      <label [textContent]="invoiceTaxNumber.taxIdDescription"></label>
+      <input [(ngModel)]="invoiceTaxNumber.taxId" (blur)="onChangeTax()"  type="text">
+    </div>
+
+    <div class="qt-input-block qt-mr-16 qt-w100 input_inside_white_important">
+      <label>Invoice Date</label>
+      <app-date-picker [formatDate]="formatDate" [editMode]="true" [editDate]="invoice.invoiceDataDto.date" [useMinDate]="false" (onChange)="onChangeDate($event)"></app-date-picker>
+    </div>
+
+    <div class="qt-input-block qt-w100 input_inside_white_important">
+      <label>Due Date</label>
+      <app-date-picker [formatDate]="formatDate"  [editMode]="true"  [editDate]="invoice.invoiceDataDto.dueDate" [useMinDate]="true" (onChange)="onChangeDueDate($event)"></app-date-picker>
+
+    </div>
+  </div>
+
+  <div class="invoice-items" >
+    <div class="qt-df qt-jc-fe qt-mb-10 qt-pr-30 qt-pl-30">
+      <button class="billing-aside-edit-mode" *ngIf="!editMode" (click)="editMode = true">Edit</button>
+      <button class="qt-ml-10 billing-aside-save-mode" *ngIf="editMode" (click)="onEditTickets()">Save</button>
+      <button class="qt-ml-10 billing-aside-cancel-mode" *ngIf="editMode" (click)="onCancelTickets()">Cancel</button>
+    </div>
+    <div *ngIf="!editMode">
+      <ng-template ngFor let-ticket [ngForOf]="invoice.invoiceDataDto.tickets" let-i="index" [ngForTrackBy]="trackByIndex">
+        <app-invoice-form-ticket-info  [ticketsLength]="invoice.invoiceDataDto.tickets.length" (onDelete)="delete(i)"
+          [ticket]="ticket"></app-invoice-form-ticket-info>
+      </ng-template>
+    </div>
+
+
+    <div *ngIf="editMode">
+      <ng-template ngFor let-ticket [ngForOf]="editTickets" let-i="index" [ngForTrackBy]="trackByIndex">
+        <app-invoice-form-ticket-edit (onUpdateSubject)="onUpdateSubjectTicket($event,i)" [ticket]="ticket"></app-invoice-form-ticket-edit>
+      </ng-template>
+    </div>
+
+
+
+<app-invoice-discount (onDelete)="onDeleteDiscount($event)" (onUpdate)="onUpdateDiscount($event)" [lockId]="invoice.lockId" *ngIf="toggleDiscount"></app-invoice-discount>
+  </div>
+
+  <div class="summary-info qt-df qt-pl-30 qt-pr-30 qt-pb-24 qt-jc-sb">
+    <div>
+      <div class="qt-mb-30" *ngIf="!toggleDiscount">
+        <div class="info-button-sm qt-ff-gm" (click)="toggleDiscount = !toggleDiscount"><div class="icon__discount qt-mr-4 qt-sz-16 qt-ic-c"></div> Apply Discount</div>
+      </div>
+
+ <app-invoice-regular-note   [invoiceNotes]="invoiceNotes" (onUpdateInvoiceData)="updateInvoiceData($event)"></app-invoice-regular-note>
+    </div>
+
+    <div>
+      <div class="invoice-total qt-color-dark" >
+        <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-15">
+          <div>Sub Total</div>
+          <div [textContent]="(invoice.invoiceDataDto.productsSum + invoice.invoiceDataDto.servicesSum ) |
+          currency"></div>
+        </div>
+        <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-15" *ngIf="invoice.invoiceDataDto.invoiceDiscount">
+          <div>Discount</div>
+          <div [textContent]="(-invoice.invoiceDataDto.invoiceDiscount.amount) |
+          currency"></div>
+        </div>
+        <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-15">
+          <div>Tax</div>
+          <div [textContent]="invoice.invoiceDataDto.taxSum | currency"></div>
+        </div>
+        <div class="qt-df qt-jc-sb qt-pt-15 invoice-total__total-line">
+          <div class="qt-fs-13 qt-fw-b">Total</div>
+          <div class="qt-fs-16 qt-fw-b" [textContent]="invoice.invoiceDataDto.totalSum | currency"></div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="terms-n-conditions qt-pl-30 qt-pr-30 qt-pb-24 qt-pt-16">
+
+    <div class="qt-fs-13 qt-ff-gm qt-mb-12">Terms & Conditions</div>
+    <div class="qt-fs-12 qt-color-info qt-ff-gm pointer"  *ngIf="changeGlobalNote" (click)="onUpdateGlobalNote()">Save Terms & Conditions</div>
+
+    <textarea id="description-global-note" (input)="onCheckUpdateGlobalNote()" class="terms-n-conditions__textarea qt-textarea" placeholder="Enter the terms and conditions of your business to be displayed in your transaction" appTextArea    maxlength="250"   cols="30" rows="1"></textarea>
+
+  </div>

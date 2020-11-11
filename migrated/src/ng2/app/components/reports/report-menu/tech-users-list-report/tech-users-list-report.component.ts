@@ -35,6 +35,8 @@ export class TechUsersListReportComponent implements OnInit, OnDestroy {
         return item;
       }
     });
+    this.resUserList.sort((a, b) => ((`${a.firstName} ${a.lastName}`).toLowerCase() > (`${b.firstName} ${b.lastName}`).toLowerCase()) ?
+    1 : (((`${b.firstName} ${b.lastName}`).toLowerCase() > (`${a.firstName} ${a.lastName}`).toLowerCase()) ? -1 : 0));
     this.usersList = JSON.parse(JSON.stringify(this.resUserList));
   }
   getSelectedUser() {

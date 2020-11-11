@@ -1,0 +1,134 @@
+.dropdown-menu {
+    transform: translate(0, 0) !important;
+    top: auto !important;
+    left: 17px !important;
+    width: 230px;
+  }
+  .add-tax {
+    position: absolute;
+    top: -16px;
+    right: 18px;
+    color: #16a4fa;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  .new-tax {
+    overflow: hidden;
+  }
+
+  .tax-title {
+    font-size: 15px;
+    color: #364656;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+
+  .add-tax-inventory {
+    top: 0 !important;
+
+    .control-label {
+      top: -13px !important;
+      color: red;
+      font-family: Graphik-Regular, sans-serif !important;
+    }
+    .new-tax {
+      overflow: visible;
+      width: 346px !important;
+      height: fit-content;
+    }
+
+    .add-tax-dropdown {
+      width: 100%;
+    }
+
+    .dropdown {
+      left: -30px;
+      top: -5px;
+
+    }
+
+    .add-tax-dropdown {
+      padding: 15px;
+
+      input {
+        height: 40px;
+        padding: 0 12px;
+        font-size: 13px;
+        border: 1px solid #c4cbd5;
+        border-radius: 4px;
+        margin-bottom: 17px;
+        color: rgb(64, 75, 95);
+      }
+
+      .add-tax-label {
+        font-size: 13px;
+        margin-bottom: 11px;
+        font-weight: 600;
+        color: #4f5f79;
+      }
+
+      .control-label {
+        position: absolute;
+        top: 15px;
+        padding: 0;
+      }
+  }
+
+  }
+
+  .label-name {
+    font-family: Graphik-Medium, sans-serif;
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+
+  .new-taxes-area {
+    margin-top: 20px !important;
+
+    .report-caret-icon {
+        top: 40px !important;
+        right: 25px;
+    }
+
+    .dropdown-menu {
+      width: calc(100% - 30px);
+    }
+
+    .dropdown-item {
+        align-items: center;
+        display: flex;
+        position: relative;
+        button {
+          color: #4c5c6f;
+        }
+    }
+  }
+
+  #dropdownTypeTaxes {
+    outline: none;
+    height: 40px;
+    padding: 0 12px;
+    font-size: 13px;
+    border: 1px solid #c4cbd5;
+    border-radius: 4px;
+    width: 100%;
+    background: white;
+    &::placeholder {
+      color: #9ca5b6;
+    }
+  }
+
+.submit-tax-item {
+  margin-right: 12px;
+  width: auto !important;
+}
+
+.cancel-tax-item, .cancel-tax-item:hover {
+  width: auto !important;
+  background-color: #edf2f6 !important;
+  color: #4f5f79 !important
+}
+
+label.checkbox {
+  font-family: Graphik-Regular, sans-serif !important;
+}

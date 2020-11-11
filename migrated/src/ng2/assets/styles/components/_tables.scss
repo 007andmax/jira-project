@@ -3,6 +3,7 @@ table.qt-table-modern {
   border-collapse: separate;
   border-spacing: 0 2px;
 
+
   thead {
     font-size: 12px;
     th {
@@ -18,7 +19,7 @@ table.qt-table-modern {
         height: 48px;
         border-top: 1px solid transparent;
         border-bottom: 1px solid transparent;
-
+        vertical-align: middle;
         &:last-child {
           border-top-right-radius: 5px;
           border-bottom-right-radius: 5px;
@@ -70,8 +71,60 @@ table.qt-table-modern {
     }
 }
 
+.qt-table-modern__sorting {
+  position: relative;
+  width: 8px;
+  height: 12px;
+  display: inline-flex;
+  line-height: 8px;
+  top: 2px;
 
+  &:before {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 6px;
+    background-image: url('assets/img/icons/sorting-up.svg');
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 6px;
+    top: 6px;
+    background-image: url('assets/img/icons/sorting-down.svg');
+  }
+}
 
 .h100 {
   height: 100%;
+}
+
+.page-list {
+  .qt-table-modern {
+    max-width: 1320px;
+    margin: 0 auto;
+    min-width: 1064px;
+  }
+
+  .table-container {
+    overflow-x: auto;
+    min-height: calc(100vh - 346px);
+    overflow-x: auto;
+  }
+
+  .sticky-list-table-header .qt-table-modern {
+    min-width: unset;
+    th {
+      white-space: nowrap;
+    }
+  }
+}
+
+@media (min-width: 1920px) {
+  .page-list {
+    .qt-table-modern {
+      max-width: unset;
+    }
+  }
 }

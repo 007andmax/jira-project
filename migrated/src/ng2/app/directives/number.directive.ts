@@ -13,7 +13,7 @@ import { CommonService } from '../services/common/common.service';
 export class numberDirective {
     lastValue: number = 1;
     @Input("money") money: boolean = false;
-    
+    @Input("useFixed") useFixed: boolean = true;
     constructor(private element: ElementRef, private commonService: CommonService) { }
     ngOnInit() {
       
@@ -22,7 +22,11 @@ export class numberDirective {
         });
         if (this.money) {
             this.element.nativeElement.addEventListener("blur", (event) => {
-                if (event.target.value) event.target.value = parseFloat(event.target.value).toFixed(2);
+                if (event.target.value) {
+                    event.target.value = (this.useFixed) ?  parseFloat(event.target.value).toFixed(2) : parseFloat(event.target.value)
+                } else {
+                    event.target.value = 0;
+                }
             });
         }
 
@@ -42,7 +46,5 @@ export class numberDirective {
         } else {
             this.lastValue = 1;
         }
-
     }
-
 }

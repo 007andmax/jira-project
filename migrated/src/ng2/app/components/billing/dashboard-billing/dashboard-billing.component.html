@@ -1,0 +1,46 @@
+<app-left-panel-billing></app-left-panel-billing>
+<div class="billing-dashboard-page">
+  <div class="loading" *ngIf="showPreloader"></div>
+  <div class="billing-dashboard-page__content" *ngIf="!showPreloader">
+    <div class="qt-df qt-ai-c qt-jc-sb qt-mb-16">
+      <h3 class="list-title qt-mt-0 qt-mb-0 qt-fs-16 qt-ff-sb">Dashboard</h3>
+      <div [textContent]="'Accounting date: ' + getTextAccountingStartDate()"></div>
+    </div>
+
+    <div class="qt-df qt-jc-sb qt-mb-16">
+      <app-dashboard-stats [title]="'Total Sales'" [total]="dashboard.totalSales" [class]="'icon__total-sales'"></app-dashboard-stats>
+    <!-- <app-dashboard-total-sales [totalSales]="dashboard.totalSales"></app-dashboard-total-sales>
+-->
+<app-dashboard-stats [title]="'Unpaid Invoices'" [total]="dashboard.totalReceivableUnpaid" [class]="'icon__unpaid-invoice'"></app-dashboard-stats>
+
+    <!-- <app-dashboard-unpaid-invoices [totalReceivableUnpaid]="dashboard.totalReceivableUnpaid"></app-dashboard-unpaid-invoices>-->
+    <app-dashboard-stats [title]="'Unbilled Amount'" [total]="dashboard.totalBillable" [class]="'icon__unbilled-amount'"></app-dashboard-stats>
+
+    <!--  <app-dashboard-unbilled-amount [totalBillable]="dashboard.totalBillable"></app-dashboard-unbilled-amount>-->
+    <app-dashboard-stats [title]="'Total Quotes'" [total]="dashboard.saleQuotesPossibleRevenue" [class]="'icon__quotes'"></app-dashboard-stats>
+
+    <!-- <app-dashboard-total-quotes [saleQuotesPossibleRevenue]="dashboard.saleQuotesPossibleRevenue"></app-dashboard-total-quotes>-->
+    </div>
+    <app-dashboard-sales-analytics #dashboardStats (onSelectType)="getDashboard($event)" [chartData]="dashboard.chartData"></app-dashboard-sales-analytics>
+    <div class="qt-df qt-jc-sb qt-mb-16">
+<app-invoice-revenue [accountingStartDate]="accountingStartDate" ></app-invoice-revenue>
+
+
+<app-dashboard-quotes [stats]="dashboard.saleQuoteCounters"></app-dashboard-quotes>
+
+<app-contracts-dashboard #contractsDb [contractsDashboard]="contractsDashboard"></app-contracts-dashboard>
+    </div>
+    <div class="qt-df qt-jc-sb">
+      <div class="contract-info-list qt-mr-16">
+       <app-top-dashboard [title]="'Top Customer Sale'" [list]="topDashboard.top5InvoicesSum"></app-top-dashboard>
+      </div>
+
+      <div class="contract-info-list qt-mr-16">
+        <app-top-dashboard [title]="'Top Outstanding Customer'" [list]="topDashboard.top5OutstandingInvoicesSum"></app-top-dashboard>
+      </div>
+      <div class="contract-info-list">
+      <app-top-product-dashboard [title]="'Top Selling Products'" [list]="topDashboard.top5SellingProducts"></app-top-product-dashboard>
+      </div>
+    </div>
+  </div>
+</div>

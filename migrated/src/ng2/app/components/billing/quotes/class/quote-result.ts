@@ -4,7 +4,7 @@ export class QuoteResult {
     constructor(message) {
         this.message = message;
     }
-    public setShow (show) {
+    public setShow(show) {
         this.show = show;
     }
     public getMessage() {

@@ -1,0 +1,17 @@
+<div class="qt-df qt-ai-c">
+  <app-drop-down class="contracts-company-filter search-company" [search]="true"  #companyDp  [placeholder]="'Select Company'"
+    [change]="true" [field]="'name'" [list]="companies"
+    (onSelectedItem)="onSelectCompany($event)"></app-drop-down>
+
+
+  <app-drop-down  class="contracts-company-filter search-users "    #typesDp [placeholder]="'Contract Type'"
+    [change]="false" [list]="listsTypes" [field]="'title'"
+    (onSelectedItem)="onSelectType($event)"></app-drop-down>
+
+
+    <app-multi-datepicker    class="qt-input-block contracts-date-filter search-type" #datesDp (selectedDate)="filterByDate($event)"></app-multi-datepicker>
+
+    <app-drop-down  class="contracts-status-filter search-status "  #statusDp  [placeholder]="'Select by Status'"
+    [change]="false" [list]="listsStatus" [field]="'title'"
+    (onSelectedItem)="onSelectStatus($event)"></app-drop-down>
+</div>

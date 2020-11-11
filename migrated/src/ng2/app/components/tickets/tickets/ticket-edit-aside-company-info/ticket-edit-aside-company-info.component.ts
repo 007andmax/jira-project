@@ -17,21 +17,18 @@ import { UsersStateService } from 'src/ng2/app/states/users/users-state.service'
 
 })
 export class TicketEditAsideCompanyInfoComponent implements OnInit {
+  @Input() createdUser: CurrentUser;
+  @ViewChild('companyHistory') companyHistory: CompanyInfoHistoryComponent;
+  @Input() set setCompanyId(value) {
+    this.companyId = value;
+    this.company = this.companiesStateService.getCompanies().find(item => item.id === this.companyId);
+    if (this.company && this.createdUser) this.showPreloader = false;
+  };
   companyId: string;
   company: Company;
   lastUserId: string = '';
   lastCompanyId: string = '';
-  showPreloader:boolean = true;
-  @Input() createdUser: CurrentUser;
-  @ViewChild('companyHistory') companyHistory:CompanyInfoHistoryComponent;
-  @Input() set setCompanyId(value) {
-    this.companyId = value;
-    this.company = this.companiesStateService.getCompanies().find(item => item.id === this.companyId);
-   
-     if (this.company && this.createdUser)   this.showPreloader = false;
-  };
-  
- 
+  showPreloader: boolean = true;
   reputations = [1, 2, 3, 4, 5];
   public primaryContact: CompanyAndressContact;
   public primaryAddress: CompanyAndress;
@@ -40,18 +37,17 @@ export class TicketEditAsideCompanyInfoComponent implements OnInit {
   public workingTime: string = '';
   constructor(private companiesStateService: CompaniesStateService,
     public ticketsListService: TicketsListService,
-    private usersStateService:UsersStateService,
+    private usersStateService: UsersStateService,
     private mapModalStateService: MapModalStateService) { }
 
   ngOnInit() {
-   
+
   }
   ngDoCheck() {
     if (this.company) {
       let primaryContact,
         primaryAddress,
         primaryPhone;
-
       if (this.company.companyInfo) {
         if (this.company.companyInfo.contacts) {
           for (let contact of this.company.companyInfo.contacts) {
@@ -65,10 +61,9 @@ export class TicketEditAsideCompanyInfoComponent implements OnInit {
         }
         if (primaryAddress && primaryAddress.phoneNumbers.length) primaryPhone = primaryAddress.phoneNumbers[0];
         if (!this.company.companyInfo.workingTime) {
-          this.workingTime= '';
+          this.workingTime = '';
         } else {
           let workingTime = this.company.companyInfo.workingTime[new Date().getDay() - 1];
-
           let startTime = workingTime.startTime / 3600;
           let typeTime = (startTime > 12) ? "PM" : "AM";
           startTime = (startTime > 12) ? startTime - 12 : startTime;
@@ -77,33 +72,26 @@ export class TicketEditAsideCompanyInfoComponent implements OnInit {
             minutes = Math.round(timeInMinutes - (hours * 60));
           this.workingTime = `${(hours < 10) ? '0' + hours : hours}:${(minutes < 10) ? '0' + minutes : minutes} ${typeTime}`;
         }
-       
       }
-
       this.primaryContact = primaryContact;
       this.primaryAddress = primaryAddress;
       this.primaryPhone = primaryPhone;
-
-
       if (primaryAddress) {
         this.location = primaryAddress.addressWithSuitNumberAndPostalCode;
       } else {
         this.location = '';
       }
       if (this.company && this.createdUser && this.companyHistory) {
-        
-          this.lastCompanyId = this.company.id;
-          this.lastUserId = this.createdUser.id;
-          this.companyHistory.onInitGetTickets();
-        
-         }
+        this.lastCompanyId = this.company.id;
+        this.lastUserId = this.createdUser.id;
+        this.companyHistory.onInitGetTickets();
+      }
     }
-   
   }
   getPhoneNumbers(userId) {
-   let user =  this.usersStateService.getAllUsers().find(item => item.id === userId);
-   if (user && user.phoneNumbers) return user.phoneNumbers;
-   return [];
+    let user = this.usersStateService.getAllUsers().find(item => item.id === userId);
+    if (user && user.phoneNumbers) return user.phoneNumbers;
+    return [];
   }
   onShowMap() {
     this.mapModalStateService.onSohwMap({

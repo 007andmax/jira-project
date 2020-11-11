@@ -39,20 +39,20 @@ body
             background-color: transparent;
             @media only screen and (max-width:1280px){
                 width: 100%;
-                padding-left: 285px;
+                padding-left: 345px !important;
                 padding-right: 30px;
                 .left-panel-closed .content-container{margin: 0;}
             }
             @media only screen and (max-width:1099px){
-                padding-left: 25px;
+                padding-left: 25px !important; 
                 padding-right: 25px;
             }
             @media only screen and (max-width:768px){
-                padding: 0;
+                padding: 0 !important;
             }
         }
-        /*** Top SearchBar ***/
-        .global-search {
+        /*** Top SearchBar ***/ 
+        .global-search { 
             .dropdown-menu {
                 .category {
                     .category-name{
@@ -467,19 +467,22 @@ table{
         -webkit-box-shadow:none;
         -moz-box-shadow:none;
         box-shadow:none;
+         position: relative;
+        top:auto;
+        left:auto;
         .modal-content{
             -ms-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
             -o-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
             -webkit-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
             -moz-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
             box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
-            overflow: hidden;
+            // overflow: hidden;
             border:none;
             background-color: #f3f7f9;
             @include opacity(1);
             @include border-radius(5px);
             padding: 40px 32px 25px 32px;
-            margin:50px auto;
+            margin:0 auto;
             .modal-header,.modal-body{
                 padding: 0;
                 border:none;
@@ -502,11 +505,27 @@ table{
             outline: none;
             border: none;
             opacity: 1;
+            z-index: 1;
         }
       }
     .f-row  {
         margin-bottom: 0;
     }
+}
+
+@media only screen and (min-width: 576px)
+{
+    .modal-dialog-centered {
+        min-height: calc(100% - 3.5rem);
+        display: flex;
+        align-items: center;
+        margin: 1.75rem auto;
+        &::before{
+            height: calc(100vh - 3.5rem);
+        }
+       
+    }
+
 }
 
 .m-btn-row {
@@ -843,10 +862,15 @@ header{
         }
        
     }
+    .tag_description {	
+        float: left;	
+        width: 100%;	
+        padding: 34px 48px 24px 48px;	
+    }
 }
 
 /*** Common Tabbings ***/
-tabset {
+ngb-tabset {
     float: left;
     width: 100%;
     ul.nav-tabs {
@@ -901,15 +925,15 @@ tabset {
                     @include transition(0.4s);
 
                 }
+                &:hover,&.active{
+                        color: #16a4fa;
+                        &::after{
+                            border-color: #16a4fa;
+                        }
+                    
+                } 
             }
-            &:hover,&.active{
-                .nav-link{
-                    color: #16a4fa;
-                    &::after{
-                        border-color: #16a4fa;
-                    }
-                }
-            }   
+              
         }
     }
     .tab-content{
@@ -1427,7 +1451,7 @@ tabset {
     position: fixed;
     right: -700px;
     @include transition(0.5s);
-    z-index: 9999999;
+    z-index: 1000;
     @media only screen and (max-width: 768px){
         width: 100%;
         top: 0;
@@ -1629,7 +1653,9 @@ tabset {
     margin-bottom: 47px;
     border: solid 2px rgba(22, 164, 250, 0.1);
   }
-  
+  .overlay {
+    display: none;
+}
   .cropping .img-crop image-cropper {
     display: flex;
     margin: 0;
@@ -1638,7 +1664,7 @@ tabset {
     width: 100%;
     justify-content: center;
     align-items: center;
-    overflow: visible;
+    overflow: hidden;
   }
   
   .cropping .preview {
@@ -2294,6 +2320,21 @@ div#editor.angular-editor-textarea {
                 }
             }
         }
+    }
+    .modal-backdrop{
+        background-color: #364656;
+        &.show{
+            opacity: 0.8;
+            filter: alpha(opacity=80);
+        }
+    }
+    .modal.show {
+        .modal-dialog {
+            transform: none;
+        }
+    }
+    .modal-dialog{
+        max-height: inherit;
     }
 }
     
