@@ -1,9 +1,7 @@
-import { NgModule, ViewChild } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { NgModule, ChangeDetectorRef } from '@angular/core';
 import { Component, OnInit,ViewEncapsulation  } from '@angular/core';
 import {NgbDropdownToggle,NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { TicketProfileFormService } from '../../../../ng2/app/components/tickets/tickets/ticket-edit-aside/class/ticket-profile-form-service';
-import { TicketProfileUpdatesServiceTimepickerComponent } from '../../components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-timepicker/ticket-profile-updates-service-timepicker.component';
 import { CompaniesService } from 'src/ng2/app/services/company/companies.service';
 import { CompanyProfile } from '../companies/class/company-profile';
 import { Subscription } from 'rxjs';
@@ -16,6 +14,9 @@ import { DownloadAgentComponent } from '../companies/download-agent/download-age
 import { Company } from '../../interfaces/company/company';
 import { DomSanitizer } from "@angular/platform-browser";
 import { ToastrService } from 'ngx-toastr';
+import { ServiceAgreement } from '../billing/contracts/class/service-agreement';
+import { ContractsStateService } from '../../states/contracts/contracts-state.service';
+import { CompanyTagsStateService } from '../companies/company-tags/states/company-tags-state.service';
 declare let d3: any;
 @Component({
   selector: 'company-dashboard',
@@ -28,13 +29,6 @@ declare let d3: any;
   imports: [NgbDropdownToggle,NgbModal]  
 })
 export class CompanyDashboardComponent implements OnInit {
-  @ViewChild('timePicker1') timePicker1: TicketProfileUpdatesServiceTimepickerComponent;
-  @ViewChild('timePicker2') timePicker2: TicketProfileUpdatesServiceTimepickerComponent;
-  @ViewChild('timePicker3') timePicker3: TicketProfileUpdatesServiceTimepickerComponent;
-  @ViewChild('timePicker4') timePicker4: TicketProfileUpdatesServiceTimepickerComponent;
-  @ViewChild('timePicker5') timePicker5: TicketProfileUpdatesServiceTimepickerComponent;
-  @ViewChild('timePicker6') timePicker6: TicketProfileUpdatesServiceTimepickerComponent;
-  @ViewChild('timePicker7') timePicker7: TicketProfileUpdatesServiceTimepickerComponent;
   currentService: TicketProfileFormService = new TicketProfileFormService();
   chartOptions: any;
   lineChartOptions: any;
@@ -42,26 +36,26 @@ export class CompanyDashboardComponent implements OnInit {
   lineData: any;
   chartColors = ["#0747a6", "#00ccff", '#cdecff'];
   lineChartColors = ["#0747a6", "#00ccff", '#2bc7c6'];
-  _id = '';
-  companyOpen = 'Close';
+  _id:string = '';
+  companyOpen:string = 'Close';
   company: Company;
-  totalTickets = 0;
-  averageResponseTime = '';
+  totalTickets:number = 0;
+  averageResponseTime:string = '';
   public countUsers: number = 0;
   public countDevices: number = 0;
   showArchivedCompanies = false;
   recentInvoiceList = [];
   contractsList = [];
   sub: Subscription = new Subscription();
-  totalRevenue = '';
-  invoicedSum = 0;
-  collectedSum = 0;
-  outstandingSum = 0;
-  addresses = '';
-  phoneNumber = '';
-  name = '';
-  month = '12'
-  ticketFrequency = 'Monthly';
+  totalRevenue:string = '';
+  invoicedSum:number = 0;
+  collectedSum:number = 0;
+  outstandingSum:number = 0;
+  addresses:string = '';
+  phoneNumber:string = '';
+  name:string = '';
+  month:string = '12'
+  ticketFrequency:string = 'Monthly';
   primaryContact = {
     firstName: '',
     lastName: '',
@@ -72,9 +66,10 @@ export class CompanyDashboardComponent implements OnInit {
   tags = [];
   statistics = [];
   statisticsCount = 0;
-  mapSrc = '';
-  serviceType = '';
-  domain = '';
+  mapSrc:string = '';
+  serviceType:string = '';
+  domain:string = '';
+  tagSaved:boolean = false;
   serviceTypesMap = {
     HOURLY: 'Hourly',
     BLOCK_TIME: 'Block time',
@@ -86,24 +81,29 @@ export class CompanyDashboardComponent implements OnInit {
     BLOCK_TIME: 'Block Time',
     SERVICE_CONTRACT: 'Service Contract',
   };
-  closingSoon = false;
+  closingSoon:boolean = false;
   workingDays = [];
   statisticsColor = ['0747a6', '00ccff', '052e6b', 'cdecff', '16A4FA', '7C77CB', '2BC7C6'];
   clientIndustry: string = '';
   modalReference: any;
+  showContractPreview: boolean = false;
   public companyDetail: CompanyProfile;
+  serviceAgreement: ServiceAgreement;
   constructor(private modalService: NgbModal,
     private companiesService: CompaniesService,
     private devicesState: DevicesSateService,
     private usersStateService: UsersStateService,
-    private route: ActivatedRoute,
     private companiesStateService: CompaniesStateService,
     private downloadAgentStateService: DownloadAgentStateService,
     private toaster: ToastrService,
-    private sanitizer: DomSanitizer) {}
+    private sanitizer: DomSanitizer,
+    public cd: ChangeDetectorRef,
+    public contractsStateService: ContractsStateService,
+    private tagsState: CompanyTagsStateService) {}
   closeResult = '';
 
   open(content: any) {
+    this.tagsState.setTagsFromtEdit(this.tags);
     this.modalReference = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title',centered: true , windowClass: 'cmp-comapny-modal'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     });
@@ -133,6 +133,14 @@ export class CompanyDashboardComponent implements OnInit {
         this.onGetUsersCount(data);
       })
       this.sub.add(getOnUsers);
+      let getOnPreview = this.contractsStateService.getOnPreview().subscribe(data => {
+        this.serviceAgreement = data;
+        this.showContractPreview = true;
+        if (!this.cd['destroyed']) {
+          this.cd.detectChanges();
+        }
+      })
+      this.sub.add(getOnPreview);
       if (this.devicesState.getAllDevices()) this.onGetDevicesCount(this.devicesState.getAllDevices());
       let getOnDevices = this.devicesState.getOnDevices().subscribe((data) => {
         this.showArchivedCompanies = false;
@@ -289,8 +297,12 @@ export class CompanyDashboardComponent implements OnInit {
   }
 
   public onChangeTags(tags) {
-     
-    // this.company.setTags(tags);
+    this.companyDetail.tags = tags;
+  }
+
+  saveTags() {
+    this.tagSaved = true;
+    this.saveCompany();
   }
 
   getCharacter(name) { 
@@ -396,28 +408,28 @@ export class CompanyDashboardComponent implements OnInit {
   getTicketGraph(frequency: string) {
     let getTicket = this.companiesService.getTicketGraph(this._id, frequency.toUpperCase()).subscribe((data: any) => {
       this.ticketFrequency = frequency;
-      let avgTime = [];
-      let ticketCount = [];
-      let resTime = [];
+      let countOfInProgressTickets = [];
+      let countOfOnHoldTickets = [];
+      let countOfCompletedTickets = [];
       data.forEach(element => {
-        avgTime.push([new Date(element.date), element.averageTime]);
-        ticketCount.push([new Date(element.date), element.countOfNewTickets]);
-        resTime.push([new Date(element.date), element.responseTime]);
+        countOfInProgressTickets.push([new Date(element.date), element.countOfInProgressTickets]);
+        countOfOnHoldTickets.push([new Date(element.date), element.countOfOnHoldTickets]);
+        countOfCompletedTickets.push([new Date(element.date), element.countOfCompletedTickets]);
       });
       this.lineData = [
         {
-            key: "Average Time",
-            values: avgTime
+            key: "In Progress",
+            values: countOfInProgressTickets
         },
         {
-            key: "New Tickets Count",
-            values: ticketCount
+            key: "On Hold",
+            values: countOfOnHoldTickets
         },
   
   
         {
-            key: "Response Time",
-            values: resTime
+            key: "Completed",
+            values: countOfCompletedTickets
         }
       ];
     });
@@ -523,9 +535,15 @@ export class CompanyDashboardComponent implements OnInit {
 
   saveCompany() {
     let savecompany = this.companiesService.editWoringHours(this.companyDetail).subscribe((data: any) => {
-      this.toaster.success('Working hours updated successfully', null, {
+      let msg = 'Working hours updated successfully';
+      if (this.tagSaved == true) {
+        msg = 'Tags saved successfully'; 
+        this.tags = this.companyDetail.tags;
+      }
+      this.toaster.success(msg, null, {
         timeOut: 5000
       });
+      this.tagSaved = false;
     });
     this.sub.add(savecompany);
   }
@@ -652,6 +670,10 @@ export class CompanyDashboardComponent implements OnInit {
 
     const value = h + ':' + m;
     return value;
+  }
+
+  openContractPreview() {
+    this.showContractPreview = true;
   }
 
 }

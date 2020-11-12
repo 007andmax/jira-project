@@ -13,28 +13,6 @@
           >
           </div>
           <div class="cmp-dboard-rating d-flex">
-            <!-- <span class="d-flex">
-              <img
-                src="html/ng2/assets/img/company-details/rating-filled.svg"
-                alt="rating"
-              />
-              <img
-                src="html/ng2/assets/img/company-details/rating-filled.svg"
-                alt="rating"
-              />
-              <img
-                src="html/ng2/assets/img/company-details/rating-filled.svg"
-                alt="rating"
-              />
-              <img
-                src="html/ng2/assets/img/company-details/rating-filled.svg"
-                alt="rating"
-              />
-              <img
-                src="html/ng2/assets/img/company-details/rating.svg"
-                alt="rating"
-              />
-            </span> -->
             <span class="d-flex" *ngIf="companyDetail?.reputation === undefined || companyDetail?.reputation === null ">
               <img *ngFor="let item of arrayOne(5); let i = index;"
                 src="html/ng2/assets/img/company-details/rating.svg"
@@ -65,18 +43,11 @@
               Get Direction</a
             >
           </div>
-          <!-- <div class="other-info-col d-flex">
-            <div class="small-title">Website</div>
-            <a href="https://{{domain}}" target="_blank"
-              >{{domain}}</a
-            >
-          </div> -->
           <div class="other-info-col d-flex">
             <div class="small-title">Working Hours</div>
             <div class="working-hrs d-flex">
                 <div ngbDropdown class="d-flex">
-                  <!-- <button class="selected-item" id="dropdownBasic1" ngbDropdownToggle>Opens  9:30 AM</button> -->
-                  <button class="selected-item" id="dropdownBasic1" ngbDropdownToggle>{{companyOpen}}</button>
+                 <button class="selected-item" id="dropdownBasic1" ngbDropdownToggle>{{companyOpen}}</button>
                   <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                     <button class="item" ngbDropdownItem *ngFor="let hours of workingDays">{{hours.dayOfWeek}}<span *ngIf="hours.startTime !== 0 && hours.endTime !== 0">{{hours.timing}}</span><span *ngIf="(hours.startTime === 0 || hours.startTime === null) && (hours.endTime === 0 || hours.endTime === null)">Close</span></button>
                     <div class="item"> 
@@ -121,7 +92,7 @@
         <div class="profile-cmp-board tags-area d-flex">
           <div class="small-title d-flex">
             Tags
-            <!-- <a href="javascript:;" (click)="openTag(tag)">+Add</a> -->
+            <a href="javascript:;" (click)="open(tag)">+Add</a>
           </div>
           <div class="tags-tab d-flex">
             <span class="tag" *ngFor="let tag of tags; let i = index;"
@@ -211,18 +182,7 @@
         </div>
         <div class="cmp-board-tickets cmn-box d-flex">
           <div class="cmp-board-title-wrap d-flex">
-            <h2>Tickets</h2> 
-            <!-- <ul class=" list-unstyled chart-status">
-              <li class="progress-in">
-                Average Time
-              </li>
-              <li class="hold">
-                New Tickets Count
-             </li>
-              <li class="complete">
-                Response Time
-              </li>
-          </ul> -->
+            <h2>Tickets</h2>
             <div ngbDropdown class="d-flex">
               <button class="selected-item" id="dropdownBasic1" ngbDropdownToggle>{{ticketFrequency}}</button>
               <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
@@ -306,36 +266,13 @@
                           </div>
                           <div class="cmp-board-progresbbar d-flex">
                               <span *ngFor="let stat of statistics; let i = index;" [style.backgroundColor]="stat.color" [style.width]="stat.width">{{i}}</span>
-                              <!-- <span style="
-                              background-color: #00ccff;
-                              width: 25%;
-                          ">Second cell</span>
-                              <span style="
-                              background-color: #052e6b;
-                              width: 28%;
-                          ">Third cell</span>
-                              <span style="
-                              background-color: #cdecff;
-                              width: 20%;
-                          ">Fourth cell</span> -->
+                             
                           </div>
                           <ul class="list-unstyled d-flex">
                               <li class="d-flex color{{i}}" *ngFor="let stat of statistics; let i = index;">
                                   <span>{{stat.itemName}}</span>
                                   <b>{{stat.quantity}} hr</b>
                               </li>
-                              <!-- <li class="remote-service d-flex">
-                                <span>Remote Service</span>
-                                <b>254</b>
-                              </li>
-                              <li class="block-tile d-flex">
-                                <span>Block Time</span>
-                                <b>200 hr</b>
-                               </li>
-                              <li class="manage-fully d-flex">
-                                <span>Fully Managed</span>
-                                <b>156 hr</b>
-                              </li>   -->
                           </ul>
                           <div class="contract-info d-flex">
                                 <h6>Hourly Contract</h6>
@@ -354,7 +291,7 @@
                            </thead>
                            <tbody>
                               <tr *ngFor="let contract of contractsList">
-                                <td>{{contractType[contract.serviceAgreement.type]}}</td>
+                                <td (click)="openContractPreview()">{{contractType[contract.serviceAgreement.type]}}</td>
                                 <td>{{contract.serviceAgreement.startDateName}}</td>
                                 <td>{{contract.serviceAgreement.endDateName}}</td>
                                 <td class="hold" *ngIf="contract.serviceAgreement.status == 'PENDING'">Pending</td>
@@ -632,16 +569,21 @@
 
 <ng-template #tag let-modal class="map-modal">
   
-  <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+  <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
     close
   </button>
 <div class="modal-body d-flex">
   <div class="h1">Tags</div>
-  <app-company-tags (tagsChange)="onChangeTags($event)"></app-company-tags>
+  <app-company-dash-tags (tagsChange)="onChangeTags($event)" [tagList]="tags"></app-company-dash-tags>
+  <div class="footer-area-modal d-flex">
+    <button type="button" class="btn btn-primary" (click)="saveTags();modal.dismiss()">Save Changes</button>
+  </div>
 </div>
+
 
 </ng-template>
 
 
 </div>
 <app-company-edit-aside></app-company-edit-aside>
+<app-contracts-preview *ngIf="showContractPreview" [serviceAgreement]="serviceAgreement"  ></app-contracts-preview>

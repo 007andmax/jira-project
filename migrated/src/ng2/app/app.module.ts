@@ -343,6 +343,7 @@ import { ProductItemQuoteComponent } from './components/billing/quotes/quote-asi
 import { QuoteAsideEditComponent } from './components/billing/quotes/quote-aside-edit/quote-aside-edit.component';
 import { ProductItemQuoteEditComponent } from './components/billing/quotes/quote-aside-edit/product-item-quote-edit/product-item-quote-edit.component';
  import { QuoteAsideEditBodyComponent } from './components/billing/quotes/quote-aside-edit/quote-aside-edit-body/quote-aside-edit-body.component';
+import { CompanyDashTagsComponent } from './components/company-dashboard/company-dash-tags/company-dash-tags.component';
 
 /**
  * declare angular
@@ -584,6 +585,7 @@ angular.module('quicktech')
     ImageCropperComponent,
     CompanyEditAsideComponent,
     CompanyTagsComponent,
+    CompanyDashTagsComponent,
     DraftEmailComponent,
     DraftEmailRecipientsComponent,
     LeftPanelTagsComponent,

@@ -1894,7 +1894,14 @@ svg.nvd3-svg {
         }
     }
     .nv-legend {	
-       -webkit-transform: translate(calc(-50% + 260px), -40px);	
-       transform: translate(calc(-50% + 260px), -40px);	
+       -webkit-transform: translate(calc(-56% + 260px), -40px);	
+       transform: translate(calc(-56% + 260px), -40px);	
+    }
+}
+
+app-company-dash-tags {
+    .mat-form-field {
+        width: 100%;
+        margin: 30px 0;
     }
 }
