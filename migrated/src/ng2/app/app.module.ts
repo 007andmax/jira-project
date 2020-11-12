@@ -342,6 +342,7 @@ import { ProductItemQuoteComponent } from './components/billing/quotes/quote-asi
 import { QuoteAsideEditComponent } from './components/billing/quotes/quote-aside-edit/quote-aside-edit.component';
 import { ProductItemQuoteEditComponent } from './components/billing/quotes/quote-aside-edit/product-item-quote-edit/product-item-quote-edit.component';
  import { QuoteAsideEditBodyComponent } from './components/billing/quotes/quote-aside-edit/quote-aside-edit-body/quote-aside-edit-body.component';
+import { CompanyDevicesComponent } from './components/company-devices/company-devices.component';
 
 /**
  * declare angular
@@ -519,6 +520,10 @@ angular.module('quicktech')
   .directive(
     'dashboardBillingComponent',
     downgradeComponent({ component: DashboardBillingComponent })
+  )
+  .directive(
+    'companyDevicesComponent',
+    downgradeComponent({ component: CompanyDevicesComponent })
   )
   .directive(
     'companyContractsComponent',
@@ -833,7 +838,8 @@ angular.module('quicktech')
     ProductItemQuoteComponent,
     QuoteAsideEditComponent,
     ProductItemQuoteEditComponent,
-    QuoteAsideEditBodyComponent
+    QuoteAsideEditBodyComponent,
+    CompanyDevicesComponent
   ],
   imports: [
     BrowserModule,
@@ -925,7 +931,8 @@ angular.module('quicktech')
     TicketTaskComponent,
     ContractsConfirmComponent,
     DashboardBillingComponent,
-    CompanyContractsComponent
+    CompanyContractsComponent,
+    CompanyDevicesComponent
     // RecurringTicketsComponent
   ],
   exports: [

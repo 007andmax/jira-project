@@ -269,6 +269,10 @@
           url: '/ng2/setting/techUsers',
           template: '<tech-component></tech-component>'
         }))
+        .state('company-devices', waitForServices({
+          url: '/ng2/company/devices',
+          template: '<company-devices></company-devices>'
+        }))
         .state('email-setting-component', waitForServices({
           url: '/ng2/setting/emailSetting',
           template: '<email-setting-component></email-setting-component>'

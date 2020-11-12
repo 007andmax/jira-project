@@ -560,6 +560,13 @@
         </div>
         <div class="left-panel-hide-filter">
           <a class="left-panel-title  left-panel-title-hover"
+          ng-click="activateCompanyProfileTab('CompanyProfileDevicesPage');stateGo($event, 'company-devices')"
+          ng-class="{'left-panel-active': CompanyProfileDevicesPage}"
+           >
+         Devices 2
+         <i class="report-caret-icon" ng-class="{'report-caret-icon-up': CompanyProfileDevicesPage}"></i>
+       </a>
+          <a class="left-panel-title  left-panel-title-hover"
              ng-click="activateCompanyProfileTab('CompanyProfileDevicesPage')"
              ng-class="{'left-panel-active': CompanyProfileDevicesPage}"
              href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=devices-all">
