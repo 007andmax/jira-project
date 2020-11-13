@@ -256,7 +256,7 @@ const routes: Routes = [
   {
     path: 'ng2/company/devices',
     component: CompanyDevicesComponent,
-    pathMatch: 'full'
+    
   },
 ];
 

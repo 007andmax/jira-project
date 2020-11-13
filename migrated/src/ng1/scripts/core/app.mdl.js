@@ -271,7 +271,7 @@
         }))
         .state('company-devices', waitForServices({
           url: '/ng2/company/devices',
-          template: '<company-devices></company-devices>'
+          template: '<company-devices-component></company-devices-component>'
         }))
         .state('email-setting-component', waitForServices({
           url: '/ng2/setting/emailSetting',
