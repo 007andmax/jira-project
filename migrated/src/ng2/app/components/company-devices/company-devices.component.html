@@ -1,3 +1,331 @@
-<p>
-  company-devices works!
-</p>
+<div class="page-list company-devices-page">
+  <div class="qt-list-header sticky-list-header company-devices-page__list-header">
+    <div><h3 class="list-title" [textContent]="'All Devices (275)'"></h3></div>
+
+    <div class="sticky-list-table-header company-devices-list-table-header">
+      <table class="qt-table-modern company-devices-table">
+        <thead>
+          <tr>
+            <th class="company-devices-table__check">
+              <div class="d-f">
+                <label class="qt-checkbox">
+                  <input type="checkbox">
+                  <span ></span>
+                </label>
+              </div>
+            </th>
+            <th class="company-devices-table__device-type"></th>
+            <th class="company-devices-table__device-name">Device Name <span class="qt-table-modern__sorting"></span></th>
+            <th class="company-devices-table__logged-user">Logged in user <span class="qt-table-modern__sorting"></span></th>
+            <th class="company-devices-table__up-time">Up time <span class="qt-table-modern__sorting"></span></th>
+            <th class="company-devices-table__windows">Windows</th>
+            <th class="company-devices-table__ip-address"><span class="qt-pl-30">Ip address</span></th>
+            <th class="company-devices-table__go-to"></th>
+            <th class="company-devices-table__connect"></th>
+            <th class="company-devices-table__menu"></th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </div>
+
+  <div class="qt-df qt-fd-c qt-jc-sb">
+    <div>
+      <div class="table-container">
+        <table class="qt-table-modern company-devices-table">
+
+          <tbody>
+            <tr>
+              <td class="company-devices-table__check">
+                <div class="d-f">
+                  <label class="qt-checkbox">
+                    <input type="checkbox">
+                    <span ></span>
+                  </label>
+                </div>
+              </td>
+              <td class="company-devices-table__device-type">
+                <div>
+                  <div class="qt-ic-c qt-pointer icon__computer device-type-icon qt-sz-24"></div>
+                  <div class="qt-ic-c icon__master-agent-badge master-agent-icon qt-sz-18"></div>
+                </div>
+              </td>
+              <td class="company-devices-table__device-name">
+                <div class="qt-df qt-fd-c">
+                  <span class="company-devices-table-device-name qt-ff-gm">HP Ethernet Multi-Environment Jet</span>
+                  <span class="company-device-desc">HP Multi Server 2020</span>
+                </div>
+              </td>
+              <td class="company-devices-table__logged-user">
+                <div class="qt-df qt-fd-c">
+                  <span class="logged-name qt-ff-gm">Stanley Miles</span>
+                  <span class="logged-time">Idle: 15 min</span>
+                </div>
+              </td>
+              <td class="company-devices-table__up-time">
+                <div class="qt-df qt-fd-c">
+                  <span>15 min</span>
+                  <span class="uptime-tag qt-ff-gm">Online</span>
+                </div>
+              </td>
+              <td class="company-devices-table__windows">
+                <span class="company-devices-table__ip-windows-text">Windows 10 Home 2020</span>
+                <div class="company-devices-table__system-network-buttons">
+                  <div class="qt-df qt-ai-c qt-mr-20 qt-pointer">
+                    <div class="icon__system qt-ic-c qt-mr-6 qt-sz-16"></div>
+                    <div>System</div>
+                  </div>
+                  <div class="qt-df qt-ai-c qt-pointer">
+                    <div class="icon__network qt-ic-c qt-mr-6 qt-sz-16"></div>
+                    <div>Network</div>
+                  </div>
+                </div>
+              </td>
+              <td class="company-devices-table__ip-address">
+                <span class="qt-pl-30 company-devices-table__ip-address-text">192.168.0.70</span>
+                <div class="company-devices-table__ip-address-buttons qt-pl-15">
+                  <div class="qt-df qt-ai-c qt-mr-20 qt-pointer">
+                    <div class="icon__software qt-ic-c qt-mr-6 qt-sz-16"></div>
+                    <div>Software</div>
+                  </div>
+                  <div class="qt-df qt-ai-c qt-pointer">
+                    <div class="icon__updates qt-ic-c qt-mr-6 qt-sz-16"></div>
+                    <div>Updates</div>
+                  </div>
+                </div>
+              </td>
+              <td class="company-devices-table__go-to">
+                <ng-template #tipDeviceDetail class="tooltip">Device Detail</ng-template>
+                <div class="qt-ic-c icon__go-to qt-pointer qt-sz-24 qt-bgsz-16" placement="top" [ngbTooltip]="tipDeviceDetail"></div>
+              </td>
+              <td class="company-devices-table__connect">
+                <ng-template #tipRemoteAccess class="tooltip">Remote Access</ng-template>
+                <div class="qt-ic-c icon__quick-connect qt-pointer qt-sz-24 qt-bg-contain" placement="top" [ngbTooltip]="tipRemoteAccess"></div>
+              </td>
+              <td class="company-devices-table__menu">
+                <div class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"></div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="company-devices-table__check">
+                <div class="d-f">
+                  <label class="qt-checkbox">
+                    <input type="checkbox">
+                    <span ></span>
+                  </label>
+                </div>
+              </td>
+              <td class="company-devices-table__device-type">
+                <div>
+                  <div class="qt-ic-c qt-pointer icon__printer device-type-icon --ofline qt-sz-24"></div>
+                </div>
+              </td>
+              <td class="company-devices-table__device-name">
+                <div class="qt-df qt-fd-c">
+                  <span class="company-devices-table-device-name qt-ff-gm">Frondesk Server-101</span>
+                  <span class="company-device-desc">DESKTOP-65PV</span>
+                </div>
+              </td>
+              <td class="company-devices-table__logged-user">
+                <div class="qt-df qt-fd-c">
+                  <span class="logged-name qt-ff-gm">Mae Morales</span>
+                  <span class="logged-time">Idle: 1 hrs 2 min</span>
+                </div>
+              </td>
+              <td class="company-devices-table__up-time">
+                <div class="qt-df qt-fd-c">
+                  <span>1 hrs 30 min</span>
+                  <span class="uptime-tag qt-ff-gm --offline">Offline</span>
+                </div>
+              </td>
+              <td class="company-devices-table__windows">
+                <span class="company-devices-table__ip-windows-text">Windows 10 Home 2019</span>
+                <div class="company-devices-table__system-network-buttons">
+                  <div class="qt-df qt-ai-c qt-mr-20 qt-pointer">
+                    <div class="icon__system qt-ic-c qt-mr-6 qt-sz-16"></div>
+                    <div>System</div>
+                  </div>
+                  <div class="qt-df qt-ai-c qt-pointer">
+                    <div class="icon__network qt-ic-c qt-mr-6 qt-sz-16"></div>
+                    <div>Network</div>
+                  </div>
+                </div>
+              </td>
+              <td class="company-devices-table__ip-address">
+                <span class="qt-pl-30 company-devices-table__ip-address-text">192.168.0.230</span>
+                <div class="company-devices-table__ip-address-buttons qt-pl-15">
+                  <div class="qt-df qt-ai-c qt-mr-20 qt-pointer">
+                    <div class="icon__software qt-ic-c qt-mr-6 qt-sz-16"></div>
+                    <div>Software</div>
+                  </div>
+                  <div class="qt-df qt-ai-c qt-pointer">
+                    <div class="icon__updates qt-ic-c qt-mr-6 qt-sz-16"></div>
+                    <div>Updates</div>
+                  </div>
+                </div>
+              </td>
+              <td class="company-devices-table__go-to">
+                <ng-template #tipDeviceDetail class="tooltip">Device Detail</ng-template>
+                <div class="qt-ic-c icon__go-to qt-pointer qt-sz-24 qt-bgsz-16" placement="top" [ngbTooltip]="tipDeviceDetail"></div>
+              </td>
+              <td class="company-devices-table__connect">
+                <ng-template #tipRemoteAccess class="tooltip">Remote Access</ng-template>
+                <div class="qt-ic-c icon__quick-connect qt-pointer qt-sz-24 qt-bg-contain" placement="top" [ngbTooltip]="tipRemoteAccess"></div>
+              </td>
+              <td class="company-devices-table__menu">
+                <div class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain">
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="company-devices-table__check">
+                <div class="d-f">
+                  <label class="qt-checkbox">
+                    <input type="checkbox">
+                    <span ></span>
+                  </label>
+                </div>
+              </td>
+              <td class="company-devices-table__device-type">
+                <div>
+                  <div class="qt-ic-c qt-pointer icon__server device-type-icon qt-sz-24"></div>
+                </div>
+              </td>
+              <td class="company-devices-table__device-name">
+                <div class="qt-df qt-fd-c">
+                  <span class="company-devices-table-device-name qt-ff-gm">HV Server</span>
+                  <span class="company-device-desc">Multi Server 2020</span>
+                </div>
+              </td>
+              <td class="company-devices-table__logged-user">
+                <div class="qt-df qt-fd-c">
+                  <span class="logged-name qt-ff-gm">May Bridges</span>
+                  <span class="logged-time">Idle: 1 hrs 2 min</span>
+                </div>
+              </td>
+              <td class="company-devices-table__up-time">
+                <div class="qt-df qt-fd-c">
+                  <span>9 hrs 30 min</span>
+                  <span class="uptime-tag qt-ff-gm">Online</span>
+                </div>
+              </td>
+              <td class="company-devices-table__windows">
+                <span class="company-devices-table__ip-windows-text">Windows 7 Home 2017</span>
+                <div class="company-devices-table__system-network-buttons">
+                  <div class="qt-df qt-ai-c qt-mr-20 qt-pointer">
+                    <div class="icon__system qt-ic-c qt-mr-6 qt-sz-16"></div>
+                    <div>System</div>
+                  </div>
+                  <div class="qt-df qt-ai-c qt-pointer">
+                    <div class="icon__network qt-ic-c qt-mr-6 qt-sz-16"></div>
+                    <div>Network</div>
+                  </div>
+                </div>
+              </td>
+              <td class="company-devices-table__ip-address">
+                <span class="qt-pl-30 company-devices-table__ip-address-text">192.168.0.3</span>
+                <div class="company-devices-table__ip-address-buttons qt-pl-15">
+                  <div class="qt-df qt-ai-c qt-mr-20 qt-pointer">
+                    <div class="icon__software qt-ic-c qt-mr-6 qt-sz-16"></div>
+                    <div>Software</div>
+                  </div>
+                  <div class="qt-df qt-ai-c qt-pointer">
+                    <div class="icon__updates qt-ic-c qt-mr-6 qt-sz-16"></div>
+                    <div>Updates</div>
+                  </div>
+                </div>
+              </td>
+              <td class="company-devices-table__go-to">
+                <ng-template #tipDeviceDetail class="tooltip">Device Detail</ng-template>
+                <div class="qt-ic-c icon__go-to qt-pointer qt-sz-24 qt-bgsz-16" placement="top" [ngbTooltip]="tipDeviceDetail"></div>
+              </td>
+              <td class="company-devices-table__connect">
+                <ng-template #tipRemoteAccess class="tooltip">Remote Access</ng-template>
+                <div class="qt-ic-c icon__quick-connect qt-pointer qt-sz-24 qt-bg-contain" placement="top" [ngbTooltip]="tipRemoteAccess"></div>
+              </td>
+              <td class="company-devices-table__menu">
+                <div class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain">
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="company-devices-table__check">
+                <div class="d-f">
+                  <label class="qt-checkbox">
+                    <input type="checkbox">
+                    <span ></span>
+                  </label>
+                </div>
+              </td>
+              <td class="company-devices-table__device-type">
+                <div>
+                  <div class="qt-ic-c qt-pointer icon__tablet device-type-icon --ofline qt-sz-24"></div>
+                </div>
+              </td>
+              <td class="company-devices-table__device-name">
+                <div class="qt-df qt-fd-c">
+                  <span class="company-devices-table-device-name qt-ff-gm">BackupDevice server (Samba, Ubuntu)</span>
+                  <span class="company-device-desc">Multi Server 2020</span>
+                </div>
+              </td>
+              <td class="company-devices-table__logged-user">
+                <div class="qt-df qt-fd-c">
+                  <span class="logged-name qt-ff-gm">Lucas Bowman</span>
+                  <span class="logged-time">Idle: 9 hrs 15 min</span>
+                </div>
+              </td>
+              <td class="company-devices-table__up-time">
+                <div class="qt-df qt-fd-c">
+                  <span>1 day 15 min</span>
+                  <span class="uptime-tag qt-ff-gm --offline">Offline</span>
+                </div>
+              </td>
+              <td class="company-devices-table__windows">
+                <span class="company-devices-table__ip-windows-text">Windows 10 Home 2019</span>
+                <div class="company-devices-table__system-network-buttons">
+                  <div class="qt-df qt-ai-c qt-mr-20 qt-pointer">
+                    <div class="icon__system qt-ic-c qt-mr-6 qt-sz-16"></div>
+                    <div>System</div>
+                  </div>
+                  <div class="qt-df qt-ai-c qt-pointer">
+                    <div class="icon__network qt-ic-c qt-mr-6 qt-sz-16"></div>
+                    <div>Network</div>
+                  </div>
+                </div>
+              </td>
+              <td class="company-devices-table__ip-address">
+                <span class="qt-pl-30 company-devices-table__ip-address-text">192.168.0.188</span>
+                <div class="company-devices-table__ip-address-buttons qt-pl-15">
+                  <div class="qt-df qt-ai-c qt-mr-20 qt-pointer">
+                    <div class="icon__software qt-ic-c qt-mr-6 qt-sz-16"></div>
+                    <div>Software</div>
+                  </div>
+                  <div class="qt-df qt-ai-c qt-pointer">
+                    <div class="icon__updates qt-ic-c qt-mr-6 qt-sz-16"></div>
+                    <div>Updates</div>
+                  </div>
+                </div>
+              </td>
+              <td class="company-devices-table__go-to">
+                <ng-template #tipDeviceDetail class="tooltip">Device Detail</ng-template>
+                <div class="qt-ic-c icon__go-to qt-pointer qt-sz-24 qt-bgsz-16" placement="top" [ngbTooltip]="tipDeviceDetail"></div>
+              </td>
+              <td class="company-devices-table__connect">
+                <ng-template #tipRemoteAccess class="tooltip">Remote Access</ng-template>
+                <div class="qt-ic-c icon__quick-connect qt-pointer qt-sz-24 qt-bg-contain" placement="top" [ngbTooltip]="tipRemoteAccess"></div>
+              </td>
+              <td class="company-devices-table__menu">
+                <div class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain">
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>

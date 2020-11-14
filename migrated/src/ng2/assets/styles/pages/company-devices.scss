@@ -1,0 +1,184 @@
+.company-devices-page {
+  &__list-header.qt-list-header.sticky-list-header {
+    padding: 12px 0 0 0;
+  }
+  table.company-devices-table {
+    td {
+      height: 64px;
+      cursor: pointer;
+    }
+    tbody, thead {
+      .company-devices-table {
+        &__check {
+          padding: 12px 6px 12px 16px;
+          vertical-align: top;
+          width: 38px;
+          max-width: 38px;
+        }
+        &__device-type {
+          width: 36px;
+          max-width: 36px;
+          vertical-align: top;
+          padding: 10px 6px 6px 6px;
+          .device-type-icon {
+            position: relative;
+            &::before {
+              content: '';
+              width: 10px;
+              height: 10px;
+              position: absolute;
+              top: -2px;
+              right: -2px;
+              border: solid 2px #ffffff;
+              background-color: #2ec866;
+              border-radius: 50%;
+            }
+            &.--ofline {
+              &::before {
+                background-color: #ff5263;
+              }
+            }
+          }
+          .master-agent-icon {
+            margin: 0 auto;
+            margin-top: 2px;
+          }
+        }
+        &__device-name {
+          padding: 12px 8px 12px 8px;
+          vertical-align: top;
+          .company-devices-table-device-name {
+            color: #364656;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+          }
+          .company-device-desc {
+            color: #9ca5b6;
+            line-height: 1.33;
+            font-size: 12px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+          }
+        }
+        &__logged-user {
+          width: 150px;
+          max-width: 150px;
+          padding: 12px 8px 12px 8px;
+          vertical-align: top;
+          .logged-name {
+            color: #364656;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+          }
+          .logged-time {
+            color: #9ca5b6;
+            line-height: 1.33;
+            font-size: 12px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+          }
+        }
+        &__up-time {
+          width: 105px;
+          max-width: 105px;
+          padding: 12px 8px 12px 8px;
+          color: #4f5f79;
+          vertical-align: top;
+          .uptime-tag {
+            border: solid 1px #2ec866;
+            line-height: 1;
+            width: fit-content;
+            padding: 2px 4px;
+            border-radius: 3px;
+            color: #2ec866;
+            background-color: #ffffff;
+            letter-spacing: 0.3px;
+            font-size: 8px;
+            text-transform: uppercase;
+            &.--offline {
+              color: #ff5263;
+              border: solid 1px #ff5263;
+            }
+          }
+        }
+        &__windows {
+          width: 162px;
+          max-width: 162px;
+          padding: 12px 0px 12px 8px;
+          color: #4f5f79;
+          vertical-align: top;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+        }
+        &__ip-address {
+          width: 218px;
+          max-width: 218px;
+          padding: 12px 8px 12px 0px;
+          color: #4f5f79;
+          vertical-align: top;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+        }
+        &__go-to {
+          width: 30px;
+          max-width: 30px;
+          padding: 14px 7px 14px 7px;
+        }
+        &__connect {
+          width: 30px;
+          max-width: 30px;
+          padding: 14px 7px 14px 7px;
+        }
+        &__menu {
+          width: 38px;
+          max-width: 38px;
+          padding: 23px 16px 23px 8px;
+        }
+      }
+
+      tr th {
+        font-size: 11px;
+        color: #364656;
+        text-transform: uppercase;
+        padding-top: 4px !important;
+        padding-bottom: 4px !important;
+        vertical-align: middle !important;
+        .company-devices-table {
+          &__check, &__device-type, &__device-name, &__logged-user,
+          &__up-time, &__windows, &__ip-address, &__go-to, &__connect, &__menu {
+            padding-top: 4px;
+            padding-bottom: 4px;
+            vertical-align: middle;
+          }
+        }
+      }
+    }
+    .company-devices-table__system-network-buttons,
+    .company-devices-table__ip-address-buttons {
+      display: none;
+      font-size: 12px;
+      font-family: Graphik-Medium, sans-serif;
+      color: #16a4fa;
+      padding-top: 8px;
+    }
+    tbody tr:hover {
+      td {
+        background-color: #f9fafb;
+        .company-devices-table__ip-address-text,
+        .company-devices-table__ip-windows-text {
+          display: none;
+        }
+        .company-devices-table__system-network-buttons,
+        .company-devices-table__ip-address-buttons {
+          display: flex;
+        }
+      }
+    }
+  }
+}
