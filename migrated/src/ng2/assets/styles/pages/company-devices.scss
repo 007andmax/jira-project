@@ -2,6 +2,19 @@
   &__list-header.qt-list-header.sticky-list-header {
     padding: 12px 0 0 0;
   }
+  &__list-header-buttons {
+    display: flex;
+    padding: 8px 16px;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
+    background-color: #ffffff;
+    font-size: 12px;
+    color: #4f5f79;
+    line-height: 1.33;
+  }
+  .sticky-list-table-header.company-devices-list-table-header {
+    top: 145px;
+  }
   table.company-devices-table {
     td {
       height: 64px;
@@ -14,10 +27,12 @@
           vertical-align: top;
           width: 38px;
           max-width: 38px;
+          min-width: 38px;
         }
         &__device-type {
           width: 36px;
           max-width: 36px;
+          min-width: 36px;
           vertical-align: top;
           padding: 10px 6px 6px 6px;
           .device-type-icon {
@@ -46,12 +61,18 @@
         }
         &__device-name {
           padding: 12px 8px 12px 8px;
+          width: 100%;
           vertical-align: top;
           .company-devices-table-device-name {
             color: #364656;
             text-overflow: ellipsis;
             white-space: nowrap;
             overflow: hidden;
+            .name-text {
+              width: 100%;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
           }
           .company-device-desc {
             color: #9ca5b6;
@@ -61,11 +82,21 @@
             white-space: nowrap;
             overflow: hidden;
           }
+          .device-name-edit-marker {
+            border: solid 1px #dfe3e8;
+            background-color: #ffffff;
+            border-radius: 50%;
+            margin-left: 8px;
+            background-size: 12px;
+            min-width: 24px;
+            min-height: 24px;
+          }
         }
         &__logged-user {
-          width: 150px;
-          max-width: 150px;
-          padding: 12px 8px 12px 8px;
+          width: 148px;
+          max-width: 148px;
+          min-width: 148px;
+          padding: 12px 8px 11px 8px;
           vertical-align: top;
           .logged-name {
             color: #364656;
@@ -85,6 +116,7 @@
         &__up-time {
           width: 105px;
           max-width: 105px;
+          min-width: 105px;
           padding: 12px 8px 12px 8px;
           color: #4f5f79;
           vertical-align: top;
@@ -108,6 +140,7 @@
         &__windows {
           width: 162px;
           max-width: 162px;
+          min-width: 162px;
           padding: 12px 0px 12px 8px;
           color: #4f5f79;
           vertical-align: top;
@@ -118,6 +151,7 @@
         &__ip-address {
           width: 218px;
           max-width: 218px;
+          min-width: 218px;
           padding: 12px 8px 12px 0px;
           color: #4f5f79;
           vertical-align: top;
@@ -128,16 +162,19 @@
         &__go-to {
           width: 30px;
           max-width: 30px;
+          min-width: 30px;
           padding: 14px 7px 14px 7px;
         }
         &__connect {
           width: 30px;
           max-width: 30px;
+          min-width: 30px;
           padding: 14px 7px 14px 7px;
         }
         &__menu {
           width: 38px;
           max-width: 38px;
+          min-width: 38px;
           padding: 23px 16px 23px 8px;
         }
       }
@@ -167,6 +204,13 @@
       color: #16a4fa;
       padding-top: 8px;
     }
+    .device-name-edit-marker {
+      display: none;
+    }
+    tbody tr.--selected td {
+      background: #f4fbff !important;
+      border-color: #16a4fa !important;
+    }
     tbody tr:hover {
       td {
         background-color: #f9fafb;
@@ -175,7 +219,8 @@
           display: none;
         }
         .company-devices-table__system-network-buttons,
-        .company-devices-table__ip-address-buttons {
+        .company-devices-table__ip-address-buttons,
+        .device-name-edit-marker {
           display: flex;
         }
       }
