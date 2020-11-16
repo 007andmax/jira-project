@@ -6,7 +6,7 @@
     <span class="left-panel-full__head--header">Billing</span>
   </div>
   <div class="center-category collapsed-nav nano-content">
-    <div class="center-category__category" [ngClass]="{'active':activePage === 'billing-dashboard'}" (click)="goToState('billing-dashboard')">
+    <div class="center-category__category" *ngIf="getPermissions('VIEW_ACCOUNTING_DASHBOARD')" [ngClass]="{'active':activePage === 'billing-dashboard'}" (click)="goToState('billing-dashboard')">
       Dashboard
     </div>
     <div class="center-category__category" [ngClass]="{'active':activePage === 'new-services'}" (click)="goToState('new-services')">

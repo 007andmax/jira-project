@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { PermissionsService } from 'src/ng2/app/services/permissions/permissions.service';
 import { LeftPanelStateService } from 'src/ng2/app/states/left-panel/left-panel-state.service';
 import { QuoteStateService } from 'src/ng2/app/states/quote/quote-state.service';
  
@@ -21,7 +22,8 @@ export class LeftPanelBillingComponent implements OnInit, OnDestroy {
    */
   constructor(
     private quoteStateService: QuoteStateService,
-    private leftPanelStateService: LeftPanelStateService
+    private leftPanelStateService: LeftPanelStateService,
+    private permissionsService: PermissionsService,
   ) { }
 
 
@@ -43,6 +45,9 @@ export class LeftPanelBillingComponent implements OnInit, OnDestroy {
   public goToState(state) {
     this.activePage = state;
     this.quoteStateService.goToState(state);
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
