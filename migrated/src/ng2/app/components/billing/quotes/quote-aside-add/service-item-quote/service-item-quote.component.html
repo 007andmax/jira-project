@@ -1,5 +1,5 @@
 <tr>
-  <td class="new-quote-table__col-item qt-p-0-important">
+  <td class="new-quote-table__col-item qt-p-0-important qt-inside-border-none-important">
     <app-drop-down
     #companyDp
     [placeholder]="'Select Service'"
@@ -11,6 +11,7 @@
     [search]="true"
     [change]="true"
     [isBlockClear]="true"
+    [dropdownWidth]="'250px'"
     (onSelectedItem)="onSelectService($event)">
   </app-drop-down>
   </td>

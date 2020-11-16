@@ -834,3 +834,9 @@
 .qt-w-auto-important {
   width: auto !important;
 }
+
+.qt-inside-border-none-important {
+  input {
+    border: none !important;
+  }
+}
