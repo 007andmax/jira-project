@@ -6,6 +6,7 @@ export class QuoteValdiate {
     servicesProducts: boolean = true;
     validateSaleCostProduct: boolean = true;
     validate: boolean = true;
+    validateServices: boolean = true;
     errorMessage: string = "";
     constructor() { }
 
@@ -38,6 +39,7 @@ export class QuoteValdiate {
         this.company = true;
     }
     public isValidate(quote) {
+        if (quote.services.find(item => !item.validate)) this.validateServices = false;
         if (quote.number.length === 0) this.number = false;
         if (!quote.companyId) this.company = false;
         if (quote.services.length === 0 && quote.products.length === 0) this.servicesProducts = false;
@@ -46,6 +48,6 @@ export class QuoteValdiate {
         } else {
             this.validateSaleCostProduct = true;
         }
-        return this.company && this.servicesProducts && this.validateSaleCostProduct && this.number;
+        return this.company && this.servicesProducts && this.validateSaleCostProduct && this.number && this.validateServices;
     }
 }

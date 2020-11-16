@@ -77,23 +77,7 @@
           let-i="index"
           [ngForOf]="quote.services"
           [ngForTrackBy]="trackById">
-          <tr>
-            <td class="new-quote-table__col-item" [textContent]="service.item.name"></td>
-            <td class="new-quote-table__col-desc"><input type="text" [(ngModel)]="service.description" class="qt-input-in-table" /></td>
-            <td class="new-quote-table__col-unit-price td-padding-side" ></td>
-            <td class="new-quote-table__col-markup td-padding-side" ></td>
-            <td class="new-quote-table__col-sales-price td-padding-side" [textContent]="service.item.rate | currency"></td>
-            <td class="new-quote-table__col-quantify">
-              <input class="qt-input-in-table"
-                decimalNumber
-                [value]="service.quantity"
-                (onChange)="service.quantity=$event"
-                />
-            </td>
-            <td class="new-quote-table__col-tax" [innerHTML]="getSelectedTaxes(service.item.taxes)"> </td>
-            <td class="new-quote-table__col-amount" [textContent]="getPriceService(service) | currency"></td>
-            <td> <div class="icon__raw-clear qt-ic-c qt-sz-16" (click)="removeService(i)"></div></td>
-          </tr>
+      <app-service-item-quote [service]="service" [services]="services" (onRemoveService)="removeService(i)"></app-service-item-quote>
 </ng-template>
 <ng-template ngFor let-product
 let-i="index"
@@ -114,7 +98,7 @@ let-i="index"
     <div>
       <div class="qt-df qt-mb-25">
         <app-product-list-quote class="qt-mr-8" (selectedProductItem)="selectProduct($event)"></app-product-list-quote>
-        <app-service-list-quote #servicesList [quoteCompany]="quoteCompany" (onSelect)="onAddService($event)"></app-service-list-quote>
+        <app-service-list-quote #servicesList [quoteCompany]="quoteCompany" (onSelect)="onAddService($event)" [services]="services"></app-service-list-quote>
       </div>
       <app-invoice-regular-note *ngIf="notes" [invoiceNotes]="notes" (onUpdateInvoiceData)="updateInvoiceData($event)"></app-invoice-regular-note>
     </div>

@@ -9,7 +9,7 @@ import { QuoteService } from 'src/ng2/app/services/quote/quote.service';
 })
 export class ServiceListQuoteComponent implements OnInit {
   @Input() quoteCompany: any;
-  services: Array<Service> = [];
+  @Input() services: Array<Service> = [];
   @Output() onSelect = new EventEmitter<any>();
   constructor(private quoteServices: QuoteService) { }
 

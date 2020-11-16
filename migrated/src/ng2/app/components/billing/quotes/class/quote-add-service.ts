@@ -8,12 +8,19 @@ export class QuoteAddService {
     quantity: number;
     sum: number;
     taxSum: number;
+    validate: boolean = true;
     constructor(description, discountType, item, itemOrder, quantity) {
         this.description = description;
         this.discountType = discountType;
         this.item = item;
         this.itemOrder = itemOrder;
         this.quantity = quantity;
+    }
+    public setItem(data) {
+        this.item = data;
+    }
+    public setValdiate(data) {
+        this.validate = data;
     }
     public getDataForCreate() {
         return {
