@@ -1,50 +1,59 @@
 <div class="invoice-item qt-mb-16 qt-w100 billable-invoice-apply-discount qt-pos-rel">
-  <div class="qt-df qt-ai-c">
-
-    <div class="delete-item-container qt-pl-4">
-      <div class="qt-pointer  qt-sz-16 icon__raw-clear qt-ic-c " *ngIf="canRemove"  placement="left" ngbTooltip="Remove Ticket" (click)="delete()"></div>
+    <div class="qt-df qt-ai-c">
+        <div class="delete-item-container qt-pl-4">
+            <div
+                class="qt-pointer  qt-sz-16 icon__raw-clear qt-ic-c "
+                *ngIf="canRemove"
+                placement="left"
+                ngbTooltip="Remove Ticket"
+                (click)="delete()"
+            ></div>
+        </div>
     </div>
-   </div>
-
-   <table class="invoice-item__table ">
-     <thead >
-       <tr>
-         <th></th>
-         <th class="invoice-item__col-item  qt-ff-sb border-top">Item</th>
-         <th class="invoice-item__col-desc  qt-ff-sb border-top" >Description</th>
-         <th class="invoice-item__col-quentity qt-ff-sb border-top">Quantity</th>
-         <th class="invoice-item__col-amount qt-ff-sb border-top">Amount</th>
-         <th></th>
-       </tr>
-     </thead>
-     <tbody>
-
-       <tr>
-         <td>
-           <div class=" qt-pointer qt-sz-20 icon__move-light qt-ic-c"></div>
-         </td>
-         <td class="invoice-item__col-item" ><div class="qt-green-label">Discount</div></td>
-         <td class="invoice-item__col-desc"  >
-          <textarea  [(ngModel)]="discount.description" (blur)="onChange()"  appTextArea  [minHeight]="48"  cols="5" rows="1"   placeholder="Write ticket conversation here…"
-          ></textarea>
-
-         </td>
-          <td class="invoice-item__col-quentity">1</td>
-         <td class="invoice-item__col-amount"  > <input
-          class="input-default input-price"
-          number
-          [money]="true"
-          [ngModel]="discount.amount"
-          appToFixed
-          (blur)="onChange()"
-          (ngModelChange)="onChangeAmount($event)"
-          /></td>
-         <td>
-
-         </td>
-       </tr>
-
-
-     </tbody>
-   </table>
- </div>
+    <table class="invoice-item__table ">
+        <thead>
+            <tr>
+                <th></th>
+                <th class="invoice-item__col-item  qt-ff-sb border-top">Item</th>
+                <th class="invoice-item__col-desc  qt-ff-sb border-top">Description</th>
+                <th class="invoice-item__col-quentity qt-ff-sb border-top">Quantity</th>
+                <th class="invoice-item__col-amount qt-ff-sb border-top">Amount</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class=" qt-pointer qt-sz-20 icon__move-light qt-ic-c"></div>
+                </td>
+                <td class="invoice-item__col-item">
+                    <div class="qt-green-label">Discount</div>
+                </td>
+                <td class="invoice-item__col-desc">
+                    <textarea
+                        [(ngModel)]="discount.description"
+                        (blur)="onChange()"
+                        appTextArea
+                        [minHeight]="48"
+                        cols="5"
+                        rows="1"
+                        placeholder="Write ticket conversation here…"
+                    ></textarea>
+                </td>
+                <td class="invoice-item__col-quentity">1</td>
+                <td class="invoice-item__col-amount">
+                    <input
+                        class="input-default input-price"
+                        number
+                        [money]="true"
+                        [ngModel]="discount.amount"
+                        appToFixed
+                        (blur)="onChange()"
+                        (ngModelChange)="onChangeAmount($event)"
+                    >
+                </td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

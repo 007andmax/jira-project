@@ -1,23 +1,108 @@
-<tr class="contracts-table-row-item" [ngClass]="(showNotificationReview) ? 'no-valid' : ''">
-  <td class="contracts-table__company" [textContent]="contract.company.name" (click)="preview()"></td>
-  <td class="contracts-table__description" [textContent]="contract.description" (click)="preview()"></td>
-  <td class="contracts-table__contract-type" [textContent]="getType()" (click)="preview()"></td>
-  <td class="contracts-table__status" (click)="preview()"><span class="tag__modern"
-    [ngClass]="{'--error' : contract.status === 'TERMINATED',
+<tr
+    class="contracts-table-row-item"
+    [ngClass]="(showNotificationReview) ? 'no-valid' : ''"
+>
+    <td
+        class="contracts-table__company"
+        [textContent]="contract.company.name"
+        (click)="preview()"
+    ></td>
+    <td
+        class="contracts-table__description"
+        [textContent]="contract.description"
+        (click)="preview()"
+    ></td>
+    <td
+        class="contracts-table__contract-type"
+        [textContent]="getType()"
+        (click)="preview()"
+    ></td>
+    <td
+        class="contracts-table__status"
+        (click)="preview()"
+    >
+        <span
+            class="tag__modern"
+            [ngClass]="{'--error' : contract.status === 'TERMINATED',
     '--warning' : contract.status === 'EXPIRED' || contract.status === 'PENDING',
-    '--info' : contract.status === 'CURRENT'}" [textContent]="contractStatusDictionary[contract.status]"></span></td>
-  <td class="contracts-table__start-date" [textContent]="getDate(contract.startDate)" (click)="preview()"></td>
-  <td class="contracts-table__review-date" [textContent]="getDate(contract.reviewDate)" (click)="preview()"></td>
-  <td class="contracts-table__amount" [textContent]="contract.amount | currency" (click)="preview()"></td>
-  <td class="contracts-table__menu" ngbDropdown container="body">
-    <div class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"  id="dropdownBasic1" ngbDropdownToggle></div>
-
-    <ul class="qt-dropdown-menu invoice-items-dropdown"  ngbDropdownMenu aria-labelledby="dropdownBasic1">
-      <li class="pointer" ngbDropdownItem (click)="copyContract()"><div class="icon__copy-gray qt-sz-16 qt-bg-contain qt-mr-8"></div>Copy contract</li>
-      <li class="pointer" ngbDropdownItem [hidden]="contract.status == 'TERMINATED' || contract.status == 'EXPIRED' || contract.type == 'HOURLY'" (click)="forceCreate()"><div class="icon__force-create qt-sz-16 qt-bg-contain qt-mr-8"></div>Force create</li>
-      <li class="pointer" ngbDropdownItem (click)="editContract()"  *ngIf="contract.status !== 'TERMINATED'"><div class="icon__edit qt-sz-16 qt-bg-contain qt-mr-8"></div>Edit contract</li>
-      <li class="pointer" ngbDropdownItem (click)="terminateContract()"  *ngIf="contract.status !== 'TERMINATED'"><div class="icon__terminate qt-sz-16 qt-bg-contain qt-mr-8"></div>Terminate</li>
-      <li class="pointer" ngbDropdownItem (click)="deleteContract()"  *ngIf="getPermissions('DELETE_SERVICE_AGREEMENTS') && contract.status !== 'CURRENT'"><div class="icon__remove qt-sz-16 qt-bg-contain qt-mr-8"></div>Delete agreement</li>
-    </ul>
-  </td>
+    '--info' : contract.status === 'CURRENT'}"
+            [textContent]="contractStatusDictionary[contract.status]"
+        ></span>
+    </td>
+    <td
+        class="contracts-table__start-date"
+        [textContent]="getDate(contract.startDate)"
+        (click)="preview()"
+    ></td>
+    <td
+        class="contracts-table__review-date"
+        [textContent]="getDate(contract.reviewDate)"
+        (click)="preview()"
+    ></td>
+    <td
+        class="contracts-table__amount"
+        [textContent]="contract.amount | currency"
+        (click)="preview()"
+    ></td>
+    <td
+        class="contracts-table__menu"
+        ngbDropdown
+        container="body"
+    >
+        <div
+            class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"
+            id="dropdownBasic1"
+            ngbDropdownToggle
+        ></div>
+        <ul
+            class="qt-dropdown-menu invoice-items-dropdown"
+            ngbDropdownMenu
+            aria-labelledby="dropdownBasic1"
+        >
+            <li
+                class="pointer"
+                ngbDropdownItem
+                (click)="copyContract()"
+            >
+                <div class="icon__copy-gray qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                Copy contract
+            </li>
+            <li
+                class="pointer"
+                ngbDropdownItem
+                [hidden]="contract.status == 'TERMINATED' || contract.status == 'EXPIRED' || contract.type == 'HOURLY'"
+                (click)="forceCreate()"
+            >
+                <div class="icon__force-create qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                Force create
+            </li>
+            <li
+                class="pointer"
+                ngbDropdownItem
+                (click)="editContract()"
+                *ngIf="contract.status !== 'TERMINATED'"
+            >
+                <div class="icon__edit qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                Edit contract
+            </li>
+            <li
+                class="pointer"
+                ngbDropdownItem
+                (click)="terminateContract()"
+                *ngIf="contract.status !== 'TERMINATED'"
+            >
+                <div class="icon__terminate qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                Terminate
+            </li>
+            <li
+                class="pointer"
+                ngbDropdownItem
+                (click)="deleteContract()"
+                *ngIf="getPermissions('DELETE_SERVICE_AGREEMENTS') && contract.status !== 'CURRENT'"
+            >
+                <div class="icon__remove qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                Delete agreement
+            </li>
+        </ul>
+    </td>
 </tr>

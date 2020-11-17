@@ -1,27 +1,64 @@
 <div class="contracts-page__aside">
-  <div class="aside-header qt-df qt-ai-c qt-jc-sb qt-pr-16 qt-pl-32">
-
-    <div class="qt-fs-20 qt-ff-gm qt-color-dark">
-      Preview Contract
+    <div class="aside-header qt-df qt-ai-c qt-jc-sb qt-pr-16 qt-pl-32">
+        <div class="qt-fs-20 qt-ff-gm qt-color-dark">Preview Contract</div>
+        <div class="qt-df qt-ai-c">
+            <div
+                class="icon__close qt-sz-24 qt-pointer qt-ic-c"
+                (click)="closed()"
+            ></div>
+        </div>
     </div>
-
-    <div class="qt-df qt-ai-c">
-      <div class="icon__close qt-sz-24 qt-pointer qt-ic-c" (click)="closed()"></div>
+    <app-contracts-aside-hourly-billing-preview
+        *ngIf="serviceAgreement.type === 'HOURLY'"
+        [contractsHourly]="serviceAgreement"
+    ></app-contracts-aside-hourly-billing-preview>
+    <app-contracts-aside-block-time-billing-preview
+        *ngIf="serviceAgreement.type === 'BLOCK_TIME'"
+        [contractsBlockTime]="serviceAgreement"
+    ></app-contracts-aside-block-time-billing-preview>
+    <app-contracts-aside-user-device-billing-preview
+        *ngIf="serviceAgreement.type === 'SERVICE_CONTRACT' && serviceAgreement.billType !== 'OTHER'"
+        [contractsUserDevice]="serviceAgreement"
+    ></app-contracts-aside-user-device-billing-preview>
+    <app-contracts-aside-product-service-preview
+        *ngIf="serviceAgreement.type === 'SERVICE_CONTRACT' && serviceAgreement.billType === 'OTHER'"
+        [contractsOther]="serviceAgreement"
+    ></app-contracts-aside-product-service-preview>
+    <div class="aside-footer qt-pr-30 qt-pl-30 qt-pb-16 qt-pt-16 qt-df qt-ai-c qt-jc-sb">
+        <div class="qt-df">
+            <button
+                class="qt-button qt-mr-12"
+                (click)="copy()"
+            >
+                Copy
+            </button>
+            <button
+                class="qt-button qt-mr-12"
+                (click)="edit()"
+                *ngIf="serviceAgreement.status !== 'TERMINATED'"
+            >
+                Edit
+            </button>
+            <button
+                class="qt-button qt-mr-12"
+                (click)="terminateAndCopy()"
+                *ngIf="serviceAgreement.status !== 'TERMINATED'"
+            >
+                Terminate and copy
+            </button>
+            <button
+                class="qt-button qt-mr-12"
+                (click)="terminateAndClose()"
+                *ngIf="serviceAgreement.status !== 'TERMINATED'"
+            >
+                Terminate and close
+            </button>
+            <button
+                class="qt-button --gray"
+                (click)="closed()"
+            >
+                Cancel
+            </button>
+        </div>
     </div>
-
-  </div>
-
-  <app-contracts-aside-hourly-billing-preview *ngIf="serviceAgreement.type === 'HOURLY'" [contractsHourly]="serviceAgreement"></app-contracts-aside-hourly-billing-preview>
-  <app-contracts-aside-block-time-billing-preview *ngIf="serviceAgreement.type === 'BLOCK_TIME'" [contractsBlockTime]="serviceAgreement"></app-contracts-aside-block-time-billing-preview>
- <app-contracts-aside-user-device-billing-preview *ngIf="serviceAgreement.type === 'SERVICE_CONTRACT' && serviceAgreement.billType !== 'OTHER'" [contractsUserDevice]="serviceAgreement"></app-contracts-aside-user-device-billing-preview>
- <app-contracts-aside-product-service-preview *ngIf="serviceAgreement.type === 'SERVICE_CONTRACT' && serviceAgreement.billType === 'OTHER'" [contractsOther]="serviceAgreement"></app-contracts-aside-product-service-preview> 
- <div class="aside-footer qt-pr-30 qt-pl-30 qt-pb-16 qt-pt-16 qt-df qt-ai-c qt-jc-sb">
-    <div class="qt-df">
-      <button class="qt-button qt-mr-12"  (click)="copy()">Copy</button>
-      <button class="qt-button qt-mr-12" (click)="edit()" *ngIf="serviceAgreement.status !== 'TERMINATED'">Edit</button>
-      <button class="qt-button qt-mr-12" (click)="terminateAndCopy()" *ngIf="serviceAgreement.status !== 'TERMINATED'">Terminate and copy</button>
-      <button class="qt-button qt-mr-12" (click)="terminateAndClose()" *ngIf="serviceAgreement.status !== 'TERMINATED'">Terminate and close</button>
-      <button class="qt-button --gray" (click)="closed()">Cancel</button>
-    </div>
-   </div>
 </div>

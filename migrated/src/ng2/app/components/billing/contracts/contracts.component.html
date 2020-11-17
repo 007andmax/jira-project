@@ -1,18 +1,35 @@
 <app-left-panel-billing></app-left-panel-billing>
 <div class="page-list contracts-page">
-
-  <div class="qt-df qt-fd-c qt-jc-sb contracts-page__list-container">
-    <div class="qt-w100">
-      <div class="expire-contract-notification" *ngIf="showNotificationReview">
-        <div>Some contracts are about to expire, please review</div>
-        <button class="expire-contract-notification__button" (click)="showNotificationReview = false">Okay, Got it</button>
-      </div>
-      <app-contracts-header ></app-contracts-header>
-      <app-contracts-table></app-contracts-table>
+    <div class="qt-df qt-fd-c qt-jc-sb contracts-page__list-container">
+        <div class="qt-w100">
+            <div
+                class="expire-contract-notification"
+                *ngIf="showNotificationReview"
+            >
+                <div>
+                    Some contracts are about to expire, please review
+                </div>
+                <button
+                    class="expire-contract-notification__button"
+                    (click)="showNotificationReview = false"
+                >
+                    Okay, Got it
+                </button>
+            </div>
+            <app-contracts-header></app-contracts-header>
+            <app-contracts-table></app-contracts-table>
+        </div>
     </div>
-
-  </div>
 </div>
-<app-contracts-preview *ngIf="showPreview" [serviceAgreement]="serviceAgreement"  ></app-contracts-preview>
-<app-contracts-aside *ngIf="showCreate" (onClose)="showCreate = false"></app-contracts-aside>
-<app-contracts-edit *ngIf="showEdit" [serviceAgreement]="serviceAgreement"></app-contracts-edit>
+<app-contracts-preview
+    *ngIf="showPreview"
+    [serviceAgreement]="serviceAgreement"
+></app-contracts-preview>
+<app-contracts-aside
+    *ngIf="showCreate"
+    (onClose)="showCreate = false"
+></app-contracts-aside>
+<app-contracts-edit
+    *ngIf="showEdit"
+    [serviceAgreement]="serviceAgreement"
+></app-contracts-edit>

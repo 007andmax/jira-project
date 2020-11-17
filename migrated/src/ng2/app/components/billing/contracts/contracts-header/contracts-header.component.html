@@ -1,55 +1,96 @@
 <div class="qt-list-header sticky-list-header contracts-list-header">
-  <div>
-    <h3 class="list-title" [textContent]="'Contracts'"></h3>
-  </div>
-
-  <div class="d-f ai-c">
-
-    <button class="qt-btn --outline-blue btn-mr-8" (click)="clearAll()" *ngIf="countFilter > 0">Clear all</button>
-    <button class="qt-btn filter-button qt-ml-8" [ngClass]="{'active':!toggleFilter}" (click)="toggleFilter = !toggleFilter" [textContent]="getTextCountFilters()"></button>
-    <button class="qt-btn --outline-blue qt-ml-8" (click)="showCreate()">Create Contract</button>
-  </div>
+    <div>
+        <h3
+            class="list-title"
+            [textContent]="'Contracts'"
+        ></h3>
+    </div>
+    <div class="d-f ai-c">
+        <button
+            class="qt-btn --outline-blue btn-mr-8"
+            (click)="clearAll()"
+            *ngIf="countFilter > 0"
+        >
+            Clear all
+        </button>
+        <button
+            class="qt-btn filter-button qt-ml-8"
+            [ngClass]="{'active':!toggleFilter}"
+            (click)="toggleFilter = !toggleFilter"
+            [textContent]="getTextCountFilters()"
+        ></button>
+        <button
+            class="qt-btn --outline-blue qt-ml-8"
+            (click)="showCreate()"
+        >
+            Create Contract
+        </button>
+    </div>
 </div>
-
 <div class="sticky-list-table-header contracts-list-table-header">
-
-  <app-contracts-filter class="qt-w100" #filter [companyContracts]="companyContracts" (changeCountFilter)="onChangeCountFilter($event)" [hidden]="toggleFilter"></app-contracts-filter>
-
-  <div class="contracts-table-header-wrapper">
-    <table class="qt-table-modern contracts-table">
-      <thead>
-        <tr class="contracts-table-row-item">
-          <th class="contracts-table__company pointer" (click)="setSort('company')">
-            Company
-            <span class="qt-table-modern__sorting"></span>
-          </th>
-          <th class="contracts-table__description pointer" (click)="setSort('description')">
-            Description
-            <span class="qt-table-modern__sorting"></span>
-          </th>
-          <th class="contracts-table__contract-type pointer" (click)="setSort('type')">
-            Contract Type
-            <span class="qt-table-modern__sorting"></span>
-          </th>
-          <th class="contracts-table__status pointer" (click)="setSort('status')">
-            Status
-            <span class="qt-table-modern__sorting"></span>
-          </th>
-          <th class="contracts-table__start-date pointer" (click)="setSort('start_date')">
-            Start Date
-            <span class="qt-table-modern__sorting"></span>
-          </th>
-          <th class="contracts-table__review-date pointer" (click)="setSort('review_date')">
-            Review Date
-            <span class="qt-table-modern__sorting"></span>
-          </th>
-          <th class="contracts-table__amount pointer" (click)="setSort('amount')">
-            Amount
-            <span class="qt-table-modern__sorting"></span>
-          </th>
-          <th class="contracts-table__menu"></th>
-        </tr>
-      </thead>
-    </table>
-  </div>
+    <app-contracts-filter
+        class="qt-w100"
+        #filter
+        [companyContracts]="companyContracts"
+        (changeCountFilter)="onChangeCountFilter($event)"
+        [hidden]="toggleFilter"
+    ></app-contracts-filter>
+    <div class="contracts-table-header-wrapper">
+        <table class="qt-table-modern contracts-table">
+            <thead>
+                <tr class="contracts-table-row-item">
+                    <th
+                        class="contracts-table__company pointer"
+                        (click)="setSort('company')"
+                    >
+                        Company
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th
+                        class="contracts-table__description pointer"
+                        (click)="setSort('description')"
+                    >
+                        Description
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th
+                        class="contracts-table__contract-type pointer"
+                        (click)="setSort('type')"
+                    >
+                        Contract Type
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th
+                        class="contracts-table__status pointer"
+                        (click)="setSort('status')"
+                    >
+                        Status
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th
+                        class="contracts-table__start-date pointer"
+                        (click)="setSort('start_date')"
+                    >
+                        Start Date
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th
+                        class="contracts-table__review-date pointer"
+                        (click)="setSort('review_date')"
+                    >
+                        Review Date
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th
+                        class="contracts-table__amount pointer"
+                        (click)="setSort('amount')"
+                    >
+                        Amount
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th class="contracts-table__menu"></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
 </div>

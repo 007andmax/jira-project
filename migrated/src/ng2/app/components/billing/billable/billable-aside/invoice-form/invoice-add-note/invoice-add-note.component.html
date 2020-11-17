@@ -1,31 +1,54 @@
 <div class="qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24 qt-pos-rel">
-  <div class="qt-popup-arrow --bottom"></div>
-
-  <div class="qt-mb-20 qt-ff-sb qt-fs-15 qt-lh-133">Add Saved Note</div>
-
-  <div class="qt-mb-16">
-    <div class="qt-input-block qt-lh-154">
-      <mat-error class="qt-tooltip-error"  *ngIf="!validate.getTitle()">
-        Subject is required
-      </mat-error>
-      <label>Note Subject</label>
-      <input [ngClass]="{'--input-error':!validate.getTitle()}" type="text"  [(ngModel)]="createNote.title" (blur)="validate.checkValidTitle(createNote.title)" placeholder="Write Note Subject">
+    <div class="qt-popup-arrow --bottom"></div>
+    <div class="qt-mb-20 qt-ff-sb qt-fs-15 qt-lh-133">Add Saved Note</div>
+    <div class="qt-mb-16">
+        <div class="qt-input-block qt-lh-154">
+            <mat-error
+                class="qt-tooltip-error"
+                *ngIf="!validate.getTitle()"
+            >
+                Subject is required
+            </mat-error>
+            <label>Note Subject</label>
+            <input
+                [ngClass]="{'--input-error':!validate.getTitle()}"
+                type="text"
+                [(ngModel)]="createNote.title"
+                (blur)="validate.checkValidTitle(createNote.title)"
+                placeholder="Write Note Subject"
+            >
+        </div>
     </div>
-  </div>
-
-  <div class="qt-mb-24">
-    <div class="qt-input-block qt-text-area-block">
-      <mat-error class="qt-tooltip-error"  *ngIf="!validate.getLine1()">
-        Description is required
-      </mat-error>
-      <label class="qt-lh-154">Note Description</label>
-    <textarea [ngClass]="{'--input-error':!validate.getLine1()}"  class="qt-textarea" [(ngModel)]="createNote.line1" (blur)="validate.checkValidLine1(createNote.line1)" placeholder="Write Note Description"></textarea>
+    <div class="qt-mb-24">
+        <div class="qt-input-block qt-text-area-block">
+            <mat-error
+                class="qt-tooltip-error"
+                *ngIf="!validate.getLine1()"
+            >
+                Description is required
+            </mat-error>
+            <label class="qt-lh-154">Note Description</label>
+            <textarea
+                [ngClass]="{'--input-error':!validate.getLine1()}"
+                class="qt-textarea"
+                [(ngModel)]="createNote.line1"
+                (blur)="validate.checkValidLine1(createNote.line1)"
+                placeholder="Write Note Description"
+            ></textarea>
+        </div>
     </div>
-  </div>
-
-  <div class="qt-df">
-    <button class="qt-button qt-mr-12"  (click)="add()">Save Note</button>
-    <button class="qt-button --gray" (click)="close()">Cancel</button>
-  </div>
-
+    <div class="qt-df">
+        <button
+            class="qt-button qt-mr-12"
+            (click)="add()"
+        >
+            Save Note
+        </button>
+        <button
+            class="qt-button --gray"
+            (click)="close()"
+        >
+            Cancel
+        </button>
+    </div>
 </div>

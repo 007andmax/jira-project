@@ -1,71 +1,105 @@
 <div class="contracts-page-scroll-content contract-type-aside-content">
-
-  <div class="qt-mb-20 qt-ff-sb qt-fs-15 qt-lh-147 qt-color-dark">Select your contract type from below option</div>
-
-  <div class="contract-type-select qt-mb-16" [ngClass]="{'--selected': selected_type === 'HOURLY'}" (click)="select('HOURLY')">
-    <div class="qt-radio contract-type-select__radio">
-      <input id="hourly-billing" type="radio" name="radio" value="1" [checked]="selected_type === 'HOURLY'">
-      <label for="hourly-billing"></label>
+    <div class="qt-mb-20 qt-ff-sb qt-fs-15 qt-lh-147 qt-color-dark">
+        Select your contract type from below option
     </div>
-
-    <div>
-      <div class="contract-type-select__title">Custom Hourly Billing</div>
-      <div class="contract-type-select__text">Bill your customers by the hour, or create custom service that work for you and your customers</div>
+    <div
+        class="contract-type-select qt-mb-16"
+        [ngClass]="{'--selected': selected_type === 'HOURLY'}"
+        (click)="select('HOURLY')"
+    >
+        <div class="qt-radio contract-type-select__radio">
+            <input
+                id="hourly-billing"
+                type="radio"
+                name="radio"
+                value="1"
+                [checked]="selected_type === 'HOURLY'"
+            >
+            <label for="hourly-billing"></label>
+        </div>
+        <div>
+            <div class="contract-type-select__title">Custom Hourly Billing</div>
+            <div class="contract-type-select__text">
+                Bill your customers by the hour, or create custom service that work for you and your customers
+            </div>
+        </div>
+        <div class="qt-df qt-ai-c">
+            <div class="contract-type-select__icon icon__contract-claim-ticket"></div>
+        </div>
     </div>
-
-    <div class="qt-df qt-ai-c">
-      <div class="contract-type-select__icon icon__contract-claim-ticket"></div>
+    <div
+        class="contract-type-select qt-mb-16"
+        [ngClass]="{'--selected': selected_type === 'BLOCK_TIME'}"
+        (click)="select('BLOCK_TIME')"
+    >
+        <div class="qt-radio contract-type-select__radio">
+            <input
+                id="block-time"
+                type="radio"
+                name="radio"
+                value="1"
+                [checked]="selected_type === 'BLOCK_TIME'"
+            >
+            <label for="block-time"></label>
+        </div>
+        <div>
+            <div class="contract-type-select__title">Block Time Billing</div>
+            <div class="contract-type-select__text">
+                Sell your customer a block of time, that you bill against each month, this can be carried over if not used.
+            </div>
+        </div>
+        <div class="qt-df qt-ai-c">
+            <div class="contract-type-select__icon icon__block-time-billing"></div>
+        </div>
     </div>
-  </div>
-
-
-  <div class="contract-type-select qt-mb-16" [ngClass]="{'--selected': selected_type === 'BLOCK_TIME'}" (click)="select('BLOCK_TIME')">
-    <div class="qt-radio contract-type-select__radio">
-      <input id="block-time" type="radio" name="radio" value="1" [checked]="selected_type === 'BLOCK_TIME'">
-      <label for="block-time"></label>
+    <div
+        class="contract-type-select qt-mb-16"
+        [ngClass]="{'--selected': selected_type === 'SERVICE_CONTRACT_DEVICE'}"
+        (click)="select('SERVICE_CONTRACT_DEVICE')"
+    >
+        <div class="qt-radio contract-type-select__radio">
+            <input
+                id="per-user"
+                type="radio"
+                name="radio"
+                value="1"
+                [checked]="selected_type === 'SERVICE_CONTRACT_DEVICE'"
+            >
+            <label for="per-user"></label>
+        </div>
+        <div>
+            <div class="contract-type-select__title">Per user / device Billing</div>
+            <div class="contract-type-select__text">
+                Per user or Device billing, Track time with custom services or create services for projects
+            </div>
+        </div>
+        <div class="qt-df qt-ai-c">
+            <div class="contract-type-select__icon icon__per-user"></div>
+        </div>
     </div>
-
-    <div>
-      <div class="contract-type-select__title">Block Time Billing</div>
-      <div class="contract-type-select__text">Sell your customer a block of time, that you bill against each month, this can be carried over if not used.</div>
+    <div
+        class="contract-type-select"
+        [ngClass]="{'--selected': selected_type === 'SERVICE_CONTRACT_OTHER'}"
+        (click)="select('SERVICE_CONTRACT_OTHER')"
+    >
+        <div class="qt-radio contract-type-select__radio">
+            <input
+                id="product"
+                type="radio"
+                name="radio"
+                value="1"
+                [checked]="selected_type === 'SERVICE_CONTRACT_OTHER'"
+            >
+            <label for="product"></label>
+        </div>
+        <div>
+            <div class="contract-type-select__title">Subscriptions</div>
+            <div class="contract-type-select__text">
+                Create a Product sales or Service contract, that is billed or sold as a contract.
+            </div>
+        </div>
+        <div class="qt-df qt-ai-c">
+            <div class="contract-type-select__icon icon__product-contract"></div>
+        </div>
     </div>
-
-    <div class="qt-df qt-ai-c">
-      <div class="contract-type-select__icon icon__block-time-billing"></div>
-    </div>
-  </div>
-
-
-  <div class="contract-type-select qt-mb-16" [ngClass]="{'--selected': selected_type === 'SERVICE_CONTRACT_DEVICE'}" (click)="select('SERVICE_CONTRACT_DEVICE')">
-    <div class="qt-radio contract-type-select__radio">
-      <input id="per-user" type="radio" name="radio" value="1" [checked]="selected_type === 'SERVICE_CONTRACT_DEVICE'">
-      <label for="per-user"></label>
-    </div>
-
-    <div>
-      <div class="contract-type-select__title">Per user / device Billing</div>
-      <div class="contract-type-select__text">Per user or Device billing, Track time with custom services or create services for projects</div>
-    </div>
-
-    <div class="qt-df qt-ai-c">
-      <div class="contract-type-select__icon icon__per-user"></div>
-    </div>
-  </div>
-
-
-  <div class="contract-type-select" [ngClass]="{'--selected': selected_type === 'SERVICE_CONTRACT_OTHER'}" (click)="select('SERVICE_CONTRACT_OTHER')">
-    <div class="qt-radio contract-type-select__radio">
-      <input id="product" type="radio" name="radio" value="1" [checked]="selected_type === 'SERVICE_CONTRACT_OTHER'">
-      <label for="product"></label>
-    </div>
-
-    <div>
-      <div class="contract-type-select__title">Subscriptions</div>
-      <div class="contract-type-select__text">Create a Product sales or Service contract, that is billed or sold as a contract.</div>
-    </div>
-
-    <div class="qt-df qt-ai-c">
-      <div class="contract-type-select__icon icon__product-contract"></div>
-    </div>
-  </div>
 </div>

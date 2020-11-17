@@ -1,106 +1,128 @@
 <div class="contracts-page-scroll-content">
-  <div class="qt-pr-32 qt-pl-32 qt-pb-8 qt-pt-16">
-
-    <div class="qt-df qt-mb-16">
-      <div class="qt-w50 qt-input-block qt-mr-16">
-        <label>Company Name</label>
-        <app-select-search class="search-company" [placeholder]="'Select Company'"
-         [editItem]="selectedCompany" [class]="['qt-dropdown']" [field]="'name'" [isDisabled]="true"
-        ></app-select-search>
-      </div>
-
-
-      <div class="contracts-page__contract-type-name-input qt-input-block">
-        <label>Contract Type</label>
-      <app-select-search  class="search-users" [isDisabled]="true"  [placeholder]="'Contract Type'"
-      [editItem]="selectedType" [class]="['qt-dropdown']"   [field]="'title'"
-    ></app-select-search>
-      </div>
-    </div>
-
-
-    <div class="qt-df qt-mb-16 qt-w50 qt-mr-16">
-      <div class="qt-input-block --required qt-w50 qt-mr-16">
-        <label>Start Date</label>
-        <app-date-picker [formatDate]="formatDate" [disabled]="true" [editMode]="true"  [editDate]="contractsHourly.startDate"    ></app-date-picker>
-
-      </div>
-
-      <div class="qt-input-block --required qt-w50">
-        <label>Review Date</label>
-        <app-date-picker [formatDate]="formatDate" [disabled]="true"  [editMode]="true" [editDate]="contractsHourly.reviewDate"    ></app-date-picker>
-
-      </div>
-    </div>
-
-    <div>
-      <div class="qt-input-block --required qt-w100">
-        <label>Description</label>
-        <input placeholder="Write contract description" type="text" [(ngModel)]="contractsHourly.description" disabled >
-
-      </div>
-    </div>
-
-  </div>
-
-  <hr class="qt-horisontal-line qt-mb-16">
-
-
-  <div class="qt-pl-32 qt-pr-32 qt-pb-20">
-
-    <div class="qt-mb-16 qt-ff-sb qt-fs-15 qt-lh-147 qt-color-dark">Check this services you want for this customer</div>
-
-    <table class="qt-gray-table service-table --preview qt-mb-16" colspan="0">
-      <thead>
-        <tr>
-
-          <th class="service-table__name">Service Name</th>
-          <th class="service-table__billable">
-            <div class="qt-df qt-ai-c qt-jc-fe">
-              <div>Billable</div>
-              <div class="qt-sz-12 icon__question-help"></div>
+    <div class="qt-pr-32 qt-pl-32 qt-pb-8 qt-pt-16">
+        <div class="qt-df qt-mb-16">
+            <div class="qt-w50 qt-input-block qt-mr-16">
+                <label>Company Name</label>
+                <app-select-search
+                    class="search-company"
+                    [placeholder]="'Select Company'"
+                    [editItem]="selectedCompany"
+                    [class]="['qt-dropdown']"
+                    [field]="'name'"
+                    [isDisabled]="true"
+                ></app-select-search>
             </div>
-          </th>
-          <th class="service-table__tax">
-            <div class="qt-df qt-ai-c qt-jc-fe">
-              <div>Tax</div>
-              <div class="qt-sz-12 icon__question-help"></div>
+            <div class="contracts-page__contract-type-name-input qt-input-block">
+                <label>Contract Type</label>
+                <app-select-search
+                    class="search-users"
+                    [isDisabled]="true"
+                    [placeholder]="'Contract Type'"
+                    [editItem]="selectedType"
+                    [class]="['qt-dropdown']"
+                    [field]="'title'"
+                ></app-select-search>
             </div>
-          </th>
-          <th class="service-table__rate">
-            <div class="qt-df qt-ai-c qt-jc-fe">
-              <div>Hourly Rate</div>
-              <div class="qt-sz-12 icon__question-help"></div>
+        </div>
+        <div class="qt-df qt-mb-16 qt-w50 qt-mr-16">
+            <div class="qt-input-block --required qt-w50 qt-mr-16">
+                <label>Start Date</label>
+                <app-date-picker
+                    [formatDate]="formatDate"
+                    [disabled]="true"
+                    [editMode]="true"
+                    [editDate]="contractsHourly.startDate"
+                ></app-date-picker>
             </div>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <ng-template ngFor let-item
-        [ngForOf]="contractsHourly.services"
-        [ngForTrackBy]="trackById">
-      <tr>
-
-        <td class="service-table__name" [textContent]="item.name">
-
-        </td>
-        <td class="service-table__billable">
-          <label class="qt-checkbox">
-            <input type="checkbox" [(ngModel)]="item.billable" disabled>
-            <span></span>
-          </label>
-        </td>
-        <td class="service-table__tax" [textContent]="getSelectedTaxes(item.taxIds)"></td>
-        <td class="service-table__rate" [textContent]="item.rate | currency"> </td>
-      </tr>
-      </ng-template>
-
-
-
-
-      </tbody>
-    </table>
-
-  </div>
-
+            <div class="qt-input-block --required qt-w50">
+                <label>Review Date</label>
+                <app-date-picker
+                    [formatDate]="formatDate"
+                    [disabled]="true"
+                    [editMode]="true"
+                    [editDate]="contractsHourly.reviewDate"
+                ></app-date-picker>
+            </div>
+        </div>
+        <div>
+            <div class="qt-input-block --required qt-w100">
+                <label>Description</label>
+                <input
+                    placeholder="Write contract description"
+                    type="text"
+                    [(ngModel)]="contractsHourly.description"
+                    disabled
+                >
+            </div>
+        </div>
+    </div>
+    <hr class="qt-horisontal-line qt-mb-16">
+    <div class="qt-pl-32 qt-pr-32 qt-pb-20">
+        <div class="qt-mb-16 qt-ff-sb qt-fs-15 qt-lh-147 qt-color-dark">
+            Check this services you want for this customer
+        </div>
+        <table
+            class="qt-gray-table service-table --preview qt-mb-16"
+            colspan="0"
+        >
+            <thead>
+                <tr>
+                    <th class="service-table__name">Service Name</th>
+                    <th class="service-table__billable">
+                        <div class="qt-df qt-ai-c qt-jc-fe">
+                            <div>Billable</div>
+                            <div class="qt-sz-12 icon__question-help"></div>
+                        </div>
+                    </th>
+                    <th class="service-table__tax">
+                        <div class="qt-df qt-ai-c qt-jc-fe">
+                            <div>Tax</div>
+                            <div class="qt-sz-12 icon__question-help"></div>
+                        </div>
+                    </th>
+                    <th class="service-table__rate">
+                        <div class="qt-df qt-ai-c qt-jc-fe">
+                            <div>Hourly Rate</div>
+                            <div class="qt-sz-12 icon__question-help"></div>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-template
+                    ngFor
+                    let-item
+                    [ngForOf]="contractsHourly.services"
+                    [ngForTrackBy]="trackById"
+                >
+                    <tr>
+                        <td
+                            class="service-table__name"
+                            [textContent]="item.name"
+                        >
+                        </td>
+                        <td class="service-table__billable">
+                            <label class="qt-checkbox">
+                                <input
+                                    type="checkbox"
+                                    [(ngModel)]="item.billable"
+                                    disabled
+                                >
+                                <span></span>
+                            </label>
+                        </td>
+                        <td
+                            class="service-table__tax"
+                            [textContent]="getSelectedTaxes(item.taxIds)"
+                        ></td>
+                        <td
+                            class="service-table__rate"
+                            [textContent]="item.rate | currency"
+                        >
+                        </td>
+                    </tr>
+                </ng-template>
+            </tbody>
+        </table>
+    </div>
 </div>
