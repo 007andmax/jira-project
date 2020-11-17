@@ -48,8 +48,6 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
   statusColor: TicketsColor;
   listAssignedUser: Array<CurrentUser> = [];
   lisUpdateUser: Array<CurrentUser> = [];
-
-
   sub: Subscription = new Subscription();
   constructor(private ticketsStateService: TicketsStateService,
     private confirmStateService: ConfirmStateService,
@@ -150,6 +148,10 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       if (newChange.action == 'UPDATE_DELETED') this.ticketProfile.removeUpdate(newChange.data);
       this.cd.detectChanges();
     });
+  }
+  onOpenCompaniesDropDown() {
+    console.log("onOpenCompaniesDropDown");
+    this.cd.detectChanges();
   }
   getCompany(id) {
     return this.companiesStateService.getCompanies().find(item => item.id === id);

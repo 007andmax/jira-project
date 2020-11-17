@@ -27,10 +27,17 @@
                             <div class="d-f ai-c">
                                 <div
                                     class="ticket-edit-aside__header-company"
-                                    [textContent]="getCompanyName() + ' - ' + getNameCreateUser()"
                                     ngbDropdown
-                                    ngbDropdownToggle
+                                    (openChange)="onOpenCompaniesDropDown()"
+                                    placement="bottom-left"
                                 >
+                                    <span
+                                        [ngClass]="{'pointer': ticketProfile.ticketSource === 'FROM_EMAIL'}"
+                                        [textContent]="getCompanyName()"
+                                        id="dropdownCompany"
+                                        ngbDropdownToggle
+                                    ></span>
+                                    <span [textContent]="' - ' + getNameCreateUser()"></span>
                                     <div
                                         *ngIf="ticketProfile.ticketSource === 'FROM_EMAIL'"
                                         ngbDropdownMenu
@@ -123,6 +130,18 @@
                         (click)="toggleSubject()"
                     >
                         <span [ngClass]="getClassType()"></span>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
