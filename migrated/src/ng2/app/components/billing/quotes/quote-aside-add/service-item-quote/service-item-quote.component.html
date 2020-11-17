@@ -1,32 +1,55 @@
 <tr>
-  <td class="new-quote-table__col-item qt-p-0-important qt-inside-border-none-important">
-    <app-drop-down
-    #companyDp
-    [placeholder]="'Select Service'"
-    [list]="services"
-    [editItem]="service.item"
-    [validate]="service.validate"
-    [errorMessage]="'The service does not belong to the selected company.'"
-    [field]="'name'"
-    [search]="true"
-    [change]="true"
-    [isBlockClear]="true"
-    [dropdownWidth]="'250px'"
-    (onSelectedItem)="onSelectService($event)">
-  </app-drop-down>
-  </td>
-  <td class="new-quote-table__col-desc"><input type="text" [(ngModel)]="service.description" class="qt-input-in-table" /></td>
-  <td class="new-quote-table__col-unit-price td-padding-side" ></td>
-  <td class="new-quote-table__col-markup td-padding-side" ></td>
-  <td class="new-quote-table__col-sales-price td-padding-side" [textContent]="service.item.rate | currency"></td>
-  <td class="new-quote-table__col-quantify">
-    <input class="qt-input-in-table"
-      decimalNumber
-      [value]="service.quantity"
-      (onChange)="service.quantity=$event"
-      />
-  </td>
-  <td class="new-quote-table__col-tax" [innerHTML]="getSelectedTaxes(service.item.taxes)"> </td>
-  <td class="new-quote-table__col-amount" [textContent]="getPriceService(service) | currency"></td>
-  <td> <div class="icon__raw-clear qt-ic-c qt-sz-16" (click)="removeService(i)"></div></td>
+    <td class="new-quote-table__col-item qt-p-0-important qt-inside-border-none-important">
+        <app-drop-down
+            #companyDp
+            [placeholder]="'Select Service'"
+            [list]="services"
+            [editItem]="service.item"
+            [validate]="service.validate"
+            [errorMessage]="'The service does not belong to the selected company.'"
+            [field]="'name'"
+            [search]="true"
+            [change]="true"
+            [isBlockClear]="true"
+            [dropdownWidth]="'250px'"
+            (onSelectedItem)="onSelectService($event)"
+        >
+        </app-drop-down>
+    </td>
+    <td class="new-quote-table__col-desc">
+        <input
+            type="text"
+            [(ngModel)]="service.description"
+            class="qt-input-in-table"
+        >
+    </td>
+    <td class="new-quote-table__col-unit-price td-padding-side"></td>
+    <td class="new-quote-table__col-markup td-padding-side"></td>
+    <td
+        class="new-quote-table__col-sales-price td-padding-side"
+        [textContent]="service.item.rate | currency"
+    ></td>
+    <td class="new-quote-table__col-quantify">
+        <input
+            class="qt-input-in-table"
+            decimalNumber
+            [value]="service.quantity"
+            (onChange)="service.quantity=$event"
+        >
+    </td>
+    <td
+        class="new-quote-table__col-tax"
+        [innerHTML]="getSelectedTaxes(service.item.taxes)"
+    >
+    </td>
+    <td
+        class="new-quote-table__col-amount"
+        [textContent]="getPriceService(service) | currency"
+    ></td>
+    <td>
+        <div
+            class="icon__raw-clear qt-ic-c qt-sz-16"
+            (click)="removeService(i)"
+        ></div>
+    </td>
 </tr>

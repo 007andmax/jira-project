@@ -48,7 +48,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
   statusColor: TicketsColor;
   listAssignedUser: Array<CurrentUser> = [];
   lisUpdateUser: Array<CurrentUser> = [];
-
+  listCompanies = [];
 
   sub: Subscription = new Subscription();
   constructor(private ticketsStateService: TicketsStateService,
@@ -82,7 +82,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       this.ticketMessage.reset();
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
-    }
+      }
     })
     this.sub.add(getOnEditTicket);
     this.ticketsStateService.getOnInitColor().subscribe(data => {
@@ -131,7 +131,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     });
     this.ticketStateService.getOnChangeUpdatesTicket().subscribe(newChange => {
 
-      
+
       if (newChange.action == 'UPDATE_SAVED' || newChange.action == 'UPDATE_CREATED' || newChange.action === 'UPDATE_EXPENSE_DELETED') {
         let update = this.ticketProfile.updates.find(item => item.id === newChange.data.id),
           attachments = newChange.data.attachments;
@@ -149,6 +149,9 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       if (newChange.action == 'UPDATE_DELETED') this.ticketProfile.removeUpdate(newChange.data);
       this.cd.detectChanges();
     });
+  }
+  changeTicketCompany() {
+    
   }
   private updateListAssignedUser() {
     this.listAssignedUser = [];
@@ -197,7 +200,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     this.ticketProfile.updates = updates;
     this.cd.detectChanges();
   }
-   
+
   onChangeTags(data) {
     if (!this.opened) return;
     this.ticketProfile.tags = data;
@@ -232,7 +235,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
   }
   toggleNote() {
     var textCurrent = this.elRef.nativeElement.querySelector("#ticket-note").innerHTML.replace(/<\/?[^>]+>/ig, "");
-    var textOld = (this.ticketProfile.note) ?  this.ticketProfile.note.replace(/<\/?[^>]+>/ig, "") : "";
+    var textOld = (this.ticketProfile.note) ? this.ticketProfile.note.replace(/<\/?[^>]+>/ig, "") : "";
     this.modeDescription = 'view';
     if (textCurrent != textOld) {
       this.ticketProfile.note = this.elRef.nativeElement.querySelector("#ticket-note").innerHTML;
@@ -307,7 +310,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       value.push(currentUser.id);
     }
     this.ticketsService.assignUserToTicket(this.ticketProfile.id, value.join(",")).subscribe(res => {
-     // this.ticketMessage.isClaimTicket = false;
+      // this.ticketMessage.isClaimTicket = false;
     })
 
   };
@@ -363,7 +366,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     this.ticketMessage.reset();
     if (!this.cd['destroyed']) {
       this.cd.detectChanges();
-  }
+    }
   }
   getClassType() {
     return `priority-icon ticket-edit-aside__ticket-subject-flag ${(this.ticketProfile.priorityLevel && this.ticketProfile.priorityLevel !== "MEDIUM") ? '--' + this.ticketProfile.priorityLevel.toLowerCase() : ''}`;

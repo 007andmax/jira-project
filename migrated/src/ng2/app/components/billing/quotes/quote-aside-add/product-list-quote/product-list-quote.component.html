@@ -1,55 +1,111 @@
-<div class="product-list-quote product-dropdown-new-ng light-dropdown select-product" ngbDropdown [autoClose]="'outside'" #products="ngbDropdown" (openChange)="onCloseProducts($event)" >
-  <mat-error  class="qt-tooltip-error qt-w-auto-important" *ngIf="!validate">
-    Product is required
-  </mat-error>
-  <button class="qt-btn --outline --small"   id="dropdownProducts" ngbDropdownToggle>+ Add Product</button>
-  <div class=select-product__dropdown ngbDropdownMenu aria-labelledby="dropdownProducts" >
-    <div class="select-product__header">
-      <div class="qt-pos-rel qt-w100">
-        <div class="icon__search product-search-icon qt-sz-16 qt-bg-contain"></div>
-        <input class="pointer select-product__input" type="text"
-          [ngClass]="{'--input-error' : !validate}" placeholder="Type an item name" (input)="onSearch($event)"
-          id="dropdownProducts">
-      </div>
-      <span class="qt-sz-16" *ngIf="itemList && selectedItem">
-        <i  class="icn-sm icn-remove-old"
-            (click)="clear($event)"></i>
-      </span>
-    </div>
-    <ngb-accordion #acc="ngbAccordion" class="item-list products-accordion"  >
-      <ngb-panel   *ngFor="let item of itemList | filter : resetSearch : search"  > <!--| filter :'name' : search -->
-        <ng-template ngbPanelHeader  let-opened="opened">
-          <button ngbPanelToggle class="btn select-product__item-title" (click)="togglePanel(opened,$event)">
-            <div>
-            {{item.name}} <span *ngIf="item.products.length"> ({{item.products.length}})</span>
-          </div>
-            <div class="select-product__expand icon__expand"></div>
-          </button>
-        </ng-template>
-        <ng-template ngbPanelContent>
-          <div class="category-product" *ngFor="let productItem of item.products" (click)="setProduct(productItem)">
-              <div class="d-f category-product__main-info">
-              <div class="d-f jc-sb category-product__title-price">
-                <div class="title">{{ productItem.description }}</div>
-                <div class="text-right total-count">{{ productItem.sale | currency: '$' }}</div>
-              </div>
-              <div class="manufacture">
-                <span *ngIf="productItem.ilc">ILC: {{ productItem.ilc }}</span>
-                <span *ngIf="productItem.manufacture">P/N: {{ productItem.manufacture }}</span>
-              </div>
+<div
+    class="product-list-quote product-dropdown-new-ng light-dropdown select-product"
+    ngbDropdown
+    [autoClose]="'outside'"
+    #products="ngbDropdown"
+    (openChange)="onCloseProducts($event)"
+>
+    <mat-error
+        class="qt-tooltip-error qt-w-auto-important"
+        *ngIf="!validate"
+    >
+        Product is required
+    </mat-error>
+    <button
+        class="qt-btn --outline --small"
+        id="dropdownProducts"
+        ngbDropdownToggle
+    >
+        + Add Product
+    </button>
+    <div
+        class=select-product__dropdown
+        ngbDropdownMenu
+        aria-labelledby="dropdownProducts"
+    >
+        <div class="select-product__header">
+            <div class="qt-pos-rel qt-w100">
+                <div class="icon__search product-search-icon qt-sz-16 qt-bg-contain"></div>
+                <input
+                    class="pointer select-product__input"
+                    type="text"
+                    [ngClass]="{'--input-error' : !validate}"
+                    placeholder="Type an item name"
+                    (input)="onSearch($event)"
+                    id="dropdownProducts"
+                >
             </div>
-            <div class="button-add">Add this</div>
-          </div>
-        </ng-template>
-      </ngb-panel>
-    </ngb-accordion>
-    <div class="select-product__footer-add-product qt-ff-gm" (click)="onCreateProduct()">+ Add New Item</div>
-  </div>
-  <div *ngIf="isCreateproduct" [ngClass]="classAddProduct">
-    <div class="create-product --modal">
-      <h3 class="create-product__title">Create Product</h3>
-      <app-inventory-add-body   #body (onClose)="isCreateproduct = false"></app-inventory-add-body>
+            <span
+                class="qt-sz-16"
+                *ngIf="itemList && selectedItem"
+            >
+                <i
+                    class="icn-sm icn-remove-old"
+                    (click)="clear($event)"
+                ></i>
+            </span>
+        </div>
+        <ngb-accordion
+            #acc="ngbAccordion"
+            class="item-list products-accordion"
+        >
+            <ngb-panel *ngFor="let item of itemList | filter : resetSearch : search">
+                <!-- | filter :'name' : search -->
+                <ng-template
+                    ngbPanelHeader
+                    let-opened="opened"
+                >
+                    <button
+                        ngbPanelToggle
+                        class="btn select-product__item-title"
+                        (click)="togglePanel(opened,$event)"
+                    >
+                        <div>
+                            {{item.name}}
+                            <span *ngIf="item.products.length">({{item.products.length}})</span>
+                        </div>
+                        <div class="select-product__expand icon__expand"></div>
+                    </button>
+                </ng-template>
+                <ng-template ngbPanelContent>
+                    <div
+                        class="category-product"
+                        *ngFor="let productItem of item.products"
+                        (click)="setProduct(productItem)"
+                    >
+                        <div class="d-f category-product__main-info">
+                            <div class="d-f jc-sb category-product__title-price">
+                                <div class="title">{{ productItem.description }}</div>
+                                <div class="text-right total-count">{{ productItem.sale | currency: '$' }}</div>
+                            </div>
+                            <div class="manufacture">
+                                <span *ngIf="productItem.ilc">ILC: {{ productItem.ilc }}</span>
+                                <span *ngIf="productItem.manufacture">P/N: {{ productItem.manufacture }}</span>
+                            </div>
+                        </div>
+                        <div class="button-add">Add this</div>
+                    </div>
+                </ng-template>
+            </ngb-panel>
+        </ngb-accordion>
+        <div
+            class="select-product__footer-add-product qt-ff-gm"
+            (click)="onCreateProduct()"
+        >
+            + Add New Item
+        </div>
     </div>
-    <div class="product-popup-triangle"></div>
-  </div>
-  </div>
+    <div
+        *ngIf="isCreateproduct"
+        [ngClass]="classAddProduct"
+    >
+        <div class="create-product --modal">
+            <h3 class="create-product__title">Create Product</h3>
+            <app-inventory-add-body
+                #body
+                (onClose)="isCreateproduct = false"
+            ></app-inventory-add-body>
+        </div>
+        <div class="product-popup-triangle"></div>
+    </div>
+</div>

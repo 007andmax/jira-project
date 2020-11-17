@@ -25,14 +25,10 @@ export class QuoteAdd {
 
     }
     public checkValidateServicesByCompany(services) {
-        console.log("services",services);
-        console.log("this.services",this.services);
         this.services.forEach(item => {
             let find = services.find(service => service.versionedId.id === item.item.versionedId.id);
-            console.log("find",find);
             if (!find) item.validate = false;
         })
-        console.log("this.services",this.services);
     }
     public setCopyData(quote: QuotePreview) {
         this.companyId = quote.company.id;

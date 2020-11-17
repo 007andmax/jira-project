@@ -13,7 +13,18 @@
 
             <div>
               <div class="d-f ai-c">
-                <div class="ticket-edit-aside__header-company" [textContent]="getCompanyName() + ' - ' + getNameCreateUser()"></div>
+                <div class="ticket-edit-aside__header-company" [textContent]="getCompanyName() + ' - ' + getNameCreateUser()" ngbDropdown>
+                  <div ngbDropdownMenu
+                  aria-labelledby="dropdownCompany">
+                  <div class="dropdown-menu-qt">
+                    <ul>
+                      <ng-template ngFor let-item [ngForOf]="listCompanies" let-i="index">
+                        <li ngbDropdownItem class="" [textContent]="item.title"  (click)="changeTicketCompany()"></li>
+                      </ng-template>
+                    </ul>
+                  </div>
+                </div>
+                </div>
                 <app-ticket-change-status [ticketProfile]="ticketProfile"></app-ticket-change-status>
               </div>
               <div class="ticket-edit-aside__header-info"><span [textContent]="parseTicketSource() + getAgentName()"></span> <span class="divider-point"></span> <span [textContent]="getCreatAt()"></span>

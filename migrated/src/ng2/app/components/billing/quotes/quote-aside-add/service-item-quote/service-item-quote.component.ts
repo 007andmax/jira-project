@@ -31,7 +31,6 @@ export class ServiceItemQuoteComponent implements OnInit {
     }).join("<br>");
   }
   onSelectService(data) {
-    console.log("data", data);
     this.service.setItem(data);
     this.service.setValdiate(true);
   }
