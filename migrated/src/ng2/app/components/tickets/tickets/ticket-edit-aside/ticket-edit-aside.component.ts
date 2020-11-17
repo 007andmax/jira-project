@@ -48,7 +48,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
   statusColor: TicketsColor;
   listAssignedUser: Array<CurrentUser> = [];
   lisUpdateUser: Array<CurrentUser> = [];
-  listCompanies = [];
+
 
   sub: Subscription = new Subscription();
   constructor(private ticketsStateService: TicketsStateService,
@@ -83,6 +83,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
       }
+      console.log("ticketProfile", this.ticketProfile);
     })
     this.sub.add(getOnEditTicket);
     this.ticketsStateService.getOnInitColor().subscribe(data => {
@@ -150,8 +151,12 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     });
   }
-  changeTicketCompany() {
-    
+  getCompany(id) {
+    return this.companiesStateService.getCompanies().find(item => item.id === id);
+  }
+  changeTicketCompany(id) {
+    this.ticketsService.changeSubjectNoteTicket(this.ticketProfile.id, this.ticketProfile.subject, this.ticketProfile.note, id).subscribe(data => {
+    })
   }
   private updateListAssignedUser() {
     this.listAssignedUser = [];
