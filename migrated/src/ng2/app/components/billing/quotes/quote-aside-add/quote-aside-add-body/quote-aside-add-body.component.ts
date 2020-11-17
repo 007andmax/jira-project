@@ -94,8 +94,7 @@ export class QuoteAsideAddBodyComponent implements OnInit {
       }
       this.notes = data;
     })
-    this.invoiceTicketsService.termsAndConditions().subscribe((data:any) => {
-      console.log("data",data);
+    this.invoiceTicketsService.termsAndConditions().subscribe((data: any) => {
       this.termsAndConditions = data.conditions;
       this.elRef.nativeElement.querySelector("#description-global-note").value = data.conditions;
     })
