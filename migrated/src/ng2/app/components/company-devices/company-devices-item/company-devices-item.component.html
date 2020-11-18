@@ -44,6 +44,7 @@
                 </ng-template>
                 <div
                     placement="top"
+                    container="body"
                     [ngbTooltip]="tipEditDevice"
                     class="ml-8 qt-sz-24 icon__edit qt-ic-c device-name-edit-marker"
                     ngbDropdownToggle
@@ -136,6 +137,20 @@
             placement="top"
             [ngbTooltip]="tipRemoteAccess"
             (click)="openModalRemoteAccess()"
+        ></div>
+
+        <ng-template
+            #tipConnected
+            class="tooltip"
+        >
+            <div class="connected-tooltip-name qt-ff-gm">Lucas Bowman</div>
+            <div class="connected-tooltip-text">Connected: 5 Min</div>
+        </ng-template>
+        <div
+            placement="top"
+            container="body"
+            [ngbTooltip]="tipConnected"
+            class="qt-ic-c icon__connected-device master-agent-icon qt-sz-24"
         ></div>
     </td>
     <td class="company-devices-table__menu">
