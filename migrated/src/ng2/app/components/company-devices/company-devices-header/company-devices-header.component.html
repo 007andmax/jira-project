@@ -1,0 +1,26 @@
+<div class="qt-list-header sticky-list-header company-devices-page__list-header">
+    <div class="qt-w100 qt-df qt-jc-sb qt-ai-c">
+        <h3
+            class="list-title"
+            [textContent]="'All Devices (' + devices.length + ')'"
+        ></h3>
+        <div
+            class="company-devices-page__list-header-buttons"
+            *ngIf="getCountSelected() > 0"
+        >
+            <div [textContent]="getCountSelected() + ' Devices Selected'"></div>
+            <div class="qt-ml-16 qt-ff-gm qt-df qt-color-info qt-ai-c qt-pointer">
+                <div class="icon__restart-blue qt-sz-16 qt-ic-c qt-mr-6"></div>
+                <div>Restart</div>
+            </div>
+            <div class="qt-ml-16 qt-ff-gm qt-df qt-color-info qt-ai-c qt-pointer">
+                <div class="icon__shutdown-blue qt-sz-16 qt-ic-c qt-mr-6"></div>
+                <div>Shutdown</div>
+            </div>
+            <div class="qt-ml-16 qt-ff-gm qt-df qt-color-info qt-ai-c qt-pointer">
+                <div class="icon__remove-blue qt-sz-16 qt-ic-c qt-mr-6"></div>
+                <div>Remove Agent</div>
+            </div>
+        </div>
+    </div>
+</div>

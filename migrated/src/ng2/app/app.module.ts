@@ -332,7 +332,7 @@ import { QuotesTableComponent } from './components/billing/quotes/quotes-table/q
 import { QuotesHeaderComponent } from './components/billing/quotes/quotes-header/quotes-header.component';
 import { QuotesItemComponent } from './components/billing/quotes/quotes-table/quotes-item/quotes-item.component';
 import { QuotesFilterComponent } from './components/billing/quotes/quotes-header/quotes-filter/quotes-filter.component';
- import { QuoteAsidePreviewComponent } from './components/billing/quotes/quote-aside-preview/quote-aside-preview.component';
+import { QuoteAsidePreviewComponent } from './components/billing/quotes/quote-aside-preview/quote-aside-preview.component';
 import { QuoteAsidePreviewBodyComponent } from './components/billing/quotes/quote-aside-preview/quote-aside-preview-body/quote-aside-preview-body.component';
 import { QuoteAsideAddComponent } from './components/billing/quotes/quote-aside-add/quote-aside-add.component';
 import { QuoteAsideAddBodyComponent } from './components/billing/quotes/quote-aside-add/quote-aside-add-body/quote-aside-add-body.component';
@@ -341,8 +341,10 @@ import { ServiceListQuoteComponent } from './components/billing/quotes/quote-asi
 import { ProductItemQuoteComponent } from './components/billing/quotes/quote-aside-add/product-item-quote/product-item-quote.component';
 import { QuoteAsideEditComponent } from './components/billing/quotes/quote-aside-edit/quote-aside-edit.component';
 import { ProductItemQuoteEditComponent } from './components/billing/quotes/quote-aside-edit/product-item-quote-edit/product-item-quote-edit.component';
- import { QuoteAsideEditBodyComponent } from './components/billing/quotes/quote-aside-edit/quote-aside-edit-body/quote-aside-edit-body.component';
+import { QuoteAsideEditBodyComponent } from './components/billing/quotes/quote-aside-edit/quote-aside-edit-body/quote-aside-edit-body.component';
 import { CompanyDevicesComponent } from './components/company-devices/company-devices.component';
+import { CompanyDevicesItemComponent } from './components/company-devices/company-devices-item/company-devices-item.component';
+import { CompanyDevicesHeaderComponent } from './components/company-devices/company-devices-header/company-devices-header.component';
 
 /**
  * declare angular
@@ -839,7 +841,9 @@ angular.module('quicktech')
     QuoteAsideEditComponent,
     ProductItemQuoteEditComponent,
     QuoteAsideEditBodyComponent,
-    CompanyDevicesComponent
+    CompanyDevicesComponent,
+    CompanyDevicesItemComponent,
+    CompanyDevicesHeaderComponent,
   ],
   imports: [
     BrowserModule,
