@@ -345,6 +345,7 @@ import { QuoteAsideEditBodyComponent } from './components/billing/quotes/quote-a
 import { CompanyDevicesComponent } from './components/company-devices/company-devices.component';
 import { CompanyDevicesItemComponent } from './components/company-devices/company-devices-item/company-devices-item.component';
 import { CompanyDevicesHeaderComponent } from './components/company-devices/company-devices-header/company-devices-header.component';
+import { CompanyDevicesRemoteAccessComponent } from './components/company-devices/company-devices-remote-access/company-devices-remote-access.component';
 
 /**
  * declare angular
@@ -844,6 +845,7 @@ angular.module('quicktech')
     CompanyDevicesComponent,
     CompanyDevicesItemComponent,
     CompanyDevicesHeaderComponent,
+    CompanyDevicesRemoteAccessComponent,
   ],
   imports: [
     BrowserModule,
@@ -936,7 +938,8 @@ angular.module('quicktech')
     ContractsConfirmComponent,
     DashboardBillingComponent,
     CompanyContractsComponent,
-    CompanyDevicesComponent
+    CompanyDevicesComponent,
+    CompanyDevicesRemoteAccessComponent
     // RecurringTicketsComponent
   ],
   exports: [
