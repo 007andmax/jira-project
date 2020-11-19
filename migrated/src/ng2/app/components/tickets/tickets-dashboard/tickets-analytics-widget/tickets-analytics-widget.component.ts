@@ -93,10 +93,10 @@ export class TicketsAnalyticsWidgetComponent implements OnInit {
 
   getDataForChart() {
     let sin = [], sin2 = [];
-    let chartData = JSON.parse(JSON.stringify(this.dashboard.chartData.splice(this.dashboard.chartData.length - 30, this.dashboard.chartData.length)));
+    this.dashboard.chartData = JSON.parse(JSON.stringify(this.dashboard.chartData.splice(this.dashboard.chartData.length - 30, this.dashboard.chartData.length)));
     for (let i = 1; i < 30; i++) {
-      sin.push({ x: i, y: chartData[i].totalTickets });
-      sin2.push({ x: i, y: chartData[i].completedTickets });
+      sin.push({ x: i, y: this.dashboard.chartData[i].totalTickets });
+      sin2.push({ x: i, y: this.dashboard.chartData[i].completedTickets });
     }
     return [
       {

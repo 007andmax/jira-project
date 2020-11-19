@@ -35,7 +35,7 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
     if (!this.ticketsStateService.isMoveToTickets) this.getCounts();
     if (this.ticketsStateService.isMoveToTickets) {
       this.ticketsCounts = this.ticketsStateService.getTicketsCounts();
-      this.ticketsStateService.onInitCount(this.ticketsCounts[(this.listType === 'USERS') ? 'USER' : this.listType]);
+      if (this.listType !== "DASHBOARD") this.ticketsStateService.onInitCount(this.ticketsCounts[(this.listType === 'USERS') ? 'USER' : this.listType]);
       this.cd.detectChanges();
     }
     /* END */
@@ -54,24 +54,21 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
     /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
     /* START */
     this.ticketsStateService.setIsMoveToTickets(true);
+    this.ticketsStateService.setListType("DASHBOARD");
     /* END */
     this.goToState('new-tickets-dashboard');
-    /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
-    /* START */
-    this.ticketsStateService.onChangeTypeFilter("DASHBOARD");
-    /* END */
   }
   public goToState(state) {
-    /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
-    /* START */
-    this.ticketsStateService.setIsMoveToTickets(true);
-    /* END */
     this.quoteStateService.goToState(state);
   }
   getCountByField(field) {
     return (this.ticketsCounts) ? this.ticketsCounts[field] : 0;
   }
   public setTypeFilter(type) {
+    /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
+    /* START */
+    if (this.listType === "DASHBOARD") this.ticketsStateService.setIsMoveToTickets(true);
+    /* END */
     this.listType = type;
     this.ticketsStateService.onChangeTypeFilter(type);
     this.goToState('new-tickets');

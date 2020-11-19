@@ -13,7 +13,7 @@ import { TicketsCounts } from '../../components/tickets/tickets/class/tickets-co
 export class TicketsStateService {
   listType: string = "USERS";
   ticketsCounts: TicketsCounts;
-  isMoveToTickets:boolean = false;
+  isMoveToTickets: boolean = false;
   clearFormUpdate: EventEmitter<any> = new EventEmitter();
   actualNumber: EventEmitter<any> = new EventEmitter();
   addTicket: EventEmitter<any> = new EventEmitter();
@@ -60,11 +60,14 @@ export class TicketsStateService {
 
 
   }
-  public getTicketsCounts () {
+  public getTicketsCounts() {
     return this.ticketsCounts;
   }
-  public setIsMoveToTickets (data) {
+  public setIsMoveToTickets(data) {
     this.isMoveToTickets = data;
+  }
+  public setListType(data) {
+    this.listType = data;
   }
   public getCounts(counts) {
     this.ticketsService.getCounts(counts).subscribe(data => {
