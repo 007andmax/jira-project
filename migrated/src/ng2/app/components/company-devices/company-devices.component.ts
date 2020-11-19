@@ -18,7 +18,7 @@ export class CompanyDevicesComponent implements OnInit {
     this.devices = (this.devicesSateService.getAllDevices()[companyId]) ? this.devicesSateService.getAllDevices()[companyId] : [];
     console.log("this.devices", this.devices);
     if (this.devices.length > 0) {
-      this.devicesService.sendDeviceStatusRequest(companyId, this.devices.map(item => item.agentId), ["idle", "norestart", "online"]).subscribe(data => {
+      this.devicesService.sendDeviceStatusRequest(companyId, this.devices.filter(item => item.agentId).map(item => item.agentId), ["idle", "norestart", "online"]).subscribe(data => {
         console.log("data", data);
       })
     }
@@ -26,7 +26,7 @@ export class CompanyDevicesComponent implements OnInit {
       let devices = data[companyId];
       devices.forEach(item => {
         let find = this.devices.find(device => device.agentId === item.agentId);
-        if (!find) {
+        if (!find && find.agentId) {
           this.devicesService.sendDeviceStatusRequest(companyId, [find.agentId], ["idle", "norestart", "online"]).subscribe(res => {
             console.log("res", res);
           })
