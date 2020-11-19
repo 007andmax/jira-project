@@ -29,10 +29,10 @@ export class CompanyDevicesItemComponent implements OnInit {
   }
   returnTimeFormatForPage(time) {
     return {
-      days: moment(time).date(),
-      hours: moment(time).hour(),
-      minutes: moment(time).minute(),
-      seconds: moment(time).second()
+      days: (time == 0) ? 0 : moment(time).date(),
+      hours: (time == 0) ? 0 : moment(time).hour(),
+      minutes: (time == 0) ? 0 : moment(time).minute(),
+      seconds: (time == 0) ? 0 : moment(time).second()
     }
   }
 }
