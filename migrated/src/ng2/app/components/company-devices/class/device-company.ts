@@ -4,5 +4,5 @@ import { DeviceTiming } from './device-timing';
 export class DeviceCompany extends Device {
 
     selected: boolean = false;
-    timing: DeviceTiming = new DeviceTiming();
+
 }

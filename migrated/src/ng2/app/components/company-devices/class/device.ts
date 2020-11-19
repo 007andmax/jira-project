@@ -1,5 +1,6 @@
 import { DeviceAntivirus } from './device-antivirus';
 import { DeviceSystem } from './device-system';
+import { DeviceTiming } from './device-timing';
 
 export class Device {
     agentId: string;
@@ -21,6 +22,7 @@ export class Device {
     uninstalledAt: string;
     updatedAt: string;
     userName: string;
+    timing: DeviceTiming = new DeviceTiming();
     constructor(data) {
         for (const key in data) {
             this[key] = data[key];

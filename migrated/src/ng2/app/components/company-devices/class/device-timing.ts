@@ -5,4 +5,5 @@ export class DeviceTiming {
     agentConnectedAt: number = 0;
     offline: number = 0;
     uptimeForOrdering: number = 0;
+    constructor() { }
 }
