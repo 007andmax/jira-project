@@ -4,6 +4,7 @@ import { UsersStateService } from '../users/users-state.service';
 import { DevicesService } from '../../services/devices/devices.service';
 import { DevicesRealTimeService } from './devices-real-time.service';
 import { DeviceUpdate } from './class/device-update';
+import * as moment from "moment";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class DevicesSateService {
   allDevices = null;
   onGetDevices: EventEmitter<any> = new EventEmitter();
   onRemoveConnecion: EventEmitter<any> = new EventEmitter();
- // onChangeDevices: EventEmitter<DeviceUpdate> = new EventEmitter();
+  // onChangeDevices: EventEmitter<DeviceUpdate> = new EventEmitter();
   constructor(private userStateService: UsersStateService, private devicesService: DevicesService,
     private devicesRealTimeService: DevicesRealTimeService) { }
 
@@ -22,21 +23,78 @@ export class DevicesSateService {
       this.devicesService.getCompanyDevices(data.company.id).subscribe((data) => {
         this.setAllDevices(data);
         this.onInitGetDevices(data);
-      },err => {
+      }, err => {
         this.setAllDevices(null);
         this.onInitGetDevices(null);
       })
     })
     this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
-      if (newChange.action === 'DEVICE_UNINSTALLED')
-      {
-        let deviceIndex = this.allDevices[newChange.data.clientCompanyId].findIndex(item => item.id ===  newChange.data.value);
+      if (newChange.action === 'DEVICE_UNINSTALLED') {
+        let deviceIndex = this.allDevices[newChange.data.clientCompanyId].findIndex(item => item.id === newChange.data.value);
         if (newChange.data.uninstalledAt !== "") {
-        if (deviceIndex > -1)  this.allDevices[newChange.data.clientCompanyId][deviceIndex].uninstalledAt = newChange.data.uninstalledAt;
-         
+          if (deviceIndex > -1) this.allDevices[newChange.data.clientCompanyId][deviceIndex].uninstalledAt = newChange.data.uninstalledAt;
+
         } else {
-          if (deviceIndex > -1)  this.allDevices[newChange.data.clientCompanyId].splice(deviceIndex,1);
+          if (deviceIndex > -1) this.allDevices[newChange.data.clientCompanyId].splice(deviceIndex, 1);
         }
+      }
+      if (newChange.action === 'DEVICE_ONLINE') {
+
+        let deviceIndex = this.allDevices[newChange.data.clientCompanyId].findIndex(item => item.id === newChange.data.value);
+        if (deviceIndex > -1) {
+          this.allDevices[newChange.data.clientCompanyId][deviceIndex].online = true;
+          this.allDevices[newChange.data.clientCompanyId][deviceIndex].userName = newChange.data.userName;
+
+        }
+      }
+      if (newChange.action === 'DEVICE_OFFLINE') {
+
+        let deviceIndex = this.allDevices[newChange.data.clientCompanyId].findIndex(item => item.id === newChange.data.value);
+        if (deviceIndex > -1) {
+          this.allDevices[newChange.data.clientCompanyId][deviceIndex].online = false;
+          this.allDevices[newChange.data.clientCompanyId][deviceIndex].userName = newChange.data.userName;
+          var newValue = moment(Date.now()).valueOf();
+          this.allDevices[newChange.data.clientCompanyId][deviceIndex].timing.offline = (Date.now() - newValue);
+          this.allDevices[newChange.data.clientCompanyId][deviceIndex].timing.uptimeForOrdering = (Date.now() - newValue);
+
+        }
+      }
+      if (newChange.action === 'REMOTE_CONNECTION') {
+
+      }
+      if (newChange.action === 'TEST_CREDENTIALS') {
+
+      }
+      if (newChange.action === 'AGENT_ACTIVITY_STATUS') {
+        var companyId = this.getCompanyIdByAgentId(newChange.data.agentId);
+        if (newChange.data && newChange.data.statuses && newChange.data.statuses.hasOwnProperty('Idle')) {
+          if (companyId) {
+            for (var i = 0; i < this.allDevices[companyId].length; i++) {
+              if (this.allDevices[companyId][i].agentId === newChange.data.agentId) {
+                if (newChange.data.statuses.Idle) {
+                  this.allDevices[companyId][i].timing.idle = this.getMillisecondsFromTimeString(newChange.data.statuses.Idle);
+                } else {
+                  this.allDevices[companyId][i].timing.idle = null;
+                }
+                break;
+              }
+            }
+          }
+
+        } else if (newChange.data && newChange.data.statuses && newChange.data.statuses.hasOwnProperty('NoRestart') && newChange.data.statuses.hasOwnProperty('Online')) {
+
+          for (var i = 0; i < this.allDevices[companyId].length; i++) {
+            if (companyId) {
+              if (this.allDevices[companyId][i].agentId === newChange.data.agentId) {
+                this.allDevices[companyId][i].timing.noRestart = this.getMillisecondsFromTimeString(newChange.data.statuses.NoRestart);
+                this.allDevices[companyId][i].timing.online = this.getMillisecondsFromTimeString(newChange.data.statuses.Online);
+                this.allDevices[companyId][i].timing.uptimeForOrdering = this.getMillisecondsFromTimeString(newChange.data.statuses.Online);
+                break;
+              }
+            }
+          }
+        }
+
       }
       if (newChange.action === 'DEVICE_INSTALLED') {
         let parsedData = JSON.parse(newChange.data.value);
@@ -46,25 +104,42 @@ export class DevicesSateService {
           this.allDevices[companyId] = [];
           this.allDevices[companyId].push(parsedData.device);
         } else {
-          let deviceIndex = this.allDevices[newChange.data.clientCompanyId].findIndex(item => item.id ===  parsedData.device.id);
+          let deviceIndex = this.allDevices[newChange.data.clientCompanyId].findIndex(item => item.id === parsedData.device.id);
           parsedData.device.uninstalledAt = '';
           if (deviceIndex > -1) {
             this.allDevices[newChange.data.clientCompanyId][deviceIndex] = parsedData.device;
           } else {
             this.allDevices[newChange.data.clientCompanyId].push(parsedData.device);
           }
-     
+
         }
       }
       this.onInitGetDevices(this.allDevices);
     })
   }
- public onInitRemoveConnection() {
-   this.onRemoveConnecion.emit(null);
- }
- public getOnRemoveConnection() {
-   return this.onRemoveConnecion;
- }
+  getCompanyIdByAgentId(value) {
+    if (value) {
+      return Object.keys(this.allDevices).find((key) => {
+        if (key !== 'staticCopy') {
+          for (var i = 0; i < this.allDevices[key].length; i++) {
+            if (this.allDevices[key][i].agentId === value) {
+              return true;
+            }
+          }
+        }
+      });
+    }
+  }
+  getMillisecondsFromTimeString(timeString) {
+    var splittedArray = timeString.split(':');
+    return splittedArray[2] * 1000 + splittedArray[1] * 60000 + splittedArray[0] * 3600000
+  };
+  public onInitRemoveConnection() {
+    this.onRemoveConnecion.emit(null);
+  }
+  public getOnRemoveConnection() {
+    return this.onRemoveConnecion;
+  }
   public setAllDevices(data) {
     this.allDevices = data;
   }
