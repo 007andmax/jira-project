@@ -120,13 +120,14 @@ export class DevicesSateService {
   getCompanyIdByAgentId(value) {
     if (value) {
       return Object.keys(this.allDevices).find((key) => {
-        if (key !== 'staticCopy') {
+        if (key !== 'staticCopy' && this.allDevices[key]) {
           for (var i = 0; i < this.allDevices[key].length; i++) {
             if (this.allDevices[key][i].agentId === value) {
               return true;
             }
           }
         }
+
       });
     }
   }
