@@ -33,6 +33,7 @@ export class CompanyDevicesComponent implements OnInit {
         }
       });
       this.devices = devices;
+      console.log("this.devices", this.devices);
     })
   }
 
