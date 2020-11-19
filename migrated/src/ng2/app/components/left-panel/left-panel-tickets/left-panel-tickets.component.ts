@@ -5,7 +5,7 @@ import { LeftPanelService } from 'src/ng2/app/services/left-panel/left-panel.ser
 import { SelectSearchComponent } from '../../shared/select-search/select-search.component';
 import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 import { TicketsCounts } from '../../tickets/tickets/class/tickets-counts';
-import { QuoteStateService } from '../../billing/quotes/quote-create/quote-state.service';
+import { QuoteStateService } from 'src/ng2/app/states/quote/quote-state.service';
 
 @Component({
   selector: 'app-left-panel-tickets',
