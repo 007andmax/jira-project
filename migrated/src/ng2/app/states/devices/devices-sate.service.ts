@@ -5,6 +5,7 @@ import { DevicesService } from '../../services/devices/devices.service';
 import { DevicesRealTimeService } from './devices-real-time.service';
 import { DeviceUpdate } from './class/device-update';
 import * as moment from "moment";
+import { Device } from '../../components/company-devices/class/device';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,9 @@ export class DevicesSateService {
 
     this.userStateService.getOnGetCurrentuser().subscribe(data => {
       this.devicesService.getCompanyDevices(data.company.id).subscribe((data) => {
+        Object.keys(data).forEach(key => {
+          if (data[key]) data[key] = data[key].map(item => new Device(item));
+        })
         this.setAllDevices(data);
         this.onInitGetDevices(data);
       }, err => {

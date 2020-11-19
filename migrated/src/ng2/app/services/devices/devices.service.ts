@@ -5,6 +5,10 @@ import { environment } from "../../../environments/environment";
 import { Subject } from 'rxjs';
 import { ConstantsStateService } from '../../states/constants/constants-state.service';
 
+import { Ticket } from '../../components/tickets/class/ticket';
+import { map } from 'rxjs/operators';
+import { Device } from '../../components/company-devices/class/device';
+
 /**
  * Device service to work with api
  */
