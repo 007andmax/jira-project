@@ -27,7 +27,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
   statusColor: TicketsColor;
   offset: number = 15;
   showPendingPreloader: boolean = false;
-  idEditTicket:string = '';
+  idEditTicket: string = '';
   constructor(private ticketsService: TicketsService,
     private ticketsListService: TicketsListService,
     private ticketStateService: TicketStateService,
@@ -84,8 +84,10 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
 
   editTicket(id) {
     this.idEditTicket = id;
+    let ticket = this.tickets.find(item => item.id === id);
     this.ticketsStateService.onOpenTicket();
     this.ticketsService.getTicket(id).subscribe(data => {
+      data.setUserCompanies(ticket.userCompanies);
       this.ticketsStateService.onEditTicket(data);
     })
   }

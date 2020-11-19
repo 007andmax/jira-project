@@ -4,6 +4,7 @@ import { CompanyProfile } from 'src/ng2/app/components/companies/class/company-p
 import { CompanyUpdate } from 'src/ng2/app/components/companies/class/company-update';
 import { InvoiceTicketsService } from 'src/ng2/app/components/setting/invoice-tickets/invoice-tickets.service';
 import { FORMAT_DATE_2 } from 'src/ng2/app/const/date-picker';
+import { Service } from 'src/ng2/app/interfaces/service/service';
 import { BillableService } from 'src/ng2/app/services/billable/billable.service';
 import { CompaniesService } from 'src/ng2/app/services/company/companies.service';
 import { QuoteService } from 'src/ng2/app/services/quote/quote.service';
@@ -32,6 +33,7 @@ export class QuoteAsideAddBodyComponent implements OnInit {
   changeGlobalNote: boolean = false;
   termsAndConditions: string;
   companies = [];
+  services: Array<Service> = [];
   sub: Subscription = new Subscription();
   constructor(private companiesState: CompaniesStateService,
     private billableStateService: BillableStateService,
@@ -69,7 +71,8 @@ export class QuoteAsideAddBodyComponent implements OnInit {
     this.quote.setCopyData(this.quoteStateService.getQuoteForCopy());
     this.quoteCompany = this.companiesState.getCompanies().find(item => item.id === this.quote.companyId);
     this.cd.detectChanges();
-    this.servicesList.getServicesList();
+    //  this.servicesList.getServicesList();
+    this.getServicesList();
   }
   public onChangeQuoteNumber(data) {
     this.quote.number = data;
@@ -84,6 +87,16 @@ export class QuoteAsideAddBodyComponent implements OnInit {
   }
   public getQuotePreview() {
     return this.quote.getDataForPreview(this.quoteCompany, this.termsAndConditions);
+  }
+  getServicesList() {
+    this.quoteServices.getServiceList(this.quoteCompany.id).subscribe((res: any) => {
+      this.services = res;
+      this.onCheckValidateServicesByCompany();
+    });
+  }
+  public onCheckValidateServicesByCompany() {
+    this.quote.checkValidateServicesByCompany(this.services);
+    this.cd.detectChanges();
   }
   private getInvoiceNote() {
     this.billableService.getInvoiceNote().subscribe(data => {
@@ -150,14 +163,8 @@ export class QuoteAsideAddBodyComponent implements OnInit {
   removeProduct(i) {
     this.quote.products.splice(i, 1);
   }
-  getPriceService(service) {
-    service.sum = this.quoteStateService.getPrice(service.item.rate, service.quantity, service.item.taxes) + this.getTaxPrice(service);
-    service.taxSum = this.getTaxPrice(service);
-    return this.quoteStateService.roundToTwo(this.quoteStateService.getPrice(service.item.rate, service.quantity, service.item.taxes) + this.getTaxPrice(service));
-  }
-  public getTaxPrice(service) {
-    return service.item.taxes.reduce((a, b) => a + ((b.rate / 100) * service.item.rate * service.quantity), 0);;
-  }
+
+
   onEditCustomer() {
     this.companiesService.getCompany(this.quoteCompany.id).subscribe((data: any) => {
       let customerCompany: CompanyProfile = new CompanyProfile();
@@ -185,11 +192,12 @@ export class QuoteAsideAddBodyComponent implements OnInit {
     this.cd.detectChanges();
     if (data) {
       this.validate.resetCompany();
-      this.servicesList.getServicesList();
+      //  this.servicesList.getServicesList();
+      this.getServicesList();
     } else {
-      this.servicesList.resetServicesList();
+      // this.servicesList.resetServicesList();
     }
-    this.quote.resetServices();
+    // this.quote.resetServices();
     this.validate.resetValidate();
   }
   public trackById(index, item) {

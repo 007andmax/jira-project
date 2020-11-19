@@ -53,6 +53,7 @@ export class TicketProfile {
     unloadedUpdates: number;
     unread: boolean;
     updates: Array<TicketProfileUpdate> = [];
+    userCompanies: Array<string> = [];
     constructor(data = null) {
         if (data) {
             for (const key in data) {
@@ -64,7 +65,7 @@ export class TicketProfile {
             this.attachments = data.attachments.map(item => {
                 return new TicketProfileAttachment(item);
             })
-            this.createdUser = (data.createdUser) ?  new CurrentUser(data.createdUser) : null;
+            this.createdUser = (data.createdUser) ? new CurrentUser(data.createdUser) : null;
             this.multiAssignedUsers = data.multiAssignedUsers.map(item => {
                 return new CurrentUser(item);
             })
@@ -84,6 +85,9 @@ export class TicketProfile {
                 return new TicketProfileUpdate(item);
             })
         }
+    }
+    public setUserCompanies(data) {
+        this.userCompanies = data;
     }
     public addAttachment(data) {
         this.attachments.push(new TicketProfileAttachment(data));

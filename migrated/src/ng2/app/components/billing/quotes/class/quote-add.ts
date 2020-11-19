@@ -24,6 +24,12 @@ export class QuoteAdd {
     constructor() {
 
     }
+    public checkValidateServicesByCompany(services) {
+        this.services.forEach(item => {
+            let find = services.find(service => service.versionedId.id === item.item.versionedId.id);
+            if (!find) item.validate = false;
+        })
+    }
     public setCopyData(quote: QuotePreview) {
         this.companyId = quote.company.id;
         this.date = quote.date;

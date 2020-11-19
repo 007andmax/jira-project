@@ -342,6 +342,8 @@ import { ProductItemQuoteComponent } from './components/billing/quotes/quote-asi
 import { QuoteAsideEditComponent } from './components/billing/quotes/quote-aside-edit/quote-aside-edit.component';
 import { ProductItemQuoteEditComponent } from './components/billing/quotes/quote-aside-edit/product-item-quote-edit/product-item-quote-edit.component';
  import { QuoteAsideEditBodyComponent } from './components/billing/quotes/quote-aside-edit/quote-aside-edit-body/quote-aside-edit-body.component';
+import { ServiceItemQuoteComponent } from './components/billing/quotes/quote-aside-add/service-item-quote/service-item-quote.component';
+import { PermissionDasnboardBillingService } from './services/dashboard-billing/permission-dasnboard-billing.service';
 
 /**
  * declare angular
@@ -833,7 +835,8 @@ angular.module('quicktech')
     ProductItemQuoteComponent,
     QuoteAsideEditComponent,
     ProductItemQuoteEditComponent,
-    QuoteAsideEditBodyComponent
+    QuoteAsideEditBodyComponent,
+    ServiceItemQuoteComponent
   ],
   imports: [
     BrowserModule,
@@ -940,7 +943,8 @@ angular.module('quicktech')
       deps: ['$injector']
     },
     { provide: UrlHandlingStrategy, useClass: CustomHandlingStrategy },
-    ApiPasswordManagerService
+    ApiPasswordManagerService,
+    PermissionDasnboardBillingService
   ],
   // bootstrap: [AppComponent]
 })

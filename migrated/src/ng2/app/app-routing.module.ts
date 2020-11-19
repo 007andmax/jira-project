@@ -46,6 +46,7 @@ import { StartupComponent } from './components/device/startup-programes/startup-
 import { FileComponent } from './components/device/file-explorer/file-explorer.component';
 import { DashboardBillingComponent } from './components/billing/dashboard-billing/dashboard-billing.component';
 import { CompanyContractsComponent } from './components/companies/company-contracts/company-contracts.component';
+import { PermissionDasnboardBillingService } from './services/dashboard-billing/permission-dasnboard-billing.service';
 
 const routes: Routes = [
   {
@@ -246,7 +247,9 @@ const routes: Routes = [
   },
   {
     path: 'ng2/billing-dashboard',
-    component: DashboardBillingComponent
+    component: DashboardBillingComponent,
+    canActivate: [PermissionDasnboardBillingService]
+
   },
   {
     path: 'ng2/company-contracts',
