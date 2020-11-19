@@ -1,8 +1,6 @@
 export class TicketsCounts {
     ALL: number;
     CLOSED: number;
-    COMPLETED: number;
-    IN_PROGRESS: number;
     ON_HOLD: number;
     OPEN: number;
     RECURRING_TICKETS_CLOSED: number;
@@ -14,8 +12,6 @@ export class TicketsCounts {
     constructor(data) {
         this.ALL = data.ALL;
         this.CLOSED = data.CLOSED;
-        this.COMPLETED = data.COMPLETED;
-        this.IN_PROGRESS = data.IN_PROGRESS;
         this.ON_HOLD = data.ON_HOLD;
         this.OPEN = data.OPEN;
         this.RECURRING_TICKETS_CLOSED = data.RECURRING_TICKETS_CLOSED;

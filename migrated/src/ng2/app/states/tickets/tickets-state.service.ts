@@ -4,11 +4,16 @@ import { TicketProfile } from '../../components/tickets/tickets/class/ticket-pro
 import { ServiceAgreementsService } from '../../services/service-agreements/service-agreements.service';
 import { TicketChangeField } from '../../components/tickets/tickets/class/ticket-change-field';
 import { WebsocketService } from '../../services/websocket/websocket.service';
+import { TicketsService } from '../../services/tickets/tickets.service';
+import { TicketsCounts } from '../../components/tickets/tickets/class/tickets-counts';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TicketsStateService {
+  listType: string = "USERS";
+  ticketsCounts: TicketsCounts;
+  isMoveToTickets:boolean = false;
   clearFormUpdate: EventEmitter<any> = new EventEmitter();
   actualNumber: EventEmitter<any> = new EventEmitter();
   addTicket: EventEmitter<any> = new EventEmitter();
@@ -27,7 +32,8 @@ export class TicketsStateService {
   tagsFilter: EventEmitter<any> = new EventEmitter();
   leftPanelFilter: EventEmitter<any> = new EventEmitter();
   ticketChangedActions = ['ASSIGNED_USER', 'PRIORITY_CHANGED', 'STATUS', 'TRASH', 'REPORT_AS_SPAM', 'RESTORE_FROM_SPAM', 'TICKET_SHARE', 'MARKED_AS_SPAM', 'EDITED_TICKET'];
-  constructor(private ticketsRealTimeService: TicketsRealTimeService) { }
+  constructor(private ticketsRealTimeService: TicketsRealTimeService,
+    private ticketsService: TicketsService) { }
 
   public onInit() {
     this.ticketsRealTimeService.changeActualNumber.subscribe(newChange => {
@@ -54,7 +60,21 @@ export class TicketsStateService {
 
 
   }
+  public getTicketsCounts () {
+    return this.ticketsCounts;
+  }
+  public setIsMoveToTickets (data) {
+    this.isMoveToTickets = data;
+  }
+  public getCounts(counts) {
+    this.ticketsService.getCounts(counts).subscribe(data => {
+      this.ticketsCounts = new TicketsCounts(data);
+      this.onUpdateCounts(data);
+      this.onInitCount(this.ticketsCounts[(this.listType === 'USERS') ? 'USER' : this.listType]);
+    })
+  }
   public onChangeLeftPanelFilter(data) {
+    this.listType = data;
     this.leftPanelFilter.emit(data);
   }
   public getOnChangeLeftPanelFilter() {
@@ -67,8 +87,11 @@ export class TicketsStateService {
   public getOnChangeTagsFilter() {
     return this.tagsFilter;
   }
-
+  public getListType() {
+    return this.listType;
+  }
   public onChangeTypeFilter(data) {
+    this.listType = data;
     this.typeFilter.emit(data);
   }
   public getOnChangeTypeFilter() {

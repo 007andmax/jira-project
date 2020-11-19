@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Ticket } from '../../components/tickets/class/ticket';
 import { map, tap } from 'rxjs/operators';
 import { TicketProfile } from '../../components/tickets/tickets/class/ticket-profile';
+import { DashboardTickets } from '../../components/tickets/tickets-dashboard/class/dashboard-tickets';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,13 @@ import { TicketProfile } from '../../components/tickets/tickets/class/ticket-pro
 export class TicketsService {
   private apiUrl = environment.apiUrl;
   constructor(private http: HttpClient) { }
+
+  public getDashboardByServices(data) {
+    return this.http.post(this.apiUrl + `dashboard/ticket/byServices`,data);
+  }
+  public getDashboard(frequency) {
+    return this.http.get(this.apiUrl + `dashboard/ticket?frequency=${frequency}`).pipe(map((data: any) => new DashboardTickets(data)));
+  }
   public updateExpense(data) {
     return this.http.put(this.apiUrl + `v2/tickets/ticketUpdate/updateExpense`, data);
   }

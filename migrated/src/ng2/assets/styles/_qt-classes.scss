@@ -489,6 +489,7 @@
   background-color: #ffffff;
   padding: 8px 0;
   margin: 0;
+  position: relative;
   &.--open-top {
     top: unset;
     bottom: calc(100% + 4px);
@@ -496,6 +497,10 @@
   &.--open-bot {
     top: calc(100% - 4px) !important;
     transform: none !important;
+  }
+  &.--open-left {
+    right: 0 !important;
+    left: auto !important;
   }
   &.--fixed {
     position: fixed !important;
@@ -839,4 +844,9 @@
   input {
     border: none !important;
   }
+}
+.qt-card {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  background-color: #ffffff;
 }

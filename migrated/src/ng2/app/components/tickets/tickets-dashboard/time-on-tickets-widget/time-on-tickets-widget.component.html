@@ -1,0 +1,34 @@
+<div class="contract-dashboard-chart-card time-on-tickets">
+  <div class="time-on-tickets__header">
+    <div class="contract-dashboard-chart-card__header-title">Time on Tickets</div>
+    <div class="list-type" ngbDropdown>
+      <div class="time-on-tickets__interval-title pointer" ngbDropdownToggle [textContent]="currentInterval.title" id="dropdownIntervals"></div>
+      <ul  class="qt-dropdown-menu --border" ngbDropdownMenu aria-labelledby="dropdownIntervals">
+        <ng-template ngFor let-item [ngForOf]="listIntervals" >
+          <li tabindex="-1" href="javascript:void(0)" ngbDropdownItem [textContent]="item.title" (click)="onSelectInterval(item)"></li>
+        </ng-template>
+      </ul>
+    </div>
+  </div>
+  <div class="time-on-tickets__content" *ngIf="!showPreloader">
+    <div class="time-on-tickets__time-container">
+      <div class="qt-df">
+        <div class="time-on-tickets__icon icon__tickets-on-time"></div>
+        <div class="time-on-tickets__info">
+          <div class="time-on-tickets__info-value" [textContent]="dashboardTicketsTime.getAverageResponseTime()"></div>
+          <div class="time-on-tickets__info-title">Average Ticket Time</div>
+        </div>
+      </div>
+    </div>
+    <div class="time-on-tickets__time-container">
+      <div class="qt-df">
+        <div class="time-on-tickets__icon icon__avg-response"></div>
+        <div class="time-on-tickets__info">
+          <div class="time-on-tickets__info-value"[textContent]="dashboardTicketsTime.getAverageLifeTime()"></div>
+          <div class="time-on-tickets__info-title">Average Response Time</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="loading" *ngIf="showPreloader"></div>
+</div>

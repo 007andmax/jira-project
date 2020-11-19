@@ -1,0 +1,41 @@
+<div class="contract-dashboard-chart-card qt-mr-16">
+  <div class="contract-dashboard-chart-card__header">
+    <div class="contract-dashboard-chart-card__header-title">Open Ticket Priority</div>
+  </div>
+  <div class="contract-dashboard-chart-card__chart-content">
+    <nvd3 [options]="chartOptions" [data]="data" #nvd3></nvd3>
+    <div class="contract-dashboard-chart-card__chart-info">
+      <div class="contract-dashboard-chart-card__title" [textContent]="getTotal()"></div>
+      <div class="contract-dashboard-chart-card__subtitle">Total Ticket</div>
+    </div>
+  </div>
+  <div class="contract-dashboard-chart-card__footer">
+    <div class="contract-dashboard-chart-card__footer-item">
+      <div class="contract-dashboard-chart-card__footer-item-title-block">
+        <div style="background-color: #0747a6;" class="contract-dashboard-chart-card__footer-item-box"></div>
+        <div>
+          <div class="contract-dashboard-chart-card__footer-item-title">High</div>
+          <div class="contract-dashboard-chart-card__footer-item-value" [textContent]="dashboardTicketsStats.HIGH"></div>
+        </div>
+      </div>
+    </div>
+    <div class="contract-dashboard-chart-card__footer-item">
+      <div class="contract-dashboard-chart-card__footer-item-title-block">
+        <div style="background-color: #00ccff;" class="contract-dashboard-chart-card__footer-item-box"></div>
+        <div>
+          <div class="contract-dashboard-chart-card__footer-item-title">Medium</div>
+          <div class="contract-dashboard-chart-card__footer-item-value" [textContent]="dashboardTicketsStats.MEDIUM"></div>
+        </div>
+      </div>
+    </div>
+    <div class="contract-dashboard-chart-card__footer-item">
+      <div class="contract-dashboard-chart-card__footer-item-title-block">
+        <div style="background-color: #cdecff;" class="contract-dashboard-chart-card__footer-item-box"></div>
+        <div>
+          <div class="contract-dashboard-chart-card__footer-item-title">Low</div>
+          <div class="contract-dashboard-chart-card__footer-item-value" [textContent]="dashboardTicketsStats.LOW"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

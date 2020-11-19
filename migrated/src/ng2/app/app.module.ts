@@ -332,7 +332,7 @@ import { QuotesTableComponent } from './components/billing/quotes/quotes-table/q
 import { QuotesHeaderComponent } from './components/billing/quotes/quotes-header/quotes-header.component';
 import { QuotesItemComponent } from './components/billing/quotes/quotes-table/quotes-item/quotes-item.component';
 import { QuotesFilterComponent } from './components/billing/quotes/quotes-header/quotes-filter/quotes-filter.component';
- import { QuoteAsidePreviewComponent } from './components/billing/quotes/quote-aside-preview/quote-aside-preview.component';
+import { QuoteAsidePreviewComponent } from './components/billing/quotes/quote-aside-preview/quote-aside-preview.component';
 import { QuoteAsidePreviewBodyComponent } from './components/billing/quotes/quote-aside-preview/quote-aside-preview-body/quote-aside-preview-body.component';
 import { QuoteAsideAddComponent } from './components/billing/quotes/quote-aside-add/quote-aside-add.component';
 import { QuoteAsideAddBodyComponent } from './components/billing/quotes/quote-aside-add/quote-aside-add-body/quote-aside-add-body.component';
@@ -341,9 +341,17 @@ import { ServiceListQuoteComponent } from './components/billing/quotes/quote-asi
 import { ProductItemQuoteComponent } from './components/billing/quotes/quote-aside-add/product-item-quote/product-item-quote.component';
 import { QuoteAsideEditComponent } from './components/billing/quotes/quote-aside-edit/quote-aside-edit.component';
 import { ProductItemQuoteEditComponent } from './components/billing/quotes/quote-aside-edit/product-item-quote-edit/product-item-quote-edit.component';
- import { QuoteAsideEditBodyComponent } from './components/billing/quotes/quote-aside-edit/quote-aside-edit-body/quote-aside-edit-body.component';
+import { QuoteAsideEditBodyComponent } from './components/billing/quotes/quote-aside-edit/quote-aside-edit-body/quote-aside-edit-body.component';
 import { ServiceItemQuoteComponent } from './components/billing/quotes/quote-aside-add/service-item-quote/service-item-quote.component';
 import { PermissionDasnboardBillingService } from './services/dashboard-billing/permission-dasnboard-billing.service';
+import { TicketsDashboardComponent } from './components/tickets/tickets-dashboard/tickets-dashboard.component';
+import { RecurringTicketWidgetComponent } from './components/tickets/tickets-dashboard/recurring-ticket-widget/recurring-ticket-widget.component';
+import { TicketsAnalyticsWidgetComponent } from './components/tickets/tickets-dashboard/tickets-analytics-widget/tickets-analytics-widget.component';
+import { TicketPriorityWidgetComponent } from './components/tickets/tickets-dashboard/ticket-priority-widget/ticket-priority-widget.component';
+import { TimeOnTicketsWidgetComponent } from './components/tickets/tickets-dashboard/time-on-tickets-widget/time-on-tickets-widget.component';
+import { TicketsBillableHoursWidgetComponent } from './components/tickets/tickets-dashboard/tickets-billable-hours-widget/tickets-billable-hours-widget.component';
+
+
 
 /**
  * declare angular
@@ -525,6 +533,9 @@ angular.module('quicktech')
   .directive(
     'companyContractsComponent',
     downgradeComponent({ component: CompanyContractsComponent }))
+  .directive(
+    'ticketsDashboardComponent',
+    downgradeComponent({ component: TicketsDashboardComponent }))
   .factory('ngZone', downgradeInjectable(NgZone));
 
 /**
@@ -836,7 +847,13 @@ angular.module('quicktech')
     QuoteAsideEditComponent,
     ProductItemQuoteEditComponent,
     QuoteAsideEditBodyComponent,
-    ServiceItemQuoteComponent
+    ServiceItemQuoteComponent,
+    TicketsDashboardComponent,
+    RecurringTicketWidgetComponent,
+    TicketsAnalyticsWidgetComponent,
+    TicketPriorityWidgetComponent,
+    TimeOnTicketsWidgetComponent,
+    TicketsBillableHoursWidgetComponent
   ],
   imports: [
     BrowserModule,
@@ -928,7 +945,8 @@ angular.module('quicktech')
     TicketTaskComponent,
     ContractsConfirmComponent,
     DashboardBillingComponent,
-    CompanyContractsComponent
+    CompanyContractsComponent,
+    TicketsDashboardComponent
     // RecurringTicketsComponent
   ],
   exports: [

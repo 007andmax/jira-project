@@ -19,7 +19,7 @@ import { Subscribable, Subscription } from 'rxjs';
   templateUrl: './tickets-filter.component.html',
   styleUrls: ['./tickets-filter.component.scss']
 })
-export class TicketsFilterComponent implements OnInit,OnDestroy {
+export class TicketsFilterComponent implements OnInit, OnDestroy {
   @ViewChild('usersDp') usersDp: SelectSearchComponent;
   @ViewChild('companyDp') companyDp: SelectSearchComponent;
   @ViewChild('techUsersDp') techUsersDp: SelectSearchComponent;
@@ -39,7 +39,7 @@ export class TicketsFilterComponent implements OnInit,OnDestroy {
   new ItemStatus('On Hold', 'onHold', 'ON_HOLD')]
   blockFilterUser: boolean = false;
   ticketsCounts: TicketsCounts;
-  sub:Subscription = new Subscription();
+  sub: Subscription = new Subscription();
   @Output() changeCountFilter = new EventEmitter<any>();
   constructor(private ticketsStateService: TicketsStateService,
     private companiesState: CompaniesStateService,
@@ -49,12 +49,16 @@ export class TicketsFilterComponent implements OnInit,OnDestroy {
     private elRef: ElementRef,
     public cd: ChangeDetectorRef,
     private leftPanelService: LeftPanelService) { }
- 
+
 
 
   ngOnInit() {
-
-   let getOnChangeTypeFilter =  this.ticketsStateService.getOnChangeTypeFilter().subscribe(type => {
+    /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
+    /* START */
+    this.listType = this.ticketsStateService.getListType();
+    this.ticketsFilter.setListType(this.listType);
+    /* END */
+    let getOnChangeTypeFilter = this.ticketsStateService.getOnChangeTypeFilter().subscribe(type => {
       this.listType = type;
       this.ticketsFilter.setListType(type);
       this.ticketsStateService.onInitFilter(this.ticketsFilter);
@@ -92,7 +96,7 @@ export class TicketsFilterComponent implements OnInit,OnDestroy {
     })
     //    this.getCounts();
 
-   let getOnUpdateCounts =  this.ticketsStateService.getOnUpdateCounts().subscribe(data => {
+    let getOnUpdateCounts = this.ticketsStateService.getOnUpdateCounts().subscribe(data => {
       this.ticketsCounts = new TicketsCounts(data);
       this.ticketsStateService.onInitCount(this.ticketsCounts[(this.listType === 'USERS') ? 'USER' : this.listType]);
       this.cd.detectChanges();

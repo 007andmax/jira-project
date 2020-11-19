@@ -43,8 +43,6 @@ export class TicketsFilter {
         let data = {
             "ALL": this.getAllPayLoad(),
             "CLOSED": this.getClsoedPayLoad(),
-            "COMPLETED": this.getCompletedPayLoad(),
-            "IN_PROGRESS": this.getInProgressPayLoad(),
             "ON_HOLD": this.getHoldPayLoad(),
             "OPEN": this.getOpenPayLoad(),
             "RECURRING_TICKETS_CLOSED": this.getRecurringTicketsClosedPayLoad(),
