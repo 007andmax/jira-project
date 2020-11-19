@@ -234,3 +234,31 @@
     color: #ffffff;
   }
 }
+
+.dropdown-menu.company-device-edit-name {
+  width: 388px;
+  padding: 24px;
+  box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
+  border: solid 1px #dfe3e8;
+  border-radius: 3px;
+  overflow: visible;
+  // &::before {
+  //   position: absolute;
+  //   content: '';
+  //   width: 10px;
+  //   height: 10px;
+  //   background: white;
+  //   transform: rotate(45deg);
+  //   top: -4px;
+  //   left: 15px;
+  // }
+  .company-device-edit-name__button.qt-button {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  input.company-device-edit-name__input {
+    &::placeholder {
+      color: #4f5f79;
+    }
+  }
+}

@@ -55,24 +55,18 @@
                 [textContent]="device.hostName || device.ip"
             ></span>
         </div>
-        <div ngbDropdownMenu>
-            <h3>Edit Device Name</h3>
+        <div class="company-device-edit-name" container="body" ngbDropdownMenu>
+          <div class="qt-fs-15 qt-mb-16 qt-lh-133 qt-ff-sb qt-color-dark">Edit Device Name</div>
 
+          <div class="qt-input-block qt-mb-24">
+            <label>Device Name</label>
+            <input class="company-device-edit-name__input" placeholder="HP Ethernet Multi-Environment Jet" type="text">
+          </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+          <div class="qt-df">
+            <button class="company-device-edit-name__button qt-button qt-mr-12">Save Changes</button>
+            <button class="company-device-edit-name__button qt-button --gray">Cancel</button>
+          </div>
 
         </div>
     </td>
