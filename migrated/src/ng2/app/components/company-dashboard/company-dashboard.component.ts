@@ -35,7 +35,7 @@ export class CompanyDashboardComponent implements OnInit {
   data: any;
   lineData: any;
   chartColors = ["#0747a6", "#00ccff", '#cdecff'];
-  lineChartColors = ["#0747a6", "#00ccff", '#2bc7c6'];
+  lineChartColors = ["#0747a6", "#00ccff", '#2bc7c6', '#7C77CB'];
   _id:string = '';
   companyOpen:string = 'Close';
   company: Company;
@@ -411,10 +411,13 @@ export class CompanyDashboardComponent implements OnInit {
       let countOfInProgressTickets = [];
       let countOfOnHoldTickets = [];
       let countOfCompletedTickets = [];
-      data.forEach(element => {
-        countOfInProgressTickets.push([new Date(element.date), element.countOfInProgressTickets]);
-        countOfOnHoldTickets.push([new Date(element.date), element.countOfOnHoldTickets]);
-        countOfCompletedTickets.push([new Date(element.date), element.countOfCompletedTickets]);
+      let countOfNewTickets = [];
+      let filter_list = (data.length > 30) ? data.splice(data.length - 30, data.length) : data;
+      filter_list.forEach(element => {
+        countOfInProgressTickets.push([new Date(element.date), element.countOfInProgressTickets === undefined ? 0 : element.countOfInProgressTickets]);
+        countOfOnHoldTickets.push([new Date(element.date), element.countOfOnHoldTickets === undefined ? 0 : element.countOfOnHoldTickets]);
+        countOfCompletedTickets.push([new Date(element.date), element.countOfCompletedTickets === undefined ? 0 : element.countOfCompletedTickets]);
+        countOfNewTickets.push([new Date(element.date), element.countOfNewTickets === undefined ? 0 : element.countOfNewTickets]);
       });
       this.lineData = [
         {
@@ -425,12 +428,14 @@ export class CompanyDashboardComponent implements OnInit {
             key: "On Hold",
             values: countOfOnHoldTickets
         },
-  
-  
         {
             key: "Completed",
             values: countOfCompletedTickets
-        }
+        },
+        {
+          key: "Created Tickets",
+          values: countOfNewTickets
+      }
       ];
     });
     this.sub.add(getTicket);
