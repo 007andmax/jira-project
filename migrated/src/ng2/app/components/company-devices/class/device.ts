@@ -29,5 +29,6 @@ export class Device {
         for (const key in data) {
             this[key] = data[key];
         }
+
     }
 }

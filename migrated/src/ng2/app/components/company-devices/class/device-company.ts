@@ -2,7 +2,18 @@ import { Device } from './device';
 import { DeviceTiming } from './device-timing';
 
 export class DeviceCompany extends Device {
-
+    companyId: string;
     selected: boolean = false;
-
+    constructor(data, companyId) {
+        super(data);
+        this.companyId = companyId;
+    }
+    public getDataForEditIcon(iconName) {
+        return {
+            "agentId": this.agentId,
+            "companyId": this.companyId,
+            "newLabelValue": this.label,
+            "iconName": iconName
+        }
+    }
 }

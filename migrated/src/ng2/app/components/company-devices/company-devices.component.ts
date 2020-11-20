@@ -18,7 +18,7 @@ export class CompanyDevicesComponent implements OnInit {
 
   ngOnInit() {
     let companyId = localStorage.getItem("company_id");
-    this.devices = (this.devicesSateService.getAllDevices()[companyId]) ? this.devicesSateService.getAllDevices()[companyId].map(item => new DeviceCompany(item)) : [];
+    this.devices = (this.devicesSateService.getAllDevices()[companyId]) ? this.devicesSateService.getAllDevices()[companyId].map(item => new DeviceCompany(item, companyId)) : [];
     console.log("this.devices", this.devices);
     if (this.devices.length > 0) {
       this.devicesService.sendDeviceStatusRequest(companyId, this.devices.filter(item => item.agentId).map(item => item.agentId), ["idle", "norestart", "online"]).subscribe(data => {

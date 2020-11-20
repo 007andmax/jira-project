@@ -4,6 +4,7 @@ import { Device } from '../class/device';
 import { DeviceCompany } from '../class/device-company';
 import { CompanyDevicesRemoteAccessComponent } from '../company-devices-remote-access/company-devices-remote-access.component';
 import * as moment from "moment";
+import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
 
 @Component({
   selector: 'app-company-devices-item',
@@ -13,7 +14,7 @@ import * as moment from "moment";
 export class CompanyDevicesItemComponent implements OnInit {
   @Input() device: DeviceCompany;
 
-  constructor(private modalService: NgbModal,) { }
+  constructor(private modalService: NgbModal, private devicesService: DevicesService,) { }
 
   ngOnInit() {
   }
@@ -24,8 +25,11 @@ export class CompanyDevicesItemComponent implements OnInit {
     modalRef.componentInstance.action = QUOTE_MODAL_ACTION_ADD;*/
     console.log(this.returnTimeFormatForPage(this.device.timing.offline));
   }
-  ngDocheck() {
-    console.log(this.returnTimeFormatForPage(this.device.timing.offline));
+
+  setIcon(iconName) {
+    this.devicesService.setIcon(this.device.getDataForEditIcon(iconName)).subscribe(data => {
+
+    })
   }
   returnTimeFormatForPage(time) {
     return {

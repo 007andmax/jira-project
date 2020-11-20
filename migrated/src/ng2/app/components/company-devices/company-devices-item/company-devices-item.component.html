@@ -13,13 +13,46 @@
     <td class="company-devices-table__device-type">
         <div>
             <div
+                ngbDropdown
+                placement="bottom-left"
+                container="body"
                 class="qt-ic-c qt-pointer device-type-icon qt-sz-24"
                 [ngClass]="{'icon__computer' : device.iconName === 'workstation' || !device.iconName,
               'icon__tablet' : device.iconName === 'device',
             'icon__printer' : device.iconName === 'printer',
           'icon__server' : device.iconName === 'server',
         '--ofline': !device.online }"
-            ></div>
+                ngbDropdownToggle
+            >
+                <div ngbDropdownMenu>
+                    <ul class="icon-list">
+                        <li
+                            (click)="setIcon('workstation')"
+                            ngbDropdownItem
+                        >
+                            <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__computer"></i>
+                        </li>
+                        <li
+                            (click)="setIcon('device')"
+                            ngbDropdownItem
+                        >
+                            <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__tablet"></i>
+                        </li>
+                        <li
+                            (click)="setIcon('printer')"
+                            ngbDropdownItem
+                        >
+                            <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__printer"></i>
+                        </li>
+                        <li
+                            (click)="setIcon('server')"
+                            ngbDropdownItem
+                        >
+                            <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__server"></i>
+                        </li>
+                    </ul>
+                </div>
+            </div>
             <div
                 class="qt-ic-c icon__master-agent-badge master-agent-icon qt-sz-18"
                 *ngIf="device.master"
@@ -55,19 +88,24 @@
                 [textContent]="device.hostName || device.ip"
             ></span>
         </div>
-        <div class="company-device-edit-name" container="body" ngbDropdownMenu>
-          <div class="qt-fs-15 qt-mb-16 qt-lh-133 qt-ff-sb qt-color-dark">Edit Device Name</div>
-
-          <div class="qt-input-block qt-mb-24">
-            <label>Device Name</label>
-            <input class="company-device-edit-name__input" placeholder="HP Ethernet Multi-Environment Jet" type="text">
-          </div>
-
-          <div class="qt-df">
-            <button class="company-device-edit-name__button qt-button qt-mr-12">Save Changes</button>
-            <button class="company-device-edit-name__button qt-button --gray">Cancel</button>
-          </div>
-
+        <div
+            class="company-device-edit-name"
+            container="body"
+            ngbDropdownMenu
+        >
+            <div class="qt-fs-15 qt-mb-16 qt-lh-133 qt-ff-sb qt-color-dark">Edit Device Name</div>
+            <div class="qt-input-block qt-mb-24">
+                <label>Device Name</label>
+                <input
+                    class="company-device-edit-name__input"
+                    placeholder="HP Ethernet Multi-Environment Jet"
+                    type="text"
+                >
+            </div>
+            <div class="qt-df">
+                <button class="company-device-edit-name__button qt-button qt-mr-12">Save Changes</button>
+                <button class="company-device-edit-name__button qt-button --gray">Cancel</button>
+            </div>
         </div>
     </td>
     <td class="company-devices-table__logged-user">
@@ -196,23 +234,6 @@
             [ngbTooltip]="tipRemoteAccess"
             (click)="openModalRemoteAccess()"
         ></div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         <ng-template
             #tipConnected
             class="tooltip"
