@@ -85,6 +85,7 @@
             </div>
             <span
                 class="company-device-desc"
+                *ngIf="isLabel()"
                 [textContent]="device.hostName || device.ip"
             ></span>
         </div>
@@ -221,7 +222,12 @@
             [ngbTooltip]="tipDeviceDetail"
         ></div>
     </td>
-    <td class="company-devices-table__connect">
+    <td
+        class="company-devices-table__connect"
+        ngbDropdown
+        container="body"
+        placement="bottom-right"
+    >
         <ng-template
             #tipRemoteAccess
             class="tooltip"
@@ -229,24 +235,100 @@
             Remote Access
         </ng-template>
         <div
+            *ngIf="device.remoteSessions.length == 0 && device.type !== 'workstation' && device.online && getPermissions('REMOTE_CONNECTIONS')"
             class="qt-ic-c icon__quick-connect qt-pointer qt-sz-24 qt-bg-contain"
             placement="top"
             [ngbTooltip]="tipRemoteAccess"
-            (click)="openModalRemoteAccess()"
-        ></div>
+            (click)="remoteAccess('PROXY')"
+        >
+        </div>
+        <div
+            *ngIf="device.remoteSessions.length == 0 && device.type === 'workstation' && device.online && getPermissions('REMOTE_CONNECTIONS')"
+            class="qt-ic-c icon__quick-connect qt-pointer qt-sz-24 qt-bg-contain"
+            placement="top"
+            [ngbTooltip]="tipRemoteAccess"
+            ngbDropdownToggle
+        >
+            <div ngbDropdownMenu>
+                <ul>
+                    <li
+                        (click)="remoteAccess('CSS')"
+                        ngbDropdownItem
+                    >
+                        QuickTech Connect
+                    </li>
+                    <li
+                        (click)="remoteAccess('RDP')"
+                        ngbDropdownItem
+                    >
+                        Remote Desktop
+                    </li>
+                </ul>
+            </div>
+        </div>
         <ng-template
             #tipConnected
             class="tooltip"
         >
-            <div class="connected-tooltip-name qt-ff-gm">Lucas Bowman</div>
-            <div class="connected-tooltip-text">Connected: 5 Min</div>
+            <ng-template
+                ngFor
+                let-item
+                [ngForOf]="device.remoteSessions"
+            >
+                <div
+                    class="connected-tooltip-name qt-ff-gm"
+                    [textContent]="getUserName(item.userId)"
+                ></div>
+                <div class="connected-tooltip-text">
+                    Connected:
+                    <span *ngIf="returnTimeFormatConnected(item.agentConnectedAt).days > 0">
+                        {{returnTimeFormatConnected(item.agentConnectedAt).days}} day
+                    </span>
+                    <span *ngIf="returnTimeFormatConnected(item.agentConnectedAt).hours > 0">
+                        {{returnTimeFormatConnected(item.agentConnectedAt ).hours}} hrs
+                    </span>
+                    <span *ngIf="returnTimeFormatConnected(item.agentConnectedAt ).minutes > 0 && returnTimeFormatConnected(item.agentConnectedAt).days < 1">
+                        {{returnTimeFormatConnected(item.agentConnectedAt ).minutes}} min
+                    </span>
+                    <span *ngIf="returnTimeFormatConnected(item.agentConnectedAt ).seconds > 0 && returnTimeFormatConnected(item.agentConnectedAt).minutes < 1">0 min</span>
+                </div>
+            </ng-template>
         </ng-template>
         <div
+            *ngIf="device.online && device.remoteSessions.length > 0 && device.type !== 'workstation' && device.online && getPermissions('REMOTE_CONNECTIONS')"
+            placement="top"
+            [ngbTooltip]="tipConnected"
+            class="qt-ic-c icon__connected-device master-agent-icon qt-sz-24"
+            (click)="remoteAccess('PROXY')"
+        ></div>
+        <div
+            *ngIf="device.online && device.remoteSessions.length > 0 && device.type === 'workstation' && device.online && getPermissions('REMOTE_CONNECTIONS')"
             placement="top"
             container="body"
             [ngbTooltip]="tipConnected"
             class="qt-ic-c icon__connected-device master-agent-icon qt-sz-24"
-        ></div>
+            ngbDropdownToggle
+        >
+            <div
+                *ngIf="device.type === 'workstation' && device.online && getPermissions('REMOTE_CONNECTIONS')"
+                ngbDropdownMenu
+            >
+                <ul>
+                    <li
+                        (click)="remoteAccess('CSS')"
+                        ngbDropdownItem
+                    >
+                        QuickTech Connect
+                    </li>
+                    <li
+                        (click)="remoteAccess('RDP')"
+                        ngbDropdownItem
+                    >
+                        Remote Desktop
+                    </li>
+                </ul>
+            </div>
+        </div>
     </td>
     <td class="company-devices-table__menu">
         <div class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"></div>

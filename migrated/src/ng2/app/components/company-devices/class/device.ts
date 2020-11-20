@@ -29,6 +29,6 @@ export class Device {
         for (const key in data) {
             this[key] = data[key];
         }
-
+        this.remoteSessions = (data.remoteSessions) ? data.remoteSessions.map(item => new DeviceRemoteSessions(item)) : [];
     }
 }
