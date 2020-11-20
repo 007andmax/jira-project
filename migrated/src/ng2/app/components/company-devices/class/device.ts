@@ -1,4 +1,5 @@
 import { DeviceAntivirus } from './device-antivirus';
+import { DeviceRemoteSessions } from './device-remote-sessions';
 import { DeviceSystem } from './device-system';
 import { DeviceTiming } from './device-timing';
 
@@ -23,6 +24,7 @@ export class Device {
     updatedAt: string;
     userName: string;
     timing: DeviceTiming = new DeviceTiming();
+    remoteSessions: Array<DeviceRemoteSessions> = [];
     constructor(data) {
         for (const key in data) {
             this[key] = data[key];

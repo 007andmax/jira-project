@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DevicesService } from '../../services/devices/devices.service';
+import { DevicesRealTimeService } from '../../states/devices/devices-real-time.service';
 import { DevicesSateService } from '../../states/devices/devices-sate.service';
 import { Device } from './class/device';
 import { DeviceCompany } from './class/device-company';
@@ -11,7 +12,9 @@ import { DeviceCompany } from './class/device-company';
 })
 export class CompanyDevicesComponent implements OnInit {
   devices: Array<DeviceCompany> = [];
-  constructor(private devicesSateService: DevicesSateService, private devicesService: DevicesService) { }
+  constructor(private devicesSateService: DevicesSateService,
+    private devicesService: DevicesService,
+    private devicesRealTimeService: DevicesRealTimeService) { }
 
   ngOnInit() {
     let companyId = localStorage.getItem("company_id");
@@ -34,6 +37,23 @@ export class CompanyDevicesComponent implements OnInit {
       });
       this.devices = devices;
       console.log("this.devices", this.devices);
+    })
+    this.devicesRealTimeService.oneTimeConnectionArray.subscribe(newChange => {
+      if (newChange.action === 'ONE_TIME_CONNECTION_OPEN') {
+        for (var i = 0; i < this.devices.length; i++) {
+          if (this.devices[i].id === newChange.data.deviceId) {
+            this.devices[i].remoteSessions.push(newChange.data)
+          }
+        }
+      } else if (newChange.action === 'ONE_TIME_DELETED') {
+        for (var i = 0; i < this.devices.length; i++) {
+          for (var r = 0; r < this.devices[i].remoteSessions.length; r++) {
+            if (this.devices[i].remoteSessions[r].id === newChange.data) {
+              this.devices[i].remoteSessions.splice(r, 1);
+            }
+          }
+        }
+      }
     })
   }
 
