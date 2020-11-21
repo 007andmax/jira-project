@@ -245,11 +245,11 @@
                            </thead>
                            <tbody>
                               <tr *ngFor="let invoice of recentInvoiceList">
-                                <td>{{invoice.number}}</td>
+                                <td (click)="onPreviewInvoice(invoice)" class="pointer">{{invoice.number}}</td>
                                 <td>{{invoice.dateName}}</td>
-                                <td *ngIf="invoice.paidOn" class="paid">Paid</td>
-                                <td *ngIf="invoice.isOverDue && !invoice.paidOn" class="ov-d">Over Due</td>
-                                <td *ngIf="!invoice.isOverDue && !invoice.paidOn" class="outstanding">Outstanding</td>
+                                <td *ngIf="invoice.paidOn" class="paid" (click)="onDetailsPayment(invoice)">Paid</td>
+                                <td *ngIf="invoice.isOverDue && !invoice.paidOn" (click)="onDetailsPayment(invoice)" class="ov-d">Over Due</td>
+                                <td *ngIf="!invoice.isOverDue && !invoice.paidOn" (click)="onDetailsPayment(invoice)" class="outstanding">Outstanding</td>
                                 <td>${{invoice.sum}}</td>
                               </tr>
                            </tbody>
@@ -291,7 +291,7 @@
                            </thead>
                            <tbody>
                               <tr *ngFor="let contract of contractsList">
-                                <td (click)="openContractPreview(contract)" ><ng-template #tipContent><div [textContent]="contract.serviceAgreement.description"></div></ng-template><span [ngbTooltip]="tipContent" placement="right">{{contractType[contract.serviceAgreement.type]}}</span></td>
+                                <td (click)="openContractPreview(contract)" class="pointer"><ng-template #tipContent><div [textContent]="contract.serviceAgreement.description"></div></ng-template><span [ngbTooltip]="tipContent" placement="right">{{contractType[contract.serviceAgreement.type]}}</span></td>
                                 <td>{{contract.serviceAgreement.startDateName}}</td>
                                 <td>{{contract.serviceAgreement.endDateName}}</td>
                                 <td class="hold" *ngIf="contract.serviceAgreement.status == 'PENDING'">Pending</td>
@@ -587,3 +587,6 @@
 </div>
 <app-company-edit-aside></app-company-edit-aside>
 <app-contracts-preview *ngIf="showContractPreview" [serviceAgreement]="serviceAgreement"  ></app-contracts-preview>
+<app-contracts-edit *ngIf="showContractEdit" [serviceAgreement]="serviceAgreement"></app-contracts-edit>
+<app-invoices-aside-preview #previewInvoiceAside *ngIf="showPreviewInvoice" (onClose)="showPreviewInvoice = false" [invoiceId]="previewInvoice.id"></app-invoices-aside-preview>
+<app-payments-aside *ngIf="showDetailsPayment" [payment]="detailsPayment" (onClose)="showDetailsPayment = false" (onEditPayment)="onEditPayment($event)" (onRefundPayment)="onRefundPayment($event)"></app-payments-aside>

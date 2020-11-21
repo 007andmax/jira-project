@@ -137,7 +137,6 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
     })
   }
   onEdit(data) {
-    debugger;
     this.contractsService.getServiceAgreement(data.id).subscribe(data => {
       this.contractsStateService.setEdit(data);
     })

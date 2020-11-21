@@ -1,4 +1,4 @@
-import { NgModule, ChangeDetectorRef } from '@angular/core';
+import { NgModule, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { Component, OnInit,ViewEncapsulation  } from '@angular/core';
 import {NgbDropdownToggle,NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { TicketProfileFormService } from '../../../../ng2/app/components/tickets/tickets/ticket-edit-aside/class/ticket-profile-form-service';
@@ -18,6 +18,11 @@ import { ServiceAgreement } from '../billing/contracts/class/service-agreement';
 import { ContractsStateService } from '../../states/contracts/contracts-state.service';
 import { CompanyTagsStateService } from '../companies/company-tags/states/company-tags-state.service';
 import { ContractsService } from '../../services/contracts/contracts.service';
+import { InvoicesAsidePreviewComponent } from '../billing/invoices/invoices-aside-preview/invoices-aside-preview.component';
+import { Invoice } from '../billing/invoices/class/invoice';
+import { InvoicesService } from '../../services/invoices/invoices.service';
+import { Payment } from '../billing/payments/class/payment';
+import { PaymentsService } from '../../services/payments/payments.service';
 declare let d3: any;
 @Component({
   selector: 'company-dashboard',
@@ -88,8 +93,16 @@ export class CompanyDashboardComponent implements OnInit {
   clientIndustry: string = '';
   modalReference: any;
   showContractPreview: boolean = false;
+  showContractEdit: boolean = false;
+  showPreviewInvoice: boolean = false;
+  showDetailsPayment: boolean = false;
+  showRefundPayment: boolean = false;
   public companyDetail: CompanyProfile;
   serviceAgreement: ServiceAgreement;
+  detailsPayment: Payment;
+  refundPayment: Payment;
+  previewInvoice: Invoice;
+  @ViewChild('previewInvoiceAside') previewInvoiceAside: InvoicesAsidePreviewComponent;
   constructor(private modalService: NgbModal,
     private companiesService: CompaniesService,
     private devicesState: DevicesSateService,
@@ -101,6 +114,8 @@ export class CompanyDashboardComponent implements OnInit {
     public cd: ChangeDetectorRef,
     public contractsStateService: ContractsStateService,
     private contractsService: ContractsService,
+    private invoicesService: InvoicesService,
+    private paymentsService: PaymentsService,
     private tagsState: CompanyTagsStateService) {}
   closeResult = '';
 
@@ -137,7 +152,6 @@ export class CompanyDashboardComponent implements OnInit {
       this.sub.add(getOnUsers);
      
       let getOnPreview = this.contractsStateService.getOnPreview().subscribe(data => {
-        debugger;
         this.serviceAgreement = data;
         this.showContractPreview = true;
         if (!this.cd['destroyed']) {
@@ -145,6 +159,30 @@ export class CompanyDashboardComponent implements OnInit {
         }
       })
       this.sub.add(getOnPreview);
+      let getOnTogglePreview = this.contractsStateService.getOnTogglePreview().subscribe(data => {
+
+        this.showContractPreview = false;
+        if (!this.cd['destroyed']) {
+          this.cd.detectChanges();
+        }
+      })
+      this.sub.add(getOnTogglePreview);
+      let getOnEdit = this.contractsStateService.getOnEdit().subscribe(data => {
+        this.serviceAgreement = data;
+        this.showContractEdit = true;
+        if (!this.cd['destroyed']) {
+          this.cd.detectChanges();
+        }
+      })
+      this.sub.add(getOnEdit);
+      let getOnToggleEdit = this.contractsStateService.getOnToggleEdit().subscribe(data => {
+  
+        this.showContractEdit = data;
+        if (!this.cd['destroyed']) {
+          this.cd.detectChanges();
+        }
+      })
+      this.sub.add(getOnToggleEdit);
       if (this.devicesState.getAllDevices()) this.onGetDevicesCount(this.devicesState.getAllDevices());
       let getOnDevices = this.devicesState.getOnDevices().subscribe((data) => {
         this.showArchivedCompanies = false;
@@ -684,7 +722,38 @@ export class CompanyDashboardComponent implements OnInit {
     this.contractsService.getServiceAgreement(data.serviceAgreement.id).subscribe(data => {
       this.contractsStateService.setPreview(data);
     })
-    // this.showContractPreview = true;
+  }
+
+  onPreviewInvoice(data) {
+    this.previewInvoice = data;
+    if (this.showPreviewInvoice) {
+      this.cd.detectChanges();
+      this.previewInvoiceAside.onGetInvoice();
+    }
+    this.showPreviewInvoice = true;
+  }
+
+  onRemoveInvoice(invoice) {
+    this.invoicesService.remove(invoice.id).subscribe(data => {
+      this.showPreviewInvoice = false;
+    })
+  }
+
+  onDetailsPayment(data) {
+    this.detailsPayment = data;
+    this.showDetailsPayment = true;
+
+  }
+  onRemovePayment(payment) {
+    this.paymentsService.deletePayment(payment).subscribe(data => {
+    })
+    this.showDetailsPayment = false;
+    this.cd.detectChanges();
+  }
+
+  onRefundPayment(data) {
+    this.refundPayment = data;
+    this.showRefundPayment = true;
   }
 
 }
