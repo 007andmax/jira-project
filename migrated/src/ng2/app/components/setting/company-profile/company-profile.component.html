@@ -444,14 +444,14 @@
           
           <form (ngSubmit)="saveAccountingDate()">
             <div class="f-row">
-                <div class="f-col col-50">
+                <div class="f-col col-50  date-area">
                     <label>Start Date</label>
                     <div class="form-row">
                       <input name="start_date" type="text" class="form-control sub-label-field" [(ngModel)]="accountingStartDate" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()">
                       <a href="javascript:;" (click)="resetAccountingDate()">Reset</a>
                     </div>
                 </div>
-                <div class="f-col col-50">
+                <div class="f-col col-50 date-area">
                   <label>End Date</label>
                   <div class="form-row">
                     <input name="end_date" type="text" class="form-control sub-label-field" [(ngModel)]="accountingEndDate" ngbDatepicker #dd="ngbDatepicker" (click)="dd.toggle()" disabled>
