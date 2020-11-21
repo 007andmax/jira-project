@@ -681,7 +681,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
       return;
     }
 let data = {};
-debugger;
 data['id'] = this.currentCompany.addresses.length > 0 ? this.currentCompany.addresses[0].id : '';
 data['isPrimary'] = true;
 data['suiteNumber'] = this.cProfileForm.get('suiteNumber').value;
