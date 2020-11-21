@@ -17,6 +17,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ServiceAgreement } from '../billing/contracts/class/service-agreement';
 import { ContractsStateService } from '../../states/contracts/contracts-state.service';
 import { CompanyTagsStateService } from '../companies/company-tags/states/company-tags-state.service';
+import { ContractsService } from '../../services/contracts/contracts.service';
 declare let d3: any;
 @Component({
   selector: 'company-dashboard',
@@ -99,6 +100,7 @@ export class CompanyDashboardComponent implements OnInit {
     private sanitizer: DomSanitizer,
     public cd: ChangeDetectorRef,
     public contractsStateService: ContractsStateService,
+    private contractsService: ContractsService,
     private tagsState: CompanyTagsStateService) {}
   closeResult = '';
 
@@ -133,7 +135,9 @@ export class CompanyDashboardComponent implements OnInit {
         this.onGetUsersCount(data);
       })
       this.sub.add(getOnUsers);
+     
       let getOnPreview = this.contractsStateService.getOnPreview().subscribe(data => {
+        debugger;
         this.serviceAgreement = data;
         this.showContractPreview = true;
         if (!this.cd['destroyed']) {
@@ -342,7 +346,6 @@ export class CompanyDashboardComponent implements OnInit {
 
   getContractsList() {
     let getInvoice = this.companiesService.getContractsList(this._id).subscribe((data: any) => {
-      
       let statistics = [];
       data.forEach(element => {
         let obj = element;
@@ -677,8 +680,11 @@ export class CompanyDashboardComponent implements OnInit {
     return value;
   }
 
-  openContractPreview() {
-    this.showContractPreview = true;
+  openContractPreview(data) {
+    this.contractsService.getServiceAgreement(data.serviceAgreement.id).subscribe(data => {
+      this.contractsStateService.setPreview(data);
+    })
+    // this.showContractPreview = true;
   }
 
 }

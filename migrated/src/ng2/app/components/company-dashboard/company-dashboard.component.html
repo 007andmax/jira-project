@@ -291,7 +291,7 @@
                            </thead>
                            <tbody>
                               <tr *ngFor="let contract of contractsList">
-                                <td (click)="openContractPreview()">{{contractType[contract.serviceAgreement.type]}}</td>
+                                <td (click)="openContractPreview(contract)" ><ng-template #tipContent><div [textContent]="contract.serviceAgreement.description"></div></ng-template><span [ngbTooltip]="tipContent" placement="right">{{contractType[contract.serviceAgreement.type]}}</span></td>
                                 <td>{{contract.serviceAgreement.startDateName}}</td>
                                 <td>{{contract.serviceAgreement.endDateName}}</td>
                                 <td class="hold" *ngIf="contract.serviceAgreement.status == 'PENDING'">Pending</td>
@@ -313,7 +313,7 @@
   </div>
 
   <!-- Sidebar Recent Activity -->
-  <aside class="cmp-board-sidebar d-flex" [class.opened]="expand">
+  <!-- <aside class="cmp-board-sidebar d-flex" [class.opened]="expand">
       <a href="javascript:;" class="sidebar-toogle" (click)="expand=!expand">
         Sidebar Toogle 
       </a>
@@ -395,7 +395,7 @@
           
       </ul>
       <a href="javascript:;" class="btn btn-load">Load More…</a>
-  </aside>
+  </aside> -->
 
 <!-- Modal -->
 
