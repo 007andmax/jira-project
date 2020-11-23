@@ -35,12 +35,11 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     }, 1000);
   }
-  openModalRemoteAccess() {
+  remoteAccess(connectionType) {
     const modalRef = this.modalService.open(CompanyDevicesRemoteAccessComponent, { windowClass: 'quote-send-modal' });
-    /*let data = JSON.parse(JSON.stringify(quote.getDataForCreate(true)));
-    modalRef.componentInstance.data = data;
-    modalRef.componentInstance.action = QUOTE_MODAL_ACTION_ADD;*/
-
+    modalRef.componentInstance.connectionType = connectionType;
+    modalRef.componentInstance.device = this.device;
+    modalRef.componentInstance.companyId = this.device.companyId;
   }
   public getUserName(userId) {
     let user = this.usersStateService.getAllUsers().find(item => item.id === userId);

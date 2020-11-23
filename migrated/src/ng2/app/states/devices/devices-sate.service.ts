@@ -14,6 +14,7 @@ export class DevicesSateService {
   allDevices = null;
   onGetDevices: EventEmitter<any> = new EventEmitter();
   onRemoveConnecion: EventEmitter<any> = new EventEmitter();
+  onLaunchRemoteApp: EventEmitter<any> = new EventEmitter();
   // onChangeDevices: EventEmitter<DeviceUpdate> = new EventEmitter();
   constructor(private userStateService: UsersStateService, private devicesService: DevicesService,
     private devicesRealTimeService: DevicesRealTimeService) { }
@@ -64,7 +65,7 @@ export class DevicesSateService {
         }
       }
       if (newChange.action === 'REMOTE_CONNECTION') {
-
+        this.onInitLaunchRemoteApp();
       }
       if (newChange.action === 'TEST_CREDENTIALS') {
 
@@ -139,6 +140,12 @@ export class DevicesSateService {
     var splittedArray = timeString.split(':');
     return splittedArray[2] * 1000 + splittedArray[1] * 60000 + splittedArray[0] * 3600000
   };
+  public onInitLaunchRemoteApp() {
+    this.onLaunchRemoteApp.emit(null);
+  }
+  public getOnLaunchRemoteApp() {
+    return this.onLaunchRemoteApp;
+  }
   public onInitRemoveConnection() {
     this.onRemoveConnecion.emit(null);
   }
