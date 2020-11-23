@@ -26,7 +26,7 @@ export class CompanyDevicesComponent implements OnInit {
       })
     }
     this.devicesSateService.getOnDevices().subscribe(data => {
-      let devices = data[companyId].map(item => new DeviceCompany(item, companyId);
+      let devices = data[companyId].map(item => new DeviceCompany(item, companyId));
       devices.forEach(item => {
         let find = this.devices.find(device => device.agentId === item.agentId);
         if (!find && find.agentId) {
