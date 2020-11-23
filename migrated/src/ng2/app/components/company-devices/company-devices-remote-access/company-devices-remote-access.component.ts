@@ -4,6 +4,7 @@ import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
 import { ConstantsStateService } from 'src/ng2/app/states/constants/constants-state.service';
 import { DevicesSateService } from 'src/ng2/app/states/devices/devices-sate.service';
 import { Device } from '../class/device';
+import { DeviceCompany } from '../class/device-company';
 
 @Component({
   selector: 'app-company-devices-remote-access',
@@ -13,7 +14,7 @@ import { Device } from '../class/device';
 })
 export class CompanyDevicesRemoteAccessComponent implements OnInit {
   @Input() connectionType: string;
-  @Input() device: Device;
+  @Input() device: DeviceCompany;
   @Input() companyId: string;
   sessionId: string;
   constructor(private constantsStateService: ConstantsStateService,

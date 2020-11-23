@@ -36,6 +36,7 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
     }, 1000);
   }
   remoteAccess(connectionType) {
+    console.log("this.device", this.device);
     const modalRef = this.modalService.open(CompanyDevicesRemoteAccessComponent, { windowClass: 'quote-send-modal' });
     modalRef.componentInstance.connectionType = connectionType;
     modalRef.componentInstance.device = this.device;
