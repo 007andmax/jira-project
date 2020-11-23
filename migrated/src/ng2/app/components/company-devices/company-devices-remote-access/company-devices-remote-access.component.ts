@@ -15,6 +15,7 @@ export class CompanyDevicesRemoteAccessComponent implements OnInit {
   @Input() connectionType: string;
   @Input() device: Device;
   @Input() companyId: string;
+  sessionId: string;
   constructor(private constantsStateService: ConstantsStateService,
     private devicesSateService: DevicesSateService,
     public activeModal: NgbActiveModal,
@@ -22,7 +23,7 @@ export class CompanyDevicesRemoteAccessComponent implements OnInit {
 
   ngOnInit() {
     this.devicesSateService.getOnLaunchRemoteApp().subscribe(data => {
-      this.close();
+      if (data === this.sessionId) this.close();
     })
   }
   downloadViewer() {
@@ -31,6 +32,7 @@ export class CompanyDevicesRemoteAccessComponent implements OnInit {
   launchRemoteApp() {
     this.devicesService.createRemoteSession(this.device.id, this.companyId, this.connectionType, null).subscribe((resp: any) => {
       //this.connectRemoteAccess(resp.sessionId, connectionType, false);
+      this.sessionId = resp.sessionId;
       let remoteConnectPort = this.constantsStateService.getConstant('remote.connect.port'),
         restServerAddress = this.constantsStateService.getConstant('rest.server.address'),
         url = 'quicktech://connect?serverIP=' + restServerAddress + '&port=' + remoteConnectPort + '&sessionID=' + resp.sessionId;

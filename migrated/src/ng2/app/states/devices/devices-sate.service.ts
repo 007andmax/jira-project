@@ -34,6 +34,7 @@ export class DevicesSateService {
       })
     })
     this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
+      console.log("newChange", newChange);
       if (newChange.action === 'DEVICE_UNINSTALLED') {
         let deviceIndex = this.allDevices[newChange.data.clientCompanyId].findIndex(item => item.id === newChange.data.value);
         if (newChange.data.uninstalledAt !== "") {
@@ -65,7 +66,7 @@ export class DevicesSateService {
         }
       }
       if (newChange.action === 'REMOTE_CONNECTION') {
-        this.onInitLaunchRemoteApp();
+        this.onInitLaunchRemoteApp(newChange.data.sessionId);
       }
       if (newChange.action === 'TEST_CREDENTIALS') {
 
@@ -140,8 +141,8 @@ export class DevicesSateService {
     var splittedArray = timeString.split(':');
     return splittedArray[2] * 1000 + splittedArray[1] * 60000 + splittedArray[0] * 3600000
   };
-  public onInitLaunchRemoteApp() {
-    this.onLaunchRemoteApp.emit(null);
+  public onInitLaunchRemoteApp(sessionId) {
+    this.onLaunchRemoteApp.emit(sessionId);
   }
   public getOnLaunchRemoteApp() {
     return this.onLaunchRemoteApp;
