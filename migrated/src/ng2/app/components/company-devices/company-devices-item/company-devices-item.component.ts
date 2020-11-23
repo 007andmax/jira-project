@@ -50,11 +50,17 @@ export class CompanyDevicesItemComponent implements OnInit {
     let minutesDiff = currentTimeZone * 60 * 1000;
     // let date = new Date(time + minutesDiff);
     let date = new Date(time);
+    var hours = 0;
+    var minutes = 0;
+    var seconds = 0;
+    hours = Math.floor(time / 3600000);
+    minutes = Math.floor((time - (hours * 3600000)) / 60000);
+    seconds = Math.floor((time - (hours * 3600000) - (minutes * 60000)) / 1000);
     return {
       days: 0,
-      hours: date.getUTCHours(),
-      minutes: date.getUTCMinutes(),
-      seconds: date.getUTCSeconds()
+      hours: hours,
+      minutes: minutes,
+      seconds: seconds
     }
   }
   returnTimeFormatForPage(time) {

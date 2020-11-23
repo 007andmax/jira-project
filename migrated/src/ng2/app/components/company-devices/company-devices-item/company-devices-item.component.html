@@ -281,16 +281,12 @@
                 ></div>
                 <div class="connected-tooltip-text">
                     Connected:
-                    <span *ngIf="returnTimeFormatConnected(item.agentConnectedAt).days > 0">
-                        {{returnTimeFormatConnected(item.agentConnectedAt).days}} day
-                    </span>
                     <span *ngIf="returnTimeFormatConnected(item.agentConnectedAt).hours > 0">
                         {{returnTimeFormatConnected(item.agentConnectedAt ).hours}} hrs
                     </span>
-                    <span *ngIf="returnTimeFormatConnected(item.agentConnectedAt ).minutes > 0 && returnTimeFormatConnected(item.agentConnectedAt).days < 1">
+                    <span *ngIf="returnTimeFormatConnected(item.agentConnectedAt ).minutes > 0">
                         {{returnTimeFormatConnected(item.agentConnectedAt ).minutes}} min
                     </span>
-                    <span *ngIf="returnTimeFormatConnected(item.agentConnectedAt ).seconds > 0 && returnTimeFormatConnected(item.agentConnectedAt).minutes < 1">0 min</span>
                 </div>
             </ng-template>
         </ng-template>
