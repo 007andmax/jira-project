@@ -45,33 +45,30 @@ export class CompanyDevicesItemComponent implements OnInit {
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
   }
-  returnTimeFormatConnected(time) {
-    var currentTimeZone = new Date().getTimezoneOffset();
-    let minutesDiff = currentTimeZone * 60 * 1000;
-    // let date = new Date(time + minutesDiff);
-    let date = new Date(time);
+  returnTimeFormat(time) {
+    var hours = 0;
+    var minutes = 0;
+    hours = Math.floor(time / 3600000);
+    minutes = Math.floor((time - (hours * 3600000)) / 60000);
+    return {
+      hours: hours,
+      minutes: minutes,
+    }
+  }
+  returnTimeFormatUpTime(time) {
+    var days = 0;
     var hours = 0;
     var minutes = 0;
     var seconds = 0;
-    hours = Math.floor(time / 3600000);
-    minutes = Math.floor((time - (hours * 3600000)) / 60000);
-    seconds = Math.floor((time - (hours * 3600000) - (minutes * 60000)) / 1000);
+    days = Math.floor(time / 86400000);
+    hours = Math.floor((time - (days * 86400000)) / 3600000);
+    minutes = Math.floor((time - (days * 86400000) - (hours * 3600000)) / 60000);
+    seconds = Math.floor((time - (days * 86400000) - (hours * 3600000) - (minutes * 60000)) / 1000);
     return {
-      days: 0,
+      days: days,
       hours: hours,
       minutes: minutes,
       seconds: seconds
-    }
-  }
-  returnTimeFormatForPage(time) {
-    var currentTimeZone = new Date().getTimezoneOffset();
-    let minutesDiff = currentTimeZone * 60 * 1000;
-    let date = new Date(time + minutesDiff);
-    return {
-      days: (time > 86400000) ? Math.floor(time / 86400000) : 0,
-      hours: date.getHours(),
-      minutes: date.getMinutes(),
-      seconds: date.getSeconds()
     }
   }
 }

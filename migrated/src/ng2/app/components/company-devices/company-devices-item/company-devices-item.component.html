@@ -123,25 +123,25 @@
             </span>
             <span
                 class="logged-time"
-                *ngIf="device.timing.idle && returnTimeFormatForPage(device.timing.idle).days > 0"
+                *ngIf="device.timing.idle && returnTimeFormat(device.timing.idle).days > 0"
             >
-                Idle: {{returnTimeFormatForPage(device.timing.idle).days}} day
+                Idle: {{returnTimeFormat(device.timing.idle).days}} day
             </span>
             <span
                 class="logged-time"
-                *ngIf="device.timing.idle && returnTimeFormatForPage(device.timing.idle).hours > 0"
+                *ngIf="device.timing.idle && returnTimeFormat(device.timing.idle).hours > 0"
             >
-                Idle: {{returnTimeFormatForPage(device.timing.idle).hours}} hrs
+                Idle: {{returnTimeFormat(device.timing.idle).hours}} hrs
             </span>
             <span
                 class="logged-time"
-                *ngIf="device.timing.idle && returnTimeFormatForPage(device.timing.idle).minutes > 0 && returnTimeFormatForPage(device.timing.idle).days < 1"
+                *ngIf="device.timing.idle && returnTimeFormat(device.timing.idle).minutes > 0 && returnTimeFormat(device.timing.idle).days < 1"
             >
-                Idle: {{returnTimeFormatForPage(device.timing.idle).minutes}} min
+                Idle: {{returnTimeFormat(device.timing.idle).minutes}} min
             </span>
             <span
                 class="logged-time"
-                *ngIf="device.timing.idle && returnTimeFormatForPage(device.timing.idle).seconds > 0 && returnTimeFormatForPage(device.timing.idle).minutes < 1"
+                *ngIf="device.timing.idle && returnTimeFormat(device.timing.idle).seconds > 0 && returnTimeFormat(device.timing.idle).minutes < 1"
             >
                 Idle: 0 min
             </span>
@@ -149,26 +149,26 @@
     </td>
     <td class="company-devices-table__up-time">
         <div class="qt-df qt-fd-c">
-            <span *ngIf="device.online && returnTimeFormatForPage(device.timing.online).days > 0">
-                {{returnTimeFormatForPage(device.timing.online).days}} day
+            <span *ngIf="device.online && returnTimeFormatUpTime(device.timing.online).days > 0">
+                {{returnTimeFormatUpTime(device.timing.online).days}} day
             </span>
-            <span *ngIf="device.online && returnTimeFormatForPage(device.timing.online).hours > 0">
-                {{returnTimeFormatForPage(device.timing.online).hours}} hrs
+            <span *ngIf="device.online && returnTimeFormatUpTime(device.timing.online).hours > 0">
+                {{returnTimeFormatUpTime(device.timing.online).hours}} hrs
             </span>
-            <span *ngIf="device.online && returnTimeFormatForPage(device.timing.online).minutes > 0 && returnTimeFormatForPage(device.timing.online).days < 1">
-                {{returnTimeFormatForPage(device.timing.online).minutes}} min
+            <span *ngIf="device.online && returnTimeFormatUpTime(device.timing.online).minutes > 0 && returnTimeFormatUpTime(device.timing.online).days < 1">
+                {{returnTimeFormatUpTime(device.timing.online).minutes}} min
             </span>
-            <span *ngIf="device.online && returnTimeFormatForPage(device.timing.online).seconds >= 0 && returnTimeFormatForPage(device.timing.online).minutes < 1 && returnTimeFormatForPage(device.timing.online).hours < 1 && returnTimeFormatForPage(device.timing.online).days < 1">0 min</span>
-            <span *ngIf="!device.online && returnTimeFormatForPage(device.timing.offline).days > 0">
-                {{returnTimeFormatForPage(device.timing.offline).days}} day
+            <span *ngIf="device.online && returnTimeFormatUpTime(device.timing.online).seconds >= 0 && returnTimeFormatUpTime(device.timing.online).minutes < 1 && returnTimeFormatUpTime(device.timing.online).hours < 1 && returnTimeFormatUpTime(device.timing.online).days < 1">0 min</span>
+            <span *ngIf="!device.online && returnTimeFormatUpTime(device.timing.offline).days > 0">
+                {{returnTimeFormatUpTime(device.timing.offline).days}} day
             </span>
-            <span *ngIf="!device.online && returnTimeFormatForPage(device.timing.offline).hours > 0">
-                {{returnTimeFormatForPage(device.timing.offline).hours}} hrs
+            <span *ngIf="!device.online && returnTimeFormatUpTime(device.timing.offline).hours > 0">
+                {{returnTimeFormatUpTime(device.timing.offline).hours}} hrs
             </span>
-            <span *ngIf="!device.online && returnTimeFormatForPage(device.timing.offline).minutes > 0 && returnTimeFormatForPage(device.timing.offline).days < 1">
-                {{returnTimeFormatForPage(device.timing.offline).minutes}} min
+            <span *ngIf="!device.online && returnTimeFormatUpTime(device.timing.offline).minutes > 0 && returnTimeFormatUpTime(device.timing.offline).days < 1">
+                {{returnTimeFormatUpTime(device.timing.offline).minutes}} min
             </span>
-            <span *ngIf="!device.online && returnTimeFormatForPage(device.timing.offline).seconds >= 0 && returnTimeFormatForPage(device.timing.offline).minutes < 1 && returnTimeFormatForPage(device.timing.offline).hours < 1 && returnTimeFormatForPage(device.timing.offline).days < 1">0 min</span>
+            <span *ngIf="!device.online && returnTimeFormatUpTime(device.timing.offline).seconds >= 0 && returnTimeFormatUpTime(device.timing.offline).minutes < 1 && returnTimeFormatUpTime(device.timing.offline).hours < 1 && returnTimeFormatUpTime(device.timing.offline).days < 1">0 min</span>
             <span
                 class="uptime-tag qt-ff-gm"
                 [ngClass]="{'--offline':!device.online}"
@@ -281,11 +281,11 @@
                 ></div>
                 <div class="connected-tooltip-text">
                     Connected:
-                    <span *ngIf="returnTimeFormatConnected(item.agentConnectedAt).hours > 0">
-                        {{returnTimeFormatConnected(item.agentConnectedAt ).hours}} hrs
+                    <span *ngIf="returnTimeFormat(item.agentConnectedAt).hours > 0">
+                        {{returnTimeFormat(item.agentConnectedAt ).hours}} hrs
                     </span>
-                    <span *ngIf="returnTimeFormatConnected(item.agentConnectedAt ).minutes > 0">
-                        {{returnTimeFormatConnected(item.agentConnectedAt ).minutes}} min
+                    <span *ngIf="returnTimeFormat(item.agentConnectedAt ).minutes > 0">
+                        {{returnTimeFormat(item.agentConnectedAt ).minutes}} min
                     </span>
                 </div>
             </ng-template>
