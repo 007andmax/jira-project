@@ -145,6 +145,7 @@
           color: #4f5f79;
           vertical-align: top;
           word-break: break-word;
+          position: relative;
         }
         &__ip-address {
           width: 218px;
@@ -156,6 +157,7 @@
           text-overflow: ellipsis;
           white-space: nowrap;
           overflow: hidden;
+          position: relative;
         }
         &__go-to {
           width: 30px;
@@ -214,10 +216,14 @@
         background-color: #f9fafb;
         .company-devices-table__ip-address-text,
         .company-devices-table__ip-windows-text {
-          display: none;
+          opacity: 0;
         }
         .company-devices-table__system-network-buttons,
-        .company-devices-table__ip-address-buttons,
+        .company-devices-table__ip-address-buttons {
+          position: absolute;
+          top: 7px;
+          display: flex;
+        }
         .device-name-edit-marker {
           display: flex;
         }

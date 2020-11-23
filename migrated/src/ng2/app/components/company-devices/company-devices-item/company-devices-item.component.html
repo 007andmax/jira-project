@@ -143,6 +143,7 @@
     </td>
     <td class="company-devices-table__up-time">
         <div class="qt-df qt-fd-c">
+          <span>
             <span *ngIf="device.online && returnTimeFormatUpTime(device.timing.online).days > 0">
                 {{returnTimeFormatUpTime(device.timing.online).days}} day
             </span>
@@ -163,6 +164,7 @@
                 {{returnTimeFormatUpTime(device.timing.offline).minutes}} min
             </span>
             <span *ngIf="!device.online && returnTimeFormatUpTime(device.timing.offline).minutes < 1 && returnTimeFormatUpTime(device.timing.offline).hours < 1 && returnTimeFormatUpTime(device.timing.offline).days < 1">0 min</span>
+          </span>
             <span
                 class="uptime-tag qt-ff-gm"
                 [ngClass]="{'--offline':!device.online}"
