@@ -300,6 +300,7 @@
           });
 
           RealTimeService.subscribe('/oneTimeConnection', $rootScope, function (newChange) {
+            console.log("newChange", newChange);
             storage.oneTimeCallbacks[newChange.action] && storage.oneTimeCallbacks[newChange.action](newChange);
             storage.oneTimeCallbacks.listener && storage.oneTimeCallbacks.listener(newChange);
 

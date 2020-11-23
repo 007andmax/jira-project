@@ -2,6 +2,7 @@ import { DeviceAntivirus } from './device-antivirus';
 import { DeviceRemoteSessions } from './device-remote-sessions';
 import { DeviceSystem } from './device-system';
 import { DeviceTiming } from './device-timing';
+import * as moment from "moment";
 
 export class Device {
     agentId: string;
@@ -30,5 +31,11 @@ export class Device {
             this[key] = data[key];
         }
         this.remoteSessions = (data.remoteSessions) ? data.remoteSessions.map(item => new DeviceRemoteSessions(item)) : [];
+        if (!this.online) {
+            var currentTimeZone = new Date().getTimezoneOffset();
+            let minutesDiff = currentTimeZone * 60 * 1000;
+            let time = Date.now() + minutesDiff;
+            this.timing.offline = (time - moment(this.offlineAt).valueOf());
+        }
     }
 }
