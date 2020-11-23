@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Device } from '../class/device';
 import { DeviceCompany } from '../class/device-company';
@@ -19,7 +19,8 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
   constructor(private modalService: NgbModal,
     private devicesService: DevicesService,
     private usersStateService: UsersStateService,
-    private permissionsService: PermissionsService,) { }
+    private permissionsService: PermissionsService,
+    public cd: ChangeDetectorRef,) { }
 
 
   ngOnInit() {
@@ -31,7 +32,7 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
       if (this.device.online) this.device.timing.online += 1000;
       if (!this.device.online) this.device.timing.offline += 1000;
       if (this.device.timing.idle) this.device.timing.idle += 1000;
-      console.log("eee", this.device);
+      this.cd.detectChanges();
     }, 1000);
   }
   openModalRemoteAccess() {
