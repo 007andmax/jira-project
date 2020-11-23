@@ -46,47 +46,25 @@ export class CompanyDevicesItemComponent implements OnInit {
     return this.permissionsService.isAllowed(action)
   }
   returnTimeFormatConnected(time) {
-
-    console.log("time", time);
-    var days = 0;
-    var hours = 0;
-    var minutes = 0;
-    var seconds = 0;
-    if (time > 86400000) {
-      days = Math.floor(time / 86400000);
-      hours = Math.floor((time - (days * 86400000)) / 3600000);
-      minutes = Math.floor((time - (days * 86400000) - (hours * 3600000)) / 60000);
-      seconds = Math.floor((time - (days * 86400000) - (hours * 3600000) - (minutes * 60000)) / 1000);
-    } else if (time < 86400000 && time > 3600000) {
-      days = 0;
-      hours = Math.floor((time - (days * 86400000)) / 3600000);
-      minutes = Math.floor((time - (days * 86400000) - (hours * 3600000)) / 60000);
-      seconds = Math.floor((time - (days * 86400000) - (hours * 3600000) - (minutes * 60000)) / 1000);
-    } else if (time < 3600000 && time > 60000) {
-      days = 0;
-      hours = 0;
-      minutes = Math.floor((time - (days * 86400000) - (hours * 3600000)) / 60000);
-      seconds = Math.floor((time - (days * 86400000) - (hours * 3600000) - (minutes * 60000)) / 1000);
-    } else {
-      days = 0;
-      hours = 0;
-      minutes = 0;
-      seconds = Math.floor((time - (days * 86400000) - (hours * 3600000) - (minutes * 60000)) / 1000);
-    }
-
+    var currentTimeZone = new Date().getTimezoneOffset();
+    let minutesDiff = currentTimeZone * 60 * 1000;
+    let date = new Date(time + minutesDiff);
     return {
-      days: days,
-      hours: hours,
-      minutes: minutes,
-      seconds: seconds
+      days: (time > 86400000) ? Math.floor(time / 86400000) : 0,
+      hours: date.getHours(),
+      minutes: date.getMinutes(),
+      seconds: date.getSeconds()
     }
   }
   returnTimeFormatForPage(time) {
+    var currentTimeZone = new Date().getTimezoneOffset();
+    let minutesDiff = currentTimeZone * 60 * 1000;
+    let date = new Date(time + minutesDiff);
     return {
-      days: (time == 0) ? 0 : moment(time).date(),
-      hours: (time == 0) ? 0 : moment(time).hour(),
-      minutes: (time == 0) ? 0 : moment(time).minute(),
-      seconds: (time == 0) ? 0 : moment(time).second()
+      days: (time > 86400000) ? Math.floor(time / 86400000) : 0,
+      hours: date.getHours(),
+      minutes: date.getMinutes(),
+      seconds: date.getSeconds()
     }
   }
 }
