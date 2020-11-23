@@ -123,25 +123,19 @@
             </span>
             <span
                 class="logged-time"
-                *ngIf="device.timing.idle && returnTimeFormat(device.timing.idle).days > 0"
-            >
-                Idle: {{returnTimeFormat(device.timing.idle).days}} day
-            </span>
-            <span
-                class="logged-time"
                 *ngIf="device.timing.idle && returnTimeFormat(device.timing.idle).hours > 0"
             >
                 Idle: {{returnTimeFormat(device.timing.idle).hours}} hrs
             </span>
             <span
                 class="logged-time"
-                *ngIf="device.timing.idle && returnTimeFormat(device.timing.idle).minutes > 0 && returnTimeFormat(device.timing.idle).days < 1"
+                *ngIf="device.timing.idle && returnTimeFormat(device.timing.idle).minutes > 0"
             >
                 Idle: {{returnTimeFormat(device.timing.idle).minutes}} min
             </span>
             <span
                 class="logged-time"
-                *ngIf="device.timing.idle && returnTimeFormat(device.timing.idle).seconds > 0 && returnTimeFormat(device.timing.idle).minutes < 1"
+                *ngIf="device.timing.idle && returnTimeFormat(device.timing.idle).minutes < 1"
             >
                 Idle: 0 min
             </span>
