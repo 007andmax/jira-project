@@ -22,6 +22,7 @@ export class CompanyDevicesRemoteAccessComponent implements OnInit {
     private devicesService: DevicesService) { }
 
   ngOnInit() {
+
     this.devicesSateService.getOnLaunchRemoteApp().subscribe(data => {
       if (data === this.sessionId) this.close();
     })
@@ -30,6 +31,8 @@ export class CompanyDevicesRemoteAccessComponent implements OnInit {
     window.location.href = '/data/connection-viewer';
   }
   launchRemoteApp() {
+    console.log("device", this.device);
+    console.log("companyId", this.companyId);
     this.devicesService.createRemoteSession(this.device.id, this.companyId, this.connectionType, null).subscribe((resp: any) => {
       //this.connectRemoteAccess(resp.sessionId, connectionType, false);
       this.sessionId = resp.sessionId;
