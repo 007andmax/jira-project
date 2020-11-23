@@ -48,12 +48,13 @@ export class CompanyDevicesItemComponent implements OnInit {
   returnTimeFormatConnected(time) {
     var currentTimeZone = new Date().getTimezoneOffset();
     let minutesDiff = currentTimeZone * 60 * 1000;
-    let date = new Date(time + minutesDiff);
+    // let date = new Date(time + minutesDiff);
+    let date = new Date(time);
     return {
-      days: (time > 86400000) ? Math.floor(time / 86400000) : 0,
-      hours: date.getHours(),
-      minutes: date.getMinutes(),
-      seconds: date.getSeconds()
+      days: 0,
+      hours: date.getUTCHours(),
+      minutes: date.getUTCMinutes(),
+      seconds: date.getUTCSeconds()
     }
   }
   returnTimeFormatForPage(time) {
