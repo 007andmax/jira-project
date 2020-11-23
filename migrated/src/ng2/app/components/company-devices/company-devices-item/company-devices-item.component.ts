@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Device } from '../class/device';
 import { DeviceCompany } from '../class/device-company';
@@ -13,22 +13,33 @@ import { UsersStateService } from 'src/ng2/app/states/users/users-state.service'
   templateUrl: './company-devices-item.component.html',
   styleUrls: ['./company-devices-item.component.scss']
 })
-export class CompanyDevicesItemComponent implements OnInit {
+export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
   @Input() device: DeviceCompany;
-
+  timer: any = null;
   constructor(private modalService: NgbModal,
     private devicesService: DevicesService,
     private usersStateService: UsersStateService,
     private permissionsService: PermissionsService,) { }
 
+
   ngOnInit() {
+    this.timer = setInterval(() => {
+
+      this.device.remoteSessions.forEach(item => {
+        item.agentConnectedAt += 1000;
+      });
+      if (this.device.online) this.device.timing.online += 1000;
+      if (!this.device.online) this.device.timing.offline += 1000;
+      if (this.device.timing.idle) this.device.timing.idle += 1000;
+      console.log("eee", this.device);
+    }, 1000);
   }
   openModalRemoteAccess() {
     const modalRef = this.modalService.open(CompanyDevicesRemoteAccessComponent, { windowClass: 'quote-send-modal' });
     /*let data = JSON.parse(JSON.stringify(quote.getDataForCreate(true)));
     modalRef.componentInstance.data = data;
     modalRef.componentInstance.action = QUOTE_MODAL_ACTION_ADD;*/
-    console.log(this.returnTimeFormatForPage(this.device.timing.offline));
+
   }
   public getUserName(userId) {
     let user = this.usersStateService.getAllUsers().find(item => item.id === userId);
@@ -46,8 +57,8 @@ export class CompanyDevicesItemComponent implements OnInit {
     return this.permissionsService.isAllowed(action)
   }
   returnTimeFormat(time) {
-    var hours = 0;
-    var minutes = 0;
+    let hours = 0;
+    let minutes = 0;
     hours = Math.floor(time / 3600000);
     minutes = Math.floor((time - (hours * 3600000)) / 60000);
     return {
@@ -56,19 +67,19 @@ export class CompanyDevicesItemComponent implements OnInit {
     }
   }
   returnTimeFormatUpTime(time) {
-    var days = 0;
-    var hours = 0;
-    var minutes = 0;
-    var seconds = 0;
+    let days = 0;
+    let hours = 0;
+    let minutes = 0;
     days = Math.floor(time / 86400000);
     hours = Math.floor((time - (days * 86400000)) / 3600000);
     minutes = Math.floor((time - (days * 86400000) - (hours * 3600000)) / 60000);
-    seconds = Math.floor((time - (days * 86400000) - (hours * 3600000) - (minutes * 60000)) / 1000);
     return {
       days: days,
       hours: hours,
       minutes: minutes,
-      seconds: seconds
     }
+  }
+  ngOnDestroy(): void {
+    clearInterval(this.timer);
   }
 }
