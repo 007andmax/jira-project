@@ -38,7 +38,19 @@ export class CompanyDevicesComponent implements OnInit {
       this.devices = devices;
       console.log("this.devices", this.devices);
     })
+    let ONE_TIME_ONLINE = [];
+    let ONE_TIME_OFFLINE = [];
     this.devicesRealTimeService.oneTimeConnectionArray.subscribe(newChange => {
+      if (newChange.action === 'ONE_TIME_ONLINE') {
+        let find = ONE_TIME_ONLINE.find(item => item === newChange.data.id);
+        if (!find) ONE_TIME_ONLINE.push(newChange.data.id);
+        console.log("ONE_TIME_ONLINE", ONE_TIME_ONLINE);
+      }
+      if (newChange.action === 'ONE_TIME_OFFLINE') {
+        let find = ONE_TIME_OFFLINE.find(item => item === newChange.data.id);
+        if (!find) ONE_TIME_OFFLINE.push(newChange.data.id);
+        console.log("ONE_TIME_OFFLINE", ONE_TIME_OFFLINE);
+      }
       if (newChange.action === 'ONE_TIME_CONNECTION_OPEN') {
         for (var i = 0; i < this.devices.length; i++) {
           if (this.devices[i].id === newChange.data.deviceId) {
