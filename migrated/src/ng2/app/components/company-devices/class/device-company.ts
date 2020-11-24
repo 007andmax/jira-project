@@ -16,4 +16,12 @@ export class DeviceCompany extends Device {
             "iconName": iconName
         }
     }
+    public getDataForEditLabel(label) {
+        return {
+            "agentId": this.agentId,
+            "companyId": this.companyId,
+            "newLabelValue": label,
+            "iconName": this.iconName
+        }
+    }
 }

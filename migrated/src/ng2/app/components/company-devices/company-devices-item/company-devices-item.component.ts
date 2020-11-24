@@ -16,6 +16,7 @@ import { UsersStateService } from 'src/ng2/app/states/users/users-state.service'
 export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
   @Input() device: DeviceCompany;
   timer: any = null;
+
   constructor(private modalService: NgbModal,
     private devicesService: DevicesService,
     private usersStateService: UsersStateService,
@@ -34,6 +35,7 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
       if (this.device.timing.idle) this.device.timing.idle += 1000;
       this.cd.detectChanges();
     }, 1000);
+
   }
   remoteAccess(connectionType) {
     console.log("this.device", this.device);
@@ -67,6 +69,7 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
       minutes: minutes,
     }
   }
+
   returnTimeFormatUpTime(time) {
     let days = 0;
     let hours = 0;

@@ -62,6 +62,7 @@
     <td
         class="company-devices-table__device-name"
         ngbDropdown
+        (openChange)="changeNameDP.onOpenDropDown($event)"
     >
         <div class="qt-df qt-fd-c">
             <div class="company-devices-table-device-name qt-ff-gm qt-df qt-ai-c">
@@ -89,25 +90,13 @@
                 [textContent]="device.hostName || device.ip"
             ></span>
         </div>
-        <div
-            class="company-device-edit-name"
+        <app-company-devices-edit-name
+            [device]="device"
             container="body"
             ngbDropdownMenu
-        >
-            <div class="qt-fs-15 qt-mb-16 qt-lh-133 qt-ff-sb qt-color-dark">Edit Device Name</div>
-            <div class="qt-input-block qt-mb-24">
-                <label>Device Name</label>
-                <input
-                    class="company-device-edit-name__input"
-                    placeholder="HP Ethernet Multi-Environment Jet"
-                    type="text"
-                >
-            </div>
-            <div class="qt-df">
-                <button class="company-device-edit-name__button qt-button qt-mr-12">Save Changes</button>
-                <button class="company-device-edit-name__button qt-button --gray">Cancel</button>
-            </div>
-        </div>
+            #changeNameDP
+            class="company-device-edit-name"
+        ></app-company-devices-edit-name>
     </td>
     <td class="company-devices-table__logged-user">
         <div class="qt-df qt-fd-c">
@@ -143,28 +132,28 @@
     </td>
     <td class="company-devices-table__up-time">
         <div class="qt-df qt-fd-c">
-          <span>
-            <span *ngIf="device.online && returnTimeFormatUpTime(device.timing.online).days > 0">
-                {{returnTimeFormatUpTime(device.timing.online).days}} day
+            <span>
+                <span *ngIf="device.online && returnTimeFormatUpTime(device.timing.online).days > 0">
+                    {{returnTimeFormatUpTime(device.timing.online).days}} day
+                </span>
+                <span *ngIf="device.online && returnTimeFormatUpTime(device.timing.online).hours > 0">
+                    {{returnTimeFormatUpTime(device.timing.online).hours}} hrs
+                </span>
+                <span *ngIf="device.online && returnTimeFormatUpTime(device.timing.online).minutes > 0 && returnTimeFormatUpTime(device.timing.online).days < 1">
+                    {{returnTimeFormatUpTime(device.timing.online).minutes}} min
+                </span>
+                <span *ngIf="device.online && returnTimeFormatUpTime(device.timing.online).minutes < 1 && returnTimeFormatUpTime(device.timing.online).hours < 1 && returnTimeFormatUpTime(device.timing.online).days < 1">0 min</span>
+                <span *ngIf="!device.online && returnTimeFormatUpTime(device.timing.offline).days > 0">
+                    {{returnTimeFormatUpTime(device.timing.offline).days}} day
+                </span>
+                <span *ngIf="!device.online && returnTimeFormatUpTime(device.timing.offline).hours > 0">
+                    {{returnTimeFormatUpTime(device.timing.offline).hours}} hrs
+                </span>
+                <span *ngIf="!device.online && returnTimeFormatUpTime(device.timing.offline).minutes > 0 && returnTimeFormatUpTime(device.timing.offline).days < 1">
+                    {{returnTimeFormatUpTime(device.timing.offline).minutes}} min
+                </span>
+                <span *ngIf="!device.online && returnTimeFormatUpTime(device.timing.offline).minutes < 1 && returnTimeFormatUpTime(device.timing.offline).hours < 1 && returnTimeFormatUpTime(device.timing.offline).days < 1">0 min</span>
             </span>
-            <span *ngIf="device.online && returnTimeFormatUpTime(device.timing.online).hours > 0">
-                {{returnTimeFormatUpTime(device.timing.online).hours}} hrs
-            </span>
-            <span *ngIf="device.online && returnTimeFormatUpTime(device.timing.online).minutes > 0 && returnTimeFormatUpTime(device.timing.online).days < 1">
-                {{returnTimeFormatUpTime(device.timing.online).minutes}} min
-            </span>
-            <span *ngIf="device.online && returnTimeFormatUpTime(device.timing.online).minutes < 1 && returnTimeFormatUpTime(device.timing.online).hours < 1 && returnTimeFormatUpTime(device.timing.online).days < 1">0 min</span>
-            <span *ngIf="!device.online && returnTimeFormatUpTime(device.timing.offline).days > 0">
-                {{returnTimeFormatUpTime(device.timing.offline).days}} day
-            </span>
-            <span *ngIf="!device.online && returnTimeFormatUpTime(device.timing.offline).hours > 0">
-                {{returnTimeFormatUpTime(device.timing.offline).hours}} hrs
-            </span>
-            <span *ngIf="!device.online && returnTimeFormatUpTime(device.timing.offline).minutes > 0 && returnTimeFormatUpTime(device.timing.offline).days < 1">
-                {{returnTimeFormatUpTime(device.timing.offline).minutes}} min
-            </span>
-            <span *ngIf="!device.online && returnTimeFormatUpTime(device.timing.offline).minutes < 1 && returnTimeFormatUpTime(device.timing.offline).hours < 1 && returnTimeFormatUpTime(device.timing.offline).days < 1">0 min</span>
-          </span>
             <span
                 class="uptime-tag qt-ff-gm"
                 [ngClass]="{'--offline':!device.online}"
