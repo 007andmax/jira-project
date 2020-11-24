@@ -10,7 +10,7 @@ import { Device } from '../../components/company-devices/class/device';
 @Injectable({
   providedIn: 'root'
 })
-export class DevicesSateService {
+export class DevicesStateService {
   allDevices = null;
   onGetDevices: EventEmitter<any> = new EventEmitter();
   onRemoveConnecion: EventEmitter<any> = new EventEmitter();

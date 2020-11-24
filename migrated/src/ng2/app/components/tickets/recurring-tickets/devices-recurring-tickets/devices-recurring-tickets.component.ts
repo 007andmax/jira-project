@@ -5,8 +5,8 @@ import { debounceTime, distinctUntilChanged, filter, map } from "rxjs/operators"
 import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
 import { FormGroup } from "@angular/forms";
 import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
-import {  DevicesRecurringTicketsStateService } from './services/devices-recurring-tickets-state.service';
-import { DevicesSateService } from 'src/ng2/app/states/devices/devices-sate.service';
+import { DevicesRecurringTicketsStateService } from './services/devices-recurring-tickets-state.service';
+import { DevicesStateService } from 'src/ng2/app/states/devices/devices-sate.service';
 
 
 @Component({
@@ -14,8 +14,8 @@ import { DevicesSateService } from 'src/ng2/app/states/devices/devices-sate.serv
   templateUrl: './devices-recurring-tickets.component.html',
   styleUrls: ['./devices-recurring-tickets.component.scss']
 })
-export class DevicesRecurringTicketsComponent implements OnInit,OnDestroy {
-  
+export class DevicesRecurringTicketsComponent implements OnInit, OnDestroy {
+
 
   @ViewChild('instance') instance: NgbTypeahead;
   @Output() selectedItem = new EventEmitter<any>();
@@ -28,16 +28,16 @@ export class DevicesRecurringTicketsComponent implements OnInit,OnDestroy {
   focus$ = new Subject<string>();
   click$ = new Subject<string>();
   sub = new Subscription();
-   /**
-   * Creates an instance of the DevicesRecurringTicketsComponent with the injected services
-   * @param {DevicesService} devicesService Service to work with devices
-   * @param {DevicesStateService} devicesState to work devices state
-   * @param {ChangeDetectorRef} cd Service to work with change detector
-   */
+  /**
+  * Creates an instance of the DevicesRecurringTicketsComponent with the injected services
+  * @param {DevicesService} devicesService Service to work with devices
+  * @param {DevicesStateService} devicesState to work devices state
+  * @param {ChangeDetectorRef} cd Service to work with change detector
+  */
   constructor(
     private devicesService: DevicesService,
     private devicesRecurringTicketsStateService: DevicesRecurringTicketsStateService,
-    private devicesStateService:DevicesSateService,
+    private devicesStateService: DevicesStateService,
     public cd: ChangeDetectorRef,
   ) { }
 
@@ -47,7 +47,7 @@ export class DevicesRecurringTicketsComponent implements OnInit,OnDestroy {
   ngOnInit() {
     this.getCLientsList();
     this.onInitClearState();
-   
+
   }
 
   /**
@@ -59,15 +59,14 @@ export class DevicesRecurringTicketsComponent implements OnInit,OnDestroy {
       this.devicesList = null;
     });
     this.sub.add(getClearState);
-   }
+  }
 
   /**
    * Get devices list
    */
   private getCLientsList() {
     this.subGetDevicesList = this.devicesRecurringTicketsStateService.devicesCompany.subscribe((res: any) => {
-      if (this.devicesStateService.getAllDevices()[res])
-      {
+      if (this.devicesStateService.getAllDevices()[res]) {
         this.devicesList = this.devicesStateService.getAllDevices()[res].map((item) => {
           item.name = item.hostName;
           return item;
@@ -75,18 +74,17 @@ export class DevicesRecurringTicketsComponent implements OnInit,OnDestroy {
       } else {
         this.devicesList = [];
       }
-    
-    
+
+
       this.devicesList = (this.devicesList.length === 0) ? null : this.devicesList;
       if (!this.devicesList) this.clearDevices();
-        if (this.editItem && this.devicesList)
-        {
-          let index: number = this.devicesList.findIndex(item => item.id === this.editItem.deviceId);
-          if (index > (-1))  {
-            this.selectedDevice = this.devicesList[index];
-          }
+      if (this.editItem && this.devicesList) {
+        let index: number = this.devicesList.findIndex(item => item.id === this.editItem.deviceId);
+        if (index > (-1)) {
+          this.selectedDevice = this.devicesList[index];
         }
-        this.getAllItems.emit(this.devicesList);
+      }
+      this.getAllItems.emit(this.devicesList);
     })
   }
 
@@ -104,7 +102,7 @@ export class DevicesRecurringTicketsComponent implements OnInit,OnDestroy {
           .filter(v => v['name'].toLowerCase().indexOf(term.toLowerCase()) > -1)))
     );
   };
-  
+
   /**
    * set selected item
    * @param companyId - id of company
@@ -130,7 +128,7 @@ export class DevicesRecurringTicketsComponent implements OnInit,OnDestroy {
   }
 
   ngOnDestroy(): void {
-   this.sub.unsubscribe();
+    this.sub.unsubscribe();
   }
 
 }

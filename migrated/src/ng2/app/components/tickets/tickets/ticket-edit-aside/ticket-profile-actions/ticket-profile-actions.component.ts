@@ -3,7 +3,7 @@ import { TicketsPermissionsService } from '../services/tickets-permissions.servi
 import { CurrentUser } from 'src/ng2/class/current-user/current-user';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { TicketProfile } from '../../class/ticket-profile';
-import { DevicesSateService } from 'src/ng2/app/states/devices/devices-sate.service';
+import { DevicesStateService } from 'src/ng2/app/states/devices/devices-sate.service';
 import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 import { NotificationStateService } from 'src/ng2/app/components/shared/notification/services/notification-state.service';
 import { ConfirmStateService } from 'src/ng2/app/components/shared/confirm/services/confirm-state.service';
@@ -26,7 +26,7 @@ export class TicketProfileActionsComponent implements OnInit, OnDestroy {
   sub = new Subscription();
   constructor(
     public ticketsPermissionsService: TicketsPermissionsService,
-    private devicesSateService: DevicesSateService,
+    private devicesStateService: DevicesStateService,
     private ticketsService: TicketsService,
     private notificationStateService: NotificationStateService,
     private usersStateService: UsersStateService,
@@ -67,7 +67,7 @@ export class TicketProfileActionsComponent implements OnInit, OnDestroy {
     }
   }
   getDevicesByCompany() {
-    let find = (this.devicesSateService.getAllDevices()) ? this.devicesSateService.getAllDevices()[this.ticketProfile.company.id] : false;
+    let find = (this.devicesStateService.getAllDevices()) ? this.devicesStateService.getAllDevices()[this.ticketProfile.company.id] : false;
     return (find) ? find : []
   }
   isDeviceToLink() {

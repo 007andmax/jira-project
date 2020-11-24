@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
 import { ConstantsStateService } from 'src/ng2/app/states/constants/constants-state.service';
-import { DevicesSateService } from 'src/ng2/app/states/devices/devices-sate.service';
+import { DevicesStateService } from 'src/ng2/app/states/devices/devices-sate.service';
 import { Device } from '../class/device';
 import { DeviceCompany } from '../class/device-company';
 
@@ -18,13 +18,13 @@ export class CompanyDevicesRemoteAccessComponent implements OnInit {
   @Input() companyId: string;
   sessionId: string;
   constructor(private constantsStateService: ConstantsStateService,
-    private devicesSateService: DevicesSateService,
+    private devicesStateService: DevicesStateService,
     public activeModal: NgbActiveModal,
     private devicesService: DevicesService) { }
 
   ngOnInit() {
 
-    this.devicesSateService.getOnLaunchRemoteApp().subscribe(data => {
+    this.devicesStateService.getOnLaunchRemoteApp().subscribe(data => {
       if (data === this.sessionId) this.close();
     })
   }

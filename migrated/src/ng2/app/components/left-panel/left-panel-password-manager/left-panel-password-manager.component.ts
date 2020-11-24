@@ -12,7 +12,7 @@ import { GadgetsService } from "../../../services/gadgets/gadgets.service";
 import { ISubscription } from "rxjs-compat/Subscription";
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
-import { DevicesSateService } from 'src/ng2/app/states/devices/devices-sate.service';
+import { DevicesStateService } from 'src/ng2/app/states/devices/devices-sate.service';
 
 /**
  * Left panel password manager component
@@ -63,19 +63,19 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     private passwordManagerService: PasswordManagerService,
     private apiPasswordManagerService: ApiPasswordManagerService,
     private gadgetsService: GadgetsService,
-    private cdRef:ChangeDetectorRef,
+    private cdRef: ChangeDetectorRef,
     private usersStateService: UsersStateService,
-    private companiesState:CompaniesStateService,
-    private devicesSateService:DevicesSateService
+    private companiesState: CompaniesStateService,
+    private devicesStateService: DevicesStateService
   ) {
-    
+
   }
 
   /**
    * Initializes left panel password manager. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
-    
+
     this.getPasswordRecords();
     this.addNewRecord();
     this.deleteRecord();
@@ -87,21 +87,21 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
    * Get companies list
    */
   public getCompaniesList() {
-  //  this.ngOnInit();
-  if (this.companiesState.getCompanies().length > 0) {
-    if (!this.cdRef['destroyed']) {
-      this.cdRef.detectChanges();
+    //  this.ngOnInit();
+    if (this.companiesState.getCompanies().length > 0) {
+      if (!this.cdRef['destroyed']) {
+        this.cdRef.detectChanges();
+      }
+      this.companiesList = this.getCompaniesNames(this.companiesState.getCompanies());
+
     }
-    this.companiesList = this.getCompaniesNames(this.companiesState.getCompanies());
-    
-  }
     this.companiesState.getOnCompanies().subscribe((data) => {
       if (!this.cdRef['destroyed']) {
         this.cdRef.detectChanges();
       }
       this.companiesList = this.getCompaniesNames(data);
     })
-  
+
     /* return this.subscription = this.companiesService.clientsCompany
        .subscribe((company) => {
          if (!this.cdRef['destroyed']) {
@@ -115,7 +115,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   /**
    * Select company filter
    */
-  public selectCompany(item){
+  public selectCompany(item) {
     this.selectedCompany = item.item;
     this.companiesService.setFilteredCompnay(item.item);
     this.passwordManagerService.setSelectedDeviceOrUser({});
@@ -130,7 +130,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   /**
    * Select company mobile filter
    */
-  public selectCompanyMob(item){
+  public selectCompanyMob(item) {
     this.selectedCompany = item.item;
     this.companiesService.setFilteredCompnay(item.item);
     this.passwordManagerService.setSelectedDeviceOrUser({});
@@ -148,7 +148,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
    */
   public filterPasswordRecords(company) {
     if (company && company.companyId)
-    return this.passwordRecords = this.passwordRecordsStart.filter((item) => item.companyId === company.companyId)
+      return this.passwordRecords = this.passwordRecordsStart.filter((item) => item.companyId === company.companyId)
   };
 
   /**
@@ -174,16 +174,16 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     const selectedDate = `${date.year}/${this.formatDayAndMonth(date.month)}/${this.formatDayAndMonth(date.day)}`;
     this.selectedDateItem = date;
     this.selectedDateForFilter = date;
-     
-   
- 
+
+
+
     (this.selectedCompany && this.selectedCompany.companyId) && this.filterPasswordRecords(this.selectedCompany);
-     this.passwordRecords = this.passwordRecords.filter((item) => {
-       
+    this.passwordRecords = this.passwordRecords.filter((item) => {
+
       return item.expiredDate === selectedDate;
     })
     //this.selectDate(date);
-     
+
     this.cdRef.detectChanges();
   }
 
@@ -209,7 +209,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
    * Select device or user mobile version
    * @param item - value to set
    */
-  public selectDeviceOrUserMob(item){
+  public selectDeviceOrUserMob(item) {
     this.selectedDeviceOrUser = item.item;
     this.passwordManagerService.setSelectedDeviceOrUser(item.item);
     this.filterPasswordRecordsByDeviceOrUser(item.item);
@@ -220,11 +220,11 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
    * @param companyId - id of company
    */
   public getCompanyDevices() {
-    
-      if (this.devicesSateService.getAllDevices()[this.selectedCompany.companyId]) {
-        return this.devicesAndUsersList = [...this.devicesAndUsersList, ...this.devicesSateService.getAllDevices()[this.selectedCompany.companyId]];
-      }
-    
+
+    if (this.devicesStateService.getAllDevices()[this.selectedCompany.companyId]) {
+      return this.devicesAndUsersList = [...this.devicesAndUsersList, ...this.devicesStateService.getAllDevices()[this.selectedCompany.companyId]];
+    }
+
   }
 
   /**
@@ -253,12 +253,12 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     if (this.innerWidth <= 414) {
       this.passwordManagerService.setMobileCategory();
     }
-     
+
     this.subGetRecords = this.apiPasswordManagerService.dataChange.subscribe((res: any) => {
       this.passwordRecordsStart = res;
       this.passwordRecords = res;
-      this.selectedCompany && this.selectCompany({item: this.selectedCompany});
-      this.selectedDeviceOrUser && this.selectDeviceOrUser({item: this.selectedDeviceOrUser});
+      this.selectedCompany && this.selectCompany({ item: this.selectedCompany });
+      this.selectedDeviceOrUser && this.selectDeviceOrUser({ item: this.selectedDeviceOrUser });
       this.selectedDateItem && this.selectDate(this.selectedDateItem);
       if (this.innerWidth <= 414) {
         this.closeMobileFilters();
@@ -345,7 +345,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
    * @param list
    */
   private getCompaniesNames(list) {
-    
+
     const filteredArray = [];
     list.map((item) => {
       filteredArray.push({
@@ -363,8 +363,8 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.devicesAndUsersList = [];
     this.refreshCompany();
     this.refreshDeviceOrUser();
-//    this.getPasswordRecords();
-this.passwordRecords = this.passwordRecordsStart;
+    //    this.getPasswordRecords();
+    this.passwordRecords = this.passwordRecordsStart;
   }
 
   /**
@@ -374,8 +374,8 @@ this.passwordRecords = this.passwordRecordsStart;
     this.devicesAndUsersList = [];
     this.refreshCompany();
     this.refreshDeviceOrUser();
-//    this.getPasswordRecords();
-this.passwordRecords = this.passwordRecordsStart;
+    //    this.getPasswordRecords();
+    this.passwordRecords = this.passwordRecordsStart;
   }
 
   /**
@@ -395,9 +395,9 @@ this.passwordRecords = this.passwordRecordsStart;
     this.passwordManagerService.setDate('');
     this.selectedDate = null;
     this.selectedDateItem = null;
-    
+
     (this.selectedCompany && this.selectedCompany.companyId) ? this.filterPasswordRecords(this.selectedCompany) : this.passwordRecords = this.passwordRecordsStart;
- 
+
   }
 
   /**
@@ -418,9 +418,9 @@ this.passwordRecords = this.passwordRecordsStart;
     this.passwordManagerService.setDate('');
     this.selectedDate = null;
     this.selectedDateItem = null;
-    
+
     (this.selectedCompany && this.selectedCompany.companyId) ? this.filterPasswordRecords(this.selectedCompany) : this.passwordRecords = this.passwordRecordsStart;
-  //  this.cdRef.checkNoChanges();
+    //  this.cdRef.checkNoChanges();
   }
 
   /**
@@ -428,14 +428,14 @@ this.passwordRecords = this.passwordRecordsStart;
    */
   private refreshDeviceOrUser() {
     this.device = null;
-    this.selectDeviceOrUser({item: null});
+    this.selectDeviceOrUser({ item: null });
   }
 
   /**
    * Clear company
    */
   private refreshCompany() {
-    this.selectCompany({item: this.clearCompanyItem});
+    this.selectCompany({ item: this.clearCompanyItem });
     this.company = null;
     this.device = null;
   }
@@ -445,10 +445,10 @@ this.passwordRecords = this.passwordRecordsStart;
    * @param companyId - id of company
    */
   private getAllUsers(companyId) {
-   // this.usersStateService.getAllusers().subscribe((res: any) => {
-     let list_users = this.usersStateService.getAllUsers().filter((item) =>  item.company.id == companyId);
-      this.devicesAndUsersList = [...(list_users.filter((item) => item.accountType === USER.TYPE.CLIENT)), ...this.devicesAndUsersList]
-  //  })
+    // this.usersStateService.getAllusers().subscribe((res: any) => {
+    let list_users = this.usersStateService.getAllUsers().filter((item) => item.company.id == companyId);
+    this.devicesAndUsersList = [...(list_users.filter((item) => item.accountType === USER.TYPE.CLIENT)), ...this.devicesAndUsersList]
+    //  })
   }
 
   /**
@@ -464,18 +464,18 @@ this.passwordRecords = this.passwordRecordsStart;
    * Add new record
    */
   public addNewRecord() {
-  
+
     this.subNewRecordAdd = this.passwordManagerService.newRecordsisAdd.subscribe(() => {
-     
+
       if (this.innerWidth <= 414) {
         this.passwordManagerService.setMobileCategory();
       }
       this.subscriptions.add(this.apiPasswordManagerService.getRecordsNew().subscribe((res: any) => {
-       
+
         this.passwordRecordsStart = res;
         this.passwordRecords = res;
-        this.selectedCompany && this.selectCompany({item: this.selectedCompany});
-        this.selectedDeviceOrUser && this.selectDeviceOrUser({item: this.selectedDeviceOrUser});
+        this.selectedCompany && this.selectCompany({ item: this.selectedCompany });
+        this.selectedDeviceOrUser && this.selectDeviceOrUser({ item: this.selectedDeviceOrUser });
         this.selectedDateItem && this.selectDate(this.selectedDateItem);
         if (this.innerWidth <= 414) {
           this.closeMobileFilters();
@@ -495,8 +495,8 @@ this.passwordRecords = this.passwordRecordsStart;
       this.subscriptions.add(this.apiPasswordManagerService.getRecordsNew().subscribe((res: any) => {
         this.passwordRecordsStart = res;
         this.passwordRecords = res;
-        this.selectedCompany && this.selectCompany({item: this.selectedCompany});
-        this.selectedDeviceOrUser && this.selectDeviceOrUser({item: this.selectedDeviceOrUser});
+        this.selectedCompany && this.selectCompany({ item: this.selectedCompany });
+        this.selectedDeviceOrUser && this.selectDeviceOrUser({ item: this.selectedDeviceOrUser });
         this.selectedDateItem && this.selectDate(this.selectedDateItem);
         if (this.innerWidth <= 414) {
           this.closeMobileFilters();
@@ -508,14 +508,14 @@ this.passwordRecords = this.passwordRecordsStart;
   /**
    * Getter for load status
    */
-  get loadStatus () {
+  get loadStatus() {
     return this.company && this.companiesList;
   }
 
   /**
    * Getter for companies
    */
-  get companiesListStatus () {
+  get companiesListStatus() {
     return this.companiesList;
   }
 

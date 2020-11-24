@@ -5,7 +5,7 @@ import { setUpLocationSync } from '@angular/router/upgrade';
 import { UsersService } from "./services/users/users.service";
 import { WebsocketService } from "./services/websocket/websocket.service";
 import { UsersStateService } from './states/users/users-state.service';
-import { DevicesSateService } from './states/devices/devices-sate.service';
+import { DevicesStateService } from './states/devices/devices-sate.service';
 import { CompaniesStateService } from './states/company/companies-state.service';
 import { AppService } from './states/app/app.service';
 import { TaxesStateService } from './states/taxes/taxes-state.service';
@@ -13,7 +13,7 @@ import { GlNumberStateService } from './states/gl-number/gl-number-state.service
 import { InventoryStateService } from './states/inventory/inventory-state.service';
 import { TicketsStateService } from './states/tickets/tickets-state.service';
 import { ConstantsStateService } from './states/constants/constants-state.service';
- 
+
 
 /**
  * Root component
@@ -24,11 +24,11 @@ import { ConstantsStateService } from './states/constants/constants-state.servic
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  showPreloader:boolean = true;
-  isUsersInit:boolean = false;
-  isCompaniesInit:boolean = false;
-  isDevicesInit:boolean = false;
-  
+  showPreloader: boolean = true;
+  isUsersInit: boolean = false;
+  isCompaniesInit: boolean = false;
+  isDevicesInit: boolean = false;
+
   /**
    * Creates an instance of the MainComponent with the injected services
    * @param {UpgradeModule} upgrade service
@@ -40,14 +40,14 @@ export class AppComponent implements OnInit {
     private userService: UsersService,
     private usersStateService: UsersStateService,
     private websocketService: WebsocketService,
-    private devicesState: DevicesSateService,
+    private devicesState: DevicesStateService,
     private companiesState: CompaniesStateService,
     private appService: AppService,
-    private taxesStateService:TaxesStateService,
-    private glNumberStateService:GlNumberStateService,
-    private inventoryStateService:InventoryStateService,
-    private ticketsStateService:TicketsStateService,
-    private constantsStateService:ConstantsStateService,
+    private taxesStateService: TaxesStateService,
+    private glNumberStateService: GlNumberStateService,
+    private inventoryStateService: InventoryStateService,
+    private ticketsStateService: TicketsStateService,
+    private constantsStateService: ConstantsStateService,
     public cd: ChangeDetectorRef,
 
   ) { }
@@ -68,7 +68,7 @@ export class AppComponent implements OnInit {
     this.ticketsStateService.onInit();
     this.constantsStateService.onInit();
     //  this.userService.getCurrentUser();
-    
+
     this.websocketService.initializeWebSocketConnection();
     this.appService.onCheckMobile();
     window.addEventListener('resize', this.appService.onCheckMobile);
@@ -89,13 +89,13 @@ export class AppComponent implements OnInit {
 
   }
   private onCheckInitAll() {
-    if (this.isCompaniesInit &&  this.isUsersInit && !this.appService.getIsInit()) {
+    if (this.isCompaniesInit && this.isUsersInit && !this.appService.getIsInit()) {
       this.appService.onInit();
       this.showPreloader = false;
       this.cd.detectChanges();
     }
 
   }
-  
+
 
 }

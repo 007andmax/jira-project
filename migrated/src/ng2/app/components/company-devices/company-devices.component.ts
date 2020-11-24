@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DevicesService } from '../../services/devices/devices.service';
 import { DevicesRealTimeService } from '../../states/devices/devices-real-time.service';
-import { DevicesSateService } from '../../states/devices/devices-sate.service';
+import { DevicesStateService } from '../../states/devices/devices-sate.service';
 import { Device } from './class/device';
 import { DeviceCompany } from './class/device-company';
 
@@ -12,20 +12,20 @@ import { DeviceCompany } from './class/device-company';
 })
 export class CompanyDevicesComponent implements OnInit {
   devices: Array<DeviceCompany> = [];
-  constructor(private devicesSateService: DevicesSateService,
+  constructor(private devicesStateService: DevicesStateService,
     private devicesService: DevicesService,
     private devicesRealTimeService: DevicesRealTimeService) { }
 
   ngOnInit() {
     let companyId = localStorage.getItem("company_id");
-    this.devices = (this.devicesSateService.getAllDevices()[companyId]) ? this.devicesSateService.getAllDevices()[companyId].map(item => new DeviceCompany(item, companyId)) : [];
+    this.devices = (this.devicesStateService.getAllDevices()[companyId]) ? this.devicesStateService.getAllDevices()[companyId].map(item => new DeviceCompany(item, companyId)) : [];
     console.log("this.devices", this.devices);
     if (this.devices.length > 0) {
       this.devicesService.sendDeviceStatusRequest(companyId, this.devices.filter(item => item.agentId).map(item => item.agentId), ["idle", "norestart", "online"]).subscribe(data => {
         console.log("data", data);
       })
     }
-    this.devicesSateService.getOnDevices().subscribe(data => {
+    this.devicesStateService.getOnDevices().subscribe(data => {
       let devices = data[companyId].map(item => new DeviceCompany(item, companyId));
       devices.forEach(item => {
         let find = this.devices.find(device => device.agentId === item.agentId);
@@ -56,6 +56,8 @@ export class CompanyDevicesComponent implements OnInit {
       }
     })
   }
-
+  public trackById(index, item) {
+    return item.id;
+  }
 
 }

@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DevicesSateService } from './devices-sate.service';
+import { DevicesStateService } from './devices-sate.service';
 
-describe('DevicesSateService', () => {
+describe('DevicesStateService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: DevicesSateService = TestBed.get(DevicesSateService);
+    const service: DevicesStateService = TestBed.get(DevicesStateService);
     expect(service).toBeTruthy();
   });
 });
