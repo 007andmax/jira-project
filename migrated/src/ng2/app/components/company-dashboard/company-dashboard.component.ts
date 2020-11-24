@@ -95,12 +95,8 @@ export class CompanyDashboardComponent implements OnInit {
   showContractPreview: boolean = false;
   showContractEdit: boolean = false;
   showPreviewInvoice: boolean = false;
-  showDetailsPayment: boolean = false;
-  showRefundPayment: boolean = false;
   public companyDetail: CompanyProfile;
   serviceAgreement: ServiceAgreement;
-  detailsPayment: Payment;
-  refundPayment: Payment;
   previewInvoice: Invoice;
   @ViewChild('previewInvoiceAside') previewInvoiceAside: InvoicesAsidePreviewComponent;
   constructor(private modalService: NgbModal,
@@ -737,23 +733,6 @@ export class CompanyDashboardComponent implements OnInit {
     this.invoicesService.remove(invoice.id).subscribe(data => {
       this.showPreviewInvoice = false;
     })
-  }
-
-  onDetailsPayment(data) {
-    this.detailsPayment = data;
-    this.showDetailsPayment = true;
-
-  }
-  onRemovePayment(payment) {
-    this.paymentsService.deletePayment(payment).subscribe(data => {
-    })
-    this.showDetailsPayment = false;
-    this.cd.detectChanges();
-  }
-
-  onRefundPayment(data) {
-    this.refundPayment = data;
-    this.showRefundPayment = true;
   }
 
 }
