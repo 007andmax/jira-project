@@ -518,8 +518,16 @@
     font-size: 13px;
     cursor: pointer;
     position: relative;
+    white-space: nowrap;
     &:hover {
       background-color: #edf2f6;
+    }
+  }
+  &.--dropdown-icons {
+    padding: 8px;
+    li {
+      padding: 4px;
+      border-radius: 4px;
     }
   }
 }

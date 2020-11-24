@@ -26,7 +26,7 @@
                 ngbDropdownToggle
             >
                 <div ngbDropdownMenu>
-                    <ul class="icon-list">
+                    <ul class="icon-list qt-dropdown-menu --dropdown-icons device-type-dropdown">
                         <li
                             (click)="setIcon('workstation')"
                             ngbDropdownItem
@@ -61,39 +61,40 @@
         </div>
     </td>
     <td
-        class="company-devices-table__device-name"
+      class="company-devices-table__device-name"
+    >
+      <div
         ngbDropdown
         container="body"
         placement="bottom-left"
-        (openChange)="changeNameDP.onOpenDropDown($event)"
-    >
+        (openChange)="changeNameDP.onOpenDropDown($event)">
         <div class="qt-df qt-fd-c">
-            <div class="company-devices-table-device-name qt-ff-gm qt-df qt-ai-c">
-                <span
-                    class="name-text"
-                    [textContent]="device.label || device.hostName || device.ip"
-                    ngbDropdownAnchor
-                ></span>
-                <ng-template
-                    #tipEditDevice
-                    class="tooltip"
-                >
-                    Edit Device Name
-                </ng-template>
-                <div
-                    placement="top"
-                    container="body"
-                    [ngbTooltip]="tipEditDevice"
-                    class="ml-8 qt-sz-24 icon__edit qt-ic-c device-name-edit-marker"
-                    id="dropdownChangeName"
-                    ngbDropdownToggle
-                ></div>
-            </div>
-            <span
-                class="company-device-desc"
-                *ngIf="isLabel()"
-                [textContent]="device.hostName || device.ip"
-            ></span>
+          <div class="company-devices-table-device-name qt-ff-gm qt-df qt-ai-c">
+              <span
+                  class="name-text"
+                  [textContent]="device.label || device.hostName || device.ip"
+                  ngbDropdownAnchor
+              ></span>
+              <ng-template
+                  #tipEditDevice
+                  class="tooltip"
+              >
+                  Edit Device Name
+              </ng-template>
+              <div
+                  placement="top"
+                  container="body"
+                  [ngbTooltip]="tipEditDevice"
+                  class="ml-8 qt-sz-24 icon__edit qt-ic-c device-name-edit-marker"
+                  id="dropdownChangeName"
+                  ngbDropdownToggle
+              ></div>
+          </div>
+          <span
+              class="company-device-desc"
+              *ngIf="isLabel()"
+              [textContent]="device.hostName || device.ip"
+          ></span>
         </div>
         <app-company-devices-edit-name
             [device]="device"
@@ -104,6 +105,8 @@
             (onChangeName)="onChangeName($event)"
             aria-labelledby="dropdownChangeName"
         ></app-company-devices-edit-name>
+      </div>
+
     </td>
     <td class="company-devices-table__logged-user">
         <div class="qt-df qt-fd-c">
@@ -214,12 +217,12 @@
             [ngbTooltip]="tipDeviceDetail"
         ></div>
     </td>
-    <td
-        class="company-devices-table__connect"
+    <td class="company-devices-table__connect">
+      <div
         ngbDropdown
         container="body"
         placement="bottom-right"
-    >
+      >
         <ng-template
             #tipRemoteAccess
             class="tooltip"
@@ -242,7 +245,7 @@
             ngbDropdownToggle
         >
             <div ngbDropdownMenu>
-                <ul>
+                <ul class="qt-dropdown-menu">
                     <li
                         (click)="remoteAccess('CSS')"
                         ngbDropdownItem
@@ -301,7 +304,7 @@
                 *ngIf="device.type === 'workstation' && device.online && getPermissions('REMOTE_CONNECTIONS')"
                 ngbDropdownMenu
             >
-                <ul>
+                <ul class="qt-dropdown-menu">
                     <li
                         (click)="remoteAccess('CSS')"
                         ngbDropdownItem
@@ -317,6 +320,7 @@
                 </ul>
             </div>
         </div>
+      </div>
     </td>
     <td class="company-devices-table__menu">
         <div class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"></div>

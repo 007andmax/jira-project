@@ -262,9 +262,8 @@
     padding-left: 16px;
     padding-right: 16px;
   }
-  input.company-device-edit-name__input {
-    &::placeholder {
-      color: #4f5f79;
-    }
-  }
+}
+
+.device-type-dropdown {
+  transform: translateX(-10px);
 }
