@@ -11,7 +11,7 @@ import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 import { TicketValidate } from '../class/ticket-validate';
 import { UploadAreaComponent } from '../../../shared/upload-area/upload-area.component';
 import { NotificationStateService } from '../../../shared/notification/services/notification-state.service';
-import { DevicesStateService } from 'src/ng2/app/states/devices/devices-sate.service';
+import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.service';
 
 
 

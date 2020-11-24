@@ -6,7 +6,7 @@ import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
 import { FormGroup } from "@angular/forms";
 import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
 import { DevicesRecurringTicketsStateService } from './services/devices-recurring-tickets-state.service';
-import { DevicesStateService } from 'src/ng2/app/states/devices/devices-sate.service';
+import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.service';
 
 
 @Component({

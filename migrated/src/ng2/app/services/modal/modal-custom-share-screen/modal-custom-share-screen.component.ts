@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DownloadAgentService } from 'src/ng2/app/components/companies/download-agent/services/download-agent.service';
-import { DevicesStateService } from 'src/ng2/app/states/devices/devices-sate.service';
+import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({

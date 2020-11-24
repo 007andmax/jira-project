@@ -5,7 +5,7 @@ import { setUpLocationSync } from '@angular/router/upgrade';
 import { UsersService } from "./services/users/users.service";
 import { WebsocketService } from "./services/websocket/websocket.service";
 import { UsersStateService } from './states/users/users-state.service';
-import { DevicesStateService } from './states/devices/devices-sate.service';
+import { DevicesStateService } from './states/devices/devices-state.service';
 import { CompaniesStateService } from './states/company/companies-state.service';
 import { AppService } from './states/app/app.service';
 import { TaxesStateService } from './states/taxes/taxes-state.service';

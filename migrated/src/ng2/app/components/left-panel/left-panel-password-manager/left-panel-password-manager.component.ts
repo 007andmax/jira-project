@@ -12,7 +12,7 @@ import { GadgetsService } from "../../../services/gadgets/gadgets.service";
 import { ISubscription } from "rxjs-compat/Subscription";
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
-import { DevicesStateService } from 'src/ng2/app/states/devices/devices-sate.service';
+import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.service';
 
 /**
  * Left panel password manager component

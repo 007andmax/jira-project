@@ -7,7 +7,7 @@ import { StatusColor } from '../../../left-panel/left-panel-tickets/tickets-stat
 import { TicketsColor } from '../../../left-panel/left-panel-tickets/tickets-status/class/tickets-color';
 import { CurrentUser } from 'src/ng2/class/current-user/current-user';
 import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
-import { DevicesStateService } from 'src/ng2/app/states/devices/devices-sate.service';
+import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.service';
 import { TicketsPermissionsService } from './services/tickets-permissions.service';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { TicketsListService } from '../services/tickets-list.service';

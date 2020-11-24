@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DevicesStateService } from './devices-sate.service';
+import { DevicesStateService } from './devices-state.service';
 
 describe('DevicesStateService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

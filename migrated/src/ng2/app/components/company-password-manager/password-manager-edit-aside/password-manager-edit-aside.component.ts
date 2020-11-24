@@ -17,7 +17,7 @@ import { PermissionsService } from "../../../services/permissions/permissions.se
 import { ApiPasswordManagerService } from "../../../services/password-manager/api-password-manager.service";
 
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
-import { DevicesStateService } from 'src/ng2/app/states/devices/devices-sate.service';
+import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.service';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 
 /**

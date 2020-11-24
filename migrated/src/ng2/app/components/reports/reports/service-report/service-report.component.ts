@@ -8,7 +8,7 @@ import * as moment from "moment";
 import { ServiceReports } from '../../class/service-reports';
 import { ServiceReportsItem } from '../../class/service-reports-item';
 import { ReportsStateService } from 'src/ng2/app/states/reports/reports-state.service';
-import { DevicesStateService } from 'src/ng2/app/states/devices/devices-sate.service';
+import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.service';
 import { isEmbeddedView } from '@angular/core/src/view/util';
 
 @Component({

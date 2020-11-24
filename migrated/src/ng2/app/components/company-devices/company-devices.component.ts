@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DevicesService } from '../../services/devices/devices.service';
 import { DevicesRealTimeService } from '../../states/devices/devices-real-time.service';
-import { DevicesStateService } from '../../states/devices/devices-sate.service';
+import { DevicesStateService } from '../../states/devices/devices-state.service';
 import { Device } from './class/device';
 import { DeviceCompany } from './class/device-company';
 

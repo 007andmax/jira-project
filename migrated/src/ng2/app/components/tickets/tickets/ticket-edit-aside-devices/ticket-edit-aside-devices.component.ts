@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ElementRef, OnDestroy } from '@angular/core';
-import { DevicesStateService } from 'src/ng2/app/states/devices/devices-sate.service';
+import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.service';
 import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ModalQuoteComponent } from 'src/ng2/app/services/modal/modal-quote/modal-quote.component';

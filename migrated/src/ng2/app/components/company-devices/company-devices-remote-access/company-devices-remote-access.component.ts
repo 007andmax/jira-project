@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
 import { ConstantsStateService } from 'src/ng2/app/states/constants/constants-state.service';
-import { DevicesStateService } from 'src/ng2/app/states/devices/devices-sate.service';
+import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.service';
 import { Device } from '../class/device';
 import { DeviceCompany } from '../class/device-company';
 

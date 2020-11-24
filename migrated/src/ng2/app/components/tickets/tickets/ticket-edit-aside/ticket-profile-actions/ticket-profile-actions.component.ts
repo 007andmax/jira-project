@@ -3,7 +3,7 @@ import { TicketsPermissionsService } from '../services/tickets-permissions.servi
 import { CurrentUser } from 'src/ng2/class/current-user/current-user';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { TicketProfile } from '../../class/ticket-profile';
-import { DevicesStateService } from 'src/ng2/app/states/devices/devices-sate.service';
+import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.service';
 import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 import { NotificationStateService } from 'src/ng2/app/components/shared/notification/services/notification-state.service';
 import { ConfirmStateService } from 'src/ng2/app/components/shared/confirm/services/confirm-state.service';
