@@ -5,6 +5,7 @@
                 <input
                     type="checkbox"
                     [(ngModel)]="device.selected"
+                    (change)="onSelectDevice()"
                 >
                 <span></span>
             </label>

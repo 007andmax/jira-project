@@ -7,7 +7,11 @@
                     <th class="company-devices-table__check">
                         <div class="d-f">
                             <label class="qt-checkbox">
-                                <input type="checkbox">
+                                <input
+                                    type="checkbox"
+                                    [(ngModel)]="selectAllDevices"
+                                    (change)="toogleDevices()"
+                                >
                                 <span></span>
                             </label>
                         </div>
@@ -49,18 +53,9 @@
                         >
                             <app-company-devices-item
                                 [device]="item"
-                                (onChangeSelect)="onChangeSelect"
+                                (onChangeSelect)="onChangeSelect()"
                             ></app-company-devices-item>
                         </ng-template>
-
-
-
-
-
-
-
-
-
                         <!-- <tr class="--selected">
                             <td class="company-devices-table__check">
                                 <div class="d-f">
@@ -505,6 +500,12 @@
                     </tbody>
                 </table>
             </div>
+
+
+
+
+
+
 
 
 

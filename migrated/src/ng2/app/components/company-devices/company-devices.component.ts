@@ -12,6 +12,7 @@ import { DeviceCompany } from './class/device-company';
 })
 export class CompanyDevicesComponent implements OnInit {
   devices: Array<DeviceCompany> = [];
+  selectAllDevices: boolean = false;
   constructor(private devicesStateService: DevicesStateService,
     private devicesService: DevicesService,
     private devicesRealTimeService: DevicesRealTimeService) { }
@@ -66,6 +67,16 @@ export class CompanyDevicesComponent implements OnInit {
           }
         }
       }
+    })
+  }
+  onChangeSelect() {
+    let find = this.devices.find(item => !item.selected);
+    this.selectAllDevices = (find) ? false : true;
+  }
+  toogleDevices() {
+    console.log("selectAllDevices", this.selectAllDevices);
+    this.devices.forEach(item => {
+      item.selected = (this.selectAllDevices) ? true : false;
     })
   }
   public trackById(index, item) {

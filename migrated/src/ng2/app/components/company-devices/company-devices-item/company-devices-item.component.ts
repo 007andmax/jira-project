@@ -17,7 +17,7 @@ import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.se
 export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
   @Input() device: DeviceCompany;
   timer: any = null;
-
+  @Output() onChangeSelect = new EventEmitter();
   constructor(private modalService: NgbModal,
     private devicesService: DevicesService,
     private usersStateService: UsersStateService,
@@ -39,9 +39,12 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
     }, 1000);
 
   }
+  onSelectDevice() {
+    this.onChangeSelect.emit(null);
+  }
   remoteAccess(connectionType) {
     console.log("this.device", this.device);
-    const modalRef = this.modalService.open(CompanyDevicesRemoteAccessComponent, { windowClass: 'quote-send-modal' });
+    const modalRef = this.modalService.open(CompanyDevicesRemoteAccessComponent, { windowClass: 'device-send-modal' });
     modalRef.componentInstance.connectionType = connectionType;
     modalRef.componentInstance.device = this.device;
     modalRef.componentInstance.companyId = this.device.companyId;
