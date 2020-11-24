@@ -62,6 +62,8 @@
     <td
         class="company-devices-table__device-name"
         ngbDropdown
+        container="body"
+        placement="bottom-left"
         (openChange)="changeNameDP.onOpenDropDown($event)"
     >
         <div class="qt-df qt-fd-c">
@@ -69,6 +71,7 @@
                 <span
                     class="name-text"
                     [textContent]="device.label || device.hostName || device.ip"
+                    ngbDropdownAnchor
                 ></span>
                 <ng-template
                     #tipEditDevice
@@ -81,6 +84,7 @@
                     container="body"
                     [ngbTooltip]="tipEditDevice"
                     class="ml-8 qt-sz-24 icon__edit qt-ic-c device-name-edit-marker"
+                    id="dropdownChangeName"
                     ngbDropdownToggle
                 ></div>
             </div>
@@ -96,6 +100,8 @@
             ngbDropdownMenu
             #changeNameDP
             class="company-device-edit-name"
+            (onChangeName)="onChangeName($event)"
+            aria-labelledby="dropdownChangeName"
         ></app-company-devices-edit-name>
     </td>
     <td class="company-devices-table__logged-user">

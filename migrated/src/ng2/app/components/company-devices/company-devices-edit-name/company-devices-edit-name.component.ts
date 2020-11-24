@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
 import { DeviceCompany } from '../class/device-company';
 
@@ -10,15 +10,15 @@ import { DeviceCompany } from '../class/device-company';
 export class CompanyDevicesEditNameComponent implements OnInit {
   label: string;
   @Input() device: DeviceCompany;
-
+  @Output() onChangeName = new EventEmitter();
   constructor(private devicesService: DevicesService,) { }
 
   ngOnInit() {
 
   }
-  onChangeName() {
+  changeName() {
     if (this.label.length > 0) this.devicesService.setIcon(this.device.getDataForEditLabel(this.label)).subscribe(data => {
-
+      this.onChangeName.emit(this.label);
     })
   }
   public onOpenDropDown(open) {

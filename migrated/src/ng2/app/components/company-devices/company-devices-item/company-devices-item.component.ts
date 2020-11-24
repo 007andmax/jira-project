@@ -7,6 +7,7 @@ import * as moment from "moment";
 import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
 import { PermissionsService } from 'src/ng2/app/services/permissions/permissions.service';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
+import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.service';
 
 @Component({
   selector: 'app-company-devices-item',
@@ -21,6 +22,7 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
     private devicesService: DevicesService,
     private usersStateService: UsersStateService,
     private permissionsService: PermissionsService,
+    private devicesStateService: DevicesStateService,
     public cd: ChangeDetectorRef,) { }
 
 
@@ -50,7 +52,8 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
   }
   setIcon(iconName) {
     this.devicesService.setIcon(this.device.getDataForEditIcon(iconName)).subscribe(data => {
-
+      this.device.setIconName(iconName);
+      this.devicesStateService.updateLabelIcon(this.device);
     })
   }
   isLabel() {
@@ -69,7 +72,10 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
       minutes: minutes,
     }
   }
-
+  onChangeName(data) {
+    this.device.setLabel(data);
+    this.devicesStateService.updateLabelIcon(this.device);
+  }
   returnTimeFormatUpTime(time) {
     let days = 0;
     let hours = 0;

@@ -6,6 +6,7 @@ import { DevicesRealTimeService } from './devices-real-time.service';
 import { DeviceUpdate } from './class/device-update';
 import * as moment from "moment";
 import { Device } from '../../components/company-devices/class/device';
+import { DeviceCompany } from '../../components/company-devices/class/device-company';
 
 @Injectable({
   providedIn: 'root'
@@ -141,6 +142,11 @@ export class DevicesStateService {
     var splittedArray = timeString.split(':');
     return splittedArray[2] * 1000 + splittedArray[1] * 60000 + splittedArray[0] * 3600000
   };
+  public updateLabelIcon(device: DeviceCompany) {
+    let index = this.allDevices[device.companyId].findIndex(item => item.id === device.id);
+    this.allDevices[device.companyId][index].label = device.label;
+    this.allDevices[device.companyId][index].iconName = device.iconName;
+  }
   public onInitLaunchRemoteApp(sessionId) {
     this.onLaunchRemoteApp.emit(sessionId);
   }

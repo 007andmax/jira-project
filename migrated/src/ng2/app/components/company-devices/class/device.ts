@@ -38,4 +38,10 @@ export class Device {
             this.timing.offline = (time - moment(this.offlineAt).valueOf());
         }
     }
+    public setLabel(data) {
+        this.label = data;
+    }
+    public setIconName(data) {
+        this.iconName = data;
+    }
 }
