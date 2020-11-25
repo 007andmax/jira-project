@@ -39,8 +39,14 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
       })
     }
     this.devicesStateService.getOnDevices().subscribe(data => {
-      let devices = data[companyId].map(item => new DeviceCompany(item, companyId));
-      this.devices = devices;
+      this.devices.forEach(item => {
+        let find = data[companyId].find(device => device.id === item.id);
+        if (find) {
+          item.update(find);
+        } else {
+          this.devices.push(new DeviceCompany(item, companyId));
+        }
+      })
       console.log("this.devices", this.devices);
     })
     this.devicesRealTimeService.oneTimeConnectionArray.subscribe(newChange => {
@@ -81,6 +87,37 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
+
+    let getOnUpdateAgentActivityStatus = this.devicesStateService.getOnUpdateAgentActivityStatus().subscribe(newChange => {
+      var isCurrentCompany = this.devicesStateService.getCompanyIdByAgentId(newChange.data.agentId) === companyId;
+      if (newChange.data && newChange.data.statuses && newChange.data.statuses.hasOwnProperty('Idle')) {
+        if (isCurrentCompany) {
+          for (var i = 0; i < this.devices.length; i++) {
+            if (this.devices[i].agentId === newChange.data.agentId) {
+              if (newChange.data.statuses.Idle) {
+                this.devices[i].timing.idle = this.devicesStateService.getMillisecondsFromTimeString(newChange.data.statuses.Idle);
+              } else {
+                this.devices[i].timing.idle = null;
+              }
+              break;
+            }
+          }
+        }
+
+      } else if (newChange.data && newChange.data.statuses && newChange.data.statuses.hasOwnProperty('NoRestart') && newChange.data.statuses.hasOwnProperty('Online')) {
+        if (isCurrentCompany) {
+          for (var i = 0; i < this.devices.length; i++) {
+            if (this.devices[i].agentId === newChange.data.agentId) {
+              this.devices[i].timing.noRestart = this.devicesStateService.getMillisecondsFromTimeString(newChange.data.statuses.NoRestart);
+              this.devices[i].timing.online = this.devicesStateService.getMillisecondsFromTimeString(newChange.data.statuses.Online);
+              this.devices[i].timing.uptimeForOrdering = this.devicesStateService.getMillisecondsFromTimeString(newChange.data.statuses.Online);
+              break;
+            }
+          }
+        }
+      }
+    })
+    this.sub.add(getOnUpdateAgentActivityStatus);
   }
   onRemoveAgents() {
     let len = this.devices.filter(item => item.selected).length;

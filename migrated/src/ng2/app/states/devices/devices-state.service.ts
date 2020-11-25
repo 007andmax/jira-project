@@ -16,6 +16,7 @@ export class DevicesStateService {
   devicesForReboot: Array<DeviceCompany> = [];
   devicesForRemove: Array<DeviceCompany> = [];
   devicesForShutDown: Array<DeviceCompany> = [];
+  onUpdateAgentActivityStatus: EventEmitter<any> = new EventEmitter();
   onGetDevices: EventEmitter<any> = new EventEmitter();
   onRemoveConnecion: EventEmitter<any> = new EventEmitter();
   onLaunchRemoteApp: EventEmitter<any> = new EventEmitter();
@@ -72,37 +73,7 @@ export class DevicesStateService {
       if (newChange.action === 'REMOTE_CONNECTION') {
         this.onInitLaunchRemoteApp(newChange.data.sessionId);
       }
-      if (newChange.action === 'AGENT_ACTIVITY_STATUS') {
-        var companyId = this.getCompanyIdByAgentId(newChange.data.agentId);
-        if (newChange.data && newChange.data.statuses && newChange.data.statuses.hasOwnProperty('Idle')) {
-          if (companyId) {
-            for (var i = 0; i < this.allDevices[companyId].length; i++) {
-              if (this.allDevices[companyId][i].agentId === newChange.data.agentId) {
-                if (newChange.data.statuses.Idle) {
-                  this.allDevices[companyId][i].timing.idle = this.getMillisecondsFromTimeString(newChange.data.statuses.Idle);
-                } else {
-                  this.allDevices[companyId][i].timing.idle = null;
-                }
-                break;
-              }
-            }
-          }
-
-        } else if (newChange.data && newChange.data.statuses && newChange.data.statuses.hasOwnProperty('NoRestart') && newChange.data.statuses.hasOwnProperty('Online')) {
-
-          for (var i = 0; i < this.allDevices[companyId].length; i++) {
-            if (companyId) {
-              if (this.allDevices[companyId][i].agentId === newChange.data.agentId) {
-                this.allDevices[companyId][i].timing.noRestart = this.getMillisecondsFromTimeString(newChange.data.statuses.NoRestart);
-                this.allDevices[companyId][i].timing.online = this.getMillisecondsFromTimeString(newChange.data.statuses.Online);
-                this.allDevices[companyId][i].timing.uptimeForOrdering = this.getMillisecondsFromTimeString(newChange.data.statuses.Online);
-                break;
-              }
-            }
-          }
-        }
-
-      }
+      if (newChange.action === 'AGENT_ACTIVITY_STATUS') this.onInitUpdateAgentActivityStatus(newChange);
       if (newChange.action === 'DEVICE_INSTALLED') {
         let parsedData = JSON.parse(newChange.data.value);
         parsedData.device.userName = newChange.data.userName;
@@ -125,6 +96,12 @@ export class DevicesStateService {
       }
       this.onInitGetDevices(this.allDevices);
     })
+  }
+  public onInitUpdateAgentActivityStatus(data) {
+    this.onUpdateAgentActivityStatus.emit(data);
+  }
+  public getOnUpdateAgentActivityStatus() {
+    return this.onUpdateAgentActivityStatus;
   }
   getCompanyIdByAgentId(value) {
     if (value) {

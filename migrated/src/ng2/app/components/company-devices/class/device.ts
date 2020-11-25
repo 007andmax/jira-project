@@ -44,4 +44,26 @@ export class Device {
     public setIconName(data) {
         this.iconName = data;
     }
+    public update(data) {
+        this.agentId = data.agentId;
+        this.agentVersion = data.agentVersion;
+        this.antivirus = data.antivirus;
+        this.createdAt = data.createdAt;
+        this.externalIp = data.externalIp;
+        this.hostName = data.hostName;
+        this.iconName = data.iconName;
+        this.id = data.id;
+        this.ip = data.ip;
+        this.isRegular = data.isRegular;
+        this.label = data.label;
+        this.master = data.master;
+        this.offlineAt = data.offlineAt;
+        this.online = data.online;
+        this.system = data.system;
+        this.type = data.type;
+        this.uninstalledAt = data.uninstalledAt;
+        this.updatedAt = data.updatedAt;
+        this.userName = data.userName;
+        this.remoteSessions = data.remoteSessions;
+    }
 }
