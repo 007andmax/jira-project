@@ -118,8 +118,10 @@ export class DevicesStateService {
           } else {
             this.allDevices[newChange.data.clientCompanyId].push(parsedData.device);
           }
-
         }
+        this.devicesService.sendDeviceStatusRequest(newChange.data.clientCompanyId, [parsedData.device.agentId], ["idle", "norestart", "online"]).subscribe(res => {
+          console.log("res", res);
+        })
       }
       this.onInitGetDevices(this.allDevices);
     })

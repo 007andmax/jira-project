@@ -40,14 +40,6 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     }
     this.devicesStateService.getOnDevices().subscribe(data => {
       let devices = data[companyId].map(item => new DeviceCompany(item, companyId));
-      devices.forEach(item => {
-        let find = this.devices.find(device => device.agentId === item.agentId);
-        if (find && find.agentId) {
-          this.devicesService.sendDeviceStatusRequest(companyId, [find.agentId], ["idle", "norestart", "online"]).subscribe(res => {
-            console.log("res", res);
-          })
-        }
-      });
       this.devices = devices;
       console.log("this.devices", this.devices);
     })
