@@ -13,6 +13,8 @@ import { DeviceCompany } from '../../components/company-devices/class/device-com
 })
 export class DevicesStateService {
   allDevices = null;
+  devicesForReboot: Array<DeviceCompany> = [];
+  devicesForShutDown: Array<DeviceCompany> = [];
   onGetDevices: EventEmitter<any> = new EventEmitter();
   onRemoveConnecion: EventEmitter<any> = new EventEmitter();
   onLaunchRemoteApp: EventEmitter<any> = new EventEmitter();
@@ -68,9 +70,6 @@ export class DevicesStateService {
       }
       if (newChange.action === 'REMOTE_CONNECTION') {
         this.onInitLaunchRemoteApp(newChange.data.sessionId);
-      }
-      if (newChange.action === 'TEST_CREDENTIALS') {
-
       }
       if (newChange.action === 'AGENT_ACTIVITY_STATUS') {
         var companyId = this.getCompanyIdByAgentId(newChange.data.agentId);
@@ -142,6 +141,18 @@ export class DevicesStateService {
     var splittedArray = timeString.split(':');
     return splittedArray[2] * 1000 + splittedArray[1] * 60000 + splittedArray[0] * 3600000
   };
+  public setDevicesForShutDown(data) {
+    this.devicesForShutDown = data;
+  }
+  public getDevicesForShutDown() {
+    return this.devicesForShutDown;
+  }
+  public getDevicesForReboot() {
+    return this.devicesForReboot;
+  }
+  public setDevicesForReboot(data) {
+    this.devicesForReboot = data;
+  }
   public updateLabelIcon(device: DeviceCompany) {
     let index = this.allDevices[device.companyId].findIndex(item => item.id === device.id);
     this.allDevices[device.companyId][index].label = device.label;

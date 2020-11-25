@@ -1,5 +1,9 @@
 <div class="page-list company-devices-page">
-    <app-company-devices-header [devices]="devices"></app-company-devices-header>
+    <app-company-devices-header
+        [devices]="devices"
+        [isOfflineDeviceSelected]="isOfflineDeviceSelected"
+        (onTurnOff)="onTurnOff($event)"
+    ></app-company-devices-header>
     <div class="sticky-list-table-header company-devices-list-table-header">
         <table class="qt-table-modern company-devices-table">
             <thead>
@@ -54,6 +58,7 @@
                             <app-company-devices-item
                                 [device]="item"
                                 (onChangeSelect)="onChangeSelect()"
+                                (onTurnOff)="onTurnOff($event)"
                             ></app-company-devices-item>
                         </ng-template>
                         <!-- <tr class="--selected">
@@ -500,6 +505,9 @@
                     </tbody>
                 </table>
             </div>
+
+
+
 
 
 

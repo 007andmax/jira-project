@@ -60,53 +60,51 @@
             ></div>
         </div>
     </td>
-    <td
-      class="company-devices-table__device-name"
-    >
-      <div
-        ngbDropdown
-        container="body"
-        placement="bottom-left"
-        (openChange)="changeNameDP.onOpenDropDown($event)">
-        <div class="qt-df qt-fd-c">
-          <div class="company-devices-table-device-name qt-ff-gm qt-df qt-ai-c">
-              <span
-                  class="name-text"
-                  [textContent]="device.label || device.hostName || device.ip"
-                  ngbDropdownAnchor
-              ></span>
-              <ng-template
-                  #tipEditDevice
-                  class="tooltip"
-              >
-                  Edit Device Name
-              </ng-template>
-              <div
-                  placement="top"
-                  container="body"
-                  [ngbTooltip]="tipEditDevice"
-                  class="ml-8 qt-sz-24 icon__edit qt-ic-c device-name-edit-marker"
-                  id="dropdownChangeName"
-                  ngbDropdownToggle
-              ></div>
-          </div>
-          <span
-              class="company-device-desc"
-              *ngIf="isLabel()"
-              [textContent]="device.hostName || device.ip"
-          ></span>
-        </div>
-        <app-company-devices-edit-name
-            [device]="device"
+    <td class="company-devices-table__device-name">
+        <div
+            ngbDropdown
             container="body"
-            ngbDropdownMenu
-            #changeNameDP
-            class="company-device-edit-name"
-            (onChangeName)="onChangeName($event)"
-            aria-labelledby="dropdownChangeName"
-        ></app-company-devices-edit-name>
-      </div>
-
+            placement="bottom-left"
+            (openChange)="changeNameDP.onOpenDropDown($event)"
+        >
+            <div class="qt-df qt-fd-c">
+                <div class="company-devices-table-device-name qt-ff-gm qt-df qt-ai-c">
+                    <span
+                        class="name-text"
+                        [textContent]="device.label || device.hostName || device.ip"
+                        ngbDropdownAnchor
+                    ></span>
+                    <ng-template
+                        #tipEditDevice
+                        class="tooltip"
+                    >
+                        Edit Device Name
+                    </ng-template>
+                    <div
+                        placement="top"
+                        container="body"
+                        [ngbTooltip]="tipEditDevice"
+                        class="ml-8 qt-sz-24 icon__edit qt-ic-c device-name-edit-marker"
+                        id="dropdownChangeName"
+                        ngbDropdownToggle
+                    ></div>
+                </div>
+                <span
+                    class="company-device-desc"
+                    *ngIf="isLabel()"
+                    [textContent]="device.hostName || device.ip"
+                ></span>
+            </div>
+            <app-company-devices-edit-name
+                [device]="device"
+                container="body"
+                ngbDropdownMenu
+                #changeNameDP
+                class="company-device-edit-name"
+                (onChangeName)="onChangeName($event)"
+                aria-labelledby="dropdownChangeName"
+            ></app-company-devices-edit-name>
+        </div>
     </td>
     <td class="company-devices-table__logged-user">
         <div class="qt-df qt-fd-c">
@@ -218,117 +216,150 @@
         ></div>
     </td>
     <td class="company-devices-table__connect">
-      <div
-        ngbDropdown
-        container="body"
-        placement="bottom-right"
-      >
-        <ng-template
-            #tipRemoteAccess
-            class="tooltip"
-        >
-            Remote Access
-        </ng-template>
         <div
-            *ngIf="device.remoteSessions.length == 0 && device.type !== 'workstation' && device.online && getPermissions('REMOTE_CONNECTIONS')"
-            class="qt-ic-c icon__quick-connect qt-pointer qt-sz-24 qt-bg-contain"
-            placement="top"
-            [ngbTooltip]="tipRemoteAccess"
-            (click)="remoteAccess('PROXY')"
-        >
-        </div>
-        <div
-            *ngIf="device.remoteSessions.length == 0 && device.type === 'workstation' && device.online && getPermissions('REMOTE_CONNECTIONS')"
-            class="qt-ic-c icon__quick-connect qt-pointer qt-sz-24 qt-bg-contain"
-            placement="top"
-            [ngbTooltip]="tipRemoteAccess"
-            ngbDropdownToggle
-        >
-            <div ngbDropdownMenu>
-                <ul class="qt-dropdown-menu">
-                    <li
-                        (click)="remoteAccess('CSS')"
-                        ngbDropdownItem
-                    >
-                        QuickTech Connect
-                    </li>
-                    <li
-                        (click)="remoteAccess('RDP')"
-                        ngbDropdownItem
-                    >
-                        Remote Desktop
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <ng-template
-            #tipConnected
-            class="tooltip"
+            ngbDropdown
+            container="body"
+            placement="bottom-right"
         >
             <ng-template
-                ngFor
-                let-item
-                [ngForOf]="device.remoteSessions"
+                #tipRemoteAccess
+                class="tooltip"
+            >
+                Remote Access
+            </ng-template>
+            <div
+                *ngIf="device.remoteSessions.length == 0 && device.type !== 'workstation' && device.online && getPermissions('REMOTE_CONNECTIONS')"
+                class="qt-ic-c icon__quick-connect qt-pointer qt-sz-24 qt-bg-contain"
+                placement="top"
+                [ngbTooltip]="tipRemoteAccess"
+                (click)="remoteAccess('PROXY')"
+            >
+            </div>
+            <div
+                *ngIf="device.remoteSessions.length == 0 && device.type === 'workstation' && device.online && getPermissions('REMOTE_CONNECTIONS')"
+                class="qt-ic-c icon__quick-connect qt-pointer qt-sz-24 qt-bg-contain"
+                placement="top"
+                [ngbTooltip]="tipRemoteAccess"
+                ngbDropdownToggle
+            >
+                <div ngbDropdownMenu>
+                    <ul class="qt-dropdown-menu">
+                        <li
+                            (click)="remoteAccess('CSS')"
+                            ngbDropdownItem
+                        >
+                            QuickTech Connect
+                        </li>
+                        <li
+                            (click)="remoteAccess('RDP')"
+                            ngbDropdownItem
+                        >
+                            Remote Desktop
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <ng-template
+                #tipConnected
+                class="tooltip"
+            >
+                <ng-template
+                    ngFor
+                    let-item
+                    [ngForOf]="device.remoteSessions"
+                >
+                    <div
+                        class="connected-tooltip-name qt-ff-gm"
+                        [textContent]="getUserName(item.userId)"
+                    ></div>
+                    <div class="connected-tooltip-text">
+                        Connected:
+                        <span *ngIf="returnTimeFormat(item.agentConnectedAt).hours > 0">
+                            {{returnTimeFormat(item.agentConnectedAt ).hours}} hrs
+                        </span>
+                        <span *ngIf="returnTimeFormat(item.agentConnectedAt ).minutes > 0">
+                            {{returnTimeFormat(item.agentConnectedAt ).minutes}} min
+                        </span>
+                    </div>
+                </ng-template>
+            </ng-template>
+            <div
+                *ngIf="device.online && device.remoteSessions.length > 0 && device.type !== 'workstation' && device.online && getPermissions('REMOTE_CONNECTIONS')"
+                placement="top"
+                [ngbTooltip]="tipConnected"
+                class="qt-ic-c icon__connected-device master-agent-icon qt-sz-24"
+                (click)="remoteAccess('PROXY')"
+            ></div>
+            <div
+                *ngIf="device.online && device.remoteSessions.length > 0 && device.type === 'workstation' && device.online && getPermissions('REMOTE_CONNECTIONS')"
+                placement="top"
+                container="body"
+                [ngbTooltip]="tipConnected"
+                class="qt-ic-c icon__connected-device master-agent-icon qt-sz-24"
+                ngbDropdownToggle
             >
                 <div
-                    class="connected-tooltip-name qt-ff-gm"
-                    [textContent]="getUserName(item.userId)"
-                ></div>
-                <div class="connected-tooltip-text">
-                    Connected:
-                    <span *ngIf="returnTimeFormat(item.agentConnectedAt).hours > 0">
-                        {{returnTimeFormat(item.agentConnectedAt ).hours}} hrs
-                    </span>
-                    <span *ngIf="returnTimeFormat(item.agentConnectedAt ).minutes > 0">
-                        {{returnTimeFormat(item.agentConnectedAt ).minutes}} min
-                    </span>
+                    *ngIf="device.type === 'workstation' && device.online && getPermissions('REMOTE_CONNECTIONS')"
+                    ngbDropdownMenu
+                >
+                    <ul class="qt-dropdown-menu">
+                        <li
+                            (click)="remoteAccess('CSS')"
+                            ngbDropdownItem
+                        >
+                            QuickTech Connect
+                        </li>
+                        <li
+                            (click)="remoteAccess('RDP')"
+                            ngbDropdownItem
+                        >
+                            Remote Desktop
+                        </li>
+                    </ul>
                 </div>
-            </ng-template>
-        </ng-template>
-        <div
-            *ngIf="device.online && device.remoteSessions.length > 0 && device.type !== 'workstation' && device.online && getPermissions('REMOTE_CONNECTIONS')"
-            placement="top"
-            [ngbTooltip]="tipConnected"
-            class="qt-ic-c icon__connected-device master-agent-icon qt-sz-24"
-            (click)="remoteAccess('PROXY')"
-        ></div>
-        <div
-            *ngIf="device.online && device.remoteSessions.length > 0 && device.type === 'workstation' && device.online && getPermissions('REMOTE_CONNECTIONS')"
-            placement="top"
-            container="body"
-            [ngbTooltip]="tipConnected"
-            class="qt-ic-c icon__connected-device master-agent-icon qt-sz-24"
-            ngbDropdownToggle
-        >
-            <div
-                *ngIf="device.type === 'workstation' && device.online && getPermissions('REMOTE_CONNECTIONS')"
-                ngbDropdownMenu
-            >
-                <ul class="qt-dropdown-menu">
-                    <li
-                        (click)="remoteAccess('CSS')"
-                        ngbDropdownItem
-                    >
-                        QuickTech Connect
-                    </li>
-                    <li
-                        (click)="remoteAccess('RDP')"
-                        ngbDropdownItem
-                    >
-                        Remote Desktop
-                    </li>
-                </ul>
             </div>
         </div>
-      </div>
     </td>
     <td class="company-devices-table__menu">
-        <div class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"></div>
-        <!-- <ul class="qt-dropdown-menu invoice-items-dropdown">
-                  <li class="pointer"><div class="qt-bg-contain qt-sz-16 qt-mr-8"></div>Restart</li>
-                  <li class="pointer"><div class="qt-bg-contain qt-sz-16 qt-mr-8"></div>Shutdown</li>
-                  <li class="pointer"><div class="qt-bg-contain qt-sz-16 qt-mr-8"></div>Set as Master Agent</li>
-                  <li class="pointer"><div class="icon__remove qt-bg-contain qt-sz-16 qt-mr-8"></div>Remove</li>
-                </ul> -->
+        <div
+            class="company-devices-table__menu-body"
+            ngbDropdown
+            placement="bottom-right"
+            container="body"
+        >
+            <div
+                class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"
+                ngbDropdownToggle
+            ></div>
+            <ul
+                class="qt-dropdown-menu invoice-items-dropdown"
+                ngbDropdownMenu
+            >
+                <li
+                    class="pointer"
+                    (click)="turnOff('reboot')"
+                    ngbDropdownItem
+                >
+                    <div class="qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                    Restart
+                </li>
+                <li
+                    class="pointer"
+                    (click)="turnOff('shutdown')"
+                    ngbDropdownItem
+                >
+                    <div class="qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                    Shutdown
+                </li>
+                <li class="pointer">
+                    <div class="qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                    Set as Master Agent
+                </li>
+                <li class="pointer">
+                    <div class="icon__remove qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                    Remove
+                </li>
+            </ul>
+        </div>
     </td>
 </tr>

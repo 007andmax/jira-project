@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Device } from '../class/device';
 import { DeviceCompany } from '../class/device-company';
 
@@ -9,6 +9,8 @@ import { DeviceCompany } from '../class/device-company';
 })
 export class CompanyDevicesHeaderComponent implements OnInit {
   @Input() devices: Array<DeviceCompany> = [];
+  @Input() isOfflineDeviceSelected: boolean = false;
+  @Output() onTurnOff = new EventEmitter();
   constructor() { }
 
   ngOnInit() {
@@ -16,5 +18,7 @@ export class CompanyDevicesHeaderComponent implements OnInit {
   getCountSelected() {
     return this.devices.filter(item => item.selected).length;
   }
-
+  turnOff(action) {
+    this.onTurnOff.emit(action);
+  }
 }

@@ -9,11 +9,19 @@
             *ngIf="getCountSelected() > 0"
         >
             <div [textContent]="getCountSelected() + ' Devices Selected'"></div>
-            <div class="qt-ml-16 qt-ff-gm qt-df qt-color-info qt-ai-c qt-pointer">
+            <div
+                class="qt-ml-16 qt-ff-gm qt-df qt-color-info qt-ai-c qt-pointer"
+                *ngIf="!isOfflineDeviceSelected"
+                (click)="turnOff('reboot')"
+            >
                 <div class="icon__restart-blue qt-sz-16 qt-ic-c qt-mr-6"></div>
                 <div>Restart</div>
             </div>
-            <div class="qt-ml-16 qt-ff-gm qt-df qt-color-info qt-ai-c qt-pointer">
+            <div
+                class="qt-ml-16 qt-ff-gm qt-df qt-color-info qt-ai-c qt-pointer"
+                *ngIf="!isOfflineDeviceSelected"
+                (click)="turnOff('shutdown')"
+            >
                 <div class="icon__shutdown-blue qt-sz-16 qt-ic-c qt-mr-6"></div>
                 <div>Shutdown</div>
             </div>

@@ -18,6 +18,7 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
   @Input() device: DeviceCompany;
   timer: any = null;
   @Output() onChangeSelect = new EventEmitter();
+  @Output() onTurnOff = new EventEmitter();
   constructor(private modalService: NgbModal,
     private devicesService: DevicesService,
     private usersStateService: UsersStateService,
@@ -91,6 +92,9 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
       hours: hours,
       minutes: minutes,
     }
+  }
+  turnOff(action) {
+    this.onTurnOff.emit(action);
   }
   ngOnDestroy(): void {
     clearInterval(this.timer);

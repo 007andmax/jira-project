@@ -1,7 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
+import { REBOOT_DEVICE, SHUTDOWN_DEVICE } from '../../const/confirm';
 import { DevicesService } from '../../services/devices/devices.service';
 import { DevicesRealTimeService } from '../../states/devices/devices-real-time.service';
 import { DevicesStateService } from '../../states/devices/devices-state.service';
+import { ConfirmComponent } from '../shared/confirm/confirm.component';
+import { ConfirmStateService } from '../shared/confirm/services/confirm-state.service';
 import { Device } from './class/device';
 import { DeviceCompany } from './class/device-company';
 
@@ -10,12 +15,19 @@ import { DeviceCompany } from './class/device-company';
   templateUrl: './company-devices.component.html',
   styleUrls: ['./company-devices.component.scss']
 })
-export class CompanyDevicesComponent implements OnInit {
+export class CompanyDevicesComponent implements OnInit, OnDestroy {
   devices: Array<DeviceCompany> = [];
   selectAllDevices: boolean = false;
+  isOfflineDeviceSelected: boolean = false;
+  sub: Subscription = new Subscription();
   constructor(private devicesStateService: DevicesStateService,
     private devicesService: DevicesService,
+    private confirmStateService: ConfirmStateService,
+    private modalService: NgbModal,
     private devicesRealTimeService: DevicesRealTimeService) { }
+  ngOnDestroy(): void {
+    throw new Error('Method not implemented.');
+  }
 
   ngOnInit() {
     let companyId = localStorage.getItem("company_id");
@@ -39,19 +51,7 @@ export class CompanyDevicesComponent implements OnInit {
       this.devices = devices;
       console.log("this.devices", this.devices);
     })
-    let ONE_TIME_ONLINE = [];
-    let ONE_TIME_OFFLINE = [];
     this.devicesRealTimeService.oneTimeConnectionArray.subscribe(newChange => {
-      if (newChange.action === 'ONE_TIME_ONLINE') {
-        let find = ONE_TIME_ONLINE.find(item => item === newChange.data.id);
-        if (!find) ONE_TIME_ONLINE.push(newChange.data.id);
-        console.log("ONE_TIME_ONLINE", ONE_TIME_ONLINE);
-      }
-      if (newChange.action === 'ONE_TIME_OFFLINE') {
-        let find = ONE_TIME_OFFLINE.find(item => item === newChange.data.id);
-        if (!find) ONE_TIME_OFFLINE.push(newChange.data.id);
-        console.log("ONE_TIME_OFFLINE", ONE_TIME_OFFLINE);
-      }
       if (newChange.action === 'ONE_TIME_CONNECTION_OPEN') {
         for (var i = 0; i < this.devices.length; i++) {
           if (this.devices[i].id === newChange.data.deviceId) {
@@ -68,16 +68,48 @@ export class CompanyDevicesComponent implements OnInit {
         }
       }
     })
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === REBOOT_DEVICE) {
+          this.devicesService.sendPowerAction(companyId, this.devicesStateService.getDevicesForReboot(), 'reboot').subscribe(data => {
+
+          });
+        }
+        if (this.confirmStateService.getConfirmAction() === SHUTDOWN_DEVICE) {
+          this.devicesService.sendPowerAction(companyId, this.devicesStateService.getDevicesForShutDown(), 'shutdown').subscribe(data => {
+
+          });
+        }
+
+      }
+    })
+    this.sub.add(getConfirm);
+  }
+  onTurnOff(action) {
+    if (action === 'reboot') {
+      this.confirmStateService.setConfirmAction(REBOOT_DEVICE);
+      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+      modalRef.componentInstance.message = `Are you sure you want to reboot chosen device?`;
+      this.devicesStateService.setDevicesForReboot(this.devices.filter(item => item.selected));
+    }
+    if (action === 'shutdown') {
+      this.confirmStateService.setConfirmAction(SHUTDOWN_DEVICE);
+      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+      modalRef.componentInstance.message = `Are you sure you want to shutdown chosen device?`;
+      this.devicesStateService.setDevicesForShutDown(this.devices.filter(item => item.selected));
+    }
   }
   onChangeSelect() {
     let find = this.devices.find(item => !item.selected);
     this.selectAllDevices = (find) ? false : true;
+    this.isOfflineDeviceSelected = (this.devices.find(item => item.selected && !item.online)) ? true : false;
   }
   toogleDevices() {
     console.log("selectAllDevices", this.selectAllDevices);
     this.devices.forEach(item => {
       item.selected = (this.selectAllDevices) ? true : false;
     })
+    this.isOfflineDeviceSelected = (this.devices.find(item => item.selected && !item.online)) ? true : false;
   }
   public trackById(index, item) {
     return item.id;
