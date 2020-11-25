@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="8" height="16" viewBox="0 0 8 16">
+    <g fill="none" fill-rule="evenodd">
+        <g fill="#4F5F79">
+            <g>
+                <g>
+                    <g>
+                        <g transform="translate(-1335 -92) translate(905 72) translate(55) translate(375 20) translate(2 1)">
+                            <circle cx="2.001" cy="1.983" r="1.5"/>
+                            <circle cx="2.001" cy="6.983" r="1.5"/>
+                            <circle cx="2.001" cy="11.983" r="1.5"/>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

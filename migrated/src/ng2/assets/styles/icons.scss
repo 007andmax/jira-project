@@ -474,6 +474,32 @@
   &__connected-device {
     background-image: url('assets/img/icons/connected-device.svg');
   }
+  &__more-vertical {
+    background-image: url('assets/img/icons/more-vertical.svg');
+  }
+  &__arrow-right {
+    background-image: url('assets/img/icons/arrow-right.svg');
+  }
+  &.--online, &.--offline {
+    position: relative;
+    &::before {
+      content: '';
+      width: 10px;
+      height: 10px;
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      border: solid 2px #ffffff;
+      background-color: #2ec866;
+      border-radius: 50%;
+    }
+
+  }
+  &.--offline {
+    &::before {
+      background-color: #ff5263;
+    }
+  }
 }
 
 .icn-20 {
@@ -492,4 +518,6 @@
   &.--medium {background-image: url("assets/img/icons/priority-medium.png");}
   &.--low    {background-image: url("assets/img/icons/priority-low.png");}
 }
+
+
 

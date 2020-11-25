@@ -239,6 +239,142 @@
     font-size: 11px;
     color: #ffffff;
   }
+
+  // ASIDE
+  &__aside{
+    background: white;
+    position: fixed;
+    width: 480px;
+    top: 79px;
+    right: 0;
+    border-left: 1px solid #dfe3e8;
+    height: calc(100vh - 79px);
+    z-index: 10;
+    box-shadow: -8px 0 8px 0 rgba(0, 0, 0, 0.05);
+  }
+
+  .company-device-aside {
+    &__menu {
+      position: absolute;
+      right: 100%;
+      top: 0;
+    }
+    &__menu-item {
+      width: 54px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #edf2f6;
+      border: 1px solid #dfe3e8;
+      border-top: none;
+      &.--active {
+        background-color: white;;
+      }
+    }
+    &__header {
+      height: 56px;
+      padding: 16px;
+      background-color: #f9fafb;
+      border-bottom: 1px solid #dfe3e8;
+      color: #364656;
+    }
+    &__more-icon {
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    &__close-icon {
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 24px;
+      margin-right: 8px;
+    }
+    &__arrow-right-icon {
+      height: 56px;
+      width: 48px;
+      border-left: 1px solid #dfe3e8;
+      margin-right: -16px;
+      margin-top: 0px;
+      cursor: pointer;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 24px;
+    }
+    &__subheader {
+      height: 40px;
+      border-bottom: 1px solid #dfe3e8;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+      display: flex;
+    }
+    &__subheader-item {
+      width: 25%;
+      background-size: 16px;
+      background-position: center;
+      height: 100%;
+      background-repeat: no-repeat;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      &.subheader-item-system {
+        background-image: url(/ng2/assets/img/icons/system-gray.svg);
+        &.--active {
+          background-image: url(/ng2/assets/img/icons/system.svg);
+        }
+      }
+      &.subheader-item-network {
+        background-image: url(/ng2/assets/img/icons/network-gray.svg);
+        &.--active {
+          background-image: url(/ng2/assets/img/icons/network.svg);
+        }
+      }
+      &.subheader-item-software {
+        background-image: url(/ng2/assets/img/icons/software-gray.svg);
+        &.--active {
+          background-image: url(/ng2/assets/img/icons/software.svg);
+        }
+      }
+      &.subheader-item-updates {
+        background-image: url(/ng2/assets/img/icons/updates-gray.svg);
+        &.--active {
+          background-image: url(/ng2/assets/img/icons/updates.svg);
+        }
+      }
+      &.--active {
+        border-bottom: 2px solid #16a4fa;
+      }
+    }
+  }
+
+  .sidebar-system, .sidebar-network {
+    &__title {
+      font-size: 11px;
+      line-height: 1.45;
+      color: #364656;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+    }
+    &__info {
+      display: flex;;
+      margin-bottom: 12px;
+    }
+    &__info-title {
+      font-size: 12px;
+      line-height: 1.33;
+      color: #364656;
+      width: 132px;
+      font-family: Graphik-Medium, sans-serif;
+    }
+    &__info-text {
+      font-size: 12px;
+      line-height: 1.33;
+      color: #4f5f79;
+    }
+  }
+
+  .sidebar-network {
+    &__info-title {
+      width: 200px;
+    }
+  }
 }
 
 .dropdown-menu.company-device-edit-name {
