@@ -480,6 +480,9 @@
   &__arrow-right {
     background-image: url('assets/img/icons/arrow-right.svg');
   }
+  &__collapse {
+    background-image: url('assets/img/icons/collapse.svg');
+  }
   &.--online, &.--offline {
     position: relative;
     &::before {

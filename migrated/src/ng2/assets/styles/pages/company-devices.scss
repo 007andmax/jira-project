@@ -342,6 +342,26 @@
         border-bottom: 2px solid #16a4fa;
       }
     }
+    &__body {
+      height: calc(100% - 96px);
+      overflow: auto;
+    }
+    &__info-block {
+      .company-device-aside__expand-collapse {
+        background-size: 16px;
+        cursor: pointer;
+        background-image: url(/ng2/assets/img/icons/collapse.svg);
+      }
+      &.--collapsed {
+        max-height: 13px;
+        overflow-y: hidden;
+        .company-device-aside__expand-collapse {
+          background-image: url(/ng2/assets/img/icons/expand.svg);
+        }
+      }
+
+    }
+
   }
 
   .sidebar-system, .sidebar-network {
