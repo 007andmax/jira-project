@@ -47,16 +47,13 @@ export class DevicesStateService {
         console.log("this.allDevices[newChange.data.clientCompanyId]", this.allDevices[newChange.data.clientCompanyId]);
       }
       if (newChange.action === 'DEVICE_ONLINE') {
-
         let deviceIndex = this.allDevices[newChange.data.clientCompanyId].findIndex(item => item.id === newChange.data.value);
         if (deviceIndex > -1) {
           this.allDevices[newChange.data.clientCompanyId][deviceIndex].online = true;
           this.allDevices[newChange.data.clientCompanyId][deviceIndex].userName = newChange.data.userName;
-
         }
       }
       if (newChange.action === 'DEVICE_OFFLINE') {
-
         let deviceIndex = this.allDevices[newChange.data.clientCompanyId].findIndex(item => item.id === newChange.data.value);
         if (deviceIndex > -1) {
           this.allDevices[newChange.data.clientCompanyId][deviceIndex].online = false;
@@ -64,7 +61,6 @@ export class DevicesStateService {
           var newValue = moment(Date.now()).valueOf();
           this.allDevices[newChange.data.clientCompanyId][deviceIndex].timing.offline = (Date.now() - newValue);
           this.allDevices[newChange.data.clientCompanyId][deviceIndex].timing.uptimeForOrdering = (Date.now() - newValue);
-
         }
       }
       if (newChange.action === 'REMOTE_CONNECTION') {
@@ -94,7 +90,7 @@ export class DevicesStateService {
           console.log("res", res);
         })
       }
-      this.onInitGetDevices(this.allDevices);
+      // this.onInitGetDevices(this.allDevices);
     })
   }
   public onInitUpdateAgentActivityStatus(data) {
