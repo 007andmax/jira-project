@@ -42,12 +42,7 @@ export class DevicesStateService {
       console.log("newChange", newChange);
       if (newChange.action === 'DEVICE_UNINSTALLED') {
         let deviceIndex = this.allDevices[newChange.data.clientCompanyId].findIndex(item => item.id === newChange.data.value);
-        if (newChange.data.uninstalledAt !== "") {
-          if (deviceIndex > -1) this.allDevices[newChange.data.clientCompanyId][deviceIndex].uninstalledAt = newChange.data.uninstalledAt;
-
-        } else {
-          if (deviceIndex > -1) this.allDevices[newChange.data.clientCompanyId].splice(deviceIndex, 1);
-        }
+        if (deviceIndex > -1) this.allDevices[newChange.data.clientCompanyId].splice(deviceIndex, 1);
       }
       if (newChange.action === 'DEVICE_ONLINE') {
 
@@ -80,15 +75,16 @@ export class DevicesStateService {
         if (!this.allDevices[newChange.data.clientCompanyId]) {
           let companyId = newChange.data.clientCompanyId;
           this.allDevices[companyId] = [];
-          this.allDevices[companyId].push(parsedData.device);
+          this.allDevices[companyId].push(new Device(parsedData.device));
         } else {
-          let deviceIndex = this.allDevices[newChange.data.clientCompanyId].findIndex(item => item.id === parsedData.device.id);
-          parsedData.device.uninstalledAt = '';
-          if (deviceIndex > -1) {
-            this.allDevices[newChange.data.clientCompanyId][deviceIndex] = new Device(parsedData.device);
-          } else {
-            this.allDevices[newChange.data.clientCompanyId].push(new Device(parsedData.device));
-          }
+          this.allDevices[newChange.data.clientCompanyId].push(new Device(parsedData.device));
+          /* let deviceIndex = this.allDevices[newChange.data.clientCompanyId].findIndex(item => item.id === parsedData.device.id);
+           parsedData.device.uninstalledAt = '';
+           if (deviceIndex > -1) {
+             this.allDevices[newChange.data.clientCompanyId][deviceIndex] = new Device(parsedData.device);
+           } else {
+             this.allDevices[newChange.data.clientCompanyId].push(new Device(parsedData.device));
+           }*/
         }
         this.devicesService.sendDeviceStatusRequest(newChange.data.clientCompanyId, [parsedData.device.agentId], ["idle", "norestart", "online"]).subscribe(res => {
           console.log("res", res);

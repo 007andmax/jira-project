@@ -41,7 +41,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     this.devicesStateService.getOnDevices().subscribe(data => {
       this.devices.forEach(item => {
         let findIndex = data[companyId].findIndex(device => device.id === item.id);
-        if (findIndex) {
+        if (findIndex > -1) {
           item.update(data[companyId][findIndex]);
         } else {
           if (data[companyId].length > this.devices.length) this.devices.push(new DeviceCompany(data[companyId][findIndex], companyId));
