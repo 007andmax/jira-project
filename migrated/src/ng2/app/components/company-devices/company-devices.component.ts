@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
-import { REBOOT_DEVICE, SHUTDOWN_DEVICE } from '../../const/confirm';
+import { REBOOT_DEVICE, REMOVE_DEVICES, SHUTDOWN_DEVICE } from '../../const/confirm';
 import { DevicesService } from '../../services/devices/devices.service';
 import { DevicesRealTimeService } from '../../states/devices/devices-real-time.service';
 import { DevicesStateService } from '../../states/devices/devices-state.service';
@@ -80,10 +80,22 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
 
           });
         }
+        if (this.confirmStateService.getConfirmAction() === REMOVE_DEVICES) {
+          this.devicesService.sendUninstallAgentRequest(companyId, this.devicesStateService.getDevicesForRemove().map(item => item.id)).subscribe(data => {
+            this.onChangeSelect();
+          });
+        }
 
       }
     })
     this.sub.add(getConfirm);
+  }
+  onRemoveAgents() {
+    let len = this.devices.filter(item => item.selected).length;
+    this.confirmStateService.setConfirmAction(REMOVE_DEVICES);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    modalRef.componentInstance.message = `Do you want to remove ${(len === 1) ? "1 device" : len + " devices"}?`;
+    this.devicesStateService.setDevicesForRemove(this.devices.filter(item => item.selected));
   }
   onTurnOff(action) {
     if (action === 'reboot') {

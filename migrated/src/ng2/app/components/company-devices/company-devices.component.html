@@ -3,6 +3,7 @@
         [devices]="devices"
         [isOfflineDeviceSelected]="isOfflineDeviceSelected"
         (onTurnOff)="onTurnOff($event)"
+        (onRemoveAgents)="onRemoveAgents()"
     ></app-company-devices-header>
     <div class="sticky-list-table-header company-devices-list-table-header">
         <table class="qt-table-modern company-devices-table">
@@ -504,6 +505,7 @@
                     </tbody>
                 </table>
             </div>
+
 
 
 

@@ -11,6 +11,7 @@ export class CompanyDevicesHeaderComponent implements OnInit {
   @Input() devices: Array<DeviceCompany> = [];
   @Input() isOfflineDeviceSelected: boolean = false;
   @Output() onTurnOff = new EventEmitter();
+  @Output() onRemoveAgents = new EventEmitter();
   constructor() { }
 
   ngOnInit() {
@@ -20,5 +21,8 @@ export class CompanyDevicesHeaderComponent implements OnInit {
   }
   turnOff(action) {
     this.onTurnOff.emit(action);
+  }
+  removeAgents() {
+    this.onRemoveAgents.emit(null);
   }
 }

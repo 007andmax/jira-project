@@ -14,6 +14,7 @@ import { DeviceCompany } from '../../components/company-devices/class/device-com
 export class DevicesStateService {
   allDevices = null;
   devicesForReboot: Array<DeviceCompany> = [];
+  devicesForRemove: Array<DeviceCompany> = [];
   devicesForShutDown: Array<DeviceCompany> = [];
   onGetDevices: EventEmitter<any> = new EventEmitter();
   onRemoveConnecion: EventEmitter<any> = new EventEmitter();
@@ -141,6 +142,12 @@ export class DevicesStateService {
     var splittedArray = timeString.split(':');
     return splittedArray[2] * 1000 + splittedArray[1] * 60000 + splittedArray[0] * 3600000
   };
+  public getDevicesForRemove() {
+    return this.devicesForRemove;
+  }
+  public setDevicesForRemove(data) {
+    this.devicesForRemove = data;
+  }
   public setDevicesForShutDown(data) {
     this.devicesForShutDown = data;
   }

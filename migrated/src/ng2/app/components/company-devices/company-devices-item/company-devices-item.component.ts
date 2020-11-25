@@ -8,7 +8,7 @@ import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
 import { PermissionsService } from 'src/ng2/app/services/permissions/permissions.service';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.service';
-import { REBOOT_DEVICE, SHUTDOWN_DEVICE } from 'src/ng2/app/const/confirm';
+import { REBOOT_DEVICE, REMOVE_DEVICES, SHUTDOWN_DEVICE } from 'src/ng2/app/const/confirm';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 
@@ -110,6 +110,12 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
       modalRef.componentInstance.message = `Are you sure you want to shutdown chosen device?`;
       this.devicesStateService.setDevicesForShutDown([this.device]);
     }
+  }
+  removeDevice() {
+    this.confirmStateService.setConfirmAction(REMOVE_DEVICES);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    modalRef.componentInstance.message = `Do you want to remove 1 device?`;
+    this.devicesStateService.setDevicesForRemove([this.device]);
   }
   ngOnDestroy(): void {
     clearInterval(this.timer);
