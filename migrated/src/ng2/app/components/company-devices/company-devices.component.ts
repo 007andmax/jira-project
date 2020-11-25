@@ -39,16 +39,23 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
       })
     }
     let getOnDevices = this.devicesStateService.getOnDevices().subscribe(data => {
-      this.devices.forEach(item => {
-        let findIndex = data[companyId].findIndex(device => device.id === item.id);
-        console.log("findIndex", findIndex);
-        if (findIndex > -1) {
-          item.update(data[companyId][findIndex]);
-        } else {
-          if (data[companyId].length > this.devices.length) this.devices.push(new DeviceCompany(data[companyId][findIndex], companyId));
-          if (data[companyId].length < this.devices.length) this.devices.splice(findIndex, 1);
-        }
-      })
+      if (data[companyId].length > this.devices.length) {
+        data[companyId].forEach(item => {
+          let find = this.devices.find(device => device.id === item.id);
+          if (!find) this.devices.push(new DeviceCompany(item, companyId));
+        });
+      } else if (data[companyId].length < this.devices.length) {
+        this.devices.forEach(item => {
+          let findIndex = data[companyId].findIndex(device => device.id === item.id);
+          if (findIndex === -1) this.devices.splice(findIndex, 1);
+        })
+      } else if (data[companyId].length === this.devices.length) {
+        this.devices.forEach(item => {
+          let findIndex = data[companyId].findIndex(device => device.id === item.id);
+          console.log("findIndex", findIndex);
+          if (findIndex > -1) item.update(data[companyId][findIndex]);
+        })
+      }
       console.log("this.devices", this.devices);
     })
     this.sub.add(getOnDevices);
