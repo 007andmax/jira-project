@@ -43,6 +43,8 @@ export class DevicesStateService {
       if (newChange.action === 'DEVICE_UNINSTALLED') {
         let deviceIndex = this.allDevices[newChange.data.clientCompanyId].findIndex(item => item.id === newChange.data.value);
         if (deviceIndex > -1) this.allDevices[newChange.data.clientCompanyId].splice(deviceIndex, 1);
+        console.log("deviceIndex", deviceIndex);
+        console.log("this.allDevices[newChange.data.clientCompanyId]", this.allDevices[newChange.data.clientCompanyId]);
       }
       if (newChange.action === 'DEVICE_ONLINE') {
 
@@ -76,6 +78,7 @@ export class DevicesStateService {
           let companyId = newChange.data.clientCompanyId;
           this.allDevices[companyId] = [];
           this.allDevices[companyId].push(new Device(parsedData.device));
+          console.log("this.allDevices[companyId]", this.allDevices[companyId]);
         } else {
           this.allDevices[newChange.data.clientCompanyId].push(new Device(parsedData.device));
           /* let deviceIndex = this.allDevices[newChange.data.clientCompanyId].findIndex(item => item.id === parsedData.device.id);
@@ -85,6 +88,7 @@ export class DevicesStateService {
            } else {
              this.allDevices[newChange.data.clientCompanyId].push(new Device(parsedData.device));
            }*/
+          console.log("this.allDevices[newChange.data.clientCompanyId]", this.allDevices[newChange.data.clientCompanyId]);
         }
         this.devicesService.sendDeviceStatusRequest(newChange.data.clientCompanyId, [parsedData.device.agentId], ["idle", "norestart", "online"]).subscribe(res => {
           console.log("res", res);

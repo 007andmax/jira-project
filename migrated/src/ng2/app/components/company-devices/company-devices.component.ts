@@ -31,16 +31,17 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     let companyId = localStorage.getItem("company_id");
-    this.devices = (this.devicesStateService.getAllDevices()[companyId]) ? this.devicesStateService.getAllDevices()[companyId].map(item => new DeviceCompany(item, companyId)) : [];
+    this.devices = (this.devicesStateService.getAllDevices()[companyId]) ? this.devicesStateService.getAllDevices()[companyId].map(item => new DeviceCompany(JSON.parse(JSON.stringify(item)), companyId)) : [];
     console.log("this.devices", this.devices);
     if (this.devices.length > 0) {
       this.devicesService.sendDeviceStatusRequest(companyId, this.devices.filter(item => item.agentId).map(item => item.agentId), ["idle", "norestart", "online"]).subscribe(data => {
         console.log("data", data);
       })
     }
-    this.devicesStateService.getOnDevices().subscribe(data => {
+    let getOnDevices = this.devicesStateService.getOnDevices().subscribe(data => {
       this.devices.forEach(item => {
         let findIndex = data[companyId].findIndex(device => device.id === item.id);
+        console.log("findIndex", findIndex);
         if (findIndex > -1) {
           item.update(data[companyId][findIndex]);
         } else {
@@ -50,6 +51,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
       })
       console.log("this.devices", this.devices);
     })
+    this.sub.add(getOnDevices);
     this.devicesRealTimeService.oneTimeConnectionArray.subscribe(newChange => {
       if (newChange.action === 'ONE_TIME_CONNECTION_OPEN') {
         for (var i = 0; i < this.devices.length; i++) {
