@@ -43,7 +43,7 @@ export class DevicesService {
     if (!Array.isArray(agentIds)) {
       agentIds = [agentIds];
     }
-    return this.http.post(this.apiUrl + '/devices/sendPowerAction?companyId=' + companyId + '&action=' + action, agentIds);
+    return this.http.post(this.apiUrl + 'devices/sendPowerAction?companyId=' + companyId + '&action=' + action, agentIds);
 
   }
   sendDeviceStatusRequest(companyId, agentIds, actions) {

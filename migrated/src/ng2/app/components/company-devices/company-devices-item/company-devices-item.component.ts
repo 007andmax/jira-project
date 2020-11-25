@@ -8,6 +8,9 @@ import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
 import { PermissionsService } from 'src/ng2/app/services/permissions/permissions.service';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.service';
+import { REBOOT_DEVICE, SHUTDOWN_DEVICE } from 'src/ng2/app/const/confirm';
+import { ConfirmComponent } from '../../shared/confirm/confirm.component';
+import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 
 @Component({
   selector: 'app-company-devices-item',
@@ -18,12 +21,13 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
   @Input() device: DeviceCompany;
   timer: any = null;
   @Output() onChangeSelect = new EventEmitter();
-  @Output() onTurnOff = new EventEmitter();
+
   constructor(private modalService: NgbModal,
     private devicesService: DevicesService,
     private usersStateService: UsersStateService,
     private permissionsService: PermissionsService,
     private devicesStateService: DevicesStateService,
+    private confirmStateService: ConfirmStateService,
     public cd: ChangeDetectorRef,) { }
 
 
@@ -94,7 +98,18 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
     }
   }
   turnOff(action) {
-    this.onTurnOff.emit(action);
+    if (action === 'reboot') {
+      this.confirmStateService.setConfirmAction(REBOOT_DEVICE);
+      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+      modalRef.componentInstance.message = `Are you sure you want to reboot chosen device?`;
+      this.devicesStateService.setDevicesForReboot([this.device]);
+    }
+    if (action === 'shutdown') {
+      this.confirmStateService.setConfirmAction(SHUTDOWN_DEVICE);
+      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+      modalRef.componentInstance.message = `Are you sure you want to shutdown chosen device?`;
+      this.devicesStateService.setDevicesForShutDown([this.device]);
+    }
   }
   ngOnDestroy(): void {
     clearInterval(this.timer);

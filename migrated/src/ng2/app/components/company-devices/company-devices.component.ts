@@ -71,12 +71,12 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REBOOT_DEVICE) {
-          this.devicesService.sendPowerAction(companyId, this.devicesStateService.getDevicesForReboot(), 'reboot').subscribe(data => {
+          this.devicesService.sendPowerAction(companyId, this.devicesStateService.getDevicesForReboot().map(item => item.agentId), 'reboot').subscribe(data => {
 
           });
         }
         if (this.confirmStateService.getConfirmAction() === SHUTDOWN_DEVICE) {
-          this.devicesService.sendPowerAction(companyId, this.devicesStateService.getDevicesForShutDown(), 'shutdown').subscribe(data => {
+          this.devicesService.sendPowerAction(companyId, this.devicesStateService.getDevicesForShutDown().map(item => item.agentId), 'shutdown').subscribe(data => {
 
           });
         }
