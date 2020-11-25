@@ -85,9 +85,9 @@ export class DevicesStateService {
           let deviceIndex = this.allDevices[newChange.data.clientCompanyId].findIndex(item => item.id === parsedData.device.id);
           parsedData.device.uninstalledAt = '';
           if (deviceIndex > -1) {
-            this.allDevices[newChange.data.clientCompanyId][deviceIndex] = parsedData.device;
+            this.allDevices[newChange.data.clientCompanyId][deviceIndex] = new Device(parsedData.device);
           } else {
-            this.allDevices[newChange.data.clientCompanyId].push(parsedData.device);
+            this.allDevices[newChange.data.clientCompanyId].push(new Device(parsedData.device));
           }
         }
         this.devicesService.sendDeviceStatusRequest(newChange.data.clientCompanyId, [parsedData.device.agentId], ["idle", "norestart", "online"]).subscribe(res => {

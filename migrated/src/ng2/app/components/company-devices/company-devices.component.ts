@@ -44,7 +44,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
         if (findIndex) {
           item.update(data[companyId][findIndex]);
         } else {
-          if (data[companyId].length > this.devices.length) this.devices.push(new DeviceCompany(item, companyId));
+          if (data[companyId].length > this.devices.length) this.devices.push(new DeviceCompany(data[companyId][findIndex], companyId));
           if (data[companyId].length < this.devices.length) this.devices.splice(findIndex, 1);
         }
       })
