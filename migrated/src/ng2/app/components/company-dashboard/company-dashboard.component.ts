@@ -23,6 +23,9 @@ import { Invoice } from '../billing/invoices/class/invoice';
 import { InvoicesService } from '../../services/invoices/invoices.service';
 import { Payment } from '../billing/payments/class/payment';
 import { PaymentsService } from '../../services/payments/payments.service';
+import { CompanyPrimaryContact } from '../companies/class/company-primary-contact';
+import { CompanyServiceType } from '../companies/class/company-service-type';
+import { CompanyContractType } from '../companies/class/company-contract-type';
 declare let d3: any;
 @Component({
   selector: 'company-dashboard',
@@ -40,8 +43,8 @@ export class CompanyDashboardComponent implements OnInit {
   lineChartOptions: any;
   data: any;
   lineData: any;
-  chartColors = ["#0747a6", "#00ccff", '#cdecff'];
-  lineChartColors = ["#0747a6", "#00ccff", '#2bc7c6', '#7C77CB'];
+  chartColors:string[] = ["#0747a6", "#00ccff", '#cdecff'];
+  lineChartColors:string[] = ["#0747a6", "#00ccff", '#2bc7c6', '#7C77CB'];
   _id:string = '';
   companyOpen:string = 'Close';
   company: Company;
@@ -49,7 +52,7 @@ export class CompanyDashboardComponent implements OnInit {
   averageResponseTime:string = '';
   public countUsers: number = 0;
   public countDevices: number = 0;
-  showArchivedCompanies = false;
+  showArchivedCompanies:boolean = false;
   recentInvoiceList = [];
   contractsList = [];
   sub: Subscription = new Subscription();
@@ -62,7 +65,7 @@ export class CompanyDashboardComponent implements OnInit {
   name:string = '';
   month:string = '12'
   ticketFrequency:string = 'Monthly';
-  primaryContact = {
+  primaryContact: CompanyPrimaryContact = {
     firstName: '',
     lastName: '',
     email: '',
@@ -71,18 +74,18 @@ export class CompanyDashboardComponent implements OnInit {
   };
   tags = [];
   statistics = [];
-  statisticsCount = 0;
+  statisticsCount:number = 0;
   mapSrc:string = '';
   serviceType:string = '';
   domain:string = '';
   tagSaved:boolean = false;
-  serviceTypesMap = {
+  serviceTypesMap: CompanyServiceType = {
     HOURLY: 'Hourly',
     BLOCK_TIME: 'Block time',
     SEMI_MANAGED: 'Semi managed',
     FULLY_MANAGED: 'Fully managed'
   }
-  contractType = {
+  contractType: CompanyContractType = {
     HOURLY: 'Custom Hourly',
     BLOCK_TIME: 'Block Time',
     SERVICE_CONTRACT: 'Service Contract',
@@ -146,15 +149,6 @@ export class CompanyDashboardComponent implements OnInit {
         this.onGetUsersCount(data);
       })
       this.sub.add(getOnUsers);
-     
-      let getOnPreview = this.contractsStateService.getOnPreview().subscribe(data => {
-        this.serviceAgreement = data;
-        this.showContractPreview = true;
-        if (!this.cd['destroyed']) {
-          this.cd.detectChanges();
-        }
-      })
-      this.sub.add(getOnPreview);
       let getOnTogglePreview = this.contractsStateService.getOnTogglePreview().subscribe(data => {
 
         this.showContractPreview = false;
@@ -716,7 +710,11 @@ export class CompanyDashboardComponent implements OnInit {
 
   openContractPreview(data) {
     this.contractsService.getServiceAgreement(data.serviceAgreement.id).subscribe(data => {
-      this.contractsStateService.setPreview(data);
+      this.serviceAgreement = data;
+        this.showContractPreview = true;
+        if (!this.cd['destroyed']) {
+          this.cd.detectChanges();
+        }
     })
   }
 
