@@ -80,6 +80,11 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
       minutes: minutes,
     }
   }
+  setMasterAgent() {
+    this.devicesService.markDeviceAsMaster(this.device.companyId, this.device.agentId).subscribe(data => {
+
+    })
+  }
   onChangeName(data) {
     this.device.setLabel(data);
     this.devicesStateService.updateLabelIcon(this.device);

@@ -51,6 +51,7 @@ export class DevicesStateService {
         if (deviceIndex > -1) {
           this.allDevices[newChange.data.clientCompanyId][deviceIndex].online = true;
           this.allDevices[newChange.data.clientCompanyId][deviceIndex].userName = newChange.data.userName;
+          this.allDevices[newChange.data.clientCompanyId][deviceIndex].timing.online = 0;
         }
       }
       if (newChange.action === 'DEVICE_OFFLINE') {
@@ -58,9 +59,8 @@ export class DevicesStateService {
         if (deviceIndex > -1) {
           this.allDevices[newChange.data.clientCompanyId][deviceIndex].online = false;
           this.allDevices[newChange.data.clientCompanyId][deviceIndex].userName = newChange.data.userName;
-          var newValue = moment(Date.now()).valueOf();
-          this.allDevices[newChange.data.clientCompanyId][deviceIndex].timing.offline = (Date.now() - newValue);
-          this.allDevices[newChange.data.clientCompanyId][deviceIndex].timing.uptimeForOrdering = (Date.now() - newValue);
+          this.allDevices[newChange.data.clientCompanyId][deviceIndex].timing.offline = 0;
+          this.allDevices[newChange.data.clientCompanyId][deviceIndex].timing.uptimeForOrdering = 0;
         }
       }
       if (newChange.action === 'REMOTE_CONNECTION') {

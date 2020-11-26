@@ -17,6 +17,7 @@ export class CompanyDevicesRemoteAccessComponent implements OnInit {
   @Input() device: DeviceCompany;
   @Input() companyId: string;
   sessionId: string;
+  isConnection: boolean = false;
   constructor(private constantsStateService: ConstantsStateService,
     private devicesStateService: DevicesStateService,
     public activeModal: NgbActiveModal,
@@ -35,27 +36,12 @@ export class CompanyDevicesRemoteAccessComponent implements OnInit {
     console.log("device", this.device);
     console.log("companyId", this.companyId);
     this.devicesService.createRemoteSession(this.device.id, this.companyId, this.connectionType, null).subscribe((resp: any) => {
-      //this.connectRemoteAccess(resp.sessionId, connectionType, false);
       this.sessionId = resp.sessionId;
       let remoteConnectPort = this.constantsStateService.getConstant('remote.connect.port'),
         restServerAddress = this.constantsStateService.getConstant('rest.server.address'),
         url = 'quicktech://connect?serverIP=' + restServerAddress + '&port=' + remoteConnectPort + '&sessionID=' + resp.sessionId;
-      /* modalInstance.result.then(angular.noop, function () {
-         if (promise) {
-           $interval.cancel(promise);
-         }
-       });*/
-      /* this.
-      DevicesService.subscribeToRemoteConnection(realSessionId, function () {
-        if (modalInstance) {
-          modalInstance.dismiss();
-        }
-        if (promise) {
-          $interval.cancel(promise);
-        }
-        $rootScope.currentRemoteSessionId = realSessionId;
-      });*/
       window.open(url, '_self');
+      this.isConnection = true;
     })
 
   }

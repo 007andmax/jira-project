@@ -84,7 +84,7 @@
                         placement="top"
                         container="body"
                         [ngbTooltip]="tipEditDevice"
-                        class="ml-8 qt-sz-24 icon__edit qt-ic-c device-name-edit-marker"
+                        class="ml-8 qt-sz-24 icon__edit qt-ic-c device-name-edit-marker pointer"
                         id="dropdownChangeName"
                         ngbDropdownToggle
                     ></div>
@@ -351,7 +351,12 @@
                     <div class="qt-bg-contain qt-sz-16 qt-mr-8"></div>
                     Shutdown
                 </li>
-                <li class="pointer">
+                <li
+                    class="pointer"
+                    (click)="setMasterAgent()"
+                    *ngIf="!device.master"
+                    ngbDropdownItem
+                >
                     <div class="qt-bg-contain qt-sz-16 qt-mr-8"></div>
                     Set as Master Agent
                 </li>

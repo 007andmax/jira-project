@@ -33,6 +33,8 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     let companyId = localStorage.getItem("company_id");
     this.devices = (this.devicesStateService.getAllDevices()[companyId]) ? JSON.parse(JSON.stringify(this.devicesStateService.getAllDevices()[companyId])).map(item => new DeviceCompany(item, companyId)) : [];
+    this.devices.sort((a, b) => ((a.label || a.hostName || a.ip).toLowerCase() > (b.label || b.hostName || b.ip).toLowerCase()) ?
+      1 : (((b.label || b.hostName || b.ip).toLowerCase() > (a.label || a.hostName || a.ip).toLowerCase()) ? -1 : 0))
     console.log("this.devices", this.devices);
     if (this.devices.length > 0) {
       this.devicesService.sendDeviceStatusRequest(companyId, this.devices.filter(item => item.agentId).map(item => item.agentId), ["idle", "norestart", "online"]).subscribe(data => {
@@ -62,7 +64,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
       console.log("this.devices", this.devices);
     })
     this.sub.add(getOnDevices);
-    this.devicesRealTimeService.oneTimeConnectionArray.subscribe(newChange => {
+    let oneTimeConnectionArray = this.devicesRealTimeService.oneTimeConnectionArray.subscribe(newChange => {
       if (newChange.action === 'ONE_TIME_CONNECTION_OPEN') {
         for (var i = 0; i < this.devices.length; i++) {
           if (this.devices[i].id === newChange.data.deviceId) {
@@ -80,6 +82,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
       }
       this.cd.detectChanges();
     })
+    this.sub.add(oneTimeConnectionArray);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REBOOT_DEVICE) {
@@ -101,7 +104,6 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
-
     let getOnUpdateAgentActivityStatus = this.devicesStateService.getOnUpdateAgentActivityStatus().subscribe(newChange => {
       var isCurrentCompany = this.devicesStateService.getCompanyIdByAgentId(newChange.data.agentId) === companyId;
       if (newChange.data && newChange.data.statuses && newChange.data.statuses.hasOwnProperty('Idle')) {
@@ -165,6 +167,9 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
       item.selected = (this.selectAllDevices) ? true : false;
     })
     this.isOfflineDeviceSelected = (this.devices.find(item => item.selected && !item.online)) ? true : false;
+  }
+  isLabel(device) {
+    if (device.label && device.hostName) return device.label !== device.hostName;
   }
   public trackById(index, item) {
     return item.id;

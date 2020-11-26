@@ -23,7 +23,7 @@ export class CompanyDevicesEditNameComponent implements OnInit {
   }
   public onOpenDropDown(open) {
     console.log("open", open);
-    if (open) this.label = JSON.parse(JSON.stringify(this.device.label))
+    if (open) this.label = JSON.parse(JSON.stringify(this.device.label || this.device.hostName || this.device.ip))
   }
   close() {
     this.label = '';

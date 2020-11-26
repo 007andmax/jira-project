@@ -28,3 +28,12 @@
     height: 66px;
   }
 }
+.qt-list-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    float: none;
+    .loader {
+      margin: 0px 0px 0px 20px;
+    }
+}
