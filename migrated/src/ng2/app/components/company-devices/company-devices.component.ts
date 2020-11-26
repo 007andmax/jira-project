@@ -134,6 +134,19 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getOnUpdateAgentActivityStatus);
+
+    let getOnResetDeviceTiming = this.devicesStateService.getOnResetDeviceTiming().subscribe(data => {
+      let findIndex = this.devices.findIndex(item => item.id === data.id);
+      if (findIndex > -1) {
+        if (data.online) {
+          this.devices[findIndex].timing.online = 0;
+        } else {
+          this.devices[findIndex].timing.offline = 0;
+          this.devices[findIndex].timing.uptimeForOrdering = 0;
+        }
+      }
+    })
+    this.sub.add(getOnResetDeviceTiming);
   }
   onRemoveAgents() {
     let len = this.devices.filter(item => item.selected).length;

@@ -18,6 +18,7 @@ export class DevicesStateService {
   devicesForShutDown: Array<DeviceCompany> = [];
   onUpdateAgentActivityStatus: EventEmitter<any> = new EventEmitter();
   onGetDevices: EventEmitter<any> = new EventEmitter();
+  onResetDeviceTiming: EventEmitter<any> = new EventEmitter();
   onRemoveConnecion: EventEmitter<any> = new EventEmitter();
   onLaunchRemoteApp: EventEmitter<any> = new EventEmitter();
   // onChangeDevices: EventEmitter<DeviceUpdate> = new EventEmitter();
@@ -51,7 +52,7 @@ export class DevicesStateService {
         if (deviceIndex > -1) {
           this.allDevices[newChange.data.clientCompanyId][deviceIndex].online = true;
           this.allDevices[newChange.data.clientCompanyId][deviceIndex].userName = newChange.data.userName;
-          this.allDevices[newChange.data.clientCompanyId][deviceIndex].timing.online = 0;
+          this.onResetDeviceTiming.emit({ id: newChange.data.value, online: true });
         }
       }
       if (newChange.action === 'DEVICE_OFFLINE') {
@@ -59,8 +60,7 @@ export class DevicesStateService {
         if (deviceIndex > -1) {
           this.allDevices[newChange.data.clientCompanyId][deviceIndex].online = false;
           this.allDevices[newChange.data.clientCompanyId][deviceIndex].userName = newChange.data.userName;
-          this.allDevices[newChange.data.clientCompanyId][deviceIndex].timing.offline = 0;
-          this.allDevices[newChange.data.clientCompanyId][deviceIndex].timing.uptimeForOrdering = 0;
+          this.onResetDeviceTiming.emit({ id: newChange.data.value, online: false });
         }
       }
       if (newChange.action === 'REMOTE_CONNECTION') {
@@ -117,6 +117,9 @@ export class DevicesStateService {
     var splittedArray = timeString.split(':');
     return splittedArray[2] * 1000 + splittedArray[1] * 60000 + splittedArray[0] * 3600000
   };
+  public getOnResetDeviceTiming() {
+    return this.onResetDeviceTiming;
+  }
   public getDevicesForRemove() {
     return this.devicesForRemove;
   }
