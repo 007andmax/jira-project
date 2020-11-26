@@ -372,7 +372,7 @@
       text-transform: uppercase;
     }
     &__info {
-      display: flex;;
+      display: flex;
       margin-bottom: 12px;
     }
     &__info-title {
@@ -425,9 +425,18 @@
   }
 
   .sidebar-updates {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    &__tab-title {
+      font-size: 11px;
+      line-height: 1.45;
+      color: #364656;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+    }
+    &__items {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
     &__item {
       padding: 16px;
       width: 136px;

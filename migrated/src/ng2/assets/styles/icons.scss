@@ -483,6 +483,39 @@
   &__collapse {
     background-image: url('assets/img/icons/collapse.svg');
   }
+  &__drivers-missing {
+    background-image: url("assets/img/icons/drivers-missing.svg") ;
+  }
+  &__security-update {
+    background-image: url("assets/img/icons/security-update.svg") ;
+  }
+  &__virus-protection {
+    background-image: url("assets/img/icons/virus-protection.svg") ;
+  }
+  &.--updated {
+    position: relative;
+    &::before {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      right: -2px;
+      top: -3px;
+      background-image: url("assets/img/icons/updated.svg");
+    }
+  }
+  &.--alert {
+    position: relative;
+    &::before {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      right: -2px;
+      top: -3px;
+      background-image: url("assets/img/icons/alert.svg");
+    }
+  }
   &.--online, &.--offline {
     position: relative;
     &::before {
