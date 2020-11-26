@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { REBOOT_DEVICE, REMOVE_DEVICES, SHUTDOWN_DEVICE } from '../../const/confirm';
@@ -24,6 +24,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     private devicesService: DevicesService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
+    public cd: ChangeDetectorRef,
     private devicesRealTimeService: DevicesRealTimeService) { }
   ngOnDestroy(): void {
     throw new Error('Method not implemented.');
@@ -31,7 +32,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     let companyId = localStorage.getItem("company_id");
-    this.devices = (this.devicesStateService.getAllDevices()[companyId]) ? this.devicesStateService.getAllDevices()[companyId].map(item => new DeviceCompany(JSON.parse(JSON.stringify(item)), companyId)) : [];
+    this.devices = (this.devicesStateService.getAllDevices()[companyId]) ? JSON.parse(JSON.stringify(this.devicesStateService.getAllDevices()[companyId])).map(item => new DeviceCompany(item, companyId)) : [];
     console.log("this.devices", this.devices);
     if (this.devices.length > 0) {
       this.devicesService.sendDeviceStatusRequest(companyId, this.devices.filter(item => item.agentId).map(item => item.agentId), ["idle", "norestart", "online"]).subscribe(data => {
@@ -56,6 +57,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
           if (findIndex > -1) item.update(data[companyId][findIndex]);
         })
       }
+      this.cd.detectChanges();
       console.log("this.devices", this.devices);
     })
     this.sub.add(getOnDevices);
@@ -75,6 +77,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
           }
         }
       }
+      this.cd.detectChanges();
     })
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
