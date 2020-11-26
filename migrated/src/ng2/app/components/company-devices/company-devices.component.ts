@@ -41,15 +41,15 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     }
     let getOnDevices = this.devicesStateService.getOnDevices().subscribe(data => {
       console.log("data[companyId]", data[companyId]);
-      /*if (data[companyId].length > this.devices.length) {
+      if (data[companyId].length > this.devices.length) {
         data[companyId].forEach(item => {
           let find = this.devices.find(device => device.id === item.id);
           if (!find) this.devices.push(new DeviceCompany(item, companyId));
         });
       } else if (data[companyId].length < this.devices.length) {
-        this.devices.forEach(item => {
+        this.devices.forEach((item, index) => {
           let findIndex = data[companyId].findIndex(device => device.id === item.id);
-          if (findIndex === -1) this.devices.splice(findIndex, 1);
+          if (findIndex === -1) this.devices.splice(index, 1);
         })
       } else if (data[companyId].length === this.devices.length) {
         this.devices.forEach(item => {
@@ -57,7 +57,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
           console.log("findIndex", findIndex);
           if (findIndex > -1) item.update(data[companyId][findIndex]);
         })
-      }*/
+      }
       this.cd.detectChanges();
       console.log("this.devices", this.devices);
     })
