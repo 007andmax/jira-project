@@ -90,7 +90,7 @@ export class DevicesStateService {
           console.log("res", res);
         })
       }
-      //this.onInitGetDevices(this.allDevices);
+      this.onInitGetDevices(this.allDevices);
     })
   }
   public onInitUpdateAgentActivityStatus(data) {
