@@ -525,129 +525,188 @@
 
 
 
+
         </div>
     </div>
 
+
     <!-- ASIDE -->
-    <div class="company-devices-page__aside company-device-aside">
+    <div
+        class="company-devices-page__aside company-device-aside"
+        [hidden]="true"
+    >
 
-      <div class="company-device-aside__menu">
-        <div class="company-device-aside__menu-item qt-pointer">
-          <ng-template #asideMenuItem class="tooltip">MD Reception-02</ng-template>
-          <div placement="left" [ngbTooltip]="asideMenuItem" class="qt-sz-24 icon__computer"></div>
-        </div>
-        <div class="company-device-aside__menu-item qt-pointer">
-          <ng-template #asideMenuItem class="tooltip">MD Reception-02</ng-template>
-          <div placement="left" [ngbTooltip]="asideMenuItem"  class="qt-sz-24 icon__server"></div>
-        </div>
-        <div class="company-device-aside__menu-item qt-pointer --active">
-          <ng-template #asideMenuItem class="tooltip">MD Reception-02</ng-template>
-          <div placement="left" [ngbTooltip]="asideMenuItem"  class="qt-sz-24 icon__computer"></div>
-        </div>
-      </div>
 
-      <div class="company-device-aside__header qt-df qt-ai-c qt-jc-sb">
-        <div class="qt-df qt-ai-c">
-          <div class="icon__computer icon --online qt-sz-24 qt-mr-12"></div>
-          <div class="qt-fs-13 qt-ff-sb qt-lh-154">HP Ethernet Multi-Environment color jet-2005</div>
-        </div>
-
-        <div class="qt-df qt-ai-c">
-          <div class="qt-sz-24 qt-mr-8 qt-pointer company-device-aside__more-icon icon__more-vertical"></div>
-          <div class="qt-sz-24 qt-pointer company-device-aside__close-icon icon__close"></div>
-          <div class="qt-pointer company-device-aside__arrow-right-icon icon__arrow-right"></div>
-        </div>
-      </div>
-
-      <div class="company-device-aside__subheader">
-        <div class="company-device-aside__subheader-item subheader-item-system --active"></div>
-        <div class="company-device-aside__subheader-item subheader-item-network"></div>
-        <div class="company-device-aside__subheader-item subheader-item-software"></div>
-        <div class="company-device-aside__subheader-item subheader-item-updates"></div>
-      </div>
-
-      <div class="company-device-aside__body">
-        <!-- System Tab -->
-        <div class="sidebar-system qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
-          <div class="company-device-aside__info-block">
-            <div class="qt-df qt-jc-sb">
-              <div class="sidebar-system__title qt-ff-sb">Device Specifications</div>
-              <div class="company-device-aside__expand-collapse qt-sz-16"></div>
+        <div class="company-device-aside__menu">
+            <div class="company-device-aside__menu-item qt-pointer">
+                <ng-template
+                    #asideMenuItem
+                    class="tooltip"
+                >
+                    MD Reception-02
+                </ng-template>
+                <div
+                    placement="left"
+                    [ngbTooltip]="asideMenuItem"
+                    class="qt-sz-24 icon__computer"
+                ></div>
             </div>
-            <div class="sidebar-system__info">
-              <div class="sidebar-system__info-title">Device Name</div>
-              <div class="sidebar-system__info-text">HP Ethernet Multi-Environment color jet-2005</div>
+            <div class="company-device-aside__menu-item qt-pointer">
+                <ng-template
+                    #asideMenuItem
+                    class="tooltip"
+                >
+                    MD Reception-02
+                </ng-template>
+                <div
+                    placement="left"
+                    [ngbTooltip]="asideMenuItem"
+                    class="qt-sz-24 icon__server"
+                ></div>
             </div>
-
-            <div class="sidebar-system__info">
-              <div class="sidebar-system__info-title">Processor</div>
-              <div class="sidebar-system__info-text">Pend and Touch</div>
+            <div class="company-device-aside__menu-item qt-pointer --active">
+                <ng-template
+                    #asideMenuItem
+                    class="tooltip"
+                >
+                    MD Reception-02
+                </ng-template>
+                <div
+                    placement="left"
+                    [ngbTooltip]="asideMenuItem"
+                    class="qt-sz-24 icon__computer"
+                ></div>
             </div>
-
-            <div class="sidebar-system__info">
-              <div class="sidebar-system__info-title">Installed RAM</div>
-              <div class="sidebar-system__info-text">32.0 GB</div>
-            </div>
-
-            <div class="sidebar-system__info">
-              <div class="sidebar-system__info-title">Device ID</div>
-              <div class="sidebar-system__info-text">1DF8C7E1-DCF6-4030-AE0E-5F38A92C6BE3</div>
-            </div>
-
-            <div class="sidebar-system__info">
-              <div class="sidebar-system__info-title">Product ID</div>
-              <div class="sidebar-system__info-text">00330-80000-00000-AA033</div>
-            </div>
-
-            <div class="sidebar-system__info">
-              <div class="sidebar-system__info-title">System Type</div>
-              <div class="sidebar-system__info-text">64-bit operating system, x64-bassed processor</div>
-            </div>
-
-            <div class="sidebar-system__info">
-              <div class="sidebar-system__info-title">Pend and Touch</div>
-              <div class="sidebar-system__info-text">No pen or touch input is available for this display</div>
-            </div>
-          </div>
-
-          <div class="qt-divider qt-mt-24 qt-mb-24"></div>
-
-          <div class="company-device-aside__info-block --collapsed">
-            <div class="qt-df qt-jc-sb">
-              <div class="sidebar-system__title qt-ff-sb">Window Specifications </div>
-              <div class="company-device-aside__expand-collapse qt-sz-16"></div>
-            </div>
-
-            <div class="sidebar-system__info">
-              <div class="sidebar-system__info-title">Edition</div>
-              <div class="sidebar-system__info-text">Windows 10 Pro</div>
-            </div>
-
-            <div class="sidebar-system__info">
-              <div class="sidebar-system__info-title">Version</div>
-              <div class="sidebar-system__info-text">2004</div>
-            </div>
-
-            <div class="sidebar-system__info">
-              <div class="sidebar-system__info-title">Installed on</div>
-              <div class="sidebar-system__info-text">2020-08-05</div>
-            </div>
-
-            <div class="sidebar-system__info">
-              <div class="sidebar-system__info-title">OS build</div>
-              <div class="sidebar-system__info-text">19041.421</div>
-            </div>
-
-            <div class="sidebar-system__info">
-              <div class="sidebar-system__info-title">Experience</div>
-              <div class="sidebar-system__info-text">Windows Feature Experience Pack</div>
-            </div>
-          </div>
         </div>
 
 
-        <!-- Network Tab -->
-        <!-- <div class="sidebar-network qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
+        <div class="company-device-aside__header qt-df qt-ai-c qt-jc-sb">
+            <div class="qt-df qt-ai-c">
+                <div class="icon__computer icon --online qt-sz-24 qt-mr-12"></div>
+                <div class="qt-fs-13 qt-ff-sb qt-lh-154">
+                    HP Ethernet Multi-Environment color jet-2005
+                </div>
+            </div>
+
+
+            <div class="qt-df qt-ai-c">
+                <div class="qt-sz-24 qt-mr-8 qt-pointer company-device-aside__more-icon icon__more-vertical"></div>
+                <div class="qt-sz-24 qt-pointer company-device-aside__close-icon icon__close"></div>
+                <div class="qt-pointer company-device-aside__arrow-right-icon icon__arrow-right"></div>
+            </div>
+        </div>
+
+
+        <div class="company-device-aside__subheader">
+            <div class="company-device-aside__subheader-item subheader-item-system --active"></div>
+            <div class="company-device-aside__subheader-item subheader-item-network"></div>
+            <div class="company-device-aside__subheader-item subheader-item-software"></div>
+            <div class="company-device-aside__subheader-item subheader-item-updates"></div>
+        </div>
+
+
+        <div class="company-device-aside__body">
+            <!-- System Tab -->
+            <div class="sidebar-system qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
+                <div class="company-device-aside__info-block">
+                    <div class="qt-df qt-jc-sb">
+                        <div class="sidebar-system__title qt-ff-sb">Device Specifications</div>
+                        <div class="company-device-aside__expand-collapse qt-sz-16"></div>
+                    </div>
+                    <div class="sidebar-system__info">
+                        <div class="sidebar-system__info-title">Device Name</div>
+                        <div class="sidebar-system__info-text">
+                            HP Ethernet Multi-Environment color jet-2005
+                        </div>
+                    </div>
+
+
+                    <div class="sidebar-system__info">
+                        <div class="sidebar-system__info-title">Processor</div>
+                        <div class="sidebar-system__info-text">Pend and Touch</div>
+                    </div>
+
+
+                    <div class="sidebar-system__info">
+                        <div class="sidebar-system__info-title">Installed RAM</div>
+                        <div class="sidebar-system__info-text">32.0 GB</div>
+                    </div>
+
+
+                    <div class="sidebar-system__info">
+                        <div class="sidebar-system__info-title">Device ID</div>
+                        <div class="sidebar-system__info-text">1DF8C7E1-DCF6-4030-AE0E-5F38A92C6BE3</div>
+                    </div>
+
+
+                    <div class="sidebar-system__info">
+                        <div class="sidebar-system__info-title">Product ID</div>
+                        <div class="sidebar-system__info-text">00330-80000-00000-AA033</div>
+                    </div>
+
+
+                    <div class="sidebar-system__info">
+                        <div class="sidebar-system__info-title">System Type</div>
+                        <div class="sidebar-system__info-text">
+                            64-bit operating system, x64-bassed processor
+                        </div>
+                    </div>
+
+
+                    <div class="sidebar-system__info">
+                        <div class="sidebar-system__info-title">Pend and Touch</div>
+                        <div class="sidebar-system__info-text">
+                            No pen or touch input is available for this display
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="qt-divider qt-mt-24 qt-mb-24"></div>
+
+
+                <div class="company-device-aside__info-block --collapsed">
+                    <div class="qt-df qt-jc-sb">
+                        <div class="sidebar-system__title qt-ff-sb">Window Specifications</div>
+                        <div class="company-device-aside__expand-collapse qt-sz-16"></div>
+                    </div>
+
+
+                    <div class="sidebar-system__info">
+                        <div class="sidebar-system__info-title">Edition</div>
+                        <div class="sidebar-system__info-text">Windows 10 Pro</div>
+                    </div>
+
+
+                    <div class="sidebar-system__info">
+                        <div class="sidebar-system__info-title">Version</div>
+                        <div class="sidebar-system__info-text">2004</div>
+                    </div>
+
+
+                    <div class="sidebar-system__info">
+                        <div class="sidebar-system__info-title">Installed on</div>
+                        <div class="sidebar-system__info-text">2020-08-05</div>
+                    </div>
+
+
+                    <div class="sidebar-system__info">
+                        <div class="sidebar-system__info-title">OS build</div>
+                        <div class="sidebar-system__info-text">19041.421</div>
+                    </div>
+
+
+                    <div class="sidebar-system__info">
+                        <div class="sidebar-system__info-title">Experience</div>
+                        <div class="sidebar-system__info-text">Windows Feature Experience Pack</div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Network Tab -->
+            <!-- <div class="sidebar-network qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
             <div class="company-device-aside__info-block">
               <div class="qt-df qt-jc-sb">
                 <div class="sidebar-network__title qt-ff-sb">IP Settings</div>
@@ -702,6 +761,6 @@
 
           <div class="qt-divider qt-mt-24 qt-mb-24"></div>
         </div> -->
-      </div>
+        </div>
     </div>
 </div>
