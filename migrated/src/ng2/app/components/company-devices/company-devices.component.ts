@@ -21,6 +21,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
   selectAllDevices: boolean = false;
   isOfflineDeviceSelected: boolean = false;
   filter: CompanyDeviceFilter = new CompanyDeviceFilter();
+  showPreloader: boolean = true;
   sub: Subscription = new Subscription();
   constructor(private devicesStateService: DevicesStateService,
     private devicesService: DevicesService,
@@ -28,23 +29,20 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     public cd: ChangeDetectorRef,
     private devicesRealTimeService: DevicesRealTimeService) { }
-  ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
-  }
+
 
   ngOnInit() {
     let companyId = localStorage.getItem("company_id");
-    this.devices = (this.devicesStateService.getAllDevices()[companyId]) ? JSON.parse(JSON.stringify(this.devicesStateService.getAllDevices()[companyId])).map(item => new DeviceCompany(item, companyId)) : [];
-    this.devices.sort((a, b) => ((a.label || a.hostName || a.ip).toLowerCase() > (b.label || b.hostName || b.ip).toLowerCase()) ?
-      1 : (((b.label || b.hostName || b.ip).toLowerCase() > (a.label || a.hostName || a.ip).toLowerCase()) ? -1 : 0))
-    console.log("this.devices", this.devices);
-    if (this.devices.length > 0) {
-      this.devicesService.sendDeviceStatusRequest(companyId, this.devices.filter(item => item.agentId).map(item => item.agentId), ["idle", "norestart", "online"]).subscribe(data => {
-        console.log("data", data);
-      })
+    if (this.devicesStateService.getAllDevices()) {
+      this.devices = (this.devicesStateService.getAllDevices()[companyId]) ? JSON.parse(JSON.stringify(this.devicesStateService.getAllDevices()[companyId])).map(item => new DeviceCompany(item, companyId)) : [];
+      this.filter.onFilterName(this.devices);
+      console.log("this.devices", this.devices);
+      this.showPreloader = false;
     }
+    if (this.devices.length > 0) this.sendDeviceStatusRequest(companyId, this.devices.filter(item => item.agentId).map(item => item.agentId));
     let getOnDevices = this.devicesStateService.getOnDevices().subscribe(data => {
       console.log("data[companyId]", data[companyId]);
+      if (this.devices.length === 0) this.sendDeviceStatusRequest(companyId, data[companyId].filter(item => item.agentId).map(item => item.agentId));
       if (data[companyId].length > this.devices.length) {
         data[companyId].forEach(item => {
           let find = this.devices.find(device => device.id === item.id);
@@ -62,7 +60,9 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
           if (findIndex > -1) item.update(data[companyId][findIndex]);
         })
       }
+      this.filter.onCurrentFilter(this.devices);
       this.cd.detectChanges();
+      this.showPreloader = false;
       console.log("this.devices", this.devices);
     })
     this.sub.add(getOnDevices);
@@ -153,6 +153,11 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
   public onFilter(field) {
     this.filter.onFilter(field, this.devices)
   }
+  sendDeviceStatusRequest(companyId, ids) {
+    this.devicesService.sendDeviceStatusRequest(companyId, ids, ["idle", "norestart", "online"]).subscribe(data => {
+      console.log("data", data);
+    })
+  }
   onRemoveAgents() {
     let len = this.devices.filter(item => item.selected).length;
     this.confirmStateService.setConfirmAction(REMOVE_DEVICES);
@@ -192,5 +197,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
   public trackById(index, item) {
     return item.id;
   }
-
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }

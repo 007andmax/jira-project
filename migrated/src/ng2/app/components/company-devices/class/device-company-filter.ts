@@ -37,25 +37,32 @@ export class CompanyDeviceFilter {
 
 
             }
-            if (field === 'up_time') {
-                this.clearFilter();
-                if (sort === '' || sort === 'DESC') {
-                    this.filterTop[index].filter = 'ASC';
-                    this.onFilterUpTimeASC(devices);
-                } else {
-                    this.filterTop[index].filter = 'DESC';
+        }
+    }
+    public onCurrentFilter(devices) {
+        let index = this.filterTop.findIndex(item => item.field != '');
+        if (index > -1) {
+            let sort = this.filterTop[index].filter;
+            let field = this.filterTop[index].field;
+            if (field === 'name') {
+                if (sort === 'ASC') {
                     this.onFilterName(devices);
+                } else {
+                    this.onFilterName(devices);
+                    devices.reverse();
                 }
-
-
+            }
+            if (field === 'user_name') {
+                if (sort === 'ASC') {
+                    this.onFilterUserName(devices);
+                } else {
+                    this.onFilterUserName(devices);
+                    devices.reverse();
+                }
             }
         }
     }
 
-    private onFilterUpTimeASC(devices) {
-        devices.sort((a, b) => (((a.online) ? a.timing.uptimeForOrdering : 0) > (b.online) ? b.timing.uptimeForOrdering : 0) ?
-            1 : (((b.online) ? b.timing.uptimeForOrdering : 0 > (a.online) ? a.timing.uptimeForOrdering : 0) ? -1 : 0));
-    }
     private onFilterUserName(devices) {
         devices.sort((a, b) => (this.getUserName(a).toLowerCase() > this.getUserName(b).toLowerCase()) ?
             1 : ((this.getUserName(b).toLowerCase() > this.getUserName(a).toLowerCase()) ? -1 : 0));
@@ -63,7 +70,7 @@ export class CompanyDeviceFilter {
     private getUserName(device) {
         return device.userName || '';
     }
-    private onFilterName(devices) {
+    public onFilterName(devices) {
         devices.sort((a, b) => (this.getNameDevice(a).toLowerCase() > this.getNameDevice(b).toLowerCase()) ?
             1 : ((this.getNameDevice(b).toLowerCase() > this.getNameDevice(a).toLowerCase()) ? -1 : 0));
     }
