@@ -24,6 +24,7 @@ export class CompanyDeviceFilter {
             }
             if (field === 'user_name') {
                 this.clearFilter();
+                console.log("sort", sort);
                 if (sort === '' || sort === 'DESC') {
 
                     this.filterTop[index].filter = 'ASC';
