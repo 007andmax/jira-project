@@ -419,6 +419,9 @@ body {
         .cmp-dboard-col {
             flex-direction: column;
             margin: 0 8px;
+            &.m-0 {
+                margin: 0;
+            }
             .cmp-profile-dp {
                 width: 72px;
                 height: 72px;
@@ -908,6 +911,10 @@ body {
                                 max-width: 220px;
                                 margin: 0 auto;
                             }
+                        }
+                        div.cmn-box {
+                            padding: 0;
+                            box-shadow: unset;
                         }
                     }
                 }

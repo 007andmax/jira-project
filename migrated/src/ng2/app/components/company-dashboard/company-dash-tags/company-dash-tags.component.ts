@@ -2,9 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitt
 import { CompanyTagsStateService } from './../../companies/company-tags/states/company-tags-state.service';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { FormControl } from '@angular/forms';
-
 import { Subscription } from 'rxjs';
-import { MatChipInputEvent } from '@angular/material';
 import { Tag } from 'src/ng2/app/interfaces/tag/tag';
 import { TagsService } from 'src/ng2/app/services/tags/tags.service';
 

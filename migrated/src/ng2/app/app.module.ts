@@ -344,6 +344,12 @@ import { QuoteAsideEditComponent } from './components/billing/quotes/quote-aside
 import { ProductItemQuoteEditComponent } from './components/billing/quotes/quote-aside-edit/product-item-quote-edit/product-item-quote-edit.component';
  import { QuoteAsideEditBodyComponent } from './components/billing/quotes/quote-aside-edit/quote-aside-edit-body/quote-aside-edit-body.component';
 import { CompanyDashTagsComponent } from './components/company-dashboard/company-dash-tags/company-dash-tags.component';
+import { CompanyDashDetailComponent } from './components/company-dashboard/company-dash-detail/company-dash-detail.component';
+import { CompanyDashStatsComponent } from './components/company-dashboard/company-dash-stats/company-dash-stats.component';
+import { CompanyDashTicketComponent } from './components/company-dashboard/company-dash-ticket/company-dash-ticket.component';
+import { CompanyDashRevenueComponent } from './components/company-dashboard/company-dash-revenue/company-dash-revenue.component';
+import { CompanyDashInvoiceComponent } from './components/company-dashboard/company-dash-invoice/company-dash-invoice.component';
+import { CompanyDashContractComponent } from './components/company-dashboard/company-dash-contract/company-dash-contract.component';
 
 /**
  * declare angular
@@ -586,6 +592,12 @@ angular.module('quicktech')
     CompanyEditAsideComponent,
     CompanyTagsComponent,
     CompanyDashTagsComponent,
+    CompanyDashDetailComponent,
+    CompanyDashStatsComponent,
+    CompanyDashTicketComponent,
+    CompanyDashRevenueComponent,
+    CompanyDashInvoiceComponent,
+    CompanyDashContractComponent,
     DraftEmailComponent,
     DraftEmailRecipientsComponent,
     LeftPanelTagsComponent,
