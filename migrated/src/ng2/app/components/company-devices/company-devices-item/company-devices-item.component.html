@@ -176,11 +176,17 @@
             [textContent]="device.system.caption + device.system.release_id"
         ></span>
         <div class="company-devices-table__system-network-buttons">
-            <div class="qt-df qt-ai-c qt-mr-20 qt-pointer">
+            <div
+                class="qt-df qt-ai-c qt-mr-20 qt-pointer"
+                (click)="openAside('SYSTEM')"
+            >
                 <div class="icon__system qt-ic-c qt-mr-6 qt-sz-16"></div>
                 <div>System</div>
             </div>
-            <div class="qt-df qt-ai-c qt-pointer">
+            <div
+                class="qt-df qt-ai-c qt-pointer"
+                (click)="openAside('NETWORK')"
+            >
                 <div class="icon__network qt-ic-c qt-mr-6 qt-sz-16"></div>
                 <div>Network</div>
             </div>
@@ -192,11 +198,17 @@
             [textContent]="device.ip"
         ></span>
         <div class="company-devices-table__ip-address-buttons qt-pl-15">
-            <div class="qt-df qt-ai-c qt-mr-20 qt-pointer">
+            <div
+                class="qt-df qt-ai-c qt-mr-20 qt-pointer"
+                (click)="openAside('SOFTWARE')"
+            >
                 <div class="icon__software qt-ic-c qt-mr-6 qt-sz-16"></div>
                 <div>Software</div>
             </div>
-            <div class="qt-df qt-ai-c qt-pointer">
+            <div
+                class="qt-df qt-ai-c qt-pointer"
+                (click)="openAside('UPDATES')"
+            >
                 <div class="icon__updates qt-ic-c qt-mr-6 qt-sz-16"></div>
                 <div>Updates</div>
             </div>

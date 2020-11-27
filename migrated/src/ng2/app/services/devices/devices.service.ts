@@ -35,6 +35,9 @@ export class DevicesService {
   public getCompanyDevices(companyId) {
     return this.http.get(this.apiUrl + `devices?companyId=${companyId}`);
   }
+  public getDeviceExtended(companyId, agentId) {
+    return this.http.get(this.apiUrl + `devices/extended?companyId=${companyId}&agentId=${agentId}`);
+  }
   public setIcon(data) {
     return this.http.post(this.apiUrl + '/devices/editAgentInfo', data);
   }

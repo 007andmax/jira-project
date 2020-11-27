@@ -11,6 +11,7 @@ import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.se
 import { REBOOT_DEVICE, REMOVE_DEVICES, SHUTDOWN_DEVICE } from 'src/ng2/app/const/confirm';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
+import { DeviceCompanyAsideParams } from '../class/device-company-aside-params';
 
 @Component({
   selector: 'app-company-devices-item',
@@ -44,6 +45,9 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     }, 1000);
 
+  }
+  openAside(type) {
+    if (this.device.agentId) this.devicesStateService.setOnOpenAside(new DeviceCompanyAsideParams(type, [this.device.agentId]));
   }
   onSelectDevice() {
     this.onChangeSelect.emit(null);

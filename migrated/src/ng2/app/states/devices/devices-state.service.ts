@@ -19,6 +19,7 @@ export class DevicesStateService {
   onUpdateAgentActivityStatus: EventEmitter<any> = new EventEmitter();
   onGetDevices: EventEmitter<any> = new EventEmitter();
   onResetDeviceTiming: EventEmitter<any> = new EventEmitter();
+  onOpenAside: EventEmitter<any> = new EventEmitter();
   onRemoveConnecion: EventEmitter<any> = new EventEmitter();
   onLaunchRemoteApp: EventEmitter<any> = new EventEmitter();
   // onChangeDevices: EventEmitter<DeviceUpdate> = new EventEmitter();
@@ -117,6 +118,13 @@ export class DevicesStateService {
     var splittedArray = timeString.split(':');
     return splittedArray[2] * 1000 + splittedArray[1] * 60000 + splittedArray[0] * 3600000
   };
+  public setOnOpenAside(data) {
+    console.log("data", data);
+    this.onOpenAside.emit(data);
+  }
+  public getOnOpenAside() {
+    return this.onOpenAside;
+  }
   public getOnResetDeviceTiming() {
     return this.onResetDeviceTiming;
   }

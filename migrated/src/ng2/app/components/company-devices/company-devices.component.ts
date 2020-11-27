@@ -22,6 +22,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
   isOfflineDeviceSelected: boolean = false;
   filter: CompanyDeviceFilter = new CompanyDeviceFilter();
   showPreloader: boolean = true;
+  companyId: string;
   sub: Subscription = new Subscription();
   constructor(private devicesStateService: DevicesStateService,
     private devicesService: DevicesService,
@@ -32,32 +33,32 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    let companyId = localStorage.getItem("company_id");
+    this.companyId = localStorage.getItem("company_id");
     if (this.devicesStateService.getAllDevices()) {
-      this.devices = (this.devicesStateService.getAllDevices()[companyId]) ? JSON.parse(JSON.stringify(this.devicesStateService.getAllDevices()[companyId])).map(item => new DeviceCompany(item, companyId)) : [];
+      this.devices = (this.devicesStateService.getAllDevices()[this.companyId]) ? JSON.parse(JSON.stringify(this.devicesStateService.getAllDevices()[this.companyId])).map(item => new DeviceCompany(item, this.companyId)) : [];
       this.filter.onFilterName(this.devices);
       console.log("this.devices", this.devices);
       this.showPreloader = false;
     }
-    if (this.devices.length > 0) this.sendDeviceStatusRequest(companyId, this.devices.filter(item => item.agentId).map(item => item.agentId));
+    if (this.devices.length > 0) this.sendDeviceStatusRequest(this.companyId, this.devices.filter(item => item.agentId).map(item => item.agentId));
     let getOnDevices = this.devicesStateService.getOnDevices().subscribe(data => {
-      console.log("data[companyId]", data[companyId]);
-      if (this.devices.length === 0) this.sendDeviceStatusRequest(companyId, data[companyId].filter(item => item.agentId).map(item => item.agentId));
-      if (data[companyId].length > this.devices.length) {
-        data[companyId].forEach(item => {
+
+      if (this.devices.length === 0) this.sendDeviceStatusRequest(this.companyId, data[this.companyId].filter(item => item.agentId).map(item => item.agentId));
+      if (data[this.companyId].length > this.devices.length) {
+        data[this.companyId].forEach(item => {
           let find = this.devices.find(device => device.id === item.id);
-          if (!find) this.devices.push(new DeviceCompany(item, companyId));
+          if (!find) this.devices.push(new DeviceCompany(item, this.companyId));
         });
-      } else if (data[companyId].length < this.devices.length) {
+      } else if (data[this.companyId].length < this.devices.length) {
         this.devices.forEach((item, index) => {
-          let findIndex = data[companyId].findIndex(device => device.id === item.id);
+          let findIndex = data[this.companyId].findIndex(device => device.id === item.id);
           if (findIndex === -1) this.devices.splice(index, 1);
         })
-      } else if (data[companyId].length === this.devices.length) {
+      } else if (data[this.companyId].length === this.devices.length) {
         this.devices.forEach(item => {
-          let findIndex = data[companyId].findIndex(device => device.id === item.id);
+          let findIndex = data[this.companyId].findIndex(device => device.id === item.id);
           console.log("findIndex", findIndex);
-          if (findIndex > -1) item.update(data[companyId][findIndex]);
+          if (findIndex > -1) item.update(data[this.companyId][findIndex]);
         })
       }
       this.filter.onCurrentFilter(this.devices);
@@ -88,17 +89,17 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REBOOT_DEVICE) {
-          this.devicesService.sendPowerAction(companyId, this.devicesStateService.getDevicesForReboot().map(item => item.agentId), 'reboot').subscribe(data => {
+          this.devicesService.sendPowerAction(this.companyId, this.devicesStateService.getDevicesForReboot().map(item => item.agentId), 'reboot').subscribe(data => {
 
           });
         }
         if (this.confirmStateService.getConfirmAction() === SHUTDOWN_DEVICE) {
-          this.devicesService.sendPowerAction(companyId, this.devicesStateService.getDevicesForShutDown().map(item => item.agentId), 'shutdown').subscribe(data => {
+          this.devicesService.sendPowerAction(this.companyId, this.devicesStateService.getDevicesForShutDown().map(item => item.agentId), 'shutdown').subscribe(data => {
 
           });
         }
         if (this.confirmStateService.getConfirmAction() === REMOVE_DEVICES) {
-          this.devicesService.sendUninstallAgentRequest(companyId, this.devicesStateService.getDevicesForRemove().map(item => item.id)).subscribe(data => {
+          this.devicesService.sendUninstallAgentRequest(this.companyId, this.devicesStateService.getDevicesForRemove().map(item => item.id)).subscribe(data => {
             this.onChangeSelect();
           });
         }
@@ -107,7 +108,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getConfirm);
     let getOnUpdateAgentActivityStatus = this.devicesStateService.getOnUpdateAgentActivityStatus().subscribe(newChange => {
-      var isCurrentCompany = this.devicesStateService.getCompanyIdByAgentId(newChange.data.agentId) === companyId;
+      var isCurrentCompany = this.devicesStateService.getCompanyIdByAgentId(newChange.data.agentId) === this.companyId;
       if (newChange.data && newChange.data.statuses && newChange.data.statuses.hasOwnProperty('Idle')) {
         if (isCurrentCompany) {
           for (var i = 0; i < this.devices.length; i++) {
