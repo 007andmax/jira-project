@@ -22,15 +22,24 @@
                         </div>
                     </th>
                     <th class="company-devices-table__device-type"></th>
-                    <th class="company-devices-table__device-name">
+                    <th
+                        class="company-devices-table__device-name"
+                        (click)="onFilter('name')"
+                    >
                         Device Name
                         <span class="qt-table-modern__sorting"></span>
                     </th>
-                    <th class="company-devices-table__logged-user">
+                    <th
+                        class="company-devices-table__logged-user"
+                        (click)="onFilter('user_name')"
+                    >
                         Logged in user
                         <span class="qt-table-modern__sorting"></span>
                     </th>
-                    <th class="company-devices-table__up-time">
+                    <th
+                        class="company-devices-table__up-time"
+                        (click)="onFilter('up_time')"
+                    >
                         Up time
                         <span class="qt-table-modern__sorting"></span>
                     </th>
@@ -526,15 +535,21 @@
 
 
 
+
+
         </div>
     </div>
+
+
 
 
     <!-- ASIDE -->
     <div
         class="company-devices-page__aside company-device-aside"
-        [hidden]="false"
+        [hidden]="true"
     >
+
+
 
 
         <div class="company-device-aside__menu">
@@ -580,6 +595,8 @@
         </div>
 
 
+
+
         <div class="company-device-aside__header qt-df qt-ai-c qt-jc-sb">
             <div class="qt-df qt-ai-c">
                 <div class="icon__computer icon --online qt-sz-24 qt-mr-12"></div>
@@ -587,6 +604,8 @@
                     HP Ethernet Multi-Environment color jet-2005
                 </div>
             </div>
+
+
 
 
             <div class="qt-df qt-ai-c">
@@ -597,12 +616,16 @@
         </div>
 
 
+
+
         <div class="company-device-aside__subheader">
             <div class="company-device-aside__subheader-item subheader-item-system --active"></div>
             <div class="company-device-aside__subheader-item subheader-item-network"></div>
             <div class="company-device-aside__subheader-item subheader-item-software"></div>
             <div class="company-device-aside__subheader-item subheader-item-updates"></div>
         </div>
+
+
 
 
         <div class="company-device-aside__body">
@@ -704,6 +727,8 @@
             </div> -->
 
 
+
+
             <!-- Network Tab -->
             <!-- <div class="sidebar-network qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
             <div class="company-device-aside__info-block">
@@ -760,6 +785,8 @@
 
           <div class="qt-divider qt-mt-24 qt-mb-24"></div>
         </div> -->
+
+
 
             <!-- Software tab -->
             <!-- <div class="sidebar-software qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
@@ -824,32 +851,40 @@
                 </div>
             </div> -->
 
+
+
             <!-- Update tab -->
             <div class="sidebar-updates qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
-              <div class="qt-df qt-jc-sb">
-                <div class="sidebar-updates__tab-title qt-ff-sb">UPDATES</div>
-              </div>
-
-
-              <div class="sidebar-updates__items">
-                <div class="sidebar-updates__item">
-                  <div class="sidebar-updates__icon icon__virus-protection icon --updated"></div>
-                  <div class="sidebar-updates__title">Virus Protection</div>
-                  <div class="sidebar-updates__subtitle">Up-to-date</div>
+                <div class="qt-df qt-jc-sb">
+                    <div class="sidebar-updates__tab-title qt-ff-sb">UPDATES</div>
                 </div>
 
-                <div class="sidebar-updates__item">
-                  <div class="sidebar-updates__icon icon__security-update icon --alert"></div>
-                  <div class="sidebar-updates__title">Security Update</div>
-                  <div class="sidebar-updates__subtitle --link">Install 7 Updates</div>
-                </div>
 
-                <div class="sidebar-updates__item">
-                  <div class="sidebar-updates__icon icon icon__drivers-missing --updated"></div>
-                  <div class="sidebar-updates__title">Drivers Misssing</div>
-                  <div class="sidebar-updates__subtitle">Up-to-date</div>
+
+
+                <div class="sidebar-updates__items">
+                    <div class="sidebar-updates__item">
+                        <div class="sidebar-updates__icon icon__virus-protection icon --updated"></div>
+                        <div class="sidebar-updates__title">Virus Protection</div>
+                        <div class="sidebar-updates__subtitle">Up-to-date</div>
+                    </div>
+
+
+
+                    <div class="sidebar-updates__item">
+                        <div class="sidebar-updates__icon icon__security-update icon --alert"></div>
+                        <div class="sidebar-updates__title">Security Update</div>
+                        <div class="sidebar-updates__subtitle --link">Install 7 Updates</div>
+                    </div>
+
+
+
+                    <div class="sidebar-updates__item">
+                        <div class="sidebar-updates__icon icon icon__drivers-missing --updated"></div>
+                        <div class="sidebar-updates__title">Drivers Misssing</div>
+                        <div class="sidebar-updates__subtitle">Up-to-date</div>
+                    </div>
                 </div>
-              </div>
             </div>
         </div>
     </div>

@@ -40,6 +40,7 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
       if (this.device.online) this.device.timing.online += 1000;
       if (!this.device.online) this.device.timing.offline += 1000;
       if (this.device.timing.idle) this.device.timing.idle += 1000;
+      if (this.device.online) this.device.timing.uptimeForOrdering += 1000;
       this.cd.detectChanges();
     }, 1000);
 

@@ -9,6 +9,7 @@ import { ConfirmComponent } from '../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../shared/confirm/services/confirm-state.service';
 import { Device } from './class/device';
 import { DeviceCompany } from './class/device-company';
+import { CompanyDeviceFilter } from './class/device-company-filter';
 
 @Component({
   selector: 'app-company-devices',
@@ -19,6 +20,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
   devices: Array<DeviceCompany> = [];
   selectAllDevices: boolean = false;
   isOfflineDeviceSelected: boolean = false;
+  filter: CompanyDeviceFilter = new CompanyDeviceFilter();
   sub: Subscription = new Subscription();
   constructor(private devicesStateService: DevicesStateService,
     private devicesService: DevicesService,
@@ -147,6 +149,9 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getOnResetDeviceTiming);
+  }
+  public onFilter(field) {
+    this.filter.onFilter(field, this.devices)
   }
   onRemoveAgents() {
     let len = this.devices.filter(item => item.selected).length;
