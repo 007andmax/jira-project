@@ -17,6 +17,14 @@
         </ng-template>
     </div>
 
+
+
+
+
+
+
+
+
     <div class="company-device-aside__header qt-df qt-ai-c qt-jc-sb">
         <div class="qt-df qt-ai-c">
             <div
@@ -35,6 +43,14 @@
             </div>
         </div>
 
+
+
+
+
+
+
+
+
         <div class="qt-df qt-ai-c">
             <div class="qt-sz-24 qt-mr-8 qt-pointer company-device-aside__more-icon icon__more-vertical"></div>
             <div
@@ -48,113 +64,30 @@
             ></div>
         </div>
     </div>
-
     <div class="company-device-aside__subheader">
-        <div class="company-device-aside__subheader-item subheader-item-system --active"></div>
-        <div class="company-device-aside__subheader-item subheader-item-network"></div>
+        <div
+            class="company-device-aside__subheader-item subheader-item-system"
+            [ngClass]="{'--active':tab === 'SYSTEM'}"
+            (click)="tab = 'SYSTEM'"
+        ></div>
+        <div
+            class="company-device-aside__subheader-item subheader-item-network"
+            [ngClass]="{'--active':tab === 'NETWORK'}"
+            (click)="tab = 'NETWORK'"
+        ></div>
         <div class="company-device-aside__subheader-item subheader-item-software"></div>
         <div class="company-device-aside__subheader-item subheader-item-updates"></div>
     </div>
-
     <div class="company-device-aside__body">
-        <app-company-devices-aside-system [device]="currentDevice"></app-company-devices-aside-system>
+        <app-company-devices-aside-system
+            [device]="currentDevice"
+            *ngIf="tab === 'SYSTEM'"
+        ></app-company-devices-aside-system>
+        <app-company-devices-aside-network-tab
+            [device]="currentDevice"
+            *ngIf="tab === 'NETWORK'"
+        ></app-company-devices-aside-network-tab>
         <!-- System Tab -->
-        <!-- <div class="sidebar-system qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
-                <div class="company-device-aside__info-block">
-                    <div class="qt-df qt-jc-sb">
-                        <div class="sidebar-system__title qt-ff-sb">Device Specifications</div>
-                        <div class="company-device-aside__expand-collapse qt-sz-16"></div>
-                    </div>
-                    <div class="sidebar-system__info">
-                        <div class="sidebar-system__info-title">Device Name</div>
-                        <div class="sidebar-system__info-text">
-                            HP Ethernet Multi-Environment color jet-2005
-                        </div>
-                    </div>
-
-
-                    <div class="sidebar-system__info">
-                        <div class="sidebar-system__info-title">Processor</div>
-                        <div class="sidebar-system__info-text">Pend and Touch</div>
-                    </div>
-
-
-                    <div class="sidebar-system__info">
-                        <div class="sidebar-system__info-title">Installed RAM</div>
-                        <div class="sidebar-system__info-text">32.0 GB</div>
-                    </div>
-
-
-                    <div class="sidebar-system__info">
-                        <div class="sidebar-system__info-title">Device ID</div>
-                        <div class="sidebar-system__info-text">1DF8C7E1-DCF6-4030-AE0E-5F38A92C6BE3</div>
-                    </div>
-
-
-                    <div class="sidebar-system__info">
-                        <div class="sidebar-system__info-title">Product ID</div>
-                        <div class="sidebar-system__info-text">00330-80000-00000-AA033</div>
-                    </div>
-
-
-                    <div class="sidebar-system__info">
-                        <div class="sidebar-system__info-title">System Type</div>
-                        <div class="sidebar-system__info-text">
-                            64-bit operating system, x64-bassed processor
-                        </div>
-                    </div>
-
-
-                    <div class="sidebar-system__info">
-                        <div class="sidebar-system__info-title">Pend and Touch</div>
-                        <div class="sidebar-system__info-text">
-                            No pen or touch input is available for this display
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="qt-divider qt-mt-24 qt-mb-24"></div>
-
-
-                <div class="company-device-aside__info-block --collapsed">
-                    <div class="qt-df qt-jc-sb">
-                        <div class="sidebar-system__title qt-ff-sb">Window Specifications</div>
-                        <div class="company-device-aside__expand-collapse qt-sz-16"></div>
-                    </div>
-
-
-                    <div class="sidebar-system__info">
-                        <div class="sidebar-system__info-title">Edition</div>
-                        <div class="sidebar-system__info-text">Windows 10 Pro</div>
-                    </div>
-
-
-                    <div class="sidebar-system__info">
-                        <div class="sidebar-system__info-title">Version</div>
-                        <div class="sidebar-system__info-text">2004</div>
-                    </div>
-
-
-                    <div class="sidebar-system__info">
-                        <div class="sidebar-system__info-title">Installed on</div>
-                        <div class="sidebar-system__info-text">2020-08-05</div>
-                    </div>
-
-
-                    <div class="sidebar-system__info">
-                        <div class="sidebar-system__info-title">OS build</div>
-                        <div class="sidebar-system__info-text">19041.421</div>
-                    </div>
-
-
-                    <div class="sidebar-system__info">
-                        <div class="sidebar-system__info-title">Experience</div>
-                        <div class="sidebar-system__info-text">Windows Feature Experience Pack</div>
-                    </div>
-                </div>
-            </div> -->
-
         <!-- Network Tab -->
         <!-- <div class="sidebar-network qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
             <div class="company-device-aside__info-block">
@@ -211,6 +144,14 @@
 
           <div class="qt-divider qt-mt-24 qt-mb-24"></div>
         </div> -->
+
+
+
+
+
+
+
+
 
         <!-- Software tab -->
         <!-- <div class="sidebar-software qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
@@ -275,11 +216,27 @@
                 </div>
             </div> -->
 
+
+
+
+
+
+
+
+
         <!-- Update tab -->
         <div class="sidebar-updates qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
             <div class="qt-df qt-jc-sb">
                 <div class="sidebar-updates__tab-title qt-ff-sb">UPDATES</div>
             </div>
+
+
+
+
+
+
+
+
 
             <div class="sidebar-updates__items">
                 <div class="sidebar-updates__item">
@@ -288,11 +245,27 @@
                     <div class="sidebar-updates__subtitle">Up-to-date</div>
                 </div>
 
+
+
+
+
+
+
+
+
                 <div class="sidebar-updates__item">
                     <div class="sidebar-updates__icon icon__security-update icon --alert"></div>
                     <div class="sidebar-updates__title">Security Update</div>
                     <div class="sidebar-updates__subtitle --link">Install 7 Updates</div>
                 </div>
+
+
+
+
+
+
+
+
 
                 <div class="sidebar-updates__item">
                     <div class="sidebar-updates__icon icon icon__drivers-missing --updated"></div>

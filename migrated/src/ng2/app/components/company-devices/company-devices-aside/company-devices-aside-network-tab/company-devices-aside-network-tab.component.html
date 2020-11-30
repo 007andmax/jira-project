@@ -1,0 +1,74 @@
+<div class="sidebar-network qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
+    <div class="company-device-aside__info-block">
+        <div class="qt-df qt-jc-sb">
+            <div class="sidebar-network__title qt-ff-sb">IP Settings</div>
+            <div class="company-device-aside__expand-collapse qt-sz-16"></div>
+        </div>
+
+        <div class="sidebar-network__info">
+            <div class="sidebar-network__info-title">IP Assignment</div>
+            <div class="sidebar-network__info-text">Automatic (DHCP)</div>
+        </div>
+
+        <div class="sidebar-network__info">
+            <div class="sidebar-network__info-title">Link speed (Receive/Transmit)</div>
+            <div
+                class="sidebar-network__info-text"
+                [textContent]="getLinkSpeed() + ' (Mbps)'"
+            ></div>
+        </div>
+
+        <div class="sidebar-network__info">
+            <div class="sidebar-network__info-title">Link-local IPv6 address</div>
+            <div class="sidebar-network__info-text">fe80::5c63:3f5a:de19::e55f17</div>
+        </div>
+
+        <div class="sidebar-network__info">
+            <div class="sidebar-network__info-title">IPv4 address</div>
+            <div
+                class="sidebar-network__info-text"
+                [textContent]="getNetworkAdapter().ip_address"
+            ></div>
+        </div>
+
+        <div class="sidebar-network__info">
+            <div class="sidebar-network__info-title">IPv4 DNS servers</div>
+            <div
+                class="sidebar-network__info-text"
+                [textContent]="getNetworkAdapter().dns"
+            ></div>
+        </div>
+
+        <div class="sidebar-network__info">
+            <div class="sidebar-network__info-title">Manufacturer</div>
+            <div
+                class="sidebar-network__info-text"
+                [textContent]="getNetworkAdapter().manufacturer"
+            ></div>
+        </div>
+
+        <div class="sidebar-network__info">
+            <div class="sidebar-network__info-title">Description</div>
+            <div
+                class="sidebar-network__info-text"
+                [textContent]="getNetworkAdapter().description"
+            >
+            </div>
+        </div>
+
+        <div class="sidebar-network__info">
+            <div class="sidebar-network__info-title">Driver version</div>
+            <div class="sidebar-network__info-text">12.15.184.0</div>
+        </div>
+
+        <div class="sidebar-network__info">
+            <div class="sidebar-network__info-title">Physical address (MAC)</div>
+            <div
+                class="sidebar-network__info-text"
+                [textContent]="getNetworkAdapter().mac"
+            ></div>
+        </div>
+    </div>
+
+    <div class="qt-divider qt-mt-24 qt-mb-24"></div>
+</div>

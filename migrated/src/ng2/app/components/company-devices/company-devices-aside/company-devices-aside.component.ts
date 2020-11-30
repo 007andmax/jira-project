@@ -14,6 +14,7 @@ import { DeviceExtendedReport } from '../class/device-extended-report';
 })
 export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
   @Input() companyId: string;
+  tab: string = "SYSTEM";
   devices: Array<DeviceExtended> = [];
   currentDevice: DeviceExtended;
   open: boolean = false;
