@@ -1,0 +1,22 @@
+<div
+    class="company-device-aside__menu-item qt-pointer"
+    [ngClass]="{'--active': currentDevice.id === device.id}"
+    (click)="select()"
+>
+    <ng-template
+        #asideMenuItem
+        class="tooltip"
+    >
+        {{!isLabel() ? device.hostName || device.ip :  device.label || device.hostName || device.ip}}
+    </ng-template>
+    <div
+        placement="left"
+        [ngbTooltip]="asideMenuItem"
+        class="qt-sz-24"
+        [ngClass]="{'icon__computer' : device.iconName === 'workstation' || !device.iconName,
+              'icon__tablet' : device.iconName === 'device',
+            'icon__printer' : device.iconName === 'printer',
+          'icon__server' : device.iconName === 'server',
+        '--ofline': !device.online }"
+    ></div>
+</div>

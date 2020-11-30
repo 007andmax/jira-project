@@ -3,58 +3,37 @@
     *ngIf="open"
 >
     <div class="company-device-aside__menu">
-        <div class="company-device-aside__menu-item qt-pointer">
-            <ng-template
-                #asideMenuItem
-                class="tooltip"
-            >
-                MD Reception-02
-            </ng-template>
-            <div
-                placement="left"
-                [ngbTooltip]="asideMenuItem"
-                class="qt-sz-24 icon__computer"
-            ></div>
-        </div>
-        <div class="company-device-aside__menu-item qt-pointer">
-            <ng-template
-                #asideMenuItem
-                class="tooltip"
-            >
-                MD Reception-02
-            </ng-template>
-            <div
-                placement="left"
-                [ngbTooltip]="asideMenuItem"
-                class="qt-sz-24 icon__server"
-            ></div>
-        </div>
-        <div class="company-device-aside__menu-item qt-pointer --active">
-            <ng-template
-                #asideMenuItem
-                class="tooltip"
-            >
-                MD Reception-02
-            </ng-template>
-            <div
-                placement="left"
-                [ngbTooltip]="asideMenuItem"
-                class="qt-sz-24 icon__computer"
-            ></div>
-        </div>
+        <ng-template
+            ngFor
+            let-item
+            [ngForOf]="devices"
+            [ngForTrackBy]="trackById"
+        >
+            <app-company-devices-aside-device-icon
+                (onSelect)="currentDevice = item"
+                [currentDevice]="currentDevice"
+                [device]="item"
+            ></app-company-devices-aside-device-icon>
+        </ng-template>
     </div>
 
     <div class="company-device-aside__header qt-df qt-ai-c qt-jc-sb">
         <div class="qt-df qt-ai-c">
             <div class="icon__computer icon --online qt-sz-24 qt-mr-12"></div>
-            <div class="qt-fs-13 qt-ff-sb qt-lh-154">
-                HP Ethernet Multi-Environment color jet-2005
+            <div
+                class="qt-fs-13 qt-ff-sb qt-lh-154"
+                [textContent]="!isLabel() ? currentDevice.hostName || currentDevice.ip :  currentDevice.label || currentDevice.hostName || currentDevice.ip"
+            >
             </div>
         </div>
 
         <div class="qt-df qt-ai-c">
             <div class="qt-sz-24 qt-mr-8 qt-pointer company-device-aside__more-icon icon__more-vertical"></div>
-            <div class="qt-sz-24 qt-pointer company-device-aside__close-icon icon__close"></div>
+            <div
+                class="qt-sz-24 qt-pointer company-device-aside__close-icon icon__close"
+                *ngIf="devices.length > 1"
+                (click)="removeDevice()"
+            ></div>
             <div
                 class="qt-pointer company-device-aside__arrow-right-icon icon__arrow-right"
                 (click)="close()"

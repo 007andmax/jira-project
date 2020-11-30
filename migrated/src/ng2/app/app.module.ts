@@ -348,6 +348,7 @@ import { CompanyDevicesHeaderComponent } from './components/company-devices/comp
 import { CompanyDevicesRemoteAccessComponent } from './components/company-devices/company-devices-remote-access/company-devices-remote-access.component';
 import { CompanyDevicesEditNameComponent } from './components/company-devices/company-devices-edit-name/company-devices-edit-name.component';
 import { CompanyDevicesAsideComponent } from './components/company-devices/company-devices-aside/company-devices-aside.component';
+import { CompanyDevicesAsideDeviceIconComponent } from './components/company-devices/company-devices-aside/company-devices-aside-device-icon/company-devices-aside-device-icon.component';
 
 /**
  * declare angular
@@ -850,6 +851,7 @@ angular.module('quicktech')
     CompanyDevicesRemoteAccessComponent,
     CompanyDevicesEditNameComponent,
     CompanyDevicesAsideComponent,
+    CompanyDevicesAsideDeviceIconComponent,
   ],
   imports: [
     BrowserModule,
