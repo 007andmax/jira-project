@@ -19,7 +19,15 @@
 
     <div class="company-device-aside__header qt-df qt-ai-c qt-jc-sb">
         <div class="qt-df qt-ai-c">
-            <div class="icon__computer icon --online qt-sz-24 qt-mr-12"></div>
+            <div
+                class="icon qt-sz-24 qt-mr-12"
+                [ngClass]="{'icon__computer' : currentDevice.iconName === 'workstation' || !currentDevice.iconName,
+              'icon__tablet' : currentDevice.iconName === 'device',
+            'icon__printer' : currentDevice.iconName === 'printer',
+          'icon__server' : currentDevice.iconName === 'server',
+        '--ofline': !currentDevice.online,
+    '--online':currentDevice.online }"
+            ></div>
             <div
                 class="qt-fs-13 qt-ff-sb qt-lh-154"
                 [textContent]="!isLabel() ? currentDevice.hostName || currentDevice.ip :  currentDevice.label || currentDevice.hostName || currentDevice.ip"
@@ -49,6 +57,7 @@
     </div>
 
     <div class="company-device-aside__body">
+        <app-company-devices-aside-system [device]="currentDevice"></app-company-devices-aside-system>
         <!-- System Tab -->
         <!-- <div class="sidebar-system qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
                 <div class="company-device-aside__info-block">

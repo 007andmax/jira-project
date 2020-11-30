@@ -1,0 +1,114 @@
+<div class="sidebar-system qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
+    <div
+        class="company-device-aside__info-block"
+        [ngClass]="{'--collapsed' :toggleDeviceSpecifications}"
+    >
+        <div class="qt-df qt-jc-sb">
+            <div class="sidebar-system__title qt-ff-sb">Device Specifications</div>
+            <div
+                class="company-device-aside__expand-collapse qt-sz-16"
+                (click)="toggleDeviceSpecifications = !toggleDeviceSpecifications"
+            ></div>
+        </div>
+        <div class="sidebar-system__info">
+            <div class="sidebar-system__info-title">Device Name</div>
+            <div class="sidebar-system__info-text">
+                HP Ethernet Multi-Environment color jet-2005
+            </div>
+        </div>
+
+        <div class="sidebar-system__info">
+            <div class="sidebar-system__info-title">Processor</div>
+            <div
+                class="sidebar-system__info-text"
+                [textContent]="device.report.processors[0].name"
+            >
+                Pend and Touch
+            </div>
+        </div>
+
+        <div class="sidebar-system__info">
+            <div class="sidebar-system__info-title">Installed RAM</div>
+            <div
+                class="sidebar-system__info-text"
+                [textContent]="getRamSize(device.report.ram.total)"
+            ></div>
+        </div>
+
+        <div class="sidebar-system__info">
+            <div class="sidebar-system__info-title">Device ID</div>
+            <div class="sidebar-system__info-text">1DF8C7E1-DCF6-4030-AE0E-5F38A92C6BE3</div>
+        </div>
+
+        <div class="sidebar-system__info">
+            <div class="sidebar-system__info-title">Product ID</div>
+            <div class="sidebar-system__info-text">00330-80000-00000-AA033</div>
+        </div>
+
+        <div class="sidebar-system__info">
+            <div class="sidebar-system__info-title">System Type</div>
+            <div
+                class="sidebar-system__info-text"
+                [textContent]="device.report.system.architecture"
+            >
+
+            </div>
+        </div>
+
+        <div class="sidebar-system__info">
+            <div class="sidebar-system__info-title">Pend and Touch</div>
+            <div class="sidebar-system__info-text">
+                No pen or touch input is available for this display
+            </div>
+        </div>
+    </div>
+
+    <div class="qt-divider qt-mt-24 qt-mb-24"></div>
+
+    <div
+        class="company-device-aside__info-block"
+        [ngClass]="{'--collapsed' :toggleWindowSpecifications}"
+    >
+        <div class="qt-df qt-jc-sb">
+            <div class="sidebar-system__title qt-ff-sb">Window Specifications</div>
+            <div
+                class="company-device-aside__expand-collapse qt-sz-16"
+                (click)="toggleWindowSpecifications = !toggleWindowSpecifications"
+            ></div>
+        </div>
+
+        <div class="sidebar-system__info">
+            <div class="sidebar-system__info-title">Edition</div>
+            <div
+                class="sidebar-system__info-text"
+                [textContent]="getEdition()"
+            ></div>
+        </div>
+
+        <div class="sidebar-system__info">
+            <div class="sidebar-system__info-title">Version</div>
+            <div
+                class="sidebar-system__info-text"
+                [textContent]="device.report.system.version"
+            ></div>
+        </div>
+
+        <div class="sidebar-system__info">
+            <div class="sidebar-system__info-title">Installed on</div>
+            <div
+                class="sidebar-system__info-text"
+                [textContent]="getDate(device.report.system.install_date)"
+            ></div>
+        </div>
+
+        <div class="sidebar-system__info">
+            <div class="sidebar-system__info-title">OS build</div>
+            <div class="sidebar-system__info-text">19041.421</div>
+        </div>
+
+        <div class="sidebar-system__info">
+            <div class="sidebar-system__info-title">Experience</div>
+            <div class="sidebar-system__info-text">Windows Feature Experience Pack</div>
+        </div>
+    </div>
+</div>

@@ -349,6 +349,7 @@ import { CompanyDevicesRemoteAccessComponent } from './components/company-device
 import { CompanyDevicesEditNameComponent } from './components/company-devices/company-devices-edit-name/company-devices-edit-name.component';
 import { CompanyDevicesAsideComponent } from './components/company-devices/company-devices-aside/company-devices-aside.component';
 import { CompanyDevicesAsideDeviceIconComponent } from './components/company-devices/company-devices-aside/company-devices-aside-device-icon/company-devices-aside-device-icon.component';
+import { CompanyDevicesAsideSystemComponent } from './components/company-devices/company-devices-aside/company-devices-aside-system/company-devices-aside-system.component';
 
 /**
  * declare angular
@@ -852,6 +853,7 @@ angular.module('quicktech')
     CompanyDevicesEditNameComponent,
     CompanyDevicesAsideComponent,
     CompanyDevicesAsideDeviceIconComponent,
+    CompanyDevicesAsideSystemComponent,
   ],
   imports: [
     BrowserModule,
