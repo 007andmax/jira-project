@@ -492,6 +492,13 @@
   &__virus-protection {
     background-image: url("assets/img/icons/virus-protection.svg") ;
   }
+  &__master-agent {
+    background-image: url("assets/img/icons/master-agent.svg") ;
+  }
+  &__sidebar-blue {
+    background-image: url("assets/img/icons/sidebar-blue.svg") ;
+  }
+
   &.--updated {
     position: relative;
     &::before {

@@ -137,9 +137,9 @@
           }
         }
         &__windows {
-          width: 162px;
-          max-width: 162px;
-          min-width: 162px;
+          width: 195px;
+          max-width: 195px;
+          min-width: 195px;
           padding: 12px 0px 12px 8px;
           color: #4f5f79;
           vertical-align: top;
@@ -222,6 +222,9 @@
           position: absolute;
           top: 7px;
           display: flex;
+        }
+        .company-devices-table__ip-address-buttons {
+          left: -15px;
         }
         .device-name-edit-marker {
           display: flex;
@@ -342,7 +345,7 @@
       }
     }
     &__body {
-      height: calc(100% - 96px);
+      height: calc(100vh - 175px);
       overflow: auto;
     }
     &__info-block {
@@ -380,6 +383,8 @@
       line-height: 1.33;
       color: #364656;
       width: 132px;
+      min-width: 132px;
+      max-width: 132px;
       font-family: Graphik-Medium, sans-serif;
     }
     &__info-text {
@@ -392,6 +397,8 @@
   .sidebar-network {
     &__info-title {
       width: 200px;
+      min-width: 200px;
+      max-width: 200px;
     }
   }
 
@@ -421,6 +428,10 @@
       font-size: 12px;
       line-height: 1.33;
       color: #4f5f79;
+      min-width: 70px;
+      width: 70px;
+      max-width: 70px;
+      text-align: right;
     }
   }
 

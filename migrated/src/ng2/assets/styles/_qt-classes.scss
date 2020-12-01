@@ -490,6 +490,7 @@
   background-color: #ffffff;
   padding: 8px 0;
   margin: 0;
+  overflow: visible;
   &.--open-top {
     top: unset;
     bottom: calc(100% + 4px);
@@ -842,4 +843,8 @@
 
 .qt-w-auto-important {
   width: auto !important;
+}
+
+.qt-overflow-v {
+  overflow: visible;
 }

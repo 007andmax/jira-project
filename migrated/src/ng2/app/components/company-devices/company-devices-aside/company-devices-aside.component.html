@@ -29,7 +29,7 @@
               'icon__tablet' : currentDevice.iconName === 'device',
             'icon__printer' : currentDevice.iconName === 'printer',
           'icon__server' : currentDevice.iconName === 'server',
-        '--ofline': !currentDevice.online,
+        '--offline': !currentDevice.online,
     '--online':currentDevice.online }"
                 ></div>
                 <div
@@ -40,92 +40,92 @@
             </div>
             <div
                 class="qt-df qt-ai-c"
-                ngbDropdown
-                placement="bottom-right"
             >
-                <div
-                    class="qt-sz-24 qt-mr-8 qt-pointer company-device-aside__more-icon icon__more-vertical"
-                    ngbDropdownToggle
-                ></div>
-                <ul
-                    class="qt-dropdown-menu invoice-items-dropdown"
-                    ngbDropdownMenu
-                >
-                    <li
-                        class="pointer"
-                        ngbDropdownItem
-                        (click)="gotiDetailDevice()"
-                    >
-                        <div class="qt-ic-c icon__go-to qt-pointer qt-sz-24 qt-bgsz-16"></div>
-                        Device Detail
-                    </li>
-                    <li
-                        class="pointer"
-                        ngbDropdownItem
-                        *ngIf="currentDevice.type !== 'workstation' && currentDevice.online && getPermissions('REMOTE_CONNECTIONS')"
-                        (click)="remoteAccess('PROXY')"
-                    >
-                        <div class="qt-ic-c icon__go-to qt-pointer qt-sz-24 qt-bgsz-16"></div>
-                        Remote Access
-                    </li>
-                    <li
-                        class="pointer"
-                        *ngIf="currentDevice.type === 'workstation' && currentDevice.online && getPermissions('REMOTE_CONNECTIONS')"
-                        (click)="showRemoteAccess = !showRemoteAccess "
-                    >
-                        <div class="qt-ic-c icon__go-to qt-pointer qt-sz-24 qt-bgsz-16"></div>
-                        Remote Access
-                        <ul
-                            class="dropdown-menu-qt__submenu dropdown-menu"
-                            *ngIf="showRemoteAccess"
-                        >
-                            <li
-                                ngbDropdownItem
-                                (click)="remoteAccess('CSS')"
-                            >
-                                Custom Share Screen
-                            </li>
-                            <li
-                                ngbDropdownItem
-                                (click)="remoteAccess('RDP')"
-                            >
-                                Remote desktop protocol
-                            </li>
-                        </ul>
-                    </li>
-                    <li
-                        class="pointer"
-                        (click)="turnOff('reboot')"
-                        ngbDropdownItem
-                    >
-                        <div class="qt-bg-contain qt-sz-16 qt-mr-8"></div>
-                        Restart
-                    </li>
-                    <li
-                        class="pointer"
-                        (click)="turnOff('shutdown')"
-                        ngbDropdownItem
-                    >
-                        <div class="qt-bg-contain qt-sz-16 qt-mr-8"></div>
-                        Shutdown
-                    </li>
-                    <li
-                        class="pointer"
-                        (click)="setMasterAgent()"
-                        *ngIf="!currentDevice.master"
-                        ngbDropdownItem
-                    >
-                        <div class="qt-bg-contain qt-sz-16 qt-mr-8"></div>
-                        Set as Master Agent
-                    </li>
-                    <li
-                        class="pointer"
-                        (click)="removeCurrentDevice()"
-                    >
-                        <div class="icon__remove qt-bg-contain qt-sz-16 qt-mr-8"></div>
-                        Remove
-                    </li>
-                </ul>
+                <div ngbDropdown container="body" class="qt-overflow-v">
+                  <div
+                      class="qt-sz-24 qt-mr-8 qt-pointer company-device-aside__more-icon icon__more-vertical"
+                      ngbDropdownToggle
+                  ></div>
+                  <ul
+                      class="qt-dropdown-menu --open-bot"
+                      ngbDropdownMenu
+                  >
+                      <li
+                          class="pointer"
+                          ngbDropdownItem
+                          (click)="gotiDetailDevice()"
+                      >
+                          <div class="qt-ic-c icon__go-to qt-pointer qt-sz-16 qt-mr-8"></div>
+                          Device Detail
+                      </li>
+                      <li
+                          class="pointer"
+                          ngbDropdownItem
+                          *ngIf="currentDevice.type !== 'workstation' && currentDevice.online && getPermissions('REMOTE_CONNECTIONS')"
+                          (click)="remoteAccess('PROXY')"
+                      >
+                          <div class="qt-ic-c icon__quick-connect qt-pointer qt-sz-18 qt-mr-5"></div>
+                          Remote Access
+                      </li>
+                      <li
+                          class="pointer"
+                          *ngIf="currentDevice.type === 'workstation' && currentDevice.online && getPermissions('REMOTE_CONNECTIONS')"
+                          (click)="showRemoteAccess = !showRemoteAccess "
+                      >
+                          <div class="qt-ic-c icon__quick-connect qt-pointer qt-sz-18 qt-mr-5"></div>
+                          Remote Access
+                          <ul
+                              class="dropdown-menu-qt__submenu dropdown-menu"
+                              *ngIf="showRemoteAccess"
+                          >
+                              <li
+                                  ngbDropdownItem
+                                  (click)="remoteAccess('CSS')"
+                              >
+                                  Custom Share Screen
+                              </li>
+                              <li
+                                  ngbDropdownItem
+                                  (click)="remoteAccess('RDP')"
+                              >
+                                  Remote desktop protocol
+                              </li>
+                          </ul>
+                      </li>
+                      <li
+                          class="pointer"
+                          (click)="turnOff('reboot')"
+                          ngbDropdownItem
+                      >
+                          <div class="icon__restart qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                          Restart
+                      </li>
+                      <li
+                          class="pointer"
+                          (click)="turnOff('shutdown')"
+                          ngbDropdownItem
+                      >
+                          <div class="icon__shutdown qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                          Shutdown
+                      </li>
+                      <li
+                          class="pointer"
+                          (click)="setMasterAgent()"
+                          *ngIf="!currentDevice.master"
+                          ngbDropdownItem
+                      >
+                          <div class="icon__master-agent qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                          Set as Master Agent
+                      </li>
+                      <li
+                          class="pointer"
+                          (click)="removeCurrentDevice()"
+                      >
+                          <div class="icon__remove pointer qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                          Remove
+                      </li>
+                  </ul>
+                </div>
                 <div
                     class="qt-sz-24 qt-pointer company-device-aside__close-icon icon__close"
                     *ngIf="devices.length > 1"
