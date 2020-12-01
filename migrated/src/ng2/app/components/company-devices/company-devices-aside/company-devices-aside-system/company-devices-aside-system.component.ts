@@ -17,7 +17,10 @@ export class CompanyDevicesAsideSystemComponent implements OnInit {
   public getDate(date) {
     return moment(date).format('YYYY-MM-DD');
   }
-  getEdition() {
+  getNetworkAdapter() {
+    return this.device.report.networkAdapters.find(item => item.is_default);
+  }
+  getWindowsInfo() {
     return `${this.device.report.system.caption.replace('Microsoft ', '')}${(this.device.report.system.architecture !== '') ? ` ( ${this.device.report.system.architecture} )` : ''}${(this.device.report.system.release_id !== '') ? ` Version ${this.device.report.system.release_id}` : ''}`
   }
   getRamSize(ramSize) {

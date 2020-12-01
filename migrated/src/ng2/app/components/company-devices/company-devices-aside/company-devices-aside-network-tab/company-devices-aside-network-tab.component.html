@@ -6,25 +6,15 @@
         </div>
 
         <div class="sidebar-network__info">
-            <div class="sidebar-network__info-title">IP Assignment</div>
-            <div class="sidebar-network__info-text">Automatic (DHCP)</div>
-        </div>
-
-        <div class="sidebar-network__info">
-            <div class="sidebar-network__info-title">Link speed (Receive/Transmit)</div>
+            <div class="sidebar-network__info-title">Model(s):</div>
             <div
                 class="sidebar-network__info-text"
-                [textContent]="getLinkSpeed() + ' (Mbps)'"
+                [textContent]="getNetworkAdapter().description"
             ></div>
         </div>
 
         <div class="sidebar-network__info">
-            <div class="sidebar-network__info-title">Link-local IPv6 address</div>
-            <div class="sidebar-network__info-text">fe80::5c63:3f5a:de19::e55f17</div>
-        </div>
-
-        <div class="sidebar-network__info">
-            <div class="sidebar-network__info-title">IPv4 address</div>
+            <div class="sidebar-network__info-title">IP:</div>
             <div
                 class="sidebar-network__info-text"
                 [textContent]="getNetworkAdapter().ip_address"
@@ -32,7 +22,15 @@
         </div>
 
         <div class="sidebar-network__info">
-            <div class="sidebar-network__info-title">IPv4 DNS servers</div>
+            <div class="sidebar-network__info-title">Subnet Mask:</div>
+            <div
+                class="sidebar-network__info-text"
+                [textContent]="getNetworkAdapter().subnet"
+            ></div>
+        </div>
+
+        <div class="sidebar-network__info">
+            <div class="sidebar-network__info-title">DNS 1:</div>
             <div
                 class="sidebar-network__info-text"
                 [textContent]="getNetworkAdapter().dns"
@@ -40,32 +38,33 @@
         </div>
 
         <div class="sidebar-network__info">
-            <div class="sidebar-network__info-title">Manufacturer</div>
+            <div class="sidebar-network__info-title">Link Speed:</div>
             <div
                 class="sidebar-network__info-text"
-                [textContent]="getNetworkAdapter().manufacturer"
+                [textContent]="getLinkSpeed() + ' (MegaBit)'"
             ></div>
         </div>
 
         <div class="sidebar-network__info">
-            <div class="sidebar-network__info-title">Description</div>
+            <div class="sidebar-network__info-title">External IP:</div>
             <div
                 class="sidebar-network__info-text"
-                [textContent]="getNetworkAdapter().description"
+                [textContent]="device.report.externalIp"
+            ></div>
+        </div>
+        <div class="sidebar-network__info">
+            <div class="sidebar-network__info-title">MAC:</div>
+            <div
+                class="sidebar-network__info-text"
+                [textContent]="formatMacAddress(getNetworkAdapter().mac)"
             >
             </div>
         </div>
-
         <div class="sidebar-network__info">
-            <div class="sidebar-network__info-title">Driver version</div>
-            <div class="sidebar-network__info-text">12.15.184.0</div>
-        </div>
-
-        <div class="sidebar-network__info">
-            <div class="sidebar-network__info-title">Physical address (MAC)</div>
+            <div class="sidebar-network__info-title">DHCP:</div>
             <div
                 class="sidebar-network__info-text"
-                [textContent]="getNetworkAdapter().mac"
+                [textContent]="getNetworkAdapter().dhcp_server"
             ></div>
         </div>
     </div>

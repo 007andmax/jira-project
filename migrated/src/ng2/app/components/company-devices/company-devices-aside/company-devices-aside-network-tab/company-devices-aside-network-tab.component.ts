@@ -18,4 +18,12 @@ export class CompanyDevicesAsideNetworkTabComponent implements OnInit {
   getLinkSpeed() {
     return (Number(this.getNetworkAdapter().speed) / 1000000);
   }
+  formatMacAddress(mac: any) {
+    if (mac) {
+      return mac.match(/.{1,2}/g).join(' ');
+    } else {
+      return 'N/A';
+    }
+
+  };
 }

@@ -16,15 +16,6 @@
             ></app-company-devices-aside-device-icon>
         </ng-template>
     </div>
-
-
-
-
-
-
-
-
-
     <div class="company-device-aside__header qt-df qt-ai-c qt-jc-sb">
         <div class="qt-df qt-ai-c">
             <div
@@ -42,17 +33,93 @@
             >
             </div>
         </div>
-
-
-
-
-
-
-
-
-
-        <div class="qt-df qt-ai-c">
-            <div class="qt-sz-24 qt-mr-8 qt-pointer company-device-aside__more-icon icon__more-vertical"></div>
+        <div
+            class="qt-df qt-ai-c"
+            ngbDropdown
+            placement="bottom-right"
+        >
+            <div
+                class="qt-sz-24 qt-mr-8 qt-pointer company-device-aside__more-icon icon__more-vertical"
+                ngbDropdownToggle
+            ></div>
+            <ul
+                class="qt-dropdown-menu invoice-items-dropdown"
+                ngbDropdownMenu
+            >
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                >
+                    <div class="qt-ic-c icon__go-to qt-pointer qt-sz-24 qt-bgsz-16"></div>
+                    Device Detail
+                </li>
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                    *ngIf="currentDevice.type !== 'workstation' && currentDevice.online && getPermissions('REMOTE_CONNECTIONS')"
+                    (click)="remoteAccess('PROXY')"
+                >
+                    <div class="qt-ic-c icon__go-to qt-pointer qt-sz-24 qt-bgsz-16"></div>
+                    Remote Access
+                </li>
+                <li
+                    class="pointer"
+                    *ngIf="currentDevice.type === 'workstation' && currentDevice.online && getPermissions('REMOTE_CONNECTIONS')"
+                    (click)="showRemoteAccess = !showRemoteAccess "
+                >
+                    <div class="qt-ic-c icon__go-to qt-pointer qt-sz-24 qt-bgsz-16"></div>
+                    Remote Access
+                    <ul
+                        class="dropdown-menu-qt__submenu dropdown-menu"
+                        *ngIf="showRemoteAccess"
+                    >
+                        <li
+                            ngbDropdownItem
+                            (click)="remoteAccess('CSS')"
+                        >
+                            Custom Share Screen
+                        </li>
+                        <li
+                            ngbDropdownItem
+                            (click)="remoteAccess('RDP')"
+                        >
+                            Remote desktop protocol
+                        </li>
+                    </ul>
+                </li>
+                <li
+                    class="pointer"
+                    (click)="turnOff('reboot')"
+                    ngbDropdownItem
+                >
+                    <div class="qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                    Restart
+                </li>
+                <li
+                    class="pointer"
+                    (click)="turnOff('shutdown')"
+                    ngbDropdownItem
+                >
+                    <div class="qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                    Shutdown
+                </li>
+                <li
+                    class="pointer"
+                    (click)="setMasterAgent()"
+                    *ngIf="!currentDevice.master"
+                    ngbDropdownItem
+                >
+                    <div class="qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                    Set as Master Agent
+                </li>
+                <li
+                    class="pointer"
+                    (click)="removeCurrentDevice()"
+                >
+                    <div class="icon__remove qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                    Remove
+                </li>
+            </ul>
             <div
                 class="qt-sz-24 qt-pointer company-device-aside__close-icon icon__close"
                 *ngIf="devices.length > 1"
@@ -153,6 +220,25 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <!-- Software tab -->
         <!-- <div class="sidebar-software qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
               <div class="qt-df qt-jc-sb">
@@ -224,11 +310,49 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <!-- Update tab -->
         <div class="sidebar-updates qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
             <div class="qt-df qt-jc-sb">
                 <div class="sidebar-updates__tab-title qt-ff-sb">UPDATES</div>
             </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -253,11 +377,49 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 <div class="sidebar-updates__item">
                     <div class="sidebar-updates__icon icon__security-update icon --alert"></div>
                     <div class="sidebar-updates__title">Security Update</div>
                     <div class="sidebar-updates__subtitle --link">Install 7 Updates</div>
                 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
