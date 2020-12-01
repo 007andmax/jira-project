@@ -38,7 +38,6 @@ export class CompanyDashContractComponent implements OnInit {
 
   public ngOnInit() {
     this._id = /[^/]*$/.exec(window.location.href)[0];
-    setTimeout(() => {
       this.getContractsList();
       let getOnTogglePreview = this.contractsStateService.getOnTogglePreview().subscribe(data => {
 
@@ -64,7 +63,6 @@ export class CompanyDashContractComponent implements OnInit {
         }
       })
       this.sub.add(getOnToggleEdit);
-    }, 1000);
     
   }
 
@@ -92,6 +90,9 @@ export class CompanyDashContractComponent implements OnInit {
           code: this.statisticsColor[index]
         })
       });
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+      }
     });
     this.sub.add(getInvoice);
   }

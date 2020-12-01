@@ -26,9 +26,7 @@ export class CompanyDashInvoiceComponent implements OnInit {
 
   public ngOnInit() {
     this._id = /[^/]*$/.exec(window.location.href)[0];
-    setTimeout(() => {
-      this.getRecentInvoiceList();
-    }, 1000);
+    this.getRecentInvoiceList();
     
   }
 
@@ -39,6 +37,9 @@ export class CompanyDashInvoiceComponent implements OnInit {
         obj.dateName = moment(new Date(obj.date)).format('DD MMM YYYY');
         this.recentInvoiceList.push(obj);
       });
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+      }
     });
     this.sub.add(getInvoice);
   }

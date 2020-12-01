@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { CompanyProfile } from '../../companies/class/company-profile';
 import { CompaniesService } from 'src/ng2/app/services/company/companies.service';
 import { CompanyPrimaryContact } from '../../companies/class/company-primary-contact';
@@ -13,6 +13,7 @@ import { CompaniesStateService } from 'src/ng2/app/states/company/companies-stat
 import { DomSanitizer } from '@angular/platform-browser';
 import { TicketProfileFormService } from '../../../../../ng2/app/components/tickets/tickets/ticket-edit-aside/class/ticket-profile-form-service';
 import { CompanyServiceType } from '../../companies/class/company-service-type';
+import { CompanyDetail } from './company-detailing';
 
 @Component({
   selector: 'app-company-dash-detail',
@@ -22,12 +23,12 @@ import { CompanyServiceType } from '../../companies/class/company-service-type';
 export class CompanyDashDetailComponent implements OnInit {
 
   public companyDetail: CompanyProfile;
-  companyDetailing: any = {
+  companyDetailing: CompanyDetail = {
     name: '',
     addresses: '',
     phoneNumber: '',
     totalTickets: 0,
-    averageResponseTime: 0,
+    averageResponseTime: '0',
     serviceType: '',
     domain: '',
     clientIndustry: ""
@@ -58,6 +59,200 @@ export class CompanyDashDetailComponent implements OnInit {
     SEMI_MANAGED: 'Semi managed',
     FULLY_MANAGED: 'Fully managed'
   }
+  workingHoursList:WorkingHours[] = [
+    {
+      name: '12:00 AM',
+      value: '00:00'
+    },
+    {
+      name: '12:30 AM',
+      value: '00:30'
+    },
+    {
+      name: '1:00 AM',
+      value: '01:00'
+    },
+    {
+      name: '1:30 AM',
+      value: '01:30'
+    },
+    {
+      name: '2:00 AM',
+      value: '02:00'
+    },
+    {
+      name: '2:30 AM',
+      value: '02:30'
+    },
+    {
+      name: '3:00 AM',
+      value: '03:00'
+    },
+    {
+      name: '3:30 AM',
+      value: '03:30'
+    },
+    {
+      name: '4:00 AM',
+      value: '04:00'
+    },
+    {
+      name: '4:30 AM',
+      value: '04:30'
+    },
+    {
+      name: '5:00 AM',
+      value: '05:00'
+    },
+    {
+      name: '5:30 AM',
+      value: '05:30'
+    },
+    {
+      name: '6:00 AM',
+      value: '06:00'
+    },
+    {
+      name: '6:30 AM',
+      value: '06:30'
+    },
+    {
+      name: '7:00 AM',
+      value: '07:00'
+    },
+    {
+      name: '7:30 AM',
+      value: '07:30'
+    },
+    {
+      name: '8:00 AM',
+      value: '08:00'
+    },
+    {
+      name: '8:30 AM',
+      value: '08:30'
+    },
+    {
+      name: '9:00 AM',
+      value: '09:00'
+    },
+    {
+      name: '9:30 AM',
+      value: '09:30'
+    },
+    {
+      name: '10:00 AM',
+      value: '10:00'
+    },
+    {
+      name: '10:30 AM',
+      value: '10:30'
+    },
+    {
+      name: '11:00 AM',
+      value: '11:00'
+    },
+    {
+      name: '11:30 AM',
+      value: '11:30'
+    },
+    {
+      name: '12:00 PM',
+      value: '12:00'
+    },
+    {
+      name: '12:30 PM',
+      value: '12:30'
+    },
+    {
+      name: '13:00 PM',
+      value: '13:00'
+    },
+    {
+      name: '13:30 PM',
+      value: '13:30'
+    },
+    {
+      name: '14:00 PM',
+      value: '14:00'
+    },
+    {
+      name: '14:30 PM',
+      value: '14:30'
+    },
+    {
+      name: '15:00 PM',
+      value: '15:00'
+    },
+    {
+      name: '15:30 PM',
+      value: '15:30'
+    },
+    {
+      name: '16:00 PM',
+      value: '16:00'
+    },
+    {
+      name: '16:30 PM',
+      value: '16:30'
+    },
+    {
+      name: '17:00 PM',
+      value: '17:00'
+    },
+    {
+      name: '17:30 PM',
+      value: '17:30'
+    },
+    {
+      name: '18:00 PM',
+      value: '18:00'
+    },
+    {
+      name: '18:30 PM',
+      value: '18:30'
+    },
+    {
+      name: '19:00 PM',
+      value: '19:00'
+    },
+    {
+      name: '19:30 PM',
+      value: '19:30'
+    },
+    {
+      name: '20:00 PM',
+      value: '20:00'
+    },
+    {
+      name: '20:30 PM',
+      value: '20:30'
+    },
+    {
+      name: '21:00 PM',
+      value: '21:00'
+    },
+    {
+      name: '21:30 PM',
+      value: '21:30'
+    },
+    {
+      name: '22:00 PM',
+      value: '22:00'
+    },
+    {
+      name: '22:30 PM',
+      value: '22:30'
+    },
+    {
+      name: '23:00 PM',
+      value: '23:00'
+    },
+    {
+      name: '23:30 PM',
+      value: '23:30'
+    }
+  ];
 
   public constructor(private companiesService: CompaniesService,
     private toaster: ToastrService,
@@ -66,13 +261,12 @@ export class CompanyDashDetailComponent implements OnInit {
     private tagsState: CompanyTagsStateService,
     private companiesStateService: CompaniesStateService,
     private sanitizer: DomSanitizer,
+    public cd: ChangeDetectorRef
   ) { }
 
   public ngOnInit() {
     this._id = /[^/]*$/.exec(window.location.href)[0];
-    setTimeout(() => {
-      this.getCompanyDetails();
-    }, 1000);
+    this.getCompanyDetails();
     this.currentService = new TicketProfileFormService();
   }
 
@@ -142,7 +336,9 @@ export class CompanyDashDetailComponent implements OnInit {
           }
         });
       }
-      
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+      }
     })
     this.sub.add(getCompany);
   }
@@ -424,4 +620,9 @@ export class CompanyDashDetailComponent implements OnInit {
   }
 
 
+}
+
+export interface WorkingHours {
+  name: string;
+  value: string;
 }

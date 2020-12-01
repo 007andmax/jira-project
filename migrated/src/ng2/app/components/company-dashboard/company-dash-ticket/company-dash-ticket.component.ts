@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CompaniesService } from 'src/ng2/app/services/company/companies.service';
 import { Subscription } from 'rxjs';
 
@@ -16,7 +16,8 @@ export class CompanyDashTicketComponent implements OnInit {
   lineChartOptions: any;
   lineChartColors:string[] = ["#0747a6", "#00ccff", '#2bc7c6', '#7C77CB'];
 
-  public constructor(private companiesService: CompaniesService
+  public constructor(private companiesService: CompaniesService,
+    public cd: ChangeDetectorRef
   ) { }
 
   public ngOnInit() {
@@ -110,6 +111,9 @@ export class CompanyDashTicketComponent implements OnInit {
           values: countOfNewTickets
       }
       ];
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+      }
     });
     this.sub.add(getTicket);
   }

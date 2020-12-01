@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CompaniesService } from 'src/ng2/app/services/company/companies.service';
 import * as moment from "moment";
 import { Subscription } from 'rxjs';
@@ -21,13 +21,12 @@ export class CompanyDashRevenueComponent implements OnInit {
   chartOptions: any;
   chartColors:string[] = ["#0747a6", "#00ccff", '#cdecff'];
 
-  public constructor(private companiesService: CompaniesService) { }
+  public constructor(private companiesService: CompaniesService,
+    public cd: ChangeDetectorRef) { }
 
   public ngOnInit() {
     this._id = /[^/]*$/.exec(window.location.href)[0];
-    setTimeout(() => {
-      this.getInvoiceRevenue('12');
-    }, 1000);
+    this.getInvoiceRevenue('12');
     this.chartOptions = {
       chart: {
         type: 'pieChart',
@@ -56,7 +55,7 @@ export class CompanyDashRevenueComponent implements OnInit {
   }
 
   getInvoiceRevenue(month) {
-    let obj: any = {
+    let obj: InvoiceRevenue = {
       startDate: moment(new Date()).subtract(month, 'months').format('YYYY-MM-DD'),
       endDate: moment(new Date()).format('YYYY-MM-DD'),
       id: this._id
@@ -87,10 +86,19 @@ export class CompanyDashRevenueComponent implements OnInit {
           "value" : data.outstandingSum
         }
     ]
+    if (!this.cd['destroyed']) {
+      this.cd.detectChanges();
+    }
     });
     this.sub.add(getRevenue);
   }
 
 
 
+}
+
+export interface InvoiceRevenue {
+  startDate: string;
+  endDate: string;
+  id: string;
 }

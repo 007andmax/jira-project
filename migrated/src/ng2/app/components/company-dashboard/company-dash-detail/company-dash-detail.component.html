@@ -71,10 +71,10 @@
   <div class="profile-cmp-board primary-contact d-flex">
     <div class="small-title">Primary Contact</div>
     <div class="contact-info d-flex">
-      <figure class="d-flex" *ngIf="primaryContact.avatar != null && primaryContact.avatar != undefined && primaryContact.avatar != ''">
+      <!-- <figure class="d-flex" *ngIf="primaryContact.avatar != null && primaryContact.avatar != undefined && primaryContact.avatar != ''">
         <img src="{{primaryContact.avatar}}" alt="user" />
-      </figure>
-      <figure class="d-flex no-user-init uppercase" *ngIf="primaryContact.avatar == null || primaryContact.avatar == undefined || primaryContact.avatar == ''">
+      </figure> -->
+      <figure class="d-flex no-user-init uppercase">
         {{getCharacter(primaryContact.firstName)}}
       </figure>
       <div class="primary-contact-info d-flex">
@@ -147,108 +147,14 @@
                     <select #startTime class="cmn-select form-input" [id]=" 'from-'+work.dayOfWeek"
                     (change)="startTimeChange(work, startTime.value)"
                     name="{{work.dayOfWeek}}" [attr.disabled]="!work.checked ? 'disabled' : null" [ngModel]="fromTime_convert(work.startTime)" >
-                      <option value="00:00">12:00 AM</option>
-                      <option value="00:30">12:30 AM</option>
-                      <option value="01:00">1:00 AM</option>
-                      <option value="01:30">1:30 AM</option>
-                      <option value="02:00">2:00 AM</option>
-                      <option value="02:00">2:30 AM</option>
-                      <option value="03:00">3:00 AM</option>
-                      <option value="03:30">3:30 AM</option>
-                      <option value="04:00">4:00 AM</option>
-                      <option value="04:30">4:30 AM</option>
-                      <option value="05:00">5:00 AM</option>
-                      <option value="05:30">5:30 AM</option>
-                      <option value="06:00">6:00 AM</option>
-                      <option value="06:30">6:30 AM</option>
-                      <option value="07:00">07:00 AM</option>
-                      <option value="07:30">7:30 AM</option>
-                      <option value="08:00">08:00 AM</option>
-                      <option value="08:30">8:30 AM</option>
-                      <option value="09:00">9:00 AM</option>
-                      <option value="09:30">9:30 AM</option>
-                      <option value="10:00">10:00 AM</option>
-                      <option value="10:30">10:30 AM</option>
-                      <option value="11:00">11:00 AM</option>
-                      <option value="11:30">11:30 AM</option>
-                      <option value="12:00">12:00 PM</option>
-                      <option value="12:30">12:30 PM</option>
-                      <option value="13:00">13:00 PM</option>
-                      <option value="13:30">13:30 PM</option>
-                      <option value="14:00">14:00 PM</option>
-                      <option value="14:30">14:30 PM</option>
-                      <option value="15:00">15:00 PM</option>
-                      <option value="15:30">15:30 PM</option>
-                      <option value="16:00">16:00 PM</option>
-                      <option value="16:30">16:30 PM</option>
-                      <option value="17:00">17:00 PM</option>
-                      <option value="17:30">17:30 PM</option>
-                      <option value="18:00">18:00 PM</option>
-                      <option value="18:30">18:30 PM</option>
-                      <option value="19:00">19:00 PM</option>
-                      <option value="19:30">19:30 PM</option>
-                      <option value="20:00">20:00 PM</option>
-                      <option value="20:30">20:30 PM</option>
-                      <option value="21:00">21:00 PM</option>
-                      <option value="21:30">21:30 PM</option>
-                      <option value="22:00">22:00 PM</option>
-                      <option value="22:30">22:30 PM</option>
-                      <option value="23:00">23:00 PM</option>
-                      <option value="23:30">23:30 PM</option>
+                      <option *ngFor="let hours of workingHoursList" [value]="hours.value">{{hours.name}}</option>
                     </select>
                   </div>
                   <div class="tl-col">
                     <select #endTime class="cmn-select form-input"
                     (change)="endTimeChange(work,endTime.value)" [id]="'to-'+work.dayOfWeek"
                     name="{{work.dayOfWeek+i}}" [attr.disabled]="!work.checked ? 'disabled' : null" [ngModel]="toTime_convert(work.endTime)" >
-                    <option value="00:00">12:00 AM</option>
-                    <option value="00:30">12:30 AM</option>
-                    <option value="01:00">1:00 AM</option>
-                    <option value="01:30">1:30 AM</option>
-                    <option value="02:00">2:00 AM</option>
-                    <option value="02:00">2:30 AM</option>
-                    <option value="03:00">3:00 AM</option>
-                    <option value="03:30">3:30 AM</option>
-                    <option value="04:00">4:00 AM</option>
-                    <option value="04:30">4:30 AM</option>
-                    <option value="05:00">5:00 AM</option>
-                    <option value="05:30">5:30 AM</option>
-                    <option value="06:00">6:00 AM</option>
-                    <option value="06:30">6:30 AM</option>
-                    <option value="07:00">07:00 AM</option>
-                    <option value="07:30">7:30 AM</option>
-                    <option value="08:00">08:00 AM</option>
-                    <option value="08:30">8:30 AM</option>
-                    <option value="09:00">9:00 AM</option>
-                    <option value="09:30">9:30 AM</option>
-                    <option value="10:00">10:00 AM</option>
-                    <option value="10:30">10:30 AM</option>
-                    <option value="11:00">11:00 AM</option>
-                    <option value="11:30">11:30 AM</option>
-                    <option value="12:00">12:00 PM</option>
-                    <option value="12:30">12:30 PM</option>
-                    <option value="13:00">13:00 PM</option>
-                    <option value="13:30">13:30 PM</option>
-                    <option value="14:00">14:00 PM</option>
-                    <option value="14:30">14:30 PM</option>
-                    <option value="15:00">15:00 PM</option>
-                    <option value="15:30">15:30 PM</option>
-                    <option value="16:00">16:00 PM</option>
-                    <option value="16:30">16:30 PM</option>
-                    <option value="17:00">17:00 PM</option>
-                    <option value="17:30">17:30 PM</option>
-                    <option value="18:00">18:00 PM</option>
-                    <option value="18:30">18:30 PM</option>
-                    <option value="19:00">19:00 PM</option>
-                    <option value="19:30">19:30 PM</option>
-                    <option value="20:00">20:00 PM</option>
-                    <option value="20:30">20:30 PM</option>
-                    <option value="21:00">21:00 PM</option>
-                    <option value="21:30">21:30 PM</option>
-                    <option value="22:00">22:00 PM</option>
-                    <option value="22:30">22:30 PM</option>
-                    <option value="23:00">23:00 PM</option>
-                    <option value="23:30">23:30 PM</option>
+                    <option *ngFor="let hours of workingHoursList" [value]="hours.value">{{hours.name}}</option>
                     </select>
                   </div>
                 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { CompanyProfile } from '../../companies/class/company-profile';
 import { CompanyPrimaryContact } from '../../companies/class/company-primary-contact';
 import { Subscription } from 'rxjs';
@@ -41,25 +41,23 @@ export class CompanyDashStatsComponent implements OnInit {
   public constructor(
     private usersStateService: UsersStateService,
     private devicesState: DevicesSateService,
+    public cd: ChangeDetectorRef
   ) { }
 
   public ngOnInit() {
     this._id = /[^/]*$/.exec(window.location.href)[0];
-    setTimeout(() => {
-      if (this.usersStateService.getAllUsers().length > 0) this.onGetUsersCount(this.usersStateService.getAllUsers());
-      let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
-        this.showArchivedCompanies = false;
-        this.onGetUsersCount(data);
-      })
-      this.sub.add(getOnUsers);
-      if (this.devicesState.getAllDevices()) this.onGetDevicesCount(this.devicesState.getAllDevices());
-      let getOnDevices = this.devicesState.getOnDevices().subscribe((data) => {
-        this.showArchivedCompanies = false;
-        this.onGetDevicesCount(data);
-      })
-      this.sub.add(getOnDevices);
-    }, 1000);
-    
+    if (this.usersStateService.getAllUsers().length > 0) this.onGetUsersCount(this.usersStateService.getAllUsers());
+    let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
+      this.showArchivedCompanies = false;
+      this.onGetUsersCount(data);
+    })
+    this.sub.add(getOnUsers);
+    if (this.devicesState.getAllDevices()) this.onGetDevicesCount(this.devicesState.getAllDevices());
+    let getOnDevices = this.devicesState.getOnDevices().subscribe((data) => {
+      this.showArchivedCompanies = false;
+      this.onGetDevicesCount(data);
+    })
+    this.sub.add(getOnDevices);
   }
 
   private onGetUsersCount(data) {
@@ -68,12 +66,17 @@ export class CompanyDashStatsComponent implements OnInit {
       var isArchived = user.deletedAt;
       return !isArchived && !this.showArchivedCompanies && user.company.id === this._id || this.showArchivedCompanies && isArchived && user.company.id === this._id;
     }).length;
+    if (!this.cd['destroyed']) {
+      this.cd.detectChanges();
+    }
   }
 
   private onGetDevicesCount(data) {
     let devices = data;
     this.countDevices = (devices && devices[this._id]) ? devices[this._id].length : 0;
-
+    if (!this.cd['destroyed']) {
+      this.cd.detectChanges();
+    }
   }
 
 
