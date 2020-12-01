@@ -1,10 +1,15 @@
 <div class="sidebar-network qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
-    <div class="company-device-aside__info-block">
+    <div
+        class="company-device-aside__info-block"
+        [ngClass]="{'--collapsed' :toggleIpSettings}"
+    >
         <div class="qt-df qt-jc-sb">
             <div class="sidebar-network__title qt-ff-sb">IP Settings</div>
-            <div class="company-device-aside__expand-collapse qt-sz-16"></div>
+            <div
+                class="company-device-aside__expand-collapse qt-sz-16"
+                (click)="toggleIpSettings = !toggleIpSettings"
+            ></div>
         </div>
-
         <div class="sidebar-network__info">
             <div class="sidebar-network__info-title">Model(s):</div>
             <div
@@ -12,7 +17,6 @@
                 [textContent]="getNetworkAdapter().description"
             ></div>
         </div>
-
         <div class="sidebar-network__info">
             <div class="sidebar-network__info-title">IP:</div>
             <div
@@ -20,7 +24,6 @@
                 [textContent]="getNetworkAdapter().ip_address"
             ></div>
         </div>
-
         <div class="sidebar-network__info">
             <div class="sidebar-network__info-title">Subnet Mask:</div>
             <div
@@ -28,7 +31,6 @@
                 [textContent]="getNetworkAdapter().subnet"
             ></div>
         </div>
-
         <div class="sidebar-network__info">
             <div class="sidebar-network__info-title">DNS 1:</div>
             <div
@@ -36,7 +38,6 @@
                 [textContent]="getNetworkAdapter().dns"
             ></div>
         </div>
-
         <div class="sidebar-network__info">
             <div class="sidebar-network__info-title">Link Speed:</div>
             <div
@@ -44,7 +45,6 @@
                 [textContent]="getLinkSpeed() + ' (MegaBit)'"
             ></div>
         </div>
-
         <div class="sidebar-network__info">
             <div class="sidebar-network__info-title">External IP:</div>
             <div
@@ -68,6 +68,5 @@
             ></div>
         </div>
     </div>
-
     <div class="qt-divider qt-mt-24 qt-mb-24"></div>
 </div>

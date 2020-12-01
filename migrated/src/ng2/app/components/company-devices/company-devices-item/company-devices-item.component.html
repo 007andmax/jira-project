@@ -54,10 +54,10 @@
                     </ul>
                 </div>
             </div>
-            <div
+            <!-- <div
                 class="qt-ic-c icon__master-agent-badge master-agent-icon qt-sz-18"
                 *ngIf="device.master"
-            ></div>
+            ></div> -->
         </div>
     </td>
     <td class="company-devices-table__device-name">
@@ -225,6 +225,7 @@
             class="qt-ic-c icon__go-to qt-pointer qt-sz-24 qt-bgsz-16"
             placement="top"
             [ngbTooltip]="tipDeviceDetail"
+            (click)="gotiDetailDevice()"
         ></div>
     </td>
     <td class="company-devices-table__connect">

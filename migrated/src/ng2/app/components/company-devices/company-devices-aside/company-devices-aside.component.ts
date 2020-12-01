@@ -25,6 +25,7 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
   currentDevice: DeviceExtended;
   open: boolean = false;
   showRemoteAccess: boolean = false;
+  showPreloader: boolean = true;
   sub: Subscription = new Subscription();
   constructor(private devicesStateService: DevicesStateService,
     private modalService: NgbModal,
@@ -48,6 +49,7 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
           })
           console.log("this.devices", this.devices);
           this.currentDevice = this.devices[0];
+          this.showPreloader = false;
         });
     })
     this.sub.add(getOnOpenAside);
@@ -62,6 +64,12 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
   }
+  gotiDetailDevice() {
+    localStorage.setItem('agentId', this.currentDevice.agentId);
+    localStorage.setItem('type', this.currentDevice.type);
+    var url = '/#/ng2/device/dashboard';
+    window.open(url, '_blank');
+  };
   turnOff(action) {
     if (action === 'reboot') {
       this.confirmStateService.setConfirmAction(REBOOT_DEVICE);

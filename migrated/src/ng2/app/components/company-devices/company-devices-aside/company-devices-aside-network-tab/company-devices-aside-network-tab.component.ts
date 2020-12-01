@@ -8,6 +8,7 @@ import { DeviceExtended } from '../../class/device-extended';
 })
 export class CompanyDevicesAsideNetworkTabComponent implements OnInit {
   @Input() device: DeviceExtended;
+  toggleIpSettings: boolean = false;
   constructor() { }
 
   ngOnInit() {
