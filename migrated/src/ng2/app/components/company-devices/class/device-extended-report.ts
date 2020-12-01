@@ -40,5 +40,8 @@ export class DeviceExtendedReport {
         for (const key in data) {
             this[key] = data[key];
         }
+        this.softList.sort((a, b) => (a.softName.toLowerCase() > b.softName.toLowerCase()) ?
+            1 : ((b.softName.toLowerCase() > a.softName.toLowerCase()) ? -1 : 0));
+
     }
 }

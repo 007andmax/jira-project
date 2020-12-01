@@ -17,9 +17,9 @@ export class CompanyDevicesAsideSoftwareComponent implements OnInit {
     return (date !== "") ? moment(date).format('YYYY-MM-DD') : "No installed date";
   }
   public getVersion(softVersion) {
-    return (softVersion !== "") ? `, version - ${softVersion}` : '';
+    return (softVersion !== "") ? `, version - ${softVersion}` : ', No version';
   }
   public softSize(softSize) {
-    return Math.floor(Number(softSize) / 1024);
+    return (softSize !== "") ? `${Math.floor(Number(softSize) / 1024)} MB` : "No size data";
   }
 }
