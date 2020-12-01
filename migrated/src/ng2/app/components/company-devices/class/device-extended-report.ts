@@ -8,6 +8,7 @@ import { DeviceExtendedReportPrinter } from './device-extended-report-printer';
 import { DeviceExtendedReportProcessor } from './device-extended-report-processor';
 import { DeviceExtendedReportRam } from './device-extended-report-ram';
 import { DeviceExtendedReportService } from './device-extended-report-service';
+import { DeviceExtendedReportSoftList } from './device-extended-report-soft-list';
 import { DeviceExtendedReportSystem } from './device-extended-report-system';
 import { DeviceExtendedReportVariant } from './device-extended-report-variant';
 import { DeviceExtendedReportWarrantyParts } from './device-extended-report-warranty-parts';
@@ -30,7 +31,7 @@ export class DeviceExtendedReport {
     processors: Array<DeviceExtendedReportProcessor> = [];
     ram: DeviceExtendedReportRam;
     service: DeviceExtendedReportService;
-    softList: Array<any>;
+    softList: Array<DeviceExtendedReportSoftList>;
     system: DeviceExtendedReportSystem;
     variant: DeviceExtendedReportVariant;
     videoCards: Array<any>;

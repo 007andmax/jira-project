@@ -142,7 +142,11 @@
             [ngClass]="{'--active':tab === 'NETWORK'}"
             (click)="tab = 'NETWORK'"
         ></div>
-        <div class="company-device-aside__subheader-item subheader-item-software"></div>
+        <div
+            class="company-device-aside__subheader-item subheader-item-software"
+            [ngClass]="{'--active':tab === 'SOFTWARE'}"
+            (click)="tab = 'SOFTWARE'"
+        ></div>
         <div class="company-device-aside__subheader-item subheader-item-updates"></div>
     </div>
     <div class="company-device-aside__body">
@@ -154,6 +158,13 @@
             [device]="currentDevice"
             *ngIf="tab === 'NETWORK'"
         ></app-company-devices-aside-network-tab>
+        <app-company-devices-aside-software
+            [device]="currentDevice"
+            *ngIf="tab === 'SOFTWARE'"
+        ></app-company-devices-aside-software>
+
+
+
         <!-- System Tab -->
         <!-- Network Tab -->
         <!-- <div class="sidebar-network qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
@@ -211,6 +222,8 @@
 
           <div class="qt-divider qt-mt-24 qt-mb-24"></div>
         </div> -->
+
+
 
 
 
@@ -329,11 +342,15 @@
 
 
 
+
+
         <!-- Update tab -->
         <div class="sidebar-updates qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
             <div class="qt-df qt-jc-sb">
                 <div class="sidebar-updates__tab-title qt-ff-sb">UPDATES</div>
             </div>
+
+
 
 
 
@@ -396,11 +413,15 @@
 
 
 
+
+
                 <div class="sidebar-updates__item">
                     <div class="sidebar-updates__icon icon__security-update icon --alert"></div>
                     <div class="sidebar-updates__title">Security Update</div>
                     <div class="sidebar-updates__subtitle --link">Install 7 Updates</div>
                 </div>
+
+
 
 
 

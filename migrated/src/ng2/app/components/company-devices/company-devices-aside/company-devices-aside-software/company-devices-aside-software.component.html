@@ -1,0 +1,27 @@
+<div class="sidebar-software qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
+    <div class="qt-df qt-jc-sb">
+        <div class="sidebar-software__title qt-ff-sb">Softwares</div>
+    </div>
+    <ng-template
+        ngFor
+        let-item
+        [ngForOf]="device.report.softList"
+    >
+        <div class="sidebar-software__row">
+            <div>
+                <div
+                    class="sidebar-software__row-title"
+                    [textContent]="item.softName"
+                ></div>
+                <div
+                    class="sidebar-software__date"
+                    [textContent]="getDate(item.softInstalledOn) + getVersion(item.softVersion)"
+                ></div>
+            </div>
+            <div
+                class="sidebar-software__size"
+                [textContent]="softSize(item.softSize) + ' MB'"
+            ></div>
+        </div>
+    </ng-template>
+</div>

@@ -351,6 +351,7 @@ import { CompanyDevicesAsideComponent } from './components/company-devices/compa
 import { CompanyDevicesAsideDeviceIconComponent } from './components/company-devices/company-devices-aside/company-devices-aside-device-icon/company-devices-aside-device-icon.component';
 import { CompanyDevicesAsideSystemComponent } from './components/company-devices/company-devices-aside/company-devices-aside-system/company-devices-aside-system.component';
 import { CompanyDevicesAsideNetworkTabComponent } from './components/company-devices/company-devices-aside/company-devices-aside-network-tab/company-devices-aside-network-tab.component';
+import { CompanyDevicesAsideSoftwareComponent } from './components/company-devices/company-devices-aside/company-devices-aside-software/company-devices-aside-software.component';
 
 /**
  * declare angular
@@ -856,6 +857,7 @@ angular.module('quicktech')
     CompanyDevicesAsideDeviceIconComponent,
     CompanyDevicesAsideSystemComponent,
     CompanyDevicesAsideNetworkTabComponent,
+    CompanyDevicesAsideSoftwareComponent,
   ],
   imports: [
     BrowserModule,
