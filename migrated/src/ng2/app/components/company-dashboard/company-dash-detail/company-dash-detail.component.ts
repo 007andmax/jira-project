@@ -59,200 +59,56 @@ export class CompanyDashDetailComponent implements OnInit {
     SEMI_MANAGED: 'Semi managed',
     FULLY_MANAGED: 'Fully managed'
   }
-  workingHoursList:WorkingHours[] = [
-    {
-      name: '12:00 AM',
-      value: '00:00'
-    },
-    {
-      name: '12:30 AM',
-      value: '00:30'
-    },
-    {
-      name: '1:00 AM',
-      value: '01:00'
-    },
-    {
-      name: '1:30 AM',
-      value: '01:30'
-    },
-    {
-      name: '2:00 AM',
-      value: '02:00'
-    },
-    {
-      name: '2:30 AM',
-      value: '02:30'
-    },
-    {
-      name: '3:00 AM',
-      value: '03:00'
-    },
-    {
-      name: '3:30 AM',
-      value: '03:30'
-    },
-    {
-      name: '4:00 AM',
-      value: '04:00'
-    },
-    {
-      name: '4:30 AM',
-      value: '04:30'
-    },
-    {
-      name: '5:00 AM',
-      value: '05:00'
-    },
-    {
-      name: '5:30 AM',
-      value: '05:30'
-    },
-    {
-      name: '6:00 AM',
-      value: '06:00'
-    },
-    {
-      name: '6:30 AM',
-      value: '06:30'
-    },
-    {
-      name: '7:00 AM',
-      value: '07:00'
-    },
-    {
-      name: '7:30 AM',
-      value: '07:30'
-    },
-    {
-      name: '8:00 AM',
-      value: '08:00'
-    },
-    {
-      name: '8:30 AM',
-      value: '08:30'
-    },
-    {
-      name: '9:00 AM',
-      value: '09:00'
-    },
-    {
-      name: '9:30 AM',
-      value: '09:30'
-    },
-    {
-      name: '10:00 AM',
-      value: '10:00'
-    },
-    {
-      name: '10:30 AM',
-      value: '10:30'
-    },
-    {
-      name: '11:00 AM',
-      value: '11:00'
-    },
-    {
-      name: '11:30 AM',
-      value: '11:30'
-    },
-    {
-      name: '12:00 PM',
-      value: '12:00'
-    },
-    {
-      name: '12:30 PM',
-      value: '12:30'
-    },
-    {
-      name: '13:00 PM',
-      value: '13:00'
-    },
-    {
-      name: '13:30 PM',
-      value: '13:30'
-    },
-    {
-      name: '14:00 PM',
-      value: '14:00'
-    },
-    {
-      name: '14:30 PM',
-      value: '14:30'
-    },
-    {
-      name: '15:00 PM',
-      value: '15:00'
-    },
-    {
-      name: '15:30 PM',
-      value: '15:30'
-    },
-    {
-      name: '16:00 PM',
-      value: '16:00'
-    },
-    {
-      name: '16:30 PM',
-      value: '16:30'
-    },
-    {
-      name: '17:00 PM',
-      value: '17:00'
-    },
-    {
-      name: '17:30 PM',
-      value: '17:30'
-    },
-    {
-      name: '18:00 PM',
-      value: '18:00'
-    },
-    {
-      name: '18:30 PM',
-      value: '18:30'
-    },
-    {
-      name: '19:00 PM',
-      value: '19:00'
-    },
-    {
-      name: '19:30 PM',
-      value: '19:30'
-    },
-    {
-      name: '20:00 PM',
-      value: '20:00'
-    },
-    {
-      name: '20:30 PM',
-      value: '20:30'
-    },
-    {
-      name: '21:00 PM',
-      value: '21:00'
-    },
-    {
-      name: '21:30 PM',
-      value: '21:30'
-    },
-    {
-      name: '22:00 PM',
-      value: '22:00'
-    },
-    {
-      name: '22:30 PM',
-      value: '22:30'
-    },
-    {
-      name: '23:00 PM',
-      value: '23:00'
-    },
-    {
-      name: '23:30 PM',
-      value: '23:30'
-    }
-  ];
+  workingHoursList:any = {
+    '00:00': '12:00 AM',
+    '00:30': '12:30 AM',
+    '01:00': '1:00 AM',
+    '01:30': '1:30 AM',
+    '02:00': '2:00 AM',
+    '02:30': '2:30 AM',
+    '03:00': '3:00 AM',
+    '03:30': '3:30 AM',
+    '04:00': '4:00 AM',
+    '04:30': '4:30 AM',
+    '05:00': '5:00 AM',
+    '05:30': '5:30 AM',
+    '06:00': '6:00 AM',
+    '06:30': '6:30 AM',
+    '07:00': '7:00 AM',
+    '07:30': '7:30 AM',
+    '08:00': '8:00 AM',
+    '08:30': '8:30 AM',
+    '09:00': '9:00 AM',
+    '09:30': '9:30 AM',
+    '10:00': '10:00 AM',
+    '10:30': '10:30 AM',
+    '11:00': '11:00 AM',
+    '11:30': '11:30 AM',
+    '12:00': '12:00 PM',
+    '12:30': '12:30 PM',
+    '13:00': '13:00 PM',
+    '13:30': '13:30 PM',
+    '14:00': '14:00 PM',
+    '14:30': '14:30 PM',
+    '15:00': '15:00 PM',
+    '15:30': '15:30 PM',
+    '16:00': '16:00 PM',
+    '16:30': '16:30 PM',
+    '17:00': '17:00 PM',
+    '17:30': '17:30 PM',
+    '18:00': '18:00 PM',
+    '18:30': '18:30 PM',
+    '19:00': '19:00 PM',
+    '19:30': '19:30 PM',
+    '20:00': '20:00 PM',
+    '20:30': '20:30 PM',
+    '21:00': '21:00 PM',
+    '21:30': '21:30 PM',
+    '22:00': '22:00 PM',
+    '22:30': '22:30 PM',
+    '23:00': '23:00 PM',
+    '23:30': '23:30 PM'
+  };
 
   public constructor(private companiesService: CompaniesService,
     private toaster: ToastrService,
@@ -523,9 +379,9 @@ export class CompanyDashDetailComponent implements OnInit {
 
   startTimeChange(workingday: any, startTime: any) {
     const splitTime = startTime.split(':');
-    if (!Number(splitTime[0])) {
-      return;
-    }
+    // if (!Number(splitTime[0])) {
+    //   return;
+    // }
     let hours = parseInt(splitTime[0]) || 0;
     let minutes =
       (!splitTime[1] || splitTime[1].length > 1

@@ -144,18 +144,32 @@
 
                 <div class="time-zone">
                   <div class="tl-col">
-                    <select #startTime class="cmn-select form-input" [id]=" 'from-'+work.dayOfWeek"
+                    <!-- <select #startTime class="cmn-select form-input" [id]=" 'from-'+work.dayOfWeek"
                     (change)="startTimeChange(work, startTime.value)"
                     name="{{work.dayOfWeek}}" [attr.disabled]="!work.checked ? 'disabled' : null" [ngModel]="fromTime_convert(work.startTime)" >
                       <option *ngFor="let hours of workingHoursList" [value]="hours.value">{{hours.name}}</option>
-                    </select>
+                    </select> -->
+                    <div ngbDropdown class="d-flex working-hour">
+                      <button class="selected-item" [attr.disabled]="!work.checked ? 'disabled' : null" [id]=" 'from-'+work.dayOfWeek" ngbDropdownToggle>{{workingHoursList[fromTime_convert(work.startTime)]}}</button>
+                       <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                         <button class="item" (click)="startTimeChange(work, hours.key)" ngbDropdownItem *ngFor="let hours of workingHoursList | keyvalue" [class.active]="fromTime_convert(work.startTime) == hours.key">{{hours.value}}</button>
+                         
+                       </div> 
+                     </div>
                   </div>
                   <div class="tl-col">
-                    <select #endTime class="cmn-select form-input"
+                    <!-- <select #endTime class="cmn-select form-input"
                     (change)="endTimeChange(work,endTime.value)" [id]="'to-'+work.dayOfWeek"
                     name="{{work.dayOfWeek+i}}" [attr.disabled]="!work.checked ? 'disabled' : null" [ngModel]="toTime_convert(work.endTime)" >
                     <option *ngFor="let hours of workingHoursList" [value]="hours.value">{{hours.name}}</option>
-                    </select>
+                    </select> -->
+                    <div ngbDropdown class="d-flex working-hour">
+                      <button class="selected-item" [attr.disabled]="!work.checked ? 'disabled' : null" [id]="'to-'+work.dayOfWeek" ngbDropdownToggle>{{workingHoursList[toTime_convert(work.endTime)]}}</button>
+                       <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                         <button class="item" (click)="endTimeChange(work,hours.key)" ngbDropdownItem *ngFor="let hours of workingHoursList | keyvalue" [class.active]="toTime_convert(work.endTime) == hours.key">{{hours.value}}</button>
+                         
+                       </div> 
+                     </div>
                   </div>
                 </div>
               </li>
