@@ -61,6 +61,7 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
           } else {
             this.currentDevice = this.devices[this.devices.length - 1];
           }
+          this.tab = data.type;
           this.showPreloader = false;
         });
     })
@@ -120,6 +121,7 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
     this.showPreloader = true;
     this.currentDevice = null;
     this.devices = [];
+    this.tab = "SYSTEM";
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

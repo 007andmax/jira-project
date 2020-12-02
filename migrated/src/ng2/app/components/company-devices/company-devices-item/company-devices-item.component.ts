@@ -136,6 +136,9 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.message = `Do you want to remove 1 device?`;
     this.devicesStateService.setDevicesForRemove([this.device]);
   }
+  getWindows() {
+    return `${this.device.system.caption.replace('Microsoft', '')}${this.device.system.release_id}`
+  }
   ngOnDestroy(): void {
     clearInterval(this.timer);
   }

@@ -110,29 +110,29 @@
         <div class="qt-df qt-fd-c">
             <span
                 class="logged-name qt-ff-gm"
-                [textContent]="device.userName || 'unknown'"
+                [textContent]="device.userName || ''"
             ></span>
             <span
                 class="logged-time"
-                *ngIf="!device.timing.idle"
+                *ngIf="device.userName && !device.timing.idle"
             >
                 Idle: 0 min
             </span>
             <span
                 class="logged-time"
-                *ngIf="device.timing.idle && returnTimeFormat(device.timing.idle).hours > 0"
+                *ngIf="device.userName && device.timing.idle && returnTimeFormat(device.timing.idle).hours > 0"
             >
                 Idle: {{returnTimeFormat(device.timing.idle).hours}} hrs
             </span>
             <span
                 class="logged-time"
-                *ngIf="device.timing.idle && returnTimeFormat(device.timing.idle).hours === 0 && returnTimeFormat(device.timing.idle).minutes > 0"
+                *ngIf="device.userName && device.timing.idle && returnTimeFormat(device.timing.idle).hours === 0 && returnTimeFormat(device.timing.idle).minutes > 0"
             >
                 Idle: {{returnTimeFormat(device.timing.idle).minutes}} min
             </span>
             <span
                 class="logged-time"
-                *ngIf="device.timing.idle && returnTimeFormat(device.timing.idle).hours === 0 && returnTimeFormat(device.timing.idle).minutes < 1"
+                *ngIf="device.userName && device.timing.idle && returnTimeFormat(device.timing.idle).hours === 0 && returnTimeFormat(device.timing.idle).minutes < 1"
             >
                 Idle: 0 min
             </span>
@@ -151,21 +151,34 @@
                     {{returnTimeFormatUpTime(device.timing.online).minutes}} min
                 </span>
                 <span *ngIf="device.online && returnTimeFormatUpTime(device.timing.online).minutes < 1 && returnTimeFormatUpTime(device.timing.online).hours < 1 && returnTimeFormatUpTime(device.timing.online).days < 1">0 min</span>
-                <span *ngIf="!device.online && returnTimeFormatUpTime(device.timing.offline).days > 0">
-                    {{returnTimeFormatUpTime(device.timing.offline).days}} day
-                </span>
-                <span *ngIf="!device.online && returnTimeFormatUpTime(device.timing.offline).hours > 0">
-                    {{returnTimeFormatUpTime(device.timing.offline).hours}} hrs
-                </span>
-                <span *ngIf="!device.online && returnTimeFormatUpTime(device.timing.offline).minutes > 0 && returnTimeFormatUpTime(device.timing.offline).days < 1">
-                    {{returnTimeFormatUpTime(device.timing.offline).minutes}} min
-                </span>
-                <span *ngIf="!device.online && returnTimeFormatUpTime(device.timing.offline).minutes < 1 && returnTimeFormatUpTime(device.timing.offline).hours < 1 && returnTimeFormatUpTime(device.timing.offline).days < 1">0 min</span>
+                <ng-template
+                    #tipOfflineDevice
+                    class="tooltip"
+                >
+                    <span *ngIf="!device.online && returnTimeFormatUpTime(device.timing.offline).days > 0">
+                        {{returnTimeFormatUpTime(device.timing.offline).days}} day
+                    </span>
+                    <span *ngIf="!device.online && returnTimeFormatUpTime(device.timing.offline).hours > 0">
+                        {{returnTimeFormatUpTime(device.timing.offline).hours}} hrs
+                    </span>
+                    <span *ngIf="!device.online && returnTimeFormatUpTime(device.timing.offline).minutes > 0 && returnTimeFormatUpTime(device.timing.offline).days < 1">
+                        {{returnTimeFormatUpTime(device.timing.offline).minutes}} min
+                    </span>
+                    <span *ngIf="!device.online && returnTimeFormatUpTime(device.timing.offline).minutes < 1 && returnTimeFormatUpTime(device.timing.offline).hours < 1 && returnTimeFormatUpTime(device.timing.offline).days < 1">0 min</span>
+                </ng-template>
             </span>
             <span
+                *ngIf="device.online"
                 class="uptime-tag qt-ff-gm"
-                [ngClass]="{'--offline':!device.online}"
-                [textContent]="(device.online) ? 'Online' : 'Offline'"
+                [textContent]="'Online'"
+            ></span>
+            <span
+                *ngIf="!device.online"
+                placement="top"
+                container="body"
+                [ngbTooltip]="tipOfflineDevice"
+                class="uptime-tag qt-ff-gm --offline"
+                [textContent]="'Offline'"
             ></span>
         </div>
     </td>
@@ -173,7 +186,7 @@
         <span
             *ngIf="device.system"
             class="company-devices-table__ip-windows-text"
-            [textContent]="device.system.caption + device.system.release_id"
+            [textContent]="getWindows()"
         ></span>
         <div class="company-devices-table__system-network-buttons">
             <div
@@ -375,7 +388,7 @@
                 </li>
                 <li
                     class="pointer"
-                    (click)="removeCurrentDevice()"
+                    (click)="removeDevice()"
                 >
                     <div class="icon__remove qt-bg-contain qt-sz-16 qt-mr-8"></div>
                     Remove
