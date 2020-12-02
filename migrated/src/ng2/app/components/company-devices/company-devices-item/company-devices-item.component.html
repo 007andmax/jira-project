@@ -114,7 +114,7 @@
             ></span>
             <span
                 class="logged-time"
-                *ngIf="device.userName"
+                *ngIf="device.timing.idle"
             >
                 Idle:
                 <span *ngIf="device.timing.idle && returnTimeFormat(device.timing.idle).hours > 0">
