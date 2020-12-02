@@ -16,11 +16,12 @@ export class CompanyDevicesAsideNetworkTabComponent implements OnInit {
   public chackDefaultValue(value) {
     return (!value || value === "") ? "N\A" : value;
   }
-  getNetworkAdapter() {
-    return this.device.report.networkAdapters.find(item => item.is_default);
+  getNetworkAdapterField(field) {
+    let find = this.device.report.networkAdapters.find(item => item.is_default);
+    return (find) ? find[field] : null;
   }
   getLinkSpeed() {
-    return (Number(this.getNetworkAdapter().speed) / 1000000);
+    return (this.getNetworkAdapterField("speed")) ? (Number(this.getNetworkAdapterField("speed")) / 1000000) : 0;
   }
   formatMacAddress(mac: any) {
     if (mac) {

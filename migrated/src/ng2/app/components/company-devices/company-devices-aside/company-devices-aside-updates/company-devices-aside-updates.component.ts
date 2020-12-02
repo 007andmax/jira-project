@@ -12,5 +12,8 @@ export class CompanyDevicesAsideUpdatesComponent implements OnInit {
 
   ngOnInit() {
   }
+  getAntivirusFiled(field) {
+    return (this.device.report.antivirus.length > 0) ? this.device.report.antivirus[0][field] : null;
+  }
 
 }

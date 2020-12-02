@@ -22,7 +22,7 @@
             <div class="sidebar-system__info-title">Asset Tag</div>
             <div
                 class="sidebar-system__info-text"
-                [textContent]="chackDefaultValue(device.report.system.asset_tag)"
+                [textContent]="chackDefaultValue(getSystemField('asset_tag'))"
             >
             </div>
         </div>
@@ -30,21 +30,21 @@
             <div class="sidebar-system__info-title">Manufacturer</div>
             <div
                 class="sidebar-system__info-text"
-                [textContent]="chackDefaultValue(device.report.system.manufacturer)"
+                [textContent]="chackDefaultValue(getSystemField('manufacturer'))"
             ></div>
         </div>
         <div class="sidebar-system__info">
             <div class="sidebar-system__info-title">IP address</div>
             <div
                 class="sidebar-system__info-text"
-                [textContent]="chackDefaultValue(getNetworkAdapter().ip_address)"
+                [textContent]="chackDefaultValue(getNetworkAdapterField('ip_address'))"
             ></div>
         </div>
         <div class="sidebar-system__info">
             <div class="sidebar-system__info-title">Computer Model</div>
             <div
                 class="sidebar-system__info-text"
-                [textContent]="chackDefaultValue(device.report.system.model)"
+                [textContent]="chackDefaultValue(getSystemField('model'))"
             ></div>
         </div>
     </div>
@@ -64,7 +64,7 @@
             <div class="sidebar-system__info-title">Warranty</div>
             <div
                 class="sidebar-system__info-text"
-                [textContent]="chackDefaultValue(device.report.system.warranty)"
+                [textContent]="chackDefaultValue(getSystemField('warranty'))"
             ></div>
         </div>
         <div class="sidebar-system__info">
@@ -78,14 +78,14 @@
             <div class="sidebar-system__info-title">Installed on</div>
             <div
                 class="sidebar-system__info-text"
-                [textContent]="chackDefaultValue(getDate(device.report.system.install_date))"
+                [textContent]="chackDefaultValue(getDate(getSystemField('install_date')))"
             ></div>
         </div>
         <div class="sidebar-system__info">
             <div class="sidebar-system__info-title">System Type</div>
             <div
                 class="sidebar-system__info-text"
-                [textContent]="chackDefaultValue(device.report.system.architecture)"
+                [textContent]="chackDefaultValue(getSystemField('architecture'))"
             ></div>
         </div>
     </div>

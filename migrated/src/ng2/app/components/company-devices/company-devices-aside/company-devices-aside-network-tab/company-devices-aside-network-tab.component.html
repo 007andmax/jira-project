@@ -14,28 +14,28 @@
             <div class="sidebar-network__info-title">Model(s):</div>
             <div
                 class="sidebar-network__info-text"
-                [textContent]="chackDefaultValue(getNetworkAdapter().description)"
+                [textContent]="chackDefaultValue(getNetworkAdapterField('description'))"
             ></div>
         </div>
         <div class="sidebar-network__info">
             <div class="sidebar-network__info-title">IP:</div>
             <div
                 class="sidebar-network__info-text"
-                [textContent]="chackDefaultValue(getNetworkAdapter().ip_address)"
+                [textContent]="chackDefaultValue(getNetworkAdapterField('ip_address'))"
             ></div>
         </div>
         <div class="sidebar-network__info">
             <div class="sidebar-network__info-title">Subnet Mask:</div>
             <div
                 class="sidebar-network__info-text"
-                [textContent]="chackDefaultValue(getNetworkAdapter().subnet)"
+                [textContent]="chackDefaultValue(getNetworkAdapterField('subnet'))"
             ></div>
         </div>
         <div class="sidebar-network__info">
             <div class="sidebar-network__info-title">DNS 1:</div>
             <div
                 class="sidebar-network__info-text"
-                [textContent]="chackDefaultValue(getNetworkAdapter().dns)"
+                [textContent]="chackDefaultValue(getNetworkAdapterField('dns'))"
             ></div>
         </div>
         <div class="sidebar-network__info">
@@ -56,7 +56,7 @@
             <div class="sidebar-network__info-title">MAC:</div>
             <div
                 class="sidebar-network__info-text"
-                [textContent]="chackDefaultValue(formatMacAddress(getNetworkAdapter().mac))"
+                [textContent]="chackDefaultValue(formatMacAddress(getNetworkAdapterField('mac')))"
             >
             </div>
         </div>
@@ -64,7 +64,7 @@
             <div class="sidebar-network__info-title">DHCP:</div>
             <div
                 class="sidebar-network__info-text"
-                [textContent]="chackDefaultValue(getNetworkAdapter().dhcp_server)"
+                [textContent]="chackDefaultValue(getNetworkAdapterField('dhcp_server'))"
             ></div>
         </div>
     </div>

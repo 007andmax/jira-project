@@ -7,7 +7,7 @@
         <div class="sidebar-updates__item">
             <div
                 class="sidebar-updates__icon icon__virus-protection icon "
-                [ngClass]="{'--updated': device.report.antivirus[0].isUpToDate == true, '--alert': device.report.antivirus[0].isUpToDate == false}"
+                [ngClass]="{'--updated': getAntivirusFiled('isUpToDate') == true, '--alert': getAntivirusFiled('isUpToDate') == false}"
             ></div>
             <div class="sidebar-updates__title">Virus Protection</div>
             <div class="sidebar-updates__subtitle">Up-to-date</div>
