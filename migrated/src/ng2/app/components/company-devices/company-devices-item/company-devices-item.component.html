@@ -1,4 +1,4 @@
-<tr>
+<tr [ngClass]="{'company-device-hover':device.agentId}">
     <td class="company-devices-table__check">
         <div class="d-f">
             <label class="qt-checkbox">
@@ -126,13 +126,13 @@
             </span>
             <span
                 class="logged-time"
-                *ngIf="device.timing.idle && returnTimeFormat(device.timing.idle).minutes > 0"
+                *ngIf="device.timing.idle && returnTimeFormat(device.timing.idle).hours === 0 && returnTimeFormat(device.timing.idle).minutes > 0"
             >
                 Idle: {{returnTimeFormat(device.timing.idle).minutes}} min
             </span>
             <span
                 class="logged-time"
-                *ngIf="device.timing.idle && returnTimeFormat(device.timing.idle).minutes < 1"
+                *ngIf="device.timing.idle && returnTimeFormat(device.timing.idle).hours === 0 && returnTimeFormat(device.timing.idle).minutes < 1"
             >
                 Idle: 0 min
             </span>

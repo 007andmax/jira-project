@@ -14,28 +14,28 @@
             <div class="sidebar-network__info-title">Model(s):</div>
             <div
                 class="sidebar-network__info-text"
-                [textContent]="getNetworkAdapter().description"
+                [textContent]="chackDefaultValue(getNetworkAdapter().description)"
             ></div>
         </div>
         <div class="sidebar-network__info">
             <div class="sidebar-network__info-title">IP:</div>
             <div
                 class="sidebar-network__info-text"
-                [textContent]="getNetworkAdapter().ip_address"
+                [textContent]="chackDefaultValue(getNetworkAdapter().ip_address)"
             ></div>
         </div>
         <div class="sidebar-network__info">
             <div class="sidebar-network__info-title">Subnet Mask:</div>
             <div
                 class="sidebar-network__info-text"
-                [textContent]="getNetworkAdapter().subnet"
+                [textContent]="chackDefaultValue(getNetworkAdapter().subnet)"
             ></div>
         </div>
         <div class="sidebar-network__info">
             <div class="sidebar-network__info-title">DNS 1:</div>
             <div
                 class="sidebar-network__info-text"
-                [textContent]="getNetworkAdapter().dns"
+                [textContent]="chackDefaultValue(getNetworkAdapter().dns)"
             ></div>
         </div>
         <div class="sidebar-network__info">
@@ -49,14 +49,14 @@
             <div class="sidebar-network__info-title">External IP:</div>
             <div
                 class="sidebar-network__info-text"
-                [textContent]="device.report.externalIp"
+                [textContent]="chackDefaultValue(device.report.externalIp)"
             ></div>
         </div>
         <div class="sidebar-network__info">
             <div class="sidebar-network__info-title">MAC:</div>
             <div
                 class="sidebar-network__info-text"
-                [textContent]="formatMacAddress(getNetworkAdapter().mac)"
+                [textContent]="chackDefaultValue(formatMacAddress(getNetworkAdapter().mac))"
             >
             </div>
         </div>
@@ -64,7 +64,7 @@
             <div class="sidebar-network__info-title">DHCP:</div>
             <div
                 class="sidebar-network__info-text"
-                [textContent]="getNetworkAdapter().dhcp_server"
+                [textContent]="chackDefaultValue(getNetworkAdapter().dhcp_server)"
             ></div>
         </div>
     </div>

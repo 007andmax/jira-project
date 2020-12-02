@@ -22,7 +22,7 @@
             <div class="sidebar-system__info-title">Asset Tag</div>
             <div
                 class="sidebar-system__info-text"
-                [textContent]="device.report.system.asset_tag"
+                [textContent]="chackDefaultValue(device.report.system.asset_tag)"
             >
             </div>
         </div>
@@ -30,21 +30,21 @@
             <div class="sidebar-system__info-title">Manufacturer</div>
             <div
                 class="sidebar-system__info-text"
-                [textContent]="device.report.system.manufacturer"
+                [textContent]="chackDefaultValue(device.report.system.manufacturer)"
             ></div>
         </div>
         <div class="sidebar-system__info">
             <div class="sidebar-system__info-title">IP address</div>
             <div
                 class="sidebar-system__info-text"
-                [textContent]="getNetworkAdapter().ip_address"
+                [textContent]="chackDefaultValue(getNetworkAdapter().ip_address)"
             ></div>
         </div>
         <div class="sidebar-system__info">
             <div class="sidebar-system__info-title">Computer Model</div>
             <div
                 class="sidebar-system__info-text"
-                [textContent]="device.report.system.model"
+                [textContent]="chackDefaultValue(device.report.system.model)"
             ></div>
         </div>
     </div>
@@ -64,28 +64,28 @@
             <div class="sidebar-system__info-title">Warranty</div>
             <div
                 class="sidebar-system__info-text"
-                [textContent]="device.report.system.warranty"
+                [textContent]="chackDefaultValue(device.report.system.warranty)"
             ></div>
         </div>
         <div class="sidebar-system__info">
             <div class="sidebar-system__info-title">Windows Info</div>
             <div
                 class="sidebar-system__info-text"
-                [textContent]="getWindowsInfo()"
+                [textContent]="chackDefaultValue(getWindowsInfo())"
             ></div>
         </div>
         <div class="sidebar-system__info">
             <div class="sidebar-system__info-title">Installed on</div>
             <div
                 class="sidebar-system__info-text"
-                [textContent]="getDate(device.report.system.install_date)"
+                [textContent]="chackDefaultValue(getDate(device.report.system.install_date))"
             ></div>
         </div>
         <div class="sidebar-system__info">
             <div class="sidebar-system__info-title">System Type</div>
             <div
                 class="sidebar-system__info-text"
-                [textContent]="device.report.system.architecture"
+                [textContent]="chackDefaultValue(device.report.system.architecture)"
             ></div>
         </div>
     </div>

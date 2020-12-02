@@ -210,27 +210,6 @@
       background: #f4fbff !important;
       border-color: #16a4fa !important;
     }
-    tbody tr:hover {
-      td {
-        background-color: #f9fafb;
-        .company-devices-table__ip-address-text,
-        .company-devices-table__ip-windows-text {
-          opacity: 0;
-        }
-        .company-devices-table__system-network-buttons,
-        .company-devices-table__ip-address-buttons {
-          position: absolute;
-          top: 7px;
-          display: flex;
-        }
-        .company-devices-table__ip-address-buttons {
-          left: -15px;
-        }
-        .device-name-edit-marker {
-          display: flex;
-        }
-      }
-    }
   }
   .connected-tooltip-name {
     font-size: 12px;

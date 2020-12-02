@@ -14,8 +14,11 @@ export class CompanyDevicesAsideSystemComponent implements OnInit {
 
   ngOnInit() {
   }
+  public chackDefaultValue(value) {
+    return (!value || value === "") ? "N\A" : value;
+  }
   public getDate(date) {
-    return moment(date).format('YYYY-MM-DD');
+    return date != "" ? moment(date).format('YYYY-MM-DD') : "";
   }
   getNetworkAdapter() {
     return this.device.report.networkAdapters.find(item => item.is_default);

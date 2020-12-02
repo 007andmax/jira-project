@@ -13,6 +13,9 @@ export class CompanyDevicesAsideNetworkTabComponent implements OnInit {
 
   ngOnInit() {
   }
+  public chackDefaultValue(value) {
+    return (!value || value === "") ? "N\A" : value;
+  }
   getNetworkAdapter() {
     return this.device.report.networkAdapters.find(item => item.is_default);
   }
