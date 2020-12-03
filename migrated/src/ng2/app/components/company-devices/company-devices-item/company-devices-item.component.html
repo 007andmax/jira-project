@@ -292,10 +292,9 @@
                         <span *ngIf="returnTimeFormat(item.agentConnectedAt).hours > 0">
                             {{returnTimeFormat(item.agentConnectedAt ).hours}} hrs
                         </span>
-                        <span *ngIf="returnTimeFormat(item.agentConnectedAt ).minutes > 0">
+                        <span *ngIf="returnTimeFormat(item.agentConnectedAt ).minutes >= 0">
                             {{returnTimeFormat(item.agentConnectedAt ).minutes}} min
                         </span>
-                        <span *ngIf="returnTimeFormat(item.agentConnectedAt).hours === 0 && returnTimeFormat(item.agentConnectedAt ).minutes < 0">0 min</span>
                     </div>
                 </ng-template>
             </ng-template>
