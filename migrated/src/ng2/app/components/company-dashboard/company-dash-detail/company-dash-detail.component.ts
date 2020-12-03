@@ -13,7 +13,7 @@ import { CompaniesStateService } from 'src/ng2/app/states/company/companies-stat
 import { DomSanitizer } from '@angular/platform-browser';
 import { TicketProfileFormService } from '../../../../../ng2/app/components/tickets/tickets/ticket-edit-aside/class/ticket-profile-form-service';
 import { CompanyServiceType } from '../../companies/class/company-service-type';
-import { CompanyDetail } from './company-detailing';
+import { CompanyDetaill } from './company-detailing';
 
 @Component({
   selector: 'app-company-dash-detail',
@@ -22,25 +22,31 @@ import { CompanyDetail } from './company-detailing';
 })
 export class CompanyDashDetailComponent implements OnInit {
 
-  public companyDetail: CompanyProfile;
-  companyDetailing: CompanyDetail = {
+  public companyDetail: CompanyProfile = new CompanyProfile();
+  companyDetailing: CompanyDetaill = {
     name: '',
-    addresses: '',
+    addresses: [],
+    addresses_name: '',
     phoneNumber: '',
     totalTickets: 0,
     averageResponseTime: '0',
     serviceType: '',
     domain: '',
-    clientIndustry: ""
+    clientIndustry: "",
+    tags: [],
+    mapSrc: "",
+    primaryContact: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      phoneNumber: '',
+      avatar: ''
+    },
+    reputation: '',
+    clientType: '',
+    description: ''
   };
   _id:string = '';
-  primaryContact: CompanyPrimaryContact = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    phoneNumber: '',
-    avatar: ''
-  };
   mapSrc:string = '';
   companyOpen:string = 'Close';
   workingDays = [];
@@ -138,36 +144,15 @@ export class CompanyDashDetailComponent implements OnInit {
     // 07ed6152-997c-4389-81f9-a261e262e307
     // d9adf435-0f98-41cc-98a2-22ddf4a83a2f
     let getCompany = this.companiesService.getCompany(this._id).subscribe((data: CompanyProfile) => {
+      // this.companyDetail = data;
+      this.companyDetail.onEditMode(data);
+      this.companyDetailing = this.companyDetail.getDataForDashboard();
       this.companyDetail = data;
-      this.companyDetailing.name = this.companyDetail.name == undefined ? '' : this.companyDetail.name;
-      this.companyDetailing.addresses = this.companyDetail.addresses.length > 0 ? this.companyDetail.addresses[0].address : '';
-      this.companyDetailing.phoneNumber = this.companyDetail.addresses.length > 0 && this.companyDetail.addresses[0].phoneNumbers.length !== 0 ? this.companyDetail.addresses[0].phoneNumbers[0].number : '';
-      this.companyDetailing.totalTickets = this.companyDetail['companyTicketStatistic'].totalTickets;
-      this.companyDetailing.averageResponseTime = this.companyDetail['companyTicketStatistic'].averageResponseTime;
       this.totalTicketsChanged.emit(this.companyDetailing.totalTickets);
       this.averageResponseTimeChanged.emit(this.companyDetailing.averageResponseTime);
-      this.tags = this.companyDetail.tags;
-      this.companyDetailing.serviceType = (this.companyDetail.serviceType == undefined || this.companyDetail.serviceType == null) ? '' : this.companyDetail.serviceType;
-      this.companyDetailing.domain = (this.companyDetail.domain == undefined || this.companyDetail.domain == null) ? '' : this.companyDetail.domain;
-      let type = typeof this.companyDetail.contacts[0].phoneNumbers[0];
-      let typeIndustry = typeof this.companyDetail.clientIndustry;
-      let name = '';
-      if (typeIndustry === 'object' && this.companyDetail.clientIndustry !== null) {
-        this.companyDetailing.name = this.companyDetail.clientIndustry.name;
-      }
-      this.companyDetailing.clientIndustry = typeIndustry === 'object' ? name : this.companyDetail.clientIndustry;
-      let primaryContact: CompanyPrimaryContact = {
-        firstName: this.companyDetail.contacts[0].firstName,
-        lastName: this.companyDetail.contacts[0].lastName,
-        email: this.companyDetail.contacts[0].primaryEmail,
-        phoneNumber: type === 'object' ? this.companyDetail.contacts[0].phoneNumbers[0].number : this.companyDetail.contacts[0].phoneNumbers[0],
-        avatar: this.companyDetail.contacts[0].avatar
-      };
-      this.primaryContact = primaryContact;
-      // this.mapSrc = `https://maps.google.com/maps?q=${this.companyDetail.addresses[0].locationLat},${this.companyDetail.addresses[0].locationLng}&z=15&amp;output=embed`;
-      this.mapSrc = "https://maps.google.com/maps/embed/v1/place?key=AIzaSyAbP4DFpz4f9YcXMWUjdkOdyArX2peNt8s&q="+this.companyDetail.addresses[0].locationLat +","+this.companyDetail.addresses[0].locationLng+"";
+      this.tags = this.companyDetailing.tags;
       let day = moment(new Date()).format('dddd');
-      this.workingDays = this.companyDetail.workingDays;
+      this.workingDays = data.workingDays;
       if (this.workingDays.length !== 0) {
         let arr = this.workingDays.filter(val => val.dayOfWeek.toLowerCase() === day.toLowerCase())
         if (arr.length !== 0 && arr[0].startTime !== 0 && arr[0].endTime !== 0) {
@@ -307,6 +292,9 @@ export class CompanyDashDetailComponent implements OnInit {
       this.toaster.success(msg, null, {
         timeOut: 5000
       });
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+      }
       this.tagSaved = false;
     });
     this.sub.add(savecompany);
@@ -374,7 +362,7 @@ export class CompanyDashDetailComponent implements OnInit {
 
 
   mapUrl() {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(this.mapSrc);
+    return this.sanitizer.bypassSecurityTrustResourceUrl(this.companyDetailing.mapSrc);
   }
 
   startTimeChange(workingday: any, startTime: any) {

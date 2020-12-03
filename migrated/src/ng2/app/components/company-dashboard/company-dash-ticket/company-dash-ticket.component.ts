@@ -22,10 +22,7 @@ export class CompanyDashTicketComponent implements OnInit {
 
   public ngOnInit() {
     this._id = /[^/]*$/.exec(window.location.href)[0];
-    setTimeout(() => {
-      this.getTicketGraph(this.ticketFrequency);
-      
-    }, 1000);
+    this.getTicketGraph(this.ticketFrequency);
     this.lineChartOptions = {
       chart: {
         type: 'lineChart',

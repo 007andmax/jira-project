@@ -18,6 +18,7 @@ export class CompanyProfile {
     addresses: Array<CompanyProfileAddress>;
     agentLinkToEmail: any = null;
     clientIndustry: any = {};
+    companyTicketStatistic?: any = {};
     clientType: string = '';
     contacts: Array<CompanyProfileContact>;
     defaultPaymentMethod: string = null;
@@ -37,6 +38,7 @@ export class CompanyProfile {
     techLeadId: string;
     id: string;
     tags: Array<Tag>;
+    reputation?: string = '';
     constructor() {
         this.logo = null;
         let contact: CompanyProfileContact = new CompanyProfileContact();
@@ -90,6 +92,7 @@ export class CompanyProfile {
             }
         }
         this.tags = company.tags;
+        this.reputation = company.reputation;
 
     }
     public getDataForUpdate() {
@@ -172,6 +175,39 @@ export class CompanyProfile {
 
         if (!this.contacts[0].phoneNumbers[0].number || this.contacts[0].phoneNumbers[0].number.length === 0) this.contacts[0].phoneNumbers = [];
 
+    }
+
+    public getDataForDashboard() {
+        let typeIndustry = typeof this.clientIndustry;
+        let name = '';
+        let type = typeof this.contacts[0].phoneNumbers[0];
+        let data = {
+            name: this.name == undefined ? '' : this.name,
+            addresses: this.addresses,
+            addresses_name: this.addresses.length > 0 ? this.addresses[0].address : '',
+            phoneNumber: this.addresses.length > 0 && this.addresses[0].phoneNumbers.length !== 0 ? this.addresses[0].phoneNumbers[0].number : '',
+            totalTickets: this['companyTicketStatistic'].totalTickets,
+            averageResponseTime: this['companyTicketStatistic'].averageResponseTime,
+            tags: this.tags,
+            serviceType: (this.serviceType == undefined || this.serviceType == null) ? '' : this.serviceType,
+            domain: (this.domain == undefined || this.domain == null) ? '' : this.domain,
+            clientIndustry: typeIndustry === 'object' ? name : this.clientIndustry,
+            mapSrc: "https://maps.google.com/maps/embed/v1/place?key=AIzaSyAbP4DFpz4f9YcXMWUjdkOdyArX2peNt8s&q="+this.addresses[0].locationLat +","+this.addresses[0].locationLng+"",
+            primaryContact: {
+                firstName: this.contacts[0].firstName,
+                lastName: this.contacts[0].lastName,
+                email: this.contacts[0].primaryEmail,
+                phoneNumber: type === 'object' ? this.contacts[0].phoneNumbers[0].number : this.contacts[0].phoneNumbers[0],
+                avatar: this.contacts[0].avatar
+            },
+            clientType: this.clientType,
+            description: this.description,
+            reputation: this.reputation
+        }
+        if (typeIndustry === 'object' && this.clientIndustry !== null) {
+            data.name = this.clientIndustry.name;
+        }
+        return data;
     }
 
 }
