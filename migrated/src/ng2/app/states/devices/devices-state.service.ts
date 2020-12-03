@@ -20,7 +20,8 @@ export class DevicesStateService {
   onGetDevices: EventEmitter<any> = new EventEmitter();
   onResetDeviceTiming: EventEmitter<any> = new EventEmitter();
   onOpenAside: EventEmitter<any> = new EventEmitter();
-  onRemoveConnecion: EventEmitter<any> = new EventEmitter();
+  onRemoveConnecion: EventEmitter<any> = new EventEmitter();.
+  onClosedRemoveConnecion: EventEmitter<any> = new EventEmitter();
   onLaunchRemoteApp: EventEmitter<any> = new EventEmitter();
   // onChangeDevices: EventEmitter<DeviceUpdate> = new EventEmitter();
   constructor(private userStateService: UsersStateService, private devicesService: DevicesService,
@@ -64,8 +65,11 @@ export class DevicesStateService {
           this.onResetDeviceTiming.emit({ id: newChange.data.value, online: false });
         }
       }
-      if (newChange.action === 'REMOTE_CONNECTION') {
+      if (newChange.action === 'REMOTE_CONNECTION' && newChange.data.status === 'online') {
         this.onInitLaunchRemoteApp(newChange.data.sessionId);
+      }
+      if (newChange.action === 'REMOTE_CONNECTION' && newChange.data.status === 'offline') {
+        this.closedRemoveConnecion(newChange.data.sessionId);
       }
       if (newChange.action === 'AGENT_ACTIVITY_STATUS') this.onInitUpdateAgentActivityStatus(newChange);
       if (newChange.action === 'DEVICE_INSTALLED') {
@@ -133,6 +137,12 @@ export class DevicesStateService {
   }
   public setDevicesForRemove(data) {
     this.devicesForRemove = data;
+  }
+  public closedRemoveConnecion(data) {
+    this.onClosedRemoveConnecion.emit(data);
+  }
+  public getOnClosedRemoveConnecion() {
+    return this.onClosedRemoveConnecion;
   }
   public setDevicesForShutDown(data) {
     this.devicesForShutDown = data;

@@ -68,6 +68,15 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
       console.log("this.devices", this.devices);
     })
     this.sub.add(getOnDevices);
+    let getOnClosedRemoveConnecion = this.devicesStateService.getOnClosedRemoveConnecion().subscribe(data => {
+      this.devices.forEach(item => {
+        let findIndex = item.remoteSessions.findIndex(remoteSession => remoteSession.id === data);
+        if (findIndex > -1) item.remoteSessions.splice(findIndex, 1);
+      })
+      this.cd.detectChanges();
+    })
+    this.sub.add(getOnClosedRemoveConnecion);
+    /*
     let oneTimeConnectionArray = this.devicesRealTimeService.oneTimeConnectionArray.subscribe(newChange => {
       if (newChange.action === 'ONE_TIME_CONNECTION_OPEN') {
         for (var i = 0; i < this.devices.length; i++) {
@@ -91,7 +100,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
       }
       this.cd.detectChanges();
     })
-    this.sub.add(oneTimeConnectionArray);
+    this.sub.add(oneTimeConnectionArray);*/
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REBOOT_DEVICE) {
