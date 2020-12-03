@@ -162,7 +162,7 @@
                 [textContent]="'Online'"
             ></span>
             <span
-                *ngIf="!device.online"
+                [hidden]="device.online"
                 placement="top"
                 container="body"
                 [ngbTooltip]="tipOfflineDevice"
