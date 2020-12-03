@@ -1,0 +1,61 @@
+<div
+    ngbDropdown
+    container="body"
+    placement="bottom-right"
+>
+    <ng-template
+        #tipConnected
+        class="tooltip"
+    >
+        <ng-template
+            ngFor
+            let-item
+            [ngForOf]="device.remoteSessions"
+        >
+            <div
+                class="connected-tooltip-name qt-ff-gm"
+                [textContent]="getUserName(item.userId)"
+            ></div>
+            <div class="connected-tooltip-text">
+                Connected:
+                <span *ngIf="returnTimeFormat(item.agentConnectedAt).hours > 0">
+                    {{returnTimeFormat(item.agentConnectedAt ).hours}} hrs
+                </span>
+                <span *ngIf="returnTimeFormat(item.agentConnectedAt ).minutes >= 0">
+                    {{returnTimeFormat(item.agentConnectedAt ).minutes}} min
+                </span>
+            </div>
+        </ng-template>
+    </ng-template>
+    <div
+        [hidden]="!(device.online && device.remoteSessions.length > 0 && device.type !== 'workstation' && device.online && getPermissions('REMOTE_CONNECTIONS'))"
+        placement="top"
+        [ngbTooltip]="tipConnected"
+        class="qt-ic-c icon__connected-device master-agent-icon qt-sz-24"
+        (click)="remoteAccess('PROXY')"
+    ></div>
+    <div
+        [hidden]="!(device.online && device.remoteSessions.length > 0 && device.type === 'workstation' && device.online && getPermissions('REMOTE_CONNECTIONS'))"
+        placement="top"
+        [ngbTooltip]="tipConnected"
+        class="qt-ic-c icon__connected-device master-agent-icon qt-sz-24"
+        ngbDropdownToggle
+    >
+        <div ngbDropdownMenu>
+            <ul class="qt-dropdown-menu">
+                <li
+                    (click)="remoteAccess('CSS')"
+                    ngbDropdownItem
+                >
+                    QuickTech Connect
+                </li>
+                <li
+                    (click)="remoteAccess('RDP')"
+                    ngbDropdownItem
+                >
+                    Remote Desktop
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

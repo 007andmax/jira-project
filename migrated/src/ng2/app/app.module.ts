@@ -353,6 +353,8 @@ import { CompanyDevicesAsideSystemComponent } from './components/company-devices
 import { CompanyDevicesAsideNetworkTabComponent } from './components/company-devices/company-devices-aside/company-devices-aside-network-tab/company-devices-aside-network-tab.component';
 import { CompanyDevicesAsideSoftwareComponent } from './components/company-devices/company-devices-aside/company-devices-aside-software/company-devices-aside-software.component';
 import { CompanyDevicesAsideUpdatesComponent } from './components/company-devices/company-devices-aside/company-devices-aside-updates/company-devices-aside-updates.component';
+import { CompanyDevicesExistRemoteSessionsComponent } from './components/company-devices/company-devices-item/company-devices-exist-remote-sessions/company-devices-exist-remote-sessions.component';
+import { CompanyDevicesNoExistRemoteSessionsComponent } from './components/company-devices/company-devices-item/company-devices-no-exist-remote-sessions/company-devices-no-exist-remote-sessions.component';
 
 /**
  * declare angular
@@ -860,6 +862,8 @@ angular.module('quicktech')
     CompanyDevicesAsideNetworkTabComponent,
     CompanyDevicesAsideSoftwareComponent,
     CompanyDevicesAsideUpdatesComponent,
+    CompanyDevicesExistRemoteSessionsComponent,
+    CompanyDevicesNoExistRemoteSessionsComponent,
   ],
   imports: [
     BrowserModule,
