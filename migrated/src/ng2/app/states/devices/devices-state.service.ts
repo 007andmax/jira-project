@@ -20,7 +20,7 @@ export class DevicesStateService {
   onGetDevices: EventEmitter<any> = new EventEmitter();
   onResetDeviceTiming: EventEmitter<any> = new EventEmitter();
   onOpenAside: EventEmitter<any> = new EventEmitter();
-  onRemoveConnecion: EventEmitter<any> = new EventEmitter();.
+  onRemoveConnecion: EventEmitter<any> = new EventEmitter();
   onClosedRemoveConnecion: EventEmitter<any> = new EventEmitter();
   onLaunchRemoteApp: EventEmitter<any> = new EventEmitter();
   // onChangeDevices: EventEmitter<DeviceUpdate> = new EventEmitter();
