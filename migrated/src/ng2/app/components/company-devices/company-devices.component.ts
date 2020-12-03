@@ -10,6 +10,7 @@ import { ConfirmStateService } from '../shared/confirm/services/confirm-state.se
 import { Device } from './class/device';
 import { DeviceCompany } from './class/device-company';
 import { CompanyDeviceFilter } from './class/device-company-filter';
+import { DeviceRemoteSessions } from './class/device-remote-sessions';
 
 @Component({
   selector: 'app-company-devices',
@@ -71,7 +72,12 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
       if (newChange.action === 'ONE_TIME_CONNECTION_OPEN') {
         for (var i = 0; i < this.devices.length; i++) {
           if (this.devices[i].id === newChange.data.deviceId) {
-            this.devices[i].remoteSessions.push(newChange.data)
+            this.devices[i].remoteSessions.push(new DeviceRemoteSessions({
+              startedAt: newChange.data.startedAt,
+              id: newChange.data.id,
+              sessionId: newChange.data.sessionId,
+              userId: newChange.data.performer.id,
+            }))
           }
         }
       } else if (newChange.action === 'ONE_TIME_DELETED') {

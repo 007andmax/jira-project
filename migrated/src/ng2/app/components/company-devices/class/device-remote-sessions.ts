@@ -4,7 +4,6 @@ export class DeviceRemoteSessions {
     id: string;
     sessionId: string;
     agentConnectedAt: number;
-
     userId: string;
     constructor(data) {
         this.startedAt = data.startedAt;
