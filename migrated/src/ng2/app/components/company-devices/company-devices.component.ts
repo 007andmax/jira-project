@@ -149,6 +149,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     let getOnResetDeviceTiming = this.devicesStateService.getOnResetDeviceTiming().subscribe(data => {
       let findIndex = this.devices.findIndex(item => item.id === data.id);
       if (findIndex > -1) {
+        this.devices[findIndex].timing.idle = null;
         if (data.online) {
           this.devices[findIndex].timing.online = 0;
         } else {
