@@ -154,6 +154,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
           this.devices[findIndex].timing.online = 0;
         } else {
           this.devices[findIndex].timing.offline = 0;
+          this.devices[findIndex].offlineAt = new Date().toUTCString();
           this.devices[findIndex].timing.uptimeForOrdering = 0;
         }
       }
