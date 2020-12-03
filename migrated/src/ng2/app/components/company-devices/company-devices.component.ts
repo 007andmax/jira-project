@@ -69,8 +69,9 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnDevices);
     let getOnClosedRemoveConnecion = this.devicesStateService.getOnClosedRemoveConnecion().subscribe(data => {
+      console.log("data", data);
       this.devices.forEach(item => {
-        let findIndex = item.remoteSessions.findIndex(remoteSession => remoteSession.id === data);
+        let findIndex = item.remoteSessions.findIndex(remoteSession => remoteSession.sessionId === data);
         if (findIndex > -1) item.remoteSessions.splice(findIndex, 1);
       })
       this.cd.detectChanges();
