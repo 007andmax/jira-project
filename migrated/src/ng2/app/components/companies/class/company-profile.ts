@@ -93,6 +93,7 @@ export class CompanyProfile {
         }
         this.tags = company.tags;
         this.reputation = company.reputation;
+        this.companyTicketStatistic = company.companyTicketStatistic;
 
     }
     public getDataForUpdate() {

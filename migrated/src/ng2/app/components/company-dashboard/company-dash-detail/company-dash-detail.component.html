@@ -206,14 +206,17 @@
 </ng-template>
 
 <ng-template #tag let-modal class="map-modal">
+  <div class="modal-title tag d-flex">
+    <div class="h1">Add Tags</div>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+      close
+    </button>
+  </div>
+<div class="modal-body tag d-flex">
   
-  <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
-    close
-  </button>
-<div class="modal-body d-flex">
-  <div class="h1">Tags</div>
   <app-company-dash-tags (tagsChange)="onChangeTags($event)" [tagList]="tags"></app-company-dash-tags>
   <div class="footer-area-modal d-flex">
+    <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Cancel</button>
     <button type="button" class="btn btn-primary" (click)="saveTags();modal.dismiss()">Save Changes</button>
   </div>
 </div>

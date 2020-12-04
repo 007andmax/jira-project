@@ -824,16 +824,17 @@ body {
                         //     height: 160px !important;
                         // }
                         .chart-status {
-                            margin: 0 -24px !important;
+                            // margin: 0 -24px !important;
+                            margin: 0;
                             @include flexbox;
                             align-items: center;
                             flex-direction: row;
                             border-top: 1px solid #edf0f2;
                             padding-top: 10px !important;
                             justify-content: center;
-                            @media only screen and (max-width: 1439px) {
-                                margin: 0 -16px !important;
-                            }
+                            // @media only screen and (max-width: 1439px) {
+                            //     margin: 0 -16px !important;
+                            // }
                             li {
                                 width: auto;
                                 max-width: 90px;
@@ -1908,7 +1909,55 @@ svg.nvd3-svg {
 
 app-company-dash-tags {
     .mat-form-field {
+        display: inline-block;
+        position: relative;
+        text-align: left;
         width: 100%;
-        margin: 30px 0;
+    }
+    .mat-form-field-wrapper {
+        margin: 0;
+        padding-bottom: 0 !important;
+        &::before {
+            position: absolute;
+            content: 'Tags';
+            font-family: "Graphik-Medium", sans-serif;
+            font-size: 13px;
+            left: 0;
+            top: -28px;
+        }
+    }
+    .mat-form-field-flex {
+        display: inline-flex;
+        align-items: baseline;
+        box-sizing: border-box;
+        width: 100%;
+    }
+    .mat-form-field-infix {
+        border: 1px solid #c4cbd5;
+        border-radius: 4px;
+        padding-left: 36px !important;
+        position: relative;
+        min-height: 48px;
+        &::before {
+            left: 12px;
+            top: 15px;
+            position: absolute;
+            content: '';
+            width: 16px;
+            height: 16px;
+            background: url("./../../../assets/img/icons/tag-ng2.png");
+        }
+        input {
+            margin: 0;
+            flex: 1 0 150px;
+            padding: 12px 24px 12px 12px;
+            outline: none;
+        }
+    }
+    .mat-form-field-underline, .mat-form-field-label-wrapper {
+        display: none;
+    }
+    .footer-area-modal {
+        margin-top: 64px;
     }
 }

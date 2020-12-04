@@ -45,3 +45,20 @@
         }
     }
 }
+
+.tag {
+    &.modal-title {
+        margin: 10px 0 24px 32px;
+        padding: 0;
+        .h1 {
+            font-size: 20px;
+            line-height: 28px;
+        }
+        .close {
+            top: 5px;
+        }
+    }
+    .footer-area-modal {
+        margin-top: 64px;
+    }
+}

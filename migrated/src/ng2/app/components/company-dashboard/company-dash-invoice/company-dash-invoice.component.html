@@ -16,7 +16,7 @@
                   <td>{{invoice.dateName}}</td>
                   <td *ngIf="invoice.paidOn" class="paid" >Paid</td>
                   <td *ngIf="invoice.isOverDue && !invoice.paidOn" class="ov-d">Over Due</td>
-                  <td *ngIf="!invoice.isOverDue && !invoice.paidOn" class="outstanding">Outstanding</td>
+                  <td *ngIf="!invoice.isOverDue && !invoice.paidOn" class="ov-d">Outstanding</td>
                   <td>${{invoice.sum}}</td>
                 </tr>
              </tbody>
