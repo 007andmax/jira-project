@@ -61,7 +61,9 @@ export class DevicesStateService {
         let deviceIndex = this.allDevices[newChange.data.clientCompanyId].findIndex(item => item.id === newChange.data.value);
         if (deviceIndex > -1) {
           this.allDevices[newChange.data.clientCompanyId][deviceIndex].online = false;
-          this.allDevices[newChange.data.clientCompanyId][deviceIndex].offlineAt = new Date().toUTCString();
+          var now = new Date();
+          var utc_now = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds(), now.getUTCMilliseconds());
+          this.allDevices[newChange.data.clientCompanyId][deviceIndex].offlineAt = utc_now.toString();
           this.allDevices[newChange.data.clientCompanyId][deviceIndex].userName = newChange.data.userName;
           this.onResetDeviceTiming.emit({ id: newChange.data.value, online: false });
         }
