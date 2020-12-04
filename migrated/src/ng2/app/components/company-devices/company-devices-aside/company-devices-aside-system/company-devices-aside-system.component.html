@@ -10,74 +10,66 @@
                 (click)="toggleDeviceSpecifications = !toggleDeviceSpecifications"
             ></div>
         </div>
+
         <div
-            class="sidebar-system__info edit-field"
-            ngbDropdown
-            placement="bottom-left"
-            (openChange)="changeHostNameDP.onOpenDropDown($event)"
+          ngbDropdown
+          placement="bottom-left"
+          (openChange)="changeHostNameDP.onOpenDropDown($event)"
         >
+          <div class="sidebar-system__info edit-field" ngbDropdownAnchor>
             <div class="sidebar-system__info-title">Hostname</div>
-            <div
-                class="sidebar-system__info-text"
-                [textContent]="device.hostName"
-                ngbDropdownAnchor
-            >
-            </div>
+            <div class="sidebar-system__info-text" [textContent]="device.hostName"></div>
             <app-company-devices-aside-tooltip></app-company-devices-aside-tooltip>
-            <app-company-devices-edit-label
+          </div>
+          <app-company-devices-edit-label
                 [field]="device.hostName"
                 [title]="'Edit Device Name'"
                 ngbDropdownMenu
+                container="body"
                 #changeHostNameDP
                 class="company-device-edit-name"
                 (onChange)="onChangeName($event)"
             ></app-company-devices-edit-label>
         </div>
+
+
         <div
-            class="sidebar-system__info"
-            ngbDropdown
-            placement="bottom-left"
-            (openChange)="changeAssetTagDP.onOpenDropDown($event)"
+          ngbDropdown
+          placement="bottom-left"
+          (openChange)="changeAssetTagDP.onOpenDropDown($event)"
         >
-            <div class="sidebar-system__info-title">Asset Tag</div>
-            <div
-                class="sidebar-system__info-text"
-                [textContent]="chackDefaultValue(getSystemField('asset_tag'))"
-                ngbDropdownAnchor
-            >
-            </div>
-            <app-company-devices-aside-tooltip></app-company-devices-aside-tooltip>
-            <app-company-devices-edit-label
-                [field]="getSystemField('asset_tag') || ''"
-                [title]="'Edit Device Name'"
-                ngbDropdownMenu
-                #changeAssetTagDP
-                class="company-device-edit-name"
-                (onChange)="onChangeHardware(device.getDataForUpdateAssetTag($event),'asset_tag',$event)"
-            ></app-company-devices-edit-label>
+          <div ngbDropdownAnchor class="sidebar-system__info" ngbDropdownAnchor>
+              <div class="sidebar-system__info-title">Asset Tag</div>
+              <div class="sidebar-system__info-text" [textContent]="chackDefaultValue(getSystemField('asset_tag'))"></div>
+              <app-company-devices-aside-tooltip></app-company-devices-aside-tooltip>
+              <app-company-devices-edit-label
+                  [field]="getSystemField('asset_tag') || ''"
+                  [title]="'Edit Device Name'"
+                  ngbDropdownMenu
+                  #changeAssetTagDP
+                  class="company-device-edit-name"
+                  (onChange)="onChangeHardware(device.getDataForUpdateAssetTag($event),'asset_tag',$event)"
+              ></app-company-devices-edit-label>
+          </div>
         </div>
-        <div
-            class="sidebar-system__info"
-            ngbDropdown
-            placement="bottom-left"
-            (openChange)="changeManufacturerDP.onOpenDropDown($event)"
-        >
-            <div class="sidebar-system__info-title">Manufacturer</div>
-            <div
-                class="sidebar-system__info-text"
-                [textContent]="chackDefaultValue(getSystemField('manufacturer'))"
-                ngbDropdownAnchor
-            ></div>
-            <app-company-devices-aside-tooltip></app-company-devices-aside-tooltip>
-            <app-company-devices-edit-label
-                [field]="getSystemField('manufacturer') || ''"
-                [title]="'Edit Device Name'"
-                ngbDropdownMenu
-                #changeManufacturerDP
-                class="company-device-edit-name"
-                (onChange)="onChangeHardware(device.getDataForUpdateManufacturer($event),'manufacturer',$event)"
-            ></app-company-devices-edit-label>
+
+
+        <div ngbDropdown placement="bottom-left" (openChange)="changeManufacturerDP.onOpenDropDown($event)">
+          <div class="sidebar-system__info" ngbDropdownAnchor>
+              <div class="sidebar-system__info-title">Manufacturer</div>
+              <div class="sidebar-system__info-text" [textContent]="chackDefaultValue(getSystemField('manufacturer'))"></div>
+              <app-company-devices-aside-tooltip></app-company-devices-aside-tooltip>
+              <app-company-devices-edit-label
+                  [field]="getSystemField('manufacturer') || ''"
+                  [title]="'Edit Device Name'"
+                  ngbDropdownMenu
+                  #changeManufacturerDP
+                  class="company-device-edit-name"
+                  (onChange)="onChangeHardware(device.getDataForUpdateManufacturer($event),'manufacturer',$event)"
+              ></app-company-devices-edit-label>
+          </div>
         </div>
+
         <div class="sidebar-system__info">
             <div class="sidebar-system__info-title">IP address</div>
             <div
@@ -85,27 +77,21 @@
                 [textContent]="chackDefaultValue(getNetworkAdapterField('ip_address'))"
             ></div>
         </div>
-        <div
-            class="sidebar-system__info"
-            ngbDropdown
-            placement="bottom-left"
-            (openChange)="changeComputerModelDP.onOpenDropDown($event)"
-        >
-            <div class="sidebar-system__info-title">Computer Model</div>
-            <div
-                class="sidebar-system__info-text"
-                [textContent]="chackDefaultValue(getSystemField('model'))"
-                ngbDropdownAnchor
-            ></div>
-            <app-company-devices-aside-tooltip></app-company-devices-aside-tooltip>
-            <app-company-devices-edit-label
-                [field]="getSystemField('model') || ''"
-                [title]="'Edit Device Name'"
-                ngbDropdownMenu
-                #changeComputerModelDP
-                class="company-device-edit-name"
-                (onChange)="onChangeHardware(device.getDataForUpdateModel($event),'model',$event)"
-            ></app-company-devices-edit-label>
+
+        <div ngbDropdown placement="bottom-left" (openChange)="changeComputerModelDP.onOpenDropDown($event)">
+          <div class="sidebar-system__info" ngbDropdownAnchor>
+              <div class="sidebar-system__info-title">Computer Model</div>
+              <div class="sidebar-system__info-text" [textContent]="chackDefaultValue(getSystemField('model'))"></div>
+              <app-company-devices-aside-tooltip></app-company-devices-aside-tooltip>
+              <app-company-devices-edit-label
+                  [field]="getSystemField('model') || ''"
+                  [title]="'Edit Device Name'"
+                  ngbDropdownMenu
+                  #changeComputerModelDP
+                  class="company-device-edit-name"
+                  (onChange)="onChangeHardware(device.getDataForUpdateModel($event),'model',$event)"
+              ></app-company-devices-edit-label>
+          </div>
         </div>
     </div>
     <div class="qt-divider qt-mt-24 qt-mb-24"></div>
@@ -120,7 +106,7 @@
                 (click)="toggleWindowSpecifications = !toggleWindowSpecifications"
             ></div>
         </div>
-        <div class="sidebar-system__info">
+        <div class="sidebar-system__info warranty-info">
             <div class="sidebar-system__info-title">Warranty</div>
             <div
                 class="sidebar-system__info-text"
@@ -136,6 +122,7 @@
                 [editMode]="true"
                 [editDate]="getSystemField('warranty') || getToDayDate()"
                 [useMinDate]="false"
+                [placement]="'bottom-right'"
                 (onChange)="onChangeHardware(device.getDataForUpdateWarranty(parseDateFromDatePicker($event)),'warranty',parseDateFromDatePicker($event))"
             ></app-date-picker>
         </div>
@@ -146,7 +133,7 @@
                 [textContent]="chackDefaultValue(getWindowsInfo())"
             ></div>
         </div>
-        <div class="sidebar-system__info">
+        <div class="sidebar-system__info installed-info">
             <div class="sidebar-system__info-title">Installed on</div>
             <div
                 class="sidebar-system__info-text"
@@ -162,30 +149,26 @@
                 [editMode]="true"
                 [editDate]="getSystemField('install_date') || getToDayDate()"
                 [useMinDate]="false"
+                [placement]="'top-right'"
                 (onChange)="onChangeHardware(device.getDataForUpdateInstallDate(parseDateFromDatePicker($event)),'install_date',parseDateFromDatePicker($event))"
             ></app-date-picker>
         </div>
-        <div
-            class="sidebar-system__info"
-            ngbDropdown
-            placement="bottom-left"
-            (openChange)="changeNameDP.onOpenDropDown($event)"
-        >
-            <div class="sidebar-system__info-title">System Type</div>
-            <div
-                class="sidebar-system__info-text"
-                [textContent]="chackDefaultValue(getSystemField('architecture'))"
-                ngbDropdownAnchor
-            ></div>
-            <app-company-devices-aside-tooltip></app-company-devices-aside-tooltip>
-            <app-company-devices-edit-label
-                [field]="getSystemField('architecture') || ''"
-                [title]="'Edit Device Name'"
-                ngbDropdownMenu
-                #changeNameDP
-                class="company-device-edit-name"
-                (onChange)="onChangeHardware(device.getDataForUpdateArchitecture($event),'architecture',$event)"
-            ></app-company-devices-edit-label>
+
+      <div ngbDropdown placement="bottom-left" (openChange)="changeNameDP.onOpenDropDown($event)">
+        <div class="sidebar-system__info" ngbDropdownAnchor>
+          <div class="sidebar-system__info-title">System Type</div>
+          <div class="sidebar-system__info-text" [textContent]="chackDefaultValue(getSystemField('architecture'))"></div>
+          <app-company-devices-aside-tooltip></app-company-devices-aside-tooltip>
+          <app-company-devices-edit-label
+              [field]="getSystemField('architecture') || ''"
+              [title]="'Edit Device Name'"
+              ngbDropdownMenu
+              #changeNameDP
+              class="company-device-edit-name"
+              (onChange)="onChangeHardware(device.getDataForUpdateArchitecture($event),'architecture',$event)"
+          ></app-company-devices-edit-label>
         </div>
+      </div>
     </div>
 </div>
+
