@@ -17,7 +17,7 @@ export class CompanyDevicesEditNameComponent implements OnInit {
 
   }
   changeName() {
-    this.devicesService.setIcon(this.device.getDataForEditLabel((this.label.length > 0) ? this.label : this.device.hostName || this.device.ip)).subscribe(data => {
+    this.devicesService.editAgentInfo(this.device.getDataForEditLabel((this.label.length > 0) ? this.label : this.device.hostName || this.device.ip)).subscribe(data => {
       this.onChangeName.emit(this.label);
     })
   }

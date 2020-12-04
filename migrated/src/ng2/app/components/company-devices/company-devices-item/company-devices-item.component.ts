@@ -73,7 +73,7 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
     return (user) ? `${user.firstName} ${user.lastName}` : '';
   }
   setIcon(iconName) {
-    this.devicesService.setIcon(this.device.getDataForEditIcon(iconName)).subscribe(data => {
+    this.devicesService.editAgentInfo(this.device.getDataForEditIcon(iconName)).subscribe(data => {
       this.device.setIconName(iconName);
       this.devicesStateService.updateLabelIcon(this.device);
     })

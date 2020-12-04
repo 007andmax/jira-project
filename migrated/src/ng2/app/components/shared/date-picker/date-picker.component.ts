@@ -25,7 +25,7 @@ export class DatePickerComponent implements OnInit, OnDestroy {
   @Input() useMaxDate: boolean = false;
   @Input() minDate: number = new Date().getTime();
   @Input() maxDate: number = new Date().getTime();
-  @Input() placement:string = "bottom";
+  @Input() placement: string = "bottom";
   @Output() onChange: EventEmitter<ChangeDatePicker> = new EventEmitter();
   public datepicker: NgbDateStruct;
   public date: RecurringTicketsEditAsideDate = new RecurringTicketsEditAsideDate();
@@ -49,15 +49,15 @@ export class DatePickerComponent implements OnInit, OnDestroy {
  * Initializes date picker. See [ngOnInit]{@see OnInit#ngOnInit}
  */
   ngOnInit() {
-    
 
-   // if (this.useMinDate) this.minDateDP = this.sericeDatePicker.getDateStruct(this.minDate);
-  //  if (this.useMaxDate) this.maxDateDP = this.sericeDatePicker.getDateStruct(this.maxDate);
+
+    // if (this.useMinDate) this.minDateDP = this.sericeDatePicker.getDateStruct(this.minDate);
+    //  if (this.useMaxDate) this.maxDateDP = this.sericeDatePicker.getDateStruct(this.maxDate);
 
     this.oninitreset();
     this.onInitEditMode();
     this.oninitClear();
-  
+
     if (this.editMode) this.setEditDate(this.editDate);
 
   }
@@ -67,7 +67,7 @@ export class DatePickerComponent implements OnInit, OnDestroy {
 
   }
 
-   
+
   /**
   * Subscribe to clear date picker
   */
@@ -83,7 +83,7 @@ export class DatePickerComponent implements OnInit, OnDestroy {
     let date = new Date();
     this.navDate = this.sericeDatePicker.getNavDate(date);
     this.datepicker = this.sericeDatePicker.getDateForDatePicker(date);
-    this.date.setTitle(this.datepicker,this.formatDate);
+    this.date.setTitle(this.datepicker, this.formatDate);
   }
   /**
   * Subscribe to edit mode
@@ -99,7 +99,7 @@ export class DatePickerComponent implements OnInit, OnDestroy {
     this.navDate = this.sericeDatePicker.getNavDate(date);
     this.datepicker = this.sericeDatePicker.getDateForDatePicker(data);
     if (this.navDate) this.sericeDatePicker.updateMonthAndYearDatePicker(this.datepicker, this.navDate);
-    this.date.setTitle(this.datepicker,this.formatDate);
+    this.date.setTitle(this.datepicker, this.formatDate);
   }
 
   public geTextDate() {
@@ -122,11 +122,11 @@ export class DatePickerComponent implements OnInit, OnDestroy {
   public selectDate(data: NgbDate) {
     this.datepicker = data;
     if (this.navDate) this.sericeDatePicker.updateMonthAndYearDatePicker(this.datepicker, this.navDate);
-    this.date.setTitle(this.datepicker,this.formatDate);
+    this.date.setTitle(this.datepicker, this.formatDate);
 
     if (this.type === TYPE_INPUT) this.sericeDatePicker.setTextInput('dropdownDate', this.date.getTitle());
     this.onChange.emit(new ChangeDatePicker(this.datepicker.day, this.datepicker.month, this.datepicker.year));
-   this.date_dropDown.close();
+    this.date_dropDown.close();
     this.cd.detectChanges();
 
   }
@@ -156,10 +156,14 @@ export class DatePickerComponent implements OnInit, OnDestroy {
   * Update  date
   */
   private updateDate() {
-    this.date.setTitle(this.datepicker,this.formatDate);
+    this.date.setTitle(this.datepicker, this.formatDate);
     this.onChange.emit(new ChangeDatePicker(this.datepicker.day, this.datepicker.month, this.datepicker.year));
     if (this.type === TYPE_INPUT) this.sericeDatePicker.setTextInput('dropdownDate', this.date.getTitle());
     this.date_dropDown.close();
+  }
+
+  public getDropDown() {
+    return this.date_dropDown;
   }
 
   /**

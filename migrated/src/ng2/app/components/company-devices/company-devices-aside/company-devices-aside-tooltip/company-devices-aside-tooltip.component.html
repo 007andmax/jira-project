@@ -1,0 +1,23 @@
+<ng-template
+    #tipDevice
+    class="tooltip"
+>
+    Edit Device Name
+</ng-template>
+<div
+    *ngIf="initDropdownToggle"
+    placement="top"
+    container="body"
+    [ngbTooltip]="tipDevice"
+    class="ml-8 qt-sz-24 icon__edit qt-ic-c device-name-edit-marker pointer"
+    id="dropdownChangeName"
+    ngbDropdownToggle
+></div>
+<div
+    *ngIf="!initDropdownToggle"
+    placement="top"
+    container="body"
+    [ngbTooltip]="tipDevice"
+    class="ml-8 qt-sz-24 icon__edit qt-ic-c device-name-edit-marker pointer"
+    (click)="click()"
+></div>

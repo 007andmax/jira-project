@@ -355,6 +355,8 @@ import { CompanyDevicesAsideSoftwareComponent } from './components/company-devic
 import { CompanyDevicesAsideUpdatesComponent } from './components/company-devices/company-devices-aside/company-devices-aside-updates/company-devices-aside-updates.component';
 import { CompanyDevicesExistRemoteSessionsComponent } from './components/company-devices/company-devices-item/company-devices-exist-remote-sessions/company-devices-exist-remote-sessions.component';
 import { CompanyDevicesNoExistRemoteSessionsComponent } from './components/company-devices/company-devices-item/company-devices-no-exist-remote-sessions/company-devices-no-exist-remote-sessions.component';
+import { CompanyDevicesEditLabelComponent } from './components/company-devices/company-devices-edit-label/company-devices-edit-label.component';
+import { CompanyDevicesAsideTooltipComponent } from './components/company-devices/company-devices-aside/company-devices-aside-tooltip/company-devices-aside-tooltip.component';
 
 /**
  * declare angular
@@ -864,6 +866,8 @@ angular.module('quicktech')
     CompanyDevicesAsideUpdatesComponent,
     CompanyDevicesExistRemoteSessionsComponent,
     CompanyDevicesNoExistRemoteSessionsComponent,
+    CompanyDevicesEditLabelComponent,
+    CompanyDevicesAsideTooltipComponent,
   ],
   imports: [
     BrowserModule,
