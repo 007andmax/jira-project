@@ -61,6 +61,7 @@ export class DevicesStateService {
         let deviceIndex = this.allDevices[newChange.data.clientCompanyId].findIndex(item => item.id === newChange.data.value);
         if (deviceIndex > -1) {
           this.allDevices[newChange.data.clientCompanyId][deviceIndex].online = false;
+          this.allDevices[newChange.data.clientCompanyId][deviceIndex].offlineAt = new Date().toUTCString();
           this.allDevices[newChange.data.clientCompanyId][deviceIndex].userName = newChange.data.userName;
           this.onResetDeviceTiming.emit({ id: newChange.data.value, online: false });
         }
