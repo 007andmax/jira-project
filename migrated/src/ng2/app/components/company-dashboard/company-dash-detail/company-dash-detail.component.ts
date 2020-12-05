@@ -42,7 +42,7 @@ export class CompanyDashDetailComponent implements OnInit {
       phoneNumber: '',
       avatar: ''
     },
-    reputation: '',
+    reputation: 0,
     clientType: '',
     description: ''
   };
@@ -115,6 +115,9 @@ export class CompanyDashDetailComponent implements OnInit {
     '23:00': '23:00 PM',
     '23:30': '23:30 PM'
   };
+  selectedRating = 0;
+  unSelectedRating = 0;
+  ratingSaved: boolean = false;
 
   public constructor(private companiesService: CompaniesService,
     private toaster: ToastrService,
@@ -147,6 +150,12 @@ export class CompanyDashDetailComponent implements OnInit {
       // this.companyDetail = data;
       this.companyDetail.onEditMode(data);
       this.companyDetailing = this.companyDetail.getDataForDashboard();
+      if (this.companyDetailing.reputation === undefined || this.companyDetailing.reputation === null) {
+        this.unSelectedRating = 5
+      } else {
+        this.selectedRating = this.companyDetailing.reputation;
+        this.unSelectedRating = 5 - this.selectedRating;
+      }
       this.companyDetail = data;
       this.totalTicketsChanged.emit(this.companyDetailing.totalTickets);
       this.averageResponseTimeChanged.emit(this.companyDetailing.averageResponseTime);
@@ -288,7 +297,9 @@ export class CompanyDashDetailComponent implements OnInit {
       if (this.tagSaved == true) {
         msg = 'Tags saved successfully'; 
         this.tags = this.companyDetail.tags;
-      }
+      } else if (this.ratingSaved == true) {
+        msg = 'Rating saved successfully';
+      } 
       this.toaster.success(msg, null, {
         timeOut: 5000
       });
@@ -296,6 +307,7 @@ export class CompanyDashDetailComponent implements OnInit {
         this.cd.detectChanges();
       }
       this.tagSaved = false;
+      this.ratingSaved = false;
     });
     this.sub.add(savecompany);
   }
@@ -461,6 +473,24 @@ export class CompanyDashDetailComponent implements OnInit {
 
     const value = h + ':' + m;
     return value;
+  }
+
+  changeRating(index, type) {
+    let rating = 0;
+    if (type === 'selected') {
+      rating = index + 1;
+    } else {
+      rating = this.selectedRating + (index + 1)
+    }
+    this.companyDetail.reputation = rating;
+    this.ratingSaved = true;
+    if (this.companyDetail.reputation === undefined || this.companyDetail.reputation === null) {
+      this.unSelectedRating = 5
+    } else {
+      this.selectedRating = this.companyDetail.reputation;
+      this.unSelectedRating = 5 - this.selectedRating;
+    }
+    this.saveCompany();
   }
 
 

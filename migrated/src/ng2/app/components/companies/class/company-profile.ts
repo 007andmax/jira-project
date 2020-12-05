@@ -38,7 +38,7 @@ export class CompanyProfile {
     techLeadId: string;
     id: string;
     tags: Array<Tag>;
-    reputation?: string = '';
+    reputation?: number = 0;
     constructor() {
         this.logo = null;
         let contact: CompanyProfileContact = new CompanyProfileContact();

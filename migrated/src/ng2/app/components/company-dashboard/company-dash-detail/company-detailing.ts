@@ -15,7 +15,7 @@ export class CompanyDetaill {
     tags: Array<Tag>;
     mapSrc: string;
     primaryContact: CompanyPrimaryContact;
-    reputation?: string = '';
+    reputation?: number = 0;
     clientType: string;
     description: string;
 }

@@ -10,10 +10,14 @@
     >
     </div>
     <div class="cmp-dboard-rating d-flex">
-      <span class="d-flex" *ngIf="companyDetailing?.reputation === undefined || companyDetailing?.reputation === null ">
-        <img *ngFor="let item of arrayOne(5); let i = index;"
+      <span class="d-flex" >
+        <img *ngFor="let item of arrayOne(selectedRating); let i = index;" class="pointer"
+          src="html/ng2/assets/img/company-details/rating-filled.svg"
+          alt="rating" (click)="changeRating(i, 'selected')"
+        />
+        <img *ngFor="let item of arrayOne(unSelectedRating); let i = index;" class="pointer"
           src="html/ng2/assets/img/company-details/rating.svg"
-          alt="rating"
+          alt="rating" (click)="changeRating(i, 'unselected')"
         />
       </span>
       <div class="cmp-user-info d-flex">

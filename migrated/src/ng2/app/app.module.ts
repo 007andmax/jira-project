@@ -350,7 +350,6 @@ import { CompanyDashTicketComponent } from './components/company-dashboard/compa
 import { CompanyDashRevenueComponent } from './components/company-dashboard/company-dash-revenue/company-dash-revenue.component';
 import { CompanyDashInvoiceComponent } from './components/company-dashboard/company-dash-invoice/company-dash-invoice.component';
 import { CompanyDashContractComponent } from './components/company-dashboard/company-dash-contract/company-dash-contract.component';
-
 /**
  * declare angular
  */
