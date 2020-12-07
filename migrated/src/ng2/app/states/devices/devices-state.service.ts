@@ -69,10 +69,10 @@ export class DevicesStateService {
         }
       }
       if (newChange.action === 'REMOTE_CONNECTION' && newChange.data.status === 'online') {
-        this.onInitLaunchRemoteApp(newChange.data.sessionId);
+        this.onInitLaunchRemoteApp(newChange.data.id);
       }
       if (newChange.action === 'REMOTE_CONNECTION' && newChange.data.status === 'offline') {
-        this.closedRemoveConnecion(newChange.data.sessionId);
+        this.closedRemoveConnecion(newChange.data.id);
       }
       if (newChange.action === 'AGENT_ACTIVITY_STATUS') this.onInitUpdateAgentActivityStatus(newChange);
       if (newChange.action === 'DEVICE_INSTALLED') {
