@@ -14,6 +14,10 @@
   }
   .sticky-list-table-header.company-devices-list-table-header {
     top: 145px;
+    overflow: auto;
+    .company-devices-table {
+      min-width: 1064px !important;
+    }
   }
   table.company-devices-table {
     td {
