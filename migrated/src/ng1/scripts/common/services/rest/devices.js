@@ -682,26 +682,6 @@
         Utils.handleCallback(future, callback);
       }
 
-      function sendAgentUpdateRequest(companyId, agentIds, callback) {
-        if (!companyId) {
-          throw "CompanyId is required!"
-        }
-        if (!agentIds) {
-          throw "agentId is required!"
-        }
-
-        if (!Array.isArray(agentIds)) {
-          agentIds = [agentIds];
-        }
-
-        var future = $http({
-          url: '/devices/sendAgentUpdateRequest?companyId=' + companyId,
-          method: 'POST',
-          data: agentIds
-        });
-        Utils.handleCallback(future, callback);
-      }
-
       function getDevicesCount(scope, callback) {
         if (!scope) {
           throw "scope is required!"
@@ -957,26 +937,6 @@
         Utils.handleCallback(future, callback);
       }
 
-      function getOneTimeHistory(callback) {
-        var history = [];
-
-        $http.get('/remote/history').then(function (resp) {
-          Utils.customizeArray(resp.data, history);
-
-          storage.oneTimeCallbacks.REMOTE_CONNECTION_CLOSED = function (newChange) {
-            if (newChange.data.oneTime) {
-              history.unshift(newChange.data);
-            }
-          };
-
-          if (callback) {
-            callback(history);
-          }
-        });
-
-        return history;
-      }
-
       function getOneById(id, companyId) {
         return Utils.findById(storage.devices[companyId], id);
       }
@@ -1080,30 +1040,6 @@
         }
       }
 
-      function saveReportEditedFields(dto, callback) {
-        var future = $http.post('/devices/report/edit', dto);
-        Utils.handleCallback(future, callback);
-      }
-
-      function reportPasswordShow(agentId, companyId, callback) {
-        var future = $http.get('/devices/report/showPassword?agentId=' + agentId + '&companyId=' + companyId);
-        Utils.handleCallback(future, callback);
-      }
-
-      function getGadgets(callback) {
-        var future = $http.get('/gadgets');
-        Utils.handleCallback(future, callback);
-      }
-
-      function saveGadget(name, companyId, callback) {
-        var future = $http.post('/gadgets', { name: name, clientCompanyId: companyId });
-        Utils.handleCallback(future, callback);
-      }
-
-      function removeGadget(id, callback) {
-        var future = $http.delete('/gadgets/' + id);
-        Utils.handleCallback(future, callback);
-      }
 
       function saveMasterAgent(companyId, agentId, callback) {
         var future = $http.post('/devices/updateMasterAgent', { masterAgentId: agentId, clientCompanyId: companyId });
@@ -1174,38 +1110,8 @@
 
       }
 
-      function setNewDeviceLabel(dto, callback) {
-
-        // dto structure
-        // {
-        // “agentId”:””,
-        // “deviceId”:””,
-        // “companyId”:””,
-        // “newLabelValue”:””
-        // }
-
-        var future = $http.post('/devices/editAgentInfo', dto);
-        Utils.handleCallback(future, callback);
-      }
 
       var actionsList = ["idle", "norestart", "online"];
-
-      function sendDeviceStatusRequest(companyId, agentId, callback) {
-        if (companyId && agentId) {
-          var dto = {
-            companyId: companyId,
-            agentId: agentId,
-            actions: actionsList
-          };
-
-          var future = $http({
-            url: '/devices/agentStatuses',
-            method: 'POST',
-            data: dto
-          });
-          Utils.handleCallback(future, callback);
-        }
-      }
 
       function getDevicesCredentials(devices, scope, callback) {
         var credentials = {};
@@ -1287,7 +1193,6 @@
         sendInstallAgentRequests: sendInstallAgentRequests,
         sendUninstallAgentRequest: sendUninstallAgentRequest,
         sendDescription: sendDescription,
-        sendAgentUpdateRequest: sendAgentUpdateRequest,
         sendPowerAction: sendPowerAction,
         updateAgentSettings: updateAgentSettings,
         getAgentSettingsByCompany: getAgentSettingsByCompany,
@@ -1299,22 +1204,14 @@
         deleteRemoteSession: deleteRemoteSession,
         getSomeInfoForDevices: getSomeInfoForDevices,
         getDeviceReports: getDeviceReports,
-        getOneTimeHistory: getOneTimeHistory,
         getOneById: getOneById,
         getOneByDeviceId: getOneByDeviceId,
         getOneByAgentId: getOneByAgentId,
         getCompanyIdByAgentId: getCompanyIdByAgentId,
-        saveReportEditedFields: saveReportEditedFields,
-        reportPasswordShow: reportPasswordShow,
-        getGadgets: getGadgets,
-        saveGadget: saveGadget,
-        removeGadget: removeGadget,
         saveMasterAgent: saveMasterAgent,
         testCredentials: testCredentials,
         _addInitListener: _addInitListener,
         getAgentsAndReportsDataByCompanyId: getAgentsAndReportsDataByCompanyId,
-        setNewDeviceLabel: setNewDeviceLabel,
-        sendDeviceStatusRequest: sendDeviceStatusRequest,
         getDevicesCredentials: getDevicesCredentials,
         markDeviceAsMaster: markDeviceAsMaster,
         getUpdatedDevices: getUpdatedDevices,
