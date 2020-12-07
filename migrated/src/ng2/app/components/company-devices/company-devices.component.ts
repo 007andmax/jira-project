@@ -84,7 +84,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
           if (this.devices[i].id === newChange.data.deviceId) {
             this.devices[i].remoteSessions.push(new DeviceRemoteSessions({
               startedAt: newChange.data.startedAt,
-              id: newChange.data.id,
+              id: newChange.data.sessionId,
               userId: newChange.data.performer.id,
             }))
           }
