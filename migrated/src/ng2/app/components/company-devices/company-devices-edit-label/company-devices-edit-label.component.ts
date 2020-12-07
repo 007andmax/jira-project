@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { DeviceCompany } from '../class/device-company';
 
 @Component({
   selector: 'app-company-devices-edit-label',
@@ -8,7 +7,6 @@ import { DeviceCompany } from '../class/device-company';
 })
 export class CompanyDevicesEditLabelComponent implements OnInit {
   value: string;
-
   @Input() field: string;
   @Input() title: string;
   @Input() name: string;
@@ -20,13 +18,11 @@ export class CompanyDevicesEditLabelComponent implements OnInit {
   }
   ngDoCheck() {
     this.placeholder = (this.field !== '') ? this.field : `Enter ${this.title} here`;
-
   }
   change() {
     this.onChange.emit(this.field);
   }
   public onOpenDropDown(open) {
-    console.log("open", open);
     if (open) this.value = JSON.parse(JSON.stringify(this.field))
   }
   close() {

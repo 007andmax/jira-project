@@ -1,6 +1,5 @@
 import { Device } from './device';
 import { DeviceExtendedReport } from './device-extended-report';
-import * as moment from "moment";
 
 export class DeviceExtended extends Device {
     report: DeviceExtendedReport;

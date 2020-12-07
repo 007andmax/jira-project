@@ -14,7 +14,6 @@ export class CompanyDevicesEditNameComponent implements OnInit {
   constructor(private devicesService: DevicesService,) { }
 
   ngOnInit() {
-
   }
   changeName() {
     this.devicesService.editAgentInfo(this.device.getDataForEditLabel((this.label.length > 0) ? this.label : this.device.hostName || this.device.ip)).subscribe(data => {
@@ -22,7 +21,6 @@ export class CompanyDevicesEditNameComponent implements OnInit {
     })
   }
   public onOpenDropDown(open) {
-    console.log("open", open);
     if (open) this.label = JSON.parse(JSON.stringify(this.device.label || this.device.hostName || this.device.ip))
   }
   close() {

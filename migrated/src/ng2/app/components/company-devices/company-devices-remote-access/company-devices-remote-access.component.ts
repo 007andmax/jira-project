@@ -3,7 +3,6 @@ import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-boots
 import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
 import { ConstantsStateService } from 'src/ng2/app/states/constants/constants-state.service';
 import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.service';
-import { Device } from '../class/device';
 import { DeviceCompany } from '../class/device-company';
 
 @Component({
@@ -24,7 +23,6 @@ export class CompanyDevicesRemoteAccessComponent implements OnInit {
     private devicesService: DevicesService) { }
 
   ngOnInit() {
-
     this.devicesStateService.getOnLaunchRemoteApp().subscribe(data => {
       if (data === this.sessionId) this.close();
     })
@@ -33,8 +31,6 @@ export class CompanyDevicesRemoteAccessComponent implements OnInit {
     window.location.href = '/data/connection-viewer';
   }
   launchRemoteApp() {
-    console.log("device", this.device);
-    console.log("companyId", this.companyId);
     this.devicesService.createRemoteSession(this.device.id, this.companyId, this.connectionType, null).subscribe((resp: any) => {
       this.sessionId = resp.sessionId;
       let remoteConnectPort = this.constantsStateService.getConstant('remote.connect.port'),
@@ -43,7 +39,6 @@ export class CompanyDevicesRemoteAccessComponent implements OnInit {
       window.open(url, '_self');
       this.isConnection = true;
     })
-
   }
   close() {
     this.activeModal.dismiss('Cross click');

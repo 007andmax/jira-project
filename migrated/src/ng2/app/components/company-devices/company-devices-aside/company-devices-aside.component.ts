@@ -9,9 +9,7 @@ import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { DeviceCompanyAsideParams } from '../class/device-company-aside-params';
 import { DeviceExtended } from '../class/device-extended';
-import { DeviceExtendedReport } from '../class/device-extended-report';
 import { CompanyDevicesRemoteAccessComponent } from '../company-devices-remote-access/company-devices-remote-access.component';
-
 
 @Component({
   selector: 'app-company-devices-aside',
@@ -36,10 +34,8 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     let getOnOpenAside = this.devicesStateService.getOnOpenAside().subscribe((data: DeviceCompanyAsideParams) => {
-      console.log("data", data);
       if (this.open) {
         let find = this.devices.find(item => item.agentId === data.ids[0]);
-        console.log("find", find);
         if (find) {
           this.currentDevice = find;
           return;
@@ -50,12 +46,9 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
         [...data.ids.map(item => this.devicesService.getDeviceExtended(this.companyId, item))]
       )
         .subscribe(res => {
-          console.log("res", res);
-
           res.forEach(item => {
             if (item[this.companyId].length > 0) this.devices.push(new DeviceExtended(item[this.companyId][0], this.companyId));
           })
-          console.log("this.devices", this.devices);
           if (!this.currentDevice) {
             this.currentDevice = this.devices[0];
           } else {
@@ -68,7 +61,6 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
     this.sub.add(getOnOpenAside);
   }
   remoteAccess(connectionType) {
-
     const modalRef = this.modalService.open(CompanyDevicesRemoteAccessComponent, { windowClass: 'device-send-modal' });
     modalRef.componentInstance.connectionType = connectionType;
     modalRef.componentInstance.device = this.currentDevice;
@@ -99,7 +91,6 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
   }
   setMasterAgent() {
     this.devicesService.markDeviceAsMaster(this.currentDevice.companyId, this.currentDevice.agentId).subscribe(data => {
-
     })
   }
   isLabel() {

@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.service';
-import { Device } from '../class/device';
 import { DeviceCompany } from '../class/device-company';
 import { DeviceCompanyAsideParams } from '../class/device-company-aside-params';
 

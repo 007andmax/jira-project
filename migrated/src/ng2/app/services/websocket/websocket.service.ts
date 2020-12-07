@@ -384,7 +384,6 @@ export class WebsocketService {
   public subsribeToSubmittedOneTimeConnection() {
     setTimeout(() => {
       this.stompClient.subscribe(`/user/watch/oneTimeConnection`, (message) => {
-        console.log("message", message);
         var newChange = JSON.parse(message.body);
         this.devicesRealTimeService.handleRealTimeOneTimeConnection(newChange);
       });

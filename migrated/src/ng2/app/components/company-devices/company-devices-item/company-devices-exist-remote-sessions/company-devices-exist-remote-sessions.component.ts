@@ -1,8 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PermissionsService } from 'src/ng2/app/services/permissions/permissions.service';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
-
-
 import { DeviceCompany } from '../../class/device-company';
 
 @Component({

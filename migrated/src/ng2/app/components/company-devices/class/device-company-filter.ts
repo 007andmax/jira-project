@@ -7,7 +7,6 @@ export class CompanyDeviceFilter {
     constructor() { }
 
     public onFilter(field, devices) {
-
         let index = this.filterTop.findIndex(item => item.field === field);
         if (index > -1) {
             let sort = this.filterTop[index].filter;
@@ -20,23 +19,16 @@ export class CompanyDeviceFilter {
                     this.filterTop[index].filter = 'DESC';
                     devices.reverse();
                 }
-
             }
             if (field === 'user_name') {
                 this.clearFilter();
-                console.log("sort", sort);
                 if (sort === '' || sort === 'DESC') {
-
                     this.filterTop[index].filter = 'ASC';
                     this.onFilterUserName(devices);
-
                 } else {
-
                     this.filterTop[index].filter = 'DESC';
                     devices.reverse();
                 }
-
-
             }
         }
     }
@@ -63,7 +55,6 @@ export class CompanyDeviceFilter {
             }
         }
     }
-
     private onFilterUserName(devices) {
         devices.sort((a, b) => (this.getUserName(a).toLowerCase() > this.getUserName(b).toLowerCase()) ?
             1 : ((this.getUserName(b).toLowerCase() > this.getUserName(a).toLowerCase()) ? -1 : 0));

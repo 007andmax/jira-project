@@ -4,6 +4,7 @@ import * as moment from "moment";
 import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
 import { HardwareService } from '../../../device/_services/hardware.service';
 import { DatePickerComponent } from '../../../shared/date-picker/date-picker.component';
+
 @Component({
   selector: 'app-company-devices-aside-system',
   templateUrl: './company-devices-aside-system.component.html',
@@ -23,7 +24,6 @@ export class CompanyDevicesAsideSystemComponent implements OnInit {
   onChangeName(value) {
     this.devicesService.editAgentInfo(this.device.getDataForEditName(value)).subscribe(data => {
       this.device.setHostName(value);
-
     })
   }
   getNetworkAdapterField(field) {

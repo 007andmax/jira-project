@@ -22,7 +22,6 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
   @Input() device: DeviceCompany;
   timer: any = null;
   @Output() onChangeSelect = new EventEmitter();
-
   constructor(private modalService: NgbModal,
     private devicesService: DevicesService,
     private usersStateService: UsersStateService,
@@ -31,10 +30,8 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService,
     public cd: ChangeDetectorRef,) { }
 
-
   ngOnInit() {
     this.timer = setInterval(() => {
-
       this.device.remoteSessions.forEach(item => {
         item.agentConnectedAt += 1000;
       });
@@ -44,7 +41,6 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
       if (this.device.online) this.device.timing.uptimeForOrdering += 1000;
       this.cd.detectChanges();
     }, 1000);
-
   }
   openAside(type) {
     if (this.device.agentId) this.devicesStateService.setOnOpenAside(new DeviceCompanyAsideParams(type, [this.device.agentId]));
@@ -59,10 +55,8 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
       var url = '/#/ng2/device/dashboard';
       window.open(url, '_blank');
     }
-
   };
   remoteAccess(connectionType) {
-    console.log("this.device", this.device);
     const modalRef = this.modalService.open(CompanyDevicesRemoteAccessComponent, { windowClass: 'device-send-modal' });
     modalRef.componentInstance.connectionType = connectionType;
     modalRef.componentInstance.device = this.device;
@@ -96,7 +90,6 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
   }
   setMasterAgent() {
     this.devicesService.markDeviceAsMaster(this.device.companyId, this.device.agentId).subscribe(data => {
-
     })
   }
   onChangeName(data) {

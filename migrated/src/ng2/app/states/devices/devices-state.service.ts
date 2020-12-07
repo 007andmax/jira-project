@@ -42,12 +42,9 @@ export class DevicesStateService {
       })
     })
     this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
-      console.log("newChange", newChange);
       if (newChange.action === 'DEVICE_UNINSTALLED') {
         let deviceIndex = this.allDevices[newChange.data.clientCompanyId].findIndex(item => item.id === newChange.data.value);
         if (deviceIndex > -1) this.allDevices[newChange.data.clientCompanyId].splice(deviceIndex, 1);
-        console.log("deviceIndex", deviceIndex);
-        console.log("this.allDevices[newChange.data.clientCompanyId]", this.allDevices[newChange.data.clientCompanyId]);
       }
       if (newChange.action === 'DEVICE_ONLINE') {
         let deviceIndex = this.allDevices[newChange.data.clientCompanyId].findIndex(item => item.id === newChange.data.value);
@@ -82,20 +79,10 @@ export class DevicesStateService {
           let companyId = newChange.data.clientCompanyId;
           this.allDevices[companyId] = [];
           this.allDevices[companyId].push(new Device(parsedData.device));
-          console.log("this.allDevices[companyId]", this.allDevices[companyId]);
         } else {
           this.allDevices[newChange.data.clientCompanyId].push(new Device(parsedData.device));
-          /* let deviceIndex = this.allDevices[newChange.data.clientCompanyId].findIndex(item => item.id === parsedData.device.id);
-           parsedData.device.uninstalledAt = '';
-           if (deviceIndex > -1) {
-             this.allDevices[newChange.data.clientCompanyId][deviceIndex] = new Device(parsedData.device);
-           } else {
-             this.allDevices[newChange.data.clientCompanyId].push(new Device(parsedData.device));
-           }*/
-          console.log("this.allDevices[newChange.data.clientCompanyId]", this.allDevices[newChange.data.clientCompanyId]);
         }
         this.devicesService.sendDeviceStatusRequest(newChange.data.clientCompanyId, [parsedData.device.agentId], ["idle", "norestart", "online"]).subscribe(res => {
-          console.log("res", res);
         })
       }
       this.onInitGetDevices(this.allDevices);
@@ -126,7 +113,6 @@ export class DevicesStateService {
     return splittedArray[2] * 1000 + splittedArray[1] * 60000 + splittedArray[0] * 3600000
   };
   public setOnOpenAside(data) {
-    console.log("data", data);
     this.onOpenAside.emit(data);
   }
   public getOnOpenAside() {

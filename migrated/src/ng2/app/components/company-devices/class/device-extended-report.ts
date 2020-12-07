@@ -42,6 +42,5 @@ export class DeviceExtendedReport {
         }
         this.softList.sort((a, b) => (a.softName.toLowerCase() > b.softName.toLowerCase()) ?
             1 : ((b.softName.toLowerCase() > a.softName.toLowerCase()) ? -1 : 0));
-
     }
 }

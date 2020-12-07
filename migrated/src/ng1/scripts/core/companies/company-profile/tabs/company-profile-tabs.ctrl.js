@@ -223,8 +223,6 @@
               $scope.uptimeOrder = 'timing.uptimeForOrdering';
             }
           };
-          console.log("orderDevicesBy", $scope.orderDevicesBy);
-          console.log("uptimeOrder", $scope.uptimeOrder);
         };
 
         $scope.changeSelectedUsers = function (selectedUsers) {

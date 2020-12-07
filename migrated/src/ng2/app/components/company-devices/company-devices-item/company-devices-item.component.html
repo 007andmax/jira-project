@@ -54,10 +54,6 @@
                     </ul>
                 </div>
             </div>
-            <!-- <div
-                class="qt-ic-c icon__master-agent-badge master-agent-icon qt-sz-18"
-                *ngIf="device.master"
-            ></div> -->
         </div>
     </td>
     <td class="company-devices-table__device-name">
@@ -235,7 +231,6 @@
             [device]="device"
             (onRemoteAccess)="remoteAccess($event)"
         ></app-company-devices-no-exist-remote-sessions>
-        <!-- next drop down -->
         <app-company-devices-exist-remote-sessions
             [device]="device"
             (onRemoteAccess)="remoteAccess($event)"

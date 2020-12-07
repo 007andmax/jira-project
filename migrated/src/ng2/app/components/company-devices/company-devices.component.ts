@@ -7,7 +7,6 @@ import { DevicesRealTimeService } from '../../states/devices/devices-real-time.s
 import { DevicesStateService } from '../../states/devices/devices-state.service';
 import { ConfirmComponent } from '../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../shared/confirm/services/confirm-state.service';
-import { Device } from './class/device';
 import { DeviceCompany } from './class/device-company';
 import { CompanyDeviceFilter } from './class/device-company-filter';
 import { DeviceRemoteSessions } from './class/device-remote-sessions';
@@ -32,13 +31,11 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     private devicesRealTimeService: DevicesRealTimeService) { }
 
-
   ngOnInit() {
     this.companyId = localStorage.getItem("company_id");
     if (this.devicesStateService.getAllDevices()) {
       this.devices = (this.devicesStateService.getAllDevices()[this.companyId]) ? JSON.parse(JSON.stringify(this.devicesStateService.getAllDevices()[this.companyId])).map(item => new DeviceCompany(item, this.companyId)) : [];
       this.filter.onFilterName(this.devices);
-      console.log("this.devices", this.devices);
       this.showPreloader = false;
     }
     if (this.devices.length > 0) this.sendDeviceStatusRequest(this.companyId, this.devices.filter(item => item.agentId).map(item => item.agentId));
@@ -58,18 +55,15 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
       } else if (data[this.companyId].length === this.devices.length) {
         this.devices.forEach(item => {
           let findIndex = data[this.companyId].findIndex(device => device.id === item.id);
-          console.log("findIndex", findIndex);
           if (findIndex > -1) item.update(data[this.companyId][findIndex]);
         })
       }
       this.filter.onCurrentFilter(this.devices);
       this.cd.detectChanges();
       this.showPreloader = false;
-      console.log("this.devices", this.devices);
     })
     this.sub.add(getOnDevices);
     let getOnClosedRemoveConnecion = this.devicesStateService.getOnClosedRemoveConnecion().subscribe(data => {
-      console.log("data", data);
       this.devices.forEach(item => {
         let findIndex = item.remoteSessions.findIndex(remoteSession => remoteSession.id === data);
         if (findIndex > -1) item.remoteSessions.splice(findIndex, 1);
@@ -77,7 +71,6 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
     this.sub.add(getOnClosedRemoveConnecion);
-
     let oneTimeConnectionArray = this.devicesRealTimeService.oneTimeConnectionArray.subscribe(newChange => {
       if (newChange.action === 'ONE_TIME_CONNECTION_OPEN') {
         for (var i = 0; i < this.devices.length; i++) {
@@ -97,12 +90,10 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REBOOT_DEVICE) {
           this.devicesService.sendPowerAction(this.companyId, this.devicesStateService.getDevicesForReboot().map(item => item.agentId), 'reboot').subscribe(data => {
-
           });
         }
         if (this.confirmStateService.getConfirmAction() === SHUTDOWN_DEVICE) {
           this.devicesService.sendPowerAction(this.companyId, this.devicesStateService.getDevicesForShutDown().map(item => item.agentId), 'shutdown').subscribe(data => {
-
           });
         }
         if (this.confirmStateService.getConfirmAction() === REMOVE_DEVICES) {
@@ -110,7 +101,6 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
             this.onChangeSelect();
           });
         }
-
       }
     })
     this.sub.add(getConfirm);
@@ -129,7 +119,6 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
             }
           }
         }
-
       } else if (newChange.data && newChange.data.statuses && newChange.data.statuses.hasOwnProperty('NoRestart') && newChange.data.statuses.hasOwnProperty('Online')) {
         if (isCurrentCompany) {
           for (var i = 0; i < this.devices.length; i++) {
@@ -144,7 +133,6 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getOnUpdateAgentActivityStatus);
-
     let getOnResetDeviceTiming = this.devicesStateService.getOnResetDeviceTiming().subscribe(data => {
       let findIndex = this.devices.findIndex(item => item.id === data.id);
       if (findIndex > -1) {
@@ -162,11 +150,9 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
   }
   public onFilter(field) {
     this.filter.onFilter(field, this.devices)
-    console.log("this.devices", this.devices);
   }
   sendDeviceStatusRequest(companyId, ids) {
     this.devicesService.sendDeviceStatusRequest(companyId, ids, ["idle", "norestart", "online"]).subscribe(data => {
-      console.log("data", data);
     })
   }
   onRemoveAgents() {
@@ -196,7 +182,6 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     this.isOfflineDeviceSelected = (this.devices.find(item => item.selected && !item.online)) ? true : false;
   }
   toogleDevices() {
-    console.log("selectAllDevices", this.selectAllDevices);
     this.devices.forEach(item => {
       item.selected = (this.selectAllDevices) ? true : false;
     })
