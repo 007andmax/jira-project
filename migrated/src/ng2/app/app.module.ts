@@ -350,6 +350,7 @@ import { TicketsAnalyticsWidgetComponent } from './components/tickets/tickets-da
 import { TicketPriorityWidgetComponent } from './components/tickets/tickets-dashboard/ticket-priority-widget/ticket-priority-widget.component';
 import { TimeOnTicketsWidgetComponent } from './components/tickets/tickets-dashboard/time-on-tickets-widget/time-on-tickets-widget.component';
 import { TicketsBillableHoursWidgetComponent } from './components/tickets/tickets-dashboard/tickets-billable-hours-widget/tickets-billable-hours-widget.component';
+import { CompanyNetworkScanComponent } from './components/company-network-scan/company-network-scan.component';
 
 
 
@@ -536,6 +537,9 @@ angular.module('quicktech')
   .directive(
     'ticketsDashboardComponent',
     downgradeComponent({ component: TicketsDashboardComponent }))
+  .directive(
+    'companyNetworkScanComponent',
+    downgradeComponent({ component: CompanyNetworkScanComponent }))
   .factory('ngZone', downgradeInjectable(NgZone));
 
 /**
@@ -853,7 +857,8 @@ angular.module('quicktech')
     TicketsAnalyticsWidgetComponent,
     TicketPriorityWidgetComponent,
     TimeOnTicketsWidgetComponent,
-    TicketsBillableHoursWidgetComponent
+    TicketsBillableHoursWidgetComponent,
+    CompanyNetworkScanComponent
   ],
   imports: [
     BrowserModule,
@@ -946,7 +951,8 @@ angular.module('quicktech')
     ContractsConfirmComponent,
     DashboardBillingComponent,
     CompanyContractsComponent,
-    TicketsDashboardComponent
+    TicketsDashboardComponent,
+    CompanyNetworkScanComponent
     // RecurringTicketsComponent
   ],
   exports: [

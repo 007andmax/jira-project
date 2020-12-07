@@ -48,6 +48,7 @@ import { DashboardBillingComponent } from './components/billing/dashboard-billin
 import { CompanyContractsComponent } from './components/companies/company-contracts/company-contracts.component';
 import { PermissionDasnboardBillingService } from './services/dashboard-billing/permission-dasnboard-billing.service';
 import { TicketsDashboardComponent } from './components/tickets/tickets-dashboard/tickets-dashboard.component';
+import { CompanyNetworkScanComponent } from './components/company-network-scan/company-network-scan.component';
 
 const routes: Routes = [
   {
@@ -259,6 +260,10 @@ const routes: Routes = [
   {
     path: 'ng2/tickets-dashboard',
     component: TicketsDashboardComponent
+  },
+  {
+    path: 'ng2/company/network-scan',
+    component: CompanyNetworkScanComponent
   }
 ];
 

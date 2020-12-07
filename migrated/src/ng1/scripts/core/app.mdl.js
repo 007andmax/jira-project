@@ -302,7 +302,7 @@
         .state('glnumber-component', waitForServices({
           url: '/ng2/setting/glnumber',
           template: '<glnumber-settings-component></glnumber-settings-component>'
-        })) .state('device-dashboard', waitForServices({
+        })).state('device-dashboard', waitForServices({
           url: '/ng2/device/dashboard',
           template: '<dashboard-component></dashboard-component>'
         }))
@@ -342,6 +342,10 @@
           url: '/ng2/device/file',
           template: '<file-component></file-component>'
         }))
+        .state('company-network-scan', waitForServices({
+          url: '/ng2/company/network-scan',
+          template: '<company-network-scan-component></company-network-scan-component>'
+        }))
         .state('billing-dashboard', waitForServices({
           url: '/ng2/billing-dashboard',
           template: '<dashboard-billing-component></dashboard-billing-component>'
@@ -375,7 +379,7 @@
     ['$rootScope', '$templateRequest', 'CompaniesService', '$state', '$uibModal', 'TicketsService', '$stateParams',
       'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.SharedStateService', '$http',
       function ($rootScope, $templateRequest, CompaniesService, $state, $uibModal, TicketsService, $stateParams,
-                UserConfirmationsService, SharedStateService, $http) {
+        UserConfirmationsService, SharedStateService, $http) {
 
         $rootScope.debounce = function (fn, time) {
           var isCalled = false;

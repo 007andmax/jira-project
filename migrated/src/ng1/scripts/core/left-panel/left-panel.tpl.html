@@ -595,6 +595,12 @@
         </div>
         <a class="left-panel-title"
            style="margin-bottom: 10px;"
+         ng-click="activateCompanyProfileTab('CompanyNetworkScanComponent')"
+             ng-class="{'left-panel-active': CompanyNetworkScanComponent}">
+          Network Scan 2
+        </a>
+           <a class="left-panel-title"
+           style="margin-bottom: 10px;"
            href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=network-scan"
            ng-class="{'active': getOpenedUsersTab() ==='network-scan'}">
           Network Scan
