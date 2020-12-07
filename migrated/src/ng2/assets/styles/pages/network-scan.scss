@@ -1,0 +1,211 @@
+.network-scan-page {
+  padding: 24px;
+  min-height: 100vh;
+  background-color: #edf2f6;
+  &__content {
+    max-width: 1144px;
+    margin: 0 auto;
+  }
+
+  &__header-title {
+    font-size: 18px;
+    margin-bottom: 24px;
+  }
+  .network-steps {
+    width: 100%;
+    display: flex;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+  }
+  .network-step {
+    width: 33.33%;
+    padding: 24px 4px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+    &:first-child, &:last-child {
+      &::before {
+        content: "";
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        border-top: 7px solid transparent;
+        box-sizing: border-box;
+        border-left: 7px solid #edf2f6;
+        left: 100%;
+        border-bottom: 7px solid transparent;
+        z-index: 1;
+        top: calc(50% + -6px);
+      }
+    &:first-child {
+      border-top-left-radius: 8px;
+      border-bottom-left-radius: 8px;
+      border-right: 1px solid #edf2f6;
+    }
+    &:last-child {
+      &::before {
+        left: 0;
+      }
+      border-top-right-radius: 8px;
+      border-bottom-right-radius: 8px;
+      border-left: 1px solid #edf2f6;
+    }
+
+    }
+    &__title {
+      font-family: Graphik-Semibold, sans-serif;
+      color: #364656;
+      font-size: 16px;
+      line-height: 1.63;
+    }
+    &__text, &__text-cred {
+      font-size: 13px;
+      color: #4f5f79;
+      width: 155px;
+      text-align: center;
+      line-height: 1.54;
+    }
+    &__text-cred {
+      width: unset;
+    }
+  }
+
+  .circle-number {
+    width: 48px;
+    height: 48px;
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(to bottom, rgba(111, 201, 255, 0.18), rgba(238, 238, 238, 0.12) 95%);
+    &__inner {
+      width: 32px;
+      height: 32px;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+      background-color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #4f5f79;
+      font-size: 13px;
+      font-family: Graphik-Semibold, sans-serif;
+      border-radius: 50%;
+    }
+  }
+
+  .network-scan-table {
+    border-collapse: collapse;
+    th {
+      height: 40px;
+      background: #f9fafb;
+      font-size: 11px;
+      color: #364656;
+      text-transform: uppercase;
+      text-align: left;
+      padding: 0 8px;
+      vertical-align: middle;
+      &:first-child {
+        border-top-left-radius: 8px;
+      }
+      &:last-child {
+        border-top-right-radius: 8px;
+      }
+    }
+    td {
+      height: 48px;
+      padding: 5px 8px;
+      vertical-align: middle;
+      text-align: left;
+      background: white;
+      font-size: 13px;
+      color: #4f5f79;
+      border-top: 1px solid #edf0f2
+    }
+
+    td.network-scan-table, th.network-scan-table {
+      &__check {
+        width: 32px;
+        min-width: 32px;
+        max-width: 32px;
+        padding-left: 16px;
+        padding-right: 0;
+      }
+      &__device-name {
+        width: 100%;
+      }
+      &__lan-ip {
+        width: 115px;
+        min-width: 115px;
+        max-width: 115px;
+      }
+      &__manufacturer {
+        width: 208px;
+        min-width: 208px;
+        max-width: 208px;
+      }
+      &__mac-address {
+        width: 132px;
+        max-width: 132px;
+        min-width: 132px;
+      }
+      &__status {
+        width: 102px;
+        max-width: 102px;
+        min-width: 102px;
+        .tag__modern {
+          text-transform: uppercase;
+          font-size: 9px;
+          font-family: Graphik-Semibold, sans-serif;
+          padding-left: 6px;
+          padding-right: 6px;
+        }
+      }
+      &__delete {
+        width: 40px;
+        max-width: 40px;
+        min-width: 40px;
+        padding-right: 16px;
+      }
+    }
+
+    tr {
+      &:last-child {
+        td:first-child {
+          border-bottom-left-radius: 8px;
+        }
+        td:last-child {
+          border-bottom-right-radius: 8px;
+        }
+      }
+
+      &.--checked {
+        td {
+          background-color: #f4fbff;
+        }
+      }
+    }
+
+    .network-scan-edit-marker {
+      border-radius: 50%;
+      height: 24px;
+      width: 24px;
+      border: 1px solid #dfe3e8;
+      background-color: white;
+      background-size: 12px;
+      background-repeat: no-repeat;
+      background-position: center;
+      opacity: 0;
+      cursor: pointer;
+    }
+    tr:hover {
+      .network-scan-edit-marker {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+

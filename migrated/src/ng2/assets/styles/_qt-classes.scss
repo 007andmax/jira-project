@@ -353,6 +353,12 @@
   width: fit-content;
   cursor: pointer;
   font-family: Graphik-Medium, sans-serif;
+  position: relative;
+
+  &.--disabled {
+    background-color: #16a4fa80;
+    cursor: default;
+  }
 
   &.--outline {
     color: #16a4fa;
@@ -378,7 +384,17 @@
       margin-right: -20px;
       padding-right: 20px;
     }
-
+    .left-side-overflow {
+      max-width: 180px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-left: -6px;
+      margin-right: -6px;
+    }
+    .icon__dropdown-arrow-up {
+      transform: rotate(180deg);
+    }
   }
   .button-menu {
     border-left: 1px solid #ffffff57;
@@ -392,6 +408,7 @@
     padding-left: 8px;
     padding-right: 8px;
   }
+
 }
 
 .qt-popup-arrow {
@@ -849,4 +866,36 @@
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
   border-radius: 8px;
   background-color: #ffffff;
+}
+
+.qt-loading {
+  cursor: default;
+  position: relative;
+  &::before {
+    width: 18px;
+    height: 18px;
+    content: '';
+    position: absolute;
+    left: calc(50% - 9px);
+    top: calc(50% - 9px);
+    border-radius: 50%;
+    border: 2px solid white;
+    border-top: 2px solid rgba(255, 255, 255, 0.3);
+    animation: spin 2s linear infinite;
+  }
+  &.--hide-text {
+    color: transparent;
+  }
+  &.--blue {
+    &::before {
+      border: 2px solid #16a4fa;
+      border-top: 2px solid #cdecff;
+    }
+
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg) }
+  100% { transform: rotate(360deg) }
 }
