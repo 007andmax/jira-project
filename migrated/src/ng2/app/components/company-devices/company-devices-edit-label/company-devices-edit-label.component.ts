@@ -8,13 +8,19 @@ import { DeviceCompany } from '../class/device-company';
 })
 export class CompanyDevicesEditLabelComponent implements OnInit {
   value: string;
+
   @Input() field: string;
   @Input() title: string;
-  @Input() placeholder: string = 'Enter a new device name here';
+  @Input() name: string;
+  placeholder: string = '';
   @Output() onChange = new EventEmitter();
   constructor() { }
 
   ngOnInit() {
+  }
+  ngDoCheck() {
+    this.placeholder = (this.field !== '') ? this.field : `Enter ${this.title} here`;
+
   }
   change() {
     this.onChange.emit(this.field);
