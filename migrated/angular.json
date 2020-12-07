@@ -289,8 +289,6 @@
               "src/ng1/scripts/core/companies/company-profile/tabs/dashboard/dashboard.ctrl.js",
               "src/ng1/scripts/core/companies/company-profile/tabs/dashboard/map-modal.ctrl.js",
               "src/ng1/scripts/core/companies/company-profile/tabs/devices-tab/convert-to-pdf.drv.js",
-              "src/ng1/scripts/core/companies/company-profile/tabs/devices-tab/device-reports.ctrl.js",
-              "src/ng1/scripts/core/companies/company-profile/tabs/devices-tab/devices-tab.ctrl.js",
               "src/ng1/scripts/core/companies/company-profile/tabs/network-scan-tab/network-scan-item.ctrl.js",
               "src/ng1/scripts/core/companies/company-profile/tabs/network-scan-tab/network-scan-tab.ctrl.js",
               "src/ng1/scripts/core/companies/company-profile/tabs/unknownFilter.fltr.js",
