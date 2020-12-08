@@ -13,32 +13,50 @@
         </div>
         <div class="qt-df qt-ai-c">
             <div
-                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon edit-grey-ng2"
+                class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__edit"
                 *ngIf="checkStatus(quote, ['READ','UNREAD','SAVED', 'APPROVED', 'CANCELED', 'EXPIRED'])"
                 (click)="editQuote()"
+                placement="top"
+                container="body"
+                ngbTooltip="Edit"
             ></div>
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__email-dark"
                 (click)="resend()"
+                placement="top"
+                container="body"
+                ngbTooltip="Send"
             ></div>
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__download-pdf"
                 (click)="downloadPdf()"
+                placement="top"
+                container="body"
+                ngbTooltip="Download"
             ></div>
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__remove"
                 *ngIf="checkStatus(quote, ['UNREAD','SAVED', 'EXPIRED', 'INVOICED', 'TICKETED','CANCELED'])"
                 (click)="archiveQuote()"
+                placement="top"
+                container="body"
+                ngbTooltip="Archive"
             ></div>
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__convert-invoice"
                 *ngIf="checkStatus(quote, ['APPROVED'])"
                 (click)="convertToInvoice()"
+                placement="top"
+                container="body"
+                ngbTooltip="Convert to Invoice"
             ></div>
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__convert-ticket"
                 *ngIf="checkStatus(quote, ['APPROVED'])"
                 (click)="convertToTicket()"
+                placement="top"
+                container="body"
+                ngbTooltip="Convert to Ticket"
             ></div>
             <div
                 class="icon__close qt-sz-24 qt-pointer qt-ic-c "
