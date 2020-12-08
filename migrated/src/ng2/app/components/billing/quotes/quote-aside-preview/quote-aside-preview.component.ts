@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { QuotePreview } from '../class/quote-preview';
 import * as moment from "moment";
 import { QuoteService } from 'src/ng2/app/services/quote/quote.service';
@@ -27,6 +27,7 @@ export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
   constructor(private quoteStateService: QuoteStateService,
     private quoteServices: QuoteService,
     private modalService: NgbModal,
+    public cd: ChangeDetectorRef,
     private quoteRealTimeService: QuoteRealTimeService,
     private confirmStateService: ConfirmStateService) { }
 
@@ -49,11 +50,12 @@ export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
     });
     this.sub.add(getHandleSendModePreview);
     let changeQuotesArray = this.quoteRealTimeService.changeQuotesArray.subscribe((newChange) => {
-      if (newChange.data.id === this.quote.id) {
+      if (this.open && newChange.data.id === this.quote.id) {
         if (newChange.action !== 'SALE_QUOTE_CREATED') {
           if (newChange.data.status !== 'ARCHIVED') this.quote.uppdate(newChange.data);
           if (newChange.data.status === 'ARCHIVED') this.quote.setStatus(newChange.data.status);
         }
+        this.cd.detectChanges();
       }
     })
     this.sub.add(changeQuotesArray);

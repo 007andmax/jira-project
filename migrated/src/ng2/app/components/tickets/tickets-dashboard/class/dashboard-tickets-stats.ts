@@ -126,7 +126,14 @@ export class DashboardTicketsStats {
                                 "values": [
                                     this.endDate
                                 ]
-                            }
+                            },
+                            {
+                                "path": "ticketSource",
+                                "operator": "NOT_EQ",
+                                "values": [
+                                    "FROM_RECURRING_TICKET"
+                                ]
+                            },
                         ]
                     }
                 ]
@@ -156,7 +163,14 @@ export class DashboardTicketsStats {
                                 "values": [
                                     this.endDate
                                 ]
-                            }
+                            },
+                            {
+                                "path": "ticketSource",
+                                "operator": "NOT_EQ",
+                                "values": [
+                                    "FROM_RECURRING_TICKET"
+                                ]
+                            },
                         ]
                     }
                 ]
@@ -214,7 +228,14 @@ export class DashboardTicketsStats {
                                 "values": [
                                     this.endDate
                                 ]
-                            }
+                            },
+                            {
+                                "path": "ticketSource",
+                                "operator": "NOT_EQ",
+                                "values": [
+                                    "FROM_RECURRING_TICKET"
+                                ]
+                            },
                         ]
                     },
                     {
@@ -233,7 +254,7 @@ export class DashboardTicketsStats {
                                 "values": [
                                     false
                                 ]
-                            }
+                            },
                         ],
                         "predicateRule": "OR"
                     }
@@ -298,7 +319,14 @@ export class DashboardTicketsStats {
                                 "values": [
                                     "MEDIUM"
                                 ]
-                            }
+                            },
+                            {
+                                "path": "ticketSource",
+                                "operator": "NOT_EQ",
+                                "values": [
+                                    "FROM_RECURRING_TICKET"
+                                ]
+                            },
                         ]
                     }
                 ]
@@ -314,7 +342,14 @@ export class DashboardTicketsStats {
                                 "values": [
                                     "HIGH"
                                 ]
-                            }
+                            },
+                            {
+                                "path": "ticketSource",
+                                "operator": "NOT_EQ",
+                                "values": [
+                                    "FROM_RECURRING_TICKET"
+                                ]
+                            },
                         ]
                     }
                 ]
@@ -330,7 +365,14 @@ export class DashboardTicketsStats {
                                 "values": [
                                     "LOW"
                                 ]
-                            }
+                            },
+                            {
+                                "path": "ticketSource",
+                                "operator": "NOT_EQ",
+                                "values": [
+                                    "FROM_RECURRING_TICKET"
+                                ]
+                            },
                         ]
                     }
                 ]
