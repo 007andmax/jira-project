@@ -64,17 +64,30 @@
         }
         &__device-name {
           padding: 12px 8px 12px 8px;
-          width: 100%;
           vertical-align: top;
+          max-width: 345px;
+          width: max-content;
+          min-width: 345px;
           .company-devices-table-device-name {
             color: #364656;
             text-overflow: ellipsis;
             white-space: nowrap;
             overflow: hidden;
             .name-text {
-              // width: 100%;
               overflow: hidden;
               text-overflow: ellipsis;
+            }
+            .name-text-input {
+              padding: 3px;
+              position: relative;
+              width: 100%;
+              height: 24px;
+              padding-left: 0;
+              border: 1px solid #c4cbd5;
+              border-radius: 4px;
+              &:focus {
+                outline: none;
+              }
             }
           }
           .company-device-desc {
@@ -266,6 +279,12 @@
       border-bottom: 1px solid #dfe3e8;
       color: #364656;
     }
+    &__header-title {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      width: 310px;
+    }
     &__more-icon {
       background-position: center;
       background-repeat: no-repeat;
@@ -384,6 +403,11 @@
       line-height: 1.33;
       color: #4f5f79;
     }
+    &__info-text-input {
+      border: 1px solid #dde1e6;
+      border-radius: 4px;
+      width: 100%;
+    }
   }
 
   .sidebar-network {
@@ -424,6 +448,15 @@
       width: 70px;
       max-width: 70px;
       text-align: right;
+    }
+  }
+
+  .sidebar-system {
+    &__info-text {
+      max-width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 

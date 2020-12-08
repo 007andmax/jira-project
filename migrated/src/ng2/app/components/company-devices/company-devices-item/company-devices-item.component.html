@@ -70,20 +70,7 @@
                         [textContent]="device.label || device.hostName || device.ip"
                         ngbDropdownAnchor
                     ></span>
-                    <ng-template
-                        #tipEditDevice
-                        class="tooltip"
-                    >
-                        Edit Device Name
-                    </ng-template>
-                    <div
-                        placement="top"
-                        container="body"
-                        [ngbTooltip]="tipEditDevice"
-                        class="ml-8 qt-sz-24 icon__edit qt-ic-c device-name-edit-marker pointer"
-                        id="dropdownChangeName"
-                        ngbDropdownToggle
-                    ></div>
+                    <!-- <input class="name-text-input" type="text" [value]="device.label || device.hostName || device.ip"> -->
                 </div>
                 <span
                     class="company-device-desc"

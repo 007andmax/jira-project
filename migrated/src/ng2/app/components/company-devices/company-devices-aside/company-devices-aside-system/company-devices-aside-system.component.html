@@ -24,7 +24,8 @@
                     class="sidebar-system__info-text"
                     [textContent]="device.label || device.hostName || device.ip"
                 ></div>
-                <app-company-devices-aside-tooltip></app-company-devices-aside-tooltip>
+                <input type="text" class="sidebar-system__info-text-input" [value]="device.label || device.hostName || device.ip">
+                <!-- <app-company-devices-aside-tooltip></app-company-devices-aside-tooltip> -->
             </div>
             <app-company-devices-edit-label
                 [field]="device.label || device.hostName || device.ip"
@@ -52,7 +53,8 @@
                     class="sidebar-system__info-text"
                     [textContent]="chackDefaultValue(getSystemField('asset_tag'))"
                 ></div>
-                <app-company-devices-aside-tooltip></app-company-devices-aside-tooltip>
+                <input type="text" class="sidebar-system__info-text-input" [value]="chackDefaultValue(getSystemField('asset_tag'))">
+                <!-- <app-company-devices-aside-tooltip></app-company-devices-aside-tooltip> -->
                 <app-company-devices-edit-label
                     [field]="getSystemField('asset_tag') || ''"
                     [name]="'Edit Device Asset Tag'"
@@ -78,7 +80,8 @@
                     class="sidebar-system__info-text"
                     [textContent]="chackDefaultValue(getSystemField('manufacturer'))"
                 ></div>
-                <app-company-devices-aside-tooltip></app-company-devices-aside-tooltip>
+                <input type="text" class="sidebar-system__info-text-input" [value]="chackDefaultValue(getSystemField('manufacturer'))">
+                <!-- <app-company-devices-aside-tooltip></app-company-devices-aside-tooltip> -->
                 <app-company-devices-edit-label
                     [field]="getSystemField('manufacturer') || ''"
                     [name]="'Edit Device Manufacturer'"
@@ -111,7 +114,8 @@
                     class="sidebar-system__info-text"
                     [textContent]="chackDefaultValue(getSystemField('model'))"
                 ></div>
-                <app-company-devices-aside-tooltip></app-company-devices-aside-tooltip>
+                <input type="text" class="sidebar-system__info-text-input" [value]="chackDefaultValue(getSystemField('model'))">
+                <!-- <app-company-devices-aside-tooltip></app-company-devices-aside-tooltip> -->
                 <app-company-devices-edit-label
                     [field]="getSystemField('model') || ''"
                     [name]="'Edit Device Model'"
@@ -197,7 +201,8 @@
                     class="sidebar-system__info-text"
                     [textContent]="chackDefaultValue(getSystemField('architecture'))"
                 ></div>
-                <app-company-devices-aside-tooltip></app-company-devices-aside-tooltip>
+                <input type="text" class="sidebar-system__info-text-input" [value]="chackDefaultValue(getSystemField('architecture'))">
+                <!-- <app-company-devices-aside-tooltip></app-company-devices-aside-tooltip> -->
                 <app-company-devices-edit-label
                     [field]="getSystemField('architecture') || ''"
                     [name]="'Edit Device Architecture'"
