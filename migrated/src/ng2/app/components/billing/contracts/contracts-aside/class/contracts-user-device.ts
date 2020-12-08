@@ -23,8 +23,8 @@ export class ContractsUserDevice {
     invoiceAsSingleItem: boolean = false;
     productExpenses: Array<ContractsOtherProduct> = [];
     rateExceeding: string;
-    customBillingDate:string;
-    withCustomBillingDate:boolean = false;
+    customBillingDate: string;
+    withCustomBillingDate: boolean = false;
     serviceContractServices: Array<ContractsUserDeviceService> = [];
     serviceContractServicesToTrack: Array<ContractsBlockTimeService> = [];
     serviceExpenses: Array<ContractsOtherService> = [];
@@ -64,11 +64,11 @@ export class ContractsUserDevice {
         this.reviewDate = data.reviewDate;
         this.calculateEndDate();
     }
-    public resetCustomBillingDate () {
-        this.customBillingDate  = JSON.parse(JSON.stringify(this.startDate));
+    public resetCustomBillingDate() {
+        this.customBillingDate = JSON.parse(JSON.stringify(this.startDate));
     }
-    public clearCustomBillingDate () {
-        this.customBillingDate  = undefined;
+    public clearCustomBillingDate() {
+        this.customBillingDate = undefined;
     }
     public calculateTotalAmount() {
         let sum = 0;
@@ -134,12 +134,12 @@ export class ContractsUserDevice {
             let dateDatePicker = new Date(year, month - 1, day).getTime(); // timestamp from calendar
             let finalDate = new Date(dateDatePicker - (current.getTimezoneOffset() * 60000/* dont touch*/) - timeOffset /* timezone.timeOffset */);
             this.customBillingDate = moment(finalDate.getTime()).format('YYYY/MM/DD');
-            
+
         } else {
             let currentTime = new Date(current.getFullYear(), current.getMonth(), current.getDate()).getTime();
             let finalDate = new Date(currentTime - (current.getTimezoneOffset() * 60000) - timeOffset);
             this.customBillingDate = moment(finalDate.getTime()).format('YYYY/MM/DD');
-           
+
         }
 
     }
@@ -229,7 +229,7 @@ export class ContractsUserDevice {
         return {
             billType: this.billType,
             blockRate: this.blockRate,
-            blockTimeServices: (toggleMaximumAmountHours) ? this.blockTimeServices.map(item => item.getDataForCreate()) : null,
+            blockTimeServices: (toggleMaximumAmountHours) ? this.blockTimeServices.map(item => item.getDataForCreate(this.rateExceeding)) : null,
             companyId: this.companyId,
             contractWithBlockTime: toggleMaximumAmountHours,
             customInterval: (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') ? null : (this.intervalstring === '30 days') ? 30 : (this.intervalstring === '15 days') ? 15 : 7,
@@ -240,17 +240,17 @@ export class ContractsUserDevice {
             interval: (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') ? this.intervalstring : null,
             rateExceeding: this.rateExceeding,
             serviceContractServices: this.serviceContractServices.map(item => item.getDataForCreate()),
-            serviceContractServicesToTrack: (!toggleMaximumAmountHours) ? this.blockTimeServices.map(item => item.getDataForCreate()) : [],
+            serviceContractServicesToTrack: (!toggleMaximumAmountHours) ? this.blockTimeServices.map(item => item.getDataForCreate(0)) : [],
             services: this.services.map(item => item.getDataForCreate()),
-           
-            customBillingDate:this.customBillingDate,
+
+            customBillingDate: this.customBillingDate,
             reviewDate: this.reviewDate,
             startDate: this.startDate,
             taxIds: (toggleMaximumAmountHours) ? this.taxIds : null,
             type: "SERVICE_CONTRACT"
         }
     }
-    
+
     public checkDuplicatedServices() {
         this.services.forEach(item => {
             item.validateDuplicated = true;

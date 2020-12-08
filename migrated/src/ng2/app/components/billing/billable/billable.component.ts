@@ -33,7 +33,7 @@ export class BillableComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     private appService: AppService,
     private billableRealTimeService: BillableRealTimeService,
-    private leftPanelStateService:LeftPanelStateService,
+    private leftPanelStateService: LeftPanelStateService,
     private usersStateService: UsersStateService) { }
 
 
@@ -43,12 +43,12 @@ export class BillableComponent implements OnInit, OnDestroy {
     this.appService.getOnInit().subscribe(data => {
       this.getList();
     })
-    let changeBillableCount = this.billableRealTimeService.changeBillableCount.subscribe(data => {
-      if (data.action == 'LEFT_PANEL_COUNTS') {
-        this.count = data.data.BILLABLE;
-      }
-    })
-    this.sub.add(changeBillableCount);
+    /* let changeBillableCount = this.billableRealTimeService.changeBillableCount.subscribe(data => {
+       if (data.action == 'LEFT_PANEL_COUNTS') {
+         this.count = data.data.BILLABLE;
+       }
+     })
+     this.sub.add(changeBillableCount);*/
     let changeBillable = this.billableRealTimeService.changeBillable.subscribe(data => {
       if (data.action == 'TICKET_LOCKED') {
         let key = Object.keys(data.data)[0];
@@ -87,9 +87,10 @@ export class BillableComponent implements OnInit, OnDestroy {
         this.addTicket(data, this.reqList);
         this.addTicket(data, this.list);
       }
+      this.getCounters();
     })
     this.sub.add(changeBillable);
-    this.getCounters();
+
   }
   private addTicket(data, list) {
     let clientCompanyId = data.data.companyId;
@@ -119,9 +120,13 @@ export class BillableComponent implements OnInit, OnDestroy {
     }
   }
   public getCounters() {
-    this.billableService.getCounters().subscribe((data: any) => {
-      this.count = data.BILLABLE;
+    this.count = 0;
+    this.list.forEach(item => {
+      this.count += item.tickets.length;
     })
+    /*  this.billableService.getCounters().subscribe((data: any) => {
+        this.count = data.BILLABLE;
+      })*/
   }
   onSearch(event) {
     if (event.target.value.length > 0) {
@@ -129,6 +134,7 @@ export class BillableComponent implements OnInit, OnDestroy {
     } else {
       this.list = JSON.parse(JSON.stringify(this.reqList));
     }
+    this.getCounters();
   }
   private getList() {
     this.billableService.getBillable().subscribe(data => {
@@ -139,11 +145,12 @@ export class BillableComponent implements OnInit, OnDestroy {
         this.reqList.push(new BillableProfile(key, data[key].tickets, company.name, this.ticketsListService.getUserName(salesPerson), company.isDefault));
       }
       this.onFilterName();
+      this.getCounters();
       this.showPreloader = false;
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
-    }
-     
+      }
+
     })
   }
   onFilter(field) {

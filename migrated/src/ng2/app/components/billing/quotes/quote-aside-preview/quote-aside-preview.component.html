@@ -70,11 +70,22 @@
                     class="invoice-status-timeline__line"
                     *ngIf="toggleStatus"
                 >
-                    <div class="invoice-status-timeline__line-point"></div>
-                    <div class="invoice-status-timeline__line-point"></div>
-                    <div class="invoice-status-timeline__line-point"></div>
-                    <!-- [ngClass]="{'not-completed-status':!invoiceProfile.readedAt}" -->
-                    <div class="invoice-status-timeline__line-point"></div>
+                    <div
+                        class="invoice-status-timeline__line-point"
+                        [ngClass]="{'not-completed-status':!quote.createdAt}"
+                    ></div>
+                    <div
+                        class="invoice-status-timeline__line-point"
+                        [ngClass]="{'not-completed-status':!quote.sentAt}"
+                    ></div>
+                    <div
+                        class="invoice-status-timeline__line-point"
+                        [ngClass]="{'not-completed-status':!quote.readAt}"
+                    ></div>
+                    <div
+                        class="invoice-status-timeline__line-point"
+                        [ngClass]="{'not-completed-status':!quote.approvedAt}"
+                    ></div>
                 </div>
                 <div
                     class="invoice-status-timeline__steps qt-df"
@@ -86,6 +97,7 @@
                             <div class="qt-fs-12 qt-ff-gm qt-lh-133  qt-color-dark ">Quote Created</div>
                             <div
                                 class="qt-fs-11 qt-lh-145 qt-color-dark-light"
+                                *ngIf="quote.createdAt"
                                 [textContent]="getDate(quote.createdAt)"
                             ></div>
                         </div>
@@ -94,20 +106,33 @@
                         <div class="step-citcle qt-mr-5 icon__invoice-email"></div>
                         <div>
                             <div class="qt-fs-12 qt-ff-gm qt-lh-133  qt-color-dark ">Quote sent</div>
+                            <div
+                                class="qt-fs-11 qt-lh-145 qt-color-dark-light"
+                                *ngIf="quote.sentAt"
+                                [textContent]="getDate(quote.sentAt)"
+                            ></div>
                         </div>
                     </div>
                     <div class="qt-df qt-ai-c invoice-status-timeline__steps-info">
                         <div class="step-citcle qt-mr-5 icon__read-on"></div>
                         <div>
                             <div class="qt-fs-12 qt-ff-gm qt-lh-133  qt-color-dark ">Quote Read</div>
-                            <div class="qt-fs-11 qt-lh-145 qt-color-dark-light"></div>
+                            <div
+                                class="qt-fs-11 qt-lh-145 qt-color-dark-light"
+                                *ngIf="quote.readAt"
+                                [textContent]="getDate(quote.readAt)"
+                            ></div>
                         </div>
                     </div>
                     <div class="qt-df qt-ai-c invoice-status-timeline__steps-info">
                         <div class="step-citcle qt-mr-5 icon__get-paid"></div>
                         <div>
                             <div class="qt-fs-12 qt-ff-gm qt-lh-133  qt-color-dark ">Quote Approved</div>
-                            <div class="qt-fs-11 qt-lh-145 qt-color-dark-light"></div>
+                            <div
+                                class="qt-fs-11 qt-lh-145 qt-color-dark-light"
+                                *ngIf="quote.approvedAt"
+                                [textContent]="getDate(quote.approvedAt)"
+                            ></div>
                         </div>
                     </div>
                 </div>

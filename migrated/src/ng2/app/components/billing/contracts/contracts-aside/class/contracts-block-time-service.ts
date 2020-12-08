@@ -13,10 +13,10 @@ export class ContractsBlockTimeService {
     public setValidateDuplicated(data) {
         this.validateDuplicated = data;
     }
-    public getDataForCreate() {
+    public getDataForCreate(rate) {
         return {
             name: this.name,
-            rate: this.rate
+            rate: rate
         }
     }
 }

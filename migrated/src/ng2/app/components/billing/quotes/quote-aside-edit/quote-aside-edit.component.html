@@ -48,6 +48,7 @@
                         aria-labelledby="dropdownUpdate"
                     >
                         <li
+                            *ngIf="getEditQuote() && getEditQuote().status !== 'APPROVED'"
                             ngbDropdownItem
                             appDisabledBtn
                             #saveAndApproveBtn="disabled"
@@ -82,8 +83,8 @@
                             #saveAndContinueBtn="disabled"
                             (onClick)="saveAndSend()"
                         >
-                            <span *ngIf="!saveAndSendBtn.isBlock() && !saveAndContinueBtn.isBlock() && !saveAndApproveBtn.isBlock() && !saveAndDownloadBtn.isBlock()">Save and Send</span>
-                            <app-preloader-ticket *ngIf="saveAndSendBtn.isBlock() || saveAndContinueBtn.isBlock() || saveAndApproveBtn.isBlock() || saveAndDownloadBtn.isBlock()"></app-preloader-ticket>
+                            <span *ngIf="!saveAndSendBtn.isBlock() && !saveAndContinueBtn.isBlock() && ((saveAndApproveBtn) ?  !saveAndApproveBtn.isBlock() : true) && !saveAndDownloadBtn.isBlock()">Save and Send</span>
+                            <app-preloader-ticket *ngIf="saveAndSendBtn.isBlock() || saveAndContinueBtn.isBlock() || saveAndApproveBtn &&  saveAndApproveBtn.isBlock() || saveAndDownloadBtn.isBlock()"></app-preloader-ticket>
                         </span>
                         <div
                             class="button-menu"

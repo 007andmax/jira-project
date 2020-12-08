@@ -1,3 +1,5 @@
+import * as moment from "moment";
+
 export class QuoteFilter {
     companyName: string;
     quoteNumber: number;
@@ -28,12 +30,14 @@ export class QuoteFilter {
         this.quoteNumber = data;
     }
     public getFIlter() {
+        let endDate = new Date(this.endDate);
+        endDate.setDate(endDate.getDate() + 1);
         return {
             companyName: this.companyName,
             quoteNumber: this.quoteNumber,
             status: this.status,
-            date: this.date,
-            endDate: this.endDate,
+            date: (this.date) ? moment(this.date).format('YYYY-MM-DD') : null,
+            endDate: (this.endDate) ? moment(endDate).format('YYYY-MM-DD') : null,
             sortBy: this.sortBy,
             offset: this.offset,
             limit: this.limit

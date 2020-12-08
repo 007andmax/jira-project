@@ -54,6 +54,9 @@ export class QuoteAsideEditComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getHandleSendModeEdit);
   }
+  getEditQuote() {
+    return this.quoteEdit.getQuote();
+  }
   close() {
     this.open = false;
     this.showPreview = false;

@@ -9,7 +9,7 @@ export class ContractsBlockTime {
     blockTimeServices: Array<ContractsBlockTimeService> = [new ContractsBlockTimeService("On site block time service", 5),
     new ContractsBlockTimeService("Remote block time service", 5)];
     companyId: string;
-    customBillingDate:string;
+    customBillingDate: string;
     customInterval: number;
     description: string = "";
     enableTimeRollover: boolean;
@@ -19,7 +19,7 @@ export class ContractsBlockTime {
     maxRolloverHours: string = "";
     intervalstring: string = "MONTHLY";
     rateExceeding: string = "";
-    withCustomBillingDate:boolean = false;
+    withCustomBillingDate: boolean = false;
     services: Array<ContractsBlockTimeDefaultService> = [];
     shares: Array<СontractsBlockTimeShare> = [];
     startDate: string;
@@ -54,11 +54,11 @@ export class ContractsBlockTime {
         this.reviewDate = data.reviewDate;
         this.calculateEndDate();
     }
-    public resetCustomBillingDate () {
-        this.customBillingDate  = JSON.parse(JSON.stringify(this.startDate));
+    public resetCustomBillingDate() {
+        this.customBillingDate = JSON.parse(JSON.stringify(this.startDate));
     }
-    public clearCustomBillingDate () {
-        this.customBillingDate  = undefined;
+    public clearCustomBillingDate() {
+        this.customBillingDate = undefined;
     }
     public setShares(data) {
         this.shares = data;
@@ -85,7 +85,7 @@ export class ContractsBlockTime {
 
         return {
             blockRate: Number(this.blockRate),
-            blockTimeServices: this.blockTimeServices.map(item => item.getDataForCreate()),
+            blockTimeServices: this.blockTimeServices.map(item => item.getDataForCreate(this.rateExceeding)),
             companyId: this.companyId,
             customInterval: (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') ? null : (this.intervalstring === '30 days') ? 30 : (this.intervalstring === '15 days') ? 15 : 7,
             description: this.description,
@@ -97,7 +97,7 @@ export class ContractsBlockTime {
             rateExceeding: Number(this.rateExceeding),
             services: this.services.map(item => item.getDataForCreate()),
             shares: this.shares,
-            customBillingDate:this.customBillingDate,
+            customBillingDate: this.customBillingDate,
             startDate: this.startDate,
             reviewDate: this.reviewDate,
             taxIds: this.taxIds,
@@ -171,12 +171,12 @@ export class ContractsBlockTime {
             let dateDatePicker = new Date(year, month - 1, day).getTime(); // timestamp from calendar
             let finalDate = new Date(dateDatePicker - (current.getTimezoneOffset() * 60000/* dont touch*/) - timeOffset /* timezone.timeOffset */);
             this.customBillingDate = moment(finalDate.getTime()).format('YYYY/MM/DD');
-            
+
         } else {
             let currentTime = new Date(current.getFullYear(), current.getMonth(), current.getDate()).getTime();
             let finalDate = new Date(currentTime - (current.getTimezoneOffset() * 60000) - timeOffset);
             this.customBillingDate = moment(finalDate.getTime()).format('YYYY/MM/DD');
-           
+
         }
 
     }
