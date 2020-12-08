@@ -10,6 +10,7 @@ import { ARCHIVE_QUOTE } from 'src/ng2/app/const/confirm';
 import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
 import { QuoteStateService } from 'src/ng2/app/states/quote/quote-state.service';
 import { QUOTE_MODAL_ACTION_PREVIEW } from 'src/ng2/app/const/quote';
+import { QuoteRealTimeService } from '../quote-realtime/quote-realtime.service';
 
 @Component({
   selector: 'app-quote-aside-preview',
@@ -26,6 +27,7 @@ export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
   constructor(private quoteStateService: QuoteStateService,
     private quoteServices: QuoteService,
     private modalService: NgbModal,
+    private quoteRealTimeService: QuoteRealTimeService,
     private confirmStateService: ConfirmStateService) { }
 
   ngOnInit() {
@@ -46,6 +48,15 @@ export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
       });
     });
     this.sub.add(getHandleSendModePreview);
+    let changeQuotesArray = this.quoteRealTimeService.changeQuotesArray.subscribe((newChange) => {
+      if (newChange.data.id === this.quote.id) {
+        if (newChange.action !== 'SALE_QUOTE_CREATED') {
+          if (newChange.data.status !== 'ARCHIVED') this.quote.uppdate(newChange.data);
+          if (newChange.data.status === 'ARCHIVED') this.quote.setStatus(newChange.data.status);
+        }
+      }
+    })
+    this.sub.add(changeQuotesArray);
   }
   close() {
     this.open = false;
@@ -74,7 +85,7 @@ export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
     this.quoteServices.convertToInvoice({ companyInfo: this.quote.company }, this.quote.id).subscribe((res) => {
     });
   }
-  
+
   archiveQuote() {
     this.confirmStateService.setConfirmAction(ARCHIVE_QUOTE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });

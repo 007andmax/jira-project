@@ -122,11 +122,8 @@ export class BillableComponent implements OnInit, OnDestroy {
   public getCounters() {
     this.count = 0;
     this.list.forEach(item => {
-      this.count += item.tickets.length;
+      if (!item.isDefault) this.count += item.tickets.length;
     })
-    /*  this.billableService.getCounters().subscribe((data: any) => {
-        this.count = data.BILLABLE;
-      })*/
   }
   onSearch(event) {
     if (event.target.value.length > 0) {
