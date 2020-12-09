@@ -397,6 +397,21 @@
       min-width: 132px;
       max-width: 132px;
       font-family: Graphik-Medium, sans-serif;
+      .date-picker {
+        input {
+          border: 1px solid #dde1e6;
+          border-radius: 4px;
+          border-color: transparent;
+          &:hover, &:focus {
+            border-color: #dde1e6;
+            outline: none;
+          }
+        }
+        .icn-calendar-light {
+          top: 7px;
+        }
+      }
+
     }
     &__info-text {
       font-size: 12px;
@@ -407,6 +422,11 @@
       border: 1px solid #dde1e6;
       border-radius: 4px;
       width: 100%;
+      border-color: transparent;
+      &:hover, &:focus {
+        border-color: #dde1e6;
+        outline: none;
+      }
     }
   }
 
