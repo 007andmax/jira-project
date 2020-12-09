@@ -93,8 +93,12 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
     })
   }
   onChangeName(data) {
-    this.device.setLabel(data);
-    this.devicesStateService.updateLabelIcon(this.device);
+    this.devicesService.editAgentInfo(this.device.getDataForEditLabel((data.length > 0) ? data : this.device.hostName || this.device.ip)).subscribe(res => {
+      this.device.setLabel(data);
+      this.devicesStateService.updateLabelIcon(this.device);
+    })
+    console.log("data", data);
+
   }
   returnTimeFormatUpTime(time) {
     let days = 0;

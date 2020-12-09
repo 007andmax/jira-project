@@ -9,23 +9,27 @@ export class CompanyDevicesEditLabelComponent implements OnInit {
   value: string;
   @Input() field: string;
   @Input() title: string;
-  @Input() name: string;
+  // @Input() name: string;
+  showEdit: boolean = false;
   placeholder: string = '';
   @Output() onChange = new EventEmitter();
   constructor() { }
 
   ngOnInit() {
+    this.value = JSON.parse(JSON.stringify(this.field));
   }
   ngDoCheck() {
     this.placeholder = (this.field !== '') ? this.field : `Enter ${this.title} here`;
   }
-  change() {
-    this.onChange.emit(this.field);
+  onCheckValue() {
+    console.log('this.value', this.value);
+    console.log('this.field', this.field);
+    if (this.value !== this.field) this.onChange.emit(this.value);
+
   }
-  public onOpenDropDown(open) {
-    if (open) this.value = JSON.parse(JSON.stringify(this.field))
-  }
-  close() {
-    this.value = '';
+  public onShowInput() {
+
+    this.value = JSON.parse(JSON.stringify(this.field));
+    console.log("this.value", this.value);
   }
 }

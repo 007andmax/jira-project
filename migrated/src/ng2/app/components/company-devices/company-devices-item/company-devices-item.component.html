@@ -57,19 +57,15 @@
         </div>
     </td>
     <td class="company-devices-table__device-name">
-        <div
-            ngbDropdown
-            container="body"
-            placement="bottom-left"
-            (openChange)="changeNameDP.onOpenDropDown($event)"
-        >
+        <div>
             <div class="qt-df qt-fd-c">
                 <div class="company-devices-table-device-name qt-ff-gm qt-df qt-ai-c">
-                    <span
-                        class="name-text"
-                        [textContent]="device.label || device.hostName || device.ip"
-                        ngbDropdownAnchor
-                    ></span>
+                    <app-company-devices-edit-label
+                        [field]="device.label || device.hostName || device.ip"
+                        [title]="'Name'"
+                        class="company-device-edit-name"
+                        (onChange)="onChangeName($event)"
+                    ></app-company-devices-edit-label>
                     <!-- <input class="name-text-input" type="text" [value]="device.label || device.hostName || device.ip"> -->
                 </div>
                 <span
@@ -78,15 +74,6 @@
                     [textContent]="device.hostName || device.ip"
                 ></span>
             </div>
-            <app-company-devices-edit-name
-                [device]="device"
-                container="body"
-                ngbDropdownMenu
-                #changeNameDP
-                class="company-device-edit-name"
-                (onChangeName)="onChangeName($event)"
-                aria-labelledby="dropdownChangeName"
-            ></app-company-devices-edit-name>
         </div>
     </td>
     <td class="company-devices-table__logged-user">
