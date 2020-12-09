@@ -65,7 +65,7 @@ export class CompanyDashDetailComponent implements OnInit {
     SEMI_MANAGED: 'Semi managed',
     FULLY_MANAGED: 'Fully managed'
   }
-  workingHoursList:any = [
+  workingHoursList:WorkingHours[] = [
     {
       name: '12:00 AM',	
           value: '00:00'	
