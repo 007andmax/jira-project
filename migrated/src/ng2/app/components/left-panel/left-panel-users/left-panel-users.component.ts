@@ -22,14 +22,14 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
   industryHistory = [];
   companiesHistory = [];
   selectedClientIndustry: string = null;
-  selectedCompany: string = null;
-//  clientIndustry: string = '';
+  selectedCompany: any = null;
+  //  clientIndustry: string = '';
   companies = [];
-  constructor(private usersStateService: UsersStateService, 
+  constructor(private usersStateService: UsersStateService,
     private leftPanelUsersService: LeftPanelUsersService,
     public cd: ChangeDetectorRef,
-    private companiesState: CompaniesStateService, 
-    private leftPanelService: LeftPanelService, 
+    private companiesState: CompaniesStateService,
+    private leftPanelService: LeftPanelService,
     private companiesService: CompaniesService) { }
 
   ngOnInit() {
@@ -40,11 +40,11 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
     this.leftPanelUsersService.addSubscription(getOnUsers);
     this.industries = this.companiesState.getIndustries();
     this.leftPanelService.getIndustryHistoryUsers().subscribe((data: Array<string>) => {
-       
+
       this.industryHistory = data;
     })
     this.leftPanelService.getCompaniesHistory().subscribe((data: Array<string>) => {
-       
+
       this.companiesHistory = data;
     })
     if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
@@ -58,12 +58,13 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
     document.body.querySelector('app-left-panel-users').classList.remove('show');
   }
   public onSelectCompany(item) {
+    console.log("item", item);
     if (!item) {
       this.clearSelectedCompany();
       return;
     }
     this.selectedCompany = null;
-     
+
     this.filter.setCompany(item.id);
     this.usersStateService.onInitFilter(this.filter);
     this.companiesHistory.pop();
@@ -77,7 +78,7 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
   }
   private getClientsList(data) {
     this.companies = data.filter(item => item.accountType === 'CLIENT' && ((!this.showArchivedCompanies) ? !item.deletedAt : item.deletedAt)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-    1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
   toggleFilter(event) {
     event.target.parentNode.classList.toggle('show-filter');
@@ -98,10 +99,11 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
 
         return acc;
       }, []).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
-      1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
+        1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
 
   }
   public onSelectClientIndustry(item) {
+    console.log("item", item);
     if (!item) {
       this.clearClientIndustry();
       return;
@@ -109,7 +111,7 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
     this.selectedClientIndustry = null;
 
     //   this.showClearIndustry = true;
-   // this.clientIndustry = item;
+    // this.clientIndustry = item;
     this.filter.setClientIndustry(item);
     this.usersStateService.onInitFilter(this.filter);
     this.industryHistory.pop();
@@ -121,22 +123,22 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
     })
   }
   public selectClientIndustry(item) {
-   
+
     this.selectedClientIndustry = item;
-     
+
     //  this.showClearIndustry = true;
-  //  this.clientIndustry = item;
+    //  this.clientIndustry = item;
     this.filter.setClientIndustry(item);
     this.usersStateService.onInitFilter(this.filter);
     this.cd.detectChanges();
   }
   selectClientCompany(item) {
-     
-   
+
+    console.log("item", item);
     let indexCompany = this.companiesState.getCompanies().findIndex(company => company.name === item);
     //  this.showClearIndustry = true;
     // this.clientIndustry = item;
-     
+
     this.selectedCompany = this.companiesState.getCompanies()[indexCompany];
     this.filter.setCompany(this.companiesState.getCompanies()[indexCompany].id);
     this.usersStateService.onInitFilter(this.filter);
@@ -144,7 +146,7 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
   clearClientIndustry() {
     //  this.showClearIndustry = false;
     this.selectedClientIndustry = null;
-  //  this.clientIndustry = '';
+    //  this.clientIndustry = '';
     this.filter.setClientIndustry(null);
     this.usersStateService.onInitFilter(this.filter);
   }
@@ -156,7 +158,7 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
     this.usersStateService.onInitFilter(this.filter);
   }
   onSelectTitle(data) {
-     
+
     this.filter.setTitle(data);
     this.usersStateService.onInitFilter(this.filter);
   }

@@ -80,7 +80,7 @@ export class InvoicesAsideComponent implements OnInit {
       this.invoices[index].paymentAmount = (paymentAmount > 0) ? (this.invoices[index].sum - this.invoices[index].paidSum) : (this.amountReceived - sumPayment);
     }
     if (!this.isChangeAmountReceived) {
-      if (this.invoices[index].selected)this.invoices[index].paymentAmount = (this.invoices[index].sum - this.invoices[index].paidSum);
+      if (this.invoices[index].selected) this.invoices[index].paymentAmount = (this.invoices[index].sum - this.invoices[index].paidSum);
       this.amountReceived = this.invoices.reduce((a, b) => {
         if (b.selected) return a + (b.sum - b.paidSum);
         return a + 0;
@@ -96,7 +96,7 @@ export class InvoicesAsideComponent implements OnInit {
   }
   public onChangePayment(val, invoice) {
     let value = Number(val);
-    invoice.paymentAmount = Math.floor((value)*100)/100;
+    invoice.paymentAmount = Math.floor((value) * 100) / 100;
     this.validate.setValidPayment(true);
     if (!this.validate.getAmountReceived()) this.validate.checkAmountReceived(this.amountReceived, this.invoices);
   }
@@ -115,7 +115,7 @@ export class InvoicesAsideComponent implements OnInit {
       this.payment.resetPartialPayments();
       this.notificationStateService.oninitShowNotification("The payment has been received");
       this.close();
-    },err => {
+    }, err => {
       this.validate.setValidPayment(false);
       this.recordPayment.setDisabled(false);
       this.payment.resetInvoiceIds();
@@ -168,6 +168,7 @@ export class InvoicesAsideComponent implements OnInit {
     if (!this.validate.getAmountReceived()) this.validate.checkAmountReceived(this.amountReceived, this.invoices);
   }
   onSelectCompany(item) {
+    console.log('item', item);
     if (item) {
       this.invoicesFilter.setLimit(10000);
       this.invoicesFilter.setStatus("UNPAID");
