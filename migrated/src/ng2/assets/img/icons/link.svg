@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+    <g fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g stroke="#16A4FA">
+            <g>
+                <g>
+                    <g>
+                        <g>
+                            <path d="M0 5V3c0-1.657 1.343-3 3-3s3 1.343 3 3v2" transform="translate(-755 -602) translate(288 148) translate(459 448) translate(8 6) rotate(45 4.293 13.036)"/>
+                            <path d="M0 13v-2c0-1.657 1.343-3 3-3s3 1.343 3 3v2" transform="translate(-755 -602) translate(288 148) translate(459 448) translate(8 6) rotate(45 4.293 13.036) matrix(1 0 0 -1 0 21)"/>
+                            <path d="M3 4L3 9" transform="translate(-755 -602) translate(288 148) translate(459 448) translate(8 6) rotate(45 4.293 13.036)"/>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="88" height="88" viewBox="0 0 88 88">
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g>
+                <g transform="translate(-808 -276) translate(288 148) translate(520 128)">
+                    <circle cx="44" cy="44" r="44" fill="#16A4FA" opacity=".1"/>
+                    <g fill-rule="nonzero" stroke="#16A4FA" stroke-linecap="round" stroke-linejoin="round">
+                        <path fill="#FFF" d="M11.423 15L15.577 15 15.577 24 11.423 24z" transform="translate(23 34)"/>
+                        <path fill="#FFF" d="M2 0h23c1.105 0 2 .895 2 2v16c0 1.105-.895 2-2 2H2c-1.105 0-2-.895-2-2V2C0 .895.895 0 2 0z" transform="translate(23 34)"/>
+                        <path fill="#16A4FA" fill-opacity=".2" d="M0 16h27v2c0 1.105-.895 2-2 2H2c-1.105 0-2-.895-2-2v-2h0z" transform="translate(23 34)"/>
+                        <path fill="#FFF" d="M8.308 24L18.691 24" transform="translate(23 34)"/>
+                    </g>
+                    <g fill-rule="nonzero" stroke="#16A4FA" stroke-linecap="round" stroke-linejoin="round" transform="translate(45 30)">
+                        <path fill="#FFF" d="M2 0h16c1.105 0 2 .895 2 2v24c0 1.105-.895 2-2 2H2c-1.105 0-2-.895-2-2V2C0 .895.895 0 2 0z"/>
+                        <rect width="14" height="4" x="3" y="3" fill="#16A4FA" fill-opacity=".2" rx=".5"/>
+                        <rect width="14" height="4" x="3" y="9" fill="#16A4FA" fill-opacity=".2" rx=".5"/>
+                        <rect width="14" height="4" x="3" y="15" fill="#16A4FA" fill-opacity=".2" rx=".5"/>
+                        <rect width="14" height="4" x="3" y="21" fill="#16A4FA" fill-opacity=".2" rx=".5"/>
+                    </g>
+                    <g fill="#FFF" fill-rule="nonzero" stroke="#16A4FA" stroke-linecap="round" stroke-linejoin="round" transform="translate(58 24)">
+                        <circle cx="7" cy="7" r="7"/>
+                        <path d="M8 7L6 9 8 11" transform="matrix(0 -1 -1 0 16 16)"/>
+                        <path d="M7 2.999L7 10"/>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
