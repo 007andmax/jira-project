@@ -867,6 +867,14 @@
                 >
                     Network Scan
                 </a>
+                <a
+                    class="left-panel-title"
+                    style="margin-bottom: 10px;"
+                    ng-click="activateCompanyProfileTab('CompanyNetworkScanComponent')"
+                    ng-class="{'active': getOpenedUsersTab() ==='company-network-scan'}"
+                >
+                    Network Scan 2
+                </a>
                 <div
                     class="left-panel-hide-filter"
                     ng-if="PermissionsService.isAllowed('VIEW_PASSWORD_SECTION')"

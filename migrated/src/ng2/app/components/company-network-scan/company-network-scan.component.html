@@ -1,377 +1,578 @@
-
-  <div class="network-scan-page">
+<div class="network-scan-page">
     <div class="network-scan-page__content">
-      <div class="network-scan-page__header-title qt-ff-gm">Network Scan</div>
-
-      <!-- Empty page -->
-      <div class="network-scan-page__empty-content">
-        <div class="network-scan-page__empty-content-icon icon__no-devices-installed"></div>
-        <div class="network-scan-page__empty-content-title qt-ff-sb">No Devices added Yet!</div>
-        <div class="network-scan-page__empty-content-subtitle">It seems No devices added for this company, <br/> try to search for other results.</div>
-        <button class="network-scan-page__empty-content-download-button qt-button qt-mb-15">Download Agent Installer</button>
-        <div class="network-scan-page__empty-content-or-divider qt-ff-sb">or</div>
-        <div class="qt-button --small --outline">
-          <div class="icon__link qt-sz-16 qt-mr-5"></div>
-          Copy Installer link to clipboard
-        </div>
-      </div>
+        <div class="network-scan-page__header-title qt-ff-gm">Network Scan</div>
 
 
-      <!-- CONTENT -->
-      <div class="network-steps qt-mb-30">
-        <div class="network-step">
-          <div class="circle-number qt-mb-8">
-            <div class="circle-number__inner">1</div>
-          </div>
-          <div class="network-step__title">Run Scan</div>
-          <div class="network-step__text qt-mb-15">Get Started with run scan to get result</div>
-          <!-- <button class="qt-button">Run Scan</button> -->
-          <button class="qt-button --with-menu">
-            <span class="left-side-overflow">
-              HP Ethernet Multi-Environlololo.o
-            </span>
-            <div class="button-menu">
-              <div class="qt-sz-16 qt-ic-c icon__dropdown-arrow-up"></div>
+
+
+
+
+
+        <div
+            class="loading"
+            *ngIf="showPreloader"
+        ></div>
+        <!-- Empty page -->
+        <app-company-network-scan-no-exist-devices
+            *ngIf="!showPreloader && devices.length === 0"
+            [companyId]="companyId"
+        ></app-company-network-scan-no-exist-devices>
+
+
+
+
+
+
+
+
+        <!-- CONTENT -->
+        <div
+            class="network-steps qt-mb-30"
+            *ngIf="!showPreloader && devices.length > 0"
+        >
+            <div class="network-step">
+                <div class="circle-number qt-mb-8">
+                    <div class="circle-number__inner">1</div>
+                </div>
+                <div class="network-step__title">Run Scan</div>
+                <div class="network-step__text qt-mb-15">Get Started with run scan to get result</div>
+                <!-- <button class="qt-button">Run Scan</button> -->
+                <button class="qt-button --with-menu">
+                    <span class="left-side-overflow">HP Ethernet Multi-Environlololo.o</span>
+                    <div class="button-menu">
+                        <div class="qt-sz-16 qt-ic-c icon__dropdown-arrow-up"></div>
+                    </div>
+                </button>
             </div>
-          </button>
+
+
+
+
+
+
+
+            <div class="network-step">
+                <div class="circle-number qt-mb-8">
+                    <div class="circle-number__inner">2</div>
+                </div>
+                <div class="network-step__title">Select Device</div>
+                <!-- <div class="network-step__text qt-mb-15">Choose Device you want to install agent</div> -->
+                <div class="network-step__text-cred qt-mb-15">
+                    <span>You have using below credentials:</span>
+                    <br>
+                    <span class="qt-ff-gm">Activec admin</span>
+                </div>
+                <button class="qt-button qt-loading --hide-text">Apply Credentials</button>
+            </div>
+
+
+
+
+
+
+
+            <div class="network-step">
+                <div class="circle-number qt-mb-8">
+                    <div class="circle-number__inner">3</div>
+                </div>
+                <div class="network-step__title">Install Agent</div>
+                <div class="network-step__text qt-mb-15">Click on button below to install agent</div>
+                <button
+                    class="qt-button --disabled"
+                    disabled
+                >
+                    Install Agent
+                </button>
+            </div>
         </div>
 
-        <div class="network-step">
-          <div class="circle-number qt-mb-8">
-            <div class="circle-number__inner">2</div>
-          </div>
-          <div class="network-step__title">Select Device</div>
-          <!-- <div class="network-step__text qt-mb-15">Choose Device you want to install agent</div> -->
-          <div class="network-step__text-cred qt-mb-15">
-            <span>You have using below credentials:</span><br>
-            <span class="qt-ff-gm">Activec admin</span>
-          </div>
-          <button class="qt-button qt-loading --hide-text">Apply Credentials</button>
-        </div>
 
-        <div class="network-step">
-          <div class="circle-number qt-mb-8">
-            <div class="circle-number__inner">3</div>
-          </div>
-          <div class="network-step__title">Install Agent</div>
-          <div class="network-step__text qt-mb-15">Click on button below to install agent</div>
-          <button class="qt-button --disabled" disabled>Install Agent</button>
-        </div>
-      </div>
 
-      <table class="network-scan-table qt-w100">
-        <thead>
-          <tr>
-            <th class="network-scan-table__check">
-              <div class="d-f">
-                <label class="qt-checkbox">
-                  <input type="checkbox">
-                  <span ></span>
-                </label>
-              </div>
-            </th>
-            <th class="network-scan-table__device-name">
-              Device Name
-              <span class="qt-table-modern__sorting"></span>
-            </th>
-            <th class="network-scan-table__lan-ip">
-              Lan ip
-              <span class="qt-table-modern__sorting"></span>
-            </th>
-            <th class="network-scan-table__manufacturer">
-              Manufacturer
-              <span class="qt-table-modern__sorting"></span>
-            </th>
-            <th class="network-scan-table__mac-address">
-              Mac address
-              <span class="qt-table-modern__sorting"></span>
-            </th>
-            <th class="network-scan-table__status">
-              Status
-              <span class="qt-table-modern__sorting"></span>
-            </th>
-            <th class="network-scan-table__delete"></th>
-          </tr>
-        </thead>
 
-        <tbody>
-          <tr>
-            <td class="network-scan-table__check">
-              <div class="d-f">
-                <label class="qt-checkbox">
-                  <input type="checkbox">
-                  <span ></span>
-                </label>
-              </div>
-            </td>
-            <td class="network-scan-table__device-name">
-              <div class="qt-df qt-ai-c">
-                <input class="network-scan-table__device-name-input" type="text" value="HP Ethernet Multi-Environment color jet-2005">
-              </div>
-            </td>
-            <td class="network-scan-table__lan-ip">192.168.15.71</td>
-            <td class="network-scan-table__manufacturer">Asutek Computer INC</td>
-            <td class="network-scan-table__mac-address">f832e4701029</td>
-            <td class="network-scan-table__status">
-              <span class="tag__modern --success ">Managed</span>
-            </td>
-            <td class="network-scan-table__delete">
-              <div class="icon__remove qt-ic-c qt-sz-16 qt-pointer"></div>
-            </td>
-          </tr>
 
-          <tr>
-            <td class="network-scan-table__check">
-              <div class="d-f">
-                <label class="qt-checkbox">
-                  <input type="checkbox">
-                  <span ></span>
-                </label>
-              </div>
-            </td>
-            <td class="network-scan-table__device-name">
-              <div class="qt-df qt-ai-c">
-                <span>HV Server</span>
-                <div class="qt-ml-8 icon__remove network-scan-edit-marker pointer"></div>
-              </div>
-            </td>
-            <td class="network-scan-table__lan-ip">192.168.15.71</td>
-            <td class="network-scan-table__manufacturer">Intel Corporate</td>
-            <td class="network-scan-table__mac-address">f832e4701029</td>
-            <td class="network-scan-table__status">
-              <span class="tag__modern --success">Managed</span>
-            </td>
-            <td class="network-scan-table__delete">
-              <div class="icon__remove qt-ic-c qt-sz-16 qt-pointer"></div>
-            </td>
-          </tr>
 
-          <tr>
-            <td class="network-scan-table__check">
-              <div class="d-f">
-                <label class="qt-checkbox">
-                  <input type="checkbox">
-                  <span ></span>
-                </label>
-              </div>
-            </td>
-            <td class="network-scan-table__device-name">
-              <div class="qt-df qt-ai-c">
-                <span>HV Server</span>
-                <div class="qt-ml-8 icon__remove network-scan-edit-marker pointer"></div>
-              </div>
-            </td>
-            <td class="network-scan-table__lan-ip">192.168.15.71</td>
-            <td class="network-scan-table__manufacturer">Intel Corporate</td>
-            <td class="network-scan-table__mac-address">f832e4701029</td>
-            <td class="network-scan-table__status">
-              <span class="tag__modern --error">Bad password</span>
-            </td>
-            <td class="network-scan-table__delete">
-              <div class="icon__remove qt-ic-c qt-sz-16 qt-pointer"></div>
-            </td>
-          </tr>
 
-          <tr>
-            <td class="network-scan-table__check">
-              <div class="d-f">
-                <label class="qt-checkbox">
-                  <input type="checkbox">
-                  <span ></span>
-                </label>
-              </div>
-            </td>
-            <td class="network-scan-table__device-name">
-              <div class="qt-df qt-ai-c">
-                <span>HV Server</span>
-                <div class="qt-ml-8 icon__remove network-scan-edit-marker pointer"></div>
-              </div>
-            </td>
-            <td class="network-scan-table__lan-ip">192.168.15.71</td>
-            <td class="network-scan-table__manufacturer">Intel Corporate</td>
-            <td class="network-scan-table__mac-address">f832e4701029</td>
-            <td class="network-scan-table__status">
-              <span class="tag__modern --gray">Blocked</span>
-            </td>
-            <td class="network-scan-table__delete">
-              <div class="icon__remove qt-ic-c qt-sz-16 qt-pointer"></div>
-            </td>
-          </tr>
+        <table
+            class="network-scan-table qt-w100"
+            *ngIf="!showPreloader && devices.length > 0"
+        >
+            <thead>
+                <tr>
+                    <th class="network-scan-table__check">
+                        <div class="d-f">
+                            <label class="qt-checkbox">
+                                <input type="checkbox">
+                                <span></span>
+                            </label>
+                        </div>
+                    </th>
+                    <th class="network-scan-table__device-name">
+                        Device Name
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th class="network-scan-table__lan-ip">
+                        Lan ip
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th class="network-scan-table__manufacturer">
+                        Manufacturer
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th class="network-scan-table__mac-address">
+                        Mac address
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th class="network-scan-table__status">
+                        Status
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th class="network-scan-table__delete"></th>
+                </tr>
+            </thead>
 
-          <tr class="--checked">
-            <td class="network-scan-table__check">
-              <div class="d-f">
-                <label class="qt-checkbox">
-                  <input type="checkbox">
-                  <span ></span>
-                </label>
-              </div>
-            </td>
-            <td class="network-scan-table__device-name">
-              <div class="qt-df qt-ai-c">
-                <span>Accounting-(Master Agent)</span>
-                <div class="qt-ml-8 icon__remove network-scan-edit-marker pointer"></div>
-              </div>
-            </td>
-            <td class="network-scan-table__lan-ip">192.168.15.71</td>
-            <td class="network-scan-table__manufacturer">Unknown Manufacturer</td>
-            <td class="network-scan-table__mac-address">f832e4701029</td>
-            <td class="network-scan-table__status">
-              <div class="qt-sz-18 qt-loading --blue qt-ml-20"></div>
-            </td>
-            <td class="network-scan-table__delete">
-              <div class="icon__remove qt-ic-c qt-sz-16 qt-pointer"></div>
-            </td>
-          </tr>
 
-          <tr class="--checked">
-            <td class="network-scan-table__check">
-              <div class="d-f">
-                <label class="qt-checkbox">
-                  <input type="checkbox">
-                  <span ></span>
-                </label>
-              </div>
-            </td>
-            <td class="network-scan-table__device-name">
-              <div class="qt-df qt-ai-c">
-                <span>Samsung HD Tablet-2020</span>
-                <div class="qt-ml-8 icon__remove network-scan-edit-marker pointer"></div>
-              </div>
-            </td>
-            <td class="network-scan-table__lan-ip">192.168.15.71</td>
-            <td class="network-scan-table__manufacturer">Dell Inc.</td>
-            <td class="network-scan-table__mac-address">f832e4701029</td>
-            <td class="network-scan-table__status"></td>
-            <td class="network-scan-table__delete">
-              <div class="icon__remove qt-ic-c qt-sz-16 qt-pointer"></div>
-            </td>
-          </tr>
 
-          <tr>
-            <td class="network-scan-table__check">
-              <div class="d-f">
-                <label class="qt-checkbox">
-                  <input type="checkbox">
-                  <span ></span>
-                </label>
-              </div>
-            </td>
-            <td class="network-scan-table__device-name">
-              <div class="qt-df qt-ai-c">
-                <span>Samsung HD Tablet-2020</span>
-                <div class="qt-ml-8 icon__remove network-scan-edit-marker pointer"></div>
-              </div>
-            </td>
-            <td class="network-scan-table__lan-ip">192.168.15.71</td>
-            <td class="network-scan-table__manufacturer">Planmeca Oy</td>
-            <td class="network-scan-table__mac-address">f832e4701029</td>
-            <td class="network-scan-table__status"></td>
-            <td class="network-scan-table__delete">
-              <div class="icon__remove qt-ic-c qt-sz-16 qt-pointer"></div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+
+
+
+
+            <tbody>
+                <tr>
+                    <td class="network-scan-table__check">
+                        <div class="d-f">
+                            <label class="qt-checkbox">
+                                <input type="checkbox">
+                                <span></span>
+                            </label>
+                        </div>
+                    </td>
+                    <td class="network-scan-table__device-name">
+                        <div class="qt-df qt-ai-c">
+                            <input
+                                class="network-scan-table__device-name-input"
+                                type="text"
+                                value="HP Ethernet Multi-Environment color jet-2005"
+                            >
+                        </div>
+                    </td>
+                    <td class="network-scan-table__lan-ip">192.168.15.71</td>
+                    <td class="network-scan-table__manufacturer">Asutek Computer INC</td>
+                    <td class="network-scan-table__mac-address">f832e4701029</td>
+                    <td class="network-scan-table__status">
+                        <span class="tag__modern --success ">Managed</span>
+                    </td>
+                    <td class="network-scan-table__delete">
+                        <div class="icon__remove qt-ic-c qt-sz-16 qt-pointer"></div>
+                    </td>
+                </tr>
+
+
+
+
+
+
+
+                <tr>
+                    <td class="network-scan-table__check">
+                        <div class="d-f">
+                            <label class="qt-checkbox">
+                                <input type="checkbox">
+                                <span></span>
+                            </label>
+                        </div>
+                    </td>
+                    <td class="network-scan-table__device-name">
+                        <div class="qt-df qt-ai-c">
+                            <span>HV Server</span>
+                            <div class="qt-ml-8 icon__remove network-scan-edit-marker pointer"></div>
+                        </div>
+                    </td>
+                    <td class="network-scan-table__lan-ip">192.168.15.71</td>
+                    <td class="network-scan-table__manufacturer">Intel Corporate</td>
+                    <td class="network-scan-table__mac-address">f832e4701029</td>
+                    <td class="network-scan-table__status">
+                        <span class="tag__modern --success">Managed</span>
+                    </td>
+                    <td class="network-scan-table__delete">
+                        <div class="icon__remove qt-ic-c qt-sz-16 qt-pointer"></div>
+                    </td>
+                </tr>
+
+
+
+
+
+
+
+                <tr>
+                    <td class="network-scan-table__check">
+                        <div class="d-f">
+                            <label class="qt-checkbox">
+                                <input type="checkbox">
+                                <span></span>
+                            </label>
+                        </div>
+                    </td>
+                    <td class="network-scan-table__device-name">
+                        <div class="qt-df qt-ai-c">
+                            <span>HV Server</span>
+                            <div class="qt-ml-8 icon__remove network-scan-edit-marker pointer"></div>
+                        </div>
+                    </td>
+                    <td class="network-scan-table__lan-ip">192.168.15.71</td>
+                    <td class="network-scan-table__manufacturer">Intel Corporate</td>
+                    <td class="network-scan-table__mac-address">f832e4701029</td>
+                    <td class="network-scan-table__status">
+                        <span class="tag__modern --error">Bad password</span>
+                    </td>
+                    <td class="network-scan-table__delete">
+                        <div class="icon__remove qt-ic-c qt-sz-16 qt-pointer"></div>
+                    </td>
+                </tr>
+
+
+
+
+
+
+
+                <tr>
+                    <td class="network-scan-table__check">
+                        <div class="d-f">
+                            <label class="qt-checkbox">
+                                <input type="checkbox">
+                                <span></span>
+                            </label>
+                        </div>
+                    </td>
+                    <td class="network-scan-table__device-name">
+                        <div class="qt-df qt-ai-c">
+                            <span>HV Server</span>
+                            <div class="qt-ml-8 icon__remove network-scan-edit-marker pointer"></div>
+                        </div>
+                    </td>
+                    <td class="network-scan-table__lan-ip">192.168.15.71</td>
+                    <td class="network-scan-table__manufacturer">Intel Corporate</td>
+                    <td class="network-scan-table__mac-address">f832e4701029</td>
+                    <td class="network-scan-table__status">
+                        <span class="tag__modern --gray">Blocked</span>
+                    </td>
+                    <td class="network-scan-table__delete">
+                        <div class="icon__remove qt-ic-c qt-sz-16 qt-pointer"></div>
+                    </td>
+                </tr>
+
+
+
+
+
+
+
+                <tr class="--checked">
+                    <td class="network-scan-table__check">
+                        <div class="d-f">
+                            <label class="qt-checkbox">
+                                <input type="checkbox">
+                                <span></span>
+                            </label>
+                        </div>
+                    </td>
+                    <td class="network-scan-table__device-name">
+                        <div class="qt-df qt-ai-c">
+                            <span>Accounting-(Master Agent)</span>
+                            <div class="qt-ml-8 icon__remove network-scan-edit-marker pointer"></div>
+                        </div>
+                    </td>
+                    <td class="network-scan-table__lan-ip">192.168.15.71</td>
+                    <td class="network-scan-table__manufacturer">Unknown Manufacturer</td>
+                    <td class="network-scan-table__mac-address">f832e4701029</td>
+                    <td class="network-scan-table__status">
+                        <div class="qt-sz-18 qt-loading --blue qt-ml-20"></div>
+                    </td>
+                    <td class="network-scan-table__delete">
+                        <div class="icon__remove qt-ic-c qt-sz-16 qt-pointer"></div>
+                    </td>
+                </tr>
+
+
+
+
+
+
+
+                <tr class="--checked">
+                    <td class="network-scan-table__check">
+                        <div class="d-f">
+                            <label class="qt-checkbox">
+                                <input type="checkbox">
+                                <span></span>
+                            </label>
+                        </div>
+                    </td>
+                    <td class="network-scan-table__device-name">
+                        <div class="qt-df qt-ai-c">
+                            <span>Samsung HD Tablet-2020</span>
+                            <div class="qt-ml-8 icon__remove network-scan-edit-marker pointer"></div>
+                        </div>
+                    </td>
+                    <td class="network-scan-table__lan-ip">192.168.15.71</td>
+                    <td class="network-scan-table__manufacturer">Dell Inc.</td>
+                    <td class="network-scan-table__mac-address">f832e4701029</td>
+                    <td class="network-scan-table__status"></td>
+                    <td class="network-scan-table__delete">
+                        <div class="icon__remove qt-ic-c qt-sz-16 qt-pointer"></div>
+                    </td>
+                </tr>
+
+
+
+
+
+
+
+                <tr>
+                    <td class="network-scan-table__check">
+                        <div class="d-f">
+                            <label class="qt-checkbox">
+                                <input type="checkbox">
+                                <span></span>
+                            </label>
+                        </div>
+                    </td>
+                    <td class="network-scan-table__device-name">
+                        <div class="qt-df qt-ai-c">
+                            <span>Samsung HD Tablet-2020</span>
+                            <div class="qt-ml-8 icon__remove network-scan-edit-marker pointer"></div>
+                        </div>
+                    </td>
+                    <td class="network-scan-table__lan-ip">192.168.15.71</td>
+                    <td class="network-scan-table__manufacturer">Planmeca Oy</td>
+                    <td class="network-scan-table__mac-address">f832e4701029</td>
+                    <td class="network-scan-table__status"></td>
+                    <td class="network-scan-table__delete">
+                        <div class="icon__remove qt-ic-c qt-sz-16 qt-pointer"></div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <!-- ASIDE -->
-    <div class="network-scan-page__aside">
-      <div class="aside-header qt-df qt-ai-c qt-jc-sb qt-pr-16 qt-pl-32">
-        <div class="qt-fs-20 qt-ff-gm qt-color-dark">
-          Select Credential
+    <div
+        class="network-scan-page__aside"
+        [hidden]="true"
+    >
+        <div class="aside-header qt-df qt-ai-c qt-jc-sb qt-pr-16 qt-pl-32">
+            <div class="qt-fs-20 qt-ff-gm qt-color-dark">Select Credential</div>
+
+
+
+
+
+
+
+            <div class="qt-df qt-ai-c">
+                <div class="icon__close qt-sz-24 qt-pointer"></div>
+            </div>
         </div>
 
-        <div class="qt-df qt-ai-c">
-          <div class="icon__close qt-sz-24 qt-pointer"></div>
+
+
+
+
+
+
+        <div class="contracts-page-scroll-content">
+            <div class="qt-pr-24 qt-pl-24 qt-pb-12 qt-pt-12">
+                <div class="qt-df qt-jc-sb qt-ai-c qt-mb-12">
+                    <div class="qt-ff-gm qt-fs-13 qt-color-dark-light">
+                        Apply Credential to selected devices from list below
+                    </div>
+                    <button class="qt-button --small --outline">+ Add new</button>
+                </div>
+
+
+
+
+
+
+
+                <div class="credential-block">
+                    <div class="qt-df qt-fd-c qt-w100">
+                        <input
+                            class="credential-block__username qt-ff-sb qt-w100"
+                            type="text"
+                            value="Ativetec admin"
+                        >
+                        <input
+                            class="credential-block__pass qt-ff-sb qt-w100"
+                            type="password"
+                            value="asdasasdas"
+                        >
+                    </div>
+                    <div class="qt-df ">
+                        <div class="credential-block__icon-btn icon__play"></div>
+                        <div class="credential-block__icon-btn icon__remove"></div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+                <div class="credential-block">
+                    <div class="qt-df qt-fd-c qt-w100">
+                        <input
+                            class="credential-block__username qt-ff-sb qt-w100"
+                            type="text"
+                            value="Ativetec admin"
+                        >
+                        <input
+                            class="credential-block__pass qt-ff-sb qt-w100"
+                            type="password"
+                            value="asdasasdas"
+                        >
+                    </div>
+                    <div class="qt-df ">
+                        <div class="credential-block__icon-btn icon__play"></div>
+                        <div class="credential-block__icon-btn icon__remove"></div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+                <div class="credential-block">
+                    <div class="qt-df qt-fd-c qt-w100">
+                        <input
+                            class="credential-block__username qt-ff-sb qt-w100"
+                            type="text"
+                            value="Ativetec admin"
+                        >
+                        <input
+                            class="credential-block__pass qt-ff-sb qt-w100"
+                            type="password"
+                            value="asdasasdas"
+                        >
+                    </div>
+                    <div class="qt-df ">
+                        <div class="credential-block__icon-btn icon__play"></div>
+                        <div class="credential-block__icon-btn icon__remove"></div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+                <div class="credential-block">
+                    <div class="qt-df qt-fd-c qt-w100">
+                        <input
+                            class="credential-block__username qt-ff-sb qt-w100"
+                            type="text"
+                            value="Ativetec admin"
+                        >
+                        <input
+                            class="credential-block__pass qt-ff-sb qt-w100"
+                            type="password"
+                            value="asdasasdas"
+                        >
+                    </div>
+                    <div class="qt-df ">
+                        <div class="credential-block__icon-btn icon__play"></div>
+                        <div class="credential-block__icon-btn icon__remove"></div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+                <div class="credential-block">
+                    <div class="qt-df qt-fd-c qt-w100">
+                        <input
+                            class="credential-block__username qt-ff-sb qt-w100"
+                            type="text"
+                            value="Ativetec admin"
+                        >
+                        <input
+                            class="credential-block__pass qt-ff-sb qt-w100"
+                            type="password"
+                            value="asdasasdas"
+                        >
+                    </div>
+                    <div class="qt-df ">
+                        <div class="credential-block__icon-btn icon__play"></div>
+                        <div class="credential-block__icon-btn icon__remove"></div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+                <div class="credential-block">
+                    <div class="qt-df qt-fd-c qt-w100">
+                        <input
+                            class="credential-block__username qt-ff-sb qt-w100"
+                            type="text"
+                            value="Ativetec admin"
+                        >
+                        <input
+                            class="credential-block__pass qt-ff-sb qt-w100"
+                            type="password"
+                            value="asdasasdas"
+                        >
+                    </div>
+                    <div class="qt-df ">
+                        <div class="credential-block__icon-btn icon__play"></div>
+                        <div class="credential-block__icon-btn icon__remove"></div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+                <div class="credential-block">
+                    <div class="qt-df qt-fd-c qt-w100">
+                        <input
+                            class="credential-block__username qt-ff-sb qt-w100"
+                            type="text"
+                            value="Ativetec admin"
+                        >
+                        <input
+                            class="credential-block__pass qt-ff-sb qt-w100"
+                            type="password"
+                            value="asdasasdas"
+                        >
+                    </div>
+                    <div class="qt-df ">
+                        <div class="credential-block__icon-btn icon__play"></div>
+                        <div class="credential-block__icon-btn icon__remove"></div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-
-      <div class="contracts-page-scroll-content">
-        <div class="qt-pr-24 qt-pl-24 qt-pb-12 qt-pt-12">
-          <div class="qt-df qt-jc-sb qt-ai-c qt-mb-12">
-            <div class="qt-ff-gm qt-fs-13 qt-color-dark-light">Apply Credential to selected devices from list below</div>
-            <button class="qt-button --small --outline">+ Add new</button>
-          </div>
-
-          <div class="credential-block">
-            <div class="qt-df qt-fd-c qt-w100">
-              <input class="credential-block__username qt-ff-sb qt-w100" type="text" value="Ativetec admin">
-              <input class="credential-block__pass qt-ff-sb qt-w100" type="password" value="asdasasdas">
-            </div>
-            <div class="qt-df ">
-              <div class="credential-block__icon-btn icon__play"></div>
-              <div class="credential-block__icon-btn icon__remove"></div>
-            </div>
-          </div>
-
-          <div class="credential-block">
-            <div class="qt-df qt-fd-c qt-w100">
-              <input class="credential-block__username qt-ff-sb qt-w100" type="text" value="Ativetec admin">
-              <input class="credential-block__pass qt-ff-sb qt-w100" type="password" value="asdasasdas">
-            </div>
-            <div class="qt-df ">
-              <div class="credential-block__icon-btn icon__play"></div>
-              <div class="credential-block__icon-btn icon__remove"></div>
-            </div>
-          </div>
-
-          <div class="credential-block">
-            <div class="qt-df qt-fd-c qt-w100">
-              <input class="credential-block__username qt-ff-sb qt-w100" type="text" value="Ativetec admin">
-              <input class="credential-block__pass qt-ff-sb qt-w100" type="password" value="asdasasdas">
-            </div>
-            <div class="qt-df ">
-              <div class="credential-block__icon-btn icon__play"></div>
-              <div class="credential-block__icon-btn icon__remove"></div>
-            </div>
-          </div>
-
-          <div class="credential-block">
-            <div class="qt-df qt-fd-c qt-w100">
-              <input class="credential-block__username qt-ff-sb qt-w100" type="text" value="Ativetec admin">
-              <input class="credential-block__pass qt-ff-sb qt-w100" type="password" value="asdasasdas">
-            </div>
-            <div class="qt-df ">
-              <div class="credential-block__icon-btn icon__play"></div>
-              <div class="credential-block__icon-btn icon__remove"></div>
-            </div>
-          </div>
-
-          <div class="credential-block">
-            <div class="qt-df qt-fd-c qt-w100">
-              <input class="credential-block__username qt-ff-sb qt-w100" type="text" value="Ativetec admin">
-              <input class="credential-block__pass qt-ff-sb qt-w100" type="password" value="asdasasdas">
-            </div>
-            <div class="qt-df ">
-              <div class="credential-block__icon-btn icon__play"></div>
-              <div class="credential-block__icon-btn icon__remove"></div>
-            </div>
-          </div>
-
-          <div class="credential-block">
-            <div class="qt-df qt-fd-c qt-w100">
-              <input class="credential-block__username qt-ff-sb qt-w100" type="text" value="Ativetec admin">
-              <input class="credential-block__pass qt-ff-sb qt-w100" type="password" value="asdasasdas">
-            </div>
-            <div class="qt-df ">
-              <div class="credential-block__icon-btn icon__play"></div>
-              <div class="credential-block__icon-btn icon__remove"></div>
-            </div>
-          </div>
-
-          <div class="credential-block">
-            <div class="qt-df qt-fd-c qt-w100">
-              <input class="credential-block__username qt-ff-sb qt-w100" type="text" value="Ativetec admin">
-              <input class="credential-block__pass qt-ff-sb qt-w100" type="password" value="asdasasdas">
-            </div>
-            <div class="qt-df ">
-              <div class="credential-block__icon-btn icon__play"></div>
-              <div class="credential-block__icon-btn icon__remove"></div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
 
 
-  </div>
+
+
+
+
+
+
+</div>
