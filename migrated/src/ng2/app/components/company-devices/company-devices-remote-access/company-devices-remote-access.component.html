@@ -1,0 +1,48 @@
+<div class="qt-modal company-devices-remote-modal">
+    <div class="qt-modal__header">
+        <div
+            class="qt-modal__close icon__close qt-pointer"
+            (click)="close()"
+        ></div>
+        <div
+            class="qt-list-loading preloader"
+            *ngIf="isConnection"
+        >
+            Connecting
+            <div class="loader"></div>
+        </div>
+    </div>
+    <div class="qt-modal__body">
+        <div class="qt-df qt-mb-32">
+            <div class="qt-mr-16 connect-icon"></div>
+            <div>
+                <div class="qt-fs-16 qt-color-dark qt-ff-sb qt-lh-163 company-devices-remote-modal__title">Quicktech Connect</div>
+                <div class="qt-lh qt-color-dark-light qt-lh-154 qt-mb-16">
+                    Get our Windows Installer package to install the app on your system. The app will be available to join future sessions instantly.
+                </div>
+                <button
+                    class="qt-btn --btn40h company-devices-remote-modal__button"
+                    (click)="downloadViewer()"
+                >
+                    Download App
+                </button>
+            </div>
+        </div>
+        <div class="qt-df">
+            <div class="qt-mr-16 remote-desctop-icon"></div>
+            <div>
+                <div class="qt-fs-16 qt-color-dark qt-ff-sb qt-lh-163 company-devices-remote-modal__title">Remote Desktop</div>
+                <div class="qt-lh qt-color-dark-light qt-lh-154 qt-mb-16">
+                    Launch our app already installed on your device. If not installed, we will attempt the next option after 2 seconds
+          have elapsed.
+                </div>
+                <button
+                    class="qt-btn --btn40h company-devices-remote-modal__button"
+                    (click)="launchRemoteApp()"
+                >
+                    Launch Application
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

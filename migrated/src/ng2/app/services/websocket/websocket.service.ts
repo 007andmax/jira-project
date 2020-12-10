@@ -19,7 +19,7 @@ import { InvoiceRealTimeService } from '../../states/invoice/invoice-real-time.s
 import { PaymentsRealTimeService } from '../../states/payments/payments-real-time.service';
 import { DefaultServicesRealTimeService } from '../../states/default-services/default-services-real-time.service';
 import { ContractsRealTimeService } from '../../states/contracts/contracts-real-time.service';
- 
+
 import { ShellRealTimeService } from '../../states/shell/shell-real-time.service';
 
 /**
@@ -90,6 +90,7 @@ export class WebsocketService {
       that.subsribeToPayments();
       that.subsribeToSubmittedService();
       that.subsribeToSubmittedServiceAgreement();
+      that.subsribeToSubmittedOneTimeConnection();
     });
   }
   private subsribeToDevices() {
@@ -376,6 +377,15 @@ export class WebsocketService {
       this.stompClient.subscribe(`/user/watch/serviceAgreement`, (message) => {
         var newChange = JSON.parse(message.body);
         this.contractsRealTimeService.handleRealTimeChanges(newChange);
+      });
+
+    }, 3000);
+  }
+  public subsribeToSubmittedOneTimeConnection() {
+    setTimeout(() => {
+      this.stompClient.subscribe(`/user/watch/oneTimeConnection`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.devicesRealTimeService.handleRealTimeOneTimeConnection(newChange);
       });
 
     }, 3000);

@@ -1,351 +1,363 @@
 <!DOCTYPE html>
 <html class="no-js">
-<head>
-  <meta http-equiv="expires" content="0">
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-
-  <title>Quicktech Admin</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- build:css(.tmp) styles/main.css -->
-  <link rel="stylesheet" href="styles/admin-customer-list.css"/>
-  <link rel="stylesheet" href="styles/admin-tickets.css"/>
-  <link rel="stylesheet" href="styles/bootstrap-datetimepicker.css"/>
-  <link rel="stylesheet" href="styles/common.dropdown.css"/>
-  <link rel="stylesheet" href="styles/common.icons.css"/>
-  <link rel="stylesheet" href="styles/common.left.css"/>
-  <link rel="stylesheet" href="styles/common.lists.css"/>
-  <link rel="stylesheet" href="styles/common.right.css"/>
-  <link rel="stylesheet" href="styles/common.tables.css"/>
-  <link rel="stylesheet" href="styles/common.ticket.add.css"/>
-  <link rel="stylesheet" href="styles/common.ticket.alerts.css"/>
-  <link rel="stylesheet" href="styles/common.ticket.attachments.css"/>
-  <link rel="stylesheet" href="styles/common.ticket.email.css"/>
-  <link rel="stylesheet" href="styles/common.ticket.header.css"/>
-  <link rel="stylesheet" href="styles/common.ticket.list.css"/>
-  <link rel="stylesheet" href="styles/common.ticket.updates.css"/>
-  <link rel="stylesheet" href="styles/common.tickets.wells.css"/>
-  <link rel="stylesheet" href="styles/common.top.css"/>
-  <link rel="stylesheet" href="styles/companies.css"/>
-  <link rel="stylesheet" href="styles/nanoscroller.css"/>
-  <link rel="stylesheet" href="styles/nouislider.css"/>
-  <link rel="stylesheet" href="styles/styles.css"/>
-  <link rel="stylesheet" href="styles/tokenfield.css"/>
-  <link rel="stylesheet" href="styles/users.css"/>
-  <link rel="stylesheet" href="styles/vendors.css"/>
-  <link rel='stylesheet' href='styles/crop.css'/>
-  <link rel='stylesheet' href='styles/fixed.css'/>
-  <link rel='stylesheet' href='styles/invoice-modal-tech.css'/>
-  <link rel='stylesheet' href='styles/invoice-page.css'/>
-  <link rel='stylesheet' href='styles/settings-company-info.css'/>
-  <link rel='stylesheet' href='styles/quick-support.css'/>
-  <link rel='stylesheet' href='styles/tax-rates.css'/>
-  <link rel='stylesheet' href='styles/company-profile.css'/>
-  <link rel='stylesheet' href='styles/time-zone-autocomplete.css'/>
-  <link rel='stylesheet' href='styles/ticket-tags.css'/>
-  <link rel='stylesheet' href='styles/loading-indicator.css'/>
-  <link rel='stylesheet' href='styles/button-with-loading-indicator.css'/>
-  <link rel="stylesheet" href="styles/settings.css"/>
-  <link rel='stylesheet' href='styles/permissions-management.css'/>
-  <link rel='stylesheet' href='styles/tracking-devices.css'/>
-  <link rel='stylesheet' href='styles/left-panel.css'/>
-  <link rel='stylesheet' href='styles/agent-install.css'/>
-  <link rel='stylesheet' href='styles/datepicker.css'/>
-  <link rel='stylesheet' href='styles/feed-back.css'/>
-  <link rel='stylesheet' href='styles/welcome-wizard.css'/>
-  <link rel='stylesheet' href='styles/modal-popup.css'/>
-  <link rel='stylesheet' href='styles/dashboard.css'/>
-  <link rel='stylesheet' href='styles/charts.css'/>
-  <link rel='stylesheet' href='styles/hardware-report.css'/>
-  <link rel='stylesheet' href='styles/card-view.css'/>
-  <link rel='stylesheet' href='styles/password-manager.css'/>
-  <link rel='stylesheet' href='styles/customer-report.css'/>
-  <link rel='stylesheet' href='styles/new-style.css'/>
-  <link rel="stylesheet" href="styles/nv.d3.css">
- 
-  <!-- endbuild -->
-
-</head>
-<body ng-app="quicktech.admin">
-<customer-list></customer-list>
-
-<script src="/bower_components/jquery/dist/jquery.js"></script>
-<script src="/bower_components/jquery-mousewheel/jquery.mousewheel.js"></script>
-<script src="/bower_components/angular/angular.js"></script>
-<script src="/bower_components/angular-messages/angular-messages.js"></script>
-<script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-<script src="/bower_components/angular-ui-select/dist/select.js"></script>
-<script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-<script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
-<script src="/bower_components/angular-animate/angular-animate.js"></script>
-<script src="/bower_components/tether/dist/js/tether.js"></script>
-<script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
-<script src="/bower_components/bootstrap-tokenfield/dist/bootstrap-tokenfield.js"></script>
-<script src="/bower_components/bootstrap3-typeahead/bootstrap3-typeahead.js"></script>
-<script src="/bower_components/bootstrap-select/dist/js/bootstrap-select.js"></script>
-<script src="/bower_components/moment/min/moment-with-locales.js"></script>
-<script src="/bower_components/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"></script>
-<script src="/bower_components/typeahead.js/dist/typeahead.bundle.js"></script>
-<script src="/bower_components/nanoscroller/bin/javascripts/jquery.nanoscroller.js"></script>
-<script src="/bower_components/sockjs-client/dist/sockjs.js"></script>
-<script src="/bower_components/stomp-websocket/lib/stomp.js"></script>
-<script src="/bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
-<script src="/bower_components/d3/d3.js"></script>
-<script src="/bower_components/ng-cropper/dist/ngCropper.all.js"></script>
-<script src="/bower_components/nvd3/build/nv.d3.js"></script>
-<script src="/bower_components/angular-nvd3/dist/angular-nvd3.js"></script>
-<script src="scripts/js/vendors/jquery.jscrollpane.js"></script>
-<script src="scripts/js/vendors/modernizr.js"></script>
-<script src="scripts/js/vendors/editor/jquery.hotkeys.js"></script>
-<script src="scripts/js/vendors/editor/editor.js"></script>
-<script src="scripts/js/vendors/pie-chart.js"></script>
-<script src="scripts/js/vendors/easeljs-0.6.1.min.js"></script>
-<script src="scripts/js/vendors/jquery.fileUploader.js"></script>
-<script src="scripts/js/vendors/jquery.autocomplete.js"></script>
-<script src="scripts/js/vendors/jquery.servicesMoving.js"></script>
-<script src="scripts/js/vendors/jquery.productAutocomplete.js"></script>
-<script src="scripts/js/vendors/md5-min.js"></script>
-<script src="scripts/js/vendors/nouislider.min.js"></script>
-<script src="scripts/js/vendors/date-range-picker/datepicker.js"></script>
-<script src="scripts/js/vendors/date-range-picker/datepicker.en.js"></script>
-
-
-<!-- endbuild -->
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbP4DFpz4f9YcXMWUjdkOdyArX2peNt8s&v=3.exp&libraries=places&language=en"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/canvg/1.4/rgbcolor.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/stackblur-canvas/1.4.1/stackblur.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/canvg/dist/browser/canvg.min.js"></script>
-
-<!-- build:js({.tmp,ng1}) scripts/custom.js -->
-<script src="scripts/js/handlebars-v3.0.3.js"></script>
-<!-- endbuild -->
-
-<!-- build:js({.tmp,ng1}) scripts/scripts.js -->
-<script src="scripts/admin/app-admin.mdl.js"></script>
-<script src="scripts/common/directives/directives.mdl.js"></script>
-<script src="scripts/common/services/local/local-services.mdl.js"></script>
-<script src="scripts/common/services/rest/rest-services.mdl.js"></script>
-<script src="scripts/core/app.mdl.js"></script>
-<script src="scripts/core/billable/billable.mdl.js"></script>
-<script src="scripts/core/companies/companies.mdl.js"></script>
-<script src="scripts/core/devices/devices.mdl.js"></script>
-<script src="scripts/core/left-panel/left-panel.mdl.js"></script>
-<script src="scripts/core/products/products.mdl.js"></script>
-<script src="scripts/core/quick-support/quick-support.mdl.js"></script>
-<script src="scripts/core/reports/reports.mdl.js"></script>
-<script src="scripts/core/right-panel/right-panel.mdl.js"></script>
-<script src="scripts/core/service-agreements/service-agreements.mdl.js"></script>
-<script src="scripts/core/settings/settings.mdl.js"></script>
-<script src="scripts/core/tickets/tickets.mdl.js"></script>
-<script src="scripts/admin/admin-services/customer-list.js"></script>
-<script src="scripts/admin/customer-list/customer-list.drv.js"></script>
-<script src="scripts/common/directives/add-create-new-button.drv.js"></script>
-<script src="scripts/common/directives/addOnFocus.drv.js"></script>
-<script src="scripts/common/directives/address-autocomplete.drv.js"></script>
-<script src="scripts/common/directives/animation-change-location.drv.js"></script>
-<script src="scripts/common/directives/append-el-to-body.drv.js"></script>
-<script src="scripts/common/directives/append-html-to-body.drv.js"></script>
-<script src="scripts/common/directives/append-to-top.drv.js"></script>
-<script src="scripts/common/directives/array-maxlength.drv.js"></script>
-<script src="scripts/common/directives/array-minlength.drv.js"></script>
-<script src="scripts/common/directives/attach-files.drv.js"></script>
-<script src="scripts/common/directives/auto-expand.drv.js"></script>
-<script src="scripts/common/directives/avatar/avatar.drv.js"></script>
-<script src="scripts/common/directives/button-with-loading-indicator/button-with-loading-indicator.drv.js"></script>
-<script src="scripts/common/directives/charts/axis.drv.js"></script>
-<script src="scripts/common/directives/charts/bars.drv.js"></script>
-<script src="scripts/common/directives/charts/chart.drv.js"></script>
-<script src="scripts/common/directives/charts/data-restriction.drv.js"></script>
-<script src="scripts/common/directives/charts/line.drv.js"></script>
-<script src="scripts/common/directives/charts/pie.drv.js"></script>
-<script src="scripts/common/directives/charts/stacked-bars.drv.js"></script>
-<script src="scripts/common/directives/click-outside.drv.js"></script>
-<script src="scripts/common/directives/count-nodes-in-line.drv.js"></script>
-<script src="scripts/common/directives/crop-image/crop-image.drv.js"></script>
-<script src="scripts/common/directives/custom-disabled.drv.js"></script>
-<script src="scripts/common/directives/custom-ng-show-if.drv.js"></script>
-<script src="scripts/common/directives/custom-popover.drv.js"></script>
-<script src="scripts/common/directives/custom-selection.js"></script>
-<script src="scripts/common/directives/custom-style.drv.js"></script>
-<script src="scripts/common/directives/date-time-picker-with-period.js"></script>
-<script src="scripts/common/directives/desktop-mobile-function.drv.js"></script>
-<script src="scripts/common/directives/dragUpload.drv.js"></script>
-<script src="scripts/common/directives/dropdown-arrow-navigation.js"></script>
-<script src="scripts/common/directives/duration-filter.fltr.js"></script>
-<script src="scripts/common/directives/email-to.drv.js"></script>
-<script src="scripts/common/directives/execute-when-outfocused.js"></script>
-<script src="scripts/common/directives/feedback-form/feedback-form.drv.js"></script>
-<script src="scripts/common/directives/file-size-filter.js"></script>
-<script src="scripts/common/directives/fixed-block-top.js"></script>
-<script src="scripts/common/directives/fixed-tab-topbar.drv.js"></script>
-<script src="scripts/common/directives/focus-on.drv.js"></script>
-<script src="scripts/common/directives/hard-phone-number-pattern.js"></script>
-<script src="scripts/common/directives/hard-reset-pattern.drv.js"></script>
-<script src="scripts/common/directives/invalid-when.drv.js"></script>
-<script src="scripts/common/directives/is-uniq-validation.drv.js"></script>
-<script src="scripts/common/directives/isolated-form.drv.js"></script>
-<script src="scripts/common/directives/limit-lines.drv.js"></script>
-<script src="scripts/common/directives/loading-indicator/loading-indicator.ctrl.js"></script>
-<script src="scripts/common/directives/make-dirty-on-blur.drv.js"></script>
-<script src="scripts/common/directives/max-length-word.drv.js"></script>
-<script src="scripts/common/directives/modal-window-button.drv.js"></script>
-<script src="scripts/common/directives/navigation-bar.drv.js"></script>
-<script src="scripts/common/directives/on-finish-render.drv.js"></script>
-<script src="scripts/common/directives/on-press-enter.drv.js"></script>
-<script src="scripts/common/directives/only-numbers-input.drv.js"></script>
-<script src="scripts/common/directives/open-dropdown-on-model-change.js"></script>
-<script src="scripts/common/directives/phone-numbers/phone-numbers.drv.js"></script>
-<script src="scripts/common/directives/fast-repeat.drv.js"></script>
-<script src="scripts/common/directives/pie-chart.drv.js"></script>
-<script src="scripts/common/directives/priceDelimiters.fltr.js"></script>
-<script src="scripts/common/directives/product-autocomplete.drv.js"></script>
-<script src="scripts/common/directives/product-name.filt.js"></script>
-<script src="scripts/common/directives/products-list.drv.js"></script>
-<script src="scripts/common/directives/qt-checkbox.drv.js"></script>
-<script src="scripts/common/directives/qt-create-new-button.drv.js"></script>
-<script src="scripts/common/directives/qt-custom-popover-template.drv.js"></script>
-<script src="scripts/common/directives/qt-custom-popover.drv.js"></script>
-<script src="scripts/common/directives/qt-data-time-picker.drv.js"></script>
-<script src="scripts/common/directives/qt-date-range-picker.drv.js"></script>
-<script src="scripts/common/directives/qt-dropdown-typehead/qt-dropdown-typehead.drv.js"></script>
-<script src="scripts/common/directives/qt-hide-dropdown.drv.js"></script>
-<script src="scripts/common/directives/qt-nano-scroller.drv.js"></script>
-<script src="scripts/common/directives/qt-sidebar.drv.js"></script>
-<script src="scripts/common/directives/qt-to-fixed.drv.js"></script>
-<script src="scripts/common/directives/qt-toggle-slider.drv.js"></script>
-<script src="scripts/common/directives/qt-typeahead-async-show-on-focus.drv.js"></script>
-<script src="scripts/common/directives/qt-typeahead-show-on-focus.drv.js"></script>
-<script src="scripts/common/directives/replace-whitespace.drv.js"></script>
-<script src="scripts/common/directives/report-menu/report-menu.drv.js"></script>
-<script src="scripts/common/directives/reportTime.fltr.js"></script>
-<script src="scripts/common/directives/restore-from.js"></script>
-<script src="scripts/common/directives/scroll-pane.js"></script>
-<script src="scripts/common/directives/scroll-to-error-fild.drv.js"></script>
-<script src="scripts/common/directives/scroll-to-form.drv.js"></script>
-<script src="scripts/common/directives/scroll-to-product.drv.js"></script>
-<script src="scripts/common/directives/scrollPagination.drv.js"></script>
-<script src="scripts/common/directives/scrollTo.drv.js"></script>
-<script src="scripts/common/directives/select-taxes/select-taxes.drv.js"></script>
-<script src="scripts/common/directives/service-quantity-picker.drv.js"></script>
-<script src="scripts/common/directives/set-height.drv.js"></script>
-<script src="scripts/common/directives/show-model-element.drv.js"></script>
-<script src="scripts/common/directives/show-on-drag-start.drv.js"></script>
-<script src="scripts/common/directives/show-tooltip.drv.js"></script>
-<script src="scripts/common/directives/smart-dropdown-menu-position.drv.js"></script>
-<script src="scripts/common/directives/sticky-products-header.drv.js"></script>
-<script src="scripts/common/directives/stop-propagation.drv.js"></script>
-<script src="scripts/common/directives/text-editor.drv.js"></script>
-<script src="scripts/common/directives/ticket-tags/set-focus-on-var-change.drv.js"></script>
-<script src="scripts/common/directives/ticket-tags/ticket-tags.drv.js"></script>
-<script src="scripts/common/directives/time-zone-autocomplete/time-zone-autocomplete.drv.js"></script>
-<script src="scripts/common/directives/toFixed.fltr.js"></script>
-<script src="scripts/common/directives/toggle-mobile-company.drv.js"></script>
-<script src="scripts/common/directives/trimmed-popover.drv.js"></script>
-<script src="scripts/common/directives/typeahead-input-icon.drv.js"></script>
-<script src="scripts/common/directives/user-notification.drv.js"></script>
-<script src="scripts/common/directives/welcome-wizard/welcome-wizard.drv.js"></script>
-<script src="scripts/common/directives/zoom-slider/zoom-slider.drv.js"></script>
-<script src="scripts/common/services/local/google-map.srv.js"></script>
-<script src="scripts/common/services/local/new-confirmation.js"></script>
-<script src="scripts/common/services/local/permissions.srv.js"></script>
-<script src="scripts/common/services/local/phone-formats.srv.js"></script>
-<script src="scripts/common/services/local/remote-access.srv.js"></script>
-<script src="scripts/common/services/local/shared-state.srv.js"></script>
-<script src="scripts/common/services/local/ticketMobileSettings.srv.js"></script>
-<script src="scripts/common/services/local/tickets-permissions.srv.js"></script>
-<script src="scripts/common/services/local/user-confirmations.srv.js"></script>
-<script src="scripts/common/services/local/user-notification.srv.js"></script>
-<script src="scripts/common/services/rest/address.js"></script>
-<script src="scripts/common/services/rest/billable.js"></script>
-<script src="scripts/common/services/rest/colors.js"></script>
-<script src="scripts/common/services/rest/common.js"></script>
-<script src="scripts/common/services/rest/companies.js"></script>
-<script src="scripts/common/services/rest/constants.js"></script>
-<script src="scripts/common/services/rest/custom-storage.js"></script>
-<script src="scripts/common/services/rest/devices.js"></script>
-<script src="scripts/common/services/rest/drafts.js"></script>
-<script src="scripts/common/services/rest/email.js"></script>
-<script src="scripts/common/services/rest/files.js"></script>
-<script src="scripts/common/services/rest/global-search.js"></script>
-<script src="scripts/common/services/rest/password-manager.js"></script>
-<script src="scripts/common/services/rest/products.js"></script>
-<script src="scripts/common/services/rest/realtime.js"></script>
-<script src="scripts/common/services/rest/reports.js"></script>
-<script src="scripts/common/services/rest/services.js"></script>
-<script src="scripts/common/services/rest/statistics.js"></script>
-<script src="scripts/common/services/rest/subscriptions.js"></script>
-<script src="scripts/common/services/rest/tags.js"></script>
-<script src="scripts/common/services/rest/taxes.js"></script>
-<script src="scripts/common/services/rest/tickets.js"></script>
-<script src="scripts/common/services/rest/users.js"></script>
-<script src="scripts/core/billable/prevent-hash-change.drv.js"></script>
-<script src="scripts/core/companies/company-profile/company-address-autocomplete.drv.js"></script>
-<script src="scripts/core/companies/company-profile/company-profile.ctrl.js"></script>
-<script src="scripts/core/companies/company-profile/download-agent/download-agent.ctrl.js"></script>
-<script src="scripts/core/companies/company-profile/tabs/bulk-option.ctrl.js"></script>
-<script src="scripts/core/companies/company-profile/tabs/company-bulk-option.drv.js"></script>
-<script src="scripts/core/companies/company-profile/tabs/company-profile-tabs.ctrl.js"></script>
-<script src="scripts/core/companies/company-profile/tabs/confirmModal.ctrl.js"></script>
-<script src="scripts/core/companies/company-profile/tabs/dashboard/dashboard.ctrl.js"></script>
-<script src="scripts/core/companies/company-profile/tabs/dashboard/map-modal.ctrl.js"></script>
-<script src="scripts/core/companies/company-profile/tabs/devices-tab/convert-to-pdf.drv.js"></script>
-<script src="scripts/core/companies/company-profile/tabs/devices-tab/device-reports.ctrl.js"></script>
-<script src="scripts/core/companies/company-profile/tabs/devices-tab/devices-tab.ctrl.js"></script>
-<script src="scripts/core/companies/company-profile/tabs/network-scan-tab/network-scan-item.ctrl.js"></script>
-<script src="scripts/core/companies/company-profile/tabs/network-scan-tab/network-scan-tab.ctrl.js"></script>
-<script src="scripts/core/companies/company-profile/tabs/unknownFilter.fltr.js"></script>
-<script src="scripts/core/companies/confirm-modal.ctrl.js"></script>
-<script src="scripts/core/companies/download-agent.ctrl.js"></script>
-<script src="scripts/core/devices/company-agent-devices/company-agent-devices.ctrl.js"></script>
-<script src="scripts/core/devices/company-device-devices/company-device-devices.ctrl.js"></script>
-<script src="scripts/core/devices/company-network-devices/company-network-device.ctrl.js"></script>
-<script src="scripts/core/devices/device-settings/device-settings.ctrl.js"></script>
-<script src="scripts/core/header/create-new-entity/create-company/create-company.ctrl.js"></script>
-<script src="scripts/core/header/create-new-entity/create-email/create-email.ctrl.js"></script>
-<script src="scripts/core/header/create-new-entity/create-new-entity.ctrl.js"></script>
-<script src="scripts/core/header/create-new-entity/create-new-entity.drv.js"></script>
-<script src="scripts/core/header/create-new-entity/create-product/create-product.ctrl.js"></script>
-<script src="scripts/core/header/create-new-entity/create-service/create-service.crtl.js"></script>
-<script src="scripts/core/header/create-new-entity/create-preview/create-preview.crtl.js"></script>
-<script src="scripts/core/header/create-new-entity/create-ticket/create-ticket.ctrl.js"></script>
-<script src="scripts/core/header/create-new-entity/create-user/create-user.ctrl.js"></script>
-<script src="scripts/core/header/global-search/adjust-height.drv.js"></script>
-<script src="scripts/core/header/global-search/global-search.ctrl.js"></script>
-<script src="scripts/core/header/global-search/highlight-text.drv.js"></script>
-<script src="scripts/core/header/global-search/old/adjust-height.drv.js"></script>
-<script src="scripts/core/header/global-search/old/highlight-text.drv.js"></script>
-<script src="scripts/core/header/header-drafts-bulk.ctrl.js"></script>
-<script src="scripts/core/header/header-quick-support.ctrl.js"></script>
-<script src="scripts/core/header/header-tickets-bulk.ctrl.js"></script>
-<script src="scripts/core/header/header.ctrl.js"></script>
-<script src="scripts/core/header/logout-btn.drv.js"></script>
-<script src="scripts/core/left-panel/customer-ticket-report/customer-ticket-report.ctrl.js"></script>
-<script src="scripts/core/left-panel/left-panel.ctrl.js"></script>
-<script src="scripts/core/quick-support/copy-key.drv.js"></script>
-<script src="scripts/core/quick-support/copy-url.drv.js"></script>
-<script src="scripts/core/quick-support/open-mail-manager.drv.js"></script>
-<script src="scripts/core/quick-support/quick-support.ctrl.js"></script>
-<script src="scripts/core/reports/reports.ctrl.js"></script>
-<script src="scripts/core/right-panel/device-context-menu/device-context-menu.drv.js"></script>
-<script src="scripts/core/settings/taxes/taxModal.ctrl.js"></script>
-<script src="scripts/core/settings/taxes/taxes.ctrl.js"></script>
-<script src="scripts/core/tickets/assign-user/assign-user-button.drv.js"></script>
-<script src="scripts/core/tickets/assign-user/assign-user.ctrl.js"></script>
-<script src="scripts/core/tickets/assign-user/assign-user.drv.js"></script>
-<script src="scripts/core/tickets/services/ticket-add-update-service-list.drv.js"></script>
-<script src="scripts/core/tickets/ticket-update/update-add-user.ctrl.js"></script>
-<script src="scripts/core/tickets/ticket-update/update-add-user.drv.js"></script>
-<script src="scripts/core/assign-user-list/assign-user-list.ctrl.js"></script>
-<script type="text/javascript" src="https://momentjs.com/downloads/moment-timezone.min.js"></script>
-
-<!-- endbuild -->
-
-<!--build date script-->
-<script>window.qtBuildDate = 'dateOfLastBuild'</script>
-<!--end build date script-->
-
-</body>
+    <head>
+        <meta
+            http-equiv="expires"
+            content="0"
+        >
+        <meta charset="utf-8">
+        <meta
+            http-equiv="X-UA-Compatible"
+            content="IE=edge"
+        >
+        <meta
+            http-equiv="Content-Type"
+            content="text/html;charset=utf-8"
+        >
+        <title>Quicktech Admin</title>
+        <meta
+            name="description"
+            content
+        >
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1"
+        >
+        <!-- build:css(.tmp) styles/main.css -->
+        <link rel="stylesheet" href="styles/admin-customer-list.css">
+        <link rel="stylesheet" href="styles/admin-tickets.css">
+        <link rel="stylesheet" href="styles/bootstrap-datetimepicker.css">
+        <link rel="stylesheet" href="styles/common.dropdown.css">
+        <link rel="stylesheet" href="styles/common.icons.css">
+        <link rel="stylesheet" href="styles/common.left.css">
+        <link rel="stylesheet" href="styles/common.lists.css">
+        <link rel="stylesheet" href="styles/common.right.css">
+        <link rel="stylesheet" href="styles/common.tables.css">
+        <link rel="stylesheet" href="styles/common.ticket.add.css">
+        <link rel="stylesheet" href="styles/common.ticket.alerts.css">
+        <link rel="stylesheet" href="styles/common.ticket.attachments.css">
+        <link rel="stylesheet" href="styles/common.ticket.email.css">
+        <link rel="stylesheet" href="styles/common.ticket.header.css">
+        <link rel="stylesheet" href="styles/common.ticket.list.css">
+        <link rel="stylesheet" href="styles/common.ticket.updates.css">
+        <link rel="stylesheet" href="styles/common.tickets.wells.css">
+        <link rel="stylesheet" href="styles/common.top.css">
+        <link rel="stylesheet" href="styles/companies.css">
+        <link rel="stylesheet" href="styles/nanoscroller.css">
+        <link rel="stylesheet" href="styles/nouislider.css">
+        <link rel="stylesheet" href="styles/styles.css">
+        <link rel="stylesheet" href="styles/tokenfield.css">
+        <link rel="stylesheet" href="styles/users.css">
+        <link rel="stylesheet" href="styles/vendors.css">
+        <link rel='stylesheet' href='styles/crop.css'>
+        <link rel='stylesheet' href='styles/fixed.css'>
+        <link rel='stylesheet' href='styles/invoice-modal-tech.css'>
+        <link rel='stylesheet' href='styles/invoice-page.css'>
+        <link rel='stylesheet' href='styles/settings-company-info.css'>
+        <link rel='stylesheet' href='styles/quick-support.css'>
+        <link rel='stylesheet' href='styles/tax-rates.css'>
+        <link rel='stylesheet' href='styles/company-profile.css'>
+        <link rel='stylesheet' href='styles/time-zone-autocomplete.css'>
+        <link rel='stylesheet' href='styles/ticket-tags.css'>
+        <link rel='stylesheet' href='styles/loading-indicator.css'>
+        <link rel='stylesheet' href='styles/button-with-loading-indicator.css'>
+        <link rel="stylesheet" href="styles/settings.css">
+        <link rel='stylesheet' href='styles/permissions-management.css'>
+        <link rel='stylesheet' href='styles/tracking-devices.css'>
+        <link rel='stylesheet' href='styles/left-panel.css'>
+        <link rel='stylesheet' href='styles/agent-install.css'>
+        <link rel='stylesheet' href='styles/datepicker.css'>
+        <link rel='stylesheet' href='styles/feed-back.css'>
+        <link rel='stylesheet' href='styles/welcome-wizard.css'>
+        <link rel='stylesheet' href='styles/modal-popup.css'>
+        <link rel='stylesheet' href='styles/dashboard.css'>
+        <link rel='stylesheet' href='styles/charts.css'>
+        <link rel='stylesheet' href='styles/hardware-report.css'>
+        <link rel='stylesheet' href='styles/card-view.css'>
+        <link rel='stylesheet' href='styles/password-manager.css'>
+        <link rel='stylesheet' href='styles/customer-report.css'>
+        <link rel='stylesheet' href='styles/new-style.css'>
+        <link rel="stylesheet" href="styles/nv.d3.css">
+        <!-- endbuild -->
+    </head>
+    <body ng-app="quicktech.admin">
+        <customer-list></customer-list>
+        <script src="/bower_components/jquery/dist/jquery.js"></script>
+        <script src="/bower_components/jquery-mousewheel/jquery.mousewheel.js"></script>
+        <script src="/bower_components/angular/angular.js"></script>
+        <script src="/bower_components/angular-messages/angular-messages.js"></script>
+        <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+        <script src="/bower_components/angular-ui-select/dist/select.js"></script>
+        <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+        <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+        <script src="/bower_components/angular-animate/angular-animate.js"></script>
+        <script src="/bower_components/tether/dist/js/tether.js"></script>
+        <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="/bower_components/bootstrap-tokenfield/dist/bootstrap-tokenfield.js"></script>
+        <script src="/bower_components/bootstrap3-typeahead/bootstrap3-typeahead.js"></script>
+        <script src="/bower_components/bootstrap-select/dist/js/bootstrap-select.js"></script>
+        <script src="/bower_components/moment/min/moment-with-locales.js"></script>
+        <script src="/bower_components/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"></script>
+        <script src="/bower_components/typeahead.js/dist/typeahead.bundle.js"></script>
+        <script src="/bower_components/nanoscroller/bin/javascripts/jquery.nanoscroller.js"></script>
+        <script src="/bower_components/sockjs-client/dist/sockjs.js"></script>
+        <script src="/bower_components/stomp-websocket/lib/stomp.js"></script>
+        <script src="/bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+        <script src="/bower_components/d3/d3.js"></script>
+        <script src="/bower_components/ng-cropper/dist/ngCropper.all.js"></script>
+        <script src="/bower_components/nvd3/build/nv.d3.js"></script>
+        <script src="/bower_components/angular-nvd3/dist/angular-nvd3.js"></script>
+        <script src="scripts/js/vendors/jquery.jscrollpane.js"></script>
+        <script src="scripts/js/vendors/modernizr.js"></script>
+        <script src="scripts/js/vendors/editor/jquery.hotkeys.js"></script>
+        <script src="scripts/js/vendors/editor/editor.js"></script>
+        <script src="scripts/js/vendors/pie-chart.js"></script>
+        <script src="scripts/js/vendors/easeljs-0.6.1.min.js"></script>
+        <script src="scripts/js/vendors/jquery.fileUploader.js"></script>
+        <script src="scripts/js/vendors/jquery.autocomplete.js"></script>
+        <script src="scripts/js/vendors/jquery.servicesMoving.js"></script>
+        <script src="scripts/js/vendors/jquery.productAutocomplete.js"></script>
+        <script src="scripts/js/vendors/md5-min.js"></script>
+        <script src="scripts/js/vendors/nouislider.min.js"></script>
+        <script src="scripts/js/vendors/date-range-picker/datepicker.js"></script>
+        <script src="scripts/js/vendors/date-range-picker/datepicker.en.js"></script>
+        <!-- endbuild -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbP4DFpz4f9YcXMWUjdkOdyArX2peNt8s&v=3.exp&libraries=places&language=en"></script>
+        <script
+            type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/canvg/1.4/rgbcolor.min.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/stackblur-canvas/1.4.1/stackblur.min.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="https://cdn.jsdelivr.net/npm/canvg/dist/browser/canvg.min.js"
+        ></script>
+        <!-- build:js({.tmp,ng1}) scripts/custom.js -->
+        <script src="scripts/js/handlebars-v3.0.3.js"></script>
+        <!-- endbuild -->
+        <!-- build:js({.tmp,ng1}) scripts/scripts.js -->
+        <script src="scripts/admin/app-admin.mdl.js"></script>
+        <script src="scripts/common/directives/directives.mdl.js"></script>
+        <script src="scripts/common/services/local/local-services.mdl.js"></script>
+        <script src="scripts/common/services/rest/rest-services.mdl.js"></script>
+        <script src="scripts/core/app.mdl.js"></script>
+        <script src="scripts/core/billable/billable.mdl.js"></script>
+        <script src="scripts/core/companies/companies.mdl.js"></script>
+        <script src="scripts/core/dashboards/dashboards.mdl.js"></script>
+        <script src="scripts/core/devices/devices.mdl.js"></script>
+        <script src="scripts/core/left-panel/left-panel.mdl.js"></script>
+        <script src="scripts/core/products/products.mdl.js"></script>
+        <script src="scripts/core/quick-support/quick-support.mdl.js"></script>
+        <script src="scripts/core/reports/reports.mdl.js"></script>
+        <script src="scripts/core/right-panel/right-panel.mdl.js"></script>
+        <script src="scripts/core/service-agreements/service-agreements.mdl.js"></script>
+        <script src="scripts/core/settings/settings.mdl.js"></script>
+        <script src="scripts/core/tickets/tickets.mdl.js"></script>
+        <script src="scripts/admin/admin-services/customer-list.js"></script>
+        <script src="scripts/admin/customer-list/customer-list.drv.js"></script>
+        <script src="scripts/common/directives/add-create-new-button.drv.js"></script>
+        <script src="scripts/common/directives/addOnFocus.drv.js"></script>
+        <script src="scripts/common/directives/address-autocomplete.drv.js"></script>
+        <script src="scripts/common/directives/animation-change-location.drv.js"></script>
+        <script src="scripts/common/directives/append-el-to-body.drv.js"></script>
+        <script src="scripts/common/directives/append-html-to-body.drv.js"></script>
+        <script src="scripts/common/directives/append-to-top.drv.js"></script>
+        <script src="scripts/common/directives/array-maxlength.drv.js"></script>
+        <script src="scripts/common/directives/array-minlength.drv.js"></script>
+        <script src="scripts/common/directives/attach-files.drv.js"></script>
+        <script src="scripts/common/directives/auto-expand.drv.js"></script>
+        <script src="scripts/common/directives/avatar/avatar.drv.js"></script>
+        <script src="scripts/common/directives/button-with-loading-indicator/button-with-loading-indicator.drv.js"></script>
+        <script src="scripts/common/directives/charts/axis.drv.js"></script>
+        <script src="scripts/common/directives/charts/bars.drv.js"></script>
+        <script src="scripts/common/directives/charts/chart.drv.js"></script>
+        <script src="scripts/common/directives/charts/data-restriction.drv.js"></script>
+        <script src="scripts/common/directives/charts/line.drv.js"></script>
+        <script src="scripts/common/directives/charts/pie.drv.js"></script>
+        <script src="scripts/common/directives/charts/stacked-bars.drv.js"></script>
+        <script src="scripts/common/directives/click-outside.drv.js"></script>
+        <script src="scripts/common/directives/count-nodes-in-line.drv.js"></script>
+        <script src="scripts/common/directives/crop-image/crop-image.drv.js"></script>
+        <script src="scripts/common/directives/custom-disabled.drv.js"></script>
+        <script src="scripts/common/directives/custom-ng-show-if.drv.js"></script>
+        <script src="scripts/common/directives/custom-popover.drv.js"></script>
+        <script src="scripts/common/directives/custom-selection.js"></script>
+        <script src="scripts/common/directives/custom-style.drv.js"></script>
+        <script src="scripts/common/directives/date-time-picker-with-period.js"></script>
+        <script src="scripts/common/directives/desktop-mobile-function.drv.js"></script>
+        <script src="scripts/common/directives/dragUpload.drv.js"></script>
+        <script src="scripts/common/directives/dropdown-arrow-navigation.js"></script>
+        <script src="scripts/common/directives/duration-filter.fltr.js"></script>
+        <script src="scripts/common/directives/email-to.drv.js"></script>
+        <script src="scripts/common/directives/execute-when-outfocused.js"></script>
+        <script src="scripts/common/directives/feedback-form/feedback-form.drv.js"></script>
+        <script src="scripts/common/directives/file-size-filter.js"></script>
+        <script src="scripts/common/directives/fixed-block-top.js"></script>
+        <script src="scripts/common/directives/fixed-tab-topbar.drv.js"></script>
+        <script src="scripts/common/directives/focus-on.drv.js"></script>
+        <script src="scripts/common/directives/hard-phone-number-pattern.js"></script>
+        <script src="scripts/common/directives/hard-reset-pattern.drv.js"></script>
+        <script src="scripts/common/directives/invalid-when.drv.js"></script>
+        <script src="scripts/common/directives/is-uniq-validation.drv.js"></script>
+        <script src="scripts/common/directives/isolated-form.drv.js"></script>
+        <script src="scripts/common/directives/limit-lines.drv.js"></script>
+        <script src="scripts/common/directives/loading-indicator/loading-indicator.ctrl.js"></script>
+        <script src="scripts/common/directives/make-dirty-on-blur.drv.js"></script>
+        <script src="scripts/common/directives/max-length-word.drv.js"></script>
+        <script src="scripts/common/directives/modal-window-button.drv.js"></script>
+        <script src="scripts/common/directives/navigation-bar.drv.js"></script>
+        <script src="scripts/common/directives/on-finish-render.drv.js"></script>
+        <script src="scripts/common/directives/on-press-enter.drv.js"></script>
+        <script src="scripts/common/directives/only-numbers-input.drv.js"></script>
+        <script src="scripts/common/directives/open-dropdown-on-model-change.js"></script>
+        <script src="scripts/common/directives/phone-numbers/phone-numbers.drv.js"></script>
+        <script src="scripts/common/directives/fast-repeat.drv.js"></script>
+        <script src="scripts/common/directives/pie-chart.drv.js"></script>
+        <script src="scripts/common/directives/priceDelimiters.fltr.js"></script>
+        <script src="scripts/common/directives/product-autocomplete.drv.js"></script>
+        <script src="scripts/common/directives/product-name.filt.js"></script>
+        <script src="scripts/common/directives/products-list.drv.js"></script>
+        <script src="scripts/common/directives/qt-checkbox.drv.js"></script>
+        <script src="scripts/common/directives/qt-create-new-button.drv.js"></script>
+        <script src="scripts/common/directives/qt-custom-popover-template.drv.js"></script>
+        <script src="scripts/common/directives/qt-custom-popover.drv.js"></script>
+        <script src="scripts/common/directives/qt-data-time-picker.drv.js"></script>
+        <script src="scripts/common/directives/qt-date-range-picker.drv.js"></script>
+        <script src="scripts/common/directives/qt-dropdown-typehead/qt-dropdown-typehead.drv.js"></script>
+        <script src="scripts/common/directives/qt-hide-dropdown.drv.js"></script>
+        <script src="scripts/common/directives/qt-nano-scroller.drv.js"></script>
+        <script src="scripts/common/directives/qt-sidebar.drv.js"></script>
+        <script src="scripts/common/directives/qt-to-fixed.drv.js"></script>
+        <script src="scripts/common/directives/qt-toggle-slider.drv.js"></script>
+        <script src="scripts/common/directives/qt-typeahead-async-show-on-focus.drv.js"></script>
+        <script src="scripts/common/directives/qt-typeahead-show-on-focus.drv.js"></script>
+        <script src="scripts/common/directives/replace-whitespace.drv.js"></script>
+        <script src="scripts/common/directives/report-menu/report-menu.drv.js"></script>
+        <script src="scripts/common/directives/reportTime.fltr.js"></script>
+        <script src="scripts/common/directives/restore-from.js"></script>
+        <script src="scripts/common/directives/scroll-pane.js"></script>
+        <script src="scripts/common/directives/scroll-to-error-fild.drv.js"></script>
+        <script src="scripts/common/directives/scroll-to-form.drv.js"></script>
+        <script src="scripts/common/directives/scroll-to-product.drv.js"></script>
+        <script src="scripts/common/directives/scrollPagination.drv.js"></script>
+        <script src="scripts/common/directives/scrollTo.drv.js"></script>
+        <script src="scripts/common/directives/select-taxes/select-taxes.drv.js"></script>
+        <script src="scripts/common/directives/service-quantity-picker.drv.js"></script>
+        <script src="scripts/common/directives/set-height.drv.js"></script>
+        <script src="scripts/common/directives/show-model-element.drv.js"></script>
+        <script src="scripts/common/directives/show-on-drag-start.drv.js"></script>
+        <script src="scripts/common/directives/show-tooltip.drv.js"></script>
+        <script src="scripts/common/directives/smart-dropdown-menu-position.drv.js"></script>
+        <script src="scripts/common/directives/sticky-products-header.drv.js"></script>
+        <script src="scripts/common/directives/stop-propagation.drv.js"></script>
+        <script src="scripts/common/directives/text-editor.drv.js"></script>
+        <script src="scripts/common/directives/ticket-tags/set-focus-on-var-change.drv.js"></script>
+        <script src="scripts/common/directives/ticket-tags/ticket-tags.drv.js"></script>
+        <script src="scripts/common/directives/time-zone-autocomplete/time-zone-autocomplete.drv.js"></script>
+        <script src="scripts/common/directives/toFixed.fltr.js"></script>
+        <script src="scripts/common/directives/toggle-mobile-company.drv.js"></script>
+        <script src="scripts/common/directives/trimmed-popover.drv.js"></script>
+        <script src="scripts/common/directives/typeahead-input-icon.drv.js"></script>
+        <script src="scripts/common/directives/user-notification.drv.js"></script>
+        <script src="scripts/common/directives/welcome-wizard/welcome-wizard.drv.js"></script>
+        <script src="scripts/common/directives/zoom-slider/zoom-slider.drv.js"></script>
+        <script src="scripts/common/services/local/google-map.srv.js"></script>
+        <script src="scripts/common/services/local/new-confirmation.js"></script>
+        <script src="scripts/common/services/local/permissions.srv.js"></script>
+        <script src="scripts/common/services/local/phone-formats.srv.js"></script>
+        <script src="scripts/common/services/local/remote-access.srv.js"></script>
+        <script src="scripts/common/services/local/shared-state.srv.js"></script>
+        <script src="scripts/common/services/local/ticketMobileSettings.srv.js"></script>
+        <script src="scripts/common/services/local/tickets-permissions.srv.js"></script>
+        <script src="scripts/common/services/local/user-confirmations.srv.js"></script>
+        <script src="scripts/common/services/local/user-notification.srv.js"></script>
+        <script src="scripts/common/services/rest/address.js"></script>
+        <script src="scripts/common/services/rest/billable.js"></script>
+        <script src="scripts/common/services/rest/colors.js"></script>
+        <script src="scripts/common/services/rest/common.js"></script>
+        <script src="scripts/common/services/rest/companies.js"></script>
+        <script src="scripts/common/services/rest/constants.js"></script>
+        <script src="scripts/common/services/rest/custom-storage.js"></script>
+        <script src="scripts/common/services/rest/devices.js"></script>
+        <script src="scripts/common/services/rest/drafts.js"></script>
+        <script src="scripts/common/services/rest/email.js"></script>
+        <script src="scripts/common/services/rest/files.js"></script>
+        <script src="scripts/common/services/rest/global-search.js"></script>
+        <script src="scripts/common/services/rest/password-manager.js"></script>
+        <script src="scripts/common/services/rest/products.js"></script>
+        <script src="scripts/common/services/rest/realtime.js"></script>
+        <script src="scripts/common/services/rest/reports.js"></script>
+        <script src="scripts/common/services/rest/services.js"></script>
+        <script src="scripts/common/services/rest/statistics.js"></script>
+        <script src="scripts/common/services/rest/subscriptions.js"></script>
+        <script src="scripts/common/services/rest/tags.js"></script>
+        <script src="scripts/common/services/rest/taxes.js"></script>
+        <script src="scripts/common/services/rest/tickets.js"></script>
+        <script src="scripts/common/services/rest/users.js"></script>
+        <script src="scripts/core/billable/prevent-hash-change.drv.js"></script>
+        <script src="scripts/core/companies/company-profile/company-address-autocomplete.drv.js"></script>
+        <script src="scripts/core/companies/company-profile/company-profile.ctrl.js"></script>
+        <script src="scripts/core/companies/company-profile/download-agent/download-agent.ctrl.js"></script>
+        <script src="scripts/core/companies/company-profile/tabs/bulk-option.ctrl.js"></script>
+        <script src="scripts/core/companies/company-profile/tabs/company-bulk-option.drv.js"></script>
+        <script src="scripts/core/companies/company-profile/tabs/company-profile-tabs.ctrl.js"></script>
+        <script src="scripts/core/companies/company-profile/tabs/confirmModal.ctrl.js"></script>
+        <script src="scripts/core/companies/company-profile/tabs/dashboard/dashboard.ctrl.js"></script>
+        <script src="scripts/core/companies/company-profile/tabs/dashboard/map-modal.ctrl.js"></script>
+        <script src="scripts/core/companies/company-profile/tabs/devices-tab/convert-to-pdf.drv.js"></script>
+        <script src="scripts/core/companies/company-profile/tabs/network-scan-tab/network-scan-item.ctrl.js"></script>
+        <script src="scripts/core/companies/company-profile/tabs/network-scan-tab/network-scan-tab.ctrl.js"></script>
+        <script src="scripts/core/companies/company-profile/tabs/unknownFilter.fltr.js"></script>
+        <script src="scripts/core/companies/confirm-modal.ctrl.js"></script>
+        <script src="scripts/core/companies/download-agent.ctrl.js"></script>
+        <script src="scripts/core/dashboards/tickets-dashboard/tickets-dashboard.ctrl.js"></script>
+        <script src="scripts/core/devices/company-device-devices/company-device-devices.ctrl.js"></script>
+        <script src="scripts/core/devices/company-network-devices/company-network-device.ctrl.js"></script>
+        <script src="scripts/core/header/create-new-entity/create-company/create-company.ctrl.js"></script>
+        <script src="scripts/core/header/create-new-entity/create-email/create-email.ctrl.js"></script>
+        <script src="scripts/core/header/create-new-entity/create-new-entity.ctrl.js"></script>
+        <script src="scripts/core/header/create-new-entity/create-new-entity.drv.js"></script>
+        <script src="scripts/core/header/create-new-entity/create-product/create-product.ctrl.js"></script>
+        <script src="scripts/core/header/create-new-entity/create-service/create-service.crtl.js"></script>
+        <script src="scripts/core/header/create-new-entity/create-preview/create-preview.crtl.js"></script>
+        <script src="scripts/core/header/create-new-entity/create-ticket/create-ticket.ctrl.js"></script>
+        <script src="scripts/core/header/create-new-entity/create-user/create-user.ctrl.js"></script>
+        <script src="scripts/core/header/global-search/adjust-height.drv.js"></script>
+        <script src="scripts/core/header/global-search/global-search.ctrl.js"></script>
+        <script src="scripts/core/header/global-search/highlight-text.drv.js"></script>
+        <script src="scripts/core/header/global-search/old/adjust-height.drv.js"></script>
+        <script src="scripts/core/header/global-search/old/highlight-text.drv.js"></script>
+        <script src="scripts/core/header/header-drafts-bulk.ctrl.js"></script>
+        <script src="scripts/core/header/header-quick-support.ctrl.js"></script>
+        <script src="scripts/core/header/header-tickets-bulk.ctrl.js"></script>
+        <script src="scripts/core/header/header.ctrl.js"></script>
+        <script src="scripts/core/header/logout-btn.drv.js"></script>
+        <script src="scripts/core/left-panel/customer-ticket-report/customer-ticket-report.ctrl.js"></script>
+        <script src="scripts/core/left-panel/left-panel.ctrl.js"></script>
+        <script src="scripts/core/quick-support/copy-key.drv.js"></script>
+        <script src="scripts/core/quick-support/copy-url.drv.js"></script>
+        <script src="scripts/core/quick-support/open-mail-manager.drv.js"></script>
+        <script src="scripts/core/quick-support/quick-support.ctrl.js"></script>
+        <script src="scripts/core/reports/reports.ctrl.js"></script>
+        <script src="scripts/core/settings/taxes/taxModal.ctrl.js"></script>
+        <script src="scripts/core/settings/taxes/taxes.ctrl.js"></script>
+        <script src="scripts/core/tickets/assign-user/assign-user-button.drv.js"></script>
+        <script src="scripts/core/tickets/assign-user/assign-user.ctrl.js"></script>
+        <script src="scripts/core/tickets/assign-user/assign-user.drv.js"></script>
+        <script src="scripts/core/tickets/services/ticket-add-update-service-list.drv.js"></script>
+        <script src="scripts/core/tickets/ticket-update/update-add-user.ctrl.js"></script>
+        <script src="scripts/core/tickets/ticket-update/update-add-user.drv.js"></script>
+        <script src="scripts/core/assign-user-list/assign-user-list.ctrl.js"></script>
+        <script
+            type="text/javascript"
+            src="https://momentjs.com/downloads/moment-timezone.min.js"
+        ></script>
+        <!-- endbuild -->
+        <!-- build date script -->
+        <script>window.qtBuildDate = 'dateOfLastBuild'</script>
+        <!-- end build date script -->
+    </body>
 </html>

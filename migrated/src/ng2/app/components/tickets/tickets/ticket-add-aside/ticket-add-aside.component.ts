@@ -4,7 +4,6 @@ import { TicketAdd } from '../class/ticket-add';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { TicketCreatedUser } from '../class/ticket-created-user';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
-import { DevicesSateService } from 'src/ng2/app/states/devices/devices-sate.service';
 import { SelectSearchComponent } from '../../../shared/select-search/select-search.component';
 import { TechUserItem } from '../../../shared/teh-users/class/tech-user-item';
 import { TitleListType } from '../tickets-header/class/title-list-type';
@@ -12,6 +11,7 @@ import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 import { TicketValidate } from '../class/ticket-validate';
 import { UploadAreaComponent } from '../../../shared/upload-area/upload-area.component';
 import { NotificationStateService } from '../../../shared/notification/services/notification-state.service';
+import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.service';
 
 
 
@@ -44,7 +44,7 @@ export class TicketAddAsideComponent implements OnInit {
   constructor(private ticketsStateService: TicketsStateService,
     private usersStateService: UsersStateService,
     private ticketsService: TicketsService,
-    private devicesSateService: DevicesSateService,
+    private devicesStateService: DevicesStateService,
     private notificationStateService: NotificationStateService,
     private elRef: ElementRef,
     public cd: ChangeDetectorRef,
@@ -122,7 +122,7 @@ export class TicketAddAsideComponent implements OnInit {
     if (item) {
       this.ticketAdd.createdUser.setCompanyId(item.id);
       this.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.company.id === item.id));
-      this.onGetDevices(this.devicesSateService.getAllDevices()[item.id]);
+      this.onGetDevices(this.devicesStateService.getAllDevices()[item.id]);
       let list = this.users.filter(item => item.subscription && item.subscription.ticketManager);
       list = list.map(item => {
         let user = new TechUserItem(item);
@@ -163,7 +163,7 @@ export class TicketAddAsideComponent implements OnInit {
       this.ticketValidate.resetClientUser();
 
     } else {
-    //  this.removeShareUser(this.ticketAdd.createdUser.id);
+      //  this.removeShareUser(this.ticketAdd.createdUser.id);
       this.ticketAdd.createdUser.clearUserData();
     }
   }

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ElementRef, OnDestroy } from '@angular/core';
-import { DevicesSateService } from 'src/ng2/app/states/devices/devices-sate.service';
+import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.service';
 import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ModalQuoteComponent } from 'src/ng2/app/services/modal/modal-quote/modal-quote.component';
@@ -27,12 +27,12 @@ export class TicketEditAsideDevicesComponent implements OnInit, OnDestroy {
     this.onGetDevices();
   };
   sub: Subscription = new Subscription();
-  constructor(private devicesSateService: DevicesSateService,
+  constructor(private devicesStateService: DevicesStateService,
     private constantsStateService: ConstantsStateService,
     private modalService: NgbModal,
     private elRef: ElementRef,
     config: NgbModalConfig,
-    private devicesService: DevicesService, ) {
+    private devicesService: DevicesService,) {
     config.backdrop = 'static';
     config.keyboard = false;
   }
@@ -40,7 +40,7 @@ export class TicketEditAsideDevicesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.onGetDevices();
-    let getOnRemoveConnection = this.devicesSateService.getOnRemoveConnection().subscribe(data => {
+    let getOnRemoveConnection = this.devicesStateService.getOnRemoveConnection().subscribe(data => {
       let remoteConnectPort = this.constantsStateService.getConstant('remote.connect.port'),
         restServerAddress = this.constantsStateService.getConstant('rest.server.address'),
         url = 'quicktech://connect?serverIP=' + restServerAddress + '&port=' + remoteConnectPort + '&sessionID=' + this.realSessionId;
@@ -74,10 +74,10 @@ export class TicketEditAsideDevicesComponent implements OnInit, OnDestroy {
     } else {
       return;
     }
-    let devices = (this.devicesSateService.getAllDevices()) ? this.devicesSateService.getAllDevices()[this.companyId] : [];
+    let devices = (this.devicesStateService.getAllDevices()) ? this.devicesStateService.getAllDevices()[this.companyId] : [];
 
-    if (devices)   devices.sort((a, b) => (a.hostName.toLowerCase() > b.hostName.toLowerCase()) ?
-    1 : ((b.hostName.toLowerCase() > a.hostName.toLowerCase()) ? -1 : 0));
+    if (devices) devices.sort((a, b) => (a.hostName.toLowerCase() > b.hostName.toLowerCase()) ?
+      1 : ((b.hostName.toLowerCase() > a.hostName.toLowerCase()) ? -1 : 0));
     this.devices = (devices) ? devices : [];
     this.reqDevices = (devices) ? devices : [];
   }

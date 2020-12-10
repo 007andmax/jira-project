@@ -353,6 +353,21 @@ import { TicketsBillableHoursWidgetComponent } from './components/tickets/ticket
 import { CompanyNetworkScanComponent } from './components/company-network-scan/company-network-scan.component';
 
 
+import { CompanyDevicesComponent } from './components/company-devices/company-devices.component';
+import { CompanyDevicesItemComponent } from './components/company-devices/company-devices-item/company-devices-item.component';
+import { CompanyDevicesHeaderComponent } from './components/company-devices/company-devices-header/company-devices-header.component';
+import { CompanyDevicesRemoteAccessComponent } from './components/company-devices/company-devices-remote-access/company-devices-remote-access.component';
+import { CompanyDevicesEditNameComponent } from './components/company-devices/company-devices-edit-name/company-devices-edit-name.component';
+import { CompanyDevicesAsideComponent } from './components/company-devices/company-devices-aside/company-devices-aside.component';
+import { CompanyDevicesAsideDeviceIconComponent } from './components/company-devices/company-devices-aside/company-devices-aside-device-icon/company-devices-aside-device-icon.component';
+import { CompanyDevicesAsideSystemComponent } from './components/company-devices/company-devices-aside/company-devices-aside-system/company-devices-aside-system.component';
+import { CompanyDevicesAsideNetworkTabComponent } from './components/company-devices/company-devices-aside/company-devices-aside-network-tab/company-devices-aside-network-tab.component';
+import { CompanyDevicesAsideSoftwareComponent } from './components/company-devices/company-devices-aside/company-devices-aside-software/company-devices-aside-software.component';
+import { CompanyDevicesAsideUpdatesComponent } from './components/company-devices/company-devices-aside/company-devices-aside-updates/company-devices-aside-updates.component';
+import { CompanyDevicesExistRemoteSessionsComponent } from './components/company-devices/company-devices-item/company-devices-exist-remote-sessions/company-devices-exist-remote-sessions.component';
+import { CompanyDevicesNoExistRemoteSessionsComponent } from './components/company-devices/company-devices-item/company-devices-no-exist-remote-sessions/company-devices-no-exist-remote-sessions.component';
+import { CompanyDevicesEditLabelComponent } from './components/company-devices/company-devices-edit-label/company-devices-edit-label.component';
+import { CompanyDevicesAsideTooltipComponent } from './components/company-devices/company-devices-aside/company-devices-aside-tooltip/company-devices-aside-tooltip.component';
 
 /**
  * declare angular
@@ -530,6 +545,10 @@ angular.module('quicktech')
   .directive(
     'dashboardBillingComponent',
     downgradeComponent({ component: DashboardBillingComponent })
+  )
+  .directive(
+    'companyDevicesComponent',
+    downgradeComponent({ component: CompanyDevicesComponent })
   )
   .directive(
     'companyContractsComponent',
@@ -858,7 +877,22 @@ angular.module('quicktech')
     TicketPriorityWidgetComponent,
     TimeOnTicketsWidgetComponent,
     TicketsBillableHoursWidgetComponent,
-    CompanyNetworkScanComponent
+    CompanyNetworkScanComponent,
+    CompanyDevicesComponent,
+    CompanyDevicesItemComponent,
+    CompanyDevicesHeaderComponent,
+    CompanyDevicesRemoteAccessComponent,
+    CompanyDevicesEditNameComponent,
+    CompanyDevicesAsideComponent,
+    CompanyDevicesAsideDeviceIconComponent,
+    CompanyDevicesAsideSystemComponent,
+    CompanyDevicesAsideNetworkTabComponent,
+    CompanyDevicesAsideSoftwareComponent,
+    CompanyDevicesAsideUpdatesComponent,
+    CompanyDevicesExistRemoteSessionsComponent,
+    CompanyDevicesNoExistRemoteSessionsComponent,
+    CompanyDevicesEditLabelComponent,
+    CompanyDevicesAsideTooltipComponent,
   ],
   imports: [
     BrowserModule,
@@ -952,7 +986,9 @@ angular.module('quicktech')
     DashboardBillingComponent,
     CompanyContractsComponent,
     TicketsDashboardComponent,
-    CompanyNetworkScanComponent
+    CompanyNetworkScanComponent,
+    CompanyDevicesComponent,
+    CompanyDevicesRemoteAccessComponent
     // RecurringTicketsComponent
   ],
   exports: [

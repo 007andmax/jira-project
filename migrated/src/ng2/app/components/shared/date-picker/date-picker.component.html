@@ -1,26 +1,88 @@
-<div class="input-group date-picker" ngbDropdown  [autoClose]="'outside'" #date="ngbDropdown" [placement]="placement">
-  <input *ngIf="type === 'INPUT'" [disabled]="disabled" type="text" class="pointer" placeholder="Select Date" ngbDropdownToggle id="dropdownDate" [value]="geTextDate()" readonly>
-  <div *ngIf="type === 'ICON'" placement="top" ngbTooltip="Date" class="ticket-updates__date-icon icon__assign-date" ngbDropdownToggle id="dropdownDate" >
-   
-  </div>
-  <i *ngIf="type === 'INPUT'" class="icn-16 icn-calendar-light pointer"></i>
-  <div ngbDropdownMenu aria-labelledby="dropdownDate" class="date-picker-container">
-    <ngb-datepicker [navigation]="'arrows'" [(ngModel)]="datepicker" (select)="selectDate($event)"
-     
-                    (navigate)="navigateDate($event)" [startDate]="datepicker"
-                    [ngModelOptions]="{standalone: true}"
-                    [minDate]="minDateDP"
-                    [maxDate]="maxDateDP"
-                    style="border: none"></ngb-datepicker>
-    <div class="date-picker-actions clearfix">
-      <div class="col-md-12 p-0 mb-5 d-f">
-        <button class="btn-new btn-primary-white" (click)="selectToday();">Start Now</button>
-        <button class="btn-new btn-primary-white" (click)="selectTomorrow();">Tomorrow</button>
-      </div>
-      <div class="col-md-12 p-0 d-f">
-        <button class="btn-new btn-primary-white" (click)="selectStartMonth();">Start of Month</button>
-        <button class="btn-new btn-primary-white" (click)="selectEndMonth();">End of Month</button>
-      </div>
+<div
+    class="input-group date-picker"
+    ngbDropdown
+    [autoClose]="'outside'"
+    #date="ngbDropdown"
+    [placement]="placement"
+>
+    <input
+        *ngIf="type === 'INPUT'"
+        [disabled]="disabled"
+        type="text"
+        class="pointer"
+        placeholder="Select Date"
+        ngbDropdownToggle
+        id="dropdownDate"
+        [value]="geTextDate()"
+        readonly
+    >
+    <div
+        *ngIf="type === 'ICON'"
+        placement="top"
+        ngbTooltip="Date"
+        class="ticket-updates__date-icon icon__assign-date"
+        ngbDropdownToggle
+        id="dropdownDate"
+    >
     </div>
-  </div>
+    <div
+        *ngIf="type === 'NO_ICON'"
+        placement="top"
+        ngbTooltip="Date"
+        class="ticket-updates__date-icon icon__assign-date hidden-icon"
+        ngbDropdownToggle
+        id="dropdownDate"
+    >
+    </div>
+    <i
+        *ngIf="type === 'INPUT'"
+        class="icn-16 icn-calendar-light pointer"
+    ></i>
+    <div
+        ngbDropdownMenu
+        aria-labelledby="dropdownDate"
+        class="date-picker-container"
+    >
+        <ngb-datepicker
+            [navigation]="'arrows'"
+            [(ngModel)]="datepicker"
+            (select)="selectDate($event)"
+            (navigate)="navigateDate($event)"
+            [startDate]="datepicker"
+            [ngModelOptions]="{standalone: true}"
+            [minDate]="minDateDP"
+            [maxDate]="maxDateDP"
+            style="border: none"
+        ></ngb-datepicker>
+        <div class="date-picker-actions clearfix">
+            <div class="col-md-12 p-0 mb-5 d-f">
+                <button
+                    class="btn-new btn-primary-white"
+                    (click)="selectToday();"
+                >
+                    Start Now
+                </button>
+                <button
+                    class="btn-new btn-primary-white"
+                    (click)="selectTomorrow();"
+                >
+                    Tomorrow
+                </button>
+            </div>
+            <div class="col-md-12 p-0 d-f">
+                <button
+                    class="btn-new btn-primary-white"
+                    (click)="selectStartMonth();"
+                >
+                    Start of Month
+                </button>
+                <button
+                    class="btn-new btn-primary-white"
+                    (click)="selectEndMonth();"
+                >
+                    End of Month
+                </button>
+            </div>
+        </div>
+    </div>
 </div>

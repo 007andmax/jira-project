@@ -1610,7 +1610,7 @@
             return 'inbox';
           } else if (url.indexOf('companies') > -1) {
             return 'companies';
-          } else if (url.indexOf('companyProfile') > -1 || url.indexOf('company-password-manager') > -1 || url.indexOf('company-user') > -1 || url.indexOf('company-products') > -1 || url.indexOf('company-tickets') > -1 || url.indexOf('company-contracts') > -1 || url.indexOf('company-network-scan') > -1) {
+          } else if (url.indexOf('companyProfile') > -1 || url.indexOf('company-password-manager') > -1 || url.indexOf('company-user') > -1 || url.indexOf('company-products') > -1 || url.indexOf('company-tickets') > -1 || url.indexOf('company-contracts') > -1 || url.indexOf('company-network-scan') > -1 || url.indexOf('company-devices') > -1) {
             return 'companyProfile';
           } else if (url.indexOf('users') > -1) {
             return 'users';

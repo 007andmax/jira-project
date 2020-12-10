@@ -1,0 +1,39 @@
+.company-devices-remote-modal {
+
+  .qt-modal__body {
+    padding: 20px 40px 56px 40px;
+  }
+
+  .qt-modal__close.icon__close {
+    right: 24px;
+    top: 24px;
+  }
+
+  &__title {
+    margin-bottom: 2px;
+  }
+  &__button {
+    min-width: 153px;
+  }
+  .remote-desctop-icon {
+    background-image: url(/ng2/assets/img/remote-desktop.svg);
+    width: 66px;
+    min-width: 66px;
+    height: 66px;
+  }
+  .connect-icon {
+    background-image: url(/ng2/assets/img/quicktech-connect.svg);
+    width: 66px;
+    min-width: 66px;
+    height: 66px;
+  }
+}
+.qt-list-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    float: none;
+    .loader {
+      margin: 0px 0px 0px 20px;
+    }
+}

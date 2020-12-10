@@ -1,0 +1,263 @@
+<tr [ngClass]="{'company-device-hover':device.agentId}">
+    <td class="company-devices-table__check">
+        <div class="d-f">
+            <label class="qt-checkbox">
+                <input
+                    type="checkbox"
+                    [(ngModel)]="device.selected"
+                    (change)="onSelectDevice()"
+                >
+                <span></span>
+            </label>
+        </div>
+    </td>
+    <td class="company-devices-table__device-type">
+        <div>
+            <div
+                ngbDropdown
+                placement="bottom-left"
+                container="body"
+                class="qt-ic-c qt-pointer device-type-icon qt-sz-24"
+                [ngClass]="{'icon__computer' : device.iconName === 'workstation' || !device.iconName,
+              'icon__tablet' : device.iconName === 'device',
+            'icon__printer' : device.iconName === 'printer',
+          'icon__server' : device.iconName === 'server',
+        '--ofline': !device.online }"
+                ngbDropdownToggle
+            >
+                <div ngbDropdownMenu>
+                    <ul class="icon-list qt-dropdown-menu --dropdown-icons device-type-dropdown">
+                        <li
+                            (click)="setIcon('workstation')"
+                            ngbDropdownItem
+                        >
+                            <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__computer"></i>
+                        </li>
+                        <li
+                            (click)="setIcon('device')"
+                            ngbDropdownItem
+                        >
+                            <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__tablet"></i>
+                        </li>
+                        <li
+                            (click)="setIcon('printer')"
+                            ngbDropdownItem
+                        >
+                            <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__printer"></i>
+                        </li>
+                        <li
+                            (click)="setIcon('server')"
+                            ngbDropdownItem
+                        >
+                            <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__server"></i>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </td>
+    <td class="company-devices-table__device-name">
+        <div>
+            <div class="qt-df qt-fd-c">
+                <div class="company-devices-table-device-name qt-ff-gm qt-df qt-ai-c">
+                    <app-company-devices-edit-label
+                        [field]="device.label || device.hostName || device.ip"
+                        [title]="'Name'"
+                        class="company-device-edit-name"
+                        (onChange)="onChangeName($event)"
+                    ></app-company-devices-edit-label>
+                    <!-- <input class="name-text-input" type="text" [value]="device.label || device.hostName || device.ip"> -->
+                </div>
+                <span
+                    class="company-device-desc"
+                    *ngIf="isLabel()"
+                    [textContent]="device.hostName || device.ip"
+                ></span>
+            </div>
+        </div>
+    </td>
+    <td class="company-devices-table__logged-user">
+        <div class="qt-df qt-fd-c">
+            <span
+                class="logged-name qt-ff-gm"
+                [textContent]="device.userName || ''"
+            ></span>
+            <span
+                class="logged-time"
+                *ngIf="device.timing.idle"
+            >
+                Idle:
+                <span *ngIf="device.timing.idle && returnTimeFormat(device.timing.idle).hours > 0">
+                    {{returnTimeFormat(device.timing.idle).hours}} hrs
+                </span>
+                <span *ngIf="device.timing.idle && returnTimeFormat(device.timing.idle).minutes > 0">
+                    {{returnTimeFormat(device.timing.idle).minutes}} min
+                </span>
+                <span *ngIf="device.timing.idle && returnTimeFormat(device.timing.idle).minutes < 1">0 min</span>
+            </span>
+        </div>
+    </td>
+    <td class="company-devices-table__up-time">
+        <div class="qt-df qt-fd-c">
+            <span>
+                <span *ngIf="device.online && returnTimeFormatUpTime(device.timing.online).days > 0">
+                    {{returnTimeFormatUpTime(device.timing.online).days}} day
+                </span>
+                <span *ngIf="device.online && returnTimeFormatUpTime(device.timing.online).hours > 0">
+                    {{returnTimeFormatUpTime(device.timing.online).hours}} hrs
+                </span>
+                <span *ngIf="device.online && returnTimeFormatUpTime(device.timing.online).minutes > 0 && returnTimeFormatUpTime(device.timing.online).days < 1">
+                    {{returnTimeFormatUpTime(device.timing.online).minutes}} min
+                </span>
+                <span *ngIf="device.online && returnTimeFormatUpTime(device.timing.online).minutes < 1 && returnTimeFormatUpTime(device.timing.online).hours < 1 && returnTimeFormatUpTime(device.timing.online).days < 1">0 min</span>
+                <ng-template
+                    #tipOfflineDevice
+                    class="tooltip"
+                >
+                    <span *ngIf="!device.online && returnTimeFormatUpTime(device.timing.offline).days > 0">
+                        {{returnTimeFormatUpTime(device.timing.offline).days}} day
+                    </span>
+                    <span *ngIf="!device.online && returnTimeFormatUpTime(device.timing.offline).hours > 0">
+                        {{returnTimeFormatUpTime(device.timing.offline).hours}} hrs
+                    </span>
+                    <span *ngIf="!device.online && returnTimeFormatUpTime(device.timing.offline).minutes > 0 && returnTimeFormatUpTime(device.timing.offline).days < 1">
+                        {{returnTimeFormatUpTime(device.timing.offline).minutes}} min
+                    </span>
+                    <span *ngIf="!device.online && returnTimeFormatUpTime(device.timing.offline).minutes < 1 && returnTimeFormatUpTime(device.timing.offline).hours < 1 && returnTimeFormatUpTime(device.timing.offline).days < 1">0 min</span>
+                </ng-template>
+            </span>
+            <span
+                *ngIf="device.online"
+                class="uptime-tag qt-ff-gm"
+                [textContent]="'Online'"
+            ></span>
+            <span
+                [hidden]="device.online"
+                placement="top"
+                container="body"
+                [ngbTooltip]="tipOfflineDevice"
+                class="uptime-tag qt-ff-gm --offline"
+                [textContent]="'Offline'"
+            ></span>
+        </div>
+    </td>
+    <td class="company-devices-table__windows">
+        <span
+            *ngIf="device.system"
+            class="company-devices-table__ip-windows-text"
+            [textContent]="getWindows()"
+        ></span>
+        <div class="company-devices-table__system-network-buttons">
+            <div
+                class="qt-df qt-ai-c qt-mr-20 qt-pointer"
+                (click)="openAside('SYSTEM')"
+            >
+                <div class="icon__system qt-ic-c qt-mr-6 qt-sz-16"></div>
+                <div>System</div>
+            </div>
+            <div
+                class="qt-df qt-ai-c qt-pointer"
+                (click)="openAside('NETWORK')"
+            >
+                <div class="icon__network qt-ic-c qt-mr-6 qt-sz-16"></div>
+                <div>Network</div>
+            </div>
+        </div>
+    </td>
+    <td class="company-devices-table__ip-address">
+        <span
+            class="qt-pl-30 company-devices-table__ip-address-text"
+            [textContent]="device.ip"
+        ></span>
+        <div class="company-devices-table__ip-address-buttons qt-pl-15">
+            <div
+                class="qt-df qt-ai-c qt-mr-20 qt-pointer"
+                (click)="openAside('SOFTWARE')"
+            >
+                <div class="icon__software qt-ic-c qt-mr-6 qt-sz-16"></div>
+                <div>Software</div>
+            </div>
+            <div
+                class="qt-df qt-ai-c qt-pointer"
+                (click)="openAside('UPDATES')"
+            >
+                <div class="icon__updates qt-ic-c qt-mr-6 qt-sz-16"></div>
+                <div>Updates</div>
+            </div>
+        </div>
+    </td>
+    <td class="company-devices-table__go-to">
+        <ng-template
+            #tipDeviceDetail
+            class="tooltip"
+        >
+            Device Detail
+        </ng-template>
+        <div
+            class="qt-ic-c icon__go-to qt-pointer qt-sz-24 qt-bgsz-16"
+            placement="top"
+            [ngbTooltip]="tipDeviceDetail"
+            (click)="gotiDetailDevice()"
+        ></div>
+    </td>
+    <td class="company-devices-table__connect">
+        <app-company-devices-no-exist-remote-sessions
+            [device]="device"
+            (onRemoteAccess)="remoteAccess($event)"
+        ></app-company-devices-no-exist-remote-sessions>
+        <app-company-devices-exist-remote-sessions
+            [device]="device"
+            (onRemoteAccess)="remoteAccess($event)"
+        ></app-company-devices-exist-remote-sessions>
+    </td>
+    <td class="company-devices-table__menu">
+        <div
+            class="company-devices-table__menu-body"
+            ngbDropdown
+            placement="bottom-right"
+            container="body"
+        >
+            <div
+                class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"
+                ngbDropdownToggle
+            ></div>
+            <ul
+                class="qt-dropdown-menu invoice-items-dropdown"
+                ngbDropdownMenu
+            >
+                <li
+                    class="pointer"
+                    (click)="turnOff('reboot')"
+                    ngbDropdownItem
+                >
+                    <div class="icon__restart qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                    Restart
+                </li>
+                <li
+                    class="pointer"
+                    (click)="turnOff('shutdown')"
+                    ngbDropdownItem
+                >
+                    <div class="icon__shutdown qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                    Shutdown
+                </li>
+                <li
+                    class="pointer"
+                    (click)="setMasterAgent()"
+                    *ngIf="!device.master"
+                    ngbDropdownItem
+                >
+                    <div class="icon__master-agent qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                    Set as Master Agent
+                </li>
+                <li
+                    class="pointer"
+                    (click)="removeDevice()"
+                >
+                    <div class="icon__remove qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                    Remove
+                </li>
+            </ul>
+        </div>
+    </td>
+</tr>

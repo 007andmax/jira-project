@@ -456,6 +456,120 @@
   &__play {
     background-image: url('assets/img/icons/play.svg');
   }
+  &__computer {
+    background-image: url('assets/img/icons/computer.svg');
+  }
+  &__printer {
+    background-image: url('assets/img/icons/printer.svg');
+  }
+  &__server {
+    background-image: url('assets/img/icons/server.svg');
+  }
+  &__tablet {
+    background-image: url('assets/img/icons/tablet.svg');
+  }
+  &__master-agent-badge {
+    background-image: url('assets/img/icons/master-agent-badge.svg');
+  }
+  &__quick-connect {
+    background-image: url('assets/img/icons/quick-connect.svg');
+  }
+  &__go-to {
+    background-image: url('assets/img/icons/go-to.svg');
+  }
+  &__network {
+    background-image: url('assets/img/icons/network.svg');
+  }
+  &__software {
+    background-image: url('assets/img/icons/software.svg');
+  }
+  &__system {
+    background-image: url('assets/img/icons/system.svg');
+  }
+  &__updates {
+    background-image: url('assets/img/icons/updates.svg');
+  }
+  &__remove-blue {
+    background-image: url('assets/img/icons/remove-blue.svg');
+  }
+  &__restart-blue {
+    background-image: url('assets/img/icons/restart-blue.svg');
+  }
+  &__shutdown-blue {
+    background-image: url('assets/img/icons/shutdown-blue.svg');
+  }
+  &__connected-device {
+    background-image: url('assets/img/icons/connected-device.svg');
+  }
+  &__more-vertical {
+    background-image: url('assets/img/icons/more-vertical.svg');
+  }
+  &__arrow-right {
+    background-image: url('assets/img/icons/arrow-right.svg');
+  }
+  &__collapse {
+    background-image: url('assets/img/icons/collapse.svg');
+  }
+  &__drivers-missing {
+    background-image: url("assets/img/icons/drivers-missing.svg") ;
+  }
+  &__security-update {
+    background-image: url("assets/img/icons/security-update.svg") ;
+  }
+  &__virus-protection {
+    background-image: url("assets/img/icons/virus-protection.svg") ;
+  }
+  &__master-agent {
+    background-image: url("assets/img/icons/master-agent.svg") ;
+  }
+  &__sidebar-blue {
+    background-image: url("assets/img/icons/sidebar-blue.svg") ;
+  }
+
+  &.--updated {
+    position: relative;
+    &::before {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      right: -2px;
+      top: -3px;
+      background-image: url("assets/img/icons/updated.svg");
+    }
+  }
+  &.--alert {
+    position: relative;
+    &::before {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      right: -2px;
+      top: -3px;
+      background-image: url("assets/img/icons/alert.svg");
+    }
+  }
+  &.--online, &.--offline {
+    position: relative;
+    &::before {
+      content: '';
+      width: 10px;
+      height: 10px;
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      border: solid 2px #ffffff;
+      background-color: #2ec866;
+      border-radius: 50%;
+    }
+
+  }
+  &.--offline {
+    &::before {
+      background-color: #ff5263;
+    }
+  }
 }
 
 .icn-20 {
@@ -474,4 +588,6 @@
   &.--medium {background-image: url("assets/img/icons/priority-medium.png");}
   &.--low    {background-image: url("assets/img/icons/priority-low.png");}
 }
+
+
 

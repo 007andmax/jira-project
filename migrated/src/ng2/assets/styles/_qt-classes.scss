@@ -234,6 +234,10 @@
   background-repeat: no-repeat;
 }
 
+.qt-bgsz-16 {
+  background-size: 16px;
+}
+
 .qt-pointer {
   cursor: pointer;
 }
@@ -506,7 +510,7 @@
   background-color: #ffffff;
   padding: 8px 0;
   margin: 0;
-  position: relative;
+  overflow: visible;
   &.--open-top {
     top: unset;
     bottom: calc(100% + 4px);
@@ -539,8 +543,16 @@
     font-size: 13px;
     cursor: pointer;
     position: relative;
+    white-space: nowrap;
     &:hover {
       background-color: #edf2f6;
+    }
+  }
+  &.--dropdown-icons {
+    padding: 8px;
+    li {
+      padding: 4px;
+      border-radius: 4px;
     }
   }
 }
@@ -554,7 +566,7 @@
   line-height: 1.54;
 }
 
-.qt-lh-154 {
+.qt-lh-163 {
   line-height: 1.63;
 }
 
@@ -856,7 +868,9 @@
 .qt-w-auto-important {
   width: auto !important;
 }
-
+.qt-overflow-v {
+  overflow: visible !important;
+}
 .qt-inside-border-none-important {
   input {
     border: none !important;

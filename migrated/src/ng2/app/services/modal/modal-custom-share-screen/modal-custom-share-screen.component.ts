@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DownloadAgentService } from 'src/ng2/app/components/companies/download-agent/services/download-agent.service';
-import { DevicesSateService } from 'src/ng2/app/states/devices/devices-sate.service';
+import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -12,8 +12,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class ModalCustomShareScreenComponent implements OnInit {
   @Input() companyId: string;
   constructor(private downloadAgentService: DownloadAgentService,
-    private devicesSateService: DevicesSateService,
-    public activeModal: NgbActiveModal, ) { }
+    private devicesStateService: DevicesStateService,
+    public activeModal: NgbActiveModal,) { }
 
   ngOnInit() {
   }
@@ -21,7 +21,7 @@ export class ModalCustomShareScreenComponent implements OnInit {
     window.location.href = '/data/connection-viewer';
   }
   launchApp() {
-    this.devicesSateService.onInitRemoveConnection();
+    this.devicesStateService.onInitRemoveConnection();
     this.activeModal.close();
   }
   closed() {
