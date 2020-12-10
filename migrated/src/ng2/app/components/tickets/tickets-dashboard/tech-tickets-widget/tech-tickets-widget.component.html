@@ -54,7 +54,11 @@
                 </tr>
             </thead>
         </table>
-        <table class="contract-info-list__table-body contract-info-list__table">
+        <p *ngIf="techTickets.list.length === 0">No data yet</p>
+        <table
+            class="contract-info-list__table-body contract-info-list__table"
+            *ngIf="techTickets.list.length > 0"
+        >
             <tbody>
                 <ng-template
                     ngFor
