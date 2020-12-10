@@ -15,9 +15,9 @@ import { TicketsAnalyticsWidgetComponent } from './tickets-analytics-widget/tick
   styleUrls: ['./tickets-dashboard.component.scss']
 })
 export class TicketsDashboardComponent implements OnInit {
-  @ViewChild('ticketPriority') ticketPriority:TicketPriorityWidgetComponent;
-  @ViewChild('recurringTicket') recurringTicket:RecurringTicketWidgetComponent;
-  @ViewChild('ticketsAnalytics') ticketsAnalytics:TicketsAnalyticsWidgetComponent;
+  @ViewChild('ticketPriority') ticketPriority: TicketPriorityWidgetComponent;
+  @ViewChild('recurringTicket') recurringTicket: RecurringTicketWidgetComponent;
+  @ViewChild('ticketsAnalytics') ticketsAnalytics: TicketsAnalyticsWidgetComponent;
   showPreloader: boolean = true;
   accountingStartDate: string;
   dashboard: DashboardTickets;
@@ -26,6 +26,7 @@ export class TicketsDashboardComponent implements OnInit {
   currentInterval = new CompanySetting('last month', 'LAST_MONTH');
   countIsReady: boolean = false;
   timeOnTicketsIsReady: boolean = false;
+  techTicketsIsReady: boolean = false;
   ticketsAnalyticsReady: boolean = false;
   ticketsBillableHoursIsReady: boolean = false;
   constructor(
@@ -48,10 +49,14 @@ export class TicketsDashboardComponent implements OnInit {
       this.countIsReady = true;
       this.onCheckREadyState();
       this.cd.detectChanges();
-    },(err) => {
+    }, (err) => {
       this.countIsReady = true;
       this.onCheckREadyState();
     })
+  }
+  onTechTicketsIsReady() {
+    this.techTicketsIsReady = true;
+    this.onCheckREadyState();
   }
   onTimeOnTicketsIsReady() {
     this.timeOnTicketsIsReady = true;
@@ -66,7 +71,7 @@ export class TicketsDashboardComponent implements OnInit {
     this.onCheckREadyState();
   }
   onCheckREadyState() {
-    if (this.countIsReady && this.timeOnTicketsIsReady && this.ticketsBillableHoursIsReady && this.ticketsAnalyticsReady && this.showPreloader) {
+    if (this.countIsReady && this.timeOnTicketsIsReady && this.ticketsBillableHoursIsReady && this.ticketsAnalyticsReady && this.showPreloader && this.techTicketsIsReady) {
       this.showPreloader = false;
       this.cd.detectChanges();
       this.ticketPriority.updateDataChart();

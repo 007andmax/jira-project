@@ -14,7 +14,10 @@ export class TicketsService {
   constructor(private http: HttpClient) { }
 
   public getDashboardByServices(data) {
-    return this.http.post(this.apiUrl + `dashboard/ticket/byServices`,data);
+    return this.http.post(this.apiUrl + `dashboard/ticket/byServices`, data);
+  }
+  public getDashboardByTech(startDate, endDate) {
+    return this.http.get(this.apiUrl + `dashboard/ticket/counters?startDate=${startDate}&endDate=${endDate}`);
   }
   public getDashboard(frequency) {
     return this.http.get(this.apiUrl + `dashboard/ticket?frequency=${frequency}`).pipe(map((data: any) => new DashboardTickets(data)));
@@ -22,8 +25,8 @@ export class TicketsService {
   public updateExpense(data) {
     return this.http.put(this.apiUrl + `v2/tickets/ticketUpdate/updateExpense`, data);
   }
-  public updateNote(ticketId,updateId,note) {
-    return this.http.put(this.apiUrl + `v2/tickets/${ticketId}/updates/${updateId}/updateNote`, {note: note});
+  public updateNote(ticketId, updateId, note) {
+    return this.http.put(this.apiUrl + `v2/tickets/${ticketId}/updates/${updateId}/updateNote`, { note: note });
   }
   public fetchUpdates(ticket) {
     var loadedIds = [];
@@ -62,8 +65,8 @@ export class TicketsService {
 
     return this.http.delete(this.apiUrl + `v2/tickets/${ticketId}/updates/${updateId}/deleteExpenses`, options);
   }
-  public downloadFile(id,contentType) {
-    return this.http.get( this.apiUrl + `file/${id}/attachment`,{
+  public downloadFile(id, contentType) {
+    return this.http.get(this.apiUrl + `file/${id}/attachment`, {
       headers: new HttpHeaders({
         'Content-Type': contentType,
       }), responseType: 'blob'

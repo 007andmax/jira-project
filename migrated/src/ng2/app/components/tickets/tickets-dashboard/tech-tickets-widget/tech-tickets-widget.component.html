@@ -1,0 +1,93 @@
+<div class="contract-dashboard-chart-card time-on-tickets">
+    <div class="time-on-tickets__header">
+        <div class="contract-dashboard-chart-card__header-title">Tech Tickets</div>
+        <div
+            class="btn-group btn-group-toggle"
+            ngbRadioGroup
+            name="radioBasic"
+            [(ngModel)]="techTickets.sort"
+        >
+            <label
+                ngbButtonLabel
+                class="btn-primary"
+            >
+                <input
+                    ngbButton
+                    type="radio"
+                    [value]="'day'"
+                    (change)="onChangeType()"
+                >
+                Day
+            </label>
+            <label
+                ngbButtonLabel
+                class="btn-primary"
+            >
+                <input
+                    ngbButton
+                    type="radio"
+                    [value]="'month'"
+                    (change)="onChangeType()"
+                >
+                Month
+            </label>
+        </div>
+    </div>
+    <div
+        class="time-on-tickets__content"
+        *ngIf="!showPreloader"
+    >
+        <table class="contract-info-list__table-head contract-info-list__table">
+            <thead>
+                <tr>
+                    <th class="contract-info-list__table--number">tech name</th>
+                    <ng-template
+                        ngFor
+                        let-type
+                        [ngForOf]="techTickets.listTypes"
+                    >
+                        <th
+                            class="contract-info-list__table--name"
+                            [textContent]="type.title"
+                        ></th>
+                    </ng-template>
+                </tr>
+            </thead>
+        </table>
+        <table class="contract-info-list__table-body contract-info-list__table">
+            <tbody>
+                <ng-template
+                    ngFor
+                    let-item
+                    let-i="index"
+                    [ngForOf]="techTickets.list"
+                >
+                    <tr>
+                        <td class="contract-info-list__table--number">
+                            <div class="contract-info-list__table--number-circle-outer">
+                                <div
+                                    class="contract-info-list__table--number-circle-inner"
+                                    [textContent]="getUserName(item.userId)"
+                                ></div>
+                            </div>
+                        </td>
+                        <ng-template
+                            ngFor
+                            let-type
+                            [ngForOf]="techTickets.listTypes"
+                        >
+                            <td
+                                class="contract-info-list__table--name"
+                                [textContent]="item.getValue(type.type)"
+                            ></td>
+                        </ng-template>
+                    </tr>
+                </ng-template>
+            </tbody>
+        </table>
+    </div>
+    <div
+        class="loading"
+        *ngIf="showPreloader"
+    ></div>
+</div>

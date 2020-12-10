@@ -360,9 +360,10 @@ import { CompanyContractsComponent } from './components/companies/company-contra
 import { TicketsDashboardComponent } from './components/tickets/tickets-dashboard/tickets-dashboard.component';
 import { RecurringTicketWidgetComponent } from './components/tickets/tickets-dashboard/recurring-ticket-widget/recurring-ticket-widget.component';
 import { TicketsAnalyticsWidgetComponent } from './components/tickets/tickets-dashboard/tickets-analytics-widget/tickets-analytics-widget.component';
- import { TicketPriorityWidgetComponent } from './components/tickets/tickets-dashboard/ticket-priority-widget/ticket-priority-widget.component';
- import { TimeOnTicketsWidgetComponent } from './components/tickets/tickets-dashboard/time-on-tickets-widget/time-on-tickets-widget.component';
+import { TicketPriorityWidgetComponent } from './components/tickets/tickets-dashboard/ticket-priority-widget/ticket-priority-widget.component';
+import { TimeOnTicketsWidgetComponent } from './components/tickets/tickets-dashboard/time-on-tickets-widget/time-on-tickets-widget.component';
 import { TicketsBillableHoursWidgetComponent } from './components/tickets/tickets-dashboard/tickets-billable-hours-widget/tickets-billable-hours-widget.component';
+import { TechTicketsWidgetComponent } from './components/tickets/tickets-dashboard/tech-tickets-widget/tech-tickets-widget.component';
 
 
 
@@ -561,9 +562,9 @@ angular.module('quicktech')
   .directive(
     'companyContractsComponent',
     downgradeComponent({ component: CompanyContractsComponent }))
-    .directive(
-      'ticketsDashboardComponent',
-      downgradeComponent({ component: TicketsDashboardComponent }))
+  .directive(
+    'ticketsDashboardComponent',
+    downgradeComponent({ component: TicketsDashboardComponent }))
   .factory('ngZone', downgradeInjectable(NgZone));
 
 /**
@@ -918,7 +919,8 @@ angular.module('quicktech')
     TicketsAnalyticsWidgetComponent,
     TicketPriorityWidgetComponent,
     TimeOnTicketsWidgetComponent,
-    TicketsBillableHoursWidgetComponent
+    TicketsBillableHoursWidgetComponent,
+    TechTicketsWidgetComponent
   ],
   imports: [
     BrowserModule,
