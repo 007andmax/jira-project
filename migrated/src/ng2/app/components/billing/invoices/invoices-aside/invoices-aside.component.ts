@@ -76,13 +76,13 @@ export class InvoicesAsideComponent implements OnInit {
       if (item.selected) sumPayment += item.paymentAmount;
     })
     if (this.invoices[index].selected && sumPayment < this.amountReceived) {
-      let paymentAmount = (this.amountReceived - sumPayment) - (this.invoices[index].sum - this.invoices[index].paidSum);
-      this.invoices[index].paymentAmount = (paymentAmount > 0) ? (this.invoices[index].sum - this.invoices[index].paidSum) : (this.amountReceived - sumPayment);
+      let paymentAmount = (this.amountReceived - sumPayment) - (this.invoices[index].totalSum - this.invoices[index].paidSum);
+      this.invoices[index].paymentAmount = (paymentAmount > 0) ? (this.invoices[index].totalSum - this.invoices[index].paidSum) : (this.amountReceived - sumPayment);
     }
     if (!this.isChangeAmountReceived) {
-      if (this.invoices[index].selected) this.invoices[index].paymentAmount = (this.invoices[index].sum - this.invoices[index].paidSum);
+      if (this.invoices[index].selected) this.invoices[index].paymentAmount = (this.invoices[index].totalSum - this.invoices[index].paidSum);
       this.amountReceived = this.invoices.reduce((a, b) => {
-        if (b.selected) return a + (b.sum - b.paidSum);
+        if (b.selected) return a + (b.totalSum - b.paidSum);
         return a + 0;
       }, 0);;
     }
@@ -144,7 +144,7 @@ export class InvoicesAsideComponent implements OnInit {
   getSubtotal() {
     let subTotal = 0;
     this.invoices.forEach(item => {
-      if (item.selected) subTotal += (item.sum - item.paidSum);
+      if (item.selected) subTotal += (item.totalSum - item.paidSum);
     })
     return subTotal;
   }
@@ -155,14 +155,14 @@ export class InvoicesAsideComponent implements OnInit {
       if (item.selected) sumPayment += item.paymentAmount;
       if (item.paymentAmount === 0) {
         if (sumPayment < this.amountReceived) {
-          let paymentAmount = (this.amountReceived - sumPayment) - (item.sum - item.paidSum);
-          item.paymentAmount = (paymentAmount > 0) ? (item.sum - item.paidSum) : (this.amountReceived - sumPayment);
+          let paymentAmount = (this.amountReceived - sumPayment) - (item.totalSum - item.paidSum);
+          item.paymentAmount = (paymentAmount > 0) ? (item.totalSum - item.paidSum) : (this.amountReceived - sumPayment);
         }
-        if (!this.isChangeAmountReceived) item.paymentAmount = (item.sum - item.paidSum);
+        if (!this.isChangeAmountReceived) item.paymentAmount = (item.totalSum - item.paidSum);
       }
     })
     if (!this.isChangeAmountReceived) this.amountReceived = this.invoices.reduce((a, b) => {
-      if (b.selected) return a + (b.sum - b.paidSum);
+      if (b.selected) return a + (b.totalSum - b.paidSum);
       return a + 0;
     }, 0);
     if (!this.validate.getAmountReceived()) this.validate.checkAmountReceived(this.amountReceived, this.invoices);
@@ -179,11 +179,11 @@ export class InvoicesAsideComponent implements OnInit {
         this.invoices.forEach(item => {
           let find = this.selectedInvoices.find(selectInvoice => selectInvoice.id === item.id);
           if (find) item.selected = true;
-          if (item.selected && !this.isChangeAmountReceived) item.paymentAmount = parseFloat((item.sum - item.paidSum).toFixed(2)); ///Math.floor((item.sum - item.paidSum)*100)/100;
+          if (item.selected && !this.isChangeAmountReceived) item.paymentAmount = parseFloat((item.totalSum - item.paidSum).toFixed(2)); ///Math.floor((item.sum - item.paidSum)*100)/100;
         })
         if (!this.isChangeAmountReceived) {
           this.amountReceived = this.invoices.reduce((a, b) => {
-            if (b.selected) return parseFloat((a + (b.sum - b.paidSum)).toFixed(2));// Math.floor((a + (b.sum - b.paidSum))*100)/100;;
+            if (b.selected) return parseFloat((a + (b.totalSum - b.paidSum)).toFixed(2));// Math.floor((a + (b.sum - b.paidSum))*100)/100;;
             return a + 0;
           }, 0);
         }
