@@ -369,6 +369,10 @@ import { CompanyDevicesNoExistRemoteSessionsComponent } from './components/compa
 import { CompanyDevicesEditLabelComponent } from './components/company-devices/company-devices-edit-label/company-devices-edit-label.component';
 import { CompanyDevicesAsideTooltipComponent } from './components/company-devices/company-devices-aside/company-devices-aside-tooltip/company-devices-aside-tooltip.component';
 import { CompanyNetworkScanNoExistDevicesComponent } from './components/company-network-scan/company-network-scan-no-exist-devices/company-network-scan-no-exist-devices.component';
+import { NetworkScanCredentialsAsideComponent } from './components/company-network-scan/network-scan-credentials-aside/network-scan-credentials-aside.component';
+import { NetworkScanCredentialsAddComponent } from './components/company-network-scan/network-scan-credentials-add/network-scan-credentials-add.component';
+import { NetworkScanCredentialsAsideItemComponent } from './components/company-network-scan/network-scan-credentials-aside/network-scan-credentials-aside-item/network-scan-credentials-aside-item.component';
+
 
 /**
  * declare angular
@@ -895,6 +899,9 @@ angular.module('quicktech')
     CompanyDevicesEditLabelComponent,
     CompanyDevicesAsideTooltipComponent,
     CompanyNetworkScanNoExistDevicesComponent,
+    NetworkScanCredentialsAsideComponent,
+    NetworkScanCredentialsAddComponent,
+    NetworkScanCredentialsAsideItemComponent,
   ],
   imports: [
     BrowserModule,

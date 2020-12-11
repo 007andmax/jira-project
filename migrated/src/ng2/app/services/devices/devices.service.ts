@@ -49,6 +49,10 @@ export class DevicesService {
     return this.http.post(this.apiUrl + 'devices/sendPowerAction?companyId=' + companyId + '&action=' + action, agentIds);
 
   }
+  public getSomeInfoForDevices(companyId) {
+    return this.http.get(this.apiUrl + `devices/getSomeInfoForDevices?companyId=${companyId}`);
+  }
+
   sendDeviceStatusRequest(companyId, agentIds, actions) {
     return this.http.post(this.apiUrl + '/devices/agentStatuses', {
       companyId: companyId,
