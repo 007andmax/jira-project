@@ -211,6 +211,11 @@
           }
         }
       }
+      tr:hover {
+        .sidebar-system__info-text-input {
+         background-color: #f9fafb;
+        }
+      }
     }
     .company-devices-table__system-network-buttons,
     .company-devices-table__ip-address-buttons {
@@ -388,15 +393,7 @@
       &.installed-info .date-picker-container {
         transform: translate(-50%, -15px);
       }
-    }
-    &__info-title {
-      font-size: 12px;
-      line-height: 1.33;
-      color: #364656;
-      width: 132px;
-      min-width: 132px;
-      max-width: 132px;
-      font-family: Graphik-Medium, sans-serif;
+
       .date-picker {
         input {
           border: 1px solid #dde1e6;
@@ -408,10 +405,18 @@
           }
         }
         .icn-calendar-light {
-          top: 7px;
+          top: 5px;
         }
       }
-
+    }
+    &__info-title {
+      font-size: 12px;
+      line-height: 1.33;
+      color: #364656;
+      width: 132px;
+      min-width: 132px;
+      max-width: 132px;
+      font-family: Graphik-Medium, sans-serif;
     }
     &__info-text {
       font-size: 12px;
