@@ -1,4 +1,4 @@
-@import "../../../assets/scss/fonts";
+// @import "../../../assets/scss/fonts";
 @import "../../../assets/scss/custom";
 
 /*** Custom Color Variables For this components ***/
@@ -21,8 +21,8 @@ $titleColor: #364656;
 $parot: #2ec866;
 
 body {
-    padding: 0;
-    margin: 0;
+    // padding: 0;
+    // margin: 0;
     @include body-font;
     background-color: $bodyColor;
 }
@@ -1566,6 +1566,49 @@ body {
             
         }
     }
+    svg.nvd3-svg {	
+        overflow: visible;	
+    }
+    .nv-axis.nv-x .tick line {
+        display:none;
+    }
+    .nvd3 {
+        &.nv-pie path {
+            fill-opacity: 1;
+        }
+        .domain {
+            display: none;
+        }
+        .tick {
+            text{
+                font-size: 12px;
+                line-height: 1.33;
+                letter-spacing: normal;
+                color: #4f5f79;
+                font-family: 'Graphik-Regular';
+                fill: #4f5f79;
+            }
+            line{
+                fill: #edf0f2;
+                stroke: #edf0f2;
+                stroke-width: 0.8px;
+            }
+        }
+        .nv-series {
+            text {
+                font-size: 12px;
+                line-height: 1.33;
+                letter-spacing: normal;
+                color: #4f5f79;
+                font-family: 'Graphik-Regular';
+                fill: #4f5f79;
+            }
+        }
+        .nv-legend {	
+           -webkit-transform: translate(calc(-49% + 260px), -40px);	
+           transform: translate(calc(-49% + 260px), -40px);	
+        }
+    }
 }
 
 /*** Modal Style ***/
@@ -1938,49 +1981,6 @@ body {
 
 .uppercase {
     text-transform: uppercase;
-}
-svg.nvd3-svg {	
-    overflow: visible;	
-}
-.nv-axis.nv-x .tick line {
-    display:none;
-}
-.nvd3 {
-    &.nv-pie path {
-        fill-opacity: 1;
-    }
-    .domain {
-        display: none;
-    }
-    .tick {
-        text{
-            font-size: 12px;
-            line-height: 1.33;
-            letter-spacing: normal;
-            color: #4f5f79;
-            font-family: 'Graphik-Regular';
-            fill: #4f5f79;
-        }
-        line{
-            fill: #edf0f2;
-            stroke: #edf0f2;
-            stroke-width: 0.8px;
-        }
-    }
-    .nv-series {
-        text {
-            font-size: 12px;
-            line-height: 1.33;
-            letter-spacing: normal;
-            color: #4f5f79;
-            font-family: 'Graphik-Regular';
-            fill: #4f5f79;
-        }
-    }
-    .nv-legend {	
-       -webkit-transform: translate(calc(-49% + 260px), -40px);	
-       transform: translate(calc(-49% + 260px), -40px);	
-    }
 }
 
 app-company-dash-tags {
