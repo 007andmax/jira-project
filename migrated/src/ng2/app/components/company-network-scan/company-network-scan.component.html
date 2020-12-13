@@ -15,47 +15,49 @@
             class="network-steps qt-mb-30"
             *ngIf="!showPreloader && devices.length > 0"
         >
-            <div
-                class="network-step"
-                ngbDropdown
-                [placement]="'bottom-right'"
-            >
+            <div class="network-step">
                 <div class="circle-number qt-mb-8">
                     <div class="circle-number__inner">1</div>
                 </div>
                 <div class="network-step__title">Run Scan</div>
                 <div class="network-step__text qt-mb-15">Get Started with run scan to get result</div>
                 <!-- <button class="qt-button">Run Scan</button> -->
-                <button
-                    class="qt-button --with-menu"
-                    ngbDropdownAnchor
-                >
-                    <span
-                        class="left-side-overflow"
-                        [textContent]="(masterAgent) ? masterAgent.label || masterAgent.hostName || masterAgent.ip : ''"
-                    ></span>
-                    <div
-                        class="button-menu"
-                        ngbDropdownToggle
-                    >
-                        <div class="qt-sz-16 qt-ic-c icon__dropdown-arrow-up"></div>
-                    </div>
-                </button>
-                <div
-                    class="list-devices"
-                    ngbDropdownMenu
-                >
-                    <ng-template
-                        ngFor
-                        let-agent
-                        [ngForOf]="devices"
-                        [ngForTrackBy]="trackById"
+
+                <div ngbDropdown container="body" [placement]="'bottom-right'">
+                    <button
+                      class="qt-button --with-menu network-steps__scan-button"
+                      [ngClass]="{'qt-loading': showPreloader}"
+                      ngbDropdownAnchor
                     >
                         <span
-                            ngbDropdownItem
-                            [textContent]="agent.label || agent.hostName || agent.ip"
+                            class="left-side-overflow"
+                            [textContent]="(masterAgent) ? masterAgent.label || masterAgent.hostName || masterAgent.ip : ''"
                         ></span>
-                    </ng-template>
+                        <div
+                            class="button-menu"
+                            ngbDropdownToggle
+                        >
+                            <div class="qt-sz-16 qt-ic-c icon__dropdown-arrow-up"></div>
+                        </div>
+                    </button>
+
+                    <ul
+                        class="qt-dropdown-menu list-devices"
+                        ngbDropdownMenu
+                    >
+                        <ng-template
+                            ngFor
+                            let-agent
+                            [ngForOf]="devices"
+                            [ngForTrackBy]="trackById"
+                        >
+                            <li
+                                class="pointer"
+                                ngbDropdownItem
+                                [textContent]="agent.label || agent.hostName || agent.ip"
+                            ></li>
+                        </ng-template>
+                    </ul>
                 </div>
             </div>
 
