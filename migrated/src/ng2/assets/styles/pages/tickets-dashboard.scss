@@ -252,7 +252,7 @@
       overflow: auto;
       max-height: 215px;
       &::-webkit-scrollbar {
-        width: 0;
+        width: 2px;
       }
     }
     &__table-body {
@@ -270,7 +270,7 @@
           text-align: center;
         }
         &:nth-child(4) {
-          width: 40px;
+          width: 38px;
           text-align: center;
         }
       }
