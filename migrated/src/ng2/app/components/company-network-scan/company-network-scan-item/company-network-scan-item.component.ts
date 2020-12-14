@@ -11,11 +11,15 @@ import { NetworkScanSomeInfoForDevice } from '../class/network-scan-some-info-fo
 export class CompanyNetworkScanItemComponent implements OnInit {
   @Input() networkScanSomeInfoForDevice: NetworkScanSomeInfoForDevice;
   @Input() device: NetworkScanDevice;
+  @Input() masterAgent: Device = null;
   constructor() { }
 
   ngOnInit() {
   }
+  checkUnknown(value) {
+    return (value === "unknown") ? null : value;
+  }
   getLabel() {
-    return `${(this.device.description || this.device.hostName || this.device)} ${(this.device.deviceId === this.networkScanSomeInfoForDevice.masterAgentId ? '(MASTER AGENT)' : '')}`;
+    return `${(this.checkUnknown(this.device.description) || this.checkUnknown(this.device.hostName) || this.checkUnknown(this.device))} ${(this.device.deviceId === this.masterAgent.id ? '(MASTER AGENT)' : '')}`;
   }
 }
