@@ -1,0 +1,40 @@
+<tr>
+    <td class="network-scan-table__check">
+        <div
+            class="d-f"
+            *ngIf="networkScanSomeInfoForDevice.allowAgentInstall"
+        >
+            <label class="qt-checkbox">
+                <input type="checkbox">
+                <span></span>
+            </label>
+        </div>
+    </td>
+    <td class="network-scan-table__device-name">
+        <div class="qt-df qt-ai-c">
+            <input
+                class="network-scan-table__device-name-input"
+                type="text"
+                [value]="getLabel()"
+            >
+        </div>
+    </td>
+    <td
+        class="network-scan-table__lan-ip"
+        [textContent]="device.ipAddress"
+    ></td>
+    <td
+        class="network-scan-table__manufacturer"
+        [textContent]="device.manufacturer || 'not defined'"
+    ></td>
+    <td
+        class="network-scan-table__mac-address"
+        [textContent]="device.macAddress"
+    ></td>
+    <td class="network-scan-table__status">
+        <span class="tag__modern --success ">Managed</span>
+    </td>
+    <td class="network-scan-table__delete">
+        <div class="icon__remove qt-ic-c qt-sz-16 qt-pointer"></div>
+    </td>
+</tr>

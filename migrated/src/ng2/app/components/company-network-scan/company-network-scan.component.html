@@ -22,12 +22,15 @@
                 <div class="network-step__title">Run Scan</div>
                 <div class="network-step__text qt-mb-15">Get Started with run scan to get result</div>
                 <!-- <button class="qt-button">Run Scan</button> -->
-
-                <div ngbDropdown container="body" [placement]="'bottom-right'">
+                <div
+                    ngbDropdown
+                    container="body"
+                    [placement]="'bottom-right'"
+                >
                     <button
-                      class="qt-button --with-menu network-steps__scan-button"
-                      [ngClass]="{'qt-loading': showPreloader}"
-                      ngbDropdownAnchor
+                        class="qt-button --with-menu network-steps__scan-button"
+                        [ngClass]="{'qt-loading': showPreloader}"
+                        ngbDropdownAnchor
                     >
                         <span
                             class="left-side-overflow"
@@ -40,7 +43,6 @@
                             <div class="qt-sz-16 qt-ic-c icon__dropdown-arrow-up"></div>
                         </div>
                     </button>
-
                     <ul
                         class="qt-dropdown-menu list-devices"
                         ngbDropdownMenu
@@ -61,39 +63,6 @@
                     </ul>
                 </div>
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             <div class="network-step">
                 <div class="circle-number qt-mb-8">
                     <div class="circle-number__inner">2</div>
@@ -113,39 +82,6 @@
                 </button>
                 <!-- qt-loading --hide-text -->
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             <div class="network-step">
                 <div class="circle-number qt-mb-8">
                     <div class="circle-number__inner">3</div>
@@ -160,39 +96,6 @@
                 </button>
             </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         <table
             class="network-scan-table qt-w100"
             *ngIf="!showPreloader && devices.length > 0"
@@ -230,41 +133,19 @@
                     <th class="network-scan-table__delete"></th>
                 </tr>
             </thead>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             <tbody>
-                <tr>
+                <ng-template
+                    ngFor
+                    let-device
+                    [ngForOf]="networkScanDevices.devices"
+                    [ngForTrackBy]="trackById"
+                >
+                    <app-company-network-scan-item
+                        [device]="device"
+                        [networkScanSomeInfoForDevice]="networkScanSomeInfoForDevice"
+                    ></app-company-network-scan-item>
+                </ng-template>
+                <!-- <tr>
                     <td class="network-scan-table__check">
                         <div class="d-f">
                             <label class="qt-checkbox">
@@ -292,39 +173,6 @@
                         <div class="icon__remove qt-ic-c qt-sz-16 qt-pointer"></div>
                     </td>
                 </tr>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 <tr>
                     <td class="network-scan-table__check">
                         <div class="d-f">
@@ -350,39 +198,6 @@
                         <div class="icon__remove qt-ic-c qt-sz-16 qt-pointer"></div>
                     </td>
                 </tr>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 <tr>
                     <td class="network-scan-table__check">
                         <div class="d-f">
@@ -408,39 +223,6 @@
                         <div class="icon__remove qt-ic-c qt-sz-16 qt-pointer"></div>
                     </td>
                 </tr>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 <tr>
                     <td class="network-scan-table__check">
                         <div class="d-f">
@@ -466,39 +248,6 @@
                         <div class="icon__remove qt-ic-c qt-sz-16 qt-pointer"></div>
                     </td>
                 </tr>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 <tr class="--checked">
                     <td class="network-scan-table__check">
                         <div class="d-f">
@@ -524,39 +273,6 @@
                         <div class="icon__remove qt-ic-c qt-sz-16 qt-pointer"></div>
                     </td>
                 </tr>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 <tr class="--checked">
                     <td class="network-scan-table__check">
                         <div class="d-f">
@@ -580,39 +296,6 @@
                         <div class="icon__remove qt-ic-c qt-sz-16 qt-pointer"></div>
                     </td>
                 </tr>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 <tr>
                     <td class="network-scan-table__check">
                         <div class="d-f">
@@ -635,7 +318,7 @@
                     <td class="network-scan-table__delete">
                         <div class="icon__remove qt-ic-c qt-sz-16 qt-pointer"></div>
                     </td>
-                </tr>
+                </tr> -->
             </tbody>
         </table>
     </div>
@@ -651,7 +334,23 @@
 
 
 
+
+
+
+
+
+
+
+
     <app-network-scan-credentials-aside [companyId]="companyId"></app-network-scan-credentials-aside>
+
+
+
+
+
+
+
+
 
 
 

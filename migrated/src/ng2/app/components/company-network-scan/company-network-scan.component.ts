@@ -6,6 +6,7 @@ import { DevicesStateService } from '../../states/devices/devices-state.service'
 import { NetworkScanStateService } from '../../states/network-scan/network-scan-state.service';
 
 import { Device } from '../company-devices/class/device';
+import { NetworkScanDevices } from './class/network-scan-devices';
 import { NetworkScanSomeInfoForDevice } from './class/network-scan-some-info-for-devices';
 
 @Component({
@@ -15,6 +16,7 @@ import { NetworkScanSomeInfoForDevice } from './class/network-scan-some-info-for
 })
 export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
   devices: Array<Device> = [];
+  networkScanDevices: NetworkScanDevices;
   networkScanSomeInfoForDevice: NetworkScanSomeInfoForDevice;
   masterAgent: Device = null;
   showPreloader: boolean = true;
@@ -51,8 +53,9 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
         this.networkScanSomeInfoForDevice = new NetworkScanSomeInfoForDevice(data);
         if (this.getPermissions('NETWORK_SCAN_CLIENTS')) {
           this.devicesService.getLastScanDevices(this.companyId).subscribe((res: any) => {
-            let networkScan = JSON.parse(res.data.networkScan);
+            let networkScan = JSON.parse(res.networkScan);
             console.log("networkScan", networkScan);
+            this.networkScanDevices = new NetworkScanDevices(networkScan);
           })
         }
       }
