@@ -133,7 +133,7 @@
                     <th class="network-scan-table__delete"></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody *ngIf="networkScanDevices">
                 <ng-template
                     ngFor
                     let-device
@@ -342,7 +342,11 @@
 
 
 
+
+
     <app-network-scan-credentials-aside [companyId]="companyId"></app-network-scan-credentials-aside>
+
+
 
 
 
