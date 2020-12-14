@@ -77,8 +77,9 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
   }
   selectMasterAgent(device) {
     console.log("device", device);
+    this.masterAgent = device;
     this.devicesService.markDeviceAsMaster(this.companyId, device.agentId).subscribe(data => {
-      this.masterAgent = device;
+
     })
   }
   findMasterAgent() {
