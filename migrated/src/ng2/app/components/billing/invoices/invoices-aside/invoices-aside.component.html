@@ -1,44 +1,16 @@
 <div class="invoices-page__aside">
-
-
-
-
     <div class="aside-header qt-df qt-ai-c qt-jc-sb qt-pr-16 qt-pl-32">
-
-
-
-
         <div class="qt-fs-20 qt-ff-gm qt-color-dark">Record Payment</div>
-
-
-
-
         <div
             class="qt-df qt-ai-c"
             (click)="close()"
         >
             <div class="icon__close qt-sz-24 qt-pointer qt-ic-c "></div>
         </div>
-
-
-
-
     </div>
-
-
-
-
     <div class="billing-aside-scroll-content">
-
-
-
-
         <div class="qt-df qt-pos-rel address-block">
             <div class="qt-w50 qt-pt-16 qt-pr-24 qt-pl-32 qt-pb-24">
-
-
-
-
                 <div class="qt-input-block">
                     <label class="qt-lh-154">Customer Name</label>
                     <app-select-search
@@ -54,21 +26,8 @@
                     ></app-select-search>
                 </div>
             </div>
-
-
-
-
-
         </div>
-
-
-
-
         <div class="qt-df qt-pt-16 qt-pl-30 qt-pr-30 qt-mb-16">
-
-
-
-
             <div class="qt-input-block qt-mr-16 qt-w100">
                 <label class="qt-lh-154">Payment Date</label>
                 <app-date-picker
@@ -79,15 +38,7 @@
                     [useMaxDate]="true"
                     (onChange)="onChangeDate($event)"
                 ></app-date-picker>
-
-
-
-
             </div>
-
-
-
-
             <div class="qt-input-block qt-mr-16 qt-w100">
                 <label class="qt-lh-154">Amount Received</label>
                 <div
@@ -99,14 +50,10 @@
                         class="qt-input-prepend"
                         number
                         [money]="true"
-                        [(ngModel)]="amountReceived"
+                        [ngModel]="amountReceived"
                         (change)="onChangeAmountReceived($event)"
                         appToFixed
                     >
-
-
-
-
                     <mat-error
                         class="qt-tooltip-error"
                         *ngIf="!validate.getAmountReceived()"
@@ -114,10 +61,6 @@
                         You must use the entire amount. $ {{getUnUsedAmountReceived()}} left unused
                     </mat-error>
                 </div>
-
-
-
-
                 <!-- <div class="qt-df qt-ai-c qt-mt-10">
           <label class="qt-checkbox receive-full-amount-check qt-mb-0">
             <input type="checkbox">
@@ -127,17 +70,8 @@
          <div class="qt-fs-12 qt-ml-5">
             Received full amount
           </div>
-
         </div> -->
-
-
-
-
             </div>
-
-
-
-
             <div class="qt-input-block qt-mr-16 qt-w100">
                 <label class="qt-lh-154">Payment Mode</label>
                 <app-select-search

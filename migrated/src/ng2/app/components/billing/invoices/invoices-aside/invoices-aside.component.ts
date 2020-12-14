@@ -62,6 +62,7 @@ export class InvoicesAsideComponent implements OnInit {
   }
   onChangeAmountReceived(event) {
     this.amountReceived = Number(event.target.value);
+    this.amountReceived = parseFloat((this.amountReceived).toFixed(2));
     this.isChangeAmountReceived = (this.amountReceived > 0);
     if (!this.validate.getAmountReceived()) this.validate.checkAmountReceived(this.amountReceived, this.invoices);
   }
@@ -96,7 +97,7 @@ export class InvoicesAsideComponent implements OnInit {
   }
   public onChangePayment(val, invoice) {
     let value = Number(val);
-    invoice.paymentAmount = Math.floor((value) * 100) / 100;
+    invoice.paymentAmount = parseFloat((((value) * 100) / 100).toFixed(2));
     this.validate.setValidPayment(true);
     if (!this.validate.getAmountReceived()) this.validate.checkAmountReceived(this.amountReceived, this.invoices);
   }

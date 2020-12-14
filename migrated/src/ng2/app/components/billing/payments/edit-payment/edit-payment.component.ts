@@ -55,6 +55,7 @@ export class EditPaymentComponent implements OnInit {
   }
   onChangeAmountReceived(event) {
     this.amountReceived = Number(event.target.value);
+    this.amountReceived = parseFloat((this.amountReceived).toFixed(2));
     this.isChangeAmountReceived = (this.amountReceived > 0);
     if (!this.validate.getAmountReceived()) this.validate.checkAmountReceivedEditAside(this.amountReceived, this.editPayment.paymentData);
   }
