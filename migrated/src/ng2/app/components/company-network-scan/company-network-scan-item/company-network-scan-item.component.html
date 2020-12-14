@@ -32,7 +32,14 @@
         [textContent]="device.macAddress"
     ></td>
     <td class="network-scan-table__status">
-        <span class="tag__modern --success ">Managed</span>
+        <span
+            class="tag__modern --success "
+            [ngClass]="{'--success':device.agentStatus === 'managed'}"
+            *ngIf="device.agentStatus !== 'unknown"
+            [textContent]="device.agentStatus"
+        >
+
+        </span>
     </td>
     <td class="network-scan-table__delete">
         <div class="icon__remove qt-ic-c qt-sz-16 qt-pointer"></div>
