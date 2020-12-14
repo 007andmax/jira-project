@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DevicesService } from '../../services/devices/devices.service';
+import { PermissionsService } from '../../services/permissions/permissions.service';
 import { DevicesStateService } from '../../states/devices/devices-state.service';
 import { NetworkScanStateService } from '../../states/network-scan/network-scan-state.service';
 
@@ -22,6 +23,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   constructor(private devicesStateService: DevicesStateService,
     private devicesService: DevicesService,
+    private permissionsService: PermissionsService,
     private networkScanStateService: NetworkScanStateService,
     public cd: ChangeDetectorRef,) { }
 
@@ -42,6 +44,22 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
       this.showPreloader = false;
     })
     this.sub.add(getOnDevices);
+    this.devicesStateService.getOnChangeInfoForDevice().subscribe(data => {
+      if (data.masterAgentId == this.masterAgent.agentId) {
+        this.networkScanSomeInfoForDevice = new NetworkScanSomeInfoForDevice(data);
+        if (this.getPermissions('NETWORK_SCAN_CLIENTS')) {
+          this.devicesService.getLastScanDevices(this.companyId).subscribe((res: any) => {
+            let networkScan = JSON.parse(res.data.networkScan);
+            console.log("networkScan", networkScan);
+          })
+        }
+      }
+
+
+    })
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   openAside() {
     this.networkScanStateService.openAside();
@@ -53,6 +71,12 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
       this.networkScanSomeInfoForDevice = new NetworkScanSomeInfoForDevice(data);
       console.log("this.networkScanSomeInfoForDevice", this.networkScanSomeInfoForDevice);
       this.findMasterAgent();
+    })
+  }
+  selectMasterAgent(device) {
+    console.log("device", device);
+    this.devicesService.markDeviceAsMaster(this.companyId, device.agentId).subscribe(data => {
+      this.masterAgent = device;
     })
   }
   findMasterAgent() {

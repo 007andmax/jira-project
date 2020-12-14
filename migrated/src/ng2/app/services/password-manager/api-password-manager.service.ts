@@ -22,32 +22,37 @@ export class ApiPasswordManagerService {
    */
   public constructor(
     private http: HttpClient
-  ) {}
+  ) { }
 
-   /**
-   * set action open record
-   */
+  /**
+  * set action open record
+  */
   public setOpenRecord(id) {
-    
-   return this.http.get(this.apiUrl + `passwordRecords/${id}/password`);
+
+    return this.http.get(this.apiUrl + `passwordRecords/${id}/password`);
+  }
+
+  public editRecord(data) {
+
+    return this.http.put(this.apiUrl + 'passwordRecords', data);
   }
 
   /**
    * Get records list
    */
   public getRecords() {
- 
-    this.subGetRecords = this.http.get(this.apiUrl + 'passwordRecords').subscribe((response)=> {
+
+    this.subGetRecords = this.http.get(this.apiUrl + 'passwordRecords').subscribe((response) => {
       this.dataChange.next(response);
     })
   }
 
-   /**
-   * Get records list
-   */
+  /**
+  * Get records list
+  */
   public getCompanyRecords(id) {
-   
-    this.http.get(this.apiUrl + `passwordRecords/company/${id}`).subscribe((response)=> {
+
+    this.http.get(this.apiUrl + `passwordRecords/company/${id}`).subscribe((response) => {
       this.companyRecords.next(response);
     })
   }
@@ -56,7 +61,7 @@ export class ApiPasswordManagerService {
    * Get records list
    */
   public getRecordsNew() {
-    
+
     return this.http.get(this.apiUrl + 'passwordRecords');
   }
 
@@ -72,6 +77,6 @@ export class ApiPasswordManagerService {
    * Delete subscription
    */
   public deleteSubscription() {
-  if (this.subGetRecords)  this.subGetRecords.unsubscribe();
+    if (this.subGetRecords) this.subGetRecords.unsubscribe();
   }
 }

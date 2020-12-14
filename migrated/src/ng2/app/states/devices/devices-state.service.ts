@@ -21,6 +21,7 @@ export class DevicesStateService {
   onResetDeviceTiming: EventEmitter<any> = new EventEmitter();
   onOpenAside: EventEmitter<any> = new EventEmitter();
   onRemoveConnecion: EventEmitter<any> = new EventEmitter();
+  onChangeInfoForDevice: EventEmitter<any> = new EventEmitter();
   onClosedRemoveConnecion: EventEmitter<any> = new EventEmitter();
   onLaunchRemoteApp: EventEmitter<any> = new EventEmitter();
   // onChangeDevices: EventEmitter<DeviceUpdate> = new EventEmitter();
@@ -42,6 +43,9 @@ export class DevicesStateService {
       })
     })
     this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
+      if (newChange.action === 'SOME_INFO_FOR_DEVICES') {
+        this.onChangeInfoForDevice.emit(newChange.data);
+      }
       if (newChange.action === 'DEVICE_UNINSTALLED') {
         let deviceIndex = this.allDevices[newChange.data.clientCompanyId].findIndex(item => item.id === newChange.data.value);
         if (deviceIndex > -1) this.allDevices[newChange.data.clientCompanyId].splice(deviceIndex, 1);
@@ -87,6 +91,9 @@ export class DevicesStateService {
       }
       this.onInitGetDevices(this.allDevices);
     })
+  }
+  public getOnChangeInfoForDevice() {
+    return this.onChangeInfoForDevice;
   }
   public onInitUpdateAgentActivityStatus(data) {
     this.onUpdateAgentActivityStatus.emit(data);

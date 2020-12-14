@@ -32,6 +32,11 @@ export class DevicesService {
    * Get devices from company
    * @param companyId - id of company
    */
+
+
+  public getLastScanDevices(companyId) {
+    return this.http.get(this.apiUrl + `devices/networkScan?companyId=${companyId}`);
+  }
   public getCompanyDevices(companyId) {
     return this.http.get(this.apiUrl + `devices?companyId=${companyId}`);
   }
@@ -42,12 +47,10 @@ export class DevicesService {
     return this.http.post(this.apiUrl + '/devices/editAgentInfo', data);
   }
   public sendPowerAction(companyId, agentIds, action) {
-
     if (!Array.isArray(agentIds)) {
       agentIds = [agentIds];
     }
     return this.http.post(this.apiUrl + 'devices/sendPowerAction?companyId=' + companyId + '&action=' + action, agentIds);
-
   }
   public getSomeInfoForDevices(companyId) {
     return this.http.get(this.apiUrl + `devices/getSomeInfoForDevices?companyId=${companyId}`);

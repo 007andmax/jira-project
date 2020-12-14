@@ -14,12 +14,31 @@ import { NetworkScanCredential } from '../../class/network-scan-credential';
 })
 export class NetworkScanCredentialsAsideItemComponent implements OnInit {
   @Input() item: NetworkScanCredential;
+  @Input() companyId: string;
   constructor(private modalService: NgbModal,
     private confirmStateService: ConfirmStateService,
     private apiPasswordManagerService: ApiPasswordManagerService,
     private networkScanStateService: NetworkScanStateService) { }
 
   ngOnInit() {
+  }
+  onCheckChangeName(event) {
+    console.log("event", event.target.value);
+    console.log("item", this.item.username);
+    if (this.item.username !== event.target.value) {
+      this.apiPasswordManagerService.editRecord(this.item.getDataForUpdate(this.companyId, event.target.value, null)).subscribe(data => {
+        this.item.setUserName(event.target.value);
+      })
+    }
+  }
+  onCheckChangePassword(event) {
+    console.log("event", event.target.value);
+    console.log("item", this.item.password);
+    if (this.item.password !== event.target.value) {
+      this.apiPasswordManagerService.editRecord(this.item.getDataForUpdate(this.companyId, this.item.username, event.target.value)).subscribe(data => {
+        this.item.setPassword(event.target.value);
+      })
+    }
   }
   remove() {
     this.confirmStateService.setConfirmAction(REMOVE_CREDENTIAL);

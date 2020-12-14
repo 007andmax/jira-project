@@ -54,6 +54,7 @@
                             <li
                                 class="pointer"
                                 ngbDropdownItem
+                                (click)="selectMasterAgent(agent)"
                                 [textContent]="agent.label || agent.hostName || agent.ip"
                             ></li>
                         </ng-template>
