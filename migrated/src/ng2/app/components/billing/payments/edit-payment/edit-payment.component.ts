@@ -41,7 +41,7 @@ export class EditPaymentComponent implements OnInit {
       this.getClientsList(data);
     })
     this.amountReceived = this.editPayment.paymentData.reduce((a, b) => {
-      return a + b.paidAmount;
+      return parseFloat((a + b.paidAmount).toFixed(2))
     }, 0);;
     this.sub.add(getOnCompanies);
   }
@@ -103,7 +103,7 @@ export class EditPaymentComponent implements OnInit {
     this.paymentsService.editPayments(this.editPayment.getDataForRequest(this.payment)).subscribe(data => {
       this.recordPayment.setDisabled(false);
       this.close();
-    },err => {
+    }, err => {
       this.recordPayment.setDisabled(false);
     })
   }
