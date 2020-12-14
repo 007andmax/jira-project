@@ -16,6 +16,6 @@ export class CompanyNetworkScanItemComponent implements OnInit {
   ngOnInit() {
   }
   getLabel() {
-    return (this.device.description || this.device.hostName || this.device) + (this.device.deviceId === this.networkScanSomeInfoForDevice.masterAgentId ? ' (MASTER AGENT)' : '');
+    return `${(this.device.description || this.device.hostName || this.device)} ${(this.device.deviceId === this.networkScanSomeInfoForDevice.masterAgentId ? '(MASTER AGENT)' : '')}`;
   }
 }

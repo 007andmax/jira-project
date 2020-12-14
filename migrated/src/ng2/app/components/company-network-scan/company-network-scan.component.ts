@@ -56,6 +56,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
             let networkScan = JSON.parse(res.networkScan);
             console.log("networkScan", networkScan);
             this.networkScanDevices = new NetworkScanDevices(networkScan);
+            this.cd.detectChanges();
           })
         }
       }
