@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { REMOVE_CREDENTIAL } from 'src/ng2/app/const/confirm';
@@ -22,7 +22,7 @@ export class NetworkScanCredentialsAsideComponent implements OnInit, OnDestroy {
   constructor(private passwordManagerService: PasswordManagerService,
     private modalService: NgbModal,
     private confirmStateService: ConfirmStateService,
-
+    public cd: ChangeDetectorRef,
     private apiPasswordManagerService: ApiPasswordManagerService,
     private networkScanStateService: NetworkScanStateService) { }
 
@@ -57,6 +57,7 @@ export class NetworkScanCredentialsAsideComponent implements OnInit, OnDestroy {
         let findIndex = this.list.findIndex(item => item.id === newChange.data.id);
         if (findIndex > -1) this.list.splice(findIndex, 1);
       }
+      this.cd.detectChanges();
     })
     this.sub.add(onChangeRealTime);
   }
