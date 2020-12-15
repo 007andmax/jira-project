@@ -30,6 +30,46 @@ export class CompanyNetworkScanItemComponent implements OnInit {
     })
     console.log("data", data);
   }
+  getStatusText() {
+    if (this.device.agentStatus === 'managed') {
+      return 'Managed';
+
+    } else if (this.device.agentStatus === 'Installed') {
+
+      return 'Installed';
+    } else if (this.device.agentStatus === 'Install error') {
+
+      return 'Install error';
+
+    } else if (this.device.agentStatus === 'Bad password') {
+
+      return 'Bad password';
+
+    } else if (this.device.agentStatus === 'Installing' /*
+      || ($scope.device.agentPassword && $scope.device.agentPassword.status === 'PROCEED')*/) {
+
+      return 'Installing';
+
+    } else if (this.device.agentStatus === 'init') {
+
+      return 'Copy install files'
+
+    } else if (this.device.agentStatus === 'Blocked') {
+
+      return 'Blocked';
+
+    } else {
+
+
+
+      /*  if ($scope.device.agentPassword && $scope.device.agentPassword.status === 'SUCCESS') {
+          return 'Correct';
+        } else {
+          return 'Not Monitored';
+        }
+  */
+    }
+  }
   remove() {
     this.devicesService.sendUninstallAgentRequest(this.companyId, [this.device.deviceId]).subscribe(data => {
 
