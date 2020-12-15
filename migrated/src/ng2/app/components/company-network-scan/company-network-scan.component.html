@@ -141,6 +141,7 @@
                     [ngForTrackBy]="trackById"
                 >
                     <app-company-network-scan-item
+                        [companyId]="companyId"
                         [device]="device"
                         [masterAgent]="masterAgent"
                         [networkScanSomeInfoForDevice]="networkScanSomeInfoForDevice"
@@ -346,7 +347,9 @@
 
 
 
+
     <app-network-scan-credentials-aside [companyId]="companyId"></app-network-scan-credentials-aside>
+
 
 
 
