@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { REMOVE_CREDENTIAL } from 'src/ng2/app/const/confirm';
@@ -14,7 +14,7 @@ import { NetworkScanCredential } from '../class/network-scan-credential';
   templateUrl: './network-scan-credentials-aside.component.html',
   styleUrls: ['./network-scan-credentials-aside.component.scss']
 })
-export class NetworkScanCredentialsAsideComponent implements OnInit {
+export class NetworkScanCredentialsAsideComponent implements OnInit, OnDestroy {
   open: boolean = false;
   list: Array<NetworkScanCredential> = [];
   @Input() companyId: string;
@@ -22,8 +22,10 @@ export class NetworkScanCredentialsAsideComponent implements OnInit {
   constructor(private passwordManagerService: PasswordManagerService,
     private modalService: NgbModal,
     private confirmStateService: ConfirmStateService,
+
     private apiPasswordManagerService: ApiPasswordManagerService,
     private networkScanStateService: NetworkScanStateService) { }
+
 
   ngOnInit() {
     this.networkScanStateService.getOnOpenAside().subscribe(data => {
@@ -45,9 +47,23 @@ export class NetworkScanCredentialsAsideComponent implements OnInit {
       }
     })
     this.sub.add(getConfirm);
+    let onChangeRealTime = this.passwordManagerService.onChangeRealTime.subscribe(newChange => {
+      if (newChange.action === 'PASSWORD_RECORD_CREATED') this.list.push(new NetworkScanCredential(newChange.data.id, newChange.data.username));
+      if (newChange.action === 'PASSWORD_RECORD_UPDATED') {
+        let findIndex = this.list.findIndex(item => item.id === newChange.data.id);
+        if (findIndex > -1) this.list[findIndex].setUserName(newChange.data.username);
+      }
+      if (newChange.action === 'PASSWORD_RECORD_DELETED') {
+        let findIndex = this.list.findIndex(item => item.id === newChange.data.id);
+        if (findIndex > -1) this.list.splice(findIndex, 1);
+      }
+    })
+    this.sub.add(onChangeRealTime);
   }
   close() {
     this.open = false;
   }
-
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }
