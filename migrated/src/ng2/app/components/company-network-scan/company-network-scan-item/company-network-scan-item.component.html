@@ -47,6 +47,10 @@
         </span>
     </td>
     <td class="network-scan-table__delete">
-        <div class="icon__remove qt-ic-c qt-sz-16 qt-pointer"></div>
+        <div
+            class="icon__remove qt-ic-c qt-sz-16 qt-pointer"
+            *ngIf="device.agentStatus === 'managed' || device.agentStatus === 'Installed'"
+            (click)="remove()"
+        ></div>
     </td>
 </tr>

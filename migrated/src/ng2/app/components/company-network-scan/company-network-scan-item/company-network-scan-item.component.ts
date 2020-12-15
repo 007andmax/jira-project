@@ -26,10 +26,13 @@ export class CompanyNetworkScanItemComponent implements OnInit {
   }
   onChangeName(data) {
     this.devicesService.sendDescription(this.companyId, this.device.id, data).subscribe(res => {
+      this.device.setDescription(data);
+    })
+    console.log("data", data);
+  }
+  remove() {
+    this.devicesService.sendUninstallAgentRequest(this.companyId, [this.device.deviceId]).subscribe(data => {
 
     })
-
-    console.log("data", data);
-
   }
 }
