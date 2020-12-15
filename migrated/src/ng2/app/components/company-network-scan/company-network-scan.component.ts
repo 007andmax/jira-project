@@ -51,17 +51,18 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
       if (data.masterAgentId == this.masterAgent.agentId) {
         console.log("data", data);
         this.networkScanSomeInfoForDevice = new NetworkScanSomeInfoForDevice(data);
-        if (this.getPermissions('NETWORK_SCAN_CLIENTS')) {
-          this.devicesService.getLastScanDevices(this.companyId).subscribe((res: any) => {
-            let networkScan = JSON.parse(res.networkScan);
-            console.log("networkScan", networkScan);
-            this.networkScanDevices = new NetworkScanDevices(networkScan);
-            this.cd.detectChanges();
-          })
-        }
+        if (this.getPermissions('NETWORK_SCAN_CLIENTS')) this.getLastScanDevices();
       }
 
 
+    })
+  }
+  private getLastScanDevices() {
+    this.devicesService.getLastScanDevices(this.companyId).subscribe((res: any) => {
+      let networkScan = JSON.parse(res.networkScan);
+      console.log("networkScan", networkScan);
+      this.networkScanDevices = new NetworkScanDevices(networkScan);
+      this.cd.detectChanges();
     })
   }
   public getPermissions(action) {
@@ -98,6 +99,12 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     }
     console.log("this.masterAgent", this.masterAgent);
     console.log("this.devices", this.devices);
+    this.networkScanSomeInfoForDevice = new NetworkScanSomeInfoForDevice({
+      allowAgentInstall: true,
+      domainPresent: false,
+      masterAgentId: this.masterAgent.agentId
+    });
+    if (this.getPermissions('NETWORK_SCAN_CLIENTS')) this.getLastScanDevices();
   }
 
   ngOnDestroy(): void {
