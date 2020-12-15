@@ -12,11 +12,17 @@
     </td>
     <td class="network-scan-table__device-name">
         <div class="qt-df qt-ai-c">
-            <input
+            <app-company-devices-edit-label
+                [field]="getLabel()"
+                [title]="'Name'"
+                class="company-device-edit-name"
+                (onChange)="onChangeName($event)"
+            ></app-company-devices-edit-label>
+            <!-- <input
                 class="network-scan-table__device-name-input"
                 type="text"
                 [value]="getLabel()"
-            >
+            > -->
         </div>
     </td>
     <td
@@ -35,10 +41,9 @@
         <span
             class="tag__modern --success "
             [ngClass]="{'--success':device.agentStatus === 'managed'}"
-            *ngIf="device.agentStatus !== 'unknown"
+            *ngIf="device.agentStatus !== 'unknown'"
             [textContent]="device.agentStatus"
         >
-
         </span>
     </td>
     <td class="network-scan-table__delete">

@@ -34,6 +34,9 @@ export class DevicesService {
    */
 
 
+  public sendDescription(companyId, networkDeviceId, description) {
+    return this.http.post(this.apiUrl + `/devices/sendDescription?companyId=${companyId}&networkDeviceId=${networkDeviceId}`, description);
+  }
   public getLastScanDevices(companyId) {
     return this.http.get(this.apiUrl + `devices/networkScan?companyId=${companyId}`);
   }
