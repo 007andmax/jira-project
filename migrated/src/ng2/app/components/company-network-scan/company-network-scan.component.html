@@ -29,13 +29,13 @@
                 >
                     <button
                         class="qt-button --with-menu network-steps__scan-button"
-                        [ngClass]="{'qt-loading': showPreloader}"
                         ngbDropdownAnchor
                     >
                         <span
-                            class="left-side-overflow"
+                            class="left-side-overflow qt-loading"
                             [textContent]="(masterAgent) ? masterAgent.label || masterAgent.hostName || masterAgent.ip : ''"
-                        ></span>
+                        >
+                      </span>
                         <div
                             class="button-menu"
                             ngbDropdownToggle
