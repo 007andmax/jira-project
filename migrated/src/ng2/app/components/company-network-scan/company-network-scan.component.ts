@@ -10,6 +10,7 @@ import { Device } from '../company-devices/class/device';
 import { NetworkScanDevice } from './class/network-scan-device';
 import { NetworkScanDevices } from './class/network-scan-devices';
 import { NetworkScanSomeInfoForDevice } from './class/network-scan-some-info-for-devices';
+import { installationStatuses } from './const/const';
 
 @Component({
   selector: 'app-company-network-scan',
@@ -76,7 +77,15 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
       }
       if (newChange.action === 'REMOTE_INSTALL' || newChange.action === 'REMOTE_INSTALL_INFO') {
         let findIndex = this.networkScanDevices.devices.findIndex(item => item.deviceId === newChange.data.deviceId || item.deviceId === newChange.data.netScanId);
-        if (findIndex > -1) this.networkScanDevices.devices[findIndex].setAgentStatus(newChange.data.status);
+        if (findIndex > -1) {
+          let statusName = newChange.data.status;
+          let status = installationStatuses[statusName];
+          if (statusName === 'MANAGED') {
+            this.networkScanDevices.devices[findIndex].setAgentStatus('managed');
+          } else {
+            this.networkScanDevices.devices[findIndex].setMessage(status.message);
+          }
+        }
       }
       if (newChange.action === 'AGENT_PASSWORDS_CHANGED') {
         newChange.data.forEach(element => {
@@ -88,6 +97,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
         let findIndex = this.networkScanDevices.devices.findIndex(item => item.deviceId === newChange.data.deviceId);
         if (findIndex > -1) this.networkScanDevices.devices[findIndex].setDescription(newChange.data.description);
       }
+      this.cd.detectChanges();
     })
   }
   private getLastScanDevices() {

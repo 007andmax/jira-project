@@ -17,6 +17,9 @@ export class NetworkScanDevice {
             this[key] = data[key];
         }
     }
+    public setMessage(data) {
+        this.message = data;
+    }
     public setDescription(data) {
         this.description = data;
     }
