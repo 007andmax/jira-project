@@ -52,17 +52,16 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
       this.showPreloader = false;
     })
     this.sub.add(getOnDevices);
-    this.devicesStateService.getOnChangeInfoForDevice().subscribe(data => {
+    let getOnChangeInfoForDevice = this.devicesStateService.getOnChangeInfoForDevice().subscribe(data => {
       console.log("data", data);
-      if (data.masterAgentId == this.masterAgent.agentId) {
+      if (data.masterAgentId != this.masterAgent.agentId) {
         console.log("data", data);
         this.networkScanSomeInfoForDevice = new NetworkScanSomeInfoForDevice(data);
         if (this.getPermissions('NETWORK_SCAN_CLIENTS')) this.getLastScanDevices();
       }
-
-
     })
-    this.devicesRealTimeService.netScanArray.subscribe(newChange => {
+    this.sub.add(getOnChangeInfoForDevice);
+    let netScanArray = this.devicesRealTimeService.netScanArray.subscribe(newChange => {
       if (newChange.action === 'NETWORK_SCAN') {
         if (newChange.data.status === 'Scanning') this.isScaning = true;
         if (newChange.data.status === 'Finished') this.isScaning = false;
@@ -104,6 +103,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
       }
       this.cd.detectChanges();
     })
+    this.sub.add(netScanArray);
   }
   runScanDevices() {
     if (this.isScaning) return;
