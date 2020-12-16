@@ -34,6 +34,7 @@
                         <span
                             class="left-side-overflow"
                             [ngClass]="{'qt-loading': isScaning}"
+                            (click)="runScanDevices()"
                             [textContent]="(masterAgent && !isScaning) ? masterAgent.label || masterAgent.hostName || masterAgent.ip : ''"
                         >
                         </span>
@@ -353,7 +354,11 @@
 
 
 
+
+
     <app-network-scan-credentials-aside [companyId]="companyId"></app-network-scan-credentials-aside>
+
+
 
 
 

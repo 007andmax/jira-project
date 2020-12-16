@@ -33,7 +33,9 @@ export class DevicesService {
    * @param companyId - id of company
    */
 
-
+  public runScanDevices(companyId) {
+    return this.http.get(this.apiUrl + `devices/refreshNetworkScan?companyId=${companyId}`);
+  }
   public sendDescription(companyId, networkDeviceId, description) {
     return this.http.post(this.apiUrl + `/devices/sendDescription?companyId=${companyId}&networkDeviceId=${networkDeviceId}`, description);
   }

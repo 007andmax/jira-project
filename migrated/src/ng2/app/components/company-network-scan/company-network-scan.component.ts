@@ -105,6 +105,12 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
   }
+  runScanDevices() {
+    if (this.isScaning) return;
+    this.devicesService.runScanDevices(this.companyId).subscribe(data => {
+      this.isScaning = true;
+    })
+  }
   private getLastScanDevices() {
     this.devicesService.getLastScanDevices(this.companyId).subscribe((res: any) => {
       let networkScan = JSON.parse(res.networkScan);
