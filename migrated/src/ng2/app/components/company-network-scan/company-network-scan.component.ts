@@ -83,7 +83,9 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
           let status = installationStatuses[statusName];
           if (statusName === 'MANAGED') {
             this.networkScanDevices.devices[findIndex].setAgentStatus('managed');
+            this.networkScanDevices.devices[findIndex].setMessage(status.message);
           } else {
+            this.networkScanDevices.devices[findIndex].setAgentStatus(status.status);
             this.networkScanDevices.devices[findIndex].setMessage(status.message);
           }
           console.log("statusName", statusName);
