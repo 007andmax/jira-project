@@ -19,10 +19,10 @@ $light-blue: #1286cc;
 $titleColor: #364656;
 $parot: #2ec866;
 
-body {
-    @include body-font;
-    background-color: $bodyColor;
-}
+// body {
+//     @include body-font;
+//     background-color: $bodyColor;
+// }
 .d-flex {
     @include flexbox;
 }
