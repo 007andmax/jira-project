@@ -24,6 +24,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
   showPreloader: boolean = true;
   isGetDevices: boolean = false;
   companyId: string;
+  isScaning: boolean = false;
   sub: Subscription = new Subscription();
   constructor(private devicesStateService: DevicesStateService,
     private devicesService: DevicesService,
@@ -62,6 +63,8 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     })
     this.devicesRealTimeService.netScanArray.subscribe(newChange => {
       if (newChange.action === 'NETWORK_SCAN') {
+        if (newChange.data.status === 'Scanning') this.isScaning = true;
+        if (newChange.data.status === 'Finished') this.isScaning = false;
         newChange.data.deviceList.forEach(element => {
           let findIndex = this.networkScanDevices.devices.findIndex(item => item.id === element.id);
           if (findIndex > -1) {

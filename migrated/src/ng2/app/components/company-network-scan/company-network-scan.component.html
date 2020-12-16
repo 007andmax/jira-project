@@ -32,13 +32,15 @@
                         ngbDropdownAnchor
                     >
                         <span
-                            class="left-side-overflow qt-loading"
-                            [textContent]="(masterAgent) ? masterAgent.label || masterAgent.hostName || masterAgent.ip : ''"
+                            class="left-side-overflow"
+                            [ngClass]="{'qt-loading': isScaning}"
+                            [textContent]="(masterAgent && !isScaning) ? masterAgent.label || masterAgent.hostName || masterAgent.ip : ''"
                         >
-                      </span>
+                        </span>
                         <div
                             class="button-menu"
                             ngbDropdownToggle
+                            [hidden]="isScaning"
                         >
                             <div class="qt-sz-16 qt-ic-c icon__dropdown-arrow-up"></div>
                         </div>
@@ -348,7 +350,13 @@
 
 
 
+
+
+
     <app-network-scan-credentials-aside [companyId]="companyId"></app-network-scan-credentials-aside>
+
+
+
 
 
 
