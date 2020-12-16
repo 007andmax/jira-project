@@ -3,6 +3,10 @@ export const installationStatuses = {
         status: 'Installing',
         message: "Remote installation initialized"
     },
+    'INSTALL_UNKNOWN': {
+        status: 'Unknown',
+        message: "Unknown error"
+    },
     'CONNECT_TO_HOST': {
         status: 'Installing',
         message: 'Connecting to a remote computer'
