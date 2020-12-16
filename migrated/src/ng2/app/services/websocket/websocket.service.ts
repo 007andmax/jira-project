@@ -91,6 +91,7 @@ export class WebsocketService {
       that.subsribeToSubmittedService();
       that.subsribeToSubmittedServiceAgreement();
       that.subsribeToSubmittedOneTimeConnection();
+
     });
   }
   private subsribeToDevices() {
@@ -386,6 +387,19 @@ export class WebsocketService {
       this.stompClient.subscribe(`/user/watch/oneTimeConnection`, (message) => {
         var newChange = JSON.parse(message.body);
         this.devicesRealTimeService.handleRealTimeOneTimeConnection(newChange);
+      });
+
+    }, 3000);
+  }
+
+  public subsribeToNetScan(companyId) {
+
+    setTimeout(() => {
+
+      this.stompClient.subscribe(`/user/watch/netScan/${companyId}`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.devicesRealTimeService.handleRealTimeNetScan(newChange);
+
       });
 
     }, 3000);

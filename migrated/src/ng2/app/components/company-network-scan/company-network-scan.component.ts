@@ -2,10 +2,12 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DevicesService } from '../../services/devices/devices.service';
 import { PermissionsService } from '../../services/permissions/permissions.service';
+import { DevicesRealTimeService } from '../../states/devices/devices-real-time.service';
 import { DevicesStateService } from '../../states/devices/devices-state.service';
 import { NetworkScanStateService } from '../../states/network-scan/network-scan-state.service';
 
 import { Device } from '../company-devices/class/device';
+import { NetworkScanDevice } from './class/network-scan-device';
 import { NetworkScanDevices } from './class/network-scan-devices';
 import { NetworkScanSomeInfoForDevice } from './class/network-scan-some-info-for-devices';
 
@@ -27,11 +29,13 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     private devicesService: DevicesService,
     private permissionsService: PermissionsService,
     private networkScanStateService: NetworkScanStateService,
+    private devicesRealTimeService: DevicesRealTimeService,
     public cd: ChangeDetectorRef,) { }
 
 
   ngOnInit() {
     this.companyId = localStorage.getItem("company_id");
+    this.devicesStateService.subsribeToNetScan(this.companyId);
     if (this.devicesStateService.getAllDevices()) {
       this.devices = (this.devicesStateService.getAllDevices()[this.companyId]) ? JSON.parse(JSON.stringify(this.devicesStateService.getAllDevices()[this.companyId])).map(item => new Device(item)) : [];
       this.getSomeInfoForDevices();
@@ -55,6 +59,32 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
       }
 
 
+    })
+    this.devicesRealTimeService.netScanArray.subscribe(newChange => {
+      if (newChange.action === 'NETWORK_SCAN') {
+        newChange.data.deviceList.forEach(element => {
+          let findIndex = this.networkScanDevices.devices.findIndex(item => item.id === element.id);
+          if (findIndex > -1) {
+            this.networkScanDevices.devices[findIndex].update(element);
+          } else {
+            this.networkScanDevices.devices.push(new NetworkScanDevice(element));
+          }
+        });
+      }
+      if (newChange.action === 'REMOTE_INSTALL' || newChange.action === 'REMOTE_INSTALL_INFO') {
+        let findIndex = this.networkScanDevices.devices.findIndex(item => item.deviceId === newChange.data.deviceId || item.deviceId === newChange.data.netScanId);
+        if (findIndex > -1) this.networkScanDevices.devices[findIndex].setAgentStatus(newChange.data.status);
+      }
+      if (newChange.action === 'AGENT_PASSWORDS_CHANGED') {
+        newChange.data.forEach(element => {
+          let findIndex = this.networkScanDevices.devices.findIndex(item => item.deviceId === element.deviceId);
+          if (findIndex > -1) this.networkScanDevices.devices[findIndex].setAgentPassword(element);
+        });
+      }
+      if (newChange.action === 'NETWORK_DEVICE_DESCRIPTON') {
+        let findIndex = this.networkScanDevices.devices.findIndex(item => item.deviceId === newChange.data.deviceId);
+        if (findIndex > -1) this.networkScanDevices.devices[findIndex].setDescription(newChange.data.description);
+      }
     })
   }
   private getLastScanDevices() {

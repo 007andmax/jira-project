@@ -11,6 +11,7 @@ export class NetworkScanDevice {
     manufacturer: string;
     message: string;
     updatedAt: string;
+    agentPassword: any;
     constructor(data) {
         for (const key in data) {
             this[key] = data[key];
@@ -18,5 +19,25 @@ export class NetworkScanDevice {
     }
     public setDescription(data) {
         this.description = data;
+    }
+    public setAgentPassword(data) {
+        this.agentPassword = data;
+    }
+    public setAgentStatus(data) {
+        this.agentStatus = data;
+    }
+    public update(data) {
+        this.agentStatus = data.agentStatus;
+        this.createdAt = data.createdAt;
+        this.description = data.description;
+        this.deviceId = data.deviceId;
+        this.discoveredByAgentId = data.discoveredByAgentId;
+        this.hostName = data.hostName;
+        this.id = data.id;
+        this.ipAddress = data.ipAddress;
+        this.macAddress = data.macAddress;
+        this.manufacturer = data.manufacturer;
+        this.message = data.message;
+        this.updatedAt = data.updatedAt;
     }
 }

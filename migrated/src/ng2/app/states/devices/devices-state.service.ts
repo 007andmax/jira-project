@@ -7,6 +7,7 @@ import { DeviceUpdate } from './class/device-update';
 import * as moment from "moment";
 import { Device } from '../../components/company-devices/class/device';
 import { DeviceCompany } from '../../components/company-devices/class/device-company';
+import { WebsocketService } from '../../services/websocket/websocket.service';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,9 @@ export class DevicesStateService {
   onClosedRemoveConnecion: EventEmitter<any> = new EventEmitter();
   onLaunchRemoteApp: EventEmitter<any> = new EventEmitter();
   // onChangeDevices: EventEmitter<DeviceUpdate> = new EventEmitter();
-  constructor(private userStateService: UsersStateService, private devicesService: DevicesService,
+  constructor(private userStateService: UsersStateService,
+    private devicesService: DevicesService,
+    private websocketService: WebsocketService,
     private devicesRealTimeService: DevicesRealTimeService) { }
 
   public onInit() {
@@ -92,6 +95,9 @@ export class DevicesStateService {
       }
       this.onInitGetDevices(this.allDevices);
     })
+  }
+  public subsribeToNetScan(id) {
+    this.websocketService.subsribeToNetScan(id);
   }
   public getOnChangeInfoForDevice() {
     return this.onChangeInfoForDevice;
