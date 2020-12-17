@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { REMOVE_CREDENTIAL } from 'src/ng2/app/const/confirm';
 import { ApiPasswordManagerService } from 'src/ng2/app/services/password-manager/api-password-manager.service';
@@ -15,12 +15,16 @@ import { NetworkScanCredential } from '../../class/network-scan-credential';
 export class NetworkScanCredentialsAsideItemComponent implements OnInit {
   @Input() item: NetworkScanCredential;
   @Input() companyId: string;
+  @Output() onSelect = new EventEmitter<any>();
   constructor(private modalService: NgbModal,
     private confirmStateService: ConfirmStateService,
     private apiPasswordManagerService: ApiPasswordManagerService,
     private networkScanStateService: NetworkScanStateService) { }
 
   ngOnInit() {
+  }
+  select() {
+    this.onSelect.emit(this.item);
   }
   onCheckChangeName(event) {
     console.log("event", event.target.value);

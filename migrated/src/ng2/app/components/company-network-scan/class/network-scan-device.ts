@@ -12,6 +12,7 @@ export class NetworkScanDevice {
     message: string;
     updatedAt: string;
     agentPassword: any;
+    selected: boolean = false;
     constructor(data) {
         for (const key in data) {
             this[key] = data[key];

@@ -75,13 +75,18 @@
                 <div class="network-step__text-cred qt-mb-15">
                     <span>You have using below credentials:</span>
                     <br>
-                    <span class="qt-ff-gm">Activec admin</span>
+                    <span
+                        class="qt-ff-gm"
+                        [textContent]="networkScanInstallAgent.getCredentialText()"
+                    ></span>
                 </div>
                 <button
                     class="qt-button "
+                    [ngClass]="{'--disabled': !checkSelected()}"
                     (click)="openAside()"
+                    [disabled]="!checkSelected()"
+                    [textContent]="(networkScanInstallAgent.getCredential()) ? 'Modify credentials' : 'Apply Credentials'"
                 >
-                    Apply Credentials
                 </button>
                 <!-- qt-loading --hide-text -->
             </div>
@@ -92,8 +97,10 @@
                 <div class="network-step__title">Install Agent</div>
                 <div class="network-step__text qt-mb-15">Click on button below to install agent</div>
                 <button
-                    class="qt-button --disabled"
-                    disabled
+                    class="qt-button"
+                    [ngClass]="{'--disabled': !checkCanInstallAgent()}"
+                    (click)="installAgent()"
+                    [disabled]="!checkCanInstallAgent()"
                 >
                     Install Agent
                 </button>
@@ -108,7 +115,11 @@
                     <th class="network-scan-table__check">
                         <div class="d-f">
                             <label class="qt-checkbox">
-                                <input type="checkbox">
+                                <input
+                                    type="checkbox"
+                                    (change)="onToggleAll($event)"
+                                    [(ngModel)]="selectAllDevices"
+                                >
                                 <span></span>
                             </label>
                         </div>
@@ -148,6 +159,7 @@
                         [device]="device"
                         [masterAgent]="masterAgent"
                         [networkScanSomeInfoForDevice]="networkScanSomeInfoForDevice"
+                        (onSelect)="onSelectDevice()"
                     ></app-company-network-scan-item>
                 </ng-template>
                 <!-- <tr>
@@ -356,7 +368,36 @@
 
 
 
-    <app-network-scan-credentials-aside [companyId]="companyId"></app-network-scan-credentials-aside>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <app-network-scan-credentials-aside
+        [companyId]="companyId"
+        (onSelect)="onSelectCredential($event)"
+    ></app-network-scan-credentials-aside>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

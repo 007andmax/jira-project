@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
 import { Device } from '../../company-devices/class/device';
 import { NetworkScanDevice } from '../class/network-scan-device';
@@ -14,9 +14,13 @@ export class CompanyNetworkScanItemComponent implements OnInit {
   @Input() device: NetworkScanDevice;
   @Input() masterAgent: Device = null;
   @Input() companyId: string;
+  @Output() onSelect = new EventEmitter<any>();
   constructor(private devicesService: DevicesService) { }
 
   ngOnInit() {
+  }
+  onSelectDevice() {
+    this.onSelect.emit(null);
   }
   checkUnknown(value) {
     return (value === "unknown") ? null : value;
@@ -58,8 +62,11 @@ export class CompanyNetworkScanItemComponent implements OnInit {
 
       return 'Blocked';
 
-    } else {
+    } else if (this.device.agentStatus === 'ErrorUac') {
 
+      return 'Error Uac';
+
+    } else {
 
 
       /*  if ($scope.device.agentPassword && $scope.device.agentPassword.status === 'SUCCESS') {

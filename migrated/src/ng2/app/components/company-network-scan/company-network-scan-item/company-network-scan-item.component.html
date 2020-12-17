@@ -4,8 +4,16 @@
             class="d-f"
             *ngIf="networkScanSomeInfoForDevice.allowAgentInstall"
         >
-            <label class="qt-checkbox">
-                <input type="checkbox">
+            <label
+                class="qt-checkbox"
+                [attr.for]="'device-' + device.id"
+            >
+                <input
+                    type="checkbox"
+                    [attr.id]="'device-' + device.id"
+                    [(ngModel)]="device.selected"
+                    (change)="onSelectDevice()"
+                >
                 <span></span>
             </label>
         </div>
@@ -39,9 +47,10 @@
     ></td>
     <td class="network-scan-table__status">
         <span
-            class="tag__modern --success "
+            class="tag__modern"
+            *ngIf="device.agentStatus !== 'unknown'"
             [ngClass]="{'--success':device.agentStatus === 'managed' || device.agentStatus === 'Installed' || device.agentStatus === 'unknown',
-        '--error':device.agentStatus === 'Install error' || device.agentStatus === 'Bad password' || device.agentStatus === 'unknown',
+        '--error':device.agentStatus === 'Install error' || device.agentStatus === 'Bad password' || device.agentStatus === 'unknown' || device.agentStatus === 'ErrorUac',
     '--gray':device.agentStatus === 'Blocked',
 '--blue':device.agentStatus === 'Installing' || device.agentStatus === 'init'}"
             [textContent]="getStatusText()"

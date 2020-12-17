@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DevicesService } from '../../services/devices/devices.service';
+import { ApiPasswordManagerService } from '../../services/password-manager/api-password-manager.service';
 import { PermissionsService } from '../../services/permissions/permissions.service';
 import { DevicesRealTimeService } from '../../states/devices/devices-real-time.service';
 import { DevicesStateService } from '../../states/devices/devices-state.service';
@@ -9,6 +10,7 @@ import { NetworkScanStateService } from '../../states/network-scan/network-scan-
 import { Device } from '../company-devices/class/device';
 import { NetworkScanDevice } from './class/network-scan-device';
 import { NetworkScanDevices } from './class/network-scan-devices';
+import { NetworkScanInstallAgent } from './class/network-scan-install-agent';
 import { NetworkScanSomeInfoForDevice } from './class/network-scan-some-info-for-devices';
 import { installationStatuses } from './const/const';
 
@@ -19,11 +21,13 @@ import { installationStatuses } from './const/const';
 })
 export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
   devices: Array<Device> = [];
+  networkScanInstallAgent: NetworkScanInstallAgent = new NetworkScanInstallAgent();
   networkScanDevices: NetworkScanDevices;
   networkScanSomeInfoForDevice: NetworkScanSomeInfoForDevice;
   masterAgent: Device = null;
   showPreloader: boolean = true;
   isGetDevices: boolean = false;
+  selectAllDevices: boolean = false;
   companyId: string;
   isScaning: boolean = false;
   sub: Subscription = new Subscription();
@@ -32,6 +36,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     private permissionsService: PermissionsService,
     private networkScanStateService: NetworkScanStateService,
     private devicesRealTimeService: DevicesRealTimeService,
+    private apiPasswordManagerService: ApiPasswordManagerService,
     public cd: ChangeDetectorRef,) { }
 
 
@@ -104,6 +109,31 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
     this.sub.add(netScanArray);
+  }
+  checkCanInstallAgent() {
+    return this.checkSelected() && this.networkScanInstallAgent.getCredential();
+  }
+  onSelectCredential(data) {
+    this.networkScanInstallAgent.setCredential(data);
+    this.apiPasswordManagerService.setOpenRecord(data.id).subscribe((res: any) => {
+      console.log('res', res);
+      this.networkScanInstallAgent.getCredential().setPassword(res.password);
+    })
+  }
+  onSelectDevice() {
+    this.selectAllDevices = true;
+    this.networkScanDevices.devices.forEach(item => {
+      if (!item.selected) this.selectAllDevices = false;
+    })
+  }
+
+  checkSelected() {
+    return (!this.networkScanDevices) ? false : this.networkScanDevices.devices.find(item => item.selected);
+  }
+  onToggleAll(event) {
+    this.networkScanDevices.devices.forEach(item => {
+      item.selected = event.target.checked;
+    })
   }
   runScanDevices() {
     if (this.isScaning) return;

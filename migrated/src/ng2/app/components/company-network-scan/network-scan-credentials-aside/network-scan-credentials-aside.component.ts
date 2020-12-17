@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { REMOVE_CREDENTIAL } from 'src/ng2/app/const/confirm';
@@ -18,6 +18,7 @@ export class NetworkScanCredentialsAsideComponent implements OnInit, OnDestroy {
   open: boolean = false;
   list: Array<NetworkScanCredential> = [];
   @Input() companyId: string;
+  @Output() onSelect = new EventEmitter<any>();
   sub: Subscription = new Subscription();
   constructor(private passwordManagerService: PasswordManagerService,
     private modalService: NgbModal,
@@ -60,6 +61,10 @@ export class NetworkScanCredentialsAsideComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
     this.sub.add(onChangeRealTime);
+  }
+  onSelectCredential(data) {
+    this.onSelect.emit(data);
+    this.close();
   }
   close() {
     this.open = false;
