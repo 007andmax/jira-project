@@ -48,10 +48,7 @@
     <td class="network-scan-table__status">
         <span
             *ngIf="device.agentStatus !== 'unknown'"
-            [ngClass]="{'tag__modern --success':device.agentStatus === 'managed' || device.agentStatus === 'Installed' || device.agentStatus === 'unknown',
-        'tag__modern --error':device.agentStatus === 'Install error' || device.agentStatus === 'Bad password' || device.agentStatus === 'unknown' || device.agentStatus === 'ErrorUac',
-    'tag__modern --gray':device.agentStatus === 'Blocked',
-'qt-sz-18 qt-loading --blue qt-ml-20':device.agentStatus === 'Installing' || device.agentStatus === 'init'}"
+            [ngClass]="getClass()"
             [textContent]="getStatusText()"
         >
         </span>
