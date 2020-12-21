@@ -52,7 +52,8 @@
             [ngClass]="{'--success':device.agentStatus === 'managed' || device.agentStatus === 'Installed' || device.agentStatus === 'unknown',
         '--error':device.agentStatus === 'Install error' || device.agentStatus === 'Bad password' || device.agentStatus === 'unknown' || device.agentStatus === 'ErrorUac',
     '--gray':device.agentStatus === 'Blocked',
-'--blue':device.agentStatus === 'Installing' || device.agentStatus === 'init'}"
+'--blue':device.agentStatus === 'Installing' || device.agentStatus === 'init',
+'qt-loading':device.agentStatus === 'Installing' || device.agentStatus === 'init'}"
             [textContent]="getStatusText()"
         >
         </span>
