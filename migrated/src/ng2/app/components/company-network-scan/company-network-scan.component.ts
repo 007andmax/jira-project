@@ -141,7 +141,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     })
   }
   runScanDevices() {
-    if (this.isScaning) return;
+    if (!this.masterAgent.online || this.isScaning) return;
     this.devicesService.runScanDevices(this.companyId).subscribe(data => {
       this.isScaning = true;
     })
