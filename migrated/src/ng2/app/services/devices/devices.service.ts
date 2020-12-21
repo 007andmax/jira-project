@@ -36,6 +36,10 @@ export class DevicesService {
   public runScanDevices(companyId) {
     return this.http.get(this.apiUrl + `devices/refreshNetworkScan?companyId=${companyId}`);
   }
+
+  public remoteInstall(data) {
+    return this.http.post(this.apiUrl + `devices/remoteInstall`, data);
+  }
   public sendDescription(companyId, networkDeviceId, description) {
     return this.http.post(this.apiUrl + `/devices/sendDescription?companyId=${companyId}&networkDeviceId=${networkDeviceId}`, description);
   }

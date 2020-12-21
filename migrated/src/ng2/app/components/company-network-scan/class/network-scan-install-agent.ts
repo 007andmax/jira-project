@@ -12,4 +12,13 @@ export class NetworkScanInstallAgent {
     public getCredentialText() {
         return (this.credential) ? `${this.credential.username} ${this.credential.password}` : '';
     }
+    public getDataForInstall(companyId, deviceIds, discoveredByAgentId) {
+        return {
+            login: this.credential.username,
+            password: this.credential.password,
+            companyId: companyId,
+            deviceIds: deviceIds,
+            discoveredByAgentId: discoveredByAgentId
+        }
+    }
 }

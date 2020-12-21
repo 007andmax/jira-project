@@ -113,6 +113,11 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
   checkCanInstallAgent() {
     return this.checkSelected() && this.networkScanInstallAgent.getCredential();
   }
+  installAgent() {
+    this.devicesService.remoteInstall(this.networkScanInstallAgent.getDataForInstall(this.companyId, this.networkScanDevices.devices.filter(item => item.selected).map(item => item.id), this.masterAgent.agentId)).subscribe(data => {
+
+    })
+  }
   onSelectCredential(data) {
     this.networkScanInstallAgent.setCredential(data);
     this.apiPasswordManagerService.setOpenRecord(data.id).subscribe((res: any) => {
