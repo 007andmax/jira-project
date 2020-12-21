@@ -52,7 +52,7 @@ export class CompanyNetworkScanItemComponent implements OnInit {
     } else if (this.device.agentStatus === 'Installing' /*
       || ($scope.device.agentPassword && $scope.device.agentPassword.status === 'PROCEED')*/) {
 
-      return 'Installing';
+      return '';
 
     } else if (this.device.agentStatus === 'init') {
 
