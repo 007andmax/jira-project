@@ -32,7 +32,7 @@
                         ngbDropdownAnchor
                         placement="top"
                         ngbTooltip="Master Agent Offline"
-                        [disableTooltip]="masterAgent.online"
+                        [disableTooltip]="masterAgent && masterAgent.online"
                     >
                         <span
                             class="left-side-overflow"
