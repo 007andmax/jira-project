@@ -25,7 +25,6 @@ export class PermissionsService {
    */
   public isAllowed(action) {
     const currentUser = this.usersStateService.getCurrentUser();
-    console.log("currentUser", currentUser);
     return !!(currentUser && (currentUser.isOwner || currentUser.permissions.indexOf(action) > -1));
   };
 }

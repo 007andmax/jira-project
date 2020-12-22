@@ -48,6 +48,7 @@ export class DevicesStateService {
     this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
       console.log("newChange", newChange);
       if (newChange.action === 'SOME_INFO_FOR_DEVICES') {
+        console.log("onChangeInfoForDevice");
         this.onChangeInfoForDevice.emit(newChange.data);
       }
       if (newChange.action === 'DEVICE_UNINSTALLED') {
