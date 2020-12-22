@@ -395,8 +395,9 @@ export class WebsocketService {
   public subsribeToNetScan(companyId) {
 
     setTimeout(() => {
-
+      console.log("subsribeToNetScan", companyId);
       this.stompClient.subscribe(`/user/watch/netScan/${companyId}`, (message) => {
+        console.log("message", message);
         var newChange = JSON.parse(message.body);
         this.devicesRealTimeService.handleRealTimeNetScan(newChange);
 
