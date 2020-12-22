@@ -49,14 +49,14 @@ export class DevicesStateService {
       console.log("newChange", newChange);
       if (newChange.action === 'SOME_INFO_FOR_DEVICES') {
         console.log("onChangeInfoForDevice");
-        for (const key in this.allDevices) {
+        /*for (const key in this.allDevices) {
           if (this.allDevices[key]) {
             this.allDevices[key].forEach(item => {
               if (item.agentId === newChange.data.masterAgentId) item.master = true;
               if (item.agentId !== newChange.data.masterAgentId) item.master = false;
-            })
+            });
           }
-        }
+        }*/
         this.onChangeInfoForDevice.emit(newChange.data);
       }
       if (newChange.action === 'DEVICE_UNINSTALLED') {
