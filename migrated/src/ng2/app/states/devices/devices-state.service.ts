@@ -49,6 +49,10 @@ export class DevicesStateService {
       console.log("newChange", newChange);
       if (newChange.action === 'SOME_INFO_FOR_DEVICES') {
         console.log("onChangeInfoForDevice");
+        this.allDevices.forEach(item => {
+          if (item.agentId === newChange.data.masterAgentId) item.master = true;
+          if (item.agentId !== newChange.data.masterAgentId) item.master = false;
+        })
         this.onChangeInfoForDevice.emit(newChange.data);
       }
       if (newChange.action === 'DEVICE_UNINSTALLED') {

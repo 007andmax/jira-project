@@ -146,16 +146,6 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getOnResetDeviceTiming);
-    let getOnChangeInfoForDevice = this.devicesStateService.getOnChangeInfoForDevice().subscribe(data => {
-      console.log("data", data);
-      this.devices.forEach(item => {
-        if (item.agentId === data.masterAgentId) item.master = true;
-        if (item.agentId !== data.masterAgentId) item.master = false;
-      })
-      console.log("this.devices", this.devices);
-      this.cd.detectChanges();
-    })
-    this.sub.add(getOnChangeInfoForDevice);
   }
   public onFilter(field) {
     this.filter.onFilter(field, this.devices)
