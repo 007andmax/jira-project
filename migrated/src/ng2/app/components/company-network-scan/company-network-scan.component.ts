@@ -67,6 +67,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnChangeInfoForDevice);
     let netScanArray = this.devicesRealTimeService.netScanArray.subscribe(newChange => {
+      console.log("newChange", newChange);
       if (newChange.action === 'NETWORK_SCAN') {
         if (newChange.data.status === 'Scanning') this.isScaning = true;
         if (newChange.data.status === 'Finished') this.isScaning = false;
@@ -80,6 +81,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
         });
       }
       if (newChange.action === 'REMOTE_INSTALL' || newChange.action === 'REMOTE_INSTALL_INFO') {
+        console.log("newChange.action", newChange.action);
         let findIndex = this.networkScanDevices.devices.findIndex(item => item.id === newChange.data.netScanId);
         console.log("findIndex", findIndex);
         if (findIndex > -1) {
