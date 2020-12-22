@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Device } from '../class/device';
 import { DeviceCompany } from '../class/device-company';
@@ -12,6 +12,7 @@ import { REBOOT_DEVICE, REMOVE_DEVICES, SHUTDOWN_DEVICE } from 'src/ng2/app/cons
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { DeviceCompanyAsideParams } from '../class/device-company-aside-params';
+import { CompanyDevicesEditLabelComponent } from '../company-devices-edit-label/company-devices-edit-label.component';
 
 @Component({
   selector: 'app-company-devices-item',
@@ -19,6 +20,7 @@ import { DeviceCompanyAsideParams } from '../class/device-company-aside-params';
   styleUrls: ['./company-devices-item.component.scss']
 })
 export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
+  @ViewChild('editLabel') editLabel: CompanyDevicesEditLabelComponent;
   @Input() device: DeviceCompany;
   timer: any = null;
   @Output() onChangeSelect = new EventEmitter();
@@ -88,14 +90,20 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
       minutes: minutes,
     }
   }
+  getLabelForEdit() {
+    if (this.device.label) return this.device.label;
+    return this.device.hostName || this.device.ip;
+  }
   setMasterAgent() {
     this.devicesService.markDeviceAsMaster(this.device.companyId, this.device.agentId).subscribe(data => {
     })
   }
   onChangeName(data) {
     this.devicesService.editAgentInfo(this.device.getDataForEditLabel((data.length > 0) ? data : this.device.hostName || this.device.ip)).subscribe(res => {
-      this.device.setLabel(data);
+      this.device.setLabel((data.length > 0) ? data : null);
       this.devicesStateService.updateLabelIcon(this.device);
+      this.editLabel.setValue((data.length > 0) ? data : this.device.hostName || this.device.ip);
+      this.cd.detectChanges();
     })
     console.log("data", data);
 

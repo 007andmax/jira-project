@@ -18,6 +18,9 @@ export class CompanyDevicesEditLabelComponent implements OnInit {
   ngOnInit() {
     this.value = JSON.parse(JSON.stringify(this.field));
   }
+  public setValue(value) {
+    this.value = JSON.parse(JSON.stringify(value));
+  }
   ngDoCheck() {
     this.placeholder = (this.field !== '') ? this.field : `Enter ${this.title} here`;
   }

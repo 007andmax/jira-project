@@ -40,7 +40,6 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     }
     if (this.devices.length > 0) this.sendDeviceStatusRequest(this.companyId, this.devices.filter(item => item.agentId).map(item => item.agentId));
     let getOnDevices = this.devicesStateService.getOnDevices().subscribe(data => {
-
       if (this.devices.length === 0) this.sendDeviceStatusRequest(this.companyId, data[this.companyId].filter(item => item.agentId).map(item => item.agentId));
       if (data[this.companyId].length > this.devices.length) {
         data[this.companyId].forEach(item => {
@@ -147,6 +146,15 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getOnResetDeviceTiming);
+    let getOnChangeInfoForDevice = this.devicesStateService.getOnChangeInfoForDevice().subscribe(data => {
+      console.log("data", data);
+      this.devices.forEach(item => {
+        if (item.agentId === data.masterAgentId) item.master = true;
+        if (item.agentId !== data.masterAgentId) item.master = false;
+      })
+      this.cd.detectChanges();
+    })
+    this.sub.add(getOnChangeInfoForDevice);
   }
   public onFilter(field) {
     this.filter.onFilter(field, this.devices)
