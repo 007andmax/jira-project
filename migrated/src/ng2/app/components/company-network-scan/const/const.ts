@@ -23,6 +23,10 @@ export const installationStatuses = {
         status: 'Installing',
         message: 'Cleaning the previous installation'
     },
+    'INSTALL_CLEANUP': {
+        status: 'Installing',
+        message: 'Cleaning the previous installation'
+    },
     'OPEN_DESTINATION_FOLDER': {
         status: 'Installing',
         message: 'Opening the destination folder'
