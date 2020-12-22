@@ -80,7 +80,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
         });
       }
       if (newChange.action === 'REMOTE_INSTALL' || newChange.action === 'REMOTE_INSTALL_INFO') {
-        let findIndex = this.networkScanDevices.devices.findIndex(item => item.deviceId === newChange.data.deviceId || item.deviceId === newChange.data.netScanId);
+        let findIndex = this.networkScanDevices.devices.findIndex(item => item.deviceId === newChange.data.netScanId);
         console.log("findIndex", findIndex);
         if (findIndex > -1) {
           let statusName = newChange.data.status;
