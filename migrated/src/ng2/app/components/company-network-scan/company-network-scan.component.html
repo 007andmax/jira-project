@@ -30,6 +30,9 @@
                     <button
                         class="qt-button --with-menu network-steps__scan-button"
                         ngbDropdownAnchor
+                        placement="top"
+                        ngbTooltip="Master Agent Offline"
+                        [disableTooltip]="masterAgent.online"
                     >
                         <span
                             class="left-side-overflow"
@@ -381,10 +384,28 @@
 
 
 
+
+
+
+
+
+
+
+
+
     <app-network-scan-credentials-aside
         [companyId]="companyId"
         (onSelect)="onSelectCredential($event)"
     ></app-network-scan-credentials-aside>
+
+
+
+
+
+
+
+
+
 
 
 
