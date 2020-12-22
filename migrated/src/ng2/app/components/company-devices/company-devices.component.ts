@@ -152,6 +152,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
         if (item.agentId === data.masterAgentId) item.master = true;
         if (item.agentId !== data.masterAgentId) item.master = false;
       })
+      console.log("this.devices", this.devices);
       this.cd.detectChanges();
     })
     this.sub.add(getOnChangeInfoForDevice);
