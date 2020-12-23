@@ -14,11 +14,13 @@ import { NetworkScanFilter } from './class/network-scan-filter';
 import { NetworkScanInstallAgent } from './class/network-scan-install-agent';
 import { NetworkScanSomeInfoForDevice } from './class/network-scan-some-info-for-devices';
 import { installationStatuses } from './const/const';
+import { CompanyNetworkScanService } from './services/company-network-scan.service';
 
 @Component({
   selector: 'app-company-network-scan',
   templateUrl: './company-network-scan.component.html',
-  styleUrls: ['./company-network-scan.component.scss']
+  styleUrls: ['./company-network-scan.component.scss'],
+  providers: [CompanyNetworkScanService]
 })
 export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
   devices: Array<Device> = [];
@@ -31,7 +33,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
   selectAllDevices: boolean = false;
   companyId: string;
   isScaning: boolean = false;
-  networkScanFilter: NetworkScanFilter = new NetworkScanFilter();
+  networkScanFilter: NetworkScanFilter = new NetworkScanFilter(new CompanyNetworkScanService);
   sub: Subscription = new Subscription();
   constructor(private devicesStateService: DevicesStateService,
     private devicesService: DevicesService,

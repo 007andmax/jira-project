@@ -1,4 +1,5 @@
 import { CompanyFilterTop } from "../../companies/class/company-filter-top";
+import { CompanyNetworkScanService } from "../services/company-network-scan.service";
 
 export class NetworkScanFilter {
     filter: Array<CompanyFilterTop> = [new CompanyFilterTop('name', 'ASC'),
@@ -6,7 +7,7 @@ export class NetworkScanFilter {
     new CompanyFilterTop('manufacturer', ''),
     new CompanyFilterTop('macAddress', ''),
     new CompanyFilterTop('agentStatus', '')];
-    constructor() { }
+    constructor(private companyNetworkScanService: CompanyNetworkScanService) { }
 
 
     sortByCurrentFilter(list) {
@@ -114,8 +115,8 @@ export class NetworkScanFilter {
     }
 
     private onFilterAgentStatus(list) {
-        list.sort((a, b) => (a.agentStatus.toLowerCase() > b.agentStatus.toLowerCase()) ?
-            1 : ((b.agentStatus.toLowerCase() > a.agentStatus.toLowerCase()) ? -1 : 0));
+        list.sort((a, b) => (this.companyNetworkScanService.getStatusText(a) > this.companyNetworkScanService.getStatusText(b) ?
+            1 : ((this.companyNetworkScanService.getStatusText(b) > this.companyNetworkScanService.getStatusText(a) ? -1 : 0))));
     }
     private onFilterMacAddress(list) {
         list.sort((a, b) => (a.macAddress.toLowerCase() > b.macAddress.toLowerCase()) ?
