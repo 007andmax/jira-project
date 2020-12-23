@@ -1,7 +1,12 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NETWORK_REMOVE_DEVICE, REMOVE_DEVICES } from 'src/ng2/app/const/confirm';
 import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
+import { NetworkScanStateService } from 'src/ng2/app/states/network-scan/network-scan-state.service';
 import { Device } from '../../company-devices/class/device';
 import { CompanyDevicesEditLabelComponent } from '../../company-devices/company-devices-edit-label/company-devices-edit-label.component';
+import { ConfirmComponent } from '../../shared/confirm/confirm.component';
+import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { NetworkScanDevice } from '../class/network-scan-device';
 import { NetworkScanSomeInfoForDevice } from '../class/network-scan-some-info-for-devices';
 
@@ -18,6 +23,9 @@ export class CompanyNetworkScanItemComponent implements OnInit {
   @Input() companyId: string;
   @Output() onSelect = new EventEmitter<any>();
   constructor(private devicesService: DevicesService,
+    private confirmStateService: ConfirmStateService,
+    private networkScanStateService: NetworkScanStateService,
+    private modalService: NgbModal,
     public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -38,12 +46,12 @@ export class CompanyNetworkScanItemComponent implements OnInit {
       this.editLabel.setValue((data.length > 0) ? data : this.checkUnknown(this.device.hostName) || this.checkUnknown(this.device.ipAddress));
       this.cd.detectChanges();
     })
-    console.log("data", data);
   }
 
   remove() {
-    this.devicesService.sendUninstallAgentRequest(this.companyId, [this.device.deviceId]).subscribe(data => {
-
-    })
+    this.confirmStateService.setConfirmAction(NETWORK_REMOVE_DEVICE);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    modalRef.componentInstance.message = `Do you want to remove device?`;
+    this.networkScanStateService.setDeviceForRemove(this.device);
   }
 }

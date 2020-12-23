@@ -52,4 +52,11 @@ export class CompanyNetworkScanService {
       return '';
     }
   }
+  public onFilterName(devices) {
+    devices.sort((a, b) => (this.getNameDevice(a).toLowerCase() > this.getNameDevice(b).toLowerCase()) ?
+      1 : ((this.getNameDevice(b).toLowerCase() > this.getNameDevice(a).toLowerCase()) ? -1 : 0));
+  }
+  private getNameDevice(device) {
+    return device.label || device.hostName || device.ip
+  }
 }

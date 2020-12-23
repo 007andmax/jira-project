@@ -101,9 +101,11 @@
                 <div class="network-step__text qt-mb-15">Click on button below to install agent</div>
                 <button
                     class="qt-button"
-                    [ngClass]="{'--disabled': !checkCanInstallAgent()}"
-                    (click)="installAgent()"
+                    [ngClass]="{'--disabled': !checkCanInstallAgent(),'qt-loading --hide-text': btnInstallAgent.isBlock()}"
                     [disabled]="!checkCanInstallAgent()"
+                    appDisabledBtn
+                    #btnInstallAgent="disabled"
+                    (onClick)="installAgent()"
                 >
                     Install Agent
                 </button>
