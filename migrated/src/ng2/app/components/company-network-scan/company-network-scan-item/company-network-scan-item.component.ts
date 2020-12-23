@@ -22,6 +22,10 @@ export class CompanyNetworkScanItemComponent implements OnInit {
 
   ngOnInit() {
   }
+  shownTooltip() {
+    console.log("shownTooltip");
+    this.cd.detectChanges();
+  }
   onSelectDevice() {
     this.onSelect.emit(null);
   }

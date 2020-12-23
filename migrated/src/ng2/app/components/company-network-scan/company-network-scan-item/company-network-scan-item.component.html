@@ -59,6 +59,7 @@
             placement="top"
             [ngbTooltip]="tipConnected"
             [ngClass]="getClass()"
+            (shown)="shownTooltip()"
             [textContent]="getStatusText()"
         >
         </span>
