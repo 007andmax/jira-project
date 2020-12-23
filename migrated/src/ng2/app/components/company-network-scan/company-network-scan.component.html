@@ -127,23 +127,38 @@
                             </label>
                         </div>
                     </th>
-                    <th class="network-scan-table__device-name">
+                    <th
+                        class="network-scan-table__device-name"
+                        (click)="setSort('name')"
+                    >
                         Device Name
                         <span class="qt-table-modern__sorting"></span>
                     </th>
-                    <th class="network-scan-table__lan-ip">
+                    <th
+                        class="network-scan-table__lan-ip"
+                        (click)="setSort('ipAddress')"
+                    >
                         Lan ip
                         <span class="qt-table-modern__sorting"></span>
                     </th>
-                    <th class="network-scan-table__manufacturer">
+                    <th
+                        class="network-scan-table__manufacturer"
+                        (click)="setSort('manufacturer')"
+                    >
                         Manufacturer
                         <span class="qt-table-modern__sorting"></span>
                     </th>
-                    <th class="network-scan-table__mac-address">
+                    <th
+                        class="network-scan-table__mac-address"
+                        (click)="setSort('macAddress')"
+                    >
                         Mac address
                         <span class="qt-table-modern__sorting"></span>
                     </th>
-                    <th class="network-scan-table__status">
+                    <th
+                        class="network-scan-table__status"
+                        (click)="setSort('agentStatus')"
+                    >
                         Status
                         <span class="qt-table-modern__sorting"></span>
                     </th>

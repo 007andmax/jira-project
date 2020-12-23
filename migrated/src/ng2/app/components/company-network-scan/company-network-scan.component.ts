@@ -10,6 +10,7 @@ import { NetworkScanStateService } from '../../states/network-scan/network-scan-
 import { Device } from '../company-devices/class/device';
 import { NetworkScanDevice } from './class/network-scan-device';
 import { NetworkScanDevices } from './class/network-scan-devices';
+import { NetworkScanFilter } from './class/network-scan-filter';
 import { NetworkScanInstallAgent } from './class/network-scan-install-agent';
 import { NetworkScanSomeInfoForDevice } from './class/network-scan-some-info-for-devices';
 import { installationStatuses } from './const/const';
@@ -30,6 +31,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
   selectAllDevices: boolean = false;
   companyId: string;
   isScaning: boolean = false;
+  networkScanFilter: NetworkScanFilter = new NetworkScanFilter();
   sub: Subscription = new Subscription();
   constructor(private devicesStateService: DevicesStateService,
     private devicesService: DevicesService,
@@ -79,6 +81,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
             this.networkScanDevices.devices.push(new NetworkScanDevice(element));
           }
         });
+        this.networkScanFilter.sortByCurrentFilter(this.networkScanDevices.devices);
       }
       if (newChange.action === 'REMOTE_INSTALL' || newChange.action === 'REMOTE_INSTALL_INFO') {
         console.log("newChange.action", newChange.action);
@@ -153,8 +156,16 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
       let networkScan = JSON.parse(res.networkScan);
       console.log("networkScan", networkScan);
       this.networkScanDevices = new NetworkScanDevices(networkScan);
+
+      this.networkScanFilter.sortByCurrentFilter(this.networkScanDevices.devices);
       this.cd.detectChanges();
     })
+  }
+  setSort(data) {
+    this.networkScanFilter.onSort(data, this.networkScanDevices.devices);
+    if (!this.cd['destroyed']) {
+      this.cd.detectChanges();
+    }
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
