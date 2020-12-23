@@ -49,6 +49,9 @@
     <td class="network-scan-table__status">
         <span
             *ngIf="device.agentStatus !== 'unknown'"
+            container="body"
+            placement="top"
+            [ngbTooltip]="device.message"
             [ngClass]="getClass()"
             [textContent]="getStatusText()"
         >
