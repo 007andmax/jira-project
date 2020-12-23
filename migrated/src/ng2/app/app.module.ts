@@ -373,6 +373,7 @@ import { NetworkScanCredentialsAsideComponent } from './components/company-netwo
 import { NetworkScanCredentialsAddComponent } from './components/company-network-scan/network-scan-credentials-add/network-scan-credentials-add.component';
 import { NetworkScanCredentialsAsideItemComponent } from './components/company-network-scan/network-scan-credentials-aside/network-scan-credentials-aside-item/network-scan-credentials-aside-item.component';
 import { CompanyNetworkScanItemComponent } from './components/company-network-scan/company-network-scan-item/company-network-scan-item.component';
+import { CompanyNetworkScanItemTooltipComponent } from './components/company-network-scan/company-network-scan-item/company-network-scan-item-tooltip/company-network-scan-item-tooltip.component';
 
 
 /**
@@ -904,6 +905,7 @@ angular.module('quicktech')
     NetworkScanCredentialsAddComponent,
     NetworkScanCredentialsAsideItemComponent,
     CompanyNetworkScanItemComponent,
+    CompanyNetworkScanItemTooltipComponent,
   ],
   imports: [
     BrowserModule,
