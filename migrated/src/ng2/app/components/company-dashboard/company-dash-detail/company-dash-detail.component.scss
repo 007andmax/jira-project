@@ -1,0 +1,64 @@
+.working-hour {
+    .selected-item {
+        padding: 9px 10px 9px 0;
+        width: 100%;
+        border-radius: 4px;
+        border: solid 1px #c4cbd5;
+        line-height: 1.54;
+        letter-spacing: normal;
+        height: auto;
+        background: url(/ng2/assets/img/selct-arrow.svg) no-repeat right 15px center;
+        padding-right: 30px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        outline: none;
+        &:disabled {
+            background-color: #f4f6f8;
+            border: 1px solid #f4f6f8;
+        }
+    }
+    .item {
+        width: 100%;
+        padding: 7px 15px;
+        background-color: #fff;
+        outline: none;
+        border: none;
+        text-align: left;
+        font-size: 13px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.4;
+        letter-spacing: normal;
+        color: #4f5f79;
+        display: -webkit-box;
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        &:hover {
+            color: #364656;
+            background-color: #edf2f6;
+        }
+        &.active {
+            color: #364656;
+            background-color: #edf2f6;
+        }
+    }
+}
+
+.tag {
+    &.modal-title {
+        margin: 10px 0 24px 32px;
+        padding: 0;
+        .h1 {
+            font-size: 20px;
+            line-height: 28px;
+        }
+        .close {
+            top: 5px;
+        }
+    }
+    .footer-area-modal {
+        margin-top: 64px;
+    }
+}

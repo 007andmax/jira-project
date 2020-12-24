@@ -1,0 +1,231 @@
+<div class="cmp-dboard-col m-0 d-flex">
+  <div class="profile-cmp-board d-flex">
+    <div class="cmp-profile-dp d-flex" *ngIf="companyDetailing.name !== ''">
+      <figure class="d-flex">{{getCharacter(companyDetailing.name)}}</figure>
+    </div>
+    <div class="cmp-profile-user d-flex">
+      <h1>{{companyDetailing.name}}</h1>
+      <a href="https://{{companyDetailing.domain}}" target="_blank"
+      >{{companyDetailing.domain}}</a
+    >
+    </div>
+    <div class="cmp-dboard-rating d-flex">
+      <span class="d-flex" >
+        <img *ngFor="let item of arrayOne(selectedRating); let i = index;" class="pointer"
+          src="html/ng2/assets/img/company-details/rating-filled.svg"
+          alt="rating" (click)="changeRating(i, 'selected')"
+        />
+        <img *ngFor="let item of arrayOne(unSelectedRating); let i = index;" class="pointer"
+          src="html/ng2/assets/img/company-details/rating.svg"
+          alt="rating" (click)="changeRating(i, 'unselected')"
+        />
+      </span>
+      <div class="cmp-user-info d-flex">
+        <span class="user-info-pt d-flex" *ngIf="companyDetailing?.clientType">{{companyDetailing.clientType}}</span>
+        <span class="user-info-pt d-flex" *ngIf="companyDetailing.serviceType !== '' ">{{serviceTypesMap[companyDetailing.serviceType]}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="profile-cmp-board other-info d-flex">
+    <div class="other-info-col d-flex" *ngIf="companyDetailing.phoneNumber !== ''">
+      <div class="small-title">Telephone</div>
+      <a href="tel:{{companyDetailing?.addresses[0]?.phoneNumbers[0]?.number}}">{{companyDetailing?.addresses[0]?.phoneNumbers[0]?.number}}</a>
+    </div>
+    <div class="other-info-col d-flex">
+      <div class="small-title">Address</div>
+      <address>
+        {{companyDetailing.addresses_name}}
+      </address>
+      <a (click)="openMap(content)" class="btn btn-outline">
+        <img
+          src="html/ng2/assets/img/company-details/location.svg"
+          alt="location"
+        />
+        Get Direction</a
+      >
+    </div>
+    <div class="other-info-col d-flex">
+      <div class="small-title">Working Hours</div>
+      <div class="working-hrs d-flex">
+          <div ngbDropdown class="d-flex">
+           <button class="selected-item" id="dropdownBasic1" ngbDropdownToggle>{{companyOpen}}</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <button class="item" ngbDropdownItem *ngFor="let hours of workingDays">{{hours.dayOfWeek}}<span *ngIf="hours.startTime !== 0 && hours.endTime !== 0">{{hours.timing}}</span><span *ngIf="(hours.startTime === 0 || hours.startTime === null) && (hours.endTime === 0 || hours.endTime === null)">Close</span></button>
+              <div class="item"> 
+                <button class="btn btn-outline" (click)="open(contentHour)"> 
+                  <img src="html/ng2/assets/img/company-details/edit-blue.svg" alt="user" />  
+                  Edit Suggestions</button>
+              </div> 
+            </div> 
+          </div>
+          <span class="closing-tag" *ngIf="closingSoon == true">Closing Soon</span>
+      </div>  
+    </div>
+    <div class="other-info-col d-flex" *ngIf="companyDetailing?.clientIndustry !== undefined && companyDetailing?.clientIndustry !== null && companyDetailing?.clientIndustry !== ''">
+      <div class="small-title">Industry</div>
+      <p>{{companyDetailing.clientIndustry}}</p>
+    </div>
+    <div class="other-info-col d-flex" *ngIf="companyDetailing?.description !== undefined && companyDetailing?.description !== null && companyDetailing?.description !== ''">
+      <div class="small-title">Notes</div>
+      <p>
+        {{companyDetailing.description}}
+      </p>
+    </div>
+  </div>
+  <div class="profile-cmp-board primary-contact d-flex">
+    <div class="small-title">Primary Contact</div>
+    <div class="contact-info d-flex">
+      <!-- <figure class="d-flex" *ngIf="primaryContact.avatar != null && primaryContact.avatar != undefined && primaryContact.avatar != ''">
+        <img src="{{primaryContact.avatar}}" alt="user" />
+      </figure> -->
+      <figure class="d-flex no-user-init uppercase">
+        {{getCharacter(companyDetailing?.primaryContact.firstName)}}
+      </figure>
+      <div class="primary-contact-info d-flex">
+        <div class="h5">{{companyDetailing?.primaryContact.firstName}} {{companyDetailing?.primaryContact.lastName}}</div>
+        <a href="mailto:{{companyDetailing?.primaryContact.email}}"
+          >{{companyDetailing?.primaryContact.email}}</a
+        >
+        <a *ngIf="companyDetailing?.primaryContact.phoneNumber !== ''" href="tel:{{companyDetailing?.primaryContact.phoneNumber}}">{{companyDetailing?.primaryContact.phoneNumber}}</a>
+      </div>
+    </div>
+  </div>
+  <div class="profile-cmp-board tags-area d-flex">
+    <div class="small-title d-flex">
+      Tags
+      <a href="javascript:;" (click)="open(tag)">+Add</a>
+    </div>
+    <div class="tags-tab d-flex">
+      <span class="tag" *ngFor="let tag of tags; let i = index;"
+        >{{tag.word}}
+        <a href="javascript:;" (click)="deleteTag(i)" class="close">
+          <img
+            src="html/ng2/assets/img/company-details/tag-close-12.svg"
+            alt="tags"
+          />
+        </a>
+      </span>
+    </div>
+  </div>
+  <div class="btn-row d-flex">
+    <a href="javascript:;" (click)="downloadAgent()" class="btn btn-outline">
+      <img
+        src="html/ng2/assets/img/company-details/download.svg"
+        alt="download"
+      />
+      Download Agent
+    </a>
+    <a (click)="edit()" class="btn btn-primary">
+      Edit Company
+    </a>
+  </div>
+</div>
+
+<ng-template #contentHour let-modal>
+  <div class="modal-header d-flex">
+    <h1>Edit Hours</h1>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      close
+    </button>
+  </div>
+  <div class="modal-body d-flex">
+      <h5>Select days with correct hours</h5>
+      <form method="post" class="d-flex">
+            <ul class="list-unstyled d-flex">
+              <li class="d-flex" *ngFor="let work of workingDays; let i = index;">
+                <div class="cmn-checkbox">
+                  <input
+                    type="checkbox"
+                    id="{{ work.dayOfWeek }}"
+                    [(ngModel)]="work.checked"
+                    name="{{ work.dayOfWeek | titlecase }}"
+                    [ngModelOptions]="{ standalone: true }"
+                  />
+                  <label for="{{ work.dayOfWeek }}">{{
+                    work.dayOfWeek
+                  }}</label>
+                </div>
+
+                <div class="time-zone">
+                  <div class="tl-col">
+                    <!-- <select #startTime class="cmn-select form-input" [id]=" 'from-'+work.dayOfWeek"
+                    (change)="startTimeChange(work, startTime.value)"
+                    name="{{work.dayOfWeek}}" [attr.disabled]="!work.checked ? 'disabled' : null" [ngModel]="fromTime_convert(work.startTime)" >
+                      <option *ngFor="let hours of workingHoursList" [value]="hours.value">{{hours.name}}</option>
+                    </select> -->
+                    <div ngbDropdown class="d-flex working-hour">
+                      <button class="selected-item" [attr.disabled]="!work.checked ? 'disabled' : null" [id]=" 'from-'+work.dayOfWeek" ngbDropdownToggle>{{filterTime(fromTime_convert(work.startTime))}}</button>
+                       <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                         <button class="item" (click)="startTimeChange(work, hours.value)" ngbDropdownItem *ngFor="let hours of workingHoursList" [class.active]="fromTime_convert(work.startTime) == hours.value">{{hours.name}}</button>
+                         
+                       </div> 
+                     </div>
+                  </div>
+                  <div class="tl-col">
+                    <!-- <select #endTime class="cmn-select form-input"
+                    (change)="endTimeChange(work,endTime.value)" [id]="'to-'+work.dayOfWeek"
+                    name="{{work.dayOfWeek+i}}" [attr.disabled]="!work.checked ? 'disabled' : null" [ngModel]="toTime_convert(work.endTime)" >
+                    <option *ngFor="let hours of workingHoursList" [value]="hours.value">{{hours.name}}</option>
+                    </select> -->
+                    <div ngbDropdown class="d-flex working-hour">
+                      <button class="selected-item" [attr.disabled]="!work.checked ? 'disabled' : null" [id]="'to-'+work.dayOfWeek" ngbDropdownToggle>{{filterTime(toTime_convert(work.endTime))}}</button>
+                       <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                         <button class="item" (click)="endTimeChange(work,hours.value)" ngbDropdownItem *ngFor="let hours of workingHoursList" [class.active]="toTime_convert(work.endTime) == hours.value">{{hours.name}}</button>
+                         
+                       </div> 
+                     </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+      </form>
+      <div class="footer-area-modal d-flex">
+        <button type="button" class="btn btn-secondary" aria-label="Close" (click)="modal.dismiss('Cross click')">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="saveHours();modal.dismiss();">Save Changes</button>
+      </div>
+  </div>
+  
+</ng-template>
+
+
+<!-- MAP -->
+
+<ng-template #content let-modal class="map-modal">
+  
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      close
+    </button>
+  <div class="modal-body d-flex">
+    <div class="h1">Get Direction</div>
+    <iframe
+      frameborder="0" 
+      scrolling="no" 
+      marginheight="0" 
+      marginwidth="0" 
+      [src]="mapUrl()"
+    >
+    </iframe>
+  </div>
+  
+</ng-template>
+
+<ng-template #tag let-modal class="map-modal">
+  <div class="modal-title tag d-flex">
+    <div class="h1">Add Tags</div>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+      close
+    </button>
+  </div>
+<div class="modal-body tag d-flex">
+  
+  <app-company-dash-tags (tagsChange)="onChangeTags($event)" [tagList]="tags"></app-company-dash-tags>
+  <div class="footer-area-modal d-flex">
+    <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="saveTags();modal.dismiss()">Save Changes</button>
+  </div>
+</div>
+
+
+</ng-template>
+
+<app-company-edit-aside></app-company-edit-aside>

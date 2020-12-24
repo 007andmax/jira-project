@@ -309,6 +309,12 @@
             $scope.goToTab(`#/ng2/company-password-manager`);
             return;
           }
+
+          if (tabToActivate == 'CompanyDashboardPage') {
+            $scope.goToTab(`#/ng2/company-dashboard/${company_id}`);
+            return;
+          }
+
           if (tabToActivate == 'billablePageNew') {
             $scope.goToTab(`#/ng2/billable`);
             return;
@@ -330,6 +336,11 @@
           if (tabToActivate == 'CompanyNetworkScanComponent') {
             // $scope.goToTab(`#/ng2/company/network-scan`);
             $scope.stateGo(null, 'company-network-scan');
+            return;
+          }
+
+          if (tabToActivate == 'CompanyProfileDashboardPage') {
+            $scope.goToTab(`#/ng2/company-dashboard`);
             return;
           }
 
@@ -1610,7 +1621,7 @@
             return 'inbox';
           } else if (url.indexOf('companies') > -1) {
             return 'companies';
-          } else if (url.indexOf('companyProfile') > -1 || url.indexOf('company-password-manager') > -1 || url.indexOf('company-user') > -1 || url.indexOf('company-products') > -1 || url.indexOf('company-tickets') > -1 || url.indexOf('company-contracts') > -1 || url.indexOf('company-network-scan') > -1 || url.indexOf('company-devices') > -1) {
+          } else if (url.indexOf('companyProfile') > -1 || url.indexOf('company-password-manager') > -1 || url.indexOf('company-user') > -1 || url.indexOf('company-contracts') > -1 || url.indexOf('company-network-scan') > -1 || url.indexOf('company-devices') > -1 || url.indexOf('company-dashboard') > -1 || url.indexOf('company-products') > -1 || url.indexOf('company-tickets') > -1) {
             return 'companyProfile';
           } else if (url.indexOf('users') > -1) {
             return 'users';

@@ -221,6 +221,7 @@ import { CompanyInfoHistoryComponent } from './components/tickets/tickets/ticket
 import { TicketEditAsideRightPanelComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-edit-aside-right-panel/ticket-edit-aside-right-panel.component';
 import { ModalCustomShareScreenComponent } from './services/modal/modal-custom-share-screen/modal-custom-share-screen.component';
 import { CompanyTicketsComponent } from './components/company-tickets/company-tickets.component';
+import { CompanyDashboardComponent } from './components/company-dashboard/company-dashboard.component';
 import { InventoryAddBodyComponent } from './components/inventory/inventory-add-aside/inventory-add-body/inventory-add-body.component';
 import { ServicePipe } from './pipe/service.pipe';
 import { LeftPanelSettingsComponent } from './components/left-panel/left-panel-settings/left-panel-settings.component';
@@ -352,8 +353,6 @@ import { TimeOnTicketsWidgetComponent } from './components/tickets/tickets-dashb
 import { TicketsBillableHoursWidgetComponent } from './components/tickets/tickets-dashboard/tickets-billable-hours-widget/tickets-billable-hours-widget.component';
 import { TechTicketsWidgetComponent } from './components/tickets/tickets-dashboard/tech-tickets-widget/tech-tickets-widget.component';
 import { CompanyNetworkScanComponent } from './components/company-network-scan/company-network-scan.component';
-
-
 import { CompanyDevicesComponent } from './components/company-devices/company-devices.component';
 import { CompanyDevicesItemComponent } from './components/company-devices/company-devices-item/company-devices-item.component';
 import { CompanyDevicesHeaderComponent } from './components/company-devices/company-devices-header/company-devices-header.component';
@@ -375,8 +374,13 @@ import { NetworkScanCredentialsAddComponent } from './components/company-network
 import { NetworkScanCredentialsAsideItemComponent } from './components/company-network-scan/network-scan-credentials-aside/network-scan-credentials-aside-item/network-scan-credentials-aside-item.component';
 import { CompanyNetworkScanItemComponent } from './components/company-network-scan/company-network-scan-item/company-network-scan-item.component';
 import { CompanyNetworkScanItemTooltipComponent } from './components/company-network-scan/company-network-scan-item/company-network-scan-item-tooltip/company-network-scan-item-tooltip.component';
-
-
+import { CompanyDashTagsComponent } from './components/company-dashboard/company-dash-tags/company-dash-tags.component';
+import { CompanyDashDetailComponent } from './components/company-dashboard/company-dash-detail/company-dash-detail.component';
+import { CompanyDashStatsComponent } from './components/company-dashboard/company-dash-stats/company-dash-stats.component';
+import { CompanyDashTicketComponent } from './components/company-dashboard/company-dash-ticket/company-dash-ticket.component';
+import { CompanyDashRevenueComponent } from './components/company-dashboard/company-dash-revenue/company-dash-revenue.component';
+import { CompanyDashInvoiceComponent } from './components/company-dashboard/company-dash-invoice/company-dash-invoice.component';
+import { CompanyDashContractComponent } from './components/company-dashboard/company-dash-contract/company-dash-contract.component';
 /**
  * declare angular
  */
@@ -408,6 +412,9 @@ angular.module('quicktech')
   .directive(
     'companyTickets',
     downgradeComponent({ component: CompanyTicketsComponent }))
+  .directive(
+    'companyDashboard',
+    downgradeComponent({ component: CompanyDashboardComponent }))
   .directive(
     'leftPanelComponent',
     downgradeComponent({ component: LeftPanelComponent }))
@@ -624,6 +631,13 @@ angular.module('quicktech')
     ImageCropperComponent,
     CompanyEditAsideComponent,
     CompanyTagsComponent,
+    CompanyDashTagsComponent,
+    CompanyDashDetailComponent,
+    CompanyDashStatsComponent,
+    CompanyDashTicketComponent,
+    CompanyDashRevenueComponent,
+    CompanyDashInvoiceComponent,
+    CompanyDashContractComponent,
     DraftEmailComponent,
     DraftEmailRecipientsComponent,
     LeftPanelTagsComponent,
@@ -755,6 +769,9 @@ angular.module('quicktech')
     TicketEditAsideRightPanelComponent,
     ModalCustomShareScreenComponent,
     CompanyTicketsComponent,
+
+    CompanyDashboardComponent,
+
     InventoryAddBodyComponent,
     ServicePipe,
     LeftPanelSettingsComponent,
@@ -964,6 +981,7 @@ angular.module('quicktech')
     CompanyPasswordManagerComponent,
     CompanyUserComponent,
     CompanyTicketsComponent,
+    CompanyDashboardComponent,
     UsersComponent,
     AlertComponent,
     LeftPanelComponent,

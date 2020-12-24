@@ -1,0 +1,27 @@
+<div class="cmp-board-invoice cmn-box d-flex" *ngIf="recentInvoiceList.length > 0">
+  <h2>Recent Invoices</h2>
+   <div class="cmp-dash-table-wrap">
+          <table *ngIf="recentInvoiceList.length > 0">
+             <thead> 
+                <tr>
+                   <th>Invoice#</th>
+                   <th>Date</th>
+                   <th>Status</th>
+                   <th>Amount</th>
+                </tr>
+             </thead>
+             <tbody>
+                <tr *ngFor="let invoice of recentInvoiceList">
+                  <td (click)="onPreviewInvoice(invoice)" class="pointer">{{invoice.number}}</td>
+                  <td>{{invoice.dateName}}</td>
+                  <td *ngIf="invoice.paidOn" class="paid" >Paid</td>
+                  <td *ngIf="invoice.isOverDue && !invoice.paidOn" class="ov-d">Over Due</td>
+                  <td *ngIf="!invoice.isOverDue && !invoice.paidOn" class="ov-d">Outstanding</td>
+                  <td>${{invoice.sum}}</td>
+                </tr>
+             </tbody>
+          </table>
+   </div>
+</div>
+
+<app-invoices-aside-preview #previewInvoiceAside *ngIf="showPreviewInvoice" (onClose)="showPreviewInvoice = false" [invoiceId]="previewInvoice.id"></app-invoices-aside-preview>

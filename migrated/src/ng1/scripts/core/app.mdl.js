@@ -99,6 +99,10 @@
           url: '/ng2/company-tickets',
           template: '<company-tickets></company-tickets>'
         }))
+        .state('company-dashboard', waitForServices({
+          url: '/ng2/company-dashboard/:companyId',
+          template: '<company-dashboard></company-dashboard>'
+        }))
         .state('inventory', waitForServices({
           url: '/ng2/inventory/products',
           template: '<inventory-component></inventory-component>'

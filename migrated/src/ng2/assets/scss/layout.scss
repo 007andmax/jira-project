@@ -74,6 +74,7 @@ body
 
 /*** Default stylesheet reset ***/
 .ng7{
+
 *,*::before,*::after{box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;-o-box-sizing:border-box;}
 article,aside,figcaption,figure,footer,header,hgroup,main,nav,section{display:block;}
 .page-wrapper{display:block;overflow:hidden;width:100%;}
@@ -83,6 +84,7 @@ img{display:inline-block;max-width:100%;}
 .slug {
     margin-top: -4px;
 }
+
 /*** Heading ***/
 
 h1,.h1{

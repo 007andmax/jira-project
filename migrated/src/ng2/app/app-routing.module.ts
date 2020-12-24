@@ -28,6 +28,7 @@ import { InventoryComponent } from './components/inventory/inventory.component';
 import { CompanyProductsComponent } from './components/companies/company-products/company-products.component';
 import { TicketsComponent } from './components/tickets/tickets/tickets.component';
 import { CompanyTicketsComponent } from './components/company-tickets/company-tickets.component';
+import { CompanyDashboardComponent } from './components/company-dashboard/company-dashboard.component';
 import { BillableComponent } from './components/billing/billable/billable.component';
 import { BillableTicketsComponent } from './components/billing/billable/billable-tickets/billable-tickets.component';
 import { ContractsComponent } from './components/billing/contracts/contracts.component';
@@ -75,6 +76,11 @@ const routes: Routes = [
   {
     path: 'ng2/company-tickets',
     component: CompanyTicketsComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'ng2/company-dashboard/:companyId',
+    component: CompanyDashboardComponent,
     pathMatch: 'full'
   },
   {

@@ -47,7 +47,6 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     private elRef: ElementRef) { }
 
   ngOnInit() {
-
     /*  this.companiesStateService.getOnShowArchived().subscribe(data => {
         this.showArchivedCompanies = data;
       })*/
@@ -114,7 +113,8 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     let body = document.querySelector('.left-panel__category-wrap');
     var link = document.createElement('a');
     body.appendChild(link);
-    link.href = `#/clients/companyProfile/${this.company.id}?tabName=dashboard`;
+    // link.href = `#/clients/companyProfile/${this.company.id}?tabName=dashboard`;
+    link.href = `#/ng2/company-dashboard/${this.company.id}`
     var e = document.createEvent('MouseEvents');
     e.initEvent('click', true, true);
     link.dispatchEvent(e);
