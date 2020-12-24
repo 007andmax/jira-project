@@ -25,6 +25,8 @@ export class TicketsDashboardComponent implements OnInit {
   listIntervals = [new CompanySetting('last month', 'LAST_MONTH'), new CompanySetting('current month', 'CURRENT_MONTH'), new CompanySetting('year to date', 'YEAR_TO_DATE')];
   currentInterval = new CompanySetting('last month', 'LAST_MONTH');
   countIsReady: boolean = false;
+  timeOnTicketsIsReady: boolean = false;
+  techTicketsIsReady: boolean = false;
   ticketsAnalyticsReady: boolean = false;
   ticketsBillableHoursIsReady: boolean = false;
   constructor(
@@ -52,6 +54,14 @@ export class TicketsDashboardComponent implements OnInit {
       this.onCheckREadyState();
     })
   }
+  onTechTicketsIsReady() {
+    this.techTicketsIsReady = true;
+    this.onCheckREadyState();
+  }
+  onTimeOnTicketsIsReady() {
+    this.timeOnTicketsIsReady = true;
+    this.onCheckREadyState();
+  }
   onTicketsBillableHoursIsReady() {
     this.ticketsBillableHoursIsReady = true;
     this.onCheckREadyState();
@@ -61,7 +71,7 @@ export class TicketsDashboardComponent implements OnInit {
     this.onCheckREadyState();
   }
   onCheckREadyState() {
-    if (this.countIsReady && this.ticketsBillableHoursIsReady && this.ticketsAnalyticsReady && this.showPreloader) {
+    if (this.countIsReady && this.ticketsBillableHoursIsReady && this.ticketsAnalyticsReady && this.showPreloader && this.techTicketsIsReady) {
       this.showPreloader = false;
       this.cd.detectChanges();
       this.ticketPriority.updateDataChart();

@@ -15,7 +15,8 @@
     font-family: Graphik-Medium, sans-serif;
   }
   .billing-hours {
-    width: 66%;
+    min-width: 66.3%;
+    width: 66.3%;
     &__header-title {
     font-size: 15px;
     line-height: 1.56;
@@ -174,6 +175,135 @@
     display: flex;
     justify-content: flex-end;
   }
+
+  .tech-tickets {
+    justify-content: flex-start;
+    &__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px 10px 24px;
+    }
+    &__header-title {
+      font-size: 15px;
+      color: #364656;
+      line-height: 1.47;
+    }
+    &__toggle-menu {
+      border-radius: 6px;
+      background-color: #f4f6f8;
+      height: 24px;
+      align-items: center;
+      justify-content: center;
+      padding: 2px;
+      input {
+        position: absolute;
+        opacity: 0;
+      }
+    }
+    &__content {
+      height: 100%;
+    }
+    &__no-data-yet {
+      height: calc(100% - 24px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #9ca5b6;
+    }
+    &__table {
+      width: 100%;
+      // .tech-tickets {
+        // &__name {
+      // }
+    }
+    &__table-head {
+      font-size: 10px;
+      font-family: Graphik-Medium, sans-serif;
+      text-transform: uppercase;
+      th {
+        background-color: #f9fafb;
+        color: #9ca5b6;
+        white-space: nowrap;
+        padding: 0 8px;
+        height: 24px;
+        line-height: 1;
+        vertical-align: middle;
+        text-align: center;
+        &:first-child {
+          padding-left: 24px;
+          text-align: left;
+        }
+        &:last-child {
+          padding-right: 24px;
+        }
+        &:nth-child(2) {
+          width: 45px;
+        }
+        &:nth-child(3) {
+          width: 72px;
+        }
+        &:nth-child(4) {
+          width: 75px;
+        }
+      }
+    }
+    &__table-body-container {
+      overflow: auto;
+      max-height: 215px;
+      &::-webkit-scrollbar {
+        width: 2px;
+      }
+    }
+    &__table-body {
+      td {
+        height: 42px;
+        border-bottom: 1px solid #edf0f2;
+        font-size: 12px;
+        color: #4f5f79;
+        &:nth-child(2) {
+          width: 30px;
+          text-align: center;
+        }
+        &:nth-child(3) {
+          width: 90px;
+          text-align: center;
+        }
+        &:nth-child(4) {
+          width: 38px;
+          text-align: center;
+        }
+      }
+      tr:last-child {
+        td {
+          border-bottom: none;
+        }
+
+      }
+    }
+  }
+
+  label.btn-primary.tech-tickets__toggle-menu-button {
+    height: 20px;
+    background-color: transparent;
+    border-radius: 4px;
+    padding: 4px 6px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #4f5f79;
+    min-width: unset;
+    font-family: Graphik-Regular, sans-serif;
+    font-size: 10px;
+    &.active {
+      background: white;
+      border-radius: 4px !important;
+      color: #4f5f79;
+      font-family: Graphik-Medium, sans-serif;
+    }
+  }
+
 }
 
 

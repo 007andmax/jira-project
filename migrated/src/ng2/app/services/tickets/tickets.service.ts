@@ -14,7 +14,10 @@ export class TicketsService {
   constructor(private http: HttpClient) { }
 
   public getDashboardByServices(data) {
-    return this.http.post(this.apiUrl + `dashboard/ticket/byServices`,data);
+    return this.http.post(this.apiUrl + `dashboard/ticket/byServices`, data);
+  }
+  public getDashboardByTech(startDate, endDate) {
+    return this.http.get(this.apiUrl + `dashboard/ticket/counters?startDate=${startDate}&endDate=${endDate}`);
   }
   public getDashboard(frequency) {
     return this.http.get(this.apiUrl + `dashboard/ticket?frequency=${frequency}`).pipe(map((data: any) => new DashboardTickets(data)));
