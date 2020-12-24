@@ -8,6 +8,7 @@
 <span
     [disableTooltip]="device.agentStatus === 'managed'"
     [hidden]="device.agentStatus === 'unknown'"
+    container="body"
     placement="top"
     [ngbTooltip]="tipConnected"
     [ngClass]="getClass()"
