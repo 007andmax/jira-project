@@ -3,13 +3,14 @@
     class="tooltip"
 >
     <span [textContent]="device.message"></span>
-    <span>{{device.message}}</span>
 </ng-template>
+<!-- [disableTooltip]="device.agentStatus === 'managed'" -->
 <span
-    [disableTooltip]="device.agentStatus === 'managed'"
     [hidden]="device.agentStatus === 'unknown'"
     placement="top"
     [ngbTooltip]="tipConnected"
+    triggers="click"
+    [autoClose]="'outside'"
     [ngClass]="getClass()"
     (shown)="shownTooltip()"
     [textContent]="getStatusText()"
