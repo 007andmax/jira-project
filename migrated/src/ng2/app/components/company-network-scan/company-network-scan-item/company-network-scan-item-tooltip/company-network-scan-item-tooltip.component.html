@@ -4,8 +4,9 @@
 >
     <span [textContent]="device.message"></span>
 </ng-template>
-<!-- [disableTooltip]="device.agentStatus === 'managed'" -->
 <span
+    class="pointer"
+    [disableTooltip]="device.agentStatus === 'managed'"
     [hidden]="device.agentStatus === 'unknown'"
     placement="top"
     [ngbTooltip]="tipConnected"
