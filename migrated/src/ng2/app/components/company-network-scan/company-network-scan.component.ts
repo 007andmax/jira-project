@@ -32,6 +32,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
   networkScanSomeInfoForDevice: NetworkScanSomeInfoForDevice;
   masterAgent: Device = null;
   showPreloader: boolean = true;
+  showMinPreloader: boolean = false;
   isGetDevices: boolean = false;
   selectAllDevices: boolean = false;
   companyId: string;
@@ -174,11 +175,12 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     })
   }
   private getLastScanDevices() {
+    this.showMinPreloader = true;
     this.devicesService.getLastScanDevices(this.companyId).subscribe((res: any) => {
       let networkScan = JSON.parse(res.networkScan);
       console.log("networkScan", networkScan);
       this.networkScanDevices = new NetworkScanDevices(networkScan);
-
+      this.showMinPreloader = false;
       this.networkScanFilter.sortByCurrentFilter(this.networkScanDevices.devices);
       this.cd.detectChanges();
     })

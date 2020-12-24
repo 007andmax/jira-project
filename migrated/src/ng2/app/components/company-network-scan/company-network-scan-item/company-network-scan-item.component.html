@@ -53,6 +53,8 @@
         <div
             class="icon__remove qt-ic-c qt-sz-16 qt-pointer"
             *ngIf="device.agentStatus === 'managed' || device.agentStatus === 'Installed'"
+            placement="top"
+            ngbTooltip="Remove Agent"
             (click)="remove()"
         ></div>
     </td>

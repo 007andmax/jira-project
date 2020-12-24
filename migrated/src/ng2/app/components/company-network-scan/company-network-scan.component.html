@@ -33,6 +33,7 @@
                         placement="top"
                         ngbTooltip="Master Agent Offline"
                         [disableTooltip]="masterAgent && masterAgent.online"
+                        [ngClass]="{'cursor-default': masterAgent && !masterAgent.online}"
                     >
                         <span
                             class="left-side-overflow"
@@ -85,9 +86,9 @@
                 </div>
                 <button
                     class="qt-button "
-                    [ngClass]="{'--disabled': !checkSelected()}"
+                    [ngClass]="{'--disabled': !checkSelected() || masterAgent && !masterAgent.online}"
                     (click)="openAside()"
-                    [disabled]="!checkSelected()"
+                    [disabled]="!checkSelected() || masterAgent && !masterAgent.online"
                     [textContent]="(networkScanInstallAgent.getCredential()) ? 'Modify credentials' : 'Apply Credentials'"
                 >
                 </button>
@@ -119,7 +120,7 @@
                 <tr>
                     <th class="network-scan-table__check">
                         <div class="d-f">
-                            <label class="qt-checkbox">
+                            <label class="qt-checkbox pointer">
                                 <input
                                     type="checkbox"
                                     (change)="onToggleAll($event)"
@@ -130,35 +131,35 @@
                         </div>
                     </th>
                     <th
-                        class="network-scan-table__device-name"
+                        class="network-scan-table__device-name pointer"
                         (click)="setSort('name')"
                     >
                         Device Name
                         <span class="qt-table-modern__sorting"></span>
                     </th>
                     <th
-                        class="network-scan-table__lan-ip"
+                        class="network-scan-table__lan-ip pointer"
                         (click)="setSort('ipAddress')"
                     >
                         Lan ip
                         <span class="qt-table-modern__sorting"></span>
                     </th>
                     <th
-                        class="network-scan-table__manufacturer"
+                        class="network-scan-table__manufacturer pointer"
                         (click)="setSort('manufacturer')"
                     >
                         Manufacturer
                         <span class="qt-table-modern__sorting"></span>
                     </th>
                     <th
-                        class="network-scan-table__mac-address"
+                        class="network-scan-table__mac-address pointer"
                         (click)="setSort('macAddress')"
                     >
                         Mac address
                         <span class="qt-table-modern__sorting"></span>
                     </th>
                     <th
-                        class="network-scan-table__status"
+                        class="network-scan-table__status pointer"
                         (click)="setSort('agentStatus')"
                     >
                         Status
@@ -167,7 +168,7 @@
                     <th class="network-scan-table__delete"></th>
                 </tr>
             </thead>
-            <tbody *ngIf="networkScanDevices">
+            <tbody *ngIf="networkScanDevices && !showMinPreloader">
                 <ng-template
                     ngFor
                     let-device
@@ -183,6 +184,10 @@
                     ></app-company-network-scan-item>
                 </ng-template>
             </tbody>
+            <div
+                class="loading"
+                *ngIf="showMinPreloader"
+            ></div>
         </table>
     </div>
     <app-network-scan-credentials-aside
