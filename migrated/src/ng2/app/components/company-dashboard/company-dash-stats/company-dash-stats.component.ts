@@ -3,7 +3,7 @@ import { CompanyProfile } from '../../companies/class/company-profile';
 import { CompanyPrimaryContact } from '../../companies/class/company-primary-contact';
 import { Subscription } from 'rxjs';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
-import { DevicesSateService } from 'src/ng2/app/states/devices/devices-sate.service';
+import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.service';
 
 @Component({
   selector: 'app-company-dash-stats',
@@ -13,7 +13,7 @@ import { DevicesSateService } from 'src/ng2/app/states/devices/devices-sate.serv
 export class CompanyDashStatsComponent implements OnInit {
 
   public companyDetail: CompanyProfile;
-  _id:string = '';
+  _id: string = '';
   primaryContact: CompanyPrimaryContact = {
     firstName: '',
     lastName: '',
@@ -21,26 +21,26 @@ export class CompanyDashStatsComponent implements OnInit {
     phoneNumber: '',
     avatar: ''
   };
-  mapSrc:string = '';
-  companyOpen:string = 'Close';
+  mapSrc: string = '';
+  companyOpen: string = 'Close';
   workingDays = [];
-  closingSoon:boolean = false;
-  tagSaved:boolean = false;
+  closingSoon: boolean = false;
+  tagSaved: boolean = false;
   sub: Subscription = new Subscription();
   tags = [];
-  closeResult:string = '';
+  closeResult: string = '';
   modalReference: any;
   @Input() totalTickets: number = 0;
   @Input() averageResponseTime: number = 0;
 
 
-  showArchivedCompanies:boolean = false;
+  showArchivedCompanies: boolean = false;
   public countUsers: number = 0;
   public countDevices: number = 0;
 
   public constructor(
     private usersStateService: UsersStateService,
-    private devicesState: DevicesSateService,
+    private devicesState: DevicesStateService,
     public cd: ChangeDetectorRef
   ) { }
 
