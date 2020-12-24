@@ -2,12 +2,12 @@
     #tipConnected
     class="tooltip"
 >
+    <span [textContent]="device.message"></span>
     <span>{{device.message}}</span>
 </ng-template>
 <span
     [disableTooltip]="device.agentStatus === 'managed'"
     [hidden]="device.agentStatus === 'unknown'"
-    container="body"
     placement="top"
     [ngbTooltip]="tipConnected"
     [ngClass]="getClass()"
