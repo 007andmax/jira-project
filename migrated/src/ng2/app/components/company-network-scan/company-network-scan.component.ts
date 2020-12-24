@@ -226,7 +226,9 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     console.log("this.getPermissions('NETWORK_SCAN_CLIENTS')", this.getPermissions('NETWORK_SCAN_CLIENTS'));
     if (this.getPermissions('NETWORK_SCAN_CLIENTS')) this.getLastScanDevices();
   }
-
+  public trackById(index, item) {
+    return item.id;
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
