@@ -1,0 +1,197 @@
+<div class="network-scan-page">
+    <div class="network-scan-page__content">
+        <div class="network-scan-page__header-title qt-ff-gm">Network Scan</div>
+        <div
+            class="loading"
+            *ngIf="showPreloader"
+        ></div>
+        <!-- Empty page -->
+        <app-company-network-scan-no-exist-devices
+            *ngIf="!showPreloader && devices.length === 0"
+            [companyId]="companyId"
+        ></app-company-network-scan-no-exist-devices>
+        <!-- CONTENT -->
+        <div
+            class="network-steps qt-mb-30"
+            *ngIf="!showPreloader && devices.length > 0"
+        >
+            <div class="network-step">
+                <div class="circle-number qt-mb-8">
+                    <div class="circle-number__inner">1</div>
+                </div>
+                <div class="network-step__title">Run Scan</div>
+                <div class="network-step__text qt-mb-15">Get Started with run scan to get result</div>
+                <!-- <button class="qt-button">Run Scan</button> -->
+                <div
+                    ngbDropdown
+                    container="body"
+                    [placement]="'bottom-right'"
+                >
+                    <button
+                        class="qt-button --with-menu network-steps__scan-button"
+                        ngbDropdownAnchor
+                        placement="top"
+                        ngbTooltip="Master Agent Offline"
+                        [disableTooltip]="masterAgent && masterAgent.online"
+                        [ngClass]="{'cursor-default': masterAgent && !masterAgent.online}"
+                    >
+                        <span
+                            class="left-side-overflow"
+                            [ngClass]="{'qt-loading': isScaning}"
+                            (click)="runScanDevices()"
+                            [textContent]="(masterAgent && !isScaning) ? masterAgent.label || masterAgent.hostName || masterAgent.ip : ''"
+                        >
+                        </span>
+                        <div
+                            class="button-menu"
+                            ngbDropdownToggle
+                            [hidden]="isScaning"
+                        >
+                            <div class="qt-sz-16 qt-ic-c icon__dropdown-arrow-up"></div>
+                        </div>
+                    </button>
+                    <ul
+                        class="qt-dropdown-menu list-devices"
+                        ngbDropdownMenu
+                    >
+                        <ng-template
+                            ngFor
+                            let-agent
+                            [ngForOf]="devices"
+                            [ngForTrackBy]="trackById"
+                        >
+                            <li
+                                class="pointer"
+                                ngbDropdownItem
+                                (click)="selectMasterAgent(agent)"
+                                [textContent]="agent.label || agent.hostName || agent.ip"
+                            ></li>
+                        </ng-template>
+                    </ul>
+                </div>
+            </div>
+            <div class="network-step">
+                <div class="circle-number qt-mb-8">
+                    <div class="circle-number__inner">2</div>
+                </div>
+                <div class="network-step__title">Select Device</div>
+                <!-- <div class="network-step__text qt-mb-15">Choose Device you want to install agent</div> -->
+                <div class="network-step__text-cred qt-mb-15">
+                    <span>You have using below credentials:</span>
+                    <br>
+                    <span
+                        class="qt-ff-gm"
+                        [textContent]="networkScanInstallAgent.getCredentialText()"
+                    ></span>
+                </div>
+                <button
+                    class="qt-button "
+                    [ngClass]="{'--disabled': !checkSelected() || masterAgent && !masterAgent.online}"
+                    (click)="openAside()"
+                    [disabled]="!checkSelected() || masterAgent && !masterAgent.online"
+                    [textContent]="(networkScanInstallAgent.getCredential()) ? 'Modify credentials' : 'Apply Credentials'"
+                >
+                </button>
+                <!-- qt-loading --hide-text -->
+            </div>
+            <div class="network-step">
+                <div class="circle-number qt-mb-8">
+                    <div class="circle-number__inner">3</div>
+                </div>
+                <div class="network-step__title">Install Agent</div>
+                <div class="network-step__text qt-mb-15">Click on button below to install agent</div>
+                <button
+                    class="qt-button"
+                    [ngClass]="{'--disabled': !checkCanInstallAgent(),'qt-loading --hide-text': btnInstallAgent.isBlock()}"
+                    [disabled]="!checkCanInstallAgent()"
+                    appDisabledBtn
+                    #btnInstallAgent="disabled"
+                    (onClick)="installAgent()"
+                >
+                    Install Agent
+                </button>
+            </div>
+        </div>
+        <table
+            class="network-scan-table qt-w100"
+            *ngIf="!showPreloader && devices.length > 0"
+        >
+            <thead>
+                <tr>
+                    <th class="network-scan-table__check">
+                        <div class="d-f">
+                            <label class="qt-checkbox pointer">
+                                <input
+                                    type="checkbox"
+                                    (change)="onToggleAll($event)"
+                                    [(ngModel)]="selectAllDevices"
+                                >
+                                <span></span>
+                            </label>
+                        </div>
+                    </th>
+                    <th
+                        class="network-scan-table__device-name pointer"
+                        (click)="setSort('name')"
+                    >
+                        Device Name
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th
+                        class="network-scan-table__lan-ip pointer"
+                        (click)="setSort('ipAddress')"
+                    >
+                        Lan ip
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th
+                        class="network-scan-table__manufacturer pointer"
+                        (click)="setSort('manufacturer')"
+                    >
+                        Manufacturer
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th
+                        class="network-scan-table__mac-address pointer"
+                        (click)="setSort('macAddress')"
+                    >
+                        Mac address
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th
+                        class="network-scan-table__status pointer"
+                        (click)="setSort('agentStatus')"
+                    >
+                        Status
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th class="network-scan-table__delete"></th>
+                </tr>
+            </thead>
+            <tbody *ngIf="networkScanDevices && !showMinPreloader">
+                <ng-template
+                    ngFor
+                    let-device
+                    [ngForOf]="networkScanDevices.devices"
+                    [ngForTrackBy]="trackById"
+                >
+                    <app-company-network-scan-item
+                        [companyId]="companyId"
+                        [device]="device"
+                        [masterAgent]="masterAgent"
+                        [networkScanSomeInfoForDevice]="networkScanSomeInfoForDevice"
+                        (onSelect)="onSelectDevice()"
+                    ></app-company-network-scan-item>
+                </ng-template>
+            </tbody>
+            <div
+                class="loading"
+                *ngIf="showMinPreloader"
+            ></div>
+        </table>
+    </div>
+    <app-network-scan-credentials-aside
+        [companyId]="companyId"
+        (onSelect)="onSelectCredential($event)"
+    ></app-network-scan-credentials-aside>
+</div>

@@ -75,7 +75,7 @@
           $scope.isLeftPanelHidden = true;
           $scope.isRightPanelHidden = true;
         });
-        $scope.clearCategory = function() {
+        $scope.clearCategory = function () {
           $scope.newCategory = '';
         };
 
@@ -138,6 +138,7 @@
         $scope.dropdownByTechUserCompanyProfilePage = false;
         $scope.dropdownByUserCompanyProfilePage = false;
 
+        $scope.CompanyNetworkScanComponent = false;
         $scope.CompanyProfileTicketsPage = false;
         $scope.CompanyProfileUsersPage = false;
         $scope.CompanyProfileDevicesPage = false;
@@ -246,10 +247,10 @@
         };
 
         $scope.toggleMobileMenu = function (menu) {
-       /*   TicketsService.getAllCounts(function (resp) {
-            resp && ($scope.ticketsCounter = resp);
-            return $scope.test;
-          });*/
+          /*   TicketsService.getAllCounts(function (resp) {
+               resp && ($scope.ticketsCounter = resp);
+               return $scope.test;
+             });*/
           $scope.listOfMobileTitles.forEach(function (title) {
             $scope[title] = false;
           });
@@ -267,10 +268,10 @@
           }
         }, true);
 
-      /*  TicketsService.getAllCounts(function (resp) {
-          resp && ($scope.ticketsCounter = resp);
-          return $scope.test;
-        });*/
+        /*  TicketsService.getAllCounts(function (resp) {
+            resp && ($scope.ticketsCounter = resp);
+            return $scope.test;
+          });*/
 
         $scope.$watch('ticketsCounter', function (newValue, oldValue) {
           $scope.ticketsCounter = newValue;
@@ -283,9 +284,9 @@
         }, function (val) {
           if (val) {
 
-         /*   TicketsService.getAllCounts(function (resp) {
-              $scope.ticketsCounter = resp;
-            });*/
+            /*   TicketsService.getAllCounts(function (resp) {
+                 $scope.ticketsCounter = resp;
+               });*/
           }
         });
 
@@ -326,6 +327,11 @@
             $scope.goToTab(`#/ng2/company-tickets`);
             return;
           }
+          if (tabToActivate == 'CompanyNetworkScanComponent') {
+            // $scope.goToTab(`#/ng2/company/network-scan`);
+            $scope.stateGo(null, 'company-network-scan');
+            return;
+          }
 
           var tab = $scope[tabToActivate];
           deactivateAllCompanyProfileTabs();
@@ -345,16 +351,16 @@
           link.dispatchEvent(e);
         }
 
-      /*  $scope.goToTab = function (url) {
-          let body = document.querySelector('.left-panel__category-wrap');
-          var link = document.createElement('a');
-          body.appendChild(link);
-          link.href = url;
-          var e = document.createEvent('MouseEvents');
-          e.initEvent('click', true, true);
-          link.dispatchEvent(e);
-        }
-*/
+        /*  $scope.goToTab = function (url) {
+            let body = document.querySelector('.left-panel__category-wrap');
+            var link = document.createElement('a');
+            body.appendChild(link);
+            link.href = url;
+            var e = document.createEvent('MouseEvents');
+            e.initEvent('click', true, true);
+            link.dispatchEvent(e);
+          }
+  */
         $scope.companyIconClick = function () {
           $scope.isLeftPanelHidden = !$scope.isLeftPanelHidden
         };
@@ -1051,7 +1057,7 @@
           $scope.companyProfilePasswordsFilter.userId = getUserIdByUserFullName(value)
         };
 
-        
+
 
 
         $scope.changeTicketsTagColor = function (type, colorCode) {
@@ -1126,7 +1132,7 @@
         }, function (value) {
           if (value && value !== '^ ') {
 
-            
+
 
             $scope.openedCategory = getOpenedCategory(value);
             if ($scope.openedCategory) {
@@ -1151,7 +1157,7 @@
 
           $scope.clearAllFilters()
 
-          
+
 
           if (ifIconPart) {
             deactivateAllCompanyProfileTabs();
@@ -1166,12 +1172,12 @@
               $rootScope.isLeftPanelHidden = false;
             }
           }
-        //  $scope.globalSearch.openedItemName = section;
+          //  $scope.globalSearch.openedItemName = section;
         };
 
 
 
-       
+
 
         $scope.showLeftArrowToggleLeftPanel = function () {
           return window.outerWidth <= 1024
@@ -1600,15 +1606,15 @@
             return 'quick-support';
           } else if (url.indexOf('settings.') > -1) {
             return 'settings';
-          }  else if (url.indexOf('drafts') > -1) {
+          } else if (url.indexOf('drafts') > -1) {
             return 'inbox';
           } else if (url.indexOf('companies') > -1) {
             return 'companies';
-          } else if (url.indexOf('companyProfile') > -1 || url.indexOf('company-password-manager') > -1 || url.indexOf('company-user') > -1 || url.indexOf('company-products') > -1 || url.indexOf('company-tickets') > -1 || url.indexOf('company-contracts') > -1) {
+          } else if (url.indexOf('companyProfile') > -1 || url.indexOf('company-password-manager') > -1 || url.indexOf('company-user') > -1 || url.indexOf('company-products') > -1 || url.indexOf('company-tickets') > -1 || url.indexOf('company-contracts') > -1 || url.indexOf('company-network-scan') > -1 || url.indexOf('company-devices') > -1) {
             return 'companyProfile';
           } else if (url.indexOf('users') > -1) {
             return 'users';
-          } else if (url.indexOf('accounting') > -1 || url.indexOf('new-services') > -1 ||  url.indexOf('new-contracts') > -1 ||  url.indexOf('billing-dashboard') > -1) {
+          } else if (url.indexOf('accounting') > -1 || url.indexOf('new-services') > -1 || url.indexOf('new-contracts') > -1 || url.indexOf('billing-dashboard') > -1) {
             return 'billing';
           } else if (url.indexOf('inventory') > -1) {
             return 'inventory';
@@ -1639,7 +1645,7 @@
         }, function (companyId) {
           if (companyId) {
             $scope.companyProfilePageUsersList = UsersService.getAllByCompanyIdNonArchived(companyId);
-           // TicketsService.getAllCountsByCompanyId($scope, companyId, ticketCounterCallback);
+            // TicketsService.getAllCountsByCompanyId($scope, companyId, ticketCounterCallback);
             $scope.companyForCompanyProfile = CompaniesService.getOneById(companyId);
             $scope.companyDevices = $scope.devices.filter(function (device) {
               return device.companyId === companyId;
@@ -1653,7 +1659,7 @@
           if (val) {
             var id = companyProfileSharedState.companyId
             if (id === val.oldCompanyId || id === val.companyId) {
-            //  TicketsService.getAllCountsByCompanyId($scope, id, ticketCounterCallback);
+              //  TicketsService.getAllCountsByCompanyId($scope, id, ticketCounterCallback);
             }
           }
         })
@@ -1665,12 +1671,12 @@
 
 
 
-        $rootScope.$on('onInitConpaiesList', function(){
+        $rootScope.$on('onInitConpaiesList', function () {
           if (company_id) {
-             $scope.companyProfilePageUsersList = UsersService.getAllByCompanyIdNonArchived(company_id);
-              $scope.companyForCompanyProfile = CompaniesService.getOneById(company_id);
-           }
-           $scope.$apply();
+            $scope.companyProfilePageUsersList = UsersService.getAllByCompanyIdNonArchived(company_id);
+            $scope.companyForCompanyProfile = CompaniesService.getOneById(company_id);
+          }
+          $scope.$apply();
         });
       }]);
 

@@ -234,6 +234,10 @@
   background-repeat: no-repeat;
 }
 
+.qt-bgsz-16 {
+  background-size: 16px;
+}
+
 .qt-pointer {
   cursor: pointer;
 }
@@ -353,6 +357,12 @@
   width: fit-content;
   cursor: pointer;
   font-family: Graphik-Medium, sans-serif;
+  position: relative;
+
+  &.--disabled {
+    background-color: #16a4fa80;
+    cursor: default;
+  }
 
   &.--outline {
     color: #16a4fa;
@@ -378,7 +388,17 @@
       margin-right: -20px;
       padding-right: 20px;
     }
-
+    .left-side-overflow {
+      max-width: 180px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-left: -6px;
+      margin-right: -6px;
+    }
+    .icon__dropdown-arrow-up {
+      transform: rotate(180deg);
+    }
   }
   .button-menu {
     border-left: 1px solid #ffffff57;
@@ -392,6 +412,7 @@
     padding-left: 8px;
     padding-right: 8px;
   }
+
 }
 
 .qt-popup-arrow {
@@ -489,7 +510,7 @@
   background-color: #ffffff;
   padding: 8px 0;
   margin: 0;
-  position: relative;
+  overflow: visible;
   &.--open-top {
     top: unset;
     bottom: calc(100% + 4px);
@@ -522,8 +543,16 @@
     font-size: 13px;
     cursor: pointer;
     position: relative;
+    white-space: nowrap;
     &:hover {
       background-color: #edf2f6;
+    }
+  }
+  &.--dropdown-icons {
+    padding: 8px;
+    li {
+      padding: 4px;
+      border-radius: 4px;
     }
   }
 }
@@ -537,7 +566,7 @@
   line-height: 1.54;
 }
 
-.qt-lh-154 {
+.qt-lh-163 {
   line-height: 1.63;
 }
 
@@ -839,7 +868,9 @@
 .qt-w-auto-important {
   width: auto !important;
 }
-
+.qt-overflow-v {
+  overflow: visible !important;
+}
 .qt-inside-border-none-important {
   input {
     border: none !important;
@@ -849,4 +880,36 @@
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
   border-radius: 8px;
   background-color: #ffffff;
+}
+
+.qt-loading {
+  cursor: default;
+  position: relative;
+  &::before {
+    width: 18px;
+    height: 18px;
+    content: '';
+    position: absolute;
+    left: calc(50% - 9px);
+    top: calc(50% - 9px);
+    border-radius: 50%;
+    border: 2px solid white;
+    border-top: 2px solid rgba(255, 255, 255, 0.3);
+    animation: spin 2s linear infinite;
+  }
+  &.--hide-text {
+    color: transparent;
+  }
+  &.--blue {
+    &::before {
+      border: 2px solid #16a4fa;
+      border-top: 2px solid #cdecff;
+    }
+
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg) }
+  100% { transform: rotate(360deg) }
 }

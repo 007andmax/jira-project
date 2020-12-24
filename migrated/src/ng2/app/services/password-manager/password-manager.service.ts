@@ -25,7 +25,7 @@ export class PasswordManagerService {
   public newRecordsisAdd: EventEmitter<any> = new EventEmitter();
   public onSort: EventEmitter<any> = new EventEmitter();
   public onChangeRealTime: EventEmitter<any> = new EventEmitter();
-  password:string = null;
+  password: string = null;
   /**
    * Password manager service constructor
    * @param {HttpClient} http Service to work with request
@@ -33,10 +33,10 @@ export class PasswordManagerService {
   public constructor(
     private http: HttpClient
   ) { }
-public getPassword () {
-  return this.password;
-}
-  public setPassword (password) {
+  public getPassword() {
+    return this.password;
+  }
+  public setPassword(password) {
     this.password = password;
   }
   public handleRealTimeChanges(data) {
@@ -97,7 +97,7 @@ public getPassword () {
    */
 
   public addRecord(item?) {
-   
+
     this.showAddForm.emit(item);
     this.newRecordsisAdd.emit();
   }
@@ -117,7 +117,11 @@ public getPassword () {
    */
   public deleteRecordFromEditForm(recordId) {
     this.deleteItemEditForm.emit(recordId);
-  //  this.hideAddForm.emit();
+    //  this.hideAddForm.emit();
+  }
+
+  public getAgentsCredentialsForCompany(companyId) {
+    return this.http.get(this.apiUrl + `passwordRecords/${companyId}/agents/password`);
   }
 
   /**
@@ -126,7 +130,11 @@ public getPassword () {
    */
   public saveRecord(recordInfo) {
     const date = recordInfo.expiredDate;
-    return this.http.post(this.apiUrl + 'passwordRecords', this.getData(recordInfo,false));
+    return this.http.post(this.apiUrl + 'passwordRecords', this.getData(recordInfo, false));
+  }
+
+  public createRecord(data) {
+    return this.http.post(this.apiUrl + 'passwordRecords', data);
   }
 
   /**
@@ -136,7 +144,7 @@ public getPassword () {
    */
   public editRecord(recordInfo, recordId) {
     const date = recordInfo.expiredDate;
-    return this.http.put(this.apiUrl + 'passwordRecords', Object.assign({ id: recordId }, this.getData(recordInfo,true)));
+    return this.http.put(this.apiUrl + 'passwordRecords', Object.assign({ id: recordId }, this.getData(recordInfo, true)));
   }
 
   /**
@@ -159,7 +167,7 @@ public getPassword () {
    * Get data info
    * @param recordInfo - record information
    */
-  public getData(recordInfo,edit) {
+  public getData(recordInfo, edit) {
     if (recordInfo.type.UPPERCASE === 'OFFICE_365_ACCOUNT') {
       return ({
         companyId: recordInfo.client && recordInfo.client.id,

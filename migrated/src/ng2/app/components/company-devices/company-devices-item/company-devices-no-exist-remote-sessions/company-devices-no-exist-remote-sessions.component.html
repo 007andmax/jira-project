@@ -1,0 +1,45 @@
+<div
+    ngbDropdown
+    container="body"
+    placement="bottom-right"
+>
+    <ng-template
+        #tipRemoteAccess
+        class="tooltip"
+    >
+        Remote Access
+    </ng-template>
+    <div
+        [hidden]="!(device.remoteSessions.length == 0 && device.type !== 'workstation' && device.online && getPermissions('REMOTE_CONNECTIONS'))"
+        class="qt-ic-c icon__quick-connect qt-pointer qt-sz-24 qt-bg-contain"
+        placement="top"
+        [ngbTooltip]="tipRemoteAccess"
+        (click)="remoteAccess('PROXY')"
+    >
+    </div>
+    <div
+        [hidden]="!(device.remoteSessions.length == 0 && device.type === 'workstation' && device.online && getPermissions('REMOTE_CONNECTIONS'))"
+        class="qt-ic-c icon__quick-connect qt-pointer qt-sz-24 qt-bg-contain"
+        placement="top"
+        container="body"
+        [ngbTooltip]="tipRemoteAccess"
+        ngbDropdownToggle
+    >
+        <div ngbDropdownMenu>
+            <ul class="qt-dropdown-menu">
+                <li
+                    (click)="remoteAccess('CSS')"
+                    ngbDropdownItem
+                >
+                    QuickTech Connect
+                </li>
+                <li
+                    (click)="remoteAccess('RDP')"
+                    ngbDropdownItem
+                >
+                    Remote Desktop
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

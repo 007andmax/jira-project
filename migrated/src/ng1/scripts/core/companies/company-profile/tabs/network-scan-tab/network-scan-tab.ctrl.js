@@ -8,7 +8,7 @@
       'quicktech.common.services.UserNotificationService',
       'Utils', 'PasswordManagerService', 'quicktech.common.services.UserConfirmationsService', '$filter',
       function ($scope, UsersService, CompaniesService, DevicesService, PermissionsService,
-                UserNotificationService, Utils, PasswordManagerService, UserConfirmationsService, $filter) {
+        UserNotificationService, Utils, PasswordManagerService, UserConfirmationsService, $filter) {
         var lastMasterAgentId;
 
         $scope.testCredentialsModel = {};
@@ -39,6 +39,7 @@
               $scope.masterAgent = selectMAsterAgent(lastMasterAgentId);
               $scope.lastMasterAgent = $scope.masterAgent;
             }
+            console.log("$scope.masterAgent", $scope.masterAgent);
 
             if (lastMasterAgentId && PermissionsService.isAllowed('NETWORK_SCAN_CLIENTS')) {
               getScanDevices();
@@ -106,7 +107,7 @@
           }
 
           if ($scope.agents) {
-            var masterAgent = $scope.agents.find(function(agent) {
+            var masterAgent = $scope.agents.find(function (agent) {
               return agent.master;
             });
 
@@ -130,7 +131,7 @@
           }
         }
 
-        $scope.changeShowPassword = function() {
+        $scope.changeShowPassword = function () {
           $scope.passwordShown = !$scope.passwordShown;
         };
 
@@ -281,7 +282,7 @@
 
         $scope.installAgents = function (form) {
           // if (form.$valid) {
-            if (true) {
+          if (true) {
             $scope.isInstallInProgress = true;
             $scope.triedToDownload = false;
 
@@ -292,24 +293,24 @@
               }
             }
 
-            $scope.devicesToWatch = deviceIds.map(function(id) {
-              return $scope.scanDevices.devices.find(function(device) {
+            $scope.devicesToWatch = deviceIds.map(function (id) {
+              return $scope.scanDevices.devices.find(function (device) {
                 return device.id === id;
               })
             })
-            $scope.devicesToWatch = $scope.devicesToWatch.filter(function(el) {
+            $scope.devicesToWatch = $scope.devicesToWatch.filter(function (el) {
               return !!el;
             })
 
             if ($scope.selectedCredential.password && $scope.selectedCredential.username) {
               // var completedIds = {};
-              $scope.devicesToWatch = $scope.devicesToWatch.map(function(dev) {
+              $scope.devicesToWatch = $scope.devicesToWatch.map(function (dev) {
                 if (!dev.status) return dev;
                 dev.status.message = '';
                 dev.status.tooltip = '';
                 return dev;
               })
-              var watcher = $scope.$watch('devicesToWatch', function(val) {
+              var watcher = $scope.$watch('devicesToWatch', function (val) {
                 var completedDevices = 0;
                 var devices = $scope.devicesToWatch;
 
@@ -365,7 +366,7 @@
 
         };
 
-        $scope.changeSortProp = function(prop) {
+        $scope.changeSortProp = function (prop) {
           if ($scope.orderScanBy === prop) {
             $scope.reverse = !$scope.reverse;
           }
@@ -373,7 +374,7 @@
           $scope.orderScanBy = prop;
         }
 
-        $scope.sortDevices = function(option, devices) {
+        $scope.sortDevices = function (option, devices) {
 
           if (!devices) return
 
@@ -392,14 +393,14 @@
           $scope.orderScanBy = option;
 
           if (option === 'ipAddress') {
-            devices.sort(function(a, b) {
+            devices.sort(function (a, b) {
               var first = $scope.reverse ? b : a;
               var second = $scope.reverse ? a : b;
 
               return getIpAsNum(first.ipAddress) - getIpAsNum(second.ipAddress);
             });
           } else {
-            devices.sort(function(a, b) {
+            devices.sort(function (a, b) {
               var first = $scope.reverse ? b : a;
               var second = $scope.reverse ? a : b;
 
@@ -469,7 +470,7 @@
               password: $scope.testCredentialsModel.password,
               username: $scope.testCredentialsModel.username
             };
-            if($scope.testCredentialsModel.id) {
+            if ($scope.testCredentialsModel.id) {
               data.id = $scope.testCredentialsModel.id;
             }
             PasswordManagerService.save(data, function () {
@@ -481,7 +482,7 @@
           }
         };
 
-        $scope.removeCredential = function(credential) {
+        $scope.removeCredential = function (credential) {
           if (PermissionsService.isAllowed('DELETE_PASSWORD')) {
             var message = 'Are you sure you want to delete this password?';
             UserConfirmationsService.show(message, 'Yes').then(function () {
@@ -499,12 +500,12 @@
         }, function (val) {
           // $scope.sortDevices('hostName');
           $scope.isScanDevicesLoad = val && val !== 'disabled' && val !== 'finished' || $scope.runScan;
-          if(val === 'finished') {
+          if (val === 'finished') {
             UserNotificationService.show('Scanning finished', true);
           }
         });
 
-        $scope.$on('$destroy', function() {
+        $scope.$on('$destroy', function () {
           if ($scope.defaultMasterAgent) {
             DevicesService.markDeviceAsMaster($scope.company.id, $scope.defaultMasterAgent.agentId);
           }
@@ -518,14 +519,14 @@
         var toSort = devices.slice();
 
         if (option === 'ipAddress') {
-          toSort.sort(function(a, b) {
+          toSort.sort(function (a, b) {
             var first = reverse ? b : a;
             var second = reverse ? a : b;
 
             return getIpAsNum(first.ipAddress) - getIpAsNum(second.ipAddress);
           });
         } else {
-          toSort.sort(function(a, b) {
+          toSort.sort(function (a, b) {
             var first = reverse ? b : a;
             var second = reverse ? a : b;
             return first[option].localeCompare(second[option]);

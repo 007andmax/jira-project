@@ -1,0 +1,15 @@
+<div class="sidebar-updates qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
+    <div class="qt-df qt-jc-sb">
+        <div class="sidebar-updates__tab-title qt-ff-sb">UPDATES</div>
+    </div>
+    <div class="sidebar-updates__items">
+        <div class="sidebar-updates__item">
+            <div
+                class="sidebar-updates__icon icon__virus-protection icon "
+                [ngClass]="{'--updated': getAntivirusFiled('isUpToDate') == true, '--alert': getAntivirusFiled('isUpToDate') == false}"
+            ></div>
+            <div class="sidebar-updates__title">Virus Protection</div>
+            <div class="sidebar-updates__subtitle">Up-to-date</div>
+        </div>
+    </div>
+</div>

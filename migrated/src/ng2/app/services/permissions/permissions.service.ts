@@ -23,7 +23,7 @@ export class PermissionsService {
    * check is allowed
    * @param action - permission
    */
-  public isAllowed (action) {
+  public isAllowed(action) {
     const currentUser = this.usersStateService.getCurrentUser();
     return !!(currentUser && (currentUser.isOwner || currentUser.permissions.indexOf(action) > -1));
   };

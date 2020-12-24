@@ -3,7 +3,7 @@ import { Company } from 'src/ng2/app/interfaces/company/company';
 import { CompanyAndressContact } from 'src/ng2/app/interfaces/company/company-address-contact';
 import { CompanyAndress } from 'src/ng2/app/interfaces/company/company-address';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
-import { DevicesSateService } from 'src/ng2/app/states/devices/devices-sate.service';
+import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
@@ -37,7 +37,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   constructor(private usersStateService: UsersStateService,
     private companiesStateService: CompaniesStateService,
-    private devicesState: DevicesSateService,
+    private devicesState: DevicesStateService,
     private modalService: NgbModal,
     private confirmStateService: ConfirmStateService,
     private companiesService: CompaniesService,

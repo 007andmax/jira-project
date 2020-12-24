@@ -8,7 +8,7 @@ import * as moment from "moment";
 import { ServiceReports } from '../../class/service-reports';
 import { ServiceReportsItem } from '../../class/service-reports-item';
 import { ReportsStateService } from 'src/ng2/app/states/reports/reports-state.service';
-import { DevicesSateService } from 'src/ng2/app/states/devices/devices-sate.service';
+import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.service';
 import { isEmbeddedView } from '@angular/core/src/view/util';
 
 @Component({
@@ -36,7 +36,7 @@ export class ServiceReportComponent implements OnInit {
     private companiesStateService: CompaniesStateService,
     private usersStateService: UsersStateService,
     private reportsStateService: ReportsStateService,
-    private devicesSateService: DevicesSateService,
+    private devicesStateService: DevicesStateService,
     private ticketReportStateService: TicketReportStateService) { }
 
   ngOnInit() {
@@ -177,7 +177,7 @@ export class ServiceReportComponent implements OnInit {
   }
   public getDeviceName(data) {
     if (!this.selectedClient) return "";
-    let list = this.devicesSateService.getAllDevices()[this.selectedClient.id];
+    let list = this.devicesStateService.getAllDevices()[this.selectedClient.id];
     if (!list) return "";
     let find = list.find(item => item.id === data);
     return (find) ? find.hostName : "";

@@ -7,7 +7,7 @@ import { CompaniesStateService } from '../../states/company/companies-state.serv
 import { ConfirmStateService } from '../shared/confirm/services/confirm-state.service';
 import { Subscription } from 'rxjs';
 import { CompanyFilterTop } from './class/company-filter-top';
-import { DevicesSateService } from '../../states/devices/devices-sate.service';
+import { DevicesStateService } from '../../states/devices/devices-state.service';
 import { UsersStateService } from '../../states/users/users-state.service';
 import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
 import { LeftPanelCompaniesFilter } from '../left-panel/left-panel-companies/class/left-panel-companies-filter';
@@ -51,7 +51,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     private companiesStateService: CompaniesStateService,
     private userService: UsersService,
     private confirmStateService: ConfirmStateService,
-    private devicesState: DevicesSateService,
+    private devicesState: DevicesStateService,
     private usersStateService: UsersStateService,
     private leftPanelStateService: LeftPanelStateService,
     private companiesRealTimeService: CompaniesRealTimeService,

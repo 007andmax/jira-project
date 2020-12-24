@@ -1,0 +1,61 @@
+<tr>
+    <td class="network-scan-table__check">
+        <div
+            class="d-f"
+            *ngIf="networkScanSomeInfoForDevice.allowAgentInstall"
+        >
+            <label
+                class="qt-checkbox"
+                [attr.for]="'device-' + device.id"
+            >
+                <input
+                    type="checkbox"
+                    [attr.id]="'device-' + device.id"
+                    [(ngModel)]="device.selected"
+                    (change)="onSelectDevice()"
+                >
+                <span></span>
+            </label>
+        </div>
+    </td>
+    <td class="network-scan-table__device-name">
+        <div class="qt-df qt-ai-c">
+            <app-company-devices-edit-label
+                #editLabel
+                [field]="getLabel()"
+                [title]="'Name'"
+                class="company-device-edit-name"
+                (onChange)="onChangeName($event)"
+            ></app-company-devices-edit-label>
+            <!-- <input
+                class="network-scan-table__device-name-input"
+                type="text"
+                [value]="getLabel()"
+            > -->
+        </div>
+    </td>
+    <td
+        class="network-scan-table__lan-ip"
+        [textContent]="device.ipAddress"
+    ></td>
+    <td
+        class="network-scan-table__manufacturer"
+        [textContent]="device.manufacturer || 'not defined'"
+    ></td>
+    <td
+        class="network-scan-table__mac-address"
+        [textContent]="device.macAddress"
+    ></td>
+    <td class="network-scan-table__status">
+        <app-company-network-scan-item-tooltip [device]="device"></app-company-network-scan-item-tooltip>
+    </td>
+    <td class="network-scan-table__delete">
+        <div
+            class="icon__remove qt-ic-c qt-sz-16 qt-pointer"
+            *ngIf="device.agentStatus === 'managed' || device.agentStatus === 'Installed'"
+            placement="top"
+            ngbTooltip="Remove Agent"
+            (click)="remove()"
+        ></div>
+    </td>
+</tr>

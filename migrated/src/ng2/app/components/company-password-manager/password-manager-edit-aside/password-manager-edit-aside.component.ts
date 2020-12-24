@@ -15,9 +15,9 @@ import { UsersService } from "../../../services/users/users.service";
 import { GadgetsService } from "../../../services/gadgets/gadgets.service";
 import { PermissionsService } from "../../../services/permissions/permissions.service";
 import { ApiPasswordManagerService } from "../../../services/password-manager/api-password-manager.service";
- 
+
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
-import { DevicesSateService } from 'src/ng2/app/states/devices/devices-sate.service';
+import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.service';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 
 /**
@@ -27,7 +27,7 @@ import { UsersStateService } from 'src/ng2/app/states/users/users-state.service'
   selector: 'app-company-password-manager-edit-aside',
   templateUrl: './password-manager-edit-aside.component.html',
   styleUrls: ['./password-manager-edit-aside.component.scss'],
-  
+
 })
 export class CompanyPasswordManagerEditAsideComponent implements OnInit {
 
@@ -74,7 +74,7 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
   public subGetCompaniesList: ISubscription;
   public opened: boolean = false;
   showPassword: boolean = false;
-  isLoadPassword:boolean = false;
+  isLoadPassword: boolean = false;
   /**
    * Creates an instance of the PasswordManagerEditAsideComponent with the injected services
    * @param {ApiPasswordManagerService} apiPasswordManagerService Service to work with api
@@ -96,9 +96,9 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
     private permissionsService: PermissionsService,
     private apiPasswordManagerService: ApiPasswordManagerService,
     public cd: ChangeDetectorRef,
-  
+
     private companiesState: CompaniesStateService,
-    private devicesSateService:DevicesSateService,
+    private devicesStateService: DevicesStateService,
     private usersStateService: UsersStateService,
     private elRef: ElementRef
   ) { }
@@ -108,18 +108,18 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
    */
   ngOnInit() {
     this.showAddForm();
-    if (this.companiesState.getCompanies().length > 0)   this.getCLientsList(this.companiesState.getCompanies());
-      this.companiesState.getOnCompanies().subscribe((data) => {
-        this.getCLientsList(data);
-      })
-    
-   
+    if (this.companiesState.getCompanies().length > 0) this.getCLientsList(this.companiesState.getCompanies());
+    this.companiesState.getOnCompanies().subscribe((data) => {
+      this.getCLientsList(data);
+    })
+
+
     this.type = 0;
     this.currentType = PASSWORD_RECORD_TYPES[0];
     this.hideAddForm();
     this.onGetUsers();
-   // this.oGetDevices();
- 
+    // this.oGetDevices();
+
 
   }
 
@@ -139,8 +139,8 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
       this.showPassword = false;
       this.elRef.nativeElement.querySelector('#toggle-password-company').classList.add('show-pass');
       this.elRef.nativeElement.querySelector('#toggle-password-company').classList.remove('hide-pass');
-      this.elRef.nativeElement.querySelector('#password').setAttribute('type','password');
-   
+      this.elRef.nativeElement.querySelector('#password').setAttribute('type', 'password');
+
       this.passwordManagerService.setPassword(null);
     }
   }
@@ -153,8 +153,8 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
       this.editItem = res;
       if (this.editItem) this.isEditmode = true;
       this.opened = true;
-       this.initForm();
-      
+      this.initForm();
+
     });
   }
 
@@ -173,8 +173,8 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
       this.selectedUserAndDevices = [];
       this.opened = false;
       this.subShowAddForm.unsubscribe();
-       
-      
+
+
     });
   }
 
@@ -191,11 +191,11 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
   /**
    * init new form
    */
-  public initForm(){
+  public initForm() {
     this.expiryDate = this.editItem && this.editItem.expiredDate ? this.getStartDate(this.editItem.expiredDate) : null;
     this.createPasswordRecord = this.fb.group({
       description: [this.editItem ? this.editItem.description : '', Validators.maxLength(5000)],
-      client: [this.editItem? this.getEditCompany(this.editItem.companyId) : this.selectedClient, [Validators.required]],
+      client: [this.editItem ? this.getEditCompany(this.editItem.companyId) : this.selectedClient, [Validators.required]],
       type: [this.editItem ? this.getEditTemplate(this.editItem.template) : PASSWORD_RECORD_TYPES[0], [Validators.required]],
       ssid: [this.editItem ? this.editItem.ssid : ''],
       userName: [this.editItem ? this.editItem.username : '', [Validators.required, Validators.maxLength(100)]],
@@ -204,7 +204,7 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
       link: [''],
       url: [this.editItem ? this.editItem.url : '', [Validators.maxLength(255)]],
       code: [this.editItem ? this.editItem.code : ''],
-      userOrDevice: [this.editItem ? this.editItem.links :''],
+      userOrDevice: [this.editItem ? this.editItem.links : ''],
       ipAdres: [this.editItem ? this.editItem.ip : '', [Validators.pattern('^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$')]],
       port: [this.editItem ? this.editItem.port : ''],
       expiryDate: [this.editItem ? this.expiryDate : null, []],
@@ -220,9 +220,8 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
    */
   public save() {
     this.submitted = true;
-    if (this.editItem && (!this.createPasswordRecord.value.password || this.createPasswordRecord.value.password.length === 0)  && this.passwordManagerService.getPassword() !== null)
-    {
-      const errors:ValidationErrors = {required: 'Field is required'};
+    if (this.editItem && (!this.createPasswordRecord.value.password || this.createPasswordRecord.value.password.length === 0) && this.passwordManagerService.getPassword() !== null) {
+      const errors: ValidationErrors = { required: 'Field is required' };
       this.createPasswordRecord.controls['password'].setErrors(errors);
       this.cd.detectChanges();
       return;
@@ -301,10 +300,10 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
    * change selected user and device
    */
   public changeSelectedUserAndDevices(newItem, index?, type?) {
-    const items =  this.selectedUserAndDevices.filter((item) => {
+    const items = this.selectedUserAndDevices.filter((item) => {
       return (item.item.id !== newItem.id)
     });
-    if (items.length <  this.selectedUserAndDevices.length) {
+    if (items.length < this.selectedUserAndDevices.length) {
       return this.selectedUserAndDevices = items;
     } else {
       return this.selectedUserAndDevices.push({
@@ -320,13 +319,13 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
    * @param newItem - new item
    * @param type - type of new item
    */
-  private pushItemToUserDevice( newItem, type) {
+  private pushItemToUserDevice(newItem, type) {
     if (type === 'device') {
-      this.userDevice.push({deviceId: newItem.id})
-    } else if (type === 'user'){
-      this.userDevice.push({userId: newItem.id})
+      this.userDevice.push({ deviceId: newItem.id })
+    } else if (type === 'user') {
+      this.userDevice.push({ userId: newItem.id })
     } else {
-      this.userDevice.push({gadgetId: newItem.id})
+      this.userDevice.push({ gadgetId: newItem.id })
     }
   }
 
@@ -338,7 +337,7 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
   private filterUserDevice(newItem, type) {
     if (type === 'device') {
       return this.userDevice.filter((item) => item.deviceId !== newItem.id);
-    } else if (type === 'user'){
+    } else if (type === 'user') {
       return this.userDevice.filter((item) => item.userId !== newItem.id);
     } else {
       return this.userDevice.filter((item) => item.gadgetId !== newItem.id);
@@ -350,10 +349,10 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
    * @param newItem - item
    * @param type - type of item
    */
-   private findItemInUserDevice(newItem, type) {
+  private findItemInUserDevice(newItem, type) {
     if (type === 'device') {
       return this.userDevice.filter((item) => item.deviceId === newItem.id);
-    } else if (type === 'user'){
+    } else if (type === 'user') {
       return this.userDevice.filter((item) => item.userId === newItem.id);
     } else {
       return this.userDevice.filter((item) => item.gadgetId === newItem.id);
@@ -367,29 +366,29 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
   public getCompanyDevices(companyId) {
     this.selectedClient = companyId.item;
     this.clearClient();
-   
+
     this.getGadgets();
-   // this.subGetDevices = this.devicesService.getCompanyDevices(companyId.item.id).subscribe((res) => {
-      if (this.devicesSateService.getAllDevices() && this.devicesSateService.getAllDevices()[companyId.item.id]) {
-        this.deviceCheckbox = new Array([...this.devicesSateService.getAllDevices()[companyId.item.id]].length);
-        this.showGadgetsForm = false;
-        for (var i = 0; i < this.deviceCheckbox.length; ++i) { this.deviceCheckbox[i] = false; }
-        this.devicesList = [...this.devicesSateService.getAllDevices()[companyId.item.id]];
-        if (this.isEditmode && this.editItem) {
-          this.editItem.links.map((item) => {
-            const index = this.devicesList.findIndex((deviceListItem) => {
-              return deviceListItem.id === item.deviceId
-            });
-            if (index > -1) {
-              this.toggleItem(this.devicesList[index], 'device', index);
-            }
+    // this.subGetDevices = this.devicesService.getCompanyDevices(companyId.item.id).subscribe((res) => {
+    if (this.devicesStateService.getAllDevices() && this.devicesStateService.getAllDevices()[companyId.item.id]) {
+      this.deviceCheckbox = new Array([...this.devicesStateService.getAllDevices()[companyId.item.id]].length);
+      this.showGadgetsForm = false;
+      for (var i = 0; i < this.deviceCheckbox.length; ++i) { this.deviceCheckbox[i] = false; }
+      this.devicesList = [...this.devicesStateService.getAllDevices()[companyId.item.id]];
+      if (this.isEditmode && this.editItem) {
+        this.editItem.links.map((item) => {
+          const index = this.devicesList.findIndex((deviceListItem) => {
+            return deviceListItem.id === item.deviceId
           });
-         
-        }
+          if (index > -1) {
+            this.toggleItem(this.devicesList[index], 'device', index);
+          }
+        });
+
       }
-      companyId.item && this.getUsersCompany(companyId.item.id);
-   // });
-   // return this.selectedClient;
+    }
+    companyId.item && this.getUsersCompany(companyId.item.id);
+    // });
+    // return this.selectedClient;
   }
 
   /**
@@ -400,7 +399,7 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
     const clicksWithClosedPopup$ = this.click$.pipe(filter(() => !this.instance.isPopupOpen()));
     const inputFocus$ = this.focus$;
     return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
-      map(term => PASSWORD_RECORD_TYPES.sort().slice(0,9))
+      map(term => PASSWORD_RECORD_TYPES.sort().slice(0, 9))
     );
   };
 
@@ -430,7 +429,7 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
     return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
       map(term => (term === '' ? this.clientsList
         : this.clientsList && this.clientsList
-        .filter(v => v['name'].toLowerCase().indexOf(term.toLowerCase()) > -1)))
+          .filter(v => v['name'].toLowerCase().indexOf(term.toLowerCase()) > -1)))
     );
   };
 
@@ -452,11 +451,11 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
    * get client list
    */
   public getCLientsList(res) {
-    
-      this.clientsList = res
-        .sort((a, b) => a.name.localeCompare(b.name))
-        .filter((item) => !item.deletedAt)
-    
+
+    this.clientsList = res
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .filter((item) => !item.deletedAt)
+
   }
 
   /**
@@ -487,38 +486,37 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
   }
 
   public togglePassword() {
-     
+
     if (!this.showPassword) {
-      if (this.editItem)
-      {
+      if (this.editItem) {
         this.isLoadPassword = true;
-        this.apiPasswordManagerService.setOpenRecord(this.editItem.id).subscribe((data:any) => {
-         
+        this.apiPasswordManagerService.setOpenRecord(this.editItem.id).subscribe((data: any) => {
+
           this.passwordManagerService.setPassword(data.password);
-         
+
           this.createPasswordRecord.controls['password'].setValue(data.password);
           this.showPassword = !this.showPassword;
-         
-       
+
+
           this.isLoadPassword = false;
           this.elRef.nativeElement.querySelector('#toggle-password-company').classList.add('hide-pass');
           this.elRef.nativeElement.querySelector('#toggle-password-company').classList.remove('show-pass');
-          this.elRef.nativeElement.querySelector('#password').setAttribute('type','text');
+          this.elRef.nativeElement.querySelector('#password').setAttribute('type', 'text');
         })
       } else {
         this.showPassword = !this.showPassword;
         this.elRef.nativeElement.querySelector('#toggle-password-company').classList.add('hide-pass');
         this.elRef.nativeElement.querySelector('#toggle-password-company').classList.remove('show-pass');
-        this.elRef.nativeElement.querySelector('#password').setAttribute('type','text');
-    
+        this.elRef.nativeElement.querySelector('#password').setAttribute('type', 'text');
+
       }
-     
+
     } else {
       this.showPassword = !this.showPassword;
       this.elRef.nativeElement.querySelector('#toggle-password-company').classList.add('show-pass');
       this.elRef.nativeElement.querySelector('#toggle-password-company').classList.remove('hide-pass');
-      this.elRef.nativeElement.querySelector('#password').setAttribute('type','password');
-         
+      this.elRef.nativeElement.querySelector('#password').setAttribute('type', 'password');
+
     }
   }
 
@@ -575,22 +573,22 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
   }
 
   /*public oGetDevices() {
-    if (this.devicesSateService.getAllDevices()) {
-      this.getGadgets(this.devicesSateService.getAllDevices());
+    if (this.devicesStateService.getAllDevices()) {
+      this.getGadgets(this.devicesStateService.getAllDevices());
     } else {
-      this.devicesSateService.getOnDevices().subscribe((data) => {
+      this.devicesStateService.getOnDevices().subscribe((data) => {
       
         this.getGadgets(data);
       })
     }
   }*/
   public onGetUsers() {
-    if (this.usersStateService.getAllUsers().length > 0)  this.getAllUsers(this.usersStateService.getAllUsers());
-      this.usersStateService.getOnUsers().subscribe((data) => {
+    if (this.usersStateService.getAllUsers().length > 0) this.getAllUsers(this.usersStateService.getAllUsers());
+    this.usersStateService.getOnUsers().subscribe((data) => {
 
-        this.getAllUsers(data);
-      })
-    
+      this.getAllUsers(data);
+    })
+
   }
   /**
    * get gadgets
@@ -657,7 +655,7 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
    * get edit template
    */
   public getEditTemplate(template) {
-    const index  = PASSWORD_RECORD_TYPES.findIndex((item) => item.UPPERCASE === template);
+    const index = PASSWORD_RECORD_TYPES.findIndex((item) => item.UPPERCASE === template);
     this.currentType = PASSWORD_RECORD_TYPES[index];
     this.changeType(this.currentType);
     return PASSWORD_RECORD_TYPES[index];
@@ -669,7 +667,7 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
   public getEditCompany(id) {
     if (this.clientsList) {
       const company = this.clientsList.filter((item) => item.id === id);
-      this.getCompanyDevices({item: company[0]});
+      this.getCompanyDevices({ item: company[0] });
       return this.selectedClient = company[0];
     }
   }
@@ -689,7 +687,7 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
   /**
    * delete record
    */
-  public deleteRecord(recordId){
+  public deleteRecord(recordId) {
     this.passwordManagerService.deleteRecordFromEditForm(recordId);
     this.hideAddForm();
   }

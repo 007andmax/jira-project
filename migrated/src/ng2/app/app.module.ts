@@ -351,7 +351,30 @@ import { TicketPriorityWidgetComponent } from './components/tickets/tickets-dash
 import { TimeOnTicketsWidgetComponent } from './components/tickets/tickets-dashboard/time-on-tickets-widget/time-on-tickets-widget.component';
 import { TicketsBillableHoursWidgetComponent } from './components/tickets/tickets-dashboard/tickets-billable-hours-widget/tickets-billable-hours-widget.component';
 import { TechTicketsWidgetComponent } from './components/tickets/tickets-dashboard/tech-tickets-widget/tech-tickets-widget.component';
+import { CompanyNetworkScanComponent } from './components/company-network-scan/company-network-scan.component';
 
+
+import { CompanyDevicesComponent } from './components/company-devices/company-devices.component';
+import { CompanyDevicesItemComponent } from './components/company-devices/company-devices-item/company-devices-item.component';
+import { CompanyDevicesHeaderComponent } from './components/company-devices/company-devices-header/company-devices-header.component';
+import { CompanyDevicesRemoteAccessComponent } from './components/company-devices/company-devices-remote-access/company-devices-remote-access.component';
+import { CompanyDevicesEditNameComponent } from './components/company-devices/company-devices-edit-name/company-devices-edit-name.component';
+import { CompanyDevicesAsideComponent } from './components/company-devices/company-devices-aside/company-devices-aside.component';
+import { CompanyDevicesAsideDeviceIconComponent } from './components/company-devices/company-devices-aside/company-devices-aside-device-icon/company-devices-aside-device-icon.component';
+import { CompanyDevicesAsideSystemComponent } from './components/company-devices/company-devices-aside/company-devices-aside-system/company-devices-aside-system.component';
+import { CompanyDevicesAsideNetworkTabComponent } from './components/company-devices/company-devices-aside/company-devices-aside-network-tab/company-devices-aside-network-tab.component';
+import { CompanyDevicesAsideSoftwareComponent } from './components/company-devices/company-devices-aside/company-devices-aside-software/company-devices-aside-software.component';
+import { CompanyDevicesAsideUpdatesComponent } from './components/company-devices/company-devices-aside/company-devices-aside-updates/company-devices-aside-updates.component';
+import { CompanyDevicesExistRemoteSessionsComponent } from './components/company-devices/company-devices-item/company-devices-exist-remote-sessions/company-devices-exist-remote-sessions.component';
+import { CompanyDevicesNoExistRemoteSessionsComponent } from './components/company-devices/company-devices-item/company-devices-no-exist-remote-sessions/company-devices-no-exist-remote-sessions.component';
+import { CompanyDevicesEditLabelComponent } from './components/company-devices/company-devices-edit-label/company-devices-edit-label.component';
+import { CompanyDevicesAsideTooltipComponent } from './components/company-devices/company-devices-aside/company-devices-aside-tooltip/company-devices-aside-tooltip.component';
+import { CompanyNetworkScanNoExistDevicesComponent } from './components/company-network-scan/company-network-scan-no-exist-devices/company-network-scan-no-exist-devices.component';
+import { NetworkScanCredentialsAsideComponent } from './components/company-network-scan/network-scan-credentials-aside/network-scan-credentials-aside.component';
+import { NetworkScanCredentialsAddComponent } from './components/company-network-scan/network-scan-credentials-add/network-scan-credentials-add.component';
+import { NetworkScanCredentialsAsideItemComponent } from './components/company-network-scan/network-scan-credentials-aside/network-scan-credentials-aside-item/network-scan-credentials-aside-item.component';
+import { CompanyNetworkScanItemComponent } from './components/company-network-scan/company-network-scan-item/company-network-scan-item.component';
+import { CompanyNetworkScanItemTooltipComponent } from './components/company-network-scan/company-network-scan-item/company-network-scan-item-tooltip/company-network-scan-item-tooltip.component';
 
 
 /**
@@ -532,11 +555,18 @@ angular.module('quicktech')
     downgradeComponent({ component: DashboardBillingComponent })
   )
   .directive(
+    'companyDevicesComponent',
+    downgradeComponent({ component: CompanyDevicesComponent })
+  )
+  .directive(
     'companyContractsComponent',
     downgradeComponent({ component: CompanyContractsComponent }))
   .directive(
     'ticketsDashboardComponent',
     downgradeComponent({ component: TicketsDashboardComponent }))
+  .directive(
+    'companyNetworkScanComponent',
+    downgradeComponent({ component: CompanyNetworkScanComponent }))
   .factory('ngZone', downgradeInjectable(NgZone));
 
 /**
@@ -855,7 +885,29 @@ angular.module('quicktech')
     TicketPriorityWidgetComponent,
     TimeOnTicketsWidgetComponent,
     TicketsBillableHoursWidgetComponent,
-    TechTicketsWidgetComponent
+    TechTicketsWidgetComponent,
+    CompanyNetworkScanComponent,
+    CompanyDevicesComponent,
+    CompanyDevicesItemComponent,
+    CompanyDevicesHeaderComponent,
+    CompanyDevicesRemoteAccessComponent,
+    CompanyDevicesEditNameComponent,
+    CompanyDevicesAsideComponent,
+    CompanyDevicesAsideDeviceIconComponent,
+    CompanyDevicesAsideSystemComponent,
+    CompanyDevicesAsideNetworkTabComponent,
+    CompanyDevicesAsideSoftwareComponent,
+    CompanyDevicesAsideUpdatesComponent,
+    CompanyDevicesExistRemoteSessionsComponent,
+    CompanyDevicesNoExistRemoteSessionsComponent,
+    CompanyDevicesEditLabelComponent,
+    CompanyDevicesAsideTooltipComponent,
+    CompanyNetworkScanNoExistDevicesComponent,
+    NetworkScanCredentialsAsideComponent,
+    NetworkScanCredentialsAddComponent,
+    NetworkScanCredentialsAsideItemComponent,
+    CompanyNetworkScanItemComponent,
+    CompanyNetworkScanItemTooltipComponent,
   ],
   imports: [
     BrowserModule,
@@ -948,7 +1000,10 @@ angular.module('quicktech')
     ContractsConfirmComponent,
     DashboardBillingComponent,
     CompanyContractsComponent,
-    TicketsDashboardComponent
+    TicketsDashboardComponent,
+    CompanyNetworkScanComponent,
+    CompanyDevicesComponent,
+    CompanyDevicesRemoteAccessComponent
     // RecurringTicketsComponent
   ],
   exports: [

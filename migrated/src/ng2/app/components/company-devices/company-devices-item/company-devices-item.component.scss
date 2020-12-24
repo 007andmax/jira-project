@@ -1,0 +1,34 @@
+.icon-list i {
+    display: block;
+}
+.company-devices-table__menu-body {
+    position: relative;
+}
+.company-device-hover:hover {
+  td {
+    background-color: #f9fafb;
+    .company-devices-table__ip-address-text,
+    .company-devices-table__ip-windows-text {
+      opacity: 0;
+    }
+    .company-devices-table__system-network-buttons,
+    .company-devices-table__ip-address-buttons {
+      position: absolute;
+      top: 7px;
+      display: flex;
+    }
+    .company-devices-table__ip-address-buttons {
+      left: -15px;
+    }
+    .device-name-edit-marker {
+      display: flex;
+    }
+    input.name-text-input {
+      background-color: #F9FAFB;
+    }
+  }
+}
+
+.sidebar-system__info-text-input {
+  background-color: orange;
+}

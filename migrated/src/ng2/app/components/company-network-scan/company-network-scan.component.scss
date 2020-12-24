@@ -1,0 +1,12 @@
+.list-devices {
+    height: fit-content;
+}
+app-company-network-scan-item {
+    display: contents;
+}
+.cursor-default {
+    cursor: default;
+    .button-menu {
+        cursor: pointer;
+    }
+}

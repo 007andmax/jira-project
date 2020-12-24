@@ -1,0 +1,19 @@
+<ng-template
+    #tipConnected
+    class="tooltip"
+>
+    <span [textContent]="device.message"></span>
+</ng-template>
+<span
+    class="pointer"
+    [disableTooltip]="device.agentStatus === 'managed'"
+    [hidden]="device.agentStatus === 'unknown'"
+    placement="top"
+    [ngbTooltip]="tipConnected"
+    triggers="click"
+    [autoClose]="'outside'"
+    [ngClass]="getClass()"
+    (shown)="shownTooltip()"
+    [textContent]="getStatusText()"
+>
+</span>
