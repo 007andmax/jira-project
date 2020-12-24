@@ -25,7 +25,6 @@ export class TicketsDashboardComponent implements OnInit {
   listIntervals = [new CompanySetting('last month', 'LAST_MONTH'), new CompanySetting('current month', 'CURRENT_MONTH'), new CompanySetting('year to date', 'YEAR_TO_DATE')];
   currentInterval = new CompanySetting('last month', 'LAST_MONTH');
   countIsReady: boolean = false;
-  timeOnTicketsIsReady: boolean = false;
   techTicketsIsReady: boolean = false;
   ticketsAnalyticsReady: boolean = false;
   ticketsBillableHoursIsReady: boolean = false;
@@ -56,10 +55,6 @@ export class TicketsDashboardComponent implements OnInit {
   }
   onTechTicketsIsReady() {
     this.techTicketsIsReady = true;
-    this.onCheckREadyState();
-  }
-  onTimeOnTicketsIsReady() {
-    this.timeOnTicketsIsReady = true;
     this.onCheckREadyState();
   }
   onTicketsBillableHoursIsReady() {
