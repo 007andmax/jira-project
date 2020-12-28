@@ -109,88 +109,93 @@
             </div>
         </div>
         <div class="network-scan-page__table-container">
-          <div
-            class="loading"
-            *ngIf="showPreloader"
-          ></div>
-
-          <table
-              class="network-scan-table qt-w100"
-              *ngIf="!showPreloader && devices.length > 0"
-          >
-              <thead>
-                  <tr>
-                      <th class="network-scan-table__check">
-                          <div class="d-f">
-                              <label class="qt-checkbox pointer">
-                                  <input
-                                      type="checkbox"
-                                      (change)="onToggleAll($event)"
-                                      [(ngModel)]="selectAllDevices"
-                                  >
-                                  <span></span>
-                              </label>
-                          </div>
-                      </th>
-                      <th
-                          class="network-scan-table__device-name pointer"
-                          (click)="setSort('name')"
-                      >
-                          Device Name
-                          <span class="qt-table-modern__sorting"></span>
-                      </th>
-                      <th
-                          class="network-scan-table__lan-ip pointer"
-                          (click)="setSort('ipAddress')"
-                      >
-                          Lan ip
-                          <span class="qt-table-modern__sorting"></span>
-                      </th>
-                      <th
-                          class="network-scan-table__manufacturer pointer"
-                          (click)="setSort('manufacturer')"
-                      >
-                          Manufacturer
-                          <span class="qt-table-modern__sorting"></span>
-                      </th>
-                      <th
-                          class="network-scan-table__mac-address pointer"
-                          (click)="setSort('macAddress')"
-                      >
-                          Mac address
-                          <span class="qt-table-modern__sorting"></span>
-                      </th>
-                      <th
-                          class="network-scan-table__status pointer"
-                          (click)="setSort('agentStatus')"
-                      >
-                          Status
-                          <span class="qt-table-modern__sorting"></span>
-                      </th>
-                      <th class="network-scan-table__delete"></th>
-                  </tr>
-              </thead>
-              <tbody *ngIf="networkScanDevices && !showMinPreloader">
-                  <ng-template
-                      ngFor
-                      let-device
-                      [ngForOf]="networkScanDevices.devices"
-                      [ngForTrackBy]="trackById"
-                  >
-                      <app-company-network-scan-item
-                          [companyId]="companyId"
-                          [device]="device"
-                          [masterAgent]="masterAgent"
-                          [networkScanSomeInfoForDevice]="networkScanSomeInfoForDevice"
-                          (onSelect)="onSelectDevice()"
-                      ></app-company-network-scan-item>
-                  </ng-template>
-              </tbody>
-              <div
-                  class="loading"
-                  *ngIf="showMinPreloader"
-              ></div>
-          </table>
+            <div
+                class="loading"
+                *ngIf="showPreloader"
+            ></div>
+            <table
+                class="network-scan-table qt-w100"
+                *ngIf="!showPreloader && devices.length > 0"
+            >
+                <thead>
+                    <tr>
+                        <th class="network-scan-table__check">
+                            <div class="d-f">
+                                <label class="qt-checkbox pointer">
+                                    <input
+                                        type="checkbox"
+                                        (change)="onToggleAll($event)"
+                                        [(ngModel)]="selectAllDevices"
+                                    >
+                                    <span></span>
+                                </label>
+                            </div>
+                        </th>
+                        <th
+                            class="network-scan-table__device-name pointer"
+                            (click)="setSort('name')"
+                        >
+                            Device Name
+                            <span class="qt-table-modern__sorting"></span>
+                        </th>
+                        <th
+                            class="network-scan-table__lan-ip pointer"
+                            (click)="setSort('ipAddress')"
+                        >
+                            Lan ip
+                            <span class="qt-table-modern__sorting"></span>
+                        </th>
+                        <th
+                            class="network-scan-table__manufacturer pointer"
+                            (click)="setSort('manufacturer')"
+                        >
+                            Manufacturer
+                            <span class="qt-table-modern__sorting"></span>
+                        </th>
+                        <th
+                            class="network-scan-table__mac-address pointer"
+                            (click)="setSort('macAddress')"
+                        >
+                            Mac address
+                            <span class="qt-table-modern__sorting"></span>
+                        </th>
+                        <th
+                            class="network-scan-table__status pointer"
+                            (click)="setSort('agentStatus')"
+                        >
+                            Status
+                            <span class="qt-table-modern__sorting"></span>
+                        </th>
+                        <th class="network-scan-table__delete"></th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="networkScanDevices && !showMinPreloader">
+                    <ng-template
+                        ngFor
+                        let-device
+                        [ngForOf]="networkScanDevices.devices"
+                        [ngForTrackBy]="trackById"
+                    >
+                        <app-company-network-scan-item
+                            [companyId]="companyId"
+                            [device]="device"
+                            [masterAgent]="masterAgent"
+                            [networkScanSomeInfoForDevice]="networkScanSomeInfoForDevice"
+                            (onSelect)="onSelectDevice()"
+                        ></app-company-network-scan-item>
+                    </ng-template>
+                </tbody>
+                <div
+                    class="loading"
+                    *ngIf="showMinPreloader"
+                ></div>
+                <div
+                    class="no-devices"
+                    *ngIf="noExistDevices"
+                >
+                    <p>No Devices</p>
+                </div>
+            </table>
         </div>
     </div>
     <app-network-scan-credentials-aside
