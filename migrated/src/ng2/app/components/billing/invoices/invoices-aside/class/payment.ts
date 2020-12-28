@@ -28,14 +28,14 @@ export class Payment {
     }
     public setDate(day, month, year, timeOffset) {
         let current = new Date();
-
         if (day !== current.getDate() || current.getMonth() !== (month - 1)) {
-            let dateDatePicker = new Date(year, month - 1, day).getTime(); // timestamp from calendar
-            let finalDate = new Date(dateDatePicker - (current.getTimezoneOffset() * 60000/* dont touch*/) - timeOffset /* timezone.timeOffset */);
+            let currentTime = current.getTime();
+            let dateTechCompany = new Date(currentTime + (current.getTimezoneOffset() * 60000) + timeOffset);
+            let finalDate = new Date(year, month - 1, day, dateTechCompany.getHours(), dateTechCompany.getMinutes(), dateTechCompany.getSeconds()); // timestamp from calendar
             this.date = moment(finalDate.getTime()).format("YYYY-MM-DDTHH:mm:ss");
         } else {
-            let currentTime = new Date(current.getFullYear(), current.getMonth(), current.getDate()).getTime();
-            let finalDate = new Date(currentTime - (current.getTimezoneOffset() * 60000) - timeOffset);
+            let currentTime = current.getTime();
+            let finalDate = new Date(currentTime + (current.getTimezoneOffset() * 60000) + timeOffset);
             this.date = moment(finalDate.getTime()).format("YYYY-MM-DDTHH:mm:ss");
         }
     }
