@@ -10,3 +10,8 @@ app-company-network-scan-item {
         cursor: pointer;
     }
 }
+.no-devices {
+    position: absolute;
+    left: calc(50% - 40px);
+    top: 60px;
+}

@@ -72,6 +72,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
       console.log("data", data);
       if (data.masterAgentId != this.masterAgent.agentId) {
         console.log("data", data);
+        this.selectAllDevices = false;
         this.networkScanSomeInfoForDevice = new NetworkScanSomeInfoForDevice(data);
         if (this.getPermissions('NETWORK_SCAN_CLIENTS')) this.findMasterAgent();
       }
