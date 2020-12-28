@@ -11,6 +11,10 @@ export class QuoteFilter {
     limit: number = 30;
 
     constructor() { }
+
+    public clearSortBy() {
+        this.sortBy = null;
+    }
     public setStatus(data) {
         this.status = data;
     }

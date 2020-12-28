@@ -33,6 +33,9 @@ export class PaymentItemComponent implements OnInit {
   ngOnInit() {
 
   }
+  public getDate() {
+    return moment(this.payment.createdAt).format('YYYY/MM/DD');
+  }
   showEditPayment() {
     this.onEditPayment.emit(this.payment);
   }

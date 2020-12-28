@@ -41,7 +41,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     private companiesStateService: CompaniesStateService,
     private invoiceStateService: InvoiceStateService,
     private confirmStateService: ConfirmStateService,
-    private leftPanelStateService:LeftPanelStateService,
+    private leftPanelStateService: LeftPanelStateService,
     private invoicesListService: InvoicesListService) { }
 
   ngOnInit() {
@@ -57,6 +57,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
       this.selectedInvoices = [];
       this.selectedCompanyId = null;
       this.invoicesFilter = data;
+      this.invoicesFilter.resetSortBy();
       this.showPreloader = true;
       window.scrollTo(0, 0);
       this.setDefaultScoll();

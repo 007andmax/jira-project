@@ -49,7 +49,7 @@ export class PaymentsComponent implements OnInit {
     private paymentsStateService: PaymentsStateService,
     private confirmStateService: ConfirmStateService,
     private paymentsRealTimeService: PaymentsRealTimeService,
-    private leftPanelStateService:LeftPanelStateService,
+    private leftPanelStateService: LeftPanelStateService,
     private paymentsListService: PaymentsListService) { }
 
   ngOnInit() {
@@ -65,6 +65,7 @@ export class PaymentsComponent implements OnInit {
       this.selectedPayments = [];
       this.selectedCompanyId = null;
       this.paymentsFilter = data;
+      this.paymentsFilter.resetSortBy();
       this.showPreloader = true;
       window.scrollTo(0, 0);
       this.setDefaultScoll();
