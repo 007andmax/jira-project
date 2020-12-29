@@ -108,7 +108,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
 
   goToDashboard() {
 
-
+    localStorage.setItem("company_id", this.company.id);
     //  window.location.href = `#/tickets/user`;
     let body = document.querySelector('.left-panel__category-wrap');
     var link = document.createElement('a');
