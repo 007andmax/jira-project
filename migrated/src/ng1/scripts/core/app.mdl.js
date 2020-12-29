@@ -70,15 +70,6 @@
       $urlRouterProvider.when('/accounting', '/accounting/billable');
 
       $stateProvider
-        .state('companyProfile', waitForServices({
-          url: '/clients/companyProfile/:companyId?tabName',
-          params: {
-            tabName: 'dashboard'
-          },
-          reloadOnSearch: false,
-          templateUrl: '/ng1/scripts/core/companies/company-profile/company-profile.tpl.html',
-          controller: 'quicktech.core.companies.companyProfileCtrl'
-        }))
         .state('password-manager', waitForServices({
           url: '/ng2/password-manager',
           template: '<password-manager></password-manager>'
