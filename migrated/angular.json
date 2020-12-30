@@ -280,7 +280,6 @@
               "src/ng1/scripts/core/billable/prevent-hash-change.drv.js",
               "src/ng1/scripts/core/companies/company-profile/tabs/devices-tab/convert-to-pdf.drv.js",
               "src/ng1/scripts/core/companies/confirm-modal.ctrl.js",
-              "src/ng1/scripts/core/devices/company-device-devices/company-device-devices.ctrl.js",
               "src/ng1/scripts/core/header/create-new-entity/create-company/create-company.ctrl.js",
               "src/ng1/scripts/core/header/create-new-entity/create-email/create-email.ctrl.js",
               "src/ng1/scripts/core/header/create-new-entity/create-new-entity.ctrl.js",

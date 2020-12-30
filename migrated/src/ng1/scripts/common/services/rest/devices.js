@@ -433,49 +433,10 @@
         callCallbacks();
       }
 
-      function downloadAgent(companyId, userName, userPassword, globalAutoInstall, callback) {
-        if (!companyId) {
-          throw "CompanyId is required!"
-        }
 
-        var url = "/data/prepareDownloadAgent?companyId=" + companyId + "&userName=" + userName +
-          "&userPassword=" + userPassword + "&autoGlobalRemoteInstall=" + globalAutoInstall;
-        return $http.get(url).then(function (response) {
-          if (callback) {
-            callback(response.data);
-          }
-          if (response.data.code >= 400) {
-            return;
-          }
-          var link = document.createElement('a');
-          link.target = "_blank";
-          link.href = response.data.link;
-          link.download = response.data.link.substring(response.data.link.lastIndexOf('/') + 1, response.data.link.length);;
-          link.click();
-        });
-      }
 
-      function sendDownloadAgentLink(agentDownloadDto, callback) {
-        var future = $http.post('/data/sendAgent', agentDownloadDto);
-        Utils.handleCallback(future, callback);
-      }
 
-      function getDownloadAgentLink(agentDownloadDto, callback) {
-        var future = $http.post('/data/getAgentDownloadLink', agentDownloadDto);
-        Utils.handleCallback(future, callback);
-      }
 
-      function markDeviceAsMaster(companyId, agentId, callback) {
-        var request = {
-          "masterAgentId": agentId,
-          "clientCompanyId": companyId
-        }
-
-        $http.post('/devices/updateMasterAgent', request)
-          .then(function (resp) {
-
-          })
-      }
 
       function createOneTimeRemoteSession(callback) {
         $http.get('/remote/createOneTimeRemoteSession').then(function (resp) {
@@ -585,38 +546,9 @@
         callbackForRemoteConnection[sessionId] = callback;
       }
 
-      function sendInstallAgentRequest(companyId, agentId, devicesIds, agentIfForType, callback) {
-        if (!companyId) {
-          throw "CompanyId is required!"
-        }
-        if (!agentId) {
-          throw "agentId is required!"
-        }
-        if (!devicesIds) {
-          throw "agentId is required!"
-        }
 
-        if (!Array.isArray(devicesIds)) {
-          devicesIds = [devicesIds];
-        }
 
-        if (callback && typeof callback === "function") {
-          for (var i in devicesIds) {
-            callbacksForRemoteInstall[devicesIds[i]] = callback;
-          }
-        }
 
-        $http({
-          url: '/devices/sendInstallAgentRequest?companyId=' + companyId + '&agentId=' + agentId + '&agentIfForType=' + agentIfForType,
-          method: 'POST',
-          data: devicesIds
-        });
-      }
-
-      function sendInstallAgentRequests(dto, callback) {
-        var future = $http.post('/devices/remoteInstall', dto);
-        Utils.handleCallback(future, callback);
-      }
 
       function sendUninstallAgentRequest(companyId, devicesIds, callback) {
         if (!companyId) {
@@ -643,44 +575,9 @@
         });
       }
 
-      function sendDescription(companyId, networkDeviceId, description, callback) {
-        if (!companyId) {
-          throw "CompanyId is required!"
-        }
-        if (!networkDeviceId) {
-          throw "agentId is required!"
-        }
 
-        var future = $http({
-          url: '/devices/sendDescription?companyId=' + companyId + '&networkDeviceId=' + networkDeviceId,
-          method: 'POST',
-          data: description
-        });
-        Utils.handleCallback(future, callback);
-      }
 
-      function sendPowerAction(companyId, agentIds, action, callback) {
-        if (!companyId) {
-          throw "CompanyId is required!"
-        }
-        if (!action) {
-          throw "action is required!"
-        }
-        if (!agentIds) {
-          throw "agentId is required!"
-        }
 
-        if (!Array.isArray(agentIds)) {
-          agentIds = [agentIds];
-        }
-
-        var future = $http({
-          url: '/devices/sendPowerAction?companyId=' + companyId + '&action=' + action,
-          method: 'POST',
-          data: agentIds
-        });
-        Utils.handleCallback(future, callback);
-      }
 
       function getDevicesCount(scope, callback) {
         if (!scope) {
@@ -721,221 +618,11 @@
 
       }
 
-      function runScanDevices(scope, companyId, callback) {
-
-        if (!scope) {
-          throw "scope is required!"
-        }
-
-        if (!companyId) {
-          throw "CompanyId is required!"
-        }
-
-        scannedDevices[companyId] = [];
-
-        $http.get('/devices/refreshNetworkScan?companyId=' + companyId).success(function (resp) {
-          if (callback) {
-            callback(resp);
-          }
-        }).error(function (resp) {
-          if (callback) {
-            callback(resp);
-          }
-        });
-      }
-
-      function getLastScanDevices(scope, companyId, callback) {
-
-        if (!scope) {
-          throw "scope is required!"
-        }
-        if (!companyId) {
-          throw "CompanyId is required!"
-        }
-
-        $http.get('/devices/networkScan?companyId=' + companyId).then(function (resp) {
-          var networkScan = JSON.parse(resp.data.networkScan);
-
-          if (networkScan) {
-            Utils.defineReadOnlyProperty(scannedDevices, "status", networkScan.netScanStatus.toLowerCase());
-            scannedDevices[companyId] = networkScan.devices;
-
-
-          }
-
-
-          RealTimeService.subscribe('/netScan/' + companyId, scope, function (newChange) {
-
-            if (newChange.action === 'NETWORK_SCAN') {
-
-              var data = newChange.data,
-                newDevices = data.deviceList,
-                status = data.status.toLowerCase();
-
-              if (!scannedDevices[data.companyId] || (scannedDevices.status === 'finished' && status !== 'finished')) {
-                scannedDevices[data.companyId] = [];
-              }
-
-              Utils.defineReadOnlyProperty(scannedDevices, "status", status);
-
-              for (var i = 0; i < newDevices.length; i++) {
-                var newDevice = newDevices[i],
-                  dublicatedDevice = Utils.findById(scannedDevices[data.companyId], newDevice.id);
-
-                if (!dublicatedDevice) {
-                  scannedDevices[data.companyId].push(newDevice);
-                } else {
-                  Utils.customizeObj(newDevice, dublicatedDevice);
-                }
-              }
-
-            } else if (newChange.action === 'REMOTE_INSTALL' || newChange.action === 'REMOTE_INSTALL_INFO') {
-              var device = Utils.findById(scannedDevices[companyId], newChange.data.netScanId);
-              if (!device) {
-                for (var i in scannedDevices[companyId]) {
-
-                  if (scannedDevices[companyId][i].deviceId === newChange.data.deviceId || newChange.data.netScanId) {
-                    device = scannedDevices[companyId][i];
-                  }
-                }
-              }
 
 
 
-              if (device) {
-
-                var statusName = newChange.data.status;
-                var status = installationStatuses[statusName];
 
 
-
-                if (statusName === 'MANAGED') {
-                  Utils.defineReadOnlyProperty(device, "agentStatus", 'managed')
-                  Utils.defineReadOnlyProperty(device, "agentStatusTooltip", 'Managed');
-                  return;
-                }
-                Utils.defineReadOnlyProperty(device, "agentStatus", status.status);
-                Utils.defineReadOnlyProperty(device, "agentStatusTooltip", status.message);
-                Utils.defineReadOnlyProperty(device, "message", newChange.data.content);
-                Utils.defineReadOnlyProperty(device, "realTimeChecker", true);
-              }
-
-              var call = callbacksForRemoteInstall[newChange.data.netScanId] || callbacksForRemoteInstall[newChange.data.deviceId];
-              if (call && typeof call === "function") {
-                call();
-              }
-
-              var uninstallCall = callbacksForRemoteUninstall[newChange.data.netScanId] || callbacksForRemoteUninstall[newChange.data.deviceId];
-              if (uninstallCall && typeof uninstallCall === "function") {
-                uninstallCall();
-              }
-            } else if (newChange.action === 'AGENT_PASSWORDS_CHANGED') {
-              for (var i = 0; i < newChange.data.length; i++) {
-                var agentPassword = newChange.data[i];
-                var device = Utils.findById(scannedDevices[companyId], agentPassword.deviceId);
-                if (!device) {
-                  device = _getNetScanByDeviceId(scannedDevices[companyId], agentPassword.deviceId);
-                }
-                device.agentPassword = device.agentPassword || {};
-                Utils.customizeObj(agentPassword, device.agentPassword);
-              }
-            } else if (newChange.action === 'NETWORK_DEVICE_DESCRIPTON') {
-              var device = Utils.findById(scannedDevices[companyId], newChange.data.deviceId);
-              device.description = newChange.data.description;
-            }
-            if (callback) {
-              callback(scannedDevices);
-            }
-          });
-
-          if (callback) {
-            callback(scannedDevices);
-          }
-
-        }, function () {
-          if (callback) {
-            callback(scannedDevices);
-          }
-          return scannedDevices;
-        });
-      }
-
-      function updateAgentSettings(agentsSetting, callback) {
-        if (!agentsSetting) {
-          throw "agentsSetting is required!"
-        }
-
-        var future = $http({
-          url: '/devices/updateAgentSettings',
-          method: 'POST',
-          data: agentsSetting
-        });
-        Utils.handleCallback(future, callback);
-      }
-
-      function getAgentSettingsByCompany(companyId, callback) {
-
-        if (!companyId) {
-          throw "companyId is required!"
-        }
-
-        var agentSettings = {};
-
-        $http.get('/devices/getAgentSettingsByCompany?companyId=' + companyId).then(function (resp) {
-          agentSettings = resp.data;
-
-          if (callback) {
-            callback(agentSettings);
-          }
-        });
-
-        RealTimeService.subscribe('/agentSettings/' + companyId, serviceScope, function (newChange) {
-
-          if (newChange.action === 'MASTER_AGENT_CHANGED') {
-
-            agentSettings.masterAgent = newChange.data;
-
-            if (callback) {
-              callback(agentSettings);
-            }
-          }
-        });
-
-        if (callback) {
-          callback(agentSettings);
-        }
-
-        return agentSettings;
-      }
-
-      function getSomeInfoForDevices(companyId, callback) {
-        if (!companyId) {
-          throw "companyId is required!"
-        }
-
-        $http.get('/devices/getSomeInfoForDevices?companyId=' + companyId).then(function (resp) {
-          if (callback) {
-            callback(resp.data);
-          }
-        }, function (resp) {
-          if (callback) {
-            callback(resp.data);
-          }
-        });
-
-        RealTimeService.subscribe('/device', serviceScope, function (newChange) {
-          if (newChange.action === 'SOME_INFO_FOR_DEVICES') {
-            if (callback) {
-              callback(newChange.data);
-            }
-          }
-        });
-      }
-
-      function getDeviceReports(agentIds, companyId, callback) {
-        var future = $http.post('/devices/report?companyId=' + companyId, agentIds);
-        Utils.handleCallback(future, callback);
-      }
 
       function getOneById(id, companyId) {
         return Utils.findById(storage.devices[companyId], id);
@@ -1041,181 +728,23 @@
       }
 
 
-      function saveMasterAgent(companyId, agentId, callback) {
-        var future = $http.post('/devices/updateMasterAgent', { masterAgentId: agentId, clientCompanyId: companyId });
-        Utils.handleCallback(future, callback);
-      }
-
-      function testCredentials(dto, callback) {
-        var future = $http.post('/devices/updateAndTestAgentPassword', dto);
-        Utils.handleCallback(future, callback);
-      }
-
-      function getAgentsAndReportsDataByCompanyId(scope, companyId, callback) {
-
-        var checking = 0;
-        $rootScope.isAgentsRequestSending = true;
-        var extendedRespInterval = setInterval(function () {
-
-          if (storage.devices[companyId] && storage.devices[companyId].length) {
-            $http.get('/devices/extended?companyId=' + companyId).then(function (resp) {
-              $rootScope.isAgentsRequestSending = false;
-              if (resp) {
-
-                for (var i = 0; i < storage.devices[companyId].length; i++) {
-                  storage.devices[companyId][i].report = resp.data[companyId][i].report;
-                  storage.devices[companyId][i].label = resp.data[companyId][i].label;
-                  storage.devices[companyId][i].OneTimeConnectionData = [];
-                  storage.devices[companyId][i].iconName = resp.data[companyId][i].iconName
-                  storage.devices[companyId][i].remoteSessions = resp.data[companyId][i].remoteSessions;
-                  if (resp.data[companyId][i].remoteSessions && resp.data[companyId][i].remoteSessions.length && resp.data[companyId][i].remoteSessions.length > 0) {
-                    for (var r = 0; r < resp.data[companyId][i].remoteSessions.length; r++) {
-                      var connection = {
-                        startedAt: resp.data[companyId][i].remoteSessions[r].createdAt || resp.data[companyId][i].remoteSessions[r].startedAt,
-                        id: resp.data[companyId][i].remoteSessions[r].id,
-                        sessionId: resp.data[companyId][i].remoteSessions[r].sessionId || resp.data[companyId][i].remoteSessions[r].id,
-                        agentConnectedAt: resp.data[companyId][i].remoteSessions[r].createdAt || resp.data[companyId][i].remoteSessions[r].startedAt,
-                      };
-                      var user = UsersService.getOneById(resp.data[companyId][i].remoteSessions[r].userId);
-                      connection.performer = user;
-                      storage.devices[companyId][i].OneTimeConnectionData.push(connection);
-                    }
-                  }
-                  if (!resp.data[companyId][i].online) {
-                    storage.devices[companyId][i].offlineSince = resp.data[companyId][i].offlineAt;
-                  }
-                }
-              }
-              //   getAgentsByCompany(scope, companyId, callback);
-              if (storage.devices[companyId] && callback) {
-                callback(storage.devices[companyId]);
-              }
-            });
-          } else {
-
-            $rootScope.isAgentsRequestSending = false;
-          }
-          checking++;
-          if (checking > 4) {
-
-            clearInterval(extendedRespInterval);
-          }
-          if (storage.devices[companyId]) {
-
-            clearInterval(extendedRespInterval);
-          }
-
-        }, 1000)
-
-
-      }
-
 
       var actionsList = ["idle", "norestart", "online"];
-
-      function getDevicesCredentials(devices, scope, callback) {
-        var credentials = {};
-        $http.post('/passwordRecords/devices/password', devices).then(function (resp) {
-          credentials = resp.data;
-          RealTimeService.subscribe('/passwordRecords', scope, function (newChange) {
-            if (newChange.action === 'PASSWORD_RECORD_CREATED') {
-              var agentId = newChange.data.links[0] && newChange.data.links[0].deviceId;
-
-              if (agentId) {
-                var credential = {
-                  password: newChange.data.password,
-                  username: newChange.data.username,
-                  id: newChange.data.id
-                };
-
-                if (!credentials[agentId]) {
-                  credentials.agentId = [credential];
-                } else {
-                  credentials[agentId].push(credential);
-                }
-              }
-
-
-            } else if (newChange.action === 'PASSWORD_RECORD_UPDATED') {
-              var agentId = newChange.data.links[0] && newChange.data.links[0].deviceId;
-
-              if (agentId) {
-                var recordIndex = credentials[agentId].findIndex(function (el) {
-                  return el.id === newChange.data.id;
-                })
-
-                if (recordIndex !== -1) {
-
-                  credentials[agentId][recordIndex] = {
-                    id: newChange.data.id,
-                    password: newChange.data.password,
-                    username: newChange.data.username
-                  }
-                }
-              }
-
-
-            } else if (newChange.action === 'PASSWORD_RECORD_DELETED') {
-              var agents = Object.keys(credentials);
-
-              for (var i = 0; i < agents.length; i++) {
-                credentials[agents[i]] = credentials[agents[i]].filter(function (el) {
-                  return el.id !== newChange.data.id;
-                })
-              }
-
-            }
-
-            if (callback) {
-
-              callback(credentials);
-            }
-          });
-
-          if (callback) {
-            callback(credentials);
-          }
-        });
-
-      }
-
-
-
       return {
-        downloadAgent: downloadAgent,
-        sendDownloadAgentLink: sendDownloadAgentLink,
-        getDownloadAgentLink: getDownloadAgentLink,
-        runScanDevices: runScanDevices,
         getDevicesCount: getDevicesCount,
         getAgentsByCompany: getAgentsByCompany,
-        getLastScanDevices: getLastScanDevices,
-        sendInstallAgentRequest: sendInstallAgentRequest,
-        sendInstallAgentRequests: sendInstallAgentRequests,
-        sendUninstallAgentRequest: sendUninstallAgentRequest,
-        sendDescription: sendDescription,
-        sendPowerAction: sendPowerAction,
-        updateAgentSettings: updateAgentSettings,
-        getAgentSettingsByCompany: getAgentSettingsByCompany,
         createOneTimeRemoteSession: createOneTimeRemoteSession,
         getRemoteSessions: getRemoteSessions,
         getSessionId: getSessionId,
         createRemoteSession: createRemoteSession,
         subscribeToRemoteConnection: subscribeToRemoteConnection,
         deleteRemoteSession: deleteRemoteSession,
-        getSomeInfoForDevices: getSomeInfoForDevices,
-        getDeviceReports: getDeviceReports,
         getOneById: getOneById,
         getOneByDeviceId: getOneByDeviceId,
         getOneByAgentId: getOneByAgentId,
         getCompanyIdByAgentId: getCompanyIdByAgentId,
-        saveMasterAgent: saveMasterAgent,
-        testCredentials: testCredentials,
         _addInitListener: _addInitListener,
-        getAgentsAndReportsDataByCompanyId: getAgentsAndReportsDataByCompanyId,
-        getDevicesCredentials: getDevicesCredentials,
-        markDeviceAsMaster: markDeviceAsMaster,
         getUpdatedDevices: getUpdatedDevices,
-
       }
     }
   ]);
