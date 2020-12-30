@@ -7,10 +7,10 @@ import { environment } from 'src/ng2/environments/environment';
 })
 export class DownloadAgentService {
   private apiUrl = environment.apiUrl;
-  constructor( private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  public  downoad (companyId,userName,userPassword,globalAutoInstall) {
+  public download(companyId, userName, userPassword, globalAutoInstall) {
     return this.http.get(this.apiUrl + 'data/prepareDownloadAgent?companyId=' + companyId + "&userName=" + userName +
-    "&userPassword=" + userPassword + "&autoGlobalRemoteInstall=" + globalAutoInstall);
+      "&userPassword=" + userPassword + "&autoGlobalRemoteInstall=" + globalAutoInstall);
   }
 }

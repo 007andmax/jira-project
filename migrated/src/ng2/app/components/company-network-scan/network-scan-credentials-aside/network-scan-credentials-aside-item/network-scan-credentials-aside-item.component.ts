@@ -27,8 +27,6 @@ export class NetworkScanCredentialsAsideItemComponent implements OnInit {
     this.onSelect.emit(this.item);
   }
   onCheckChangeName(event) {
-    console.log("event", event.target.value);
-    console.log("item", this.item.username);
     if (this.item.username !== event.target.value) {
       this.apiPasswordManagerService.editRecord(this.item.getDataForUpdate(this.companyId, event.target.value, null)).subscribe(data => {
         this.item.setUserName(event.target.value);
@@ -36,8 +34,6 @@ export class NetworkScanCredentialsAsideItemComponent implements OnInit {
     }
   }
   onCheckChangePassword(event) {
-    console.log("event", event.target.value);
-    console.log("item", this.item.password);
     if (this.item.password !== event.target.value) {
       this.apiPasswordManagerService.editRecord(this.item.getDataForUpdate(this.companyId, this.item.username, event.target.value)).subscribe(data => {
         this.item.setPassword(event.target.value);
@@ -49,11 +45,9 @@ export class NetworkScanCredentialsAsideItemComponent implements OnInit {
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
     modalRef.componentInstance.message = `Are you sure you want to delete this password?`;
     this.networkScanStateService.setCredentialForRemove(this.item);
-
   }
   showPassword() {
     this.apiPasswordManagerService.setOpenRecord(this.item.id).subscribe((data: any) => {
-      console.log('data', data);
       this.item.setPassword(data.password);
     })
   }

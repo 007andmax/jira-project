@@ -6,6 +6,5 @@ export class NetworkScanSomeInfoForDevice {
         this.allowAgentInstall = data.allowAgentInstall;
         this.domainPresent = data.domainPresent;
         this.masterAgentId = data.masterAgentId;
-
     }
 }

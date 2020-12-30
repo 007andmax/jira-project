@@ -12,10 +12,8 @@ export class DeviceRemoteSessions {
         let time = Date.now() + minutesDiff;
         if (moment(data.startedAt).valueOf() > time) {
             this.agentConnectedAt = 0;
-
         } else {
             this.agentConnectedAt = (time - moment(data.startedAt).valueOf());
-
         }
         this.userId = data.userId;
     }

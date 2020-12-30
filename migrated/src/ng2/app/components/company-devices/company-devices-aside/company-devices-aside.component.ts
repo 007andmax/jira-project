@@ -31,7 +31,6 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService,
     private devicesService: DevicesService) { }
 
-
   ngOnInit() {
     let getOnOpenAside = this.devicesStateService.getOnOpenAside().subscribe((data: DeviceCompanyAsideParams) => {
       if (this.open) {

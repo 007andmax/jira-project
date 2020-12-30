@@ -149,7 +149,6 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     });
   }
   onOpenCompaniesDropDown() {
-    console.log("onOpenCompaniesDropDown");
     this.cd.detectChanges();
   }
   getCompany(id) {

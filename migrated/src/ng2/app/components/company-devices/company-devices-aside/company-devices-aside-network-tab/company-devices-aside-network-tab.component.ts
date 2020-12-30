@@ -29,6 +29,5 @@ export class CompanyDevicesAsideNetworkTabComponent implements OnInit {
     } else {
       return 'N/A';
     }
-
   };
 }

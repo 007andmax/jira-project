@@ -17,9 +17,7 @@ export class NetworkScanCredentialsAddComponent implements OnInit {
   add() {
     if (!this.networkScanCredentialsAdd.isValidate()) return;
     this.passwordManagerService.createRecord(this.networkScanCredentialsAdd.getDataForAdd(this.companyId)).subscribe(data => {
-
     })
-
   }
   close() {
     this.networkScanCredentialsAdd = new NetworkScanCredentialsAdd();

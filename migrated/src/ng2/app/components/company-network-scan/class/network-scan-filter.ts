@@ -9,7 +9,6 @@ export class NetworkScanFilter {
     new CompanyFilterTop('agentStatus', '')];
     constructor(private companyNetworkScanService: CompanyNetworkScanService) { }
 
-
     sortByCurrentFilter(list) {
         let index = this.filter.findIndex(item => item.filter !== '');
         let field = this.filter[index].field;
@@ -110,7 +109,6 @@ export class NetworkScanFilter {
                     list.reverse();
                 }
             }
-
         }
     }
 

@@ -169,7 +169,6 @@ export class InvoicesAsideComponent implements OnInit {
     if (!this.validate.getAmountReceived()) this.validate.checkAmountReceived(this.amountReceived, this.invoices);
   }
   onSelectCompany(item) {
-    console.log('item', item);
     if (item) {
       this.invoicesFilter.setLimit(10000);
       this.invoicesFilter.setStatus("UNPAID");

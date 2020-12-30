@@ -1,9 +1,7 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Device } from '../class/device';
 import { DeviceCompany } from '../class/device-company';
 import { CompanyDevicesRemoteAccessComponent } from '../company-devices-remote-access/company-devices-remote-access.component';
-import * as moment from "moment";
 import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
 import { PermissionsService } from 'src/ng2/app/services/permissions/permissions.service';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
@@ -105,8 +103,6 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
       this.editLabel.setValue((data.length > 0) ? data : this.device.hostName || this.device.ip);
       this.cd.detectChanges();
     })
-    console.log("data", data);
-
   }
   returnTimeFormatUpTime(time) {
     let days = 0;

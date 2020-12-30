@@ -16,7 +16,6 @@ export class CompanyNetworkScanItemTooltipComponent implements OnInit {
   ngOnInit() {
   }
   shownTooltip() {
-    console.log("shownTooltip");
     this.cd.detectChanges();
   }
   getClass() {
@@ -24,10 +23,8 @@ export class CompanyNetworkScanItemTooltipComponent implements OnInit {
     if (this.device.agentStatus === 'Install error' || this.device.agentStatus === 'ErrorInitialization' || this.device.agentStatus === 'Bad password' || this.device.agentStatus === 'ErrorUac') return ['tag__modern', '--error']
     if (this.device.agentStatus === 'Blocked') return ['tag__modern', '--gray']
     if (this.device.agentStatus === 'Installing' || this.device.agentStatus === 'init') return ['qt-sz-18', 'qt-loading', '--blue', 'qt-ml-20']
-
   }
   getStatusText() {
     return this.companyNetworkScanService.getStatusText(this.device);
   }
-
 }

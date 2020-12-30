@@ -40,6 +40,5 @@ export class DashboardTechTickets {
                 }
             }
         }
-        console.log("this.list", this.list);
     }
 }

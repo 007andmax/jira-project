@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { NETWORK_REMOVE_DEVICE, REMOVE_DEVICES } from 'src/ng2/app/const/confirm';
+import { NETWORK_REMOVE_DEVICE } from 'src/ng2/app/const/confirm';
 import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
 import { NetworkScanStateService } from 'src/ng2/app/states/network-scan/network-scan-state.service';
 import { Device } from '../../company-devices/class/device';

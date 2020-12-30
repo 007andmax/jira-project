@@ -72,9 +72,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnDevices);
     let getOnChangeInfoForDevice = this.devicesStateService.getOnChangeInfoForDevice().subscribe(data => {
-      console.log("data", data);
       if (data.masterAgentId != this.masterAgent.agentId) {
-        console.log("data", data);
         this.selectAllDevices = false;
         this.networkScanSomeInfoForDevice = new NetworkScanSomeInfoForDevice(data);
         if (this.getPermissions('NETWORK_SCAN_CLIENTS')) this.findMasterAgent();
@@ -82,7 +80,6 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnChangeInfoForDevice);
     let netScanArray = this.devicesRealTimeService.netScanArray.subscribe(newChange => {
-      console.log("newChange", newChange);
       if (newChange.action === 'NETWORK_SCAN') {
         if (newChange.data.status === 'Scanning') this.isScaning = true;
         if (newChange.data.status === 'Finished') this.isScaning = false;
@@ -97,9 +94,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
         this.networkScanFilter.sortByCurrentFilter(this.networkScanDevices.devices);
       }
       if (newChange.action === 'REMOTE_INSTALL' || newChange.action === 'REMOTE_INSTALL_INFO') {
-        console.log("newChange.action", newChange.action);
         let findIndex = this.networkScanDevices.devices.findIndex(item => item.id === newChange.data.netScanId);
-        console.log("findIndex", findIndex);
         if (findIndex > -1) {
           let statusName = newChange.data.status;
           let status = installationStatuses[statusName];
@@ -110,8 +105,6 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
             this.networkScanDevices.devices[findIndex].setAgentStatus(status.status);
             this.networkScanDevices.devices[findIndex].setMessage(status.message);
           }
-          console.log("statusName", statusName);
-          console.log("status", status);
         }
       }
       if (newChange.action === 'AGENT_PASSWORDS_CHANGED') {
@@ -131,7 +124,6 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === NETWORK_REMOVE_DEVICE) {
           this.devicesService.sendUninstallAgentRequest(this.companyId, [this.networkScanStateService.getDeviceForRemove().deviceId]).subscribe(data => {
-
           })
         }
       }
@@ -153,7 +145,6 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
   onSelectCredential(data) {
     this.networkScanInstallAgent.setCredential(data);
     this.apiPasswordManagerService.setOpenRecord(data.id).subscribe((res: any) => {
-      console.log('res', res);
       this.networkScanInstallAgent.getCredential().setPassword(res.password);
     })
   }
@@ -164,7 +155,6 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     })
     this.cd.detectChanges();
   }
-
   checkSelected() {
     return (!this.networkScanDevices) ? false : this.networkScanDevices.devices.find(item => item.selected);
   }
@@ -184,7 +174,6 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     this.noExistDevices = false;
     this.devicesService.getLastScanDevices(this.companyId).subscribe((res: any) => {
       let networkScan = JSON.parse(res.networkScan);
-      console.log("networkScan", networkScan);
       this.networkScanDevices = new NetworkScanDevices(networkScan);
       this.showMinPreloader = false;
       this.networkScanFilter.sortByCurrentFilter(this.networkScanDevices.devices);
@@ -209,22 +198,16 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
   getSomeInfoForDevices() {
     this.isGetDevices = true;
     this.devicesService.getSomeInfoForDevices(this.companyId).subscribe(data => {
-      console.log("data", data);
       this.networkScanSomeInfoForDevice = new NetworkScanSomeInfoForDevice(data);
-      console.log("this.networkScanSomeInfoForDevice", this.networkScanSomeInfoForDevice);
       this.findMasterAgent();
     })
   }
   selectMasterAgent(device) {
-    console.log("device", device);
-    // this.masterAgent = device;
     this.devicesService.markDeviceAsMaster(this.companyId, device.agentId).subscribe(data => {
-
     })
   }
   findMasterAgent() {
     let find = this.devices.find(item => item.agentId === this.networkScanSomeInfoForDevice.masterAgentId);
-    console.log("find", find);
     if (find) {
       this.masterAgent = find;
     } else {
@@ -232,9 +215,6 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
         1 : ((new Date(b.createdAt) > new Date(a.createdAt)) ? -1 : 0));
       this.masterAgent = agentsSortedByCreatedAtDate[0];
     }
-    console.log("this.masterAgent", this.masterAgent);
-    console.log("this.devices", this.devices);
-    console.log("this.getPermissions('NETWORK_SCAN_CLIENTS')", this.getPermissions('NETWORK_SCAN_CLIENTS'));
     if (this.getPermissions('NETWORK_SCAN_CLIENTS')) this.getLastScanDevices();
   }
   public trackById(index, item) {

@@ -21,7 +21,6 @@ export class TechTicketsWidgetComponent implements OnInit {
   }
   onChangeType() {
     this.showPreloader = true;
-    console.log("this.techTickets", this.techTickets);
     if (this.techTickets.sort.toUpperCase() === "DAY") this.techTickets.onDayDashboard();
     if (this.techTickets.sort.toUpperCase() === "MONTH") this.techTickets.onMonthDashboard();
     this.getDashboardByServices();
@@ -32,7 +31,6 @@ export class TechTicketsWidgetComponent implements OnInit {
   }
   getDashboardByServices() {
     this.ticketsService.getDashboardByTech(this.techTickets.startDate, this.techTickets.endDate).subscribe(data => {
-      console.log("data", data);
       this.techTickets.setData(data);
       this.onTechTicketsIsReady.emit(null);
       this.showPreloader = false;

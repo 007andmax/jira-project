@@ -312,7 +312,6 @@ export class WebsocketService {
     setTimeout(() => {
       this.stompClient.subscribe(`/user/watch/cmdShellOutput`, (message) => {
         var newChange = JSON.parse(message.body);
-        // console.log("newChange", newChange);
         this.shellRealTimeService.handleRealTimeChanges(newChange);
       });
 
@@ -393,16 +392,11 @@ export class WebsocketService {
   }
 
   public subsribeToNetScan(companyId) {
-
     setTimeout(() => {
-      console.log("subsribeToNetScan", companyId);
       this.stompClient.subscribe(`/user/watch/netScan/${companyId}`, (message) => {
-        console.log("message", message);
         var newChange = JSON.parse(message.body);
         this.devicesRealTimeService.handleRealTimeNetScan(newChange);
-
       });
-
     }, 3000);
   }
   public getClient() {
