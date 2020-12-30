@@ -7,7 +7,7 @@
   var services = angular.module('main.services');
 
   services.factory('CompaniesService', ['$http', '$rootScope', 'RealTimeService', 'Utils', function ($http, $rootScope, RealTimeService, Utils) {
-    
+
     var serviceScope = $rootScope.$new(),
       initialized = false,
       initListeners = [],
@@ -82,7 +82,7 @@
     function getGlNumbers() {
       return angular.copy(glNumbers);
     }
-    
+
 
     var checkInitsCount = 0;
     function setRealTimeGLNumbers(id) {
@@ -216,7 +216,7 @@
       })
     }
 
-    
+
 
     function _addAmountChangeListener(callback) {
       amountChangeListeners.push(callback);
@@ -253,12 +253,7 @@
       return storage.vendors;
     }
 
-    function getReferenceDate(callback) {
-      $http.get('/settings/companyProfile/accountingStartDate')
-        .then(function (res) {
-          if (callback) callback(res);
-        })
-    }
+
 
 
     function getCompanyByAddressId(id) {
@@ -329,12 +324,9 @@
       return searchResult;
     }
 
-    function archive(companyId, callback) {
-      var future = $http.get('/company/archive/' + companyId);
-      Utils.handleCallback(future, callback);
-    }
 
-   
+
+
 
     function getClientCompaniesInfo(scope, callback) {
 
@@ -427,55 +419,7 @@
       return companyDto;
     }
 
-    function getCompanyProfileData(scope, companyId, callback) {
 
-      var companyDto = Utils.customizeObj({});
-
-      $http.get('/company/' + companyId + '/profile').then(function (resp) {
-        Utils.customizeObj(resp.data, companyDto);
-
-        if (callback) {
-          callback(companyDto);
-        }
-
-      }, function (resp) {
-        if (callback) {
-          callback(resp);
-        }
-      });
-
-      RealTimeService.subscribe('/companyDto/' + companyId, scope, function (newChange) {
-
-        if (newChange.action == 'COMPANY_DTO_CHANGED') {
-
-
-
-          var data = JSON.parse(newChange.data);
-
-          if (data[companyId]) {
-            Utils.customizeObj(data[companyId], companyDto);
-
-            if (callback) {
-              callback(companyDto);
-            }
-          }
-        }
-      });
-
-      RealTimeService.subscribe('/user', serviceScope, function (newChange) {
-        if (newChange.action === 'USER_SAVED') {
-          if (newChange.data.id === companyDto.contacts[0].id) {
-            Utils.customizeObj(newChange.data, companyDto.contacts[0]);
-
-            if (callback) {
-              callback(companyDto);
-            }
-          }
-        }
-      });
-
-      return companyDto;
-    }
 
     function isInitialized() {
       return initialized;
@@ -566,7 +510,7 @@
       return info;
     }
 
-    
+
 
     function saveLogo(croppedImage, companyId, callback) {
 
@@ -583,34 +527,9 @@
     }
 
 
-    function saveCover(croppedImage, companyId, callback) {
 
-      if (!croppedImage) throw 'croppedImage is required!';
-      if (!companyId) throw 'companyId is required!';
 
-      var url = '/company/' + companyId + '/cover',
-        method = 'POST';
 
-      var future = $http({
-        url: url,
-        method: method,
-        data: croppedImage
-      });
-
-      Utils.handleCallback(future, callback);
-    }
-
-    function deleteCover(companyId, callback) {
-
-      if (!companyId) throw 'companyId is required!';
-
-      var future = $http({
-        url: '/company/' + companyId + '/false',
-        method: 'DELETE'
-      });
-
-      Utils.handleCallback(future, callback);
-    }
 
     function deleteLogo(companyId, callback) {
 
@@ -650,22 +569,16 @@
       Utils.handleCallback(future, callback);
     }
 
-   
+
 
     function isVendorHasProducts(vendorId, callback) {
       var future = $http.get('/company/' + vendorId + '/isProductExist');
       Utils.handleCallback(future, callback);
     }
 
-  
 
-    function changePrimaryContact(id, callback) {
-      var future = $http({
-        method: 'GET',
-        url: '/company/resetPrimaryContact?userId=' + id
-      });
-      Utils.handleCallback(future, callback);
-    }
+
+
 
     return {
       parseDateTechCompany: parseDateTechCompany,
@@ -686,21 +599,15 @@
       searchByAllCompanies: searchByAllCompanies,
       searchByClientCompanies: searchByClientCompanies,
       getClientCompaniesInfo: getClientCompaniesInfo,
-      archive: archive,
       save: save,
       getCompanyData: getCompanyData,
-      getCompanyProfileData: getCompanyProfileData,
       isNameUnique: isNameUnique,
       isDomainUnique: isDomainUnique,
-      saveCover: saveCover,
       saveLogo: saveLogo,
-      deleteCover: deleteCover,
       deleteLogo: deleteLogo,
       getIndustries: getIndustries,
       isVendorHasProducts: isVendorHasProducts,
-      changePrimaryContact: changePrimaryContact,
       checkStorageCompanyLength: checkStorageCompanyLength,
-      getReferenceDate: getReferenceDate,
       sendEmail: sendEmail,
       updateCompanyTags: updateCompanyTags
     }
