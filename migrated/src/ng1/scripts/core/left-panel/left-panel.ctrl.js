@@ -311,6 +311,7 @@
           }
 
           if (tabToActivate == 'CompanyDashboardPage') {
+            company_id = localStorage.getItem('company_id') || null;
             $scope.goToTab(`#/ng2/company-dashboard/${company_id}`);
             return;
           }
