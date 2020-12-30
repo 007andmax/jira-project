@@ -7,6 +7,7 @@ import { ApiPasswordManagerService } from '../../services/password-manager/api-p
 import { PermissionsService } from '../../services/permissions/permissions.service';
 import { DevicesRealTimeService } from '../../states/devices/devices-real-time.service';
 import { DevicesStateService } from '../../states/devices/devices-state.service';
+import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
 import { NetworkScanStateService } from '../../states/network-scan/network-scan-state.service';
 import { Device } from '../company-devices/class/device';
 import { ConfirmStateService } from '../shared/confirm/services/confirm-state.service';
@@ -48,9 +49,11 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     private apiPasswordManagerService: ApiPasswordManagerService,
     private confirmStateService: ConfirmStateService,
     private companyNetworkScanService: CompanyNetworkScanService,
+    private leftPanelStateService: LeftPanelStateService,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
+    this.leftPanelStateService.setCompanyPage("company-network-scan");
     this.companyId = localStorage.getItem("company_id");
     this.devicesStateService.subsribeToNetScan(this.companyId);
     if (this.devicesStateService.getAllDevices()) {

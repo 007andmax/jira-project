@@ -12,6 +12,7 @@ export class CompanyContractsComponent extends ContractsComponent implements OnI
 
 
   ngOnInit() {
+    this.leftPanelStateService.setCompanyPage("company-contracts");
     if (localStorage.getItem('company_id')) {
       let company_id = localStorage.getItem('company_id');
       this.companyContracts = this.companiesStateService.getCompanies().find(item => item.id === company_id);

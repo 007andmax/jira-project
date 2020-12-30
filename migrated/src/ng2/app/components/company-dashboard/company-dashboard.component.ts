@@ -1,9 +1,10 @@
 import { NgModule, ChangeDetectorRef } from '@angular/core';
-import { Component, OnInit,ViewEncapsulation  } from '@angular/core';
-import {NgbDropdownToggle,NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { NgbDropdownToggle, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { Company } from '../../interfaces/company/company';
 import { ContractsStateService } from '../../states/contracts/contracts-state.service';
+import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
 
 @Component({
   selector: 'company-dashboard',
@@ -13,20 +14,21 @@ import { ContractsStateService } from '../../states/contracts/contracts-state.se
 })
 
 @NgModule({
-  imports: [NgbDropdownToggle,NgbModal]  
+  imports: [NgbDropdownToggle, NgbModal]
 })
 export class CompanyDashboardComponent implements OnInit {
-  
+
   company: Company;
-  totalTickets:number = 0;
-  averageResponseTime:string = '';
+  totalTickets: number = 0;
+  averageResponseTime: string = '';
   sub: Subscription = new Subscription();
-  
+
   constructor(
     public cd: ChangeDetectorRef,
-    public contractsStateService: ContractsStateService) {}
-  
-  ngOnInit() {} 
+    private leftPanelStateService: LeftPanelStateService,
+    public contractsStateService: ContractsStateService) { }
+
+  ngOnInit() { this.leftPanelStateService.setCompanyPage("company-dashboard"); }
 
   totalTicketsChangedHandler(data: number) {
     this.totalTickets = data;

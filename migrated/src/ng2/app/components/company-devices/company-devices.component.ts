@@ -5,6 +5,7 @@ import { REBOOT_DEVICE, REMOVE_DEVICES, SHUTDOWN_DEVICE } from '../../const/conf
 import { DevicesService } from '../../services/devices/devices.service';
 import { DevicesRealTimeService } from '../../states/devices/devices-real-time.service';
 import { DevicesStateService } from '../../states/devices/devices-state.service';
+import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
 import { ConfirmComponent } from '../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../shared/confirm/services/confirm-state.service';
 import { DeviceCompany } from './class/device-company';
@@ -29,9 +30,11 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     public cd: ChangeDetectorRef,
+    private leftPanelStateService: LeftPanelStateService,
     private devicesRealTimeService: DevicesRealTimeService) { }
 
   ngOnInit() {
+    this.leftPanelStateService.setCompanyPage("company-devices");
     this.companyId = localStorage.getItem("company_id");
     if (this.devicesStateService.getAllDevices()) {
       this.devices = (this.devicesStateService.getAllDevices()[this.companyId]) ? JSON.parse(JSON.stringify(this.devicesStateService.getAllDevices()[this.companyId])).map(item => new DeviceCompany(item, this.companyId)) : [];

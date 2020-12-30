@@ -24,7 +24,7 @@ export class QuotesComponent implements OnInit {
    * Initializes quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
-    this.leftPanelStateService.setBillingpage('quotes-component');
+    this.leftPanelStateService.setBillingPage('quotes-component');
     this.quoteStateService.getOnInvoice().subscribe(data => {
       this.invoiceId = data;
       this.showPreviewInvoice = true;

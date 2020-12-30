@@ -75,23 +75,23 @@
           template: '<password-manager></password-manager>'
         }))
         .state('company-password-manager', waitForServices({
-          url: '/ng2/company-password-manager',
+          url: '/ng2/company/password-manager',
           template: '<company-password-manager></company-password-manager>'
         }))
         .state('company-contracts', waitForServices({
-          url: '/ng2/company-contracts',
+          url: '/ng2/company/contracts',
           template: '<company-contracts-component></company-contracts-component>'
         }))
         .state('company-user', waitForServices({
-          url: '/ng2/company-user',
+          url: '/ng2/company/user',
           template: '<company-user></company-user>'
         }))
         .state('company-tickets', waitForServices({
-          url: '/ng2/company-tickets',
+          url: '/ng2/company/tickets',
           template: '<company-tickets></company-tickets>'
         }))
         .state('company-dashboard', waitForServices({
-          url: '/ng2/company-dashboard/:companyId',
+          url: '/ng2/company/dashboard/:companyId',
           template: '<company-dashboard></company-dashboard>'
         }))
         .state('inventory', waitForServices({
@@ -134,7 +134,7 @@
           template: '<tickets-component></tickets-component>'
         }))
         .state('company-products', waitForServices({
-          url: '/ng2/company-products',
+          url: '/ng2/company/products',
           template: '<company-products></company-products>'
         }))
         .state('new-users', waitForServices({

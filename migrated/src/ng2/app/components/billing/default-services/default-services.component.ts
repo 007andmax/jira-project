@@ -15,7 +15,7 @@ import { LeftPanelStateService } from 'src/ng2/app/states/left-panel/left-panel-
   styleUrls: ['./default-services.component.scss']
 })
 export class DefaultServicesComponent implements OnInit, OnDestroy {
-  showPreloader:boolean = true;
+  showPreloader: boolean = true;
   showCreateService: boolean = false;
   showEditService: boolean = false;
   editService: DefaultServices;
@@ -26,12 +26,12 @@ export class DefaultServicesComponent implements OnInit, OnDestroy {
     private defaultServicesStateService: DefaultServicesStateService,
     private defaultServicesRealTimeService: DefaultServicesRealTimeService,
     private confirmStateService: ConfirmStateService,
-    private leftPanelStateService:LeftPanelStateService,
+    private leftPanelStateService: LeftPanelStateService,
     public cd: ChangeDetectorRef,) { }
 
 
   ngOnInit() {
-    this.leftPanelStateService.setBillingpage('new-services');
+    this.leftPanelStateService.setBillingPage('new-services');
     this.defaultServicesService.getDefaultServices().subscribe((data: Array<DefaultServices>) => {
       this.list = data;
       this.filter.onFilter('name', this.list);

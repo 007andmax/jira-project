@@ -8,6 +8,7 @@ import { PermissionsService } from '../../services/permissions/permissions.servi
 import { PasswordManagerListService } from './services/password-manager-list.service';
 import { UsersStateService } from '../../states/users/users-state.service';
 import { CompaniesStateService } from '../../states/company/companies-state.service';
+import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
 
 
 @Component({
@@ -47,6 +48,7 @@ export class CompanyPasswordManagerComponent implements OnInit, OnDestroy {
     private passwordManagerList: PasswordManagerListService,
     private userStateService: UsersStateService,
     private companiesState: CompaniesStateService,
+    private leftPanelStateService: LeftPanelStateService,
   ) {
     this.companiesService.getCompaniesList();
   }
@@ -67,11 +69,12 @@ export class CompanyPasswordManagerComponent implements OnInit, OnDestroy {
    * Initializes Password manager. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-    if (this.companiesState.getCompanies().length > 0)  this.getSelectCompany(this.companiesState.getCompanies());
-      this.companiesState.getOnCompanies().subscribe((data) => {
-        this.getSelectCompany(data);
-      })
-    
+    this.leftPanelStateService.setCompanyPage("company-password-manager");
+    if (this.companiesState.getCompanies().length > 0) this.getSelectCompany(this.companiesState.getCompanies());
+    this.companiesState.getOnCompanies().subscribe((data) => {
+      this.getSelectCompany(data);
+    })
+
 
     this.getSelectedCategory();
     this.getSelectedDeviceOrUser();
@@ -97,13 +100,13 @@ export class CompanyPasswordManagerComponent implements OnInit, OnDestroy {
    * Get selected company from filter
    */
   public getSelectCompany(clientsCompany) {
-     
+
     if (localStorage.getItem('company_id')) {
       let company_id = localStorage.getItem('company_id');
-       
+
       this.refreshFilter();
       this.selectedCompany = clientsCompany.find(item => item.id === company_id);
-      if (window.location.hash.includes('company-password-manager')) this.apiPasswordManagerService.getCompanyRecords(company_id);
+      this.apiPasswordManagerService.getCompanyRecords(company_id);
     }
     /* this.companiesService.filteredCompanyUpdate.subscribe((company) => {
        this.refreshFilter();
@@ -198,7 +201,7 @@ export class CompanyPasswordManagerComponent implements OnInit, OnDestroy {
    * destroy password manager component
    */
   ngOnDestroy() {
-     
+
     this.apiPasswordManagerService.deleteSubscription();
     this.sub.unsubscribe();
 

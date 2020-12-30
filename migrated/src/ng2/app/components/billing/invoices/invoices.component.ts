@@ -41,11 +41,11 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     private companiesStateService: CompaniesStateService,
     private invoiceStateService: InvoiceStateService,
     private confirmStateService: ConfirmStateService,
-    private leftPanelStateService:LeftPanelStateService,
+    private leftPanelStateService: LeftPanelStateService,
     private invoicesListService: InvoicesListService) { }
 
   ngOnInit() {
-    this.leftPanelStateService.setBillingpage('new-billable-invoices');
+    this.leftPanelStateService.setBillingPage('new-billable-invoices');
     window.scrollTo(0, 0);
     if (this.companiesStateService.getCompanies().length > 0) this.onScroll();
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {

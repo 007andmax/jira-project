@@ -1,106 +1,246 @@
 <div class="product-list-report product-list list-of-product">
-  <p class="report-title">List of products sold</p>
-<div>
-  <app-report-menu [report]="'company-roducts-report'"  (onSelectedClient)="onSelectedClient($event)" (onRequest)="onRequest($event)" (getReport)="getReport($event)"></app-report-menu>
- </div>
- <app-report-additional-actions [orientation]="'LANDSCAPE'" [report]="'company-roducts-report'" [fileName]="'products_report'"   [selectedClient]="selectedClient" (changePurchaseCost)="togglePurchaseCost($event)"></app-report-additional-actions>
- <div class="loading" *ngIf="loadingInProgress"></div>
- <div class="product-list___ticket"  id="product-list-ticket-data">
-  <div  class="product-list-ticket product-list-ticket-pdf list-of-product-pdf company-report"   *ngIf="!loadingInProgress">
-   
-    <div class="report-header">
-      <h1>List of products sold</h1>
-      <div class="company-info">
-        <h3>{{productsCompanyReport.clientCompanyName}}</h3>
-        <p><span>{{productsCompanyReport.startDate}}</span> - <span>{{productsCompanyReport.endDate}}</span></p>
-      </div>
+    <p class="report-title">List of products sold</p>
+    <div>
+        <app-report-menu
+            [report]="'company-roducts-report'"
+            (onSelectedClient)="onSelectedClient($event)"
+            (onRequest)="onRequest($event)"
+            (getReport)="getReport($event)"
+        ></app-report-menu>
     </div>
-    <div *ngIf="productsCompanyReport.lines.length > 0"  >
-      <div class="header-product-list-ticket"  >
-        <h3>{{ productsCompanyReport.techCompanyName }}</h3>
-        <p *ngIf="productsCompanyReport.type ==='DETAILED' ">Detailed sales for <span>{{ productsCompanyReport.clientCompanyName }}</span>
-        </p>
-        <p><span>{{ parseDate(productsCompanyReport.startDate)   }}</span> to <span>{{ parseDate(productsCompanyReport.endDate)   }}</span>
-        </p>
-      </div>
+    <app-report-additional-actions
+        [orientation]="'LANDSCAPE'"
+        [report]="'company-roducts-report'"
+        [fileName]="'products_report'"
+        [selectedClient]="selectedClient"
+        (changePurchaseCost)="togglePurchaseCost($event)"
+    ></app-report-additional-actions>
+    <div
+        class="loading"
+        *ngIf="loadingInProgress"
+    ></div>
+    <div
+        class="product-list___ticket"
+        id="product-list-ticket-data"
+    >
+        <div
+            class="product-list-ticket product-list-ticket-pdf list-of-product-pdf company-report"
+            *ngIf="!loadingInProgress"
+        >
 
-      <div *ngIf="productsCompanyReport.lines">
-        <ul >
-          <li class="top-product-list-ticket clearfix"  >
-            <div style="width: 2%;" class="col-md-1"><strong>
-              <label class="control checkbox hide-in-report">
-                <input type="checkbox"    [(ngModel)]="generalCheckbox" (change)="changeGeneralCheckbox()">
-                <span class="control-indicator"></span>
-              </label>
-            </strong></div>
-            <div class="col-md-1" (click)="onFilter('date')">Date</div>
-            <div class="col-md-1" (click)="onFilter('client')" *ngIf="productsCompanyReport.type === 'SUMMARY'"><strong>Client</strong>
+
+            <div class="report-header">
+                <h1>List of products sold</h1>
+                <div class="company-info">
+                    <h3>
+                        {{productsCompanyReport.clientCompanyName}}
+                    </h3>
+                    <p>
+                        <span>{{productsCompanyReport.startDate}}</span>
+                        -
+                        <span>{{productsCompanyReport.endDate}}</span>
+                    </p>
+                </div>
             </div>
-            <div class="col-md-1" (click)="onFilter('mfg')">MFG#</div>
-            <div class="col-md-3" (click)="onFilter('description')">Description</div>
-            <div class="col-md-2" (click)="onFilter('ticketNumber')">Ticket number</div>
-            <div class="col-md-2" (click)="onFilter('invoiceNumber')">Invoice number</div>
-            <!--<div class="col-md-1"><strong>Count</strong></div>-->
-            <div class="col-md-1 purchase-cost" (click)="onFilter('purchaseCost')">Purchase cost</div>
-            <div class="col-md-1" (click)="onFilter('salePrice')">Sale price</div>
-            <!--<div class="col-md-1" >Date</div>-->
-            <!--<div class="col-md-1"  ng-if="productsCompanyReport.type === 'SUMMARY'"><strong>Client</strong></div>-->
-            <!--<div class="col-md-1" >MFG#</div>-->
-            <!--<div class="col-md-3" >Description</div>-->
-            <!--<div class="col-md-2" >Ticket number</div>-->
-            <!--<div class="col-md-2" >Invoice number</div>-->
-            <!--&lt;!&ndash;<div class="col-md-1"><strong>Count</strong></div>&ndash;&gt;-->
-            <!--<div class="col-md-1" >Purchase cost</div>-->
-            <!--<div class="col-md-1" >Sale price</div>-->
-            <!--<div class="col-md-1"><strong>Discount(amount)</strong></div>-->
-          </li>
-          <div id="list-products">
-          <ng-template ngFor let-product
-          [ngForOf]="productsCompanyReport.lines"
-          [ngForTrackBy]="trackByIndex">
-          <li class="content-product-list-ticket clearfix"
-              on-finish-render="buildPdf()"
-              ng-class="{'hide-in-report':product.isChecked}">
-            <div style="width: 2%;padding: 0 5px;" class="col-md-1">
-              <label class="control checkbox ">
-                <input type="checkbox"  [(ngModel)]="product.isChecked" (change)="selectLine()">
-                <span class="control-indicator"></span>
-              </label>
-            </div>
-            <div class="col-md-1">{{product.date}}</div>
-            <div class="col-md-1" *ngIf="productsCompanyReport.type === 'SUMMARY'">{{product.client}}</div>
-            <div class="col-md-1 ellipsis">{{product.mfg}}</div>
-            <div class="col-md-3">
-              {{product.description}}
-            </div>
-            <div class="col-md-2" [ngStyle]="{'color': !product.invoiceNumber ? 'red' : 'none'}">{{product.ticketNumber
+            <div *ngIf="productsCompanyReport.lines.length > 0">
+                <div class="header-product-list-ticket">
+                    <h3>
+                        {{ productsCompanyReport.techCompanyName }}
+                    </h3>
+                    <p *ngIf="productsCompanyReport.type ==='DETAILED' ">
+                        Detailed sales for
+                        <span>
+                            {{ productsCompanyReport.clientCompanyName }}
+                        </span>
+                    </p>
+                    <p>
+                        <span>
+                            {{ parseDate(productsCompanyReport.startDate)   }}
+                        </span>
+                        to
+                        <span>
+                            {{ parseDate(productsCompanyReport.endDate)   }}
+                        </span>
+                    </p>
+                </div>
+
+
+                <div *ngIf="productsCompanyReport.lines">
+                    <ul>
+                        <li class="top-product-list-ticket clearfix">
+                            <div
+                                style="width: 2%;"
+                                class="col-md-1"
+                            >
+                                <strong>
+                                    <label class="control checkbox hide-in-report">
+                                        <input
+                                            type="checkbox"
+                                            [(ngModel)]="generalCheckbox"
+                                            (change)="changeGeneralCheckbox()"
+                                        >
+                                        <span class="control-indicator"></span>
+                                    </label>
+                                </strong>
+                            </div>
+                            <div
+                                class="col-md-1"
+                                (click)="onFilter('date')"
+                            >
+                                Date
+                            </div>
+                            <div
+                                class="col-md-1"
+                                (click)="onFilter('client')"
+                                *ngIf="productsCompanyReport.type === 'SUMMARY'"
+                            >
+                                <strong>Client</strong>
+                            </div>
+                            <div
+                                class="col-md-1"
+                                (click)="onFilter('mfg')"
+                            >
+                                MFG#
+                            </div>
+                            <div
+                                class="col-md-3"
+                                (click)="onFilter('description')"
+                            >
+                                Description
+                            </div>
+                            <div
+                                class="col-md-2"
+                                (click)="onFilter('ticketNumber')"
+                            >
+                                Ticket number
+                            </div>
+                            <div
+                                class="col-md-2"
+                                (click)="onFilter('invoiceNumber')"
+                            >
+                                Invoice number
+                            </div>
+                            <!-- <div class="col-md-1"><strong>Count</strong></div> -->
+                            <div
+                                class="col-md-1 purchase-cost"
+                                (click)="onFilter('purchaseCost')"
+                            >
+                                Purchase cost
+                            </div>
+                            <div
+                                class="col-md-1"
+                                (click)="onFilter('salePrice')"
+                            >
+                                Sale price
+                            </div>
+                            <!-- <div class="col-md-1" >Date</div> -->
+                            <!-- <div class="col-md-1"  ng-if="productsCompanyReport.type === 'SUMMARY'"><strong>Client</strong></div> -->
+                            <!-- <div class="col-md-1" >MFG#</div> -->
+                            <!-- <div class="col-md-3" >Description</div> -->
+                            <!-- <div class="col-md-2" >Ticket number</div> -->
+                            <!-- <div class="col-md-2" >Invoice number</div> -->
+                            <!-- &lt;!&ndash;<div class="col-md-1"><strong>Count</strong></div>&ndash;&gt; -->
+                            <!-- <div class="col-md-1" >Purchase cost</div> -->
+                            <!-- <div class="col-md-1" >Sale price</div> -->
+                            <!-- <div class="col-md-1"><strong>Discount(amount)</strong></div> -->
+                        </li>
+                        <div id="list-products">
+                            <ng-template
+                                ngFor
+                                let-product
+                                [ngForOf]="productsCompanyReport.lines"
+                                [ngForTrackBy]="trackByIndex"
+                            >
+                                <li
+                                    class="content-product-list-ticket clearfix"
+                                    on-finish-render="buildPdf()"
+                                    ng-class="{'hide-in-report':product.isChecked}"
+                                >
+                                    <div
+                                        style="width: 2%;padding: 0 5px;"
+                                        class="col-md-1"
+                                    >
+                                        <label class="control checkbox ">
+                                            <input
+                                                type="checkbox"
+                                                [(ngModel)]="product.isChecked"
+                                                (change)="selectLine()"
+                                            >
+                                            <span class="control-indicator"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">{{product.date}}</div>
+                                    <div
+                                        class="col-md-1"
+                                        *ngIf="productsCompanyReport.type === 'SUMMARY'"
+                                    >
+                                        {{product.client}}
+                                    </div>
+                                    <div class="col-md-1 ellipsis">{{product.mfg}}</div>
+                                    <div class="col-md-3">{{product.description}}</div>
+                                    <div
+                                        class="col-md-2"
+                                        [ngStyle]="{'color': !product.invoiceNumber ? 'red' : 'none'}"
+                                    >
+                                        {{product.ticketNumber
               }}
+                                    </div>
+                                    <div
+                                        class="col-md-2"
+                                        [ngStyle]="{'color': product.invoiceNumber ? 'green' : 'none'}"
+                                    >
+                                        {{product.invoiceNumber }}
+                                    </div>
+                                    <div
+                                        class="col-md-1 purchase-cost"
+                                        *ngIf="getPermissions('VIEW_PRODUCT_COST')"
+                                    >
+                                        {{'$' + parseTotal(product.purchaseCost) }}
+                                    </div>
+                                    <div
+                                        class="col-md-1"
+                                        [ngStyle]="{'color': product.salePrice < product.purchaseCost ? 'red' : 'none'}"
+                                    >
+                                        {{'$'+ parseTotal(product.salePrice) }}
+                                    </div>
+                                </li>
+                            </ng-template>
+
+
+                        </div>
+                    </ul>
+
+
+                </div>
+                <div
+                    class="product-report-total-sales clearfix"
+                    style="margin-top: 20px"
+                    *ngIf="productsCompanyReport.lines"
+                >
+                    <div
+                        class="col-md-1 list-of-product-bottom-space"
+                        style="width: 77.5%; display: inline-block;"
+                    ></div>
+                    <div
+                        class="purchase-cost col-md-1"
+                        style="display: inline-block;"
+                    >
+                        <strong>
+                            <span>{{'$' + parseTotal(purchaseCostSum) }}</span>
+                        </strong>
+                    </div>
+                    <div
+                        class="col-md-1"
+                        style="display: inline-block;"
+                    >
+                        <strong>
+                            <span *ngIf="getPermissions('VIEW_PRODUCT_COST')">{{'$' + parseTotal(salesPriceSum) }}</span>
+                        </strong>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-2" [ngStyle]="{'color': product.invoiceNumber ? 'green' : 'none'}">
-              {{product.invoiceNumber }}
-            </div>
-            <div class="col-md-1 purchase-cost" *ngIf="getPermissions('VIEW_PRODUCT_COST')">
-              {{'$' + parseTotal(product.purchaseCost) }}
-            </div>
-            <div class="col-md-1" [ngStyle]="{'color': product.salePrice < product.purchaseCost ? 'red' : 'none'}">
-              {{'$'+ parseTotal(product.salePrice) }}
-            </div>
-          </li>
-          </ng-template>
-          
+            <app-report-footer></app-report-footer>
         </div>
-        </ul>
-        
-      </div>
-      <div class="product-report-total-sales clearfix" style="margin-top: 20px" *ngIf="productsCompanyReport.lines">
-        <div class="col-md-1 list-of-product-bottom-space" style="width: 77.5%; display: inline-block;"></div>
-        <div class="purchase-cost col-md-1" style="display: inline-block;">
-          <strong><span> {{'$' + parseTotal(purchaseCostSum) }}</span></strong></div>
-        <div class="col-md-1" style="display: inline-block;"> <strong><span  *ngIf="getPermissions('VIEW_PRODUCT_COST')">{{'$' + parseTotal(salesPriceSum) }}</span></strong>
-        </div>
-      </div>
     </div>
-  <app-report-footer></app-report-footer>
-   </div>
- </div>
 </div>
+<app-left-panel-company></app-left-panel-company>

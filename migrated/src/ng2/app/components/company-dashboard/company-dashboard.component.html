@@ -1,25 +1,33 @@
 <div class="cmp-dashboard-body">
-  <div class="cmp-dboard-container d-flex">
-    <div class="cmp-dboard-row d-flex">
-      <app-company-dash-detail class="cmp-dboard-col left-profilebar cmn-box d-flex" (totalTicketsChanged)="totalTicketsChangedHandler($event)" (averageResponseTimeChanged)="averageResponseTimeChangedHandler($event)"></app-company-dash-detail>
-      <div class="cmp-dboard-col right-stasticsbar d-flex">
-        <app-company-dash-stats [totalTickets]="totalTickets" [averageResponseTime]="averageResponseTime" ></app-company-dash-stats>
-        <app-company-dash-ticket></app-company-dash-ticket>
-        <div class="cmp-board-information d-flex">
-          <div class="cmp-board-info-row d-flex">
-            <div class="cmp-board-info-col d-flex">
-              <app-company-dash-revenue class="cmp-board-revenue cmn-box d-flex"></app-company-dash-revenue>
-              <app-company-dash-invoice></app-company-dash-invoice>
+    <div class="cmp-dboard-container d-flex">
+        <div class="cmp-dboard-row d-flex">
+            <app-company-dash-detail
+                class="cmp-dboard-col left-profilebar cmn-box d-flex"
+                (totalTicketsChanged)="totalTicketsChangedHandler($event)"
+                (averageResponseTimeChanged)="averageResponseTimeChangedHandler($event)"
+            ></app-company-dash-detail>
+            <div class="cmp-dboard-col right-stasticsbar d-flex">
+                <app-company-dash-stats
+                    [totalTickets]="totalTickets"
+                    [averageResponseTime]="averageResponseTime"
+                ></app-company-dash-stats>
+                <app-company-dash-ticket></app-company-dash-ticket>
+                <div class="cmp-board-information d-flex">
+                    <div class="cmp-board-info-row d-flex">
+                        <div class="cmp-board-info-col d-flex">
+                            <app-company-dash-revenue class="cmp-board-revenue cmn-box d-flex"></app-company-dash-revenue>
+                            <app-company-dash-invoice></app-company-dash-invoice>
+                        </div>
+                        <app-company-dash-contract class="cmp-board-info-col d-flex"></app-company-dash-contract>
+                    </div>
+                </div>
             </div>
-            <app-company-dash-contract class="cmp-board-info-col d-flex"></app-company-dash-contract>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 
-  <!-- Sidebar Recent Activity -->
-  <!-- <aside class="cmp-board-sidebar d-flex" [class.opened]="expand">
+
+    <!-- Sidebar Recent Activity -->
+    <!-- <aside class="cmp-board-sidebar d-flex" [class.opened]="expand">
       <a href="javascript:;" class="sidebar-toogle" (click)="expand=!expand">
         Sidebar Toogle 
       </a>
@@ -103,11 +111,12 @@
       <a href="javascript:;" class="btn btn-load">Load More…</a>
   </aside> -->
 
-<!-- Modal -->
+
+    <!-- Modal -->
+
 
 
 
 
 </div>
-
-
+<app-left-panel-company></app-left-panel-company>

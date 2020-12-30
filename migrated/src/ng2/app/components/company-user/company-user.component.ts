@@ -11,6 +11,7 @@ import { DraftEmailStateService } from '../../states/draft-email/draft-email-sta
 import { WebsocketService } from '../../services/websocket/websocket.service';
 import { ARCHIVE_USER, DEARCHIVE_USER } from '../../const/confirm';
 import { UserChange } from '../users/class/user-change';
+import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
 
 @Component({
   selector: 'company-user',
@@ -27,17 +28,19 @@ export class CompanyUserComponent implements OnInit {
   showArchivedUsers: boolean = false;
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
-  count:number = 0;
-  constructor(private usersStateService: UsersStateService, 
+  count: number = 0;
+  constructor(private usersStateService: UsersStateService,
     private userListService: UserListService,
     private companiesStateService: CompaniesStateService,
     private confirmStateService: ConfirmStateService,
     private usersService: UsersService,
     public cd: ChangeDetectorRef,
     private draftEmailStateService: DraftEmailStateService,
-    private websocketService:WebsocketService) { }
+    private leftPanelStateService: LeftPanelStateService,
+    private websocketService: WebsocketService) { }
 
   ngOnInit() {
+    this.leftPanelStateService.setCompanyPage("company-user");
     let company_id = localStorage.getItem("company_id") || null;
     if (!company_id) return;
     this.filter.setLeftFilters(null, company_id, null, null);
@@ -76,39 +79,38 @@ export class CompanyUserComponent implements OnInit {
     let getChangeCompanies = this.usersStateService.getChangeUsers().subscribe((data: UserChange) => {
 
       if (data.action === 'USER_SAVED' || data.action === 'USER_ARCHIVED') {
- 
+
         const reqIndex = this.reqUsers.findIndex((item) => item.id === data.data.id);
         if (reqIndex > -1) this.reqUsers[reqIndex] = new User(data.data);
         if (reqIndex === -1 && data.data.company.id === company_id) {
           this.reqUsers.unshift(new User(data.data));
           this.users.unshift(new User(data.data));
 
-        
+
           // this.onRelaodList();
         }
         const userIndex = this.users.findIndex((item) => item.id === data.data.id);
         if (userIndex > -1) this.users[userIndex] = new User(data.data);
-        
+
         if (!this.showArchivedUsers && data.action === 'USER_ARCHIVED') {
           const userIndex = this.users.findIndex((item) => item.id === data.data.id);
-          if (userIndex > -1) this.users.splice(userIndex,1);
-        } 
+          if (userIndex > -1) this.users.splice(userIndex, 1);
+        }
       }
-     
-       
+
+
       if (data.action === 'USERS_DEARCHIVED') {
-         
+
         data.data.forEach(user => {
           const reqIndex = this.reqUsers.findIndex((item) => item.id === user.id);
           if (reqIndex > -1) this.reqUsers[reqIndex] = new User(user);
-          if (this.showArchivedUsers)
-          {
+          if (this.showArchivedUsers) {
             const userIndex = this.users.findIndex((item) => item.id === user.id);
-             
-            if (userIndex > -1) this.users.splice(userIndex,1);
+
+            if (userIndex > -1) this.users.splice(userIndex, 1);
           }
         })
-       
+
       }
 
     })
@@ -118,12 +120,12 @@ export class CompanyUserComponent implements OnInit {
   showMobileFilter() {
     document.body.querySelector('app-left-panel-users').classList.add('show');
   }
-  private onInitSubscribe () {
+  private onInitSubscribe() {
     setTimeout(() => {
-      
-     let stompClient = this.websocketService.getClient().subscribe(`/user/watch/subscription/${this.companiesStateService.getCurrentCompany().id}`, (message) => {
+
+      let stompClient = this.websocketService.getClient().subscribe(`/user/watch/subscription/${this.companiesStateService.getCurrentCompany().id}`, (message) => {
         var newChange = JSON.parse(message.body);
-         
+
         if (newChange.action === 'SUBSCRIPTION_SAVED') {
           const reqIndex = this.reqUsers.findIndex((item) => item.id === newChange.data.user.id);
           if (reqIndex > -1) this.reqUsers[reqIndex].changeSubscriptions(newChange.data);
@@ -133,16 +135,16 @@ export class CompanyUserComponent implements OnInit {
         }
       });
       this.userListService.addSubscription(stompClient);
-   
-  }, 3000);
+
+    }, 3000);
   }
-  onSelectAllUser (event) {
+  onSelectAllUser(event) {
     if (event.target.checked) {
-     let list_user_table = document.body.querySelectorAll('app-users-table');
-     list_user_table.forEach(item => {
-      (<any>item.querySelector('input[type="checkbox"]')).checked = true;
-   
-     });
+      let list_user_table = document.body.querySelectorAll('app-users-table');
+      list_user_table.forEach(item => {
+        (<any>item.querySelector('input[type="checkbox"]')).checked = true;
+
+      });
       this.draftEmailStateService.resetSelectedUsers();
       this.users.forEach(user => {
         this.draftEmailStateService.addSelectedUser(user);
@@ -152,8 +154,8 @@ export class CompanyUserComponent implements OnInit {
       let list_user_table = document.body.querySelectorAll('app-users-table');
       list_user_table.forEach(item => {
         (<any>item.querySelector('input[type="checkbox"]')).checked = false;
-     
-       });
+
+      });
     }
   }
   private onDeArchiveUser(id) {
@@ -181,7 +183,7 @@ export class CompanyUserComponent implements OnInit {
     this.userListService.addSubscription(archiveUser);
   }
   private getUsersList(data) {
-     
+
     this.reqUsers = data.filter(item => ((!this.showArchivedUsers) ? !item.deletedAt : item.deletedAt) && item.accountType !== "TECH");
 
     // this.onInirCalculate();
@@ -209,9 +211,9 @@ export class CompanyUserComponent implements OnInit {
     }
     this.page_number += 1;
     let listFilter = this.filter.getFilterList(this.reqUsers, this.companies);
-     
+
     this.count = listFilter.length;
-    
+
     let start = (this.page_number - 1) * 30;
     let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;
     let usersList = [];

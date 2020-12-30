@@ -4,14 +4,22 @@ import { Injectable, EventEmitter } from '@angular/core';
   providedIn: 'root'
 })
 export class LeftPanelStateService {
-  activePage:string = "new-billable";
+  activePage: string = "new-billable";
   onFilter: EventEmitter<any> = new EventEmitter();
   onBillingPage: EventEmitter<any> = new EventEmitter();
+  onCompanyPage: EventEmitter<any> = new EventEmitter();
   constructor() { }
 
-  public setBillingpage(data) {
+  public setBillingPage(data) {
     this.activePage = data;
     this.onBillingPage.emit(data);
+  }
+  public setCompanyPage(data) {
+    this.activePage = data;
+    this.onCompanyPage.emit(data);
+  }
+  public getOnCompanyPage() {
+    return this.onCompanyPage;
   }
   public getOnBillingPage() {
     return this.onBillingPage;

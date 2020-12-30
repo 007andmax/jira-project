@@ -64,22 +64,22 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'ng2/company-password-manager',
+    path: 'ng2/company/password-manager',
     component: CompanyPasswordManagerComponent,
     pathMatch: 'full'
   },
   {
-    path: 'ng2/company-user',
+    path: 'ng2/company/user',
     component: CompanyUserComponent,
     pathMatch: 'full'
   },
   {
-    path: 'ng2/company-tickets',
+    path: 'ng2/company/tickets',
     component: CompanyTicketsComponent,
     pathMatch: 'full'
   },
   {
-    path: 'ng2/company-dashboard/:companyId',
+    path: 'ng2/company/dashboard/:companyId',
     component: CompanyDashboardComponent,
     pathMatch: 'full'
   },
@@ -182,7 +182,7 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'ng2/company-products',
+    path: 'ng2/company/products',
     component: CompanyProductsComponent,
     pathMatch: 'full'
   },
@@ -261,7 +261,7 @@ const routes: Routes = [
 
   },
   {
-    path: 'ng2/company-contracts',
+    path: 'ng2/company/contracts',
     component: CompanyContractsComponent
   },
   {

@@ -7,6 +7,7 @@ import { CompanyproductsFilter } from './class/company-products-filter';
 import { PermissionsService } from 'src/ng2/app/services/permissions/permissions.service';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { ReportsStateService } from 'src/ng2/app/states/reports/reports-state.service';
+import { LeftPanelStateService } from 'src/ng2/app/states/left-panel/left-panel-state.service';
 @Component({
   selector: 'company-products',
   templateUrl: './company-products.component.html',
@@ -22,10 +23,13 @@ export class CompanyProductsComponent implements OnInit {
   salesPriceSum: number = 0;
   constructor(private permissionsService: PermissionsService,
     private reportsStateService: ReportsStateService,
+    private leftPanelStateService: LeftPanelStateService,
     public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
+    this.leftPanelStateService.setCompanyPage("company-products");
     this.reportsStateService.includePurchaseCost = true;
+
   }
   parseDate(ticketCreatedAt) {
     return moment(new Date(ticketCreatedAt)).format('DD.MM.YYYY');;

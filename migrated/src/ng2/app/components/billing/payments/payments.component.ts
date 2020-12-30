@@ -49,11 +49,11 @@ export class PaymentsComponent implements OnInit {
     private paymentsStateService: PaymentsStateService,
     private confirmStateService: ConfirmStateService,
     private paymentsRealTimeService: PaymentsRealTimeService,
-    private leftPanelStateService:LeftPanelStateService,
+    private leftPanelStateService: LeftPanelStateService,
     private paymentsListService: PaymentsListService) { }
 
   ngOnInit() {
-    this.leftPanelStateService.setBillingpage('new-payments-ng2');
+    this.leftPanelStateService.setBillingPage('new-payments-ng2');
     window.scrollTo(0, 0);
     if (this.companiesStateService.getCompanies().length > 0) this.onScroll();
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {

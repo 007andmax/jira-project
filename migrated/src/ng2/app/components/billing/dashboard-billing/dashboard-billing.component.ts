@@ -33,7 +33,7 @@ export class DashboardBillingComponent implements OnInit {
     private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
-    this.leftPanelStateService.setBillingpage('billing-dashboard');
+    this.leftPanelStateService.setBillingPage('billing-dashboard');
     this.getAccountingStartDate();
   }
   getTextAccountingStartDate() {
@@ -43,12 +43,12 @@ export class DashboardBillingComponent implements OnInit {
     this.dashboardBillingService.getDashboard(type).subscribe(data => {
       this.dashboard = data;
       this.contractsDashboard = new ContractsDashboard(this.dashboard.serviceAgreementCounters);
-     
+
       this.cd.detectChanges();
       if (this.dashboardStats) this.dashboardStats.updateDataChart();
       this.isDashboardReady = true;
       this.checkReadyState();
-    },(err) => {
+    }, (err) => {
       this.dashboard = new Dashboard();
       this.isDashboardReady = true;
       this.checkReadyState();

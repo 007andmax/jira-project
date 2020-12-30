@@ -31,20 +31,22 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
   statusColor: TicketsColor;
   offset: number = 15;
   showPendingPreloader: boolean = false;
-  idEditTicket:string = '';
+  idEditTicket: string = '';
   @ViewChild('header') header: TicketsHeaderComponent;
-  
- 
+
+
   constructor(private ticketsService: TicketsService,
     private ticketsListService: TicketsListService,
     public cd: ChangeDetectorRef,
-    private ticketStateService:TicketStateService,
+    private ticketStateService: TicketStateService,
     private leftPanelService: LeftPanelService,
-    private usersStateService:UsersStateService,
+    private usersStateService: UsersStateService,
     private companiesStateService: CompaniesStateService,
+    private leftPanelStateService: LeftPanelStateService,
     private ticketsStateService: TicketsStateService) { }
 
   ngOnInit() {
+    this.leftPanelStateService.setCompanyPage("company-tickets");
     this.ticketStateService.getOnTicketClosed().subscribe(data => {
       this.idEditTicket = '';
     })
@@ -110,7 +112,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
       this.ticketsFilter.setListType("ALL");
       this.ticketsFilter.setCompany(company);
       this.header.filter.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.company.id === company.id));
-    
+
       this.getCount();
       this.onScroll();
     }
