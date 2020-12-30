@@ -1,6 +1,6 @@
 .network-scan-page {
   padding: 24px;
-  min-height: calc(100vh - 150px);
+  min-height: calc(100vh - 78px);
   background-color: #edf2f6;
   &__content {
     max-width: 1144px;
@@ -149,8 +149,14 @@
     }
   }
 
+  &__table-container {
+    min-height: calc(100vh - 450px);
+    position: relative;
+  }
+
   .network-scan-table {
     border-collapse: collapse;
+
     th {
       height: 40px;
       background: #f9fafb;
@@ -235,15 +241,6 @@
     }
 
     tr {
-      &:last-child {
-        td:first-child {
-          border-bottom-left-radius: 8px;
-        }
-        td:last-child {
-          border-bottom-right-radius: 8px;
-        }
-      }
-
       &.--checked {
         td {
           background-color: #f4fbff;
