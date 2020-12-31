@@ -12,6 +12,9 @@ export class InvoicesFilter {
     status: string;
     constructor() { }
 
+    public resetSortBy() {
+        this.sortBy = null;
+    }
     public getFIlter() {
         let endDate = new Date(this.endDate);
         endDate.setDate(endDate.getDate() + 1);

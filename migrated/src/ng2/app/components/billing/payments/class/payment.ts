@@ -25,13 +25,13 @@ export class Payment {
         this.note = data.note;
         this.partialPaidAmount = data.partialPaidAmount;
         this.partialPaidInvoices = data.partialPaidInvoices;
-        this.paymentData = data.paymentData.map(item => {
-            return new PaymentData(item.invoiceAmount,item.invoiceDate,item.invoiceId,item.paidAmount,item.invoiceNumber,item.invoicePaidDue);
-        })
+        this.paymentData = (data.paymentData) ? data.paymentData.map(item => {
+            return new PaymentData(item.invoiceAmount, item.invoiceDate, item.invoiceId, item.paidAmount, item.invoiceNumber, item.invoicePaidDue);
+        }) : [];
         this.paymentMethod = data.paymentMethod;
         this.reference = data.reference;
         this.refundMethod = data.refundMethod;
         this.totalSum = data.totalSum;
     }
-    
+
 }

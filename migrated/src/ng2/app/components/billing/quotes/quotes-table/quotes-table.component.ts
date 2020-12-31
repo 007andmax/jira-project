@@ -47,7 +47,8 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
     window.scrollTo(0, 0);
     this.onScroll();
     let getOnInitFilter = this.quoteStateService.getOnInitFilter().subscribe(data => {
-      this.filter = data;
+      this.filter.setData(data);
+      this.filter.clearSortBy();
       this.showPreloader = true;
       window.scrollTo(0, 0);
       this.setDefaultScoll();

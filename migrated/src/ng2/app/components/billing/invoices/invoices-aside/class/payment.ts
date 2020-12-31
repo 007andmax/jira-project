@@ -7,11 +7,11 @@ export class Payment {
     note: string = "";
     partialPayments: Array<PartialPayments> = [];
     paymentMethod: string = "CHEQUE";
-    reference :string;
+    reference: string;
     constructor() {
 
     }
-    public resetInvoiceIds () {
+    public resetInvoiceIds() {
         this.invoiceIds = [];
     }
     public resetPartialPayments() {
@@ -20,23 +20,25 @@ export class Payment {
     public addInvoiceId(id) {
         this.invoiceIds.push(id);
     }
-    public addPartialPayment (id,data) {
-        this.partialPayments.push(new PartialPayments(id,data));
+    public addPartialPayment(id, data) {
+        this.partialPayments.push(new PartialPayments(id, data));
     }
-    public setPaymentMethod (data) {
+    public setPaymentMethod(data) {
         this.paymentMethod = data;
     }
     public setDate(day, month, year, timeOffset) {
         let current = new Date();
-
         if (day !== current.getDate() || current.getMonth() !== (month - 1)) {
-            let dateDatePicker = new Date(year, month - 1, day).getTime(); // timestamp from calendar
-            let finalDate = new Date(dateDatePicker - (current.getTimezoneOffset() * 60000/* dont touch*/) - timeOffset /* timezone.timeOffset */);
-            this.date = moment(finalDate.getTime()).format('YYYY-MM-DD');
+            let currentTime = current.getTime();
+            // let dateTechCompany = new Date(currentTime + (current.getTimezoneOffset() * 60000) + timeOffset);
+            let dateTechCompany = new Date(currentTime + (current.getTimezoneOffset() * 60000));
+            let finalDate = new Date(year, month - 1, day, dateTechCompany.getHours(), dateTechCompany.getMinutes(), dateTechCompany.getSeconds()); // timestamp from calendar
+            this.date = moment(finalDate.getTime()).format("YYYY-MM-DDTHH:mm:ss");
         } else {
-            let currentTime = new Date(current.getFullYear(), current.getMonth(), current.getDate()).getTime();
-            let finalDate = new Date(currentTime - (current.getTimezoneOffset() * 60000) - timeOffset);
-            this.date = moment(finalDate.getTime()).format('YYYY-MM-DD');
+            let currentTime = current.getTime();
+            // let finalDate = new Date(currentTime + (current.getTimezoneOffset() * 60000) + timeOffset);
+            let finalDate = new Date(currentTime + (current.getTimezoneOffset() * 60000));
+            this.date = moment(finalDate.getTime()).format("YYYY-MM-DDTHH:mm:ss");
         }
     }
 }

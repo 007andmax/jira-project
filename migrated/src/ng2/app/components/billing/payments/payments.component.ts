@@ -65,6 +65,7 @@ export class PaymentsComponent implements OnInit {
       this.selectedPayments = [];
       this.selectedCompanyId = null;
       this.paymentsFilter = data;
+      this.paymentsFilter.resetSortBy();
       this.showPreloader = true;
       window.scrollTo(0, 0);
       this.setDefaultScoll();
