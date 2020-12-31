@@ -6,14 +6,22 @@ export class QuoteFilter {
     status: string;
     date: number;
     endDate: number;
-    sortBy: string = "DATE_DESC";
+    sortBy: string;
     offset: number = 0;
     limit: number = 30;
 
     constructor() { }
-
+    public setData(data) {
+        this.companyName = data.companyName;
+        this.quoteNumber = data.quoteNumber;
+        this.status = data.status;
+        this.date = data.date;
+        this.endDate = data.endDate;
+        this.offset = data.offset;
+        this.limit = data.limit;
+    }
     public clearSortBy() {
-        this.sortBy = null;
+        this.sortBy = undefined;
     }
     public setStatus(data) {
         this.status = data;
