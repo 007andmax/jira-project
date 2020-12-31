@@ -58,23 +58,18 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
     document.body.querySelector('app-left-panel-users').classList.remove('show');
   }
   public onSelectCompany(item) {
-    console.log("item", item);
     if (!item) {
       this.clearSelectedCompany();
       return;
     }
     this.selectedCompany = null;
-
     this.filter.setCompany(item.id);
     this.usersStateService.onInitFilter(this.filter);
     this.companiesHistory.pop();
     this.companiesHistory.unshift(item.name);
     //this.company.techLeadId = this.listPersons[index].id;
-
     this.companiesService.setСustomStorage("userPageFilterByCompanyHistory", this.companiesHistory).subscribe(data => {
-
     })
-
   }
   private getClientsList(data) {
     this.companies = data.filter(item => item.accountType === 'CLIENT' && ((!this.showArchivedCompanies) ? !item.deletedAt : item.deletedAt)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
@@ -103,23 +98,16 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
 
   }
   public onSelectClientIndustry(item) {
-    console.log("item", item);
     if (!item) {
       this.clearClientIndustry();
       return;
     }
     this.selectedClientIndustry = null;
-
-    //   this.showClearIndustry = true;
-    // this.clientIndustry = item;
     this.filter.setClientIndustry(item);
     this.usersStateService.onInitFilter(this.filter);
     this.industryHistory.pop();
     this.industryHistory.unshift(item);
-    //this.company.techLeadId = this.listPersons[index].id;
-
     this.companiesService.setСustomStorage("userPageFilterByIndustryHistory", this.industryHistory).subscribe(data => {
-
     })
   }
   public selectClientIndustry(item) {
@@ -133,12 +121,7 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
     this.cd.detectChanges();
   }
   selectClientCompany(item) {
-
-    console.log("item", item);
     let indexCompany = this.companiesState.getCompanies().findIndex(company => company.name === item);
-    //  this.showClearIndustry = true;
-    // this.clientIndustry = item;
-
     this.selectedCompany = this.companiesState.getCompanies()[indexCompany];
     this.filter.setCompany(this.companiesState.getCompanies()[indexCompany].id);
     this.usersStateService.onInitFilter(this.filter);

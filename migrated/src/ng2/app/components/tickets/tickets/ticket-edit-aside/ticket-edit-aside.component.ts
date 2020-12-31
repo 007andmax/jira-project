@@ -81,7 +81,6 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
       }
-      console.log("ticketProfile", this.ticketProfile);
     })
     this.sub.add(getOnEditTicket);
     this.ticketsStateService.getOnInitColor().subscribe(data => {
@@ -150,7 +149,6 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     });
   }
   onOpenCompaniesDropDown() {
-    console.log("onOpenCompaniesDropDown");
     this.cd.detectChanges();
   }
   getCompany(id) {

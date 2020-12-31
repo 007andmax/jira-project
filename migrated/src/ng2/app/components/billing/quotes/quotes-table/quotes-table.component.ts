@@ -91,7 +91,6 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
     window.scrollTo(0, 0);
     this.setDefaultScoll();
     this.filter.sortBy = this.sort.getSortType(value);
-    console.log("this.filter", this.filter);
     this.getQuotes()
   }
   public setDefaultScoll() {

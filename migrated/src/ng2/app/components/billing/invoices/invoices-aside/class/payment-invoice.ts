@@ -22,8 +22,6 @@ export class PaymentInvoice {
             if (item.selected) sumAmountReceived += item.paymentAmount;
         })
         sumAmountReceived = parseFloat((sumAmountReceived).toFixed(2));
-        console.log("sumAmountReceived", sumAmountReceived);
-        console.log("amountReceived", amountReceived);
         this.amountReceived = (sumAmountReceived === amountReceived);
     }
     public checkAmountReceivedEditAside(amountReceived: number, paymentData: Array<PaymentData>) {
@@ -41,10 +39,7 @@ export class PaymentInvoice {
         })
         sumAmountReceived = parseFloat((sumAmountReceived).toFixed(2));
         this.amountReceived = (sumAmountReceived === amountReceived);
-        console.log("sumAmountReceived", sumAmountReceived);
-        console.log("amountReceived", amountReceived);
         return this.amountReceived;
-
     }
     public isValidateEditAside(amountReceived: number, paymentData: Array<PaymentData>) {
         let sumAmountReceived = 0;
