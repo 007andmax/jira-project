@@ -72,12 +72,9 @@
       </p>
     </div>
   </div>
-  <div class="profile-cmp-board primary-contact d-flex">
+  <div class="profile-cmp-board primary-contact d-flex" *ngIf="companyDetailing?.primaryContact">
     <div class="small-title">Primary Contact</div>
     <div class="contact-info d-flex">
-      <!-- <figure class="d-flex" *ngIf="primaryContact.avatar != null && primaryContact.avatar != undefined && primaryContact.avatar != ''">
-        <img src="{{primaryContact.avatar}}" alt="user" />
-      </figure> -->
       <figure class="d-flex no-user-init uppercase">
         {{getCharacter(companyDetailing?.primaryContact.firstName)}}
       </figure>
