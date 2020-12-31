@@ -205,7 +205,7 @@ export class CompanyProfile {
             description: this.description,
             reputation: this.reputation
         }
-        if (typeIndustry === 'object' && this.clientIndustry !== null) {
+        if (typeIndustry === 'object' && this.clientIndustry !== null && this.clientIndustry.name !== null && this.clientIndustry.name !== '') {
             data.name = this.clientIndustry.name;
         }
         return data;

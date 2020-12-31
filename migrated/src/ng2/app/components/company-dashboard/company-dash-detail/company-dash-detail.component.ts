@@ -346,8 +346,8 @@ export class CompanyDashDetailComponent implements OnInit {
     this.saveCompany();
   }
 
-  getCharacter(name) { 
-    return name[0] + name[1];
+  getCharacter(name) {
+    return name === null || name === '' ? '' : name[0] + name[1];
   }
 
   arrayOne(n: number): any[] {
