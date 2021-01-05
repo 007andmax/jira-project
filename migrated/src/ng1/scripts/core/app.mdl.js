@@ -192,6 +192,10 @@
           templateUrl: '/ng1/scripts/core/billable/new-payments/new-payments.tpl.html',
           controller: 'quicktech.core.billable.newPaymentsCtrl'
         }))
+        .state('new-quickSupport', waitForServices({
+          url: '/ng2/quickSupport',
+          template: '<support-component></support-component>'
+        }))
         .state('quickSupport', waitForServices({
           url: '/quickSupport',
           templateUrl: '/ng1/scripts/core/quick-support/quick-support.tpl.html',

@@ -382,6 +382,7 @@ import { CompanyDashRevenueComponent } from './components/company-dashboard/comp
 import { CompanyDashInvoiceComponent } from './components/company-dashboard/company-dash-invoice/company-dash-invoice.component';
 import { CompanyDashContractComponent } from './components/company-dashboard/company-dash-contract/company-dash-contract.component';
 import { LeftPanelCompanyComponent } from './components/left-panel/left-panel-company/left-panel-company.component';
+import { SupportComponent } from './components/support/support.component';
 /**
  * declare angular
  */
@@ -575,6 +576,9 @@ angular.module('quicktech')
   .directive(
     'companyNetworkScanComponent',
     downgradeComponent({ component: CompanyNetworkScanComponent }))
+  .directive(
+    'supportComponent',
+    downgradeComponent({ component: SupportComponent }))
   .factory('ngZone', downgradeInjectable(NgZone));
 
 /**
@@ -927,6 +931,7 @@ angular.module('quicktech')
     CompanyNetworkScanItemComponent,
     CompanyNetworkScanItemTooltipComponent,
     LeftPanelCompanyComponent,
+    SupportComponent,
   ],
   imports: [
     BrowserModule,
@@ -1023,7 +1028,8 @@ angular.module('quicktech')
     TicketsDashboardComponent,
     CompanyNetworkScanComponent,
     CompanyDevicesComponent,
-    CompanyDevicesRemoteAccessComponent
+    CompanyDevicesRemoteAccessComponent,
+    SupportComponent
     // RecurringTicketsComponent
   ],
   exports: [
