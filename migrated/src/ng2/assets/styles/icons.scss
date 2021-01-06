@@ -526,6 +526,31 @@
     background-image: url("assets/img/icons/sidebar-blue.svg") ;
   }
 
+  &__key {
+    background-image: url("assets/img/icons/key.svg") ;
+  }
+  &__copy {
+    background-image: url("assets/img/icons/copy.svg") ;
+  }
+  &__link-gray {
+    background-image: url("assets/img/icons/link-gray.svg") ;
+  }
+  &__new-ticket-support {
+    background-image: url("assets/img/icons/new-ticket-support.svg") ;
+  }
+  &__remote-access-green {
+    background-image: url("assets/img/icons/remote-access-green.svg") ;
+  }
+  &__remote-access-gray {
+    background-image: url("assets/img/icons/remote-access-gray.svg") ;
+  }
+  &__connected-device-green {
+    background-image: url("assets/img/icons/connected-device-green.svg") ;
+  }
+  &__computer-green {
+    background-image: url("assets/img/icons/computer-green.svg") ;
+  }
+
   &.--updated {
     position: relative;
     &::before {
