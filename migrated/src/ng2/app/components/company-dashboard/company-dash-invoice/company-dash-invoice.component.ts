@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef, Input } from '@angular/core';
 import { CompaniesService } from 'src/ng2/app/services/company/companies.service';
 import * as moment from "moment";
 import { Subscription } from 'rxjs';
@@ -18,6 +18,11 @@ export class CompanyDashInvoiceComponent implements OnInit {
   sub: Subscription = new Subscription();
   showPreviewInvoice: boolean = false;
   previewInvoice: Invoice;
+  @Input() public set companyName(val: string) {
+    if (val !== '' && val !== null && val !== undefined) {
+      this.getRecentInvoiceList(val);
+    }
+  }
   @ViewChild('previewInvoiceAside') previewInvoiceAside: InvoicesAsidePreviewComponent;
 
   public constructor(private companiesService: CompaniesService,
@@ -26,12 +31,12 @@ export class CompanyDashInvoiceComponent implements OnInit {
 
   public ngOnInit() {
     this._id = /[^/]*$/.exec(window.location.href)[0];
-    this.getRecentInvoiceList();
+    // this.getRecentInvoiceList();
     
   }
 
-  getRecentInvoiceList() {
-    let getInvoice = this.companiesService.getRecentInvoice().subscribe((data: any) => {
+  getRecentInvoiceList(companyName: string) {
+    let getInvoice = this.companiesService.getRecentInvoice(companyName).subscribe((data: any) => {
       data.forEach(element => {
         let obj = element;
         obj.dateName = moment(new Date(obj.date)).format('DD MMM YYYY');

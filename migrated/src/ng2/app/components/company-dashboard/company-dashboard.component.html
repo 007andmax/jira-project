@@ -1,7 +1,7 @@
 <div class="cmp-dashboard-body">
   <div class="cmp-dboard-container d-flex">
     <div class="cmp-dboard-row d-flex">
-      <app-company-dash-detail class="cmp-dboard-col left-profilebar cmn-box d-flex" (totalTicketsChanged)="totalTicketsChangedHandler($event)" (averageResponseTimeChanged)="averageResponseTimeChangedHandler($event)"></app-company-dash-detail>
+      <app-company-dash-detail class="cmp-dboard-col left-profilebar cmn-box d-flex" (companyNameChanged)="companyNameChangedHandler($event)" (totalTicketsChanged)="totalTicketsChangedHandler($event)" (averageResponseTimeChanged)="averageResponseTimeChangedHandler($event)"></app-company-dash-detail>
       <div class="cmp-dboard-col right-stasticsbar d-flex">
         <app-company-dash-stats [totalTickets]="totalTickets" [averageResponseTime]="averageResponseTime" ></app-company-dash-stats>
         <app-company-dash-ticket></app-company-dash-ticket>
@@ -9,7 +9,7 @@
           <div class="cmp-board-info-row d-flex">
             <div class="cmp-board-info-col d-flex">
               <app-company-dash-revenue class="cmp-board-revenue cmn-box d-flex"></app-company-dash-revenue>
-              <app-company-dash-invoice></app-company-dash-invoice>
+              <app-company-dash-invoice [companyName]="companyName"></app-company-dash-invoice>
             </div>
             <app-company-dash-contract class="cmp-board-info-col d-flex"></app-company-dash-contract>
           </div>
