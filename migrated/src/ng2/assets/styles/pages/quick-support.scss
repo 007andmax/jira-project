@@ -92,6 +92,20 @@
       border-bottom-right-radius: 4px;
     }
   }
+  &.--big {
+    height: 40px;
+    .support-item-menu {
+      &__button {
+        width: 40px;
+      }
+      &__number {
+        width: fit-content;
+        font-size: 15px;
+        white-space: nowrap;
+        line-height: .1;
+      }
+    }
+  }
 }
 
 .support-timeline-status {

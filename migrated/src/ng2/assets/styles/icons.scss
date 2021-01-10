@@ -175,6 +175,12 @@
      background-image: url("assets/img/icons/service-blue.svg");
   }
  }
+ &__quick-support {
+  background-image: url("assets/img/icons/quick-support-gray.svg");
+  &.active {
+    background-image: url("assets/img/icons/quick-support.svg");
+  }
+ }
  &__attach-blue {
    background-image: url("assets/img/attachment-blue.svg");
  }
