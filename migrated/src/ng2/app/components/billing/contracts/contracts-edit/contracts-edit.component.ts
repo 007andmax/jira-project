@@ -6,6 +6,7 @@ import { ContractsAsideBlockTimeEditComponent } from './contracts-aside-block-ti
 import { DefaultServicesService } from 'src/ng2/app/services/default-services/default-services.service';
 import { ContractsAsideUserDeviceEditComponent } from './contracts-aside-user-device-edit/contracts-aside-user-device-edit.component';
 import { ContractsAsideProductServiceEditComponent } from './contracts-aside-product-service-edit/contracts-aside-product-service-edit.component';
+import { DisabledBtnDirective } from 'src/ng2/app/directives/disabled-btn.directive';
 
 @Component({
   selector: 'app-contracts-edit',
@@ -17,7 +18,7 @@ export class ContractsEditComponent implements OnInit {
   @ViewChild('blockTimeContract') blockTimeContract: ContractsAsideBlockTimeEditComponent;
   @ViewChild('serviceContract') serviceContract: ContractsAsideUserDeviceEditComponent;
   @ViewChild('otherContract') otherContract: ContractsAsideProductServiceEditComponent;
-
+  @ViewChild('editContract') editContract: DisabledBtnDirective;
   @Input() serviceAgreement: ServiceAgreement;
   constructor(private contractsStateService: ContractsStateService,
     public cd: ChangeDetectorRef,
@@ -29,13 +30,15 @@ export class ContractsEditComponent implements OnInit {
     })
   }
   edit() {
+
     if (this.hourlyContract) this.hourlyContract.onEdit();
     if (this.blockTimeContract) this.blockTimeContract.onEdit();
     if (this.serviceContract) this.serviceContract.onEdit();
     if (this.otherContract) this.otherContract.onEdit();
+    this.editContract.setDisabled(true);
   }
   closed() {
     this.contractsStateService.toggleEdit(false);
-   
+    this.editContract.setDisabled(false);
   }
 }

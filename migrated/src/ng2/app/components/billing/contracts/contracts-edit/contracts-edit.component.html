@@ -36,9 +36,12 @@
         <div class="qt-df">
             <button
                 class="qt-button qt-mr-12"
-                (click)="edit()"
+                appDisabledBtn
+                #editContract="disabled"
+                (onClick)="edit()"
             >
-                Edit
+                <span *ngIf="!editContract.isBlock()">Edit</span>
+                <app-preloader-ticket *ngIf="editContract.isBlock()"></app-preloader-ticket>
             </button>
             <button
                 class="qt-button --gray"

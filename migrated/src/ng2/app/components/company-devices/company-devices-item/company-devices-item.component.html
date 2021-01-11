@@ -82,10 +82,7 @@
                 class="logged-name qt-ff-gm"
                 [textContent]="device.userName || ''"
             ></span>
-            <span
-                class="logged-time"
-                *ngIf="device.timing.idle"
-            >
+            <span class="logged-time">
                 Idle:
                 <span *ngIf="device.timing.idle && returnTimeFormat(device.timing.idle).hours > 0">
                     {{returnTimeFormat(device.timing.idle).hours}} hrs
@@ -93,7 +90,7 @@
                 <span *ngIf="device.timing.idle && returnTimeFormat(device.timing.idle).minutes > 0">
                     {{returnTimeFormat(device.timing.idle).minutes}} min
                 </span>
-                <span *ngIf="device.timing.idle && returnTimeFormat(device.timing.idle).minutes < 1">0 min</span>
+                <span *ngIf="device.timing.idle && returnTimeFormat(device.timing.idle).minutes < 1 || !device.timing.idle">0 min</span>
             </span>
         </div>
     </td>
