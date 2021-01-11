@@ -62,14 +62,15 @@ export class DashboardTicketsBillableHours {
         this.totalQuantity = data.totalQuantity;
         this.lines = [];
         let maxValue = Math.max.apply(Math, Object.keys(data.lines).map((o) => data.lines[o]));
+        maxValue = (maxValue <= 8) ? 8 : maxValue;
         Object.keys(data.lines).forEach((item, index) => {
             this.lines.push(new DashboardTicketsBillableHoursItem(item, Math.ceil((data.lines[item]) * 100) / 100, data.lines[item] / maxValue * 100));
         });
         this.counters = [0];
         if (this.lines.length > 0) {
-            let count = (maxValue < 10) ? 5 : 10;
+            let count = 8;//(maxValue < 10) ? 5 : 10;
             for (let i = 1; i <= count; i++) {
-                this.counters.push(Math.round(maxValue / count * i));
+                this.counters.push((maxValue <= 8) ? i : Math.round(maxValue / count * i));
             }
         }
     }

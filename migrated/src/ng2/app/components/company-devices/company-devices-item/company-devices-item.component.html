@@ -60,13 +60,14 @@
         <div>
             <div class="qt-df qt-fd-c">
                 <div class="company-devices-table-device-name qt-ff-gm qt-df qt-ai-c">
-                    <app-company-devices-edit-label
+                    <span [textContent]="getLabelForEdit()"></span>
+                    <!-- <app-company-devices-edit-label
                         #editLabel
                         [field]="getLabelForEdit()"
                         [title]="'Name'"
                         class="company-device-edit-name"
                         (onChange)="onChangeName($event)"
-                    ></app-company-devices-edit-label>
+                    ></app-company-devices-edit-label> -->
                 </div>
                 <span
                     class="company-device-desc"
@@ -82,7 +83,10 @@
                 class="logged-name qt-ff-gm"
                 [textContent]="device.userName || ''"
             ></span>
-            <span class="logged-time">
+            <span
+                class="logged-time"
+                *ngIf="device.online && device.userName"
+            >
                 Idle:
                 <span *ngIf="device.timing.idle && returnTimeFormat(device.timing.idle).hours > 0">
                     {{returnTimeFormat(device.timing.idle).hours}} hrs
