@@ -32,7 +32,7 @@ export class WebsocketService {
 
   private serverUrl = '/realtime';
   private stompClient;
-  privae
+  private netScanSub;
 
   /**
    * Users api service constructor
@@ -393,11 +393,15 @@ export class WebsocketService {
 
   public subsribeToNetScan(companyId) {
     setTimeout(() => {
-      this.stompClient.subscribe(`/user/watch/netScan/${companyId}`, (message) => {
+      this.netScanSub = this.stompClient.subscribe(`/user/watch/netScan/${companyId}`, (message) => {
         var newChange = JSON.parse(message.body);
         this.devicesRealTimeService.handleRealTimeNetScan(newChange);
       });
     }, 3000);
+
+  }
+  public unSubsribeNetScan() {
+    this.netScanSub.unsubscribe();
   }
   public getClient() {
     return this.stompClient;

@@ -5,6 +5,7 @@ import { DisabledBtnDirective } from '../../directives/disabled-btn.directive';
 import { DevicesService } from '../../services/devices/devices.service';
 import { ApiPasswordManagerService } from '../../services/password-manager/api-password-manager.service';
 import { PermissionsService } from '../../services/permissions/permissions.service';
+import { WebsocketService } from '../../services/websocket/websocket.service';
 import { DevicesRealTimeService } from '../../states/devices/devices-real-time.service';
 import { DevicesStateService } from '../../states/devices/devices-state.service';
 import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
@@ -50,6 +51,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService,
     private companyNetworkScanService: CompanyNetworkScanService,
     private leftPanelStateService: LeftPanelStateService,
+    private websocketService: WebsocketService,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
@@ -222,5 +224,6 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
+    this.websocketService.unSubsribeNetScan();
   }
 }
