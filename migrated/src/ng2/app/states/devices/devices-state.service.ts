@@ -100,6 +100,12 @@ export class DevicesStateService {
       this.onInitGetDevices(this.allDevices);
     })
   }
+  public setLabel(companyId, id, label) {
+    this.allDevices[companyId].forEach(element => {
+      if (element.id === id) element.label = label;
+    });
+    this.onInitGetDevices(this.allDevices);
+  }
   public subsribeToNetScan(id) {
     this.websocketService.subsribeToNetScan(id);
   }

@@ -4,6 +4,7 @@ import * as moment from "moment";
 import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
 import { HardwareService } from '../../../device/_services/hardware.service';
 import { DatePickerComponent } from '../../../shared/date-picker/date-picker.component';
+import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.service';
 
 @Component({
   selector: 'app-company-devices-aside-system',
@@ -17,6 +18,7 @@ export class CompanyDevicesAsideSystemComponent implements OnInit {
   toggleWindowSpecifications: boolean = false;
   toggleDeviceSpecifications: boolean = false;
   constructor(private devicesService: DevicesService,
+    private devicesStateService: DevicesStateService,
     private hardwareService: HardwareService) { }
 
   ngOnInit() {
@@ -24,6 +26,7 @@ export class CompanyDevicesAsideSystemComponent implements OnInit {
   onChangeName(value) {
     this.devicesService.editAgentInfo(this.device.getDataForEditName(value)).subscribe(data => {
       this.device.setHostName(value);
+      this.devicesStateService.setLabel(this.device.companyId, this.device.id, value);
     })
   }
   getNetworkAdapterField(field) {
