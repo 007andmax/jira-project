@@ -72,7 +72,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnDevices);
     let getOnChangeInfoForDevice = this.devicesStateService.getOnChangeInfoForDevice().subscribe(data => {
-      if (data.masterAgentId != this.masterAgent.agentId) {
+      if (!this.masterAgent || data.masterAgentId != this.masterAgent.agentId) {
         this.selectAllDevices = false;
         this.networkScanSomeInfoForDevice = new NetworkScanSomeInfoForDevice(data);
         if (this.getPermissions('NETWORK_SCAN_CLIENTS')) this.findMasterAgent();
