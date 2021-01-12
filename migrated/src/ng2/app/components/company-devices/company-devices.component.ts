@@ -43,7 +43,8 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     }
     if (this.devices.length > 0) this.sendDeviceStatusRequest(this.companyId, this.devices.filter(item => item.agentId).map(item => item.agentId));
     let getOnDevices = this.devicesStateService.getOnDevices().subscribe(data => {
-      if (this.devices.length === 0) this.sendDeviceStatusRequest(this.companyId, data[this.companyId].filter(item => item.agentId).map(item => item.agentId));
+      //  if (this.devices.length === 0 && data[this.companyId]) this.sendDeviceStatusRequest(this.companyId, data[this.companyId].filter(item => item.agentId).map(item => item.agentId));
+      if (!data[this.companyId] && this.devices.length === 0) return;
       if (data[this.companyId].length > this.devices.length) {
         data[this.companyId].forEach(item => {
           let find = this.devices.find(device => device.id === item.id);
@@ -108,12 +109,14 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     this.sub.add(getConfirm);
     let getOnUpdateAgentActivityStatus = this.devicesStateService.getOnUpdateAgentActivityStatus().subscribe(newChange => {
       var isCurrentCompany = this.devicesStateService.getCompanyIdByAgentId(newChange.data.agentId) === this.companyId;
+      console.log("isCurrentCompany", isCurrentCompany);
       if (newChange.data && newChange.data.statuses && newChange.data.statuses.hasOwnProperty('Idle')) {
         if (isCurrentCompany) {
           for (var i = 0; i < this.devices.length; i++) {
             if (this.devices[i].agentId === newChange.data.agentId) {
               if (newChange.data.statuses.Idle) {
                 this.devices[i].timing.idle = this.devicesStateService.getMillisecondsFromTimeString(newChange.data.statuses.Idle);
+                console.log("this.devices[i].timing.idle", this.devices[i].timing.idle);
               } else {
                 this.devices[i].timing.idle = null;
               }
@@ -128,6 +131,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
               this.devices[i].timing.noRestart = this.devicesStateService.getMillisecondsFromTimeString(newChange.data.statuses.NoRestart);
               this.devices[i].timing.online = this.devicesStateService.getMillisecondsFromTimeString(newChange.data.statuses.Online);
               this.devices[i].timing.uptimeForOrdering = this.devicesStateService.getMillisecondsFromTimeString(newChange.data.statuses.Online);
+              console.log("this.devices[i].timing", this.devices[i].timing);
               break;
             }
           }

@@ -5,6 +5,7 @@ import { DisabledBtnDirective } from '../../directives/disabled-btn.directive';
 import { DevicesService } from '../../services/devices/devices.service';
 import { ApiPasswordManagerService } from '../../services/password-manager/api-password-manager.service';
 import { PermissionsService } from '../../services/permissions/permissions.service';
+import { WebsocketService } from '../../services/websocket/websocket.service';
 import { DevicesRealTimeService } from '../../states/devices/devices-real-time.service';
 import { DevicesStateService } from '../../states/devices/devices-state.service';
 import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
@@ -50,6 +51,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService,
     private companyNetworkScanService: CompanyNetworkScanService,
     private leftPanelStateService: LeftPanelStateService,
+    private websocketService: WebsocketService,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
@@ -59,20 +61,21 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     if (this.devicesStateService.getAllDevices()) {
       this.devices = (this.devicesStateService.getAllDevices()[this.companyId]) ? JSON.parse(JSON.stringify(this.devicesStateService.getAllDevices()[this.companyId])).map(item => new Device(item)) : [];
       this.companyNetworkScanService.onFilterName(this.devices);
-      this.getSomeInfoForDevices();
+      if (this.devices.length > 0) this.getSomeInfoForDevices();
       this.showPreloader = false;
       this.cd.detectChanges();
     }
     let getOnDevices = this.devicesStateService.getOnDevices().subscribe(data => {
       this.devices = (data[this.companyId]) ? JSON.parse(JSON.stringify(data[this.companyId])).map(item => new Device(item)) : [];
       this.companyNetworkScanService.onFilterName(this.devices);
-      if (!this.isGetDevices) this.getSomeInfoForDevices();
+      console.log("this.devices", this.devices);
+      if (this.devices.length > 0 && !this.isGetDevices) this.getSomeInfoForDevices();
       this.cd.detectChanges();
       this.showPreloader = false;
     })
     this.sub.add(getOnDevices);
     let getOnChangeInfoForDevice = this.devicesStateService.getOnChangeInfoForDevice().subscribe(data => {
-      if (data.masterAgentId != this.masterAgent.agentId) {
+      if (!this.masterAgent || data.masterAgentId != this.masterAgent.agentId) {
         this.selectAllDevices = false;
         this.networkScanSomeInfoForDevice = new NetworkScanSomeInfoForDevice(data);
         if (this.getPermissions('NETWORK_SCAN_CLIENTS')) this.findMasterAgent();
@@ -196,6 +199,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     this.networkScanStateService.openAside();
   }
   getSomeInfoForDevices() {
+    console.log("getSomeInfoForDevices");
     this.isGetDevices = true;
     this.devicesService.getSomeInfoForDevices(this.companyId).subscribe(data => {
       this.networkScanSomeInfoForDevice = new NetworkScanSomeInfoForDevice(data);
@@ -215,6 +219,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
         1 : ((new Date(b.createdAt) > new Date(a.createdAt)) ? -1 : 0));
       this.masterAgent = agentsSortedByCreatedAtDate[0];
     }
+    console.log("this.masterAgent", this.masterAgent);
     if (this.getPermissions('NETWORK_SCAN_CLIENTS')) this.getLastScanDevices();
   }
   public trackById(index, item) {
@@ -222,5 +227,6 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
+    this.websocketService.unSubsribeNetScan();
   }
 }
