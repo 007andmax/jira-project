@@ -8,6 +8,7 @@ import * as moment from "moment";
 import { Device } from '../../components/company-devices/class/device';
 import { DeviceCompany } from '../../components/company-devices/class/device-company';
 import { WebsocketService } from '../../services/websocket/websocket.service';
+import { DeviceStatus } from './class/device-status';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,7 @@ export class DevicesStateService {
   onRemoveConnecion: EventEmitter<any> = new EventEmitter();
   onChangeInfoForDevice: EventEmitter<any> = new EventEmitter();
   onClosedRemoveConnecion: EventEmitter<any> = new EventEmitter();
+  onSendDeviceStatus: EventEmitter<any> = new EventEmitter();
   onLaunchRemoteApp: EventEmitter<any> = new EventEmitter();
   // onChangeDevices: EventEmitter<DeviceUpdate> = new EventEmitter();
   constructor(private userStateService: UsersStateService,
@@ -93,14 +95,16 @@ export class DevicesStateService {
         } else {
           this.allDevices[newChange.data.clientCompanyId].push(new Device(parsedData.device));
         }
-        this.devicesService.sendDeviceStatusRequest(newChange.data.clientCompanyId, [parsedData.device.agentId], ["idle", "norestart", "online"]).subscribe(res => {
-        })
+        this.onSendDeviceStatus.emit(new DeviceStatus(newChange.data.clientCompanyId, [parsedData.device.agentId], ["idle", "norestart", "online"]));
       }
       this.onInitGetDevices(this.allDevices);
     })
   }
   public subsribeToNetScan(id) {
     this.websocketService.subsribeToNetScan(id);
+  }
+  public getOnSendDeviceStatus() {
+    return this.onSendDeviceStatus;
   }
   public getOnChangeInfoForDevice() {
     return this.onChangeInfoForDevice;

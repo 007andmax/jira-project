@@ -3,6 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { REBOOT_DEVICE, REMOVE_DEVICES, SHUTDOWN_DEVICE } from '../../const/confirm';
 import { DevicesService } from '../../services/devices/devices.service';
+import { DeviceStatus } from '../../states/devices/class/device-status';
 import { DevicesRealTimeService } from '../../states/devices/devices-real-time.service';
 import { DevicesStateService } from '../../states/devices/devices-state.service';
 import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
@@ -153,6 +154,11 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getOnResetDeviceTiming);
+    let getOnSendDeviceStatus = this.devicesStateService.getOnSendDeviceStatus().subscribe((data: DeviceStatus) => {
+      if (this.companyId === data.companyId) this.devicesService.sendDeviceStatusRequest(data.companyId, data.agentIds, data.actions).subscribe(res => {
+      })
+    })
+    this.sub.add(getOnSendDeviceStatus);
   }
   public onFilter(field) {
     this.filter.onFilter(field, this.devices)
