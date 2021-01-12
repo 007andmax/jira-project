@@ -58,7 +58,7 @@
             Products
         </div>
         <div
-            *ngIf="getPermissions('VIEW_SERVICE_AGREEMENTS') && selectedCompany.clientType !== 'LEAD' && selectedCompany.clientType !== 'VENDOR'"
+            *ngIf="getPermissions('VIEW_SERVICE_AGREEMENTS') && selectedCompany &&  selectedCompany.clientType !== 'LEAD' && selectedCompany.clientType !== 'VENDOR'"
             class="center-category__category"
             [ngClass]="{'active':activePage === 'company-contracts'}"
             (click)="goToState('company-contracts')"
