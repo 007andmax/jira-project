@@ -62,7 +62,7 @@
     <td
         class="invoce-table__menu"
         ngbDropdown
-        [placement]="'left-top'"
+        [container]="'body'"
     >
         <div
             class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"
@@ -117,7 +117,6 @@
                     <div class="icon__remove qt-bg-contain qt-sz-16 qt-mr-8"></div>
                     Rollback
                 </li>
-                <!-- <li class="pointer" ngbDropdownItem (click)="deleteInvoice()"> <div class="icon__remove qt-sz-16 qt-mr-8"></div> Delete</li> -->
                 <li
                     ngbDropdownItem
                     class="payment-menu-item"
@@ -133,7 +132,7 @@
                             >
                                 <div class="col-md-12">
                                     <div
-                                        class="col-md-4"
+                                        class="col-md-5"
                                         [textContent]="payment.createdAt"
                                     >
                                     </div>
@@ -143,17 +142,17 @@
                                     >
                                     </div>
                                     <div
-                                        class="col-md-4"
+                                        class="col-md-3"
                                         [textContent]="(payment.partialPaidAmount || paymentSum) | currency"
                                     >
                                     </div>
                                 </div>
                             </ng-template>
                             <div class="col-md-12">
-                                <div class="col-md-4"></div>
+                                <div class="col-md-5"></div>
                                 <div class="col-md-4">Total payment:</div>
                                 <div
-                                    class="col-md-4"
+                                    class="col-md-3"
                                     [textContent]="(allPaymentsSum || invoice.payment && invoice.payment.totalSum || invoice.sum) | currency"
                                 >
                                 </div>

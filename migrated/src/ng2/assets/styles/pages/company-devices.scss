@@ -560,3 +560,11 @@
 app-company-devices-edit-label {
   display: contents;
 }
+
+table.qt-table-modern.company-devices-table tbody tr.--ofline td {
+  vertical-align: middle;
+  .company-devices-table__system-network-buttons,
+  .company-devices-table__ip-address-buttons {
+    top: 11px !important;
+  }
+}
