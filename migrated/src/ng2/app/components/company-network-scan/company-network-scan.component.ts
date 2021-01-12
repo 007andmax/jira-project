@@ -61,7 +61,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     if (this.devicesStateService.getAllDevices()) {
       this.devices = (this.devicesStateService.getAllDevices()[this.companyId]) ? JSON.parse(JSON.stringify(this.devicesStateService.getAllDevices()[this.companyId])).map(item => new Device(item)) : [];
       this.companyNetworkScanService.onFilterName(this.devices);
-      this.getSomeInfoForDevices();
+      if (this.devices.length > 0) this.getSomeInfoForDevices();
       this.showPreloader = false;
       this.cd.detectChanges();
     }
@@ -69,7 +69,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
       this.devices = (data[this.companyId]) ? JSON.parse(JSON.stringify(data[this.companyId])).map(item => new Device(item)) : [];
       this.companyNetworkScanService.onFilterName(this.devices);
       console.log("this.devices", this.devices);
-      if (!this.isGetDevices) this.getSomeInfoForDevices();
+      if (this.devices.length > 0 && !this.isGetDevices) this.getSomeInfoForDevices();
       this.cd.detectChanges();
       this.showPreloader = false;
     })
