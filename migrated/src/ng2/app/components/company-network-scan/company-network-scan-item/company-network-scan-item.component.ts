@@ -38,7 +38,7 @@ export class CompanyNetworkScanItemComponent implements OnInit {
     return (value === "unknown") ? null : value;
   }
   getLabel() {
-    return `${(this.checkUnknown(this.device.description) || this.checkUnknown(this.device.hostName) || this.checkUnknown(this.device.ipAddress))} ${(this.device.deviceId === this.masterAgent.id ? '(MASTER AGENT)' : '')}`;
+    return `${(this.checkUnknown(this.device.description) || this.checkUnknown(this.device.hostName) || this.checkUnknown(this.device.ipAddress))} ${(this.masterAgent && this.device.deviceId === this.masterAgent.id ? '(MASTER AGENT)' : '')}`;
   }
   onChangeName(data) {
     this.devicesService.sendDescription(this.companyId, this.device.id, data).subscribe(res => {

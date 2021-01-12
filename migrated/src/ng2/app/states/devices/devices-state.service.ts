@@ -47,7 +47,7 @@ export class DevicesStateService {
     })
     this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
       if (newChange.action === 'SOME_INFO_FOR_DEVICES') {
-        this.allDevices[newChange.data.clientCompanyId].forEach(item => {
+        if (this.allDevices[newChange.data.clientCompanyId]) this.allDevices[newChange.data.clientCompanyId].forEach(item => {
           if (item.agentId === newChange.data.masterAgentId) item.master = true;
           if (item.agentId !== newChange.data.masterAgentId) item.master = false;
         });
