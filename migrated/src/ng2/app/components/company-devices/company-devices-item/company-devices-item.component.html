@@ -1,4 +1,4 @@
-<tr [ngClass]="{'company-device-hover':device.agentId}">
+<tr [ngClass]="{'company-device-hover':device.agentId, '--ofline': !device.online}">
     <td class="company-devices-table__check">
         <div class="d-f">
             <label class="qt-checkbox">

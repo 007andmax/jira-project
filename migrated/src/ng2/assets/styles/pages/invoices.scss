@@ -405,24 +405,25 @@
       background-image: none;
     }
   }
+}
 
-  .invoice-items-dropdown {
-    .payment-info-submenu {
-      display: none;
-    }
-    .payment-menu-item {
-      &:hover {
-        .payment-info-submenu {
-          display: block;
-        }
+.invoice-items-dropdown {
+  overflow: visible !important;
+  .payment-info-submenu {
+    display: none;
+  }
+  .payment-menu-item {
+    &:hover {
+      .payment-info-submenu {
+        display: block;
       }
     }
-    overflow: visible;
-    .payment-info-submenu {
-      position: absolute;
-      right: 100%;
-      top: 0;
-    }
+  }
+  overflow: visible;
+  .payment-info-submenu {
+    position: absolute;
+    right: 100%;
+    top: 0;
   }
 }
 
