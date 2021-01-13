@@ -2,9 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitt
 import { CompanyTagsStateService } from './states/company-tags-state.service';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { FormControl } from '@angular/forms';
-
 import { Subscription } from 'rxjs';
-import { MatChipInputEvent } from '@angular/material';
 import { Tag } from 'src/ng2/app/interfaces/tag/tag';
 import { TagsService } from 'src/ng2/app/services/tags/tags.service';
 
@@ -14,7 +12,6 @@ import { TagsService } from 'src/ng2/app/services/tags/tags.service';
   styleUrls: ['./company-tags.component.scss']
 })
 export class CompanyTagsComponent implements OnInit, OnDestroy {
-
   visible = true;
   selectable = true;
   removable = true;
@@ -31,7 +28,6 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
   @Input() blockCreateTag: boolean = false;
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @Output() tagsChange = new EventEmitter();
-
   /**
    * Creates an instance of the TagsComponent with the injected services
    * @param {TagsService} tagsService Service to work with tags
@@ -47,23 +43,20 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-   let getTags =  this.tagsService.geCompanytTags().subscribe((data) => {
+    let getTags = this.tagsService.geCompanytTags().subscribe((data) => {
       this.tags = data.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
-      1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
+        1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
       this.reqTags = data.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
-      1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
+        1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
     })
     this.sub.add(getTags);
     this.onInitClearState();
     this.onCheckEditItem();
   }
 
-
   onSearch(event) {
-
     this.tags = this.reqTags.filter(item => item.word.includes(event.target.value));
   }
-
 
   /**
   * Subscribe for edit mode
@@ -83,18 +76,15 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
     this.sub.add(getClearState);
   }
 
-  onKeyUp (event) {
-
+  onKeyUp(event) {
     if (event.keyCode === 13) {
       const input = event.target.input;
       const value = event.target.value;
-
       if ((value || '').trim()) {
         let tag: Tag = {
           colorCode: 0, usedCounter: 0, word: value.trim(), id: ''
         }
-
-        let setTags =  this.tagsService.setCompanyTags(tag.word).subscribe((res) => {
+        let setTags = this.tagsService.setCompanyTags(tag.word).subscribe((res) => {
           tag.id = res.id;
           this.reqTags.push(tag);
           this.tags = this.reqTags;
@@ -107,9 +97,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
         });
         this.sub.add(setTags);
       }
-
     }
-
   }
 
   /**
@@ -122,7 +110,6 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
       this.tagsChange.emit(this.selectedTag);
       this.cd.detectChanges();
     }
-
   }
 
   /**

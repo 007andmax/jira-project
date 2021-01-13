@@ -15,8 +15,6 @@ import { CompanyCalculateCount } from './class/company-calculate-count';
 import { CompaniesRealTimeService } from '../../states/company/companies-real-time.service';
 import { CompanyUpdate } from './class/company-update';
 import { ARCHIVE_COMPANY, DEARCHIVE_COMPANY } from '../../const/confirm';
-import { AppService } from '../../states/app/app.service';
-import { DeviceUpdate } from '../../states/devices/class/device-update';
 import { DraftEmailStateService } from '../../states/draft-email/draft-email-state.service';
 
 @Component({
@@ -26,7 +24,6 @@ import { DraftEmailStateService } from '../../states/draft-email/draft-email-sta
   providers: [CompaniesListService]
 })
 export class CompaniesComponent implements OnInit, OnDestroy {
-
   CompaniesList: Array<Company> = [];
   reqCompaniesList: Array<Company> = [];
   showPreloader: boolean = true;
@@ -72,11 +69,9 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.sub.add(getOnShowArchived);
     if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
-
       this.getClientsList(data);
     })
     this.sub.add(getOnCompanies);
-
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === ARCHIVE_COMPANY) {
@@ -88,40 +83,31 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
-
     if (this.devicesState.getAllDevices()) this.devices = this.devicesState.getAllDevices();
     let getOnDevices = this.devicesState.getOnDevices().subscribe((data) => {
-
       this.devices = data;
     })
     this.sub.add(getOnDevices);
-
     if (this.usersStateService.getAllUsers().length > 0) this.users = this.usersStateService.getAllUsers();
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.users = data;
     })
     this.sub.add(getOnUsers);
-
     let geLefttFilter = this.leftPanelStateService.getOnFilter().subscribe((data) => {
       window.scrollTo(0, 0);
       this.left_filter = data;
       this.setDefaultScoll();
       this.onScroll();
       this.onInirCalculate();
-
     })
     this.sub.add(geLefttFilter);
-
     let getChangeCompanies = this.companiesStateService.getChangeCompanies().subscribe((data: CompanyUpdate) => {
-
       if (data.action === 'COMPANY_SAVED' || data.action === 'COMPANY_ARCHIVED') {
-
         const reqIndex = this.reqCompaniesList.findIndex((item) => item.id === data.data.id);
         if (reqIndex > -1) this.reqCompaniesList[reqIndex] = data.data;
         if (reqIndex === -1) {
           this.reqCompaniesList.unshift(data.data);
           this.CompaniesList.unshift(data.data);
-          // this.onRelaodList();
         }
         const companyIndex = this.CompaniesList.findIndex((item) => item.id === data.data.id);
         if (companyIndex > -1) this.CompaniesList[companyIndex] = data.data;
@@ -134,26 +120,14 @@ export class CompaniesComponent implements OnInit, OnDestroy {
           if (companyIndex > -1) this.CompaniesList.splice(companyIndex, 1);
         }
       }
-
     })
     this.sub.add(getChangeCompanies);
-
-    /*  let getChangeDevices = this.devicesState.getChangeDevices().subscribe((data: DeviceUpdate) => {
-        if (data.action === 'DEVICE_UNINSTALLED' || data.action === 'DEVICE_INSTALLED') {
-        
-          const reqIndex = this.reqCompaniesList.findIndex((item) => item.id === data.data.id);
-          if (reqIndex > -1) this.reqCompaniesList[reqIndex] = data.data;
-          
-        }
-  
-      });*/
   }
   onSelectAllCompanies(event) {
     if (event.target.checked) {
       let list_company_table = document.body.querySelectorAll('app-companies-table');
       list_company_table.forEach(item => {
         (<any>item.querySelector('input[type="checkbox"]')).checked = true;
-
       });
       this.draftEmailStateService.resetSelectedCompanies();
       this.CompaniesList.forEach(user => {
@@ -164,41 +138,23 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       let list_company_table = document.body.querySelectorAll('app-companies-table');
       list_company_table.forEach(item => {
         (<any>item.querySelector('input[type="checkbox"]')).checked = false;
-
       });
     }
   }
   showMobileFilter() {
     document.body.querySelector('app-left-panel-companies').classList.add('show');
   }
-  /* private onRelaodList() {
-   
-     let listFilter = this.left_filter.getFilterList(this.reqCompaniesList);
-     let start = 0;
-     let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;
-     let CompaniesList = [];
-     for (let i = start; i < end; i++) {
-       CompaniesList.push(listFilter[i]);
-     }
-     this.CompaniesList = CompaniesList;
-     this.infiniteScrollDisabled = false;
-     if ((this.page_number * 30) > listFilter.length) this.companiesList.setBlockList(true);
-   
-   }*/
   public onFilterTags(tags) {
-
     if (tags.length > 0) {
       let getClientsByTags = this.companiesService.getClientsByTags(tags).subscribe(data => {
         this.showPreloader = true;
         this.setDefaultScoll();
         this.getClientsList(data);
-
       })
       this.sub.add(getClientsByTags);
     } else {
       this.setDefaultScoll();
       this.getClientsList(this.companiesStateService.getCompanies());
-
     }
     this.cd.detectChanges();
   }
@@ -208,7 +164,6 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   }
   private getClientsList(data) {
     this.reqCompaniesList = data.filter(item => item.accountType === 'CLIENT' && ((!this.showArchivedCompanies) ? !item.deletedAt : item.deletedAt));
-
     this.onInirCalculate();
     this.reqCompaniesList.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
@@ -231,12 +186,9 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.CompaniesList = [...this.CompaniesList, ...CompaniesList];
     this.infiniteScrollDisabled = false;
     if ((this.page_number * 30) > listFilter.length) this.companiesList.setBlockList(true);
-
-
   }
 
   onFilter(field) {
-
     let index = this.filter.findIndex(item => item.field === field);
     if (index > -1) {
       let sort = this.filter[index].filter;
@@ -249,22 +201,16 @@ export class CompaniesComponent implements OnInit, OnDestroy {
           this.filter[index].filter = 'DESC';
           this.reqCompaniesList.reverse();
         }
-
       }
       if (field === 'address') {
         this.clearFilter();
         if (sort === '' || sort === 'DESC') {
-
           this.filter[index].filter = 'ASC';
           this.onFilterAdress();
-
         } else {
-
           this.filter[index].filter = 'DESC';
           this.reqCompaniesList.reverse();
         }
-
-
       }
       if (field === 'primary_contact') {
         this.clearFilter();
@@ -275,10 +221,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
           this.filter[index].filter = 'DESC';
           this.reqCompaniesList.reverse();
         }
-
-
       }
-
       if (field === 'email') {
         this.clearFilter();
         if (sort === '' || sort === 'DESC') {
@@ -288,8 +231,6 @@ export class CompaniesComponent implements OnInit, OnDestroy {
           this.filter[index].filter = 'DESC';
           this.reqCompaniesList.reverse();
         }
-
-
       }
       if (field === 'tickets') {
         this.clearFilter();
@@ -300,21 +241,16 @@ export class CompaniesComponent implements OnInit, OnDestroy {
           this.filter[index].filter = 'DESC';
           this.reqCompaniesList.reverse();
         }
-
-
       }
       if (field === 'devices') {
         this.clearFilter();
         if (sort === '' || sort === 'DESC') {
           this.filter[index].filter = 'ASC';
           this.onFilterDevices();
-
         } else {
           this.filter[index].filter = 'DESC';
           this.reqCompaniesList.reverse();
         }
-
-
       }
       if (field === 'users') {
         this.clearFilter();
@@ -325,10 +261,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
           this.filter[index].filter = 'DESC';
           this.reqCompaniesList.reverse();
         }
-
-
       }
-
       this.page_number = 0;
       this.companiesList.setBlockList(false);
       this.CompaniesList = [];
@@ -390,7 +323,6 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   }
   private getPrimaryPhone(company) {
     let primaryContact;
-
     if (company.companyInfo) {
       if (company.companyInfo.contacts) {
         for (let contact of company.companyInfo.contacts) {
@@ -398,23 +330,18 @@ export class CompaniesComponent implements OnInit, OnDestroy {
         }
       }
     }
-
     return `${primaryContact.firstName} ${primaryContact.lastName}`;
   }
 
   private getEmail(company) {
     let primaryContact;
-
     if (company.companyInfo) {
       if (company.companyInfo.contacts) {
         for (let contact of company.companyInfo.contacts) {
           if (!primaryContact || contact.priority > primaryContact.priority) primaryContact = contact;
         }
       }
-
-
     }
-
     return primaryContact.primaryEmail;
   }
   public setDefaultScoll() {
@@ -430,9 +357,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.sub.add(deArchive);
   }
   public onArchiveCompany(id) {
-
     let archiveCompany = this.companiesService.archiveCompany(id).subscribe(data => {
-
       let index = this.CompaniesList.findIndex(item => item.id === id);
       if (index > -1) this.CompaniesList.splice(index, 1);
     })
@@ -441,7 +366,6 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   public onScroll() {
     this.infiniteScrollDisabled = true;
     this.getCompanies();
-
   }
 
   public trackById(index, item) {

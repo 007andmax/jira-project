@@ -1,11 +1,8 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { ProductSalesReport } from '../../reports/class/product-sales-report';
 import * as moment from "moment";
 import { ProductCompanyReport } from '../../reports/class/product-company-report';
-import { iterateListLike } from '@angular/core/src/change_detection/change_detection_util';
 import { CompanyproductsFilter } from './class/company-products-filter';
 import { PermissionsService } from 'src/ng2/app/services/permissions/permissions.service';
-import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { ReportsStateService } from 'src/ng2/app/states/reports/reports-state.service';
 import { LeftPanelStateService } from 'src/ng2/app/states/left-panel/left-panel-state.service';
 @Component({
@@ -43,7 +40,6 @@ export class CompanyProductsComponent implements OnInit {
         this.salesPriceSum += item.salePrice;
       }
     })
-
   }
   /**
    * getPermission
@@ -69,7 +65,6 @@ export class CompanyProductsComponent implements OnInit {
   }
   onSelectedClient(client) {
     this.selectedClient = client;
-
   }
   public onFilter(field) {
     this.filter.onFilter(field, this.productsCompanyReport.lines);

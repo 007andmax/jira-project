@@ -23,7 +23,6 @@ import { DraftEmailStateService } from 'src/ng2/app/states/draft-email/draft-ema
   styleUrls: ['./companies-table.component.scss']
 })
 export class CompaniesTableComponent implements OnInit, OnDestroy {
-
   @Input() company: Company;
   @Input() public showArchivedCompanies: boolean = false;
   public primaryContact: CompanyAndressContact;
@@ -33,7 +32,6 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
   public countUsers: number = 0;
   public countDevices: number = 0;
   IS_MOBILE: boolean = false;
-
   sub: Subscription = new Subscription();
   constructor(private usersStateService: UsersStateService,
     private companiesStateService: CompaniesStateService,
@@ -47,37 +45,29 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     private elRef: ElementRef) { }
 
   ngOnInit() {
-    /*  this.companiesStateService.getOnShowArchived().subscribe(data => {
-        this.showArchivedCompanies = data;
-      })*/
     if (this.usersStateService.getAllUsers().length > 0) this.onGetUsersCount(this.usersStateService.getAllUsers());
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.showArchivedCompanies = false;
       this.onGetUsersCount(data);
     })
     this.sub.add(getOnUsers);
-
     if (this.devicesState.getAllDevices()) this.onGetDevicesCount(this.devicesState.getAllDevices());
     let getOnDevices = this.devicesState.getOnDevices().subscribe((data) => {
       this.showArchivedCompanies = false;
-
       this.onGetDevicesCount(data);
     })
     this.sub.add(getOnDevices);
-
     this.IS_MOBILE = this.appService.checkMobile();
     let getOnMobile = this.appService.getOnMobile().subscribe(data => {
       this.IS_MOBILE = data;
     })
     this.sub.add(getOnMobile);
-
   }
   ngDoCheck() {
     if (this.company) {
       let primaryContact,
         primaryAddress,
         primaryPhone;
-
       if (this.company.companyInfo) {
         if (this.company.companyInfo.contacts) {
           for (let contact of this.company.companyInfo.contacts) {
@@ -94,7 +84,6 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
       this.primaryContact = primaryContact;
       this.primaryAddress = primaryAddress;
       this.primaryPhone = primaryPhone;
-
       if (primaryAddress) {
         this.location = primaryAddress.addressWithSuitNumberAndPostalCode;
       } else {
@@ -107,13 +96,10 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
   }
 
   goToDashboard() {
-
     localStorage.setItem("company_id", this.company.id);
-    //  window.location.href = `#/tickets/user`;
     let body = document.querySelector('.left-panel__category-wrap');
     var link = document.createElement('a');
     body.appendChild(link);
-    // link.href = `#/clients/companyProfile/${this.company.id}?tabName=dashboard`;
     link.href = `#/ng2/company/dashboard/${this.company.id}`
     var e = document.createEvent('MouseEvents');
     e.initEvent('click', true, true);
@@ -134,18 +120,14 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     return `${this.primaryContact.firstName} ${this.primaryContact.lastName}`;
   };
   downloadAgent() {
-
     this.downloadAgentStateService.setCompnay(this.company);
     const modalRef = this.modalService.open(DownloadAgentComponent, { windowClass: 'download-modal' });
-
   }
   edit() {
     let getCompany = this.companiesService.getCompany(this.company.id).subscribe((data: CompanyProfile) => {
-
       this.companiesStateService.setEditCompany(data);
     })
     this.sub.add(getCompany);
-
   }
   remove() {
     this.confirmStateService.setConfirmAction(ARCHIVE_COMPANY);
@@ -154,14 +136,10 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     this.companiesStateService.setCompnayForArchive(this.company);
   }
   private onGetDevicesCount(data) {
-
     let devices = data;
-
     this.countDevices = (devices && devices[this.company.id]) ? devices[this.company.id].length : 0;
-
   }
   private onGetUsersCount(data) {
-
     let users = data;
     this.countUsers = users.filter((user) => {
       var isArchived = user.deletedAt || this.company.deletedAt;
@@ -170,7 +148,6 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
   }
 
   onSelectCompany(event) {
-
     if (event.target.checked) {
       this.draftEmailStateService.addSelectedCompany(this.company);
     } else {
@@ -178,7 +155,6 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
       let index = list.findIndex(item => item.id === this.company.id);
       if (index > -1) this.draftEmailStateService.removeSelectedCompany(index);
     }
-
   }
   onRestore() {
     this.confirmStateService.setConfirmAction(DEARCHIVE_COMPANY);

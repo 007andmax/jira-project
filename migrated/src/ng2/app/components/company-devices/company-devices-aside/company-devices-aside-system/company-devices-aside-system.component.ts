@@ -28,14 +28,11 @@ export class CompanyDevicesAsideSystemComponent implements OnInit {
   ngOnInit() {
   }
   onChangeName(value) {
-    console.log("value", value);
     this.devicesService.editAgentInfo(this.device.getDataForEditName((value.length > 0) ? value : this.device.hostName || this.device.ip)).subscribe(data => {
       this.device.setLabel((value.length > 0) ? value : null);
-      // this.device.setLabel((value.length > 0) ? data : null);
       this.editLabel.setValue((value.length > 0) ? value : this.device.hostName || this.device.ip);
       this.cd.detectChanges();
       this.devicesStateService.setLabel(this.device.companyId, this.device.id, value);
-      console.log("this.device", this.device);
     })
   }
   getLabelForEdit() {

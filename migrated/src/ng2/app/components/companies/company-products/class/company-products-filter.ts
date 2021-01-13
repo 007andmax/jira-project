@@ -9,7 +9,7 @@ export class CompanyproductsFilter {
     new FilterListTop('invoiceNumber', ''),
     new FilterListTop('purchaseCost', ''),
     new FilterListTop('salePrice', '')];
-  
+
     constructor() { }
 
     public clearFilter() {
@@ -17,7 +17,7 @@ export class CompanyproductsFilter {
     }
     public onFilterList(lines) {
         lines.sort((a, b) => (b.date.toLowerCase() > a.date.toLowerCase()) ?
-        1 : ((a.date.toLowerCase() > b.date.toLowerCase()) ? -1 : 0));
+            1 : ((a.date.toLowerCase() > b.date.toLowerCase()) ? -1 : 0));
     }
     public onFilter(field, lines) {
         let index = this.filterTop.findIndex(item => item.field === field);
@@ -32,22 +32,16 @@ export class CompanyproductsFilter {
                     this.filterTop[index].filter = 'DESC';
                     lines.reverse();
                 }
-
             }
             if (field === 'client') {
                 this.clearFilter();
                 if (sort === '' || sort === 'DESC') {
-
                     this.filterTop[index].filter = 'ASC';
                     this.onFilterClients(lines);
-
                 } else {
-
                     this.filterTop[index].filter = 'DESC';
                     lines.reverse();
                 }
-
-
             }
             if (field === 'mfg') {
                 this.clearFilter();
@@ -58,11 +52,7 @@ export class CompanyproductsFilter {
                     this.filterTop[index].filter = 'DESC';
                     lines.reverse();
                 }
-
-
             }
-
-           
             if (field === 'description') {
                 this.clearFilter();
                 if (sort === '' || sort === 'DESC') {
@@ -115,14 +105,14 @@ export class CompanyproductsFilter {
             }
         }
     }
-   
-    private onFilterPurchaseCost (reqUsers) {
+
+    private onFilterPurchaseCost(reqUsers) {
         reqUsers.sort((a, b) => ((a.purchaseCost || 0) > (b.purchaseCost || 0)) ?
-        1 : (((b.purchaseCost || 0) > (a.purchaseCost || 0)) ? -1 : 0));
+            1 : (((b.purchaseCost || 0) > (a.purchaseCost || 0)) ? -1 : 0));
     }
-    private onFilterSalePrice (reqUsers) {
+    private onFilterSalePrice(reqUsers) {
         reqUsers.sort((a, b) => ((a.salePrice || 0) > (b.salePrice || 0)) ?
-        1 : (((b.salePrice || 0) > (a.salePrice || 0)) ? -1 : 0));
+            1 : (((b.salePrice || 0) > (a.salePrice || 0)) ? -1 : 0));
     }
 
     private onFilterInvoiceNumber(lines) {
@@ -149,5 +139,5 @@ export class CompanyproductsFilter {
         lines.sort((a, b) => (a.date.toLowerCase() > b.date.toLowerCase()) ?
             1 : ((b.date.toLowerCase() > a.date.toLowerCase()) ? -1 : 0));
     }
-    
+
 }

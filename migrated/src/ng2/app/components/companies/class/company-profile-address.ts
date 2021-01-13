@@ -3,10 +3,10 @@ import { CompanyProfileContact } from './company-profile-contact';
 export class CompanyProfileAddress {
     isPrimary: boolean;
     address: string;
-    addressWithSuitNumberAndPostalCode:string;
-    countryCode:string;
-    locationLat:number;
-    locationLng:number;
+    addressWithSuitNumberAndPostalCode: string;
+    countryCode: string;
+    locationLat: number;
+    locationLng: number;
     fromGoogle: boolean;
     postalCode: string;
     suiteNumber: string;
@@ -23,7 +23,7 @@ export class CompanyProfileAddress {
         this.address = '';
         this.fromGoogle = false;
         this.isPrimary = true;
-       
+
         this.postalCode = '';
         this.suiteNumber = '';
         this.locale = '';
@@ -34,6 +34,5 @@ export class CompanyProfileAddress {
     }
     public shortVersion(contact: CompanyProfileContact) {
         this.isPrimary = true;
-       // this.phoneNumbers = contact.phoneNumbers;
     }
 }

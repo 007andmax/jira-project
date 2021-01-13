@@ -1,12 +1,10 @@
 import { Component, OnInit, ElementRef, Input, Output, EventEmitter, ViewChild, ChangeDetectorRef, OnDestroy } from '@angular/core';
-
 import { CompanyProfile } from '../class/company-profile';
 import { CompaniesService } from 'src/ng2/app/services/company/companies.service';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { CompanySubscription } from '../class/company-subscription';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ImageCropperComponent } from '../../shared/image-cropper/image-cropper.component';
 import { ImageCropperStateService } from 'src/ng2/app/states/image-cropper/image-cropper-state.service';
 import { CompanySetting } from '../class/company-setting';
 import { CompanyValdiate } from '../class/company-validate';
@@ -22,8 +20,6 @@ import { CompanySubscriptionStateService } from '../company-subscription/class/c
   styleUrls: ['./company-add-aside.component.scss']
 })
 export class CompanyAddAsideComponent implements OnInit, OnDestroy {
-
-
   opened = false;
   company: CompanyProfile = new CompanyProfile();
   industries: Array<string> = [];
@@ -55,9 +51,7 @@ export class CompanyAddAsideComponent implements OnInit, OnDestroy {
     private modalImageCropperStateService: ModalImageCropperStateService) { }
 
   ngOnInit() {
-
     this.onShowAside();
-    //this.getIndustries();
     this.industries = this.companiesStateService.getIndustries();
     if (this.usersStateService.getAllUsers().length > 0) {
       this.getTehusers(this.usersStateService.getAllUsers());
@@ -68,8 +62,6 @@ export class CompanyAddAsideComponent implements OnInit, OnDestroy {
       this.getUsersTitle(data);
     })
     this.sub.add(getOnUsers);
-
-
     this.onCroppImage();
   }
   getUsersTitle(allUsers) {
@@ -81,11 +73,9 @@ export class CompanyAddAsideComponent implements OnInit, OnDestroy {
         let index = acc.findIndex((el) => {
           return (el || '').toLowerCase() === (title || '').toLowerCase();
         })
-
         if (index === -1 && title) {
           acc.push(title);
         }
-
         return acc;
       }, []).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
         1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
@@ -93,7 +83,6 @@ export class CompanyAddAsideComponent implements OnInit, OnDestroy {
   }
   onSelectDesignation(data) {
     this.company.contacts[0].designation = data;
-
   }
   private getPlaceAutocomplete() {
     this.locationIsinit = true;
@@ -110,7 +99,6 @@ export class CompanyAddAsideComponent implements OnInit, OnDestroy {
   }
 
   invokeEvent(place: any) {
-
     this.company.addresses[0].locationLat = place.geometry.location.lat();
     this.company.addresses[0].locationLng = place.geometry.location.lng();
     this.company.addresses[0].address = this.addresstext.nativeElement.value;
@@ -124,7 +112,6 @@ export class CompanyAddAsideComponent implements OnInit, OnDestroy {
       }
       this.cd.detectChanges();
     })
-
   }
   close() {
     this.opened = false;
@@ -135,10 +122,8 @@ export class CompanyAddAsideComponent implements OnInit, OnDestroy {
     this.paymentTerms.forEach(item => item.selected = false);
     this.serviceTypes.forEach(item => item.selected = false);
     this.subscriptions.forEach(item => item.selected = false);
-    //  this.listPersons.forEach(item => item.selected = false);
     this.validate = new CompanyValdiate();
     this.cd.detectChanges();
-
   }
   public onSelectTechLead(event) {
     if (event) {
@@ -146,9 +131,6 @@ export class CompanyAddAsideComponent implements OnInit, OnDestroy {
     } else {
       this.company.techLeadId = null;
     }
-    //this.listPersons.forEach(item => item.selected = false);
-    //  this.listPersons[index].selected = true;
-
   }
   public onSelectPaymentTerms(index) {
     this.paymentTerms.forEach(item => item.selected = false);
@@ -167,9 +149,7 @@ export class CompanyAddAsideComponent implements OnInit, OnDestroy {
   }
   onAddShort() {
     if (!this.validate.isValidate(this.company)) return;
-
     let createCompany = this.companiesService.createCompany(this.company).subscribe(data => {
-
       this.close();
     })
     this.sub.add(createCompany);
@@ -177,18 +157,14 @@ export class CompanyAddAsideComponent implements OnInit, OnDestroy {
   public onShowAside() {
     let getShowAsideForAdd = this.companiesStateService.getShowAsideForAdd().subscribe(() => {
       this.opened = true;
-
     })
     this.sub.add(getShowAsideForAdd);
   }
   public oninitFullVersion() {
     this.version = 'full';
     this.company.fullVersion();
-
-
   }
   onSelectClientIndustry(item) {
-
     this.company.clientIndustry.name = item
   }
   public onCheckGoogleAutoComplete() {
@@ -250,19 +226,13 @@ export class CompanyAddAsideComponent implements OnInit, OnDestroy {
   }
   public onChangeTags(tags) {
     this.company.setTags(tags);
-    /* tags.forEach((item) => {
-       this.recurringState.getCreateTicket().addTag(item.id);
-     })*/
   }
   public onChangeDescription(event) {
     this.company.description = event.target.value;
-    //  this.recurringState.getCreateTicket().setDescription(event.target.value);
   }
   public onAddFull() {
     if (!this.validate.isValidate(this.company)) return;
-
     let createCompany = this.companiesService.createCompany(this.company).subscribe(data => {
-
       this.close();
     })
     this.sub.add(createCompany);
@@ -270,42 +240,24 @@ export class CompanyAddAsideComponent implements OnInit, OnDestroy {
   public onCroppImage() {
     let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
       if (!this.opened) return;
-
       if (data) this.company.setLogo(data);
-
     })
     this.sub.add(getConfirm);
   }
   private getTehusers(list) {
-
     list.forEach((item) => {
       if (item.accountType === "TECH" && !item.deletedAt) {
-        //  item.selected = false;
-        // this.listPersons.push(item);
         this.listPersons.push(new ItemFilterPerson(item.id, `${item.firstName} ${item.lastName}`));
         this.listPersons.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
           1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
       }
     })
-
   }
-  /*  private getIndustries() {
-      let getIndustries = this.companiesService.getIndustries().subscribe((data: Array<string>) => {
-        this.industries = data;
-       
-      })
-      this.sub.add(getIndustries);
-    }*/
   getSelectedCompanyTypes() {
     let index = this.companyTypes.findIndex(item => item.selected === true);
     if (index > -1) return this.companyTypes[index].title;
     return "";
   }
-  /* getSelectedTechLead() {
-     let index = this.listPersons.findIndex(item => item.selected === true);
-     if (index > -1) return this.listPersons[index].firstName + ' ' + this.listPersons[index].lastName;
-     return "";
-   }*/
   getSelectedServiceType() {
     let index = this.serviceTypes.findIndex(item => item.selected === true);
     if (index > -1) return this.serviceTypes[index].title;
@@ -329,43 +281,27 @@ export class CompanyAddAsideComponent implements OnInit, OnDestroy {
     return editValue;
   }
   public uploadFileOnBrower(event) {
-
     if (event.target.value) {
       const file = event.target.files[0];
-
       this.uploadFile(file).then((data: any) => {
         let res = JSON.parse(data.response);
-        // this.changeFile(file).then((base64: string): any => {
         this.modalImageCropperStateService.onInitOpen(new ImageCroper(res.base64, res.id));
-
-        //   const modalRef = this.modalService.open(ImageCropperComponent);
-        //   modalRef.componentInstance.imageBase64 = res.base64;
-        //   modalRef.componentInstance.id = res.id;
         event.target.value = null;
         this.cd.detectChanges();
-        // });
-
       });
-
     }
   }
   uploadFile(file) {
     return new Promise((resolve, reject) => {
-      //  var file = this.dataURLtoFile(this.img, this.fileName);
-
       var fd = new FormData();
       fd.append("file", file);
       var xhr = new XMLHttpRequest();
       xhr.addEventListener("load", (event) => {
-
         resolve(xhr);
-
       }, false);
       xhr.addEventListener("error", (error) => {
         reject(error);
       }, false);
-
-
       xhr.open("POST", "/file?isAvatar=true&ratio=1");
       xhr.send(fd);
     });

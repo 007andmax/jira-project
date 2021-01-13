@@ -1,6 +1,3 @@
-import { CompanyAndress } from 'src/ng2/app/interfaces/company/company-address';
-
-import { CompanyAndressContact } from 'src/ng2/app/interfaces/company/company-address-contact';
 import { WorkDay } from './work-day';
 import { CompanyService } from './company-service';
 import { CompanyProfileContact } from './company-profile-contact';
@@ -8,9 +5,7 @@ import { CompanyProfileAddress } from './company-profile-address';
 import { Weeks } from '../../shared/interval/config/enums';
 import { CompanyLogo } from './company-logo';
 import { ImageCropper } from '../../shared/image-cropper/class/image-cropper';
-import { Company } from 'src/ng2/app/interfaces/company/company';
 import { Tag } from 'src/ng2/app/interfaces/tag/tag';
-import { CompanyLogoCropped } from './company-logo-cropped';
 import { CompanyConditions } from './company-conditions';
 
 export class CompanyProfile {
@@ -29,7 +24,7 @@ export class CompanyProfile {
     maxAgents: number = 0;
     name: string = "";
     password: string = "";
-    conditions:CompanyConditions;
+    conditions: CompanyConditions;
     paymentTerms: number;
     serviceType: string;
     removeOfflineTime: number = 30;
@@ -97,15 +92,13 @@ export class CompanyProfile {
 
     }
     public getDataForUpdate() {
-
-     //this.onCheckFullVersion();
         return {
             accountNumber: this.accountNumber,
             addresses: this.addresses,
             agentLinkToEmail: this.agentLinkToEmail,
-            clientIndustry: (!this.clientIndustry.name || this.clientIndustry.name.length === 0) ? {}  : this.clientIndustry,
+            clientIndustry: (!this.clientIndustry.name || this.clientIndustry.name.length === 0) ? {} : this.clientIndustry,
             clientType: this.clientType,
-            contacts: this.contacts.map((item,index) => {
+            contacts: this.contacts.map((item, index) => {
                 if (index === 0 && (!item.phoneNumbers[0].number || item.phoneNumbers[0].number.length === 0)) item.phoneNumbers = [];
                 return item;
             }),
@@ -129,13 +122,6 @@ export class CompanyProfile {
     }
     public editLogo(data) {
         this.logo = data;
-        /*    this.logo.cropped = new CompanyLogoCropped();
-            
-            this.logo.base64 = data.croppedImage.base64;
-            this.logo.w = data.croppedImage.width;
-            this.logo.h = data.croppedImage.width;
-            this.logo.x = data.croppedImage.imagePosition.x1;
-            this.logo.y = data.croppedImage.imagePosition.y1;*/
     }
     public setLogo(data: ImageCropper) {
         this.logo = new CompanyLogo();
@@ -148,34 +134,24 @@ export class CompanyProfile {
 
     }
     public fullVersion() {
-        // let contact: CompanyProfileContact = new CompanyProfileContact();
         this.contacts[0].fullVersion();
-        //   let address: CompanyProfileAddress = new CompanyProfileAddress();
         this.addresses[0].fullVersion();
         this.agentLinkToEmail = null;
         this.clientIndustry = {
             name: null
         };
-        //  this.clientType = '';
         this.description = null;
-        //  this.domain = null;
         this.login = '';
-
         this.defaultPaymentMethod = null;
         this.paymentTerms = null;
         this.serviceType = null;
         this.techLeadId = null;
-        //  this.addresses = [address];
-        //  this.contacts = [contact];
         this.workingDays = Weeks.map((item) => new WorkDay(item.toUpperCase(), 0, 0))
-
     }
 
     public onCheckFullVersion() {
         if (!this.clientIndustry.name || this.clientIndustry.name.length === 0) this.clientIndustry = {};
-
         if (!this.contacts[0].phoneNumbers[0].number || this.contacts[0].phoneNumbers[0].number.length === 0) this.contacts[0].phoneNumbers = [];
-
     }
 
     public getDataForDashboard() {
@@ -193,7 +169,7 @@ export class CompanyProfile {
             serviceType: (this.serviceType == undefined || this.serviceType == null) ? '' : this.serviceType,
             domain: (this.domain == undefined || this.domain == null) ? '' : this.domain,
             clientIndustry: typeIndustry === 'object' ? name : this.clientIndustry,
-            mapSrc: "https://maps.google.com/maps/embed/v1/place?key=AIzaSyAbP4DFpz4f9YcXMWUjdkOdyArX2peNt8s&q="+this.addresses[0].locationLat +","+this.addresses[0].locationLng+"",
+            mapSrc: "https://maps.google.com/maps/embed/v1/place?key=AIzaSyAbP4DFpz4f9YcXMWUjdkOdyArX2peNt8s&q=" + this.addresses[0].locationLat + "," + this.addresses[0].locationLng + "",
             primaryContact: {
                 firstName: this.contacts[0].firstName,
                 lastName: this.contacts[0].lastName,

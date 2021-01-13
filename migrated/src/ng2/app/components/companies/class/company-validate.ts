@@ -1,6 +1,5 @@
 import { CompanyProfile } from './company-profile';
 
-
 export class CompanyValdiate {
     name: boolean = true;
     type: boolean = true;
@@ -108,8 +107,6 @@ export class CompanyValdiate {
         } else {
             this.primaryContactEmail = true;
         }
-
-
     }
 
     public checkValidFirstname(firstName) {
@@ -118,8 +115,6 @@ export class CompanyValdiate {
         } else {
             this.firstName = true;
         }
-
-
     }
     public isValidate(company: CompanyProfile) {
         if (!company.contacts[0].firstName || company.contacts[0].firstName.length === 0) this.firstName = false;
@@ -129,7 +124,6 @@ export class CompanyValdiate {
         if (!company.addresses[0].phoneNumbers[0].number || !company.addresses[0].phoneNumbers[0].number.match(this.rePhoneNumber)) this.phoneNumber = false;
         if (company.domain && !company.domain.match(this.reDomain)) this.domain = false;
         return this.name && this.type && this.primaryContactEmail && this.phoneNumber && this.firstName && this.domain && !this.domainIsExist;
-
     }
 
 

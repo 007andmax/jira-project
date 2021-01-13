@@ -27,7 +27,6 @@ export class CompanyDevicesEditLabelComponent implements OnInit {
     if (this.value !== this.field) this.onChange.emit(this.value);
   }
   public onUpdate() {
-    console.log("this.field", this.field);
     this.value = JSON.parse(JSON.stringify(this.field));
   }
 }

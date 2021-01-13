@@ -8,12 +8,8 @@ import { CompaniesService } from 'src/ng2/app/services/company/companies.service
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ImageCropperStateService } from 'src/ng2/app/states/image-cropper/image-cropper-state.service';
-
-import { Company } from 'src/ng2/app/interfaces/company/company';
 import { CompanySubscriptionStateService } from '../company-subscription/class/company-subscription-state.service';
 import { CompanyTimeZoneStateService } from '../company-time-zone/services/company-time-zone-state.service';
-import { isNgTemplate } from '@angular/compiler';
-import { ImageCropperComponent } from '../../shared/image-cropper/image-cropper.component';
 import { CompanyTagsStateService } from '../company-tags/states/company-tags-state.service';
 import { ItemFilterPerson } from '../../left-panel/left-panel-companies/class/item-filter-person';
 import { Subscription } from 'rxjs';
@@ -21,7 +17,6 @@ import { CROPP_AVATAR_COMPANY } from 'src/ng2/app/const/image-cropp';
 import { ModalImageCropperStateService } from 'src/ng2/app/services/modal/modal-image-cropper/services/modal-image-cropper-state.service';
 import { ImageCroper } from 'src/ng2/app/services/modal/modal-image-cropper/class/image-croper';
 import { CompanyEditLogo } from '../class/company-edit-logo';
-import { ImageCropper } from '../../shared/image-cropper/class/image-cropper';
 import { UsersService } from 'src/ng2/app/services/users/users.service';
 
 @Component({
@@ -30,8 +25,6 @@ import { UsersService } from 'src/ng2/app/services/users/users.service';
   styleUrls: ['./company-edit-aside.component.scss']
 })
 export class CompanyEditAsideComponent implements OnInit, OnDestroy {
-
-
   opened = false;
   company: CompanyProfile = new CompanyProfile();
   industries: Array<string> = [];
@@ -67,9 +60,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
-
     this.company.fullVersion();
-    // this.getIndustries();
     this.industries = this.companiesStateService.getIndustries();
     if (this.usersStateService.getAllUsers().length > 0) {
       this.getTehusers(this.usersStateService.getAllUsers());
@@ -80,8 +71,6 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
       this.getUsersTitle(data);
     })
     this.sub.add(getOnUsers);
-
-
     this.onCroppImage();
     this.onEditCompany();
   }
@@ -94,15 +83,12 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
         let index = acc.findIndex((el) => {
           return (el || '').toLowerCase() === (title || '').toLowerCase();
         })
-
         if (index === -1 && title) {
           acc.push(title);
         }
-
         return acc;
       }, []).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
         1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
-
   }
   getSelectedPaymentMethod() {
     let index = this.paymentMethods.findIndex(item => item.value === this.company.defaultPaymentMethod);
@@ -111,7 +97,6 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   }
   onSelectDesignation(data) {
     this.company.contacts[0].designation = data;
-
   }
   private getPlaceAutocomplete() {
     this.locationIsinit = true;
@@ -127,7 +112,6 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   }
 
   invokeEvent(place: any) {
-
     this.company.addresses[0].locationLat = place.geometry.location.lat();
     this.company.addresses[0].locationLng = place.geometry.location.lng();
     this.company.addresses[0].address = this.addresstext.nativeElement.value;
@@ -141,7 +125,6 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
       }
       this.cd.detectChanges();
     })
-
   }
 
   public onCheckGoogleAutoComplete() {
@@ -153,13 +136,11 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     this.companySubscriptionState.onInitClear();
     this.companyTagsStateService.onInitClear();
     this.company = new CompanyProfile();
-    //  this.company.fullVersion();
     this.companyTypes.forEach(item => item.selected = false);
     this.paymentTerms.forEach(item => item.selected = false);
     this.serviceTypes.forEach(item => item.selected = false);
     this.subscriptions.forEach(item => item.selected = false);
     this.selectedTechLead = null;
-    // this.listPersons.forEach(item => item.selected = false);
     this.validate = new CompanyValdiate();
 
   }
@@ -171,22 +152,15 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
       this.companyTimeZoneState.onEditMode(this.company.addresses[0].timeZone);
       let indexTerms = this.paymentTerms.findIndex(item => item.value === this.company.paymentTerms);
       if (indexTerms > -1) this.onSelectPaymentTerms(indexTerms);
-
       let indexServiceType = this.serviceTypes.findIndex(item => item.value === this.company.serviceType);
       if (indexServiceType > -1) this.onSelectServiceTypes(indexServiceType);
-
       let indexPersone = this.listPersons.findIndex(item => item.id === this.company.techLeadId);
       if (indexPersone > -1) this.selectedTechLead = this.listPersons[indexPersone].name;
-      //  if (indexPersone > -1) this.onSelectTechLead(indexPersone);
-
       let indexType = this.companyTypes.findIndex(item => item.value === this.company.clientType);
       if (indexType > -1) this.onSelectCompanyTypes(indexType);
-
-
       this.tagsState.setTagsFromtEdit(this.company.tags);
       this.elRef.nativeElement.querySelector("#company-description").value = this.company.description;
       this.opened = true;
-      //this.company.
       this.cd.detectChanges();
     })
     this.sub.add(getCompanyFromEdit);
@@ -204,17 +178,8 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
       this.selectedTechLead = null;
     } else {
       this.company.techLeadId = null;
-
     }
-    //this.listPersons.forEach(item => item.selected = false);
-    //  this.listPersons[index].selected = true;
-
   }
-  /* public onSelectTechLead(index) {
-     this.listPersons.forEach(item => item.selected = false);
-     this.listPersons[index].selected = true;
-     this.company.techLeadId = this.listPersons[index].id;
-   }*/
   public onSelectPaymentTerms(index) {
     this.paymentTerms.forEach(item => item.selected = false);
     this.paymentTerms[index].selected = true;
@@ -226,12 +191,10 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     this.company.serviceType = this.serviceTypes[index].value;
   }
   onCheckEmail() {
-
     if (this.company.contacts[0].primaryEmail && this.company.contacts[0].primaryEmail.length > 0) this.onCheckValidPrimaryEmail();
   }
   onCheckValidPrimaryEmail() {
     this.usersService.checkValidPrimaryEmail(this.company.contacts[0].primaryEmail, this.company.id, this.company.contacts[0].id).subscribe((data: any) => {
-
       this.validate.setExistPrimaryContactEmail(data.value);
       this.cd.detectChanges();
     })
@@ -288,22 +251,14 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     this.company.clientIndustry.name = item
   }
   public onChangeTags(tags) {
-
     this.company.setTags(tags);
-    /* tags.forEach((item) => {
-      this.recurringState.getCreateTicket().addTag(item.id);
-    }) */
   }
   public onChangeDescription(event) {
     this.company.description = event.target.value;
-    //  this.recurringState.getCreateTicket().setDescription(event.target.value);
   }
   public onUpdateFull() {
-
     if (!this.validate.isValidate(this.company)) return;
-
     let updateCompany = this.companiesService.updateCompany(this.company.getDataForUpdate()).subscribe(data => {
-
       this.close();
       this.cd.detectChanges();
     })
@@ -312,71 +267,33 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   public onCroppImage() {
     let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
       if (!this.opened || !data || this.imageCropperStateService.getAction() !== CROPP_AVATAR_COMPANY) return;
-
       this.companiesService.editCompanyAvatar(this.company.id, new CompanyEditLogo(data.croppedImage.base64, data.croppedImage.height,
         this.company.id, (data.edit) ? this.company.logo.origin.id : data.id, data.croppedImage.width, data.croppedImage.imagePosition.x1, data.croppedImage.imagePosition.y1)).subscribe(res => {
           this.company.editLogo(res);
         })
-      /*  if (data.edit) {
-          this.companiesService.editCompanyAvatar(this.company.id,new CompanyEditLogo(data.croppedImage.base64,data.croppedImage.height,
-            this.company.id,this.company.logo.origin.id,data.croppedImage.width,data.croppedImage.imagePosition.x1,data.croppedImage.imagePosition.y1)).subscribe(res => {
-              this.company.editLogo(res);
-            })
-         
-        } else {
-          this.companiesService.editCompanyAvatar(this.company.id,new CompanyEditLogo(data.croppedImage.base64,data.croppedImage.height,
-            this.company.id,data.id,data.croppedImage.width,data.croppedImage.imagePosition.x1,data.croppedImage.imagePosition.y1)).subscribe(res => {
-              this.company.editLogo(res);
-            })
-          this.company.setLogo(data);
-        }*/
-
     })
     this.sub.add(getConfirm);
   }
   public onChangeAvatar() {
-
     this.downloadCompanyLogo().then(data => {
-      //   const modalRef = this.modalService.open(ImageCropperComponent);
-
-      //  modalRef.componentInstance.imageBase64 = data;
-      //  modalRef.componentInstance.id = this.company.logo.origin.id;
       this.modalImageCropperStateService.onInitOpen(new ImageCroper(data, this.company.logo.origin.id, true));
       this.cd.detectChanges();
-
     })
   }
   private getTehusers(list) {
-
     list.forEach((item) => {
       if (item.accountType === "TECH" && !item.deletedAt) {
-        // item.selected = false;
-        //   this.listPersons.push(item);
         this.listPersons.push(new ItemFilterPerson(item.id, `${item.firstName} ${item.lastName}`));
         this.listPersons.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
           1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
       }
-
     })
-
   }
-  /* private getIndustries() {
-     let getIndustries = this.companiesService.getIndustries().subscribe((data: Array<string>) => {
-       this.industries = data;
-        
-     })
-     this.sub.add(getIndustries);
-   }*/
   getSelectedCompanyTypes() {
     let index = this.companyTypes.findIndex(item => item.selected === true);
     if (index > -1) return this.companyTypes[index].title;
     return "";
   }
-  /* getSelectedTechLead() {
-     let index = this.listPersons.findIndex(item => item.selected === true);
-     if (index > -1) return this.listPersons[index].firstName + ' ' + this.listPersons[index].lastName;
-     return "";
-   }*/
   getSelectedServiceType() {
     let index = this.serviceTypes.findIndex(item => item.selected === true);
     if (index > -1) return this.serviceTypes[index].title;
@@ -409,15 +326,10 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
         req.responseType = "arraybuffer";
         req.open('GET', `/file/${this.company.logo.origin.id}.jpg`, true); /* Третий аргумент true означает асинхронность */
         req.onload = (oEvent) => {
-
           var blob = new Blob([req.response], { type: "image/jpg" });
-
           this.changeFile(blob).then((base64: string): any => {
-
             resolve(base64);
-
           });
-
         };
         req.send(null);
       }
@@ -426,47 +338,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   public uploadFileOnBrower(event) {
     this.imageCropperStateService.setAction(CROPP_AVATAR_COMPANY);
     this.imageCropperStateService.uploadFileOnBrower(event);
-    /* if (event.target.value) {
-       const file = event.target.files[0];
-        
-       this.uploadFile(file).then((data: any) => {
-         let res = JSON.parse(data.response);
-         // this.changeFile(file).then((base64: string): any => {
-       //  const modalRef = this.modalService.open(ImageCropperComponent,res.base64);
-      
-       //  modalRef.componentInstance.imageBase64 = res.base64;
-      //   modalRef.componentInstance.id = res.id;
-         event.target.value = null;
-         this.modalImageCropperStateService.onInitOpen(new ImageCroper(res.base64,res.id));
-       this.cd.detectChanges();
- 
-         // });
- 
-       });
- 
-     }  */
   }
-  /*uploadFile(file) {
-    return new Promise((resolve, reject) => {
-      //  var file = this.dataURLtoFile(this.img, this.fileName);
-       
-      var fd = new FormData();
-      fd.append("file", file);
-      var xhr = new XMLHttpRequest();
-      xhr.addEventListener("load", (event) => {
-
-        resolve(xhr);
-
-      }, false);
-      xhr.addEventListener("error", (error) => {
-        reject(error);
-      }, false);
-
-
-      xhr.open("POST", "/file?isAvatar=true&ratio=1");
-      xhr.send(fd);
-    });
-  }*/
   changeFile(file) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();

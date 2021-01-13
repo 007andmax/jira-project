@@ -23,36 +23,22 @@ export class DownloadAgentComponent implements OnInit {
   }
   closeModal() {
     this.activeModal.close();
-
-
-    /*  if (closeFn) closeFn();
-      $uibModalInstance.dismiss();*/
   }
   getDonwloadLink() {
     let textArea: any = document.createElement("textarea");
     textArea.style.opacity = 0;
     textArea.value = this.downloadLink;
-
     document.body.appendChild(textArea);
-
     textArea.select();
-
     try {
       let successful = document.execCommand('copy');
-      if (successful) {
-        // UserNotificationService.show('Copied successfully', true);
-      } else {
-        //  UserNotificationService.show('Copy failed', true);
-      }
     } catch (err) {
       //  UserNotificationService.show('Copy failed', true);
     }
-
     document.body.removeChild(textArea);
   }
   downloadAgent() {
     this.downloadAgentService.download(this.downloadAgentStateService.getCompany().id, "", "", false).subscribe((data: any) => {
-
       var link = document.createElement('a');
       link.target = "_blank";
       link.href = data.link;
