@@ -252,6 +252,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
         } else {
           this.validate.setDomainIsExist();
         }
+        this.cd.detectChanges();
       })
     }
   }
