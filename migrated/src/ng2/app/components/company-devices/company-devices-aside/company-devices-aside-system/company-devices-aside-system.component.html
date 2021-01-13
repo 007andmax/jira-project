@@ -14,7 +14,8 @@
             <div class="sidebar-system__info edit-field">
                 <div class="sidebar-system__info-title">Name</div>
                 <app-company-devices-edit-label
-                    [field]="device.label || device.hostName || device.ip"
+                    #editLabel
+                    [field]="getLabelForEdit()"
                     [title]="'Name'"
                     class="company-device-edit-name"
                     (onChange)="onChangeName($event)"

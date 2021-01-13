@@ -26,10 +26,10 @@ export class CompaniesService {
    */
   public constructor(
     private http: HttpClient
-  ) {}
+  ) { }
 
   public deArchive(id) {
-    return this.http.get(this.apiUrl + 'company/dearchive/' + id); 
+    return this.http.get(this.apiUrl + 'company/dearchive/' + id);
   }
 
   /**
@@ -43,34 +43,38 @@ export class CompaniesService {
   public getCompany(id) {
     return this.http.get(this.apiUrl + `company/${id}/data`);
   }
-   
-  public checkCompanyName(id,name) {
-    return this.http.get(this.apiUrl + `company/isCompanyNameUnique?id=${id}&name=${name}`); 
+
+  public checkCompanyName(id, name) {
+    return this.http.get(this.apiUrl + `company/isCompanyNameUnique?id=${id}&name=${name}`);
   }
 
-  public  archiveCompany (id) {
+  public checkCompanyDomain(id, domain) {
+    return this.http.get(this.apiUrl + `company/isCompanyDomainUnique?domain=${domain}&id=${id}`);
+  }
+
+  public archiveCompany(id) {
     return this.http.get(this.apiUrl + 'company/archive/' + id);
   }
 
-  public getClientsByTags (tags) {
-   
-    return this.http.post(this.apiUrl + 'company/clientsByTags',tags);
-    
+  public getClientsByTags(tags) {
+
+    return this.http.post(this.apiUrl + 'company/clientsByTags', tags);
+
   }
-  public getDownloadLink (data) {
-   
-    return this.http.post(this.apiUrl + 'data/getAgentDownloadLink',data);
-    
+  public getDownloadLink(data) {
+
+    return this.http.post(this.apiUrl + 'data/getAgentDownloadLink', data);
+
   }
-  public  createCompany (data) {
-    let company =  data;
+  public createCompany(data) {
+    let company = data;
     company.onCheckFullVersion();
-    return this.http.post(this.apiUrl + 'company',company);
+    return this.http.post(this.apiUrl + 'company', company);
   }
-  public  updateCompany (data) {
-   // let company = data;
-   // company.onCheckFullVersion();
-    return this.http.put(this.apiUrl + 'company',data);
+  public updateCompany(data) {
+    // let company = data;
+    // company.onCheckFullVersion();
+    return this.http.put(this.apiUrl + 'company', data);
   }
 
   /**
@@ -90,54 +94,54 @@ export class CompaniesService {
   }
 
 
-  public getIndustries () {
+  public getIndustries() {
     return this.http.get(this.apiUrl + '/company/getIndustries');
   }
 
-public uploadAvatar (file) {
-  return this.http.post(this.apiUrl + 'file?isAvatar=true&ratio=1',{file:file});
-}
+  public uploadAvatar(file) {
+    return this.http.post(this.apiUrl + 'file?isAvatar=true&ratio=1', { file: file });
+  }
 
-public editCompanyAvatar (id,data) {
-  return this.http.post(this.apiUrl + `/company/${id}/logo`,data);
-}
+  public editCompanyAvatar(id, data) {
+    return this.http.post(this.apiUrl + `/company/${id}/logo`, data);
+  }
 
-public setСustomStorage (customKey,value) {
-  return this.http.post(this.apiUrl + 'customStorage/user',{
-    customKey: customKey,
-    value: JSON.stringify(value)
-  });
-}
+  public setСustomStorage(customKey, value) {
+    return this.http.post(this.apiUrl + 'customStorage/user', {
+      customKey: customKey,
+      value: JSON.stringify(value)
+    });
+  }
 
-public getRecentInvoice () {
-  return this.http.post(this.apiUrl + 'receivable',{
-    limit: 5,
-    offset: 0
-  });
-}
+  public getRecentInvoice() {
+    return this.http.post(this.apiUrl + 'receivable', {
+      limit: 5,
+      offset: 0
+    });
+  }
 
-public getContractsList (id) {
-  return this.http.get(this.apiUrl + `serviceAgreements/${id}/dashboard`);
-}
+  public getContractsList(id) {
+    return this.http.get(this.apiUrl + `serviceAgreements/${id}/dashboard`);
+  }
 
-public getInvoiceRevenue (data) {
-  return this.http.post(this.apiUrl + 'reports/sales/invoiceRevenue',{
-    startDate: data.startDate,
-    endDate: data.endDate,
-    companyId: data.id
-  });
-}
+  public getInvoiceRevenue(data) {
+    return this.http.post(this.apiUrl + 'reports/sales/invoiceRevenue', {
+      startDate: data.startDate,
+      endDate: data.endDate,
+      companyId: data.id
+    });
+  }
 
-public getTicketGraph (id, frequency) {
-  return this.http.get(this.apiUrl + `dashboard/company?companyId=${id}&frequency=${frequency}`);
-}
+  public getTicketGraph(id, frequency) {
+    return this.http.get(this.apiUrl + `dashboard/company?companyId=${id}&frequency=${frequency}`);
+  }
 
-public removeTag (id, data) {
-  return this.http.put(this.apiUrl + 'company/tags?companyId=' + id, data);
-}
+  public removeTag(id, data) {
+    return this.http.put(this.apiUrl + 'company/tags?companyId=' + id, data);
+  }
 
-public  editWoringHours (data) {
-  return this.http.put(this.apiUrl + 'company',data);
-}
+  public editWoringHours(data) {
+    return this.http.put(this.apiUrl + 'company', data);
+  }
 
 }

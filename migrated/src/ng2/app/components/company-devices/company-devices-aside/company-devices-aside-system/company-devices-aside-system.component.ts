@@ -1,10 +1,11 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { DeviceExtended } from '../../class/device-extended';
 import * as moment from "moment";
 import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
 import { HardwareService } from '../../../device/_services/hardware.service';
 import { DatePickerComponent } from '../../../shared/date-picker/date-picker.component';
 import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.service';
+import { CompanyDevicesEditLabelComponent } from '../../company-devices-edit-label/company-devices-edit-label.component';
 
 @Component({
   selector: 'app-company-devices-aside-system',
@@ -14,20 +15,32 @@ import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.se
 export class CompanyDevicesAsideSystemComponent implements OnInit {
   @ViewChild('datePickerInstalledOn') datePickerInstalledOn: DatePickerComponent;
   @ViewChild('datePickerWarranty') datePickerWarranty: DatePickerComponent;
+  @ViewChild('editLabel') editLabel: CompanyDevicesEditLabelComponent;
+
   @Input() device: DeviceExtended;
   toggleWindowSpecifications: boolean = false;
   toggleDeviceSpecifications: boolean = false;
   constructor(private devicesService: DevicesService,
     private devicesStateService: DevicesStateService,
-    private hardwareService: HardwareService) { }
+    private hardwareService: HardwareService,
+    public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
   }
   onChangeName(value) {
-    this.devicesService.editAgentInfo(this.device.getDataForEditName(value)).subscribe(data => {
-      this.device.setHostName(value);
+    console.log("value", value);
+    this.devicesService.editAgentInfo(this.device.getDataForEditName((value.length > 0) ? value : this.device.hostName || this.device.ip)).subscribe(data => {
+      this.device.setLabel((value.length > 0) ? value : null);
+      // this.device.setLabel((value.length > 0) ? data : null);
+      this.editLabel.setValue((value.length > 0) ? value : this.device.hostName || this.device.ip);
+      this.cd.detectChanges();
       this.devicesStateService.setLabel(this.device.companyId, this.device.id, value);
+      console.log("this.device", this.device);
     })
+  }
+  getLabelForEdit() {
+    if (this.device.label) return this.device.label;
+    return this.device.hostName || this.device.ip;
   }
   getNetworkAdapterField(field) {
     let find = this.device.report.networkAdapters.find(item => item.is_default);

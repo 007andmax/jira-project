@@ -64,6 +64,9 @@
           <mat-error *ngIf="!validate.getDomain()">
             Please enter a valid domain
           </mat-error>
+           <mat-error *ngIf="validate.getDomainIsExist()">
+            This company domain already occupied
+          </mat-error>
           <p>Domain Name</p>
           <input type="text"
                  (blur)="onChangeDomain()"

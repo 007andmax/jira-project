@@ -12,17 +12,27 @@ export class CompanyValdiate {
     rePhoneNumber = /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/;
     reDomain = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
     nameIsExist: boolean = false;
+    domainIsExist: boolean = false;
     existPrimaryContactEmail: boolean = true;
     constructor() { }
 
-    public getExistPrimaryContactEmail () {
+    public getExistPrimaryContactEmail() {
         return this.existPrimaryContactEmail;
     }
-    public setExistPrimaryContactEmail (data) {
+    public setExistPrimaryContactEmail(data) {
         this.existPrimaryContactEmail = data;
     }
-    public getDomain(){
+    public getDomain() {
         return this.domain;
+    }
+    public resetDomain() {
+        this.domain = true;
+    }
+    public resetDomainIsExist() {
+        this.domainIsExist = false;
+    }
+    public setDomainIsExist() {
+        this.domainIsExist = true;
     }
     public resetNameIsExist() {
         this.nameIsExist = false;
@@ -41,6 +51,9 @@ export class CompanyValdiate {
     }
     public getNameIsExist() {
         return this.nameIsExist;
+    }
+    public getDomainIsExist() {
+        return this.domainIsExist;
     }
     public getName() {
         return this.name;
@@ -115,7 +128,7 @@ export class CompanyValdiate {
         if (!company.contacts[0].primaryEmail || !company.contacts[0].primaryEmail.match(this.reEmail)) this.primaryContactEmail = false;
         if (!company.addresses[0].phoneNumbers[0].number || !company.addresses[0].phoneNumbers[0].number.match(this.rePhoneNumber)) this.phoneNumber = false;
         if (company.domain && !company.domain.match(this.reDomain)) this.domain = false;
-        return this.name && this.type && this.primaryContactEmail && this.phoneNumber && this.firstName && this.domain;
+        return this.name && this.type && this.primaryContactEmail && this.phoneNumber && this.firstName && this.domain && !this.domainIsExist;
 
     }
 

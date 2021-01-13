@@ -23,7 +23,7 @@ import { CompanySubscriptionStateService } from '../company-subscription/class/c
 })
 export class CompanyAddAsideComponent implements OnInit, OnDestroy {
 
-   
+
   opened = false;
   company: CompanyProfile = new CompanyProfile();
   industries: Array<string> = [];
@@ -88,12 +88,12 @@ export class CompanyAddAsideComponent implements OnInit, OnDestroy {
 
         return acc;
       }, []).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
-      1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
+        1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
 
   }
   onSelectDesignation(data) {
     this.company.contacts[0].designation = data;
-   
+
   }
   private getPlaceAutocomplete() {
     this.locationIsinit = true;
@@ -177,7 +177,7 @@ export class CompanyAddAsideComponent implements OnInit, OnDestroy {
   public onShowAside() {
     let getShowAsideForAdd = this.companiesStateService.getShowAsideForAdd().subscribe(() => {
       this.opened = true;
-    
+
     })
     this.sub.add(getShowAsideForAdd);
   }
@@ -223,6 +223,16 @@ export class CompanyAddAsideComponent implements OnInit, OnDestroy {
   }
   public onChangeDomain() {
     this.validate.checkValidDomain(this.company.domain);
+    if (this.validate.getDomain()) {
+      this.companiesService.checkCompanyDomain('', this.company.domain).subscribe((data: any) => {
+        if (data.value) {
+          this.validate.resetDomain();
+          this.validate.resetDomainIsExist();
+        } else {
+          this.validate.setDomainIsExist();
+        }
+      })
+    }
   }
   public onChangePhoneNumber() {
     this.validate.checkValidPhoneNumber(this.company.addresses[0].phoneNumbers[0].number);

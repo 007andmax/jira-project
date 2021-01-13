@@ -226,11 +226,11 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     this.company.serviceType = this.serviceTypes[index].value;
   }
   onCheckEmail() {
-    
+
     if (this.company.contacts[0].primaryEmail && this.company.contacts[0].primaryEmail.length > 0) this.onCheckValidPrimaryEmail();
   }
   onCheckValidPrimaryEmail() {
-    this.usersService.checkValidPrimaryEmail(this.company.contacts[0].primaryEmail, this.company.id,this.company.contacts[0].id).subscribe((data: any) => {
+    this.usersService.checkValidPrimaryEmail(this.company.contacts[0].primaryEmail, this.company.id, this.company.contacts[0].id).subscribe((data: any) => {
 
       this.validate.setExistPrimaryContactEmail(data.value);
       this.cd.detectChanges();
@@ -244,6 +244,16 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   }
   public onChangeDomain() {
     this.validate.checkValidDomain(this.company.domain);
+    if (this.validate.getDomain()) {
+      this.companiesService.checkCompanyDomain(this.company.id, this.company.domain).subscribe((data: any) => {
+        if (data.value) {
+          this.validate.resetDomain();
+          this.validate.resetDomainIsExist();
+        } else {
+          this.validate.setDomainIsExist();
+        }
+      })
+    }
   }
   public onChangeName() {
     if (this.company.name && this.company.name.length > 0) {
