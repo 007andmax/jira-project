@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SupportService } from '../../services/support/support.service';
+import { RemoteSession } from './class/remote-sessions';
 
 @Component({
   selector: 'app-support',
@@ -6,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./support.component.scss']
 })
 export class SupportComponent implements OnInit {
-
-  constructor() { }
+  list: Array<RemoteSession> = [];
+  constructor(private supportService: SupportService) { }
 
   ngOnInit() {
+    this.supportService.getRemoteSessions().subscribe(data => {
+      this.list = data;
+      console.log("this.list", this.list);
+    })
   }
 
 }
