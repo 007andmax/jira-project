@@ -21,6 +21,7 @@ export class CompanyDashboardComponent implements OnInit {
   company: Company;
   totalTickets: number = 0;
   averageResponseTime: string = '';
+  companyName: string = '';
   sub: Subscription = new Subscription();
 
   constructor(
@@ -36,6 +37,10 @@ export class CompanyDashboardComponent implements OnInit {
 
   averageResponseTimeChangedHandler(data: string) {
     this.averageResponseTime = data;
+  }
+
+  companyNameChangedHandler(name: string) {
+    this.companyName = name;
   }
 
 }

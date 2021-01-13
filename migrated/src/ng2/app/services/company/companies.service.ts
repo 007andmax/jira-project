@@ -113,10 +113,11 @@ export class CompaniesService {
     });
   }
 
-  public getRecentInvoice() {
+  public getRecentInvoice(name: string) {
     return this.http.post(this.apiUrl + 'receivable', {
       limit: 5,
-      offset: 0
+      offset: 0,
+      companyName: name
     });
   }
 
