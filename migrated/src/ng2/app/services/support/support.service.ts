@@ -20,7 +20,12 @@ export class SupportService {
   constructor(
     private http: HttpClient
   ) { }
-
+  public deleteRemoteSession(data) {
+    return this.http.post(this.apiUrl + `remote/deleteRemoteSession`, data);
+  }
+  public createOneTimeRemoteSession() {
+    return this.http.get(this.apiUrl + `remote/createOneTimeRemoteSession`);
+  }
   public getRemoteSessions() {
     return this.http.get(this.apiUrl + `remote/getRemoteSessions`).pipe(map((data: any) => data.map(item => new RemoteSession(item))));
   }

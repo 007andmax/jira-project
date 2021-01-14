@@ -4,10 +4,16 @@
             <h3 class="list-title">Quick Support</h3>
         </div>
         <div class="d-f ai-c">
-            <button class="qt-btn --outline-blue">Create Service</button>
+            <button
+                class="qt-btn --outline-blue"
+                (click)="create()"
+            >
+                Create Service
+            </button>
         </div>
     </div>
     <div class="support-tickets-list">
+
 
 
 
@@ -19,6 +25,7 @@
         >
             <app-support-item [item]="item"></app-support-item>
         </ng-template>
+
 
 
 
@@ -51,6 +58,7 @@
 
 
 
+
                     <div class="support-tickets-list__close icon__close"></div>
                 </div>
             </div>
@@ -58,6 +66,7 @@
                 User Sam downloaded agent. Please waiting for install.
             </div>
         </div>
+
 
 
 
@@ -91,6 +100,7 @@
 
 
 
+
                     <div class="support-tickets-list__close icon__close"></div>
                 </div>
             </div>
@@ -98,6 +108,7 @@
                 User Sam with hostName - ‘DESKTOP-SAM’ installed agent (1.0.0.2739). You can start remote connection
             </div>
         </div>
+
 
 
 
@@ -137,6 +148,7 @@
 
 
 
+
                     <div class="support-tickets-list__close icon__close"></div>
                 </div>
             </div>
@@ -144,6 +156,7 @@
                 User Sam with hostName - ‘DESKTOP-SAM’ installed agent (1.0.0.2739). You can start remote connection
             </div>
         </div>
+
 
 
 
@@ -173,6 +186,7 @@
                         </div>
                         <div class="support-timeline-status__step3 icon__computer"></div>
                     </div>
+
 
 
 

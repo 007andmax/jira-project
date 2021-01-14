@@ -8,6 +8,8 @@ import { UsersStateService } from 'src/ng2/app/states/users/users-state.service'
 import { CurrentUser } from 'src/ng2/class/current-user/current-user';
 import { RemoteSession } from '../class/remote-sessions';
 import * as moment from "moment";
+import { SupportStateService } from 'src/ng2/app/states/support/support-state.service';
+import { SupportService } from 'src/ng2/app/services/support/support.service';
 
 @Component({
   selector: 'app-support-item',
@@ -31,6 +33,8 @@ export class SupportItemComponent implements OnInit {
   constructor(private constantsStateService: ConstantsStateService,
     private companiesStateService: CompaniesStateService,
     private usersStateService: UsersStateService,
+    private supportService: SupportService,
+    private supportStateService: SupportStateService,
     private modalService: NgbModal,) { }
 
   ngOnInit() {
@@ -76,6 +80,11 @@ export class SupportItemComponent implements OnInit {
   getUserName() {
     if (this.item.status === 'DOWNLOADED' || this.item.status === 'INSTALLED') return this.item.userName;
     return 'N/A';
+  }
+  removeSession() {
+    this.supportService.deleteRemoteSession([this.item.id]).subscribe(data => {
+
+    })
   }
   getMessage() {
     if (this.item.status == 'INSTALLED') return `User <b>${this.item.userName}</b> ${this.item.hostName ? " with hostName - '" + this.item.hostName + "'" : ''} installed agent(${this.item.version ? this.item.version : ''}). You can start remote connection`;

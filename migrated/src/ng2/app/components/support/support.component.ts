@@ -38,5 +38,10 @@ export class SupportComponent implements OnInit {
       })
     })
   }
+  create() {
+    this.supportService.createOneTimeRemoteSession().subscribe(data => {
+
+    })
+  }
 
 }

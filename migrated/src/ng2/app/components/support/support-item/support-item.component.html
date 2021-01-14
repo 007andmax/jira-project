@@ -71,7 +71,10 @@
                 'icon__computer' : item.status !== 'CONNECTED' || !item.online}"
                 ></div>
             </div>
-            <div class="support-tickets-list__close icon__close"></div>
+            <div
+                class="support-tickets-list__close icon__close"
+                (click)="removeSession()"
+            ></div>
         </div>
     </div>
     <div class="support-tickets-list__status-msg">
