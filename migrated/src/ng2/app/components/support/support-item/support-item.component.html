@@ -6,32 +6,75 @@
         ></div>
         <div class="qt-df qt-ai-c qt-jc-fe">
             <div class="qt-mr-24 qt-ml-16">
-                <div class="support-item-menu">
+                <div
+                    class="support-item-menu"
+                    *ngIf="item.status === 'URL_GENERATED' || item.status === 'URL_OPENED'"
+                >
                     <div class="support-item-menu__key icon__key"></div>
                     <div
                         class="support-item-menu__number"
                         [textContent]="item.key"
                     >
                     </div>
-                    <div class="support-item-menu__button icon__copy"></div>
-                    <div class="support-item-menu__button icon__email-dark"></div>
-                    <div class="support-item-menu__button icon__link-gray"></div>
+                    <div
+                        class="support-item-menu__button icon__copy"
+                        (click)="copyKey()"
+                    ></div>
+                    <div
+                        class="support-item-menu__button icon__email-dark"
+                        (click)="sendEmail()"
+                    ></div>
+                    <div
+                        class="support-item-menu__button icon__link-gray"
+                        (click)="copyLink()"
+                    ></div>
                     <div class="support-item-menu__button icon__new-ticket-support"></div>
                 </div>
             </div>
             <div class="support-timeline-status qt-mr-24">
-                <div class="support-timeline-status__step1 icon__computer"></div>
-                <div class="support-timeline-status__line">
-                    <div class="support-timeline-status__line-title">Miguel Burgess</div>
+                <div
+                    class="support-timeline-status__step1"
+                    [ngClass]="{'icon__computer-green' : item.status === 'CONNECTED',
+                'icon__computer' : item.status !== 'CONNECTED'}"
+                ></div>
+                <div
+                    class="support-timeline-status__line"
+                    [ngClass]="{'--success' : item.status === 'CONNECTED'}"
+                >
+                    <div
+                        class="support-timeline-status__line-title"
+                        [textContent]="getUserFirstLastName(item.performer)"
+                    ></div>
                 </div>
-                <div class="support-timeline-status__step2 icon__remote-access-gray"></div>
-                <div class="support-timeline-status__line">
-                    <div class="support-timeline-status__line-title line-title--gray">URL has been generated</div>
+                <div
+                    class="support-timeline-status__step2"
+                    [ngClass]="{'icon__remote-access-green' : item.status === 'INSTALLED' && item.online,
+            'icon__remote-access-gray' : item.status !== 'INSTALLED' || !item.online,
+        'icon__connected-device-green' : item.status === 'CONNECTED' && item.online}"
+                ></div>
+                <div
+                    class="support-timeline-status__line"
+                    [ngClass]="{'--success' : item.status === 'INSTALLED' && item.online || item.status === 'CONNECTED' && item.online}"
+                >
+                    <div
+                        class="support-timeline-status__line-title"
+                        [textContent]="item.userName"
+                    ></div>
+                    <div
+                        class="support-timeline-status__line-title line-title--gray"
+                        [textContent]="statusMap[item.status]"
+                    ></div>
                 </div>
-                <div class="support-timeline-status__step3 icon__computer"></div>
+                <div
+                    class="support-timeline-status__step3"
+                    [ngClass]="{'icon__computer-green' : item.status === 'CONNECTED' && item.online,
+                'icon__computer' : item.status !== 'CONNECTED' || !item.online}"
+                ></div>
             </div>
             <div class="support-tickets-list__close icon__close"></div>
         </div>
     </div>
-
+    <div class="support-tickets-list__status-msg">
+        <span [innerHTML]="getMessage()"></span>
+    </div>
 </div>

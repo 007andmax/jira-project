@@ -12,6 +12,8 @@ import { UsersStateService } from 'src/ng2/app/states/users/users-state.service'
 import { SAVE_AND_SEND } from 'src/ng2/app/const/confirm';
 import { QuoteStateService } from 'src/ng2/app/states/quote/quote-state.service';
 import { QUOTE_MODAL_ACTION_ADD, QUOTE_MODAL_ACTION_EDIT, QUOTE_MODAL_ACTION_LIST, QUOTE_MODAL_ACTION_PREVIEW } from 'src/ng2/app/const/quote';
+import { SUPPORT_MODAL_ACTION_SEND } from 'src/ng2/app/const/support';
+import { SupportStateService } from 'src/ng2/app/states/support/support-state.service';
 
 /**
  * Modal quote component
@@ -63,6 +65,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
     public activeModal: NgbActiveModal,
     private quoteStateService: QuoteStateService,
     private confirmStateService: ConfirmStateService,
+    private supportStateService: SupportStateService,
     private modalService: NgbModal,
     config: NgbModalConfig,
     private usersStateService: UsersStateService
@@ -210,6 +213,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
       if (this.action === QUOTE_MODAL_ACTION_EDIT) this.quoteStateService.saveSandModeEdit(this.data);
       if (this.action === QUOTE_MODAL_ACTION_ADD) this.quoteStateService.saveSandMode(this.data);
       if (this.action === QUOTE_MODAL_ACTION_LIST) this.quoteStateService.saveSandModeList(this.data);
+      if (this.action === SUPPORT_MODAL_ACTION_SEND) this.supportStateService.onHandleSendMode(this.data);
 
       /*  if (!this.isResend) {
           this.onInitSubjectAndMessage();
