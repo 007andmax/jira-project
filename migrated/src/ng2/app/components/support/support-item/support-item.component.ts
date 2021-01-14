@@ -67,7 +67,7 @@ export class SupportItemComponent implements OnInit {
     const modalRef = this.modalService.open(ModalQuoteComponent, { windowClass: 'quote-send-modal' });
 
     modalRef.componentInstance.data = {
-      message: `Follow that link(${this.constantsStateService.getConstant('server.url') + this.item.key}) to download agent`,
+      message: `Follow that link(${this.constantsStateService.getConstant('server.url') + 'remote?key=' + this.item.key}) to download agent`,
       subject: `${this.companiesStateService.getCurrentCompany().name} remote support agent`,
       recipients: []
     };
