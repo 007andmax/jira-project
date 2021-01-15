@@ -17,18 +17,28 @@
                     >
                     </div>
                     <div
-                        class="support-item-menu__button icon__copy"
+                        placement="top"
+                        ngbTooltip="Copy Key"
+                        class="support-item-menu__button icon__copy pointer"
                         (click)="copyKey()"
                     ></div>
                     <div
-                        class="support-item-menu__button icon__email-dark"
+                        placement="top"
+                        ngbTooltip="Email Info"
+                        class="support-item-menu__button icon__email-dark pointer"
                         (click)="sendEmail()"
                     ></div>
                     <div
-                        class="support-item-menu__button icon__link-gray"
+                        placement="top"
+                        ngbTooltip="Copy Support URL"
+                        class="support-item-menu__button icon__link-gray pointer"
                         (click)="copyLink()"
                     ></div>
-                    <div class="support-item-menu__button icon__new-ticket-support"></div>
+                    <div
+                        class="support-item-menu__button icon__new-ticket-support pointer"
+                        placement="top"
+                        ngbTooltip="Create Ticket"
+                    ></div>
                 </div>
             </div>
             <div class="support-timeline-status qt-mr-24">
@@ -51,6 +61,9 @@
                     class="support-timeline-status__step2"
                     [ngClass]="{'icon__remote-access-green' : item.status === 'INSTALLED' && item.online,
             'icon__remote-access-gray' : item.status !== 'INSTALLED' || !item.online}"
+                    placement="top"
+                    disableTooltip="item.status !== 'INSTALLED' || !item.online"
+                    ngbTooltip="Agent Connected"
                 ></div>
                 <div
                     *ngIf="item.status === 'INSTALLED' && item.online"
@@ -94,7 +107,9 @@
                 ></div>
             </div>
             <div
-                class="support-tickets-list__close icon__close"
+                class="support-tickets-list__close icon__close pointer"
+                placement="top"
+                ngbTooltip="Close Remote Session"
                 (click)="removeSession()"
             ></div>
         </div>
