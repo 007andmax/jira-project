@@ -54,8 +54,10 @@ export class SupportComponent implements OnInit, OnDestroy {
         }
       }
       if (newChange.action === 'ONE_TIME_DELETED' || newChange.action === 'ONE_TIME_UNINSTALLED') {
-        let findIndex = this.list.findIndex(item => item.id === newChange.data);
-        if (findIndex > -1) this.list.splice(findIndex, 1);
+        newChange.data.forEach(element => {
+          let findIndex = this.list.findIndex(item => item.id === element);
+          if (findIndex > -1) this.list.splice(findIndex, 1);
+        });
       }
       this.cd.detectChanges();
     })
