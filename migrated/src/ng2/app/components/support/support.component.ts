@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DraftEmailService } from '../../services/draft-email/draft-email.service';
 import { SupportService } from '../../services/support/support.service';
+import { DevicesRealTimeService } from '../../states/devices/devices-real-time.service';
 import { SupportStateService } from '../../states/support/support-state.service';
 import { DraftEmail } from '../shared/draft-email/class/draft-email';
 import { RemoteSession } from './class/remote-sessions';
@@ -16,6 +17,7 @@ export class SupportComponent implements OnInit {
   constructor(private supportService: SupportService,
     private supportStateService: SupportStateService,
     private draftEmailService: DraftEmailService,
+    private devicesRealTimeService: DevicesRealTimeService,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
@@ -37,6 +39,25 @@ export class SupportComponent implements OnInit {
         }
       })
     })
+    let oneTimeConnectionArray = this.devicesRealTimeService.oneTimeConnectionArray.subscribe(newChange => {
+      console.log("newChange", newChange);
+      if (newChange.action === 'ONE_TIME_DOWNLOADED' || newChange.action === 'ONE_TIME_INSTALLED' || newChange.action === 'ONE_TIME_CONNECTION_OPEN') {
+        if (newChange.data.oneTime) {
+          let findIndex = this.list.findIndex(item => item.id === newChange.data.id);
+          if (findIndex > -1) {
+            this.list[findIndex] = new RemoteSession(newChange.data);
+          } else {
+            this.list.push(new RemoteSession(newChange.data));
+          }
+        }
+      }
+      if (newChange.action === 'ONE_TIME_DELETED' || newChange.action === 'ONE_TIME_UNINSTALLED') {
+        let findIndex = this.list.findIndex(item => item.id === newChange.data);
+        if (findIndex > -1) this.list.splice(findIndex, 1);
+      }
+      this.cd.detectChanges();
+    })
+    //  this.sub.add(oneTimeConnectionArray);
   }
   create() {
     this.supportService.createOneTimeRemoteSession().subscribe(data => {
