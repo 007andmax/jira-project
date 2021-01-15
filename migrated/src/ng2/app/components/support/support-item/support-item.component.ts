@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SUPPORT_MODAL_ACTION_SEND } from 'src/ng2/app/const/support';
 import { ModalQuoteComponent } from 'src/ng2/app/services/modal/modal-quote/modal-quote.component';
@@ -10,6 +10,7 @@ import { RemoteSession } from '../class/remote-sessions';
 import * as moment from "moment";
 import { SupportStateService } from 'src/ng2/app/states/support/support-state.service';
 import { SupportService } from 'src/ng2/app/services/support/support.service';
+import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
 
 @Component({
   selector: 'app-support-item',
@@ -18,6 +19,7 @@ import { SupportService } from 'src/ng2/app/services/support/support.service';
 })
 export class SupportItemComponent implements OnInit {
   @Input() item: RemoteSession;
+  @Output() onConnectRemoteAccess = new EventEmitter();
   host: string;
   showHost: string;
   currentUser: CurrentUser;
@@ -35,6 +37,7 @@ export class SupportItemComponent implements OnInit {
     private usersStateService: UsersStateService,
     private supportService: SupportService,
     private supportStateService: SupportStateService,
+    private devicesService: DevicesService,
     private modalService: NgbModal,) { }
 
   ngOnInit() {
@@ -84,6 +87,13 @@ export class SupportItemComponent implements OnInit {
   removeSession() {
     this.supportService.deleteRemoteSession([this.item.id]).subscribe(data => {
 
+    })
+  }
+  public connectRemoteAccess(conectionType) {
+    this.onConnectRemoteAccess.emit({
+      sessionId: this.item.sessionId,
+      conectionType: conectionType,
+      companyId: this.item.clientCompany.id
     })
   }
   getMessage() {

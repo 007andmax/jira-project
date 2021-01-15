@@ -47,11 +47,33 @@
                     ></div>
                 </div>
                 <div
+                    *ngIf="item.status === 'INSTALLED' && item.online || (item.status !== 'INSTALLED' || !item.online)"
                     class="support-timeline-status__step2"
                     [ngClass]="{'icon__remote-access-green' : item.status === 'INSTALLED' && item.online,
-            'icon__remote-access-gray' : item.status !== 'INSTALLED' || !item.online,
-        'icon__connected-device-green' : item.status === 'CONNECTED' && item.online}"
+            'icon__remote-access-gray' : item.status !== 'INSTALLED' || !item.online}"
                 ></div>
+                <div
+                    *ngIf="item.status === 'INSTALLED' && item.online"
+                    class="support-timeline-status__step2 icon__remote-access-green pointer"
+                    ngbDropdown
+                    container="body"
+                    ngbDropdownToggle
+                >
+                    <div ngbDropdownMenu>
+                        <button
+                            ngbDropdownItem
+                            (click)="connectRemoteAccess('CSS')"
+                        >
+                            CSS – Custom Share Screen
+                        </button>
+                        <button
+                            ngbDropdownItem
+                            (click)="connectRemoteAccess('RDP')"
+                        >
+                            RDP – Remote desktop protocol
+                        </button>
+                    </div>
+                </div>
                 <div
                     class="support-timeline-status__line"
                     [ngClass]="{'--success' : item.status === 'INSTALLED' && item.online || item.status === 'CONNECTED' && item.online}"

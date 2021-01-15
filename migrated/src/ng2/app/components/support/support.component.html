@@ -19,7 +19,10 @@
             [ngForOf]="list"
             [ngForTrackBy]="trackById"
         >
-            <app-support-item [item]="item"></app-support-item>
+            <app-support-item
+                [item]="item"
+                (onConnectRemoteAccess)="onConnectRemoteAccess($event)"
+            ></app-support-item>
         </ng-template>
         <!-- <div class="support-tickets-list__item">
             <div class="support-tickets-list__item-top">
