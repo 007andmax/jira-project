@@ -108,6 +108,10 @@ export class SupportComponent implements OnInit, OnDestroy {
     this.realSessionId = realSessionId;
     const modalRef = this.modalService.open(ModalCustomShareScreenComponent, null);
     modalRef.componentInstance.companyId = this.companyId;
+    this.cd.detectChanges();
+  }
+  public trackById(index, item) {
+    return item.id;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

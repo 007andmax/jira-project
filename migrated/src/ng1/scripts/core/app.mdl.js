@@ -555,121 +555,121 @@
             throw 'SessionId is required';
           }
 
-          if (sessionId === $rootScope.currentRemoteSessionId) {
-            $uibModal.open({
-              templateUrl: '/ng1/scripts/common/templates/remote-connection-complete.tpl.html',
-              controller: ['$scope', '$uibModalInstance', 'TicketsService', function ($scope, $uibModalInstance, TicketsService) {
-                $scope.selectTicket = false;
-                $scope.selectedTicket = {};
-                $scope.searchTickets = TicketsService.search.bind(this, function (resp) {
-                  $scope.filteredTickets = resp;
-                });
+          // if (sessionId === $rootScope.currentRemoteSessionId) {
+          $uibModal.open({
+            templateUrl: '/ng1/scripts/common/templates/remote-connection-complete.tpl.html',
+            controller: ['$scope', '$uibModalInstance', 'TicketsService', function ($scope, $uibModalInstance, TicketsService) {
+              $scope.selectTicket = false;
+              $scope.selectedTicket = {};
+              $scope.searchTickets = TicketsService.search.bind(this, function (resp) {
+                $scope.filteredTickets = resp;
+              });
 
-                $scope.getTicketLabel = function (ticket) {
-                  if (ticket && ticket.number && ticket.subject) {
-                    return ticket.number + ' - ' + ticket.subject;
-                  } else {
-                    return '';
-                  }
-                };
-
-                $scope.selectTicket = function (isTUCreating) {
-                  $scope.selectingTicket = isTUCreating;
-                };
-
-                $scope.onTicketSelect = function (value) {
-                  var ticketNumber = value.split(' - ')[0];
-
-                  $scope.selectedTicket.item = $scope.filteredTickets.find(function (ticket) {
-                    return ticket.number === ticketNumber;
-                  });
-                };
-
-                $scope.createTicket = function () {
-                  $uibModalInstance.close();
-                };
-
-                $scope.createTicketUpdate = function () {
-                  $uibModalInstance.close($scope.selectedTicket.item);
-                };
-
-                $scope.cancelConfirm = function (isGoBack) {
-                  if (isGoBack) {
-                    $scope.selectingTicket = false;
-                  } else {
-                    $uibModalInstance.dismiss(false);
-                  }
-                };
-
-              }],
-              keyboard: false,
-              size: 'custom-size-confirmation-pop-up',
-              windowClass: 'modal-spam',
-              backdrop: 'static',
-              animation: true
-
-            }).result.then(function (ticket) {
-              if (ticket) {
-
-                //create ticket update
-                var params = {
-                  listType: 'all',
-                  ticketId: ticket.id,
-                  remoteParams: {
-                    connectionDuration: sessionTime,
-                    companyId: companyId,
-                    deviceId: deviceId
-                  }
-                };
-
-                if (!ticket.assignedUser || !ticket.assignedUser.id) {
-                  TicketsService.assignTo(ticket.id, $rootScope.currentUser.id, function () {
-                    $state.go('tickets.details', params);
-                  });
+              $scope.getTicketLabel = function (ticket) {
+                if (ticket && ticket.number && ticket.subject) {
+                  return ticket.number + ' - ' + ticket.subject;
                 } else {
-                  $state.go('tickets.details', params);
+                  return '';
                 }
-              } else if (ticket === undefined) {
+              };
 
-                //create ticket
-                var modalInstance = $uibModal.open({
-                  templateUrl: '/ng1/scripts/core/header/create-new-entity/create-new-entity.tpl.html',
-                  controller: 'createNewEntityCtrl',
-                  windowClass: 'create-popup',
-                  backdrop: 'static',
-                  animation: true,
-                  resolve: {
-                    sessionId: function () {
-                      return sessionId;
-                    },
-                    sessionTime: function () {
-                      return sessionTime;
-                    },
-                    resolvedDeviceId: function () {
-                      return deviceId;
-                    },
-                    resolvedCompanyId: function () {
-                      return companyId;
-                    },
-                    resolvedOpenedTab: function () {
-                      return 'ticket';
-                    },
-                    resolvedExistedItem: false
-                  }
-                });
+              $scope.selectTicket = function (isTUCreating) {
+                $scope.selectingTicket = isTUCreating;
+              };
 
-                modalInstance.opened.then(function () {
-                  $('body').addClass('non-body-scroll');
-                });
+              $scope.onTicketSelect = function (value) {
+                var ticketNumber = value.split(' - ')[0];
 
-                modalInstance.result.finally(function () {
-                  $('body').removeClass('non-body-scroll');
+                $scope.selectedTicket.item = $scope.filteredTickets.find(function (ticket) {
+                  return ticket.number === ticketNumber;
                 });
+              };
+
+              $scope.createTicket = function () {
+                $uibModalInstance.close();
+              };
+
+              $scope.createTicketUpdate = function () {
+                $uibModalInstance.close($scope.selectedTicket.item);
+              };
+
+              $scope.cancelConfirm = function (isGoBack) {
+                if (isGoBack) {
+                  $scope.selectingTicket = false;
+                } else {
+                  $uibModalInstance.dismiss(false);
+                }
+              };
+
+            }],
+            keyboard: false,
+            size: 'custom-size-confirmation-pop-up',
+            windowClass: 'modal-spam',
+            backdrop: 'static',
+            animation: true
+
+          }).result.then(function (ticket) {
+            if (ticket) {
+
+              //create ticket update
+              var params = {
+                listType: 'all',
+                ticketId: ticket.id,
+                remoteParams: {
+                  connectionDuration: sessionTime,
+                  companyId: companyId,
+                  deviceId: deviceId
+                }
+              };
+
+              if (!ticket.assignedUser || !ticket.assignedUser.id) {
+                TicketsService.assignTo(ticket.id, $rootScope.currentUser.id, function () {
+                  $state.go('tickets.details', params);
+                });
+              } else {
+                $state.go('tickets.details', params);
               }
-            });
+            } else if (ticket === undefined) {
 
-            $rootScope.currentRemoteSessionId = '';
-          }
+              //create ticket
+              var modalInstance = $uibModal.open({
+                templateUrl: '/ng1/scripts/core/header/create-new-entity/create-new-entity.tpl.html',
+                controller: 'createNewEntityCtrl',
+                windowClass: 'create-popup',
+                backdrop: 'static',
+                animation: true,
+                resolve: {
+                  sessionId: function () {
+                    return sessionId;
+                  },
+                  sessionTime: function () {
+                    return sessionTime;
+                  },
+                  resolvedDeviceId: function () {
+                    return deviceId;
+                  },
+                  resolvedCompanyId: function () {
+                    return companyId;
+                  },
+                  resolvedOpenedTab: function () {
+                    return 'ticket';
+                  },
+                  resolvedExistedItem: false
+                }
+              });
+
+              modalInstance.opened.then(function () {
+                $('body').addClass('non-body-scroll');
+              });
+
+              modalInstance.result.finally(function () {
+                $('body').removeClass('non-body-scroll');
+              });
+            }
+          });
+
+          $rootScope.currentRemoteSessionId = '';
+          //  }
 
         };
 

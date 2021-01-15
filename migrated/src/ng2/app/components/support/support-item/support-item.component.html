@@ -67,7 +67,7 @@
                     'icon__connected-device-green' : item.status === 'CONNECTED' && item.online}"
                     placement="top"
                     container="body"
-                    disableTooltip="item.status !== 'INSTALLED' || !item.online"
+                    [disableTooltip]="!(item.status === 'CONNECTED' && item.online)"
                     ngbTooltip="Agent Connected"
                 ></div>
                 <div
