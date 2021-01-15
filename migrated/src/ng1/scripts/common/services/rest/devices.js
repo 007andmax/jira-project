@@ -305,9 +305,10 @@
             storage.oneTimeCallbacks.listener && storage.oneTimeCallbacks.listener(newChange);
 
 
-            if (newChange.action === 'REMOTE_CONNECTION_CLOSED') {
+            if (newChange.action === 'ONE_TIME_CONNECTION_OPEN') { //'REMOTE_CONNECTION_CLOSED'
               var session = newChange.data;
-              $rootScope.openCreateTicketForm(session.sessionId, session.duration, session.clientCompany.id, session.oneTime ? '' : session.deviceId);
+              //  $rootScope.openCreateTicketForm(session.sessionId, session.duration, session.clientCompany.id, session.oneTime ? '' : session.deviceId);
+              $rootScope.openCreateTicketForm(session.sessionId, 10, session.clientCompany.id, session.oneTime ? '' : session.deviceId);
             } else if (newChange.action === 'ONE_TIME_CONNECTION_OPEN') {
               addRemoteConnectionSessionToDevice(newChange, devices);
 
