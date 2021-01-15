@@ -91,7 +91,7 @@ export class SupportItemComponent implements OnInit {
   }
   public connectRemoteAccess(conectionType) {
     this.onConnectRemoteAccess.emit({
-      sessionId: this.item.sessionId,
+      sessionId: this.item.id,
       conectionType: conectionType,
       companyId: this.item.clientCompany.id
     })
