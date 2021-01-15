@@ -24,6 +24,16 @@
                 (onConnectRemoteAccess)="onConnectRemoteAccess($event)"
             ></app-support-item>
         </ng-template>
+        <p
+            class="no-exist-remote-sessions"
+            *ngIf="!showPreloader && list.length === 0"
+        >
+            There are no active requests
+        </p>
+        <div
+            class="loading"
+            *ngIf="showPreloader"
+        ></div>
         <!-- <div class="support-tickets-list__item">
             <div class="support-tickets-list__item-top">
                 <div class="support-tickets-list__title">Remote Session - Sam</div>

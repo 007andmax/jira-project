@@ -18,6 +18,7 @@ import { RemoteSession } from './class/remote-sessions';
   styleUrls: ['./support.component.scss']
 })
 export class SupportComponent implements OnInit, OnDestroy {
+  showPreloader: boolean = true;
   list: Array<RemoteSession> = [];
   realSessionId: string;
   companyId: string;
@@ -36,6 +37,7 @@ export class SupportComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.supportService.getRemoteSessions().subscribe(data => {
       this.list = data;
+      this.showPreloader = false;
       console.log("this.list", this.list);
       this.cd.detectChanges();
     })

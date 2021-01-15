@@ -18,21 +18,18 @@
                     </div>
                     <div
                         placement="top"
-                        container="body"
                         ngbTooltip="Copy Key"
                         class="support-item-menu__button icon__copy pointer"
                         (click)="copyKey()"
                     ></div>
                     <div
                         placement="top"
-                        container="body"
                         ngbTooltip="Email Info"
                         class="support-item-menu__button icon__email-dark pointer"
                         (click)="sendEmail()"
                     ></div>
                     <div
                         placement="top"
-                        container="body"
                         ngbTooltip="Copy Support URL"
                         class="support-item-menu__button icon__link-gray pointer"
                         (click)="copyLink()"
@@ -40,7 +37,6 @@
                     <div
                         class="support-item-menu__button icon__new-ticket-support pointer"
                         placement="top"
-                        container="body"
                         ngbTooltip="Create Ticket"
                     ></div>
                 </div>
@@ -66,7 +62,6 @@
                     [ngClass]="{'icon__remote-access-gray' : item.status !== 'INSTALLED' || !item.online,
                     'icon__connected-device-green' : item.status === 'CONNECTED' && item.online}"
                     placement="top"
-                    container="body"
                     [disableTooltip]="!(item.status === 'CONNECTED' && item.online)"
                     ngbTooltip="Agent Connected"
                 ></div>
@@ -114,7 +109,6 @@
             <div
                 class="support-tickets-list__close icon__close pointer"
                 placement="top"
-                container="body"
                 ngbTooltip="Close Remote Session"
                 (click)="removeSession()"
             ></div>

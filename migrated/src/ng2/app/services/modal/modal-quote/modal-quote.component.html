@@ -1,63 +1,98 @@
 <div class="qt-modal quote-email-modal">
-  <div class="qt-modal__header">
-    <div class="qt-modal__header-title qt-ff-sb">Emall info</div>
-    <div class="qt-modal__close icon__close qt-pointer" (click)="onCheckForClose()"></div>
-  </div>
-  <div class="qt-modal__body">
-
-    <div class="qt-input-block qt-mb-24 qt-w100">
-      <label>Subject</label>
-      <input type="text" placeholder="Write Subject" [(ngModel)]="subject" (ngModelChange)="setSubject($event)">
+    <div class="qt-modal__header">
+        <div class="qt-modal__header-title qt-ff-sb">Emall info</div>
+        <div
+            class="qt-modal__close icon__close qt-pointer"
+            (click)="onCheckForClose()"
+        ></div>
     </div>
-
-    <div class="qt-input-block qt-w100 email-selects qt-mb-24">
-      <label>Recipient Email Address</label>
-
-      <mat-form-field>
-        <mat-chip-list #chipList aria-label="Fruit selection">
-          <mat-chip
-            *ngFor="let user of selectedUsers; let i = index"
-            [selectable]="selectable"
-            [removable]="removable"
-            (removed)="remove(i)">
-            {{user}}
-            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-          </mat-chip>
-          <input
-            placeholder="Add receipt email address"
-            #userInput
-            class="pointer"
-            [formControl]="userCtrl"
-            [matAutocomplete]="auto"
-            [matChipInputFor]="chipList"
-            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-            [matChipInputAddOnBlur]="addOnBlur"
-            (keyup)="keyup($event)"
-            (matChipInputTokenEnd)="add($event)">
-        </mat-chip-list>
-        <mat-autocomplete class="quote-email-dropdown" #auto="matAutocomplete" (optionSelected)="selected($event)">
-          <mat-option *ngFor="let user of users" [value]="user">
-            {{user.primaryEmail}}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-      <p *ngIf="showError" class="qt-modal-bot-error">at least 1 user</p>
+    <div class="qt-modal__body">
+        <div class="qt-input-block qt-mb-24 qt-w100">
+            <label>Subject</label>
+            <input
+                type="text"
+                placeholder="Write Subject"
+                [(ngModel)]="subject"
+                (ngModelChange)="setSubject($event)"
+            >
+        </div>
+        <div class="qt-input-block qt-w100 email-selects qt-mb-24">
+            <label>Recipient Email Address</label>
+            <mat-form-field>
+                <mat-chip-list
+                    #chipList
+                    aria-label="Fruit selection"
+                >
+                    <mat-chip
+                        *ngFor="let user of selectedUsers; let i = index"
+                        [selectable]="selectable"
+                        [removable]="removable"
+                        (removed)="remove(i)"
+                    >
+                        {{user}}
+                        <mat-icon
+                            matChipRemove
+                            *ngIf="removable"
+                        >
+                            cancel
+                        </mat-icon>
+                    </mat-chip>
+                    <input
+                        placeholder="Add receipt email address"
+                        #userInput
+                        class="pointer"
+                        [formControl]="userCtrl"
+                        [matAutocomplete]="auto"
+                        [matChipInputFor]="chipList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        [matChipInputAddOnBlur]="addOnBlur"
+                        (input)="onSearch($event)"
+                        (keyup)="keyup($event)"
+                        (matChipInputTokenEnd)="add($event)"
+                    >
+                </mat-chip-list>
+                <mat-autocomplete
+                    class="quote-email-dropdown"
+                    #auto="matAutocomplete"
+                    (optionSelected)="selected($event)"
+                >
+                    <mat-option
+                        *ngFor="let user of users"
+                        [value]="user"
+                    >
+                        {{user.primaryEmail}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+            <p
+                *ngIf="showError"
+                class="qt-modal-bot-error"
+            >
+                at least 1 user
+            </p>
+        </div>
+        <div class="qt-input-block qt-w100">
+            <label>Message</label>
+            <textarea
+                class="quote-text-block"
+                placeholder="Write message here…"
+                [(ngModel)]="message"
+                (ngModelChange)="setMessage($event)"
+            ></textarea>
+        </div>
     </div>
-
-
-    <div class="qt-input-block qt-w100">
-      <label>Message</label>
-
-      <textarea
-        class="quote-text-block"
-        placeholder="Write message here…"
-        [(ngModel)]="message"
-        (ngModelChange)="setMessage($event)"></textarea>
+    <div class="qt-modal__footer">
+        <button
+            class="qt-button --gray qt-mr-12"
+            (click)="onCheckForClose()"
+        >
+            Cancel
+        </button>
+        <button
+            class="qt-button qt-mr-12"
+            (click)="save()"
+        >
+            Send Message
+        </button>
     </div>
-  </div>
-  <div class="qt-modal__footer">
-    <button class="qt-button --gray qt-mr-12" (click)="onCheckForClose()">Cancel</button>
-    <button class="qt-button qt-mr-12" (click)="save()"  >Send Message</button>
-  </div>
 </div>
-

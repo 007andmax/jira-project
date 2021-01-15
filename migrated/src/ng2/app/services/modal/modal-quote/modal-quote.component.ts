@@ -41,6 +41,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
   showError = false;
   usersEmails = [];
   users = [];
+  reqUsersList = [];
   initialized: boolean = false;
   showConfirm: boolean = false;
   sub: Subscription = new Subscription();
@@ -173,6 +174,8 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
     let clientUser = userList.filter((item) => item.accountType === USER.TYPE.CLIENT && item.company.id == companyId && !item.deletedAt && item.primaryEmail !== "");
     this.users = [...techUser, ...clientUser].sort((a, b) => (a.primaryEmail.toLowerCase() > b.primaryEmail.toLowerCase()) ?
       1 : ((b.primaryEmail.toLowerCase() > a.primaryEmail.toLowerCase()) ? -1 : 0));
+    this.reqUsersList = [...techUser, ...clientUser].sort((a, b) => (a.primaryEmail.toLowerCase() > b.primaryEmail.toLowerCase()) ?
+      1 : ((b.primaryEmail.toLowerCase() > a.primaryEmail.toLowerCase()) ? -1 : 0));
   }
 
   /**
@@ -236,6 +239,10 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
     } else {
       this.showError = true;
     }
+  }
+
+  onSearch(event) {
+    this.users = this.reqUsersList.filter(item => item.primaryEmail.includes(event.target.value));
   }
 
   /**

@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { NgbModal, NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 import { SUPPORT_MODAL_ACTION_SEND } from 'src/ng2/app/const/support';
 import { ModalQuoteComponent } from 'src/ng2/app/services/modal/modal-quote/modal-quote.component';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
@@ -38,6 +38,7 @@ export class SupportItemComponent implements OnInit {
     private supportService: SupportService,
     private supportStateService: SupportStateService,
     private devicesService: DevicesService,
+    public cd: ChangeDetectorRef,
     private modalService: NgbModal,) { }
 
   ngOnInit() {
@@ -72,7 +73,6 @@ export class SupportItemComponent implements OnInit {
   }
   sendEmail() {
     const modalRef = this.modalService.open(ModalQuoteComponent, { windowClass: 'quote-send-modal' });
-
     modalRef.componentInstance.data = {
       message: `Follow that link(${this.constantsStateService.getConstant('server.url') + 'remote?key=' + this.item.key}) to download agent`,
       subject: `${this.companiesStateService.getCurrentCompany().name} remote support agent`,
