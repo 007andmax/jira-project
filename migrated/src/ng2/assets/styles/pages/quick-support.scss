@@ -141,6 +141,11 @@
     width: 100%;
     font-family: Graphik-Medium, sans-serif;
     top: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    line-height: 14px;
     &.line-title--gray, .line-title--gray {
       color: #9ca5b6;
       font-family: Graphik-Regular, sans-serif;

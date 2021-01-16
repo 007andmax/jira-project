@@ -51,10 +51,9 @@
                     class="support-timeline-status__line"
                     [ngClass]="{'--success' : item.status === 'CONNECTED'}"
                 >
-                    <div
-                        class="support-timeline-status__line-title"
-                        [textContent]="getUserFirstLastName(item.performer)"
-                    ></div>
+                    <div class="support-timeline-status__line-title">
+                      <span [textContent]="getUserFirstLastName(item.performer)"></span>
+                    </div>
                 </div>
                 <div
                     *ngIf="(item.status !== 'INSTALLED' || !item.online) || (item.status === 'CONNECTED' && item.online)"
@@ -91,14 +90,10 @@
                     class="support-timeline-status__line"
                     [ngClass]="{'--success' : item.status === 'INSTALLED' && item.online || item.status === 'CONNECTED' && item.online}"
                 >
-                    <div
-                        class="support-timeline-status__line-title"
-                        [textContent]="item.userName"
-                    ></div>
-                    <div
-                        class="support-timeline-status__line-title line-title--gray"
-                        [textContent]="statusMap[item.status]"
-                    ></div>
+                    <div class="support-timeline-status__line-title">
+                      <span [textContent]="item.userName"></span>
+                      <span class="line-title--gray" [textContent]="statusMap[item.status]"></span>
+                    </div>
                 </div>
                 <div
                     class="support-timeline-status__step3"
