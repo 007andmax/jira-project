@@ -1,7 +1,91 @@
-<div class="new-users-content__header">
+<div class="qt-list-header sticky-list-header users-page__list-header">
+  <div class="qt-w100 qt-df qt-jc-sb qt-ai-c">
+    <h3 class="list-title qt-mb-0" [textContent]="'All Users (' + count + ')'"></h3>
+
+    <div class="qt-df qt-ai-c">
+      <div class="company-devices-page__list-header-buttons">
+        <div [textContent]="'3 Users Selected'"></div>
+        <div class="qt-ml-25 qt-ff-gm qt-df qt-color-info qt-ai-c qt-pointer">
+          <div class="email-ng2 qt-sz-16 qt-ic-c qt-mr-6"></div>
+          <div>Write Draft</div>
+        </div>
+        <div class="qt-ml-16 qt-ff-gm qt-df qt-color-info qt-ai-c qt-pointer">
+          <div class="archive-blue-ng2 qt-sz-16 qt-ic-c qt-mr-6"></div>
+          <div>Archive User</div>
+        </div>
+      </div>
+
+      <button class="qt-btn btn-filter qt-ml-8 d-f">Filters</button><!-- add class 'active' if filters open  -->
+      <button class="qt-btn --outline-blue qt-ml-8" (click)="addUser()">Add user</button>
+    </div>
+  </div>
+
+  <div class="qt-df qt-ai-c qt-w100 qt-mt-16">
+    <input
+      type="text"
+      placeholder="Select Title"
+      class="qt-mr-8 qt-input h36 qt-w100"
+    >
+    <input
+      type="text"
+      placeholder="Search By Company"
+      class="qt-mr-8 qt-input h36 qt-w100"
+    >
+    <input
+      type="text"
+      placeholder="Search By Industry"
+      class="qt-input h36 qt-w100"
+    >
+  </div>
+
+  <table class="qt-table-modern">
+    <thead>
+        <tr>
+          <th class="users-table__ckeck">
+            <div class="d-f">
+              <label class="qt-checkbox">
+                <input
+                  type="checkbox"
+                >
+                <span></span>
+              </label>
+            </div>
+          </th>
+          <th class="users-table__name">
+            NAME
+            <span class="qt-table-modern__sorting"></span>
+          </th>
+          <th class="users-table__company">
+            COMPANY
+            <span class="qt-table-modern__sorting"></span>
+          </th>
+          <th class="users-table__contract-no">
+            CONTRACT NO
+            <span class="qt-table-modern__sorting"></span>
+          </th>
+          <th class="users-table__subscription">
+            SUBSCRIPTION
+            <span class="qt-table-modern__sorting"></span>
+          </th>
+          <th class="users-table__tickets">
+            TICKETS
+            <span class="qt-table-modern__sorting"></span>
+          </th>
+          <th class="users-table__email"></th>
+          <th class="users-table__menu"></th>
+        </tr>
+    </thead>
+  </table>
+
+
+</div>
+
+
+
+<!-- ********** Old HEADER ******* -->
+<!-- <div class="new-users-content__header">
   <h3>Users ({{count}})</h3>
   <div class="new-users-content__header--search">
-    <!--add class "show" to <div class="new-users-selected">-->
     <div class="new-users-selected">
       <div class="new-users-selected-qty">
         <span>2</span> Selected
@@ -22,4 +106,4 @@
       Add User
     </button>
   </div>
-</div>
+</div> -->

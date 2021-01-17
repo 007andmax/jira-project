@@ -1,9 +1,35 @@
-<!--for show filters add class "show" for app-left-panel-->
-<app-left-panel-users class=""></app-left-panel-users>
+<!-- for show filters add class "show" for app-left-panel -->
+<app-left-panel-users></app-left-panel-users>
+<div class="page-list users-page">
+  <app-users-header [count]="count"></app-users-header>
+  <div class="table-container">
+    <table class="qt-table-modern users-table">
+      <tbody
+        infiniteScroll
+        [infiniteScrollDistance]="2"
+        [infiniteScrollThrottle]="50"
+        [infiniteScrollDisabled]="infiniteScrollDisabled"
+        (scrolled)="onScroll()">
+        <ng-template ngFor let-user
+          [ngForOf]="users"
+          [ngForTrackBy]="trackById">
+          <app-users-table [showArchivedUsers]="showArchivedUsers" [user]="user"></app-users-table>
+        </ng-template>
+      </tbody>
+    </table>
+    <div class="loading" *ngIf="showPreloader"></div>
+  </div>
+</div>
 
-<div class="new-users-content">
+<app-users-aside></app-users-aside>
+<users-aside-edit></users-aside-edit>
+
+
+
+<!--div class="page-list users-page">
   <app-users-header [count]="count"></app-users-header>
   <div class="new-users__list">
+
     <div class="new-users__list--header clearfix mob-hidden">
       <div class="col-md-3 pointer with-checkbox">
         <label class="checkbox-container">
@@ -18,6 +44,8 @@
       <div class="col-md-1 pointer text-center"  (click)="onFilter('tickets')">Tickets</div>
       <div class="col-md-2 pointer"></div>
     </div>
+
+
     <div class="user-content"
     infiniteScroll
     [infiniteScrollDistance]="2"
@@ -37,6 +65,5 @@
     </button>
     <div class="loading" style="display: none;"></div>
   </div>
-</div>
-<users-aside-edit></users-aside-edit>
-<app-users-aside></app-users-aside>
+</-div>
+ -->

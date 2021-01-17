@@ -1,10 +1,92 @@
-<div class="new-users-content__list--item clearfix">
+<tr>
+  <td>
+    <div class="d-f">
+      <label class="qt-checkbox">
+        <input
+            type="checkbox"
+            (change)="onSelectUser($event)"
+        >
+        <span></span>
+      </label>
+    </div>
+  </td>
+
+  <td class="users-table__name">
+    user
+  </td>
+  <td class="users-table__company">
+    company
+  </td>
+  <td class="users-table__contract-no">
+    contract no
+  </td>
+  <td class="users-table__subscription">
+    subscription
+  </td>
+  <td class="users-table__tickets">
+    tickets
+  </td>
+  <td class="users-table__email">
+    email
+  </td>
+  <td>
+    <div
+      class="users-table__menu"
+      ngbDropdown
+      [container]="'body'"
+    >
+      <div
+        class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"
+        id="dropdownBasic1"
+        ngbDropdownToggle
+      ></div>
+      <ul
+        class="qt-dropdown-menu"
+        ngbDropdownMenu
+        aria-labelledby="dropdownBasic1"
+      >
+        <li class="pointer" ngbDropdownItem>
+          <div class="icon__edit qt-bg-contain  qt-sz-16 qt-mr-8"></div>
+          Edit
+        </li>
+        <li class="pointer" ngbDropdownItem>
+          <div class="send-grey-ng2 qt-bg-contain  qt-sz-16 qt-mr-8"></div>
+          Send
+        </li>
+        <li class="pointer">
+          <div class="icon__remove qt-bg-contain qt-sz-16 qt-mr-8"></div>
+          Delete
+        </li>
+        <li class="pointer">
+          <div class="archive-grey-ng2 qt-bg-contain qt-sz-16 qt-mr-8"></div>
+          Restore
+        </li>
+      </ul>
+    </div>
+  </td>
+
+  <!-- <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+    <button ngbDropdownItem *ngIf="!showArchivedUsers" (click)="edit()"><i class="icn-16 edit-grey-ng2"></i>Edit
+    </button>
+    <button ngbDropdownItem *ngIf="!showArchivedUsers"><i class="icn-16 send-grey-ng2"></i>Send</button>
+    <button ngbDropdownItem *ngIf="currentUser.checkPermission('ARCHIVE_USERS') && !showArchivedUsers"
+            (click)="delete()"><i class="icn-16 archive-grey-ng2"></i>Delete
+    </button>
+    <button ngbDropdownItem *ngIf="currentUser.checkPermission('ARCHIVE_USERS') && showArchivedUsers"
+            (click)="restore()"><i class="icn-16 archive-grey-ng2"></i>Restore
+    </button>
+  </div> -->
+
+
+</tr>
+
+
+<!-- <div class="new-users-content__list--item clearfix">
   <div class="col-md-3 w-100">
     <label class="checkbox-container">
       <input type="checkbox" (change)="onSelectUser($event)">
       <span class="checkbox-mark"></span>
     </label>
-    <!--[ngStyle]="{'background': 'url(' + getUserAvatarUrl(user) + ') no-repeat','background-size': 'contain'}"-->
     <div class="user-details" (click)="showUserDetails()">
     <div class="circle-avatar"
          [ngStyle]="{'background':  getUserAvatarUrl()}"
@@ -44,7 +126,20 @@
     <app-user-table-subscription (onChange)="onChangeSubscriptions($event)"
                                  [subscription]="user.subscription"></app-user-table-subscription>
   </div>
+
+
+
+
   <div class="col-md-1 fz-13 jc-c mob-hidden" [textContent]="user.userStatistic.ticketsSubmitted || 0"></div>
+
+
+
+
+
+
+
+
+
   <div class="col-md-2">
     <div class="grey-dropdown right with-icons" ngbDropdown>
       <i class="icn-16 more-vertical-ng2 pointer"
@@ -54,13 +149,7 @@
         <button ngbDropdownItem *ngIf="!showArchivedUsers" (click)="edit()"><i class="icn-16 edit-grey-ng2"></i>Edit
         </button>
         <button ngbDropdownItem *ngIf="!showArchivedUsers"><i class="icn-16 send-grey-ng2"></i>Send</button>
-        <button ngbDropdownItem *ngIf="currentUser.checkPermission('ARCHIVE_USERS') && !showArchivedUsers"
-                (click)="delete()"><i class="icn-16 archive-grey-ng2"></i>Delete
-        </button>
-        <button ngbDropdownItem *ngIf="currentUser.checkPermission('ARCHIVE_USERS') && showArchivedUsers"
-                (click)="restore()"><i class="icn-16 archive-grey-ng2"></i>Restore
-        </button>
       </div>
     </div>
   </div>
-</div>
+</div> -->
