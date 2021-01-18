@@ -2654,7 +2654,9 @@ app-ticket-profile-form-update {
   bottom: 0;
   background: white;
   z-index: 30;
-
+  .cps-block__content {
+    min-height: 106px;
+  }
 }
 
 .dropdown-menu.services-container.show {
