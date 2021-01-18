@@ -384,6 +384,7 @@ import { CompanyDashContractComponent } from './components/company-dashboard/com
 import { LeftPanelCompanyComponent } from './components/left-panel/left-panel-company/left-panel-company.component';
 import { SupportComponent } from './components/support/support.component';
 import { SupportItemComponent } from './components/support/support-item/support-item.component';
+import { DynamicTooltipComponent } from './components/shared/dynamic-tooltip/dynamic-tooltip.component';
 /**
  * declare angular
  */
@@ -934,6 +935,7 @@ angular.module('quicktech')
     LeftPanelCompanyComponent,
     SupportComponent,
     SupportItemComponent,
+    DynamicTooltipComponent,
   ],
   imports: [
     BrowserModule,

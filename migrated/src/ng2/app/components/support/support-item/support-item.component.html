@@ -16,10 +16,15 @@
                         [textContent]="item.key"
                     >
                     </div>
+                    <app-dynamic-tooltip
+                        [content]="'Copy Key'"
+                        [position]="'top'"
+                        #dynamicTooltip
+                    ></app-dynamic-tooltip>
                     <div
-                        placement="top"
-                        ngbTooltip="Copy Key"
                         class="support-item-menu__button icon__copy pointer"
+                        (mouseenter)="dynamicTooltip.show($event.target)"
+                        (mouseleave)="dynamicTooltip.hide()"
                         (click)="copyKey()"
                     ></div>
                     <div
@@ -52,7 +57,7 @@
                     [ngClass]="{'--success' : item.status === 'CONNECTED'}"
                 >
                     <div class="support-timeline-status__line-title">
-                      <span [textContent]="getUserFirstLastName(item.performer)"></span>
+                        <span [textContent]="getUserFirstLastName(item.performer)"></span>
                     </div>
                 </div>
                 <div
@@ -91,8 +96,11 @@
                     [ngClass]="{'--success' : item.status === 'INSTALLED' && item.online || item.status === 'CONNECTED' && item.online}"
                 >
                     <div class="support-timeline-status__line-title">
-                      <span [textContent]="item.userName"></span>
-                      <span class="line-title--gray" [textContent]="statusMap[item.status]"></span>
+                        <span [textContent]="item.userName"></span>
+                        <span
+                            class="line-title--gray"
+                            [textContent]="statusMap[item.status]"
+                        ></span>
                     </div>
                 </div>
                 <div
