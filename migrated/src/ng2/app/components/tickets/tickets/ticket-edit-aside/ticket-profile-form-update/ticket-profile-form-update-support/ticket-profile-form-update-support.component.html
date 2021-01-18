@@ -1,9 +1,12 @@
 <div class="cps-block__content">
     <div
         class="qt-df"
-        *ngIf="item && (item.status === 'URL_GENERATED' || item.status === 'URL_OPENED')"
+        *ngIf="item"
     >
-        <div class="support-item-menu --big qt-mr-16">
+        <div
+            class="support-item-menu --big qt-mr-16"
+            *ngIf="item.status === 'URL_GENERATED' || item.status === 'URL_OPENED'"
+        >
             <div class="support-item-menu__key icon__key"></div>
             <div
                 class="support-item-menu__number"
