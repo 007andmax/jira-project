@@ -1,0 +1,23 @@
+.cps-block {
+    
+    .support-timeline-status__line {
+      width: 140px;
+    }
+    &__support-message {
+      width: 100%;
+      font-size: 12px;
+      color: #364656;
+      line-height: 1.33;
+      border: 1px solid #fff1d6;
+      height: 24px;
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      border-radius: 4px;
+      background-color: #fffbf2;
+      padding: 4px 10px;
+    }
+    &__create-connection-btn {
+      width: fit-content;
+    }
+  }

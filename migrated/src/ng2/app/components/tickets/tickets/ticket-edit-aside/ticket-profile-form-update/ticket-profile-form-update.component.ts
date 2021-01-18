@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectorRef, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef, ViewChild, ElementRef, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { TicketProfileFormUpdate } from '../class/ticket-profile-form-update';
 import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.service';
 import { TicketProfile } from '../../class/ticket-profile';
@@ -11,6 +11,18 @@ import { TicketProfileFormUpdateServicesComponent } from './ticket-profile-form-
 import { NotificationStateService } from 'src/ng2/app/components/shared/notification/services/notification-state.service';
 import { ErrorNotificationStateService } from 'src/ng2/app/components/shared/error-notification/services/error-notification-state.service';
 import { DisabledBtnDirective } from 'src/ng2/app/directives/disabled-btn.directive';
+import { RemoteSession } from 'src/ng2/app/components/support/class/remote-sessions';
+import { SupportService } from 'src/ng2/app/services/support/support.service';
+import { Subscription } from 'rxjs';
+import { SupportStateService } from 'src/ng2/app/states/support/support-state.service';
+import { DraftEmail } from 'src/ng2/app/components/shared/draft-email/class/draft-email';
+import { DraftEmailService } from 'src/ng2/app/services/draft-email/draft-email.service';
+import { DevicesRealTimeService } from 'src/ng2/app/states/devices/devices-real-time.service';
+import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.service';
+import { ConstantsStateService } from 'src/ng2/app/states/constants/constants-state.service';
+import { ModalCustomShareScreenComponent } from 'src/ng2/app/services/modal/modal-custom-share-screen/modal-custom-share-screen.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
 
 @Component({
   selector: 'app-ticket-profile-form-update',
@@ -19,7 +31,7 @@ import { DisabledBtnDirective } from 'src/ng2/app/directives/disabled-btn.direct
   providers: [TicketsListService]
 })
 
-export class TicketProfileFormUpdateComponent implements OnInit {
+export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
   ticketProfile: TicketProfile = new TicketProfile();
   ticketProfileFormUpdate: TicketProfileFormUpdate = new TicketProfileFormUpdate();
   @ViewChild('selectProducts') selectProducts: TicketProfileFormUpdateProductsComponent;
@@ -32,6 +44,10 @@ export class TicketProfileFormUpdateComponent implements OnInit {
     this.ticketProfileFormUpdate.setTicketId(this.ticketProfile.id);
     this.addCreatedUser();
   };
+
+  realSessionId: string;
+  companyIdForSupport: string;
+  remoteSession: RemoteSession;
   @Output() onClosed = new EventEmitter();
   showAddUpdateUser = false;
   isUpdate: boolean = false;
@@ -39,17 +55,94 @@ export class TicketProfileFormUpdateComponent implements OnInit {
   files: any[] = [];
   tab: string = "NOTE";
   currentUser: CurrentUser;
+  sub: Subscription = new Subscription();
   constructor(private ticketsStateService: TicketsStateService,
     public cd: ChangeDetectorRef,
     private usersStateService: UsersStateService,
     private ticketsService: TicketsService,
     private elRef: ElementRef,
+    private modalService: NgbModal,
+    private devicesService: DevicesService,
+    private supportService: SupportService,
     private errorNotificationStateService: ErrorNotificationStateService,
     private notificationStateService: NotificationStateService,
+    private supportStateService: SupportStateService,
+    private devicesRealTimeService: DevicesRealTimeService,
+    private draftEmailService: DraftEmailService,
+    private constantsStateService: ConstantsStateService,
+    private devicesStateService: DevicesStateService,
     public ticketsListService: TicketsListService) { }
+
 
   ngOnInit() {
     this.currentUser = this.usersStateService.getCurrentUser();
+
+    this.supportStateService.getHandleSendMode().subscribe(data => {
+      let draftEmail: DraftEmail = new DraftEmail();
+      draftEmail.setContent(data.message);
+      draftEmail.setSubject(data.subject);
+      draftEmail.setRecipients(data.recipients);
+      console.log("draftEmail", draftEmail);
+      console.log("data", data);
+      this.draftEmailService.sendMessage(draftEmail).subscribe((data) => {
+        if (!this.cd['destroyed']) {
+          this.cd.detectChanges();
+        }
+      })
+    })
+    let oneTimeConnectionArray = this.devicesRealTimeService.oneTimeConnectionArray.subscribe(newChange => {
+      console.log("newChange", newChange);
+      if (newChange.action === 'ONE_TIME_DOWNLOADED' || newChange.action === 'ONE_TIME_INSTALLED' || newChange.action === 'ONE_TIME_CONNECTION_OPEN' || newChange.action === 'ONE_TIME_URL_GENERATED' || newChange.action === 'ONE_TIME_URL_OPEN' || newChange.action === 'ONE_TIME_ONLINE' || newChange.action === 'ONE_TIME_OFFLINE') {
+        if (newChange.data.oneTime) {
+          if (this.remoteSession && this.remoteSession.id === newChange.data.id) this.remoteSession = new RemoteSession(newChange.data);
+        }
+      }
+      if (newChange.action === 'ONE_TIME_DELETED' || newChange.action === 'ONE_TIME_UNINSTALLED') {
+        newChange.data.forEach(element => {
+          if (this.remoteSession && this.remoteSession.id === element) this.remoteSession = null;
+        });
+      }
+      this.cd.detectChanges();
+    })
+    this.sub.add(oneTimeConnectionArray);
+
+    let getOnRemoveConnection = this.devicesStateService.getOnRemoveConnection().subscribe(data => {
+      let remoteConnectPort = this.constantsStateService.getConstant('remote.connect.port'),
+        restServerAddress = this.constantsStateService.getConstant('rest.server.address'),
+        url = 'quicktech://connect?serverIP=' + restServerAddress + '&port=' + remoteConnectPort + '&sessionID=' + this.realSessionId;
+      window.open(url, '_self');
+    })
+    this.sub.add(getOnRemoveConnection);
+  }
+  onConnectRemoteAccess(data) {
+    this.companyIdForSupport = data.companyId;
+    if (!data.sessionId) {
+      throw 'SessionId is required';
+    }
+    if (!data.conectionType) {
+      throw 'conectionType is required';
+    }
+    this.devicesService.getSessionId(data.sessionId, data.conectionType).subscribe((realSessionId: any) => {
+      if (!realSessionId || !realSessionId.sessionId || realSessionId.sessionId.length < 1) {
+        throw "Not session Id"
+      } else {
+        this.createRemoteAccess(realSessionId.sessionId);
+      }
+    });
+
+  }
+  createRemoteAccess(realSessionId) {
+    this.realSessionId = realSessionId;
+    const modalRef = this.modalService.open(ModalCustomShareScreenComponent, null);
+    modalRef.componentInstance.companyId = this.companyIdForSupport;
+    this.cd.detectChanges();
+  }
+  onCreateOneTimeRemoteSession() {
+    this.supportService.createOneTimeRemoteSession().subscribe(data => {
+      console.log("data", data);
+      this.remoteSession = new RemoteSession(data);
+      this.cd.detectChanges();
+    })
   }
   private addCreatedUser() {
     if (this.ticketProfile.createdUser) {
@@ -182,7 +275,7 @@ export class TicketProfileFormUpdateComponent implements OnInit {
         if (completeServices) completeServices = (update.services.find(item => !item.completed) ? false : true);
         if (completeProducts) completeProducts = (update.products.find(item => !item.completed) ? false : true);
       }
-     
+
     });
     return completeServices && completeProducts;
 
@@ -272,7 +365,9 @@ export class TicketProfileFormUpdateComponent implements OnInit {
     this.ticketProfileFormUpdate.removeFile(index);
 
   }
-
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
   public trackByIndex(index, item) {
     return index;
   }

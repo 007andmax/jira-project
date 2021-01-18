@@ -1,0 +1,137 @@
+<div class="cps-block__content">
+    <div
+        class="qt-df"
+        *ngIf="item && (item.status === 'URL_GENERATED' || item.status === 'URL_OPENED')"
+    >
+        <div class="support-item-menu --big qt-mr-16">
+            <div class="support-item-menu__key icon__key"></div>
+            <div
+                class="support-item-menu__number"
+                [textContent]="item.key"
+            ></div>
+            <app-dynamic-tooltip
+                [content]="'Copy Key'"
+                [position]="'top'"
+                #copyKeyTooltip
+            ></app-dynamic-tooltip>
+            <div
+                class="support-item-menu__button icon__copy pointer"
+                (mouseenter)="copyKeyTooltip.show($event.target)"
+                (mouseleave)="copyKeyTooltip.hide()"
+                (click)="copyKey()"
+            ></div>
+            <app-dynamic-tooltip
+                [content]="'Email Info'"
+                [position]="'top'"
+                #emailInfoTooltip
+            ></app-dynamic-tooltip>
+            <div
+                (mouseenter)="emailInfoTooltip.show($event.target)"
+                (mouseleave)="emailInfoTooltip.hide()"
+                class="support-item-menu__button icon__email-dark pointer"
+                (click)="sendEmail()"
+            ></div>
+            <app-dynamic-tooltip
+                [content]="'Copy Support URL'"
+                [position]="'top'"
+                #copySupportTooltip
+            ></app-dynamic-tooltip>
+            <div
+                (mouseenter)="copySupportTooltip.show($event.target)"
+                (mouseleave)="copySupportTooltip.hide()"
+                class="support-item-menu__button icon__link-gray pointer"
+                (click)="copyLink()"
+            ></div>
+        </div>
+
+        <div class="support-timeline-status">
+            <app-dynamic-tooltip
+                [content]="getUserFirstLastName(item.performer)"
+                [position]="'top'"
+                #performerTooltip
+            ></app-dynamic-tooltip>
+            <div
+                class="support-timeline-status__step1"
+                [ngClass]="{'icon__computer-green' : item.status === 'CONNECTED',
+                'icon__computer' : item.status !== 'CONNECTED'}"
+                (mouseenter)="performerTooltip.show($event.target)"
+                (mouseleave)="performerTooltip.hide()"
+            ></div>
+            <div
+                class="support-timeline-status__line"
+                [ngClass]="{'--success' : item.status === 'CONNECTED'}"
+            >
+            </div>
+            <app-dynamic-tooltip
+                [disableTooltip]="!(item.status === 'CONNECTED' && item.online)"
+                [content]="'Agent Connected'"
+                [position]="'top'"
+                #agentConnectedTooltip
+            ></app-dynamic-tooltip>
+            <div
+                *ngIf="(item.status !== 'INSTALLED' || !item.online) || (item.status === 'CONNECTED' && item.online)"
+                class="support-timeline-status__step2"
+                [ngClass]="{'icon__remote-access-gray' : item.status !== 'INSTALLED' || !item.online,
+                    'icon__connected-device-green' : item.status === 'CONNECTED' && item.online}"
+                (mouseenter)="agentConnectedTooltip.show($event.target)"
+                (mouseleave)="agentConnectedTooltip.hide()"
+            ></div>
+            <div
+                *ngIf="item.status === 'INSTALLED' && item.online"
+                class="support-timeline-status__step2 icon__remote-access-green pointer"
+                ngbDropdown
+                container="body"
+                ngbDropdownToggle
+            >
+                <div ngbDropdownMenu>
+                    <button
+                        ngbDropdownItem
+                        (click)="connectRemoteAccess('CSS')"
+                    >
+                        CSS – Custom Share Screen
+                    </button>
+                    <button
+                        ngbDropdownItem
+                        (click)="connectRemoteAccess('RDP')"
+                    >
+                        RDP – Remote desktop protocol
+                    </button>
+                </div>
+            </div>
+            <div
+                class="support-timeline-status__line"
+                [ngClass]="{'--success' : item.status === 'INSTALLED' && item.online || item.status === 'CONNECTED' && item.online}"
+            >
+            </div>
+            <app-dynamic-tooltip
+                [content]="item.userName"
+                [position]="'top'"
+                #userNameTooltip
+            ></app-dynamic-tooltip>
+            <div
+                class="support-timeline-status__step3"
+                [ngClass]="{'icon__computer-green' : item.status === 'CONNECTED' && item.online,
+                'icon__computer' : item.status !== 'CONNECTED' || !item.online}"
+                (mouseenter)="userNameTooltip.show($event.target)"
+                (mouseleave)="userNameTooltip.hide()"
+            ></div>
+        </div>
+
+    </div>
+
+    <div
+        class="support-tickets-list__status-msg"
+        *ngIf="item"
+    >
+        <span [innerHTML]="getMessage()"></span>
+    </div>
+
+    <div
+        class="qt-btn --btn40h cps-block__create-connection-btn"
+        *ngIf="!item"
+        (click)="create()"
+    >
+        <div class="qt-sz-16 icon__plus-white qt-mr-4"></div>
+        <span>Create Connection</span>
+    </div>
+</div>

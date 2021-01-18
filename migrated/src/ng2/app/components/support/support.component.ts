@@ -56,7 +56,7 @@ export class SupportComponent implements OnInit, OnDestroy {
     })
     let oneTimeConnectionArray = this.devicesRealTimeService.oneTimeConnectionArray.subscribe(newChange => {
       console.log("newChange", newChange);
-      if (newChange.action === 'ONE_TIME_DOWNLOADED' || newChange.action === 'ONE_TIME_INSTALLED' || newChange.action === 'ONE_TIME_CONNECTION_OPEN' || newChange.action === 'ONE_TIME_URL_GENERATED') {
+      if (newChange.action === 'ONE_TIME_DOWNLOADED' || newChange.action === 'ONE_TIME_INSTALLED' || newChange.action === 'ONE_TIME_CONNECTION_OPEN' || newChange.action === 'ONE_TIME_URL_GENERATED' || newChange.action === 'ONE_TIME_URL_OPEN' || newChange.action === 'ONE_TIME_ONLINE' || newChange.action === 'ONE_TIME_OFFLINE') {
         if (newChange.data.oneTime) {
           let findIndex = this.list.findIndex(item => item.id === newChange.data.id);
           if (findIndex > -1) {
@@ -66,7 +66,7 @@ export class SupportComponent implements OnInit, OnDestroy {
           }
         }
       }
-      if (newChange.action === 'ONE_TIME_DELETED') { //newChange.action === 'ONE_TIME_UNINSTALLED'
+      if (newChange.action === 'ONE_TIME_DELETED' || newChange.action === 'ONE_TIME_UNINSTALLED') {
         newChange.data.forEach(element => {
           let findIndex = this.list.findIndex(item => item.id === element);
           if (findIndex > -1) this.list.splice(findIndex, 1);

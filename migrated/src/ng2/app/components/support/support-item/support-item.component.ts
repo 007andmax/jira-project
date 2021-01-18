@@ -11,6 +11,7 @@ import * as moment from "moment";
 import { SupportStateService } from 'src/ng2/app/states/support/support-state.service';
 import { SupportService } from 'src/ng2/app/services/support/support.service';
 import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
+import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.service';
 
 @Component({
   selector: 'app-support-item',
@@ -38,6 +39,7 @@ export class SupportItemComponent implements OnInit {
     private supportService: SupportService,
     private supportStateService: SupportStateService,
     private devicesService: DevicesService,
+    private ticketsStateService: TicketsStateService,
     public cd: ChangeDetectorRef,
     private modalService: NgbModal,) { }
 
@@ -101,6 +103,9 @@ export class SupportItemComponent implements OnInit {
     if (this.item.status === 'DOWNLOADED') return `User <b> ${this.item.userName} </b> download agent. Please, waiting for install.`
     if (this.item.status === 'URL_GENERATED' || this.item.status === 'URL_OPENED') return `Direct your customer to <a href="${this.host + 'remote'}" target="_blank"><b>${this.showHost + 'remote'}</b></a> and give them this support key to join your key:<b>${this.item.key}</b>`;
     if (this.item.status === 'CONNECTED') return `<b>${this.item.performer.id === this.currentUser.id ? 'You' : this.getUserFirstLastName(this.item.performer)}</b> started remote connection at <b>${moment(this.item.startedAt).format('DD/MM/YYYY')}</b>.`;
+  }
+  onAddTicket() {
+    this.ticketsStateService.onToggleAddTicket();
   }
   public getUserFirstLastName(user) {
     return (user) ? `${user.firstName} ${user.lastName}` : '';
