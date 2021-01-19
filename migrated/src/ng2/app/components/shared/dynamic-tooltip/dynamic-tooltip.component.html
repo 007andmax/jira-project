@@ -1,7 +1,9 @@
 <div
     id="tooltip"
     role="tooltip"
-    class="tooltip ng-star-inserted bs-tooltip-top"
+    class="tooltip ng-star-inserted"
+    [ngClass]="{'bs-tooltip-top' : position === 'top',
+'bs-tooltip-left' : position === 'left'}"
 >
     <div class="arrow"></div>
     <div

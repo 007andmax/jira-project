@@ -122,24 +122,6 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Add selected user
-   * @param event - selected user
-   */
-  public add(event: MatChipInputEvent): void {
-    if (!this.matAutocomplete.isOpen) {
-      const input = event.input;
-      const value = event.value;
-      if ((value || '').trim()) {
-        this.selectedUsers.push(value.trim());
-      }
-      if (input) {
-        input.value = '';
-      }
-      this.userCtrl.setValue(null);
-    }
-  }
-
-  /**
    * Remove user from selected
    * @param index - user index
    */
@@ -209,6 +191,8 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
    */
   public save() {
     this.showError = false;
+    console.log("daya", this.data);
+    console.log("usersEmails", this.usersEmails);
     if ((this.data && this.data.recipients.length > 0 && !!this.data.recipients[0]) || (this.usersEmails && this.usersEmails.length > 0)) {
       this.onInitSubjectAndMessage();
       this.data.recipients = this.usersEmails;
@@ -273,11 +257,14 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
 
   public keyup(e) {
     if (e.keyCode === 13) {
-      if (this.userInput.nativeElement.value.length > 0) {
-        this.selectedUsers.push(this.userInput.nativeElement.value);
-        this.usersEmails.push(this.userInput.nativeElement.value);
+      const input = e.target;
+      const value = e.target.value;
+      console.log("value", value);
+      if (value.length > 0) {
+        this.selectedUsers.push(value);
+        this.usersEmails.push(value);
         this.quoteStateService.setUsersEmail(this.usersEmails);
-        this.userInput.nativeElement.value = "";
+        input.value = '';
         this.userCtrl.setValue(null);
       }
     }

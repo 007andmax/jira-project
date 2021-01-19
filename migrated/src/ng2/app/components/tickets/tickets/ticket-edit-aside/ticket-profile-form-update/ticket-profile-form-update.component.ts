@@ -23,6 +23,7 @@ import { ConstantsStateService } from 'src/ng2/app/states/constants/constants-st
 import { ModalCustomShareScreenComponent } from 'src/ng2/app/services/modal/modal-custom-share-screen/modal-custom-share-screen.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
+import { TicketStateService } from '../services/ticket-state.service';
 
 @Component({
   selector: 'app-ticket-profile-form-update',
@@ -71,6 +72,7 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     private draftEmailService: DraftEmailService,
     private constantsStateService: ConstantsStateService,
     private devicesStateService: DevicesStateService,
+    private ticketStateService: TicketStateService,
     public ticketsListService: TicketsListService) { }
 
 
@@ -113,6 +115,14 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
       window.open(url, '_self');
     })
     this.sub.add(getOnRemoveConnection);
+    let getOnTicketClosed = this.ticketStateService.getOnTicketClosed().subscribe(data => {
+      if (this.remoteSession) this.removeSession();
+    })
+    this.sub.add(getOnTicketClosed);
+    let getOnEditTicket = this.ticketsStateService.getOnEditTicket().subscribe(data => {
+      if (this.remoteSession) this.removeSession();
+    })
+    this.sub.add(getOnEditTicket);
   }
   onConnectRemoteAccess(data) {
     this.companyIdForSupport = data.companyId;
@@ -363,7 +373,11 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
   deleteFile(index: number) {
     this.files.splice(index, 1);
     this.ticketProfileFormUpdate.removeFile(index);
-
+  }
+  removeSession() {
+    this.supportService.deleteRemoteSession([this.remoteSession.id]).subscribe(data => {
+      this.remoteSession = null;
+    })
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
