@@ -40,6 +40,8 @@ export class SupportComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.supportService.getRemoteSessions().subscribe(data => {
+      data.sort((a, b) => (b.createdAt > a.createdAt) ?
+        1 : ((a.createdAt > b.createdAt) ? -1 : 0));
       this.list = data;
       this.reqList = data;
       this.showPreloader = false;

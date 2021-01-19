@@ -10,6 +10,8 @@ export class DynamicTooltipComponent implements OnInit {
   @Input() content: string;
   @Input() position: string = 'top';
   @Input() disableTooltip: boolean = false;
+  popperInstance = null;
+
   constructor(private elRef: ElementRef) { }
 
   ngOnInit() {
@@ -18,8 +20,8 @@ export class DynamicTooltipComponent implements OnInit {
   public show(target) {
     console.log("target", target);
     if (this.disableTooltip) return;
-    const tooltip = this.elRef.nativeElement.querySelector('#tooltip');
-    createPopper(target, tooltip, {
+    let tooltip = this.elRef.nativeElement.querySelector('#tooltip');
+    this.popperInstance = createPopper(target, tooltip, {
       placement: <any>this.position,
       modifiers: [
         {
@@ -30,11 +32,17 @@ export class DynamicTooltipComponent implements OnInit {
         },
       ],
     });
+    console.log("popper", this.popperInstance);
     this.elRef.nativeElement.querySelector('#tooltip').classList.add('show');
+    tooltip = null;
   }
   public hide() {
     if (this.disableTooltip) return;
     this.elRef.nativeElement.querySelector('#tooltip').classList.remove('show');
+    if (this.popperInstance) {
+      this.popperInstance.destroy();
+      this.popperInstance = null;
+    }
   }
 
 }
