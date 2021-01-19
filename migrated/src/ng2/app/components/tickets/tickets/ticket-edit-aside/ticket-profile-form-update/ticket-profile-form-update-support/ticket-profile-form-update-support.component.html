@@ -87,20 +87,20 @@
                 container="body"
                 ngbDropdownToggle
             >
-                <div ngbDropdownMenu>
-                    <button
+                <ul ngbDropdownMenu class="qt-dropdown-menu">
+                    <li
                         ngbDropdownItem
                         (click)="connectRemoteAccess('CSS')"
                     >
                         CSS – Custom Share Screen
-                    </button>
-                    <button
+                    </li>
+                    <li
                         ngbDropdownItem
                         (click)="connectRemoteAccess('RDP')"
                     >
                         RDP – Remote desktop protocol
-                    </button>
-                </div>
+                    </li>
+                </ul>
             </div>
             <div
                 class="support-timeline-status__line"
