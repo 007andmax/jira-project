@@ -30,6 +30,10 @@ export class DynamicTooltipComponent implements OnInit {
             offset: [0, 10],
           },
         },
+        {
+          name: 'flip',
+          enabled: false,
+        },
       ],
     });
     console.log("popper", this.popperInstance);
