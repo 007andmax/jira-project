@@ -386,6 +386,7 @@ import { SupportComponent } from './components/support/support.component';
 import { SupportItemComponent } from './components/support/support-item/support-item.component';
 import { DynamicTooltipComponent } from './components/shared/dynamic-tooltip/dynamic-tooltip.component';
 import { TicketProfileFormUpdateSupportComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-form-update/ticket-profile-form-update-support/ticket-profile-form-update-support.component';
+import { LeftPanelSupportComponent } from './components/left-panel/left-panel-support/left-panel-support.component';
 /**
  * declare angular
  */
@@ -938,6 +939,7 @@ angular.module('quicktech')
     SupportItemComponent,
     DynamicTooltipComponent,
     TicketProfileFormUpdateSupportComponent,
+    LeftPanelSupportComponent,
   ],
   imports: [
     BrowserModule,

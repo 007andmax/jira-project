@@ -9,6 +9,7 @@ import { ConstantsStateService } from '../../states/constants/constants-state.se
 import { DevicesRealTimeService } from '../../states/devices/devices-real-time.service';
 import { DevicesStateService } from '../../states/devices/devices-state.service';
 import { SupportStateService } from '../../states/support/support-state.service';
+import { UsersStateService } from '../../states/users/users-state.service';
 import { DraftEmail } from '../shared/draft-email/class/draft-email';
 import { RemoteSession } from './class/remote-sessions';
 
@@ -20,6 +21,8 @@ import { RemoteSession } from './class/remote-sessions';
 export class SupportComponent implements OnInit, OnDestroy {
   showPreloader: boolean = true;
   list: Array<RemoteSession> = [];
+  filter: string = "ALL";
+  reqList: Array<RemoteSession> = [];
   realSessionId: string;
   companyId: string;
   sub: Subscription = new Subscription();
@@ -29,6 +32,7 @@ export class SupportComponent implements OnInit, OnDestroy {
     private devicesRealTimeService: DevicesRealTimeService,
     private devicesService: DevicesService,
     private modalService: NgbModal,
+    private usersStateService: UsersStateService,
     private constantsStateService: ConstantsStateService,
     private devicesStateService: DevicesStateService,
     public cd: ChangeDetectorRef,) { }
@@ -37,6 +41,7 @@ export class SupportComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.supportService.getRemoteSessions().subscribe(data => {
       this.list = data;
+      this.reqList = data;
       this.showPreloader = false;
       console.log("this.list", this.list);
       this.cd.detectChanges();
@@ -58,18 +63,20 @@ export class SupportComponent implements OnInit, OnDestroy {
       console.log("newChange", newChange);
       if (newChange.action === 'ONE_TIME_DOWNLOADED' || newChange.action === 'ONE_TIME_INSTALLED' || newChange.action === 'ONE_TIME_CONNECTION_OPEN' || newChange.action === 'ONE_TIME_URL_GENERATED' || newChange.action === 'ONE_TIME_URL_OPEN' || newChange.action === 'ONE_TIME_ONLINE' || newChange.action === 'ONE_TIME_OFFLINE') {
         if (newChange.data.oneTime) {
-          let findIndex = this.list.findIndex(item => item.id === newChange.data.id);
+          let findIndex = this.reqList.findIndex(item => item.id === newChange.data.id);
           if (findIndex > -1) {
-            this.list[findIndex] = new RemoteSession(newChange.data);
+            this.reqList[findIndex] = new RemoteSession(newChange.data);
           } else {
-            this.list.push(new RemoteSession(newChange.data));
+            this.reqList.push(new RemoteSession(newChange.data));
           }
+          this.updateList();
         }
       }
       if (newChange.action === 'ONE_TIME_DELETED' || newChange.action === 'ONE_TIME_UNINSTALLED') {
         newChange.data.forEach(element => {
-          let findIndex = this.list.findIndex(item => item.id === element);
-          if (findIndex > -1) this.list.splice(findIndex, 1);
+          let findIndex = this.reqList.findIndex(item => item.id === element);
+          if (findIndex > -1) this.reqList.splice(findIndex, 1);
+          this.updateList();
         });
       }
       this.cd.detectChanges();
@@ -83,6 +90,20 @@ export class SupportComponent implements OnInit, OnDestroy {
       window.open(url, '_self');
     })
     this.sub.add(getOnRemoveConnection);
+
+    let getHandleFilter = this.supportStateService.getHandleFilter().subscribe(data => {
+      this.filter = data;
+      this.updateList();
+    })
+    this.sub.add(getHandleFilter);
+  }
+  private updateList() {
+    if (this.filter === "ALL") {
+      this.list = this.reqList.map(item => new RemoteSession(JSON.parse(JSON.stringify(item))));
+    } else {
+      this.list = this.reqList.filter(item => item.performer.id === this.usersStateService.getCurrentUser().id).map(item => new RemoteSession(JSON.parse(JSON.stringify(item))));
+    }
+    this.cd.detectChanges();
   }
   create() {
     this.supportService.createOneTimeRemoteSession().subscribe(data => {

@@ -5,6 +5,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 })
 export class SupportStateService {
   public handleSendMode: EventEmitter<any> = new EventEmitter();
+  public handFilter: EventEmitter<any> = new EventEmitter();
   constructor() { }
 
   public getHandleSendMode() {
@@ -12,5 +13,12 @@ export class SupportStateService {
   }
   public onHandleSendMode(data) {
     this.handleSendMode.emit(data);
+  }
+
+  public getHandleFilter() {
+    return this.handFilter;
+  }
+  public onHandleFilter(data) {
+    this.handFilter.emit(data);
   }
 }
