@@ -18,7 +18,6 @@ export class DynamicTooltipComponent implements OnInit {
 
   }
   public show(target) {
-    console.log("target", target);
     if (this.disableTooltip) return;
     let tooltip = this.elRef.nativeElement.querySelector('#tooltip');
     this.popperInstance = createPopper(target, tooltip, {
@@ -36,7 +35,6 @@ export class DynamicTooltipComponent implements OnInit {
         },
       ],
     });
-    console.log("popper", this.popperInstance);
     this.elRef.nativeElement.querySelector('#tooltip').classList.add('show');
     tooltip = null;
   }
@@ -48,5 +46,4 @@ export class DynamicTooltipComponent implements OnInit {
       this.popperInstance = null;
     }
   }
-
 }

@@ -1,5 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { RemoteSession } from 'src/ng2/app/components/support/class/remote-sessions';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { SupportItemComponent } from 'src/ng2/app/components/support/support-item/support-item.component';
 
 @Component({
@@ -8,11 +7,9 @@ import { SupportItemComponent } from 'src/ng2/app/components/support/support-ite
   styleUrls: ['./ticket-profile-form-update-support.component.scss']
 })
 export class TicketProfileFormUpdateSupportComponent extends SupportItemComponent {
-
   @Output() onCreateOneTimeRemoteSession = new EventEmitter();
 
   public create() {
     this.onCreateOneTimeRemoteSession.emit(null);
   }
-
 }

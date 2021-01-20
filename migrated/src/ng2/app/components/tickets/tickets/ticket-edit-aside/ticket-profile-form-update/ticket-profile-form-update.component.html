@@ -93,11 +93,6 @@
         ></app-ticket-profile-form-update-support>
     </div>
 </div>
-
-
-
-
-
 <div class="qt-aside__buttons jc-sb ai-c">
     <div class="d-f ticket-edit-aside-bottom-part-users-attack">
         <!-- <div *ngIf="tab === 'NOTE'"> -->
@@ -128,11 +123,6 @@
             (hidden)="onToggleAddUpdateUser()"
             *ngIf="showAddUpdateUser"
         ></app-add-assigned-user>
-
-
-
-
-
         <div class="ticket-edit-aside__users-linked d-f">
             <ng-template
                 class="assigned-ticket-user"
@@ -173,11 +163,6 @@
                     <div [textContent]="ticketsListService.getUserName(user)"></div>
                     <div [textContent]="user.primaryEmail"></div>
                 </ng-template>
-
-
-
-
-
                 <div
                     class="ticket-edit-aside__users-linked-author pointer"
                     placement="top"
@@ -192,11 +177,6 @@
         </div>
         <!-- </div> -->
     </div>
-
-
-
-
-
     <div
         class="d-f"
         *ngIf="!showAddUpdateUser"
@@ -211,11 +191,6 @@
             <span>Update</span>
             <app-preloader-ticket *ngIf="isUpdate"></app-preloader-ticket>
         </div>
-
-
-
-
-
         <div
             class="qt-btn --btn40h"
             placement="top"

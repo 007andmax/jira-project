@@ -47,7 +47,6 @@ export class SupportItemComponent implements OnInit {
     this.currentUser = this.usersStateService.getCurrentUser();
     this.host = this.constantsStateService.getConstant('server.url');
     this.showHost = this.host.replace(/.*?:\/\//g, "");
-
   }
   copyKey() {
     var textArea: any = document.createElement("textarea");

@@ -37,7 +37,6 @@ export class SupportComponent implements OnInit, OnDestroy {
     private devicesStateService: DevicesStateService,
     public cd: ChangeDetectorRef,) { }
 
-
   ngOnInit() {
     this.supportService.getRemoteSessions().subscribe(data => {
       data.sort((a, b) => (b.createdAt > a.createdAt) ?
@@ -45,7 +44,6 @@ export class SupportComponent implements OnInit, OnDestroy {
       this.list = data;
       this.reqList = data;
       this.showPreloader = false;
-      console.log("this.list", this.list);
       this.cd.detectChanges();
     })
     this.supportStateService.getHandleSendMode().subscribe(data => {
@@ -53,8 +51,6 @@ export class SupportComponent implements OnInit, OnDestroy {
       draftEmail.setContent(data.message);
       draftEmail.setSubject(data.subject);
       draftEmail.setRecipients(data.recipients);
-      console.log("draftEmail", draftEmail);
-      console.log("data", data);
       this.draftEmailService.sendMessage(draftEmail).subscribe((data) => {
         if (!this.cd['destroyed']) {
           this.cd.detectChanges();
@@ -62,7 +58,6 @@ export class SupportComponent implements OnInit, OnDestroy {
       })
     })
     let oneTimeConnectionArray = this.devicesRealTimeService.oneTimeConnectionArray.subscribe(newChange => {
-      console.log("newChange", newChange);
       if (newChange.action === 'ONE_TIME_DOWNLOADED' || newChange.action === 'ONE_TIME_INSTALLED' || newChange.action === 'ONE_TIME_CONNECTION_OPEN' || newChange.action === 'ONE_TIME_URL_GENERATED' || newChange.action === 'ONE_TIME_URL_OPEN' || newChange.action === 'ONE_TIME_ONLINE' || newChange.action === 'ONE_TIME_OFFLINE') {
         if (newChange.data.oneTime) {
           let findIndex = this.reqList.findIndex(item => item.id === newChange.data.id);
@@ -127,7 +122,6 @@ export class SupportComponent implements OnInit, OnDestroy {
         this.createRemoteAccess(realSessionId.sessionId);
       }
     });
-
   }
   createRemoteAccess(realSessionId) {
     this.realSessionId = realSessionId;

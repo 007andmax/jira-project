@@ -45,7 +45,6 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     this.ticketProfileFormUpdate.setTicketId(this.ticketProfile.id);
     this.addCreatedUser();
   };
-
   realSessionId: string;
   companyIdForSupport: string;
   remoteSession: RemoteSession;
@@ -75,17 +74,13 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     private ticketStateService: TicketStateService,
     public ticketsListService: TicketsListService) { }
 
-
   ngOnInit() {
     this.currentUser = this.usersStateService.getCurrentUser();
-
     this.supportStateService.getHandleSendMode().subscribe(data => {
       let draftEmail: DraftEmail = new DraftEmail();
       draftEmail.setContent(data.message);
       draftEmail.setSubject(data.subject);
       draftEmail.setRecipients(data.recipients);
-      console.log("draftEmail", draftEmail);
-      console.log("data", data);
       this.draftEmailService.sendMessage(draftEmail).subscribe((data) => {
         if (!this.cd['destroyed']) {
           this.cd.detectChanges();
@@ -93,7 +88,6 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
       })
     })
     let oneTimeConnectionArray = this.devicesRealTimeService.oneTimeConnectionArray.subscribe(newChange => {
-      console.log("newChange", newChange);
       if (newChange.action === 'ONE_TIME_DOWNLOADED' || newChange.action === 'ONE_TIME_INSTALLED' || newChange.action === 'ONE_TIME_CONNECTION_OPEN' || newChange.action === 'ONE_TIME_URL_GENERATED' || newChange.action === 'ONE_TIME_URL_OPEN' || newChange.action === 'ONE_TIME_ONLINE' || newChange.action === 'ONE_TIME_OFFLINE') {
         if (newChange.data.oneTime) {
           if (this.remoteSession && this.remoteSession.id === newChange.data.id) this.remoteSession = new RemoteSession(newChange.data);
@@ -139,7 +133,6 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
         this.createRemoteAccess(realSessionId.sessionId);
       }
     });
-
   }
   createRemoteAccess(realSessionId) {
     this.realSessionId = realSessionId;
@@ -149,7 +142,6 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
   }
   onCreateOneTimeRemoteSession() {
     this.supportService.createOneTimeRemoteSession().subscribe(data => {
-      console.log("data", data);
       this.remoteSession = new RemoteSession(data);
       this.cd.detectChanges();
     })
@@ -159,15 +151,12 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
       let find = this.lisUpdateUser.find(item => item.id === this.ticketProfile.createdUser.id);
       if (!find) this.lisUpdateUser.unshift(this.ticketProfile.createdUser);
     }
-
   }
   public onChangeChat(event) {
     this.ticketProfileFormUpdate.setChatMessage(event.target.value.replace(/\n/g, '<br/>'));
-
   }
   public onPastChat(value) {
     this.ticketProfileFormUpdate.setChatMessage(value.replace(/\n/g, '<br/>'));
-
   }
   public reset() {
     if (this.tab === "NOTE") this.elRef.nativeElement.querySelector("#chat").value = "";
@@ -182,27 +171,22 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     let techusers = userList.filter((item) => item.accountType === "TECH" && !item.deletedAt);
     let clientUsers = userList.filter((item) => item.accountType === "CLIENT" && !item.deletedAt && item.company.id === this.ticketProfile.company.id);
     return [...techusers, ...clientUsers];
-
   }
   update() {
     if (this.tab === "NOTE") {
       if (!this.ticketProfileFormUpdate.isValidateNote()) return;
       this.onUpdateTicket(this.ticketProfileFormUpdate.getDataForUpdateNote());
-
     }
     if (this.tab === "PRODUCT") {
       this.onChangeProducts(this.selectProducts.getSelectedProducts());
       if (!this.ticketProfileFormUpdate.isValidateProduct() || !this.selectProducts.onValidateProducts()) return;
       this.onUpdateTicket(this.ticketProfileFormUpdate.getDataForUpdateProduct());
-
     }
     if (this.tab === "SERVICE") {
       this.onChangeServices(this.selectServices.getSelectedServices());
       if (!this.selectServices.onValidateServices() || !this.ticketProfileFormUpdate.isValidateService()) return;
       this.onUpdateTicket(this.ticketProfileFormUpdate.getDataForUpdateService());
-
     }
-
   }
   onUpdateTicket(data) {
     this.updateBtn.setDisabled(true);
@@ -231,26 +215,20 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
       if (this.ticketProfileFormUpdate.isValidateNote()) {
         this.onUpdateTicketAndClose(this.ticketProfileFormUpdate.getDataForUpdateNote());
       } else this.onUpdateTicketAndClose(this.ticketProfileFormUpdate.getDataForClose());
-
     }
     if (this.tab === "PRODUCT") {
       this.onChangeProducts(this.selectProducts.getSelectedProducts());
-
       if (this.ticketProfileFormUpdate.isValidateProduct()) {
         if (!this.selectProducts.onValidateProducts()) return;
         this.onUpdateTicketAndClose(this.ticketProfileFormUpdate.getDataForUpdateProduct());
-
       } else this.onUpdateTicketAndClose(this.ticketProfileFormUpdate.getDataForClose());
-
     }
     if (this.tab === "SERVICE") {
       this.onChangeServices(this.selectServices.getSelectedServices());
       if (this.ticketProfileFormUpdate.isValidateServiceUpdateAndClose()) {
         if (!this.selectServices.onValidateServices()) return;
         this.onUpdateTicketAndClose(this.ticketProfileFormUpdate.getDataForUpdateService());
-
       } else this.onUpdateTicketAndClose(this.ticketProfileFormUpdate.getDataForClose());
-
     }
   }
   onUpdateTicketAndClose(data) {
@@ -285,10 +263,8 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
         if (completeServices) completeServices = (update.services.find(item => !item.completed) ? false : true);
         if (completeProducts) completeProducts = (update.products.find(item => !item.completed) ? false : true);
       }
-
     });
     return completeServices && completeProducts;
-
   }
   public setTab(data) {
     this.tab = data;
@@ -311,7 +287,6 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
   fileBrowseHandler(files) {
     this.prepareFilesList(files);
   }
-
   prepareFilesList(files: Array<any>) {
     for (const item of files) {
       item.progress = 0;
@@ -337,9 +312,7 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
         this.files[index].showError = true;
         this.uploadFilesSimulator(index + 1);
       });
-
     }
-
   }
   uploadFile(file) {
     return new Promise((resolve, reject) => {
@@ -349,7 +322,6 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
       xhr.addEventListener("load", (event) => {
         resolve(xhr);
       }, false);
-
       xhr.upload.onprogress = (event) => {
         file.progress = Math.round((event.loaded / event.total) * 100);
       }

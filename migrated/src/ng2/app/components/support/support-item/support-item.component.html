@@ -77,18 +77,19 @@
                     </div>
                 </div>
                 <app-dynamic-tooltip
-                    [disableTooltip]="!(item.status === 'CONNECTED' && item.online)"
                     [content]="'Agent Connected'"
                     [position]="'top'"
                     #agentConnectedTooltip
                 ></app-dynamic-tooltip>
                 <div
-                    *ngIf="(item.status !== 'INSTALLED' || !item.online) || (item.status === 'CONNECTED' && item.online)"
-                    class="support-timeline-status__step2"
-                    [ngClass]="{'icon__remote-access-gray' : item.status !== 'INSTALLED' || !item.online,
-                    'icon__connected-device-green' : item.status === 'CONNECTED' && item.online}"
+                    *ngIf="item.status === 'CONNECTED' && item.online"
+                    class="support-timeline-status__step2 icon__connected-device-green"
                     (mouseenter)="agentConnectedTooltip.show($event.target)"
                     (mouseleave)="agentConnectedTooltip.hide()"
+                ></div>
+                <div
+                    *ngIf="item.status !== 'INSTALLED' || !item.online"
+                    class="support-timeline-status__step2 icon__remote-access-gray"
                 ></div>
                 <div
                     *ngIf="item.status === 'INSTALLED' && item.online"
@@ -97,7 +98,10 @@
                     container="body"
                     ngbDropdownToggle
                 >
-                    <ul ngbDropdownMenu class="qt-dropdown-menu">
+                    <ul
+                        ngbDropdownMenu
+                        class="qt-dropdown-menu"
+                    >
                         <li
                             ngbDropdownItem
                             (click)="connectRemoteAccess('CSS')"

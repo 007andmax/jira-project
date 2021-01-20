@@ -191,8 +191,6 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
    */
   public save() {
     this.showError = false;
-    console.log("daya", this.data);
-    console.log("usersEmails", this.usersEmails);
     if ((this.data && this.data.recipients.length > 0 && !!this.data.recipients[0]) || (this.usersEmails && this.usersEmails.length > 0)) {
       this.onInitSubjectAndMessage();
       this.data.recipients = this.usersEmails;
@@ -201,24 +199,6 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
       if (this.action === QUOTE_MODAL_ACTION_ADD) this.quoteStateService.saveSandMode(this.data);
       if (this.action === QUOTE_MODAL_ACTION_LIST) this.quoteStateService.saveSandModeList(this.data);
       if (this.action === SUPPORT_MODAL_ACTION_SEND) this.supportStateService.onHandleSendMode(this.data);
-
-      /*  if (!this.isResend) {
-          this.onInitSubjectAndMessage();
-          this.data.recipients = this.usersEmails;
-          this.quoteStateService.saveSandMode(this.data);
-        } else {
-          if (!this.data.id) {
-            this.onInitSubjectAndMessage();
-            this.data.recipients = this.usersEmails;
-            this.quoteStateService.saveSandMode(this.data);
-          } else {
-            this.onInitSubjectAndMessage();
-            this.data.recipients = this.usersEmails;
-            this.quoteStateService.saveSandModeEdit(this.data);
-          }
-  
-  
-        }*/
       this.activeModal.close();
     } else {
       this.showError = true;
@@ -259,7 +239,6 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
     if (e.keyCode === 13) {
       const input = e.target;
       const value = e.target.value;
-      console.log("value", value);
       if (value.length > 0) {
         this.selectedUsers.push(value);
         this.usersEmails.push(value);
