@@ -13,4 +13,7 @@ export class DownloadAgentService {
     return this.http.get(this.apiUrl + 'data/prepareDownloadAgent?companyId=' + companyId + "&userName=" + userName +
       "&userPassword=" + userPassword + "&autoGlobalRemoteInstall=" + globalAutoInstall);
   }
+  public downloadDemo(companyId) {
+    return this.http.get(this.apiUrl + `data/downloadAgentV2?companyId=${companyId}`);
+  }
 }
