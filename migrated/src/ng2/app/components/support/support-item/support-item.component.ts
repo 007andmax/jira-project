@@ -97,6 +97,7 @@ export class SupportItemComponent implements OnInit {
       conectionType: conectionType,
       companyId: this.item.clientCompany.id
     })
+    this.cd.detectChanges();
   }
   getMessage() {
     if (this.item.status == 'INSTALLED') return `User <b>${this.item.userName}</b> ${this.item.hostName ? " with hostName - '" + this.item.hostName + "'" : ''} installed agent(${this.item.version ? this.item.version : ''}). You can start remote connection`;
