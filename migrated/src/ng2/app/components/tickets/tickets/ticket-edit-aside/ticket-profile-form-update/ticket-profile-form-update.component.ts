@@ -138,6 +138,7 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     this.realSessionId = realSessionId;
     const modalRef = this.modalService.open(ModalCustomShareScreenComponent, null);
     modalRef.componentInstance.companyId = this.companyIdForSupport;
+    document.body.click();
     this.cd.detectChanges();
   }
   onCreateOneTimeRemoteSession() {

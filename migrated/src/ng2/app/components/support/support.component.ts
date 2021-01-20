@@ -125,8 +125,9 @@ export class SupportComponent implements OnInit, OnDestroy {
   }
   createRemoteAccess(realSessionId) {
     this.realSessionId = realSessionId;
-    const modalRef = this.modalService.open(ModalCustomShareScreenComponent, null);
+    const modalRef = this.modalService.open(ModalCustomShareScreenComponent, { windowClass: 'device-send-modal' });
     modalRef.componentInstance.companyId = this.companyId;
+    document.body.click();
     this.cd.detectChanges();
   }
   public trackById(index, item) {
