@@ -88,7 +88,7 @@
                     (mouseleave)="agentConnectedTooltip.hide()"
                 ></div>
                 <div
-                    *ngIf="item.status !== 'INSTALLED' || !item.online"
+                    *ngIf="!(item.status === 'CONNECTED' && item.online) && !(item.status === 'INSTALLED' && item.online)"
                     class="support-timeline-status__step2 icon__remote-access-gray"
                 ></div>
                 <div
