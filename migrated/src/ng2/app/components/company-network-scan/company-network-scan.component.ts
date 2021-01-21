@@ -30,7 +30,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
   @ViewChild('btnInstallAgent') btnInstallAgent: DisabledBtnDirective;
   devices: Array<Device> = [];
   networkScanInstallAgent: NetworkScanInstallAgent = new NetworkScanInstallAgent();
-  networkScanDevices: NetworkScanDevices;
+  networkScanDevices: NetworkScanDevices = new NetworkScanDevices();
   networkScanSomeInfoForDevice: NetworkScanSomeInfoForDevice;
   masterAgent: Device = null;
   showPreloader: boolean = true;
