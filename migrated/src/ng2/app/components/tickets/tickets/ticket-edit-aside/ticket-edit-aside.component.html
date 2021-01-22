@@ -54,7 +54,6 @@
                                                     <li
                                                         *ngIf="getCompany(item)"
                                                         ngbDropdownItem
-                                                        class
                                                         [textContent]="getCompany(item).name"
                                                         (click)="changeTicketCompany(item)"
                                                     ></li>
@@ -130,6 +129,7 @@
                         (click)="toggleSubject()"
                     >
                         <span [ngClass]="getClassType()"></span>
+
 
 
 

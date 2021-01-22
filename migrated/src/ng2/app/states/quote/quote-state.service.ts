@@ -5,15 +5,15 @@ import { QuotePreview } from '../../components/billing/quotes/class/quote-previe
   providedIn: 'root'
 })
 export class QuoteStateService {
-  
+
   filter: EventEmitter<any> = new EventEmitter();
   onPreview: EventEmitter<any> = new EventEmitter();
   onEdit: EventEmitter<any> = new EventEmitter();
   onCopy: EventEmitter<any> = new EventEmitter();
   onCreate: EventEmitter<any> = new EventEmitter();
   onInvoice: EventEmitter<any> = new EventEmitter();
-  quoteForCopy:QuotePreview;
-  quoteForArchive:QuotePreview;
+  quoteForCopy: QuotePreview;
+  quoteForArchive: QuotePreview;
   public handleSendMode: EventEmitter<any> = new EventEmitter();
   public handleSendModeList: EventEmitter<any> = new EventEmitter();
   public handleSendModePreview: EventEmitter<any> = new EventEmitter();
@@ -69,15 +69,15 @@ export class QuoteStateService {
   public getOnPreview() {
     return this.onPreview;
   }
- 
-  
 
- /* public setDescription(description) {
-    this.quoteForCreate.description = description;
-  }*/
-  
 
-  
+
+  /* public setDescription(description) {
+     this.quoteForCreate.description = description;
+   }*/
+
+
+
   /*public getServices() {
     return this.servicesList;
   }
@@ -87,17 +87,17 @@ export class QuoteStateService {
   * set company
   *  @param company company
   */
- /* public setCompany(company) {
-    this.client = company;
-    this.quoteForCreate.company = company;
-  }*/
+  /* public setCompany(company) {
+     this.client = company;
+     this.quoteForCreate.company = company;
+   }*/
 
   /**
   * return client
   */
- /* public getClient() {
-    return this.client;
-  }*/
+  /* public getClient() {
+     return this.client;
+   }*/
 
   /**
   * return price quote
@@ -114,7 +114,7 @@ export class QuoteStateService {
     }
     return price;
   }
- 
+
 
   /**
    * move to  component with params
@@ -132,14 +132,14 @@ export class QuoteStateService {
     this.handleSendMode.emit(data);
   }
 
-  public getHandleSendMode () {
+  public getHandleSendMode() {
     return this.handleSendMode;
   }
   public saveSandModeList(data) {
     this.handleSendModeList.emit(data);
   }
 
-  public getHandleSendModeList () {
+  public getHandleSendModeList() {
     return this.handleSendModeList;
   }
 
@@ -147,14 +147,14 @@ export class QuoteStateService {
     this.handleSendModePreview.emit(data);
   }
 
-  public getHandleSendModePreview () {
+  public getHandleSendModePreview() {
     return this.handleSendModePreview;
   }
 
   public saveSandModeEdit(data) {
     this.handleSendModeEdit.emit(data);
   }
-  public getHandleSendModeEdit () {
+  public getHandleSendModeEdit() {
     return this.handleSendModeEdit;
   }
 
@@ -181,5 +181,5 @@ export class QuoteStateService {
     return this.filter;
   }
 
-   
+
 }
