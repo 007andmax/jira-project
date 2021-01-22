@@ -85,7 +85,8 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
         this.networkScanSomeInfoForDevice = new NetworkScanSomeInfoForDevice(data);
         if (this.getPermissions('NETWORK_SCAN_CLIENTS')) {
           this.findMasterAgent();
-          this.getLastScanDevices();
+          if (this.masterAgent.online) this.runScanDevices();
+          if (!this.masterAgent.online) this.networkScanDevices.devices = [];
         }
       }
     })

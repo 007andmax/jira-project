@@ -148,6 +148,9 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     });
   }
+  checkExistServicesProducts() {
+    return this.ticketProfile.updates.filter(item => item.type == 'PRODUCT' || item.type == 'SERVICE').length > 0;
+  }
   onOpenCompaniesDropDown() {
     this.cd.detectChanges();
   }
