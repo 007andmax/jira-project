@@ -1,87 +1,85 @@
-<div class="page-list company-devices-page">
+<div class="qt-page-list company-devices-page">
+  <div class="qt-page-list__header --sticky">
     <app-company-devices-header
         [devices]="devices"
         [isOfflineDeviceSelected]="isOfflineDeviceSelected"
         (onTurnOff)="onTurnOff($event)"
         (onRemoveAgents)="onRemoveAgents()"
     ></app-company-devices-header>
-    <div class="sticky-list-table-header company-devices-list-table-header">
-        <table class="qt-table-modern company-devices-table">
-            <thead>
-                <tr>
-                    <th class="company-devices-table__check">
-                        <div class="d-f">
-                            <label class="qt-checkbox">
-                                <input
-                                    type="checkbox"
-                                    [(ngModel)]="selectAllDevices"
-                                    (change)="toogleDevices()"
-                                >
-                                <span></span>
-                            </label>
-                        </div>
-                    </th>
-                    <th class="company-devices-table__device-type"></th>
-                    <th
-                        class="company-devices-table__device-name pointer"
-                        (click)="onFilter('name')"
-                    >
-                        Device Name
-                        <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
-                        class="company-devices-table__logged-user pointer"
-                        (click)="onFilter('user_name')"
-                    >
-                        Logged in user
-                        <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th class="company-devices-table__up-time">
-                        Up time
-                        <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th class="company-devices-table__windows">Windows</th>
-                    <th class="company-devices-table__ip-address">
-                        <span class="qt-pl-30">Ip address</span>
-                    </th>
-                    <th class="company-devices-table__go-to"></th>
-                    <th class="company-devices-table__connect"></th>
-                    <th class="company-devices-table__menu"></th>
-                </tr>
-            </thead>
-        </table>
+
+    <div class="qt-page-list__header-thead-container">
+      <table class="qt-table-modern qt-page-list__header-thead">
+        <thead>
+          <tr>
+            <th class="company-devices-table__check">
+              <div class="d-f">
+                <label class="qt-checkbox">
+                  <input
+                      type="checkbox"
+                      [(ngModel)]="selectAllDevices"
+                      (change)="toogleDevices()"
+                  >
+                  <span></span>
+                </label>
+              </div>
+            </th>
+            <th class="company-devices-table__device-type"></th>
+            <th class="company-devices-table__device-name pointer" (click)="onFilter('name')">
+              Device Name
+              <span class="qt-table-modern__sorting"></span>
+            </th>
+            <th class="company-devices-table__logged-user pointer" (click)="onFilter('user_name')">
+              Logged in user
+              <span class="qt-table-modern__sorting"></span>
+            </th>
+            <th class="company-devices-table__up-time">
+              Up time
+              <span class="qt-table-modern__sorting"></span>
+            </th>
+            <th class="company-devices-table__windows">Windows</th>
+            <th class="company-devices-table__ip-address">
+              <span class="qt-pl-30">Ip address</span>
+            </th>
+            <th class="company-devices-table__go-to"></th>
+            <th class="company-devices-table__connect"></th>
+            <th class="company-devices-table__menu"></th>
+          </tr>
+        </thead>
+      </table>
     </div>
-    <div class="qt-df qt-fd-c qt-jc-sb">
-        <div>
-            <div class="table-container">
-                <table class="qt-table-modern company-devices-table">
-                    <tbody>
-                        <ng-template
-                            ngFor
-                            let-item
-                            [ngForOf]="devices"
-                            [ngForTrackBy]="trackById"
-                        >
-                            <app-company-devices-item
-                                [device]="item"
-                                (onChangeSelect)="onChangeSelect()"
-                            ></app-company-devices-item>
-                        </ng-template>
-                    </tbody>
-                </table>
-            </div>
-            <div
-                class="loading"
-                *ngIf="showPreloader"
-            ></div>
-            <div
-                class="no-exist-devices"
-                *ngIf="!showPreloader && devices.length === 0"
-            >
-                No devices installed
-            </div>
-        </div>
-    </div>
-    <app-company-devices-aside [companyId]="companyId"></app-company-devices-aside>
+  </div>
+
+  <div class="qt-df qt-fd-c qt-jc-sb">
+      <div>
+          <div class="table-container">
+              <table class="qt-table-modern company-devices-table">
+                  <tbody>
+                      <ng-template
+                          ngFor
+                          let-item
+                          [ngForOf]="devices"
+                          [ngForTrackBy]="trackById"
+                      >
+                          <app-company-devices-item
+                              [device]="item"
+                              (onChangeSelect)="onChangeSelect()"
+                          ></app-company-devices-item>
+                      </ng-template>
+                  </tbody>
+              </table>
+          </div>
+          <div
+              class="loading"
+              *ngIf="showPreloader"
+          ></div>
+          <div
+              class="no-exist-devices"
+              *ngIf="!showPreloader && devices.length === 0"
+          >
+              No devices installed
+          </div>
+      </div>
+  </div>
+  <app-company-devices-aside [companyId]="companyId"></app-company-devices-aside>
 </div>
 <app-left-panel-company></app-left-panel-company>

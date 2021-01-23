@@ -7,14 +7,7 @@
 
   .invoice-table {
     max-width: 1320px;
-    // min-width: 1064px;
     margin: 0 auto;
-  }
-
-  .invoices-list-header {
-    display: flex;
-    flex-wrap: wrap;
-    z-index: 2;
   }
 
   .pengind-loading {
@@ -80,13 +73,10 @@
     }
   }
 
-  .invoice-list-table-header {
-    z-index: 1;
-    &.--filters-open {
-      top: 198px;
-    }
-  }
   &__list-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     min-height: calc(100vh - 102px);
   }
 
@@ -102,20 +92,6 @@
   .filter-counter {
     margin-left: -8px;
   }
-
-  // .filter-status {
-  //   max-width: 216px;
-  // }
-
-  // .filter-invoice {
-  //   max-width: 216px;
-  // }
-
-  // .filter-date {
-  //   max-width: 216px;
-  // }
-
-
 
   .invoice-table td {
     border: 1px solid transparent;
