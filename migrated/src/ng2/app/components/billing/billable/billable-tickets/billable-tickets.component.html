@@ -68,81 +68,83 @@
       </table>
     </div>
 
-    <div class="table-container">
-        <table class="qt-table-modern billable-item-table">
-            <tbody>
-                <ng-template
-                    ngFor
-                    let-item
-                    [ngForOf]="billableProfile.tickets"
-                    let-i="index"
-                    [ngForTrackBy]="trackById"
+    <div class="qt-page-list__body">
+      <div class="qt-page-list__body-table-container">
+        <table class="qt-page-list__body-tbody qt-table-modern billable-item-table">
+          <tbody>
+            <ng-template
+              ngFor
+              let-item
+              [ngForOf]="billableProfile.tickets"
+              let-i="index"
+              [ngForTrackBy]="trackById"
+            >
+              <tr [ngClass]="{'--selected': item.selected}">
+                <td
+                  class="billable-item-table__check"
+                  *ngIf="!item.lockedBy"
                 >
-                    <tr [ngClass]="{'--selected': item.selected}">
-                        <td
-                            class="billable-item-table__check"
-                            *ngIf="!item.lockedBy"
-                        >
-                            <div class="d-f">
-                                <label
-                                    class="qt-checkbox pointer"
-                                    [attr.for]="'ticket-' + i"
-                                >
-                                    <input
-                                        [attr.id]="'ticket-' + i"
-                                        [(ngModel)]="item.selected"
-                                        type="checkbox"
-                                    >
-                                    <span></span>
-                                </label>
-                            </div>
-                        </td>
-                        <td
-                            class="billable-item-table__check"
-                            *ngIf="item.lockedBy"
-                        >
-                            <div
-                                class="icon__locked qt-sz-16"
-                                placement="top"
-                                ngbTooltip="Is being used by other user"
-                            ></div>
-                        </td>
-                        <td
-                            class="billable-item-table__date"
-                            [textContent]="getDate(item.closedAt)"
-                        ></td>
-                        <td
-                            class="billable-item-table__ticket pointer"
-                            *ngIf="!item.isOrder"
-                            [textContent]="item.ticketNumber"
-                            (click)="editTicket(item.id)"
-                        ></td>
-                        <td
-                            class="billable-item-table__ticket no-edit-ticket"
-                            *ngIf="item.isOrder"
-                            [textContent]="'Contract'"
-                        ></td>
-                        <td
-                            class="billable-item-table__subject"
-                            [textContent]="item.subject"
-                        ></td>
-                        <td class="billable-item-table__check">
-                            <div
-                                *ngIf="item.isOrder"
-                                class="ticket-updates__delete icon__remove"
-                                (click)="deleteTicket(item)"
-                                placement="top"
-                                ngbTooltip="Delete"
-                            ></div>
-                        </td>
-                        <td
-                            class="billable-item-table__amount"
-                            [textContent]="item.sum | currency"
-                        ></td>
-                    </tr>
-                </ng-template>
-            </tbody>
+                  <div class="d-f">
+                    <label
+                      class="qt-checkbox pointer"
+                      [attr.for]="'ticket-' + i"
+                    >
+                      <input
+                        [attr.id]="'ticket-' + i"
+                        [(ngModel)]="item.selected"
+                        type="checkbox"
+                      >
+                      <span></span>
+                    </label>
+                  </div>
+                </td>
+                <td
+                  class="billable-item-table__check"
+                  *ngIf="item.lockedBy"
+                >
+                  <div
+                    class="icon__locked qt-sz-16"
+                    placement="top"
+                    ngbTooltip="Is being used by other user"
+                  ></div>
+                </td>
+                <td
+                  class="billable-item-table__date"
+                  [textContent]="getDate(item.closedAt)"
+                ></td>
+                <td
+                  class="billable-item-table__ticket pointer"
+                  *ngIf="!item.isOrder"
+                  [textContent]="item.ticketNumber"
+                  (click)="editTicket(item.id)"
+                ></td>
+                <td
+                  class="billable-item-table__ticket no-edit-ticket"
+                  *ngIf="item.isOrder"
+                  [textContent]="'Contract'"
+                ></td>
+                <td
+                  class="billable-item-table__subject"
+                  [textContent]="item.subject"
+                ></td>
+                <td class="billable-item-table__check">
+                  <div
+                    *ngIf="item.isOrder"
+                    class="ticket-updates__delete icon__remove"
+                    (click)="deleteTicket(item)"
+                    placement="top"
+                    ngbTooltip="Delete"
+                  ></div>
+                </td>
+                <td
+                  class="billable-item-table__amount"
+                  [textContent]="item.sum | currency"
+                ></td>
+              </tr>
+            </ng-template>
+          </tbody>
         </table>
+      </div>
     </div>
 </div>
 <app-ticket-edit-aside></app-ticket-edit-aside>

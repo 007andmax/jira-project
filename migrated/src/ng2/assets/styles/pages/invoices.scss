@@ -1,14 +1,5 @@
 .invoices-page {
 
-  .table-container {
-    overflow-x: auto;
-    min-height: calc(100vh - 346px);
-  }
-
-  .invoice-table {
-    max-width: 1320px;
-    margin: 0 auto;
-  }
 
   .pengind-loading {
     bottom: -10px;
@@ -647,12 +638,4 @@ app-invoices-item,app-payment-item {
 
 .invoice-preview-notes {
   max-width: 530px;
-}
-
-
-@media (min-width: 1920px) {
-  .invoice-table {
-    width: 100% !important;
-    max-width: 100% !important;
-  }
 }

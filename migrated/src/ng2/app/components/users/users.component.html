@@ -2,25 +2,26 @@
 <app-left-panel-users></app-left-panel-users>
 <div class="qt-page-list users-page">
   <app-users-header [count]="count"></app-users-header>
-  <div class="table-container">
-    <table class="qt-table-modern users-table">
-      <tbody
-        infiniteScroll
-        [infiniteScrollDistance]="2"
-        [infiniteScrollThrottle]="50"
-        [infiniteScrollDisabled]="infiniteScrollDisabled"
-        (scrolled)="onScroll()">
-        <ng-template ngFor let-user
-          [ngForOf]="users"
-          [ngForTrackBy]="trackById">
-          <app-users-table [showArchivedUsers]="showArchivedUsers" [user]="user"></app-users-table>
-        </ng-template>
-      </tbody>
-    </table>
-    <div class="loading" *ngIf="showPreloader"></div>
+  <div class="qt-page-list__body">
+    <div class="qt-page-list__body-table-container">
+      <table class="qt-page-list__body-tbody qt-table-modern users-table">
+        <tbody
+          infiniteScroll
+          [infiniteScrollDistance]="2"
+          [infiniteScrollThrottle]="50"
+          [infiniteScrollDisabled]="infiniteScrollDisabled"
+          (scrolled)="onScroll()">
+          <ng-template ngFor let-user
+            [ngForOf]="users"
+            [ngForTrackBy]="trackById">
+            <app-users-table [showArchivedUsers]="showArchivedUsers" [user]="user"></app-users-table>
+          </ng-template>
+        </tbody>
+      </table>
+      <div class="loading" *ngIf="showPreloader"></div>
+    </div>
   </div>
 </div>
-
 <app-users-aside></app-users-aside>
 <users-aside-edit></users-aside-edit>
 

@@ -50,35 +50,35 @@
   </div>
 
   <div class="qt-df qt-fd-c qt-jc-sb">
-      <div>
-          <div class="table-container">
-              <table class="qt-table-modern company-devices-table">
-                  <tbody>
-                      <ng-template
-                          ngFor
-                          let-item
-                          [ngForOf]="devices"
-                          [ngForTrackBy]="trackById"
-                      >
-                          <app-company-devices-item
-                              [device]="item"
-                              (onChangeSelect)="onChangeSelect()"
-                          ></app-company-devices-item>
-                      </ng-template>
-                  </tbody>
-              </table>
-          </div>
-          <div
-              class="loading"
-              *ngIf="showPreloader"
-          ></div>
-          <div
-              class="no-exist-devices"
-              *ngIf="!showPreloader && devices.length === 0"
-          >
-              No devices installed
-          </div>
+    <div class="qt-page-list__body">
+      <div class="qt-page-list__body-table-container">
+        <table class="qt-page-list__body-tbody qt-table-modern company-devices-table">
+          <tbody>
+            <ng-template
+              ngFor
+              let-item
+              [ngForOf]="devices"
+              [ngForTrackBy]="trackById"
+            >
+              <app-company-devices-item
+                [device]="item"
+                (onChangeSelect)="onChangeSelect()"
+              ></app-company-devices-item>
+            </ng-template>
+          </tbody>
+        </table>
       </div>
+      <div
+        class="loading"
+        *ngIf="showPreloader"
+      ></div>
+      <div
+        class="no-exist-devices"
+        *ngIf="!showPreloader && devices.length === 0"
+      >
+        No devices installed
+      </div>
+    </div>
   </div>
   <app-company-devices-aside [companyId]="companyId"></app-company-devices-aside>
 </div>

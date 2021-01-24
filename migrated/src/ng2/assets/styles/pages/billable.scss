@@ -14,16 +14,9 @@
     }
   }
 
-  .table-container {
-    overflow-x: auto;
-    min-height: calc(100vh - 246px);
-  }
 
 
   .billable-table {
-    max-width: 1320px;
-    min-width: 1064px;
-    margin: 0 auto;
 
     td, th {
       &:first-child {
@@ -705,10 +698,3 @@ app-invoice-form-ticket-edit-service,app-invoice-form-ticket-edit-product {
   max-width: 530px;
 }
 
-
-@media (min-width: 1920px) {
-  .billable-table {
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-}

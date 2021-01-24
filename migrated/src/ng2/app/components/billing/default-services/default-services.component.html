@@ -45,22 +45,25 @@
     </table>
   </div>
 
-  <div class="default-services-page__table-container services-list">
-    <table class="qt-table-modern default-service-table">
-      <tbody>
-        <ng-template ngFor let-item
-        [ngForOf]="list"
-        [ngForTrackBy]="trackById">
-        <app-default-services-item [service]="item" (onEditService)="onEditService($event)" ></app-default-services-item>
-      </ng-template>
-      </tbody>
-    </table>
-    <div class="loading" *ngIf="showPreloader"></div>
+  <div class="qt-page-list__body">
+    <div class="qt-page-list__body-table-container services-list">
+      <table class="qt-page-list__body-tbody  qt-table-modern default-service-table">
+        <tbody>
+          <ng-template ngFor let-item
+          [ngForOf]="list"
+          [ngForTrackBy]="trackById">
+          <app-default-services-item [service]="item" (onEditService)="onEditService($event)" ></app-default-services-item>
+        </ng-template>
+        </tbody>
+      </table>
+      <div class="loading" *ngIf="showPreloader"></div>
+    </div>
   </div>
 
 
-  <div class="default-services-page__table-container --visible"  *ngIf="!showPreloader">
-    <table class="qt-table-modern default-service-table">
+
+  <div class="qt-page-list__body-table-container --visible"  *ngIf="!showPreloader">
+    <table class="qt-page-list__body-tbody  qt-table-modern default-service-table">
       <thead>
         <tr>
           <th class="default-service-table__contracts  qt-ff-sb">

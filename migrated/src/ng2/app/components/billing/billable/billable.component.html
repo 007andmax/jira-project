@@ -46,28 +46,27 @@
     </div>
   </div>
 
-  <div class="table-container">
+  <div class="qt-page-list__body">
+    <div class="qt-page-list__body-table-container">
       <table
-          class="qt-table-modern billable-table"
-          *ngIf="!showPreloader"
+        class="qt-page-list__body-tbody qt-table-modern billable-table"
+        *ngIf="!showPreloader"
       >
-          <tbody>
-              <ng-template
-                  ngFor
-                  let-item
-                  [ngForOf]="list"
-                  [ngForTrackBy]="trackById"
-              >
-                  <app-billable-item
-                      [item]="item"
-                      *ngIf="!item.isDefault"
-                  ></app-billable-item>
-              </ng-template>
-          </tbody>
+        <tbody>
+          <ng-template
+            ngFor
+            let-item
+            [ngForOf]="list"
+            [ngForTrackBy]="trackById"
+          >
+            <app-billable-item
+              [item]="item"
+              *ngIf="!item.isDefault"
+            ></app-billable-item>
+          </ng-template>
+        </tbody>
       </table>
-      <div
-          class="loading"
-          *ngIf="showPreloader"
-      ></div>
+      <div class="loading" *ngIf="showPreloader"></div>
+    </div>
   </div>
 </div>

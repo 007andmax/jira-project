@@ -4,24 +4,25 @@
   <div class="qt-df qt-fd-c qt-jc-sb invoices-page__list-container">
     <div>
       <app-invoices-header (onCreateInvoice)="onCreatePayment()" (onSortBy)="sortBy($event)"></app-invoices-header>
-      <div class="table-container">
-        <table class="qt-table-modern invoice-table">
-          <tbody
-          infiniteScroll
-          [infiniteScrollDistance]="2"
-          [infiniteScrollThrottle]="50"
-          [infiniteScrollDisabled]="infiniteScrollDisabled"
-          (scrolled)="onScroll()">
-       <ng-template ngFor let-invoice
-                    [ngForOf]="invoices"
-                    [ngForTrackBy]="trackById">
-                    <app-invoices-item (onSelectInvoice)="onSelectInvoice()" (onPreviewInvoice)="onPreviewInvoice($event)" [invoice]="invoice"></app-invoices-item>
-       </ng-template>
-     </tbody>
-        </table>
-        <div class="loading" *ngIf="showPreloader"></div>
-
-
+      <div class="qt-page-list__body">
+        <div class="qt-page-list__body-table-container">
+          <table class="qt-page-list__body-tbody qt-table-modern invoice-table">
+            <tbody
+              infiniteScroll
+              [infiniteScrollDistance]="2"
+              [infiniteScrollThrottle]="50"
+              [infiniteScrollDisabled]="infiniteScrollDisabled"
+              (scrolled)="onScroll()">
+              <ng-template
+                ngFor let-invoice
+                [ngForOf]="invoices"
+                [ngForTrackBy]="trackById">
+                <app-invoices-item (onSelectInvoice)="onSelectInvoice()" (onPreviewInvoice)="onPreviewInvoice($event)" [invoice]="invoice"></app-invoices-item>
+              </ng-template>
+            </tbody>
+          </table>
+          <div class="loading" *ngIf="showPreloader"></div>
+        </div>
       </div>
     </div>
 

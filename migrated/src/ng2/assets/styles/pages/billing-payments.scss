@@ -12,10 +12,6 @@
   .billable-table, .invoice-table {
     min-width: 1064px;
   }
-  .billable-table {
-    max-width: 1320px;
-    margin: 0 auto;
-  }
 
   &__payment-note-table-icon {
     background-position: center;
@@ -82,9 +78,6 @@
     width: 100%;
   }
 
-  .table-container {
-    overflow-x: auto;
-  }
 
   .payment-table {
     border-spacing: 0;

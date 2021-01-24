@@ -4,16 +4,6 @@
     z-index: 1;
   }
 
-  .table-container {
-    overflow-x: auto;
-    min-height: calc(100vh - 238px);
-  }
-
-  .contracts-table {
-    max-width: 1320px;
-    min-width: 1064px;
-    margin: 0 auto;
-  }
 
   .contracts-table td {
     border: 1px solid transparent;
@@ -726,9 +716,3 @@ thead tr.contracts-table-row-item::before {
   transform: translate(-10px, -50px);
 }
 
-@media (min-width: 1920px) {
-  .contracts-table {
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-}
