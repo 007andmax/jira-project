@@ -37,6 +37,8 @@
                                         id="dropdownCompany"
                                         ngbDropdownToggle
                                         placement="top"
+                                        container="body"
+                                        tooltipClass="user-companies-tooltip"
                                         ngbTooltip="You must remove all Product/Services updates from the ticket before changing the company."
                                         [disableTooltip]="!checkExistServicesProducts()"
                                     ></span>
@@ -133,6 +135,8 @@
                         (click)="toggleSubject()"
                     >
                         <span [ngClass]="getClassType()"></span>
+
+
 
 
 
