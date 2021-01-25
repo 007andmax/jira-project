@@ -1,0 +1,1 @@
+export const SUPPORT_MODAL_ACTION_SEND = "SUPPORT_SEND";

@@ -300,14 +300,13 @@
           });
 
           RealTimeService.subscribe('/oneTimeConnection', $rootScope, function (newChange) {
-            console.log("newChange", newChange);
             storage.oneTimeCallbacks[newChange.action] && storage.oneTimeCallbacks[newChange.action](newChange);
             storage.oneTimeCallbacks.listener && storage.oneTimeCallbacks.listener(newChange);
 
 
-            if (newChange.action === 'REMOTE_CONNECTION_CLOSED') {
+            if (newChange.action === 'ONE_TIME_CONNECTION_OPEN') { //'REMOTE_CONNECTION_CLOSED'
               var session = newChange.data;
-              $rootScope.openCreateTicketForm(session.sessionId, session.duration, session.clientCompany.id, session.oneTime ? '' : session.deviceId);
+              //  $rootScope.openCreateTicketForm(session.sessionId, session.duration, session.clientCompany.id, session.oneTime ? '' : session.deviceId);
             } else if (newChange.action === 'ONE_TIME_CONNECTION_OPEN') {
               addRemoteConnectionSessionToDevice(newChange, devices);
 
@@ -431,67 +430,6 @@
 
         }
         callCallbacks();
-      }
-
-
-
-
-
-
-      function createOneTimeRemoteSession(callback) {
-        $http.get('/remote/createOneTimeRemoteSession').then(function (resp) {
-          if (callback) {
-            callback(resp.data);
-          }
-        }, function (resp) {
-          if (callback) {
-            callback(resp.data);
-          }
-        });
-      }
-
-      function getRemoteSessions(scope, callback) {
-
-        if (!scope || !scope.$id) {
-          throw 'First argument must be Angularjs scope!'
-        }
-
-        return Utils.getListByUrl('/remote/getRemoteSessions', callback, function (list) {
-
-          storage.oneTimeCallbacks.listener = function (newChange) {
-            if (newChange.data.oneTime) {
-              var session = Utils.findById(list, newChange.data.id);
-              if (session) {
-                Utils.customizeObj(newChange.data, session);
-              } else {
-                list.unshift(Utils.customizeObj(newChange.data));
-              }
-            }
-          };
-
-          storage.oneTimeCallbacks.ONE_TIME_DELETED = function (newChange) {
-            Utils.deleteById(list, newChange.data);
-          };
-          storage.oneTimeCallbacks.ONE_TIME_UNINSTALLED = storage.oneTimeCallbacks.ONE_TIME_DELETED;
-        });
-      }
-
-      function deleteRemoteSession(ids, callback) {
-        if (!ids) {
-          throw 'ids is required!';
-        }
-
-        if (!Array.isArray(ids)) {
-          ids = [ids];
-        }
-
-        var future = $http({
-          url: '/remote/deleteRemoteSession',
-          method: 'POST',
-          data: ids
-        });
-
-        Utils.handleCallback(future, callback);
       }
 
       //one time connection
@@ -733,12 +671,9 @@
       return {
         getDevicesCount: getDevicesCount,
         getAgentsByCompany: getAgentsByCompany,
-        createOneTimeRemoteSession: createOneTimeRemoteSession,
-        getRemoteSessions: getRemoteSessions,
         getSessionId: getSessionId,
         createRemoteSession: createRemoteSession,
         subscribeToRemoteConnection: subscribeToRemoteConnection,
-        deleteRemoteSession: deleteRemoteSession,
         getOneById: getOneById,
         getOneByDeviceId: getOneByDeviceId,
         getOneByAgentId: getOneByAgentId,

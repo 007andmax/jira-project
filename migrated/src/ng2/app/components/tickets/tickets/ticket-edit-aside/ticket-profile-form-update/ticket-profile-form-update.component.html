@@ -1,69 +1,208 @@
 <div class="cps-block">
-  <div class="cps-block__header d-f">
-    <div class="cps-block__photo"  [textContent]="ticketsListService.getAssignedUserNameForAvatar(currentUser)"
-    [ngStyle]="{'background': ticketsListService.getStyleAvatar(currentUser)}"></div>
-    <ul class="cps-block__nav">
-      <li class="cps-block__nav-item icon__chat" [ngClass]="{'active':tab === 'NOTE' }" (click)="setTab('NOTE')">Chat</li>
-      <li class="cps-block__nav-item icon__products" [ngClass]="{'active':tab === 'PRODUCT' }" (click)="setTab('PRODUCT')">Products</li>
-      <li class="cps-block__nav-item icon__service" [ngClass]="{'active':tab === 'SERVICE' }" (click)="setTab('SERVICE')">Service</li>
-    </ul>
-  </div>
-  <div class="cps-block__content">
-   <div class="cps-block__chat-block" *ngIf="tab === 'NOTE'" >
-    <div class="editable-description editable-chat">
-    
-    <textarea id="chat" name="cps-chat" class="cps-block__content-textarea" appTextArea [maxLines]="8"    maxlength="500"   cols="5" rows="1"   placeholder="Write ticket conversation here…"
-    (input)="onChangeChat($event)" (onPast)="onPastChat($event)"></textarea>
+    <div class="cps-block__header d-f">
+        <div
+            class="cps-block__photo"
+            [textContent]="ticketsListService.getAssignedUserNameForAvatar(currentUser)"
+            [ngStyle]="{'background': ticketsListService.getStyleAvatar(currentUser)}"
+        ></div>
+        <ul class="cps-block__nav">
+            <li
+                class="cps-block__nav-item icon__chat"
+                [ngClass]="{'active':tab === 'NOTE' }"
+                (click)="setTab('NOTE')"
+            >
+                Chat
+            </li>
+            <li
+                class="cps-block__nav-item icon__products"
+                [ngClass]="{'active':tab === 'PRODUCT' }"
+                (click)="setTab('PRODUCT')"
+            >
+                Products
+            </li>
+            <li
+                class="cps-block__nav-item icon__service"
+                [ngClass]="{'active':tab === 'SERVICE' }"
+                (click)="setTab('SERVICE')"
+            >
+                Service
+            </li>
+            <li
+                class="cps-block__nav-item icon__quick-support"
+                [ngClass]="{'active':tab === 'QUICK_SUPPORT' }"
+                (click)="setTab('QUICK_SUPPORT')"
+            >
+                Quick Support
+            </li>
+        </ul>
     </div>
-    <div class="files-list">
-      <div class="single-file" *ngFor="let file of files; let i = index">
-
-        <div class="info">
-          <h4 class="name">
-            {{ file?.name }}
-          </h4>
-          <p class="size">
-            {{ formatBytes(file?.size) }} <span class="file-error">{{(file.showError) ? error : ''}}</span>
-          </p>
-          <app-upload-area-progress [progress]="file?.progress"></app-upload-area-progress>
+    <div class="cps-block__content">
+        <div
+            class="cps-block__chat-block"
+            *ngIf="tab === 'NOTE'"
+        >
+            <div class="editable-description editable-chat">
+                <textarea
+                    id="chat"
+                    name="cps-chat"
+                    class="cps-block__content-textarea"
+                    appTextArea
+                    [maxLines]="8"
+                    maxlength="500"
+                    cols="5"
+                    rows="1"
+                    placeholder="Write ticket conversation here…"
+                    (input)="onChangeChat($event)"
+                    (onPast)="onPastChat($event)"
+                ></textarea>
+            </div>
+            <div class="files-list">
+                <div
+                    class="single-file"
+                    *ngFor="let file of files; let i = index"
+                >
+                    <div class="info">
+                        <h4 class="name">{{ file?.name }}</h4>
+                        <p class="size">
+                            {{ formatBytes(file?.size) }}
+                            <span class="file-error">{{(file.showError) ? error : ''}}</span>
+                        </p>
+                        <app-upload-area-progress [progress]="file?.progress"></app-upload-area-progress>
+                    </div>
+                    <i
+                        class="icn-sm icn-remove-old"
+                        (click)="deleteFile(i)"
+                    ></i>
+                </div>
+            </div>
         </div>
-        <i class="icn-sm icn-remove-old" (click)="deleteFile(i)"></i>
-      </div>
+        <app-ticket-profile-form-update-products
+            #selectProducts
+            *ngIf="tab === 'PRODUCT'"
+        ></app-ticket-profile-form-update-products>
+        <app-ticket-profile-form-update-services
+            #selectServices
+            [ticketProfile]="ticketProfile"
+            *ngIf="tab === 'SERVICE'"
+        ></app-ticket-profile-form-update-services>
+        <app-ticket-profile-form-update-support
+            *ngIf="tab === 'QUICK_SUPPORT'"
+            (onCreateOneTimeRemoteSession)="onCreateOneTimeRemoteSession()"
+            [item]="remoteSession"
+            (onConnectRemoteAccess)="onConnectRemoteAccess($event)"
+        ></app-ticket-profile-form-update-support>
     </div>
-
-  </div>
-  <app-ticket-profile-form-update-products #selectProducts   *ngIf="tab === 'PRODUCT'"></app-ticket-profile-form-update-products>
-  <app-ticket-profile-form-update-services   #selectServices  [ticketProfile]="ticketProfile"  *ngIf="tab === 'SERVICE'"></app-ticket-profile-form-update-services>
-  </div>
 </div>
-
 <div class="qt-aside__buttons jc-sb ai-c">
-  <div class="d-f ticket-edit-aside-bottom-part-users-attack" >
-    <!--<div *ngIf="tab === 'NOTE'"> -->
-    <div class="ticket-edit-aside__attach icon__attachment" placement="top" ngbTooltip="Add Attachment">
-      <input type="file" #fileDropRef id="fileDropRef" multiple (change)="fileBrowseHandler($event.target.files)" />
+    <div class="d-f ticket-edit-aside-bottom-part-users-attack">
+        <!-- <div *ngIf="tab === 'NOTE'"> -->
+        <div
+            class="ticket-edit-aside__attach icon__attachment"
+            placement="top"
+            ngbTooltip="Add Attachment"
+        >
+            <input
+                type="file"
+                #fileDropRef
+                id="fileDropRef"
+                multiple
+                (change)="fileBrowseHandler($event.target.files)"
+            >
+        </div>
+        <div
+            class="ticket-edit-aside__users  icon__assign-user toggle-select-user"
+            *ngIf="!showAddUpdateUser"
+            (click)="onToggleAddUpdateUser()"
+            placement="top"
+            ngbTooltip="Add User"
+        ></div>
+        <app-add-assigned-user
+            [userList]="getUsersForUpdate()"
+            [selectedUsers]="lisUpdateUser"
+            (onSelected)="onSelectUpdateUser($event)"
+            (hidden)="onToggleAddUpdateUser()"
+            *ngIf="showAddUpdateUser"
+        ></app-add-assigned-user>
+        <div class="ticket-edit-aside__users-linked d-f">
+            <ng-template
+                class="assigned-ticket-user"
+                ngFor
+                let-user
+                [ngForOf]="lisUpdateUser"
+                let-i="index"
+                [ngForTrackBy]="trackByIndex"
+            >
+                <ng-template #tipContent>
+                    <div [textContent]="ticketsListService.getUserName(user)"></div>
+                    <div [textContent]="user.primaryEmail"></div>
+                </ng-template>
+                <div
+                    class="ticket-edit-aside__users-linked-author pointer"
+                    placement="top"
+                    [ngbTooltip]="tipContent"
+                    [ngClass]="{'selected':ticketProfileFormUpdate.checkShares(user)}"
+                    (click)="ticketProfileFormUpdate.toggleShares(user)"
+                    *ngIf="user.accountType === 'CLIENT' && !showAddUpdateUser"
+                    [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
+                    [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
+                ></div>
+            </ng-template>
+            <div
+                class="ticket-edit-aside__users-linked-divider"
+                *ngIf="!showAddUpdateUser"
+            ></div>
+            <ng-template
+                class="assigned-ticket-user"
+                ngFor
+                let-user
+                [ngForOf]="lisUpdateUser"
+                let-i="index"
+                [ngForTrackBy]="trackByIndex"
+            >
+                <ng-template #tipContent>
+                    <div [textContent]="ticketsListService.getUserName(user)"></div>
+                    <div [textContent]="user.primaryEmail"></div>
+                </ng-template>
+                <div
+                    class="ticket-edit-aside__users-linked-author pointer"
+                    placement="top"
+                    [ngbTooltip]="tipContent"
+                    [ngClass]="{'selected':ticketProfileFormUpdate.checkShares(user)}"
+                    (click)="ticketProfileFormUpdate.toggleShares(user)"
+                    *ngIf="user.accountType === 'TECH' && !showAddUpdateUser"
+                    [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
+                    [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
+                ></div>
+            </ng-template>
+        </div>
+        <!-- </div> -->
     </div>
-    <div class="ticket-edit-aside__users  icon__assign-user toggle-select-user" *ngIf="!showAddUpdateUser" (click)="onToggleAddUpdateUser()" placement="top" ngbTooltip="Add User"></div>
-    <app-add-assigned-user [userList]="getUsersForUpdate()" [selectedUsers]="lisUpdateUser" (onSelected)="onSelectUpdateUser($event)" (hidden)="onToggleAddUpdateUser()" *ngIf="showAddUpdateUser"></app-add-assigned-user>
-
-    <div class="ticket-edit-aside__users-linked d-f">
-      <ng-template class="assigned-ticket-user" ngFor let-user [ngForOf]="lisUpdateUser" let-i="index" [ngForTrackBy]="trackByIndex">
-        <ng-template #tipContent><div [textContent]="ticketsListService.getUserName(user)"></div><div [textContent]="user.primaryEmail"></div></ng-template>
-        <div class="ticket-edit-aside__users-linked-author pointer" placement="top" [ngbTooltip]="tipContent" [ngClass]="{'selected':ticketProfileFormUpdate.checkShares(user)}" (click)="ticketProfileFormUpdate.toggleShares(user)" *ngIf="user.accountType === 'CLIENT' && !showAddUpdateUser" [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"   [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"></div>
-      </ng-template>
-      <div class="ticket-edit-aside__users-linked-divider" *ngIf="!showAddUpdateUser"></div>
-      <ng-template class="assigned-ticket-user" ngFor let-user [ngForOf]="lisUpdateUser" let-i="index" [ngForTrackBy]="trackByIndex">
-        <ng-template #tipContent><div [textContent]="ticketsListService.getUserName(user)"></div><div [textContent]="user.primaryEmail"></div></ng-template>
-
-        <div class="ticket-edit-aside__users-linked-author pointer" placement="top" [ngbTooltip]="tipContent" [ngClass]="{'selected':ticketProfileFormUpdate.checkShares(user)}" (click)="ticketProfileFormUpdate.toggleShares(user)" *ngIf="user.accountType === 'TECH' && !showAddUpdateUser" [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"   [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"></div>
-      </ng-template>
+    <div
+        class="d-f"
+        *ngIf="!showAddUpdateUser"
+    >
+        <div
+            class="qt-btn --btn40h --outline-blue update-ticket-btn"
+            [ngClass]="{'--loading':isUpdate}"
+            appDisabledBtn
+            #updateBtn="disabled"
+            (onClick)="update()"
+        >
+            <span>Update</span>
+            <app-preloader-ticket *ngIf="isUpdate"></app-preloader-ticket>
+        </div>
+        <div
+            class="qt-btn --btn40h"
+            placement="top"
+            ngbTooltip="You cannot close the ticket. It contains incomplete products / services."
+            [disableTooltip]="checkUpdateAndClose()"
+            appDisabledBtn
+            #update_closeBtn="disabled"
+            (onClick)="updateAndClose()"
+            [ngClass]="{'disabled':!checkUpdateAndClose(), '--loading':isUpdateAndClose}"
+        >
+            <span>Update & Close</span>
+            <app-preloader-ticket *ngIf="isUpdateAndClose"></app-preloader-ticket>
+        </div>
     </div>
-     <!-- </div>-->
-  </div>
-
-  <div class="d-f" *ngIf="!showAddUpdateUser">
-    <div class="qt-btn --btn40h --outline-blue update-ticket-btn" [ngClass]="{'--loading':isUpdate}" appDisabledBtn #updateBtn="disabled" (onClick)="update()" ><span>Update</span> <app-preloader-ticket *ngIf="isUpdate"></app-preloader-ticket></div>
-
-    <div class="qt-btn --btn40h" placement="top" ngbTooltip="You cannot close the ticket. It contains incomplete products / services." [disableTooltip]="checkUpdateAndClose()" appDisabledBtn #update_closeBtn="disabled" (onClick)="updateAndClose()"  [ngClass]="{'disabled':!checkUpdateAndClose(), '--loading':isUpdateAndClose}"><span>Update & Close</span><app-preloader-ticket *ngIf="isUpdateAndClose"></app-preloader-ticket></div>
-  </div>
 </div>

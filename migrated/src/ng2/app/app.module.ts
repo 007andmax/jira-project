@@ -382,6 +382,11 @@ import { CompanyDashRevenueComponent } from './components/company-dashboard/comp
 import { CompanyDashInvoiceComponent } from './components/company-dashboard/company-dash-invoice/company-dash-invoice.component';
 import { CompanyDashContractComponent } from './components/company-dashboard/company-dash-contract/company-dash-contract.component';
 import { LeftPanelCompanyComponent } from './components/left-panel/left-panel-company/left-panel-company.component';
+import { SupportComponent } from './components/support/support.component';
+import { SupportItemComponent } from './components/support/support-item/support-item.component';
+import { DynamicTooltipComponent } from './components/shared/dynamic-tooltip/dynamic-tooltip.component';
+import { TicketProfileFormUpdateSupportComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-form-update/ticket-profile-form-update-support/ticket-profile-form-update-support.component';
+import { LeftPanelSupportComponent } from './components/left-panel/left-panel-support/left-panel-support.component';
 /**
  * declare angular
  */
@@ -575,6 +580,9 @@ angular.module('quicktech')
   .directive(
     'companyNetworkScanComponent',
     downgradeComponent({ component: CompanyNetworkScanComponent }))
+  .directive(
+    'supportComponent',
+    downgradeComponent({ component: SupportComponent }))
   .factory('ngZone', downgradeInjectable(NgZone));
 
 /**
@@ -927,6 +935,11 @@ angular.module('quicktech')
     CompanyNetworkScanItemComponent,
     CompanyNetworkScanItemTooltipComponent,
     LeftPanelCompanyComponent,
+    SupportComponent,
+    SupportItemComponent,
+    DynamicTooltipComponent,
+    TicketProfileFormUpdateSupportComponent,
+    LeftPanelSupportComponent,
   ],
   imports: [
     BrowserModule,
@@ -1023,7 +1036,8 @@ angular.module('quicktech')
     TicketsDashboardComponent,
     CompanyNetworkScanComponent,
     CompanyDevicesComponent,
-    CompanyDevicesRemoteAccessComponent
+    CompanyDevicesRemoteAccessComponent,
+    SupportComponent
     // RecurringTicketsComponent
   ],
   exports: [

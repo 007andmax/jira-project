@@ -12,6 +12,8 @@ import { UsersStateService } from 'src/ng2/app/states/users/users-state.service'
 import { SAVE_AND_SEND } from 'src/ng2/app/const/confirm';
 import { QuoteStateService } from 'src/ng2/app/states/quote/quote-state.service';
 import { QUOTE_MODAL_ACTION_ADD, QUOTE_MODAL_ACTION_EDIT, QUOTE_MODAL_ACTION_LIST, QUOTE_MODAL_ACTION_PREVIEW } from 'src/ng2/app/const/quote';
+import { SUPPORT_MODAL_ACTION_SEND } from 'src/ng2/app/const/support';
+import { SupportStateService } from 'src/ng2/app/states/support/support-state.service';
 
 /**
  * Modal quote component
@@ -39,6 +41,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
   showError = false;
   usersEmails = [];
   users = [];
+  reqUsersList = [];
   initialized: boolean = false;
   showConfirm: boolean = false;
   sub: Subscription = new Subscription();
@@ -63,6 +66,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
     public activeModal: NgbActiveModal,
     private quoteStateService: QuoteStateService,
     private confirmStateService: ConfirmStateService,
+    private supportStateService: SupportStateService,
     private modalService: NgbModal,
     config: NgbModalConfig,
     private usersStateService: UsersStateService
@@ -118,24 +122,6 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Add selected user
-   * @param event - selected user
-   */
-  public add(event: MatChipInputEvent): void {
-    if (!this.matAutocomplete.isOpen) {
-      const input = event.input;
-      const value = event.value;
-      if ((value || '').trim()) {
-        this.selectedUsers.push(value.trim());
-      }
-      if (input) {
-        input.value = '';
-      }
-      this.userCtrl.setValue(null);
-    }
-  }
-
-  /**
    * Remove user from selected
    * @param index - user index
    */
@@ -169,6 +155,8 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
     const techUser = userList.filter((item) => item.accountType === USER.TYPE.TECH && !item.deletedAt && item.primaryEmail !== "");
     let clientUser = userList.filter((item) => item.accountType === USER.TYPE.CLIENT && item.company.id == companyId && !item.deletedAt && item.primaryEmail !== "");
     this.users = [...techUser, ...clientUser].sort((a, b) => (a.primaryEmail.toLowerCase() > b.primaryEmail.toLowerCase()) ?
+      1 : ((b.primaryEmail.toLowerCase() > a.primaryEmail.toLowerCase()) ? -1 : 0));
+    this.reqUsersList = [...techUser, ...clientUser].sort((a, b) => (a.primaryEmail.toLowerCase() > b.primaryEmail.toLowerCase()) ?
       1 : ((b.primaryEmail.toLowerCase() > a.primaryEmail.toLowerCase()) ? -1 : 0));
   }
 
@@ -210,28 +198,15 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
       if (this.action === QUOTE_MODAL_ACTION_EDIT) this.quoteStateService.saveSandModeEdit(this.data);
       if (this.action === QUOTE_MODAL_ACTION_ADD) this.quoteStateService.saveSandMode(this.data);
       if (this.action === QUOTE_MODAL_ACTION_LIST) this.quoteStateService.saveSandModeList(this.data);
-
-      /*  if (!this.isResend) {
-          this.onInitSubjectAndMessage();
-          this.data.recipients = this.usersEmails;
-          this.quoteStateService.saveSandMode(this.data);
-        } else {
-          if (!this.data.id) {
-            this.onInitSubjectAndMessage();
-            this.data.recipients = this.usersEmails;
-            this.quoteStateService.saveSandMode(this.data);
-          } else {
-            this.onInitSubjectAndMessage();
-            this.data.recipients = this.usersEmails;
-            this.quoteStateService.saveSandModeEdit(this.data);
-          }
-  
-  
-        }*/
+      if (this.action === SUPPORT_MODAL_ACTION_SEND) this.supportStateService.onHandleSendMode(this.data);
       this.activeModal.close();
     } else {
       this.showError = true;
     }
+  }
+
+  onSearch(event) {
+    this.users = this.reqUsersList.filter(item => item.primaryEmail.includes(event.target.value));
   }
 
   /**
@@ -262,11 +237,13 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
 
   public keyup(e) {
     if (e.keyCode === 13) {
-      if (this.userInput.nativeElement.value.length > 0) {
-        this.selectedUsers.push(this.userInput.nativeElement.value);
-        this.usersEmails.push(this.userInput.nativeElement.value);
+      const input = e.target;
+      const value = e.target.value;
+      if (value.length > 0) {
+        this.selectedUsers.push(value);
+        this.usersEmails.push(value);
         this.quoteStateService.setUsersEmail(this.usersEmails);
-        this.userInput.nativeElement.value = "";
+        input.value = '';
         this.userCtrl.setValue(null);
       }
     }
