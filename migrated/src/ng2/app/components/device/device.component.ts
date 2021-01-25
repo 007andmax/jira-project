@@ -34,6 +34,8 @@ export class DeviceComponent implements OnInit {
   closeResult = '';
   play_pause_path = '/html/ng2/assets/img/device/pause.svg';
   playTimer = true;
+  _id: string = '';
+  type: string = '';
   interval;
   constructor(private modalService: NgbModal, private commonHttpServices: CommonHttpServices,
     private commonServices: CommonServices, private toastr: ToastrService,
@@ -73,11 +75,13 @@ export class DeviceComponent implements OnInit {
   }
   
   ngOnInit(): void {
+    this.type = window.location.href.split('/')[window.location.href.split('/').length - 2];
+    this._id = window.location.href.split('/')[window.location.href.split('/').length - 1];
     this.usersStateService.onInit();
     this.shellStateService.onInit();
     this.socketService.initializeWebSocketConnection();
-    localStorage.setItem('uuid', uuidv4());
-    this.deviceType = localStorage.getItem('type');
+    localStorage.setItem('uuid_' + this._id, uuidv4());
+    this.deviceType = this.type;
     if (this.deviceType === 'printer') {
       this.deviceImg = '/html/ng2/assets/img/device/Device_printer.svg';
     }
@@ -135,7 +139,7 @@ export class DeviceComponent implements OnInit {
   }
   getDevicesByCompany() {
     // localStorage.getItem('currentCompany')
-    this.commonHttpServices.getDevicesByCompany(localStorage.getItem('company_id'), localStorage.getItem('agentId'))
+    this.commonHttpServices.getDevicesByCompany(localStorage.getItem('company_id'), this._id)
       .pipe()
       .subscribe(resp => {
         const tempObj = this.commonServices.cleanObject(resp);
@@ -147,9 +151,9 @@ export class DeviceComponent implements OnInit {
           }
         }
         this.deviceDetailService.addDeviceList(deviceList);
-        let index = deviceList.findIndex(value => value.agentId === localStorage.getItem('agentId'))
+        let index = deviceList.findIndex(value => value.agentId === this._id)
         this.deviceDetail = deviceList[index];
-        localStorage.setItem('deviceDetail', JSON.stringify(deviceList[index]))
+        localStorage.setItem('deviceDetail_' + this._id, JSON.stringify(deviceList[index]))
         localStorage.setItem('company_id', deviceList[index].company_id);
         // this.getDeviceDetail();
       },
@@ -237,11 +241,11 @@ export class DeviceComponent implements OnInit {
   }
 
   sendCommand(command) {
-    if (JSON.parse(localStorage.getItem('deviceDetail')).online === true) {
+    if (JSON.parse(localStorage.getItem('deviceDetail_' + this._id)).online === true) {
       let data: command = {
         "companyId": localStorage.getItem('company_id'),
-        "agentId": localStorage.getItem('agentId'),
-        "sessionId": localStorage.getItem('uuid'),
+        "agentId": this._id,
+        "sessionId": localStorage.getItem('uuid_' + this._id),
         "scriptType": 'cmd', // 'powershell'
         "script": 'shutdown /' + command,
         "file": false,

@@ -43,6 +43,8 @@ export class HardwareComponent implements OnInit {
   printDisk: Array<Array<string>>; 
   printOS: Array<Array<string>>;
   pdfUrl: string = '';
+  _id: string = '';
+  type: string = '';
   DateTimeFormat = CONFIGCONSTANTS.DateTimeFormat;
   constructor(private hardwareService: HardwareService, private toastr: ToastrService,
 				 private commonHttpServices: CommonHttpServices, 
@@ -51,12 +53,13 @@ export class HardwareComponent implements OnInit {
          private excelService: ExcelService) {}
 
   ngOnInit() {
-
+    this.type = window.location.href.split('/')[window.location.href.split('/').length - 2];
+    this._id = window.location.href.split('/')[window.location.href.split('/').length - 1];
     // $('main').css('margin-right', '64px')
-    if(localStorage.getItem('type') === 'printer') {
-      this.router.navigate(['/ng2/device/dashboard']);
+    if(this.type === 'printer') {
+      this.router.navigate([`/ng2/device/dashboard/${this.type}/${this._id}`]);
     }
-    this.deviceDetail = JSON.parse(localStorage.getItem('deviceDetail'));
+    this.deviceDetail = JSON.parse(localStorage.getItem('deviceDetail_' + this._id));
     this.hardwareDetail = this.deviceDetailService.getDevice();
     if (Object.keys(this.hardwareDetail).length === 0) {
       this.getDeviceDetail();
@@ -469,7 +472,7 @@ export class HardwareComponent implements OnInit {
   saveLabel() {
     this.deviceName = this.deviceName.toUpperCase();
     const data = {
-      agentId: localStorage.getItem('agentId'),
+      agentId: this._id,
       companyId: localStorage.getItem('company_id'),
       newLabelValue: this.deviceName
     }
@@ -478,9 +481,9 @@ export class HardwareComponent implements OnInit {
     .subscribe(
       resp => {
         $('#head-label').text(this.deviceName);
-        let obj = JSON.parse(localStorage.getItem('deviceDetail'));
+        let obj = JSON.parse(localStorage.getItem('deviceDetail_' + this._id));
         obj.label = this.deviceName;
-        localStorage.setItem('deviceDetail', JSON.stringify(obj));
+        localStorage.setItem('deviceDetail_' + this._id, JSON.stringify(obj));
       },
       error => {
         this.toastr.error('Something went wrong please try again.');

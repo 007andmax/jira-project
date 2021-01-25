@@ -88,6 +88,8 @@ export class TerminalComponent implements OnInit {
     lineWrapping: true,
   };
   terminalHit = false;
+  _id: string = '';
+  type: string = '';
   DateTimeHistoryFormat = CONFIGCONSTANTS.DateTimeHistoryFormat;
   constructor(private terminalService: TerminalService,
     private toastr: ToastrService,
@@ -100,7 +102,8 @@ export class TerminalComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    
+    this.type = window.location.href.split('/')[window.location.href.split('/').length - 2];
+    this._id = window.location.href.split('/')[window.location.href.split('/').length - 1];
     // this.socketService.initializeWebSocketConnection();
     this.getCommandList();
     this.getCmdCategoryRead();
@@ -145,11 +148,11 @@ export class TerminalComponent implements OnInit {
   }
 
   getHistory () {
-    this.terminalService.getHistory(localStorage.getItem('agentId'))
+    this.terminalService.getHistory(this._id)
     .pipe(first())
     .subscribe(data => {
       if (Object.keys(data).length > 0) {
-      let obj = data[localStorage.getItem('agentId')]
+      let obj = data[this._id]
       this.his = obj;
       let arr = obj.split('↵');
       if (arr.length == 1) {
@@ -527,14 +530,14 @@ export class TerminalComponent implements OnInit {
   }
 
   copyToTerminal(cmd, type, file) {
-    if (JSON.parse(localStorage.getItem('deviceDetail')).online === true) {
+    if (JSON.parse(localStorage.getItem('deviceDetail_' + this._id)).online === true) {
       this.finalCommand = cmd;
       // let arr = cmd.split(/\r*\n/)
       // this.splitCommand[this.splitCommand.length - 1] = this.splitCommand[this.splitCommand.length - 1] + arr[0];
       // if (arr.splice(0, 1).length > 0) {
       //   this.splitCommand = this.splitCommand.concat(arr.splice(0, 1));
       // }
-      this.sessionId = localStorage.getItem('uuid');
+      this.sessionId = localStorage.getItem('uuid_' + this._id);
       this.sendCommand(type, file);
     } else {
       this.toastr.error('The device is offline');
@@ -545,7 +548,7 @@ export class TerminalComponent implements OnInit {
   sendCommand(type, file) {
     let data: command = {
       "companyId": localStorage.getItem('company_id'),
-      "agentId": localStorage.getItem('agentId'),
+      "agentId": this._id,
       "sessionId": this.sessionId,
       "scriptType": type === '' ? this.scriptTyped.toLowerCase() : type.toLowerCase(), // 'powershell'
       "script": this.finalCommand,
@@ -558,13 +561,15 @@ export class TerminalComponent implements OnInit {
     .subscribe(resp => {
       if (!this.terminalHit) {
         let getCmdOutput = this.shellStateService.getCmdOutput().subscribe((data) => {
-          let arr = data.data.output.split(/\r*\n/)
-          let arr1 = this.splitCommand.concat(arr);
-          this.splitCommand = arr1;
-          this.cd.detectChanges();
-          setTimeout(() => {
-            $('#terminal').scrollTop($('#terminal')[0].scrollHeight);
-          }, 50);
+          if (this.sessionId === data.data.sessionId) {
+            let arr = data.data.output.split(/\r*\n/)
+            let arr1 = this.splitCommand.concat(arr);
+            this.splitCommand = arr1;
+            this.cd.detectChanges();
+            setTimeout(() => {
+              $('#terminal').scrollTop($('#terminal')[0].scrollHeight);
+            }, 50);
+          }
         })
         this.sub.add(getCmdOutput);
         this.terminalHit = true;
