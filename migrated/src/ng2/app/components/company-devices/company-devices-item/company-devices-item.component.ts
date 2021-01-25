@@ -49,12 +49,10 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
     this.onChangeSelect.emit(null);
   }
   gotiDetailDevice() {
-    if (this.device.agentId) {
-      localStorage.setItem('agentId', this.device.agentId);
-      localStorage.setItem('type', this.device.type);
-      var url = '/#/ng2/device/dashboard';
-      window.open(url, '_blank');
-    }
+    localStorage.setItem('agentId', this.device.agentId);
+    localStorage.setItem('type', this.device.type);
+    var url = `/#/ng2/device/dashboard/${this.device.type}/${this.device.agentId}`;
+    window.open(url, '_blank');
   };
   remoteAccess(connectionType) {
     const modalRef = this.modalService.open(CompanyDevicesRemoteAccessComponent, { windowClass: 'device-send-modal' });
