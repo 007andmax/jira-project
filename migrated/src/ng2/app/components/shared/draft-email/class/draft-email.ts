@@ -19,6 +19,9 @@ export class DraftEmail {
         this.recipients = data;
 
     }
+    public setSubject(data) {
+        this.subject = data;
+    }
     public setAttachment(id) {
         this.attachments.push(id);
     }

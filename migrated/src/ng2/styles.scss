@@ -2654,7 +2654,9 @@ app-ticket-profile-form-update {
   bottom: 0;
   background: white;
   z-index: 30;
-
+  .cps-block__content {
+    min-height: 106px;
+  }
 }
 
 .dropdown-menu.services-container.show {
@@ -2746,8 +2748,10 @@ app-ticket-edit-aside-devices  {
     border-radius: 5px;
     overflow: auto;
     border: solid 1px #dfe3e8;
-    max-height: calc(100vh - 300px);
+    height: calc(100vh - 300px);
+    max-height: 290px;
     box-shadow: 0px 2px 20px 10px #0000000e;
+    z-index: 100;
   }
   &::before {
     content: '';

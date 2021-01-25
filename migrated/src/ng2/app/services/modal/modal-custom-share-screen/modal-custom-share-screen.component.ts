@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { DownloadAgentService } from 'src/ng2/app/components/companies/download-agent/services/download-agent.service';
 import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -13,9 +13,11 @@ export class ModalCustomShareScreenComponent implements OnInit {
   @Input() companyId: string;
   constructor(private downloadAgentService: DownloadAgentService,
     private devicesStateService: DevicesStateService,
+    public cd: ChangeDetectorRef,
     public activeModal: NgbActiveModal,) { }
 
   ngOnInit() {
+    this.cd.detectChanges();
   }
   downloadViewer() {
     window.location.href = '/data/connection-viewer';

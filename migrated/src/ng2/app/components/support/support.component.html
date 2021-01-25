@@ -1,0 +1,40 @@
+<div class="quick-support-page qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
+    <div class="qt-list-header quick-support-page__header">
+        <div>
+            <h3 class="list-title">Quick Support</h3>
+        </div>
+        <div class="d-f ai-c">
+            <button
+                class="qt-btn --outline-blue pointer"
+                (click)="create()"
+            >
+                Create Connection
+            </button>
+        </div>
+    </div>
+    <div class="support-tickets-list">
+        <ng-template
+            ngFor
+            let-item
+            [ngForOf]="list"
+            [ngForTrackBy]="trackById"
+        >
+            <app-support-item
+                [item]="item"
+                (onConnectRemoteAccess)="onConnectRemoteAccess($event)"
+            ></app-support-item>
+        </ng-template>
+        <p
+            class="no-exist-remote-sessions"
+            *ngIf="!showPreloader && list.length === 0"
+        >
+            There are no active requests
+        </p>
+        <div
+            class="loading"
+            *ngIf="showPreloader"
+        ></div>
+    </div>
+</div>
+<app-ticket-add-aside></app-ticket-add-aside>
+<app-left-panel-support></app-left-panel-support>

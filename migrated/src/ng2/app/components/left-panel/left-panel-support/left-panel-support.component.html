@@ -1,0 +1,24 @@
+<div class="left-panel-full-wrapper nano billing">
+    <div class="left-panel-full__head">
+        <div class="icon-pos go-back-left-panel">
+            <i class="icn-sm icn-back-arrow"></i>
+        </div>
+        <span class="left-panel-full__head--header">Quick Support</span>
+    </div>
+    <div class="center-category collapsed-nav nano-content">
+        <div
+            class="center-category__category"
+            [ngClass]="{'active':activePage === 'ALL'}"
+            (click)="onFilter('ALL')"
+        >
+            All Sessions
+        </div>
+        <div
+            class="center-category__category"
+            [ngClass]="{'active':activePage === 'MY'}"
+            (click)="onFilter('MY')"
+        >
+            My Sessions
+        </div>
+    </div>
+</div>
