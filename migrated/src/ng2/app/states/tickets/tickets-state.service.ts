@@ -47,7 +47,7 @@ export class TicketsStateService {
         this.addTicket.emit(newChange.data);
       }
       if (this.ticketChangedActions.indexOf(newChange.action) > -1) {
-        if (newChange.action !== 'EDITED_TICKET') newChange.data.userCompanies = undefined;
+        if (newChange.action !== 'EDITED_TICKET') delete newChange.data.userCompanies;
         this.updateTicket.emit(newChange.data);
       }
       if (newChange.action === 'ALL_TICKETS_COUNT') this.onUpdateCounts(newChange.data);
