@@ -221,8 +221,8 @@ export class CompanyAddAsideComponent implements OnInit, OnDestroy {
     this.validate.checkValidType(this.company.clientType);
   }
   public onChangeTimeZone(data) {
-    this.company.addresses[0].locale = data.name;
-    this.company.addresses[0].timeZone = data;
+    this.company.addresses[0].locale = (data) ? data.second : '';
+
   }
   public onChangeTags(tags) {
     this.company.setTags(tags);

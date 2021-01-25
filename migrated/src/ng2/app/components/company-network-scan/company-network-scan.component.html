@@ -57,6 +57,7 @@
                                 class="pointer"
                                 ngbDropdownItem
                                 (click)="selectMasterAgent(agent)"
+                                [ngClass]="{'offline-device': masterAgent && !masterAgent.online}"
                                 [textContent]="agent.label || agent.hostName || agent.ip"
                             ></li>
                         </ng-template>
@@ -191,6 +192,12 @@
                     *ngIf="noExistDevices"
                 >
                     <p>No Devices</p>
+                </div>
+                <div
+                    class="no-devices"
+                    *ngIf="masterAgent && !masterAgent.online && networkScanDevices.devices.length === 0"
+                >
+                    <p>Master Agent Offline</p>
                 </div>
             </table>
         </div>

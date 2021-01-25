@@ -36,10 +36,13 @@
                                         [textContent]="getCompanyName()"
                                         id="dropdownCompany"
                                         ngbDropdownToggle
+                                        placement="top"
+                                        ngbTooltip="You must remove all Product/Services updates from the ticket before changing the company."
+                                        [disableTooltip]="!checkExistServicesProducts()"
                                     ></span>
                                     <span [textContent]="' - ' + getNameCreateUser()"></span>
                                     <div
-                                        *ngIf="ticketProfile.ticketSource === 'FROM_EMAIL'"
+                                        *ngIf="ticketProfile.ticketSource === 'FROM_EMAIL' && !checkExistServicesProducts()"
                                         ngbDropdownMenu
                                         aria-labelledby="dropdownCompany"
                                     >
@@ -130,6 +133,11 @@
                         (click)="toggleSubject()"
                     >
                         <span [ngClass]="getClassType()"></span>
+
+
+
+
+
 
 
 

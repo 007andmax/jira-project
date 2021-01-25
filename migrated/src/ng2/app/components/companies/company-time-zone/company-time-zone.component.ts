@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter, ElementRef, OnDestroy } from '@angular/core';
 import { TimeZoneService } from './services/time-zone.service';
 import { TimeZone } from './class/time-zone';
-import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
-import { TimeZoneOffset } from './class/time-zone-offset';
 import { CompanyTimeZoneStateService } from './services/company-time-zone-state.service';
 import { Subscription } from 'rxjs';
 
@@ -12,20 +10,17 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./company-time-zone.component.scss']
 })
 export class CompanyTimeZoneComponent implements OnInit, OnDestroy {
-  @ViewChild('zones_dropDown') zones_dropDown: NgbDropdown;
   @Output() selectedOffsetItem = new EventEmitter<any>();
   public isFormValid = false;
   public list: Array<TimeZone> = [];
+  selectedItem: TimeZone = null;
   sub: Subscription = new Subscription();
-  displayName: string = null;
   constructor(private timeZoneService: TimeZoneService, private elRef: ElementRef,
     private companyTimeZoneState: CompanyTimeZoneStateService) { }
 
   ngOnInit() {
-    let getTimeZones = this.timeZoneService.getTimeZones().subscribe(data => {
-      for (var prop in data) {
-        this.list.push(new TimeZone(prop, data[prop]));
-      }
+    let getTimeZones = this.timeZoneService.getTimeZones().subscribe((data: any) => {
+      this.list = data.map(item => new TimeZone(item));
     })
     this.sub.add(getTimeZones);
     this.onEditMode();
@@ -34,16 +29,13 @@ export class CompanyTimeZoneComponent implements OnInit, OnDestroy {
   private onEditMode() {
     let getEditMode = this.companyTimeZoneState.getOnEditMode().subscribe((data) => {
       if (data) {
-        this.displayName = (data.displayName) ? data.displayName : null;
-        if (data.name.indexOf('/') > -1) {
-          let city = data.name.substring(data.name.indexOf('/') + 1, data.name.length);
-          this.elRef.nativeElement.querySelector('#dropdownTimeZone').value = city;
-        } else {
-          this.elRef.nativeElement.querySelector('#dropdownTimeZone').value = data.name;
-        }
+        let find = this.list.find(item => item.second === data.name);
+        console.log("find", find);
+        this.selectedItem = find;
+        //   this.elRef.nativeElement.querySelector('#dropdownTimeZone').value = find.first;
       } else {
-        this.displayName = null;
-        this.elRef.nativeElement.querySelector('#dropdownTimeZone').value = '';
+        this.selectedItem = null;
+        //this.elRef.nativeElement.querySelector('#dropdownTimeZone').value = '';
       }
     })
     this.sub.add(getEditMode);
@@ -51,11 +43,10 @@ export class CompanyTimeZoneComponent implements OnInit, OnDestroy {
   /**
     * set and emit product item
     */
-  public setOffset(offset: TimeZoneOffset) {
-    this.elRef.nativeElement.querySelector('#dropdownTimeZone').value = offset.name;
-    this.zones_dropDown.close();
-    if (this.displayName) offset.setDisplayName(this.displayName);
-    this.selectedOffsetItem.next(offset);
+  public setOffset(data: TimeZone) {
+    this.selectedItem = data;
+    // this.elRef.nativeElement.querySelector('#dropdownTimeZone').value = data.first;
+    this.selectedOffsetItem.next(data);
   }
 
   public trackByIndex(index, item) {

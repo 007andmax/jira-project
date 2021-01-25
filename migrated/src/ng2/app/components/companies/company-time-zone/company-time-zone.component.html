@@ -1,24 +1,12 @@
-<div class="product-dropdown-new-ng light-dropdown" ngbDropdown [autoClose]="'outside'" #zones_dropDown="ngbDropdown">
-  <input class="pointer" type="text" [ngClass]="{'no-valid': isFormValid}" placeholder="Select Time Zone"
-    id="dropdownTimeZone" ngbDropdownToggle>
-  <i class="icn-sm report-caret-icon"></i>
-  <div ngbDropdownMenu aria-labelledby="dropdownTimeZone">
-    <ngb-accordion #acc="ngbAccordion" class="item-list products-accordion">
-      <ngb-panel *ngFor="let item of list">
-        <ng-template ngbPanelHeader>
-          <button ngbPanelToggle class="btn">
-            {{item.zone}} <span *ngIf="item.offsets.length"> {{item.offsets.length}} items</span>
-            <span class="icn-sm report-caret-icon"></span>
-          </button>
-        </ng-template>
-        <ng-template ngbPanelContent  >
-            <div class="category-product" *ngFor="let offset of item.offsets" (click)="setOffset(offset)">
-              <div class="clearfix" >
-                <div class="title col-md-12" [textContent]="offset.timeOffset + ' ' + offset.name"  ></div>
-              </div>
-            </div>
-        </ng-template>
-      </ngb-panel>
-    </ngb-accordion>
-  </div>
-</div>
+<app-drop-down
+    #companiesDP
+    [title]="'Time Zone'"
+    [placeholder]="'Time Zone'"
+    [class]="['company-time-zone-drop-down']"
+    [list]="list"
+    [field]="'first'"
+    [search]="true"
+    [change]="true"
+    [editItem]="selectedItem"
+    (onSelectedItem)="setOffset($event)"
+></app-drop-down>

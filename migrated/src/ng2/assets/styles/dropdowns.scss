@@ -492,3 +492,11 @@
     color: white;
   }
 }
+.company-time-zone-drop-down {
+  .app-drop-down__dropdown {
+    width: fit-content !important;
+    .dropdown-item {
+      color: #364657 !important;
+    }
+  }
+}
