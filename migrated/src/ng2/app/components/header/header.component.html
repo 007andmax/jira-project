@@ -314,11 +314,8 @@
                     </div>
                 </div>
             </div> -->
-            <div
-                ng-if="!isShowTicketsBulkAction() && !isShowDraftsBulkAction()"
-                class="searchField"
-            >
-                <div ng-include="'/ng1/scripts/core/header/global-search/global-search.tpl.html'"></div>
+            <div class="searchField">
+                <app-global-search></app-global-search>
             </div>
         </div>
         <div>
@@ -334,6 +331,8 @@
                             <i class="icn-sm icn-plus"></i>
                         </div>
                     </div>
+
+
 
                     <ul
                         class="dropdown-menu tag-list"
@@ -404,6 +403,8 @@
                 </div>
             </div>
         </div>
+
+
 
         <div class="topNavbarRight">
             <div ngbDropdown>

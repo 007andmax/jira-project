@@ -383,6 +383,7 @@ import { CompanyDashInvoiceComponent } from './components/company-dashboard/comp
 import { CompanyDashContractComponent } from './components/company-dashboard/company-dash-contract/company-dash-contract.component';
 import { LeftPanelCompanyComponent } from './components/left-panel/left-panel-company/left-panel-company.component';
 import { HeaderComponent } from './components/header/header.component';
+import { GlobalSearchComponent } from './components/header/global-search/global-search.component';
 /**
  * declare angular
  */
@@ -929,6 +930,7 @@ angular.module('quicktech')
     CompanyNetworkScanItemTooltipComponent,
     LeftPanelCompanyComponent,
     HeaderComponent,
+    GlobalSearchComponent,
   ],
   imports: [
     BrowserModule,
