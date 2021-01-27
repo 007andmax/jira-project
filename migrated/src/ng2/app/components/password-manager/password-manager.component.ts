@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Subject } from "rxjs";
 
 import { ApiPasswordManagerService } from "../../services/password-manager/api-password-manager.service";
@@ -46,9 +46,9 @@ export class PasswordManagerComponent implements OnInit {
     private userService: UsersService,
     private permissionsService: PermissionsService,
     private passwordManagerList: PasswordManagerListService,
-    private userState :UsersStateService
+    private userState: UsersStateService
   ) {
-  
+
   }
 
   /**
@@ -68,13 +68,13 @@ export class PasswordManagerComponent implements OnInit {
  * Sort 
  * @param sort - type sort
  */
-public sortBy(sort) {
- 
-  this.direction = this.passwordManagerList.getDirection(this.direction, this.sort, sort);
-  this.sort = sort;
-  this.passwordManagerService.onInitSort({direction:this.direction,sort:sort});
- 
-}
+  public sortBy(sort) {
+
+    this.direction = this.passwordManagerList.getDirection(this.direction, this.sort, sort);
+    this.sort = sort;
+    this.passwordManagerService.onInitSort({ direction: this.direction, sort: sort });
+
+  }
 
   /**
    * Get selected company from filter
@@ -109,7 +109,7 @@ public sortBy(sort) {
    */
   public getSelectedDate() {
     this.passwordManagerService.selectedDate.subscribe((date) => {
-       
+
       if (date) {
         this.selectedDate = `${date.year}/${this.formatDayAndMonth(date.month)}/${this.formatDayAndMonth(date.day)}`
       } else {
@@ -159,15 +159,16 @@ public sortBy(sort) {
    */
   public showMobileFilters() {
     this.isMobileFilterShowing = !this.isMobileFilterShowing;
+    this.passwordManagerService.toggleFilters(this.isMobileFilterShowing);
   }
 
   /**
    * Close mobile filters
    */
   public checkCloseFilters() {
-    this.passwordManagerService.closeFilter.subscribe(() => {
-      this.isMobileFilterShowing = false
-    } )
+    this.passwordManagerService.onToggleFilter.subscribe((data) => {
+      this.isMobileFilterShowing = data;
+    })
   }
 
   /**

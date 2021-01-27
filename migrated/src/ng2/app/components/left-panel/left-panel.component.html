@@ -1,0 +1,30 @@
+<div
+    class="left-panel-full-wrapper nano"
+    [ngClass]="{'billing' : page === 'billing' || page === 'company',
+'new-companies' : page === 'companies',
+'inventory' : page === 'inventory',
+'password' : page === 'password-manager',
+'left-panel-settings' : page === 'settings',
+'new-tickets' : page === 'tickets',
+'new-users' : page === 'users'}"
+>
+    <div class="left-panel-full__head">
+        <div class="icon-pos go-back-left-panel">
+            <i class="icn-sm icn-back-arrow"></i>
+        </div>
+        <span
+            class="left-panel-full__head--header"
+            [textContent]="headerText"
+        ></span>
+    </div>
+    <div class="center-category collapsed-nav nano-content">
+        <app-left-panel-billing *ngIf="page === 'billing'"></app-left-panel-billing>
+        <app-left-panel-companies *ngIf="page === 'companies'"></app-left-panel-companies>
+        <app-left-panel-company *ngIf="page === 'company'"></app-left-panel-company>
+        <app-left-panel-inventory *ngIf="page === 'inventory'"></app-left-panel-inventory>
+        <app-left-panel-password-manager *ngIf="page === 'password-manager'"></app-left-panel-password-manager>
+        <app-left-panel-settings *ngIf="page === 'settings'"></app-left-panel-settings>
+        <app-left-panel-tickets *ngIf="page === 'tickets'"></app-left-panel-tickets>
+        <app-left-panel-users *ngIf="page === 'users'"></app-left-panel-users>
+    </div>
+</div>

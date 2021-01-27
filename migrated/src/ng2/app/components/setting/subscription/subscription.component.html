@@ -1,394 +1,503 @@
-<!-- Middle Wrapper  -->
-<app-left-panel-settings [componentName]="'SubscriptionComponent'"></app-left-panel-settings>
-<div class="page-container" *ngIf="!show">
-  <div class="page-insider subscription">
-    <div class="heading">
-      <h1>
-        <a
-          href="javascript:;"
-          (click)="onBackMenu()"
-          class="back-menu"
-          style="display: none;"
-          >backmneu</a
-        >Subscription
-      </h1>
-    </div>
-    <!-- Subscription content -->
-    <div class="cmn-area subs-info">
-      <div class="current-plan">
-        <div class="plan-heading">
-          <h6>Currrent Plan</h6>
-          <a href="javascript:;" class="h5">Cancel subscription</a>
+<!-- Middle Wrapper -->
+
+
+<div
+    class="page-container"
+    *ngIf="!show"
+>
+    <div class="page-insider subscription">
+        <div class="heading">
+            <h1>
+                <a
+                    href="javascript:;"
+                    (click)="onBackMenu()"
+                    class="back-menu"
+                    style="display: none;"
+                >
+                    backmneu
+                </a>
+                Subscription
+            </h1>
         </div>
-        <div class="plan-des">
-          <div class="plan-info">
-            <h2>Basic Plan - $150/yr</h2>
-            <span>Next Billing Date: 29 Nov 2019</span>
-          </div>
-          <div class="upgrade-info">
-            <a href="javascript:;">Downgrade plan</a>
-            <a
-              href="javascript:;"
-              class="btn btn-primary"
-              (click)="show = !show"
-              >Upgrade Plan</a
-            >
-          </div>
-        </div>
-        <div class="plan-heading">
-          <h6>Billing info</h6>
-        </div>
-        <div class="card-info">
-          <div class="card-left">
-            <span class="card-img"
-              ><img
-                src="../../../../../ng1/images/setting-module/visa.svg"
-                alt="visa"
-            /></span>
-            <div class="card-des">
-              <h5>************ 1640</h5>
-              <span>03/2020</span>
+        <!-- Subscription content -->
+        <div class="cmn-area subs-info">
+            <div class="current-plan">
+                <div class="plan-heading">
+                    <h6>Currrent Plan</h6>
+                    <a
+                        href="javascript:;"
+                        class="h5"
+                    >
+                        Cancel subscription
+                    </a>
+                </div>
+                <div class="plan-des">
+                    <div class="plan-info">
+                        <h2>Basic Plan - $150/yr</h2>
+                        <span>Next Billing Date: 29 Nov 2019</span>
+                    </div>
+                    <div class="upgrade-info">
+                        <a href="javascript:;">Downgrade plan</a>
+                        <a
+                            href="javascript:;"
+                            class="btn btn-primary"
+                            (click)="show = !show"
+                        >
+                            Upgrade Plan
+                        </a>
+                    </div>
+                </div>
+                <div class="plan-heading">
+                    <h6>Billing info</h6>
+                </div>
+                <div class="card-info">
+                    <div class="card-left">
+                        <span class="card-img">
+                            <img
+                                src="../../../../../ng1/images/setting-module/visa.svg"
+                                alt="visa"
+                            >
+                        </span>
+                        <div class="card-des">
+                            <h5>************ 1640</h5>
+                            <span>03/2020</span>
+                        </div>
+                    </div>
+                    <div class="card-action">
+                        <a
+                            href="javascript:;"
+                            data-tooltip="Edit"
+                            class="edit"
+                        >
+                            <img
+                                src="../../../../../ng1/images/setting-module/edit.svg"
+                                alt="Edit"
+                            >
+                        </a>
+                        <a
+                            href="javascript:;"
+                            data-tooltip="Remove"
+                            class="remove"
+                        >
+                            <img
+                                src="../../../../../ng1/images/setting-module/remove.svg"
+                                alt="Remove"
+                            >
+                        </a>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="card-action">
-            <a href="javascript:;" data-tooltip="Edit" class="edit"
-              ><img
-                src="../../../../../ng1/images/setting-module/edit.svg"
-                alt="Edit"
-            /></a>
-            <a href="javascript:;" data-tooltip="Remove" class="remove"
-              ><img
-                src="../../../../../ng1/images/setting-module/remove.svg"
-                alt="Remove"
-            /></a>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 
-<!-- price content -->
-<div class="price-wrapper" *ngIf="show">
-  <div class="price-content">
-    <div class="price-heading">
-      <h1>Choose the plan that’s right for you</h1>
-      <span>Give your team the features they need to succeed.</span>
-    </div>
 
-    <div class="reporting">
-      <span class="switchbox">
-        <input
-          type="checkbox"
-          id="switch"
-          (change)="price = !price"
-          ng-model="price"
-        />
-        <label for="switch"></label>
-        <span class="monthly">Monthly</span>
-        <span class="Annual">Annual</span>
-      </span>
-      <!-- monthly report -->
-      <div class="price-area" *ngIf="!price">
-        <div class="pr-wrapper">
-          <table class="price-table">
-            <tr>
-              <th class="h-title">
-                &nbsp;
-              </th>
-              <th class="h-title basic">Basic</th>
-              <th class="h-title standard">Standard</th>
-              <th class="h-title professional">Professional</th>
-            </tr>
-            <tr>
-              <th class="v-title plan">Features</th>
-              <td class="plan">
-                <div class="price-info">
-                  <div class="price"><sup>$</sup>10<sub>/ mo</sub></div>
-                  <a href="javascript:;" class="btn btn-secondary"
-                    >Current Plan</a
-                  >
-                </div>
-              </td>
-              <td class="plan">
-                <div class="price-info">
-                  <div class="price"><sup>$</sup>15<sub>/ mo</sub></div>
-                  <a href="javascript:;" class="btn btn-primary">Upgrade</a>
-                </div>
-              </td>
-              <td class="plan">
-                <div class="price-info">
-                  <div class="price"><sup>$</sup>18<sub>/ mo</sub></div>
-                  <a href="javascript:;" class="btn btn-yellow">Upgrade</a>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th class="v-title">Users</th>
-              <td>1 User</td>
-              <td>3 User</td>
-              <td>10 User</td>
-            </tr>
-            <tr>
-              <th class="v-title">Contacts</th>
-              <td>50 Contacts</td>
-              <td>500 Contacts</td>
-              <td>Unlimited</td>
-            </tr>
-            <tr>
-              <th class="v-title">Estimates</th>
-              <td>
-                <img
-                  src="../../../../../ng1/images/setting-module/check-bullet.svg"
-                  alt="check"
-                />
-              </td>
-              <td><img src="../../../../../ng1/images/setting-module/check-bullet.svg" alt="check" /></td>
-              <td><img src="../../../../../ng1/images/setting-module/check-bullet.svg" alt="check" /></td>
-            </tr>
-            <tr>
-              <th class="v-title">Invoices</th>
-              <td>
-                <img
-                  src="../../../../../ng1/images/setting-module/check-bullet.svg"
-                  alt="check"
-                />
-              </td>
-              <td>
-                <img
-                  src="../../../../../ng1/images/setting-module/check-bullet.svg"
-                  alt="check"
-                />
-              </td>
-              <td><img src="../../../../../ng1/images/setting-module/check-bullet.svg" alt="check" /></td>
-            </tr>
-            <tr>
-              <th class="v-title">Time Tracking</th>
-              <td>
-                <img
-                  src="../../../../../ng1/images/setting-module/cross-bullet.svg"
-                  alt="check"
-                />
-              </td>
-              <td>
-                <img
-                  src="../../../../../ng1/images/setting-module/check-bullet.svg"
-                  alt="check"
-                />
-              </td>
-              <td>
-                <img
-                  src="../../../../../ng1/images/setting-module/check-bullet.svg"
-                  alt="check"
-                />
-              </td>
-            </tr>
-            <tr>
-              <th class="v-title">Reports</th>
-              <td>
-                <img
-                  src="../../../../../ng1/images/setting-module/cross-bullet.svg"
-                  alt="check"
-                />
-              </td>
-              <td>
-                <img
-                  src="../../../../../ng1/images/setting-module/check-bullet.svg"
-                  alt="check"
-                />
-              </td>
-              <td>
-                <img
-                  src="../../../../../ng1/images/setting-module/check-bullet.svg"
-                  alt="check"
-                />
-              </td>
-            </tr>
-            <tr>
-              <th class="v-title">Recurring Invoices</th>
-              <td>
-                <img
-                  src="../../../../../ng1/images/setting-module/check-bullet.svg"
-                  alt="check"
-                />
-              </td>
-              <td>
-                <img
-                  src="../../../../../ng1/images/setting-module/check-bullet.svg"
-                  alt="check"
-                />
-              </td>
-              <td>
-                <img
-                  src="../../../../../ng1/images/setting-module/check-bullet.svg"
-                  alt="check"
-                />
-              </td>
-            </tr>
-          </table>
+<!-- price content -->
+<div
+    class="price-wrapper"
+    *ngIf="show"
+>
+    <div class="price-content">
+        <div class="price-heading">
+            <h1>Choose the plan that’s right for you</h1>
+            <span>
+                Give your team the features they need to succeed.
+            </span>
         </div>
-        <a href="javascript:;" class="close-btn" (click)="show = !show"
-          >Upgrade Plan</a
-        >
-      </div>
-      <!-- Annual report -->
-      <div class="price-area" *ngIf="price">
-        <div class="pr-wrapper">
-          <table class="price-table">
-            <tr>
-              <th class="h-title">
-                &nbsp;
-              </th>
-              <th class="h-title basic">Basic</th>
-              <th class="h-title standard">Standard</th>
-              <th class="h-title professional">Professional</th>
-            </tr>
-            <tr>
-              <th class="v-title plan">Features</th>
-              <td class="plan">
-                <div class="price-info">
-                  <div class="price"><sup>$</sup>8<sub>/ mo</sub></div>
-                  <a href="javascript:;" class="btn btn-secondary"
-                    >Current Plan</a
-                  >
+
+
+        <div class="reporting">
+            <span class="switchbox">
+                <input
+                    type="checkbox"
+                    id="switch"
+                    (change)="price = !price"
+                    ng-model="price"
+                >
+                <label for="switch"></label>
+                <span class="monthly">Monthly</span>
+                <span class="Annual">Annual</span>
+            </span>
+            <!-- monthly report -->
+            <div
+                class="price-area"
+                *ngIf="!price"
+            >
+                <div class="pr-wrapper">
+                    <table class="price-table">
+                        <tbody>
+                            <tr>
+                                <th class="h-title">&nbsp;</th>
+                                <th class="h-title basic">Basic</th>
+                                <th class="h-title standard">Standard</th>
+                                <th class="h-title professional">Professional</th>
+                            </tr>
+                            <tr>
+                                <th class="v-title plan">Features</th>
+                                <td class="plan">
+                                    <div class="price-info">
+                                        <div class="price">
+                                            <sup>$</sup>
+                                            10
+                                            <sub>/ mo</sub>
+                                        </div>
+                                        <a
+                                            href="javascript:;"
+                                            class="btn btn-secondary"
+                                        >
+                                            Current Plan
+                                        </a>
+                                    </div>
+                                </td>
+                                <td class="plan">
+                                    <div class="price-info">
+                                        <div class="price">
+                                            <sup>$</sup>
+                                            15
+                                            <sub>/ mo</sub>
+                                        </div>
+                                        <a
+                                            href="javascript:;"
+                                            class="btn btn-primary"
+                                        >
+                                            Upgrade
+                                        </a>
+                                    </div>
+                                </td>
+                                <td class="plan">
+                                    <div class="price-info">
+                                        <div class="price">
+                                            <sup>$</sup>
+                                            18
+                                            <sub>/ mo</sub>
+                                        </div>
+                                        <a
+                                            href="javascript:;"
+                                            class="btn btn-yellow"
+                                        >
+                                            Upgrade
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="v-title">Users</th>
+                                <td>1 User</td>
+                                <td>3 User</td>
+                                <td>10 User</td>
+                            </tr>
+                            <tr>
+                                <th class="v-title">Contacts</th>
+                                <td>50 Contacts</td>
+                                <td>500 Contacts</td>
+                                <td>Unlimited</td>
+                            </tr>
+                            <tr>
+                                <th class="v-title">Estimates</th>
+                                <td>
+                                    <img
+                                        src="../../../../../ng1/images/setting-module/check-bullet.svg"
+                                        alt="check"
+                                    >
+                                </td>
+                                <td>
+                                    <img
+                                        src="../../../../../ng1/images/setting-module/check-bullet.svg"
+                                        alt="check"
+                                    >
+                                </td>
+                                <td>
+                                    <img
+                                        src="../../../../../ng1/images/setting-module/check-bullet.svg"
+                                        alt="check"
+                                    >
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="v-title">Invoices</th>
+                                <td>
+                                    <img
+                                        src="../../../../../ng1/images/setting-module/check-bullet.svg"
+                                        alt="check"
+                                    >
+                                </td>
+                                <td>
+                                    <img
+                                        src="../../../../../ng1/images/setting-module/check-bullet.svg"
+                                        alt="check"
+                                    >
+                                </td>
+                                <td>
+                                    <img
+                                        src="../../../../../ng1/images/setting-module/check-bullet.svg"
+                                        alt="check"
+                                    >
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="v-title">Time Tracking</th>
+                                <td>
+                                    <img
+                                        src="../../../../../ng1/images/setting-module/cross-bullet.svg"
+                                        alt="check"
+                                    >
+                                </td>
+                                <td>
+                                    <img
+                                        src="../../../../../ng1/images/setting-module/check-bullet.svg"
+                                        alt="check"
+                                    >
+                                </td>
+                                <td>
+                                    <img
+                                        src="../../../../../ng1/images/setting-module/check-bullet.svg"
+                                        alt="check"
+                                    >
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="v-title">Reports</th>
+                                <td>
+                                    <img
+                                        src="../../../../../ng1/images/setting-module/cross-bullet.svg"
+                                        alt="check"
+                                    >
+                                </td>
+                                <td>
+                                    <img
+                                        src="../../../../../ng1/images/setting-module/check-bullet.svg"
+                                        alt="check"
+                                    >
+                                </td>
+                                <td>
+                                    <img
+                                        src="../../../../../ng1/images/setting-module/check-bullet.svg"
+                                        alt="check"
+                                    >
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="v-title">Recurring Invoices</th>
+                                <td>
+                                    <img
+                                        src="../../../../../ng1/images/setting-module/check-bullet.svg"
+                                        alt="check"
+                                    >
+                                </td>
+                                <td>
+                                    <img
+                                        src="../../../../../ng1/images/setting-module/check-bullet.svg"
+                                        alt="check"
+                                    >
+                                </td>
+                                <td>
+                                    <img
+                                        src="../../../../../ng1/images/setting-module/check-bullet.svg"
+                                        alt="check"
+                                    >
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-              </td>
-              <td class="plan">
-                <div class="price-info">
-                  <div class="price"><sup>$</sup>12<sub>/ mo</sub></div>
-                  <a href="javascript:;" class="btn btn-primary">Upgrade</a>
+                <a
+                    href="javascript:;"
+                    class="close-btn"
+                    (click)="show = !show"
+                >
+                    Upgrade Plan
+                </a>
+            </div>
+            <!-- Annual report -->
+            <div
+                class="price-area"
+                *ngIf="price"
+            >
+                <div class="pr-wrapper">
+                    <table class="price-table">
+                        <tbody>
+                            <tr>
+                                <th class="h-title">&nbsp;</th>
+                                <th class="h-title basic">Basic</th>
+                                <th class="h-title standard">Standard</th>
+                                <th class="h-title professional">Professional</th>
+                            </tr>
+                            <tr>
+                                <th class="v-title plan">Features</th>
+                                <td class="plan">
+                                    <div class="price-info">
+                                        <div class="price">
+                                            <sup>$</sup>
+                                            8
+                                            <sub>/ mo</sub>
+                                        </div>
+                                        <a
+                                            href="javascript:;"
+                                            class="btn btn-secondary"
+                                        >
+                                            Current Plan
+                                        </a>
+                                    </div>
+                                </td>
+                                <td class="plan">
+                                    <div class="price-info">
+                                        <div class="price">
+                                            <sup>$</sup>
+                                            12
+                                            <sub>/ mo</sub>
+                                        </div>
+                                        <a
+                                            href="javascript:;"
+                                            class="btn btn-primary"
+                                        >
+                                            Upgrade
+                                        </a>
+                                    </div>
+                                </td>
+                                <td class="plan">
+                                    <div class="price-info">
+                                        <div class="price">
+                                            <sup>$</sup>
+                                            16
+                                            <sub>/ mo</sub>
+                                        </div>
+                                        <a
+                                            href="javascript:;"
+                                            class="btn btn-yellow"
+                                        >
+                                            Upgrade
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="v-title">Users</th>
+                                <td>1 User</td>
+                                <td>3 User</td>
+                                <td>10 User</td>
+                            </tr>
+                            <tr>
+                                <th class="v-title">Contacts</th>
+                                <td>50 Contacts</td>
+                                <td>500 Contacts</td>
+                                <td>Unlimited</td>
+                            </tr>
+                            <tr>
+                                <th class="v-title">Estimates</th>
+                                <td>
+                                    <img
+                                        src="../../../../../ng1/images/setting-module/check-bullet.svg"
+                                        alt="check"
+                                    >
+                                </td>
+                                <td>
+                                    <img
+                                        src="../../../../../ng1/images/setting-module/check-bullet.svg"
+                                        alt="check"
+                                    >
+                                </td>
+                                <td>
+                                    <img
+                                        src="../../../../../ng1/images/setting-module/check-bullet.svg"
+                                        alt="check"
+                                    >
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="v-title">Invoices</th>
+                                <td>
+                                    <img
+                                        src="../../../../../ng1/images/setting-module/check-bullet.svg"
+                                        alt="check"
+                                    >
+                                </td>
+                                <td>
+                                    <img
+                                        src="../../../../../ng1/images/setting-module/check-bullet.svg"
+                                        alt="check"
+                                    >
+                                </td>
+                                <td>
+                                    <img
+                                        src="../../../../../ng1/images/setting-module/check-bullet.svg"
+                                        alt="check"
+                                    >
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="v-title">Time Tracking</th>
+                                <td>
+                                    <img
+                                        src="../../../../../ng1/images/setting-module/cross-bullet.svg"
+                                        alt="check"
+                                    >
+                                </td>
+                                <td>
+                                    <img
+                                        src="../../../../../ng1/images/setting-module/check-bullet.svg"
+                                        alt="check"
+                                    >
+                                </td>
+                                <td>
+                                    <img
+                                        src="../../../../../ng1/images/setting-module/check-bullet.svg"
+                                        alt="check"
+                                    >
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="v-title">Reports</th>
+                                <td>
+                                    <img
+                                        src="../../../../../ng1/images/setting-module/cross-bullet.svg"
+                                        alt="check"
+                                    >
+                                </td>
+                                <td>
+                                    <img
+                                        src="../../../../../ng1/images/setting-module/check-bullet.svg"
+                                        alt="check"
+                                    >
+                                </td>
+                                <td>
+                                    <img
+                                        src="../../../../../ng1/images/setting-module/check-bullet.svg"
+                                        alt="check"
+                                    >
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="v-title">Recurring Invoices</th>
+                                <td>
+                                    <img
+                                        src="../../../../../ng1/images/setting-module/check-bullet.svg"
+                                        alt="check"
+                                    >
+                                </td>
+                                <td>
+                                    <img
+                                        src="../../../../../ng1/images/setting-module/check-bullet.svg"
+                                        alt="check"
+                                    >
+                                </td>
+                                <td>
+                                    <img
+                                        src="../../../../../ng1/images/setting-module/check-bullet.svg"
+                                        alt="check"
+                                    >
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-              </td>
-              <td class="plan">
-                <div class="price-info">
-                  <div class="price"><sup>$</sup>16<sub>/ mo</sub></div>
-                  <a href="javascript:;" class="btn btn-yellow">Upgrade</a>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th class="v-title">Users</th>
-              <td>1 User</td>
-              <td>3 User</td>
-              <td>10 User</td>
-            </tr>
-            <tr>
-              <th class="v-title">Contacts</th>
-              <td>50 Contacts</td>
-              <td>500 Contacts</td>
-              <td>Unlimited</td>
-            </tr>
-            <tr>
-              <th class="v-title">Estimates</th>
-              <td>
-                <img
-                  src="../../../../../ng1/images/setting-module/check-bullet.svg"
-                  alt="check"
-                />
-              </td>
-              <td>
-                <img
-                  src="../../../../../ng1/images/setting-module/check-bullet.svg"
-                  alt="check"
-                />
-              </td>
-              <td>
-                <img
-                  src="../../../../../ng1/images/setting-module/check-bullet.svg"
-                  alt="check"
-                />
-              </td>
-            </tr>
-            <tr>
-              <th class="v-title">Invoices</th>
-              <td>
-                <img
-                  src="../../../../../ng1/images/setting-module/check-bullet.svg"
-                  alt="check"
-                />
-              </td>
-              <td>
-                <img
-                  src="../../../../../ng1/images/setting-module/check-bullet.svg"
-                  alt="check"
-                />
-              </td>
-              <td>
-                <img
-                  src="../../../../../ng1/images/setting-module/check-bullet.svg"
-                  alt="check"
-                />
-              </td>
-            </tr>
-            <tr>
-              <th class="v-title">Time Tracking</th>
-              <td>
-                <img
-                  src="../../../../../ng1/images/setting-module/cross-bullet.svg"
-                  alt="check"
-                />
-              </td>
-              <td>
-                <img
-                  src="../../../../../ng1/images/setting-module/check-bullet.svg"
-                  alt="check"
-                />
-              </td>
-              <td>
-                <img
-                  src="../../../../../ng1/images/setting-module/check-bullet.svg"
-                  alt="check"
-                />
-              </td>
-            </tr>
-            <tr>
-              <th class="v-title">Reports</th>
-              <td>
-                <img
-                  src="../../../../../ng1/images/setting-module/cross-bullet.svg"
-                  alt="check"
-                />
-              </td>
-              <td>
-                <img
-                  src="../../../../../ng1/images/setting-module/check-bullet.svg"
-                  alt="check"
-                />
-              </td>
-              <td>
-                <img
-                  src="../../../../../ng1/images/setting-module/check-bullet.svg"
-                  alt="check"
-                />
-              </td>
-            </tr>
-            <tr>
-              <th class="v-title">Recurring Invoices</th>
-              <td>
-                <img
-                  src="../../../../../ng1/images/setting-module/check-bullet.svg"
-                  alt="check"
-                />
-              </td>
-              <td>
-                <img
-                  src="../../../../../ng1/images/setting-module/check-bullet.svg"
-                  alt="check"
-                />
-              </td>
-              <td>
-                <img
-                  src="../../../../../ng1/images/setting-module/check-bullet.svg"
-                  alt="check"
-                />
-              </td>
-            </tr>
-          </table>
+                <a
+                    href="javascript:;"
+                    class="close-btn"
+                    (click)="show = !show"
+                >
+                    Upgrade Plan
+                </a>
+            </div>
         </div>
-        <a href="javascript:;" class="close-btn" (click)="show = !show"
-          >Upgrade Plan</a
-        >
-      </div>
     </div>
-  </div>
 </div>

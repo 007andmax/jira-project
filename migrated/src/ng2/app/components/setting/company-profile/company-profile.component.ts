@@ -19,9 +19,10 @@ import { ToastrService } from 'ngx-toastr';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { SettingService } from 'src/ng2/app/services/setting/setting.service';
 import { MapsAPILoader } from '@agm/core';
+import { SettingStateService } from 'src/ng2/app/states/setting/setting-state.service';
 
 declare var google: any;
-declare var $:any;
+declare var $: any;
 @Component({
   selector: 'app-company-profile',
   templateUrl: './company-profile.component.html',
@@ -100,8 +101,9 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     private settingService: SettingService,
     private fb: FormBuilder,
     private mapsAPILoader: MapsAPILoader,
+    private settingStateService: SettingStateService,
     private ngZone: NgZone
-  ) {}
+  ) { }
 
   /**
    * init
@@ -137,6 +139,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
 
     // load address autocomplete
     this.getAddressAutocomplete();
+    this.settingStateService.setComponentName('CompanyProfileComponent');
   }
 
   ngOnDestroy() {
@@ -220,7 +223,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   createCProfileForm() {
     this.cProfileForm = new FormGroup({
       name: new FormControl('', Validators.required),
-     // url: new FormControl({ value: '' }, Validators.required),
+      // url: new FormControl({ value: '' }, Validators.required),
       url: new FormControl(''),
       timeZone: new FormControl(''),
       primaryId: new FormControl(''),
@@ -267,7 +270,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
           }
         }
       },
-      error => {}
+      error => { }
     );
   }
 
@@ -275,11 +278,11 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
    * get company profile
    */
   getCompanyProfile() {
-    this.loading = true;$(".loading").css("display", "block");
+    this.loading = true; $(".loading").css("display", "block");
     try {
       this.companyProfileService.getCompanyProfile().subscribe(
         (res: any) => {
-          this.loading = false;$(".loading").css("display", "none");
+          this.loading = false; $(".loading").css("display", "none");
           if (res) {
             this.cProfile.address = res.addresses;
             this.cProfile.logo = res.logo;
@@ -316,13 +319,13 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
               address: res.addresses.length === 0 ? '' : res.addresses[0].address,
               postalCode: res.addresses.length === 0 ? '' : res.addresses[0].postalCode
             });
-            
-              this.country = res.addresses.length > 0 ? res.addresses[0].country : '';
-              this.countryCode = res.addresses.length > 0 ? res.addresses[0].countryCode : '';
-              this.longCity = res.addresses.length > 0 ? res.addresses[0].longCity : '';
-              this.shortCity = res.addresses.length > 0 ? res.addresses[0].shortCity : '';
-              this.longState = res.addresses.length > 0 ? res.addresses[0].longState : '';
-              this.shortState = res.addresses.length > 0 ? res.addresses[0].shortState : '';
+
+            this.country = res.addresses.length > 0 ? res.addresses[0].country : '';
+            this.countryCode = res.addresses.length > 0 ? res.addresses[0].countryCode : '';
+            this.longCity = res.addresses.length > 0 ? res.addresses[0].longCity : '';
+            this.shortCity = res.addresses.length > 0 ? res.addresses[0].shortCity : '';
+            this.longState = res.addresses.length > 0 ? res.addresses[0].longState : '';
+            this.shortState = res.addresses.length > 0 ? res.addresses[0].shortState : '';
 
             for (let i = 0; i < this.cProfile.address.length; i++) {
               const phoneNumbers = this.cProfile.address[i].phoneNumbers,
@@ -355,12 +358,12 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
           }
         },
         error => {
-          this.loading = false;$(".loading").css("display", "none");
-        
+          this.loading = false; $(".loading").css("display", "none");
+
         }
       );
     } catch (error) {
-      this.loading = false;$(".loading").css("display", "none");
+      this.loading = false; $(".loading").css("display", "none");
     }
   }
 
@@ -390,7 +393,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
           this.timezones = timeZonesMapped;
         }
       },
-      error => {}
+      error => { }
     );
   }
 
@@ -408,7 +411,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
           this.cProfileForm.patchValue({ url: this.url });
         }
       },
-      error => {}
+      error => { }
     );
   }
 
@@ -458,18 +461,18 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
       this.imageChangedEvent = event;
       const fromData = new FormData();
       fromData.append('file', event.target.files[0]);
-      this.loading = true;$(".loading").css("display", "block");
+      this.loading = true; $(".loading").css("display", "block");
 
       this.settingService.fileAvatar(fromData).subscribe(
         result => {
-          this.loading = false;$(".loading").css("display", "none");
+          this.loading = false; $(".loading").css("display", "none");
           if (result) {
             this.fileAvatar = result;
           }
         },
         error => {
-          this.loading = false;$(".loading").css("display", "none");
-         
+          this.loading = false; $(".loading").css("display", "none");
+
         }
       );
     }
@@ -483,8 +486,8 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
         name: this.cProfile.name
       })
       .subscribe(
-        res => {},
-        error => {}
+        res => { },
+        error => { }
       );
   }
 
@@ -492,7 +495,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
    * delete avatar
    */
   deleteAvatar() {
-    this.loading = true;$(".loading").css("display", "block");
+    this.loading = true; $(".loading").css("display", "block");
     this.companyProfileService
       .removeAvatar(this.currentCompany.id, true)
       .subscribe(
@@ -505,7 +508,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
           this.basic();
         },
         error => {
-          this.loading = false;$(".loading").css("display", "none");
+          this.loading = false; $(".loading").css("display", "none");
         }
       );
   }
@@ -516,9 +519,9 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   rePositionAvatar() {
     if (this.cProfile && this.currentCompany.logo.base64 === null) {
       const imageUrl = `/file/${this.currentCompany.logo.origin.id}.jpg`;
-      this.loading = true;$(".loading").css("display", "block");
+      this.loading = true; $(".loading").css("display", "block");
       this.getBase64ImageFromURL(imageUrl).subscribe(base64data => {
-        this.loading = false;$(".loading").css("display", "none");
+        this.loading = false; $(".loading").css("display", "none");
         this.isCroppedImg = true;
         this.croppedImage = this.currentCompany.logo.cropped;
         this.croppedImage.base64 = base64data;
@@ -604,7 +607,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
       };
     }
 
-    this.loading = true;$(".loading").css("display", "block");
+    this.loading = true; $(".loading").css("display", "block");
     this.companyProfileService
       .logo(this.currentCompany.id, cropImage)
       .subscribe(
@@ -620,13 +623,13 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
                 }
               },
               error => {
-                this.loading = false;$(".loading").css("display", "none");
+                this.loading = false; $(".loading").css("display", "none");
               }
             );
           }
         },
         error => {
-          this.loading = false;$(".loading").css("display", "none");
+          this.loading = false; $(".loading").css("display", "none");
         }
       );
   }
@@ -649,7 +652,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
           workingDays: selectedWorkingHours
         }
       };
-      this.loading = true;$(".loading").css("display", "block");
+      this.loading = true; $(".loading").css("display", "block");
       // selectedWorkingHours.map((h: any, index: number) => {
       //   // tslint:disable-next-line: no-string-literal
       //   const from = document.getElementById('from-' + h.dayOfWeek)['value'];
@@ -659,11 +662,11 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
       // });
       this.companyProfileService.workingTime(data).subscribe(
         res => {
-          this.loading = false;$(".loading").css("display", "none");
+          this.loading = false; $(".loading").css("display", "none");
           this.toaster.success('Records Saved Successfully');
         },
         error => {
-          this.loading = false;$(".loading").css("display", "none");
+          this.loading = false; $(".loading").css("display", "none");
           this.toaster.error('Bad Request');
         }
       );
@@ -675,51 +678,51 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
    */
   onSubmit() {
     this.submitted = true;
-    
+
     // stop here if form is invalid
     if (this.cProfileForm.invalid) {
       return;
     }
-let data = {};
-data['id'] = this.currentCompany.addresses.length > 0 ? this.currentCompany.addresses[0].id : '';
-data['isPrimary'] = true;
-data['suiteNumber'] = this.cProfileForm.get('suiteNumber').value;
-let dis = this.cProfile.address.length > 0 ? this.cProfile.address[0].timeZone == null ? '' : this.cProfile.address[0].timeZone.displayName : '';
-data['timeZone'] = {
-  name: this.cProfileForm.get(
-    'timeZone'
-  ).value == undefined ? '' : (this.cProfileForm.get(
-    'timeZone'
-  ).value.city || (this.cProfile.address.length > 0 ? (this.cProfile.address[0].timeZone == null ? '' : this.cProfile.address[0].timeZone.name) : '')),
-  displayName: this.cProfileForm.get(
-    'timeZone'
-  ).value == undefined ? '' : '' || dis,
-  timeOffset: this.cProfileForm.get(
-    'timeZone'
-  ).value == undefined ? '' : (this.cProfileForm.get(
-    'timeZone'
-  ).value.offset || (this.cProfile.address.length > 0 ? (this.cProfile.address[0].timeZone == null ? '' : this.cProfile.address[0].timeZone.timeOffset) : ''))
-};
-data['address'] = this.searchElementRef.nativeElement.value;
-data['postalCode'] = this.cProfileForm.get(
-  'postalCode'
-).value;
-data['country'] = this.country;
-data['locale'] = this.cProfileForm.get(
-  'timeZone'
-).value == undefined ? '' : (this.cProfileForm.get(
-  'timeZone'
-).value.city
-|| (this.cProfile.address.length > 0 ? this.cProfile.address[0].locale : ''));
-data['countryCode'] = this.countryCode;
-data['locationLat'] = this.latitude;
-data['locationLng'] = this.longitude;
-data['longCity'] = this.longCity;
-data['shortCity'] = this.shortCity;
-data['longState'] = this.longState;
-data['shortState'] = this.shortState;
-data['addressWithSuitNumberAndPostalCode'] = this.cProfile.address.length > 0 ? this.cProfile.address[0].addressWithSuitNumberAndPostalCode : '';
-data['fromGoogle'] = this.fromGoogle;
+    let data = {};
+    data['id'] = this.currentCompany.addresses.length > 0 ? this.currentCompany.addresses[0].id : '';
+    data['isPrimary'] = true;
+    data['suiteNumber'] = this.cProfileForm.get('suiteNumber').value;
+    let dis = this.cProfile.address.length > 0 ? this.cProfile.address[0].timeZone == null ? '' : this.cProfile.address[0].timeZone.displayName : '';
+    data['timeZone'] = {
+      name: this.cProfileForm.get(
+        'timeZone'
+      ).value == undefined ? '' : (this.cProfileForm.get(
+        'timeZone'
+      ).value.city || (this.cProfile.address.length > 0 ? (this.cProfile.address[0].timeZone == null ? '' : this.cProfile.address[0].timeZone.name) : '')),
+      displayName: this.cProfileForm.get(
+        'timeZone'
+      ).value == undefined ? '' : '' || dis,
+      timeOffset: this.cProfileForm.get(
+        'timeZone'
+      ).value == undefined ? '' : (this.cProfileForm.get(
+        'timeZone'
+      ).value.offset || (this.cProfile.address.length > 0 ? (this.cProfile.address[0].timeZone == null ? '' : this.cProfile.address[0].timeZone.timeOffset) : ''))
+    };
+    data['address'] = this.searchElementRef.nativeElement.value;
+    data['postalCode'] = this.cProfileForm.get(
+      'postalCode'
+    ).value;
+    data['country'] = this.country;
+    data['locale'] = this.cProfileForm.get(
+      'timeZone'
+    ).value == undefined ? '' : (this.cProfileForm.get(
+      'timeZone'
+    ).value.city
+      || (this.cProfile.address.length > 0 ? this.cProfile.address[0].locale : ''));
+    data['countryCode'] = this.countryCode;
+    data['locationLat'] = this.latitude;
+    data['locationLng'] = this.longitude;
+    data['longCity'] = this.longCity;
+    data['shortCity'] = this.shortCity;
+    data['longState'] = this.longState;
+    data['shortState'] = this.shortState;
+    data['addressWithSuitNumberAndPostalCode'] = this.cProfile.address.length > 0 ? this.cProfile.address[0].addressWithSuitNumberAndPostalCode : '';
+    data['fromGoogle'] = this.fromGoogle;
     // this.cProfile.address[0].suiteNumber = this.cProfileForm.get(
     //   'suiteNumber'
     // ).value;
@@ -765,7 +768,7 @@ data['fromGoogle'] = this.fromGoogle;
 
     data['phoneNumbers'] = phones;
     if (this.cProfile.name !== this.cProfileForm.get('name').value) {
-      this.loading = true;$(".loading").css("display", "block");
+      this.loading = true; $(".loading").css("display", "block");
       this.companyProfileService
         .isCompanyNameUnique(
           this.cProfile.address[0].id,
@@ -773,7 +776,7 @@ data['fromGoogle'] = this.fromGoogle;
         )
         .subscribe(
           (res: any) => {
-            this.loading = false;$(".loading").css("display", "none");
+            this.loading = false; $(".loading").css("display", "none");
             this.isCompanyNameUnique = res.value;
             // true, unique companyname
             if (res && res.value) {
@@ -787,7 +790,7 @@ data['fromGoogle'] = this.fromGoogle;
                   this.toaster.success('Records saved successfully');
                 },
                 error => {
-                  this.loading = false;$(".loading").css("display", "none");
+                  this.loading = false; $(".loading").css("display", "none");
                   this.toaster.error('Bad Request');
                 }
               );
@@ -795,20 +798,20 @@ data['fromGoogle'] = this.fromGoogle;
             }
           },
           error => {
-            this.loading = false;$(".loading").css("display", "none");
+            this.loading = false; $(".loading").css("display", "none");
           }
         );
     } else {
       const address = { addresses: [data] };
-      this.loading = true;$(".loading").css("display", "block");
+      this.loading = true; $(".loading").css("display", "block");
       this.companyProfileService.addresses(address).subscribe(
         res => {
-          this.loading = false;$(".loading").css("display", "none");
+          this.loading = false; $(".loading").css("display", "none");
           if (res) {
           }
         },
         error => {
-          this.loading = false;$(".loading").css("display", "none");
+          this.loading = false; $(".loading").css("display", "none");
         }
       );
     }

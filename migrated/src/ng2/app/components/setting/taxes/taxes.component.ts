@@ -3,7 +3,8 @@ import { TaxesService } from "./taxes.service";
 import { ToastrService } from "ngx-toastr";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { map } from "rxjs/operators";
-declare var $:any;
+import { SettingStateService } from "src/ng2/app/states/setting/setting-state.service";
+declare var $: any;
 @Component({
   selector: "app-taxes-settings",
   templateUrl: "./taxes.component.html",
@@ -23,8 +24,9 @@ export class TaxesSettingsComponent implements OnInit, OnDestroy {
   constructor(
     private taxesService: TaxesService,
     private toastrService: ToastrService,
-    private formBuilder: FormBuilder
-  ) {}
+    private formBuilder: FormBuilder,
+    private settingStateService: SettingStateService
+  ) { }
 
   /**
    * init
@@ -47,6 +49,7 @@ export class TaxesSettingsComponent implements OnInit, OnDestroy {
     });
 
     this.getTaxes();
+    this.settingStateService.setComponentName('TaxesSettingsComponent');
   }
 
   ngOnDestroy() {
@@ -62,7 +65,7 @@ export class TaxesSettingsComponent implements OnInit, OnDestroy {
    * get taxes
    */
   getTaxes() {
-    this.loading = true;$(".loading").css("display", "block");
+    this.loading = true; $(".loading").css("display", "block");
     this.taxesService
       .getTaxes()
       .pipe(
@@ -70,7 +73,7 @@ export class TaxesSettingsComponent implements OnInit, OnDestroy {
           if (res) {
             this.taxes = res;
           }
-          this.loading = false;$(".loading").css("display", "none");
+          this.loading = false; $(".loading").css("display", "none");
         })
       )
       .subscribe();
@@ -98,7 +101,7 @@ export class TaxesSettingsComponent implements OnInit, OnDestroy {
   }
 
   defaultTax(tax: any) {
-    
+
 
     this.taxForm.patchValue({
       name: tax.name,
@@ -106,13 +109,13 @@ export class TaxesSettingsComponent implements OnInit, OnDestroy {
       id: tax.id,
       isDefault: !tax.isDefault
     });
-    
-    this.loading = true;$(".loading").css("display", "block");
+
+    this.loading = true; $(".loading").css("display", "block");
     this.taxesService
       .editTaxes(this.taxForm.value)
       .pipe(
         map((res: any) => {
-          this.loading = false;$(".loading").css("display", "none");
+          this.loading = false; $(".loading").css("display", "none");
           if (res) {
             let itemIndex = this.taxes.findIndex(item => item.id == res.id);
             this.taxes[itemIndex] = res;
@@ -125,7 +128,7 @@ export class TaxesSettingsComponent implements OnInit, OnDestroy {
           this.toastrService.success("Tax Saved Successfully");
         },
         error => {
-          this.loading = false;$(".loading").css("display", "none");
+          this.loading = false; $(".loading").css("display", "none");
         }
       );
   }
@@ -140,18 +143,18 @@ export class TaxesSettingsComponent implements OnInit, OnDestroy {
    * @param tax
    */
   removeTax() {
-      this.loading = true;$(".loading").css("display", "block");
-      this.taxesService
-        .delete(this.tax.id)
-        .pipe(
-          map(res => {
-            this.loading = false;$(".loading").css("display", "none");
-            this.popup = false;
-            this.taxes = this.taxes.filter(t => t.id !== this.tax.id);
-            this.toastrService.success(`${this.tax.name} is Deleted Successfully.`);
-          })
-        )
-        .subscribe();
+    this.loading = true; $(".loading").css("display", "block");
+    this.taxesService
+      .delete(this.tax.id)
+      .pipe(
+        map(res => {
+          this.loading = false; $(".loading").css("display", "none");
+          this.popup = false;
+          this.taxes = this.taxes.filter(t => t.id !== this.tax.id);
+          this.toastrService.success(`${this.tax.name} is Deleted Successfully.`);
+        })
+      )
+      .subscribe();
   }
 
   /**
@@ -192,12 +195,12 @@ export class TaxesSettingsComponent implements OnInit, OnDestroy {
 
     if (this.taxForm.value.id) {
       // edit
-      this.loading = true;$(".loading").css("display", "block");
+      this.loading = true; $(".loading").css("display", "block");
       this.taxesService
         .editTaxes(this.taxForm.value)
         .pipe(
           map((res: any) => {
-            this.loading = false;$(".loading").css("display", "none");
+            this.loading = false; $(".loading").css("display", "none");
             if (res) {
               let itemIndex = this.taxes.findIndex(item => item.id == res.id);
               this.taxes[itemIndex] = res;
@@ -210,17 +213,17 @@ export class TaxesSettingsComponent implements OnInit, OnDestroy {
             this.toastrService.success("Tax Saved Successfully");
           },
           error => {
-            this.loading = false;$(".loading").css("display", "none");
+            this.loading = false; $(".loading").css("display", "none");
           }
         );
     } else {
       // add
-      this.loading = true;$(".loading").css("display", "block");
+      this.loading = true; $(".loading").css("display", "block");
       this.taxesService
         .saveTaxes(this.taxForm.value)
         .pipe(
           map((res: any) => {
-            this.loading = false;$(".loading").css("display", "none");
+            this.loading = false; $(".loading").css("display", "none");
             this.taxes.push(res);
             this.create = false;
           })

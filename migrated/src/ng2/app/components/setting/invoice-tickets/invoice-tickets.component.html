@@ -1,29 +1,54 @@
-<!-- Middle Wrapper  -->
-<app-left-panel-settings [componentName]="'InvoiceTicketsComponent'"></app-left-panel-settings>
+<!-- Middle Wrapper -->
+
+
 <div class="page-container">
-  <div class="page-insider invoice-ticket">
-    <div class="heading">
-      <h1><a href="javascript:;" (click)="onBackMenu()" class="back-menu" style="display: none;">backmneu</a>Invoice and Ticket</h1>
+    <div class="page-insider invoice-ticket">
+        <div class="heading">
+            <h1>
+                <a
+                    href="javascript:;"
+                    (click)="onBackMenu()"
+                    class="back-menu"
+                    style="display: none;"
+                >
+                    backmneu
+                </a>
+                Invoice and Ticket
+            </h1>
+        </div>
+        <ngb-tabset>
+            <!-- Ticket Settings -->
+            <ngb-tab
+                title="Ticket Settings"
+                id="tab1"
+            >
+                <ng-template ngbTabContent>
+                    <app-ticket-settings
+                        [taxIdDescInput]="taxIdDescription"
+                        [taxIdInput]="taxId"
+                        [conditionInput]="condition"
+                        *ngIf="showTab == true && showTerm == true"
+                    ></app-ticket-settings>
+                </ng-template>
+            </ngb-tab>
+            <!-- Invoice Settings -->
+            <ngb-tab title="Invoice Settings">
+                <ng-template ngbTabContent>
+                    <app-invoice-settings
+                        [taxIdDescInput]="taxIdDescription"
+                        [taxIdInput]="taxId"
+                        [termInput]="term"
+                        [conditionInput]="condition"
+                        *ngIf="showTab == true && showTerm == true"
+                    ></app-invoice-settings>
+                </ng-template>
+            </ngb-tab>
+            <!-- Quotes Settings -->
+            <ngb-tab title="Quotes settings">
+                <ng-template ngbTabContent>
+                    <app-quotes-settings></app-quotes-settings>
+                </ng-template>
+            </ngb-tab>
+        </ngb-tabset>
     </div>
-    <ngb-tabset>
-      <!-- Ticket Settings -->
-      <ngb-tab title="Ticket Settings" id="tab1">
-        <ng-template ngbTabContent>
-        <app-ticket-settings [taxIdDescInput]="taxIdDescription" [taxIdInput]="taxId" [conditionInput]="condition" *ngIf="showTab == true && showTerm == true"></app-ticket-settings>
-        </ng-template>
-      </ngb-tab>
-      <!-- Invoice Settings -->
-      <ngb-tab title="Invoice Settings">
-        <ng-template ngbTabContent>
-        <app-invoice-settings [taxIdDescInput]="taxIdDescription" [taxIdInput]="taxId" [termInput]="term" [conditionInput]="condition" *ngIf="showTab == true && showTerm == true"></app-invoice-settings>
-        </ng-template>
-      </ngb-tab>
-      <!-- Quotes Settings  -->
-      <ngb-tab title="Quotes settings">
-        <ng-template ngbTabContent>
-        <app-quotes-settings></app-quotes-settings>
-        </ng-template>
-      </ngb-tab>
-    </ngb-tabset>
-  </div>
 </div>

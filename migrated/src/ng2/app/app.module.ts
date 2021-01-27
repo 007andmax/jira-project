@@ -140,7 +140,6 @@ import { CompanyProductsComponent } from './components/companies/company-product
  * declare angular
  */
 declare var angular: any;
-import { LeftPanelSettingComponent } from './components/left-panel/left-panel-setting/left-panel-setting.component';
 import { TechUsersComponent } from './components/setting/tech-users/tech-users.component';
 import { EmailSettingComponent } from './components/setting/email-setting/email-setting.component';
 import { TaxesSettingsComponent } from './components/setting/taxes/taxes.component';
@@ -384,6 +383,7 @@ import { CompanyDashContractComponent } from './components/company-dashboard/com
 import { LeftPanelCompanyComponent } from './components/left-panel/left-panel-company/left-panel-company.component';
 import { HeaderComponent } from './components/header/header.component';
 import { GlobalSearchComponent } from './components/header/global-search/global-search.component';
+
 /**
  * declare angular
  */
@@ -665,7 +665,6 @@ angular.module('quicktech')
     MyProfileComponent,
     SettingComponent,
     CompanyProfileComponent,
-    LeftPanelSettingComponent,
     ManageTagsComponent,
     TechUsersComponent,
     EmailSettingComponent,
@@ -930,7 +929,7 @@ angular.module('quicktech')
     CompanyNetworkScanItemTooltipComponent,
     LeftPanelCompanyComponent,
     HeaderComponent,
-    GlobalSearchComponent,
+    GlobalSearchComponent
   ],
   imports: [
     BrowserModule,

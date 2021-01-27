@@ -39,6 +39,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   private subGetRecords: ISubscription;
   private subNewRecordAdd: ISubscription;
   private subscriptions = new Subscription();
+  public isMobileFilterShowing = false;
   public innerWidth: any;
   public clearCompanyItem = {
     companyId: '',
@@ -80,6 +81,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.addNewRecord();
     this.deleteRecord();
     this.getCompaniesList();
+    this.checkCloseFilters();
     this.innerWidth = window.innerWidth;
   }
 
@@ -111,6 +113,13 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
        }
      );*/
   }
+
+  public checkCloseFilters() {
+    this.passwordManagerService.onToggleFilter.subscribe((data) => {
+      this.isMobileFilterShowing = data;
+    })
+  }
+
 
   /**
    * Select company filter
@@ -535,7 +544,8 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
    * Close filter mobile version
    */
   public closeMobileFilters() {
-    this.passwordManagerService.closeFilters();
+    this.passwordManagerService.toggleFilters(false);
+    this.isMobileFilterShowing = false;
   }
 
 }

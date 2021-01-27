@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
+import { SettingStateService } from "src/ng2/app/states/setting/setting-state.service";
 import { EmailSettingService } from './email-setting.service';
-declare var $:any;
+declare var $: any;
 @Component({
   selector: "app-email-setting",
   templateUrl: "./email-setting.component.html",
@@ -50,12 +51,14 @@ export class EmailSettingComponent implements OnInit, OnDestroy {
       encryptionType: "TLS"
     }
   };
-  constructor(private emailSettingService: EmailSettingService) {}
+  constructor(private emailSettingService: EmailSettingService,
+    private settingStateService: SettingStateService) { }
 
   ngOnInit() {
     $('body').addClass('ng7');
     $('body').removeClass('backMenu');
     this.SMTPSettings();
+    this.settingStateService.setComponentName('EmailSettingComponent');
   }
 
   ngOnDestroy() {
@@ -86,7 +89,7 @@ export class EmailSettingComponent implements OnInit, OnDestroy {
             ? this.getEmailViaByDomain(this.smtp.domain)
             : this.emailVia[0];
           this.showIn = true;
-          
+
         }
       },
       (error: any) => {
@@ -104,5 +107,5 @@ export class EmailSettingComponent implements OnInit, OnDestroy {
       counter++;
     }
   }
-  
+
 }

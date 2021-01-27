@@ -3,7 +3,8 @@ import { IntegrationsService } from "./integrations.service";
 import { map, catchError } from "rxjs/operators";
 import { of } from "rxjs";
 import { ToastrService } from "ngx-toastr";
-declare var $:any;
+import { SettingStateService } from "src/ng2/app/states/setting/setting-state.service";
+declare var $: any;
 @Component({
   selector: "app-integrations",
   templateUrl: "./integrations.component.html",
@@ -23,8 +24,9 @@ export class IntegrationsComponent implements OnInit, OnDestroy {
 
   constructor(
     private integrationsService: IntegrationsService,
-    private toastrService: ToastrService
-  ) {}
+    private toastrService: ToastrService,
+    private settingStateService: SettingStateService
+  ) { }
 
   /**
    * init
@@ -33,6 +35,7 @@ export class IntegrationsComponent implements OnInit, OnDestroy {
     $('body').addClass('ng7');
     $('body').removeClass('backMenu');
     this.getSetting();
+    this.settingStateService.setComponentName('IntegrationsComponent');
   }
 
   ngOnDestroy() {
@@ -53,14 +56,14 @@ export class IntegrationsComponent implements OnInit, OnDestroy {
    * get settings
    */
   getSetting() {
-    this.loading = true;$(".loading").css("display", "block");
+    this.loading = true; $(".loading").css("display", "block");
     this.integrationsService.settings().subscribe(
       (res: any) => {
-        this.loading = false;$(".loading").css("display", "none");
+        this.loading = false; $(".loading").css("display", "none");
         this.paymentInfo = res;
       },
       error => {
-        this.loading = false;$(".loading").css("display", "none");
+        this.loading = false; $(".loading").css("display", "none");
       }
     );
   }
@@ -69,18 +72,18 @@ export class IntegrationsComponent implements OnInit, OnDestroy {
    * saved payment info
    */
   savePaymentInfo(isNotificationDis: boolean) {
-    this.loading = true;$(".loading").css("display", "block");
+    this.loading = true; $(".loading").css("display", "block");
 
     this.integrationsService.savePaymentInfo(this.paymentInfo).subscribe(
       (res: any) => {
-        this.loading = false;$(".loading").css("display", "none");
+        this.loading = false; $(".loading").css("display", "none");
         this.paymentInfo = res;
         if (isNotificationDis) {
           this.toastrService.success("Payment Info Changed Successfully.");
         }
       },
       error => {
-        this.loading = false;$(".loading").css("display", "none");
+        this.loading = false; $(".loading").css("display", "none");
         if (isNotificationDis) {
           this.toastrService.error(`Error Occured,  ${error}`);
         }

@@ -20,7 +20,7 @@ export class PasswordManagerService {
   public hideAddForm: EventEmitter<any> = new EventEmitter();
   public deleteItem: EventEmitter<any> = new EventEmitter();
   public deleteItemEditForm: EventEmitter<any> = new EventEmitter();
-  public closeFilter: EventEmitter<any> = new EventEmitter();
+  public onToggleFilter: EventEmitter<any> = new EventEmitter();
   public mobileCategory: EventEmitter<any> = new EventEmitter();
   public newRecordsisAdd: EventEmitter<any> = new EventEmitter();
   public onSort: EventEmitter<any> = new EventEmitter();
@@ -282,8 +282,8 @@ export class PasswordManagerService {
   /**
    * Close filters
    */
-  public closeFilters() {
-    this.closeFilter.emit();
+  public toggleFilters(val) {
+    this.onToggleFilter.emit(val);
   }
 
   /**

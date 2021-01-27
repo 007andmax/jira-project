@@ -122,6 +122,22 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getChangeCompanies);
+
+    let onFilterTags = this.companiesStateService.onFilterTags.subscribe(tags => {
+      if (tags.length > 0) {
+        let getClientsByTags = this.companiesService.getClientsByTags(tags).subscribe(data => {
+          this.showPreloader = true;
+          this.setDefaultScoll();
+          this.getClientsList(data);
+        })
+        this.sub.add(getClientsByTags);
+      } else {
+        this.setDefaultScoll();
+        this.getClientsList(this.companiesStateService.getCompanies());
+      }
+      this.cd.detectChanges();
+    })
+    this.sub.add(onFilterTags);
   }
   onSelectAllCompanies(event) {
     if (event.target.checked) {
@@ -143,20 +159,6 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   }
   showMobileFilter() {
     document.body.querySelector('app-left-panel-companies').classList.add('show');
-  }
-  public onFilterTags(tags) {
-    if (tags.length > 0) {
-      let getClientsByTags = this.companiesService.getClientsByTags(tags).subscribe(data => {
-        this.showPreloader = true;
-        this.setDefaultScoll();
-        this.getClientsList(data);
-      })
-      this.sub.add(getClientsByTags);
-    } else {
-      this.setDefaultScoll();
-      this.getClientsList(this.companiesStateService.getCompanies());
-    }
-    this.cd.detectChanges();
   }
   private onInirCalculate() {
     this.calculateCount.onCalculate(this.reqCompaniesList, this.left_filter);

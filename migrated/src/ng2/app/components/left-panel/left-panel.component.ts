@@ -10,7 +10,8 @@ import { Router } from "@angular/router";
   styleUrls: ['./left-panel.component.scss']
 })
 export class LeftPanelComponent implements OnInit {
-
+  headerText: string = "";
+  page: string;
   public appType: string;
 
   /**
@@ -19,7 +20,7 @@ export class LeftPanelComponent implements OnInit {
    */
   constructor(
     private router: Router
-  ) {}
+  ) { }
 
   /**
    * Initializes left panel. See [ngOnInit]{@see OnInit#ngOnInit}
@@ -28,6 +29,39 @@ export class LeftPanelComponent implements OnInit {
     this.router.events
       .subscribe((event) => {
         const appType = this.router.url.startsWith('/ng2/quotes') ? '/ng2/quotes' : 'ng1';
+        console.log("this.router.url", this.router.url);
+        if (this.router.url.includes('ng2/companies')) {
+          this.page = 'companies';
+          this.headerText = 'Companies';
+        }
+        if (this.router.url.includes('ng2/company')) {
+          this.page = 'company';
+          this.headerText = 'Companies';
+        }
+        if (this.router.url.includes('ng2/tickets')) {
+          this.page = 'tickets';
+          this.headerText = 'Filters';
+        }
+        if (this.router.url.includes('ng2/users')) {
+          this.page = 'users';
+          this.headerText = 'Users';
+        }
+        if (this.router.url.includes('ng2/billable')) {
+          this.page = 'billing';
+          this.headerText = 'Billing';
+        }
+        if (this.router.url.includes('ng2/inventory')) {
+          this.page = 'inventory';
+          this.headerText = 'Inventory';
+        }
+        if (this.router.url.includes('ng2/password-manager')) {
+          this.page = 'password-manager';
+          this.headerText = 'Password';
+        }
+        if (this.router.url.includes('ng2/setting')) {
+          this.page = 'settings';
+          this.headerText = 'Settings';
+        }
         this.setAppType(appType);
       });
   }
