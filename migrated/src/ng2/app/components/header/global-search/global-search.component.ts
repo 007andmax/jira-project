@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { GlobalSearchService } from 'src/ng2/app/services/global-search/global-search.service';
+import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
+import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.service';
+import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { GlobalSearchResult } from './class/global-search-result';
 import { GlobalSearchResultItem } from './class/global-search-result-item';
 
@@ -13,7 +16,10 @@ export class GlobalSearchComponent implements OnInit {
   @ViewChild('globalSearch') globalSearch: NgbDropdown;
   list: Array<GlobalSearchResult> = [];
   word: string = "";
-  constructor(private globalSearchService: GlobalSearchService) { }
+  constructor(private globalSearchService: GlobalSearchService,
+    private ticketsService: TicketsService,
+    private usersStateService: UsersStateService,
+    private ticketsStateService: TicketsStateService) { }
 
   ngOnInit() {
   }
@@ -27,6 +33,11 @@ export class GlobalSearchComponent implements OnInit {
   onCloseProducts(open) {
 
   }
+  togglePanel(data, event) {
+    event.target.closest('.card').classList.toggle('opened-card');
+    if (!data) {
+    }
+  }
   showInfo(item: GlobalSearchResultItem) {
     if (item.type === 'COMPANIES') {
       localStorage.setItem("company_id", item.id);
@@ -38,6 +49,23 @@ export class GlobalSearchComponent implements OnInit {
       e.initEvent('click', true, true);
       link.dispatchEvent(e);
     }
+    if (item.type === 'TICKETS') {
+      console.log(item);
+      this.ticketsStateService.onOpenTicket();
+      this.ticketsService.getTicket(item.id).subscribe(data => {
+        //  data.setUserCompanies(ticket.userCompanies);
+        this.ticketsStateService.onEditTicket(data);
+      })
+    }
+    if (item.type === 'USERS') {
+      let user = this.usersStateService.getAllUsers().find(item => item.id === item.id);
+      this.usersStateService.setUserForEdit(user);
+      this.usersStateService.onOpenEditAsige();
+    }
+  }
+  clearWord() {
+    this.word = "";
+    this.list = [];
   }
   isShowType(type) {
     if (type === 'TICKETS' || type === 'COMPANIES' || type === 'USERS' || type === 'SERVICES') return true;

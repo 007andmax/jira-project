@@ -21,6 +21,7 @@
             <span
                 class="input-group-addon-search"
                 *ngIf="word.length > 0"
+                (click)="clearWord()"
             >
                 <i class="icn-sm icn-search form-control-top-search-icn disabled"></i>
                 <i
@@ -58,7 +59,7 @@
                             class="btn select-product__item-title"
                             (click)="togglePanel(opened,$event)"
                         >
-                            <div>
+                            <div class="header-result-p">
                                 {{getText(item.type) + ' '}}
                                 <span>({{item.list.length}})</span>
                             </div>

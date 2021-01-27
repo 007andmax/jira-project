@@ -12,30 +12,29 @@ import { UserChange } from '../../components/users/class/user-change';
   providedIn: 'root'
 })
 export class UsersStateService {
-  allUsers:Array<User> = [];
+  allUsers: Array<User> = [];
   currentUser: CurrentUser;
-  userForEdit:UserProfile = null;
+  userForEdit: User = null;
   onGetUsers: EventEmitter<any> = new EventEmitter();
   onGetCurrentUser: EventEmitter<any> = new EventEmitter();
   onShowArchived: EventEmitter<any> = new EventEmitter();
   onFilter: EventEmitter<any> = new EventEmitter();
-   
   openAside: EventEmitter<any> = new EventEmitter();
   openEditAside: EventEmitter<any> = new EventEmitter();
-  userForArchive: User = null;
+  userForArchive: UserProfile = null;
   userForDeArchive: User = null;
   onChangeUsers: EventEmitter<UserChange> = new EventEmitter();
 
-  constructor(private userService: UsersService, private usersRealTimeService:UsersRealTimeService) {
+  constructor(private userService: UsersService, private usersRealTimeService: UsersRealTimeService) {
 
   }
   public onInit() {
 
     this.userService.getAllusers().subscribe((data) => {
-   /*   let users = data.map((item) => {
-        return new User(item);
-      })*/
-       
+      /*   let users = data.map((item) => {
+           return new User(item);
+         })*/
+
       this.setAllUsers(data);
       this.onInitGetUsers(data);
     })
@@ -53,29 +52,29 @@ export class UsersStateService {
         newChange.data.forEach(data => {
           const Index = this.allUsers.findIndex((item) => item.id === data.id);
           if (Index > -1) this.allUsers[Index] = new User(data);
-        }); 
+        });
       }
-      this.onChangeUsers.emit(new UserChange(newChange.action,newChange.data,this.allUsers));
+      this.onChangeUsers.emit(new UserChange(newChange.action, newChange.data, this.allUsers));
     })
 
     this.usersRealTimeService.changeSubmittedTicket.subscribe(newChange => {
       if (newChange.action === 'USER_SUBMITTED_TICKET') {
         const Index = this.allUsers.findIndex((item) => item.id === newChange.data.id);
         var prevValue = this.allUsers[Index].userStatistic.ticketsSubmitted || 0;
-        prevValue ++;
+        prevValue++;
         if (Index > -1) this.allUsers[Index].userStatistic.ticketsSubmitted = prevValue;
       }
-      this.onChangeUsers.emit(new UserChange(newChange.action,newChange.data,this.allUsers));
+      this.onChangeUsers.emit(new UserChange(newChange.action, newChange.data, this.allUsers));
     });
   }
   public getChangeUsers() {
     return this.onChangeUsers;
   }
   public setUserForEdit(data) {
-    this.userForArchive = data;
+    this.userForEdit = data;
   }
   public getuserForEdit() {
-    return this.userForArchive;
+    return this.userForEdit;
   }
   public onOpenAsige() {
     this.openAside.emit(null);
@@ -102,7 +101,7 @@ export class UsersStateService {
   public getUserForDeArchive() {
     return this.userForDeArchive;
   }
-  
+
   public onInitFilter(data) {
     this.onFilter.emit(data);
   }

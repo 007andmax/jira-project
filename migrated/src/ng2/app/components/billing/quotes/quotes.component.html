@@ -1,7 +1,11 @@
- <app-left-panel-billing></app-left-panel-billing>
- <app-quotes-table></app-quotes-table>
- <app-quote-aside-preview></app-quote-aside-preview>
- <app-quote-aside-add></app-quote-aside-add>
- <app-quote-aside-edit></app-quote-aside-edit>
- <app-ticket-edit-aside></app-ticket-edit-aside>
- <app-invoices-aside-preview #previewInvoiceAside *ngIf="showPreviewInvoice" (onClose)="showPreviewInvoice = false" [invoiceId]="invoiceId"></app-invoices-aside-preview>
+<app-left-panel-billing></app-left-panel-billing>
+<app-quotes-table></app-quotes-table>
+<app-quote-aside-preview></app-quote-aside-preview>
+<app-quote-aside-add></app-quote-aside-add>
+<app-quote-aside-edit></app-quote-aside-edit>
+<app-invoices-aside-preview
+    #previewInvoiceAside
+    *ngIf="showPreviewInvoice"
+    (onClose)="showPreviewInvoice = false"
+    [invoiceId]="invoiceId"
+></app-invoices-aside-preview>
