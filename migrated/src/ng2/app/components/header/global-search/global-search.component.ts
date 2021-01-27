@@ -26,9 +26,12 @@ export class GlobalSearchComponent implements OnInit {
   onSearch() {
     this.globalSearchService.search(this.word).subscribe(data => {
       this.list = data;
-      this.globalSearch.open();
+      this.onShowDropDown();
       console.log(this.list);
     })
+  }
+  onShowDropDown() {
+    if (this.word.length > 0) this.globalSearch.open();
   }
   onCloseProducts(open) {
 
@@ -58,7 +61,7 @@ export class GlobalSearchComponent implements OnInit {
       })
     }
     if (item.type === 'USERS') {
-      let user = this.usersStateService.getAllUsers().find(item => item.id === item.id);
+      let user = this.usersStateService.getAllUsers().find(userItem => userItem.id === item.id);
       this.usersStateService.setUserForEdit(user);
       this.usersStateService.onOpenEditAsige();
     }
