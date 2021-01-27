@@ -21,7 +21,7 @@ export class UsersStateService {
   onFilter: EventEmitter<any> = new EventEmitter();
   openAside: EventEmitter<any> = new EventEmitter();
   openEditAside: EventEmitter<any> = new EventEmitter();
-  userForArchive: UserProfile = null;
+  userForArchive: User = null;
   userForDeArchive: User = null;
   onChangeUsers: EventEmitter<UserChange> = new EventEmitter();
 
