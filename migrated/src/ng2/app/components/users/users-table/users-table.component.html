@@ -1,5 +1,5 @@
 <tr>
-  <td>
+  <td class="users-table__check">
     <div class="d-f">
       <label class="qt-checkbox">
         <input
@@ -12,26 +12,45 @@
   </td>
 
   <td class="users-table__name">
-    user
+    <div class="qt-df qt-ai-c">
+      <div
+        class="users-table__name--avatar"
+        [ngStyle]="{'background':  getUserAvatarUrl()}"
+        [textContent]="getNameForAvatar()"
+      ></div>
+      <div>
+        <div class="users-table__name--user-name" [textContent]="getUserName()"></div>
+        <div class="users-table__name--profession" [textContent]="user.designation"></div>
+      </div>
+    </div>
   </td>
   <td class="users-table__company">
-    company
+    <span>{{ getUserCompanyName() }} </span>
   </td>
   <td class="users-table__contract-no">
-    contract no
+    <ng-template ngFor let-phone [ngForOf]="user.phoneNumbers" [ngForTrackBy]="trackById">
+      <div class="qt-df qt-ai-c">
+        <div>
+          <div *ngIf="phone.typeNumber === 'FAX'" class="qt-sz-16 qt-mr-6 icon__office-phone-gray"></div>
+          <div *ngIf="phone.typeNumber === 'MOBILE' || phone.typeNumber === 'OFFICE'" class="qt-sz-16 qt-mr-6 icon__phone-gray"></div>
+        </div>
+        <div class="users-table__contract-no--number">{{phone.number}}</div>
+      </div>
+    </ng-template>
   </td>
   <td class="users-table__subscription">
-    subscription
+    <app-user-table-subscription
+      class="users-table__subscription--dropdown"
+      (onChange)="onChangeSubscriptions($event)"
+      [subscription]="user.subscription">
+    </app-user-table-subscription>
   </td>
-  <td class="users-table__tickets">
-    tickets
-  </td>
+  <td class="users-table__tickets" [textContent]="user.userStatistic.ticketsSubmitted || 0"></td>
   <td class="users-table__email">
-    email
+    <div class="icon__email-dark qt-sz-16"></div>
   </td>
-  <td>
+  <td class="users-table__menu">
     <div
-      class="users-table__menu"
       ngbDropdown
       [container]="'body'"
     >
