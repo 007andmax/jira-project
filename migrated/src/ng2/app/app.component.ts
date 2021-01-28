@@ -13,6 +13,7 @@ import { GlNumberStateService } from './states/gl-number/gl-number-state.service
 import { InventoryStateService } from './states/inventory/inventory-state.service';
 import { TicketsStateService } from './states/tickets/tickets-state.service';
 import { ConstantsStateService } from './states/constants/constants-state.service';
+import { LeftPanelStateService } from './states/left-panel/left-panel-state.service';
 
 
 /**
@@ -28,6 +29,7 @@ export class AppComponent implements OnInit {
   isUsersInit: boolean = false;
   isCompaniesInit: boolean = false;
   isDevicesInit: boolean = false;
+  toggleLeftPanel: boolean = false;
 
   /**
    * Creates an instance of the MainComponent with the injected services
@@ -48,6 +50,7 @@ export class AppComponent implements OnInit {
     private inventoryStateService: InventoryStateService,
     private ticketsStateService: TicketsStateService,
     private constantsStateService: ConstantsStateService,
+    private leftPanelStateService: LeftPanelStateService,
     public cd: ChangeDetectorRef,
 
   ) { }
@@ -86,8 +89,13 @@ export class AppComponent implements OnInit {
       this.onCheckInitAll();
 
     })
-
+    this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
+      this.toggleLeftPanel = data;
+      console.log("this.toggleLeftPanel", this.toggleLeftPanel);
+      this.cd.detectChanges();
+    })
   }
+
   private onCheckInitAll() {
     if (this.isCompaniesInit && this.isUsersInit && !this.appService.getIsInit()) {
       this.appService.onInit();

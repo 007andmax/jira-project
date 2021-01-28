@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Company } from '../../interfaces/company/company';
 import { CompaniesStateService } from '../../states/company/companies-state.service';
 import { DefaultServicesStateService } from '../../states/default-services/default-services-state.service';
 import { InventoryStateService } from '../../states/inventory/inventory-state.service';
+import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
 import { QuoteStateService } from '../../states/quote/quote-state.service';
 import { TicketsStateService } from '../../states/tickets/tickets-state.service';
 import { UsersStateService } from '../../states/users/users-state.service';
@@ -14,18 +15,29 @@ import { UsersStateService } from '../../states/users/users-state.service';
 })
 export class HeaderComponent implements OnInit {
   currentCompany: Company;
+  toggleLeftPanel: boolean = false;
   constructor(private usersStateService: UsersStateService,
     private ticketsStateService: TicketsStateService,
     // private quoteStateService: QuoteStateService,
     private inventoryStateService: InventoryStateService,
     private defaultServicesStateService: DefaultServicesStateService,
+    private leftPanelStateService: LeftPanelStateService,
+    public cd: ChangeDetectorRef,
     private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
+    this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
+      this.toggleLeftPanel = data;
+      this.cd.detectChanges();
+    })
     this.currentCompany = this.companiesStateService.getCurrentCompany();
     this.companiesStateService.getOnCurrentCompany().subscribe(data => {
       this.currentCompany = this.companiesStateService.getCurrentCompany();
     })
+  }
+  onToggleLeftPanel() {
+    this.toggleLeftPanel = !this.toggleLeftPanel;
+    this.leftPanelStateService.toggleLeftPanel(this.toggleLeftPanel);
   }
   goToLink(url) {
 

@@ -1,5 +1,75 @@
-<p>
-  reports works!
-</p>
-<a href="/#/ng2/reports/ggg">efefefefe</a>
- 
+<div class="reports-all">
+    <div
+        class="col-sm-4"
+        *ngIf="getPermissions('VIEW_SALES_REPORT') || getPermissions('VIEW_TAXES_REPORT')"
+    >
+        <app-report-list-item
+            *ngIf="getPermissions('VIEW_SALES_REPORT')"
+            [img]="'ng1/images/new-icons/Report-sales.svg'"
+            [title]="'Sales'"
+            [listTitles]="getListTitles('Sales')"
+            [listStates]="getListStates('Sales')"
+        ></app-report-list-item>
+        <app-report-list-item
+            *ngIf="getPermissions('VIEW_TAXES_REPORT')"
+            [img]="'ng1/images/new-icons/Report-Taxes.svg'"
+            [title]="'Taxes'"
+            [listTitles]="getListTitles('Taxes')"
+            [listStates]="getListStates('Taxes')"
+        ></app-report-list-item>
+        <app-report-list-item
+            *ngIf="getPermissions('VIEW_PERFORMANCE_REPORT')"
+            [img]="'ng1/images/new-icons/Report-Perforrmance.svg'"
+            [title]="'Commissions'"
+            [listTitles]="getListTitles('Commissions')"
+            [listStates]="getListStates('Commissions')"
+        ></app-report-list-item>
+    </div>
+    <div class="col-sm-4">
+        <app-report-list-item
+            *ngIf="getPermissions('VIEW_FINANCIAL_REPORT')"
+            [img]="'ng1/images/new-icons/Report-Financial.svg'"
+            [title]="'Financial'"
+            [listTitles]="getListTitles('Financial')"
+            [listStates]="getListStates('Financial')"
+        ></app-report-list-item>
+        <app-report-list-item
+            *ngIf="getPermissions('VIEW_REMOTE_ACCESS_REPORT')"
+            [img]="'ng1/images/new-icons/Report-Remoteaccess.svg'"
+            [title]="'Remote Access'"
+            [listTitles]="getListTitles('Remote Access')"
+            [listStates]="getListStates('Remote Access')"
+        ></app-report-list-item>
+        <app-report-list-item
+            *ngIf="getPermissions('VIEW_DEVICES_REPORTS')"
+            [img]="'ng1/images/new-icons/Report-Perforrmance.svg'"
+            [title]="'Devices'"
+            [listTitles]="getListTitles('Devices')"
+            [listStates]="getListStates('Devices')"
+        ></app-report-list-item>
+    </div>
+    <div
+        class="col-sm-4"
+        *ngIf="getPermissions('VIEW_PERFORMANCE_REPORT')"
+    >
+        <app-report-list-item
+            *ngIf="getPermissions('VIEW_PERFORMANCE_REPORT')"
+            [img]="'ng1/images/new-icons/Report-Perforrmance.svg'"
+            [title]="'Performance'"
+            [listTitles]="getListTitles('Performance')"
+            [listStates]="getListStates('Performance')"
+        ></app-report-list-item>
+        <app-report-list-item
+            [img]="'ng1/images/new-icons/report-tickets.svg'"
+            [title]="'Tickets'"
+            [listTitles]="getListTitles('Tickets')"
+            [listStates]="getListStates('Tickets')"
+        ></app-report-list-item>
+        <app-report-list-item
+            [img]="'ng1/images/new-icons/report-tickets.svg'"
+            [title]="'Income accounts'"
+            [listTitles]="getListTitles('Income accounts')"
+            [listStates]="getListStates('Income accounts')"
+        ></app-report-list-item>
+    </div>
+</div>

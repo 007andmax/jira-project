@@ -10,9 +10,11 @@
 ></div>
 <app-header
     class="top-bar"
+    [ngClass]="{'full-header':toggleLeftPanel,
+            'no-full-header':!toggleLeftPanel}"
     style="z-index: 991;"
 ></app-header>
-<app-left-panel></app-left-panel>
+<app-left-panel [ngClass]="{'hidden-left-panel':toggleLeftPanel}"></app-left-panel>
 <div
     ng-controller="quicktech.core.header.headerCtrl"
     class="mobile-top-bar"
@@ -37,7 +39,7 @@
     <div class="row">
         <div
             class="content-container"
-            ng-class="{'large': isRightPanelHidden}"
+            [ngClass]="{'large': toggleLeftPanel}"
         >
             <div class="content-wrapper">
                 <div ng-include="'/ng1/scripts/common/templates/index-page-body.tpl.html'"></div>

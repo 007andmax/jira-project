@@ -6,10 +6,14 @@
 'password' : page === 'password-manager',
 'left-panel-settings' : page === 'settings',
 'new-tickets' : page === 'tickets',
-'new-users' : page === 'users'}"
+'new-users' : page === 'users',
+'hidden' : toggleLeftPanel}"
 >
     <div class="left-panel-full__head">
-        <div class="icon-pos go-back-left-panel">
+        <div
+            class="icon-pos go-back-left-panel"
+            (click)="onToggleLeftPanel()"
+        >
             <i class="icn-sm icn-back-arrow"></i>
         </div>
         <span

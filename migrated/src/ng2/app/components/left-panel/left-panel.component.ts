@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
+import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
 
 /**
  * Left panel component
@@ -13,19 +14,24 @@ export class LeftPanelComponent implements OnInit {
   headerText: string = "";
   page: string;
   public appType: string;
+  toggleLeftPanel: boolean = false;
 
   /**
    * Creates an instance of the LeftPanelComponent with the injected services
    * @param {Router} router Service to work with router
    */
   constructor(
-    private router: Router
+    private router: Router,
+    private leftPanelStateService: LeftPanelStateService
   ) { }
 
   /**
    * Initializes left panel. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
+    this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
+      this.toggleLeftPanel = data;
+    })
     this.router.events
       .subscribe((event) => {
         const appType = this.router.url.startsWith('/ng2/quotes') ? '/ng2/quotes' : 'ng1';
@@ -62,10 +68,18 @@ export class LeftPanelComponent implements OnInit {
           this.page = 'settings';
           this.headerText = 'Settings';
         }
+        if (this.router.url.includes('report')) {
+          this.leftPanelStateService.toggleLeftPanel(true);
+        } else {
+          this.leftPanelStateService.toggleLeftPanel(false);
+        }
         this.setAppType(appType);
       });
   }
-
+  onToggleLeftPanel() {
+    this.toggleLeftPanel = !this.toggleLeftPanel;
+    this.leftPanelStateService.toggleLeftPanel(this.toggleLeftPanel);
+  }
   /**
    * Set app type
    * @param appType - application type

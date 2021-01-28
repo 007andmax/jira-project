@@ -1,7 +1,7 @@
 <nav class="topNavbar">
     <div class="topNavbar-content">
         <div class="topNavbarLeft ellipsis">
-            <div ng-show="!isToggleLeftPanelButtonAvailable()">
+            <div (click)="onToggleLeftPanel()">
                 <a
                     href="javascript:void(0)"
                     id="toggle-left-panel"
@@ -332,6 +332,8 @@
 
 
 
+
+
                     <ul
                         class="dropdown-menu tag-list"
                         ngbDropdownMenu
@@ -401,6 +403,8 @@
                 </div>
             </div>
         </div>
+
+
 
 
 

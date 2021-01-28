@@ -1,0 +1,23 @@
+<div class="report">
+    <div>
+        <p [textContent]="title"></p>
+        <img [src]="img">
+        <ul>
+            <!-- ui-sref="byProducts" -->
+            <ng-template
+                ngFor
+                let-item
+                [ngForOf]="listTitles"
+                let-i="index"
+                [ngForTrackBy]="trackByIndex"
+            >
+                <li
+                    class="content-report"
+                    (click)="goToState(listStates[i])"
+                    [textContent]="item"
+                >
+                </li>
+            </ng-template>
+        </ul>
+    </div>
+</div>

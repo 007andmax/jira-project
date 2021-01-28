@@ -438,7 +438,7 @@
                 class="left-panel__category"
                 ng-class="{'active': openedCategory === 'reports'}"
                 ng-click="onClickReports()"
-                ui-sref="reports"
+                ui-sref="new-reports"
                 ng-if="showReportsPage()"
             >
                 <div
@@ -461,7 +461,7 @@
     </div>
     <div
         class="left-panel-full"
-        ng-style="{'width': isLeftPanelHidden ? '0px' : '240px'}"
+        ng-style="{'width':  '0px',display: 'none' }"
     >
         <div
             class="left-panel-full-wrapper nano"
