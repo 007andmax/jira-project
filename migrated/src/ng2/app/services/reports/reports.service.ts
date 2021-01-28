@@ -8,33 +8,41 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 export class ReportsService {
 
   private apiUrl = environment.apiUrl;
-  constructor(private http: HttpClient ) { }
+  constructor(private http: HttpClient) { }
 
   public getPdfUrl(data) {
     return this.http.post(this.apiUrl + `reports/pdf`, data);
-    
+
   }
-  public getCSV(url,data) {
+  public getCSV(url, data) {
     const options: {
-        headers?: HttpHeaders;
-        observe?: 'body';
-        params?: HttpParams;
-        reportProgress?: boolean;
-        responseType: 'arraybuffer';
-        withCredentials?: boolean;
+      headers?: HttpHeaders;
+      observe?: 'body';
+      params?: HttpParams;
+      reportProgress?: boolean;
+      responseType: 'arraybuffer';
+      withCredentials?: boolean;
     } = {
-        responseType: 'arraybuffer'
+      responseType: 'arraybuffer'
     };
-    return this.http.post(this.apiUrl + url, data,options);
-    
+    return this.http.post(this.apiUrl + url, data, options);
+
   }
   public getCustomPdfUrl(data) {
     return this.http.post(this.apiUrl + `customerReport/pdf`, data);
-    
+
   }
 
-  public getAccountingStartDate () {
+  public getAccountingStartDate() {
     return this.http.get(this.apiUrl + `settings/companyProfile/accountingStartDate`);
+  }
+  public setAccountingStartDate(data) {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    return this.http.post(this.apiUrl + `settings/companyProfile/accountingStartDate`, data, options);
   }
   public getReportByTechService(data) {
     return this.http.post(this.apiUrl + `reports/sales/byServices`, data);
@@ -66,10 +74,10 @@ export class ReportsService {
   public getReportByService(data) {
     return this.http.post(this.apiUrl + `customerReport/expenses`, data);
   }
-  public sendMessage (data) {
+  public sendMessage(data) {
     return this.http.post(this.apiUrl + `reports/email`, data);
   }
-  public sendCustomerMessage (data) {
+  public sendCustomerMessage(data) {
     return this.http.post(this.apiUrl + `customerReport/email`, data);
   }
 }

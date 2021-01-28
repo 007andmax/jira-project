@@ -1,0 +1,11 @@
+.header-dashboard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    span {
+        margin: 0px 10px 0px 0px;
+    }
+    app-date-picker{
+        margin: 0px -8px 0px 0px;
+    }
+}
