@@ -10,6 +10,7 @@ import { ReportsService } from 'src/ng2/app/services/reports/reports.service';
 import { TopDashboard } from './class/top-dashboard';
 import { DashboardSalesAnalyticsComponent } from './dashboard-sales-analytics/dashboard-sales-analytics.component';
 import { LeftPanelStateService } from 'src/ng2/app/states/left-panel/left-panel-state.service';
+import { InvoiceRevenueComponent } from './invoice-revenue/invoice-revenue.component';
 
 @Component({
   selector: 'app-dashboard-billing',
@@ -19,6 +20,7 @@ import { LeftPanelStateService } from 'src/ng2/app/states/left-panel/left-panel-
 export class DashboardBillingComponent implements OnInit {
   @ViewChild('contractsDb') contractsDb: ContractsDashboardComponent;
   @ViewChild('dashboardStats') dashboardStats: DashboardSalesAnalyticsComponent;
+  @ViewChild('invoiceRevenue') invoiceRevenue: InvoiceRevenueComponent;
   accountingStartDate: number;
   dashboard: Dashboard;
   topDashboard: TopDashboard = new TopDashboard();
@@ -72,7 +74,10 @@ export class DashboardBillingComponent implements OnInit {
       this.accountingStartDate = date.getTime();
       this.topDashboard.setInvoiceAmountsStartDate(moment(this.accountingStartDate).format('YYYY/MM/DD'));
       this.topDashboard.setInvoiceAmountsEndDate(moment(new Date()).format('YYYY/MM/DD'));
+      this.cd.detectChanges();
       this.getTops();
+      this.invoiceRevenue.updateStartDate();
+      this.invoiceRevenue.getInvoiceRevenue();
 
     })
   }

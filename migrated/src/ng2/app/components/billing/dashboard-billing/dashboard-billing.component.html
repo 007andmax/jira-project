@@ -21,17 +21,7 @@
                     (onChange)="onChangeDatePicker($event)"
                 ></app-date-picker>
             </div>
-
-
-
-
         </div>
-
-
-
-
-
-
         <div class="qt-df qt-jc-sb qt-mb-16">
             <app-dashboard-stats
                 [title]="'Total Sales'"
@@ -60,21 +50,11 @@
             [chartData]="dashboard.chartData"
         ></app-dashboard-sales-analytics>
         <div class="qt-df qt-jc-sb qt-mb-16">
-            <app-invoice-revenue [accountingStartDate]="accountingStartDate"></app-invoice-revenue>
-
-
-
-
-
-
-
+            <app-invoice-revenue
+                #invoiceRevenue
+                [accountingStartDate]="accountingStartDate"
+            ></app-invoice-revenue>
             <app-dashboard-quotes [stats]="dashboard.saleQuoteCounters"></app-dashboard-quotes>
-
-
-
-
-
-
             <app-contracts-dashboard
                 #contractsDb
                 [contractsDashboard]="contractsDashboard"
@@ -87,12 +67,6 @@
                     [list]="topDashboard.top5InvoicesSum"
                 ></app-top-dashboard>
             </div>
-
-
-
-
-
-
             <div class="contract-info-list qt-mr-16">
                 <app-top-dashboard
                     [title]="'Top Outstanding Customer'"

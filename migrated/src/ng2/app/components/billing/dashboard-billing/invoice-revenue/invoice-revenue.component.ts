@@ -65,14 +65,17 @@ export class InvoiceRevenueComponent implements OnInit {
       }
     ];
     this.invoiceRevenue.companyId = this.companiesStateService.getCurrentCompany().id;
-    this.invoiceRevenue.startDate = moment(this.accountingStartDate).format('YYYY-MM-DD');
+    this.updateStartDate();
     this.invoiceRevenue.endDate = moment(new Date()).format('YYYY-MM-DD');
-    this.datesDp.setStartDate(new Date(this.accountingStartDate));
     this.datesDp.setEndDate(new Date());
     this.getInvoiceRevenue();
 
   }
-  getInvoiceRevenue() {
+  public updateStartDate() {
+    this.invoiceRevenue.startDate = moment(this.accountingStartDate).format('YYYY-MM-DD');
+    this.datesDp.setStartDate(new Date(this.accountingStartDate));
+  }
+  public getInvoiceRevenue() {
     this.dashboardBillingService.getInvoiceRevenue(this.invoiceRevenue.getDataForRequest()).subscribe(data => {
       this.invoiceRevenue.setData(data);
       this.data[0].value = this.invoiceRevenue.invoicedSum;
@@ -90,11 +93,9 @@ export class InvoiceRevenueComponent implements OnInit {
       this.invoiceRevenue.endDate = moment(value.end).format('YYYY-MM-DD');
 
     } else {
-      this.invoiceRevenue.startDate = moment(this.accountingStartDate).format('YYYY-MM-DD');
       this.invoiceRevenue.endDate = moment(new Date()).format('YYYY-MM-DD');
-      this.datesDp.setStartDate(new Date(this.accountingStartDate));
       this.datesDp.setEndDate(new Date());
-
+      this.updateStartDate();
     }
     this.cd.detectChanges();
     this.getInvoiceRevenue();
