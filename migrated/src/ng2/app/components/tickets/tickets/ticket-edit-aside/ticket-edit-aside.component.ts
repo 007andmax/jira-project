@@ -107,6 +107,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
         let ticket = new Ticket(data);
         if (this.ticketProfile.id === ticket.id) {
           this.ticketProfile.update(data);
+          console.log("this.ticketProfile", this.ticketProfile);
           this.elRef.nativeElement.querySelector("#ticket-note").innerHTML = this.ticketProfile.note;
           this.updateListAssignedUser();
           this.updateLisUpdateUser();

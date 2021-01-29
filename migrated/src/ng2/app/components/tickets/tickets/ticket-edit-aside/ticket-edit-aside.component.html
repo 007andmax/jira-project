@@ -31,14 +31,20 @@
                                     (openChange)="onOpenCompaniesDropDown()"
                                     placement="bottom-left"
                                 >
+                                    <app-dynamic-tooltip
+                                        class="user-companies-tooltip"
+                                        [content]="'You must remove all Product/Services updates from the ticket before changing the company.'"
+                                        [position]="'bottom'"
+                                        #userCompanyTooltip
+                                        [disableTooltip]="!checkExistServicesProducts()"
+                                    ></app-dynamic-tooltip>
                                     <span
                                         [ngClass]="{'pointer': ticketProfile.ticketSource === 'FROM_EMAIL'}"
                                         [textContent]="getCompanyName()"
                                         id="dropdownCompany"
                                         ngbDropdownToggle
-                                        placement="top"
-                                        ngbTooltip="You must remove all Product/Services updates from the ticket before changing the company."
-                                        [disableTooltip]="!checkExistServicesProducts()"
+                                        (mouseenter)="userCompanyTooltip.show($event.target)"
+                                        (mouseleave)="userCompanyTooltip.hide()"
                                     ></span>
                                     <span [textContent]="' - ' + getNameCreateUser()"></span>
                                     <div
@@ -133,6 +139,13 @@
                         (click)="toggleSubject()"
                     >
                         <span [ngClass]="getClassType()"></span>
+
+
+
+
+
+
+
 
 
 
