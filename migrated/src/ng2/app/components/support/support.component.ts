@@ -120,7 +120,8 @@ export class SupportComponent implements OnInit, OnDestroy {
   }
   createRemoteAccess(realSessionId, connectionType) {
     this.realSessionId = realSessionId;
-    const modalRef = this.modalService.open(CompanyDevicesRemoteAccessComponent, null);
+    const modalRef = this.modalService.open(CompanyDevicesRemoteAccessComponent, { windowClass: 'device-send-modal' });
+    modalRef.componentInstance.remoteSessionId = this.realSessionId;
     modalRef.componentInstance.companyId = this.companyId;
     modalRef.componentInstance.connectionType = connectionType;
     modalRef.componentInstance.action = 'CONNECT_SUPPORT_DEVICE';

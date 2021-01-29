@@ -103,12 +103,12 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     })
     this.sub.add(oneTimeConnectionArray);
 
-    let getOnRemoveConnection = this.devicesStateService.getOnRemoveConnection().subscribe(data => {
-      let remoteConnectPort = this.constantsStateService.getConstant('remote.connect.port'),
-        restServerAddress = this.constantsStateService.getConstant('rest.server.address'),
-        url = 'quicktech://connect?serverIP=' + restServerAddress + '&port=' + remoteConnectPort + '&sessionID=' + this.realSessionId;
-      window.open(url, '_self');
-    })
+    /* let getOnRemoveConnection = this.devicesStateService.getOnRemoveConnection().subscribe(data => {
+       let remoteConnectPort = this.constantsStateService.getConstant('remote.connect.port'),
+         restServerAddress = this.constantsStateService.getConstant('rest.server.address'),
+         url = 'quicktech://connect?serverIP=' + restServerAddress + '&port=' + remoteConnectPort + '&sessionID=' + this.realSessionId;
+       window.open(url, '_self');
+     })*/
     this.sub.add(getOnRemoveConnection);
     let getOnTicketClosed = this.ticketStateService.getOnTicketClosed().subscribe(data => {
       if (this.remoteSession) this.removeSession();
@@ -138,7 +138,8 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
   }
   createRemoteAccess(realSessionId, connectionType) {
     this.realSessionId = realSessionId;
-    const modalRef = this.modalService.open(CompanyDevicesRemoteAccessComponent, null);
+    const modalRef = this.modalService.open(CompanyDevicesRemoteAccessComponent, { windowClass: 'device-send-modal' });
+    modalRef.componentInstance.remoteSessionId = this.realSessionId;
     modalRef.componentInstance.companyId = this.companyIdForSupport;
     modalRef.componentInstance.connectionType = connectionType;
     modalRef.componentInstance.action = 'CONNECT_SUPPORT_DEVICE';
