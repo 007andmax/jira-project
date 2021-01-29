@@ -28,11 +28,6 @@
             >Remove Photo</a
           >
         </label>
-        <!-- <label for="profile-dp"  (click)="rePositionAvatar()">
-          <a href="javascript:void(0)" restore-default-button=""
-            >Reposition Photo</a
-          >
-        </label> -->
       </div>
       <span>Photos help your teammates recognize you in Quicktech</span>
     </div>
@@ -50,15 +45,6 @@
       </div>
       <div class="cropping">
         <div class="img-crop">
-          <!-- <image-cropper
-            [imageBase64]="imageBase64"
-            [imageChangedEvent]="imageChangedEvent"
-            [maintainAspectRatio]="false"
-            [aspectRatio]="4 / 3"
-            [resizeToWidth]="128"
-            format="png"
-            (imageCropped)="imageCropped($event)"
-          ></image-cropper> -->
           <image-cropper
             [imageChangedEvent]="imageChangedEvent"
             [maintainAspectRatio]="false"
@@ -89,35 +75,9 @@
     </div>
   </div>
 
-  <!-- <input
-    type="file"
-    (change)="onFileChange($event)"
-    accept="image/*"
-    #fileSelector
-    style="display: none"
-  /> -->
-
   <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
     <div class="f-row">
-      <!-- Commented code for full name -->
-      <!-- <div class="f-col col-50">
-        <label *ngIf="!submitted || !f.userName.errors">Your Full name</label>
-        <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
-          <div *ngIf="f.userName.errors.required">Full Name is required</div>
-          <div *ngIf="f.userName.errors.minlength">Full name is too short.</div>
-          <div *ngIf="f.userName.errors.maxlength">Full name is too large.</div>
-        </div>
-        <div class="form-row">
-          <input
-            type="text"
-            class="form-input"
-            placeholder="Enter Your Full name"
-            formControlName="userName"
-          />
-        </div>
-      </div> -->
       <div class="f-col col-50">
-        <!-- <label>Your Full name</label>  -->
 
         <label>First Name</label>
         <div class="form-row">
@@ -234,11 +194,6 @@
           <a href="javascript:;" class="static-link" (click)="onAddPhone()"
             >Remove</a
           >
-          <!-- <div *ngIf="submitted && f.secondaryPhone.errors" class="invalid-feedback">
-                        <div *ngIf="f.secondary.errors.required">
-                          Primary Phone Number is required
-                        </div>
-                      </div> -->
         </label>
 
         <div class="form-row primary-phone">
@@ -285,12 +240,6 @@
               #search
               formControlName="mailingAddress"
             />
-            <!-- <input
-              type="text"
-              placeholder="Enter Mailing Address"
-              class="form-input"
-              formControlName="mailingAddress"
-            /> -->
           </div>
         </div>
         <div class="f-col col-20">
@@ -318,5 +267,4 @@
     </div>
     <input type="submit" class="btn btn-primary" value="Save Changes" />
   </form>
-  <!-- <div class="loading" *ngIf="loading"></div> -->
 </div>

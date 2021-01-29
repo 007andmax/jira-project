@@ -85,4 +85,16 @@ export class CompanyProfileService {
     return this.http.post(`${this.apiUrl}company/${companyId}/logo`, cropImage);
   }
 
+  getAccountingStartDate () {
+    return this.http.get(this.apiUrl + `settings/companyProfile/accountingStartDate`);
+  }
+
+  setAccountingStartDate (data) {
+    return this.http.post(this.apiUrl + `settings/companyProfile/accountingStartDate`, data);
+  }
+
+  resetAccountingStartDate () {
+    return this.http.post(this.apiUrl + `settings/companyProfile/accountingStartDate/reset`, {});
+  }
+
 }

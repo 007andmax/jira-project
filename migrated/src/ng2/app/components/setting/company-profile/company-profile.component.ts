@@ -19,6 +19,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { SettingService } from 'src/ng2/app/services/setting/setting.service';
 import { MapsAPILoader } from '@agm/core';
+import { NgbDatepicker, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { TimeZone } from '../../companies/company-time-zone/class/time-zone';
 
 declare var google: any;
@@ -29,7 +30,10 @@ declare var $: any;
   styleUrls: ['./company-profile.component.scss']
 })
 export class CompanyProfileComponent implements OnInit, OnDestroy {
+  // @ViewChild(NgbDatepicker) dd: NgbDatepicker;
+  // @ViewChild(NgbDatepicker) d: NgbDatepicker;
   cProfileForm: FormGroup;
+  accForm: FormGroup;
   workingHoursForm: FormGroup;
 
   submitted = false;
@@ -90,7 +94,16 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   shortCity = '';
   longState = '';
   shortState = '';
-
+  accountingStartDate: NgbDateStruct = {
+    "day": 0,
+    "month": 0,
+    "year": 0,
+  };
+  accountingEndDate: NgbDateStruct = {
+    "day": new Date().getDate(),
+    "month": new Date().getMonth() + 1,
+    "year": new Date().getFullYear(),
+  };
   @ViewChild('search')
   public searchElementRef: ElementRef;
 
@@ -117,7 +130,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
       timeSettings: { workingDays: [], outliersSeconds: 0 },
       supportMailBox: ''
     };
-
+    this.getAccountingStartDate();
     this.createCProfileForm();
 
     this.getCurrentCompany();
@@ -148,6 +161,21 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     // this.address = place['formatted_address'];
     // this.formattedAddress = place['formatted_address'];
     // this.ngZone.run(() => this.formattedAddress = place['formatted_address']);
+  }
+
+  getAccountingStartDate() {
+    this.companyProfileService.getAccountingStartDate().subscribe(
+      (res: any) => {
+        if (res.accountingStartDate !== null) {
+          this.accountingStartDate = {
+            "day": new Date(res.accountingStartDate).getDate(),
+            "month": new Date(res.accountingStartDate).getMonth() + 1,
+            "year": new Date(res.accountingStartDate).getFullYear(),
+          };
+        }
+      },
+      error => { }
+    );
   }
 
   getAddressAutocomplete() {
@@ -969,5 +997,28 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     const body = document.getElementsByTagName('body')[0];
     body.classList.remove('backMenu'); // remove the class
     body.classList.add('backMenu');
+  }
+
+  saveAccountingDate() {
+    let data = new Date(this.accountingStartDate.month + '/' + this.accountingStartDate.day + '/' + this.accountingStartDate.year).getTime()
+    this.companyProfileService.setAccountingStartDate(data).subscribe(
+      (res: any) => {
+        this.toaster.success('Accounting date updated successfully', null, {
+          timeOut: 3000
+        });
+      },
+      error => { }
+    );
+  }
+
+  resetAccountingDate() {
+    this.companyProfileService.resetAccountingStartDate().subscribe(
+      (res: any) => {
+        this.toaster.success('Accounting date reset successfully', null, {
+          timeOut: 3000
+        });
+      },
+      error => { }
+    );
   }
 }

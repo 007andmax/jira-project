@@ -5,13 +5,7 @@
   <div class="page-insider">
     <div class="heading">
       <h1>
-        <a
-          href="javascript:;"
-          (click)="onBackMenu()"
-          class="back-menu"
-          style="display: none;"
-          >backmneu</a
-        >Manage Tech Users
+        Manage Tech Users
       </h1>
       <div class="heading-serach">
         <a
@@ -56,28 +50,6 @@
                       </span>
                     </span>
                   </span>
-
-                  <!-- <span
-                    class="user-dp online"
-                    *ngIf="
-                      !techUser.requestToChangePassword &&
-                      techUser.isEmailVerified
-                    "
-                  >
-                  <span class="user-tech-dp">
-                    <img
-                      *ngIf="techUser.avatar !== null"
-                      src="/users/{{ techUser.id }}/image.jpg?t={{
-                        techUser.avatar.updatedAt
-                      }}"
-                      alt="user"
-                    />
-                    <span class="simple-dp" *ngIf="techUser.avatar === null">
-                      {{displayFrstLstChar(techUser)}}
-                    </span>
-                  </span>
-
-                  </span> -->
                   <span class="user-dp online" *ngIf="techUser.avatar === null">
                     <img
                       src="../../../../../../ng1/images/setting-module/avtar-56@2x.png"
