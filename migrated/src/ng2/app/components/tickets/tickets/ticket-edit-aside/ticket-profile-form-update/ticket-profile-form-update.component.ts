@@ -108,8 +108,8 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
          restServerAddress = this.constantsStateService.getConstant('rest.server.address'),
          url = 'quicktech://connect?serverIP=' + restServerAddress + '&port=' + remoteConnectPort + '&sessionID=' + this.realSessionId;
        window.open(url, '_self');
-     })*/
-    this.sub.add(getOnRemoveConnection);
+     })
+    this.sub.add(getOnRemoveConnection);*/
     let getOnTicketClosed = this.ticketStateService.getOnTicketClosed().subscribe(data => {
       if (this.remoteSession) this.removeSession();
     })
