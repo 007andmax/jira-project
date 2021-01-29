@@ -5,11 +5,11 @@ export class Dashboard {
     chartData: Array<DashboardChartData> = [];
     saleQuoteCounters: DashboardSaleQuoteCounters = new DashboardSaleQuoteCounters();
     saleQuotesPossibleRevenue: number;
-    serviceAgreementCounters: {CURRENT: 2}
+    serviceAgreementCounters: { CURRENT: 2 }
     totalBillable: number = 0;
     totalOverDue: number = 0;
-    totalReceivable: number = 0;
-    totalReceivableUnpaid: number = 0;
+    totalIncomeAmount: number = 0;
+    totalCustomerDebt: number = 0;
     totalSales: number = 0;
     constructor(data = null) {
         if (data) {
@@ -19,11 +19,11 @@ export class Dashboard {
             this.serviceAgreementCounters = data.serviceAgreementCounters;
             this.totalBillable = data.totalBillable;
             this.totalOverDue = data.totalOverDue;
-            this.totalReceivable = data.totalReceivable;
-            this.totalReceivableUnpaid = data.totalReceivableUnpaid;
+            this.totalIncomeAmount = data.totalIncomeAmount;
+            this.totalCustomerDebt = data.totalCustomerDebt;
             this.totalSales = data.totalSales;
         }
-       
+
     }
-    
+
 }

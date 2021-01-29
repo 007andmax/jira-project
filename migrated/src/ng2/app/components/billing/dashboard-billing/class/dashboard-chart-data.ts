@@ -2,15 +2,15 @@ export class DashboardChartData {
     date: string;
     totalBillable: number;
     totalOverDue: number;
-    totalReceivable: number;
-    totalReceivableUnpaid: number;
+    totalIncomeAmount: number;
+    totalCustomerDebt: number;
     totalSales: number;
     constructor(data) {
         this.date = data.date;
         this.totalBillable = data.totalBillable;
         this.totalOverDue = data.totalOverDue;
-        this.totalReceivable = data.totalReceivable;
-        this.totalReceivableUnpaid = data.totalReceivableUnpaid;
+        this.totalIncomeAmount = data.totalIncomeAmount;
+        this.totalCustomerDebt = data.totalCustomerDebt;
         this.totalSales = data.totalSales;
     }
 }
