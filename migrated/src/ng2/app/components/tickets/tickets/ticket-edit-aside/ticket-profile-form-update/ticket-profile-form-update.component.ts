@@ -20,7 +20,6 @@ import { DraftEmailService } from 'src/ng2/app/services/draft-email/draft-email.
 import { DevicesRealTimeService } from 'src/ng2/app/states/devices/devices-real-time.service';
 import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.service';
 import { ConstantsStateService } from 'src/ng2/app/states/constants/constants-state.service';
-import { ModalCustomShareScreenComponent } from 'src/ng2/app/services/modal/modal-custom-share-screen/modal-custom-share-screen.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
 import { TicketStateService } from '../services/ticket-state.service';
@@ -102,14 +101,6 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
     this.sub.add(oneTimeConnectionArray);
-
-    /* let getOnRemoveConnection = this.devicesStateService.getOnRemoveConnection().subscribe(data => {
-       let remoteConnectPort = this.constantsStateService.getConstant('remote.connect.port'),
-         restServerAddress = this.constantsStateService.getConstant('rest.server.address'),
-         url = 'quicktech://connect?serverIP=' + restServerAddress + '&port=' + remoteConnectPort + '&sessionID=' + this.realSessionId;
-       window.open(url, '_self');
-     })
-    this.sub.add(getOnRemoveConnection);*/
     let getOnTicketClosed = this.ticketStateService.getOnTicketClosed().subscribe(data => {
       if (this.remoteSession) this.removeSession();
     })
@@ -128,13 +119,6 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
       throw 'conectionType is required';
     }
     this.createRemoteAccess(data.sessionId, data.conectionType);
-    /* this.devicesService.getSessionId(data.sessionId, data.conectionType).subscribe((realSessionId: any) => {
-       if (!realSessionId || !realSessionId.sessionId || realSessionId.sessionId.length < 1) {
-         throw "Not session Id"
-       } else {
-         this.createRemoteAccess(realSessionId.sessionId);
-       }
-     });*/
   }
   createRemoteAccess(realSessionId, connectionType) {
     this.realSessionId = realSessionId;
@@ -143,11 +127,6 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.companyId = this.companyIdForSupport;
     modalRef.componentInstance.connectionType = connectionType;
     modalRef.componentInstance.action = 'CONNECT_SUPPORT_DEVICE';
-    document.body.click();
-    this.cd.detectChanges();
-    /* this.realSessionId = realSessionId;
-     const modalRef = this.modalService.open(ModalCustomShareScreenComponent, null);
-     modalRef.componentInstance.companyId = this.companyIdForSupport;*/
     document.body.click();
     this.cd.detectChanges();
   }

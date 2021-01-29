@@ -219,7 +219,6 @@ import { ToFixedDirective } from './directives/to-fixed.directive';
 import { MapModalComponent } from './components/shared/map-modal/map-modal.component';
 import { CompanyInfoHistoryComponent } from './components/tickets/tickets/ticket-edit-aside-company-info/company-info-history/company-info-history.component';
 import { TicketEditAsideRightPanelComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-edit-aside-right-panel/ticket-edit-aside-right-panel.component';
-import { ModalCustomShareScreenComponent } from './services/modal/modal-custom-share-screen/modal-custom-share-screen.component';
 import { CompanyTicketsComponent } from './components/company-tickets/company-tickets.component';
 import { CompanyDashboardComponent } from './components/company-dashboard/company-dashboard.component';
 import { InventoryAddBodyComponent } from './components/inventory/inventory-add-aside/inventory-add-body/inventory-add-body.component';
@@ -776,11 +775,8 @@ angular.module('quicktech')
     MapModalComponent,
     CompanyInfoHistoryComponent,
     TicketEditAsideRightPanelComponent,
-    ModalCustomShareScreenComponent,
     CompanyTicketsComponent,
-
     CompanyDashboardComponent,
-
     InventoryAddBodyComponent,
     ServicePipe,
     LeftPanelSettingsComponent,
@@ -1007,7 +1003,6 @@ angular.module('quicktech')
     TicketsComponent,
     InventoryComponent,
     CompanyProductsComponent,
-    ModalCustomShareScreenComponent,
     BillableComponent,
     BillableTicketsComponent,
     ContractsComponent,

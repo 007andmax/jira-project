@@ -3,7 +3,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { DevicesService } from '../../services/devices/devices.service';
 import { DraftEmailService } from '../../services/draft-email/draft-email.service';
-import { ModalCustomShareScreenComponent } from '../../services/modal/modal-custom-share-screen/modal-custom-share-screen.component';
 import { SupportService } from '../../services/support/support.service';
 import { ConstantsStateService } from '../../states/constants/constants-state.service';
 import { DevicesRealTimeService } from '../../states/devices/devices-real-time.service';
