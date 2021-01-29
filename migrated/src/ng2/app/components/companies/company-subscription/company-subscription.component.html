@@ -1,4 +1,4 @@
-  <div class="grey-dropdown" ngbDropdown>
+  <div class="grey-dropdown" ngbDropdown container="body">
     <i class="icn-sm report-caret-icon"></i>
     <div class="user-subscription"
          id="dropdownServices"
@@ -9,14 +9,14 @@
             </div>
           </ng-template>
     </div>
-    <div ngbDropdownMenu
+    <ul class="qt-dropdown-menu" ngbDropdownMenu
          aria-labelledby="dropdownServices">
          <ng-template ngFor let-tag [ngForOf]="subscriptions" let-i="index" [ngForTrackBy]="trackById">
-            <button ngbDropdownItem
+            <li ngbDropdownItem
                     (click)="selected(i)"
                     [textContent]="tag.title">
-            </button>
+            </li>
           </ng-template>
 
-    </div>
+    </ul>
   </div>

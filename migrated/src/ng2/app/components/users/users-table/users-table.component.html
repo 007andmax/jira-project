@@ -64,7 +64,7 @@
         ngbDropdownMenu
         aria-labelledby="dropdownBasic1"
       >
-        <li class="pointer" ngbDropdownItem>
+        <li class="pointer" *ngIf="!showArchivedUsers" (click)="edit()" ngbDropdownItem>
           <div class="icon__edit qt-bg-contain  qt-sz-16 qt-mr-8"></div>
           Edit
         </li>
@@ -84,9 +84,8 @@
     </div>
   </td>
 
+  <!-- TODO ADD actions for menu buttons  -->
   <!-- <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-    <button ngbDropdownItem *ngIf="!showArchivedUsers" (click)="edit()"><i class="icn-16 edit-grey-ng2"></i>Edit
-    </button>
     <button ngbDropdownItem *ngIf="!showArchivedUsers"><i class="icn-16 send-grey-ng2"></i>Send</button>
     <button ngbDropdownItem *ngIf="currentUser.checkPermission('ARCHIVE_USERS') && !showArchivedUsers"
             (click)="delete()"><i class="icn-16 archive-grey-ng2"></i>Delete
@@ -98,77 +97,3 @@
 
 
 </tr>
-
-
-<!-- <div class="new-users-content__list--item clearfix">
-  <div class="col-md-3 w-100">
-    <label class="checkbox-container">
-      <input type="checkbox" (change)="onSelectUser($event)">
-      <span class="checkbox-mark"></span>
-    </label>
-    <div class="user-details" (click)="showUserDetails()">
-    <div class="circle-avatar"
-         [ngStyle]="{'background':  getUserAvatarUrl()}"
-         [textContent]="getNameForAvatar()">
-    </div>
-    <div class="mob-styles contact">
-      <p class="ff-g-m fz-13 fw-500" [textContent]="getUserName()"></p>
-      <p class="fz-12 mob-hidden" [textContent]="user.designation"></p>
-      <p class="fz-12 desktop-hidden">{{getUserCompanyName()}}</p>
-    </div>
-  </div>
-  </div>
-  <div class="col-md-4 company-location w-100 fz-13">
-    {{getUserCompanyName()}}
-  </div>
-  <div class="col-md-4 w-100 fz-13 info">
-    <div class="phones-numbers">
-      <ng-template ngFor let-phone
-                   [ngForOf]="user.phoneNumbers"
-                   [ngForTrackBy]="trackById">
-
-        <div class="item-phone">
-          <i *ngIf="phone.typeNumber === 'FAX'" class="icn-16 fax-icn"></i>
-          <i *ngIf="phone.typeNumber === 'MOBILE'" class="icn-16 mobile-phone-icn"></i>
-          <i *ngIf="phone.typeNumber === 'OFFICE'" class="icn-16 office-phone-icn"></i>
-          {{phone.number}}
-        </div>
-      </ng-template>
-      <div class="fz-13 desktop-hidden" [textContent]="user.userStatistic.ticketsSubmitted || 0"></div>
-    </div>
-  </div>
-  <div class="col-md-12 position desktop-hidden">
-    <p class="fz-12" [textContent]="user.designation"></p>
-  </div>
-  <div class="col-md-4 subs">
-    <div class="desktop-hidden">Subscription</div>
-    <app-user-table-subscription (onChange)="onChangeSubscriptions($event)"
-                                 [subscription]="user.subscription"></app-user-table-subscription>
-  </div>
-
-
-
-
-  <div class="col-md-1 fz-13 jc-c mob-hidden" [textContent]="user.userStatistic.ticketsSubmitted || 0"></div>
-
-
-
-
-
-
-
-
-
-  <div class="col-md-2">
-    <div class="grey-dropdown right with-icons" ngbDropdown>
-      <i class="icn-16 more-vertical-ng2 pointer"
-         id="dropdownBasic1"
-         ngbDropdownToggle></i>
-      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-        <button ngbDropdownItem *ngIf="!showArchivedUsers" (click)="edit()"><i class="icn-16 edit-grey-ng2"></i>Edit
-        </button>
-        <button ngbDropdownItem *ngIf="!showArchivedUsers"><i class="icn-16 send-grey-ng2"></i>Send</button>
-      </div>
-    </div>
-  </div>
-</div> -->
