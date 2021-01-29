@@ -13,8 +13,10 @@ import { DeviceCompany } from '../class/device-company';
 })
 export class CompanyDevicesRemoteAccessComponent implements OnInit {
   @Input() connectionType: string;
+  @Input() remoteSessionId: string;
   @Input() device: DeviceCompany;
   @Input() companyId: string;
+  @Input() action: string;
   sessionId: string;
   isConnection: boolean = false;
   constructor(private constantsStateService: ConstantsStateService,
@@ -31,14 +33,31 @@ export class CompanyDevicesRemoteAccessComponent implements OnInit {
     window.location.href = '/data/connection-viewer';
   }
   launchRemoteApp() {
-    this.devicesService.createRemoteSession(this.device.id, this.companyId, this.connectionType, null).subscribe((resp: any) => {
-      this.sessionId = resp.sessionId;
-      let remoteConnectPort = this.constantsStateService.getConstant('remote.connect.port'),
-        restServerAddress = this.constantsStateService.getConstant('rest.server.address'),
-        url = 'quicktech://connect?serverIP=' + restServerAddress + '&port=' + remoteConnectPort + '&sessionID=' + resp.sessionId;
-      window.open(url, '_self');
-      this.isConnection = true;
-    })
+    if (this.action === 'CONNECT_DEVICE') {
+      this.devicesService.createRemoteSession(this.device.id, this.companyId, this.connectionType, null).subscribe((resp: any) => {
+        this.sessionId = resp.sessionId;
+        let remoteConnectPort = this.constantsStateService.getConstant('remote.connect.port'),
+          restServerAddress = this.constantsStateService.getConstant('rest.server.address'),
+          url = 'quicktech://connect?serverIP=' + restServerAddress + '&port=' + remoteConnectPort + '&sessionID=' + resp.sessionId;
+        window.open(url, '_self');
+        this.isConnection = true;
+      })
+    }
+    if (this.action === 'CONNECT_SUPPORT_DEVICE') {
+      this.devicesService.getSessionId(this.remoteSessionId, this.connectionType).subscribe((realSessionId: any) => {
+        if (!realSessionId || !realSessionId.sessionId || realSessionId.sessionId.length < 1) {
+          throw "Not session Id"
+        } else {
+          this.sessionId = realSessionId.sessionId;
+          let remoteConnectPort = this.constantsStateService.getConstant('remote.connect.port'),
+            restServerAddress = this.constantsStateService.getConstant('rest.server.address'),
+            url = 'quicktech://connect?serverIP=' + restServerAddress + '&port=' + remoteConnectPort + '&sessionID=' + realSessionId.sessionId;
+          window.open(url, '_self');
+          this.isConnection = true;
+        }
+      });
+    }
+
   }
   close() {
     this.activeModal.dismiss('Cross click');

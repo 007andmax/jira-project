@@ -10,6 +10,7 @@ import { DevicesRealTimeService } from '../../states/devices/devices-real-time.s
 import { DevicesStateService } from '../../states/devices/devices-state.service';
 import { SupportStateService } from '../../states/support/support-state.service';
 import { UsersStateService } from '../../states/users/users-state.service';
+import { CompanyDevicesRemoteAccessComponent } from '../company-devices/company-devices-remote-access/company-devices-remote-access.component';
 import { DraftEmail } from '../shared/draft-email/class/draft-email';
 import { RemoteSession } from './class/remote-sessions';
 
@@ -80,13 +81,13 @@ export class SupportComponent implements OnInit, OnDestroy {
     })
     this.sub.add(oneTimeConnectionArray);
 
-    let getOnRemoveConnection = this.devicesStateService.getOnRemoveConnection().subscribe(data => {
-      let remoteConnectPort = this.constantsStateService.getConstant('remote.connect.port'),
-        restServerAddress = this.constantsStateService.getConstant('rest.server.address'),
-        url = 'quicktech://connect?serverIP=' + restServerAddress + '&port=' + remoteConnectPort + '&sessionID=' + this.realSessionId;
-      window.open(url, '_self');
-    })
-    this.sub.add(getOnRemoveConnection);
+    /* let getOnRemoveConnection = this.devicesStateService.getOnRemoveConnection().subscribe(data => {
+       let remoteConnectPort = this.constantsStateService.getConstant('remote.connect.port'),
+         restServerAddress = this.constantsStateService.getConstant('rest.server.address'),
+         url = 'quicktech://connect?serverIP=' + restServerAddress + '&port=' + remoteConnectPort + '&sessionID=' + this.realSessionId;
+       window.open(url, '_self');
+     })
+     this.sub.add(getOnRemoveConnection);*/
 
     let getHandleFilter = this.supportStateService.getHandleFilter().subscribe(data => {
       this.filter = data;
@@ -115,18 +116,14 @@ export class SupportComponent implements OnInit, OnDestroy {
     if (!data.conectionType) {
       throw 'conectionType is required';
     }
-    this.devicesService.getSessionId(data.sessionId, data.conectionType).subscribe((realSessionId: any) => {
-      if (!realSessionId || !realSessionId.sessionId || realSessionId.sessionId.length < 1) {
-        throw "Not session Id"
-      } else {
-        this.createRemoteAccess(realSessionId.sessionId);
-      }
-    });
+    this.createRemoteAccess(data.sessionId, data.conectionType);
   }
-  createRemoteAccess(realSessionId) {
+  createRemoteAccess(realSessionId, connectionType) {
     this.realSessionId = realSessionId;
-    const modalRef = this.modalService.open(ModalCustomShareScreenComponent, null);
+    const modalRef = this.modalService.open(CompanyDevicesRemoteAccessComponent, null);
     modalRef.componentInstance.companyId = this.companyId;
+    modalRef.componentInstance.connectionType = connectionType;
+    modalRef.componentInstance.action = 'CONNECT_SUPPORT_DEVICE';
     document.body.click();
     this.cd.detectChanges();
   }

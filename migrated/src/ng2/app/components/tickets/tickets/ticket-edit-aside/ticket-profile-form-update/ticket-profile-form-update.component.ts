@@ -24,6 +24,7 @@ import { ModalCustomShareScreenComponent } from 'src/ng2/app/services/modal/moda
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
 import { TicketStateService } from '../services/ticket-state.service';
+import { CompanyDevicesRemoteAccessComponent } from 'src/ng2/app/components/company-devices/company-devices-remote-access/company-devices-remote-access.component';
 
 @Component({
   selector: 'app-ticket-profile-form-update',
@@ -126,18 +127,26 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     if (!data.conectionType) {
       throw 'conectionType is required';
     }
-    this.devicesService.getSessionId(data.sessionId, data.conectionType).subscribe((realSessionId: any) => {
-      if (!realSessionId || !realSessionId.sessionId || realSessionId.sessionId.length < 1) {
-        throw "Not session Id"
-      } else {
-        this.createRemoteAccess(realSessionId.sessionId);
-      }
-    });
+    this.createRemoteAccess(data.sessionId, data.conectionType);
+    /* this.devicesService.getSessionId(data.sessionId, data.conectionType).subscribe((realSessionId: any) => {
+       if (!realSessionId || !realSessionId.sessionId || realSessionId.sessionId.length < 1) {
+         throw "Not session Id"
+       } else {
+         this.createRemoteAccess(realSessionId.sessionId);
+       }
+     });*/
   }
-  createRemoteAccess(realSessionId) {
+  createRemoteAccess(realSessionId, connectionType) {
     this.realSessionId = realSessionId;
-    const modalRef = this.modalService.open(ModalCustomShareScreenComponent, null);
+    const modalRef = this.modalService.open(CompanyDevicesRemoteAccessComponent, null);
     modalRef.componentInstance.companyId = this.companyIdForSupport;
+    modalRef.componentInstance.connectionType = connectionType;
+    modalRef.componentInstance.action = 'CONNECT_SUPPORT_DEVICE';
+    document.body.click();
+    this.cd.detectChanges();
+    /* this.realSessionId = realSessionId;
+     const modalRef = this.modalService.open(ModalCustomShareScreenComponent, null);
+     modalRef.componentInstance.companyId = this.companyIdForSupport;*/
     document.body.click();
     this.cd.detectChanges();
   }

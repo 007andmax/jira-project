@@ -59,6 +59,7 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.connectionType = connectionType;
     modalRef.componentInstance.device = this.device;
     modalRef.componentInstance.companyId = this.device.companyId;
+    modalRef.componentInstance.action = 'CONNECT_DEVICE';
   }
   public getUserName(userId) {
     let user = this.usersStateService.getAllUsers().find(item => item.id === userId);
