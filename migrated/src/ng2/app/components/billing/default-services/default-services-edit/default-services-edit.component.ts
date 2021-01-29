@@ -9,6 +9,7 @@ import { TaxesComponent } from '../../../shared/taxes/taxes.component';
 import { GlNumberService } from 'src/ng2/app/services/gl-number/gl-number.service';
 import { DefaultServicesService } from 'src/ng2/app/services/default-services/default-services.service';
 import { DefaultServiceValidate } from '../class/default-service-validate';
+import { DefaultServicesStateService } from 'src/ng2/app/states/default-services/default-services-state.service';
 
 @Component({
   selector: 'app-default-services-edit',
@@ -16,25 +17,31 @@ import { DefaultServiceValidate } from '../class/default-service-validate';
   styleUrls: ['./default-services-edit.component.scss']
 })
 export class DefaultServicesEditComponent implements OnInit {
+  open: boolean = false;
   glNumbers: Array<GlNumber> = [];
   validate: DefaultServiceValidate = new DefaultServiceValidate();
-  @Input() service: DefaultServices;
+  service: DefaultServices;
   sub: Subscription = new Subscription();
   @ViewChild('glNumberSelect') glNumberSelect: SelectSearchComponent;
-  @ViewChild('taxSelect') taxSelect: TaxesComponent;
   @Output() onClose = new EventEmitter<any>();
   constructor(private glNumberStateService: GlNumberStateService,
     private glNumberService: GlNumberService,
+    private defaultServicesStateService: DefaultServicesStateService,
     private defaultServicesService: DefaultServicesService,
     private taxesStateService: TaxesStateService) { }
 
   ngOnInit() {
+    this.defaultServicesStateService.getShowAsideForEdit().subscribe(data => {
+      this.service = data;
+      // this.taxSelect.setEditItem(this.service.taxes);
+      this.open = true;
+    })
     if (this.glNumberStateService.getGLNumbers().length > 0) this.glNumbers = this.sortGlNumbers(this.glNumberStateService.getGLNumbers());
     let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe((data) => {
       this.glNumbers = this.sortGlNumbers(data);
     })
     this.sub.add(getOnGlNumbers);
-    this.taxSelect.setEditItem(this.service.taxes);
+
   }
   private sortGlNumbers(data) {
     return data.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?
@@ -66,6 +73,7 @@ export class DefaultServicesEditComponent implements OnInit {
     this.service.glNumber = data;
   }
   close() {
+    this.open = false;
     this.onClose.emit(null);
   }
 

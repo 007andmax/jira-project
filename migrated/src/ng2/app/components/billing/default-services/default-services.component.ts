@@ -69,6 +69,7 @@ export class DefaultServicesComponent implements OnInit, OnDestroy {
   }
   onEditService(service) {
     this.editService = new DefaultServices(JSON.parse(JSON.stringify(service)));
+    this.defaultServicesStateService.toggleAsideForEdit(this.editService);
     this.showEditService = true;
   }
   public onFilter(field) {

@@ -1,7 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
+import { DefaultServicesService } from 'src/ng2/app/services/default-services/default-services.service';
 import { GlobalSearchService } from 'src/ng2/app/services/global-search/global-search.service';
+import { ProductService } from 'src/ng2/app/services/product/product.service';
 import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
+import { DefaultServicesStateService } from 'src/ng2/app/states/default-services/default-services-state.service';
+import { InventoryStateService } from 'src/ng2/app/states/inventory/inventory-state.service';
 import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.service';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { GlobalSearchResult } from './class/global-search-result';
@@ -18,7 +22,11 @@ export class GlobalSearchComponent implements OnInit {
   word: string = "";
   constructor(private globalSearchService: GlobalSearchService,
     private ticketsService: TicketsService,
+    private defaultServicesStateService: DefaultServicesStateService,
+    private defaultServicesService: DefaultServicesService,
     private usersStateService: UsersStateService,
+    private productService: ProductService,
+    private inventoryStateService: InventoryStateService,
     private ticketsStateService: TicketsStateService) { }
 
   ngOnInit() {
@@ -65,13 +73,23 @@ export class GlobalSearchComponent implements OnInit {
       this.usersStateService.setUserForEdit(user);
       this.usersStateService.onOpenEditAsige();
     }
+    if (item.type === 'SERVICES') {
+      this.defaultServicesService.getDefaultService(item.id).subscribe(res => {
+        this.defaultServicesStateService.toggleAsideForEdit(res);
+      })
+    }
+    if (item.type === 'PRODUCTS') {
+      this.productService.getProduct(item.id).subscribe(res => {
+        this.inventoryStateService.setEditInventory(res);
+      })
+    }
   }
   clearWord() {
     this.word = "";
     this.list = [];
   }
   isShowType(type) {
-    if (type === 'TICKETS' || type === 'COMPANIES' || type === 'USERS' || type === 'SERVICES') return true;
+    if (type === 'TICKETS' || type === 'COMPANIES' || type === 'USERS' || type === 'SERVICES' || type === 'PRODUCTS') return true;
     return false;
   }
   getText(type) {
@@ -79,6 +97,7 @@ export class GlobalSearchComponent implements OnInit {
     if (type === 'COMPANIES') return 'Companies';
     if (type === 'USERS') return 'Users';
     if (type === 'SERVICES') return 'Services';
+    if (type === 'PRODUCTS') return 'Products';
   }
 
 }

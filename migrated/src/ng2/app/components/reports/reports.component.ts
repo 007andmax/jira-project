@@ -26,25 +26,25 @@ export class ReportsComponent implements OnInit {
     this.quoteStateService.goToState(state);
   }
   public getListTitles(type) {
-    if (type === 'Sales') return ['Product sales report', 'Customer sales report'];
-    if (type === 'Taxes') return ['Tax report'];
-    if (type === 'Commissions') return ['Common report', 'Detailed report'];
-    if (type === 'Financial') return ['Accounts receivable report', 'Accounting report'];
-    if (type === 'Remote Access') return ['Remote connection report'];
-    if (type === 'Devices') return ['Software Summary report', 'Hardware Summary reports', 'Device IP Summary report'];
-    if (type === 'Performance') return ['Tech sales report', 'Tech ticket report', 'Tech service report'];
-    if (type === 'Tickets') return ['Tickets report', 'Service report'];
-    if (type === 'Income accounts') return ['Income account report'];
+    if (type === 'SALES') return ['Product sales report', 'Customer sales report'];
+    if (type === 'TAXES') return ['Tax report'];
+    if (type === 'COMMISSIONS') return ['Common report', 'Detailed report'];
+    if (type === 'FINANCIAL') return ['Accounts receivable report', 'Accounting report'];
+    if (type === 'REMOTE_ACCESS') return ['Remote connection report'];
+    if (type === 'DEVICES') return ['Software Summary report', 'Hardware Summary reports', 'Device IP Summary report'];
+    if (type === 'PERFORMANCE') return ['Tech sales report', 'Tech ticket report', 'Tech service report'];
+    if (type === 'TICKETS') return ['Tickets report', 'Service report'];
+    if (type === 'INCOME_ACCOUNTS') return ['Income account report'];
   }
   public getListStates(type) {
-    if (type === 'Sales') return ['byProducts', 'byCustomers'];
-    if (type === 'Taxes') return ['byTaxes'];
-    if (type === 'Commissions') return ['commissionsReport-common', 'commissionsReport-detailed'];
-    if (type === 'Financial') return ['accounts-receivable', 'accounting-report'];
-    if (type === 'Remote Access') return ['remoteAccess'];
-    if (type === 'Devices') return ['software-summary', 'hardware-summary', 'device-ip-summary'];
-    if (type === 'Performance') return ['techReport-ProductSales', 'techReport-TicketCreated', 'tech-service'];
-    if (type === 'Tickets') return ['ticket-report', 'service-report'];
-    if (type === 'Income accounts') return ['income-accounts'];
+    if (type === 'SALES') return ['byProducts', 'byCustomers'];
+    if (type === 'TAXES') return ['byTaxes'];
+    if (type === 'COMMISSIONS') return ['commissionsReport-common', 'commissionsReport-detailed'];
+    if (type === 'FINANCIAL') return ['accounts-receivable', 'accounting-report'];
+    if (type === 'REMOTE_ACCESS') return ['remoteAccess'];
+    if (type === 'DEVICES') return ['software-summary', 'hardware-summary', 'device-ip-summary'];
+    if (type === 'PERFORMANCE') return ['techReport-ProductSales', 'techReport-TicketCreated', 'tech-service'];
+    if (type === 'TICKETS') return ['ticket-report', 'service-report'];
+    if (type === 'INCOME_ACCOUNTS') return ['income-accounts'];
   }
 }

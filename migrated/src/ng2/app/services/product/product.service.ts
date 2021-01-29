@@ -56,9 +56,9 @@ export class ProductService {
   /**
   * remove category 
   */
- public removeCategory(id) {
-  return this.http.delete(`${this.apiUrl}products/categories/${id}`);
-}
+  public removeCategory(id) {
+    return this.http.delete(`${this.apiUrl}products/categories/${id}`);
+  }
 
 
   /**
@@ -84,6 +84,10 @@ export class ProductService {
  */
   public getProducts() {
     return this.http.get(`${this.apiUrl}products/`).pipe(map((data: any) => data.map(item => new InventoryItem(item))));
+  }
+
+  public getProduct(product_id) {
+    return this.http.get(`${this.apiUrl}products/${product_id}/view`).pipe(map((data: any) => new InventoryItem(data)));
   }
 
   /**

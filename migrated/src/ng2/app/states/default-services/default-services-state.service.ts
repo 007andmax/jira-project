@@ -7,6 +7,7 @@ import { DefaultServices } from '../../components/billing/default-services/class
 export class DefaultServicesStateService {
   serviceForRemove: DefaultServices = null;
   showAsideForAdd: EventEmitter<any> = new EventEmitter();
+  showAsideForEdit: EventEmitter<any> = new EventEmitter();
   constructor() { }
   public setServiceForRemove(data) {
     this.serviceForRemove = data;
@@ -19,5 +20,11 @@ export class DefaultServicesStateService {
   }
   public getShowAsideForAdd() {
     return this.showAsideForAdd;
+  }
+  public toggleAsideForEdit(data) {
+    this.showAsideForEdit.emit(data);
+  }
+  public getShowAsideForEdit() {
+    return this.showAsideForEdit;
   }
 }
