@@ -12,7 +12,7 @@
           <div [textContent]="'3 Users Selected'"></div>
           <div class="qt-ml-25 qt-ff-gm qt-df qt-color-info qt-ai-c qt-pointer">
             <div class="email-ng2 qt-sz-16 qt-ic-c qt-mr-6"></div>
-            <div>Write Draft</div>
+            <div (click)="showAsideForDraftEmail()">Write Draft</div>
           </div>
           <div class="qt-ml-16 qt-ff-gm qt-df qt-color-info qt-ai-c qt-pointer">
             <div class="archive-blue-ng2 qt-sz-16 qt-ic-c qt-mr-6"></div>
@@ -33,6 +33,7 @@
       type="text"
       placeholder="Select Title"
       class="qt-mr-8 qt-input h36 qt-w100"
+      (change)="onSelectAllUser($event)"
     >
     <input
       type="text"
@@ -62,15 +63,15 @@
             </th>
             <th class="users-table__name">
               Name
-              <span class="qt-table-modern__sorting"></span>
+              <span (click)="onFilter('name')" class="qt-table-modern__sorting"></span>
             </th>
             <th class="users-table__company">
               Company
-              <span class="qt-table-modern__sorting"></span>
+              <span (click)="onFilter('company')" class="qt-table-modern__sorting"></span>
             </th>
             <th class="users-table__contract-no">
               Contract no
-              <span class="qt-table-modern__sorting"></span>
+              <span (click)="onFilter('contact')" class="qt-table-modern__sorting"></span>
             </th>
             <th class="users-table__subscription">
               Subscription
@@ -78,7 +79,7 @@
             </th>
             <th class="users-table__tickets">
               Tickets
-              <span class="qt-table-modern__sorting"></span>
+              <span (click)="onFilter('tickets')" class="qt-table-modern__sorting"></span>
             </th>
             <th class="users-table__email"></th>
             <th class="users-table__menu"></th>
@@ -88,31 +89,3 @@
   </div>
 
 </div>
-
-
-
-<!-- ********** Old HEADER ******* -->
-<!-- <div class="new-users-content__header">
-  <h3>Users ({{count}})</h3>
-  <div class="new-users-content__header--search">
-    <div class="new-users-selected">
-      <div class="new-users-selected-qty">
-        <span>2</span> Selected
-      </div>
-      <div class="new-users-selected-actions">
-        <i class="icn-16 email-ng2"></i>
-        <i class="icn-16 archive-blue-ng2"></i>
-        <i class="icn-16 export-ng2"></i>
-      </div>
-    </div>
-    <i class="icn-16 email-ng2"
-    uib-tooltip="Draft email"
-    tooltip-placement="top"
-    (click)="showAsideForDraftEmail()"></i>
-    <button class="new-link desktop-hidden" style="font-size: 13px;" (click)="addUser()">Add User
-    </button>
-    <button class="btn-new btn-primary-white mob-hidden" (click)="addUser()">
-      Add User
-    </button>
-  </div>
-</div> -->

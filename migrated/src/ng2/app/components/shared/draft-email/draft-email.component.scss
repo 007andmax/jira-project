@@ -1,35 +1,39 @@
-/deep/ .angular-editor-button[title='Undo'],	
-/deep/ .angular-editor-button[title='Redo'],	
-/deep/ .angular-editor-button[title='Strikethrough'],	
-/deep/ .angular-editor-button[title='Subscript'],	
-/deep/ .angular-editor-button[title='Superscript'],	
-/deep/ .angular-editor-button[title='Justify Full'],	
-/deep/ .angular-editor-button[title='Indent'],	
-/deep/ .angular-editor-button[title='Outdent'],	
-/deep/ .select-heading[title='Formatting'],	
-/deep/ .angular-editor-button[title='Text Color'],	
-/deep/ .angular-editor-button[title='Background Color'],	
-/deep/ .select-custom-style[title='Custom Style'],	
-/deep/ .angular-editor-button[title='Insert Link'],	
-/deep/ .angular-editor-button[title='Unlink'],	
-/deep/ .angular-editor-button[title='Insert Image'],	
-/deep/ .angular-editor-button[title='Insert Video'],	
-/deep/ .angular-editor-button[title='Horizontal Line'],	
-/deep/ .angular-editor-button[title='HTML Code'],	
-/deep/ .block-label  {	
-    display: none;	
-}	
-/deep/ .angular-editor-toolbar-set {	
-    &:nth-child(1),	
-    &:nth-child(4),	
-    &:nth-child(6),	
-    &:nth-child(9),	
-    &:nth-child(10),	
-    &:nth-child(11),	
-    &:nth-child(13) {	
-        display: none !important;	
-    }	
-}	
-/deep/ .angular-editor-toolbar-set .fa {	
-    color: #4f5f79;	
+/deep/ .angular-editor-button[title='Undo'],
+/deep/ .angular-editor-button[title='Redo'],
+/deep/ .angular-editor-button[title='Strikethrough'],
+/deep/ .angular-editor-button[title='Subscript'],
+/deep/ .angular-editor-button[title='Superscript'],
+/deep/ .angular-editor-button[title='Justify Full'],
+/deep/ .angular-editor-button[title='Indent'],
+/deep/ .angular-editor-button[title='Outdent'],
+/deep/ .select-heading[title='Formatting'],
+/deep/ .angular-editor-button[title='Text Color'],
+/deep/ .angular-editor-button[title='Background Color'],
+/deep/ .select-custom-style[title='Custom Style'],
+/deep/ .angular-editor-button[title='Insert Link'],
+/deep/ .angular-editor-button[title='Unlink'],
+/deep/ .angular-editor-button[title='Insert Image'],
+/deep/ .angular-editor-button[title='Insert Video'],
+/deep/ .angular-editor-button[title='Horizontal Line'],
+/deep/ .angular-editor-button[title='HTML Code'],
+/deep/ .block-label  {
+    display: none;
+}
+/deep/ .angular-editor-toolbar-set {
+    &:nth-child(1),
+    &:nth-child(4),
+    &:nth-child(6),
+    &:nth-child(9),
+    &:nth-child(10),
+    &:nth-child(11),
+    &:nth-child(13) {
+        display: none !important;
+    }
+}
+/deep/ .angular-editor-toolbar-set .fa {
+    color: #4f5f79;
+}
+/deep/ .angular-editor-toolbar {
+  padding-left: 4px !important;
+  padding-right: 4px !important;
 }

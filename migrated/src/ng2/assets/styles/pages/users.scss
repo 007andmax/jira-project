@@ -182,3 +182,67 @@
 app-users-table {
   display: contents;
 }
+
+.draft-email-sidebar {
+  aside.ng-sidebar {
+    width: 592px;
+  }
+
+  &__select-users-container {
+    margin-left: -15px;
+    margin-right: -15px;
+    .mat-form-field-infix::before {
+      display: none;
+    }
+
+    .mat-form-field-infix, .mat-input-element {
+      min-height: 40px !important;
+    }
+
+    label.mat-empty.mat-form-field-empty {
+      padding: 8px 14px !important;
+    }
+
+    .mat-standard-chip.mat-chip-with-trailing-icon {
+      padding-top: 6px;
+      padding-bottom: 6px;
+      padding-right: 7px;
+      padding-left: 8px;
+      font-size: 12px;
+      margin-right: 0px;
+      color: #4f5f79;
+      background-color: #f8f9fa;
+    }
+
+    .mat-chip.mat-standard-chip .mat-chip-remove::before {
+      height: 16px;
+      width: 16px;
+      top: 1px;
+      opacity: 1;
+      right: -4px;
+      filter: brightness(.7);
+    }
+
+    .mat-standard-chip .mat-chip-remove.mat-icon {
+      opacity: 1;
+    }
+
+    button.dropdown-item.ng-star-inserted {
+      font-size: 13px !important;
+      color: #364656 !important;
+      height: 32px !important;
+      padding-left: 15px !important;
+      &:hover {
+        background-color: #edf2f6 !important;
+      }
+    }
+
+
+  }
+
+  .qt-aside-modern__content.new-companies-content__modal--content {
+    .mat-form-field-infix {
+      padding: 3px 5px 4px 5px;
+    }
+  }
+}
