@@ -292,3 +292,37 @@ app-users-table {
     right: 4px;
   }
 }
+
+.remove-user-dialog {
+  width: 552px;
+  height: 216px;
+  padding: 24px;
+  border-radius: 6px;
+  background: white;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &__title {
+    font-size: 20px;
+    line-height: 1.4;
+    letter-spacing: -0.5px;
+    color: #364656;
+  }
+
+  &__subtitle {
+    font-size: 13px;
+    line-height: 1.54;
+    color: #4f5f79;
+  }
+
+  &__close {
+    background-size: contain;
+    cursor: pointer;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+  }
+
+}

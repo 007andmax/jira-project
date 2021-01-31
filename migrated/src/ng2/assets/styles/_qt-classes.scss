@@ -376,6 +376,12 @@
     background-color: white;
   }
 
+  &.--red {
+    color: white;
+    border: solid 1px #ff5263;
+    background-color: #ff5263;
+  }
+
   &.--with-menu {
     padding-right: 0;
     .left-side {
