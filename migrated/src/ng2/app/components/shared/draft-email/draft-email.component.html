@@ -17,10 +17,10 @@
           <draft-email-user-recipients [usersSelected]="usersSelected" *ngIf="action === 'USERS'" (onCompanyEmails)="onChangeCompanyEmails($event)"></draft-email-user-recipients>
         </div>
 
-        <div class="mt-24">
-          <div class="qt-w100 tab-btns">
-            <div [ngClass]="{active: tab == 'plain'}" (click)="tab = 'plain'">Plain Text</div>
-            <div [ngClass]="{active: tab == 'html'}" (click)="tab = 'html'">Paste Html</div>
+        <div>
+          <div class="qt-pt-24 qt-w100 draft-email-sidebar__editor-tab qt-ff-gm">
+            <div class="draft-email-sidebar__editor-tab-item" [ngClass]="{active: tab == 'plain'}" (click)="tab = 'plain'">Plain Text</div>
+            <div class="draft-email-sidebar__editor-tab-item" [ngClass]="{active: tab == 'html'}" (click)="tab = 'html'">Past Html</div>
           </div>
 
           <div class="qt-w100 editor-container qt-mt-0">

@@ -183,7 +183,7 @@ app-users-table {
   display: contents;
 }
 
-.draft-email-sidebar {
+.draft-email-sidebar, .add-user-sidebar {
   aside.ng-sidebar {
     width: 592px;
   }
@@ -244,5 +244,51 @@ app-users-table {
     .mat-form-field-infix {
       padding: 3px 5px 4px 5px;
     }
+  }
+
+  &__editor-tab {
+    display: flex;
+    color: #4f5f79;
+    font-size: 12px;
+  }
+
+  &__editor-tab-item {
+    padding: 0 8px 8px 8px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    &.active {
+      color: #16a4fa;
+      border-color: #16a4fa;
+    }
+  }
+
+  select#fontSelector-, select#fontSizeSelector-  {
+    background-color: white !important;
+    border: 1px solid #e7eaee !important;
+    height: 32px !important;
+  }
+
+  .editor-container .editor-container-attachments  {
+    bottom: 19px;
+    right: 30px;
+  }
+  .textarea.email-text-block {
+    min-height: 230px;
+    padding: 16px 15px;
+    &::placeholder {
+      color: #9ca5b6 !important;
+      line-height: 1;
+    }
+  }
+  .upload-attachments li {
+    justify-content: space-between;
+    margin-bottom: 3px;
+    padding-right: 30px;
+  }
+  .upload-attachments li .hit-area {
+    margin-top: -5px;
+    margin-left: 1px;
+    position: absolute;
+    right: 4px;
   }
 }
