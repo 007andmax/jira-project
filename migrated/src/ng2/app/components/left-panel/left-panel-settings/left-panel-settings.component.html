@@ -32,7 +32,7 @@
         </li>
         <li
             [ngClass]="{'active':componentName === 'ManageTagsComponent'}"
-            *ngIf="currentUser.isOwner || getPermissions('VIEW_TAGS_SETTINGS')"
+            *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TAGS_SETTINGS')"
         >
             <a href="#/ng2/setting/tags">
                 <span class="nav-ico">
@@ -44,6 +44,8 @@
                 Manage Tags
             </a>
         </li>
+
+
 
 
         <li [ngClass]="{'active':componentName === 'GlNumberSettingsComponent'}">
@@ -60,7 +62,7 @@
         <li [ngClass]="{'active':componentName === 'CompanyProfileComponent'}">
             <a
                 href="#/ng2/setting/companyprofile"
-                *ngIf="currentUser.isOwner || getPermissions('VIEW_COMPANY_PROFILE_SETTINGS')"
+                *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_COMPANY_PROFILE_SETTINGS')"
             >
                 <span class="nav-ico">
                     <img
@@ -71,6 +73,8 @@
                 Company Profile
             </a>
         </li>
+
+
 
 
         <li [ngClass]="{'active':componentName === 'TechUsersComponent'}">
@@ -86,6 +90,8 @@
         </li>
 
 
+
+
         <li [ngClass]="{'active':componentName === 'EmailSettingComponent'}">
             <a href="#/ng2/setting/emailSetting">
                 <span class="nav-ico">
@@ -97,6 +103,8 @@
                 Email Settings
             </a>
         </li>
+
+
 
 
         <li [ngClass]="{'active':componentName === 'TaxesSettingsComponent'}">
@@ -112,9 +120,11 @@
         </li>
 
 
+
+
         <li
             [ngClass]="{'active':componentName === 'PermissionManageComponent'}"
-            *ngIf="currentUser.isOwner || getPermissions('VIEW_PERMISSIONS_SETTINGS')"
+            *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_PERMISSIONS_SETTINGS')"
         >
             <a href="#/ng2/setting/permission">
                 <span class="nav-ico">
@@ -126,6 +136,8 @@
                 Permission Management
             </a>
         </li>
+
+
 
 
         <li [ngClass]="{'active':componentName === 'EmailTempleteComponent'}">
@@ -141,6 +153,8 @@
         </li>
 
 
+
+
         <li [ngClass]="{'active':componentName === 'IntegrationsComponent'}">
             <a href="#/ng2/setting/integration">
                 <span class="nav-ico">
@@ -152,6 +166,8 @@
                 Integrations
             </a>
         </li>
+
+
 
 
         <li [ngClass]="{'active':componentName === 'InvoiceTicketsComponent'}">
@@ -176,6 +192,8 @@
                 Commissions
             </a>
         </li>
+
+
 
 
         <li [ngClass]="{'active':componentName === 'SubscriptionComponent'}">
