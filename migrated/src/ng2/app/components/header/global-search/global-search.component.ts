@@ -41,6 +41,10 @@ export class GlobalSearchComponent implements OnInit {
     this.indexNoAvatar = this.ticketsListService.randomInteger(0, 3);
   }
   onSearch() {
+    if (this.word.length == 0) {
+      this.list = [];
+      return;
+    }
     this.globalSearchService.search(this.word).subscribe(data => {
       this.list = data;
       this.selectedType = (this.list.length > 0) ? this.list[0].type : 'TICKETS';
@@ -52,7 +56,7 @@ export class GlobalSearchComponent implements OnInit {
     if (this.word.length > 0) this.globalSearch.open();
   }
   togglePanel(data, event) {
-    event.target.closest('.card').classList.toggle('opened-card');
+    // event.target.closest('.card').classList.toggle('opened-card');
     if (!data) {
     }
   }
