@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { InvoicesAsidePreviewComponent } from '../../billing/invoices/invoices-aside-preview/invoices-aside-preview.component';
 import { Invoice } from '../../billing/invoices/class/invoice';
 import { InvoicesService } from '../../../services/invoices/invoices.service';
+import { InvoiceStateService } from 'src/ng2/app/states/invoice/invoice-state.service';
 
 @Component({
   selector: 'app-company-dash-invoice',
@@ -13,26 +14,27 @@ import { InvoicesService } from '../../../services/invoices/invoices.service';
 })
 export class CompanyDashInvoiceComponent implements OnInit {
 
-  _id:string = '';
+  _id: string = '';
   recentInvoiceList = [];
   sub: Subscription = new Subscription();
-  showPreviewInvoice: boolean = false;
-  previewInvoice: Invoice;
+  //showPreviewInvoice: boolean = false;
+  //previewInvoice: Invoice;
   @Input() public set companyName(val: string) {
     if (val !== '' && val !== null && val !== undefined) {
       this.getRecentInvoiceList(val);
     }
   }
-  @ViewChild('previewInvoiceAside') previewInvoiceAside: InvoicesAsidePreviewComponent;
+  // @ViewChild('previewInvoiceAside') previewInvoiceAside: InvoicesAsidePreviewComponent;
 
   public constructor(private companiesService: CompaniesService,
+    private invoiceStateService: InvoiceStateService,
     private invoicesService: InvoicesService,
     public cd: ChangeDetectorRef) { }
 
   public ngOnInit() {
     this._id = /[^/]*$/.exec(window.location.href)[0];
     // this.getRecentInvoiceList();
-    
+
   }
 
   getRecentInvoiceList(companyName: string) {
@@ -50,17 +52,18 @@ export class CompanyDashInvoiceComponent implements OnInit {
   }
 
   onPreviewInvoice(data) {
-    this.previewInvoice = data;
-    if (this.showPreviewInvoice) {
-      this.cd.detectChanges();
-      this.previewInvoiceAside.onGetInvoice();
-    }
-    this.showPreviewInvoice = true;
+    this.invoiceStateService.togglePreview(data.id);
+    /*  this.previewInvoice = data;
+      if (this.showPreviewInvoice) {
+        this.cd.detectChanges();
+        this.previewInvoiceAside.onGetInvoice();
+      }
+      this.showPreviewInvoice = true;*/
   }
 
   onRemoveInvoice(invoice) {
     this.invoicesService.remove(invoice.id).subscribe(data => {
-      this.showPreviewInvoice = false;
+      //  this.showPreviewInvoice = false;
     })
   }
 

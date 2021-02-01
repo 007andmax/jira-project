@@ -10,39 +10,46 @@ import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.se
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { GlobalSearchResult } from './class/global-search-result';
 import { GlobalSearchResultItem } from './class/global-search-result-item';
+import { InvoiceStateService } from 'src/ng2/app/states/invoice/invoice-state.service';
+import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 
 @Component({
   selector: 'app-global-search',
   templateUrl: './global-search.component.html',
-  styleUrls: ['./global-search.component.scss']
+  styleUrls: ['./global-search.component.scss'],
+  providers: [TicketsListService]
 })
 export class GlobalSearchComponent implements OnInit {
   @ViewChild('globalSearch') globalSearch: NgbDropdown;
+  selectedType: string = 'TICKETS';
   list: Array<GlobalSearchResult> = [];
+  indexNoAvatar: number = 0;
+  listColorNoAvatar = ['#0cdeaa', '#16a4fa', '#7c77cb', '#ffb937'];
   word: string = "";
   constructor(private globalSearchService: GlobalSearchService,
     private ticketsService: TicketsService,
+    private invoiceStateService: InvoiceStateService,
     private defaultServicesStateService: DefaultServicesStateService,
     private defaultServicesService: DefaultServicesService,
     private usersStateService: UsersStateService,
     private productService: ProductService,
     private inventoryStateService: InventoryStateService,
+    public ticketsListService: TicketsListService,
     private ticketsStateService: TicketsStateService) { }
 
   ngOnInit() {
+    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 3);
   }
   onSearch() {
     this.globalSearchService.search(this.word).subscribe(data => {
       this.list = data;
+      this.selectedType = (this.list.length > 0) ? this.list[0].type : 'TICKETS';
       this.onShowDropDown();
       console.log(this.list);
     })
   }
   onShowDropDown() {
     if (this.word.length > 0) this.globalSearch.open();
-  }
-  onCloseProducts(open) {
-
   }
   togglePanel(data, event) {
     event.target.closest('.card').classList.toggle('opened-card');
@@ -64,12 +71,12 @@ export class GlobalSearchComponent implements OnInit {
       console.log(item);
       this.ticketsStateService.onOpenTicket();
       this.ticketsService.getTicket(item.id).subscribe(data => {
-        //  data.setUserCompanies(ticket.userCompanies);
         this.ticketsStateService.onEditTicket(data);
       })
     }
     if (item.type === 'USERS') {
-      let user = this.usersStateService.getAllUsers().find(userItem => userItem.id === item.id);
+      let user = this.getUserById(item.id);
+      console.log("user", user);
       this.usersStateService.setUserForEdit(user);
       this.usersStateService.onOpenEditAsige();
     }
@@ -83,14 +90,37 @@ export class GlobalSearchComponent implements OnInit {
         this.inventoryStateService.setEditInventory(res);
       })
     }
+    if (item.type === 'INVOICES') {
+      this.invoiceStateService.togglePreview(item.id);
+    }
+  }
+  getUserById(id) {
+    return this.usersStateService.getAllUsers().find(userItem => userItem.id === id);
+  }
+  getNameForAvatar(item) {
+    let user = this.getUserById(item.id);
+    if (!user.avatar) return `${(user.firstName) ? user.firstName[0].toUpperCase() : ''}${(user.lastName) ? user.lastName[0].toUpperCase() : ''}`;
+    return '';
   }
   clearWord() {
     this.word = "";
     this.list = [];
   }
   isShowType(type) {
-    if (type === 'TICKETS' || type === 'COMPANIES' || type === 'USERS' || type === 'SERVICES' || type === 'PRODUCTS') return true;
+    if (type === 'TICKETS' || type === 'COMPANIES' || type === 'USERS' || type === 'SERVICES' || type === 'PRODUCTS' || type === 'INVOICES') return true;
     return false;
+  }
+  getFistLine(item) {
+    if (item.type !== 'INVOICES') return `${item.name}`;
+    if (item.type === 'INVOICES') return `${item.info}`;
+  }
+  getSecondLine(item) {
+    if (item.type !== 'INVOICES') return `${item.info}`;
+    if (item.type === 'INVOICES') return `${item.name} ${item.extraInfo}`;
+  }
+  getTypeList(type) {
+    let find = this.list.find(item => item.type === type);
+    return (find) ? find.list : [];
   }
   getText(type) {
     if (type === 'TICKETS') return 'Tickets';
@@ -98,6 +128,6 @@ export class GlobalSearchComponent implements OnInit {
     if (type === 'USERS') return 'Users';
     if (type === 'SERVICES') return 'Services';
     if (type === 'PRODUCTS') return 'Products';
+    if (type === 'INVOICES') return 'Invoices';
   }
-
 }

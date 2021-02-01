@@ -32,7 +32,7 @@ export class UsersAsideEditComponent implements OnInit {
   phoneTypes = ['Office', 'Mobile', 'Fax'];
   constructor(private imageCropperStateService: ImageCropperStateService, private usersStateService: UsersStateService,
     private usersAsideService: UsersAsideService,
-     private usersService: UsersService,
+    private usersService: UsersService,
     private companiesState: SelectClientCompanyStateService,
     private companiesStateService: CompaniesStateService,
     private modalImageCropperStateService: ModalImageCropperStateService,
@@ -133,7 +133,7 @@ export class UsersAsideEditComponent implements OnInit {
     if (this.user.primaryEmail && this.user.primaryEmail.length > 0 && this.user.companyId) this.onCheckValidPrimaryEmail();
   }
   onCheckValidPrimaryEmail() {
-    this.usersService.checkValidPrimaryEmail(this.user.primaryEmail, this.user.companyId,this.usersStateService.getuserForEdit().id).subscribe((data: any) => {
+    this.usersService.checkValidPrimaryEmail(this.user.primaryEmail, this.user.companyId, this.usersStateService.getuserForEdit().id).subscribe((data: any) => {
 
       this.validate.setExistPrimaryContactEmail(data.value);
       this.cd.detectChanges();
@@ -161,7 +161,7 @@ export class UsersAsideEditComponent implements OnInit {
     this.user.serCompanyId((selectClient === 'null') ? null : selectClient.item.id);
     if (selectClient !== 'null') this.validate.setCompanyValid();
     if (this.user.primaryEmail && this.user.primaryEmail.length > 0 && this.user.companyId) this.onCheckValidPrimaryEmail();
- 
+
   }
 
   onSave() {

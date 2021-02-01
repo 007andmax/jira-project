@@ -12,6 +12,7 @@ import { Invoice } from '../invoices/class/invoice';
 import { InvoicesAsidePreviewComponent } from '../invoices/invoices-aside-preview/invoices-aside-preview.component';
 import { PaymentsRealTimeService } from 'src/ng2/app/states/payments/payments-real-time.service';
 import { LeftPanelStateService } from 'src/ng2/app/states/left-panel/left-panel-state.service';
+import { InvoiceStateService } from 'src/ng2/app/states/invoice/invoice-state.service';
 
 @Component({
   selector: 'payments',
@@ -38,13 +39,14 @@ export class PaymentsComponent implements OnInit {
   detailsPayment: Payment;
   refundPayment: Payment;
   editPayment: Payment;
-  previewInvoiceId: string;
-  showPreviewInvoice: boolean = false;
+  // previewInvoiceId: string;
+  //showPreviewInvoice: boolean = false;
   selectedPayments: Array<Payment> = [];
-  @ViewChild('previewInvoiceAside') previewInvoiceAside: InvoicesAsidePreviewComponent;
+  // @ViewChild('previewInvoiceAside') previewInvoiceAside: InvoicesAsidePreviewComponent;
   sub: Subscription = new Subscription();
   constructor(private paymentsService: PaymentsService,
     public cd: ChangeDetectorRef,
+    private invoiceStateService: InvoiceStateService,
     private companiesStateService: CompaniesStateService,
     private paymentsStateService: PaymentsStateService,
     private confirmStateService: ConfirmStateService,
@@ -111,12 +113,13 @@ export class PaymentsComponent implements OnInit {
     this.showEditPayment = true;
   }
   onPreviewInvoice(data) {
-    this.previewInvoiceId = data;
-    if (this.showPreviewInvoice) {
-      this.cd.detectChanges();
-      this.previewInvoiceAside.onGetInvoice();
-    }
-    this.showPreviewInvoice = true;
+    this.invoiceStateService.togglePreview(data);
+    /*  this.previewInvoiceId = data;
+      if (this.showPreviewInvoice) {
+        this.cd.detectChanges();
+        this.previewInvoiceAside.onGetInvoice();
+      }
+      this.showPreviewInvoice = true;*/
   }
   onRefundPayment(data) {
     this.refundPayment = data;

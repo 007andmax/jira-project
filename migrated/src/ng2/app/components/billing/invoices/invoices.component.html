@@ -1,6 +1,7 @@
 <div class="page-list invoices-page">
 
 
+
     <div class="qt-df qt-fd-c qt-jc-sb invoices-page__list-container">
         <div>
             <app-invoices-header
@@ -38,8 +39,10 @@
 
 
 
+
             </div>
         </div>
+
 
 
         <div class="total-info">
@@ -60,8 +63,10 @@
         </div>
 
 
+
     </div>
 </div>
+
 
 
 <app-invoices-aside
@@ -69,9 +74,3 @@
     (onClose)="onCloseCreatePayment()"
     [selectedInvoices]="selectedInvoices"
 ></app-invoices-aside>
-<app-invoices-aside-preview
-    #previewInvoiceAside
-    *ngIf="showPreviewInvoice"
-    (onClose)="showPreviewInvoice = false"
-    [invoiceId]="previewInvoice.id"
-></app-invoices-aside-preview>
