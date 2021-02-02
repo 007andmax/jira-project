@@ -1,5 +1,30 @@
-<nav class="topNavbar">
-    <div class="topNavbar-content">
+
+<div class="nav-header__left-side">1</div>
+
+<div class="nav-header__rigth-side">
+  <div class="nav-header__account-info">
+    <div class="qt-df qt-ai-fe qt-fd-c">
+      <div class="nav-header__account-info-company-name">{{ (currentCompany) ? currentCompany.name : ''}}</div>
+      <div class="nav-header__account-info-user-name" [textContent]="getCurrentUserName()"></div>
+    </div>
+    <div ngbDropdown>
+      <div id="dropdownCompany" ngbDropdownToggle class="nav-header__account-info-menu icon__dropdown-down"></div>
+      <ul class="qt-dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownCompany">
+        <li ngbDropdownItem (click)="goToLink('#/ng2/setting/myprofile')">
+          My Profile
+        </li>
+        <li ngbDropdownItem (click)="logOut()">
+          Logout
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+
+
+    <!-- <div class="topNavbar-content">
         <div class="topNavbarLeft ellipsis">
             <div (click)="onToggleLeftPanel()">
                 <a
@@ -11,305 +36,7 @@
                     <i class="icn-sm icn-back-arrow"></i>
                 </a>
             </div>
-            <!-- <p ng-if="!globalSearch.selectedItemsCount && (globalSearch.openedItemName || getPageNameByState())">
-                <span style="font-family: 'Graphik-Light', sans-serif;">
-                    {{ globalSearch.openedItemName ? globalSearch.openedItemName : userReadable(getPageNameByState()) }}
-                </span>
-                <span
-                    class="text-muted"
-                    ng-if="(globalSearch.count || globalSearch.count === 0) && !isCompanyProfileTicketPageIsOpen() && !showCounter "
-                >
-                    &nbsp;{{ globalSearch.count }}
-                </span>
-                <span
-                    class="text-muted"
-                    ng-if="(isCompanyProfileTicketPageIsOpen() && !ticketsSharedState.filter.clientUserId && !ticketsSharedState.filter.techUserId) && !(companyProfileSharedState.ticketsCounts[companyProfileTabsMap[getOpenedUsersTab()]] > globalSearch.count)"
-                >
-                    &nbsp;{{ companyProfileSharedState.ticketsCounts[companyProfileTabsMap[getOpenedUsersTab()]] }}
-                </span>
-                <span
-                    class="text-muted"
-                    ng-if="(isCompanyProfileTicketPageIsOpen() && (ticketsSharedState.filter.clientUserId || ticketsSharedState.filter.techUserId)) || companyProfileSharedState.ticketsCounts[companyProfileTabsMap[getOpenedUsersTab()]] > globalSearch.count"
-                >
-                    &nbsp;{{ globalSearch.count }}
-                </span>
-            </p>
 
-            <p ng-if="globalSearch.selectedItemsCount">
-                <strong>{{ globalSearch.selectedItemsCount }}</strong>
-                &nbsp;
-                <span class="text-muted">Selected</span>
-            </p> -->
-        </div>
-        <div class="search-block">
-            <!-- <div
-                class="topNavbarLeft-Left"
-                ng-if="isShowTicketsBulkAction() || isShowDraftsBulkAction()"
-            >
-
-                <div
-                    ng-if="isShowTicketsBulkAction()"
-                    class="topNavbar-filter"
-                    ng-controller="quicktech.core.header.ticketsBulkCtrl"
-                >
-
-                    <div
-                        style="display: inline-block;"
-                        uib-dropdown
-                        ng-if="TicketsPermissionsService.isActionVisible('assign', ticketsSharedState.selectedTickets)"
-                    >
-
-                        <div
-                            class="btn-icn btn btn-default has-tooltip"
-                            tooltip-placement="bottom"
-                            uib-tooltip="assign ticket to..."
-                            aria-haspopup="true"
-                            uib-dropdown-toggle
-                            ng-click="isShowAssignUser = true"
-                        >
-                            <i
-                                class="icon-sm icon-user"
-                                style="margin-top: -30px;"
-                            ></i>
-                        </div>
-
-                        <div
-                            class="dropdown-assign-ticket dropdown-menu"
-                            style="width: auto; margin-top: -10px;"
-                            stop-propagation="click"
-                            ng-if="isShowAssignUser"
-                            assign-user-button
-                            aub-ticket-id="ticketsSharedState.checkedTicketsIds"
-                            ticket-assigned-user-id="ticket.assignedUser.id"
-                            aub-is-bulk-operation="true"
-                            aub-ticket-number="ticket.number"
-                            users="usersCurrentCompany"
-                            aub-current-user="currentUser"
-                        ></div>
-                    </div>
-
-                    <div
-                        style="display: inline-block;"
-                        uib-dropdown
-                        ng-if="TicketsPermissionsService.isActionVisible('change_priority', ticketsSharedState.selectedTickets)"
-                    >
-
-                        <div
-                            class="btn-icn btn btn-default has-tooltip"
-                            tooltip-placement="bottom"
-                            uib-tooltip="Change Priority to..."
-                            aria-haspopup="true"
-                            uib-dropdown-toggle
-                        >
-                            <i
-                                class="icon-sm icon-ticket-flag"
-                                style="margin-top: -30px;"
-                            ></i>
-                        </div>
-
-                        <ul
-                            class="dropdown-menu dropdown-priority"
-                            style="margin-top: -10px;"
-                            role="menu"
-                        >
-
-                            <li ng-click="changeTicketPriority('LOW')">
-                                <a
-                                    tabindex="-1"
-                                    href="javascript:void(0)"
-                                >
-                                    <span class="priority-dot low"></span>
-                                    Low
-                                </a>
-                            </li>
-
-                            <li ng-click="changeTicketPriority('MEDIUM')">
-                                <a
-                                    tabindex="-1"
-                                    href="javascript:void(0)"
-                                >
-                                    <span class="priority-dot medium"></span>
-                                    Medium
-                                </a>
-                            </li>
-
-                            <li ng-click="changeTicketPriority('HIGH')">
-                                <a
-                                    tabindex="-1"
-                                    href="javascript:void(0)"
-                                >
-                                    <span class="priority-dot high"></span>
-                                    High
-                                </a>
-                            </li>
-
-                        </ul>
-                    </div>
-
-                    <div
-                        class="more"
-                        uib-dropdown
-                        ng-if="TicketsPermissionsService.isActionVisible('change_status,send_to_spam,send_to_trash,restore', ticketsSharedState.selectedTickets)"
-                    >
-
-                        <a
-                            class="hit-area ha-22-38 has-tooltip"
-                            tooltip-placement="bottom"
-                            uib-tooltip="More"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                            uib-dropdown-toggle
-                        >
-                            <i class="icn-sm icn-more"></i>
-                        </a>
-
-                        <ul
-                            class="dropdown-menu"
-                            role="menu"
-                            style="overflow: visible; font-size: 14.1px;"
-                        >
-
-                            <li class="dropdown-submenu">
-                                <a
-                                    tabindex="-1"
-                                    href="javascript:void(0)"
-                                    ng-if="TicketsPermissionsService.isActionVisible('change_status', ticketsSharedState.selectedTickets)"
-                                >
-                                    Change Status to...
-                                </a>
-
-                                <div class="dropdown-submenu-wrapper">
-                                    <ul class="dropdown-menu dropdown-priority">
-
-                                        <li ng-click="changeTicketStatus('IN_PROGRESS')">
-                                            <a
-                                                tabindex="-1"
-                                                href="javascript:void(0)"
-                                            >
-                                                In Progress
-                                            </a>
-                                        </li>
-
-                                        <li ng-click="changeTicketStatus('ON_HOLD')">
-                                            <a
-                                                tabindex="-1"
-                                                href="javascript:void(0)"
-                                            >
-                                                On Hold
-                                            </a>
-                                        </li>
-
-                                    </ul>
-                                </div>
-                            </li>
-
-                            <li
-                                class="dropdown-submenu dropdown linked-agent-dropdown"
-                                ng-if="ticketsSharedState.agentList && ticketsSharedState.agentList.length &&
-                        TicketsPermissionsService.isActionVisible('link_agent', ticketsSharedState.selectedTickets, ticketsSharedState.selectedTickets[0].company)"
-                            >
-                                <a
-                                    tabindex="-1"
-                                    href="javascript:void(0)"
-                                    data-toggle="dropdown"
-                                >
-                                    Link with Agent
-                                </a>
-                                <ul class="dropdown-submenu-wrapper dropdown-menu">
-                                    <li
-                                        ng-repeat="agent in ticketsSharedState.agentList"
-                                        ng-click="bulkLinkAgent(ticketsSharedState.checkedTicketsIds, agent.id, agent.hostName || agent.ip)"
-                                    >
-                                        {{ agent.hostName || agent.ip }}
-                                    </li>
-                                </ul>
-                            </li>
-
-                            <li>
-                                <a
-                                    tabindex="-1"
-                                    href="javascript:void(0)"
-                                    ng-click="bulkLinkAgent(ticketsSharedState.checkedTicketsIds, '')"
-                                >
-                                    Unlink Agent
-                                </a>
-                            </li>
-
-                            <li
-                                ng-click="moveIntoSpam()"
-                                ng-if="TicketsPermissionsService.isActionVisible('send_to_spam', ticketsSharedState.selectedTickets)"
-                            >
-                                <a
-                                    tabindex="-1"
-                                    href="javascript:void(0)"
-                                >
-                                    {{ currentUser.isOwner ? 'Mark as Spam' : 'Report as Spam'
-                  }}
-                                </a>
-                            </li>
-
-                            <li ng-if="TicketsPermissionsService.isActionVisible('send_to_trash', ticketsSharedState.selectedTickets)">
-                                <a
-                                    tabindex="-1"
-                                    href="javascript:void(0)"
-                                    ng-click="moveToTrash(true)"
-                                >
-                                    Move to Trash
-                                </a>
-                            </li>
-
-                            <li ng-if="TicketsPermissionsService.isActionVisible('restore', ticketsSharedState.selectedTickets, 'from_spam')">
-                                <a
-                                    tabindex="-1"
-                                    href="javascript:void(0)"
-                                    ng-click="restoreFromSpam()"
-                                >
-                                    Restore from Spam
-                                </a>
-                            </li>
-
-                            <li ng-if="TicketsPermissionsService.isActionVisible('restore', ticketsSharedState.selectedTickets, 'from_trash')">
-                                <a
-                                    tabindex="-1"
-                                    href="javascript:void(0)"
-                                    ng-click="moveToTrash(false)"
-                                >
-                                    Restore from Trash
-                                </a>
-                            </li>
-
-                        </ul>
-
-                    </div>
-
-                    <div
-                        ng-if="TicketsPermissionsService.isActionVisible('delete_forever', ticketsSharedState.selectedTickets)"
-                        class="btn-icn btn btn-default has-tooltip"
-                        tooltip-placement="bottom"
-                        uib-tooltip="Delete Forever"
-                        ng-click="deleteForever()"
-                    >
-                        <i
-                            class="icon-sm icn-delete-white"
-                            style="margin-top: -35px;"
-                        ></i>
-                    </div>
-                </div>
-                <div
-                    ng-if="isShowDraftsBulkAction()"
-                    class="topNavbar-filter"
-                    ng-controller="quicktech.core.header.draftsBulkCtrl"
-                >
-                    <div
-                        class="btn-icn btn btn-default has-tooltip"
-                        tooltip-placement="bottom"
-                        uib-tooltip="delete forever"
-                        ng-click="deleteForever()"
-                    >
-                        <i class="icon-sm icn-delete-white"></i>
-                    </div>
-                </div>
-            </div> -->
             <div class="searchField">
                 <app-global-search></app-global-search>
             </div>
@@ -327,13 +54,6 @@
                             <i class="icn-sm icn-plus"></i>
                         </div>
                     </div>
-
-
-
-
-
-
-
 
                     <ul
                         class="dropdown-menu tag-list"
@@ -419,45 +139,12 @@
                     ngbDropdownToggle
                     id="dropdownCompany"
                 >
-                    {{ (currentCompany) ? currentCompany.name : ''}}
+
                     <i class="icn-sm icn-expand"></i>
                     <i class="icn-sm icn-collapse"></i>
                 </div>
-                <ul
-                    class="dropdown-menu tag-list"
-                    ngbDropdownMenu
-                    aria-labelledby="dropdownCompany"
-                >
-                    <li
-                        class="topNavbar-logout"
-                        ngbDropdownItem
-                        (click)="goToLink('#/ng2/setting/myprofile')"
-                    >
-                        <a
-                            href="javascript:void(0)"
-                            class="ha-20-16"
-                        >
-                            <span>My Profile</span>
-                        </a>
-                    </li>
-                    <li
-                        class="topNavbar-logout"
-                        ngbDropdownItem
-                        (click)="logOut()"
-                    >
-                        <a
-                            href="javascript:void(0)"
-                            class="ha-20-16"
-                        >
-                            <span>Logout</span>
-                        </a>
-                    </li>
-                </ul>
+
             </div>
-            <div
-                class="nickname-wrapper"
-                [textContent]="getCurrentUserName()"
-            ></div>
+
         </div>
-    </div>
-</nav>
+    </div> -->

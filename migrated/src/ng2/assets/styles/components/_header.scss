@@ -1,0 +1,69 @@
+.nav-header {
+  position: fixed;
+  z-index: 1050;
+  top: 0;
+  right: 0;
+  height: 64px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+  background-color: #ffffff;
+  width: calc(100% - 315px);
+  transition: width 300ms;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &.--full-width {
+    width: calc(100% - 76px);
+  }
+
+  &__account-info {
+    width: 256px;
+    display: flex;
+    border-left: 1px solid #edf0f2;
+    padding: 12px 24px 12px 12px;
+  }
+
+  &__account-info-menu {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid #c5cdd5;
+    margin-left: 8px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+  }
+
+  &__account-info-company-name {
+    color: #4f5f79;
+    font-size: 13px;
+    line-height: 1.54;
+    margin-bottom: 2px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 191px;
+    display: inline-block;
+    white-space: nowrap;
+    font-family: Graphik-Medium, sans-serif;
+  }
+
+  &__account-info-user-name {
+    color: #9ca5b6;
+    font-size: 12px;
+    line-height: 1.33;
+    text-align: right;
+    width: fit-content;
+    position: relative;
+    &::before {
+      content: '';
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: #2ec866;
+      left: -10px;
+      top: calc(50% - 3px);
+    }
+  }
+}

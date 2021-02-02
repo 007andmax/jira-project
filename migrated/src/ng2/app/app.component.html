@@ -3,25 +3,11 @@
     user-notification
     style="z-index: 991;"
 ></div>
-<div
-    class="top-bar"
-    style="z-index: 991;"
-    ng-include="'/ng1/scripts/core/header/header.tpl.html'"
-></div>
 <app-header
-    class="top-bar"
-    [ngClass]="{'full-header':toggleLeftPanel,
-            'no-full-header':!toggleLeftPanel}"
-    style="z-index: 991;"
+    class="nav-header"
+    [ngClass]="{'--full-width':toggleLeftPanel}"
 ></app-header>
 <app-left-panel [ngClass]="{'hidden-left-panel':toggleLeftPanel}"></app-left-panel>
-<div
-    ng-controller="quicktech.core.header.headerCtrl"
-    class="mobile-top-bar"
-    ng-class="{ 'ticket-detail-header': isTicketOpened && !isTicketEditOpened, 'ticket-create-update': isTicketEditOpened }"
-    style="z-index: 991;"
-    ng-include="'/ng1/scripts/core/header/mobile-header.tpl.html'"
-></div>
 <aside
     id="left"
     style="z-index: 991;"
@@ -63,9 +49,6 @@
                 <app-default-services-edit></app-default-services-edit>
                 <app-inventory-edit-aside></app-inventory-edit-aside>
                 <app-invoices-aside-preview></app-invoices-aside-preview>
-
-
-
             </div>
         </div>
     </div>
