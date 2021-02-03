@@ -528,6 +528,15 @@
   &__dropdown-down {
     background-image: url("assets/img/icons/dropdown-down.svg") ;
   }
+  &__notifications {
+    background-image: url("assets/img/icons/notifications.svg");
+  }
+  &__add-white {
+    background-image: url("assets/img/icons/add-white.svg");
+  }
+  &__close-round {
+    background-image: url("assets/img/icons/close-round.svg");
+  }
 
   &.--updated {
     position: relative;

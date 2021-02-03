@@ -1,99 +1,46 @@
-<div
-    class="topNavbarLeft-Left "
-    ngbDropdown
-    [autoClose]="'outside'"
-    #globalSearch="ngbDropdown"
->
-    <div
-        class="topNavbar-search global-search "
-        ngbDropdownAnchor
-    >
-        <div class="input-group-search dropdown">
-            <input
-                type="text"
-                class="form-control-top-search"
-                placeholder="Global search..."
-                autocomplete="off"
-                [(ngModel)]="word"
-                (input)="onSearch()"
-                (click)="onShowDropDown()"
-            >
-            <span
-                class="input-group-addon-search"
-                *ngIf="word.length > 0"
-                (click)="clearWord()"
-            >
-                <i class="icn-sm icn-search form-control-top-search-icn disabled"></i>
-                <i
-                    class="icn-sm icn-remove-old"
-                    style="cursor:pointer;pointer-events: auto;"
-                ></i>
-            </span>
-        </div>
+<div class="global-search" ngbDropdown [autoClose]="'outside'" #globalSearch="ngbDropdown">
+  <div ngbDropdownAnchor>
+    <span class="qt-input-search">
+      <input
+        type="text"
+        class="global-search__input"
+        placeholder="Global search"
+        autocomplete="off"
+        [(ngModel)]="word"
+        (input)="onSearch()"
+        (click)="onShowDropDown()"
+      >
+      <span class="global-search__close icon__close-round" *ngIf="word.length > 0" (click)="clearWord()"></span>
+    </span>
+  </div>
+  <div ngbDropdownMenu aria-labelledby="dropdownProducts" class="global-search__dropdown">
+    <div class="global-search__no-data-available" *ngIf="list.length === 0">
+      <p>No data available yet</p>
     </div>
-    <div
-        class=select-product__dropdown
-        ngbDropdownMenu
-        aria-labelledby="dropdownProducts"
-    >
-        <div
-            class="cps-block"
-            *ngIf="list.length === 0"
+    <ul class="global-search__menu" *ngIf="list.length > 0">
+      <ng-template ngFor let-item [ngForOf]="list" [ngForTrackBy]="trackByIndex">
+        <li
+          [ngClass]="{'--active':selectedType === item.type }"
+          *ngIf="isShowType(item.type)"
+          (click)="selectedType = item.type"
+          [textContent]="getText(item.type) + ' ('+item.list.length +')'"
         >
-            <p>No data available yet</p>
-        </div>
+        </li>
+      </ng-template>
+    </ul>
+    <div>
+      <div class="global-search__menu-item" *ngFor="let listItem of getTypeList(selectedType)" (click)="showInfo(listItem)">
         <div
-            class="cps-block"
-            *ngIf="list.length > 0"
-        >
-            <div class="cps-block__header d-f">
-                <ul class="cps-block__nav">
-                    <ng-template
-                        ngFor
-                        let-item
-                        [ngForOf]="list"
-                        [ngForTrackBy]="trackByIndex"
-                    >
-                        <li
-                            class="cps-block__nav-item"
-                            [ngClass]="{'active':selectedType === item.type }"
-                            *ngIf="isShowType(item.type)"
-                            (click)="selectedType = item.type"
-                            [textContent]="getText(item.type) + ' ('+item.list.length +')'"
-                        >
-                        </li>
-                    </ng-template>
-                </ul>
-            </div>
-            <div class="cps-block__content">
-                <div class="cps-block__chat-block">
-                    <div
-                        class="category-product"
-                        *ngFor="let listItem of getTypeList(selectedType)"
-                        (click)="showInfo(listItem)"
-                    >
-                        <div class="d-f category-product__main-info">
-                            <div class="d-f jc-sb category-product__title-price">
-                                <div
-                                    *ngIf="selectedType === 'USERS'"
-                                    class="qt-table-modern__circle-avatar"
-                                    [ngClass]="!getNameForAvatar(listItem).length ? 'transparent-text' : ''"
-                                    [textContent]="getNameForAvatar(listItem)"
-                                    [ngStyle]="{'background': ticketsListService.getStyleAvatar(getUserById(listItem.id),listColorNoAvatar[indexNoAvatar]) }"
-                                ></div>
-                                <div
-                                    class="title"
-                                    [textContent]="getFistLine(listItem)"
-                                ></div>
-                                <div class="text-right total-count"></div>
-                            </div>
-                            <div class="manufacture">
-                                <span [textContent]="getSecondLine(listItem)"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          class="global-search__user-avatar"
+          *ngIf="selectedType === 'USERS'"
+          [textContent]="getNameForAvatar(listItem)"
+          [ngStyle]="{'background': ticketsListService.getStyleAvatar(getUserById(listItem.id),listColorNoAvatar[indexNoAvatar]) }">
         </div>
+        <div>
+          <div class="global-search__menu-item-title" [textContent]="getFistLine(listItem)"></div>
+          <div class="global-search__menu-item-subtitle" [textContent]="getSecondLine(listItem)"></div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

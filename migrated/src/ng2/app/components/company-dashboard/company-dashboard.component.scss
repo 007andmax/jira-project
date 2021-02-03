@@ -1,4 +1,6 @@
 @import "../../../assets/scss/custom";
+@import "../../../assets/styles/variable";
+
 
 /*** Custom Color Variables For this components ***/
 
@@ -366,7 +368,7 @@ $parot: #2ec866;
                 cursor: pointer;
                 outline: none;
                 border: none;
-                opacity: 1; 
+                opacity: 1;
                 z-index: 1;
             }
         }
@@ -805,7 +807,7 @@ $parot: #2ec866;
                                 .dropdown-toggle{
                                     margin-top: 2px;
                                 }
-                            } 
+                            }
                         }
                     }
                     &.cmp-board-revenue {
@@ -1228,7 +1230,7 @@ $parot: #2ec866;
                     background-size: 16px;
                     display: flex;
                 }
-                
+
             }
             .dropdown-menu {
                 width: 220px;
@@ -1363,7 +1365,7 @@ $parot: #2ec866;
         right: -224px;
         width: 222px;
         bottom: 0;
-        top: 78px;
+        top: $header-height;
         flex-direction: column;
         @include border-radius(6px);
         @include box-shadow(0, 10px, 10px, 0 rgba(192, 199, 208, 0.2));
@@ -1560,11 +1562,11 @@ $parot: #2ec866;
                     background: none;
                 }
             }
-            
+
         }
     }
-    svg.nvd3-svg {	
-        overflow: visible;	
+    svg.nvd3-svg {
+        overflow: visible;
     }
     .nv-axis.nv-x .tick line {
         display:none;
@@ -1601,9 +1603,9 @@ $parot: #2ec866;
                 fill: #4f5f79;
             }
         }
-        .nv-legend {	
-           -webkit-transform: translate(calc(-49% + 260px), -40px);	
-           transform: translate(calc(-49% + 260px), -40px);	
+        .nv-legend {
+           -webkit-transform: translate(calc(-49% + 260px), -40px);
+           transform: translate(calc(-49% + 260px), -40px);
         }
     }
 }
@@ -1849,7 +1851,7 @@ $parot: #2ec866;
                                         }
                                     }
                                 }
-                                
+
                             }
                         }
                     }
@@ -1946,7 +1948,7 @@ $parot: #2ec866;
                 }
             }
         }
-    }    
+    }
     }
 }
 

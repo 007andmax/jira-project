@@ -3,7 +3,7 @@
   z-index: 1050;
   top: 0;
   right: 0;
-  height: 64px;
+  height: $header-height;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
   background-color: #ffffff;
   width: calc(100% - 315px);
@@ -14,6 +14,57 @@
 
   &.--full-width {
     width: calc(100% - 76px);
+  }
+
+  &__left-side {
+    display: flex;
+    align-items: center;
+    padding: 12px 24px;
+  }
+
+  app-global-search {
+    width: 552px;
+  }
+
+  &__rigth-side {
+    display: flex;
+    align-items: center;
+  }
+
+  &__add-btn {
+    margin-right: 16px;
+    width: 40px;
+    height: 40px;
+    background-color: #16a4fa;
+    border-radius: 50%;
+    cursor: pointer;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: transform 300ms;
+    &.--open {
+      transform: rotate(45deg);
+    }
+  }
+
+  &__notifications-bell {
+    width: 24px;
+    height: 24px;
+    margin-right: 16px;
+    position: relative;
+    cursor: pointer;
+    &.--notifications-exits {
+      &::before {
+        content: '';
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #ff5263;
+        right: 1px;
+        top: -1px;
+        border: 2px solid white;
+      }
+    }
   }
 
   &__account-info {

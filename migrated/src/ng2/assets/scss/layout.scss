@@ -663,8 +663,8 @@ header{
         -webkit-transition: 0.4s;
         -moz-transition: 0.4s;
         transition: 0.4s;
-        top: 78px;
-        height: calc(100vh - 78px);
+        top: $header-height;
+        height: calc(100vh - $header-height);
     }
     app-nav{
         float: left;
@@ -1445,7 +1445,7 @@ ngb-tabset {
     height: auto;
     box-shadow: -8px 0 16px 0 rgba(0, 0, 0, 0.1);
     background-color: #ffffff;
-    top: 78px;
+    top: $header-height;
     bottom: 0;
     position: fixed;
     right: -700px;
@@ -2045,11 +2045,11 @@ ngx-loading > div {
 .ng7 .left-panel-closed .content-container{margin: 0 !important;}
 
 .ng7 .left-panel.nano{display:none}
-.ng7 aside#left{width: 255px;top: 78px;left:-255px;-moz-transition: 0.4s;-webkit-transition: 0.4s;-o-transition: 0.4s;;transition: 0.4s;}
+.ng7 aside#left{width: 255px;top: $header-height;left:-255px;-moz-transition: 0.4s;-webkit-transition: 0.4s;-o-transition: 0.4s;;transition: 0.4s;}
 .ng7 .page-container.permissin-manage .data-table-wrap table.dataTable{width: 1040px !important;}
 .ng7 .chang-password .f-row .input-area{width: calc(100% - 135px);}
 .ng7 .data-table-wrap.mteh-data{overflow-y: visible;}
-.ng7 .left-panel-full{width: 255px !important;left: 0;top:78px;}
+.ng7 .left-panel-full{width: 255px !important;left: 0;top:$header-height;}
 
 
 

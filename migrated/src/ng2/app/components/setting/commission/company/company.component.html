@@ -32,12 +32,12 @@
                 {{ selectedActiveTechUsers(company) }}
               </div>
               <div style="right: 0;" class="dropdown-menu dropdown-assign-ticket assign-ticket">
-      
+
                 <div class="assign-ticket-content">
                   <div class="assign-ticket-header" (click)="$event.stopPropagation()">
                     <div class="clearfix">
                       <div class="form-group">
-                        <input class="form-control" placeholder="Search Tech Person" 
+                        <input class="form-control" placeholder="Search Tech Person"
                         [(ngModel)]="filterTechUsers">
                       </div>
                     </div>
@@ -51,8 +51,8 @@
                                                                                                                    }}</a>
                       </div>
                     </div>
-      
-      
+
+
                   </div>
                 </div>
               </div>
@@ -60,15 +60,15 @@
             <!-- <div class="cmn-dropdown">
               <div id="{{company.id}}" class="drop-down-select" (click)="selectedDropdown(i)">
                 <span class="selcted-dp">
-                  
-                 <span *ngIf="selectedActiveTechUserURL(company) !== null"> 
+
+                 <span *ngIf="selectedActiveTechUserURL(company) !== null">
                   <img  [src]="selectedActiveTechUserURL(company)" alt="user"
                     />
                   </span>
                   <span *ngIf="selectedActiveTechUserURL(company) === null">{{dropFrstLstChar(company)}}</span>
                   <b>{{ getFullName(company)}}</b>
                 </span>
-                
+
                 <span class="selected-opt">{{selectedActiveTechUsers(company.techLeadId)}}</span>
               </div>
               <div
@@ -79,11 +79,11 @@
                   <input type="text" id="{{company.id}}" #name (keyup)= "searchTechUser(name.value,this)" placeholder="Search Tech Person" />
                 </form>
                 <ul class="list-unstyled" placeholder="Select Tech Users">
-                  <li id="{{company.id}}" *ngFor="let techUser of activeTechUsers" 
+                  <li id="{{company.id}}" *ngFor="let techUser of activeTechUsers"
                   (click)="company.techLeadId = techUser.id;setTechLead(techUser, company)">
                     <span class="pic"
                       >
-                     
+
 
                     <img
                     height="15"
@@ -101,7 +101,7 @@
                       <span class="email">{{techUser.primaryEmail}}</span>
                     </div>
                   </li>
-                  
+
                 </ul>
               </div>
             </div> -->

@@ -1,8 +1,10 @@
+@import "../../../../assets/styles/variable";
+
 .quotes {
   background: #f3f7f9;
-  min-height: calc(100vh - 78px);
+  min-height: calc(100vh - $header-height);
   &__header {
-    top: 78px;
+    top: $header-height;
     background: #f3f7f9;
     padding: 24px;
     position: fixed;

@@ -1066,7 +1066,7 @@ hr {
   padding: 25px;
   background-color: #f3f7f9;
   color: #364656;
-  min-height: calc(100vh - 78px);
+  min-height: calc(100vh - px);
 }
 
 .billable-items-list {
@@ -1208,7 +1208,7 @@ hr {
   right: 25px;
   position: fixed;
   width: calc(100% - 366px);
-  top: 78px;
+  top: $header-height;
   z-index: 2;
 }
 
