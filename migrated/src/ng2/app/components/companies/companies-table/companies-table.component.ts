@@ -117,7 +117,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     return '/company/default/logo.jpg';
   }
   getUserName() {
-    return `${this.primaryContact.firstName} ${this.primaryContact.lastName}`;
+    return (this.primaryContact) ? `${this.primaryContact.firstName} ${this.primaryContact.lastName}` : '';
   };
   downloadAgent() {
     this.downloadAgentStateService.setCompnay(this.company);
