@@ -384,6 +384,7 @@ import { LeftPanelCompanyComponent } from './components/left-panel/left-panel-co
 import { HeaderComponent } from './components/header/header.component';
 import { GlobalSearchComponent } from './components/header/global-search/global-search.component';
 import { ReportListItemComponent } from './components/reports/report-list-item/report-list-item.component';
+import { LeftPanelReportsComponent } from './components/left-panel/left-panel-reports/left-panel-reports.component';
 
 /**
  * declare angular
@@ -931,7 +932,8 @@ angular.module('quicktech')
     LeftPanelCompanyComponent,
     HeaderComponent,
     GlobalSearchComponent,
-    ReportListItemComponent
+    ReportListItemComponent,
+    LeftPanelReportsComponent
   ],
   imports: [
     BrowserModule,

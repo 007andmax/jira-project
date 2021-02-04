@@ -1,59 +1,67 @@
 <div
-    class="center-category__category"
-    [ngClass]="{'active':activePage === 'company-dashboard'}"
-    (click)="goToDashboard()"
+    class="category-name"
+    (click)="goToState('company-dashboard')"
 >
-    Dashboard
+    <span>Companies</span>
 </div>
-<div
-    class="center-category__category"
-    [ngClass]="{'active':activePage === 'company-tickets'}"
-    (click)="goToState('company-tickets')"
->
-    Tickets
-</div>
-<div
-    class="center-category__category"
-    [ngClass]="{'active':activePage === 'company-user'}"
-    (click)="goToState('company-user')"
->
-    Users
-</div>
-<div
-    class="center-category__category"
-    [ngClass]="{'active':activePage === 'company-devices'}"
-    (click)="goToState('company-devices')"
->
-    Devices
-</div>
-<div
-    class="center-category__category"
-    [ngClass]="{'active':activePage === 'company-network-scan'}"
-    (click)="goToState('company-network-scan')"
->
-    Network Scan
-</div>
-<div
-    *ngIf="getPermissions('VIEW_PASSWORD_SECTION')"
-    class="center-category__category"
-    [ngClass]="{'active':activePage === 'company-password-manager'}"
-    (click)="goToState('company-password-manager')"
->
-    Password Manager
-</div>
-<div
-    *ngIf="getPermissions('VIEW_SALES_REPORT')"
-    class="center-category__category"
-    [ngClass]="{'active':activePage === 'company-products'}"
-    (click)="goToState('company-products')"
->
-    Products
-</div>
-<div
-    *ngIf="getPermissions('VIEW_SERVICE_AGREEMENTS') && selectedCompany &&  selectedCompany.clientType !== 'LEAD' && selectedCompany.clientType !== 'VENDOR'"
-    class="center-category__category"
-    [ngClass]="{'active':activePage === 'company-contracts'}"
-    (click)="goToState('company-contracts')"
->
-    Service Agreements
+<div class="category-list-items">
+    <div
+        class="center-category__category"
+        [ngClass]="{'active':activePage === 'company-dashboard'}"
+        (click)="goToState('company-dashboard')"
+    >
+        Dashboard
+    </div>
+    <div
+        class="center-category__category"
+        [ngClass]="{'active':activePage === 'company-tickets'}"
+        (click)="goToState('company-tickets')"
+    >
+        Tickets
+    </div>
+    <div
+        class="center-category__category"
+        [ngClass]="{'active':activePage === 'company-user'}"
+        (click)="goToState('company-user')"
+    >
+        Users
+    </div>
+    <div
+        class="center-category__category"
+        [ngClass]="{'active':activePage === 'company-devices'}"
+        (click)="goToState('company-devices')"
+    >
+        Devices
+    </div>
+    <div
+        class="center-category__category"
+        [ngClass]="{'active':activePage === 'company-network-scan'}"
+        (click)="goToState('company-network-scan')"
+    >
+        Network Scan
+    </div>
+    <div
+        *ngIf="getPermissions('VIEW_PASSWORD_SECTION')"
+        class="center-category__category"
+        [ngClass]="{'active':activePage === 'company-password-manager'}"
+        (click)="goToState('company-password-manager')"
+    >
+        Password Manager
+    </div>
+    <div
+        *ngIf="getPermissions('VIEW_SALES_REPORT')"
+        class="center-category__category"
+        [ngClass]="{'active':activePage === 'company-products'}"
+        (click)="goToState('company-products')"
+    >
+        Products
+    </div>
+    <div
+        *ngIf="getPermissions('VIEW_SERVICE_AGREEMENTS') && selectedCompany &&  selectedCompany.clientType !== 'LEAD' && selectedCompany.clientType !== 'VENDOR'"
+        class="center-category__category"
+        [ngClass]="{'active':activePage === 'company-contracts'}"
+        (click)="goToState('company-contracts')"
+    >
+        Service Agreements
+    </div>
 </div>

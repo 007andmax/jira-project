@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute, ActivationStart, NavigationEnd } from '@angular/router';
 import { PermissionsService } from 'src/ng2/app/services/permissions/permissions.service';
 import { CurrentUser } from 'src/ng2/class/current-user/current-user';
@@ -14,6 +14,8 @@ export class LeftPanelSettingsComponent implements OnInit {
   active: boolean = false;
   componentName: string;
   currentUser: CurrentUser;
+  @Output() onGoToLink = new EventEmitter();
+  @Output() onChangeState = new EventEmitter();
   constructor(private permissionsService: PermissionsService,
     private settingStateService: SettingStateService,
     private usersStateService: UsersStateService) {
@@ -22,6 +24,12 @@ export class LeftPanelSettingsComponent implements OnInit {
   ngOnInit() {
     this.componentName = this.settingStateService.getComponentName();
     this.currentUser = this.usersStateService.getCurrentUser();
+  }
+  public goToState(state) {
+    // this.activePage = state;
+    this.onChangeState.emit(state);
+
+    //   this.quoteStateService.goToState(state);
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)

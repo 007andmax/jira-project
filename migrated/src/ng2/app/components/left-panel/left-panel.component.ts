@@ -15,7 +15,7 @@ export class LeftPanelComponent implements OnInit {
   page: string;
   public appType: string;
   toggleLeftPanel: boolean = false;
-
+  state: string = '';
   /**
    * Creates an instance of the LeftPanelComponent with the injected services
    * @param {Router} router Service to work with router
@@ -46,7 +46,7 @@ export class LeftPanelComponent implements OnInit {
         }
         if (this.router.url.includes('ng2/tickets')) {
           this.page = 'tickets';
-          this.headerText = 'Filters';
+          this.headerText = 'Tickets';
         }
         if (this.router.url.includes('ng2/users')) {
           this.page = 'users';
@@ -73,6 +73,45 @@ export class LeftPanelComponent implements OnInit {
         } else {
           this.leftPanelStateService.toggleLeftPanel(false);
         }
+        if (this.state === '') {
+          /*if (this.router.url.includes(`#/ng2/companies`)) this.state === 'new-companies';
+          if (this.state === 'billing-dashboard') this.goToLink('#/ng2/billing-dashboard');
+          if (this.state === 'new-services') this.goToLink('#/ng2/default-services');
+          if (this.state === 'new-billable') this.goToLink('#/ng2/billable');
+          if (this.state === 'new-billable-invoices') this.goToLink('#/ng2/invoices');
+          if (this.state === 'quotes-component') this.goToLink('#/ng2/quotes');
+          if (this.state === 'new-payments-ng2') this.goToLink('#/ng2/payments');
+          if (this.state === 'new-contracts') this.goToLink('#/ng2/contracts');
+          if (this.state === 'company-dashboard') this.goToLink(`#/ng2/company/dashboard/${localStorage.getItem("company_id")}`);
+          if (this.state === 'company-tickets') this.goToLink('#/ng2/company/tickets');
+          if (this.state === 'company-user') this.goToLink('#/ng2/company/user');
+          if (this.state === 'company-devices') this.goToLink('#/ng2/company/devices');
+          if (this.state === 'company-network-scan') this.goToLink('#/ng2/company/network-scan');
+          if (this.state === 'company-password-manager') this.goToLink('#/ng2/company/password-manager');
+          if (this.state === 'company-products') this.goToLink('#/ng2/company/products');
+          if (this.state === 'company-contracts') this.goToLink('#/ng2/company/contracts');
+          if (this.state === 'inventory') this.goToLink(`#/ng2/inventory/products`);
+          if (this.state === 'password-manager') this.goToLink(`#/ng2/password-manager`);
+
+          if (this.state === 'myprofile-component') this.goToLink('#/ng2/setting/myprofile');
+          if (this.state === 'manage-tags-component') this.goToLink('#/ng2/setting/tags');
+          if (this.state === 'glnumber-component') this.goToLink('#/ng2/setting/glnumber');
+          if (this.state === 'company-profile-component') this.goToLink('#/ng2/setting/companyprofile');
+          if (this.state === 'tech-component') this.goToLink('#/ng2/setting/techUsers');
+          if (this.state === 'email-setting-component') this.goToLink('#/ng2/setting/emailSetting');
+          if (this.state === 'taxes-component') this.goToLink('#/ng2/setting/taxes');
+          if (this.state === 'permission-manage-component') this.goToLink('#/ng2/setting/permission');
+          if (this.state === 'email-templete-component') this.goToLink('#/ng2/setting/emailTemplete');
+          if (this.state === 'integrations-component') this.goToLink('#/ng2/setting/integration');
+          if (this.state === 'invoice-ticket-component') this.goToLink('#/ng2/setting/invoiceTickets');
+          if (this.state === 'commission-component') this.goToLink('#/ng2/setting/commission');
+          if (this.state === 'subscription-component') this.goToLink('#/ng2/setting/subscription');
+
+          if (this.state === 'new-users') this.goToLink('#/ng2/users');
+          if (this.state === 'new-reports') this.goToLink('#/ng2/reports');
+          if (this.state === 'new-tickets-dashboard') this.goToLink('#/ng2/tickets-dashboard');
+          if (this.state === 'new-tickets') this.goToLink('#/ng2/tickets');*/
+        }
         this.setAppType(appType);
       });
   }
@@ -87,7 +126,57 @@ export class LeftPanelComponent implements OnInit {
   setAppType(appType) {
     this.appType = appType;
   }
+  public goToLink(url) {
+    let body = document.querySelector('.left-panel__category-wrap');
+    var link = document.createElement('a');
+    body.appendChild(link);
+    link.href = url;
+    var e = document.createEvent('MouseEvents');
+    e.initEvent('click', true, true);
+    link.dispatchEvent(e);
+  }
+  onChangeState(data) {
+    if (this.state !== data) {
+      this.state = data;
+      if (this.state === 'new-companies') this.goToLink(`#/ng2/companies`);
+      if (this.state === 'billing-dashboard') this.goToLink('#/ng2/billing-dashboard');
+      if (this.state === 'new-services') this.goToLink('#/ng2/default-services');
+      if (this.state === 'new-billable') this.goToLink('#/ng2/billable');
+      if (this.state === 'new-billable-invoices') this.goToLink('#/ng2/invoices');
+      if (this.state === 'quotes-component') this.goToLink('#/ng2/quotes');
+      if (this.state === 'new-payments-ng2') this.goToLink('#/ng2/payments');
+      if (this.state === 'new-contracts') this.goToLink('#/ng2/contracts');
+      if (this.state === 'company-dashboard') this.goToLink(`#/ng2/company/dashboard/${localStorage.getItem("company_id")}`);
+      if (this.state === 'company-tickets') this.goToLink('#/ng2/company/tickets');
+      if (this.state === 'company-user') this.goToLink('#/ng2/company/user');
+      if (this.state === 'company-devices') this.goToLink('#/ng2/company/devices');
+      if (this.state === 'company-network-scan') this.goToLink('#/ng2/company/network-scan');
+      if (this.state === 'company-password-manager') this.goToLink('#/ng2/company/password-manager');
+      if (this.state === 'company-products') this.goToLink('#/ng2/company/products');
+      if (this.state === 'company-contracts') this.goToLink('#/ng2/company/contracts');
+      if (this.state === 'inventory') this.goToLink(`#/ng2/inventory/products`);
+      if (this.state === 'password-manager') this.goToLink(`#/ng2/password-manager`);
 
+      if (this.state === 'myprofile-component') this.goToLink('#/ng2/setting/myprofile');
+      if (this.state === 'manage-tags-component') this.goToLink('#/ng2/setting/tags');
+      if (this.state === 'glnumber-component') this.goToLink('#/ng2/setting/glnumber');
+      if (this.state === 'company-profile-component') this.goToLink('#/ng2/setting/companyprofile');
+      if (this.state === 'tech-component') this.goToLink('#/ng2/setting/techUsers');
+      if (this.state === 'email-setting-component') this.goToLink('#/ng2/setting/emailSetting');
+      if (this.state === 'taxes-component') this.goToLink('#/ng2/setting/taxes');
+      if (this.state === 'permission-manage-component') this.goToLink('#/ng2/setting/permission');
+      if (this.state === 'email-templete-component') this.goToLink('#/ng2/setting/emailTemplete');
+      if (this.state === 'integrations-component') this.goToLink('#/ng2/setting/integration');
+      if (this.state === 'invoice-ticket-component') this.goToLink('#/ng2/setting/invoiceTickets');
+      if (this.state === 'commission-component') this.goToLink('#/ng2/setting/commission');
+      if (this.state === 'subscription-component') this.goToLink('#/ng2/setting/subscription');
+
+      if (this.state === 'new-users') this.goToLink('#/ng2/users');
+      if (this.state === 'new-reports') this.goToLink('#/ng2/reports');
+      if (this.state === 'new-tickets-dashboard') this.goToLink('#/ng2/tickets-dashboard');
+      if (this.state === 'new-tickets') this.goToLink('#/ng2/tickets');
+    }
+  }
   /**
    * Check application type
    */

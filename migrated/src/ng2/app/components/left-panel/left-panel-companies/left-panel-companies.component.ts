@@ -24,6 +24,8 @@ export class LeftPanelCompaniesComponent implements OnInit {
   selectedTechLead: ItemFilterPerson = null;
   selectedClientIndustry: string = null;
   filter: LeftPanelCompaniesFilter = new LeftPanelCompaniesFilter();
+  @Output() onGoToLink = new EventEmitter();
+  @Output() onChangeState = new EventEmitter();
   constructor(private usersStateService: UsersStateService,
     private leftPanelService: LeftPanelService,
     private companiesService: CompaniesService,
@@ -128,10 +130,12 @@ export class LeftPanelCompaniesComponent implements OnInit {
     this.filter.setClientType(null);
     this.companiesState.setOnShowArchived(false);
     this.showArchivedCompanies = false;
+    this.companiesState.setShowArchivedCompanies(false);
   }
   onShowArchived() {
     this.companiesState.setOnShowArchived(true);
     this.showArchivedCompanies = true;
+    this.companiesState.setShowArchivedCompanies(true);
   }
   onSetFilterClientType(data) {
     this.calculateCount.onCulculateCurrent(data);
@@ -158,7 +162,13 @@ export class LeftPanelCompaniesComponent implements OnInit {
 
     })
   }
+  public goToState() {
+    // this.activePage = state;
+    this.onChangeState.emit('new-companies');
 
+
+    //  this.quoteStateService.goToState(state);
+  }
   public onSelectClientIndustry(item) {
     if (!item) {
       this.clearClientIndustry();

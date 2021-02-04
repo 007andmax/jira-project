@@ -1,4 +1,26 @@
-<div class="mob-filters-header desktop-hidden">
+<div
+    class="category-name"
+    (click)="goToState();onShowAll()"
+>
+    <span>Companies</span>
+</div>
+<div class="category-list-items">
+    <div
+        class="list-item"
+        [ngClass]="{'active': !showArchivedCompanies}"
+        (click)="goToState();onShowAll()"
+    >
+        All Companies
+    </div>
+    <div
+        class="list-item"
+        [ngClass]="{'active': showArchivedCompanies}"
+        (click)="goToState();onShowArchived()"
+    >
+        Archive
+    </div>
+</div>
+<!-- <div class="mob-filters-header desktop-hidden">
     <button
         class="x-mark mobile-btn"
         (click)="closeMobileFilter()"
@@ -9,14 +31,14 @@
     <div
         class="list-item"
         [ngClass]="{'active': !showArchivedCompanies}"
-        (click)="onShowAll()"
+        (click)="goToState();onShowAll()"
     >
         All Companies
     </div>
     <div
         class="list-item"
         [ngClass]="{'active': showArchivedCompanies}"
-        (click)="onShowArchived()"
+        (click)="goToState();onShowArchived()"
     >
         Archive
     </div>
@@ -53,8 +75,7 @@
     ></app-left-panel-tags>
 </div>
 <div class="left-panel-ng2__content--filters">
-    <!-- for show "filter-item__content" click on "filter-item__header" and add class "show-filter" for "filter-item" -->
-    <div class="filter-item">
+     <div class="filter-item">
         <i class="icn-sm report-caret-icon"></i>
         <div
             class="filter-item__header"
@@ -93,8 +114,7 @@
             </div>
         </div>
     </div>
-    <!-- for show "filter-item__content" click on "filter-item__header" and add class "show-filter" for "filter-item" -->
-    <div class="filter-item">
+      <div class="filter-item">
         <i class="icn-sm report-caret-icon"></i>
         <div
             class="filter-item__header"
@@ -137,4 +157,4 @@
     (click)="closeMobileFilter()"
 >
     Apply Filters
-</button>
+</button> -->

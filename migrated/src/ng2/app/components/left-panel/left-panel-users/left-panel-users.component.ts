@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { FilterListTop } from 'src/ng2/class/list/filter-list-top';
 import { UserFilter } from '../../users/class/user-filter';
@@ -25,6 +25,8 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
   selectedCompany: any = null;
   //  clientIndustry: string = '';
   companies = [];
+  @Output() onChangeState = new EventEmitter();
+  @Output() onGoToLink = new EventEmitter();
   constructor(private usersStateService: UsersStateService,
     private leftPanelUsersService: LeftPanelUsersService,
     public cd: ChangeDetectorRef,
@@ -56,6 +58,12 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
   }
   closeMobileFilter() {
     document.body.querySelector('app-left-panel-users').classList.remove('show');
+  }
+  public goToState() {
+    // this.activePage = state;
+
+    this.onChangeState.emit('new-users');
+
   }
   public onSelectCompany(item) {
     if (!item) {
@@ -143,11 +151,13 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
     this.filter.setClientType(null);
     this.usersStateService.setOnShowArchived(false);
     this.showArchivedCompanies = false;
+    this.usersStateService.setShowArchivedCompanies(false);
   }
   onShowArchived() {
     this.filter.setClientType(null);
     this.usersStateService.setOnShowArchived(true);
     this.showArchivedCompanies = true;
+    this.usersStateService.setShowArchivedCompanies(true);
   }
   public trackByIndex(index, item) {
     return index;

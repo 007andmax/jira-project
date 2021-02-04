@@ -1,4 +1,48 @@
-<div class="mob-filters-header desktop-hidden">
+<div
+    class="category-name"
+    (click)="goToState()"
+>
+    <span>Users</span>
+</div>
+<div class="category-list-items">
+
+
+
+
+    <div
+        class="list-item"
+        [ngClass]="{'active': !showArchivedCompanies && !filter.getClientType()}"
+        (click)="goToState();onShowAll()"
+    >
+        All Users
+    </div>
+    <div
+        class="list-item"
+        [ngClass]="{'active': filter.getClientType() === 'CLIENT'}"
+        (click)="goToState();onSetFilterClientType('CLIENT')"
+    >
+        Customer Users
+    </div>
+    <div
+        class="list-item"
+        [ngClass]="{'active': filter.getClientType() === 'LEAD'}"
+        (click)="goToState();onSetFilterClientType('LEAD')"
+    >
+        Lead Users
+    </div>
+    <div
+        class="list-item"
+        [ngClass]="{'active': showArchivedCompanies && !filter.getClientType()}"
+        (click)="goToState();onShowArchived()"
+    >
+        Archived Users
+    </div>
+
+
+
+
+</div>
+<!-- <div class="mob-filters-header desktop-hidden">
     <button
         class="x-mark mobile-btn"
         (click)="closeMobileFilter()"
@@ -128,4 +172,4 @@
     (click)="closeMobileFilter()"
 >
     Apply Filters
-</button>
+</button> -->

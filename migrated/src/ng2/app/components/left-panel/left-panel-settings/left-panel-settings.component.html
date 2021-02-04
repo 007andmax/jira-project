@@ -1,4 +1,339 @@
-<div class="brand">
+<div
+    class="category-name"
+    (click)="goToState('myprofile-component')"
+>
+    <span>Settings</span>
+</div>
+<div class="category-list-items">
+
+
+
+
+    <li [ngClass]="{'active':componentName === 'MyProfileComponent'}">
+        <a
+            href="#/ng2/setting/myprofile"
+            (click)="goToState('myprofile-component')"
+        >
+            <span class="nav-ico">
+                <img
+                    src="ng1/images/setting-module/my-profile.svg"
+                    alt="My Profile"
+                >
+            </span>
+            My Profile Settings
+        </a>
+    </li>
+    <li
+        [ngClass]="{'active':componentName === 'ManageTagsComponent'}"
+        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TAGS_SETTINGS')"
+    >
+        <a
+            href="#/ng2/setting/tags"
+            (click)="goToState('manage-tags-component')"
+        >
+            <span class="nav-ico">
+                <img
+                    src="ng1/images/setting-module/manage-tags.svg"
+                    alt="Tags"
+                >
+            </span>
+            Manage Tags
+        </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li [ngClass]="{'active':componentName === 'GlNumberSettingsComponent'}">
+        <a
+            href="#/ng2/setting/glnumber"
+            (click)="goToState('glnumber-component')"
+        >
+            <span class="nav-ico">
+                <img
+                    src="ng1/images/setting-module/gl-number.svg"
+                    alt="Glnumber"
+                >
+            </span>
+            Manage GL number
+        </a>
+    </li>
+    <li [ngClass]="{'active':componentName === 'CompanyProfileComponent'}">
+        <a
+            href="#/ng2/setting/companyprofile"
+            (click)="goToState('company-profile-component')"
+            *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_COMPANY_PROFILE_SETTINGS')"
+        >
+            <span class="nav-ico">
+                <img
+                    src="ng1/images/setting-module/company-profile.svg"
+                    alt="Company"
+                >
+            </span>
+            Company Profile
+        </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li [ngClass]="{'active':componentName === 'TechUsersComponent'}">
+        <a
+            href="#/ng2/setting/techUsers"
+            (click)="goToState('tech-component')"
+        >
+            <span class="nav-ico">
+                <img
+                    src="ng1/images/setting-module/manage-users.svg"
+                    alt="Tech"
+                >
+            </span>
+            Manage Tech Users
+        </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li [ngClass]="{'active':componentName === 'EmailSettingComponent'}">
+        <a
+            href="#/ng2/setting/emailSetting"
+            (click)="goToState('email-setting-component')"
+        >
+            <span class="nav-ico">
+                <img
+                    src="ng1/images/setting-module/email-settings.svg"
+                    alt="Email"
+                >
+            </span>
+            Email Settings
+        </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li [ngClass]="{'active':componentName === 'TaxesSettingsComponent'}">
+        <a
+            href="#/ng2/setting/taxes"
+            (click)="goToState('taxes-component')"
+        >
+            <span class="nav-ico">
+                <img
+                    src="ng1/images/setting-module/taxes.svg"
+                    alt="Taxes"
+                >
+            </span>
+            Taxes
+        </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li
+        [ngClass]="{'active':componentName === 'PermissionManageComponent'}"
+        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_PERMISSIONS_SETTINGS')"
+    >
+        <a
+            href="#/ng2/setting/permission"
+            (click)="goToState('permission-manage-component')"
+        >
+            <span class="nav-ico">
+                <img
+                    src="ng1/images/setting-module/permission-management.svg"
+                    alt="Permission"
+                >
+            </span>
+            Permission Management
+        </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li [ngClass]="{'active':componentName === 'EmailTempleteComponent'}">
+        <a
+            href="#/ng2/setting/emailTemplete"
+            (click)="goToState('email-templete-component')"
+        >
+            <span class="nav-ico">
+                <img
+                    src="ng1/images/setting-module/email-templates.svg"
+                    alt="Templetes"
+                >
+            </span>
+            Email Templetes
+        </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li [ngClass]="{'active':componentName === 'IntegrationsComponent'}">
+        <a
+            href="#/ng2/setting/integration"
+            (click)="goToState('integrations-component')"
+        >
+            <span class="nav-ico">
+                <img
+                    src="ng1/images/setting-module/integrations.svg"
+                    alt="Integrations"
+                >
+            </span>
+            Integrations
+        </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li [ngClass]="{'active':componentName === 'InvoiceTicketsComponent'}">
+        <a
+            href="#/ng2/setting/invoiceTickets"
+            (click)="goToState('invoice-ticket-component')"
+        >
+            <span class="nav-ico">
+                <img
+                    src="ng1/images/setting-module/invoice.svg"
+                    alt="Commissions"
+                >
+            </span>
+            Invoice and Ticket
+        </a>
+    </li>
+    <li [ngClass]="{'active':componentName === 'CommissionComponent'}">
+        <a
+            href="#/ng2/setting/commission"
+            (click)="goToState('commission-component')"
+        >
+            <span class="nav-ico">
+                <img
+                    src="ng1/images/setting-module/commissions.svg"
+                    alt="Commissions"
+                >
+            </span>
+            Commissions
+        </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li [ngClass]="{'active':componentName === 'SubscriptionComponent'}">
+        <a
+            href="#/ng2/setting/subscription"
+            (click)="goToState('subscription-component')"
+        >
+            <span class="nav-ico">
+                <img
+                    src="ng1/images/setting-module/subscription.svg"
+                    alt="Subscription"
+                >
+            </span>
+            Subscription
+        </a>
+    </li>
+
+
+
+
+</div>
+
+
+
+
+<!-- <div class="brand">
     <a class="logo">
         <span>Settings</span>
     </a>
@@ -20,7 +355,10 @@
 <nav>
     <ul class="list-unstyled">
         <li [ngClass]="{'active':componentName === 'MyProfileComponent'}">
-            <a href="#/ng2/setting/myprofile">
+            <a
+                href="#/ng2/setting/myprofile"
+                (click)="goToState('myprofile-component')"
+            >
                 <span class="nav-ico">
                     <img
                         src="ng1/images/setting-module/my-profile.svg"
@@ -34,7 +372,10 @@
             [ngClass]="{'active':componentName === 'ManageTagsComponent'}"
             *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TAGS_SETTINGS')"
         >
-            <a href="#/ng2/setting/tags">
+            <a
+                href="#/ng2/setting/tags"
+                (click)="goToState('manage-tags-component')"
+            >
                 <span class="nav-ico">
                     <img
                         src="ng1/images/setting-module/manage-tags.svg"
@@ -48,8 +389,18 @@
 
 
 
+
+
+
+
+
+
+
         <li [ngClass]="{'active':componentName === 'GlNumberSettingsComponent'}">
-            <a href="#/ng2/setting/glnumber">
+            <a
+                href="#/ng2/setting/glnumber"
+                (click)="goToState('glnumber-component')"
+            >
                 <span class="nav-ico">
                     <img
                         src="ng1/images/setting-module/gl-number.svg"
@@ -62,6 +413,7 @@
         <li [ngClass]="{'active':componentName === 'CompanyProfileComponent'}">
             <a
                 href="#/ng2/setting/companyprofile"
+                (click)="goToState('company-profile-component')"
                 *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_COMPANY_PROFILE_SETTINGS')"
             >
                 <span class="nav-ico">
@@ -77,8 +429,18 @@
 
 
 
+
+
+
+
+
+
+
         <li [ngClass]="{'active':componentName === 'TechUsersComponent'}">
-            <a href="#/ng2/setting/techUsers">
+            <a
+                href="#/ng2/setting/techUsers"
+                (click)="goToState('tech-component')"
+            >
                 <span class="nav-ico">
                     <img
                         src="ng1/images/setting-module/manage-users.svg"
@@ -92,8 +454,18 @@
 
 
 
+
+
+
+
+
+
+
         <li [ngClass]="{'active':componentName === 'EmailSettingComponent'}">
-            <a href="#/ng2/setting/emailSetting">
+            <a
+                href="#/ng2/setting/emailSetting"
+                (click)="goToState('email-setting-component')"
+            >
                 <span class="nav-ico">
                     <img
                         src="ng1/images/setting-module/email-settings.svg"
@@ -107,8 +479,18 @@
 
 
 
+
+
+
+
+
+
+
         <li [ngClass]="{'active':componentName === 'TaxesSettingsComponent'}">
-            <a href="#/ng2/setting/taxes">
+            <a
+                href="#/ng2/setting/taxes"
+                (click)="goToState('taxes-component')"
+            >
                 <span class="nav-ico">
                     <img
                         src="ng1/images/setting-module/taxes.svg"
@@ -122,11 +504,21 @@
 
 
 
+
+
+
+
+
+
+
         <li
             [ngClass]="{'active':componentName === 'PermissionManageComponent'}"
             *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_PERMISSIONS_SETTINGS')"
         >
-            <a href="#/ng2/setting/permission">
+            <a
+                href="#/ng2/setting/permission"
+                (click)="goToState('permission-manage-component')"
+            >
                 <span class="nav-ico">
                     <img
                         src="ng1/images/setting-module/permission-management.svg"
@@ -140,8 +532,18 @@
 
 
 
+
+
+
+
+
+
+
         <li [ngClass]="{'active':componentName === 'EmailTempleteComponent'}">
-            <a href="#/ng2/setting/emailTemplete">
+            <a
+                href="#/ng2/setting/emailTemplete"
+                (click)="goToState('email-templete-component')"
+            >
                 <span class="nav-ico">
                     <img
                         src="ng1/images/setting-module/email-templates.svg"
@@ -155,8 +557,18 @@
 
 
 
+
+
+
+
+
+
+
         <li [ngClass]="{'active':componentName === 'IntegrationsComponent'}">
-            <a href="#/ng2/setting/integration">
+            <a
+                href="#/ng2/setting/integration"
+                (click)="goToState('integrations-component')"
+            >
                 <span class="nav-ico">
                     <img
                         src="ng1/images/setting-module/integrations.svg"
@@ -170,8 +582,18 @@
 
 
 
+
+
+
+
+
+
+
         <li [ngClass]="{'active':componentName === 'InvoiceTicketsComponent'}">
-            <a href="#/ng2/setting/invoiceTickets">
+            <a
+                href="#/ng2/setting/invoiceTickets"
+                (click)="goToState('invoice-ticket-component')"
+            >
                 <span class="nav-ico">
                     <img
                         src="ng1/images/setting-module/invoice.svg"
@@ -182,7 +604,10 @@
             </a>
         </li>
         <li [ngClass]="{'active':componentName === 'CommissionComponent'}">
-            <a href="#/ng2/setting/commission">
+            <a
+                href="#/ng2/setting/commission"
+                (click)="goToState('commission-component')"
+            >
                 <span class="nav-ico">
                     <img
                         src="ng1/images/setting-module/commissions.svg"
@@ -196,8 +621,18 @@
 
 
 
+
+
+
+
+
+
+
         <li [ngClass]="{'active':componentName === 'SubscriptionComponent'}">
-            <a href="#/ng2/setting/subscription">
+            <a
+                href="#/ng2/setting/subscription"
+                (click)="goToState('subscription-component')"
+            >
                 <span class="nav-ico">
                     <img
                         src="ng1/images/setting-module/subscription.svg"
@@ -208,4 +643,4 @@
             </a>
         </li>
     </ul>
-</nav>
+</nav> -->

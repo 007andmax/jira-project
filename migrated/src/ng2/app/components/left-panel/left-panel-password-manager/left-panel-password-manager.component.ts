@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
@@ -46,7 +46,8 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     name: ''
   };
   private subscription: ISubscription;
-
+  @Output() onGoToLink = new EventEmitter();
+  @Output() onChangeState = new EventEmitter();
   /**
    * Creates an instance of the LeftPanelPasswordManagerComponent with the injected services
    * @param {CompaniesService} companiesService Service to work with companies
@@ -234,6 +235,13 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
       return this.devicesAndUsersList = [...this.devicesAndUsersList, ...this.devicesStateService.getAllDevices()[this.selectedCompany.companyId]];
     }
 
+  }
+
+  public goToState() {
+    // this.activePage = state;
+
+    this.onChangeState.emit('password-manager');
+    //  this.quoteStateService.goToState(state);
   }
 
   /**

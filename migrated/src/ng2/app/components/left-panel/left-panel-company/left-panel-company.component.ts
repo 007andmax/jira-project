@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Company } from 'src/ng2/app/interfaces/company/company';
 import { PermissionsService } from 'src/ng2/app/services/permissions/permissions.service';
@@ -16,7 +16,9 @@ export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
   selectedCompany: Company;
   companyId: string;
   sub: Subscription = new Subscription();
-  constructor(private quoteStateService: QuoteStateService,
+  @Output() onGoToLink = new EventEmitter();
+  @Output() onChangeState = new EventEmitter();
+  constructor(//private quoteStateService: QuoteStateService,
     private permissionsService: PermissionsService,
     private companiesStateService: CompaniesStateService,
     private leftPanelStateService: LeftPanelStateService) { }
@@ -34,22 +36,23 @@ export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnBillingPage);
   }
-  goToDashboard() {
-    let body = document.querySelector('.left-panel__category-wrap');
-    var link = document.createElement('a');
-    body.appendChild(link);
-    // link.href = `#/clients/companyProfile/${this.company.id}?tabName=dashboard`;
-    link.href = `#/ng2/company/dashboard/${this.companyId}`
-    var e = document.createEvent('MouseEvents');
-    e.initEvent('click', true, true);
-    link.dispatchEvent(e);
-  }
+  /* goToDashboard() {
+     let body = document.querySelector('.left-panel__category-wrap');
+     var link = document.createElement('a');
+     body.appendChild(link);
+     // link.href = `#/clients/companyProfile/${this.company.id}?tabName=dashboard`;
+     link.href = `#/ng2/company/dashboard/${this.companyId}`
+     var e = document.createEvent('MouseEvents');
+     e.initEvent('click', true, true);
+     link.dispatchEvent(e);
+   }*/
   private findSelectedCompany() {
     this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.companyId);
   }
   public goToState(state) {
     this.activePage = state;
-    this.quoteStateService.goToState(state);
+    this.onChangeState.emit(state);
+    //  this.quoteStateService.goToState(state);
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)

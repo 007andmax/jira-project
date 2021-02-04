@@ -26,6 +26,7 @@ export class CompaniesStateService {
   calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
   currentCompany: any = null;
   onCurrentCompany: EventEmitter<any> = new EventEmitter();
+  showArchivedCompanies: boolean = false;
   constructor(private companiesService: CompaniesService,
     private companiesRealTimeService: CompaniesRealTimeService,
     private websocketService: WebsocketService) {
@@ -59,7 +60,12 @@ export class CompaniesStateService {
         1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
     })
   }
-
+  public setShowArchivedCompanies(data) {
+    this.showArchivedCompanies = data;
+  }
+  public getShowArchivedCompanies() {
+    return this.showArchivedCompanies;
+  }
   public getOnCurrentCompany() {
     return this.onCurrentCompany;
   }

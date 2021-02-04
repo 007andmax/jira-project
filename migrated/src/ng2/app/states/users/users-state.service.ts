@@ -7,6 +7,7 @@ import { UserPipe } from '../../pipe/user.pipe';
 import { UserProfile } from '../../components/users/class/user-profile';
 import { UsersRealTimeService } from './users-real-time.service';
 import { UserChange } from '../../components/users/class/user-change';
+import { UserFilter } from '../../components/users/class/user-filter';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,8 @@ export class UsersStateService {
   userForArchive: User = null;
   userForDeArchive: User = null;
   onChangeUsers: EventEmitter<UserChange> = new EventEmitter();
-
+  filter: UserFilter = new UserFilter();
+  showArchivedCompanies: boolean = false;
   constructor(private userService: UsersService, private usersRealTimeService: UsersRealTimeService) {
 
   }
@@ -66,6 +68,15 @@ export class UsersStateService {
       }
       this.onChangeUsers.emit(new UserChange(newChange.action, newChange.data, this.allUsers));
     });
+  }
+  public setShowArchivedCompanies(data) {
+    this.showArchivedCompanies = data;
+  }
+  public getShowArchivedCompanies() {
+    return this.showArchivedCompanies;
+  }
+  public getFilter() {
+    return this.filter;
   }
   public getChangeUsers() {
     return this.onChangeUsers;

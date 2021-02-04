@@ -1,4 +1,122 @@
-<div class="left-panel-ng2__content--lists">
+<div
+    class="category-name"
+    (click)="goToBashboard()"
+>
+    <span>Tickets</span>
+</div>
+<div class="category-list-items">
+
+
+
+
+
+
+    <div
+        class="list-item d-f jc-sb"
+        [ngClass]="{'active': listType === 'DASHBOARD'}"
+        (click)="goToBashboard()"
+    >
+        Dashboard
+    </div>
+    <div
+        class="list-item d-f jc-sb"
+        [ngClass]="{'active': listType === 'USERS'}"
+        (click)="setTypeFilter('USERS')"
+    >
+        My Tickets
+        <div>{{getCountByField('USER')}}</div>
+    </div>
+    <div
+        class="list-item d-f jc-sb"
+        [ngClass]="{'active': listType === 'ALL'}"
+        (click)="setTypeFilter('ALL')"
+    >
+        All Tickets
+        <div>{{getCountByField('ALL')}}</div>
+    </div>
+    <div
+        class="list-item d-f jc-sb"
+        [ngClass]="{'active': listType === 'UNASSIGNED'}"
+        (click)="setTypeFilter('UNASSIGNED')"
+    >
+        Unassigned
+        <div>{{getCountByField('UNASSIGNED')}}</div>
+    </div>
+    <div
+        class="list-item d-f jc-sb"
+        [ngClass]="{'active': listType === 'OPEN'}"
+        (click)="setTypeFilter('OPEN')"
+    >
+        Open
+        <div>{{getCountByField('OPEN')}}</div>
+    </div>
+    <div
+        class="list-item d-f jc-sb"
+        [ngClass]="{'active': listType === 'CLOSED'}"
+        (click)="setTypeFilter('CLOSED')"
+    >
+        Closed
+        <div>{{getCountByField('CLOSED')}}</div>
+    </div>
+    <div
+        class="list-item d-f jc-sb"
+        [ngClass]="{'active': listType === 'ON_HOLD'}"
+        (click)="setTypeFilter('ON_HOLD')"
+    >
+        On Hold
+        <div>{{getCountByField('ON_HOLD')}}</div>
+    </div>
+    <div
+        class="list-item d-f jc-sb"
+        [ngClass]="{'active': listType === 'TRASH'}"
+        (click)="setTypeFilter('TRASH')"
+    >
+        Trash
+        <div>{{getCountByField('TRASH')}}</div>
+    </div>
+    <div
+        class="list-item d-f jc-sb"
+        [ngClass]="{'active': listType === 'SPAM'}"
+        (click)="setTypeFilter('SPAM')"
+    >
+        Spam
+        <div>{{getCountByField('SPAM')}}</div>
+    </div>
+    <div
+        class="list-item d-f jc-sb"
+        [ngClass]="{'active': listType === 'RECURRING_TICKETS'}"
+        (click)="setTypeFilter('RECURRING_TICKETS')"
+    >
+        Recurring tickets
+    </div>
+    <div
+        class="list-item d-f jc-sb"
+        [ngClass]="{'active': listType === 'RECURRING_TICKETS_OPEN'}"
+        (click)="setTypeFilter('RECURRING_TICKETS_OPEN')"
+    >
+        Recurring tickets Open
+        <div>
+            {{getCountByField('RECURRING_TICKETS_OPEN')}}
+        </div>
+    </div>
+    <div
+        class="list-item d-f jc-sb"
+        [ngClass]="{'active': listType === 'RECURRING_TICKETS_CLOSED'}"
+        (click)="setTypeFilter('RECURRING_TICKETS_CLOSED')"
+    >
+        Recurring tickets Closed
+        <div>
+            {{getCountByField('RECURRING_TICKETS_CLOSED')}}
+        </div>
+    </div>
+
+
+
+
+
+
+</div>
+<!-- <div class="left-panel-ng2__content--lists">
     <div
         class="list-item d-f jc-sb"
         [ngClass]="{'active': listType === 'DASHBOARD'}"
@@ -125,4 +243,4 @@
         (tagsChange)="onChangeTags($event)"
     >
     </app-left-panel-tags>
-</div>
+</div> -->

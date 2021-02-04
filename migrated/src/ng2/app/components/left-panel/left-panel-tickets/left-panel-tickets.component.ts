@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { TicketsFilter } from '../../tickets/tickets/class/tickets-filter';
 import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.service';
 import { LeftPanelService } from 'src/ng2/app/services/left-panel/left-panel.service';
@@ -18,10 +18,11 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
   listType: string = "USERS";
   blockFilterUser: boolean = false;
   ticketsCounts: TicketsCounts;
+  @Output() onChangeState = new EventEmitter();
   constructor(private ticketsStateService: TicketsStateService,
     private ticketsService: TicketsService,
     public cd: ChangeDetectorRef,
-    private quoteStateService: QuoteStateService,
+    // private quoteStateService: QuoteStateService,
     private leftPanelService: LeftPanelService) { }
 
 
@@ -59,8 +60,10 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
     this.goToState('new-tickets-dashboard');
   }
   public goToState(state) {
-    this.quoteStateService.goToState(state);
+    //this.quoteStateService.goToState(state);
+    this.onChangeState.emit(state);
   }
+
   getCountByField(field) {
     return (this.ticketsCounts) ? this.ticketsCounts[field] : 0;
   }
