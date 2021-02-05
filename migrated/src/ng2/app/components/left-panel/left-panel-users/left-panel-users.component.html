@@ -1,10 +1,15 @@
 <div
     class="category-name"
-    (click)="goToState()"
+    (click)="open = !open"
 >
     <span>Users</span>
 </div>
-<div class="category-list-items">
+<div
+    class="category-list-items"
+    *ngIf="open"
+>
+
+
 
 
 
@@ -37,6 +42,8 @@
     >
         Archived Users
     </div>
+
+
 
 
 

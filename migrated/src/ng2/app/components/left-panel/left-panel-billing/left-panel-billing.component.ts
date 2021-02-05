@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { PermissionsService } from 'src/ng2/app/services/permissions/permissions.service';
 import { LeftPanelStateService } from 'src/ng2/app/states/left-panel/left-panel-state.service';
@@ -13,8 +13,8 @@ import { QuoteStateService } from 'src/ng2/app/states/quote/quote-state.service'
   styleUrls: ['./left-panel-billing.component.scss']
 })
 export class LeftPanelBillingComponent implements OnInit, OnDestroy {
-
-  activePage: string = "new-billable";
+  open: boolean = false;
+  @Input() activePage: string = "";
   sub: Subscription = new Subscription();
   @Output() onGoToLink = new EventEmitter();
   @Output() onChangeState = new EventEmitter();

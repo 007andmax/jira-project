@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { LeftPanelService } from 'src/ng2/app/services/left-panel/left-panel.service';
 import { CompaniesService } from 'src/ng2/app/services/company/companies.service';
@@ -14,6 +14,7 @@ import { ItemFilterPerson } from './class/item-filter-person';
   styleUrls: ['./left-panel-companies.component.scss']
 })
 export class LeftPanelCompaniesComponent implements OnInit {
+  open: boolean = false;
   listPersons: Array<ItemFilterPerson> = [];
   clientIndustry: string = '';
   industryHistory = [];
@@ -24,6 +25,7 @@ export class LeftPanelCompaniesComponent implements OnInit {
   selectedTechLead: ItemFilterPerson = null;
   selectedClientIndustry: string = null;
   filter: LeftPanelCompaniesFilter = new LeftPanelCompaniesFilter();
+  @Input() activePage: string = "";
   @Output() onGoToLink = new EventEmitter();
   @Output() onChangeState = new EventEmitter();
   constructor(private usersStateService: UsersStateService,

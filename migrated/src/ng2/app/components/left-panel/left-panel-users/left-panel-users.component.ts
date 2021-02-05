@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, Output, EventEmitter, Input } from '@angular/core';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { FilterListTop } from 'src/ng2/class/list/filter-list-top';
 import { UserFilter } from '../../users/class/user-filter';
@@ -14,7 +14,7 @@ import { CompaniesService } from 'src/ng2/app/services/company/companies.service
   providers: [LeftPanelUsersService]
 })
 export class LeftPanelUsersComponent implements OnInit, OnDestroy {
-
+  open: boolean = false;
   showArchivedCompanies: boolean = false;
   filter: UserFilter = new UserFilter();
   allTitles: Array<string> = [];
@@ -25,6 +25,7 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
   selectedCompany: any = null;
   //  clientIndustry: string = '';
   companies = [];
+  @Input() activePage: string = "";
   @Output() onChangeState = new EventEmitter();
   @Output() onGoToLink = new EventEmitter();
   constructor(private usersStateService: UsersStateService,

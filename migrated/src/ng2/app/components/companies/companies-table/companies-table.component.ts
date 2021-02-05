@@ -97,7 +97,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
 
   goToDashboard() {
     localStorage.setItem("company_id", this.company.id);
-    let body = document.querySelector('.left-panel__category-wrap');
+    let body = document.querySelector('.main-container');
     var link = document.createElement('a');
     body.appendChild(link);
     link.href = `#/ng2/company/dashboard/${this.company.id}`

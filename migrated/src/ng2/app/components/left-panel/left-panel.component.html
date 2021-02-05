@@ -22,14 +22,32 @@
         ></span>
     </div>
     <div class="center-category collapsed-nav nano-content">
-        <app-left-panel-billing (onChangeState)="onChangeState($event)"></app-left-panel-billing>
-        <app-left-panel-companies (onChangeState)="onChangeState($event)"></app-left-panel-companies>
-        <app-left-panel-company (onChangeState)="onChangeState($event)"></app-left-panel-company>
+        <app-left-panel-billing
+            (onChangeState)="onChangeState($event)"
+            [activePage]="state"
+        ></app-left-panel-billing>
+        <app-left-panel-companies
+            (onChangeState)="onChangeState($event)"
+            [activePage]="state"
+        ></app-left-panel-companies>
+        <app-left-panel-company
+            (onChangeState)="onChangeState($event)"
+            [activePage]="state"
+        ></app-left-panel-company>
         <app-left-panel-inventory (onChangeState)="onChangeState($event)"></app-left-panel-inventory>
         <app-left-panel-password-manager (onChangeState)="onChangeState($event)"></app-left-panel-password-manager>
-        <app-left-panel-settings (onChangeState)="onChangeState($event)"></app-left-panel-settings>
-        <app-left-panel-tickets (onChangeState)="onChangeState($event)"></app-left-panel-tickets>
-        <app-left-panel-users (onChangeState)="onChangeState($event)"></app-left-panel-users>
+        <app-left-panel-settings
+            (onChangeState)="onChangeState($event)"
+            [activePage]="state"
+        ></app-left-panel-settings>
+        <app-left-panel-tickets
+            (onChangeState)="onChangeState($event)"
+            [activePage]="state"
+        ></app-left-panel-tickets>
+        <app-left-panel-users
+            (onChangeState)="onChangeState($event)"
+            [activePage]="state"
+        ></app-left-panel-users>
         <app-left-panel-reports (onChangeState)="onChangeState($event)"></app-left-panel-reports>
     </div>
 </div>

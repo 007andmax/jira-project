@@ -8,19 +8,6 @@
     [ngClass]="{'--full-width':toggleLeftPanel}"
 ></app-header>
 <app-left-panel [ngClass]="{'hidden-left-panel':toggleLeftPanel}"></app-left-panel>
-<aside
-    id="left"
-    style="z-index: 991;"
-    ng-include="'/ng1/scripts/core/left-panel/left-panel.tpl.html'"
-></aside>
-<aside
-    ng-controller="quicktech.core.leftPanel.leftPanelCtrl"
-    id="mobile-left"
-    ng-class="{opened: isLeftPanelOpened}"
-    qt-sidebar
-    style="z-index: 991;"
-    ng-include="'/ng1/scripts/core/left-panel/mobile-left-panel.tpl.html'"
-></aside>
 <div class="main-container">
     <div class="row">
         <div

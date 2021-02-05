@@ -1,10 +1,13 @@
 <div
     class="category-name"
-    (click)="goToState('company-dashboard')"
+    (click)="open = !open"
 >
     <span>Companies</span>
 </div>
-<div class="category-list-items">
+<div
+    class="category-list-items"
+    *ngIf="open"
+>
     <div
         class="center-category__category"
         [ngClass]="{'active':activePage === 'company-dashboard'}"

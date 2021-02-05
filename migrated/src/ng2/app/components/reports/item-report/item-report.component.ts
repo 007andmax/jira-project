@@ -20,7 +20,7 @@ export class ItemReportComponent implements OnInit, OnDestroy {
   }
   back() {
 
-    let body = document.querySelector('.left-panel__category-wrap');
+    let body = document.querySelector('.main-container');
     var link = document.createElement('a');
     body.appendChild(link);
     link.href = `#/ng2/reports`;

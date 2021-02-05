@@ -1,7 +1,13 @@
-<div class="category-name">
+<div
+    class="category-name"
+    (click)="open = !open"
+>
     <span>Billing</span>
 </div>
-<div class="category-list-items">
+<div
+    class="category-list-items"
+    *ngIf="open"
+>
     <div
         class="center-category__category"
         *ngIf="getPermissions('VIEW_ACCOUNTING_DASHBOARD')"
@@ -52,6 +58,7 @@
     >
         Contracts
     </div>
+
 
 
 </div>

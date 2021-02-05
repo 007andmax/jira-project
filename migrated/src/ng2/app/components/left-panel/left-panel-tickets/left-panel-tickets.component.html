@@ -1,10 +1,18 @@
 <div
     class="category-name"
-    (click)="goToBashboard()"
+    (click)="open = !open"
 >
     <span>Tickets</span>
 </div>
-<div class="category-list-items">
+<div
+    class="category-list-items"
+    *ngIf="open"
+>
+
+
+
+
+
 
 
 
@@ -85,7 +93,7 @@
     <div
         class="list-item d-f jc-sb"
         [ngClass]="{'active': listType === 'RECURRING_TICKETS'}"
-        (click)="setTypeFilter('RECURRING_TICKETS')"
+        (click)="goToRecurringTickets('RECURRING_TICKETS')"
     >
         Recurring tickets
     </div>
@@ -109,6 +117,11 @@
             {{getCountByField('RECURRING_TICKETS_CLOSED')}}
         </div>
     </div>
+
+
+
+
+
 
 
 

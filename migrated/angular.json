@@ -300,7 +300,6 @@
               "src/ng1/scripts/core/header/header.ctrl.js",
               "src/ng1/scripts/core/header/logout-btn.drv.js",
               "src/ng1/scripts/core/left-panel/customer-ticket-report/customer-ticket-report.ctrl.js",
-              "src/ng1/scripts/core/left-panel/left-panel.ctrl.js",
               "src/ng1/scripts/core/quick-support/copy-key.drv.js",
               "src/ng1/scripts/core/quick-support/copy-url.drv.js",
               "src/ng1/scripts/core/quick-support/open-mail-manager.drv.js",

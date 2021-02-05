@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, Output, EventEmitter, Input } from '@angular/core';
 import { ProductService } from 'src/ng2/app/services/product/product.service';
 import { CategoryProduct } from 'src/ng2/app/interfaces/product/category-product';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';

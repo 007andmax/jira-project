@@ -41,7 +41,7 @@ export class HeaderComponent implements OnInit {
   }
   goToLink(url) {
 
-    let body = document.querySelector('.left-panel__category-wrap');
+    let body = document.querySelector('.main-container');
     var link = document.createElement('a');
     body.appendChild(link);
     link.href = url;

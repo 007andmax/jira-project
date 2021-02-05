@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Company } from 'src/ng2/app/interfaces/company/company';
 import { PermissionsService } from 'src/ng2/app/services/permissions/permissions.service';
@@ -12,7 +12,8 @@ import { QuoteStateService } from 'src/ng2/app/states/quote/quote-state.service'
   styleUrls: ['./left-panel-company.component.scss']
 })
 export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
-  activePage: string = "new-billable";
+  open: boolean = false;
+  @Input() activePage: string = "";
   selectedCompany: Company;
   companyId: string;
   sub: Subscription = new Subscription();
@@ -37,7 +38,7 @@ export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
     this.sub.add(getOnBillingPage);
   }
   /* goToDashboard() {
-     let body = document.querySelector('.left-panel__category-wrap');
+     let body = document.querySelector('.main-container');
      var link = document.createElement('a');
      body.appendChild(link);
      // link.href = `#/clients/companyProfile/${this.company.id}?tabName=dashboard`;

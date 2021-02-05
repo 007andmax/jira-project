@@ -11,9 +11,11 @@ import { SettingStateService } from 'src/ng2/app/states/setting/setting-state.se
   styleUrls: ['./left-panel-settings.component.scss']
 })
 export class LeftPanelSettingsComponent implements OnInit {
+  open: boolean = false;
   active: boolean = false;
   componentName: string;
   currentUser: CurrentUser;
+  @Input() activePage: string = "";
   @Output() onGoToLink = new EventEmitter();
   @Output() onChangeState = new EventEmitter();
   constructor(private permissionsService: PermissionsService,
