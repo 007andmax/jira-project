@@ -9,35 +9,35 @@
     *ngIf="open"
 >
     <div
-        class="center-category__category"
+        class="center-category__category category-item"
         [ngClass]="{'active':activePage === 'company-dashboard'}"
         (click)="goToState('company-dashboard')"
     >
         Dashboard
     </div>
     <div
-        class="center-category__category"
+        class="center-category__category category-item"
         [ngClass]="{'active':activePage === 'company-tickets'}"
         (click)="goToState('company-tickets')"
     >
         Tickets
     </div>
     <div
-        class="center-category__category"
+        class="center-category__category category-item"
         [ngClass]="{'active':activePage === 'company-user'}"
         (click)="goToState('company-user')"
     >
         Users
     </div>
     <div
-        class="center-category__category"
+        class="center-category__category category-item"
         [ngClass]="{'active':activePage === 'company-devices'}"
         (click)="goToState('company-devices')"
     >
         Devices
     </div>
     <div
-        class="center-category__category"
+        class="center-category__category category-item"
         [ngClass]="{'active':activePage === 'company-network-scan'}"
         (click)="goToState('company-network-scan')"
     >
@@ -45,7 +45,7 @@
     </div>
     <div
         *ngIf="getPermissions('VIEW_PASSWORD_SECTION')"
-        class="center-category__category"
+        class="center-category__category category-item"
         [ngClass]="{'active':activePage === 'company-password-manager'}"
         (click)="goToState('company-password-manager')"
     >
@@ -53,7 +53,7 @@
     </div>
     <div
         *ngIf="getPermissions('VIEW_SALES_REPORT')"
-        class="center-category__category"
+        class="center-category__category category-item"
         [ngClass]="{'active':activePage === 'company-products'}"
         (click)="goToState('company-products')"
     >
@@ -61,7 +61,7 @@
     </div>
     <div
         *ngIf="getPermissions('VIEW_SERVICE_AGREEMENTS') && selectedCompany &&  selectedCompany.clientType !== 'LEAD' && selectedCompany.clientType !== 'VENDOR'"
-        class="center-category__category"
+        class="center-category__category category-item"
         [ngClass]="{'active':activePage === 'company-contracts'}"
         (click)="goToState('company-contracts')"
     >

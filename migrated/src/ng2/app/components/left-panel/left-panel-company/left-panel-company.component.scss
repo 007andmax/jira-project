@@ -1,4 +1,13 @@
 .active {
     background: #3e4b61;
+     color: #16a4fa;
     border-left: 2px solid #16a4fa;
+}
+.category-item {
+    &:hover {
+        color: #16a4fa;
+    }
+}
+.category-name  {
+    color: white;
 }

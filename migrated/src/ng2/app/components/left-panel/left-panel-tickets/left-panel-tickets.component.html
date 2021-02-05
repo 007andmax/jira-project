@@ -8,26 +8,15 @@
     class="category-list-items"
     *ngIf="open"
 >
-
-
-
-
-
-
-
-
-
-
-
     <div
-        class="list-item d-f jc-sb"
+        class="list-item d-f jc-sb category-item"
         [ngClass]="{'active': listType === 'DASHBOARD'}"
         (click)="goToBashboard()"
     >
         Dashboard
     </div>
     <div
-        class="list-item d-f jc-sb"
+        class="list-item d-f jc-sb category-item"
         [ngClass]="{'active': listType === 'USERS'}"
         (click)="setTypeFilter('USERS')"
     >
@@ -35,7 +24,7 @@
         <div>{{getCountByField('USER')}}</div>
     </div>
     <div
-        class="list-item d-f jc-sb"
+        class="list-item d-f jc-sb category-item"
         [ngClass]="{'active': listType === 'ALL'}"
         (click)="setTypeFilter('ALL')"
     >
@@ -43,7 +32,7 @@
         <div>{{getCountByField('ALL')}}</div>
     </div>
     <div
-        class="list-item d-f jc-sb"
+        class="list-item d-f jc-sb category-item"
         [ngClass]="{'active': listType === 'UNASSIGNED'}"
         (click)="setTypeFilter('UNASSIGNED')"
     >
@@ -51,7 +40,7 @@
         <div>{{getCountByField('UNASSIGNED')}}</div>
     </div>
     <div
-        class="list-item d-f jc-sb"
+        class="list-item d-f jc-sb category-item"
         [ngClass]="{'active': listType === 'OPEN'}"
         (click)="setTypeFilter('OPEN')"
     >
@@ -59,7 +48,7 @@
         <div>{{getCountByField('OPEN')}}</div>
     </div>
     <div
-        class="list-item d-f jc-sb"
+        class="list-item d-f jc-sb category-item"
         [ngClass]="{'active': listType === 'CLOSED'}"
         (click)="setTypeFilter('CLOSED')"
     >
@@ -67,7 +56,7 @@
         <div>{{getCountByField('CLOSED')}}</div>
     </div>
     <div
-        class="list-item d-f jc-sb"
+        class="list-item d-f jc-sb category-item"
         [ngClass]="{'active': listType === 'ON_HOLD'}"
         (click)="setTypeFilter('ON_HOLD')"
     >
@@ -75,7 +64,7 @@
         <div>{{getCountByField('ON_HOLD')}}</div>
     </div>
     <div
-        class="list-item d-f jc-sb"
+        class="list-item d-f jc-sb category-item"
         [ngClass]="{'active': listType === 'TRASH'}"
         (click)="setTypeFilter('TRASH')"
     >
@@ -83,7 +72,7 @@
         <div>{{getCountByField('TRASH')}}</div>
     </div>
     <div
-        class="list-item d-f jc-sb"
+        class="list-item d-f jc-sb category-item"
         [ngClass]="{'active': listType === 'SPAM'}"
         (click)="setTypeFilter('SPAM')"
     >
@@ -91,14 +80,14 @@
         <div>{{getCountByField('SPAM')}}</div>
     </div>
     <div
-        class="list-item d-f jc-sb"
+        class="list-item d-f jc-sb category-item"
         [ngClass]="{'active': listType === 'RECURRING_TICKETS'}"
         (click)="goToRecurringTickets('RECURRING_TICKETS')"
     >
         Recurring tickets
     </div>
     <div
-        class="list-item d-f jc-sb"
+        class="list-item d-f jc-sb category-item"
         [ngClass]="{'active': listType === 'RECURRING_TICKETS_OPEN'}"
         (click)="setTypeFilter('RECURRING_TICKETS_OPEN')"
     >
@@ -108,7 +97,7 @@
         </div>
     </div>
     <div
-        class="list-item d-f jc-sb"
+        class="list-item d-f jc-sb category-item"
         [ngClass]="{'active': listType === 'RECURRING_TICKETS_CLOSED'}"
         (click)="setTypeFilter('RECURRING_TICKETS_CLOSED')"
     >
@@ -117,6 +106,8 @@
             {{getCountByField('RECURRING_TICKETS_CLOSED')}}
         </div>
     </div>
+
+
 
 
 

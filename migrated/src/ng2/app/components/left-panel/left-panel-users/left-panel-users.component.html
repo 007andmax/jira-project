@@ -8,46 +8,34 @@
     class="category-list-items"
     *ngIf="open"
 >
-
-
-
-
-
-
     <div
-        class="list-item"
+        class="list-item category-item"
         [ngClass]="{'active': !showArchivedCompanies && !filter.getClientType()}"
         (click)="goToState();onShowAll()"
     >
         All Users
     </div>
     <div
-        class="list-item"
+        class="list-item category-item"
         [ngClass]="{'active': filter.getClientType() === 'CLIENT'}"
         (click)="goToState();onSetFilterClientType('CLIENT')"
     >
         Customer Users
     </div>
     <div
-        class="list-item"
+        class="list-item category-item"
         [ngClass]="{'active': filter.getClientType() === 'LEAD'}"
         (click)="goToState();onSetFilterClientType('LEAD')"
     >
         Lead Users
     </div>
     <div
-        class="list-item"
+        class="list-item category-item"
         [ngClass]="{'active': showArchivedCompanies && !filter.getClientType()}"
         (click)="goToState();onShowArchived()"
     >
         Archived Users
     </div>
-
-
-
-
-
-
 </div>
 <!-- <div class="mob-filters-header desktop-hidden">
     <button

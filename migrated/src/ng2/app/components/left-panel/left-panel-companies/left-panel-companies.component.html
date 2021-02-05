@@ -9,14 +9,14 @@
     *ngIf="open"
 >
     <div
-        class="list-item"
+        class="list-item category-item"
         [ngClass]="{'active':activePage === 'new-companies' && !showArchivedCompanies}"
         (click)="goToState();onShowAll()"
     >
         All Companies
     </div>
     <div
-        class="list-item"
+        class="list-item category-item"
         [ngClass]="{'active':activePage === 'new-companies' && showArchivedCompanies}"
         (click)="goToState();onShowArchived()"
     >

@@ -8,7 +8,10 @@
     class="category-list-items"
     *ngIf="open"
 >
-    <li [ngClass]="{'active':activePage === 'myprofile-component'}">
+    <li
+        class="category-item"
+        [ngClass]="{'active':activePage === 'myprofile-component'}"
+    >
         <a
             href="#/ng2/setting/myprofile"
             (click)="goToState('myprofile-component')"
@@ -23,6 +26,7 @@
         </a>
     </li>
     <li
+        class="category-item"
         [ngClass]="{'active':activePage === 'manage-tags-component'}"
         *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TAGS_SETTINGS')"
     >
@@ -39,7 +43,10 @@
             Manage Tags
         </a>
     </li>
-    <li [ngClass]="{'active':activePage === 'glnumber-component'}">
+    <li
+        class="category-item"
+        [ngClass]="{'active':activePage === 'glnumber-component'}"
+    >
         <a
             href="#/ng2/setting/glnumber"
             (click)="goToState('glnumber-component')"
@@ -53,7 +60,10 @@
             Manage GL number
         </a>
     </li>
-    <li [ngClass]="{'active':activePage === 'company-profile-component'}">
+    <li
+        class="category-item"
+        [ngClass]="{'active':activePage === 'company-profile-component'}"
+    >
         <a
             href="#/ng2/setting/companyprofile"
             (click)="goToState('company-profile-component')"
@@ -68,7 +78,10 @@
             Company Profile
         </a>
     </li>
-    <li [ngClass]="{'active':activePage === 'tech-component'}">
+    <li
+        class="category-item"
+        [ngClass]="{'active':activePage === 'tech-component'}"
+    >
         <a
             href="#/ng2/setting/techUsers"
             (click)="goToState('tech-component')"
@@ -82,7 +95,10 @@
             Manage Tech Users
         </a>
     </li>
-    <li [ngClass]="{'active':activePage === 'email-setting-component'}">
+    <li
+        class="category-item"
+        [ngClass]="{'active':activePage === 'email-setting-component'}"
+    >
         <a
             href="#/ng2/setting/emailSetting"
             (click)="goToState('email-setting-component')"
@@ -96,7 +112,10 @@
             Email Settings
         </a>
     </li>
-    <li [ngClass]="{'active':activePage === 'taxes-component'}">
+    <li
+        class="category-item"
+        [ngClass]="{'active':activePage === 'taxes-component'}"
+    >
         <a
             href="#/ng2/setting/taxes"
             (click)="goToState('taxes-component')"
@@ -111,6 +130,7 @@
         </a>
     </li>
     <li
+        class="category-item"
         [ngClass]="{'active':activePage === 'permission-manage-component'}"
         *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_PERMISSIONS_SETTINGS')"
     >
@@ -127,7 +147,10 @@
             Permission Management
         </a>
     </li>
-    <li [ngClass]="{'active':activePage === 'email-templete-component'}">
+    <li
+        class="category-item"
+        [ngClass]="{'active':activePage === 'email-templete-component'}"
+    >
         <a
             href="#/ng2/setting/emailTemplete"
             (click)="goToState('email-templete-component')"
@@ -141,7 +164,10 @@
             Email Templetes
         </a>
     </li>
-    <li [ngClass]="{'active':activePage === 'integrations-component'}">
+    <li
+        class="category-item"
+        [ngClass]="{'active':activePage === 'integrations-component'}"
+    >
         <a
             href="#/ng2/setting/integration"
             (click)="goToState('integrations-component')"
@@ -155,7 +181,10 @@
             Integrations
         </a>
     </li>
-    <li [ngClass]="{'active':activePage === 'invoice-ticket-component'}">
+    <li
+        class="category-item"
+        [ngClass]="{'active':activePage === 'invoice-ticket-component'}"
+    >
         <a
             href="#/ng2/setting/invoiceTickets"
             (click)="goToState('invoice-ticket-component')"
@@ -169,7 +198,10 @@
             Invoice and Ticket
         </a>
     </li>
-    <li [ngClass]="{'active':activePage === 'commission-component'}">
+    <li
+        class="category-item"
+        [ngClass]="{'active':activePage === 'commission-component'}"
+    >
         <a
             href="#/ng2/setting/commission"
             (click)="goToState('commission-component')"
@@ -183,7 +215,10 @@
             Commissions
         </a>
     </li>
-    <li [ngClass]="{'active':activePage === 'subscription-component'}">
+    <li
+        class="category-item"
+        [ngClass]="{'active':activePage === 'subscription-component'}"
+    >
         <a
             href="#/ng2/setting/subscription"
             (click)="goToState('subscription-component')"
@@ -198,6 +233,8 @@
         </a>
     </li>
 </div>
+
+
 
 
 <!-- <div class="brand">
