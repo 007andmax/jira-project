@@ -23,7 +23,6 @@ export class LeftPanelBillingComponent implements OnInit, OnDestroy {
    * @param {QuoteStateService} quoteStateService Service to work with quote
    */
   constructor(
-    //private quoteStateService: QuoteStateService,
     private leftPanelStateService: LeftPanelStateService,
     private permissionsService: PermissionsService,
   ) { }
@@ -45,10 +44,7 @@ export class LeftPanelBillingComponent implements OnInit, OnDestroy {
    * * @param state - state to go
    */
   public goToState(state) {
-    this.activePage = state;
-
     this.onChangeState.emit(state);
-    //   this.quoteStateService.goToState(state);
   }
 
   public getPermissions(action) {

@@ -51,9 +51,7 @@ export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
     this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.companyId);
   }
   public goToState(state) {
-    this.activePage = state;
     this.onChangeState.emit(state);
-    //  this.quoteStateService.goToState(state);
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)

@@ -56,10 +56,7 @@ export class LeftPanelInventoryComponent implements OnInit {
     }
   }
   public goToState() {
-    // this.activePage = state;
     this.onChangeState.emit('inventory');
-
-    //  this.quoteStateService.goToState(state);
   }
   deleteCategory(category) {
     this.confirmStateService.setConfirmAction(DELETE_COMPANY);

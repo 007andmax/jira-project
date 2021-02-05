@@ -28,10 +28,7 @@ export class LeftPanelSettingsComponent implements OnInit {
     this.currentUser = this.usersStateService.getCurrentUser();
   }
   public goToState(state) {
-    // this.activePage = state;
     this.onChangeState.emit(state);
-
-    //   this.quoteStateService.goToState(state);
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)

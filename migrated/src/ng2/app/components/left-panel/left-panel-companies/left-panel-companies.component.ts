@@ -165,11 +165,7 @@ export class LeftPanelCompaniesComponent implements OnInit {
     })
   }
   public goToState() {
-    // this.activePage = state;
     this.onChangeState.emit('new-companies');
-
-
-    //  this.quoteStateService.goToState(state);
   }
   public onSelectClientIndustry(item) {
     if (!item) {

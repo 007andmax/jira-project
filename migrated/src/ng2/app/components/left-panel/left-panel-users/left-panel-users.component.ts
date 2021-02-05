@@ -61,10 +61,7 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
     document.body.querySelector('app-left-panel-users').classList.remove('show');
   }
   public goToState() {
-    // this.activePage = state;
-
     this.onChangeState.emit('new-users');
-
   }
   public onSelectCompany(item) {
     if (!item) {

@@ -238,10 +238,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   public goToState() {
-    // this.activePage = state;
-
     this.onChangeState.emit('password-manager');
-    //  this.quoteStateService.goToState(state);
   }
 
   /**

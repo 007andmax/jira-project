@@ -24,7 +24,6 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
   constructor(private ticketsStateService: TicketsStateService,
     private ticketsService: TicketsService,
     public cd: ChangeDetectorRef,
-    // private quoteStateService: QuoteStateService,
     private leftPanelService: LeftPanelService) { }
 
 

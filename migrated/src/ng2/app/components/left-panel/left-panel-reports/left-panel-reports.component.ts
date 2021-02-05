@@ -12,9 +12,6 @@ export class LeftPanelReportsComponent implements OnInit {
   ngOnInit() {
   }
   public goToState() {
-    // this.activePage = state;
-
     this.onChangeState.emit('new-reports');
-    //  this.quoteStateService.goToState(state);
   }
 }
