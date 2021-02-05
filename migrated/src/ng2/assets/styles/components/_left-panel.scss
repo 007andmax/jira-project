@@ -1,0 +1,69 @@
+.app-left-panel {
+  display: block;
+  height: 100vh;
+  width: $left-panel-width;
+  z-index: 1050;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #212b36;
+  color: #fff;
+  padding: 24px;
+  transition: width 300ms;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+
+  &__header-logo-mini {
+    display: none;
+  }
+
+  &__header-logo {
+    width: 128px;
+    height: 32px;
+    position: relative;
+    background-image: url("assets/img/icons-left-sidebar/quicktech-logo.svg");
+  }
+
+  &__header-logo.--beta {
+    &::after {
+      position: absolute;
+      content: 'Beta';
+      line-height: 1.25;
+      text-transform: uppercase;
+      font-size: 8px;
+      letter-spacing: 1px;
+      padding: 1px 3px;
+      border-radius: 2px;
+      background-color: #ff5263;
+      top: 100%;
+      left: 34px;
+    }
+  }
+
+  &__header-resize-btn {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    background-image: url("assets/img/icons-left-sidebar/panel-open.svg");
+    transition: transform 300ms;
+  }
+
+}
+
+.app-left-panel.--mini {
+  width: 76px;
+
+  .app-left-panel {
+    &__header-logo {
+      display: none;
+    }
+
+    &__header-resize-btn {
+      transform: rotate(180deg);
+    }
+  }
+}

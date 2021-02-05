@@ -1,65 +1,49 @@
-<div
-    class="category-name"
-    (click)="open = !open"
->
-    <span>Billing</span>
+<div class="app-left-panel__menu" (click)="open = !open">
+  <div class="app-left-panel__menu-icon"></div>
+  <div class="app-left-panel__menu-title">Billing</div>
 </div>
-<div
-    class="category-list-items"
-    *ngIf="open"
->
-    <div
-        class="center-category__category category-item"
-        *ngIf="getPermissions('VIEW_ACCOUNTING_DASHBOARD')"
-        [ngClass]="{'active':activePage === 'billing-dashboard'}"
-        (click)="goToState('billing-dashboard')"
-    >
-        Dashboard
-    </div>
-    <div
-        class="center-category__category category-item"
-        [ngClass]="{'active':activePage === 'new-services'}"
-        (click)="goToState('new-services')"
-    >
-        Default Services
-    </div>
-    <div
-        class="center-category__category category-item"
-        [ngClass]="{'active':activePage === 'new-billable'}"
-        (click)="goToState('new-billable')"
-    >
-        Billable Items
-    </div>
-    <div
-        class="center-category__category category-item"
-        [ngClass]="{'active':activePage === 'new-billable-invoices'}"
-        (click)="goToState('new-billable-invoices')"
-    >
-        Invoices
-    </div>
-    <div
-        class="center-category__category category-item"
-        [ngClass]="{'active':activePage === 'quotes-component'}"
-        (click)="goToState('quotes-component')"
-    >
-        Quotes
-    </div>
-    <div
-        class="center-category__category category-item"
-        [ngClass]="{'active':activePage === 'new-payments-ng2'}"
-        (click)="goToState('new-payments-ng2')"
-    >
-        Payments
-    </div>
-    <div
-        class="center-category__category category-item"
-        [ngClass]="{'active':activePage === 'new-contracts'}"
-        (click)="goToState('new-contracts')"
-    >
-        Contracts
-    </div>
-
-
-
-
+<div *ngIf="open">
+  <div
+    *ngIf="getPermissions('VIEW_ACCOUNTING_DASHBOARD')"
+    [ngClass]="{'active':activePage === 'billing-dashboard'}"
+    (click)="goToState('billing-dashboard')"
+  >
+    Dashboard
+  </div>
+  <div
+    [ngClass]="{'active':activePage === 'new-services'}"
+    (click)="goToState('new-services')"
+  >
+    Default Services
+  </div>
+  <div
+    [ngClass]="{'active':activePage === 'new-billable'}"
+    (click)="goToState('new-billable')"
+  >
+    Billable Items
+  </div>
+  <div
+    [ngClass]="{'active':activePage === 'new-billable-invoices'}"
+    (click)="goToState('new-billable-invoices')"
+  >
+    Invoices
+  </div>
+  <div
+    [ngClass]="{'active':activePage === 'quotes-component'}"
+    (click)="goToState('quotes-component')"
+  >
+    Quotes
+  </div>
+  <div
+    [ngClass]="{'active':activePage === 'new-payments-ng2'}"
+    (click)="goToState('new-payments-ng2')"
+  >
+    Payments
+  </div>
+  <div
+      [ngClass]="{'active':activePage === 'new-contracts'}"
+      (click)="goToState('new-contracts')"
+  >
+      Contracts
+  </div>
 </div>

@@ -19,12 +19,6 @@
   }
 }
 
-.content-container {
-  margin-left: 316px;
-  transition: 300ms all;
-
-}
-
 .left-panel-closed .content-container {
   margin-left: 76px;
 }

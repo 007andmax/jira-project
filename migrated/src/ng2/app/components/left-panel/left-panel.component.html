@@ -1,43 +1,15 @@
-<div class="left-panel-full-wrapper nano">
-    <div class="left-panel-full__head">
-        <div
-            class="icon-pos go-back-left-panel"
-            (click)="onToggleLeftPanel()"
-        >
-            <i class="icn-sm icn-back-arrow"></i>
-        </div>
-        <span
-            class="left-panel-full__head--header"
-            [textContent]="headerText"
-        ></span>
-    </div>
-    <div class="center-category collapsed-nav nano-content">
-        <app-left-panel-billing
-            (onChangeState)="onChangeState($event)"
-            [activePage]="state"
-        ></app-left-panel-billing>
-        <app-left-panel-companies
-            (onChangeState)="onChangeState($event)"
-            [activePage]="state"
-        ></app-left-panel-companies>
-        <app-left-panel-company
-            (onChangeState)="onChangeState($event)"
-            [activePage]="state"
-        ></app-left-panel-company>
-        <app-left-panel-inventory (onChangeState)="onChangeState($event)"></app-left-panel-inventory>
-        <app-left-panel-password-manager (onChangeState)="onChangeState($event)"></app-left-panel-password-manager>
-        <app-left-panel-settings
-            (onChangeState)="onChangeState($event)"
-            [activePage]="state"
-        ></app-left-panel-settings>
-        <app-left-panel-tickets
-            (onChangeState)="onChangeState($event)"
-            [activePage]="state"
-        ></app-left-panel-tickets>
-        <app-left-panel-users
-            (onChangeState)="onChangeState($event)"
-            [activePage]="state"
-        ></app-left-panel-users>
-        <app-left-panel-reports (onChangeState)="onChangeState($event)"></app-left-panel-reports>
-    </div>
+<div class="app-left-panel__header">
+  <div class="app-left-panel__header-logo --beta"></div>
+  <div class="app-left-panel__header-resize-btn" (click)="onToggleLeftPanel()"></div>
+</div>
+<div class="app-left-panel__body">
+  <app-left-panel-billing (onChangeState)="onChangeState($event)" [activePage]="state"></app-left-panel-billing>
+  <app-left-panel-companies (onChangeState)="onChangeState($event)" [activePage]="state"></app-left-panel-companies>
+  <app-left-panel-company (onChangeState)="onChangeState($event)" [activePage]="state"></app-left-panel-company>
+  <app-left-panel-inventory (onChangeState)="onChangeState($event)"></app-left-panel-inventory>
+  <app-left-panel-password-manager (onChangeState)="onChangeState($event)"></app-left-panel-password-manager>
+  <app-left-panel-settings (onChangeState)="onChangeState($event)" [activePage]="state"></app-left-panel-settings>
+  <app-left-panel-tickets (onChangeState)="onChangeState($event)" [activePage]="state"></app-left-panel-tickets>
+  <app-left-panel-users (onChangeState)="onChangeState($event)" [activePage]="state"></app-left-panel-users>
+  <app-left-panel-reports (onChangeState)="onChangeState($event)"></app-left-panel-reports>
 </div>
