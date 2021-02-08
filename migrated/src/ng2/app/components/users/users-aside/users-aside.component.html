@@ -1,177 +1,272 @@
-<div class="qt-aside-modern users-page__aside">
-  <div class="qt-aside-modern__header">
-    <div class="qt-aside-modern__header-title">Add user</div>
-    <div class="qt-aside-modern__header-close icon__close" (click)="close()"></div>
-  </div>
-
-  <div class="qt-aside-modern__content">
-    <div class="upload-photo qt-mb-24">
-      <div class="upload-photo__img-block">
-        <img class="upload-photo__avatar" *ngIf="user.avatar" [src]="user.avatar.base64" />
-        <div class="upload-photo__no-avatar-icon icon__upload-avtar" *ngIf="!user.avatar"></div>
-      </div>
-
-      <div>
-        <div class="upload-photo__title">Upload your photo</div>
-        <div class="upload-photo__subtitle">Maximum size of 2MB. JPG, GIF, PNG</div>
-      </div>
-      <input id="upload-file" class="upload-photo__input" type="file" (input)="uploadFileOnBrower($event)" />
+<div
+    class="qt-aside-modern users-page__aside"
+    *ngIf="opened"
+>
+    <div class="qt-aside-modern__header">
+        <div class="qt-aside-modern__header-title">Add user</div>
+        <div
+            class="qt-aside-modern__header-close icon__close"
+            (click)="close()"
+        ></div>
     </div>
-
-    <div class="qt-df qt-mb-24">
-      <div class="qt-w50 qt-mr-16">
-        <div class="qt-input-block" [ngClass]="{'--input-error':!validate.getFirstName()}">
-          <label>First Name</label>
-          <input
-            type="text"
-            minlength="2"
-            maxlength="30"
-            (blur)="onChangeFistname()"
-            [(ngModel)]="user.firstName"
-            placeholder="Enter First Name"
-          >
-          <mat-error class="qt-tooltip-error" *ngIf="!validate.getFirstName()">
-            Please enter first name
-          </mat-error>
-        </div>
-      </div>
-
-      <div class="qt-w50">
-        <div class="qt-input-block">
-          <label>Last Name</label>
-          <input
-            type="text"
-            maxlength="30"
-            [(ngModel)]="user.lastName"
-            placeholder="Enter Last Name"
-          >
-        </div>
-      </div>
-    </div>
-
-    <div class="qt-df qt-mb-24">
-      <div class="qt-w50 qt-mr-16">
-        <div class="qt-input-block" [ngClass]="{'--input-error':!validate.getPrimaryContactEmail() || !validate.getExistPrimaryContactEmail()}">
-          <label>Email</label>
-          <input
-            type="text"
-            maxlength="30"
-            [(ngModel)]="user.primaryEmail"
-            (blur)="onCheckEmail()"
-            placeholder="Enter Email"
-          >
-          <mat-error *ngIf="!validate.getPrimaryContactEmail()">
-            Please enter a valid email address
-          </mat-error>
-          <mat-error *ngIf="!validate.getExistPrimaryContactEmail()">
-            The email address is already occupied
-          </mat-error>
-        </div>
-      </div>
-
-      <div class="qt-w50">
-        <app-drop-down
-          [title]="'Designation'"
-          [placeholder]="'Select Designation'"
-          [list]="allTitles"
-          (onSelectedItem)="onSelectDesignation($event)"
-        ></app-drop-down>
-      </div>
-    </div>
-
-    <div class="qt-w100 qt-mb-24">
-      <app-drop-down
-        [title]="'Company'"
-        [list]="allTitles"
-        (onSelectedItem)="onSelectCompany($event)">
-      </app-drop-down>
-    </div>
-
-    <div class="qt-df qt-mb-24">
-      <div class="qt-w50 qt-mr-16 with-new-link">
-        <div class="qt-input-block" [ngClass]="{'--input-error':!validate.getPhoneNumber(0)}">
-          <div class="qt-df qt-jc-sb">
-            <label>Primary Phone</label>
-            <span class="qt-ff-gm qt-fs-12 qt-pb-10 qt-lh-133 qt-color-info" (click)="addPhoneNumber()" *ngIf="user.phoneNumbers.length < 3">+ Add Phone</span>
-          </div>
-
-          <div class="qt-with-number-types right">
-            <input type="text"
-              class="qt-w100"
-              [(ngModel)]="user.phoneNumbers[0].number"
-              (input)="onCheckPhoneNumber(0)"
-              placeholder="Enter Primary Phone"
-            >
-            <div class="grey-dropdown primary-phone-selector" ngbDropdown>
-              <button class="types-btn" id="dropdownBasic0" ngbDropdownToggle [textContent]="user.phoneNumbers[0].typeNumber"></button>
-              <i class="icn-sm report-caret-icon"></i>
-              <div ngbDropdownMenu aria-labelledby="dropdownBasic0">
-                <ng-template ngFor let-item [ngForOf]="phoneTypes">
-                  <button ngbDropdownItem [textContent]="item" (click)="user.phoneNumbers[0].typeNumber = item.toUpperCase()"></button>
-                </ng-template>
-              </div>
-            </div>
-          </div>
-
-          <mat-error *ngIf="!validate.getPhoneNumber(0)">
-            Phone number is required
-          </mat-error>
-        </div>
-
-        <ng-template ngFor let-phone *ngIf="user.phoneNumbers.length > 1" [ngForOf]="user.phoneNumbers" [ngForTrackBy]="trackById" let-i="index" [ngForTrackBy]="trackByIndex">
-          <div *ngIf="i > 0" style="margin-top: 20px;" class="with-new-link" ngbDropdown>
-            <div class="qt-input-block" [ngClass]="{'--input-error':!validate.getPhoneNumber(i)}">
-              <div class="qt-df qt-jc-sb">
-                <label>Additional phone</label>
-                <span class="qt-ff-gm qt-fs-12 qt-pb-10 qt-lh-133 qt-color-info" (click)="removePhoneNumber(i)">Remove Phone</span>
-              </div>
-
-              <div class="qt-with-number-types right">
-                <input
-                  type="text"
-                  class="qt-w100"
-                  [(ngModel)]="phone.number"
-                  (input)="onCheckPhoneNumber(i)"
-                  placeholder="Enter Primary Phone"
+    <div class="qt-aside-modern__content">
+        <div class="upload-photo qt-mb-24">
+            <div class="upload-photo__img-block">
+                <img
+                    class="upload-photo__avatar"
+                    *ngIf="user.avatar"
+                    [src]="user.avatar.base64"
                 >
-                <div class="grey-dropdown primary-phone-selector" ngbDropdown>
-                  <button class="types-btn" [id]="'dropdownBasic' + i" ngbDropdownToggle [textContent]="phone.typeNumber"></button>
-                  <i class="icn-sm report-caret-icon"></i>
-                  <div ngbDropdownMenu [attr.aria-labelledby]="'dropdownBasic' + i">
-                    <ng-template ngFor let-item [ngForOf]="phoneTypes">
-                      <button ngbDropdownItem [textContent]="item"(click)="phone.typeNumber = item.toUpperCase()"></button>
-                    </ng-template>
-                  </div>
-                </div>
-                <mat-error *ngIf="!validate.getPhoneNumber(i)">
-                  Phone number is required
-                </mat-error>
-              </div>
+                <div
+                    class="upload-photo__no-avatar-icon icon__upload-avtar"
+                    *ngIf="!user.avatar"
+                ></div>
             </div>
-          </div>
-        </ng-template>
-      </div>
-
-      <div class="qt-w50">
-        <app-drop-down
-          [title]="'User Type'"
-          [placeholder]="'Select User Type'"
-          [list]="allTitles"
-          container="body"
-        ></app-drop-down>
-      </div>
+            <div>
+                <div class="upload-photo__title">Upload your photo</div>
+                <div class="upload-photo__subtitle">Maximum size of 2MB. JPG, GIF, PNG</div>
+            </div>
+            <input
+                id="upload-file"
+                class="upload-photo__input"
+                type="file"
+                (input)="uploadFileOnBrower($event)"
+            >
+        </div>
+        <div class="qt-df qt-mb-24">
+            <div class="qt-w50 qt-mr-16">
+                <div
+                    class="qt-input-block"
+                    [ngClass]="{'--input-error':!validate.getFirstName()}"
+                >
+                    <label>First Name</label>
+                    <input
+                        type="text"
+                        minlength="2"
+                        maxlength="30"
+                        (blur)="onChangeFistname()"
+                        [(ngModel)]="user.firstName"
+                        placeholder="Enter First Name"
+                    >
+                    <mat-error
+                        class="qt-tooltip-error"
+                        *ngIf="!validate.getFirstName()"
+                    >
+                        Please enter first name
+                    </mat-error>
+                </div>
+            </div>
+            <div class="qt-w50">
+                <div class="qt-input-block">
+                    <label>Last Name</label>
+                    <input
+                        type="text"
+                        maxlength="30"
+                        [(ngModel)]="user.lastName"
+                        placeholder="Enter Last Name"
+                    >
+                </div>
+            </div>
+        </div>
+        <div class="qt-df qt-mb-24">
+            <div class="qt-w50 qt-mr-16">
+                <div
+                    class="qt-input-block"
+                    [ngClass]="{'--input-error':!validate.getPrimaryContactEmail() || !validate.getExistPrimaryContactEmail()}"
+                >
+                    <label>Email</label>
+                    <input
+                        type="text"
+                        maxlength="30"
+                        [(ngModel)]="user.primaryEmail"
+                        (blur)="onCheckEmail()"
+                        placeholder="Enter Email"
+                    >
+                    <mat-error *ngIf="!validate.getPrimaryContactEmail()">Please enter a valid email address</mat-error>
+                    <mat-error *ngIf="!validate.getExistPrimaryContactEmail()">The email address is already occupied</mat-error>
+                </div>
+            </div>
+            <div class="qt-w50">
+                <app-drop-down
+                    [title]="'Designation'"
+                    [placeholder]="'Select Designation'"
+                    [list]="allTitles"
+                    (onSelectedItem)="onSelectDesignation($event)"
+                ></app-drop-down>
+            </div>
+        </div>
+        <div class="qt-w100 qt-mb-24">
+            <app-drop-down
+                [placeholder]="'Company'"
+                [title]="'Company'"
+                [field]="'name'"
+                [list]="companies"
+                (onSelectedItem)="onSelectCompany($event)"
+            >
+            </app-drop-down>
+        </div>
+        <div class="qt-df qt-mb-24">
+            <div class="qt-w50 qt-mr-16 with-new-link">
+                <div
+                    class="qt-input-block"
+                    [ngClass]="{'--input-error':!validate.getPhoneNumber(0)}"
+                >
+                    <div class="qt-df qt-jc-sb">
+                        <label>Primary Phone</label>
+                        <span
+                            class="qt-ff-gm qt-fs-12 qt-pb-10 qt-lh-133 qt-color-info"
+                            (click)="addPhoneNumber()"
+                            *ngIf="user.phoneNumbers.length < 3"
+                        >
+                            + Add Phone
+                        </span>
+                    </div>
+                    <div class="qt-with-number-types right">
+                        <input
+                            type="text"
+                            class="qt-w100"
+                            [(ngModel)]="user.phoneNumbers[0].number"
+                            (input)="onCheckPhoneNumber(0)"
+                            placeholder="Enter Primary Phone"
+                        >
+                        <div
+                            class="grey-dropdown primary-phone-selector"
+                            ngbDropdown
+                        >
+                            <button
+                                class="types-btn"
+                                id="dropdownBasic0"
+                                ngbDropdownToggle
+                                [textContent]="user.phoneNumbers[0].typeNumber"
+                            ></button>
+                            <i class="icn-sm report-caret-icon"></i>
+                            <div
+                                ngbDropdownMenu
+                                aria-labelledby="dropdownBasic0"
+                            >
+                                <ng-template
+                                    ngFor
+                                    let-item
+                                    [ngForOf]="phoneTypes"
+                                >
+                                    <button
+                                        ngbDropdownItem
+                                        [textContent]="item"
+                                        (click)="user.phoneNumbers[0].typeNumber = item.toUpperCase()"
+                                    ></button>
+                                </ng-template>
+                            </div>
+                        </div>
+                    </div>
+                    <mat-error *ngIf="!validate.getPhoneNumber(0)">Phone number is required</mat-error>
+                </div>
+                <ng-template
+                    ngFor
+                    let-phone
+                    *ngIf="user.phoneNumbers.length > 1"
+                    [ngForOf]="user.phoneNumbers"
+                    [ngForTrackBy]="trackById"
+                    let-i="index"
+                    [ngForTrackBy]="trackByIndex"
+                >
+                    <div
+                        *ngIf="i > 0"
+                        style="margin-top: 20px;"
+                        class="with-new-link"
+                        ngbDropdown
+                    >
+                        <div
+                            class="qt-input-block"
+                            [ngClass]="{'--input-error':!validate.getPhoneNumber(i)}"
+                        >
+                            <div class="qt-df qt-jc-sb">
+                                <label>Additional phone</label>
+                                <span
+                                    class="qt-ff-gm qt-fs-12 qt-pb-10 qt-lh-133 qt-color-info"
+                                    (click)="removePhoneNumber(i)"
+                                >
+                                    Remove Phone
+                                </span>
+                            </div>
+                            <div class="qt-with-number-types right">
+                                <input
+                                    type="text"
+                                    class="qt-w100"
+                                    [(ngModel)]="phone.number"
+                                    (input)="onCheckPhoneNumber(i)"
+                                    placeholder="Enter Primary Phone"
+                                >
+                                <div
+                                    class="grey-dropdown primary-phone-selector"
+                                    ngbDropdown
+                                >
+                                    <button
+                                        class="types-btn"
+                                        [id]="'dropdownBasic' + i"
+                                        ngbDropdownToggle
+                                        [textContent]="phone.typeNumber"
+                                    ></button>
+                                    <i class="icn-sm report-caret-icon"></i>
+                                    <div
+                                        ngbDropdownMenu
+                                        [attr.aria-labelledby]="'dropdownBasic' + i"
+                                    >
+                                        <ng-template
+                                            ngFor
+                                            let-item
+                                            [ngForOf]="phoneTypes"
+                                        >
+                                            <button
+                                                ngbDropdownItem
+                                                [textContent]="item"
+                                                (click)="phone.typeNumber = item.toUpperCase()"
+                                            ></button>
+                                        </ng-template>
+                                    </div>
+                                </div>
+                                <mat-error *ngIf="!validate.getPhoneNumber(i)">Phone number is required</mat-error>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+            <div class="qt-w50">
+                <app-drop-down
+                    [title]="'User Type'"
+                    [field]="'title'"
+                    [placeholder]="'Select User Type'"
+                    [list]="userTypes"
+                    container="body"
+                    [editItem]="selectedUserType"
+                    [isBlockClear]="true"
+                    (onSelectedItem)="onSelectRole($event)"
+                ></app-drop-down>
+            </div>
+        </div>
+        <div class="qt-w100 qt-input-block">
+            <label>Subscription</label>
+            <app-company-subscription
+                [editItem]="user.subscription"
+                (subscribeChange)="onChangeSubscriptions($event)"
+            ></app-company-subscription>
+        </div>
     </div>
-
-    <div class="qt-w100 qt-input-block">
-      <label>Subscription</label>
-      <app-company-subscription (subscribeChange)="onChangeSubscriptions($event)"></app-company-subscription>
+    <div class="qt-aside-modern__footer">
+        <div class="qt-df">
+            <button
+                class="qt-button qt-mr-12"
+                appDisabledBtn
+                #addBtn="disabled"
+                (onClick)="onAdd()"
+            >
+                Add User
+            </button>
+            <button
+                class="qt-button --gray"
+                (click)="close()"
+            >
+                Cancel
+            </button>
+        </div>
     </div>
-  </div>
-
-  <div class="qt-aside-modern__footer">
-    <div class="qt-df">
-      <button class="qt-button qt-mr-12" appDisabledBtn #addBtn="disabled" (onClick)="add()">Add User</button>
-      <button class="qt-button --gray" (click)="close()">Cancel</button>
-    </div>
-  </div>
 </div>

@@ -13,6 +13,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlertComponent } from '../../shared/alert/alert.component';
 import { UsersTableService } from './services/users-table.service';
 import { DraftEmailStateService } from 'src/ng2/app/states/draft-email/draft-email-state.service';
+import { USERS } from 'src/ng2/app/const/emails';
 
 @Component({
   selector: 'app-users-table',
@@ -35,7 +36,7 @@ export class UsersTableComponent implements OnInit {
 
   onChangeSubscriptions(data) {
     this.usersService.setSubscriptions(data).subscribe(res => {
-       
+
       this.user.subscription = data;
     })
   }
@@ -70,12 +71,12 @@ export class UsersTableComponent implements OnInit {
     }
   };
   edit() {
-     
+
     this.usersStateService.setUserForArchive(this.user);
     this.usersStateService.onOpenEditAsige();
   }
   ngOnInit() {
-    
+
     if (this.companiesStateService.getCompanies().length > 0) this.companies = this.companiesStateService.getCompanies();
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.companies = data;
@@ -103,7 +104,7 @@ export class UsersTableComponent implements OnInit {
     this.usersStateService.setUserForArchive(this.user);
   }
   showUserDetails() {
-    
+
     this.elRef.nativeElement.querySelector('.new-users-content__list--item').classList.toggle('show-details');
   }
   restore() {
@@ -114,7 +115,7 @@ export class UsersTableComponent implements OnInit {
     this.usersStateService.setUserForDeArchive(this.user);
   }
   onSelectUser(event) {
-     
+
     if (event.target.checked) {
       this.draftEmailStateService.addSelectedUser(this.user);
     } else {
@@ -123,6 +124,12 @@ export class UsersTableComponent implements OnInit {
       if (index > -1) this.draftEmailStateService.removeSelectedUser(index);
     }
 
+  }
+  public showAsideForDraftEmail() {
+    this.draftEmailStateService.setAction(USERS);
+    this.draftEmailStateService.resetSelectedUsers();
+    this.draftEmailStateService.addSelectedUser(this.user);
+    this.draftEmailStateService.toggleAsideForAdd();
   }
   public trackById(index, item) {
     return item.id;

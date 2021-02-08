@@ -25,15 +25,14 @@ export class UserProfile {
     }
     public onEdit(user: User) {
         this.role = user.role;
-        if (user.phoneNumbers && user.phoneNumbers.length === 0 || !user.phoneNumbers)
-        {
+        if (user.phoneNumbers && user.phoneNumbers.length === 0 || !user.phoneNumbers) {
             this.phoneNumbers = [new PhoneNumber('OFFICE')];
         } else {
             this.phoneNumbers = user.phoneNumbers.map((item) => {
                 return new PhoneNumber(item.typeNumber, item.number);
             })
         }
-      
+
 
         this.subscription = {
             invoice: user.subscription.invoice, ticket: user.subscription.ticket, ticketManager: user.subscription.ticketManager
@@ -47,12 +46,12 @@ export class UserProfile {
         this.companyId = user.company.id;
 
     }
-    public editLogo (data) {
+    public editLogo(data) {
         this.avatar = data;
-     
+
     }
     public setLogo(data: ImageCropper) {
-       
+
         this.avatar = new UserAvatar();
         this.avatar.base64 = data.croppedImage.base64;
         this.avatar.origin.id = data.id;
@@ -68,6 +67,9 @@ export class UserProfile {
     public setRole(data) {
         this.role = data;
     }
+    public getRole() {
+        return this.role;
+    }
     public serCompanyId(data) {
         this.companyId = data;
     }
@@ -78,11 +80,11 @@ export class UserProfile {
         this.subscription = data;
     }
     public getUserForUpdate(user: User) {
-       
+
         return new UserUpdate(this, user);
     }
     public getUserForAdd() {
-       
+
         return new UserAdd(this);
     }
 }

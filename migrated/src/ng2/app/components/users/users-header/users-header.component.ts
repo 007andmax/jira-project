@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { USERS } from 'src/ng2/app/const/emails';
 import { DraftEmailStateService } from 'src/ng2/app/states/draft-email/draft-email-state.service';
@@ -11,6 +11,8 @@ import { UsersHeaderService } from './services/users-header.service';
   providers: [UsersHeaderService]
 })
 export class UsersHeaderComponent implements OnInit, OnDestroy {
+  @Output() onChangeFilterField = new EventEmitter<any>();
+  @Output() onSelectAllUser = new EventEmitter<any>();
 
   @Input() count: number = 0;
   constructor(private usersStateService: UsersStateService,
@@ -19,11 +21,14 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    
+
   }
-  public showAsideForDraftEmail() {
-    this.draftEmailStateService.setAction(USERS);
-    this.draftEmailStateService.toggleAsideForAdd();
+  toggleAllUser(data) {
+    this.onSelectAllUser.emit(data);
+  }
+
+  public onFilter(field) {
+    this.onChangeFilterField.emit(field);
   }
   addUser() {
     this.usersStateService.onOpenAsige();
