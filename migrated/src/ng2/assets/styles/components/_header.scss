@@ -13,7 +13,7 @@
   justify-content: space-between;
 
   &.--full-width {
-    width: calc(100% - 76px);
+    width: calc(100% - #{$left-panel-mini-width});
   }
 
   &__left-side {
@@ -68,7 +68,7 @@
   }
 
   &__account-info {
-    width: 256px;
+    width: fit-content;
     display: flex;
     border-left: 1px solid #edf0f2;
     padding: 12px 24px 12px 12px;
@@ -91,9 +91,6 @@
     font-size: 13px;
     line-height: 1.54;
     margin-bottom: 2px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    max-width: 191px;
     display: inline-block;
     white-space: nowrap;
     font-family: Graphik-Medium, sans-serif;

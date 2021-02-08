@@ -1,170 +1,20 @@
-<div
-    class="category-name"
-    (click)="open = !open"
->
-    <span>Users</span>
+<div class="app-left-panel__menu" [ngClass]="{'--active': open}" (click)="open = !open">
+  <div class="app-left-panel__menu-icon --users"></div>
+  <div class="app-left-panel__menu-title">Users</div>
+  <div class="app-left-panel__menu-arrow"></div>
 </div>
-<div
-    class="category-list-items"
-    *ngIf="open"
->
-    <div
-        class="list-item category-item"
-        [ngClass]="{'active': !showArchivedCompanies && !filter.getClientType()}"
-        (click)="goToState();onShowAll()"
-    >
-        All Users
-    </div>
-    <div
-        class="list-item category-item"
-        [ngClass]="{'active': filter.getClientType() === 'CLIENT'}"
-        (click)="goToState();onSetFilterClientType('CLIENT')"
-    >
-        Customer Users
-    </div>
-    <div
-        class="list-item category-item"
-        [ngClass]="{'active': filter.getClientType() === 'LEAD'}"
-        (click)="goToState();onSetFilterClientType('LEAD')"
-    >
-        Lead Users
-    </div>
-    <div
-        class="list-item category-item"
-        [ngClass]="{'active': showArchivedCompanies && !filter.getClientType()}"
-        (click)="goToState();onShowArchived()"
-    >
-        Archived Users
-    </div>
-</div>
-<!-- <div class="mob-filters-header desktop-hidden">
-    <button
-        class="x-mark mobile-btn"
-        (click)="closeMobileFilter()"
-    ></button>
-    <div>Filters</div>
-</div>
-<div class="left-panel-ng2__content--lists">
-    <div
-        class="list-item"
-        [ngClass]="{'active': !showArchivedCompanies && !filter.getClientType()}"
-        (click)="onShowAll()"
-    >
-        All Users
-    </div>
-    <div
-        class="list-item"
-        [ngClass]="{'active': filter.getClientType() === 'CLIENT'}"
-        (click)="onSetFilterClientType('CLIENT')"
-    >
-        Customer Users
-    </div>
-    <div
-        class="list-item"
-        [ngClass]="{'active': filter.getClientType() === 'LEAD'}"
-        (click)="onSetFilterClientType('LEAD')"
-    >
-        Lead Users
-    </div>
-    <div
-        class="list-item"
-        [ngClass]="{'active': showArchivedCompanies && !filter.getClientType()}"
-        (click)="onShowArchived()"
-    >
-        Archived Users
-    </div>
-</div>
-<div class="left-panel-ng2__content--tags clearfix">
-    <div class="tags-header">By tittle</div>
-    <app-select-search
-        [placeholder]="'Select Title'"
-        [class]="['dark-dropdown']"
-        [list]="allTitles"
-        (onSelectedItem)="onSelectTitle($event)"
-    ></app-select-search>
-    <div class="tags-item"></div>
-</div>
-<div class="left-panel-ng2__content--filters">
-    <div class="filter-item">
-        <i class="icn-sm report-caret-icon"></i>
-        <div
-            class="filter-item__header"
-            (click)="toggleFilter($event)"
-        >
-            By Company
-        </div>
-        <div class="filter-item__content">
-            <div class="dark-dropdown">
-                <app-select-search
-                    [placeholder]="'Select Company'"
-                    [class]="['dark-dropdown']"
-                    [change]="false"
-                    [field]="'name'"
-                    [editItem]="selectedCompany"
-                    [list]="companies"
-                    (onSelectedItem)="onSelectCompany($event)"
-                ></app-select-search>
-            </div>
-            <div class="resent-block">
-                <div class="resent-block__header">Recent</div>
-                <div class="resent-block__content">
-                    <ng-template
-                        ngFor
-                        let-item
-                        [ngForOf]="companiesHistory"
-                        let-i="index"
-                        [ngForTrackBy]="trackByIndex"
-                    >
-                        <p
-                            [textContent]="item"
-                            (click)="selectClientCompany(item)"
-                        ></p>
-                    </ng-template>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="filter-item">
-        <i class="icn-sm report-caret-icon"></i>
-        <div
-            class="filter-item__header"
-            (click)="toggleFilter($event)"
-        >
-            By industry
-        </div>
-        <div class="filter-item__content">
-            <div class="dark-dropdown">
-                <app-select-search
-                    [placeholder]="'Select Industry'"
-                    [class]="['dark-dropdown']"
-                    [editItem]="selectedClientIndustry"
-                    [list]="industries"
-                    (onSelectedItem)="onSelectClientIndustry($event)"
-                ></app-select-search>
-            </div>
-            <div class="resent-block">
-                <div class="resent-block__header">Recent</div>
-                <div class="resent-block__content">
-                    <ng-template
-                        ngFor
-                        let-item
-                        [ngForOf]="industryHistory"
-                        let-i="index"
-                        [ngForTrackBy]="trackByIndex"
-                    >
-                        <p
-                            [textContent]="item"
-                            (click)="selectClientIndustry(item)"
-                        ></p>
-                    </ng-template>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<button
-    class="mob-filters-btn apply-filters mobile-btn primary"
-    (click)="closeMobileFilter()"
->
-    Apply Filters
-</button> -->
+
+<ul class="app-left-panel__menu-expand" *ngIf="open">
+    <li [ngClass]="{'--active': !showArchivedCompanies && !filter.getClientType()}"  (click)="goToState();onShowAll()">
+      All Users
+    </li>
+    <li [ngClass]="{'--active': filter.getClientType() === 'CLIENT'}" (click)="goToState();onSetFilterClientType('CLIENT')">
+      Customer Users
+    </li>
+    <li [ngClass]="{'--active': filter.getClientType() === 'LEAD'}" (click)="goToState();onSetFilterClientType('LEAD')">
+      Lead Users
+    </li>
+    <li [ngClass]="{'--active': showArchivedCompanies && !filter.getClientType()}" (click)="goToState();onShowArchived()">
+      Archived Users
+    </li>
+</ul>
