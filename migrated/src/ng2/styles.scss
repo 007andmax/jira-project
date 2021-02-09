@@ -2908,7 +2908,7 @@ app-ticket-edit-aside-devices  {
 .qt-tooltip-error {
   z-index: 200;
   border-radius: 3px;
-  width: 139px;
+  max-width: 250px;
   position: absolute;
   background-color: #ff5263;
   padding: 8px;
