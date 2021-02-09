@@ -82,8 +82,18 @@
                         (blur)="onCheckEmail()"
                         placeholder="Enter Email"
                     >
-                    <mat-error *ngIf="!validate.getPrimaryContactEmail()">Please enter a valid email address</mat-error>
-                    <mat-error *ngIf="!validate.getExistPrimaryContactEmail()">The email address is already occupied</mat-error>
+                    <mat-error
+                        class="qt-tooltip-error"
+                        *ngIf="!validate.getPrimaryContactEmail()"
+                    >
+                        Please enter a valid email address
+                    </mat-error>
+                    <mat-error
+                        class="qt-tooltip-error"
+                        *ngIf="!validate.getExistPrimaryContactEmail()"
+                    >
+                        The email address is already occupied
+                    </mat-error>
                 </div>
             </div>
             <div class="qt-w50">
@@ -91,6 +101,9 @@
                     [title]="'Designation'"
                     [placeholder]="'Select Designation'"
                     [list]="allTitles"
+                    [search]="true"
+                    [change]="true"
+                    [add]="true"
                     (onSelectedItem)="onSelectDesignation($event)"
                 ></app-drop-down>
             </div>
@@ -98,9 +111,13 @@
         <div class="qt-w100 qt-mb-24">
             <app-drop-down
                 [placeholder]="'Company'"
+                [validate]="validate.getCompany()"
+                [errorMessage]="'The company name is required'"
                 [title]="'Company'"
                 [field]="'name'"
                 [list]="companies"
+                [search]="true"
+                [change]="true"
                 (onSelectedItem)="onSelectCompany($event)"
             >
             </app-drop-down>
@@ -158,7 +175,12 @@
                             </div>
                         </div>
                     </div>
-                    <mat-error *ngIf="!validate.getPhoneNumber(0)">Phone number is required</mat-error>
+                    <mat-error
+                        class="qt-tooltip-error"
+                        *ngIf="!validate.getPhoneNumber(0)"
+                    >
+                        Phone number is required
+                    </mat-error>
                 </div>
                 <ng-template
                     ngFor
@@ -224,7 +246,12 @@
                                         </ng-template>
                                     </div>
                                 </div>
-                                <mat-error *ngIf="!validate.getPhoneNumber(i)">Phone number is required</mat-error>
+                                <mat-error
+                                    class="qt-tooltip-error"
+                                    *ngIf="!validate.getPhoneNumber(i)"
+                                >
+                                    Phone number is required
+                                </mat-error>
                             </div>
                         </div>
                     </div>
@@ -236,7 +263,6 @@
                     [field]="'title'"
                     [placeholder]="'Select User Type'"
                     [list]="userTypes"
-                    container="body"
                     [editItem]="selectedUserType"
                     [isBlockClear]="true"
                     (onSelectedItem)="onSelectRole($event)"

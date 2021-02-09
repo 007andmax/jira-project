@@ -72,37 +72,34 @@
                             </label>
                         </div>
                     </th>
-                    <th class="users-table__name">
+                    <th
+                        class="users-table__name pointer"
+                        (click)="onFilter('name')"
+                    >
                         Name
-                        <span
-                            (click)="onFilter('name')"
-                            class="qt-table-modern__sorting"
-                        ></span>
-                    </th>
-                    <th class="users-table__company">
-                        Company
-                        <span
-                            (click)="onFilter('company')"
-                            class="qt-table-modern__sorting"
-                        ></span>
-                    </th>
-                    <th class="users-table__contract-no">
-                        Contract no
-                        <span
-                            (click)="onFilter('contact')"
-                            class="qt-table-modern__sorting"
-                        ></span>
-                    </th>
-                    <th class="users-table__subscription">
-                        Subscription
                         <span class="qt-table-modern__sorting"></span>
                     </th>
-                    <th class="users-table__tickets">
+                    <th
+                        class="users-table__company pointer"
+                        (click)="onFilter('company')"
+                    >
+                        Company
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th
+                        class="users-table__contract-no pointer"
+                        (click)="onFilter('contact')"
+                    >
+                        Contract no
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th class="users-table__subscription">Subscription</th>
+                    <th
+                        class="users-table__tickets pointer"
+                        (click)="onFilter('tickets')"
+                    >
                         Tickets
-                        <span
-                            (click)="onFilter('tickets')"
-                            class="qt-table-modern__sorting"
-                        ></span>
+                        <span class="qt-table-modern__sorting"></span>
                     </th>
                     <th class="users-table__email"></th>
                     <th class="users-table__menu"></th>
