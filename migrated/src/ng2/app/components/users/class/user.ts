@@ -35,18 +35,18 @@ export class User {
     twoFactorAuthType: string;
     userEnabled: boolean;
     userStatistic: UserStatistic;
+    selected: boolean = false;
     constructor(data = null) {
-        if (data)
-        {
+        if (data) {
             for (const key in data) {
-                this[key] =  data[key];
+                this[key] = data[key];
             }
         }
-       
-     }
 
-    public changeSubscriptions (data) {
-        this.subscription = new UserSubscription(data.id,data.invoice,data.ticket,data.ticketManager);
     }
-    
+
+    public changeSubscriptions(data) {
+        this.subscription = new UserSubscription(data.id, data.invoice, data.ticket, data.ticketManager);
+    }
+
 }

@@ -26,7 +26,8 @@ export class UsersTableComponent implements OnInit {
   @Input() showArchivedUsers: boolean;
   companies: Array<Company> = [];
   currentUser: CurrentUser = new CurrentUser();
-  constructor(private companiesStateService: CompaniesStateService, private usersService: UsersService,
+  constructor(private companiesStateService: CompaniesStateService,
+    private usersService: UsersService,
     private usersStateService: UsersStateService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,

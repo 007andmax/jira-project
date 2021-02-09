@@ -1,8 +1,13 @@
 <tr>
     <td class="users-table__check">
         <div class="d-f">
-            <label class="qt-checkbox">
+            <label
+                class="qt-checkbox"
+                [attr.for]="'user-' + user.id"
+            >
                 <input
+                    [attr.id]="'user-' + user.id"
+                    [(ngModel)]="user.selected"
                     type="checkbox"
                     (change)="onSelectUser($event)"
                 >

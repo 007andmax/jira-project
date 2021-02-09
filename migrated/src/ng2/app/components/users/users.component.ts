@@ -6,7 +6,7 @@ import { UserFilter } from './class/user-filter';
 import { CompaniesStateService } from '../../states/company/companies-state.service';
 import { Company } from '../../interfaces/company/company';
 import { ConfirmStateService } from '../shared/confirm/services/confirm-state.service';
-import { ARCHIVE_USER, DEARCHIVE_USER } from '../../const/confirm';
+import { ARCHIVE_USER, ARCHIVE_USERS, DEARCHIVE_USER } from '../../const/confirm';
 import { UsersService } from '../../services/users/users.service';
 import { UserChange } from './class/user-change';
 import { WebsocketService } from '../../services/websocket/websocket.service';
@@ -79,7 +79,9 @@ export class UsersComponent implements OnInit {
         if (this.confirmStateService.getConfirmAction() === DEARCHIVE_USER) {
           this.onDeArchiveUser(this.usersStateService.getUserForDeArchive().id);
         }
-
+        if (this.confirmStateService.getConfirmAction() === ARCHIVE_USERS) {
+          this.onArchiveUsers(this.usersStateService.getUsersForArchive().map(item => item.id));
+        }
       }
     })
     this.userListService.addSubscription(getConfirm);
@@ -129,6 +131,17 @@ export class UsersComponent implements OnInit {
     })
     this.userListService.addSubscription(getChangeCompanies);
     this.onInitSubscribe();
+  }
+  private onArchiveUsers(ids) {
+
+    let archiveUser = this.usersService.onArchiveUsers(ids).subscribe(data => {
+      /* if (!this.showArchivedUsers && this.filter.getClientType()) {
+         let index = this.users.findIndex(item => item.id === id);
+         if (index > -1) this.users.splice(index, 1);
+       }*/
+
+    })
+    this.userListService.addSubscription(archiveUser);
   }
   showMobileFilter() {
     document.body.querySelector('app-left-panel-users').classList.add('show');

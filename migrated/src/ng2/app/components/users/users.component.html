@@ -4,6 +4,7 @@
     <app-users-header
         [count]="count"
         (onChangeFilterField)="onFilter($event)"
+        [users]="users"
         (onSelectAllUser)="onSelectAllUser($event)"
     ></app-users-header>
     <div class="qt-page-list__body">

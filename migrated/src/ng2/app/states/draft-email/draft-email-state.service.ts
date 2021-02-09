@@ -8,32 +8,34 @@ import { Company } from '../../interfaces/company/company';
 export class DraftEmailStateService {
   showAsideForAdd: EventEmitter<any> = new EventEmitter();
   clear: EventEmitter<any> = new EventEmitter();
-  action:string = null;
-  selectedUsers:Array<User> = [];
-  selectedCompanies:Array<Company> = [];
+  action: string = null;
+  selectedUsers: Array<User> = [];
+  selectedCompanies: Array<Company> = [];
   constructor() { }
 
   public addSelectedCompany(data) {
     this.selectedCompanies.push(data);
   }
-  public getSelectedCompanies(){
+  public getSelectedCompanies() {
     return this.selectedCompanies;
   }
-  public resetSelectedCompanies () {
+  public resetSelectedCompanies() {
     this.selectedCompanies = [];
   }
   public removeSelectedCompany(i) {
     this.selectedCompanies.splice(i);
   }
 
-
+  public setSelectedUser(data) {
+    this.selectedUsers = data;
+  }
   public addSelectedUser(data) {
     this.selectedUsers.push(data);
   }
-  public getSelectedUsers(){
+  public getSelectedUsers() {
     return this.selectedUsers;
   }
-  public resetSelectedUsers () {
+  public resetSelectedUsers() {
     this.selectedUsers = [];
   }
   public removeSelectedUser(i) {
