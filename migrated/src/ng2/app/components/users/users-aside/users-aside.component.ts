@@ -141,7 +141,7 @@ export class UsersAsideComponent implements OnInit {
   public onSelectCompany(selectClient) {
     console.log("selectClient", selectClient);
     this.user.serCompanyId((selectClient === null) ? null : selectClient.id);
-    if (selectClient !== 'null') this.validate.setCompanyValid();
+    if (selectClient !== null) this.validate.setCompanyValid();
     if (this.user.primaryEmail && this.user.primaryEmail.length > 0 && this.user.companyId) this.onCheckValidPrimaryEmail();
   }
   getUserType() {
