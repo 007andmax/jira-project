@@ -8,6 +8,13 @@
         </div>
         <div class="qt-page-list__header-title-line--rigth">
             <div class="qt-df qt-ai-c">
+                <button
+                    class="qt-btn --outline-blue qt-mr-8"
+                    (click)="clearAll()"
+                    *ngIf="countFilter > 0"
+                >
+                    Clear all
+                </button>
                 <div
                     class="company-devices-page__list-header-buttons"
                     *ngIf="getSelectedCount() > 0"

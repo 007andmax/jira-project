@@ -1,7 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
+import { DropDownComponent } from '../../../shared/drop-down/drop-down.component';
 import { UserFilter } from '../../class/user-filter';
 
 @Component({
@@ -10,10 +11,13 @@ import { UserFilter } from '../../class/user-filter';
   styleUrls: ['./users-filter.component.scss']
 })
 export class UsersFilterComponent implements OnInit {
+  @ViewChild('titlesDp') titlesDp: DropDownComponent;
+  @ViewChild('companiesDp') companiesDp: DropDownComponent;
+  @ViewChild('industriesDp') industriesDp: DropDownComponent;
   companies = [];
   industries = [];
   allTitles: Array<string> = [];
-  filter: UserFilter = new UserFilter();
+  public filter: UserFilter = new UserFilter();
   sub: Subscription = new Subscription();
   @Output() changeCountFilter = new EventEmitter<any>();
   constructor(private companiesState: CompaniesStateService,
@@ -48,6 +52,21 @@ export class UsersFilterComponent implements OnInit {
         return acc;
       }, []).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
         1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
+
+  }
+  public onClearAll() {
+
+    if (!this.companiesDp.isDisabled) this.filter.setCompany(null);
+    this.filter.setClientIndustry(null);
+    this.filter.setTitle(null);
+    this.titlesDp.clearWithOutChanges();
+    this.industriesDp.clearWithOutChanges();
+
+    if (!this.companiesDp.isDisabled) this.companiesDp.clearWithOutChanges();
+
+
+    this.usersStateService.onInitFilter(this.filter);
+    this.onChangeCounterFilter();
 
   }
   private getClientsList(data) {

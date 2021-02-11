@@ -1,5 +1,6 @@
 <div class="qt-page-list__header-filters">
     <app-drop-down
+        #titlesDp
         class="qt-w100 qt-mr-8"
         [placeholder]="'Select Title'"
         [list]="allTitles"
@@ -8,6 +9,7 @@
         (onSelectedItem)="onSelectTitle($event)"
     ></app-drop-down>
     <app-drop-down
+        #companiesDp
         class="qt-w100 qt-mr-8"
         [placeholder]="'Search By Company'"
         [field]="'name'"
@@ -17,6 +19,7 @@
         (onSelectedItem)="onSelectCompany($event)"
     ></app-drop-down>
     <app-drop-down
+        #industriesDp
         class="qt-w100"
         [placeholder]="'Search By Industry'"
         [list]="industries"

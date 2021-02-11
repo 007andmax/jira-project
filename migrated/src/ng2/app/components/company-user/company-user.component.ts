@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { UserListService } from '../users/services/user-list.service';
 import { User } from '../users/class/user';
 import { Company } from '../../interfaces/company/company';
@@ -12,6 +12,7 @@ import { WebsocketService } from '../../services/websocket/websocket.service';
 import { ARCHIVE_USER, DEARCHIVE_USER } from '../../const/confirm';
 import { UserChange } from '../users/class/user-change';
 import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
+import { UsersHeaderComponent } from '../users/users-header/users-header.component';
 
 @Component({
   selector: 'company-user',
@@ -29,6 +30,7 @@ export class CompanyUserComponent implements OnInit {
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
   count: number = 0;
+  @ViewChild('header') header: UsersHeaderComponent;
   constructor(private usersStateService: UsersStateService,
     private userListService: UserListService,
     private companiesStateService: CompaniesStateService,
@@ -43,8 +45,10 @@ export class CompanyUserComponent implements OnInit {
     this.leftPanelStateService.setCompanyPage("company-user");
     let company_id = localStorage.getItem("company_id") || null;
     if (!company_id) return;
-    this.filter.setLeftFilters(null, company_id, null, null);
+    this.onInitFilters(company_id);
+
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
+      console.log("data", data);
       this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title);
       this.setDefaultScoll();
       this.onScroll();
@@ -117,6 +121,15 @@ export class CompanyUserComponent implements OnInit {
     this.userListService.addSubscription(getChangeCompanies);
     this.onInitSubscribe();
   }
+  public onInitFilters(company_id) {
+    let company = this.companiesStateService.getCompanies().find(item => item.id === company_id);
+    this.header.filter.companiesDp.isDisabled = true;
+    this.header.filter.companiesDp.editItem = company;
+    this.header.filter.filter.setCompany(company_id);
+    this.header.filter.onChangeCounterFilter();
+    this.filter.setLeftFilters(null, company_id, null, null);
+    this.cd.detectChanges();
+  }
   showMobileFilter() {
     document.body.querySelector('app-left-panel-users').classList.add('show');
   }
@@ -140,22 +153,28 @@ export class CompanyUserComponent implements OnInit {
   }
   onSelectAllUser(event) {
     if (event.target.checked) {
-      let list_user_table = document.body.querySelectorAll('app-users-table');
-      list_user_table.forEach(item => {
-        (<any>item.querySelector('input[type="checkbox"]')).checked = true;
-
-      });
+      this.users.forEach(item => {
+        item.selected = true;
+      })
+      /* let list_user_table = document.body.querySelectorAll('app-users-table');
+       list_user_table.forEach(item => {
+         (<any>item.querySelector('input[type="checkbox"]')).checked = true;
+ 
+       });*/
       this.draftEmailStateService.resetSelectedUsers();
       this.users.forEach(user => {
         this.draftEmailStateService.addSelectedUser(user);
       })
     } else {
+      this.users.forEach(item => {
+        item.selected = false;
+      })
       this.draftEmailStateService.resetSelectedUsers();
-      let list_user_table = document.body.querySelectorAll('app-users-table');
-      list_user_table.forEach(item => {
-        (<any>item.querySelector('input[type="checkbox"]')).checked = false;
-
-      });
+      /* let list_user_table = document.body.querySelectorAll('app-users-table');
+       list_user_table.forEach(item => {
+         (<any>item.querySelector('input[type="checkbox"]')).checked = false;
+ 
+       });*/
     }
   }
   private onDeArchiveUser(id) {
@@ -220,7 +239,7 @@ export class CompanyUserComponent implements OnInit {
     for (let i = start; i < end; i++) {
       usersList.push(listFilter[i]);
     }
-    this.users = [...this.users, ...usersList];
+    this.users = [...this.users, ...usersList.map(item => new User(JSON.parse(JSON.stringify(item))))];
     this.infiniteScrollDisabled = false;
     if ((this.page_number * 30) > listFilter.length) this.userListService.setBlockList(true);
 

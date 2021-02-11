@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { USERS } from 'src/ng2/app/const/emails';
 import { DraftEmailStateService } from 'src/ng2/app/states/draft-email/draft-email-state.service';
@@ -12,6 +12,8 @@ import { ConfirmStateService } from '../../shared/confirm/services/confirm-state
 import { UsersService } from 'src/ng2/app/services/users/users.service';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { CurrentUser } from 'src/ng2/class/current-user/current-user';
+import { TicketsFilterComponent } from '../../tickets/tickets/tickets-header/tickets-filter/tickets-filter.component';
+import { UsersFilterComponent } from './users-filter/users-filter.component';
 
 
 
@@ -26,7 +28,7 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   @Output() onSelectAllUser = new EventEmitter<any>();
   @Input() users: Array<User> = [];
   @Input() count: number = 0;
-
+  @ViewChild('filter') filter: UsersFilterComponent;
   countFilter: number = 0;
   toggleFilter: boolean = true;
   currentUser: CurrentUser = new CurrentUser();
@@ -79,6 +81,9 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   }
   public onFilter(field) {
     this.onChangeFilterField.emit(field);
+  }
+  clearAll() {
+    this.filter.onClearAll();
   }
   addUser() {
     this.usersStateService.onOpenAsige();
