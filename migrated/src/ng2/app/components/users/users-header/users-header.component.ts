@@ -26,7 +26,10 @@ import { UsersFilterComponent } from './users-filter/users-filter.component';
 export class UsersHeaderComponent implements OnInit, OnDestroy {
   @Output() onChangeFilterField = new EventEmitter<any>();
   @Output() onSelectAllUser = new EventEmitter<any>();
-  @Input() users: Array<User> = [];
+  @Input() set users(value: Array<User>) {
+    this._users = value;
+  }
+  _users: Array<User> = [];
   @Input() count: number = 0;
   @ViewChild('filter') filter: UsersFilterComponent;
   countFilter: number = 0;
@@ -47,7 +50,7 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   public showAsideForDraftEmail() {
     this.draftEmailStateService.setAction(USERS);
     this.draftEmailStateService.resetSelectedUsers();
-    this.draftEmailStateService.setSelectedUser(this.users.filter(item => item.selected));
+    this.draftEmailStateService.setSelectedUser(this._users.filter(item => item.selected));
     this.draftEmailStateService.toggleAsideForAdd();
   }
   delete() {
@@ -55,29 +58,29 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
     this.confirmStateService.setConfirmAction(ARCHIVE_USERS);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
 
-    if (this.users.filter(item => item.selected).length === 1) {
-      let user = this.users.filter(item => item.selected)[0];
+    if (this._users.filter(item => item.selected).length === 1) {
+      let user = this._users.filter(item => item.selected)[0];
       modalRef.componentInstance.message = `Do you want to archive ${user.firstName + ' ' + user.lastName}`;
     } else {
       modalRef.componentInstance.message = `Do you want to archive users?`;
     }
-    this.usersStateService.setUsersForArchive(this.users.filter(item => item.selected));
+    this.usersStateService.setUsersForArchive(this._users.filter(item => item.selected));
   }
 
   isExistArchiveUser() {
-    return this.users.filter(item => item.selected).find(item => {
+    return this._users.filter(item => item.selected).find(item => {
       let company = this.companiesStateService.getCompanies().find(companyItem => companyItem.id === item.company.id);
       return item.deletedAt || company.deletedAt
     });
   }
   isExistPrimaryContact() {
-    return this.users.filter(item => item.selected).find(item => item.isContact);
+    return this._users.filter(item => item.selected).find(item => item.isContact);
   }
   toggleAllUser(data) {
     this.onSelectAllUser.emit(data);
   }
   getSelectedCount() {
-    return this.users.filter(item => item.selected).length;
+    return this._users.filter(item => item.selected).length;
   }
   public onFilter(field) {
     this.onChangeFilterField.emit(field);

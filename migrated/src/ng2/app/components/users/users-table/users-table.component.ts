@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { User } from '../class/user';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { Company } from 'src/ng2/app/interfaces/company/company';
@@ -33,6 +33,7 @@ export class UsersTableComponent implements OnInit {
     private modalService: NgbModal,
     private draftEmailStateService: DraftEmailStateService,
     private usersTableService: UsersTableService,
+    public cd: ChangeDetectorRef,
     private elRef: ElementRef) { }
 
   onChangeSubscriptions(data) {
@@ -124,7 +125,7 @@ export class UsersTableComponent implements OnInit {
       let index = list.findIndex(item => item.id === this.user.id);
       if (index > -1) this.draftEmailStateService.removeSelectedUser(index);
     }
-
+    this.cd.detectChanges();
   }
   public showAsideForDraftEmail() {
     this.draftEmailStateService.setAction(USERS);
