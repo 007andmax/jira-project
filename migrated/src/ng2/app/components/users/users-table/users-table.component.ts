@@ -35,7 +35,7 @@ export class UsersTableComponent implements OnInit {
 
   onChangeSubscriptions(data) {
     this.usersService.setSubscriptions(data).subscribe(res => {
-       
+
       this.user.subscription = data;
     })
   }
@@ -70,12 +70,12 @@ export class UsersTableComponent implements OnInit {
     }
   };
   edit() {
-     
-    this.usersStateService.setUserForArchive(this.user);
+
+    this.usersStateService.setUserForEdit(this.user);
     this.usersStateService.onOpenEditAsige();
   }
   ngOnInit() {
-    
+
     if (this.companiesStateService.getCompanies().length > 0) this.companies = this.companiesStateService.getCompanies();
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.companies = data;
@@ -103,7 +103,7 @@ export class UsersTableComponent implements OnInit {
     this.usersStateService.setUserForArchive(this.user);
   }
   showUserDetails() {
-    
+
     this.elRef.nativeElement.querySelector('.new-users-content__list--item').classList.toggle('show-details');
   }
   restore() {
@@ -114,7 +114,7 @@ export class UsersTableComponent implements OnInit {
     this.usersStateService.setUserForDeArchive(this.user);
   }
   onSelectUser(event) {
-     
+
     if (event.target.checked) {
       this.draftEmailStateService.addSelectedUser(this.user);
     } else {

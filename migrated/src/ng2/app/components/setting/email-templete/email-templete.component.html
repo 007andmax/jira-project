@@ -1,304 +1,367 @@
+<!-- Middle Wrapper -->
 
-<!-- Middle Wrapper  -->
-<app-left-panel-settings [componentName]="'EmailTempleteComponent'"></app-left-panel-settings>
+
+
 <div class="page-container">
-  <div class="page-insider manage-tags">
-    <div class="heading">
-      <h1>
-        Email Templates
-      </h1>
-    </div>
-    <ngb-tabset>
-      <!-- Ticket Templates -->
-      <ngb-tab title="Ticket Templates" id="tab1">
-        <ng-template ngbTabContent>
-        <div class="cmn-area">
-          <div class="data-table-wrap">
-            <table class="dataTable display" style="width:100%">
-              <thead>
-                <tr>
-                  <th class="t-name">Template Name</th>
-                  <th class="action">&nbsp;</th>
-                </tr>
-              </thead>
-              <tbody *ngIf="ticketTemplates">
-                <tr
-                  *ngFor="
+    <div class="page-insider manage-tags">
+        <div class="heading">
+            <h1>Email Templates</h1>
+        </div>
+        <ngb-tabset>
+            <!-- Ticket Templates -->
+            <ngb-tab
+                title="Ticket Templates"
+                id="tab1"
+            >
+                <ng-template ngbTabContent>
+                    <div class="cmn-area">
+                        <div class="data-table-wrap">
+                            <table
+                                class="dataTable display"
+                                style="width:100%"
+                            >
+                                <thead>
+                                    <tr>
+                                        <th class="t-name">Template Name</th>
+                                        <th class="action">&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="ticketTemplates">
+                                    <tr *ngFor="
                     let template of ticketTemplates | keyvalue;
                     trackBy: trackByTicket
-                  "
-                >
-                  <td class="t-name">{{ template.value.title }}</td>
-                  <td class="action">
-                    <a
-                      href="javascript:;"
-                      data-tooltip="Edit"
-                      class="edit"
-                      (click)="getTemplate(template, i)"
-                      ><img
-                        src="../../../../../ng1/images/setting-module/edit.svg"
-                        alt="Edit"
-                    /></a>
-                    <a
-                      *ngIf="
+                  ">
+                                        <td class="t-name">{{ template.value.title }}</td>
+                                        <td class="action">
+                                            <a
+                                                href="javascript:;"
+                                                data-tooltip="Edit"
+                                                class="edit"
+                                                (click)="getTemplate(template, i)"
+                                            >
+                                                <img
+                                                    src="../../../../../ng1/images/setting-module/edit.svg"
+                                                    alt="Edit"
+                                                >
+                                            </a>
+                                            <a
+                                                *ngIf="
                         emailPages &&
                         emailPages.activeAndNotDefault[template.key]
                           .isNotDefault
                       "
-                      href="javascript:;"
-                      data-tooltip="Reset Default"
-                      (click)="restoreDefault(template.key)"
-                      class="view"
-                      ><img
-                        src="../../../../../ng1/images/setting-module/view-icon.svg"
-                        alt="view-icon"
-                    /></a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        </ng-template>
-      </ngb-tab>
-      <!-- Agent Templates -->
-      <ngb-tab title="Agent Templates">
-        <ng-template ngbTabContent>
-        <div class="cmn-area">
-          <div class="data-table-wrap">
-            <table class="dataTable display" style="width:100%">
-              <thead>
-                <tr>
-                  <th class="t-name">Template Name</th>
-                  <th class="action">&nbsp;</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr
-                  *ngFor="
+                                                href="javascript:;"
+                                                data-tooltip="Reset Default"
+                                                (click)="restoreDefault(template.key)"
+                                                class="view"
+                                            >
+                                                <img
+                                                    src="../../../../../ng1/images/setting-module/view-icon.svg"
+                                                    alt="view-icon"
+                                                >
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </ng-template>
+            </ngb-tab>
+            <!-- Agent Templates -->
+            <ngb-tab title="Agent Templates">
+                <ng-template ngbTabContent>
+                    <div class="cmn-area">
+                        <div class="data-table-wrap">
+                            <table
+                                class="dataTable display"
+                                style="width:100%"
+                            >
+                                <thead>
+                                    <tr>
+                                        <th class="t-name">Template Name</th>
+                                        <th class="action">&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="
                     let template of agentTemplates | keyvalue;
                     trackBy: trackByTicket
-                  "
-                >
-                  <td class="t-name">{{ template.value.title }}</td>
-                  <td class="action">
-                    <a
-                      href="javascript:;"
-                      data-tooltip="Edit"
-                      (click)="getTemplate(template, i)"
-                      class="edit"
-                      ><img
-                        src="../../../../../ng1/images/setting-module/edit.svg"
-                        alt="Edit"
-                    /></a>
-                    <a
-                      *ngIf="
+                  ">
+                                        <td class="t-name">{{ template.value.title }}</td>
+                                        <td class="action">
+                                            <a
+                                                href="javascript:;"
+                                                data-tooltip="Edit"
+                                                (click)="getTemplate(template, i)"
+                                                class="edit"
+                                            >
+                                                <img
+                                                    src="../../../../../ng1/images/setting-module/edit.svg"
+                                                    alt="Edit"
+                                                >
+                                            </a>
+                                            <a
+                                                *ngIf="
                         emailPages &&
                         emailPages.activeAndNotDefault[template.key]
                           .isNotDefault
                       "
-                      (click)="restoreDefault(template.key)"
-                      href="javascript:;"
-                      data-tooltip="Reset Default"
-                      class="view"
-                      ><img
-                        src="../../../../../ng1/images/setting-module/view-icon.svg"
-                        alt="view-icon"
-                    /></a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        </ng-template>
-      </ngb-tab>
-      <!-- Invoice Templates  -->
-      <ngb-tab title="Invoice Templates">
-        <ng-template ngbTabContent>
-        <div class="cmn-area">
-          <div class="data-table-wrap">
-            <table class="dataTable display" style="width:100%">
-              <thead>
-                <tr>
-                  <th class="t-name">Template Name</th>
-                  <th class="action">&nbsp;</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr
-                  *ngFor="
+                                                (click)="restoreDefault(template.key)"
+                                                href="javascript:;"
+                                                data-tooltip="Reset Default"
+                                                class="view"
+                                            >
+                                                <img
+                                                    src="../../../../../ng1/images/setting-module/view-icon.svg"
+                                                    alt="view-icon"
+                                                >
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </ng-template>
+            </ngb-tab>
+            <!-- Invoice Templates -->
+            <ngb-tab title="Invoice Templates">
+                <ng-template ngbTabContent>
+                    <div class="cmn-area">
+                        <div class="data-table-wrap">
+                            <table
+                                class="dataTable display"
+                                style="width:100%"
+                            >
+                                <thead>
+                                    <tr>
+                                        <th class="t-name">Template Name</th>
+                                        <th class="action">&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="
                     let template of invoiceTemplates | keyvalue;
                     trackBy: trackByTicket
-                  "
-                >
-                  <td class="t-name">{{ template.value.title }}</td>
-                  <td class="action">
-                    <a
-                      href="javascript:;"
-                      data-tooltip="Edit"
-                      class="edit"
-                      (click)="getTemplate(template, i)"
-                      ><img
-                        src="../../../../../ng1/images/setting-module/edit.svg"
-                        alt="Edit"
-                    /></a>
-                    <a
-                      *ngIf="
+                  ">
+                                        <td class="t-name">{{ template.value.title }}</td>
+                                        <td class="action">
+                                            <a
+                                                href="javascript:;"
+                                                data-tooltip="Edit"
+                                                class="edit"
+                                                (click)="getTemplate(template, i)"
+                                            >
+                                                <img
+                                                    src="../../../../../ng1/images/setting-module/edit.svg"
+                                                    alt="Edit"
+                                                >
+                                            </a>
+                                            <a
+                                                *ngIf="
                         emailPages &&
                         emailPages.activeAndNotDefault[template.key]
                           .isNotDefault
                       "
-                      (click)="restoreDefault(template.key)"
-                      href="javascript:;"
-                      data-tooltip="Reset Default"
-                      class="view"
-                      ><img
-                        src="../../../../../ng1/images/setting-module/view-icon.svg"
-                        alt="view-icon"
-                    /></a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        </ng-template>
-      </ngb-tab>
-    </ngb-tabset>
-    <!-- <div class="loading" *ngIf="loading"></div> -->
-  </div>
-  
+                                                (click)="restoreDefault(template.key)"
+                                                href="javascript:;"
+                                                data-tooltip="Reset Default"
+                                                class="view"
+                                            >
+                                                <img
+                                                    src="../../../../../ng1/images/setting-module/view-icon.svg"
+                                                    alt="view-icon"
+                                                >
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </ng-template>
+            </ngb-tab>
+        </ngb-tabset>
+        <!-- <div class="loading" *ngIf="loading"></div> -->
+    </div>
+
+
+
 </div>
+
+
 
 <!-- sidebar popup edit -->
 <div
-  class="sidebar-popup tmp-edit"
-  [ngClass]="{ opened: edit }"
-  *ngIf="templeteInfo"
+    class="sidebar-popup tmp-edit"
+    [ngClass]="{ opened: edit }"
+    *ngIf="templeteInfo"
 >
-  <!-- header -->
-  <div class="sidebar-header">
-    <div class="h1">{{ templeteInfo.title }}</div>
-    <a class="close" href="javascript:;" (click)="closeTemplete()"
-      ><img src="../../../../../ng1/images/setting-module/close.svg" alt="close"
-    /></a>
-  </div>
-  <div class="reciept">
-    <span><strong>Recipient:</strong> {{ templeteInfo.recipient }}</span>
-    <a
-      href="javascript:;"
-      class="templates-view"
-      (click)="emailPreview(template)"
-      *ngIf="templeteInfo.showPreview"
-      >Show Template Preview</a
-    >
-  </div>
-  <div class="middle-content">
-    <form [formGroup]="templeteForm" (ngSubmit)="saveEmailTemplate()">
-      <div class="f-row">
-        <div class="f-col col-100">
-          <label>Subject</label>
-          <div class="form-row">
-            <input
-              type="text"
-              formControlName="subject"
-              #subject
-              name="subject"
-              id="subject"
-              class="form-input insert-field"
-              [ngClass]="{ 'is-invalid': submitted && f.subject.errors }"
-              placeholder="Enter Subject"
-            />
-            <div *ngIf="submitted && f.subject.errors" class="invalid-feedback">
-              <div *ngIf="f.subject.errors.required">Subject is required</div>
-              <div *ngIf="f.subject.errors.pattern && templeteInfo">
-                {{ templeteInfo.requiredKeywords }} is required
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="f-col col-100">
-          <label>Email</label>
-          <div class="form-row">
-              <textarea   
-              id="myEditor"
-              #body
-              class="form-input insert-field"
-              row="8"
-              name="body"
-              formControlName="body"></textarea>
-          </div>
-        </div>
-        <div class="f-col col-100">
-          <div class="keywords">
-            <label>Available keywords</label
-            ><a href="javascript:;" (click)="toggle()">{{ buttonName }}</a>
-          </div>
-
-          <div class="form-row tgs-list" *ngIf="!show">
-            <span
-              class="tags"
-              *ngFor="let key of keywords"
-              (mousedown)="insertAtCaret(key.keyName)"
-              >{{ key.keyName }}</span
-            >
-          </div>
-          <!-- on click hide show  -->
-          <div class="key-area" *ngIf="show">
-            <span
-              *ngFor="let key of keywords"
-              (mousedown)="insertAtCaret(key.keyName)"
-              ><strong>{{ key.keyName }} - </strong>{{ key.description }}</span
-            >
-          </div>
-        </div>
-      </div>
-      <div class="btn-row">
-        <input type="submit" value="Save" class="btn btn-primary" />
-
+    <!-- header -->
+    <div class="sidebar-header">
+        <div class="h1">{{ templeteInfo.title }}</div>
         <a
-          href="javascrip:;"
-          class="btn btn-secondary"
-          (click)="closeTemplete()"
-          >Cancel</a
+            class="close"
+            href="javascript:;"
+            (click)="closeTemplete()"
         >
-        <button
-          type="button"
-          href="javascript:void(0)"
-          *ngIf="emailPages && openEmailTemplate"
-          class="restore"
-          [disabled]="
+            <img
+                src="../../../../../ng1/images/setting-module/close.svg"
+                alt="close"
+            >
+        </a>
+    </div>
+    <div class="reciept">
+        <span>
+            <strong>Recipient:</strong>
+            {{ templeteInfo.recipient }}
+        </span>
+        <a
+            href="javascript:;"
+            class="templates-view"
+            (click)="emailPreview(template)"
+            *ngIf="templeteInfo.showPreview"
+        >
+            Show Template Preview
+        </a>
+    </div>
+    <div class="middle-content">
+        <form
+            [formGroup]="templeteForm"
+            (ngSubmit)="saveEmailTemplate()"
+        >
+            <div class="f-row">
+                <div class="f-col col-100">
+                    <label>Subject</label>
+                    <div class="form-row">
+                        <input
+                            type="text"
+                            formControlName="subject"
+                            #subject
+                            name="subject"
+                            id="subject"
+                            class="form-input insert-field"
+                            [ngClass]="{ 'is-invalid': submitted && f.subject.errors }"
+                            placeholder="Enter Subject"
+                        >
+                        <div
+                            *ngIf="submitted && f.subject.errors"
+                            class="invalid-feedback"
+                        >
+                            <div *ngIf="f.subject.errors.required">Subject is required</div>
+                            <div *ngIf="f.subject.errors.pattern && templeteInfo">
+                                {{ templeteInfo.requiredKeywords }} is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="f-col col-100">
+                    <label>Email</label>
+                    <div class="form-row">
+                        <textarea
+                            id="myEditor"
+                            #body
+                            class="form-input insert-field"
+                            row="8"
+                            name="body"
+                            formControlName="body"
+                        ></textarea>
+                    </div>
+                </div>
+                <div class="f-col col-100">
+                    <div class="keywords">
+                        <label>Available keywords</label>
+                        <a
+                            href="javascript:;"
+                            (click)="toggle()"
+                        >
+                            {{ buttonName }}
+                        </a>
+                    </div>
+
+
+
+                    <div
+                        class="form-row tgs-list"
+                        *ngIf="!show"
+                    >
+                        <span
+                            class="tags"
+                            *ngFor="let key of keywords"
+                            (mousedown)="insertAtCaret(key.keyName)"
+                        >
+                            {{ key.keyName }}
+                        </span>
+                    </div>
+                    <!-- on click hide show -->
+                    <div
+                        class="key-area"
+                        *ngIf="show"
+                    >
+                        <span
+                            *ngFor="let key of keywords"
+                            (mousedown)="insertAtCaret(key.keyName)"
+                        >
+                            <strong>{{ key.keyName }} -</strong>
+                            {{ key.description }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-row">
+                <input
+                    type="submit"
+                    value="Save"
+                    class="btn btn-primary"
+                >
+
+
+
+                <a
+                    href="javascrip:;"
+                    class="btn btn-secondary"
+                    (click)="closeTemplete()"
+                >
+                    Cancel
+                </a>
+                <button
+                    type="button"
+                    href="javascript:void(0)"
+                    *ngIf="emailPages && openEmailTemplate"
+                    class="restore"
+                    [disabled]="
             !emailPages.activeAndNotDefault[openEmailTemplate].isNotDefault
           "
-          (click)="restoreDefault(openEmailTemplate)"
-        >
-          Restore Default
-        </button>
-        <!-- <a href="javascript:;" class="restore">Restore Default</a> -->
-      </div>
-    </form>
-  </div>
-  <div class="msg" *ngIf="templeteInfo">
-    {{ templeteInfo.description }}
-  </div>
+                    (click)="restoreDefault(openEmailTemplate)"
+                >
+                    Restore Default
+                </button>
+                <!-- <a href="javascript:;" class="restore">Restore Default</a> -->
+            </div>
+        </form>
+    </div>
+    <div
+        class="msg"
+        *ngIf="templeteInfo"
+    >
+        {{ templeteInfo.description }}
+    </div>
 </div>
 <!-- Modal create Tags -->
 <ng-template #template>
-  <div class="modal-header">
-    <div class="modal-logo">
-      Email Template Preview
+    <div class="modal-header">
+        <div class="modal-logo">Email Template Preview</div>
+        <button
+            type="button"
+            class="close pull-right"
+            aria-label="Close"
+            (click)="modalRef.hide()"
+        >
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
-    <button
-      type="button"
-      class="close pull-right"
-      aria-label="Close"
-      (click)="modalRef.hide()"
-    >
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div [innerHTML]="emailPreviewHtml | sanitizeHtml"></div>
-  </div>
+    <div class="modal-body">
+        <div [innerHTML]="emailPreviewHtml | sanitizeHtml"></div>
+    </div>
 </ng-template>

@@ -39,6 +39,8 @@ export class UsersComponent implements OnInit {
 
   ngOnInit() {
     window.scrollTo(0, 0);
+    this.showArchivedUsers = this.usersStateService.getShowArchivedCompanies();
+    this.filter = this.usersStateService.getFilter();
     let getOnShowArchived = this.usersStateService.getOnShowArchived().subscribe(data => {
       this.showArchivedUsers = data;
       window.scrollTo(0, 0);

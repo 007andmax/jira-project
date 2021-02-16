@@ -1,6 +1,7 @@
+@import './variable.scss';
 @import './qt-classes.scss';
 
-
+@import './components/app.scss';
 @import './components/headers.scss';
 @import './components/inputs.scss';
 @import './components/btn.scss';
@@ -9,6 +10,8 @@
 @import './components/aside.scss';
 @import './components/tooltip.scss';
 @import './components/modal.scss';
+@import './components/header.scss';
+@import './components/left-panel.scss';
 
 @import './components/app-drop-down.scss';
 @import './components/taxes-dropdown.scss';

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CompaniesService } from 'src/ng2/app/services/company/companies.service';
- 
+
 import { BillableProfile } from '../class/billable-profile';
 import { Company } from 'src/ng2/app/interfaces/company/company';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
@@ -17,16 +17,16 @@ import { BillableStateService } from 'src/ng2/app/states/billable/billable-state
   providers: [TicketsListService]
 })
 export class BillableItemComponent implements OnInit {
-  @Input() item:BillableProfile;
-  company:Company;
-  salesPerson:User; 
-  totalSum:number = 0;
+  @Input() item: BillableProfile;
+  company: Company;
+  salesPerson: User;
+  totalSum: number = 0;
   indexNoAvatar: number = 0;
-  listColorNoAvatar = ['#0cdeaa','#16a4fa','#7c77cb','#ffb937'];
-  constructor(private companiesStateService:CompaniesStateService,
+  listColorNoAvatar = ['#0cdeaa', '#16a4fa', '#7c77cb', '#ffb937'];
+  constructor(private companiesStateService: CompaniesStateService,
     public ticketsListService: TicketsListService,
-    private billableStateService:BillableStateService,
-    private usersStateService:UsersStateService) { }
+    private billableStateService: BillableStateService,
+    private usersStateService: UsersStateService) { }
 
   ngOnInit() {
     this.indexNoAvatar = this.ticketsListService.randomInteger(0, 3);
@@ -34,7 +34,7 @@ export class BillableItemComponent implements OnInit {
     this.salesPerson = this.usersStateService.getAllUsers().find(item => item.id === company.techLeadId);
   }
   ngDocheck() {
-   
+
   }
   parseTotal(value) {
     return parseFloat(value.toString()).toFixed(2)
@@ -55,7 +55,7 @@ export class BillableItemComponent implements OnInit {
   };
   moToBillableTickets() {
     this.billableStateService.setBillableProfile(this.item);
-    let body = document.querySelector('.left-panel__category-wrap');
+    let body = document.querySelector('.main-container');
     var link = document.createElement('a');
     body.appendChild(link);
     link.href = `#/ng2/billable-tickets`;

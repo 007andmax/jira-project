@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="32" viewBox="0 0 128 32">
+    <g fill="none" fill-rule="evenodd">
+        <g fill="#16A4FA">
+            <g>
+                <text font-family="CircularStd-Medium, Circular Std" font-size="20" font-weight="400" transform="translate(-24 -24) translate(24 24)">
+                    <tspan x="33" y="24">Quicktech</tspan>
+                </text>
+                <path d="M15 2c7.732 0 14 6.268 14 14 0 3.228-1.093 6.201-2.928 8.57l1.146 4.419c.086.328.057.676-.08.986-.337.757-1.224 1.098-1.98.762l-4.419-1.964C18.988 29.562 17.045 30 15 30 7.268 30 1 23.732 1 16S7.268 2 15 2zm0 4.2c-5.412 0-9.8 4.388-9.8 9.8 0 5.412 4.388 9.8 9.8 9.8 5.412 0 9.8-4.388 9.8-9.8 0-5.412-4.388-9.8-9.8-9.8z" transform="translate(-24 -24) translate(24 24)"/>
+            </g>
+        </g>
+    </g>
+</svg>

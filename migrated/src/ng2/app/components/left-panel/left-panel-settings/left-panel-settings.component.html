@@ -1,84 +1,73 @@
-<div class="ng7">
-  <div class="left-sidebar left-panel-full-wrapper nano left-panel-settings"  >
-
-    <div class="brand">
-      <a class="logo">
-      <span>Settings</span>
-    </a>
-    </div>
-    <div class="back"><a href="javascript:;" [routerLink]="['/quickSupport']"><span class="nav-ico"
-      ><img src="ng1/images/setting-module/prev.svg"
-            alt="back" /></span>back</a></div>
-    <nav>
-    <ul class="list-unstyled">
-      <li [ngClass]="{'active':componentName === 'MyProfileComponent'}"><a
-        href="#/ng2/setting/myprofile"  
-         ><span class="nav-ico"><img
-              src="ng1/images/setting-module/my-profile.svg" alt="My Profile" /></span>My Profile Settings</a></li>
-      <li [ngClass]="{'active':componentName === 'ManageTagsComponent'}"
-      *ngIf="currentUser.isOwner || getPermissions('VIEW_TAGS_SETTINGS')"
-      ><a
-      href="#/ng2/setting/tags"
-         ><span class="nav-ico"><img
-              src="ng1/images/setting-module/manage-tags.svg" alt="Tags" /></span>Manage Tags</a></li>
-
-      <li [ngClass]="{'active':componentName === 'GlNumberSettingsComponent'}">
-        <a   href="#/ng2/setting/glnumber"  ><span class="nav-ico"><img
-            src="ng1/images/setting-module/gl-number.svg" alt="Glnumber" /></span>Manage GL number</a>
-      </li>
-      <li [ngClass]="{'active':componentName === 'CompanyProfileComponent'}">
-        <a href="#/ng2/setting/companyprofile"  
-        *ngIf="currentUser.isOwner || getPermissions('VIEW_COMPANY_PROFILE_SETTINGS')"><span class="nav-ico"><img
-              src="ng1/images/setting-module/company-profile.svg" alt="Company" /></span>Company Profile</a>
-      </li>
-
-      <li [ngClass]="{'active':componentName === 'TechUsersComponent'}">
-        <a href="#/ng2/setting/techUsers"    ><span class="nav-ico"><img
-          src="ng1/images/setting-module/manage-users.svg"
-               alt="Tech" /></span>Manage Tech Users</a>
-      </li>
-
-      <li [ngClass]="{'active':componentName === 'EmailSettingComponent'}">
-          <a href="#/ng2/setting/emailSetting"  ><span class="nav-ico"><img
-              src="ng1/images/setting-module/email-settings.svg" alt="Email" /></span>Email Settings</a>
-      </li>
-
-      <li [ngClass]="{'active':componentName === 'TaxesSettingsComponent'}">
-        <a href="#/ng2/setting/taxes"  ><span class="nav-ico"><img
-              src="ng1/images/setting-module/taxes.svg" alt="Taxes" /></span>Taxes</a>
-      </li>
-
-      <li [ngClass]="{'active':componentName === 'PermissionManageComponent'}"
-      *ngIf="currentUser.isOwner || getPermissions('VIEW_PERMISSIONS_SETTINGS')">
-        <a href="#/ng2/setting/permission"   ><span class="nav-ico"><img
-              src="ng1/images/setting-module/permission-management.svg" alt="Permission" /></span>Permission Management</a>
-      </li>
-
-      <li [ngClass]="{'active':componentName === 'EmailTempleteComponent'}">
-          <a href="#/ng2/setting/emailTemplete"   ><span class="nav-ico"><img
-              src="ng1/images/setting-module/email-templates.svg" alt="Templetes" /></span>Email Templetes</a>
-      </li>
-
-      <li [ngClass]="{'active':componentName === 'IntegrationsComponent'}">
-          <a href="#/ng2/setting/integration"  ><span class="nav-ico"><img
-              src="ng1/images/setting-module/integrations.svg" alt="Integrations" /></span>Integrations</a>
-      </li>
-
-      <li [ngClass]="{'active':componentName === 'InvoiceTicketsComponent'}">
-          <a href="#/ng2/setting/invoiceTickets"  ><span class="nav-ico"><img
-              src="ng1/images/setting-module/invoice.svg" alt="Commissions" /></span>Invoice and Ticket</a>
-      </li>
-      <li [ngClass]="{'active':componentName === 'CommissionComponent'}">
-        <a href="#/ng2/setting/commission"  ><span class="nav-ico"><img
-              src="ng1/images/setting-module/commissions.svg" alt="Commissions" /></span>Commissions</a>
-      </li>
-
-      <li [ngClass]="{'active':componentName === 'SubscriptionComponent'}">
-          <a href="#/ng2/setting/subscription"  ><span class="nav-ico"><img
-              src="ng1/images/setting-module/subscription.svg" alt="Subscription" /></span>Subscription</a>
-      </li>
-    </ul>
-    </nav>
-
-  </div>
+<div class="app-left-panel__menu" [ngClass]="{'--active': open}"  (click)="open = !open">
+  <div class="app-left-panel__menu-icon --settings"></div>
+  <div class="app-left-panel__menu-title">Settings</div>
+  <div class="app-left-panel__menu-arrow"></div>
 </div>
+
+<ul class="app-left-panel__menu-expand" *ngIf="open">
+    <li [ngClass]="{'--active':activePage === 'myprofile-component'}">
+      <a href="#/ng2/setting/myprofile" (click)="goToState('myprofile-component')">
+        My Profile Settings
+      </a>
+    </li>
+    <li [ngClass]="{'--active':activePage === 'manage-tags-component'}" *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TAGS_SETTINGS')">
+      <a href="#/ng2/setting/tags" (click)="goToState('manage-tags-component')">
+        Manage Tags
+      </a>
+    </li>
+    <li [ngClass]="{'--active':activePage === 'glnumber-component'}">
+      <a href="#/ng2/setting/glnumber" (click)="goToState('glnumber-component')">
+        Manage GL number
+      </a>
+    </li>
+    <li [ngClass]="{'--active':activePage === 'company-profile-component'}">
+      <a href="#/ng2/setting/companyprofile" (click)="goToState('company-profile-component')" *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_COMPANY_PROFILE_SETTINGS')">
+        Company Profile
+      </a>
+    </li>
+    <li [ngClass]="{'--active':activePage === 'tech-component'}">
+      <a href="#/ng2/setting/techUsers" (click)="goToState('tech-component')">
+        Manage Tech Users
+      </a>
+    </li>
+    <li [ngClass]="{'--active':activePage === 'email-setting-component'}">
+      <a href="#/ng2/setting/emailSetting" (click)="goToState('email-setting-component')">
+        Email Settings
+      </a>
+    </li>
+    <li [ngClass]="{'--active':activePage === 'taxes-component'}">
+      <a href="#/ng2/setting/taxes" (click)="goToState('taxes-component')">
+        Taxes
+      </a>
+    </li>
+    <li [ngClass]="{'--active':activePage === 'permission-manage-component'}" *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_PERMISSIONS_SETTINGS')">
+      <a href="#/ng2/setting/permission" (click)="goToState('permission-manage-component')">
+        Permission Management
+      </a>
+    </li>
+    <li [ngClass]="{'--active':activePage === 'email-templete-component'}">
+      <a href="#/ng2/setting/emailTemplete" (click)="goToState('email-templete-component')">
+        Email Templetes
+      </a>
+    </li>
+    <li [ngClass]="{'--active':activePage === 'integrations-component'}">
+      <a href="#/ng2/setting/integration" (click)="goToState('integrations-component')">
+        Integrations
+      </a>
+    </li>
+    <li [ngClass]="{'--active':activePage === 'invoice-ticket-component'}">
+      <a href="#/ng2/setting/invoiceTickets" (click)="goToState('invoice-ticket-component')">
+        Invoice and Ticket
+      </a>
+    </li>
+    <li [ngClass]="{'--active':activePage === 'commission-component'}">
+      <a href="#/ng2/setting/commission" (click)="goToState('commission-component')">
+        Commissions
+      </a>
+    </li>
+    <li [ngClass]="{'--active':activePage === 'subscription-component'}">
+      <a href="#/ng2/setting/subscription" (click)="goToState('subscription-component')">
+        Subscription
+      </a>
+    </li>
+</ul>

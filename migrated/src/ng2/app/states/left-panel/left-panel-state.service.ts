@@ -8,11 +8,17 @@ export class LeftPanelStateService {
   onFilter: EventEmitter<any> = new EventEmitter();
   onBillingPage: EventEmitter<any> = new EventEmitter();
   onCompanyPage: EventEmitter<any> = new EventEmitter();
+  onToggleLeftPanel: EventEmitter<any> = new EventEmitter();
+
   constructor() { }
+
 
   public setBillingPage(data) {
     this.activePage = data;
     this.onBillingPage.emit(data);
+  }
+  public toggleLeftPanel(data) {
+    this.onToggleLeftPanel.emit(data);
   }
   public setCompanyPage(data) {
     this.activePage = data;

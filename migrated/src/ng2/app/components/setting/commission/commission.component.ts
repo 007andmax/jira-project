@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-declare var $:any;
+import { SettingStateService } from 'src/ng2/app/states/setting/setting-state.service';
+declare var $: any;
 @Component({
   selector: 'app-commission',
   templateUrl: './commission.component.html',
@@ -7,11 +8,12 @@ declare var $:any;
 })
 export class CommissionComponent implements OnInit, OnDestroy {
 
-  constructor() { }
+  constructor(private settingStateService: SettingStateService,) { }
 
   ngOnInit() {
     $('body').addClass('ng7');
     $('body').removeClass('backMenu');
+    this.settingStateService.setComponentName('CommissionComponent');
   }
 
   ngOnDestroy() {

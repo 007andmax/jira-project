@@ -1,37 +1,36 @@
-<!-- Middle Wrapper  -->
-<app-left-panel-settings [componentName]="'CommissionComponent'"></app-left-panel-settings>
 <div class="page-container commision-container">
-  <div class="page-insider commision">
-    <div class="heading">
-      <h1>Commissions</h1>
-    </div>
-      <ngb-tabset>
-          <!-- Companies -->
-          <ngb-tab title="Companies’s Sales Person" id="tab1">
-            <ng-template ngbTabContent>
-            <app-company-commission></app-company-commission>
-            </ng-template>
-          </ngb-tab>
-          <!-- Product -->
-          <ngb-tab title="Product">
-            <ng-template ngbTabContent>
-             <app-product></app-product> 
-             </ng-template>
-          </ngb-tab>
-          <!-- Contract  -->
-          <ngb-tab title="Contract">
-            <ng-template ngbTabContent>
-              <app-contract></app-contract>
-              </ng-template>
-          </ngb-tab>
-          <!-- Service  -->
-          <ngb-tab title="Service">
-            <ng-template ngbTabContent>
-              <app-service></app-service>
-              </ng-template>
-          </ngb-tab>
+    <div class="page-insider commision">
+        <div class="heading">
+            <h1>Commissions</h1>
+        </div>
+        <ngb-tabset>
+            <!-- Companies -->
+            <ngb-tab
+                title="Companies’s Sales Person"
+                id="tab1"
+            >
+                <ng-template ngbTabContent>
+                    <app-company-commission></app-company-commission>
+                </ng-template>
+            </ngb-tab>
+            <!-- Product -->
+            <ngb-tab title="Product">
+                <ng-template ngbTabContent>
+                    <app-product></app-product>
+                </ng-template>
+            </ngb-tab>
+            <!-- Contract -->
+            <ngb-tab title="Contract">
+                <ng-template ngbTabContent>
+                    <app-contract></app-contract>
+                </ng-template>
+            </ngb-tab>
+            <!-- Service -->
+            <ngb-tab title="Service">
+                <ng-template ngbTabContent>
+                    <app-service></app-service>
+                </ng-template>
+            </ngb-tab>
         </ngb-tabset>
-  </div>
+    </div>
 </div>
-
-

@@ -1,66 +1,15 @@
-
-<!-- Middle Wrapper  -->
-<app-left-panel-settings [componentName]="'CompanyProfileComponent'"></app-left-panel-settings>
+<!-- Middle Wrapper -->
 <div class="page-container">
   <div class="page-insider company-profile">
     <div class="heading">
       <h1>
-        >Company Profile
+        Company Profile
       </h1>
     </div>
-
-    <ngb-tabset>
-      <!-- Profile -->
-      <ngb-tab title="Profile" id="tab1">
-        <ng-template ngbTabContent>
-        <div class="cmn-area profile">
-          <div class="dp-area">
-            <span class="dp" *ngIf="imageSrc">
-              <img [src]="imageSrc" alt="Company" />
-            </span>
-            <span class="dp" *ngIf="imageSrc === ''">
-              <img
-                src="../../../../../ng1/images/setting-module/upload-company-logo.svg"
-                alt="Company"
-              />
-            </span>
-            <div class="dp-info">
-              <input
-                type="file"
-                id="profile-dp"
-                accept="image/gif, image/jpeg, image/png, image/jpg"
-                (change)="onSelectFile($event)"
-                style="display: none;"
-              />
-              <!-- <label for="profile-dp" class="static-link">Change Logo</label> -->
-
-              <div class="static-link">
-                <label class="innert-links" for="profile-dp">{{
-                  imageSrc ? "Change Logo" : "Upload Photo"
-                }}</label>
-              </div>
+      <div class="static-link"><label class="innert-links" for="profile-dp">{{imageSrc ? "Change Logo" : "Upload Photo"}}</label>
+</div>
               <span>Maximum size of 2MB. JPG, GIF, PNG</span>
             </div>
-
-            <div class="img-croparea" *ngIf="isCroppedImg">
-              <div class="crop-inner">
-                <div class="heading-area">
-                  <h2>Crop Photo</h2>
-                  <a href="javascript:;" class="close-btn">remove</a>
-                </div>
-                <div class="cropping">
-                  <div class="img-crop">
-                    <image-cropper
-                      [imageBase64]="imageBase64"
-                      [imageChangedEvent]="imageChangedEvent"
-                      [maintainAspectRatio]="false"
-                      [aspectRatio]="4 / 3"
-                      [resizeToWidth]="128"
-                      format="png"
-                      (imageCropped)="imageCropped($event)"
-                    ></image-cropper>
-                  </div>
-
                   <div class="preview">
                     <h6>Profile Preview</h6>
                     <img [src]="croppedImage?.base64" />
@@ -197,60 +146,21 @@
                 </div>
               </div>
 
-              <div class="f-col col-50" *ngIf="isAddPhone">
-                <label>
-                  Secondary Phone Number
-                  <a
-                    href="javascript:;"
-                    class="static-link"
-                    (click)="onAddPhone()"
-                    >Remove</a
-                  >
-                </label>
 
-                <div class="form-row primary-phone">
-                  <input
-                    type="text"
-                    class="form-input"
-                    formControlName="secondaryPhone"
-                    placeholder="Secondary Phone Number"
-                    formControlName="secondaryPhone"
-                  />
-                  <select
-                    class="cmn-select form-input"
-                    formControlName="secondaryPhoneType"
-                  >
-                    <option value="MOBILE">mobile</option>
-                    <option value="OFFICE">office</option>
-                    <option value="FAX">fax</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <input type="button" (click)="onSubmit()" class="btn btn-primary" value="Save Changes" />
-          </form>
-        </div>
-        </ng-template>
-      </ngb-tab>
-      <ngb-tab title="Workspace" id="workspace">
-        <ng-template ngbTabContent>
-        <div class="cmn-area workspace">
-          <form [formGroup]="cProfileForm" (ngSubmit)="onSubmit()">
-            <div class="f-row">
-                <div class="f-col col-100">
-                    <label>Company URL</label>
-                    <div class="form-row">
-                      <div class="custm-url">
-                       <input
-                       type="text"
-                       class="form-input"
-                       placeholder="Enter Your Company URL"
-                       formControlName="url"
-                       />
-                       <span class="slug">.quicktech.com</span>
-                     </div>
-                   </div>
-                </div>
+                                <div
+                                    class="f-col col-50"
+                                    *ngIf="isAddPhone"
+                                >
+                                    <label>
+                                        Secondary Phone Number
+                                        <a
+                                            href="javascript:;"
+                                            class="static-link"
+                                            (click)="onAddPhone()"
+                                        >
+                                            Remove
+                                        </a>
+                                    </label>
 
             </div>
             <p>Your workspace URL can only contain lowercase letters, numbers and dashes (and must start with a letter or number).</p>
@@ -279,20 +189,48 @@
                   *ngFor="
                     let workingDay of this.cProfile.timeSettings.workingDays;
                     let i = index
-                  "
-                >
-                  <div class="cmn-checkbox">
-                    <input
-                      type="checkbox"
-                      id="{{ workingDay.dayOfWeek }}"
-                      [(ngModel)]="workingDay.isSelected"
-                      name="{{ workingDay.dayOfWeek | titlecase }}"
-                      [ngModelOptions]="{ standalone: true }"
-                    />
-                    <label for="{{ workingDay.dayOfWeek }}">{{
+                  ">
+                                        <div class="cmn-checkbox">
+                                            <input
+                                                type="checkbox"
+                                                id="{{ workingDay.dayOfWeek }}"
+                                                [(ngModel)]="workingDay.isSelected"
+                                                name="{{ workingDay.dayOfWeek | titlecase }}"
+                                                [ngModelOptions]="{ standalone: true }"
+                                            >
+                                            <label for="{{ workingDay.dayOfWeek }}">
+                                                {{
                       workingDay.dayOfWeek | titlecase
-                    }}</label>
-                  </div>
+                    }}
+                                            </label>
+                                        </div>
+
+
+                                        <div class="time-zone">
+                                            <div class="tl-col">
+                                                <select
+                                                    #startTime
+                                                    class="cmn-select form-input"
+                                                    [id]=" 'from-'+workingDay.dayOfWeek"
+                                                    (change)="startTimeChange(workingDay, startTime.value)"
+                                                    name="{{workingDay.dayOfWeek}}"
+                                                    [attr.disabled]="!workingDay.isSelected ? 'disabled' : null"
+                                                    [ngModel]="fromTime_convert(workingDay.startTime)"
+                                                >
+                                                    <option value="06:00">6:00 AM</option>
+                                                    <option value="06:30">6:30 AM</option>
+                                                    <option value="07:00">07:00 AM</option>
+                                                    <option value="07:30">7:30 AM</option>
+                                                    <option value="08:00">08:00 AM</option>
+                                                    <option value="08:30">8:30 AM</option>
+                                                    <option value="09:00">9:00 AM</option>
+                                                    <option value="09:30">9:30 AM</option>
+                                                    <option value="10:00">10:00 AM</option>
+                                                    <option value="10:30">10:30 AM</option>
+                                                    <option value="11:00">11:00 AM</option>
+                                                    <option value="11:30">11:30 AM</option>
+                                                    <option value="12:00">12:00 PM</option>
+                                                </select>
 
                   <div class="time-zone">
                     <div class="tl-col">
@@ -338,7 +276,6 @@
       </ngb-tab>
       <ngb-tab title="Accounting Year">
         <ng-template ngbTabContent>
-          
           <form (ngSubmit)="saveAccountingDate()">
             <div class="f-row">
                 <div class="f-col col-50  date-area">
@@ -354,7 +291,6 @@
                     <input name="end_date" type="text" class="form-control sub-label-field" [(ngModel)]="accountingEndDate" ngbDatepicker #dd="ngbDatepicker" (click)="dd.toggle()" disabled>
                  </div>
               </div>
-
             </div>
             <input type="submit" class="btn btn-primary" value="Save Changes" />
           </form>
@@ -363,5 +299,4 @@
     </ngb-tabset>
     <!-- <div class="loading" *ngIf="loading"></div> -->
   </div>
-  
 </div>

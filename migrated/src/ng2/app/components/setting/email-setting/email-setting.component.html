@@ -1,24 +1,38 @@
-<!-- Middle Wrapper  -->
+<!-- Middle Wrapper -->
 <app-left-panel-settings [componentName]="'EmailSettingComponent'"></app-left-panel-settings>
 <div class="page-container">
-  <div class="page-insider email-insider">
-    <div class="heading">
-      <h1>Email Settings</h1>
+    <div class="page-insider email-insider">
+        <div class="heading">
+            <h1>Email Settings</h1>
+        </div>
+        <ngb-tabset>
+            <!-- Profile -->
+            <ngb-tab
+                title="Incoming Email"
+                id="tab1"
+            >
+                <ng-template ngbTabContent>
+                    <app-incoming-email
+                        [smtpSettingsInput]="smtpSettings"
+                        [supportMailBoxInput]="supportMailBox"
+                        *ngIf="showIn == true"
+                    ></app-incoming-email>
+                </ng-template>
+            </ngb-tab>
+            <!-- Account -->
+            <ngb-tab title="Outgoing Email">
+                <ng-template ngbTabContent>
+                    <app-outgoing-email
+                        [smtpInput]="smtp"
+                        [supportMailBoxInput]="supportMailBox"
+                        [testEmailInput]="smtp.testEmail"
+                        [savedSMTPSettingsInput]="savedSMTPSettings"
+                        [portIsEmptyInput]="portIsEmpty"
+                        [usedEmailViaInput]="usedEmailVia"
+                        *ngIf="showIn == true"
+                    ></app-outgoing-email>
+                </ng-template>
+            </ngb-tab>
+        </ngb-tabset>
     </div>
-    <ngb-tabset>
-      <!-- Profile -->
-      <ngb-tab title="Incoming Email" id="tab1">
-        <ng-template ngbTabContent>
-        <app-incoming-email [smtpSettingsInput]="smtpSettings" [supportMailBoxInput]="supportMailBox" *ngIf="showIn == true"></app-incoming-email>
-        </ng-template>
-      </ngb-tab>
-      <!-- Account  -->
-      <ngb-tab title="Outgoing Email">
-        <ng-template ngbTabContent>
-        <app-outgoing-email [smtpInput]="smtp" [supportMailBoxInput]="supportMailBox" [testEmailInput]="smtp.testEmail"
-          [savedSMTPSettingsInput]="savedSMTPSettings" [portIsEmptyInput]="portIsEmpty" [usedEmailViaInput]="usedEmailVia" *ngIf="showIn == true"></app-outgoing-email>
-          </ng-template>
-      </ngb-tab>
-    </ngb-tabset>
-  </div>
 </div>

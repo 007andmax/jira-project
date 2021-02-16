@@ -1,57 +1,13 @@
-:host {
-  display: block;
-  height: 100vh;
-  position: fixed;
-  width: 240px;
-  left: 76px;
-  top: 0;
-  z-index: 992;
-  background: #354053;
-  overflow-x: scroll;
-  &::-webkit-scrollbar-thumb,
-  &::-webkit-scrollbar{
-    display: none;
-    width: 0;
-  }
-  @media (max-width: 414px) {
-    width: 100vw;
-    left: 0;
-    transition: all .3s;
-    top: 100%;
-    &.show {
-      top: 0;
-    }
-  }
+.active {
+    background: #3e4b61;
+     color: #16a4fa;
+    border-left: 2px solid #16a4fa;
 }
-
-:host {
-  @media (max-width: 414px) {
-
-    .center-category {
-      padding: 0 0 50px !important;
+.category-item {
+    &:hover {
+        color: #16a4fa;
     }
-
-    .left-panel-filter {
-      width: 100%;
-      padding: 20px 20px 0;
-      margin: 0;
-    }
-
-    .mob-version {
-      display: block;
-    }
-
-    .desktop-version {
-      display: none;
-    }
-
-  }
 }
-
-.mob-version {
-  display: none;
-}
-
-.desktop-version {
-  display: block;
+.category-name  {
+    color: white;
 }

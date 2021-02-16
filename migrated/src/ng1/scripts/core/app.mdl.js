@@ -168,6 +168,42 @@
           },
           template: '<item-report-component></item-report-component>'
         }))
+        .state('byProducts', waitForServices({
+          url: '/ng2/report/byProducts',
+          template: '<item-report-component></item-report-component>'
+        }))
+        .state('byCustomers', waitForServices({
+          url: '/ng2/report/byCustomers',
+          template: '<item-report-component></item-report-component>'
+        }))
+        .state('byTaxes', waitForServices({
+          url: '/ng2/report/byTaxes',
+          template: '<item-report-component></item-report-component>'
+        }))
+        .state('accounts-receivable', waitForServices({
+          url: '/ng2/report/accounts-receivable',
+          template: '<item-report-component></item-report-component>'
+        }))
+        .state('accounting-report', waitForServices({
+          url: '/ng2/report/accounting-report',
+          template: '<item-report-component></item-report-component>'
+        }))
+        .state('tech-service', waitForServices({
+          url: '/ng2/report/tech-service',
+          template: '<item-report-component></item-report-component>'
+        }))
+        .state('ticket-report', waitForServices({
+          url: '/ng2/report/ticket-report',
+          template: '<item-report-component></item-report-component>'
+        }))
+        .state('service-report', waitForServices({
+          url: '/ng2/report/service-report',
+          template: '<item-report-component></item-report-component>'
+        }))
+        .state('income-accounts', waitForServices({
+          url: '/ng2/report/income-accounts',
+          template: '<item-report-component></item-report-component>'
+        }))
         .state('accounting', waitForServices({
           url: '/accounting',
           template: '<div ui-view></div>',

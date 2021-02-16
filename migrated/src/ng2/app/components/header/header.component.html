@@ -1,0 +1,35 @@
+
+<div class="nav-header__left-side">
+  <app-global-search></app-global-search>
+</div>
+
+<div class="nav-header__rigth-side">
+  <div ngbDropdown>
+    <div id="dropdownCreate" ngbDropdownToggle class="nav-header__add-btn icon__add-white"></div>
+    <ul class="qt-dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownCreate">
+      <li ngbDropdownItem (click)="onAddTicket()">Ticket</li>
+      <li ngbDropdownItem (click)="onAddCompany()">Company</li>
+      <li ngbDropdownItem (click)="onAddUser()">Users</li>
+      <li ngbDropdownItem (click)="onAddService()">Service</li>
+      <li ngbDropdownItem (click)="onAddProduct()">Product</li>
+    </ul>
+  </div>
+  <div class="nav-header__notifications-bell --notifications-exits icon__notifications"></div>
+  <div class="nav-header__account-info">
+    <div class="qt-df qt-ai-fe qt-fd-c">
+      <div class="nav-header__account-info-company-name">{{ (currentCompany) ? currentCompany.name : ''}}</div>
+      <div class="nav-header__account-info-user-name" [textContent]="getCurrentUserName()"></div>
+    </div>
+    <div ngbDropdown>
+      <div id="dropdownCompany" ngbDropdownToggle class="nav-header__account-info-menu icon__dropdown-down"></div>
+      <ul class="qt-dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownCompany">
+        <li ngbDropdownItem (click)="goToLink('#/ng2/setting/myprofile')">
+          My Profile
+        </li>
+        <li ngbDropdownItem (click)="logOut()">
+          Logout
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-declare var $:any;
+declare var $: any;
 @Component({
   selector: 'app-setting',
   templateUrl: './setting.component.html',

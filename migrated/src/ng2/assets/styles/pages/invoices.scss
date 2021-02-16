@@ -83,7 +83,7 @@
   .invoice-list-table-header {
     z-index: 1;
     &.--filters-open {
-      top: 198px;
+      top: 183px;
     }
   }
   &__list-container {
@@ -224,9 +224,9 @@
     right: 0;
     box-shadow: -8px 0 8px 0 rgba(0, 0, 0, 0.05);
     position: fixed;
-    top: 79px;
+    top: $header-height;
     right: 0;
-    height: calc(100vh - 79px);
+    height: calc(100vh - $header-height);
     z-index: 5;
 
 

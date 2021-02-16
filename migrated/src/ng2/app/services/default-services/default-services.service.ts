@@ -10,35 +10,37 @@ import { map } from 'rxjs/operators';
 export class DefaultServicesService {
 
   private apiUrl = environment.apiUrl;
- 
+
   /**
    * Device api service constructor
    * @param {HttpClient} http Service to work with request
    */
   public constructor(
     private http: HttpClient,
-   
+
   ) { }
-  public searchDuplicatedServiceNames(startDate, endDate, companyId, agreementId,serviceNamesList) {
-    return this.http.post(this.apiUrl + `services/searchDuplicatedServiceNames?startDate=${startDate}&endDate=${endDate}&companyId=${companyId + ((agreementId) ? '&agreementId=' + agreementId : '')}`,serviceNamesList);
+  public searchDuplicatedServiceNames(startDate, endDate, companyId, agreementId, serviceNamesList) {
+    return this.http.post(this.apiUrl + `services/searchDuplicatedServiceNames?startDate=${startDate}&endDate=${endDate}&companyId=${companyId + ((agreementId) ? '&agreementId=' + agreementId : '')}`, serviceNamesList);
   }
-  public getDefaultServices(){
+  public getDefaultServices() {
     return this.http.get(this.apiUrl + `services/getDefaultServices`).pipe(map((data: any) => data.map(item => new DefaultServices(item))));
   }
-  
-  public changeBillableStatus(id,status){
-    return this.http.post(this.apiUrl + `services/changeBillableStatus?id=${id}&toBillable=${status}`,{});
+  public getDefaultService(service_id) {
+    return this.http.get(this.apiUrl + `services/${service_id}/view`).pipe(map((data: any) => new DefaultServices(data)));
   }
-  public changeService(data){
-   
-    return this.http.put(this.apiUrl + `services/${data.id}`,data);
+  public changeBillableStatus(id, status) {
+    return this.http.post(this.apiUrl + `services/changeBillableStatus?id=${id}&toBillable=${status}`, {});
   }
-  public addService(data){
-   
-    return this.http.post(this.apiUrl + `services`,data);
+  public changeService(data) {
+
+    return this.http.put(this.apiUrl + `services/${data.id}`, data);
   }
-  public deleteService(id){
-   
+  public addService(data) {
+
+    return this.http.post(this.apiUrl + `services`, data);
+  }
+  public deleteService(id) {
+
     return this.http.delete(this.apiUrl + `services/${id}`);
   }
 }

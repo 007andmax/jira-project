@@ -140,7 +140,6 @@ import { CompanyProductsComponent } from './components/companies/company-product
  * declare angular
  */
 declare var angular: any;
-import { LeftPanelSettingComponent } from './components/left-panel/left-panel-setting/left-panel-setting.component';
 import { TechUsersComponent } from './components/setting/tech-users/tech-users.component';
 import { EmailSettingComponent } from './components/setting/email-setting/email-setting.component';
 import { TaxesSettingsComponent } from './components/setting/taxes/taxes.component';
@@ -386,6 +385,11 @@ import { SupportItemComponent } from './components/support/support-item/support-
 import { DynamicTooltipComponent } from './components/shared/dynamic-tooltip/dynamic-tooltip.component';
 import { TicketProfileFormUpdateSupportComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-form-update/ticket-profile-form-update-support/ticket-profile-form-update-support.component';
 import { LeftPanelSupportComponent } from './components/left-panel/left-panel-support/left-panel-support.component';
+import { HeaderComponent } from './components/header/header.component';
+import { GlobalSearchComponent } from './components/header/global-search/global-search.component';
+import { ReportListItemComponent } from './components/reports/report-list-item/report-list-item.component';
+import { LeftPanelReportsComponent } from './components/left-panel/left-panel-reports/left-panel-reports.component';
+
 /**
  * declare angular
  */
@@ -670,7 +674,6 @@ angular.module('quicktech')
     MyProfileComponent,
     SettingComponent,
     CompanyProfileComponent,
-    LeftPanelSettingComponent,
     ManageTagsComponent,
     TechUsersComponent,
     EmailSettingComponent,
@@ -936,6 +939,10 @@ angular.module('quicktech')
     DynamicTooltipComponent,
     TicketProfileFormUpdateSupportComponent,
     LeftPanelSupportComponent,
+    HeaderComponent,
+    GlobalSearchComponent,
+    ReportListItemComponent,
+    LeftPanelReportsComponent
   ],
   imports: [
     BrowserModule,

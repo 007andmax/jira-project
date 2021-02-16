@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { SettingStateService } from 'src/ng2/app/states/setting/setting-state.service';
 import { InvoiceTicketsService } from './invoice-tickets.service';
-declare var $:any;
+declare var $: any;
 @Component({
   selector: 'app-invoice-tickets',
   templateUrl: './invoice-tickets.component.html',
@@ -15,19 +16,21 @@ export class InvoiceTicketsComponent implements OnInit, OnDestroy {
   term: any;
   condition: any;
 
-  constructor(private invoiceTicketsService: InvoiceTicketsService) {}
+  constructor(private invoiceTicketsService: InvoiceTicketsService,
+    private settingStateService: SettingStateService) { }
 
   ngOnInit() {
     $('body').addClass('ng7');
     $('body').removeClass('backMenu');
     this.getTaxNumber();
     this.getTermsAndConditions();
+    this.settingStateService.setComponentName('InvoiceTicketsComponent');
   }
 
   ngOnDestroy() {
     $('body').removeClass('ng7');
   }
-  
+
   onBackMenu() {
     let body = document.getElementsByTagName("body")[0];
     body.classList.remove("backMenu"); //remove the class
@@ -35,7 +38,7 @@ export class InvoiceTicketsComponent implements OnInit, OnDestroy {
   }
 
   getTaxNumber() {
-    this.loading = true;$(".loading").css("display", "block");
+    this.loading = true; $(".loading").css("display", "block");
     this.invoiceTicketsService.getTaxNumber().subscribe(
       (res: any) => {
         if (res) {
@@ -51,10 +54,10 @@ export class InvoiceTicketsComponent implements OnInit, OnDestroy {
   }
 
   getTermsAndConditions() {
-    this.loading = true;$(".loading").css("display", "block");
+    this.loading = true; $(".loading").css("display", "block");
     this.invoiceTicketsService.termsAndConditions().subscribe(
       (res: any) => {
-        this.loading = false;$(".loading").css("display", "none");
+        this.loading = false; $(".loading").css("display", "none");
         if (res) {
           this.term = res.term;
           this.condition = res.conditions;
@@ -63,7 +66,7 @@ export class InvoiceTicketsComponent implements OnInit, OnDestroy {
       },
       error => {
         this.showTerm = true;
-        this.loading = false;$(".loading").css("display", "none");
+        this.loading = false; $(".loading").css("display", "none");
       }
     );
   }

@@ -1,18 +1,13 @@
-:host {
-  display: block;
-  height: 100vh;
-  position: fixed;
-  width: 240px;
-  left: 76px;
-  top: 0;
-  z-index: 992;
-  @media (max-width: 414px) {
-    width: 100vw;
-    left: 0;
-    transition: all .3s;
-    top: 100%;
-    &.show {
-      top: 0;
+.active {
+    background: #3e4b61;
+     color: #16a4fa;
+    border-left: 2px solid #16a4fa;
+}
+.category-item {
+    &:hover {
+        color: #16a4fa;
     }
-  }
+}
+.category-name  {
+    color: white;
 }

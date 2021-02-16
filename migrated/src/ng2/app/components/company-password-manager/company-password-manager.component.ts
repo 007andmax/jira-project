@@ -186,14 +186,15 @@ export class CompanyPasswordManagerComponent implements OnInit, OnDestroy {
    */
   public showMobileFilters() {
     this.isMobileFilterShowing = !this.isMobileFilterShowing;
+    this.passwordManagerService.toggleFilters(this.isMobileFilterShowing);
   }
 
   /**
    * Close mobile filters
    */
   public checkCloseFilters() {
-    this.passwordManagerService.closeFilter.subscribe(() => {
-      this.isMobileFilterShowing = false
+    this.passwordManagerService.onToggleFilter.subscribe((data) => {
+      this.isMobileFilterShowing = data;
     })
   }
 

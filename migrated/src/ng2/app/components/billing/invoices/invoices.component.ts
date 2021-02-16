@@ -28,12 +28,12 @@ export class InvoicesComponent implements OnInit, OnDestroy {
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
   showCreateInvoice: boolean = false;
-  showPreviewInvoice: boolean = false;
+  // showPreviewInvoice: boolean = false;
   offset: number = 20;
   public direction: string = 'ASC';
-  previewInvoice: Invoice;
+  //previewInvoice: Invoice;
   selectedInvoices: Array<Invoice> = [];
-  @ViewChild('previewInvoiceAside') previewInvoiceAside: InvoicesAsidePreviewComponent;
+  //@ViewChild('previewInvoiceAside') previewInvoiceAside: InvoicesAsidePreviewComponent;
   sub: Subscription = new Subscription();
   constructor(private invoicesService: InvoicesService,
     public cd: ChangeDetectorRef,
@@ -136,12 +136,13 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     })
   }
   onPreviewInvoice(data) {
-    this.previewInvoice = data;
-    if (this.showPreviewInvoice) {
-      this.cd.detectChanges();
-      this.previewInvoiceAside.onGetInvoice();
-    }
-    this.showPreviewInvoice = true;
+    this.invoiceStateService.togglePreview(data.id);
+    /*  this.previewInvoice = data;
+      if (this.showPreviewInvoice) {
+        this.cd.detectChanges();
+        this.previewInvoiceAside.onGetInvoice();
+      }
+      this.showPreviewInvoice = true;*/
   }
   onRollbackInvoice(invoice) {
     this.invoicesService.rollback(invoice.id).subscribe(data => {
@@ -177,7 +178,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
   }
   onRemoveInvoice(invoice) {
     this.invoicesService.remove(invoice.id).subscribe(data => {
-      this.showPreviewInvoice = false;
+      // this.showPreviewInvoice = false;
     })
   }
   getInvoices() {

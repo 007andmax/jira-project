@@ -3,7 +3,8 @@ import { GlNumberService } from "./gl-number.service";
 import { ToastrService } from "ngx-toastr";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { map } from "rxjs/operators";
-declare var $:any;
+import { SettingStateService } from "src/ng2/app/states/setting/setting-state.service";
+declare var $: any;
 @Component({
   selector: "app-gl-number-settings",
   templateUrl: "./gl-number.component.html",
@@ -22,8 +23,9 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
   constructor(
     private glNumberService: GlNumberService,
     private toastrService: ToastrService,
-    private formBuilder: FormBuilder
-  ) {}
+    private formBuilder: FormBuilder,
+    private settingStateService: SettingStateService
+  ) { }
 
   /**
    * init
@@ -45,6 +47,7 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
     });
 
     this.getGL();
+    this.settingStateService.setComponentName('GlNumberSettingsComponent');
   }
 
   ngOnDestroy() {
@@ -60,16 +63,16 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
    * get numberList
    */
   getGL() {
-    this.loading = true;$(".loading").css("display", "block");
+    this.loading = true; $(".loading").css("display", "block");
     this.glNumberService
       .getGL()
       .pipe(
         map((res: any) => {
           if (res) {
             this.numberList = res;
-            this.numberList.sort((a,b) => a.glNumber.localeCompare(b.glNumber));
+            this.numberList.sort((a, b) => a.glNumber.localeCompare(b.glNumber));
           }
-          this.loading = false;$(".loading").css("display", "none");
+          this.loading = false; $(".loading").css("display", "none");
         })
       )
       .subscribe();
@@ -85,18 +88,18 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
    * @param gl
    */
   removeGL() {
-      this.loading = true;$(".loading").css("display", "block");
-      this.glNumberService
-        .delete(this.gl.id)
-        .pipe(
-          map(res => {
-            this.loading = false;$(".loading").css("display", "none");
-            this.popup = false;
-            this.numberList = this.numberList.filter(t => t.id !== this.gl.id);
-            this.toastrService.success(`${this.gl.glNumber} is Deleted Successfully.`);
-          })
-        )
-        .subscribe();
+    this.loading = true; $(".loading").css("display", "block");
+    this.glNumberService
+      .delete(this.gl.id)
+      .pipe(
+        map(res => {
+          this.loading = false; $(".loading").css("display", "none");
+          this.popup = false;
+          this.numberList = this.numberList.filter(t => t.id !== this.gl.id);
+          this.toastrService.success(`${this.gl.glNumber} is Deleted Successfully.`);
+        })
+      )
+      .subscribe();
   }
 
   /**
@@ -135,12 +138,12 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
 
     if (this.glForm.value.id) {
       // edit
-      this.loading = true;$(".loading").css("display", "block");
+      this.loading = true; $(".loading").css("display", "block");
       this.glNumberService
         .editGL(this.glForm.value)
         .pipe(
           map((res: any) => {
-            this.loading = false;$(".loading").css("display", "none");
+            this.loading = false; $(".loading").css("display", "none");
             if (res) {
               let itemIndex = this.numberList.findIndex(item => item.id == res.id);
               this.numberList[itemIndex] = res;
@@ -153,20 +156,20 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
             this.toastrService.success("GL Number Updated Successfully");
           },
           error => {
-            this.loading = false;$(".loading").css("display", "none");
+            this.loading = false; $(".loading").css("display", "none");
           }
         );
     } else {
       // add
-      this.loading = true;$(".loading").css("display", "block");
+      this.loading = true; $(".loading").css("display", "block");
       this.glNumberService
         .saveGL(this.glForm.value)
         .pipe(
           map((res: any) => {
-            this.loading = false;$(".loading").css("display", "none");
+            this.loading = false; $(".loading").css("display", "none");
             this.toastrService.success("GL Number Saved Successfully");
             this.numberList.push(res);
-            this.numberList.sort((a,b) => a.glNumber.localeCompare(b.glNumber));
+            this.numberList.sort((a, b) => a.glNumber.localeCompare(b.glNumber));
             this.create = false;
           })
         )

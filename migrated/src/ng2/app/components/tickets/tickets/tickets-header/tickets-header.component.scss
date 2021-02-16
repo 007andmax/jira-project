@@ -1,10 +1,12 @@
+@import "../../../../../assets/styles/variable";
+
 .tickets-list-search {
   margin-right: 8px;
 }
 
 .tickets-list-header {
   position: sticky;
-  top: 78px;
+  top: $header-height;
   padding: 24px 0 0 0;
   background-color: #edf2f6;
   margin: 0 auto;
@@ -19,7 +21,7 @@
 .tickets-list-table-header {
   width: 100%;
   position: sticky;
-  top: 158px;
+  top: 144px;
   background-color: #edf2f6;
   max-width: 1320px;
   margin: 0 auto;

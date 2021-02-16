@@ -6,9 +6,10 @@ import { Invoice } from '../../components/billing/invoices/class/invoice';
 })
 export class InvoiceStateService {
   invoiceForRemove: Invoice;
-  invoiceForRollback:Invoice;
-  invoiceForRefund:Invoice;
+  invoiceForRollback: Invoice;
+  invoiceForRefund: Invoice;
   filter: EventEmitter<any> = new EventEmitter();
+  openPreviewAside: EventEmitter<any> = new EventEmitter();
   constructor() { }
   public setInvoiceForRefund(data) {
     this.invoiceForRefund = data;
@@ -17,7 +18,9 @@ export class InvoiceStateService {
     return this.invoiceForRefund;
   }
 
-  
+  public togglePreview(data) {
+    this.openPreviewAside.emit(data);
+  }
   public setInvoiceForRollback(data) {
     this.invoiceForRollback = data;
   }

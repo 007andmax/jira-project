@@ -118,7 +118,7 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
       this.isInit = false;
       this.showPreloader = true;
       this.clearTaimer();
-    },err => {
+    }, err => {
       this.isUnlock = false;
     })
   }
@@ -155,7 +155,7 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
     })
   }
   moToBillable() {
-    let body = document.querySelector('.left-panel__category-wrap');
+    let body = document.querySelector('.main-container');
     var link = document.createElement('a');
     body.appendChild(link);
     link.href = `#/ng2/billable`;

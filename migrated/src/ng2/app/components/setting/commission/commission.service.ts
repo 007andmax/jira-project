@@ -3,6 +3,7 @@ import { environment } from 'src/ng2/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { SettingStateService } from 'src/ng2/app/states/setting/setting-state.service';
 
 const API_URL = environment.apiUrl;
 
@@ -25,7 +26,8 @@ export class CommissionService {
   private GET_USER_API = `${API_URL}users`;
   private SET_TECHLEAD_API = `${API_URL}`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+  ) { }
 
   /**
    * get categories api

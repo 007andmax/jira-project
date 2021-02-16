@@ -114,6 +114,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     private settingService: SettingService,
     private fb: FormBuilder,
     private mapsAPILoader: MapsAPILoader,
+    private settingStateService: SettingStateService,
     private ngZone: NgZone
   ) { }
 
@@ -151,6 +152,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
 
     // load address autocomplete
     this.getAddressAutocomplete();
+    this.settingStateService.setComponentName('CompanyProfileComponent');
   }
 
   ngOnDestroy() {

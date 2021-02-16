@@ -1,5 +1,6 @@
-<!-- Middle Wrapper  -->
-<app-left-panel-settings [componentName]="'GlNumberSettingsComponent'"></app-left-panel-settings>
+<!-- Middle Wrapper -->
+
+
 <div class="page-container">
   <div class="page-insider manage-taxes">
     <div class="heading">
@@ -37,203 +38,251 @@
                         <div *ngIf="f.glNumber.errors.required">
                           Income Account Number is required
                         </div>
-                        <div *ngIf="f.glNumber.errors.minlength">
-                          Income Account Number is too short.
+                        <div class="modal-body">
+                            <form
+                                [formGroup]="glForm"
+                                (ngSubmit)="onSubmit()"
+                            >
+                                <div class="f-row">
+                                    <div class="f-col col-100">
+                                        <label>Income Account Number</label>
+                                        <div class="form-row">
+                                            <input
+                                                type="text"
+                                                class="form-input"
+                                                formControlName="glNumber"
+                                                placeholder="Enter Income Account Number"
+                                                #glNumber
+                                                [ngClass]="{ 'is-invalid': submitted && f.glNumber.errors }"
+                                            >
+                                            <div
+                                                *ngIf="submitted && f.glNumber.errors"
+                                                class="invalid-feedback"
+                                            >
+                                                <div *ngIf="f.glNumber.errors.required">Income Account Number is required</div>
+                                                <div *ngIf="f.glNumber.errors.minlength">Income Account Number is too short.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="f-col col-100">
+                                        <label>Description</label>
+                                        <div class="form-row">
+                                            <textarea
+                                                type="text"
+                                                formControlName="description"
+                                                class="form-input"
+                                                placeholder="Enter Description"
+                                                #description
+                                                [ngClass]="{ 'is-invalid': submitted && f.description.errors }"
+                                            ></textarea>
+                                            <div
+                                                *ngIf="submitted && f.description.errors"
+                                                class="invalid-feedback"
+                                            >
+                                                <div *ngIf="f.description.errors.maxlength">Description is too large.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="m-btn-row">
+                                        <div class="m-btn-col">
+                                            <input
+                                                type="submit"
+                                                value="Save"
+                                                class="btn btn-primary"
+                                            >
+                                            <a
+                                                href="javascript:;"
+                                                class="btn btn-secondary"
+                                                aria-label="Close"
+                                                (click)="create = !create"
+                                            >
+                                                Cancel
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                      </div>
                     </div>
-                  </div>
-                  <div class="f-col col-100">
-                    <label>Description</label>
-                    <div class="form-row">
-                      <textarea
-                        type="text"
-                        formControlName="description"
-                        class="form-input"
-                        placeholder="Enter Description"
-                        #description
-                        [ngClass]="{ 'is-invalid': submitted && f.description.errors }"
-                      ></textarea>
-                      <div
-                        *ngIf="submitted && f.description.errors"
-                        class="invalid-feedback"
-                      >
-                        <div *ngIf="f.description.errors.maxlength">Description is too large.</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="m-btn-row">
-                    <div class="m-btn-col">
-                      <input
-                        type="submit"
-                        value="Save"
-                        class="btn btn-primary"
-                      />
-                      <a
-                        href="javascript:;"
-                        class="btn btn-secondary"
-                        aria-label="Close"
-                        (click)="create = !create"
-                        >Cancel</a
-                      >
-                    </div>
-                  </div>
                 </div>
-              </form>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
 
-    <div class="cmn-area">
-      <div class="data-table-wrap">
-        <table class="display dataTable" style="width:100%">
-          <thead>
-            <tr>
-              <th class="tax-name">Income Account Number</th>
-              <th class="rate">Description</th>
-              <th class="action">&nbsp;</th>
-            </tr>
-          </thead>
-          <tbody *ngIf="numberList">
-            <tr *ngFor="let gl of numberList; let i = index">
-              <td class="tax-name">{{ gl.glNumber }}</td>
-              <td class="rate">{{ gl.description }}</td>
-              <td class="action">
-                <a
-                  href="javascript:;"
-                  data-tooltip="Edit"
-                  (click)="openModel(false, i, gl)"
-                  class="edit"
-                  ><img
-                    src="../../../../../ng1/images/setting-module/edit.svg"
-                    alt="Edit"
-                /></a>
-                <a
-                  href="javascript:;"
-                  data-tooltip="Remove"
-                  class="remove"
-                  (click)="removeConfirm(gl)"
-                  ><img
-                    src="../../../../../ng1/images/setting-module/remove.svg"
-                    alt="Remove"
-                /></a>
 
-                <div
-                  class="modal-content toggle-area"
-                  [ngClass]="{ opened: selectedIdx === i }"
+        <div class="cmn-area">
+            <div class="data-table-wrap">
+                <table
+                    class="display dataTable"
+                    style="width:100%"
                 >
-                  <div class="modal-wrapper">
-                    <div class="toggle-header">
-                      <h2 class="h1">Edit Income Account Number</h2>
-                    </div>
-                    <div class="modal-body">
-                      <form [formGroup]="glForm" (ngSubmit)="onSubmit()">
-                        <div class="f-row">
-                          <div class="f-col col-100">
-                            <label>Income Account Number</label>
-                            <div class="form-row">
-                              <input
-                                type="text"
-                                class="form-input"
-                                formControlName="glNumber"
-                                placeholder="Enter Income Account Number"
-                                [ngClass]="{
+                    <thead>
+                        <tr>
+                            <th class="tax-name">Income Account Number</th>
+                            <th class="rate">Description</th>
+                            <th class="action">&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="numberList">
+                        <tr *ngFor="let gl of numberList; let i = index">
+                            <td class="tax-name">{{ gl.glNumber }}</td>
+                            <td class="rate">{{ gl.description }}</td>
+                            <td class="action">
+                                <a
+                                    href="javascript:;"
+                                    data-tooltip="Edit"
+                                    (click)="openModel(false, i, gl)"
+                                    class="edit"
+                                >
+                                    <img
+                                        src="../../../../../ng1/images/setting-module/edit.svg"
+                                        alt="Edit"
+                                    >
+                                </a>
+                                <a
+                                    href="javascript:;"
+                                    data-tooltip="Remove"
+                                    class="remove"
+                                    (click)="removeConfirm(gl)"
+                                >
+                                    <img
+                                        src="../../../../../ng1/images/setting-module/remove.svg"
+                                        alt="Remove"
+                                    >
+                                </a>
+
+
+                                <div
+                                    class="modal-content toggle-area"
+                                    [ngClass]="{ opened: selectedIdx === i }"
+                                >
+                                    <div class="modal-wrapper">
+                                        <div class="toggle-header">
+                                            <h2 class="h1">Edit Income Account Number</h2>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form
+                                                [formGroup]="glForm"
+                                                (ngSubmit)="onSubmit()"
+                                            >
+                                                <div class="f-row">
+                                                    <div class="f-col col-100">
+                                                        <label>Income Account Number</label>
+                                                        <div class="form-row">
+                                                            <input
+                                                                type="text"
+                                                                class="form-input"
+                                                                formControlName="glNumber"
+                                                                placeholder="Enter Income Account Number"
+                                                                [ngClass]="{
                                   'is-invalid': submitted && f.glNumber.errors
                                 }"
-                              />
-                              <div
-                                *ngIf="submitted && f.glNumber.errors"
-                                class="invalid-feedback error-text-align"
-                              >
-                                <div *ngIf="f.glNumber.errors.required">
-                                  Income Account Number is required
+                                                            >
+                                                            <div
+                                                                *ngIf="submitted && f.glNumber.errors"
+                                                                class="invalid-feedback error-text-align"
+                                                            >
+                                                                <div *ngIf="f.glNumber.errors.required">Income Account Number is required</div>
+                                                                <div *ngIf="f.glNumber.errors.minlength">Income Account Number is too short.</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="f-col col-100">
+                                                        <label>Description</label>
+                                                        <div class="form-row">
+                                                            <textarea
+                                                                type="text"
+                                                                class="form-input"
+                                                                formControlName="description"
+                                                                placeholder="Enter Description"
+                                                            ></textarea>
+                                                            <div
+                                                                *ngIf="submitted && f.description.errors"
+                                                                class="invalid-feedback error-text-align"
+                                                            >
+                                                                <div *ngIf="f.description.errors.maxlength">Description is too large.</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="m-btn-row">
+                                                        <div class="m-btn-col">
+                                                            <input
+                                                                type="submit"
+                                                                value="Save"
+                                                                class="btn btn-primary"
+                                                            >
+                                                            <a
+                                                                href="javascript:;"
+                                                                class="btn btn-secondary"
+                                                                aria-label="Close"
+                                                                (click)="selectedIdx = -1"
+                                                            >
+                                                                Cancel
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div *ngIf="f.glNumber.errors.minlength">
-                                  Income Account Number is too short.
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="f-col col-100">
-                            <label>Description</label>
-                            <div class="form-row">
-                              <textarea
-                                type="text"
-                                class="form-input"
-                                formControlName="description"
-                                placeholder="Enter Description"
-                              ></textarea>
-                              <div
-                                *ngIf="submitted && f.description.errors"
-                                class="invalid-feedback error-text-align"
-                              >
-                                <div *ngIf="f.description.errors.maxlength">Description is too large.</div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="m-btn-row">
-                            <div class="m-btn-col">
-                              <input
-                                type="submit"
-                                value="Save"
-                                class="btn btn-primary"
-                              />
-                              <a
-                                href="javascript:;"
-                                class="btn btn-secondary"
-                                aria-label="Close"
-                                (click)="selectedIdx = -1"
-                                >Cancel</a
-                              >
-                            </div>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- <div class="loading" *ngIf="loading"></div> -->
     </div>
-    <!-- <div class="loading" *ngIf="loading"></div> -->
-  </div>
+
 
 </div>
 
+
 <!-- tag delete popup -->
-<div class="img-croparea deletePopup" *ngIf="popup">
-  <div class="crop-inner">
-    <div class="cropping">
-      <div class="popup-message">
-        <span class="icon-part">
-          <img
-            src="../../../../../ng1/images/setting-module/delete-red.svg"
-            alt="delete"
-          />
-        </span>
-        <div class="message-right">
-          <h1>Remove Income Account Number</h1>
-          <p>Are you sure you want to delete?</p>
+<div
+    class="img-croparea deletePopup"
+    *ngIf="popup"
+>
+    <div class="crop-inner">
+        <div class="cropping">
+            <div class="popup-message">
+                <span class="icon-part">
+                    <img
+                        src="../../../../../ng1/images/setting-module/delete-red.svg"
+                        alt="delete"
+                    >
+                </span>
+                <div class="message-right">
+                    <h1>Remove Income Account Number</h1>
+                    <p>Are you sure you want to delete?</p>
+                </div>
+                <a
+                    class="close-ico"
+                    href="javascript:;"
+                    (click)="popup = false"
+                >
+                    <img
+                        src="../../../../../ng1/images/setting-module/close.svg"
+                        alt="close"
+                    >
+                </a>
+            </div>
+            <div class="btn-crops">
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="removeGL()"
+                >
+                    Yes, I am sure
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    (click)="popup = false"
+                >
+                    Cancel
+                </button>
+            </div>
         </div>
-        <a class="close-ico" href="javascript:;" (click)="popup = false"
-          ><img
-            src="../../../../../ng1/images/setting-module/close.svg"
-            alt="close"
-        /></a>
-      </div>
-      <div class="btn-crops">
-        <button type="button" class="btn btn-primary" (click)="removeGL()">
-          Yes, I am sure
-        </button>
-        <button type="button" class="btn btn-secondary" (click)="popup = false">
-          Cancel
-        </button>
-      </div>
     </div>
-  </div>
 </div>
