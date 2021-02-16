@@ -48,6 +48,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   private subscription: ISubscription;
   @Output() onGoToLink = new EventEmitter();
   @Output() onChangeState = new EventEmitter();
+
   /**
    * Creates an instance of the LeftPanelPasswordManagerComponent with the injected services
    * @param {CompaniesService} companiesService Service to work with companies

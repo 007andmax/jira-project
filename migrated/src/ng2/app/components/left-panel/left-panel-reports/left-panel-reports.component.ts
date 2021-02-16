@@ -6,12 +6,14 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./left-panel-reports.component.scss']
 })
 export class LeftPanelReportsComponent implements OnInit {
-  @Input() activePage: string = "";
   @Output() onChangeState = new EventEmitter();
+  @Input() activePage: string = "";
+
   constructor() { }
 
   ngOnInit() {
   }
+
   public goToState() {
     this.onChangeState.emit('new-reports');
   }

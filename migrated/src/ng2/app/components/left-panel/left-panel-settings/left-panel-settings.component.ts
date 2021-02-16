@@ -14,8 +14,8 @@ import { LeftPanelStateService } from 'src/ng2/app/states/left-panel/left-panel-
 export class LeftPanelSettingsComponent implements OnInit {
   open: boolean = false;
   active: boolean = false;
-  componentName: string;
   currentUser: CurrentUser;
+  @Input() componentName: string;
   @Input() activePage: string = "";
   @Output() onGoToLink = new EventEmitter();
   @Output() onChangeState = new EventEmitter();
@@ -32,6 +32,27 @@ export class LeftPanelSettingsComponent implements OnInit {
     this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
       if (data) this.open = false;
     })
+    this.leftPanelStateService.onChangeState.subscribe(state => {
+      if (!this.isSettingsPage(state)) this.open = false
+    })
+    this.leftPanelStateService.onFirstOpen.subscribe(data => {
+      if (this.isSettingsPage(data)) this.open = true;
+    })
+  }
+  public isSettingsPage(state) {
+    return (state === 'myprofile-component'
+      || state === 'manage-tags-component'
+      || state === 'glnumber-component'
+      || state === 'company-profile-component'
+      || state === 'tech-component'
+      || state === 'email-setting-component'
+      || state === 'taxes-component'
+      || state === 'permission-manage-component'
+      || state === 'email-templete-component'
+      || state === 'integrations-component'
+      || state === 'invoice-ticket-component'
+      || state === 'commission-component'
+      || state === 'subscription-component')
   }
   openPanel() {
     this.onOpenPanel.emit(null);

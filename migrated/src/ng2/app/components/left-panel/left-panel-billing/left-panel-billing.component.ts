@@ -34,6 +34,7 @@ export class LeftPanelBillingComponent implements OnInit, OnDestroy {
    */
   ngOnInit() {
     this.activePage = this.leftPanelStateService.activePage;
+    console.log("activePage", this.activePage);
     let getOnBillingPage = this.leftPanelStateService.getOnBillingPage().subscribe(data => {
       this.activePage = data;
     })
@@ -41,11 +42,27 @@ export class LeftPanelBillingComponent implements OnInit, OnDestroy {
     this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
       if (data) this.open = false;
     })
+    this.leftPanelStateService.onChangeState.subscribe(state => {
+      if (!this.isBillingState(state)) this.open = false;
+    })
+    this.leftPanelStateService.onFirstOpen.subscribe(data => {
+      if (this.isBillingState(data)) this.open = true;
+      console.log("activePage", this.activePage);
+      console.log("this.open", this.open);
+    })
+  }
+  isBillingState(state) {
+    return (state === 'billing-dashboard'
+      || state === 'new-services'
+      || state === 'new-billable'
+      || state === 'new-billable-invoices'
+      || state === 'quotes-component'
+      || state === 'new-payments-ng2'
+      || state === 'new-contracts')
   }
   openPanel() {
     this.onOpenPanel.emit(null);
   }
-
   /**
    * Filter by password types
    * * @param state - state to go

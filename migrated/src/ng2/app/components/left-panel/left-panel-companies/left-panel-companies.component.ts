@@ -25,6 +25,7 @@ export class LeftPanelCompaniesComponent implements OnInit {
   calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
   selectedTechLead: ItemFilterPerson = null;
   selectedClientIndustry: string = null;
+  @Output() onFilterTags = new EventEmitter();
   filter: LeftPanelCompaniesFilter = new LeftPanelCompaniesFilter();
   selectedCompany: Company;
   @Input() activePage: string = "";
@@ -35,6 +36,7 @@ export class LeftPanelCompaniesComponent implements OnInit {
     private leftPanelService: LeftPanelService,
     private companiesService: CompaniesService,
     private companiesState: CompaniesStateService,
+
     private leftPanelStateService: LeftPanelStateService) { }
 
   ngOnInit() {
@@ -59,13 +61,20 @@ export class LeftPanelCompaniesComponent implements OnInit {
     this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
       if (data) this.open = false;
     })
-
+    this.leftPanelStateService.onChangeState.subscribe(state => {
+      if (!this.isCompanyPage(state)) this.open = false
+    })
+    this.leftPanelStateService.onFirstOpen.subscribe(data => {
+      console.log("data", data);
+      if (this.isCompanyPage(data)) this.open = true;
+    })
   }
   openPanel() {
     this.onOpenPanel.emit(null);
   }
   ngDoCheck() {
     if (localStorage.getItem("company_id") && this.companiesState.getCompanies().length > 0) this.selectedCompany = this.companiesState.getCompanies().find(item => item.id === localStorage.getItem("company_id"));
+
   }
   /* private getIndustries() {
      this.companiesService.getIndustries().subscribe((data: Array<string>) => {
@@ -76,7 +85,7 @@ export class LeftPanelCompaniesComponent implements OnInit {
    }*/
   /* getSelectedTechLead() {
      let index = this.listPersons.findIndex(item => item.selected === true);
-     if (index > -1) return this.listPersons[index].firstName  ' '  this.listPersons[index].lastName;
+     if (index > -1) return this.listPersons[index].firstName + ' ' + this.listPersons[index].lastName;
      return "";
    }*/
   private getTehusers(list) {
@@ -86,16 +95,15 @@ export class LeftPanelCompaniesComponent implements OnInit {
         this.listPersons.push(new ItemFilterPerson(item.id, `${item.firstName} ${item.lastName}`));
       }
     })
-    /* this.listPersons.sort((a, b) => ((a.firstName  ' '  a.lastName).toLowerCase() > (b.firstName  ' '  b.lastName).toLowerCase()) ?
-     1 : (((b.firstName  ' '  b.lastName).toLowerCase() > (a.firstName  ' '  a.lastName).toLowerCase()) ? -1 : 0));*/
+    /* this.listPersons.sort((a, b) => ((a.firstName + ' ' + a.lastName).toLowerCase() > (b.firstName + ' ' + b.lastName).toLowerCase()) ?
+     1 : (((b.firstName + ' ' + b.lastName).toLowerCase() > (a.firstName + ' ' + a.lastName).toLowerCase()) ? -1 : 0));*/
 
     this.listPersons.sort((a, b) => ((a.name).toLowerCase() > (b.name).toLowerCase()) ?
       1 : (((b.name).toLowerCase() > (a.name).toLowerCase()) ? -1 : 0));
 
   }
-
-  public isCompanyPage() {
-    return (this.activePage == 'company-dashboard' || this.activePage == 'company-tickets' || this.activePage == 'company-user' || this.activePage == 'company-devices' || this.activePage == 'company-network-scan' || this.activePage == 'company-password-manager' || this.activePage == 'company-products' || this.activePage == 'company-contracts')
+  public isCompanyPage(state) {
+    return (state == 'new-companies' || state == 'company-dashboard' || state == 'company-tickets' || state == 'company-user' || state == 'company-devices' || state == 'company-network-scan' || state == 'company-password-manager' || state == 'company-products' || state == 'company-contracts')
   }
   public selectTechLead(name) {
 

@@ -34,8 +34,8 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
     private leftPanelUsersService: LeftPanelUsersService,
     public cd: ChangeDetectorRef,
     private companiesState: CompaniesStateService,
-    private leftPanelStateService: LeftPanelStateService,
     private leftPanelService: LeftPanelService,
+    private leftPanelStateService: LeftPanelStateService,
     private companiesService: CompaniesService) { }
 
   ngOnInit() {
@@ -62,6 +62,15 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
     this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
       if (data) this.open = false;
     })
+    this.leftPanelStateService.onChangeState.subscribe(state => {
+      if (!this.isUsersPage(state)) this.open = false
+    })
+    this.leftPanelStateService.onFirstOpen.subscribe(data => {
+      if (this.isUsersPage(data)) this.open = true;
+    })
+  }
+  isUsersPage(state) {
+    return (state === 'new-users')
   }
   openPanel() {
     this.onOpenPanel.emit(null);

@@ -14,11 +14,12 @@ import { QuoteStateService } from 'src/ng2/app/states/quote/quote-state.service'
 export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
   open: boolean = false;
   @Input() activePage: string = "";
+  @Input() selectedCompany: Company;
   companyId: string;
   sub: Subscription = new Subscription();
-  @Input() selectedCompany: Company;
   @Output() onGoToLink = new EventEmitter();
   @Output() onChangeState = new EventEmitter();
+
   constructor(//private quoteStateService: QuoteStateService,
     private permissionsService: PermissionsService,
     private companiesStateService: CompaniesStateService,
@@ -26,12 +27,16 @@ export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.companyId = localStorage.getItem("company_id");
+
+
+
     this.activePage = this.leftPanelStateService.activePage;
     let getOnBillingPage = this.leftPanelStateService.getOnCompanyPage().subscribe(data => {
       this.activePage = data;
     })
     this.sub.add(getOnBillingPage);
   }
+
   checkLogo() {
     return (this.selectedCompany && this.selectedCompany.logo && this.selectedCompany.logo.cropped && this.selectedCompany.logo.cropped.id || this.selectedCompany && this.selectedCompany.logo && this.selectedCompany.logo.origin && this.selectedCompany.logo.origin.id)
   }

@@ -57,6 +57,19 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
     this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
       if (data) this.open = false;
     })
+    this.leftPanelStateService.onChangeState.subscribe(state => {
+      console.log("state", state);
+      if (!this.isTicketsPage(state)) this.open = false
+    })
+    this.leftPanelStateService.onFirstOpen.subscribe(data => {
+      console.log("activePage", this.activePage);
+      if (this.isTicketsPage(data)) this.open = true;
+    })
+  }
+  isTicketsPage(state) {
+    return (state === 'new-tickets'
+      || state === 'new-tickets-dashboard'
+      || state === 'recurring-tickets')
   }
   openPanel() {
     this.onOpenPanel.emit(null);

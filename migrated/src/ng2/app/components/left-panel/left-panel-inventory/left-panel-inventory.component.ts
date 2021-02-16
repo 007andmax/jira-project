@@ -21,6 +21,7 @@ export class LeftPanelInventoryComponent implements OnInit {
   @ViewChild('addCategory') addCategory: AddCategoryProductComponent;
   @Output() onChangeState = new EventEmitter();
   @Output() onGoToLink = new EventEmitter();
+
   constructor(private productService: ProductService,
     private confirmStateService: ConfirmStateService,
     private inventoryStateService: InventoryStateService,
@@ -35,6 +36,7 @@ export class LeftPanelInventoryComponent implements OnInit {
       this.cd.detectChanges();
     })
   }
+
   selectCategory(category) {
     this.sortCategoty = category;
     this.inventoryStateService.setSortCategory(category);
