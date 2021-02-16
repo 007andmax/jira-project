@@ -77,11 +77,12 @@ export class LeftPanelComponent implements OnInit {
           if (this.router.url.includes(`ng2/tickets-dashboard`)) this.state = 'new-tickets-dashboard';
           if (this.router.url.includes(`ng2/tickets`)) this.state = 'new-tickets';
           if (this.router.url.includes(`ng2/recurring-tickets`)) this.state = 'recurring-tickets';
+          this.leftPanelStateService.firstOpen(this.state);
+          this.leftPanelStateService.changeState(this.state);
           this.cd.detectChanges();
         }
         console.log("this.state", this.state);
         this.setAppType(appType);
-
       });
     this.leftPanelStateService.onGoToState.subscribe(data => {
       this.onChangeState(data);
@@ -150,6 +151,7 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'new-tickets-dashboard') this.goToLink('#/ng2/tickets-dashboard');
       if (this.state === 'new-tickets') this.goToLink('#/ng2/tickets');
       if (this.state === 'recurring-tickets') this.goToLink('#/ng2/recurring-tickets');
+      this.leftPanelStateService.changeState(this.state);
       this.cd.detectChanges();
     }
   }
