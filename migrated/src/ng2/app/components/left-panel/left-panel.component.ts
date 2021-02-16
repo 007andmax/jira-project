@@ -77,6 +77,7 @@ export class LeftPanelComponent implements OnInit {
           if (this.router.url.includes(`ng2/tickets-dashboard`)) this.state = 'new-tickets-dashboard';
           if (this.router.url.includes(`ng2/tickets`)) this.state = 'new-tickets';
           if (this.router.url.includes(`ng2/recurring-tickets`)) this.state = 'recurring-tickets';
+          if (this.router.url.includes(`ng2/quickSupport`)) this.state = 'new-quickSupport';
           this.leftPanelStateService.firstOpen(this.state);
           this.leftPanelStateService.changeState(this.state);
           this.cd.detectChanges();
@@ -151,6 +152,8 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'new-tickets-dashboard') this.goToLink('#/ng2/tickets-dashboard');
       if (this.state === 'new-tickets') this.goToLink('#/ng2/tickets');
       if (this.state === 'recurring-tickets') this.goToLink('#/ng2/recurring-tickets');
+      if (this.state === 'new-quickSupport') this.goToLink('#/ng2/quickSupport');
+
       this.leftPanelStateService.changeState(this.state);
       this.cd.detectChanges();
     }

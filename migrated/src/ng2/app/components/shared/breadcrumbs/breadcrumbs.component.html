@@ -1,6 +1,7 @@
 <div
     class="breadcrumbs"
     *ngIf="isCompanyState()"
+    [ngClass]="{'class':state === 'company-dashboard'}"
 >
     <div
         class="breadcrumbs-location pointer"

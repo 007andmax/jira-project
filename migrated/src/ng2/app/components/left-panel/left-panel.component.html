@@ -6,13 +6,11 @@
     ></div>
 </div>
 <div class="app-left-panel__body">
-    <div
-        class="app-left-panel__menu"
-        [ngClass]="{'--active': false}"
-    >
-        <div class="app-left-panel__menu-icon --quick-support"></div>
-        <div class="app-left-panel__menu-title">Quick Support</div>
-    </div>
+    <app-left-panel-support
+        (onOpenPanel)="onOpenPanel()"
+        (onChangeState)="onChangeState($event)"
+        [activePage]="state"
+    ></app-left-panel-support>
     <app-left-panel-tickets
         (onOpenPanel)="onOpenPanel()"
         (onChangeState)="onChangeState($event)"
