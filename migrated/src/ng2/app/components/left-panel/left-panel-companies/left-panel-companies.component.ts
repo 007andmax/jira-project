@@ -7,6 +7,7 @@ import { LeftPanelCompaniesFilter } from './class/left-panel-companies-filter';
 import { LeftPanelStateService } from 'src/ng2/app/states/left-panel/left-panel-state.service';
 import { CompanyCalculateCount } from '../../companies/class/company-calculate-count';
 import { ItemFilterPerson } from './class/item-filter-person';
+import { Company } from 'src/ng2/app/interfaces/company/company';
 
 @Component({
   selector: 'app-left-panel-companies',
@@ -25,9 +26,11 @@ export class LeftPanelCompaniesComponent implements OnInit {
   selectedTechLead: ItemFilterPerson = null;
   selectedClientIndustry: string = null;
   filter: LeftPanelCompaniesFilter = new LeftPanelCompaniesFilter();
+  selectedCompany: Company;
   @Input() activePage: string = "";
   @Output() onGoToLink = new EventEmitter();
   @Output() onChangeState = new EventEmitter();
+  @Output() onOpenPanel = new EventEmitter();
   constructor(private usersStateService: UsersStateService,
     private leftPanelService: LeftPanelService,
     private companiesService: CompaniesService,
@@ -53,8 +56,16 @@ export class LeftPanelCompaniesComponent implements OnInit {
       this.calculateCount = data;
 
     })
+    this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
+      if (data) this.open = false;
+    })
 
-
+  }
+  openPanel() {
+    this.onOpenPanel.emit(null);
+  }
+  ngDoCheck() {
+    if (localStorage.getItem("company_id") && this.companiesState.getCompanies().length > 0) this.selectedCompany = this.companiesState.getCompanies().find(item => item.id === localStorage.getItem("company_id"));
   }
   /* private getIndustries() {
      this.companiesService.getIndustries().subscribe((data: Array<string>) => {
@@ -65,7 +76,7 @@ export class LeftPanelCompaniesComponent implements OnInit {
    }*/
   /* getSelectedTechLead() {
      let index = this.listPersons.findIndex(item => item.selected === true);
-     if (index > -1) return this.listPersons[index].firstName + ' ' + this.listPersons[index].lastName;
+     if (index > -1) return this.listPersons[index].firstName  ' '  this.listPersons[index].lastName;
      return "";
    }*/
   private getTehusers(list) {
@@ -75,8 +86,8 @@ export class LeftPanelCompaniesComponent implements OnInit {
         this.listPersons.push(new ItemFilterPerson(item.id, `${item.firstName} ${item.lastName}`));
       }
     })
-    /* this.listPersons.sort((a, b) => ((a.firstName + ' ' + a.lastName).toLowerCase() > (b.firstName + ' ' + b.lastName).toLowerCase()) ?
-     1 : (((b.firstName + ' ' + b.lastName).toLowerCase() > (a.firstName + ' ' + a.lastName).toLowerCase()) ? -1 : 0));*/
+    /* this.listPersons.sort((a, b) => ((a.firstName  ' '  a.lastName).toLowerCase() > (b.firstName  ' '  b.lastName).toLowerCase()) ?
+     1 : (((b.firstName  ' '  b.lastName).toLowerCase() > (a.firstName  ' '  a.lastName).toLowerCase()) ? -1 : 0));*/
 
     this.listPersons.sort((a, b) => ((a.name).toLowerCase() > (b.name).toLowerCase()) ?
       1 : (((b.name).toLowerCase() > (a.name).toLowerCase()) ? -1 : 0));

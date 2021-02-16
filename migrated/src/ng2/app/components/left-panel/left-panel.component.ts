@@ -87,6 +87,10 @@ export class LeftPanelComponent implements OnInit {
       this.onChangeState(data);
     })
   }
+  onOpenPanel() {
+
+    this.leftPanelStateService.toggleLeftPanel(false);
+  }
   onToggleLeftPanel() {
     this.toggleLeftPanel = !this.toggleLeftPanel;
     this.leftPanelStateService.toggleLeftPanel(this.toggleLeftPanel);

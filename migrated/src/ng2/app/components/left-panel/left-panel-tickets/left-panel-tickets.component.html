@@ -3,10 +3,14 @@
     [ngClass]="{'--active': open}"
     (click)="open = !open"
 >
-    <div class="app-left-panel__menu-icon --tickets"></div>
+    <div
+        class="app-left-panel__menu-icon --tickets"
+        (click)="openPanel()"
+    ></div>
     <div class="app-left-panel__menu-title">Tickets</div>
     <div class="app-left-panel__menu-arrow"></div>
 </div>
+
 
 
 <ul

@@ -6,6 +6,7 @@ import { SelectSearchComponent } from '../../shared/select-search/select-search.
 import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 import { TicketsCounts } from '../../tickets/tickets/class/tickets-counts';
 import { QuoteStateService } from 'src/ng2/app/states/quote/quote-state.service';
+import { LeftPanelStateService } from 'src/ng2/app/states/left-panel/left-panel-state.service';
 
 @Component({
   selector: 'app-left-panel-tickets',
@@ -21,9 +22,11 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
   ticketsCounts: TicketsCounts;
   @Input() activePage: string = "";
   @Output() onChangeState = new EventEmitter();
+  @Output() onOpenPanel = new EventEmitter();
   constructor(private ticketsStateService: TicketsStateService,
     private ticketsService: TicketsService,
     public cd: ChangeDetectorRef,
+    private leftPanelStateService: LeftPanelStateService,
     private leftPanelService: LeftPanelService) { }
 
 
@@ -51,6 +54,12 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
     /* START */
     this.ticketsStateService.setIsMoveToTickets(false);
     /* END */
+    this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
+      if (data) this.open = false;
+    })
+  }
+  openPanel() {
+    this.onOpenPanel.emit(null);
   }
   public goToBashboard() {
     /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */

@@ -1,73 +1,128 @@
-<div class="app-left-panel__menu" [ngClass]="{'--active': open}"  (click)="open = !open">
-  <div class="app-left-panel__menu-icon --settings"></div>
-  <div class="app-left-panel__menu-title">Settings</div>
-  <div class="app-left-panel__menu-arrow"></div>
+<div
+    class="app-left-panel__menu"
+    [ngClass]="{'--active': open}"
+    (click)="open = !open"
+>
+    <div
+        class="app-left-panel__menu-icon --settings"
+        (click)="openPanel()"
+    ></div>
+    <div class="app-left-panel__menu-title">Settings</div>
+    <div class="app-left-panel__menu-arrow"></div>
 </div>
-
-<ul class="app-left-panel__menu-expand" *ngIf="open">
+<ul
+    class="app-left-panel__menu-expand"
+    *ngIf="open"
+>
     <li [ngClass]="{'--active':activePage === 'myprofile-component'}">
-      <a href="#/ng2/setting/myprofile" (click)="goToState('myprofile-component')">
-        My Profile Settings
-      </a>
+        <a
+            href="#/ng2/setting/myprofile"
+            (click)="goToState('myprofile-component')"
+        >
+            My Profile Settings
+        </a>
     </li>
-    <li [ngClass]="{'--active':activePage === 'manage-tags-component'}" *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TAGS_SETTINGS')">
-      <a href="#/ng2/setting/tags" (click)="goToState('manage-tags-component')">
-        Manage Tags
-      </a>
+    <li
+        [ngClass]="{'--active':activePage === 'manage-tags-component'}"
+        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TAGS_SETTINGS')"
+    >
+        <a
+            href="#/ng2/setting/tags"
+            (click)="goToState('manage-tags-component')"
+        >
+            Manage Tags
+        </a>
     </li>
     <li [ngClass]="{'--active':activePage === 'glnumber-component'}">
-      <a href="#/ng2/setting/glnumber" (click)="goToState('glnumber-component')">
-        Manage GL number
-      </a>
+        <a
+            href="#/ng2/setting/glnumber"
+            (click)="goToState('glnumber-component')"
+        >
+            Manage GL number
+        </a>
     </li>
     <li [ngClass]="{'--active':activePage === 'company-profile-component'}">
-      <a href="#/ng2/setting/companyprofile" (click)="goToState('company-profile-component')" *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_COMPANY_PROFILE_SETTINGS')">
-        Company Profile
-      </a>
+        <a
+            href="#/ng2/setting/companyprofile"
+            (click)="goToState('company-profile-component')"
+            *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_COMPANY_PROFILE_SETTINGS')"
+        >
+            Company Profile
+        </a>
     </li>
     <li [ngClass]="{'--active':activePage === 'tech-component'}">
-      <a href="#/ng2/setting/techUsers" (click)="goToState('tech-component')">
-        Manage Tech Users
-      </a>
+        <a
+            href="#/ng2/setting/techUsers"
+            (click)="goToState('tech-component')"
+        >
+            Manage Tech Users
+        </a>
     </li>
     <li [ngClass]="{'--active':activePage === 'email-setting-component'}">
-      <a href="#/ng2/setting/emailSetting" (click)="goToState('email-setting-component')">
-        Email Settings
-      </a>
+        <a
+            href="#/ng2/setting/emailSetting"
+            (click)="goToState('email-setting-component')"
+        >
+            Email Settings
+        </a>
     </li>
     <li [ngClass]="{'--active':activePage === 'taxes-component'}">
-      <a href="#/ng2/setting/taxes" (click)="goToState('taxes-component')">
-        Taxes
-      </a>
+        <a
+            href="#/ng2/setting/taxes"
+            (click)="goToState('taxes-component')"
+        >
+            Taxes
+        </a>
     </li>
-    <li [ngClass]="{'--active':activePage === 'permission-manage-component'}" *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_PERMISSIONS_SETTINGS')">
-      <a href="#/ng2/setting/permission" (click)="goToState('permission-manage-component')">
-        Permission Management
-      </a>
+    <li
+        [ngClass]="{'--active':activePage === 'permission-manage-component'}"
+        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_PERMISSIONS_SETTINGS')"
+    >
+        <a
+            href="#/ng2/setting/permission"
+            (click)="goToState('permission-manage-component')"
+        >
+            Permission Management
+        </a>
     </li>
     <li [ngClass]="{'--active':activePage === 'email-templete-component'}">
-      <a href="#/ng2/setting/emailTemplete" (click)="goToState('email-templete-component')">
-        Email Templetes
-      </a>
+        <a
+            href="#/ng2/setting/emailTemplete"
+            (click)="goToState('email-templete-component')"
+        >
+            Email Templetes
+        </a>
     </li>
     <li [ngClass]="{'--active':activePage === 'integrations-component'}">
-      <a href="#/ng2/setting/integration" (click)="goToState('integrations-component')">
-        Integrations
-      </a>
+        <a
+            href="#/ng2/setting/integration"
+            (click)="goToState('integrations-component')"
+        >
+            Integrations
+        </a>
     </li>
     <li [ngClass]="{'--active':activePage === 'invoice-ticket-component'}">
-      <a href="#/ng2/setting/invoiceTickets" (click)="goToState('invoice-ticket-component')">
-        Invoice and Ticket
-      </a>
+        <a
+            href="#/ng2/setting/invoiceTickets"
+            (click)="goToState('invoice-ticket-component')"
+        >
+            Invoice and Ticket
+        </a>
     </li>
     <li [ngClass]="{'--active':activePage === 'commission-component'}">
-      <a href="#/ng2/setting/commission" (click)="goToState('commission-component')">
-        Commissions
-      </a>
+        <a
+            href="#/ng2/setting/commission"
+            (click)="goToState('commission-component')"
+        >
+            Commissions
+        </a>
     </li>
     <li [ngClass]="{'--active':activePage === 'subscription-component'}">
-      <a href="#/ng2/setting/subscription" (click)="goToState('subscription-component')">
-        Subscription
-      </a>
+        <a
+            href="#/ng2/setting/subscription"
+            (click)="goToState('subscription-component')"
+        >
+            Subscription
+        </a>
     </li>
 </ul>

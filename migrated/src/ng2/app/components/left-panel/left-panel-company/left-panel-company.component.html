@@ -1,3 +1,24 @@
+<div
+    class="circle-avatar"
+    [ngClass]="{'with-logo': checkLogo()}"
+>
+    <img
+        [src]="getCompanyLogoUrl()"
+        class="qwe"
+        alt
+        *ngIf="checkLogo()"
+    >
+    <span
+        *ngIf="!checkLogo()"
+        [textContent]="selectedCompany.name[0].toUpperCase()"
+    ></span>
+</div>
+<div class="mob-styles">
+    <p
+        class="ff-g-m fw-500"
+        [textContent]="selectedCompany.name"
+    ></p>
+</div>
 <ul class="app-left-panel__menu-expand">
     <li
         [ngClass]="{'--active':activePage === 'company-dashboard'}"

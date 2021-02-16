@@ -14,9 +14,9 @@ import { QuoteStateService } from 'src/ng2/app/states/quote/quote-state.service'
 export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
   open: boolean = false;
   @Input() activePage: string = "";
-  selectedCompany: Company;
   companyId: string;
   sub: Subscription = new Subscription();
+  @Input() selectedCompany: Company;
   @Output() onGoToLink = new EventEmitter();
   @Output() onChangeState = new EventEmitter();
   constructor(//private quoteStateService: QuoteStateService,
@@ -26,16 +26,20 @@ export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.companyId = localStorage.getItem("company_id");
-    if (this.companiesStateService.getCompanies().length > 0) this.findSelectedCompany();
-    let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
-      this.findSelectedCompany()
-    })
-    this.sub.add(getOnCompanies);
     this.activePage = this.leftPanelStateService.activePage;
     let getOnBillingPage = this.leftPanelStateService.getOnCompanyPage().subscribe(data => {
       this.activePage = data;
     })
     this.sub.add(getOnBillingPage);
+  }
+  checkLogo() {
+    return (this.selectedCompany && this.selectedCompany.logo && this.selectedCompany.logo.cropped && this.selectedCompany.logo.cropped.id || this.selectedCompany && this.selectedCompany.logo && this.selectedCompany.logo.origin && this.selectedCompany.logo.origin.id)
+  }
+  getCompanyLogoUrl() {
+    if (this.selectedCompany && this.selectedCompany.logo && this.selectedCompany.logo && this.selectedCompany.logo.base64 && !this.selectedCompany.logo.cropped) return this.selectedCompany.logo.base64;
+    if (this.selectedCompany && this.selectedCompany.logo && this.selectedCompany.logo.cropped && this.selectedCompany.logo.cropped.id) return `/file/${this.selectedCompany.logo.cropped.id}`;
+    if (this.selectedCompany && this.selectedCompany.logo && this.selectedCompany.logo.origin && this.selectedCompany.logo.origin.id) return `/file/${this.selectedCompany.logo.origin.id}`;
+    return '/company/default/logo.jpg';
   }
   /* goToDashboard() {
      let body = document.querySelector('.main-container');
@@ -47,9 +51,7 @@ export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
      e.initEvent('click', true, true);
      link.dispatchEvent(e);
    }*/
-  private findSelectedCompany() {
-    this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.companyId);
-  }
+
   public goToState(state) {
     this.onChangeState.emit(state);
   }

@@ -6,6 +6,7 @@ import { LeftPanelUsersService } from './services/left-panel-users.service';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { LeftPanelService } from 'src/ng2/app/services/left-panel/left-panel.service';
 import { CompaniesService } from 'src/ng2/app/services/company/companies.service';
+import { LeftPanelStateService } from 'src/ng2/app/states/left-panel/left-panel-state.service';
 
 @Component({
   selector: 'app-left-panel-users',
@@ -28,10 +29,12 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
   @Input() activePage: string = "";
   @Output() onChangeState = new EventEmitter();
   @Output() onGoToLink = new EventEmitter();
+  @Output() onOpenPanel = new EventEmitter();
   constructor(private usersStateService: UsersStateService,
     private leftPanelUsersService: LeftPanelUsersService,
     public cd: ChangeDetectorRef,
     private companiesState: CompaniesStateService,
+    private leftPanelStateService: LeftPanelStateService,
     private leftPanelService: LeftPanelService,
     private companiesService: CompaniesService) { }
 
@@ -56,6 +59,12 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
       this.getClientsList(data);
     })
     this.leftPanelUsersService.addSubscription(getOnCompanies);
+    this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
+      if (data) this.open = false;
+    })
+  }
+  openPanel() {
+    this.onOpenPanel.emit(null);
   }
   closeMobileFilter() {
     document.body.querySelector('app-left-panel-users').classList.remove('show');

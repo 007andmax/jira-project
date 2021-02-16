@@ -18,6 +18,7 @@ export class LeftPanelBillingComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   @Output() onGoToLink = new EventEmitter();
   @Output() onChangeState = new EventEmitter();
+  @Output() onOpenPanel = new EventEmitter();
   /**
    * Creates an instance of the LeftPanelComponent with the injected services
    * @param {QuoteStateService} quoteStateService Service to work with quote
@@ -37,6 +38,12 @@ export class LeftPanelBillingComponent implements OnInit, OnDestroy {
       this.activePage = data;
     })
     this.sub.add(getOnBillingPage);
+    this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
+      if (data) this.open = false;
+    })
+  }
+  openPanel() {
+    this.onOpenPanel.emit(null);
   }
 
   /**

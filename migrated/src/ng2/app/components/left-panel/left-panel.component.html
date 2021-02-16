@@ -14,18 +14,22 @@
         <div class="app-left-panel__menu-title">Quick Support</div>
     </div>
     <app-left-panel-tickets
+        (onOpenPanel)="onOpenPanel()"
         (onChangeState)="onChangeState($event)"
         [activePage]="state"
     ></app-left-panel-tickets>
     <app-left-panel-users
+        (onOpenPanel)="onOpenPanel()"
         (onChangeState)="onChangeState($event)"
         [activePage]="state"
     ></app-left-panel-users>
     <app-left-panel-companies
+        (onOpenPanel)="onOpenPanel()"
         (onChangeState)="onChangeState($event)"
         [activePage]="state"
     ></app-left-panel-companies>
     <app-left-panel-billing
+        (onOpenPanel)="onOpenPanel()"
         (onChangeState)="onChangeState($event)"
         [activePage]="state"
     ></app-left-panel-billing>
@@ -43,6 +47,7 @@
         (onChangeState)="onChangeState($event)"
     ></app-left-panel-reports>
     <app-left-panel-settings
+        (onOpenPanel)="onOpenPanel()"
         (onChangeState)="onChangeState($event)"
         [activePage]="state"
     ></app-left-panel-settings>
