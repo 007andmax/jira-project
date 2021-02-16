@@ -82,6 +82,10 @@ export class LeftPanelCompaniesComponent implements OnInit {
       1 : (((b.name).toLowerCase() > (a.name).toLowerCase()) ? -1 : 0));
 
   }
+
+  public isCompanyPage() {
+    return (this.activePage == 'company-dashboard' || this.activePage == 'company-tickets' || this.activePage == 'company-user' || this.activePage == 'company-devices' || this.activePage == 'company-network-scan' || this.activePage == 'company-password-manager' || this.activePage == 'company-products' || this.activePage == 'company-contracts')
+  }
   public selectTechLead(name) {
 
     //  this.showClearSalesPerson = true;
@@ -164,8 +168,8 @@ export class LeftPanelCompaniesComponent implements OnInit {
 
     })
   }
-  public goToState() {
-    this.onChangeState.emit('new-companies');
+  public goToState(data) {
+    this.onChangeState.emit(data);
   }
   public onSelectClientIndustry(item) {
     if (!item) {

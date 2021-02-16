@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
@@ -23,7 +23,7 @@ import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.se
   styleUrls: ['./left-panel-password-manager.component.scss']
 })
 export class LeftPanelPasswordManagerComponent implements OnInit {
-
+  @Input() activePage: string = "";
   public companiesList: any;
   public devicesAndUsersList = [];
   public company: any;

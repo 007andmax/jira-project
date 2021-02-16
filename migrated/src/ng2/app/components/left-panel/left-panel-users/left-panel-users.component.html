@@ -1,20 +1,38 @@
-<div class="app-left-panel__menu" [ngClass]="{'--active': open}" (click)="open = !open">
-  <div class="app-left-panel__menu-icon --users"></div>
-  <div class="app-left-panel__menu-title">Users</div>
-  <div class="app-left-panel__menu-arrow"></div>
+<div
+    class="app-left-panel__menu"
+    [ngClass]="{'--active': open}"
+    (click)="open = !open"
+>
+    <div class="app-left-panel__menu-icon --users"></div>
+    <div class="app-left-panel__menu-title">Users</div>
+    <div class="app-left-panel__menu-arrow"></div>
 </div>
-
-<ul class="app-left-panel__menu-expand" *ngIf="open">
-    <li [ngClass]="{'--active': !showArchivedCompanies && !filter.getClientType()}"  (click)="goToState();onShowAll()">
-      All Users
+<ul
+    class="app-left-panel__menu-expand"
+    *ngIf="open"
+>
+    <li
+        [ngClass]="{'--active': !showArchivedCompanies && !filter.getClientType() && activePage === 'new-users'}"
+        (click)="goToState();onShowAll()"
+    >
+        All Users
     </li>
-    <li [ngClass]="{'--active': filter.getClientType() === 'CLIENT'}" (click)="goToState();onSetFilterClientType('CLIENT')">
-      Customer Users
+    <li
+        [ngClass]="{'--active': filter.getClientType() === 'CLIENT' && activePage === 'new-users'}"
+        (click)="goToState();onSetFilterClientType('CLIENT')"
+    >
+        Customer Users
     </li>
-    <li [ngClass]="{'--active': filter.getClientType() === 'LEAD'}" (click)="goToState();onSetFilterClientType('LEAD')">
-      Lead Users
+    <li
+        [ngClass]="{'--active': filter.getClientType() === 'LEAD' && activePage === 'new-users'}"
+        (click)="goToState();onSetFilterClientType('LEAD')"
+    >
+        Lead Users
     </li>
-    <li [ngClass]="{'--active': showArchivedCompanies && !filter.getClientType()}" (click)="goToState();onShowArchived()">
-      Archived Users
+    <li
+        [ngClass]="{'--active': showArchivedCompanies && !filter.getClientType() && activePage === 'new-users'}"
+        (click)="goToState();onShowArchived()"
+    >
+        Archived Users
     </li>
 </ul>

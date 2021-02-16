@@ -21,6 +21,7 @@ import { SettingService } from 'src/ng2/app/services/setting/setting.service';
 import { MapsAPILoader } from '@agm/core';
 import { NgbDatepicker, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { TimeZone } from '../../companies/company-time-zone/class/time-zone';
+import { SettingStateService } from 'src/ng2/app/states/setting/setting-state.service';
 
 declare var google: any;
 declare var $: any;

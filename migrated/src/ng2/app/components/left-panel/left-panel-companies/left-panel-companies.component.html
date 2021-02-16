@@ -1,14 +1,31 @@
-<div class="app-left-panel__menu" [ngClass]="{'--active': open}" (click)="open = !open">
-  <div class="app-left-panel__menu-icon --companies"></div>
-  <div class="app-left-panel__menu-title">Companies</div>
-  <div class="app-left-panel__menu-arrow"></div>
+<div
+    class="app-left-panel__menu"
+    [ngClass]="{'--active': open}"
+    (click)="open = !open"
+>
+    <div class="app-left-panel__menu-icon --companies"></div>
+    <div class="app-left-panel__menu-title">Companies</div>
+    <div class="app-left-panel__menu-arrow"></div>
 </div>
-
-<ul class="app-left-panel__menu-expand" *ngIf="open">
-    <li [ngClass]="{'--active':activePage === 'new-companies' && !showArchivedCompanies}" (click)="goToState();onShowAll()">
-      All Companies
+<ul
+    class="app-left-panel__menu-expand"
+    *ngIf="open && !isCompanyPage()"
+>
+    <li
+        [ngClass]="{'--active':activePage === 'new-companies' && !showArchivedCompanies}"
+        (click)="goToState('new-companies');onShowAll()"
+    >
+        All Companies
     </li>
-    <li [ngClass]="{'--active':activePage === 'new-companies' && showArchivedCompanies}" (click)="goToState();onShowArchived()">
-      Archive
+    <li
+        [ngClass]="{'--active':activePage === 'new-companies' && showArchivedCompanies}"
+        (click)="goToState('new-companies');onShowArchived()"
+    >
+        Archive
     </li>
 </ul>
+<app-left-panel-company
+    (onChangeState)="goToState($event)"
+    [activePage]="activePage"
+    *ngIf="open && isCompanyPage()"
+></app-left-panel-company>

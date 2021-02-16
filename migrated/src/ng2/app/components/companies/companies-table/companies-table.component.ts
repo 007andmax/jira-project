@@ -16,6 +16,7 @@ import { CompanyProfile } from '../class/company-profile';
 import { DEARCHIVE_COMPANY, ARCHIVE_COMPANY } from 'src/ng2/app/const/confirm';
 import { AppService } from 'src/ng2/app/states/app/app.service';
 import { DraftEmailStateService } from 'src/ng2/app/states/draft-email/draft-email-state.service';
+import { LeftPanelStateService } from 'src/ng2/app/states/left-panel/left-panel-state.service';
 
 @Component({
   selector: 'app-companies-table',
@@ -42,6 +43,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     private downloadAgentStateService: DownloadAgentStateService,
     private appService: AppService,
     private draftEmailStateService: DraftEmailStateService,
+    private leftPanelStateService: LeftPanelStateService,
     private elRef: ElementRef) { }
 
   ngOnInit() {
@@ -97,13 +99,15 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
 
   goToDashboard() {
     localStorage.setItem("company_id", this.company.id);
-    let body = document.querySelector('.main-container');
-    var link = document.createElement('a');
-    body.appendChild(link);
-    link.href = `#/ng2/company/dashboard/${this.company.id}`
-    var e = document.createEvent('MouseEvents');
-    e.initEvent('click', true, true);
-    link.dispatchEvent(e);
+    this.leftPanelStateService.goToState('company-dashboard');
+    /*
+        let body = document.querySelector('.main-container');
+        var link = document.createElement('a');
+        body.appendChild(link);
+        link.href = `#/ng2/company/dashboard/${this.company.id}`
+        var e = document.createEvent('MouseEvents');
+        e.initEvent('click', true, true);
+        link.dispatchEvent(e);*/
   }
   showInfo() {
     if (this.IS_MOBILE) {

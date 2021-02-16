@@ -1,53 +1,102 @@
-<div class="app-left-panel__menu" [ngClass]="{'--active': open}" (click)="open = !open">
-  <div class="app-left-panel__menu-icon --tickets"></div>
-  <div class="app-left-panel__menu-title">Tickets</div>
-  <div class="app-left-panel__menu-arrow"></div>
+<div
+    class="app-left-panel__menu"
+    [ngClass]="{'--active': open}"
+    (click)="open = !open"
+>
+    <div class="app-left-panel__menu-icon --tickets"></div>
+    <div class="app-left-panel__menu-title">Tickets</div>
+    <div class="app-left-panel__menu-arrow"></div>
 </div>
 
-<ul class="app-left-panel__menu-expand" *ngIf="open">
-  <li [ngClass]="{'--active': listType === 'DASHBOARD'}" (click)="goToBashboard()">
-    <div>Dashboard</div>
-  </li>
-  <li [ngClass]="{'--active': listType === 'USERS'}" (click)="setTypeFilter('USERS')">
-    <div>My Tickets </div>
-    <div>{{getCountByField('USER')}}</div>
-  </li>
-  <li [ngClass]="{'--active': listType === 'ALL'}" (click)="setTypeFilter('ALL')">
-    <div>All Tickets </div>
-    <div>{{getCountByField('ALL')}}</div>
-  </li>
-  <li [ngClass]="{'--active': listType === 'UNASSIGNED'}" (click)="setTypeFilter('UNASSIGNED')">
-    Unassigned <div>{{getCountByField('UNASSIGNED')}}</div>
-  </li>
-  <li [ngClass]="{'--active': listType === 'OPEN'}" (click)="setTypeFilter('OPEN')">
-    <div>Open</div>
-    <div>{{getCountByField('OPEN')}}</div>
-  </li>
-  <li [ngClass]="{'--active': listType === 'CLOSED'}" (click)="setTypeFilter('CLOSED')">
-    <div>Closed</div>
-    <div>{{getCountByField('CLOSED')}}</div>
-  </li>
-  <li [ngClass]="{'--active': listType === 'ON_HOLD'}" (click)="setTypeFilter('ON_HOLD')">
-    <div>On Hold</div>
-    <div>{{getCountByField('ON_HOLD')}}</div>
-  </li>
-  <li [ngClass]="{'--active': listType === 'TRASH'}" (click)="setTypeFilter('TRASH')">
-    <div>Trash</div>
-    <div>{{getCountByField('TRASH')}}</div>
-  </li>
-  <li [ngClass]="{'--active': listType === 'SPAM'}" (click)="setTypeFilter('SPAM')">
-    <div>Spam</div>
-    <div>{{getCountByField('SPAM')}}</div>
-  </li>
-  <li [ngClass]="{'--active': listType === 'RECURRING_TICKETS'}" (click)="goToRecurringTickets('RECURRING_TICKETS')">
-    <div>Recurring tickets</div>
-  </li>
-  <li [ngClass]="{'--active': listType === 'RECURRING_TICKETS_OPEN'}" (click)="setTypeFilter('RECURRING_TICKETS_OPEN')">
-    <div>Recurring tickets Open</div>
-    <div>{{getCountByField('RECURRING_TICKETS_OPEN')}}</div>
-  </li>
-  <li [ngClass]="{'--active': listType === 'RECURRING_TICKETS_CLOSED'}" (click)="setTypeFilter('RECURRING_TICKETS_CLOSED')">
-    <div>Recurring tickets Closed</div>
-    <div>{{getCountByField('RECURRING_TICKETS_CLOSED')}}</div>
-  </li>
+
+<ul
+    class="app-left-panel__menu-expand"
+    *ngIf="open"
+>
+    <li
+        [ngClass]="{'--active': listType === 'DASHBOARD' && activePage === 'new-tickets'}"
+        (click)="goToBashboard()"
+    >
+        <div>Dashboard</div>
+    </li>
+    <li
+        [ngClass]="{'--active': listType === 'USERS' && activePage === 'new-tickets'}"
+        (click)="setTypeFilter('USERS')"
+    >
+        <div>My Tickets</div>
+        <div>{{getCountByField('USER')}}</div>
+    </li>
+    <li
+        [ngClass]="{'--active': listType === 'ALL' && activePage === 'new-tickets'}"
+        (click)="setTypeFilter('ALL')"
+    >
+        <div>All Tickets</div>
+        <div>{{getCountByField('ALL')}}</div>
+    </li>
+    <li
+        [ngClass]="{'--active': listType === 'UNASSIGNED' && activePage === 'new-tickets'}"
+        (click)="setTypeFilter('UNASSIGNED')"
+    >
+        Unassigned
+        <div>{{getCountByField('UNASSIGNED')}}</div>
+    </li>
+    <li
+        [ngClass]="{'--active': listType === 'OPEN' && activePage === 'new-tickets'}"
+        (click)="setTypeFilter('OPEN')"
+    >
+        <div>Open</div>
+        <div>{{getCountByField('OPEN')}}</div>
+    </li>
+    <li
+        [ngClass]="{'--active': listType === 'CLOSED' && activePage === 'new-tickets'}"
+        (click)="setTypeFilter('CLOSED')"
+    >
+        <div>Closed</div>
+        <div>{{getCountByField('CLOSED')}}</div>
+    </li>
+    <li
+        [ngClass]="{'--active': listType === 'ON_HOLD' && activePage === 'new-tickets'}"
+        (click)="setTypeFilter('ON_HOLD')"
+    >
+        <div>On Hold</div>
+        <div>{{getCountByField('ON_HOLD')}}</div>
+    </li>
+    <li
+        [ngClass]="{'--active': listType === 'TRASH' && activePage === 'new-tickets'}"
+        (click)="setTypeFilter('TRASH')"
+    >
+        <div>Trash</div>
+        <div>{{getCountByField('TRASH')}}</div>
+    </li>
+    <li
+        [ngClass]="{'--active': listType === 'SPAM' && activePage === 'new-tickets'}"
+        (click)="setTypeFilter('SPAM')"
+    >
+        <div>Spam</div>
+        <div>{{getCountByField('SPAM')}}</div>
+    </li>
+    <li
+        [ngClass]="{'--active': listType === 'RECURRING_TICKETS' && activePage === 'new-tickets'}"
+        (click)="goToRecurringTickets('RECURRING_TICKETS')"
+    >
+        <div>Recurring tickets</div>
+    </li>
+    <li
+        [ngClass]="{'--active': listType === 'RECURRING_TICKETS_OPEN' && activePage === 'new-tickets'}"
+        (click)="setTypeFilter('RECURRING_TICKETS_OPEN')"
+    >
+        <div>Recurring tickets Open</div>
+        <div>
+            {{getCountByField('RECURRING_TICKETS_OPEN')}}
+        </div>
+    </li>
+    <li
+        [ngClass]="{'--active': listType === 'RECURRING_TICKETS_CLOSED' && activePage === 'new-tickets'}"
+        (click)="setTypeFilter('RECURRING_TICKETS_CLOSED')"
+    >
+        <div>Recurring tickets Closed</div>
+        <div>
+            {{getCountByField('RECURRING_TICKETS_CLOSED')}}
+        </div>
+    </li>
 </ul>

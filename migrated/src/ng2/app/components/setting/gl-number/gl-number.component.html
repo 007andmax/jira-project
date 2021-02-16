@@ -1,42 +1,24 @@
 <!-- Middle Wrapper -->
-
-
 <div class="page-container">
-  <div class="page-insider manage-taxes">
-    <div class="heading">
-      <h1>
-        Manage Income Account Numbers
-      </h1>
-      <div class="heading-serach">
-        <a href="javascript:;" class="btn-outline" (click)="openModel(true, 0, {})"
-          >Create</a
-        >
-        <!-- Modal create Tags -->
-        <div class="modal-content toggle-area" [class.opened]="create">
-          <div class="modal-wrapper">
-            <div class="toggle-header">
-              <h2 class="h1">Create Income Account Number</h2>
-            </div>
-            <div class="modal-body">
-              <form [formGroup]="glForm" (ngSubmit)="onSubmit()">
-                <div class="f-row">
-                  <div class="f-col col-100">
-                    <label>Income Account Number</label>
-                    <div class="form-row">
-                      <input
-                        type="text"
-                        class="form-input"
-                        formControlName="glNumber"
-                        placeholder="Enter Income Account Number"
-                        #glNumber
-                        [ngClass]="{ 'is-invalid': submitted && f.glNumber.errors }"
-                      />
-                      <div
-                        *ngIf="submitted && f.glNumber.errors"
-                        class="invalid-feedback"
-                      >
-                        <div *ngIf="f.glNumber.errors.required">
-                          Income Account Number is required
+    <div class="page-insider manage-taxes">
+        <div class="heading">
+            <h1>Manage Income Account Numbers</h1>
+            <div class="heading-serach">
+                <a
+                    href="javascript:;"
+                    class="btn-outline"
+                    (click)="openModel(true, 0, {})"
+                >
+                    Create
+                </a>
+                <!-- Modal create Tags -->
+                <div
+                    class="modal-content toggle-area"
+                    [class.opened]="create"
+                >
+                    <div class="modal-wrapper">
+                        <div class="toggle-header">
+                            <h2 class="h1">Create Income Account Number</h2>
                         </div>
                         <div class="modal-body">
                             <form
@@ -107,8 +89,6 @@
                 </div>
             </div>
         </div>
-
-
         <div class="cmn-area">
             <div class="data-table-wrap">
                 <table
@@ -149,8 +129,6 @@
                                         alt="Remove"
                                     >
                                 </a>
-
-
                                 <div
                                     class="modal-content toggle-area"
                                     [ngClass]="{ opened: selectedIdx === i }"
@@ -233,11 +211,7 @@
         </div>
         <!-- <div class="loading" *ngIf="loading"></div> -->
     </div>
-
-
 </div>
-
-
 <!-- tag delete popup -->
 <div
     class="img-croparea deletePopup"

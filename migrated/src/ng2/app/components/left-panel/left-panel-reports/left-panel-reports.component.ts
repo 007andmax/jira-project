@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-left-panel-reports',
@@ -6,6 +6,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./left-panel-reports.component.scss']
 })
 export class LeftPanelReportsComponent implements OnInit {
+  @Input() activePage: string = "";
   @Output() onChangeState = new EventEmitter();
   constructor() { }
 

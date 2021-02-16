@@ -9,10 +9,13 @@ export class LeftPanelStateService {
   onBillingPage: EventEmitter<any> = new EventEmitter();
   onCompanyPage: EventEmitter<any> = new EventEmitter();
   onToggleLeftPanel: EventEmitter<any> = new EventEmitter();
+  onGoToState: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
-
+  public goToState(data) {
+    this.onGoToState.emit(data);
+  }
   public setBillingPage(data) {
     this.activePage = data;
     this.onBillingPage.emit(data);

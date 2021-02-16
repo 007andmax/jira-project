@@ -17,6 +17,7 @@ export class LeftPanelInventoryComponent implements OnInit {
   inventoryCategoryList: Array<CategoryProduct> = [];
   countOfCategories: number = 10;
   sortCategoty: CategoryProduct = null;
+  @Input() activePage: string = "";
   @ViewChild('addCategory') addCategory: AddCategoryProductComponent;
   @Output() onChangeState = new EventEmitter();
   @Output() onGoToLink = new EventEmitter();
