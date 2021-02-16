@@ -389,6 +389,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { GlobalSearchComponent } from './components/header/global-search/global-search.component';
 import { ReportListItemComponent } from './components/reports/report-list-item/report-list-item.component';
 import { LeftPanelReportsComponent } from './components/left-panel/left-panel-reports/left-panel-reports.component';
+import { BreadcrumbsComponent } from './components/shared/breadcrumbs/breadcrumbs.component';
 
 /**
  * declare angular
@@ -942,7 +943,8 @@ angular.module('quicktech')
     HeaderComponent,
     GlobalSearchComponent,
     ReportListItemComponent,
-    LeftPanelReportsComponent
+    LeftPanelReportsComponent,
+    BreadcrumbsComponent
   ],
   imports: [
     BrowserModule,

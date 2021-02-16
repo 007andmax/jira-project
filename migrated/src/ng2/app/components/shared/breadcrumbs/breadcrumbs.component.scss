@@ -1,0 +1,33 @@
+.breadcrumbs {
+  display: flex;
+  padding: 30px 0;
+  padding-left: 24px;
+  align-items: center;
+
+  div {
+    display: flex;
+    align-items: stretch;
+
+    span {
+      color: #aebdcc;
+      line-height: 15px;
+    }
+
+    &.breadcrumbs-path {
+      span {
+        color: #919eab;
+      }
+    }
+
+    .breadcrumb-separator {
+      margin-left: 10px;
+      margin-right: 10px;
+      width: 15px;
+      transform: rotate(
+          90deg
+      );
+    }
+  }
+
+
+}

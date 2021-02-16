@@ -1,0 +1,30 @@
+<div
+    class="breadcrumbs"
+    *ngIf="isCompanyState()"
+>
+    <div
+        class="breadcrumbs-location pointer"
+        (click)="back()"
+    >
+        <span>All companies</span>
+        <img
+            src="dropdown-arrow-down.svg"
+            alt
+            class="breadcrumb-separator"
+        >
+    </div>
+    <div
+        class="breadcrumbs-attribute"
+        *ngIf="selectedCompany"
+    >
+        <span [textContent]="selectedCompany.name"></span>
+        <img
+            src="dropdown-arrow-down.svg"
+            alt
+            class="breadcrumb-separator"
+        >
+    </div>
+    <div class="breadcrumbs-path">
+        <span [textContent]="getPath()"></span>
+    </div>
+</div>

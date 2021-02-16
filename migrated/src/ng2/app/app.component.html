@@ -7,7 +7,10 @@
     class="nav-header"
     [ngClass]="{'--full-width':toggleLeftPanel}"
 ></app-header>
-<app-left-panel class="app-left-panel" [ngClass]="{'--mini':toggleLeftPanel}"></app-left-panel>
+<app-left-panel
+    class="app-left-panel"
+    [ngClass]="{'--mini':toggleLeftPanel}"
+></app-left-panel>
 <div class="main-container">
     <div class="row">
         <div
@@ -15,6 +18,7 @@
             [ngClass]="{'--large': toggleLeftPanel}"
         >
             <div class="content-wrapper">
+                <breadcrumbs></breadcrumbs>
                 <div ng-include="'/ng1/scripts/common/templates/index-page-body.tpl.html'"></div>
                 <div
                     class="loading"
