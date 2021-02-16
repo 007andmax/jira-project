@@ -11,3 +11,47 @@
 .category-name  {
     color: white;
 }
+
+
+.app-left-panel__menu-info {
+  display: flex;
+  margin-left: 24px;
+  margin-bottom: 10px;
+  border-top: 1px solid #70777e;
+  margin-right: 24px;
+  padding-top: 10px;
+  .select-company {
+    margin-right: 10px;
+    img {
+      border: 1px solid rgba(22, 164, 250, 0.2);
+      border-radius: 50%;
+      height: 24px;
+      width: 24px;
+      object-fit: cover;
+    }
+
+    .empty-logo {
+      width: 24px;
+      height: 24px;
+      border: 1px solid gray;
+      border-radius: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 14px;
+    }
+
+  }
+  .mob-styles {
+    display: flex;
+    align-items: center;
+    p {
+      line-height: 27px;
+    }
+  }
+
+}
+
+
+
+

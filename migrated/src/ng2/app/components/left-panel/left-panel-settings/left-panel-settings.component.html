@@ -1,18 +1,18 @@
 <div
     class="app-left-panel__menu"
     [ngClass]="{'--active': open}"
-    (click)="open = !open"
+    (click)="open = !open;openPanel()"
 >
-    <div
-        class="app-left-panel__menu-icon --settings"
-        (click)="openPanel()"
-    ></div>
+    <div class="app-left-panel__menu-icon --settings"></div>
     <div class="app-left-panel__menu-title">Settings</div>
     <div class="app-left-panel__menu-arrow"></div>
 </div>
+
+
+
 <ul
-    class="app-left-panel__menu-expand"
-    *ngIf="open"
+    class="app-left-panel__menu-expand top-menu"
+    [ngClass]="{'menu-expand-show': open, 'menu-expand-hide': !open}"
 >
     <li [ngClass]="{'--active':activePage === 'myprofile-component'}">
         <a
