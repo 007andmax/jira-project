@@ -253,7 +253,7 @@
     top: $header-height;
     right: 0;
     border-left: 1px solid #dfe3e8;
-    height: calc(100vh - $header-height);
+    height: calc(100vh - #{$header-height});
     z-index: 10;
     box-shadow: -8px 0 8px 0 rgba(0, 0, 0, 0.05);
   }

@@ -30,7 +30,7 @@ export class PasswordManagerTableComponent implements OnInit {
   public list_records = [];
   public sort: string = 'companyName';
   public direction: string = null;
- // public filter: FilterPasswordManager = new FilterPasswordManager();
+  // public filter: FilterPasswordManager = new FilterPasswordManager();
 
 
   /**
@@ -58,25 +58,25 @@ export class PasswordManagerTableComponent implements OnInit {
     this.watchDeleteRecord();
     this.onSort();
 
- //   this.filter.company = (this.selectedCompany) ? JSON.parse(JSON.stringify(this.selectedCompany)) : null;;
+    //   this.filter.company = (this.selectedCompany) ? JSON.parse(JSON.stringify(this.selectedCompany)) : null;;
     //    this.filter.user = this.selectedUserOrDevice;
     //   this.filter.dateFormat = this.selectedDate;
     //  this.filter.passwordCategory = JSON.parse(JSON.stringify(this.selectedCategory));
   }
   ngDoCheck() {
 
-   // this.filter.company = (this.selectedCompany) ? JSON.parse(JSON.stringify(this.selectedCompany)) : null;
-   
+    // this.filter.company = (this.selectedCompany) ? JSON.parse(JSON.stringify(this.selectedCompany)) : null;
+
     /*  this.filter.user = this.selectedUserOrDevice;
       this.filter.dateFormat = this.selectedDate;
       this.filter.passwordCategory = this.selectedCategory;*/
-   
+
     this.filterList();
   }
   private filterList() {
-   
+
     this.list_records = this.recordsData.filter((item) => {
-    
+
       if (this.selectedCompany && this.selectedCompany.companyId.length > 0 && item.companyId !== this.selectedCompany.companyId) return false;
       if (this.selectedDate && item.expiredDate !== this.selectedDate) return false;
       if (this.selectedUserOrDevice && this.selectedUserOrDevice.id) {
@@ -89,34 +89,35 @@ export class PasswordManagerTableComponent implements OnInit {
       }
       if (this.selectedCategory && item.template !== this.selectedCategory.UPPERCASE) return false;
       return true;
-    })
-    
+    }).sort((a, b) => (a.companyName.toLowerCase() > b.companyName.toLowerCase()) ?
+      1 : ((b.companyName.toLowerCase() > a.companyName.toLowerCase()) ? -1 : 0));
+
   }
   private onChangeRealtTime() {
     this.passwordManagerService.onChangeRealTime.subscribe(newChange => {
-     
+
       if (newChange.action === 'PASSWORD_RECORD_CREATED') {
         this.recordsData.push(newChange.data);
       } else if (newChange.action === 'PASSWORD_RECORD_UPDATED') {
         let index = this.recordsData.findIndex(item => item.id === newChange.data.id);
         if (index > -1) this.recordsData[index] = newChange.data;
-        
+
       } else if (newChange.action === 'PASSWORD_RECORD_DELETED') {
         let index = this.recordsData.findIndex(item => item.id === newChange.data.id);
-       
+
         if (index > -1) this.recordsData.splice(index, 1);
-       
+
       }
       this.filterList();
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
-    }
+      }
     })
   }
 
   private onSort() {
     this.passwordManagerService.getOnSort().subscribe((data) => {
-     
+
       this.sort = data.sort;
       this.direction = data.direction;
 
@@ -129,13 +130,13 @@ export class PasswordManagerTableComponent implements OnInit {
    */
   public getSelectedCategory() {
     this.passwordManagerService.emitSelectedCategory.subscribe((category) => {
-     
+
       this.selectedCategory = category;
 
-     // this.filter.passwordCategory = JSON.parse(JSON.stringify(category));
-     if (!this.cd['destroyed']) {
-      this.cd.detectChanges();
-  }
+      // this.filter.passwordCategory = JSON.parse(JSON.stringify(category));
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+      }
     });
   }
 

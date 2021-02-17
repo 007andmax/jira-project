@@ -836,7 +836,7 @@ header{
         -moz-transition: 0.4s;
         transition: 0.4s;
         top: $header-height;
-        height: calc(100vh - $header-height);
+        height: calc(100vh - #{$header-height});
     }
     app-nav{
         float: left;

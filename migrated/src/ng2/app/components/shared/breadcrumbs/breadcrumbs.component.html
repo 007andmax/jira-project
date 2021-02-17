@@ -1,7 +1,9 @@
 <div
     class="breadcrumbs"
     *ngIf="isCompanyState()"
-    [ngClass]="{'class':state === 'company-dashboard'}"
+    [ngClass]="{'breadcrumbs-company-users':state === 'company-user',
+'breadcrumbs-company-password-manager':state === 'company-password-manager',
+'breadcrumbs-company-products':state === 'company-products'}"
 >
     <div
         class="breadcrumbs-location pointer"
@@ -9,7 +11,7 @@
     >
         <span>All companies</span>
         <img
-            src="dropdown-arrow-down.svg"
+            src="/html/dropdown-arrow-down.svg"
             alt
             class="breadcrumb-separator"
         >
@@ -20,7 +22,7 @@
     >
         <span [textContent]="selectedCompany.name"></span>
         <img
-            src="dropdown-arrow-down.svg"
+            src="/html/dropdown-arrow-down.svg"
             alt
             class="breadcrumb-separator"
         >

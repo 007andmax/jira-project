@@ -20,20 +20,20 @@
     <li
         [ngClass]="{'--active':activePage === 'new-companies' && filter.getClientType() === 'CLIENT'}"
         (click)="goToState('new-companies');onSetFilterClientType('CLIENT')"
+        [textContent]="(activePage === 'new-companies') ? 'Clients ('+calculateCount.getClients() +')' : 'Clients'"
     >
-        Clients ({{calculateCount.getClients()}})
     </li>
     <li
         [ngClass]="{'--active':activePage === 'new-companies' && filter.getClientType() === 'LEAD'}"
         (click)="goToState('new-companies');onSetFilterClientType('LEAD')"
+        [textContent]="(activePage === 'new-companies') ? 'Leads ('+calculateCount.getLeads() +')' : 'Leads'"
     >
-        Leads ({{calculateCount.getLeads()}})
     </li>
     <li
         [ngClass]="{'--active':activePage === 'new-companies' && filter.getClientType() === 'VENDOR'}"
         (click)="goToState('new-companies');onSetFilterClientType('VENDOR')"
+        [textContent]="(activePage === 'new-companies') ? 'Vendor ('+calculateCount.getVndors() +')' : 'Vendor'"
     >
-        Vendor ({{calculateCount.getVndors()}})
     </li>
     <li
         [ngClass]="{'--active':activePage === 'new-companies' && showArchivedCompanies}"

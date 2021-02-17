@@ -226,7 +226,7 @@
     position: fixed;
     top: $header-height;
     right: 0;
-    height: calc(100vh - $header-height);
+    height: calc(100vh - #{$header-height});
     z-index: 5;
 
 

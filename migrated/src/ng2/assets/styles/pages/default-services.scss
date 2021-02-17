@@ -1,5 +1,5 @@
 .default-services-page {
-  min-height: calc(100vh - $header-height);
+  min-height: calc(100vh - #{$header-height});
 
   &__header {
     z-index: 1;
@@ -167,7 +167,7 @@
   position: fixed;
   top: $header-height;
   right: 0;
-  height: calc(100vh - $header-height);
+  height: calc(100vh - #{$header-height});
   z-index: 5;
 
   .default-services-scroll-content {

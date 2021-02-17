@@ -1,9 +1,9 @@
 .breadcrumbs {
   display: flex;
-  padding: 30px 0;
+  padding: 30px 0px 0px 0px;
   padding-left: 24px;
   align-items: center;
-
+  background-color: #edf2f6;
   div {
     display: flex;
     align-items: stretch;
@@ -28,6 +28,18 @@
       );
     }
   }
-
-
 }
+ 
+.breadcrumbs-company-users {
+  background-color: #f5fafd;
+}
+ 
+.breadcrumbs-company-password-manager {
+  background-color: #f3f7f9;
+}
+.breadcrumbs-company-products {
+  background-color: #f3f7f9;
+}
+
+
+
