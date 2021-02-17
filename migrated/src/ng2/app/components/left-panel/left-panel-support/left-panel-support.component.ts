@@ -24,11 +24,9 @@ export class LeftPanelSupportComponent implements OnInit {
       if (data) this.open = false;
     })
     this.leftPanelStateService.onChangeState.subscribe(state => {
-      console.log("state", state);
       if (!this.isSupportPage(state)) this.open = false
     })
     this.leftPanelStateService.onFirstOpen.subscribe(data => {
-      console.log("activePage", this.activePage);
       if (this.isSupportPage(data)) this.open = true;
     })
   }

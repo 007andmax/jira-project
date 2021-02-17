@@ -34,7 +34,6 @@ export class LeftPanelBillingComponent implements OnInit, OnDestroy {
    */
   ngOnInit() {
     this.activePage = this.leftPanelStateService.activePage;
-    console.log("activePage", this.activePage);
     let getOnBillingPage = this.leftPanelStateService.getOnBillingPage().subscribe(data => {
       this.activePage = data;
     })
@@ -47,8 +46,6 @@ export class LeftPanelBillingComponent implements OnInit, OnDestroy {
     })
     this.leftPanelStateService.onFirstOpen.subscribe(data => {
       if (this.isBillingState(data)) this.open = true;
-      console.log("activePage", this.activePage);
-      console.log("this.open", this.open);
     })
   }
   isBillingState(state) {

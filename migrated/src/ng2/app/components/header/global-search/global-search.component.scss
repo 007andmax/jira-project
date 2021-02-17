@@ -84,6 +84,7 @@
   }
 
   &__menu-item-subtitle {
+    display: flex;
     cursor: pointer;
     font-size: 12px;
     line-height: 1.33;
@@ -110,3 +111,14 @@
   }
 }
 
+/deep/.invoice-number{
+   color: #16a4fa;
+}
+/deep/.invoice-circle {
+  display: block;
+  width: 4px;
+  height: 4px;
+  margin: 5px ​8px 0px 8p;
+  border-radius: 10px;
+  background-color: #c5cdd5;
+}

@@ -231,8 +231,6 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
         1 : ((new Date(b.createdAt) > new Date(a.createdAt)) ? -1 : 0));
       this.masterAgent = agentsSortedByCreatedAtDate[0];
     }
-    console.log("this.masterAgent", this.masterAgent);
-
   }
   public trackById(index, item) {
     return item.id;

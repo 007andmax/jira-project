@@ -49,7 +49,6 @@ export class GlobalSearchComponent implements OnInit {
       this.list = data;
       this.selectedType = (this.list.length > 0) ? this.list[0].type : 'TICKETS';
       this.onShowDropDown();
-      console.log(this.list);
     })
   }
   onShowDropDown() {
@@ -72,7 +71,6 @@ export class GlobalSearchComponent implements OnInit {
       link.dispatchEvent(e);
     }
     if (item.type === 'TICKETS') {
-      console.log(item);
       this.ticketsStateService.onOpenTicket();
       this.ticketsService.getTicket(item.id).subscribe(data => {
         this.ticketsStateService.onEditTicket(data);
@@ -80,7 +78,6 @@ export class GlobalSearchComponent implements OnInit {
     }
     if (item.type === 'USERS') {
       let user = this.getUserById(item.id);
-      console.log("user", user);
       this.usersStateService.setUserForEdit(user);
       this.usersStateService.onOpenEditAsige();
     }
@@ -119,8 +116,9 @@ export class GlobalSearchComponent implements OnInit {
     if (item.type === 'INVOICES') return `${item.info}`;
   }
   getSecondLine(item) {
-    if (item.type !== 'INVOICES') return `${item.info}`;
-    if (item.type === 'INVOICES') return `${item.name} ${item.extraInfo}`;
+    if (item.type !== 'INVOICES' && item.type !== 'COMPANIES') return `${item.info}`;
+    if (item.type === 'INVOICES') return `<span class="invoice-number">${item.name}</span><span class="invoice-circle"></span> <span>${item.extraInfo}</span>`;
+    return '';
   }
   getTypeList(type) {
     let find = this.list.find(item => item.type === type);

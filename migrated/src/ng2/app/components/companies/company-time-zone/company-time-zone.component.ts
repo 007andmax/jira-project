@@ -30,7 +30,6 @@ export class CompanyTimeZoneComponent implements OnInit, OnDestroy {
     let getEditMode = this.companyTimeZoneState.getOnEditMode().subscribe((data) => {
       if (data) {
         let find = this.list.find(item => item.second === data.name);
-        console.log("find", find);
         this.selectedItem = find;
         //   this.elRef.nativeElement.querySelector('#dropdownTimeZone').value = find.first;
       } else {

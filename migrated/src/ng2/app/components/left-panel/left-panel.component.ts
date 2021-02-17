@@ -82,7 +82,6 @@ export class LeftPanelComponent implements OnInit {
           this.leftPanelStateService.changeState(this.state);
           this.cd.detectChanges();
         }
-        console.log("this.state", this.state);
         this.setAppType(appType);
       });
     this.leftPanelStateService.onGoToState.subscribe(data => {

@@ -712,9 +712,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     if (this.cProfileForm.invalid) {
       return;
     }
-    console.log(this.cProfileForm.get(
-      'timeZone'
-    ).value);
     let data = {};
     data['id'] = this.currentCompany.addresses.length > 0 ? this.currentCompany.addresses[0].id : '';
     data['isPrimary'] = true;

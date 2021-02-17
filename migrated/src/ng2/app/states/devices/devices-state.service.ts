@@ -61,8 +61,6 @@ export class DevicesStateService {
         if (deviceIndex > -1) this.allDevices[newChange.data.clientCompanyId].splice(deviceIndex, 1);
       }
       if (newChange.action === 'DEVICE_ONLINE') {
-        console.log("this.allDevices", this.allDevices);
-        console.log("this.allDevices[newChange.data.clientCompanyId]", this.allDevices[newChange.data.clientCompanyId]);
         let deviceIndex = this.allDevices[newChange.data.clientCompanyId].findIndex(item => item.id === newChange.data.value);
         if (deviceIndex > -1) {
           this.allDevices[newChange.data.clientCompanyId][deviceIndex].online = true;

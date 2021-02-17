@@ -65,7 +65,6 @@ export class LeftPanelCompaniesComponent implements OnInit {
       if (!this.isCompanyPage(state)) this.open = false
     })
     this.leftPanelStateService.onFirstOpen.subscribe(data => {
-      console.log("data", data);
       if (this.isCompanyPage(data)) this.open = true;
     })
   }
