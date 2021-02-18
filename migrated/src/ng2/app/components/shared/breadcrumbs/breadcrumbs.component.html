@@ -10,22 +10,24 @@
         (click)="back()"
     >
         <span>All companies</span>
-        <img
+        <div class="breadcrumb-separator"></div>
+        <!-- <img
             src="/html/dropdown-arrow-down.svg"
             alt
             class="breadcrumb-separator"
-        >
+        > -->
     </div>
     <div
         class="breadcrumbs-attribute"
         *ngIf="selectedCompany"
     >
         <span [textContent]="selectedCompany.name"></span>
-        <img
+        <div class="breadcrumb-separator"></div>
+        <!-- <img
             src="/html/dropdown-arrow-down.svg"
             alt
             class="breadcrumb-separator"
-        >
+        > -->
     </div>
     <div class="breadcrumbs-path">
         <span [textContent]="getPath()"></span>
