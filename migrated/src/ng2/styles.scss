@@ -225,7 +225,7 @@
   //transform: translateX(0);
 }
 .ng-sidebar--right {
-  top: 78px !important;
+  top: $header-height !important;
   box-shadow: 0 0 60px 0 rgba(0, 0, 0, 0.1);
   overflow-x: hidden !important;
 }
@@ -1979,7 +1979,7 @@ ngb-datepicker {
     margin-bottom: 20px;
   }
   &__header {
-    height: 78px;
+    height: $header-height;
     display: flex;
     align-items: center;
     padding: 0 24px;
@@ -1996,7 +1996,7 @@ ngb-datepicker {
   }
   &__content {
     color: #fff;
-    margin-top: 78px;
+    margin-top: $header-height;
     @media(max-width: 414px) {
       margin-top: 0;
     }
@@ -2215,7 +2215,7 @@ ngb-datepicker {
 }
 
 .ng-sidebar--right {
-  top: 78px !important;
+  top: $header-height !important;
   box-shadow: 0 0 60px 0 rgba(0, 0, 0, 0.1);
 }
 
@@ -2654,7 +2654,9 @@ app-ticket-profile-form-update {
   bottom: 0;
   background: white;
   z-index: 30;
-
+  .cps-block__content {
+    min-height: 106px;
+  }
 }
 
 .dropdown-menu.services-container.show {
@@ -2746,8 +2748,10 @@ app-ticket-edit-aside-devices  {
     border-radius: 5px;
     overflow: auto;
     border: solid 1px #dfe3e8;
-    max-height: calc(100vh - 300px);
+    height: calc(100vh - 300px);
+    max-height: 290px;
     box-shadow: 0px 2px 20px 10px #0000000e;
+    z-index: 100;
   }
   &::before {
     content: '';

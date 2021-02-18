@@ -1,6 +1,7 @@
+@import './variable.scss';
 @import './qt-classes.scss';
 
-
+@import './components/app.scss';
 @import './components/headers.scss';
 @import './components/inputs.scss';
 @import './components/btn.scss';
@@ -9,21 +10,23 @@
 @import './components/aside.scss';
 @import './components/tooltip.scss';
 @import './components/modal.scss';
-
+@import './components/header.scss';
+@import './components/left-panel.scss';
 @import './components/app-drop-down.scss';
 @import './components/taxes-dropdown.scss';
+@import './components/pagelist';
 
 @import './pages/billable.scss';
 @import './pages/invoices.scss';
 @import './pages/billing-payments.scss';
 @import './pages/billing-dashboard.scss';
 @import './pages/default-services.scss';
-@import './components/pagelist';
 @import './pages/contracts.scss';
 @import './pages/quotes.scss';
 @import './pages/tickets-dashboard.scss';
 @import './pages/network-scan.scss';
 @import './pages/users.scss';
+@import './pages/quick-support.scss';
 @import './pages/company-devices.scss'
 
 

@@ -7,6 +7,7 @@ import { UserPipe } from '../../pipe/user.pipe';
 import { UserProfile } from '../../components/users/class/user-profile';
 import { UsersRealTimeService } from './users-real-time.service';
 import { UserChange } from '../../components/users/class/user-change';
+import { UserFilter } from '../../components/users/class/user-filter';
 
 @Injectable({
   providedIn: 'root'
@@ -14,19 +15,19 @@ import { UserChange } from '../../components/users/class/user-change';
 export class UsersStateService {
   allUsers: Array<User> = [];
   currentUser: CurrentUser;
-  userForEdit: UserProfile = null;
+  userForEdit: User = null;
   onGetUsers: EventEmitter<any> = new EventEmitter();
   onGetCurrentUser: EventEmitter<any> = new EventEmitter();
   onShowArchived: EventEmitter<any> = new EventEmitter();
   onFilter: EventEmitter<any> = new EventEmitter();
-
   openAside: EventEmitter<any> = new EventEmitter();
   openEditAside: EventEmitter<any> = new EventEmitter();
   userForArchive: User = null;
   usersForArchive: Array<User> = [];
   userForDeArchive: User = null;
   onChangeUsers: EventEmitter<UserChange> = new EventEmitter();
-
+  filter: UserFilter = new UserFilter();
+  showArchivedCompanies: boolean = false;
   constructor(private userService: UsersService, private usersRealTimeService: UsersRealTimeService) {
 
   }
@@ -69,14 +70,23 @@ export class UsersStateService {
       this.onChangeUsers.emit(new UserChange(newChange.action, newChange.data, this.allUsers));
     });
   }
+  public setShowArchivedCompanies(data) {
+    this.showArchivedCompanies = data;
+  }
+  public getShowArchivedCompanies() {
+    return this.showArchivedCompanies;
+  }
+  public getFilter() {
+    return this.filter;
+  }
   public getChangeUsers() {
     return this.onChangeUsers;
   }
   public setUserForEdit(data) {
-    this.userForArchive = data;
+    this.userForEdit = data;
   }
   public getuserForEdit() {
-    return this.userForArchive;
+    return this.userForEdit;
   }
   public setUsersForArchive(data) {
     this.usersForArchive = data;

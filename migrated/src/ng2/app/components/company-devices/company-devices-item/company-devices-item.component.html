@@ -197,6 +197,7 @@
         <div
             class="qt-ic-c icon__go-to qt-pointer qt-sz-24 qt-bgsz-16"
             placement="top"
+            *ngIf="device.agentId"
             [ngbTooltip]="tipDeviceDetail"
             (click)="gotiDetailDevice()"
         ></div>

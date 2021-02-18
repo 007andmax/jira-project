@@ -113,8 +113,6 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
         }
         this.cd.detectChanges();
       }
-
-
     })
 
     this.ticketsStateService.getOnRemoveTicket().subscribe(data => {
@@ -147,6 +145,9 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       if (newChange.action == 'UPDATE_DELETED') this.ticketProfile.removeUpdate(newChange.data);
       this.cd.detectChanges();
     });
+  }
+  checkExistServicesProducts() {
+    return this.ticketProfile.updates.filter(item => item.type == 'PRODUCT' || item.type == 'SERVICE').length > 0;
   }
   onOpenCompaniesDropDown() {
     this.cd.detectChanges();

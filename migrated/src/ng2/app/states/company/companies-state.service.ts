@@ -14,6 +14,7 @@ import { WebsocketService } from '../../services/websocket/websocket.service';
 export class CompaniesStateService {
   allCompanies = [];
   industries = [];
+  onFilterTags: EventEmitter<any> = new EventEmitter();
   onGetCompanies: EventEmitter<any> = new EventEmitter();
   onChangeCompanies: EventEmitter<CompanyUpdate> = new EventEmitter();
   showAsideForAdd: EventEmitter<any> = new EventEmitter();
@@ -23,19 +24,20 @@ export class CompaniesStateService {
   companyForDeArchive: Company = null;
   onCalculateCount: EventEmitter<CompanyCalculateCount> = new EventEmitter();
   calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
-  currentCompany:any = null;
+  currentCompany: any = null;
   onCurrentCompany: EventEmitter<any> = new EventEmitter();
-  constructor(private companiesService: CompaniesService, 
+  showArchivedCompanies: boolean = false;
+  constructor(private companiesService: CompaniesService,
     private companiesRealTimeService: CompaniesRealTimeService,
-    private websocketService: WebsocketService,) {
-   }
+    private websocketService: WebsocketService) {
+  }
   public onInit() {
     this.companiesService.getTechCompany().subscribe(data => {
-      this.currentCompany= data;
+      this.currentCompany = data;
       this.onCurrentCompany.emit(data);
       this.websocketService.subsribeToGlNumber(this.currentCompany.id);
     })
-    this.companiesService.getCompaniesList().subscribe((data:any) => {
+    this.companiesService.getCompaniesList().subscribe((data: any) => {
       this.setAllCompanies(data);
       this.onInitGetCompanies(data);
     })
@@ -49,14 +51,20 @@ export class CompaniesStateService {
       if (newChange.action === 'COMPANY_DEARCHIVED') {
         const Index = this.allCompanies.findIndex((item) => item.id === newChange.data.id);
         if (Index > -1) this.allCompanies[Index] = newChange.data;
-        
+
       }
-      this.onChangeCompanies.emit(new CompanyUpdate(newChange.action,newChange.data,this.allCompanies));
+      this.onChangeCompanies.emit(new CompanyUpdate(newChange.action, newChange.data, this.allCompanies));
     })
     this.companiesService.getIndustries().subscribe((data: Array<string>) => {
       this.industries = data.sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
-      1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
+        1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
     })
+  }
+  public setShowArchivedCompanies(data) {
+    this.showArchivedCompanies = data;
+  }
+  public getShowArchivedCompanies() {
+    return this.showArchivedCompanies;
   }
   public getOnCurrentCompany() {
     return this.onCurrentCompany;
@@ -64,7 +72,7 @@ export class CompaniesStateService {
   public getCurrentCompany() {
     return this.currentCompany;
   }
-  public getIndustries () {
+  public getIndustries() {
     return this.industries;
   }
   public getChangeCompanies() {

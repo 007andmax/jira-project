@@ -1,0 +1,26 @@
+<div
+    class="app-left-panel__menu"
+    [ngClass]="{'--active': open}"
+    (click)="open = !open;openPanel()"
+>
+    <div class="app-left-panel__menu-icon --quick-support"></div>
+    <div class="app-left-panel__menu-title">Quick Support</div>
+    <div class="app-left-panel__menu-arrow"></div>
+</div>
+<ul
+    class="app-left-panel__menu-expand top-menu"
+    [ngClass]="{'menu-expand-show': open, 'menu-expand-hide': !open}"
+>
+    <li
+        [ngClass]="{'--active':type === 'ALL'  && activePage === 'new-quickSupport'}"
+        (click)="onFilter('ALL')"
+    >
+        All Sessions
+    </li>
+    <li
+        [ngClass]="{'--active':type === 'MY'  && activePage === 'new-quickSupport'}"
+        (click)="onFilter('MY')"
+    >
+        My Sessions
+    </li>
+</ul>

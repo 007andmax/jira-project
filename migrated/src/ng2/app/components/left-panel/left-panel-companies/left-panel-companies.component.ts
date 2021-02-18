@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { LeftPanelService } from 'src/ng2/app/services/left-panel/left-panel.service';
 import { CompaniesService } from 'src/ng2/app/services/company/companies.service';
@@ -7,6 +7,7 @@ import { LeftPanelCompaniesFilter } from './class/left-panel-companies-filter';
 import { LeftPanelStateService } from 'src/ng2/app/states/left-panel/left-panel-state.service';
 import { CompanyCalculateCount } from '../../companies/class/company-calculate-count';
 import { ItemFilterPerson } from './class/item-filter-person';
+import { Company } from 'src/ng2/app/interfaces/company/company';
 
 @Component({
   selector: 'app-left-panel-companies',
@@ -14,29 +15,37 @@ import { ItemFilterPerson } from './class/item-filter-person';
   styleUrls: ['./left-panel-companies.component.scss']
 })
 export class LeftPanelCompaniesComponent implements OnInit {
-  listPersons:Array<ItemFilterPerson> = [];
+  open: boolean = false;
+  listPersons: Array<ItemFilterPerson> = [];
   clientIndustry: string = '';
   industryHistory = [];
   salesHistory = [];
   industries = [];
   showArchivedCompanies: boolean = false;
-  //showClearSalesPerson: boolean = false;
-  //showClearIndustry: boolean = false;
   calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
-  selectedTechLead:ItemFilterPerson = null;
-  selectedClientIndustry:string = null;
+  selectedTechLead: ItemFilterPerson = null;
+  selectedClientIndustry: string = null;
   @Output() onFilterTags = new EventEmitter();
   filter: LeftPanelCompaniesFilter = new LeftPanelCompaniesFilter();
-  constructor(private usersStateService: UsersStateService, private leftPanelService: LeftPanelService, private companiesService: CompaniesService,
-    private companiesState: CompaniesStateService, private leftPanelStateService: LeftPanelStateService) { }
+  selectedCompany: Company;
+  @Input() activePage: string = "";
+  @Output() onGoToLink = new EventEmitter();
+  @Output() onChangeState = new EventEmitter();
+  @Output() onOpenPanel = new EventEmitter();
+  constructor(private usersStateService: UsersStateService,
+    private leftPanelService: LeftPanelService,
+    private companiesService: CompaniesService,
+    private companiesState: CompaniesStateService,
+
+    private leftPanelStateService: LeftPanelStateService) { }
 
   ngOnInit() {
     this.calculateCount = this.companiesState.getCalculateCount();
-    if (this.usersStateService.getAllUsers().length > 0)  this.getTehusers(this.usersStateService.getAllUsers());
-      this.usersStateService.getOnUsers().subscribe((data) => {
-        this.getTehusers(data);
-      })
-    
+    if (this.usersStateService.getAllUsers().length > 0) this.getTehusers(this.usersStateService.getAllUsers());
+    this.usersStateService.getOnUsers().subscribe((data) => {
+      this.getTehusers(data);
+    })
+
     this.leftPanelService.getIndustryHistory().subscribe((data: Array<string>) => {
       this.industryHistory = data;
     })
@@ -49,50 +58,67 @@ export class LeftPanelCompaniesComponent implements OnInit {
       this.calculateCount = data;
 
     })
-
-    
-  }
- /* private getIndustries() {
-    this.companiesService.getIndustries().subscribe((data: Array<string>) => {
-      this.industries = data.sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
-      1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
-       
+    this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
+      if (data) this.open = false;
     })
-  }*/
- /* getSelectedTechLead() {
-    let index = this.listPersons.findIndex(item => item.selected === true);
-    if (index > -1) return this.listPersons[index].firstName + ' ' + this.listPersons[index].lastName;
-    return "";
-  }*/
+    this.leftPanelStateService.onChangeState.subscribe(state => {
+      if (!this.isCompanyPage(state)) this.open = false
+    })
+    this.leftPanelStateService.onFirstOpen.subscribe(data => {
+      if (this.isCompanyPage(data)) this.open = true;
+    })
+  }
+  openPanel() {
+    this.onOpenPanel.emit(null);
+  }
+  ngDoCheck() {
+    if (localStorage.getItem("company_id") && this.companiesState.getCompanies().length > 0) this.selectedCompany = this.companiesState.getCompanies().find(item => item.id === localStorage.getItem("company_id"));
+
+  }
+  /* private getIndustries() {
+     this.companiesService.getIndustries().subscribe((data: Array<string>) => {
+       this.industries = data.sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
+       1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
+        
+     })
+   }*/
+  /* getSelectedTechLead() {
+     let index = this.listPersons.findIndex(item => item.selected === true);
+     if (index > -1) return this.listPersons[index].firstName + ' ' + this.listPersons[index].lastName;
+     return "";
+   }*/
   private getTehusers(list) {
     list.forEach((item) => {
       if (item.accountType === "TECH" && !item.deletedAt) {
-       // item.selected = false;
-        this.listPersons.push(new ItemFilterPerson(item.id,`${item.firstName} ${item.lastName}`));
+        // item.selected = false;
+        this.listPersons.push(new ItemFilterPerson(item.id, `${item.firstName} ${item.lastName}`));
       }
     })
-   /* this.listPersons.sort((a, b) => ((a.firstName + ' ' + a.lastName).toLowerCase() > (b.firstName + ' ' + b.lastName).toLowerCase()) ?
-    1 : (((b.firstName + ' ' + b.lastName).toLowerCase() > (a.firstName + ' ' + a.lastName).toLowerCase()) ? -1 : 0));*/
+    /* this.listPersons.sort((a, b) => ((a.firstName + ' ' + a.lastName).toLowerCase() > (b.firstName + ' ' + b.lastName).toLowerCase()) ?
+     1 : (((b.firstName + ' ' + b.lastName).toLowerCase() > (a.firstName + ' ' + a.lastName).toLowerCase()) ? -1 : 0));*/
 
     this.listPersons.sort((a, b) => ((a.name).toLowerCase() > (b.name).toLowerCase()) ?
-    1 : (((b.name).toLowerCase() > (a.name).toLowerCase()) ? -1 : 0));
-     
+      1 : (((b.name).toLowerCase() > (a.name).toLowerCase()) ? -1 : 0));
+
+  }
+  public isCompanyPage(state) {
+    return (state == 'new-companies' || state == 'company-dashboard' || state == 'company-tickets' || state == 'company-user' || state == 'company-devices' || state == 'company-network-scan' || state == 'company-password-manager' || state == 'company-products' || state == 'company-contracts')
   }
   public selectTechLead(name) {
-   
-  //  this.showClearSalesPerson = true;
-   // this.listPersons.forEach(item => item.selected = false);
+
+    //  this.showClearSalesPerson = true;
+    // this.listPersons.forEach(item => item.selected = false);
     let index = this.listPersons.findIndex(item => item.name === name);
     if (index > -1) {
       this.selectedTechLead = this.listPersons[index];
-    //  this.listPersons[index].selected = true;
+      //  this.listPersons[index].selected = true;
       this.filter.setTehUser(this.listPersons[index].id);
       this.leftPanelStateService.onInitFilter(this.filter);
     }
   }
   public selectClientIndustry(item) {
     this.selectedClientIndustry = item;
-  //  this.showClearIndustry = true;
+    //  this.showClearIndustry = true;
     this.clientIndustry = item;
     this.filter.setClientIndustry(this.clientIndustry);
     this.leftPanelStateService.onInitFilter(this.filter);
@@ -104,14 +130,14 @@ export class LeftPanelCompaniesComponent implements OnInit {
     event.target.parentNode.classList.toggle('show-filter');
   }
   clearSalesPerson() {
-//    this.showClearSalesPerson = false;
-  //  this.listPersons.forEach(item => item.selected = false);
+    //    this.showClearSalesPerson = false;
+    //  this.listPersons.forEach(item => item.selected = false);
     this.filter.setTehUser(null);
     this.leftPanelStateService.onInitFilter(this.filter);
   }
 
   clearClientIndustry() {
-  //  this.showClearIndustry = false;
+    //  this.showClearIndustry = false;
     this.clientIndustry = '';
     this.filter.setClientIndustry(null);
     this.leftPanelStateService.onInitFilter(this.filter);
@@ -121,17 +147,19 @@ export class LeftPanelCompaniesComponent implements OnInit {
     tags.forEach(item => {
       outTags.push(item.id);
     })
-    this.onFilterTags.emit(outTags);
+    this.companiesState.onFilterTags.emit(outTags);
   }
 
   onShowAll() {
     this.filter.setClientType(null);
     this.companiesState.setOnShowArchived(false);
     this.showArchivedCompanies = false;
+    this.companiesState.setShowArchivedCompanies(false);
   }
   onShowArchived() {
     this.companiesState.setOnShowArchived(true);
     this.showArchivedCompanies = true;
+    this.companiesState.setShowArchivedCompanies(true);
   }
   onSetFilterClientType(data) {
     this.calculateCount.onCulculateCurrent(data);
@@ -145,37 +173,39 @@ export class LeftPanelCompaniesComponent implements OnInit {
       this.clearSalesPerson();
       return;
     }
-this.selectedTechLead = null;
-  //  this.showClearSalesPerson = true;
-  //  this.listPersons.forEach(item => item.selected = false);
-  //  this.listPersons[index].selected = true;
+    this.selectedTechLead = null;
+    //  this.showClearSalesPerson = true;
+    //  this.listPersons.forEach(item => item.selected = false);
+    //  this.listPersons[index].selected = true;
     this.filter.setTehUser(item.id);
     this.leftPanelStateService.onInitFilter(this.filter);
     this.salesHistory.pop();
     this.salesHistory.unshift(item.name);
-    
+
     this.companiesService.setСustomStorage("companiesPageFilterBySalesHistory", this.salesHistory).subscribe(data => {
-      
+
     })
   }
-
+  public goToState(data) {
+    this.onChangeState.emit(data);
+  }
   public onSelectClientIndustry(item) {
     if (!item) {
       this.clearClientIndustry();
       return;
     }
     this.selectedClientIndustry = null;
-     
- //   this.showClearIndustry = true;
+
+    //   this.showClearIndustry = true;
     this.clientIndustry = item;
     this.filter.setClientIndustry(this.clientIndustry);
     this.leftPanelStateService.onInitFilter(this.filter);
     this.industryHistory.pop();
     this.industryHistory.unshift(item);
     //this.company.techLeadId = this.listPersons[index].id;
-    
+
     this.companiesService.setСustomStorage("companiesPageFilterByIndustryHistory", this.industryHistory).subscribe(data => {
-      
+
     })
   }
 

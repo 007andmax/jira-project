@@ -14,7 +14,8 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
 
   calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
   sub: Subscription = new Subscription();
-  constructor(private companiesStateService: CompaniesStateService, private draftEmailStateService: DraftEmailStateService,
+  constructor(private companiesStateService: CompaniesStateService,
+    private draftEmailStateService: DraftEmailStateService,
     private companiesState: CompaniesStateService) { }
 
   ngOnInit() {

@@ -64,6 +64,8 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.connectionType = connectionType;
     modalRef.componentInstance.device = this.currentDevice;
     modalRef.componentInstance.companyId = this.currentDevice.companyId;
+    modalRef.componentInstance.action = 'CONNECT_DEVICE';
+
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)

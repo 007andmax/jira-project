@@ -1,447 +1,440 @@
-
-<!-- Middle Wrapper  -->
-<app-left-panel-settings [componentName]="'CompanyProfileComponent'"></app-left-panel-settings>
+<!-- Middle Wrapper -->
 <div class="page-container">
-  <div class="page-insider company-profile">
-    <div class="heading">
-      <h1>
-        <a
-          href="javascript:;"
-          (click)="onBackMenu()"
-          class="back-menu"
-          style="display: none;"
-          >backmneu</a
-        >Company Profile
-      </h1>
-    </div>
-
-    <ngb-tabset>
-      <!-- Profile -->
-      <ngb-tab title="Profile" id="tab1">
-        <ng-template ngbTabContent>
-        <div class="cmn-area profile">
-          <div class="dp-area">
-            <span class="dp" *ngIf="imageSrc">
-              <img [src]="imageSrc" alt="Company" />
-            </span>
-            <span class="dp" *ngIf="imageSrc === ''">
-              <img
-                src="../../../../../ng1/images/setting-module/upload-company-logo.svg"
-                alt="Company"
-              />
-            </span>
-            <div class="dp-info">
-              <input
-                type="file"
-                id="profile-dp"
-                accept="image/gif, image/jpeg, image/png, image/jpg"
-                (change)="onSelectFile($event)"
-                style="display: none;"
-              />
-              <!-- <label for="profile-dp" class="static-link">Change Logo</label> -->
-
-              <div class="static-link">
-                <label class="innert-links" for="profile-dp">{{
+    <div class="page-insider company-profile">
+        <div class="heading">
+            <h1>Company Profile</h1>
+        </div>
+        <ngb-tabset>
+            <!-- Profile -->
+            <ngb-tab
+                title="Profile"
+                id="tab1"
+            >
+                <ng-template ngbTabContent>
+                    <div class="cmn-area profile">
+                        <div class="dp-area">
+                            <span
+                                class="dp"
+                                *ngIf="imageSrc"
+                            >
+                                <img
+                                    [src]="imageSrc"
+                                    alt="Company"
+                                >
+                            </span>
+                            <span
+                                class="dp"
+                                *ngIf="imageSrc === ''"
+                            >
+                                <img
+                                    src="../../../../../ng1/images/setting-module/upload-company-logo.svg"
+                                    alt="Company"
+                                >
+                            </span>
+                            <div class="dp-info">
+                                <input
+                                    type="file"
+                                    id="profile-dp"
+                                    accept="image/gif, image/jpeg, image/png, image/jpg"
+                                    (change)="onSelectFile($event)"
+                                    style="display: none;"
+                                >
+                                <!-- <label for="profile-dp" class="static-link">Change Logo</label> -->
+                                <div class="static-link">
+                                    <label
+                                        class="innert-links"
+                                        for="profile-dp"
+                                    >
+                                        {{
                   imageSrc ? "Change Logo" : "Upload Photo"
-                }}</label>
-                <!-- <label
-                  for="profile-dp"
-                  (click)="deleteAvatar()"
-                  *ngIf="imageSrc"
-                >
-                  <a href="javascript:void(0)" restore-default-button=""
-                    >Remove Photo</a
-                  >
-                </label> -->
-
-                <!-- <label for="profile-dp" (click)="rePositionAvatar()">
-                  <a href="javascript:void(0)" restore-default-button=""
-                    >Reposition Photo</a
-                  >
-                </label> -->
-              </div>
-              <span>Maximum size of 2MB. JPG, GIF, PNG</span>
-            </div>
-
-            <div class="img-croparea" *ngIf="isCroppedImg">
-              <div class="crop-inner">
-                <div class="heading-area">
-                  <h2>Crop Photo</h2>
-                  <a href="javascript:;" class="close-btn">remove</a>
-                </div>
-                <div class="cropping">
-                  <div class="img-crop">
-                    <image-cropper
-                      [imageBase64]="imageBase64"
-                      [imageChangedEvent]="imageChangedEvent"
-                      [maintainAspectRatio]="false"
-                      [aspectRatio]="4 / 3"
-                      [resizeToWidth]="128"
-                      format="png"
-                      (imageCropped)="imageCropped($event)"
-                    ></image-cropper>
-                  </div>
-
-                  <div class="preview">
-                    <h6>Profile Preview</h6>
-                    <img [src]="croppedImage?.base64" />
-                  </div>
-                  <div class="btn-crops">
-                    <button
-                      type="button"
-                      class="btn btn-primary"
-                      (click)="cropIt()"
-                    >
-                      Crop Photo
-                    </button>
-                    <button
-                      type="button"
-                      class="btn btn-secondary"
-                      (click)="closeModel()"
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <form [formGroup]="cProfileForm">
-            <div class="f-row">
-              <div class="f-col col-100">
-                <label
-                  >Company Name</label
-                >
-                <div class="form-row">
-                  <input
-                    type="text"
-                    class="form-input"
-                    placeholder="Enter Company Name"
-                    formControlName="name"
-                  />
-                    <div
-                  *ngIf="submitted && f.name.errors"
-                  class="invalid-feedback"
-                >
-                  <div *ngIf="f.name.errors.required">
-                    Company Name is required
-                  </div>
-                  <div *ngIf="f.name.errors.minlength">
-                    Company name is too short.
-                  </div>
-                  <div *ngIf="f.name.errors.maxlength">
-                    Company name is too large.
-                  </div>
-                </div>
-                <label *ngIf="!isCompanyNameUnique" class="invalid-feedback"
-                  >This company name already occupied.</label
-                >
-                </div>
-              </div>
-              <!-- <div class="f-col col-50">
-                <label>Company URL</label>
-                <div class="form-row">
-                  <input
-                    type="text"
-                    class="form-input link"
-                    placeholder="Enter Your Company URL"
-                    formControlName="url"
-                  />
-                </div>
-              </div> -->
-
-              <div class="f-col col-20">
-                <label>Suite Number</label>
-                <div class="form-row">
-                  <input
-                    type="text"
-                    placeholder="123456"
-                    class="form-input"
-                    formControlName="suiteNumber"
-                  />
-                </div>
-              </div>
-              <div class="f-col col-60">
-                <label>Mailing Address</label>
-                <div class="form-row">
-                  <!-- <app-autocomplete (setAddress)="getAddress($event)" adressType="geocode"
-                  ></app-autocomplete> -->
-
-                  <input
-                    placeholder="search for location"
-                    autocorrect="off"
-                    autocapitalize="off"
-                    class="form-input"
-                    spellcheck="off"
-                    type="text"
-                    #search
-                    formControlName="address"
-                  />
-                  <!-- <input
-                    type="text"
-                    placeholder="Enter Mailing Address"
-                    class="form-input"
-                    formControlName="address"
-                  /> -->
-                </div>
-              </div>
-              <div class="f-col col-20">
-                <label>Zip</label>
-                <div class="form-row">
-                  <input
-                    type="text"
-                    placeholder="123456"
-                    class="form-input"
-                    formControlName="postalCode"
-                  />
-                </div>
-              </div>
-
-              <div class="f-col col-50">
-                <label
-                  >Primary Phone Number
-                  <a
-                    href="javascript:;"
-                    *ngIf="!isAddPhone"
-                    (click)="onAddPhone()"
-                    class="static-link"
-                    >+ Add Phone</a
-                  ></label
-                >
-                <div class="form-row primary-phone">
-                  <input
-                    type="text"
-                    class="form-input"
-                    placeholder="Primary Phone Number"
-                    formControlName="primaryPhone"
-                  />
-                  <select
-                    class="cmn-select form-input"
-                    formControlName="primaryPhoneType"
-                  >
-                    <option value="MOBILE">mobile</option>
-                    <option value="OFFICE">office</option>
-                    <option value="FAX">fax</option>
-                  </select>
-                </div>
-              </div>
-              <div class="f-col col-50">
-                <label>Time Zone</label>
-                <div class="form-row">
-                  <ngx-select-dropdown
-                    [config]="config"
-                    [options]="timezones"
-                    formControlName="timeZone"
-                    [multiple]="false"
-                  ></ngx-select-dropdown>
-                  <!-- <select
-                    class="cmn-select form-input"
-                    formControlName="timeZone"
-                  >
-                    <option>Canada/Atlantic</option>
-                    <option value="Asia/Calcutta">India Standard Time</option>
-                    <option>Mountain Time zone</option>
-                  </select> -->
-                </div>
-              </div>
-
-              <div class="f-col col-50" *ngIf="isAddPhone">
-                <label>
-                  Secondary Phone Number
-                  <a
-                    href="javascript:;"
-                    class="static-link"
-                    (click)="onAddPhone()"
-                    >Remove</a
-                  >
-                </label>
-
-                <div class="form-row primary-phone">
-                  <input
-                    type="text"
-                    class="form-input"
-                    formControlName="secondaryPhone"
-                    placeholder="Secondary Phone Number"
-                    formControlName="secondaryPhone"
-                  />
-                  <select
-                    class="cmn-select form-input"
-                    formControlName="secondaryPhoneType"
-                  >
-                    <option value="MOBILE">mobile</option>
-                    <option value="OFFICE">office</option>
-                    <option value="FAX">fax</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <input type="button" (click)="onSubmit()" class="btn btn-primary" value="Save Changes" />
-          </form>
-        </div>
-        </ng-template>
-      </ngb-tab>
-      <ngb-tab title="Workspace" id="workspace">
-        <ng-template ngbTabContent>
-        <div class="cmn-area workspace">
-          <form [formGroup]="cProfileForm" (ngSubmit)="onSubmit()">
-            <div class="f-row">
-                <div class="f-col col-100">
-                    <label>Company URL</label>
-                    <div class="form-row">
-                      <div class="custm-url">
-                       <input
-                       type="text"
-                       class="form-input"
-                       placeholder="Enter Your Company URL"
-                       formControlName="url"
-                       />
-                       <span class="slug">.quicktech.com</span>
-                     </div>
-                   </div>
-                </div>
-
-            </div>
-            <p>Your workspace URL can only contain lowercase letters, numbers and dashes (and must start with a letter or number).</p>
-            <input type="submit" class="btn btn-primary" value="Save Changes" />
-          </form>
-        </div>
-        </ng-template>
-      </ngb-tab>
-      <!-- Contact Details -->
-      <!-- <tab heading="Contact Details">
-              <div class="cmn-area contact">
-                  <form method="POST">
-                      <div class="f-row">
-                          <div class="f-col col-20">
-                              <label>Suite Number</label>
-                              <div class="form-row">
-                                 <input type="text" placeholder="Enter Suite Number" class="form-input" value="346"/>
-                              </div>
-                          </div>
-                          <div class="f-col col-60">
-                              <label>Mailing Address</label>
-                              <div class="form-row">
-                                 <input type="text" placeholder="Enter Mailing Address" class="form-input" value="Calgary Trail, Edmonton, AB, Canada"/>
-                              </div>
-                          </div>
-                          <div class="f-col col-20">
-                              <label>Zip</label>
-                              <div class="form-row">
-                                 <input type="text" placeholder="Enter Zip Code" class="form-input" value="403568"/>
-                              </div>
-                          </div>
-                          <div class="f-col col-100">
-                              <div class="map-area">
-                                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14680.19568247228!2d72.5559743!3d23.09530495!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x53a01f27a9ccc8c5%3A0x88350b6b08718301!2sCalgary%20Trail%20NW%2C%20Edmonton%2C%20AB%2C%20Canada!5e0!3m2!1sen!2sin!4v1566740627587!5m2!1sen!2sin"  frameborder="0" style="border:0;" allowfullscreen=""></iframe>
-                              </div>
-                          </div>
-                      </div>
-                      <input type="submit" class="btn btn-primary" value="Save Changes" />
-                  </form>
-              </div>
-          </tab> -->
-      <!-- Ticket Response Time Setting  -->
-      <ngb-tab title="Operational Hours">
-        <ng-template ngbTabContent>
-        <div class="cmn-area ticket-response">
-          <form #workingHoursForm="ngForm" (ngSubmit)="onWorkSubmit()">
-            <div>
-              <div
-                *ngFor="
+                }}
+                                    </label>
+                                </div>
+                                <span>Maximum size of 2MB. JPG, GIF, PNG</span>
+                            </div>
+                            <div
+                                class="img-croparea"
+                                *ngIf="isCroppedImg"
+                            >
+                                <div class="crop-inner">
+                                    <div class="heading-area">
+                                        <h2>Crop Photo</h2>
+                                        <a
+                                            href="javascript:;"
+                                            class="close-btn"
+                                        >
+                                            remove
+                                        </a>
+                                    </div>
+                                    <div class="cropping">
+                                        <div class="img-crop">
+                                            <image-cropper
+                                                [imageBase64]="imageBase64"
+                                                [imageChangedEvent]="imageChangedEvent"
+                                                [maintainAspectRatio]="false"
+                                                [aspectRatio]="4 / 3"
+                                                [resizeToWidth]="128"
+                                                format="png"
+                                                (imageCropped)="imageCropped($event)"
+                                            ></image-cropper>
+                                        </div>
+                                        <div class="preview">
+                                            <h6>Profile Preview</h6>
+                                            <img [src]="croppedImage?.base64">
+                                        </div>
+                                        <div class="btn-crops">
+                                            <button
+                                                type="button"
+                                                class="btn btn-primary"
+                                                (click)="cropIt()"
+                                            >
+                                                Crop Photo
+                                            </button>
+                                            <button
+                                                type="button"
+                                                class="btn btn-secondary"
+                                                (click)="closeModel()"
+                                            >
+                                                Cancel
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <form [formGroup]="cProfileForm">
+                            <div class="f-row">
+                                <div class="f-col col-100">
+                                    <label>Company Name</label>
+                                    <div class="form-row">
+                                        <input
+                                            type="text"
+                                            class="form-input"
+                                            placeholder="Enter Company Name"
+                                            formControlName="name"
+                                        >
+                                        <div
+                                            *ngIf="submitted && f.name.errors"
+                                            class="invalid-feedback"
+                                        >
+                                            <div *ngIf="f.name.errors.required">Company Name is required</div>
+                                            <div *ngIf="f.name.errors.minlength">Company name is too short.</div>
+                                            <div *ngIf="f.name.errors.maxlength">Company name is too large.</div>
+                                        </div>
+                                        <label
+                                            *ngIf="!isCompanyNameUnique"
+                                            class="invalid-feedback"
+                                        >
+                                            This company name already occupied.
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="f-col col-20">
+                                    <label>Suite Number</label>
+                                    <div class="form-row">
+                                        <input
+                                            type="text"
+                                            placeholder="123456"
+                                            class="form-input"
+                                            formControlName="suiteNumber"
+                                        >
+                                    </div>
+                                </div>
+                                <div class="f-col col-60">
+                                    <label>Mailing Address</label>
+                                    <div class="form-row">
+                                        <input
+                                            placeholder="search for location"
+                                            autocorrect="off"
+                                            autocapitalize="off"
+                                            class="form-input"
+                                            spellcheck="off"
+                                            type="text"
+                                            #search
+                                            formControlName="address"
+                                        >
+                                    </div>
+                                </div>
+                                <div class="f-col col-20">
+                                    <label>Zip</label>
+                                    <div class="form-row">
+                                        <input
+                                            type="text"
+                                            placeholder="123456"
+                                            class="form-input"
+                                            formControlName="postalCode"
+                                        >
+                                    </div>
+                                </div>
+                                <div class="f-col col-50">
+                                    <label>
+                                        Primary Phone Number
+                                        <a
+                                            href="javascript:;"
+                                            *ngIf="!isAddPhone"
+                                            (click)="onAddPhone()"
+                                            class="static-link"
+                                        >
+                                            + Add Phone
+                                        </a>
+                                    </label>
+                                    <div class="form-row primary-phone">
+                                        <input
+                                            type="text"
+                                            class="form-input"
+                                            placeholder="Primary Phone Number"
+                                            formControlName="primaryPhone"
+                                        >
+                                        <select
+                                            class="cmn-select form-input"
+                                            formControlName="primaryPhoneType"
+                                        >
+                                            <option value="MOBILE">mobile</option>
+                                            <option value="OFFICE">office</option>
+                                            <option value="FAX">fax</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="f-col col-50">
+                                    <label>Time Zone</label>
+                                    <div class="form-row">
+                                        <ngx-select-dropdown
+                                            [config]="config"
+                                            [options]="timezones"
+                                            formControlName="timeZone"
+                                            [multiple]="false"
+                                        ></ngx-select-dropdown>
+                                    </div>
+                                </div>
+                                <div
+                                    class="f-col col-50"
+                                    *ngIf="isAddPhone"
+                                >
+                                    <label>
+                                        Secondary Phone Number
+                                        <a
+                                            href="javascript:;"
+                                            class="static-link"
+                                            (click)="onAddPhone()"
+                                        >
+                                            Remove
+                                        </a>
+                                    </label>
+                                    <div class="form-row primary-phone">
+                                        <input
+                                            type="text"
+                                            class="form-input"
+                                            formControlName="secondaryPhone"
+                                            placeholder="Secondary Phone Number"
+                                            formControlName="secondaryPhone"
+                                        >
+                                        <select
+                                            class="cmn-select form-input"
+                                            formControlName="secondaryPhoneType"
+                                        >
+                                            <option value="MOBILE">mobile</option>
+                                            <option value="OFFICE">office</option>
+                                            <option value="FAX">fax</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <input
+                                type="button"
+                                (click)="onSubmit()"
+                                class="btn btn-primary"
+                                value="Save Changes"
+                            >
+                        </form>
+                    </div>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab
+                title="Workspace"
+                id="workspace"
+            >
+                <ng-template ngbTabContent>
+                    <div class="cmn-area workspace">
+                        <form
+                            [formGroup]="cProfileForm"
+                            (ngSubmit)="onSubmit()"
+                        >
+                            <div class="f-row">
+                                <div class="f-col col-100">
+                                    <label>Company URL</label>
+                                    <div class="form-row">
+                                        <div class="custm-url">
+                                            <input
+                                                type="text"
+                                                class="form-input"
+                                                placeholder="Enter Your Company URL"
+                                                formControlName="url"
+                                            >
+                                            <span class="slug">.quicktech.com</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p>
+                                Your workspace URL can only contain lowercase letters, numbers and dashes (and must start with a letter or number).
+                            </p>
+                            <input
+                                type="submit"
+                                class="btn btn-primary"
+                                value="Save Changes"
+                            >
+                        </form>
+                    </div>
+                </ng-template>
+            </ngb-tab>
+            <!-- Ticket Response Time Setting -->
+            <ngb-tab title="Operational Hours">
+                <ng-template ngbTabContent>
+                    <div class="cmn-area ticket-response">
+                        <form
+                            #workingHoursForm="ngForm"
+                            (ngSubmit)="onWorkSubmit()"
+                        >
+                            <div>
+                                <div *ngFor="
                   let workingDay of this.cProfile.timeSettings.workingDays;
                   let i = index
-                "
-              ></div>
-            </div>
-            <div class="c-hours">
-              <h5>Select days with correct hours</h5>
-              <!-- <div formArrayName="workingHoursGrpArray">
-
-                  <div *ngFor="let workHr of workingHoursFrm.controls; let i=index">
-                    <input formControlName="{{workHr.dayOfWeek}}">
-                  </div>
-              </div> -->
-              <ul class="list-unstyled">
-                <li
-                  *ngFor="
+                "></div>
+                            </div>
+                            <div class="c-hours">
+                                <h5>Select days with correct hours</h5>
+                                <ul class="list-unstyled">
+                                    <li *ngFor="
                     let workingDay of this.cProfile.timeSettings.workingDays;
                     let i = index
-                  "
-                >
-                  <div class="cmn-checkbox">
-                    <input
-                      type="checkbox"
-                      id="{{ workingDay.dayOfWeek }}"
-                      [(ngModel)]="workingDay.isSelected"
-                      name="{{ workingDay.dayOfWeek | titlecase }}"
-                      [ngModelOptions]="{ standalone: true }"
-                    />
-                    <label for="{{ workingDay.dayOfWeek }}">{{
+                  ">
+                                        <div class="cmn-checkbox">
+                                            <input
+                                                type="checkbox"
+                                                id="{{ workingDay.dayOfWeek }}"
+                                                [(ngModel)]="workingDay.isSelected"
+                                                name="{{ workingDay.dayOfWeek | titlecase }}"
+                                                [ngModelOptions]="{ standalone: true }"
+                                            >
+                                            <label for="{{ workingDay.dayOfWeek }}">
+                                                {{
                       workingDay.dayOfWeek | titlecase
-                    }}</label>
-                  </div>
-
-                  <div class="time-zone">
-                    <div class="tl-col">
-                      <select #startTime class="cmn-select form-input" [id]=" 'from-'+workingDay.dayOfWeek"
-                      (change)="startTimeChange(workingDay, startTime.value)"
-                      name="{{workingDay.dayOfWeek}}" [attr.disabled]="!workingDay.isSelected ? 'disabled' : null" [ngModel]="fromTime_convert(workingDay.startTime)" >
-                        <option value="06:00">6:00 AM</option>
-                        <option value="06:30">6:30 AM</option>
-                        <option value="07:00">07:00 AM</option>
-                        <option value="07:30">7:30 AM</option>
-                        <option value="08:00">08:00 AM</option>
-                        <option value="08:30">8:30 AM</option>
-                        <option value="09:00">9:00 AM</option>
-                        <option value="09:30">9:30 AM</option>
-                        <option value="10:00">10:00 AM</option>
-                        <option value="10:30">10:30 AM</option>
-                        <option value="11:00">11:00 AM</option>
-                        <option value="11:30">11:30 AM</option>
-                        <option value="12:00">12:00 PM</option>
-                      </select>
-
-                      <!-- <input
-                        type="text"
-                        class="form-input"
-                        [disabled]="!workingDay.isSelected"
-                        placeholder="Enter Time"
-                        value="{{ fromTime_convert(workingDay.startTime) }}"
-                        #startTime
-                        (blur)="startTimeChange(workingDay, startTime.value)"
-                      /> -->
+                    }}
+                                            </label>
+                                        </div>
+                                        <div class="time-zone">
+                                            <div class="tl-col">
+                                                <select
+                                                    #startTime
+                                                    class="cmn-select form-input"
+                                                    [id]=" 'from-'+workingDay.dayOfWeek"
+                                                    (change)="startTimeChange(workingDay, startTime.value)"
+                                                    name="{{workingDay.dayOfWeek}}"
+                                                    [attr.disabled]="!workingDay.isSelected ? 'disabled' : null"
+                                                    [ngModel]="fromTime_convert(workingDay.startTime)"
+                                                >
+                                                    <option value="06:00">6:00 AM</option>
+                                                    <option value="06:30">6:30 AM</option>
+                                                    <option value="07:00">07:00 AM</option>
+                                                    <option value="07:30">7:30 AM</option>
+                                                    <option value="08:00">08:00 AM</option>
+                                                    <option value="08:30">8:30 AM</option>
+                                                    <option value="09:00">9:00 AM</option>
+                                                    <option value="09:30">9:30 AM</option>
+                                                    <option value="10:00">10:00 AM</option>
+                                                    <option value="10:30">10:30 AM</option>
+                                                    <option value="11:00">11:00 AM</option>
+                                                    <option value="11:30">11:30 AM</option>
+                                                    <option value="12:00">12:00 PM</option>
+                                                </select>
+                                            </div>
+                                            <div class="tl-col">
+                                                <select
+                                                    #endTime
+                                                    class="cmn-select form-input"
+                                                    (change)="endTimeChange(workingDay,endTime.value)"
+                                                    [id]="'to-'+workingDay.dayOfWeek"
+                                                    name="{{workingDay.dayOfWeek+i}}"
+                                                    [attr.disabled]="!workingDay.isSelected ? 'disabled' : null"
+                                                    [ngModel]="toTime_convert(workingDay.endTime)"
+                                                >
+                                                    <option value="17:00">17:00 PM</option>
+                                                    <option value="17:30">17:30 PM</option>
+                                                    <option value="18:00">18:00 PM</option>
+                                                    <option value="18:30">18:30 PM</option>
+                                                    <option value="19:00">19:00 PM</option>
+                                                    <option value="19:30">19:30 PM</option>
+                                                    <option value="20:00">20:00 PM</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <input
+                                type="submit"
+                                class="btn btn-primary"
+                                value="Save Changes"
+                            >
+                        </form>
                     </div>
-                    <div class="tl-col">
-                      <!-- <input
-                        type="text"
-                        class="form-input"
-                        [disabled]="!workingDay.isSelected"
-                        placeholder="Enter Time"
-                        value="{{ toTime_convert(workingDay.endTime) }}"
-                      /> -->
-                      <select #endTime class="cmn-select form-input"
-                      (change)="endTimeChange(workingDay,endTime.value)" [id]="'to-'+workingDay.dayOfWeek"
-                      name="{{workingDay.dayOfWeek+i}}" [attr.disabled]="!workingDay.isSelected ? 'disabled' : null" [ngModel]="toTime_convert(workingDay.endTime)" >
-                        <option value="17:00">17:00 PM</option>
-                        <option value="17:30">17:30 PM</option>
-                        <option value="18:00">18:00 PM</option>
-                        <option value="18:30">18:30 PM</option>
-                        <option value="19:00">19:00 PM</option>
-                        <option value="19:30">19:30 PM</option>
-                        <option value="20:00">20:00 PM</option>
-                      </select>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <input type="submit" class="btn btn-primary" value="Save Changes" />
-          </form>
-        </div>
-        </ng-template>
-      </ngb-tab>
-    </ngb-tabset>
-    <!-- <div class="loading" *ngIf="loading"></div> -->
-  </div>
-  
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab title="Accounting Year">
+                <ng-template ngbTabContent>
+
+
+
+                    <form (ngSubmit)="saveAccountingDate()">
+                        <div class="f-row">
+                            <div class="f-col col-50  date-area">
+                                <label>Start Date</label>
+                                <div class="form-row">
+                                    <input
+                                        name="start_date"
+                                        type="text"
+                                        class="form-control sub-label-field"
+                                        [(ngModel)]="accountingStartDate"
+                                        ngbDatepicker
+                                        #d="ngbDatepicker"
+                                        (click)="d.toggle()"
+                                    >
+                                    <a
+                                        href="javascript:;"
+                                        (click)="resetAccountingDate()"
+                                    >
+                                        Reset
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="f-col col-50 date-area">
+                                <label>End Date</label>
+                                <div class="form-row">
+                                    <input
+                                        name="end_date"
+                                        type="text"
+                                        class="form-control sub-label-field"
+                                        [(ngModel)]="accountingEndDate"
+                                        ngbDatepicker
+                                        #dd="ngbDatepicker"
+                                        (click)="dd.toggle()"
+                                        disabled
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        <input
+                            type="submit"
+                            class="btn btn-primary"
+                            value="Save Changes"
+                        >
+                    </form>
+                </ng-template>
+            </ngb-tab>
+        </ngb-tabset>
+        <!-- <div class="loading" *ngIf="loading"></div> -->
+    </div>
+
+
+
 </div>

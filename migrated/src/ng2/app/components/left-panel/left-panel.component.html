@@ -1,0 +1,52 @@
+<div class="app-left-panel__header">
+    <div class="app-left-panel__header-logo --beta"></div>
+    <div
+        class="app-left-panel__header-resize-btn"
+        (click)="onToggleLeftPanel()"
+    ></div>
+</div>
+<div class="app-left-panel__body">
+    <app-left-panel-support
+        (onOpenPanel)="onOpenPanel()"
+        (onChangeState)="onChangeState($event)"
+        [activePage]="state"
+    ></app-left-panel-support>
+    <app-left-panel-tickets
+        (onOpenPanel)="onOpenPanel()"
+        (onChangeState)="onChangeState($event)"
+        [activePage]="state"
+    ></app-left-panel-tickets>
+    <app-left-panel-users
+        (onOpenPanel)="onOpenPanel()"
+        (onChangeState)="onChangeState($event)"
+        [activePage]="state"
+    ></app-left-panel-users>
+    <app-left-panel-companies
+        (onOpenPanel)="onOpenPanel()"
+        (onChangeState)="onChangeState($event)"
+        [activePage]="state"
+    ></app-left-panel-companies>
+    <app-left-panel-billing
+        (onOpenPanel)="onOpenPanel()"
+        (onChangeState)="onChangeState($event)"
+        [activePage]="state"
+    ></app-left-panel-billing>
+    <app-left-panel-inventory
+        [activePage]="state"
+        (onChangeState)="onChangeState($event)"
+    ></app-left-panel-inventory>
+    <app-left-panel-password-manager
+        [activePage]="state"
+        (onChangeState)="onChangeState($event)"
+    ></app-left-panel-password-manager>
+    <hr class="app-left-panel__divider">
+    <app-left-panel-reports
+        [activePage]="state"
+        (onChangeState)="onChangeState($event)"
+    ></app-left-panel-reports>
+    <app-left-panel-settings
+        (onOpenPanel)="onOpenPanel()"
+        (onChangeState)="onChangeState($event)"
+        [activePage]="state"
+    ></app-left-panel-settings>
+</div>

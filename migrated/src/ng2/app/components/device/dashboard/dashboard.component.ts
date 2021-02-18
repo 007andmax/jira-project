@@ -48,6 +48,8 @@ export class DashboardComponent implements OnInit {
   visible = false;
   editNote = false;
   create = false;
+  type = '';
+  _id = '';
   DateFormat = CONFIGCONSTANTS.DateFormat1;
    constructor(private hardwareService: HardwareService,
     private toastr: ToastrService) {
@@ -103,8 +105,10 @@ export class DashboardComponent implements OnInit {
   }
   myDateValue: Date;
   ngOnInit() {
+    this.type = window.location.href.split('/')[window.location.href.split('/').length - 2];
+    this._id = window.location.href.split('/')[window.location.href.split('/').length - 1];
     this.myDateValue = new Date();
-    this.deviceDetail = JSON.parse(localStorage.getItem('deviceDetail'));
+    this.deviceDetail = JSON.parse(localStorage.getItem('deviceDetail_' + this._id));
     this.hostName = this.deviceDetail.hostName;
     this.label = this.deviceDetail.label;
     this.getDeviceDetail();
@@ -217,7 +221,7 @@ export class DashboardComponent implements OnInit {
       obj.system['warranty'] = this.system.warranty.year + '/' + this.system.warranty.month + '/' + this.system.warranty.day;
     }
     const data = {
-      agentId: localStorage.getItem('agentId'),
+      agentId: this._id,
       companyId: localStorage.getItem('company_id'),
       override: obj
     }
@@ -245,7 +249,7 @@ export class DashboardComponent implements OnInit {
   saveLabel() {
     this.label = this.label.toUpperCase();
     const data = {
-      agentId: localStorage.getItem('agentId'),
+      agentId: this._id,
       companyId: localStorage.getItem('company_id'),
       newLabelValue: this.label
     }
@@ -254,9 +258,9 @@ export class DashboardComponent implements OnInit {
     .subscribe(
       resp => {
         $('#head-label').text(this.label);
-        let obj = JSON.parse(localStorage.getItem('deviceDetail'));
+        let obj = JSON.parse(localStorage.getItem('deviceDetail_' + this._id));
         obj.label = this.label;
-        localStorage.setItem('deviceDetail', JSON.stringify(obj));
+        localStorage.setItem('deviceDetail_' + this._id, JSON.stringify(obj));
       },
       error => {
         this.toastr.error('Something went wrong please try again.');

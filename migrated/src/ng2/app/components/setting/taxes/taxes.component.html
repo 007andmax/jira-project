@@ -1,16 +1,10 @@
 <!-- Middle Wrapper  -->
-<app-left-panel-settings [componentName]="'TaxesSettingsComponent'"></app-left-panel-settings>
+ 
 <div class="page-container">
   <div class="page-insider manage-taxes">
     <div class="heading">
       <h1>
-        <a
-          href="javascript:;"
-          (click)="onBackMenu()"
-          class="back-menu"
-          style="display: none;"
-          >backmneu</a
-        >Taxes
+        Taxes
       </h1>
       <div class="heading-serach">
         <a href="javascript:;" class="btn-outline" (click)="openModel(true, 0, {})"
@@ -279,7 +273,7 @@
           />
         </span>
         <div class="message-right">
-          <h1>Delete Tax</h1>
+          <h2 class="h1">Delete Tax</h2>
           <p>Are you sure you want to delete?</p>
         </div>
         <a class="close-ico" href="javascript:;" (click)="popup = false"

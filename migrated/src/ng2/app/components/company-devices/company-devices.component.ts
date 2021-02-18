@@ -109,9 +109,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getConfirm);
     let getOnUpdateAgentActivityStatus = this.devicesStateService.getOnUpdateAgentActivityStatus().subscribe(newChange => {
-      console.log("newChange", newChange);
       var isCurrentCompany = this.devicesStateService.getCompanyIdByAgentId(newChange.data.agentId) === this.companyId;
-      console.log("isCurrentCompany", isCurrentCompany);
       if (newChange.data && newChange.data.statuses && newChange.data.statuses.hasOwnProperty('Idle')) {
         if (isCurrentCompany) {
           for (var i = 0; i < this.devices.length; i++) {
@@ -121,7 +119,6 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
               } else {
                 this.devices[i].timing.idle = null;
               }
-              console.log("this.devices[i].timing", this.devices[i].timing);
               break;
             }
           }
@@ -133,7 +130,6 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
               this.devices[i].timing.noRestart = this.devicesStateService.getMillisecondsFromTimeString(newChange.data.statuses.NoRestart);
               this.devices[i].timing.online = this.devicesStateService.getMillisecondsFromTimeString(newChange.data.statuses.Online);
               this.devices[i].timing.uptimeForOrdering = this.devicesStateService.getMillisecondsFromTimeString(newChange.data.statuses.Online);
-              console.log("this.devices[i].timing", this.devices[i].timing);
               break;
             }
           }

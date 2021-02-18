@@ -4,9 +4,9 @@ import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ModalQuoteComponent } from 'src/ng2/app/services/modal/modal-quote/modal-quote.component';
 import { data } from 'jquery';
-import { ModalCustomShareScreenComponent } from 'src/ng2/app/services/modal/modal-custom-share-screen/modal-custom-share-screen.component';
 import { ConstantsStateService } from 'src/ng2/app/states/constants/constants-state.service';
 import { Subscription } from 'rxjs';
+import { CompanyDevicesRemoteAccessComponent } from '../../../company-devices/company-devices-remote-access/company-devices-remote-access.component';
 
 @Component({
   selector: 'app-ticket-edit-aside-devices',
@@ -89,9 +89,11 @@ export class TicketEditAsideDevicesComponent implements OnInit, OnDestroy {
     this.devices = this.reqDevices.filter(item => item.hostName.toLowerCase().includes(event.target.value.toLowerCase()));
   }
   remoteAccess(connectionType, device) {
-    this.devicesService.createRemoteSession(device.id, this.companyId, connectionType, null).subscribe((resp: any) => {
-      this.connectRemoteAccess(resp.sessionId, connectionType, false);
-    })
+    const modalRef = this.modalService.open(CompanyDevicesRemoteAccessComponent, { windowClass: 'device-send-modal' });
+    modalRef.componentInstance.connectionType = connectionType;
+    modalRef.componentInstance.device = device;
+    modalRef.componentInstance.companyId = this.companyId;
+    modalRef.componentInstance.action = 'CONNECT_DEVICE';
   };
   restart(device) {
     this.devicesService.sendPowerAction(this.companyId, device.agentId, 'reboot').subscribe(data => {
@@ -115,30 +117,6 @@ export class TicketEditAsideDevicesComponent implements OnInit, OnDestroy {
 
     })
 
-  }
-  public connectRemoteAccess(sessionId, conectionType, isOneTime) {
-    if (!sessionId) {
-      throw 'SessionId is required';
-    }
-    if (!conectionType) {
-      throw 'conectionType is required';
-    }
-    if (isOneTime) {
-      this.devicesService.getSessionId(sessionId, conectionType).subscribe((realSessionId: any) => {
-        if (!realSessionId || !realSessionId.sessionId || realSessionId.sessionId.length < 1) {
-          throw "Not session Id"
-        } else {
-          this.createRemoteAccess(realSessionId.sessionId);
-        }
-      });
-    } else {
-      this.createRemoteAccess(sessionId);
-    }
-  }
-  createRemoteAccess(realSessionId) {
-    this.realSessionId = realSessionId;
-    const modalRef = this.modalService.open(ModalCustomShareScreenComponent, null);
-    modalRef.componentInstance.companyId = this.companyId;
   }
   public trackById(index, item) {
     return item.id;

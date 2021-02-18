@@ -90,7 +90,7 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
     this.sub.add(changeBillable);
   }
   moToBillable() {
-    let body = document.querySelector('.left-panel__category-wrap');
+    let body = document.querySelector('.main-container');
     var link = document.createElement('a');
     body.appendChild(link);
     link.href = `#/ng2/billable`;
@@ -99,7 +99,7 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
     link.dispatchEvent(e);
   }
   goToSettings() {
-    let body = document.querySelector('.left-panel__category-wrap');
+    let body = document.querySelector('.main-container');
     var link = document.createElement('a');
     body.appendChild(link);
     link.href = `#/ng2/setting/companyprofile`;
@@ -251,7 +251,7 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
     this.filter.forEach(item => item.filter = '');
   }
   back() {
-    let body = document.querySelector('.left-panel__category-wrap');
+    let body = document.querySelector('.main-container');
     var link = document.createElement('a');
     body.appendChild(link);
     link.href = `#/ng2/billable`;

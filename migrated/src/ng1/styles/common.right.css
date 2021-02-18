@@ -1,6 +1,6 @@
 aside#right {
   position: fixed;
-  top: 78px;
+  top: 63px;
   right: 0;
   height: calc(100% - 78px);
   width: 281px;
@@ -20,7 +20,7 @@ aside#right.collapsed {
   aside#right {
     box-shadow: 0 0 26px 0 rgba(10, 45, 89, .1);
   }
-  
+
   @-moz-document url-prefix() {
     aside#right {
       box-shadow: 0 0 16px 0 rgba(10, 45, 89, .1);
@@ -43,7 +43,7 @@ aside#right .nav-sb-tabs {
   margin: 0;
   padding: 1px 0 0;
   position: fixed;
-  top: 78px;
+  top: 63px;
   width: 281px;
   background: rgba(255, 255, 255, 0.94);
   z-index: 1030;
@@ -52,7 +52,7 @@ aside#right .nav-sb-tabs {
 aside#right.collapsed .nav-sb-tabs {
   width: 76px;
   padding: 0;
-  top: 78px;
+  top: 73px;
 }
 
 aside#right .nav-sb-tabs > li {

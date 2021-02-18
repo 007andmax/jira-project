@@ -1,38 +1,41 @@
-<app-left-panel-settings [componentName]="'MyProfileComponent'"></app-left-panel-settings>
-<!-- Middle Wrapper  -->
+<!-- Middle Wrapper -->
 <div class="page-container">
-  <div class="page-insider profile-insider">
-     <!-- Message -->
-      <!-- <div style="display: none" class="sucess-messages">Password Change Successfully</div> -->
-
-    <div class="heading" >
-      <h1><a href="javascript:;" (click)="onBackMenu()" class="back-menu" style="display: none;">backmneu</a>My Profile Settings</h1>
+    <div class="page-insider profile-insider">
+        <!-- Message -->
+        <div class="heading">
+            <h1>My Profile Settings</h1>
+        </div>
+        <ngb-tabset>
+            <!-- Profile -->
+            <ngb-tab
+                title="Profile"
+                id="tab1"
+            >
+                <ng-template ngbTabContent>
+                    <app-profile></app-profile>
+                </ng-template>
+            </ngb-tab>
+            <!-- Account -->
+            <ngb-tab title="Account">
+                <ng-template ngbTabContent>
+                    <app-account></app-account>
+                </ng-template>
+            </ngb-tab>
+            <!-- Email -->
+            <ngb-tab title="Email Notifications">
+                <ng-template ngbTabContent>
+                    <app-email-notifications></app-email-notifications>
+                </ng-template>
+            </ngb-tab>
+            <!-- Activity History -->
+            <ngb-tab
+                title="Activity History"
+                class="history"
+            >
+                <ng-template ngbTabContent>
+                    <app-activity-history></app-activity-history>
+                </ng-template>
+            </ngb-tab>
+        </ngb-tabset>
     </div>
-    <ngb-tabset> 
-      <!-- Profile -->
-      <ngb-tab title="Profile" id="tab1">
-        <ng-template ngbTabContent>
-        <app-profile></app-profile>
-        </ng-template>
-      </ngb-tab>
-      <!-- Account  -->
-      <ngb-tab title="Account">
-        <ng-template ngbTabContent>
-        <app-account></app-account>
-        </ng-template>
-      </ngb-tab>
-      <!-- Email -->
-      <ngb-tab title="Email Notifications">
-        <ng-template ngbTabContent>
-       <app-email-notifications></app-email-notifications>
-       </ng-template>
-      </ngb-tab>
-      <!-- Activity History -->
-      <ngb-tab title="Activity History" class="history">
-        <ng-template ngbTabContent>
-        <app-activity-history></app-activity-history>
-        </ng-template>
-      </ngb-tab>
-    </ngb-tabset>
-  </div>
 </div>

@@ -73,8 +73,7 @@ export class UsersTableComponent implements OnInit {
     }
   };
   edit() {
-
-    this.usersStateService.setUserForArchive(this.user);
+    this.usersStateService.setUserForEdit(this.user);
     this.usersStateService.onOpenEditAsige();
   }
   ngOnInit() {

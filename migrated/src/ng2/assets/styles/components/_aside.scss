@@ -57,7 +57,8 @@
 .qt-aside {
   .ng-sidebar {
     width: 592px;
-    height: calc(100vh - 78px);
+    height: calc(100vh - #{$header-height});
+
   }
 
   &__header {

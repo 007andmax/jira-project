@@ -1,0 +1,117 @@
+.nav-header {
+  position: fixed;
+  z-index: 1050;
+  top: 0;
+  right: 0;
+  height: $header-height;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+  background-color: #ffffff;
+  width: calc(100% - #{$left-panel-width});
+  transition: width 300ms;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &.--full-width {
+    width: calc(100% - #{$left-panel-mini-width});
+  }
+
+  &__left-side {
+    display: flex;
+    align-items: center;
+    padding: 12px 24px;
+  }
+
+  app-global-search {
+    width: 552px;
+  }
+
+  &__rigth-side {
+    display: flex;
+    align-items: center;
+  }
+
+  &__add-btn {
+    margin-right: 16px;
+    width: 40px;
+    height: 40px;
+    background-color: #16a4fa;
+    border-radius: 50%;
+    cursor: pointer;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: transform 300ms;
+    &.--open {
+      transform: rotate(45deg);
+    }
+  }
+
+  &__notifications-bell {
+    width: 24px;
+    height: 24px;
+    margin-right: 16px;
+    position: relative;
+    cursor: pointer;
+    &.--notifications-exits {
+      &::before {
+        content: '';
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #ff5263;
+        right: 1px;
+        top: -1px;
+        border: 2px solid white;
+      }
+    }
+  }
+
+  &__account-info {
+    width: fit-content;
+    display: flex;
+    border-left: 1px solid #edf0f2;
+    padding: 12px 24px 12px 12px;
+  }
+
+  &__account-info-menu {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid #c5cdd5;
+    margin-left: 8px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+  }
+
+  &__account-info-company-name {
+    color: #4f5f79;
+    font-size: 13px;
+    line-height: 1.54;
+    margin-bottom: 2px;
+    display: inline-block;
+    white-space: nowrap;
+    font-family: Graphik-Medium, sans-serif;
+  }
+
+  &__account-info-user-name {
+    color: #9ca5b6;
+    font-size: 12px;
+    line-height: 1.33;
+    text-align: right;
+    width: fit-content;
+    position: relative;
+    &::before {
+      content: '';
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: #2ec866;
+      left: -10px;
+      top: calc(50% - 3px);
+    }
+  }
+}

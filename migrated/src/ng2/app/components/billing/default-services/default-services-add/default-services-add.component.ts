@@ -9,6 +9,7 @@ import { DefaultServicesService } from 'src/ng2/app/services/default-services/de
 import { TaxesStateService } from 'src/ng2/app/states/taxes/taxes-state.service';
 import { Tax } from 'src/ng2/app/interfaces/service/tax';
 import { DisabledBtnDirective } from 'src/ng2/app/directives/disabled-btn.directive';
+import { DefaultServicesStateService } from 'src/ng2/app/states/default-services/default-services-state.service';
 
 @Component({
   selector: 'app-default-services-add',
@@ -21,28 +22,31 @@ export class DefaultServicesAddComponent implements OnInit {
   sub: Subscription = new Subscription();
   validate: DefaultServiceValidate = new DefaultServiceValidate();
   defaultSelectedTax: Array<Tax> = [];
+  showAdd: boolean = false;
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;
-  @Output() onClose = new EventEmitter<any>();
   constructor(private glNumberStateService: GlNumberStateService,
     private defaultServicesService: DefaultServicesService,
     private taxesStateService: TaxesStateService,
+    private defaultServicesStateService: DefaultServicesStateService,
     public cd: ChangeDetectorRef,
     private glNumberService: GlNumberService,) { }
 
   ngOnInit() {
-    this.service.onInitForAdd();
+    this.defaultServicesStateService.getShowAsideForAdd().subscribe(data => {
+      this.showAdd = true;
+      this.service.onInitForAdd();
+    })
     if (this.glNumberStateService.getGLNumbers().length > 0) this.glNumbers = this.sortGlNumbers(this.glNumberStateService.getGLNumbers());
     let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe((data) => {
       this.glNumbers = this.sortGlNumbers(data);
       this.cd.detectChanges();
     })
     this.sub.add(getOnGlNumbers);
-    if (this.taxesStateService.getTaxes().length > 0) this.setDefaultTaxes(this.taxesStateService.getTaxes());
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
       this.setDefaultTaxes(data);
     })
     this.sub.add(getOnTaxess);
-   
+
   }
   private sortGlNumbers(data) {
     return data.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?
@@ -75,7 +79,7 @@ export class DefaultServicesAddComponent implements OnInit {
     this.defaultServicesService.addService(this.service.getDataForAdd()).subscribe(data => {
       this.addBtn.setDisabled(false);
       this.close();
-    },err => {
+    }, err => {
       this.addBtn.setDisabled(false);
     })
   }
@@ -84,6 +88,9 @@ export class DefaultServicesAddComponent implements OnInit {
     this.service.glNumber = data;
   }
   close() {
-    this.onClose.emit(null);
+    this.showAdd = false;
+    this.service = new DefaultServices();
+    this.validate = new DefaultServiceValidate();
+    if (this.taxesStateService.getTaxes().length > 0) this.setDefaultTaxes(this.taxesStateService.getTaxes());
   }
 }

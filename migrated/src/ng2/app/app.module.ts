@@ -140,7 +140,6 @@ import { CompanyProductsComponent } from './components/companies/company-product
  * declare angular
  */
 declare var angular: any;
-import { LeftPanelSettingComponent } from './components/left-panel/left-panel-setting/left-panel-setting.component';
 import { TechUsersComponent } from './components/setting/tech-users/tech-users.component';
 import { EmailSettingComponent } from './components/setting/email-setting/email-setting.component';
 import { TaxesSettingsComponent } from './components/setting/taxes/taxes.component';
@@ -219,7 +218,6 @@ import { ToFixedDirective } from './directives/to-fixed.directive';
 import { MapModalComponent } from './components/shared/map-modal/map-modal.component';
 import { CompanyInfoHistoryComponent } from './components/tickets/tickets/ticket-edit-aside-company-info/company-info-history/company-info-history.component';
 import { TicketEditAsideRightPanelComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-edit-aside-right-panel/ticket-edit-aside-right-panel.component';
-import { ModalCustomShareScreenComponent } from './services/modal/modal-custom-share-screen/modal-custom-share-screen.component';
 import { CompanyTicketsComponent } from './components/company-tickets/company-tickets.component';
 import { CompanyDashboardComponent } from './components/company-dashboard/company-dashboard.component';
 import { InventoryAddBodyComponent } from './components/inventory/inventory-add-aside/inventory-add-body/inventory-add-body.component';
@@ -383,6 +381,17 @@ import { CompanyDashInvoiceComponent } from './components/company-dashboard/comp
 import { CompanyDashContractComponent } from './components/company-dashboard/company-dash-contract/company-dash-contract.component';
 import { LeftPanelCompanyComponent } from './components/left-panel/left-panel-company/left-panel-company.component';
 import { UsersFilterComponent } from './components/users/users-header/users-filter/users-filter.component';
+import { SupportComponent } from './components/support/support.component';
+import { SupportItemComponent } from './components/support/support-item/support-item.component';
+import { DynamicTooltipComponent } from './components/shared/dynamic-tooltip/dynamic-tooltip.component';
+import { TicketProfileFormUpdateSupportComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-form-update/ticket-profile-form-update-support/ticket-profile-form-update-support.component';
+import { LeftPanelSupportComponent } from './components/left-panel/left-panel-support/left-panel-support.component';
+import { HeaderComponent } from './components/header/header.component';
+import { GlobalSearchComponent } from './components/header/global-search/global-search.component';
+import { ReportListItemComponent } from './components/reports/report-list-item/report-list-item.component';
+import { LeftPanelReportsComponent } from './components/left-panel/left-panel-reports/left-panel-reports.component';
+import { BreadcrumbsComponent } from './components/shared/breadcrumbs/breadcrumbs.component';
+
 /**
  * declare angular
  */
@@ -576,6 +585,9 @@ angular.module('quicktech')
   .directive(
     'companyNetworkScanComponent',
     downgradeComponent({ component: CompanyNetworkScanComponent }))
+  .directive(
+    'supportComponent',
+    downgradeComponent({ component: SupportComponent }))
   .factory('ngZone', downgradeInjectable(NgZone));
 
 /**
@@ -664,7 +676,6 @@ angular.module('quicktech')
     MyProfileComponent,
     SettingComponent,
     CompanyProfileComponent,
-    LeftPanelSettingComponent,
     ManageTagsComponent,
     TechUsersComponent,
     EmailSettingComponent,
@@ -769,11 +780,8 @@ angular.module('quicktech')
     MapModalComponent,
     CompanyInfoHistoryComponent,
     TicketEditAsideRightPanelComponent,
-    ModalCustomShareScreenComponent,
     CompanyTicketsComponent,
-
     CompanyDashboardComponent,
-
     InventoryAddBodyComponent,
     ServicePipe,
     LeftPanelSettingsComponent,
@@ -929,6 +937,16 @@ angular.module('quicktech')
     CompanyNetworkScanItemTooltipComponent,
     LeftPanelCompanyComponent,
     UsersFilterComponent,
+    SupportComponent,
+    SupportItemComponent,
+    DynamicTooltipComponent,
+    TicketProfileFormUpdateSupportComponent,
+    LeftPanelSupportComponent,
+    HeaderComponent,
+    GlobalSearchComponent,
+    ReportListItemComponent,
+    LeftPanelReportsComponent,
+    BreadcrumbsComponent
   ],
   imports: [
     BrowserModule,
@@ -996,7 +1014,6 @@ angular.module('quicktech')
     TicketsComponent,
     InventoryComponent,
     CompanyProductsComponent,
-    ModalCustomShareScreenComponent,
     BillableComponent,
     BillableTicketsComponent,
     ContractsComponent,
@@ -1025,7 +1042,8 @@ angular.module('quicktech')
     TicketsDashboardComponent,
     CompanyNetworkScanComponent,
     CompanyDevicesComponent,
-    CompanyDevicesRemoteAccessComponent
+    CompanyDevicesRemoteAccessComponent,
+    SupportComponent
     // RecurringTicketsComponent
   ],
   exports: [

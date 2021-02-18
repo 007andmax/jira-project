@@ -13,6 +13,7 @@ import { GlNumberStateService } from './states/gl-number/gl-number-state.service
 import { InventoryStateService } from './states/inventory/inventory-state.service';
 import { TicketsStateService } from './states/tickets/tickets-state.service';
 import { ConstantsStateService } from './states/constants/constants-state.service';
+import { LeftPanelStateService } from './states/left-panel/left-panel-state.service';
 
 
 /**
@@ -30,6 +31,7 @@ export class AppComponent implements OnInit {
   isDevicesInit: boolean = false;
   qtListHeaaderScroller;
   qtListBodyScroller;
+  toggleLeftPanel: boolean = false;
 
   /**
    * Creates an instance of the MainComponent with the injected services
@@ -50,6 +52,7 @@ export class AppComponent implements OnInit {
     private inventoryStateService: InventoryStateService,
     private ticketsStateService: TicketsStateService,
     private constantsStateService: ConstantsStateService,
+    private leftPanelStateService: LeftPanelStateService,
     public cd: ChangeDetectorRef,
 
   ) { }
@@ -88,13 +91,16 @@ export class AppComponent implements OnInit {
       this.onCheckInitAll();
 
     })
-
+    this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
+      this.toggleLeftPanel = data;
+      this.cd.detectChanges();
+    })
   }
   ngDoCheck() {
     this.qtListHeaaderScroller = document.querySelector('.qt-page-list__header-thead-container');
     this.qtListBodyScroller = document.querySelector('.qt-page-list__body-table-container');
     if (this.qtListHeaaderScroller && this.qtListBodyScroller) {
-      this.qtListHeaaderScroller.removeEventListener('scroll', this.qtListHeaaderScrollerScroll,false);
+      this.qtListHeaaderScroller.removeEventListener('scroll', this.qtListHeaaderScrollerScroll, false);
       this.qtListBodyScroller.removeEventListener('scroll', this.qtListBodyScrollerScroll, false);
 
       this.qtListHeaaderScroller.addEventListener('scroll', this.qtListHeaaderScrollerScroll, false);

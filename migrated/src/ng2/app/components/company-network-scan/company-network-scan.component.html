@@ -57,6 +57,7 @@
                                 class="pointer"
                                 ngbDropdownItem
                                 (click)="selectMasterAgent(agent)"
+                                [ngClass]="{'offline-device': masterAgent && !masterAgent.online}"
                                 [textContent]="agent.label || agent.hostName || agent.ip"
                             ></li>
                         </ng-template>
@@ -64,8 +65,9 @@
                 </div>
             </div>
             <div class="network-step">
+              <div class="qt-df qt-fd-c qt-ai-c">
                 <div class="circle-number qt-mb-8">
-                    <div class="circle-number__inner">2</div>
+                  <div class="circle-number__inner">2</div>
                 </div>
                 <div class="network-step__title">Select Device</div>
                 <div class="network-step__text-cred qt-mb-15">
@@ -76,14 +78,15 @@
                         [textContent]="networkScanInstallAgent.getCredentialText()"
                     ></span>
                 </div>
-                <button
-                    class="qt-button "
-                    [ngClass]="{'--disabled': !checkSelected() || masterAgent && !masterAgent.online}"
-                    (click)="openAside()"
-                    [disabled]="!checkSelected() || masterAgent && !masterAgent.online"
-                    [textContent]="(networkScanInstallAgent.getCredential()) ? 'Modify credentials' : 'Apply Credentials'"
-                >
-                </button>
+              </div>
+              <button
+                  class="qt-button "
+                  [ngClass]="{'--disabled': !checkSelected() || masterAgent && !masterAgent.online}"
+                  (click)="openAside()"
+                  [disabled]="!checkSelected() || masterAgent && !masterAgent.online"
+                  [textContent]="(networkScanInstallAgent.getCredential()) ? 'Modify credentials' : 'Apply Credentials'"
+              >
+              </button>
             </div>
             <div class="network-step">
                 <div class="circle-number qt-mb-8">
@@ -190,6 +193,12 @@
                 >
                     <p>No Devices</p>
                 </div>
+                <div
+                    class="no-devices"
+                    *ngIf="masterAgent && !masterAgent.online && networkScanDevices.devices.length === 0"
+                >
+                    <p>Master Agent Offline</p>
+                </div>
             </table>
         </div>
     </div>
@@ -198,4 +207,3 @@
         (onSelect)="onSelectCredential($event)"
     ></app-network-scan-credentials-aside>
 </div>
-<app-left-panel-company></app-left-panel-company>

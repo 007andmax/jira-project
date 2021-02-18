@@ -33,8 +33,8 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
   categories: Array<CategoryProduct> = [];
   validate: InventoryValidate = new InventoryValidate();
   editVendor: Company = null;
-  cost:string;
-  sale:string;
+  cost: string;
+  sale: string;
   @ViewChild('addTax') containerAddTax;
   @ViewChild('glNumberSelect') glNumberSelect: SelectSearchComponent;
   @ViewChild('categoriesSelect') categoriesSelect: SelectSearchComponent;
@@ -73,10 +73,10 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
       this.categories = data;
     })
     this.sub.add(getOnCategries);
-    this.onEditCompany();
+    this.onEditInventory();
   }
-  onEditCompany() {
-    let getCompanyFromEdit = this.inventoryStateService.getInventoryFromEdit().subscribe((data: InventoryItem) => {
+  onEditInventory() {
+    let getInventoryFromEdit = this.inventoryStateService.getInventoryFromEdit().subscribe((data: InventoryItem) => {
       this.inventory = new InventoryItem(data);
       let taxes = this.taxes.filter(item => {
         let index = this.inventory.taxIds.findIndex(taxId => taxId === item.id);
@@ -88,10 +88,10 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
       this.opened = true;
       this.cost = (this.inventory.cost) ? this.inventory.cost.toFixed(2) : "0.00";
       this.sale = (this.inventory.sale) ? this.inventory.sale.toFixed(2) : "0.00";
-   //   this.description.update();
+      //   this.description.update();
       this.cd.detectChanges();
     })
-    this.sub.add(getCompanyFromEdit);
+    this.sub.add(getInventoryFromEdit);
   }
   onCheckILC() {
     this.productService.validateProductILC(this.inventory.ilc, this.inventory.versionedId.id).subscribe((data: any) => {

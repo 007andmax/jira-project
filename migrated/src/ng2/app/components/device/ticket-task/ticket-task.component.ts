@@ -75,6 +75,8 @@ export class TicketTaskComponent implements OnInit, OnDestroy {
   initial = true;
   linkedAgentList = [];
   idEditTicket:string = '';
+  type:string = '';
+  _id:string = '';
 
   constructor(private ticketService: TicketService,
       private toastr: ToastrService,
@@ -89,8 +91,10 @@ export class TicketTaskComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.type = window.location.href.split('/')[window.location.href.split('/').length - 2];
+    this._id = window.location.href.split('/')[window.location.href.split('/').length - 1];
     this.myDateValue = new Date();
-    this.deviceDetail = JSON.parse(localStorage.getItem('deviceDetail'));
+    this.deviceDetail = JSON.parse(localStorage.getItem('deviceDetail_' + this._id));
     this.getAllUsers();
   }
 

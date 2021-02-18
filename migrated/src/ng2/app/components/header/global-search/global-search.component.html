@@ -1,0 +1,81 @@
+<div
+    class="global-search"
+    ngbDropdown
+    [autoClose]="'outside'"
+    #globalSearch="ngbDropdown"
+>
+    <div ngbDropdownAnchor>
+        <span class="qt-input-search">
+            <input
+                type="text"
+                class="global-search__input"
+                placeholder="Global search"
+                autocomplete="off"
+                [(ngModel)]="word"
+                (input)="onSearch()"
+                (click)="onShowDropDown()"
+            >
+            <span
+                class="global-search__close icon__close-round"
+                *ngIf="word.length > 0"
+                (click)="clearWord()"
+            ></span>
+        </span>
+    </div>
+    <div
+        ngbDropdownMenu
+        aria-labelledby="dropdownProducts"
+        class="global-search__dropdown"
+    >
+        <div
+            class="global-search__no-data-available"
+            *ngIf="list.length === 0"
+        >
+            <p>No data available yet</p>
+        </div>
+        <ul
+            class="global-search__menu"
+            *ngIf="list.length > 0"
+        >
+            <ng-template
+                ngFor
+                let-item
+                [ngForOf]="list"
+                [ngForTrackBy]="trackByIndex"
+            >
+                <li
+                    [ngClass]="{'--active':selectedType === item.type }"
+                    *ngIf="isShowType(item.type)"
+                    (click)="selectedType = item.type"
+                    [textContent]="getText(item.type) + ' ('+item.list.length +')'"
+                >
+                </li>
+            </ng-template>
+        </ul>
+        <div>
+            <div
+                class="global-search__menu-item"
+                *ngFor="let listItem of getTypeList(selectedType)"
+                (click)="showInfo(listItem)"
+            >
+                <div
+                    class="global-search__user-avatar"
+                    *ngIf="selectedType === 'USERS'"
+                    [textContent]="getNameForAvatar(listItem)"
+                    [ngStyle]="{'background': ticketsListService.getStyleAvatar(getUserById(listItem.id),listColorNoAvatar[indexNoAvatar]) }"
+                >
+                </div>
+                <div>
+                    <div
+                        class="global-search__menu-item-title"
+                        [textContent]="getFistLine(listItem)"
+                    ></div>
+                    <div
+                        class="global-search__menu-item-subtitle"
+                        [innerHTML]="getSecondLine(listItem)"
+                    ></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -17,7 +17,8 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./invoices-aside-preview.component.scss']
 })
 export class InvoicesAsidePreviewComponent implements OnInit {
-  @Input() invoiceId: string;
+  open: boolean = false;
+  invoiceId: string;
   invoiceProfile: InvoiceProfile;
   @Output() onClose = new EventEmitter<any>();
   currentCompany: any;
@@ -32,14 +33,19 @@ export class InvoicesAsidePreviewComponent implements OnInit {
     private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
-    this.currentCompany = this.companiesStateService.getCurrentCompany();
-    this.onGetInvoice();
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === DELETE_INVOICE || this.confirmStateService.getConfirmAction() === ROLLBACK_INVOICE || this.confirmStateService.getConfirmAction() === REFUND_PAYMENTS) this.close();
       }
     })
     this.sub.add(getConfirm);
+    let openPreviewAside = this.invoiceStateService.openPreviewAside.subscribe(data => {
+      this.currentCompany = this.companiesStateService.getCurrentCompany();
+      this.invoiceId = data;
+      this.open = true;
+      this.onGetInvoice();
+    })
+    this.sub.add(openPreviewAside);
   }
   public onGetInvoice() {
     this.showPreloader = true;
@@ -63,10 +69,10 @@ export class InvoicesAsidePreviewComponent implements OnInit {
   rollbackInvoice() {
     this.confirmStateService.setConfirmAction(ROLLBACK_INVOICE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
-    let ticketsNumbers =  this.invoiceProfile.tickets.map(item => item.number);
+    let ticketsNumbers = this.invoiceProfile.tickets.map(item => item.number);
     modalRef.componentInstance.message = `Do you want to rollback invoice #${this.invoiceProfile.number}? 
     ${(ticketsNumbers && ticketsNumbers.length ? (ticketsNumbers.length > 1 ? 'Tickets #' : 'Ticket #') +
-    ticketsNumbers.join(', #') + ' will be restored.' : '')}`;
+        ticketsNumbers.join(', #') + ' will be restored.' : '')}`;
     this.invoiceStateService.setInvoiceForRollback(this.invoiceProfile);
   }
   getStatusDate(dateInvoice) {
@@ -117,6 +123,8 @@ export class InvoicesAsidePreviewComponent implements OnInit {
   close() {
     this.onClose.emit(null);
     this.showPreloader = true;
+    this.open = false;
+    this.invoiceProfile = null;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

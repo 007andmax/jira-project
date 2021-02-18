@@ -4,9 +4,10 @@ import { map, catchError } from "rxjs/operators";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { of } from "rxjs";
 import { ToastrService } from "ngx-toastr";
-import { DomSanitizer } from '@angular/platform-browser';	
+import { DomSanitizer } from '@angular/platform-browser';
 import { SanitizeHtmlPipe } from './../../../pipe/sanitize-html.pipe';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { SettingStateService } from "src/ng2/app/states/setting/setting-state.service";
 // import { AngularEditorConfig } from "@kolkov/angular-editor";
 
 declare var $: any;
@@ -59,7 +60,8 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     private emailService: EmailTempleteService,
     private formBuilder: FormBuilder,
     private toastr: ToastrService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private settingStateService: SettingStateService
   ) {
     this.ticketTemplates = this.emailService.getTicketTemplates();
     this.agentTemplates = this.emailService.getAgentTemplates();
@@ -75,6 +77,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
       body: ["", Validators.required]
     });
     this.getEmailPages();
+    this.settingStateService.setComponentName('EmailTempleteComponent');
   }
 
   ngOnDestroy() {
@@ -92,7 +95,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   }
 
   onReady(eventData) {
-    eventData.plugins.get("FileRepository").createUploadAdapter = function(
+    eventData.plugins.get("FileRepository").createUploadAdapter = function (
       loader
     ) {
       return new UploadAdapter(loader);
@@ -103,16 +106,16 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
    * email pages
    */
   getEmailPages() {
-    this.loading = true;$(".loading").css("display", "block");
+    this.loading = true; $(".loading").css("display", "block");
     this.emailService
       .getEmailPages()
       .pipe(
         map(res => {
-          this.loading = false;$(".loading").css("display", "none");
+          this.loading = false; $(".loading").css("display", "none");
           this.emailPages = res;
         }),
         catchError(err => {
-          this.loading = false;$(".loading").css("display", "none");
+          this.loading = false; $(".loading").css("display", "none");
           return of("");
         })
       )
@@ -130,13 +133,13 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     }
     this.getEmailPages();
     this.templeteInfo = templete.value;
-    this.loading = true;$(".loading").css("display", "block");
+    this.loading = true; $(".loading").css("display", "block");
     this.edit = true;
     this.emailService
       .getTemplate(templete.key)
       .pipe(
         map((res: any) => {
-          this.loading = false;$(".loading").css("display", "none");
+          this.loading = false; $(".loading").css("display", "none");
           if (res) {
             this.hideButtonTextEditor();
             this.templatesData.body = res.body;
@@ -206,7 +209,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     } else {
       // this.insertDataVarables(el, text);
       // el.parentElement.parentElement.parentElement.blur();
-      this.insertAt(document.getElementById("myEditor"),text);
+      this.insertAt(document.getElementById("myEditor"), text);
     }
     // this.insertDataVarables(el, text);
   }
@@ -276,24 +279,24 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     }
   }
 
-  emailPreview(template: TemplateRef<any>) {	
+  emailPreview(template: TemplateRef<any>) {
     this.emailPreviewHtml = '';
     this.gettingEmailTemplatePreview = true;
 
-    this.emailService	
-      .getHtmlForPreview(this.type, this.templatesData)	
-      .pipe(	
-        map(resp => {	
-          this.emailPreviewHtml = resp;	
-          this.emailPreviewHtml = this.emailPreviewHtml.replace(/font-family: Graphik, sans-serif;/gi, '')	
-          this.gettingEmailTemplatePreview = false;	
-          this.modalService.open(template, {ariaLabelledBy: 'modal-basic-title', windowClass: "manage-tags", centered:true}).result.then((result) => {
-             
+    this.emailService
+      .getHtmlForPreview(this.type, this.templatesData)
+      .pipe(
+        map(resp => {
+          this.emailPreviewHtml = resp;
+          this.emailPreviewHtml = this.emailPreviewHtml.replace(/font-family: Graphik, sans-serif;/gi, '')
+          this.gettingEmailTemplatePreview = false;
+          this.modalService.open(template, { ariaLabelledBy: 'modal-basic-title', windowClass: "manage-tags", centered: true }).result.then((result) => {
+
           }, (reason) => {
-            
+
           });
-        })	
-      )	
+        })
+      )
       .subscribe();
   }
 
@@ -330,9 +333,9 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
       subject: this.templeteForm.value.subject
     });
 
-    
 
-    this.loading = true;$(".loading").css("display", "block");
+
+    this.loading = true; $(".loading").css("display", "block");
     this.emailService
       .saveEmailTemplate(this.templeteForm.value, this.openEmailTemplate)
       .pipe(
@@ -344,12 +347,12 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
       )
       .subscribe(
         () => {
-          this.loading = false;$(".loading").css("display", "none");
+          this.loading = false; $(".loading").css("display", "none");
           this.toastr.success("Saved Successfully");
           this.getEmailPages();
         },
         error => {
-          this.loading = false;$(".loading").css("display", "none");
+          this.loading = false; $(".loading").css("display", "none");
           this.toastr.error(`Error Occured  ${error}`);
         }
       );
@@ -364,12 +367,12 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.loading = true;$(".loading").css("display", "block");
+    this.loading = true; $(".loading").css("display", "block");
     this.emailService
       .setToDefaultTemplete(templeteKey)
       .pipe(
         map((defaultTemplate: any) => {
-          this.loading = false;$(".loading").css("display", "none");
+          this.loading = false; $(".loading").css("display", "none");
           if (defaultTemplate) {
             this.templeteForm.patchValue({
               subject: defaultTemplate.subject,

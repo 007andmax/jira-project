@@ -1,0 +1,35 @@
+<div
+    class="breadcrumbs"
+    *ngIf="isCompanyState()"
+    [ngClass]="{'breadcrumbs-company-users':state === 'company-user',
+'breadcrumbs-company-password-manager':state === 'company-password-manager',
+'breadcrumbs-company-products':state === 'company-products'}"
+>
+    <div
+        class="breadcrumbs-location pointer"
+        (click)="back()"
+    >
+        <span>All companies</span>
+        <div class="breadcrumb-separator"></div>
+        <!-- <img
+            src="/html/dropdown-arrow-down.svg"
+            alt
+            class="breadcrumb-separator"
+        > -->
+    </div>
+    <div
+        class="breadcrumbs-attribute"
+        *ngIf="selectedCompany"
+    >
+        <span [textContent]="selectedCompany.name"></span>
+        <div class="breadcrumb-separator"></div>
+        <!-- <img
+            src="/html/dropdown-arrow-down.svg"
+            alt
+            class="breadcrumb-separator"
+        > -->
+    </div>
+    <div class="breadcrumbs-path">
+        <span [textContent]="getPath()"></span>
+    </div>
+</div>

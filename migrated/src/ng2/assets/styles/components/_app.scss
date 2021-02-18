@@ -1,0 +1,9 @@
+.content-container {
+  margin-left: $left-panel-width;
+  &.--large {
+    margin-left: $left-panel-mini-width;
+  }
+}
+.main-container {	
+  background-color: transparent;	
+}

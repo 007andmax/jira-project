@@ -51,6 +51,7 @@ import { PermissionDasnboardBillingService } from './services/dashboard-billing/
 import { TicketsDashboardComponent } from './components/tickets/tickets-dashboard/tickets-dashboard.component';
 import { CompanyNetworkScanComponent } from './components/company-network-scan/company-network-scan.component';
 import { CompanyDevicesComponent } from './components/company-devices/company-devices.component';
+import { SupportComponent } from './components/support/support.component';
 
 const routes: Routes = [
   {
@@ -215,15 +216,15 @@ const routes: Routes = [
     component: PaymentsComponent,
   },
   {
-    path: 'ng2/device/dashboard',
+    path: 'ng2/device/dashboard/:type/:id',
     component: DashboardComponent
   },
   {
-    path: 'ng2/device/hardware',
+    path: 'ng2/device/hardware/:type/:id',
     component: HardwareComponent
   },
   {
-    path: 'ng2/device/software',
+    path: 'ng2/device/software/:type/:id',
     component: SoftwareComponent
   },
   {
@@ -235,7 +236,7 @@ const routes: Routes = [
     component: AntivirusComponent
   },
   {
-    path: 'ng2/device/terminal',
+    path: 'ng2/device/terminal/:type/:id',
     component: TerminalComponent
   },
   {
@@ -275,6 +276,11 @@ const routes: Routes = [
   {
     path: 'ng2/company/devices',
     component: CompanyDevicesComponent,
+
+  },
+  {
+    path: 'ng2/quickSupport',
+    component: SupportComponent,
 
   },
 ];

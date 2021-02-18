@@ -31,15 +31,24 @@
                                     (openChange)="onOpenCompaniesDropDown()"
                                     placement="bottom-left"
                                 >
+                                    <app-dynamic-tooltip
+                                        class="user-companies-tooltip"
+                                        [content]="'You must remove all Product/Services updates from the ticket before changing the company.'"
+                                        [position]="'bottom'"
+                                        #userCompanyTooltip
+                                        [disableTooltip]="!checkExistServicesProducts()"
+                                    ></app-dynamic-tooltip>
                                     <span
                                         [ngClass]="{'pointer': ticketProfile.ticketSource === 'FROM_EMAIL'}"
                                         [textContent]="getCompanyName()"
                                         id="dropdownCompany"
                                         ngbDropdownToggle
+                                        (mouseenter)="userCompanyTooltip.show($event.target)"
+                                        (mouseleave)="userCompanyTooltip.hide()"
                                     ></span>
                                     <span [textContent]="' - ' + getNameCreateUser()"></span>
                                     <div
-                                        *ngIf="ticketProfile.ticketSource === 'FROM_EMAIL'"
+                                        *ngIf="ticketProfile.ticketSource === 'FROM_EMAIL' && !checkExistServicesProducts()"
                                         ngbDropdownMenu
                                         aria-labelledby="dropdownCompany"
                                     >
@@ -54,7 +63,6 @@
                                                     <li
                                                         *ngIf="getCompany(item)"
                                                         ngbDropdownItem
-                                                        class
                                                         [textContent]="getCompany(item).name"
                                                         (click)="changeTicketCompany(item)"
                                                     ></li>

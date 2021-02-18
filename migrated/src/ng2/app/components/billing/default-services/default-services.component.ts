@@ -16,7 +16,6 @@ import { LeftPanelStateService } from 'src/ng2/app/states/left-panel/left-panel-
 })
 export class DefaultServicesComponent implements OnInit, OnDestroy {
   showPreloader: boolean = true;
-  showCreateService: boolean = false;
   showEditService: boolean = false;
   editService: DefaultServices;
   list: Array<DefaultServices> = [];
@@ -64,16 +63,18 @@ export class DefaultServicesComponent implements OnInit, OnDestroy {
     this.defaultServicesService.deleteService(service.versionedId.id).subscribe(data => {
 
     })
-
+  }
+  onShowAddAside() {
+    this.defaultServicesStateService.toggleAsideForAdd();
   }
   onEditService(service) {
     this.editService = new DefaultServices(JSON.parse(JSON.stringify(service)));
+    this.defaultServicesStateService.toggleAsideForEdit(this.editService);
     this.showEditService = true;
   }
   public onFilter(field) {
     this.filter.onFilter(field, this.list);
     this.cd.detectChanges();
-
   }
   public trackById(index, item) {
     return item.id;

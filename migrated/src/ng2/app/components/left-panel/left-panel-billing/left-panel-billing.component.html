@@ -1,31 +1,57 @@
-<div class="left-panel-full-wrapper nano billing">
-  <div class="left-panel-full__head">
-    <div class="icon-pos go-back-left-panel">
-      <i class="icn-sm icn-back-arrow"></i>
-    </div>
-    <span class="left-panel-full__head--header">Billing</span>
-  </div>
-  <div class="center-category collapsed-nav nano-content">
-    <div class="center-category__category" *ngIf="getPermissions('VIEW_ACCOUNTING_DASHBOARD')" [ngClass]="{'active':activePage === 'billing-dashboard'}" (click)="goToState('billing-dashboard')">
-      Dashboard
-    </div>
-    <div class="center-category__category" [ngClass]="{'active':activePage === 'new-services'}" (click)="goToState('new-services')">
-      Default Services
-    </div>
-    <div class="center-category__category" [ngClass]="{'active':activePage === 'new-billable'}" (click)="goToState('new-billable')">
-      Billable Items
-    </div>
-    <div class="center-category__category" [ngClass]="{'active':activePage === 'new-billable-invoices'}" (click)="goToState('new-billable-invoices')">
-      Invoices
-    </div>
-    <div class="center-category__category" [ngClass]="{'active':activePage === 'quotes-component'}" (click)="goToState('quotes-component')">
-      Quotes
-    </div>
-    <div class="center-category__category" [ngClass]="{'active':activePage === 'new-payments-ng2'}" (click)="goToState('new-payments-ng2')">
-      Payments
-    </div>
-    <div class="center-category__category" [ngClass]="{'active':activePage === 'new-contracts'}" (click)="goToState('new-contracts')">
-      Contracts
-    </div>
-  </div>
+<div
+    class="app-left-panel__menu"
+    [ngClass]="{'--active': open}"
+    (click)="open = !open;openPanel()"
+>
+    <div class="app-left-panel__menu-icon --billing"></div>
+    <div class="app-left-panel__menu-title">Billing</div>
+    <div class="app-left-panel__menu-arrow"></div>
 </div>
+<ul
+    class="app-left-panel__menu-expand top-menu"
+    [ngClass]="{'menu-expand-show': open, 'menu-expand-hide': !open}"
+>
+    <li
+        *ngIf="getPermissions('VIEW_ACCOUNTING_DASHBOARD')"
+        [ngClass]="{'--active':activePage === 'billing-dashboard'}"
+        (click)="goToState('billing-dashboard')"
+    >
+        Dashboard
+    </li>
+    <li
+        [ngClass]="{'--active':activePage === 'new-services'}"
+        (click)="goToState('new-services')"
+    >
+        Default Services
+    </li>
+    <li
+        [ngClass]="{'--active':activePage === 'new-billable'}"
+        (click)="goToState('new-billable')"
+    >
+        Billable Items
+    </li>
+    <li
+        [ngClass]="{'--active':activePage === 'new-billable-invoices'}"
+        (click)="goToState('new-billable-invoices')"
+    >
+        Invoices
+    </li>
+    <li
+        [ngClass]="{'--active':activePage === 'quotes-component'}"
+        (click)="goToState('quotes-component')"
+    >
+        Quotes
+    </li>
+    <li
+        [ngClass]="{'--active':activePage === 'new-payments-ng2'}"
+        (click)="goToState('new-payments-ng2')"
+    >
+        Payments
+    </li>
+    <li
+        [ngClass]="{'--active':activePage === 'new-contracts'}"
+        (click)="goToState('new-contracts')"
+    >
+        Contracts
+    </li>
+</ul>
