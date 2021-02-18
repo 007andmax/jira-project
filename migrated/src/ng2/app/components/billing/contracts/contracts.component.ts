@@ -15,7 +15,6 @@ export class ContractsComponent implements OnInit, OnDestroy {
   showPreview = false;
   showEdit = false;
   serviceAgreement: ServiceAgreement;
-  showNotificationReview: boolean = false;
   sub: Subscription = new Subscription();
   constructor(public contractsStateService: ContractsStateService,
     public leftPanelStateService: LeftPanelStateService,
@@ -26,10 +25,7 @@ export class ContractsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.leftPanelStateService.setBillingPage('new-contracts');
-    let getOnShowNotificationReview = this.contractsStateService.getOnShowNotificationReview().subscribe(data => {
-      this.showNotificationReview = true;
-    })
-    this.sub.add(getOnShowNotificationReview);
+
     let getOnToggleCreate = this.contractsStateService.getOnToggleCreate().subscribe(data => {
       this.showCreate = data;
       if (!this.cd['destroyed']) {
