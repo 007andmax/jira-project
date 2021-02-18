@@ -42,6 +42,11 @@
             >
 
 
+
+
+
+
+
                 <div class="item-phone">
                     <i
                         *ngIf="phone.typeNumber === 'FAX'"
@@ -92,6 +97,7 @@
                 ngbDropdownToggle
             ></i>
             <div
+                class="drop-down-users"
                 ngbDropdownMenu
                 aria-labelledby="dropdownBasic1"
             >
@@ -102,6 +108,14 @@
                 >
                     <i class="icn-16 edit-grey-ng2"></i>
                     Edit
+                </button>
+                <button
+                    ngbDropdownItem
+                    *ngIf="!user.isContact"
+                    (click)="resetPrimaryContact()"
+                >
+                    <i class="icn-16 icon__mark-as-master"></i>
+                    Set Primary Contact
                 </button>
                 <button
                     ngbDropdownItem

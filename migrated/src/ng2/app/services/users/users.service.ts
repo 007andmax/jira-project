@@ -46,8 +46,10 @@ export class UsersService {
   public getCurrentUser() {
     return this.http.get(this.apiUrl + 'users/current');
   }
-
-  public checkValidPrimaryEmail(email,companyId,idUser = null) {
+  public resetPrimaryContact(userId) {
+    return this.http.get(this.apiUrl + '/company/resetPrimaryContact?userId=' + userId);
+  }
+  public checkValidPrimaryEmail(email, companyId, idUser = null) {
     return this.http.get(this.apiUrl + 'users/isEmailUnique?email=' + email + '&id=' + idUser + '&isTechUser=false&companyId=' + companyId);
   }
 

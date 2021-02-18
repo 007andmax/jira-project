@@ -25,7 +25,8 @@ export class UsersTableComponent implements OnInit {
   @Input() showArchivedUsers: boolean;
   companies: Array<Company> = [];
   currentUser: CurrentUser = new CurrentUser();
-  constructor(private companiesStateService: CompaniesStateService, private usersService: UsersService,
+  constructor(private companiesStateService: CompaniesStateService,
+    private usersService: UsersService,
     private usersStateService: UsersStateService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
@@ -69,6 +70,11 @@ export class UsersTableComponent implements OnInit {
       return 'url(/users/default/image.jpg) 0% 0% / cover no-repeat';
     }
   };
+  resetPrimaryContact() {
+    this.usersService.resetPrimaryContact(this.user.id).subscribe(data => {
+
+    })
+  }
   edit() {
 
     this.usersStateService.setUserForEdit(this.user);
