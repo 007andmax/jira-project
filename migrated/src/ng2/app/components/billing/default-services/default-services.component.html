@@ -1,17 +1,17 @@
 <div class="qt-page-list default-services-page">
     <div class="qt-page-list__header --sticky">
         <div class="qt-page-list__header-title-line">
-          <div class="qt-page-list__header-title-line--left">
-              <h3 class="qt-page-list__header-title">Default Services</h3>
-          </div>
-          <div class="qt-page-list__header-title-line--rigth">
-              <button
-                  class="qt-btn --outline-blue"
-                  (click)="showCreateService = true"
-              >
-                  Create Service
-              </button>
-          </div>
+            <div class="qt-page-list__header-title-line--left">
+                <h3 class="qt-page-list__header-title">Default Services</h3>
+            </div>
+            <div class="qt-page-list__header-title-line--rigth">
+                <button
+                    class="qt-btn --outline-blue"
+                    (click)="onShowAddAside()"
+                >
+                    Create Service
+                </button>
+            </div>
         </div>
         <div class="qt-page-list__header-thead-container">
             <table class="qt-table-modern qt-page-list__header-thead">
@@ -95,27 +95,27 @@
         </div>
     </div>
     <div class="qt-page-list__body">
-      <div
-          class="qt-page-list__body-table-container --visible"
-          *ngIf="!showPreloader"
-      >
-          <table class="qt-page-list__body-tbody  qt-table-modern default-service-table">
-              <thead>
-                  <tr>
-                      <th class="default-service-table__contracts  qt-ff-sb">Contracts</th>
-                      <th class="default-service-table__rate"></th>
-                      <th class="default-service-table__taxes"></th>
-                      <th class="default-service-table__gl"></th>
-                      <th class="default-service-table__billable"></th>
-                      <th class="default-service-table__default"></th>
-                      <th class="default-service-table__menu"></th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <app-default-services-contracts [type]="'BLOCK_TIME'"></app-default-services-contracts>
-                  <app-default-services-contracts [type]="'USER_DEVICE'"></app-default-services-contracts>
-              </tbody>
-          </table>
-      </div>
+        <div
+            class="qt-page-list__body-table-container --visible"
+            *ngIf="!showPreloader"
+        >
+            <table class="qt-page-list__body-tbody  qt-table-modern default-service-table">
+                <thead>
+                    <tr>
+                        <th class="default-service-table__contracts  qt-ff-sb">Contracts</th>
+                        <th class="default-service-table__rate"></th>
+                        <th class="default-service-table__taxes"></th>
+                        <th class="default-service-table__gl"></th>
+                        <th class="default-service-table__billable"></th>
+                        <th class="default-service-table__default"></th>
+                        <th class="default-service-table__menu"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <app-default-services-contracts [type]="'BLOCK_TIME'"></app-default-services-contracts>
+                    <app-default-services-contracts [type]="'USER_DEVICE'"></app-default-services-contracts>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
