@@ -11,9 +11,7 @@
     var taxes = [],
       $serviceScope = $rootScope.$new();
 
-    $http.get('/taxes').then(function (resp) {
-      taxes = Utils.customizeArray(resp.data, taxes);
-    });
+
 
     RealTimeService.subscribe('/taxes', $serviceScope, function (newChange) {
       var action = newChange.action;
@@ -31,10 +29,7 @@
       $rootScope.$broadcast(action.toLowerCase() + '_original', taxById);
     });
 
-    function getAll(callback) {
-      callback && callback(taxes);
-      return taxes;
-    }
+
 
     function create(tax, callback) {
       var future = $http.post('/taxes', tax);
@@ -74,17 +69,17 @@
     }
 
     function findTaxById(taxId) {
-      if(taxId) {
+      if (taxId) {
         return Utils.findById(taxes, taxId);
       } else {
-       
+
       }
     }
 
     function findTaxesByIds(IdsArray) {
-      if(IdsArray && IdsArray.length && IdsArray.length > 0) {
+      if (IdsArray && IdsArray.length && IdsArray.length > 0) {
         var taxes = [];
-        IdsArray.forEach(function(id) {
+        IdsArray.forEach(function (id) {
           var tax = findTaxById(id);
           taxes.push(tax);
         });
@@ -93,7 +88,6 @@
     }
 
     return {
-      getAll: getAll,
       save: save,
       remove: remove,
       linkWithEntity: linkWithEntity,

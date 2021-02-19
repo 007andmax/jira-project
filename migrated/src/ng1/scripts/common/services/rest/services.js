@@ -8,9 +8,9 @@
 
   services.factory('ServicesService', ['$http', '$rootScope', 'RealTimeService', 'Utils', 'CompaniesService',
     function ($http, $rootScope, RealTimeService, Utils, CompaniesService) {
-    var  serviceScope = $rootScope.$new();
+      var serviceScope = $rootScope.$new();
 
-  
+
       function search(keyword) {
 
         if (!keyword) {
@@ -43,95 +43,10 @@
           });
         });
       }
-      function getServicesDataWithoutRealTime(scope, callback) {
 
-        if (!scope || !scope.$id) {
-          throw 'First argument must be Angularjs scope!'
-        }
 
-        var data = Utils.customizeObj({});
 
-        $http.get('/services/getDefaultServices').then(function (resp) {
 
-          for (var i = 0; i < resp.data.length; i++) {
-            addServiceData(data, resp.data[i])
-          }
-
-          if (callback) {
-            callback(resp.data);
-          }
-
-        }, function (resp) {
-          if (callback) {
-            callback(resp.data);
-          }
-        });
-
-        return data;
-      }
-      function getServicesData(scope, callback) {
-
-        if (!scope || !scope.$id) {
-          throw 'First argument must be Angularjs scope!'
-        }
-
-        var data = Utils.customizeObj({});
-
-        $http.get('/services/getDefaultServices').then(function (resp) {
-
-          for (var i = 0; i < resp.data.length; i++) {
-            addServiceData(data, resp.data[i])
-          }
-
-          if (callback) {
-            callback(resp.data);
-          }
-
-        }, function (resp) {
-          if (callback) {
-            callback(resp.data);
-          }
-        });
-
-        function serviceSaved(service) {
-          var oldService = findService(data, service.versionedId.id);
-
-          if (oldService) {
-            Utils.customizeObj(service, oldService);
-          } else {
-            addServiceData(data, service)
-          }
-        }
-
-        function serviceDeleted(serviceId, data) {
-
-          var index = Utils.indexOfId(data.default, serviceId);
-
-          if (index > -1) {
-            data.default.splice(index, 1);
-          }
-        }
-
-        RealTimeService.subscribe('/service', scope, function (newChange) {
-
-          if (newChange.action == 'SERVICE_SAVED') {
-            if (newChange.data.isDefault) {
-            
-              serviceSaved(newChange.data);
-             
-            }
-          } else if (newChange.action == 'SERVICE_DELETED') {
-            
-            serviceDeleted(newChange.data.versionedId.id, data);
-         
-          }
-
-        });
-
-        return data;
-      }
-
-      
 
       function addCompanyToServiceData(data, companyId) {
 
@@ -155,45 +70,14 @@
         delete data[companyId];
       }
 
-      function createGlNumber (data,callback) {
-       
 
-        var future = $http({
-          url: `/glNumber`,
-          method: 'POST',
-          data: data
-        });
-  
-        Utils.handleCallback(future, callback);
-        }
- 
-      function save(service, callback) {
 
-        if (!service) throw 'service is required!';
 
-        var url = '/services',
-          method = 'POST';
 
-        if (service.versionedId && service.versionedId.id) {
-          service.id = service.versionedId.id;
-          method = 'PUT';
-          url = url + '/' + service.versionedId.id;
-        }
 
-        var future = $http({
-          url: url,
-          method: method,
-          data: service
-        });
 
-        Utils.handleCallback(future, callback);
-      }
 
- 
-     
- 
 
- 
 
       function getActualMapping(data) {
         var actualMapping = {};
@@ -251,13 +135,10 @@
 
       }
 
-      function isNameUnique(name, modelId, callback) {
-        var future = $http.get('/services/isDefaultServiceNameUnique?name=' + name + (modelId ? '&id=' + modelId : ''));
-        Utils.handleCallback(future, callback);
-      }
 
-      function searchDuplicatedServiceNames(startDate, endDate, companyId, serviceNamesList,agreementId, callback) {
-      
+
+      function searchDuplicatedServiceNames(startDate, endDate, companyId, serviceNamesList, agreementId, callback) {
+
         var future = $http({
           method: 'POST',
           url: '/services/searchDuplicatedServiceNames?' + 'startDate=' + startDate + '&endDate=' + endDate + '&companyId=' + companyId + ((agreementId) ? '&agreementId=' + agreementId : ''),
@@ -265,17 +146,14 @@
         });
         Utils.handleCallback(future, callback);
       }
-      return {    
-        createGlNumber: createGlNumber,
+      return {
+
         getAllByCompany: getAllByCompany,
-        getServicesData: getServicesData,
-        save: save,
         addCompanyToServiceData: addCompanyToServiceData,
         deleteCompanyFromServiceData: deleteCompanyFromServiceData,
         getActualMapping: getActualMapping,
-        isNameUnique: isNameUnique,
         searchDuplicatedServiceNames: searchDuplicatedServiceNames,
-        getServicesDataWithoutRealTime: getServicesDataWithoutRealTime
+
       }
 
     }]);

@@ -9,6 +9,7 @@ import { ContractsComponent } from '../../billing/contracts/contracts.component'
 })
 export class CompanyContractsComponent extends ContractsComponent implements OnInit {
   companyContracts: Company = null;
+  showNotificationReview: boolean = false;
   ngOnInit() {
     this.leftPanelStateService.setCompanyPage("company-contracts");
     if (localStorage.getItem('company_id')) {

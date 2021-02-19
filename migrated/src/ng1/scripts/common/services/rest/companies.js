@@ -328,96 +328,9 @@
 
 
 
-    function getClientCompaniesInfo(scope, callback) {
 
-      if (!scope || !scope.$id) {
-        throw 'Second argument must be Angularjs scope!'
-      }
 
-      var info = Utils.customizeObj({});
 
-      $http.get('/company/clients/info').then(function (resp) {
-        Utils.customizeObj(resp.data, info);
-
-        if (callback) {
-          callback(resp.data);
-        }
-
-      }, function (resp) {
-        if (callback) {
-          callback(resp.data);
-        }
-      });
-
-      RealTimeService.subscribe('https://dev.quicktech.com/clientCompaniesInfo', scope, function (newChange) {
-
-        if (newChange.action == 'CLIENT_COMPANY_INFO') {
-
-          var data = JSON.parse(newChange.data);
-          for (var companyId in data) {
-            Utils.defineReadOnlyProperty(info, companyId, Utils.customizeObj(data[companyId]));
-            for (var i = 0; i < storage.companies.length; i++) {
-              if (storage.companies[i].id === companyId) {
-                storage.companies[i].companyInfo = {
-                  addresses: data[companyId].addresses,
-                  contacts: data[companyId].contacts,
-                  primaryAddress: data[companyId].primaryAddress
-                }
-              }
-            }
-            $rootScope.$broadcast('newCompanyInfo' + companyId);
-          }
-        }
-      });
-      return info;
-    }
-
-    function getCompanyData(scope, companyId, callback) {
-
-      if (!companyId) {
-        throw 'companyId is required!'
-      }
-
-      if (!scope || !scope.$id) {
-        throw 'Second argument must be Angularjs scope!'
-      }
-
-      var companyDto = Utils.customizeObj({});
-
-      $http.get('/company/' + companyId + '/data').then(function (resp) {
-        Utils.customizeObj(resp.data, companyDto);
-
-        if (callback) {
-          callback(companyDto);
-        }
-
-      }, function (resp) {
-        if (callback) {
-          callback(resp);
-        }
-      });
-
-      RealTimeService.subscribe('https://dev.quicktech.com/companyDto/' + companyId, scope, function (newChange) {
-
-        if (newChange.action == 'COMPANY_DTO_CHANGED') {
-
-          var data = JSON.parse(newChange.data);
-          if (data[companyId]) {
-            Utils.customizeObj(data[companyId], companyDto);
-          }
-        }
-      });
-
-      RealTimeService.subscribe('/user', serviceScope, function (newChange) {
-        if (newChange.action === 'USER_SAVED') {
-          if (newChange.data.id === companyDto.contacts[0].id) {
-            Utils.customizeObj(newChange.data, companyDto.contacts[0]);
-          }
-        }
-      });
-
-      return companyDto;
-    }
 
 
 
@@ -425,90 +338,11 @@
       return initialized;
     }
 
-    function save(company, callback) {
 
-      if (!company) throw 'company is required!';
 
-      var method = 'POST';
-      if (company.id) {
-        method = 'PUT';
-      }
 
-      var future = $http({
-        url: '/company',
-        method: method,
-        data: company
-      });
 
-      if (company.id) {
-        storage.clientCompanies.find(function (val) {
-          return val.id === company.id;
-        }).techLeadId = company.techLeadId;
-      }
 
-      if (!company.id && callback) {
-        future.then(function (resp) {
-          var companyId = resp.data.id;
-          if (!getOneById(companyId)) {
-            callbackForSavedCompanies[companyId] = callback;
-          } else {
-            callback(resp.data);
-          }
-        }, function (resp) {
-          callback(resp.data);
-        });
-      } else {
-        Utils.handleCallback(future, callback);
-      }
-    }
-
-    function isNameUnique(name, id, callback) {
-
-      if (!name) {
-        throw 'name is required!'
-      }
-
-      var info = Utils.customizeObj({});
-
-      $http.get('/company/isCompanyNameUnique', {
-        params: { name: name, id: id }
-      }).then(function (resp) {
-        Utils.customizeObj(resp.data, info);
-
-        if (callback) {
-          callback(resp.data);
-        }
-
-      }, function (resp) {
-        if (callback) {
-          callback(resp.data);
-        }
-      });
-      return info;
-    }
-
-    function isDomainUnique(domain, id, callback) {
-
-      if (!domain) {
-        throw 'domain is required!'
-      }
-
-      var info = Utils.customizeObj({});
-
-      $http.get('/company/isCompanyDomainUnique?domain=' + domain + '&id=' + id).then(function (resp) {
-        Utils.customizeObj(resp.data, info);
-
-        if (callback) {
-          callback(resp.data);
-        }
-
-      }, function (resp) {
-        if (callback) {
-          callback(resp.data);
-        }
-      });
-      return info;
-    }
 
 
 
@@ -564,17 +398,11 @@
       })
     }
 
-    function getIndustries(callback) {
-      var future = $http.get('/company/getIndustries');
-      Utils.handleCallback(future, callback);
-    }
 
 
 
-    function isVendorHasProducts(vendorId, callback) {
-      var future = $http.get('/company/' + vendorId + '/isProductExist');
-      Utils.handleCallback(future, callback);
-    }
+
+
 
 
 
@@ -598,15 +426,8 @@
       getUnassignedCompany: getUnassignedCompany,
       searchByAllCompanies: searchByAllCompanies,
       searchByClientCompanies: searchByClientCompanies,
-      getClientCompaniesInfo: getClientCompaniesInfo,
-      save: save,
-      getCompanyData: getCompanyData,
-      isNameUnique: isNameUnique,
-      isDomainUnique: isDomainUnique,
       saveLogo: saveLogo,
       deleteLogo: deleteLogo,
-      getIndustries: getIndustries,
-      isVendorHasProducts: isVendorHasProducts,
       checkStorageCompanyLength: checkStorageCompanyLength,
       sendEmail: sendEmail,
       updateCompanyTags: updateCompanyTags

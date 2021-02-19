@@ -59,7 +59,7 @@
         throw 'ticketId is required!';
       }
 
-      ticketTags.forEach(function(el) {
+      ticketTags.forEach(function (el) {
         if (!el.id) {
           $rootScope.newTagHasCreated = true;
         }
@@ -74,28 +74,12 @@
       Utils.handleCallback(future, callback);
     }
 
-    function setTagsInCompany(tags, companyId, callback) {
-      if (!tags || !Array.isArray(tags)) {
-        throw 'tags is required and must be array!';
-      }
 
-      if (!companyId) {
-        throw 'companyId is required!';
-      }
-
-      var future = $http({
-        url: '/company/tags?companyId=' + companyId,
-        method: 'PUT',
-        data: tags
-      });
-
-      Utils.handleCallback(future, callback);
-    }
 
 
     function getAllCompanies(scope, callback) {
       $http.get('/company/tags/getAll')
-        .then(function(response) {
+        .then(function (response) {
           if (callback) {
             callback(response);
           }
@@ -114,7 +98,7 @@
           });
 
           RealTimeService.subscribe('/companyTags', scope, function (newChange) {
-          
+
 
             if (newChange.action === "TAG_COMPANY_SAVED") {
               if (newChange.data.tags) {
@@ -132,8 +116,8 @@
     }
 
     function filterCompanies(tags, callback) {
-      $http.post('/company/clientsByTags', tags.map(function(el) { return el.id }))
-        .then(function(res) {
+      $http.post('/company/clientsByTags', tags.map(function (el) { return el.id }))
+        .then(function (res) {
           if (callback) {
             callback(res);
           }
@@ -191,12 +175,12 @@
       return tags;
     }
 
-   
-   
 
-    
 
-   
+
+
+
+
     function removeAndReplace(tagIdForDelete, tagIdForReplace, callback) {
       if (!tagIdForDelete) {
         throw 'Tag id for delete required!';
@@ -236,7 +220,7 @@
         throw 'Tag word is required!';
       }
 
-      $http.post('/company/tags', newTag).then(function(res) {
+      $http.post('/company/tags', newTag).then(function (res) {
         if (callback) {
           callback(res);
 
@@ -248,7 +232,6 @@
     return {
       search: search,
       setTagsInTicket: setTagsInTicket,
-      setTagsInCompany: setTagsInCompany,
       getAll: getAll,
       getAllCompanies: getAllCompanies,
       saveForCompany: saveForCompany,
