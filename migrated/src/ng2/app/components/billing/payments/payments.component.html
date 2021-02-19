@@ -1,56 +1,43 @@
-<div class="payments-page page-list invoices-page">
-
-
-
-    <div class="qt-df qt-fd-c qt-jc-sb invoices-page__list-container">
-        <div>
-            <app-payments-header
-                (onCreatePayment)="onCreatePayment()"
-                (onSortBy)="sortBy($event)"
-            ></app-payments-header>
-            <div class="table-container">
-                <table class="qt-table-modern billable-table">
-                    <tbody
-                        infiniteScroll
-                        [infiniteScrollDistance]="2"
-                        [infiniteScrollThrottle]="50"
-                        [infiniteScrollDisabled]="infiniteScrollDisabled"
-                        (scrolled)="onScroll()"
+<div class="qt-page-list payments-page invoices-page">
+    <app-payments-header
+        (onCreatePayment)="onCreatePayment()"
+        (onSortBy)="sortBy($event)"
+    ></app-payments-header>
+    <div class="qt-page-list__body">
+        <div class="qt-page-list__body-table-container">
+            <table class="qt-page-list__body-tbody qt-table-modern billable-table">
+                <tbody
+                    infiniteScroll
+                    [infiniteScrollDistance]="2"
+                    [infiniteScrollThrottle]="50"
+                    [infiniteScrollDisabled]="infiniteScrollDisabled"
+                    (scrolled)="onScroll()"
+                >
+                    <ng-template
+                        ngFor
+                        let-payment
+                        [ngForOf]="payments"
+                        [ngForTrackBy]="trackById"
                     >
-                        <ng-template
-                            ngFor
-                            let-payment
-                            [ngForOf]="payments"
-                            [ngForTrackBy]="trackById"
-                        >
-                            <app-payment-item
-                                (onRefundPayment)="onRefundPayment($event)"
-                                (onEditPayment)="onEditPayment($event)"
-                                (onPreviewInvoice)="onPreviewInvoice($event)"
-                                (onDetailsPayment)="onDetailsPayment($event)"
-                                [payment]="payment"
-                            ></app-payment-item>
-                        </ng-template>
-                    </tbody>
-                </table>
-                <div
-                    class="loading"
-                    *ngIf="showPreloader"
-                ></div>
-            </div>
-        </div>
-
-
-
-        <div class="total-info">
+                        <app-payment-item
+                            (onRefundPayment)="onRefundPayment($event)"
+                            (onEditPayment)="onEditPayment($event)"
+                            (onPreviewInvoice)="onPreviewInvoice($event)"
+                            (onDetailsPayment)="onDetailsPayment($event)"
+                            [payment]="payment"
+                        ></app-payment-item>
+                    </ng-template>
+                </tbody>
+            </table>
+            <div
+                class="loading"
+                *ngIf="showPreloader"
+            ></div>
             <div
                 class="loading pengind-loading"
                 *ngIf="showPendingPreloader"
             ></div>
         </div>
-
-
-
     </div>
 </div>
 <app-refund-payment

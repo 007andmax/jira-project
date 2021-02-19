@@ -1208,7 +1208,7 @@ hr {
   right: 25px;
   position: fixed;
   width: calc(100% - 366px);
-  top: $header-height;
+  top: 64px;
   z-index: 2;
 }
 

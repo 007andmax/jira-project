@@ -29,6 +29,8 @@ export class AppComponent implements OnInit {
   isUsersInit: boolean = false;
   isCompaniesInit: boolean = false;
   isDevicesInit: boolean = false;
+  qtListHeaaderScroller;
+  qtListBodyScroller;
   toggleLeftPanel: boolean = false;
 
   /**
@@ -94,7 +96,23 @@ export class AppComponent implements OnInit {
       this.cd.detectChanges();
     })
   }
+  ngDoCheck() {
+    this.qtListHeaaderScroller = document.querySelector('.qt-page-list__header-thead-container');
+    this.qtListBodyScroller = document.querySelector('.qt-page-list__body-table-container');
+    if (this.qtListHeaaderScroller && this.qtListBodyScroller) {
+      this.qtListHeaaderScroller.removeEventListener('scroll', this.qtListHeaaderScrollerScroll, false);
+      this.qtListBodyScroller.removeEventListener('scroll', this.qtListBodyScrollerScroll, false);
 
+      this.qtListHeaaderScroller.addEventListener('scroll', this.qtListHeaaderScrollerScroll, false);
+      this.qtListBodyScroller.addEventListener('scroll', this.qtListBodyScrollerScroll, false);
+    }
+  }
+  qtListHeaaderScrollerScroll = () => {
+    this.qtListBodyScroller.scrollLeft = this.qtListHeaaderScroller.scrollLeft;
+  }
+  qtListBodyScrollerScroll = () => {
+    this.qtListHeaaderScroller.scrollLeft = this.qtListBodyScroller.scrollLeft;
+  }
   private onCheckInitAll() {
     if (this.isCompaniesInit && this.isUsersInit && !this.appService.getIsInit()) {
       this.appService.onInit();

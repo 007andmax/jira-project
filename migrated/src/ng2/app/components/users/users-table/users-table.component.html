@@ -1,147 +1,150 @@
-<div class="new-users-content__list--item clearfix">
-    <div class="col-md-3 w-100">
-        <label class="checkbox-container">
-            <input
-                type="checkbox"
-                (change)="onSelectUser($event)"
+<tr>
+    <td class="users-table__check">
+        <div class="d-f">
+            <label
+                class="qt-checkbox"
+                [attr.for]="'user-' + user.id"
             >
-            <span class="checkbox-mark"></span>
-        </label>
-        <!-- [ngStyle]="{'background': 'url(' + getUserAvatarUrl(user) + ') no-repeat','background-size': 'contain'}" -->
-        <div
-            class="user-details"
-            (click)="showUserDetails()"
-        >
+                <input
+                    [attr.id]="'user-' + user.id"
+                    [(ngModel)]="user.selected"
+                    type="checkbox"
+                    (change)="onSelectUser($event)"
+                >
+                <span></span>
+            </label>
+        </div>
+    </td>
+    <td class="users-table__name">
+        <div class="qt-df qt-ai-c">
             <div
-                class="circle-avatar"
+                class="users-table__name--avatar"
                 [ngStyle]="{'background':  getUserAvatarUrl()}"
                 [textContent]="getNameForAvatar()"
-            >
-            </div>
-            <div class="mob-styles contact">
-                <p
-                    class="ff-g-m fz-13 fw-500"
-                    [textContent]="getUserName()"
-                ></p>
-                <p
-                    class="fz-12 mob-hidden"
-                    [textContent]="user.designation"
-                ></p>
-                <p class="fz-12 desktop-hidden">{{getUserCompanyName()}}</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4 company-location w-100 fz-13">{{getUserCompanyName()}}</div>
-    <div class="col-md-4 w-100 fz-13 info">
-        <div class="phones-numbers">
-            <ng-template
-                ngFor
-                let-phone
-                [ngForOf]="user.phoneNumbers"
-                [ngForTrackBy]="trackById"
-            >
-
-
-
-
-
-
-
-
-                <div class="item-phone">
-                    <i
-                        *ngIf="phone.typeNumber === 'FAX'"
-                        class="icn-16 fax-icn"
-                    ></i>
-                    <i
-                        *ngIf="phone.typeNumber === 'MOBILE'"
-                        class="icn-16 mobile-phone-icn"
-                    ></i>
-                    <i
-                        *ngIf="phone.typeNumber === 'OFFICE'"
-                        class="icn-16 office-phone-icn"
-                    ></i>
-                    {{phone.number}}
-                </div>
-            </ng-template>
-            <div
-                class="fz-13 desktop-hidden"
-                [textContent]="user.userStatistic.ticketsSubmitted || 0"
             ></div>
+            <div>
+                <div
+                    class="users-table__name--user-name"
+                    [textContent]="getUserName()"
+                ></div>
+                <div
+                    class="users-table__name--profession"
+                    [textContent]="user.designation"
+                ></div>
+            </div>
         </div>
-    </div>
-    <div class="col-md-12 position desktop-hidden">
-        <p
-            class="fz-12"
-            [textContent]="user.designation"
-        ></p>
-    </div>
-    <div class="col-md-4 subs">
-        <div class="desktop-hidden">Subscription</div>
+    </td>
+    <td
+        class="users-table__company"
+        *ngIf="type === TYPE_LIST_ALL_USERS"
+    >
+        <span>{{ getUserCompanyName() }}</span>
+    </td>
+    <td
+        class="users-table__company"
+        *ngIf="type === TYPE_LIST_COMPANY_USERS"
+    >
+        <span>{{ user.primaryEmail }}</span>
+    </td>
+    <td class="users-table__contract-no">
+        <ng-template
+            ngFor
+            let-phone
+            [ngForOf]="user.phoneNumbers"
+            [ngForTrackBy]="trackById"
+        >
+            <div class="qt-df qt-ai-c">
+                <div>
+                    <div
+                        *ngIf="phone.typeNumber === 'FAX'"
+                        class="qt-sz-16 qt-mr-6 icon__office-phone-gray"
+                    ></div>
+                    <div
+                        *ngIf="phone.typeNumber === 'MOBILE' || phone.typeNumber === 'OFFICE'"
+                        class="qt-sz-16 qt-mr-6 icon__phone-gray"
+                    ></div>
+                </div>
+                <div class="users-table__contract-no--number">{{phone.number}}</div>
+            </div>
+        </ng-template>
+    </td>
+    <td class="users-table__subscription">
         <app-user-table-subscription
+            class="users-table__subscription--dropdown"
             (onChange)="onChangeSubscriptions($event)"
             [subscription]="user.subscription"
-        ></app-user-table-subscription>
-    </div>
-    <div
-        class="col-md-1 fz-13 jc-c mob-hidden"
-        [textContent]="user.userStatistic.ticketsSubmitted || 0"
-    ></div>
-    <div class="col-md-2">
-        <div
-            class="grey-dropdown right with-icons"
-            ngbDropdown
         >
-            <i
-                class="icn-16 more-vertical-ng2 pointer"
+        </app-user-table-subscription>
+    </td>
+    <td
+        class="users-table__tickets"
+        [textContent]="user.userStatistic.ticketsSubmitted || 0"
+    ></td>
+    <td class="users-table__email">
+        <app-dynamic-tooltip
+            [content]="'Draft Email'"
+            [position]="'top'"
+            #draftEmailTooltip
+        ></app-dynamic-tooltip>
+        <div
+            class="icon__email-dark qt-sz-16 pointer"
+            *ngIf="!showArchivedUsers"
+            (click)="showAsideForDraftEmail()"
+            (mouseenter)="draftEmailTooltip.show($event.target)"
+            (mouseleave)="draftEmailTooltip.hide()"
+        ></div>
+    </td>
+    <td class="users-table__menu">
+        <div
+            ngbDropdown
+            [container]="'body'"
+            [placement]="'bottom-right'"
+        >
+            <div
+                class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"
                 id="dropdownBasic1"
                 ngbDropdownToggle
-            ></i>
-            <div
-                class="drop-down-users"
+            ></div>
+            <ul
+                class="qt-dropdown-menu"
                 ngbDropdownMenu
                 aria-labelledby="dropdownBasic1"
             >
-                <button
-                    ngbDropdownItem
+                <li
+                    class="pointer"
                     *ngIf="!showArchivedUsers"
                     (click)="edit()"
-                >
-                    <i class="icn-16 edit-grey-ng2"></i>
-                    Edit
-                </button>
-                <button
                     ngbDropdownItem
+                >
+                    <div class="icon__edit qt-bg-contain  qt-sz-16 qt-mr-8"></div>
+                    Edit
+                </li>
+                <li
+                    class="pointer"
                     *ngIf="!user.isContact"
                     (click)="resetPrimaryContact()"
+                    ngbDropdownItem
                 >
-                    <i class="icn-16 icon__mark-as-master"></i>
+                    <div class="icon__mark-as-master qt-bg-contain  qt-sz-16 qt-mr-8"></div>
                     Set as Primary contact
-                </button>
-                <button
-                    ngbDropdownItem
-                    *ngIf="!showArchivedUsers"
-                >
-                    <i class="icn-16 send-grey-ng2"></i>
-                    Send
-                </button>
-                <button
-                    ngbDropdownItem
+                </li>
+                <li
+                    class="pointer"
                     *ngIf="currentUser && currentUser.checkPermission('ARCHIVE_USERS') && !showArchivedUsers"
                     (click)="delete()"
                 >
-                    <i class="icn-16 archive-grey-ng2"></i>
-                    Delete
-                </button>
-                <button
-                    ngbDropdownItem
+                    <div class="icon__remove qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                    Archive
+                </li>
+                <li
+                    class="pointer"
                     *ngIf="currentUser && currentUser.checkPermission('ARCHIVE_USERS') && showArchivedUsers"
                     (click)="restore()"
                 >
-                    <i class="icn-16 archive-grey-ng2"></i>
+                    <div class="archive-grey-ng2 qt-bg-contain qt-sz-16 qt-mr-8"></div>
                     Restore
-                </button>
-            </div>
+                </li>
+            </ul>
         </div>
-    </div>
-</div>
+    </td>
+</tr>

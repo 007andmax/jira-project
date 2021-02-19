@@ -1,3 +1,59 @@
+.qt-aside-modern {
+  color: #4f5f79;
+  background: white;
+  width: 592px;;
+  position: absolute;
+  border-left: 1px solid #dfe3e8;
+  height: 100%;
+  right: 0;
+  box-shadow: -8px 0 8px 0 rgba(0, 0, 0, 0.05);
+  position: fixed;
+  top: $header-height;
+  right: 0;
+  height: calc(100vh - #{$header-height});
+  z-index: 5;
+
+  &__header {
+    height: 56px;
+    background-color: #f9fafb;
+    border-bottom: 1px solid #dfe3e8;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 32px;
+    padding-right: 16px;
+  }
+
+  &__header-title {
+    font-size: 20px;
+    font-family: Graphik-Medium, sans-serif;
+    color: #364656;
+  }
+
+  &__header-close {
+    height: 24px;
+    width: 24px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+  }
+
+  &__content {
+    padding: 24px 32px;
+    overflow: auto;
+    height: calc(100% - 127px);
+  }
+
+  &__footer {
+    padding: 16px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+
 .qt-aside {
   .ng-sidebar {
     width: 592px;

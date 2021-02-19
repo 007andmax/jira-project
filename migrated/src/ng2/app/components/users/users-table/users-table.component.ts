@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { User } from '../class/user';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { Company } from 'src/ng2/app/interfaces/company/company';
@@ -13,6 +13,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlertComponent } from '../../shared/alert/alert.component';
 import { UsersTableService } from './services/users-table.service';
 import { DraftEmailStateService } from 'src/ng2/app/states/draft-email/draft-email-state.service';
+import { USERS } from 'src/ng2/app/const/emails';
+import { TYPE_LIST_ALL_USERS, TYPE_LIST_COMPANY_USERS } from 'src/ng2/app/const/users';
 
 @Component({
   selector: 'app-users-table',
@@ -22,9 +24,12 @@ import { DraftEmailStateService } from 'src/ng2/app/states/draft-email/draft-ema
 })
 export class UsersTableComponent implements OnInit {
   @Input() user: User;
+  @Input() type: string;
   @Input() showArchivedUsers: boolean;
   companies: Array<Company> = [];
   currentUser: CurrentUser = new CurrentUser();
+  TYPE_LIST_ALL_USERS = TYPE_LIST_ALL_USERS;
+  TYPE_LIST_COMPANY_USERS = TYPE_LIST_COMPANY_USERS;
   constructor(private companiesStateService: CompaniesStateService,
     private usersService: UsersService,
     private usersStateService: UsersStateService,
@@ -32,6 +37,7 @@ export class UsersTableComponent implements OnInit {
     private modalService: NgbModal,
     private draftEmailStateService: DraftEmailStateService,
     private usersTableService: UsersTableService,
+    public cd: ChangeDetectorRef,
     private elRef: ElementRef) { }
 
   onChangeSubscriptions(data) {
@@ -76,7 +82,6 @@ export class UsersTableComponent implements OnInit {
     })
   }
   edit() {
-
     this.usersStateService.setUserForEdit(this.user);
     this.usersStateService.onOpenEditAsige();
   }
@@ -128,7 +133,13 @@ export class UsersTableComponent implements OnInit {
       let index = list.findIndex(item => item.id === this.user.id);
       if (index > -1) this.draftEmailStateService.removeSelectedUser(index);
     }
-
+    this.cd.detectChanges();
+  }
+  public showAsideForDraftEmail() {
+    this.draftEmailStateService.setAction(USERS);
+    this.draftEmailStateService.resetSelectedUsers();
+    this.draftEmailStateService.addSelectedUser(this.user);
+    this.draftEmailStateService.toggleAsideForAdd();
   }
   public trackById(index, item) {
     return item.id;

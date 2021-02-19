@@ -1,4 +1,4 @@
-<tr [ngClass]="{'selected-ticket': selected}">
+<tr [ngClass]="{'--selected': selected}">
   <td class="ticket-table__requested-by">
     <div class="d-f ai-c h100">
        <div class="qt-table-modern__circle-avatar" [ngClass]="!getNameForAvatar().length ? 'transparent-text' : ''" [textContent]="getNameForAvatar()"

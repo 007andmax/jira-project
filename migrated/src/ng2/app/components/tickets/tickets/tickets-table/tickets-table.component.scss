@@ -1,8 +1,4 @@
 /deep/ .ticket-table {
-  max-width: 1320px;
-  min-width: 1064px;
-  width: auto;
-  margin: 0 auto;
 
 
   th {
@@ -14,33 +10,15 @@
     text-overflow: ellipsis;
   }
 }
-.table-container {
-  overflow-x: auto;
-  min-height: calc(100vh - 165px);
-}
 
 .priority-icon {
   margin-left: 8px;
 }
 
 app-tickets-table-item {
- 
   display: contents;
-  
 }
 
-
-@media (min-width: 1920px) {
-  /deep/ .ticket-table {
-    width: 100%;
-    max-width: 100%;
-  }
-  .table-container {
-    width: 85%;
-    max-width: 85%;
-    margin: 0 auto;
-  }
-}
 
 
 .pengind-loading {

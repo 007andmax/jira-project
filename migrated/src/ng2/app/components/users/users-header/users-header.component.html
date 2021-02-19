@@ -1,25 +1,126 @@
-<div class="new-users-content__header">
-  <h3>Users ({{count}})</h3>
-  <div class="new-users-content__header--search">
-    <!--add class "show" to <div class="new-users-selected">-->
-    <div class="new-users-selected">
-      <div class="new-users-selected-qty">
-        <span>2</span> Selected
-      </div>
-      <div class="new-users-selected-actions">
-        <i class="icn-16 email-ng2"></i>
-        <i class="icn-16 archive-blue-ng2"></i>
-        <i class="icn-16 export-ng2"></i>
-      </div>
+<div class="qt-page-list__header --sticky">
+    <div class="qt-page-list__header-title-line">
+        <div class="qt-page-list__header-title-line--left">
+            <h3
+                class="qt-page-list__header-title"
+                [textContent]="'All Users (' + count + ')'"
+            ></h3>
+        </div>
+        <div class="qt-page-list__header-title-line--rigth">
+            <div class="qt-df qt-ai-c">
+                <button
+                    class="qt-btn --transparent"
+                    (click)="clearAll()"
+                    *ngIf="countFilter > 0"
+                >
+                    Clear all
+                </button>
+                <div
+                    class="company-devices-page__list-header-buttons"
+                    *ngIf="getSelectedCount() > 0"
+                >
+                    <div [textContent]="getSelectedCount() + ' Users Selected'"></div>
+                    <div
+                        class="qt-ml-25 qt-ff-gm qt-df qt-color-info qt-ai-c qt-pointer"
+                        *ngIf="!isExistArchiveUser()"
+                        (click)="showAsideForDraftEmail()"
+                    >
+                        <div class="email-ng2 qt-sz-16 qt-ic-c qt-mr-6"></div>
+                        <div>Write Draft</div>
+                    </div>
+                    <div
+                        class="qt-ml-16 qt-ff-gm qt-df qt-color-info qt-ai-c qt-pointer"
+                        *ngIf="!isExistArchiveUser() && !isExistPrimaryContact() && currentUser && currentUser.checkPermission('ARCHIVE_USERS')"
+                        (click)="delete()"
+                    >
+                        <div class="archive-blue-ng2 qt-sz-16 qt-ic-c qt-mr-6"></div>
+                        <div>Archive User</div>
+                    </div>
+                </div>
+                <button
+                    class="qt-btn btn-filter qt-ml-8 d-f"
+                    [ngClass]="{'active':!toggleFilter}"
+                    (click)="toggleFilter  = !toggleFilter"
+                >
+                    <span
+                        class="filter-counter qt-circle qt-sz-18 qt-ff-sb qt-fs-10 qt-color-white qt-bg-info qt-mr-8 qt-df qt-ai-c qt-jc-c"
+                        *ngIf="countFilter > 0"
+                        [textContent]="countFilter"
+                    ></span>
+                    Filters
+                </button>
+                <!-- add class 'active' if filters open -->
+                <button
+                    class="qt-btn --outline-blue qt-ml-8"
+                    (click)="addUser()"
+                >
+                    Add user
+                </button>
+            </div>
+        </div>
     </div>
-    <i class="icn-16 email-ng2"
-    uib-tooltip="Draft email"
-    tooltip-placement="top"
-    (click)="showAsideForDraftEmail()"></i>
-    <button class="new-link desktop-hidden" style="font-size: 13px;" (click)="addUser()">Add User
-    </button>
-    <button class="btn-new btn-primary-white mob-hidden" (click)="addUser()">
-      Add User
-    </button>
-  </div>
+    <app-users-filter
+        #filter
+        (changeCountFilter)="onChangeCountFilter($event)"
+        [hidden]="toggleFilter"
+    ></app-users-filter>
+    <div class="qt-page-list__header-thead-container">
+        <table class="qt-table-modern qt-page-list__header-thead">
+            <thead>
+                <tr>
+                    <th class="users-table__check">
+                        <div class="d-f">
+                            <label class="qt-checkbox">
+                                <input
+                                    (change)="toggleAllUser($event)"
+                                    type="checkbox"
+                                >
+                                <span></span>
+                            </label>
+                        </div>
+                    </th>
+                    <th
+                        class="users-table__name pointer"
+                        (click)="onFilter('name')"
+                    >
+                        Name
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th
+                        class="users-table__company pointer"
+                        (click)="onFilter('company')"
+                        *ngIf="type === TYPE_LIST_ALL_USERS"
+                    >
+                        Company
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th
+                        class="users-table__company pointer"
+                        (click)="onFilter('primaryEmail')"
+                        *ngIf="type === TYPE_LIST_COMPANY_USERS"
+                    >
+                        Email
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th
+                        class="users-table__contract-no pointer"
+                        (click)="onFilter('contact')"
+                    >
+                        Contract no
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th class="users-table__subscription">Subscription</th>
+                    <th
+                        class="users-table__tickets pointer"
+                        (click)="onFilter('tickets')"
+                    >
+                        Tickets
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th class="users-table__email"></th>
+                    <th class="users-table__menu"></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
 </div>

@@ -1,49 +1,41 @@
-<div class="page-list quotes-page">
-    <div class="qt-df qt-fd-c qt-jc-sb quotes-page__list-container">
-        <div>
-            <app-quotes-header (onSortBy)="sortBy($event)"></app-quotes-header>
-            <div
-                class="table-container"
-                *ngIf="!showPreloader"
-            >
-                <table class="qt-table-modern quotes-table">
-                    <tbody
-                        infiniteScroll
-                        [infiniteScrollDistance]="2"
-                        [infiniteScrollThrottle]="50"
-                        [infiniteScrollDisabled]="infiniteScrollDisabled"
-                        (scrolled)="onScroll()"
-                    >
-                        <ng-template
-                            ngFor
-                            let-quote
-                            [ngForOf]="quotes"
-                            [ngForTrackBy]="trackById"
-                        >
-                            <app-quotes-item
-                                [quote]="quote"
-                                (onResend)="resend($event)"
-                                (onConvertToInvoice)="convertToInvoice($event)"
-                                (onConvertToTicket)="convertToTicket($event)"
-                                (onApproveQuote)="approveQuote($event)"
-                                (onMarkAsRead)="markAsRead($event)"
-                                (onCancelQuote)="cancelQuote($event)"
-                                (onArchiveQuote)="archiveQuote($event)"
-                                (onGoToQuoteEdit)="goToQuoteEdit($event)"
-                                (onDownloadPdf)="downloadPdf($event)"
-                                (onCopy)="copy($event)"
-                                (onPreview)="preview($event)"
-                                (onTicket)="openTikcet($event)"
-                                (onInvoice)="onInvoice($event)"
-                            ></app-quotes-item>
-                        </ng-template>
-                    </tbody>
-                </table>
-            </div>
-            <div
-                class="loading"
-                *ngIf="showPreloader"
-            ></div>
-        </div>
+<div class="qt-page-list quotes-page">
+  <app-quotes-header (onSortBy)="sortBy($event)"></app-quotes-header>
+  <div class="qt-page-list__body">
+    <div class="qt-page-list__body-table-container" *ngIf="!showPreloader">
+      <table class="qt-page-list__body-tbody qt-table-modern quotes-table">
+        <tbody
+          infiniteScroll
+          [infiniteScrollDistance]="2"
+          [infiniteScrollThrottle]="50"
+          [infiniteScrollDisabled]="infiniteScrollDisabled"
+          (scrolled)="onScroll()"
+        >
+          <ng-template
+            ngFor
+            let-quote
+            [ngForOf]="quotes"
+            [ngForTrackBy]="trackById"
+          >
+            <app-quotes-item
+              [quote]="quote"
+              (onResend)="resend($event)"
+              (onConvertToInvoice)="convertToInvoice($event)"
+              (onConvertToTicket)="convertToTicket($event)"
+              (onApproveQuote)="approveQuote($event)"
+              (onMarkAsRead)="markAsRead($event)"
+              (onCancelQuote)="cancelQuote($event)"
+              (onArchiveQuote)="archiveQuote($event)"
+              (onGoToQuoteEdit)="goToQuoteEdit($event)"
+              (onDownloadPdf)="downloadPdf($event)"
+              (onCopy)="copy($event)"
+              (onPreview)="preview($event)"
+              (onTicket)="openTikcet($event)"
+              (onInvoice)="onInvoice($event)"
+            ></app-quotes-item>
+          </ng-template>
+        </tbody>
+      </table>
+      <div class="loading" *ngIf="showPreloader"></div>
     </div>
+  </div>
 </div>

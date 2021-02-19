@@ -1,0 +1,30 @@
+<div class="qt-page-list__header-filters">
+    <app-drop-down
+        #titlesDp
+        class="qt-w100 qt-mr-8"
+        [placeholder]="'Select Title'"
+        [list]="allTitles"
+        [search]="true"
+        [change]="true"
+        (onSelectedItem)="onSelectTitle($event)"
+    ></app-drop-down>
+    <app-drop-down
+        #companiesDp
+        class="qt-w100 qt-mr-8"
+        [placeholder]="'Search By Company'"
+        [field]="'name'"
+        [list]="companies"
+        [search]="true"
+        [change]="true"
+        (onSelectedItem)="onSelectCompany($event)"
+    ></app-drop-down>
+    <app-drop-down
+        #industriesDp
+        class="qt-w100"
+        [placeholder]="'Search By Industry'"
+        [list]="industries"
+        [search]="true"
+        [change]="true"
+        (onSelectedItem)="onSelectClientIndustry($event)"
+    ></app-drop-down>
+</div>

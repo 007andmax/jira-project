@@ -6,11 +6,12 @@ import { UserFilter } from './class/user-filter';
 import { CompaniesStateService } from '../../states/company/companies-state.service';
 import { Company } from '../../interfaces/company/company';
 import { ConfirmStateService } from '../shared/confirm/services/confirm-state.service';
-import { ARCHIVE_USER, DEARCHIVE_USER } from '../../const/confirm';
+import { ARCHIVE_USER, ARCHIVE_USERS, DEARCHIVE_USER } from '../../const/confirm';
 import { UsersService } from '../../services/users/users.service';
 import { UserChange } from './class/user-change';
 import { WebsocketService } from '../../services/websocket/websocket.service';
 import { DraftEmailStateService } from '../../states/draft-email/draft-email-state.service';
+import { TYPE_LIST_ALL_USERS } from '../../const/users';
 
 @Component({
   selector: 'app-users',
@@ -28,6 +29,7 @@ export class UsersComponent implements OnInit {
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
   count: number = 0;
+  TYPE_LIST_ALL_USERS = TYPE_LIST_ALL_USERS;
   constructor(private usersStateService: UsersStateService,
     private userListService: UserListService,
     private companiesStateService: CompaniesStateService,
@@ -56,8 +58,6 @@ export class UsersComponent implements OnInit {
       this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title);
       this.setDefaultScoll();
       this.onScroll();
-      //   this.onInirCalculate();
-
     })
     this.userListService.addSubscription(geLefttFilter);
 
@@ -81,7 +81,9 @@ export class UsersComponent implements OnInit {
         if (this.confirmStateService.getConfirmAction() === DEARCHIVE_USER) {
           this.onDeArchiveUser(this.usersStateService.getUserForDeArchive().id);
         }
-
+        if (this.confirmStateService.getConfirmAction() === ARCHIVE_USERS) {
+          this.onArchiveUsers(this.usersStateService.getUsersForArchive().map(item => item.id));
+        }
       }
     })
     this.userListService.addSubscription(getConfirm);
@@ -132,6 +134,17 @@ export class UsersComponent implements OnInit {
     this.userListService.addSubscription(getChangeCompanies);
     this.onInitSubscribe();
   }
+  private onArchiveUsers(ids) {
+
+    let archiveUser = this.usersService.onArchiveUsers(ids).subscribe(data => {
+      /* if (!this.showArchivedUsers && this.filter.getClientType()) {
+         let index = this.users.findIndex(item => item.id === id);
+         if (index > -1) this.users.splice(index, 1);
+       }*/
+
+    })
+    this.userListService.addSubscription(archiveUser);
+  }
   showMobileFilter() {
     document.body.querySelector('app-left-panel-users').classList.add('show');
   }
@@ -155,22 +168,28 @@ export class UsersComponent implements OnInit {
   }
   onSelectAllUser(event) {
     if (event.target.checked) {
-      let list_user_table = document.body.querySelectorAll('app-users-table');
-      list_user_table.forEach(item => {
-        (<any>item.querySelector('input[type="checkbox"]')).checked = true;
-
-      });
+      this.users.forEach(item => {
+        item.selected = true;
+      })
+      /* let list_user_table = document.body.querySelectorAll('app-users-table');
+       list_user_table.forEach(item => {
+         (<any>item.querySelector('input[type="checkbox"]')).checked = true;
+ 
+       });*/
       this.draftEmailStateService.resetSelectedUsers();
       this.users.forEach(user => {
         this.draftEmailStateService.addSelectedUser(user);
       })
     } else {
+      this.users.forEach(item => {
+        item.selected = false;
+      })
       this.draftEmailStateService.resetSelectedUsers();
-      let list_user_table = document.body.querySelectorAll('app-users-table');
-      list_user_table.forEach(item => {
-        (<any>item.querySelector('input[type="checkbox"]')).checked = false;
-
-      });
+      /* let list_user_table = document.body.querySelectorAll('app-users-table');
+       list_user_table.forEach(item => {
+         (<any>item.querySelector('input[type="checkbox"]')).checked = false;
+ 
+       });*/
     }
   }
   private onDeArchiveUser(id) {
@@ -235,7 +254,7 @@ export class UsersComponent implements OnInit {
     for (let i = start; i < end; i++) {
       usersList.push(listFilter[i]);
     }
-    this.users = [...this.users, ...usersList];
+    this.users = [...this.users, ...usersList.map(item => new User(JSON.parse(JSON.stringify(item))))];
     this.infiniteScrollDisabled = false;
     if ((this.page_number * 30) > listFilter.length) this.userListService.setBlockList(true);
 

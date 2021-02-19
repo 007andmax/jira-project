@@ -23,6 +23,7 @@ export class UsersStateService {
   openAside: EventEmitter<any> = new EventEmitter();
   openEditAside: EventEmitter<any> = new EventEmitter();
   userForArchive: User = null;
+  usersForArchive: Array<User> = [];
   userForDeArchive: User = null;
   onChangeUsers: EventEmitter<UserChange> = new EventEmitter();
   filter: UserFilter = new UserFilter();
@@ -86,6 +87,12 @@ export class UsersStateService {
   }
   public getuserForEdit() {
     return this.userForEdit;
+  }
+  public setUsersForArchive(data) {
+    this.usersForArchive = data;
+  }
+  public getUsersForArchive() {
+    return this.usersForArchive;
   }
   public onOpenAsige() {
     this.openAside.emit(null);

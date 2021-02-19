@@ -2912,7 +2912,7 @@ app-ticket-edit-aside-devices  {
 .qt-tooltip-error {
   z-index: 200;
   border-radius: 3px;
-  width: 139px;
+  max-width: 250px;
   position: absolute;
   background-color: #ff5263;
   padding: 8px;
@@ -2944,11 +2944,11 @@ input.--input-error {
 .--input-error {
   input {
     border: solid 1px #ff5263 !important;
-    border-left: none !important;
+    // border-left: none !important;
   }
   .qt-input-prefix {
     border: solid 1px #ff5263 !important;
-    border-right: none !important;
+    // border-right: none !important;
   }
 }
 

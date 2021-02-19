@@ -4,33 +4,6 @@
   margin-right: 8px;
 }
 
-.tickets-list-header {
-  position: sticky;
-  top: $header-height;
-  padding: 24px 0 0 0;
-  background-color: #edf2f6;
-  margin: 0 auto;
-  max-width: 1320px;
-  width: 100%;
-}
-
-.tickets-table-header-container {
-  overflow: auto;
-}
-
-.tickets-list-table-header {
-  width: 100%;
-  position: sticky;
-  top: 144px;
-  background-color: #edf2f6;
-  max-width: 1320px;
-  margin: 0 auto;
-}
-
-.btn-mr-8 {
-  margin-right: 8px;
-}
-
 .filter-button {
   padding-left: 30px;
   background-repeat: no-repeat;
@@ -46,14 +19,5 @@
     background-color: #16a4fa10;
     border: none;
     background-image: url(../../../../../assets/img/icons/filter-active.svg);
-  }
-}
-
-
-@media (min-width: 1920px) {
-  .tickets-list-header, .tickets-list-table-header {
-    width: 85%;
-    // width: 100%;
-    max-width: unset;
   }
 }

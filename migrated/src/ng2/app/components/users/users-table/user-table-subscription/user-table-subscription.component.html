@@ -1,13 +1,15 @@
-<div class="grey-dropdown" ngbDropdown>
+<div ngbDropdown container="body">
+  <div class="grey-dropdown">
     <div class="pointer subs-list"
          id="dropdownBasic"
          ngbDropdownToggle>
       <div [textContent]="title"></div>
       <i class="icn-sm report-caret-icon"></i>
     </div>
-    <div ngbDropdownMenu aria-labelledby="dropdownBasic">
-      <button ngbDropdownItem (click)="update('ticket')">Updates</button>
-      <button ngbDropdownItem (click)="update('invoice')">Invoice</button>
-      <button ngbDropdownItem (click)="update('ticketManager')">Ticket Manager</button>
-    </div>
+    <ul class="qt-dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownBasic">
+      <li ngbDropdownItem (click)="update('ticket')">Updates</li>
+      <li ngbDropdownItem (click)="update('invoice')">Invoice</li>
+      <li ngbDropdownItem (click)="update('ticketManager')">Ticket Manager</li>
+    </ul>
   </div>
+</div>

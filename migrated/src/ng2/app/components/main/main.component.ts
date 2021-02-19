@@ -33,8 +33,7 @@ export class MainComponent implements OnInit {
     this.appType = appType;
   }
 
-  ngOnInit() {	
-  }
+  ngOnInit() {}
   isAppTypeIsNg2() {
     return this.appType === 'ng2';
   }

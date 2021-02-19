@@ -11,6 +11,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ImageCropperComponent } from '../../shared/image-cropper/image-cropper.component';
 import { CompanySubscriptionStateService } from '../../companies/company-subscription/class/company-subscription-state.service';
 import { DisabledBtnDirective } from 'src/ng2/app/directives/disabled-btn.directive';
+import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
+import { TitleListType } from '../../tickets/tickets/tickets-header/class/title-list-type';
 
 @Component({
   selector: 'app-users-aside',
@@ -19,17 +21,22 @@ import { DisabledBtnDirective } from 'src/ng2/app/directives/disabled-btn.direct
   providers: [UsersAsideService]
 })
 export class UsersAsideComponent implements OnInit {
-  @ViewChild('role') role: any;
+
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   public opened = false;
   user: UserProfile = new UserProfile();
   allTitles: Array<string> = [];
+  companies = [];
   validate: UserValidate = new UserValidate();
+  selectedUserType = new TitleListType('Standar User', 'USER');
+  userTypes: Array<TitleListType> = [new TitleListType('Standar User', 'USER'),
+  new TitleListType('Manager', 'ADMIN')];
   phoneTypes = ['Office', 'Mobile', 'Fax'];
   constructor(private imageCropperStateService: ImageCropperStateService,
     private usersStateService: UsersStateService,
     private usersAsideService: UsersAsideService,
     private usersService: UsersService,
+    private companiesStateService: CompaniesStateService,
     private companiesState: SelectClientCompanyStateService,
     private companySubscriptionState: CompanySubscriptionStateService,
     public cd: ChangeDetectorRef,
@@ -43,10 +50,19 @@ export class UsersAsideComponent implements OnInit {
     this.usersAsideService.addSubscription(getOnUsers);
     this.onCroppImage();
     this.usersStateService.getOpenAside().subscribe(data => {
-      this.role.clearClient()
+
       this.opened = true;
       this.companySubscriptionState.onEditMode(this.user.subscription);
     })
+    if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
+    let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
+      this.getClientsList(data);
+    })
+
+  }
+  getClientsList(data) {
+    this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
   public onCroppImage() {
     let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
@@ -79,7 +95,6 @@ export class UsersAsideComponent implements OnInit {
         return acc;
       }, []).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
         1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
-
   }
   addPhoneNumber() {
     this.user.addPhoneNumber();
@@ -112,7 +127,8 @@ export class UsersAsideComponent implements OnInit {
     this.user.setDesignation(data);
   }
   onSelectRole(data) {
-    this.user.setRole(data);
+    this.selectedUserType = data;
+    this.user.setRole(data.type);
   }
   onChangeFistname() {
     this.validate.checkValidFirstName(this.user.firstName);
@@ -122,9 +138,8 @@ export class UsersAsideComponent implements OnInit {
     this.imageCropperStateService.uploadFileOnBrower(event);
   }
   public onSelectCompany(selectClient) {
-
-    this.user.serCompanyId((selectClient === 'null') ? null : selectClient.item.id);
-    if (selectClient !== 'null') this.validate.setCompanyValid();
+    this.user.serCompanyId((selectClient === null) ? null : selectClient.id);
+    if (selectClient !== null) this.validate.setCompanyValid();
     if (this.user.primaryEmail && this.user.primaryEmail.length > 0 && this.user.companyId) this.onCheckValidPrimaryEmail();
   }
   getUserType() {

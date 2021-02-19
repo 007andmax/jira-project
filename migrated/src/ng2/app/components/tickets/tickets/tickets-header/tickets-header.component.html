@@ -1,34 +1,73 @@
-<div class="qt-list-header tickets-list-header">
-  <div>
-    <h3 class="list-title" [textContent]="title">
-    </h3>
-  </div>
-  <div class="d-f ai-c">
-    <span class="qt-input-search" [hidden]="true">
-      <input class="qt-input-search tickets-list-search" placeholder="Search Tickets…" type="text" title="Ticket Search" name="ticket_search">
-    </span>
-    <button class="qt-btn --outline-blue btn-mr-8" (click)="clearAll()" *ngIf="countFilter > 0">Clear all</button>
-    <button class="qt-btn filter-button btn-mr-8 d-f" [ngClass]="{'active':!toggleFilter}" (click)="toggleFilter = !toggleFilter" [textContent]="getTextCountFilters()"></button>
-    <button class="qt-btn --outline-blue" (click)="onAddTicket()">Add ticket</button>
-  </div>
-</div>
+<div class="qt-page-list__header --sticky">
+    <div class="qt-page-list__header-title-line">
+        <div class="qt-page-list__header-title-line--left">
+            <h3
+                class="qt-page-list__header-title"
+                [textContent]="title"
+            ></h3>
+        </div>
+        <div class="qt-page-list__header-title-line--rigth">
+            <div class="d-f ai-c">
+                <span
+                    class="qt-input-search"
+                    [hidden]="true"
+                >
+                    <input
+                        class="qt-input-search tickets-list-search"
+                        placeholder="Search Tickets…"
+                        type="text"
+                        title="Ticket Search"
+                        name="ticket_search"
+                    >
+                </span>
+                <button
+                    class="qt-btn --outline-blue qt-mr-8"
+                    (click)="clearAll()"
+                    *ngIf="countFilter > 0"
+                >
+                    Clear all
+                </button>
+                <button
+                    class="qt-btn filter-button qt-mr-8 d-f"
+                    [ngClass]="{'active':!toggleFilter}"
+                    (click)="toggleFilter = !toggleFilter"
+                    [textContent]="getTextCountFilters()"
+                ></button>
+                <button
+                    class="qt-btn --outline-blue"
+                    (click)="onAddTicket()"
+                >
+                    Add ticket
+                </button>
+            </div>
+        </div>
+    </div>
 
-<div class="tickets-list-table-header">
 
-  <app-tickets-filter class="qt-w100" #filter (changeCountFilter)="onChangeCountFilter($event)" [hidden]="toggleFilter"></app-tickets-filter>
 
-  <div class="tickets-table-header-container">
-  <table class="qt-table-modern">
-    <thead>
-        <tr>
-          <th class="ticket-table__requested-by">Requested By</th>
-          <th class="ticket-table__subject">Subject</th>
-          <th class="ticket-table__company">Company</th>
-          <th class="ticket-table__assignee">Assignee</th>
-          <th class="ticket-table__status">Status</th>
-          <th class="ticket-table__created-date">Created Date</th>
-        </tr>
-    </thead>
-  </table>
-  </div>
+    <div class="qt-page-list__header-filters">
+        <app-tickets-filter
+            class="qt-w100"
+            #filter
+            (changeCountFilter)="onChangeCountFilter($event)"
+            [hidden]="toggleFilter"
+        ></app-tickets-filter>
+    </div>
+
+
+
+    <div class="qt-page-list__header-thead-container">
+        <table class="qt-table-modern qt-page-list__header-thead">
+            <thead>
+                <tr>
+                    <th class="ticket-table__requested-by">Requested By</th>
+                    <th class="ticket-table__subject">Subject</th>
+                    <th class="ticket-table__company">Company</th>
+                    <th class="ticket-table__assignee">Assignee</th>
+                    <th class="ticket-table__status">Status</th>
+                    <th class="ticket-table__created-date">Created Date</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
 </div>

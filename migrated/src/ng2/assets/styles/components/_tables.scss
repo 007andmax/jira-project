@@ -3,11 +3,16 @@ table.qt-table-modern {
   border-collapse: separate;
   border-spacing: 0 2px;
 
-
   thead {
     font-size: 12px;
     th {
-      padding: 14px 16px;
+      padding: 8px;
+      &:first-child {
+        padding-left: 16px;
+      }
+      &:last-child {
+        padding-right: 16px;
+      }
     }
   }
   tbody {
@@ -15,7 +20,7 @@ table.qt-table-modern {
     tr {
       td {
         background: #ffffff;
-        padding: 0 16px 0 16px;
+        padding: 0 8px 0 8px;
         height: 48px;
         border-top: 1px solid transparent;
         border-bottom: 1px solid transparent;
@@ -24,25 +29,23 @@ table.qt-table-modern {
           border-top-right-radius: 5px;
           border-bottom-right-radius: 5px;
           border-right: 1px solid transparent;
+          padding-right: 16px;
         }
         &:first-child {
           border-top-left-radius: 5px;
           border-bottom-left-radius: 5px;
           border-left: 1px solid transparent;
-
+          padding-left: 16px;
         }
       }
 
-      &.selected-ticket {
+      &.--selected {
         td {
           background: #f4fbff;
           border-color: #16a4fa;
-
         }
       }
     }
-
-
   }
   .qt-table-modern__circle-avatar {
       width: 24px;
@@ -93,38 +96,5 @@ table.qt-table-modern {
     height: 6px;
     top: 6px;
     background-image: url('assets/img/icons/sorting-down.svg');
-  }
-}
-
-.h100 {
-  height: 100%;
-}
-
-.page-list {
-  .qt-table-modern {
-    max-width: 1320px;
-    margin: 0 auto;
-    min-width: 1064px;
-  }
-
-  .table-container {
-    overflow-x: auto;
-    min-height: calc(100vh - 346px);
-    overflow-x: auto;
-  }
-
-  .sticky-list-table-header .qt-table-modern {
-    min-width: unset;
-    th {
-      white-space: nowrap;
-    }
-  }
-}
-
-@media (min-width: 1920px) {
-  .page-list {
-    .qt-table-modern {
-      max-width: unset;
-    }
   }
 }

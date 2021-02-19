@@ -14,16 +14,16 @@
   </div>
 </div> -->
 
-<div class="archive-modal" *ngIf="action === 'ARCHIVE_USER'">
-  <button class="close-modal" (click)=cancelConfirm()></button>
-  <div class="archive-modal__body">
-    <h3>Archive this User ?</h3>
-    <p [textContent]="message"></p>
+<div class="remove-user-dialog" *ngIf="action === 'ARCHIVE_USER'">
+  <div class="remove-user-dialog__close qt-sz-16 icon__close" (click)=cancelConfirm()></div>
+  <div class="remove-user-dialog__body">
+    <div class="remove-user-dialog__title qt-ff-sb qt-mb-5">Archive User</div>
+    <div class="remove-user-dialog__subtitle" [textContent]="message"></div>
   </div>
-  <div class="archive-modal__footer">
-    <div class="d-f">
-      <button class="btn-new btn-primary"  (click)=approveConfirm()>Yes, I am sure</button>
-      <button class="btn-new disabled" (click)=cancelConfirm()>Cancel</button>
+  <div class="remove-user-dialog__footer">
+    <div class="qt-df qt-jc-fe">
+      <button class="qt-button --red qt-mr-12"  (click)=approveConfirm()>Yes, I am sure</button>
+      <button class="qt-button --gray" (click)=cancelConfirm()>Cancel</button>
     </div>
   </div>
 </div>

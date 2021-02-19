@@ -52,7 +52,7 @@ export class DropDownComponent implements OnInit {
   }
 
   onCheckAdd(event) {
-    if (this.search) this.list = this.reqList.filter(item => (this.field) ? item[this.field].toLowerCase().includes(event.target.value) : item.toLowerCase().includes(event.target.value))
+    if (this.search) this.list = this.reqList.filter(item => (this.field) ? item[this.field].toLowerCase().includes(event.target.value.toLowerCase()) : item.toLowerCase().includes(event.target.value.toLowerCase()))
     let index = this.list.findIndex(item => (this.field) ? item[this.field] === event.target.value : item === event.target.value);
     if (index === -1 && this.add) {
       this.isAdd = true;

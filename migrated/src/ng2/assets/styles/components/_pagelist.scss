@@ -1,11 +1,58 @@
-.page-list {
-  padding: 0 24px 24px 24px;
+.qt-page-list {
+  padding: 24px;
   background-color: #edf2f6;
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh - #{$header-height});
 
-  .list-title {
+  &__header {
+    background-color: #edf2f6;
+    margin: 0 auto;
+    max-width: 1320px;
+    width: 100%;
+    z-index: 1;
+    &.--sticky {
+      position: sticky;
+      top: $header-height;
+      padding-top: 24px;
+      margin-top: -24px;
+    }
+  }
+
+  &__header-title {
     font-size: 16px;
     font-family: Graphik-Semibold, sans-serif;
+    margin: 0;
+  }
+
+  &__header-title-line {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &--left, &--rigth {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &__header-filters {
+    display: flex;
+    margin-top: 16px;
+    width: 100%;
+    align-items: center;
+  }
+
+  &__header-thead-container,
+  &__body-table-container {
+    width: 100%;
+    overflow: auto;
+  }
+  &__body-table-container::-webkit-scrollbar {
+    height: 0;
+  }
+
+  &__header-thead,
+  &__body-tbody {
+    min-width: 1064px;
   }
 
   &__back-button {
@@ -19,8 +66,13 @@
     background-repeat: no-repeat;
     background-position: center;
   }
-}
 
+  &__body {
+    margin: 0 auto;
+    max-width: 1320px;
+    width: 100%;
+  }
+}
 .sticky-list-header {
   position: sticky;
   top: $header-height;
@@ -45,15 +97,10 @@
   }
 }
 
-
 @media (min-width: 1920px) {
-  .sticky-list-header, .sticky-list-table-header {
+  .qt-page-list__header,
+  .qt-page-list__body {
     width: 85%;
     max-width: unset;
-  }
-  .table-container {
-    width: 85%;
-    max-width: unset;
-    margin: 0 auto;
   }
 }

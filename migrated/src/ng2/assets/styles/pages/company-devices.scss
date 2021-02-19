@@ -1,7 +1,5 @@
 .company-devices-page {
-  &__list-header.qt-list-header.sticky-list-header {
-    padding: 12px 0 0 0;
-  }
+
   &__list-header-buttons {
     display: flex;
     padding: 8px 16px;
@@ -11,13 +9,6 @@
     font-size: 12px;
     color: #4f5f79;
     line-height: 1.33;
-  }
-  .sticky-list-table-header.company-devices-list-table-header {
-    top: 145px;
-    overflow: auto;
-    .company-devices-table {
-      min-width: 1064px !important;
-    }
   }
   table.company-devices-table {
     td {

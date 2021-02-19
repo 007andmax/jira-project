@@ -380,6 +380,7 @@ import { CompanyDashRevenueComponent } from './components/company-dashboard/comp
 import { CompanyDashInvoiceComponent } from './components/company-dashboard/company-dash-invoice/company-dash-invoice.component';
 import { CompanyDashContractComponent } from './components/company-dashboard/company-dash-contract/company-dash-contract.component';
 import { LeftPanelCompanyComponent } from './components/left-panel/left-panel-company/left-panel-company.component';
+import { UsersFilterComponent } from './components/users/users-header/users-filter/users-filter.component';
 import { SupportComponent } from './components/support/support.component';
 import { SupportItemComponent } from './components/support/support-item/support-item.component';
 import { DynamicTooltipComponent } from './components/shared/dynamic-tooltip/dynamic-tooltip.component';
@@ -935,6 +936,7 @@ angular.module('quicktech')
     CompanyNetworkScanItemComponent,
     CompanyNetworkScanItemTooltipComponent,
     LeftPanelCompanyComponent,
+    UsersFilterComponent,
     SupportComponent,
     SupportItemComponent,
     DynamicTooltipComponent,

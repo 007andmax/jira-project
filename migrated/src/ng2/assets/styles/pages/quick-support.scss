@@ -1,6 +1,6 @@
 .quick-support-page {
   background-color: #edf2f6;
-  min-height: calc(100vh - 78px);
+  min-height: calc(100vh - #{$header-height});
 
   &__header {
     max-width: 1128px;

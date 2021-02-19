@@ -1,89 +1,156 @@
-<ng-sidebar-container>
-  <ng-sidebar [(opened)]="opened" [position]="'right'">
-    <div class="new-companies-content__modal">
-      <div class="new-companies-content__modal--header">
-        <h3>Write Draft for Companies</h3>
-        <button class="close-modal" (click)="close()"></button>
-      </div>
-      <div class="new-companies-content__modal--content">
-        <div class="col-md-12">
-          <p>Subject</p>
-          <input [(ngModel)]="draftEmail.subject" type="text" placeholder="Write Subject line">
-        </div>
-        <app-draft-email-recipients [companiesSelected]="companiesSelected" *ngIf="action === 'COMPANIES'" (onCompanyEmails)="onChangeCompanyEmails($event)"></app-draft-email-recipients>
-        <draft-email-user-recipients [usersSelected]="usersSelected" *ngIf="action === 'USERS'" (onCompanyEmails)="onChangeCompanyEmails($event)"></draft-email-user-recipients>
-        <div class="col-md-12 tab-btns">
-          <div [ngClass]="{active: tab == 'plain'}" (click)="tab = 'plain'">
-            Plain Text
-          </div>
-          <div [ngClass]="{active: tab == 'html'}" (click)="tab = 'html'"
-          >Paste Html
-          </div>
-        </div>
-        <div class="col-md-12 editor-container" style="margin-top: 0;">
-          <!--EDITOR-->
 
-          <div style="position:relative;">
-            <angular-editor *ngIf="tab == 'plain'"  [(ngModel)]="messageContent" [config]="editorConfig"></angular-editor>
-            <div *ngIf="tab == 'plain'" class="editor-container-attachments">
-              <i class="icn-16 icn-text-attachment"></i>
-              <input id="upload-file-email" type="file" (input)="uploadFileOnBrower($event)" />
-            </div>
-          </div>
-          <div *ngIf="tab == 'plain'" class="form-group">
-            <ul class="upload-attachments">
-              <ng-template ngFor let-file [ngForOf]="uploadFiles" let-i="index" [ngForTrackBy]="trackByIndex">
-                <li
-                  [ngStyle]="filesInfo.files[i].error && {'background-color': '#fff2f2'}">
-
-                  <span class="file-name">{{ file.name }}</span>
-                  <span class="file-size">{{ file.size }}</span>
-
-                  <a href="javascript:void(0)" class="hit-area pull-right"
-                     uib-tooltip="Remove file" tooltip-placement="top"
-                     (click)="removeAttachment(i)">
-                    <i class="icn-sm icn-remove-old"></i>
-                  </a>
-
-                  <span class="pull-right" *ngIf="filesInfo.files[i].error"
-                        style="color: rgb(229, 57, 53);white-space: nowrap;overflow: hidden;max-width: 300px;">
-                  {{ filesInfo.files[i].message }}
-                </span>
-
-                  <a href="" class="hit-area pull-right" data-toggle="tooltip" data-placement="top" title="Re-Upload"
-                     *ngIf="filesInfo.files[i].progress !== 100 && (filesInfo.files[i].code !== 500)"
-                     uib-tooltip="Re-Upload" tooltip-placement="top" (click)="reloadAttachment(file)">
-                    <i class="icn-sm icn-reupload"></i>
-                  </a>
-
-                  <div class="progress progress-attachment pull-right"
-                       *ngIf="filesInfo.files[i].progress !== 100 || filesInfo.files[i].error">
-                    <div class="progress-bar" role="progressbar"
-                         aria-valuemin="0" aria-valuemax="100"
-                         [ngStyle]="styleProgressBar(filesInfo.files[i].progress)">
-                      <span class="sr-only">{{ file.progress }}% Complete</span>
-                    </div>
-                  </div>
-
-                </li>
-              </ng-template>
-            </ul>
-          </div>
-          <textarea *ngIf="tab == 'html'" [(ngModel)]="messageHTML" class="email-text-block textarea"
-                    placeholder="Put here your HTML"></textarea>
-
-
-        </div>
-
-        <div class="col-md-12 new-companies-content__modal--content-footer">
-          <div class="d-f">
-            <button class="btn-new btn-primary"
-                    (click)="onSend()">Send Email
-            </button>
-            <button class="btn-new disabled" (click)="close()">Cancel</button>
-          </div>
-        </div>
-      </div>
+<div *ngIf="opened" class="qt-aside-modern draft-email-aside">
+    <div class="qt-aside-modern__header">
+        <div class="qt-aside-modern__header-title">Write Draft for Companies</div>
+        <div
+            class="qt-aside-modern__header-close icon__close"
+            (click)="close()"
+        ></div>
     </div>
-  </ng-sidebar>
-</ng-sidebar-container>
+    <div class="qt-aside-modern__content new-companies-content__modal--content">
+        <div class="qt-input-block qt-mt-24">
+            <label>Subject</label>
+            <input
+                [(ngModel)]="draftEmail.subject"
+                type="text"
+                placeholder="Write Subject line"
+            >
+        </div>
+        <div class="draft-email-sidebar__select-users-container">
+            <app-draft-email-recipients
+                [companiesSelected]="companiesSelected"
+                *ngIf="action === 'COMPANIES'"
+                (onCompanyEmails)="onChangeCompanyEmails($event)"
+            ></app-draft-email-recipients>
+            <draft-email-user-recipients
+                [usersSelected]="usersSelected"
+                *ngIf="action === 'USERS'"
+                (onCompanyEmails)="onChangeCompanyEmails($event)"
+            ></draft-email-user-recipients>
+        </div>
+        <div>
+            <div class="qt-pt-24 qt-w100 draft-email-sidebar__editor-tab qt-ff-gm">
+                <div
+                    class="draft-email-sidebar__editor-tab-item"
+                    [ngClass]="{active: tab == 'plain'}"
+                    (click)="tab = 'plain'"
+                >
+                    Plain Text
+                </div>
+                <div
+                    class="draft-email-sidebar__editor-tab-item"
+                    [ngClass]="{active: tab == 'html'}"
+                    (click)="tab = 'html'"
+                >
+                    Past Html
+                </div>
+            </div>
+            <div class="qt-w100 editor-container qt-mt-0">
+                <div style="position:relative;">
+                    <angular-editor
+                        *ngIf="tab == 'plain'"
+                        [(ngModel)]="messageContent"
+                        [config]="editorConfig"
+                    ></angular-editor>
+                    <div
+                        *ngIf="tab == 'plain'"
+                        class="editor-container-attachments"
+                    >
+                        <i class="icn-16 icn-text-attachment"></i>
+                        <input
+                            id="upload-file-email"
+                            type="file"
+                            (input)="uploadFileOnBrower($event)"
+                        >
+                    </div>
+                </div>
+                <div
+                    *ngIf="tab == 'plain'"
+                    class="form-group"
+                >
+                    <ul class="upload-attachments">
+                        <ng-template
+                            ngFor
+                            let-file
+                            [ngForOf]="uploadFiles"
+                            let-i="index"
+                            [ngForTrackBy]="trackByIndex"
+                        >
+                            <li [ngStyle]="filesInfo.files[i].error && {'background-color': '#fff2f2'}">
+                                <span class="file-name">{{ file.name }}</span>
+                                <span class="file-size">{{ file.size }}</span>
+                                <a
+                                    href="javascript:void(0)"
+                                    class="hit-area pull-right"
+                                    uib-tooltip="Remove file"
+                                    tooltip-placement="top"
+                                    (click)="removeAttachment(i)"
+                                >
+                                    <i class="icn-sm icn-remove-old"></i>
+                                </a>
+                                <span
+                                    class="pull-right"
+                                    *ngIf="filesInfo.files[i].error"
+                                    style="color: rgb(229, 57, 53);white-space: nowrap;overflow: hidden;max-width: 300px;"
+                                >
+                                    {{ filesInfo.files[i].message }}
+                                </span>
+                                <a
+                                    href
+                                    class="hit-area pull-right"
+                                    data-toggle="tooltip"
+                                    data-placement="top"
+                                    title="Re-Upload"
+                                    *ngIf="filesInfo.files[i].progress !== 100 && (filesInfo.files[i].code !== 500)"
+                                    uib-tooltip="Re-Upload"
+                                    tooltip-placement="top"
+                                    (click)="reloadAttachment(file)"
+                                >
+                                    <i class="icn-sm icn-reupload"></i>
+                                </a>
+                                <div
+                                    class="progress progress-attachment pull-right"
+                                    *ngIf="filesInfo.files[i].progress !== 100 || filesInfo.files[i].error"
+                                >
+                                    <div
+                                        class="progress-bar"
+                                        role="progressbar"
+                                        aria-valuemin="0"
+                                        aria-valuemax="100"
+                                        [ngStyle]="styleProgressBar(filesInfo.files[i].progress)"
+                                    >
+                                        <span class="sr-only">{{ file.progress }}% Complete</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ng-template>
+                    </ul>
+                </div>
+                <textarea
+                    *ngIf="tab == 'html'"
+                    [(ngModel)]="messageHTML"
+                    class="email-text-block textarea"
+                    placeholder="Put here your HTML"
+                ></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="qt-aside-modern__footer">
+        <div class="qt-df">
+            <button
+                class="qt-button qt-mr-12"
+                (click)="onSend()"
+            >
+                Send Email
+            </button>
+            <button
+                class="qt-button --gray"
+                (click)="close()"
+            >
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>
+
+

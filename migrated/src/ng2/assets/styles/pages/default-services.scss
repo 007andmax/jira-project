@@ -1,18 +1,6 @@
 .default-services-page {
   min-height: calc(100vh - #{$header-height});
 
-  &__header {
-    z-index: 1;
-  }
-
-  .sticky-list-table-header {
-    z-index: 1;
-  }
-
-  .default-service-table-header-titles {
-    overflow: visible;
-  }
-
   &__table-container {
     overflow-x: auto;
 
@@ -29,8 +17,6 @@
   }
 
   .default-service-table {
-    max-width: 1320px;
-    margin: 0 auto;
 
     th {
       white-space: nowrap;
@@ -267,22 +253,3 @@ app-default-services-item,app-default-services-contracts {
     }
   }
 }
-
-
-
-
-@media (min-width: 1920px) {
-  .default-service-table {
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-
-  .default-services-page__table-container {
-    width: 85%;
-    max-width: 85%;
-    margin: 0 auto;
-  }
-}
-
-
-
