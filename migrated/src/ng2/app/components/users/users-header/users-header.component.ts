@@ -14,6 +14,8 @@ import { CompaniesStateService } from 'src/ng2/app/states/company/companies-stat
 import { CurrentUser } from 'src/ng2/class/current-user/current-user';
 import { TicketsFilterComponent } from '../../tickets/tickets/tickets-header/tickets-filter/tickets-filter.component';
 import { UsersFilterComponent } from './users-filter/users-filter.component';
+import { TYPE_LIST_ALL_USERS, TYPE_LIST_COMPANY_USERS } from 'src/ng2/app/const/users';
+
 
 
 
@@ -31,10 +33,13 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   }
   _users: Array<User> = [];
   @Input() count: number = 0;
+  @Input() type: string;
   @ViewChild('filter') filter: UsersFilterComponent;
   countFilter: number = 0;
   toggleFilter: boolean = true;
   currentUser: CurrentUser = new CurrentUser();
+  TYPE_LIST_ALL_USERS = TYPE_LIST_ALL_USERS;
+  TYPE_LIST_COMPANY_USERS = TYPE_LIST_COMPANY_USERS;
   constructor(private usersStateService: UsersStateService,
     private draftEmailStateService: DraftEmailStateService,
     private companiesStateService: CompaniesStateService,

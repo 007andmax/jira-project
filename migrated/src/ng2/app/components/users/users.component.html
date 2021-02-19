@@ -1,6 +1,7 @@
 <!-- for show filters add class "show" for app-left-panel -->
 <div class="qt-page-list users-page">
     <app-users-header
+        [type]="TYPE_LIST_ALL_USERS"
         [count]="count"
         (onChangeFilterField)="onFilter($event)"
         [users]="users"
@@ -23,6 +24,7 @@
                         [ngForTrackBy]="trackById"
                     >
                         <app-users-table
+                            [type]="TYPE_LIST_ALL_USERS"
                             [showArchivedUsers]="showArchivedUsers"
                             [user]="user"
                         ></app-users-table>

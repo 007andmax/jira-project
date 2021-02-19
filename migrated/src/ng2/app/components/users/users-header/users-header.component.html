@@ -89,8 +89,17 @@
                     <th
                         class="users-table__company pointer"
                         (click)="onFilter('company')"
+                        *ngIf="type === TYPE_LIST_ALL_USERS"
                     >
                         Company
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th
+                        class="users-table__company pointer"
+                        (click)="onFilter('primaryEmail')"
+                        *ngIf="type === TYPE_LIST_COMPANY_USERS"
+                    >
+                        Email
                         <span class="qt-table-modern__sorting"></span>
                     </th>
                     <th

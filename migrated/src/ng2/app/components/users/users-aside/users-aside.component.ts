@@ -95,7 +95,6 @@ export class UsersAsideComponent implements OnInit {
         return acc;
       }, []).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
         1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
-    console.log("this.allTitles", this.allTitles);
   }
   addPhoneNumber() {
     this.user.addPhoneNumber();
@@ -139,7 +138,6 @@ export class UsersAsideComponent implements OnInit {
     this.imageCropperStateService.uploadFileOnBrower(event);
   }
   public onSelectCompany(selectClient) {
-    console.log("selectClient", selectClient);
     this.user.serCompanyId((selectClient === null) ? null : selectClient.id);
     if (selectClient !== null) this.validate.setCompanyValid();
     if (this.user.primaryEmail && this.user.primaryEmail.length > 0 && this.user.companyId) this.onCheckValidPrimaryEmail();

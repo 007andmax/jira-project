@@ -13,6 +13,7 @@ import { ARCHIVE_USER, DEARCHIVE_USER } from '../../const/confirm';
 import { UserChange } from '../users/class/user-change';
 import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
 import { UsersHeaderComponent } from '../users/users-header/users-header.component';
+import { TYPE_LIST_COMPANY_USERS } from '../../const/users';
 
 @Component({
   selector: 'company-user',
@@ -30,6 +31,7 @@ export class CompanyUserComponent implements OnInit {
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
   count: number = 0;
+  TYPE_LIST_COMPANY_USERS = TYPE_LIST_COMPANY_USERS;
   @ViewChild('header') header: UsersHeaderComponent;
   constructor(private usersStateService: UsersStateService,
     private userListService: UserListService,
@@ -48,7 +50,6 @@ export class CompanyUserComponent implements OnInit {
     this.onInitFilters(company_id);
 
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
-      console.log("data", data);
       this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title);
       this.setDefaultScoll();
       this.onScroll();

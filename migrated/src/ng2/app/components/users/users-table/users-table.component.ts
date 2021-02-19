@@ -14,6 +14,7 @@ import { AlertComponent } from '../../shared/alert/alert.component';
 import { UsersTableService } from './services/users-table.service';
 import { DraftEmailStateService } from 'src/ng2/app/states/draft-email/draft-email-state.service';
 import { USERS } from 'src/ng2/app/const/emails';
+import { TYPE_LIST_ALL_USERS, TYPE_LIST_COMPANY_USERS } from 'src/ng2/app/const/users';
 
 @Component({
   selector: 'app-users-table',
@@ -23,9 +24,12 @@ import { USERS } from 'src/ng2/app/const/emails';
 })
 export class UsersTableComponent implements OnInit {
   @Input() user: User;
+  @Input() type: string;
   @Input() showArchivedUsers: boolean;
   companies: Array<Company> = [];
   currentUser: CurrentUser = new CurrentUser();
+  TYPE_LIST_ALL_USERS = TYPE_LIST_ALL_USERS;
+  TYPE_LIST_COMPANY_USERS = TYPE_LIST_COMPANY_USERS;
   constructor(private companiesStateService: CompaniesStateService,
     private usersService: UsersService,
     private usersStateService: UsersStateService,

@@ -11,6 +11,7 @@ import { UsersService } from '../../services/users/users.service';
 import { UserChange } from './class/user-change';
 import { WebsocketService } from '../../services/websocket/websocket.service';
 import { DraftEmailStateService } from '../../states/draft-email/draft-email-state.service';
+import { TYPE_LIST_ALL_USERS } from '../../const/users';
 
 @Component({
   selector: 'app-users',
@@ -28,6 +29,7 @@ export class UsersComponent implements OnInit {
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
   count: number = 0;
+  TYPE_LIST_ALL_USERS = TYPE_LIST_ALL_USERS;
   constructor(private usersStateService: UsersStateService,
     private userListService: UserListService,
     private companiesStateService: CompaniesStateService,
@@ -52,13 +54,10 @@ export class UsersComponent implements OnInit {
     this.userListService.addSubscription(getOnShowArchived);
 
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
-      console.log("data", data);
       window.scrollTo(0, 0);
       this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title);
       this.setDefaultScoll();
       this.onScroll();
-      //   this.onInirCalculate();
-
     })
     this.userListService.addSubscription(geLefttFilter);
 
@@ -233,7 +232,6 @@ export class UsersComponent implements OnInit {
 
   }
   public onFilter(field) {
-    console.log("field", field);
     this.filter.onFilter(field, this.reqUsers, this.companies)
     this.page_number = 0;
     this.userListService.setBlockList(false);

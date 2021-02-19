@@ -34,8 +34,17 @@
             </div>
         </div>
     </td>
-    <td class="users-table__company">
+    <td
+        class="users-table__company"
+        *ngIf="type === TYPE_LIST_ALL_USERS"
+    >
         <span>{{ getUserCompanyName() }}</span>
+    </td>
+    <td
+        class="users-table__company"
+        *ngIf="type === TYPE_LIST_COMPANY_USERS"
+    >
+        <span>{{ user.primaryEmail }}</span>
     </td>
     <td class="users-table__contract-no">
         <ng-template
@@ -72,12 +81,17 @@
         [textContent]="user.userStatistic.ticketsSubmitted || 0"
     ></td>
     <td class="users-table__email">
+        <app-dynamic-tooltip
+            [content]="'Draft Email'"
+            [position]="'top'"
+            #draftEmailTooltip
+        ></app-dynamic-tooltip>
         <div
             class="icon__email-dark qt-sz-16 pointer"
             *ngIf="!showArchivedUsers"
             (click)="showAsideForDraftEmail()"
-            placement="top"
-            ngbTooltip="Draft Email"
+            (mouseenter)="draftEmailTooltip.show($event.target)"
+            (mouseleave)="draftEmailTooltip.hide()"
         ></div>
     </td>
     <td class="users-table__menu">
