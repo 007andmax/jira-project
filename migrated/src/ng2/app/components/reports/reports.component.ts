@@ -39,7 +39,7 @@ export class ReportsComponent implements OnInit {
   public getListStates(type) {
     if (type === 'SALES') return ['byProducts', 'byCustomers'];
     if (type === 'TAXES') return ['byTaxes'];
-    if (type === 'COMMISSIONS') return ['commissionsReport-common', 'commissionsReport-detailed'];
+    if (type === 'COMMISSIONS') return ['commissionsReport-common', 'detailed-commissions'];
     if (type === 'FINANCIAL') return ['accounts-receivable', 'accounting-report'];
     if (type === 'REMOTE_ACCESS') return ['remoteAccess'];
     if (type === 'DEVICES') return ['software-summary', 'hardware-summary', 'device-ip-summary'];

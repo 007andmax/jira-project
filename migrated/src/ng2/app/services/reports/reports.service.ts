@@ -47,6 +47,9 @@ export class ReportsService {
   public getReportByTechService(data) {
     return this.http.post(this.apiUrl + `reports/sales/byServices`, data);
   }
+  public getReportDetailedCommissions(data) {
+    return this.http.post(this.apiUrl + `reports/commission/byCustomers`, data);
+  }
   public getReportByGlNumber(data) {
     return this.http.post(this.apiUrl + `reports/sales/byGlNumber`, data);
   }

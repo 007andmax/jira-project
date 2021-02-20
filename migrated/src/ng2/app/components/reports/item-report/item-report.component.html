@@ -1,25 +1,82 @@
 <div class="product-list-report ticket-report">
-  
-  <p class="report-title" *ngIf="report === 'accounts-receivable'">Accounts Receivable</p>
-  <p class="report-title" *ngIf="report === 'income-accounts'">Income accounts Report</p>
-  <p class="report-title" *ngIf="report === 'byTaxes'">Tax Report</p>
-  <p class="report-title" *ngIf="report === 'byProducts'">Product Sales Report</p>
-  <p class="report-title" *ngIf="report === 'byCustomers'">Customer Sales Report</p>
-  <p class="report-title" *ngIf="report === 'ticket-report'">Tickets Report</p>
-  <p class="report-title" *ngIf="report === 'service-report'">Service report</p>
-  <p class="report-title" *ngIf="report === 'tech-service'">Tech Service report</p>
-  <p class="report-title" *ngIf="report === 'accounting-report'">Accounting report</p>
-  
-  <i class="back-page" (click)="back()"></i>
-  <app-gl-number   *ngIf="report === 'income-accounts'"></app-gl-number>
-  <app-accounts-receivable   *ngIf="report === 'accounts-receivable'"></app-accounts-receivable>
-  <app-taxes-report   *ngIf="report === 'byTaxes'"></app-taxes-report>
-  <app-product-sales-report   *ngIf="report === 'byProducts'"></app-product-sales-report>
-  <app-customer-sales-report   *ngIf="report === 'byCustomers'"></app-customer-sales-report>
-  <app-ticket-report   *ngIf="report === 'ticket-report'"></app-ticket-report>
- <app-service-report *ngIf="report === 'service-report'"></app-service-report>
- <app-tech-service-report *ngIf="report === 'tech-service'"></app-tech-service-report>
- <app-accounting-report *ngIf="report === 'accounting-report'"></app-accounting-report>
+
+
+
+    <p
+        class="report-title"
+        *ngIf="report === 'accounts-receivable'"
+    >
+        Accounts Receivable
+    </p>
+    <p
+        class="report-title"
+        *ngIf="report === 'income-accounts'"
+    >
+        Income accounts Report
+    </p>
+    <p
+        class="report-title"
+        *ngIf="report === 'byTaxes'"
+    >
+        Tax Report
+    </p>
+    <p
+        class="report-title"
+        *ngIf="report === 'byProducts'"
+    >
+        Product Sales Report
+    </p>
+    <p
+        class="report-title"
+        *ngIf="report === 'detailed-commissions'"
+    >
+        Detailed Commissions Report
+    </p>
+    <p
+        class="report-title"
+        *ngIf="report === 'byCustomers'"
+    >
+        Customer Sales Report
+    </p>
+    <p
+        class="report-title"
+        *ngIf="report === 'ticket-report'"
+    >
+        Tickets Report
+    </p>
+    <p
+        class="report-title"
+        *ngIf="report === 'service-report'"
+    >
+        Service report
+    </p>
+    <p
+        class="report-title"
+        *ngIf="report === 'tech-service'"
+    >
+        Tech Service report
+    </p>
+    <p
+        class="report-title"
+        *ngIf="report === 'accounting-report'"
+    >
+        Accounting report
+    </p>
+
+
+
+    <i
+        class="back-page"
+        (click)="back()"
+    ></i>
+    <app-gl-number *ngIf="report === 'income-accounts'"></app-gl-number>
+    <app-accounts-receivable *ngIf="report === 'accounts-receivable'"></app-accounts-receivable>
+    <app-taxes-report *ngIf="report === 'byTaxes'"></app-taxes-report>
+    <app-product-sales-report *ngIf="report === 'byProducts'"></app-product-sales-report>
+    <detailed-commissions-report *ngIf="report === 'detailed-commissions'"></detailed-commissions-report>
+    <app-customer-sales-report *ngIf="report === 'byCustomers'"></app-customer-sales-report>
+    <app-ticket-report *ngIf="report === 'ticket-report'"></app-ticket-report>
+    <app-service-report *ngIf="report === 'service-report'"></app-service-report>
+    <app-tech-service-report *ngIf="report === 'tech-service'"></app-tech-service-report>
+    <app-accounting-report *ngIf="report === 'accounting-report'"></app-accounting-report>
 </div>
-
-

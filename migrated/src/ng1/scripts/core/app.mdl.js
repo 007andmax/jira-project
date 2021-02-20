@@ -172,6 +172,10 @@
           url: '/ng2/report/byProducts',
           template: '<item-report-component></item-report-component>'
         }))
+        .state('detailed-commissions', waitForServices({
+          url: '/ng2/report/detailed-commissions',
+          template: '<item-report-component></item-report-component>'
+        }))
         .state('byCustomers', waitForServices({
           url: '/ng2/report/byCustomers',
           template: '<item-report-component></item-report-component>'

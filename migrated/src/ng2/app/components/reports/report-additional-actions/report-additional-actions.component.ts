@@ -34,13 +34,13 @@ export class ReportAdditionalActionsComponent implements OnInit, OnDestroy {
     private reportsStateService: ReportsStateService,
     private appService: AppService,
     config: NgbModalConfig,
-    private modalService: NgbModal, ) {
+    private modalService: NgbModal,) {
     config.backdrop = 'static';
     config.keyboard = false;
   }
 
   ngOnInit() {
-    if (this.report === "service-report" || this.report === "ticket-report" || this.report === "accounting-report") this.listExport = ['PDF'];
+    if (this.report === "service-report" || this.report === "ticket-report" || this.report === "accounting-report" || this.report === "detailed-commissions") this.listExport = ['PDF'];
     let exportCSV = this.reportsStateService.exportCSV.subscribe(data => {
       this.exportCSV = data;
     })
@@ -57,7 +57,7 @@ export class ReportAdditionalActionsComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.template = this.template;
     modalRef.componentInstance.fileName = this.fileName;
     modalRef.componentInstance.accountType = this.accountType;
-    
+
   }
   getPdfIdFromRest(action) {
     var dto = {

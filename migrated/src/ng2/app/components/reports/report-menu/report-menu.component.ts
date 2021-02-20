@@ -20,6 +20,7 @@ import { CompaniesStateService } from 'src/ng2/app/states/company/companies-stat
 import { ProductCompanyReport } from '../class/product-company-report';
 import { TechService } from '../class/tech-service';
 import { AccountingReport } from '../class/accounting-report';
+import { DetailedCommissionsReport } from '../class/detailed-commissions-report';
 
 
 @Component({
@@ -34,11 +35,12 @@ export class ReportMenuComponent implements OnInit {
   techService: TechService = new TechService();
   glNumber: GlNumber = new GlNumber();
   taxes: TaxesReport = new TaxesReport();
-  accountingReport:AccountingReport = new AccountingReport();
+  accountingReport: AccountingReport = new AccountingReport();
   accountsReceivable: AccountsReceivable = new AccountsReceivable();
   productSalesReport: ProductSalesReport = new ProductSalesReport();
   productsCompanyReport: ProductCompanyReport = new ProductCompanyReport();
   customerSalesReport: CustomerSalesReport = new CustomerSalesReport();
+  detailedCommissionsReport: DetailedCommissionsReport = new DetailedCommissionsReport();
   ticketsReport: TicketsReport = new TicketsReport();
   serviceReport: ServiceReports = new ServiceReports();
   loadingInProgress: boolean = true;
@@ -111,6 +113,7 @@ export class ReportMenuComponent implements OnInit {
       this.serviceReport.setCompanyId(null);
       this.ticketsReport.setCompanyId(null);
       this.accountingReport.setCompanyId(null);
+      this.detailedCommissionsReport.setCompanyId(null);
     } else {
       this.selectedClient = selectClient.item;
       this.accountingReport.setCompanyId(selectClient.item.id);
@@ -120,11 +123,15 @@ export class ReportMenuComponent implements OnInit {
       this.customerSalesReport.setCompanyId(selectClient.item.id);
       this.ticketsReport.setCompanyId(selectClient.item.id);
       this.serviceReport.setCompanyId(selectClient.item.id);
+      this.detailedCommissionsReport.setCompanyId(selectClient.item.id);
       if (this.ticketsReport.startDate === '' && this.ticketsReport.endDate === '') this.ticketsReport.setDatesByCompany(this.selectedClient);
       if (this.serviceReport.startDate === '' && this.serviceReport.endDate === '') this.serviceReport.setDatesByCompany(this.selectedClient);
       this.validate.resetCompany();
     }
     this.onSelectedClient.emit(this.selectedClient);
+  }
+  toggleDetailsByProducts(data) {
+    this.detailedCommissionsReport.setDetailsByProducts(data);
   }
   toggleShowResponseTime(event) {
     this.ticketReportStateService.toggleShowResponseTime(event.target.checked);
@@ -141,6 +148,8 @@ export class ReportMenuComponent implements OnInit {
   onSelectTechUser(data) {
     this.ticketsReport.setTechUser(data);
     this.techService.setTechUserId((data) ? data.id : null);
+    this.detailedCommissionsReport.setTechUserId((data) ? data.id : null);
+    if (data) this.validate.resetTechUser();
   }
   getReportByTaxes() {
     if (!this.validate.isValidateTaxes(this.glNumber.startDate, this.glNumber.endDate)) return;
@@ -157,14 +166,14 @@ export class ReportMenuComponent implements OnInit {
     if (!this.validate.isValidateService(this.selectedClient)) return;
     this.onRequest.emit(true);
     this.reportsService.getReportByService(this.serviceReport.getForRequest()).subscribe((data: any) => {
-   
+
       this.setDatareport(data)
     });
   }
   getReportByAccounting() {
-    if (!this.validate.isValidateAccounting(this.accountingReport.startDate,this.accountingReport.endDate,this.selectedClient)) return;
+    if (!this.validate.isValidateAccounting(this.accountingReport.startDate, this.accountingReport.endDate, this.selectedClient)) return;
     this.onRequest.emit(true);
-    this.reportsService.getReportByAccounting(this.accountingReport.getForRequest()).subscribe((data:any) => {
+    this.reportsService.getReportByAccounting(this.accountingReport.getForRequest()).subscribe((data: any) => {
       this.accountingReport.setDataFromRequest(data);
       this.setDatareport(this.accountingReport)
     });
@@ -231,12 +240,29 @@ export class ReportMenuComponent implements OnInit {
 
 
 
-    this.reportsService.getReportByTechService(this.techService.getForRequest()).subscribe((data:any) => {
+    this.reportsService.getReportByTechService(this.techService.getForRequest()).subscribe((data: any) => {
       this.techService.setList(data.lines);
       this.techService.setTotalQuantity(data.totalQuantity);
       this.setDatareport(this.techService)
-    } );
+    });
 
+
+  }
+  getReportDetailedCommissions() {
+    if (!this.validate.isValidateDetailedCommissions(this.detailedCommissionsReport.userId)) return;
+
+    this.onRequest.emit(true);
+
+    if (!this.detailedCommissionsReport.startDate && !this.detailedCommissionsReport.endDate) {
+      this.detailedCommissionsReport.setStartDate(moment(this.companiesStateService.getCurrentCompany().createdAt).format('YYYY/MM/DD'))
+      this.detailedCommissionsReport.setEndDate(moment(new Date()).format('YYYY/MM/DD'))
+
+    }
+
+    this.reportsService.getReportDetailedCommissions(this.detailedCommissionsReport.getForRequest()).subscribe((data: any) => {
+      this.detailedCommissionsReport.setData(data);
+      this.setDatareport(this.detailedCommissionsReport)
+    });
 
   }
   private setDatareport(data) {
@@ -288,7 +314,10 @@ export class ReportMenuComponent implements OnInit {
       this.accountingReport.setStartDate(moment(value.start).format('YYYY-MM-DD'));
       this.accountingReport.setEndDate(moment(value.end).format('YYYY-MM-DD'));
 
-      
+      this.detailedCommissionsReport.setStartDate(moment(value.start).format('YYYY-MM-DD'));
+      this.detailedCommissionsReport.setEndDate(moment(value.end).format('YYYY-MM-DD'));
+
+
       this.validate.resetDates();
       this.validate.resetMonthlyDetailed();
     } else {
@@ -298,6 +327,7 @@ export class ReportMenuComponent implements OnInit {
       this.productsCompanyReport.resetDates();
       this.techService.resetDates();
 
+      this.detailedCommissionsReport.resetDates();
       if (this.selectedClient) {
         this.ticketsReport.setDatesByCompany(this.selectedClient);
         this.serviceReport.setDatesByCompany(this.selectedClient);
