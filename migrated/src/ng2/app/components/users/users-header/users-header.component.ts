@@ -73,10 +73,7 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   }
 
   isExistArchiveUser() {
-    return this._users.filter(item => item.selected).find(item => {
-      let company = this.companiesStateService.getCompanies().find(companyItem => companyItem.id === item.company.id);
-      return item.deletedAt || company.deletedAt
-    });
+    return this._users.filter(item => item.selected).find(item => item.deletedAt != null);
   }
   isExistPrimaryContact() {
     return this._users.filter(item => item.selected).find(item => item.isContact);
