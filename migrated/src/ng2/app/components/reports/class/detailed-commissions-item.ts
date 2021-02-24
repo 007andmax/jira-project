@@ -17,6 +17,8 @@ export class DetailedCommissionsItem {
     servicesSum: number;
     totalSum: number;
     itemGroup: string;
+
+
     constructor(data) {
         this.agreementId = data.agreementId;
         this.agreementType = data.agreementType;

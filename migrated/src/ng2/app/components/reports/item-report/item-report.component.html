@@ -2,6 +2,8 @@
 
 
 
+
+
     <p
         class="report-title"
         *ngIf="report === 'accounts-receivable'"
@@ -31,6 +33,12 @@
         *ngIf="report === 'detailed-commissions'"
     >
         Detailed Commissions Report
+    </p>
+    <p
+        class="report-title"
+        *ngIf="report === 'common-commissions'"
+    >
+        Commissions Report
     </p>
     <p
         class="report-title"
@@ -65,6 +73,8 @@
 
 
 
+
+
     <i
         class="back-page"
         (click)="back()"
@@ -74,6 +84,7 @@
     <app-taxes-report *ngIf="report === 'byTaxes'"></app-taxes-report>
     <app-product-sales-report *ngIf="report === 'byProducts'"></app-product-sales-report>
     <detailed-commissions-report *ngIf="report === 'detailed-commissions'"></detailed-commissions-report>
+    <common-commissions-report *ngIf="report === 'common-commissions'"></common-commissions-report>
     <app-customer-sales-report *ngIf="report === 'byCustomers'"></app-customer-sales-report>
     <app-ticket-report *ngIf="report === 'ticket-report'"></app-ticket-report>
     <app-service-report *ngIf="report === 'service-report'"></app-service-report>

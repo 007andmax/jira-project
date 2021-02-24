@@ -1,5 +1,39 @@
 <!-- MENU FOR NON-TECH REPORTS -->
 <div class="report-menu">
+    <div *ngIf="report === 'common-commissions'">
+        <div
+            class="run-report-content clearfix"
+            [ngClass]="className"
+        >
+            <div class="new-reports-reverse">
+                <button
+                    class="form-group btn btn-success"
+                    (click)="getReportCommonCommissions()"
+                >
+                    Get
+          Report
+                </button>
+                <div class="form-group content">
+                    <app-multi-datepicker
+                        #dp
+                        (selectedDate)="filterByDate($event)"
+                    ></app-multi-datepicker>
+                </div>
+                <div class="form-group content custom-width dropdown-height">
+                    <app-select-client-company
+                        [blockEditMode]="true"
+                        style="width: 75%;"
+                        class="light-dropdown"
+                        (selectedItem)="selectClient($event)"
+                    ></app-select-client-company>
+                </div>
+                <div class="grey-dropdown form-group content select-users-list">
+                    <app-tech-users-list-report (onChange)="onSelectTechUser($event)"></app-tech-users-list-report>
+                    <mat-error *ngIf="!validate.getTechUser()">Select the sales user</mat-error>
+                </div>
+            </div>
+        </div>
+    </div>
     <div *ngIf="report === 'detailed-commissions'">
         <div
             class="run-report-content clearfix"
@@ -120,6 +154,11 @@
 
 
 
+
+
+
+
+
                 <div class="form-group content">
                     <app-multi-datepicker
                         #dp
@@ -146,6 +185,11 @@
                     Get
           Report
                 </button>
+
+
+
+
+
 
 
 
@@ -193,6 +237,11 @@
 
 
 
+
+
+
+
+
                 </div>
                 <div class="form-group content">
                     <div class="input-field">
@@ -219,11 +268,21 @@
 
 
 
+
+
+
+
+
                     <mat-error *ngIf="!validate.getDates() && !validate.geMonthlyDetailed()">Please select any dates or intervals</mat-error>
                 </div>
             </div>
         </div>
     </div>
+
+
+
+
+
 
 
 
@@ -279,6 +338,11 @@
 
 
 
+
+
+
+
+
                     </button>
                     <i class="icn-sm report-caret-icon"></i>
                     <div
@@ -296,6 +360,11 @@
                                 (click)="onSelectTypeTaxes(item)"
                             ></button>
                         </ng-template>
+
+
+
+
+
 
 
 
@@ -337,6 +406,11 @@
 
 
 
+
+
+
+
+
                 <div class="form-group content">
                     <app-multi-datepicker
                         #dp
@@ -359,7 +433,17 @@
 
 
 
+
+
+
+
+
                 </div>
+
+
+
+
+
 
 
 
@@ -408,6 +492,11 @@
 
 
 
+
+
+
+
+
                 <div class="form-group content custom-width dropdown-height">
                     <app-select-client-company
                         [blockEditMode]="true"
@@ -434,9 +523,19 @@
 
 
 
+
+
+
+
+
             </div>
         </div>
     </div>
+
+
+
+
+
 
 
 
@@ -492,6 +591,11 @@
 
 
 
+
+
+
+
+
                     </button>
                     <i class="icn-sm report-caret-icon"></i>
                     <div
@@ -511,6 +615,11 @@
                         </ng-template>
                     </div>
                 </div>
+
+
+
+
+
 
 
 
@@ -549,7 +658,17 @@
 
 
 
+
+
+
+
+
                 </div>
+
+
+
+
+
 
 
 
@@ -602,9 +721,19 @@
 
 
 
+
+
+
+
+
             </div>
         </div>
     </div>
+
+
+
+
+
 
 
 
@@ -660,6 +789,11 @@
 
 
 
+
+
+
+
+
                     </button>
                     <i class="icn-sm report-caret-icon"></i>
                     <div
@@ -693,8 +827,18 @@
 
 
 
+
+
+
+
+
                     </div>
                 </div>
+
+
+
+
+
 
 
 
@@ -733,7 +877,17 @@
 
 
 
+
+
+
+
+
                 </div>
+
+
+
+
+
 
 
 
@@ -780,9 +934,19 @@
 
 
 
+
+
+
+
+
             </div>
         </div>
     </div>
+
+
+
+
+
 
 
 
@@ -833,6 +997,11 @@
 
 
 
+
+
+
+
+
                 <div class="form-group content">
                     <app-multi-datepicker
                         #dp
@@ -854,7 +1023,17 @@
 
 
 
+
+
+
+
+
                 </div>
+
+
+
+
+
 
 
 
@@ -883,6 +1062,11 @@
                     ></app-select-client-company>
                     <mat-error *ngIf="!validate.getCompany()">Please select the company name</mat-error>
                 </div>
+
+
+
+
+
 
 
 
@@ -938,6 +1122,11 @@
 
 
 
+
+
+
+
+
                     <label class="control checkbox">
                         <input
                             type="checkbox"
@@ -975,7 +1164,17 @@
 
 
 
+
+
+
+
+
     </div>
+
+
+
+
+
 
 
 
@@ -1023,6 +1222,11 @@
 
 
 
+
+
+
+
+
                 <div class="form-group content">
                     <app-multi-datepicker
                         #dp
@@ -1044,7 +1248,17 @@
 
 
 
+
+
+
+
+
                 </div>
+
+
+
+
+
 
 
 
@@ -1073,6 +1287,11 @@
                     ></app-select-client-company>
                     <mat-error *ngIf="!validate.getCompany()">Please select the company name</mat-error>
                 </div>
+
+
+
+
+
 
 
 
@@ -1119,6 +1338,11 @@
 
 
 
+
+
+
+
+
                 </div>
             </div>
         </div>
@@ -1138,7 +1362,17 @@
 
 
 
+
+
+
+
+
     </div>
+
+
+
+
+
 
 
 
@@ -1184,11 +1418,21 @@
 
 
 
+
+
+
+
+
                 <div class="form-group content">
                     <app-multi-datepicker
                         #dp
                         (selectedDate)="filterByDate($event)"
                     ></app-multi-datepicker>
+
+
+
+
+
 
 
 
@@ -1234,7 +1478,17 @@
 
 
 
+
+
+
+
+
                 </div>
+
+
+
+
+
 
 
 

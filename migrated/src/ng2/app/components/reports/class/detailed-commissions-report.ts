@@ -9,18 +9,18 @@ export class DetailedCommissionsReport {
     endDate: string;
     reducedCompanies: Array<DetailedCommissionsReducedCompanies> = [];
     lines: Array<DetailedCommissionsItem> = [];
-
     categorySalesValue: any;
     clientCompanyName: string;
-
     productsSum: number;
     servicesSum: number;
-
     techCompanyName: string;
     totalCommissionSum: number;
     totalSum: number;
     priceSum: number;
     detailsByProducts: boolean = true;
+
+
+
 
     constructor(data = null) {
         if (data) {

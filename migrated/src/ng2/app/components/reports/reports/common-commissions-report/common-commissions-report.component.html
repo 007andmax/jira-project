@@ -1,0 +1,166 @@
+<div>
+    <app-report-menu
+        [report]="'common-commissions'"
+        (onRequest)="onRequest($event)"
+        (getReport)="getReport($event)"
+    ></app-report-menu>
+</div>
+<app-report-additional-actions
+    [report]="'common-commissions'"
+    [accountType]="'TECH'"
+    [template]="'CUSTOMER_REPORT'"
+    [fileName]="'common-commissions-report'"
+></app-report-additional-actions>
+<!--  -->
+<div
+    class="loading"
+    *ngIf="loadingInProgress"
+></div>
+<div
+    class="product-list___ticket report-show-footer-header"
+    id="product-list-ticket-data"
+>
+    <div
+        class="product-list-ticket"
+        style="padding: 0px;"
+        *ngIf="!loadingInProgress"
+    >
+        <div
+            class="customer-ticket"
+            *ngIf="onInit"
+        >
+            <div class="customer-ticket__report">
+                <div class="report-header">
+                    <h1>Commissions Report</h1>
+                    <div class="company-info">
+                        <h3>
+                            {{ commonCommissionsReport.companyName.name || 'All companies' }}
+                        </h3>
+                        <p>
+                            <span>{{commonCommissionsReport.startDate}}</span>
+                            -
+                            <span>{{ commonCommissionsReport.endDate }}</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="customer-ticket__report--summary">
+
+                    <div class="commissions__header clearfix">
+                        <div class="commissions__header--item canvas-chart">
+                            <h3 style="padding: 0;">Sales by customer</h3>
+                            <nvd3
+                                [options]="chartOptions"
+                                [data]="byCustomerChartData"
+                            ></nvd3>
+
+                        </div>
+                        <div class="commissions__header--item">
+                            <ng-template
+                                ngFor
+                                let-time
+                                [ngForOf]="byCustomerChartData"
+                                let-i="index"
+                                [ngForTrackBy]="trackByIndex"
+                            >
+                                <p [ngClass]="'service-color-' + i">
+                                    {{ time.name }}
+                                    <span>${{ time.time  }}</span>
+                                </p>
+                            </ng-template>
+                        </div>
+
+                        <div class="commissions__header--item canvas-chart no-value">
+                            <h3 style="padding: 0;">Top Sales Category</h3>
+                            <nvd3
+                                [options]="chartOptionsToggler"
+                                [data]="byCategoriesChartData"
+                            ></nvd3>
+
+                        </div>
+                        <div class="commissions__header--item">
+
+                            <ng-template
+                                ngFor
+                                let-time
+                                [ngForOf]="byCategoriesChartData"
+                                let-i="index"
+                                [ngForTrackBy]="trackByIndex"
+                            >
+                                <p
+                                    [ngClass]="'service-color-' + i"
+                                    *ngIf="showCategoriesData"
+                                >
+                                    {{ time.name }}
+                                    <span>${{ time.time | toFixed : 2 }}</span>
+                                </p>
+                            </ng-template>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="customer-ticket__report--details commission-pdf">
+                    <h3>Commissions Details</h3>
+                    <div class="details-header row">
+                        <div class="col-md-4">Client</div>
+                        <div class="col-md-2">
+                            <span ng-if="showProducts">Product Price</span>
+                        </div>
+                        <div class="col-md-2">Contracts</div>
+                        <div class="col-md-2">Total sales</div>
+
+                        <div class="col-md-2">Commissions</div>
+
+                    </div>
+                    <ng-template
+                        ngFor
+                        let-line
+                        [ngForOf]="commonCommissionsReport.lines"
+                        let-i="index"
+                        [ngForTrackBy]="trackByIndex"
+                    >
+                        <div class="details-content row">
+                            <div class="col-md-4">{{line.companyName}}</div>
+                            <div class="col-md-2">
+                                <span ng-if="showProducts">{{ line.productsSum | toFixed : 2 }}</span>
+                            </div>
+                            <div class="col-md-2 device-field-pdf">{{ line.servicesSum | toFixed : 2 }}</div>
+                            <div class="col-md-2">{{ line.totalSum  }}</div>
+
+                            <div class="col-md-2">
+                                {{ (line.commissionSum || 0) | toFixed : 2 }}
+                            </div>
+
+                        </div>
+                    </ng-template>
+                    <div
+                        class="details-content row"
+                        style="font-weight: bold"
+                    >
+                        <div class="col-md-4">Total</div>
+                        <div class="col-md-2">
+                            <span ng-if="showProducts">
+                                {{ commonCommissionsReport.productsSum | toFixed : 2 }}
+                            </span>
+                        </div>
+
+                        <div class="col-md-2">
+                            {{ commonCommissionsReport.servicesSum | toFixed : 2 }}
+                        </div>
+                        <div class="col-md-2">
+                            {{ commonCommissionsReport.totalSum | toFixed : 2 }}
+                        </div>
+                        <div class="col-md-2">
+                            {{ commonCommissionsReport.totalCommissionSum | toFixed : 2 }}
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <app-report-footer *ngIf="onInit"></app-report-footer>
+            </div>
+        </div>
+    </div>
+</div>

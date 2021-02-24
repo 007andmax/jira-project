@@ -38,6 +38,10 @@ export class ReportValidate {
         if (!techUser) this.techUser = false;
         return this.techUser;
     }
+    public isValidateCommonCommissions(techUser) {
+        if (!techUser) this.techUser = false;
+        return this.techUser;
+    }
     public isValidateProduct(start, end, company, type) {
         if (type === 'Summary' && start === '' && end === '') {
             this.dates = false;

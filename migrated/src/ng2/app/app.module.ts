@@ -393,6 +393,7 @@ import { LeftPanelReportsComponent } from './components/left-panel/left-panel-re
 import { BreadcrumbsComponent } from './components/shared/breadcrumbs/breadcrumbs.component';
 import { DetailedCommissionsReportComponent } from './components/reports/reports/detailed-commissions-report/detailed-commissions-report.component';
 import { ToFixedPipe } from './pipe/to-fixed.pipe';
+import { CommonCommissionsReportComponent } from './components/reports/reports/common-commissions-report/common-commissions-report.component';
 
 /**
  * declare angular
@@ -950,7 +951,8 @@ angular.module('quicktech')
     LeftPanelReportsComponent,
     BreadcrumbsComponent,
     DetailedCommissionsReportComponent,
-    ToFixedPipe
+    ToFixedPipe,
+    CommonCommissionsReportComponent
   ],
   imports: [
     BrowserModule,

@@ -21,6 +21,7 @@ import { ProductCompanyReport } from '../class/product-company-report';
 import { TechService } from '../class/tech-service';
 import { AccountingReport } from '../class/accounting-report';
 import { DetailedCommissionsReport } from '../class/detailed-commissions-report';
+import { CommonCommissionsReport } from '../class/common-commissions-report';
 
 
 @Component({
@@ -41,6 +42,7 @@ export class ReportMenuComponent implements OnInit {
   productsCompanyReport: ProductCompanyReport = new ProductCompanyReport();
   customerSalesReport: CustomerSalesReport = new CustomerSalesReport();
   detailedCommissionsReport: DetailedCommissionsReport = new DetailedCommissionsReport();
+  commonCommissionsReport: CommonCommissionsReport = new CommonCommissionsReport();
   ticketsReport: TicketsReport = new TicketsReport();
   serviceReport: ServiceReports = new ServiceReports();
   loadingInProgress: boolean = true;
@@ -114,6 +116,7 @@ export class ReportMenuComponent implements OnInit {
       this.ticketsReport.setCompanyId(null);
       this.accountingReport.setCompanyId(null);
       this.detailedCommissionsReport.setCompanyId(null);
+      this.commonCommissionsReport.setCompanyId(null);
     } else {
       this.selectedClient = selectClient.item;
       this.accountingReport.setCompanyId(selectClient.item.id);
@@ -124,6 +127,7 @@ export class ReportMenuComponent implements OnInit {
       this.ticketsReport.setCompanyId(selectClient.item.id);
       this.serviceReport.setCompanyId(selectClient.item.id);
       this.detailedCommissionsReport.setCompanyId(selectClient.item.id);
+      this.commonCommissionsReport.setCompanyId(selectClient.item.id);
       if (this.ticketsReport.startDate === '' && this.ticketsReport.endDate === '') this.ticketsReport.setDatesByCompany(this.selectedClient);
       if (this.serviceReport.startDate === '' && this.serviceReport.endDate === '') this.serviceReport.setDatesByCompany(this.selectedClient);
       this.validate.resetCompany();
@@ -132,6 +136,7 @@ export class ReportMenuComponent implements OnInit {
   }
   toggleDetailsByProducts(data) {
     this.detailedCommissionsReport.setDetailsByProducts(data);
+    this.commonCommissionsReport.setDetailsByProducts(data);
   }
   toggleShowResponseTime(event) {
     this.ticketReportStateService.toggleShowResponseTime(event.target.checked);
@@ -149,6 +154,7 @@ export class ReportMenuComponent implements OnInit {
     this.ticketsReport.setTechUser(data);
     this.techService.setTechUserId((data) ? data.id : null);
     this.detailedCommissionsReport.setTechUserId((data) ? data.id : null);
+    this.commonCommissionsReport.setTechUserId((data) ? data.id : null);
     if (data) this.validate.resetTechUser();
   }
   getReportByTaxes() {
@@ -265,6 +271,23 @@ export class ReportMenuComponent implements OnInit {
     });
 
   }
+  getReportCommonCommissions() {
+    if (!this.validate.isValidateCommonCommissions(this.commonCommissionsReport.userId)) return;
+
+    this.onRequest.emit(true);
+
+    if (!this.commonCommissionsReport.startDate && !this.commonCommissionsReport.endDate) {
+      this.commonCommissionsReport.setStartDate(moment(this.companiesStateService.getCurrentCompany().createdAt).format('YYYY/MM/DD'))
+      this.commonCommissionsReport.setEndDate(moment(new Date()).format('YYYY/MM/DD'))
+
+    }
+
+    this.reportsService.getReportDetailedCommissions(this.commonCommissionsReport.getForRequest()).subscribe((data: any) => {
+      this.commonCommissionsReport.setData(data);
+      this.setDatareport(this.commonCommissionsReport)
+    });
+
+  }
   private setDatareport(data) {
 
     if (this.report === 'income-accounts') {
@@ -316,6 +339,8 @@ export class ReportMenuComponent implements OnInit {
 
       this.detailedCommissionsReport.setStartDate(moment(value.start).format('YYYY-MM-DD'));
       this.detailedCommissionsReport.setEndDate(moment(value.end).format('YYYY-MM-DD'));
+      this.commonCommissionsReport.setStartDate(moment(value.start).format('YYYY-MM-DD'));
+      this.commonCommissionsReport.setEndDate(moment(value.end).format('YYYY-MM-DD'));
 
 
       this.validate.resetDates();
@@ -328,6 +353,7 @@ export class ReportMenuComponent implements OnInit {
       this.techService.resetDates();
 
       this.detailedCommissionsReport.resetDates();
+      this.commonCommissionsReport.resetDates();
       if (this.selectedClient) {
         this.ticketsReport.setDatesByCompany(this.selectedClient);
         this.serviceReport.setDatesByCompany(this.selectedClient);
