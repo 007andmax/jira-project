@@ -293,7 +293,7 @@
         return searchResult;
       }
 
-    
+
 
       function changeUsersRoles(userIds, role, callback) {
 
@@ -313,67 +313,9 @@
         Utils.handleCallback(future, callback);
       }
 
-      function save(user, callback, addSubscription) {
 
-        if (!user) {
-          throw 'user is required!';
-        }
 
-        var url = '/users',
-          method = 'POST';
 
-        if (user.id) {
-          method = 'PUT';
-          url = url + '/' + user.id;
-
-        }
-
-        if (addSubscription && !user.subscription) {
-          user.subscription = { id: null, invoice: null, ticket: null, ticketManager: null }
-        }
-
-        var future = $http({
-          url: url,
-          method: method,
-          data: user
-        });
-
-        Utils.handleCallback(future, callback);
-      }
-
-      function isEmailUnique(email, id, isTechUser, companyId, callback) {
-
-        if (!email) {
-          throw 'email is required!'
-        }
-
-        var isCompanyId = (typeof companyId === 'function' ? false : companyId);
-
-        if (!isCompanyId && !callback) {
-          callback = companyId;
-        }
-
-        var info = Utils.customizeObj({});
-        var url = '/users/isEmailUnique?email=' + email + '&id=' + id + '&isTechUser=' + isTechUser;
-
-        if (isCompanyId) {
-          url += '&companyId=' + isCompanyId;
-        }
-
-        $http.get(url).then(function (resp) {
-          Utils.customizeObj(resp.data, info);
-
-          if (callback) {
-            callback(resp.data);
-          }
-
-        }, function (resp) {
-          if (callback) {
-            callback(resp.data);
-          }
-        });
-        return info;
-      }
 
       function archiveUser(ids, callback) {
         if (!Array.isArray(ids)) {
@@ -436,28 +378,7 @@
         return errorMessage;
       }
 
-      function updateWelcomeWizard(state, dontShowThisAgain) {
-        var dto = $rootScope.currentUser.wizardTracker || {};
-        switch (state.split('.').pop()) {
-          case 'techUsers':
-            dto.addStaff = true;
-            break;
-          case 'email':
-            dto.emailSettings = true;
-            break;
-          case 'taxes':
-            dto.rates = true;
-            break;
-          case 'companyProfile':
-            dto.companySettings = true;
-            break;
-          case 'setupClient':
-            dto.setupClient = true;
-            break;
-        }
 
-        $http.put('/settings/userProfile/updateWizard' + (dontShowThisAgain ? '?dontShowThisAgain=' + dontShowThisAgain : ''), dto);
-      }
 
       return {
         _addInitListener: addInitListener,
@@ -474,13 +395,11 @@
         searchByClientUsers: searchByClientUsers,
         searchByUsersFromCompany: searchByUsersFromCompany,
         changeUsersRoles: changeUsersRoles,
-        save: save,
         archiveUser: archiveUser,
-        isEmailUnique: isEmailUnique,
         deleteAvatar: deleteAvatar,
         saveAvatar: saveAvatar,
-        updateWelcomeWizard: updateWelcomeWizard,
-        
+
+
       }
 
     }]);

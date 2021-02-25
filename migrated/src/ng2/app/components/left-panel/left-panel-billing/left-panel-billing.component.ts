@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { PermissionsService } from 'src/ng2/app/services/permissions/permissions.service';
+import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-state.service';
 import { LeftPanelStateService } from 'src/ng2/app/states/left-panel/left-panel-state.service';
 import { QuoteStateService } from 'src/ng2/app/states/quote/quote-state.service';
 
@@ -19,6 +20,7 @@ export class LeftPanelBillingComponent implements OnInit, OnDestroy {
   @Output() onGoToLink = new EventEmitter();
   @Output() onChangeState = new EventEmitter();
   @Output() onOpenPanel = new EventEmitter();
+  showNotificationReview: boolean = false;
   /**
    * Creates an instance of the LeftPanelComponent with the injected services
    * @param {QuoteStateService} quoteStateService Service to work with quote
@@ -26,6 +28,7 @@ export class LeftPanelBillingComponent implements OnInit, OnDestroy {
   constructor(
     private leftPanelStateService: LeftPanelStateService,
     private permissionsService: PermissionsService,
+    public contractsStateService: ContractsStateService,
   ) { }
 
 
@@ -47,6 +50,10 @@ export class LeftPanelBillingComponent implements OnInit, OnDestroy {
     this.leftPanelStateService.onFirstOpen.subscribe(data => {
       if (this.isBillingState(data)) this.open = true;
     })
+    let getOnShowNotificationReview = this.contractsStateService.getOnShowNotificationReview().subscribe(data => {
+      this.showNotificationReview = true;
+    })
+    this.sub.add(getOnShowNotificationReview);
   }
   isBillingState(state) {
     return (state === 'billing-dashboard'

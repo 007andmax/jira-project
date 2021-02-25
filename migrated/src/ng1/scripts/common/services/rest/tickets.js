@@ -3,10 +3,10 @@
 (function (window, $, undefined) {
   var numberPrefix = 'Tkt# ';
   var services = angular.module('main.services');
-  services.factory('TicketsService', ['$http', '$rootScope', 'RealTimeService', 'Utils', 'quicktech.common.services.SharedStateService', '$timeout','$filter',
-    function ($http, $rootScope, RealTimeService, Utils, SharedStateService, $timeout,$filter) {
+  services.factory('TicketsService', ['$http', '$rootScope', 'RealTimeService', 'Utils', 'quicktech.common.services.SharedStateService', '$timeout', '$filter',
+    function ($http, $rootScope, RealTimeService, Utils, SharedStateService, $timeout, $filter) {
       var scope = $rootScope.$new();
-      var ticketChangedActions = ['ASSIGNED_USER', 'PRIORITY_CHANGED', 'STATUS', 'TRASH', 'REPORT_AS_SPAM', 'RESTORE_FROM_SPAM', 'TICKET_SHARE', 'MARKED_AS_SPAM', 'EDITED_TICKET','RECURRING_TICKETS_OPEN', 'RECURRING_TICKETS_CLOSED'];
+      var ticketChangedActions = ['ASSIGNED_USER', 'PRIORITY_CHANGED', 'STATUS', 'TRASH', 'REPORT_AS_SPAM', 'RESTORE_FROM_SPAM', 'TICKET_SHARE', 'MARKED_AS_SPAM', 'EDITED_TICKET', 'RECURRING_TICKETS_OPEN', 'RECURRING_TICKETS_CLOSED'];
       var queries, loadingInProcess, lastListType, queriesForCompanyProfilePage;
       var MY_TICKETS = false;
       var operators = {
@@ -56,7 +56,7 @@
         ticketsQuantity: 0,
         leftPanelCounters: {}
       };
-      $rootScope.$on('getCountsTickets', function(){
+      $rootScope.$on('getCountsTickets', function () {
         changeTicketsCounts();
       });
       var globalSearch = SharedStateService.getSharedState('globalSearch');
@@ -77,7 +77,7 @@
       });
       var ticketsSharedState = SharedStateService.getSharedState('ticketsHeader');
       function getQueries(currentUserId) {
-   
+
         return {
           ALL: { excludeTrashSpam: true },
           UNASSIGNED: {
@@ -86,8 +86,8 @@
               {
                 "fieldFilterDtos": [
                   {
-                    "path":"status",
-                    "operator":"NULL"
+                    "path": "status",
+                    "operator": "NULL"
                   }
                 ]
               },
@@ -107,7 +107,7 @@
                     "values": [false]
                   }
                 ],
-                "predicateRule":"OR"
+                "predicateRule": "OR"
               }
             ]
           },
@@ -129,10 +129,10 @@
                     "operator": "NULL",
                     "values": []
                   },
-                  {  
-                    "path":"multiAssignedUsers.id",
-                    "operator":"IN",
-                    "values":[  
+                  {
+                    "path": "multiAssignedUsers.id",
+                    "operator": "IN",
+                    "values": [
                       currentUserId
                     ]
                   }
@@ -158,9 +158,9 @@
                   }
                 ]
               }
-            ], 
+            ],
             "offset": 0
-          }, 
+          },
           RECURRING_TICKETS_OPEN: {
             excludeTrashSpam: true,
             groupFieldFilters: [
@@ -322,14 +322,14 @@
           },
         };
       }
-     
-    
+
+
       function getTicketFromStorage(id) {
-        return storage.tickets.find(function(ticket) {
+        return storage.tickets.find(function (ticket) {
           return ticket.id === id;
         })
       }
-     
+
       function search(callback, keyword, companyId) {
         if (!keyword || keyword === '[$empty$]' || keyword === 'undefined') {
           keyword = '';
@@ -341,86 +341,11 @@
             }
             return resp.data;
           });
-      } 
-      
-      function changePriority(ticketId, priority, callback) {
-        if (!ticketId || !priority) {
-          throw 'ticketId and priority is required arguments!';
-        }
-        changeTicket('priority', ticketId, priority.toUpperCase(), callback);
       }
-      function assignTo(ticketId, userId, callback) {
-        if (!ticketId || !userId) {
-          throw 'ticketId and userId is required arguments!';
-        }
-        changeTicket('assign', ticketId, userId, callback);
-      }
-      function changeStatus(ticketId, status, callback, recipientsIds) {
-        if (!ticketId || !status) {
-          throw 'ticketId and status is required arguments!';
-        }
-        changeTicket('status', ticketId, status.toUpperCase(), callback, recipientsIds);
-      }
-      function markAsSpam(ticketId, callback) {
-        if (!ticketId) {
-          throw 'ticketId is required arguments!';
-        }
-        changeTicket('markAsSpam', ticketId, false, callback);
-      }
-      function reportAsSpam(ticketId, callback) {
-        if (!ticketId) {
-          throw 'ticketId is required arguments!';
-        }
-        changeTicket('reportAsSpam', ticketId, false, callback);
-      }
-      function restoreFromSpam(ticketId, callback) {
-        if (!ticketId) {
-          throw 'ticketId is required arguments!';
-        }
-        changeTicket('restoreFromSpam', ticketId, false, callback);
-      }
-      function changeTrashFlag(ticketId, value, callback) {
-        if (!ticketId) {
-          throw 'ticketId is required arguments!';
-        }
-        changeTicket('trash', ticketId, !!value, callback);
-      }
-      function changeLinkedAgent(ticketId, agentId, callback) {
-        if (!ticketId) {
-          throw 'ticketId is required arguments!';
-        }
-        changeTicket('linkedAgent', ticketId, agentId, callback);
-      }
-      function updateDiscount(ticketId, discountId, callback) {
-        var ticketIds = Array.isArray(ticketId) ? ticketId : [ticketId];
-        changeTicket('updateDiscount', ticketIds, discountId || '', callback);
-      }
-      function changeTicket(action, id, value, callback, recipientsIds) {
-        var url, data = { value: value };
-        if (Object.prototype.toString.call(id) === '[object Array]') {
-          url = '/v2/tickets/' + action;
-          data.ids = id;
-        } else {
-          url = '/v2/tickets/' + id + '/' + action;
-        }
-        // if (value === 'COMPLETED') {
-        data.recipientsIds = recipientsIds;
-        // }
-        var future = $http.put(url, data);
-        Utils.handleCallback(future, callback)
-      }
-      function deleteForever(ticketId, callback) {
-        if (!ticketId) {
-          throw 'ticketId is required arguments!';
-        }
-        var ids = ticketId;
-        if (Object.prototype.toString.call(ticketId) !== '[object Array]') {
-          ids = [ticketId];
-        }
-        var future = $http.post('/v2/tickets/delete/', { ids: ids });
-        Utils.handleCallback(future, callback)
-      }
-      
+
+
+
+
       function createTicket(ticket, callback) {
         if (ticket.priorityLevel) {
           ticket.priorityLevel = ticket.priorityLevel.toUpperCase();
@@ -445,18 +370,8 @@
       return {
         getTicketFromStorage: getTicketFromStorage,
         search: search,
-        changePriority: changePriority,
-        assignTo: assignTo,
-        changeStatus: changeStatus,
-        markAsSpam: markAsSpam,
-        reportAsSpam: reportAsSpam,
-        restoreFromSpam: restoreFromSpam,
-        changeTrashFlag: changeTrashFlag,
-        deleteForever: deleteForever,
         createTicket: createTicket,
-        getActualNumber: getActualNumber,
-        changeLinkedAgent: changeLinkedAgent,
-        updateDiscount: updateDiscount,
+        getActualNumber: getActualNumber
       }
     }
   ]);
