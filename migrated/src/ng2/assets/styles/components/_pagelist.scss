@@ -13,7 +13,6 @@
       position: sticky;
       top: $header-height;
       padding-top: 24px;
-      margin-top: -24px;
     }
   }
 
@@ -45,6 +44,9 @@
   &__body-table-container {
     width: 100%;
     overflow: auto;
+  }
+  &__body-table-container {
+    min-height: 100vh;
   }
   &__body-table-container::-webkit-scrollbar {
     height: 0;
