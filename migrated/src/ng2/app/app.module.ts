@@ -394,6 +394,8 @@ import { BreadcrumbsComponent } from './components/shared/breadcrumbs/breadcrumb
 import { DetailedCommissionsReportComponent } from './components/reports/reports/detailed-commissions-report/detailed-commissions-report.component';
 import { ToFixedPipe } from './pipe/to-fixed.pipe';
 import { CommonCommissionsReportComponent } from './components/reports/reports/common-commissions-report/common-commissions-report.component';
+import { SoftwareSummaryReportComponent } from './components/reports/reports/software-summary-report/software-summary-report.component';
+import { SoftwareSummaryDevicesDroDownComponent } from './components/reports/reports/software-summary-report/software-summary-devices-dro-down/software-summary-devices-dro-down.component';
 
 /**
  * declare angular
@@ -952,7 +954,9 @@ angular.module('quicktech')
     BreadcrumbsComponent,
     DetailedCommissionsReportComponent,
     ToFixedPipe,
-    CommonCommissionsReportComponent
+    CommonCommissionsReportComponent,
+    SoftwareSummaryReportComponent,
+    SoftwareSummaryDevicesDroDownComponent
   ],
   imports: [
     BrowserModule,

@@ -52,6 +52,9 @@ export class DevicesService {
   public getDeviceExtended(companyId, agentId) {
     return this.http.get(this.apiUrl + `devices/extended?companyId=${companyId}&agentId=${agentId}`);
   }
+  public getSoft(companyId) {
+    return this.http.get(this.apiUrl + `devices/extended?companyId=${companyId}`);
+  }
   public editAgentInfo(data) {
     return this.http.post(this.apiUrl + '/devices/editAgentInfo', data);
   }

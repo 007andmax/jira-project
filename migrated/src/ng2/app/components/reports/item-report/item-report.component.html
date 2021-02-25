@@ -1,9 +1,10 @@
 <div class="product-list-report ticket-report">
-
-
-
-
-
+    <p
+        class="report-title"
+        *ngIf="report === 'software-summary'"
+    >
+        Software Summary Report
+    </p>
     <p
         class="report-title"
         *ngIf="report === 'accounts-receivable'"
@@ -70,16 +71,12 @@
     >
         Accounting report
     </p>
-
-
-
-
-
     <i
         class="back-page"
         (click)="back()"
     ></i>
     <app-gl-number *ngIf="report === 'income-accounts'"></app-gl-number>
+    <software-summary-report *ngIf="report === 'software-summary'"></software-summary-report>
     <app-accounts-receivable *ngIf="report === 'accounts-receivable'"></app-accounts-receivable>
     <app-taxes-report *ngIf="report === 'byTaxes'"></app-taxes-report>
     <app-product-sales-report *ngIf="report === 'byProducts'"></app-product-sales-report>

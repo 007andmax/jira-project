@@ -180,6 +180,10 @@
           url: '/ng2/report/common-commissions',
           template: '<item-report-component></item-report-component>'
         }))
+        .state('software-summary', waitForServices({
+          url: '/ng2/report/software-summary',
+          template: '<item-report-component></item-report-component>'
+        }))
         .state('byCustomers', waitForServices({
           url: '/ng2/report/byCustomers',
           template: '<item-report-component></item-report-component>'
@@ -281,11 +285,6 @@
         })).state('hardware-summary', waitForServices({
           url: '/reports/hardware-summary',
           templateUrl: '/ng1/scripts/core/reports/reports-templates/hardware-summary.tpl.html',
-          controller: 'quicktech.core.reports.reportsCtrl'
-        }))
-        .state('software-summary', waitForServices({
-          url: '/reports/software-summary',
-          templateUrl: '/ng1/scripts/core/reports/reports-templates/software-summary.tpl.html',
           controller: 'quicktech.core.reports.reportsCtrl'
         }))
         .state('myprofile-component', waitForServices({

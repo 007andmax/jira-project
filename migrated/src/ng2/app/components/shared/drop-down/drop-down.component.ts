@@ -6,7 +6,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ElementRef } from '@ang
   styleUrls: ['./drop-down.component.scss']
 })
 export class DropDownComponent implements OnInit {
-  selectedItem = '';
+  selectedItem: any = '';
 
   @Input() dropdownWidth: string = null;
   @Input() dropdownHeight: string = null;

@@ -22,6 +22,9 @@ import { TechService } from '../class/tech-service';
 import { AccountingReport } from '../class/accounting-report';
 import { DetailedCommissionsReport } from '../class/detailed-commissions-report';
 import { CommonCommissionsReport } from '../class/common-commissions-report';
+import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.service';
+import { SoftwareSummaryReport } from '../class/software-summary-report';
+import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
 
 
 @Component({
@@ -43,6 +46,7 @@ export class ReportMenuComponent implements OnInit {
   customerSalesReport: CustomerSalesReport = new CustomerSalesReport();
   detailedCommissionsReport: DetailedCommissionsReport = new DetailedCommissionsReport();
   commonCommissionsReport: CommonCommissionsReport = new CommonCommissionsReport();
+  softwareSummaryReport: SoftwareSummaryReport = new SoftwareSummaryReport();
   ticketsReport: TicketsReport = new TicketsReport();
   serviceReport: ServiceReports = new ServiceReports();
   loadingInProgress: boolean = true;
@@ -51,6 +55,9 @@ export class ReportMenuComponent implements OnInit {
   yearToDate = false;
   validate: ReportValidate = new ReportValidate();
   isDisabledCompany: boolean = false;
+  allDevices = [];
+  devices = [];
+  softSelect = [];
   @Input() report = "";
   @Output() getReport = new EventEmitter<any>();
   @Output() onRequest = new EventEmitter<any>();
@@ -60,6 +67,8 @@ export class ReportMenuComponent implements OnInit {
   constructor(private reportsService: ReportsService,
     private reportsStateService: ReportsStateService,
     private productService: ProductService,
+    private devicesStateService: DevicesStateService,
+    private devicesService: DevicesService,
     private companiesStateService: CompaniesStateService,
     private ticketReportStateService: TicketReportStateService) { }
 
@@ -69,7 +78,43 @@ export class ReportMenuComponent implements OnInit {
       this.isDisabledCompany = true;
     }
     if (this.report === 'byCustomers') this.isDisabledCompany = true;
+    if (this.devicesStateService.getAllDevices()) this.allDevices = this.devicesStateService.getAllDevices();
+    let getOnDevices = this.devicesStateService.getOnDevices().subscribe((data) => {
+      this.allDevices = data;
+    })
+    //  this.sub.add(getOnDevices);
+  }
+  public getDevicesByCompany(companyId) {
+    this.devices = (this.devicesStateService.getAllDevices()[companyId]) ? this.devicesStateService.getAllDevices()[companyId] : [];
+  }
+  public resetSoft() {
+    this.softSelect = [];
+  }
+  public getSoftByCompany(companyId) {
 
+    this.devicesService.getSoft(companyId).subscribe((resp: any) => {
+      // $rootScope.softwareSummarySelectedCompany = resp;
+      this.softSelect = [];
+      if (resp) {
+        resp[companyId].map((item: any) => {
+          if (item.report) {
+            item.report.softList.map((item) => {
+              item.softName && this.softSelect.push({ name: item.softName, type: 'soft' });
+              item.softPublisher && this.softSelect.push({ name: item.softPublisher, type: 'publisher' });
+            });
+          }
+        });
+        var obj = {};
+        for (var i = 0, len = this.softSelect.length; i < len; i++) {
+          obj[this.softSelect[i]['name']] = this.softSelect[i];
+        }
+        this.softSelect = [];
+        for (var key in obj) {
+          this.softSelect.push(obj[key]);
+        }
+
+      }
+    })
   }
   public onSelectDetailed(data) {
     this.yearToDate = false;
@@ -117,6 +162,9 @@ export class ReportMenuComponent implements OnInit {
       this.accountingReport.setCompanyId(null);
       this.detailedCommissionsReport.setCompanyId(null);
       this.commonCommissionsReport.setCompanyId(null);
+      this.softwareSummaryReport.setCompanyId(null);
+      this.getDevicesByCompany(null);
+      this.resetSoft();
     } else {
       this.selectedClient = selectClient.item;
       this.accountingReport.setCompanyId(selectClient.item.id);
@@ -128,6 +176,9 @@ export class ReportMenuComponent implements OnInit {
       this.serviceReport.setCompanyId(selectClient.item.id);
       this.detailedCommissionsReport.setCompanyId(selectClient.item.id);
       this.commonCommissionsReport.setCompanyId(selectClient.item.id);
+      this.softwareSummaryReport.setCompanyId(selectClient.item.id);
+      this.getDevicesByCompany(selectClient.item.id);
+      this.getSoftByCompany(selectClient.item.id);
       if (this.ticketsReport.startDate === '' && this.ticketsReport.endDate === '') this.ticketsReport.setDatesByCompany(this.selectedClient);
       if (this.serviceReport.startDate === '' && this.serviceReport.endDate === '') this.serviceReport.setDatesByCompany(this.selectedClient);
       this.validate.resetCompany();
