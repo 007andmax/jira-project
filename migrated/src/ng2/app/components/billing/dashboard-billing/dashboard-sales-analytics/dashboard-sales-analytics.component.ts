@@ -105,7 +105,7 @@ export class DashboardSalesAnalyticsComponent implements OnInit {
          sin2.push({ x: i, y: 0 });*/
       } else {
         sin.push({ x: i, y: this.chartData[i].totalSales });
-        sin2.push({ x: i, y: this.chartData[i].totalReceivable });
+        sin2.push({ x: i, y: this.chartData[i].totalIncomeAmount });
       }
 
     }
