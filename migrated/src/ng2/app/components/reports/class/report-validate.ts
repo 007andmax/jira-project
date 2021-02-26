@@ -87,4 +87,9 @@ export class ReportValidate {
         if (!company) this.company = false;
         return this.dates && this.company;
     }
+    public isValidateSoftwareSummary(company) {
+
+        if (!company) this.company = false;
+        return this.company;
+    }
 }

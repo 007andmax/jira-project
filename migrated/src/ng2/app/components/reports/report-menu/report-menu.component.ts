@@ -57,7 +57,7 @@ export class ReportMenuComponent implements OnInit {
   isDisabledCompany: boolean = false;
   allDevices = [];
   devices = [];
-  softSelect = [];
+
   @Input() report = "";
   @Output() getReport = new EventEmitter<any>();
   @Output() onRequest = new EventEmitter<any>();
@@ -86,33 +86,33 @@ export class ReportMenuComponent implements OnInit {
   }
   public getDevicesByCompany(companyId) {
     this.devices = (this.devicesStateService.getAllDevices()[companyId]) ? this.devicesStateService.getAllDevices()[companyId] : [];
+
   }
-  public resetSoft() {
-    this.softSelect = [];
-  }
+
   public getSoftByCompany(companyId) {
 
     this.devicesService.getSoft(companyId).subscribe((resp: any) => {
       // $rootScope.softwareSummarySelectedCompany = resp;
-      this.softSelect = [];
+      this.softwareSummaryReport.resetSoft();
       if (resp) {
         resp[companyId].map((item: any) => {
           if (item.report) {
             item.report.softList.map((item) => {
-              item.softName && this.softSelect.push({ name: item.softName, type: 'soft' });
-              item.softPublisher && this.softSelect.push({ name: item.softPublisher, type: 'publisher' });
+              item.softName && this.softwareSummaryReport.addSoft({ name: item.softName, type: 'soft' });
+              item.softPublisher && this.softwareSummaryReport.addSoft({ name: item.softPublisher, type: 'publisher' });
             });
           }
         });
         var obj = {};
-        for (var i = 0, len = this.softSelect.length; i < len; i++) {
-          obj[this.softSelect[i]['name']] = this.softSelect[i];
+        for (var i = 0, len = this.softwareSummaryReport.soft.length; i < len; i++) {
+          obj[this.softwareSummaryReport.soft[i]['name']] = this.softwareSummaryReport.soft[i];
         }
-        this.softSelect = [];
+        this.softwareSummaryReport.resetSoft();
         for (var key in obj) {
-          this.softSelect.push(obj[key]);
+          this.softwareSummaryReport.addSoft(obj[key]);
         }
-
+        this.softwareSummaryReport.setDevices(resp[companyId]);
+        console.log("resp[companyId]", resp[companyId]);
       }
     })
   }
@@ -136,6 +136,12 @@ export class ReportMenuComponent implements OnInit {
     this.glNumber.resetDates();
     this.validate.resetDates();
     this.validate.resetMonthlyDetailed();
+  }
+  public onSelectDevice(data) {
+    this.softwareSummaryReport.setDeviceId((data) ? data.id : null);
+  }
+  public onSelectSoftware(data) {
+    this.softwareSummaryReport.setSoftwareSoft(data);
   }
   public onSelectTypeTaxes(data) {
     this.taxes.setType(data);
@@ -164,7 +170,7 @@ export class ReportMenuComponent implements OnInit {
       this.commonCommissionsReport.setCompanyId(null);
       this.softwareSummaryReport.setCompanyId(null);
       this.getDevicesByCompany(null);
-      this.resetSoft();
+      this.softwareSummaryReport.resetSoft();
     } else {
       this.selectedClient = selectClient.item;
       this.accountingReport.setCompanyId(selectClient.item.id);
@@ -226,6 +232,13 @@ export class ReportMenuComponent implements OnInit {
 
       this.setDatareport(data)
     });
+  }
+  getReportBySoftwareSummary() {
+    if (!this.validate.isValidateSoftwareSummary(this.softwareSummaryReport.companyId)) return;
+    this.onRequest.emit(true);
+    console.log("this.softwareSummaryReport", this.softwareSummaryReport);
+    this.setDatareport(this.softwareSummaryReport)
+
   }
   getReportByAccounting() {
     if (!this.validate.isValidateAccounting(this.accountingReport.startDate, this.accountingReport.endDate, this.selectedClient)) return;

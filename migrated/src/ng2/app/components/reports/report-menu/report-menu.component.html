@@ -8,7 +8,7 @@
             <div class="new-reports-reverse">
                 <button
                     class="form-group btn btn-success"
-                    (click)="getReportByAccounting()"
+                    (click)="getReportBySoftwareSummary()"
                 >
                     Get
           Report
@@ -19,8 +19,8 @@
                         [placeholder]="'Search software / publisher'"
                         [dropdownHeight]="'180px'"
                         [field]="'name'"
-                        [list]="softSelect"
-                        (onSelectedItem)="onSelectDevice($event)"
+                        [list]="softwareSummaryReport.soft"
+                        (onSelectedItem)="onSelectSoftware($event)"
                     ></app-drop-down>
                 </div>
                 <div class="form-group content custom-width dropdown-height">
@@ -40,6 +40,63 @@
                         (selectedItem)="selectClient($event)"
                     ></app-select-client-company>
                     <mat-error *ngIf="!validate.getCompany()">Please select the company name</mat-error>
+                </div>
+            </div>
+            <div class="col-md-11 w-100">
+                <div class="include-ticket-report">
+                    <p>
+                        Include the following columns in the report
+                    </p>
+                    <label class="control checkbox">
+                        <input
+                            type="checkbox"
+                            [(ngModel)]="softwareSummaryReport.softwareSummaryWithDevice"
+                            [disabled]="softwareSummaryReport.soft && !softwareSummaryReport.companyId"
+                        >
+                        <span class="control-indicator"></span>
+                        Device
+                    </label>
+                    <label class="control checkbox">
+                        <input
+                            type="checkbox"
+                            [(ngModel)]="softwareSummaryReport.softwareSummaryWithSoftwareTitle"
+                        >
+                        <span class="control-indicator"></span>
+                        Software Title
+                    </label>
+                    <label class="control checkbox">
+                        <input
+                            type="checkbox"
+                            [(ngModel)]="softwareSummaryReport.softwareSummaryWithInstalationKey"
+                            [disabled]="softwareSummaryReport.soft && !softwareSummaryReport.companyId"
+                        >
+                        <span class="control-indicator"></span>
+                        Installation Key
+                    </label>
+                    <label class="control checkbox">
+                        <input
+                            type="checkbox"
+                            [(ngModel)]="softwareSummaryReport.softwareSummaryWithPublisher"
+                        >
+                        <span class="control-indicator"></span>
+                        Publisher
+                    </label>
+                    <label class="control checkbox">
+                        <input
+                            type="checkbox"
+                            [(ngModel)]="softwareSummaryReport.softwareSummaryWithVersion"
+                        >
+                        <span class="control-indicator"></span>
+                        Version
+                    </label>
+                    <label class="control checkbox">
+                        <input
+                            type="checkbox"
+                            [(ngModel)]="softwareSummaryReport.softwareSummaryWithInstallDate"
+                        >
+                        <span class="control-indicator"></span>
+                        Install Date
+                    </label>
                 </div>
             </div>
         </div>
@@ -212,6 +269,18 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
                 <div class="form-group content">
                     <app-multi-datepicker
                         #dp
@@ -238,6 +307,18 @@
                     Get
           Report
                 </button>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -313,6 +394,18 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
                 </div>
                 <div class="form-group content">
                     <div class="input-field">
@@ -353,11 +446,35 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
                     <mat-error *ngIf="!validate.getDates() && !validate.geMonthlyDetailed()">Please select any dates or intervals</mat-error>
                 </div>
             </div>
         </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -441,6 +558,18 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
                     </button>
                     <i class="icn-sm report-caret-icon"></i>
                     <div
@@ -458,6 +587,18 @@
                                 (click)="onSelectTypeTaxes(item)"
                             ></button>
                         </ng-template>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -527,6 +668,18 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
                 <div class="form-group content">
                     <app-multi-datepicker
                         #dp
@@ -563,7 +716,31 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
                 </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -640,6 +817,18 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
                 <div class="form-group content custom-width dropdown-height">
                     <app-select-client-company
                         [blockEditMode]="true"
@@ -680,9 +869,33 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
             </div>
         </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -766,6 +979,18 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
                     </button>
                     <i class="icn-sm report-caret-icon"></i>
                     <div
@@ -785,6 +1010,18 @@
                         </ng-template>
                     </div>
                 </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -851,7 +1088,31 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
                 </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -932,9 +1193,33 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
             </div>
         </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1018,6 +1303,18 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
                     </button>
                     <i class="icn-sm report-caret-icon"></i>
                     <div
@@ -1065,8 +1362,32 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
                     </div>
                 </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1133,7 +1454,31 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
                 </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1208,9 +1553,33 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
             </div>
         </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1289,6 +1658,18 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
                 <div class="form-group content">
                     <app-multi-datepicker
                         #dp
@@ -1324,7 +1705,31 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
                 </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1367,6 +1772,18 @@
                     ></app-select-client-company>
                     <mat-error *ngIf="!validate.getCompany()">Please select the company name</mat-error>
                 </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1450,6 +1867,18 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
                     <label class="control checkbox">
                         <input
                             type="checkbox"
@@ -1501,7 +1930,31 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1577,6 +2030,18 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
                 <div class="form-group content">
                     <app-multi-datepicker
                         #dp
@@ -1612,7 +2077,31 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
                 </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1655,6 +2144,18 @@
                     ></app-select-client-company>
                     <mat-error *ngIf="!validate.getCompany()">Please select the company name</mat-error>
                 </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1729,6 +2230,18 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
                 </div>
             </div>
         </div>
@@ -1762,7 +2275,31 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1836,11 +2373,35 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
                 <div class="form-group content">
                     <app-multi-datepicker
                         #dp
                         (selectedDate)="filterByDate($event)"
                     ></app-multi-datepicker>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1914,7 +2475,31 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
                 </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

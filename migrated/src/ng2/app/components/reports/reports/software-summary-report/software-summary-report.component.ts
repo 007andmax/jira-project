@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
+import { SoftwareSummaryReport } from '../../class/software-summary-report';
 
 @Component({
   selector: 'software-summary-report',
@@ -6,10 +8,56 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./software-summary-report.component.css']
 })
 export class SoftwareSummaryReportComponent implements OnInit {
-
-  constructor() { }
+  loadingInProgress: boolean = false;
+  onInit: boolean = false;
+  company: any;
+  softwareSummaryReport: SoftwareSummaryReport = new SoftwareSummaryReport();
+  constructor(public cd: ChangeDetectorRef,
+    private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
+
+  }
+  public getReport(data) {
+    this.softwareSummaryReport = new SoftwareSummaryReport(JSON.parse(JSON.stringify(data)));
+    this.company = this.companiesStateService.getCompanies().find(item => item.id == this.softwareSummaryReport.companyId);
+    console.log("this.company ", this.company);
+    console.log("this.softwareSummaryReport", this.softwareSummaryReport);
+    this.softwareSummaryReport.devices.map((item) => {
+      if (item.report && item.report && item.report.softList) {
+        item.report.softList.map((soft) => {
+          return this.softwareSummaryReport.list.push({
+            device: item.hostName,
+            softwareTitle: soft.softName,
+            installationKey: '',
+            publisher: soft.softPublisher,
+            version: (soft.softName === "Windows") ? `${item.report.system.caption} ${item.report.system.release_id} ${item.report.system.architecture} ${item.report.system.service_pack}` : soft.softVersion,
+            installDate: soft.softInstalledOn
+          });
+        });
+      }
+    });
+    if (this.softwareSummaryReport.softwareSummarySoft) {
+      const type = this.softwareSummaryReport.softwareSummarySoft.type;
+      const name = this.softwareSummaryReport.softwareSummarySoft.name;
+      this.softwareSummaryReport.list = this.softwareSummaryReport.list.filter((item) => {
+        if (type === 'publisher') {
+          return item.publisher === name;
+        } else {
+          return item.softwareTitle === name;
+        }
+      });
+    }
+    //  this.techUser = this.usersStateService.getAllUsers().find(item => item.id === this.techService.techUserId);
+    this.onInit = true;
+  }
+  getTitleHeader() {
+    if (this.softwareSummaryReport.softwareSummarySoft) return this.softwareSummaryReport.softwareSummarySoft.name;
+    return this.company.name;
+  }
+  public onRequest(data) {
+    this.loadingInProgress = data;
+    this.cd.detectChanges();
   }
 
 }
