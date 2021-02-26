@@ -20,6 +20,7 @@ export class DetailedCommissionsReportComponent implements OnInit {
   }
   public getReport(data) {
     this.detailedCommissionsReport = new DetailedCommissionsReport(JSON.parse(JSON.stringify(data)));
+    console.log("this.detailedCommissionsReport ", this.detailedCommissionsReport);
     //  this.techUser = this.usersStateService.getAllUsers().find(item => item.id === this.techService.techUserId);
     this.onInit = true;
   }

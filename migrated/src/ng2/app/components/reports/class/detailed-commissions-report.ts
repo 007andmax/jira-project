@@ -111,6 +111,7 @@ export class DetailedCommissionsReport {
                 this.reducedCompanies.push(new DetailedCommissionsReducedCompanies());
                 this.reducedCompanies[this.reducedCompanies.length - 1].list.push(item);
                 this.reducedCompanies[this.reducedCompanies.length - 1].calculate(item);
+                this.reducedCompanies[this.reducedCompanies.length - 1].setCompanyName(item.companyName);
             }
         })
     }

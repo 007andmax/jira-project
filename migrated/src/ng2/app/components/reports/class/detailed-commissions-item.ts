@@ -17,6 +17,8 @@ export class DetailedCommissionsItem {
     servicesSum: number;
     totalSum: number;
     itemGroup: string;
+    firstLine: string;
+
 
 
     constructor(data) {
@@ -38,6 +40,7 @@ export class DetailedCommissionsItem {
         this.servicesSum = data.servicesSum;
         this.totalSum = data.totalSum;
         this.itemGroup = data.productCategory || this.normalizeString(data.agreementType);
+        this.firstLine = data.firstLine;
     }
     normalizeString(str) {
         if (!str) return str;

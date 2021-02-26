@@ -401,10 +401,10 @@ export class ReportMenuComponent implements OnInit {
       this.accountingReport.setStartDate(moment(value.start).format('YYYY-MM-DD'));
       this.accountingReport.setEndDate(moment(value.end).format('YYYY-MM-DD'));
 
-      this.detailedCommissionsReport.setStartDate(moment(value.start).format('YYYY-MM-DD'));
-      this.detailedCommissionsReport.setEndDate(moment(value.end).format('YYYY-MM-DD'));
-      this.commonCommissionsReport.setStartDate(moment(value.start).format('YYYY-MM-DD'));
-      this.commonCommissionsReport.setEndDate(moment(value.end).format('YYYY-MM-DD'));
+      this.detailedCommissionsReport.setStartDate(moment(value.start).format('YYYY/MM/DD'));
+      this.detailedCommissionsReport.setEndDate(moment(value.end).format('YYYY/MM/DD'));
+      this.commonCommissionsReport.setStartDate(moment(value.start).format('YYYY/MM/DD'));
+      this.commonCommissionsReport.setEndDate(moment(value.end).format('YYYY/MM/DD'));
 
 
       this.validate.resetDates();

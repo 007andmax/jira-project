@@ -9,6 +9,9 @@ export class DetailedCommissionsReducedCompanies {
     constructor() {
 
     }
+    public setCompanyName(data) {
+        this.companyName = data;
+    }
     public calculate(item: DetailedCommissionsItem) {
         this.commissionSum = (this.commissionSum || 0) + item.commissionSum;
         this.priceSum = (this.priceSum || 0) + (item.productPrice || 0);

@@ -62,6 +62,7 @@ export class CommonCommissionsReportComponent implements OnInit {
     };
   }
   public getReport(data) {
+    this.showCategoriesData = true;
     this.commonCommissionsReport = new CommonCommissionsReport(JSON.parse(JSON.stringify(data)));
     let categories = this.commonCommissionsReport.categorySalesValue;
     if (!categories || !Object.keys(categories).length) {
@@ -97,6 +98,8 @@ export class CommonCommissionsReportComponent implements OnInit {
           color: this.chartColors[i],
         };
       });
+    console.log("byCategoriesChartData", this.byCategoriesChartData);
+    console.log("byCustomerChartData", this.byCustomerChartData);
     //  this.techUser = this.usersStateService.getAllUsers().find(item => item.id === this.techService.techUserId);
     this.onInit = true;
   }
