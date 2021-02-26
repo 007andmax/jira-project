@@ -1,4 +1,4 @@
-<div class="new-companies-content__modal--content advanced create-product " [ngClass]="class">
+<div class="qt-aside-modern__content new-companies-content__modal--content advanced create-product" [ngClass]="class">
 
   <div class="qt-inputs-row">
     <div class="create-product__col">
@@ -90,15 +90,18 @@
       (onSelectedItem)="onSelectVendor($event)"></app-select-search>
     </div>
   </div>
+</div>
 
-
-
-  <div class="col-md-12 create-product__col p-0 new-companies-content__modal--content-footer">
-    <div class="d-f">
-      <button class="btn-new btn-primary" (click)="add()" >Create Product</button>
-      <button class="btn-new btn-second" (click)="close()">Cancel</button>
-    </div>
-
+<div class="qt-aside-modern__footer">
+  <div class="qt-df">
+    <button
+      class="qt-button qt-mr-12"
+      (click)="add()"
+    >
+      Add User
+    </button>
+    <button class="qt-button --gray" (click)="close()">
+      Cancel
+    </button>
   </div>
-
 </div>

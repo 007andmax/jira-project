@@ -1670,6 +1670,20 @@ app-quotes-item {
 }
 .new-users-content__modal,
 .new-companies-content__modal {
+  .create-contract {
+    position: relative;
+    margin-right: 20px;
+    &:after {
+      position: absolute;
+      content: '';
+      background: url("./assets/img/icons/help.png");
+      height: 16px;
+      width: 16px;
+      right: -20px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
   .advanced {
     .editable-field {
       position: relative;
@@ -1681,20 +1695,6 @@ app-quotes-item {
         font-family: "Graphik-Regular", sans-serif;
         font-size: 11px;
         color: #9ca5b6;
-      }
-    }
-    .create-contract {
-      position: relative;
-      margin-right: 20px;
-      &:after {
-        position: absolute;
-        content: '';
-        background: url("./assets/img/icons/help.png");
-        height: 16px;
-        width: 16px;
-        right: -20px;
-        top: 50%;
-        transform: translateY(-50%);
       }
     }
     .details-divider {
@@ -1905,7 +1905,6 @@ ngb-datepicker {
 .recurring-tickets-content__modal,
 .new-users-content__modal {
   .logo-upload {
-    margin-top: 20px;
     padding-bottom: 20px;
     border-bottom: 1px solid #edf2f6;
     align-items: center;
@@ -2833,13 +2832,6 @@ app-ticket-edit-aside-devices  {
     width: 100% !important;
     min-height: 190px !important;
     height: fit-content !important;
-  }
-
-}
-
-.new-companies-content__modal {
-  .create-product {
-    height: 600px;
   }
 }
 

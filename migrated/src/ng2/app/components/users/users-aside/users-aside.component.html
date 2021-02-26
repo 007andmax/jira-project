@@ -1,13 +1,7 @@
-<div
-    class="qt-aside-modern users-page__aside"
-    *ngIf="opened"
->
+<div class="qt-aside-modern users-page__aside" *ngIf="opened">
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-title">Add user</div>
-        <div
-            class="qt-aside-modern__header-close icon__close"
-            (click)="close()"
-        ></div>
+        <div class="qt-aside-modern__header-close icon__close" (click)="close()"></div>
     </div>
     <div class="qt-aside-modern__content">
         <div class="upload-photo qt-mb-24">
@@ -279,20 +273,17 @@
     </div>
     <div class="qt-aside-modern__footer">
         <div class="qt-df">
-            <button
-                class="qt-button qt-mr-12"
-                appDisabledBtn
-                #addBtn="disabled"
-                (onClick)="onAdd()"
-            >
-                Add User
-            </button>
-            <button
-                class="qt-button --gray"
-                (click)="close()"
-            >
-                Cancel
-            </button>
+          <button
+            class="qt-button qt-mr-12"
+            appDisabledBtn
+            #addBtn="disabled"
+            (onClick)="onAdd()"
+          >
+            Add User
+          </button>
+          <button class="qt-button --gray" (click)="close()">
+            Cancel
+          </button>
         </div>
     </div>
 </div>
