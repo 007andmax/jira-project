@@ -17,6 +17,10 @@
     width: 642px;
   }
 
+  &.--x-large {
+    width: 940px;
+  }
+
   &__header {
     height: 56px;
     background-color: #f9fafb;
@@ -50,6 +54,10 @@
 
     &.--less-padding {
       padding: 10px 17px;
+    }
+
+    &.--no-padding {
+      padding: 0;
     }
   }
 

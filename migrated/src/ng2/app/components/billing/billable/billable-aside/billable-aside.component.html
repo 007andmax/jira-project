@@ -1,6 +1,6 @@
-<div class="billing-page__aside" *ngIf="opened">
-    <div class="aside-header qt-df qt-ai-c qt-jc-sb qt-pr-16 qt-pl-32">
-        <div class="aside-header__title qt-fs-20 qt-ff-gm qt-color-dark">New Invoice</div>
+<div class="billing-page__aside qt-aside-modern --x-large" *ngIf="opened">
+    <div class="qt-aside-modern__header">
+        <div class="qt-aside-modern__header-title">New Invoice</div>
         <div
             class="qt-df qt-ai-c"
             *ngIf="isInit"
@@ -30,12 +30,12 @@
                 Invoice has been expired and it cannot be saved
             </div>
             <div
-                class="icon__close qt-sz-24 qt-ic-c qt-pointer"
+                class="qt-aside-modern__header-close icon__close"
                 (click)="unlock()"
             ></div>
         </div>
     </div>
-    <div class="billing-aside-scroll-content">
+    <div class="qt-aside-modern__content --no-padding">
         <app-invoice-form
             [hidden]="isUdpateInvoice || showPreview"
             (onUpdateInvoice)="onUpdateInvoice($event)"
@@ -61,7 +61,7 @@
     >
         <div class="loading"></div>
     </div>
-    <div class="aside-footer qt-pr-30 qt-pl-30 qt-pb-16 qt-pt-16 qt-df qt-ai-c qt-jc-sb">
+    <div class="qt-aside-modern__footer">
         <div class="qt-df">
             <div
                 class="qt-pos-rel"

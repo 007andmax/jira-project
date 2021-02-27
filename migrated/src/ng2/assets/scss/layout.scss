@@ -86,7 +86,7 @@ ngb-datepicker{
     color: #4f5f79;
     border: 1px solid #dfe3e8 !important;
     z-index: 9;
-   
+
     .ngb-dp-header{
         padding: 0;
         margin: 0;
@@ -103,7 +103,7 @@ ngb-datepicker{
             align-items: center;
             justify-content: space-between;
             width: 100%;
-            .ngb-dp-navigation-select{ 
+            .ngb-dp-navigation-select{
                 select{
                     @include app-none();
                     border: solid 1px #c4cbd5;
@@ -145,7 +145,7 @@ ngb-datepicker{
             &.right{
                 .btn{
                     &.btn-link {
-                        
+
                         &.ngb-dp-arrow-btn{
                             background:url('/ng2/assets/img/icons/next.svg') no-repeat right center;float: right;
                             min-width: inherit;
@@ -153,7 +153,7 @@ ngb-datepicker{
                     }
                 }
             }
-            
+
         }
     }
     .ngb-dp-weekdays {
@@ -177,7 +177,7 @@ ngb-datepicker{
         .ngb-dp-month{
             width: 100%;
         }
-      
+
     }
     ngb-datepicker-month-view{
         width: 100%;
@@ -189,7 +189,7 @@ ngb-datepicker{
                 height: auto;
                 width: auto;
                 display: table-cell;
-    
+
             }
             .ngb-dp-day{
                 height: auto;
@@ -201,7 +201,7 @@ ngb-datepicker{
                 font-style: normal;
                 line-height: normal;
                 letter-spacing: normal;
-                color: #4f5f79; 
+                color: #4f5f79;
                 text-align: center;
                 padding: 5px 5px 5px 5px;
                 border: none !important;
@@ -217,14 +217,14 @@ ngb-datepicker{
                     height: auto;
                     width: auto;
                     line-height: 1 !important;
-                    font-size: 12px;    
+                    font-size: 12px;
                     font-weight: normal;
                     font-family:$font-body;
                     font-stretch: normal;
                     font-style: normal;
                     line-height: normal;
                     letter-spacing: normal;
-                    color: #4f5f79; 
+                    color: #4f5f79;
                     text-align: center;
                     min-width: 24px;
                     min-height: 24px;
@@ -233,7 +233,7 @@ ngb-datepicker{
                     justify-content: center;
                     @include border-radius(50%);
                     &.active{
-                        
+
                         background-color: #16a4fa;
                         color:#fff;
                     }
@@ -1620,14 +1620,12 @@ ngb-tabset {
     top: $header-height;
     bottom: 0;
     position: fixed;
-    right: -700px;
     @include transition(0.5s);
     z-index: 1000;
     @media only screen and (max-width: 768px){
         width: 100%;
         top: 0;
         z-index: 99;
-        right:-125%;
     }
     .sidebar-header {
         display: flex;
@@ -1653,7 +1651,7 @@ ngb-tabset {
         float: left;
         width: 100%;
         padding: 35px 40px 40px 40px;
-        height: calc(100% - 80px);
+        height: calc(100% - 168px);
         overflow-y: auto;
         overflow-x: hidden;
         @media only screen and (max-width: 768px){
