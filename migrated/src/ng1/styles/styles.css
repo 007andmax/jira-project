@@ -13486,7 +13486,7 @@ button.close {
 .recurring-tickets-content__modal--content,
 .new-users-content__modal--content,
 .password-content__modal--content {
-  padding: 0 35px 30px;
+  padding: 0 15px 20px;
 }
 
 .new-companies-content__modal--content > [class*="col-md-"],
