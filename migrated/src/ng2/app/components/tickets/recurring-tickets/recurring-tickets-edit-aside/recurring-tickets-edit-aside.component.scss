@@ -1,3 +1,10 @@
 .date-picker {
   overflow: visible;
 }
+
+.qt-aside-modern.recurring-tickets-content__modal .qt-aside-modern__footer {
+  padding-top: 0;
+  .recurring-tickets-content__modal--content-footer {
+    margin-top: 0;
+  }
+}
