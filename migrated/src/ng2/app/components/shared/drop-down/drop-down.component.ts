@@ -25,6 +25,7 @@ export class DropDownComponent implements OnInit {
   @Input() add: boolean = false;
   @Input() class = [];
   @Input() editItem: any = null;
+  @Input() preloader: boolean = false;
   @Input() isBlockClear: boolean = false;
   @Input() maxlength: number = null;
   @Input() isDisabled: boolean = false;

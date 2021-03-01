@@ -1,7 +1,6 @@
 <div>
     <app-report-menu
         [report]="'software-summary'"
-        (onRequest)="onRequest($event)"
         (getReport)="getReport($event)"
     ></app-report-menu>
 </div>
@@ -17,12 +16,12 @@
     *ngIf="loadingInProgress"
 ></div>
 <div
-    class="product-list___ticket report-show-footer-header"
+    class="product-list___ticket hardware-summary report-show-footer-header"
     id="product-list-ticket-data"
 >
     <div
-        class="product-list-ticket"
-        style="padding: 0px;"
+        class="product-list-ticket software-report"
+        style="padding: 0px;width: 1180px;"
         *ngIf="!loadingInProgress"
     >
         <div
@@ -99,6 +98,10 @@
 
 
 
+
+
+
+
                                         <div
                                             class="col-md-2"
                                             *ngIf="softwareSummaryReport.softwareSummaryWithDevice"
@@ -141,6 +144,10 @@
                         </ul>
                     </div>
                 </div>
+
+
+
+
 
 
 

@@ -92,7 +92,8 @@ export class ReportMenuComponent implements OnInit {
   }
 
   public getSoftByCompany(companyId) {
-
+    this.softwareSummaryReport.setPreloaderSoft(true);
+    this.softwareSummaryReport.setIsGetDevices(true);
     this.devicesService.getSoft(companyId).subscribe((resp: any) => {
       // $rootScope.softwareSummarySelectedCompany = resp;
 
@@ -119,6 +120,8 @@ export class ReportMenuComponent implements OnInit {
         console.log("resp[companyId]", resp[companyId]);
         this.hardwareSummaryReport.setDevices(resp[companyId]);
       }
+      this.softwareSummaryReport.setPreloaderSoft(false);
+      this.softwareSummaryReport.setIsGetDevices(false);
     })
   }
   public onSelectDetailed(data) {
@@ -249,7 +252,7 @@ export class ReportMenuComponent implements OnInit {
   }
   getReportBySoftwareSummary() {
     if (!this.validate.isValidateSoftwareSummary(this.softwareSummaryReport.companyId)) return;
-    this.onRequest.emit(true);
+
     console.log("this.softwareSummaryReport", this.softwareSummaryReport);
     this.setDatareport(this.softwareSummaryReport)
 

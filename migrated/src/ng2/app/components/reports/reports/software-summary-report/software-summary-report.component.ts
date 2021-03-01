@@ -19,10 +19,13 @@ export class SoftwareSummaryReportComponent implements OnInit {
 
   }
   public getReport(data) {
+    this.loadingInProgress = true;
     this.softwareSummaryReport = new SoftwareSummaryReport(JSON.parse(JSON.stringify(data)));
     this.company = this.companiesStateService.getCompanies().find(item => item.id == this.softwareSummaryReport.companyId);
     console.log("this.company ", this.company);
     console.log("this.softwareSummaryReport", this.softwareSummaryReport);
+    if (this.softwareSummaryReport.deviceId) this.softwareSummaryReport.devices = this.softwareSummaryReport.devices.filter((item) => item.id === this.softwareSummaryReport.deviceId);
+
     this.softwareSummaryReport.devices.map((item) => {
       if (item.report && item.report && item.report.softList) {
         item.report.softList.map((soft) => {
@@ -49,15 +52,17 @@ export class SoftwareSummaryReportComponent implements OnInit {
       });
     }
     //  this.techUser = this.usersStateService.getAllUsers().find(item => item.id === this.techService.techUserId);
-    this.onInit = true;
+    setTimeout(() => {
+      this.onInit = true;
+      this.loadingInProgress = false;
+      this.cd.detectChanges();
+
+    }, 2000);
   }
   getTitleHeader() {
     if (this.softwareSummaryReport.softwareSummarySoft) return this.softwareSummaryReport.softwareSummarySoft.name;
     return this.company.name;
   }
-  public onRequest(data) {
-    this.loadingInProgress = data;
-    this.cd.detectChanges();
-  }
+
 
 }
