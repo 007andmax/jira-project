@@ -1,0 +1,145 @@
+<div>
+    <app-report-menu
+        [report]="'hardware-summary'"
+        (onRequest)="onRequest($event)"
+        (getReport)="getReport($event)"
+    ></app-report-menu>
+</div>
+<app-report-additional-actions
+    [report]="'hardware-summary'"
+    [accountType]="'TECH'"
+    [template]="'CUSTOMER_REPORT'"
+    [fileName]="'hardware-summary-report'"
+></app-report-additional-actions>
+<!--  -->
+<div
+    class="loading"
+    *ngIf="loadingInProgress"
+></div>
+<div
+    class="product-list___ticket report-show-footer-header"
+    id="product-list-ticket-data"
+>
+    <div
+        class="product-list-ticket hardware-report"
+        style="padding: 0px;"
+        *ngIf="!loadingInProgress"
+    >
+        <div
+            class="report-header"
+            *ngIf="onInit"
+        >
+            <h1>Hardware Summary Report</h1>
+            <div class="company-info">
+                <h3>{{company.name || 'All companies'}}</h3>
+                <!-- <p>{{date | date:'yyyy-MM-dd'}}</p> -->
+            </div>
+        </div>
+        <div *ngIf="onInit">
+            <div>
+                <ul class="con-col">
+                    <li class="top-product-list-ticket clearfix">
+                        <div
+                            class="col-md-1 w-22"
+                            *ngIf="hardwareSummaryReport.hardwareSummaryWithDevice"
+                        >
+                            <strong>Device</strong>
+                        </div>
+                        <div
+                            class="col-md-3"
+                            *ngIf="hardwareSummaryReport.hardwareSummaryWithOperationSystem"
+                        >
+                            <strong>Operating System</strong>
+                        </div>
+                        <div
+                            class="col-md-2"
+                            *ngIf="hardwareSummaryReport.hardwareSummaryWithCpu"
+                        >
+                            <strong>CPU</strong>
+                        </div>
+                        <div
+                            class="col-md-1 w-6"
+                            *ngIf="hardwareSummaryReport.hardwareSummaryWithRam"
+                        >
+                            <strong>RAM</strong>
+                        </div>
+                        <div
+                            class="col-md-1 w-6"
+                            *ngIf="hardwareSummaryReport.hardwareSummaryWithDisk"
+                        >
+                            <strong>DISK</strong>
+                        </div>
+                        <div
+                            class="col-md-2"
+                            *ngIf="hardwareSummaryReport.hardwareSummaryWithWarrenty"
+                        >
+                            <strong>WARRANTY</strong>
+                        </div>
+                        <div
+                            class="col-md-2"
+                            *ngIf="hardwareSummaryReport.hardwareSummaryWithSerialNumber"
+                        >
+                            <strong>Serial Number</strong>
+                        </div>
+                    </li>
+                    <ng-template
+                        ngFor
+                        let-device
+                        [ngForOf]="hardwareSummaryReport.list"
+                        let-i="index"
+                        [ngForTrackBy]="trackByIndex"
+                    >
+                        <li
+                            class="content-product-list-ticket clearfix"
+                            *ngIf="device.report"
+                        >
+                            <div
+                                class="col-md-1 w-22"
+                                *ngIf="hardwareSummaryReport.hardwareSummaryWithDevice"
+                            >
+                                {{device.label || device.hostName}}
+                            </div>
+                            <div
+                                class="col-md-3"
+                                *ngIf="hardwareSummaryReport.hardwareSummaryWithOperationSystem"
+                            >
+                                {{device.report && device.report.system && (device.report.system.caption + ' ' + device.report.system.release_id)}}
+                            </div>
+                            <div
+                                class="col-md-2"
+                                *ngIf="hardwareSummaryReport.hardwareSummaryWithCpu"
+                            >
+                                {{device.report && device.report.processors && device.report.processors.length > 0 && device.report.processors[0].name}}
+                            </div>
+                            <div
+                                class="col-md-1 w-6"
+                                *ngIf="hardwareSummaryReport.hardwareSummaryWithRam"
+                            >
+                                {{device.report && device.report.ram && getRamSize(device.report.ram.slots)}}
+                            </div>
+                            <div
+                                class="col-md-1 w-6"
+                                *ngIf="hardwareSummaryReport.hardwareSummaryWithDisk"
+                            >
+                                {{device.report && getDiskSize(device.report.logicalDisks)}}
+                            </div>
+                            <div
+                                class="col-md-2"
+                                *ngIf="hardwareSummaryReport.hardwareSummaryWithWarrenty"
+                            >
+                                {{device.report && device.report.variant && device.report.variant.warrantyDate}}
+                            </div>
+                            <div
+                                class="col-md-2"
+                                *ngIf="hardwareSummaryReport.hardwareSummaryWithSerialNumber"
+                            >
+                                {{device.report && device.report.system && device.report.system.serial_number}}
+                            </div>
+                        </li>
+                    </ng-template>
+                </ul>
+            </div>
+        </div>
+        <app-report-footer *ngIf="onInit"></app-report-footer>
+    </div>
+</div>

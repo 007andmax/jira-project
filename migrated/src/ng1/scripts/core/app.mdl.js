@@ -200,6 +200,10 @@
           url: '/ng2/report/accounting-report',
           template: '<item-report-component></item-report-component>'
         }))
+        .state('hardware-summary', waitForServices({
+          url: '/ng2/report/hardware-summary',
+          template: '<item-report-component></item-report-component>'
+        }))
         .state('tech-service', waitForServices({
           url: '/ng2/report/tech-service',
           template: '<item-report-component></item-report-component>'
@@ -281,10 +285,6 @@
         .state('device-ip-summary', waitForServices({
           url: '/reports/device-ip-summary',
           templateUrl: '/ng1/scripts/core/reports/reports-templates/device-ip-summary.tpl.html',
-          controller: 'quicktech.core.reports.reportsCtrl'
-        })).state('hardware-summary', waitForServices({
-          url: '/reports/hardware-summary',
-          templateUrl: '/ng1/scripts/core/reports/reports-templates/hardware-summary.tpl.html',
           controller: 'quicktech.core.reports.reportsCtrl'
         }))
         .state('myprofile-component', waitForServices({

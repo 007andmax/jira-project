@@ -92,4 +92,9 @@ export class ReportValidate {
         if (!company) this.company = false;
         return this.company;
     }
+    public isValidateHardwareSummary(company) {
+
+        if (!company) this.company = false;
+        return this.company;
+    }
 }

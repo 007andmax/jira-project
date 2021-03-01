@@ -396,6 +396,7 @@ import { ToFixedPipe } from './pipe/to-fixed.pipe';
 import { CommonCommissionsReportComponent } from './components/reports/reports/common-commissions-report/common-commissions-report.component';
 import { SoftwareSummaryReportComponent } from './components/reports/reports/software-summary-report/software-summary-report.component';
 import { SoftwareSummaryDevicesDroDownComponent } from './components/reports/reports/software-summary-report/software-summary-devices-dro-down/software-summary-devices-dro-down.component';
+import { HardwareSummaryReportComponent } from './components/reports/reports/hardware-summary-report/hardware-summary-report.component';
 
 /**
  * declare angular
@@ -956,7 +957,8 @@ angular.module('quicktech')
     ToFixedPipe,
     CommonCommissionsReportComponent,
     SoftwareSummaryReportComponent,
-    SoftwareSummaryDevicesDroDownComponent
+    SoftwareSummaryDevicesDroDownComponent,
+    HardwareSummaryReportComponent
   ],
   imports: [
     BrowserModule,
