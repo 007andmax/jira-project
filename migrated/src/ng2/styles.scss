@@ -2723,6 +2723,15 @@ app-add-assigned-user {
   }
 }
 
+.ticket-edit-aside {
+  position: fixed;
+  z-index: 2;
+  background: white;
+  right: 0;
+  top: $header-height;
+  display: flex;
+  height: calc(100% - #{$header-height});
+}
 
 .ticket-edit-aside__body,
 app-ticket-edit-aside-company-info,
