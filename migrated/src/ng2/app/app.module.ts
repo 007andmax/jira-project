@@ -397,7 +397,6 @@ import { CommonCommissionsReportComponent } from './components/reports/reports/c
 import { SoftwareSummaryReportComponent } from './components/reports/reports/software-summary-report/software-summary-report.component';
 import { SoftwareSummaryDevicesDroDownComponent } from './components/reports/reports/software-summary-report/software-summary-devices-dro-down/software-summary-devices-dro-down.component';
 import { HardwareSummaryReportComponent } from './components/reports/reports/hardware-summary-report/hardware-summary-report.component';
-import { SoftwareSummarySoftDroDownComponent } from './components/reports/reports/software-summary-report/software-summary-soft-dro-down/software-summary-soft-dro-down.component';
 
 /**
  * declare angular
@@ -959,8 +958,7 @@ angular.module('quicktech')
     CommonCommissionsReportComponent,
     SoftwareSummaryReportComponent,
     SoftwareSummaryDevicesDroDownComponent,
-    HardwareSummaryReportComponent,
-    SoftwareSummarySoftDroDownComponent
+    HardwareSummaryReportComponent
   ],
   imports: [
     BrowserModule,

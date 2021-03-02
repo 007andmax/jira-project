@@ -57,7 +57,7 @@ export class SoftwareSummaryReportComponent implements OnInit {
       this.loadingInProgress = false;
       this.cd.detectChanges();
 
-    }, 2000);
+    }, 1000);
   }
   getTitleHeader() {
     if (this.softwareSummaryReport.softwareSummarySoft) return this.softwareSummaryReport.softwareSummarySoft.name;

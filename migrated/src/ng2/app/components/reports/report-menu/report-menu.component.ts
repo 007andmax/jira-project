@@ -59,7 +59,7 @@ export class ReportMenuComponent implements OnInit {
   isDisabledCompany: boolean = false;
   allDevices = [];
   devices = [];
-
+  companies = [];
   @Input() report = "";
   @Output() getReport = new EventEmitter<any>();
   @Output() onRequest = new EventEmitter<any>();
@@ -85,6 +85,15 @@ export class ReportMenuComponent implements OnInit {
       this.allDevices = data;
     })
     //  this.sub.add(getOnDevices);
+    if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
+    let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
+      this.getClientsList(data);
+    })
+    //  this.sub.add(getOnCompanies);
+  }
+  getClientsList(data) {
+    this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
   public getDevicesByCompany(companyId) {
     this.devices = (this.devicesStateService.getAllDevices()[companyId]) ? this.devicesStateService.getAllDevices()[companyId] : [];
@@ -165,7 +174,8 @@ export class ReportMenuComponent implements OnInit {
     if (data === 'Summary') this.validate.resetCompany();
   }
   public selectClient(selectClient) {
-    if (selectClient === 'null') {
+    console.log("selectClient", selectClient);
+    if (selectClient == null) {
       this.accountsReceivable.setClientCompanyId(null);
       this.selectedClient = null;
       this.glNumber.setClientCompanyId(null);
@@ -182,20 +192,20 @@ export class ReportMenuComponent implements OnInit {
       this.getDevicesByCompany(null);
       this.softwareSummaryReport.resetSoft();
     } else {
-      this.selectedClient = selectClient.item;
-      this.accountingReport.setCompanyId(selectClient.item.id);
-      this.glNumber.setClientCompanyId(selectClient.item.id);
-      this.accountsReceivable.setClientCompanyId(selectClient.item.id);
-      this.productSalesReport.setCompanyId(selectClient.item.id);
-      this.customerSalesReport.setCompanyId(selectClient.item.id);
-      this.ticketsReport.setCompanyId(selectClient.item.id);
-      this.serviceReport.setCompanyId(selectClient.item.id);
-      this.detailedCommissionsReport.setCompanyId(selectClient.item.id);
-      this.commonCommissionsReport.setCompanyId(selectClient.item.id);
-      this.softwareSummaryReport.setCompanyId(selectClient.item.id);
-      this.hardwareSummaryReport.setCompanyId(selectClient.item.id);
-      this.getDevicesByCompany(selectClient.item.id);
-      this.getSoftByCompany(selectClient.item.id);
+      this.selectedClient = selectClient;
+      this.accountingReport.setCompanyId(selectClient.id);
+      this.glNumber.setClientCompanyId(selectClient.id);
+      this.accountsReceivable.setClientCompanyId(selectClient.id);
+      this.productSalesReport.setCompanyId(selectClient.id);
+      this.customerSalesReport.setCompanyId(selectClient.id);
+      this.ticketsReport.setCompanyId(selectClient.id);
+      this.serviceReport.setCompanyId(selectClient.id);
+      this.detailedCommissionsReport.setCompanyId(selectClient.id);
+      this.commonCommissionsReport.setCompanyId(selectClient.id);
+      this.softwareSummaryReport.setCompanyId(selectClient.id);
+      this.hardwareSummaryReport.setCompanyId(selectClient.id);
+      this.getDevicesByCompany(selectClient.id);
+      this.getSoftByCompany(selectClient.id);
       if (this.ticketsReport.startDate === '' && this.ticketsReport.endDate === '') this.ticketsReport.setDatesByCompany(this.selectedClient);
       if (this.serviceReport.startDate === '' && this.serviceReport.endDate === '') this.serviceReport.setDatesByCompany(this.selectedClient);
       this.validate.resetCompany();
