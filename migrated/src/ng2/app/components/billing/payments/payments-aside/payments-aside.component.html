@@ -1,22 +1,18 @@
-    <div class="payments-page payments-page__aside">
+    <div class="payments-page payments-page__aside qt-aside-modern  --x-large">
 
-      <div class="aside-header qt-df qt-ai-c qt-jc-sb qt-pr-16 qt-pl-20">
+      <div class="qt-aside-modern__header">
 
-        <div class="qt-fs-20 qt-ff-gm qt-color-dark">
-          Payment Detail
-        </div>
+        <div class="qt-aside-modern__header-title">Payment Detail</div>
 
         <div class="qt-df qt-ai-c" >
-
           <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__edit" *ngIf="!payment.refundMethod" (click)="showEdit()"></div>
           <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__refund-payment" *ngIf="!payment.refundMethod" (click)="showRefund()"></div>
           <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-16 header-circle-icon icon__remove" (click)="deletePayment()"></div>
           <div class="icon__close qt-sz-24 qt-pointer qt-ic-c" (click)="close()"></div>
         </div>
-
       </div>
 
-      <div class="billing-aside-scroll-content qt-pt-50 qt-pr-50 qt-pb-50 qt-pl-50">
+      <div class="qt-aside-modern__content --no-footer">
         <div class="payment-preview qt-pt-40 qt-pl-40 qt-pr-40 qt-pb-40">
 
           <div class="qt-df company-info" *ngIf="currentCompany">

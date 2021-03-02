@@ -52,6 +52,10 @@
     overflow: auto;
     height: calc(100% - 127px);
 
+    &.--no-footer {
+      height: calc(100% - 67px);;
+    }
+
     &.--less-padding {
       padding: 10px 17px;
     }
