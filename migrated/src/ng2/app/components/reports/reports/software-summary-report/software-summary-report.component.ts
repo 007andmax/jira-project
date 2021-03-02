@@ -23,7 +23,7 @@ export class SoftwareSummaryReportComponent implements OnInit {
     this.softwareSummaryReport = new SoftwareSummaryReport(JSON.parse(JSON.stringify(data)));
     this.company = this.companiesStateService.getCompanies().find(item => item.id == this.softwareSummaryReport.companyId);
     console.log("this.company ", this.company);
-    console.log("this.softwareSummaryReport", this.softwareSummaryReport);
+
     if (this.softwareSummaryReport.deviceId) this.softwareSummaryReport.devices = this.softwareSummaryReport.devices.filter((item) => item.id === this.softwareSummaryReport.deviceId);
 
     this.softwareSummaryReport.devices.map((item) => {
@@ -51,6 +51,9 @@ export class SoftwareSummaryReportComponent implements OnInit {
         }
       });
     }
+    this.softwareSummaryReport.list = this.softwareSummaryReport.list.sort((a, b) => (a.device.toLowerCase() > b.device.toLowerCase() || a.softwareTitle.toLowerCase() > b.softwareTitle.toLowerCase()) ?
+      1 : ((b.device.toLowerCase() > a.device.toLowerCase() || b.softwareTitle.toLowerCase() > a.softwareTitle.toLowerCase()) ? -1 : 0));
+    console.log("this.softwareSummaryReport", this.softwareSummaryReport);
     //  this.techUser = this.usersStateService.getAllUsers().find(item => item.id === this.techService.techUserId);
     setTimeout(() => {
       this.onInit = true;
@@ -59,10 +62,7 @@ export class SoftwareSummaryReportComponent implements OnInit {
 
     }, 1000);
   }
-  getTitleHeader() {
-    if (this.softwareSummaryReport.softwareSummarySoft) return this.softwareSummaryReport.softwareSummarySoft.name;
-    return this.company.name;
-  }
+
 
 
 }

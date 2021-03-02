@@ -32,7 +32,7 @@
                 <div class="report-header">
                     <h1>Software Summary Report</h1>
                     <div class="company-info">
-                        <h3>{{getTitleHeader()}}</h3>
+                        <h3>{{company.name}}</h3>
                         <p>
                             {{softwareSummaryReport.date | date:'yyyy-MM-dd'}}
                         </p>
@@ -94,14 +94,6 @@
                                     [ngForTrackBy]="trackByIndex"
                                 >
                                     <li class="content-product-list-ticket clearfix">
-
-
-
-
-
-
-
-
                                         <div
                                             class="col-md-2"
                                             *ngIf="softwareSummaryReport.softwareSummaryWithDevice"
@@ -144,16 +136,6 @@
                         </ul>
                     </div>
                 </div>
-
-
-
-
-
-
-
-
-
-
             </div>
         </div>
         <app-report-footer *ngIf="onInit"></app-report-footer>

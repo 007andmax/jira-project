@@ -102,7 +102,8 @@ export class ReportMenuComponent implements OnInit {
 
   public getSoftByCompany(companyId) {
     this.softwareSummaryReport.setPreloaderSoft(true);
-    this.softwareSummaryReport.setIsGetDevices(true);
+
+    this.hardwareSummaryReport.setPreloaderDevices(true);
     this.devicesService.getSoft(companyId).subscribe((resp: any) => {
       // $rootScope.softwareSummarySelectedCompany = resp;
 
@@ -124,13 +125,21 @@ export class ReportMenuComponent implements OnInit {
         this.softwareSummaryReport.resetSoft();
         for (var key in obj) {
           this.softwareSummaryReport.addSoft(obj[key]);
+          /* this.softwareSummaryReport.soft.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+             1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));*/
         }
         this.softwareSummaryReport.setDevices(resp[companyId]);
         console.log("resp[companyId]", resp[companyId]);
         this.hardwareSummaryReport.setDevices(resp[companyId]);
       }
       this.softwareSummaryReport.setPreloaderSoft(false);
-      this.softwareSummaryReport.setIsGetDevices(false);
+
+      this.hardwareSummaryReport.setPreloaderDevices(false);
+    }, err => {
+      this.softwareSummaryReport.resetSoft();
+      this.softwareSummaryReport.setPreloaderSoft(false);
+
+      this.hardwareSummaryReport.setPreloaderDevices(false);
     })
   }
   public onSelectDetailed(data) {
@@ -156,6 +165,7 @@ export class ReportMenuComponent implements OnInit {
   }
   public onSelectDevice(data) {
     this.softwareSummaryReport.setDeviceId((data) ? data.id : null);
+    this.hardwareSummaryReport.setDeviceId((data) ? data.id : null);
   }
   public onSelectSoftware(data) {
     this.softwareSummaryReport.setSoftwareSoft(data);

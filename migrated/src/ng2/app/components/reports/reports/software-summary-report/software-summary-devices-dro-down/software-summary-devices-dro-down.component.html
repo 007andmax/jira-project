@@ -10,6 +10,7 @@
         [textContent]="title"
     ></div>
 
+
     <mat-error
         class="app-drop-down__error qt-tooltip-error mat-error"
         *ngIf="!validate"
@@ -31,6 +32,7 @@
         ngbDropdownToggle
     >
 
+
     <span
         class="app-drop-down__right-icon pointer"
         *ngIf="list && !isDisabled"
@@ -42,7 +44,7 @@
             (click)="clearClient($event)"
         ></i>
         <i
-            *ngIf="(!selectedItem || isBlockClear) && !isAdd"
+            *ngIf="(!selectedItem || isBlockClear) && !isAdd && !preloader"
             class="icn-sm report-caret-icon"
         ></i>
         <i
@@ -53,7 +55,7 @@
     </span>
     <i
         class="loading xs"
-        *ngIf="!list"
+        *ngIf="preloader"
     ></i>
     <div
         ngbDropdownMenu

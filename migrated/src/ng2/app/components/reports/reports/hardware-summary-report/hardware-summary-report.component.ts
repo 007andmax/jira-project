@@ -20,11 +20,17 @@ export class HardwareSummaryReportComponent implements OnInit {
 
   }
   public getReport(data) {
+    this.loadingInProgress = true;
     this.hardwareSummaryReport = new HardwareSummaryReport(JSON.parse(JSON.stringify(data)));
     this.company = this.companiesStateService.getCompanies().find(item => item.id == this.hardwareSummaryReport.companyId);
     console.log("this.company", this.company);
     //  this.techUser = this.usersStateService.getAllUsers().find(item => item.id === this.techService.techUserId);
-    this.onInit = true;
+    setTimeout(() => {
+      this.onInit = true;
+      this.loadingInProgress = false;
+      this.cd.detectChanges();
+
+    }, 1000);
   }
   getRamSize(slots) {
     let ramSize = 0;
@@ -48,9 +54,6 @@ export class HardwareSummaryReportComponent implements OnInit {
       return Math.floor(size / 1073741824) + 'GB'
     }
   };
-  public onRequest(data) {
-    this.loadingInProgress = data;
-    this.cd.detectChanges();
-  }
+
 
 }

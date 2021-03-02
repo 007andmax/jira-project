@@ -2,7 +2,7 @@ export class HardwareSummaryReport {
     companyId: string;
     deviceId: string;
     devices: any = [];
-
+    preloaderDevices: boolean = false;
     hardwareSummaryWithDevice = true;
     hardwareSummaryWithOperationSystem = true;
     hardwareSummaryWithCpu = true;
@@ -26,14 +26,12 @@ export class HardwareSummaryReport {
             this.list = [];
 
             if (this.deviceId) {
-
-                this.list = this.devices && this.devices.filter(function (item) {
-                    return item.id === data.device;
-                });
+                this.list = this.devices && this.devices.filter((item) => item.id === this.deviceId);
             } else {
                 this.list = this.devices;
             }
-
+            console.log("this.list", this.list);
+            this.list.sort((a, b) => ((a.label || a.hostName).toLowerCase() > (b.label || b.hostName).toLowerCase()) ? 1 : (((b.label || b.hostName).toLowerCase() > (a.label || a.hostName).toLowerCase()) ? -1 : 0));
             /*  if ($scope.softwareSummarySoft) {
                   const type = $scope.softwareSummarySoft.type;
                   const name = $scope.softwareSummarySoft.name;
@@ -48,7 +46,9 @@ export class HardwareSummaryReport {
         }
     }
 
-
+    public setPreloaderDevices(data) {
+        this.preloaderDevices = data;
+    }
     public setDevices(data) {
         this.devices = data;
     }

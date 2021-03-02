@@ -9,6 +9,7 @@
                 <button
                     class="form-group btn btn-success"
                     (click)="getReportByHardwareSummary()"
+                    [disabled]="hardwareSummaryReport.preloaderDevices"
                 >
                     Get
           Report
@@ -19,6 +20,8 @@
                         [placeholder]="'All devices'"
                         [dropdownHeight]="'180px'"
                         [list]="devices"
+                        [isDisabled]="!hardwareSummaryReport.companyId"
+                        [preloader]="hardwareSummaryReport.preloaderDevices"
                         (onSelectedItem)="onSelectDevice($event)"
                     ></software-summary-devices-dro-down>
                 </div>
@@ -116,10 +119,12 @@
                 </button>
                 <div class="form-group content">
                     <app-drop-down
-                        [sort]="false"
+                        [sort]="true"
                         [placeholder]="'Search software / publisher'"
                         [dropdownHeight]="'180px'"
                         [field]="'name'"
+                        [search]="true"
+                        [change]="true"
                         [isDisabled]="!softwareSummaryReport.companyId"
                         [preloader]="softwareSummaryReport.preloaderSoft"
                         [list]="softwareSummaryReport.soft"
@@ -128,7 +133,7 @@
                 </div>
                 <div class="form-group content custom-width dropdown-height">
                     <software-summary-devices-dro-down
-                        [sort]="false"
+                        [sort]="true"
                         [placeholder]="'All devices'"
                         [dropdownHeight]="'180px'"
                         [list]="devices"

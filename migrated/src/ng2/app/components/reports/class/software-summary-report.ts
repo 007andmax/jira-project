@@ -12,7 +12,7 @@ export class SoftwareSummaryReport {
     softwareSummaryWithInstallDate: boolean = true;
     soft: any = [];
     preloaderSoft: boolean = false;
-    isGetDevices: boolean = false;
+
     date = new Date();
     constructor(data = null) {
         if (data != null) {
@@ -52,7 +52,5 @@ export class SoftwareSummaryReport {
     public setSoftwareSoft(data) {
         this.softwareSummarySoft = data;
     }
-    public setIsGetDevices(data) {
-        this.isGetDevices = data;
-    }
+
 }
