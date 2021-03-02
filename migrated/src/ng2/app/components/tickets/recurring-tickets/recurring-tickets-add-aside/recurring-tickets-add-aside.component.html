@@ -171,9 +171,9 @@
   <div class="qt-aside-modern__footer">
     <div class="col-md-12 recurring-tickets-content__modal--content-footer">
       <div class="d-f">
-        <button class="btn-new btn-primary" (click)="onInitAddAndCopy()">Save & Copy</button>
-        <button class="btn-new btn-primary" (click)="onInitAdd()">Save</button>
-        <button class="btn-new disabled" (click)="close()">Cancel</button>
+        <button class="qt-button qt-mr-12" (click)="onInitAddAndCopy()">Save & Copy</button>
+        <button class="qt-button qt-mr-12" (click)="onInitAdd()">Save</button>
+        <button class="qt-button --gray" (click)="close()">Cancel</button>
       </div>
       <div class="save-template">
         <app-teh-users [users]="listTehUsers" (usersChange)="onChangeTehUsers($event)"></app-teh-users>
