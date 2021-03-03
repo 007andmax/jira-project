@@ -42,9 +42,8 @@
             Description is required
         </mat-error>
         <p class="label-name">Description</p>
-        <div class="editable-description">
+        <div class="editable-description" [ngClass]="{'--input-error' : !validate.getDescription()}">
             <textarea
-                [ngClass]="{'--input-error' : !validate.getDescription()}"
                 appTextArea
                 [limit]="160"
                 id="inventory-description"
@@ -77,7 +76,6 @@
             >
             <mat-error
                 class="qt-tooltip-error"
-                style="top: 73px; left: 15px; width: 200px;"
                 *ngIf="!validate.getCostSale()"
             >
                 Cost cannot be higher than Price
