@@ -355,6 +355,15 @@
   position: relative;
   padding-bottom: 70px;
 }
+.hardware-report {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.software-report {
+  padding-left: 0;
+  padding-right: 0;
+}
 
 .hardware-report .w-22 {
   width: 22% !important;
