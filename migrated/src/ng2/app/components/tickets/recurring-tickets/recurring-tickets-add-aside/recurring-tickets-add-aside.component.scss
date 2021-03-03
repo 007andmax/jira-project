@@ -9,7 +9,8 @@
 }
 
 .qt-aside-modern.recurring-tickets-content__modal .qt-aside-modern__footer {
-  // padding-top: 0;
+  padding: 0px 30px;
+  height: 90px;
   .recurring-tickets-content__modal--content-footer {
     margin-top: 0;
     margin-bottom: 0;
@@ -17,8 +18,7 @@
     padding-left: 0;
     padding-right: 50px;
   }
-  .device-user {
-    margin-top: 5px;
-    margin-bottom: 0;
+  /deep/.device-user {
+    margin-top: 5px !important;
   }
 }
