@@ -66,7 +66,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     private companiesState: SelectClientCompanyStateService,
     private recurringState: RecurringTicketsStateService,
     public createService: RecurringTicketsService,
-    private usersStateService:UsersStateService
+    private usersStateService: UsersStateService
   ) {
   }
 
@@ -108,7 +108,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   */
   private onEditEditMode(data: RecurringTicket) {
 
-    this.createService.setDescription(data.description);
+    // this.createService.setDescription(data.description);
     this.ticketForEdit = data;
     this.tehUsers = data.assignedUsers;
     this.selectClient({ item: data.company });
@@ -126,7 +126,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.createService.getTehState().setUsersFromtEdit(data.assignedUsers);
     this.createService.setCronForEdit(data.cronExpression);
     this.onChangeCron(data.cronExpression);
-   // this.description.update();
+    // this.description.update();
     this.cd.detectChanges();
 
   }
@@ -209,7 +209,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     const value = this.recurringState.getClient();
     value && this.getListServices(value);
   }
-  
+
   private onGetTechUsers(data) {
     this.listTehUsers = data.filter(item => {
 
@@ -270,7 +270,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   * @param index - index
   */
   public selectProduct(item, index) {
-    item = (item) ?  { ...item, ...{ quantity: 1, discount: 1 } } :  null;
+    item = (item) ? { ...item, ...{ quantity: 1, discount: 1 } } : null;
     this.products[index] = new ForCreateProduct(item);
     this.cd.detectChanges();
   }
@@ -437,7 +437,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
  * Close ticket
  */
   public close() {
-    this.opened = false;
+
     this.type = "services";
     this.selectedClient = null;
     this.devicesList = [];
@@ -446,7 +446,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.createService.getDevicesState().onInitClear();
     this.createService.getTagsState().onInitClear();
     this.createService.getTehState().onInitClear();
-    this.createService.clearData();
+    //  this.createService.clearData();
     this.createService.getStateDatePicker().onInitClear();
     this.createService.setDefaultDate();
     this.recurringState.clearCreateTicket();
@@ -455,6 +455,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.ticketForEdit = null;
     this.validate = new Validate();
     this.createService.resetEditAdditionalOptions();
+    this.opened = false;
   }
 
   public copyAndCreate() {
