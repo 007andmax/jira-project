@@ -57,7 +57,6 @@
     "moment": "^2.24.0",
     "net": "^1.0.2",
     "ng-click-outside": "^4.0.0",
-    "ng-sidebar": "^8.0.0",
     "ng2-nvd3": "^2.0.0",
     "ng2-select": "^2.0.0",
     "ng2-stomp-service": "^1.2.2",

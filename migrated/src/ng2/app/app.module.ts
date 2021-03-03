@@ -15,7 +15,6 @@ import { SelectModule } from 'ng2-select';
 // import { SelectModule } from 'ng2-select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { IgxTimePickerModule } from 'igniteui-angular';
-import { SidebarModule } from 'ng-sidebar';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ClickOutsideModule } from 'ng4-click-outside';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
@@ -963,7 +962,6 @@ angular.module('quicktech')
     MatAutocompleteModule,
     BrowserAnimationsModule,
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
-    SidebarModule.forRoot(),
     // ShowHidePasswordModule,
     AppRoutingModule,
     ImageCropperModule,
