@@ -1,4 +1,8 @@
-<div class="qt-aside-modern__content qt-pt-0-important new-companies-content__modal--content advanced create-product" [ngClass]="class">
+<div
+    class="qt-aside-modern__content qt-pt-0-important new-companies-content__modal--content advanced create-product"
+    [ngClass]="class"
+>
+    <div class="qt-inputs-row">
         <div class="create-product__col --required">
             <mat-error
                 class="qt-tooltip-error"
@@ -120,6 +124,8 @@
                 (onAddItem)="onAddCategory($event)"
                 (onSelectedItem)="onSelectCategory($event)"
             ></app-select-search> -->
+
+
 
 
             <app-drop-down
