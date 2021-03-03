@@ -149,7 +149,7 @@ export class CompanyAddAsideComponent implements OnInit, OnDestroy {
   }
   onAddShort() {
     if (!this.validate.isValidate(this.company)) return;
-    let createCompany = this.companiesService.createCompany(this.company).subscribe(data => {
+    let createCompany = this.companiesService.createCompany(this.company.getDataForAdd()).subscribe(data => {
       this.close();
     })
     this.sub.add(createCompany);
@@ -232,7 +232,7 @@ export class CompanyAddAsideComponent implements OnInit, OnDestroy {
   }
   public onAddFull() {
     if (!this.validate.isValidate(this.company)) return;
-    let createCompany = this.companiesService.createCompany(this.company).subscribe(data => {
+    let createCompany = this.companiesService.createCompany(this.company.getDataForAdd()).subscribe(data => {
       this.close();
     })
     this.sub.add(createCompany);
