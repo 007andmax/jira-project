@@ -80,6 +80,8 @@ export class DropDownComponent implements OnInit {
   clearClient() {
     this.isAdd = false;
     this.selectedItem = null;
+    this.elRef.nativeElement.querySelector("#dropdown1").value = "";
+    this.list = JSON.parse(JSON.stringify(this.reqList));
     this.onSelectedItem.emit(null);
   }
   public getInputText() {

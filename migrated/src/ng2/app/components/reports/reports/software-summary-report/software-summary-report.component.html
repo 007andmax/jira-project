@@ -5,6 +5,7 @@
     ></app-report-menu>
 </div>
 <app-report-additional-actions
+    [orientation]="'LANDSCAPE'"
     [report]="'software-summary'"
     [accountType]="'TECH'"
     [template]="'CUSTOMER_REPORT'"
@@ -138,6 +139,9 @@
                 </div>
             </div>
         </div>
-        <app-report-footer *ngIf="onInit"></app-report-footer>
+        <app-report-footer
+            [orientation]="'LANDSCAPE'"
+            *ngIf="onInit"
+        ></app-report-footer>
     </div>
 </div>
