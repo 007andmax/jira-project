@@ -92,13 +92,14 @@ export class CompanyProfile {
 
     }
     public getDataForUpdate() {
+        let contacts = JSON.parse(JSON.stringify(this.contacts));
         return {
             accountNumber: this.accountNumber,
             addresses: this.addresses,
             agentLinkToEmail: this.agentLinkToEmail,
             clientIndustry: (!this.clientIndustry.name || this.clientIndustry.name.length === 0) ? {} : this.clientIndustry,
             clientType: this.clientType,
-            contacts: this.contacts.map((item, index) => {
+            contacts: contacts.map((item, index) => {
                 if (index === 0 && (!item.phoneNumbers[0].number || item.phoneNumbers[0].number.length === 0)) item.phoneNumbers = [];
                 return item;
             }),

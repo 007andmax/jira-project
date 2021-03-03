@@ -150,8 +150,9 @@ export class UsersAsideComponent implements OnInit {
     if (!this.validate.isValidate(this.user)) return;
     this.addBtn.setDisabled(true);
     this.usersService.addUser(this.user.getUserForAdd()).subscribe(data => {
-      this.close();
       this.addBtn.setDisabled(false);
+      this.close();
+
     }, err => {
       this.addBtn.setDisabled(false);
     })

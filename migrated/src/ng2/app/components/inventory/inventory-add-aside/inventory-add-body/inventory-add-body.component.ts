@@ -13,6 +13,7 @@ import { GlNumberStateService } from 'src/ng2/app/states/gl-number/gl-number-sta
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { ProductService } from 'src/ng2/app/services/product/product.service';
 import { GlNumberService } from 'src/ng2/app/services/gl-number/gl-number.service';
+import { DropDownComponent } from '../../../shared/drop-down/drop-down.component';
 
 @Component({
   selector: 'app-inventory-add-body',
@@ -22,7 +23,7 @@ import { GlNumberService } from 'src/ng2/app/services/gl-number/gl-number.servic
 export class InventoryAddBodyComponent implements OnInit, OnDestroy {
   @ViewChild('addTax') containerAddTax;
   @ViewChild('glNumberSelect') glNumberSelect: SelectSearchComponent;
-  @ViewChild('categoriesSelect') categoriesSelect: SelectSearchComponent;
+  @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
   @ViewChild('vendorsSelect') vendorsSelect: SelectSearchComponent;
   @Output() onClose: EventEmitter<any> = new EventEmitter();
   @Input() class: string;
