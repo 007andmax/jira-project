@@ -18,7 +18,7 @@
                     <software-summary-devices-dro-down
                         [sort]="false"
                         [placeholder]="'All devices'"
-                        [dropdownHeight]="'180px'"
+                        [dropdownHeight]="'300px'"
                         [list]="devices"
                         [isDisabled]="!hardwareSummaryReport.companyId"
                         [preloader]="hardwareSummaryReport.preloaderDevices"
@@ -29,6 +29,7 @@
                     <app-drop-down
                         [placeholder]="'Select Company'"
                         [list]="companies"
+                        [dropdownHeight]="'300px'"
                         [validate]="validate.getCompany()"
                         [errorMessage]="'Please select the company name'"
                         [field]="'name'"
@@ -121,7 +122,7 @@
                     <app-drop-down
                         [sort]="true"
                         [placeholder]="'Search software / publisher'"
-                        [dropdownHeight]="'180px'"
+                        [dropdownHeight]="'300px'"
                         [field]="'name'"
                         [search]="true"
                         [change]="true"
@@ -135,7 +136,7 @@
                     <software-summary-devices-dro-down
                         [sort]="true"
                         [placeholder]="'All devices'"
-                        [dropdownHeight]="'180px'"
+                        [dropdownHeight]="'300px'"
                         [list]="devices"
                         (onSelectedItem)="onSelectDevice($event)"
                     ></software-summary-devices-dro-down>

@@ -250,7 +250,7 @@
 
 .hardware__wrapper--report .info-row .hard-drive__point--icon img {
   width: 150px;
-  
+
 }
 
 .hardware__wrapper--report .info-row .hard-drive:before {
@@ -353,6 +353,7 @@
   background-color: #fff;
   min-height: 40px;
   position: relative;
+  padding-bottom: 70px;
 }
 
 .hardware-report .w-22 {
@@ -549,7 +550,7 @@
 
 .service-agreements-lists .content-product-list-ticket {
   border-top: 1px solid #e7ecf2;
-  
+
 }
 
 .service-agreements ul {
@@ -751,7 +752,7 @@
   background-color: #fff;
   border-radius: 50%;
   transition: all .3s;
-  
+
 }
 
 .product-report-btn:hover {
@@ -1012,7 +1013,7 @@
 }
 
 .run-report-content .form-group .report-caret-icon {
-  top: 14px;
+  top: calc(50% - 3px);
   right: 16px;
 }
 
@@ -1024,7 +1025,7 @@
 }
 
 .run-report-content .content {
-  width: 250px;
+  width: 400px;
   display: inline-block;
   margin-right: 10px;
   padding-bottom: 15px;
@@ -1048,7 +1049,7 @@
   background-color: #f3f7f9;
   position: relative;
   z-index: 100;
-  
+
 }
 
 .top-product-list-ticket.sticky.shown {
@@ -1933,23 +1934,23 @@
   .service-agreements-lists .col-width-3 {
     width: 22.2%;
   }
-  
+
   .service-agreements-lists .col-width-4 {
     width: 14.3%;
   }
-  
+
   .product-report-btn.dropdown-email .dropdown-menu {
     left: -60px;
   }
-  
+
   .product-list-ticket-deposit .col-md-3 {
     width: 45%;
   }
-  
+
   .service-agreements ul li [class*='col-md-'] {
     padding: 15px 5px;
   }
-  
+
   .service-agreements-lists .col-width-1 {
     width: 8.5%;
   }
@@ -1959,39 +1960,39 @@
   .company-report .top-product-list-ticket [class*=col-md-] {
     font-size: 9px;
   }
-  
+
   .company-report .content-product-list-ticket [class*=col-md-] {
     font-size: 11px;
   }
-  
+
   .run-report-content .content {
     width: 28.6%;
   }
-  
+
   .service-agreements-lists .col-width-3 {
     width: 20%;
   }
-  
+
   .service-agreements-lists .col-width-4 {
     width: 15.7%;
   }
-  
+
   .product-report-btn.dropdown-email .dropdown-menu {
     left: -210px;
   }
-  
+
   .run-report-content-device .device-report {
     max-width: 125px;
   }
-  
+
   .deposit-create .col-md-2 {
     width: 17% !important;
   }
-  
+
   .service-agreements-lists {
     font-size: 12px;
   }
-  
+
   .service-agreements-lists .col-width-1 {
     width: 8.3%;
   }
@@ -2001,19 +2002,19 @@
   .deposit-create .col-md-2 {
     width: 16% !important;
   }
-  
+
   .run-report-content .content {
     max-width: 160px;
   }
-  
+
   .product-list-ticket-deposit .col-md-3 {
     width: 44%;
   }
-  
+
   .service-agreements-lists {
     font-size: 11px;
   }
-  
+
   .product-list-report {
     padding: 30px 10px;
   }
