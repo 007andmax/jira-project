@@ -11,14 +11,35 @@
                         [(ngModel)]="productSearchName"
                     >
                     <button
-                        class="plus-btn"
-                        *ngIf="getPermissions('MANAGE_PRODUCTS')"
-                        (click)="addProduct()"
+                        class="qt-btn filter-button qt-mr-8"
+                       >
+                       Filters
+                    </button>
+                    <button
+                      class="qt-btn --outline-blue"
+                      *ngIf="getPermissions('MANAGE_PRODUCTS')"
+                      (click)="addProduct()"
                     >
-                        +
+                      Create Product
                     </button>
                 </div>
             </div>
+          <div class="qt-page-list__header-filters qt-mb-16">
+            <app-drop-down
+              #titleDp
+              class="qt-max-w370 qt-mr-8"
+              [placeholder]="'Select Category'"
+              [heightInput]="'36px'"
+              [list]="[]"
+              [search]="true"
+              [change]="true"
+            ></app-drop-down>
+            <button
+              class="qt-btn"
+            >
+              Add Category
+            </button>
+          </div>
             <div class="products-content__list">
                 <div class="products-content__list--header clearfix">
                     <div
