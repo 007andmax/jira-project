@@ -1,16 +1,4 @@
-<div
-    class="qt-aside-modern__content new-companies-content__modal--content advanced create-product"
-    [ngClass]="class"
->
-
-
-
-
-
-
-
-
-    <div class="qt-inputs-row">
+<div class="qt-aside-modern__content qt-pt-0-important new-companies-content__modal--content advanced create-product" [ngClass]="class">
         <div class="create-product__col --required">
             <mat-error
                 class="qt-tooltip-error"
@@ -18,14 +6,6 @@
             >
                 This number already occupied
             </mat-error>
-
-
-
-
-
-
-
-
             <p class="label-name">Item number</p>
             <input
                 type="text"
@@ -36,39 +16,6 @@
                 placeholder="Enter Item number"
             >
         </div>
-
-
-
-
-
-
-
-
-        <div class="create-product__col --required">
-            <mat-error
-                class="qt-tooltip-error"
-                *ngIf="!validate.getILCIsExist()"
-            >
-                This number already occupied
-            </mat-error>
-            <p class="label-name">ILC number</p>
-            <input
-                type="text"
-                [ngClass]="{'--input-error' : !validate.getILCIsExist()}"
-                class="qt-input-40 inventory-add-body__input"
-                [(ngModel)]="inventory.ilc"
-                (blur)="onCheckILC()"
-                placeholder="Enter ILC number"
-            >
-        </div>
-
-
-
-
-
-
-
-
         <div class="create-product__col">
             <p class="label-name">GL number</p>
             <app-select-search
@@ -83,15 +30,6 @@
             ></app-select-search>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
     <div class="create-product__col --required">
         <mat-error
             class="qt-tooltip-error"
@@ -112,14 +50,6 @@
             ></textarea>
         </div>
     </div>
-
-
-
-
-
-
-
-
     <div class="qt-inputs-row">
         <div class="create-product-taxes-select">
             <app-taxes
@@ -149,14 +79,6 @@
                 Cost cannot be higher than Price
             </mat-error>
         </div>
-
-
-
-
-
-
-
-
         <div class="create-product__col --required">
             <mat-error
                 class="qt-tooltip-error"
@@ -178,14 +100,6 @@
             >
         </div>
     </div>
-
-
-
-
-
-
-
-
     <div class="qt-inputs-row">
         <div class="create-product__col select-open-top --required">
             <!-- <mat-error
@@ -226,15 +140,6 @@
             </app-drop-down>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
     <div class="qt-inputs-row">
         <div class="create-product__col select-open-top">
             <p class="label-name">Vendors</p>
@@ -249,14 +154,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
 <div class="qt-aside-modern__footer">
     <div class="qt-df">
         <button

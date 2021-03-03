@@ -421,6 +421,18 @@
   transform: translateY(-50%) !important;
 }
 
+.create-product {
+  .qt-aside-modern__content {
+    overflow: visible;
+    height: unset;
+  }
+
+  .qt-aside-modern__footer {
+    padding-bottom: 0;
+    padding-left: 0;
+  }
+}
+
 
 @media (max-height: 900px) {
   .quotes-page__aside {
