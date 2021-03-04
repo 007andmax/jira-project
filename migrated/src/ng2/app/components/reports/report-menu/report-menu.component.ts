@@ -170,6 +170,8 @@ export class ReportMenuComponent implements OnInit {
   public onSelectDevice(data) {
     this.softwareSummaryReport.setDeviceId((data) ? data.id : null);
     this.hardwareSummaryReport.setDeviceId((data) ? data.id : null);
+    this.deviceIpSummary.setDeviceId((data) ? data.id : null);
+
   }
   public onSelectSoftware(data) {
     this.softwareSummaryReport.setSoftwareSoft(data);
