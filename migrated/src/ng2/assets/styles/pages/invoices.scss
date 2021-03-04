@@ -84,10 +84,6 @@
     margin-left: -8px;
   }
 
-  .invoice-table td {
-    border: 1px solid transparent;
-  }
-
   .invoice-table__check {
     width: 32px;
     min-width: 32px;
@@ -182,31 +178,6 @@
   }
 
   &__aside {
-    color: #4f5f79;
-    background: white;
-    width: 880px;
-    position: absolute;
-    border-left: 1px solid #dfe3e8;
-    height: 100%;
-    right: 0;
-    box-shadow: -8px 0 8px 0 rgba(0, 0, 0, 0.05);
-    position: fixed;
-    top: $header-height;
-    right: 0;
-    height: calc(100vh - #{$header-height});
-    z-index: 5;
-
-
-  .billing-aside-scroll-content {
-    overflow: auto;
-    height: calc(100% - 127px);
-  }
-
-  .aside-header {
-    height: 56px;
-    background-color: #f9fafb;
-    border-bottom: 1px solid #dfe3e8;
-  }
 
   .address-block {
     border-bottom: 1px solid #dfe3e8;
@@ -346,12 +317,6 @@
     }
   }
 
-
-  .aside-footer {
-    height: 72px;
-    border-top: 1px solid #dfe3e8;
-    background: white;
-  }
   }
 
   .filter-button {

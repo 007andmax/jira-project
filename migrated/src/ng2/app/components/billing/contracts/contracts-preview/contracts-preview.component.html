@@ -1,12 +1,7 @@
-<div class="contracts-page__aside">
-    <div class="aside-header qt-df qt-ai-c qt-jc-sb qt-pr-16 qt-pl-32">
-        <div class="qt-fs-20 qt-ff-gm qt-color-dark">Preview Contract</div>
-        <div class="qt-df qt-ai-c">
-            <div
-                class="icon__close qt-sz-24 qt-pointer qt-ic-c"
-                (click)="closed()"
-            ></div>
-        </div>
+<div class="contracts-page__aside qt-aside-modern --x-large">
+    <div class="qt-aside-modern__header">
+        <div class="qt-aside-modern__header-title">Preview Contract</div>
+        <div class="qt-aside-modern__header-close icon__close" (click)="closed()"></div>
     </div>
     <app-contracts-aside-hourly-billing-preview
         *ngIf="serviceAgreement.type === 'HOURLY'"
@@ -24,7 +19,7 @@
         *ngIf="serviceAgreement.type === 'SERVICE_CONTRACT' && serviceAgreement.billType === 'OTHER'"
         [contractsOther]="serviceAgreement"
     ></app-contracts-aside-product-service-preview>
-    <div class="aside-footer qt-pr-30 qt-pl-30 qt-pb-16 qt-pt-16 qt-df qt-ai-c qt-jc-sb">
+    <div class="qt-aside-modern__footer">
         <div class="qt-df">
             <button
                 class="qt-button qt-mr-12"

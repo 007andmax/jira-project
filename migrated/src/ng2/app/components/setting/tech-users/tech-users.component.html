@@ -365,24 +365,15 @@
 </div>
 <!-- sidebar popup -->
 <div
-    class="sidebar-popup"
-    [class.opened]="create"
+    class="qt-aside-modern"
+    *ngIf="create"
 >
     <!-- header -->
-    <div class="sidebar-header">
-        <div class="h1">Create Tech User</div>
-        <a
-            class="close"
-            href="javascript:;"
-            (click)="create = !create"
-        >
-            <img
-                src="../../../../../ng1/images/setting-module/close.svg"
-                alt="close"
-            >
-        </a>
+    <div class="qt-aside-modern__header">
+        <div class="qt-aside-modern__header-title">Create Tech User</div>
+        <div class="qt-aside-modern__header-close icon__close"  (click)="create = !create"></div>
     </div>
-    <div class="middle-content">
+    <div class="qt-aside-modern__content middle-content">
         <div class="dp-area">
             <span class="dp">
                 <img
@@ -530,7 +521,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="eml-ntl-list">
+                <div class="qt-pl-10 qt-pr-10">
                     <div class="email-note-wrape">
                         <h5>Set Email Notification for Tech User</h5>
                         <ul class="list-unstyled">
@@ -574,41 +565,31 @@
                     </div>
                 </div>
             </div>
-            <div class="btn-row">
-                <input
-                    type="submit"
-                    value="Save"
-                    class="btn btn-primary"
-                >
-                <a
-                    href="javascrip:;"
-                    class="btn btn-secondary"
-                    (click)="create = !create"
-                >
-                    Cancel
-                </a>
-            </div>
         </form>
+    </div>
+    <div class="qt-aside-modern__footer">
+      <div class="qt-df">
+        <button
+          class="qt-button qt-mr-12"
+          (click)="onCreateSubmit()"
+        >
+          Save
+        </button>
+        <button class="qt-button --gray" (click)="create = !create">
+          Cancel
+        </button>
+      </div>
     </div>
 </div>
 <!-- sidebar popup edit -->
 <div
-    class="sidebar-popup role-dlt"
-    [class.opened]="edit"
+    class="qt-aside-modern sidebar-popup role-dlt"
+    *ngIf="edit"
 >
     <!-- header -->
-    <div class="sidebar-header">
-        <div class="h1">Edit Tech User</div>
-        <a
-            class="close"
-            href="javascript:;"
-            (click)="edit = !edit"
-        >
-            <img
-                src="../../../../../ng1/images/setting-module/close.svg"
-                alt="close"
-            >
-        </a>
+    <div class="qt-aside-modern__header">
+        <div class="qt-aside-modern__header-title">Edit Tech User</div>
+        <div class="qt-aside-modern__header-close icon__close" (click)="edit = !edit"></div>
     </div>
     <div
         class="warn-msg"
@@ -628,7 +609,7 @@
             </a>
         </p>
     </div>
-    <div class="middle-content">
+    <div class="middle-content qt-aside-modern__content">
         <div class="dp-area">
             <span
                 class="dp"
@@ -891,21 +872,20 @@
                     </div>
                 </div>
             </div>
-            <div class="btn-row">
-                <input
-                    type="submit"
-                    value="Save"
-                    class="btn btn-primary"
-                >
-                <a
-                    href="javascrip:;"
-                    class="btn btn-secondary"
-                    (click)="edit = !edit"
-                >
-                    Cancel
-                </a>
-            </div>
+
         </form>
+    </div>
+    <div class="qt-aside-modern__footer">
+      <div class="qt-df">
+        <button
+          class="qt-button qt-mr-12"
+          (click)="onSubmit()"
+        >
+          Save
+        </button>
+        <button class="qt-button --gray" (click)="edit = !edit">
+          Cancel
+        </button>
     </div>
 </div>
 <!-- tag delete popup -->

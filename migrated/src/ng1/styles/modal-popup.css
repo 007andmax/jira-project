@@ -1060,8 +1060,6 @@ _::-webkit-:not(:root:root),
 .company--header button,
 .product--header button,
 .new-users-content__modal button,
-.new-companies-content__modal button,
-.recurring-tickets-content__modal button,
 .password-content__modal button {
   border: none;
   outline: none;

@@ -1,13 +1,9 @@
-<div class="payments-page payments-page__aside">
-  <div class="aside-header qt-df qt-ai-c qt-jc-sb qt-pr-16 qt-pl-20">
-    <div class="qt-fs-20 qt-ff-gm qt-color-dark">
-      Refund
-    </div>
-    <div class="qt-df qt-ai-c" >
-      <div class="icon__close qt-sz-24 qt-pointer qt-ic-c" (click)="close()"></div>
-    </div>
+<div class="payments-page payments-page__aside qt-aside-modern --x-large">
+  <div class="qt-aside-modern__header">
+    <div class="qt-aside-modern__header-title">Refund</div>
+    <div class="qt-aside-modern__header-close icon__close" (click)="close()"></div>
   </div>
-  <div class="billing-aside-scroll-content qt-pt-50 qt-pr-50 qt-pb-50 qt-pl-50">
+  <div class="qt-aside-modern__content">
     <div class="payment-preview qt-pt-40 qt-pl-40 qt-pr-40 qt-pb-40">
       <div class="qt-df">
         <div class="qt-w100">
@@ -54,7 +50,7 @@
       </div>
     </div>
   </div>
-  <div class="aside-footer qt-pr-30 qt-pl-30 qt-pb-16 qt-pt-16 qt-df qt-ai-c qt-jc-sb">
+  <div class="qt-aside-modern__footer">
     <div class="qt-df">
       <button class="qt-button qt-mr-12" appDisabledBtn #refundPaymentBtn="disabled" (onClick)="create()"><span *ngIf="!refundPaymentBtn.isBlock()">Refund Payment</span> <app-preloader-ticket *ngIf="refundPaymentBtn.isBlock()"></app-preloader-ticket></button>
       <button class="qt-button --gray" (click)="close()">Cancel</button>

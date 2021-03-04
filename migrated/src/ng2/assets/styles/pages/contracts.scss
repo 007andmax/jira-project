@@ -87,16 +87,6 @@
 
 .contracts-page {
   &__aside{
-    background: white;
-    width: 880px;
-    border-left: 1px solid #dfe3e8;
-    box-shadow: -8px 0 8px 0 rgba(0, 0, 0, 0.05);
-    position: fixed;
-    top: $header-height;
-    right: 0;
-    height: calc(100vh - #{$header-height});
-    z-index: 10;
-
   // select contract type
   .contract-type-aside-content {
     padding: 32px;
@@ -464,16 +454,6 @@
 
 
 // start user device billing
-    .aside-header {
-      height: 56px;
-      background-color: #f9fafb;
-      border-bottom: 1px solid #dfe3e8;
-    }
-
-    .contracts-page-scroll-content {
-      overflow: auto;
-      height: calc(100% - 127px);
-    }
 
     .contract-tipe-info {
       border: 1px dotted #c5cdd5;
@@ -501,12 +481,6 @@
     .col-count {
       width: 84px;
       text-align: right;
-    }
-
-    .aside-footer {
-      height: 72px;
-      border: 1px solid #dfe3e8;
-      background: white;
     }
 
     .contract-total {

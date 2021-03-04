@@ -1274,6 +1274,7 @@ app-quotes-item {
       padding: 0 12px;
       font-size: 12px;
       text-align: left;
+      background-color: white;
     }
     .report-caret-icon {
       width: 8px;
@@ -1346,6 +1347,9 @@ app-quotes-item {
   border: 1px solid #c4cbd5;
   border-radius: 4px;
   display: flex;
+  &.--input-error {
+    border-color: #ff5263 !important;
+  }
   textarea {
     width: 100%;
     border: none;
@@ -1590,7 +1594,7 @@ app-quotes-item {
           position: absolute;
           background: url("./assets/img/icons/adduser.png");
           left: -40px;
-          top: -5px;
+          // top: -5px;
           width: 32px;
           height: 32px;
         }
@@ -1702,6 +1706,20 @@ app-quotes-item {
 }
 .new-users-content__modal,
 .new-companies-content__modal {
+  .create-contract {
+    position: relative;
+    margin-right: 20px;
+    &:after {
+      position: absolute;
+      content: '';
+      background: url("./assets/img/icons/help.png");
+      height: 16px;
+      width: 16px;
+      right: -20px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
   .advanced {
     .editable-field {
       position: relative;
@@ -1713,20 +1731,6 @@ app-quotes-item {
         font-family: "Graphik-Regular", sans-serif;
         font-size: 11px;
         color: #9ca5b6;
-      }
-    }
-    .create-contract {
-      position: relative;
-      margin-right: 20px;
-      &:after {
-        position: absolute;
-        content: '';
-        background: url("./assets/img/icons/help.png");
-        height: 16px;
-        width: 16px;
-        right: -20px;
-        top: 50%;
-        transform: translateY(-50%);
       }
     }
     .details-divider {
@@ -1937,7 +1941,6 @@ ngb-datepicker {
 .recurring-tickets-content__modal,
 .new-users-content__modal {
   .logo-upload {
-    margin-top: 20px;
     padding-bottom: 20px;
     border-bottom: 1px solid #edf2f6;
     align-items: center;
@@ -2756,6 +2759,15 @@ app-add-assigned-user {
   }
 }
 
+.ticket-edit-aside {
+  position: fixed;
+  z-index: 2;
+  background: white;
+  right: 0;
+  top: $header-height;
+  display: flex;
+  height: calc(100% - #{$header-height});
+}
 
 .ticket-edit-aside__body,
 app-ticket-edit-aside-company-info,
@@ -2809,7 +2821,7 @@ app-ticket-edit-aside-devices  {
     .mat-error {
       font-size: 12px;
       position: absolute;
-      top: -17px;
+      top: calc(100% + 5px);
     }
   }
 
@@ -2865,13 +2877,6 @@ app-ticket-edit-aside-devices  {
     width: 100% !important;
     min-height: 190px !important;
     height: fit-content !important;
-  }
-
-}
-
-.new-companies-content__modal {
-  .create-product {
-    height: 600px;
   }
 }
 

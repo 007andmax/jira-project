@@ -300,9 +300,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  closeTemplete() {
-    this.edit = false;
-  }
+
 
   /**
    * saved email template
@@ -356,6 +354,12 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
           this.toastr.error(`Error Occured  ${error}`);
         }
       );
+  }
+  closeTemplete() {
+    this.submitted = false;
+    this.edit = false;
+    this.templeteForm.reset();
+    this.templeteInfo = null;
   }
 
   /**

@@ -1,7 +1,7 @@
 .qt-aside-modern {
   color: #4f5f79;
   background: white;
-  width: 592px;;
+  width: 592px;
   position: absolute;
   border-left: 1px solid #dfe3e8;
   height: 100%;
@@ -12,6 +12,14 @@
   right: 0;
   height: calc(100vh - #{$header-height});
   z-index: 5;
+
+  &.--large {
+    width: 642px;
+  }
+
+  &.--x-large {
+    width: 940px;
+  }
 
   &__header {
     height: 56px;
@@ -43,6 +51,18 @@
     padding: 24px 32px;
     overflow: auto;
     height: calc(100% - 127px);
+
+    &.--no-footer {
+      height: calc(100% - 67px);;
+    }
+
+    &.--less-padding {
+      padding: 10px 17px;
+    }
+
+    &.--no-padding {
+      padding: 0;
+    }
   }
 
   &__footer {
