@@ -12,6 +12,8 @@ import { TicketValidate } from '../class/ticket-validate';
 import { UploadAreaComponent } from '../../../shared/upload-area/upload-area.component';
 import { NotificationStateService } from '../../../shared/notification/services/notification-state.service';
 import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.service';
+import { DropDownComponent } from '../../../shared/drop-down/drop-down.component';
+import { DisabledBtnDirective } from 'src/ng2/app/directives/disabled-btn.directive';
 
 
 
@@ -21,11 +23,12 @@ import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.se
   styleUrls: ['./ticket-add-aside.component.scss']
 })
 export class TicketAddAsideComponent implements OnInit {
-  @ViewChild('userDP') userDP: SelectSearchComponent;
+  @ViewChild('userDP') userDP: DropDownComponent;
   @ViewChild('techUserDP') techUserDP: SelectSearchComponent;
   @ViewChild('deviceDP') deviceDP: SelectSearchComponent;
-  @ViewChild('companyDP') companyDP: SelectSearchComponent;
+  @ViewChild('companyDP') companyDP: DropDownComponent;
   @ViewChild('uplaodFile') uplaodFile: UploadAreaComponent;
+  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   actualNumber: string = '';
   opened = false;
   isAdd = false;
@@ -71,13 +74,14 @@ export class TicketAddAsideComponent implements OnInit {
   add() {
     if (this.ticketValidate.isValidate(this.ticketAdd)) {
       this.ticketAdd.onAddSharedUsers(this.shareUsersList);
-      this.isAdd = true;
+      this.addBtn.setDisabled(true);
+
       this.ticketsService.addTicket(this.ticketAdd).subscribe(data => {
-        this.isAdd = false;
+        this.addBtn.setDisabled(false);
         this.notificationStateService.oninitShowNotification("Ticket has been created");
         this.closed();
       }, error => {
-        this.isAdd = false;
+        this.addBtn.setDisabled(false);
       })
     }
 

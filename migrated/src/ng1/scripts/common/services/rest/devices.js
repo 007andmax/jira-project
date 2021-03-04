@@ -454,31 +454,7 @@
         });
       }
 
-      //regular connection
-      function createRemoteSession(deviceId, companyId, connectionType, callback, ticketId) {
 
-        if (!deviceId) {
-          throw 'deviceId is required!';
-        }
-
-        if (!companyId) {
-          throw 'companyId is required!';
-        }
-
-        if (!connectionType) {
-          throw 'connectionType is required!';
-        }
-
-        $http.get('/remote/createRemoteSession?deviceId=' + deviceId + '&connectionType=' + connectionType + '&companyId=' + companyId + (ticketId ? '&ticketId=' + ticketId : '')).then(function (resp) {
-          if (callback) {
-            callback(resp.data);
-          }
-        }, function (resp) {
-          if (callback) {
-            callback(resp.data);
-          }
-        });
-      }
 
       function subscribeToRemoteConnection(sessionId, callback) {
         callbackForRemoteConnection[sessionId] = callback;
@@ -672,7 +648,6 @@
         getDevicesCount: getDevicesCount,
         getAgentsByCompany: getAgentsByCompany,
         getSessionId: getSessionId,
-        createRemoteSession: createRemoteSession,
         subscribeToRemoteConnection: subscribeToRemoteConnection,
         getOneById: getOneById,
         getOneByDeviceId: getOneByDeviceId,

@@ -1,14 +1,4 @@
 .payments-page {
-  &__aside{
-    background: white;
-    width: 940px;
-    position: absolute;
-    border-left: 1px solid #dfe3e8;
-    height: 100%;
-    right: 0;
-    box-shadow: -8px 0 8px 0 rgba(0, 0, 0, 0.05);
-  }
-
   .billable-table, .invoice-table {
     min-width: 1064px;
   }
@@ -23,17 +13,6 @@
     background-repeat: no-repeat;
     background-position: center;
     cursor: pointer;
-  }
-
-  .aside-header {
-    height: 56px;
-    background-color: #f9fafb;
-    border-bottom: 1px solid #dfe3e8;
-  }
-
-  .billing-aside-scroll-content {
-    overflow: auto;
-    height: calc(100% - 127px);
   }
 
   .payment-preview {

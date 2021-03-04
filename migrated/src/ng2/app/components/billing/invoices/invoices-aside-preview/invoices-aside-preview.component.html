@@ -1,29 +1,18 @@
 <div
-    class="invoices-page__aside aside-preview"
+    class="invoices-page__aside qt-aside-modern --x-large aside-preview"
     *ngIf="open"
 >
-
-
-
     <div
-        class="aside-header qt-df qt-ai-c qt-jc-sb qt-pr-16 qt-pl-20"
+        class="qt-aside-modern__header"
         *ngIf="!showPreloader"
     >
-
-
         <div
-            class="qt-fs-20 qt-ff-gm qt-color-dark"
+            class="qt-aside-modern__header-title"
             [textContent]="'Invoice#' + invoiceProfile.number"
         >
-
-
         </div>
 
-
         <div class="qt-df qt-ai-c">
-
-
-            <!-- <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__edit"></div> -->
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__email-dark"
                 (click)="resendInvoices()"
@@ -46,21 +35,16 @@
                 *ngIf="invoiceProfile.paidOn"
                 (click)="refundPayments()"
             ></div>
-            <!-- <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-16 header-circle-icon icon__remove" (click)="deleteInvoice()"></div> -->
-
 
             <div
-                class="icon__close qt-sz-24 qt-pointer qt-ic-c "
+                class="icon__close qt-aside-modern__header-close"
                 (click)="close()"
             ></div>
         </div>
-
-
     </div>
 
 
-
-    <div class="billing-invoice-preview-scroll-content">
+    <div class="qt-aside-modern__content --no-padding --no-footer">
         <div
             class="loading"
             *ngIf="showPreloader"

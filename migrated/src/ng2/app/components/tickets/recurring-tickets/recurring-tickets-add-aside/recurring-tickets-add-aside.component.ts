@@ -18,6 +18,7 @@ import { DevicesRecurringTicketsStateService } from '../devices-recurring-ticket
 import { NotificationStateService } from '../../../shared/notification/services/notification-state.service';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { TechUserItem } from '../../../shared/teh-users/class/tech-user-item';
+import { FORMAT_DATE_2 } from 'src/ng2/app/const/date-picker';
 
 @Component({
   selector: 'app-recurring-tickets-add-aside',
@@ -39,7 +40,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   public listTehUsers: Array<TechUserItem> = [];
   public validate: Validate = new Validate();
   copy: boolean = false;
-
+  formatDate: string = FORMAT_DATE_2;
 
   /**
    * Creates an instance of the RecurringTicketsAddAsideComponent with the injected services
@@ -59,7 +60,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     private devicesService: DevicesService,
     private companiesState: SelectClientCompanyStateService,
-    private recurringState: RecurringTicketsStateService,
+    public recurringState: RecurringTicketsStateService,
     public createService: RecurringTicketsService,
     private notificationStateService: NotificationStateService,
     private devicesRecurringTicketsStateService: DevicesRecurringTicketsStateService,

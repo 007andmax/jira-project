@@ -46,6 +46,12 @@
     width: 100%;
     overflow: auto;
   }
+  &__body-table-container {
+    min-height: 100vh;
+    &.--height-unset {
+      min-height: unset;
+    }
+  }
   &__body-table-container::-webkit-scrollbar {
     height: 0;
   }
