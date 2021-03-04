@@ -101,33 +101,7 @@
 
 // billing aside
 .billing-page {
-
-
   &__aside{
-    background: white;
-    width: 940px;
-    position: absolute;
-    border-left: 1px solid #dfe3e8;
-    height: 100%;
-    right: 0;
-    box-shadow: -8px 0 8px 0 rgba(0, 0, 0, 0.05);
-    position: fixed;
-    top: $header-height;
-    right: 0;
-    height: calc(100vh - #{$header-height});
-    z-index: 5;
-
-    .billing-aside-scroll-content {
-      overflow: auto;
-      height: calc(100% - 127px);
-    }
-
-    .aside-header {
-      height: 56px;
-      background-color: #f9fafb;
-      border-bottom: 1px solid #dfe3e8;
-    }
-
     .invoice-items {
       color: #364656;
       border-radius: 4px;
@@ -272,14 +246,8 @@
       }
     }
 
-    .aside-footer {
-      height: 72px;
-      border-top: 1px solid #dfe3e8;
-      background: white;
-
-      .save-billable-aside-btn{
-        min-width: 91px;
-      }
+    .save-billable-aside-btn{
+      min-width: 91px;
     }
   }
   .address-block {

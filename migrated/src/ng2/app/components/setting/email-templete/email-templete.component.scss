@@ -55,9 +55,9 @@
     }
   }
   .middle-content {
-    height: calc(100% - 130px);
+    height: unset;
     @media only screen and (max-width: 1400px) {
-      height: 100%;
+      height: unset;
     }
     form {
       height: 100%;

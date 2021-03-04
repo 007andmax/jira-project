@@ -51,57 +51,55 @@
                 </button>
             </div>
         </div>
+
+        <div class="qt-page-list__header-thead-container">
+          <table class="qt-table-modern qt-page-list__header-thead">
+              <thead>
+                  <tr>
+                      <th class="billable-item-table__check">
+                          <div class="d-f">
+                              <label class="qt-checkbox">
+                                  <input
+                                      type="checkbox"
+                                      (change)="onToggleAll($event)"
+                                  >
+                                  <span></span>
+                              </label>
+                          </div>
+                      </th>
+                      <th
+                          class="billable-item-table__date"
+                          (click)="onFilter('closedAt')"
+                      >
+                          Date
+                          <span class="qt-table-modern__sorting"></span>
+                      </th>
+                      <th
+                          class="billable-item-table__ticket"
+                          (click)="onFilter('ticketNumber')"
+                      >
+                          Ticket#
+                          <span class="qt-table-modern__sorting"></span>
+                      </th>
+                      <th
+                          class="billable-item-table__subject"
+                          (click)="onFilter('subject')"
+                      >
+                          Ticket Subject
+                          <span class="qt-table-modern__sorting"></span>
+                      </th>
+                      <th
+                          class="billable-item-table__amount"
+                          (click)="onFilter('sum')"
+                      >
+                          Amount
+                          <span class="qt-table-modern__sorting"></span>
+                      </th>
+                  </tr>
+              </thead>
+          </table>
+      </div>
     </div>
-
-
-    <div class="qt-page-list__header-thead-container">
-        <table class="qt-table-modern qt-page-list__header-thead">
-            <thead>
-                <tr>
-                    <th class="billable-item-table__check">
-                        <div class="d-f">
-                            <label class="qt-checkbox">
-                                <input
-                                    type="checkbox"
-                                    (change)="onToggleAll($event)"
-                                >
-                                <span></span>
-                            </label>
-                        </div>
-                    </th>
-                    <th
-                        class="billable-item-table__date"
-                        (click)="onFilter('closedAt')"
-                    >
-                        Date
-                        <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
-                        class="billable-item-table__ticket"
-                        (click)="onFilter('ticketNumber')"
-                    >
-                        Ticket#
-                        <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
-                        class="billable-item-table__subject"
-                        (click)="onFilter('subject')"
-                    >
-                        Ticket Subject
-                        <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
-                        class="billable-item-table__amount"
-                        (click)="onFilter('sum')"
-                    >
-                        Amount
-                        <span class="qt-table-modern__sorting"></span>
-                    </th>
-                </tr>
-            </thead>
-        </table>
-    </div>
-
 
     <div class="qt-page-list__body">
         <div class="qt-page-list__body-table-container">

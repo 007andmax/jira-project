@@ -1,3 +1,24 @@
 .date-picker {
   overflow: visible;
 }
+
+.qt-aside-modern.recurring-tickets-content__modal {
+  .qt-aside-modern__content {
+    height: calc(100% - 145px);
+  }
+}
+
+.qt-aside-modern.recurring-tickets-content__modal .qt-aside-modern__footer {
+  padding: 0px 30px;
+  height: 90px;
+  .recurring-tickets-content__modal--content-footer {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-top: 0;
+    padding-left: 0;
+    padding-right: 50px;
+  }
+  /deep/.device-user {
+    margin-top: 5px !important;
+  }
+}

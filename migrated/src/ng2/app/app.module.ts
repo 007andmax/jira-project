@@ -15,7 +15,6 @@ import { SelectModule } from 'ng2-select';
 // import { SelectModule } from 'ng2-select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { IgxTimePickerModule } from 'igniteui-angular';
-import { SidebarModule } from 'ng-sidebar';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ClickOutsideModule } from 'ng4-click-outside';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
@@ -83,7 +82,6 @@ import { LeftPanelTagsComponent } from './components/left-panel/left-panel-compa
 import { SelectSearchComponent } from './components/shared/select-search/select-search.component';
 import { CompanyPasswordManagerComponent } from './components/company-password-manager/company-password-manager.component';
 import { CompanyPasswoordManagerHeaderComponent } from './components/company-password-manager/passwoord-manager-header/passwoord-manager-header.component';
-import { CompanyPasswordManagerEditAsideComponent } from './components/company-password-manager/password-manager-edit-aside/password-manager-edit-aside.component';
 import { CompanyPasswordManagerTableComponent } from './components/company-password-manager/password-manager-table/password-manager-table.component';
 import { FilterPipe } from './pipe/filter.pipe';
 import { ClickOtsideDirective } from './directives/click-otside.directive';
@@ -658,7 +656,6 @@ angular.module('quicktech')
     SelectSearchComponent,
     CompanyPasswordManagerComponent,
     CompanyPasswoordManagerHeaderComponent,
-    CompanyPasswordManagerEditAsideComponent,
     CompanyPasswordManagerTableComponent,
     FilterPipe,
     ClickOtsideDirective,
@@ -965,7 +962,6 @@ angular.module('quicktech')
     MatAutocompleteModule,
     BrowserAnimationsModule,
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
-    SidebarModule.forRoot(),
     // ShowHidePasswordModule,
     AppRoutingModule,
     ImageCropperModule,

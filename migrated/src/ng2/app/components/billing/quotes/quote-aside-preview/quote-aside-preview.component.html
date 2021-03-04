@@ -1,16 +1,13 @@
 <div
-    class="invoices-page__aside aside-preview"
+    class="invoices-page__aside aside-preview qt-aside-modern --x-large"
     [hidden]="!open"
 >
     <div
-        class="aside-header qt-df qt-ai-c qt-jc-sb qt-pr-16 qt-pl-20"
+        class="qt-aside-modern__header"
         *ngIf="!showPreloader"
     >
-        <div
-            class="qt-fs-20 qt-ff-gm qt-color-dark"
-            [textContent]="'Quote#' + quote.number"
-        >
-        </div>
+        <div class="qt-aside-modern__header-title" [textContent]="'Quote#' + quote.number"></div>
+
         <div class="qt-df qt-ai-c">
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__edit"
@@ -64,7 +61,7 @@
             ></div>
         </div>
     </div>
-    <div class="billing-invoice-preview-scroll-content">
+    <div class="qt-aside-modern__content --no-padding --no-footer">
         <div
             class="loading"
             *ngIf="showPreloader"

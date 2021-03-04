@@ -29,7 +29,6 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
   formatDate: string = FORMAT_DATE_2;
   showPreloader: boolean = true;
   quote: QuoteEdit;
-  open: boolean = false;
   changeGlobalNote: boolean = false;
   companies = [];
   sub: Subscription = new Subscription();

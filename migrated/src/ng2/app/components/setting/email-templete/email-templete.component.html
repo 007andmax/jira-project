@@ -187,25 +187,18 @@
 </div>
 <!-- sidebar popup edit -->
 <div
-    class="sidebar-popup tmp-edit"
+    class="qt-aside-modern sidebar-popup tmp-edit"
     [ngClass]="{ opened: edit }"
     *ngIf="templeteInfo"
 >
     <!-- header -->
-    <div class="sidebar-header">
-        <div class="h1">{{ templeteInfo.title }}</div>
-        <a
-            class="close"
-            href="javascript:;"
-            (click)="closeTemplete()"
-        >
-            <img
-                src="../../../../../ng1/images/setting-module/close.svg"
-                alt="close"
-            >
-        </a>
+    <div class="qt-aside-modern__header">
+        <div class="qt-aside-modern__header-title">{{ templeteInfo.title }}</div>
+        <div class="qt-aside-modern__header-close icon__close" (click)="closeTemplete()"></div>
     </div>
-    <div class="reciept">
+
+    <div class="qt-aside-modern__content --no-padding">
+      <div class="reciept">
         <span>
             <strong>Recipient:</strong>
             {{ templeteInfo.recipient }}
@@ -218,8 +211,9 @@
         >
             Show Template Preview
         </a>
-    </div>
-    <div class="middle-content">
+      </div>
+
+      <div class="middle-content">
         <form
             [formGroup]="templeteForm"
             (ngSubmit)="saveEmailTemplate()"
@@ -299,35 +293,39 @@
                     </div>
                 </div>
             </div>
-            <div class="btn-row">
-                <input
-                    type="submit"
-                    value="Save"
-                    class="btn btn-primary"
-                >
-                <a
-                    href="javascrip:;"
-                    class="btn btn-secondary"
-                    (click)="closeTemplete()"
-                >
-                    Cancel
-                </a>
-                <button
-                    type="button"
-                    href="javascript:void(0)"
-                    *ngIf="emailPages && openEmailTemplate"
-                    class="restore"
-                    [disabled]="
-            !emailPages.activeAndNotDefault[openEmailTemplate].isNotDefault
-          "
-                    (click)="restoreDefault(openEmailTemplate)"
-                >
-                    Restore Default
-                </button>
-                <!-- <a href="javascript:;" class="restore">Restore Default</a> -->
-            </div>
         </form>
     </div>
+    </div>
+
+    <div class="qt-aside-modern__footer">
+      <div class="qt-df qt-w100 qt-ai-c qt-jc-sb">
+        <div class="qt-df">
+          <button class="qt-button qt-mr-12" (click)="saveEmailTemplate()">
+            Save
+          </button>
+
+          <button class="qt-button --gray" (click)="closeTemplete()">
+            Cancel
+          </button>
+        </div>
+
+        <div>
+          <button
+              type="button"
+              href="javascript:void(0)"
+              *ngIf="emailPages && openEmailTemplate"
+              class="restore qt-mr-50"
+              [disabled]="!emailPages.activeAndNotDefault[openEmailTemplate].isNotDefault"
+              (click)="restoreDefault(openEmailTemplate)"
+          >
+            Restore Default
+          </button>
+        </div>
+      </div>
+  </div>
+
+
+
     <div
         class="msg"
         *ngIf="templeteInfo"

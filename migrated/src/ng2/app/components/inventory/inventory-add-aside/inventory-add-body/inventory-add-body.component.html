@@ -1,104 +1,176 @@
-<div class="new-companies-content__modal--content advanced create-product " [ngClass]="class">
-
-  <div class="qt-inputs-row">
-    <div class="create-product__col">
-      <mat-error *ngIf="!validate.getManufactureIsExist()">
-        This number already occupied
-      </mat-error>
-
-      <p class="label-name">Item number</p>
-      <input type="text" class="qt-input-40 inventory-add-body__input" [(ngModel)]="inventory.manufacture" (blur)="onCheckManufacture()" placeholder="Enter Item number">
+<div
+    class="qt-aside-modern__content qt-pt-0-important new-companies-content__modal--content advanced create-product"
+    [ngClass]="class"
+>
+    <div class="qt-inputs-row">
+        <div class="create-product__col --required">
+            <mat-error
+                class="qt-tooltip-error"
+                *ngIf="!validate.getManufactureIsExist()"
+            >
+                This number already occupied
+            </mat-error>
+            <p class="label-name">Item number</p>
+            <input
+                type="text"
+                [ngClass]="{'--input-error' : !validate.getManufactureIsExist()}"
+                class="qt-input-40 inventory-add-body__input"
+                [(ngModel)]="inventory.manufacture"
+                (blur)="onCheckManufacture()"
+                placeholder="Enter Item number"
+            >
+        </div>
+        <div class="create-product__col">
+            <p class="label-name">GL number</p>
+            <app-select-search
+                [class]="['light-dropdown', 'new-product-gl-select', 'qt-select-input-40']"
+                [list]="glNumbers"
+                #glNumberSelect
+                [placeholder]="'Select GL'"
+                [add]="true"
+                [field]="'glNumber'"
+                (onAddItem)="onAddGlNumber($event)"
+                (onSelectedItem)="onSelectGlNumbers($event)"
+            ></app-select-search>
+        </div>
     </div>
-
-    <div class="create-product__col">
-      <mat-error *ngIf="!validate.getILCIsExist()">
-        This number already occupied
-      </mat-error>
-      <p class="label-name">ILC number</p>
-      <input type="text" class="qt-input-40 inventory-add-body__input" [(ngModel)]="inventory.ilc"  (blur)="onCheckILC()" placeholder="Enter ILC number">
+    <div class="create-product__col --required">
+        <mat-error
+            class="qt-tooltip-error"
+            *ngIf="!validate.getDescription()"
+        >
+            Description is required
+        </mat-error>
+        <p class="label-name">Description</p>
+        <div class="editable-description" [ngClass]="{'--input-error' : !validate.getDescription()}">
+            <textarea
+                appTextArea
+                [limit]="160"
+                id="inventory-description"
+                placeholder="Write Description"
+                (input)="onChangeDescription($event)"
+                (onPast)="onPastDescription($event)"
+            ></textarea>
+        </div>
     </div>
-
-    <div class="create-product__col">
-      <p class="label-name">GL number</p>
-      <app-select-search [class]="['light-dropdown', 'new-product-gl-select', 'qt-select-input-40']" [list]="glNumbers" #glNumberSelect
-      [placeholder]="'Select GL'"
-      [add]="true" [field]="'glNumber'"
-      (onAddItem)="onAddGlNumber($event)"
-      (onSelectedItem)="onSelectGlNumbers($event)"></app-select-search>
+    <div class="qt-inputs-row">
+        <div class="create-product-taxes-select">
+            <app-taxes
+                [selectedTax]="defaultSelectedTax"
+                (taxesChange)="onTaxesChange($event)"
+            ></app-taxes>
+        </div>
+        <!-- <div class="col-md-6"  *ngIf="!validate.getCostSale()"> -->
+        <!-- </div> -->
+        <div class="create-product__col --required">
+            <p class="label-name">Cost</p>
+            <input
+                class="qt-input-40 inventory-add-body__input"
+                [ngClass]="{'--input-error' : !validate.getCostSale()}"
+                type="text"
+                number
+                [money]="true"
+                (blur)="validate.checkPriceCost(inventory.sale,inventory.cost)"
+                [(ngModel)]="inventory.cost"
+                placeholder="Enter Cost"
+            >
+            <mat-error
+                class="qt-tooltip-error"
+                *ngIf="!validate.getCostSale()"
+            >
+                Cost cannot be higher than Price
+            </mat-error>
+        </div>
+        <div class="create-product__col --required">
+            <mat-error
+                class="qt-tooltip-error"
+                *ngIf="!validate.getSale()"
+            >
+                Price is required
+            </mat-error>
+            <p class="label-name">Price</p>
+            <input
+                class="qt-input-40 inventory-add-body__input"
+                type="text"
+                [ngClass]="{'--input-error' : !validate.getSale()}"
+                number
+                [money]="true"
+                [(ngModel)]="inventory.sale"
+                (blur)="validate.checkPriceCost(inventory.sale,inventory.cost)"
+                (input)="validate.resetSale()"
+                placeholder="Enter Price"
+            >
+        </div>
     </div>
-  </div>
+    <div class="qt-inputs-row">
+        <div class="create-product__col select-open-top --required">
+            <!-- <mat-error
+                class="qt-tooltip-error"
+                *ngIf="!validate.getCategory()"
+            >
+                Category is required
+            </mat-error>
+            <p class="label-name">Category</p>
+            <app-select-search
+                [ngClass]="{'--input-error' : !validate.getCategory()}"
+                [class]="['light-dropdown', 'qt-select-input-40']"
+                [list]="categories"
+                #categoriesSelect
+                [placeholder]="'Select Category'"
+                [field]="'name'"
+                [add]="true"
+                (onAddItem)="onAddCategory($event)"
+                (onSelectedItem)="onSelectCategory($event)"
+            ></app-select-search> -->
 
 
-  <div class="create-product__col">
-    <mat-error *ngIf="!validate.getDescription()">
-      Description is required
-    </mat-error>
-    <p class="label-name">Description</p>
-    <div class="editable-description">
-      <textarea appTextArea [limit]="160" id="inventory-description" placeholder="Write Description"
-                (input)="onChangeDescription($event)" (onPast)="onPastDescription($event)"></textarea>
+
+
+            <app-drop-down
+                #categoriesSelect
+                [class]="['light-dropdown', 'qt-select-input-40']"
+                [placeholder]="'Select Category'"
+                [validate]="validate.getCategory()"
+                [errorMessage]="'Category is required'"
+                [title]="'Category'"
+                [field]="'name'"
+                [add]="true"
+                [list]="categories"
+                [search]="true"
+                [change]="true"
+                (onAddItem)="onAddCategory($event)"
+                (onSelectedItem)="onSelectCategory($event)"
+            >
+            </app-drop-down>
+        </div>
     </div>
-  </div>
-
-  <div class="qt-inputs-row">
-    <div class="create-product-taxes-select">
-      <app-taxes [selectedTax]="defaultSelectedTax" (taxesChange)="onTaxesChange($event)"></app-taxes>
+    <div class="qt-inputs-row">
+        <div class="create-product__col select-open-top">
+            <p class="label-name">Vendors</p>
+            <app-select-search
+                [class]="['light-dropdown', 'qt-select-input-40']"
+                [list]="vendors"
+                [field]="'name'"
+                [placeholder]="'Select Company'"
+                #vendorsSelect
+                (onSelectedItem)="onSelectVendor($event)"
+            ></app-select-search>
+        </div>
     </div>
-  <!--        <div class="col-md-6"  *ngIf="!validate.getCostSale()">-->
-  <!--        </div>-->
-    <div class="create-product__col">
-      <p class="label-name">Cost</p>
-      <input class="qt-input-40 inventory-add-body__input"  type="text" number [money]="true" (blur)="validate.checkPriceCost(inventory.sale,inventory.cost)" [(ngModel)]="inventory.cost"  placeholder="Enter Cost">
-      <mat-error style="top: 73px; left: 15px; width: 200px;" *ngIf="!validate.getCostSale()">
-        Cost cannot be higher than Price
-      </mat-error>
+</div>
+<div class="qt-aside-modern__footer">
+    <div class="qt-df">
+        <button
+            class="qt-button qt-mr-12"
+            (click)="add()"
+        >
+            Add User
+        </button>
+        <button
+            class="qt-button --gray"
+            (click)="close()"
+        >
+            Cancel
+        </button>
     </div>
-
-    <div class="create-product__col">
-      <mat-error *ngIf="!validate.getSale()">
-        Price is required
-      </mat-error>
-      <p class="label-name">Price</p>
-      <input class="qt-input-40 inventory-add-body__input"  type="text" number [money]="true"  [(ngModel)]="inventory.sale" (blur)="validate.checkPriceCost(inventory.sale,inventory.cost)" (input)="validate.resetSale()"  placeholder="Enter Price">
-    </div>
-  </div>
-
-  <div class="qt-inputs-row">
-    <div class="create-product__col select-open-top">
-      <mat-error *ngIf="!validate.getCategory()">
-        Category is required
-      </mat-error>
-      <p class="label-name">Category</p>
-      <app-select-search [class]="['light-dropdown', 'qt-select-input-40']" [list]="categories"
-      #categoriesSelect
-      [placeholder]="'Select Category'"
-      [field]="'name'"
-      [add]="true"
-      (onAddItem)="onAddCategory($event)"
-      (onSelectedItem)="onSelectCategory($event)"></app-select-search>
-    </div>
-  </div>
-
-
-  <div class="qt-inputs-row">
-    <div class="create-product__col select-open-top">
-      <p class="label-name">Vendors</p>
-      <app-select-search [class]="['light-dropdown', 'qt-select-input-40']" [list]="vendors"
-      [field]="'name'"
-      [placeholder]="'Select Company'"
-      #vendorsSelect
-      (onSelectedItem)="onSelectVendor($event)"></app-select-search>
-    </div>
-  </div>
-
-
-
-  <div class="col-md-12 create-product__col p-0 new-companies-content__modal--content-footer">
-    <div class="d-f">
-      <button class="btn-new btn-primary" (click)="add()" >Create Product</button>
-      <button class="btn-new btn-second" (click)="close()">Cancel</button>
-    </div>
-
-  </div>
-
 </div>
