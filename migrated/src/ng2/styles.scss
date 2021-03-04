@@ -1106,6 +1106,38 @@ app-quotes-item {
   position: relative;
   display: flex;
 }
+.products-table__product-name {
+  width: 280px;
+  max-width: 280px;
+  min-width: 280px;
+  font-family: "Graphik-Medium", sans-serif;
+}
+.products-table__category {
+  width: 144px;
+  max-width: 144px;
+  min-width: 144px;
+}
+.products-table__cost,
+.products-table__menu {
+  width: 62px;
+  max-width: 62px;
+  min-width: 62px;
+}
+.products-content .products-table__menu {
+  padding: 23px 16px 23px 8px;
+  i {
+    margin-left: auto;
+  }
+}
+.products-table__sale-price,
+.products-table__mfg,
+.products-table__tac,
+.products-table__ilc,
+.products-table__gl {
+  width: 92px;
+  max-width: 92px;
+  min-width: 92px;
+}
 .new-companies-content__list--item,
 .recurring-tickets-content__list--item {
   padding: 16px 0;

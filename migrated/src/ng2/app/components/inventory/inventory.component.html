@@ -24,70 +24,157 @@
                     </button>
                 </div>
             </div>
-          <div class="qt-page-list__header-filters qt-mb-16">
-            <app-drop-down
-              #titleDp
-              class="qt-max-w370 qt-mr-8"
-              [placeholder]="'Select Category'"
-              [heightInput]="'36px'"
-              [list]="[]"
-              [search]="true"
-              [change]="true"
-            ></app-drop-down>
-            <button
-              class="qt-btn"
-            >
-              Add Category
-            </button>
-          </div>
-            <div class="products-content__list">
-                <div class="products-content__list--header clearfix">
-                    <div
-                        class="col-md-3 pointer"
-                        (click)="onFilter('description')"
-                    >
-                        Product Name
-                    </div>
-                    <div
-                        class="col-md-2 pointer"
-                        (click)="onFilter('vendor')"
-                    >
-                        Vendor
-                    </div>
-                    <div
-                        class="col-md-1 pointer"
-                        (click)="onFilter('cost')"
-                        *ngIf="getPermissions('VIEW_PRODUCT_COST')"
-                    >
-                        Cost
-                    </div>
-                    <div
-                        class="col-md-1 pointer"
-                        (click)="onFilter('sale')"
-                    >
-                        Sale Price
-                    </div>
-                    <div
-                        class="col-md-1 pointer"
-                        (click)="onFilter('manufacture')"
-                    >
-                        #Mfg
-                    </div>
-                    <div class="col-md-1">Tax</div>
-                    <div
-                        class="col-md-1 pointer"
-                        (click)="onFilter('ilc')"
-                    >
-                        ILC
-                    </div>
-                    <div
-                        class="col-md-1 pointer"
-                        (click)="onFilter('glNumber')"
-                    >
-                        GL
-                    </div>
-                </div>
-                <div
+            <div class="qt-page-list__header-filters qt-mb-16">
+              <app-drop-down
+                #titleDp
+                class="qt-max-w370 qt-mr-8"
+                [placeholder]="'Select Category'"
+                [heightInput]="'36px'"
+                [list]="[]"
+                [search]="true"
+                [change]="true"
+              ></app-drop-down>
+              <button
+                class="qt-btn"
+              >
+                Add Category
+              </button>
+            </div>
+<!--            <div class="products-content__list">-->
+<!--                <div class="products-content__list&#45;&#45;header clearfix">-->
+<!--                    <div-->
+<!--                        class="col-md-3 pointer"-->
+<!--                        (click)="onFilter('description')"-->
+<!--                    >-->
+<!--                        Product Name-->
+<!--                    </div>-->
+<!--                    <div-->
+<!--                        class="col-md-2 pointer"-->
+<!--                        (click)="onFilter('vendor')"-->
+<!--                    >-->
+<!--                        Vendor-->
+<!--                    </div>-->
+<!--                    <div-->
+<!--                        class="col-md-1 pointer"-->
+<!--                        (click)="onFilter('cost')"-->
+<!--                        *ngIf="getPermissions('VIEW_PRODUCT_COST')"-->
+<!--                    >-->
+<!--                        Cost-->
+<!--                    </div>-->
+<!--                    <div-->
+<!--                        class="col-md-1 pointer"-->
+<!--                        (click)="onFilter('sale')"-->
+<!--                    >-->
+<!--                        Sale Price-->
+<!--                    </div>-->
+<!--                    <div-->
+<!--                        class="col-md-1 pointer"-->
+<!--                        (click)="onFilter('manufacture')"-->
+<!--                    >-->
+<!--                        #Mfg-->
+<!--                    </div>-->
+<!--                    <div class="col-md-1">Tax</div>-->
+<!--                    <div-->
+<!--                        class="col-md-1 pointer"-->
+<!--                        (click)="onFilter('ilc')"-->
+<!--                    >-->
+<!--                        ILC-->
+<!--                    </div>-->
+<!--                    <div-->
+<!--                        class="col-md-1 pointer"-->
+<!--                        (click)="onFilter('glNumber')"-->
+<!--                    >-->
+<!--                        GL-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div-->
+<!--                    class="products-content"-->
+<!--                    style="padding: 0"-->
+<!--                    infiniteScroll-->
+<!--                    [infiniteScrollDistance]="2"-->
+<!--                    [infiniteScrollThrottle]="50"-->
+<!--                    [infiniteScrollDisabled]="infiniteScrollDisabled"-->
+<!--                    (scrolled)="onScroll()"-->
+<!--                >-->
+<!--                    <ng-template-->
+<!--                        ngFor-->
+<!--                        let-inventory-->
+<!--                        [ngForOf]="inventoryList"-->
+<!--                        [ngForTrackBy]="trackById"-->
+<!--                    >-->
+<!--                        <app-inventory-table-->
+<!--                            [companies]="companies"-->
+<!--                            [taxes]="taxes"-->
+<!--                            [glNumbers]="glNumbers"-->
+<!--                            [inventory]="inventory"-->
+<!--                        ></app-inventory-table>-->
+<!--                    </ng-template>-->
+<!--                    <div-->
+<!--                        class="loading"-->
+<!--                        *ngIf="showPreloader"-->
+<!--                    ></div>-->
+<!--                </div>-->
+<!--            </div>-->
+              <div class="qt-page-list__header-thead-container">
+                  <table class="qt-table-modern qt-page-list__header-thead">
+                      <thead>
+                          <tr>
+                              <th
+                                class="products-table__product-name pointer"
+                              >
+                                Product Name
+                                <span class="qt-table-modern__sorting"></span>
+                              </th>
+                              <th
+                                class="products-table__category pointer"
+                              >
+                                Category
+                                <span class="qt-table-modern__sorting"></span>
+                              </th>
+                              <th
+                                class="products-table__cost pointer"
+                              >
+                                Cost
+                                <span class="qt-table-modern__sorting"></span>
+                              </th>
+                              <th
+                                class="products-table__sale-price pointer"
+                              >
+                                Sale Price
+                                <span class="qt-table-modern__sorting"></span>
+                              </th>
+                              <th
+                                class="products-table__mfg pointer"
+                              >
+                                #Mfg
+                                <span class="qt-table-modern__sorting"></span>
+                              </th>
+                              <th
+                                class="products-table__tac pointer"
+                              >
+                                Tax
+                                <span class="qt-table-modern__sorting"></span>
+                              </th>
+                              <th
+                                class="products-table__ilc"
+                              >
+                                ILC
+                                <span class="qt-table-modern__sorting"></span>
+                              </th>
+                              <th
+                                class="products-table__gl pointer"
+                              >
+                                GL
+                                <span class="qt-table-modern__sorting"></span>
+                              </th>
+                              <th
+                                class="products-table__menu pointer"
+                              >
+                              </th>
+                          </tr>
+                      </thead>
+                  </table>
+                  <div
                     class="products-content"
                     style="padding: 0"
                     infiniteScroll
@@ -95,26 +182,26 @@
                     [infiniteScrollThrottle]="50"
                     [infiniteScrollDisabled]="infiniteScrollDisabled"
                     (scrolled)="onScroll()"
-                >
+                  >
                     <ng-template
-                        ngFor
-                        let-inventory
-                        [ngForOf]="inventoryList"
-                        [ngForTrackBy]="trackById"
+                      ngFor
+                      let-inventory
+                      [ngForOf]="inventoryList"
+                      [ngForTrackBy]="trackById"
                     >
-                        <app-inventory-table
-                            [companies]="companies"
-                            [taxes]="taxes"
-                            [glNumbers]="glNumbers"
-                            [inventory]="inventory"
-                        ></app-inventory-table>
+                      <app-inventory-table
+                        [companies]="companies"
+                        [taxes]="taxes"
+                        [glNumbers]="glNumbers"
+                        [inventory]="inventory"
+                      ></app-inventory-table>
                     </ng-template>
                     <div
-                        class="loading"
-                        *ngIf="showPreloader"
+                      class="loading"
+                      *ngIf="showPreloader"
                     ></div>
-                </div>
-            </div>
+                  </div>
+              </div>
         </div>
     </div>
 </div>
