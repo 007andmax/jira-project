@@ -32,6 +32,14 @@ export class DeviceIpSummary {
             this.deviceIpSummaryWithDns2 = data.deviceIpSummaryWithDns2;
             this.deviceIpSummaryWithWanIp = data.deviceIpSummaryWithWanIp;
             this.list = [];
+            if (this.deviceId) {
+                this.list = this.devices && this.devices.filter((item) => item.id === this.deviceId);
+            } else {
+                this.list = this.devices;
+            }
+            console.log("this.list", this.list);
+            this.list.sort((a, b) => ((a.label || a.hostName).toLowerCase() > (b.label || b.hostName).toLowerCase()) ? 1 : (((b.label || b.hostName).toLowerCase() > (a.label || a.hostName).toLowerCase()) ? -1 : 0));
+
         }
     }
 

@@ -27,10 +27,12 @@
             class="report-header"
             *ngIf="onInit"
         >
-            <h1>Hardware Summary Report</h1>
+            <h1>Software Summary Report</h1>
             <div class="company-info">
                 <h3>{{company.name || 'All companies'}}</h3>
-                <!-- <p>{{date | date:'yyyy-MM-dd'}}</p> -->
+                <p>
+                    {{deviceIpSummary.date | date:'yyyy-MM-dd'}}
+                </p>
             </div>
         </div>
         <div *ngIf="onInit">
@@ -38,52 +40,70 @@
                 <ul class="con-col">
                     <li class="top-product-list-ticket clearfix">
                         <div
-                            class="col-md-1 w-22"
-                            *ngIf="hardwareSummaryReport.hardwareSummaryWithDevice"
+                            class="col-md-1 w-14-5"
+                            *ngIf="deviceIpSummary.deviceIpSummaryWithDevice"
                         >
                             <strong>Device</strong>
                         </div>
                         <div
-                            class="col-md-3"
-                            *ngIf="hardwareSummaryReport.hardwareSummaryWithOperationSystem"
+                            class="col-md-1 w-14-5"
+                            *ngIf="deviceIpSummary.deviceIpSummaryWithNetworkName"
                         >
-                            <strong>Operating System</strong>
+                            <strong>Network Name</strong>
                         </div>
                         <div
-                            class="col-md-2"
-                            *ngIf="hardwareSummaryReport.hardwareSummaryWithCpu"
+                            class="col-md-1 w-7"
+                            *ngIf="deviceIpSummary.deviceIpSummaryWithLinkSpeed"
                         >
-                            <strong>CPU</strong>
+                            <strong>Link Speed</strong>
                         </div>
                         <div
-                            class="col-md-1 w-6"
-                            *ngIf="hardwareSummaryReport.hardwareSummaryWithRam"
+                            class="col-md-1 w-4"
+                            *ngIf="deviceIpSummary.deviceIpSummaryWithDhcp"
                         >
-                            <strong>RAM</strong>
+                            <strong>DHCP</strong>
                         </div>
                         <div
-                            class="col-md-1 w-6"
-                            *ngIf="hardwareSummaryReport.hardwareSummaryWithDisk"
+                            class="col-md-1"
+                            *ngIf="deviceIpSummary.deviceIpSummaryWithIpAddress"
                         >
-                            <strong>DISK</strong>
+                            <strong>IP Address</strong>
                         </div>
                         <div
-                            class="col-md-2"
-                            *ngIf="hardwareSummaryReport.hardwareSummaryWithWarrenty"
+                            class="col-md-1"
+                            *ngIf="deviceIpSummary.deviceIpSummaryWithSubnet"
                         >
-                            <strong>WARRANTY</strong>
+                            <strong>Subnet</strong>
                         </div>
                         <div
-                            class="col-md-2"
-                            *ngIf="hardwareSummaryReport.hardwareSummaryWithSerialNumber"
+                            class="col-md-1"
+                            *ngIf="deviceIpSummary.deviceIpSummaryWithGateway"
                         >
-                            <strong>Serial Number</strong>
+                            <strong>Gateway</strong>
+                        </div>
+                        <div
+                            class="col-md-1"
+                            *ngIf="deviceIpSummary.deviceIpSummaryWithDns1"
+                        >
+                            <strong>DNS 1</strong>
+                        </div>
+                        <div
+                            class="col-md-1"
+                            *ngIf="deviceIpSummary.deviceIpSummaryWithDns2"
+                        >
+                            <strong>DNS 2</strong>
+                        </div>
+                        <div
+                            class="col-md-1"
+                            *ngIf="deviceIpSummary.deviceIpSummaryWithWanIp"
+                        >
+                            <strong>WAN IP</strong>
                         </div>
                     </li>
                     <ng-template
                         ngFor
                         let-device
-                        [ngForOf]="hardwareSummaryReport.list"
+                        [ngForOf]="deviceIpSummary.list"
                         let-i="index"
                         [ngForTrackBy]="trackByIndex"
                     >
@@ -92,51 +112,79 @@
                             *ngIf="device.report"
                         >
                             <div
-                                class="col-md-1 w-22"
-                                *ngIf="hardwareSummaryReport.hardwareSummaryWithDevice"
+                                class="col-md-1 w-14-5"
+                                *ngIf="deviceIpSummary.deviceIpSummaryWithDevice"
                             >
-                                {{device.label || device.hostName}}
+                                {{device.label}}
                             </div>
                             <div
-                                class="col-md-3"
-                                *ngIf="hardwareSummaryReport.hardwareSummaryWithOperationSystem"
+                                class="col-md-1 w-14-5"
+                                *ngIf="deviceIpSummary.deviceIpSummaryWithNetworkName"
                             >
-                                {{device.report && device.report.system && (device.report.system.caption + ' ' + device.report.system.release_id)}}
+                                {{device.hostName}}
                             </div>
                             <div
-                                class="col-md-2"
-                                *ngIf="hardwareSummaryReport.hardwareSummaryWithCpu"
+                                class="col-md-1 w-7"
+                                *ngIf="deviceIpSummary.deviceIpSummaryWithLinkSpeed"
                             >
-                                {{device.report && device.report.processors && device.report.processors.length > 0 && device.report.processors[0].name}}
+                                {{getDeviceReport(device, 'speed')/1000000}}
                             </div>
                             <div
-                                class="col-md-1 w-6"
-                                *ngIf="hardwareSummaryReport.hardwareSummaryWithRam"
+                                class="col-md-1 w-4"
+                                *ngIf="deviceIpSummary.deviceIpSummaryWithDhcp"
                             >
-                                {{device.report && device.report.ram && getRamSize(device.report.ram.slots)}}
+                                {{getDeviceReport(device, 'dhcp_server') ? 'yes' : 'no'}}
                             </div>
                             <div
-                                class="col-md-1 w-6"
-                                *ngIf="hardwareSummaryReport.hardwareSummaryWithDisk"
+                                class="col-md-1"
+                                *ngIf="deviceIpSummary.deviceIpSummaryWithIpAddress"
                             >
-                                {{device.report && getDiskSize(device.report.logicalDisks)}}
+                                {{getDeviceReport(device, 'ip_address')}}
                             </div>
                             <div
-                                class="col-md-2"
-                                *ngIf="hardwareSummaryReport.hardwareSummaryWithWarrenty"
+                                class="col-md-1"
+                                *ngIf="deviceIpSummary.deviceIpSummaryWithSubnet"
                             >
-                                {{device.report && device.report.variant && device.report.variant.warrantyDate}}
+                                {{getDeviceReport(device, 'dns')}}
                             </div>
                             <div
-                                class="col-md-2"
-                                *ngIf="hardwareSummaryReport.hardwareSummaryWithSerialNumber"
+                                class="col-md-1"
+                                *ngIf="deviceIpSummary.deviceIpSummaryWithGateway"
                             >
-                                {{device.report && device.report.system && device.report.system.serial_number}}
+                                {{getDeviceReport(device, 'gateway')}}
+                            </div>
+                            <div
+                                class="col-md-1"
+                                *ngIf="deviceIpSummary.deviceIpSummaryWithDns1"
+                            >
+                                {{getDeviceReport(device, 'dns')}}
+                            </div>
+                            <div
+                                class="col-md-1"
+                                *ngIf="deviceIpSummary.deviceIpSummaryWithDns2"
+                            >
+                                {{getDeviceReport(device, 'dns')}}
+                            </div>
+                            <div
+                                class="col-md-1"
+                                *ngIf="deviceIpSummary.deviceIpSummaryWithWanIp"
+                            >
+                                {{device.report.externalIp}}
                             </div>
                         </li>
                     </ng-template>
                 </ul>
             </div>
+
+
+
+
+
+
+
+
+
+
         </div>
         <app-report-footer *ngIf="onInit"></app-report-footer>
     </div>
