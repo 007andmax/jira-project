@@ -7,6 +7,12 @@
     </p>
     <p
         class="report-title"
+        *ngIf="report === 'device-ip-summary'"
+    >
+        Device IP Summary Report
+    </p>
+    <p
+        class="report-title"
         *ngIf="report === 'software-summary'"
     >
         Software Summary Report
@@ -81,6 +87,9 @@
         class="back-page"
         (click)="back()"
     ></i>
+
+
+    <device-ip-summary-report *ngIf="report === 'device-ip-summary'"></device-ip-summary-report>
     <app-gl-number *ngIf="report === 'income-accounts'"></app-gl-number>
     <software-summary-report *ngIf="report === 'software-summary'"></software-summary-report>
     <hardware-summary-report *ngIf="report === 'hardware-summary'"></hardware-summary-report>

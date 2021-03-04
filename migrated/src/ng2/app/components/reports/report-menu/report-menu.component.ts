@@ -26,6 +26,7 @@ import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.se
 import { SoftwareSummaryReport } from '../class/software-summary-report';
 import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
 import { HardwareSummaryReport } from '../class/hardware-summary-report';
+import { DeviceIpSummary } from '../class/device-ip-summary';
 
 
 @Component({
@@ -51,6 +52,7 @@ export class ReportMenuComponent implements OnInit {
   ticketsReport: TicketsReport = new TicketsReport();
   serviceReport: ServiceReports = new ServiceReports();
   hardwareSummaryReport: HardwareSummaryReport = new HardwareSummaryReport();
+  deviceIpSummary: DeviceIpSummary = new DeviceIpSummary();
   loadingInProgress: boolean = true;
   listDetailed = ['Year to date', 'Monthly'];
   listTypes = ['Summary', 'Detailed'];
@@ -104,6 +106,7 @@ export class ReportMenuComponent implements OnInit {
     this.softwareSummaryReport.setPreloaderSoft(true);
 
     this.hardwareSummaryReport.setPreloaderDevices(true);
+    this.deviceIpSummary.setPreloaderDevices(true);
     this.devicesService.getSoft(companyId).subscribe((resp: any) => {
       // $rootScope.softwareSummarySelectedCompany = resp;
 
@@ -131,14 +134,15 @@ export class ReportMenuComponent implements OnInit {
         this.softwareSummaryReport.setDevices(resp[companyId]);
         console.log("resp[companyId]", resp[companyId]);
         this.hardwareSummaryReport.setDevices(resp[companyId]);
+        this.deviceIpSummary.setDevices(resp[companyId]);
       }
       this.softwareSummaryReport.setPreloaderSoft(false);
-
+      this.deviceIpSummary.setPreloaderDevices(false);
       this.hardwareSummaryReport.setPreloaderDevices(false);
     }, err => {
       this.softwareSummaryReport.resetSoft();
       this.softwareSummaryReport.setPreloaderSoft(false);
-
+      this.deviceIpSummary.setPreloaderDevices(false);
       this.hardwareSummaryReport.setPreloaderDevices(false);
     })
   }
@@ -198,7 +202,7 @@ export class ReportMenuComponent implements OnInit {
       this.commonCommissionsReport.setCompanyId(null);
       this.softwareSummaryReport.setCompanyId(null);
       this.hardwareSummaryReport.setCompanyId(null);
-
+      this.deviceIpSummary.setCompanyId(null);
       this.getDevicesByCompany(null);
       this.softwareSummaryReport.resetSoft();
     } else {
@@ -214,6 +218,7 @@ export class ReportMenuComponent implements OnInit {
       this.commonCommissionsReport.setCompanyId(selectClient.id);
       this.softwareSummaryReport.setCompanyId(selectClient.id);
       this.hardwareSummaryReport.setCompanyId(selectClient.id);
+      this.deviceIpSummary.setCompanyId(selectClient.id);
       this.getDevicesByCompany(selectClient.id);
       this.getSoftByCompany(selectClient.id);
       if (this.ticketsReport.startDate === '' && this.ticketsReport.endDate === '') this.ticketsReport.setDatesByCompany(this.selectedClient);
@@ -269,6 +274,12 @@ export class ReportMenuComponent implements OnInit {
     this.onRequest.emit(true);
     console.log("this.hardwareSummaryReport", this.hardwareSummaryReport);
     this.setDatareport(this.hardwareSummaryReport)
+  }
+  getReportByDeviceIpSummary() {
+    if (!this.validate.isValidateHardwareSummary(this.deviceIpSummary.companyId)) return;
+    this.onRequest.emit(true);
+    console.log("this.deviceIpSummary", this.deviceIpSummary);
+    this.setDatareport(this.deviceIpSummary)
   }
   getReportBySoftwareSummary() {
     if (!this.validate.isValidateSoftwareSummary(this.softwareSummaryReport.companyId)) return;

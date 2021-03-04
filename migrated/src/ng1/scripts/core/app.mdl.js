@@ -283,9 +283,8 @@
           controller: 'quicktech.core.reports.reportsCtrl'
         }))
         .state('device-ip-summary', waitForServices({
-          url: '/reports/device-ip-summary',
-          templateUrl: '/ng1/scripts/core/reports/reports-templates/device-ip-summary.tpl.html',
-          controller: 'quicktech.core.reports.reportsCtrl'
+          url: '/ng2/report/device-ip-summary',
+          template: '<item-report-component></item-report-component>'
         }))
         .state('myprofile-component', waitForServices({
           url: '/ng2/setting/myprofile',

@@ -1,5 +1,133 @@
 <!-- MENU FOR NON-TECH REPORTS -->
 <div class="report-menu">
+    <div *ngIf="report === 'device-ip-summary'">
+        <div
+            class="run-report-content clearfix"
+            [ngClass]="className"
+        >
+            <div class="new-reports-reverse">
+                <button
+                    class="form-group btn btn-success"
+                    (click)="getReportByDeviceIpSummary()"
+                    [disabled]="deviceIpSummary.preloaderDevices"
+                >
+                    Get
+          Report
+                </button>
+                <div class="form-group content custom-width dropdown-height">
+                    <software-summary-devices-dro-down
+                        [sort]="false"
+                        [placeholder]="'All devices'"
+                        [dropdownHeight]="'300px'"
+                        [list]="devices"
+                        [isDisabled]="!deviceIpSummary.companyId"
+                        [preloader]="deviceIpSummary.preloaderDevices"
+                        (onSelectedItem)="onSelectDevice($event)"
+                    ></software-summary-devices-dro-down>
+                </div>
+                <div class="grey-dropdown form-group content select-users-list">
+                    <app-drop-down
+                        [placeholder]="'Select Company'"
+                        [list]="companies"
+                        [dropdownHeight]="'175px'"
+                        [validate]="validate.getCompany()"
+                        [errorMessage]="'Please select the company name'"
+                        [field]="'name'"
+                        [search]="true"
+                        [change]="true"
+                        (onSelectedItem)="selectClient($event)"
+                    ></app-drop-down>
+                </div>
+            </div>
+            <div class="col-md-11 w-100">
+                <div class="include-ticket-report">
+                    <p>
+                        Include the following columns in the report
+                    </p>
+                    <label class="control checkbox">
+                        <input
+                            type="checkbox"
+                            [(ngModel)]="deviceIpSummary.deviceIpSummaryWithDevice"
+                        >
+                        <span class="control-indicator"></span>
+                        Device
+                    </label>
+                    <label class="control checkbox">
+                        <input
+                            type="checkbox"
+                            [(ngModel)]="deviceIpSummary.deviceIpSummaryWithNetworkName"
+                        >
+                        <span class="control-indicator"></span>
+                        Network Name
+                    </label>
+                    <label class="control checkbox">
+                        <input
+                            type="checkbox"
+                            [(ngModel)]="deviceIpSummary.deviceIpSummaryWithLinkSpeed"
+                        >
+                        <span class="control-indicator"></span>
+                        Link Speed
+                    </label>
+                    <label class="control checkbox">
+                        <input
+                            type="checkbox"
+                            [(ngModel)]="deviceIpSummary.deviceIpSummaryWithDhcp"
+                        >
+                        <span class="control-indicator"></span>
+                        DHCP
+                    </label>
+                    <label class="control checkbox">
+                        <input
+                            type="checkbox"
+                            [(ngModel)]="deviceIpSummary.deviceIpSummaryWithIpAddress"
+                        >
+                        <span class="control-indicator"></span>
+                        IP Address
+                    </label>
+                    <label class="control checkbox">
+                        <input
+                            type="checkbox"
+                            [(ngModel)]="deviceIpSummary.deviceIpSummaryWithSubnet"
+                        >
+                        <span class="control-indicator"></span>
+                        Subnet
+                    </label>
+                    <label class="control checkbox">
+                        <input
+                            type="checkbox"
+                            [(ngModel)]="deviceIpSummary.deviceIpSummaryWithGateway"
+                        >
+                        <span class="control-indicator"></span>
+                        Gateway
+                    </label>
+                    <label class="control checkbox">
+                        <input
+                            type="checkbox"
+                            [(ngModel)]="deviceIpSummary.deviceIpSummaryWithDns1"
+                        >
+                        <span class="control-indicator"></span>
+                        DNS 1
+                    </label>
+                    <label class="control checkbox">
+                        <input
+                            type="checkbox"
+                            [(ngModel)]="deviceIpSummary.deviceIpSummaryWithDns2"
+                        >
+                        <span class="control-indicator"></span>
+                        DNS 2
+                    </label>
+                    <label class="control checkbox">
+                        <input
+                            type="checkbox"
+                            [(ngModel)]="deviceIpSummary.deviceIpSummaryWithWanIp"
+                        >
+                        <span class="control-indicator"></span>
+                        WAN IP
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
     <div *ngIf="report === 'hardware-summary'">
         <div
             class="run-report-content clearfix"
@@ -136,6 +264,7 @@
                     <software-summary-devices-dro-down
                         [sort]="true"
                         [placeholder]="'All devices'"
+                        [isDisabled]="!softwareSummaryReport.companyId"
                         [dropdownHeight]="'300px'"
                         [list]="devices"
                         (onSelectedItem)="onSelectDevice($event)"
