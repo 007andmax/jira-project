@@ -212,8 +212,8 @@
           url: '/ng2/report/ticket-report',
           template: '<item-report-component></item-report-component>'
         }))
-        .state('remote-connection', waitForServices({
-          url: '/ng2/report/remote-connection',
+        .state('remote-access', waitForServices({
+          url: '/ng2/report/remote-access',
           template: '<item-report-component></item-report-component>'
         }))
         .state('service-report', waitForServices({
