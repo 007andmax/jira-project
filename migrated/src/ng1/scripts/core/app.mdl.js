@@ -213,7 +213,7 @@
           template: '<item-report-component></item-report-component>'
         }))
         .state('remote-connection', waitForServices({
-          url: '/ng2/report/service-report',
+          url: '/ng2/reports/remoteAccess',
           template: '<item-report-component></item-report-component>'
         }))
         .state('service-report', waitForServices({

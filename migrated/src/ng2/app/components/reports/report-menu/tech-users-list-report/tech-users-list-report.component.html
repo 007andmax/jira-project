@@ -1,39 +1,81 @@
-<div class="light-dropdown" ngbDropdown>
-  
-  <input type="text"
-         [value]="getSelectedUser()"
-         autocomplete="new-password"
-         placeholder="Tech users"
-         id="dropdown1"
-         readonly
-         ngbDropdownToggle />
-
-         <span *ngIf="usersList">
-          <i *ngIf="selectedUser"
-             class="icn-sm icn-remove-old"
-             (click)="clearClient($event)"></i>
-          <i *ngIf="!selectedUser"
-             class="icn-sm report-caret-icon"></i>
-          </span>
-  <div ngbDropdownMenu
-       aria-labelledby="dropdown1">
-    <ng-template ngFor let-user [ngForOf]="usersList" let-i="index" [ngForTrackBy]="trackByIndex">
-      <div class="user-item" data-index="1" ngbDropdownItem (click)="onSelect(user)"><a href="javascript:void(0)"
-          [id]="user.id" class="dropdown-link">
-          <div class="default-user-avatar avatar-background-color-odd ng-scope" *ngIf="!user.avatar">
-            <span [textContent]="(user.firstName.length > 0) ? user.firstName[0].toUpperCase() : ''"></span>
-            <span [textContent]="(user.lastName.length > 0) ? user.lastName[0].toUpperCase() : ''"></span>
-          </div>
-          <div class="default-user-avatar avatar-background-color-odd ng-scope" *ngIf="user.avatar">
-            <img ng-if="user.avatar" class="img-circle report-user-avatar" style="margin: 0;"
-              [src]="'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')"
-              alt="...">
-          </div>
-          <span>
-            <p class="report-user-name" [textContent]="user.firstName + ' ' + user.lastName"></p>
-            <p class="report-user-email"[textContent]="user.primaryEmail" style="margin: 0;"></p>
-          </span>
-        </a></div>
-    </ng-template>
-  </div>
+<div
+    class="light-dropdown"
+    ngbDropdown
+>
+    <input
+        type="text"
+        [value]="getSelectedUser()"
+        autocomplete="new-password"
+        placeholder="Tech users"
+        id="dropdown1"
+        (input)="onSearch($event)"
+        ngbDropdownToggle
+    >
+    <span *ngIf="usersList">
+        <i
+            *ngIf="selectedUser"
+            class="icn-sm icn-remove-old"
+            (click)="clearClient($event)"
+        ></i>
+        <i
+            *ngIf="!selectedUser"
+            class="icn-sm report-caret-icon"
+        ></i>
+    </span>
+    <div
+        ngbDropdownMenu
+        aria-labelledby="dropdown1"
+    >
+        <ng-template
+            ngFor
+            let-user
+            [ngForOf]="usersList"
+            let-i="index"
+            [ngForTrackBy]="trackByIndex"
+        >
+            <div
+                class="user-item"
+                data-index="1"
+                ngbDropdownItem
+                (click)="onSelect(user)"
+            >
+                <a
+                    href="javascript:void(0)"
+                    [id]="user.id"
+                    class="dropdown-link"
+                >
+                    <div
+                        class="default-user-avatar avatar-background-color-odd ng-scope"
+                        *ngIf="!user.avatar"
+                    >
+                        <span [textContent]="(user.firstName.length > 0) ? user.firstName[0].toUpperCase() : ''"></span>
+                        <span [textContent]="(user.lastName.length > 0) ? user.lastName[0].toUpperCase() : ''"></span>
+                    </div>
+                    <div
+                        class="default-user-avatar avatar-background-color-odd ng-scope"
+                        *ngIf="user.avatar"
+                    >
+                        <img
+                            ng-if="user.avatar"
+                            class="img-circle report-user-avatar"
+                            style="margin: 0;"
+                            [src]="'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')"
+                            alt="..."
+                        >
+                    </div>
+                    <span>
+                        <p
+                            class="report-user-name"
+                            [textContent]="user.firstName + ' ' + user.lastName"
+                        ></p>
+                        <p
+                            class="report-user-email"
+                            [textContent]="user.primaryEmail"
+                            style="margin: 0;"
+                        ></p>
+                    </span>
+                </a>
+            </div>
+        </ng-template>
+    </div>
 </div>

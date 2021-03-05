@@ -20,7 +20,9 @@
                 </div>
                 <div class="form-group content custom-width">
                     <software-summary-devices-dro-down
-                        [sort]="false"
+                        [sort]="true"
+                        [search]="true"
+                        [change]="true"
                         [placeholder]="'All devices'"
                         [dropdownHeight]="'300px'"
                         [list]="devices"
@@ -68,7 +70,9 @@
                 </button>
                 <div class="form-group content custom-width dropdown-height">
                     <software-summary-devices-dro-down
-                        [sort]="false"
+                        [sort]="true"
+                        [search]="true"
+                        [change]="true"
                         [placeholder]="'All devices'"
                         [dropdownHeight]="'300px'"
                         [list]="devices"
@@ -196,7 +200,9 @@
                 </button>
                 <div class="form-group content custom-width dropdown-height">
                     <software-summary-devices-dro-down
-                        [sort]="false"
+                        [sort]="true"
+                        [search]="true"
+                        [change]="true"
                         [placeholder]="'All devices'"
                         [dropdownHeight]="'300px'"
                         [list]="devices"
@@ -315,6 +321,8 @@
                 <div class="form-group content custom-width dropdown-height">
                     <software-summary-devices-dro-down
                         [sort]="true"
+                        [search]="true"
+                        [change]="true"
                         [placeholder]="'All devices'"
                         [isDisabled]="!softwareSummaryReport.companyId"
                         [dropdownHeight]="'300px'"

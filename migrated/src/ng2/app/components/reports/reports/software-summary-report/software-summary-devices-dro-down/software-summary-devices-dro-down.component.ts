@@ -18,4 +18,13 @@ export class SoftwareSummaryDevicesDroDownComponent extends DropDownComponent {
   getSelectedItemText() {
     return (this.selectedItem) ? this.selectedItem.hostName || this.selectedItem.ip : "";
   }
+  onCheckAdd(event) {
+    if (this.search) this.list = this.reqList.filter(item => (item.hostName || item.ip).toLowerCase().includes(event.target.value.toLowerCase()))
+    let index = this.list.findIndex(item => (item.hostName || item.ip) === event.target.value);
+    if (index === -1 && this.add) {
+      this.isAdd = true;
+    } else {
+      this.isAdd = false;
+    }
+  }
 }
