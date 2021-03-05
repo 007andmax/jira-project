@@ -213,7 +213,7 @@
           template: '<item-report-component></item-report-component>'
         }))
         .state('remote-connection', waitForServices({
-          url: '/ng2/reports/remoteAccess',
+          url: '/ng2/report/remote-connection',
           template: '<item-report-component></item-report-component>'
         }))
         .state('service-report', waitForServices({
@@ -254,11 +254,6 @@
         .state('reports', waitForServices({
           url: '/reports',
           templateUrl: '/ng1/scripts/core/reports/reports.tpl.html',
-          controller: 'quicktech.core.reports.reportsCtrl'
-        }))
-        .state('remoteAccess', waitForServices({
-          url: '/reports/remoteAccess',
-          templateUrl: '/ng1/scripts/core/reports/reports-templates/remote-access-summary.tpl.html',
           controller: 'quicktech.core.reports.reportsCtrl'
         }))
         .state('techReport-TicketCreated', waitForServices({
