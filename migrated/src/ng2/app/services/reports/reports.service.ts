@@ -74,6 +74,9 @@ export class ReportsService {
   public getReportByAccounting(data) {
     return this.http.post(this.apiUrl + `reports/sales/accounting`, data);
   }
+  public getReportByRemoteAccess(data) {
+    return this.http.post(this.apiUrl + `reports/remoteAccess`, data);
+  }
   public getReportByService(data) {
     return this.http.post(this.apiUrl + `customerReport/expenses`, data);
   }

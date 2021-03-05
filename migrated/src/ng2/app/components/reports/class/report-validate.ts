@@ -87,6 +87,10 @@ export class ReportValidate {
         if (!company) this.company = false;
         return this.dates && this.company;
     }
+    public isValidateRemoteConnection(start, end) {
+        if (start === '' && end === '') this.dates = false;
+        return this.dates;
+    }
     public isValidateSoftwareSummary(company) {
 
         if (!company) this.company = false;

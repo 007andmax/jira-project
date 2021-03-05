@@ -1,0 +1,182 @@
+<div>
+    <app-report-menu
+        [report]="'remote-connection'"
+        (onRequest)="onRequest($event)"
+        (getReport)="getReport($event)"
+    ></app-report-menu>
+</div>
+<app-report-additional-actions
+    [orientation]="'LANDSCAPE'"
+    [report]="'remote-connection'"
+    [fileName]="'remote-connection-report'"
+></app-report-additional-actions>
+<!--  -->
+<div
+    class="loading"
+    *ngIf="loadingInProgress"
+></div>
+<div
+    class="product-list___ticket report-show-footer-header"
+    id="product-list-ticket-data"
+>
+    <div
+        class="product-list-ticket"
+        style="width: 1080px;padding: 0px;"
+        *ngIf="!loadingInProgress"
+    >
+        <div
+            class="report-header"
+            *ngIf="onInit"
+        >
+            <h1>Remote Connection Report</h1>
+            <div class="company-info">
+                <h3>
+                    {{remoteConnectionReport.clientCompanyName || 'All companies'}}
+                </h3>
+                <p>
+                    <span>{{remoteConnectionReport.startDate}}</span>
+                    -
+                    <span>{{remoteConnectionReport.endDate}}</span>
+                </p>
+            </div>
+        </div>
+        <div
+            class="header-product-list-ticket"
+            *ngIf="onInit && remoteConnectionReport.lines"
+        >
+            <h3>
+                {{remoteConnectionReport.techCompanyName}}
+            </h3>
+            <p *ngIf="remoteConnectionReport.type === 'DETAILED'">
+                <span>Detailed</span>
+                quicktech connect support for
+                <span>
+                    {{remoteConnectionReport.clientCompanyName}}
+                </span>
+            </p>
+            <p>
+                <span>
+                    {{ parseDate(remoteConnectionReport.startDate) | date: 'dd.MM.yyyy' }}
+                </span>
+                to
+                <span>
+                    {{ parseDate(remoteConnectionReport.endDate) | date: 'dd.MM.yyyy' }}
+                </span>
+            </p>
+        </div>
+        <div *ngIf="onInit && remoteConnectionReport.lines">
+            <div *ngIf="remoteConnectionReport.clientCompanyName">
+                <ul class="con-col">
+                    <li class="top-product-list-ticket clearfix">
+                        <div class="col-md-2">
+                            <strong>Date</strong>
+                        </div>
+                        <div class="col-md-2">
+                            <strong>Device</strong>
+                        </div>
+                        <div class="col-md-2">
+                            <strong>Tech</strong>
+                        </div>
+                        <div class="col-md-2">
+                            <strong>Ticket</strong>
+                        </div>
+                        <div class="col-md-2">
+                            <strong>Viewer IP</strong>
+                        </div>
+                        <div class="col-md-1">
+                            <strong>Start time</strong>
+                        </div>
+                        <div class="col-md-1">
+                            <strong>Duration</strong>
+                        </div>
+                    </li>
+                    <ng-template
+                        ngFor
+                        let-line
+                        [ngForOf]="remoteConnectionReport.lines"
+                        let-i="index"
+                        [ngForTrackBy]="trackByIndex"
+                    >
+                        <li class="content-product-list-ticket clearfix">
+                            <div class="col-md-2">
+                                {{ parseDate(line.date) | date: 'dd.MM.yyyy' }}
+                            </div>
+                            <div class="col-md-2">{{line.deviceName}}</div>
+                            <div class="col-md-2 ellipsis">{{line.techFullName}}</div>
+                            <div class="col-md-2 ellipsis">{{line.ticketNumber}}</div>
+                            <div class="col-md-2 ellipsis">{{line.viewerIp}}</div>
+                            <div class="col-md-1">{{ line.startTime }}</div>
+                            <div class="col-md-1">{{line.duration}} min</div>
+                        </li>
+                    </ng-template>
+                </ul>
+            </div>
+            <div *ngIf="!remoteConnectionReport.clientCompanyName">
+                <ul class="con-col">
+                    <li class="top-product-list-ticket clearfix">
+                        <div class="col-md-1">
+                            <strong>Date</strong>
+                        </div>
+                        <div class="col-md-3">
+                            <strong>Company name</strong>
+                        </div>
+                        <div class="col-md-2">
+                            <strong>Device</strong>
+                        </div>
+                        <div class="col-md-2">
+                            <strong>Tech</strong>
+                        </div>
+                        <div class="col-md-1">
+                            <strong>Ticket</strong>
+                        </div>
+                        <div class="col-md-1">
+                            <strong>Viewer IP</strong>
+                        </div>
+                        <div class="col-md-1">
+                            <strong>Start time</strong>
+                        </div>
+                        <div class="col-md-1">
+                            <strong>Duration</strong>
+                        </div>
+                    </li>
+                    <ng-template
+                        ngFor
+                        let-line
+                        [ngForOf]="remoteConnectionReport.lines"
+                        let-i="index"
+                        [ngForTrackBy]="trackByIndex"
+                    >
+                        <li class="content-product-list-ticket clearfix">
+                            <div class="col-md-1">
+                                {{ parseDate(line.date) | date: 'dd.MM.yyyy' }}
+                            </div>
+                            <div class="col-md-3">{{line.companyName}}</div>
+                            <div class="col-md-2">{{line.deviceName}}</div>
+                            <div class="col-md-2 ellipsis">{{line.techFullName}}</div>
+                            <div class="col-md-1 ellipsis">{{line.ticketNumber}}</div>
+                            <div class="col-md-1 ellipsis">{{line.viewerIp}}</div>
+                            <div class="col-md-1">{{ line.startTime }}</div>
+                            <div class="col-md-1">{{line.duration}} min</div>
+                        </li>
+                    </ng-template>
+                </ul>
+            </div>
+
+        </div>
+        <div
+            class="product-report-total-sales clearfix"
+            *ngIf="onInit && remoteConnectionReport.lines"
+        >
+            <p>
+                Total Duration:
+                <br>
+                <strong>
+                    <span>
+                        {{remoteConnectionReport.totalDuration}} min
+                    </span>
+                </strong>
+            </p>
+        </div>
+        <app-report-footer *ngIf="onInit"></app-report-footer>
+    </div>
+</div>

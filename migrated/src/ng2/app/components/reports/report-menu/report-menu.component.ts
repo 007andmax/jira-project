@@ -27,6 +27,7 @@ import { SoftwareSummaryReport } from '../class/software-summary-report';
 import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
 import { HardwareSummaryReport } from '../class/hardware-summary-report';
 import { DeviceIpSummary } from '../class/device-ip-summary';
+import { RemoteConnectionReport } from '../class/remote-connection-report';
 
 
 @Component({
@@ -53,6 +54,7 @@ export class ReportMenuComponent implements OnInit {
   serviceReport: ServiceReports = new ServiceReports();
   hardwareSummaryReport: HardwareSummaryReport = new HardwareSummaryReport();
   deviceIpSummary: DeviceIpSummary = new DeviceIpSummary();
+  remoteConnectionReport: RemoteConnectionReport = new RemoteConnectionReport();
   loadingInProgress: boolean = true;
   listDetailed = ['Year to date', 'Monthly'];
   listTypes = ['Summary', 'Detailed'];
@@ -104,7 +106,7 @@ export class ReportMenuComponent implements OnInit {
 
   public getSoftByCompany(companyId) {
     this.softwareSummaryReport.setPreloaderSoft(true);
-
+    this.remoteConnectionReport.setPreloaderDevices(true);
     this.hardwareSummaryReport.setPreloaderDevices(true);
     this.deviceIpSummary.setPreloaderDevices(true);
     this.devicesService.getSoft(companyId).subscribe((resp: any) => {
@@ -139,11 +141,13 @@ export class ReportMenuComponent implements OnInit {
       this.softwareSummaryReport.setPreloaderSoft(false);
       this.deviceIpSummary.setPreloaderDevices(false);
       this.hardwareSummaryReport.setPreloaderDevices(false);
+      this.remoteConnectionReport.setPreloaderDevices(false);
     }, err => {
       this.softwareSummaryReport.resetSoft();
       this.softwareSummaryReport.setPreloaderSoft(false);
       this.deviceIpSummary.setPreloaderDevices(false);
       this.hardwareSummaryReport.setPreloaderDevices(false);
+      this.remoteConnectionReport.setPreloaderDevices(false);
     })
   }
   public onSelectDetailed(data) {
@@ -171,7 +175,7 @@ export class ReportMenuComponent implements OnInit {
     this.softwareSummaryReport.setDeviceId((data) ? data.id : null);
     this.hardwareSummaryReport.setDeviceId((data) ? data.id : null);
     this.deviceIpSummary.setDeviceId((data) ? data.id : null);
-
+    this.remoteConnectionReport.setDeviceId((data) ? data.id : null);
   }
   public onSelectSoftware(data) {
     this.softwareSummaryReport.setSoftwareSoft(data);
@@ -205,6 +209,7 @@ export class ReportMenuComponent implements OnInit {
       this.softwareSummaryReport.setCompanyId(null);
       this.hardwareSummaryReport.setCompanyId(null);
       this.deviceIpSummary.setCompanyId(null);
+      this.remoteConnectionReport.setCompanyId(null);
       this.getDevicesByCompany(null);
       this.softwareSummaryReport.resetSoft();
     } else {
@@ -221,6 +226,7 @@ export class ReportMenuComponent implements OnInit {
       this.softwareSummaryReport.setCompanyId(selectClient.id);
       this.hardwareSummaryReport.setCompanyId(selectClient.id);
       this.deviceIpSummary.setCompanyId(selectClient.id);
+      this.remoteConnectionReport.setCompanyId(selectClient.id);
       this.getDevicesByCompany(selectClient.id);
       this.getSoftByCompany(selectClient.id);
       if (this.ticketsReport.startDate === '' && this.ticketsReport.endDate === '') this.ticketsReport.setDatesByCompany(this.selectedClient);
@@ -248,6 +254,7 @@ export class ReportMenuComponent implements OnInit {
   onSelectTechUser(data) {
     this.ticketsReport.setTechUser(data);
     this.techService.setTechUserId((data) ? data.id : null);
+    this.remoteConnectionReport.setTechUserId((data) ? data.id : null);
     this.detailedCommissionsReport.setTechUserId((data) ? data.id : null);
     this.commonCommissionsReport.setTechUserId((data) ? data.id : null);
     if (data) this.validate.resetTechUser();
@@ -289,6 +296,16 @@ export class ReportMenuComponent implements OnInit {
     console.log("this.softwareSummaryReport", this.softwareSummaryReport);
     this.setDatareport(this.softwareSummaryReport)
 
+  }
+  getReportByRemoteConnectionReport() {
+    if (!this.validate.isValidateRemoteConnection(this.remoteConnectionReport.startDate, this.remoteConnectionReport.endDate)) return;
+    this.onRequest.emit(true);
+    this.reportsService.getReportByRemoteAccess(this.remoteConnectionReport.getForRequest()).subscribe((data: any) => {
+      this.remoteConnectionReport.setDataFromRequest(data);
+      this.setDatareport(this.remoteConnectionReport)
+      this.reportsStateService.onChangeExportCSV(new ExportCSV('reports/remoteAccess', this.remoteConnectionReport.getForRequest(), 'Report_by_remote_access'));
+
+    });
   }
   getReportByAccounting() {
     if (!this.validate.isValidateAccounting(this.accountingReport.startDate, this.accountingReport.endDate, this.selectedClient)) return;
@@ -457,6 +474,8 @@ export class ReportMenuComponent implements OnInit {
       this.commonCommissionsReport.setEndDate(moment(value.end).format('YYYY/MM/DD'));
 
 
+      this.remoteConnectionReport.setStartDate(moment(value.start).format('YYYY/MM/DD'));
+      this.remoteConnectionReport.setEndDate(moment(value.end).format('YYYY/MM/DD'));
       this.validate.resetDates();
       this.validate.resetMonthlyDetailed();
     } else {
@@ -465,7 +484,7 @@ export class ReportMenuComponent implements OnInit {
       this.productSalesReport.resetDates();
       this.productsCompanyReport.resetDates();
       this.techService.resetDates();
-
+      this.remoteConnectionReport.resetDates();
       this.detailedCommissionsReport.resetDates();
       this.commonCommissionsReport.resetDates();
       if (this.selectedClient) {

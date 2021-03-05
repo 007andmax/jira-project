@@ -396,6 +396,7 @@ import { SoftwareSummaryReportComponent } from './components/reports/reports/sof
 import { SoftwareSummaryDevicesDroDownComponent } from './components/reports/reports/software-summary-report/software-summary-devices-dro-down/software-summary-devices-dro-down.component';
 import { HardwareSummaryReportComponent } from './components/reports/reports/hardware-summary-report/hardware-summary-report.component';
 import { DeviceIpSummaryReportComponent } from './components/reports/reports/device-ip-summary-report/device-ip-summary-report.component';
+import { RemoteConnectionReportComponent } from './components/reports/reports/remote-connection-report/remote-connection-report.component';
 
 /**
  * declare angular
@@ -957,7 +958,8 @@ angular.module('quicktech')
     SoftwareSummaryReportComponent,
     SoftwareSummaryDevicesDroDownComponent,
     HardwareSummaryReportComponent,
-    DeviceIpSummaryReportComponent
+    DeviceIpSummaryReportComponent,
+    RemoteConnectionReportComponent
   ],
   imports: [
     BrowserModule,

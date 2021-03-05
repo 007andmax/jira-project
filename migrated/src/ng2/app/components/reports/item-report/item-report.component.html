@@ -7,6 +7,12 @@
     </p>
     <p
         class="report-title"
+        *ngIf="report === 'remote-connection'"
+    >
+        Remote Connection Report
+    </p>
+    <p
+        class="report-title"
         *ngIf="report === 'device-ip-summary'"
     >
         Device IP Summary Report
@@ -89,6 +95,8 @@
     ></i>
 
 
+
+    <remote-connection-report *ngIf="report === 'remote-connection'"></remote-connection-report>
     <device-ip-summary-report *ngIf="report === 'device-ip-summary'"></device-ip-summary-report>
     <app-gl-number *ngIf="report === 'income-accounts'"></app-gl-number>
     <software-summary-report *ngIf="report === 'software-summary'"></software-summary-report>
