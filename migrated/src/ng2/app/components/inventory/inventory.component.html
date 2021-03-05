@@ -1,45 +1,45 @@
-<div>
-    <div style="width: 100%; display: inline-block;">
-        <div class="products-content">
-            <div class="products-content__header">
-                <h3>Products</h3>
-                <div class="products-content__header--search">
-                    <input
-                        type="text"
-                        placeholder="Search Products…"
-                        (input)="onSearch()"
-                        [(ngModel)]="productSearchName"
-                    >
-                    <button
-                        class="qt-btn filter-button qt-mr-8"
-                       >
-                       Filters
-                    </button>
-                    <button
-                      class="qt-btn --outline-blue"
-                      *ngIf="getPermissions('MANAGE_PRODUCTS')"
-                      (click)="addProduct()"
-                    >
-                      Create Product
-                    </button>
-                </div>
-            </div>
-            <div class="qt-page-list__header-filters qt-mb-16">
-              <app-drop-down
-                #titleDp
-                class="qt-max-w370 qt-mr-8"
-                [placeholder]="'Select Category'"
-                [heightInput]="'36px'"
-                [list]="[]"
-                [search]="true"
-                [change]="true"
-              ></app-drop-down>
-              <button
-                class="qt-btn"
-              >
-                Add Category
-              </button>
-            </div>
+<!--<div>-->
+<!--    <div style="width: 100%; display: inline-block;">-->
+<!--        <div class="products-content">-->
+<!--            <div class="products-content__header">-->
+<!--                <h3>Products</h3>-->
+<!--                <div class="products-content__header&#45;&#45;search">-->
+<!--                    <input-->
+<!--                        type="text"-->
+<!--                        placeholder="Search Products…"-->
+<!--                        (input)="onSearch()"-->
+<!--                        [(ngModel)]="productSearchName"-->
+<!--                    >-->
+<!--                    <button-->
+<!--                        class="qt-btn filter-button qt-mr-8"-->
+<!--                       >-->
+<!--                       Filters-->
+<!--                    </button>-->
+<!--                    <button-->
+<!--                      class="qt-btn &#45;&#45;outline-blue"-->
+<!--                      *ngIf="getPermissions('MANAGE_PRODUCTS')"-->
+<!--                      (click)="addProduct()"-->
+<!--                    >-->
+<!--                      Create Product-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="qt-page-list__header-filters qt-mb-16">-->
+<!--              <app-drop-down-->
+<!--                #titleDp-->
+<!--                class="qt-max-w370 qt-mr-8"-->
+<!--                [placeholder]="'Select Category'"-->
+<!--                [heightInput]="'36px'"-->
+<!--                [list]="[]"-->
+<!--                [search]="true"-->
+<!--                [change]="true"-->
+<!--              ></app-drop-down>-->
+<!--              <button-->
+<!--                class="qt-btn"-->
+<!--              >-->
+<!--                Add Category-->
+<!--              </button>-->
+<!--            </div>-->
 <!--            <div class="products-content__list">-->
 <!--                <div class="products-content__list&#45;&#45;header clearfix">-->
 <!--                    <div-->
@@ -115,93 +115,153 @@
 <!--                    ></div>-->
 <!--                </div>-->
 <!--            </div>-->
-              <div class="qt-page-list__header-thead-container">
-                  <table class="qt-table-modern qt-page-list__header-thead">
-                      <thead>
-                          <tr>
-                              <th
-                                class="products-table__product-name pointer"
-                              >
-                                Product Name
-                                <span class="qt-table-modern__sorting"></span>
-                              </th>
-                              <th
-                                class="products-table__category pointer"
-                              >
-                                Category
-                                <span class="qt-table-modern__sorting"></span>
-                              </th>
-                              <th
-                                class="products-table__cost pointer"
-                              >
-                                Cost
-                                <span class="qt-table-modern__sorting"></span>
-                              </th>
-                              <th
-                                class="products-table__sale-price pointer"
-                              >
-                                Sale Price
-                                <span class="qt-table-modern__sorting"></span>
-                              </th>
-                              <th
-                                class="products-table__mfg pointer"
-                              >
-                                #Mfg
-                                <span class="qt-table-modern__sorting"></span>
-                              </th>
-                              <th
-                                class="products-table__tac pointer"
-                              >
-                                Tax
-                                <span class="qt-table-modern__sorting"></span>
-                              </th>
-                              <th
-                                class="products-table__ilc"
-                              >
-                                ILC
-                                <span class="qt-table-modern__sorting"></span>
-                              </th>
-                              <th
-                                class="products-table__gl pointer"
-                              >
-                                GL
-                                <span class="qt-table-modern__sorting"></span>
-                              </th>
-                              <th
-                                class="products-table__menu pointer"
-                              >
-                              </th>
-                          </tr>
-                      </thead>
-                  </table>
-                  <div
-                    class="products-content"
-                    style="padding: 0"
-                    infiniteScroll
-                    [infiniteScrollDistance]="2"
-                    [infiniteScrollThrottle]="50"
-                    [infiniteScrollDisabled]="infiniteScrollDisabled"
-                    (scrolled)="onScroll()"
-                  >
-                    <ng-template
-                      ngFor
-                      let-inventory
-                      [ngForOf]="inventoryList"
-                      [ngForTrackBy]="trackById"
-                    >
-                      <app-inventory-table
-                        [companies]="companies"
-                        [taxes]="taxes"
-                        [glNumbers]="glNumbers"
-                        [inventory]="inventory"
-                      ></app-inventory-table>
-                    </ng-template>
-                    <div
-                      class="loading"
-                      *ngIf="showPreloader"
-                    ></div>
-                  </div>
-              </div>
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<div class="qt-page-list products-page">
+  <div class="qt-page-list__header --sticky">
+
+    <div class="qt-page-list__header-title-line">
+      <div class="qt-page-list__header-title-line--left">
+        <h3
+          class="qt-page-list__header-title"
+          [textContent]="'Products'"
+        ></h3>
+      </div>
+      <div class="qt-page-list__header-title-line--rigth">
+        <div class="qt-df qt-ai-c">
+          <div class="products-page__search">
+            <input
+              type="text"
+              placeholder="Search Products…"
+              (input)="onSearch()"
+              [(ngModel)]="productSearchName"
+            >
+          </div>
+          <button
+            class="qt-btn btn-filter d-f"
+          >
+            Filters
+          </button>
+          <!-- add class 'active' if filters open -->
+          <button
+            class="qt-btn --outline-blue qt-ml-8"
+            *ngIf="getPermissions('MANAGE_PRODUCTS')"
+            (click)="addProduct()"
+          >
+            Create Product
+          </button>
         </div>
+      </div>
     </div>
+    <div class="qt-page-list__header-filters">
+      <app-drop-down
+        #titlesDp
+        class="products-page__category-btn qt-mr-8"
+        [heightInput]="'36px'"
+        [placeholder]="'Select Category'"
+        [list]="[]"
+        [search]="true"
+        [change]="true"
+      ></app-drop-down>
+      <button
+        class="qt-btn"
+      >
+        Add Category
+      </button>
+    </div>
+    <div class="qt-page-list__header-thead-container">
+      <table class="qt-table-modern qt-page-list__header-thead">
+        <thead>
+        <tr>
+          <th
+            class="products-table__product-name pointer"
+          >
+            Product Name
+            <span class="qt-table-modern__sorting"></span>
+          </th>
+          <th
+            class="products-table__category pointer"
+          >
+            Category
+            <span class="qt-table-modern__sorting"></span>
+          </th>
+          <th
+            class="products-table__cost pointer"
+          >
+            Cost
+            <span class="qt-table-modern__sorting"></span>
+          </th>
+          <th
+            class="products-table__sale-price pointer"
+          >
+            Sale Price
+            <span class="qt-table-modern__sorting"></span>
+          </th>
+          <th
+            class="products-table__mfg pointer"
+          >
+            #Mfg
+            <span class="qt-table-modern__sorting"></span>
+          </th>
+          <th
+            class="products-table__tac pointer"
+          >
+            Tax
+            <span class="qt-table-modern__sorting"></span>
+          </th>
+          <th
+            class="products-table__ilc"
+          >
+            ILC
+            <span class="qt-table-modern__sorting"></span>
+          </th>
+          <th
+            class="products-table__gl pointer"
+          >
+            GL
+            <span class="qt-table-modern__sorting"></span>
+          </th>
+          <th
+            class="products-table__menu pointer"
+          >
+          </th>
+        </tr>
+        </thead>
+      </table>
+    </div>
+  </div>
+  <div class="qt-page-list__body">
+    <div class="qt-page-list__body-table-container">
+      <table class="qt-page-list__body-tbody qt-table-modern products-table">
+        <tbody
+            infiniteScroll
+            [infiniteScrollDistance]="2"
+            [infiniteScrollThrottle]="50"
+            [infiniteScrollDisabled]="infiniteScrollDisabled"
+            (scrolled)="onScroll()"
+          >
+          <ng-template
+            ngFor
+            let-inventory
+            [ngForOf]="inventoryList"
+            [ngForTrackBy]="trackById"
+          >
+            <app-inventory-table
+              [companies]="companies"
+              [taxes]="taxes"
+              [glNumbers]="glNumbers"
+              [inventory]="inventory"
+            ></app-inventory-table>
+          </ng-template>
+          <div
+            class="loading"
+            *ngIf="showPreloader"
+          ></div>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
+
+

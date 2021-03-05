@@ -33,73 +33,106 @@
 
 
 <!--</div>-->
-<table class="qt-page-list__body-tbody qt-table-modern users-table">
-  <tbody>
-  <tr>
-    <td class="products-table__product-name pre-line">
-      <div
-        [textContent]="inventory.description"
-      >
-      </div>
-    </td>
-    <td class="products-table__category">
-      <div
-        [textContent]="getCompanyName()"
-      >
-      </div>
-    </td>
-    <td class="products-table__cost">
-      <div
-        *ngIf="getPermissions('VIEW_PRODUCT_COST')" [textContent]="'$' + parseTotal(inventory.cost || 0)"
-      >
-      </div>
-    </td>
-    <td class="products-table__sale-price">
-      <div
-        [textContent]="'$' + parseTotal(inventory.sale || 0)"
-      >
-      </div>
-    </td>
 
-    <td class="products-table__mfg">
-      <div
-        [textContent]="inventory.manufacture"
+
+<tr>
+  <td class="products-table__product-name pre-line">
+    <div
+      [textContent]="inventory.description"
+    >
+    </div>
+  </td>
+  <td class="products-table__category">
+    <div
+      [textContent]="getCompanyName()"
+    >
+    </div>
+  </td>
+  <td class="products-table__cost">
+    <div
+      *ngIf="getPermissions('VIEW_PRODUCT_COST')" [textContent]="'$' + parseTotal(inventory.cost || 0)"
+    >
+    </div>
+  </td>
+  <td class="products-table__sale-price">
+    <div
+      [textContent]="'$' + parseTotal(inventory.sale || 0)"
+    >
+    </div>
+  </td>
+
+  <td class="products-table__mfg">
+    <div
+      [textContent]="inventory.manufacture"
+    >
+    </div>
+  </td>
+  <td class="products-table__tac">
+    <div
+      [textContent]="getSelectedTaxNames()"
+    >
+    </div>
+  </td>
+  <td class="products-table__ilc">
+    <div
+      [textContent]="inventory.ilc"
+    >
+    </div>
+  </td>
+  <td class="products-table__gl">
+    <div
+      [textContent]="getGlNumberName()"
+    >
+    </div>
+  </td>
+  <td class="products-table__menu">
+<!--    <div-->
+<!--      *ngIf="getPermissions('MANAGE_PRODUCTS')"-->
+<!--      class="grey-dropdown right with-icons"-->
+<!--      ngbDropdown-->
+<!--    >-->
+<!--      <i class="icn-16 more-vertical-ng2 pointer" id="dropdownBasic1" ngbDropdownToggle></i>-->
+<!--      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">-->
+<!--        <button ngbDropdownItem (click)="edit()"><i class="icn-16 edit-grey-ng2"></i>Edit-->
+<!--        </button>-->
+<!--        <button ngbDropdownItem (click)="delete()"><i class="icn-16 archive-grey-ng2"></i>Delete-->
+<!--        </button>-->
+<!--      </div>-->
+<!--    </div>-->
+    <div
+        *ngIf="getPermissions('MANAGE_PRODUCTS')"
+        [container]="'body'"
+        [placement]="'bottom-right'"
+        ngbDropdown
       >
-      </div>
-    </td>
-    <td class="products-table__tac">
       <div
-        [textContent]="getSelectedTaxNames()"
+        class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"
+        id="dropdownBasic1"
+        ngbDropdownToggle
+      ></div>
+      <ul
+        class="qt-dropdown-menu"
+        ngbDropdownMenu
+        aria-labelledby="dropdownBasic1"
       >
-      </div>
-    </td>
-    <td class="products-table__ilc">
-      <div
-        [textContent]="inventory.ilc"
-      >
-      </div>
-    </td>
-    <td class="products-table__gl">
-      <div
-        [textContent]="getGlNumberName()"
-      >
-      </div>
-    </td>
-    <td class="products-table__menu">
-      <div
-          *ngIf="getPermissions('MANAGE_PRODUCTS')"
-          class="grey-dropdown right with-icons"
-          ngbDropdown
+        <li
+          class="pointer"
+          ngbDropdownItem
+          (click)="edit()"
         >
-        <i class="icn-16 more-vertical-ng2 pointer" id="dropdownBasic1" ngbDropdownToggle></i>
-        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-          <button ngbDropdownItem (click)="edit()"><i class="icn-16 edit-grey-ng2"></i>Edit
-          </button>
-          <button ngbDropdownItem (click)="delete()"><i class="icn-16 archive-grey-ng2"></i>Delete
-          </button>
-        </div>
-      </div>
-    </td>
-  </tr>
-  </tbody>
-</table>
+          <div class="icon__edit qt-bg-contain  qt-sz-16 qt-mr-8"></div>
+          Edit
+        </li>
+        <li
+          class="pointer"
+          ngbDropdownItem
+          (click)="delete()"
+        >
+          <div class="archive-grey-ng2 qt-bg-contain qt-sz-16 qt-mr-8"></div>
+          Delete
+        </li>
+      </ul>
+    </div>
+  </td>
+</tr>
+
