@@ -2811,7 +2811,11 @@ app-ticket-edit-aside-devices  {
 
   #inventory-description {
   //  height: 40px !important;
-    padding: 10px 14px;
+    padding: 8px 14px;
+  }
+
+  .app-drop-down__right-icon {
+    right: 0;
   }
 
   .btn-new {
