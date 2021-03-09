@@ -28,6 +28,8 @@ import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
 import { HardwareSummaryReport } from '../class/hardware-summary-report';
 import { DeviceIpSummary } from '../class/device-ip-summary';
 import { RemoteConnectionReport } from '../class/remote-connection-report';
+import { TechSalesReport } from '../class/tech-sales-report';
+import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 
 
 @Component({
@@ -55,6 +57,7 @@ export class ReportMenuComponent implements OnInit {
   hardwareSummaryReport: HardwareSummaryReport = new HardwareSummaryReport();
   deviceIpSummary: DeviceIpSummary = new DeviceIpSummary();
   remoteConnectionReport: RemoteConnectionReport = new RemoteConnectionReport();
+  techSalesReport: TechSalesReport = new TechSalesReport();
   loadingInProgress: boolean = true;
   listDetailed = ['Year to date', 'Monthly'];
   listTypes = ['Summary', 'Detailed'];
@@ -68,6 +71,8 @@ export class ReportMenuComponent implements OnInit {
   @Output() getReport = new EventEmitter<any>();
   @Output() onRequest = new EventEmitter<any>();
   @Output() onSelectedClient = new EventEmitter<any>();
+
+  @ViewChild('durationsTechSaleDP') durationsTechSaleDP: DropDownComponent;
   @ViewChild('dp') datePicker: any;
   @ViewChild('cp') companiesList: any;
   constructor(private reportsService: ReportsService,
@@ -149,6 +154,14 @@ export class ReportMenuComponent implements OnInit {
       this.hardwareSummaryReport.setPreloaderDevices(false);
       this.remoteConnectionReport.setPreloaderDevices(false);
     })
+  }
+  onSelectTypeTechSale(data) {
+    this.techSalesReport.setType(data);
+  }
+  onSelectDurationTechSale(data) {
+    this.techSalesReport.setDuration(data);
+    this.techSalesReport.resetDates();
+    this.datePicker.clearWithOutChanges();
   }
   public onSelectDetailed(data) {
     this.yearToDate = false;
@@ -296,6 +309,15 @@ export class ReportMenuComponent implements OnInit {
     console.log("this.softwareSummaryReport", this.softwareSummaryReport);
     this.setDatareport(this.softwareSummaryReport)
 
+  }
+  getReportByTechSaleReport() {
+    this.onRequest.emit(true);
+    this.reportsService.getReportByTechSale(this.techSalesReport.getForRequest()).subscribe((data: any) => {
+      this.techSalesReport.setDataFromRequest(data);
+      this.setDatareport(this.techSalesReport)
+      this.reportsStateService.onChangeExportCSV(new ExportCSV('reports/sales/byTechSold', this.techSalesReport.getForRequest(), 'Report_by_tech_sold'));
+
+    });
   }
   getReportByRemoteConnectionReport() {
     if (!this.validate.isValidateRemoteConnection(this.remoteConnectionReport.startDate, this.remoteConnectionReport.endDate)) return;
@@ -473,12 +495,17 @@ export class ReportMenuComponent implements OnInit {
       this.commonCommissionsReport.setStartDate(moment(value.start).format('YYYY/MM/DD'));
       this.commonCommissionsReport.setEndDate(moment(value.end).format('YYYY/MM/DD'));
 
-
+      this.techSalesReport.setStartDate(moment(value.start).format('YYYY/MM/DD'));
+      this.techSalesReport.setEndDate(moment(value.end).format('YYYY/MM/DD'));
+      this.techSalesReport.resetDuration();
+      this.durationsTechSaleDP.clearWithOutChanges();
       this.remoteConnectionReport.setStartDate(moment(value.start).format('YYYY/MM/DD'));
       this.remoteConnectionReport.setEndDate(moment(value.end).format('YYYY/MM/DD'));
       this.validate.resetDates();
       this.validate.resetMonthlyDetailed();
     } else {
+      this.techSalesReport.resetDates();
+      this.techSalesReport.setDefaultDuration();
       this.accountingReport.resetDates();
       this.glNumber.resetDates();
       this.productSalesReport.resetDates();

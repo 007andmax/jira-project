@@ -43,7 +43,7 @@ export class ReportsComponent implements OnInit {
     if (type === 'FINANCIAL') return ['accounts-receivable', 'accounting-report'];
     if (type === 'REMOTE_ACCESS') return ['remote-access'];
     if (type === 'DEVICES') return ['software-summary', 'hardware-summary', 'device-ip-summary'];
-    if (type === 'PERFORMANCE') return ['techReport-ProductSales', 'techReport-TicketCreated', 'tech-service'];
+    if (type === 'PERFORMANCE') return ['tech-sales', 'techReport-TicketCreated', 'tech-service'];
     if (type === 'TICKETS') return ['ticket-report', 'service-report'];
     if (type === 'INCOME_ACCOUNTS') return ['income-accounts'];
   }

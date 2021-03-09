@@ -271,10 +271,9 @@
           templateUrl: '/ng1/scripts/core/reports/reports-templates/commissions-report-common.tpl.html',
           controller: 'quicktech.core.reports.reportsCtrl'
         }))
-        .state('techReport-ProductSales', waitForServices({
-          url: '/reports/techReport-ProductSales',
-          templateUrl: '/ng1/scripts/core/reports/reports-templates/tech-report-product-sales.tpl.html',
-          controller: 'quicktech.core.reports.reportsCtrl'
+        .state('tech-sales', waitForServices({
+          url: '/ng2/report/tech-sales',
+          template: '<item-report-component></item-report-component>'
         }))
         .state('hardware-reports', waitForServices({
           url: '/reports/hardware-reports',

@@ -1,0 +1,75 @@
+<div>
+    <app-report-menu
+        [report]="'tech-sales'"
+        (onRequest)="onRequest($event)"
+        (getReport)="getReport($event)"
+    ></app-report-menu>
+</div>
+<app-report-additional-actions
+    [report]="'tech-sales'"
+    [accountType]="'TECH'"
+    [template]="'CUSTOMER_REPORT'"
+    [fileName]="'tech-sales-report'"
+></app-report-additional-actions>
+<!--  -->
+<div
+    class="loading"
+    *ngIf="loadingInProgress"
+></div>
+<div
+    class="product-list___ticket report-show-footer-header"
+    id="product-list-ticket-data"
+>
+    <div
+        class="product-list-ticket product-list-ticket-tech"
+        style="padding: 0px;"
+        *ngIf="!loadingInProgress"
+    >
+        <div
+            class="customer-ticket"
+            *ngIf="onInit"
+        >
+            <div class="customer-ticket__report">
+                <div class="report-header">
+                    <h1>Tech Sales Report</h1>
+                    <div
+                        class="company-info"
+                        *ngIf="techSalesReport.startDate !== '' && techSalesReport.endDate !== ''"
+                    >
+                        <p>
+                            <span>
+                                {{getDateForHeader(techSalesReport.startDate)}}
+                            </span>
+                            -
+                            <span>
+                                {{getDateForHeader(techSalesReport.endDate)}}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div *ngIf="onInit">
+                    <div class="header-product-list-ticket">
+                        <h4 *ngIf="techSalesReport.type =='BILLED_TIME'">Billed Time</h4>
+                        <p *ngIf="techSalesReport.type =='PRODUCT_SOLD'">Products Sold</p>
+                    </div>
+                    <nvd3
+                        [options]="chartOptionsToggler"
+                        [data]="chartData"
+                    ></nvd3>
+                    <div class="clearfix">
+                        <div *ngIf="techSalesReport.type == 'BILLED_TIME'">
+                            Total Hours:
+                            <span>{{techSalesReport.total}} hours</span>
+                        </div>
+                        <div *ngIf="techSalesReport.type == 'PRODUCT_SOLD'">
+                            Potential revenue:
+                            <span>${{techSalesReport.total}}</span>
+                        </div>
+                    </div>
+
+                </div>
+                <app-report-footer *ngIf="onInit"></app-report-footer>
+            </div>
+        </div>
+    </div>
+</div>

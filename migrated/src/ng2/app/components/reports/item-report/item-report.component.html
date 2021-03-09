@@ -89,10 +89,17 @@
     >
         Accounting report
     </p>
+    <p
+        class="report-title"
+        *ngIf="report === 'tech-sales'"
+    >
+        Tech Sales Report
+    </p>
     <i
         class="back-page"
         (click)="back()"
     ></i>
+    <tech-sales-report *ngIf="report === 'tech-sales'"></tech-sales-report>
     <remote-connection-report *ngIf="report === 'remote-access'"></remote-connection-report>
     <device-ip-summary-report *ngIf="report === 'device-ip-summary'"></device-ip-summary-report>
     <app-gl-number *ngIf="report === 'income-accounts'"></app-gl-number>
