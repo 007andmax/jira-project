@@ -398,6 +398,7 @@ import { HardwareSummaryReportComponent } from './components/reports/reports/har
 import { DeviceIpSummaryReportComponent } from './components/reports/reports/device-ip-summary-report/device-ip-summary-report.component';
 import { RemoteConnectionReportComponent } from './components/reports/reports/remote-connection-report/remote-connection-report.component';
 import { TechSalesReportComponent } from './components/reports/reports/tech-sales-report/tech-sales-report.component';
+import { TechTicketReportComponent } from './components/reports/reports/tech-ticket-report/tech-ticket-report.component';
 
 /**
  * declare angular
@@ -961,7 +962,8 @@ angular.module('quicktech')
     HardwareSummaryReportComponent,
     DeviceIpSummaryReportComponent,
     RemoteConnectionReportComponent,
-    TechSalesReportComponent
+    TechSalesReportComponent,
+    TechTicketReportComponent
   ],
   imports: [
     BrowserModule,

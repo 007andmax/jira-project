@@ -95,10 +95,17 @@
     >
         Tech Sales Report
     </p>
+    <p
+        class="report-title"
+        *ngIf="report === 'tech-ticket'"
+    >
+        Tech Ticket Report
+    </p>
     <i
         class="back-page"
         (click)="back()"
     ></i>
+    <tech-ticket-report *ngIf="report === 'tech-ticket'"></tech-ticket-report>
     <tech-sales-report *ngIf="report === 'tech-sales'"></tech-sales-report>
     <remote-connection-report *ngIf="report === 'remote-access'"></remote-connection-report>
     <device-ip-summary-report *ngIf="report === 'device-ip-summary'"></device-ip-summary-report>

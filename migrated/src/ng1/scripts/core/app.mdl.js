@@ -256,10 +256,9 @@
           templateUrl: '/ng1/scripts/core/reports/reports.tpl.html',
           controller: 'quicktech.core.reports.reportsCtrl'
         }))
-        .state('techReport-TicketCreated', waitForServices({
-          url: '/reports/techReport-TicketCreated',
-          templateUrl: '/ng1/scripts/core/reports/reports-templates/tech-report-ticked-created.tpl.html',
-          controller: 'quicktech.core.reports.reportsCtrl'
+        .state('tech-ticket', waitForServices({
+          url: '/ng2/report/tech-ticket',
+          template: '<item-report-component></item-report-component>'
         }))
         .state('commissionsReport-detailed', waitForServices({
           url: '/reports/byCommissionsDetailed',

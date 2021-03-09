@@ -80,6 +80,9 @@ export class ReportsService {
   public getReportByTechSale(data) {
     return this.http.post(this.apiUrl + `reports/sales/byTechSold`, data);
   }
+  public getReportByTechTicket(data) {
+    return this.http.post(this.apiUrl + `reports/techTickets`, data);
+  }
   public getReportByService(data) {
     return this.http.post(this.apiUrl + `customerReport/expenses`, data);
   }

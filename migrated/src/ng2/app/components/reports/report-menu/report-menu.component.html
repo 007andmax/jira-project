@@ -1,5 +1,39 @@
 <!-- MENU FOR NON-TECH REPORTS -->
 <div class="report-menu">
+    <div *ngIf="report === 'tech-ticket'">
+        <div
+            class="run-report-content clearfix"
+            [ngClass]="className"
+        >
+            <div class="new-reports-reverse">
+                <button
+                    class="form-group btn btn-success"
+                    (click)="getReportByTechTicketReport()"
+                >
+                    Get
+          Report
+                </button>
+                <div class="form-group content custom-width">
+                    <app-multi-datepicker
+                        #dp
+                        (selectedDate)="filterByDate($event)"
+                    ></app-multi-datepicker>
+                </div>
+                <div class="form-group content">
+                    <app-drop-down
+                        #durationsTechSaleDP
+                        [placeholder]="'No interval'"
+                        [list]="techTicketReport.durations"
+                        [editItem]="techTicketReport.selectedDuration"
+                        [dropdownHeight]="'175px'"
+                        [field]="'title'"
+                        [isBlockClear]="true"
+                        (onSelectedItem)="onSelectDurationTechSale($event)"
+                    ></app-drop-down>
+                </div>
+            </div>
+        </div>
+    </div>
     <div *ngIf="report === 'tech-sales'">
         <div
             class="run-report-content clearfix"

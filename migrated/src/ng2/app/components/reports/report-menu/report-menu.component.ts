@@ -30,6 +30,7 @@ import { DeviceIpSummary } from '../class/device-ip-summary';
 import { RemoteConnectionReport } from '../class/remote-connection-report';
 import { TechSalesReport } from '../class/tech-sales-report';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
+import { TechTicketReport } from '../class/tech-ticket-report';
 
 
 @Component({
@@ -58,6 +59,7 @@ export class ReportMenuComponent implements OnInit {
   deviceIpSummary: DeviceIpSummary = new DeviceIpSummary();
   remoteConnectionReport: RemoteConnectionReport = new RemoteConnectionReport();
   techSalesReport: TechSalesReport = new TechSalesReport();
+  techTicketReport: TechTicketReport = new TechTicketReport();
   loadingInProgress: boolean = true;
   listDetailed = ['Year to date', 'Monthly'];
   listTypes = ['Summary', 'Detailed'];
@@ -162,6 +164,10 @@ export class ReportMenuComponent implements OnInit {
     this.techSalesReport.setDuration(data);
     this.techSalesReport.resetDates();
     this.datePicker.clearWithOutChanges();
+
+    this.techTicketReport.setDuration(data);
+    this.techTicketReport.resetDates();
+
   }
   public onSelectDetailed(data) {
     this.yearToDate = false;
@@ -309,6 +315,15 @@ export class ReportMenuComponent implements OnInit {
     console.log("this.softwareSummaryReport", this.softwareSummaryReport);
     this.setDatareport(this.softwareSummaryReport)
 
+  }
+  getReportByTechTicketReport() {
+    this.onRequest.emit(true);
+    this.reportsService.getReportByTechTicket(this.techTicketReport.getForRequest()).subscribe((data: any) => {
+      this.techTicketReport.setDataFromRequest(data);
+      this.setDatareport(this.techTicketReport)
+      this.reportsStateService.onChangeExportCSV(new ExportCSV('reports/techTickets', this.techTicketReport.getForRequest(), 'Report_by_tech_tickets'));
+
+    });
   }
   getReportByTechSaleReport() {
     this.onRequest.emit(true);
@@ -498,6 +513,11 @@ export class ReportMenuComponent implements OnInit {
       this.techSalesReport.setStartDate(moment(value.start).format('YYYY/MM/DD'));
       this.techSalesReport.setEndDate(moment(value.end).format('YYYY/MM/DD'));
       this.techSalesReport.resetDuration();
+
+      this.techTicketReport.setStartDate(moment(value.start).format('YYYY/MM/DD'));
+      this.techTicketReport.setEndDate(moment(value.end).format('YYYY/MM/DD'));
+      this.techTicketReport.resetDuration();
+
       this.durationsTechSaleDP.clearWithOutChanges();
       this.remoteConnectionReport.setStartDate(moment(value.start).format('YYYY/MM/DD'));
       this.remoteConnectionReport.setEndDate(moment(value.end).format('YYYY/MM/DD'));
@@ -506,6 +526,11 @@ export class ReportMenuComponent implements OnInit {
     } else {
       this.techSalesReport.resetDates();
       this.techSalesReport.setDefaultDuration();
+
+
+      this.techTicketReport.resetDates();
+      this.techTicketReport.setDefaultDuration();
+
       this.accountingReport.resetDates();
       this.glNumber.resetDates();
       this.productSalesReport.resetDates();
