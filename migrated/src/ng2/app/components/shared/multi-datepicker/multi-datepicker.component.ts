@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbDate, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { DateService } from "../../../services/date/date.service";
 
@@ -15,6 +15,8 @@ export class MultiDatepickerComponent implements OnInit {
   hoveredDate: NgbDate;
   fromDate: NgbDate;
   toDate: NgbDate;
+  @Input() errorMessage: string = null;
+  @Input() validate: boolean = true;
   public navigation = 'select';
   public showDatePicker = false;
   public selectedDateModel = '';
@@ -52,7 +54,7 @@ export class MultiDatepickerComponent implements OnInit {
         start: this.dateService.getDateFromBootstrap(this.fromDate),
         end: this.dateService.getDateFromBootstrap(this.toDate),
       });
-       
+
       this.setSelectedDateModel(this.fromDate, this.toDate);
       this.hideDatePicker();
     }
@@ -102,10 +104,10 @@ export class MultiDatepickerComponent implements OnInit {
    */
   public setSelectedDateModel(start, end) {
     if (start && end) {
-       
+
       const startDate = new Date(this.dateService.getDateFromBootstrap(start));
       const endDate = new Date(this.dateService.getDateFromBootstrap(end));
-       
+
       this.selectedDateModel = `${this.dateService.getInvoiceDate(startDate)} - ${this.dateService.getInvoiceDate(endDate)}`;
     } else {
       this.selectedDateModel = '';
@@ -127,7 +129,7 @@ export class MultiDatepickerComponent implements OnInit {
   }
 
   public clearWithOutChanges() {
-    
+
     this.fromDate = undefined;
     this.toDate = undefined;
     this.setSelectedDateModel('', '');

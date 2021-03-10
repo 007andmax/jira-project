@@ -1,25 +1,30 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy, ElementRef } from '@angular/core';
 import { TehUsersService } from 'src/ng2/app/services/teh-users/teh-users.service';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { Subscription } from 'rxjs';
+import { DropDownComponent } from '../../../shared/drop-down/drop-down.component';
 
 @Component({
   selector: 'app-tech-users-list-report',
   templateUrl: './tech-users-list-report.component.html',
   styleUrls: ['./tech-users-list-report.component.scss']
 })
-export class TechUsersListReportComponent implements OnInit, OnDestroy {
-  public usersList: any = [];
-  public selectedUser = null;
-  resUserList = [];
+export class TechUsersListReportComponent extends DropDownComponent {
+
+
+
   sub: Subscription = new Subscription();
-  @Output() onChange = new EventEmitter<any>();
+
 
   constructor(private tehService: TehUsersService,
-    private usersStateService: UsersStateService) { }
+    public elRef: ElementRef,
+    private usersStateService: UsersStateService) {
+    super(elRef);
+  }
 
   ngOnInit() {
-
+    if (this.class.length > 0) this.class = this.class;
+    if (this.uiType) this.class.push(this.uiType);
     if (this.usersStateService.getAllUsers().length > 0) {
       this.setUsers(this.usersStateService.getAllUsers());
     }
@@ -28,32 +33,36 @@ export class TechUsersListReportComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnUsers);
   }
+  ngDoCheck() {
+
+    if (this.reqList.length === 0) this.reqList = JSON.parse(JSON.stringify(this.list));
+    if (this.editItem) this.selectedItem = (this.field) ? this.editItem : this.editItem;
+  }
   setUsers(data) {
-    this.resUserList = data.filter(item => {
+    this.reqList = data.filter(item => {
       if (item.accountType === 'TECH' && !item.deletedAt) {
         item.selected = false;
         return item;
       }
     });
-    this.resUserList.sort((a, b) => ((`${a.firstName} ${a.lastName}`).toLowerCase() > (`${b.firstName} ${b.lastName}`).toLowerCase()) ?
-      1 : (((`${b.firstName} ${b.lastName}`).toLowerCase() > (`${a.firstName} ${a.lastName}`).toLowerCase()) ? -1 : 0));
-    this.usersList = JSON.parse(JSON.stringify(this.resUserList));
+    if (this.sort) this.reqList.sort((a, b) => (`${a.firstName} ${a.lastName}`).localeCompare(`${b.firstName} ${b.lastName}`));
+    this.list = JSON.parse(JSON.stringify(this.reqList));
   }
-  onSearch(event) {
-    this.usersList = this.resUserList.filter(item => (`${item.firstName} ${item.lastName}`).toLowerCase().includes(event.target.value.toLowerCase()))
+  onCheckAdd(event) {
+    if (this.search) this.list = this.reqList.filter(item => (`${item.firstName} ${item.lastName}`).toLowerCase().includes(event.target.value.toLowerCase()))
+    let index = this.list.findIndex(item => (`${item.firstName} ${item.lastName}`) === event.target.value);
+    if (index === -1 && this.add) {
+      this.isAdd = true;
+    } else {
+      this.isAdd = false;
+    }
+  }
 
-  }
   getSelectedUser() {
-    return (this.selectedUser) ? `${this.selectedUser.firstName} ${this.selectedUser.lastName}` : '';
+    return (this.selectedItem) ? `${this.selectedItem.firstName} ${this.selectedItem.lastName}` : '';
   }
-  onSelect(data) {
-    this.selectedUser = data;
-    this.onChange.emit(data);
-  }
-  clearClient() {
-    this.selectedUser = null;
-    this.onChange.emit(null);
-  }
+
+
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

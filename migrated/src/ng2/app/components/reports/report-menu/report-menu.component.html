@@ -97,8 +97,14 @@
           Report
                 </button>
                 <div class="device-report dropdown-remote-report-tech form-group custom-width">
-                    <app-tech-users-list-report (onChange)="onSelectTechUser($event)"></app-tech-users-list-report>
-                    <mat-error *ngIf="!validate.getTechUser()">Select the sales user</mat-error>
+                    <app-tech-users-list-report
+                        [sort]="true"
+                        [search]="true"
+                        [change]="true"
+                        [validate]="validate.getTechUser()"
+                        [errorMessage]="'Select any user'"
+                        (onSelectedItem)="onSelectTechUser($event)"
+                    ></app-tech-users-list-report>
                 </div>
                 <div class="form-group content custom-width">
                     <software-summary-devices-dro-down
@@ -116,9 +122,10 @@
                 <div class="form-group content">
                     <app-multi-datepicker
                         #dp
+                        [validate]="validate.getDates()"
+                        [errorMessage]="'Please select the dates'"
                         (selectedDate)="filterByDate($event)"
                     ></app-multi-datepicker>
-                    <mat-error *ngIf="!validate.getDates()">Please select the dates</mat-error>
                 </div>
                 <div class="form-group content custom-width">
                     <app-drop-down
@@ -514,8 +521,14 @@
                     ></app-drop-down>
                 </div>
                 <div class="grey-dropdown form-group content select-users-list">
-                    <app-tech-users-list-report (onChange)="onSelectTechUser($event)"></app-tech-users-list-report>
-                    <mat-error *ngIf="!validate.getTechUser()">Select the sales user</mat-error>
+                    <app-tech-users-list-report
+                        [sort]="true"
+                        [search]="true"
+                        [change]="true"
+                        [validate]="validate.getTechUser()"
+                        [errorMessage]="'Select any user'"
+                        (onSelectedItem)="onSelectTechUser($event)"
+                    ></app-tech-users-list-report>
                 </div>
             </div>
         </div>
@@ -550,8 +563,14 @@
                     ></app-drop-down>
                 </div>
                 <div class="grey-dropdown form-group content select-users-list">
-                    <app-tech-users-list-report (onChange)="onSelectTechUser($event)"></app-tech-users-list-report>
-                    <mat-error *ngIf="!validate.getTechUser()">Select the sales user</mat-error>
+                    <app-tech-users-list-report
+                        [sort]="true"
+                        [search]="true"
+                        [change]="true"
+                        [validate]="validate.getTechUser()"
+                        [errorMessage]="'Select any user'"
+                        (onSelectedItem)="onSelectTechUser($event)"
+                    ></app-tech-users-list-report>
                 </div>
             </div>
             <div class="col-md-11">
@@ -596,9 +615,10 @@
                 <div class="form-group content">
                     <app-multi-datepicker
                         #dp
+                        [validate]="validate.getDates()"
+                        [errorMessage]="'Please select the dates'"
                         (selectedDate)="filterByDate($event)"
                     ></app-multi-datepicker>
-                    <mat-error *ngIf="!validate.getDates()">Please select the dates</mat-error>
                 </div>
                 <div class="form-group content custom-width dropdown-height">
                     <app-drop-down
@@ -631,12 +651,18 @@
                 <div class="form-group content">
                     <app-multi-datepicker
                         #dp
+                        [validate]="validate.getDates()"
+                        [errorMessage]="'Please select the dates'"
                         (selectedDate)="filterByDate($event)"
                     ></app-multi-datepicker>
-                    <mat-error *ngIf="!validate.getDates()">Please select the dates</mat-error>
                 </div>
                 <div class="grey-dropdown form-group content select-users-list">
-                    <app-tech-users-list-report (onChange)="onSelectTechUser($event)"></app-tech-users-list-report>
+                    <app-tech-users-list-report
+                        [sort]="true"
+                        [search]="true"
+                        [change]="true"
+                        (onSelectedItem)="onSelectTechUser($event)"
+                    ></app-tech-users-list-report>
                 </div>
             </div>
         </div>
@@ -667,20 +693,23 @@
                 <div class="form-group content">
                     <app-multi-datepicker
                         #dp
+                        [validate]="validate.getDates() && validate.geMonthlyDetailed()"
+                        [errorMessage]="'Please select the dates'"
                         (selectedDate)="filterByDate($event)"
                     ></app-multi-datepicker>
-                    <mat-error *ngIf="!validate.getDates() && validate.geMonthlyDetailed()">Please select the dates</mat-error>
+                    <!-- <mat-error *ngIf="!validate.getDates() && validate.geMonthlyDetailed()">Please select the dates</mat-error> -->
                 </div>
                 <div class="form-group content">
                     <div class="input-field">
-                        <app-select
+                        <app-drop-down
+                            [validate]="validate.geMonthlyDetailed()"
+                            [errorMessage]="'Please select any dates or intervals'"
                             [placeholder]="'Select filter'"
                             [list]="listDetailed"
-                            (onChange)="onSelectDetailed($event)"
-                        >
-                        </app-select>
+                            (onSelectedItem)="onSelectDetailed($event)"
+                        ></app-drop-down>
                     </div>
-                    <mat-error *ngIf="!validate.getDates() && !validate.geMonthlyDetailed()">Please select any dates or intervals</mat-error>
+                    <!-- <mat-error *ngIf="!validate.getDates() && !validate.geMonthlyDetailed()">Please select any dates or intervals</mat-error> -->
                 </div>
             </div>
         </div>
@@ -735,9 +764,10 @@
                 <div class="form-group content">
                     <app-multi-datepicker
                         #dp
+                        [validate]="validate.getDates()"
+                        [errorMessage]="'Please select the dates'"
                         (selectedDate)="filterByDate($event)"
                     ></app-multi-datepicker>
-                    <mat-error *ngIf="!validate.getDates()">Please select the dates</mat-error>
                 </div>
             </div>
         </div>
@@ -813,9 +843,10 @@
                 <div class="form-group content">
                     <app-multi-datepicker
                         #dp
+                        [validate]="validate.getDates()"
+                        [errorMessage]="'Please select the dates'"
                         (selectedDate)="filterByDate($event)"
                     ></app-multi-datepicker>
-                    <mat-error *ngIf="!validate.getDates()">Please select the dates</mat-error>
                 </div>
                 <div class="form-group content custom-width dropdown-height">
                     <app-drop-down
@@ -885,9 +916,10 @@
                 <div class="form-group content">
                     <app-multi-datepicker
                         #dp
+                        [validate]="validate.getDates()"
+                        [errorMessage]="'Please select the dates'"
                         (selectedDate)="filterByDate($event)"
                     ></app-multi-datepicker>
-                    <mat-error *ngIf="!validate.getDates()">Please select the dates</mat-error>
                 </div>
                 <div class="form-group content custom-width dropdown-height">
                     <app-drop-down
@@ -919,7 +951,12 @@
           Report
                 </button>
                 <div class="grey-dropdown form-group content select-users-list">
-                    <app-tech-users-list-report (onChange)="onSelectTechUser($event)"></app-tech-users-list-report>
+                    <app-tech-users-list-report
+                        [sort]="true"
+                        [search]="true"
+                        [change]="true"
+                        (onSelectedItem)="onSelectTechUser($event)"
+                    ></app-tech-users-list-report>
                 </div>
                 <div class="form-group content">
                     <app-multi-datepicker

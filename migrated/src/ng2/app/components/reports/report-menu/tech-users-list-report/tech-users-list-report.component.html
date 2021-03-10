@@ -2,23 +2,30 @@
     class="light-dropdown"
     ngbDropdown
 >
+    <mat-error
+        class="app-drop-down__error qt-tooltip-error mat-error"
+        *ngIf="!validate"
+        [textContent]="errorMessage"
+    >
+    </mat-error>
     <input
+        [ngClass]="{'--input-error' : !validate}"
         type="text"
         [value]="getSelectedUser()"
         autocomplete="new-password"
         placeholder="Tech users"
         id="dropdown1"
-        (input)="onSearch($event)"
+        (input)="onCheckAdd($event)"
         ngbDropdownToggle
     >
-    <span *ngIf="usersList">
+    <span *ngIf="list">
         <i
-            *ngIf="selectedUser"
+            *ngIf="selectedItem"
             class="icn-sm icn-remove-old"
             (click)="clearClient($event)"
         ></i>
         <i
-            *ngIf="!selectedUser"
+            *ngIf="!selectedItem"
             class="icn-sm report-caret-icon"
         ></i>
     </span>
@@ -29,7 +36,7 @@
         <ng-template
             ngFor
             let-user
-            [ngForOf]="usersList"
+            [ngForOf]="list"
             let-i="index"
             [ngForTrackBy]="trackByIndex"
         >

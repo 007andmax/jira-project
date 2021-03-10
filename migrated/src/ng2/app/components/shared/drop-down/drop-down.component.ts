@@ -39,7 +39,7 @@ export class DropDownComponent implements OnInit {
   reqList = [];
 
   public isAdd: boolean = false;
-  constructor(private elRef: ElementRef,) { }
+  constructor(public elRef: ElementRef,) { }
 
   ngOnInit() {
     if (this.class.length > 0) this.class = this.class;
