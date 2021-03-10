@@ -141,7 +141,6 @@ export class ReportMenuComponent implements OnInit {
              1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));*/
         }
         this.softwareSummaryReport.setDevices(resp[companyId]);
-        console.log("resp[companyId]", resp[companyId]);
         this.hardwareSummaryReport.setDevices(resp[companyId]);
         this.deviceIpSummary.setDevices(resp[companyId]);
       }
@@ -213,7 +212,6 @@ export class ReportMenuComponent implements OnInit {
     if (data === 'Summary') this.validate.resetCompany();
   }
   public selectClient(selectClient) {
-    console.log("selectClient", selectClient);
     if (selectClient == null) {
       this.accountsReceivable.setClientCompanyId(null);
       this.selectedClient = null;
@@ -300,19 +298,15 @@ export class ReportMenuComponent implements OnInit {
   getReportByHardwareSummary() {
     if (!this.validate.isValidateHardwareSummary(this.hardwareSummaryReport.companyId)) return;
     this.onRequest.emit(true);
-    console.log("this.hardwareSummaryReport", this.hardwareSummaryReport);
     this.setDatareport(this.hardwareSummaryReport)
   }
   getReportByDeviceIpSummary() {
     if (!this.validate.isValidateHardwareSummary(this.deviceIpSummary.companyId)) return;
     this.onRequest.emit(true);
-    console.log("this.deviceIpSummary", this.deviceIpSummary);
     this.setDatareport(this.deviceIpSummary)
   }
   getReportBySoftwareSummary() {
     if (!this.validate.isValidateSoftwareSummary(this.softwareSummaryReport.companyId)) return;
-
-    console.log("this.softwareSummaryReport", this.softwareSummaryReport);
     this.setDatareport(this.softwareSummaryReport)
 
   }

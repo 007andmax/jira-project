@@ -25,16 +25,12 @@ export class DeviceIpSummaryReportComponent implements OnInit {
     this.loadingInProgress = true;
     this.deviceIpSummary = new DeviceIpSummary(JSON.parse(JSON.stringify(data)));
     this.company = this.companiesStateService.getCompanies().find(item => item.id == this.deviceIpSummary.companyId);
-    console.log("this.company", this.company);
-
-
     setTimeout(() => {
       this.onInit = true;
       this.loadingInProgress = false;
       this.cd.detectChanges();
 
     }, 1000);
-    console.log("this.deviceIpSummary", this.deviceIpSummary);
   }
   public parseHTML(data) {
     var parser = new DOMParser();

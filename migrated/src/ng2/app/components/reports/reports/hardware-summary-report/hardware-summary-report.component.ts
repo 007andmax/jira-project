@@ -23,7 +23,6 @@ export class HardwareSummaryReportComponent implements OnInit {
     this.loadingInProgress = true;
     this.hardwareSummaryReport = new HardwareSummaryReport(JSON.parse(JSON.stringify(data)));
     this.company = this.companiesStateService.getCompanies().find(item => item.id == this.hardwareSummaryReport.companyId);
-    console.log("this.company", this.company);
     //  this.techUser = this.usersStateService.getAllUsers().find(item => item.id === this.techService.techUserId);
     setTimeout(() => {
       this.onInit = true;

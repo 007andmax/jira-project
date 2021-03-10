@@ -63,28 +63,22 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
     })
   }
   private getUsersList() {
-
     if (this.usersStateService.getAllUsers().length > 0) this.setUserList(this.usersStateService.getAllUsers());
     this.usersStateService.getOnUsers().subscribe((data) => {
       this.setUserList(data);
     })
-
   }
   private setUserList(data) {
-    console.log("this.selectedClient", this.selectedClient);
     this.reqUsersList = data.filter(item => ((this.selectedClient == null && this.accountType != null) ? item.accountType == this.accountType && !item.deletedAt : false) || ((this.accountType != null) ? item.accountType === this.accountType : true) && ((this.selectedClient !== null) ? (item.accountType === 'TECH' || item.company.id === this.selectedClient.id) : true) && !item.deletedAt && item.primaryEmail !== '').sort((a, b) => (a.primaryEmail.toLowerCase() > b.primaryEmail.toLowerCase()) ?
       1 : ((b.primaryEmail.toLowerCase() > a.primaryEmail.toLowerCase()) ? -1 : 0));
     this.userList = data.filter(item => ((this.selectedClient == null && this.accountType != null) ? item.accountType == this.accountType && !item.deletedAt : false) || ((this.accountType != null) ? item.accountType === this.accountType : true) && ((this.selectedClient !== null) ? (item.accountType === 'TECH' || item.company.id === this.selectedClient.id) : true) && !item.deletedAt && item.primaryEmail !== '').sort((a, b) => (a.primaryEmail.toLowerCase() > b.primaryEmail.toLowerCase()) ?
       1 : ((b.primaryEmail.toLowerCase() > a.primaryEmail.toLowerCase()) ? -1 : 0));
-
     this.usersSelected.forEach(item => {
       if (item.primaryEmail !== '') {
         this.selectedUsers.push(item.primaryEmail);
         this.userEmails.push(item.primaryEmail);
       }
-
     })
-
     this.onCompanyEmails.emit(this.userEmails);
   }
 

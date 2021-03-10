@@ -37,9 +37,7 @@ export class DeviceIpSummary {
             } else {
                 this.list = this.devices;
             }
-            console.log("this.list", this.list);
             this.list.sort((a, b) => ((a.label || a.hostName).toLowerCase() > (b.label || b.hostName).toLowerCase()) ? 1 : (((b.label || b.hostName).toLowerCase() > (a.label || a.hostName).toLowerCase()) ? -1 : 0));
-
         }
     }
 

@@ -17,7 +17,6 @@ export class ItemReportComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (localStorage.report) this.report = localStorage.report;
-    console.log("this.report", this.report);
   }
   back() {
 

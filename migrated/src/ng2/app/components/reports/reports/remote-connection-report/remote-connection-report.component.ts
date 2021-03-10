@@ -22,9 +22,6 @@ export class RemoteConnectionReportComponent implements OnInit {
   public getReport(data) {
     this.remoteConnectionReport = new RemoteConnectionReport(JSON.parse(JSON.stringify(data)));
     this.selectedClient = this.companiesStateService.getCompanies().find(item => item.id === this.remoteConnectionReport.companyId);
-    //  this.commonCommissionsReport = new CommonCommissionsReport(JSON.parse(JSON.stringify(data)));
-    console.log("this.remoteConnectionReport", this.remoteConnectionReport);
-    //  this.techUser = this.usersStateService.getAllUsers().find(item => item.id === this.techService.techUserId);
     this.onInit = true;
   }
   public parseDate(data) {

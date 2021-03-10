@@ -22,10 +22,7 @@ export class SoftwareSummaryReportComponent implements OnInit {
     this.loadingInProgress = true;
     this.softwareSummaryReport = new SoftwareSummaryReport(JSON.parse(JSON.stringify(data)));
     this.company = this.companiesStateService.getCompanies().find(item => item.id == this.softwareSummaryReport.companyId);
-    console.log("this.company ", this.company);
-
     if (this.softwareSummaryReport.deviceId) this.softwareSummaryReport.devices = this.softwareSummaryReport.devices.filter((item) => item.id === this.softwareSummaryReport.deviceId);
-
     this.softwareSummaryReport.devices.map((item) => {
       if (item.report && item.report && item.report.softList) {
         item.report.softList.map((soft) => {
@@ -53,8 +50,6 @@ export class SoftwareSummaryReportComponent implements OnInit {
     }
     this.softwareSummaryReport.list = this.softwareSummaryReport.list.sort((a, b) => (a.device.toLowerCase() > b.device.toLowerCase() || a.softwareTitle.toLowerCase() > b.softwareTitle.toLowerCase()) ?
       1 : ((b.device.toLowerCase() > a.device.toLowerCase() || b.softwareTitle.toLowerCase() > a.softwareTitle.toLowerCase()) ? -1 : 0));
-    console.log("this.softwareSummaryReport", this.softwareSummaryReport);
-    //  this.techUser = this.usersStateService.getAllUsers().find(item => item.id === this.techService.techUserId);
     setTimeout(() => {
       this.onInit = true;
       this.loadingInProgress = false;
@@ -62,7 +57,4 @@ export class SoftwareSummaryReportComponent implements OnInit {
 
     }, 1000);
   }
-
-
-
 }

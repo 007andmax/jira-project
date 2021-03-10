@@ -61,9 +61,7 @@ export class TechSalesReportComponent implements OnInit {
     };
   }
   public getReport(data) {
-
     this.techSalesReport = new TechSalesReport(JSON.parse(JSON.stringify(data)));
-    console.log("this.techSalesReport", this.techSalesReport);
     this.chartData = [];
     if (this.techSalesReport.lines.length > 0) {
       if (this.techSalesReport.selectedType.type === "BILLED_TIME") {
@@ -107,10 +105,8 @@ export class TechSalesReportComponent implements OnInit {
       }
       this.chartOptionsToggler = this.chartOptions;
     } else {
-
       this.chartOptionsToggler = this.chartNoDataAvailable;
     }
-    console.log("this.chartData", this.chartData);
     this.onInit = true;
   }
 

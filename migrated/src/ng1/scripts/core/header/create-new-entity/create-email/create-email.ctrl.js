@@ -234,19 +234,16 @@
         }
 
         if ($scope.allUsersEmails) {
-          console.log("1");
           $scope.filteredUsersEmails = $scope.allUsersEmails.filter(function (el) {
             return el;
           });
           $scope.$watch('newEmail', function (val) {
-            console.log("2");
             if (val === undefined) return;
             $scope.filteredUsersEmails = $scope.allUsersEmails.filter(function (el) {
               return el && el.includes(val);
             })
           })
         } else {
-          console.log("3");
           $scope.isReportEmail = true;
           $scope.filteredUsersEmails = $scope.$parent.$ctrl.tempUsers.concat($scope.users)
             .map(function (el) {
@@ -257,7 +254,6 @@
             })
           $scope.$watch('newEmail', function (val) {
             if (val === undefined) return;
-            console.log("4");
             $scope.filteredUsersEmails = $scope.$parent.$ctrl.tempUsers.concat($scope.users)
               .map(function (el) {
                 return el.primaryEmail;

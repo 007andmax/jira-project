@@ -38,7 +38,6 @@ export class QuoteAsideEditComponent implements OnInit, OnDestroy {
   ngOnInit() {
     let getOnEdit = this.quoteStateService.getOnEdit().subscribe(quote => {
       this.open = true;
-      console.log("this.open", this.open);
     })
     this.sub.add(getOnEdit);
     let getHandleSendModeEdit = this.quoteStateService.getHandleSendModeEdit().subscribe(data => {

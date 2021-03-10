@@ -46,13 +46,11 @@ export class TechTicketReportComponent implements OnInit {
         },
         multibar: {
           valueFormat: function (n) {
-            console.log(n);
             return d3.format(',f')(n);
           }
         },
         yAxis: {
           tickFormat: function (d) {
-
             return d3.format('')(d);
           }
         },
@@ -69,9 +67,7 @@ export class TechTicketReportComponent implements OnInit {
     };
   }
   public getReport(data) {
-
     this.techTicketReport = new TechTicketReport(JSON.parse(JSON.stringify(data)));
-    console.log("this.techTicketReport", this.techTicketReport);
     this.chartData = [];
     if (this.techTicketReport.lines.length > 0) {
       var valueClosed = [];
@@ -109,7 +105,6 @@ export class TechTicketReportComponent implements OnInit {
       this.chartOptionsToggler = this.chartNoDataAvailable;
     }
     this.onInit = true;
-    console.log("this.chartData", this.chartData);
   }
 
   public getDateForHeader(data) {
