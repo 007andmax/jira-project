@@ -38,6 +38,8 @@ export class TechTicketReport {
     }
     public setDataFromRequest(data) {
         this.lines = (data.lines) ? data.lines.map(item => new TechTicketItem(item)) : [];
+        this.totalClosed = data.totalClosed;
+        this.totalCreated = data.totalCreated;
     }
 
     public setDuration(data) {

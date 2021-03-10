@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { DeviceIpSummary } from '../../class/device-ip-summary';
 
@@ -14,6 +15,7 @@ export class DeviceIpSummaryReportComponent implements OnInit {
   company: any;
   deviceIpSummary: DeviceIpSummary = new DeviceIpSummary();
   constructor(public cd: ChangeDetectorRef,
+    private domSanitizer: DomSanitizer,
     private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
@@ -34,6 +36,11 @@ export class DeviceIpSummaryReportComponent implements OnInit {
     }, 1000);
     console.log("this.deviceIpSummary", this.deviceIpSummary);
   }
+  public parseHTML(data) {
+    var parser = new DOMParser();
+
+    return parser.parseFromString(data, 'text/html');
+  }
   getDeviceReport(device, params) {
     var currentItem = '';
     if (device.report) {
@@ -42,7 +49,7 @@ export class DeviceIpSummaryReportComponent implements OnInit {
       });
       if (params === 'dns' || 'subnet') {
         var regex = /;/gi;
-        currentItem = currentItem.replace(regex, '</br>');
+        currentItem = currentItem.replace(regex, "\n");
         return currentItem;
       } else {
         return currentItem;

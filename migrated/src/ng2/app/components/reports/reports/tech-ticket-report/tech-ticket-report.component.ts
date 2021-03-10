@@ -35,16 +35,24 @@ export class TechTicketReportComponent implements OnInit {
           return d.label;
         },
         y: function (d) {
+
           return d.value;
         },
         showControls: false,
         showValues: true,
         duration: 500,
         xAxis: {
-          showMaxMin: false
+          showMaxMin: false,
+        },
+        multibar: {
+          valueFormat: function (n) {
+            console.log(n);
+            return d3.format(',f')(n);
+          }
         },
         yAxis: {
           tickFormat: function (d) {
+
             return d3.format('')(d);
           }
         },
@@ -101,6 +109,7 @@ export class TechTicketReportComponent implements OnInit {
       this.chartOptionsToggler = this.chartNoDataAvailable;
     }
     this.onInit = true;
+    console.log("this.chartData", this.chartData);
   }
 
   public getDateForHeader(data) {

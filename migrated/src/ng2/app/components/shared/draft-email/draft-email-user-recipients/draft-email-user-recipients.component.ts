@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { FormControl } from '@angular/forms';
-import { MatAutocomplete,  } from '@angular/material';
+import { MatAutocomplete, } from '@angular/material';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { DraftEmailStateService } from 'src/ng2/app/states/draft-email/draft-email-state.service';
 import { User } from '../../../users/class/user';
@@ -71,6 +71,7 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
 
   }
   private setUserList(data) {
+    console.log("this.selectedClient", this.selectedClient);
     this.reqUsersList = data.filter(item => ((this.selectedClient == null && this.accountType != null) ? item.accountType == this.accountType && !item.deletedAt : false) || ((this.accountType != null) ? item.accountType === this.accountType : true) && ((this.selectedClient !== null) ? (item.accountType === 'TECH' || item.company.id === this.selectedClient.id) : true) && !item.deletedAt && item.primaryEmail !== '').sort((a, b) => (a.primaryEmail.toLowerCase() > b.primaryEmail.toLowerCase()) ?
       1 : ((b.primaryEmail.toLowerCase() > a.primaryEmail.toLowerCase()) ? -1 : 0));
     this.userList = data.filter(item => ((this.selectedClient == null && this.accountType != null) ? item.accountType == this.accountType && !item.deletedAt : false) || ((this.accountType != null) ? item.accountType === this.accountType : true) && ((this.selectedClient !== null) ? (item.accountType === 'TECH' || item.company.id === this.selectedClient.id) : true) && !item.deletedAt && item.primaryEmail !== '').sort((a, b) => (a.primaryEmail.toLowerCase() > b.primaryEmail.toLowerCase()) ?

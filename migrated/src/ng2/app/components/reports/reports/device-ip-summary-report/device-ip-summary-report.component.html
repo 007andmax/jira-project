@@ -145,7 +145,7 @@
                                 class="col-md-1"
                                 *ngIf="deviceIpSummary.deviceIpSummaryWithSubnet"
                             >
-                                {{getDeviceReport(device, 'dns')}}
+                                <p>{{ getDeviceReport(device, 'dns')}}</p>
                             </div>
                             <div
                                 class="col-md-1"
@@ -157,13 +157,13 @@
                                 class="col-md-1"
                                 *ngIf="deviceIpSummary.deviceIpSummaryWithDns1"
                             >
-                                {{getDeviceReport(device, 'dns')}}
+                                <p>{{getDeviceReport(device, 'dns')}}</p>
                             </div>
                             <div
                                 class="col-md-1"
                                 *ngIf="deviceIpSummary.deviceIpSummaryWithDns2"
                             >
-                                {{getDeviceReport(device, 'dns')}}
+                                <p>{{getDeviceReport(device, 'dns')}}</p>
                             </div>
                             <div
                                 class="col-md-1"

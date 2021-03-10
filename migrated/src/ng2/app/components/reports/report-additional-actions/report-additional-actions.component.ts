@@ -28,7 +28,7 @@ export class ReportAdditionalActionsComponent implements OnInit, OnDestroy {
   @Input() id: string = null;
   @Input() template: string = "PDF_TEMPLATE";
   @Input() accountType = 'CLIENT';
-  @Input() selectedClient;
+  @Input() selectedClient = null;
   @Output() changePurchaseCost = new EventEmitter<any>();
   constructor(private reportsService: ReportsService,
     private reportsStateService: ReportsStateService,
