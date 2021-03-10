@@ -513,23 +513,27 @@ export class ReportMenuComponent implements OnInit {
       this.techSalesReport.setStartDate(moment(value.start).format('YYYY/MM/DD'));
       this.techSalesReport.setEndDate(moment(value.end).format('YYYY/MM/DD'));
       this.techSalesReport.resetDuration();
+      this.techSalesReport.setDisabledDuration(true);
 
       this.techTicketReport.setStartDate(moment(value.start).format('YYYY/MM/DD'));
       this.techTicketReport.setEndDate(moment(value.end).format('YYYY/MM/DD'));
       this.techTicketReport.resetDuration();
+      this.techTicketReport.setDisabledDuration(true);
 
-      this.durationsTechSaleDP.clearWithOutChanges();
+      if (this.durationsTechSaleDP) this.durationsTechSaleDP.clearWithOutChanges();
       this.remoteConnectionReport.setStartDate(moment(value.start).format('YYYY/MM/DD'));
       this.remoteConnectionReport.setEndDate(moment(value.end).format('YYYY/MM/DD'));
       this.validate.resetDates();
       this.validate.resetMonthlyDetailed();
+
     } else {
       this.techSalesReport.resetDates();
       this.techSalesReport.setDefaultDuration();
-
+      this.techSalesReport.setDisabledDuration(false);
 
       this.techTicketReport.resetDates();
       this.techTicketReport.setDefaultDuration();
+      this.techTicketReport.setDisabledDuration(false);
 
       this.accountingReport.resetDates();
       this.glNumber.resetDates();

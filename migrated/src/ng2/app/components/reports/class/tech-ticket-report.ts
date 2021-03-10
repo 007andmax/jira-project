@@ -14,6 +14,7 @@ export class TechTicketReport {
     endDate: string = '';
     totalClosed: number;
     totalCreated: number;
+    isDisabledDuration: boolean = false;
     constructor(data = null) {
         if (data) {
             this.lines = data.lines;
@@ -24,7 +25,9 @@ export class TechTicketReport {
             this.endDate = data.endDate;
         }
     }
-
+    public setDisabledDuration(data) {
+        this.isDisabledDuration = data;
+    }
     public getForRequest() {
         return {
             dateRangeType: (this.selectedDuration) ? this.selectedDuration.type : "CUSTOM",

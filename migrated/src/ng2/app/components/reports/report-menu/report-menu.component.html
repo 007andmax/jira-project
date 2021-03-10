@@ -24,6 +24,8 @@
                         #durationsTechSaleDP
                         [placeholder]="'No interval'"
                         [list]="techTicketReport.durations"
+                        [sort]="false"
+                        [isDisabled]="techTicketReport.isDisabledDuration"
                         [editItem]="techTicketReport.selectedDuration"
                         [dropdownHeight]="'175px'"
                         [field]="'title'"
@@ -58,9 +60,11 @@
                         #durationsTechSaleDP
                         [placeholder]="'No interval'"
                         [list]="techSalesReport.durations"
+                        [isDisabled]="techTicketReport.isDisabledDuration"
                         [editItem]="techSalesReport.selectedDuration"
                         [dropdownHeight]="'175px'"
                         [field]="'title'"
+                        [sort]="false"
                         [isBlockClear]="true"
                         (onSelectedItem)="onSelectDurationTechSale($event)"
                     ></app-drop-down>
