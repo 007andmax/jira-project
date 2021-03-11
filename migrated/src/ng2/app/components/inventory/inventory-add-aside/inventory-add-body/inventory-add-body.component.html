@@ -21,18 +21,20 @@
             >
         </div>
         <div class="create-product__col --required">
-          <mat-error
-            class="qt-tooltip-error"
-          >
-            This number already occupied
-          </mat-error>
-          <p class="label-name">ILC Number</p>
-          <input
-            type="text"
-            class="qt-input-40 inventory-add-body__input"
-            (blur)="onCheckManufacture()"
-            placeholder="Enter ILC Number"
-          >
+            <mat-error
+                class="qt-tooltip-error"
+                *ngIf="!validate.getILCIsExist()"
+            >
+                This number already occupied
+            </mat-error>
+            <p class="label-name">ILC Number</p>
+            <input
+                type="text"
+                class="qt-input-40 inventory-add-body__input"
+                [(ngModel)]="inventory.ilc"
+                (blur)="onCheckILC()"
+                placeholder="Enter ILC Number"
+            >
         </div>
         <div class="create-product__col">
             <p class="label-name">GL Number</p>
@@ -56,7 +58,10 @@
             Description is required
         </mat-error>
         <p class="label-name">Description</p>
-        <div class="editable-description" [ngClass]="{'--input-error' : !validate.getDescription()}">
+        <div
+            class="editable-description"
+            [ngClass]="{'--input-error' : !validate.getDescription()}"
+        >
             <textarea
                 appTextArea
                 [limit]="160"
@@ -118,28 +123,6 @@
     </div>
     <div class="qt-inputs-row">
         <div class="create-product__col select-open-top --required">
-            <!-- <mat-error
-                class="qt-tooltip-error"
-                *ngIf="!validate.getCategory()"
-            >
-                Category is required
-            </mat-error>
-            <p class="label-name">Category</p>
-            <app-select-search
-                [ngClass]="{'--input-error' : !validate.getCategory()}"
-                [class]="['light-dropdown', 'qt-select-input-40']"
-                [list]="categories"
-                #categoriesSelect
-                [placeholder]="'Select Category'"
-                [field]="'name'"
-                [add]="true"
-                (onAddItem)="onAddCategory($event)"
-                (onSelectedItem)="onSelectCategory($event)"
-            ></app-select-search> -->
-
-
-
-
             <app-drop-down
                 #categoriesSelect
                 [class]="['light-dropdown', 'qt-select-input-40']"
@@ -178,7 +161,7 @@
             class="qt-button qt-mr-12"
             (click)="add()"
         >
-          Create Product
+            Create Product
         </button>
         <button
             class="qt-button --gray"

@@ -9,17 +9,10 @@
             (click)="close()"
         ></div>
     </div>
-
-
-
     <div class="qt-aside-modern__content --less-padding new-companies-content__modal--content advanced">
-
-
         <div class="col-md-4">
             <mat-error *ngIf="!validate.getManufactureIsExist()">This number already occupied</mat-error>
-
-
-            <p>Item number</p>
+            <p>Item Number</p>
             <input
                 type="text"
                 [(ngModel)]="inventory.manufacture"
@@ -27,8 +20,6 @@
                 placeholder="Enter Item number"
             >
         </div>
-
-
         <div class="col-md-4">
             <mat-error *ngIf="!validate.getILCIsExist()">This number already occupied</mat-error>
             <p>ILC number</p>
@@ -39,8 +30,6 @@
                 placeholder="Enter ILC number"
             >
         </div>
-
-
         <div class="col-md-4">
             <p>GL number</p>
             <app-select-search
@@ -54,11 +43,7 @@
                 (onAddItem)="onAddGlNumber($event)"
                 (onSelectedItem)="onSelectGlNumbers($event)"
             ></app-select-search>
-
-
         </div>
-
-
         <div class="col-md-12">
             <mat-error *ngIf="!validate.getDescription()">Description is required</mat-error>
             <p>Description</p>
@@ -67,16 +52,12 @@
                     appTextArea
                     [limit]="160"
                     id="inventory-description"
-                    placeholder="Write Description"
+                    placeholder="Write Product Description"
                     (input)="onChangeDescription($event)"
                     (onPast)="onPastDescription($event)"
                 ></textarea>
             </div>
-
-
         </div>
-
-
         <app-taxes (taxesChange)="onTaxesChange($event)"></app-taxes>
         <div
             class="col-md-6"
@@ -96,8 +77,6 @@
                 placeholder="Enter Cost"
             >
         </div>
-
-
         <div class="col-md-3">
             <mat-error *ngIf="!validate.getSale()">Price is required</mat-error>
             <p>Price</p>
@@ -111,8 +90,6 @@
                 placeholder="Enter Price"
             >
         </div>
-
-
         <div class="col-md-12">
             <mat-error *ngIf="!validate.getCategory()">Category is required</mat-error>
             <p>Category</p>
@@ -128,9 +105,6 @@
                 (onSelectedItem)="onSelectCategory($event)"
             ></app-select-search>
         </div>
-
-
-
         <div class="col-md-12">
             <p>Vendors</p>
             <app-select-search
@@ -138,14 +112,12 @@
                 [list]="vendors"
                 #vendorsSelect
                 [field]="'name'"
-                [placeholder]="'Select Company'"
+                [placeholder]="'Select Vendor'"
                 [editItem]="editVendor"
                 (onSelectedItem)="onSelectVendor($event)"
             ></app-select-search>
         </div>
     </div>
-
-
     <div class="qt-aside-modern__footer">
         <div class="d-f">
             <button
