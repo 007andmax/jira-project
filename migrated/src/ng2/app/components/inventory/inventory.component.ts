@@ -35,8 +35,9 @@ export class InventoryComponent implements OnInit {
   productSearchName: string = '';
   sub: Subscription = new Subscription();
   taxes: Array<Tax> = [];
-  showAddCategory: boolean = false;
-  constructor(private productService: ProductService, private inventoryListService: InventoryListService,
+
+  constructor(private productService: ProductService,
+    private inventoryListService: InventoryListService,
     private companiesStateService: CompaniesStateService,
     private taxesStateService: TaxesStateService,
     private glNumberStateService: GlNumberStateService,
@@ -126,9 +127,7 @@ export class InventoryComponent implements OnInit {
       this.cd.detectChanges();
     });
   }
-  addProduct() {
-    this.inventoryStateService.toggleAsideForAdd();
-  }
+
   getProducts() {
     if (this.inventoryListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
@@ -149,7 +148,8 @@ export class InventoryComponent implements OnInit {
     if ((this.page_number * 30) > listFilter.length) this.inventoryListService.setBlockList(true);
     this.cd.detectChanges();
   }
-  onSearch() {
+  onSearch(data) {
+    this.productSearchName = data;
     this.page_number = 0;
     this.inventoryListService.setBlockList(false);
     this.inventoryList = [];

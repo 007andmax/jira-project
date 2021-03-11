@@ -119,101 +119,10 @@
 <!-- </div> -->
 <!-- </div> -->
 <div class="qt-page-list products-page">
-    <div class="qt-page-list__header --sticky">
-
-
-        <div class="qt-page-list__header-title-line">
-            <div class="qt-page-list__header-title-line--left">
-                <h3
-                    class="qt-page-list__header-title"
-                    [textContent]="'Products'"
-                ></h3>
-            </div>
-            <div class="qt-page-list__header-title-line--rigth">
-                <div class="qt-df qt-ai-c">
-                    <div class="products-page__search">
-                        <input
-                            type="text"
-                            placeholder="Search Products…"
-                            (input)="onSearch()"
-                            [(ngModel)]="productSearchName"
-                        >
-                    </div>
-                    <button class="qt-btn btn-filter d-f">Filters</button>
-                    <!-- add class 'active' if filters open -->
-                    <button
-                        class="qt-btn --outline-blue qt-ml-8"
-                        *ngIf="getPermissions('MANAGE_PRODUCTS')"
-                        (click)="addProduct()"
-                    >
-                        Create Product
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="qt-page-list__header-filters">
-            <app-drop-down
-                #titlesDp
-                class="products-page__category-btn qt-mr-8"
-                [heightInput]="'36px'"
-                [placeholder]="'Select Category'"
-                [list]="[]"
-                [search]="true"
-                [change]="true"
-            ></app-drop-down>
-            <button
-                class="qt-btn"
-                (click)="showAddCategory = true"
-            >
-                Add Category
-            </button>
-        </div>
-        <inventory-add-category
-            *ngIf="showAddCategory"
-            (onClose)="showAddCategory = false"
-        ></inventory-add-category>
-        <div class="qt-page-list__header-thead-container">
-            <table class="qt-table-modern qt-page-list__header-thead">
-                <thead>
-                    <tr>
-                        <th class="products-table__product-name pointer">
-                            Product Name
-                            <span class="qt-table-modern__sorting"></span>
-                        </th>
-                        <th class="products-table__category pointer">
-                            Category
-                            <span class="qt-table-modern__sorting"></span>
-                        </th>
-                        <th class="products-table__cost pointer">
-                            Cost
-                            <span class="qt-table-modern__sorting"></span>
-                        </th>
-                        <th class="products-table__sale-price pointer">
-                            Sale Price
-                            <span class="qt-table-modern__sorting"></span>
-                        </th>
-                        <th class="products-table__mfg pointer">
-                            #Mfg
-                            <span class="qt-table-modern__sorting"></span>
-                        </th>
-                        <th class="products-table__tac pointer">
-                            Tax
-                            <span class="qt-table-modern__sorting"></span>
-                        </th>
-                        <th class="products-table__ilc">
-                            ILC
-                            <span class="qt-table-modern__sorting"></span>
-                        </th>
-                        <th class="products-table__gl pointer">
-                            GL
-                            <span class="qt-table-modern__sorting"></span>
-                        </th>
-                        <th class="products-table__menu pointer"></th>
-                    </tr>
-                </thead>
-            </table>
-        </div>
-    </div>
+    <inventory-header
+        (onSearch)="onSearch($event)"
+        (onFilter)="onFilter($event)"
+    ></inventory-header>
     <div class="qt-page-list__body">
         <div class="qt-page-list__body-table-container">
             <table class="qt-page-list__body-tbody qt-table-modern products-table">

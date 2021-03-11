@@ -390,6 +390,8 @@ import { ReportListItemComponent } from './components/reports/report-list-item/r
 import { LeftPanelReportsComponent } from './components/left-panel/left-panel-reports/left-panel-reports.component';
 import { BreadcrumbsComponent } from './components/shared/breadcrumbs/breadcrumbs.component';
 import { InventoryAddCategoryComponent } from './components/inventory/inventory-add-category/inventory-add-category.component';
+import { InventoryHeaderComponent } from './components/inventory/inventory-header/inventory-header.component';
+import { InventoryFilterComponent } from './components/inventory/inventory-header/inventory-filter/inventory-filter.component';
 
 /**
  * declare angular
@@ -945,7 +947,9 @@ angular.module('quicktech')
     ReportListItemComponent,
     LeftPanelReportsComponent,
     BreadcrumbsComponent,
-    InventoryAddCategoryComponent
+    InventoryAddCategoryComponent,
+    InventoryHeaderComponent,
+    InventoryFilterComponent
   ],
   imports: [
     BrowserModule,

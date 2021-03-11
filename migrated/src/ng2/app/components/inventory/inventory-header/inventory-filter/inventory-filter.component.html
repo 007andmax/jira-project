@@ -1,0 +1,24 @@
+<div class="qt-page-list__header-filters">
+    <app-drop-down
+        #titlesDp
+        [sort]="true"
+        class="products-page__category-btn qt-mr-8"
+        [heightInput]="'36px'"
+        [placeholder]="'Select Category'"
+        [list]="categories"
+        [field]="'name'"
+        [search]="true"
+        [change]="true"
+        (onSelectedItem)="onSelectCategory($event)"
+    ></app-drop-down>
+    <button
+        class="qt-btn"
+        (click)="showAddCategory = true"
+    >
+        Add Category
+    </button>
+</div>
+<inventory-add-category
+    *ngIf="showAddCategory"
+    (onClose)="showAddCategory = false"
+></inventory-add-category>
