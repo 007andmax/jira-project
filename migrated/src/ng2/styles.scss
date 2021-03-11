@@ -2187,11 +2187,11 @@ ngb-datepicker {
     margin: 0;
   }
 
-  .report-footer {
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-  }
+  //.report-footer {
+  //  position: absolute;
+  //  width: 100%;
+  //  bottom: 0;
+  //}
 }
 
 
@@ -2965,5 +2965,49 @@ input.--input-error {
   color: transparent !important;
 }
 
+.product-list-report {
+  .run-report-content input  {
+    height: 40px;
+  }
 
+  .btn {
+    height: 40px;
+    flex-shrink: 0;
+  }
 
+  .product-list-ticket {
+    padding-bottom: 0;
+  }
+}
+
+.product-list-ticket-tech {
+  .header-product-list-ticket {
+    padding: 0 50px;
+
+    .col-md-3:first-child {
+      padding-left: 0;
+    }
+  }
+}
+
+.product-list-ticket {
+  li.content-product-list-ticket p {
+    height: auto;
+    white-space: pre-line;
+    word-wrap: break-word;
+    font-size: 11px;
+    line-height: 15px;
+  }
+}
+
+.run-report-content {
+  .dropdown-remote-report-tech {
+    margin-right: 10px;
+  }
+}
+
+.product-list___ticket {
+  .product-report-total-sales {
+    padding: 0 100px 0 50px;
+  }
+}
