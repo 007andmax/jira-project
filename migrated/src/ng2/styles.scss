@@ -2987,7 +2987,11 @@ input.--input-error {
     .col-md-3:first-child {
       padding-left: 0;
     }
+    .col-md-3 {
+      width: auto;
+    }
   }
+
 }
 
 .product-list-ticket {
