@@ -6,7 +6,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ElementRef } from '@ang
   styleUrls: ['./drop-down.component.scss']
 })
 export class DropDownComponent implements OnInit {
-  selectedItem = '';
+  selectedItem = null;
 
   @Input() dropdownWidth: string = null;
   @Input() dropdownHeight: string = null;
@@ -65,7 +65,7 @@ export class DropDownComponent implements OnInit {
     if (this.sort) this.reqList.sort((a, b) => (this.field) ? a[this.field].localeCompare(b[this.field]) : a.localeCompare(b));
   }
   addItem() {
-    this.onAddItem.emit(this.selectedItem);
+    this.onAddItem.emit((this.selectedItem) ? this.selectedItem : this.getInputText());
     this.isAdd = false;
   }
   getSelectedItemText() {
