@@ -61,6 +61,9 @@ export class InventoryItem {
         }
         return item;
     }
-
+    public isFindGlNumber(text) {
+        if (!this.glNumber) return false;
+        return this.glNumber.glNumber.toLowerCase().includes(text.toLowerCase());
+    }
 
 }
