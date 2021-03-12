@@ -92,8 +92,26 @@
         </div>
         <div class="col-md-12">
             <mat-error *ngIf="!validate.getCategory()">Category is required</mat-error>
-            <p>Category</p>
-            <app-select-search
+
+
+            <app-drop-down
+                #categoriesSelect
+                [class]="['light-dropdown', 'qt-select-input-40']"
+                [placeholder]="'Select Category'"
+                [validate]="validate.getCategory()"
+                [errorMessage]="'Category is required'"
+                [title]="'Category'"
+                [field]="'name'"
+                [add]="true"
+                [list]="categories"
+                [search]="true"
+                [change]="true"
+                [editItem]="inventory.category"
+                (onAddItem)="onAddCategory($event)"
+                (onSelectedItem)="onSelectCategory($event)"
+            >
+            </app-drop-down>
+            <!-- <app-select-search
                 [class]="['light-dropdown']"
                 [list]="categories"
                 #categoriesSelect
@@ -103,7 +121,7 @@
                 [editItem]="inventory.category"
                 (onAddItem)="onAddCategory($event)"
                 (onSelectedItem)="onSelectCategory($event)"
-            ></app-select-search>
+            ></app-select-search> -->
         </div>
         <div class="col-md-12">
             <p>Vendors</p>

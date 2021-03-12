@@ -15,6 +15,7 @@ import { GlNumberService } from 'src/ng2/app/services/gl-number/gl-number.servic
 import { CompanyProfile } from '../../companies/class/company-profile';
 import { SelectSearchComponent } from '../../shared/select-search/select-search.component';
 import { TextAreaDirective } from 'src/ng2/app/directives/text-area.directive';
+import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 
 @Component({
   selector: 'app-inventory-edit-aside',
@@ -37,7 +38,7 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
   sale: string;
   @ViewChild('addTax') containerAddTax;
   @ViewChild('glNumberSelect') glNumberSelect: SelectSearchComponent;
-  @ViewChild('categoriesSelect') categoriesSelect: SelectSearchComponent;
+  @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
   @ViewChild('vendorsSelect') vendorsSelect: SelectSearchComponent;
   @ViewChild(TextAreaDirective) set appTextArea(directive: TextAreaDirective) {
     this.description = directive;
@@ -71,6 +72,7 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
     if (this.inventoryStateService.getCategories().length > 0) this.categories = this.inventoryStateService.getCategories();
     let getOnCategries = this.inventoryStateService.getOnCategries().subscribe((data) => {
       this.categories = data;
+      this.categoriesSelect.reset();
     })
     this.sub.add(getOnCategries);
     this.onEditInventory();

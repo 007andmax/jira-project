@@ -70,6 +70,7 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
     let getOnCategries = this.inventoryStateService.getOnCategries().subscribe((data) => {
       this.categories = data;
       console.log("this.categories", this.categories);
+      this.categoriesSelect.reset();
     })
     this.sub.add(getOnCategries);
     this.cd.detectChanges();
@@ -99,7 +100,7 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
     this.productService.addCategory(data).subscribe((data: any) => {
       this.inventory.category = data;
       this.validate.resetCategory();
-      this.categoriesSelect.reset();
+
     })
   }
   onSelectCategory(data) {
