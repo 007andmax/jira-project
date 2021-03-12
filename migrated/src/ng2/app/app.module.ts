@@ -399,6 +399,7 @@ import { DeviceIpSummaryReportComponent } from './components/reports/reports/dev
 import { RemoteConnectionReportComponent } from './components/reports/reports/remote-connection-report/remote-connection-report.component';
 import { TechSalesReportComponent } from './components/reports/reports/tech-sales-report/tech-sales-report.component';
 import { TechTicketReportComponent } from './components/reports/reports/tech-ticket-report/tech-ticket-report.component';
+import { KeyUpEnterDirective } from './directives/key-up-enter.directive';
 
 /**
  * declare angular
@@ -963,7 +964,8 @@ angular.module('quicktech')
     DeviceIpSummaryReportComponent,
     RemoteConnectionReportComponent,
     TechSalesReportComponent,
-    TechTicketReportComponent
+    TechTicketReportComponent,
+    KeyUpEnterDirective
   ],
   imports: [
     BrowserModule,

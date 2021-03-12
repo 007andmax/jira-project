@@ -22,7 +22,8 @@
     <input
         type="text"
         (blur)="onSetNumberQuote($event)"
-        placeholder="Enter Quote #"
+        appKeyUpEnter
+        (onChange)="onSetNumberQuote($event)"
         class="qt-mr-8 qt-input h36 filter-quotes quotes-number-filter"
         [(ngModel)]="quotesFilter.quoteNumber"
     >

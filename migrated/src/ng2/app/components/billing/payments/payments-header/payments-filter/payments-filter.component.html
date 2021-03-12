@@ -1,11 +1,36 @@
 <div class="qt-df qt-ai-c">
-  <app-select-search class="search-company invoices-company-filter"  #companyDp  [placeholder]="'Select Company'"
-    [change]="false" [class]="['qt-dropdown']" [field]="'name'" [list]="companies"
-    (onSelectedItem)="onSelectCompany($event)"></app-select-search>
-
-    <app-select-search class="search-company invoices-status-filter"  #statusDp  [placeholder]="'Select Status'"
-    [change]="false" [class]="['qt-dropdown']" [field]="'title'" [list]="statusTypes"
-    (onSelectedItem)="onSelectStatus($event)"></app-select-search>
-  <input type="text" (blur)="onSetNumberInvoice($event)" placeholder="Enter invoice #" class="qt-mr-8 qt-input h36 filter-invoice invoices-number-filter" [(ngModel)]="paymentsFilter.invoiceNumber">
-  <app-multi-datepicker class="qt-input-block invoices-date-filter" #datesDp (selectedDate)="filterByDate($event)"></app-multi-datepicker>
+    <app-select-search
+        class="search-company invoices-company-filter"
+        #companyDp
+        [placeholder]="'Select Company'"
+        [change]="false"
+        [class]="['qt-dropdown']"
+        [field]="'name'"
+        [list]="companies"
+        (onSelectedItem)="onSelectCompany($event)"
+    ></app-select-search>
+    <app-select-search
+        class="search-company invoices-status-filter"
+        #statusDp
+        [placeholder]="'Select Status'"
+        [change]="false"
+        [class]="['qt-dropdown']"
+        [field]="'title'"
+        [list]="statusTypes"
+        (onSelectedItem)="onSelectStatus($event)"
+    ></app-select-search>
+    <input
+        type="text"
+        appKeyUpEnter
+        (onChange)="onSetNumberInvoice($event)"
+        (blur)="onSetNumberInvoice($event)"
+        placeholder="Enter invoice #"
+        class="qt-mr-8 qt-input h36 filter-invoice invoices-number-filter"
+        [(ngModel)]="paymentsFilter.invoiceNumber"
+    >
+    <app-multi-datepicker
+        class="qt-input-block invoices-date-filter"
+        #datesDp
+        (selectedDate)="filterByDate($event)"
+    ></app-multi-datepicker>
 </div>
