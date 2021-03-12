@@ -9,7 +9,7 @@
             (click)="close()"
         ></div>
     </div>
-    <div class="qt-aside-modern__content --less-padding new-companies-content__modal--content advanced">
+    <div class="qt-aside-modern__content qt-pt-0-important --less-padding new-companies-content__modal--content advanced">
         <div class="col-md-4">
             <mat-error *ngIf="!validate.getManufactureIsExist()">This number already occupied</mat-error>
             <p>Item Number</p>
@@ -17,21 +17,21 @@
                 type="text"
                 [(ngModel)]="inventory.manufacture"
                 (blur)="onCheckManufacture()"
-                placeholder="Enter Item number"
+                placeholder="Enter Item Number"
             >
         </div>
         <div class="col-md-4">
             <mat-error *ngIf="!validate.getILCIsExist()">This number already occupied</mat-error>
-            <p>ILC number</p>
+            <p>ILC Number</p>
             <input
                 type="text"
                 [(ngModel)]="inventory.ilc"
                 (blur)="onCheckILC()"
-                placeholder="Enter ILC number"
+                placeholder="Enter ILC Number"
             >
         </div>
         <div class="col-md-4">
-            <p>GL number</p>
+            <p>GL Number</p>
             <app-select-search
                 [class]="['light-dropdown']"
                 [list]="glNumbers"

@@ -11,14 +11,17 @@
         [change]="true"
         (onSelectedItem)="onSelectCategory($event)"
     ></app-drop-down>
-    <button
-        class="qt-btn"
-        (click)="showAddCategory = true"
-    >
-        Add Category
-    </button>
+    <div class="inventory-add-category qt-pos-rel">
+      <button
+          class="qt-btn"
+          (click)="showAddCategory = true"
+      >
+          Add Category
+      </button>
+      <inventory-add-category
+        *ngIf="showAddCategory"
+        (onClose)="showAddCategory = false"
+      ></inventory-add-category>
+    </div>
 </div>
-<inventory-add-category
-    *ngIf="showAddCategory"
-    (onClose)="showAddCategory = false"
-></inventory-add-category>
+

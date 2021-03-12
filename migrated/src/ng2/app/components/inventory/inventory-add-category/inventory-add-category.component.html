@@ -1,13 +1,19 @@
-<p>inventory-add-category works!</p>
-<button
-    class="qt-button qt-mr-12"
-    (click)="save()"
->
-    Save
-</button>
-<button
-    class="qt-button --gray"
-    (click)="close()"
->
-    Cancel
-</button>
+<div class="add-tax-dropdown">
+  <div class="d-inline-block">
+    <div class="tax-title">Add Category</div>
+    <div class="add-tax-label">Category Name</div>
+    <input placeholder="Devices and Media Kit" type="text" class="qt-input-40 input qt-mb-24" required>
+    <div class="d-f">
+      <button class="qt-button qt-mr-12" type="submit"
+        (click)="save()"
+      >
+        Save
+      </button>
+      <button class="qt-button --gray"
+        (click)="close()"
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
