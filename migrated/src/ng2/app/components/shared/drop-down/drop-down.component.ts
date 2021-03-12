@@ -50,6 +50,10 @@ export class DropDownComponent implements OnInit {
     if (this.reqList.length === 0) this.reqList = JSON.parse(JSON.stringify(this.list));
     if (this.editItem) this.selectedItem = (this.field) ? this.editItem : this.editItem;
   }
+  public reset() {
+    if (this.sort) this.list.sort((a, b) => (this.field) ? a[this.field].localeCompare(b[this.field]) : a.localeCompare(b));
+    this.reqList = JSON.parse(JSON.stringify(this.list));
+  }
 
   onCheckAdd(event) {
     if (this.search) this.list = this.reqList.filter(item => (this.field) ? item[this.field].toLowerCase().includes(event.target.value.toLowerCase()) : item.toLowerCase().includes(event.target.value.toLowerCase()))
@@ -67,6 +71,7 @@ export class DropDownComponent implements OnInit {
   addItem() {
     this.onAddItem.emit((this.selectedItem) ? this.selectedItem : this.getInputText());
     this.isAdd = false;
+    this.list = JSON.parse(JSON.stringify(this.reqList));
   }
   getSelectedItemText() {
     return (this.field) ? (this.selectedItem) ? this.selectedItem[this.field] : "" : this.selectedItem;
