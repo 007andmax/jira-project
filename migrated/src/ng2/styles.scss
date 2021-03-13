@@ -1783,6 +1783,17 @@ app-quotes-item {
     }
   }
 }
+.new-companies-content__modal {
+  .icn-product-save {
+    position: absolute;
+    top: calc(50% - 4px) !important;
+    right: 11px;
+  }
+
+  .app-drop-down__right-icon {
+    right: 0;
+  }
+}
 .new-companies-content__list--item {
   position: relative;
   [class*='col-md-'] {
