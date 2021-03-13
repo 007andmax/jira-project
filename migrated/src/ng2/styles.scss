@@ -2850,6 +2850,12 @@ app-ticket-edit-aside-devices  {
     min-height: 190px !important;
     height: fit-content !important;
   }
+
+  .icn-product-save {
+    position: absolute;
+    top: calc(50% - 4px) !important;
+    right: 11px;
+  }
 }
 
 .product-popup-triangle {
