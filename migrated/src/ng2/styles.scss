@@ -1784,7 +1784,7 @@ app-quotes-item {
   }
 }
 .new-companies-content__list--item {
-  position: relative;
+  position: relanpm rtive;
   [class*='col-md-'] {
     align-items: flex-start;
   }
@@ -2983,15 +2983,17 @@ input.--input-error {
 .product-list-ticket-tech {
   .header-product-list-ticket {
     padding: 0 50px;
+    .ticket-total {
+      padding: 19px 6px;
+      line-height: 30px;
+      width: auto;
+      float: left;
+    }
 
-    .col-md-3:first-child {
+    .ticket-total:first-child {
       padding-left: 0;
     }
-    .col-md-3 {
-      width: auto;
-    }
   }
-
 }
 
 .product-list-ticket {
