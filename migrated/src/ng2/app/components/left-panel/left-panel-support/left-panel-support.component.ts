@@ -30,6 +30,9 @@ export class LeftPanelSupportComponent implements OnInit {
       if (this.isSupportPage(data)) this.open = true;
     })
   }
+  public close() {
+    this.open = false;
+  }
   isSupportPage(state) {
     return (state === 'new-quickSupport');
   }

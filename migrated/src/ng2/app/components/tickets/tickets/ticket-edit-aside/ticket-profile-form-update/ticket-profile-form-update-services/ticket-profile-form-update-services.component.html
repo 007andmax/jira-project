@@ -10,16 +10,6 @@
         let-i="index"
         [ngForTrackBy]="trackByIndex"
     >
-
-
-
-
-
-
-
-
-
-
         <div class="service-item">
             <div class="service-item__first-line d-f relative">
                 <app-services-list
@@ -70,16 +60,6 @@
                     [useMinDate]="false"
                     (onChange)="onChangeDatePickerService($event,i)"
                 ></app-date-picker>
-
-
-
-
-
-
-
-
-
-
                 <button
                     class="service-item__btn-del"
                     (click)="removeService(i)"
@@ -93,22 +73,13 @@
                         name="cps-chat"
                         class="cps-block__content-textarea"
                         appTextArea
+                        maxlength="500"
                         [(ngModel)]="service.description"
                         cols="5"
                         rows="1"
                         placeholder="Write ticket conversation here…"
                     ></textarea>
                 </div>
-
-
-
-
-
-
-
-
-
-
             </div>
         </div>
     </ng-template>
@@ -150,16 +121,6 @@
                 [useMinDate]="false"
                 (onChange)="onChangeDatePicker($event)"
             ></app-date-picker>
-
-
-
-
-
-
-
-
-
-
             <button
                 class="service-item__btn-add"
                 (click)="addService()"
@@ -174,23 +135,13 @@
                     class="cps-block__content-textarea"
                     appTextArea
                     [(ngModel)]="currentService.description"
-                    maxlength="250"
+                    maxlength="500"
                     cols="5"
                     rows="1"
                     id="service-description"
                     placeholder="Write ticket conversation here…"
                 ></textarea>
             </div>
-
-
-
-
-
-
-
-
-
-
         </div>
     </div>
 </div>

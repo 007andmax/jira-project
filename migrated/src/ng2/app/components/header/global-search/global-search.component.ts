@@ -64,14 +64,18 @@ export class GlobalSearchComponent implements OnInit {
   showInfo(item: GlobalSearchResultItem) {
     if (item.type === 'COMPANIES') {
       localStorage.setItem("company_id", item.id);
-      let body = document.querySelector('.main-container');
-      var link = document.createElement('a');
-      body.appendChild(link);
-      link.href = `#/ng2/company/dashboard/${item.id}`
-      var e = document.createEvent('MouseEvents');
-      e.initEvent('click', true, true);
-      link.dispatchEvent(e);
-      this.leftPanelStateService.setCompanyPage("company-dashboard");
+
+      this.leftPanelStateService.goToState('company-dashboard');
+
+      this.leftPanelStateService.openCompanPage();
+      /*  let body = document.querySelector('.main-container');
+        var link = document.createElement('a');
+        body.appendChild(link);
+        link.href = `#/ng2/company/dashboard/${item.id}`
+        var e = document.createEvent('MouseEvents');
+        e.initEvent('click', true, true);
+        link.dispatchEvent(e);
+        this.leftPanelStateService.setCompanyPage("company-dashboard");*/
     }
     if (item.type === 'TICKETS') {
       this.ticketsStateService.onOpenTicket();

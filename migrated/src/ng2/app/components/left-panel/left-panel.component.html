@@ -7,26 +7,31 @@
 </div>
 <div class="app-left-panel__body">
     <app-left-panel-support
+        #panelSupport
         (onOpenPanel)="onOpenPanel()"
         (onChangeState)="onChangeState($event)"
         [activePage]="state"
     ></app-left-panel-support>
     <app-left-panel-tickets
+        #panelTickets
         (onOpenPanel)="onOpenPanel()"
         (onChangeState)="onChangeState($event)"
         [activePage]="state"
     ></app-left-panel-tickets>
     <app-left-panel-users
+        #panelUsers
         (onOpenPanel)="onOpenPanel()"
         (onChangeState)="onChangeState($event)"
         [activePage]="state"
     ></app-left-panel-users>
     <app-left-panel-companies
+        #panelCompanies
         (onOpenPanel)="onOpenPanel()"
         (onChangeState)="onChangeState($event)"
         [activePage]="state"
     ></app-left-panel-companies>
     <app-left-panel-billing
+        #panelBilling
         (onOpenPanel)="onOpenPanel()"
         (onChangeState)="onChangeState($event)"
         [activePage]="state"
@@ -45,6 +50,7 @@
         (onChangeState)="onChangeState($event)"
     ></app-left-panel-reports>
     <app-left-panel-settings
+        #panelSettings
         (onOpenPanel)="onOpenPanel()"
         (onChangeState)="onChangeState($event)"
         [activePage]="state"

@@ -1,6 +1,13 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from "@angular/router";
 import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
+import { LeftPanelBillingComponent } from './left-panel-billing/left-panel-billing.component';
+import { LeftPanelCompaniesComponent } from './left-panel-companies/left-panel-companies.component';
+import { LeftPanelCompanyComponent } from './left-panel-company/left-panel-company.component';
+import { LeftPanelSettingsComponent } from './left-panel-settings/left-panel-settings.component';
+import { LeftPanelSupportComponent } from './left-panel-support/left-panel-support.component';
+import { LeftPanelTicketsComponent } from './left-panel-tickets/left-panel-tickets.component';
+import { LeftPanelUsersComponent } from './left-panel-users/left-panel-users.component';
 
 /**
  * Left panel component
@@ -14,6 +21,14 @@ export class LeftPanelComponent implements OnInit {
   public appType: string;
   toggleLeftPanel: boolean = false;
   state: string = '';
+  @ViewChild('panelBilling') panelBilling: LeftPanelBillingComponent;
+  @ViewChild('panelCompanies') panelCompanies: LeftPanelCompaniesComponent;
+
+  @ViewChild('panelSettings') panelSettings: LeftPanelSettingsComponent;
+  @ViewChild('panelSupport') panelSupport: LeftPanelSupportComponent;
+  @ViewChild('panelTickets') panelTickets: LeftPanelTicketsComponent;
+  @ViewChild('panelUsers') panelUsers: LeftPanelUsersComponent;
+
 
   /**
    * Creates an instance of the LeftPanelComponent with the injected services
@@ -86,6 +101,17 @@ export class LeftPanelComponent implements OnInit {
       });
     this.leftPanelStateService.onGoToState.subscribe(data => {
       this.onChangeState(data);
+    })
+    this.leftPanelStateService.onOpenCompanyPage.subscribe(data => {
+      this.panelBilling.close();
+
+      this.panelSettings.close();
+      this.panelSupport.close();
+      this.panelTickets.close();
+      this.panelUsers.close();
+
+      this.panelCompanies.openPanel();
+      this.panelCompanies.togglePanel(true);
     })
 
   }
