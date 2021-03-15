@@ -1,9 +1,34 @@
-<p id="datepairExample" class="start-end-timer">
-	<input type="text" class="time start"/>
-	<input *ngIf="!editMode || editMode && currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'" type="text" class="time end"/>
+<p
+    id="datepairExample"
+    class="start-end-timer"
+>
+    <input
+        type="text"
+        class="time start"
+        [ngClass]="{'--input-error':!validate}"
+    >
+    <input
+        *ngIf="!editMode || editMode && currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'"
+        type="text"
+        class="time end"
+        [ngClass]="{'--input-error':! validate}"
+    >
+    <mat-error
+        class="qt-tooltip-error --max-width"
+        *ngIf="!validate"
+        [textContent]="errorMessage"
+    >
 
+
+
+    </mat-error>
 </p>
-<p *ngIf="editMode && currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER'"
-  class="start-end-timer">
-  <span [textContent]="getEndText()" class="time end"></span>
+<p
+    *ngIf="editMode && currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER'"
+    class="start-end-timer"
+>
+    <span
+        [textContent]="getEndText()"
+        class="time end"
+    ></span>
 </p>

@@ -11,6 +11,7 @@ export class TicketProfileFormService {
     itemOrder: number;
     quantity: number = 0;
     validate: boolean = true;
+    validateQuantity: boolean = true;
     constructor(data = null) {
         if (data) {
             for (const key in data) {
@@ -22,6 +23,12 @@ export class TicketProfileFormService {
             this.durationEnd = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), currentDate.getHours(), currentDate.getMinutes()).getTime();
         }
 
+    }
+    public checkQuantity() {
+        this.setValidateQuantity((this.quantity == 0) ? false : true);
+    }
+    public setValidateQuantity(data) {
+        this.validateQuantity = data;
     }
     public checkValidate() {
         if (this.item) {
@@ -88,8 +95,10 @@ export class TicketProfileFormService {
         if (this.durationStart - this.durationEnd > 0) durationEnd = this.durationEnd + 24 * 3600000;
         this.quantity = (durationEnd - this.durationStart) / 3600000 > 0 ? (durationEnd - this.durationStart) / 3600000 : 0;
         if (this.quantity > 24) this.quantity -= 24;
+        this.setValidateQuantity(true);
     }
     public setQuantity(data) {
         this.quantity = data;
+        this.setValidateQuantity(true);
     }
 }

@@ -1,7 +1,31 @@
-<igx-time-picker id="timepicker2" #picker format="HH:mm"  placeholder="time" [itemsDelta]="{hours:1, minutes:step}" (click)="show()" [vertical]="true" [mode]="mode" [value]="date" (onOpened)="onOpened($event)" (onClosed)="onClosed()">
-  <ng-template igxTimePickerActions>
-    <div class="container action-buttons">
-        <button igxButton="flat" (click)="picker.okButtonClick();onSelected()">Set it</button>
-    </div>
-</ng-template>
+<igx-time-picker
+    id="timepicker2"
+    #picker
+    [ngClass]="{'--input-error-validate':!validate}"
+    format="HH:mm"
+    placeholder="time"
+    [itemsDelta]="{hours:1, minutes:step}"
+    (click)="show()"
+    [vertical]="true"
+    [mode]="mode"
+    [value]="date"
+    (onOpened)="onOpened($event)"
+    (onClosed)="onClosed()"
+>
+    <ng-template igxTimePickerActions>
+        <div class="container action-buttons">
+            <button
+                igxButton="flat"
+                (click)="picker.okButtonClick();onSelected()"
+            >
+                Set it
+            </button>
+        </div>
+    </ng-template>
 </igx-time-picker>
+<mat-error
+    class="qt-tooltip-error --max-width"
+    *ngIf="!validate"
+    [textContent]="errorMessage"
+>
+</mat-error>
