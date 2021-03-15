@@ -11,6 +11,7 @@ import { Payment } from './class/payment';
 import { NotificationStateService } from '../../../shared/notification/services/notification-state.service';
 import { PaymentInvoice } from './class/payment-invoice';
 import { DisabledBtnDirective } from 'src/ng2/app/directives/disabled-btn.directive';
+import { InvoiceStateService } from 'src/ng2/app/states/invoice/invoice-state.service';
 
 
 @Component({
@@ -34,13 +35,15 @@ export class InvoicesAsideComponent implements OnInit {
   selectedCompany: any = null;
   isChangeAmountReceived: boolean = false;
   selectAllInvoice: boolean = false;
+  opened: boolean = false;
   selectedPaymentMode = new CompanySetting('Cheque', 'CHEQUE');
   sub: Subscription = new Subscription();
   @ViewChild('recordPayment') recordPayment: DisabledBtnDirective;
-  @Input() selectedInvoices: Array<Invoice> = [];
+  selectedInvoices: Array<Invoice> = [];
   @Output() onClose = new EventEmitter<any>();
   constructor(private companiesState: CompaniesStateService,
     private notificationStateService: NotificationStateService,
+    private invoiceStateService: InvoiceStateService,
     private invoicesService: InvoicesService) { }
 
   ngOnInit() {
@@ -49,12 +52,17 @@ export class InvoicesAsideComponent implements OnInit {
       this.getClientsList(data);
     })
     this.sub.add(getOnCompanies);
-    if (this.selectedInvoices.length > 0) {
-      this.selectedCompany = this.reqCompanies.find(item => item.id === this.selectedInvoices[0].companyId);
-      this.onSelectCompany(this.selectedCompany);
-    }
-    let today = new Date();
-    this.payment.setDate(today.getDate(), today.getMonth() + 1, today.getFullYear(), this.companiesState.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    let getOpenAside = this.invoiceStateService.getOpenAside().subscribe(data => {
+      this.opened = true;
+      this.selectedInvoices = data;
+      if (this.selectedInvoices.length > 0) {
+        this.selectedCompany = this.reqCompanies.find(item => item.id === this.selectedInvoices[0].companyId);
+        this.onSelectCompany(this.selectedCompany);
+      }
+      let today = new Date();
+      this.payment.setDate(today.getDate(), today.getMonth() + 1, today.getFullYear(), this.companiesState.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    })
+    this.sub.add(getOpenAside);
   }
   onSelectPaymentModes(data) {
     this.selectedPaymentMode = data;
@@ -206,7 +214,18 @@ export class InvoicesAsideComponent implements OnInit {
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
   close() {
-    this.onClose.emit(null);
+
+    this.opened = false;
+    this.invoices = [];
+    this.invoicesFilter = new InvoicesFilter();
+    this.validate = new PaymentInvoice();
+    this.payment = new Payment();
+    this.amountReceived = 0;
+    this.selectedCompany = null;
+    this.isChangeAmountReceived = false;
+    this.selectAllInvoice = false;
+    this.selectedPaymentMode = new CompanySetting('Cheque', 'CHEQUE');
+    this.invoiceStateService.onClosedAsige();
   }
   public trackById(index, item) {
     return item.id;

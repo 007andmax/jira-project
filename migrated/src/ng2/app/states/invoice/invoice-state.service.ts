@@ -8,6 +8,8 @@ export class InvoiceStateService {
   invoiceForRemove: Invoice;
   invoiceForRollback: Invoice;
   invoiceForRefund: Invoice;
+  openAside: EventEmitter<any> = new EventEmitter();
+  closedAside: EventEmitter<any> = new EventEmitter();
   filter: EventEmitter<any> = new EventEmitter();
   openPreviewAside: EventEmitter<any> = new EventEmitter();
   constructor() { }
@@ -38,5 +40,17 @@ export class InvoiceStateService {
   }
   public getOnInitFilter() {
     return this.filter;
+  }
+  public onOpenAsige(data) {
+    this.openAside.emit(data);
+  }
+  public getOpenAside() {
+    return this.openAside;
+  }
+  public onClosedAsige() {
+    this.closedAside.emit(null);
+  }
+  public getClosedAside() {
+    return this.closedAside;
   }
 }

@@ -87,6 +87,7 @@ export class LeftPanelComponent implements OnInit {
     this.leftPanelStateService.onGoToState.subscribe(data => {
       this.onChangeState(data);
     })
+
   }
   onOpenPanel() {
 
