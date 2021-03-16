@@ -1,23 +1,85 @@
-<div class="password-content__header">
-  <h3>Password Manager</h3>
-  <div class="password-content__header--search">
-    <!--add class "show" to <div class="password-selected">-->
-    <div class="password-selected">
-      <div class="password-selected-qty new-link">
-        <span>2</span> Selected
-      </div>
-      <div class="password-selected-actions">
-        <i class="icn-16 edit-new"></i>
-        <i class="icn-16 print-new"></i>
-        <i class="icn-16 export-new"></i>
+<!--<div class="password-content__header">-->
+<!--  <h3>Password Manager</h3>-->
+<!--  <div class="password-content__header&#45;&#45;search">-->
+<!--    &lt;!&ndash;add class "show" to <div class="password-selected">&ndash;&gt;-->
+<!--    <div class="password-selected">-->
+<!--      <div class="password-selected-qty new-link">-->
+<!--        <span>2</span> Selected-->
+<!--      </div>-->
+<!--      <div class="password-selected-actions">-->
+<!--        <i class="icn-16 edit-new"></i>-->
+<!--        <i class="icn-16 print-new"></i>-->
+<!--        <i class="icn-16 export-new"></i>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <button-->
+<!--      *ngIf="getPermissions('CREATE_PASSWORD')"-->
+<!--      (click)="addRecord()"-->
+<!--            style="font-size: 13px;" class="new-link desktop-hidden">Create Password</button>-->
+<!--    <button-->
+<!--      *ngIf="getPermissions('CREATE_PASSWORD')"-->
+<!--      (click)="addRecord()" class="plus-btn mob-hidden">+</button>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+<div class="qt-page-list__header --sticky">
+  <div class="qt-page-list__header-title-line">
+    <div class="qt-page-list__header-title-line--left">
+      <h3
+        class="qt-page-list__header-title"
+        [textContent]="'Password Manager'"
+      ></h3>
+    </div>
+    <div class="qt-page-list__header-title-line--rigth">
+      <div class="qt-df qt-ai-c">
+        <div class="password-content__header--search">
+          <input
+            type="text"
+            placeholder="Search password"
+          >
+          <button
+            class="qt-btn btn-filter qt-ml-8 d-f"
+          >
+            Filters
+          </button>
+          <button
+            class="qt-btn --outline-blue qt-ml-8"
+          >
+            Create Password
+          </button>
+        </div>
       </div>
     </div>
-    <button
-      *ngIf="getPermissions('CREATE_PASSWORD')"
-      (click)="addRecord()"
-            style="font-size: 13px;" class="new-link desktop-hidden">Create Password</button>
-    <button
-      *ngIf="getPermissions('CREATE_PASSWORD')"
-      (click)="addRecord()" class="plus-btn mob-hidden">+</button>
   </div>
+
+  <div class="qt-page-list__header-filters">
+    <app-drop-down
+      class="filter-category qt-mr-8"
+      [placeholder]="'Select by Category'"
+      [list]="[]"
+    ></app-drop-down>
+    <button class="plus-btn qt-mr-8">
+      +
+    </button>
+    <app-drop-down
+      class="filter-company qt-mr-8"
+      [placeholder]="'Select Company'"
+      [list]="[]"
+    ></app-drop-down>
+    <app-drop-down
+      class="filter-device-user qt-mr-8"
+      [placeholder]="'Select Device or User'"
+      [list]="[]"
+    ></app-drop-down>
+    <app-drop-down
+      class="data-picker qt-w100"
+      [placeholder]="'Data picker'"
+      [list]="[]"
+    ></app-drop-down>
+  </div>
+
+
 </div>
+
+

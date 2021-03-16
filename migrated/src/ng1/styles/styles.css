@@ -1447,10 +1447,10 @@ bold {
   /* transform: translate(-50%, -50%) !important; */
 }
 
+/*.password-content*/
 .products-content,
 .recurring-tickets-content,
-.new-companies-content,
-.password-content {
+.new-companies-content {
   padding: 21px 24px;
   background: #f3f7f9;
   position: relative;
