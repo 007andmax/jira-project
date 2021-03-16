@@ -1,5 +1,4 @@
 <div class="qt-page-list__header --sticky">
-
     <div class="qt-page-list__header-title-line">
         <div class="qt-page-list__header-title-line--left">
             <h3
@@ -24,7 +23,6 @@
                 >
                     Filters
                 </button>
-                <!-- add class 'active' if filters open -->
                 <button
                     class="qt-btn --outline-blue qt-ml-8"
                     *ngIf="getPermissions('MANAGE_PRODUCTS')"
@@ -36,7 +34,6 @@
         </div>
     </div>
     <inventory-filter [hidden]="toggleFilter"></inventory-filter>
-
     <div class="qt-page-list__header-thead-container">
         <table class="qt-table-modern qt-page-list__header-thead">
             <thead>
