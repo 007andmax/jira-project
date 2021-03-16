@@ -12,6 +12,7 @@ import { InventoryStateService } from 'src/ng2/app/states/inventory/inventory-st
 export class InventoryAddCategoryComponent implements OnInit {
   @Output() onClose: EventEmitter<any> = new EventEmitter();
   name: string = "";
+
   categories: Array<CategoryProduct> = [];
   disableCreateCategory: boolean = false;
   sub: Subscription = new Subscription();
@@ -22,6 +23,7 @@ export class InventoryAddCategoryComponent implements OnInit {
     if (this.inventoryStateService.getCategories().length > 0) this.categories = this.inventoryStateService.getCategories();
     let getOnCategries = this.inventoryStateService.getOnCategries().subscribe((data) => {
       this.categories = data;
+
     })
     this.sub.add(getOnCategries);
   }
