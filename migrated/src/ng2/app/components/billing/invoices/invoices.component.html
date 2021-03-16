@@ -1,65 +1,65 @@
 <div class="qt-page-list invoices-page">
-  <div class="qt-df qt-fd-c qt-jc-sb invoices-page__list-container">
-    <div>
-      <app-invoices-header
-        (onCreateInvoice)="onCreatePayment()"
-        (onSortBy)="sortBy($event)"
-      ></app-invoices-header>
-      <div class="qt-page-list__body">
-        <div class="qt-page-list__body-table-container">
-          <table class="qt-page-list__body-tbody qt-table-modern invoice-table">
-            <tbody
-              infiniteScroll
-              [infiniteScrollDistance]="2"
-              [infiniteScrollThrottle]="50"
-              [infiniteScrollDisabled]="infiniteScrollDisabled"
-              (scrolled)="onScroll()"
-            >
-            <ng-template
-              ngFor
-              let-invoice
-              [ngForOf]="invoices"
-              [ngForTrackBy]="trackById"
-            >
-              <app-invoices-item
-                (onSelectInvoice)="onSelectInvoice()"
-                (onPreviewInvoice)="onPreviewInvoice($event)"
-                [invoice]="invoice"
-              ></app-invoices-item>
-            </ng-template>
-            </tbody>
-          </table>
-          <div
-            class="loading"
-            *ngIf="showPreloader"
-          ></div>
-          <div class="total-info">
-            <div
-              class="loading pengind-loading"
-              *ngIf="showPendingPreloader"
-            ></div>
-            <hr class="total-divider qt-mb-16">
-            <div class="qt-df qt-jc-fe">
-              <div>
-                <span class="qt-ff-sb qt-fs-13 qt-mr-5">Total:</span>
-                <span
-                  class="qt-ff-sb qt-fs-16"
-                  [textContent]="getTotal() | currency"
-                ></span>
-              </div>
+    <div class="qt-df qt-fd-c qt-jc-sb invoices-page__list-container">
+        <div>
+            <app-invoices-header
+                (onCreateInvoice)="onCreatePayment()"
+                (onSortBy)="sortBy($event)"
+            ></app-invoices-header>
+            <div class="qt-page-list__body">
+                <div class="qt-page-list__body-table-container">
+                    <table class="qt-page-list__body-tbody qt-table-modern invoice-table">
+                        <tbody
+                            infiniteScroll
+                            [infiniteScrollDistance]="2"
+                            [infiniteScrollThrottle]="50"
+                            [infiniteScrollDisabled]="infiniteScrollDisabled"
+                            (scrolled)="onScroll()"
+                        >
+                            <ng-template
+                                ngFor
+                                let-invoice
+                                [ngForOf]="invoices"
+                                [ngForTrackBy]="trackById"
+                            >
+                                <app-invoices-item
+                                    (onSelectInvoice)="onSelectInvoice()"
+                                    (onPreviewInvoice)="onPreviewInvoice($event)"
+                                    [invoice]="invoice"
+                                ></app-invoices-item>
+                            </ng-template>
+                        </tbody>
+                    </table>
+                    <div
+                        class="loading"
+                        *ngIf="showPreloader"
+                    ></div>
+                    <div class="total-info">
+                        <div
+                            class="loading pengind-loading"
+                            *ngIf="showPendingPreloader"
+                        ></div>
+                        <hr class="total-divider qt-mb-16">
+                        <div class="qt-df qt-jc-fe">
+                            <div>
+                                <span class="qt-ff-sb qt-fs-13 qt-mr-5">Total:</span>
+                                <span
+                                    class="qt-ff-sb qt-fs-16"
+                                    [textContent]="getTotal() | currency"
+                                ></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
-          </div>
+
+
         </div>
 
-      </div>
+
 
     </div>
 
 
-  </div>
-    <app-invoices-aside
-        *ngIf="showCreateInvoice"
-        (onClose)="onCloseCreatePayment()"
-        [selectedInvoices]="selectedInvoices"
-    ></app-invoices-aside>
 </div>

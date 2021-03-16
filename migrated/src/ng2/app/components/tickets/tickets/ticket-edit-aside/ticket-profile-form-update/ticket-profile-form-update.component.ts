@@ -217,11 +217,13 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
       this.onChangeServices(this.selectServices.getSelectedServices());
       if (this.ticketProfileFormUpdate.isValidateServiceUpdateAndClose()) {
         if (!this.selectServices.onValidateServices()) return;
+
         this.onUpdateTicketAndClose(this.ticketProfileFormUpdate.getDataForUpdateService());
       } else this.onUpdateTicketAndClose(this.ticketProfileFormUpdate.getDataForClose());
     }
   }
   onUpdateTicketAndClose(data) {
+
     this.update_closeBtn.setDisabled(true);
     this.isUpdateAndClose = true;
     this.ticketsService.updateTicket(data, true).subscribe(data => {

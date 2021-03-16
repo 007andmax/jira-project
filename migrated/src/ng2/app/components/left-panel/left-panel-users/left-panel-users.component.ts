@@ -69,6 +69,9 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
       if (this.isUsersPage(data)) this.open = true;
     })
   }
+  public close() {
+    this.open = false;
+  }
   isUsersPage(state) {
     return (state === 'new-users')
   }

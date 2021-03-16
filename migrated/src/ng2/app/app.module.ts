@@ -399,6 +399,10 @@ import { DeviceIpSummaryReportComponent } from './components/reports/reports/dev
 import { RemoteConnectionReportComponent } from './components/reports/reports/remote-connection-report/remote-connection-report.component';
 import { TechSalesReportComponent } from './components/reports/reports/tech-sales-report/tech-sales-report.component';
 import { TechTicketReportComponent } from './components/reports/reports/tech-ticket-report/tech-ticket-report.component';
+import { KeyUpEnterDirective } from './directives/key-up-enter.directive';
+import { InventoryAddCategoryComponent } from './components/inventory/inventory-add-category/inventory-add-category.component';
+import { InventoryHeaderComponent } from './components/inventory/inventory-header/inventory-header.component';
+import { InventoryFilterComponent } from './components/inventory/inventory-header/inventory-filter/inventory-filter.component';
 
 /**
  * declare angular
@@ -963,7 +967,11 @@ angular.module('quicktech')
     DeviceIpSummaryReportComponent,
     RemoteConnectionReportComponent,
     TechSalesReportComponent,
-    TechTicketReportComponent
+    TechTicketReportComponent,
+    KeyUpEnterDirective,
+    InventoryAddCategoryComponent,
+    InventoryHeaderComponent,
+    InventoryFilterComponent
   ],
   imports: [
     BrowserModule,

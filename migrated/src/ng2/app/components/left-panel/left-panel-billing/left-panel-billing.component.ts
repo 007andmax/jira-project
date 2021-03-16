@@ -64,6 +64,9 @@ export class LeftPanelBillingComponent implements OnInit, OnDestroy {
       || state === 'new-payments-ng2'
       || state === 'new-contracts')
   }
+  public close() {
+    this.open = false;
+  }
   openPanel() {
     this.onOpenPanel.emit(null);
   }

@@ -6,7 +6,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ElementRef } from '@ang
   styleUrls: ['./drop-down.component.scss']
 })
 export class DropDownComponent implements OnInit {
-  selectedItem: any = '';
+  selectedItem = null;
 
   @Input() dropdownWidth: string = null;
   @Input() dropdownHeight: string = null;
@@ -51,6 +51,11 @@ export class DropDownComponent implements OnInit {
     if (this.reqList.length === 0) this.reqList = JSON.parse(JSON.stringify(this.list));
     if (this.editItem) this.selectedItem = (this.field) ? this.editItem : this.editItem;
   }
+  public reset(data) {
+    this.list = data;
+    if (this.sort) this.list.sort((a, b) => (this.field) ? a[this.field].localeCompare(b[this.field]) : a.localeCompare(b));
+    this.reqList = JSON.parse(JSON.stringify(this.list));
+  }
 
   onCheckAdd(event) {
     if (this.search) this.list = this.reqList.filter(item => (this.field) ? item[this.field].toLowerCase().includes(event.target.value.toLowerCase()) : item.toLowerCase().includes(event.target.value.toLowerCase()))
@@ -66,8 +71,9 @@ export class DropDownComponent implements OnInit {
     if (this.sort) this.reqList.sort((a, b) => (this.field) ? a[this.field].localeCompare(b[this.field]) : a.localeCompare(b));
   }
   addItem() {
-    this.onAddItem.emit(this.selectedItem);
+    this.onAddItem.emit((this.selectedItem) ? this.selectedItem : this.getInputText());
     this.isAdd = false;
+    this.list = JSON.parse(JSON.stringify(this.reqList));
   }
   getSelectedItemText() {
     return (this.field) ? (this.selectedItem) ? this.selectedItem[this.field] : "" : this.selectedItem;

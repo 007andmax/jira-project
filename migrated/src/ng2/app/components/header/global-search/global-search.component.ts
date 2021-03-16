@@ -12,6 +12,7 @@ import { GlobalSearchResult } from './class/global-search-result';
 import { GlobalSearchResultItem } from './class/global-search-result-item';
 import { InvoiceStateService } from 'src/ng2/app/states/invoice/invoice-state.service';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
+import { LeftPanelStateService } from 'src/ng2/app/states/left-panel/left-panel-state.service';
 
 @Component({
   selector: 'app-global-search',
@@ -33,6 +34,7 @@ export class GlobalSearchComponent implements OnInit {
     private defaultServicesService: DefaultServicesService,
     private usersStateService: UsersStateService,
     private productService: ProductService,
+    public leftPanelStateService: LeftPanelStateService,
     private inventoryStateService: InventoryStateService,
     public ticketsListService: TicketsListService,
     private ticketsStateService: TicketsStateService) { }
@@ -62,13 +64,18 @@ export class GlobalSearchComponent implements OnInit {
   showInfo(item: GlobalSearchResultItem) {
     if (item.type === 'COMPANIES') {
       localStorage.setItem("company_id", item.id);
-      let body = document.querySelector('.main-container');
-      var link = document.createElement('a');
-      body.appendChild(link);
-      link.href = `#/ng2/company/dashboard/${item.id}`
-      var e = document.createEvent('MouseEvents');
-      e.initEvent('click', true, true);
-      link.dispatchEvent(e);
+
+      this.leftPanelStateService.goToState('company-dashboard');
+
+      this.leftPanelStateService.openCompanPage();
+      /*  let body = document.querySelector('.main-container');
+        var link = document.createElement('a');
+        body.appendChild(link);
+        link.href = `#/ng2/company/dashboard/${item.id}`
+        var e = document.createEvent('MouseEvents');
+        e.initEvent('click', true, true);
+        link.dispatchEvent(e);
+        this.leftPanelStateService.setCompanyPage("company-dashboard");*/
     }
     if (item.type === 'TICKETS') {
       this.ticketsStateService.onOpenTicket();

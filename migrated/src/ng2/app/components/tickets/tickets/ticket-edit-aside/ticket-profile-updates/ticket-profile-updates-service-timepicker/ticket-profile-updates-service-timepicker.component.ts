@@ -14,6 +14,8 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit {
   @Input() end: number = 0;
   @Input() quantity: number = 0;
   @Input() editMode: boolean = false;
+  @Input() validate: boolean = true;
+  @Input() errorMessage: string = "";
   @Output() onChangeEnd = new EventEmitter<any>();
   @Output() onSetEnd = new EventEmitter<any>();
   @Output() onChangeStart = new EventEmitter<any>();
@@ -24,7 +26,7 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit {
   inputTarget = null;
   timePickerStart;
   timePickerEnd;
-  constructor(private companiesStateService: CompaniesStateService, public cd: ChangeDetectorRef, private elRef: ElementRef, ) { }
+  constructor(private companiesStateService: CompaniesStateService, public cd: ChangeDetectorRef, private elRef: ElementRef,) { }
 
   ngOnInit() {
 

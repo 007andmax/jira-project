@@ -27,7 +27,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
   public sort: string = '';
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
-  showCreateInvoice: boolean = false;
+
   // showPreviewInvoice: boolean = false;
   offset: number = 20;
   public direction: string = 'ASC';
@@ -109,6 +109,15 @@ export class InvoicesComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
     this.sub.add(changeInvoice);
+    let getClosedAside = this.invoiceStateService.getClosedAside().subscribe(data => {
+
+      this.selectedCompanyId = null;
+      this.invoices.forEach(item => {
+        item.selected = false;
+        item.blockSelected = false;
+      })
+    })
+    this.sub.add(getClosedAside);
   }
   getTotal() {
     let total = 0;
@@ -124,17 +133,10 @@ export class InvoicesComponent implements OnInit, OnDestroy {
         if (item.selected) this.selectedInvoices.push(item);
       })
     }
-    this.showCreateInvoice = true;
 
+    this.invoiceStateService.onOpenAsige(this.selectedInvoices);
   }
-  onCloseCreatePayment() {
-    this.showCreateInvoice = false;
-    this.selectedCompanyId = null;
-    this.invoices.forEach(item => {
-      item.selected = false;
-      item.blockSelected = false;
-    })
-  }
+
   onPreviewInvoice(data) {
     this.invoiceStateService.togglePreview(data.id);
     /*  this.previewInvoice = data;

@@ -68,7 +68,13 @@ export class LeftPanelCompaniesComponent implements OnInit {
       if (this.isCompanyPage(data)) this.open = true;
     })
   }
-  openPanel() {
+  public close() {
+    this.open = false;
+  }
+  public togglePanel(data) {
+    this.open = data;
+  }
+  public openPanel() {
     this.onOpenPanel.emit(null);
   }
   ngDoCheck() {

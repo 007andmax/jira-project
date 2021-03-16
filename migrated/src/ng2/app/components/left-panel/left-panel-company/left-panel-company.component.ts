@@ -36,6 +36,9 @@ export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnBillingPage);
   }
+  public close() {
+    this.open = false;
+  }
 
   checkLogo() {
     return (this.selectedCompany && this.selectedCompany.logo && this.selectedCompany.logo.cropped && this.selectedCompany.logo.cropped.id || this.selectedCompany && this.selectedCompany.logo && this.selectedCompany.logo.origin && this.selectedCompany.logo.origin.id)

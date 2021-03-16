@@ -1,0 +1,97 @@
+<div class="qt-page-list__header --sticky">
+    <div class="qt-page-list__header-title-line">
+        <div class="qt-page-list__header-title-line--left">
+            <h3
+                class="qt-page-list__header-title"
+                [textContent]="'Products'"
+            ></h3>
+        </div>
+        <div class="qt-page-list__header-title-line--rigth">
+            <div class="qt-df qt-ai-c">
+                <div class="products-page__search">
+                    <input
+                        type="text"
+                        placeholder="Search Products…"
+                        (input)="search()"
+                        [(ngModel)]="productSearchName"
+                    >
+                </div>
+                <button
+                    class="qt-btn btn-filter d-f"
+                    [ngClass]="{'active':!toggleFilter}"
+                    (click)="toggleFilter = !toggleFilter"
+                >
+                    Filters
+                </button>
+                <button
+                    class="qt-btn --outline-blue qt-ml-8"
+                    *ngIf="getPermissions('MANAGE_PRODUCTS')"
+                    (click)="addProduct()"
+                >
+                    Create Product
+                </button>
+            </div>
+        </div>
+    </div>
+    <inventory-filter [hidden]="toggleFilter"></inventory-filter>
+    <div class="qt-page-list__header-thead-container">
+        <table class="qt-table-modern qt-page-list__header-thead">
+            <thead>
+                <tr>
+                    <th
+                        class="products-table__product-name pointer"
+                        (click)="filter('description')"
+                    >
+                        Product Name
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th
+                        class="products-table__category pointer"
+                        (click)="filter('category')"
+                    >
+                        Category
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th
+                        class="products-table__cost pointer"
+                        (click)="filter('cost')"
+                        *ngIf="getPermissions('VIEW_PRODUCT_COST')"
+                    >
+                        Cost
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th
+                        class="products-table__sale-price pointer"
+                        (click)="filter('sale')"
+                    >
+                        Sale Price
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th
+                        class="products-table__mfg pointer"
+                        (click)="filter('manufacture')"
+                    >
+                        #Mfg
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th class="products-table__tac">Tax</th>
+                    <th
+                        class="products-table__ilc pointer"
+                        (click)="filter('ilc')"
+                    >
+                        ILC
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th
+                        class="products-table__gl pointer"
+                        (click)="filter('glNumber')"
+                    >
+                        GL
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th class="products-table__menu pointer"></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
