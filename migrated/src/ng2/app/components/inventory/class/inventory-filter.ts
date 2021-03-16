@@ -4,7 +4,7 @@ import { Company } from 'src/ng2/app/interfaces/company/company';
 
 export class InventoryFilter {
     filterTop: Array<FilterListTop> = [new FilterListTop('description', 'ASC'),
-    new FilterListTop('vendor', ''),
+    new FilterListTop('category', ''),
     new FilterListTop('cost', ''),
     new FilterListTop('sale', ''),
     new FilterListTop('manufacture', ''),
@@ -13,7 +13,7 @@ export class InventoryFilter {
     categoryId: string;
 
     constructor() { }
-    
+
     public setCompanyId(data) {
         this.categoryId = data;
     }
@@ -40,7 +40,7 @@ export class InventoryFilter {
                     this.filterTop[index].filter = 'DESC';
                 }
             }
-            if (field === 'vendor') {
+            if (field === 'category') {
                 if (sort === '' || sort === 'DESC') {
                     this.filterTop[index].filter = 'ASC';
                 } else {
@@ -93,8 +93,8 @@ export class InventoryFilter {
                 this.onFilterDescription(reqInventory);
                 if (sort !== 'ASC') reqInventory.reverse();
             }
-            if (field === 'vendor') {
-                this.onFilterCompany(reqInventory, companies);
+            if (field === 'category') {
+                this.onFilterCategory(reqInventory);
                 if (sort !== 'ASC') reqInventory.reverse();
             }
             if (field === 'cost') {
@@ -151,6 +151,10 @@ export class InventoryFilter {
             return (first.toLowerCase() > next.toLowerCase()) ?
                 1 : ((next.toLowerCase() > first.toLowerCase()) ? -1 : 0)
         });
+    }
+    private onFilterCategory(reqInventory) {
+        reqInventory.sort((a, b) => (a.category.name.toLowerCase() > b.category.name.toLowerCase()) ?
+            1 : ((b.category.name.toLowerCase() > a.category.name.toLowerCase()) ? -1 : 0));
     }
     private onFilterIlc(reqInventory) {
         reqInventory.sort((a, b) => (((a.ilc) ? a.ilc : '').toLowerCase() > ((b.ilc) ? b.ilc : '').toLowerCase()) ?

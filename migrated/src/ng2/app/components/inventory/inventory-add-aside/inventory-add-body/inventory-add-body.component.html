@@ -10,18 +10,34 @@
             >
                 This number already occupied
             </mat-error>
-            <p class="label-name">Item number</p>
+            <p class="label-name">Item Number</p>
             <input
                 type="text"
                 [ngClass]="{'--input-error' : !validate.getManufactureIsExist()}"
                 class="qt-input-40 inventory-add-body__input"
                 [(ngModel)]="inventory.manufacture"
                 (blur)="onCheckManufacture()"
-                placeholder="Enter Item number"
+                placeholder="Enter Item Number"
+            >
+        </div>
+        <div class="create-product__col --required">
+            <mat-error
+                class="qt-tooltip-error"
+                *ngIf="!validate.getILCIsExist()"
+            >
+                This number already occupied
+            </mat-error>
+            <p class="label-name">ILC Number</p>
+            <input
+                type="text"
+                class="qt-input-40 inventory-add-body__input"
+                [(ngModel)]="inventory.ilc"
+                (blur)="onCheckILC()"
+                placeholder="Enter ILC Number"
             >
         </div>
         <div class="create-product__col">
-            <p class="label-name">GL number</p>
+            <p class="label-name">GL Number</p>
             <app-select-search
                 [class]="['light-dropdown', 'new-product-gl-select', 'qt-select-input-40']"
                 [list]="glNumbers"
@@ -42,12 +58,15 @@
             Description is required
         </mat-error>
         <p class="label-name">Description</p>
-        <div class="editable-description" [ngClass]="{'--input-error' : !validate.getDescription()}">
+        <div
+            class="editable-description"
+            [ngClass]="{'--input-error' : !validate.getDescription()}"
+        >
             <textarea
                 appTextArea
                 [limit]="160"
                 id="inventory-description"
-                placeholder="Write Description"
+                placeholder="Write Product Description"
                 (input)="onChangeDescription($event)"
                 (onPast)="onPastDescription($event)"
             ></textarea>
@@ -60,8 +79,6 @@
                 (taxesChange)="onTaxesChange($event)"
             ></app-taxes>
         </div>
-        <!-- <div class="col-md-6"  *ngIf="!validate.getCostSale()"> -->
-        <!-- </div> -->
         <div class="create-product__col --required">
             <p class="label-name">Cost</p>
             <input
@@ -104,28 +121,6 @@
     </div>
     <div class="qt-inputs-row">
         <div class="create-product__col select-open-top --required">
-            <!-- <mat-error
-                class="qt-tooltip-error"
-                *ngIf="!validate.getCategory()"
-            >
-                Category is required
-            </mat-error>
-            <p class="label-name">Category</p>
-            <app-select-search
-                [ngClass]="{'--input-error' : !validate.getCategory()}"
-                [class]="['light-dropdown', 'qt-select-input-40']"
-                [list]="categories"
-                #categoriesSelect
-                [placeholder]="'Select Category'"
-                [field]="'name'"
-                [add]="true"
-                (onAddItem)="onAddCategory($event)"
-                (onSelectedItem)="onSelectCategory($event)"
-            ></app-select-search> -->
-
-
-
-
             <app-drop-down
                 #categoriesSelect
                 [class]="['light-dropdown', 'qt-select-input-40']"
@@ -151,7 +146,7 @@
                 [class]="['light-dropdown', 'qt-select-input-40']"
                 [list]="vendors"
                 [field]="'name'"
-                [placeholder]="'Select Company'"
+                [placeholder]="'Select Vendor'"
                 #vendorsSelect
                 (onSelectedItem)="onSelectVendor($event)"
             ></app-select-search>
@@ -164,7 +159,7 @@
             class="qt-button qt-mr-12"
             (click)="add()"
         >
-            Add User
+            Create Product
         </button>
         <button
             class="qt-button --gray"

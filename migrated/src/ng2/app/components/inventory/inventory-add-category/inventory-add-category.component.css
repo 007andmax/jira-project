@@ -1,0 +1,20 @@
+.add-tax-dropdown {
+  width: 388px;
+  top: 100%;
+  transform: translateY(14px);
+  padding: 29px 24px;
+  position: absolute;
+  z-index: 1000;
+}
+.add-tax-dropdown .add-tax-label {
+  font-size: 13px;
+  margin-bottom: 11px;
+  font-family: Graphik-Medium, sans-serif;
+  color: #4f5f79;
+}
+.add-tax-dropdown .tax-title {
+  font-size: 15px;
+  color: #364656;
+  margin-bottom: 16px;
+  font-family: Graphik-Semibold, sans-serif;
+}

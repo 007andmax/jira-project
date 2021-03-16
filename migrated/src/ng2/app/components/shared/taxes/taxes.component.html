@@ -1,6 +1,6 @@
 <div class="col-md-6 light-dropdown new-taxes-area" ngbDropdown #taxesDropDown="ngbDropdown">
   <p class="label-name">Taxes</p>
-  <div class="add-tax add-tax-inventory" ><span (click)="onInitAddTax()">Add Tax</span>
+  <div class="add-tax add-tax-inventory" ><span (click)="onInitAddTax()">+ Add Tax</span>
 
     <div class="d-inline-block" ngbDropdown #addTax="ngbDropdown">
       <a style="display: none;" class="nav-link" id="dropdownManual" ngbDropdownToggle>Contribute</a>
@@ -57,13 +57,15 @@
       </div>
     </div>
   </div>
-  <i class="icn-sm report-caret-icon"></i>
-  <input type="text" [value]="getSelectedTaxes()"
-         autocomplete="new-password"
-         readonly
-         placeholder="Select Taxes"
-         id="dropdownTypeTaxes"
-         ngbDropdownToggle />
+  <div class="light-dropdown new-product-gl-select qt-select-input-40">
+    <i class="icn-sm report-caret-icon"></i>
+    <input type="text" [value]="getSelectedTaxes()"
+           autocomplete="new-password"
+           readonly
+           placeholder="Select Taxes"
+           id="dropdownTypeTaxes"
+           ngbDropdownToggle />
+  </div>
   <ul ngbDropdownMenu class="dropdown-menu"
        aria-labelledby="dropdownTypeTaxes">
     <ng-template ngFor let-tax [ngForOf]="taxes" [ngForTrackBy]="trackById">
