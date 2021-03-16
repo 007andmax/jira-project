@@ -69,7 +69,6 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
     if (this.inventoryStateService.getCategories().length > 0) this.categories = this.inventoryStateService.getCategories();
     let getOnCategries = this.inventoryStateService.getOnCategries().subscribe((data) => {
       this.categories = data;
-      console.log("this.categories", this.categories);
       this.categoriesSelect.reset(this.categories);
     })
     this.sub.add(getOnCategries);
@@ -95,12 +94,9 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0)).filter(item => !item.deletedAt && !item.isDefault && item.clientType && item.clientType.toLowerCase() === 'vendor');
   }
   onAddCategory(data) {
-    console.log("data", data);
-
     this.productService.addCategory(data).subscribe((data: any) => {
       this.inventory.category = data;
       this.validate.resetCategory();
-
     })
   }
   onSelectCategory(data) {

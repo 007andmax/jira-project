@@ -20,7 +20,6 @@ export class InventoryFilterComponent implements OnInit {
     if (this.inventoryStateService.getCategories().length > 0) this.categories = this.inventoryStateService.getCategories();
     let getOnCategries = this.inventoryStateService.getOnCategries().subscribe((data) => {
       this.categories = data;
-      console.log("this.categories", this.categories);
       this.categoriesSelect.reset(this.categories);
     })
     this.sub.add(getOnCategries);
