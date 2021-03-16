@@ -13,6 +13,12 @@ export class InvoiceProfile extends InvoiceDto {
         this.isOverDue = (overDue < 0);
 
     }
+    public getDataForRecordPayment() {
+        return {
+            id: this.id,
+            companyId: this.company.id
+        }
+    }
 
     public setId(data) {
         this.id = data;

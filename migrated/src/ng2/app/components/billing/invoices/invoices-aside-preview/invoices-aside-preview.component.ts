@@ -57,7 +57,7 @@ export class InvoicesAsidePreviewComponent implements OnInit {
     })
   }
   onCreatePayment() {
-    this.invoiceStateService.onOpenAsige([]);
+    this.invoiceStateService.onOpenAsige([this.invoiceProfile.getDataForRecordPayment()]);
   }
   resendInvoices() {
     this.invoicesService.resendInvoices([this.invoiceId]).subscribe(data => {

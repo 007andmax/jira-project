@@ -14,10 +14,13 @@
 
 
 
+
+
         <div class="qt-df qt-ai-c">
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__payment-received"
                 (click)="onCreatePayment()"
+                *ngIf="!invoiceProfile.paidOn"
             ></div>
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__email-dark"
@@ -44,12 +47,16 @@
 
 
 
+
+
             <div
                 class="icon__close qt-aside-modern__header-close"
                 (click)="close()"
             ></div>
         </div>
     </div>
+
+
 
 
 
@@ -67,6 +74,8 @@
 
 
 
+
+
             <div
                 class="invoice-status-timeline qt-pt-10 qt-pl-16 qt-pr-16 qt-pb-20 qt-mb-24 qt-mr-20 qt-ml-20"
                 [ngClass]="{'--closed': !toggleStatus}"
@@ -80,6 +89,8 @@
                     ></div>
                     <!-- by clicking this button you should toggle class '--closed' for .invoice-status-timeline -->
                 </div>
+
+
 
 
 
@@ -103,10 +114,14 @@
 
 
 
+
+
                 <div
                     class="invoice-status-timeline__steps qt-df"
                     *ngIf="toggleStatus"
                 >
+
+
 
 
 
@@ -125,6 +140,8 @@
 
 
 
+
+
                     <div class="qt-df qt-ai-c invoice-status-timeline__steps-info">
                         <div class="step-citcle qt-mr-5 icon__invoice-email"></div>
                         <div>
@@ -132,6 +149,8 @@
                             <!-- <div class="qt-fs-11 qt-lh-145 qt-color-dark-light">21/05/2020 09:47 AM</div> -->
                         </div>
                     </div>
+
+
 
 
 
@@ -151,6 +170,8 @@
 
 
 
+
+
                     <div class="qt-df qt-ai-c invoice-status-timeline__steps-info">
                         <div class="step-citcle qt-mr-5 icon__get-paid"></div>
                         <div>
@@ -166,12 +187,18 @@
 
 
 
+
+
                 </div>
 
 
 
 
+
+
             </div>
+
+
 
 
 
@@ -194,11 +221,15 @@
 
 
 
+
+
             <div class="invoice-preview qt-pos-rel">
                 <div
                     class="invoice-preview__status"
                     [ngClass]="{'--paid': invoiceProfile.paidOn, '--overdue': invoiceProfile.isOverDue && !invoiceProfile.paidOn}"
                 ></div>
+
+
 
 
 
@@ -227,6 +258,8 @@
 
 
 
+
+
                     <div
                         class="qt-color-dark qt-lh-131 qt-pr-24 qt-fs-26 qt-text-upper qt-ff-gm"
                         [textContent]="'Invoice#' + invoiceProfile.number"
@@ -235,8 +268,12 @@
 
 
 
+
+
                     </div>
                 </div>
+
+
 
 
 
@@ -268,6 +305,8 @@
                             [textContent]="(invoiceProfile.invoiceContact.phoneNumbers && invoiceProfile.invoiceContact.phoneNumbers.length > 0) ? invoiceProfile.invoiceContact.phoneNumbers[0].number : ''"
                         ></div>
                     </div>
+
+
 
 
 
@@ -306,6 +345,8 @@
                         </div>
                     </div>
                 </div>
+
+
 
 
 
@@ -419,8 +460,12 @@
 
 
 
+
+
                                 </tbody>
                             </table>
+
+
 
 
 
@@ -435,13 +480,19 @@
 
 
 
+
+
                 </div>
 
 
 
 
 
+
+
                 <div class="qt-df qt-w100 qt-jc-sb qt-color-dark qt-fs-12 qt-ff-gm qt-mb-20 qt-lh-133">
+
+
 
 
 
@@ -460,6 +511,8 @@
 
 
 
+
+
                     <div class="invoice-preview__total-block">
                         <div class="qt-df qt-jc-sb qt-pl-12 qt-pr-12">
                             <div class="qt-text-left">Sub Total</div>
@@ -469,6 +522,8 @@
           currency"
                             ></div>
                         </div>
+
+
 
 
 
@@ -504,6 +559,8 @@
 
 
 
+
+
                 <div>
                     <div>
                         <div class="qt-fs-12 qt-mb-4 qt-ff-qm qt-color-dark qt-ff-gm qt-lh-133">Terms & Conditions</div>
@@ -519,7 +576,11 @@
 
 
 
+
+
             </div>
+
+
 
 
 
@@ -530,7 +591,11 @@
 
 
 
+
+
     </div>
+
+
 
 
 
