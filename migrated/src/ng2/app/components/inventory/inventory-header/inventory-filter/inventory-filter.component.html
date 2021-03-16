@@ -1,6 +1,6 @@
 <div class="qt-page-list__header-filters">
     <app-drop-down
-        #titlesDp
+        #categoriesSelect
         [sort]="true"
         class="products-page__category-btn qt-mr-8"
         [heightInput]="'36px'"
@@ -12,16 +12,15 @@
         (onSelectedItem)="onSelectCategory($event)"
     ></app-drop-down>
     <div class="inventory-add-category qt-pos-rel">
-      <button
-          class="qt-btn"
-          (click)="showAddCategory = true"
-      >
-          Add Category
-      </button>
-      <inventory-add-category
-        *ngIf="showAddCategory"
-        (onClose)="showAddCategory = false"
-      ></inventory-add-category>
+        <button
+            class="qt-btn"
+            (click)="showAddCategory = true"
+        >
+            Add Category
+        </button>
+        <inventory-add-category
+            *ngIf="showAddCategory"
+            (onClose)="showAddCategory = false"
+        ></inventory-add-category>
     </div>
 </div>
-

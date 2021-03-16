@@ -18,3 +18,6 @@
   margin-bottom: 16px;
   font-family: Graphik-Semibold, sans-serif;
 }
+.add-category-input {
+  position: relative;
+}

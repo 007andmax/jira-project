@@ -11,7 +11,7 @@
     </div>
     <div class="qt-aside-modern__content qt-pt-0-important --less-padding new-companies-content__modal--content advanced">
         <div class="col-md-4">
-            <mat-error *ngIf="!validate.getManufactureIsExist()">This number already occupied</mat-error>
+            <mat-error *ngIf="!validate.getManufactureIsExist()">This number is already occupied</mat-error>
             <p>Item Number</p>
             <input
                 type="text"
@@ -21,7 +21,7 @@
             >
         </div>
         <div class="col-md-4">
-            <mat-error *ngIf="!validate.getILCIsExist()">This number already occupied</mat-error>
+            <mat-error *ngIf="!validate.getILCIsExist()">This number is already occupied</mat-error>
             <p>ILC Number</p>
             <input
                 type="text"

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CategoryProduct } from 'src/ng2/app/interfaces/product/category-product';
 import { InventoryStateService } from 'src/ng2/app/states/inventory/inventory-state.service';
+import { DropDownComponent } from '../../../shared/drop-down/drop-down.component';
 
 @Component({
   selector: 'inventory-filter',
@@ -12,12 +13,14 @@ export class InventoryFilterComponent implements OnInit {
   showAddCategory: boolean = false;
   categories: Array<CategoryProduct> = [];
   sub: Subscription = new Subscription();
+  @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
   constructor(private inventoryStateService: InventoryStateService,) { }
 
   ngOnInit() {
     if (this.inventoryStateService.getCategories().length > 0) this.categories = this.inventoryStateService.getCategories();
     let getOnCategries = this.inventoryStateService.getOnCategries().subscribe((data) => {
       this.categories = data;
+      this.categoriesSelect.reset(this.categories);
     })
     this.sub.add(getOnCategries);
   }
