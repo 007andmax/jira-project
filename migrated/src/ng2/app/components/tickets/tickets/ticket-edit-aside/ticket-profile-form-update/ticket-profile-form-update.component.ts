@@ -173,12 +173,8 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
       this.onUpdateTicket(this.ticketProfileFormUpdate.getDataForUpdateProduct());
     }
     if (this.tab === "SERVICE") {
-
       this.onChangeServices(this.selectServices.getSelectedServices());
       if (!this.selectServices.onValidateServices() || !this.ticketProfileFormUpdate.isValidateService()) return;
-      console.log("s.ticketProfileFormUpdate", this.ticketProfileFormUpdate);
-      console.log("s.ticketProfileFormUpdate", this.ticketProfileFormUpdate);
-
       this.onUpdateTicket(this.ticketProfileFormUpdate.getDataForUpdateService());
     }
   }

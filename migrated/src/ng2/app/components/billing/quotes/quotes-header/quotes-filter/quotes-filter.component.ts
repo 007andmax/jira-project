@@ -66,7 +66,6 @@ export class QuotesFilterComponent implements OnInit {
     this.onChangeCounterFilter();
   }
   public onSetNumberQuote(event) {
-    console.log("event.target.value", event.target.value);
     this.quotesFilter.setQuoteNumber((event.target.value.length > 0) ? event.target.value : null);
     this.quoteStateService.onInitFilter(this.quotesFilter);
     this.onChangeCounterFilter();

@@ -164,8 +164,6 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit, OnDestr
     let find = this.addedServiceList.find(item => !item.validate || !item.validateQuantity);
     this.currentService.checkValidate();
     this.currentService.checkQuantity();
-    console.log("this.currentService", this.currentService);
-    console.log("this.addedServiceList", this.addedServiceList);
     return ((find) ? false : true) && this.currentService.validate && this.currentService.validateQuantity;
   }
   public trackByIndex(index, item) {
