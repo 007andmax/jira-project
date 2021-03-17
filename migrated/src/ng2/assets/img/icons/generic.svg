@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>DA6795A5-95E5-49EB-A55F-E446D4F4D235</title>
+    <g id="Password-Manager" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linejoin="round">
+        <g id="1a-Password-Manager" transform="translate(-336.000000, -258.000000)" stroke="#919EAB">
+            <g id="Group" transform="translate(288.000000, 234.000000)">
+                <g id="Actions-/-1px-/-Generic" transform="translate(48.000000, 24.000000)">
+                    <path d="M5.32122603,1.53285353 C7.0364243,0.822382156 8.96359464,0.822382156 10.6787929,1.53285353 C12.3939912,2.24329965 13.756694,3.60602775 14.4671654,5.32122603 C15.1776115,7.0364243 15.1776115,8.96359464 14.4671654,10.6787929 C13.756694,12.3939912 12.3939912,13.756694 10.6787929,14.4671654 C8.96359464,15.1776115 7.0364243,15.1776115 5.32122603,14.4671654 C3.60602775,13.756694 2.24329965,12.3939912 1.53285353,10.6787929 C0.822382156,8.96359464 0.822382156,7.0364243 1.53285353,5.32122603 C2.24329965,3.60602775 3.60602775,2.24329965 5.32122603,1.53285353 Z" id="Path" stroke-linecap="round"></path>
+                    <line x1="1" y1="10" x2="15" y2="10" id="Path"></line>
+                    <line x1="1" y1="6" x2="15" y2="6" id="Path"></line>
+                    <ellipse id="Oval" stroke-linecap="round" cx="8" cy="8" rx="2" ry="7"></ellipse>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>C9A0A1C5-37BB-470E-AA44-610520A1680A</title>
+    <g id="Password-Manager" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="1a-Password-Manager" transform="translate(-336.000000, -588.000000)" stroke="#919EAB">
+            <g id="Group" transform="translate(288.000000, 564.000000)">
+                <g id="Actions-/-1px-/-Devices" transform="translate(48.000000, 24.000000)">
+                    <path d="M2,2 L14,2 C14.5522847,2 15,2.44771525 15,3 L15,11 C15,11.5522847 14.5522847,12 14,12 L2,12 C1.44771525,12 1,11.5522847 1,11 L1,3 C1,2.44771525 1.44771525,2 2,2 Z" id="Rectangle"></path>
+                    <path d="M1,9 L15,9 L15,11 C15,11.5522847 14.5522847,12 14,12 L2,12 C1.44771525,12 1,11.5522847 1,11 L1,9 L1,9 Z" id="Rectangle"></path>
+                    <line x1="6" y1="14" x2="10.0013428" y2="14" id="Path"></line>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

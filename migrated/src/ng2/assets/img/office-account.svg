@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>DFE5B793-CCC2-4988-9917-FC04609FBC64</title>
+    <g id="Password-Manager" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="1a-Password-Manager" transform="translate(-336.000000, -192.000000)" stroke="#919EAB">
+            <g id="Group" transform="translate(288.000000, 168.000000)">
+                <g id="Path" transform="translate(48.000000, 24.000000)">
+                    <line x1="2" y1="15" x2="14" y2="15"></line>
+                    <polygon points="3 1 13 1 13 15 3 15"></polygon>
+                    <line x1="3" y1="1" x2="2" y2="1"></line>
+                    <line x1="13" y1="1" x2="14" y2="1"></line>
+                    <path d="M6,13 C6,12.66862 6.16862,12.5 6.5,12.5 L9.5,12.5 C9.83138,12.5 10,12.66862 10,13 L10,15 L6,15 L6,13 Z"></path>
+                    <line x1="5.3" y1="3.4" x2="5.9" y2="3.4"></line>
+                    <line x1="7.7" y1="3.4" x2="8.3" y2="3.4"></line>
+                    <line x1="10.1" y1="3.4" x2="10.7" y2="3.4"></line>
+                    <line x1="5.3" y1="5.8" x2="5.9" y2="5.8"></line>
+                    <line x1="7.7" y1="5.8" x2="8.3" y2="5.8"></line>
+                    <line x1="10.1" y1="5.8" x2="10.7" y2="5.8"></line>
+                    <line x1="5.3" y1="8.2" x2="5.9" y2="8.2"></line>
+                    <line x1="7.7" y1="8.2" x2="8.3" y2="8.2"></line>
+                    <line x1="10.1" y1="8.2" x2="10.7" y2="8.2"></line>
+                    <line x1="5.3" y1="10.6" x2="5.9" y2="10.6"></line>
+                    <line x1="7.7" y1="10.6" x2="8.3" y2="10.6"></line>
+                    <line x1="10.1" y1="10.6" x2="10.7" y2="10.6"></line>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

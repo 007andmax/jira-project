@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>47C3E536-0E34-4EF5-B2C5-47E682559EB7</title>
+    <g id="Password-Manager" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linejoin="round">
+        <g id="1a-Password-Manager" transform="translate(-336.000000, -720.000000)" stroke="#919EAB">
+            <g id="Group" transform="translate(288.000000, 696.000000)">
+                <g id="Path" transform="translate(48.000000, 24.000000)">
+                    <path d="M1,4.14285714 C1,3.51168571 1.51168571,3 2.14285714,3 L13.8571429,3 C14.4883143,3 15,3.51168571 15,4.14285714 L15,12.1428571 C15,12.7740286 14.4883143,13.2857143 13.8571429,13.2857143 L2.14285714,13.2857143 C1.51168571,13.2857143 1,12.7740286 1,12.1428571 L1,4.14285714 Z"></path>
+                    <path d="M15,4 L9.48714286,8.72317143 C8.63117143,9.45685714 7.36808571,9.45685714 6.51211429,8.72317143 L1,4"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
