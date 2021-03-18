@@ -44,6 +44,8 @@ export class UsersStateService {
     this.userService.getCurrentUser().subscribe((data: any) => {
       this.currentUser = new CurrentUser(data);
       this.onInitCurrentUser(data);
+    }, err => {
+      console.log("err", err);
     })
     this.usersRealTimeService.changeUsersArray.subscribe(newChange => {
       if (newChange.action === 'USER_SAVED' || newChange.action === 'USER_ARCHIVED') {
