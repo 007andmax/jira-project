@@ -33,7 +33,30 @@
     </div>
     <div class="qt-page-list__header-title-line--rigth">
       <div class="qt-df qt-ai-c">
-        <div class="password-content__header--search">
+        <div
+          class="company-devices-page__list-header-buttons"
+        >
+          <div>3 Selected</div>
+          <div
+            class="qt-ml-25 qt-ff-gm qt-df qt-color-info qt-ai-c qt-pointer"
+          >
+            <div class="password-icon password-icon__email-blue qt-ic-c qt-mr-6"></div>
+            <div>Share via Email</div>
+          </div>
+          <div
+            class="qt-ml-16 qt-ff-gm qt-df qt-color-info qt-ai-c qt-pointer"
+          >
+            <div class="password-icon password-icon__print-blue qt-ic-c qt-mr-6"></div>
+            <div>Print</div>
+          </div>
+          <div
+            class="qt-ml-16 qt-ff-gm qt-df qt-color-info qt-ai-c qt-pointer"
+          >
+            <div class="password-icon password-icon__export-blue qt-ic-c qt-mr-6"></div>
+            <div>Export</div>
+          </div>
+        </div>
+        <div class="password-content__header--search qt-ml-8">
           <input
             type="text"
             placeholder="Search password"
@@ -45,6 +68,8 @@
           </button>
           <button
             class="qt-btn --outline-blue qt-ml-8"
+            *ngIf="getPermissions('CREATE_PASSWORD')"
+            (click)="addRecord()"
           >
             Create Password
           </button>
@@ -83,7 +108,9 @@
     <table class="qt-table-modern qt-page-list__header-thead">
       <thead>
       <tr>
-        <th class="password-table__check">
+        <th
+          class="password-table__check"
+        >
           <div class="d-f">
             <label class="qt-checkbox">
               <input
