@@ -14,6 +14,8 @@ import { InventoryStateService } from './states/inventory/inventory-state.servic
 import { TicketsStateService } from './states/tickets/tickets-state.service';
 import { ConstantsStateService } from './states/constants/constants-state.service';
 import { LeftPanelStateService } from './states/left-panel/left-panel-state.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalLockScreenComponent } from './services/modal/modal-lock-screen/modal-lock-screen.component';
 
 
 /**
@@ -32,7 +34,7 @@ export class AppComponent implements OnInit {
   qtListHeaaderScroller;
   qtListBodyScroller;
   toggleLeftPanel: boolean = false;
-
+  showLockScreen: boolean = false;
   /**
    * Creates an instance of the MainComponent with the injected services
    * @param {UpgradeModule} upgrade service
@@ -53,6 +55,7 @@ export class AppComponent implements OnInit {
     private ticketsStateService: TicketsStateService,
     private constantsStateService: ConstantsStateService,
     private leftPanelStateService: LeftPanelStateService,
+    private modalService: NgbModal,
     public cd: ChangeDetectorRef,
 
   ) { }
@@ -94,6 +97,13 @@ export class AppComponent implements OnInit {
     this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
       this.toggleLeftPanel = data;
       this.cd.detectChanges();
+    })
+    this.appService.onLockScreen.subscribe(data => {
+      if (!this.showLockScreen) {
+        const modalRef = this.modalService.open(ModalLockScreenComponent, { windowClass: 'quote-send-modal' });
+        console.log("modalRef", modalRef);
+        this.showLockScreen = true;
+      }
     })
   }
   ngDoCheck() {

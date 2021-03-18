@@ -9,12 +9,22 @@
         ng-class="{'has-error': isShowingErrors(unlockForm, 'code')}"
     >
 
+
+
+
+
+
         <label
             class="control-label"
             ng-hide="isShowingErrors(unlockForm, 'code')"
         >
-            Password {{ currentUser.enableTwoFactorAuth && unlockModel.isCodeSent() ? ' or code' : '' }}
+            Password {{currentUser && currentUser.enableTwoFactorAuth && unlockModel.isCodeSent() ? ' or code' : '' }}
         </label>
+
+
+
+
+
 
         <div>
             <!-- ng-messages="unlockForm.code.$error"
@@ -23,15 +33,20 @@
                 class="control-label"
                 *ngIf="!validate.getValidate()"
             >
-                Password {{ currentUser.enableTwoFactorAuth && lockScreen.isCodeSent() ? ' or code' : '' }} is required.
+                Password {{currentUser && currentUser.enableTwoFactorAuth && lockScreen.isCodeSent() ? ' or code' : '' }} is required.
             </label>
             <label
                 class="control-label"
-                *ngIf="wrongCode.getWrongCode()"
+                *ngIf="validate.getWrongCode()"
             >
-                It is wrong password {{ currentUser.enableTwoFactorAuth && lockScreen.isCodeSent() ? ' or code' : '' }}.
+                It is wrong password {{ currentUser && currentUser.enableTwoFactorAuth && lockScreen.isCodeSent() ? ' or code' : '' }}.
             </label>
         </div>
+
+
+
+
+
 
         <input
             placeholder="Enter password"
@@ -55,6 +70,11 @@
             ></i>
         </a>
 
+
+
+
+
+
     </div>
     <div class="buttons-container">
         <button
@@ -66,13 +86,18 @@
         </button>
         <button
             class="btn btn-success"
-            *ngIf="currentUser.enableTwoFactorAuth"
+            *ngIf="currentUser && currentUser.enableTwoFactorAuth"
             (click)="sendCode()"
             [disabled]="lockScreen.isUnlocking()"
         >
             Send code
         </button>
     </div>
+
+
+
+
+
 
     <i class="unlock-modal-icn"></i>
     <p class="text-muted">
@@ -82,5 +107,10 @@
     <div class="log-out-btn">
         <a (click)="logOut()">Logout</a>
     </div>
+
+
+
+
+
 
 </div>

@@ -8,12 +8,15 @@ export class AppService {
   isInit: boolean = false;
   onMobile: EventEmitter<any> = new EventEmitter();
   init: EventEmitter<any> = new EventEmitter();
-
+  onLockScreen: EventEmitter<any> = new EventEmitter();
   constructor() { }
   public onInit() {
     this.isInit = true;
     this.init.emit(null);
 
+  }
+  public showLockScreen () {
+    this.onLockScreen.emit(null);
   }
   public getOnInit() {
     return this.init;

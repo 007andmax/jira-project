@@ -9,7 +9,7 @@ import {
   downgradeComponent,
   downgradeInjectable
 } from '@angular/upgrade/static';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SelectModule } from 'ng2-select';
 // import { SelectModule } from 'ng2-select';
@@ -400,6 +400,8 @@ import { RemoteConnectionReportComponent } from './components/reports/reports/re
 import { TechSalesReportComponent } from './components/reports/reports/tech-sales-report/tech-sales-report.component';
 import { TechTicketReportComponent } from './components/reports/reports/tech-ticket-report/tech-ticket-report.component';
 import { ModalLockScreenComponent } from './services/modal/modal-lock-screen/modal-lock-screen.component';
+import { HttpInterceptorService } from './services/http/http-interceptor.service';
+
 
 /**
  * declare angular
@@ -1007,7 +1009,7 @@ angular.module('quicktech')
     IgxTimePickerModule,
     DisabledBtnModule,
     NgxUploaderModule,
-    AngularEditorModule,
+    AngularEditorModule
   ],
   entryComponents: [
     LeftPanelComponent,
@@ -1061,7 +1063,8 @@ angular.module('quicktech')
     CompanyNetworkScanComponent,
     CompanyDevicesComponent,
     CompanyDevicesRemoteAccessComponent,
-    SupportComponent
+    SupportComponent,
+    ModalLockScreenComponent
     // RecurringTicketsComponent
   ],
   exports: [
@@ -1074,6 +1077,11 @@ angular.module('quicktech')
       provide: '$state',
       useFactory: ($injector: any) => $injector.get('$state'),
       deps: ['$injector']
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi: true,
     },
     { provide: UrlHandlingStrategy, useClass: CustomHandlingStrategy },
     ApiPasswordManagerService,

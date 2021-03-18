@@ -39,6 +39,7 @@ export class ModalLockScreenComponent implements OnInit {
         this.activeModal.dismiss('Cross click');
         this.lockScreen.setUnlocking(false);
       }, resp => {
+        console.log("resp", resp);
         if (resp.status === 409) this.validate.setWrongCode(false);
         this.lockScreen.setUnlocking(false);
       })
