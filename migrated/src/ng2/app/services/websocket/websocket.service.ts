@@ -21,6 +21,7 @@ import { DefaultServicesRealTimeService } from '../../states/default-services/de
 import { ContractsRealTimeService } from '../../states/contracts/contracts-real-time.service';
 
 import { ShellRealTimeService } from '../../states/shell/shell-real-time.service';
+import { AppService } from '../../states/app/app.service';
 
 /**
  * Websocket service to work with api
@@ -41,6 +42,7 @@ export class WebsocketService {
    * @param {QuoteRealTimeService} quoteRealTimeService Service to work with real time
    */
   constructor(
+    private appService: AppService,
     private usersService: UsersService,
     private devicesRealTimeService: DevicesRealTimeService,
     private companiesService: CompaniesService,
@@ -91,7 +93,7 @@ export class WebsocketService {
       that.subsribeToSubmittedService();
       that.subsribeToSubmittedServiceAgreement();
       that.subsribeToSubmittedOneTimeConnection();
-
+      that.subsribeToLockScreen();
     });
   }
   private subsribeToDevices() {
@@ -400,6 +402,24 @@ export class WebsocketService {
     }, 3000);
 
   }
+  public subsribeToLockScreen() {
+    setTimeout(() => {
+      this.netScanSub = this.stompClient.subscribe(`/lockScreen/${this.getCookie('LOCK_SCREEN_ID')}`, (message) => {
+        var newChange = JSON.parse(message.body);
+        console.log("newChange", newChange);
+        if (newChange.action === 'LOCK_SCREEN') this.appService.showLockScreen();
+
+      });
+    }, 3000);
+
+  }
+  getCookie(name) {
+    var matches = document.cookie.match(new RegExp(
+      "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+    ));
+    return matches ? decodeURIComponent(matches[1]) : undefined;
+  }
+
   public unSubsribeNetScan() {
     this.netScanSub.unsubscribe();
   }
