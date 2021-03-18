@@ -123,8 +123,6 @@
               "src/ng1/bower_components/angular-daterangepicker/js/angular-daterangepicker.js",
               "src/ng1/bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js",
               "src/ng1/scripts/core/app.mdl.js",
-              "src/ng1/scripts/common/directives/feedback-form/feedback-form.drv.js",
-              "src/ng1/scripts/common/directives/phone-numbers/phone-numbers.drv.js",
               "src/ng1/scripts/js/vendors/jquery.jscrollpane.js",
               "src/ng1/scripts/js/vendors/modernizr.js",
               "src/ng1/scripts/js/vendors/editor/jquery.hotkeys.js",
