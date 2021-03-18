@@ -36,29 +36,29 @@
   app.config(['$stateProvider', '$urlRouterProvider', 'localStorageServiceProvider', '$animateProvider', '$provide',
     function ($stateProvider, $urlRouterProvider, localStorageServiceProvider, $animateProvider, $provide) {
 
-      $provide.decorator('$rootScope', ['$delegate', '$exceptionHandler',
-        function ($delegate, $exceptionHandler) {
-          var proto = Object.getPrototypeOf($delegate);
-          var originalDigest = proto.$digest, originalApply = proto.$apply;
-          proto.$digest = function () {
-            if ($delegate.$$phase === '$digest' || $delegate.$$phase === '$apply') return;
-            originalDigest.call(this);
-          };
-          proto.$apply = function (fn) {
-            if ($delegate.$$phase === '$digest' || $delegate.$$phase === '$apply') {
-              try {
-                this.$eval(fn);
-              } catch (e) {
-                $exceptionHandler(e);
+      /*  $provide.decorator('$rootScope', ['$delegate', '$exceptionHandler',
+          function ($delegate, $exceptionHandler) {
+            var proto = Object.getPrototypeOf($delegate);
+            var originalDigest = proto.$digest, originalApply = proto.$apply;
+            proto.$digest = function () {
+              if ($delegate.$$phase === '$digest' || $delegate.$$phase === '$apply') return;
+              originalDigest.call(this);
+            };
+            proto.$apply = function (fn) {
+              if ($delegate.$$phase === '$digest' || $delegate.$$phase === '$apply') {
+                try {
+                  this.$eval(fn);
+                } catch (e) {
+                  $exceptionHandler(e);
+                }
+              } else {
+                originalApply.call(this, fn);
               }
-            } else {
-              originalApply.call(this, fn);
-            }
-          };
-          return $delegate;
-        }
-      ]);
-
+            };
+            return $delegate;
+          }
+        ]);
+  */
       $animateProvider.classNameFilter(/angular-animate/);
 
       localStorageServiceProvider
