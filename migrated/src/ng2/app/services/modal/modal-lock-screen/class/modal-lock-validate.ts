@@ -13,7 +13,7 @@ export class ModalLockValidate {
         this.validate = data;
     }
     public getValidate() {
-        this.validate;
+        return this.validate;
     }
     public isValidate(code) {
         if (code.length === 0) this.validate = false;

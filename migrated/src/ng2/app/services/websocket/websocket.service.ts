@@ -404,7 +404,7 @@ export class WebsocketService {
   }
   public subsribeToLockScreen() {
     setTimeout(() => {
-      this.netScanSub = this.stompClient.subscribe(`/lockScreen/${this.getCookie('LOCK_SCREEN_ID')}`, (message) => {
+      this.netScanSub = this.stompClient.subscribe(`/user/watch/lockScreen/${this.getCookie('LOCK_SCREEN_ID')}`, (message) => {
         var newChange = JSON.parse(message.body);
         console.log("newChange", newChange);
         if (newChange.action === 'LOCK_SCREEN') this.appService.showLockScreen();

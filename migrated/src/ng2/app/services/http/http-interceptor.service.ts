@@ -17,15 +17,15 @@ export class HttpInterceptorService implements HttpInterceptor {
     return next.handle(req).pipe(
       tap(
         (event) => {
-          if (event instanceof HttpResponse)
-            console.log('Server response')
+          //  if (event instanceof HttpResponse)  //   console.log('Server response')
+
         },
         (err) => {
           if (err instanceof HttpErrorResponse) {
             if (err.status == 423) {
               this.appService.showLockScreen();
             }
-            console.log('Unauthorized')
+            //  console.log('Unauthorized')
           }
         }
       )

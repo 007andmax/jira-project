@@ -100,9 +100,13 @@ export class AppComponent implements OnInit {
     })
     this.appService.onLockScreen.subscribe(data => {
       if (!this.showLockScreen) {
-        const modalRef = this.modalService.open(ModalLockScreenComponent, { windowClass: 'quote-send-modal' });
+        const modalRef = this.modalService.open(ModalLockScreenComponent, {
+          windowClass: 'quote-send-modal', backdrop: 'static',
+          keyboard: false
+        });
         console.log("modalRef", modalRef);
         this.showLockScreen = true;
+        this.cd.detectChanges();
       }
     })
   }

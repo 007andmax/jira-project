@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { LockScreenService } from '../../lock-screen/lock-screen.service';
@@ -11,6 +11,7 @@ import { ModalLockValidate } from './class/modal-lock-validate';
   styleUrls: ['./modal-lock-screen.component.css'],
   providers: [NgbModalConfig, NgbModal]
 })
+
 export class ModalLockScreenComponent implements OnInit {
   currentUser: any;
   codeShowed: boolean = false;
@@ -20,19 +21,24 @@ export class ModalLockScreenComponent implements OnInit {
     private lockScreenService: LockScreenService,
     public activeModal: NgbActiveModal,
     private modalService: NgbModal,
+    public cd: ChangeDetectorRef,
     config: NgbModalConfig,) {
     config.backdrop = 'static';
     config.keyboard = false;
+    console.log("config", config);
   }
 
   ngOnInit() {
     this.currentUser = this.usersStateService.getCurrentUser();
+    this.cd.detectChanges();
+    console.log("this.validate", this.validate);
   }
   onCodeChange() {
     this.validate.setWrongCode(true);
     this.validate.setValidate(true);
   }
   unlock() {
+    console.log("this.validate", this.validate);
     if (this.validate.isValidate(this.lockScreen.code)) {
       this.lockScreen.setUnlocking(true);
       this.lockScreenService.unlockScreen(this.lockScreen.code).subscribe(resp => {
