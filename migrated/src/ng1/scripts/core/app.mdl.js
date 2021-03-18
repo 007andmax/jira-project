@@ -4,19 +4,19 @@
 
   var app = angular.module('quicktech',
     [
-      'main.services',
-      'quicktech.core.tickets',
-      'quicktech.common.services',
-      'quicktech.common.directives',
-      'quicktech.core.companies',
-      'quicktech.core.products',
-      'quicktech.core.billable',
-      'quicktech.core.leftPanel',
-      'quicktech.core.rightPanel',
-      'quicktech.core.settings',
-      'quicktech.core.devices',
-      'quicktech.core.reports',
-      'quicktech.core.serviceAgreements',
+
+
+
+
+
+
+
+
+
+
+
+
+
       'ui.router',
       'ui.select',
       'ui.bootstrap',
@@ -237,48 +237,24 @@
           url: '/ng2/contracts',
           template: '<contracts-component></contracts-component>'
         }))
-        .state('credits', waitForServices({
-          url: '/accounting/credits',
-          templateUrl: '/ng1/scripts/core/billable/credits/credits.tpl.html',
-          controller: 'quicktech.core.billable.creditsCtrl'
-        }))
-        .state('new-payments', waitForServices({
-          url: '/accounting/new-payments',
-          templateUrl: '/ng1/scripts/core/billable/new-payments/new-payments.tpl.html',
-          controller: 'quicktech.core.billable.newPaymentsCtrl'
-        }))
+
+
         .state('new-quickSupport', waitForServices({
           url: '/ng2/quickSupport',
           template: '<support-component></support-component>'
         }))
-        .state('reports', waitForServices({
-          url: '/reports',
-          templateUrl: '/ng1/scripts/core/reports/reports.tpl.html',
-          controller: 'quicktech.core.reports.reportsCtrl'
-        }))
+
         .state('tech-ticket', waitForServices({
           url: '/ng2/report/tech-ticket',
           template: '<item-report-component></item-report-component>'
         }))
-        .state('commissionsReport-detailed', waitForServices({
-          url: '/reports/byCommissionsDetailed',
-          templateUrl: '/ng1/scripts/core/reports/reports-templates/commissions-report-detailed.tpl.html',
-          controller: 'quicktech.core.reports.reportsCtrl'
-        }))
-        .state('commissionsReport-common', waitForServices({
-          url: '/reports/byCommissions',
-          templateUrl: '/ng1/scripts/core/reports/reports-templates/commissions-report-common.tpl.html',
-          controller: 'quicktech.core.reports.reportsCtrl'
-        }))
+
+
         .state('tech-sales', waitForServices({
           url: '/ng2/report/tech-sales',
           template: '<item-report-component></item-report-component>'
         }))
-        .state('hardware-reports', waitForServices({
-          url: '/reports/hardware-reports',
-          templateUrl: '/ng1/scripts/core/reports/reports-templates/hardware-summary.tpl.html',
-          controller: 'quicktech.core.reports.reportsCtrl'
-        }))
+
         .state('device-ip-summary', waitForServices({
           url: '/ng2/report/device-ip-summary',
           template: '<item-report-component></item-report-component>'
@@ -412,10 +388,10 @@
     }]);
 
   app.run(
-    ['$rootScope', '$templateRequest', 'CompaniesService', '$state', '$uibModal', 'TicketsService', '$stateParams',
-      'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.SharedStateService', '$http',
-      function ($rootScope, $templateRequest, CompaniesService, $state, $uibModal, TicketsService, $stateParams,
-        UserConfirmationsService, SharedStateService, $http) {
+    ['$rootScope', '$templateRequest', '$state', '$uibModal', '$stateParams',
+      '$http',
+      function ($rootScope, $templateRequest, $state, $uibModal, $stateParams,
+        $http) {
 
         $rootScope.debounce = function (fn, time) {
           var isCalled = false;
@@ -446,7 +422,7 @@
 
         $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState) {
 
-          var globalSearch = SharedStateService.getSharedState('globalSearch');
+          //  var globalSearch = SharedStateService.getSharedState('globalSearch');
           $rootScope.isRightPanelHidden = toState.name !== 'tickets.details';
 
 
@@ -592,11 +568,7 @@
           $rootScope.isLogOut = true;
           var confirmButton = 'OK';
 
-          UserConfirmationsService.show(message, confirmButton, true).then(function () {
-            window.loggingOut = true;
-            window.location.href = '/logout';
-            window.location.hash = '';
-          });
+
 
         };
 

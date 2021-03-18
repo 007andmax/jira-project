@@ -44,6 +44,7 @@ export class UsersStateService {
     this.userService.getCurrentUser().subscribe((data: any) => {
       this.currentUser = new CurrentUser(data);
       this.onInitCurrentUser(data);
+      console.log("getCurrentUser", data);
     }, err => {
       console.log("err", err);
     })
