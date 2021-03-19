@@ -401,6 +401,7 @@ import { TechSalesReportComponent } from './components/reports/reports/tech-sale
 import { TechTicketReportComponent } from './components/reports/reports/tech-ticket-report/tech-ticket-report.component';
 import { ModalLockScreenComponent } from './services/modal/modal-lock-screen/modal-lock-screen.component';
 import { HttpInterceptorService } from './services/http/http-interceptor.service';
+import { ModalSessionScreenComponent } from './services/modal/modal-session-screen/modal-session-screen.component';
 
 
 /**
@@ -967,7 +968,8 @@ angular.module('quicktech')
     RemoteConnectionReportComponent,
     TechSalesReportComponent,
     TechTicketReportComponent,
-    ModalLockScreenComponent
+    ModalLockScreenComponent,
+    ModalSessionScreenComponent
   ],
   imports: [
     BrowserModule,
