@@ -21,13 +21,13 @@
                 class="control-label"
                 *ngIf="!validate.getValidate()"
             >
-                Password {{currentUser && currentUser.enableTwoFactorAuth && lockScreen.isCodeSent() ? ' or code' : '' }} is required.
+                Password {{currentUser && isEnableTwoFactorAuth() && lockScreen.isCodeSent() ? ' or code' : '' }} is required.
             </label>
             <label
                 class="control-label"
                 *ngIf="!validate.getWrongCode()"
             >
-                It is wrong password {{ currentUser && currentUser.enableTwoFactorAuth && lockScreen.isCodeSent() ? ' or code' : '' }}.
+                It is wrong password {{ currentUser && isEnableTwoFactorAuth() && lockScreen.isCodeSent() ? ' or code' : '' }}.
             </label>
         </div>
         <input
@@ -62,7 +62,7 @@
         </button>
         <button
             class="btn btn-success"
-            *ngIf="currentUser && currentUser.enableTwoFactorAuth"
+            *ngIf="currentUser && isEnableTwoFactorAuth()"
             (click)="sendCode()"
             [disabled]="lockScreen.isUnlocking()"
         >

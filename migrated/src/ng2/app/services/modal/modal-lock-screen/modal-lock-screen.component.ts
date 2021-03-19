@@ -30,12 +30,21 @@ export class ModalLockScreenComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = this.usersStateService.getCurrentUser();
+    this.usersStateService.getOnGetCurrentuser().subscribe(data => {
+      this.currentUser = data;
+      console.log("this.currentUser", this.currentUser);
+      this.cd.detectChanges();
+    })
+    console.log("this.currentUser", this.currentUser);
     this.cd.detectChanges();
     console.log("this.validate", this.validate);
   }
   onCodeChange() {
     this.validate.setWrongCode(true);
     this.validate.setValidate(true);
+  }
+  isEnableTwoFactorAuth() {
+    return this.currentUser.twoFactorAuthType === 'SECURE' || this.currentUser.twoFactorAuthType === 'BASIC';
   }
   unlock() {
     console.log("this.validate", this.validate);
