@@ -1,160 +1,153 @@
-<!--<div class="password-content__header">-->
-<!--  <h3>Password Manager</h3>-->
-<!--  <div class="password-content__header&#45;&#45;search">-->
-<!--    &lt;!&ndash;add class "show" to <div class="password-selected">&ndash;&gt;-->
-<!--    <div class="password-selected">-->
-<!--      <div class="password-selected-qty new-link">-->
-<!--        <span>2</span> Selected-->
-<!--      </div>-->
-<!--      <div class="password-selected-actions">-->
-<!--        <i class="icn-16 edit-new"></i>-->
-<!--        <i class="icn-16 print-new"></i>-->
-<!--        <i class="icn-16 export-new"></i>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <button-->
-<!--      *ngIf="getPermissions('CREATE_PASSWORD')"-->
-<!--      (click)="addRecord()"-->
-<!--            style="font-size: 13px;" class="new-link desktop-hidden">Create Password</button>-->
-<!--    <button-->
-<!--      *ngIf="getPermissions('CREATE_PASSWORD')"-->
-<!--      (click)="addRecord()" class="plus-btn mob-hidden">+</button>-->
-<!--  </div>-->
-<!--</div>-->
+<!-- <div class="password-content__header"> -->
+<!-- <h3>Password Manager</h3> -->
+<!-- <div class="password-content__header&#45;&#45;search"> -->
+<!-- &lt;!&ndash;add class "show" to <div class="password-selected">&ndash;&gt; -->
+<!-- <div class="password-selected"> -->
+<!-- <div class="password-selected-qty new-link"> -->
+<!-- <span>2</span> Selected -->
+<!-- </div> -->
+<!-- <div class="password-selected-actions"> -->
+<!-- <i class="icn-16 edit-new"></i> -->
+<!-- <i class="icn-16 print-new"></i> -->
+<!-- <i class="icn-16 export-new"></i> -->
+<!-- </div> -->
+<!-- </div> -->
+<!-- <button -->
+<!-- *ngIf="getPermissions('CREATE_PASSWORD')" -->
+<!-- (click)="addRecord()" -->
+<!-- style="font-size: 13px;" class="new-link desktop-hidden">Create Password</button> -->
+<!-- <button -->
+<!-- *ngIf="getPermissions('CREATE_PASSWORD')" -->
+<!-- (click)="addRecord()" class="plus-btn mob-hidden">+</button> -->
+<!-- </div> -->
+<!-- </div> -->
+
+
+
 
 
 <div class="qt-page-list__header --sticky">
-  <div class="qt-page-list__header-title-line">
-    <div class="qt-page-list__header-title-line--left">
-      <h3
-        class="qt-page-list__header-title"
-        [textContent]="'Password Manager'"
-      ></h3>
-    </div>
-    <div class="qt-page-list__header-title-line--rigth">
-      <div class="qt-df qt-ai-c">
-        <div
-          class="company-devices-page__list-header-buttons"
-        >
-          <div>3 Selected</div>
-          <div
-            class="qt-ml-25 qt-ff-gm qt-df qt-color-info qt-ai-c qt-pointer"
-          >
-            <div class="email-ng2 qt-za-16 qt-sz-16 qt-bg-contain qt-ic-c qt-mr-6"></div>
-            <div>Share via Email</div>
-          </div>
-          <div
-            class="qt-ml-16 qt-ff-gm qt-df qt-color-info qt-ai-c qt-pointer"
-          >
-            <div class="icon__print-blue qt-za-16 qt-sz-16 qt-bg-contain qt-ic-c qt-mr-6"></div>
-            <div>Print</div>
-          </div>
-          <div
-            class="qt-ml-16 qt-ff-gm qt-df qt-color-info qt-ai-c qt-pointer"
-          >
-            <div class="export-ng2 qt-za-16 qt-sz-16 qt-bg-contain qt-ic-c qt-mr-6"></div>
-            <div>Export</div>
-          </div>
+    <div class="qt-page-list__header-title-line">
+        <div class="qt-page-list__header-title-line--left">
+            <h3
+                class="qt-page-list__header-title"
+                [textContent]="'Password Manager'"
+            ></h3>
         </div>
-        <div class="qt-page-list__search qt-ml-8">
-          <input
-            type="text"
-            placeholder="Search password"
-          >
+        <div class="qt-page-list__header-title-line--rigth">
+            <div class="qt-df qt-ai-c">
+                <div class="company-devices-page__list-header-buttons">
+                    <div>3 Selected</div>
+                    <div class="qt-ml-25 qt-ff-gm qt-df qt-color-info qt-ai-c qt-pointer">
+                        <div class="email-ng2 qt-za-16 qt-sz-16 qt-bg-contain qt-ic-c qt-mr-6"></div>
+                        <div>Share via Email</div>
+                    </div>
+                    <div class="qt-ml-16 qt-ff-gm qt-df qt-color-info qt-ai-c qt-pointer">
+                        <div class="icon__print-blue qt-za-16 qt-sz-16 qt-bg-contain qt-ic-c qt-mr-6"></div>
+                        <div>Print</div>
+                    </div>
+                    <div class="qt-ml-16 qt-ff-gm qt-df qt-color-info qt-ai-c qt-pointer">
+                        <div class="export-ng2 qt-za-16 qt-sz-16 qt-bg-contain qt-ic-c qt-mr-6"></div>
+                        <div>Export</div>
+                    </div>
+                </div>
+                <div class="qt-page-list__search qt-ml-8">
+                    <input
+                        type="text"
+                        placeholder="Search password"
+                    >
+                </div>
+                <button class="qt-btn btn-filter qt-ml-8 d-f">Filters</button>
+                <button
+                    class="qt-btn --outline-blue qt-ml-8"
+                    *ngIf="getPermissions('CREATE_PASSWORD')"
+                    (click)="addRecord()"
+                >
+                    Create Password
+                </button>
+            </div>
         </div>
-        <button
-          class="qt-btn btn-filter qt-ml-8 d-f"
-        >
-          Filters
-        </button>
-        <button
-          class="qt-btn --outline-blue qt-ml-8"
-          *ngIf="getPermissions('CREATE_PASSWORD')"
-          (click)="addRecord()"
-        >
-          Create Password
-        </button>
-      </div>
     </div>
-  </div>
 
-  <div class="qt-page-list__header-filters">
-    <app-drop-down
-      class="filter-category qt-mr-8"
-      [placeholder]="'Select by Category'"
-      [list]="[]"
-      [class]="['dropdown']"
-      widthInput="232px"
-    ></app-drop-down>
-    <button class="plus-btn qt-mr-8">
-      +
-    </button>
-    <app-drop-down
-      class="filter-company qt-w100 qt-mr-8"
-      [placeholder]="'Select Company'"
-      [list]="[]"
-      [class]="['dropdown']"
-      widthInput="100%"
-    ></app-drop-down>
-    <app-drop-down
-      class="qt-mr-8"
-      [placeholder]="'Select Device or User'"
-      [list]="[]"
-      [class]="['dropdown']"
-      widthInput="264px"
-    ></app-drop-down>
-    <app-drop-down
-      class="data-picker"
-      [placeholder]="'Data picker'"
-      [list]="[]"
-      [class]="['dropdown']"
-      widthInput="232px"
-    ></app-drop-down>
-  </div>
 
-  <div class="qt-page-list__header-thead-container">
-    <table class="qt-table-modern qt-page-list__header-thead">
-      <thead>
-      <tr>
-        <th
-          class="password-table__check"
+
+
+    <div class="qt-page-list__header-filters">
+        <app-drop-down
+            class="filter-category qt-mr-8"
+            [placeholder]="'Select by Category'"
+            [list]="[]"
+            [class]="['dropdown']"
+            widthInput="232px"
+        ></app-drop-down>
+        <button
+            class="plus-btn qt-mr-8"
+            (click)="showAddCategory = true"
         >
-          <div class="d-f">
-            <label class="qt-checkbox">
-              <input
-                type="checkbox"
-              >
-              <span></span>
-            </label>
-          </div>
-        </th>
-        <th
-          class="password-table__account pointer"
-        >
-          Account Type
-          <span class="qt-table-modern__sorting"></span>
-        </th>
-        <th
-          class="password-table__description pointer"
-        >
-          Description
-          <span class="qt-table-modern__sorting"></span>
-        </th>
-        <th
-          class="password-table__user-password pointer"
-        >
-          User & Password
-          <span class="qt-table-modern__sorting"></span>
-        </th>
-        <th class="password-table__status">
-          Status
-        </th>
-        <th class="password-table__menu"></th>
-      </tr>
-      </thead>
-    </table>
-  </div>
+            +
+        </button>
+        <app-password-manager-add-category
+            *ngIf="showAddCategory"
+            (onClose)="showAddCategory = false"
+        ></app-password-manager-add-category>
+        <app-drop-down
+            class="filter-company qt-w100 qt-mr-8"
+            [placeholder]="'Select Company'"
+            [list]="[]"
+            [class]="['dropdown']"
+            widthInput="100%"
+        ></app-drop-down>
+        <app-drop-down
+            class="qt-mr-8"
+            [placeholder]="'Select Device or User'"
+            [list]="[]"
+            [class]="['dropdown']"
+            widthInput="264px"
+        ></app-drop-down>
+        <app-drop-down
+            class="data-picker"
+            [placeholder]="'Data picker'"
+            [list]="[]"
+            [class]="['dropdown']"
+            widthInput="232px"
+        ></app-drop-down>
+    </div>
+
+
+
+
+    <div class="qt-page-list__header-thead-container">
+        <table class="qt-table-modern qt-page-list__header-thead">
+            <thead>
+                <tr>
+                    <th class="password-table__check">
+                        <div class="d-f">
+                            <label class="qt-checkbox">
+                                <input type="checkbox">
+                                <span></span>
+                            </label>
+                        </div>
+                    </th>
+                    <th class="password-table__account pointer">
+                        Account Type
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th class="password-table__description pointer">
+                        Description
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th class="password-table__user-password pointer">
+                        User & Password
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th class="password-table__status">Status</th>
+                    <th class="password-table__menu"></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+
+
 
 </div>
-
-

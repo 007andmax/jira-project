@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { PasswordManagerService } from "../../../services/password-manager/password-manager.service";
 import { PermissionsService } from "../../../services/permissions/permissions.service";
-import {ApiPasswordManagerService} from "../../../services/password-manager/api-password-manager.service";
+import { ApiPasswordManagerService } from "../../../services/password-manager/api-password-manager.service";
 
 /**
  * Password manager header component
@@ -13,7 +13,7 @@ import {ApiPasswordManagerService} from "../../../services/password-manager/api-
   styleUrls: ['./passwoord-manager-header.component.scss']
 })
 export class PasswoordManagerHeaderComponent implements OnInit {
-
+  showAddCategory: boolean = false;
   /**
    * Creates an instance of the PasswordManagerComponent with the injected services
    * @param {ApiPasswordManagerService} apiPasswordManagerService Service to work with api
@@ -29,13 +29,13 @@ export class PasswoordManagerHeaderComponent implements OnInit {
   /**
    * Initializes Password manager header. See [ngOnInit]{@see OnInit#ngOnInit}
    */
-  ngOnInit() {}
+  ngOnInit() { }
 
   /**
    * add new record event
    */
   public addRecord() {
-    this.passwordManagerService.onAddRecord();
+    this.passwordManagerService.showAddForm();
   }
 
   /**

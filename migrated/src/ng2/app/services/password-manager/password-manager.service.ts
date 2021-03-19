@@ -16,7 +16,8 @@ export class PasswordManagerService {
   public selectedDeviceOrUser: EventEmitter<any> = new EventEmitter();
   public selectedDate: EventEmitter<any> = new EventEmitter();
   public emitSelectedCategory: EventEmitter<any> = new EventEmitter();
-  public showAddForm: EventEmitter<any> = new EventEmitter();
+  public onAddForm: EventEmitter<any> = new EventEmitter();
+  public onEditForm: EventEmitter<any> = new EventEmitter();
   public hideAddForm: EventEmitter<any> = new EventEmitter();
   public deleteItem: EventEmitter<any> = new EventEmitter();
   public deleteItemEditForm: EventEmitter<any> = new EventEmitter();
@@ -33,6 +34,12 @@ export class PasswordManagerService {
   public constructor(
     private http: HttpClient
   ) { }
+  public showAddForm() {
+    this.onAddForm.emit(null);
+  }
+  public showEditFrom(data) {
+    this.onEditForm.emit(data);
+  }
   public getPassword() {
     return this.password;
   }
@@ -83,24 +90,14 @@ export class PasswordManagerService {
     this.selectedDate.emit(item)
   }
 
-  public onAddRecord(item?) {
-    this.showAddForm.emit(item);
-  }
 
-  public onEditRecord(item?) {
-    this.showAddForm.emit(item);
-  }
 
   /**
    * Add new record
    * @param item - record data
    */
 
-  public addRecord(item?) {
 
-    this.showAddForm.emit(item);
-    this.newRecordsisAdd.emit();
-  }
 
   /**
    * Delete record

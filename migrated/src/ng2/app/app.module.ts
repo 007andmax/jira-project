@@ -403,6 +403,8 @@ import { KeyUpEnterDirective } from './directives/key-up-enter.directive';
 import { InventoryAddCategoryComponent } from './components/inventory/inventory-add-category/inventory-add-category.component';
 import { InventoryHeaderComponent } from './components/inventory/inventory-header/inventory-header.component';
 import { InventoryFilterComponent } from './components/inventory/inventory-header/inventory-filter/inventory-filter.component';
+import { PasswordManagerAddCategoryComponent } from './components/password-manager/password-manager-add-category/password-manager-add-category.component';
+import { PasswordManagerAddAsideComponent } from './components/password-manager/password-manager-add-aside/password-manager-add-aside.component';
 
 /**
  * declare angular
@@ -971,7 +973,9 @@ angular.module('quicktech')
     KeyUpEnterDirective,
     InventoryAddCategoryComponent,
     InventoryHeaderComponent,
-    InventoryFilterComponent
+    InventoryFilterComponent,
+    PasswordManagerAddCategoryComponent,
+    PasswordManagerAddAsideComponent
   ],
   imports: [
     BrowserModule,

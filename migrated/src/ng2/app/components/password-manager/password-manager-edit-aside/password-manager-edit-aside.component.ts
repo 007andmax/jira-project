@@ -144,7 +144,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
    * show add form and init form
    */
   public showAddForm() {
-    this.subShowAddForm = this.passwordManagerService.showAddForm.subscribe((res) => {
+    this.subShowAddForm = this.passwordManagerService.onEditForm.subscribe((res) => {
       this.editItem = res;
       if (this.editItem) this.isEditmode = true;
       this.opened = true;
