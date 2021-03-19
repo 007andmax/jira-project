@@ -91,7 +91,7 @@ export class CompanyPasswordManagerTableComponent implements OnInit {
   public deleteRecord(recordId) {
     if (this.permissionsService.isAllowed('DELETE_PASSWORD')) {
       this.apiPasswordManagerService.deleteRecord(recordId).subscribe((res) => {
-     //   this.passwordManagerService.deleteRecord(recordId);
+        //   this.passwordManagerService.deleteRecord(recordId);
         this.recordsData = this.recordsData.filter((item) => item.id !== recordId);
         this.cd.detectChanges();
       });
@@ -112,9 +112,9 @@ export class CompanyPasswordManagerTableComponent implements OnInit {
    * @param item - item for edit
    */
   public editRecord(item) {
-     if (this.permissionsService.isAllowed('VIEW_PASSWORD')) {
-      this.passwordManagerService.addRecord(item);
-    }
+    /*  if (this.permissionsService.isAllowed('VIEW_PASSWORD')) {
+       this.passwordManagerService.addRecord(item);
+     }*/
   }
 
   /**
