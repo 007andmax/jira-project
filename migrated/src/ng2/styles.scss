@@ -1016,45 +1016,45 @@ app-quotes-item {
   font-size: 20px;
   margin: 0;
 }
-.products-content__header--search,
-.new-users-content__header--search,
-.password-content__header--search {
-  display: flex;
-  position: relative;
-}
-.products-content__header--search:before,
-.new-users-content__header--search:before,
-.password-content__header--search:before {
-  position: absolute;
-  content: '';
-  width: 20px;
-  height: 20px;
-  background: url(assets/img/icons/search.png);
-  left: 10px;
-  top: calc(50% - 10px);
-}
-.products-content__header--search input,
-.new-users-content__header--search input,
-.password-content__header--search input {
-  width: 300px;
-  margin-right: 16px;
-  border: none;
-  padding: 8px 8px 8px 40px;
-  border-radius: 4px;
-  background: #fff;
-  font-size: 13px;
-  outline: none;
-}
-.password-content__header--search input {
-  margin-right: 0;
-  padding: 6px 8px 6px 40px;
-}
-.products-content__header--search input::placeholder,
-.password-content__header--search::placeholder,
-.new-users-content__header--search input::placeholder {
-  color: #9ca5b6;
-  opacity: 1;
-}
+//.products-content__header--search,
+//.new-users-content__header--search,
+//.password-content__header--search {
+//  display: flex;
+//  position: relative;
+//}
+//.products-content__header--search:before,
+//.new-users-content__header--search:before,
+//.password-content__header--search:before {
+//  position: absolute;
+//  content: '';
+//  width: 20px;
+//  height: 20px;
+//  background: url(assets/img/icons/search.png);
+//  left: 10px;
+//  top: calc(50% - 10px);
+//}
+//.products-content__header--search input,
+//.new-users-content__header--search input,
+//.password-content__header--search input {
+//  width: 300px;
+//  margin-right: 16px;
+//  border: none;
+//  padding: 8px 8px 8px 40px;
+//  border-radius: 4px;
+//  background: #fff;
+//  font-size: 13px;
+//  outline: none;
+//}
+//.password-content__header--search input {
+//  margin-right: 0;
+//  padding: 6px 8px 6px 40px;
+//}
+//.products-content__header--search input::placeholder,
+//.password-content__header--search::placeholder,
+//.new-users-content__header--search input::placeholder {
+//  color: #9ca5b6;
+//  opacity: 1;
+//}
 .plus-btn {
   display: flex;
   align-items: center;
