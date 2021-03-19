@@ -17,14 +17,24 @@ export class HttpInterceptorService implements HttpInterceptor {
     return next.handle(req).pipe(
       tap(
         (event) => {
-          //  if (event instanceof HttpResponse)  //   console.log('Server response')
-
+          if (event instanceof HttpResponse) console.log('Server response', req)
+          let isDisabled = (req.body && req.body.data) ? req.body.data.message === 'userDisabled' : false;
+          if (isDisabled) this.appService.showSessionScreen('Your account has been disabled.')
         },
         (err) => {
           if (err instanceof HttpErrorResponse) {
-            if (err.status == 423) {
-              this.appService.showLockScreen();
+            console.log("err", err);
+            let unlockExpiredHeader = err.headers.get('SESSION_UNLOCK_EXPIRED');
+            let isUnauthorized = (err.error) ? err.error.errorMessage === 'unauthorized' || err.error.authMessage === 'unauthorized' : false;
+            if (isUnauthorized) {
+              this.appService.showSessionScreen('Your account has been disabled.')
+              return;
+            };
+            if (unlockExpiredHeader && unlockExpiredHeader.toLocaleLowerCase() === 'true') {
+              this.appService.showSessionScreen('You have been away for more than 3 hours. You have been logged off. Please login again.');
+              return;
             }
+            if (err.status == 423) this.appService.showLockScreen();
             //  console.log('Unauthorized')
           }
         }

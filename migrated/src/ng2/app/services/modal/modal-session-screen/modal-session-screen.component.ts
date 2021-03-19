@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-modal-session-screen',
@@ -6,10 +7,28 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./modal-session-screen.component.scss']
 })
 export class ModalSessionScreenComponent implements OnInit {
+  @Input() public message = '';
+  action: string = null;
+  constructor(
+    public activeModal: NgbActiveModal, private eRef: ElementRef,) {
 
-  constructor() { }
+  }
 
   ngOnInit() {
+
   }
+
+  public logOut() {
+    window.location.href = '/logout';
+    window.location.hash = '';
+  }
+
+
+  approveConfirm() {
+    this.logOut();
+    this.activeModal.close();
+
+  };
+
 
 }

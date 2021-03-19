@@ -9,13 +9,17 @@ export class AppService {
   onMobile: EventEmitter<any> = new EventEmitter();
   init: EventEmitter<any> = new EventEmitter();
   onLockScreen: EventEmitter<any> = new EventEmitter();
+  onSessionScreen: EventEmitter<any> = new EventEmitter();
   constructor() { }
   public onInit() {
     this.isInit = true;
     this.init.emit(null);
 
   }
-  public showLockScreen () {
+  public showSessionScreen(data) {
+    this.onSessionScreen.emit(data);
+  }
+  public showLockScreen() {
     this.onLockScreen.emit(null);
   }
   public getOnInit() {

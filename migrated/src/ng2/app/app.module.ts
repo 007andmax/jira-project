@@ -1066,7 +1066,8 @@ angular.module('quicktech')
     CompanyDevicesComponent,
     CompanyDevicesRemoteAccessComponent,
     SupportComponent,
-    ModalLockScreenComponent
+    ModalLockScreenComponent,
+    ModalSessionScreenComponent
     // RecurringTicketsComponent
   ],
   exports: [

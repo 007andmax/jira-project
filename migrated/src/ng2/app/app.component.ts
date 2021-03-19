@@ -16,6 +16,7 @@ import { ConstantsStateService } from './states/constants/constants-state.servic
 import { LeftPanelStateService } from './states/left-panel/left-panel-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalLockScreenComponent } from './services/modal/modal-lock-screen/modal-lock-screen.component';
+import { ModalSessionScreenComponent } from './services/modal/modal-session-screen/modal-session-screen.component';
 
 
 /**
@@ -34,6 +35,7 @@ export class AppComponent implements OnInit {
   qtListHeaaderScroller;
   qtListBodyScroller;
   toggleLeftPanel: boolean = false;
+  showSessionScreen: boolean = false;
   showLockScreen: boolean = false;
   /**
    * Creates an instance of the MainComponent with the injected services
@@ -101,11 +103,23 @@ export class AppComponent implements OnInit {
     this.appService.onLockScreen.subscribe(data => {
       if (!this.showLockScreen) {
         const modalRef = this.modalService.open(ModalLockScreenComponent, {
-          windowClass: 'quote-send-modal', backdrop: 'static',
+          windowClass: 'lock-screen-modal', backdrop: 'static',
           keyboard: false
         });
         console.log("modalRef", modalRef);
         this.showLockScreen = true;
+        this.cd.detectChanges();
+      }
+    })
+    this.appService.onSessionScreen.subscribe(data => {
+      if (!this.showSessionScreen) {
+        const modalRef = this.modalService.open(ModalSessionScreenComponent, {
+          windowClass: 'xs-modal user-modal', backdrop: 'static',
+          keyboard: false
+        });
+        modalRef.componentInstance.message = data;
+        console.log("modalRef", modalRef);
+        this.showSessionScreen = true;
         this.cd.detectChanges();
       }
     })
