@@ -31,6 +31,7 @@
 .icn-calendar-light {
   background: url("assets/img/calendar-light.png");
 }
+
 .icn-attach {
   background: url("assets/img/attachment-blue.svg");
 }
@@ -261,6 +262,12 @@
   }
   &__view {
     background-image: url("assets/img/icons/view.svg");
+  }
+  &__calendar {
+    background-image: url("assets/img/icons/calander.svg");
+  }
+  &__user-grey {
+    background-image: url("assets/img/icons/user-grey.svg");
   }
   &__payment-received {
     background-image: url("assets/img/icons/payment-received.svg");

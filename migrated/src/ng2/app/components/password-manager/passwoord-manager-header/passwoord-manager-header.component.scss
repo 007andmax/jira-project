@@ -8,3 +8,20 @@
   }
 }
 
+.filter {
+  &-category {
+    width: 20%;
+  }
+
+  &-company {
+    width: 30%;
+  }
+
+  &-device {
+    width: 24%;
+  }
+
+  &-data-picker {
+    width: 20%;
+  }
+}
