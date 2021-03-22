@@ -70,8 +70,13 @@
                 <tr>
                     <th class="users-table__check">
                         <div class="d-f">
-                            <label class="qt-checkbox">
+                            <label
+                                class="qt-checkbox"
+                                for="all-users"
+                            >
                                 <input
+                                    id="all-users"
+                                    [(ngModel)]="selectAll"
                                     (change)="toggleAllUser($event)"
                                     type="checkbox"
                                 >
