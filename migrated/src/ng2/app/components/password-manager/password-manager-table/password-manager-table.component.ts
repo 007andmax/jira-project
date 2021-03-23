@@ -6,6 +6,8 @@ import { ApiPasswordManagerService } from "../../../services/password-manager/ap
 import { PasswordManagerService } from "../../../services/password-manager/password-manager.service";
 import { PermissionsService } from "../../../services/permissions/permissions.service";
 import { FilterPasswordManager } from '../class/filter-password-manager';
+import { PasswordRecord } from '../class/password-record';
+import { PasswordManagerListService } from '../services/password-manager-list.service';
 
 /**
  * Password manager data table component
@@ -13,25 +15,16 @@ import { FilterPasswordManager } from '../class/filter-password-manager';
 @Component({
   selector: 'app-password-manager-table',
   templateUrl: './password-manager-table.component.html',
-  styleUrls: ['./password-manager-table.component.scss']
+  styleUrls: ['./password-manager-table.component.scss'],
+  providers: [PasswordManagerListService]
 })
 export class PasswordManagerTableComponent implements OnInit {
-
-
-  @Input() selectedCompany: any;
-  @Input() selectedUserOrDevice: any;
-  @Input() selectedDate: any;
-  @Input() selectedCategory: any;
-  @Input() addNewRecords: Subject<boolean>;
-  @Input() showDataTable: Subject<boolean>;
-  private subGetRecords: ISubscription;
-  private subAddNewRecords: ISubscription;
-  public recordsData: any = [];
-  public list_records = [];
-  public sort: string = 'companyName';
-  public direction: string = null;
-  // public filter: FilterPasswordManager = new FilterPasswordManager();
-
+  public recordsData: Array<PasswordRecord> = [];
+  public list_records: Array<PasswordRecord> = [];
+  showPreloader: boolean = true;
+  public infiniteScrollDisabled = false;
+  public page_number: number = 0;
+  public filter: FilterPasswordManager = new FilterPasswordManager();
 
   /**
    * Creates an instance of the PasswordManagerTableComponent with the injected services
@@ -43,6 +36,7 @@ export class PasswordManagerTableComponent implements OnInit {
     private apiPasswordManagerService: ApiPasswordManagerService,
     private passwordManagerService: PasswordManagerService,
     private permissionsService: PermissionsService,
+    private passwordManagerListService: PasswordManagerListService,
     public cd: ChangeDetectorRef,
   ) { }
 
@@ -50,47 +44,31 @@ export class PasswordManagerTableComponent implements OnInit {
    * Initializes Password manager data table. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
+    window.scrollTo(0, 0);
     this.getRecords();
-    this.getSelectedCategory();
-    this.subAddNewRecords = this.addNewRecords.subscribe(v => {
-      this.apiPasswordManagerService.getRecords();
-    });
-    this.watchDeleteRecord();
-    this.onSort();
-
-    //   this.filter.company = (this.selectedCompany) ? JSON.parse(JSON.stringify(this.selectedCompany)) : null;;
-    //    this.filter.user = this.selectedUserOrDevice;
-    //   this.filter.dateFormat = this.selectedDate;
-    //  this.filter.passwordCategory = JSON.parse(JSON.stringify(this.selectedCategory));
   }
-  ngDoCheck() {
-
-    // this.filter.company = (this.selectedCompany) ? JSON.parse(JSON.stringify(this.selectedCompany)) : null;
-
-    /*  this.filter.user = this.selectedUserOrDevice;
-      this.filter.dateFormat = this.selectedDate;
-      this.filter.passwordCategory = this.selectedCategory;*/
-
+  public onScroll() {
+    this.infiniteScrollDisabled = true;
     this.filterList();
   }
+
   private filterList() {
-
-    this.list_records = this.recordsData.filter((item) => {
-
-      if (this.selectedCompany && this.selectedCompany.companyId.length > 0 && item.companyId !== this.selectedCompany.companyId) return false;
-      if (this.selectedDate && item.expiredDate !== this.selectedDate) return false;
-      if (this.selectedUserOrDevice && this.selectedUserOrDevice.id) {
-        let find = false;
-        item.links.forEach(link => {
-          if (link.userId && link.userId == this.selectedUserOrDevice.id) find = true;
-          if (link.deviceId && link.deviceId == this.selectedUserOrDevice.id) find = true;
-        });
-        if (!find) return false;
-      }
-      if (this.selectedCategory && item.template !== this.selectedCategory.UPPERCASE) return false;
-      return true;
-    }).sort((a, b) => (a.companyName.toLowerCase() > b.companyName.toLowerCase()) ?
-      1 : ((b.companyName.toLowerCase() > a.companyName.toLowerCase()) ? -1 : 0));
+    if (this.passwordManagerListService.getBlockList()) {
+      this.infiniteScrollDisabled = false;
+      return;
+    }
+    this.page_number += 1;
+    let listFilter = this.filter.getFilterList(this.recordsData);
+    let start = (this.page_number - 1) * 30;
+    let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;
+    let list_records = [];
+    for (let i = start; i < end; i++) {
+      list_records.push(listFilter[i]);
+    }
+    this.list_records = [...this.list_records, ...list_records.map(item => new PasswordRecord(JSON.parse(JSON.stringify(item))))];
+    console.log("this.list_records", this.list_records);
+    this.infiniteScrollDisabled = false;
+    if ((this.page_number * 30) > listFilter.length) this.passwordManagerListService.setBlockList(true);
 
   }
   private onChangeRealtTime() {
@@ -108,96 +86,28 @@ export class PasswordManagerTableComponent implements OnInit {
         if (index > -1) this.recordsData.splice(index, 1);
 
       }
-      this.filterList();
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
       }
     })
   }
 
-  private onSort() {
-    this.passwordManagerService.getOnSort().subscribe((data) => {
 
-      this.sort = data.sort;
-      this.direction = data.direction;
 
-      //  this.cd.detectChanges();
-    })
-  }
-
-  /**
-   * Get selected category
-   */
-  public getSelectedCategory() {
-    this.passwordManagerService.emitSelectedCategory.subscribe((category) => {
-
-      this.selectedCategory = category;
-
-      // this.filter.passwordCategory = JSON.parse(JSON.stringify(category));
-      if (!this.cd['destroyed']) {
-        this.cd.detectChanges();
-      }
-    });
-  }
 
   /**
    * Get records list
    */
   public getRecords() {
-    this.subGetRecords = this.apiPasswordManagerService.dataChange.subscribe((res) => {
-      this.recordsData = res;
+    console.log("getRecords");
+    this.apiPasswordManagerService.getRecords().subscribe((res: any) => {
+      console.log("res", res);
+      this.recordsData = res.map(item => new PasswordRecord(item));
+      this.showPreloader = false;
       this.onChangeRealtTime();
+      this.onScroll();
       this.cd.detectChanges();
     });
-  }
-
-  /**
-   * delete record from list
-   */
-  public deleteRecord(recordId) {
-    if (this.permissionsService.isAllowed('DELETE_PASSWORD')) {
-      this.apiPasswordManagerService.deleteRecord(recordId).subscribe((res) => {
-        //  this.passwordManagerService.deleteRecord(recordId);
-        //    return this.recordsData = this.recordsData.filter((item) => item.id !== recordId);
-      });
-    }
-  }
-
-  /**
-   * subscription for deleting records
-   */
-  public watchDeleteRecord() {
-    this.passwordManagerService.deleteItemEditForm.subscribe((item) => {
-      return this.deleteRecord(item);
-    });
-  }
-
-  /**
-   * edit record
-   * @param item - item for edit
-   */
-  public editRecord(item) {
-    /* let index = this.recordsData.findIndex(record => record.id === item.id);
-     if (this.permissionsService.isAllowed('VIEW_PASSWORD')) {
-       this.passwordManagerService.onEditRecord(this.recordsData[index]);
-     }*/
-    this.passwordManagerService.showEditFrom(null);
-  }
-
-  /**
-   * get record type class
-   * @param type - record type
-   */
-  public getRecordTypeClass(type) {
-    return type.toLowerCase();
-  }
-
-  /**
-   * getPermission
-   * @param action - permission type
-   */
-  public getPermissions(action) {
-    return this.permissionsService.isAllowed(action)
   }
 
   public trackById(index, item) {
@@ -208,10 +118,6 @@ export class PasswordManagerTableComponent implements OnInit {
    * destroy password manager data table component
    */
   ngOnDestroy() {
-    this.subGetRecords.unsubscribe();
-    this.subAddNewRecords.unsubscribe();
     this.apiPasswordManagerService.deleteSubscription();
   }
-
-
 }

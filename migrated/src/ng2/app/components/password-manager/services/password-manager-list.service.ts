@@ -2,24 +2,28 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class PasswordManagerListService {
-
+  blockList: boolean = false;
   constructor() { }
 
-    /**
-   * Get direction
-   * @param direction - direction
-   * @param sort_c - current sort
-   * @param sort_o - old sort
-   */
-  public getDirection (direction,sort_c,sort_o) {
-    if (sort_c === sort_o)
-    {
+  /**
+ * Get direction
+ * @param direction - direction
+ * @param sort_c - current sort
+ * @param sort_o - old sort
+ */
+  public getDirection(direction, sort_c, sort_o) {
+    if (sort_c === sort_o) {
       direction = (direction === 'ASC') ? 'DESC' : 'ASC';
     }
-    if (sort_c !== sort_o)
-    {
+    if (sort_c !== sort_o) {
       direction = 'ASC';
     }
     return direction;
+  }
+  public setBlockList(data) {
+    this.blockList = data;
+  }
+  public getBlockList() {
+    return this.blockList;
   }
 }

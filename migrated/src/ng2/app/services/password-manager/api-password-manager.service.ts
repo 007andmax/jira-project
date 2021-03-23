@@ -42,9 +42,7 @@ export class ApiPasswordManagerService {
    */
   public getRecords() {
 
-    this.subGetRecords = this.http.get(this.apiUrl + 'passwordRecords').subscribe((response) => {
-      this.dataChange.next(response);
-    })
+    return this.http.get(this.apiUrl + 'passwordRecords');
   }
 
   /**

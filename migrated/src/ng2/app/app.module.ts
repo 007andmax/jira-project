@@ -405,6 +405,7 @@ import { InventoryHeaderComponent } from './components/inventory/inventory-heade
 import { InventoryFilterComponent } from './components/inventory/inventory-header/inventory-filter/inventory-filter.component';
 import { PasswordManagerAddCategoryComponent } from './components/password-manager/password-manager-add-category/password-manager-add-category.component';
 import { PasswordManagerAddAsideComponent } from './components/password-manager/password-manager-add-aside/password-manager-add-aside.component';
+import { PasswordManagerItemComponent } from './components/password-manager/password-manager-table/password-manager-item/password-manager-item.component';
 
 /**
  * declare angular
@@ -455,10 +456,6 @@ angular.module('quicktech')
   .directive(
     'usersComponent',
     downgradeComponent({ component: UsersComponent }))
-  .directive(
-    'passwordManager',
-    downgradeComponent({ component: PasswordManagerComponent })
-  )
   .directive(
     'leftPanelComponent',
     downgradeComponent({ component: LeftPanelComponent })
@@ -975,7 +972,8 @@ angular.module('quicktech')
     InventoryHeaderComponent,
     InventoryFilterComponent,
     PasswordManagerAddCategoryComponent,
-    PasswordManagerAddAsideComponent
+    PasswordManagerAddAsideComponent,
+    PasswordManagerItemComponent
   ],
   imports: [
     BrowserModule,

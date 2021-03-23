@@ -63,7 +63,6 @@ export class UsersComponent implements OnInit {
 
     if (this.companiesStateService.getCompanies().length > 0) this.companies = this.companiesStateService.getCompanies();
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
-
       this.companies = data;
     })
     this.userListService.addSubscription(getOnCompanies);
