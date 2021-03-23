@@ -64,7 +64,7 @@
   }
 
   &__menu-item {
-    height: 56px;
+    min-height: 56px;
     border-bottom: 1px solid #edf0f2;
     display: flex;
     align-items: center;
