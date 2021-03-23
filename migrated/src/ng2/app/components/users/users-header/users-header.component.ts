@@ -57,7 +57,7 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   public showAsideForDraftEmail() {
     this.draftEmailStateService.setAction(USERS);
     this.draftEmailStateService.resetSelectedUsers();
-    this.draftEmailStateService.setSelectedUser(this._users.filter(item => item.selected));
+    this.draftEmailStateService.setSelectedUser(this.reqUsers.filter(item => item.selected));
     this.draftEmailStateService.toggleAsideForAdd();
   }
   delete() {
