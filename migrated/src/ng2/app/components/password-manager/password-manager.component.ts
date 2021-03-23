@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Subject } from "rxjs";
 
 import { ApiPasswordManagerService } from "../../services/password-manager/api-password-manager.service";
@@ -8,6 +8,11 @@ import { UsersService } from "../../services/users/users.service";
 import { PermissionsService } from "../../services/permissions/permissions.service";
 import { PasswordManagerListService } from './services/password-manager-list.service';
 import { UsersStateService } from '../../states/users/users-state.service';
+import { PasswordRecord } from './class/password-record';
+import { FilterPasswordManager } from './class/filter-password-manager';
+import { ConfirmStateService } from '../shared/confirm/services/confirm-state.service';
+import { REMOVE_RECORD } from '../../const/confirm';
+import { PasswordManagerStateService } from '../../states/password-manager/password-manager-state.service';
 
 /**
  * Password manager component
@@ -20,26 +25,148 @@ import { UsersStateService } from '../../states/users/users-state.service';
 })
 
 export class PasswordManagerComponent implements OnInit {
+  public recordsData: Array<PasswordRecord> = [];
+  public list_records: Array<PasswordRecord> = [];
+  showPreloader: boolean = true;
+  public infiniteScrollDisabled = false;
+  public page_number: number = 0;
+  public filter: FilterPasswordManager = new FilterPasswordManager();
+  selectAll: boolean = false;
 
 
   /**
    * Creates an instance of the PasswordManagerComponent with the injected services
    * @param {ApiPasswordManagerService} apiPasswordManagerService Service to work with api
      */
-  public constructor(
+  constructor(
     private apiPasswordManagerService: ApiPasswordManagerService,
-  ) {
+    private passwordManagerService: PasswordManagerService,
+    private permissionsService: PermissionsService,
+    private passwordManagerListService: PasswordManagerListService,
+    private confirmStateService: ConfirmStateService,
+    private passwordManagerStateService: PasswordManagerStateService,
+    public cd: ChangeDetectorRef,
+  ) { }
+
+  /**
+   * Initializes Password manager data table. See [ngOnInit]{@see OnInit#ngOnInit}
+   */
+  ngOnInit() {
+    window.scrollTo(0, 0);
+    this.getRecords();
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === REMOVE_RECORD) {
+          this.onRemoveRecord(this.passwordManagerStateService.getRecordForRemove().id);
+        }
+
+      }
+    })
+
+  }
+  onRemoveRecord(id) {
+    this.apiPasswordManagerService.deleteRecord(id).subscribe(data => {
+
+    })
+  }
+  public onScroll() {
+    this.infiniteScrollDisabled = true;
+    this.filterList();
+  }
+
+  private filterList() {
+    if (this.passwordManagerListService.getBlockList()) {
+      this.infiniteScrollDisabled = false;
+      return;
+    }
+    this.page_number += 1;
+    let listFilter = this.filter.getFilterList(this.recordsData);
+    let start = (this.page_number - 1) * 30;
+    let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;
+    let list_records = [];
+    for (let i = start; i < end; i++) {
+      list_records.push(listFilter[i]);
+    }
+    this.list_records = [...this.list_records, ...list_records.map(item => new PasswordRecord(JSON.parse(JSON.stringify(item))))];
+    console.log("this.list_records", this.list_records);
+    this.infiniteScrollDisabled = false;
+    if ((this.page_number * 30) > listFilter.length) this.passwordManagerListService.setBlockList(true);
+
+  }
+  private onChangeRealtTime() {
+    this.passwordManagerService.onChangeRealTime.subscribe(newChange => {
+
+      if (newChange.action === 'PASSWORD_RECORD_CREATED') {
+        this.recordsData.push(newChange.data);
+      } else if (newChange.action === 'PASSWORD_RECORD_UPDATED') {
+        let index = this.recordsData.findIndex(item => item.id === newChange.data.id);
+        if (index > -1) this.recordsData[index] = newChange.data;
+
+      } else if (newChange.action === 'PASSWORD_RECORD_DELETED') {
+        let index = this.recordsData.findIndex(item => item.id === newChange.data.id);
+        let indexList = this.list_records.findIndex(item => item.id === newChange.data.id);
+
+        if (index > -1) this.recordsData.splice(index, 1);
+        if (indexList > -1) this.list_records.splice(indexList, 1);
+
+      }
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+      }
+    })
+  }
+  onSelectRecord(record) {
+    this.recordsData.find(item => item.id === record.id).selected = record.selected;
+    this.selectAll = (this.filter.getFilterList(this.recordsData).find(item => !item.selected)) ? false : true;
+
+  }
+
+  onSelectAll(event) {
+    if (event.target.checked) {
+      this.selectAll = true;
+      this.list_records.forEach(item => {
+        item.selected = true;
+      })
+      // this.draftEmailStateService.resetSelectedUsers();
+      this.filter.getFilterList(this.recordsData).forEach(item => {
+        this.recordsData.find(user => user.id === item.id).selected = true;
+      })
+      this.recordsData.forEach(user => {
+        //     if (user.selected) this.draftEmailStateService.addSelectedUser(user);
+      })
+    } else {
+      this.selectAll = false;
+      this.list_records.forEach(item => {
+        item.selected = false;
+      })
+      this.recordsData.forEach(item => {
+        item.selected = false;
+      })
+      //  this.draftEmailStateService.resetSelectedUsers();
+    }
   }
 
   /**
-   * Initializes Password manager. See [ngOnInit]{@see OnInit#ngOnInit}
+   * Get records list
    */
-  public ngOnInit() {
+  public getRecords() {
+    console.log("getRecords");
+    this.apiPasswordManagerService.getRecords().subscribe((res: any) => {
+      console.log("res", res);
+      this.recordsData = res.map(item => new PasswordRecord(item));
+      this.showPreloader = false;
+      this.onChangeRealtTime();
+      this.onScroll();
+      this.cd.detectChanges();
+    });
+  }
 
-  };
+  public trackById(index, item) {
+    return item.id;
+  }
 
   /**
-   * destroy password manager component
+   * destroy password manager data table component
    */
   ngOnDestroy() {
     this.apiPasswordManagerService.deleteSubscription();

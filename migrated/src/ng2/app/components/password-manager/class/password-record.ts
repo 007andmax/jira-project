@@ -12,6 +12,7 @@ export class PasswordRecord {
     username: string;
     description: string;
     password: string;
+    selected: boolean = false;
     constructor(data) {
         this.companyId = data.companyId;
         this.companyName = data.companyName;

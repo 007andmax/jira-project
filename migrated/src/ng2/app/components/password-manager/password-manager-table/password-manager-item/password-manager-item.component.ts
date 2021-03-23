@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ApiPasswordManagerService } from 'src/ng2/app/services/password-manager/api-password-manager.service';
 import { PermissionsService } from 'src/ng2/app/services/permissions/permissions.service';
 import { PasswordRecord } from '../../class/password-record';
@@ -11,12 +11,15 @@ import { PasswordRecord } from '../../class/password-record';
 })
 export class PasswordManagerItemComponent implements OnInit {
   @Input() item: PasswordRecord;
+  @Output() onSelectRecord = new EventEmitter<any>();
   togglePassword: boolean = false;
   constructor(private apiPasswordManagerService: ApiPasswordManagerService,
-    private permissionsService: PermissionsService,) { }
+    private permissionsService: PermissionsService,
+    public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
   }
+
   showPassword() {
     this.apiPasswordManagerService.setOpenRecord(this.item.id).subscribe((data: any) => {
       this.item.setPassword(data.password);

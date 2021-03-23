@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { PasswordManagerService } from "../../../services/password-manager/password-manager.service";
 import { PermissionsService } from "../../../services/permissions/permissions.service";
 import { ApiPasswordManagerService } from "../../../services/password-manager/api-password-manager.service";
+
 
 /**
  * Password manager header component
@@ -14,6 +15,9 @@ import { ApiPasswordManagerService } from "../../../services/password-manager/ap
 })
 export class PasswoordManagerHeaderComponent implements OnInit {
   showAddCategory: boolean = false;
+  @Output() onSelectAll = new EventEmitter<any>();
+  @Input() selectAll: boolean = false;
+
   /**
    * Creates an instance of the PasswordManagerComponent with the injected services
    * @param {ApiPasswordManagerService} apiPasswordManagerService Service to work with api
@@ -30,6 +34,11 @@ export class PasswoordManagerHeaderComponent implements OnInit {
    * Initializes Password manager header. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() { }
+
+  toggleAll(data) {
+    this.selectAll = true;
+    this.onSelectAll.emit(data);
+  }
 
   /**
    * add new record event

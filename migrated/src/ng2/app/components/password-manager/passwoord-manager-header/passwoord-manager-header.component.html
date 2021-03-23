@@ -26,6 +26,8 @@
 
 
 
+
+
 <div class="qt-page-list__header --sticky">
     <div class="qt-page-list__header-title-line">
         <div class="qt-page-list__header-title-line--left">
@@ -72,6 +74,8 @@
 
 
 
+
+
     <div class="qt-page-list__header-filters">
         <app-drop-down
             class="filter-category qt-mr-8"
@@ -80,16 +84,16 @@
             [class]="['dropdown']"
         ></app-drop-down>
         <div class="password-add-category qt-pos-rel">
-          <button
-              class="plus-btn qt-mr-8"
-              (click)="showAddCategory = true"
-          >
-              +
-          </button>
-          <app-password-manager-add-category
-              *ngIf="showAddCategory"
-              (onClose)="showAddCategory = false"
-          ></app-password-manager-add-category>
+            <button
+                class="plus-btn qt-mr-8"
+                (click)="showAddCategory = true"
+            >
+                +
+            </button>
+            <app-password-manager-add-category
+                *ngIf="showAddCategory"
+                (onClose)="showAddCategory = false"
+            ></app-password-manager-add-category>
         </div>
         <app-drop-down
             class="filter-company qt-w100 qt-mr-8"
@@ -114,6 +118,8 @@
 
 
 
+
+
     <div class="qt-page-list__header-thead-container">
         <table class="qt-table-modern qt-page-list__header-thead">
             <thead>
@@ -121,7 +127,11 @@
                     <th class="password-table__check">
                         <div class="d-f">
                             <label class="qt-checkbox">
-                                <input type="checkbox">
+                                <input
+                                    type="checkbox"
+                                    [(ngModel)]="selectAll"
+                                    (change)="toggleAll($event)"
+                                >
                                 <span></span>
                             </label>
                         </div>
@@ -144,6 +154,8 @@
             </thead>
         </table>
     </div>
+
+
 
 
 
