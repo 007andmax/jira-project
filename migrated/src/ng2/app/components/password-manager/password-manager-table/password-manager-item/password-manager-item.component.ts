@@ -44,6 +44,12 @@ export class PasswordManagerItemComponent implements OnInit {
     let expired = new Date(this.item.expiredDate).getTime();
     return expired < current;
   }
+  isExpiredLess30() {
+    let current = new Date().getTime();
+    let expired = new Date(this.item.expiredDate).getTime();
+    let day = (expired - current) / 86400000;
+    return day <= 30;
+  }
   parseExpiredDate() {
     let current = new Date().getTime();
     let expired = new Date(this.item.expiredDate).getTime();
