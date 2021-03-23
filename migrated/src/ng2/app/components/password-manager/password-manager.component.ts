@@ -62,7 +62,18 @@ export class PasswordManagerComponent implements OnInit {
 
       }
     })
-
+    let geLefttFilter = this.passwordManagerStateService.getOnFilter().subscribe((data) => {
+      window.scrollTo(0, 0);
+      this.filter.setFilter(data);
+      this.setDefaultScoll();
+      this.onScroll();
+    })
+    //  this.userListService.addSubscription(geLefttFilter);
+  }
+  public setDefaultScoll() {
+    this.page_number = 0;
+    this.passwordManagerListService.setBlockList(false);
+    this.list_records = [];
   }
   onRemoveRecord(id) {
     this.apiPasswordManagerService.deleteRecord(id).subscribe(data => {
@@ -145,6 +156,13 @@ export class PasswordManagerComponent implements OnInit {
       //  this.draftEmailStateService.resetSelectedUsers();
     }
   }
+  public onFilter(field) {
+    this.filter.onFilter(field, this.recordsData)
+    this.page_number = 0;
+    this.passwordManagerListService.setBlockList(false);
+    this.list_records = [];
+    this.onScroll();
+  }
 
   /**
    * Get records list
@@ -154,6 +172,8 @@ export class PasswordManagerComponent implements OnInit {
     this.apiPasswordManagerService.getRecords().subscribe((res: any) => {
       console.log("res", res);
       this.recordsData = res.map(item => new PasswordRecord(item));
+      this.recordsData.sort((a, b) => (a.companyName.toLowerCase() > b.companyName.toLowerCase()) ?
+        1 : ((b.companyName.toLowerCase() > a.companyName.toLowerCase()) ? -1 : 0));
       this.showPreloader = false;
       this.onChangeRealtTime();
       this.onScroll();

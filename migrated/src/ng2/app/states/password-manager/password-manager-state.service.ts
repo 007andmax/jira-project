@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { PasswordRecord } from '../../components/password-manager/class/password-record';
 
 @Injectable({
@@ -6,6 +6,7 @@ import { PasswordRecord } from '../../components/password-manager/class/password
 })
 export class PasswordManagerStateService {
   recordForRemove: PasswordRecord = null;
+  onFilter: EventEmitter<any> = new EventEmitter();
   constructor() { }
 
   public setRecordForRemove(data) {
@@ -13,5 +14,11 @@ export class PasswordManagerStateService {
   }
   public getRecordForRemove() {
     return this.recordForRemove;
+  }
+  public onInitFilter(data) {
+    this.onFilter.emit(data);
+  }
+  public getOnFilter() {
+    return this.onFilter;
   }
 }

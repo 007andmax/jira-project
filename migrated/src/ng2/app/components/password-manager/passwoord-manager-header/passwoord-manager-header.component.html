@@ -28,6 +28,15 @@
 
 
 
+
+
+
+
+
+
+
+
+
 <div class="qt-page-list__header --sticky">
     <div class="qt-page-list__header-title-line">
         <div class="qt-page-list__header-title-line--left">
@@ -76,12 +85,23 @@
 
 
 
+
+
+
+
+
+
+
+
+
     <div class="qt-page-list__header-filters">
         <app-drop-down
             class="filter-category qt-mr-8"
             [placeholder]="'Select by Category'"
-            [list]="[]"
+            [list]="PASSWORD_RECORD_TYPES"
+            [field]="'TITLE'"
             [class]="['dropdown']"
+            (onSelectedItem)="onSelectCategory($event)"
         ></app-drop-down>
         <div class="password-add-category qt-pos-rel">
             <button
@@ -98,22 +118,38 @@
         <app-drop-down
             class="filter-company qt-w100 qt-mr-8"
             [placeholder]="'Select Company'"
-            [list]="[]"
             [class]="['dropdown']"
+            [list]="companies"
+            [field]="'name'"
+            [search]="true"
+            [change]="true"
+            (onSelectedItem)="selectCompany($event)"
         ></app-drop-down>
         <app-drop-down
             class="filter-device qt-mr-8"
             [placeholder]="'Select Device or User'"
+            [isDisabled]="true"
             [list]="[]"
             [class]="['dropdown']"
         ></app-drop-down>
         <app-drop-down
             class="filter-data-picker"
             [placeholder]="'Data picker'"
-            [list]="[]"
+            [list]="listDates"
+            [field]="'title'"
             [class]="['dropdown']"
+            (onSelectedItem)="selectDate($event)"
         ></app-drop-down>
     </div>
+
+
+
+
+
+
+
+
+
 
 
 
@@ -136,15 +172,24 @@
                             </label>
                         </div>
                     </th>
-                    <th class="password-table__account pointer">
+                    <th
+                        class="password-table__account pointer"
+                        (click)="onFilter('account_type')"
+                    >
                         Account Type
                         <span class="qt-table-modern__sorting"></span>
                     </th>
-                    <th class="password-table__description pointer">
+                    <th
+                        class="password-table__description pointer"
+                        (click)="onFilter('description')"
+                    >
                         Description
                         <span class="qt-table-modern__sorting"></span>
                     </th>
-                    <th class="password-table__user-password pointer">
+                    <th
+                        class="password-table__user-password pointer"
+                        (click)="onFilter('user_password')"
+                    >
                         User & Password
                         <span class="qt-table-modern__sorting"></span>
                     </th>
@@ -154,6 +199,15 @@
             </thead>
         </table>
     </div>
+
+
+
+
+
+
+
+
+
 
 
 
