@@ -87,8 +87,8 @@ export class PasswordManagerTableComponent implements OnInit {
     modalRef.componentInstance.message = `Are you sure you want to delete “${this.item.username}” account?`;
     this.passwordManagerStateService.setRecordForRemove(this.item);
   }
-  public editRecord(item) {
-    this.passwordManagerService.showEditFrom(null);
+  public editRecord() {
+    this.passwordManagerService.showEditFrom(this.item);
   }
   parseExpiredDate() {
     let current = new Date().getTime();

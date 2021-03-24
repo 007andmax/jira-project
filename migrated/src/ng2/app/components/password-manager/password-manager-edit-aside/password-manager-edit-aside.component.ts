@@ -19,6 +19,7 @@ import { ApiPasswordManagerService } from "../../../services/password-manager/ap
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.service';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
+import { PasswordRecord } from '../class/password-record';
 
 /**
  * Password manager edit aside component
@@ -61,7 +62,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public selectedUserAndDevices = [];
   public selectedClient: any;
   public isEditmode = false;
-  public editItem = null;
+  public editItem: PasswordRecord = null;
   public expiryDate;
   public currentTypeChoosen: any;
   public subShowAddForm: Subscription;
@@ -150,6 +151,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public showAddForm() {
     this.subShowAddForm = this.passwordManagerService.onEditForm.subscribe((res) => {
       this.editItem = res;
+      this.selectedClient = this.companiesState.getCompanies().find(item => item.id === this.editItem.companyId);
       if (this.editItem) this.isEditmode = true;
       this.opened = true;
       this.initForm();
@@ -189,27 +191,27 @@ export class PasswordManagerEditAsideComponent implements OnInit {
    */
   public initForm() {
 
-    this.expiryDate = this.editItem && this.editItem.expiredDate ? this.getStartDate(this.editItem.expiredDate) : null;
-    this.createPasswordRecord = this.fb.group({
-      description: [this.editItem ? this.editItem.description : '', Validators.maxLength(5000)],
-      client: [this.editItem ? this.getEditCompany(this.editItem.companyId) : this.selectedClient, [Validators.required]],
-      type: [this.editItem ? this.getEditTemplate(this.editItem.template) : PASSWORD_RECORD_TYPES[0], [Validators.required]],
-      ssid: [this.editItem ? this.editItem.ssid : ''],
-      userName: [this.editItem ? this.editItem.username : '', [Validators.required, Validators.maxLength(100)]],
-      password: (this.editItem) ? [this.editItem.password] : ['', [Validators.required, Validators.maxLength(100)]],
-      key: [this.editItem ? this.editItem.key : '', [Validators.maxLength(100)]],
-      link: [''],
-      url: [this.editItem ? this.editItem.url : '', [Validators.maxLength(255)]],
-      code: [this.editItem ? this.editItem.code : ''],
-      userOrDevice: [this.editItem ? this.editItem.links : ''],
-      ipAdres: [this.editItem ? this.editItem.ip : '', [Validators.pattern('^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$')]],
-      port: [this.editItem ? this.editItem.port : ''],
-      expiryDate: [this.editItem ? this.expiryDate : null, []],
-      note: [this.editItem ? this.editItem.note : '', [Validators.maxLength(1000)]],
-      https: [this.editItem ? this.editItem.https : false],
-      ssh: [this.editItem ? this.editItem.ssh : false],
-      telnet: [this.editItem ? this.editItem.telnet : false]
-    });
+    /* this.expiryDate = this.editItem && this.editItem.expiredDate ? this.getStartDate(this.editItem.expiredDate) : null;
+     this.createPasswordRecord = this.fb.group({
+       description: [this.editItem ? this.editItem.description : '', Validators.maxLength(5000)],
+       client: [this.editItem ? this.getEditCompany(this.editItem.companyId) : this.selectedClient, [Validators.required]],
+       type: [this.editItem ? this.getEditTemplate(this.editItem.template) : PASSWORD_RECORD_TYPES[0], [Validators.required]],
+       ssid: [this.editItem ? this.editItem.ssid : ''],
+       userName: [this.editItem ? this.editItem.username : '', [Validators.required, Validators.maxLength(100)]],
+       password: (this.editItem) ? [this.editItem.password] : ['', [Validators.required, Validators.maxLength(100)]],
+       key: [this.editItem ? this.editItem.key : '', [Validators.maxLength(100)]],
+       link: [''],
+       url: [this.editItem ? this.editItem.url : '', [Validators.maxLength(255)]],
+       code: [this.editItem ? this.editItem.code : ''],
+       userOrDevice: [this.editItem ? this.editItem.links : ''],
+       ipAdres: [this.editItem ? this.editItem.ip : '', [Validators.pattern('^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$')]],
+       port: [this.editItem ? this.editItem.port : ''],
+       expiryDate: [this.editItem ? this.expiryDate : null, []],
+       note: [this.editItem ? this.editItem.note : '', [Validators.maxLength(1000)]],
+       https: [this.editItem ? this.editItem.https : false],
+       ssh: [this.editItem ? this.editItem.ssh : false],
+       telnet: [this.editItem ? this.editItem.telnet : false]
+     });*/
   }
 
   /**
@@ -618,16 +620,16 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
         this.gadgetCheckbox[i] = false;
       }
-      if (this.isEditmode && this.editItem) {
-        this.editItem.links.map((item) => {
-          const index = this.gadgets.findIndex((gadgetListItem) => {
-            return gadgetListItem.id === item.gadgetId
+      /*  if (this.isEditmode && this.editItem) {
+          this.editItem.links.map((item) => {
+            const index = this.gadgets.findIndex((gadgetListItem) => {
+              return gadgetListItem.id === item.gadgetId
+            });
+            if (index > -1) {
+              this.toggleItem(this.gadgets[index], 'gadget', index);
+            }
           });
-          if (index > -1) {
-            this.toggleItem(this.gadgets[index], 'gadget', index);
-          }
-        });
-      }
+        }*/
     });
   }
 
@@ -736,6 +738,28 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     return index;
   }
 
+  getUserAvatarUrl(user) {
+    if (!(user && user.avatar)) return '';
+
+    if (user.id) {
+      return `url(${'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt :
+        '')}) 0% 0% / cover no-repeat`
+    } else if (user.avatar && user.avatar.origin && user.avatar.origin.id) {
+      return `url(/file/${(user.avatar.origin.id)}.jpg) 0% 0% / cover no-repeat`;
+    } else {
+      return 'url(/users/default/image.jpg) 0% 0% / cover no-repeat';
+    }
+  };
+  getUserById(userId) {
+    return this.usersStateService.getAllUsers().find(item => item.id === userId);
+  }
+  getUserName(user) {
+    return `${user.firstName} ${user.lastName}`;
+  }
+  getNameForAvatar(user) {
+    if (!user.avatar) return `${(user.firstName) ? user.firstName[0].toUpperCase() : ''}${(user.lastName) ? user.lastName[0].toUpperCase() : ''}`;
+    return '';
+  }
   /**
    * Show history
    */
