@@ -21,22 +21,6 @@
 <!-- (click)="addRecord()" class="plus-btn mob-hidden">+</button> -->
 <!-- </div> -->
 <!-- </div> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <div class="qt-page-list__header --sticky">
     <div class="qt-page-list__header-title-line">
         <div class="qt-page-list__header-title-line--left">
@@ -79,21 +63,6 @@
             </div>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <div class="qt-page-list__header-filters">
         <app-drop-down
             class="filter-category qt-mr-8"
@@ -125,13 +94,18 @@
             [change]="true"
             (onSelectedItem)="selectCompany($event)"
         ></app-drop-down>
-        <app-drop-down
+        <app-passwoord-manager-devices-users
             class="filter-device qt-mr-8"
             [placeholder]="'Select Device or User'"
-            [isDisabled]="true"
-            [list]="[]"
+            [isDisabled]="disabledDevicesUsers"
+            [list]="devicesUsers"
+            [field]="'name'"
+            [search]="true"
+            [change]="true"
+            [sort]="true"
+            (onSelectedItem)="selectDeviceUser($event)"
             [class]="['dropdown']"
-        ></app-drop-down>
+        ></app-passwoord-manager-devices-users>
         <app-drop-down
             class="filter-data-picker"
             [placeholder]="'Data picker'"
@@ -141,21 +115,6 @@
             (onSelectedItem)="selectDate($event)"
         ></app-drop-down>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <div class="qt-page-list__header-thead-container">
         <table class="qt-table-modern qt-page-list__header-thead">
             <thead>
@@ -181,6 +140,13 @@
                     </th>
                     <th
                         class="password-table__description pointer"
+                        (click)="onFilter('company')"
+                    >
+                        Company name
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th
+                        class="password-table__description pointer"
                         (click)="onFilter('description')"
                     >
                         Description
@@ -199,19 +165,4 @@
             </thead>
         </table>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </div>

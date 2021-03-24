@@ -32,6 +32,7 @@ export class PasswordManagerTableComponent implements OnInit {
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     private passwordManagerStateService: PasswordManagerStateService,
+    private passwordManagerService: PasswordManagerService,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
@@ -85,6 +86,9 @@ export class PasswordManagerTableComponent implements OnInit {
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
     modalRef.componentInstance.message = `Are you sure you want to delete “${this.item.username}” account?`;
     this.passwordManagerStateService.setRecordForRemove(this.item);
+  }
+  public editRecord(item) {
+    this.passwordManagerService.showEditFrom(null);
   }
   parseExpiredDate() {
     let current = new Date().getTime();

@@ -9,6 +9,10 @@ import { Subscription } from 'rxjs';
 import { TitleListType } from '../../tickets/tickets/tickets-header/class/title-list-type';
 import { FilterPasswordManager } from '../class/filter-password-manager';
 import { PasswordManagerStateService } from 'src/ng2/app/states/password-manager/password-manager-state.service';
+import { PasswordDeviceUser } from '../class/password-device-user';
+import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
+import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.service';
+import { flattenStyles } from '@angular/platform-browser/src/dom/dom_renderer';
 
 
 /**
@@ -22,6 +26,8 @@ import { PasswordManagerStateService } from 'src/ng2/app/states/password-manager
 export class PasswoordManagerHeaderComponent implements OnInit, OnDestroy {
   showAddCategory: boolean = false;
   companies = [];
+  disabledDevicesUsers: boolean = true;
+  devicesUsers: Array<PasswordDeviceUser> = [];
   listDates: Array<TitleListType> = [new TitleListType('5 days', '5_DAYS'), new TitleListType('15 days', '15_DAYS'), new TitleListType('30 days', '30_DAYS')];
   PASSWORD_RECORD_TYPES = PASSWORD_RECORD_TYPES;
   public filter: FilterPasswordManager = new FilterPasswordManager();
@@ -40,7 +46,9 @@ export class PasswoordManagerHeaderComponent implements OnInit, OnDestroy {
     private permissionsService: PermissionsService,
     private apiPasswordManagerService: ApiPasswordManagerService,
     private companiesState: CompaniesStateService,
-    private passwordManagerStateService: PasswordManagerStateService
+    private passwordManagerStateService: PasswordManagerStateService,
+    private usersStateService: UsersStateService,
+    private devicesStateService: DevicesStateService
   ) { }
 
   /**
@@ -69,6 +77,11 @@ export class PasswoordManagerHeaderComponent implements OnInit, OnDestroy {
     this.passwordManagerStateService.onInitFilter(this.filter);
     this.onChangeCounterFilter();
   }
+  selectDeviceUser(data) {
+    this.filter.setDeviceUser(data);
+    this.passwordManagerStateService.onInitFilter(this.filter);
+    this.onChangeCounterFilter();
+  }
   onSelectCategory(data) {
     this.filter.setCategory(data);
     this.passwordManagerStateService.onInitFilter(this.filter);
@@ -78,6 +91,24 @@ export class PasswoordManagerHeaderComponent implements OnInit, OnDestroy {
     this.filter.setCompany(data);
     this.passwordManagerStateService.onInitFilter(this.filter);
     this.onChangeCounterFilter();
+    if (data) {
+      let users = this.usersStateService.getAllUsers().filter(item => item.company.id === data.id);
+      let devices = (this.devicesStateService.getAllDevices()[data.id]) ? this.devicesStateService.getAllDevices()[data.id] : [];
+      users.forEach(item => {
+        this.devicesUsers.push(new PasswordDeviceUser(item.id, `${item.firstName} ${item.lastName}`, 'USER'));
+      })
+      devices.forEach(item => {
+        this.devicesUsers.push(new PasswordDeviceUser(item.id, this.getLabelDevice(item), 'DEVICE'));
+      })
+      this.disabledDevicesUsers = false;
+    } else {
+      this.devicesUsers = [];
+      this.disabledDevicesUsers = true;
+    }
+  }
+  getLabelDevice(item) {
+    if (item.label) return item.label;
+    return item.hostName || item.ip;
   }
   public onChangeCounterFilter() {
     let count = 0;

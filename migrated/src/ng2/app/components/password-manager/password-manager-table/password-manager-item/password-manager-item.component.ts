@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ApiPasswordManagerService } from 'src/ng2/app/services/password-manager/api-password-manager.service';
+import { PasswordManagerService } from 'src/ng2/app/services/password-manager/password-manager.service';
 import { PermissionsService } from 'src/ng2/app/services/permissions/permissions.service';
 import { PasswordRecord } from '../../class/password-record';
 
@@ -15,6 +16,7 @@ export class PasswordManagerItemComponent implements OnInit {
   togglePassword: boolean = false;
   constructor(private apiPasswordManagerService: ApiPasswordManagerService,
     private permissionsService: PermissionsService,
+    private passwordManagerService: PasswordManagerService,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
@@ -58,5 +60,8 @@ export class PasswordManagerItemComponent implements OnInit {
     let expired = new Date(this.item.expiredDate).getTime();
     let day = (expired - current) / 86400000;
     return `${Math.round(day)} days to expire`;
+  }
+  public editRecord(item) {
+    this.passwordManagerService.showEditFrom(null);
   }
 }

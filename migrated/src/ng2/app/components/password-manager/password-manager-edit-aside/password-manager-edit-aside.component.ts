@@ -76,6 +76,10 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   showPassword: boolean = false;
   isLoadPassword: boolean = false;
 
+
+
+  tab: string = 'PASSWORD_DETAIL'
+
   /**
    * Creates an instance of the PasswordManagerEditAsideComponent with the injected services
    * @param {ApiPasswordManagerService} apiPasswordManagerService Service to work with api

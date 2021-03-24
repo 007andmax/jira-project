@@ -18,6 +18,9 @@ export class FilterPasswordManager {
     constructor() {
 
     }
+    public setDeviceUser(data) {
+        this.selectedUserOrDevice = data;
+    }
     public setDate(data) {
         this.selectedDate = data;
     }
@@ -52,7 +55,7 @@ export class FilterPasswordManager {
                     return false;
                 }
             }
-            if (this.selectedUserOrDevice && this.selectedUserOrDevice.id) {
+            if (this.selectedUserOrDevice) {
                 let find = false;
                 item.links.forEach(link => {
                     if (link.userId && link.userId == this.selectedUserOrDevice.id) find = true;
@@ -64,7 +67,6 @@ export class FilterPasswordManager {
             return true;
         })
         return list;
-
     }
     public clearFilter() {
         this.filterTop.forEach(item => item.filter = '');
