@@ -24,13 +24,8 @@ import { flattenStyles } from '@angular/platform-browser/src/dom/dom_renderer';
   styleUrls: ['./passwoord-manager-header.component.scss']
 })
 export class PasswoordManagerHeaderComponent implements OnInit, OnDestroy {
-  showAddCategory: boolean = false;
-  companies = [];
-  disabledDevicesUsers: boolean = true;
-  devicesUsers: Array<PasswordDeviceUser> = [];
-  listDates: Array<TitleListType> = [new TitleListType('5 days', '5_DAYS'), new TitleListType('15 days', '15_DAYS'), new TitleListType('30 days', '30_DAYS')];
-  PASSWORD_RECORD_TYPES = PASSWORD_RECORD_TYPES;
-  public filter: FilterPasswordManager = new FilterPasswordManager();
+  toggleFilter: boolean = true;
+  countFilter: number = 0;
   @Output() onChangeFilterField = new EventEmitter<any>();
   @Output() onSelectAll = new EventEmitter<any>();
   @Input() selectAll: boolean = false;
@@ -55,16 +50,9 @@ export class PasswoordManagerHeaderComponent implements OnInit, OnDestroy {
    * Initializes Password manager header. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
-    if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
-    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
-      this.getClientsList(data);
-    })
-    this.sub.add(getOnCompanies);
+
   }
-  getClientsList(data) {
-    this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-  }
+
   toggleAll(data) {
     this.selectAll = true;
     this.onSelectAll.emit(data);
@@ -72,58 +60,17 @@ export class PasswoordManagerHeaderComponent implements OnInit, OnDestroy {
   public onFilter(field) {
     this.onChangeFilterField.emit(field);
   }
-  selectDate(data) {
-    this.filter.setDate(data);
-    this.passwordManagerStateService.onInitFilter(this.filter);
-    this.onChangeCounterFilter();
-  }
-  selectDeviceUser(data) {
-    this.filter.setDeviceUser(data);
-    this.passwordManagerStateService.onInitFilter(this.filter);
-    this.onChangeCounterFilter();
-  }
-  onSelectCategory(data) {
-    this.filter.setCategory(data);
-    this.passwordManagerStateService.onInitFilter(this.filter);
-    this.onChangeCounterFilter();
-  }
-  selectCompany(data) {
-    this.filter.setCompany(data);
-    this.passwordManagerStateService.onInitFilter(this.filter);
-    this.onChangeCounterFilter();
-    if (data) {
-      let users = this.usersStateService.getAllUsers().filter(item => item.company.id === data.id);
-      let devices = (this.devicesStateService.getAllDevices()[data.id]) ? this.devicesStateService.getAllDevices()[data.id] : [];
-      users.forEach(item => {
-        this.devicesUsers.push(new PasswordDeviceUser(item.id, `${item.firstName} ${item.lastName}`, 'USER'));
-      })
-      devices.forEach(item => {
-        this.devicesUsers.push(new PasswordDeviceUser(item.id, this.getLabelDevice(item), 'DEVICE'));
-      })
-      this.disabledDevicesUsers = false;
-    } else {
-      this.devicesUsers = [];
-      this.disabledDevicesUsers = true;
-    }
-  }
-  getLabelDevice(item) {
-    if (item.label) return item.label;
-    return item.hostName || item.ip;
-  }
-  public onChangeCounterFilter() {
-    let count = 0;
-    if (this.filter.selectedCategory) count++;
-    if (this.filter.selectedCompany) count++;
-    if (this.filter.selectedDate) count++;
-    // this.changeCountFilter.emit(count);
-  }
+
+
   /**
    * add new record event
    */
   public addRecord() {
     this.passwordManagerService.showAddForm();
   }
-
+  onChangeCountFilter(data) {
+    this.countFilter = data;
+  }
   /**
    * getPermission
    */

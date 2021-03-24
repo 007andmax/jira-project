@@ -407,6 +407,7 @@ import { PasswordManagerAddCategoryComponent } from './components/password-manag
 import { PasswordManagerAddAsideComponent } from './components/password-manager/password-manager-add-aside/password-manager-add-aside.component';
 import { PasswordManagerItemComponent } from './components/password-manager/password-manager-table/password-manager-item/password-manager-item.component';
 import { PasswoordManagerDevicesUsersComponent } from './components/password-manager/passwoord-manager-devices-users/passwoord-manager-devices-users.component';
+import { PasswoordManagerFiltersComponent } from './components/password-manager/passwoord-manager-header/passwoord-manager-filters/passwoord-manager-filters.component';
 
 /**
  * declare angular
@@ -975,7 +976,8 @@ angular.module('quicktech')
     PasswordManagerAddCategoryComponent,
     PasswordManagerAddAsideComponent,
     PasswordManagerItemComponent,
-    PasswoordManagerDevicesUsersComponent
+    PasswoordManagerDevicesUsersComponent,
+    PasswoordManagerFiltersComponent
   ],
   imports: [
     BrowserModule,

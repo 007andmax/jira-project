@@ -1,0 +1,93 @@
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { PASSWORD_RECORD_TYPES } from 'src/ng2/app/const/password-record-types';
+import { ApiPasswordManagerService } from 'src/ng2/app/services/password-manager/api-password-manager.service';
+import { PasswordManagerService } from 'src/ng2/app/services/password-manager/password-manager.service';
+import { PermissionsService } from 'src/ng2/app/services/permissions/permissions.service';
+import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
+import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.service';
+import { PasswordManagerStateService } from 'src/ng2/app/states/password-manager/password-manager-state.service';
+import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
+import { TitleListType } from '../../../tickets/tickets/tickets-header/class/title-list-type';
+import { FilterPasswordManager } from '../../class/filter-password-manager';
+import { PasswordDeviceUser } from '../../class/password-device-user';
+
+@Component({
+  selector: 'app-passwoord-manager-filters',
+  templateUrl: './passwoord-manager-filters.component.html',
+  styleUrls: ['./passwoord-manager-filters.component.scss']
+})
+export class PasswoordManagerFiltersComponent implements OnInit {
+  PASSWORD_RECORD_TYPES = PASSWORD_RECORD_TYPES;
+  showAddCategory: boolean = false;
+  companies = [];
+  disabledDevicesUsers: boolean = true;
+  devicesUsers: Array<PasswordDeviceUser> = [];
+  listDates: Array<TitleListType> = [new TitleListType('5 days', '5_DAYS'), new TitleListType('15 days', '15_DAYS'), new TitleListType('30 days', '30_DAYS')];
+  @Output() onChangeCountFilter = new EventEmitter<any>();
+  public filter: FilterPasswordManager = new FilterPasswordManager();
+  constructor(private passwordManagerService: PasswordManagerService,
+    private permissionsService: PermissionsService,
+    private apiPasswordManagerService: ApiPasswordManagerService,
+    private companiesState: CompaniesStateService,
+    private passwordManagerStateService: PasswordManagerStateService,
+    private usersStateService: UsersStateService,
+    private devicesStateService: DevicesStateService) { }
+
+  ngOnInit() {
+    if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
+    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
+      this.getClientsList(data);
+    })
+
+  }
+  getClientsList(data) {
+    this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+  }
+  selectDate(data) {
+    this.filter.setDate(data);
+    this.passwordManagerStateService.onInitFilter(this.filter);
+    this.onChangeCounterFilter();
+  }
+  selectDeviceUser(data) {
+    this.filter.setDeviceUser(data);
+    this.passwordManagerStateService.onInitFilter(this.filter);
+    this.onChangeCounterFilter();
+  }
+  onSelectCategory(data) {
+    this.filter.setCategory(data);
+    this.passwordManagerStateService.onInitFilter(this.filter);
+    this.onChangeCounterFilter();
+  }
+  selectCompany(data) {
+    this.filter.setCompany(data);
+    this.passwordManagerStateService.onInitFilter(this.filter);
+    this.onChangeCounterFilter();
+    if (data) {
+      let users = this.usersStateService.getAllUsers().filter(item => item.company.id === data.id);
+      let devices = (this.devicesStateService.getAllDevices()[data.id]) ? this.devicesStateService.getAllDevices()[data.id] : [];
+      users.forEach(item => {
+        this.devicesUsers.push(new PasswordDeviceUser(item.id, `${item.firstName} ${item.lastName}`, 'USER'));
+      })
+      devices.forEach(item => {
+        this.devicesUsers.push(new PasswordDeviceUser(item.id, this.getLabelDevice(item), 'DEVICE'));
+      })
+      this.disabledDevicesUsers = false;
+    } else {
+      this.devicesUsers = [];
+      this.disabledDevicesUsers = true;
+    }
+  }
+  getLabelDevice(item) {
+    if (item.label) return item.label;
+    return item.hostName || item.ip;
+  }
+  public onChangeCounterFilter() {
+    let count = 0;
+    if (this.filter.selectedCategory) count++;
+    if (this.filter.selectedCompany) count++;
+    if (this.filter.selectedDate) count++;
+    if (this.filter.selectedUserOrDevice) count++;
+    this.onChangeCountFilter.emit(count);
+  }
+}

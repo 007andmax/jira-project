@@ -52,7 +52,18 @@
                         placeholder="Search password"
                     >
                 </div>
-                <button class="qt-btn btn-filter qt-ml-8 d-f">Filters</button>
+                <button
+                    class="qt-btn btn-filter qt-ml-8 d-f"
+                    [ngClass]="{'active':!toggleFilter}"
+                    (click)="toggleFilter  = !toggleFilter"
+                >
+                    <span
+                        class="filter-counter qt-circle qt-sz-18 qt-ff-sb qt-fs-10 qt-color-white qt-bg-info qt-mr-8 qt-df qt-ai-c qt-jc-c"
+                        *ngIf="countFilter > 0"
+                        [textContent]="countFilter"
+                    ></span>
+                    Filters
+                </button>
                 <button
                     class="qt-btn --outline-blue qt-ml-8"
                     *ngIf="getPermissions('CREATE_PASSWORD')"
@@ -63,58 +74,10 @@
             </div>
         </div>
     </div>
-    <div class="qt-page-list__header-filters">
-        <app-drop-down
-            class="filter-category qt-mr-8"
-            [placeholder]="'Select by Category'"
-            [list]="PASSWORD_RECORD_TYPES"
-            [field]="'TITLE'"
-            [class]="['dropdown']"
-            (onSelectedItem)="onSelectCategory($event)"
-        ></app-drop-down>
-        <div class="password-add-category qt-pos-rel">
-            <button
-                class="plus-btn qt-mr-8"
-                (click)="showAddCategory = true"
-            >
-                +
-            </button>
-            <app-password-manager-add-category
-                *ngIf="showAddCategory"
-                (onClose)="showAddCategory = false"
-            ></app-password-manager-add-category>
-        </div>
-        <app-drop-down
-            class="filter-company qt-w100 qt-mr-8"
-            [placeholder]="'Select Company'"
-            [class]="['dropdown']"
-            [list]="companies"
-            [field]="'name'"
-            [search]="true"
-            [change]="true"
-            (onSelectedItem)="selectCompany($event)"
-        ></app-drop-down>
-        <app-passwoord-manager-devices-users
-            class="filter-device qt-mr-8"
-            [placeholder]="'Select Device or User'"
-            [isDisabled]="disabledDevicesUsers"
-            [list]="devicesUsers"
-            [field]="'name'"
-            [search]="true"
-            [change]="true"
-            [sort]="true"
-            (onSelectedItem)="selectDeviceUser($event)"
-            [class]="['dropdown']"
-        ></app-passwoord-manager-devices-users>
-        <app-drop-down
-            class="filter-data-picker"
-            [placeholder]="'Data picker'"
-            [list]="listDates"
-            [field]="'title'"
-            [class]="['dropdown']"
-            (onSelectedItem)="selectDate($event)"
-        ></app-drop-down>
-    </div>
+    <app-passwoord-manager-filters
+        [hidden]="toggleFilter"
+        (onChangeCountFilter)="onChangeCountFilter($event)"
+    ></app-passwoord-manager-filters>
     <div class="qt-page-list__header-thead-container">
         <table class="qt-table-modern qt-page-list__header-thead">
             <thead>
