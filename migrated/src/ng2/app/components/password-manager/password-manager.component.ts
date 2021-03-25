@@ -70,6 +70,13 @@ export class PasswordManagerComponent implements OnInit {
     })
     //  this.userListService.addSubscription(geLefttFilter);
   }
+  onSearch(value) {
+    console.log("value", value);
+    window.scrollTo(0, 0);
+    this.filter.setSearch((value !== "") ? value : null);
+    this.setDefaultScoll();
+    this.onScroll();
+  }
   public setDefaultScoll() {
     this.page_number = 0;
     this.passwordManagerListService.setBlockList(false);

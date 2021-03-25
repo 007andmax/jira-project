@@ -7,10 +7,6 @@ export const PASSWORD_RECORD_TYPES = [
     UPPERCASE: 'AGENT'
   },
   {
-    TITLE: 'Clear',
-    UPPERCASE: 'CLEAR'
-  },
-  {
     TITLE: 'Device',
     UPPERCASE: 'DEVICE'
   },

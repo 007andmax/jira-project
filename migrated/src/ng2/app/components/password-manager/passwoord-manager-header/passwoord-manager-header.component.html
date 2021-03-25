@@ -31,8 +31,11 @@
         </div>
         <div class="qt-page-list__header-title-line--rigth">
             <div class="qt-df qt-ai-c">
-                <div class="company-devices-page__list-header-buttons">
-                    <div>3 Selected</div>
+                <div
+                    class="company-devices-page__list-header-buttons"
+                    *ngIf="getSelectedCount() > 0"
+                >
+                    <div [textContent]="getSelectedCount() + ' Selected'"></div>
                     <div class="qt-ml-25 qt-ff-gm qt-df qt-color-info qt-ai-c qt-pointer">
                         <div class="email-ng2 qt-za-16 qt-sz-16 qt-bg-contain qt-ic-c qt-mr-6"></div>
                         <div>Share via Email</div>
@@ -50,6 +53,7 @@
                     <input
                         type="text"
                         placeholder="Search password"
+                        (input)="search($event)"
                     >
                 </div>
                 <button

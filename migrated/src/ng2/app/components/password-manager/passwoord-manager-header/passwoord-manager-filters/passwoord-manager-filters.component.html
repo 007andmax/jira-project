@@ -5,6 +5,8 @@
         [list]="PASSWORD_RECORD_TYPES"
         [field]="'TITLE'"
         [class]="['dropdown']"
+        [search]="true"
+        [change]="true"
         (onSelectedItem)="onSelectCategory($event)"
     ></app-drop-down>
     <div class="password-add-category qt-pos-rel">
@@ -43,7 +45,7 @@
     ></app-passwoord-manager-devices-users>
     <app-drop-down
         class="filter-data-picker"
-        [placeholder]="'Data picker'"
+        [placeholder]="'Search by Expire Date'"
         [list]="listDates"
         [field]="'title'"
         [class]="['dropdown']"

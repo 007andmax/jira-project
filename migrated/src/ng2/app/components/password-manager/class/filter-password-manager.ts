@@ -10,13 +10,16 @@ export class FilterPasswordManager {
     new FilterListTop('description', ''),
     new FilterListTop('user_password', '')];
 
-
+    search: string;
     selectedCompany: Company;
     selectedDate: TitleListType;
     selectedUserOrDevice: any;
     selectedCategory: any;
     constructor() {
 
+    }
+    public setSearch(data) {
+        this.search = data;
     }
     public setDeviceUser(data) {
         this.selectedUserOrDevice = data;
@@ -64,6 +67,14 @@ export class FilterPasswordManager {
                 if (!find) return false;
             }
             if (this.selectedCategory && item.template !== this.selectedCategory.UPPERCASE) return false;
+            if (this.search) {
+                let find = false;
+                item.links.forEach(link => {
+                    if (link.userId && link.userName.includes(this.search)) find = true;
+                    if (link.deviceId && link.deviceLabel.includes(this.search)) find = true;
+                });
+                if (!(item.description ? item.description : "").includes(this.search) && !find) return false;
+            }
             return true;
         })
         return list;

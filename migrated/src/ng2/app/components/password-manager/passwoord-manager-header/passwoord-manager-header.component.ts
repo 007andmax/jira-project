@@ -13,6 +13,7 @@ import { PasswordDeviceUser } from '../class/password-device-user';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.service';
 import { flattenStyles } from '@angular/platform-browser/src/dom/dom_renderer';
+import { PasswordRecord } from '../class/password-record';
 
 
 /**
@@ -28,7 +29,9 @@ export class PasswoordManagerHeaderComponent implements OnInit, OnDestroy {
   countFilter: number = 0;
   @Output() onChangeFilterField = new EventEmitter<any>();
   @Output() onSelectAll = new EventEmitter<any>();
+  @Output() onSearch = new EventEmitter<any>();
   @Input() selectAll: boolean = false;
+  @Input() recordsData: Array<PasswordRecord> = [];
   sub: Subscription = new Subscription();
   /**
    * Creates an instance of the PasswordManagerComponent with the injected services
@@ -60,7 +63,9 @@ export class PasswoordManagerHeaderComponent implements OnInit, OnDestroy {
   public onFilter(field) {
     this.onChangeFilterField.emit(field);
   }
-
+  search(event) {
+    this.onSearch.emit(event.target.value);
+  }
 
   /**
    * add new record event
@@ -74,6 +79,9 @@ export class PasswoordManagerHeaderComponent implements OnInit, OnDestroy {
   /**
    * getPermission
    */
+  getSelectedCount() {
+    return this.recordsData.filter(item => item.selected).length;
+  }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
   }
