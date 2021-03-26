@@ -31,7 +31,7 @@ export const PASSWORD_RECORD_TYPES = [
     UPPERCASE: 'MICROSOFT_ACCOUNT'
   },
   {
-    TITLE: 'Office 365 Account',
+    TITLE: 'Office Account',
     UPPERCASE: 'OFFICE_365_ACCOUNT'
   },
   {

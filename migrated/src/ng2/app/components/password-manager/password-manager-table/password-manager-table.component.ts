@@ -3,6 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from "rxjs";
 import { ISubscription } from "rxjs/Subscription";
 import { REMOVE_RECORD } from 'src/ng2/app/const/confirm';
+import { PASSWORD_RECORD_TYPES } from 'src/ng2/app/const/password-record-types';
 import { PasswordManagerStateService } from 'src/ng2/app/states/password-manager/password-manager-state.service';
 
 import { ApiPasswordManagerService } from "../../../services/password-manager/api-password-manager.service";
@@ -27,6 +28,7 @@ export class PasswordManagerTableComponent implements OnInit {
   @Input() item: PasswordRecord;
   @Output() onSelectRecord = new EventEmitter<any>();
   togglePassword: boolean = false;
+  PASSWORD_RECORD_TYPES = PASSWORD_RECORD_TYPES;
   constructor(private apiPasswordManagerService: ApiPasswordManagerService,
     private permissionsService: PermissionsService,
     private confirmStateService: ConfirmStateService,
@@ -53,6 +55,9 @@ export class PasswordManagerTableComponent implements OnInit {
       this.item.setPassword(data.password);
       this.togglePassword = true;
     })
+  }
+  getAccountType(type) {
+    return this.PASSWORD_RECORD_TYPES.find(item => item.UPPERCASE === type).TITLE;
   }
   copyPassword() {
     let textArea: any = document.createElement("textarea");

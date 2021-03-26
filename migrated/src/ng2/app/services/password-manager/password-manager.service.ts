@@ -126,8 +126,8 @@ export class PasswordManagerService {
    * @param recordInfo - record data
    */
   public saveRecord(recordInfo) {
-    const date = recordInfo.expiredDate;
-    return this.http.post(this.apiUrl + 'passwordRecords', this.getData(recordInfo, false));
+
+    return this.http.post(this.apiUrl + 'passwordRecords', recordInfo);
   }
 
   public createRecord(data) {
