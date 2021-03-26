@@ -402,22 +402,22 @@ export class PasswordManagerAddAsideComponent implements OnInit {
   /**
    * change selected user and device
    */
-  public changeSelectedUserAndDevices(newItem, index?, type?) {
-    const items = this.selectedUserAndDevices.filter((item) => {
-      return (item.item.id !== newItem.id)
-    });
-    if (items.length < this.selectedUserAndDevices.length) {
-      this.selectedUserAndDevices = items;
-    } else {
-      this.selectedUserAndDevices.push({
-        item: newItem,
-        index: index,
-        type: type
-      });
-    }
-
-  }
-
+  /* public changeSelectedUserAndDevices(newItem, index?, type?) {
+     const items = this.selectedUserAndDevices.filter((item) => {
+       return (item.item.id !== newItem.id)
+     });
+     if (items.length < this.selectedUserAndDevices.length) {
+       this.selectedUserAndDevices = items;
+     } else {
+       this.selectedUserAndDevices.push({
+         item: newItem,
+         index: index,
+         type: type
+       });
+     }
+ 
+   }
+ */
   /**
    * push item to user device
    * @param newItem - new item
@@ -486,7 +486,7 @@ export class PasswordManagerAddAsideComponent implements OnInit {
             return deviceListItem.id === item.deviceId
           });
           if (index > -1) {
-            this.toggleItem(this.devicesList[index], 'device', index);
+            // this.toggleItem(this.devicesList[index], 'device', index);
           }
         });
       }
@@ -599,9 +599,9 @@ export class PasswordManagerAddAsideComponent implements OnInit {
         const index_res = this.reqUsersList.findIndex(userListItem => userListItem.id === item.userId);
         const index = this.usersList.findIndex(userListItem => userListItem.id === item.userId);
         if (index > -1 && index_res > -1) {
-          this.toggleItem(this.usersList[index], 'user', index);
+          //this.toggleItem(this.usersList[index], 'user', index);
         } else if (index === -1 && index_res > -1) {
-          this.toggleItem(this.reqUsersList[index_res], 'user', index);
+          //  this.toggleItem(this.reqUsersList[index_res], 'user', index);
         }
       });
     }
