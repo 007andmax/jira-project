@@ -113,7 +113,6 @@ export class PasswordManagerAddAsideComponent implements OnInit {
     private permissionsService: PermissionsService,
     private apiPasswordManagerService: ApiPasswordManagerService,
     public cd: ChangeDetectorRef,
-
     private companiesState: CompaniesStateService,
     private devicesStateService: DevicesStateService,
     private usersStateService: UsersStateService,
@@ -129,11 +128,10 @@ export class PasswordManagerAddAsideComponent implements OnInit {
       this.getClientsList(data);
     })
     this.subHideAddForm = this.passwordManagerService.onAddForm.subscribe((res) => {
-
-
       this.passwordRecordAdd = new PasswordRecordAdd();
+      this.passwordRecordAdd.setExpiryDate(moment(new Date()).format('YYYY/MM/DD'));
+      console.log("this.passwordRecordAdd", this.passwordRecordAdd);
       this.opened = true;
-
     });
     /*
     this.showAddForm();
@@ -218,7 +216,7 @@ export class PasswordManagerAddAsideComponent implements OnInit {
     if (data.UPPERCASE !== 'DEVICE' && data.UPPERCASE !== 'LOCAL_USER_ACCOUNT') this.validate.resetLinkTo();
   }
   onChangeDatePicker(data) {
-    this.passwordRecordAdd.setExpiryDate(moment(data).format('YYYY/MM/DD'));
+    this.passwordRecordAdd.setExpiryDate(moment(new Date(data.year, data.month - 1, data.day)).format('YYYY/MM/DD'));
   }
   public toggleItem(newItem) {
     let findIndex = this.selectedUserAndDevices.findIndex(item => item.id === newItem.id);

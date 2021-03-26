@@ -32,6 +32,9 @@ export class PasswordRecordAdd {
     public setExpiryDate(data) {
         this.expiryDate = data;
     }
+    public getExpiryDateByTime() {
+        return new Date(this.expiryDate).getTime();
+    }
     public getDataForAdd(selectedUserAndDevices: Array<PasswordDeviceUser>) {
         let data: any = {
             companyId: this.client.id,
