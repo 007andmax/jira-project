@@ -139,9 +139,9 @@ export class PasswordManagerService {
    * @param recordId - id of record
    * @param recordInfo - record data
    */
-  public editRecord(recordInfo, recordId) {
-    const date = recordInfo.expiredDate;
-    return this.http.put(this.apiUrl + 'passwordRecords', Object.assign({ id: recordId }, this.getData(recordInfo, true)));
+  public editRecord(recordInfo) {
+
+    return this.http.put(this.apiUrl + 'passwordRecords', recordInfo);
   }
 
   /**

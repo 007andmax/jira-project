@@ -1,3 +1,4 @@
+import { PasswordDeviceUser } from "./password-device-user";
 import { PasswordRecordHistory } from "./password-record-history";
 import { PasswordRecordLink } from "./password-record-link";
 
@@ -10,6 +11,16 @@ export class PasswordRecord {
     links: Array<PasswordRecordLink> = []
     template: string;
     username: string;
+    ssid: string;
+    key: string;
+    url: string;
+    code: string;
+    ipAdres: string;
+    port: string;
+    https: boolean = false;
+    ssh: boolean = false;
+    telnet: boolean = false;
+    note: string;
     description: string;
     password: string;
     selected: boolean = false;
@@ -23,8 +34,94 @@ export class PasswordRecord {
         this.template = data.template;
         this.username = data.username;
         this.description = data.description;
+
+        this.ssid = data.ssid;
+        this.key = data.key;
+        this.url = data.url;
+        this.code = data.code;
+        this.ipAdres = data.ipAdres;
+        this.port = data.port;
+        this.https = data.https;
+        this.ssh = data.ssh;
+        this.telnet = data.telnet;
+        this.note = data.note;
     }
     public setPassword(data) {
         this.password = data;
+    }
+    public setCompanyId(data) {
+        this.companyId = data;
+    }
+    public setExpiryDate(data) {
+        this.expiredDate = data;
+    }
+    public setType(data) {
+        this.template = data;
+    }
+    public getExpiryDateByTime() {
+        return new Date(this.expiredDate).getTime();
+    }
+    public getDataForEdit(selectedUserAndDevices: Array<PasswordDeviceUser>) {
+        let data: any = {
+            id: this.id,
+            companyId: this.companyId,
+            description: this.description,
+            expiredDate: this.expiredDate,
+            links: selectedUserAndDevices.map(item => {
+                if (item.type === "DEVICE") return { deviceId: item.id }
+                if (item.type === "USER") return { userId: item.id }
+                if (item.type === "GADGET") return { gadgetId: item.id }
+            }),
+
+            password: this.password,
+            template: this.template
+        };
+        if (this.template === "OFFICE_365_ACCOUNT") {
+            data.key = this.key;
+            data.url = this.url;
+            data.ssid = this.ssid;
+            data.username = this.username;
+            data.note = this.note;
+        }
+        if (this.template === "MICROSOFT_ACCOUNT") {
+            data.url = this.url;
+            data.username = this.username;
+            data.note = this.note;
+        }
+        if (this.template === "EMAIL_ACCOUNT") {
+            data.username = this.username;
+            data.note = this.note;
+        }
+        if (this.template === "HOSTING") {
+            data.url = this.url;
+            data.username = this.username;
+            data.note = this.note;
+        }
+        if (this.template === "DEVICE") {
+            data.ip = (this.ipAdres) ? this.ipAdres : null;
+            data.username = this.username;
+            data.https = this.https;
+            data.ssh = this.ssh;
+            data.telnet = this.telnet;
+            data.port = this.port;
+            data.note = this.note;
+        }
+        if (this.template === "GENERIC") {
+            data.username = this.username;
+            data.code = this.code;
+            data.note = this.note;
+        }
+        if (this.template === "AGENT") {
+            data.username = this.username;
+        }
+        if (this.template === "WIFI_NETWORK") {
+            data.ssid = this.ssid;
+            data.note = this.note;
+        }
+        if (this.template === "LOCAL_USER_ACCOUNT") {
+            data.username = this.username;
+            data.note = this.note;
+        }
+        return data;
     }
 }

@@ -237,7 +237,7 @@ export class PasswordManagerAddAsideComponent implements OnInit {
     this.showGadgetsForm = false;
   }
   public save() {
-    if (!this.validate.isValidate(this.passwordRecordAdd)) return;
+    if (!this.validate.isValidate(this.passwordRecordAdd, this.selectedUserAndDevices)) return;
     this.subSaveRecord = this.passwordManagerService.saveRecord(this.passwordRecordAdd.getDataForAdd(this.selectedUserAndDevices))
       .subscribe((res) => {
         this.close();

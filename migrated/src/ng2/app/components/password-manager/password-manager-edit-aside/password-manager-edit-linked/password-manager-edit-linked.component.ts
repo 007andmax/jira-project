@@ -13,7 +13,6 @@ import { PasswordDeviceUser } from '../../class/password-device-user';
 export class PasswordManagerEditLinkedComponent implements OnInit {
   selectedUserAndDevices = [];
   @Input() selectedClient: Company;
-
   showSelect = false;
   @Input() type: string;
   @Input() title: string;
@@ -79,16 +78,6 @@ export class PasswordManagerEditLinkedComponent implements OnInit {
     } else {
       this.selectedUserAndDevices.push(newItem);
     }
-    /* if (type) {
-       this.changeSelectedUserAndDevices(newItem, index, type);
-       this.changeChecked(type, index);
-       const isItem = this.userDevice && this.findItemInUserDevice(newItem, type);
-       if (!isItem || isItem.length === 0) {
-         this.pushItemToUserDevice(newItem, type);
-       } else {
-         this.userDevice = this.filterUserDevice(newItem, type)
-       }
-       this.showGadgetsForm = false;
-     }*/
   }
+
 }

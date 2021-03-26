@@ -5,7 +5,8 @@ export class RecurringTicketsEditAsideDate {
     constructor() { }
     public setTitle(model, formatDate) {
         let date = new Date(model.year, model.month - 1, model.day);
-        this.title = moment(date).format(formatDate);
+        console.log("date", date);
+        this.title = (date.toString() === "Invalid Date") ? "No date" : moment(date).format(formatDate);
     }
     public getTitle() {
         return this.title;
