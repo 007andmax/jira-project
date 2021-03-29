@@ -14,6 +14,7 @@ import { InventoryStateService } from './states/inventory/inventory-state.servic
 import { TicketsStateService } from './states/tickets/tickets-state.service';
 import { ConstantsStateService } from './states/constants/constants-state.service';
 import { LeftPanelStateService } from './states/left-panel/left-panel-state.service';
+import { PasswordManagerStateService } from './states/password-manager/password-manager-state.service';
 
 
 /**
@@ -53,6 +54,7 @@ export class AppComponent implements OnInit {
     private ticketsStateService: TicketsStateService,
     private constantsStateService: ConstantsStateService,
     private leftPanelStateService: LeftPanelStateService,
+    private passwordManagerStateService: PasswordManagerStateService,
     public cd: ChangeDetectorRef,
 
   ) { }
@@ -65,6 +67,7 @@ export class AppComponent implements OnInit {
     setUpLocationSync(this.upgrade);
     this.userService.getUser();
     this.devicesState.onInit();
+    this.passwordManagerStateService.onInit();
     this.usersStateService.onInit();
     this.companiesState.onInit();
     this.taxesStateService.onInit();

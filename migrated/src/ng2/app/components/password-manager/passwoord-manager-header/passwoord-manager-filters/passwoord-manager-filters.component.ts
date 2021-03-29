@@ -10,6 +10,7 @@ import { UsersStateService } from 'src/ng2/app/states/users/users-state.service'
 import { TitleListType } from '../../../tickets/tickets/tickets-header/class/title-list-type';
 import { FilterPasswordManager } from '../../class/filter-password-manager';
 import { PasswordDeviceUser } from '../../class/password-device-user';
+import { PasswordRecordCategories } from '../../class/password-record-categories';
 
 @Component({
   selector: 'app-passwoord-manager-filters',
@@ -17,9 +18,10 @@ import { PasswordDeviceUser } from '../../class/password-device-user';
   styleUrls: ['./passwoord-manager-filters.component.scss']
 })
 export class PasswoordManagerFiltersComponent implements OnInit {
-  PASSWORD_RECORD_TYPES = PASSWORD_RECORD_TYPES;
+
   showAddCategory: boolean = false;
   companies = [];
+  categories: Array<PasswordRecordCategories> = [];
   disabledDevicesUsers: boolean = true;
   devicesUsers: Array<PasswordDeviceUser> = [];
   listDates: Array<TitleListType> = [new TitleListType('5 days', '5_DAYS'), new TitleListType('15 days', '15_DAYS'), new TitleListType('30 days', '30_DAYS')];
@@ -38,7 +40,12 @@ export class PasswoordManagerFiltersComponent implements OnInit {
     let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
       this.getClientsList(data);
     })
-
+    this.getCategories();
+  }
+  getCategories() {
+    this.apiPasswordManagerService.getCategories().subscribe((data: any) => {
+      this.categories = data.map(item => new PasswordRecordCategories(item))
+    })
   }
   getClientsList(data) {
     this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?

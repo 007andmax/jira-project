@@ -24,6 +24,8 @@ import { PasswordRecordAdd } from '../class/password-record-add';
 import { PasswordDeviceUser } from '../class/password-device-user';
 import { PasswordRecordValidate } from '../class/password-record-validate';
 import { FORMAT_DATE_2 } from 'src/ng2/app/const/date-picker';
+import { PasswordRecordCategories } from '../class/password-record-categories';
+import { PasswordManagerStateService } from 'src/ng2/app/states/password-manager/password-manager-state.service';
 
 
 @Component({
@@ -76,17 +78,15 @@ export class PasswordManagerAddAsideComponent implements OnInit {
   isLoadPassword: boolean = false;
 
   companies: Array<Company> = [];
-  PASSWORD_RECORD_TYPES = PASSWORD_RECORD_TYPES;
-  selectedType = {
-    TITLE: 'Office Account',
-    UPPERCASE: 'OFFICE_365_ACCOUNT'
-  }
+  categories: Array<PasswordRecordCategories> = [];
+  selectedType: PasswordRecordCategories;
   passwordRecordAdd: PasswordRecordAdd = new PasswordRecordAdd();
   public devicesList = [];
   public usersList = [];
   public gadgets = [];
   public selectedUserAndDevices: Array<PasswordDeviceUser> = [];
   public showSelect = false;
+  showAddCategory: boolean = false;
   public tabs = ['User', 'Device', 'Not monitored'];
   public currentTab = this.tabs[0];
   public opened: boolean = false;
@@ -112,6 +112,7 @@ export class PasswordManagerAddAsideComponent implements OnInit {
     private gadgetsService: GadgetsService,
     private permissionsService: PermissionsService,
     private apiPasswordManagerService: ApiPasswordManagerService,
+    private passwordManagerStateService: PasswordManagerStateService,
     public cd: ChangeDetectorRef,
     private companiesState: CompaniesStateService,
     private devicesStateService: DevicesStateService,
@@ -128,11 +129,16 @@ export class PasswordManagerAddAsideComponent implements OnInit {
       this.getClientsList(data);
     })
     this.subHideAddForm = this.passwordManagerService.onAddForm.subscribe((res) => {
+      this.selectedType = this.categories[0];
       this.passwordRecordAdd = new PasswordRecordAdd();
       this.passwordRecordAdd.setExpiryDate(moment(new Date()).format('YYYY/MM/DD'));
       console.log("this.passwordRecordAdd", this.passwordRecordAdd);
       this.opened = true;
     });
+    this.categories = this.passwordManagerStateService.getCategories();
+    this.passwordManagerStateService.onGetCategories.subscribe((data: Array<PasswordRecordCategories>) => {
+      this.categories = data;
+    })
     /*
     this.showAddForm();
     this.getCLientsList();

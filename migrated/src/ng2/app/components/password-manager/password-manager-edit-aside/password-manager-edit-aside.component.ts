@@ -27,6 +27,7 @@ import { ConfirmStateService } from '../../shared/confirm/services/confirm-state
 import { PasswordManagerStateService } from 'src/ng2/app/states/password-manager/password-manager-state.service';
 import { REMOVE_RECORD } from 'src/ng2/app/const/confirm';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
+import { PasswordRecordCategories } from '../class/password-record-categories';
 
 /**
  * Password manager edit aside component
@@ -86,11 +87,8 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
 
   tab: string = 'PASSWORD_DETAIL'
-  PASSWORD_RECORD_TYPES = PASSWORD_RECORD_TYPES;
-  selectedType = {
-    TITLE: 'Office Account',
-    UPPERCASE: 'OFFICE_365_ACCOUNT'
-  }
+  categories: Array<PasswordRecordCategories> = [];
+  selectedType: PasswordRecordCategories;
   companies: Array<Company> = [];
   public editItem: PasswordRecord = null;
   showPassword: boolean = false;
@@ -154,7 +152,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
           this.gadgetsList.push(new PasswordDeviceUser(item.gadgetId, `${item.gadgetName}`, 'GADGET'));
         }
       })
-      this.selectedType = this.PASSWORD_RECORD_TYPES.find(item => item.UPPERCASE === this.editItem.template);
+      this.selectedType = this.categories.find(item => item.name === this.editItem.template);
       this.selectedClient = this.companiesState.getCompanies().find(item => item.id === this.editItem.companyId);
       if (this.editItem) this.isEditmode = true;
       this.opened = true;
@@ -165,8 +163,11 @@ export class PasswordManagerEditAsideComponent implements OnInit {
         if (this.confirmStateService.getConfirmAction() === REMOVE_RECORD) {
           this.close();
         }
-
       }
+    })
+    this.categories = this.passwordManagerStateService.getCategories();
+    this.passwordManagerStateService.onGetCategories.subscribe((data: Array<PasswordRecordCategories>) => {
+      this.categories = data;
     })
     //this.showAddForm();
     /*  this.getCLientsList();
@@ -177,6 +178,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       this.hideAddForm();
       this.initForm();*/
   }
+
   private getClientsList(data) {
     this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));

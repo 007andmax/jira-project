@@ -27,6 +27,13 @@ export class ApiPasswordManagerService {
   /**
   * set action open record
   */
+  public getCategories() {
+    return this.http.get(this.apiUrl + `passwordRecords/types`);
+  }
+  public addCategories(name) {
+    return this.http.post(this.apiUrl + `passwordRecords/types?name=${name}`, {});
+  }
+
   public setOpenRecord(id) {
 
     return this.http.get(this.apiUrl + `passwordRecords/${id}/password`);
