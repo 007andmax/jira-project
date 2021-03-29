@@ -13,10 +13,8 @@ import { PasswordRecordCategories } from '../class/password-record-categories';
   styleUrls: ['./password-manager-add-category.component.scss']
 })
 export class PasswordManagerAddCategoryComponent implements OnInit {
-
   @Output() onClose: EventEmitter<any> = new EventEmitter();
   name: string = "";
-
   categories: Array<PasswordRecordCategories> = [];
   disableCreateCategory: boolean = false;
   sub: Subscription = new Subscription();
@@ -29,7 +27,6 @@ export class PasswordManagerAddCategoryComponent implements OnInit {
     this.passwordManagerStateService.onGetCategories.subscribe((data: Array<PasswordRecordCategories>) => {
       this.categories = data;
     })
-
   }
   checkDublicateCategory() {
     var duplicateCategory = this.categories.filter((item) => {
@@ -41,7 +38,10 @@ export class PasswordManagerAddCategoryComponent implements OnInit {
     return this.categories.find(item => item.name === name);
   }
   public save() {
-    if (this.name.length === 0 && this.checkName(this.name)) return;
+    if (this.name.length === 0) {
+      this.disableCreateCategory = true;
+      return;
+    };
     this.apiPasswordManagerService.addCategories(this.name).subscribe(data => {
       this.close();
     })

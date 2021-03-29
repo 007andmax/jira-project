@@ -40,11 +40,9 @@ export class PasswoordManagerFiltersComponent implements OnInit {
     let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
       this.getClientsList(data);
     })
-    this.getCategories();
-  }
-  getCategories() {
-    this.apiPasswordManagerService.getCategories().subscribe((data: any) => {
-      this.categories = data.map(item => new PasswordRecordCategories(item))
+    this.categories = this.passwordManagerStateService.getCategories();
+    this.passwordManagerStateService.onGetCategories.subscribe((data: Array<PasswordRecordCategories>) => {
+      this.categories = data;
     })
   }
   getClientsList(data) {

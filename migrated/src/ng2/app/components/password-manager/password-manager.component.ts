@@ -68,6 +68,7 @@ export class PasswordManagerComponent implements OnInit {
       this.setDefaultScoll();
       this.onScroll();
     })
+    if (this.passwordManagerStateService.getCategories().length === 0) this.passwordManagerStateService.onInit();
     //  this.userListService.addSubscription(geLefttFilter);
   }
   onSearch(value) {

@@ -54,7 +54,6 @@ export class AppComponent implements OnInit {
     private ticketsStateService: TicketsStateService,
     private constantsStateService: ConstantsStateService,
     private leftPanelStateService: LeftPanelStateService,
-    private passwordManagerStateService: PasswordManagerStateService,
     public cd: ChangeDetectorRef,
 
   ) { }
@@ -67,7 +66,6 @@ export class AppComponent implements OnInit {
     setUpLocationSync(this.upgrade);
     this.userService.getUser();
     this.devicesState.onInit();
-    this.passwordManagerStateService.onInit();
     this.usersStateService.onInit();
     this.companiesState.onInit();
     this.taxesStateService.onInit();
