@@ -405,7 +405,6 @@ import { InventoryHeaderComponent } from './components/inventory/inventory-heade
 import { InventoryFilterComponent } from './components/inventory/inventory-header/inventory-filter/inventory-filter.component';
 import { PasswordManagerAddCategoryComponent } from './components/password-manager/password-manager-add-category/password-manager-add-category.component';
 import { PasswordManagerAddAsideComponent } from './components/password-manager/password-manager-add-aside/password-manager-add-aside.component';
-import { PasswordManagerItemComponent } from './components/password-manager/password-manager-table/password-manager-item/password-manager-item.component';
 import { PasswoordManagerDevicesUsersComponent } from './components/password-manager/passwoord-manager-devices-users/passwoord-manager-devices-users.component';
 import { PasswoordManagerFiltersComponent } from './components/password-manager/passwoord-manager-header/passwoord-manager-filters/passwoord-manager-filters.component';
 import { PasswordManagerEditLinkedComponent } from './components/password-manager/password-manager-edit-aside/password-manager-edit-linked/password-manager-edit-linked.component';
@@ -976,7 +975,6 @@ angular.module('quicktech')
     InventoryFilterComponent,
     PasswordManagerAddCategoryComponent,
     PasswordManagerAddAsideComponent,
-    PasswordManagerItemComponent,
     PasswoordManagerDevicesUsersComponent,
     PasswoordManagerFiltersComponent,
     PasswordManagerEditLinkedComponent

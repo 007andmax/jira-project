@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators, ValidationErrors } from '@angular/f
 import { Observable, Subject, merge, Subscription } from 'rxjs';
 import { ISubscription } from "rxjs/Subscription";
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
-import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 
 import { PasswordManagerService } from "../../../services/password-manager/password-manager.service";
@@ -23,6 +23,10 @@ import { PasswordRecord } from '../class/password-record';
 import { PasswordDeviceUser } from '../class/password-device-user';
 import { PasswordRecordValidate } from '../class/password-record-validate';
 import { Company } from 'src/ng2/app/interfaces/quote/company';
+import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
+import { PasswordManagerStateService } from 'src/ng2/app/states/password-manager/password-manager-state.service';
+import { REMOVE_RECORD } from 'src/ng2/app/const/confirm';
+import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 
 /**
  * Password manager edit aside component
@@ -52,8 +56,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public showSelect = false;
   public tabs = ['User', 'Device', 'Not monitored'];
   public currentTab = this.tabs[0];
-  public devicesList = [];
-  public usersList = [];
+
   public reqUsersList = [];
   public showGadgetsForm: any;
   public newGadgets: any;
@@ -93,6 +96,9 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   showPassword: boolean = false;
   validate: PasswordRecordValidate = new PasswordRecordValidate();
   selectedUserAndDevices: Array<PasswordDeviceUser> = [];
+  public devicesList = [];
+  public usersList = [];
+  public gadgetsList = [];
   /**
    * Creates an instance of the PasswordManagerEditAsideComponent with the injected services
    * @param {ApiPasswordManagerService} apiPasswordManagerService Service to work with api
@@ -114,7 +120,9 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     private permissionsService: PermissionsService,
     private apiPasswordManagerService: ApiPasswordManagerService,
     public cd: ChangeDetectorRef,
-
+    private confirmStateService: ConfirmStateService,
+    private modalService: NgbModal,
+    private passwordManagerStateService: PasswordManagerStateService,
     private companiesState: CompaniesStateService,
     private devicesStateService: DevicesStateService,
     private usersStateService: UsersStateService,
@@ -130,14 +138,36 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       this.getClientsList(data);
     })
     this.subShowAddForm = this.passwordManagerService.onEditForm.subscribe((res) => {
-      this.editItem = res;
+      this.editItem = new PasswordRecord(JSON.parse(JSON.stringify(res)));
       console.log("this.editItem", this.editItem);
+      this.editItem.links.forEach(item => {
+        if (item.userId) {
+          this.selectedUserAndDevices.push(new PasswordDeviceUser(item.userId, `${item.userName}`, 'USER'));
+          this.usersList.push(new PasswordDeviceUser(item.userId, `${item.userName}`, 'USER'));
+        }
+        if (item.deviceId) {
+          this.selectedUserAndDevices.push(new PasswordDeviceUser(item.deviceId, `${item.deviceLabel}`, 'DEVICE'));
+          this.devicesList.push(new PasswordDeviceUser(item.deviceId, `${item.deviceLabel}`, 'DEVICE'));
+        }
+        if (item.gadgetId) {
+          this.selectedUserAndDevices.push(new PasswordDeviceUser(item.gadgetId, `${item.gadgetName}`, 'GADGET'));
+          this.gadgetsList.push(new PasswordDeviceUser(item.gadgetId, `${item.gadgetName}`, 'GADGET'));
+        }
+      })
       this.selectedType = this.PASSWORD_RECORD_TYPES.find(item => item.UPPERCASE === this.editItem.template);
       this.selectedClient = this.companiesState.getCompanies().find(item => item.id === this.editItem.companyId);
       if (this.editItem) this.isEditmode = true;
       this.opened = true;
       // this.initForm();
     });
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === REMOVE_RECORD) {
+          this.close();
+        }
+
+      }
+    })
     //this.showAddForm();
     /*  this.getCLientsList();
       this.oGetUsers();
@@ -200,7 +230,15 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
   close() {
     this.opened = false;
-
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
+  }
+  deleteRecord() {
+    this.confirmStateService.setConfirmAction(REMOVE_RECORD);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    modalRef.componentInstance.message = `Are you sure you want to delete “${this.editItem.username}” account?`;
+    this.passwordManagerStateService.setRecordForRemove(this.editItem);
   }
   /**
    * toggle sidebar and refresh data
@@ -752,21 +790,8 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     });
   }
 
-  /**
-   * delete record
-   */
-  public deleteRecord(recordId) {
-    this.passwordManagerService.deleteRecordFromEditForm(recordId);
-    // this.hideAddForm();
-    this._toggleSidebar();
-  }
 
-  /**
-   * getPermission
-   */
-  public getPermissions(action) {
-    return this.permissionsService.isAllowed(action)
-  }
+
 
   /**
    * Destroy password manager edit component

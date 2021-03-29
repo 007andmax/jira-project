@@ -761,7 +761,7 @@ ngb-typeahead-window {
   position: relative;
   &:before {
     position: absolute;
-    content: 'Select Device / User';
+    content: '';
     left: 10px;
     top: 50%;
     transform: translateY(-50%);
@@ -2268,7 +2268,7 @@ ngb-typeahead-window {
 
   &:before {
     position: absolute;
-    content: 'Select Device / User';
+    content: '';
     left: 10px;
     top: 50%;
     transform: translateY(-50%);

@@ -11,18 +11,22 @@ import { PasswordDeviceUser } from '../../class/password-device-user';
   styleUrls: ['./password-manager-edit-linked.component.scss']
 })
 export class PasswordManagerEditLinkedComponent implements OnInit {
-  selectedUserAndDevices = [];
+  @Input() selectedUserAndDevices: Array<PasswordDeviceUser> = [];
   @Input() selectedClient: Company;
   showSelect = false;
   @Input() type: string;
   @Input() title: string;
+  @Input() placeholder: string;
   list: Array<PasswordDeviceUser> = [];
+
+
   constructor(private usersStateService: UsersStateService,
     public cd: ChangeDetectorRef,
     private gadgetsService: GadgetsService,
     private devicesStateService: DevicesStateService) { }
 
   ngOnInit() {
+
     if (this.type === 'USERS') {
       let users = this.usersStateService.getAllUsers().filter(item => item.company.id === this.selectedClient.id);
       users.forEach(item => {

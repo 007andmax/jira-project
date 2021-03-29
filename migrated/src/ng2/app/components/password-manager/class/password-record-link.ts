@@ -6,6 +6,9 @@ export class PasswordRecordLink {
 
     deviceId: string;
     deviceLabel: string;
+
+    gadgetId: string;
+    gadgetName: string;
     constructor(data) {
         this.actionDate = data.actionDate;
         this.historyType = data.historyType;
