@@ -1,4 +1,5 @@
 import { PasswordDeviceUser } from "./password-device-user";
+import { PasswordRecordCategories } from "./password-record-categories";
 import { PasswordRecordHistory } from "./password-record-history";
 import { PasswordRecordLink } from "./password-record-link";
 
@@ -9,7 +10,7 @@ export class PasswordRecord {
     histories: Array<PasswordRecordHistory> = [];
     id: string;
     links: Array<PasswordRecordLink> = []
-    template: string;
+    template: PasswordRecordCategories;
     username: string;
     ssid: string;
     key: string;
@@ -76,28 +77,28 @@ export class PasswordRecord {
             password: this.password,
             template: this.template
         };
-        if (this.template === "OFFICE_365_ACCOUNT") {
+        if (this.template.name === "OFFICE_365_ACCOUNT") {
             data.key = this.key;
             data.url = this.url;
             data.ssid = this.ssid;
             data.username = this.username;
             data.note = this.note;
         }
-        if (this.template === "MICROSOFT_ACCOUNT") {
+        if (this.template.name === "MICROSOFT_ACCOUNT") {
             data.url = this.url;
             data.username = this.username;
             data.note = this.note;
         }
-        if (this.template === "EMAIL_ACCOUNT") {
+        if (this.template.name === "EMAIL_ACCOUNT") {
             data.username = this.username;
             data.note = this.note;
         }
-        if (this.template === "HOSTING") {
+        if (this.template.name === "HOSTING") {
             data.url = this.url;
             data.username = this.username;
             data.note = this.note;
         }
-        if (this.template === "DEVICE") {
+        if (this.template.name === "DEVICE") {
             data.ip = (this.ipAdres) ? this.ipAdres : null;
             data.username = this.username;
             data.https = this.https;
@@ -106,19 +107,19 @@ export class PasswordRecord {
             data.port = this.port;
             data.note = this.note;
         }
-        if (this.template === "GENERIC") {
+        if (this.template.name === "GENERIC") {
             data.username = this.username;
             data.code = this.code;
             data.note = this.note;
         }
-        if (this.template === "AGENT") {
+        if (this.template.name === "AGENT") {
             data.username = this.username;
         }
-        if (this.template === "WIFI_NETWORK") {
+        if (this.template.name === "WIFI_NETWORK") {
             data.ssid = this.ssid;
             data.note = this.note;
         }
-        if (this.template === "LOCAL_USER_ACCOUNT") {
+        if (this.template.name === "LOCAL_USER_ACCOUNT") {
             data.username = this.username;
             data.note = this.note;
         }

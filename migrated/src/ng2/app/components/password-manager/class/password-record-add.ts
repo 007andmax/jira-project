@@ -1,10 +1,11 @@
 import { Company } from "src/ng2/app/interfaces/quote/company";
 import { PasswordDeviceUser } from "./password-device-user";
+import { PasswordRecordCategories } from "./password-record-categories";
 
 export class PasswordRecordAdd {
     description: string = "";
     client: Company;
-    type: string = "OFFICE_365_ACCOUNT";
+    template: PasswordRecordCategories;
     ssid: string;
     userName: string;
     password: string;
@@ -27,7 +28,7 @@ export class PasswordRecordAdd {
         this.client = data;
     }
     public setType(data) {
-        this.type = data;
+        this.template = data;
     }
     public setExpiryDate(data) {
         this.expiryDate = data;
@@ -47,30 +48,30 @@ export class PasswordRecordAdd {
             }),
 
             password: this.password,
-            template: this.type
+            template: this.template
         };
-        if (this.type === "OFFICE_365_ACCOUNT") {
+        if (this.template.name === "OFFICE_365_ACCOUNT") {
             data.key = this.key;
             data.url = this.url;
             data.ssid = this.ssid;
             data.username = this.userName;
             data.note = this.note;
         }
-        if (this.type === "MICROSOFT_ACCOUNT") {
+        if (this.template.name === "MICROSOFT_ACCOUNT") {
             data.url = this.url;
             data.username = this.userName;
             data.note = this.note;
         }
-        if (this.type === "EMAIL_ACCOUNT") {
+        if (this.template.name === "EMAIL_ACCOUNT") {
             data.username = this.userName;
             data.note = this.note;
         }
-        if (this.type === "HOSTING") {
+        if (this.template.name === "HOSTING") {
             data.url = this.url;
             data.username = this.userName;
             data.note = this.note;
         }
-        if (this.type === "DEVICE") {
+        if (this.template.name === "DEVICE") {
             data.ip = (this.ipAdres) ? this.ipAdres : null;
             data.username = this.userName;
             data.https = this.https;
@@ -79,19 +80,19 @@ export class PasswordRecordAdd {
             data.port = this.port;
             data.note = this.note;
         }
-        if (this.type === "GENERIC") {
+        if (this.template.name === "GENERIC") {
             data.username = this.userName;
             data.code = this.code;
             data.note = this.note;
         }
-        if (this.type === "AGENT") {
+        if (this.template.name === "AGENT") {
             data.username = this.userName;
         }
-        if (this.type === "WIFI_NETWORK") {
+        if (this.template.name === "WIFI_NETWORK") {
             data.ssid = this.ssid;
             data.note = this.note;
         }
-        if (this.type === "LOCAL_USER_ACCOUNT") {
+        if (this.template.name === "LOCAL_USER_ACCOUNT") {
             data.username = this.userName;
             data.note = this.note;
         }

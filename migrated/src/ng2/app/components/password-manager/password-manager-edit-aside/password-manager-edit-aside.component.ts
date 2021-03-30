@@ -29,7 +29,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public opened: boolean = false;
   tab: string = 'PASSWORD_DETAIL'
   categories: Array<PasswordRecordCategories> = [];
-  selectedType: PasswordRecordCategories;
   companies: Array<Company> = [];
   public editItem: PasswordRecord = null;
   showPassword: boolean = false;
@@ -84,7 +83,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
           this.gadgetsList.push(new PasswordDeviceUser(item.gadgetId, `${item.gadgetName}`, 'GADGET'));
         }
       })
-      this.selectedType = this.categories.find(item => item.name === this.editItem.template);
+
       this.selectedClient = this.companiesState.getCompanies().find(item => item.id === this.editItem.companyId);
       this.opened = true;
     });
@@ -113,9 +112,9 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.validate.resetCompany();
   }
   selectType(data) {
-    this.selectedType = data;
-    this.editItem.setType(data.UPPERCASE);
-    if (data.UPPERCASE !== 'DEVICE' && data.UPPERCASE !== 'LOCAL_USER_ACCOUNT') this.validate.resetLinkTo();
+
+    this.editItem.setType(data);
+    if (data.name !== 'DEVICE' && data.name !== 'LOCAL_USER_ACCOUNT') this.validate.resetLinkTo();
   }
   onChangeExpiryDate(data) {
     this.editItem.setExpiryDate(moment(new Date(data.year, data.month - 1, data.day)).format('YYYY/MM/DD'));

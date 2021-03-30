@@ -24,7 +24,6 @@ export class PasswordManagerAddAsideComponent implements OnInit {
   showPassword: boolean = false;
   companies: Array<Company> = [];
   categories: Array<PasswordRecordCategories> = [];
-  selectedType: PasswordRecordCategories;
   passwordRecordAdd: PasswordRecordAdd = new PasswordRecordAdd();
   public devicesList = [];
   public usersList = [];
@@ -69,8 +68,9 @@ export class PasswordManagerAddAsideComponent implements OnInit {
       this.getClientsList(data);
     })
     this.passwordManagerService.onAddForm.subscribe((res) => {
-      this.selectedType = this.categories[0];
+
       this.passwordRecordAdd = new PasswordRecordAdd();
+      this.passwordRecordAdd.setType(this.categories[0])
       this.passwordRecordAdd.setExpiryDate(moment(new Date()).format('YYYY/MM/DD'));
       console.log("this.passwordRecordAdd", this.passwordRecordAdd);
       this.opened = true;
@@ -146,8 +146,8 @@ export class PasswordManagerAddAsideComponent implements OnInit {
     return item.hostName || item.ip;
   }
   selectType(data) {
-    this.selectedType = data;
-    this.passwordRecordAdd.setType(data ? data.UPPERCASE : null);
+
+    this.passwordRecordAdd.setType(data);
     if (data.UPPERCASE !== 'DEVICE' && data.UPPERCASE !== 'LOCAL_USER_ACCOUNT') this.validate.resetLinkTo();
   }
   onChangeDatePicker(data) {
