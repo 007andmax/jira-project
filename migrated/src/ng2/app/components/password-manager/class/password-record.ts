@@ -47,6 +47,9 @@ export class PasswordRecord {
         this.telnet = data.telnet;
         this.note = data.note;
     }
+    public isDefaultType() {
+        return this.template.default;
+    }
     public setPassword(data) {
         this.password = data;
     }

@@ -24,6 +24,9 @@ export class PasswordRecordAdd {
     constructor() {
 
     }
+    public isDefaultType() {
+        return this.template.default;
+    }
     public setCompany(data) {
         this.client = data;
     }
