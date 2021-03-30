@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { REMOVE_CREDENTIAL } from 'src/ng2/app/const/confirm';
-import { ApiPasswordManagerService } from 'src/ng2/app/services/password-manager/api-password-manager.service';
+import { PasswordManagerService } from 'src/ng2/app/services/password-manager/password-manager.service';
 import { NetworkScanStateService } from 'src/ng2/app/states/network-scan/network-scan-state.service';
 import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../../shared/confirm/services/confirm-state.service';
@@ -18,7 +18,7 @@ export class NetworkScanCredentialsAsideItemComponent implements OnInit {
   @Output() onSelect = new EventEmitter<any>();
   constructor(private modalService: NgbModal,
     private confirmStateService: ConfirmStateService,
-    private apiPasswordManagerService: ApiPasswordManagerService,
+    private passwordManagerService: PasswordManagerService,
     private networkScanStateService: NetworkScanStateService) { }
 
   ngOnInit() {
@@ -28,14 +28,14 @@ export class NetworkScanCredentialsAsideItemComponent implements OnInit {
   }
   onCheckChangeName(event) {
     if (this.item.username !== event.target.value) {
-      this.apiPasswordManagerService.editRecord(this.item.getDataForUpdate(this.companyId, event.target.value, null)).subscribe(data => {
+      this.passwordManagerService.editRecord(this.item.getDataForUpdate(this.companyId, event.target.value, null)).subscribe(data => {
         this.item.setUserName(event.target.value);
       })
     }
   }
   onCheckChangePassword(event) {
     if (this.item.password !== event.target.value) {
-      this.apiPasswordManagerService.editRecord(this.item.getDataForUpdate(this.companyId, this.item.username, event.target.value)).subscribe(data => {
+      this.passwordManagerService.editRecord(this.item.getDataForUpdate(this.companyId, this.item.username, event.target.value)).subscribe(data => {
         this.item.setPassword(event.target.value);
       })
     }
@@ -47,7 +47,7 @@ export class NetworkScanCredentialsAsideItemComponent implements OnInit {
     this.networkScanStateService.setCredentialForRemove(this.item);
   }
   showPassword() {
-    this.apiPasswordManagerService.setOpenRecord(this.item.id).subscribe((data: any) => {
+    this.passwordManagerService.setOpenRecord(this.item.id).subscribe((data: any) => {
       this.item.setPassword(data.password);
     })
   }

@@ -70,10 +70,10 @@ export class FilterPasswordManager {
             if (this.search) {
                 let find = false;
                 item.links.forEach(link => {
-                    if (link.userId && link.userName.includes(this.search)) find = true;
-                    if (link.deviceId && link.deviceLabel.includes(this.search)) find = true;
+                    if (link.userId && link.userName.toLocaleLowerCase().includes(this.search.toLocaleLowerCase())) find = true;
+                    if (link.deviceId && link.deviceLabel.toLocaleLowerCase().includes(this.search.toLocaleLowerCase())) find = true;
                 });
-                if (!(item.description ? item.description : "").includes(this.search) && !find) return false;
+                if (!(item.description ? item.description.toLocaleLowerCase() : "").includes(this.search.toLocaleLowerCase()) && !find) return false;
             }
             return true;
         })

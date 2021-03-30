@@ -2,17 +2,7 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 
 import { PasswordManagerService } from "../../../services/password-manager/password-manager.service";
 import { PermissionsService } from "../../../services/permissions/permissions.service";
-import { ApiPasswordManagerService } from "../../../services/password-manager/api-password-manager.service";
-import { PASSWORD_RECORD_TYPES } from 'src/ng2/app/const/password-record-types';
-import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { Subscription } from 'rxjs';
-import { TitleListType } from '../../tickets/tickets/tickets-header/class/title-list-type';
-import { FilterPasswordManager } from '../class/filter-password-manager';
-import { PasswordManagerStateService } from 'src/ng2/app/states/password-manager/password-manager-state.service';
-import { PasswordDeviceUser } from '../class/password-device-user';
-import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
-import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.service';
-import { flattenStyles } from '@angular/platform-browser/src/dom/dom_renderer';
 import { PasswordRecord } from '../class/password-record';
 
 
@@ -35,18 +25,12 @@ export class PasswoordManagerHeaderComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   /**
    * Creates an instance of the PasswordManagerComponent with the injected services
-   * @param {ApiPasswordManagerService} apiPasswordManagerService Service to work with api
-   * @param {PasswordManagerService} passwordManagerService Service to work with filters
+    * @param {PasswordManagerService} passwordManagerService Service to work with filters
    * @param {permissionsService} permissionsService to work with permissions service
    */
   constructor(
     private passwordManagerService: PasswordManagerService,
     private permissionsService: PermissionsService,
-    private apiPasswordManagerService: ApiPasswordManagerService,
-    private companiesState: CompaniesStateService,
-    private passwordManagerStateService: PasswordManagerStateService,
-    private usersStateService: UsersStateService,
-    private devicesStateService: DevicesStateService
   ) { }
 
   /**

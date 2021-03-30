@@ -7,7 +7,6 @@ import { CompaniesService } from "../../../services/company/companies.service";
 import { DevicesService } from "../../../services/devices/devices.service";
 import { PasswordManagerService } from "../../../services/password-manager/password-manager.service";
 import { UsersService } from "../../../services/users/users.service";
-import { ApiPasswordManagerService } from "../../../services/password-manager/api-password-manager.service";
 import { GadgetsService } from "../../../services/gadgets/gadgets.service";
 import { ISubscription } from "rxjs-compat/Subscription";
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
@@ -55,8 +54,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
    * @param {DevicesService} devicesService Service to work with devices
    * @param {UsersService} userService Service to work with users
    * @param {PasswordManagerService} passwordManagerService Service to work with password manager
-   * @param {ApiPasswordManagerService} apiPasswordManagerService Service to work with api password manager
-   * @param {GadgetsService} gadgetsService Service to work with gadget
+    * @param {GadgetsService} gadgetsService Service to work with gadget
    * @param {ChangeDetectorRef} cdRef Service to work with change detection
    */
   constructor(
@@ -64,7 +62,6 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     private devicesService: DevicesService,
     private userService: UsersService,
     private passwordManagerService: PasswordManagerService,
-    private apiPasswordManagerService: ApiPasswordManagerService,
     private gadgetsService: GadgetsService,
     private cdRef: ChangeDetectorRef,
     private usersStateService: UsersStateService,
@@ -78,10 +75,6 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
    * Initializes left panel password manager. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
-
-    this.getPasswordRecords();
-    this.addNewRecord();
-    this.deleteRecord();
     this.getCompaniesList();
     this.checkCloseFilters();
     this.innerWidth = window.innerWidth;
@@ -132,9 +125,8 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.passwordManagerService.setSelectedDeviceOrUser({});
     this.filterPasswordRecords(item.item);
     if (item.item.companyId) {
-      this.getCompanyDevices();
-      this.getAllUsers(item.item.companyId);
-      this.getGadgets(item.item.companyId);
+
+
     }
   }
 
@@ -147,9 +139,8 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.passwordManagerService.setSelectedDeviceOrUser({});
     this.filterPasswordRecords(item.item);
     if (item.item.companyId) {
-      this.getCompanyDevices();
-      this.getAllUsers(item.item.companyId);
-      this.getGadgets(item.item.companyId);
+
+
     }
   }
 
@@ -226,17 +217,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.filterPasswordRecordsByDeviceOrUser(item.item);
   }
 
-  /**
-   * Get device from company
-   * @param companyId - id of company
-   */
-  public getCompanyDevices() {
 
-    if (this.devicesStateService.getAllDevices()[this.selectedCompany.companyId]) {
-      return this.devicesAndUsersList = [...this.devicesAndUsersList, ...this.devicesStateService.getAllDevices()[this.selectedCompany.companyId]];
-    }
-
-  }
 
   public goToState() {
     this.onChangeState.emit('password-manager');
@@ -261,26 +242,6 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.filterPasswordRecordsByDate(date);
   }
 
-  /**
-  * Get password records list
-  */
-  public getPasswordRecords() {
-    if (this.innerWidth <= 414) {
-      this.passwordManagerService.setMobileCategory();
-    }
-
-    this.subGetRecords = this.apiPasswordManagerService.dataChange.subscribe((res: any) => {
-      this.passwordRecordsStart = res;
-      this.passwordRecords = res;
-      this.selectedCompany && this.selectCompany({ item: this.selectedCompany });
-      this.selectedDeviceOrUser && this.selectDeviceOrUser({ item: this.selectedDeviceOrUser });
-      this.selectedDateItem && this.selectDate(this.selectedDateItem);
-      if (this.innerWidth <= 414) {
-        this.closeMobileFilters();
-      }
-      this.cdRef.detectChanges();
-    });
-  }
 
   /**
    * Show category if has records
@@ -455,70 +416,11 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.device = null;
   }
 
-  /**
-   * Get all user by company
-   * @param companyId - id of company
-   */
-  private getAllUsers(companyId) {
-    // this.usersStateService.getAllusers().subscribe((res: any) => {
-    let list_users = this.usersStateService.getAllUsers().filter((item) => item.company.id == companyId);
-    this.devicesAndUsersList = [...(list_users.filter((item) => item.accountType === USER.TYPE.CLIENT)), ...this.devicesAndUsersList]
-    //  })
-  }
 
-  /**
-   * Get all gadgets by company
-   * @param companyId - id of company
-   */
-  private getGadgets(companyId) {
-    this.gadgetsService.getCompanyDevices().subscribe((res: any) =>
-      this.devicesAndUsersList = [...(res.filter((item) => item.clientCompanyId === companyId)), ...this.devicesAndUsersList])
-  }
 
-  /**
-   * Add new record
-   */
-  public addNewRecord() {
 
-    this.subNewRecordAdd = this.passwordManagerService.newRecordsisAdd.subscribe(() => {
 
-      if (this.innerWidth <= 414) {
-        this.passwordManagerService.setMobileCategory();
-      }
-      this.subscriptions.add(this.apiPasswordManagerService.getRecordsNew().subscribe((res: any) => {
 
-        this.passwordRecordsStart = res;
-        this.passwordRecords = res;
-        this.selectedCompany && this.selectCompany({ item: this.selectedCompany });
-        this.selectedDeviceOrUser && this.selectDeviceOrUser({ item: this.selectedDeviceOrUser });
-        this.selectedDateItem && this.selectDate(this.selectedDateItem);
-        if (this.innerWidth <= 414) {
-          this.closeMobileFilters();
-        }
-      }));
-    })
-  }
-
-  /**
-   * Delete record
-   */
-  public deleteRecord() {
-    this.passwordManagerService.deleteItem.subscribe((item) => {
-      if (this.innerWidth <= 414) {
-        this.passwordManagerService.setMobileCategory();
-      }
-      this.subscriptions.add(this.apiPasswordManagerService.getRecordsNew().subscribe((res: any) => {
-        this.passwordRecordsStart = res;
-        this.passwordRecords = res;
-        this.selectedCompany && this.selectCompany({ item: this.selectedCompany });
-        this.selectedDeviceOrUser && this.selectDeviceOrUser({ item: this.selectedDeviceOrUser });
-        this.selectedDateItem && this.selectDate(this.selectedDateItem);
-        if (this.innerWidth <= 414) {
-          this.closeMobileFilters();
-        }
-      }));
-    });
-  }
 
   /**
    * Getter for load status
@@ -538,7 +440,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
    * Destroy component
    */
   ngOnDestroy() {
-    this.apiPasswordManagerService.deleteSubscription();
+
     this.subscription && this.subscription.unsubscribe();
     this.subGetRecords && this.subGetRecords.unsubscribe();
     this.subGetRecords && this.subGetRecords.unsubscribe();

@@ -25,7 +25,7 @@ export class PasswordManagerService {
   public mobileCategory: EventEmitter<any> = new EventEmitter();
   public newRecordsisAdd: EventEmitter<any> = new EventEmitter();
   public onSort: EventEmitter<any> = new EventEmitter();
-  public onChangeRealTime: EventEmitter<any> = new EventEmitter();
+
   password: string = null;
   /**
    * Password manager service constructor
@@ -46,9 +46,7 @@ export class PasswordManagerService {
   public setPassword(password) {
     this.password = password;
   }
-  public handleRealTimeChanges(data) {
-    this.onChangeRealTime.emit(data)
-  }
+
 
   public getOnSort() {
     return this.onSort;
@@ -90,37 +88,16 @@ export class PasswordManagerService {
     this.selectedDate.emit(item)
   }
 
-
-
-  /**
-   * Add new record
-   * @param item - record data
-   */
-
-
-
-  /**
-   * Delete record
-   * @param recordId - id of record
-   */
-  public deleteRecord(recordId) {
-    this.deleteItem.emit(recordId);
-    this.hideAddForm.emit();
-  }
-
-  /**
-   * Delete record from edit form
-   * @param recordId - id of record
-   */
-  public deleteRecordFromEditForm(recordId) {
-    this.deleteItemEditForm.emit(recordId);
-    //  this.hideAddForm.emit();
-  }
-
   public getAgentsCredentialsForCompany(companyId) {
     return this.http.get(this.apiUrl + `passwordRecords/${companyId}/agents/password`);
   }
+  public setOpenRecord(id) {
 
+    return this.http.get(this.apiUrl + `passwordRecords/${id}/password`);
+  }
+  public getCategories() {
+    return this.http.get(this.apiUrl + `passwordRecords/types`);
+  }
   /**
    * Save record
    * @param recordInfo - record data
@@ -144,6 +121,10 @@ export class PasswordManagerService {
     return this.http.put(this.apiUrl + 'passwordRecords', recordInfo);
   }
 
+  public getCompanyRecords(id) {
+
+    return this.http.get(this.apiUrl + `passwordRecords/company/${id}`)
+  }
   /**
    * Format day and mouth
    * @param item - date data
@@ -158,6 +139,26 @@ export class PasswordManagerService {
    */
   public getFormatedDate(date) {
     return date && `${date.year}/${this.formatDayAndMonth(date.month)}/${this.formatDayAndMonth(date.day)}`;
+  }
+
+  public addCategories(name) {
+    return this.http.post(this.apiUrl + `passwordRecords/types?name=${name}`, {});
+  }
+
+  /**
+  * Delete record
+  * @param recordId - id of record
+  */
+  public deleteRecord(recordId) {
+    return this.http.delete(this.apiUrl + `passwordRecords/${recordId}`);
+  }
+
+  /**
+  * Get records list
+  */
+  public getRecords() {
+
+    return this.http.get(this.apiUrl + 'passwordRecords');
   }
 
   /**

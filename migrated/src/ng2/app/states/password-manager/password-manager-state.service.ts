@@ -1,7 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { PasswordRecord } from '../../components/password-manager/class/password-record';
 import { PasswordRecordCategories } from '../../components/password-manager/class/password-record-categories';
-import { ApiPasswordManagerService } from '../../services/password-manager/api-password-manager.service';
+import { PasswordManagerService } from '../../services/password-manager/password-manager.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,15 +11,24 @@ export class PasswordManagerStateService {
   onFilter: EventEmitter<any> = new EventEmitter();
   onGetCategories: EventEmitter<any> = new EventEmitter();
   categories: Array<PasswordRecordCategories> = [];
-  constructor(private apiPasswordManagerService: ApiPasswordManagerService) { }
+  public onChangeRealTime: EventEmitter<any> = new EventEmitter();
+  constructor(private passwordManagerService: PasswordManagerService) { }
 
   public onInit() {
-    this.apiPasswordManagerService.getCategories().subscribe((data: any) => {
+    this.passwordManagerService.getCategories().subscribe((data: any) => {
       this.categories = data.map(item => new PasswordRecordCategories(item))
       this.onGetCategories.emit(this.categories);
     })
-  }
+    this.onChangeRealTime.subscribe(newChange => {
+      if (newChange.action === 'PASSWORD_CATEGORY_DELETED') console.log("newChange", newChange);
+      if (newChange.action === 'PASSWORD_CATEGORY_CREATED') console.log("newChange", newChange);
+      if (newChange.action === 'PASSWORD_CATEGORY_UPDATED') console.log("newChange", newChange);
 
+    })
+  }
+  public handleRealTimeChanges(data) {
+    this.onChangeRealTime.emit(data)
+  }
   public getCategories() {
     return this.categories;
   }

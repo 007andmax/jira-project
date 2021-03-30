@@ -1,8 +1,4 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { PASSWORD_RECORD_TYPES } from 'src/ng2/app/const/password-record-types';
-import { ApiPasswordManagerService } from 'src/ng2/app/services/password-manager/api-password-manager.service';
-import { PasswordManagerService } from 'src/ng2/app/services/password-manager/password-manager.service';
-import { PermissionsService } from 'src/ng2/app/services/permissions/permissions.service';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.service';
 import { PasswordManagerStateService } from 'src/ng2/app/states/password-manager/password-manager-state.service';
@@ -27,9 +23,7 @@ export class PasswoordManagerFiltersComponent implements OnInit {
   listDates: Array<TitleListType> = [new TitleListType('5 days', '5_DAYS'), new TitleListType('15 days', '15_DAYS'), new TitleListType('30 days', '30_DAYS')];
   @Output() onChangeCountFilter = new EventEmitter<any>();
   public filter: FilterPasswordManager = new FilterPasswordManager();
-  constructor(private passwordManagerService: PasswordManagerService,
-    private permissionsService: PermissionsService,
-    private apiPasswordManagerService: ApiPasswordManagerService,
+  constructor(
     private companiesState: CompaniesStateService,
     private passwordManagerStateService: PasswordManagerStateService,
     private usersStateService: UsersStateService,

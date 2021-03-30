@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
-import { ApiPasswordManagerService } from '../../services/password-manager/api-password-manager.service';
 import { CompaniesService } from '../../services/company/companies.service';
 import { PasswordManagerService } from '../../services/password-manager/password-manager.service';
 import { UsersService } from '../../services/users/users.service';
@@ -33,14 +32,13 @@ export class CompanyPasswordManagerComponent implements OnInit, OnDestroy {
   public direction: string = 'DESC';
   /**
    * Creates an instance of the PasswordManagerComponent with the injected services
-   * @param {ApiPasswordManagerService} apiPasswordManagerService Service to work with api
-   * @param {CompaniesService} companiesService Service to work with api
+    * @param {CompaniesService} companiesService Service to work with api
    * @param {PasswordManagerService} passwordManagerService Service to work with filters
    * @param {userService} userService Service to work with user
    * @param {permissionsService} permissionsService to work with permissions service
    */
   public constructor(
-    private apiPasswordManagerService: ApiPasswordManagerService,
+
     private companiesService: CompaniesService,
     private passwordManagerService: PasswordManagerService,
     private userService: UsersService,
@@ -83,17 +81,17 @@ export class CompanyPasswordManagerComponent implements OnInit, OnDestroy {
 
     this.checkCloseFilters();
 
-    let subGetRecords = this.apiPasswordManagerService.dataChange.subscribe((res) => {
+    /* let subGetRecords = this.apiPasswordManagerService.dataChange.subscribe((res) => {
+ 
+       this.showPreloader = false;
+     });*/
 
-      this.showPreloader = false;
-    });
-
-    let companyRecords = this.apiPasswordManagerService.companyRecords.subscribe((res) => {
-
-      this.showPreloader = false;
-    });
-    this.sub.add(subGetRecords);
-    this.sub.add(companyRecords);
+    /*  let companyRecords = this.apiPasswordManagerService.companyRecords.subscribe((res) => {
+  
+        this.showPreloader = false;
+      });*/
+    /*  this.sub.add(subGetRecords);
+      this.sub.add(companyRecords);*/
   };
 
   /**
@@ -106,7 +104,7 @@ export class CompanyPasswordManagerComponent implements OnInit, OnDestroy {
 
       this.refreshFilter();
       this.selectedCompany = clientsCompany.find(item => item.id === company_id);
-      this.apiPasswordManagerService.getCompanyRecords(company_id);
+      this.passwordManagerService.getCompanyRecords(company_id);
     }
     /* this.companiesService.filteredCompanyUpdate.subscribe((company) => {
        this.refreshFilter();
@@ -203,7 +201,7 @@ export class CompanyPasswordManagerComponent implements OnInit, OnDestroy {
    */
   ngOnDestroy() {
 
-    this.apiPasswordManagerService.deleteSubscription();
+
     this.sub.unsubscribe();
 
   }

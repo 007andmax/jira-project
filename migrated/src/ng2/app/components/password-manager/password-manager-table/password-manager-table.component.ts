@@ -3,16 +3,15 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from "rxjs";
 import { ISubscription } from "rxjs/Subscription";
 import { REMOVE_RECORD } from 'src/ng2/app/const/confirm';
-import { PASSWORD_RECORD_TYPES } from 'src/ng2/app/const/password-record-types';
 import { PasswordManagerStateService } from 'src/ng2/app/states/password-manager/password-manager-state.service';
 
-import { ApiPasswordManagerService } from "../../../services/password-manager/api-password-manager.service";
 import { PasswordManagerService } from "../../../services/password-manager/password-manager.service";
 import { PermissionsService } from "../../../services/permissions/permissions.service";
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { FilterPasswordManager } from '../class/filter-password-manager';
 import { PasswordRecord } from '../class/password-record';
+import { PasswordRecordCategories } from '../class/password-record-categories';
 import { PasswordManagerListService } from '../services/password-manager-list.service';
 
 /**
@@ -28,9 +27,8 @@ export class PasswordManagerTableComponent implements OnInit {
   @Input() item: PasswordRecord;
   @Output() onSelectRecord = new EventEmitter<any>();
   togglePassword: boolean = false;
-  PASSWORD_RECORD_TYPES = PASSWORD_RECORD_TYPES;
-  constructor(private apiPasswordManagerService: ApiPasswordManagerService,
-    private permissionsService: PermissionsService,
+  categories: Array<PasswordRecordCategories> = [];
+  constructor(private permissionsService: PermissionsService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     private passwordManagerStateService: PasswordManagerStateService,
@@ -38,6 +36,10 @@ export class PasswordManagerTableComponent implements OnInit {
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
+    this.categories = this.passwordManagerStateService.getCategories();
+    this.passwordManagerStateService.onGetCategories.subscribe((data: Array<PasswordRecordCategories>) => {
+      this.categories = data;
+    })
   }
   selectRecord(event) {
     if (event.target.checked) {
@@ -51,13 +53,10 @@ export class PasswordManagerTableComponent implements OnInit {
     this.cd.detectChanges();
   }
   showPassword() {
-    this.apiPasswordManagerService.setOpenRecord(this.item.id).subscribe((data: any) => {
+    this.passwordManagerService.setOpenRecord(this.item.id).subscribe((data: any) => {
       this.item.setPassword(data.password);
       this.togglePassword = true;
     })
-  }
-  getAccountType(type) {
-    return this.PASSWORD_RECORD_TYPES.find(item => item.UPPERCASE === type).TITLE;
   }
   copyPassword() {
     let textArea: any = document.createElement("textarea");
@@ -89,11 +88,11 @@ export class PasswordManagerTableComponent implements OnInit {
   deleteRecord() {
     this.confirmStateService.setConfirmAction(REMOVE_RECORD);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
-    modalRef.componentInstance.message = `Are you sure you want to delete “${this.item.username}” account?`;
+    modalRef.componentInstance.message = `Are you sure you want to delete the password record?`;
     this.passwordManagerStateService.setRecordForRemove(this.item);
   }
   public editRecord() {
-    this.passwordManagerService.showEditFrom(this.item);
+    if (this.getPermissions('VIEW_PASSWORD')) this.passwordManagerService.showEditFrom(this.item);
   }
   parseExpiredDate() {
     let current = new Date().getTime();

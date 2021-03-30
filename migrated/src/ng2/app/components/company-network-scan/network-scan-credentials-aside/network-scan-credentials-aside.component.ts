@@ -2,9 +2,9 @@ import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, O
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { REMOVE_CREDENTIAL } from 'src/ng2/app/const/confirm';
-import { ApiPasswordManagerService } from 'src/ng2/app/services/password-manager/api-password-manager.service';
 import { PasswordManagerService } from 'src/ng2/app/services/password-manager/password-manager.service';
 import { NetworkScanStateService } from 'src/ng2/app/states/network-scan/network-scan-state.service';
+import { PasswordManagerStateService } from 'src/ng2/app/states/password-manager/password-manager-state.service';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { NetworkScanCredential } from '../class/network-scan-credential';
 
@@ -20,9 +20,9 @@ export class NetworkScanCredentialsAsideComponent implements OnInit, OnDestroy {
   @Output() onSelect = new EventEmitter<any>();
   sub: Subscription = new Subscription();
   constructor(private passwordManagerService: PasswordManagerService,
+    private passwordManagerStateService: PasswordManagerStateService,
     private confirmStateService: ConfirmStateService,
     public cd: ChangeDetectorRef,
-    private apiPasswordManagerService: ApiPasswordManagerService,
     private networkScanStateService: NetworkScanStateService) { }
 
   ngOnInit() {
@@ -35,13 +35,13 @@ export class NetworkScanCredentialsAsideComponent implements OnInit, OnDestroy {
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REMOVE_CREDENTIAL) {
-          this.apiPasswordManagerService.deleteRecord(this.networkScanStateService.getCredentialForRemove().id).subscribe(res => {
+          this.passwordManagerService.deleteRecord(this.networkScanStateService.getCredentialForRemove().id).subscribe(res => {
           })
         }
       }
     })
     this.sub.add(getConfirm);
-    let onChangeRealTime = this.passwordManagerService.onChangeRealTime.subscribe(newChange => {
+    let onChangeRealTime = this.passwordManagerStateService.onChangeRealTime.subscribe(newChange => {
       if (newChange.action === 'PASSWORD_RECORD_CREATED') this.list.push(new NetworkScanCredential(newChange.data.id, newChange.data.username));
       if (newChange.action === 'PASSWORD_RECORD_UPDATED') {
         let findIndex = this.list.findIndex(item => item.id === newChange.data.id);

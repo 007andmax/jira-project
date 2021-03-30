@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Subject } from "rxjs";
 
-import { ApiPasswordManagerService } from "../../services/password-manager/api-password-manager.service";
 import { CompaniesService } from "../../services/company/companies.service";
 import { PasswordManagerService } from "../../services/password-manager/password-manager.service";
 import { UsersService } from "../../services/users/users.service";
@@ -33,13 +32,7 @@ export class PasswordManagerComponent implements OnInit {
   public filter: FilterPasswordManager = new FilterPasswordManager();
   selectAll: boolean = false;
 
-
-  /**
-   * Creates an instance of the PasswordManagerComponent with the injected services
-   * @param {ApiPasswordManagerService} apiPasswordManagerService Service to work with api
-     */
   constructor(
-    private apiPasswordManagerService: ApiPasswordManagerService,
     private passwordManagerService: PasswordManagerService,
     private permissionsService: PermissionsService,
     private passwordManagerListService: PasswordManagerListService,
@@ -68,6 +61,26 @@ export class PasswordManagerComponent implements OnInit {
       this.setDefaultScoll();
       this.onScroll();
     })
+    this.passwordManagerStateService.onChangeRealTime.subscribe(newChange => {
+
+      if (newChange.action === 'PASSWORD_RECORD_CREATED') {
+        this.recordsData.push(newChange.data);
+      } else if (newChange.action === 'PASSWORD_RECORD_UPDATED') {
+        let index = this.recordsData.findIndex(item => item.id === newChange.data.id);
+        if (index > -1) this.recordsData[index] = newChange.data;
+
+      } else if (newChange.action === 'PASSWORD_RECORD_DELETED') {
+        let index = this.recordsData.findIndex(item => item.id === newChange.data.id);
+        let indexList = this.list_records.findIndex(item => item.id === newChange.data.id);
+
+        if (index > -1) this.recordsData.splice(index, 1);
+        if (indexList > -1) this.list_records.splice(indexList, 1);
+
+      }
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+      }
+    })
     if (this.passwordManagerStateService.getCategories().length === 0) this.passwordManagerStateService.onInit();
     //  this.userListService.addSubscription(geLefttFilter);
   }
@@ -84,7 +97,7 @@ export class PasswordManagerComponent implements OnInit {
     this.list_records = [];
   }
   onRemoveRecord(id) {
-    this.apiPasswordManagerService.deleteRecord(id).subscribe(data => {
+    this.passwordManagerService.deleteRecord(id).subscribe(data => {
 
     })
   }
@@ -112,28 +125,7 @@ export class PasswordManagerComponent implements OnInit {
     if ((this.page_number * 30) > listFilter.length) this.passwordManagerListService.setBlockList(true);
 
   }
-  private onChangeRealtTime() {
-    this.passwordManagerService.onChangeRealTime.subscribe(newChange => {
 
-      if (newChange.action === 'PASSWORD_RECORD_CREATED') {
-        this.recordsData.push(newChange.data);
-      } else if (newChange.action === 'PASSWORD_RECORD_UPDATED') {
-        let index = this.recordsData.findIndex(item => item.id === newChange.data.id);
-        if (index > -1) this.recordsData[index] = newChange.data;
-
-      } else if (newChange.action === 'PASSWORD_RECORD_DELETED') {
-        let index = this.recordsData.findIndex(item => item.id === newChange.data.id);
-        let indexList = this.list_records.findIndex(item => item.id === newChange.data.id);
-
-        if (index > -1) this.recordsData.splice(index, 1);
-        if (indexList > -1) this.list_records.splice(indexList, 1);
-
-      }
-      if (!this.cd['destroyed']) {
-        this.cd.detectChanges();
-      }
-    })
-  }
   onSelectRecord(record) {
     this.recordsData.find(item => item.id === record.id).selected = record.selected;
     this.selectAll = (this.filter.getFilterList(this.recordsData).find(item => !item.selected)) ? false : true;
@@ -177,13 +169,13 @@ export class PasswordManagerComponent implements OnInit {
    */
   public getRecords() {
     console.log("getRecords");
-    this.apiPasswordManagerService.getRecords().subscribe((res: any) => {
+    this.passwordManagerService.getRecords().subscribe((res: any) => {
       console.log("res", res);
       this.recordsData = res.map(item => new PasswordRecord(item));
       this.recordsData.sort((a, b) => (a.companyName.toLowerCase() > b.companyName.toLowerCase()) ?
         1 : ((b.companyName.toLowerCase() > a.companyName.toLowerCase()) ? -1 : 0));
       this.showPreloader = false;
-      this.onChangeRealtTime();
+
       this.onScroll();
       this.cd.detectChanges();
     });
@@ -197,6 +189,6 @@ export class PasswordManagerComponent implements OnInit {
    * destroy password manager data table component
    */
   ngOnDestroy() {
-    this.apiPasswordManagerService.deleteSubscription();
+
   }
 }

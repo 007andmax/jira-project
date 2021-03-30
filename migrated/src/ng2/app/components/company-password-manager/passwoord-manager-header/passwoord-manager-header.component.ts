@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { PasswordManagerService } from "../../../services/password-manager/password-manager.service";
 import { PermissionsService } from "../../../services/permissions/permissions.service";
-import { ApiPasswordManagerService } from "../../../services/password-manager/api-password-manager.service";
 
 /**
  * Password manager header component
@@ -16,14 +15,13 @@ export class CompanyPasswoordManagerHeaderComponent implements OnInit {
 
   /**
    * Creates an instance of the PasswordManagerComponent with the injected services
-   * @param {ApiPasswordManagerService} apiPasswordManagerService Service to work with api
-   * @param {PasswordManagerService} passwordManagerService Service to work with filters
+    * @param {PasswordManagerService} passwordManagerService Service to work with filters
    * @param {permissionsService} permissionsService to work with permissions service
    */
   constructor(
     private passwordManagerService: PasswordManagerService,
     private permissionsService: PermissionsService,
-    private apiPasswordManagerService: ApiPasswordManagerService
+
   ) { }
 
   /**
@@ -49,7 +47,7 @@ export class CompanyPasswoordManagerHeaderComponent implements OnInit {
    * destroy password manager header component
    */
   ngOnDestroy() {
-    this.apiPasswordManagerService.deleteSubscription();
+
   }
 
 }

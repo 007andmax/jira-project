@@ -1,8 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { CategoryProduct } from 'src/ng2/app/interfaces/product/category-product';
-import { ApiPasswordManagerService } from 'src/ng2/app/services/password-manager/api-password-manager.service';
-import { ProductService } from 'src/ng2/app/services/product/product.service';
+import { PasswordManagerService } from 'src/ng2/app/services/password-manager/password-manager.service';
 import { InventoryStateService } from 'src/ng2/app/states/inventory/inventory-state.service';
 import { PasswordManagerStateService } from 'src/ng2/app/states/password-manager/password-manager-state.service';
 import { PasswordRecordCategories } from '../class/password-record-categories';
@@ -18,7 +16,8 @@ export class PasswordManagerAddCategoryComponent implements OnInit {
   categories: Array<PasswordRecordCategories> = [];
   disableCreateCategory: boolean = false;
   sub: Subscription = new Subscription();
-  constructor(private apiPasswordManagerService: ApiPasswordManagerService,
+  constructor(
+    private passwordManagerService: PasswordManagerService,
     private passwordManagerStateService: PasswordManagerStateService,
     private inventoryStateService: InventoryStateService,) { }
 
@@ -42,7 +41,7 @@ export class PasswordManagerAddCategoryComponent implements OnInit {
       this.disableCreateCategory = true;
       return;
     };
-    this.apiPasswordManagerService.addCategories(this.name).subscribe(data => {
+    this.passwordManagerService.addCategories(this.name).subscribe(data => {
       this.close();
     })
 

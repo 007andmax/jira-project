@@ -2,7 +2,6 @@ import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { Subject } from "rxjs";
 import { ISubscription } from "rxjs/Subscription";
 
-import { ApiPasswordManagerService } from "../../../services/password-manager/api-password-manager.service";
 import { PasswordManagerService } from "../../../services/password-manager/password-manager.service";
 import { PermissionsService } from "../../../services/permissions/permissions.service";
 
@@ -30,12 +29,10 @@ export class CompanyPasswordManagerTableComponent implements OnInit {
 
   /**
    * Creates an instance of the PasswordManagerTableComponent with the injected services
-   * @param {ApiPasswordManagerService} apiPasswordManagerService Service to work with api
-   * @param {PasswordManagerService} passwordManagerService Service to work with filters
+    * @param {PasswordManagerService} passwordManagerService Service to work with filters
    * @param {permissionsService} permissionsService to work with permissions service
    */
   constructor(
-    private apiPasswordManagerService: ApiPasswordManagerService,
     private passwordManagerService: PasswordManagerService,
     private permissionsService: PermissionsService,
     public cd: ChangeDetectorRef,
@@ -47,11 +44,11 @@ export class CompanyPasswordManagerTableComponent implements OnInit {
   ngOnInit() {
     this.getRecords();
     this.getSelectedCategory();
-    this.subAddNewRecords = this.addNewRecords.subscribe(v => {
+    /*this.subAddNewRecords = this.addNewRecords.subscribe(v => {
 
       this.apiPasswordManagerService.getCompanyRecords(this.selectedCompany.id);
 
-    });
+    });*/
     this.watchDeleteRecord();
     this.onSort();
   }
@@ -79,10 +76,10 @@ export class CompanyPasswordManagerTableComponent implements OnInit {
    * Get records list
    */
   public getRecords() {
-    this.subGetRecords = this.apiPasswordManagerService.companyRecords.subscribe((res) => {
+    /*this.subGetRecords = this.apiPasswordManagerService.companyRecords.subscribe((res) => {
       this.recordsData = res;
       //  this.recordsData = res.filter(item => item.companyId === this.selectedCompany.id);
-    });
+    });*/
   }
 
   /**
@@ -90,11 +87,11 @@ export class CompanyPasswordManagerTableComponent implements OnInit {
    */
   public deleteRecord(recordId) {
     if (this.permissionsService.isAllowed('DELETE_PASSWORD')) {
-      this.apiPasswordManagerService.deleteRecord(recordId).subscribe((res) => {
-        //   this.passwordManagerService.deleteRecord(recordId);
-        this.recordsData = this.recordsData.filter((item) => item.id !== recordId);
-        this.cd.detectChanges();
-      });
+      /* this.apiPasswordManagerService.deleteRecord(recordId).subscribe((res) => {
+         //   this.passwordManagerService.deleteRecord(recordId);
+         this.recordsData = this.recordsData.filter((item) => item.id !== recordId);
+         this.cd.detectChanges();
+       });*/
     }
   }
 
@@ -139,7 +136,7 @@ export class CompanyPasswordManagerTableComponent implements OnInit {
   ngOnDestroy() {
     //   this.subGetRecords.unsubscribe();
     this.subAddNewRecords.unsubscribe();
-    this.apiPasswordManagerService.deleteSubscription();
+
   }
 
 

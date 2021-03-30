@@ -31,10 +31,8 @@ import { PasswordManagerComponent } from './components/password-manager/password
 import { LeftPanelComponent } from './components/left-panel/left-panel.component';
 import { LeftPanelPasswordManagerComponent } from './components/left-panel/left-panel-password-manager/left-panel-password-manager.component';
 import { MainComponent } from './components/main/main.component';
-import { PasswordRecordsTypesComponent } from './components/left-panel/left-panel-password-manager/password-records-types/password-records-types.component';
 import { PasswordManagerTableComponent } from './components/password-manager/password-manager-table/password-manager-table.component';
 import { PasswoordManagerHeaderComponent } from './components/password-manager/passwoord-manager-header/passwoord-manager-header.component';
-import { ApiPasswordManagerService } from './services/password-manager/api-password-manager.service';
 import { QuotesComponent } from './components/billing/quotes/quotes.component';
 import { UserPipe } from './pipe/user.pipe';
 import { DateFormatPipe } from './pipe/date-format.pipe';
@@ -615,7 +613,6 @@ angular.module('quicktech')
     LeftPanelPasswordManagerComponent,
     MainComponent,
     CompanyPipe,
-    PasswordRecordsTypesComponent,
     PasswordManagerTableComponent,
     PasswoordManagerHeaderComponent,
     UserPipe,
@@ -1088,7 +1085,7 @@ angular.module('quicktech')
       deps: ['$injector']
     },
     { provide: UrlHandlingStrategy, useClass: CustomHandlingStrategy },
-    ApiPasswordManagerService,
+
     PermissionDasnboardBillingService
   ],
   // bootstrap: [AppComponent]

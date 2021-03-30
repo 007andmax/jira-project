@@ -21,6 +21,7 @@ import { DefaultServicesRealTimeService } from '../../states/default-services/de
 import { ContractsRealTimeService } from '../../states/contracts/contracts-real-time.service';
 
 import { ShellRealTimeService } from '../../states/shell/shell-real-time.service';
+import { PasswordManagerStateService } from '../../states/password-manager/password-manager-state.service';
 
 /**
  * Websocket service to work with api
@@ -49,7 +50,7 @@ export class WebsocketService {
     private usersState: UsersStateService,
     private companiesRealTimeService: CompaniesRealTimeService,
     private usersRealTimeService: UsersRealTimeService,
-    private passwordManagerService: PasswordManagerService,
+    private passwordManagerStateService: PasswordManagerStateService,
     private taxesRealTimeService: TaxesRealTimeService,
     private glNumberRealTimeService: GlNumberRealTimeService,
     private inventoryRealTimeService: InventoryRealTimeService,
@@ -188,7 +189,7 @@ export class WebsocketService {
 
       this.stompClient.subscribe(`/user/watch/passwordRecords`, (message) => {
         var newChange = JSON.parse(message.body);
-        this.passwordManagerService.handleRealTimeChanges(newChange);
+        this.passwordManagerStateService.handleRealTimeChanges(newChange);
 
       });
 
