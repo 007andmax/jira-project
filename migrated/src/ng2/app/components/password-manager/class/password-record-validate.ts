@@ -46,10 +46,10 @@ export class PasswordRecordValidate {
     public isValidate(record: PasswordRecordAdd, selectedUserAndDevices) {
         if (!record.client) this.company = false;
         if (!record.password || record.password === "") this.password = false;
-        if (record.type !== "WIFI_NETWORK" && (!record.userName || record.userName === "")) this.userName = false;
-        if (record.type === "WIFI_NETWORK" && (!record.ssid || record.ssid === "")) this.ssid = false;
+        if (record.template.name !== "WIFI_NETWORK" && (!record.userName || record.userName === "")) this.userName = false;
+        if (record.template.name === "WIFI_NETWORK" && (!record.ssid || record.ssid === "")) this.ssid = false;
 
-        if ((record.type === "DEVICE" || record.type === "LOCAL_USER_ACCOUNT") && selectedUserAndDevices.length === 0) this.linkTo = false;
+        if ((record.template.name === "DEVICE" || record.template.name === "LOCAL_USER_ACCOUNT") && selectedUserAndDevices.length === 0) this.linkTo = false;
 
 
         return this.company && this.password && this.userName && this.ssid && this.linkTo;
