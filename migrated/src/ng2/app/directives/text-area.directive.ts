@@ -9,6 +9,7 @@ export class TextAreaDirective implements OnInit {
   lines: number = 1;
   height: number = 0;
   @Input() limit;
+  @Input() default;
   @Input() minHeight;
   @Input() maxLines = 5;
   @Output() onPast = new EventEmitter<any>();
@@ -28,11 +29,11 @@ export class TextAreaDirective implements OnInit {
   ngDoCheck() {
 
     if (this.element.nativeElement.value === "") {
-      this.element.nativeElement.setAttribute("rows", 1);
+      this.element.nativeElement.setAttribute("rows", (this.default) ? this.default : 1);
     } else {
       this.lines = this.getNumberOfLines(this.element.nativeElement.value);
       if (this.lines <= this.maxLines) {
-        this.element.nativeElement.setAttribute("rows", this.lines);
+        this.element.nativeElement.setAttribute("rows", (this.default && this.default > this.lines) ? this.default : this.lines);
       } else {
         this.element.nativeElement.setAttribute("rows", this.maxLines);
       }

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Company } from 'src/ng2/app/interfaces/quote/company';
 import { GadgetsService } from 'src/ng2/app/services/gadgets/gadgets.service';
 import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.service';
@@ -18,7 +18,7 @@ export class PasswordManagerEditLinkedComponent implements OnInit {
   @Input() title: string;
   @Input() placeholder: string;
   list: Array<PasswordDeviceUser> = [];
-
+  @Output() onChange = new EventEmitter<any>();
 
   constructor(private usersStateService: UsersStateService,
     public cd: ChangeDetectorRef,
@@ -26,7 +26,6 @@ export class PasswordManagerEditLinkedComponent implements OnInit {
     private devicesStateService: DevicesStateService) { }
 
   ngOnInit() {
-
     if (this.type === 'USERS') {
       let users = this.usersStateService.getAllUsers().filter(item => item.company.id === this.selectedClient.id);
       users.forEach(item => {
@@ -52,7 +51,6 @@ export class PasswordManagerEditLinkedComponent implements OnInit {
     return this.selectedUserAndDevices.find(element => element.id === item.id);
   }
   public showSelectWrapper($event) {
-
     this.showSelect = !this.showSelect;
     this.stopEvent($event);
     this.cd.detectChanges();
@@ -67,7 +65,6 @@ export class PasswordManagerEditLinkedComponent implements OnInit {
   }
   public hideSelectWrapper() {
     this.showSelect = false;
-
   }
   removeItem(index) {
     this.selectedUserAndDevices.splice(index, 1);
@@ -82,6 +79,7 @@ export class PasswordManagerEditLinkedComponent implements OnInit {
     } else {
       this.selectedUserAndDevices.push(newItem);
     }
+    this.onChange.emit(this.selectedUserAndDevices);
   }
 
 }

@@ -36,9 +36,9 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   validate: PasswordRecordValidate = new PasswordRecordValidate();
   selectedUserAndDevices: Array<PasswordDeviceUser> = [];
   @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
-  public devicesList = [];
-  public usersList = [];
-  public gadgetsList = [];
+  public devicesList: Array<PasswordDeviceUser> = [];
+  public usersList: Array<PasswordDeviceUser> = [];
+  public gadgetsList: Array<PasswordDeviceUser> = [];
   /**
    * Creates an instance of the PasswordManagerEditAsideComponent with the injected services
      * @param {FormBuilder} fb Service to work with form
@@ -160,6 +160,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     document.body.removeChild(textArea);
   }
   public save() {
+    this.selectedUserAndDevices = [...this.usersList, ...this.devicesList, ...this.gadgetsList];
     if (!this.validate.isValidateEdit(this.editItem, this.selectedUserAndDevices)) {
       console.log("this.validate", this.validate);
       return;
@@ -172,6 +173,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   close() {
     this.opened = false;
     this.tab = 'PASSWORD_DETAIL';
+    this.validate = new PasswordRecordValidate();
     this.showPassword = false;
     this.selectedUserAndDevices = [];
     this.devicesList = [];

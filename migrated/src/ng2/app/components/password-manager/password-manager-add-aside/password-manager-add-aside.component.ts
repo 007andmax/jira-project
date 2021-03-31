@@ -190,6 +190,7 @@ export class PasswordManagerAddAsideComponent implements OnInit {
   close() {
     this.opened = false;
     this.passwordRecordAdd = new PasswordRecordAdd();
+    this.validate = new PasswordRecordValidate();
     this.selectedUserAndDevices = [];
     this.devicesList = [];
     this.usersList = [];
