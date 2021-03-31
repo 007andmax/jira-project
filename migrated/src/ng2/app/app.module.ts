@@ -79,8 +79,6 @@ import { DraftEmailRecipientsComponent } from './components/shared/draft-email/d
 import { LeftPanelTagsComponent } from './components/left-panel/left-panel-companies/left-panel-tags-companies/left-panel-tags-companies.component';
 import { SelectSearchComponent } from './components/shared/select-search/select-search.component';
 import { CompanyPasswordManagerComponent } from './components/company-password-manager/company-password-manager.component';
-import { CompanyPasswoordManagerHeaderComponent } from './components/company-password-manager/passwoord-manager-header/passwoord-manager-header.component';
-import { CompanyPasswordManagerTableComponent } from './components/company-password-manager/password-manager-table/password-manager-table.component';
 import { FilterPipe } from './pipe/filter.pipe';
 import { ClickOtsideDirective } from './directives/click-otside.directive';
 import { SortByPipe } from './pipe/sort-by.pipe';
@@ -668,8 +666,6 @@ angular.module('quicktech')
     LeftPanelTagsComponent,
     SelectSearchComponent,
     CompanyPasswordManagerComponent,
-    CompanyPasswoordManagerHeaderComponent,
-    CompanyPasswordManagerTableComponent,
     FilterPipe,
     ClickOtsideDirective,
     SortByPipe,

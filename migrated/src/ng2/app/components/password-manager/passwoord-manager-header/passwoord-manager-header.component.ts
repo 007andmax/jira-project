@@ -22,6 +22,7 @@ export class PasswoordManagerHeaderComponent implements OnInit, OnDestroy {
   @Output() onSearch = new EventEmitter<any>();
   @Input() selectAll: boolean = false;
   @Input() recordsData: Array<PasswordRecord> = [];
+  @Input() disabledCompany: boolean = false;
   sub: Subscription = new Subscription();
   searchText: string = "";
   /**
