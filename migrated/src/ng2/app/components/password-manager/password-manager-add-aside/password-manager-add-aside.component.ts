@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import * as moment from 'moment';
 import { PasswordManagerService } from "../../../services/password-manager/password-manager.service";
 import { GadgetsService } from "../../../services/gadgets/gadgets.service";
@@ -13,6 +13,7 @@ import { PasswordRecordValidate } from '../class/password-record-validate';
 import { FORMAT_DATE_2 } from 'src/ng2/app/const/date-picker';
 import { PasswordRecordCategories } from '../class/password-record-categories';
 import { PasswordManagerStateService } from 'src/ng2/app/states/password-manager/password-manager-state.service';
+import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 
 
 @Component({
@@ -38,6 +39,7 @@ export class PasswordManagerAddAsideComponent implements OnInit {
   formatDate: string = FORMAT_DATE_2;
   public showGadgetsForm: any;
   public newGadgets: any;
+  @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
   /**
    * Creates an instance of the PasswordManagerEditAsideComponent with the injected services
     * @param {FormBuilder} fb Service to work with form
@@ -78,6 +80,7 @@ export class PasswordManagerAddAsideComponent implements OnInit {
     this.categories = this.passwordManagerStateService.getCategories();
     this.passwordManagerStateService.onGetCategories.subscribe((data: Array<PasswordRecordCategories>) => {
       this.categories = data;
+      this.categoriesSelect.reset(this.categories);
     })
   }
   public onChangeDescription(event) {

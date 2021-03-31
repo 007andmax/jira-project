@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ElementRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { PasswordManagerService } from "../../../services/password-manager/password-manager.service";
@@ -14,6 +14,7 @@ import { PasswordManagerStateService } from 'src/ng2/app/states/password-manager
 import { REMOVE_RECORD } from 'src/ng2/app/const/confirm';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { PasswordRecordCategories } from '../class/password-record-categories';
+import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 
 /**
  * Password manager edit aside component
@@ -34,6 +35,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   showPassword: boolean = false;
   validate: PasswordRecordValidate = new PasswordRecordValidate();
   selectedUserAndDevices: Array<PasswordDeviceUser> = [];
+  @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
   public devicesList = [];
   public usersList = [];
   public gadgetsList = [];
@@ -98,6 +100,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.categories = this.passwordManagerStateService.getCategories();
     this.passwordManagerStateService.onGetCategories.subscribe((data: Array<PasswordRecordCategories>) => {
       this.categories = data;
+      this.categoriesSelect.reset(this.categories);
     })
 
   }

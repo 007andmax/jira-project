@@ -1,8 +1,9 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.service';
 import { PasswordManagerStateService } from 'src/ng2/app/states/password-manager/password-manager-state.service';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
+import { DropDownComponent } from '../../../shared/drop-down/drop-down.component';
 import { TitleListType } from '../../../tickets/tickets/tickets-header/class/title-list-type';
 import { FilterPasswordManager } from '../../class/filter-password-manager';
 import { PasswordDeviceUser } from '../../class/password-device-user';
@@ -22,6 +23,7 @@ export class PasswoordManagerFiltersComponent implements OnInit {
   devicesUsers: Array<PasswordDeviceUser> = [];
   listDates: Array<TitleListType> = [new TitleListType('5 days', '5_DAYS'), new TitleListType('15 days', '15_DAYS'), new TitleListType('30 days', '30_DAYS')];
   @Output() onChangeCountFilter = new EventEmitter<any>();
+  @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
   public filter: FilterPasswordManager = new FilterPasswordManager();
   constructor(
     private companiesState: CompaniesStateService,
@@ -37,6 +39,7 @@ export class PasswoordManagerFiltersComponent implements OnInit {
     this.categories = this.passwordManagerStateService.getCategories();
     this.passwordManagerStateService.onGetCategories.subscribe((data: Array<PasswordRecordCategories>) => {
       this.categories = data;
+      this.categoriesSelect.reset(this.categories);
     })
   }
   getClientsList(data) {
