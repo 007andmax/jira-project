@@ -9,6 +9,7 @@
         [search]="true"
         [change]="true"
         (onSelectedItem)="onSelectCategory($event)"
+        heightInput="36px"
     ></app-drop-down>
     <div class="password-add-category qt-pos-rel">
         <button
@@ -31,6 +32,7 @@
         [search]="true"
         [change]="true"
         (onSelectedItem)="selectCompany($event)"
+        heightInput="36px"
     ></app-drop-down>
     <app-passwoord-manager-devices-users
         class="filter-device qt-mr-8"
@@ -43,6 +45,7 @@
         [sort]="true"
         (onSelectedItem)="selectDeviceUser($event)"
         [class]="['dropdown dropdown-devices-users']"
+        heightInput="36px"
     ></app-passwoord-manager-devices-users>
     <app-drop-down
         class="filter-data-picker"
@@ -52,5 +55,6 @@
         [field]="'title'"
         [class]="['dropdown']"
         (onSelectedItem)="selectDate($event)"
+        heightInput="36px"
     ></app-drop-down>
 </div>
