@@ -23,6 +23,7 @@ export class PasswoordManagerHeaderComponent implements OnInit, OnDestroy {
   @Input() selectAll: boolean = false;
   @Input() recordsData: Array<PasswordRecord> = [];
   sub: Subscription = new Subscription();
+  searchText: string = "";
   /**
    * Creates an instance of the PasswordManagerComponent with the injected services
     * @param {PasswordManagerService} passwordManagerService Service to work with filters
@@ -39,7 +40,10 @@ export class PasswoordManagerHeaderComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
   }
-
+  clearSearch() {
+    this.searchText = "";
+    this.onSearch.emit("");
+  }
   toggleAll(data) {
     this.selectAll = true;
     this.onSelectAll.emit(data);

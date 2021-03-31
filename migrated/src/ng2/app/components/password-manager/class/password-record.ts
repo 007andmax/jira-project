@@ -77,7 +77,7 @@ export class PasswordRecord {
                 if (item.type === "GADGET") return { gadgetId: item.id }
             }),
 
-            password: this.password,
+            password: (this.password && this.password.length > 0) ? this.password : undefined,
             template: this.template
         };
         if (this.template.name === "OFFICE_365_ACCOUNT") {

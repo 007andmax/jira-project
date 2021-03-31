@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ElementRef } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { PasswordManagerService } from "../../../services/password-manager/password-manager.service";
@@ -56,6 +56,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     private passwordManagerStateService: PasswordManagerStateService,
     private companiesState: CompaniesStateService,
     private usersStateService: UsersStateService,
+    private elRef: ElementRef,
   ) { }
 
   /**
@@ -100,7 +101,17 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     })
 
   }
-
+  onInitDescription() {
+    this.elRef.nativeElement.querySelector('#record-description').value = this.editItem.description;
+    this.cd.detectChanges();
+    console.log("onInitDescription");
+  }
+  public onChangeDescription(event) {
+    this.editItem.description = event.target.value;
+  }
+  public onPastDescription(value) {
+    this.editItem.description = value;
+  }
   private getClientsList(data) {
     this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
@@ -157,6 +168,12 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
   close() {
     this.opened = false;
+    this.tab = 'PASSWORD_DETAIL';
+    this.showPassword = false;
+    this.selectedUserAndDevices = [];
+    this.devicesList = [];
+    this.usersList = [];
+    this.gadgetsList = [];
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)

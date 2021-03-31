@@ -406,6 +406,7 @@ import { PasswordManagerAddAsideComponent } from './components/password-manager/
 import { PasswoordManagerDevicesUsersComponent } from './components/password-manager/passwoord-manager-devices-users/passwoord-manager-devices-users.component';
 import { PasswoordManagerFiltersComponent } from './components/password-manager/passwoord-manager-header/passwoord-manager-filters/passwoord-manager-filters.component';
 import { PasswordManagerEditLinkedComponent } from './components/password-manager/password-manager-edit-aside/password-manager-edit-linked/password-manager-edit-linked.component';
+import { AfterViewInitDirective } from './directives/after-view-init.directive';
 
 /**
  * declare angular
@@ -974,7 +975,8 @@ angular.module('quicktech')
     PasswordManagerAddAsideComponent,
     PasswoordManagerDevicesUsersComponent,
     PasswoordManagerFiltersComponent,
-    PasswordManagerEditLinkedComponent
+    PasswordManagerEditLinkedComponent,
+    AfterViewInitDirective
   ],
   imports: [
     BrowserModule,

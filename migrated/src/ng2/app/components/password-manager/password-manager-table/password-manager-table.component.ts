@@ -58,10 +58,10 @@ export class PasswordManagerTableComponent implements OnInit {
       this.togglePassword = true;
     })
   }
-  copyPassword() {
+  copy(value) {
     let textArea: any = document.createElement("textarea");
     textArea.style.opacity = 0;
-    textArea.value = this.item.password;
+    textArea.value = value
     document.body.appendChild(textArea);
     textArea.select();
     try {

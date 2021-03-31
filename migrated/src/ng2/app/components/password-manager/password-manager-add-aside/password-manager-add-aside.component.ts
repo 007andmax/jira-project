@@ -80,6 +80,12 @@ export class PasswordManagerAddAsideComponent implements OnInit {
       this.categories = data;
     })
   }
+  public onChangeDescription(event) {
+    this.passwordRecordAdd.description = event.target.value;
+  }
+  public onPastDescription(value) {
+    this.passwordRecordAdd.description = value;
+  }
   private getClientsList(data) {
     this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
@@ -181,6 +187,13 @@ export class PasswordManagerAddAsideComponent implements OnInit {
   close() {
     this.opened = false;
     this.passwordRecordAdd = new PasswordRecordAdd();
+    this.selectedUserAndDevices = [];
+    this.devicesList = [];
+    this.usersList = [];
+    this.gadgets = [];
+    this.currentTab = this.tabs[0];
+    this.showSelect = false;
+    this.showAddCategory = false;
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)

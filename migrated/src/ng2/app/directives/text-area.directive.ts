@@ -37,6 +37,7 @@ export class TextAreaDirective implements OnInit {
         this.element.nativeElement.setAttribute("rows", this.maxLines);
       }
     }
+
   }
 
   private getNumberOfLines(str) {
