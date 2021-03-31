@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Company } from 'src/ng2/app/interfaces/quote/company';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { DevicesStateService } from 'src/ng2/app/states/devices/devices-state.service';
 import { PasswordManagerStateService } from 'src/ng2/app/states/password-manager/password-manager-state.service';
@@ -23,7 +24,9 @@ export class PasswoordManagerFiltersComponent implements OnInit {
   devicesUsers: Array<PasswordDeviceUser> = [];
   listDates: Array<TitleListType> = [new TitleListType('5 days', '5_DAYS'), new TitleListType('15 days', '15_DAYS'), new TitleListType('30 days', '30_DAYS')];
   @Output() onChangeCountFilter = new EventEmitter<any>();
+  selectedCompany: Company;
   @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
+  @Input() disabledCompany: boolean = false;
   public filter: FilterPasswordManager = new FilterPasswordManager();
   constructor(
     private companiesState: CompaniesStateService,
@@ -45,6 +48,22 @@ export class PasswoordManagerFiltersComponent implements OnInit {
   getClientsList(data) {
     this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+    if (this.disabledCompany) {
+      this.selectedCompany = this.companies.find(item => item.id === localStorage.getItem('company_id'));
+      this.filter.setCompany(this.selectedCompany);
+      this.onChangeCounterFilter();
+
+      let users = this.usersStateService.getAllUsers().filter(item => item.company.id === this.selectedCompany.id);
+      let devices = (this.devicesStateService.getAllDevices()[this.selectedCompany.id]) ? this.devicesStateService.getAllDevices()[this.selectedCompany.id] : [];
+      users.forEach(item => {
+        this.devicesUsers.push(new PasswordDeviceUser(item.id, `${item.firstName} ${item.lastName}`, 'USER'));
+      })
+      devices.forEach(item => {
+        this.devicesUsers.push(new PasswordDeviceUser(item.id, this.getLabelDevice(item), 'DEVICE'));
+      })
+      this.disabledDevicesUsers = false;
+
+    }
   }
   selectDate(data) {
     this.filter.setDate(data);
@@ -62,6 +81,7 @@ export class PasswoordManagerFiltersComponent implements OnInit {
     this.onChangeCounterFilter();
   }
   selectCompany(data) {
+    this.selectedCompany = data;
     this.filter.setCompany(data);
     this.passwordManagerStateService.onInitFilter(this.filter);
     this.onChangeCounterFilter();

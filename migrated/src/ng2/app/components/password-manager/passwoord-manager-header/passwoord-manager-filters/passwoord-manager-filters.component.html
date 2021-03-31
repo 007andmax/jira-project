@@ -27,6 +27,8 @@
         class="filter-company qt-w100 qt-mr-8"
         [placeholder]="'Select Company'"
         [class]="['dropdown']"
+        [isDisabled]="disabledCompany"
+        [editItem]="selectedCompany"
         [list]="companies"
         [field]="'name'"
         [search]="true"

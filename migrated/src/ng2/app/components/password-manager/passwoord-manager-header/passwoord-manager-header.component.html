@@ -1,26 +1,3 @@
-<!-- <div class="password-content__header"> -->
-<!-- <h3>Password Manager</h3> -->
-<!-- <div class="password-content__header&#45;&#45;search"> -->
-<!-- &lt;!&ndash;add class "show" to <div class="password-selected">&ndash;&gt; -->
-<!-- <div class="password-selected"> -->
-<!-- <div class="password-selected-qty new-link"> -->
-<!-- <span>2</span> Selected -->
-<!-- </div> -->
-<!-- <div class="password-selected-actions"> -->
-<!-- <i class="icn-16 edit-new"></i> -->
-<!-- <i class="icn-16 print-new"></i> -->
-<!-- <i class="icn-16 export-new"></i> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- <button -->
-<!-- *ngIf="getPermissions('CREATE_PASSWORD')" -->
-<!-- (click)="addRecord()" -->
-<!-- style="font-size: 13px;" class="new-link desktop-hidden">Create Password</button> -->
-<!-- <button -->
-<!-- *ngIf="getPermissions('CREATE_PASSWORD')" -->
-<!-- (click)="addRecord()" class="plus-btn mob-hidden">+</button> -->
-<!-- </div> -->
-<!-- </div> -->
 <div class="qt-page-list__header --sticky">
     <div class="qt-page-list__header-title-line">
         <div class="qt-page-list__header-title-line--left">
@@ -89,6 +66,7 @@
     </div>
     <app-passwoord-manager-filters
         [hidden]="toggleFilter"
+        [disabledCompany]="disabledCompany"
         (onChangeCountFilter)="onChangeCountFilter($event)"
     ></app-passwoord-manager-filters>
     <div class="qt-page-list__header-thead-container">

@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Subject } from "rxjs";
+import { Subject, Subscription } from "rxjs";
 
 import { CompaniesService } from "../../services/company/companies.service";
 import { PasswordManagerService } from "../../services/password-manager/password-manager.service";
@@ -12,6 +12,7 @@ import { FilterPasswordManager } from './class/filter-password-manager';
 import { ConfirmStateService } from '../shared/confirm/services/confirm-state.service';
 import { REMOVE_RECORD } from '../../const/confirm';
 import { PasswordManagerStateService } from '../../states/password-manager/password-manager-state.service';
+import { CompaniesStateService } from '../../states/company/companies-state.service';
 
 /**
  * Password manager component
@@ -31,13 +32,14 @@ export class PasswordManagerComponent implements OnInit {
   public page_number: number = 0;
   public filter: FilterPasswordManager = new FilterPasswordManager();
   selectAll: boolean = false;
-
+  sub: Subscription = new Subscription();
   constructor(
-    private passwordManagerService: PasswordManagerService,
+    public passwordManagerService: PasswordManagerService,
     private permissionsService: PermissionsService,
     private passwordManagerListService: PasswordManagerListService,
     private confirmStateService: ConfirmStateService,
     private passwordManagerStateService: PasswordManagerStateService,
+    public companiesStateService: CompaniesStateService,
     public cd: ChangeDetectorRef,
   ) { }
 
@@ -49,43 +51,35 @@ export class PasswordManagerComponent implements OnInit {
     this.getRecords();
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
-        if (this.confirmStateService.getConfirmAction() === REMOVE_RECORD) {
-          this.onRemoveRecord(this.passwordManagerStateService.getRecordForRemove().id);
-        }
-
+        if (this.confirmStateService.getConfirmAction() === REMOVE_RECORD) this.onRemoveRecord(this.passwordManagerStateService.getRecordForRemove().id);
       }
     })
+    this.sub.add(getConfirm);
     let geLefttFilter = this.passwordManagerStateService.getOnFilter().subscribe((data) => {
       window.scrollTo(0, 0);
       this.filter.setFilter(data);
       this.setDefaultScoll();
       this.onScroll();
     })
-    this.passwordManagerStateService.onChangeRealTime.subscribe(newChange => {
-
+    this.sub.add(geLefttFilter);
+    let onChangeRealTime = this.passwordManagerStateService.onChangeRealTime.subscribe(newChange => {
       if (newChange.action === 'PASSWORD_RECORD_CREATED') {
         this.recordsData.push(new PasswordRecord(newChange.data));
       } else if (newChange.action === 'PASSWORD_RECORD_UPDATED') {
         let index = this.recordsData.findIndex(item => item.id === newChange.data.id);
         if (index > -1) this.recordsData[index] = new PasswordRecord(newChange.data);
-
         let indexList = this.list_records.findIndex(item => item.id === newChange.data.id);
         if (indexList > -1) this.list_records[indexList] = new PasswordRecord(newChange.data);
-
       } else if (newChange.action === 'PASSWORD_RECORD_DELETED') {
         let index = this.recordsData.findIndex(item => item.id === newChange.data.id);
         let indexList = this.list_records.findIndex(item => item.id === newChange.data.id);
-
         if (index > -1) this.recordsData.splice(index, 1);
         if (indexList > -1) this.list_records.splice(indexList, 1);
-
       }
-      if (!this.cd['destroyed']) {
-        this.cd.detectChanges();
-      }
+      if (!this.cd['destroyed']) this.cd.detectChanges();
     })
+    this.sub.add(onChangeRealTime);
     if (this.passwordManagerStateService.getCategories().length === 0) this.passwordManagerStateService.onInit();
-    //  this.userListService.addSubscription(geLefttFilter);
   }
   onSearch(value) {
     console.log("value", value);
@@ -192,6 +186,6 @@ export class PasswordManagerComponent implements OnInit {
    * destroy password manager data table component
    */
   ngOnDestroy() {
-
+    this.sub.unsubscribe();
   }
 }
