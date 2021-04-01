@@ -28,7 +28,7 @@ export class PasswordManagerComponent implements OnInit {
   public recordsData: Array<PasswordRecord> = [];
   public list_records: Array<PasswordRecord> = [];
   showPreloader: boolean = true;
-  public infiniteScrollDisabled = false;
+  public infiniteScrollDisabled = true;
   public page_number: number = 0;
   public filter: FilterPasswordManager = new FilterPasswordManager();
   selectAll: boolean = false;
@@ -37,8 +37,8 @@ export class PasswordManagerComponent implements OnInit {
     public passwordManagerService: PasswordManagerService,
     private permissionsService: PermissionsService,
     private passwordManagerListService: PasswordManagerListService,
-    private confirmStateService: ConfirmStateService,
-    private passwordManagerStateService: PasswordManagerStateService,
+    public confirmStateService: ConfirmStateService,
+    public passwordManagerStateService: PasswordManagerStateService,
     public companiesStateService: CompaniesStateService,
     public cd: ChangeDetectorRef,
   ) { }
@@ -104,10 +104,12 @@ export class PasswordManagerComponent implements OnInit {
   }
 
   private filterList() {
+    console.log("filterList 1");
     if (this.passwordManagerListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;
     }
+    console.log("filterList 2");
     this.page_number += 1;
     let listFilter = this.filter.getFilterList(this.recordsData);
     let start = (this.page_number - 1) * 30;
@@ -172,7 +174,7 @@ export class PasswordManagerComponent implements OnInit {
       this.recordsData.sort((a, b) => (a.companyName.toLowerCase() > b.companyName.toLowerCase()) ?
         1 : ((b.companyName.toLowerCase() > a.companyName.toLowerCase()) ? -1 : 0));
       this.showPreloader = false;
-
+      console.log("this.recordsData", this.recordsData);
       this.onScroll();
       this.cd.detectChanges();
     });
