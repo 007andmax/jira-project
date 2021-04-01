@@ -15,6 +15,7 @@ import { PasswordRecordCategories } from '../class/password-record-categories';
 import { PasswordManagerStateService } from 'src/ng2/app/states/password-manager/password-manager-state.service';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 import { Subscription } from 'rxjs';
+import { DisabledBtnDirective } from 'src/ng2/app/directives/disabled-btn.directive';
 
 
 @Component({
@@ -42,6 +43,7 @@ export class PasswordManagerAddAsideComponent implements OnInit {
   public newGadgets: any;
   sub: Subscription = new Subscription();
   @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
+  @ViewChild('addRecord') addRecord: DisabledBtnDirective;
   /**
    * Creates an instance of the PasswordManagerEditAsideComponent with the injected services
     * @param {FormBuilder} fb Service to work with form
@@ -83,7 +85,7 @@ export class PasswordManagerAddAsideComponent implements OnInit {
     this.categories = this.passwordManagerStateService.getCategories();
     let onGetCategories = this.passwordManagerStateService.onGetCategories.subscribe((data: Array<PasswordRecordCategories>) => {
       this.categories = data;
-      this.categoriesSelect.reset(this.categories);
+      if (this.categoriesSelect) this.categoriesSelect.reset(this.categories);
     })
     this.sub.add(onGetCategories);
   }
@@ -194,9 +196,13 @@ export class PasswordManagerAddAsideComponent implements OnInit {
   }
   public save() {
     if (!this.validate.isValidate(this.passwordRecordAdd, this.selectedUserAndDevices)) return;
+    this.addRecord.setDisabled(true);
     this.passwordManagerService.saveRecord(this.passwordRecordAdd.getDataForAdd(this.selectedUserAndDevices))
       .subscribe((res) => {
+        this.addRecord.setDisabled(false);
         this.close();
+      }, err => {
+        this.addRecord.setDisabled(false);
       });
   }
   close() {

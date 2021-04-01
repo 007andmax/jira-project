@@ -53,7 +53,7 @@ export class PasswordRecordAdd {
             password: this.password,
             template: this.template
         };
-        if (this.template.name === "OFFICE_365_ACCOUNT") {
+        if (this.template.name === "OFFICE_365_ACCOUNT" || !this.isDefaultType()) {
             data.key = this.key;
             data.url = this.url;
             data.ssid = this.ssid;

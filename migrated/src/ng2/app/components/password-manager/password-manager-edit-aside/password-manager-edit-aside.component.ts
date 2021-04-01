@@ -16,6 +16,7 @@ import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { PasswordRecordCategories } from '../class/password-record-categories';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 import { Subscription } from 'rxjs';
+import { DisabledBtnDirective } from 'src/ng2/app/directives/disabled-btn.directive';
 
 /**
  * Password manager edit aside component
@@ -41,6 +42,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public usersList: Array<PasswordDeviceUser> = [];
   public gadgetsList: Array<PasswordDeviceUser> = [];
   sub: Subscription = new Subscription();
+  @ViewChild('saveRecord') saveRecord: DisabledBtnDirective;
   /**
    * Creates an instance of the PasswordManagerEditAsideComponent with the injected services
      * @param {FormBuilder} fb Service to work with form
@@ -105,7 +107,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.categories = this.passwordManagerStateService.getCategories();
     let onGetCategories = this.passwordManagerStateService.onGetCategories.subscribe((data: Array<PasswordRecordCategories>) => {
       this.categories = data;
-      this.categoriesSelect.reset(this.categories);
+      if (this.categoriesSelect) this.categoriesSelect.reset(this.categories);
     })
     this.sub.add(onGetCategories);
   }
@@ -166,13 +168,14 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
   public save() {
     this.selectedUserAndDevices = [...this.usersList, ...this.devicesList, ...this.gadgetsList];
-    if (!this.validate.isValidateEdit(this.editItem, this.selectedUserAndDevices)) {
-      console.log("this.validate", this.validate);
-      return;
-    }
+    if (!this.validate.isValidateEdit(this.editItem, this.selectedUserAndDevices)) return;
+    this.saveRecord.setDisabled(true);
     this.passwordManagerService.editRecord(this.editItem.getDataForEdit(this.selectedUserAndDevices))
       .subscribe((res) => {
+        this.saveRecord.setDisabled(false);
         this.close();
+      }, err => {
+        this.saveRecord.setDisabled(false);
       });
   }
   close() {

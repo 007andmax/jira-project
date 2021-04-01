@@ -158,7 +158,7 @@ export class FilterPasswordManager {
             1 : ((b.description ? b.description : '').toLowerCase() > (a.description ? a.description : '').toLowerCase() ? -1 : 0));
     }
     private onAccountType(reqList) {
-        reqList.sort((a, b) => (a.template > b.template) ?
-            1 : ((b.template > a.template) ? -1 : 0));
+        reqList.sort((a, b) => (a.template.title > b.template.title) ?
+            1 : ((b.template.title > a.template.title) ? -1 : 0));
     }
 }
