@@ -178,6 +178,18 @@ export class PasswordManagerEditAsideComponent implements OnInit {
         this.saveRecord.setDisabled(false);
       });
   }
+  onChangeUsersList(data) {
+    this.usersList = data;
+    this.validate.resetLinkTo();
+  }
+  onChangeDevicesList(data) {
+    this.devicesList = data;
+    this.validate.resetLinkTo();
+  }
+  onChangeGadgetsList(data) {
+    this.gadgetsList = data;
+    this.validate.resetLinkTo();
+  }
   close() {
     this.opened = false;
     this.tab = 'PASSWORD_DETAIL';
