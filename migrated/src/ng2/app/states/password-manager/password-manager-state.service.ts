@@ -1,6 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { PasswordRecord } from '../../components/password-manager/class/password-record';
 import { PasswordRecordCategories } from '../../components/password-manager/class/password-record-categories';
+import { PASSWORD_RECORD_TYPES } from '../../const/password-record-types';
 import { PasswordManagerService } from '../../services/password-manager/password-manager.service';
 
 @Injectable({
@@ -12,6 +13,7 @@ export class PasswordManagerStateService {
   onGetCategories: EventEmitter<any> = new EventEmitter();
   categories: Array<PasswordRecordCategories> = [];
   public onChangeRealTime: EventEmitter<any> = new EventEmitter();
+
   constructor(private passwordManagerService: PasswordManagerService) { }
 
   public onInit() {

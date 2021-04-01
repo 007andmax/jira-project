@@ -14,6 +14,7 @@ import { FORMAT_DATE_2 } from 'src/ng2/app/const/date-picker';
 import { PasswordRecordCategories } from '../class/password-record-categories';
 import { PasswordManagerStateService } from 'src/ng2/app/states/password-manager/password-manager-state.service';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -39,6 +40,7 @@ export class PasswordManagerAddAsideComponent implements OnInit {
   formatDate: string = FORMAT_DATE_2;
   public showGadgetsForm: any;
   public newGadgets: any;
+  sub: Subscription = new Subscription();
   @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
   /**
    * Creates an instance of the PasswordManagerEditAsideComponent with the injected services
@@ -69,19 +71,21 @@ export class PasswordManagerAddAsideComponent implements OnInit {
     let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
       this.getClientsList(data);
     })
-    this.passwordManagerService.onAddForm.subscribe((res) => {
-
+    this.sub.add(getOnCompanies);
+    let onAddForm = this.passwordManagerService.onAddForm.subscribe((res) => {
       this.passwordRecordAdd = new PasswordRecordAdd();
       this.passwordRecordAdd.setType(this.categories.find(item => item.name === "OFFICE_365_ACCOUNT"));
       this.passwordRecordAdd.setExpiryDate(moment(new Date()).format('YYYY/MM/DD'));
       console.log("this.passwordRecordAdd", this.passwordRecordAdd);
       this.opened = true;
     });
+    this.sub.add(onAddForm);
     this.categories = this.passwordManagerStateService.getCategories();
-    this.passwordManagerStateService.onGetCategories.subscribe((data: Array<PasswordRecordCategories>) => {
+    let onGetCategories = this.passwordManagerStateService.onGetCategories.subscribe((data: Array<PasswordRecordCategories>) => {
       this.categories = data;
       this.categoriesSelect.reset(this.categories);
     })
+    this.sub.add(onGetCategories);
   }
   public onChangeDescription(event) {
     this.passwordRecordAdd.description = event.target.value;
@@ -99,14 +103,22 @@ export class PasswordManagerAddAsideComponent implements OnInit {
     this.devicesList = [];
     this.gadgets = [];
     if (data) {
-      let users = this.usersStateService.getAllUsers().filter(item => item.company.id === data.id);
+      let users = this.usersStateService.getAllUsers().filter(item => {
+        let company = this.companies.find(itemCompany => itemCompany.id === item.company.id);
+        let isArchived = item.deletedAt || !company;
+        return !isArchived && item.company.id === data.id
+      });
       users.forEach(item => {
         this.usersList.push(new PasswordDeviceUser(item.id, `${item.firstName} ${item.lastName}`, 'USER'));
       })
+      this.usersList.sort((a, b) => (`${a.name}`.toLowerCase() > `${b.name}`.toLowerCase()) ?
+        1 : ((`${b.name}`.toLowerCase() > `${a.name}`.toLowerCase()) ? -1 : 0));
       let devices = (this.devicesStateService.getAllDevices()[data.id]) ? this.devicesStateService.getAllDevices()[data.id] : [];
       devices.forEach(item => {
         this.devicesList.push(new PasswordDeviceUser(item.id, this.getLabelDevice(item), 'DEVICE'));
       })
+      this.devicesList.sort((a, b) => (`${a.name}`.toLowerCase() > `${b.name}`.toLowerCase()) ?
+        1 : ((`${b.name}`.toLowerCase() > `${a.name}`.toLowerCase()) ? -1 : 0));
       this.getGadgets();
     }
     this.validate.resetCompany();
@@ -203,7 +215,7 @@ export class PasswordManagerAddAsideComponent implements OnInit {
     return this.permissionsService.isAllowed(action)
   }
   ngOnDestroy() {
-
+    this.sub.unsubscribe();
   }
   public trackByIndex(index, item) {
     return index;

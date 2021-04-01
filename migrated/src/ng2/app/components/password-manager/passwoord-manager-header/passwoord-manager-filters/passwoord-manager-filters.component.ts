@@ -53,7 +53,11 @@ export class PasswoordManagerFiltersComponent implements OnInit {
       this.filter.setCompany(this.selectedCompany);
       this.onChangeCounterFilter();
 
-      let users = this.usersStateService.getAllUsers().filter(item => item.company.id === this.selectedCompany.id);
+      let users = this.usersStateService.getAllUsers().filter(item => {
+        let company = this.companies.find(itemCompany => itemCompany.id === item.company.id);
+        let isArchived = item.deletedAt || !company;
+        return !isArchived && item.company.id === this.selectedCompany.id
+      });
       let devices = (this.devicesStateService.getAllDevices()[this.selectedCompany.id]) ? this.devicesStateService.getAllDevices()[this.selectedCompany.id] : [];
       users.forEach(item => {
         this.devicesUsers.push(new PasswordDeviceUser(item.id, `${item.firstName} ${item.lastName}`, 'USER'));
@@ -61,6 +65,7 @@ export class PasswoordManagerFiltersComponent implements OnInit {
       devices.forEach(item => {
         this.devicesUsers.push(new PasswordDeviceUser(item.id, this.getLabelDevice(item), 'DEVICE'));
       })
+
       this.disabledDevicesUsers = false;
 
     }
@@ -86,7 +91,11 @@ export class PasswoordManagerFiltersComponent implements OnInit {
     this.passwordManagerStateService.onInitFilter(this.filter);
     this.onChangeCounterFilter();
     if (data) {
-      let users = this.usersStateService.getAllUsers().filter(item => item.company.id === data.id);
+      let users = this.usersStateService.getAllUsers().filter(item => {
+        let company = this.companies.find(itemCompany => itemCompany.id === item.company.id);
+        let isArchived = item.deletedAt || !company;
+        return !isArchived && item.company.id === data.id
+      });
       let devices = (this.devicesStateService.getAllDevices()[data.id]) ? this.devicesStateService.getAllDevices()[data.id] : [];
       users.forEach(item => {
         this.devicesUsers.push(new PasswordDeviceUser(item.id, `${item.firstName} ${item.lastName}`, 'USER'));

@@ -3,6 +3,7 @@ import { Company } from "src/ng2/app/interfaces/quote/company";
 import { FilterListTop } from "src/ng2/class/list/filter-list-top";
 import { TitleListType } from "../../tickets/tickets/tickets-header/class/title-list-type";
 import { PasswordRecord } from "./password-record";
+import { PasswordRecordCategories } from "./password-record-categories";
 
 export class FilterPasswordManager {
     filterTop: Array<FilterListTop> = [new FilterListTop('company', 'ASC'),
@@ -14,7 +15,7 @@ export class FilterPasswordManager {
     selectedCompany: Company;
     selectedDate: TitleListType;
     selectedUserOrDevice: any;
-    selectedCategory: any;
+    selectedCategory: PasswordRecordCategories;
     constructor() {
 
     }
@@ -66,7 +67,7 @@ export class FilterPasswordManager {
                 });
                 if (!find) return false;
             }
-            if (this.selectedCategory && item.template !== this.selectedCategory.UPPERCASE) return false;
+            if (this.selectedCategory && item.template.name !== this.selectedCategory.name) return false;
             if (this.search) {
                 let find = false;
                 item.links.forEach(link => {

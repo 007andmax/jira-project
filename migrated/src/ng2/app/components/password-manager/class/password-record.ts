@@ -32,7 +32,7 @@ export class PasswordRecord {
         this.histories = data.histories;
         this.id = data.id;
         this.links = data.links;
-        this.template = data.template;
+        this.template = new PasswordRecordCategories(data.template);
         this.username = data.username;
         this.description = data.description;
 

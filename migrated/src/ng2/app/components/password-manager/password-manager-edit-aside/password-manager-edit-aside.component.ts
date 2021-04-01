@@ -15,6 +15,7 @@ import { REMOVE_RECORD } from 'src/ng2/app/const/confirm';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { PasswordRecordCategories } from '../class/password-record-categories';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
+import { Subscription } from 'rxjs';
 
 /**
  * Password manager edit aside component
@@ -39,6 +40,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public devicesList: Array<PasswordDeviceUser> = [];
   public usersList: Array<PasswordDeviceUser> = [];
   public gadgetsList: Array<PasswordDeviceUser> = [];
+  sub: Subscription = new Subscription();
   /**
    * Creates an instance of the PasswordManagerEditAsideComponent with the injected services
      * @param {FormBuilder} fb Service to work with form
@@ -69,7 +71,8 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
       this.getClientsList(data);
     })
-    this.passwordManagerService.onEditForm.subscribe((res) => {
+    this.sub.add(getOnCompanies);
+    let onEditForm = this.passwordManagerService.onEditForm.subscribe((res) => {
       this.editItem = new PasswordRecord(JSON.parse(JSON.stringify(res)));
       console.log("this.editItem", this.editItem);
       this.editItem.links.forEach(item => {
@@ -90,6 +93,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       this.selectedClient = this.companiesState.getCompanies().find(item => item.id === this.editItem.companyId);
       this.opened = true;
     });
+    this.sub.add(onEditForm);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REMOVE_RECORD) {
@@ -97,12 +101,13 @@ export class PasswordManagerEditAsideComponent implements OnInit {
         }
       }
     })
+    this.sub.add(getConfirm);
     this.categories = this.passwordManagerStateService.getCategories();
-    this.passwordManagerStateService.onGetCategories.subscribe((data: Array<PasswordRecordCategories>) => {
+    let onGetCategories = this.passwordManagerStateService.onGetCategories.subscribe((data: Array<PasswordRecordCategories>) => {
       this.categories = data;
       this.categoriesSelect.reset(this.categories);
     })
-
+    this.sub.add(onGetCategories);
   }
   onInitDescription() {
     this.elRef.nativeElement.querySelector('#record-description').value = this.editItem.description;
@@ -191,8 +196,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   ngOnDestroy() {
-
-
+    this.sub.unsubscribe();
   }
   public trackByIndex(index, item) {
     return index;
