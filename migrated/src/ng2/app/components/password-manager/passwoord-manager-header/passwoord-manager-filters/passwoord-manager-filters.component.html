@@ -1,15 +1,15 @@
 <div class="qt-page-list__header-filters">
     <app-drop-down
         #categoriesSelect
-        class="filter-category qt-mr-8"
+        class="filter-category qt-mr-8 dropdown"
         [placeholder]="'Select by Category'"
         [list]="categories"
         [field]="'title'"
-        [class]="['dropdown']"
         [search]="true"
         [change]="true"
         (onSelectedItem)="onSelectCategory($event)"
         heightInput="36px"
+        widthInput="20%"
     ></app-drop-down>
     <div class="password-add-category qt-pos-rel">
         <button
@@ -24,9 +24,8 @@
         ></app-password-manager-add-category>
     </div>
     <app-drop-down
-        class="filter-company qt-w100 qt-mr-8"
+        class="filter-company qt-w100 qt-mr-8 dropdown"
         [placeholder]="'Select Company'"
-        [class]="['dropdown']"
         [isDisabled]="disabledCompany"
         [editItem]="selectedCompany"
         [list]="companies"
@@ -35,9 +34,10 @@
         [change]="true"
         (onSelectedItem)="selectCompany($event)"
         heightInput="36px"
+        widthInput="30%"
     ></app-drop-down>
     <app-passwoord-manager-devices-users
-        class="filter-device qt-mr-8"
+        class="filter-device qt-mr-8 dropdown dropdown-devices-users"
         [placeholder]="'Select Device or User'"
         [isDisabled]="disabledDevicesUsers"
         [list]="devicesUsers"
@@ -46,17 +46,17 @@
         [change]="true"
         [sort]="true"
         (onSelectedItem)="selectDeviceUser($event)"
-        [class]="['dropdown dropdown-devices-users']"
         heightInput="36px"
+        widthInput="25%"
     ></app-passwoord-manager-devices-users>
     <app-drop-down
-        class="filter-data-picker"
+        class="filter-data-picker dropdown"
         [placeholder]="'Search by Expire Date'"
         [list]="listDates"
         [sort]="false"
         [field]="'title'"
-        [class]="['dropdown']"
         (onSelectedItem)="selectDate($event)"
         heightInput="36px"
+        widthInput="20%"
     ></app-drop-down>
 </div>
