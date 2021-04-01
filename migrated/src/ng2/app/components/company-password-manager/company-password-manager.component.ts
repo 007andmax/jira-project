@@ -40,6 +40,7 @@ export class CompanyPasswordManagerComponent extends PasswordManagerComponent {
     let onChangeRealTime = this.passwordManagerStateService.onChangeRealTime.subscribe(newChange => {
       if (newChange.action === 'PASSWORD_RECORD_CREATED' && newChange.data.companyId === localStorage.getItem('company_id')) {
         this.recordsData.push(new PasswordRecord(newChange.data));
+        if (this.passwordManagerListService.getBlockList()) this.list_records.push(new PasswordRecord(newChange.data));
       } else if (newChange.action === 'PASSWORD_RECORD_UPDATED') {
         let index = this.recordsData.findIndex(item => item.id === newChange.data.id);
         if (index > -1) this.recordsData[index] = new PasswordRecord(newChange.data);

@@ -36,7 +36,7 @@ export class PasswordManagerComponent implements OnInit {
   constructor(
     public passwordManagerService: PasswordManagerService,
     private permissionsService: PermissionsService,
-    private passwordManagerListService: PasswordManagerListService,
+    public passwordManagerListService: PasswordManagerListService,
     public confirmStateService: ConfirmStateService,
     public passwordManagerStateService: PasswordManagerStateService,
     public companiesStateService: CompaniesStateService,
