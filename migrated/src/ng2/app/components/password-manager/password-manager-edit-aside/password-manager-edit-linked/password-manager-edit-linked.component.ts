@@ -48,7 +48,6 @@ export class PasswordManagerEditLinkedComponent implements OnInit {
     this.list.sort((a, b) => (`${a.name}`.toLowerCase() > `${b.name}`.toLowerCase()) ?
       1 : ((`${b.name}`.toLowerCase() > `${a.name}`.toLowerCase()) ? -1 : 0));
     if (this.type === 'GADGETS') this.getGadgets();
-    console.log("this.list", this.list);
   }
   private getClientsList(data) {
     this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
@@ -57,7 +56,6 @@ export class PasswordManagerEditLinkedComponent implements OnInit {
   public getGadgets() {
     this.gadgetsService.getCompanyDevices().subscribe((res: any) => {
       this.list = res.map(item => new PasswordDeviceUser(item.id, item.name, 'GADGET'));
-      console.log("this.list", this.list);
     });
   }
   isSeleted(item) {
@@ -94,5 +92,7 @@ export class PasswordManagerEditLinkedComponent implements OnInit {
     }
     this.onChange.emit(this.selectedUserAndDevices);
   }
-
+  public trackByIndex(index, item) {
+    return index;
+  }
 }

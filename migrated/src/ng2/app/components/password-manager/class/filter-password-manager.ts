@@ -1,4 +1,3 @@
-import { CategoryProduct } from "src/ng2/app/interfaces/product/category-product";
 import { Company } from "src/ng2/app/interfaces/quote/company";
 import { FilterListTop } from "src/ng2/class/list/filter-list-top";
 import { TitleListType } from "../../tickets/tickets/tickets-header/class/title-list-type";
@@ -10,7 +9,6 @@ export class FilterPasswordManager {
     new FilterListTop('account_type', ''),
     new FilterListTop('description', ''),
     new FilterListTop('user_password', '')];
-
     search: string;
     selectedCompany: Company;
     selectedDate: TitleListType;
@@ -42,9 +40,7 @@ export class FilterPasswordManager {
         this.selectedCategory = data.selectedCategory;
     }
     public getFilterList(reqList: Array<PasswordRecord>) {
-
         let list = reqList.filter((item) => {
-
             if (this.selectedCompany && item.companyId !== this.selectedCompany.id) return false;
             if (this.selectedDate) {
                 if (!item.expiredDate) return false;
@@ -84,7 +80,6 @@ export class FilterPasswordManager {
         this.filterTop.forEach(item => item.filter = '');
     }
     public onFilter(field, reqList) {
-
         let index = this.filterTop.findIndex(item => item.field === field);
         if (index > -1) {
             let sort = this.filterTop[index].filter;
@@ -97,35 +92,26 @@ export class FilterPasswordManager {
                     this.filterTop[index].filter = 'DESC';
                     reqList.reverse();
                 }
-
             }
             if (field === 'company') {
                 this.clearFilter();
                 if (sort === '' || sort === 'DESC') {
                     this.filterTop[index].filter = 'ASC';
                     this.onFilterCompany(reqList);
-
                 } else {
-
                     this.filterTop[index].filter = 'DESC';
                     reqList.reverse();
                 }
-
-
             }
             if (field === 'description') {
                 this.clearFilter();
                 if (sort === '' || sort === 'DESC') {
                     this.filterTop[index].filter = 'ASC';
                     this.onFilterDescription(reqList);
-
                 } else {
-
                     this.filterTop[index].filter = 'DESC';
                     reqList.reverse();
                 }
-
-
             }
             if (field === 'user_password') {
                 this.clearFilter();
@@ -136,13 +122,7 @@ export class FilterPasswordManager {
                     this.filterTop[index].filter = 'DESC';
                     reqList.reverse();
                 }
-
-
             }
-
-
-
-
         }
     }
     private onFilterUserName(reqList) {

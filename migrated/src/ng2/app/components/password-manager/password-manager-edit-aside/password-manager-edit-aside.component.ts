@@ -76,7 +76,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.sub.add(getOnCompanies);
     let onEditForm = this.passwordManagerService.onEditForm.subscribe((res) => {
       this.editItem = new PasswordRecord(JSON.parse(JSON.stringify(res)));
-      console.log("this.editItem", this.editItem);
       this.editItem.links.forEach(item => {
         if (item.userId) {
           this.selectedUserAndDevices.push(new PasswordDeviceUser(item.userId, `${item.userName}`, 'USER'));
@@ -91,7 +90,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
           this.gadgetsList.push(new PasswordDeviceUser(item.gadgetId, `${item.gadgetName}`, 'GADGET'));
         }
       })
-
       this.selectedClient = this.companiesState.getCompanies().find(item => item.id === this.editItem.companyId);
       this.opened = true;
     });
@@ -114,7 +112,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   onInitDescription() {
     this.elRef.nativeElement.querySelector('#record-description').value = this.editItem.description;
     this.cd.detectChanges();
-    console.log("onInitDescription");
   }
   public onChangeDescription(event) {
     this.editItem.description = event.target.value;
@@ -126,14 +123,12 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
-
   selectCompany(data) {
     this.selectedClient = data;
     this.editItem.setCompanyId(data.id);
     this.validate.resetCompany();
   }
   selectType(data) {
-
     this.editItem.setType(data);
     if (data.name !== 'DEVICE' && data.name !== 'LOCAL_USER_ACCOUNT') this.validate.resetLinkTo();
   }
@@ -209,14 +204,12 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     modalRef.componentInstance.message = `Are you sure you want to delete the password record?`;
     this.passwordManagerStateService.setRecordForRemove(this.editItem);
   }
-
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
   public trackByIndex(index, item) {
     return index;
   }
-
   getUserAvatarUrl(user) {
     if (!(user && user.avatar)) return '';
 

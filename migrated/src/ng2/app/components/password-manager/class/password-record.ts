@@ -35,7 +35,6 @@ export class PasswordRecord {
         this.template = new PasswordRecordCategories(data.template);
         this.username = data.username;
         this.description = data.description;
-
         this.ssid = data.ssid;
         this.key = data.key;
         this.url = data.url;
@@ -76,7 +75,6 @@ export class PasswordRecord {
                 if (item.type === "USER") return { userId: item.id }
                 if (item.type === "GADGET") return { gadgetId: item.id }
             }),
-
             password: (this.password && this.password.length > 0) ? this.password : undefined,
             template: this.template
         };

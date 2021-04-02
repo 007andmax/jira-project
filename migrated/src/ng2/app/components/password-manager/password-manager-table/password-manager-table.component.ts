@@ -1,18 +1,13 @@
 import { Component, Input, OnInit, ChangeDetectorRef, OnChanges, Output, EventEmitter } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Subject } from "rxjs";
-import { ISubscription } from "rxjs/Subscription";
 import { REMOVE_RECORD } from 'src/ng2/app/const/confirm';
 import { PasswordManagerStateService } from 'src/ng2/app/states/password-manager/password-manager-state.service';
-
 import { PasswordManagerService } from "../../../services/password-manager/password-manager.service";
 import { PermissionsService } from "../../../services/permissions/permissions.service";
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
-import { FilterPasswordManager } from '../class/filter-password-manager';
 import { PasswordRecord } from '../class/password-record';
 import { PasswordRecordCategories } from '../class/password-record-categories';
-import { PasswordManagerListService } from '../services/password-manager-list.service';
 
 /**
  * Password manager data table component
@@ -42,13 +37,6 @@ export class PasswordManagerTableComponent implements OnInit {
     })
   }
   selectRecord(event) {
-    if (event.target.checked) {
-      //  this.draftEmailStateService.addSelectedUser(this.item);
-    } else {
-      /*   let list = this.draftEmailStateService.getSelectedUsers();
-         let index = list.findIndex(item => item.id === this.item.id);
-         if (index > -1) this.draftEmailStateService.removeSelectedUser(index);*/
-    }
     this.onSelectRecord.emit(this.item);
     this.cd.detectChanges();
   }

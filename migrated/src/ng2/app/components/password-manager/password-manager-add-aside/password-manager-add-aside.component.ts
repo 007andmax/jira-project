@@ -78,7 +78,6 @@ export class PasswordManagerAddAsideComponent implements OnInit {
       this.passwordRecordAdd = new PasswordRecordAdd();
       this.passwordRecordAdd.setType(this.categories.find(item => item.name === "OFFICE_365_ACCOUNT"));
       this.passwordRecordAdd.setExpiryDate(moment(new Date()).format('YYYY/MM/DD'));
-      console.log("this.passwordRecordAdd", this.passwordRecordAdd);
       this.opened = true;
     });
     this.sub.add(onAddForm);
@@ -161,7 +160,6 @@ export class PasswordManagerAddAsideComponent implements OnInit {
   public getGadgets() {
     this.gadgetsService.getCompanyDevices().subscribe((res: any) => {
       this.gadgets = res.map(item => new PasswordDeviceUser(item.id, item.name, 'GADGET'));
-      console.log("this.gadgets", this.gadgets);
     });
   }
   getLabelDevice(item) {
@@ -169,7 +167,6 @@ export class PasswordManagerAddAsideComponent implements OnInit {
     return item.hostName || item.ip;
   }
   selectType(data) {
-
     this.passwordRecordAdd.setType(data);
     if (data.UPPERCASE !== 'DEVICE' && data.UPPERCASE !== 'LOCAL_USER_ACCOUNT') this.validate.resetLinkTo();
   }

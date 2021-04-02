@@ -3,10 +3,8 @@ export class PasswordRecordLink {
     historyType: string;
     userId: string;
     userName: string;
-
     deviceId: string;
     deviceLabel: string;
-
     gadgetId: string;
     gadgetName: string;
     constructor(data) {

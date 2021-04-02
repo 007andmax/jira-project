@@ -1,10 +1,8 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-
 import { PasswordManagerService } from "../../../services/password-manager/password-manager.service";
 import { PermissionsService } from "../../../services/permissions/permissions.service";
 import { Subscription } from 'rxjs';
 import { PasswordRecord } from '../class/password-record';
-
 
 /**
  * Password manager header component
@@ -55,29 +53,18 @@ export class PasswoordManagerHeaderComponent implements OnInit, OnDestroy {
   search(event) {
     this.onSearch.emit(event.target.value);
   }
-
-  /**
-   * add new record event
-   */
   public addRecord() {
     this.passwordManagerService.showAddForm();
   }
   onChangeCountFilter(data) {
     this.countFilter = data;
   }
-  /**
-   * getPermission
-   */
   getSelectedCount() {
     return this.recordsData.filter(item => item.selected).length;
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
   }
-
-  /**
-   * destroy password manager header component
-   */
   ngOnDestroy() {
     this.sub.unsubscribe();
   }

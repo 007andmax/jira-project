@@ -44,7 +44,6 @@ export class PasswordManagerAddCategoryComponent implements OnInit {
     this.passwordManagerService.addCategories(this.name).subscribe(data => {
       this.close();
     })
-
   }
   public close() {
     this.onClose.emit(null);

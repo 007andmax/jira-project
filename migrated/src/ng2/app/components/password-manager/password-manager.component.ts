@@ -1,12 +1,8 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Subject, Subscription } from "rxjs";
-
-import { CompaniesService } from "../../services/company/companies.service";
+import { Subscription } from "rxjs";
 import { PasswordManagerService } from "../../services/password-manager/password-manager.service";
-import { UsersService } from "../../services/users/users.service";
 import { PermissionsService } from "../../services/permissions/permissions.service";
 import { PasswordManagerListService } from './services/password-manager-list.service';
-import { UsersStateService } from '../../states/users/users-state.service';
 import { PasswordRecord } from './class/password-record';
 import { FilterPasswordManager } from './class/filter-password-manager';
 import { ConfirmStateService } from '../shared/confirm/services/confirm-state.service';
@@ -82,7 +78,6 @@ export class PasswordManagerComponent implements OnInit {
     if (this.passwordManagerStateService.getCategories().length === 0) this.passwordManagerStateService.onInit();
   }
   onSearch(value) {
-    console.log("value", value);
     window.scrollTo(0, 0);
     this.filter.setSearch((value !== "") ? value : null);
     this.setDefaultScoll();
@@ -95,21 +90,17 @@ export class PasswordManagerComponent implements OnInit {
   }
   onRemoveRecord(id) {
     this.passwordManagerService.deleteRecord(id).subscribe(data => {
-
     })
   }
   public onScroll() {
     this.infiniteScrollDisabled = true;
     this.filterList();
   }
-
   private filterList() {
-    console.log("filterList 1");
     if (this.passwordManagerListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;
     }
-    console.log("filterList 2");
     this.page_number += 1;
     let listFilter = this.filter.getFilterList(this.recordsData);
     let start = (this.page_number - 1) * 30;
@@ -119,30 +110,21 @@ export class PasswordManagerComponent implements OnInit {
       list_records.push(listFilter[i]);
     }
     this.list_records = [...this.list_records, ...list_records.map(item => new PasswordRecord(JSON.parse(JSON.stringify(item))))];
-    console.log("this.list_records", this.list_records);
     this.infiniteScrollDisabled = false;
     if ((this.page_number * 30) > listFilter.length) this.passwordManagerListService.setBlockList(true);
-
   }
-
   onSelectRecord(record) {
     this.recordsData.find(item => item.id === record.id).selected = record.selected;
     this.selectAll = (this.filter.getFilterList(this.recordsData).find(item => !item.selected)) ? false : true;
-
   }
-
   onSelectAll(event) {
     if (event.target.checked) {
       this.selectAll = true;
       this.list_records.forEach(item => {
         item.selected = true;
       })
-      // this.draftEmailStateService.resetSelectedUsers();
       this.filter.getFilterList(this.recordsData).forEach(item => {
         this.recordsData.find(user => user.id === item.id).selected = true;
-      })
-      this.recordsData.forEach(user => {
-        //     if (user.selected) this.draftEmailStateService.addSelectedUser(user);
       })
     } else {
       this.selectAll = false;
@@ -152,7 +134,6 @@ export class PasswordManagerComponent implements OnInit {
       this.recordsData.forEach(item => {
         item.selected = false;
       })
-      //  this.draftEmailStateService.resetSelectedUsers();
     }
   }
   public onFilter(field) {
@@ -162,31 +143,19 @@ export class PasswordManagerComponent implements OnInit {
     this.list_records = [];
     this.onScroll();
   }
-
-  /**
-   * Get records list
-   */
   public getRecords() {
-    console.log("getRecords");
     this.passwordManagerService.getRecords().subscribe((res: any) => {
-      console.log("res", res);
       this.recordsData = res.map(item => new PasswordRecord(item));
       this.recordsData.sort((a, b) => (a.companyName.toLowerCase() > b.companyName.toLowerCase()) ?
         1 : ((b.companyName.toLowerCase() > a.companyName.toLowerCase()) ? -1 : 0));
       this.showPreloader = false;
-      console.log("this.recordsData", this.recordsData);
       this.onScroll();
       this.cd.detectChanges();
     });
   }
-
   public trackById(index, item) {
     return item.id;
   }
-
-  /**
-   * destroy password manager data table component
-   */
   ngOnDestroy() {
     this.sub.unsubscribe();
   }

@@ -65,9 +65,7 @@ export class PasswoordManagerFiltersComponent implements OnInit {
       devices.forEach(item => {
         this.devicesUsers.push(new PasswordDeviceUser(item.id, this.getLabelDevice(item), 'DEVICE'));
       })
-
       this.disabledDevicesUsers = false;
-
     }
   }
   selectDate(data) {
