@@ -7,9 +7,13 @@ export class PasswordRecordValidate {
     password: boolean = true;
     linkTo: boolean = true;
     ssid: boolean = true;
-
+    reIpAdress = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+    ipAdress: boolean = true;
     constructor() { }
 
+    public getIpAdress() {
+        return this.ipAdress;
+    }
     public getCompany() {
         return this.company;
     }
@@ -24,6 +28,9 @@ export class PasswordRecordValidate {
     }
     public getSsid() {
         return this.ssid;
+    }
+    public resetIpAdress() {
+        this.ipAdress = true;
     }
     public resetCompany() {
         this.company = true;
@@ -48,11 +55,11 @@ export class PasswordRecordValidate {
         if (!record.password || record.password === "") this.password = false;
         if (record.template.name !== "WIFI_NETWORK" && (!record.userName || record.userName === "")) this.userName = false;
         if (record.template.name === "WIFI_NETWORK" && (!record.ssid || record.ssid === "")) this.ssid = false;
-
+        if (record.template.name === "DEVICE" && record.ipAdres && record.ipAdres.length > 0 && !record.ipAdres.match(this.reIpAdress)) this.ipAdress = false;
         if ((record.template.name === "DEVICE" || record.template.name === "LOCAL_USER_ACCOUNT") && selectedUserAndDevices.length === 0) this.linkTo = false;
-
-
-        return this.company && this.password && this.userName && this.ssid && this.linkTo;
+        console.log("record", record);
+        console.log("record.ipAdres.match(this.reIpAdress)", record.ipAdres.match(this.reIpAdress));
+        return this.company && this.password && this.userName && this.ssid && this.linkTo && this.ipAdress;
 
     }
     public isValidateEdit(record: PasswordRecord, selectedUserAndDevices) {
@@ -61,8 +68,9 @@ export class PasswordRecordValidate {
         if (record.template.name !== "WIFI_NETWORK" && (!record.username || record.username === "")) this.userName = false;
         if (record.template.name === "WIFI_NETWORK" && (!record.ssid || record.ssid === "")) this.ssid = false;
         if ((record.template.name === "DEVICE" || record.template.name === "LOCAL_USER_ACCOUNT") && selectedUserAndDevices.length === 0) this.linkTo = false;
+        if (record.template.name === "DEVICE" && record.ipAdres && record.ipAdres.length > 0 && !record.ipAdres.match(this.reIpAdress)) this.ipAdress = false;
 
-        return this.company && this.userName && this.ssid && this.linkTo;
+        return this.company && this.userName && this.ssid && this.linkTo && this.ipAdress;
 
     }
 }
