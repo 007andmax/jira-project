@@ -66,8 +66,7 @@ export class AppComponent implements OnInit {
    * Initializes root. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
-    this.upgrade.bootstrap(document.body, ['quicktech']);
-    setUpLocationSync(this.upgrade);
+
     this.userService.getUser();
     this.devicesState.onInit();
     this.usersStateService.onInit();

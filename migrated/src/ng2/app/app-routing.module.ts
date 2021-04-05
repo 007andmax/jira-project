@@ -56,9 +56,10 @@ import { SupportComponent } from './components/support/support.component';
 const routes: Routes = [
   {
     path: '',
-    component: AppComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    redirectTo: '/ng2/tickets',
   },
+
   {
     path: 'ng2/password-manager',
     component: PasswordManagerComponent,

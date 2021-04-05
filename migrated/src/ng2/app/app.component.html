@@ -1,8 +1,3 @@
-<div
-    class="alert alert-yellow hide"
-    user-notification
-    style="z-index: 991;"
-></div>
 <app-header
     class="nav-header"
     [ngClass]="{'--full-width':toggleLeftPanel}"
@@ -19,7 +14,6 @@
         >
             <div class="content-wrapper">
                 <breadcrumbs></breadcrumbs>
-                <div ng-include="'/ng1/scripts/common/templates/index-page-body.tpl.html'"></div>
                 <div
                     class="loading"
                     style="display: none;"
@@ -40,6 +34,7 @@
                 <app-default-services-edit></app-default-services-edit>
                 <app-inventory-edit-aside></app-inventory-edit-aside>
                 <app-invoices-aside-preview></app-invoices-aside-preview>
+                <router-outlet></router-outlet>
             </div>
         </div>
     </div>
