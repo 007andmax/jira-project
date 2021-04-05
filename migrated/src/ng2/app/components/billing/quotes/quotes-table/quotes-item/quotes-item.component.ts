@@ -15,6 +15,7 @@ export class QuotesItemComponent implements OnInit {
   createdUser: User;
   @Input() quote: Quote;
   @Output() onResend = new EventEmitter<any>();
+  @Output() onConvertToBillable = new EventEmitter<any>();
   @Output() onConvertToInvoice = new EventEmitter<any>();
   @Output() onConvertToTicket = new EventEmitter<any>();
   @Output() onApproveQuote = new EventEmitter<any>();
@@ -68,6 +69,9 @@ export class QuotesItemComponent implements OnInit {
   }
   markAsRead() {
     this.onMarkAsRead.emit(this.quote);
+  }
+  convertToBillable() {
+    this.onConvertToBillable.emit(this.quote);
   }
   approveQuote() {
     this.onApproveQuote.emit(this.quote);

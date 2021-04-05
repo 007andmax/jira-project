@@ -154,6 +154,10 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
   goToQuoteEdit(quote) {
     this.quoteStateService.setEdit(quote);
   }
+  onConvertToBillable(quote) {
+    this.quoteServices.convertToBillable(quote.company, quote.id).subscribe((res) => {
+    });
+  }
   onArchiveQuote() {
     let quote = this.quoteStateService.getQuoteForArchive();
     this.quoteServices.archiveQuote(quote.company, quote.id).subscribe((res) => {

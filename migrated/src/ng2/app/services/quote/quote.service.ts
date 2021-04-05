@@ -6,7 +6,7 @@ import { throwError } from 'rxjs';
 import { NotificationStateService } from '../../components/shared/notification/services/notification-state.service';
 import { Quote } from '../../components/billing/quotes/class/quote';
 import { QuoteStateService } from '../../states/quote/quote-state.service';
- 
+
 
 /**
  * Quote service to work with api
@@ -26,8 +26,8 @@ export class QuoteService {
   constructor(
     private http: HttpClient,
     private quoteStateService: QuoteStateService,
-    private notificationStateService:NotificationStateService
-    
+    private notificationStateService: NotificationStateService
+
   ) { }
 
   /**
@@ -72,9 +72,9 @@ export class QuoteService {
       catchError(this.handleError));
   }
 
-    /**
-   * Get quote note
-   */
+  /**
+ * Get quote note
+ */
   public getQuote(id) {
     return this.http.get(this.apiUrl + `saleQuotes/${id}`).pipe(
       tap(data => data),
@@ -155,6 +155,14 @@ export class QuoteService {
       catchError(this.handleError));
   }
 
+  public convertToBillable(company, quote_id) {
+    return this.http.post(this.apiUrl +
+      `saleQuotes/convertToBillableItem?companyId=${company.id}`, [quote_id]
+    ).pipe(
+      tap(data => data),
+      catchError(this.handleError));
+  }
+
   /**
    * Archive quote
    * @param company - company info
@@ -201,9 +209,9 @@ export class QuoteService {
   * @param id - type of the document.
   */
   public downLoadFile(res: any, id, companyName, quoteNumber) {
-    
+
     var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
-    
+
     const data = window.URL.createObjectURL(res);
     var link = document.createElement('a');
     link.href = data;
@@ -217,7 +225,7 @@ export class QuoteService {
     var e = document.createEvent('MouseEvents');
     e.initEvent('click', true, true);
     link.dispatchEvent(e);
-    
+
   }
 
   /**
@@ -233,5 +241,5 @@ export class QuoteService {
     this.notificationStateService.oninitShowNotification(message);
     return data;
   }
- 
+
 }

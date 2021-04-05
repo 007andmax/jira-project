@@ -138,6 +138,15 @@
             <li
                 class="pointer"
                 ngbDropdownItem
+                (click)="convertToBillable()"
+                *ngIf="checkStatus(quote, [ 'APPROVED'])"
+            >
+                <i class="icn-16 edit-grey-ng2 qt-mr-8"></i>
+                Convert to billable item
+            </li>
+            <li
+                class="pointer"
+                ngbDropdownItem
                 (click)="goToQuoteEdit()"
                 *ngIf="checkStatus(quote, ['READ','UNREAD','SAVED', 'APPROVED', 'CANCELED', 'EXPIRED'])"
             >
