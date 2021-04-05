@@ -404,204 +404,8 @@ import { HttpInterceptorService } from './services/http/http-interceptor.service
 import { ModalSessionScreenComponent } from './services/modal/modal-session-screen/modal-session-screen.component';
 
 
-/**
- * declare angular
- */
-declare var angular: any;
+
 declare var $: any;
-export class CustomHandlingStrategy implements UrlHandlingStrategy {
-  constructor() { }
-  shouldProcessUrl(url) {
-    return url.toString().startsWith('/ng2') || url.toString() == '/';
-  }
-  extract(url) { return url }
-  merge(url, whole) { return url }
-}
-
-/**
- * Component downgrade
- */
-
-angular.module('quicktech')
-  .directive(
-    'passwordManager',
-    downgradeComponent({ component: PasswordManagerComponent }))
-  .directive(
-    'companyPasswordManager',
-    downgradeComponent({ component: CompanyPasswordManagerComponent }))
-  .directive(
-    'companyUser',
-    downgradeComponent({ component: CompanyUserComponent }))
-  .directive(
-    'companyTickets',
-    downgradeComponent({ component: CompanyTicketsComponent }))
-  .directive(
-    'companyDashboard',
-    downgradeComponent({ component: CompanyDashboardComponent }))
-  .directive(
-    'leftPanelComponent',
-    downgradeComponent({ component: LeftPanelComponent }))
-  .directive(
-    'quotesComponent',
-    downgradeComponent({ component: QuotesComponent }))
-  .directive(
-    'recurringTicketsComponent',
-    downgradeComponent({ component: RecurringTicketsComponent }))
-  .directive(
-    'companiesComponent',
-    downgradeComponent({ component: CompaniesComponent }))
-  .directive(
-    'usersComponent',
-    downgradeComponent({ component: UsersComponent }))
-  .directive(
-    'passwordManager',
-    downgradeComponent({ component: PasswordManagerComponent })
-  )
-  .directive(
-    'leftPanelComponent',
-    downgradeComponent({ component: LeftPanelComponent })
-  )
-  .directive(
-    'settingComponent',
-    downgradeComponent({ component: SettingComponent })
-  )
-  .directive(
-    'myprofileComponent',
-    downgradeComponent({ component: MyProfileComponent })
-  )
-  .directive(
-    'manageTagsComponent',
-    downgradeComponent({ component: ManageTagsComponent })
-  )
-  .directive(
-    'glnumberSettingsComponent',
-    downgradeComponent({ component: GlNumberSettingsComponent })
-  )
-  .directive(
-    'companyProfileComponent',
-    downgradeComponent({ component: CompanyProfileComponent })
-  )
-  .directive(
-    'techComponent',
-    downgradeComponent({ component: TechUsersComponent })
-  )
-  .directive(
-    'emailSettingComponent',
-    downgradeComponent({ component: EmailSettingComponent })
-  )
-  .directive(
-    'taxesSettingsComponent',
-    downgradeComponent({ component: TaxesSettingsComponent })
-  )
-  .directive(
-    'permissionManageComponent',
-    downgradeComponent({ component: PermissionManageComponent })
-  )
-  .directive(
-    'emailTempleteComponent',
-    downgradeComponent({ component: EmailTempleteComponent })
-  )
-  .directive(
-    'integrationsComponent',
-    downgradeComponent({ component: IntegrationsComponent })
-  )
-  .directive(
-    'invoiceTicketComponent',
-    downgradeComponent({ component: InvoiceTicketsComponent })
-  )
-  .directive(
-    'commissionComponent',
-    downgradeComponent({ component: CommissionComponent })
-  )
-  .directive(
-    'subscriptionComponent',
-    downgradeComponent({ component: SubscriptionComponent })
-  )
-  .directive(
-    'reportsComponent',
-    downgradeComponent({ component: ReportsComponent }))
-  .directive(
-    'itemReportComponent',
-    downgradeComponent({ component: ItemReportComponent }))
-  .directive(
-    'ticketsComponent',
-    downgradeComponent({ component: TicketsComponent }))
-  .directive(
-    'billableComponent',
-    downgradeComponent({ component: BillableComponent }))
-  .directive(
-    'defaultServicesComponent',
-    downgradeComponent({ component: DefaultServicesComponent }))
-  .directive(
-    'invoicesComponent',
-    downgradeComponent({ component: InvoicesComponent }))
-  .directive(
-    'billableTicketsComponent',
-    downgradeComponent({ component: BillableTicketsComponent }))
-  .directive(
-    'paymentsComponent',
-    downgradeComponent({ component: PaymentsComponent }))
-  .directive(
-    'inventoryComponent',
-    downgradeComponent({ component: InventoryComponent }))
-  .directive(
-    'companyProducts',
-    downgradeComponent({ component: CompanyProductsComponent }))
-  .directive(
-    'contractsComponent',
-    downgradeComponent({ component: ContractsComponent }))
-  .directive(
-    'dashboardComponent',
-    downgradeComponent({ component: DashboardComponent }))
-  .directive(
-    'hardwareComponent',
-    downgradeComponent({ component: HardwareComponent }))
-  .directive(
-    'softwareComponent',
-    downgradeComponent({ component: SoftwareComponent }))
-  .directive(
-    'servicesComponent',
-    downgradeComponent({ component: ServicesComponent }))
-  .directive(
-    'antivirusComponent',
-    downgradeComponent({ component: AntivirusComponent }))
-  .directive(
-    'terminalComponent',
-    downgradeComponent({ component: TerminalComponent }))
-  .directive(
-    'passwordComponent',
-    downgradeComponent({ component: PasswordComponent }))
-  .directive(
-    'windowsComponent',
-    downgradeComponent({ component: WindowsComponent }))
-  .directive(
-    'startupComponent',
-    downgradeComponent({ component: StartupComponent }))
-  .directive(
-    'fileComponent',
-    downgradeComponent({ component: FileComponent }))
-  .directive(
-    'dashboardBillingComponent',
-    downgradeComponent({ component: DashboardBillingComponent })
-  )
-  .directive(
-    'companyDevicesComponent',
-    downgradeComponent({ component: CompanyDevicesComponent })
-  )
-  .directive(
-    'companyContractsComponent',
-    downgradeComponent({ component: CompanyContractsComponent }))
-  .directive(
-    'ticketsDashboardComponent',
-    downgradeComponent({ component: TicketsDashboardComponent }))
-  .directive(
-    'companyNetworkScanComponent',
-    downgradeComponent({ component: CompanyNetworkScanComponent }))
-  .directive(
-    'supportComponent',
-    downgradeComponent({ component: SupportComponent }))
-  .factory('ngZone', downgradeInjectable(NgZone));
-
 /**
  * This module represents the main application module
  */
@@ -1073,20 +877,13 @@ angular.module('quicktech')
   exports: [
     PhonePipe,
     OrderByPipe,
-
   ],
   providers: [
-    {
-      provide: '$state',
-      useFactory: ($injector: any) => $injector.get('$state'),
-      deps: ['$injector']
-    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpInterceptorService,
       multi: true,
     },
-    { provide: UrlHandlingStrategy, useClass: CustomHandlingStrategy },
     ApiPasswordManagerService,
     PermissionDasnboardBillingService
   ],

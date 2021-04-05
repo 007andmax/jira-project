@@ -20,6 +20,10 @@
       "dom"
     ]
   },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
+  },
   "include": [
     "src/**/*",
     "node_modules/ng2-stomp-service/dist/stomp.service.ts"
