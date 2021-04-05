@@ -30,15 +30,16 @@
                 </tbody>
             </table>
 
+
         </div>
-      <div
-        class="loading"
-        *ngIf="showPreloader"
-      ></div>
-      <div
-        class="loading pengind-loading"
-        *ngIf="showPendingPreloader"
-      ></div>
+        <div
+            class="loading"
+            *ngIf="showPreloader"
+        ></div>
+        <div
+            class="loading pengind-loading"
+            *ngIf="showPendingPreloader"
+        ></div>
     </div>
 </div>
 <app-refund-payment
@@ -58,7 +59,3 @@
     [payment]="editPayment"
     (onClose)="showEditPayment = false"
 ></app-edit-payment>
-<app-invoices-aside
-    *ngIf="showCreatePayment"
-    (onClose)="onCloseCreatePayment()"
-></app-invoices-aside>

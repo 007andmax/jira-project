@@ -30,7 +30,6 @@ export class PaymentsComponent implements OnInit {
   public sort: string = '';
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
-  showCreatePayment: boolean = false;
   showDetailsPayment: boolean = false;
   showRefundPayment: boolean = false;
   showEditPayment: boolean = false;
@@ -102,11 +101,8 @@ export class PaymentsComponent implements OnInit {
     })
     this.sub.add(changePaymentsArray);
   }
-  onCloseCreatePayment() {
-    this.showCreatePayment = false;
-  }
   onCreatePayment() {
-    this.showCreatePayment = true;
+    this.invoiceStateService.onOpenAsige([]);
   }
   onEditPayment(data) {
     this.editPayment = data;
