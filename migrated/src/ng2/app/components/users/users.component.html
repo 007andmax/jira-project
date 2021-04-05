@@ -3,6 +3,8 @@
     <app-users-header
         [type]="TYPE_LIST_ALL_USERS"
         [count]="count"
+        [reqUsers]="reqUsers"
+        [selectAll]="selectAll"
         (onChangeFilterField)="onFilter($event)"
         [users]="users"
         (onSelectAllUser)="onSelectAllUser($event)"
@@ -26,6 +28,7 @@
                         <app-users-table
                             [type]="TYPE_LIST_ALL_USERS"
                             [showArchivedUsers]="showArchivedUsers"
+                            (onSelectUser)="onSelectUser($event)"
                             [user]="user"
                         ></app-users-table>
                     </ng-template>
