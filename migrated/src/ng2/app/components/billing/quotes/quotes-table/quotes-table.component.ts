@@ -132,7 +132,7 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
     this.quoteServices.downloadPdf(item.id).subscribe((res) => this.quoteServices.downLoadFile(res, item.id, item.company.name, item.quoteNumber));
   }
   public resend(item) {
-    if (item.status === 'TICKETED' || item.status === 'INVOICED') {
+    if (item.status === 'TICKETED' || item.status === 'INVOICED' || item.status === 'BILLED') {
       this.quoteServices.repeatSend(item.id).subscribe();
     } else {
       let recipients = item.recipients;
