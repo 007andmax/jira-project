@@ -1,74 +1,73 @@
-.customer-list {
-  padding: 45px 30px;
-}
+/*.customer-list {*/
+/*  padding: 45px 30px;*/
+/*}*/
 
-/*test*/
-.customer-list ul,
-.customer-list li {
-  list-style: none;
-  margin: 0;
-}
+/*!*test*!*/
+/*.customer-list ul,*/
+/*.customer-list li {*/
+/*  list-style: none;*/
+/*  margin: 0;*/
+/*}*/
 
-.customer-list-header div,
-.customer-list-header div p,
-.customer-list-header div input {
-  display: inline-block;
-  vertical-align: middle;
-}
+/*.customer-list-header div,*/
+/*.customer-list-header div p,*/
+/*.customer-list-header div input {*/
+/*  display: inline-block;*/
+/*  vertical-align: middle;*/
+/*}*/
 
-.customer-filter p {
-  margin-bottom: 2px;
-}
+/*.customer-filter p {*/
+/*  margin-bottom: 2px;*/
+/*}*/
 
-.customer-list-header div input {
-  width: 80%;
-}
+/*.customer-list-header div input {*/
+/*  width: 80%;*/
+/*}*/
 
-.customer-list-header .customer-search p,
-.customer-list-header .customer-sort p {
-  padding-right: 5px;
-}
+/*.customer-list-header .customer-search p,*/
+/*.customer-list-header .customer-sort p {*/
+/*  padding-right: 5px;*/
+/*}*/
 
-.customer-search,
-.customer-sort {
-  width: 300px;
-  float: right;
-}
+/*.customer-search,*/
+/*.customer-sort {*/
+/*  width: 300px;*/
+/*  float: right;*/
+/*}*/
 
-.customer-list-content [class*=col-] {
-  display: inline-block;
-  vertical-align: top;
-  word-break: break-all;
-}
+/*.customer-list-content [class*=col-] {*/
+/*  display: inline-block;*/
+/*  vertical-align: top;*/
+/*  word-break: break-all;*/
+/*}*/
 
-.customer-list-content-header {
-  font-weight: 700;
-}
+/*.customer-list-content-header {*/
+/*  font-weight: 700;*/
+/*}*/
 
-.customer-list-content-header [class*=col-] {
-  word-break: normal;
-}
+/*.customer-list-content-header [class*=col-] {*/
+/*  word-break: normal;*/
+/*}*/
 
-.customer-list-content li {
-  padding: 14.5px 5px;
-  border-bottom: 1px solid #eee;
-}
+/*.customer-list-content li {*/
+/*  padding: 14.5px 5px;*/
+/*  border-bottom: 1px solid #eee;*/
+/*}*/
 
-.customer-list-content {
-  padding: 20px 0;
-}
+/*.customer-list-content {*/
+/*  padding: 20px 0;*/
+/*}*/
 
-.customer-list-content .col-1 {
-  width: 12.5%;
-}
+/*.customer-list-content .col-1 {*/
+/*  width: 12.5%;*/
+/*}*/
 
-.customer-list-content .col-2 {
-  width: 5%;
-}
+/*.customer-list-content .col-2 {*/
+/*  width: 5%;*/
+/*}*/
 
-.customer-list-content-body a {
-  cursor: pointer;
-  margin-left: 20px;
-}
+/*.customer-list-content-body a {*/
+/*  cursor: pointer;*/
+/*  margin-left: 20px;*/
+/*}*/
 
- 
