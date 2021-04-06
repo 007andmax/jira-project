@@ -38,6 +38,7 @@ export class BillableComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+    window.scrollTo(0, 0);
     this.leftPanelStateService.setBillingPage('new-billable');
     if (this.appService.getIsInit()) this.getList();
     this.appService.getOnInit().subscribe(data => {
