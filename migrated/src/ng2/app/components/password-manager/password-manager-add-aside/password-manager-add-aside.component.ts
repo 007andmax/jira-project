@@ -77,7 +77,9 @@ export class PasswordManagerAddAsideComponent implements OnInit {
     let onAddForm = this.passwordManagerService.onAddForm.subscribe((res) => {
       this.passwordRecordAdd = new PasswordRecordAdd();
       this.passwordRecordAdd.setType(this.categories.find(item => item.name === "OFFICE_365_ACCOUNT"));
-      this.passwordRecordAdd.setExpiryDate(moment(new Date()).format('YYYY/MM/DD'));
+      let current = new Date();
+      current.setFullYear(current.getFullYear() + 1);
+      this.passwordRecordAdd.setExpiryDate(moment(current).format('YYYY/MM/DD'));
       this.opened = true;
     });
     this.sub.add(onAddForm);
