@@ -22,9 +22,9 @@ export class QuoteStateService {
   public usersEmail: any;
 
   constructor(
-    @Inject('$state') $state: any
+
   ) {
-    this.state = $state;
+
   }
   public setQuoteForArchive(data) {
     this.quoteForArchive = data;

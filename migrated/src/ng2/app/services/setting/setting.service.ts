@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 
 import { environment } from "../../../environments/environment";
 
-declare const hex_md5: any;
+var md5 = require('md5');
 
 @Injectable({
   providedIn: "root"
@@ -12,7 +12,7 @@ export class SettingService {
   private apiUrl = environment.apiUrl;
   public currentUser: any;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   currentCompany() {
     return this.http.get(`${this.apiUrl}company/current`);
@@ -54,8 +54,8 @@ export class SettingService {
 
   public resetPassword(oldPass: string, newPass: string) {
     return this.http.post(`${this.apiUrl}resetPassword`, {
-      oldPass: hex_md5(oldPass),
-      newPass: hex_md5(newPass)
+      oldPass: md5(oldPass),
+      newPass: md5(newPass)
     });
   }
 

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/ng2/environments/environment';
-declare const hex_md5: any;
+var md5 = require('md5');
 @Injectable({
   providedIn: 'root',
 })
@@ -21,7 +21,7 @@ export class LockScreenService {
   ) { }
 
   public unlockScreen(code) {
-    return this.http.post(this.apiUrl + 'unlockScreen', { code: hex_md5(code) });
+    return this.http.post(this.apiUrl + 'unlockScreen', { code: md5(code) });
   }
   public sendUnlockScreenCode() {
     return this.http.get(this.apiUrl + 'sendUnlockScreenCode');

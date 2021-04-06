@@ -818,38 +818,32 @@ declare var $: any;
     AngularEditorModule
   ],
   entryComponents: [
-    LeftPanelComponent,
+
     ModalQuoteComponent,
     ConfirmComponent,
-    QuotesComponent,
-    PasswordManagerComponent,
-    CompaniesComponent,
+
+
     DownloadAgentComponent,
     ImageCropperComponent,
-    CompanyPasswordManagerComponent,
-    CompanyUserComponent,
-    CompanyTicketsComponent,
-    CompanyDashboardComponent,
-    UsersComponent,
+
+
+
     AlertComponent,
-    LeftPanelComponent,
-    ReportsComponent,
-    ItemReportComponent,
-    OverviewReportComponent,
+
+
+
     ReportSendEmailComponent,
-    TicketsComponent,
-    InventoryComponent,
-    CompanyProductsComponent,
-    BillableComponent,
-    BillableTicketsComponent,
-    ContractsComponent,
-    InvoicesComponent,
-    BillableTicketsComponent,
-    DefaultServicesComponent,
-    PaymentsComponent,
-    DefaultServicesComponent,
-    AppComponent,
-    DeviceComponent,
+
+
+
+
+
+
+
+
+
+
+
     NavComponent,
     DashboardComponent,
     HardwareComponent,
@@ -863,13 +857,13 @@ declare var $: any;
     PasswordComponent,
     TicketTaskComponent,
     ContractsConfirmComponent,
-    DashboardBillingComponent,
-    CompanyContractsComponent,
-    TicketsDashboardComponent,
-    CompanyNetworkScanComponent,
-    CompanyDevicesComponent,
+
+
+
+
+
     CompanyDevicesRemoteAccessComponent,
-    SupportComponent,
+
     ModalLockScreenComponent,
     ModalSessionScreenComponent
     // RecurringTicketsComponent
@@ -887,35 +881,8 @@ declare var $: any;
     ApiPasswordManagerService,
     PermissionDasnboardBillingService
   ],
-  // bootstrap: [AppComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule {
-  ngDoBootstrap(app) {
-    fetch('url/to/fetch/component/name')
-      .then((name) => { bootstrapRootComponent(app, name) });
-  }
-}
 
-function bootstrapRootComponent(app, name) {
-  // define the possible bootstrap components 
-  // with their selectors (html host elements)
-  const options = {
-    'app': AppComponent,
-    'device': DeviceComponent
-  };
-  const component = options[name];
-  app.bootstrap(component);
-}
-
-function fetch(url) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      if (window.location.href.includes('/device/') === true) {
-        resolve('device');
-      } else {
-        resolve('app');
-      }
-
-    }, 2000);
-  });
 }
