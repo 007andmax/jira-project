@@ -130,10 +130,19 @@
                 class="pointer"
                 ngbDropdownItem
                 (click)="archiveQuote()"
-                *ngIf="checkStatus(quote, ['UNREAD','SAVED', 'EXPIRED', 'INVOICED', 'TICKETED','CANCELED'])"
+                *ngIf="checkStatus(quote, ['UNREAD','SAVED', 'EXPIRED', 'INVOICED', 'TICKETED','CANCELED','BILLED'])"
             >
                 <div class="icon__remove qt-bg-contain qt-sz-16 qt-mr-8"></div>
                 Archive a quote
+            </li>
+            <li
+                class="pointer"
+                ngbDropdownItem
+                (click)="convertToBillable()"
+                *ngIf="checkStatus(quote, [ 'APPROVED'])"
+            >
+                <i class="icn-16 convert-to-billable-ng2 qt-mr-8"></i>
+                Convert to billable item
             </li>
             <li
                 class="pointer"
