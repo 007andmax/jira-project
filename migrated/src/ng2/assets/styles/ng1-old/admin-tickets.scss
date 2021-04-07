@@ -1,0 +1,84 @@
+.main-container {
+  padding-top: 64px;
+  background-color: #fff;
+  min-height: 100vh;
+}
+
+@-moz-document url-prefix() {
+  .main-container > .row {
+    min-width: 1000px;
+  }
+}
+
+.left-panel-closed .content-container {
+  margin-left: 76px;
+}
+
+.content-wrapper {
+  position: relative;
+
+  height: 100%;
+}
+
+.right-panel-closed.opened-ticket .content-wrapper .container-ticket-content {
+  right: 0;
+  width: calc(100% - 316px);
+}
+
+.right-panel-closed.left-panel-closed.opened-ticket .content-wrapper .container-ticket-content {
+  right: 0;
+  width: calc(100% - 77px);
+
+}
+
+.left-panel-closed.opened-ticket .content-wrapper .container-ticket-content {
+  width: calc(100% - 153px);
+}
+
+.left-panel-closed.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-content {
+  width: calc(100% - 653px);
+
+}
+
+.right-panel-closed.left-panel-closed.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-content {
+  width: calc(100% - 616px);
+}
+
+.right-panel-closed.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-content {
+  right: 0;
+
+  width: calc(100% - 856px);
+}
+
+@media screen and (max-width: 1700px) {
+  .right-panel-closed.left-panel-closed.opened-ticket .content-wrapper .container-ticket-content {
+    width: calc(100% - 76px);
+  }
+
+  .right-panel-closed.opened-ticket .content-wrapper .container-ticket-content {
+    right: 0;
+
+    width: calc(100% - 316px);
+  }
+}
+
+@media screen and (max-width: 1315px) {
+  .left-panel-closed.opened-ticket .content-wrapper .container-ticket-content {
+    right: 77px;
+
+    /*width: calc(100% - 77px);*/
+  }
+
+  .right-panel-closed.opened-ticket .content-wrapper .container-ticket-content {
+    right: 0;
+
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 1316px) and (max-width: 1440px) {
+  .right-panel-closed.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-content {
+    right: 0;
+    width: calc(100% - 656px);
+  }
+}

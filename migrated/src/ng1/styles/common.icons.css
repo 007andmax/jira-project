@@ -25,7 +25,7 @@
 }
 
 @media only screen and (-Webkit-min-device-pixel-ratio: 1.5), only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min-device-pixel-ratio: 1.5) {
-  
+
   .icn-xs, .icn-sm, .icn-md, .icn-lg, .control-indicator {
     /*background-image: url('../images/sprites-retina-s9f68249a71.png');*/
     background-image: url('../images/sprites-s76c759f188.png');
@@ -35,7 +35,7 @@
     display: inline-block;
     margin: auto;
   }
-  
+
 }
 
 /* Hit Area Start */
@@ -384,21 +384,21 @@ a.ha-24 {
 @media screen and (min-width: 414px) {
   .new-date-picker .dropdown-menu {
     transform: translateY(calc(-100% - 55px));
-    
+
   }
-  
+
   .service-datetimepicker {
     position: relative;
   }
-  
+
   .service-datetimepicker .dropdown-menu {
     transform: translateX(calc(100% - 98px))
   }
-  
+
   .new-service-dropdown {
     transform: translateY(calc(-100% - 15px))
   }
-  
+
 }
 
 .ticket-add-content .sale-icon-for-isDicount, .sale-icon-for-isDicount-green, .ticket-update-service-edit .sale-icon-for-isDicount, .ticket-update-product-edit .sale-icon-for-isDicount {
@@ -483,12 +483,12 @@ a.ha-24 {
 }
 
 .icon-ticket-flag {
-  
+
   background-image: url("../images/new-icons/flag-white.png");
 }
 
 .icon-user {
-  
+
   background-image: url("../images/new-icons/user-circle-white.png");
 }
 

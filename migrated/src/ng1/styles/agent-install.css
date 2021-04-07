@@ -1,81 +1,81 @@
-.wrapper {
-  width: 250px !important;
-  padding: 10px !important;}
-  .wrapper .row .interior {
-    display: block; }
-    .wrapper .row .interior .col-md-12 {
-      padding: 5px;
-      text-align: center; }
-    .wrapper .row .interior .agent-head__description {
-      line-height: 1em;
-      font-size: 1.4em; }
-    .wrapper .row .interior .icons-container .svg-icn {
-      width: 70%;
-      cursor: pointer; }
-      .wrapper .row .interior .icons-container .svg-icn:hover,
-      .wrapper .row .interior .icons-container .active .svg-icn {
-        border: 2px solid grey;
-        border-radius: 10px; }
-    .wrapper .row .interior .icons-container:after {
-      position: absolute;
-      bottom: 0;
-      left: 10%;
-      width: 80%;
-      height: 1px;
-      background: #4c5c6f;
-      content: " "; }
-    .wrapper .row .interior .form-container:after {
-      position: absolute;
-      bottom: 0;
-      left: 10%;
-      width: 80%;
-      height: 1px;
-      background: #4c5c6f;
-      content: " "; }
-    .wrapper .row .interior .form-container .form-group {
-      margin-bottom: 0;
-      text-align: left;
-    }
+/*.wrapper {*/
+/*  width: 250px !important;*/
+/*  padding: 10px !important;}*/
+/*  .wrapper .row .interior {*/
+/*    display: block; }*/
+/*    .wrapper .row .interior .col-md-12 {*/
+/*      padding: 5px;*/
+/*      text-align: center; }*/
+/*    .wrapper .row .interior .agent-head__description {*/
+/*      line-height: 1em;*/
+/*      font-size: 1.4em; }*/
+/*    .wrapper .row .interior .icons-container .svg-icn {*/
+/*      width: 70%;*/
+/*      cursor: pointer; }*/
+/*      .wrapper .row .interior .icons-container .svg-icn:hover,*/
+/*      .wrapper .row .interior .icons-container .active .svg-icn {*/
+/*        border: 2px solid grey;*/
+/*        border-radius: 10px; }*/
+/*    .wrapper .row .interior .icons-container:after {*/
+/*      position: absolute;*/
+/*      bottom: 0;*/
+/*      left: 10%;*/
+/*      width: 80%;*/
+/*      height: 1px;*/
+/*      background: #4c5c6f;*/
+/*      content: " "; }*/
+/*    .wrapper .row .interior .form-container:after {*/
+/*      position: absolute;*/
+/*      bottom: 0;*/
+/*      left: 10%;*/
+/*      width: 80%;*/
+/*      height: 1px;*/
+/*      background: #4c5c6f;*/
+/*      content: " "; }*/
+/*    .wrapper .row .interior .form-container .form-group {*/
+/*      margin-bottom: 0;*/
+/*      text-align: left;*/
+/*    }*/
 
-.underline-link {
-  color: #1586e4;
-  text-decoration: underline;
-  cursor: pointer; }
+/*.underline-link {*/
+/*  color: #1586e4;*/
+/*  text-decoration: underline;*/
+/*  cursor: pointer; }*/
 
-.internal-wrap {
-  max-height: 470px; }
-  .internal-wrap .col-md-12 .form-group {
-    margin: 0; }
-    .internal-wrap .col-md-12 .form-group .control-label {
-      text-transform: uppercase;
-      margin-bottom: 4px; }
-    .internal-wrap .col-md-12 .form-group textarea {
-      height: 200px; }
-  .internal-wrap .col-md-12 .available-keywords-label {
-    font-weight: bold; }
-  .internal-wrap .agent-head {
-    text-align: center; }
-    .internal-wrap .agent-head__description {
-      line-height: 2em;
-      font-size: 1.4em;
-      position: relative; }
-      .internal-wrap .agent-head__description .back-in-black {
-        display: inline-block;
-        width: 2em;
-        height: 2em;
-        position: absolute;
-        left: 20px; }
-        .internal-wrap .agent-head__description .back-in-black .icn-expand {
-          transform: rotate(90deg) translateX(150%); }
-  .internal-wrap .template-actions {
-    margin: 10px 0; }
-    .internal-wrap .template-actions .restore-default-wrap {
-      display: inline-block;
-      vertical-align: middle; }
-    .internal-wrap .template-actions .or {
-      color: #b2becd;
-      margin-left: 5px; }
-.download-agent-btn{
-  margin-top: 5px;
-}
-/*# sourceMappingURL=agent-install.css.map */
+/*.internal-wrap {*/
+/*  max-height: 470px; }*/
+/*  .internal-wrap .col-md-12 .form-group {*/
+/*    margin: 0; }*/
+/*    .internal-wrap .col-md-12 .form-group .control-label {*/
+/*      text-transform: uppercase;*/
+/*      margin-bottom: 4px; }*/
+/*    .internal-wrap .col-md-12 .form-group textarea {*/
+/*      height: 200px; }*/
+/*  .internal-wrap .col-md-12 .available-keywords-label {*/
+/*    font-weight: bold; }*/
+/*  .internal-wrap .agent-head {*/
+/*    text-align: center; }*/
+/*    .internal-wrap .agent-head__description {*/
+/*      line-height: 2em;*/
+/*      font-size: 1.4em;*/
+/*      position: relative; }*/
+/*      .internal-wrap .agent-head__description .back-in-black {*/
+/*        display: inline-block;*/
+/*        width: 2em;*/
+/*        height: 2em;*/
+/*        position: absolute;*/
+/*        left: 20px; }*/
+/*        .internal-wrap .agent-head__description .back-in-black .icn-expand {*/
+/*          transform: rotate(90deg) translateX(150%); }*/
+/*  .internal-wrap .template-actions {*/
+/*    margin: 10px 0; }*/
+/*    .internal-wrap .template-actions .restore-default-wrap {*/
+/*      display: inline-block;*/
+/*      vertical-align: middle; }*/
+/*    .internal-wrap .template-actions .or {*/
+/*      color: #b2becd;*/
+/*      margin-left: 5px; }*/
+/*.download-agent-btn{*/
+/*  margin-top: 5px;*/
+/*}*/
+/*!*# sourceMappingURL=agent-install.css.map *!*/
