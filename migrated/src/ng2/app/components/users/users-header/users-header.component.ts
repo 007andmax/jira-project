@@ -31,6 +31,8 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   @Input() set users(value: Array<User>) {
     this._users = value;
   }
+  @Input() reqUsers: Array<User> = [];
+  @Input() selectAll: boolean = false;
   _users: Array<User> = [];
   @Input() count: number = 0;
   @Input() type: string;
@@ -55,7 +57,7 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   public showAsideForDraftEmail() {
     this.draftEmailStateService.setAction(USERS);
     this.draftEmailStateService.resetSelectedUsers();
-    this.draftEmailStateService.setSelectedUser(this._users.filter(item => item.selected));
+    this.draftEmailStateService.setSelectedUser(this.reqUsers.filter(item => item.selected));
     this.draftEmailStateService.toggleAsideForAdd();
   }
   delete() {
@@ -79,10 +81,11 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
     return this._users.filter(item => item.selected).find(item => item.isContact);
   }
   toggleAllUser(data) {
+    this.selectAll = true;
     this.onSelectAllUser.emit(data);
   }
   getSelectedCount() {
-    return this._users.filter(item => item.selected).length;
+    return this.reqUsers.filter(item => item.selected).length;
   }
   public onFilter(field) {
     this.onChangeFilterField.emit(field);

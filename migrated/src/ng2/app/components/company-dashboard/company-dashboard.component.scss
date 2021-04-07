@@ -1271,9 +1271,12 @@ $parot: #2ec866;
                 min-width: 74px;
             }
         }
-        .dropdown {
+      .cmp-board-tickets,
+      .cmp-board-revenue {
+          .dropdown {
             position: relative;
             width: 115px;
+
             .dropdown-toggle {
                 width: 100%;
                 outline: none;
@@ -1288,10 +1291,13 @@ $parot: #2ec866;
                 padding: 0 15px 0 0;
                 text-align: left;
                 background: url(../../../../ng2/assets/img/company-details/filter-drop-down.svg) no-repeat right center
-                    #fff;
+                #fff;
                 background-size: 16px;
                 display: flex;
-            }
+              }
+          }
+      }
+        .dropdown {
             .dropdown-menu {
                 width: 220px;
                 height: 284px;

@@ -1,0 +1,62 @@
+<div class="qt-page-list__header-filters">
+    <app-drop-down
+        #categoriesSelect
+        class="filter-category qt-mr-8 dropdown"
+        [placeholder]="'Select by Category'"
+        [list]="categories"
+        [field]="'title'"
+        [search]="true"
+        [change]="true"
+        (onSelectedItem)="onSelectCategory($event)"
+        heightInput="36px"
+        widthInput="20%"
+    ></app-drop-down>
+    <div class="password-add-category qt-pos-rel">
+        <button
+            class="plus-btn qt-mr-8"
+            (click)="showAddCategory = true"
+        >
+            +
+        </button>
+        <app-password-manager-add-category
+            *ngIf="showAddCategory"
+            (onClose)="showAddCategory = false"
+        ></app-password-manager-add-category>
+    </div>
+    <app-drop-down
+        class="filter-company qt-w100 qt-mr-8 dropdown"
+        [placeholder]="'Select Company'"
+        [isDisabled]="disabledCompany"
+        [editItem]="selectedCompany"
+        [list]="companies"
+        [field]="'name'"
+        [search]="true"
+        [change]="true"
+        (onSelectedItem)="selectCompany($event)"
+        heightInput="36px"
+        widthInput="30%"
+    ></app-drop-down>
+    <app-passwoord-manager-devices-users
+        class="filter-device qt-mr-8 dropdown dropdown-devices-users"
+        [placeholder]="'Select Device or User'"
+        [isDisabled]="disabledDevicesUsers"
+        [list]="devicesUsers"
+        [field]="'name'"
+        [search]="true"
+        [change]="true"
+        [sort]="true"
+        (onSelectedItem)="selectDeviceUser($event)"
+        heightInput="36px"
+        widthInput="25%"
+    ></app-passwoord-manager-devices-users>
+    <app-drop-down
+        class="filter-data-picker dropdown"
+        [placeholder]="'Search by Expire Date'"
+        [list]="listDates"
+        [sort]="false"
+        [field]="'title'"
+        (onSelectedItem)="selectDate($event)"
+        heightInput="36px"
+        widthInput="20%"
+    ></app-drop-down>
+</div>

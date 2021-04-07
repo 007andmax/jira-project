@@ -24,7 +24,8 @@ export class QuotesFilterComponent implements OnInit {
   new CompanySetting('Expired', 'EXPIRED'), new CompanySetting('Invoiced', 'INVOICED'),
   new CompanySetting('Not Approved', 'NOT_APPROVED'), new CompanySetting('Read', 'READ'),
   new CompanySetting('Canceled', 'CANCELED'), new CompanySetting('Saved', 'SAVED'),
-  new CompanySetting('Ticketed', 'TICKETED'), new CompanySetting('Unread', 'UNREAD'),];
+  new CompanySetting('Ticketed', 'TICKETED'), new CompanySetting('Unread', 'UNREAD'),
+  new CompanySetting('Billed', 'BILLED')];
   constructor(private companiesState: CompaniesStateService,
     private quoteStateService: QuoteStateService) { }
 

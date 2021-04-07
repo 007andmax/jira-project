@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { NETWORK_REMOVE_DEVICE } from '../../const/confirm';
 import { DisabledBtnDirective } from '../../directives/disabled-btn.directive';
 import { DevicesService } from '../../services/devices/devices.service';
-import { ApiPasswordManagerService } from '../../services/password-manager/api-password-manager.service';
+import { PasswordManagerService } from '../../services/password-manager/password-manager.service';
 import { PermissionsService } from '../../services/permissions/permissions.service';
 import { WebsocketService } from '../../services/websocket/websocket.service';
 import { DevicesRealTimeService } from '../../states/devices/devices-real-time.service';
@@ -47,7 +47,8 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     private permissionsService: PermissionsService,
     private networkScanStateService: NetworkScanStateService,
     private devicesRealTimeService: DevicesRealTimeService,
-    private apiPasswordManagerService: ApiPasswordManagerService,
+    private passwordManagerService: PasswordManagerService,
+
     private confirmStateService: ConfirmStateService,
     private companyNetworkScanService: CompanyNetworkScanService,
     private leftPanelStateService: LeftPanelStateService,
@@ -156,7 +157,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
   }
   onSelectCredential(data) {
     this.networkScanInstallAgent.setCredential(data);
-    this.apiPasswordManagerService.setOpenRecord(data.id).subscribe((res: any) => {
+    this.passwordManagerService.setOpenRecord(data.id).subscribe((res: any) => {
       this.networkScanInstallAgent.getCredential().setPassword(res.password);
     })
   }

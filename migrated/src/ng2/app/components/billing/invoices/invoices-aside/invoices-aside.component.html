@@ -1,4 +1,7 @@
-<div class="qt-aside-modern --x-large invoices-page__aside">
+<div
+    class="qt-aside-modern --x-large invoices-page__aside"
+    *ngIf="opened"
+>
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-title">Record Payment</div>
         <div
@@ -210,7 +213,7 @@
                         <textarea
                             class="summary-info__textarea qt-textarea"
                             [(ngModel)]="payment.note"
-                            placeholder="Partial Payment Recived from Aspen accounting office"
+                            placeholder="Thank you for your payment."
                             appTextArea
                             maxlength="250"
                             cols="30"

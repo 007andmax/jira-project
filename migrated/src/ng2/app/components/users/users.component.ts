@@ -26,6 +26,7 @@ export class UsersComponent implements OnInit {
   showPreloader: boolean = true;
   filter: UserFilter = new UserFilter();
   showArchivedUsers: boolean = false;
+  selectAll: boolean = false;
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
   count: number = 0;
@@ -56,6 +57,8 @@ export class UsersComponent implements OnInit {
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
       window.scrollTo(0, 0);
       this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title);
+      this.selectAll = false;
+      this.reqUsers.forEach(item => item.selected = false);
       this.setDefaultScoll();
       this.onScroll();
     })
@@ -63,7 +66,6 @@ export class UsersComponent implements OnInit {
 
     if (this.companiesStateService.getCompanies().length > 0) this.companies = this.companiesStateService.getCompanies();
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
-
       this.companies = data;
     })
     this.userListService.addSubscription(getOnCompanies);
@@ -168,29 +170,33 @@ export class UsersComponent implements OnInit {
   }
   onSelectAllUser(event) {
     if (event.target.checked) {
+      this.selectAll = true;
       this.users.forEach(item => {
         item.selected = true;
       })
-      /* let list_user_table = document.body.querySelectorAll('app-users-table');
-       list_user_table.forEach(item => {
-         (<any>item.querySelector('input[type="checkbox"]')).checked = true;
- 
-       });*/
+
       this.draftEmailStateService.resetSelectedUsers();
-      this.users.forEach(user => {
-        this.draftEmailStateService.addSelectedUser(user);
+      this.filter.getFilterList(this.reqUsers, this.companies).forEach(item => {
+        this.reqUsers.find(user => user.id === item.id).selected = true;
+      })
+
+      this.reqUsers.forEach(user => {
+        if (user.selected) this.draftEmailStateService.addSelectedUser(user);
       })
     } else {
+      this.selectAll = false;
       this.users.forEach(item => {
         item.selected = false;
       })
+      this.reqUsers.forEach(item => {
+        item.selected = false;
+      })
       this.draftEmailStateService.resetSelectedUsers();
-      /* let list_user_table = document.body.querySelectorAll('app-users-table');
-       list_user_table.forEach(item => {
-         (<any>item.querySelector('input[type="checkbox"]')).checked = false;
- 
-       });*/
     }
+  }
+  onSelectUser(user) {
+    this.reqUsers.find(item => item.id === user.id).selected = user.selected;
+    this.selectAll = (this.filter.getFilterList(this.reqUsers, this.companies).find(item => !item.selected)) ? false : true;
   }
   private onDeArchiveUser(id) {
     let ids = [];
@@ -228,7 +234,7 @@ export class UsersComponent implements OnInit {
   }
   public onScroll() {
     this.infiniteScrollDisabled = true;
-    this.getCompanies();
+    this.getUsers();
 
   }
   public onFilter(field) {
@@ -238,7 +244,7 @@ export class UsersComponent implements OnInit {
     this.users = [];
     this.onScroll();
   }
-  private getCompanies() {
+  private getUsers() {
     if (this.userListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;
@@ -255,6 +261,7 @@ export class UsersComponent implements OnInit {
       usersList.push(listFilter[i]);
     }
     this.users = [...this.users, ...usersList.map(item => new User(JSON.parse(JSON.stringify(item))))];
+    if (this.selectAll) this.users.forEach(item => item.selected = true);
     this.infiniteScrollDisabled = false;
     if ((this.page_number * 30) > listFilter.length) this.userListService.setBlockList(true);
 

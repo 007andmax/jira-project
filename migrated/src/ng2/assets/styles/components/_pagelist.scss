@@ -78,6 +78,38 @@
     max-width: 1320px;
     width: 100%;
   }
+
+  &__search {
+    display: flex;
+    position: relative;
+
+    &::before {
+      position: absolute;
+      content: '';
+      width: 20px;
+      height: 20px;
+      background-image: url('assets/img/icons/search.png');
+      left: 10px;
+      top: calc(50% - 10px);
+      z-index: 1;
+    }
+
+    input {
+      width: 300px;
+      border: none;
+      padding: 6px 8px 6px 40px;
+      border-radius: 4px;
+      background: #ffffff;
+      font-size: 13px;
+      outline: none;
+      position: relative;
+
+      &::placeholder {
+        color: #9ca5b6;
+        opacity: 1;
+      }
+    }
+  }
 }
 .sticky-list-header {
   position: sticky;

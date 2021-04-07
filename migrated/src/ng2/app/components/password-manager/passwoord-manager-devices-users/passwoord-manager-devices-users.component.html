@@ -1,0 +1,84 @@
+<div
+    ngbDropdown
+    [ngClass]="class"
+    [container]="container"
+    [ngStyle]="{'width':widthInput ? widthInput : '100%'}"
+>
+    <div
+        *ngIf="title"
+        class="app-drop-down__title"
+        [textContent]="title"
+    ></div>
+    <mat-error
+        class="app-drop-down__error qt-tooltip-error mat-error"
+        *ngIf="!validate"
+        [textContent]="errorMessage"
+    >
+    </mat-error>
+    <input
+        type="text"
+        [ngStyle]="{'width': '100%', 'height': heightInput ? heightInput : '40px' }"
+        [ngClass]="{'disabled': isDisabled, '--input-error' : !validate}"
+        [disabled]="isDisabled"
+        [value]="getSelectedItemText()"
+        autocomplete="new-password"
+        [placeholder]="placeholder"
+        id="dropdown1"
+        [attr.maxlength]="maxlength"
+        (input)="onCheckAdd($event)"
+        [readonly]="!change"
+        ngbDropdownToggle
+    >
+    <span
+        class="app-drop-down__right-icon pointer"
+        *ngIf="list && !isDisabled"
+        [ngStyle]="{'bottom': heightInput ? dividePosition(heightInput) : '20px' }"
+    >
+        <i
+            *ngIf="selectedItem && !isAdd && !isBlockClear"
+            class="icn-sm icn-remove-old"
+            (click)="clearClient($event)"
+        ></i>
+        <i
+            *ngIf="(!selectedItem || isBlockClear) && !isAdd && !preloader"
+            class="icn-sm report-caret-icon"
+        ></i>
+        <i
+            *ngIf="isAdd"
+            (click)="addItem()"
+            class="icn-sm icn-product-save"
+        ></i>
+    </span>
+    <i
+        class="loading xs"
+        *ngIf="preloader"
+    ></i>
+    <div
+        ngbDropdownMenu
+        [ngStyle]="{'width': dropdownWidth ? dropdownWidth : '100%', 'max-height': dropdownHeight ? dropdownHeight : '175px'}"
+        aria-labelledby="dropdown1"
+        class="app-drop-down__dropdown"
+    >
+        <ng-template
+            ngFor
+            let-item
+            [ngForOf]="list"
+            let-i="index"
+        >
+            <div
+                (click)="onSelect(item)"
+                ngbDropdownItem
+            >
+                <i
+                    class="icon__user-grey qt-sz-16 qt-bg-contain"
+                    *ngIf="item.type === 'USER'"
+                ></i>
+                <i
+                    class="icon__devices-grey qt-sz-16 qt-bg-contain"
+                    *ngIf="item.type === 'DEVICE'"
+                ></i>
+                <span [textContent]="item.name"></span>
+            </div>
+        </ng-template>
+    </div>
+</div>

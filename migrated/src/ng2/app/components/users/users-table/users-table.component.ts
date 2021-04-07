@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import { User } from '../class/user';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { Company } from 'src/ng2/app/interfaces/company/company';
@@ -26,6 +26,7 @@ export class UsersTableComponent implements OnInit {
   @Input() user: User;
   @Input() type: string;
   @Input() showArchivedUsers: boolean;
+  @Output() onSelectUser = new EventEmitter<any>();
   companies: Array<Company> = [];
   currentUser: CurrentUser = new CurrentUser();
   TYPE_LIST_ALL_USERS = TYPE_LIST_ALL_USERS;
@@ -124,7 +125,7 @@ export class UsersTableComponent implements OnInit {
     modalRef.componentInstance.message = `Do you want to restore ${this.user.firstName + ' ' + this.user.lastName}`;
     this.usersStateService.setUserForDeArchive(this.user);
   }
-  onSelectUser(event) {
+  selectUser(event) {
 
     if (event.target.checked) {
       this.draftEmailStateService.addSelectedUser(this.user);
@@ -133,6 +134,7 @@ export class UsersTableComponent implements OnInit {
       let index = list.findIndex(item => item.id === this.user.id);
       if (index > -1) this.draftEmailStateService.removeSelectedUser(index);
     }
+    this.onSelectUser.emit(this.user);
     this.cd.detectChanges();
   }
   public showAsideForDraftEmail() {

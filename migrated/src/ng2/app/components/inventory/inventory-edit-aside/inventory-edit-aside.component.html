@@ -9,40 +9,29 @@
             (click)="close()"
         ></div>
     </div>
-
-
-
-    <div class="qt-aside-modern__content --less-padding new-companies-content__modal--content advanced">
-
-
+    <div class="qt-aside-modern__content qt-pt-0-important --less-padding new-companies-content__modal--content advanced">
         <div class="col-md-4">
-            <mat-error *ngIf="!validate.getManufactureIsExist()">This number already occupied</mat-error>
-
-
-            <p>Item number</p>
+            <mat-error *ngIf="!validate.getManufactureIsExist()">This number is already occupied</mat-error>
+            <p>Item Number</p>
             <input
                 type="text"
                 [(ngModel)]="inventory.manufacture"
                 (blur)="onCheckManufacture()"
-                placeholder="Enter Item number"
+                placeholder="Enter Item Number"
             >
         </div>
-
-
         <div class="col-md-4">
-            <mat-error *ngIf="!validate.getILCIsExist()">This number already occupied</mat-error>
-            <p>ILC number</p>
+            <mat-error *ngIf="!validate.getILCIsExist()">This number is already occupied</mat-error>
+            <p>ILC Number</p>
             <input
                 type="text"
                 [(ngModel)]="inventory.ilc"
                 (blur)="onCheckILC()"
-                placeholder="Enter ILC number"
+                placeholder="Enter ILC Number"
             >
         </div>
-
-
         <div class="col-md-4">
-            <p>GL number</p>
+            <p>GL Number</p>
             <app-select-search
                 [class]="['light-dropdown']"
                 [list]="glNumbers"
@@ -54,11 +43,7 @@
                 (onAddItem)="onAddGlNumber($event)"
                 (onSelectedItem)="onSelectGlNumbers($event)"
             ></app-select-search>
-
-
         </div>
-
-
         <div class="col-md-12">
             <mat-error *ngIf="!validate.getDescription()">Description is required</mat-error>
             <p>Description</p>
@@ -67,16 +52,12 @@
                     appTextArea
                     [limit]="160"
                     id="inventory-description"
-                    placeholder="Write Description"
+                    placeholder="Write Product Description"
                     (input)="onChangeDescription($event)"
                     (onPast)="onPastDescription($event)"
                 ></textarea>
             </div>
-
-
         </div>
-
-
         <app-taxes (taxesChange)="onTaxesChange($event)"></app-taxes>
         <div
             class="col-md-6"
@@ -96,8 +77,6 @@
                 placeholder="Enter Cost"
             >
         </div>
-
-
         <div class="col-md-3">
             <mat-error *ngIf="!validate.getSale()">Price is required</mat-error>
             <p>Price</p>
@@ -111,26 +90,26 @@
                 placeholder="Enter Price"
             >
         </div>
-
-
         <div class="col-md-12">
             <mat-error *ngIf="!validate.getCategory()">Category is required</mat-error>
-            <p>Category</p>
-            <app-select-search
-                [class]="['light-dropdown']"
-                [list]="categories"
+            <app-drop-down
                 #categoriesSelect
-                [field]="'name'"
+                [class]="['light-dropdown', 'qt-select-input-40']"
                 [placeholder]="'Select Category'"
+                [validate]="validate.getCategory()"
+                [errorMessage]="'Category is required'"
+                [title]="'Category'"
+                [field]="'name'"
                 [add]="true"
+                [list]="categories"
+                [search]="true"
+                [change]="true"
                 [editItem]="inventory.category"
                 (onAddItem)="onAddCategory($event)"
                 (onSelectedItem)="onSelectCategory($event)"
-            ></app-select-search>
+            >
+            </app-drop-down>
         </div>
-
-
-
         <div class="col-md-12">
             <p>Vendors</p>
             <app-select-search
@@ -138,14 +117,12 @@
                 [list]="vendors"
                 #vendorsSelect
                 [field]="'name'"
-                [placeholder]="'Select Company'"
+                [placeholder]="'Select Vendor'"
                 [editItem]="editVendor"
                 (onSelectedItem)="onSelectVendor($event)"
             ></app-select-search>
         </div>
     </div>
-
-
     <div class="qt-aside-modern__footer">
         <div class="d-f">
             <button

@@ -31,10 +31,8 @@ import { PasswordManagerComponent } from './components/password-manager/password
 import { LeftPanelComponent } from './components/left-panel/left-panel.component';
 import { LeftPanelPasswordManagerComponent } from './components/left-panel/left-panel-password-manager/left-panel-password-manager.component';
 import { MainComponent } from './components/main/main.component';
-import { PasswordRecordsTypesComponent } from './components/left-panel/left-panel-password-manager/password-records-types/password-records-types.component';
 import { PasswordManagerTableComponent } from './components/password-manager/password-manager-table/password-manager-table.component';
 import { PasswoordManagerHeaderComponent } from './components/password-manager/passwoord-manager-header/passwoord-manager-header.component';
-import { ApiPasswordManagerService } from './services/password-manager/api-password-manager.service';
 import { QuotesComponent } from './components/billing/quotes/quotes.component';
 import { UserPipe } from './pipe/user.pipe';
 import { DateFormatPipe } from './pipe/date-format.pipe';
@@ -81,8 +79,6 @@ import { DraftEmailRecipientsComponent } from './components/shared/draft-email/d
 import { LeftPanelTagsComponent } from './components/left-panel/left-panel-companies/left-panel-tags-companies/left-panel-tags-companies.component';
 import { SelectSearchComponent } from './components/shared/select-search/select-search.component';
 import { CompanyPasswordManagerComponent } from './components/company-password-manager/company-password-manager.component';
-import { CompanyPasswoordManagerHeaderComponent } from './components/company-password-manager/passwoord-manager-header/passwoord-manager-header.component';
-import { CompanyPasswordManagerTableComponent } from './components/company-password-manager/password-manager-table/password-manager-table.component';
 import { FilterPipe } from './pipe/filter.pipe';
 import { ClickOtsideDirective } from './directives/click-otside.directive';
 import { SortByPipe } from './pipe/sort-by.pipe';
@@ -402,6 +398,16 @@ import { TechTicketReportComponent } from './components/reports/reports/tech-tic
 import { ModalLockScreenComponent } from './services/modal/modal-lock-screen/modal-lock-screen.component';
 import { HttpInterceptorService } from './services/http/http-interceptor.service';
 import { ModalSessionScreenComponent } from './services/modal/modal-session-screen/modal-session-screen.component';
+import { KeyUpEnterDirective } from './directives/key-up-enter.directive';
+import { InventoryAddCategoryComponent } from './components/inventory/inventory-add-category/inventory-add-category.component';
+import { InventoryHeaderComponent } from './components/inventory/inventory-header/inventory-header.component';
+import { InventoryFilterComponent } from './components/inventory/inventory-header/inventory-filter/inventory-filter.component';
+import { PasswordManagerAddCategoryComponent } from './components/password-manager/password-manager-add-category/password-manager-add-category.component';
+import { PasswordManagerAddAsideComponent } from './components/password-manager/password-manager-add-aside/password-manager-add-aside.component';
+import { PasswoordManagerDevicesUsersComponent } from './components/password-manager/passwoord-manager-devices-users/passwoord-manager-devices-users.component';
+import { PasswoordManagerFiltersComponent } from './components/password-manager/passwoord-manager-header/passwoord-manager-filters/passwoord-manager-filters.component';
+import { PasswordManagerEditLinkedComponent } from './components/password-manager/password-manager-edit-aside/password-manager-edit-linked/password-manager-edit-linked.component';
+import { AfterViewInitDirective } from './directives/after-view-init.directive';
 
 
 
@@ -418,7 +424,6 @@ declare var $: any;
     LeftPanelPasswordManagerComponent,
     MainComponent,
     CompanyPipe,
-    PasswordRecordsTypesComponent,
     PasswordManagerTableComponent,
     PasswoordManagerHeaderComponent,
     UserPipe,
@@ -473,8 +478,6 @@ declare var $: any;
     LeftPanelTagsComponent,
     SelectSearchComponent,
     CompanyPasswordManagerComponent,
-    CompanyPasswoordManagerHeaderComponent,
-    CompanyPasswordManagerTableComponent,
     FilterPipe,
     ClickOtsideDirective,
     SortByPipe,
@@ -773,7 +776,17 @@ declare var $: any;
     TechSalesReportComponent,
     TechTicketReportComponent,
     ModalLockScreenComponent,
-    ModalSessionScreenComponent
+    ModalSessionScreenComponent,
+    KeyUpEnterDirective,
+    InventoryAddCategoryComponent,
+    InventoryHeaderComponent,
+    InventoryFilterComponent,
+    PasswordManagerAddCategoryComponent,
+    PasswordManagerAddAsideComponent,
+    PasswoordManagerDevicesUsersComponent,
+    PasswoordManagerFiltersComponent,
+    PasswordManagerEditLinkedComponent,
+    AfterViewInitDirective
   ],
   imports: [
     BrowserModule,
@@ -878,7 +891,6 @@ declare var $: any;
       useClass: HttpInterceptorService,
       multi: true,
     },
-    ApiPasswordManagerService,
     PermissionDasnboardBillingService
   ],
   bootstrap: [AppComponent]

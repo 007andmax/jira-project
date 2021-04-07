@@ -17,6 +17,7 @@ import { LeftPanelStateService } from './states/left-panel/left-panel-state.serv
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalLockScreenComponent } from './services/modal/modal-lock-screen/modal-lock-screen.component';
 import { ModalSessionScreenComponent } from './services/modal/modal-session-screen/modal-session-screen.component';
+import { PasswordManagerStateService } from './states/password-manager/password-manager-state.service';
 
 
 /**

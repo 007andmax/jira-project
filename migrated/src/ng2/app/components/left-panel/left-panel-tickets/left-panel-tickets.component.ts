@@ -64,6 +64,9 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
       if (this.isTicketsPage(data)) this.open = true;
     })
   }
+  public close() {
+    this.open = false;
+  }
   isTicketsPage(state) {
     return (state === 'new-tickets'
       || state === 'new-tickets-dashboard'

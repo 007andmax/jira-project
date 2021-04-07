@@ -15,6 +15,8 @@ export class TicketProfileUpdatesServiceDurationComponent implements OnInit {
     @Input() hour: number = 0;
     @Input() minute: number = 0;
     @Input() editMode: boolean = false;
+    @Input() validate: boolean = true;
+    @Input() errorMessage: string = "";
     step = 1;
 
     constructor(@Inject(DOCUMENT) private document: Document,

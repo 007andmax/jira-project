@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { PasswordManagerService } from "../../../services/password-manager/password-manager.service";
 import { PermissionsService } from "../../../services/permissions/permissions.service";
-import {ApiPasswordManagerService} from "../../../services/password-manager/api-password-manager.service";
+import { Subscription } from 'rxjs';
+import { PasswordRecord } from '../class/password-record';
 
 /**
  * Password manager header component
@@ -12,44 +12,61 @@ import {ApiPasswordManagerService} from "../../../services/password-manager/api-
   templateUrl: './passwoord-manager-header.component.html',
   styleUrls: ['./passwoord-manager-header.component.scss']
 })
-export class PasswoordManagerHeaderComponent implements OnInit {
-
+export class PasswoordManagerHeaderComponent implements OnInit, OnDestroy {
+  toggleFilter: boolean = true;
+  countFilter: number = 0;
+  @Output() onChangeFilterField = new EventEmitter<any>();
+  @Output() onSelectAll = new EventEmitter<any>();
+  @Output() onSearch = new EventEmitter<any>();
+  @Input() selectAll: boolean = false;
+  @Input() recordsData: Array<PasswordRecord> = [];
+  @Input() disabledCompany: boolean = false;
+  sub: Subscription = new Subscription();
+  searchText: string = "";
   /**
    * Creates an instance of the PasswordManagerComponent with the injected services
-   * @param {ApiPasswordManagerService} apiPasswordManagerService Service to work with api
-   * @param {PasswordManagerService} passwordManagerService Service to work with filters
+    * @param {PasswordManagerService} passwordManagerService Service to work with filters
    * @param {permissionsService} permissionsService to work with permissions service
    */
   constructor(
     private passwordManagerService: PasswordManagerService,
     private permissionsService: PermissionsService,
-    private apiPasswordManagerService: ApiPasswordManagerService
   ) { }
 
   /**
    * Initializes Password manager header. See [ngOnInit]{@see OnInit#ngOnInit}
    */
-  ngOnInit() {}
+  ngOnInit() {
 
-  /**
-   * add new record event
-   */
-  public addRecord() {
-    this.passwordManagerService.onAddRecord();
   }
-
-  /**
-   * getPermission
-   */
+  clearSearch() {
+    this.searchText = "";
+    this.onSearch.emit("");
+  }
+  toggleAll(data) {
+    this.selectAll = true;
+    this.onSelectAll.emit(data);
+  }
+  public onFilter(field) {
+    this.onChangeFilterField.emit(field);
+  }
+  search(event) {
+    this.onSearch.emit(event.target.value);
+  }
+  public addRecord() {
+    this.passwordManagerService.showAddForm();
+  }
+  onChangeCountFilter(data) {
+    this.countFilter = data;
+  }
+  getSelectedCount() {
+    return this.recordsData.filter(item => item.selected).length;
+  }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
   }
-
-  /**
-   * destroy password manager header component
-   */
   ngOnDestroy() {
-    this.apiPasswordManagerService.deleteSubscription();
+    this.sub.unsubscribe();
   }
 
 }

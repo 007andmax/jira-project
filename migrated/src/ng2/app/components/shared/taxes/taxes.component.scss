@@ -1,7 +1,8 @@
 .dropdown-menu {
   transform: translate(0, 0) !important;
   top: auto !important;
-  left: 17px !important;
+  //left: 17px !important;
+  left: 0 !important;
   width: 230px;
 }
 .add-tax {
@@ -85,10 +86,10 @@
 .new-taxes-area {
   margin-top: 20px !important;
 
-  .report-caret-icon {
-      top: 40px !important;
-      right: 25px;
-  }
+  //.report-caret-icon {
+  //    top: 40px !important;
+  //    right: 25px;
+  //}
 
   .dropdown-menu {
     width: calc(100% - 30px);
@@ -118,13 +119,14 @@
   }
 }
 
- .submit-tax-item {
-    margin-right: 12px;
-    width: auto !important;
-  }
+.submit-tax-item {
+  margin-right: 12px;
+  width: auto !important;
+}
 
-  .cancel-tax-item, .cancel-tax-item:hover {
-    width: auto !important;
-    background-color: #edf2f6 !important;
-    color: #4f5f79 !important
-  }
+.cancel-tax-item, .cancel-tax-item:hover {
+  width: auto !important;
+  background-color: #edf2f6 !important;
+  color: #4f5f79 !important
+}
+

@@ -1,11 +1,13 @@
-import { Component, Input, OnInit, ChangeDetectorRef, OnChanges } from '@angular/core';
-import { Subject } from "rxjs";
-import { ISubscription } from "rxjs/Subscription";
-
-import { ApiPasswordManagerService } from "../../../services/password-manager/api-password-manager.service";
+import { Component, Input, OnInit, ChangeDetectorRef, OnChanges, Output, EventEmitter } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { REMOVE_RECORD } from 'src/ng2/app/const/confirm';
+import { PasswordManagerStateService } from 'src/ng2/app/states/password-manager/password-manager-state.service';
 import { PasswordManagerService } from "../../../services/password-manager/password-manager.service";
 import { PermissionsService } from "../../../services/permissions/permissions.service";
-import { FilterPasswordManager } from '../class/filter-password-manager';
+import { ConfirmComponent } from '../../shared/confirm/confirm.component';
+import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
+import { PasswordRecord } from '../class/password-record';
+import { PasswordRecordCategories } from '../class/password-record-categories';
 
 /**
  * Password manager data table component
@@ -13,204 +15,77 @@ import { FilterPasswordManager } from '../class/filter-password-manager';
 @Component({
   selector: 'app-password-manager-table',
   templateUrl: './password-manager-table.component.html',
-  styleUrls: ['./password-manager-table.component.scss']
+  styleUrls: ['./password-manager-table.component.scss'],
+
 })
 export class PasswordManagerTableComponent implements OnInit {
-
-
-  @Input() selectedCompany: any;
-  @Input() selectedUserOrDevice: any;
-  @Input() selectedDate: any;
-  @Input() selectedCategory: any;
-  @Input() addNewRecords: Subject<boolean>;
-  @Input() showDataTable: Subject<boolean>;
-  private subGetRecords: ISubscription;
-  private subAddNewRecords: ISubscription;
-  public recordsData: any = [];
-  public list_records = [];
-  public sort: string = 'companyName';
-  public direction: string = null;
-  // public filter: FilterPasswordManager = new FilterPasswordManager();
-
-
-  /**
-   * Creates an instance of the PasswordManagerTableComponent with the injected services
-   * @param {ApiPasswordManagerService} apiPasswordManagerService Service to work with api
-   * @param {PasswordManagerService} passwordManagerService Service to work with filters
-   * @param {permissionsService} permissionsService to work with permissions service
-   */
-  constructor(
-    private apiPasswordManagerService: ApiPasswordManagerService,
+  @Input() item: PasswordRecord;
+  @Output() onSelectRecord = new EventEmitter<any>();
+  togglePassword: boolean = false;
+  categories: Array<PasswordRecordCategories> = [];
+  constructor(private permissionsService: PermissionsService,
+    private confirmStateService: ConfirmStateService,
+    private modalService: NgbModal,
+    private passwordManagerStateService: PasswordManagerStateService,
     private passwordManagerService: PasswordManagerService,
-    private permissionsService: PermissionsService,
-    public cd: ChangeDetectorRef,
-  ) { }
+    public cd: ChangeDetectorRef,) { }
 
-  /**
-   * Initializes Password manager data table. See [ngOnInit]{@see OnInit#ngOnInit}
-   */
   ngOnInit() {
-    this.getRecords();
-    this.getSelectedCategory();
-    this.subAddNewRecords = this.addNewRecords.subscribe(v => {
-      this.apiPasswordManagerService.getRecords();
-    });
-    this.watchDeleteRecord();
-    this.onSort();
-
-    //   this.filter.company = (this.selectedCompany) ? JSON.parse(JSON.stringify(this.selectedCompany)) : null;;
-    //    this.filter.user = this.selectedUserOrDevice;
-    //   this.filter.dateFormat = this.selectedDate;
-    //  this.filter.passwordCategory = JSON.parse(JSON.stringify(this.selectedCategory));
-  }
-  ngDoCheck() {
-
-    // this.filter.company = (this.selectedCompany) ? JSON.parse(JSON.stringify(this.selectedCompany)) : null;
-
-    /*  this.filter.user = this.selectedUserOrDevice;
-      this.filter.dateFormat = this.selectedDate;
-      this.filter.passwordCategory = this.selectedCategory;*/
-
-    this.filterList();
-  }
-  private filterList() {
-
-    this.list_records = this.recordsData.filter((item) => {
-
-      if (this.selectedCompany && this.selectedCompany.companyId.length > 0 && item.companyId !== this.selectedCompany.companyId) return false;
-      if (this.selectedDate && item.expiredDate !== this.selectedDate) return false;
-      if (this.selectedUserOrDevice && this.selectedUserOrDevice.id) {
-        let find = false;
-        item.links.forEach(link => {
-          if (link.userId && link.userId == this.selectedUserOrDevice.id) find = true;
-          if (link.deviceId && link.deviceId == this.selectedUserOrDevice.id) find = true;
-        });
-        if (!find) return false;
-      }
-      if (this.selectedCategory && item.template !== this.selectedCategory.UPPERCASE) return false;
-      return true;
-    }).sort((a, b) => (a.companyName.toLowerCase() > b.companyName.toLowerCase()) ?
-      1 : ((b.companyName.toLowerCase() > a.companyName.toLowerCase()) ? -1 : 0));
-
-  }
-  private onChangeRealtTime() {
-    this.passwordManagerService.onChangeRealTime.subscribe(newChange => {
-
-      if (newChange.action === 'PASSWORD_RECORD_CREATED') {
-        this.recordsData.push(newChange.data);
-      } else if (newChange.action === 'PASSWORD_RECORD_UPDATED') {
-        let index = this.recordsData.findIndex(item => item.id === newChange.data.id);
-        if (index > -1) this.recordsData[index] = newChange.data;
-
-      } else if (newChange.action === 'PASSWORD_RECORD_DELETED') {
-        let index = this.recordsData.findIndex(item => item.id === newChange.data.id);
-
-        if (index > -1) this.recordsData.splice(index, 1);
-
-      }
-      this.filterList();
-      if (!this.cd['destroyed']) {
-        this.cd.detectChanges();
-      }
+    this.categories = this.passwordManagerStateService.getCategories();
+    this.passwordManagerStateService.onGetCategories.subscribe((data: Array<PasswordRecordCategories>) => {
+      this.categories = data;
     })
   }
-
-  private onSort() {
-    this.passwordManagerService.getOnSort().subscribe((data) => {
-
-      this.sort = data.sort;
-      this.direction = data.direction;
-
-      //  this.cd.detectChanges();
+  selectRecord(event) {
+    this.onSelectRecord.emit(this.item);
+    this.cd.detectChanges();
+  }
+  showPassword() {
+    this.passwordManagerService.setOpenRecord(this.item.id).subscribe((data: any) => {
+      this.item.setPassword(data.password);
+      this.togglePassword = true;
     })
   }
-
-  /**
-   * Get selected category
-   */
-  public getSelectedCategory() {
-    this.passwordManagerService.emitSelectedCategory.subscribe((category) => {
-
-      this.selectedCategory = category;
-
-      // this.filter.passwordCategory = JSON.parse(JSON.stringify(category));
-      if (!this.cd['destroyed']) {
-        this.cd.detectChanges();
-      }
-    });
-  }
-
-  /**
-   * Get records list
-   */
-  public getRecords() {
-    this.subGetRecords = this.apiPasswordManagerService.dataChange.subscribe((res) => {
-      this.recordsData = res;
-      this.onChangeRealtTime();
-      this.cd.detectChanges();
-    });
-  }
-
-  /**
-   * delete record from list
-   */
-  public deleteRecord(recordId) {
-    if (this.permissionsService.isAllowed('DELETE_PASSWORD')) {
-      this.apiPasswordManagerService.deleteRecord(recordId).subscribe((res) => {
-        //  this.passwordManagerService.deleteRecord(recordId);
-        //    return this.recordsData = this.recordsData.filter((item) => item.id !== recordId);
-      });
+  copy(value) {
+    let textArea: any = document.createElement("textarea");
+    textArea.style.opacity = 0;
+    textArea.value = value
+    document.body.appendChild(textArea);
+    textArea.select();
+    try {
+      let successful = document.execCommand('copy');
+    } catch (err) {
+      //  UserNotificationService.show('Copy failed', true);
     }
+    document.body.removeChild(textArea);
   }
-
-  /**
-   * subscription for deleting records
-   */
-  public watchDeleteRecord() {
-    this.passwordManagerService.deleteItemEditForm.subscribe((item) => {
-      return this.deleteRecord(item);
-    });
-  }
-
-  /**
-   * edit record
-   * @param item - item for edit
-   */
-  public editRecord(item) {
-    let index = this.recordsData.findIndex(record => record.id === item.id);
-    if (this.permissionsService.isAllowed('VIEW_PASSWORD')) {
-      this.passwordManagerService.onEditRecord(this.recordsData[index]);
-    }
-  }
-
-  /**
-   * get record type class
-   * @param type - record type
-   */
-  public getRecordTypeClass(type) {
-    return type.toLowerCase();
-  }
-
-  /**
-   * getPermission
-   * @param action - permission type
-   */
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
   }
-
-  public trackById(index, item) {
-    return item.id;
+  isExpired() {
+    let current = new Date().getTime();
+    let expired = new Date(this.item.expiredDate).getTime();
+    return expired < current;
   }
-
-  /**
-   * destroy password manager data table component
-   */
-  ngOnDestroy() {
-    this.subGetRecords.unsubscribe();
-    this.subAddNewRecords.unsubscribe();
-    this.apiPasswordManagerService.deleteSubscription();
+  isExpiredLess30() {
+    let current = new Date().getTime();
+    let expired = new Date(this.item.expiredDate).getTime();
+    let day = (expired - current) / 86400000;
+    return day <= 30;
   }
-
-
+  deleteRecord() {
+    this.confirmStateService.setConfirmAction(REMOVE_RECORD);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    modalRef.componentInstance.message = `Are you sure you want to delete the password record?`;
+    this.passwordManagerStateService.setRecordForRemove(this.item);
+  }
+  public editRecord() {
+    if (this.getPermissions('VIEW_PASSWORD')) this.passwordManagerService.showEditFrom(this.item);
+  }
+  parseExpiredDate() {
+    let current = new Date().getTime();
+    let expired = new Date(this.item.expiredDate).getTime();
+    let day = (expired - current) / 86400000;
+    return `${Math.round(day)} days to expire`;
+  }
 }

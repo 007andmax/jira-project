@@ -1,6 +1,7 @@
 /**
  * Password records type
  */
+
 export const PASSWORD_RECORD_TYPES = [
   {
     TITLE: 'Office 365 Account',
@@ -42,8 +43,7 @@ export const PASSWORD_RECORD_TYPES = [
     TITLE: 'Clear',
     UPPERCASE: 'CLEAR'
   }
-  ];
-
+];
 export enum PASSWORD_RECORD_TYPES_ENUM {
   OFFICE_365_ACCOUNT,
   MICROSOFT_ACCOUNT,

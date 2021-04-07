@@ -31,6 +31,7 @@
 .icn-calendar-light {
   background: url("assets/img/calendar-light.png");
 }
+
 .icn-attach {
   background: url("assets/img/attachment-blue.svg");
 }
@@ -76,6 +77,9 @@
 
 .edit-grey-ng2 {
   background: url("assets/img/icons/edit-grey-ng2.png");
+}
+.convert-to-billable-ng2 {
+  background: url("assets/img/icons/billable.svg");
 }
 
 .send-grey-ng2 {
@@ -196,12 +200,27 @@
  &__devices {
    background-image: url("assets/img/icons/devices.svg");
  }
+ &__devices-grey {
+   background-image: url("assets/img/icons/devices-grey.svg");
+ }
+ &__office-account {
+  background-image: url("assets/img/icons/office-account.svg");
+ }
+  &__custom-category {
+  background-image: url("assets/img/icons/custom-category.svg");
+ }
+ &__generic {
+   background-image: url("assets/img/icons/generic.svg");
+ }
  &__panel-open {
    background-image: url("assets/img/icons/panel-open.svg");
  }
  &__users {
    background-image: url("assets/img/icons/users.svg");
  }
+  &__user-account {
+    background-image: url("assets/img/icons/local-user-account.svg");
+  }
  &__get-direction {
     background-image: url("assets/img/icons/get-direction.svg");
  }
@@ -216,6 +235,9 @@
   }
   &__expand{
     background-image: url("assets/img/icons/expand.svg");
+  }
+  &__export-dark {
+    background-image: url("assets/img/icons/export-dark.svg");
   }
   &__plus-white {
     background-image: url("assets/img/icons/plus-white.svg");
@@ -243,6 +265,21 @@
   }
   &__email-dark {
     background-image: url("assets/img/icons/email-dark.svg");
+  }
+  &__view {
+    background-image: url("assets/img/icons/view.svg");
+  }
+  &__hide {
+    background-image: url("assets/img/icons/hide.svg");
+  }
+  &__calendar {
+    background-image: url("assets/img/icons/calander.svg");
+  }
+  &__user-grey {
+    background-image: url("assets/img/icons/user-grey.svg");
+  }
+  &__payment-received {
+    background-image: url("assets/img/icons/payment-received.svg");
   }
   &__convert-ticket {
     background-image: url("assets/img/icons/convert-ticket.svg");
@@ -316,6 +353,9 @@
   &__print {
     background-image: url('assets/img/icons/print.svg');
   }
+  &__print-blue {
+    background-image: url('assets/img/icons/print-blue.svg');
+  }
   &__email-dark {
     background-image: url('assets/img/icons/email-dark.svg');
   }
@@ -335,11 +375,9 @@
   &__faster-payment {
     background-image: url("assets/img/icons/faster-payment.svg");
   }
-
-  &__email-dark {
-    background-image: url("assets/img/icons/email-dark.svg");
+  &__email {
+    background-image: url("assets/img/icons/email.svg");
   }
-
   &__check {
     background-image: url("assets/img/icons/check.png");
   }
@@ -477,6 +515,9 @@
   &__master-agent-badge {
     background-image: url('assets/img/icons/master-agent-badge.svg');
   }
+  &__agent {
+    background-image: url('assets/img/icons/agent.svg');
+  }
   &__quick-connect {
     background-image: url('assets/img/icons/quick-connect.svg');
   }
@@ -488,6 +529,15 @@
   }
   &__software {
     background-image: url('assets/img/icons/software.svg');
+  }
+  &__wifi {
+    background-image: url('assets/img/icons/wifi-network.svg');
+  }
+  &__microsoft {
+    background-image: url('assets/img/icons/microsoft.svg');
+  }
+   &__hosting {
+    background-image: url('assets/img/icons/hosting.svg');
   }
   &__system {
     background-image: url('assets/img/icons/system.svg');

@@ -39,6 +39,9 @@ export class LeftPanelSettingsComponent implements OnInit {
       if (this.isSettingsPage(data)) this.open = true;
     })
   }
+  public close() {
+    this.open = false;
+  }
   public isSettingsPage(state) {
     return (state === 'myprofile-component'
       || state === 'manage-tags-component'

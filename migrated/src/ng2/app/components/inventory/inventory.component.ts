@@ -35,17 +35,19 @@ export class InventoryComponent implements OnInit {
   productSearchName: string = '';
   sub: Subscription = new Subscription();
   taxes: Array<Tax> = [];
-  constructor(private productService: ProductService, private inventoryListService: InventoryListService,
+
+  constructor(private productService: ProductService,
+    private inventoryListService: InventoryListService,
     private companiesStateService: CompaniesStateService,
     private taxesStateService: TaxesStateService,
     private glNumberStateService: GlNumberStateService,
     private inventoryStateService: InventoryStateService,
     private permissionsService: PermissionsService,
     private confirmStateService: ConfirmStateService,
-    public cd: ChangeDetectorRef, ) { }
+    public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
     if (this.companiesStateService.getCompanies().length > 0) this.companies = this.companiesStateService.getCompanies();
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.companies = data;
@@ -69,7 +71,7 @@ export class InventoryComponent implements OnInit {
     })
     this.sub.add(getConfirm);
     let getOnSortCategory = this.inventoryStateService.getOnSortCategory().subscribe(data => {
-      window.scrollTo(0,0);
+      window.scrollTo(0, 0);
       this.sortCategoty = data;
       this.page_number = 0;
       this.inventoryListService.setBlockList(false);
@@ -78,7 +80,7 @@ export class InventoryComponent implements OnInit {
     })
     this.sub.add(getOnSortCategory);
     let getChangeProducts = this.inventoryStateService.getChangeProducts().subscribe((data: InventoryChange) => {
-    
+
       if (data.action === 'PRODUCT_SAVED') {
         const reqIndex = this.reqInventoryList.findIndex((item) => item.versionedId.id === data.data.versionedId.id);
         const Index = this.inventoryList.findIndex((item) => item.versionedId.id === data.data.versionedId.id);
@@ -86,14 +88,14 @@ export class InventoryComponent implements OnInit {
         if (reqIndex === -1) this.reqInventoryList.push(new InventoryItem(data.data));
         if (Index > -1) {
           this.inventoryList[Index] = new InventoryItem(data.data);
-         }
+        }
         if (Index === -1) {
           this.inventoryList.push(new InventoryItem(data.data));
           this.inventoryList = this.inventoryList.filter(item => (this.sortCategoty) ? item.category.id === this.sortCategoty.id : (!this.sortCategoty) ? true : false);
           this.inventoryList = this.inventoryList.filter(item => (this.productSearchName.length > 0) ? item.description.toLowerCase().includes(this.productSearchName.toLowerCase()) : true);
           this.filter.onFilter(this.inventoryList, this.companies, this.glNumbers);
         }
-       
+
       }
       if (data.action === 'PRODUCT_DELETED') {
         const reqIndex = this.reqInventoryList.findIndex((item) => item.versionedId.id === data.data.versionedId.id);
@@ -125,9 +127,7 @@ export class InventoryComponent implements OnInit {
       this.cd.detectChanges();
     });
   }
-  addProduct() {
-    this.inventoryStateService.toggleAsideForAdd();
-  }
+
   getProducts() {
     if (this.inventoryListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
@@ -135,7 +135,7 @@ export class InventoryComponent implements OnInit {
     }
     this.page_number += 1;
     let listFilter = this.reqInventoryList.filter(item => (this.sortCategoty) ? item.category.id === this.sortCategoty.id : (!this.sortCategoty) ? true : false);
-    listFilter = listFilter.filter(item => (this.productSearchName.length > 0) ? item.description.toLowerCase().includes(this.productSearchName.toLowerCase()) : true);
+    listFilter = listFilter.filter(item => (this.productSearchName.length > 0) ? (item.description.toLowerCase().includes(this.productSearchName.toLowerCase()) || item.ilc && item.ilc.toLowerCase().includes(this.productSearchName.toLowerCase()) || item.isFindGlNumber(this.productSearchName) || item.manufacture && item.manufacture.toLowerCase().includes(this.productSearchName.toLowerCase())) : true);
     this.filter.onFilter(listFilter, this.companies, this.glNumbers);
     let start = (this.page_number - 1) * 30;
     let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;
@@ -148,7 +148,8 @@ export class InventoryComponent implements OnInit {
     if ((this.page_number * 30) > listFilter.length) this.inventoryListService.setBlockList(true);
     this.cd.detectChanges();
   }
-  onSearch() {
+  onSearch(data) {
+    this.productSearchName = data;
     this.page_number = 0;
     this.inventoryListService.setBlockList(false);
     this.inventoryList = [];
