@@ -152,17 +152,19 @@
             ></app-select-search>
         </div>
     </div>
-    <div class="create-product__col --required">
-        <div>
-            <label class="checkbox-container">
-                Set product as active
-                <input
-                    type="checkbox"
-                    [(ngModel)]="inventory.active"
-                >
-                <span class="checkbox-mark"></span>
-            </label>
-        </div>
+    <div class="create-product__col qt-df qt-ai-c">
+        <label
+            class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
+            for="inventory-active"
+        >
+            <input
+                id="inventory-active"
+                type="checkbox"
+                [(ngModel)]="inventory.active"
+            >
+            <span></span>
+        </label>
+        <div class="qt-fs-12 qt-ml-5">Set product as active</div>
     </div>
 </div>
 <div class="qt-aside-modern__footer">
