@@ -1,1306 +1,1306 @@
-.ticket-update {
-  margin: 0 30px 30px;
-}
-
-.ticket-update-header {
-  padding: 0 30px 20px 30px;
-  border-bottom: 1px solid #e9edf1;
-}
-
-.ticket-update-header h4 {
-  float: left;
-  font-weight: 400;
-  font-size: 17px;
-  margin: 8px 0px;
-}
-
-.ticket-update-header h4 .light-cl {
-  color: #94a4b8;
-}
-
-.ticket-update-header h4 span.ticket-update-title {
-  margin-top: 1px;
-}
-
-.ticket-update-header h4 .label {
-  margin-top: 1px;
-  margin-left: 10px;
-  font-weight: normal;
-  color: #94a4b8;
-  background-color: #e7ecf2;
-  -webkit-transition: border-radius 0.3s ease-out;
-  -moz-transition: border-radius 0.3s ease-out;
-  -o-transition: border-radius 0.3s ease-out;
-  -ms-ransition: border-radius 0.3s ease-out;
-  transition: border-radius 0.3s ease-out;
-}
-
-.ticket-update-header h4 .label:hover {
-  border-radius: 3px;
-}
-
-.static-wysiwyg .wysiwyg-controls-wrapper {
-  left: 0 !important;
-  /* bottom: 0 !important; */
-  top: auto !important;
-  /* transform: translateY(-50%); */
-  /* width: 100% !important; */
-}
-
-.ticket-updates .btn-load-more {
-  margin: 20px auto 0 auto;
-  display: block;
-  width: 200px;
-}
-
-.ticket-update-header .shared-users-list {
-  margin: 10px 20px 0 30px;
-  padding: 0px;
-  list-style: none;
-}
-
-.ticket-update-header .shared-users-list > li {
-  margin-right: 10px;
-  margin-top: 10px;
-  float: left;
-  position: relative;
-}
-
-.ticket-update-header .shared-users-list > li .avatar:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(21, 30, 41, .6);
-  border-radius: 50%;
-  display: none;
-}
-
-.ticket-update-header .shared-users-list > li .avatar:hover:after {
-  display: block;
-}
-
-.ticket-updates-wrapper {
-  position: relative;
-  margin-bottom: 530px;
-  font-size: 13px;
-}
-
-.ticket-updates-wrapper p {
-  font-size: 13px;
-}
-
-.ticket-update-avatar {
-  display: flex;
-  align-items: center;
-  position: relative;
-}
-
-.ticket-update-avatar a {
-  position: absolute;
-  right: 0;
-}
-
-.ticket-update-avatar .icon-update {
-  margin-top: 21px;
-  margin-left: 13px;
-}
-
-.ticket-update-content .updater-name {
-  display: flex;
-  white-space: nowrap;
-}
-
-.ticket-update-content .updater-name span {
-  font-weight: normal;
-}
-
-.updater-name a.hit-area {
-  margin-top: 2px;
-  margin-right: -2px;
-}
-
-.ticket-update-content .ticket-update-message {
-  float: left;
-  width: 98%;
-  margin-top: 4px;
-  color: #748498;
-  line-height: 20px;
-  margin-bottom: 5px;
-}
-
-.ticket-update-meta {
-  float: left;
-  width: 100%;
-  margin-top: 10px;
-}
-
-.ticket-update-meta .ticket-meta-wrapper {
-  display: flex;
-  align-items: center;
-}
-
-.ticket-meta-wrapper .default-user-avatar {
-  width: 24px;
-  height: 24px;
-  font-size: 10px;
-}
-
-.icn-delete-final {
-  background-image: url(../images/new-icons/remove-final.png);
-  width: 16px;
-  height: 16px;
-}
-
-.edit-icon-final {
-  background-image: url(../images/new-icons/edit-final.png);
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-}
-
-.ticket-update-content .ticket-update-message {
-  margin: 0;
-  padding: 5px;
-  border: 1px solid transparent;
-  border-radius: 4px;
-}
-
-.ticket-update-content .ticket-update-message.editing {
-  border: 1px solid #9ca5b6;
-}
-
-.ticket-update-content .updater-name a {
-  margin-left: 10px;
-}
-
-.ticket-update-meta .avatar {
-  position: relative;
-  margin-left: 10px;
-}
-
-.ticket-update-content .ticket-update-meta .avatar:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background-color: rgba(21, 30, 41, .6);
-  display: none;
-}
-
-.ticket-update-content .ticket-update-meta .avatar:hover:after {
-  display: block;
-}
-
-.ticket-update-meta span.update-timestamp {
-  margin-top: 7px;
-  margin-right: 10px;
-  font-size: 11px;
-  line-height: 12px;
-  text-transform: uppercase;
-  color: #94a4b8;
-}
-
-.ticket-update-content .dot-sep {
-  margin: 2px 10px;
-}
-
-.ticket-update-meta .avatar-tooltip .tooltip-inner, .shared-users-list li:not(:last-child) .tooltip-inner {
-  padding: 18px 20px;
-  text-align: left;
-  line-height: 12px;
-  white-space: nowrap;
-}
-
-.ticket-update-meta .tooltip-name, .shared-users-list .tooltip-name {
-  color: #ffffff;
-  line-height: 12px;
-}
-
-.ticket-update-meta .tooltip-designation, .shared-users-list .tooltip-designation {
-  color: #94a4b8;
-  font-weight: normal;
-  text-transform: none;
-}
-
-.shared-with {
-  position: relative;
-  cursor: pointer;
-}
-
-.tooltip-users {
-  min-width: 146px;
-}
-
-.tooltip-users .tooltip-inner {
-  height: 132px;
-  margin: 0;
-  padding: 18px 20px;
-  text-align: left;
-  list-style: none;
-}
-
-.tooltip-users .tooltip-inner > li + li {
-  margin-top: 12px;
-}
-
-.tooltip-users .tooltip-inner > li.more-users span {
-  margin-left: 0;
-}
-
-.tooltip-users .tooltip-inner > li > span {
-  display: block;
-}
-
-.tooltip-users .tooltip-inner > li > span.username {
-  color: #ffffff;
-}
-
-.tooltip-users .tooltip-inner > li > span.usertitle {
-  font-weight: normal;
-  color: #94a4b8;
-  text-transform: none;
-}
-
-.ticket-update-content {
-  /*width: calc(100% - 48px);*/
-  padding: 10px 0;
-  /*border-bottom: 1px solid #e7ecf2;*/
-  position: relative;
-}
-
-.ticket-update:last-child .ticket-update-content {
-  border-bottom: none;
-}
-
-.ticket-update-content .ticket-update-meta .btn-more-users {
-  position: relative;
-  margin: 0 0 0 10px;
-  padding: 7px 12px;
-  border-radius: 13px;
-  text-transform: uppercase;
-  cursor: pointer;
-  -webkit-transition: border-radius 0.3s ease-out;
-  -moz-transition: border-radius 0.3s ease-out;
-  -o-transition: border-radius 0.3s ease-out;
-  -ms-ransition: border-radius 0.3s ease-out;
-  transition: border-radius 0.3s ease-out;
-}
-
-.date-picker-icon-ui {
-  position: absolute !important;
-  top: 0px;
-  left: 0px;
-  opacity: 0;
-}
-
-.modal-ticket-edit-mask {
-  display: block;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, .6);
-  z-index: 998;
-  position: fixed;
-}
-
-.modal-ticket-edit-datepicker {
-  display: block;
-  top: 10%;
-  left: 10%;
-  background-color: #ffffff;
-  z-index: 999;
-  position: fixed;
-  width: 50%;
-  height: 50%;
-}
-
-.modal-ticket-edit-user {
-  display: block;
-  top: 40%;
-  left: 0;
-  background-color: #ffffff;
-  z-index: 999;
-  position: fixed;
-  width: 100%;
-  height: 40%;
-}
-
-@-moz-document url-prefix() {
-  .ticket-update-content .ticket-update-meta .btn-more-users {
-    padding: 7px 12px 8px;
-    margin-top: 1px;
-  }
-}
-
-.ticket-update-content .ticket-update-meta .btn-more-users:hover {
-  border-radius: 3px;
-}
-
-.added-users-wrapper {
-  flex: 1;
-}
-
-.users-added-to-update {
-  margin-top: -10px;
-  max-width: 100%;
-  margin-left: -180px;
-}
-
-.users-added-to-update .avatar {
-  margin-top: 10px;
-}
-
-.users-added-to-update .avatar:first-child {
-  margin-left: 190px;
-}
-
-.users-added-to-update .btn {
-  min-width: 26px;
-  height: 26px;
-  margin-top: 10px;
-  margin-left: 10px;
-}
-
-.table-wrapper {
-  float: left;
-  width: 100%;
-}
-
-.table-wrapper + .table-wrapper {
-  margin-top: 0;
-}
-
-.qt-list .table-wrapper {
-  margin-top: 0px;
-  margin-bottom: 21px;
-}
-
-.inventory-details .table-wrapper {
-  margin-top: 25px;
-  margin-bottom: 0;
-  padding-bottom: 30px;
-  cursor: auto;
-}
-
-.table-wrapper .table-content {
-  /*width: calc(100% - 30px);*/
-  margin: 0;
-  padding: 0;
-  position: relative;
-  list-style: none;
-  color: #4f5f79;
-  /*background-color: #f6f8fa;*/
-}
-
-.table-wrapper .table-content + .table-content {
-  margin-top: 10px;
-}
-
-.table-wrapper:last-child .table-content {
-  margin-bottom: 10px;
-}
-
-.qt-list .table-wrapper .table-content {
-  cursor: auto;
-  width: calc(100% - 26px);
-}
-
-.qt-invoices .sub-wrapper .table-wrapper .table-content {
-  width: calc(100% - 88px);
-  margin-left: 24px;
-  margin-bottom: 0;
-  margin-top: 10px;
-}
-
-.qt-invoices .sub-wrapper .table-wrapper .table-content:first-child {
-  margin-top: 0;
-}
-
-.qt-invoices .sub-wrapper .table-wrapper .table-content:last-child {
-  margin-bottom: 5px;
-}
-
-.qt-list .table-wrapper .table-content > i {
-  position: absolute;
-  left: -25px;
-  top: 20px;
-}
-
-.qt-invoices .sub-wrapper .table-wrapper .table-content .ha-edit {
-  position: absolute;
-  right: -33px;
-  top: 16px;
-}
-
-.qt-invoices .sub-wrapper .table-wrapper .table-content .ha-delete {
-  position: absolute;
-  right: -65px;
-  top: 16px;
-}
-
-/*.table-wrapper .table-content .model{*/
-/*padding-left: 7px;*/
-/*}*/
-.table-wrapper .table-content [class^="col-"] {
-  padding: 5px;
-  height: auto;
-  border-right: 0;
-  /*overflow: hidden;*/
-}
-
-.table-wrapper .table-content .table-content-top [class^="col-"] {
-  line-height: 0;
-  white-space: nowrap;
-}
-
-.table-wrapper .table-content .table-content-top > a {
-  position: absolute;
-  right: 0;
-  bottom: 7px;
-}
-
-.table-wrapper .table-content .form-group {
-  margin-bottom: 0;
-}
-
-.qt-recurring-invoices .table-wrapper .table-content .col-sm-4 {
-  width: 20.333333%;
-  height: auto;
-}
-
-.qt-recurring-invoices .table-wrapper .table-content .col-3 {
-  width: 13%;
-}
-
-.table-wrapper .table-content .col-1 {
-  width: 163px;
-  float: left;
-  border: 0;
-}
-
-.table-wrapper .table-content .description:hover {
-  background-color: #e7ecf2;
-}
-
-.table-wrapper .service-table .service-datetimepicker .bootstrap-datetimepicker-widget {
-  left: 0 !important;
-  top: calc(100% + 1px);
-}
-
-.table-wrapper .service-table .col-1 {
-  width: 114px;
-}
-
-.table-wrapper .service-table .col-md-1 {
-  width: 11.1%;
-}
-
-.table-wrapper .table-content .col-2 {
-  width: calc(100% - 400px);
-  float: left;
-}
-
-.table-wrapper .table-content .col-2.col-2-has-serial-number {
-  width: 64%;
-  float: left;
-}
-
-.table-wrapper .table-content .col-2.col-2-has-serial-number.has-ilc-pn {
-  line-height: 40px;
-}
-
-.qt-recurring-invoices .table-wrapper .table-content .col-2 {
-  width: calc(100% - 563px);
-  float: left;
-}
-
-.qt-recurring-invoices .table-wrapper.invoice-srvs-list .table-content .col-2 {
-  width: calc(100% - 400px);
-  float: left;
-}
-
-.qt-recurring-invoices .table-wrapper .table-content .col-2.col-2-has-serial-number {
-  /*new*/
-  width: calc(60% - 326px);
-  float: left;
-}
-
-.table-wrapper .table-content .serial-width {
-  /*new*/
-  width: 25%;
-  float: left;
-}
-
-.table-wrapper .service-table .col-2 {
-  width: 155px;
-}
-
-.table-wrapper .table-content .col-4 {
-  /*.table-wrapper .table-content .col-3 {*/
-  width: 15%;
-  float: right;
-}
-
-/*.table-wrapper .service-table .col-3 {*/
-/*width: calc(100% - 575px);*/
-/*}*/
-/*.table-wrapper .table-content .col-3{*/
-/*width: calc(100% - 758px);*/
+/*.ticket-update {*/
+/*  margin: 0 30px 30px;*/
 /*}*/
 
-.qt-recurring-invoices .table-wrapper .table-content .col-sm-4 {
-  width: 33.333333%;
-}
-
-.inventory-details .table-wrapper:last-child .table-content {
-  margin-bottom: 0;
-}
-
-.inventory-details .table-wrapper .table-content:last-child {
-  margin-bottom: 10px;
-}
-
-.table-wrapper .table-content .col-5 {
-  /*.table-wrapper .table-content .col-4 {*/
-  width: 21%;
-  float: right;
-  white-space: nowrap;
-}
-
-.table-wrapper .service-table .col-4 {
-  width: 243px;
-  height: auto;
-}
-
-.inventory-details .table-wrapper .service-table .col-5 {
-  width: 243px;
-  float: right;
-}
-
-/*.discount-ticket{*/
-/*position: absolute;*/
-/*bottom: 13px;*/
-/*right: 13px;*/
+/*.ticket-update-header {*/
+/*  padding: 0 30px 20px 30px;*/
+/*  border-bottom: 1px solid #e9edf1;*/
 /*}*/
 
-.table-wrapper .table-content-action {
-  width: 32px;
-  position: absolute;
-  right: -50px;
-  top: -16px;
-  display: flex;
-  flex-direction: column;
-}
-
-.table-wrapper .table-content-action a.hit-area {
-  margin-top: 19px;
-  margin-right: -2px;
-  cursor: pointer;
-}
-
-.ticket-update-content .attachments {
-  float: left;
-  width: 100%;
-  margin: 0;
-  margin-bottom: 0px;
-  margin-top: 0;
-  padding: 5px !important;
-  list-style: none;
-}
-
-.ticket-update-avatar .indicator-new-update {
-  height: 6px;
-  width: 6px;
-  background: #1586e4;
-  border-radius: 50%;
-  position: absolute;
-  margin-left: -18px;
-  margin-top: 16px;
-}
-
-/**Edit product on tickets page in ticket updates**/
-.ticket-update-edit {
-  clear: both;
-  float: left;
-  width: 100%;
-  /*height: 166px;*/
-  /*margin: 10px 0 0;*/
-}
-
-.table-wrapper + .table-wrapper .table-content + .ticket-update-edit {
-  margin: 0;
-}
-
-.ticket-update-edit .icon-edit {
-  position: absolute;
-  top: 43px;
-  left: 63px;
-}
-
-.ticket-update-edit .icon-edit.icn-update-product {
-  top: 50px;
-}
-
-.ticket-update-product-edit .table-content,
-.ticket-update-service-edit .table-content {
-  width: 100%;
-}
-
-.ticket-update-service-edit {
-  /*position: absolute;*/
-  /*left: -20px;*/
-  /*right: -20px;*/
-  /*height: 166px;*/
-  /*padding: 30px 84px 30px 100px;*/
-  /*box-shadow: rgba(10, 45, 89, 0.15) 0px 0px 25px 0px;*/
-  /*background-color: #fff;*/
-}
-
-.ticket-update-service-edit .start-end-picker .time-picker-in,
-.ticket-update-service-edit .start-end-picker .time-picker-out {
-  width: 46.3%;
-}
-
-@media (min-width: 2560px) {
-  .ticket-update-service-edit .start-end-picker .time-picker-in,
-  .ticket-update-service-edit .start-end-picker .time-picker-out {
-    width: 47.8%;
-  }
-}
-
-@media (min-width: 2048px) {
-  .ticket-update-service-edit .duration .dropdown-menu .duration-container-content .duration-container-values-hours > div,
-  .ticket-update-service-edit .duration .dropdown-menu .duration-container-content .duration-container-values-minutes > div {
-    width: 86px;
-  }
-}
-
-@media (max-width: 1280px) {
-  .ticket-update-service-edit .duration .dropdown-menu .duration-container-content .duration-container-values-hours > div,
-  .ticket-update-service-edit .duration .dropdown-menu .duration-container-content .duration-container-values-minutes > div {
-    width: 86px;
-  }
-}
-
-.flex-text-right {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.ticket-update-service-edit .col-md-6.service-name textarea {
-  margin-left: 35px;
-  width: calc(100% - 36px) !important;
-  border: 1px solid #c4cbd5 !important;
-  border-radius: 4px;
-  padding: 0 5px;
-  font-size: 12px;
-  font-family: "Graphik-Regular", sans-serif;
-  outline: none;
-  box-shadow: none;
-  overflow-y: scroll !important;
-  max-height: 126px;
-}
-
-.ticket-update-product-edit .edit-col1 {
-}
-
-.ticket-update-product-edit .edit-col3 {
-  width: 200px;
-}
-
-.ticket-update-product-edit .edit-col4 {
-  /*new  increment 3 4 */
-  width: 95px;
-}
-
-.ticket-update-product-edit .edit-col5 {
-  width: 90px;
-}
-
-.ticket-update-product-edit .edit-col6, .ticket-update-service-edit .edit-col6 {
-  width: 12.5%;
-}
-
-.ticket-update-product-edit .edit-col7, .ticket-update-service-edit .edit-col7 {
-  width: 7%;
-}
-
-.opened-ticket-list .ticket-update-product-edit .edit-col6, .opened-ticket-list .ticket-update-service-edit .edit-col6 {
-  width: 20%;
-}
-
-.opened-ticket-list .ticket-update-product-edit .edit-col7, .opened-ticket-list .ticket-update-service-edit .edit-col7 {
-  width: 9%;
-}
-
-.ticket-update-service-edit .service-name label {
-  margin-right: 10px;
-}
-
-.ticket-update-service-edit .edit-col1 {
-  width: calc(100% - 36px);
-  display: inline-block;
-  margin-bottom: 10px;
-}
-
-.ticket-update-service-edit .edit-col2 {
-  width: 124px;
-}
-
-.ticket-update-service-edit .edit-col4 {
-  width: 145px;
-}
-
-.ticket-update-edit-actions {
-  text-align: right;
-  margin-top: 10px;
-}
-
-.ticket-update-edit-actions .validation-msg {
-  color: #e53935;
-  padding-top: 9px;
-}
-
-.ticket-update-edit-actions .btn {
-  min-width: 80px;
-}
-
-@-moz-document url-prefix() {
-  .ticket-update-header h4 span.ticket-update-title {
-    margin-top: 0;
-  }
-  .ticket-update-edit-actions .validation-msg {
-    line-height: 19px;
-  }
-  .ticket-update-content .updater-name {
-    margin-top: -2px;
-  }
-  .ticket-update-content .ticket-update-meta > .avatar {
-    margin-top: 1px;
-  }
-  .table-wrapper {
-    margin-top: 10px;
-  }
-  .ticket-update-edit {
-    margin-bottom: 9px;
-  }
-  .ticket-update-content .attachments {
-    margin-top: 11px;
-  }
-  .updater-name a.hit-area {
-    margin-top: 3px;
-  }
-  .ticket-update-content .attachments > li {
-    margin-bottom: 9px;
-  }
-  .ticket-update-product-edit, .ticket-update-service-edit {
-    box-shadow: rgba(10, 45, 89, 0.15) 0px 0px 15px 0px;
-  }
-}
-
-.product-upd .table-content-top .col-md-1 {
-  width: 11.1%;
-}
-
-.product-upd .table-content-top .col-md-9 {
-  width: 64%;
-}
-
-@media screen and (max-width: 1440px) {
-  .table-wrapper.product-upd .table-content .col-1 {
-    width: 15%;
-  }
-
-  .table-wrapper.product-upd .table-content .col-3 {
-    width: 18%;
-  }
-}
-
-.notify-select {
-  padding: 5px 10px 0 10px;
-}
-
-.notify-select > span {
-  padding: 0 10px;
-  text-decoration: underline;
-  cursor: pointer;
-  color: #1586e4;
-}
-
-.notify-select > span:first-child {
-  padding-left: 0;
-}
-
-.table-content.service-table .col-3 {
-  width: 75%;
-  padding-left: 268px;
-}
-
-.table-content .table-content-bottom .action-update {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.table-content .table-content-bottom .action-update .assign-icn {
-  margin: 0 16px 0 8px;
-}
-
-.table-content .ticket-update-service-edit .action-update .icn-label-save-dashboard,
-.table-content .ticket-update-service-edit .action-update .assign-icn,
-.table-content .ticket-update-product-edit .action-update .icn-label-save-dashboard,
-.table-content .ticket-update-product-edit .action-update .assign-icn {
-  margin: 0 8px;
-}
-
-.table-content .ticket-update-product-edit .action-update .dashboard-remove,
-.table-content .ticket-update-service-edit .action-update .dashboard-remove {
-  margin: 0 0 0 8px;
-}
-
-.ticket-update-service-edit .timer-quantity .time_drop_down ul {
-  width: 42px;
-}
-
-.ticket-update-service-edit .timer-quantity .time_drop_down ul li a:hover {
-  background: #16a4fa !important;
-  color: #ffffff;
-}
-
-.table-content .table-content-bottom [class*='col-md-'] {
-  font-size: 13px;
-  font-family: "Graphik-Regular", sans-serif;
-}
-
-.gm {
-  font-family: "Graphik-Medium", sans-serif !important;
-}
-
-.table-content .table-content-top {
-  border-bottom: 1px solid #4f5f79;
-  font-size: 12px;
-  font-family: "Graphik-Medium", sans-serif;
-  position: relative;
-}
-
-.mob-ticket-updates .ticket-update-header {
-  position: relative;
-  border-bottom: 1px solid #4f5f79;
-}
-
-.table-content .table-content-top:before,
-.mob-ticket-updates .ticket-update-header:before {
-  position: absolute;
-  content: 'SERVICE';
-  font-size: 9px;
-  font-family: "Graphik-Semibold", sans-serif;
-  padding: 0 8px;
-  background: #edf2f6;
-  color: #4f5f79;
-  left: 0;
-  top: 6px;
-}
-
-.mob-ticket-updates .ticket-update-header:before {
-  top: 0;
-}
-
-.product-upd .table-content-top:before,
-.mob-ticket-updates .mob-product-update .ticket-update-header:before {
-  content: 'PRODUCT';
-}
-
-.mob-ticket-updates .mob-product-update .ticket-update-header {
-  padding-left: 65px;
-}
-
-.mob-ticket-updates .mob-note-update .ticket-update-header {
-  padding-left: 47px;
-}
-
-.mob-ticket-updates .mob-service-update .ticket-update-header {
-  padding-left: 59px;
-}
-
-.note-upd .table-content-top:before,
-.mob-ticket-updates .mob-note-update .ticket-update-header:before {
-  content: 'NOTE';
-}
-
-.table-content .ticket-update-service-edit .timepicker {
-  top: 6px;
-}
-
-.table-content .table-content-top.without-duration .timepicker {
-  right: 0;
-}
-
-.table-content .table-content-top .dropdown-menu {
-  /*top: 100% !important;*/
-}
-
-.table-content .table-content-top .new-input {
-  padding: 5px 12px;
-}
-
-.table-wrapper .service-table .table-content-top.without-duration .service-title {
-  width: 57%;
-}
-
-.ticket-update-service-edit .table-content .table-content-top,
-.ticket-update-service-edit .table-content .table-content-bottom,
-.ticket-update-product-edit .table-content .table-content-top,
-.ticket-update-product-edit .table-content .table-content-bottom {
-  padding: 0;
-}
-
-.table-content .table-content-top,
-.table-content .table-content-bottom {
-  padding: 10px 0;
-}
-
-.table-content .table-content-bottom:not(:last-child) {
-  border-bottom: 1px solid #edf2f6;
-}
-
-.table-wrapper .service-table .col-md-1.timer-quantity {
-  width: 8.33333333%;
-}
-
-.table-wrapper .service-table .col-md-5.service-title {
-  width: 40%;
-}
-
-.table-wrapper .service-table .col-md-2.new-quantity-picker {
-  width: 22.2%;
-}
-
-.checkbox-container {
-  position: relative;
-  min-width: 22px;
-  height: 22px;
-  margin: 0;
-  cursor: pointer;
-}
-
-.container-ticket-content .checkbox-container .checkbox-mark {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 22px;
-  height: 22px;
-  background: url("../images/new-icons/checkbox-ticket.png");
-}
-
-.checkbox-container input {
-  opacity: 0;
-}
-
-.container-ticket-content .checkbox-container input:checked ~ .checkbox-mark {
-  background-position: 24px 0;
-}
-
-.service-name p:first-child {
-  font-family: "Graphik-Medium", sans-serif;
-  font-size: 13px;
-  display: flex;
-}
-
-.ticket-update-service-edit .service-name p:first-child {
-  height: 40px;
-}
-
-.service-name p:first-child .checkbox-container,
-.product-upd .col-md-6 label {
-  margin-right: 10px;
-}
-
-.product-upd .col-md-6 {
-  display: flex;
-}
-
-.product-upd .col-md-6 p {
-  font-family: "Graphik-Medium", sans-serif;
-}
-
-.product-upd .col-md-1 {
-  width: 11.1%;
-}
-
-.service-name p:last-child {
-  font-family: "Graphik-Regular", sans-serif;
-  font-size: 12px;
-  line-height: 1.33;
-  padding-left: 33px;
-}
-
-@media screen and (min-width: 2048px) {
-  .table-content.service-table .col-3 {
-    width: 75%;
-  }
-
-  .opened-ticket .table-wrapper .service-table .col-3 {
-    width: calc(100% - 605px);
-  }
-
-  .opened-ticket-list .table-wrapper .service-table .col-3 {
-    width: calc(100% - 485px);
-  }
-
-  _:-moz-tree-row(hover), .opened-ticket-list .table-wrapper .service-table .col-3 {
-    width: calc(100% - 488px);
-  }
-
-  .qt-recurring-invoices .table-wrapper .table-content .col-sm-4 {
-    width: 33.333333%;
-  }
-}
-
-.table-content .table-content-top .new-input,
-.table-content .table-content-bottom .new-input {
-  padding: 5px;
-}
-
-@media screen and (max-width: 1600px) {
-  .table-content .ticket-update-service-edit .action-update .icn-label-save-dashboard,
-  .table-content .ticket-update-service-edit .action-update .assign-icn,
-  .table-content .ticket-update-product-edit .action-update .icn-label-save-dashboard,
-  .table-content .ticket-update-product-edit .action-update .assign-icn {
-    margin: 0 4px;
-  }
-
-  .table-content .ticket-update-product-edit .action-update .dashboard-remove,
-  .table-content .ticket-update-service-edit .action-update .dashboard-remove {
-    margin: 0 0 0 4px;
-  }
-
-  .table-content input {
-    font-size: 12px;
-  }
-
-  .table-content .table-content-top .timepicker {
-    right: 0;
-  }
-
-  .table-content.service-table .col-3 {
-    padding-left: 342px;
-  }
-
-  .table-wrapper .service-table .table-content-top.without-duration .service-title {
-    width: 50%;
-  }
-
-  .table-wrapper .service-table .table-content-top.without-duration .service-datetimepicker,
-  .table-wrapper .service-table .table-content-top.without-duration .new-quantity-picker {
-    width: 25%;
-  }
-
-  .table-wrapper .service-table .col-md-1.timer-quantity {
-    width: 9%;
-  }
-
-  .table-wrapper .service-table .col-md-5.service-title {
-    width: 36%;
-  }
-
-  /*.ticket-update-service-edit {*/
-  /*padding: 30px 40px 30px 50px;*/
-  /*}*/
-  .ticket-update-product-edit {
-    padding: 0;
-  }
-
-  .ticket-update-edit .icon-edit {
-    left: 30px;
-  }
-
-  .table-wrapper .service-table .col-3 {
-    width: calc(100% - 563px);
-  }
-
-  .opened-ticket-list .table-wrapper .service-table .col-3 {
-    width: 36%;
-  }
-
-  _::-webkit-:not(:root:root), .opened-ticket-list .table-wrapper .service-table .col-3 {
-    width: 35%;
-  }
-
-  .opened-ticket-list .table-wrapper .service-table .col-5 div {
-    white-space: nowrap;
-  }
-
-  .inventory-details .table-wrapper .service-table .col-3 {
-    width: calc(100% - 290px);
-  }
-
-  .table-wrapper .table-content .discount-ticket {
-    white-space: normal;
-  }
-
-  .table-wrapper .service-table .col-2 {
-    width: 20%;
-  }
-}
-
-@media screen and (max-width: 1366px) {
-  /*.opened-ticket-list .product-upd .table-content-top .col-md-1 {*/
-  /*  width: 33.33333%;*/
-  /*}*/
-  .ticket-update-service-edit .start-end-picker .time-picker-in input,
-  .ticket-update-service-edit .start-end-picker .time-picker-out input {
-    font-size: 11px;
-  }
-
-  .ticket-add-content .ticket-add-service .col-2.new-date-picker {
-    width: 20%;
-  }
-
-  .time-picker-width {
-    width: 34% !important;
-  }
-
-  .opened-ticket-list .ticket-update {
-    margin: 0 20px 30px;
-  }
-
-  .opened-ticket-list .table-content .action-update .icn-label-save-dashboard {
-    position: absolute;
-    right: -21px;
-    top: 0;
-  }
-
-  .opened-ticket-list .table-content .action-update .dashboard-remove {
-    position: absolute;
-    right: -15px;
-    top: 26px;
-  }
-
-  .opened-ticket-list .ticket-update-service-edit .action-update {
-    width: 12%;
-  }
-
-  .opened-ticket-list .ticket-update-service-edit .col-md-1 {
-    width: 14%;
-  }
-
-  .opened-ticket-list .service-table .col-md-6 {
-    width: 45%;
-  }
-
-  .opened-ticket-list .service-table .col-md-6.service-name {
-    width: 42%;
-  }
-
-  .opened-ticket-list .table-wrapper .service-table .col-md-2.new-quantity-picker {
-    width: 28%;
-  }
-
-  .opened-ticket-list .table-wrapper .service-table .col-md-1 {
-    width: 13.7%;
-    font-size: 12px;
-  }
-
-  .opened-ticket-list .table-wrapper .ticket-update-service-edit .col-md-1 {
-    width: 13%;
-  }
-
-  .opened-ticket-list .product-upd .table-content-top .col-md-9,
-  .opened-ticket.opened-ticket-list .ticket-update-product-edit .table-content-top .col-md-6 {
-    width: 100%;
-  }
-
-  .table-content .table-content-top .timepicker {
-    right: auto;
-  }
-
-  .table-content .table-content-top.without-duration .timepicker {
-    right: 0;
-  }
-
-  .table-content.service-table .col-3 {
-    padding-left: 295px;
-  }
-
-  .opened-ticket.opened-ticket-list .table-wrapper .service-table .table-content-top.without-duration .service-title {
-    width: 40%;
-  }
-
-  .opened-ticket.opened-ticket-list .table-wrapper .service-table .table-content-top.without-duration .service-datetimepicker {
-    width: 27%;
-  }
-
-  .opened-ticket.opened-ticket-list .table-wrapper .service-table .table-content-top.without-duration .new-quantity-picker {
-    width: 33%;
-  }
-
-  .table-wrapper .table-content .form-group input {
-    font-size: 12px;
-  }
-
-  .tax-recurring input {
-    font-size: 12px;
-  }
-
-  .table-wrapper .table-content .discount-ticket {
-    white-space: nowrap;
-  }
-
-  .table-wrapper .service-table .col-3 {
-    width: calc(100% - 464px);
-  }
-
-  .inventory-details .table-wrapper .service-table .col-3 {
-    width: calc(100% - 230px);
-  }
-
-  .opened-ticket-list .table-wrapper .service-table .col-3 {
-    width: 75%;
-  }
-
-  .opened-ticket.opened-ticket-list .table-wrapper .service-table .col-md-5.service-title {
-    width: 66.66666%;
-  }
-
-  /*.opened-ticket.opened-ticket-list .table-content-top .col-md-1,*/
-  /*.opened-ticket.opened-ticket-list .table-content-top .col-md-2 {*/
-  /*  width: 33.33333333%;*/
-  /*  text-align: left !important;*/
-  /*}*/
-  /*.opened-ticket.opened-ticket-list .table-content-top .col-md-6 {*/
-  /*  width: 66.66666667%;*/
-  /*}*/
-}
-
-@media screen and (max-width: 1280px) {
-  .inventory-details .table-wrapper .service-table .col-3 {
-    width: calc(100% - 210px);
-  }
-
-  .table-content input {
-    font-size: 13px;
-  }
-
-  .ticket-update-service-edit .start-end-picker .time-picker-in input,
-  .ticket-update-service-edit .start-end-picker .time-picker-out input {
-    font-size: 13px;
-  }
-
-  .table-content.service-table .col-3 {
-    padding-left: 278px;
-  }
-
-  .table-wrapper .table-content .col-5 {
-    width: 14%;
-  }
-
-  .table-wrapper .table-content .col-2.col-2-has-serial-number {
-    width: 71%;
-  }
-}
+/*.ticket-update-header h4 {*/
+/*  float: left;*/
+/*  font-weight: 400;*/
+/*  font-size: 17px;*/
+/*  margin: 8px 0px;*/
+/*}*/
+
+/*.ticket-update-header h4 .light-cl {*/
+/*  color: #94a4b8;*/
+/*}*/
+
+/*.ticket-update-header h4 span.ticket-update-title {*/
+/*  margin-top: 1px;*/
+/*}*/
+
+/*.ticket-update-header h4 .label {*/
+/*  margin-top: 1px;*/
+/*  margin-left: 10px;*/
+/*  font-weight: normal;*/
+/*  color: #94a4b8;*/
+/*  background-color: #e7ecf2;*/
+/*  -webkit-transition: border-radius 0.3s ease-out;*/
+/*  -moz-transition: border-radius 0.3s ease-out;*/
+/*  -o-transition: border-radius 0.3s ease-out;*/
+/*  -ms-ransition: border-radius 0.3s ease-out;*/
+/*  transition: border-radius 0.3s ease-out;*/
+/*}*/
+
+/*.ticket-update-header h4 .label:hover {*/
+/*  border-radius: 3px;*/
+/*}*/
+
+/*.static-wysiwyg .wysiwyg-controls-wrapper {*/
+/*  left: 0 !important;*/
+/*  !* bottom: 0 !important; *!*/
+/*  top: auto !important;*/
+/*  !* transform: translateY(-50%); *!*/
+/*  !* width: 100% !important; *!*/
+/*}*/
+
+/*.ticket-updates .btn-load-more {*/
+/*  margin: 20px auto 0 auto;*/
+/*  display: block;*/
+/*  width: 200px;*/
+/*}*/
+
+/*.ticket-update-header .shared-users-list {*/
+/*  margin: 10px 20px 0 30px;*/
+/*  padding: 0px;*/
+/*  list-style: none;*/
+/*}*/
+
+/*.ticket-update-header .shared-users-list > li {*/
+/*  margin-right: 10px;*/
+/*  margin-top: 10px;*/
+/*  float: left;*/
+/*  position: relative;*/
+/*}*/
+
+/*.ticket-update-header .shared-users-list > li .avatar:after {*/
+/*  content: "";*/
+/*  position: absolute;*/
+/*  top: 0;*/
+/*  width: 100%;*/
+/*  height: 100%;*/
+/*  background-color: rgba(21, 30, 41, .6);*/
+/*  border-radius: 50%;*/
+/*  display: none;*/
+/*}*/
+
+/*.ticket-update-header .shared-users-list > li .avatar:hover:after {*/
+/*  display: block;*/
+/*}*/
+
+/*.ticket-updates-wrapper {*/
+/*  position: relative;*/
+/*  margin-bottom: 530px;*/
+/*  font-size: 13px;*/
+/*}*/
+
+/*.ticket-updates-wrapper p {*/
+/*  font-size: 13px;*/
+/*}*/
+
+/*.ticket-update-avatar {*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*  position: relative;*/
+/*}*/
+
+/*.ticket-update-avatar a {*/
+/*  position: absolute;*/
+/*  right: 0;*/
+/*}*/
+
+/*.ticket-update-avatar .icon-update {*/
+/*  margin-top: 21px;*/
+/*  margin-left: 13px;*/
+/*}*/
+
+/*.ticket-update-content .updater-name {*/
+/*  display: flex;*/
+/*  white-space: nowrap;*/
+/*}*/
+
+/*.ticket-update-content .updater-name span {*/
+/*  font-weight: normal;*/
+/*}*/
+
+/*.updater-name a.hit-area {*/
+/*  margin-top: 2px;*/
+/*  margin-right: -2px;*/
+/*}*/
+
+/*.ticket-update-content .ticket-update-message {*/
+/*  float: left;*/
+/*  width: 98%;*/
+/*  margin-top: 4px;*/
+/*  color: #748498;*/
+/*  line-height: 20px;*/
+/*  margin-bottom: 5px;*/
+/*}*/
+
+/*.ticket-update-meta {*/
+/*  float: left;*/
+/*  width: 100%;*/
+/*  margin-top: 10px;*/
+/*}*/
+
+/*.ticket-update-meta .ticket-meta-wrapper {*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*}*/
+
+/*.ticket-meta-wrapper .default-user-avatar {*/
+/*  width: 24px;*/
+/*  height: 24px;*/
+/*  font-size: 10px;*/
+/*}*/
+
+/*.icn-delete-final {*/
+/*  background-image: url(../images/new-icons/remove-final.png);*/
+/*  width: 16px;*/
+/*  height: 16px;*/
+/*}*/
+
+/*.edit-icon-final {*/
+/*  background-image: url(../images/new-icons/edit-final.png);*/
+/*  width: 16px;*/
+/*  height: 16px;*/
+/*  cursor: pointer;*/
+/*}*/
+
+/*.ticket-update-content .ticket-update-message {*/
+/*  margin: 0;*/
+/*  padding: 5px;*/
+/*  border: 1px solid transparent;*/
+/*  border-radius: 4px;*/
+/*}*/
+
+/*.ticket-update-content .ticket-update-message.editing {*/
+/*  border: 1px solid #9ca5b6;*/
+/*}*/
+
+/*.ticket-update-content .updater-name a {*/
+/*  margin-left: 10px;*/
+/*}*/
+
+/*.ticket-update-meta .avatar {*/
+/*  position: relative;*/
+/*  margin-left: 10px;*/
+/*}*/
+
+/*.ticket-update-content .ticket-update-meta .avatar:after {*/
+/*  content: "";*/
+/*  position: absolute;*/
+/*  top: 0;*/
+/*  width: 100%;*/
+/*  height: 100%;*/
+/*  border-radius: 50%;*/
+/*  background-color: rgba(21, 30, 41, .6);*/
+/*  display: none;*/
+/*}*/
+
+/*.ticket-update-content .ticket-update-meta .avatar:hover:after {*/
+/*  display: block;*/
+/*}*/
+
+/*.ticket-update-meta span.update-timestamp {*/
+/*  margin-top: 7px;*/
+/*  margin-right: 10px;*/
+/*  font-size: 11px;*/
+/*  line-height: 12px;*/
+/*  text-transform: uppercase;*/
+/*  color: #94a4b8;*/
+/*}*/
+
+/*.ticket-update-content .dot-sep {*/
+/*  margin: 2px 10px;*/
+/*}*/
+
+/*.ticket-update-meta .avatar-tooltip .tooltip-inner, .shared-users-list li:not(:last-child) .tooltip-inner {*/
+/*  padding: 18px 20px;*/
+/*  text-align: left;*/
+/*  line-height: 12px;*/
+/*  white-space: nowrap;*/
+/*}*/
+
+/*.ticket-update-meta .tooltip-name, .shared-users-list .tooltip-name {*/
+/*  color: #ffffff;*/
+/*  line-height: 12px;*/
+/*}*/
+
+/*.ticket-update-meta .tooltip-designation, .shared-users-list .tooltip-designation {*/
+/*  color: #94a4b8;*/
+/*  font-weight: normal;*/
+/*  text-transform: none;*/
+/*}*/
+
+/*.shared-with {*/
+/*  position: relative;*/
+/*  cursor: pointer;*/
+/*}*/
+
+/*.tooltip-users {*/
+/*  min-width: 146px;*/
+/*}*/
+
+/*.tooltip-users .tooltip-inner {*/
+/*  height: 132px;*/
+/*  margin: 0;*/
+/*  padding: 18px 20px;*/
+/*  text-align: left;*/
+/*  list-style: none;*/
+/*}*/
+
+/*.tooltip-users .tooltip-inner > li + li {*/
+/*  margin-top: 12px;*/
+/*}*/
+
+/*.tooltip-users .tooltip-inner > li.more-users span {*/
+/*  margin-left: 0;*/
+/*}*/
+
+/*.tooltip-users .tooltip-inner > li > span {*/
+/*  display: block;*/
+/*}*/
+
+/*.tooltip-users .tooltip-inner > li > span.username {*/
+/*  color: #ffffff;*/
+/*}*/
+
+/*.tooltip-users .tooltip-inner > li > span.usertitle {*/
+/*  font-weight: normal;*/
+/*  color: #94a4b8;*/
+/*  text-transform: none;*/
+/*}*/
+
+/*.ticket-update-content {*/
+/*  !*width: calc(100% - 48px);*!*/
+/*  padding: 10px 0;*/
+/*  !*border-bottom: 1px solid #e7ecf2;*!*/
+/*  position: relative;*/
+/*}*/
+
+/*.ticket-update:last-child .ticket-update-content {*/
+/*  border-bottom: none;*/
+/*}*/
+
+/*.ticket-update-content .ticket-update-meta .btn-more-users {*/
+/*  position: relative;*/
+/*  margin: 0 0 0 10px;*/
+/*  padding: 7px 12px;*/
+/*  border-radius: 13px;*/
+/*  text-transform: uppercase;*/
+/*  cursor: pointer;*/
+/*  -webkit-transition: border-radius 0.3s ease-out;*/
+/*  -moz-transition: border-radius 0.3s ease-out;*/
+/*  -o-transition: border-radius 0.3s ease-out;*/
+/*  -ms-ransition: border-radius 0.3s ease-out;*/
+/*  transition: border-radius 0.3s ease-out;*/
+/*}*/
+
+/*.date-picker-icon-ui {*/
+/*  position: absolute !important;*/
+/*  top: 0px;*/
+/*  left: 0px;*/
+/*  opacity: 0;*/
+/*}*/
+
+/*.modal-ticket-edit-mask {*/
+/*  display: block;*/
+/*  top: 0;*/
+/*  bottom: 0;*/
+/*  right: 0;*/
+/*  left: 0;*/
+/*  background-color: rgba(0, 0, 0, .6);*/
+/*  z-index: 998;*/
+/*  position: fixed;*/
+/*}*/
+
+/*.modal-ticket-edit-datepicker {*/
+/*  display: block;*/
+/*  top: 10%;*/
+/*  left: 10%;*/
+/*  background-color: #ffffff;*/
+/*  z-index: 999;*/
+/*  position: fixed;*/
+/*  width: 50%;*/
+/*  height: 50%;*/
+/*}*/
+
+/*.modal-ticket-edit-user {*/
+/*  display: block;*/
+/*  top: 40%;*/
+/*  left: 0;*/
+/*  background-color: #ffffff;*/
+/*  z-index: 999;*/
+/*  position: fixed;*/
+/*  width: 100%;*/
+/*  height: 40%;*/
+/*}*/
+
+/*@-moz-document url-prefix() {*/
+/*  .ticket-update-content .ticket-update-meta .btn-more-users {*/
+/*    padding: 7px 12px 8px;*/
+/*    margin-top: 1px;*/
+/*  }*/
+/*}*/
+
+/*.ticket-update-content .ticket-update-meta .btn-more-users:hover {*/
+/*  border-radius: 3px;*/
+/*}*/
+
+/*.added-users-wrapper {*/
+/*  flex: 1;*/
+/*}*/
+
+/*.users-added-to-update {*/
+/*  margin-top: -10px;*/
+/*  max-width: 100%;*/
+/*  margin-left: -180px;*/
+/*}*/
+
+/*.users-added-to-update .avatar {*/
+/*  margin-top: 10px;*/
+/*}*/
+
+/*.users-added-to-update .avatar:first-child {*/
+/*  margin-left: 190px;*/
+/*}*/
+
+/*.users-added-to-update .btn {*/
+/*  min-width: 26px;*/
+/*  height: 26px;*/
+/*  margin-top: 10px;*/
+/*  margin-left: 10px;*/
+/*}*/
+
+/*.table-wrapper {*/
+/*  float: left;*/
+/*  width: 100%;*/
+/*}*/
+
+/*.table-wrapper + .table-wrapper {*/
+/*  margin-top: 0;*/
+/*}*/
+
+/*.qt-list .table-wrapper {*/
+/*  margin-top: 0px;*/
+/*  margin-bottom: 21px;*/
+/*}*/
+
+/*.inventory-details .table-wrapper {*/
+/*  margin-top: 25px;*/
+/*  margin-bottom: 0;*/
+/*  padding-bottom: 30px;*/
+/*  cursor: auto;*/
+/*}*/
+
+/*.table-wrapper .table-content {*/
+/*  !*width: calc(100% - 30px);*!*/
+/*  margin: 0;*/
+/*  padding: 0;*/
+/*  position: relative;*/
+/*  list-style: none;*/
+/*  color: #4f5f79;*/
+/*  !*background-color: #f6f8fa;*!*/
+/*}*/
+
+/*.table-wrapper .table-content + .table-content {*/
+/*  margin-top: 10px;*/
+/*}*/
+
+/*.table-wrapper:last-child .table-content {*/
+/*  margin-bottom: 10px;*/
+/*}*/
+
+/*.qt-list .table-wrapper .table-content {*/
+/*  cursor: auto;*/
+/*  width: calc(100% - 26px);*/
+/*}*/
+
+/*.qt-invoices .sub-wrapper .table-wrapper .table-content {*/
+/*  width: calc(100% - 88px);*/
+/*  margin-left: 24px;*/
+/*  margin-bottom: 0;*/
+/*  margin-top: 10px;*/
+/*}*/
+
+/*.qt-invoices .sub-wrapper .table-wrapper .table-content:first-child {*/
+/*  margin-top: 0;*/
+/*}*/
+
+/*.qt-invoices .sub-wrapper .table-wrapper .table-content:last-child {*/
+/*  margin-bottom: 5px;*/
+/*}*/
+
+/*.qt-list .table-wrapper .table-content > i {*/
+/*  position: absolute;*/
+/*  left: -25px;*/
+/*  top: 20px;*/
+/*}*/
+
+/*.qt-invoices .sub-wrapper .table-wrapper .table-content .ha-edit {*/
+/*  position: absolute;*/
+/*  right: -33px;*/
+/*  top: 16px;*/
+/*}*/
+
+/*.qt-invoices .sub-wrapper .table-wrapper .table-content .ha-delete {*/
+/*  position: absolute;*/
+/*  right: -65px;*/
+/*  top: 16px;*/
+/*}*/
+
+/*!*.table-wrapper .table-content .model{*!*/
+/*!*padding-left: 7px;*!*/
+/*!*}*!*/
+/*.table-wrapper .table-content [class^="col-"] {*/
+/*  padding: 5px;*/
+/*  height: auto;*/
+/*  border-right: 0;*/
+/*  !*overflow: hidden;*!*/
+/*}*/
+
+/*.table-wrapper .table-content .table-content-top [class^="col-"] {*/
+/*  line-height: 0;*/
+/*  white-space: nowrap;*/
+/*}*/
+
+/*.table-wrapper .table-content .table-content-top > a {*/
+/*  position: absolute;*/
+/*  right: 0;*/
+/*  bottom: 7px;*/
+/*}*/
+
+/*.table-wrapper .table-content .form-group {*/
+/*  margin-bottom: 0;*/
+/*}*/
+
+/*.qt-recurring-invoices .table-wrapper .table-content .col-sm-4 {*/
+/*  width: 20.333333%;*/
+/*  height: auto;*/
+/*}*/
+
+/*.qt-recurring-invoices .table-wrapper .table-content .col-3 {*/
+/*  width: 13%;*/
+/*}*/
+
+/*.table-wrapper .table-content .col-1 {*/
+/*  width: 163px;*/
+/*  float: left;*/
+/*  border: 0;*/
+/*}*/
+
+/*.table-wrapper .table-content .description:hover {*/
+/*  background-color: #e7ecf2;*/
+/*}*/
+
+/*.table-wrapper .service-table .service-datetimepicker .bootstrap-datetimepicker-widget {*/
+/*  left: 0 !important;*/
+/*  top: calc(100% + 1px);*/
+/*}*/
+
+/*.table-wrapper .service-table .col-1 {*/
+/*  width: 114px;*/
+/*}*/
+
+/*.table-wrapper .service-table .col-md-1 {*/
+/*  width: 11.1%;*/
+/*}*/
+
+/*.table-wrapper .table-content .col-2 {*/
+/*  width: calc(100% - 400px);*/
+/*  float: left;*/
+/*}*/
+
+/*.table-wrapper .table-content .col-2.col-2-has-serial-number {*/
+/*  width: 64%;*/
+/*  float: left;*/
+/*}*/
+
+/*.table-wrapper .table-content .col-2.col-2-has-serial-number.has-ilc-pn {*/
+/*  line-height: 40px;*/
+/*}*/
+
+/*.qt-recurring-invoices .table-wrapper .table-content .col-2 {*/
+/*  width: calc(100% - 563px);*/
+/*  float: left;*/
+/*}*/
+
+/*.qt-recurring-invoices .table-wrapper.invoice-srvs-list .table-content .col-2 {*/
+/*  width: calc(100% - 400px);*/
+/*  float: left;*/
+/*}*/
+
+/*.qt-recurring-invoices .table-wrapper .table-content .col-2.col-2-has-serial-number {*/
+/*  !*new*!*/
+/*  width: calc(60% - 326px);*/
+/*  float: left;*/
+/*}*/
+
+/*.table-wrapper .table-content .serial-width {*/
+/*  !*new*!*/
+/*  width: 25%;*/
+/*  float: left;*/
+/*}*/
+
+/*.table-wrapper .service-table .col-2 {*/
+/*  width: 155px;*/
+/*}*/
+
+/*.table-wrapper .table-content .col-4 {*/
+/*  !*.table-wrapper .table-content .col-3 {*!*/
+/*  width: 15%;*/
+/*  float: right;*/
+/*}*/
+
+/*!*.table-wrapper .service-table .col-3 {*!*/
+/*!*width: calc(100% - 575px);*!*/
+/*!*}*!*/
+/*!*.table-wrapper .table-content .col-3{*!*/
+/*!*width: calc(100% - 758px);*!*/
+/*!*}*!*/
+
+/*.qt-recurring-invoices .table-wrapper .table-content .col-sm-4 {*/
+/*  width: 33.333333%;*/
+/*}*/
+
+/*.inventory-details .table-wrapper:last-child .table-content {*/
+/*  margin-bottom: 0;*/
+/*}*/
+
+/*.inventory-details .table-wrapper .table-content:last-child {*/
+/*  margin-bottom: 10px;*/
+/*}*/
+
+/*.table-wrapper .table-content .col-5 {*/
+/*  !*.table-wrapper .table-content .col-4 {*!*/
+/*  width: 21%;*/
+/*  float: right;*/
+/*  white-space: nowrap;*/
+/*}*/
+
+/*.table-wrapper .service-table .col-4 {*/
+/*  width: 243px;*/
+/*  height: auto;*/
+/*}*/
+
+/*.inventory-details .table-wrapper .service-table .col-5 {*/
+/*  width: 243px;*/
+/*  float: right;*/
+/*}*/
+
+/*!*.discount-ticket{*!*/
+/*!*position: absolute;*!*/
+/*!*bottom: 13px;*!*/
+/*!*right: 13px;*!*/
+/*!*}*!*/
+
+/*.table-wrapper .table-content-action {*/
+/*  width: 32px;*/
+/*  position: absolute;*/
+/*  right: -50px;*/
+/*  top: -16px;*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*}*/
+
+/*.table-wrapper .table-content-action a.hit-area {*/
+/*  margin-top: 19px;*/
+/*  margin-right: -2px;*/
+/*  cursor: pointer;*/
+/*}*/
+
+/*.ticket-update-content .attachments {*/
+/*  float: left;*/
+/*  width: 100%;*/
+/*  margin: 0;*/
+/*  margin-bottom: 0px;*/
+/*  margin-top: 0;*/
+/*  padding: 5px !important;*/
+/*  list-style: none;*/
+/*}*/
+
+/*.ticket-update-avatar .indicator-new-update {*/
+/*  height: 6px;*/
+/*  width: 6px;*/
+/*  background: #1586e4;*/
+/*  border-radius: 50%;*/
+/*  position: absolute;*/
+/*  margin-left: -18px;*/
+/*  margin-top: 16px;*/
+/*}*/
+
+/*!**Edit product on tickets page in ticket updates**!*/
+/*.ticket-update-edit {*/
+/*  clear: both;*/
+/*  float: left;*/
+/*  width: 100%;*/
+/*  !*height: 166px;*!*/
+/*  !*margin: 10px 0 0;*!*/
+/*}*/
+
+/*.table-wrapper + .table-wrapper .table-content + .ticket-update-edit {*/
+/*  margin: 0;*/
+/*}*/
+
+/*.ticket-update-edit .icon-edit {*/
+/*  position: absolute;*/
+/*  top: 43px;*/
+/*  left: 63px;*/
+/*}*/
+
+/*.ticket-update-edit .icon-edit.icn-update-product {*/
+/*  top: 50px;*/
+/*}*/
+
+/*.ticket-update-product-edit .table-content,*/
+/*.ticket-update-service-edit .table-content {*/
+/*  width: 100%;*/
+/*}*/
+
+/*.ticket-update-service-edit {*/
+/*  !*position: absolute;*!*/
+/*  !*left: -20px;*!*/
+/*  !*right: -20px;*!*/
+/*  !*height: 166px;*!*/
+/*  !*padding: 30px 84px 30px 100px;*!*/
+/*  !*box-shadow: rgba(10, 45, 89, 0.15) 0px 0px 25px 0px;*!*/
+/*  !*background-color: #fff;*!*/
+/*}*/
+
+/*.ticket-update-service-edit .start-end-picker .time-picker-in,*/
+/*.ticket-update-service-edit .start-end-picker .time-picker-out {*/
+/*  width: 46.3%;*/
+/*}*/
+
+/*@media (min-width: 2560px) {*/
+/*  .ticket-update-service-edit .start-end-picker .time-picker-in,*/
+/*  .ticket-update-service-edit .start-end-picker .time-picker-out {*/
+/*    width: 47.8%;*/
+/*  }*/
+/*}*/
+
+/*@media (min-width: 2048px) {*/
+/*  .ticket-update-service-edit .duration .dropdown-menu .duration-container-content .duration-container-values-hours > div,*/
+/*  .ticket-update-service-edit .duration .dropdown-menu .duration-container-content .duration-container-values-minutes > div {*/
+/*    width: 86px;*/
+/*  }*/
+/*}*/
+
+/*@media (max-width: 1280px) {*/
+/*  .ticket-update-service-edit .duration .dropdown-menu .duration-container-content .duration-container-values-hours > div,*/
+/*  .ticket-update-service-edit .duration .dropdown-menu .duration-container-content .duration-container-values-minutes > div {*/
+/*    width: 86px;*/
+/*  }*/
+/*}*/
+
+/*.flex-text-right {*/
+/*  display: flex;*/
+/*  justify-content: flex-end;*/
+/*  align-items: center;*/
+/*}*/
+
+/*.ticket-update-service-edit .col-md-6.service-name textarea {*/
+/*  margin-left: 35px;*/
+/*  width: calc(100% - 36px) !important;*/
+/*  border: 1px solid #c4cbd5 !important;*/
+/*  border-radius: 4px;*/
+/*  padding: 0 5px;*/
+/*  font-size: 12px;*/
+/*  font-family: "Graphik-Regular", sans-serif;*/
+/*  outline: none;*/
+/*  box-shadow: none;*/
+/*  overflow-y: scroll !important;*/
+/*  max-height: 126px;*/
+/*}*/
+
+/*.ticket-update-product-edit .edit-col1 {*/
+/*}*/
+
+/*.ticket-update-product-edit .edit-col3 {*/
+/*  width: 200px;*/
+/*}*/
+
+/*.ticket-update-product-edit .edit-col4 {*/
+/*  !*new  increment 3 4 *!*/
+/*  width: 95px;*/
+/*}*/
+
+/*.ticket-update-product-edit .edit-col5 {*/
+/*  width: 90px;*/
+/*}*/
+
+/*.ticket-update-product-edit .edit-col6, .ticket-update-service-edit .edit-col6 {*/
+/*  width: 12.5%;*/
+/*}*/
+
+/*.ticket-update-product-edit .edit-col7, .ticket-update-service-edit .edit-col7 {*/
+/*  width: 7%;*/
+/*}*/
+
+/*.opened-ticket-list .ticket-update-product-edit .edit-col6, .opened-ticket-list .ticket-update-service-edit .edit-col6 {*/
+/*  width: 20%;*/
+/*}*/
+
+/*.opened-ticket-list .ticket-update-product-edit .edit-col7, .opened-ticket-list .ticket-update-service-edit .edit-col7 {*/
+/*  width: 9%;*/
+/*}*/
+
+/*.ticket-update-service-edit .service-name label {*/
+/*  margin-right: 10px;*/
+/*}*/
+
+/*.ticket-update-service-edit .edit-col1 {*/
+/*  width: calc(100% - 36px);*/
+/*  display: inline-block;*/
+/*  margin-bottom: 10px;*/
+/*}*/
+
+/*.ticket-update-service-edit .edit-col2 {*/
+/*  width: 124px;*/
+/*}*/
+
+/*.ticket-update-service-edit .edit-col4 {*/
+/*  width: 145px;*/
+/*}*/
+
+/*.ticket-update-edit-actions {*/
+/*  text-align: right;*/
+/*  margin-top: 10px;*/
+/*}*/
+
+/*.ticket-update-edit-actions .validation-msg {*/
+/*  color: #e53935;*/
+/*  padding-top: 9px;*/
+/*}*/
+
+/*.ticket-update-edit-actions .btn {*/
+/*  min-width: 80px;*/
+/*}*/
+
+/*@-moz-document url-prefix() {*/
+/*  .ticket-update-header h4 span.ticket-update-title {*/
+/*    margin-top: 0;*/
+/*  }*/
+/*  .ticket-update-edit-actions .validation-msg {*/
+/*    line-height: 19px;*/
+/*  }*/
+/*  .ticket-update-content .updater-name {*/
+/*    margin-top: -2px;*/
+/*  }*/
+/*  .ticket-update-content .ticket-update-meta > .avatar {*/
+/*    margin-top: 1px;*/
+/*  }*/
+/*  .table-wrapper {*/
+/*    margin-top: 10px;*/
+/*  }*/
+/*  .ticket-update-edit {*/
+/*    margin-bottom: 9px;*/
+/*  }*/
+/*  .ticket-update-content .attachments {*/
+/*    margin-top: 11px;*/
+/*  }*/
+/*  .updater-name a.hit-area {*/
+/*    margin-top: 3px;*/
+/*  }*/
+/*  .ticket-update-content .attachments > li {*/
+/*    margin-bottom: 9px;*/
+/*  }*/
+/*  .ticket-update-product-edit, .ticket-update-service-edit {*/
+/*    box-shadow: rgba(10, 45, 89, 0.15) 0px 0px 15px 0px;*/
+/*  }*/
+/*}*/
+
+/*.product-upd .table-content-top .col-md-1 {*/
+/*  width: 11.1%;*/
+/*}*/
+
+/*.product-upd .table-content-top .col-md-9 {*/
+/*  width: 64%;*/
+/*}*/
+
+/*@media screen and (max-width: 1440px) {*/
+/*  .table-wrapper.product-upd .table-content .col-1 {*/
+/*    width: 15%;*/
+/*  }*/
+
+/*  .table-wrapper.product-upd .table-content .col-3 {*/
+/*    width: 18%;*/
+/*  }*/
+/*}*/
+
+/*.notify-select {*/
+/*  padding: 5px 10px 0 10px;*/
+/*}*/
+
+/*.notify-select > span {*/
+/*  padding: 0 10px;*/
+/*  text-decoration: underline;*/
+/*  cursor: pointer;*/
+/*  color: #1586e4;*/
+/*}*/
+
+/*.notify-select > span:first-child {*/
+/*  padding-left: 0;*/
+/*}*/
+
+/*.table-content.service-table .col-3 {*/
+/*  width: 75%;*/
+/*  padding-left: 268px;*/
+/*}*/
+
+/*.table-content .table-content-bottom .action-update {*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*  justify-content: flex-end;*/
+/*}*/
+
+/*.table-content .table-content-bottom .action-update .assign-icn {*/
+/*  margin: 0 16px 0 8px;*/
+/*}*/
+
+/*.table-content .ticket-update-service-edit .action-update .icn-label-save-dashboard,*/
+/*.table-content .ticket-update-service-edit .action-update .assign-icn,*/
+/*.table-content .ticket-update-product-edit .action-update .icn-label-save-dashboard,*/
+/*.table-content .ticket-update-product-edit .action-update .assign-icn {*/
+/*  margin: 0 8px;*/
+/*}*/
+
+/*.table-content .ticket-update-product-edit .action-update .dashboard-remove,*/
+/*.table-content .ticket-update-service-edit .action-update .dashboard-remove {*/
+/*  margin: 0 0 0 8px;*/
+/*}*/
+
+/*.ticket-update-service-edit .timer-quantity .time_drop_down ul {*/
+/*  width: 42px;*/
+/*}*/
+
+/*.ticket-update-service-edit .timer-quantity .time_drop_down ul li a:hover {*/
+/*  background: #16a4fa !important;*/
+/*  color: #ffffff;*/
+/*}*/
+
+/*.table-content .table-content-bottom [class*='col-md-'] {*/
+/*  font-size: 13px;*/
+/*  font-family: "Graphik-Regular", sans-serif;*/
+/*}*/
+
+/*.gm {*/
+/*  font-family: "Graphik-Medium", sans-serif !important;*/
+/*}*/
+
+/*.table-content .table-content-top {*/
+/*  border-bottom: 1px solid #4f5f79;*/
+/*  font-size: 12px;*/
+/*  font-family: "Graphik-Medium", sans-serif;*/
+/*  position: relative;*/
+/*}*/
+
+/*.mob-ticket-updates .ticket-update-header {*/
+/*  position: relative;*/
+/*  border-bottom: 1px solid #4f5f79;*/
+/*}*/
+
+/*.table-content .table-content-top:before,*/
+/*.mob-ticket-updates .ticket-update-header:before {*/
+/*  position: absolute;*/
+/*  content: 'SERVICE';*/
+/*  font-size: 9px;*/
+/*  font-family: "Graphik-Semibold", sans-serif;*/
+/*  padding: 0 8px;*/
+/*  background: #edf2f6;*/
+/*  color: #4f5f79;*/
+/*  left: 0;*/
+/*  top: 6px;*/
+/*}*/
+
+/*.mob-ticket-updates .ticket-update-header:before {*/
+/*  top: 0;*/
+/*}*/
+
+/*.product-upd .table-content-top:before,*/
+/*.mob-ticket-updates .mob-product-update .ticket-update-header:before {*/
+/*  content: 'PRODUCT';*/
+/*}*/
+
+/*.mob-ticket-updates .mob-product-update .ticket-update-header {*/
+/*  padding-left: 65px;*/
+/*}*/
+
+/*.mob-ticket-updates .mob-note-update .ticket-update-header {*/
+/*  padding-left: 47px;*/
+/*}*/
+
+/*.mob-ticket-updates .mob-service-update .ticket-update-header {*/
+/*  padding-left: 59px;*/
+/*}*/
+
+/*.note-upd .table-content-top:before,*/
+/*.mob-ticket-updates .mob-note-update .ticket-update-header:before {*/
+/*  content: 'NOTE';*/
+/*}*/
+
+/*.table-content .ticket-update-service-edit .timepicker {*/
+/*  top: 6px;*/
+/*}*/
+
+/*.table-content .table-content-top.without-duration .timepicker {*/
+/*  right: 0;*/
+/*}*/
+
+/*.table-content .table-content-top .dropdown-menu {*/
+/*  !*top: 100% !important;*!*/
+/*}*/
+
+/*.table-content .table-content-top .new-input {*/
+/*  padding: 5px 12px;*/
+/*}*/
+
+/*.table-wrapper .service-table .table-content-top.without-duration .service-title {*/
+/*  width: 57%;*/
+/*}*/
+
+/*.ticket-update-service-edit .table-content .table-content-top,*/
+/*.ticket-update-service-edit .table-content .table-content-bottom,*/
+/*.ticket-update-product-edit .table-content .table-content-top,*/
+/*.ticket-update-product-edit .table-content .table-content-bottom {*/
+/*  padding: 0;*/
+/*}*/
+
+/*.table-content .table-content-top,*/
+/*.table-content .table-content-bottom {*/
+/*  padding: 10px 0;*/
+/*}*/
+
+/*.table-content .table-content-bottom:not(:last-child) {*/
+/*  border-bottom: 1px solid #edf2f6;*/
+/*}*/
+
+/*.table-wrapper .service-table .col-md-1.timer-quantity {*/
+/*  width: 8.33333333%;*/
+/*}*/
+
+/*.table-wrapper .service-table .col-md-5.service-title {*/
+/*  width: 40%;*/
+/*}*/
+
+/*.table-wrapper .service-table .col-md-2.new-quantity-picker {*/
+/*  width: 22.2%;*/
+/*}*/
+
+/*.checkbox-container {*/
+/*  position: relative;*/
+/*  min-width: 22px;*/
+/*  height: 22px;*/
+/*  margin: 0;*/
+/*  cursor: pointer;*/
+/*}*/
+
+/*.container-ticket-content .checkbox-container .checkbox-mark {*/
+/*  position: absolute;*/
+/*  left: 0;*/
+/*  top: 0;*/
+/*  width: 22px;*/
+/*  height: 22px;*/
+/*  background: url("../images/new-icons/checkbox-ticket.png");*/
+/*}*/
+
+/*.checkbox-container input {*/
+/*  opacity: 0;*/
+/*}*/
+
+/*.container-ticket-content .checkbox-container input:checked ~ .checkbox-mark {*/
+/*  background-position: 24px 0;*/
+/*}*/
+
+/*.service-name p:first-child {*/
+/*  font-family: "Graphik-Medium", sans-serif;*/
+/*  font-size: 13px;*/
+/*  display: flex;*/
+/*}*/
+
+/*.ticket-update-service-edit .service-name p:first-child {*/
+/*  height: 40px;*/
+/*}*/
+
+/*.service-name p:first-child .checkbox-container,*/
+/*.product-upd .col-md-6 label {*/
+/*  margin-right: 10px;*/
+/*}*/
+
+/*.product-upd .col-md-6 {*/
+/*  display: flex;*/
+/*}*/
+
+/*.product-upd .col-md-6 p {*/
+/*  font-family: "Graphik-Medium", sans-serif;*/
+/*}*/
+
+/*.product-upd .col-md-1 {*/
+/*  width: 11.1%;*/
+/*}*/
+
+/*.service-name p:last-child {*/
+/*  font-family: "Graphik-Regular", sans-serif;*/
+/*  font-size: 12px;*/
+/*  line-height: 1.33;*/
+/*  padding-left: 33px;*/
+/*}*/
+
+/*@media screen and (min-width: 2048px) {*/
+/*  .table-content.service-table .col-3 {*/
+/*    width: 75%;*/
+/*  }*/
+
+/*  .opened-ticket .table-wrapper .service-table .col-3 {*/
+/*    width: calc(100% - 605px);*/
+/*  }*/
+
+/*  .opened-ticket-list .table-wrapper .service-table .col-3 {*/
+/*    width: calc(100% - 485px);*/
+/*  }*/
+
+/*  _:-moz-tree-row(hover), .opened-ticket-list .table-wrapper .service-table .col-3 {*/
+/*    width: calc(100% - 488px);*/
+/*  }*/
+
+/*  .qt-recurring-invoices .table-wrapper .table-content .col-sm-4 {*/
+/*    width: 33.333333%;*/
+/*  }*/
+/*}*/
+
+/*.table-content .table-content-top .new-input,*/
+/*.table-content .table-content-bottom .new-input {*/
+/*  padding: 5px;*/
+/*}*/
+
+/*@media screen and (max-width: 1600px) {*/
+/*  .table-content .ticket-update-service-edit .action-update .icn-label-save-dashboard,*/
+/*  .table-content .ticket-update-service-edit .action-update .assign-icn,*/
+/*  .table-content .ticket-update-product-edit .action-update .icn-label-save-dashboard,*/
+/*  .table-content .ticket-update-product-edit .action-update .assign-icn {*/
+/*    margin: 0 4px;*/
+/*  }*/
+
+/*  .table-content .ticket-update-product-edit .action-update .dashboard-remove,*/
+/*  .table-content .ticket-update-service-edit .action-update .dashboard-remove {*/
+/*    margin: 0 0 0 4px;*/
+/*  }*/
+
+/*  .table-content input {*/
+/*    font-size: 12px;*/
+/*  }*/
+
+/*  .table-content .table-content-top .timepicker {*/
+/*    right: 0;*/
+/*  }*/
+
+/*  .table-content.service-table .col-3 {*/
+/*    padding-left: 342px;*/
+/*  }*/
+
+/*  .table-wrapper .service-table .table-content-top.without-duration .service-title {*/
+/*    width: 50%;*/
+/*  }*/
+
+/*  .table-wrapper .service-table .table-content-top.without-duration .service-datetimepicker,*/
+/*  .table-wrapper .service-table .table-content-top.without-duration .new-quantity-picker {*/
+/*    width: 25%;*/
+/*  }*/
+
+/*  .table-wrapper .service-table .col-md-1.timer-quantity {*/
+/*    width: 9%;*/
+/*  }*/
+
+/*  .table-wrapper .service-table .col-md-5.service-title {*/
+/*    width: 36%;*/
+/*  }*/
+
+/*  !*.ticket-update-service-edit {*!*/
+/*  !*padding: 30px 40px 30px 50px;*!*/
+/*  !*}*!*/
+/*  .ticket-update-product-edit {*/
+/*    padding: 0;*/
+/*  }*/
+
+/*  .ticket-update-edit .icon-edit {*/
+/*    left: 30px;*/
+/*  }*/
+
+/*  .table-wrapper .service-table .col-3 {*/
+/*    width: calc(100% - 563px);*/
+/*  }*/
+
+/*  .opened-ticket-list .table-wrapper .service-table .col-3 {*/
+/*    width: 36%;*/
+/*  }*/
+
+/*  _::-webkit-:not(:root:root), .opened-ticket-list .table-wrapper .service-table .col-3 {*/
+/*    width: 35%;*/
+/*  }*/
+
+/*  .opened-ticket-list .table-wrapper .service-table .col-5 div {*/
+/*    white-space: nowrap;*/
+/*  }*/
+
+/*  .inventory-details .table-wrapper .service-table .col-3 {*/
+/*    width: calc(100% - 290px);*/
+/*  }*/
+
+/*  .table-wrapper .table-content .discount-ticket {*/
+/*    white-space: normal;*/
+/*  }*/
+
+/*  .table-wrapper .service-table .col-2 {*/
+/*    width: 20%;*/
+/*  }*/
+/*}*/
+
+/*@media screen and (max-width: 1366px) {*/
+/*  !*.opened-ticket-list .product-upd .table-content-top .col-md-1 {*!*/
+/*  !*  width: 33.33333%;*!*/
+/*  !*}*!*/
+/*  .ticket-update-service-edit .start-end-picker .time-picker-in input,*/
+/*  .ticket-update-service-edit .start-end-picker .time-picker-out input {*/
+/*    font-size: 11px;*/
+/*  }*/
+
+/*  .ticket-add-content .ticket-add-service .col-2.new-date-picker {*/
+/*    width: 20%;*/
+/*  }*/
+
+/*  .time-picker-width {*/
+/*    width: 34% !important;*/
+/*  }*/
+
+/*  .opened-ticket-list .ticket-update {*/
+/*    margin: 0 20px 30px;*/
+/*  }*/
+
+/*  .opened-ticket-list .table-content .action-update .icn-label-save-dashboard {*/
+/*    position: absolute;*/
+/*    right: -21px;*/
+/*    top: 0;*/
+/*  }*/
+
+/*  .opened-ticket-list .table-content .action-update .dashboard-remove {*/
+/*    position: absolute;*/
+/*    right: -15px;*/
+/*    top: 26px;*/
+/*  }*/
+
+/*  .opened-ticket-list .ticket-update-service-edit .action-update {*/
+/*    width: 12%;*/
+/*  }*/
+
+/*  .opened-ticket-list .ticket-update-service-edit .col-md-1 {*/
+/*    width: 14%;*/
+/*  }*/
+
+/*  .opened-ticket-list .service-table .col-md-6 {*/
+/*    width: 45%;*/
+/*  }*/
+
+/*  .opened-ticket-list .service-table .col-md-6.service-name {*/
+/*    width: 42%;*/
+/*  }*/
+
+/*  .opened-ticket-list .table-wrapper .service-table .col-md-2.new-quantity-picker {*/
+/*    width: 28%;*/
+/*  }*/
+
+/*  .opened-ticket-list .table-wrapper .service-table .col-md-1 {*/
+/*    width: 13.7%;*/
+/*    font-size: 12px;*/
+/*  }*/
+
+/*  .opened-ticket-list .table-wrapper .ticket-update-service-edit .col-md-1 {*/
+/*    width: 13%;*/
+/*  }*/
+
+/*  .opened-ticket-list .product-upd .table-content-top .col-md-9,*/
+/*  .opened-ticket.opened-ticket-list .ticket-update-product-edit .table-content-top .col-md-6 {*/
+/*    width: 100%;*/
+/*  }*/
+
+/*  .table-content .table-content-top .timepicker {*/
+/*    right: auto;*/
+/*  }*/
+
+/*  .table-content .table-content-top.without-duration .timepicker {*/
+/*    right: 0;*/
+/*  }*/
+
+/*  .table-content.service-table .col-3 {*/
+/*    padding-left: 295px;*/
+/*  }*/
+
+/*  .opened-ticket.opened-ticket-list .table-wrapper .service-table .table-content-top.without-duration .service-title {*/
+/*    width: 40%;*/
+/*  }*/
+
+/*  .opened-ticket.opened-ticket-list .table-wrapper .service-table .table-content-top.without-duration .service-datetimepicker {*/
+/*    width: 27%;*/
+/*  }*/
+
+/*  .opened-ticket.opened-ticket-list .table-wrapper .service-table .table-content-top.without-duration .new-quantity-picker {*/
+/*    width: 33%;*/
+/*  }*/
+
+/*  .table-wrapper .table-content .form-group input {*/
+/*    font-size: 12px;*/
+/*  }*/
+
+/*  .tax-recurring input {*/
+/*    font-size: 12px;*/
+/*  }*/
+
+/*  .table-wrapper .table-content .discount-ticket {*/
+/*    white-space: nowrap;*/
+/*  }*/
+
+/*  .table-wrapper .service-table .col-3 {*/
+/*    width: calc(100% - 464px);*/
+/*  }*/
+
+/*  .inventory-details .table-wrapper .service-table .col-3 {*/
+/*    width: calc(100% - 230px);*/
+/*  }*/
+
+/*  .opened-ticket-list .table-wrapper .service-table .col-3 {*/
+/*    width: 75%;*/
+/*  }*/
+
+/*  .opened-ticket.opened-ticket-list .table-wrapper .service-table .col-md-5.service-title {*/
+/*    width: 66.66666%;*/
+/*  }*/
+
+/*  !*.opened-ticket.opened-ticket-list .table-content-top .col-md-1,*!*/
+/*  !*.opened-ticket.opened-ticket-list .table-content-top .col-md-2 {*!*/
+/*  !*  width: 33.33333333%;*!*/
+/*  !*  text-align: left !important;*!*/
+/*  !*}*!*/
+/*  !*.opened-ticket.opened-ticket-list .table-content-top .col-md-6 {*!*/
+/*  !*  width: 66.66666667%;*!*/
+/*  !*}*!*/
+/*}*/
+
+/*@media screen and (max-width: 1280px) {*/
+/*  .inventory-details .table-wrapper .service-table .col-3 {*/
+/*    width: calc(100% - 210px);*/
+/*  }*/
+
+/*  .table-content input {*/
+/*    font-size: 13px;*/
+/*  }*/
+
+/*  .ticket-update-service-edit .start-end-picker .time-picker-in input,*/
+/*  .ticket-update-service-edit .start-end-picker .time-picker-out input {*/
+/*    font-size: 13px;*/
+/*  }*/
+
+/*  .table-content.service-table .col-3 {*/
+/*    padding-left: 278px;*/
+/*  }*/
+
+/*  .table-wrapper .table-content .col-5 {*/
+/*    width: 14%;*/
+/*  }*/
+
+/*  .table-wrapper .table-content .col-2.col-2-has-serial-number {*/
+/*    width: 71%;*/
+/*  }*/
+/*}*/

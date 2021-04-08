@@ -1,36 +1,36 @@
-.ticket-well {
-  /*min-width: 638px;*/
-  margin: 30px 30px;
-  padding-bottom: 25px;
-}
-
-.opened-ticket-list .ticket-well {
-  margin-bottom: 138px;
-}
-
-.ticket-well .text-muted {
-  display: inline-block;
-  margin-top: 8px;
-  font-size: 12px;
-  line-height: 16px;
-}
-
-.well-message, .well-actions {
-  text-align: center;
-  padding: 0 20px;
-}
-.well-message{
-  margin-bottom: 25px;
-}
-
-.well-actions .btn {
-  display: inline-block;
-  margin: 0 4px 5px;
-}
-
-/*@-moz-document url-prefix() {*/
-  /*.well-message {*/
-    /*margin-top: 24px;*/
-    /*padding-bottom: 1px;*/
-  /*}*/
+/*.ticket-well {*/
+/*  !*min-width: 638px;*!*/
+/*  margin: 30px 30px;*/
+/*  padding-bottom: 25px;*/
 /*}*/
+
+/*.opened-ticket-list .ticket-well {*/
+/*  margin-bottom: 138px;*/
+/*}*/
+
+/*.ticket-well .text-muted {*/
+/*  display: inline-block;*/
+/*  margin-top: 8px;*/
+/*  font-size: 12px;*/
+/*  line-height: 16px;*/
+/*}*/
+
+/*.well-message, .well-actions {*/
+/*  text-align: center;*/
+/*  padding: 0 20px;*/
+/*}*/
+/*.well-message{*/
+/*  margin-bottom: 25px;*/
+/*}*/
+
+/*.well-actions .btn {*/
+/*  display: inline-block;*/
+/*  margin: 0 4px 5px;*/
+/*}*/
+
+/*!*@-moz-document url-prefix() {*!*/
+/*  !*.well-message {*!*/
+/*    !*margin-top: 24px;*!*/
+/*    !*padding-bottom: 1px;*!*/
+/*  !*}*!*/
+/*!*}*!*/
