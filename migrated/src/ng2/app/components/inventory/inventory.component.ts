@@ -23,7 +23,6 @@ import { InventoryChange } from './class/inventory-change';
   providers: [InventoryListService]
 })
 export class InventoryComponent implements OnInit {
-  sortCategoty: CategoryProductitem = null;
   inventoryList: Array<InventoryItem> = [];
   reqInventoryList: Array<InventoryItem> = [];
   filter: InventoryFilter = new InventoryFilter();
@@ -32,7 +31,6 @@ export class InventoryComponent implements OnInit {
   showPreloader: boolean = true;
   companies = [];
   glNumbers: Array<GlNumber> = [];
-  productSearchName: string = '';
   sub: Subscription = new Subscription();
   taxes: Array<Tax> = [];
 
@@ -72,13 +70,23 @@ export class InventoryComponent implements OnInit {
     this.sub.add(getConfirm);
     let getOnSortCategory = this.inventoryStateService.getOnSortCategory().subscribe(data => {
       window.scrollTo(0, 0);
-      this.sortCategoty = data;
+      this.filter.setSortCategoty(data);
       this.page_number = 0;
       this.inventoryListService.setBlockList(false);
       this.inventoryList = [];
       this.onScroll();
     })
     this.sub.add(getOnSortCategory);
+    let onSortActive = this.inventoryStateService.onSortActive.subscribe(data => {
+      this.filter.setActive(data);
+      window.scrollTo(0, 0);
+      this.page_number = 0;
+      this.inventoryListService.setBlockList(false);
+      this.inventoryList = [];
+      this.showPreloader = true;
+      this.getListProducts();
+    })
+    this.sub.add(onSortActive);
     let getChangeProducts = this.inventoryStateService.getChangeProducts().subscribe((data: InventoryChange) => {
 
       if (data.action === 'PRODUCT_SAVED') {
@@ -91,8 +99,8 @@ export class InventoryComponent implements OnInit {
         }
         if (Index === -1) {
           this.inventoryList.push(new InventoryItem(data.data));
-          this.inventoryList = this.inventoryList.filter(item => (this.sortCategoty) ? item.category.id === this.sortCategoty.id : (!this.sortCategoty) ? true : false);
-          this.inventoryList = this.inventoryList.filter(item => (this.productSearchName.length > 0) ? item.description.toLowerCase().includes(this.productSearchName.toLowerCase()) : true);
+          this.inventoryList = this.filter.getFilterList(this.inventoryList);
+          // this.inventoryList = this.inventoryList.filter(item => (this.productSearchName.length > 0) ? item.description.toLowerCase().includes(this.productSearchName.toLowerCase()) : true);
           this.filter.onFilter(this.inventoryList, this.companies, this.glNumbers);
         }
 
@@ -120,7 +128,7 @@ export class InventoryComponent implements OnInit {
     return this.permissionsService.isAllowed(action)
   }
   public getListProducts() {
-    this.productService.getProducts().subscribe((res: Array<InventoryItem>) => {
+    this.productService.getProducts(this.filter.getActive()).subscribe((res: Array<InventoryItem>) => {
       this.reqInventoryList = res;
       this.onScroll();
       this.showPreloader = false;
@@ -134,8 +142,8 @@ export class InventoryComponent implements OnInit {
       return;
     }
     this.page_number += 1;
-    let listFilter = this.reqInventoryList.filter(item => (this.sortCategoty) ? item.category.id === this.sortCategoty.id : (!this.sortCategoty) ? true : false);
-    listFilter = listFilter.filter(item => (this.productSearchName.length > 0) ? (item.description.toLowerCase().includes(this.productSearchName.toLowerCase()) || item.ilc && item.ilc.toLowerCase().includes(this.productSearchName.toLowerCase()) || item.isFindGlNumber(this.productSearchName) || item.manufacture && item.manufacture.toLowerCase().includes(this.productSearchName.toLowerCase())) : true);
+    let listFilter = this.filter.getFilterList(this.reqInventoryList);
+    // listFilter = listFilter.filter(item => (this.productSearchName.length > 0) ? (item.description.toLowerCase().includes(this.productSearchName.toLowerCase()) || item.ilc && item.ilc.toLowerCase().includes(this.productSearchName.toLowerCase()) || item.isFindGlNumber(this.productSearchName) || item.manufacture && item.manufacture.toLowerCase().includes(this.productSearchName.toLowerCase())) : true);
     this.filter.onFilter(listFilter, this.companies, this.glNumbers);
     let start = (this.page_number - 1) * 30;
     let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;
@@ -149,7 +157,7 @@ export class InventoryComponent implements OnInit {
     this.cd.detectChanges();
   }
   onSearch(data) {
-    this.productSearchName = data;
+    this.filter.setProductSearchName(data);
     this.page_number = 0;
     this.inventoryListService.setBlockList(false);
     this.inventoryList = [];

@@ -15,6 +15,7 @@ export class InventoryItem {
     companyId: string;
     billable: boolean;
     taxIds: Array<String>
+    active: boolean = true;
     constructor(data = null) {
         if (data != null) {
             this.versionedId = data.versionedId;
@@ -28,6 +29,7 @@ export class InventoryItem {
             this.companyId = data.companyId;
             this.billable = data.billable;
             this.taxIds = data.taxIds;
+            this.active = data.active;
         }
     }
 
@@ -41,6 +43,7 @@ export class InventoryItem {
             description: this.description,
             companyId: this.companyId,
             taxIds: this.taxIds,
+            active: this.active,
             categoryId: (this.category) ? this.category.id : null,
             glNumber: (this.glNumber && this.glNumber.id) ? { id: this.glNumber.id } : null,
         }
@@ -56,6 +59,7 @@ export class InventoryItem {
             description: this.description,
             companyId: this.companyId,
             taxIds: this.taxIds,
+            active: this.active,
             categoryId: (this.category) ? this.category.id : null,
             glNumber: (this.glNumber && this.glNumber.id) ? { id: this.glNumber.id } : null,
         }

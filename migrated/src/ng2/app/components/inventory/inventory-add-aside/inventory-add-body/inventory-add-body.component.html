@@ -152,6 +152,18 @@
             ></app-select-search>
         </div>
     </div>
+    <div class="create-product__col --required">
+        <div>
+            <label class="checkbox-container">
+                Set product as active
+                <input
+                    type="checkbox"
+                    [(ngModel)]="inventory.active"
+                >
+                <span class="checkbox-mark"></span>
+            </label>
+        </div>
+    </div>
 </div>
 <div class="qt-aside-modern__footer">
     <div class="qt-df">

@@ -15,11 +15,12 @@ export class InventoryStateService {
   categoryForDelete: CategoryProduct = null;
   productForDelete: InventoryItem = null;
   onSortCategory: EventEmitter<any> = new EventEmitter();
+  onSortActive: EventEmitter<any> = new EventEmitter();
   onGetCategories: EventEmitter<any> = new EventEmitter();
   onGetProducts: EventEmitter<any> = new EventEmitter();
   onChangeProducts: EventEmitter<InventoryChange> = new EventEmitter();
   categories = [];
-  productList:Array<CategoryProductitem> = [];
+  productList: Array<CategoryProductitem> = [];
   constructor(private productService: ProductService,
     private inventoryRealTimeService: InventoryRealTimeService) { }
   public onInit() {
@@ -112,6 +113,9 @@ export class InventoryStateService {
   }
   public setSortCategory(data) {
     this.onSortCategory.emit(data);
+  }
+  public setSortActive(data) {
+    this.onSortActive.emit(data);
   }
 
   public getOnSortCategory() {
