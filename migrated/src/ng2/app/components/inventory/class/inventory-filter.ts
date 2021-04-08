@@ -31,13 +31,14 @@ export class InventoryFilter {
         return this.active;
     }
     public getFilterList(reqInventoryList: Array<InventoryItem>) {
-        let list = reqInventoryList.filter((item: InventoryItem) => {
-            if (this.sortCategoty && item.category.id !== this.sortCategoty.id) return false;
-            if (item.active != this.active) return false;
-            if (this.productSearchName.length > 0 && (!item.description.toLowerCase().includes(this.productSearchName.toLowerCase()) && !(item.ilc && item.ilc.toLowerCase().includes(this.productSearchName.toLowerCase())) && !item.isFindGlNumber(this.productSearchName) && !(item.manufacture && item.manufacture.toLowerCase().includes(this.productSearchName.toLowerCase())))) return false;
-            return true;
-        })
+        let list = reqInventoryList.filter((item: InventoryItem) => this.isFilterItem(item))
         return list;
+    }
+    public isFilterItem(item) {
+        if (this.sortCategoty && item.category.id !== this.sortCategoty.id) return false;
+        if (item.active != this.active) return false;
+        if (this.productSearchName.length > 0 && (!item.description.toLowerCase().includes(this.productSearchName.toLowerCase()) && !(item.ilc && item.ilc.toLowerCase().includes(this.productSearchName.toLowerCase())) && !item.isFindGlNumber(this.productSearchName) && !(item.manufacture && item.manufacture.toLowerCase().includes(this.productSearchName.toLowerCase())))) return false;
+        return true;
     }
     public clearFilter() {
         this.filterTop.forEach(item => item.filter = '');

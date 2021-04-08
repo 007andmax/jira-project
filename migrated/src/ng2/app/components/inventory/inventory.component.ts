@@ -92,12 +92,16 @@ export class InventoryComponent implements OnInit {
       if (data.action === 'PRODUCT_SAVED') {
         const reqIndex = this.reqInventoryList.findIndex((item) => item.versionedId.id === data.data.versionedId.id);
         const Index = this.inventoryList.findIndex((item) => item.versionedId.id === data.data.versionedId.id);
-        if (reqIndex > -1) this.reqInventoryList[reqIndex] = new InventoryItem(data.data);
-        if (reqIndex === -1) this.reqInventoryList.push(new InventoryItem(data.data));
+        if (reqIndex > -1) {
+          this.reqInventoryList[reqIndex] = new InventoryItem(data.data);
+          if (!this.filter.isFilterItem(data.data)) this.reqInventoryList.splice(reqIndex, 1);
+        }
+        if (reqIndex === -1 && this.filter.isFilterItem(data.data)) this.reqInventoryList.push(new InventoryItem(data.data));
         if (Index > -1) {
           this.inventoryList[Index] = new InventoryItem(data.data);
+          if (!this.filter.isFilterItem(data.data)) this.inventoryList.splice(Index, 1);
         }
-        if (Index === -1) {
+        if (Index === -1 && this.filter.isFilterItem(data.data)) {
           this.inventoryList.push(new InventoryItem(data.data));
           this.inventoryList = this.filter.getFilterList(this.inventoryList);
           // this.inventoryList = this.inventoryList.filter(item => (this.productSearchName.length > 0) ? item.description.toLowerCase().includes(this.productSearchName.toLowerCase()) : true);
