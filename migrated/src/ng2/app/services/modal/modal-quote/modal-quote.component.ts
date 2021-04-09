@@ -234,7 +234,18 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
     this.users = [];
     this.activeModal.dismiss('Cross click');
   }
-
+  public onAdd(e) {
+    console.log("e.target.value", e.target.value);
+    const input = e.target;
+    const value = e.target.value;
+    if (value.length > 0) {
+      this.selectedUsers.push(value);
+      this.usersEmails.push(value);
+      this.quoteStateService.setUsersEmail(this.usersEmails);
+      input.value = '';
+      this.userCtrl.setValue(null);
+    }
+  }
   public keyup(e) {
     if (e.keyCode === 13) {
       const input = e.target;
