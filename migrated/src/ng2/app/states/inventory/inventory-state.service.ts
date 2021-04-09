@@ -46,8 +46,11 @@ export class InventoryStateService {
         const Index = this.productList.findIndex((item) => item.id === newChange.data.category.id);
         if (Index > -1) {
           let indexProduct = this.productList[Index].products.findIndex(item => item.versionedId.id === newChange.data.versionedId.id)
-          if (indexProduct > -1) this.productList[Index].products[indexProduct] = newChange.data;
-          if (indexProduct === -1) this.productList[Index].products.push(newChange.data);
+          if (indexProduct > -1) {
+            if (newChange.data.active) this.productList[Index].products[indexProduct] = newChange.data;
+            if (!newChange.data.active) this.productList[Index].products.splice(indexProduct, 1);
+          }
+          if (indexProduct === -1 && newChange.data.active) this.productList[Index].products.push(newChange.data);
         }
       }
       this.onInitGetProducts(this.productList);
