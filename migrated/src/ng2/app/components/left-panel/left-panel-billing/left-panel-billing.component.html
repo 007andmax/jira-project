@@ -25,7 +25,7 @@
         Default Services
     </li>
     <li
-        [ngClass]="{'--active':activePage === 'new-billable'}"
+        [ngClass]="{'--active':activePage === 'new-billable' || activePage === 'new-billable-tickets'}"
         (click)="goToState('new-billable')"
     >
         Billable Items

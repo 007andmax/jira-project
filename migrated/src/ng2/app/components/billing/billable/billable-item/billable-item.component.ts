@@ -9,6 +9,7 @@ import { CurrentUser } from 'src/ng2/class/current-user/current-user';
 import { User } from '../../../users/class/user';
 import { TicketsListService } from '../../../tickets/tickets/services/tickets-list.service';
 import { BillableStateService } from 'src/ng2/app/states/billable/billable-state.service';
+import { LeftPanelStateService } from 'src/ng2/app/states/left-panel/left-panel-state.service';
 
 @Component({
   selector: 'app-billable-item',
@@ -26,6 +27,7 @@ export class BillableItemComponent implements OnInit {
   constructor(private companiesStateService: CompaniesStateService,
     public ticketsListService: TicketsListService,
     private billableStateService: BillableStateService,
+    private leftPanelStateService: LeftPanelStateService,
     private usersStateService: UsersStateService) { }
 
   ngOnInit() {
@@ -55,12 +57,13 @@ export class BillableItemComponent implements OnInit {
   };
   moToBillableTickets() {
     this.billableStateService.setBillableProfile(this.item);
-    let body = document.querySelector('.main-container');
-    var link = document.createElement('a');
-    body.appendChild(link);
-    link.href = `#/ng2/billable-tickets`;
-    var e = document.createEvent('MouseEvents');
-    e.initEvent('click', true, true);
-    link.dispatchEvent(e);
+    this.leftPanelStateService.goToState('new-billable-tickets');
+    /*  let body = document.querySelector('.main-container');
+      var link = document.createElement('a');
+      body.appendChild(link);
+      link.href = `#/ng2/billable-tickets`;
+      var e = document.createEvent('MouseEvents');
+      e.initEvent('click', true, true);
+      link.dispatchEvent(e);*/
   }
 }

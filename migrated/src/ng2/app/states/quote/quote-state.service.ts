@@ -18,7 +18,6 @@ export class QuoteStateService {
   public handleSendModeList: EventEmitter<any> = new EventEmitter();
   public handleSendModePreview: EventEmitter<any> = new EventEmitter();
   public handleSendModeEdit: EventEmitter<any> = new EventEmitter();
-  public state;
   public usersEmail: any;
 
   constructor(
@@ -113,16 +112,6 @@ export class QuoteStateService {
       price = cost * count
     }
     return price;
-  }
-
-
-  /**
-   * move to  component with params
-   * @param state state
-   * @param params params
-   */
-  public goToState(state, params?) {
-    this.state.go(state, params);
   }
 
   /**

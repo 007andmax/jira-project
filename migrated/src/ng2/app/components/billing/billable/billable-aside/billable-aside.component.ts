@@ -18,6 +18,7 @@ import { DisabledBtnDirective } from 'src/ng2/app/directives/disabled-btn.direct
 import { InvoiceRealTimeService } from 'src/ng2/app/states/invoice/invoice-real-time.service';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { InvoiceFormComponent } from './invoice-form/invoice-form.component';
+import { LeftPanelStateService } from 'src/ng2/app/states/left-panel/left-panel-state.service';
 
 @Component({
   selector: 'app-billable-aside',
@@ -53,6 +54,7 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
     private notificationStateService: NotificationStateService,
     private confirmStateService: ConfirmStateService,
     private invoiceRealTimeService: InvoiceRealTimeService,
+    private leftPanelStateService: LeftPanelStateService,
     private billableService: BillableService) { }
 
 
@@ -155,13 +157,8 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
     })
   }
   moToBillable() {
-    let body = document.querySelector('.main-container');
-    var link = document.createElement('a');
-    body.appendChild(link);
-    link.href = `#/ng2/billable`;
-    var e = document.createEvent('MouseEvents');
-    e.initEvent('click', true, true);
-    link.dispatchEvent(e);
+    console.log("moToBillable");
+    this.leftPanelStateService.goToState('new-billable');
   }
   saveAndDownload() {
     this.disabledSaveBtns();

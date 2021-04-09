@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { LeftPanelStateService } from 'src/ng2/app/states/left-panel/left-panel-state.service';
 import { QuoteStateService } from 'src/ng2/app/states/quote/quote-state.service';
 
 @Component({
@@ -11,13 +12,13 @@ export class ReportListItemComponent implements OnInit {
   @Input() img: string;
   @Input() listTitles: Array<string> = [];
   @Input() listStates: Array<string> = [];
-  constructor(private quoteStateService: QuoteStateService,) { }
+  constructor(private leftPanelStateService: LeftPanelStateService,) { }
 
   ngOnInit() {
   }
   public goToState(state) {
     localStorage.setItem('report', state);
-    this.quoteStateService.goToState(state);
+    this.leftPanelStateService.goToState(state);
   }
   public trackByIndex(index, item) {
     return index;

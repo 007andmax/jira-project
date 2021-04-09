@@ -39,15 +39,15 @@ export class HeaderComponent implements OnInit {
     this.toggleLeftPanel = !this.toggleLeftPanel;
     this.leftPanelStateService.toggleLeftPanel(this.toggleLeftPanel);
   }
-  goToLink(url) {
-
-    let body = document.querySelector('.main-container');
-    var link = document.createElement('a');
-    body.appendChild(link);
-    link.href = url;
-    var e = document.createEvent('MouseEvents');
-    e.initEvent('click', true, true);
-    link.dispatchEvent(e);
+  goToSettings() {
+    this.leftPanelStateService.goToState('myprofile-component');
+    /*   let body = document.querySelector('.main-container');
+       var link = document.createElement('a');
+       body.appendChild(link);
+       link.href = url;
+       var e = document.createEvent('MouseEvents');
+       e.initEvent('click', true, true);
+       link.dispatchEvent(e);*/
   }
   onAddTicket() {
     this.ticketsStateService.onToggleAddTicket();

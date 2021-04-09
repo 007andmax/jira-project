@@ -59,6 +59,7 @@ export class LeftPanelBillingComponent implements OnInit, OnDestroy {
     return (state === 'billing-dashboard'
       || state === 'new-services'
       || state === 'new-billable'
+      || state === 'new-billable-tickets'
       || state === 'new-billable-invoices'
       || state === 'quotes-component'
       || state === 'new-payments-ng2'

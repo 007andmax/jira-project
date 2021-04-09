@@ -15,6 +15,7 @@ import { Subscription } from 'rxjs';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { BillableRealTimeService } from 'src/ng2/app/states/billable/billable-real-time.service';
+import { LeftPanelStateService } from 'src/ng2/app/states/left-panel/left-panel-state.service';
 
 @Component({
   selector: 'billable-tickets',
@@ -40,11 +41,13 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
     private companiesStateService: CompaniesStateService,
     private notificationStateService: NotificationStateService,
     private billableRealTimeService: BillableRealTimeService,
+    private leftPanelStateService: LeftPanelStateService,
     public cd: ChangeDetectorRef,) { }
 
 
   ngOnInit() {
     window.scrollTo(0, 0);
+    this.leftPanelStateService.setBillingPage('new-billable-tickets');
     this.currentUser = this.usersStateService.getCurrentUser();
     if (this.companiesStateService.getCurrentCompany().addresses.length === 0) this.isCurrentCompanyAddressEmpty = false;
     this.billableProfile = this.billableStateService.getBillableProfile();
@@ -91,22 +94,24 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
     this.sub.add(changeBillable);
   }
   moToBillable() {
-    let body = document.querySelector('.main-container');
-    var link = document.createElement('a');
-    body.appendChild(link);
-    link.href = `#/ng2/billable`;
-    var e = document.createEvent('MouseEvents');
-    e.initEvent('click', true, true);
-    link.dispatchEvent(e);
+    this.leftPanelStateService.goToState('new-billable');
+    /*  let body = document.querySelector('.main-container');
+      var link = document.createElement('a');
+      body.appendChild(link);
+      link.href = `#/ng2/billable`;
+      var e = document.createEvent('MouseEvents');
+      e.initEvent('click', true, true);
+      link.dispatchEvent(e);*/
   }
   goToSettings() {
-    let body = document.querySelector('.main-container');
-    var link = document.createElement('a');
-    body.appendChild(link);
-    link.href = `#/ng2/setting/companyprofile`;
-    var e = document.createEvent('MouseEvents');
-    e.initEvent('click', true, true);
-    link.dispatchEvent(e);
+    this.leftPanelStateService.goToState('company-profile-component');
+    /*  let body = document.querySelector('.main-container');
+      var link = document.createElement('a');
+      body.appendChild(link);
+      link.href = `#/ng2/setting/companyprofile`;
+      var e = document.createEvent('MouseEvents');
+      e.initEvent('click', true, true);
+      link.dispatchEvent(e);*/
   }
   editTicket(id) {
     this.ticketsStateService.onOpenTicket();
@@ -252,13 +257,14 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
     this.filter.forEach(item => item.filter = '');
   }
   back() {
-    let body = document.querySelector('.main-container');
-    var link = document.createElement('a');
-    body.appendChild(link);
-    link.href = `#/ng2/billable`;
-    var e = document.createEvent('MouseEvents');
-    e.initEvent('click', true, true);
-    link.dispatchEvent(e);
+    this.leftPanelStateService.goToState('new-billable');
+    /* let body = document.querySelector('.main-container');
+     var link = document.createElement('a');
+     body.appendChild(link);
+     link.href = `#/ng2/billable`;
+     var e = document.createEvent('MouseEvents');
+     e.initEvent('click', true, true);
+     link.dispatchEvent(e);*/
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

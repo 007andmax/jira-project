@@ -23,7 +23,7 @@ export class ReportsComponent implements OnInit {
   }
   public goToState(state) {
     localStorage.setItem('report', state);
-    this.quoteStateService.goToState(state);
+    this.leftPanelStateService.goToState(state);
   }
   public getListTitles(type) {
     if (type === 'SALES') return ['Product sales report', 'Customer sales report'];

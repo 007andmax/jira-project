@@ -18,7 +18,7 @@ import { LeftPanelUsersComponent } from './left-panel-users/left-panel-users.com
   styleUrls: ['./left-panel.component.scss']
 })
 export class LeftPanelComponent implements OnInit {
-  public appType: string;
+
   toggleLeftPanel: boolean = false;
   state: string = '';
   @ViewChild('panelBilling') panelBilling: LeftPanelBillingComponent;
@@ -49,7 +49,6 @@ export class LeftPanelComponent implements OnInit {
     })
     this.router.events
       .subscribe((event) => {
-        const appType = this.router.url.startsWith('/ng2/quotes') ? '/ng2/quotes' : 'ng1';
         if (this.router.url.includes('report')) {
           this.leftPanelStateService.toggleLeftPanel(true);
         } else {
@@ -93,13 +92,34 @@ export class LeftPanelComponent implements OnInit {
           if (this.router.url.includes(`ng2/tickets`)) this.state = 'new-tickets';
           if (this.router.url.includes(`ng2/recurring-tickets`)) this.state = 'recurring-tickets';
           if (this.router.url.includes(`ng2/quickSupport`)) this.state = 'new-quickSupport';
+          if (this.router.url.includes(`ng2/billable-tickets`)) this.state = 'new-billable-tickets';
+
+          if (this.router.url.includes(`ng2/report/byProducts`)) this.state = 'byProducts';
+          if (this.router.url.includes(`ng2/report/byCustomers`)) this.state = 'byCustomers';
+          if (this.router.url.includes(`ng2/report/byTaxes`)) this.state = 'byTaxes';
+          if (this.router.url.includes(`ng2/report/common-commissions`)) this.state = 'common-commissions';
+          if (this.router.url.includes(`ng2/report/detailed-commissions`)) this.state = 'detailed-commissions';
+          if (this.router.url.includes(`ng2/report/accounts-receivable`)) this.state = 'accounts-receivable';
+          if (this.router.url.includes(`ng2/report/accounting-report`)) this.state = 'accounting-report';
+          if (this.router.url.includes(`ng2/report/remote-access`)) this.state = 'remote-access';
+          if (this.router.url.includes(`ng2/report/software-summary`)) this.state = 'software-summary';
+          if (this.router.url.includes(`ng2/report/hardware-summary`)) this.state = 'hardware-summary';
+          if (this.router.url.includes(`ng2/report/device-ip-summary`)) this.state = 'device-ip-summary';
+          if (this.router.url.includes(`ng2/report/tech-sales`)) this.state = 'tech-sales';
+          if (this.router.url.includes(`ng2/report/tech-ticket`)) this.state = 'tech-ticket';
+          if (this.router.url.includes(`ng2/report/tech-service`)) this.state = 'tech-service';
+          if (this.router.url.includes(`ng2/report/ticket-report`)) this.state = 'ticket-report';
+          if (this.router.url.includes(`ng2/report/service-report`)) this.state = 'service-report';
+          if (this.router.url.includes(`ng2/report/income-accounts`)) this.state = 'income-accounts';
+
           this.leftPanelStateService.firstOpen(this.state);
           this.leftPanelStateService.changeState(this.state);
           this.cd.detectChanges();
         }
-        this.setAppType(appType);
+
       });
     this.leftPanelStateService.onGoToState.subscribe(data => {
+      console.log("data", data);
       this.onChangeState(data);
     })
     this.leftPanelStateService.onOpenCompanyPage.subscribe(data => {
@@ -123,22 +143,10 @@ export class LeftPanelComponent implements OnInit {
     this.toggleLeftPanel = !this.toggleLeftPanel;
     this.leftPanelStateService.toggleLeftPanel(this.toggleLeftPanel);
   }
-  /**
-   * Set app type
-   * @param appType - application type
-   */
-  setAppType(appType) {
-    this.appType = appType;
-  }
+
   public goToLink(url) {
+    console.log("url", url);
     this.router.navigate([url]);
-    /* let body = document.querySelector('.main-container');
-     var link = document.createElement('a');
-     body.appendChild(link);
-     link.href = url;
-     var e = document.createEvent('MouseEvents');
-     e.initEvent('click', true, true);
-     link.dispatchEvent(e);*/
   }
   onChangeState(data) {
     if (this.state !== data) {
@@ -180,16 +188,31 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'new-tickets') this.goToLink('/ng2/tickets');
       if (this.state === 'recurring-tickets') this.goToLink('/ng2/recurring-tickets');
       if (this.state === 'new-quickSupport') this.goToLink('/ng2/quickSupport');
+      if (this.state === 'new-billable-tickets') this.goToLink('/ng2/billable-tickets');
+
+      if (this.state === 'byProducts' ||
+        this.state === 'byCustomers' ||
+        this.state === 'byTaxes' ||
+        this.state === 'common-commissions' ||
+        this.state === 'detailed-commissions' ||
+        this.state === 'accounts-receivable' ||
+        this.state === 'accounting-report' ||
+        this.state === 'remote-access' ||
+        this.state === 'software-summary' ||
+        this.state === 'hardware-summary' ||
+        this.state === 'device-ip-summary' ||
+        this.state === 'tech-sales' ||
+        this.state === 'tech-ticket' ||
+        this.state === 'tech-service' ||
+        this.state === 'ticket-report' ||
+        this.state === 'service-report' ||
+        this.state === 'income-accounts') this.goToLink('/ng2/report/' + this.state);
+
 
       this.leftPanelStateService.changeState(this.state);
       this.cd.detectChanges();
     }
   }
-  /**
-   * Check application type
-   */
-  isAppTypeIsNg2() {
-    return this.appType == '/ng2/quotes';
-  }
+
 
 }
