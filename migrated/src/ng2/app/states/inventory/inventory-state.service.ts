@@ -45,7 +45,9 @@ export class InventoryStateService {
       if (newChange.action === 'PRODUCT_SAVED') {
         const Index = this.productList.findIndex((item) => item.id === newChange.data.category.id);
         if (Index > -1) {
-          this.productList[Index].products.push(newChange.data);
+          let indexProduct = this.productList[Index].products.findIndex(item => item.versionedId.id === newChange.data.versionedId.id)
+          if (indexProduct > -1) this.productList[Index].products[indexProduct] = newChange.data;
+          if (indexProduct === -1) this.productList[Index].products.push(newChange.data);
         }
       }
       this.onInitGetProducts(this.productList);
