@@ -52,7 +52,7 @@ export class CompanyAddAsideComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.onShowAside();
-    this.industries = this.companiesStateService.getIndustries();
+
     if (this.usersStateService.getAllUsers().length > 0) {
       this.getTehusers(this.usersStateService.getAllUsers());
       this.getUsersTitle(this.usersStateService.getAllUsers());
@@ -63,6 +63,7 @@ export class CompanyAddAsideComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnUsers);
     this.onCroppImage();
+    console.log("this.industries", this.industries);
   }
   getUsersTitle(allUsers) {
     this.allTitles = allUsers
@@ -156,6 +157,7 @@ export class CompanyAddAsideComponent implements OnInit, OnDestroy {
   }
   public onShowAside() {
     let getShowAsideForAdd = this.companiesStateService.getShowAsideForAdd().subscribe(() => {
+      this.industries = this.companiesStateService.getIndustries();
       this.opened = true;
     })
     this.sub.add(getShowAsideForAdd);
