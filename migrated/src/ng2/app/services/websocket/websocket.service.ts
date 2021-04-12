@@ -422,7 +422,7 @@ export class WebsocketService {
   }
 
   public unSubsribeNetScan() {
-    this.netScanSub.unsubscribe();
+    if (this.netScanSub) this.netScanSub.unsubscribe();
   }
   public getClient() {
     return this.stompClient;

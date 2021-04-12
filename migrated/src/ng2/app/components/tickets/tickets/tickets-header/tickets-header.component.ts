@@ -45,15 +45,15 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
       this.count = data;
       this.onSetCount();
     })
-     /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
+    /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */
     /* START */
-    if (this.ticketsStateService.getListType()) {
+    if (this.ticketsStateService.getListType() && this.ticketsStateService.getTicketsCounts()) {
       let listType = this.ticketsStateService.getListType();
       this.selectedListType = this.titleListTypes.find(item => item.type === listType);
       this.count = this.ticketsStateService.getTicketsCounts()[(listType === 'USERS') ? 'USER' : listType];
       this.onSetCount();
     }
-      /* END */
+    /* END */
   }
   onSetCount() {
     this.title = `${(this.selectedListType) ? this.selectedListType.title : ''} (${this.count})`;

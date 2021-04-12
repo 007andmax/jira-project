@@ -1,10 +1,12 @@
 import { Injectable, EventEmitter } from '@angular/core';
+import { LeftPanelCompaniesFilter } from '../../components/left-panel/left-panel-companies/class/left-panel-companies-filter';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LeftPanelStateService {
   activePage: string = "";
+  filter: LeftPanelCompaniesFilter = new LeftPanelCompaniesFilter();
   onFilter: EventEmitter<any> = new EventEmitter();
   onBillingPage: EventEmitter<any> = new EventEmitter();
   onCompanyPage: EventEmitter<any> = new EventEmitter();
@@ -16,6 +18,9 @@ export class LeftPanelStateService {
 
   constructor() { }
 
+  public getFilter() {
+    return this.filter;
+  }
   public firstOpen(data) {
     this.activePage = data;
     this.onFirstOpen.emit(data);
@@ -47,6 +52,7 @@ export class LeftPanelStateService {
     return this.onBillingPage;
   }
   public onInitFilter(data) {
+    this.filter = data;
     this.onFilter.emit(data);
   }
   public getOnFilter() {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { CommonHttpServices } from './_services/common_http.service';
 import { RemoteControlService } from './_services/remoteControl.service';
 import { CommonServices } from './_services/common.service';
@@ -13,18 +13,18 @@ import { ShellStateService } from 'src/ng2/app/states/shell/shell-state.service'
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { TerminalService } from './_services/terminal.service';
 import { command } from './class/device';
-declare var $:any;
+declare var $: any;
 @Component({
-  selector: 'app-root',
+  selector: 'app-device-root',
   templateUrl: './device.component.html',
   styleUrls: ['./device.component.scss']
 })
 export class DeviceComponent implements OnInit {
   title = 'quck-device';
-  totalSeconds:any = 0;
-  totalMinutes:any = 0;
-  totalHours:any = 0;
-  loading:boolean = false;
+  totalSeconds: any = 0;
+  totalMinutes: any = 0;
+  totalHours: any = 0;
+  loading: boolean = false;
   // mainCompanyUuid: string = '9eb35e10-e243-4c07-baf0-c234fcd93766';
   deviceDetail: any = {};
   restServerAddress = '';
@@ -40,15 +40,15 @@ export class DeviceComponent implements OnInit {
   constructor(private modalService: NgbModal, private commonHttpServices: CommonHttpServices,
     private commonServices: CommonServices, private toastr: ToastrService,
     private hardwareService: HardwareService,
-    private deviceDetailService: DeviceDetailService, 
+    private deviceDetailService: DeviceDetailService,
     private remoteControlService: RemoteControlService,
     private socketService: WebsocketService,
     private usersStateService: UsersStateService,
     private shellStateService: ShellStateService,
-    private terminalService: TerminalService) {}
+    private terminalService: TerminalService) { }
   openModal(template) {
     if (this.deviceDetail.online === true) {
-      this.modalService.open(template, {ariaLabelledBy: 'modal-basic-title' , centered:true}).result.then((result) => {
+      this.modalService.open(template, { ariaLabelledBy: 'modal-basic-title', centered: true }).result.then((result) => {
         this.closeResult = `Closed with: ${result}`;
       }, (reason) => {
         this.closeResult = `Dismissed ${this.getDismiss(reason)}`;
@@ -56,7 +56,7 @@ export class DeviceComponent implements OnInit {
     } else {
       this.toastr.error('The device is offline!');
     }
-    
+
   }
   private getDismiss(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
@@ -73,7 +73,7 @@ export class DeviceComponent implements OnInit {
     //   Object.assign({}, { class: 'remote-control modal-dialog-centered lock', backdrop: true })
     // );
   }
-  
+
   ngOnInit(): void {
     this.type = window.location.href.split('/')[window.location.href.split('/').length - 2];
     this._id = window.location.href.split('/')[window.location.href.split('/').length - 1];
@@ -89,41 +89,41 @@ export class DeviceComponent implements OnInit {
     //Add 'implements OnInit' to the class.
     $('body').addClass('ng7-device');
     this.getCurrentCompany();
-    
+
     this.interval = setInterval(() => {
       this.updateTime();
-    },1000);
+    }, 1000);
   }
   getCurrentCompany() {
-	
+
     this.commonHttpServices.getCurrentCompany()
-    .pipe(first())
-    .subscribe(
-      resp => {
-        // localStorage.setItem('currentCompany', resp.id);
-        // if (localStorage.getItem('currentCompany') === undefined || localStorage.getItem('currentCompany') === null) {
-        //   localStorage.setItem('currentCompany', this.mainCompanyUuid);
-        // }
-        
-        this.getDevicesByCompany();
-      },
-      error => {
-      this.toastr.error('Something went wrong please try again.');
-      }
-    );
+      .pipe(first())
+      .subscribe(
+        resp => {
+          // localStorage.setItem('currentCompany', resp.id);
+          // if (localStorage.getItem('currentCompany') === undefined || localStorage.getItem('currentCompany') === null) {
+          //   localStorage.setItem('currentCompany', this.mainCompanyUuid);
+          // }
+
+          this.getDevicesByCompany();
+        },
+        error => {
+          this.toastr.error('Something went wrong please try again.');
+        }
+      );
   }
   getDeviceDetail() {
-	
+
     this.hardwareService.getAllHardwareList(localStorage.getItem('company_id'), this.deviceDetail.agentId)
-    .pipe(first())
-    .subscribe(
-      resp => {
-        this.deviceDetailService.addDevice(resp);
-      },
-      error => {
-      this.toastr.error('Something went wrong please try again.');
-      }
-    );
+      .pipe(first())
+      .subscribe(
+        resp => {
+          this.deviceDetailService.addDevice(resp);
+        },
+        error => {
+          this.toastr.error('Something went wrong please try again.');
+        }
+      );
   }
   updateTime() {
     this.totalSeconds++;
@@ -157,23 +157,23 @@ export class DeviceComponent implements OnInit {
         localStorage.setItem('company_id', deviceList[index].company_id);
         // this.getDeviceDetail();
       },
-      error => {
-        this.toastr.error('Something went wrong please try again.');
-      });
-    }
-    getViewer() {
-      this.loading = true;
-      this.remoteControlService.getViewer()
+        error => {
+          this.toastr.error('Something went wrong please try again.');
+        });
+  }
+  getViewer() {
+    this.loading = true;
+    this.remoteControlService.getViewer()
       .pipe()
       .subscribe(resp => {
         this.loading = false;
       },
-      error => {
-       
-      });
-    }
-    getConstant(sessionId) {
-      this.remoteControlService.getConstant()
+        error => {
+
+        });
+  }
+  getConstant(sessionId) {
+    this.remoteControlService.getConstant()
       .pipe()
       .subscribe(resp => {
         this.restServerAddress = resp['rest.server.url'];
@@ -181,18 +181,18 @@ export class DeviceComponent implements OnInit {
         let url = 'quicktech://connect?serverIP=' + this.restServerAddress + '&port=' + this.remoteConnectPort + '&sessionID=' + sessionId;
         window.open(url, '_self');
       },
-      error => {
-       
-      });
-    }
-    createConnection(type) {
-      this.loading = true;
-      let data = {
-        deviceId: this.deviceDetail.id,
-        type: type,
-        companyId: localStorage.getItem('company_id')
-      };
-      this.remoteControlService.createConnection(data)
+        error => {
+
+        });
+  }
+  createConnection(type) {
+    this.loading = true;
+    let data = {
+      deviceId: this.deviceDetail.id,
+      type: type,
+      companyId: localStorage.getItem('company_id')
+    };
+    this.remoteControlService.createConnection(data)
       .pipe()
       .subscribe(resp => {
         this.loading = false;
@@ -204,12 +204,12 @@ export class DeviceComponent implements OnInit {
           this.getConstant(resp.sessionId);
         }
       },
-      error => {
-        this.toastr.error('Something went wrong please try again.');
-      });
-    }
-  padNumber (value) {
-    if(value == 0) {
+        error => {
+          this.toastr.error('Something went wrong please try again.');
+        });
+  }
+  padNumber(value) {
+    if (value == 0) {
       return '00';
     } else if (value < 10) {
       return '0' + value;
@@ -226,7 +226,7 @@ export class DeviceComponent implements OnInit {
       this.play_pause_path = '/html/ng2/assets/img/device/pause.svg';
       this.interval = setInterval(() => {
         this.updateTime();
-      },1000);
+      }, 1000);
     }
   }
 
@@ -251,17 +251,17 @@ export class DeviceComponent implements OnInit {
         "file": false,
         "keepOpen": true
       }
-  
+
       this.terminalService.sendCommand(data)
-      .pipe(first())
-      .subscribe(resp => {
-      },
-      error => {
-        const statusError = error;
-      });
+        .pipe(first())
+        .subscribe(resp => {
+        },
+          error => {
+            const statusError = error;
+          });
     } else {
       this.toastr.error('The device is offline');
     }
-    
+
   }
 }

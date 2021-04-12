@@ -122,6 +122,7 @@ export class UsersStateService {
   }
 
   public onInitFilter(data) {
+    this.filter = data;
     this.onFilter.emit(data);
   }
   public getOnFilter() {

@@ -831,52 +831,14 @@ declare var $: any;
     AngularEditorModule
   ],
   entryComponents: [
-
     ModalQuoteComponent,
     ConfirmComponent,
-
-
     DownloadAgentComponent,
     ImageCropperComponent,
-
-
-
     AlertComponent,
-
-
-
     ReportSendEmailComponent,
-
-
-
-
-
-
-
-
-
-
-
-    NavComponent,
-    DashboardComponent,
-    HardwareComponent,
-    SoftwareComponent,
-    StartupComponent,
-    ServicesComponent,
-    AntivirusComponent,
-    TerminalComponent,
-    WindowsComponent,
-    FileComponent,
-    PasswordComponent,
-    TicketTaskComponent,
     ContractsConfirmComponent,
-
-
-
-
-
     CompanyDevicesRemoteAccessComponent,
-
     ModalLockScreenComponent,
     ModalSessionScreenComponent
     // RecurringTicketsComponent

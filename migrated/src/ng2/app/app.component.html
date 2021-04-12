@@ -1,43 +1,48 @@
-<app-header
-    class="nav-header"
-    [ngClass]="{'--full-width':toggleLeftPanel}"
-></app-header>
-<app-left-panel
-    class="app-left-panel"
-    [ngClass]="{'--mini':toggleLeftPanel}"
-></app-left-panel>
-<div class="main-container">
-    <div class="row">
-        <div
-            class="content-container"
-            [ngClass]="{'--large': toggleLeftPanel}"
-        >
-            <div class="content-wrapper">
-                <breadcrumbs></breadcrumbs>
-                <div
-                    class="loading"
-                    style="display: none;"
-                ></div>
-                <app-map-modal></app-map-modal>
-                <notification></notification>
-                <app-error-notification></app-error-notification>
-                <modal-image-cropper></modal-image-cropper>
-                <app-draft-email></app-draft-email>
-                <app-main></app-main>
-                <app-ticket-add-aside></app-ticket-add-aside>
-                <app-users-aside></app-users-aside>
-                <app-company-add-aside></app-company-add-aside>
-                <app-default-services-add></app-default-services-add>
-                <app-inventory-add-aside></app-inventory-add-aside>
-                <app-ticket-edit-aside></app-ticket-edit-aside>
-                <users-aside-edit></users-aside-edit>
-                <app-default-services-edit></app-default-services-edit>
-                <app-inventory-edit-aside></app-inventory-edit-aside>
-                <app-invoices-aside-preview></app-invoices-aside-preview>
-                <router-outlet></router-outlet>
-                <app-invoices-aside></app-invoices-aside>
+<app-device-root *ngIf="main_page === PAGE_DEVICE"></app-device-root>
+<div
+    class="main-page-container"
+    *ngIf="main_page === PAGE_MAIN"
+>
+    <app-header
+        class="nav-header"
+        [ngClass]="{'--full-width':toggleLeftPanel}"
+    ></app-header>
+    <app-left-panel
+        class="app-left-panel"
+        [ngClass]="{'--mini':toggleLeftPanel}"
+    ></app-left-panel>
+    <div class="main-container">
+        <div class="row">
+            <div
+                class="content-container"
+                [ngClass]="{'--large': toggleLeftPanel}"
+            >
+                <div class="content-wrapper">
+                    <breadcrumbs></breadcrumbs>
+                    <div
+                        class="loading"
+                        style="display: none;"
+                    ></div>
+                    <app-map-modal></app-map-modal>
+                    <notification></notification>
+                    <app-error-notification></app-error-notification>
+                    <modal-image-cropper></modal-image-cropper>
+                    <app-draft-email></app-draft-email>
+                    <app-main></app-main>
+                    <app-ticket-add-aside></app-ticket-add-aside>
+                    <app-users-aside></app-users-aside>
+                    <app-company-add-aside></app-company-add-aside>
+                    <app-default-services-add></app-default-services-add>
+                    <app-inventory-add-aside></app-inventory-add-aside>
+                    <app-ticket-edit-aside></app-ticket-edit-aside>
+                    <users-aside-edit></users-aside-edit>
+                    <app-default-services-edit></app-default-services-edit>
+                    <app-inventory-edit-aside></app-inventory-edit-aside>
+                    <app-invoices-aside-preview></app-invoices-aside-preview>
+                    <router-outlet></router-outlet>
+                    <app-invoices-aside></app-invoices-aside>
+                </div>
             </div>
         </div>
     </div>
 </div>
-<!-- <div feedback-form ></div> -->

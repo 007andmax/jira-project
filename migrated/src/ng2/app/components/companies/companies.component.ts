@@ -58,6 +58,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     window.scrollTo(0, 0);
+    this.left_filter = this.leftPanelStateService.getFilter();
     this.showArchivedCompanies = this.companiesStateService.getShowArchivedCompanies();
     let getOnShowArchived = this.companiesStateService.getOnShowArchived().subscribe(data => {
       this.showArchivedCompanies = data;

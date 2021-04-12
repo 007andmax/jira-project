@@ -18,6 +18,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalLockScreenComponent } from './services/modal/modal-lock-screen/modal-lock-screen.component';
 import { ModalSessionScreenComponent } from './services/modal/modal-session-screen/modal-session-screen.component';
 import { PasswordManagerStateService } from './states/password-manager/password-manager-state.service';
+import { Router } from '@angular/router';
+import { PAGE_DEVICE, PAGE_MAIN } from './const/app';
 
 
 /**
@@ -38,6 +40,9 @@ export class AppComponent implements OnInit {
   toggleLeftPanel: boolean = false;
   showSessionScreen: boolean = false;
   showLockScreen: boolean = false;
+  main_page: string = PAGE_MAIN;
+  PAGE_MAIN = PAGE_MAIN;
+  PAGE_DEVICE = PAGE_DEVICE;
   /**
    * Creates an instance of the MainComponent with the injected services
    * @param {UpgradeModule} upgrade service
@@ -59,6 +64,7 @@ export class AppComponent implements OnInit {
     private constantsStateService: ConstantsStateService,
     private leftPanelStateService: LeftPanelStateService,
     private modalService: NgbModal,
+    private router: Router,
     public cd: ChangeDetectorRef,
 
   ) { }
@@ -67,7 +73,14 @@ export class AppComponent implements OnInit {
    * Initializes root. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
-
+    this.router.events
+      .subscribe((event) => {
+        if (this.router.url.includes('ng2/device')) {
+          this.main_page = PAGE_DEVICE;
+        } else {
+          this.main_page = PAGE_MAIN;
+        }
+      });
     this.userService.getUser();
     this.devicesState.onInit();
     this.usersStateService.onInit();

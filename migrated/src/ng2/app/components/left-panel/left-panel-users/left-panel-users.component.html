@@ -12,7 +12,7 @@
     [ngClass]="{'menu-expand-show': open, 'menu-expand-hide': !open}"
 >
     <li
-        [ngClass]="{'--active': !showArchivedCompanies && !filter.getClientType() && activePage === 'new-users'}"
+        [ngClass]="{'--active': !showArchivedCompanies  && activePage === 'new-users'}"
         (click)="goToState();onShowAll()"
     >
         All Users
@@ -30,7 +30,7 @@
         Lead Users
     </li>
     <li
-        [ngClass]="{'--active': showArchivedCompanies && !filter.getClientType() && activePage === 'new-users'}"
+        [ngClass]="{'--active': showArchivedCompanies && activePage === 'new-users'}"
         (click)="goToState();onShowArchived()"
     >
         Archived Users
