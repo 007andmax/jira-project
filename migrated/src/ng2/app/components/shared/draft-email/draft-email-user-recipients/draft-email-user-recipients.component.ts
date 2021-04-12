@@ -118,6 +118,19 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
   onSearch(event) {
     this.userList = this.reqUsersList.filter(item => item.primaryEmail.includes(event.target.value));
   }
+  public onAdd(event) {
+    const input = event.target.input;
+    const value = event.target.value;
+    if ((value || '').trim()) {
+      this.selectedUsers.push(value.trim());
+      this.userEmails.push(value.trim());
+      this.userList = this.reqUsersList;
+    }
+    if (input) {
+      input.value = '';
+    }
+    this.userCtrl.setValue(null);
+  }
   onKeyUp(event) {
     if (event.keyCode === 13) {
       const input = event.target.input;

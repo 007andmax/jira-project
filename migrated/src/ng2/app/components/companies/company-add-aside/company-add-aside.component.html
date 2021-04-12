@@ -215,6 +215,7 @@ Contact detail etc…
                 <app-select-search
                     [class]="['light-dropdown']"
                     [list]="industries"
+                    [placeholder]="'Select client type'"
                     (onSelectedItem)="onSelectClientIndustry($event)"
                 ></app-select-search>
             </div>
@@ -501,8 +502,6 @@ Contact detail etc…
             </div>
         </div>
     </div>
-
-
     <div class="qt-aside-modern__footer">
         <div class="qt-df qt-jc-sb qt-ai-c qt-w100">
             <div class="qt-df">
@@ -513,8 +512,6 @@ Contact detail etc…
                 >
                     Create Company
                 </button>
-
-
                 <button
                     *ngIf="version === 'full'"
                     class="qt-button qt-mr-12"
@@ -522,8 +519,6 @@ Contact detail etc…
                 >
                     Create Company
                 </button>
-
-
                 <button
                     class="qt-button --gray"
                     (click)="close()"
@@ -531,8 +526,6 @@ Contact detail etc…
                     Cancel
                 </button>
             </div>
-
-
             <div class="qt-mr-50">
                 <div
                     *ngIf="version === 'full'"
@@ -541,8 +534,6 @@ Contact detail etc…
                     <div class="new-link">Create Contract</div>
                 </div>
             </div>
-
-
         </div>
     </div>
 </div>

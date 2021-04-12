@@ -9,9 +9,6 @@
             (click)="close()"
         ></div>
     </div>
-
-
-
     <div class="qt-aside-modern__content --less-padding new-companies-content__modal--content">
         <div class="col-md-12">
             <div class="logo-upload d-f">
@@ -33,16 +30,8 @@
                         (input)="uploadFileOnBrower($event)"
                     >
                 </div>
-
-
-
-
             </div>
         </div>
-
-
-
-
         <div
             class="col-md-12 google-plus"
             [ngClass]="{'error-field':!validate.getName() || validate.getNameIsExist() }"
@@ -98,13 +87,10 @@
                     [class]="['light-dropdown']"
                     [editItem]="(company.clientIndustry.name) ? company.clientIndustry.name : null"
                     [list]="industries"
+                    [placeholder]="'Select client type'"
                     (onSelectedItem)="onSelectClientIndustry($event)"
                 ></app-select-search>
             </div>
-
-
-
-
         </div>
         <div
             class="col-md-12"
@@ -160,17 +146,9 @@
                 placeholder="Enter Phone Number"
             >
         </div>
-
-
-
-
         <div class="col-md-12 details-divider">
             <p>Contact Detail</p>
         </div>
-
-
-
-
         <div
             class="col-md-6"
             [ngClass]="{'error-field':!validate.getFirstName() }"
@@ -194,10 +172,6 @@
         </div>
         <div class="col-md-6">
             <p>Designation</p>
-
-
-
-
             <app-select-search
                 [placeholder]="'Select Designation'"
                 [maxlength]="30"
@@ -208,17 +182,8 @@
                 [list]="allTitles"
                 (onSelectedItem)="onSelectDesignation($event)"
             ></app-select-search>
-
-
-
-
-
         </div>
         <div class="col-md-6">
-
-
-
-
             <p>Phone Number</p>
             <div class="with-number-types">
                 <div
@@ -249,10 +214,6 @@
                                 (click)="company.contacts[0].phoneNumbers[0].typeNumber = item.toUpperCase()"
                             ></button>
                         </ng-template>
-
-
-
-
                     </div>
                 </div>
                 <input
@@ -282,17 +243,9 @@
             <p>Get Subscribe</p>
             <app-company-subscription (subscribeChange)="onChangeSubscribe($event)"></app-company-subscription>
         </div>
-
-
-
-
         <div class="col-md-12 details-divider">
             <p>Settings</p>
         </div>
-
-
-
-
         <div class="col-md-6">
             <app-company-time-zone (selectedOffsetItem)="onChangeTimeZone($event)"></app-company-time-zone>
         </div>
@@ -329,10 +282,6 @@
                     </ng-template>
                 </div>
             </div>
-
-
-
-
         </div>
         <div class="col-md-6">
             <p>Payment Method</p>
@@ -412,10 +361,6 @@
                     (onSelectedItem)="onSelectTechLead($event)"
                 ></app-select-search>
             </div>
-
-
-
-
         </div>
         <app-company-tags
             #companyTags
@@ -434,9 +379,6 @@
             </div>
         </div>
     </div>
-
-
-
     <div class="qt-aside-modern__footer">
         <div class="qt-df qt-jc-sb qt-ai-c qt-w100">
             <div class="qt-df">
@@ -446,18 +388,12 @@
                 >
                     Update Company
                 </button>
-
-
-
                 <button
                     class="qt-button --gray"
                     (click)="close()"
                 >
                     Cancel
                 </button>
-
-
-
             </div>
             <div class="qt-mr-50">
                 <div class="create-contract">
@@ -466,9 +402,4 @@
             </div>
         </div>
     </div>
-
-
-
-
-
 </div>

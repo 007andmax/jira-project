@@ -1,45 +1,73 @@
-<div class="col-md-12 light-dropdown" ngbDropdown #products="ngbDropdown">
-  <mat-form-field>
-    <mat-chip-list #chipList aria-label="Fruit selection">
-      <mat-chip
-        *ngFor="let user of selectedCompanies; let i = index"
-        [selectable]="selectable"
-        [removable]="removable"
-        (removed)="remove(i)">
-        {{user}}
-        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-      </mat-chip>
-      <input
-        id="dropdownServices" ngbDropdownToggle
-        placeholder="Add receipt email address"
-        #userInput
-        class="pointer"
-        [formControl]="companyCtrl"
-        autocomplete="new-password"
-        [matChipInputFor]="chipList"
-        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-        [matChipInputAddOnBlur]="addOnBlur"
-        (input)="onSearch($event)"
-        (keyup)="onKeyUp($event)">
-    </mat-chip-list>
+<div
+    class="col-md-12 light-dropdown"
+    ngbDropdown
+    #products="ngbDropdown"
+>
+    <mat-form-field>
+        <mat-chip-list
+            #chipList
+            aria-label="Fruit selection"
+        >
+            <mat-chip
+                *ngFor="let user of selectedCompanies; let i = index"
+                [selectable]="selectable"
+                [removable]="removable"
+                (removed)="remove(i)"
+            >
+                {{user}}
+                <mat-icon
+                    matChipRemove
+                    *ngIf="removable"
+                >
+                    cancel
+                </mat-icon>
+            </mat-chip>
+            <input
+                id="dropdownServices"
+                ngbDropdownToggle
+                placeholder="Add receipt email address"
+                #userInput
+                class="pointer"
+                [formControl]="companyCtrl"
+                autocomplete="new-password"
+                [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]="addOnBlur"
+                (input)="onSearch($event)"
+                (keyup)="onKeyUp($event)"
+                (blur)="onAdd($event)"
+            >
+        </mat-chip-list>
 
-    <div class="dropdown-menu unique-down"
-         ngbDropdownMenu aria-labelledby="dropdownServices">
-      <ng-template ngFor let-company [ngForOf]="companyList" [ngForTrackBy]="trackByIndex">
-        <button ngbDropdownItem class="dropdown-item"
-                (click)="selected(company)"
-                [textContent]="company.companyInfo.contacts[0].primaryEmail">
-        </button>
-      </ng-template>
-    </div>
-    <!-- <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+
+        <div
+            class="dropdown-menu unique-down"
+            ngbDropdownMenu
+            aria-labelledby="dropdownServices"
+        >
+            <ng-template
+                ngFor
+                let-company
+                [ngForOf]="companyList"
+                [ngForTrackBy]="trackByIndex"
+            >
+                <button
+                    ngbDropdownItem
+                    class="dropdown-item"
+                    (click)="selected(company)"
+                    [textContent]="company.companyInfo.contacts[0].primaryEmail"
+                >
+                </button>
+            </ng-template>
+        </div>
+        <!-- <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
 		 <ng-template ngFor let-company [ngForOf]="companyList" [ngForTrackBy]="trackByIndex">
 	   <mat-option [value]="company.companyInfo.contacts[0]">
 		 {{company.companyInfo.contacts[0].primaryEmail}}
 	   </mat-option>
 	   </ng-template>
 	 </mat-autocomplete> -->
-  </mat-form-field>
-  <p *ngIf="showError">at least 1 user</p>
-  <p *ngIf="showErrorClient">please choose Client</p>
+    </mat-form-field>
+    <p *ngIf="showError">at least 1 user</p>
+    <p *ngIf="showErrorClient">please choose Client</p>
 </div>

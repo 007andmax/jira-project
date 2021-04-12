@@ -206,6 +206,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
   }
 
   onSearch(event) {
+    console.log("event.target.value", event.target.value);
     this.users = this.reqUsersList.filter(item => item.primaryEmail.includes(event.target.value));
   }
 
@@ -244,7 +245,9 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
       this.quoteStateService.setUsersEmail(this.usersEmails);
       input.value = '';
       this.userCtrl.setValue(null);
+
     }
+    this.users = JSON.parse(JSON.stringify(this.reqUsersList));
   }
   public keyup(e) {
     if (e.keyCode === 13) {
@@ -257,7 +260,9 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
         input.value = '';
         this.userCtrl.setValue(null);
       }
+      this.users = JSON.parse(JSON.stringify(this.reqUsersList));
     }
+
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

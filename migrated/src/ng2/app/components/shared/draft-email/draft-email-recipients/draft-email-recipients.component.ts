@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { FormControl } from '@angular/forms';
-import { MatAutocomplete,  } from '@angular/material';
+import { MatAutocomplete, } from '@angular/material';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { DraftEmailStateService } from 'src/ng2/app/states/draft-email/draft-email-state.service';
 import { Company } from 'src/ng2/app/interfaces/company/company';
@@ -27,7 +27,7 @@ export class DraftEmailRecipientsComponent implements OnInit {
   companyEmails = [];
   companyList = [];
   reqCompanyList = [];
-  @Input() companiesSelected:Array<Company> = [];
+  @Input() companiesSelected: Array<Company> = [];
   @Input() public data;
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
@@ -50,7 +50,7 @@ export class DraftEmailRecipientsComponent implements OnInit {
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-     
+
 
     this.getCompanyList();
     /*this.userInput.nativeElement.onblur = (e) => {
@@ -68,37 +68,37 @@ export class DraftEmailRecipientsComponent implements OnInit {
     })
   }
   private getCompanyList() {
-     
-    if (this.companiesState.getCompanies().length > 0)  this.setCompanyList(this.companiesState.getCompanies());
-      this.companiesState.getOnCompanies().subscribe((data) => {
-        this.setCompanyList(data);
-      })
-    
+
+    if (this.companiesState.getCompanies().length > 0) this.setCompanyList(this.companiesState.getCompanies());
+    this.companiesState.getOnCompanies().subscribe((data) => {
+      this.setCompanyList(data);
+    })
+
   }
   private setCompanyList(data) {
-     
+
     this.reqCompanyList = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt && item.companyInfo.contacts[0].primaryEmail != '').sort((a, b) => (a.companyInfo.contacts[0].primaryEmail.toLowerCase() > b.companyInfo.contacts[0].primaryEmail.toLowerCase()) ?
-    1 : ((b.companyInfo.contacts[0].primaryEmail.toLowerCase() > a.companyInfo.contacts[0].primaryEmail.toLowerCase()) ? -1 : 0));
+      1 : ((b.companyInfo.contacts[0].primaryEmail.toLowerCase() > a.companyInfo.contacts[0].primaryEmail.toLowerCase()) ? -1 : 0));
     this.companyList = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt && item.companyInfo.contacts[0].primaryEmail != '').sort((a, b) => (a.companyInfo.contacts[0].primaryEmail.toLowerCase() > b.companyInfo.contacts[0].primaryEmail.toLowerCase()) ?
-    1 : ((b.companyInfo.contacts[0].primaryEmail.toLowerCase() > a.companyInfo.contacts[0].primaryEmail.toLowerCase()) ? -1 : 0));
+      1 : ((b.companyInfo.contacts[0].primaryEmail.toLowerCase() > a.companyInfo.contacts[0].primaryEmail.toLowerCase()) ? -1 : 0));
 
     this.companiesSelected.forEach(item => {
-     /* if (item.primaryEmail !== '')
-      {*/
-        this.selectedCompanies.push(item.companyInfo.contacts[0].primaryEmail);
-        this.companyEmails.push(item.companyInfo.contacts[0].primaryEmail);
-    //  }
-    
+      /* if (item.primaryEmail !== '')
+       {*/
+      this.selectedCompanies.push(item.companyInfo.contacts[0].primaryEmail);
+      this.companyEmails.push(item.companyInfo.contacts[0].primaryEmail);
+      //  }
+
     })
     this.onCompanyEmails.emit(this.companyEmails);
   }
-  
+
   /**
    * Remove user from selected
    * @param index - user index
    */
   public remove(index): void {
-     
+
     if (index >= 0) {
       this.selectedCompanies.splice(index, 1);
       this.companyEmails.splice(index, 1);
@@ -112,32 +112,42 @@ export class DraftEmailRecipientsComponent implements OnInit {
    * @param event - selected user
    */
   public selected(company): void {
-     
+
     this.showError = false;
     this.selectedCompanies.push(company.companyInfo.contacts[0].primaryEmail);
     this.companyEmails.push(company.companyInfo.contacts[0].primaryEmail);
     this.onCompanyEmails.emit(this.companyEmails);
-  //  this.userInput.nativeElement.blur();
+    //  this.userInput.nativeElement.blur();
     this.userInput.nativeElement.value = '';
     this.companyCtrl.setValue(null);
     this.companyList = this.reqCompanyList;
-     
- /*   this.userInput.nativeElement.value = '';
-    this.companyList = this.reqCompanyList;*/
+
+    /*   this.userInput.nativeElement.value = '';
+       this.companyList = this.reqCompanyList;*/
   }
 
   onSearch(event) {
-     
-    
+
+
     this.companyList = this.reqCompanyList.filter(item => item.companyInfo.contacts[0].primaryEmail.includes(event.target.value));
   }
-  onKeyUp (event) {
-     
-   
+  public onAdd(event) {
+    console.log("e.target.value", event.target.value);
+    const input = event.target.input;
+    const value = event.target.value;
+    if ((value || '').trim()) {
+      this.selectedCompanies.push(value.trim());
+      this.companyList = this.reqCompanyList;
+    }
+    if (input) {
+      input.value = '';
+    }
+    this.companyCtrl.setValue(null);
+  }
+  onKeyUp(event) {
     if (event.keyCode === 13) {
       const input = event.target.input;
       const value = event.target.value;
-  
       if ((value || '').trim()) {
         this.selectedCompanies.push(value.trim());
         this.companyList = this.reqCompanyList;
@@ -146,13 +156,11 @@ export class DraftEmailRecipientsComponent implements OnInit {
         input.value = '';
       }
       this.companyCtrl.setValue(null);
-  
-      }
-     
     }
-    public trackByIndex(index, item) {
-      return index;
-    }
-  
- 
+  }
+  public trackByIndex(index, item) {
+    return index;
+  }
+
+
 }
