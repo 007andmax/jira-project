@@ -1,4 +1,4 @@
-.services-info-wrapper .qt-default-services {
+/* .services-info-wrapper .qt-default-services {
   padding: 16px 0 30px 0;
 }
 
@@ -22,7 +22,7 @@
 }
 
 .services-info-wrapper .default-services-header .add-service-btn-wrapper .btn {
-  /*float: left;*/
+   float: left; 
 }
 
 .services-info-wrapper .service-form-wrapper {
@@ -41,9 +41,9 @@
   margin-right: 22px;
   width: 100% !important;
   text-align: right;
-}
+} */
 
-.settings-main-wrapper .default-tax-wrapper {
+/* .settings-main-wrapper .default-tax-wrapper {
   float: left;
   width: 100%;
   padding: 0;
@@ -102,17 +102,17 @@
 
 .settings-main-wrapper .default-tax-wrapper .tax-list.new-tax {
   padding-top: 0;
-}
+} */
 
-.settings-main-wrapper .services-info-wrapper {
+/* .settings-main-wrapper .services-info-wrapper {
   float: left;
 }
 
 .create-window .settings-main-wrapper .services-info-wrapper .add-new-service .btn-primary {
   display: none;
-}
+} */
 
-.tags-management {
+/* .tags-management {
   float: left;
   width: 100%;
   padding-bottom: 330px;
@@ -225,9 +225,9 @@
   font-size: 15px;
   height: 20px;
   line-height: 20px;
-}
+} */
 
-.smtp-wrap {
+/* .smtp-wrap {
   float: left;
   width: 100%;
   padding-bottom: 40px;
@@ -297,19 +297,19 @@
 .smtp-wrap .error-msg {
   vertical-align: middle;
   color: red;
-}
+} */
 
-.test-smtp-connection .loading-indicator-wrap {
+/* .test-smtp-connection .loading-indicator-wrap {
   margin-right: 20px;
-}
+} */
 
-.hint-tooltip .tooltip-inner,
+/* .hint-tooltip .tooltip-inner,
 .hint-tooltip.tooltip-inner {
   white-space: pre-wrap;
   height: auto;
-}
+} */
 
-.hint-icon {
+/* .hint-icon {
   display: inline-block;
   height: 25px;
   width: 25px;
@@ -320,9 +320,9 @@
   color: grey;
   padding-top: 2px;
   cursor: help;
-}
+} */
 
-.test-email-wrap .input-btn-cr {
+/* .test-email-wrap .input-btn-cr {
   align-self: flex-end;
   margin-left: 15px;
 }
@@ -330,4 +330,4 @@
 .test-email-wrap .form-row {
   display: inline-block;
   width: 200px;
-}
+} */

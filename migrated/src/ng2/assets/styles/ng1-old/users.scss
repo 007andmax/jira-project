@@ -1,0 +1,226 @@
+.users-list {
+  width: 100%;
+  padding-right: 30px;
+  max-width: 400px;
+}
+
+.users-list .user-card {
+  border: 1px solid #e7ecf2;
+  float: left;
+  height: 236px;
+  margin-left: 30px;
+  margin-bottom: 30px;
+  width: calc(100% / 3 - 30px);
+  -webkit-transition: 0.3s ease-out box-shadow, 0.3s ease-out border;
+  -o-transition: 0.3s ease-out box-shadow, 0.3s ease-out border;
+  transition: 0.3s ease-out box-shadow, 0.3s ease-out border;
+}
+
+.users-list .user-card:hover {
+  border: 1px solid #fff;
+  box-shadow: 0 4px 25px 0 rgba(10, 45, 89, .1);
+}
+
+.users-list .user-card .avatar img {
+  border-radius: 0px;
+  margin-left: -30px;
+  width: 236px;
+}
+
+.users-list .user-card .avatar {
+  width: 169px;
+  overflow: hidden;
+  float: right;
+  border-radius: 0px;
+  height: 234px;
+}
+
+.users-list .user-card .avatar.no-avatar {
+  background: #e7ecf2;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.users-list .user-card .avatar.no-avatar img {
+  width: auto;
+  margin-left: 0px;
+  max-width: 120px;
+}
+
+.users-list .user-card .content {
+  width: calc(100% - 169px);
+  float: left;
+  padding: 27px 0;
+  position: relative;
+}
+
+.users-list .user-card .title {
+  width: 100%;
+  padding: 0 28px 0 30px;
+}
+
+@-moz-document url-prefix() {
+  .users-list .user-card.agent-card .title {
+    padding: 0 28px 1px 30px;
+  }
+}
+
+.users-list .user-card .content h3 {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0 8px 0 0;
+  color: #1f2a37;
+  line-height: 16px;
+  max-width: calc(100% - 24px);
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+@-moz-document url-prefix() {
+  .users-list .user-card .content h3 {
+    line-height: 15px;
+  }
+}
+
+.users-list .user-card .content .title span {
+  margin-left: 10px;
+  margin-top: 2px;
+  line-height: 0;
+}
+
+.users-list .user-badges {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.users-list .user-badges li {
+  width: 12px;
+  height: 12px;
+  position: relative;
+  float: left;
+  margin-left: 10px;
+}
+
+.users-list .user-badges li.badge-admin {
+  width: 10px;
+}
+
+.users-list .status {
+  width: 100%;
+  margin-top: 7px;
+  padding: 0 30px;
+}
+.users-list .user-actions {
+  margin-top: 10px;
+  padding: 0 30px;
+}
+
+.users-list .user-actions .btn {
+  margin-right: 10px;
+}
+@media only screen and (min-width: 1000px) and (max-width: 1200px) {
+  .users-list .user-card {
+    min-width: 370px !important;
+  }
+
+  .users-list .user-actions .btn-user-chat {
+    display: none;
+  }
+}
+@media only screen and (min-width: 1380px) and (max-width: 1500px) {
+
+  .users-list .user-actions .btn-user-chat {
+    display: none;
+  }
+}
+
+.status .user-company {
+  padding: 0;
+}
+.form-row + .form-row, .phone-number-form .form-row {
+  margin-top: 13px;
+}
+
+@-moz-document url-prefix() {
+  .form-row + .form-row, .phone-number-form .form-row {
+    margin-top: 12px;
+  }
+}
+.form-row .form-group {
+  float: left;
+  width: 100%;
+  max-width: 48%; /*experemental*/
+  margin: 0;
+}
+
+.form-row .form-group.no-label {
+  margin-top: 16px;
+  max-width: 50%; /*experemental*/
+}
+
+@-moz-document url-prefix() {
+  .form-row .form-group.no-label {
+    margin-top: 3px;
+  }
+}
+
+.settings-main-wrapper .form-row .form-group.full-width.no-label {
+  margin-top: 17px;
+}
+
+.form-row .form-group.full-width {
+  max-width: none;
+}
+
+.form-row .form-group .popover {
+  max-width: none;
+  width: 100%;
+  left: 0 !important;
+}
+
+.form-row .form-group.address-field {
+  max-width: 280px !important;
+}
+
+.form-row .form-group.zipcode-field {
+  max-width: 100px !important;
+}
+
+.form-row .form-group.scan-repeat-days {
+  max-width: 145px !important;
+}
+
+.form-row .form-group.scan-time {
+  max-width: 125px !important;
+}
+
+@-moz-document url-prefix() {
+  .form-row .form-group.no-label {
+    /*margin-top: 22px;*/
+    transform: translateY(50%);
+  }
+  .settings-main-wrapper .form-row .form-group.full-width.no-label {
+    margin-top: 18px;
+  }
+}
+
+.form-row .form-group + .form-group {
+  margin-left: 10px;
+  max-width: 50%;
+}
+
+
+.btn-primary.btn-create {
+  line-height: 34px;
+  width: 190px;
+}
+
+.ticket-drop {
+  height: 30px;
+}
+.ticket-drop.has-dropdown ~ i {
+  top: 12px;
+}
