@@ -82,8 +82,8 @@ export class ProductService {
   /**
  * Get products categories
  */
-  public getProducts() {
-    return this.http.get(`${this.apiUrl}products/`).pipe(map((data: any) => data.map(item => new InventoryItem(item))));
+  public getProducts(active) {
+    return this.http.get(`${this.apiUrl}products/?active=${active}`).pipe(map((data: any) => data.map(item => new InventoryItem(item))));
   }
 
   public getProduct(product_id) {

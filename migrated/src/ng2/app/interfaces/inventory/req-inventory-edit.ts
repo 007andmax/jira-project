@@ -1,8 +1,8 @@
 import { VersionedId } from '../versioned-id';
 
 export interface reqInventoryEdit {
-    versionedId:  VersionedId;
-    ilc:string;
+    versionedId: VersionedId;
+    ilc: string;
     cost: number;
     sale: number;
     manufacture: string;
@@ -10,5 +10,6 @@ export interface reqInventoryEdit {
     companyId: string;
     taxIds: Array<String>;
     categoryId: string;
+    active: boolean;
     glNumber: { id: string };
 }
