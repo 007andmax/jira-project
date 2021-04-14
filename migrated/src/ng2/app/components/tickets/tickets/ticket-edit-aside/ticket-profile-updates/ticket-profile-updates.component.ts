@@ -7,12 +7,14 @@ import { ConfirmStateService } from 'src/ng2/app/components/shared/confirm/servi
 import { REMOVE_UPDATE_TICKET, REMOVE_UPDATE_TICKET_SERVICE, REMOVE_UPDATE_TICKET_PRODUCT } from 'src/ng2/app/const/confirm';
 import { TicketStateService } from '../services/ticket-state.service';
 import { Subscription } from 'rxjs';
+import { TicketsPermissionsService } from '../services/tickets-permissions.service';
 
 
 @Component({
   selector: 'app-ticket-profile-updates',
   templateUrl: './ticket-profile-updates.component.html',
-  styleUrls: ['./ticket-profile-updates.component.scss']
+  styleUrls: ['./ticket-profile-updates.component.scss'],
+  providers: [TicketsPermissionsService]
 })
 export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
   @Input() updates: Array<TicketProfileUpdate>;
@@ -25,6 +27,7 @@ export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService,
     private ticketStateService: TicketStateService,
     public cd: ChangeDetectorRef,
+    public ticketsPermissionsService: TicketsPermissionsService,
     private notificationStateService: NotificationStateService,) { }
   ngOnInit() {
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {

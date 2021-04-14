@@ -21,6 +21,7 @@ export class TicketProfileUpdatesServiceInfoComponent implements OnInit {
   @Input() update: TicketProfileUpdate;
   @Input() service: TicketProfileService;
   @Output() onEdit = new EventEmitter();
+  @Input() isBlockChange: boolean;
   changeDate: boolean = false;
   userService = [];
   listTehUsers = [];
@@ -35,7 +36,7 @@ export class TicketProfileUpdatesServiceInfoComponent implements OnInit {
   ngOnInit() {
     if (this.service.user) this.userService = [this.service.user];
     this.listTehUsers = this.getUsersForAssign();
-    if (this.service.date)  this.setDateWithTimeOffset();
+    if (this.service.date) this.setDateWithTimeOffset();
   }
   edit() {
     this.onEdit.emit(null);
@@ -48,7 +49,7 @@ export class TicketProfileUpdatesServiceInfoComponent implements OnInit {
     return moment((date) ? new Date(date) : new Date()).format('DD MMM YYYY');
   }
   private getTimeOffSet() {
-      // getting milliseconds of a date, after calculating timeOffSet of the tech user and timeOffset of the technical company
+    // getting milliseconds of a date, after calculating timeOffSet of the tech user and timeOffset of the technical company
     let currentTimeOffset = new Date().getTimezoneOffset() * 60000;
     currentTimeOffset = (currentTimeOffset < 0) ? -currentTimeOffset : currentTimeOffset;
     let companyTimeOffset = this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset;

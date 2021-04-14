@@ -16,10 +16,11 @@ export class TicketProfileUpdatesNoteComponent implements OnInit {
   @Input() update: TicketProfileUpdate;
   @Output() onRemove = new EventEmitter();
   @Input() idTicket: string;
+  @Input() isBlockChange: boolean;
   constructor(public ticketsListService: TicketsListService,
     private confirmStateService: ConfirmStateService,
     private ticketStateService: TicketStateService,
-    private modalService: NgbModal, ) { }
+    private modalService: NgbModal,) { }
 
   ngOnInit() {
 

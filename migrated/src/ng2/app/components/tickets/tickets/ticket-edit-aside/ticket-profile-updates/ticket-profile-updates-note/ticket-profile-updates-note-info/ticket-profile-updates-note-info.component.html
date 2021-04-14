@@ -1,4 +1,15 @@
 <div class="ticket-updates__message-line d-f jc-sb ai-c">
-  <div><span class="ticket-updates__message" [innerHTML]="note"></span></div>
-  <div class="ticket-updates__edit edit-grey-ng2" *ngIf="update.type === 'NOTE'" (click)="edit()" placement="top" ngbTooltip="Edit Update"></div>
+    <div>
+        <span
+            class="ticket-updates__message"
+            [innerHTML]="note"
+        ></span>
+    </div>
+    <div
+        class="ticket-updates__edit edit-grey-ng2"
+        *ngIf="update.type === 'NOTE' && !isBlockChange"
+        (click)="edit()"
+        placement="top"
+        ngbTooltip="Edit Update"
+    ></div>
 </div>

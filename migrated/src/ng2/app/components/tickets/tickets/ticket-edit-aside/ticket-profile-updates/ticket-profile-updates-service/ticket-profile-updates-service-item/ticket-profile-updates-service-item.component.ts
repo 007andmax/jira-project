@@ -10,7 +10,8 @@ import { TicketProfileUpdate } from '../../../../class/ticket-profile-update';
 export class TicketProfileUpdatesServiceItemComponent implements OnInit {
   @Input() service: TicketProfileService;
   @Input() update: TicketProfileUpdate;
-  editMode:boolean = false;
+  @Input() isBlockChange: boolean;
+  editMode: boolean = false;
   constructor() { }
 
   ngOnInit() {

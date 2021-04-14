@@ -16,13 +16,14 @@ import { ConfirmComponent } from 'src/ng2/app/components/shared/confirm/confirm.
 })
 export class TicketProfileUpdatesProductComponent implements OnInit {
   @Input() update: TicketProfileUpdate;
+  @Input() isBlockChange: boolean;
   constructor(public ticketsListService: TicketsListService,
     private confirmStateService: ConfirmStateService,
     private ticketStateService: TicketStateService,
     private modalService: NgbModal) { }
 
   ngOnInit() {
-   
+
   }
   public getTotal(price, quantity) {
     return price * quantity;

@@ -9,7 +9,8 @@ import { TicketProfileUpdate } from '../../../../class/ticket-profile-update';
 export class TicketProfileUpdatesNoteItemComponent implements OnInit {
   @Input() update: TicketProfileUpdate;
   @Input() idTicket: string;
-  editMode:boolean = false;
+  @Input() isBlockChange: boolean;
+  editMode: boolean = false;
   constructor() { }
 
   ngOnInit() {

@@ -10,6 +10,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 export class TicketProfileUpdatesNoteInfoComponent implements OnInit {
   @Output() onEdit = new EventEmitter();
   @Input() update: TicketProfileUpdate;
+  @Input() isBlockChange: boolean;
   note: SafeHtml = '';
   constructor(private sanitized: DomSanitizer) { }
 
@@ -17,7 +18,7 @@ export class TicketProfileUpdatesNoteInfoComponent implements OnInit {
     this.note = this.getHtml(this.update.note);
   }
   ngOnChanges() {
-    this.note = (this.update) ?  this.getHtml(this.update.note) : '';
+    this.note = (this.update) ? this.getHtml(this.update.note) : '';
   }
   edit() {
     this.onEdit.emit(null);
