@@ -206,7 +206,6 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
   }
 
   onSearch(event) {
-    console.log("event.target.value", event.target.value);
     this.users = this.reqUsersList.filter(item => item.primaryEmail.includes(event.target.value));
   }
 
@@ -214,7 +213,6 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
    * Init resend mode
    */
   public initResendMode() {
-
     if (this.data.recipients && this.data.recipients.length > 0 && this.data.recipients[0] !== "") {
       this.selectedUsers = JSON.parse(JSON.stringify([...this.data.recipients]));
       this.usersEmails = JSON.parse(JSON.stringify([...this.data.recipients]));
@@ -236,7 +234,6 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
     this.activeModal.dismiss('Cross click');
   }
   public onAdd(e) {
-    console.log("e.target.value", e.target.value);
     const input = e.target;
     const value = e.target.value;
     if (value.length > 0) {
@@ -245,7 +242,6 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
       this.quoteStateService.setUsersEmail(this.usersEmails);
       input.value = '';
       this.userCtrl.setValue(null);
-
     }
     this.users = JSON.parse(JSON.stringify(this.reqUsersList));
   }
@@ -262,7 +258,6 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
       }
       this.users = JSON.parse(JSON.stringify(this.reqUsersList));
     }
-
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

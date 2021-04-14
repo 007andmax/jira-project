@@ -63,7 +63,6 @@ export class CompanyAddAsideComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnUsers);
     this.onCroppImage();
-    console.log("this.industries", this.industries);
   }
   getUsersTitle(allUsers) {
     this.allTitles = allUsers

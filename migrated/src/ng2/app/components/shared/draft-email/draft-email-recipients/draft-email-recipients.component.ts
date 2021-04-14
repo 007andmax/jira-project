@@ -50,45 +50,28 @@ export class DraftEmailRecipientsComponent implements OnInit {
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-
-
     this.getCompanyList();
-    /*this.userInput.nativeElement.onblur = (e) => {
-      if (this.matAutocomplete.isOpen) {
-        let modal = this.matAutocomplete.panel.nativeElement;
-        modal.parentNode.style.width = 'max-content';
-      }
-    }*/
     this.draftEmailStateService.getOnClear().subscribe(data => {
       this.selectedCompanies = [];
       this.companyEmails = [];
       this.companyCtrl.setValue(null);
       this.cd.detectChanges();
-
     })
   }
   private getCompanyList() {
-
     if (this.companiesState.getCompanies().length > 0) this.setCompanyList(this.companiesState.getCompanies());
     this.companiesState.getOnCompanies().subscribe((data) => {
       this.setCompanyList(data);
     })
-
   }
   private setCompanyList(data) {
-
     this.reqCompanyList = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt && item.companyInfo.contacts[0].primaryEmail != '').sort((a, b) => (a.companyInfo.contacts[0].primaryEmail.toLowerCase() > b.companyInfo.contacts[0].primaryEmail.toLowerCase()) ?
       1 : ((b.companyInfo.contacts[0].primaryEmail.toLowerCase() > a.companyInfo.contacts[0].primaryEmail.toLowerCase()) ? -1 : 0));
     this.companyList = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt && item.companyInfo.contacts[0].primaryEmail != '').sort((a, b) => (a.companyInfo.contacts[0].primaryEmail.toLowerCase() > b.companyInfo.contacts[0].primaryEmail.toLowerCase()) ?
       1 : ((b.companyInfo.contacts[0].primaryEmail.toLowerCase() > a.companyInfo.contacts[0].primaryEmail.toLowerCase()) ? -1 : 0));
-
     this.companiesSelected.forEach(item => {
-      /* if (item.primaryEmail !== '')
-       {*/
       this.selectedCompanies.push(item.companyInfo.contacts[0].primaryEmail);
       this.companyEmails.push(item.companyInfo.contacts[0].primaryEmail);
-      //  }
-
     })
     this.onCompanyEmails.emit(this.companyEmails);
   }
@@ -112,27 +95,19 @@ export class DraftEmailRecipientsComponent implements OnInit {
    * @param event - selected user
    */
   public selected(company): void {
-
     this.showError = false;
     this.selectedCompanies.push(company.companyInfo.contacts[0].primaryEmail);
     this.companyEmails.push(company.companyInfo.contacts[0].primaryEmail);
     this.onCompanyEmails.emit(this.companyEmails);
-    //  this.userInput.nativeElement.blur();
     this.userInput.nativeElement.value = '';
     this.companyCtrl.setValue(null);
     this.companyList = this.reqCompanyList;
-
-    /*   this.userInput.nativeElement.value = '';
-       this.companyList = this.reqCompanyList;*/
   }
 
   onSearch(event) {
-
-
     this.companyList = this.reqCompanyList.filter(item => item.companyInfo.contacts[0].primaryEmail.includes(event.target.value));
   }
   public onAdd(event) {
-    console.log("e.target.value", event.target.value);
     const input = event.target.input;
     const value = event.target.value;
     if ((value || '').trim()) {
@@ -161,6 +136,4 @@ export class DraftEmailRecipientsComponent implements OnInit {
   public trackByIndex(index, item) {
     return index;
   }
-
-
 }
