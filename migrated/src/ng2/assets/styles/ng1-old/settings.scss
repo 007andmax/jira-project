@@ -1,0 +1,41 @@
+.form-group.full-width label.control {
+  margin-top: 17px;
+  margin-bottom: 13px;
+}
+
+@-moz-document url-prefix() {
+  .form-group.full-width label.control {
+    line-height: 11px;
+    margin-bottom: 14px;
+  }
+}
+.template-details .form-group {
+  margin-bottom: 14px;
+}
+.template-form-wrapper .form-group {
+  width: 245px;
+  float: left;
+}
+
+.template-form-wrapper .form-group.full-width {
+  width: 100%;
+}
+
+.template-form-wrapper .form-group + .form-group {
+  margin-left: 10px;
+}
+.response-time-settings-wrapper .form-row .form-group,
+.payments-info .form-row .form-group {
+  display: table-cell;
+  width: 50%;
+  vertical-align: middle;
+  float: none;
+}
+.new-tax .procent-rate {
+  width: initial;
+  position: absolute;
+  right: 15px;
+  top: 30px;
+  color: #b2becd;
+  padding-left: 13px;
+}
