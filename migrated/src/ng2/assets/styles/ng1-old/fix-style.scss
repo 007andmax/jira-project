@@ -4,6 +4,7 @@ html {
   -webkit-text-size-adjust: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
+  font-size: 16px;
 }
 
 body {
@@ -11,9 +12,6 @@ body {
   /*min-width: 1200px;*/
   overflow: hidden;
   display: initial;
-}
-
-body {
   font-family: 'Graphik-Regular', sans-serif;
   font-size: 14px;
   line-height: 24px;
@@ -31,6 +29,12 @@ body input::-ms-clear {
 _::-webkit-:host:not(:root:root),
 body .left-panel-full {
   font-family: 'Graphik-Medium', sans-serif;
+}
+
+.icn-xs, .icn-sm, .icn-md, .icn-lg, .control-indicator {
+  background-repeat: no-repeat;
+  display: inline-block;
+  margin: auto;
 }
 
 body .topNavbar {
@@ -292,6 +296,88 @@ strong {
 .company-new-cover-wrapper p, strong {
   font-family: 'Graphik-Medium', sans-serif;
 }
+
+.p-0 {
+  padding: 0 !important;
+}
+
+/* Textarea */
+.password-content__modal--content textarea {
+  /* background: #fff8eb; */
+  /* border: 1px solid #ffe3af; */
+  border: 1px solid #c4cbd5;
+  border-radius: 4px;
+  min-height: 80px;
+  width: 100%;
+  padding: 15px;
+  font-size: 13px;
+  outline: none;
+}
+textarea {
+  resize: none;
+}
+/* End Textarea */
+
+.new-companies-content__modal--content .password-actions, .new-users-content__modal--content .password-actions, .recurring-tickets-content__modal--content .password-actions, .password-content__modal--content .password-actions {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  position: absolute;
+  right: 15px;
+  top: 0;
+  width: 70px;
+  z-index: 2;
+}
+
+
+.payment-status, .network-scan-status, .invoice-status, .quote-status {
+  padding: 0 10px;
+  font-size: 11px;
+  border-radius: 3px;
+  font-family: "Graphik-Medium", sans-serif;
+  border: none;
+  text-align: center;
+  width: auto;
+  height: 22px;
+}
+
+.status-in-progress {
+  background-color: #d0edfe;
+  color: #16a4fa;
+  display: inline-block;
+}
+
+.payment-status.paid, .status-success, .dashboard-network-scan-list .success-status, .invoices .success-status {
+  background-color: #d5f4e0;
+  color: #2ec866;
+  display: inline-block;
+}
+
+/* TABS */
+.nav-tabs > li > a:hover {
+  border-color: #eeeeee #eeeeee #dddddd;
+}
+.nav > li > a:hover, .nav > li > a:focus {
+  text-decoration: none;
+}
+.nav-tabs > li > a {
+  margin-right: 2px;
+  line-height: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px 4px 0 0;
+}
+.nav > li > a {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+}
+.nav > li > a:hover, .nav > li > a:focus {
+  background-color: transparent;
+}
+/* End TABS */
 
 @media (min-width: 992px) {
   .col-md-12 {
