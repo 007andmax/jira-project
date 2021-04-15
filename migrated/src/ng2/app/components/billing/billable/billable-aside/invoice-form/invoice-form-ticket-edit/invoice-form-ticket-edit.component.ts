@@ -11,20 +11,23 @@ import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 export class InvoiceFormTicketEditComponent implements OnInit {
   @Input() ticket: InvoiceProfileTicket;
   @Output() onUpdateSubject = new EventEmitter();
+
   currentCompany;
   constructor(private companiesStateService: CompaniesStateService,
     private ticketsService: TicketsService,) { }
 
   ngOnInit() {
     this.currentCompany = this.companiesStateService.getCurrentCompany();
+    this.ticket.setNewSubject(JSON.parse(JSON.stringify(this.ticket.subject)));
   }
   public getDate(date) {
     return moment(new Date(date)).format('DD/MM/YYYY');
   }
   onChangeSubject() {
-    this.ticketsService.changeSubjectNoteTicket(this.ticket.id, this.ticket.subject, this.ticket.note).subscribe(data => {
-      this.onUpdateSubject.emit(this.ticket.subject);
-    })
+    this.ticket.setChangeSubject(this.ticket.newSubject !== this.ticket.subject);
+    // this.ticketsService.changeSubjectNoteTicket(this.ticket.id, this.ticket.subject, this.ticket.note).subscribe(data => {
+    //   this.onUpdateSubject.emit(this.ticket.subject);
+    // })
   }
   getDuration(input) {
     let timeInMinutes = input * 60,

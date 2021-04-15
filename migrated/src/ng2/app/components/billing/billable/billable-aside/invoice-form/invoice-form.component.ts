@@ -5,7 +5,7 @@ import { CompanyProfile } from 'src/ng2/app/components/companies/class/company-p
 import { BillableStateService } from 'src/ng2/app/states/billable/billable-state.service';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { CompanyUpdate } from 'src/ng2/app/components/companies/class/company-update';
-import { Subscription } from 'rxjs';
+import { forkJoin, Subscription } from 'rxjs';
 import { InvoiceFormEditCustomerComponent } from './invoice-form-edit-customer/invoice-form-edit-customer.component';
 import { PartialUpdate } from './class/partial-update';
 import { BillableService } from 'src/ng2/app/services/billable/billable.service';
@@ -22,6 +22,7 @@ import { NoteService } from 'src/ng2/app/services/note/note.service';
 import { InvoiceValidate } from './class/invoice-validate';
 import { InvoiceProfileTicket } from '../../class/invoice-profile-ticket';
 import { FORMAT_DATE_2 } from 'src/ng2/app/const/date-picker';
+import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 
 @Component({
   selector: 'app-invoice-form',
@@ -36,7 +37,8 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   @Input() invoiceNotes: Array<InvoiceNote> = [];
   @Input() company: CompanyProfile = new CompanyProfile();
   @Input() invoiceTaxNumber: InvoiceTaxNumber;
-  formatDate:string = FORMAT_DATE_2;
+  changedSubjectTickets: Array<InvoiceProfileTicket> = [];
+  formatDate: string = FORMAT_DATE_2;
   toggleDiscount: boolean = false;
   currentCompany: any;
   changeGlobalNote: boolean = false;
@@ -53,6 +55,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     private elRef: ElementRef,
     public cd: ChangeDetectorRef,
     private noteService: NoteService,
+    private ticketsService: TicketsService,
     private companiesStateService: CompaniesStateService) { }
 
 
@@ -160,6 +163,28 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     this.invoice.invoiceDataDto.dueDate = dueDate;
   }
   onEditTickets() {
+    this.changedSubjectTickets = [];
+    this.editTickets.forEach((item, index) => {
+      if (item.changeSubject) this.changedSubjectTickets.push(item);
+    });
+    if (this.changedSubjectTickets.length > 0) {
+      forkJoin(
+        this.changedSubjectTickets.map(item => this.ticketsService.changeSubjectNoteTicket(item.id, item.newSubject, item.note))
+      )
+        .subscribe(result => {
+          console.log("result", result);
+          console.log("this.changedSubjectTickets", this.changedSubjectTickets);
+          result.forEach((item: any, i) => {
+            let index = this.invoice.invoiceDataDto.tickets.findIndex(ticket => ticket.id === item.id);
+            if (index > -1) this.onUpdateSubjectTicket(this.changedSubjectTickets[i].newSubject, index)
+          })
+          this.onCompleteEditTickets();
+        });
+    } else {
+      this.onCompleteEditTickets();
+    }
+  }
+  onCompleteEditTickets() {
     let expensesToUpdate = [];
     this.editTickets.forEach((item, index) => {
       expensesToUpdate = [...expensesToUpdate, ...item.getDateForUpdate()];
@@ -178,7 +203,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   onEditCustomer() {
     this.billableStateService.onEditCustomer(this.company);
   }
-  onUpdateSubjectTicket(subject,i) {
+  onUpdateSubjectTicket(subject, i) {
     this.invoice.invoiceDataDto.tickets[i].subject = subject;
   }
   delete(i) {

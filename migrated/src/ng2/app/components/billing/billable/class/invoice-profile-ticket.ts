@@ -2,7 +2,7 @@ import { BillableProfileTicketProductExpense } from './billable-profile-ticket-p
 import { BillableProfileTicketServiceExpense } from './billable-profile-ticket-service-expense';
 
 export class InvoiceProfileTicket {
-    id:string;
+    id: string;
     closedAt: number;
     discountSum: number;
     number: string;
@@ -14,23 +14,30 @@ export class InvoiceProfileTicket {
     note: string;
     taxSum: number;
     totalSum: number;
-   
+    changeSubject: boolean = false;
+    newSubject: string;
     constructor(data) {
         for (const key in data) {
             this[key] = data[key];
         }
-        this.productExpenses  = data.productExpenses.map(item => {
+        this.productExpenses = data.productExpenses.map(item => {
             return new BillableProfileTicketProductExpense(item);
         })
-        this.serviceExpenses  = data.serviceExpenses.map(item => {
+        this.serviceExpenses = data.serviceExpenses.map(item => {
             return new BillableProfileTicketServiceExpense(item);
         })
+    }
+    public setNewSubject(data) {
+        this.newSubject = data;
+    }
+    public setChangeSubject(data) {
+        this.changeSubject = data;
     }
     public getDateForUpdate() {
         let productExpenses = [];
         this.productExpenses.forEach(item => {
             let taxes = item.taxes.map(tax => {
-                return {id: tax.id};
+                return { id: tax.id };
             });
             productExpenses.push({
                 productExpense: {
@@ -52,7 +59,7 @@ export class InvoiceProfileTicket {
         let serviceExpenses = [];
         this.serviceExpenses.forEach(item => {
             let taxes = item.taxes.map(tax => {
-                return {id: tax.id};
+                return { id: tax.id };
             });
             serviceExpenses.push({
                 serviceExpense: {
@@ -67,11 +74,11 @@ export class InvoiceProfileTicket {
                     item: item.item,
                     quantity: item.quantity,
                     user: item.user,
-                    taxes:taxes
+                    taxes: taxes
                 },
                 ticketUpdateId: item.ticketUpdate.id
             })
         });
-        return [...productExpenses,...serviceExpenses];
+        return [...productExpenses, ...serviceExpenses];
     }
 }
