@@ -16,15 +16,16 @@
         [value]="geTextDate()"
         readonly
     >
-    <div
+    <button
         *ngIf="type === 'ICON'"
         placement="top"
         ngbTooltip="Date"
-        class="ticket-updates__date-icon icon__assign-date"
+        class="ticket-updates__date-icon icon__assign-date btn-icon-date-picker"
         ngbDropdownToggle
+        [disabled]="isDisabled"
         id="dropdownDate"
     >
-    </div>
+    </button>
     <div
         *ngIf="type === 'NO_ICON'"
         placement="top"

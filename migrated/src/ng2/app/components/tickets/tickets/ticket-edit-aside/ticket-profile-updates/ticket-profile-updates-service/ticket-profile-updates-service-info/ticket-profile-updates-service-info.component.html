@@ -30,6 +30,7 @@
                     [textContent]="getDuration(service.quantity)"
                 ></div>
                 <app-date-picker
+                    [isDisabled]="isBlockChange"
                     [placement]="'bottom-right'"
                     [useMinDate]="false"
                     [editMode]="true"

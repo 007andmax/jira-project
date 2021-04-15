@@ -28,6 +28,7 @@
                 [textContent]="'$' + getTotal(product.price,product.quantity)"
             ></div>
             <app-date-picker
+                [isDisabled]="isBlockChange"
                 placement="top"
                 ngbTooltip="Date"
                 [placement]="'bottom-right'"
@@ -38,6 +39,7 @@
                 (onChange)="onChangeDatePicker($event)"
             ></app-date-picker>
             <app-teh-users
+                [isDisabled]="isBlockChange"
                 [type]="'TICEKTS'"
                 [editMode]="true"
                 [selectedMode]="'SINGLE'"

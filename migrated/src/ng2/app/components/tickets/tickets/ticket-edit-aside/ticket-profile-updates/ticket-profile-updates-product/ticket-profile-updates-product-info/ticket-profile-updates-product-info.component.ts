@@ -65,6 +65,7 @@ export class TicketProfileUpdatesProductInfoComponent implements OnInit {
     this.onEdit.emit(null);
   }
   setComplete() {
+    if (this.isBlockChange) return;
     this.product.setCompleted(!this.product.completed);
     this.updateProduct();
   }
