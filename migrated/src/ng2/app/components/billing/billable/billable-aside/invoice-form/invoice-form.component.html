@@ -121,9 +121,12 @@
         <button
             class="qt-ml-10 billing-aside-save-mode"
             *ngIf="editMode"
-            (click)="onEditTickets()"
+            appDisabledBtn
+            #editTicketsBtn="disabled"
+            (onClick)="onEditTickets()"
         >
-            Save
+            <span *ngIf="!editTicketsBtn.isBlock()">Save</span>
+            <app-preloader-ticket *ngIf="editTicketsBtn.isBlock()"></app-preloader-ticket>
         </button>
         <button
             class="qt-ml-10 billing-aside-cancel-mode"

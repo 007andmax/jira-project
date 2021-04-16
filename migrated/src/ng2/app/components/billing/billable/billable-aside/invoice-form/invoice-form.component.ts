@@ -23,6 +23,7 @@ import { InvoiceValidate } from './class/invoice-validate';
 import { InvoiceProfileTicket } from '../../class/invoice-profile-ticket';
 import { FORMAT_DATE_2 } from 'src/ng2/app/const/date-picker';
 import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
+import { DisabledBtnDirective } from 'src/ng2/app/directives/disabled-btn.directive';
 
 @Component({
   selector: 'app-invoice-form',
@@ -31,6 +32,7 @@ import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 })
 export class InvoiceFormComponent implements OnInit, OnDestroy {
   @ViewChild('companyEdit') companyEdit: InvoiceFormEditCustomerComponent;
+  @ViewChild('editTicketsBtn') editTicketsBtn: DisabledBtnDirective;
   @Output() onUpdateInvoice = new EventEmitter();
   @Input() invoice: InvoiceLock;
   @Input() invoiceNumber: string;
@@ -163,6 +165,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     this.invoice.invoiceDataDto.dueDate = dueDate;
   }
   onEditTickets() {
+    this.editTicketsBtn.setDisabled(true);
     this.changedSubjectTickets = [];
     this.editTickets.forEach((item, index) => {
       if (item.changeSubject) this.changedSubjectTickets.push(item);
