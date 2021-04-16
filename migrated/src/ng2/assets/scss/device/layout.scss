@@ -2351,7 +2351,7 @@ ngb-datepicker{
             position: absolute;
             right: 32px;
             top: 32px;
-            background: url('../../../../ng2/assets/img/device/close.svg') no-repeat center;
+            background: url('/assets/img/icons/close.svg') no-repeat center;
             background-size: 20px auto;
             font-size: 0;
             padding: 0;
@@ -2622,7 +2622,7 @@ ngx-loading > div {
             position: absolute;
             height: 24px;
             width: 24px;
-            background: url('../../../../ng2/assets/img/device/close.svg');
+            background: url('/assets/img/icons/close.svg');
             font-size:0;
 
           } 

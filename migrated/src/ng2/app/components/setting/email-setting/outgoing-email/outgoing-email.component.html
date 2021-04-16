@@ -1,232 +1,295 @@
-
-<div class="cmn-area outgoing-email" *ngIf="smtp">
-  <p>
-    You can specify a custom outgoing email service if you prefer to use your
+<div
+    class="cmn-area outgoing-email"
+    *ngIf="smtp"
+>
+    <p>
+        You can specify a custom outgoing email service if you prefer to use your
     own, or you can use our quicktech email servers. If you select customer
     mails servers this is only for outgoing, you still need to forward your
     email to the above incoming email address.
-  </p>
-  <form [formGroup]="smtpForm" (ngSubmit)="saveSMTP(smtpForm)">
-    <div class="f-row">
-      <div class="f-col col-50">
-        <label *ngIf="!submitted || !f.emailAlias.errors">Alias Name</label>
-        <div *ngIf="submitted && f.emailAlias.errors" class="invalid-feedback">
-          <div *ngIf="f.emailAlias.errors.required">
-            Email Alias is required
-          </div>
-          <div *ngIf="f.emailAlias.errors.minlength">
-            Email Alias is too short.
-          </div>
-          <div *ngIf="f.emailAlias.errors.maxlength">
-            Email Alias is too large.
-          </div>
-        </div>
-        <div class="form-row">
-          <input
-            type="text"
-            class="form-input"
-            [ngClass]="{ 'is-invalid': submitted && f.emailAlias.errors }"
-            placeholder="Enter Alias Name"
-            formControlName="emailAlias"
-            (blur)="saveEmailAlias()"
-          />
-        </div>
-      </div>
+    </p>
+    <form
+        [formGroup]="smtpForm"
+        (ngSubmit)="saveSMTP(smtpForm)"
+    >
+        <div class="f-row">
+            <div class="f-col col-50">
+                <label *ngIf="!submitted || !f.emailAlias.errors">Alias Name</label>
+                <div
+                    *ngIf="submitted && f.emailAlias.errors"
+                    class="invalid-feedback"
+                >
+                    <div *ngIf="f.emailAlias.errors.required">Email Alias is required</div>
+                    <div *ngIf="f.emailAlias.errors.minlength">Email Alias is too short.</div>
+                    <div *ngIf="f.emailAlias.errors.maxlength">Email Alias is too large.</div>
+                </div>
+                <div class="form-row">
+                    <input
+                        type="text"
+                        class="form-input"
+                        [ngClass]="{ 'is-invalid': submitted && f.emailAlias.errors }"
+                        placeholder="Enter Alias Name"
+                        formControlName="emailAlias"
+                        (blur)="saveEmailAlias()"
+                    >
+                </div>
+            </div>
 
-      <div class="f-col col-50">
-        <label>Outgoing mail server</label>
-        <div class="form-row">
-          <select
-            class="cmn-select form-input"
-            formControlName="usedEmailVia"
-            (change)="changeEmailVia()"
-          >
-            <option *ngFor="let email of emailVia" value="{{ email.label }}">{{
+
+
+
+
+            <div class="f-col col-50">
+                <label>Outgoing mail server</label>
+                <div class="form-row">
+                    <select
+                        class="cmn-select form-input"
+                        formControlName="usedEmailVia"
+                        (change)="changeEmailVia()"
+                    >
+                        <option
+                            *ngFor="let email of emailVia"
+                            value="{{ email.label }}"
+                        >
+                            {{
               email.label
-            }}</option>
-          </select>
-        </div>
-      </div>
+            }}
+                        </option>
+                    </select>
+                </div>
+            </div>
 
-      <div class="f-col col-50">
-        <label *ngIf="!submitted || !f.domain.errors">Domain</label>
-        <div *ngIf="submitted && f.domain.errors" class="invalid-feedback">
-          <div *ngIf="f.domain.errors.required">
-            domain is required
-          </div>
-          <div *ngIf="f.domain.errors.Pattern">
-            Please enter a valid domain.
-          </div>
-        </div>
-        <div class="form-row">
-          <input
-            type="text"
-            class="form-input"
-            placeholder="Enter Domain"
-            [ngClass]="{ 'is-invalid': submitted && f.domain.errors }"
-            formControlName="domain"
-          />
-        </div>
-      </div>
 
-      <div class="f-col col-25">
-        <label *ngIf="!submitted || !f.port.errors">Port</label>
 
-        <div *ngIf="submitted && f.port.errors" class="invalid-feedback">
-          <div *ngIf="f.port.errors.required">
-            port is required
-          </div>
-          <div *ngIf="f.port.errors.min">
-            Value must be greater then 0.
-          </div>
-          <div *ngIf="f.port.errors.max">
-            Value must be smaller then 65535.
-          </div>
-        </div>
-        <div class="form-row">
-          <input
-            type="number"
-            class="form-input"
-            placeholder="Enter Port"
-            formControlName="port"
-            [ngClass]="{ 'is-invalid': submitted && f.port.errors }"
-          />
-        </div>
-      </div>
 
-      <div class="f-col col-25">
-        <label>Encryption</label>
-        <div class="form-row">
-          <select
-            class="cmn-select form-input"
-            formControlName="encryptionType"
-            (change)="changeEncryption($event.target.value)"
-          >
-            <option value="NONE">PLAIN</option>
-            <option value="TLS">TLS</option>
-            <option value="SSL">SSL</option>
-          </select>
-        </div>
-      </div>
 
-      <div class="f-col col-50">
-        <label *ngIf="(!submitted || !f.login.errors) && isSMTPLoginUnique"
-          >Login</label
-        >
-        <div *ngIf="submitted && f.login.errors" class="invalid-feedback">
-          <div *ngIf="f.login.errors.required">
-            Login is required
-          </div>
-          <div *ngIf="f.login.errors.pattern">
-            Please enter a valid email address.
-          </div>
-          <div *ngIf="f.login.errors.maxlength">
-            Email mustn't be greater then 128 chars
-          </div>
-        </div>
-        <label *ngIf="!isSMTPLoginUnique"> Login is not unique</label>
-        <div class="form-row">
-          <input
-            type="text"
-            class="form-input"
-            placeholder="Enter Login Details"
-            formControlName="login"
-            (blur)="checkSMTPLoginUnique()"
-          />
-        </div>
-      </div>
+            <div class="f-col col-50">
+                <label *ngIf="!submitted || !f.domain.errors">Domain</label>
+                <div
+                    *ngIf="submitted && f.domain.errors"
+                    class="invalid-feedback"
+                >
+                    <div *ngIf="f.domain.errors.required">domain is required</div>
+                    <div *ngIf="f.domain.errors.Pattern">Please enter a valid domain.</div>
+                </div>
+                <div class="form-row">
+                    <input
+                        type="text"
+                        class="form-input"
+                        placeholder="Enter Domain"
+                        [ngClass]="{ 'is-invalid': submitted && f.domain.errors }"
+                        formControlName="domain"
+                    >
+                </div>
+            </div>
 
-      <div class="f-col col-50">
-        <label *ngIf="!submitted || !f.password.errors">Password</label>
-        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-          <div *ngIf="f.password.errors.required">
-            Password is required
-          </div>
-        </div>
-        <div class="form-row password">
-          <input
-            type="{{ showPassword ? 'text' : 'password' }}"
-            class="form-input"
-            placeholder="Enter password"
-            formControlName="password"
-          />
 
-          <a
-            href="javascript:;"
-            class="password-co"
-            (click)="showPassword = !showPassword"
-            [hidden]="!smtp.password"
-            >
-            <img
-            *ngIf="!showPassword"
-              src="../../../../../../ng1/images/setting-module/password-show-old.svg"
-              alt="password"/>
-              <img
-              *ngIf="showPassword"
-              src="../../../../../../ng1/images/setting-module/password-show.svg"
-              alt="password"/>
-            </a>
+
+
+
+            <div class="f-col col-25">
+                <label *ngIf="!submitted || !f.port.errors">Port</label>
+
+
+
+
+
+                <div
+                    *ngIf="submitted && f.port.errors"
+                    class="invalid-feedback"
+                >
+                    <div *ngIf="f.port.errors.required">port is required</div>
+                    <div *ngIf="f.port.errors.min">Value must be greater then 0.</div>
+                    <div *ngIf="f.port.errors.max">Value must be smaller then 65535.</div>
+                </div>
+                <div class="form-row">
+                    <input
+                        type="number"
+                        class="form-input"
+                        placeholder="Enter Port"
+                        formControlName="port"
+                        [ngClass]="{ 'is-invalid': submitted && f.port.errors }"
+                    >
+                </div>
+            </div>
+
+
+
+
+
+            <div class="f-col col-25">
+                <label>Encryption</label>
+                <div class="form-row">
+                    <select
+                        class="cmn-select form-input"
+                        formControlName="encryptionType"
+                        (change)="changeEncryption($event.target.value)"
+                    >
+                        <option value="NONE">PLAIN</option>
+                        <option value="TLS">TLS</option>
+                        <option value="SSL">SSL</option>
+                    </select>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="f-col col-50">
+                <label *ngIf="(!submitted || !f.login.errors) && isSMTPLoginUnique">Login</label>
+                <div
+                    *ngIf="submitted && f.login.errors"
+                    class="invalid-feedback"
+                >
+                    <div *ngIf="f.login.errors.required">Login is required</div>
+                    <div *ngIf="f.login.errors.pattern">Please enter a valid email address.</div>
+                    <div *ngIf="f.login.errors.maxlength">Email mustn't be greater then 128 chars</div>
+                </div>
+                <label *ngIf="!isSMTPLoginUnique">Login is not unique</label>
+                <div class="form-row">
+                    <input
+                        type="text"
+                        class="form-input"
+                        placeholder="Enter Login Details"
+                        formControlName="login"
+                        (blur)="checkSMTPLoginUnique()"
+                    >
+                </div>
+            </div>
+
+
+
+
+
+            <div class="f-col col-50">
+                <label *ngIf="!submitted || !f.password.errors">Password</label>
+                <div
+                    *ngIf="submitted && f.password.errors"
+                    class="invalid-feedback"
+                >
+                    <div *ngIf="f.password.errors.required">Password is required</div>
+                </div>
+                <div class="form-row password">
+                    <input
+                        type="{{ showPassword ? 'text' : 'password' }}"
+                        class="form-input"
+                        placeholder="Enter password"
+                        formControlName="password"
+                    >
+
+
+
+
+
+                    <a
+                        href="javascript:;"
+                        class="password-co"
+                        (click)="showPassword = !showPassword"
+                        [hidden]="!smtp.password"
+                    >
+                        <img
+                            *ngIf="!showPassword"
+                            src="/html/ng2/assets/img/password-show-old.svg"
+                            alt="password"
+                        >
+                        <img
+                            *ngIf="showPassword"
+                            src="/html/ng2/assets/img/password-show.svg"
+                            alt="password"
+                        >
+                    </a>
+                </div>
+            </div>
+            <div class="f-col col-100 test-server">
+                <!-- <a href="javascript:;" class="btn-outline" >Test Server</a> -->
+                <input
+                    type="button"
+                    class="btn-outline"
+                    value="Test Server"
+                    disabled="{{ !smtp.useSMTP || smtpForm.invalid || !smtp.isValid }}"
+                    (click)="create = !create"
+                >
+            </div>
         </div>
-      </div>
-      <div class="f-col col-100 test-server">
-        <!-- <a href="javascript:;" class="btn-outline" >Test Server</a> -->
         <input
-          type="button"
-          class="btn-outline"
-          value="Test Server"
-          disabled="{{ !smtp.useSMTP || smtpForm.invalid || !smtp.isValid }}"
-          (click)="create = !create"
-        />
-      </div>
-    </div>
-    <input type="submit" class="btn btn-primary" value="Save Changes" />
-  </form>
-  <!-- <div class="loading" *ngIf="loading"></div> -->
+            type="submit"
+            class="btn btn-primary"
+            value="Save Changes"
+        >
+    </form>
+    <!-- <div class="loading" *ngIf="loading"></div> -->
 </div>
 
-<div class="sidebar-popup" [class.opened]="create">
-  <!-- header -->
-  <div class="sidebar-header">
-    <a class="close" href="javascript:;" (click)="create = !create"
-      ><img src="../../../../../../ng1/images/setting-module/close.svg" alt="close"
-    /></a>
-  </div>
-  <div class="middle-content">
-    <form
-      (ngSubmit)="f.form.valid && sendTestEmail(smtpForm, testEmailForm, true)"
-      #f="ngForm"
-      novalidate
-    >
-      <div class="f-row">
-        <div class="f-col col-50">
-          <label>Target Email</label>
-          <a class="close" href="javascript:;" (click)="create = !create"
-            ><img src="../../../../../../ng1/images/setting-module/close.svg" alt="close"
-          /></a>
-          <div class="form-row" *ngIf="smtp">
-            <input
-              type="text"
-              class="form-control"
-              name="testEmail"
-              [(ngModel)]="smtp.testEmail"
-              #targetEmail="ngModel"
-              [ngClass]="{ 'is-invalid': f.submitted && testEmail.invalid }"
-              required
-            />
-            <div
-              *ngIf="f.submitted && testEmail.invalid"
-              class="invalid-feedback"
+
+
+
+
+<div
+    class="sidebar-popup"
+    [class.opened]="create"
+>
+    <!-- header -->
+    <div class="sidebar-header">
+        <a
+            class="close"
+            href="javascript:;"
+            (click)="create = !create"
+        >
+            <img
+                src="/html/ng2/assets/img/icons/close.svg"
+                alt="close"
             >
-              <div *ngIf="testEmail.errors.required">
-                Test Email is required
-              </div>
+        </a>
+    </div>
+    <div class="middle-content">
+        <form
+            (ngSubmit)="f.form.valid && sendTestEmail(smtpForm, testEmailForm, true)"
+            #f="ngForm"
+            novalidate
+        >
+            <div class="f-row">
+                <div class="f-col col-50">
+                    <label>Target Email</label>
+                    <a
+                        class="close"
+                        href="javascript:;"
+                        (click)="create = !create"
+                    >
+                        <img
+                            src="/html/ng2/assets/img/icons/close.svg"
+                            alt="close"
+                        >
+                    </a>
+                    <div
+                        class="form-row"
+                        *ngIf="smtp"
+                    >
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="testEmail"
+                            [(ngModel)]="smtp.testEmail"
+                            #targetEmail="ngModel"
+                            [ngClass]="{ 'is-invalid': f.submitted && testEmail.invalid }"
+                            required
+                        >
+                        <div
+                            *ngIf="f.submitted && testEmail.invalid"
+                            class="invalid-feedback"
+                        >
+                            <div *ngIf="testEmail.errors.required">Test Email is required</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="btn-row">
-        <input type="submit" value="Save" class="btn btn-primary" />
-      </div>
-    </form>
-  </div>
+            <div class="btn-row">
+                <input
+                    type="submit"
+                    value="Save"
+                    class="btn btn-primary"
+                >
+            </div>
+        </form>
+    </div>
 </div>

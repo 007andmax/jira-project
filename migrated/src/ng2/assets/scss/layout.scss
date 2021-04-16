@@ -670,7 +670,7 @@ table{
             position: absolute;
             right: 40px;
             top: 40px;
-            background: url('/ng2/assets/img/close.svg') no-repeat center;
+            background: url('/assets/img/icons/close.svg') no-repeat center;
             font-size: 0;
             padding: 0;
             cursor: pointer;
@@ -1777,7 +1777,7 @@ ngb-tabset {
             position: absolute;
             height: 24px;
             width: 24px;
-            background: url('././assets/img/close.svg');
+            background: url('/assets/img/icons/close.svg');
             font-size:0;
 
           }
@@ -1933,7 +1933,7 @@ ngb-tabset {
     box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1);
     background-image: none !important;
 
-    background: url(/../../../ng1/images/setting-module/Error.svg)  #FF6E61 no-repeat left 16px center !important;
+    background: url(/assets/img/Error.svg)  #FF6E61 no-repeat left 16px center !important;
     background-color: #FF6E61;
     padding:12px 15px 12px 44px;
     font-size: 12px;
@@ -1952,7 +1952,7 @@ ngb-tabset {
 }
 #toast-container .toast.toast-error {
 background-image: none !important;
-background: url(/../../../ng1/images/setting-module/Error.svg)  #FF6E61 no-repeat left 16px center !important;
+background: url(/assets/img/Error.svg)  #FF6E61 no-repeat left 16px center !important;
 background-color: #FF6E61;
 }
 
@@ -1977,7 +1977,7 @@ background-color: #FF6E61;
     box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1);
     background-image: none !important;
 
-    background: url(/../../../ng1/images/setting-module/success-tick.svg)  #2ec866 no-repeat left 16px center !important;
+    background: url(/assets/img/success-tick.svg)  #2ec866 no-repeat left 16px center !important;
     background-color: #2ec866;
     padding:12px 15px 12px 44px;
     font-size: 12px;
@@ -2007,7 +2007,7 @@ background-color: #FF6E61;
 }
 .overlay-container #toast-container .toast-success,.overlay-container .toast-container .toast-success {
     background-image: none !important;
-    background: url(/../../../ng1/images/setting-module/success-tick.svg) #2ec866 no-repeat left 16px center !important;
+    background: url(/assets/img/success-tick.svg) #2ec866 no-repeat left 16px center !important;
 
 }
 

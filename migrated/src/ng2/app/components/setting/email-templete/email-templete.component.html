@@ -37,7 +37,7 @@
                                                 (click)="getTemplate(template, i)"
                                             >
                                                 <img
-                                                    src="../../../../../ng1/images/setting-module/edit.svg"
+                                                    src="/html/ng2/assets/img/icons/edit.svg"
                                                     alt="Edit"
                                                 >
                                             </a>
@@ -53,7 +53,7 @@
                                                 class="view"
                                             >
                                                 <img
-                                                    src="../../../../../ng1/images/setting-module/view-icon.svg"
+                                                    src="/html/ng2/assets/img/view-icon.svg"
                                                     alt="view-icon"
                                                 >
                                             </a>
@@ -94,7 +94,7 @@
                                                 class="edit"
                                             >
                                                 <img
-                                                    src="../../../../../ng1/images/setting-module/edit.svg"
+                                                    src="/html/ng2/assets/img/icons/edit.svg"
                                                     alt="Edit"
                                                 >
                                             </a>
@@ -110,7 +110,7 @@
                                                 class="view"
                                             >
                                                 <img
-                                                    src="../../../../../ng1/images/setting-module/view-icon.svg"
+                                                    src="/html/ng2/assets/img/view-icon.svg"
                                                     alt="view-icon"
                                                 >
                                             </a>
@@ -151,7 +151,7 @@
                                                 (click)="getTemplate(template, i)"
                                             >
                                                 <img
-                                                    src="../../../../../ng1/images/setting-module/edit.svg"
+                                                    src="/html/ng2/assets/img/icons/edit.svg"
                                                     alt="Edit"
                                                 >
                                             </a>
@@ -167,7 +167,7 @@
                                                 class="view"
                                             >
                                                 <img
-                                                    src="../../../../../ng1/images/setting-module/view-icon.svg"
+                                                    src="/html/ng2/assets/img/view-icon.svg"
                                                     alt="view-icon"
                                                 >
                                             </a>
@@ -184,6 +184,11 @@
     </div>
 
 
+
+
+
+
+
 </div>
 <!-- sidebar popup edit -->
 <div
@@ -194,135 +199,174 @@
     <!-- header -->
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-title">{{ templeteInfo.title }}</div>
-        <div class="qt-aside-modern__header-close icon__close" (click)="closeTemplete()"></div>
+        <div
+            class="qt-aside-modern__header-close icon__close"
+            (click)="closeTemplete()"
+        ></div>
     </div>
 
-    <div class="qt-aside-modern__content --no-padding">
-      <div class="reciept">
-        <span>
-            <strong>Recipient:</strong>
-            {{ templeteInfo.recipient }}
-        </span>
-        <a
-            href="javascript:;"
-            class="templates-view"
-            (click)="emailPreview(template)"
-            *ngIf="templeteInfo.showPreview"
-        >
-            Show Template Preview
-        </a>
-      </div>
 
-      <div class="middle-content">
-        <form
-            [formGroup]="templeteForm"
-            (ngSubmit)="saveEmailTemplate()"
-        >
-            <div class="f-row">
-                <div class="f-col col-100">
-                    <label>Subject</label>
-                    <div class="form-row">
-                        <input
-                            type="text"
-                            formControlName="subject"
-                            #subject
-                            name="subject"
-                            id="subject"
-                            class="form-input insert-field"
-                            [ngClass]="{ 'is-invalid': submitted && f.subject.errors }"
-                            placeholder="Enter Subject"
-                        >
-                        <div
-                            *ngIf="submitted && f.subject.errors"
-                            class="invalid-feedback"
-                        >
-                            <div *ngIf="f.subject.errors.required">Subject is required</div>
-                            <div *ngIf="f.subject.errors.pattern && templeteInfo">
-                                {{ templeteInfo.requiredKeywords }} is required
+
+
+
+
+    <div class="qt-aside-modern__content --no-padding">
+        <div class="reciept">
+            <span>
+                <strong>Recipient:</strong>
+                {{ templeteInfo.recipient }}
+            </span>
+            <a
+                href="javascript:;"
+                class="templates-view"
+                (click)="emailPreview(template)"
+                *ngIf="templeteInfo.showPreview"
+            >
+                Show Template Preview
+            </a>
+        </div>
+
+
+
+
+
+
+        <div class="middle-content">
+            <form
+                [formGroup]="templeteForm"
+                (ngSubmit)="saveEmailTemplate()"
+            >
+                <div class="f-row">
+                    <div class="f-col col-100">
+                        <label>Subject</label>
+                        <div class="form-row">
+                            <input
+                                type="text"
+                                formControlName="subject"
+                                #subject
+                                name="subject"
+                                id="subject"
+                                class="form-input insert-field"
+                                [ngClass]="{ 'is-invalid': submitted && f.subject.errors }"
+                                placeholder="Enter Subject"
+                            >
+                            <div
+                                *ngIf="submitted && f.subject.errors"
+                                class="invalid-feedback"
+                            >
+                                <div *ngIf="f.subject.errors.required">Subject is required</div>
+                                <div *ngIf="f.subject.errors.pattern && templeteInfo">
+                                    {{ templeteInfo.requiredKeywords }} is required
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="f-col col-100">
-                    <label>Email</label>
-                    <div class="form-row">
-                        <textarea
-                            id="myEditor"
-                            #body
-                            class="form-input insert-field"
-                            row="8"
-                            name="body"
-                            formControlName="body"
-                        ></textarea>
+                    <div class="f-col col-100">
+                        <label>Email</label>
+                        <div class="form-row">
+                            <textarea
+                                id="myEditor"
+                                #body
+                                class="form-input insert-field"
+                                row="8"
+                                name="body"
+                                formControlName="body"
+                            ></textarea>
+                        </div>
                     </div>
-                </div>
-                <div class="f-col col-100">
-                    <div class="keywords">
-                        <label>Available keywords</label>
-                        <a
-                            href="javascript:;"
-                            (click)="toggle()"
+                    <div class="f-col col-100">
+                        <div class="keywords">
+                            <label>Available keywords</label>
+                            <a
+                                href="javascript:;"
+                                (click)="toggle()"
+                            >
+                                {{ buttonName }}
+                            </a>
+                        </div>
+                        <div
+                            class="form-row tgs-list"
+                            *ngIf="!show"
                         >
-                            {{ buttonName }}
-                        </a>
-                    </div>
-                    <div
-                        class="form-row tgs-list"
-                        *ngIf="!show"
-                    >
-                        <span
-                            class="tags"
-                            *ngFor="let key of keywords"
-                            (mousedown)="insertAtCaret(key.keyName)"
+                            <span
+                                class="tags"
+                                *ngFor="let key of keywords"
+                                (mousedown)="insertAtCaret(key.keyName)"
+                            >
+                                {{ key.keyName }}
+                            </span>
+                        </div>
+                        <!-- on click hide show -->
+                        <div
+                            class="key-area"
+                            *ngIf="show"
                         >
-                            {{ key.keyName }}
-                        </span>
-                    </div>
-                    <!-- on click hide show -->
-                    <div
-                        class="key-area"
-                        *ngIf="show"
-                    >
-                        <span
-                            *ngFor="let key of keywords"
-                            (mousedown)="insertAtCaret(key.keyName)"
-                        >
-                            <strong>{{ key.keyName }} -</strong>
-                            {{ key.description }}
-                        </span>
+                            <span
+                                *ngFor="let key of keywords"
+                                (mousedown)="insertAtCaret(key.keyName)"
+                            >
+                                <strong>{{ key.keyName }} -</strong>
+                                {{ key.description }}
+                            </span>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
-    </div>
+
+
+
+
+
 
     <div class="qt-aside-modern__footer">
-      <div class="qt-df qt-w100 qt-ai-c qt-jc-sb">
-        <div class="qt-df">
-          <button class="qt-button qt-mr-12" (click)="saveEmailTemplate()">
-            Save
-          </button>
+        <div class="qt-df qt-w100 qt-ai-c qt-jc-sb">
+            <div class="qt-df">
+                <button
+                    class="qt-button qt-mr-12"
+                    (click)="saveEmailTemplate()"
+                >
+                    Save
+                </button>
 
-          <button class="qt-button --gray" (click)="closeTemplete()">
-            Cancel
-          </button>
-        </div>
 
-        <div>
-          <button
-              type="button"
-              href="javascript:void(0)"
-              *ngIf="emailPages && openEmailTemplate"
-              class="restore qt-mr-50"
-              [disabled]="!emailPages.activeAndNotDefault[openEmailTemplate].isNotDefault"
-              (click)="restoreDefault(openEmailTemplate)"
-          >
-            Restore Default
-          </button>
+
+
+
+
+                <button
+                    class="qt-button --gray"
+                    (click)="closeTemplete()"
+                >
+                    Cancel
+                </button>
+            </div>
+
+
+
+
+
+
+            <div>
+                <button
+                    type="button"
+                    href="javascript:void(0)"
+                    *ngIf="emailPages && openEmailTemplate"
+                    class="restore qt-mr-50"
+                    [disabled]="!emailPages.activeAndNotDefault[openEmailTemplate].isNotDefault"
+                    (click)="restoreDefault(openEmailTemplate)"
+                >
+                    Restore Default
+                </button>
+            </div>
         </div>
-      </div>
-  </div>
+    </div>
+
+
+
+
+
 
 
 

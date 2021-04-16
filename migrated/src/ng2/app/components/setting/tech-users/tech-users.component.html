@@ -65,7 +65,7 @@
                                         *ngIf="techUser.avatar === null"
                                     >
                                         <img
-                                            src="../../../../../../ng1/images/setting-module/avtar-56@2x.png"
+                                            src="html/ng2/assets/img/avtar-56@2x.png"
                                             alt="user"
                                         >
                                     </span>
@@ -167,7 +167,7 @@
                                     (click)="changePasswordRequest(techUser.id)"
                                 >
                                     <img
-                                        src="../../../../../ng1/images/setting-module/reset-password.svg"
+                                        src="/html/ng2/assets/img/reset-password.svg"
                                         alt="Edit"
                                     >
                                 </a>
@@ -179,7 +179,7 @@
                                     (click)="resendWelcomeEmail(techUser.primaryEmail)"
                                 >
                                     <img
-                                        src="../../../../../ng1/images/setting-module/email-resend.svg"
+                                        src="/html/ng2/assets/img/email-resend.svg"
                                         alt="Edit"
                                     >
                                 </a>
@@ -193,7 +193,7 @@
                                     (click)="editTechUser(techUser)"
                                 >
                                     <img
-                                        src="../../../../../ng1/images/setting-module/edit.svg"
+                                        src="/html/ng2/assets/img/icons/edit.svg"
                                         alt="Edit"
                                     >
                                 </a>
@@ -204,7 +204,7 @@
                                     (click)="removeUserConfirm(techUser)"
                                 >
                                     <img
-                                        src="../../../../../ng1/images/setting-module/remove.svg"
+                                        src="/html/ng2/assets/img/icons/remove.svg"
                                         alt="Remove"
                                     >
                                 </a>
@@ -347,7 +347,7 @@
                                     (click)="restoreConfirm(techUser.id)"
                                 >
                                     <img
-                                        src="../../../../../../ng1/images/setting-module/restore-user.svg"
+                                        src="/html/ng2/assets/img/icons/restore-user.svg"
                                         alt="Restore User"
                                     >
                                 </a>
@@ -362,6 +362,19 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 </div>
 <!-- sidebar popup -->
 <div
@@ -371,13 +384,16 @@
     <!-- header -->
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-title">Create Tech User</div>
-        <div class="qt-aside-modern__header-close icon__close"  (click)="create = !create"></div>
+        <div
+            class="qt-aside-modern__header-close icon__close"
+            (click)="create = !create"
+        ></div>
     </div>
     <div class="qt-aside-modern__content middle-content">
         <div class="dp-area">
             <span class="dp">
                 <img
-                    src="../../../../../ng1/images/setting-module/upload-photo.svg"
+                    src="/html/ng2/assets/img/upload-photo.svg"
                     alt="user"
                     *ngIf="!fileAvatar"
                 >
@@ -568,17 +584,20 @@
         </form>
     </div>
     <div class="qt-aside-modern__footer">
-      <div class="qt-df">
-        <button
-          class="qt-button qt-mr-12"
-          (click)="onCreateSubmit()"
-        >
-          Save
-        </button>
-        <button class="qt-button --gray" (click)="create = !create">
-          Cancel
-        </button>
-      </div>
+        <div class="qt-df">
+            <button
+                class="qt-button qt-mr-12"
+                (click)="onCreateSubmit()"
+            >
+                Save
+            </button>
+            <button
+                class="qt-button --gray"
+                (click)="create = !create"
+            >
+                Cancel
+            </button>
+        </div>
     </div>
 </div>
 <!-- sidebar popup edit -->
@@ -589,14 +608,17 @@
     <!-- header -->
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-title">Edit Tech User</div>
-        <div class="qt-aside-modern__header-close icon__close" (click)="edit = !edit"></div>
+        <div
+            class="qt-aside-modern__header-close icon__close"
+            (click)="edit = !edit"
+        ></div>
     </div>
     <div
         class="warn-msg"
         *ngIf="selectedTechUser && !selectedTechUser.isEmailVerified"
     >
         <img
-            src="../../../../../ng1/images/setting-module/warning.svg"
+            src="/html/ng2/assets/img/warning.svg"
             alt="warning"
         >
         <p>
@@ -638,7 +660,7 @@
                     *ngIf="selectedTechUser.avatar === null"
                 >
                     <img
-                        src="../../../../../../ng1/images/setting-module/avtar-56@2x.png"
+                        src="html/ng2/assets/img/avtar-56@2x.png"
                         alt="user"
                     >
                 </span>
@@ -873,113 +895,130 @@
                 </div>
             </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
         </form>
     </div>
     <div class="qt-aside-modern__footer">
-      <div class="qt-df">
-        <button
-          class="qt-button qt-mr-12"
-          (click)="onSubmit()"
-        >
-          Save
-        </button>
-        <button class="qt-button --gray" (click)="edit = !edit">
-          Cancel
-        </button>
+        <div class="qt-df">
+            <button
+                class="qt-button qt-mr-12"
+                (click)="onSubmit()"
+            >
+                Save
+            </button>
+            <button
+                class="qt-button --gray"
+                (click)="edit = !edit"
+            >
+                Cancel
+            </button>
+        </div>
     </div>
-</div>
-<!-- tag delete popup -->
-<div
-    class="img-croparea deletePopup"
-    *ngIf="popup"
->
-    <div class="crop-inner">
-        <div class="cropping">
-            <div class="popup-message">
-                <span class="icon-part">
-                    <img
-                        src="../../../../../ng1/images/setting-module/delete-red.svg"
-                        alt="delete"
+    <!-- tag delete popup -->
+    <div
+        class="img-croparea deletePopup"
+        *ngIf="popup"
+    >
+        <div class="crop-inner">
+            <div class="cropping">
+                <div class="popup-message">
+                    <span class="icon-part">
+                        <img
+                            src="/html/ng2/assets/img/device/delete-red.svg"
+                            alt="delete"
+                        >
+                    </span>
+                    <div class="message-right">
+                        <h1>Restore User</h1>
+                        <p>Are you sure you want to restore user?</p>
+                    </div>
+                    <a
+                        class="close-ico"
+                        href="javascript:;"
+                        (click)="popup = false"
                     >
-                </span>
-                <div class="message-right">
-                    <h1>Restore User</h1>
-                    <p>Are you sure you want to restore user?</p>
+                        <img
+                            src="/html/ng2/assets/img/icons/close.svg"
+                            alt="close"
+                        >
+                    </a>
                 </div>
-                <a
-                    class="close-ico"
-                    href="javascript:;"
-                    (click)="popup = false"
-                >
-                    <img
-                        src="../../../../../ng1/images/setting-module/close.svg"
-                        alt="close"
+                <div class="btn-crops">
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        (click)="restoreUser()"
                     >
-                </a>
-            </div>
-            <div class="btn-crops">
-                <button
-                    type="button"
-                    class="btn btn-primary"
-                    (click)="restoreUser()"
-                >
-                    Yes, I am sure
-                </button>
-                <button
-                    type="button"
-                    class="btn btn-secondary"
-                    (click)="popup = false"
-                >
-                    Cancel
-                </button>
+                        Yes, I am sure
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        (click)="popup = false"
+                    >
+                        Cancel
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- tag delete popup -->
-<div
-    class="img-croparea deletePopup"
-    *ngIf="deletepopup"
->
-    <div class="crop-inner">
-        <div class="cropping">
-            <div class="popup-message">
-                <span class="icon-part">
-                    <img
-                        src="../../../../../ng1/images/setting-module/delete-red.svg"
-                        alt="delete"
+    <!-- tag delete popup -->
+    <div
+        class="img-croparea deletePopup"
+        *ngIf="deletepopup"
+    >
+        <div class="crop-inner">
+            <div class="cropping">
+                <div class="popup-message">
+                    <span class="icon-part">
+                        <img
+                            src="/html/ng2/assets/img/device/delete-red.svg"
+                            alt="delete"
+                        >
+                    </span>
+                    <div class="message-right">
+                        <h1>Delete User</h1>
+                        <p>Are you sure you want to delete?</p>
+                    </div>
+                    <a
+                        class="close-ico"
+                        href="javascript:;"
+                        (click)="deletepopup = false"
                     >
-                </span>
-                <div class="message-right">
-                    <h1>Delete User</h1>
-                    <p>Are you sure you want to delete?</p>
+                        <img
+                            src="/html/ng2/assets/img/icons/close.svg"
+                            alt="close"
+                        >
+                    </a>
                 </div>
-                <a
-                    class="close-ico"
-                    href="javascript:;"
-                    (click)="deletepopup = false"
-                >
-                    <img
-                        src="../../../../../ng1/images/setting-module/close.svg"
-                        alt="close"
+                <div class="btn-crops">
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        (click)="removeTechUser()"
                     >
-                </a>
-            </div>
-            <div class="btn-crops">
-                <button
-                    type="button"
-                    class="btn btn-primary"
-                    (click)="removeTechUser()"
-                >
-                    Yes, I am sure
-                </button>
-                <button
-                    type="button"
-                    class="btn btn-secondary"
-                    (click)="deletepopup = false"
-                >
-                    Cancel
-                </button>
+                        Yes, I am sure
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        (click)="deletepopup = false"
+                    >
+                        Cancel
+                    </button>
+                </div>
             </div>
         </div>
     </div>

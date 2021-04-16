@@ -1,36 +1,75 @@
 <!-- map area -->
 <div class="map-area his-map-area">
-  <agm-map [latitude]="selectedDevice.latitude" [longitude]="selectedDevice.longitude" 
-    [mapTypeControl]='true' [zoom]="15"  [title]="(selectedDevice.city ? selectedDevice.city + ', ' : '') + selectedDevice.country ">
-    <agm-marker [latitude]="selectedDevice.latitude" [longitude]="selectedDevice.longitude"></agm-marker>
-  </agm-map>
+    <agm-map
+        [latitude]="selectedDevice.latitude"
+        [longitude]="selectedDevice.longitude"
+        [mapTypeControl]='true'
+        [zoom]="15"
+        [title]="(selectedDevice.city ? selectedDevice.city + ', ' : '') + selectedDevice.country "
+    >
+        <agm-marker
+            [latitude]="selectedDevice.latitude"
+            [longitude]="selectedDevice.longitude"
+        ></agm-marker>
+    </agm-map>
+
+
 
 </div>
 <div class="cmn-area hs-area">
-  <div class="data-table-wrap history-data">
-    <table class="display dataTable" style="width:100%">
-      <thead>
-        <tr>
-          <th class="ac-detail">Access Detail</th>
-          <th class="last-seen">Last Seen</th>
-          <th class="action">&nbsp;</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let device of activityHistory" (click)="selectDevice(device)"
-          class="{'selected': selectedDevice.id === device.id}">
+    <div class="data-table-wrap history-data">
+        <table
+            class="display dataTable"
+            style="width:100%"
+        >
+            <thead>
+                <tr>
+                    <th class="ac-detail">Access Detail</th>
+                    <th class="last-seen">Last Seen</th>
+                    <th class="action">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr
+                    *ngFor="let device of activityHistory"
+                    (click)="selectDevice(device)"
+                    class="{'selected': selectedDevice.id === device.id}"
+                >
 
-          <td class="ac-detail">{{device.browserName}}, {{device.osName}} ({{device.city ? device.city + ',' : ''}}
-            {{device.country}} {{device.ipAddress}})</td>
-          <td class="last-seen">{{device.current ? 'now' : (device.lastAccessDate | date) }}</td>
-          <td class="action">
-            <a href="javascript:;" class="block" data-tooltip="Block"><img src="../../../../../../ng1/images/setting-module/block.svg"
-                alt="block" /></a>
-            <a href="javascript:;" class="remove" data-tooltip="Remove" (click)="closeSession(device)"><img
-                src="../../../../../../ng1/images/setting-module/remove.svg" alt="Remove" /></a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+
+
+                    <td class="ac-detail">
+                        {{device.browserName}}, {{device.osName}} ({{device.city ? device.city + ',' : ''}}
+            {{device.country}} {{device.ipAddress}})
+                    </td>
+                    <td class="last-seen">
+                        {{device.current ? 'now' : (device.lastAccessDate | date) }}
+                    </td>
+                    <td class="action">
+                        <a
+                            href="javascript:;"
+                            class="block"
+                            data-tooltip="Block"
+                        >
+                            <img
+                                src="html/ng2/assets/img/block.svg"
+                                alt="block"
+                            >
+                        </a>
+                        <a
+                            href="javascript:;"
+                            class="remove"
+                            data-tooltip="Remove"
+                            (click)="closeSession(device)"
+                        >
+                            <img
+                                src="/html/ng2/assets/img/icons/remove.svg"
+                                alt="Remove"
+                            >
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
