@@ -823,6 +823,18 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 /* ENd DropDown Ticket */
 
+/* Btn closed */
+.modal-content {
+  .archive-modal .close-modal,
+  .image-confirm-modal .close-modal {
+    background-image: url('/assets/img/icons/close-16.png');
+    position: absolute;
+    right: 45px;
+    top: 28px;
+  }
+}
+/* End Btn closed */
+
 @media (min-width: 992px) {
   .col-md-12 {
     width: 100%;
