@@ -1,0 +1,105 @@
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { USERS } from 'src/app/const/emails';
+import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
+import { UsersHeaderService } from './services/users-header.service';
+import { User } from '../class/user';
+
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ARCHIVE_USER, ARCHIVE_USERS } from 'src/app/const/confirm';
+import { ConfirmComponent } from '../../shared/confirm/confirm.component';
+import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
+import { UsersService } from 'src/app/services/users/users.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { CurrentUser } from 'src/class/current-user/current-user';
+import { TicketsFilterComponent } from '../../tickets/tickets/tickets-header/tickets-filter/tickets-filter.component';
+import { UsersFilterComponent } from './users-filter/users-filter.component';
+import { TYPE_LIST_ALL_USERS, TYPE_LIST_COMPANY_USERS } from 'src/app/const/users';
+
+
+
+
+@Component({
+  selector: 'app-users-header',
+  templateUrl: './users-header.component.html',
+  styleUrls: ['./users-header.component.scss'],
+  providers: [UsersHeaderService]
+})
+export class UsersHeaderComponent implements OnInit, OnDestroy {
+  @Output() onChangeFilterField = new EventEmitter<any>();
+  @Output() onSelectAllUser = new EventEmitter<any>();
+  @Input() set users(value: Array<User>) {
+    this._users = value;
+  }
+  @Input() reqUsers: Array<User> = [];
+  @Input() selectAll: boolean = false;
+  _users: Array<User> = [];
+  @Input() count: number = 0;
+  @Input() type: string;
+  @ViewChild('filter') filter: UsersFilterComponent;
+  countFilter: number = 0;
+  toggleFilter: boolean = true;
+  currentUser: CurrentUser = new CurrentUser();
+  TYPE_LIST_ALL_USERS = TYPE_LIST_ALL_USERS;
+  TYPE_LIST_COMPANY_USERS = TYPE_LIST_COMPANY_USERS;
+  constructor(private usersStateService: UsersStateService,
+    private draftEmailStateService: DraftEmailStateService,
+    private companiesStateService: CompaniesStateService,
+    private confirmStateService: ConfirmStateService,
+    private modalService: NgbModal,
+    private usersService: UsersService,
+    private usersHeaderService: UsersHeaderService) {
+  }
+
+  ngOnInit() {
+    this.currentUser = this.usersStateService.getCurrentUser();
+  }
+  public showAsideForDraftEmail() {
+    this.draftEmailStateService.setAction(USERS);
+    this.draftEmailStateService.resetSelectedUsers();
+    this.draftEmailStateService.setSelectedUser(this.reqUsers.filter(item => item.selected));
+    this.draftEmailStateService.toggleAsideForAdd();
+  }
+  delete() {
+
+    this.confirmStateService.setConfirmAction(ARCHIVE_USERS);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+
+    if (this._users.filter(item => item.selected).length === 1) {
+      let user = this._users.filter(item => item.selected)[0];
+      modalRef.componentInstance.message = `Do you want to archive ${user.firstName + ' ' + user.lastName}`;
+    } else {
+      modalRef.componentInstance.message = `Do you want to archive users?`;
+    }
+    this.usersStateService.setUsersForArchive(this._users.filter(item => item.selected));
+  }
+
+  isExistArchiveUser() {
+    return this._users.filter(item => item.selected).find(item => item.deletedAt != null);
+  }
+  isExistPrimaryContact() {
+    return this._users.filter(item => item.selected).find(item => item.isContact);
+  }
+  toggleAllUser(data) {
+    this.selectAll = true;
+    this.onSelectAllUser.emit(data);
+  }
+  getSelectedCount() {
+    return this.reqUsers.filter(item => item.selected).length;
+  }
+  public onFilter(field) {
+    this.onChangeFilterField.emit(field);
+  }
+  clearAll() {
+    this.filter.onClearAll();
+  }
+  addUser() {
+    this.usersStateService.onOpenAsige();
+  }
+  onChangeCountFilter(data) {
+    this.countFilter = data;
+  }
+  ngOnDestroy(): void {
+    this.usersHeaderService.onUnsubscribe();
+  }
+}

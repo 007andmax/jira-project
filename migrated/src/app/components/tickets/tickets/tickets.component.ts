@@ -1,0 +1,33 @@
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
+import { Subscription } from 'rxjs';
+import { TicketsService } from 'src/app/services/tickets/tickets.service';
+
+@Component({
+  selector: 'app-tickets',
+  templateUrl: './tickets.component.html',
+  styleUrls: ['./tickets.component.scss']
+})
+export class TicketsComponent implements OnInit, OnDestroy {
+  listType: string = "USERS";
+  sub: Subscription = new Subscription();
+  constructor(private ticketsStateService: TicketsStateService,
+    private ticketsService: TicketsService,) { }
+
+
+  ngOnInit() {
+    window.scrollTo(0, 0);
+    this.listType = this.ticketsStateService.getListType();
+    let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe((data: any) => {
+      this.listType = data.listType;
+    })
+    this.sub.add(getOnInitFilter);
+    this.ticketsService.getActualNumber().subscribe((data: any) => {
+      this.ticketsStateService.onInitActualNumber(data.number);
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+}

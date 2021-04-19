@@ -1,0 +1,271 @@
+<div class="page-container permissin-manage">
+    <div class="page-insider">
+        <div class="heading">
+            <h1>Permission Management</h1>
+            <div
+                class="heading-serach"
+                *ngIf="roles && roles.length < 5"
+            >
+                <a
+                    href="javascript:;"
+                    class="btn-outline"
+                    (click)="addNewRole()"
+                >
+                    Create New Role
+                </a>
+                <!-- [disabled]="isNewRoleCreating" -->
+            </div>
+        </div>
+        <div class="cmn-area pr-area">
+            <div class="data-table-wrap pr-data">
+                <table
+                    class="display dataTable"
+                    style="width:100%"
+                >
+                    <thead *ngIf="roles">
+                        <tr>
+                            <th class="permissions">Permissions</th>
+                            <th
+                                class="help"
+                                *ngFor="let role of roles; let i = index"
+                            >
+                                {{ role.name }}
+                                <div class="action-icons">
+                                    <a
+                                        href="javascript:;"
+                                        data-tooltip="Edit"
+                                        class="edit-ico"
+                                        (click)="editRoleName(role, i)"
+                                    >
+                                        <img
+                                            src="/html/assets/img/edit-12.svg"
+                                            alt="edit"
+                                        >
+                                    </a>
+                                    <a
+                                        href="javascript:;"
+                                        data-tooltip="Remove"
+                                        class="delete-ico"
+                                        (click)="deleteRole(role.id, true); delete = !delete"
+                                    >
+                                        <img
+                                            src="/html/assets/img/icons/remove-12.svg"
+                                            alt="remove"
+                                        >
+                                    </a>
+                                </div>
+                                <!-- Modal create Tags -->
+                                <div
+                                    class="modal-content toggle-area"
+                                    [ngClass]="{ opened: selectedRoleIndex === i }"
+                                >
+                                    <div class="modal-wrapper">
+                                        <div class="toggle-header">
+                                            <h2 class="h1">Edit Role</h2>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form method="POST">
+                                                <div class="f-row">
+                                                    <div class="f-col col-100">
+                                                        <label>Role Name</label>
+                                                        <div class="form-row">
+                                                            <input
+                                                                type="text"
+                                                                class="form-input"
+                                                                [(ngModel)]="editData.name"
+                                                                [ngModelOptions]="{ standalone: true }"
+                                                                placeholder="Enter Role Name"
+                                                            >
+                                                        </div>
+                                                    </div>
+                                                    <div class="m-btn-row">
+                                                        <div class="m-btn-col">
+                                                            <input
+                                                                type="button"
+                                                                value="Save"
+                                                                (click)="changeRoleName()"
+                                                                class="btn btn-primary"
+                                                            >
+                                                            <a
+                                                                href="javascript:;"
+                                                                class="btn btn-secondary"
+                                                                aria-label="Close"
+                                                                (click)="editRoleName(role, index)"
+                                                            >
+                                                                Cancel
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="no-border">
+                        <ng-container *ngFor="let section of sections | keyvalue">
+                            <tr>
+                                <td
+                                    class="t-tile"
+                                    colspan="4"
+                                >
+                                    <h5>{{ section.key }}</h5>
+                                </td>
+                            </tr>
+                            <tr *ngFor="let permission of section.value">
+                                <td class="permissions">{{ userReadable(permission) }}</td>
+                                <td
+                                    class="help"
+                                    *ngFor="let role of roles; let i = index"
+                                >
+                                    <span class="cmn-checkbox">
+                                        <input
+                                            type="checkbox"
+                                            id="{{ permission }}_{{ role.id }}"
+                                            [checked]="
+                        role.permissions.indexOf(permission) > -1 ? true : false
+                      "
+                                            (click)="togglePermission(role, permission)"
+                                            [disabled]="isPermissionDisabled(permission, role)"
+                                        >
+                                        <label for="{{ permission }}_{{ role.id }}"></label>
+                                    </span>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- <div class="loading" *ngIf="loading"></div> -->
+    </div>
+
+
+
+
+
+
+
+</div>
+<!-- sidebar popup edit -->
+<div
+    class="sidebar-popup role-dlt"
+    [class.opened]="delete"
+    *ngIf="usersToShift"
+>
+    <!-- header -->
+    <div class="sidebar-header">
+        <div class="h1">Delete Role?</div>
+        <a
+            class="close"
+            href="javascript:;"
+            (click)="delete = !delete"
+        >
+            <img
+                src="/html/assets/img/icons/close.svg"
+                alt="close"
+            >
+        </a>
+    </div>
+    <div class="warn-msg">
+        <img
+            src="/html/assets/img/warning.svg"
+            alt="warning"
+        >
+        <p>
+            {{ usersToShift.length }} tech users belong to this group, you must assign
+      a
+            <br>
+            different group to existing users to delete the group.
+        </p>
+    </div>
+    <div class="middle-content">
+        <form #editForm="ngForm">
+            <div class="tech-list">
+                <h6>Tech Users</h6>
+                <ul class="list-unstyled">
+                    <li *ngFor="let user of usersToShift">
+                        <div class="t-user">
+                            <span
+                                class="user-dp away"
+                                *ngIf="
+                  !user.requestToChangePassword && user.isEmailVerified
+                "
+                            >
+                                <!-- <span *ngIf="techUser.avatar !== null">
+              NN
+            </span> -->
+                                <img
+                                    *ngIf="user.avatar !== null"
+                                    src="/users/{{ user.id }}/image.jpg?t={{
+                      user.avatar.updatedAt
+                    }}"
+                                    alt="user"
+                                >
+                                <span
+                                    class="simple-dp"
+                                    *ngIf="user.avatar === null"
+                                >
+                                    {{ displayFrstLstChar(user) }}
+                                </span>
+                            </span>
+                            <span *ngIf="
+                user.requestToChangePassword || !user.isEmailVerified
+                ">
+                                <span class="simple-dp">{{ displayFrstLstChar(user) }}</span>
+                            </span>
+                            <div class="t-info">
+                                <h5>
+                                    {{ user.firstName + " " + user.lastName }}
+                                </h5>
+                                <a href="mailto:{{ user.primaryEmail }}">
+                                    {{
+                  user.primaryEmail
+                }}
+                                </a>
+                            </div>
+                        </div>
+                        <!-- <li ng-repeat="role in allTechRoles" ng-click="user.techRole = role; changeUsersRole(user)">
+              <a tabindex="-1" href="javascript:void(0)"> {{ role }} </a>
+            </li> -->
+                        <select
+                            class="cmn-select form-input"
+                            [(ngModel)]="user.techRole"
+                            (change)="changeUsersRole(user, $event)"
+                            [ngModelOptions]="{ standalone: true }"
+                            name="techRole"
+                        >
+                            <option
+                                value="{{ role }}"
+                                *ngFor="let role of allTechRoles"
+                            >
+                                {{
+                role
+              }}
+                            </option>
+                            <!-- <option>Administrator 1</option> -->
+                        </select>
+                    </li>
+                </ul>
+            </div>
+            <div class="btn-row">
+                <input
+                    type="submit"
+                    value="Delete Role"
+                    [disabled]="allRolesAreChanged(roleToDelete)"
+                    (click)="deleteRole(roleToDelete, true)"
+                    class="btn btn-primary"
+                >
+                <a
+                    href="javascrip:;"
+                    class="btn btn-secondary"
+                    (click)="delete = !delete"
+                >
+                    Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</div>

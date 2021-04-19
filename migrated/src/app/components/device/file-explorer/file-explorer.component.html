@@ -1,0 +1,1510 @@
+<div class="cmn-wrapper">
+    <div class="page-container file-explore">
+        <!-- Page Title -->
+        <div class="page-header">
+            <div class="explore-heading">
+                <h3>File Explorer</h3>
+                <ul class="list-unstyled breadCumb">
+                    <li>
+                        <a href="javascript:;">E:</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">Program Files</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">Data Entry</a>
+                    </li>
+                    <li>Checklist</li>
+                </ul>
+            </div>
+            <div class="explore-rightbar">
+                <div
+                    class="explore-opt"
+                    *ngIf="!show"
+                >
+                    <a
+                        href="javascript:;"
+                        class="new"
+                    >
+                        <img
+                            src="assets/images/new-folder.svg"
+                            alt="New"
+                        >
+                        New
+                    </a>
+                    <a
+                        href="javascript:;"
+                        class="copy-folder"
+                    >
+                        <img
+                            src="assets/images/copy-blue.svg"
+                            alt="Copy"
+                        >
+                        Copy
+                    </a>
+                    <a
+                        href="javascript:;"
+                        class="rename"
+                    >
+                        <img
+                            src="assets/images/rename-blue.svg"
+                            alt="Rename"
+                        >
+                        Rename
+                    </a>
+                    <a
+                        href="javascript:;"
+                        class="delete"
+                    >
+                        <img
+                            src="assets/images/delete-blue.svg"
+                            alt="Delete"
+                        >
+                        Delete
+                    </a>
+                </div>
+                <div
+                    class="explore-search"
+                    *ngIf="!show"
+                >
+                    <form method="get">
+                        <input
+                            autocomplete="off"
+                            type="text"
+                            id="explore-search"
+                            aria-label="search"
+                            name="search"
+                            placeholder="Search files…"
+                            class="form-input"
+                            #reference
+                        >
+                        <a
+                            (click)="reference.value=''"
+                            href="javascript:;"
+                            class="clear"
+                        >
+                            cancel
+                        </a>
+                    </form>
+                </div>
+                <div
+                    class="page-header-opt"
+                    *ngIf="show"
+                >
+                    <div class="selected-item">
+                        <span>3 Selected</span>
+                        <a
+                            class="dmn"
+                            title="download-new"
+                            href="javascript:;"
+                        >
+                            <img
+                                src="assets/images/download-new.svg"
+                                alt="install-blue"
+                            >
+                        </a>
+                        <a
+                            class="cb"
+                            title="copy-blue"
+                            href="javascript:;"
+                        >
+                            <img
+                                src="assets/images/copy-blue.svg"
+                                alt="uninstall-blue"
+                            >
+                        </a>
+                        <a
+                            class="dtl"
+                            title="delete"
+                            href="javascript:;"
+                        >
+                            <img
+                                src="assets/images/delete-blue.svg"
+                                alt="hide"
+                            >
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+        <!-- Page Content All update -->
+        <div class="contant-area">
+            <div class="content-row">
+                <div
+                    id="first-col"
+                    class="coulmn"
+                    style="width: 23%;"
+                >
+                    <ul class="list-unstyled">
+                        <li class="drive-list">
+                            <a href="javascript:;">Windows (C:)</a>
+                        </li>
+                        <li class="drive-list">
+                            <a href="javascript:;">Local Disk (D:)</a>
+                        </li>
+                        <li class="drive-list">
+                            <a href="javascript:;">Local Disk (E:)</a>
+                        </li>
+                        <li class="drive-list">
+                            <a href="javascript:;">Local Disk (F:)</a>
+                        </li>
+                        <li class="drive-list">
+                            <a href="javascript:;">Local Disk (G:)</a>
+                        </li>
+                    </ul>
+                </div>
+                <div
+                    for="first-col"
+                    class="resizer"
+                ></div>
+                <div
+                    id="second-col"
+                    class="coulmn"
+                    style="width: 23%;"
+                >
+                    <ul class="list-unstyled">
+                        <li class="folder-list">
+                            <a href="javascript:;">Intel</a>
+                        </li>
+                        <li class="folder-list">
+                            <a href="javascript:;">Datastore</a>
+                        </li>
+                        <li class="folder-list">
+                            <a href="javascript:;">Dowloads</a>
+                        </li>
+                        <li class="folder-list">
+                            <a href="javascript:;">Program Files</a>
+                        </li>
+                        <li class="folder-list">
+                            <a href="javascript:;">PerLogs</a>
+                        </li>
+                        <li class="folder-list">
+                            <a href="javascript:;">Users</a>
+                        </li>
+                        <li class="folder-list">
+                            <a href="javascript:;">Recovery</a>
+                        </li>
+                        <li class="folder-list">
+                            <a href="javascript:;">Nvidia</a>
+                        </li>
+                        <li class="folder-list">
+                            <a href="javascript:;">Temp</a>
+                        </li>
+                        <li class="folder-list">
+                            <a href="javascript:;">Windows</a>
+                        </li>
+                    </ul>
+                </div>
+                <div
+                    for="second-col"
+                    class="resizer"
+                ></div>
+                <div
+                    class="coulmn"
+                    style="width: 54%;"
+                >
+                    <div class="file-listing">
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="check-area">&nbsp;</th>
+                                        <th class="col-name">
+                                            Name
+                                            <i class="filter desc">filter</i>
+                                        </th>
+                                        <th class="col-type">
+                                            Type
+                                            <i class="filter asc">Type</i>
+                                        </th>
+                                        <th class="col-modified">
+                                            Modified
+                                            <i class="filter asc">Modified</i>
+                                        </th>
+                                        <th class="col-size">
+                                            Size
+                                            <i class="filter asc">Size</i>
+                                        </th>
+                                        <th class="action">&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="cmn-checkbox">
+                                                <input
+                                                    type="checkbox"
+                                                    name="check"
+                                                    id="sl"
+                                                    (change)="show=!show"
+                                                >
+                                                <label
+                                                    for="sl"
+                                                    aria-label="checkbox"
+                                                ></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <img
+                                                src="assets/images/folder.svg"
+                                                alt="folder"
+                                            >
+                                            <span>Checklist</span>
+                                        </td>
+                                        <td>
+                                            <span>File Folder</span>
+                                        </td>
+                                        <td>
+                                            <span>13/6/2019 7:36 PM</span>
+                                        </td>
+                                        <td>
+                                            <span>12mb</span>
+                                        </td>
+                                        <td dropdown>
+                                            <a
+                                                href="javascript:;"
+                                                is="button-basic"
+                                                aria-controls="dropdown-basic"
+                                                dropdownToggle
+                                                class="more"
+                                                data-tooltip="More"
+                                            >
+                                                <img
+                                                    src="assets/images/more.svg"
+                                                    alt="more"
+                                                >
+                                            </a>
+                                            <ul
+                                                id="dropdown-basic"
+                                                *dropdownMenu
+                                                class="dropdown-menu list-unstyled"
+                                                role="menu"
+                                                aria-labelledby="button-basic"
+                                            >
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="assets/images/download.svg"
+                                                            alt="Download"
+                                                        >
+                                                        Download
+                                                    </a>
+                                                </li>
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="assets/images/copy_black.svg"
+                                                            alt="Copy"
+                                                        >
+                                                        Copy
+                                                    </a>
+                                                </li>
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="assets/images/rename.svg"
+                                                            alt="Rename"
+                                                        >
+                                                        Rename
+                                                    </a>
+                                                </li>
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="/html/assets/img/iconsremove.svg"
+                                                            alt="Delete"
+                                                        >
+                                                        Delete
+                                                    </a>
+                                                </li>
+
+
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="cmn-checkbox">
+                                                <input
+                                                    type="checkbox"
+                                                    name="check"
+                                                    id="sl1"
+                                                    (change)="show=!show"
+                                                >
+                                                <label
+                                                    for="sl1"
+                                                    aria-label="checkbox"
+                                                ></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <img
+                                                src="assets/images/pdf.svg"
+                                                alt="pdf"
+                                            >
+                                            <span>Policy</span>
+                                        </td>
+                                        <td>
+                                            <span>PDF</span>
+                                        </td>
+                                        <td>
+                                            <span>20/6/2019 8:45 PM</span>
+                                        </td>
+                                        <td>
+                                            <span>800kb</span>
+                                        </td>
+                                        <td dropdown>
+                                            <a
+                                                href="javascript:;"
+                                                is="button-basic"
+                                                aria-controls="dropdown-basic"
+                                                dropdownToggle
+                                                class="more"
+                                                data-tooltip="More"
+                                            >
+                                                <img
+                                                    src="assets/images/more.svg"
+                                                    alt="more"
+                                                >
+                                            </a>
+                                            <ul
+                                                id="dropdown-basic"
+                                                *dropdownMenu
+                                                class="dropdown-menu list-unstyled"
+                                                role="menu"
+                                                aria-labelledby="button-basic"
+                                            >
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="assets/images/download.svg"
+                                                            alt="Download"
+                                                        >
+                                                        Download
+                                                    </a>
+                                                </li>
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="assets/images/copy_black.svg"
+                                                            alt="Copy"
+                                                        >
+                                                        Copy
+                                                    </a>
+                                                </li>
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="assets/images/rename.svg"
+                                                            alt="Rename"
+                                                        >
+                                                        Rename
+                                                    </a>
+                                                </li>
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="/html/assets/img/icons/remove.svg"
+                                                            alt="Delete"
+                                                        >
+                                                        Delete
+                                                    </a>
+                                                </li>
+
+
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="cmn-checkbox">
+                                                <input
+                                                    type="checkbox"
+                                                    name="check"
+                                                    id="sl2"
+                                                    (change)="show=!show"
+                                                >
+                                                <label
+                                                    for="sl2"
+                                                    aria-label="checkbox"
+                                                ></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <img
+                                                src="assets/images/text-document.svg"
+                                                alt="text-document"
+                                            >
+                                            <span>Project brief</span>
+                                        </td>
+                                        <td>
+                                            <span>Text Document</span>
+                                        </td>
+                                        <td>
+                                            <span>10/24/2019 8:56 AM</span>
+                                        </td>
+                                        <td>
+                                            <span>12kb</span>
+                                        </td>
+                                        <td dropdown>
+                                            <a
+                                                href="javascript:;"
+                                                is="button-basic"
+                                                aria-controls="dropdown-basic"
+                                                dropdownToggle
+                                                class="more"
+                                                data-tooltip="More"
+                                            >
+                                                <img
+                                                    src="assets/images/more.svg"
+                                                    alt="more"
+                                                >
+                                            </a>
+                                            <ul
+                                                id="dropdown-basic"
+                                                *dropdownMenu
+                                                class="dropdown-menu list-unstyled"
+                                                role="menu"
+                                                aria-labelledby="button-basic"
+                                            >
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="assets/images/download.svg"
+                                                            alt="Download"
+                                                        >
+                                                        Download
+                                                    </a>
+                                                </li>
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="assets/images/copy_black.svg"
+                                                            alt="Copy"
+                                                        >
+                                                        Copy
+                                                    </a>
+                                                </li>
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="assets/images/rename.svg"
+                                                            alt="Rename"
+                                                        >
+                                                        Rename
+                                                    </a>
+                                                </li>
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="/html/assets/img/icons/remove.svg"
+                                                            alt="Delete"
+                                                        >
+                                                        Delete
+                                                    </a>
+                                                </li>
+
+
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="cmn-checkbox">
+                                                <input
+                                                    type="checkbox"
+                                                    name="check"
+                                                    id="sl3"
+                                                    (change)="show=!show"
+                                                >
+                                                <label
+                                                    for="sl3"
+                                                    aria-label="checkbox"
+                                                ></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <img
+                                                src="assets/images/text-document.svg"
+                                                alt="text-document"
+                                            >
+                                            <span>Server Crenti</span>
+                                        </td>
+                                        <td>
+                                            <span>Microsoft Word...</span>
+                                        </td>
+                                        <td>
+                                            <span>06/01/2019 2:33 PM</span>
+                                        </td>
+                                        <td>
+                                            <span>87kb</span>
+                                        </td>
+                                        <td dropdown>
+                                            <a
+                                                href="javascript:;"
+                                                is="button-basic"
+                                                aria-controls="dropdown-basic"
+                                                dropdownToggle
+                                                class="more"
+                                                data-tooltip="More"
+                                            >
+                                                <img
+                                                    src="assets/images/more.svg"
+                                                    alt="more"
+                                                >
+                                            </a>
+                                            <ul
+                                                id="dropdown-basic"
+                                                *dropdownMenu
+                                                class="dropdown-menu list-unstyled"
+                                                role="menu"
+                                                aria-labelledby="button-basic"
+                                            >
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="assets/images/download.svg"
+                                                            alt="Download"
+                                                        >
+                                                        Download
+                                                    </a>
+                                                </li>
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="assets/images/copy_black.svg"
+                                                            alt="Copy"
+                                                        >
+                                                        Copy
+                                                    </a>
+                                                </li>
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="assets/images/rename.svg"
+                                                            alt="Rename"
+                                                        >
+                                                        Rename
+                                                    </a>
+                                                </li>
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="/html/assets/img/icons/remove.svg"
+                                                            alt="Delete"
+                                                        >
+                                                        Delete
+                                                    </a>
+                                                </li>
+
+
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="cmn-checkbox">
+                                                <input
+                                                    type="checkbox"
+                                                    name="check"
+                                                    id="sl4"
+                                                    (change)="show=!show"
+                                                >
+                                                <label
+                                                    for="sl4"
+                                                    aria-label="checkbox"
+                                                ></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <img
+                                                src="assets/images/microsoft-excel.svg"
+                                                alt="microsoft-excel"
+                                            >
+                                            <span>Data Entry</span>
+                                        </td>
+                                        <td>
+                                            <span>Microsoft Excel</span>
+                                        </td>
+                                        <td>
+                                            <span>03/18/2019 4:30 PM</span>
+                                        </td>
+                                        <td>
+                                            <span>108kb</span>
+                                        </td>
+                                        <td dropdown>
+                                            <a
+                                                href="javascript:;"
+                                                is="button-basic"
+                                                aria-controls="dropdown-basic"
+                                                dropdownToggle
+                                                class="more"
+                                                data-tooltip="More"
+                                            >
+                                                <img
+                                                    src="assets/images/more.svg"
+                                                    alt="more"
+                                                >
+                                            </a>
+                                            <ul
+                                                id="dropdown-basic"
+                                                *dropdownMenu
+                                                class="dropdown-menu list-unstyled"
+                                                role="menu"
+                                                aria-labelledby="button-basic"
+                                            >
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="assets/images/download.svg"
+                                                            alt="Download"
+                                                        >
+                                                        Download
+                                                    </a>
+                                                </li>
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="assets/images/copy_black.svg"
+                                                            alt="Copy"
+                                                        >
+                                                        Copy
+                                                    </a>
+                                                </li>
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="assets/images/rename.svg"
+                                                            alt="Rename"
+                                                        >
+                                                        Rename
+                                                    </a>
+                                                </li>
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="/html/assets/img/icons/remove.svg"
+                                                            alt="Delete"
+                                                        >
+                                                        Delete
+                                                    </a>
+                                                </li>
+
+
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="cmn-checkbox">
+                                                <input
+                                                    type="checkbox"
+                                                    name="check"
+                                                    id="sl5"
+                                                    (change)="show=!show"
+                                                >
+                                                <label
+                                                    for="sl5"
+                                                    aria-label="checkbox"
+                                                ></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <img
+                                                src="assets/images/zip.svg"
+                                                alt="microsoft-excel"
+                                            >
+                                            <span>All Payment</span>
+                                        </td>
+                                        <td>
+                                            <span>Zip Folder</span>
+                                        </td>
+                                        <td>
+                                            <span>12/5/2019 5:21 PM</span>
+                                        </td>
+                                        <td>
+                                            <span>100mb</span>
+                                        </td>
+                                        <td dropdown>
+                                            <a
+                                                href="javascript:;"
+                                                is="button-basic"
+                                                aria-controls="dropdown-basic"
+                                                dropdownToggle
+                                                class="more"
+                                                data-tooltip="More"
+                                            >
+                                                <img
+                                                    src="assets/images/more.svg"
+                                                    alt="more"
+                                                >
+                                            </a>
+                                            <ul
+                                                id="dropdown-basic"
+                                                *dropdownMenu
+                                                class="dropdown-menu list-unstyled"
+                                                role="menu"
+                                                aria-labelledby="button-basic"
+                                            >
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="assets/images/download.svg"
+                                                            alt="Download"
+                                                        >
+                                                        Download
+                                                    </a>
+                                                </li>
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="assets/images/copy_black.svg"
+                                                            alt="Copy"
+                                                        >
+                                                        Copy
+                                                    </a>
+                                                </li>
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="assets/images/rename.svg"
+                                                            alt="Rename"
+                                                        >
+                                                        Rename
+                                                    </a>
+                                                </li>
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="/html/assets/img/icons/remove.svg"
+                                                            alt="Delete"
+                                                        >
+                                                        Delete
+                                                    </a>
+                                                </li>
+
+
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="cmn-checkbox">
+                                                <input
+                                                    type="checkbox"
+                                                    name="check"
+                                                    id="sl"
+                                                    (change)="show=!show"
+                                                >
+                                                <label
+                                                    for="sl"
+                                                    aria-label="checkbox"
+                                                ></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <img
+                                                src="assets/images/folder.svg"
+                                                alt="folder"
+                                            >
+                                            <span>Checklist</span>
+                                        </td>
+                                        <td>
+                                            <span>File Folder</span>
+                                        </td>
+                                        <td>
+                                            <span>13/6/2019 7:36 PM</span>
+                                        </td>
+                                        <td>
+                                            <span>12mb</span>
+                                        </td>
+                                        <td dropdown>
+                                            <a
+                                                href="javascript:;"
+                                                is="button-basic"
+                                                aria-controls="dropdown-basic"
+                                                dropdownToggle
+                                                class="more"
+                                                data-tooltip="More"
+                                            >
+                                                <img
+                                                    src="assets/images/more.svg"
+                                                    alt="more"
+                                                >
+                                            </a>
+                                            <ul
+                                                id="dropdown-basic"
+                                                *dropdownMenu
+                                                class="dropdown-menu list-unstyled"
+                                                role="menu"
+                                                aria-labelledby="button-basic"
+                                            >
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="assets/images/download.svg"
+                                                            alt="Download"
+                                                        >
+                                                        Download
+                                                    </a>
+                                                </li>
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="assets/images/copy_black.svg"
+                                                            alt="Copy"
+                                                        >
+                                                        Copy
+                                                    </a>
+                                                </li>
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="assets/images/rename.svg"
+                                                            alt="Rename"
+                                                        >
+                                                        Rename
+                                                    </a>
+                                                </li>
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="/html/assets/img/icons/remove.svg"
+                                                            alt="Delete"
+                                                        >
+                                                        Delete
+                                                    </a>
+                                                </li>
+
+
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="cmn-checkbox">
+                                                <input
+                                                    type="checkbox"
+                                                    name="check"
+                                                    id="sl1"
+                                                    (change)="show=!show"
+                                                >
+                                                <label
+                                                    for="sl1"
+                                                    aria-label="checkbox"
+                                                ></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <img
+                                                src="assets/images/pdf.svg"
+                                                alt="pdf"
+                                            >
+                                            <span>Policy</span>
+                                        </td>
+                                        <td>
+                                            <span>PDF</span>
+                                        </td>
+                                        <td>
+                                            <span>20/6/2019 8:45 PM</span>
+                                        </td>
+                                        <td>
+                                            <span>800kb</span>
+                                        </td>
+                                        <td dropdown>
+                                            <a
+                                                href="javascript:;"
+                                                is="button-basic"
+                                                aria-controls="dropdown-basic"
+                                                dropdownToggle
+                                                class="more"
+                                                data-tooltip="More"
+                                            >
+                                                <img
+                                                    src="assets/images/more.svg"
+                                                    alt="more"
+                                                >
+                                            </a>
+                                            <ul
+                                                id="dropdown-basic"
+                                                *dropdownMenu
+                                                class="dropdown-menu list-unstyled"
+                                                role="menu"
+                                                aria-labelledby="button-basic"
+                                            >
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="assets/images/download.svg"
+                                                            alt="Download"
+                                                        >
+                                                        Download
+                                                    </a>
+                                                </li>
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="assets/images/copy_black.svg"
+                                                            alt="Copy"
+                                                        >
+                                                        Copy
+                                                    </a>
+                                                </li>
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="assets/images/rename.svg"
+                                                            alt="Rename"
+                                                        >
+                                                        Rename
+                                                    </a>
+                                                </li>
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="/html/assets/img/icons/remove.svg"
+                                                            alt="Delete"
+                                                        >
+                                                        Delete
+                                                    </a>
+                                                </li>
+
+
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="cmn-checkbox">
+                                                <input
+                                                    type="checkbox"
+                                                    name="check"
+                                                    id="sl2"
+                                                    (change)="show=!show"
+                                                >
+                                                <label
+                                                    for="sl2"
+                                                    aria-label="checkbox"
+                                                ></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <img
+                                                src="assets/images/text-document.svg"
+                                                alt="text-document"
+                                            >
+                                            <span>Project brief</span>
+                                        </td>
+                                        <td>
+                                            <span>Text Document</span>
+                                        </td>
+                                        <td>
+                                            <span>10/24/2019 8:56 AM</span>
+                                        </td>
+                                        <td>
+                                            <span>12kb</span>
+                                        </td>
+                                        <td dropdown>
+                                            <a
+                                                href="javascript:;"
+                                                is="button-basic"
+                                                aria-controls="dropdown-basic"
+                                                dropdownToggle
+                                                class="more"
+                                                data-tooltip="More"
+                                            >
+                                                <img
+                                                    src="assets/images/more.svg"
+                                                    alt="more"
+                                                >
+                                            </a>
+                                            <ul
+                                                id="dropdown-basic"
+                                                *dropdownMenu
+                                                class="dropdown-menu list-unstyled"
+                                                role="menu"
+                                                aria-labelledby="button-basic"
+                                            >
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="assets/images/download.svg"
+                                                            alt="Download"
+                                                        >
+                                                        Download
+                                                    </a>
+                                                </li>
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="assets/images/copy_black.svg"
+                                                            alt="Copy"
+                                                        >
+                                                        Copy
+                                                    </a>
+                                                </li>
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="assets/images/rename.svg"
+                                                            alt="Rename"
+                                                        >
+                                                        Rename
+                                                    </a>
+                                                </li>
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="/html/assets/img/icons/remove.svg"
+                                                            alt="Delete"
+                                                        >
+                                                        Delete
+                                                    </a>
+                                                </li>
+
+
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="cmn-checkbox">
+                                                <input
+                                                    type="checkbox"
+                                                    name="check"
+                                                    id="sl3"
+                                                    (change)="show=!show"
+                                                >
+                                                <label
+                                                    for="sl3"
+                                                    aria-label="checkbox"
+                                                ></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <img
+                                                src="assets/images/text-document.svg"
+                                                alt="text-document"
+                                            >
+                                            <span>Server Crenti</span>
+                                        </td>
+                                        <td>
+                                            <span>Microsoft Word...</span>
+                                        </td>
+                                        <td>
+                                            <span>06/01/2019 2:33 PM</span>
+                                        </td>
+                                        <td>
+                                            <span>87kb</span>
+                                        </td>
+                                        <td dropdown>
+                                            <a
+                                                href="javascript:;"
+                                                is="button-basic"
+                                                aria-controls="dropdown-basic"
+                                                dropdownToggle
+                                                class="more"
+                                                data-tooltip="More"
+                                            >
+                                                <img
+                                                    src="assets/images/more.svg"
+                                                    alt="more"
+                                                >
+                                            </a>
+                                            <ul
+                                                id="dropdown-basic"
+                                                *dropdownMenu
+                                                class="dropdown-menu list-unstyled"
+                                                role="menu"
+                                                aria-labelledby="button-basic"
+                                            >
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="assets/images/download.svg"
+                                                            alt="Download"
+                                                        >
+                                                        Download
+                                                    </a>
+                                                </li>
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="assets/images/copy_black.svg"
+                                                            alt="Copy"
+                                                        >
+                                                        Copy
+                                                    </a>
+                                                </li>
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="assets/images/rename.svg"
+                                                            alt="Rename"
+                                                        >
+                                                        Rename
+                                                    </a>
+                                                </li>
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="/html/assets/img/icons/remove.svg"
+                                                            alt="Delete"
+                                                        >
+                                                        Delete
+                                                    </a>
+                                                </li>
+
+
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="cmn-checkbox">
+                                                <input
+                                                    type="checkbox"
+                                                    name="check"
+                                                    id="sl4"
+                                                    (change)="show=!show"
+                                                >
+                                                <label
+                                                    for="sl4"
+                                                    aria-label="checkbox"
+                                                ></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <img
+                                                src="assets/images/microsoft-excel.svg"
+                                                alt="microsoft-excel"
+                                            >
+                                            <span>Data Entry</span>
+                                        </td>
+                                        <td>
+                                            <span>Microsoft Excel</span>
+                                        </td>
+                                        <td>
+                                            <span>03/18/2019 4:30 PM</span>
+                                        </td>
+                                        <td>
+                                            <span>108kb</span>
+                                        </td>
+                                        <td dropdown>
+                                            <a
+                                                href="javascript:;"
+                                                is="button-basic"
+                                                aria-controls="dropdown-basic"
+                                                dropdownToggle
+                                                class="more"
+                                                data-tooltip="More"
+                                            >
+                                                <img
+                                                    src="assets/images/more.svg"
+                                                    alt="more"
+                                                >
+                                            </a>
+                                            <ul
+                                                id="dropdown-basic"
+                                                *dropdownMenu
+                                                class="dropdown-menu list-unstyled"
+                                                role="menu"
+                                                aria-labelledby="button-basic"
+                                            >
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="assets/images/download.svg"
+                                                            alt="Download"
+                                                        >
+                                                        Download
+                                                    </a>
+                                                </li>
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="assets/images/copy_black.svg"
+                                                            alt="Copy"
+                                                        >
+                                                        Copy
+                                                    </a>
+                                                </li>
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="assets/images/rename.svg"
+                                                            alt="Rename"
+                                                        >
+                                                        Rename
+                                                    </a>
+                                                </li>
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="/html/assets/img/icons/remove.svg"
+                                                            alt="Delete"
+                                                        >
+                                                        Delete
+                                                    </a>
+                                                </li>
+
+
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="cmn-checkbox">
+                                                <input
+                                                    type="checkbox"
+                                                    name="check"
+                                                    id="sl5"
+                                                    (change)="show=!show"
+                                                >
+                                                <label
+                                                    for="sl5"
+                                                    aria-label="checkbox"
+                                                ></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <img
+                                                src="assets/images/zip.svg"
+                                                alt="microsoft-excel"
+                                            >
+                                            <span>All Payment</span>
+                                        </td>
+                                        <td>
+                                            <span>Zip Folder</span>
+                                        </td>
+                                        <td>
+                                            <span>12/5/2019 5:21 PM</span>
+                                        </td>
+                                        <td>
+                                            <span>100mb</span>
+                                        </td>
+                                        <td dropdown>
+                                            <a
+                                                href="javascript:;"
+                                                is="button-basic"
+                                                aria-controls="dropdown-basic"
+                                                dropdownToggle
+                                                class="more"
+                                                data-tooltip="More"
+                                            >
+                                                <img
+                                                    src="assets/images/more.svg"
+                                                    alt="more"
+                                                >
+                                            </a>
+                                            <ul
+                                                id="dropdown-basic"
+                                                *dropdownMenu
+                                                class="dropdown-menu list-unstyled"
+                                                role="menu"
+                                                aria-labelledby="button-basic"
+                                            >
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="assets/images/download.svg"
+                                                            alt="Download"
+                                                        >
+                                                        Download
+                                                    </a>
+                                                </li>
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="assets/images/copy_black.svg"
+                                                            alt="Copy"
+                                                        >
+                                                        Copy
+                                                    </a>
+                                                </li>
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="assets/images/rename.svg"
+                                                            alt="Rename"
+                                                        >
+                                                        Rename
+                                                    </a>
+                                                </li>
+                                                <li role="menuitem">
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href="javascript:;"
+                                                    >
+                                                        <img
+                                                            src="/html/assets/img/icons/remove.svg"
+                                                            alt="Delete"
+                                                        >
+                                                        Delete
+                                                    </a>
+                                                </li>
+
+
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <app-ticket-task></app-ticket-task>
+
+
+
+</div>

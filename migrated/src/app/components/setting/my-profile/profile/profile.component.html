@@ -1,0 +1,327 @@
+<div class="cmn-area profile">
+    <div class="dp-area">
+        <span
+            class="dp"
+            *ngIf="imageSrc"
+        >
+            <img
+                [src]="imageSrc"
+                alt="user"
+            >
+        </span>
+
+
+        <span
+            class="dp"
+            *ngIf="!imageSrc"
+        >
+            <img
+                src="html/assets/img/avtar-56@2x.png"
+                alt="user"
+            >
+        </span>
+
+
+        <div class="dp-info">
+            <input
+                type="file"
+                id="profile-dp"
+                (change)="onSelectFile($event)"
+                style="display: none;"
+            >
+            <div class="static-link">
+                <label
+                    class="innert-links"
+                    for="profile-dp"
+                >
+                    {{ imageAvatar ? "Change Photo" : "Upload your photo" }}
+                </label>
+                <label
+                    for="profile-dp"
+                    *ngIf="imageAvatar"
+                    (click)="deleteAvatar()"
+                >
+                    <a
+                        href="javascript:void(0)"
+                        restore-default-button
+                    >
+                        Remove Photo
+                    </a>
+                </label>
+            </div>
+            <span>
+                Photos help your teammates recognize you in Quicktech
+            </span>
+        </div>
+    </div>
+    <div
+        class="img-croparea"
+        *ngIf="isCroppedImg"
+    >
+        <div class="crop-inner">
+            <div class="heading-area">
+                <h2>Crop Photo</h2>
+                <a
+                    href="javascript:void(0)"
+                    class="close-btn"
+                    (click)="isCroppedImg = false"
+                >
+                    remove
+                </a>
+            </div>
+            <div class="cropping">
+                <div class="img-crop">
+                    <image-cropper
+                        [imageChangedEvent]="imageChangedEvent"
+                        [maintainAspectRatio]="false"
+                        [aspectRatio]="4 / 3"
+                        [resizeToWidth]="128"
+                        format="png"
+                        (imageCropped)="imageCropped($event)"
+                    ></image-cropper>
+                </div>
+
+
+                <div class="preview">
+                    <h6>Profile Preview</h6>
+                    <img [src]="croppedImage?.base64">
+                </div>
+                <div class="btn-crops">
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        (click)="cropIt()"
+                    >
+                        Crop Photo
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        (click)="isCroppedImg = false"
+                    >
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <form
+        [formGroup]="profileForm"
+        (ngSubmit)="onSubmit()"
+    >
+        <div class="f-row">
+            <div class="f-col col-50">
+
+
+                <label>First Name</label>
+                <div class="form-row">
+                    <input
+                        type="text"
+                        class="form-input"
+                        placeholder="Enter Your First Name"
+                        formControlName="firstName"
+                    >
+                    <div
+                        *ngIf="submitted && f.firstName.errors"
+                        class="invalid-feedback"
+                    >
+                        <div *ngIf="f.firstName.errors.required">Full Name is required</div>
+                        <div *ngIf="f.firstName.errors.minlength">First name is too short.</div>
+                        <div *ngIf="f.firstName.errors.maxlength">First name is too large.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="f-col col-50">
+                <!-- <label>Your Full name</label> -->
+
+
+                <label>Last Name</label>
+                <div class="form-row">
+                    <input
+                        type="text"
+                        class="form-input"
+                        placeholder="Enter Your Last Name"
+                        formControlName="lastName"
+                    >
+                    <div
+                        *ngIf="submitted && f.lastName.errors"
+                        class="invalid-feedback"
+                    >
+                        <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+                        <div *ngIf="f.lastName.errors.minlength">Last name is too short.</div>
+                        <div *ngIf="f.lastName.errors.maxlength">Last name is too large.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="f-col col-50">
+                <label>Email Address</label>
+                <div class="form-row">
+                    <input
+                        type="email"
+                        class="form-input"
+                        placeholder="Enter Your Email Address"
+                        (blur)="isEmailUnique()"
+                        formControlName="primaryEmail"
+                    >
+                    <div
+                        *ngIf="submitted && f.primaryEmail.errors"
+                        class="invalid-feedback"
+                    >
+                        <div *ngIf="f.primaryEmail.errors.required && uniqueEmail">Email is required</div>
+                        <div *ngIf="f.primaryEmail.errors.pattern && uniqueEmail">Email must be a valid email address</div>
+                    </div>
+                    <label
+                        *ngIf="!uniqueEmail"
+                        class="invalid-feedback"
+                    >
+                        This email already occupied.
+                    </label>
+                </div>
+            </div>
+            <div class="f-col col-50">
+                <label>Role</label>
+                <div class="form-row">
+                    <input
+                        type="text"
+                        class="form-input"
+                        placeholder="Enter Your Role"
+                        formControlName="designation"
+                    >
+                    <div
+                        *ngIf="submitted && f.designation.errors"
+                        class="invalid-feedback"
+                    >
+                        <div *ngIf="f.designation.errors.minlength">Role is too short.</div>
+                        <div *ngIf="f.designation.errors.maxlength">Role is too large.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="f-col col-50">
+                <label (click)="onAddPhone()">
+                    Primary Phone Number
+                    <a
+                        *ngIf="!isAddPhone"
+                        href="javascript:;"
+                        class="static-link"
+                    >
+                        + Add Phone
+                    </a>
+                </label>
+                <div class="form-row primary-phone">
+                    <input
+                        type="text"
+                        class="form-input"
+                        placeholder="Primary Phone Number"
+                        formControlName="primaryPhone"
+                        [validation]="true"
+                        [suffix]="suffix"
+                        mask="(000) 000-0000"
+                        (keyup)="phonehandle($event)"
+                    >
+                    <select
+                        class="cmn-select form-input"
+                        formControlName="primaryPhoneType"
+                    >
+                        <option value="MOBILE">mobile</option>
+                        <option value="OFFICE">office</option>
+                        <option value="FAX">fax</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div
+                class="f-col col-50"
+                *ngIf="isAddPhone"
+            >
+                <label>
+                    Secondary Phone Number
+                    <a
+                        href="javascript:;"
+                        class="static-link"
+                        (click)="onAddPhone()"
+                    >
+                        Remove
+                    </a>
+                </label>
+
+
+                <div class="form-row primary-phone">
+                    <input
+                        type="text"
+                        class="form-input"
+                        formControlName="secondaryPhone"
+                        placeholder="Secondary Phone Number"
+                        formControlName="secondaryPhone"
+                    >
+                    <select
+                        class="cmn-select form-input"
+                        formControlName="secondaryPhoneType"
+                    >
+                        <option value="MOBILE">mobile</option>
+                        <option value="OFFICE">office</option>
+                        <option value="FAX">fax</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="mail-row">
+                <div class="f-col col-20">
+                    <label>Suite Number</label>
+                    <div class="form-row">
+                        <input
+                            type="text"
+                            placeholder="123456"
+                            class="form-input"
+                            formControlName="suiteNumber"
+                        >
+                    </div>
+                </div>
+                <div class="f-col col-60">
+                    <label>Mailing Address</label>
+                    <div class="form-row">
+                        <input
+                            placeholder="search for location"
+                            autocorrect="off"
+                            autocapitalize="off"
+                            class="form-input"
+                            spellcheck="off"
+                            type="text"
+                            #search
+                            formControlName="mailingAddress"
+                        >
+                    </div>
+                </div>
+                <div class="f-col col-20">
+                    <label>Zip</label>
+                    <div class="form-row">
+                        <input
+                            type="text"
+                            placeholder="123456"
+                            class="form-input"
+                            formControlName="postalCode"
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="f-col col-100">
+                <label>About Me</label>
+                <div class="form-row">
+                    <textarea
+                        placeholder="Write About Your Self"
+                        class="form-input"
+                        formControlName="aboutMe"
+                    ></textarea>
+                </div>
+            </div>
+        </div>
+        <input
+            type="submit"
+            class="btn btn-primary"
+            value="Save Changes"
+        >
+    </form>
+</div>

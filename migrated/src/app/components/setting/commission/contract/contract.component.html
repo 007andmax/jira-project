@@ -1,0 +1,579 @@
+<div class="cmn-area contract">
+    <div class="data-table-wrap">
+        <table
+            class="display dataTable"
+            style="width:100%"
+        >
+            <thead>
+                <tr>
+                    <th class="p-name">Product Name</th>
+                    <th class="rate">Rate (%)</th>
+                    <th class="action">&nbsp;</th>
+                </tr>
+            </thead>
+        </table>
+        <table
+            class="display dataTable"
+            style="width:100%"
+        >
+            <tbody>
+                <tr>
+                    <td class="p-name">
+                        <h5 class="headings">Hourly Contracts</h5>
+                        <p>
+                            Hourly Contracts will use the service default commission rate.
+                        </p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <hr>
+        <table
+            class="display dataTable"
+            style="width:100%"
+        >
+            <tbody>
+                <tr>
+                    <td class="p-name">
+                        <h5 class="headings">Block Time Contracts</h5>
+                        <p>
+                            Block time contracts will be separated in two commissions rates,
+              the first will be for the included Hours, a second rate can be set
+              for Hours exceeding the included hours.
+                        </p>
+                        <p></p>
+                    </td>
+                    <td class="rate">&nbsp;</td>
+                    <td class="action">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="p-name">
+                        <h5>
+                            Block time Included Hours commission Rate
+                        </h5>
+                    </td>
+                    <td class="rate">
+                        {{ agreementsCommissions?.blockTimeContractCommission }}
+                    </td>
+                    <td class="action">
+                        <a
+                            href="javascript:;"
+                            data-tooltip="Edit"
+                            class="edit"
+                            (click)="
+                editContract(
+                  'commissionRateSetOldSalesBlockTime',
+                  'blockTimeContractCommission'
+                )
+              "
+                        >
+                            <img
+                                src="/html/assets/img/icons/edit.svg"
+                                alt="Edit"
+                            >
+                        </a>
+                        <a
+                            href="javascript:;"
+                            data-tooltip="Remove"
+                            class="remove"
+                            (click)="
+                confirmDelete(
+                  'commissionRateSetOldSalesBlockTime',
+                  'blockTimeContractCommission'
+                )
+              "
+                        >
+                            <img
+                                src="/html/assets/img/icons/remove.svg"
+                                alt="Remove"
+                            >
+                        </a>
+                        <div
+                            class="modal-content toggle-area"
+                            [ngClass]="{ opened: isBlockTimeModel === true }"
+                        >
+                            <div class="modal-wrapper">
+                                <div class="toggle-header">
+                                    <h2 class="h1">Edit Rate</h2>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="POST">
+                                        <div class="f-row">
+                                            <div class="f-col col-100">
+                                                <label>Commission Rate (%)</label>
+                                                <div class="form-row margin-bottom">
+                                                    <input
+                                                        type="text"
+                                                        class="form-input"
+                                                        autocomplete="off"
+                                                        name="commissionRate"
+                                                        #commissionRate
+                                                        placeholder="Enter Commission Rate"
+                                                    >
+                                                </div>
+                                            </div>
+                                            <div class="m-btn-row">
+                                                <div class="m-btn-col">
+                                                    <input
+                                                        type="submit"
+                                                        (click)="
+                            confirmEdit(); this.isBlockTimeModel = false
+                            "
+                                                        value="Save"
+                                                        class="btn btn-primary"
+                                                    >
+                                                    <a
+                                                        href="javascript:;"
+                                                        class="btn btn-secondary"
+                                                        aria-label="Close"
+                                                        (click)="isBlockTimeModel = false"
+                                                    >
+                                                        Cancel
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="p-name">
+                        <h5>
+                            Rate for hours Exceeding Included hours on Black Time Contracts
+                        </h5>
+                    </td>
+                    <td class="rate">
+                        {{ agreementsCommissions?.blockTimeContractCommissionExceeding }}
+                    </td>
+                    <td class="action">
+                        <a
+                            href="javascript:;"
+                            data-tooltip="Edit"
+                            class="edit"
+                            (click)="
+                editContract(
+                  'commissionRateSetOldSalesBlockTimeExceeding',
+                  'blockTimeContractCommissionExceeding'
+                )
+              "
+                        >
+                            <img
+                                src="/html/assets/img/icons/edit.svg"
+                                alt="Edit"
+                            >
+                        </a>
+                        <a
+                            href="javascript:;"
+                            data-tooltip="Remove"
+                            class="remove"
+                            (click)="
+              confirmDelete(
+                  'commissionRateSetOldSalesBlockTimeExceeding',
+                  'blockTimeContractCommissionExceeding'
+                )
+              "
+                        >
+                            <img
+                                src="/html/assets/img/icons/remove.svg"
+                                alt="Remove"
+                            >
+                        </a>
+                        <div
+                            class="modal-content toggle-area"
+                            [ngClass]="{ opened: isRateHoursModel === true }"
+                        >
+                            <div class="modal-wrapper">
+                                <div class="toggle-header">
+                                    <h2 class="h1">Edit Rate</h2>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="POST">
+                                        <div class="f-row">
+                                            <div class="f-col col-100">
+                                                <label>Commission Rate (%)</label>
+                                                <div class="form-row margin-bottom">
+                                                    <input
+                                                        type="text"
+                                                        class="form-input"
+                                                        autocomplete="off"
+                                                        name="commissionRateHourInput"
+                                                        #commissionRateHourInput
+                                                        placeholder="Enter Commission Rate"
+                                                    >
+                                                </div>
+                                            </div>
+                                            <div class="m-btn-row">
+                                                <div class="m-btn-col">
+                                                    <input
+                                                        type="submit"
+                                                        (click)="confirmEdit(); isRateHoursModel = false"
+                                                        value="Save"
+                                                        class="btn btn-primary"
+                                                    >
+                                                    <a
+                                                        href="javascript:;"
+                                                        class="btn btn-secondary"
+                                                        aria-label="Close"
+                                                        (click)="isRateHoursModel = false"
+                                                    >
+                                                        Cancel
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <hr>
+        <table
+            class="display dataTable"
+            style="width:100%"
+        >
+            <tbody>
+                <tr>
+                    <td class="p-name">
+                        <h5 class="headings">Per User and Device Cotracts</h5>
+                        <p>
+                            Managed Service. contracts will have two commissions rates, one
+              for the Contract , and one for Exceeding maximum hours included in
+              the contract, this will be the same for Per Device and Per User
+              Contract. If you Bill the customer for Other services in the
+              contracts then the additional services commission will be
+              calculated by their rates in Services Commissions.
+                        </p>
+                        <p></p>
+                    </td>
+                    <td class="rate">&nbsp;</td>
+                    <td class="action">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="p-name">
+                        <h5>Per User and Per Device Contracts</h5>
+                    </td>
+                    <td class="rate">
+                        {{ agreementsCommissions?.userOrDeviceContractCommission }}
+                    </td>
+                    <td class="action">
+                        <a
+                            href="javascript:;"
+                            data-tooltip="Edit"
+                            class="edit"
+                            (click)="
+                editContract(
+                  'commissionRateSetOldSalesUserOrDeviceContract',
+                  'userOrDeviceContractCommission'
+                )
+              "
+                        >
+                            <img
+                                src="/html/assets/img/icons/edit.svg"
+                                alt="Edit"
+                            >
+                        </a>
+                        <a
+                            href="javascript:;"
+                            data-tooltip="Remove"
+                            class="remove"
+                            (click)="
+              confirmDelete(
+                  'commissionRateSetOldSalesUserOrDeviceContract',
+                  'userOrDeviceContractCommission'
+                )
+              "
+                        >
+                            <img
+                                src="/html/assets/img/icons/remove.svg"
+                                alt="Remove"
+                            >
+                        </a>
+                        <div
+                            class="modal-content toggle-area"
+                            [ngClass]="{ opened: perUserDeviceModel === true }"
+                        >
+                            <div class="modal-wrapper">
+                                <div class="toggle-header">
+                                    <h2 class="h1">Edit Rate</h2>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="POST">
+                                        <div class="f-row">
+                                            <div class="f-col col-100">
+                                                <label>Commission Rate (%)</label>
+                                                <div class="form-row margin-bottom">
+                                                    <input
+                                                        type="text"
+                                                        class="form-input"
+                                                        autocomplete="off"
+                                                        name="commissionUserDeviceRateInput"
+                                                        #commissionUserDeviceRateInput
+                                                        placeholder="Enter Commission Rate"
+                                                    >
+                                                </div>
+                                            </div>
+                                            <div class="m-btn-row">
+                                                <div class="m-btn-col">
+                                                    <input
+                                                        type="submit"
+                                                        (click)="confirmEdit() ; perUserDeviceModel = false;"
+                                                        value="Save"
+                                                        class="btn btn-primary"
+                                                    >
+                                                    <a
+                                                        href="javascript:;"
+                                                        class="btn btn-secondary"
+                                                        aria-label="Close"
+                                                        (click)="perUserDeviceModel = false"
+                                                    >
+                                                        Cancel
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="p-name">
+                        <h5>
+                            Rate for hours Exceeding Included hours on Block Time contracts
+                        </h5>
+                    </td>
+                    <td class="rate">
+                        {{ agreementsCommissions?.userOrDeviceContractCommissionExceeding }}
+                    </td>
+                    <td class="action">
+                        <a
+                            href="javascript:;"
+                            data-tooltip="Edit"
+                            class="edit"
+                            (click)="
+                editContract(
+                  'commissionRateSetOldSalesUserOrDeviceContractExceeding',
+                  'userOrDeviceContractCommissionExceeding'
+                )
+              "
+                        >
+                            <img
+                                src="/html/assets/img/icons/edit.svg"
+                                alt="Edit"
+                            >
+                        </a>
+                        <a
+                            href="javascript:;"
+                            data-tooltip="Remove"
+                            class="remove"
+                            (click)="
+              confirmDelete(
+                  'commissionRateSetOldSalesUserOrDeviceContractExceeding',
+                  'userOrDeviceContractCommissionExceeding'
+                )
+              "
+                        >
+                            <img
+                                src="/html/assets/img/icons/remove.svg"
+                                alt="Remove"
+                            >
+                        </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <div
+                            class="modal-content toggle-area"
+                            [ngClass]="{ opened: isModelDisplayModel === true }"
+                        >
+                            <div class="modal-wrapper">
+                                <div class="toggle-header">
+                                    <h2 class="h1">Edit Rate</h2>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="POST">
+                                        <div class="f-row">
+                                            <div class="f-col col-100">
+                                                <label>Commission Rate (%)</label>
+                                                <div class="form-row margin-bottom">
+                                                    <input
+                                                        type="text"
+                                                        class="form-input"
+                                                        autocomplete="off"
+                                                        name="commissionRateContractsInput"
+                                                        #commissionRateContractsInput
+                                                        placeholder="Enter Commission Rate"
+                                                    >
+                                                </div>
+                                            </div>
+                                            <div class="m-btn-row">
+                                                <div class="m-btn-col">
+                                                    <input
+                                                        type="submit"
+                                                        (click)="confirmEdit();isModelDisplayModel=false;"
+                                                        value="Save"
+                                                        class="btn btn-primary"
+                                                    >
+                                                    <a
+                                                        href="javascript:;"
+                                                        class="btn btn-secondary"
+                                                        aria-label="Close"
+                                                        (click)="isModelDisplayModel = false"
+                                                    >
+                                                        Cancel
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <hr>
+        <table
+            class="display dataTable"
+            style="width:100%"
+        >
+            <tbody>
+                <tr>
+                    <td class="p-name">
+                        <h5 class="headings">Other Contracts</h5>
+                        <p>
+                            commission rate will be calculated based on their Product and
+              Service Commissions rates set in the Product and Service
+              Commissions.
+                        </p>
+                        <p></p>
+                    </td>
+                    <td class="rate">&nbsp;</td>
+                    <td class="action">&nbsp;</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- <div class="loading" *ngIf="loading"></div> -->
+</div>
+<div
+    class="img-croparea deletePopup"
+    *ngIf="deletePopup"
+>
+    <div class="crop-inner">
+        <div class="cropping">
+            <div class="popup-message">
+                <span class="icon-part">
+                    <img
+                        src="/html/assets/img/device/delete-red.svg"
+                        alt="delete"
+                    >
+                </span>
+                <div class="message-right">
+                    <h1>Delete Commission Rate</h1>
+                    <p>
+                        Are you sure you want to change rate to be zero & this rate to fact old items?
+                    </p>
+                </div>
+                <a
+                    class="close-ico"
+                    href="javascript:;"
+                    (click)="deletePopup = false"
+                >
+                    <img
+                        src="/html/assets/img/icons/close.svg"
+                        alt="close"
+                    >
+                </a>
+            </div>
+            <div class="btn-crops">
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="deletePopup = false;removeContract()"
+                >
+                    Yes, I am sure
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    (click)="deletePopup = false"
+                >
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div
+    class="img-croparea deletePopup"
+    *ngIf="confirmPopup"
+>
+    <div class="crop-inner">
+        <div class="cropping">
+            <div class="popup-message">
+                <div class="message-right">
+                    <p>
+                        Do you want this commission to fact old items?
+                    </p>
+                </div>
+                <a
+                    class="close-ico"
+                    href="javascript:;"
+                    (click)="factItem = false;confirmPopup = false;setAgreementRate()"
+                >
+                    <img
+                        src="/html/assets/img/icons/close.svg"
+                        alt="close"
+                    >
+                </a>
+            </div>
+            <div class="btn-crops">
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="factItem = true;confirmPopup = false;setAgreementRate()"
+                >
+                    Yes, I want
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    (click)="factItem = false;confirmPopup = false;setAgreementRate()"
+                >
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

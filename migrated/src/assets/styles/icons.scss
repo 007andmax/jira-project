@@ -1,0 +1,698 @@
+.icn-64 {
+  display: block;
+  width: 64px;
+  height: 64px;
+}
+
+.icn-24 {
+  width: 26px;
+  height: 26px;
+  display: block;
+}
+
+.icn-16 {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+.icn-user {
+  background: url("/assets/img/user-icn.png");
+}
+
+.icn-device {
+  background: url("/assets/img/device-icn.png");
+}
+
+.icn-search-light {
+  background: url("/assets/img/search-light.png");
+}
+
+.icn-calendar-light {
+  background: url("/assets/img/calendar-light.png");
+}
+
+.icn-attach {
+  background: url("/assets/img/attachment-blue.svg");
+}
+
+.icn-delete {
+  background-image: url(/assets/img/icons/icn-remove.png) !important;
+  width: 16px;
+  height: 17px;
+  display: block;
+}
+
+.icn-remove {
+  background: url("/assets/img/icons/close-16.png");
+}
+
+.email-ng2 {
+  background: url("/assets/img/icons/email-ng2.png");
+}
+
+.archive-blue-ng2 {
+  background: url("/assets/img/icons/archive-blue-ng2.png");
+}
+
+.export-ng2 {
+  background: url("/assets/img/icons/export-ng2.png");
+}
+
+.import-ng2 {
+  background: url("/assets/img/icons/import-ng2.png");
+}
+
+.restore-ng2 {
+  background: url("/assets/img/icons/restore-company.png");
+}
+
+.upload-logo {
+  background: url("/assets/img/icons/upload-logo.png");
+}
+
+.more-vertical-ng2 {
+  background: url("/assets/img/icons/more-vertical-ng2.png") no-repeat;
+}
+
+.edit-grey-ng2 {
+  background: url("/assets/img/icons/edit-grey-ng2.png");
+}
+.convert-to-billable-ng2 {
+  background: url("/assets/img/icons/billable.svg");
+}
+
+.send-grey-ng2 {
+  background: url("/assets/img/icons/send-grey-ng2.png");
+}
+
+.email-grey-ng2 {
+  background: url("/assets/img/icons/email-grey-ng2.png");
+}
+
+.archive-grey-ng2 {
+  background: url("/assets/img/icons/archive-grey-ng2.png");
+}
+
+.history-ng2 {
+  background: url("/assets/img/icons/history.svg") no-repeat;
+  background-size: cover;
+}
+
+.archive-red-ng2 {
+  background: url("/assets/img/icons/archive-red-ng2.png") no-repeat;
+  background-size: cover;
+}
+
+.no-valid-label {
+  background: url("/assets/img/icons/update-label.png") no-repeat;
+  display: block;
+  width: 44px;
+  height: 20px;
+}
+.home-phone-icn {
+  background: url("/assets/img/icons/home-phone.png");
+}
+
+.fax-icn {
+  background: url("/assets/img/icons/fax.png");
+}
+
+.mobile-phone-icn {
+  background: url("/assets/img/icons/mobile-phone.png");
+}
+
+.office-phone-icn {
+  background: url("/assets/img/icons/office-phone.png");
+}
+
+.add-user {
+  background: url("/assets/img/icons/add-users.svg");
+}
+
+
+
+.icon {
+ &__assign-date {
+  background-image: url("/assets/img/icons/assign-date.svg");
+  }
+ &__assign-user {
+    background-image: url("/assets/img/icons/assign-user.svg");
+  }
+
+ &__task-pending {
+    background-image: url("/assets/img/icons/task-pending.svg");
+    &.--done {
+      background-image: url("/assets/img/icons/task-completed.svg");
+    }
+ }
+ &__users {
+    background-image: url("/assets/img/icons/addusers.svg")
+ }
+ &__close {
+    background-image: url("/assets/img/icons/close.svg")
+ }
+ &__remove {
+    background-image: url("/assets/img/icons/remove.svg")
+ }
+ &__attachment {
+    background-image: url("/assets/img/icons/attachment.svg")
+ }
+ &__selected {
+     background-image: url("/assets/img/icons/selected.svg")
+ }
+ &__chat {
+    background-image: url("/assets/img/icons/chat.svg");
+    &.active {
+        background-image: url("/assets/img/icons/chat-blue.svg");
+      }
+ }
+ &__products {
+   background-image: url("/assets/img/icons/products.svg");
+   &.active {
+     background-image: url("/assets/img/icons/products-blue.svg");
+   }
+ }
+ &__service {
+  background-image: url("/assets/img/icons/service.svg");
+  &.active {
+     background-image: url("/assets/img/icons/service-blue.svg");
+  }
+ }
+ &__quick-support {
+  background-image: url("/assets/img/icons/quick-support-gray.svg");
+  &.active {
+    background-image: url("/assets/img/icons/quick-support.svg");
+  }
+ }
+ &__attach-blue {
+   background-image: url("/assets/img/attachment-blue.svg");
+ }
+ &__filters {
+   background-image: url("/assets/img/icons/filters.svg");
+ }
+ &__collapse-arrow {
+   background-image: url("/assets/img/icons/collapse-arrow.svg");
+ }
+ &__company-info {
+   background-image: url("/assets/img/icons/company-info.svg");
+ }
+ &__devices {
+   background-image: url("/assets/img/icons/devices.svg");
+ }
+ &__devices-grey {
+   background-image: url("/assets/img/icons/devices-grey.svg");
+ }
+ &__office-account {
+  background-image: url("/assets/img/icons/office-account.svg");
+ }
+  &__custom-category {
+  background-image: url("/assets/img/icons/custom-category.svg");
+ }
+ &__generic {
+   background-image: url("/assets/img/icons/generic.svg");
+ }
+ &__panel-open {
+   background-image: url("/assets/img/icons/panel-open.svg");
+ }
+ &__users {
+   background-image: url("/assets/img/icons/users.svg");
+ }
+  &__user-account {
+    background-image: url("/assets/img/icons/local-user-account.svg");
+  }
+ &__get-direction {
+    background-image: url("/assets/img/icons/get-direction.svg");
+ }
+  &__panel-close{
+     background-image: url("/assets/img/icons/panel-close.svg");
+  }
+  &__rating-filled{
+     background-image: url("/assets/img/icons/rating-filled.svg");
+  }
+  &__rating{
+     background-image: url("/assets/img/icons/rating.svg");
+  }
+  &__expand{
+    background-image: url("/assets/img/icons/expand.svg");
+  }
+  &__export-dark {
+    background-image: url("/assets/img/icons/export-dark.svg");
+  }
+  &__plus-white {
+    background-image: url("/assets/img/icons/plus-white.svg");
+  }
+  &__close {
+    background-image: url("/assets/img/icons/tag-close.svg");
+  }
+  &__more {
+    background-image: url("/assets/img/icons/more-vertical-ng2.png") ;
+  }
+  &__claim-ticket {
+    background-image: url("/assets/img/icons/claim-ticket.svg");
+  }
+  &__ticket-status {
+    background: url("/assets/img/icons/ticket-status.svg") ;
+  }
+  &__tips {
+    background-image: url("/assets/img/icons/tips.svg");
+  }
+  &__invoice-check {
+    background-image: url("/assets/img/icons/invoice-check.svg");
+  }
+  &__archive {
+    background-image: url("/assets/img/icons/archive.svg");
+  }
+  &__email-dark {
+    background-image: url("/assets/img/icons/email-dark.svg");
+  }
+  &__view {
+    background-image: url("/assets/img/icons/view.svg");
+  }
+  &__hide {
+    background-image: url("/assets/img/icons/hide.svg");
+  }
+  &__calendar {
+    background-image: url("/assets/img/icons/calander.svg");
+  }
+  &__user-grey {
+    background-image: url("/assets/img/icons/user-grey.svg");
+  }
+  &__payment-received {
+    background-image: url("/assets/img/icons/payment-received.svg");
+  }
+  &__convert-ticket {
+    background-image: url("/assets/img/icons/convert-ticket.svg");
+  }
+  &__convert-invoice {
+    background-image: url("/assets/img/icons/convert-invoice.svg");
+  }
+  &__approve-quote {
+    background-image: url("/assets/img/icons/approve-quote.svg");
+  }
+  &__uninstall {
+    background-image: url("/assets/img/icons/uninstall.svg");
+  }
+  &__set-privilege {
+    background-image: url("/assets/img/icons/set-privilege.svg");
+  }
+  &__subscribe {
+    background-image: url("/assets/img/icons/subscribe.svg");
+  }
+  &__mark-as-master {
+    background-image: url("/assets/img/icons/mark-as-master.svg");
+  }
+  &__remote-access {
+    background-image: url("/assets/img/icons/remote-access.svg");
+  }
+  &__remove-12 {
+    background-image: url("/assets/img/icons/remove-12.svg");
+  }
+  &__restart {
+    background-image: url("/assets/img/icons/restart.svg");
+  }
+  &__payment-note {
+    background-image: url("/assets/img/icons/saved-note.svg");
+  }
+  &__shutdown {
+    background-image: url("/assets/img/icons/shutdown.svg");
+  }
+  &__clock-timer {
+    background-image: url('/assets/img/icons/timer-counter.svg');
+  }
+  &__add-task {
+    background-image: url('/assets/img/icons/add-task.svg');
+  }
+  &__calander {
+    background-image: url('/assets/img/icons/calander.svg');
+  }
+  &__company-address {
+    background-image: url('/assets/img/icons/company-address.svg');
+  }
+  &__discount {
+    background-image: url('/assets/img/icons/discount.svg');
+  }
+  &__raw-clear {
+    background-image: url('/assets/img/icons/raw-clear.svg');
+  }
+  &__timer-counter {
+    background-image: url('/assets/img/icons/timer-counter.svg');
+  }
+  &__move-light {
+    background-image: url('/assets/img/icons/move-light.svg');
+  }
+  &__dropdown-arrow-up {
+    background-image: url('/assets/img/icons/dropdown-arrow-up.svg');
+  }
+  &__company-info {
+    background-image: url('/assets/img/icons/company-info.svg');
+  }
+  &__invoice-expired {
+    background-image: url('/assets/img/icons/invoice-expired.svg');
+  }
+  &__print {
+    background-image: url('/assets/img/icons/print.svg');
+  }
+  &__print-blue {
+    background-image: url('/assets/img/icons/print-blue.svg');
+  }
+  &__email-dark {
+    background-image: url('/assets/img/icons/email-dark.svg');
+  }
+  &__invoice-expired {
+    background-image: url('/assets/img/icons/invoice-expired.svg');
+  }
+  &__download {
+    background-image: url('/assets/img/icons/download.svg');
+  }
+  &__locked {
+    background-image: url('/assets/img/icons/locked.svg');
+  }
+  &__filter-active {
+    background-image: url("/assets/img/icons/filter-active.svg");
+  }
+
+  &__faster-payment {
+    background-image: url("/assets/img/icons/faster-payment.svg");
+  }
+  &__email {
+    background-image: url("/assets/img/icons/email.svg");
+  }
+  &__check {
+    background-image: url("/assets/img/icons/check.png");
+  }
+  &__collapse-task {
+    background-image: url("/assets/img/icons/collapse-task.svg");
+  }
+  &__read-on {
+    background-image: url("/assets/img/icons/read-on.svg");
+  }
+  &__invoice-email {
+    background-image: url("/assets/img/icons/invoice-email.svg");
+  }
+  &__get-paid {
+    background-image: url("/assets/img/icons/get-paid.svg");
+  }
+  &__edit {
+    background-image: url("/assets/img/icons/edit.svg");
+  }
+  &__email-dark {
+    background-image: url("/assets/img/icons/email-dark.svg");
+  }
+  &__download-pdf {
+    background-image: url("/assets/img/icons/download-pdf.svg");
+  }
+  &__payment-history {
+    background-image: url("/assets/img/icons/payment_history.svg");
+  }
+  &__mark-as-read {
+    background-image: url("/assets/img/icons/mark_as_read.svg");
+  }
+  &__refund-payment {
+    background-image: url("/assets/img/icons/refund-payment.svg");
+  }
+  &__verified {
+    background-image: url("/assets/img/icons/verified.svg");
+  }
+
+  &__block-time-billing {
+    background-image: url('/assets/img/icons/block-time-billing.svg');
+  }
+  &__contract-claim-ticket {
+    background-image: url('/assets/img/icons/contract-claim-ticket.svg');
+  }
+  &__per-user {
+    background-image: url('/assets/img/icons/per-user.svg');
+  }
+  &__product-contract {
+    background-image: url('/assets/img/icons/product-contract.svg');
+  }
+
+  &__question-help {
+    background-image: url('/assets/img/icons/question-help.svg');
+  }
+  &__info-question {
+    background-image: url("/assets/img/icons/info-question.svg");
+  }
+  &__growth {
+    background-image: url('/assets/img/icons/growth.svg');
+  }
+  &__loss {
+    background-image: url('/assets/img/icons/loss.svg');
+  }
+  &__quotes {
+    background-image: url('/assets/img/icons/quotes.svg');
+  }
+  &__total-sales {
+    background-image: url('/assets/img/icons/total-sales.svg');
+  }
+  &__unbilled-amount {
+    background-image: url('/assets/img/icons/unbilled-amount.svg');
+  }
+  &__unpaid-invoice {
+    background-image: url('/assets/img/icons/unpaid-invoice.svg');
+  }
+  &__profile-dropdown {
+    background-image: url('/assets/img/icons/profile-dropdown.svg');
+  }
+  &__message-forward {
+    background-image: url('/assets/img/icons/message-forward.svg');
+  }
+  &__message-response {
+    background-image: url('/assets/img/icons/message-response.svg');
+  }
+  &__copy-gray {
+    background-image: url('/assets/img/icons/copy-gray.svg');
+  }
+  &__terminate {
+    background-image: url('/assets/img/icons/terminate.svg');
+  }
+  &__search {
+    background-image: url('/assets/img/icons/search.svg');
+  }
+  &__force-create {
+    background-image: url('/assets/img/icons/force-create.svg');
+  }
+  &__avg-response {
+    background-image: url('/assets/img/icons/avg-response.svg');
+  }
+  &__tickets-on-time {
+    background-image: url('/assets/img/icons/tickets-on-time.svg');
+  }
+  &__new-tickets {
+    background-image: url('/assets/img/icons/new-tickets.svg');
+  }
+  &__on-hold-tickets {
+    background-image: url('/assets/img/icons/on-hold-tickets.svg');
+  }
+  &__recurring-tickets {
+    background-image: url('/assets/img/icons/recurring-tickets.svg');
+  }
+  &__solved-tickets {
+    background-image: url('/assets/img/icons/solved-tickets.svg');
+  }
+  &__no-devices-installed {
+    background-image: url('/assets/img/no-devices-installed.svg');
+  }
+  &__link {
+    background-image: url('/assets/img/icons/link.svg');
+  }
+  &__play {
+    background-image: url('/assets/img/icons/play.svg');
+  }
+  &__computer {
+    background-image: url('/assets/img/icons/computer.svg');
+  }
+  &__printer {
+    background-image: url('/assets/img/icons/printer.svg');
+  }
+  &__server {
+    background-image: url('/assets/img/icons/server.svg');
+  }
+  &__tablet {
+    background-image: url('/assets/img/icons/tablet.svg');
+  }
+  &__master-agent-badge {
+    background-image: url('/assets/img/icons/master-agent-badge.svg');
+  }
+  &__agent {
+    background-image: url('/assets/img/icons/agent.svg');
+  }
+  &__quick-connect {
+    background-image: url('/assets/img/icons/quick-connect.svg');
+  }
+  &__go-to {
+    background-image: url('/assets/img/icons/go-to.svg');
+  }
+  &__network {
+    background-image: url('/assets/img/icons/network.svg');
+  }
+  &__software {
+    background-image: url('/assets/img/icons/software.svg');
+  }
+  &__wifi {
+    background-image: url('/assets/img/icons/wifi-network.svg');
+  }
+  &__microsoft {
+    background-image: url('/assets/img/icons/microsoft.svg');
+  }
+   &__hosting {
+    background-image: url('/assets/img/icons/hosting.svg');
+  }
+  &__system {
+    background-image: url('/assets/img/icons/system.svg');
+  }
+  &__updates {
+    background-image: url('/assets/img/icons/updates.svg');
+  }
+  &__remove-blue {
+    background-image: url('/assets/img/icons/remove-blue.svg');
+  }
+  &__restart-blue {
+    background-image: url('/assets/img/icons/restart-blue.svg');
+  }
+  &__shutdown-blue {
+    background-image: url('/assets/img/icons/shutdown-blue.svg');
+  }
+  &__connected-device {
+    background-image: url('/assets/img/icons/connected-device.svg');
+  }
+  &__more-vertical {
+    background-image: url('/assets/img/icons/more-vertical.svg');
+  }
+  &__arrow-right {
+    background-image: url('/assets/img/icons/arrow-right.svg');
+  }
+  &__collapse {
+    background-image: url('/assets/img/icons/collapse.svg');
+  }
+  &__drivers-missing {
+    background-image: url("/assets/img/icons/drivers-missing.svg");
+  }
+  &__security-update {
+    background-image: url("/assets/img/icons/security-update.svg");
+  }
+  &__virus-protection {
+    background-image: url("/assets/img/icons/virus-protection.svg");
+  }
+  &__master-agent {
+    background-image: url("/assets/img/icons/master-agent.svg");
+  }
+  &__sidebar-blue {
+    background-image: url("/assets/img/icons/sidebar-blue.svg");
+  }
+  &__office-phone-gray {
+    background-image: url("/assets/img/icons/office-phone-gray.svg");
+  }
+  &__phone-gray {
+    background-image: url("/assets/img/icons/phone-gray.svg");
+  }
+  &__upload-avtar {
+    background-image: url("/assets/img/icons/upload-avtar.svg");
+  }
+  &__dropdown-down {
+    background-image: url("/assets/img/icons/dropdown-down.svg") ;
+  }
+  &__notifications {
+    background-image: url("/assets/img/icons/notifications.svg");
+  }
+  &__add-white {
+    background-image: url("/assets/img/icons/add-white.svg");
+  }
+  &__close-round {
+    background-image: url("/assets/img/icons/close-round.svg");
+  }
+  &__create-folder {
+    background-image: url("/assets/img/icons/create-folder.svg");
+  }
+
+  &__key {
+    background-image: url("/assets/img/icons/key.svg") ;
+  }
+  &__copy {
+    background-image: url("/assets/img/icons/copy.svg") ;
+  }
+  &__link-gray {
+    background-image: url("/assets/img/icons/link-gray.svg") ;
+  }
+  &__new-ticket-support {
+    background-image: url("/assets/img/icons/new-ticket-support.svg") ;
+  }
+  &__remote-access-green {
+    background-image: url("/assets/img/icons/remote-access-green.svg") ;
+  }
+  &__remote-access-gray {
+    background-image: url("/assets/img/icons/remote-access-gray.svg") ;
+  }
+  &__connected-device-green {
+    background-image: url("/assets/img/icons/connected-device-green.svg") ;
+  }
+  &__computer-green {
+    background-image: url("/assets/img/icons/computer-green.svg") ;
+  }
+
+  &.--updated {
+    position: relative;
+    &::before {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      right: -2px;
+      top: -3px;
+      background-image: url("/assets/img/icons/updated.svg");
+    }
+  }
+  &.--alert {
+    position: relative;
+    &::before {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      right: -2px;
+      top: -3px;
+      background-image: url("/assets/img/icons/alert.svg");
+    }
+  }
+  &.--online, &.--offline {
+    position: relative;
+    &::before {
+      content: '';
+      width: 10px;
+      height: 10px;
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      border: solid 2px #ffffff;
+      background-color: #2ec866;
+      border-radius: 50%;
+    }
+
+  }
+  &.--offline {
+    &::before {
+      background-color: #ff5263;
+    }
+  }
+}
+
+.icn-20 {
+  background-size: cover;
+  width: 20px;
+  height: 20px;
+}
+
+.priority-icon {
+  width: 14px;
+  height: 14px;
+  background-size: contain;
+  display: inline-block;
+
+  &.--high {background-image: url("/assets/img/icons/priority-high.png");}
+  &.--medium {background-image: url("/assets/img/icons/priority-medium.png");}
+  &.--low    {background-image: url("/assets/img/icons/priority-low.png");}
+}
+
+
+

@@ -1,0 +1,95 @@
+import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ReportsService {
+
+  private apiUrl = environment.apiUrl;
+  constructor(private http: HttpClient) { }
+
+  public getPdfUrl(data) {
+    return this.http.post(this.apiUrl + `reports/pdf`, data);
+
+  }
+  public getCSV(url, data) {
+    const options: {
+      headers?: HttpHeaders;
+      observe?: 'body';
+      params?: HttpParams;
+      reportProgress?: boolean;
+      responseType: 'arraybuffer';
+      withCredentials?: boolean;
+    } = {
+      responseType: 'arraybuffer'
+    };
+    return this.http.post(this.apiUrl + url, data, options);
+
+  }
+  public getCustomPdfUrl(data) {
+    return this.http.post(this.apiUrl + `customerReport/pdf`, data);
+
+  }
+
+  public getAccountingStartDate() {
+    return this.http.get(this.apiUrl + `settings/companyProfile/accountingStartDate`);
+  }
+  public setAccountingStartDate(data) {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    return this.http.post(this.apiUrl + `settings/companyProfile/accountingStartDate`, data, options);
+  }
+  public getReportByTechService(data) {
+    return this.http.post(this.apiUrl + `reports/sales/byServices`, data);
+  }
+  public getReportDetailedCommissions(data) {
+    return this.http.post(this.apiUrl + `reports/commission/byCustomers`, data);
+  }
+  public getReportByGlNumber(data) {
+    return this.http.post(this.apiUrl + `reports/sales/byGlNumber`, data);
+  }
+  public getReportSalesByProducts(data) {
+    return this.http.post(this.apiUrl + `reports/sales/byProducts`, data);
+  }
+  public getReportByTaxes(data) {
+    return this.http.post(this.apiUrl + `reports/sales/byTaxes`, data);
+  }
+  public getReportByAccountsReceivable(data) {
+    return this.http.post(this.apiUrl + `reports/sales/byReceivable`, data);
+  }
+  public getReportByProduct(data) {
+    return this.http.post(this.apiUrl + `reports/sales/byProducts`, data);
+  }
+  public getReportByCustomers(data) {
+    return this.http.post(this.apiUrl + `reports/sales/byCustomers`, data);
+  }
+  public getReportByTickets(data) {
+    return this.http.post(this.apiUrl + `customerReport`, data);
+  }
+  public getReportByAccounting(data) {
+    return this.http.post(this.apiUrl + `reports/sales/accounting`, data);
+  }
+  public getReportByRemoteAccess(data) {
+    return this.http.post(this.apiUrl + `reports/remoteAccess`, data);
+  }
+  public getReportByTechSale(data) {
+    return this.http.post(this.apiUrl + `reports/sales/byTechSold`, data);
+  }
+  public getReportByTechTicket(data) {
+    return this.http.post(this.apiUrl + `reports/techTickets`, data);
+  }
+  public getReportByService(data) {
+    return this.http.post(this.apiUrl + `customerReport/expenses`, data);
+  }
+  public sendMessage(data) {
+    return this.http.post(this.apiUrl + `reports/email`, data);
+  }
+  public sendCustomerMessage(data) {
+    return this.http.post(this.apiUrl + `customerReport/email`, data);
+  }
+}

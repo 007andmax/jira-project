@@ -5,14 +5,14 @@
     "types": []
   },
   "files": [
-    "./ng2/main.ts",
-    "./ng2/polyfills.ts"
+    "./main.ts",
+    "./polyfills.ts"
   ],
   "include": [
     "**/*.ts"
   ],
   "exclude": [
-    "ng2/test.ts",
+    "test.ts",
     "**/*.spec.ts"
   ]
 }
