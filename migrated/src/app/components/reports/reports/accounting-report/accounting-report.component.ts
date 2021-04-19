@@ -35,4 +35,7 @@ export class AccountingReportComponent implements OnInit {
   public getDateForHeader(data) {
     return moment(new Date(data)).format('MMM DD, YYYY');
   }
+  public trackByIndex(index, item) {
+    return index;
+  }
 }

@@ -83,6 +83,10 @@ export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
       this.close();
     });
   }
+  convertToTicket() {
+    this.quoteServices.convertToTicket(this.quote.company, this.quote.id).subscribe((res) => {
+    });
+  }
   convertToInvoice() {
     this.quoteServices.convertToInvoice({ companyInfo: this.quote.company }, this.quote.id).subscribe((res) => {
     });

@@ -235,6 +235,9 @@
 
 
 
+
+
+
                                             </textarea>
                                         </div>
                                         <textarea
@@ -467,7 +470,7 @@
                                                     >
                                                         <button
                                                             ngbDropdownItem
-                                                            (click)="filterMyScript();"
+                                                            (click)="filterMyScript(undefined);"
                                                         >
                                                             All Category
                                                         </button>
@@ -490,7 +493,7 @@
                                                     placeholder="Search Scripts"
                                                     class="form-input script-search"
                                                     [(ngModel)]="myScriptModal.search"
-                                                    (keyup)="filterMyScript()"
+                                                    (keyup)="filterMyScript(undefined)"
                                                     id="my_search"
                                                     name="my_search"
                                                 >
@@ -584,7 +587,7 @@
                                                     >
                                                         <button
                                                             ngbDropdownItem
-                                                            (click)="filterSharedScript();"
+                                                            (click)="filterSharedScript(undefined);"
                                                         >
                                                             All Category
                                                         </button>
@@ -606,7 +609,7 @@
                                                     type="text"
                                                     placeholder="Search description or filename"
                                                     class="form-input script-search"
-                                                    (keyup)="filterSharedScript()"
+                                                    (keyup)="filterSharedScript(undefined)"
                                                     id="shared_search"
                                                     name="shared_search"
                                                     [(ngModel)]="sharedScriptModal.search"
@@ -885,6 +888,9 @@
 
 
 
+
+
+
                                         </textarea>
                                     </div>
                                     <textarea
@@ -937,6 +943,9 @@
                 </div>
             </div>
         </aside>
+
+
+
 
 
 
@@ -1075,7 +1084,13 @@
 
 
 
+
+
+
                 <div class="confirm-btn">
+
+
+
 
 
 

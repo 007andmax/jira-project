@@ -11,6 +11,8 @@ export class QuotePreview extends Quote {
     regularNote: InvoiceNote;
     message: string;
     purchaseOrder: string;
+    sentAt: number;
+    approvedAt: number;
     constructor(data = null) {
         super();
         if (data) {

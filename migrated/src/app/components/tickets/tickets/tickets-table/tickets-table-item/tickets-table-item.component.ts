@@ -70,4 +70,7 @@ export class TicketsTableItemComponent implements OnInit {
   getClassType() {
     return `priority-icon ${(this.ticket.priorityLevel && this.ticket.priorityLevel !== "MEDIUM") ? '--' + this.ticket.priorityLevel.toLowerCase() : ''}`;
   }
+  public trackById(index, item) {
+    return item.id;
+  }
 }

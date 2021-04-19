@@ -175,6 +175,9 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
     this.quote.setExpiryDate(data.day, data.month, data.year, this.companiesState.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.validate.resetValidate();
   }
+  public trackById(index, item) {
+    return item.id;
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

@@ -123,6 +123,10 @@ export class IntervalComponent implements OnInit, OnDestroy {
     }
   }
 
+  public isActiveTabMonthly() {
+    return this.activeTab == 'monthly';
+  }
+
   /**
    * Subscribe for clear data
    */

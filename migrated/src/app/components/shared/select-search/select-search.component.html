@@ -1,36 +1,46 @@
-<div [ngClass]="class" >
-  <input
- 
-    [ngClass]="{'qt-select':true,'disabled': isDisabled}"
-    [disabled]="isDisabled"
-    [id]="id"
-    [placeholder]="placeholder"
-    type="text"
-    [(ngModel)]="selectedItem"
-    class="pointer typeahead-focus1"
-    [ngClass]="(!valid) ? 'no-valid' : 'AAAAAAAAAAAAAAAAA'"
-    [inputFormatter]="formatter"
-    [resultFormatter]="formatter"
-    [ngbTypeahead]="search"
-    [container]="container"
-    (selectItem)="selectItem($event)"
-    (input)="onCheckAdd($event)"
-    (focus)="focus$.next('')"
-    (click)="click$.next('')"
-		#instance="ngbTypeahead"
-    autocomplete="new-password"
-    [attr.maxlength]="maxlength"
-    (blur)="onChange($event)"
-    (isPopupOpen)="isDropDownOpen()"
-    [readonly]="!isSearch"
-  />
-  <span *ngIf="list && !isDisabled">
-    <i *ngIf="selectedItem && !isAdd && !isBlockClear"
-       class="icn-sm icn-remove-old"
-       (click)="clearClient($event)"></i>
-    <i *ngIf="!selectedItem || isBlockClear"
-       class="icn-sm report-caret-icon"></i>
-    <i *ngIf="isAdd"  (click)="addItem()" class="icn-sm icn-product-save"></i>
-  </span>
-  <i class="loading xs" *ngIf="!list"></i>
+<div [ngClass]="class">
+    <input
+        [ngClass]="{'qt-select':true,'disabled': isDisabled}"
+        [disabled]="isDisabled"
+        [id]="id"
+        [placeholder]="placeholder"
+        type="text"
+        [(ngModel)]="selectedItem"
+        class="pointer typeahead-focus1"
+        [ngClass]="(!valid) ? 'no-valid' : 'AAAAAAAAAAAAAAAAA'"
+        [inputFormatter]="formatter"
+        [resultFormatter]="formatter"
+        [ngbTypeahead]="search"
+        [container]="container"
+        (selectItem)="selectItem($event)"
+        (input)="onCheckAdd($event)"
+        (focus)="focus$.next('')"
+        (click)="click$.next('')"
+        #instance="ngbTypeahead"
+        autocomplete="new-password"
+        [attr.maxlength]="maxlength"
+        (blur)="onChange($event)"
+        (isPopupOpen)="isDropDownOpen()"
+        [readonly]="!isSearch"
+    >
+    <span *ngIf="list && !isDisabled">
+        <i
+            *ngIf="selectedItem && !isAdd && !isBlockClear"
+            class="icn-sm icn-remove-old"
+            (click)="clearClient()"
+        ></i>
+        <i
+            *ngIf="!selectedItem || isBlockClear"
+            class="icn-sm report-caret-icon"
+        ></i>
+        <i
+            *ngIf="isAdd"
+            (click)="addItem()"
+            class="icn-sm icn-product-save"
+        ></i>
+    </span>
+    <i
+        class="loading xs"
+        *ngIf="!list"
+    ></i>
 </div>

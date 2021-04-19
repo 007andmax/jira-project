@@ -246,7 +246,7 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
       this.update_closeBtn.setDisabled(false);
     })
   }
-  private checkUpdateAndClose() {
+  checkUpdateAndClose() {
     if (this.ticketProfile.updates.length === 0) return true;
     let completeServices = true;
     let completeProducts = true;

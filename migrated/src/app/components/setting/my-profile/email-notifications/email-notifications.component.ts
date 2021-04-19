@@ -9,7 +9,7 @@ import { map } from "rxjs/operators";
   styleUrls: ["./email-notifications.component.scss"]
 })
 export class EmailNotificationsComponent implements OnInit {
-  emailNotifications: {};
+  emailNotifications: any;
 
   constructor(
     private settingService: SettingService,

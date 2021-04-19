@@ -5,7 +5,7 @@ export class InvoiceProfile extends InvoiceDto {
     id: string;
     isOverDue: boolean = false;
     paidOn: any;
-
+    readedAt: number;
     public onCheckIsOverDue() {
         var today = Date.now();
         var dueDate = new Date(this.dueDate).getTime();

@@ -115,6 +115,9 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
     this.devices = [];
     this.tab = "SYSTEM";
   }
+  public trackById(index, item) {
+    return item.id;
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

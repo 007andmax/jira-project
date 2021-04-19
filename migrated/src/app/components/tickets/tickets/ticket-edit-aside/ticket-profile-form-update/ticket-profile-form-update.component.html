@@ -64,8 +64,8 @@
                     <div class="info">
                         <h4 class="name">{{ file?.name }}</h4>
                         <p class="size">
-                            {{ formatBytes(file?.size) }}
-                            <span class="file-error">{{(file.showError) ? error : ''}}</span>
+                            {{ formatBytes(file?.size,2) }}
+                            <span class="file-error">{{(file.showError) ? file.error : ''}}</span>
                         </p>
                         <app-upload-area-progress [progress]="file?.progress"></app-upload-area-progress>
                     </div>

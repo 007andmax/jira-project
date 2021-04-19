@@ -132,4 +132,7 @@ export class GlobalSearchComponent implements OnInit {
     if (type === 'PRODUCTS') return 'Products';
     if (type === 'INVOICES') return 'Invoices';
   }
+  public trackByIndex(index, item) {
+    return index;
+  }
 }

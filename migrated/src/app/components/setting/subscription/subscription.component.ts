@@ -8,6 +8,7 @@ declare var $: any;
 })
 export class SubscriptionComponent implements OnInit, OnDestroy {
   show = false;
+  price = false;
   constructor(private settingStateService: SettingStateService) { }
 
   ngOnInit() {

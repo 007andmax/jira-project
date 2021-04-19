@@ -127,7 +127,7 @@
                                 class="col-md-1 w-7"
                                 *ngIf="deviceIpSummary.deviceIpSummaryWithLinkSpeed"
                             >
-                                {{getDeviceReport(device, 'speed')/1000000}}
+                                {{parseFloatValue(getDeviceReport(device, 'speed'))/1000000}}
                             </div>
                             <div
                                 class="col-md-1 w-4"

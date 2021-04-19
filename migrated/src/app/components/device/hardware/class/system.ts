@@ -6,6 +6,7 @@ export class System {
     caption: string;
     service_pack: string;
     version: string;
+    release_id: string;
 }
 
 export class Graphics {

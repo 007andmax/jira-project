@@ -54,5 +54,10 @@ export class DeviceIpSummaryReportComponent implements OnInit {
       return ''
     }
   };
-
+  parseFloatValue(value) {
+    return parseFloat(value);
+  }
+  public trackByIndex(index, item) {
+    return index;
+  }
 }

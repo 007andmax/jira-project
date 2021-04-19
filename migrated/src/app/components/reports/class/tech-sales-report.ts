@@ -12,13 +12,14 @@ export class TechSalesReport {
     selectedDuration = new TitleListType("Daily", "TODAY");
     startDate: string = '';
     endDate: string = '';
+    total: number;
     isDisabledDuration: boolean = false;
     constructor(data = null) {
         if (data) {
             this.lines = data.lines;
             this.selectedType = data.selectedType;
             this.selectedDuration = data.selectedDuration;
-
+            this.total = data.total;
             this.startDate = data.startDate;
             this.endDate = data.endDate;
         }
@@ -36,6 +37,7 @@ export class TechSalesReport {
     }
     public setDataFromRequest(data) {
         this.lines = (data.lines) ? data.lines.map(item => new TechSalesItem(item)) : [];
+        this.total = data.total;
     }
     public setType(data) {
         this.selectedType = data;

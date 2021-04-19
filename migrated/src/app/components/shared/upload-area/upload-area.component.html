@@ -1,25 +1,42 @@
-<div class="qt-fileupload" appDnd (fileDropped)="onFileDropped($event)">
-<label class="qt-fileupload__label">
-  <div class="qt-fileupload__attach-icon icon__attach-blue"></div>
-<span class="qt-fileupload__title">Drag your file here or <span class="qt-fileupload__link">Upload manually</span></span>
-<input type="file" #fileDropRef id="fileDropRef" multiple (change)="fileBrowseHandler($event.target.files)" />
-</label>
+<div
+    class="qt-fileupload"
+    appDnd
+    (fileDropped)="onFileDropped($event)"
+>
+    <label class="qt-fileupload__label">
+        <div class="qt-fileupload__attach-icon icon__attach-blue"></div>
+        <span class="qt-fileupload__title">
+            Drag your file here or
+            <span class="qt-fileupload__link">Upload manually</span>
+        </span>
+        <input
+            type="file"
+            #fileDropRef
+            id="fileDropRef"
+            multiple
+            (change)="fileBrowseHandler($event.target.files)"
+        >
+    </label>
 </div>
 <div class="files-list">
-  <div class="single-file" *ngFor="let file of files; let i = index">
-   
-    <div class="info">
-      <h4 class="name">
-        {{ file?.name }}
-      </h4>
-      <p class="size">
-        {{ formatBytes(file?.size) }} <span class="file-error">{{(file.showError) ? error : ''}}</span>
-      </p>
-      <app-upload-area-progress [progress]="file?.progress"></app-upload-area-progress>
-    </div>
-    <i class="icn-sm icn-remove-old" (click)="deleteFile(i)"></i>
-   <!-- <img src="assets/img/dnd/ic-delete-file.svg" class="delete" width="20px" alt="file" (click)="deleteFile(i)">-->
-  </div>
-</div>
+    <div
+        class="single-file"
+        *ngFor="let file of files; let i = index"
+    >
 
- 
+
+        <div class="info">
+            <h4 class="name">{{ file?.name }}</h4>
+            <p class="size">
+                {{ formatBytes(file?.size,2) }}
+                <span class="file-error">{{(file.showError) ? file.error : ''}}</span>
+            </p>
+            <app-upload-area-progress [progress]="file?.progress"></app-upload-area-progress>
+        </div>
+        <i
+            class="icn-sm icn-remove-old"
+            (click)="deleteFile(i)"
+        ></i>
+        <!-- <img src="assets/img/dnd/ic-delete-file.svg" class="delete" width="20px" alt="file" (click)="deleteFile(i)"> -->
+    </div>
+</div>

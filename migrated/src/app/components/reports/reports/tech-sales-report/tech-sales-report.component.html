@@ -48,23 +48,24 @@
                 </div>
                 <div *ngIf="onInit">
                     <div class="header-product-list-ticket">
-                        <h4 *ngIf="techSalesReport.type =='BILLED_TIME'">Billed Time</h4>
-                        <p *ngIf="techSalesReport.type =='PRODUCT_SOLD'">Products Sold</p>
+                        <h4 *ngIf="techSalesReport.selectedType.type =='BILLED_TIME'">Billed Time</h4>
+                        <p *ngIf="techSalesReport.selectedType.type =='PRODUCT_SOLD'">Products Sold</p>
                     </div>
                     <nvd3
                         [options]="chartOptionsToggler"
                         [data]="chartData"
                     ></nvd3>
                     <div class="clearfix">
-                        <div *ngIf="techSalesReport.type == 'BILLED_TIME'">
+                        <div *ngIf="techSalesReport.selectedType.type == 'BILLED_TIME'">
                             Total Hours:
                             <span>{{techSalesReport.total}} hours</span>
                         </div>
-                        <div *ngIf="techSalesReport.type == 'PRODUCT_SOLD'">
+                        <div *ngIf="techSalesReport.selectedType.type == 'PRODUCT_SOLD'">
                             Potential revenue:
                             <span>${{techSalesReport.total}}</span>
                         </div>
                     </div>
+
 
                 </div>
                 <app-report-footer *ngIf="onInit"></app-report-footer>

@@ -31,5 +31,7 @@ export class RemoteConnectionReportComponent implements OnInit {
     this.loadingInProgress = data;
     this.cd.detectChanges();
   }
-
+  public trackByIndex(index, item) {
+    return index;
+  }
 }

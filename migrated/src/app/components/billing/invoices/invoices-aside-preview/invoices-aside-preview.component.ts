@@ -129,6 +129,12 @@ export class InvoicesAsidePreviewComponent implements OnInit {
     this.open = false;
     this.invoiceProfile = null;
   }
+  public trackById(index, item) {
+    return item.id;
+  }
+  public trackByIndex(index, item) {
+    return index;
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

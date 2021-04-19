@@ -171,6 +171,9 @@ export class UsersAsideComponent implements OnInit {
     this.user.phoneNumbers.splice(i);
     this.validate.removePhoneNumber(i);
   }
+  public trackById(index, item) {
+    return item.id;
+  }
   public trackByIndex(index, item) {
     return index;
   }

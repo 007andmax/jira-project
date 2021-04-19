@@ -388,7 +388,6 @@
                 <button
                     class="form-group btn btn-success"
                     (click)="getReportBySoftwareSummary()"
-                    [disabled]="softwareSummaryReport.isGetDevices"
                 >
                     Get
           Report
@@ -864,8 +863,7 @@
                 <div class="form-group content custom-width">
                     <app-product-list
                         [type]="'REPORT'"
-                        [editItem]="product"
-                        (selectedProductItem)="selectProduct($event,i)"
+                        (selectedProductItem)="selectProduct($event)"
                     ></app-product-list>
                 </div>
             </div>
@@ -1105,8 +1103,7 @@
                 <div class="form-group content custom-width">
                     <app-product-list
                         [type]="'REPORT'"
-                        [editItem]="product"
-                        (selectedProductItem)="selectProduct($event,i)"
+                        (selectedProductItem)="selectProduct($event)"
                     ></app-product-list>
                 </div>
             </div>

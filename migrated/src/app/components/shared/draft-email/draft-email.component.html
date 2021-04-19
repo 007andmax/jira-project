@@ -1,5 +1,7 @@
-
-<div *ngIf="opened" class="qt-aside-modern draft-email-aside">
+<div
+    *ngIf="opened"
+    class="qt-aside-modern draft-email-aside"
+>
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-title">Write Draft for Companies</div>
         <div
@@ -104,7 +106,7 @@
                                     *ngIf="filesInfo.files[i].progress !== 100 && (filesInfo.files[i].code !== 500)"
                                     uib-tooltip="Re-Upload"
                                     tooltip-placement="top"
-                                    (click)="reloadAttachment(file)"
+                                    (click)="reloadAttachment(filesInfo.files[i],file)"
                                 >
                                     <i class="icn-sm icn-reupload"></i>
                                 </a>
@@ -152,5 +154,3 @@
         </div>
     </div>
 </div>
-
-

@@ -248,6 +248,9 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
     this.leftPanelStateService.goToState('new-billable');
 
   }
+  public trackById(index, item) {
+    return item.id;
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

@@ -169,7 +169,7 @@ Contact detail etc…
             <input
                 type="text"
                 [(ngModel)]="company.name"
-                (blur)="onChangeName($event)"
+                (blur)="onChangeName()"
                 placeholder="Write Company or Search Company"
             >
         </div>
@@ -185,7 +185,7 @@ Contact detail etc…
                     type="text"
                     [value]="getSelectedCompanyTypes()"
                     autocomplete="new-password"
-                    (input)="onChangeType($event)"
+                    (input)="onChangeType()"
                     placeholder="Select Company Type"
                     id="dropdownTypeCompany"
                     ngbDropdownToggle
@@ -504,6 +504,8 @@ Contact detail etc…
 
 
 
+
+
     <div class="qt-aside-modern__footer">
         <div class="qt-df qt-jc-sb qt-ai-c qt-w100">
             <div class="qt-df">
@@ -517,6 +519,8 @@ Contact detail etc…
 
 
 
+
+
                 <button
                     *ngIf="version === 'full'"
                     class="qt-button qt-mr-12"
@@ -524,6 +528,8 @@ Contact detail etc…
                 >
                     Create Company
                 </button>
+
+
 
 
 
@@ -537,6 +543,8 @@ Contact detail etc…
 
 
 
+
+
             <div class="qt-mr-50">
                 <div
                     *ngIf="version === 'full'"
@@ -545,6 +553,8 @@ Contact detail etc…
                     <div class="new-link">Create Contract</div>
                 </div>
             </div>
+
+
 
 
 

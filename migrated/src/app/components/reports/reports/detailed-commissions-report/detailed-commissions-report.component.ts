@@ -26,6 +26,9 @@ export class DetailedCommissionsReportComponent implements OnInit {
   toFixedPrice(value) {
     return value.toFixed(2);
   }
+  public trackByIndex(index, item) {
+    return index;
+  }
   public onRequest(data) {
     this.loadingInProgress = data;
     this.cd.detectChanges();

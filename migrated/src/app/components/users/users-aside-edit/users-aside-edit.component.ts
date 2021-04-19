@@ -250,4 +250,7 @@ export class UsersAsideEditComponent implements OnInit {
   public trackByIndex(index, item) {
     return index;
   }
+  public trackById(index, item) {
+    return item.id;
+  }
 }

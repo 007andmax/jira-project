@@ -53,6 +53,8 @@ export class HardwareSummaryReportComponent implements OnInit {
       return Math.floor(size / 1073741824) + 'GB'
     }
   };
-
+  public trackByIndex(index, item) {
+    return index;
+  }
 
 }

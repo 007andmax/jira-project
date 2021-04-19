@@ -189,6 +189,9 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
     this.quoteServices.convertToInvoice({ companyInfo: item.company }, item.id).subscribe((res) => {
     });
   }
+  public trackById(index, item) {
+    return item.id;
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

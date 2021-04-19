@@ -57,4 +57,7 @@ export class SoftwareSummaryReportComponent implements OnInit {
 
     }, 1000);
   }
+  public trackByIndex(index, item) {
+    return index;
+  }
 }

@@ -48,4 +48,7 @@ export class TechServiceReportComponent implements OnInit {
 
     return `${moment((date) ? new Date(date) : new Date()).format('DD/MM/YYYY')} ${(hours > 10) ? hours : "0" + hours}:${minutes} ${typeTime}`;
   }
+  public trackByIndex(index, item) {
+    return index;
+  }
 }

@@ -26,6 +26,7 @@
                                 <tbody *ngIf="ticketTemplates">
                                     <tr *ngFor="
                     let template of ticketTemplates | keyvalue;
+                    let i = index;
                     trackBy: trackByTicket
                   ">
                                         <td class="t-name">{{ template.value.title }}</td>
@@ -83,6 +84,7 @@
                                 <tbody>
                                     <tr *ngFor="
                     let template of agentTemplates | keyvalue;
+                    let i = index;
                     trackBy: trackByTicket
                   ">
                                         <td class="t-name">{{ template.value.title }}</td>
@@ -140,6 +142,7 @@
                                 <tbody>
                                     <tr *ngFor="
                     let template of invoiceTemplates | keyvalue;
+                    let i = index;
                     trackBy: trackByTicket
                   ">
                                         <td class="t-name">{{ template.value.title }}</td>
@@ -189,6 +192,8 @@
 
 
 
+
+
 </div>
 <!-- sidebar popup edit -->
 <div
@@ -210,6 +215,8 @@
 
 
 
+
+
     <div class="qt-aside-modern__content --no-padding">
         <div class="reciept">
             <span>
@@ -225,6 +232,8 @@
                 Show Template Preview
             </a>
         </div>
+
+
 
 
 
@@ -320,6 +329,8 @@
 
 
 
+
+
     <div class="qt-aside-modern__footer">
         <div class="qt-df qt-w100 qt-ai-c qt-jc-sb">
             <div class="qt-df">
@@ -335,6 +346,8 @@
 
 
 
+
+
                 <button
                     class="qt-button --gray"
                     (click)="closeTemplete()"
@@ -342,6 +355,8 @@
                     Cancel
                 </button>
             </div>
+
+
 
 
 
@@ -362,6 +377,8 @@
             </div>
         </div>
     </div>
+
+
 
 
 

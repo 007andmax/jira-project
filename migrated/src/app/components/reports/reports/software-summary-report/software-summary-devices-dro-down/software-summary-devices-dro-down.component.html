@@ -11,6 +11,7 @@
     ></div>
 
 
+
     <mat-error
         class="app-drop-down__error qt-tooltip-error mat-error"
         *ngIf="!validate"
@@ -33,6 +34,7 @@
     >
 
 
+
     <span
         class="app-drop-down__right-icon pointer"
         *ngIf="list && !isDisabled"
@@ -41,7 +43,7 @@
         <i
             *ngIf="selectedItem && !isAdd && !isBlockClear"
             class="icn-sm icn-remove-old"
-            (click)="clearClient($event)"
+            (click)="clearClient()"
         ></i>
         <i
             *ngIf="(!selectedItem || isBlockClear) && !isAdd && !preloader"
