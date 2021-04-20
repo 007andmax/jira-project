@@ -24,7 +24,6 @@ import { CronEditorModule } from 'cron-editor';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { NgxSelectModule } from 'ngx-select-ex';
 // import { ShowHidePasswordModule } from 'ngx-show-hide-password';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppComponent } from './app.component';
 import { PasswordManagerComponent } from './components/password-manager/password-manager.component';
 import { LeftPanelComponent } from './components/left-panel/left-panel.component';
@@ -821,7 +820,6 @@ declare var $: any;
     }),
     CronEditorModule,
     ImageCropperModule,
-    FontAwesomeModule,
     NvD3Module,
     BrowserAnimationsModule,
     IgxTimePickerModule,
