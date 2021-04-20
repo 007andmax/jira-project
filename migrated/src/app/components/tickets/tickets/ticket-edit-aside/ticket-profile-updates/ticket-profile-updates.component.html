@@ -7,8 +7,6 @@
         Ticket
     Updates
     </div>
-
-
     <div class="ticket-updates__ticket">
         <ng-template
             ngFor
@@ -19,22 +17,25 @@
         >
             <app-ticket-profile-updates-note
                 class="ticket-updates__ticket-item"
-                (onRemove)="removeUpdate()"
+                (onRemove)="removeUpdate($event)"
                 *ngIf="update.type === 'NOTE' || update.type === 'SALE_QUOTE_REVIEW_NOTE'"
                 [idTicket]="ticketProfile.id"
                 [update]="update"
+                [isBlockChange]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
             >
             </app-ticket-profile-updates-note>
             <app-ticket-profile-updates-product
                 class="ticket-updates__ticket-item"
                 *ngIf="update.type === 'PRODUCT'"
                 [update]="update"
+                [isBlockChange]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
             >
             </app-ticket-profile-updates-product>
             <app-ticket-profile-updates-service
                 class="ticket-updates__ticket-item"
                 *ngIf="update.type === 'SERVICE'"
                 [update]="update"
+                [isBlockChange]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
             >
             </app-ticket-profile-updates-service>
         </ng-template>

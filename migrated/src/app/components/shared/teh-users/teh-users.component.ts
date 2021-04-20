@@ -25,6 +25,7 @@ export class TehUsersComponent implements OnInit, OnDestroy {
   @Input() selectedMode: string = MULTIPLE_SELECT;
   @Input() editUsers = [];
   @Input() editMode: boolean = false;
+  @Input() isDisabled: boolean = false;
   @Input() type: string = RECURRING_TICEKTS;
   users: Array<TechUserItem> = [];
   sub = new Subscription();
@@ -53,7 +54,6 @@ export class TehUsersComponent implements OnInit, OnDestroy {
           this.selectedUsers = [item];
         }
       })
-      console.log("this.selectedUsers", this.selectedUsers);
     }
     this.onInitClearState();
     this.checUsersForEdit();

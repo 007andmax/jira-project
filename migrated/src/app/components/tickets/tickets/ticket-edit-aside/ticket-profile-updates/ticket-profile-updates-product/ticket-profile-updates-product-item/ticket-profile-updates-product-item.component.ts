@@ -11,10 +11,11 @@ import { TicketProfileProduct } from '../../../../class/ticket-profile-product';
 export class TicketProfileUpdatesProductItemComponent implements OnInit {
   @Input() product: TicketProfileProduct;
   @Input() update: TicketProfileUpdate;
-  editMode:boolean = false;
+  @Input() isBlockChange: boolean;
+  editMode: boolean = false;
   constructor() { }
 
   ngOnInit() {
   }
-  
+
 }

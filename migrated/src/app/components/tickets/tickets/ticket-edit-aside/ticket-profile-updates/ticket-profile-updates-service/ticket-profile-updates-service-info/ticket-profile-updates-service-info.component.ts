@@ -21,6 +21,7 @@ export class TicketProfileUpdatesServiceInfoComponent implements OnInit {
   @Input() update: TicketProfileUpdate;
   @Input() service: TicketProfileService;
   @Output() onEdit = new EventEmitter();
+  @Input() isBlockChange: boolean;
   changeDate: boolean = false;
   userService = [];
   listTehUsers = [];
@@ -66,6 +67,7 @@ export class TicketProfileUpdatesServiceInfoComponent implements OnInit {
     return `${(hours < 10) ? '0' + hours : hours} : ${(minutes < 10) ? '0' + minutes : minutes}`
   }
   setComplete() {
+    if (this.isBlockChange) return;
     this.service.setCompleted(!this.service.completed);
     this.updateService();
   }

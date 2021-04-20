@@ -34,7 +34,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
    * @param {TagsStateService} tagsState to work with tags state
    */
   public constructor(
-    private tagsService: TagsService,
+    public tagsService: TagsService,
     private tagsState: CompanyTagsStateService,
     public cd: ChangeDetectorRef
   ) { }
@@ -61,7 +61,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
   /**
   * Subscribe for edit mode
   */
-  private onCheckEditItem() {
+  onCheckEditItem() {
     let getTagsFromEdit = this.tagsState.getTagsFromEdit().subscribe((data) => {
       this.selectedTag = data;
     });
@@ -71,7 +71,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
   /**
   * Subscribe for clear data
   */
-  private onInitClearState() {
+  onInitClearState() {
     let getClearState = this.tagsState.getClearState().subscribe(() => this.close());
     this.sub.add(getClearState);
   }

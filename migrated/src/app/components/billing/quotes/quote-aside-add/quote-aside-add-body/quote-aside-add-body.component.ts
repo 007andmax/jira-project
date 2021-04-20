@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { CompanyProfile } from 'src/app/components/companies/class/company-profile';
 import { CompanyUpdate } from 'src/app/components/companies/class/company-update';
 import { InvoiceTicketsService } from 'src/app/components/setting/invoice-tickets/invoice-tickets.service';
+import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { Service } from 'src/app/interfaces/service/service';
 import { BillableService } from 'src/app/services/billable/billable.service';
@@ -25,6 +26,8 @@ import { ServiceListQuoteComponent } from '../service-list-quote/service-list-qu
 export class QuoteAsideAddBodyComponent implements OnInit {
   @ViewChild('companyEdit') companyEdit: InvoiceFormEditCustomerComponent;
   @ViewChild('servicesList') servicesList: ServiceListQuoteComponent;
+  @ViewChild('expiryDate') expiryDate: DatePickerComponent;
+
   @Input() validate: QuoteValdiate = new QuoteValdiate();
   quoteCompany: any;
   notes: Array<InvoiceNote>;
@@ -181,6 +184,7 @@ export class QuoteAsideAddBodyComponent implements OnInit {
   onChangeQuoteDate(data) {
     this.quote.setQuoteDate(data.day, data.month, data.year, this.companiesState.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.validate.resetValidate();
+    this.expiryDate.setEditDate(this.quote.validUntil);
   }
   onChangeExpiryDate(data) {
     this.quote.setExpiryDate(data.day, data.month, data.year, this.companiesState.getCurrentCompany().addresses[0].timeZone.timeOffset);

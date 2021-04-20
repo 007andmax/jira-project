@@ -242,8 +242,11 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   }
 
   onChangeTags(tags) {
-    this.ticketsStateService.onChangeTagsFilter(tags);
-
+    //   this.ticketsStateService.onChangeTagsFilter(tags);
+    this.ticketsFilter.setTags(tags);
+    this.ticketsStateService.onInitFilter(this.ticketsFilter);
+    this.getCount();
+    this.onChangeCounterFilter();
   }
   getTechUserList() {
     return this.techUsersList.map(item => {

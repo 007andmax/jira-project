@@ -1,43 +1,98 @@
 <div class="d-f jc-sb ai-fs ticket-updates__ticket-info-container">
-  <div class="ticket-updates__ticket-info">
-    <div class="ticket-updates__ticket-header d-f">
-      <div class="ticket-updates__service-header-name">Service Name</div>
-      <div class="ticket-updates__service-header-price">Time In</div>
-      <div class="ticket-updates__service-header-qty">Time Out</div>
-      <div class="ticket-updates__service-header-total">Duration</div>
-    </div>
-     <div class="ticket-updates__ticket-body">
-      <div class="d-f">
-        <div class="ticket-updates__done-status icon__task-pending"    [ngClass]="{'--done':service.completed}" (click)="setComplete()"></div>
-        <div class="ticket-updates__service-title" [textContent]="service.item.name"></div>
-        <div class="ticket-updates__service-time-in" [textContent]="getTime(service.durationStart)"></div>
-        <div class="ticket-updates__service-time-out" [textContent]="getTime(service.durationEnd)"></div>
-        <div class="ticket-updates__service-duration" [textContent]="getDuration(service.quantity)"></div>
-
-        <app-date-picker     [placement]="'bottom-right'"  [useMinDate]="false" [editMode]="true" [editDate]="service.date" [type]="'ICON'" (onChange)="onChangeDatePicker($event)"></app-date-picker>
-
-        <app-teh-users    [type]="'TICEKTS'" [editMode]="true" [selectedMode]="'SINGLE'" [editUsers]="userService" [users]="listTehUsers" (usersChange)="onChangeUser($event)"></app-teh-users>
+    <div class="ticket-updates__ticket-info">
+        <div class="ticket-updates__ticket-header d-f">
+            <div class="ticket-updates__service-header-name">Service Name</div>
+            <div class="ticket-updates__service-header-price">Time In</div>
+            <div class="ticket-updates__service-header-qty">Time Out</div>
+            <div class="ticket-updates__service-header-total">Duration</div>
         </div>
-
-      <div class="ticket-updates__service-subinfo">
-        <pre [textContent]="service.description">
-
+        <div class="ticket-updates__ticket-body">
+            <div class="d-f">
+                <div
+                    class="ticket-updates__done-status icon__task-pending"
+                    [ngClass]="{'--done':service.completed}"
+                    (click)="setComplete()"
+                ></div>
+                <div
+                    class="ticket-updates__service-title"
+                    [textContent]="service.item.name"
+                ></div>
+                <div
+                    class="ticket-updates__service-time-in"
+                    [textContent]="getTime(service.durationStart)"
+                ></div>
+                <div
+                    class="ticket-updates__service-time-out"
+                    [textContent]="getTime(service.durationEnd)"
+                ></div>
+                <div
+                    class="ticket-updates__service-duration"
+                    [textContent]="getDuration(service.quantity)"
+                ></div>
+                <app-date-picker
+                    [isDisabled]="isBlockChange"
+                    [placement]="'bottom-right'"
+                    [useMinDate]="false"
+                    [editMode]="true"
+                    [editDate]="service.date"
+                    [type]="'ICON'"
+                    (onChange)="onChangeDatePicker($event)"
+                ></app-date-picker>
+                <app-teh-users
+                    [type]="'TICEKTS'"
+                    [editMode]="true"
+                    [selectedMode]="'SINGLE'"
+                    [editUsers]="userService"
+                    [users]="listTehUsers"
+                    (usersChange)="onChangeUser($event)"
+                ></app-teh-users>
+            </div>
+            <div class="ticket-updates__service-subinfo">
+                <pre [textContent]="service.description">
         </pre>
-      </div>
+            </div>
+        </div>
+        <span
+            class="tag__modern ticket-updates__service-tag-completed"
+            *ngIf="service.completed"
+            [textContent]="'Completed on ' + getDate(service.date)"
+        ></span>
+        <span
+            class="tag__modern ticket-updates__service-tag-completed"
+            *ngIf="!service.completed && service.date"
+            [textContent]="'Due date - ' + getDate(service.date)"
+        ></span>
     </div>
-    <span  class="tag__modern ticket-updates__service-tag-completed" *ngIf="service.completed" [textContent]="'Completed on ' + getDate(service.date)"></span>
-    <span  class="tag__modern ticket-updates__service-tag-completed" *ngIf="!service.completed && service.date" [textContent]="'Due date - ' + getDate(service.date)"></span>
-
-  </div>
-  <div ngbDropdown  >
-  <div class="ticket-updates__more icon__more" id="dropdownBasic1"
-  ngbDropdownToggle></div>
-  <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="dropdown-menu-qt">
-    <ul>
-      <li ngbDropdownItem   (click)="edit()"><i class="icn-16 edit-grey-ng2"></i>Edit</li>
-      <li ngbDropdownItem (click)="removeService()"  ><i class="icn-16 archive-grey-ng2"></i>Delete</li>
-    </ul>
-
-  </div>
-</div>
+    <div
+        ngbDropdown
+        *ngIf="!isBlockChange"
+    >
+        <div
+            class="ticket-updates__more icon__more"
+            id="dropdownBasic1"
+            ngbDropdownToggle
+        ></div>
+        <div
+            ngbDropdownMenu
+            aria-labelledby="dropdownBasic1"
+            class="dropdown-menu-qt"
+        >
+            <ul>
+                <li
+                    ngbDropdownItem
+                    (click)="edit()"
+                >
+                    <i class="icn-16 edit-grey-ng2"></i>
+                    Edit
+                </li>
+                <li
+                    ngbDropdownItem
+                    (click)="removeService()"
+                >
+                    <i class="icn-16 archive-grey-ng2"></i>
+                    Delete
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>

@@ -22,6 +22,7 @@ import { NoteService } from 'src/app/services/note/note.service';
 import { InvoiceValidate } from './class/invoice-validate';
 import { InvoiceProfileTicket } from '../../class/invoice-profile-ticket';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
 
 @Component({
   selector: 'app-invoice-form',
@@ -30,12 +31,14 @@ import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 })
 export class InvoiceFormComponent implements OnInit, OnDestroy {
   @ViewChild('companyEdit') companyEdit: InvoiceFormEditCustomerComponent;
+  @ViewChild('editTicketsBtn') editTicketsBtn: DisabledBtnDirective;
   @Output() onUpdateInvoice = new EventEmitter();
   @Input() invoice: InvoiceLock;
   @Input() invoiceNumber: string;
   @Input() invoiceNotes: Array<InvoiceNote> = [];
   @Input() company: CompanyProfile = new CompanyProfile();
   @Input() invoiceTaxNumber: InvoiceTaxNumber;
+  changedSubjectTickets: Array<InvoiceProfileTicket> = [];
   formatDate: string = FORMAT_DATE_2;
   toggleDiscount: boolean = false;
   currentCompany: any;
@@ -53,6 +56,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     private elRef: ElementRef,
     public cd: ChangeDetectorRef,
     private noteService: NoteService,
+    private ticketsService: TicketsService,
     private companiesStateService: CompaniesStateService) { }
 
 
@@ -160,6 +164,29 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     this.invoice.invoiceDataDto.dueDate = dueDate;
   }
   onEditTickets() {
+    this.editTicketsBtn.setDisabled(true);
+    this.changedSubjectTickets = [];
+    this.editTickets.forEach((item, index) => {
+      if (item.changeSubject) this.changedSubjectTickets.push(item);
+    });
+    if (this.changedSubjectTickets.length > 0) {
+      forkJoin(
+        this.changedSubjectTickets.map(item => this.ticketsService.changeSubjectNoteTicket(item.id, item.newSubject, item.note))
+      )
+        .subscribe(result => {
+          console.log("result", result);
+          console.log("this.changedSubjectTickets", this.changedSubjectTickets);
+          result.forEach((item: any, i) => {
+            let index = this.invoice.invoiceDataDto.tickets.findIndex(ticket => ticket.id === item.id);
+            if (index > -1) this.onUpdateSubjectTicket(this.changedSubjectTickets[i].newSubject, index)
+          })
+          this.onCompleteEditTickets();
+        });
+    } else {
+      this.onCompleteEditTickets();
+    }
+  }
+  onCompleteEditTickets() {
     let expensesToUpdate = [];
     this.editTickets.forEach((item, index) => {
       expensesToUpdate = [...expensesToUpdate, ...item.getDateForUpdate()];

@@ -13,54 +13,34 @@
         Assigned Users
     </div>
     <div
-        class="device-user pointer"
-        *ngIf="type === 'COMPANY_SETTINGS'"
-        id="dropdownTehuser"
-        style="margin-bottom: 10px;width: 109px;"
-        ngbDropdownToggle
-        [textContent]="(selectedUsers.length === 1) ? ticketsListService.getUserName(selectedUsers[0]) : 'Assigned Users'"
-    >
-    </div>
-    <div
         class="tech__user-icon icon__assign-user"
         *ngIf="type === 'TICEKTS' && selectedUsers.length === 0 || type === 'CONTRACT'"
         id="dropdownTehuser"
         ngbDropdownToggle
     ></div>
-    <div
+    <button
         class="ticket-updates__photo-people"
         *ngIf="type === 'TICEKTS' && selectedUsers.length === 1"
         [textContent]="ticketsListService.getAssignedUserNameForAvatar(selectedUsers[0])"
         [ngStyle]="{'background': ticketsListService.getStyleAvatar(selectedUsers[0])}"
         id="dropdownTehuser"
         ngbDropdownToggle
+        [disabled]="isDisabled"
         placement="top"
         [ngbTooltip]="ticketsListService.getUserName(selectedUsers[0])"
-    ></div>
-
-
-
+    ></button>
     <div
         class="teh-user-body"
         ngbDropdownMenu
         aria-labelledby="dropdownTehuser"
     >
         <div class="select-wrapper dropdown-assign-ticket fixed-assign">
-
-
-
             <div class="content">
-
-
-
                 <form class="px-4 py-3">
                     <div
                         class="assign-ticket"
                         assign-user
                     >
-
-
-
                         <div class="assign-ticket-content">
                             <div class="assign-ticket-header">
                                 <div class="clearfix">
@@ -72,9 +52,6 @@
                                             autocomplete="off"
                                             (input)="onSearch($event)"
                                         >
-
-
-
                                     </div>
                                 </div>
                             </div>
@@ -131,31 +108,12 @@
                                             </a>
                                         </div>
                                     </ng-template>
-
-
-
-
                                 </div>
                             </div>
                         </div>
-
-
-
-
                     </div>
-
-
-
-
                 </form>
-
-
-
-
             </div>
         </div>
-
-
-
     </div>
 </div>

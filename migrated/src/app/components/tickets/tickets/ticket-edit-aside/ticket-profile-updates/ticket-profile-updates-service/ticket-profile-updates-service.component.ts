@@ -14,7 +14,7 @@ import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.comp
 })
 export class TicketProfileUpdatesServiceComponent implements OnInit {
   @Input() update: TicketProfileUpdate;
-
+  @Input() isBlockChange: boolean;
   constructor(public ticketsListService: TicketsListService,
     private confirmStateService: ConfirmStateService,
     private ticketStateService: TicketStateService,

@@ -22,7 +22,9 @@ export class QuoteAdd {
     subject: string;
     validUntil: number = new Date().getTime();
     constructor() {
-
+        let current = new Date();
+        current.setMonth(current.getMonth() + 1);
+        this.validUntil = current.getTime();
     }
     public checkValidateServicesByCompany(services) {
         this.services.forEach(item => {
@@ -118,6 +120,9 @@ export class QuoteAdd {
             let finalDate = new Date(currentTime - (current.getTimezoneOffset() * 60000) - timeOffset);
             this.date = finalDate.getTime();
         }
+        let validUntil = new Date(this.date);
+        validUntil.setMonth(new Date(this.date).getMonth() + 1);
+        this.validUntil = validUntil.getTime();
     }
     public setExpiryDate(day, month, year, timeOffset) {
         let current = new Date();

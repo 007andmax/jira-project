@@ -1,2 +1,12 @@
-<app-ticket-profile-updates-note-info [update]="update" *ngIf="!editMode" (onEdit)="editMode = true"></app-ticket-profile-updates-note-info>
-<app-ticket-profile-updates-note-edit [idTicket]="idTicket" [update]="update" *ngIf="editMode" (onEdit)="editMode = false"></app-ticket-profile-updates-note-edit>
+<app-ticket-profile-updates-note-info
+    [isBlockChange]="isBlockChange"
+    [update]="update"
+    *ngIf="!editMode"
+    (onEdit)="editMode = true"
+></app-ticket-profile-updates-note-info>
+<app-ticket-profile-updates-note-edit
+    [idTicket]="idTicket"
+    [update]="update"
+    *ngIf="editMode"
+    (onEdit)="editMode = false"
+></app-ticket-profile-updates-note-edit>

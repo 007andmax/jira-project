@@ -13,8 +13,8 @@
                 <span class="qt-fs-11 qt-ff-sb">Subject:</span>
                 <input
                     class="qt-mr-10 qt-ml-10 qt-fg"
-                    [(ngModel)]="ticket.subject"
-                    (blur)="onChangeSubject()"
+                    [(ngModel)]="ticket.newSubject"
+                    (input)="onChangeSubject()"
                 >
             </div>
         </div>

@@ -1,14 +1,34 @@
-<div class="d-f  ticket-updates__update-block"  >
-  <div class="ticket-updates__ticket-photo" [textContent]="ticketsListService.getAssignedUserNameForAvatar(update.user)"
-  [ngStyle]="{'background': ticketsListService.getStyleAvatar(update.user)}"></div>
-
-  <div class="ticket-updates__content">
-    <div class="ticket-updates__author-line d-f jc-sb ai-c ">
-      <div><span class="ticket-updates__author" [textContent]="ticketsListService.getUserName(update.user)"></span> <span class="ticket-updates__add-note">&nbsp;added a note</span></div>
-      <div class="ticket-updates__delete icon__remove" (click)="remove()" placement="top" ngbTooltip="Delete Update"></div>
+<div class="d-f  ticket-updates__update-block">
+    <div
+        class="ticket-updates__ticket-photo"
+        [textContent]="ticketsListService.getAssignedUserNameForAvatar(update.user)"
+        [ngStyle]="{'background': ticketsListService.getStyleAvatar(update.user)}"
+    ></div>
+    <div class="ticket-updates__content">
+        <div class="ticket-updates__author-line d-f jc-sb ai-c ">
+            <div>
+                <span
+                    class="ticket-updates__author"
+                    [textContent]="ticketsListService.getUserName(update.user)"
+                ></span>
+                <span class="ticket-updates__add-note">&nbsp;added a note</span>
+            </div>
+            <div
+                class="ticket-updates__delete icon__remove"
+                *ngIf="!isBlockChange"
+                (click)="remove()"
+                placement="top"
+                ngbTooltip="Delete Update"
+            ></div>
+        </div>
+        <app-ticket-profile-updates-note-item
+            [isBlockChange]="isBlockChange"
+            [idTicket]="idTicket"
+            [update]="update"
+        ></app-ticket-profile-updates-note-item>
+        <app-ticket-profile-updates-footer
+            [date]="update.createdAt"
+            [shares]="update.shares"
+        ></app-ticket-profile-updates-footer>
     </div>
-   <app-ticket-profile-updates-note-item [idTicket]="idTicket" [update]="update"></app-ticket-profile-updates-note-item>
-    <app-ticket-profile-updates-footer [date]="update.createdAt" [shares]="update.shares"></app-ticket-profile-updates-footer>
-  </div>
-
 </div>

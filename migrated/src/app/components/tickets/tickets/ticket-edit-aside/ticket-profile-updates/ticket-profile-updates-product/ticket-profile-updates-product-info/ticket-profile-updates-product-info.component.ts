@@ -21,6 +21,7 @@ export class TicketProfileUpdatesProductInfoComponent implements OnInit {
   @Input() product: TicketProfileProduct;
   @Input() update: TicketProfileUpdate;
   @Output() onEdit = new EventEmitter();
+  @Input() isBlockChange: boolean;
   changeDate: boolean = false;
   userService = [];
   listTehUsers = [];
@@ -64,6 +65,7 @@ export class TicketProfileUpdatesProductInfoComponent implements OnInit {
     this.onEdit.emit(null);
   }
   setComplete() {
+    if (this.isBlockChange) return;
     this.product.setCompleted(!this.product.completed);
     this.updateProduct();
   }
@@ -96,5 +98,4 @@ export class TicketProfileUpdatesProductInfoComponent implements OnInit {
     modalRef.componentInstance.message = `Do you want to remove the item?`;
 
   }
-
 }
