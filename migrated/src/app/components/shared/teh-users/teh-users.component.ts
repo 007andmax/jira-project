@@ -53,6 +53,7 @@ export class TehUsersComponent implements OnInit, OnDestroy {
           this.selectedUsers = [item];
         }
       })
+      console.log("this.selectedUsers", this.selectedUsers);
     }
     this.onInitClearState();
     this.checUsersForEdit();

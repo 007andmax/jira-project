@@ -46,7 +46,7 @@ export class CompanyComponent implements OnInit {
   ngOnInit() {
     this.currentUser = this.userService.currentUser;
     // this.getClientCompanies();
-    this.getCompanies();
+
     this.getUsers();
   }
 
@@ -69,11 +69,12 @@ export class CompanyComponent implements OnInit {
       )
       .subscribe(
         (techUsers: any) => {
-          this.loading = false; $(".loading").css("display", "none");
+          //   this.loading = false; $(".loading").css("display", "none");
           this.activeTechUsers = techUsers;
+          this.getCompanies();
         },
         error => {
-          this.loading = false; $(".loading").css("display", "none");
+          //  this.loading = false; $(".loading").css("display", "none");
         }
       );
   }
@@ -102,8 +103,7 @@ export class CompanyComponent implements OnInit {
     if (!techLead || !company) {
       return;
     }
-
-    const techLeadId = techLead.id;
+    const techLeadId = techLead[0].id;
     this.loading = true; $(".loading").css("display", "block");
     this.commissionService.setTechLead(company.id, techLeadId).subscribe(
       res => {
@@ -134,7 +134,7 @@ export class CompanyComponent implements OnInit {
    */
   selectedActiveTechUsers(company, i): any {
     if (company.techLeadId === null) {
-      return;
+      return [];
     }
     let techUser: any = [];
     if (this.activeTechUsers) {
@@ -145,8 +145,8 @@ export class CompanyComponent implements OnInit {
         }
       });
     }
-
-    return techUser.length > 0 && techUser[0] ? techUser[0].firstName : null;
+    //  console.log("techUser", techUser);
+    return techUser;
   }
 
   selectedActiveTechUserURL(company, i): any {
@@ -192,7 +192,7 @@ export class CompanyComponent implements OnInit {
           this.loading = false; $(".loading").css("display", "none");
           if (custCompany) {
             this.clientsCompanies = custCompany;
-
+            console.log("this.clientsCompanies", this.clientsCompanies);
           }
         },
         error => {

@@ -28,48 +28,14 @@
                     </td>
                     <td class="sp">
                         <div class>
-                            <ng-select
-                                class="disable-arrow disable-dropdown disable-clear-all"
-                                [items]="activeTechUsers"
-                                bindLabel="firstName"
-                                bindValue="firstName"
-                                (change)="setTechLead($event, company)"
-                                placeholder="Select Tech Users"
-                                [ngModel]="selectedActiveTechUsers(company, i)"
-                            >
-                                <ng-template
-                                    ng-label-tmp
-                                    let-item="item"
-                                    let-clear="clear"
-                                >
-                                    <b>{{ getFullName(item) }}</b>
-                                </ng-template>
-                                <ng-template
-                                    ng-option-tmp
-                                    let-item="item"
-                                    let-index="index"
-                                >
-                                    <img
-                                        height="15"
-                                        width="15"
-                                        *ngIf="item.avatar"
-                                        src="/users/{{ item.id }}/image.jpg?t={{
-                      item.avatar.updatedAt
-                    }}"
-                                    >
-                                    <span *ngIf="item.avatar === null">
-                                        {{
-                    dropFrstLstChar(item)
-                  }}
-                                    </span>
-                                    <div class="info">
-                                        <h5>
-                                            {{ item.firstName }} {{ item.lastName }}
-                                        </h5>
-                                        <span class="email">{{ item.primaryEmail }}</span>
-                                    </div>
-                                </ng-template>
-                            </ng-select>
+                            <app-teh-users
+                                [users]="activeTechUsers"
+                                [editMode]="true"
+                                [type]="'COMPANY_SETTINGS'"
+                                [selectedMode]="'SINGLE'"
+                                [editUsers]="selectedActiveTechUsers(company, i)"
+                                (usersChange)="setTechLead($event,company)"
+                            ></app-teh-users>
                         </div>
                     </td>
                 </tr>

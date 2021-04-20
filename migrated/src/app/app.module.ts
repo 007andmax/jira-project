@@ -11,8 +11,7 @@ import {
 } from '@angular/upgrade/static';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SelectModule } from 'ng2-select';
-// import { SelectModule } from 'ng2-select';
+
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { IgxTimePickerModule } from 'igniteui-angular';
 import { AngularEditorModule } from '@kolkov/angular-editor';

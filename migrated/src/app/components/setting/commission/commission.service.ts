@@ -188,6 +188,7 @@ export class CommissionService {
     if (!cmpId || !techLeadId) {
       return;
     }
+    console.log("f");
     return this.http.put(
       `${this.SET_TECHLEAD_API}company/${cmpId}/setTechLead/${techLeadId}`,
       ''

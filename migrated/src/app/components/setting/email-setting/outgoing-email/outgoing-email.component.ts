@@ -27,6 +27,7 @@ export class OutgoingEmailComponent implements OnInit {
   portIsEmpty = false;
   initialized = false;
   create = false;
+  showPassword = false;
   emailAlias: "";
   smtpPromise;
   inboxEnabledPromise;

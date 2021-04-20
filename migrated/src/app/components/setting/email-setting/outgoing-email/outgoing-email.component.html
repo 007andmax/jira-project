@@ -10,35 +10,30 @@
     </p>
     <form
         [formGroup]="smtpForm"
-        (ngSubmit)="saveSMTP(smtpForm)"
+        (ngSubmit)="saveSMTP(smtpForm,undefined)"
     >
         <div class="f-row">
             <div class="f-col col-50">
-                <label *ngIf="!submitted || !f.emailAlias.errors">Alias Name</label>
+                <label *ngIf="!submitted || !smtpForm.controls['emailAlias'].errors">Alias Name</label>
                 <div
-                    *ngIf="submitted && f.emailAlias.errors"
+                    *ngIf="submitted && smtpForm.controls['emailAlias'].errors"
                     class="invalid-feedback"
                 >
-                    <div *ngIf="f.emailAlias.errors.required">Email Alias is required</div>
-                    <div *ngIf="f.emailAlias.errors.minlength">Email Alias is too short.</div>
-                    <div *ngIf="f.emailAlias.errors.maxlength">Email Alias is too large.</div>
+                    <div *ngIf="smtpForm.controls['emailAlias'].errors.required">Email Alias is required</div>
+                    <div *ngIf="smtpForm.controls['emailAlias'].errors.minlength">Email Alias is too short.</div>
+                    <div *ngIf="smtpForm.controls['emailAlias'].errors.maxlength">Email Alias is too large.</div>
                 </div>
                 <div class="form-row">
                     <input
                         type="text"
                         class="form-input"
-                        [ngClass]="{ 'is-invalid': submitted && f.emailAlias.errors }"
+                        [ngClass]="{ 'is-invalid': submitted && smtpForm.controls['emailAlias'].errors }"
                         placeholder="Enter Alias Name"
                         formControlName="emailAlias"
                         (blur)="saveEmailAlias()"
                     >
                 </div>
             </div>
-
-
-
-
-
             <div class="f-col col-50">
                 <label>Outgoing mail server</label>
                 <div class="form-row">
@@ -58,49 +53,34 @@
                     </select>
                 </div>
             </div>
-
-
-
-
-
             <div class="f-col col-50">
-                <label *ngIf="!submitted || !f.domain.errors">Domain</label>
+                <label *ngIf="!submitted || !smtpForm.controls['domain'].errors">Domain</label>
                 <div
-                    *ngIf="submitted && f.domain.errors"
+                    *ngIf="submitted && smtpForm.controls['domain'].errors"
                     class="invalid-feedback"
                 >
-                    <div *ngIf="f.domain.errors.required">domain is required</div>
-                    <div *ngIf="f.domain.errors.Pattern">Please enter a valid domain.</div>
+                    <div *ngIf="smtpForm.controls['domain'].errors.required">domain is required</div>
+                    <div *ngIf="smtpForm.controls['domain'].errors.Pattern">Please enter a valid domain.</div>
                 </div>
                 <div class="form-row">
                     <input
                         type="text"
                         class="form-input"
                         placeholder="Enter Domain"
-                        [ngClass]="{ 'is-invalid': submitted && f.domain.errors }"
+                        [ngClass]="{ 'is-invalid': submitted && smtpForm.controls['domain'].errors }"
                         formControlName="domain"
                     >
                 </div>
             </div>
-
-
-
-
-
             <div class="f-col col-25">
-                <label *ngIf="!submitted || !f.port.errors">Port</label>
-
-
-
-
-
+                <label *ngIf="!submitted || !smtpForm.controls['port'].errors">Port</label>
                 <div
-                    *ngIf="submitted && f.port.errors"
+                    *ngIf="submitted && smtpForm.controls['port'].errors"
                     class="invalid-feedback"
                 >
-                    <div *ngIf="f.port.errors.required">port is required</div>
-                    <div *ngIf="f.port.errors.min">Value must be greater then 0.</div>
-                    <div *ngIf="f.port.errors.max">Value must be smaller then 65535.</div>
+                    <div *ngIf="smtpForm.controls['port'].errors.required">port is required</div>
+                    <div *ngIf="smtpForm.controls['port'].errors.min">Value must be greater then 0.</div>
+                    <div *ngIf="smtpForm.controls['port'].errors.max">Value must be smaller then 65535.</div>
                 </div>
                 <div class="form-row">
                     <input
@@ -108,15 +88,10 @@
                         class="form-input"
                         placeholder="Enter Port"
                         formControlName="port"
-                        [ngClass]="{ 'is-invalid': submitted && f.port.errors }"
+                        [ngClass]="{ 'is-invalid': submitted && smtpForm.controls['port'].errors }"
                     >
                 </div>
             </div>
-
-
-
-
-
             <div class="f-col col-25">
                 <label>Encryption</label>
                 <div class="form-row">
@@ -131,20 +106,15 @@
                     </select>
                 </div>
             </div>
-
-
-
-
-
             <div class="f-col col-50">
-                <label *ngIf="(!submitted || !f.login.errors) && isSMTPLoginUnique">Login</label>
+                <label *ngIf="(!submitted || !smtpForm.controls['login'].errors) && isSMTPLoginUnique">Login</label>
                 <div
-                    *ngIf="submitted && f.login.errors"
+                    *ngIf="submitted && smtpForm.controls['login'].errors"
                     class="invalid-feedback"
                 >
-                    <div *ngIf="f.login.errors.required">Login is required</div>
-                    <div *ngIf="f.login.errors.pattern">Please enter a valid email address.</div>
-                    <div *ngIf="f.login.errors.maxlength">Email mustn't be greater then 128 chars</div>
+                    <div *ngIf="smtpForm.controls['login'].errors.required">Login is required</div>
+                    <div *ngIf="smtpForm.controls['login'].errors.pattern">Please enter a valid email address.</div>
+                    <div *ngIf="smtpForm.controls['login'].errors.maxlength">Email mustn't be greater then 128 chars</div>
                 </div>
                 <label *ngIf="!isSMTPLoginUnique">Login is not unique</label>
                 <div class="form-row">
@@ -157,18 +127,13 @@
                     >
                 </div>
             </div>
-
-
-
-
-
             <div class="f-col col-50">
-                <label *ngIf="!submitted || !f.password.errors">Password</label>
+                <label *ngIf="!submitted || !smtpForm.controls['password'].errors">Password</label>
                 <div
-                    *ngIf="submitted && f.password.errors"
+                    *ngIf="submitted && smtpForm.controls['password'].errors"
                     class="invalid-feedback"
                 >
-                    <div *ngIf="f.password.errors.required">Password is required</div>
+                    <div *ngIf="smtpForm.controls['password'].errors.required">Password is required</div>
                 </div>
                 <div class="form-row password">
                     <input
@@ -177,11 +142,6 @@
                         placeholder="Enter password"
                         formControlName="password"
                     >
-
-
-
-
-
                     <a
                         href="javascript:;"
                         class="password-co"
@@ -220,11 +180,6 @@
     </form>
     <!-- <div class="loading" *ngIf="loading"></div> -->
 </div>
-
-
-
-
-
 <div
     class="sidebar-popup"
     [class.opened]="create"
@@ -244,7 +199,7 @@
     </div>
     <div class="middle-content">
         <form
-            (ngSubmit)="f.form.valid && sendTestEmail(smtpForm, testEmailForm, true)"
+            (ngSubmit)="smtpForm.valid && sendTestEmail(smtpForm, testEmailForm, true)"
             #f="ngForm"
             novalidate
         >
@@ -271,14 +226,14 @@
                             name="testEmail"
                             [(ngModel)]="smtp.testEmail"
                             #targetEmail="ngModel"
-                            [ngClass]="{ 'is-invalid': f.submitted && testEmail.invalid }"
+                            [ngClass]="{ 'is-invalid': submitted && smtp.testEmail.invalid }"
                             required
                         >
                         <div
-                            *ngIf="f.submitted && testEmail.invalid"
+                            *ngIf="submitted && smtp.testEmail.invalid"
                             class="invalid-feedback"
                         >
-                            <div *ngIf="testEmail.errors.required">Test Email is required</div>
+                            <div *ngIf="smtp.testEmail.errors.required">Test Email is required</div>
                         </div>
                     </div>
                 </div>
