@@ -407,6 +407,9 @@ import { PasswordManagerEditLinkedComponent } from './components/password-manage
 import { AfterViewInitDirective } from './directives/after-view-init.directive';
 import { TicketsFilterTagsComponent } from './components/tickets/tickets/tickets-header/tickets-filter/tickets-filter-tags/tickets-filter-tags.component';
 
+import { DocumentsComponent } from './components/documents/documents.component';
+import { LeftPanelDocumentsComponent } from './components/left-panel/left-panel-documents/left-panel-documents.component';
+import { FroalaEditorModule, FroalaViewModule } from './modules/froala-editor';
 
 
 declare var $: any;
@@ -785,7 +788,9 @@ declare var $: any;
     PasswoordManagerFiltersComponent,
     PasswordManagerEditLinkedComponent,
     AfterViewInitDirective,
-    TicketsFilterTagsComponent
+    TicketsFilterTagsComponent,
+    DocumentsComponent,
+    LeftPanelDocumentsComponent
   ],
   imports: [
     BrowserModule,
@@ -825,7 +830,9 @@ declare var $: any;
     IgxTimePickerModule,
     DisabledBtnModule,
     NgxUploaderModule,
-    AngularEditorModule
+    AngularEditorModule,
+    FroalaEditorModule,
+    FroalaViewModule
   ],
   entryComponents: [
     ModalQuoteComponent,

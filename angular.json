@@ -35,7 +35,8 @@
               "node_modules/igniteui-angular/styles/igniteui-angular.css",
               "node_modules/timepicker/dist/jquery.timepicker.css",
               "./node_modules/ngx-toastr/toastr.css",
-              "src/app/components/device/styles.scss"
+              "src/app/components/device/styles.scss",
+              "node_modules/froala-editor/css/froala_editor.pkgd.css"
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js"

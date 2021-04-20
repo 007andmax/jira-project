@@ -93,6 +93,7 @@ export class LeftPanelComponent implements OnInit {
           if (this.router.url.includes(`ng2/recurring-tickets`)) this.state = 'recurring-tickets';
           if (this.router.url.includes(`ng2/quickSupport`)) this.state = 'new-quickSupport';
           if (this.router.url.includes(`ng2/billable-tickets`)) this.state = 'new-billable-tickets';
+          if (this.router.url.includes(`ng2/documents`)) this.state = 'new-documents';
 
           if (this.router.url.includes(`ng2/report/byProducts`)) this.state = 'byProducts';
           if (this.router.url.includes(`ng2/report/byCustomers`)) this.state = 'byCustomers';
@@ -189,6 +190,7 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'recurring-tickets') this.goToLink('/ng2/recurring-tickets');
       if (this.state === 'new-quickSupport') this.goToLink('/ng2/quickSupport');
       if (this.state === 'new-billable-tickets') this.goToLink('/ng2/billable-tickets');
+      if (this.state === 'new-documents') this.goToLink('/ng2/documents');
 
       if (this.state === 'byProducts' ||
         this.state === 'byCustomers' ||
