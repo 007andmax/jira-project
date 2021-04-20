@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CompanyTagsComponent } from 'src/ng2/app/components/companies/company-tags/company-tags.component';
+import { CompanyTagsComponent } from 'src/app/components/companies/company-tags/company-tags.component';
 
 @Component({
   selector: 'app-tickets-filter-tags',

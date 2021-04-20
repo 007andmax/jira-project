@@ -407,6 +407,7 @@ import { PasswoordManagerDevicesUsersComponent } from './components/password-man
 import { PasswoordManagerFiltersComponent } from './components/password-manager/passwoord-manager-header/passwoord-manager-filters/passwoord-manager-filters.component';
 import { PasswordManagerEditLinkedComponent } from './components/password-manager/password-manager-edit-aside/password-manager-edit-linked/password-manager-edit-linked.component';
 import { AfterViewInitDirective } from './directives/after-view-init.directive';
+import { TicketsFilterTagsComponent } from './components/tickets/tickets/tickets-header/tickets-filter/tickets-filter-tags/tickets-filter-tags.component';
 
 
 
@@ -785,7 +786,8 @@ declare var $: any;
     PasswoordManagerDevicesUsersComponent,
     PasswoordManagerFiltersComponent,
     PasswordManagerEditLinkedComponent,
-    AfterViewInitDirective
+    AfterViewInitDirective,
+    TicketsFilterTagsComponent
   ],
   imports: [
     BrowserModule,

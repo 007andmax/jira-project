@@ -5,7 +5,7 @@ import { CompanyProfile } from 'src/app/components/companies/class/company-profi
 import { BillableStateService } from 'src/app/states/billable/billable-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { CompanyUpdate } from 'src/app/components/companies/class/company-update';
-import { Subscription } from 'rxjs';
+import { forkJoin, Subscription } from 'rxjs';
 import { InvoiceFormEditCustomerComponent } from './invoice-form-edit-customer/invoice-form-edit-customer.component';
 import { PartialUpdate } from './class/partial-update';
 import { BillableService } from 'src/app/services/billable/billable.service';
@@ -23,6 +23,7 @@ import { InvoiceValidate } from './class/invoice-validate';
 import { InvoiceProfileTicket } from '../../class/invoice-profile-ticket';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { TicketsService } from 'src/app/services/tickets/tickets.service';
 
 @Component({
   selector: 'app-invoice-form',

@@ -17,7 +17,7 @@
         >
             <app-ticket-profile-updates-note
                 class="ticket-updates__ticket-item"
-                (onRemove)="removeUpdate($event)"
+                (onRemove)="removeUpdate()"
                 *ngIf="update.type === 'NOTE' || update.type === 'SALE_QUOTE_REVIEW_NOTE'"
                 [idTicket]="ticketProfile.id"
                 [update]="update"
