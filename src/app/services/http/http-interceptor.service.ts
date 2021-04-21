@@ -23,7 +23,7 @@ export class HttpInterceptorService implements HttpInterceptor {
         },
         (err) => {
           if (err instanceof HttpErrorResponse) {
-            console.log("err", err);
+
             let unlockExpiredHeader = err.headers.get('SESSION_UNLOCK_EXPIRED');
             let isUnauthorized = (err.error) ? err.error.errorMessage === 'unauthorized' || err.error.authMessage === 'unauthorized' : false;
             if (isUnauthorized) {

@@ -27,7 +27,9 @@ export class ModalLockScreenComponent implements OnInit {
     config.keyboard = false;
     console.log("config", config);
   }
-
+  ngAfterViewInit() {
+    this.cd.detectChanges();
+  }
   ngOnInit() {
     this.currentUser = this.usersStateService.getCurrentUser();
     this.usersStateService.getOnGetCurrentuser().subscribe(data => {
