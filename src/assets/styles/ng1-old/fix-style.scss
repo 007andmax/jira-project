@@ -35,7 +35,11 @@ body .left-panel-full {
   background-color: #90c56b;
   border-color: #90c56b;
 }
-
+.icn-remove-old {
+  background-image: url('/assets/img/icons/close-10.png');
+  background-position: center;
+  transform: translateY(2px);
+}
 /* Datepicker */
 .ngb-dp-week .hidden {
   display: block !important;
@@ -831,6 +835,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     position: absolute;
     right: 45px;
     top: 28px;
+    background-size: cover;
   }
 }
 /* End Btn closed */
