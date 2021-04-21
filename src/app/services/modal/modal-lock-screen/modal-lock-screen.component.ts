@@ -58,6 +58,7 @@ export class ModalLockScreenComponent implements OnInit {
       this.lockScreen.setUnlocking(true);
       this.lockScreenService.unlockScreen(this.lockScreen.code).subscribe(resp => {
         //  this.activeModal.dismiss('Cross click');
+        this.show = false;
         this.lockScreen.setUnlocking(false);
         if (this.reload) window.location.reload();
       }, resp => {
