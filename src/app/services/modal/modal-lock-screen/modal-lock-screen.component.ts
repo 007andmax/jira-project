@@ -27,6 +27,7 @@ export class ModalLockScreenComponent implements OnInit {
     config.backdrop = 'static';
     config.keyboard = false;
     console.log("config", config);
+    cd.markForCheck();
   }
   ngAfterViewInit() {
     this.cd.detectChanges();
