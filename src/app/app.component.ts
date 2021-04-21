@@ -116,11 +116,11 @@ export class AppComponent implements OnInit {
     })
     this.appService.onLockScreen.subscribe(data => {
       if (!this.showLockScreen) {
-        const modalRef = this.modalService.open(this.contentModal, {
+        this.modalService.open(this.contentModal, {
           windowClass: 'lock-screen-modal', backdrop: 'static',
           keyboard: false
         });
-        console.log("modalRef", modalRef);
+
         this.showLockScreen = true;
         /*  modalRef.componentInstance.cd.detectChanges();
           modalRef.componentInstance.reload = data;
