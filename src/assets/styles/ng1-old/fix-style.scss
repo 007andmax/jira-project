@@ -46,6 +46,49 @@ body .left-panel-full {
 }
 /* End Datepicker */
 
+.text-muted {
+  color: #4f5f79;
+  font-size: 13px;
+}
+
+.lock-screen-modal {
+  h3 {
+    margin-bottom: 8px;
+  }
+  .modal-dialog {
+    width: 360px;
+    margin-left: -180px;
+  }
+  .modal-content {
+    box-shadow: 0 10px 20px -5px rgba(0,0,0,.1);
+    border: none;
+  }
+  .form-control {
+    outline: none;
+    height: 40px;
+    padding: 0 12px;
+    font-size: 13px;
+    border: 1px solid #c4cbd5;
+    border-radius: 4px;
+  }
+  .form-group {
+    margin-top: 22px;
+
+    p {
+      font-family: "Graphik-Medium", sans-serif;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+  }
+  .qt-button {
+    padding: 10px 16px;
+    &.--red {
+      background: #fff;
+      color: #ff5263;
+    }
+  }
+}
+
 .new-companies-content__modal--content > [class*="col-md-"] input::placeholder,
 .new-users-content__modal--content > [class*="col-md-"] input::placeholder,
 .recurring-tickets-content__modal--content > [class*="col-md-"] input::placeholder,
