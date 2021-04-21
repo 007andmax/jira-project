@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 // @ts-ignore
 import { UpgradeModule } from "@angular/upgrade/static";
 import { setUpLocationSync } from '@angular/router/upgrade';
@@ -43,6 +43,7 @@ export class AppComponent implements OnInit {
   main_page: string = PAGE_MAIN;
   PAGE_MAIN = PAGE_MAIN;
   PAGE_DEVICE = PAGE_DEVICE;
+  @ViewChild('contentModal') contentModal;
   /**
    * Creates an instance of the MainComponent with the injected services
    * @param {UpgradeModule} upgrade service
@@ -115,7 +116,7 @@ export class AppComponent implements OnInit {
     })
     this.appService.onLockScreen.subscribe(data => {
       if (!this.showLockScreen) {
-        const modalRef = this.modalService.open(ModalLockScreenComponent, {
+        const modalRef = this.modalService.open(this.contentModal, {
           windowClass: 'lock-screen-modal', backdrop: 'static',
           keyboard: false
         });
