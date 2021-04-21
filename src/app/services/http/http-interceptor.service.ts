@@ -34,7 +34,7 @@ export class HttpInterceptorService implements HttpInterceptor {
               this.appService.showSessionScreen('You have been away for more than 3 hours. You have been logged off. Please login again.');
               return;
             }
-            if (err.status == 423) this.appService.showLockScreen();
+            if (err.status == 423) this.appService.showLockScreen(true);
             //  console.log('Unauthorized')
           }
         }

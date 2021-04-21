@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { LockScreenService } from '../../lock-screen/lock-screen.service';
@@ -15,6 +15,7 @@ import { ModalLockValidate } from './class/modal-lock-validate';
 export class ModalLockScreenComponent implements OnInit {
   currentUser: any;
   codeShowed: boolean = false;
+  @Input() reload: boolean;
   validate: ModalLockValidate = new ModalLockValidate();
   lockScreen: LockScreen = new LockScreen();
   constructor(private usersStateService: UsersStateService,
@@ -55,6 +56,7 @@ export class ModalLockScreenComponent implements OnInit {
       this.lockScreenService.unlockScreen(this.lockScreen.code).subscribe(resp => {
         this.activeModal.dismiss('Cross click');
         this.lockScreen.setUnlocking(false);
+        if (this.reload) window.location.reload();
       }, resp => {
         console.log("resp", resp);
         if (resp.status === 409) this.validate.setWrongCode(false);
