@@ -9,7 +9,7 @@ import { ModalLockValidate } from './class/modal-lock-validate';
   selector: 'modal-lock-screen',
   templateUrl: './modal-lock-screen.component.html',
   styleUrls: ['./modal-lock-screen.component.css'],
-  providers: [NgbModalConfig, NgbModal]
+  // providers: [NgbModalConfig, NgbModal]
 })
 
 export class ModalLockScreenComponent implements OnInit {
@@ -18,20 +18,19 @@ export class ModalLockScreenComponent implements OnInit {
   @Input() reload: boolean;
   validate: ModalLockValidate = new ModalLockValidate();
   lockScreen: LockScreen = new LockScreen();
+  show: boolean = false;
   constructor(private usersStateService: UsersStateService,
     private lockScreenService: LockScreenService,
-    public activeModal: NgbActiveModal,
-    private modalService: NgbModal,
+    //  public activeModal: NgbActiveModal,
+    //  private modalService: NgbModal,
     public cd: ChangeDetectorRef,
-    config: NgbModalConfig,) {
-    config.backdrop = 'static';
-    config.keyboard = false;
-    console.log("config", config);
-    cd.markForCheck();
+   /* config: NgbModalConfig,*/) {
+    /* config.backdrop = 'static';
+     config.keyboard = false;
+     console.log("config", config);
+     cd.markForCheck();*/
   }
-  ngAfterViewInit() {
-    this.cd.detectChanges();
-  }
+
   ngOnInit() {
     this.currentUser = this.usersStateService.getCurrentUser();
     this.usersStateService.getOnGetCurrentuser().subscribe(data => {
@@ -42,6 +41,9 @@ export class ModalLockScreenComponent implements OnInit {
     console.log("this.currentUser", this.currentUser);
     this.cd.detectChanges();
     console.log("this.validate", this.validate);
+  }
+  public showModal() {
+    this.show = true;
   }
   onCodeChange() {
     this.validate.setWrongCode(true);
@@ -55,7 +57,7 @@ export class ModalLockScreenComponent implements OnInit {
     if (this.validate.isValidate(this.lockScreen.code)) {
       this.lockScreen.setUnlocking(true);
       this.lockScreenService.unlockScreen(this.lockScreen.code).subscribe(resp => {
-        this.activeModal.dismiss('Cross click');
+        //  this.activeModal.dismiss('Cross click');
         this.lockScreen.setUnlocking(false);
         if (this.reload) window.location.reload();
       }, resp => {
