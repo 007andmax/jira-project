@@ -116,16 +116,8 @@ export class AppComponent implements OnInit {
     })
     this.appService.onLockScreen.subscribe(data => {
       if (!this.showLockScreen) {
-        /*   this.modalService.open(this.contentModal, {
-             windowClass: 'lock-screen-modal', backdrop: 'static',
-             keyboard: false
-           });
-   */
         this.contentModal.showModal();
         this.showLockScreen = true;
-        /*  modalRef.componentInstance.cd.detectChanges();
-          modalRef.componentInstance.reload = data;
-  */
         this.cd.detectChanges();
       }
     })
