@@ -3105,5 +3105,71 @@ input.--input-error {
       padding: 4px 6px 3px 8px;
     }
   }
+}
 
+.company-devices-page {
+  .company-devices-table__check {
+    width: 16px;
+  }
+  .company-devices-table__menu {
+    width: 34px;
+    max-width: 34px;
+    min-width: 34px;
+  }
+  .company-devices-table__go-to {
+    width: 30px;
+    max-width: 30px;
+    min-width: 30px;
+  }
+  .company-devices-table__connect {
+    width: 38px;
+    max-width: 38px;
+    min-width: 38px;
+  }
+  .company-devices-table__ip-address {
+    width: 224px;
+    max-width: 224px;
+    min-width: 222px;
+  }
+  .company-devices-table__windows {
+    width: 195px;
+    max-width: 195px;
+    min-width: 195px;
+  }
+  .company-devices-table__up-time {
+    width: 105px;
+    max-width: 105px;
+    min-width: 105px;
+  }
+  .company-devices-table__logged-user {
+    width: 148px;
+    max-width: 148px;
+    min-width: 148px;
+  }
+  .company-devices-table__device-name {
+    max-width: 345px;
+    width: max-content;
+    min-width: 345px;
+  }
+  .company-devices-table__device-type {
+    width: 36px;
+    max-width: 36px;
+    min-width: 36px;
+  }
+}
+
+.quotes-page .qt-page-list__header-filters .dropdown-menu {
+  right: 0;
+  left: unset;
+}
+.product-list-report .report-menu .dropdown-menu {
+  right: 0;
+  left: unset;
+}
+
+.invoices-date-filter,
+.quotes-date-filter {
+  .date-picker .icn-remove-old {
+    top: 7px;
+  }
 }
