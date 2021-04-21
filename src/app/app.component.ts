@@ -121,7 +121,7 @@ export class AppComponent implements OnInit {
         });
         console.log("modalRef", modalRef);
         this.showLockScreen = true;
-        modalRef.componentInstance.cd.detectChanges();
+        modalRef.componentInstance.cd.markForCheck();
         modalRef.componentInstance.reload = data;
         this.cd.detectChanges();
       }
