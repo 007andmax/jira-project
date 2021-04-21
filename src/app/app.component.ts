@@ -123,6 +123,7 @@ export class AppComponent implements OnInit {
         this.showLockScreen = true;
         modalRef.componentInstance.cd.markForCheck();
         modalRef.componentInstance.reload = data;
+        this.cd.markForCheck();
         this.cd.detectChanges();
       }
     })
