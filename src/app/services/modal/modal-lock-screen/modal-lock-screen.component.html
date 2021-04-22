@@ -20,7 +20,7 @@
                 <div class="icon__unlock-screen qt-sz-72 qt-bg-contain"></div>
                 <h3>Unlock Screen</h3>
                 <p class="text-muted">
-                  Please enter a password to Unlock the screen
+                    Please enter a password to Unlock the screen
                 </p>
                 <div
                     class="form-group text-left"
@@ -71,35 +71,57 @@
                         ></i>
                     </a>
                 </div>
-              <div class="qt-df qt-jc-fe">
-                <button class="qt-button --red qt-mr-12">Logout</button>
-                <button class="qt-button">
-                  <span class="ng-star-inserted">Unlock Screen</span>
-                </button>
-              </div>
+                <div class="qt-df qt-jc-fe">
+                    <button
+                        class="qt-button --red qt-mr-12"
+                        (click)="logOut()"
+                    >
+                        Logout
+                    </button>
+                    <button
+                        class="qt-button"
+                        (click)="unlock()"
+                        [disabled]="lockScreen.isUnlocking()"
+                    >
+                        <span class="ng-star-inserted">Unlock Screen</span>
+                    </button>
+                    <button
+                        class="qt-button"
+                        *ngIf="currentUser && isEnableTwoFactorAuth()"
+                        (click)="sendCode()"
+                        [disabled]="lockScreen.isUnlocking()"
+                    >
+                        <span class="ng-star-inserted">Send code</span>
+                    </button>
+                </div>
 
 
-<!--                <div class="buttons-container">-->
-<!--                    <button-->
-<!--                        class="btn btn-primary"-->
-<!--                        (click)="unlock()"-->
-<!--                        [disabled]="lockScreen.isUnlocking()"-->
-<!--                    >-->
-<!--                        Unlock-->
-<!--                    </button>-->
-<!--                    <button-->
-<!--                        class="btn btn-success"-->
-<!--                        *ngIf="currentUser && isEnableTwoFactorAuth()"-->
-<!--                        (click)="sendCode()"-->
-<!--                        [disabled]="lockScreen.isUnlocking()"-->
-<!--                    >-->
-<!--                        Send code-->
-<!--                    </button>-->
-<!--                </div>-->
+
+
+
+
+
+                <!-- <div class="buttons-container"> -->
+                <!-- <button -->
+                <!-- class="btn btn-primary" -->
+                <!-- (click)="unlock()" -->
+                <!-- [disabled]="lockScreen.isUnlocking()" -->
+                <!-- > -->
+                <!-- Unlock -->
+                <!-- </button> -->
+                <!-- <button -->
+                <!-- class="btn btn-success" -->
+                <!-- *ngIf="currentUser && isEnableTwoFactorAuth()" -->
+                <!-- (click)="sendCode()" -->
+                <!-- [disabled]="lockScreen.isUnlocking()" -->
+                <!-- > -->
+                <!-- Send code -->
+                <!-- </button> -->
+                <!-- </div> -->
                 <i class="unlock-modal-icn"></i>
-  <!--                <div class="log-out-btn">-->
-  <!--                    <a (click)="logOut()">Logout</a>-->
-  <!--                </div>-->
+                <!-- <div class="log-out-btn"> -->
+                <!-- <a (click)="logOut()">Logout</a> -->
+                <!-- </div> -->
             </div>
         </div>
     </div>
