@@ -145,6 +145,9 @@ export class AppComponent implements OnInit {
       this.qtListBodyScroller.addEventListener('scroll', this.qtListBodyScrollerScroll, false);
     }
   }
+  public setShowSessionScreen(data) {
+    this.showSessionScreen = data;
+  }
   qtListHeaaderScrollerScroll = () => {
     this.qtListBodyScroller.scrollLeft = this.qtListHeaaderScroller.scrollLeft;
   }

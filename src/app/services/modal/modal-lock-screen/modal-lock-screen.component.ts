@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { LockScreenService } from '../../lock-screen/lock-screen.service';
@@ -16,6 +16,7 @@ export class ModalLockScreenComponent implements OnInit {
   currentUser: any;
   codeShowed: boolean = false;
   @Input() reload: boolean;
+  @Output() onClosed = new EventEmitter<any>();
   validate: ModalLockValidate = new ModalLockValidate();
   lockScreen: LockScreen = new LockScreen();
   show: boolean = false;
@@ -60,6 +61,7 @@ export class ModalLockScreenComponent implements OnInit {
         //  this.activeModal.dismiss('Cross click');
         this.show = false;
         this.lockScreen.setUnlocking(false);
+        this.close();
         this.cd.detectChanges();
         if (this.reload) window.location.reload();
       }, resp => {
@@ -70,6 +72,9 @@ export class ModalLockScreenComponent implements OnInit {
     } else {
       //  $scope.triedToUnlock = true;
     }
+  }
+  close() {
+    this.onClosed.emit(null);
   }
   sendCode() {
     this.lockScreen.setUnlocking(true);

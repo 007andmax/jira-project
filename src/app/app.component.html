@@ -49,4 +49,8 @@
 
 
 
-<modal-lock-screen #contentModal></modal-lock-screen>
+
+<modal-lock-screen
+    #contentModal
+    (onClosed)="setShowSessionScreen(false)"
+></modal-lock-screen>
