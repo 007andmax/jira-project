@@ -43,7 +43,7 @@ export class AppComponent implements OnInit {
   main_page: string = PAGE_MAIN;
   PAGE_MAIN = PAGE_MAIN;
   PAGE_DEVICE = PAGE_DEVICE;
-  @ViewChild('contentModal') contentModal;
+  @ViewChild('contentModal') contentModal: ModalLockScreenComponent;
   /**
    * Creates an instance of the MainComponent with the injected services
    * @param {UpgradeModule} upgrade service
@@ -117,6 +117,7 @@ export class AppComponent implements OnInit {
     this.appService.onLockScreen.subscribe(data => {
       console.log("showLockScreen", this.showLockScreen);
       if (!this.showLockScreen) {
+        this.contentModal.reload = data;
         this.contentModal.showModal();
         this.showLockScreen = true;
         this.cd.detectChanges();

@@ -54,16 +54,16 @@ export class ModalLockScreenComponent implements OnInit {
     return this.currentUser.twoFactorAuthType === 'SECURE' || this.currentUser.twoFactorAuthType === 'BASIC';
   }
   unlock() {
-    console.log("this.validate", this.validate);
+    console.log("this.reload", this.reload);
     if (this.validate.isValidate(this.lockScreen.code)) {
       this.lockScreen.setUnlocking(true);
       this.lockScreenService.unlockScreen(this.lockScreen.code).subscribe(resp => {
         //  this.activeModal.dismiss('Cross click');
         this.show = false;
         this.lockScreen.setUnlocking(false);
-        this.close();
         this.cd.detectChanges();
         if (this.reload) window.location.reload();
+        this.close();
       }, resp => {
         console.log("resp", resp);
         if (resp.status === 409) this.validate.setWrongCode(false);
