@@ -6,15 +6,18 @@
 >
     <div ngbDropdownAnchor>
         <span class="qt-input-search">
-            <input
-                type="text"
-                class="global-search__input"
-                placeholder="Global search"
-                autocomplete="off"
-                [(ngModel)]="word"
-                (input)="onSearch()"
-                (click)="onShowDropDown()"
-            >
+            <form>
+                <input
+                    id="global-search"
+                    type="text"
+                    class="global-search__input"
+                    placeholder="Global search"
+                    autocomplete="new-password"
+                    [(ngModel)]="word"
+                    (input)="onSearch()"
+                    (click)="onShowDropDown()"
+                >
+            </form>
             <span
                 class="global-search__close icon__close-round"
                 *ngIf="word.length > 0"
