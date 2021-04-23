@@ -52,6 +52,13 @@ body .left-panel-full {
 }
 
 .lock-screen-modal {
+  .unlock-screen-wrapper {
+    padding: 0;
+
+    &__header {
+      padding: 24px 30px;
+    }
+  }
   h3 {
     margin-bottom: 8px;
   }
@@ -73,6 +80,7 @@ body .left-panel-full {
   }
   .form-group {
     margin-top: 22px;
+    margin-bottom: 24px;
 
     p {
       font-family: "Graphik-Medium", sans-serif;
@@ -86,6 +94,28 @@ body .left-panel-full {
       background: #fff;
       color: #ff5263;
     }
+  }
+  .button-verification {
+    background: none;
+    color: #16a4fa;
+    font-size: 16px;
+    font-family: "Graphik-Regular", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid #dfe3e8;
+    padding: 14px 0;
+    height: auto;
+    width: 100%;
+    line-height: 20px;
+    transition: background-color .3s ease-out;
+
+    &:hover {
+      background-color: rgba(15,154,239,.05);
+    }
+  }
+  .text-muted {
+    line-height: 20px;
   }
 }
 
