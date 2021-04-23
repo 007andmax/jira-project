@@ -43,7 +43,8 @@ export class AppComponent implements OnInit {
   main_page: string = PAGE_MAIN;
   PAGE_MAIN = PAGE_MAIN;
   PAGE_DEVICE = PAGE_DEVICE;
-  @ViewChild('contentModal') contentModal: ModalLockScreenComponent;
+  @ViewChild('contentLockScreenModal') contentLockScreenModal: ModalLockScreenComponent;
+  @ViewChild('contentSessionScreenModal') contentSessionScreenModal: ModalSessionScreenComponent;
   /**
    * Creates an instance of the MainComponent with the injected services
    * @param {UpgradeModule} upgrade service
@@ -117,20 +118,21 @@ export class AppComponent implements OnInit {
     this.appService.onLockScreen.subscribe(data => {
       console.log("showLockScreen", this.showLockScreen);
       if (!this.showLockScreen) {
-        this.contentModal.reload = data;
-        this.contentModal.showModal();
+        this.contentLockScreenModal.reload = data;
+        this.contentLockScreenModal.showModal();
         this.showLockScreen = true;
         this.cd.detectChanges();
       }
     })
     this.appService.onSessionScreen.subscribe(data => {
       if (!this.showSessionScreen) {
-        const modalRef = this.modalService.open(ModalSessionScreenComponent, {
-          windowClass: 'xs-modal user-modal', backdrop: 'static',
-          keyboard: false
-        });
-        modalRef.componentInstance.message = data;
-        console.log("modalRef", modalRef);
+        /*  const modalRef = this.modalService.open(ModalSessionScreenComponent, {
+            windowClass: 'xs-modal user-modal', backdrop: 'static',
+            keyboard: false
+          });*/
+        this.contentSessionScreenModal.message = data;
+        this.contentSessionScreenModal.showModal();
+        // console.log("modalRef", modalRef);
         this.showSessionScreen = true;
         this.cd.detectChanges();
       }

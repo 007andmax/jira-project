@@ -5,8 +5,8 @@
     #globalSearch="ngbDropdown"
 >
     <div ngbDropdownAnchor>
-        <span class="qt-input-search">
-            <form>
+        <form>
+            <span class="qt-input-search">
                 <input
                     id="global-search"
                     type="text"
@@ -16,14 +16,15 @@
                     [(ngModel)]="word"
                     (input)="onSearch()"
                     (click)="onShowDropDown()"
+                    [ngModelOptions]="{ standalone: true }"
                 >
-            </form>
-            <span
-                class="global-search__close icon__close-round"
-                *ngIf="word.length > 0"
-                (click)="clearWord()"
-            ></span>
-        </span>
+                <span
+                    class="global-search__close icon__close-round"
+                    *ngIf="word.length > 0"
+                    (click)="clearWord()"
+                ></span>
+            </span>
+        </form>
     </div>
     <div
         ngbDropdownMenu

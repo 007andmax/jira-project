@@ -1,15 +1,36 @@
-<div class="archive-modal">
-    <div class="archive-modal__body modal-body">
-        <p [textContent]="message"></p>
-    </div>
-    <div class="archive-modal__footer">
-        <div class="d-f">
-            <button
-                class="btn-new btn-primary"
-                (click)=approveConfirm()
-            >
-                OK
-            </button>
+<div
+    style="z-index: 1050"
+    aria-hidden="true"
+    class="modal-backdrop fade show"
+    *ngIf="show"
+></div>
+<div
+    role="dialog"
+    tabindex="-1"
+    class="modal fade show d-block lock-screen-modal"
+    aria-modal="true"
+    *ngIf="show"
+>
+    <div
+        role="document"
+        class="modal-dialog"
+    >
+        <div class="modal-content">
+            <div class="archive-modal">
+                <div class="archive-modal__body modal-body">
+                    <p [textContent]="message"></p>
+                </div>
+                <div class="archive-modal__footer">
+                    <div class="d-f">
+                        <button
+                            class="btn-new btn-primary"
+                            (click)=approveConfirm()
+                        >
+                            OK
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
