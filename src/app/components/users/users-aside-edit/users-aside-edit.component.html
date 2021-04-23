@@ -34,6 +34,7 @@
             >
         </div>
 
+
         <div class="qt-df qt-mb-24">
             <div class="qt-w50 qt-mr-16">
                 <div
@@ -44,7 +45,6 @@
                     <input
                         type="text"
                         minlength="2"
-                        maxlength="30"
                         (blur)="onChangeFistname()"
                         [(ngModel)]="user.firstName"
                         placeholder="Enter First Name"
@@ -62,13 +62,13 @@
                     <label>Last Name</label>
                     <input
                         type="text"
-                        maxlength="30"
                         [(ngModel)]="user.lastName"
                         placeholder="Enter Last Name"
                     >
                 </div>
             </div>
         </div>
+
 
         <div class="qt-df qt-mb-24">
             <div class="qt-w50 qt-mr-16">
@@ -79,7 +79,6 @@
                     <label>Email</label>
                     <input
                         type="text"
-                        maxlength="30"
                         [(ngModel)]="user.primaryEmail"
                         (blur)="onCheckEmail()"
                         placeholder="Enter Email"
@@ -99,6 +98,7 @@
                 </div>
             </div>
 
+
             <div class="qt-w50">
                 <app-drop-down
                     [title]="'Designation'"
@@ -112,6 +112,7 @@
                 ></app-drop-down>
             </div>
         </div>
+
 
         <div class="qt-w100 qt-mb-24">
             <app-drop-down
@@ -128,6 +129,7 @@
             >
             </app-drop-down>
         </div>
+
 
         <div class="qt-df qt-mb-24">
             <div class="qt-w50 qt-mr-16 with-new-link">
@@ -284,6 +286,7 @@
             ></app-company-subscription>
         </div>
     </div>
+
 
     <div class="qt-aside-modern__footer">
         <div class="qt-df">
