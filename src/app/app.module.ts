@@ -3,6 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, NgZone } from '@angular/core';
 import { UrlHandlingStrategy } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
+import { NgxMaskModule } from 'ngx-mask'
 // @ts-ignore
 import {
   UpgradeModule,
@@ -20,7 +21,6 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule, MatIconModule } from '@angular/material';
-import { CronEditorModule } from 'cron-editor';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { NgxSelectModule } from 'ngx-select-ex';
 // import { ShowHidePasswordModule } from 'ngx-show-hide-password';
@@ -151,7 +151,6 @@ import { TagPipe } from './pipe/tag.pipe';
 import { NgxUploaderModule } from 'ngx-uploader';
 import { ToastrModule } from 'ngx-toastr';
 // import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
-import { SelectDropDownModule } from 'ngx-select-dropdown';
 import { IncomingEmailComponent } from './components/setting/email-setting/incoming-email/incoming-email.component';
 import { OutgoingEmailComponent } from './components/setting/email-setting/outgoing-email/outgoing-email.component';
 import { TicketSettingsComponent } from './components/setting/invoice-tickets/ticket-settings/ticket-settings.component';
@@ -167,7 +166,6 @@ import { ServiceComponent } from './components/setting/commission/service/servic
 import { AutocompleteComponent } from './shared/autocomplete/autocomplete.component';
 import { PhonePipe } from './pipe/phone.pipe';
 import { OrderByPipe } from './pipe/order-by.pipe';
-import { NgxMaskModule } from 'ngx-mask'
 import { TaxesComponent } from './components/shared/taxes/taxes.component';
 import { TicketsTableItemComponent } from './components/tickets/tickets/tickets-table/tickets-table-item/tickets-table-item.component';
 import { TicketEditAsideCompanyInfoComponent } from './components/tickets/tickets/ticket-edit-aside-company-info/ticket-edit-aside-company-info.component';
@@ -807,25 +805,22 @@ declare var $: any;
     // ShowHidePasswordModule,
     AppRoutingModule,
     ImageCropperModule,
-    DataTablesModule,
-    SelectDropDownModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAbP4DFpz4f9YcXMWUjdkOdyArX2peNt8s'
     }),
-    NgxMaskModule.forRoot(),
     ToastrModule.forRoot({
       closeButton: true,
       preventDuplicates: true,
       timeOut: 5000
     }),
-    CronEditorModule,
     ImageCropperModule,
     NvD3Module,
     BrowserAnimationsModule,
     IgxTimePickerModule,
     DisabledBtnModule,
     NgxUploaderModule,
-    AngularEditorModule
+    AngularEditorModule,
+    NgxMaskModule.forRoot(),
   ],
   entryComponents: [
     ModalQuoteComponent,

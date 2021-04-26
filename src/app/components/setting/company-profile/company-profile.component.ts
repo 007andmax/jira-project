@@ -22,6 +22,7 @@ import { MapsAPILoader } from '@agm/core';
 import { NgbDatepicker, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { TimeZone } from '../../companies/company-time-zone/class/time-zone';
 import { SettingStateService } from 'src/app/states/setting/setting-state.service';
+import { CompanyTimeZoneStateService } from '../../companies/company-time-zone/services/company-time-zone-state.service';
 
 declare var google: any;
 declare var $: any;
@@ -116,6 +117,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private mapsAPILoader: MapsAPILoader,
     private settingStateService: SettingStateService,
+    private companyTimeZoneState: CompanyTimeZoneStateService,
     private ngZone: NgZone
   ) { }
 
@@ -234,7 +236,11 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
       });
     });
   }
-
+  public onChangeTimeZone(data) {
+    this.cProfileForm.patchValue({
+      timeZone: data
+    });
+  }
   // get current position
   private setCurrentPosition() {
     if ('geolocation' in navigator) {
@@ -314,10 +320,15 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
           this.loading = false; $(".loading").css("display", "none");
           if (res) {
             this.cProfile.address = res.addresses;
+            this.cProfile.address[0].timeZone = new TimeZone({
+              first: res.addresses[0].timeZone.displayName,
+              second: res.addresses[0].timeZone.name,
+            })
             this.cProfile.logo = res.logo;
             this.cProfile.name = res.name;
             this.cProfile.timeSettings = res.responseTimeSettings;
-
+            console.log("res.addresses[0].timeZone", this.cProfile.address[0].timeZone);
+            //this.companyTimeZoneState.onEditMode(this.cProfile.address[0].timeZone);
             if (res.responseTimeSettings) {
               const workingDays = res.responseTimeSettings.workingDays;
               for (let i = 0; i < this.weekDays.length; i++) {

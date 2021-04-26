@@ -196,15 +196,11 @@
                                     </div>
                                 </div>
                                 <div class="f-col col-50">
-                                    <label>Time Zone</label>
-                                    <div class="form-row">
-                                        <ngx-select-dropdown
-                                            [config]="config"
-                                            [options]="timezones"
-                                            formControlName="timeZone"
-                                            [multiple]="false"
-                                        ></ngx-select-dropdown>
-                                    </div>
+                                    <app-company-time-zone
+                                        *ngIf="cProfile.address.length > 0"
+                                        [selectedItem]="cProfile.address[0].timeZone"
+                                        (selectedOffsetItem)="onChangeTimeZone($event)"
+                                    ></app-company-time-zone>
                                 </div>
                                 <div
                                     class="f-col col-50"
@@ -387,6 +383,13 @@
 
 
 
+
+
+
+
+
+
+
                     <form (ngSubmit)="saveAccountingDate()">
                         <div class="f-row">
                             <div class="f-col col-50  date-area">
@@ -436,6 +439,13 @@
         </ngb-tabset>
         <!-- <div class="loading" *ngIf="loading"></div> -->
     </div>
+
+
+
+
+
+
+
 
 
 
