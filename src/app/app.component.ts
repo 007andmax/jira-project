@@ -116,7 +116,6 @@ export class AppComponent implements OnInit {
       this.cd.detectChanges();
     })
     this.appService.onLockScreen.subscribe(data => {
-      console.log("showLockScreen", this.showLockScreen);
       if (!this.showLockScreen) {
         this.contentLockScreenModal.reload = data;
         this.contentLockScreenModal.showModal();
@@ -126,13 +125,8 @@ export class AppComponent implements OnInit {
     })
     this.appService.onSessionScreen.subscribe(data => {
       if (!this.showSessionScreen) {
-        /*  const modalRef = this.modalService.open(ModalSessionScreenComponent, {
-            windowClass: 'xs-modal user-modal', backdrop: 'static',
-            keyboard: false
-          });*/
         this.contentSessionScreenModal.message = data;
         this.contentSessionScreenModal.showModal();
-        // console.log("modalRef", modalRef);
         this.showSessionScreen = true;
         this.cd.detectChanges();
       }
@@ -151,7 +145,6 @@ export class AppComponent implements OnInit {
   }
   public setShowLockScreen(data) {
     this.showLockScreen = data;
-    console.log("showSessionScreen", this.showLockScreen);
   }
   qtListHeaaderScrollerScroll = () => {
     this.qtListBodyScroller.scrollLeft = this.qtListHeaaderScroller.scrollLeft;

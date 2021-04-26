@@ -76,7 +76,6 @@ export class DraftEmailComponent implements OnInit {
   public onShowAside() {
     this.draftEmailStateService.getShowAsideForAdd().subscribe(() => {
       this.usersSelected = this.draftEmailStateService.getSelectedUsers();
-      console.log("this.usersSelected", this.usersSelected);
       this.companiesSelected = this.draftEmailStateService.getSelectedCompanies();
       this.action = this.draftEmailStateService.getAction();
       this.opened = true;

@@ -17,13 +17,11 @@ export class HttpInterceptorService implements HttpInterceptor {
     return next.handle(req).pipe(
       tap(
         (event) => {
-          if (event instanceof HttpResponse) console.log('Server response', req)
           let isDisabled = (req.body && req.body.data) ? req.body.data.message === 'userDisabled' : false;
           if (isDisabled) this.appService.showSessionScreen('Your account has been disabled.')
         },
         (err) => {
           if (err instanceof HttpErrorResponse) {
-
             let unlockExpiredHeader = err.headers.get('SESSION_UNLOCK_EXPIRED');
             let isUnauthorized = (err.error) ? err.error.errorMessage === 'unauthorized' || err.error.authMessage === 'unauthorized' : false;
             if (unlockExpiredHeader && unlockExpiredHeader.toLocaleLowerCase() === 'true' || isUnauthorized) {
@@ -31,7 +29,6 @@ export class HttpInterceptorService implements HttpInterceptor {
               return;
             }
             if (err.status == 423) this.appService.showLockScreen(true);
-            //  console.log('Unauthorized')
           }
         }
       )

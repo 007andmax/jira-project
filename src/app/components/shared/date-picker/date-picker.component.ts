@@ -101,7 +101,6 @@ export class DatePickerComponent implements OnInit, OnDestroy {
     this.datepicker = this.sericeDatePicker.getDateForDatePicker(data);
     if (this.navDate) this.sericeDatePicker.updateMonthAndYearDatePicker(this.datepicker, this.navDate);
     this.date.setTitle(this.datepicker, this.formatDate);
-    console.log("date", date);
   }
 
   public geTextDate() {

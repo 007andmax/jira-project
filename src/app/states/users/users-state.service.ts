@@ -34,17 +34,12 @@ export class UsersStateService {
   public onInit() {
 
     this.userService.getAllusers().subscribe((data) => {
-      /*   let users = data.map((item) => {
-           return new User(item);
-         })*/
-
       this.setAllUsers(data);
       this.onInitGetUsers(data);
     })
     this.userService.getCurrentUser().subscribe((data: any) => {
       this.currentUser = new CurrentUser(data);
       this.onInitCurrentUser(data);
-      console.log("getCurrentUser", data);
     })
     this.usersRealTimeService.changeUsersArray.subscribe(newChange => {
       if (newChange.action === 'USER_SAVED' || newChange.action === 'USER_ARCHIVED') {

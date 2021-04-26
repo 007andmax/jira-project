@@ -144,7 +144,6 @@ export class CompanyComponent implements OnInit {
         }
       });
     }
-    //  console.log("techUser", techUser);
     return techUser;
   }
 
@@ -191,7 +190,6 @@ export class CompanyComponent implements OnInit {
           this.loading = false; $(".loading").css("display", "none");
           if (custCompany) {
             this.clientsCompanies = custCompany;
-            console.log("this.clientsCompanies", this.clientsCompanies);
           }
         },
         error => {

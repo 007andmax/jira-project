@@ -327,7 +327,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
             this.cProfile.logo = res.logo;
             this.cProfile.name = res.name;
             this.cProfile.timeSettings = res.responseTimeSettings;
-            console.log("res.addresses[0].timeZone", this.cProfile.address[0].timeZone);
             //this.companyTimeZoneState.onEditMode(this.cProfile.address[0].timeZone);
             if (res.responseTimeSettings) {
               const workingDays = res.responseTimeSettings.workingDays;

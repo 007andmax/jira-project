@@ -175,8 +175,6 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
         this.changedSubjectTickets.map(item => this.ticketsService.changeSubjectNoteTicket(item.id, item.newSubject, item.note))
       )
         .subscribe(result => {
-          console.log("result", result);
-          console.log("this.changedSubjectTickets", this.changedSubjectTickets);
           result.forEach((item: any, i) => {
             let index = this.invoice.invoiceDataDto.tickets.findIndex(ticket => ticket.id === item.id);
             if (index > -1) this.onUpdateSubjectTicket(this.changedSubjectTickets[i].newSubject, index)
