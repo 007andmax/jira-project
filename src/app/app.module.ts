@@ -22,7 +22,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule, MatIconModule } from '@angular/material';
 import { ImageCropperModule } from 'ngx-image-cropper';
-import { NgxSelectModule } from 'ngx-select-ex';
 // import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 import { AppComponent } from './app.component';
 import { PasswordManagerComponent } from './components/password-manager/password-manager.component';
@@ -795,7 +794,6 @@ declare var $: any;
     InfiniteScrollModule,
     ClickOutsideModule,
     DataTablesModule,
-    NgxSelectModule,
     MatSelectModule,
     MatChipsModule,
     MatIconModule,

@@ -8,7 +8,6 @@ import { DevicesService } from "../../../services/devices/devices.service";
 import { PasswordManagerService } from "../../../services/password-manager/password-manager.service";
 import { UsersService } from "../../../services/users/users.service";
 import { GadgetsService } from "../../../services/gadgets/gadgets.service";
-import { ISubscription } from "rxjs-compat/Subscription";
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
@@ -35,8 +34,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   public passwordRecords: any;
   public passwordRecordsStart: any;
   public interval: any;
-  private subGetRecords: ISubscription;
-  private subNewRecordAdd: ISubscription;
+
   private subscriptions = new Subscription();
   public isMobileFilterShowing = false;
   public innerWidth: any;
@@ -44,7 +42,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     companyId: '',
     name: ''
   };
-  private subscription: ISubscription;
+
   @Output() onGoToLink = new EventEmitter();
   @Output() onChangeState = new EventEmitter();
 
@@ -441,11 +439,10 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
    */
   ngOnDestroy() {
 
-    this.subscription && this.subscription.unsubscribe();
-    this.subGetRecords && this.subGetRecords.unsubscribe();
-    this.subGetRecords && this.subGetRecords.unsubscribe();
+
+
     this.subscriptions && this.subscriptions.unsubscribe();
-    this.subNewRecordAdd && this.subNewRecordAdd.unsubscribe();
+
   }
 
   /**
