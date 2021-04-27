@@ -1,6 +1,7 @@
 .app-left-panel {
   display: block;
-  height: 100vh;
+  //height: 100vh;
+  height: 100%;
   width: $left-panel-width;
   z-index: 1050;
   position: fixed;
@@ -19,18 +20,18 @@
   &__body {
     overflow: auto;
     height: calc(100% - 80px);
-     &::-webkit-scrollbar-thumb {	
-      background: transparent;	
-    }	
-    &::-webkit-scrollbar {	
-      width: 0px;	
+     &::-webkit-scrollbar-thumb {
+      background: transparent;
+    }
+    &::-webkit-scrollbar {
+      width: 0px;
     }
   }
 
   &__header-logo-mini {
     display: none;
-    &.--active {	
-	
+    &.--active {
+
     }
   }
 
@@ -79,7 +80,7 @@
     height: 16px;
     background-image: url("/assets/img/icons-left-sidebar/dropdown-arrow-down.svg");
     margin-left: auto;
-     
+
   }
 
   &__menu-title {
@@ -138,21 +139,21 @@
   &__menu-expand {
     list-style: none;
     padding: 0;
-     margin-bottom: 0;	
-    &.top-menu {	
-      opacity: 0;	
-      overflow: hidden;	
-      max-height: 0;	
-      &.menu-expand-show {	
-        animation-name: showExpandPanel;	
-        animation-duration: 0.5s;	
-        animation-fill-mode: forwards;	
-      }	
-      &.menu-expand-hide {	
-        animation-name: hideExpandPanel;	
-        animation-duration: 0.2s;	
-        animation-fill-mode: forwards;	
-      }	
+     margin-bottom: 0;
+    &.top-menu {
+      opacity: 0;
+      overflow: hidden;
+      max-height: 0;
+      &.menu-expand-show {
+        animation-name: showExpandPanel;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+      }
+      &.menu-expand-hide {
+        animation-name: hideExpandPanel;
+        animation-duration: 0.2s;
+        animation-fill-mode: forwards;
+      }
     }
   }
 
@@ -262,26 +263,26 @@
   }
 }
 
-@keyframes showExpandPanel {	
-  0% {	
-    max-height: 0%;	
-    opacity: 0;	
-  }	
-  25% {	
-    opacity: 0.5;	
-  }	
-  100% {	
-    opacity: 1;	
-    max-height: 100%;	
-  }	
-}	
-@keyframes hideExpandPanel {	
-  0% {	
-    opacity: 1;	
-    max-height: 100%;	
-  }	
-  100% {	
-    max-height: 0%;	
-    opacity: 0;	
-  }	
+@keyframes showExpandPanel {
+  0% {
+    max-height: 0%;
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+    max-height: 100%;
+  }
+}
+@keyframes hideExpandPanel {
+  0% {
+    opacity: 1;
+    max-height: 100%;
+  }
+  100% {
+    max-height: 0%;
+    opacity: 0;
+  }
 }
