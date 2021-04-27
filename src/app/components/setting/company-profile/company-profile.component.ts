@@ -825,6 +825,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
               this.companyProfileService.basic(basic).subscribe(
                 res => {
                   this.toaster.success('Records saved successfully');
+                  this.companiesStateService.onInitGetCurrentCompany();
                 },
                 error => {
                   this.loading = false; $(".loading").css("display", "none");
