@@ -83,7 +83,6 @@ export class AppComponent implements OnInit {
           this.main_page = PAGE_MAIN;
         }
       });
-    this.userService.getUser();
     this.devicesState.onInit();
     this.usersStateService.onInit();
     this.companiesState.onInit();

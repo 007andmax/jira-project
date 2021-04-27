@@ -19,12 +19,7 @@ export class InvoiceTicketsService {
     return this.http.get(`${this.apiUrl}settings/companyProfile/`);
   }
 
-  /**
-   * get current company
-   */
-  currentCompany() {
-    return this.http.get(`${this.apiUrl}company/current`);
-  }
+
 
   /**
    * actual number

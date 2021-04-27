@@ -36,6 +36,8 @@ export class CompaniesStateService {
       this.currentCompany = data;
       this.onCurrentCompany.emit(data);
       this.websocketService.subsribeToGlNumber(this.currentCompany.id);
+      this.websocketService.subsribeToQuote(this.currentCompany.id);
+      this.websocketService.subsribeToRecurringTickets(this.currentCompany.id);
     })
     this.companiesService.getCompaniesList().subscribe((data: any) => {
       this.setAllCompanies(data);
@@ -46,7 +48,10 @@ export class CompaniesStateService {
         const Index = this.allCompanies.findIndex((item) => item.id === newChange.data.id);
         if (Index > -1) this.allCompanies[Index] = newChange.data;
         if (Index === -1) this.allCompanies.unshift(newChange.data);
-
+        if (newChange.data.id === this.currentCompany.id) {
+          this.currentCompany = newChange.data;
+          this.onCurrentCompany.emit(newChange.data);
+        }
       }
       if (newChange.action === 'COMPANY_DEARCHIVED') {
         const Index = this.allCompanies.findIndex((item) => item.id === newChange.data.id);

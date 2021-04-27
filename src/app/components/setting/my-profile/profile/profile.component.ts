@@ -18,6 +18,7 @@ import { Observable, Observer } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs/operators';
 import { MapsAPILoader } from '@agm/core';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 // import { ToastrService } from 'ngx-toastr';
 
@@ -60,7 +61,8 @@ export class ProfileComponent implements OnInit {
     private userService: UsersService,
     private toastr: ToastrService,
     private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private usersStateService: UsersStateService
   ) {
     // this.getCurrentUser();
     // this.getUserProfile();
@@ -68,7 +70,12 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.imageSrc = '';
-    this.getCurrentUser();
+    if (this.usersStateService.getCurrentUser()) this.getCurrentUser(this.usersStateService.getCurrentUser());
+    this.usersStateService.getOnGetCurrentuser().subscribe(data => {
+      this.getCurrentUser(data)
+    })
+
+
     this.getUserProfile();
 
     /**
@@ -171,8 +178,8 @@ export class ProfileComponent implements OnInit {
   /**
    * getCurrentUser
    */
-  private getCurrentUser() {
-    this.currentUser = this.userService.currentUser;
+  private getCurrentUser(data) {
+    this.currentUser = data;
     if (this.currentUser && this.currentUser.avatar) {
       this.imageSrc = `/users/${this.currentUser.id}/image.jpg?t=${this.currentUser.avatar.updatedAt}`;
       this.imageAvatar = this.currentUser.avatar;
@@ -460,7 +467,7 @@ export class ProfileComponent implements OnInit {
             res => {
               this.loading = false; $(".loading").css("display", "none");
               if (res) {
-                this.getCurrentUser();
+
                 this.imageSrc = '';
               }
             },

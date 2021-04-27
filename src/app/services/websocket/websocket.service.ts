@@ -73,8 +73,6 @@ export class WebsocketService {
     let that = this;
     this.stompClient.connect({}, function () {
       that.subsribeToPermissions();
-      that.subsribeToQuote();
-      that.subsribeToRecurringTickets();
       that.subsribeToUsers();
       that.subsribeToDevices();
       that.subsribeToCompany();
@@ -135,16 +133,14 @@ export class WebsocketService {
   /**
    * subscribe to quote realtime
    */
-  public subsribeToQuote() {
+  public subsribeToQuote(id) {
     setTimeout(() => {
-      this.companiesService.getTechCompany().subscribe((res) => {
-        this.stompClient.subscribe(`/user/watch/saleQuotes/${res['id']}`, (message) => {
-          var newChange = JSON.parse(message.body);
-          this.quoteRealTimeService.handleRealTimeChanges(newChange);
-          if (message.body) {
+      this.stompClient.subscribe(`/user/watch/saleQuotes/${id}`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.quoteRealTimeService.handleRealTimeChanges(newChange);
+        if (message.body) {
 
-          }
-        });
+        }
       });
     }, 3000);
   }
@@ -167,17 +163,15 @@ export class WebsocketService {
   /**
   * subscribe to recurring tickets realtime
   */
-  public subsribeToRecurringTickets() {
+  public subsribeToRecurringTickets(id) {
 
     setTimeout(() => {
-      this.companiesService.getTechCompany().subscribe((res) => {
-        this.stompClient.subscribe(`/user/watch/recurringTickets/${res['id']}`, (message) => {
-          var newChange = JSON.parse(message.body);
-          this.recurringTicketsRealTimeService.handleRealTimeChanges(newChange);
-          if (message.body) {
+      this.stompClient.subscribe(`/user/watch/recurringTickets/${id}`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.recurringTicketsRealTimeService.handleRealTimeChanges(newChange);
+        if (message.body) {
 
-          }
-        });
+        }
       });
     }, 3000);
   }

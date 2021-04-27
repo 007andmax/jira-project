@@ -4,6 +4,7 @@ import { RecurringTicket } from '../class/recurring-ticket';
 import { Ticket } from '../../class/ticket';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { EditProduct } from 'src/app/interfaces/product/edit-product';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 
 @Injectable({
@@ -17,7 +18,8 @@ export class RecurringTicketsStateService {
   public showTicketAddRecurringAside: EventEmitter<any> = new EventEmitter();
   editProducts: Array<EditProduct> = [];
   tehCompany: any = null;
-  constructor(private companiesService: CompaniesService) {
+  constructor(private companiesService: CompaniesService,
+    private companiesStateService: CompaniesStateService,) {
     this.onInitTehCompany();
   }
 
@@ -25,9 +27,10 @@ export class RecurringTicketsStateService {
 * Subscribe to change teh company
 */
   public onInitTehCompany() {
-    this.companiesService.getTechCompany().subscribe((res) => {
+    if (this.companiesStateService.getCurrentCompany()) this.tehCompany = this.companiesStateService.getCurrentCompany();
+    this.companiesStateService.onCurrentCompany.subscribe(res => {
       this.tehCompany = res;
-    });
+    })
   }
 
   public onInitCopyCreate(data) {

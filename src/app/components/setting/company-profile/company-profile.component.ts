@@ -23,6 +23,7 @@ import { NgbDatepicker, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { TimeZone } from '../../companies/company-time-zone/class/time-zone';
 import { SettingStateService } from 'src/app/states/setting/setting-state.service';
 import { CompanyTimeZoneStateService } from '../../companies/company-time-zone/services/company-time-zone-state.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 declare var google: any;
 declare var $: any;
@@ -117,6 +118,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private mapsAPILoader: MapsAPILoader,
     private settingStateService: SettingStateService,
+    private companiesStateService: CompaniesStateService,
     private companyTimeZoneState: CompanyTimeZoneStateService,
     private ngZone: NgZone
   ) { }
@@ -137,7 +139,11 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     this.getAccountingStartDate();
     this.createCProfileForm();
 
-    this.getCurrentCompany();
+    if (this.companiesStateService.getCurrentCompany()) this.getCurrentCompany(this.companiesStateService.getCurrentCompany());
+    this.companiesStateService.onCurrentCompany.subscribe(res => {
+      this.getCurrentCompany(res);
+    })
+
     this.getCompanyProfile();
     this.getConstants();
 
@@ -280,33 +286,26 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   /**
    * get current company
    */
-  private getCurrentCompany() {
-    this.currentCompany = this.companyProfileService.current().subscribe(
-      res => {
-        if (res) {
-          this.currentCompany = res;
-          if (
-            this.currentCompany &&
-            this.currentCompany.logo &&
-            this.currentCompany.logo.cropped
-          ) {
-            this.imageSrc = `/file/${this.currentCompany.logo.cropped.id}.jpg?t=${this.currentCompany.logo.updatedAt}`;
-          } else {
-            this.imageSrc = '';
-            // this.imageSrc = "../../../../../ng1/images/setting-module/upload-company-logo.svg";
-          }
-          if (this.currentCompany.addresses.length > 0) {
-            const timeZone = this.currentCompany.addresses[0].timeZone;
-            if (timeZone) {
-              this.cProfileForm.patchValue({
-                timeZone: timeZone.name
-              });
-            }
-          }
-        }
-      },
-      error => { }
-    );
+  private getCurrentCompany(res) {
+    this.currentCompany = res;
+    if (
+      this.currentCompany &&
+      this.currentCompany.logo &&
+      this.currentCompany.logo.cropped
+    ) {
+      this.imageSrc = `/file/${this.currentCompany.logo.cropped.id}.jpg?t=${this.currentCompany.logo.updatedAt}`;
+    } else {
+      this.imageSrc = '';
+      // this.imageSrc = "../../../../../ng1/images/setting-module/upload-company-logo.svg";
+    }
+    if (this.currentCompany.addresses.length > 0) {
+      const timeZone = this.currentCompany.addresses[0].timeZone;
+      if (timeZone) {
+        this.cProfileForm.patchValue({
+          timeZone: timeZone.name
+        });
+      }
+    }
   }
 
   /**
@@ -543,7 +542,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
             timeOut: 3000
           });
           this.getCompanyProfile();
-          this.getCurrentCompany();
+
           this.basic();
         },
         error => {
@@ -658,7 +657,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
               res => {
                 if (res) {
                   this.getCompanyProfile();
-                  this.getCurrentCompany();
+
                 }
               },
               error => {

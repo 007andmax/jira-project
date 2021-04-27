@@ -9,6 +9,7 @@ import { TechUsersService } from 'src/app/services/setting/tech-users.service';
 import { SettingService } from 'src/app/services/setting/setting.service';
 import { map } from 'rxjs/operators';
 import { SettingStateService } from 'src/app/states/setting/setting-state.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 declare var $;
 
@@ -50,13 +51,17 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private toastr: ToastrService,
     private settingService: SettingService,
-    private settingStateService: SettingStateService
+    private settingStateService: SettingStateService,
+    private companiesStateService: CompaniesStateService,
   ) {
     const currentComapnyId = localStorage.getItem('currentComapnyId');
     if (currentComapnyId) {
       this.currentCompanyId = currentComapnyId;
     } else {
-      this.currentCompany();
+      if (this.companiesStateService.getCurrentCompany()) this.currentCompany(this.companiesStateService.getCurrentCompany());
+      this.companiesStateService.onCurrentCompany.subscribe(res => {
+        this.currentCompany(res);
+      })
     }
   }
 
@@ -358,18 +363,9 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
   /**
    * current comapny
    */
-  currentCompany() {
-    this.techUsersService
-      .currentComapny()
-      .pipe(
-        map((currentCompany: any) => {
-          if (currentCompany) {
-            localStorage.setItem('currentComapnyId', currentCompany.id);
-            this.currentCompanyId = currentCompany.id;
-          }
-        })
-      )
-      .subscribe();
+  currentCompany(currentCompany) {
+    localStorage.setItem('currentComapnyId', currentCompany.id);
+    this.currentCompanyId = currentCompany.id;
   }
 
   /**

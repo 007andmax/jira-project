@@ -14,9 +14,7 @@ export class TagsService {
     return this.http.get(`${this.apiUrl}tags/getAll`);
   }
 
-  getCurrentCompany() {
-    return this.http.get(`${this.apiUrl}company/current`);
-  }
+
 
   getAllCompany() {
     return this.http.get(`${this.apiUrl}company/tags/getAll`);
