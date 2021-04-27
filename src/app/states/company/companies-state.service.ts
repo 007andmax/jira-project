@@ -27,18 +27,13 @@ export class CompaniesStateService {
   currentCompany: any = null;
   onCurrentCompany: EventEmitter<any> = new EventEmitter();
   showArchivedCompanies: boolean = false;
+  isInitCurrentCompany: boolean = false;
   constructor(private companiesService: CompaniesService,
     private companiesRealTimeService: CompaniesRealTimeService,
     private websocketService: WebsocketService) {
   }
   public onInit() {
-    this.companiesService.getTechCompany().subscribe(data => {
-      this.currentCompany = data;
-      this.onCurrentCompany.emit(data);
-      this.websocketService.subsribeToGlNumber(this.currentCompany.id);
-      this.websocketService.subsribeToQuote(this.currentCompany.id);
-      this.websocketService.subsribeToRecurringTickets(this.currentCompany.id);
-    })
+    this.onInitGetCurrentCompany();
     this.companiesService.getCompaniesList().subscribe((data: any) => {
       this.setAllCompanies(data);
       this.onInitGetCompanies(data);
@@ -48,10 +43,7 @@ export class CompaniesStateService {
         const Index = this.allCompanies.findIndex((item) => item.id === newChange.data.id);
         if (Index > -1) this.allCompanies[Index] = newChange.data;
         if (Index === -1) this.allCompanies.unshift(newChange.data);
-        if (newChange.data.id === this.currentCompany.id) {
-          this.currentCompany = newChange.data;
-          this.onCurrentCompany.emit(newChange.data);
-        }
+        if (newChange.data.id === this.currentCompany.id) this.onInitGetCurrentCompany();
       }
       if (newChange.action === 'COMPANY_DEARCHIVED') {
         const Index = this.allCompanies.findIndex((item) => item.id === newChange.data.id);
@@ -63,6 +55,18 @@ export class CompaniesStateService {
     this.companiesService.getIndustries().subscribe((data: Array<string>) => {
       this.industries = data.sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
         1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
+    })
+  }
+  public onInitGetCurrentCompany() {
+    this.companiesService.getTechCompany().subscribe(data => {
+      this.currentCompany = data;
+      this.onCurrentCompany.emit(data);
+      if (!this.isInitCurrentCompany) {
+        this.websocketService.subsribeToGlNumber(this.currentCompany.id);
+        this.websocketService.subsribeToQuote(this.currentCompany.id);
+        this.websocketService.subsribeToRecurringTickets(this.currentCompany.id);
+      }
+      this.isInitCurrentCompany = true;
     })
   }
   public setShowArchivedCompanies(data) {

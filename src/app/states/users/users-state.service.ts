@@ -37,19 +37,13 @@ export class UsersStateService {
       this.setAllUsers(data);
       this.onInitGetUsers(data);
     })
-    this.userService.getCurrentUser().subscribe((data: any) => {
-      this.currentUser = new CurrentUser(data);
-      this.onInitCurrentUser(data);
-    })
+    this.onInitGetCurrentUser();
     this.usersRealTimeService.changeUsersArray.subscribe(newChange => {
       if (newChange.action === 'USER_SAVED' || newChange.action === 'USER_ARCHIVED') {
         const Index = this.allUsers.findIndex((item) => item.id === newChange.data.id);
         if (Index > -1) this.allUsers[Index] = new User(newChange.data);
         if (Index === -1) this.allUsers.unshift(new User(newChange.data));
-        if (newChange.data.id === this.currentUser.id) {
-          this.currentUser = new CurrentUser(newChange.data);
-          this.onInitCurrentUser(newChange.data);
-        }
+        if (newChange.data.id === this.currentUser.id) this.onInitGetCurrentUser();
       }
       if (newChange.action === 'USERS_DEARCHIVED') {
         newChange.data.forEach(data => {
@@ -69,6 +63,12 @@ export class UsersStateService {
       }
       this.onChangeUsers.emit(new UserChange(newChange.action, newChange.data, this.allUsers));
     });
+  }
+  public onInitGetCurrentUser() {
+    this.userService.getCurrentUser().subscribe((data: any) => {
+      this.currentUser = new CurrentUser(data);
+      this.onInitCurrentUser(data);
+    })
   }
   public setShowArchivedCompanies(data) {
     this.showArchivedCompanies = data;
