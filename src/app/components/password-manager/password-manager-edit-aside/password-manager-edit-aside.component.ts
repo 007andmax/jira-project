@@ -76,6 +76,10 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.sub.add(getOnCompanies);
     let onEditForm = this.passwordManagerService.onEditForm.subscribe((res) => {
       this.editItem = new PasswordRecord(JSON.parse(JSON.stringify(res)));
+      this.selectedUserAndDevices = [];
+      this.usersList = [];
+      this.devicesList = [];
+      this.gadgetsList = [];
       this.editItem.links.forEach(item => {
         if (item.userId) {
           this.selectedUserAndDevices.push(new PasswordDeviceUser(item.userId, `${item.userName}`, 'USER'));
