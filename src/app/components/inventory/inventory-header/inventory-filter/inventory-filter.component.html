@@ -11,7 +11,7 @@
         [change]="true"
         (onSelectedItem)="onSelectCategory($event)"
     ></app-drop-down>
-    <div class="inventory-add-category qt-pos-rel">
+    <div class="inventory-add-category qt-pos-rel qt-mr-8">
         <button
             class="qt-btn"
             (click)="showAddCategory = true"
@@ -23,4 +23,17 @@
             (onClose)="showAddCategory = false"
         ></inventory-add-category>
     </div>
+    <app-drop-down
+        class="qt-w100 dropdown"
+        [placeholder]="'Select Active'"
+        [editItem]="selectedActive"
+        [list]="listActive"
+        [field]="'title'"
+        [search]="true"
+        [change]="true"
+        [isBlockClear]="true"
+        (onSelectedItem)="selectActive($event)"
+        heightInput="36px"
+        widthInput="30%"
+    ></app-drop-down>
 </div>

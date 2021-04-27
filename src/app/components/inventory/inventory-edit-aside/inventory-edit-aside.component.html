@@ -122,6 +122,20 @@
                 (onSelectedItem)="onSelectVendor($event)"
             ></app-select-search>
         </div>
+        <div class="col-md-12 qt-df qt-ai-c">
+            <label
+                class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
+                for="inventory-active"
+            >
+                <input
+                    id="inventory-active"
+                    type="checkbox"
+                    [(ngModel)]="inventory.active"
+                >
+                <span></span>
+            </label>
+            <div class="qt-fs-12 qt-ml-5">Set product as active</div>
+        </div>
     </div>
     <div class="qt-aside-modern__footer">
         <div class="d-f">

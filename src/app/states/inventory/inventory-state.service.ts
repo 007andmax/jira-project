@@ -5,7 +5,6 @@ import { ProductService } from '../../services/product/product.service';
 import { InventoryRealTimeService } from './inventory-real-time.service';
 import { InventoryChange } from '../../components/inventory/class/inventory-change';
 import { CategoryProductitem } from 'src/class/category-product-item';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -15,6 +14,7 @@ export class InventoryStateService {
   categoryForDelete: CategoryProduct = null;
   productForDelete: InventoryItem = null;
   onSortCategory: EventEmitter<any> = new EventEmitter();
+  onSortActive: EventEmitter<any> = new EventEmitter();
   onGetCategories: EventEmitter<any> = new EventEmitter();
   onGetProducts: EventEmitter<any> = new EventEmitter();
   onChangeProducts: EventEmitter<InventoryChange> = new EventEmitter();
@@ -44,7 +44,12 @@ export class InventoryStateService {
       if (newChange.action === 'PRODUCT_SAVED') {
         const Index = this.productList.findIndex((item) => item.id === newChange.data.category.id);
         if (Index > -1) {
-          this.productList[Index].products.push(newChange.data);
+          let indexProduct = this.productList[Index].products.findIndex(item => item.versionedId.id === newChange.data.versionedId.id)
+          if (indexProduct > -1) {
+            if (newChange.data.active) this.productList[Index].products[indexProduct] = newChange.data;
+            if (!newChange.data.active) this.productList[Index].products.splice(indexProduct, 1);
+          }
+          if (indexProduct === -1 && newChange.data.active) this.productList[Index].products.push(newChange.data);
         }
       }
       this.onInitGetProducts(this.productList);
@@ -53,14 +58,11 @@ export class InventoryStateService {
     this.productService.getCategories().subscribe((res: any) => {
       this.setproducts(res);
       this.onInitGetProducts(this.productList);
-
-
     });
   }
   public getListProducts() {
     return this.productList;
   }
-
   public setproducts(data) {
     this.productList = data;
   }
@@ -113,7 +115,9 @@ export class InventoryStateService {
   public setSortCategory(data) {
     this.onSortCategory.emit(data);
   }
-
+  public setSortActive(data) {
+    this.onSortActive.emit(data);
+  }
   public getOnSortCategory() {
     return this.onSortCategory;
   }

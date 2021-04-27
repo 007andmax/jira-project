@@ -1,7 +1,7 @@
 import { FilterListTop } from 'src/class/list/filter-list-top';
 import { InventoryItem } from './inventory-item';
 import { Company } from 'src/app/interfaces/company/company';
-
+import { CategoryProductitem } from 'src/class/category-product-item';
 export class InventoryFilter {
     filterTop: Array<FilterListTop> = [new FilterListTop('description', 'ASC'),
     new FilterListTop('category', ''),
@@ -10,20 +10,31 @@ export class InventoryFilter {
     new FilterListTop('manufacture', ''),
     new FilterListTop('ilc', ''),
     new FilterListTop('glNumber', '')];
-    categoryId: string;
-
+    sortCategoty: CategoryProductitem = null;
+    active: boolean = true;
+    productSearchName: string = "";
     constructor() { }
-
-    public setCompanyId(data) {
-        this.categoryId = data;
+    public setSortCategoty(data) {
+        this.sortCategoty = data;
     }
-    public getFilterList(reqInventoryList: Array<InventoryItem>, companies: Array<Company>) {
-        let list = reqInventoryList.filter((item: InventoryItem) => {
-            let indexCompany = companies.findIndex(company => company.id === item.companyId);
-            if (indexCompany > -1) return true;
-            return false;
-        })
+    public setActive(data) {
+        this.active = data;
+    }
+    public setProductSearchName(data) {
+        this.productSearchName = data;
+    }
+    public getActive() {
+        return this.active;
+    }
+    public getFilterList(reqInventoryList: Array<InventoryItem>) {
+        let list = reqInventoryList.filter((item: InventoryItem) => this.isFilterItem(item))
         return list;
+    }
+    public isFilterItem(item) {
+        if (this.sortCategoty && item.category.id !== this.sortCategoty.id) return false;
+        if (item.active != this.active) return false;
+        if (this.productSearchName.length > 0 && (!item.description.toLowerCase().includes(this.productSearchName.toLowerCase()) && !(item.ilc && item.ilc.toLowerCase().includes(this.productSearchName.toLowerCase())) && !item.isFindGlNumber(this.productSearchName) && !(item.manufacture && item.manufacture.toLowerCase().includes(this.productSearchName.toLowerCase())))) return false;
+        return true;
     }
     public clearFilter() {
         this.filterTop.forEach(item => item.filter = '');
@@ -129,7 +140,6 @@ export class InventoryFilter {
                 1 : ((b.cost > a.cost) ? -1 : 0)
         });
     }
-
     private onFilterSale(reqInventory) {
         reqInventory.sort((a, b) => {
             return (a.sale > b.sale) ?

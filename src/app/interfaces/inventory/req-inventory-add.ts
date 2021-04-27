@@ -1,5 +1,5 @@
 export interface reqInventoryAdd {
-    ilc:string;
+    ilc: string;
     cost: number;
     sale: number;
     manufacture: string;
@@ -7,5 +7,6 @@ export interface reqInventoryAdd {
     companyId: string;
     taxIds: Array<String>;
     categoryId: string;
+    active: boolean;
     glNumber: { id: string };
 }
