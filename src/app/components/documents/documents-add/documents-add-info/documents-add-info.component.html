@@ -1,0 +1,19 @@
+<div
+    class="toggle-aside icon__panel-open"
+    [ngClass]="{'opened' : toggleAside}"
+    (click)="toggleAside = !toggleAside"
+></div>
+<div
+    class="documents-add-info"
+    *ngIf="toggleAside"
+>
+    <div
+        class="qt-aside-modern__header-close icon__close"
+        routerLink="/ng2/documents"
+    ></div>
+    <button (click)="toggleEditCategories = true">Edit</button>
+</div>
+<documents-add-edit-categories
+    *ngIf="toggleEditCategories"
+    (onClosed)="toggleEditCategories = false"
+></documents-add-edit-categories>

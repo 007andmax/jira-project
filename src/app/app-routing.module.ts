@@ -53,6 +53,7 @@ import { CompanyNetworkScanComponent } from './components/company-network-scan/c
 import { CompanyDevicesComponent } from './components/company-devices/company-devices.component';
 import { SupportComponent } from './components/support/support.component';
 import { DocumentsComponent } from './components/documents/documents.component';
+import { DocumentsAddComponent } from './components/documents/documents-add/documents-add.component';
 
 const routes: Routes = [
   {
@@ -182,6 +183,11 @@ const routes: Routes = [
   {
     path: 'ng2/inventory/products',
     component: InventoryComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'ng2/documents/add',
+    component: DocumentsAddComponent,
     pathMatch: 'full'
   },
   {

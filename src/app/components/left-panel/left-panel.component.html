@@ -1,11 +1,17 @@
-<div class="app-left-panel__header">
+<div
+    class="app-left-panel__header"
+    *ngIf="!hideleLeftPanel"
+>
     <div class="app-left-panel__header-logo --beta"></div>
     <div
         class="app-left-panel__header-resize-btn"
         (click)="onToggleLeftPanel()"
     ></div>
 </div>
-<div class="app-left-panel__body">
+<div
+    class="app-left-panel__body"
+    *ngIf="!hideleLeftPanel"
+>
     <app-left-panel-support
         #panelSupport
         (onOpenPanel)="onOpenPanel()"

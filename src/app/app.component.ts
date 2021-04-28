@@ -38,6 +38,7 @@ export class AppComponent implements OnInit {
   qtListHeaaderScroller;
   qtListBodyScroller;
   toggleLeftPanel: boolean = false;
+  hideleLeftPanel: boolean = false;
   showSessionScreen: boolean = false;
   showLockScreen: boolean = false;
   main_page: string = PAGE_MAIN;
@@ -112,6 +113,10 @@ export class AppComponent implements OnInit {
     })
     this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
       this.toggleLeftPanel = data;
+      this.cd.detectChanges();
+    })
+    this.leftPanelStateService.onHideLeftPanel.subscribe(data => {
+      this.hideleLeftPanel = data;
       this.cd.detectChanges();
     })
     this.appService.onLockScreen.subscribe(data => {

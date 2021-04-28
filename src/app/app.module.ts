@@ -424,6 +424,12 @@ import 'froala-editor/js/third_party/font_awesome.min';
 import 'froala-editor/js/third_party/image_tui.min';
 import 'froala-editor/js/third_party/spell_checker.min';
 import 'froala-editor/js/third_party/embedly.min';
+import { DocumentsAddComponent } from './components/documents/documents-add/documents-add.component';
+import { DocumentsAddBodyComponent } from './components/documents/documents-add/documents-add-body/documents-add-body.component';
+import { DocumentsAddHeaderComponent } from './components/documents/documents-add/documents-add-header/documents-add-header.component';
+import { DocumentsAddFooterComponent } from './components/documents/documents-add/documents-add-footer/documents-add-footer.component';
+import { DocumentsAddInfoComponent } from './components/documents/documents-add/documents-add-info/documents-add-info.component';
+import { DocumentsAddEditCategoriesComponent } from './components/documents/documents-add/documents-add-info/documents-add-edit-categories/documents-add-edit-categories.component';
 declare var $: any;
 /**
  * This module represents the main application module
@@ -802,7 +808,13 @@ declare var $: any;
     AfterViewInitDirective,
     TicketsFilterTagsComponent,
     DocumentsComponent,
-    LeftPanelDocumentsComponent
+    LeftPanelDocumentsComponent,
+    DocumentsAddComponent,
+    DocumentsAddBodyComponent,
+    DocumentsAddHeaderComponent,
+    DocumentsAddFooterComponent,
+    DocumentsAddInfoComponent,
+    DocumentsAddEditCategoriesComponent
   ],
   imports: [
     BrowserModule,
@@ -839,7 +851,7 @@ declare var $: any;
     NgxUploaderModule,
     AngularEditorModule,
     FroalaEditorModule,
-    FroalaViewModule
+    FroalaViewModule,
     NgxMaskModule.forRoot()
   ],
   entryComponents: [

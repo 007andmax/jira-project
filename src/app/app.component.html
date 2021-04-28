@@ -5,17 +5,20 @@
 >
     <app-header
         class="nav-header"
-        [ngClass]="{'--full-width':toggleLeftPanel}"
+        [ngClass]="{'--small-with':toggleLeftPanel,
+    '--full-width':hideleLeftPanel}"
     ></app-header>
     <app-left-panel
         class="app-left-panel"
+        [ngStyle]="{'display' : !hideleLeftPanel ? 'block' : 'none'}"
         [ngClass]="{'--mini':toggleLeftPanel}"
     ></app-left-panel>
     <div class="main-container">
         <div class="row">
             <div
                 class="content-container"
-                [ngClass]="{'--large': toggleLeftPanel}"
+                [ngClass]="{'--large': toggleLeftPanel,
+            'xx-small' : hideleLeftPanel}"
             >
                 <div class="content-wrapper">
                     <breadcrumbs></breadcrumbs>
