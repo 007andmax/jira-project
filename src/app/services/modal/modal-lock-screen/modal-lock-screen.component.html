@@ -1,80 +1,106 @@
-<div class="text-center unlock-screen-wrapper">
-    <img
-        src="images/new-icons/unlock-modal-user.svg"
-        alt
-    >
-    <h3>Please Unlock Screen</h3>
+<div
+    style="z-index: 1050"
+    aria-hidden="true"
+    class="modal-backdrop fade show"
+    *ngIf="show"
+></div>
+<div
+    role="dialog"
+    tabindex="-1"
+    class="modal fade show d-block lock-screen-modal"
+    aria-modal="true"
+    *ngIf="show"
+>
     <div
-        class="form-group text-left"
-        [ngClass]="{'has-error': !validate.getValidate() || !validate.getWrongCode()}"
+        role="document"
+        class="modal-dialog"
     >
-        <!-- <label
+        <div class="modal-content">
+            <div class="unlock-screen-wrapper">
+                <div class="unlock-screen-wrapper__header">
+                  <div class="icon__unlock-screen qt-sz-72 qt-bg-contain"></div>
+                  <h3>Unlock Screen</h3>
+                  <p class="text-muted">
+                    Users that have 2 factor authentications please click send code then you can enter this into password box
+                  </p>
+                  <div
+                    class="form-group text-left"
+                    [ngClass]="{'has-error': !validate.getValidate() || !validate.getWrongCode()}"
+                  >
+                    <!-- <label
             class="control-label"
             ng-hide="isShowingErrors(unlockForm, 'code')"
         >
             Password {{currentUser && currentUser.enableTwoFactorAuth && unlockModel.isCodeSent() ? ' or code' : '' }}
         </label> -->
-        <div>
-            <!-- ng-messages="unlockForm.code.$error"
-            ng-hide="!isShowingErrors(unlockForm, 'code')" -->
-            <label
-                class="control-label"
-                *ngIf="!validate.getValidate()"
-            >
-                Password {{currentUser && isEnableTwoFactorAuth() && lockScreen.isCodeSent() ? ' or code' : '' }} is required.
-            </label>
-            <label
-                class="control-label"
-                *ngIf="!validate.getWrongCode()"
-            >
-                It is wrong password {{ currentUser && isEnableTwoFactorAuth() && lockScreen.isCodeSent() ? ' or code' : '' }}.
-            </label>
-        </div>
-        <input
-            placeholder="Enter password"
-            [attr.type]="(codeShowed) ? 'text' : 'password'"
-            name="code"
-            (change)="onCodeChange()"
-            [(ngModel)]="lockScreen.code"
-            class="form-control"
-            required
-        >
-        <a
-            href="javascript:void(0)"
-            class="hit-area ha-20-20"
-            (click)="codeShowed = !codeShowed"
-            style="position: absolute;right: 15px;top: 40px;"
-        >
-            <i
-                class="icn-sm"
-                [ngClass]="{'unlock-hide-icn': codeShowed,
+                    <div>
+                      <!-- ng-messages="unlockForm.code.$error"
+          ng-hide="!isShowingErrors(unlockForm, 'code')" -->
+                      <label
+                        class="control-label"
+                        *ngIf="!validate.getValidate()"
+                      >
+                        Password {{currentUser && isEnableTwoFactorAuth() && lockScreen.isCodeSent() ? ' or code' : '' }} is required.
+                      </label>
+                      <label
+                        class="control-label"
+                        *ngIf="!validate.getWrongCode()"
+                      >
+                        It is wrong password {{ currentUser && isEnableTwoFactorAuth() && lockScreen.isCodeSent() ? ' or code' : '' }}.
+                      </label>
+                    </div>
+                    <p>Password</p>
+                    <input
+                      placeholder="Enter Password"
+                      [attr.type]="(codeShowed) ? 'text' : 'password'"
+                      name="code"
+                      (change)="onCodeChange()"
+                      [(ngModel)]="lockScreen.code"
+                      class="form-control"
+                      required
+                    >
+                    <a
+                      href="javascript:void(0)"
+                      class="hit-area ha-20-20"
+                      (click)="codeShowed = !codeShowed"
+                      style="position: absolute;right: 15px;top: 40px;"
+                    >
+                      <i
+                        class="icn-sm"
+                        [ngClass]="{'unlock-hide-icn': codeShowed,
               'unlock-show-icn' : !codeShowed}"
-            ></i>
-        </a>
-    </div>
-    <div class="buttons-container">
-        <button
-            class="btn btn-primary"
-            (click)="unlock()"
-            [disabled]="lockScreen.isUnlocking()"
-        >
-            Unlock
-        </button>
-        <button
-            class="btn btn-success"
-            *ngIf="currentUser && isEnableTwoFactorAuth()"
-            (click)="sendCode()"
-            [disabled]="lockScreen.isUnlocking()"
-        >
-            Send code
-        </button>
-    </div>
-    <i class="unlock-modal-icn"></i>
-    <p class="text-muted">
-        Users that have 2 factor authentications please click send code then you can enter this into the
-    password box
-    </p>
-    <div class="log-out-btn">
-        <a (click)="logOut()">Logout</a>
+                      ></i>
+                    </a>
+                  </div>
+                  <div class="qt-df qt-jc-fe">
+                    <button
+                      class="qt-button --red qt-mr-12"
+                      (click)="logOut()"
+                    >
+                      Logout
+                    </button>
+                    <button
+                      class="qt-button"
+                      (click)="unlock()"
+                      [disabled]="lockScreen.isUnlocking()"
+                    >
+                      <span class="ng-star-inserted">Unlock Screen</span>
+                    </button>
+                  </div>
+                  <i class="unlock-modal-icn"></i>
+                </div>
+                <div class="unlock-screen-wrapper__footer">
+                  <button
+                    class="qt-button button-verification"
+                    *ngIf="currentUser && isEnableTwoFactorAuth()"
+                    (click)="sendCode()"
+                    [disabled]="lockScreen.isUnlocking()"
+                  >
+                    <span class="icon__email-blue qt-sz-16 qt-mr-6 qt-bg-contain"></span>
+                    <span class="ng-star-inserted">Send me Verification Code</span>
+                  </button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

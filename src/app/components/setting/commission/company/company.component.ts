@@ -8,6 +8,7 @@ import { CommissionService } from "../commission.service";
 import { UsersService } from "src/app/services/users/users.service";
 import { ToastrService } from "ngx-toastr";
 import { FormControl } from "@angular/forms";
+import { UsersStateService } from "src/app/states/users/users-state.service";
 
 @Component({
   selector: "app-company-commission",
@@ -39,11 +40,15 @@ export class CompanyComponent implements OnInit {
   constructor(
     private commissionService: CommissionService,
     private userService: UsersService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private usersStateService: UsersStateService
   ) { }
 
   ngOnInit() {
-    this.currentUser = this.userService.currentUser;
+    if (this.usersStateService.getCurrentUser()) this.currentUser = this.usersStateService.getCurrentUser();
+    this.usersStateService.getOnGetCurrentuser().subscribe(data => {
+      this.currentUser = data;
+    })
     // this.getClientCompanies();
 
     this.getUsers();
@@ -144,7 +149,6 @@ export class CompanyComponent implements OnInit {
         }
       });
     }
-    //  console.log("techUser", techUser);
     return techUser;
   }
 
@@ -191,7 +195,6 @@ export class CompanyComponent implements OnInit {
           this.loading = false; $(".loading").css("display", "none");
           if (custCompany) {
             this.clientsCompanies = custCompany;
-            console.log("this.clientsCompanies", this.clientsCompanies);
           }
         },
         error => {

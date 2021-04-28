@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { EmailSettingService } from '../email-setting.service';
 import { ToastrService } from 'ngx-toastr';
 import { SettingService } from 'src/app/services/setting/setting.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
   selector: 'app-incoming-email',
@@ -22,7 +23,8 @@ export class IncomingEmailComponent implements OnInit {
   constructor(
     private emailSettingService: EmailSettingService,
     private settingService: SettingService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private companiesStateService: CompaniesStateService,
   ) { }
 
   /**
@@ -31,7 +33,10 @@ export class IncomingEmailComponent implements OnInit {
   ngOnInit() {
     this.smtpSettings = this.smtpSettingsInput;
     this.supportMailBox = this.supportMailBoxInput;
-    this.currentCompany();
+    if (this.companiesStateService.getCurrentCompany()) this.currentCompany(this.companiesStateService.getCurrentCompany());
+    this.companiesStateService.onCurrentCompany.subscribe(res => {
+      this.currentCompany(res);
+    })
     this.getConstants();
     // this.SMTPSettings();
   }
@@ -39,11 +44,9 @@ export class IncomingEmailComponent implements OnInit {
   /**
    * get current company
    */
-  currentCompany() {
-    this.settingService.currentCompany().subscribe(res => {
-      this.currentComapny = res;
-      this.inboxEnabled = this.currentComapny.inboxEnabled;
-    });
+  currentCompany(res) {
+    this.currentComapny = res;
+    this.inboxEnabled = this.currentComapny.inboxEnabled;
   }
 
   /**

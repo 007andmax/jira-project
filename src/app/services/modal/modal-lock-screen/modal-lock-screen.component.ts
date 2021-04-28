@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { LockScreenService } from '../../lock-screen/lock-screen.service';
@@ -9,35 +9,31 @@ import { ModalLockValidate } from './class/modal-lock-validate';
   selector: 'modal-lock-screen',
   templateUrl: './modal-lock-screen.component.html',
   styleUrls: ['./modal-lock-screen.component.css'],
-  providers: [NgbModalConfig, NgbModal]
 })
 
 export class ModalLockScreenComponent implements OnInit {
   currentUser: any;
   codeShowed: boolean = false;
+  @Input() reload: boolean;
+  @Output() onClosed = new EventEmitter<any>();
   validate: ModalLockValidate = new ModalLockValidate();
   lockScreen: LockScreen = new LockScreen();
+  show: boolean = false;
   constructor(private usersStateService: UsersStateService,
     private lockScreenService: LockScreenService,
-    public activeModal: NgbActiveModal,
-    private modalService: NgbModal,
-    public cd: ChangeDetectorRef,
-    config: NgbModalConfig,) {
-    config.backdrop = 'static';
-    config.keyboard = false;
-    console.log("config", config);
+    public cd: ChangeDetectorRef) {
   }
 
   ngOnInit() {
     this.currentUser = this.usersStateService.getCurrentUser();
     this.usersStateService.getOnGetCurrentuser().subscribe(data => {
       this.currentUser = data;
-      console.log("this.currentUser", this.currentUser);
       this.cd.detectChanges();
     })
-    console.log("this.currentUser", this.currentUser);
     this.cd.detectChanges();
-    console.log("this.validate", this.validate);
+  }
+  public showModal() {
+    this.show = true;
   }
   onCodeChange() {
     this.validate.setWrongCode(true);
@@ -47,20 +43,25 @@ export class ModalLockScreenComponent implements OnInit {
     return this.currentUser.twoFactorAuthType === 'SECURE' || this.currentUser.twoFactorAuthType === 'BASIC';
   }
   unlock() {
-    console.log("this.validate", this.validate);
     if (this.validate.isValidate(this.lockScreen.code)) {
       this.lockScreen.setUnlocking(true);
       this.lockScreenService.unlockScreen(this.lockScreen.code).subscribe(resp => {
-        this.activeModal.dismiss('Cross click');
+        //  this.activeModal.dismiss('Cross click');
+        this.show = false;
         this.lockScreen.setUnlocking(false);
+        this.cd.detectChanges();
+        if (this.reload) window.location.reload();
+        this.close();
       }, resp => {
-        console.log("resp", resp);
         if (resp.status === 409) this.validate.setWrongCode(false);
         this.lockScreen.setUnlocking(false);
       })
     } else {
       //  $scope.triedToUnlock = true;
     }
+  }
+  close() {
+    this.onClosed.emit(null);
   }
   sendCode() {
     this.lockScreen.setUnlocking(true);

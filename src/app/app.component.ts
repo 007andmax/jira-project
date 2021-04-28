@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 // @ts-ignore
 import { UpgradeModule } from "@angular/upgrade/static";
 import { setUpLocationSync } from '@angular/router/upgrade';
@@ -43,6 +43,8 @@ export class AppComponent implements OnInit {
   main_page: string = PAGE_MAIN;
   PAGE_MAIN = PAGE_MAIN;
   PAGE_DEVICE = PAGE_DEVICE;
+  @ViewChild('contentLockScreenModal') contentLockScreenModal: ModalLockScreenComponent;
+  @ViewChild('contentSessionScreenModal') contentSessionScreenModal: ModalSessionScreenComponent;
   /**
    * Creates an instance of the MainComponent with the injected services
    * @param {UpgradeModule} upgrade service
@@ -81,7 +83,6 @@ export class AppComponent implements OnInit {
           this.main_page = PAGE_MAIN;
         }
       });
-    this.userService.getUser();
     this.devicesState.onInit();
     this.usersStateService.onInit();
     this.companiesState.onInit();
@@ -115,23 +116,16 @@ export class AppComponent implements OnInit {
     })
     this.appService.onLockScreen.subscribe(data => {
       if (!this.showLockScreen) {
-        const modalRef = this.modalService.open(ModalLockScreenComponent, {
-          windowClass: 'lock-screen-modal', backdrop: 'static',
-          keyboard: false
-        });
-        console.log("modalRef", modalRef);
+        this.contentLockScreenModal.reload = data;
+        this.contentLockScreenModal.showModal();
         this.showLockScreen = true;
         this.cd.detectChanges();
       }
     })
     this.appService.onSessionScreen.subscribe(data => {
       if (!this.showSessionScreen) {
-        const modalRef = this.modalService.open(ModalSessionScreenComponent, {
-          windowClass: 'xs-modal user-modal', backdrop: 'static',
-          keyboard: false
-        });
-        modalRef.componentInstance.message = data;
-        console.log("modalRef", modalRef);
+        this.contentSessionScreenModal.message = data;
+        this.contentSessionScreenModal.showModal();
         this.showSessionScreen = true;
         this.cd.detectChanges();
       }
@@ -147,6 +141,9 @@ export class AppComponent implements OnInit {
       this.qtListHeaaderScroller.addEventListener('scroll', this.qtListHeaaderScrollerScroll, false);
       this.qtListBodyScroller.addEventListener('scroll', this.qtListBodyScrollerScroll, false);
     }
+  }
+  public setShowLockScreen(data) {
+    this.showLockScreen = data;
   }
   qtListHeaaderScrollerScroll = () => {
     this.qtListBodyScroller.scrollLeft = this.qtListHeaaderScroller.scrollLeft;

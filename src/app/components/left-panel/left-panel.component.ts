@@ -120,7 +120,6 @@ export class LeftPanelComponent implements OnInit {
 
       });
     this.leftPanelStateService.onGoToState.subscribe(data => {
-      console.log("data", data);
       this.onChangeState(data);
     })
     this.leftPanelStateService.onOpenCompanyPage.subscribe(data => {
@@ -146,7 +145,6 @@ export class LeftPanelComponent implements OnInit {
   }
 
   public goToLink(url) {
-    console.log("url", url);
     this.router.navigate([url]);
   }
   onChangeState(data) {

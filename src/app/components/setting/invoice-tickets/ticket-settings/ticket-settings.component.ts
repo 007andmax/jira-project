@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { InvoiceTicketsService } from '../invoice-tickets.service';
 import { UsersService } from 'src/app/services/users/users.service';
 import { ToastrService } from 'ngx-toastr';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
   selector: 'app-ticket-settings',
@@ -24,7 +26,9 @@ export class TicketSettingsComponent implements OnInit {
     private formBuilder: FormBuilder,
     private invoiceTicketsService: InvoiceTicketsService,
     private userService: UsersService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private companiesStateService: CompaniesStateService,
+    private usersStateService: UsersStateService
   ) { }
 
   /**
@@ -32,7 +36,11 @@ export class TicketSettingsComponent implements OnInit {
    */
   ngOnInit() {
     // get current user
-    this.currentUser = this.userService.currentUser;
+    if (this.usersStateService.getCurrentUser()) this.currentUser = this.usersStateService.getCurrentUser();
+    this.usersStateService.getOnGetCurrentuser().subscribe(data => {
+      this.currentUser = data;
+    })
+
 
     this.ticketForm = this.formBuilder.group({
       ticketCount: [
@@ -62,8 +70,11 @@ export class TicketSettingsComponent implements OnInit {
       // ],
       // conditions: ['']
     });
+    if (this.companiesStateService.getCurrentCompany()) this.getCurrentCompany(this.companiesStateService.getCurrentCompany());
+    this.companiesStateService.onCurrentCompany.subscribe(res => {
+      this.getCurrentCompany(res);
+    })
 
-    this.getCurrentCompany();
     this.getActualNumber();
     // this.getTaxNumber();
     // this.getTermsAndConditions();
@@ -84,22 +95,15 @@ export class TicketSettingsComponent implements OnInit {
   /**
    * current comapny
    */
-  getCurrentCompany() {
-    this.invoiceTicketsService.currentCompany().subscribe(
-      (res: any) => {
-        if (res) {
-          this.ticketForm.patchValue({
-            outliersTime: res.outliersSeconds
-              ? res.outliersSeconds / 3600
-              : null,
-            timepickerType: res.serviceExpenseDurationPresentation
-              ? res.serviceExpenseDurationPresentation
-              : 'DURATION_PICKER'
-          });
-        }
-      },
-      error => { }
-    );
+  getCurrentCompany(res) {
+    this.ticketForm.patchValue({
+      outliersTime: res.outliersSeconds
+        ? res.outliersSeconds / 3600
+        : null,
+      timepickerType: res.serviceExpenseDurationPresentation
+        ? res.serviceExpenseDurationPresentation
+        : 'DURATION_PICKER'
+    });
   }
 
   /**

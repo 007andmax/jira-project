@@ -206,6 +206,9 @@
  &__office-account {
   background-image: url("/assets/img/icons/office-account.svg");
  }
+ &__unlock-screen {
+   background-image: url("/assets/img/icons/unlock-screen.svg");
+ }
   &__custom-category {
   background-image: url("/assets/img/icons/custom-category.svg");
  }
@@ -265,6 +268,9 @@
   }
   &__email-dark {
     background-image: url("/assets/img/icons/email-dark.svg");
+  }
+  &__email-blue {
+    background-image: url("/assets/img/icons/email-blue.svg");
   }
   &__view {
     background-image: url("/assets/img/icons/view.svg");
@@ -681,6 +687,7 @@
   background-size: cover;
   width: 20px;
   height: 20px;
+  display: block;
 }
 
 .priority-icon {

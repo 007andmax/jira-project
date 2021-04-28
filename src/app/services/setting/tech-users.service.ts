@@ -82,7 +82,5 @@ export class TechUsersService {
     });
   }
 
-  currentComapny() {
-    return this.http.get(`${this.apiUrl}company/current`);
-  }
+
 }

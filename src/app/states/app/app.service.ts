@@ -19,8 +19,8 @@ export class AppService {
   public showSessionScreen(data) {
     this.onSessionScreen.emit(data);
   }
-  public showLockScreen() {
-    this.onLockScreen.emit(null);
+  public showLockScreen(data = false) {
+    this.onLockScreen.emit(data);
   }
   public getOnInit() {
     return this.init;

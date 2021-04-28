@@ -157,7 +157,6 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
     })
   }
   moToBillable() {
-    console.log("moToBillable");
     this.leftPanelStateService.goToState('new-billable');
   }
   saveAndDownload() {

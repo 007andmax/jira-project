@@ -94,13 +94,10 @@ export class GlNumberComponent implements OnInit {
       this.cd.detectChanges();
     })
 
-    this.techCompany = this.companiesStateService.getCurrentCompany();
-    this.companiesService.getTechCompany().subscribe(data => {
-      this.techCompany = data;
+    if (this.companiesStateService.getCurrentCompany()) this.techCompany = this.companiesStateService.getCurrentCompany();
+    this.companiesStateService.onCurrentCompany.subscribe(res => {
+      this.techCompany = res;
     })
-
-
-
   }
 
   public getReport(data) {

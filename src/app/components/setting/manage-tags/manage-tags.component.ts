@@ -13,6 +13,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
 import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { SettingStateService } from "src/app/states/setting/setting-state.service";
+import { CompaniesStateService } from "src/app/states/company/companies-state.service";
 declare var $: any;
 @Component({
   selector: "app-manage-tags",
@@ -53,7 +54,8 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     private tagsService: TagsService,
     private formBuilder: FormBuilder,
     private toaster: ToastrService,
-    private settingStateService: SettingStateService
+    private settingStateService: SettingStateService,
+    private companiesStateService: CompaniesStateService,
   ) { }
 
   /**
@@ -67,7 +69,10 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       word: ["", Validators.required],
       id: [""]
     });
-    this.getCurrentCompany();
+    if (this.companiesStateService.getCurrentCompany()) this.getCurrentCompany(this.companiesStateService.getCurrentCompany());
+    this.companiesStateService.onCurrentCompany.subscribe(res => {
+      this.getCurrentCompany(res);
+    })
     this.serviceAllTickets = this.tagsService.getAllTickets();
     this.serviceAllCompany = this.tagsService.getAllCompany();
 
@@ -98,14 +103,8 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       );
   }
 
-  getCurrentCompany() {
-    this.tagsService.getCurrentCompany().subscribe(
-      res => {
-        this.allowCreateTags = res['allowCreateTags'];
-      },
-      error => {
-      }
-    );
+  getCurrentCompany(res) {
+    this.allowCreateTags = res['allowCreateTags'];
   }
 
   saveAllowingCreateCustomTags() {

@@ -9,15 +9,18 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class ModalSessionScreenComponent implements OnInit {
   @Input() public message = '';
   action: string = null;
+  show: boolean = false;
   constructor(
-    public activeModal: NgbActiveModal, private eRef: ElementRef,) {
+   /* public activeModal: NgbActiveModal, */private eRef: ElementRef,) {
 
   }
 
   ngOnInit() {
 
   }
-
+  public showModal() {
+    this.show = true;
+  }
   public logOut() {
     window.location.href = '/logout';
     window.location.hash = '';
@@ -26,7 +29,7 @@ export class ModalSessionScreenComponent implements OnInit {
 
   approveConfirm() {
     this.logOut();
-    this.activeModal.close();
+    // this.activeModal.close();
 
   };
 

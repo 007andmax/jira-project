@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter, ElementRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter, ElementRef, OnDestroy, Input } from '@angular/core';
 import { TimeZoneService } from './services/time-zone.service';
 import { TimeZone } from './class/time-zone';
 import { CompanyTimeZoneStateService } from './services/company-time-zone-state.service';
@@ -13,7 +13,7 @@ export class CompanyTimeZoneComponent implements OnInit, OnDestroy {
   @Output() selectedOffsetItem = new EventEmitter<any>();
   public isFormValid = false;
   public list: Array<TimeZone> = [];
-  selectedItem: TimeZone = null;
+  @Input() selectedItem: TimeZone = null;
   sub: Subscription = new Subscription();
   constructor(private timeZoneService: TimeZoneService, private elRef: ElementRef,
     private companyTimeZoneState: CompanyTimeZoneStateService) { }
@@ -21,6 +21,10 @@ export class CompanyTimeZoneComponent implements OnInit, OnDestroy {
   ngOnInit() {
     let getTimeZones = this.timeZoneService.getTimeZones().subscribe((data: any) => {
       this.list = data.map(item => new TimeZone(item));
+      if (this.selectedItem) {
+        let find = this.list.find(item => item.second === this.selectedItem.second);
+        this.selectedItem = find;
+      }
     })
     this.sub.add(getTimeZones);
     this.onEditMode();

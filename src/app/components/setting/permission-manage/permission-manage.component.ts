@@ -6,6 +6,7 @@ import { of } from 'rxjs';
 import { UsersService } from 'src/app/services/users/users.service';
 import { ToastrService } from 'ngx-toastr';
 import { SettingStateService } from 'src/app/states/setting/setting-state.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 declare var $: any;
 @Component({
   selector: 'app-permission-manage',
@@ -46,7 +47,8 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
     private settingService: SettingService,
     private usersService: UsersService,
     private toastrService: ToastrService,
-    private settingStateService: SettingStateService
+    private settingStateService: SettingStateService,
+    private companiesStateService: CompaniesStateService,
   ) {
     this.companiesRelatedPermissions = this.permissionManageService.getCompaniesRelatedPermissions();
     this.userRelatedPermissions = this.permissionManageService.getUserRelatedPermissions();
@@ -67,7 +69,10 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
     this.allUsers = [];
     this.getPermissionManage();
     this.getRoleNames();
-    this.currentCompany();
+    if (this.companiesStateService.getCurrentCompany()) this.currentCompany(this.companiesStateService.getCurrentCompany());
+    this.companiesStateService.onCurrentCompany.subscribe(res => {
+      this.currentCompany(res);
+    })
     this.getAllUsers();
     this.settingStateService.setComponentName('PermissionManageComponent');
   }
@@ -94,15 +99,8 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
   /**
    * current comapny
    */
-  currentCompany() {
-    this.settingService
-      .currentCompany()
-      .pipe(
-        map(res => {
-          this.techCompany = res;
-        })
-      )
-      .subscribe();
+  currentCompany(res) {
+    this.techCompany = res;
   }
 
   /**

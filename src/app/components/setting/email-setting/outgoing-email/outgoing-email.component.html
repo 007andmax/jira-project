@@ -182,7 +182,8 @@
 </div>
 <div
     class="sidebar-popup"
-    [class.opened]="create"
+    *ngIf="create"
+    [ngClass]="{'opened':create}"
 >
     <!-- header -->
     <div class="sidebar-header">

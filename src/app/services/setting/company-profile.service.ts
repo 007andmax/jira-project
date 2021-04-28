@@ -18,9 +18,7 @@ export class CompanyProfileService {
     return this.http.get(`${this.apiUrl}settings/companyProfile/`);
   }
 
-  current() {
-    return this.http.get(`${this.apiUrl}company/current`);
-  }
+
 
   basic(compBasic: any) {
     return this.http.put(

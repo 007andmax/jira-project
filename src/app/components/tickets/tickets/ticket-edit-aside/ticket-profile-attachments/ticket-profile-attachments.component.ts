@@ -21,6 +21,7 @@ export class TicketProfileAttachmentsComponent implements OnInit {
     if (contentType === "image/jpg" || contentType === "image/png") this.previewAttachmentStateService.onInitPreview(`/file/${attachmentId}`);
   }
   public getTypeFile(name: string) {
+    if (!name) return "attachment";
     let type = name.substring(name.lastIndexOf(".") + 1, name.length);
     return type.toUpperCase();
   }
