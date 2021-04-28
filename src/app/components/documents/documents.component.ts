@@ -1,5 +1,6 @@
 import { Component, OnInit, SimpleChanges } from '@angular/core';
 import FroalaEditor from 'froala-editor';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
 declare const Codox: any;
 
 @Component({
@@ -12,11 +13,28 @@ export class DocumentsComponent implements OnInit {
   public options: Object;
   codox: any;
   editor: any;
-  constructor() {
+  currentUser: any;
+  showPreloader: boolean = true;
+  constructor(private usersStateService: UsersStateService) {
     this.codox = new Codox()
   }
 
   ngOnInit() {
+    if (this.usersStateService.getCurrentUser()) {
+      this.currentUser = this.usersStateService.getCurrentUser();
+      this.onInitFloara();
+      this.showPreloader = false;
+    }
+    this.usersStateService.getOnGetCurrentuser().subscribe(data => {
+      this.currentUser = data;
+      this.onInitFloara();
+      this.showPreloader = false;
+    })
+
+
+
+  }
+  onInitFloara() {
     const self = this;
     this.options = {
       saveParam: 'body',
@@ -31,10 +49,15 @@ export class DocumentsComponent implements OnInit {
         "initialized": function () {
           let config = {
             "docId": "e1626875-8d25-4f98-abd8-abfdd7010d81",
-            "user": { "name": "Semyhran" },
+            "user": { "name": `${self.usersStateService.getCurrentUser().firstName} ${self.usersStateService.getCurrentUser().lastName}` },
             "editor": this,
-            "apiKey": "68cdb48b-a9cf-4859-973d-2ee548671b2a",
+            "apiKey": "58e429b0-be4a-4cd8-8c8d-9a37fb0adec0",
             "app": "froala",
+            "showPointer": true,
+            "cursorAlwaysOn": true,
+            "pointers": {
+              "shape": "arrow"
+            }
           };
           //start!
           self.codox.init(config);
@@ -81,8 +104,6 @@ export class DocumentsComponent implements OnInit {
 
       }
     };
-
-
   }
 
 
