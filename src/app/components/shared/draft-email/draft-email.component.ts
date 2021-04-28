@@ -144,6 +144,7 @@ export class DraftEmailComponent implements OnInit {
 
   }
   onSend() {
+    console.log("this.draftEmail", this.draftEmail);
     if (this.tab === 'html') {
       this.draftEmail.setCustomHtml(true);
       this.draftEmail.setContent(this.messageHTML.replace(/(\r\n|\n|\r)/gm, ""));

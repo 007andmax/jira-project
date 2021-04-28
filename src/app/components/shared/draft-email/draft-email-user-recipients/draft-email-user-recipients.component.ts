@@ -125,6 +125,7 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
       if ((value || '').trim()) {
         this.selectedUsers.push(value.trim());
         this.userEmails.push(value.trim());
+        this.onCompanyEmails.emit(this.userEmails);
         this.userList = this.reqUsersList;
       }
       if (input) {
