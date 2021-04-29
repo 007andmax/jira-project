@@ -130,6 +130,8 @@ export class DraftEmailRecipientsComponent implements OnInit {
     const value = event.target.value;
     if ((value || '').trim()) {
       this.selectedCompanies.push(value.trim());
+      this.companyEmails.push(value.trim());
+      this.onCompanyEmails.emit(this.companyEmails);
       this.companyList = this.reqCompanyList;
     }
     if (input) {
