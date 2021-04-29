@@ -135,6 +135,19 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
     }
 
   }
+  public onAdd(event) {
+    const input = event.target.input;
+    const value = event.target.value;
+    if ((value || '').trim()) {
+      this.selectedUsers.push(value.trim());
+      this.userEmails.push(value.trim());
+      this.userList = this.reqUsersList;
+    }
+    if (input) {
+      input.value = '';
+    }
+    this.userCtrl.setValue(null);
+  }
   public trackByIndex(index, item) {
     return index;
   }

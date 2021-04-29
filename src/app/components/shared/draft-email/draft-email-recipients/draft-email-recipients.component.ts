@@ -76,19 +76,13 @@ export class DraftEmailRecipientsComponent implements OnInit {
 
   }
   private setCompanyList(data) {
-
     this.reqCompanyList = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt && item.companyInfo.contacts[0].primaryEmail != '').sort((a, b) => (a.companyInfo.contacts[0].primaryEmail.toLowerCase() > b.companyInfo.contacts[0].primaryEmail.toLowerCase()) ?
       1 : ((b.companyInfo.contacts[0].primaryEmail.toLowerCase() > a.companyInfo.contacts[0].primaryEmail.toLowerCase()) ? -1 : 0));
     this.companyList = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt && item.companyInfo.contacts[0].primaryEmail != '').sort((a, b) => (a.companyInfo.contacts[0].primaryEmail.toLowerCase() > b.companyInfo.contacts[0].primaryEmail.toLowerCase()) ?
       1 : ((b.companyInfo.contacts[0].primaryEmail.toLowerCase() > a.companyInfo.contacts[0].primaryEmail.toLowerCase()) ? -1 : 0));
-
     this.companiesSelected.forEach(item => {
-      /* if (item.primaryEmail !== '')
-       {*/
       this.selectedCompanies.push(item.companyInfo.contacts[0].primaryEmail);
       this.companyEmails.push(item.companyInfo.contacts[0].primaryEmail);
-      //  }
-
     })
     this.onCompanyEmails.emit(this.companyEmails);
   }
@@ -131,13 +125,22 @@ export class DraftEmailRecipientsComponent implements OnInit {
 
     this.companyList = this.reqCompanyList.filter(item => item.companyInfo.contacts[0].primaryEmail.includes(event.target.value));
   }
+  public onAdd(event) {
+    const input = event.target.input;
+    const value = event.target.value;
+    if ((value || '').trim()) {
+      this.selectedCompanies.push(value.trim());
+      this.companyList = this.reqCompanyList;
+    }
+    if (input) {
+      input.value = '';
+    }
+    this.companyCtrl.setValue(null);
+  }
   onKeyUp(event) {
-
-
     if (event.keyCode === 13) {
       const input = event.target.input;
       const value = event.target.value;
-
       if ((value || '').trim()) {
         this.selectedCompanies.push(value.trim());
         this.companyEmails.push(value.trim());
@@ -149,9 +152,7 @@ export class DraftEmailRecipientsComponent implements OnInit {
         input.value = '';
       }
       this.companyCtrl.setValue(null);
-
     }
-
   }
   public trackByIndex(index, item) {
     return index;

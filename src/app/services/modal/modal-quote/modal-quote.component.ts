@@ -235,6 +235,18 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
     this.activeModal.dismiss('Cross click');
   }
 
+  public onAdd(e) {
+    const input = e.target;
+    const value = e.target.value;
+    if (value.length > 0) {
+      this.selectedUsers.push(value);
+      this.usersEmails.push(value);
+      this.quoteStateService.setUsersEmail(this.usersEmails);
+      input.value = '';
+      this.userCtrl.setValue(null);
+    }
+    this.users = JSON.parse(JSON.stringify(this.reqUsersList));
+  }
   public keyup(e) {
     if (e.keyCode === 13) {
       const input = e.target;
@@ -246,6 +258,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
         input.value = '';
         this.userCtrl.setValue(null);
       }
+      this.users = JSON.parse(JSON.stringify(this.reqUsersList));
     }
   }
   ngOnDestroy(): void {
