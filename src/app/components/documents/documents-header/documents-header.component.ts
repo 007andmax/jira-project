@@ -1,0 +1,64 @@
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+
+
+@Component({
+  selector: 'documents-header',
+  templateUrl: './documents-header.component.html',
+  styleUrls: ['./documents-header.component.css']
+})
+export class DocumentsHeaderComponent implements OnInit {
+  toggleFilter: boolean = true;
+  countFilter: number = 0;
+  @Output() onChangeFilterField = new EventEmitter<any>();
+  @Output() onSelectAll = new EventEmitter<any>();
+  @Output() onSearch = new EventEmitter<any>();
+  @Input() selectAll: boolean = false;
+
+
+  sub: Subscription = new Subscription();
+  searchText: string = "";
+  /**
+   * Creates an instance of the PasswordManagerComponent with the injected services
+    * @param {PasswordManagerService} passwordManagerService Service to work with filters
+   * @param {permissionsService} permissionsService to work with permissions service
+   */
+  constructor(
+
+    private permissionsService: PermissionsService,
+  ) { }
+
+  /**
+   * Initializes Password manager header. See [ngOnInit]{@see OnInit#ngOnInit}
+   */
+  ngOnInit() {
+
+  }
+  clearSearch() {
+    this.searchText = "";
+    this.onSearch.emit("");
+  }
+  toggleAll(data) {
+    this.selectAll = true;
+    this.onSelectAll.emit(data);
+  }
+  public onFilter(field) {
+    this.onChangeFilterField.emit(field);
+  }
+  search(event) {
+    this.onSearch.emit(event.target.value);
+  }
+
+  onChangeCountFilter(data) {
+    this.countFilter = data;
+  }
+
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
+  }
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
+
+}

@@ -430,6 +430,9 @@ import { DocumentsAddHeaderComponent } from './components/documents/documents-ad
 import { DocumentsAddFooterComponent } from './components/documents/documents-add/documents-add-footer/documents-add-footer.component';
 import { DocumentsAddInfoComponent } from './components/documents/documents-add/documents-add-info/documents-add-info.component';
 import { DocumentsAddEditCategoriesComponent } from './components/documents/documents-add/documents-add-info/documents-add-edit-categories/documents-add-edit-categories.component';
+import { DocumentsTableComponent } from './components/documents/documents-table/documents-table.component';
+import { DocumentsHeaderComponent } from './components/documents/documents-header/documents-header.component';
+import { DocumentsFilterComponent } from './components/documents/documents-header/documents-filter/documents-filter.component';
 declare var $: any;
 /**
  * This module represents the main application module
@@ -814,7 +817,10 @@ declare var $: any;
     DocumentsAddHeaderComponent,
     DocumentsAddFooterComponent,
     DocumentsAddInfoComponent,
-    DocumentsAddEditCategoriesComponent
+    DocumentsAddEditCategoriesComponent,
+    DocumentsTableComponent,
+    DocumentsHeaderComponent,
+    DocumentsFilterComponent
   ],
   imports: [
     BrowserModule,
