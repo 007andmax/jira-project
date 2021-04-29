@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { DocumentsService } from 'src/app/services/documents/documents.service';
+import { DocumentAdd } from '../class/document-add';
 
 @Component({
   selector: 'app-documents-add-footer',
@@ -6,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./documents-add-footer.component.scss']
 })
 export class DocumentsAddFooterComponent implements OnInit {
-
-  constructor() { }
+  @Input() documentAdd: DocumentAdd = new DocumentAdd();
+  constructor(private documentsService: DocumentsService) { }
 
   ngOnInit() {
   }
+  add() {
+    console.log("documentAdd", this.documentAdd);
+    this.documentsService.add(this.documentAdd).subscribe(data => {
 
+    })
+  }
 }

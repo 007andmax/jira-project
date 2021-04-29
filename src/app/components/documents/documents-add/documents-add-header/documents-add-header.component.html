@@ -1,2 +1,75 @@
 <p>documents-add-header works!</p>
+<div
+    class="invoce-table__menu"
+    ngbDropdown
+    [container]="'body'"
+>
+    <div
+        class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"
+        id="dropdownBasic1"
+        ngbDropdownToggle
+    >
+        <ul
+            class="qt-dropdown-menu invoice-items-dropdown"
+            ngbDropdownMenu
+            aria-labelledby="dropdownBasic1"
+        >
+            <li
+                class="pointer"
+                ngbDropdownItem
+            >
+                Share...
+            </li>
+            <li
+                class="pointer"
+                ngbDropdownItem
+            >
+                Move...
+            </li>
+            <li
+                class="pointer"
+                ngbDropdownItem
+            >
+                Copy to...
+            </li>
+            <li
+                class="pointer"
+                ngbDropdownItem
+            >
+                Clone Document
+            </li>
+            <li
+                class="pointer"
+                ngbDropdownItem
+            >
+                Find within document
+            </li>
+            <li
+                class="pointer"
+                ngbDropdownItem
+            >
+                Copy Internal Link
+            </li>
+            <li
+                class="pointer"
+                ngbDropdownItem
+            >
+                Print
+            </li>
+            <li
+                class="pointer"
+                ngbDropdownItem
+            >
+                Export PDF
+            </li>
+            <hr>
+            <li
+                class="pointer"
+                ngbDropdownItem
+            >
+                Move to Trash
+            </li>
+        </ul>
+    </div>
+</div>
 <button (click)="onToggleLeftPanel()">collapse document</button>

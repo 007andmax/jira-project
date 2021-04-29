@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { DocumentAdd } from './class/document-add';
 
 @Component({
   selector: 'app-documents-add',
@@ -9,6 +10,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 export class DocumentsAddComponent implements OnInit {
   currentUser: any;
   showPreloader: boolean = true;
+  documentAdd: DocumentAdd = new DocumentAdd();
   constructor(private usersStateService: UsersStateService) { }
 
   ngOnInit() {
@@ -21,5 +23,8 @@ export class DocumentsAddComponent implements OnInit {
       this.showPreloader = false;
     })
   }
-
+  onChangeContent(data) {
+    console.log("data", data);
+    this.documentAdd.setContent(data);
+  }
 }

@@ -1,6 +1,14 @@
 <app-documents-add-header></app-documents-add-header>
 
-<app-documents-add-body></app-documents-add-body>
 
-<app-documents-add-footer></app-documents-add-footer>
+
+
+
+<app-documents-add-body (onChangeContent)="onChangeContent($event)"></app-documents-add-body>
+
+
+
+
+
+<app-documents-add-footer [documentAdd]="documentAdd"></app-documents-add-footer>
 <app-documents-add-info></app-documents-add-info>

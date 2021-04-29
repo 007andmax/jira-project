@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 declare const Codox: any;
 @Component({
@@ -13,6 +13,7 @@ export class DocumentsAddBodyComponent implements OnInit {
   codox: any;
   editor: any;
   currentUser: any;
+  @Output() onChangeContent = new EventEmitter<any>();
   constructor(private usersStateService: UsersStateService) {
     this.codox = new Codox()
   }
@@ -20,6 +21,9 @@ export class DocumentsAddBodyComponent implements OnInit {
   ngOnInit() {
     this.currentUser = this.usersStateService.getCurrentUser();
     this.onInitFloara();
+  }
+  ngDoCheck() {
+    this.onChangeContent.emit(this.editorContent);
   }
   onInitFloara() {
     const self = this;

@@ -1,3 +1,19 @@
-<p>
-  documents-add-footer works!
-</p>
+<div class="qt-aside-modern__footer">
+    <div class="qt-df">
+        <button
+            class="qt-button qt-mr-12"
+            appDisabledBtn
+            #addBtn="disabled"
+            (onClick)="add()"
+        >
+            <span *ngIf="!addBtn.isBlock()">Save Document</span>
+            <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
+        </button>
+        <button
+            class="qt-button --gray"
+            (click)="closed()"
+        >
+            Save as Template
+        </button>
+    </div>
+</div>
