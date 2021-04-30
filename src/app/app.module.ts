@@ -419,6 +419,9 @@ import 'froala-editor/js/plugins/align.min.js';
 // Import a Froala Editor language file.
 import 'froala-editor/js/languages/de.js';
 
+
+import 'froala-editor/js/plugins/image.min.js';
+
 // Import a third-party plugin.
 import 'froala-editor/js/third_party/font_awesome.min';
 import 'froala-editor/js/third_party/image_tui.min';

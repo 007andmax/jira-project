@@ -24,7 +24,6 @@ export class DocumentsAddComponent implements OnInit {
     })
   }
   onChangeContent(data) {
-    console.log("data", data);
     this.documentAdd.setContent(data);
   }
 }

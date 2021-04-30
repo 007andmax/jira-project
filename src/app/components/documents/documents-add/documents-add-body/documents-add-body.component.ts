@@ -1,13 +1,15 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { environment } from 'src/environments/environment';
 declare const Codox: any;
+
 @Component({
   selector: 'app-documents-add-body',
   templateUrl: './documents-add-body.component.html',
   styleUrls: ['./documents-add-body.component.scss']
 })
 export class DocumentsAddBodyComponent implements OnInit {
-
+  private apiUrl = environment.apiUrl;
   editorContent = "<p>Hello, Froala!</p><p>wefwefwf</p><p>wefwefwef</p><p>wefwefwef</p><p>wef</p>";
   public options: Object;
   codox: any;
@@ -28,13 +30,32 @@ export class DocumentsAddBodyComponent implements OnInit {
   onInitFloara() {
     const self = this;
     this.options = {
-      saveParam: 'body',
+      saveParam: 'file',
       // Set the save URL.
-      saveURL: 'http://example.com/save',
+      saveURL: self.apiUrl + 'file?isAvatar=false',
       // HTTP request type.
       saveMethod: 'POST',
       // Additional save params.
       saveParams: { id: 'my_editor' },
+
+
+      imageUploadParam: 'file',
+
+      // Set the image upload URL.
+      imageUploadURL: self.apiUrl + 'file?isAvatar=false&documentFile=true',
+
+      // Additional upload params.
+      imageUploadParams: { id: 'my_editor' },
+
+      // Set request type.
+      imageUploadMethod: 'POST',
+
+      // Set max image size to 5MB.
+      imageMaxSize: 5 * 1024 * 1024,
+
+      // Allow to upload PNG and JPG.
+      imageAllowedTypes: ['jpeg', 'jpg', 'png'],
+
 
       events: {
         "initialized": function () {
@@ -80,17 +101,21 @@ export class DocumentsAddBodyComponent implements OnInit {
         'image.uploaded': function ($img) {
           // Do something here.
           // this is the editor instance.
-          console.log($img);
+          var img = JSON.parse($img);
+          console.log(img);
+          return img;
+
         },
         'image.beforeUpload': function (files) {
           // Do something here.
           // this is the editor instance.
           console.log(files);
         },
-        'image.inserted': function (files) {
+        'image.inserted': function (files, response) {
           // Do something here.
           // this is the editor instance.
           console.log(files);
+          console.log(response);
         }
 
       }

@@ -7,9 +7,13 @@
             ></h3>
         </div>
 
+
+
         <div class="qt-page-list__header-title-line--rigth">
             <div class="d-f ai-c">
                 <div class="qt-page-list__search qt-ml-8 search-container">
+
+
 
                     <input
                         type="text"
@@ -52,6 +56,8 @@
         </div>
     </div>
 
+
+
     <div class="qt-page-list__header-filters">
         <documents-filter
             class="qt-w100"
@@ -61,6 +67,8 @@
         ></documents-filter>
     </div>
 
+
+
     <div class="qt-page-list__header-thead-container">
         <table class="qt-table-modern qt-page-list__header-thead">
             <thead>
@@ -69,43 +77,28 @@
                         class="quotes-table__date pointer"
                         (click)="sortBy('date')"
                     >
-                        Date
+                        Title
                         <span class="qt-table-modern__sorting"></span>
                     </th>
                     <th
                         class="quotes-table__number"
                         (click)="sortBy('number')"
                     >
-                        Quote#
+                        Create By
+                        <span class="qt-table-modern__sorting"></span>
                     </th>
                     <th
                         class="quotes-table__company pointer"
                         (click)="sortBy('customerName')"
                     >
-                        Company
+                        Updated
                         <span class="qt-table-modern__sorting"></span>
                     </th>
                     <th class="quotes-table__description pointer">
-                        Description
+                        shared with
                         <span class="qt-table-modern__sorting"></span>
                     </th>
-                    <th class="quotes-table__create-by">Created By</th>
-                    <th class="quotes-table__status">Status</th>
-                    <th
-                        class="quotes-table__valid pointer"
-                        (click)="sortBy('validUntil')"
-                    >
-                        Valid Until
-                        <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
-                        class="quotes-table__total pointer"
-                        (click)="sortBy('amount')"
-                    >
-                        Amount
-                        <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th class="quotes-table__menu"></th>
+                    <th class="quotes-table__description pointer"></th>
                 </tr>
             </thead>
         </table>

@@ -1,3 +1,67 @@
-<div class="qt-page-list">
-    <documents-header (onSortBy)="sortBy($event)"></documents-header>
-</div>
+<tr>
+    <td class="password-table__check">
+        <p
+            class="category"
+            [textContent]="item.name"
+        ></p>
+        <ng-template
+            ngFor
+            let-document
+            [ngForOf]="item.list"
+            [ngForTrackBy]="trackById"
+        >
+            <p [textContent]="document.title"></p>
+        </ng-template>
+    </td>
+    <td>
+        <p [textContent]="getCreateByForCategory(item.list)"></p>
+        <ng-template
+            ngFor
+            let-document
+            [ngForOf]="item.list"
+            [ngForTrackBy]="trackById"
+        >
+            <p [textContent]="getCreateBy(document.createdBy)"></p>
+        </ng-template>
+    </td>
+    <td>
+        <p [textContent]="parseUpdateAtForCategory(item.list)"></p>
+        <ng-template
+            ngFor
+            let-document
+            [ngForOf]="item.list"
+            [ngForTrackBy]="trackById"
+        >
+            <p [textContent]="parseUpdateAt(document.updatedAt)"></p>
+        </ng-template>
+    </td>
+    <td [textContent]="'-'"></td>
+    <td class="password-table__menu">
+        <!-- <div class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"></div> -->
+        <div
+            ngbDropdown
+            [container]="'body'"
+            [placement]="'bottom-right'"
+        >
+            <div
+                class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"
+                id="dropdownBasic1"
+                ngbDropdownToggle
+            ></div>
+            <ul
+                class="qt-dropdown-menu"
+                ngbDropdownMenu
+                aria-labelledby="dropdownBasic1"
+            >
+                <li
+                    class="pointer"
+                    (click)="deleteRecord()"
+                    ngbDropdownItem
+                >
+                    <div class="icon__remove qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    Remove
+                </li>
+            </ul>
+        </div>
+    </td>
+</tr>
