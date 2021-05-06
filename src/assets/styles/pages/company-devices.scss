@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .company-devices-page {
 
   &__list-header-buttons {
@@ -213,7 +215,7 @@
       display: none;
       font-size: 12px;
       font-family: Graphik-Medium, sans-serif;
-      color: #16a4fa;
+      color: $primary-1;
       padding-top: 8px;
     }
     .device-name-edit-marker {
@@ -221,7 +223,7 @@
     }
     tbody tr.--selected td {
       background: #f4fbff !important;
-      border-color: #16a4fa !important;
+      border-color: $primary-1 !important;
     }
   }
   .connected-tooltip-name {
@@ -341,7 +343,7 @@
         }
       }
       &.--active {
-        border-bottom: 2px solid #16a4fa;
+        border-bottom: 2px solid $primary-1;
       }
     }
     &__body {
@@ -514,7 +516,7 @@
       line-height: 1.33;
       color: #4f5f79;
       &.--link {
-        color: #16a4fa;
+        color: $primary-1;
         text-decoration: underline;
         cursor: pointer;
       }

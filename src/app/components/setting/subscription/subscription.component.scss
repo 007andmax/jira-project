@@ -1,7 +1,8 @@
 /*** All css files include ***/
-@import '../../../../assets/scss/variable';
+//@import '../../../../assets/scss/variable';
 @import '../../../../assets/scss/mixin';
 @import '../../../../assets/scss/custom';
+@import './src/assets/styles/variable';
 
 .subscription{
     .heading{
@@ -50,7 +51,7 @@
                 text-transform: none;
                 margin: 0;
                 &:hover{
-                    color: $primary-color;
+                    color: $primary-1;
                 }
             }
         }
@@ -108,7 +109,7 @@
                 font-family: $graphicMedBold;
                 line-height: 1.33;
                 letter-spacing: -0.3px;
-                color: #16a4fa;
+                color: $primary-1;
                 @media only screen and (max-width: 576px){
                     @include border-radius(4px);
                     display: inline-block;
@@ -237,7 +238,7 @@
     .pr-wrapper{
         float: left;
         width: 100%;overflow: hidden;
-        
+
     }
     table.price-table {
         width: 100%;
@@ -309,7 +310,7 @@
         background-color: #4f5f79;}
         th.h-title.standard{
             &::after{
-                background-color: #16a4fa;
+                background-color: $primary-1;
             }
         }
         th.h-title.professional{
@@ -402,11 +403,11 @@
     left: 0;
     background-color: #27303f;
     color: #fff;
-    display: flex; 
+    display: flex;
     flex-direction: row;
     font-size: 16px;
     padding-left: 56px;
-    z-index: 999; 
+    z-index: 999;
     align-items: center;
   }
 
@@ -423,7 +424,7 @@
     @media only screen and (max-width:768px){
         padding-left: 15px;
     }
-  
+
 .switchbox {
     display: inline-block;
     position: absolute;
@@ -469,8 +470,8 @@
         width: 32px;
         height: 18px;
         border-radius: 12px;
-        border: solid 1px #16a4fa;
-        background-color: #16a4fa;
+        border: solid 1px $primary-1;
+        background-color: $primary-1;
         display: inline-block;
         margin: 0 0  0 0;
         position: relative;

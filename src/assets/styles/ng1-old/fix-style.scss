@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 html {
   font-family: 'Graphik-Regular', sans-serif;
   -ms-text-size-adjust: 100%;
@@ -97,7 +99,7 @@ body .left-panel-full {
   }
   .button-verification {
     background: none;
-    color: #16a4fa;
+    color: $primary-1;
     font-size: 16px;
     font-family: "Graphik-Regular", sans-serif;
     display: flex;
@@ -349,7 +351,7 @@ p {
 .new-link {
   font-family: "Graphik Regular", sans-serif;
   font-size: 12px;
-  color: #16a4fa !important;
+  color: $primary-1 !important;
   text-decoration: none;
   cursor: pointer;
   font-style: normal;
@@ -521,7 +523,7 @@ textarea {
 
 .status-in-progress {
   background-color: #d0edfe;
-  color: #16a4fa;
+  color: $primary-1;
   display: inline-block;
 }
 
@@ -595,7 +597,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 .info-block {
   padding: 10px 10px 10px 50px;
   background-color: #e7f5fe;
-  color: #16a4fa;
+  color: $primary-1;
   position: relative;
   border-radius: 3px;
   width: 88%;
@@ -605,7 +607,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   content: 'i';
   width: 20px;
   height: 20px;
-  background-color: #16a4fa;
+  background-color: $primary-1;
   border-radius: 50%;
   color: #fff;
   left: 17px;

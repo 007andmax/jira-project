@@ -1,13 +1,13 @@
 @import "../../../assets/scss/custom";
-@import "../../../assets/styles/variable";
-
+//@import "../../../assets/styles/variable";
+@import './src/assets/styles/variable';
 
 /*** Custom Color Variables For this components ***/
 
 $bodyColor: #edf2f6;
 $black-color: #000000;
 $white-color: #ffffff;
-$primary-color: #16a4fa;
+$primary-color: $primary-1;
 $secondary-color: #354053;
 $secondLight: #3e4b61;
 $grey-color: #6e6e6e;
@@ -104,7 +104,7 @@ $parot: #2ec866;
         text-transform: capitalize;
     }
     a {
-        color: $primary-color;
+        color: $primary-1;
         text-decoration: none;
         text-decoration: none !important;
     }
@@ -175,7 +175,7 @@ $parot: #2ec866;
         cursor: pointer;
         border: 1px solid transparent;
         outline: none !important;
-        background-color: $primary-color;
+        background-color: $primary-1;
         padding: 12px 24px;
         @include border-radius(4px);
         @include transition(0.4s);
@@ -185,9 +185,9 @@ $parot: #2ec866;
             @include border-radius(0);
         }
         &.btn-primary {
-            background-color: $primary-color;
+            background-color: $primary-1;
             color: $white-color;
-            border-color: $primary-color;
+            border-color: $primary-1;
             &:hover,
             &:focus {
                 background-color: $light-blue;
@@ -206,8 +206,8 @@ $parot: #2ec866;
         }
         &.btn-outline {
             background-color: transparent;
-            border-color: $primary-color;
-            color: $primary-color;
+            border-color: $primary-1;
+            color: $primary-1;
         }
     }
 
@@ -218,7 +218,7 @@ $parot: #2ec866;
         font-weight: 500;
         line-height: 1.33;
         letter-spacing: -0.3px;
-        color: $primary-color;
+        color: $primary-1;
         text-decoration: none !important;
         &:hover {
             color: $light-blue;
@@ -505,7 +505,7 @@ $parot: #2ec866;
                                 font-weight: 500;
                                 font-family: $graphicMedBold;
                                 line-height: 1.33;
-                                color: $primary-color;
+                                color: $primary-1;
                                 img {
                                     margin-right: 4px;
                                 }
@@ -1026,7 +1026,7 @@ $parot: #2ec866;
                                                 background-color: #cdecff;
                                             }
                                             &.color4::before {
-                                                background-color: #16A4FA;
+                                                background-color: $primary-1;
                                             }
                                             &.color5::before {
                                                 background-color: #7C77CB;
@@ -1094,7 +1094,7 @@ $parot: #2ec866;
                                                         color: #ffb937;
                                                     }
                                                     &.going {
-                                                        color: #16a4fa;
+                                                        color: $primary-1;
                                                     }
                                                     &.expired {
                                                         color: #ff5263;
@@ -1414,7 +1414,7 @@ $parot: #2ec866;
                 font-weight: 500;
                 line-height: 1.09;
                 letter-spacing: normal;
-                color: #16a4fa;
+                color: $primary-1;
             }
         }
         .btn {
@@ -1429,7 +1429,7 @@ $parot: #2ec866;
             font-weight: 500;
             line-height: 1.33;
             letter-spacing: normal;
-            color: #16a4fa;
+            color: $primary-1;
             padding: 7.5px 15px;
         }
         ul {
@@ -1896,9 +1896,9 @@ $parot: #2ec866;
                                 @include border-radius(4px);
                                 @include transition(0.4s);
                                 text-align: center;
-                                background-color: $primary-color;
+                                background-color: $primary-1;
                                 color: $white-color;
-                                border-color: $primary-color;
+                                border-color: $primary-1;
                             }
                         }
                     }

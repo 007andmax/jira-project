@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .assigne-user-avatar{
     width: 40px;
     height: 40px;
@@ -44,9 +46,9 @@
 
  .mat-standard-chip:focus {
     box-shadow: none;
-//     border: solid 1px #16a4fa;
+//     border: solid 1px $primary-1;
 //     background-color: #e7f5fe;
-//     color: #16a4fa;
+//     color: $primary-1;
   }
 
   .assigne-user-item {

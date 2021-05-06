@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .select-wrapper {
   position: absolute;
   display: block;
@@ -25,7 +27,7 @@
     }
     .user-item {
       &.active {
-        background: #16a4fa;
+        background: $primary-1;
         p {
           color: #fff;
         }

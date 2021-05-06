@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .contracts-page {
 
   .contracts-list-header, .contracts-list-table-header {
@@ -32,7 +34,7 @@
     background-image: url(/assets/img/icons/filter.svg);
     &.active {
       background-color: #16a4fa10;
-      color: #16a4fa;
+      color: $primary-1;
       padding-left: 16px;
       border: none;
       background-image: none;
@@ -105,7 +107,7 @@
     cursor: pointer;
 
     &.--selected {
-      border-color: #16a4fa;
+      border-color: $primary-1;
     }
 
     &__title {
@@ -357,8 +359,8 @@
       border-bottom: 3px solid transparent;
       margin-right: 16px;
       &.--selected {
-        color: #16a4fa;
-        border-color: #16a4fa;
+        color: $primary-1;
+        border-color: $primary-1;
       }
       cursor: pointer;
       &:last-child {

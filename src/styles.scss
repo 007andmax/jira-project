@@ -1,8 +1,9 @@
-
+@import './src/assets/styles/variable';
 @import './assets/styles/dropdowns.scss';
 @import './assets/styles/icons.scss';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import './assets/styles/main.scss';
+
 //COMMON STYLES ----------------------------
 .d-f {
   display: flex;
@@ -82,13 +83,13 @@
 
 .btn-new.btn-primary-white {
   background: #fff;
-  color: #16a4fa;
-  border: 1px solid #16a4fa;
+  color: $primary-1;
+  border: 1px solid $primary-1;
   font-size: 12px;
   font-family: "Graphik-Semibold", sans-serif;
   font-weight: 600;
   &:hover {
-    background: #16a4fa;
+    background: $primary-1;
     color: #fff;
   }
 }
@@ -121,7 +122,7 @@
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: #16a4fa;
+      background: $primary-1;
     }
   }
   input {
@@ -130,7 +131,7 @@
     cursor: pointer;
     height: 0 !important;
     &:checked ~ .radio-mark {
-      border: 1px solid #16a4fa;
+      border: 1px solid $primary-1;
     }
     &:checked ~ .radio-mark:after {
       opacity: 1;
@@ -452,8 +453,8 @@ app-left-panel-tags {
       transition: all .3s;
       &:hover,
       &.active {
-        border-color: #16a4fa;
-        color: #16a4fa;
+        border-color: $primary-1;
+        color: $primary-1;
       }
     }
   }
@@ -1499,8 +1500,8 @@ app-quotes-item {
           background-size: contain;
         }
         &.active-tab {
-          color: #16a4fa;
-          border-bottom: 2px solid #16a4fa;
+          color: $primary-1;
+          border-bottom: 2px solid $primary-1;
           .tab-product {
             background: url("./assets/img/icons/products-tab-active-ng2.png");
             background-size: contain;
@@ -1853,13 +1854,13 @@ app-quotes-item {
   .mat-autocomplete-panel {
     width: 255px;
     &::-webkit-scrollbar-thumb {
-      background-color: #16a4fa;
+      background-color: $primary-1;
     }
     .mat-option {
       font-size: 14px;
       transition: all .3s;
       &:hover {
-        background-color: #16a4fa;
+        background-color: $primary-1;
         color: #fff;
       }
     }
@@ -1889,7 +1890,7 @@ app-quotes-item {
   }
   .mat-focused {
     .mat-form-field-underline {
-      background-color: #16a4fa;
+      background-color: $primary-1;
       .mat-form-field-ripple {
         display: none;
       }
@@ -1970,7 +1971,7 @@ ngb-datepicker {
         //font-family: "Graphik-Medium", sans-serif;
         //font-weight: 500;
         background: #3e4b61;
-        border-left: 2px solid #16a4fa;
+        border-left: 2px solid $primary-1;
       }
     }
     &--lists {
@@ -2034,7 +2035,7 @@ ngb-datepicker {
         //font-family: "Graphik-Medium", sans-serif;
         //font-weight: 500;
         background: #3e4b61;
-        border-left: 2px solid #16a4fa;
+        border-left: 2px solid $primary-1;
       }
     }
     &--lists {
@@ -2116,7 +2117,7 @@ ngb-datepicker {
               p {
                 cursor: pointer;
                 transition: all .3s;
-                color: #16a4fa;
+                color: $primary-1;
                 &:hover {
                   color: #fff;
                 }
@@ -2842,9 +2843,9 @@ app-ticket-edit-aside-devices  {
   }
 
   .btn-second {
-    color: #16a4fa;
+    color: $primary-1;
     background: white;
-    border: 1px solid #16a4fa;
+    border: 1px solid $primary-1;
   }
 
   .new-taxes-area .dropdown-item button {

@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .left-panel-ng2 {
   display: block;
   height: 100vh;
@@ -92,7 +94,7 @@
     border-color: #2ec866;
   }
   &.--blue {
-    border-color: #16a4fa;
+    border-color: $primary-1;
   }
   &.--yellow {
     border-color: #ffb937;
@@ -116,12 +118,12 @@
 }
 .active {
     background: #3e4b61;
-     color: #16a4fa;
-    border-left: 2px solid #16a4fa;
+     color: $primary-1;
+    border-left: 2px solid $primary-1;
 }
 .category-item {
     &:hover {
-        color: #16a4fa;
+        color: $primary-1;
     }
 }
 .category-name  {

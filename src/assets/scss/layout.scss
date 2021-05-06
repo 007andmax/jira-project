@@ -1,5 +1,6 @@
-
 @import '../../assets/scss/fonts';
+@import './src/assets/styles/variable';
+
 
 /*** Angular one css conflcit resolved ***/
 
@@ -209,7 +210,7 @@ ngb-datepicker{
                 // &.ngb-dp-today{
                 //     .btn-light{
                 //         // @include border-radius(50%);
-                //         // background-color: #16a4fa;
+                //         // background-color: $primary-1;
                 //         // color:#fff;
                 //     }
                 // }
@@ -234,7 +235,7 @@ ngb-datepicker{
                     @include border-radius(50%);
                     &.active{
 
-                        background-color: #16a4fa;
+                        background-color: $primary-1;
                         color:#fff;
                     }
                 }
@@ -319,7 +320,7 @@ h6,.h6{
   text-transform: capitalize;
 
 }
-a{color:$primary-color;text-decoration: none;text-decoration: none !important;}
+a{color:$primary-1;text-decoration: none;text-decoration: none !important;}
 p{margin:0 0 20px 0;}
 
 /*** Listing ***/
@@ -342,7 +343,7 @@ ol li:before{content:counter(av-counter) ".";counter-increment:none;color:$secon
     cursor: pointer;
     border: none;
     outline: none !important;
-    background-color: $primary-color;
+    background-color: $primary-1;
     padding: 17px 24px;
     @include border-radius(4px);
     @include transition(0.4s);
@@ -357,7 +358,7 @@ ol li:before{content:counter(av-counter) ".";counter-increment:none;color:$secon
         @include border-radius(0);
     }
     &.btn-primary{
-        background-color: $primary-color;
+        background-color: $primary-1;
         color: $white-color;
         &:hover,&:focus{
             background-color: $light-blue;
@@ -385,16 +386,16 @@ ol li:before{content:counter(av-counter) ".";counter-increment:none;color:$secon
     line-height: 1.33;
     letter-spacing: normal;
     text-align: center;
-    color: $primary-color;
+    color: $primary-1;
     padding: 9.5px 16px;
     margin-left: 16px;
     @include transition(0.4s);
     cursor: pointer;
     outline: none;
     // &:hover{
-    //     background-color: $primary-color;
+    //     background-color: $primary-1;
     //     color: $white-color;
-    //     border-color: $primary-color;
+    //     border-color: $primary-1;
     // }
 }
 
@@ -406,7 +407,7 @@ ol li:before{content:counter(av-counter) ".";counter-increment:none;color:$secon
     font-weight: 500;
     line-height: 1.33;
     letter-spacing: -0.3px;
-    color: $primary-color;
+    color: $primary-1;
     text-decoration: none !important;
     &:hover{
        color:$light-blue;
@@ -914,7 +915,7 @@ header{
             &:hover,&.active{
                 a{
                     background-color: $secondLight;
-                    border-color: $primary-color;
+                    border-color: $primary-1;
                 }
             }
             }
@@ -1097,9 +1098,9 @@ ngb-tabset {
 
                 }
                 &:hover,&.active{
-                        color: #16a4fa;
+                        color: $primary-1;
                         &::after{
-                            border-color: #16a4fa;
+                            border-color: $primary-1;
                         }
 
                 }
@@ -1231,7 +1232,7 @@ ngb-tabset {
             font-style: normal;
             line-height: 1.33;
             letter-spacing: -0.3px;
-            color: #16a4fa;
+            color: $primary-1;
             position: relative;
             text-transform: capitalize;
             position: relative;
@@ -1261,7 +1262,7 @@ ngb-tabset {
             font-style: normal;
             line-height: 1.33;
             letter-spacing: -0.3px;
-            color: #16a4fa;
+            color: $primary-1;
             position: relative;
             text-transform: capitalize;
             &::after{
@@ -1886,7 +1887,7 @@ ngb-tabset {
 .cropper .resize .square{
     width: 2px !important;
   height: 2px !important;
-  background-color: #16a4fa !important;
+  background-color: $primary-1 !important;
 }
 .toast-container{min-height: 43px;pointer-events: auto;display: block !important;opacity: 1 !important;
 
@@ -2058,7 +2059,7 @@ ngx-loading > div {
 .ng7 div.form-row ngx-select-dropdown .ngx-dropdown-container .ngx-dropdown-list-container .search-container input{padding: 10px;box-sizing: border-box !important;font-size: 12px !important;border-bottom: 0 !important;}
 .ng7 div.form-row ngx-select-dropdown .ngx-dropdown-container .ngx-dropdown-list-container .search-container label{top: -7px !important;left: 10px !important;height: 100% !important;font-size: 12px !important;}
 .ng7 div.form-row ngx-select-dropdown .ngx-dropdown-container .ngx-dropdown-list-container .search-container label span{margin-right: 5px !important;}
-.ng7 div.form-row ngx-select-dropdown .ngx-dropdown-container .ngx-dropdown-list-container ul.selected-items li{background-color: #16a4fa;margin:0 !important;}
+.ng7 div.form-row ngx-select-dropdown .ngx-dropdown-container .ngx-dropdown-list-container ul.selected-items li{background-color: $primary-1;margin:0 !important;}
 .ng7 div.form-row ngx-select-dropdown .ngx-dropdown-container .ngx-dropdown-list-container ul li:before{display: none !important;}
 .ng7 div.form-row ngx-select-dropdown .ngx-dropdown-container .ngx-dropdown-list-container ul li{padding:5px 10px !important;margin:0 !important;}
 .ng7 div.form-row ngx-select-dropdown .ngx-dropdown-container .ngx-dropdown-list-container hr{display: none !important;}
@@ -2162,7 +2163,7 @@ ngx-loading > div {
         color: #4f5f79;    padding-left: 5px;}
 
 
-        .ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked,.ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected,.ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked{background-color: #16a4fa;}
+        .ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked,.ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected,.ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked{background-color: $primary-1;}
         .ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected > span,.ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked > span{color: #fff;border-color: #fff;}
         .ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected > .info span,.ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected > .info h5{color:#fff}
         .ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked > .info h5,.ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked > .info span{color: #fff;border-color: #fff;}
@@ -2256,7 +2257,7 @@ ngx-loading > div {
 body.ng7{background-color: white;}
 .ng7 .account-info .ul .li:last-child form{width: 100%;margin-bottom: 25px;}
 .ng7 .page-insider .heading .heading-serach .btn-outline {position: fixed;bottom: 0;left: 0;
-    width: 100%;right: 0;margin: 0;background-color: #16a4fa;color: #fff;@include border-radius(0);border-color: #16a4fa;
+    width: 100%;right: 0;margin: 0;background-color: $primary-1;color: #fff;@include border-radius(0);border-color: $primary-1;
     font-size: 14px;padding: 14px 15px;}
 .ng7 .page-insider .heading .heading-serach > form{width: auto;float: right;}
 .ng7 .page-insider .heading .heading-serach > form .form-input{line-height: 1.67;border-color: transparent;width: 30px;height: 34px;

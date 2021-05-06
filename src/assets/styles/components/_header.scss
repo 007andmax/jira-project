@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .nav-header {
   position: fixed;
   z-index: 1050;
@@ -35,7 +37,7 @@
     margin-right: 16px;
     width: 40px;
     height: 40px;
-    background-color: #16a4fa;
+    background-color: $primary-1;
     border-radius: 50%;
     cursor: pointer;
     background-position: center;

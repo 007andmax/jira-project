@@ -1,7 +1,9 @@
+@import './src/assets/styles/variable';
+
 tr:hover {
     td {
       background-color: #f9fafb;
-  
+
     }
   }
   .invoce-table__invoice {
@@ -10,7 +12,7 @@ tr:hover {
   tr.--selected {
     td {
       background-color: #f4fbff;
-      border-color: #16a4fa !important;
+      border-color: $primary-1 !important;
     }
   }
   .pointer {
@@ -25,5 +27,5 @@ tr:hover {
   }
 .billable-payment-table__invoice {
   font-family: Graphik-Medium, sans-serif;
-  color: #16a4fa;
+  color: $primary-1;
 }

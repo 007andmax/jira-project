@@ -1,7 +1,8 @@
 /*** All css files include ***/
-@import "../../../../assets/scss/variable";
+//@import "../../../../assets/scss/variable";
 @import "../../../../assets/scss/mixin";
 @import "../../../../assets/scss/custom";
+@import './src/assets/styles/variable';
 
 .tmp-edit {
   @media only screen and (max-width: 1400px) {
@@ -51,7 +52,7 @@
       font-stretch: normal;
       line-height: 1.33;
       letter-spacing: -0.3px;
-      color: #16a4fa;
+      color: $primary-1;
     }
   }
   .middle-content {
@@ -76,7 +77,7 @@
     font-stretch: normal;
     line-height: 1.33;
     letter-spacing: -0.3px;
-    color: #16a4fa;
+    color: $primary-1;
     position: static;
     height: auto;
     width: auto;

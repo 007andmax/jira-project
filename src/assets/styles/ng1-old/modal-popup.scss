@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .buttons-container {
   padding: 10px 0 40px;
 }
@@ -70,7 +72,7 @@
   margin-right: 10px;
 
 }
- 
+
 .user-item:nth-child(even) .default-user-avatar, li:nth-child(even) .default-user-avatar {
   background-color: #ffe3af;
 }
@@ -220,7 +222,7 @@
 .tab-btns .btn:hover,
 .tab-btns .btn.active {
   background-color: #e8f6ff;
-  color: #16a4fa;
+  color: $primary-1;
   border: 1px solid transparent;
 }
 

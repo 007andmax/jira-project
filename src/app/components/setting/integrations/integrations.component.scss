@@ -1,7 +1,9 @@
 
-@import '../../../../assets/scss/variable';
+//@import '../../../../assets/scss/variable';
 @import '../../../../assets/scss/mixin';
 @import '../../../../assets/scss/custom';
+@import './src/assets/styles/variable';
+
 .integration{
     .page-insider{
         margin-bottom: 60px;
@@ -14,7 +16,7 @@
             padding: 25px;
         }
     }
-   
+
 }
 
 .insructions {
@@ -48,7 +50,7 @@
             line-height: 1.54;
             letter-spacing: normal;
             color: #4f5f79;
-            
+
         }
     }
 
@@ -69,8 +71,8 @@
         height: 0;
         width: 0;
         &:checked + label{
-            border: solid 1px #16a4fa;
-            background-color: #16a4fa;
+            border: solid 1px $primary-1;
+            background-color: $primary-1;
             &::after{
                 left: 15px;
             }

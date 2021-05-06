@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .no-valid {
     border: 1px solid red !important;
 }
@@ -59,7 +61,7 @@
       color: #4c5c6f;
       &:hover {
         color: #fff;
-        background: #16a4fa;
+        background: $primary-1;
       }
     }
   }
@@ -106,7 +108,7 @@
 .qt-dropdown {
   .dropdown-menu {
     &::-webkit-scrollbar-thumb {
-      background-color: #16a4fa;
+      background-color: $primary-1;
     }
   }
 }

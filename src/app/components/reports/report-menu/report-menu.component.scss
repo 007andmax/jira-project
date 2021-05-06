@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 /deep/.date-picker {
     overflow-x: visible;
   }
@@ -23,7 +25,7 @@
   }
 
   .dropdown-item:hover {
-    background: #16a4fa !important;
+    background: $primary-1 !important;
     color: white !important;
     border-radius: 0;
   }

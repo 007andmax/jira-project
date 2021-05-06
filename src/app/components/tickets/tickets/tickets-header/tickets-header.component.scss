@@ -1,4 +1,5 @@
-@import "../../../../../assets/styles/variable";
+//@import "../../../../../assets/styles/variable";
+@import './src/assets/styles/variable';
 
 .tickets-list-search {
   margin-right: 8px;
@@ -10,7 +11,7 @@
   background-position: 10px center;
   background-size: 16px;
   background-color: white;
-  color: #16a4fa;
+  color: $primary-1;
   color: #364656;
   border: none;
   background-image: url(../../../../../assets/img/icons/filter.svg);

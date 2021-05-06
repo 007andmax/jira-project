@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 /deep/ .igx-overlay__content {
   height: 297px !important;
   width: 180px !important;
@@ -40,7 +42,7 @@
     border-radius: 6px;
     color: #364656;
     &:hover {
-      color: #16a4fa;
+      color: $primary-1;
     }
   }
 
@@ -50,8 +52,8 @@
   }
 
   .igx-time-picker__item--selected {
-    border: 1px solid #16a4fa;
-    color: #16a4fa;
+    border: 1px solid $primary-1;
+    color: $primary-1;
     font-weight: 600;
   }
 
@@ -146,7 +148,7 @@
     height: 40px;
     border: none;
     font-weight: 600;
-    background: #16a4fa;
+    background: $primary-1;
     color: white;
     width: 100%;
   }

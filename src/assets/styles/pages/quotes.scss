@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .quotes-page {
   .quotes-company-filter {
     width: 35%;
@@ -74,7 +76,7 @@
     }
     td.quotes-table__number {
       font-family: Graphik-Medium, sans-serif;
-      color: #16a4fa;
+      color: $primary-1;
       padding-top: 14px;
     }
 

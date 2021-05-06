@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 tr:hover {
   td {
     background-color: #f9fafb;
@@ -10,13 +12,13 @@ tr:hover {
 tr.--selected {
   td {
     background-color: #f4fbff;
-    border-top-color: #16a4fa !important;
-     border-bottom-color: #16a4fa !important;
+    border-top-color: $primary-1 !important;
+     border-bottom-color: $primary-1 !important;
      &:first-child {
-      border-left-color: #16a4fa !important;
+      border-left-color: $primary-1 !important;
      }
      &:last-child {
-      border-right-color: #16a4fa !important;
+      border-right-color: $primary-1 !important;
      }
   }
 }

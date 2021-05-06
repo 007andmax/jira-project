@@ -2,7 +2,7 @@
 @import '../../../../assets/scss/device/variable';
 @import '../../../../assets/scss/device/mixin';
 @import '../../../../assets/scss/device/custom';
-
+@import './src/assets/styles/variable';
 
 
 .file-explore{
@@ -54,13 +54,13 @@
             font-style: normal;
             line-height: 1.33;
             letter-spacing: normal;
-            color: #16a4fa;
+            color: $primary-1;
             align-items: center;
             img {
                 vertical-align: middle;
                 margin-right: 5px;
             }
-            
+
         }
     }
     .explore-search {
@@ -124,7 +124,7 @@
             height: 100%;
             padding: 18px 0;
             overflow-y: auto;
-            & >ul{ 
+            & >ul{
                 display: -ms-flexbox;
                 display: -webkit-flex;
                 display: flex;
@@ -171,7 +171,7 @@
                             bottom: 0;
                             margin: auto;
                             content: "";
-                            
+
                         }
 
                     }
@@ -204,10 +204,10 @@
 
 
     }
-    
-    
-    
-    
+
+
+
+
 }
 
 
@@ -254,7 +254,7 @@
             &.col-size {
                 width: 10%;
             }
-            
+
             .filter {
                 display: inline-block;
                 vertical-align: middle;
@@ -270,7 +270,7 @@
             }
         }
         td {
-           
+
                 border-bottom: 1px solid #e1e9f5;
                 padding: 10px 0;
                 font-size: 12px;
@@ -292,7 +292,7 @@
                         margin: 0;
                     }
                 }
-           
+
             img {
                 margin-right: 5px;
             }
@@ -310,7 +310,7 @@
                 text-align: right;
                 position: relative;
             }
-            
+
         }
         tr{
             td{
@@ -331,7 +331,7 @@
             &:last-child {
                 td{
                     border-bottom: 0 !important;
-                    
+
                     .dropdown-menu{
                         top: auto !important;
                         right: 3px !important;
@@ -350,7 +350,7 @@
             }
         }
     }
-    
+
 }
 
 

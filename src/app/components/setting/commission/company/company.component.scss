@@ -1,8 +1,8 @@
 /*** All css files include ***/
-@import '../../../../../assets/scss/variable';
+//@import '../../../../../assets/scss/variable';
 @import '../../../../../assets/scss/mixin';
 @import '../../../../../assets/scss/custom';
-
+@import './src/assets/styles/variable';
 
 $font-body: 'Graphik-Regular';
 $grahic-light:'Graphik-Light';
@@ -54,7 +54,7 @@ $graphicMedBold:'Graphik-Medium';
         flex-direction: row;
         h5 {
             margin: 0 0 0 10px;
-            width: calc(100% - 55px);   
+            width: calc(100% - 55px);
         }
     }
 
@@ -156,7 +156,7 @@ $graphicMedBold:'Graphik-Medium';
                 padding: 5px 15px !important;
                 cursor: pointer;
                 &:hover{
-                    background-color: #16a4fa;
+                    background-color: $primary-1;
                     .info{
                         h5,.email{
                             color: #ffffff;

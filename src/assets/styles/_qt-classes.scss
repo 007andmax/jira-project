@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .qt-checkbox {
   margin: 0;
   cursor: pointer;
@@ -254,11 +256,11 @@
 .qt-color-dark {color: #364656;}
 .qt-color-dark-light {color: #4f5f79;}
 .qt-color-light {color: #9ca5b6;}
-.qt-color-info {color: #16a4fa;}
+.qt-color-info {color: $primary-1;}
 .qt-color-white {color: white;}
 
 
-.qt-bg-info {background-color: #16a4fa;}
+.qt-bg-info {background-color: $primary-1;}
 .qt-bg-white {background-color: white;}
 
 
@@ -352,7 +354,7 @@
 .qt-button {
   height: 40px;
   border-radius: 4px;
-  background-color: #16a4fa;
+  background-color: $primary-1;
   font-size: 13px;
   color: white;
   padding: 10px 20px;
@@ -370,8 +372,8 @@
   }
 
   &.--outline {
-    color: #16a4fa;
-    border: 1px solid #16a4fa;
+    color: $primary-1;
+    border: 1px solid $primary-1;
     background-color: white;
   }
 
@@ -680,7 +682,7 @@
 
 /* Checked */
 .qt-radio input[type=radio]:checked + label:before {
-  border: 1px solid #16a4fa;
+  border: 1px solid $primary-1;
 }
 
 .qt-radio input[type=radio]:checked + label:after {
@@ -692,7 +694,7 @@
   left: 5px;
   top: 5px;
   border-radius: 50%;
-  background: #16a4fa;
+  background: $primary-1;
 }
 
 .qt-gray-table {
@@ -818,8 +820,8 @@
   border-radius: 4px;
   font-family: Graphik-Medium, sans-serif;
   &.--outline {
-    color: #16a4fa;
-    border: solid 1px #16a4fa;
+    color: $primary-1;
+    border: solid 1px $primary-1;
     background-color: #ffffff;
   }
   &.--small {
@@ -851,7 +853,7 @@
   }
   &.--on {
     justify-content: flex-end;
-    background-color: #16a4fa;
+    background-color: $primary-1;
   }
 }
 
@@ -938,7 +940,7 @@
   }
   &.--blue {
     &::before {
-      border: 2px solid #16a4fa;
+      border: 2px solid $primary-1;
       border-top: 2px solid #cdecff;
     }
 

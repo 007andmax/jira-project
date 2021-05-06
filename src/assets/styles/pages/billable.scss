@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .page-list-billable {
 
   // ***** billable list
@@ -59,14 +61,14 @@
   tr.--selected {
     td {
       background-color: #f4fbff;
-      border-color: #16a4fa !important;
+      border-color: $primary-1 !important;
     }
   }
 
     tbody {
       .billable-item-table {
         &__ticket {
-          color: #16a4fa;
+          color: $primary-1;
           font-weight: 600;
         }
     }
@@ -229,11 +231,11 @@
       align-items: center;
       height: 28px;
       border-radius: 4px;
-      border: solid 1px #16a4fa;
+      border: solid 1px $primary-1;
       background-color: #ffffff;
       padding: 0 8px;
       width: fit-content;
-      color: #16a4fa;
+      color: $primary-1;
       cursor: pointer;
     }
 
@@ -277,7 +279,7 @@ app-invoice-preview {
 
   .invoice-info {
     border-radius: 4px;
-    border: solid 1px #16a4fa;
+    border: solid 1px $primary-1;
     background-color: rgba(22, 164, 250, 0.05);
   }
 
@@ -445,17 +447,17 @@ app-invoice-form-ticket-edit-service,app-invoice-form-ticket-edit-product {
 }
 
 .billing-aside-edit-mode {
-  color: #16a4fa;
-  border: 1px solid #16a4fa;
+  color: $primary-1;
+  border: 1px solid $primary-1;
   background-color: white;
   border-radius: 4px;
 }
 
 .billing-aside-save-mode {
   border-radius: 4px;
-  background-color: #16a4fa;
+  background-color: $primary-1;
   color: white;
-  border: 1px solid #16a4fa;
+  border: 1px solid $primary-1;
 }
 
 .billing-aside-cancel-mode {

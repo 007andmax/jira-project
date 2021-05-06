@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .payments-page {
   .billable-table, .invoice-table {
     min-width: 1064px;
@@ -84,7 +86,7 @@
     }
 
     td.payment-table__number {
-      color: #16a4fa;
+      color: $primary-1;
       font-family: Graphik-Medium, sans-serif;
     }
   }

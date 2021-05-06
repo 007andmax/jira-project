@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .tag__modern {
   font-size: 10px;
   border: 1px solid;
@@ -12,8 +14,8 @@
   }
 
   &.--info {
-    color: #16a4fa;
-    border-color: #16a4fa;
+    color: $primary-1;
+    border-color: $primary-1;
     background-color: #edf8ff;
   }
 

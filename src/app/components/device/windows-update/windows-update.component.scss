@@ -2,8 +2,8 @@
 @import '../../../../assets/scss/device/variable';
 @import '../../../../assets/scss/device/mixin';
 @import '../../../../assets/scss/device/custom';
+@import './src/assets/styles/variable';
 
-    
 .update-info {
     display: inline-block;
     vertical-align: middle;
@@ -21,27 +21,27 @@
         padding-left: 25px;
         min-height: 16px;
         &:hover{
-            color: #16a4fa;
+            color: $primary-1;
         }
         &.update{
             background: url('../../../../assets/img/device/allupdate.svg') no-repeat left 0;
             margin-left: 0;
                 &.active{
                     background: url('../../../../assets/img/device/allupdate-blue.svg') no-repeat left 0;
-                    color: #16a4fa;
+                    color: $primary-1;
                 }
-            }        
+            }
             &.hidden{
                 background: url('../../../../assets/img/device/hide-update.svg') no-repeat left 0;
                     &.active{
                         background: url('../../../../assets/img/device/hide-update-blue.svg') no-repeat left 0;
-                        color: #16a4fa;
+                        color: $primary-1;
                     }
             }
             &.installed{
                 background: url('../../../../assets/img/device/install.svg') no-repeat left 0;
                 &:hover{
-                    color: #16a4fa;
+                    color: $primary-1;
                 }
             }
     }
@@ -111,12 +111,12 @@
         font-style: normal;
         line-height: 1.33;
         letter-spacing: normal;
-        color: #16a4fa;
+        color: $primary-1;
         display: inline-block;
         margin-left: 23px;
     }
-    
-    
+
+
 }
 .sidebar-popup.upload-details {
     .h1 {
@@ -185,7 +185,7 @@
             margin-right: 2px;
         }
     }
-    
+
 }
 
 .sidebar-tabel {
@@ -208,7 +208,7 @@
             padding-right: 16px;
                 &:last-child {
                  padding-right: 0;
-            }    
+            }
         }
         .user-status {
             display: inline-block;
@@ -247,7 +247,7 @@
                 td{
                     border-bottom: 0;
                 }
-                
+
             }
         }
 }

@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .qt-fileupload {
   input[type=file] {
     user-select:none;
@@ -5,7 +7,7 @@
   }
   &__label {
     width: 100%;
-    border: 2px dotted #16a4fa;
+    border: 2px dotted $primary-1;
     border-radius: 4px;
     display: block;
     cursor: pointer;
@@ -21,7 +23,7 @@
   }
   &__link {
     text-decoration: underline;
-    color: #16a4fa;
+    color: $primary-1;
   }
 
   &__attach-icon {

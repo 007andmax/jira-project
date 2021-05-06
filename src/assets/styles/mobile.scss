@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 @media (max-width: 414px) {
   .mob-filters-header.desktop-hidden {
     background: #27303f;
@@ -113,7 +115,7 @@
           }
           &__content {
             p {
-              color: #16a4fa;
+              color: $primary-1;
             }
           }
         }

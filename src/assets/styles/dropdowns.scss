@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .dark-dropdown,
 .light-dropdown,
 .grey-dropdown {
@@ -59,7 +61,7 @@
       color: #4c5c6f;
       &:hover {
         color: #fff;
-        background: #16a4fa;
+        background: $primary-1;
       }
     }
   }
@@ -109,7 +111,7 @@
 .light-dropdown {
   .dropdown-menu {
     &::-webkit-scrollbar-thumb {
-      background-color: #16a4fa;
+      background-color: $primary-1;
     }
   }
 }
@@ -144,7 +146,7 @@
   }
   .ngb-dp-header,
   .ngb-dp-weekdays {
-    background: #16a4fa;
+    background: $primary-1;
     color: #fff;
     font-size: 14px;
     font-weight: bold;
@@ -160,7 +162,7 @@
     font-size: 14px;
   }
   .custom-select {
-    background: #16a4fa;
+    background: $primary-1;
     border: 1px solid #fff;
     border-radius: 3px;
     cursor: pointer;
@@ -187,9 +189,9 @@
       }
     }
     .bg-primary {
-      background: #16a4fa;
+      background: $primary-1;
       &:hover {
-        background: #16a4fa;
+        background: $primary-1;
       }
     }
   }
@@ -237,7 +239,7 @@
         .btn {
           width: 100%;
           display: block;
-          background-color: #16a4fa;
+          background-color: $primary-1;
           padding: 10px 16px;
           cursor: pointer;
           transition: all .3s;
@@ -269,7 +271,7 @@
             }
           }
           &:hover {
-            background-color: #16a4fa;
+            background-color: $primary-1;
             color: #fff;
             .report-caret-icon {
               background: url('/assets/img/report-caret-right.png');
@@ -332,7 +334,7 @@
     height: 40px;
     border: none;
     width: 100%;
-    background: #16a4fa;
+    background: $primary-1;
     color: #fff;
     font-size: 13px;
   }
@@ -419,7 +421,7 @@
           &:hover,
           &.active {
             color: #fff;
-            background: #16a4fa;
+            background: $primary-1;
           }
           @media (min-width: 2048px) {
             width: 105px;
@@ -464,7 +466,7 @@
         cursor: pointer;
         transition: all .3s;
         &:hover {
-          background: #16a4fa;
+          background: $primary-1;
           color: #fff;
         }
       }

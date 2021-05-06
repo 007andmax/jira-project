@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .dropdown-menu {
     transform: translate(0, 0) !important;
     top: auto !important;
@@ -8,7 +10,7 @@
     position: absolute;
     top: -16px;
     right: 18px;
-    color: #16a4fa;
+    color: $primary-1;
     cursor: pointer;
     font-size: 14px;
   }

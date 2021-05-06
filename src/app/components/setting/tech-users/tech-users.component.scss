@@ -1,8 +1,9 @@
 /*** All css files include ***/
 
-@import '../../../../assets/scss/variable';
+//@import '../../../../assets/scss/variable';
 @import '../../../../assets/scss/mixin';
 @import '../../../../assets/scss/custom';
+@import './src/assets/styles/variable';
 
 
 .page-container{
@@ -17,7 +18,7 @@
                     font-style: normal;
                     line-height: 1.33;
                     letter-spacing: normal;
-                    color: #16a4fa;
+                    color: $primary-1;
                 }
             }
         }
@@ -26,7 +27,7 @@
             @media only screen and (max-width:768px){
                 padding: 25px;
             }
-            
+
         }
     }
 }
@@ -101,7 +102,7 @@
             right: 0;
             bottom: 0;
             @include border-radius(50%);
-           
+
         }
         .user-tech-dp {
             width: 40px;
@@ -246,18 +247,18 @@
 //     object-fit: cover !important;
 //     border-radius: 50% !important;
 //   }
-  
+
 .invalid-feedback {
     // width: 100%;
     margin-top: .25rem;
     font-size: 80%;
     color: #dc3545;
   }
-  
+
   input.ng-invalid.is-invalid {
     border: 1px solid red;
   }
-  
+
 
   .email-note-wrape{
       .cmn-checkbox{
@@ -293,6 +294,6 @@
               text-decoration: underline !important;
           }
         }
-        
+
       }
 }

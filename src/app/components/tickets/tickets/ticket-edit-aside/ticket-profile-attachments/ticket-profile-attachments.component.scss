@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .attachment-component {
   padding: 0 32px;
   margin-bottom: 16px;
@@ -80,7 +82,7 @@
     }
 
     &:hover {
-      border: solid 1px #16a4fa;
+      border: solid 1px $primary-1;
       background-color: #e7f5fe;
       .attachment-item {
         &__download {

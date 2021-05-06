@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .invoices-page {
 
 
@@ -113,7 +115,7 @@
   }
   td.invoce-table__invoice {
     font-family: Graphik-Medium, sans-serif;
-    color: #16a4fa;
+    color: $primary-1;
   }
 
   .invoce-table__status {
@@ -331,7 +333,7 @@
 
     &.active {
       background-color: #16a4fa10;
-      color: #16a4fa;
+      color: $primary-1;
       padding-left: 16px;
       border: none;
       background-image: none;

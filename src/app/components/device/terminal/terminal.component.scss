@@ -2,6 +2,7 @@
 @import "../../../../assets/scss/device/variable";
 @import "../../../../assets/scss/device/mixin";
 @import "../../../../assets/scss/device/custom";
+@import './src/assets/styles/variable';
 
 main {
     &.terminal-page-area {
@@ -81,18 +82,18 @@ main {
                             @include border-radius(4px);
                             padding: 11.5px 10px;
                             width: 125px;
-                            text-align: center; 
+                            text-align: center;
                             font-size: 13px;
                             position: absolute;
                             right: 8px;
                             bottom: 8px;
                         }
                     }
-                   
-                    
+
+
                 }
             }
-        } 
+        }
         .right-sidebar {
             & > div {
                 & > .btn.btn-primary {
@@ -120,7 +121,7 @@ main {
                 @media only screen and (min-width: 1601px) {
                     width: 448px;
                 }
-                
+
                     ul.nav-tabs {
                         -ms-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
                         -o-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
@@ -169,7 +170,7 @@ main {
                                                         margin: 0;
                                                         background: url("../../../../assets/img/device/more-terminal.svg")
                                                             no-repeat center;
-                                                        line-height: 1; 
+                                                        line-height: 1;
                                                     }
 
                                                     .dropdown-menu {
@@ -294,7 +295,7 @@ main {
                             }
                         }
                     }
-                
+
 
                 .modal-content {
                     &.toggle-area {
@@ -364,8 +365,8 @@ main {
                                 #cmd_line {
                                     width: 40px;
                                     border-right: solid 1px #c4cbd5;
-                                    background-color: #f3f7f9; 
-                                    list-style-type: none; 
+                                    background-color: #f3f7f9;
+                                    list-style-type: none;
                                     padding: 10px 0;
                                     margin: 0;
                                     overflow-y: auto;
@@ -383,7 +384,7 @@ main {
                                         &::before {
                                             width: 0;
                                         }
-                                    } 
+                                    }
                                 }
                                 textarea {
                                     border-radius: 0;
@@ -420,7 +421,7 @@ main {
                                     font-style: normal;
                                     line-height: 1.33;
                                     letter-spacing: normal;
-                                    color: #16a4fa; 
+                                    color: $primary-1;
                                     font-family:$graphicMedBold;
                                     padding: 12px 15px;
                                 }
@@ -462,7 +463,7 @@ main {
                 }
 
                 & > div {
-                    
+
                         .nav-tabs {
                             padding: 18px 32px 0 32px;
                         }
@@ -617,7 +618,7 @@ main {
                                             }
                                             &.current {
                                                 a {
-                                                    background-color: #16a4fa;
+                                                    background-color: $primary-1;
                                                     color: #fff;
                                                 }
                                             }
@@ -631,7 +632,7 @@ main {
                                     12px center;
                             }
                         }
-                    
+
                 }
             }
             &.script-details {
@@ -746,8 +747,8 @@ main {
                         #cmd_detail_line {
                             width: 40px;
                             border-right: solid 1px #c4cbd5;
-                            background-color: #f3f7f9; 
-                            list-style-type: none; 
+                            background-color: #f3f7f9;
+                            list-style-type: none;
                             padding: 10px 0;
                             margin: 0;
                             overflow-y: auto;
@@ -764,7 +765,7 @@ main {
                                 &::before {
                                     width: 0;
                                 }
-                            } 
+                            }
                         }
                         textarea {
                             border-radius: 0;
@@ -792,7 +793,7 @@ main {
                 padding-left: 25px;
                 min-height: 16px;
                 &:hover {
-                    color: #16a4fa;
+                    color: $primary-1;
                 }
                 &.Command {
                     margin-left: 0;
@@ -800,7 +801,7 @@ main {
                     cursor: pointer;
                     &.active {
                         background: url("../../../../assets/img/device/command-line-blue.svg") no-repeat left 0;
-                        color: #16a4fa;
+                        color: $primary-1;
                     }
                 }
                 &.Power {
@@ -808,13 +809,13 @@ main {
                     cursor: pointer;
                     &.active {
                         background: url("../../../../assets/img/device/Powershell_Blue.svg") no-repeat left 0;
-                        color: #16a4fa;
+                        color: $primary-1;
                     }
                 }
             }
         }
 
-       
+
         .cmn-tbs-content {
             &.command {
                 li {
@@ -1001,14 +1002,14 @@ body {
                         }
                     }
                 }
-                
-                
-                
-                
-                
-                
-                
-                
+
+
+
+
+
+
+
+
             }
             &.category-modal {
                 .confirm-btn {
@@ -1018,8 +1019,8 @@ body {
                         &.btn.btn-small {
                             margin-left: 0 !important;
                             background-color: transparent;
-                            border: 1px solid #16a4fa;
-                            color: #16a4fa;
+                            border: 1px solid $primary-1;
+                            color: $primary-1;
                             font-size: 12px !important;
                             padding: 9px 8px !important;
                             display: -ms-flexbox !important;
@@ -1053,7 +1054,7 @@ body {
             //     text-transform: capitalize;
             //     margin-bottom: 10px;
             //     &.active {
-            //         color: #16a4fa;
+            //         color: $primary-1;
             //     }
             // }
             .label {
@@ -1077,8 +1078,8 @@ body {
                     font-family: "Graphik-Medium";
                     font-weight: 600;
                     &.active{
-                        color: #16a4fa;
-                        border-color: #16a4fa;
+                        color: $primary-1;
+                        border-color: $primary-1;
                     }
                    }
                 }

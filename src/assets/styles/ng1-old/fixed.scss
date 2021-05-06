@@ -1,3 +1,4 @@
+@import './src/assets/styles/variable';
 
 .btn.btn-new,
 .btn-new {
@@ -19,7 +20,7 @@
 .btn.btn-new.btn-primary,
 .btn-new.btn-primary {
   color: #fff;
-  background: #16a4fa;
+  background: $primary-1;
 }
 
 .btn.btn-new.btn-primary:hover,
@@ -98,12 +99,12 @@
 .dropdown-assign-ticket.fixed-assign .users-list::-webkit-scrollbar-thumb,
 .dropdown-assign-ticket.fixed-assign .dropdown-content::-webkit-scrollbar-thumb,
 .dropdown-assign-ticket.fixed-assign .custom-scroll::-webkit-scrollbar-thumb {
-  background-color: #16a4fa;
+  background-color: $primary-1;
 }
 
 
 .dropdown-assign-ticket.fixed-assign .users-list .user-item.active {
-  background-color: #16a4fa;
+  background-color: $primary-1;
 }
 
 .dropdown-assign-ticket.fixed-assign .users-list .user-item.active p,
