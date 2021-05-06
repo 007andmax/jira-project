@@ -19,7 +19,7 @@
 
 .btn.btn-new.btn-primary,
 .btn-new.btn-primary {
-  color: #fff;
+  color: $white;
   background: $primary-1;
 }
 
@@ -27,14 +27,14 @@
 .btn-new.btn-primary:hover,
 .btn.btn-new.btn-primary:active,
 .btn-new.btn-primary:active {
-  color: #fff;
+  color: $white;
   background: #117ebf;
 }
 
 .btn.btn-new.btn-success,
 .btn-new.btn-success {
-  color: #fff;
-  background: #2ec866;
+  color: $white;
+  background: $success;
   border: 1px solid #189947;
 }
 
@@ -42,7 +42,7 @@
 .btn-new.btn-success:hover,
 .btn.btn-new.btn-success:active,
 .btn-new.btn-success:active {
-  color: #fff;
+  color: $white;
   background: #189947;
 }
 
@@ -50,7 +50,7 @@
 .btn-new.disabled,
 .btn.btn-new.default,
 .btn-new.default {
-  background: #edf2f6;
+  background: $background;
   color: #4f5f79;
   border: 1px solid #c4cbd5;
 }
@@ -70,7 +70,7 @@
 .btn-new.default:hover,
 .btn.btn-new.default:hover,
 .btn-new.default:hover {
-  color: #fff;
+  color: $white;
   background: #c4cbd5;
 }
 
@@ -84,7 +84,7 @@
 }
 
 .dropdown-assign-ticket.fixed-assign .scroll-pane {
-  background-color: #fff;
+  background-color: $white;
   margin-top: 77px;
 }
 
@@ -111,7 +111,7 @@
 .dropdown-assign-ticket.fixed-assign .users-list .user-item.active p:last-child,
 .dropdown-assign-ticket.fixed-assign .users-list .user-item:hover p,
 .dropdown-assign-ticket.fixed-assign .users-list .user-item:hover p:last-child {
-  color: #fff;
+  color: $white;
 }
 
 .dropdown-assign-ticket.fixed-assign .users-list .user-item a {

@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .company-info-aside {
     &__history {
         height: 300px;
@@ -15,7 +17,7 @@
     &__history-block {
       border-radius: 6px;
       box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.05);
-      border: solid 1px #dfe3e8;
+      border: solid 1px $gray-400;
       padding: 9px 12px;
       margin-bottom: 6px;
       // margin-left: -9px;

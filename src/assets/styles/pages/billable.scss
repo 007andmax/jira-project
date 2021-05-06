@@ -54,7 +54,7 @@
 
   tr:hover {
     td {
-      background-color: #f9fafb;
+      background-color: $gray-200;
 
     }
   }
@@ -113,14 +113,14 @@
         border-top-left-radius: 4px;
         border-top-right-radius: 4px;
         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
-        border: solid 1px #dfe3e8;
-        background-color: #ffffff;
+        border: solid 1px $gray-400;
+        background-color: $white;
         padding-top: 7px;
         padding-bottom: 7px;
       }
 
       &__number {
-        background-color: #637382;
+        background-color: $gray-700;
         line-height: 1.2;
       }
 
@@ -138,8 +138,8 @@
         border-collapse: separate;
         border-spacing: 0px;
         th, td {
-          background-color: #f9fafb;
-          border: solid 1px #dfe3e8;
+          background-color: $gray-200;
+          border: solid 1px $gray-400;
           border-left: none;
           height: 36px;
           padding: 0 12px;
@@ -156,7 +156,7 @@
             }
           }
           &:nth-child(2) {
-            border-left: solid 1px #dfe3e8;
+            border-left: solid 1px $gray-400;
           }
         }
 
@@ -232,7 +232,7 @@
       height: 28px;
       border-radius: 4px;
       border: solid 1px $primary-1;
-      background-color: #ffffff;
+      background-color: $white;
       padding: 0 8px;
       width: fit-content;
       color: $primary-1;
@@ -240,7 +240,7 @@
     }
 
     .terms-n-conditions {
-      background-color: #f9fafb;
+      background-color: $gray-200;
 
       &__textarea  {
         width: 541px;
@@ -253,7 +253,7 @@
     }
   }
   .address-block {
-    border-bottom: 1px solid #dfe3e8;
+    border-bottom: 1px solid $gray-400;
     &__horisontal-divider {
       position: absolute;
       right: 50%;
@@ -263,7 +263,7 @@
       margin-bottom: 30px;
       width: 1px;
       border: none;
-      border-left: 1px solid #dfe3e8;
+      border-left: 1px solid $gray-400;
     }
   }
 
@@ -285,7 +285,7 @@ app-invoice-preview {
 
   .invoice-preview {
     box-shadow: 0 8px 16px 10px rgba(0, 0, 0, 0.05);
-    background-color: #ffffff;
+    background-color: $white;
     padding: 40px 32px;
 
     .company-logo {
@@ -293,7 +293,7 @@ app-invoice-preview {
       max-height: 70px;
     }
     .company-info {
-      border-bottom: 1px solid #dfe3e8;
+      border-bottom: 1px solid $gray-400;
     }
 
     .invoice-info-value {
@@ -304,8 +304,8 @@ app-invoice-preview {
     }
 
     &__item-header {
-      border: solid 1px #dfe3e8;
-      background-color: #f9fafb;
+      border: solid 1px $gray-400;
+      background-color: $gray-200;
       height: 32px;
     }
 
@@ -315,10 +315,10 @@ app-invoice-preview {
       border-spacing: 0px;
 
       th, td {
-        border-bottom: solid 1px #dfe3e8;
-        border-left: solid 1px #dfe3e8;
+        border-bottom: solid 1px $gray-400;
+        border-left: solid 1px $gray-400;
         &:last-child {
-          border-right: solid 1px #dfe3e8;
+          border-right: solid 1px $gray-400;
         }
       }
       th {
@@ -337,7 +337,7 @@ app-invoice-preview {
 
     &__item-header-number {
       color: white;
-      background-color: #637382;
+      background-color: $gray-700;
       margin-left: -13px;
       height: 20px;
       line-height: 20px;
@@ -385,7 +385,7 @@ app-invoice-preview {
     }
 
     &__total-price {
-      background-color: #f9fafb;
+      background-color: $gray-200;
       height: 40px;
     }
   }
@@ -420,7 +420,7 @@ app-invoice-form {
     height: 40px;
     border-radius: 4px;
     border: solid 1px #c4cbd5;
-    background-color: #ffffff;
+    background-color: $white;
     font-size: 13px;
     line-height: 1.54;
     color: #4f5f79;
@@ -463,7 +463,7 @@ app-invoice-form-ticket-edit-service,app-invoice-form-ticket-edit-product {
 .billing-aside-cancel-mode {
   border-radius: 4px;
   color: #4f5f79;
-  border: solid 1px #c5cdd5;
+  border: solid 1px $gray-500;
   background-color: white;
 }
 
@@ -592,7 +592,7 @@ app-invoice-form-ticket-edit-service,app-invoice-form-ticket-edit-product {
           border: none;
         }
         &:hover {
-          background: #f9fafb;
+          background: $gray-200;
           button {
             color: #4c5c6f;
           }

@@ -1,7 +1,9 @@
+@import './src/assets/styles/variable';
+
 .contract-time-users {
   mat-chip {
     border-radius: 16px !important;
-    border: solid 1px #dfe3e8;
+    border: solid 1px $gray-400;
     background-color: #f4f6f8;
     padding: 4px;
     height: 32px;

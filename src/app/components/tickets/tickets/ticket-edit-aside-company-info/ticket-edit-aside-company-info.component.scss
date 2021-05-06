@@ -20,7 +20,7 @@
   font-weight: 600;
   color: white;
   margin-bottom: 10px;
-  // border: solid 1px #dfe3e8;
+  // border: solid 1px $gray-400;
   background: rgb(22, 164, 250);
   border: 1px solid rgba(22, 164, 250, 0.2);
   overflow: hidden;
@@ -42,7 +42,7 @@
    margin-right: 4px;
   }
   &__divider {
-  border-top: 1px dashed #dfe3e8;
+  border-top: 1px dashed $gray-400;
   margin: 16px 0;
   }
   &__row-info {
@@ -124,7 +124,7 @@
   &__history-block {
     border-radius: 6px;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.05);
-    border: solid 1px #dfe3e8;
+    border: solid 1px $gray-400;
     padding: 9px 12px;
     margin-bottom: 6px;
     margin-top: 0;

@@ -32,7 +32,7 @@
             display: inline-block;
           }
           hr {
-            border-color: #edf2f6;
+            border-color: $background;
             margin: 15px 0 0 0;
           }
         }
@@ -97,7 +97,7 @@
   &::after {
     width: 10px;
     height: 10px;
-    border: solid 2px #ffffff;
+    border: solid 2px $white;
     background-color: transparent;
     content: "";
     position: absolute;
@@ -129,7 +129,7 @@
       font-stretch: normal;
       line-height: 1.33;
       letter-spacing: normal;
-      color: #ffffff;
+      color: $white;
       left: -26px;
       top: -40px;
       visibility: hidden;
@@ -224,7 +224,7 @@
       width: 32px;
       height: 32px;
       border: solid 1px rgba(22, 164, 250, 0.2);
-      background-color: #ffffff;
+      background-color: $white;
       display: flex;
       justify-content: center;
       align-items: center;

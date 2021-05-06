@@ -1,3 +1,4 @@
+@import './src/assets/styles/variable';
 
 .product-item {
   margin-bottom: 16px;
@@ -15,7 +16,7 @@
     border-radius: 4px;
     margin-left: 8px;
     display: flex;
-    background-color: #637382;
+    background-color: $gray-700;
     align-items: center;
     justify-content: center;
 
@@ -25,7 +26,7 @@
     }
   }
   &__btn-del {
-    background-color: #dfe3e8;
+    background-color: $gray-400;
   }
   &__input {
     height: 40px;

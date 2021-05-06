@@ -1,7 +1,9 @@
+@import './src/assets/styles/variable';
+
 tr:hover {
     td {
-      background-color: #f9fafb;
-  
+      background-color: $gray-200;
+
     }
   }
   tr {
@@ -17,7 +19,7 @@ tr:hover {
       text-transform: uppercase;
       font-size: 8px;
       font-family: "Graphik-Semibold", sans-serif;
-      color: #fff;
+      color: $white;
       display: block;
       z-index: 2;
     }

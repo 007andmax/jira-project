@@ -2,7 +2,7 @@
 
 .cps-block {
     padding: 20px 40px;
-    border-top: 1px solid #f9fafb;
+    border-top: 1px solid $gray-200;
 
     &__header {
       margin-bottom: 20px;
@@ -149,7 +149,7 @@
       margin-left: 4px;
     }
     &__users-linked-divider {
-      background: #dfe3e8;
+      background: $gray-400;
       width: 1px;
       margin: 0 16px;
     }

@@ -11,7 +11,7 @@
   }
   .header-circle-icon {
     background-size: 16px !important;
-    border: 1px solid #dfe3e8;
+    border: 1px solid $gray-400;
     background-repeat: no-repeat;
     background-position: center;
     cursor: pointer;
@@ -19,7 +19,7 @@
 
   .payment-preview {
     box-shadow: 0 8px 16px 10px rgba(0, 0, 0, 0.05);
-    background-color: #ffffff;
+    background-color: $white;
     min-height: 100%;
   }
 
@@ -29,7 +29,7 @@
   }
 
   &__payment-info {
-    border-right: 1px solid #dfe3e8;
+    border-right: 1px solid $gray-400;
     width: 300px;
     min-width: 300px;
   }
@@ -50,7 +50,7 @@
 
   .payment-info__notes {
     border-radius: 6px;
-    border: dashed 1px #c5cdd5;
+    border: dashed 1px $gray-500;
     font-size: 13px;
     line-height: 1.54;
     color: #364656;
@@ -65,7 +65,7 @@
     width: 100%;
     th, td {
       height: 40px;
-      border-bottom: solid 1px #dfe3e8;
+      border-bottom: solid 1px $gray-400;
       padding: 0 14px;
       font-size: 13px;
       line-height: 1.54;
@@ -73,15 +73,15 @@
       text-align: left;
       width: 25%;
       &:last-child {
-        border-right: solid 1px #dfe3e8;
+        border-right: solid 1px $gray-400;
       }
       &:first-child {
-        border-left: solid 1px #dfe3e8;
+        border-left: solid 1px $gray-400;
       }
     }
     th {
-      border-top: solid 1px #dfe3e8;
-      background-color: #f9fafb;
+      border-top: solid 1px $gray-400;
+      background-color: $gray-200;
       font-family: Graphik-Medium, sans-serif;
     }
 

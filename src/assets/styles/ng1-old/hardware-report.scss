@@ -19,7 +19,7 @@
   border: 1px solid #bbb;
   box-shadow: 0px 0px 30px -8px rgba(0, 0, 0, 0.24);
   width: 940px;
-  background-color: #fff;
+  background-color: $white;
   min-height: 40px;
   position: relative;
   padding-bottom: 70px;
@@ -224,7 +224,7 @@
   width: 32px;
   height: 32px;
   border: 1px solid #d1dbec;
-  background-color: #fff;
+  background-color: $white;
   border-radius: 50%;
   transition: all .3s;
 
@@ -400,7 +400,7 @@
   height: 36px;
   border-radius: 4px 3px 3px 4px;
   border: 1px solid #d3d8e1;
-  background-color: #fff;
+  background-color: $white;
 }
 
 .run-report-content input::-webkit-input-placeholder {
@@ -437,7 +437,7 @@
 }
 
 .reports-all .col-sm-4 .report {
-  background-color: #fff;
+  background-color: $white;
   border-radius: 2px 3px 3px 2px;
   margin: 0 30px 30px 0;
   width: 100%;
@@ -502,7 +502,7 @@
   width: 12px;
   height: 12px;
   border: 2px solid #c2c5cb;
-  background-color: #fff;
+  background-color: $white;
   border-radius: 50%;
   position: absolute;
   left: -25px;
@@ -645,7 +645,7 @@
   justify-content: center;
   align-items: center;
   padding: 20px;
-  border: 1px solid #edf2f6;
+  border: 1px solid $background;
   border-radius: 3px;
   max-height: 330px;
   min-height: 330px;
@@ -666,7 +666,7 @@
   height: 168px;
   background-color: $primary-1;
   border-radius: 50%;
-  color: #fff;
+  color: $white;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -737,7 +737,7 @@
 }
 
 .service-color-1:before {
-  background-color: #ffb937;
+  background-color: $warning;
 }
 
 .service-color-2:before {
@@ -745,7 +745,7 @@
 }
 
 .service-color-3:before {
-  background-color: #2ec866;
+  background-color: $success;
 }
 
 .service-color-4:before {
@@ -788,7 +788,7 @@
   font-weight: 400;
   margin: 0 60px;
   padding: 20px 0;
-  border-bottom: 1px solid #edf2f6;
+  border-bottom: 1px solid $background;
 }
 
 .details-content .network-scan-status {
@@ -833,7 +833,7 @@
 
 .report-header h1,
 .report-header h3 {
-  color: #fff;
+  color: $white;
   font-weight: 300;
 }
 
@@ -845,7 +845,7 @@
 }
 
 .report-footer p {
-  color: #fff;
+  color: $white;
 }
 
 .report-footer img {

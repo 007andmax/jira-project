@@ -8,7 +8,7 @@
     justify-content: flex-start;
     align-items: center;
     padding: 20px !important;
-    color: #fff;
+    color: $white;
     width: 100vw;
     font-size: 16px;
   }
@@ -59,7 +59,7 @@
     }
   }
   .password-content__modal .password-modal-actions button {
-    background-color: #fff !important;
+    background-color: $white !important;
   }
 
   //  COMPANIES FILTERS MOB VERSION
@@ -81,7 +81,7 @@
         padding: 0 0 10px 0;
         font-family: "Graphik-Medium", sans-serif;
         font-size: 13px;
-        color: #fff;
+        color: $white;
         text-transform: capitalize;
         font-weight: 100;
         opacity: 1;

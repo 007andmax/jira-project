@@ -1,8 +1,10 @@
+@import './src/assets/styles/variable';
+
 .qt-modal-circle-button {
     width: 32px;
     height: 32px;
-    border: solid 1px #dfe3e8;
-    background-color: #ffffff;
+    border: solid 1px $gray-400;
+    background-color: $white;
     margin-left: 8px;
     border-radius: 50%;
     background-repeat: no-repeat;

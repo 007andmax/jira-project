@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .no-valid {
   position: relative;
   .no-valid-label {
@@ -13,7 +15,7 @@
     text-transform: uppercase;
     font-size: 8px;
     font-family: "Graphik-Semibold", sans-serif;
-    color: #fff;
+    color: $white;
     display: block;
     z-index: 2;
   }

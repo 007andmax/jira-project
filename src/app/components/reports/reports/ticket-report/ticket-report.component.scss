@@ -1,4 +1,5 @@
 /* nvd3 version 1.8.6 (https://github.com/novus/nvd3) 2017-08-23 */
+@import './src/assets/styles/variable';
 .nvd3 .nv-axis {
     pointer-events:none;
     opacity: 1;
@@ -113,7 +114,7 @@
 .nvd3.nv-bullet .nv-measure { fill-opacity: .8; }
 .nvd3.nv-bullet .nv-measure:hover { fill-opacity: 1; }
 .nvd3.nv-bullet .nv-marker { stroke: #000; stroke-width: 2px; }
-.nvd3.nv-bullet .nv-markerTriangle { stroke: #000; fill: #fff; stroke-width: 1.5px; }
+.nvd3.nv-bullet .nv-markerTriangle { stroke: #000; fill: $white; stroke-width: 1.5px; }
 .nvd3.nv-bullet .nv-markerLine { stroke: #000; stroke-width: 1.5px; }
 .nvd3.nv-bullet .nv-tick line { stroke: #666; stroke-width: .5px; }
 .nvd3.nv-bullet .nv-range.nv-s0 { fill: #eee; }
@@ -158,7 +159,7 @@
 }
 
 .nv-force-node {
-    stroke: #fff;
+    stroke: $white;
     stroke-width: 1.5px;
 }
 
@@ -325,7 +326,7 @@ svg.nvd3-svg {
 .nvd3 .nv-brushBackground rect {
     stroke: #000;
     stroke-width: .4;
-    fill: #fff;
+    fill: $white;
     fill-opacity: .7;
 }
 
@@ -370,7 +371,7 @@ svg.nvd3-svg {
 }
 
 .nvd3 .nv-parallelCoordinates-brush .extent {
-    fill: #fff;
+    fill: $white;
     fill-opacity: .6;
     stroke: gray;
     shape-rendering: crispEdges;
@@ -406,7 +407,7 @@ svg.nvd3-svg {
 }
 
 .nvd3.nv-pie path {
-    stroke: #fff;
+    stroke: $white;
     stroke-width: 1px;
     stroke-opacity: 1;
 }
@@ -652,7 +653,7 @@ Interactive Layer
     stroke: #ccc;
 }
 .product-list-ticket {
-    height: 100%; 
+    height: 100%;
     padding: 0;
     width: 980px;
 }

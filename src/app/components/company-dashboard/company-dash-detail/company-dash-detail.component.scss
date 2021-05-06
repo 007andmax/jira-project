@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .working-hour {
     .selected-item {
         padding: 9px 10px 9px 0;
@@ -20,7 +22,7 @@
     .item {
         width: 100%;
         padding: 7px 15px;
-        background-color: #fff;
+        background-color: $white;
         outline: none;
         border: none;
         text-align: left;
@@ -37,11 +39,11 @@
         align-items: center;
         &:hover {
             color: #364656;
-            background-color: #edf2f6;
+            background-color: $background;
         }
         &.active {
             color: #364656;
-            background-color: #edf2f6;
+            background-color: $background;
         }
     }
 }

@@ -79,7 +79,7 @@
             padding-left: 34px;
             padding-right: 30px;
             font-size: 12px;
-            background: url(../../../../assets/img/device/search-explore.svg) no-repeat left 12px center #fff;
+            background: url(../../../../assets/img/device/search-explore.svg) no-repeat left 12px center $white;
             &:focus + .clear{
                 visibility: visible;
             }
@@ -116,7 +116,7 @@
         margin: 0;
         height: calc(100vh - 165px);
         .coulmn {
-            background-color: #fff;
+            background-color: $white;
             display: -ms-flexbox;
             display: -webkit-flex;
             display: flex;
@@ -159,7 +159,7 @@
                         @include transition(0.4s);
                         position: relative;
                         &:hover{
-                            background-color: #edf2f6 !important;
+                            background-color: $background !important;
                         }
                         &::after{
                             background: url('../../../../assets/img/device/path-arrow.svg') no-repeat center;

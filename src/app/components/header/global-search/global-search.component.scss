@@ -30,7 +30,7 @@
       width: 4px;
     }
     &::-webkit-scrollbar-thumb {
-      background-color: #c5cdd5;
+      background-color: $gray-500;
     }
   }
 
@@ -41,7 +41,7 @@
     justify-content: space-around;
     margin: 0;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
-    background-color: #ffffff;
+    background-color: $white;
     position: sticky;
     top: 0;
 
@@ -67,7 +67,7 @@
 
   &__menu-item {
     min-height: 56px;
-    border-bottom: 1px solid #edf0f2;
+    border-bottom: 1px solid $gray-300;
     display: flex;
     align-items: center;
     padding: 5px 15px;
@@ -122,5 +122,5 @@
   height: 4px;
   margin: 5px 8px 0px 8px;
   border-radius: 10px;
-  background-color: #c5cdd5;
+  background-color: $gray-500;
 }

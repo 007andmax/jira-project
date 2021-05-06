@@ -8,8 +8,8 @@
   white-space: nowrap;
 
   &.--success {
-    color: #2ec866;
-    border-color: #2ec866;
+    color: $success;
+    border-color: $success;
     background-color: #ebfff2;
   }
 
@@ -20,13 +20,13 @@
   }
 
   &.--warning {
-    color: #ffb937;
-    border-color: #ffb937;
+    color: $warning;
+    border-color: $warning;
     background-color: rgba(255, 185, 55, 0.1);
   }
   &.--error {
-    color: #ff5263;
-    border-color: #ff5263;
+    color: $error;
+    border-color: $error;
     background-color: rgba(255, 82, 99, 0.1);
     }
 }

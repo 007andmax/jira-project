@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .ticket-edit-aside__claimed-info {
     position: relative;
     padding: 0 32px;
@@ -7,7 +9,7 @@
 
   .ticket-edit-aside__claimed-info-lines {
     position: absolute;
-    border: 1px solid   #dfe3e8;
+    border: 1px solid   $gray-400;
     border-left: none;
     border-right: none;
     width: calc(100% - 64px);
@@ -15,7 +17,7 @@
     top: calc(50% - 2px);
   }
   .ticket-edit-aside__claimed-date {
-    border: 1px solid #dfe3e8;
+    border: 1px solid $gray-400;
     border-radius: 15px;
     padding: 2px 14px;
     z-index: 1;

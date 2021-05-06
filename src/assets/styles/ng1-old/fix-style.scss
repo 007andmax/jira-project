@@ -18,7 +18,7 @@ body {
   font-size: 14px;
   line-height: 24px;
   color: #404b5f;
-  background-color: #ffffff;
+  background-color: $white;
 }
 html body {
   line-height: 24px;
@@ -93,8 +93,8 @@ body .left-panel-full {
   .qt-button {
     padding: 10px 16px;
     &.--red {
-      background: #fff;
-      color: #ff5263;
+      background: $white;
+      color: $error;
     }
   }
   .button-verification {
@@ -105,7 +105,7 @@ body .left-panel-full {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-top: 1px solid #dfe3e8;
+    border-top: 1px solid $gray-400;
     padding: 14px 0;
     height: auto;
     width: 100%;
@@ -240,7 +240,7 @@ body .topNavbar strong span {
 
 .custom-scroll::-webkit-scrollbar-thumb {
   background-color: #d2dae4;
-  border: 3px solid #ffffff;
+  border: 3px solid $white;
   border-radius: 10px;
 }
 
@@ -294,7 +294,7 @@ body .topNavbar strong span {
   list-style: none;
   font-size: 14px;
   text-align: left;
-  background-color: #ffffff;
+  background-color: $white;
   border-radius: 4px;
   -webkit-box-shadow: 0 4px 20px 0 rgba(10, 45, 89, 0.1);
   box-shadow: 0 4px 20px 0 rgba(10, 45, 89, 0.1);
@@ -405,19 +405,19 @@ label {
   height: 16px;
   line-height: 16px;
   font-size: 65%;
-  color: #ffffff;
+  color: $white;
   text-align: center;
   //border: 1px solid #d2dae4;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  background-color: #ffffff;
+  background-color: $white;
 }
 //.control input:checked ~ .control-indicator {
 //  background-position: -858px -120px;
-//  background-color: #2ec866;
-//  border-color: #2ec866;
+//  background-color: $success;
+//  border-color: $success;
 //}
 .checkbox .control-indicator {
   position: absolute;
@@ -529,7 +529,7 @@ textarea {
 
 .payment-status.paid, .status-success, .dashboard-network-scan-list .success-status, .invoices .success-status {
   background-color: #d5f4e0;
-  color: #2ec866;
+  color: $success;
   display: inline-block;
 }
 
@@ -609,7 +609,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   height: 20px;
   background-color: $primary-1;
   border-radius: 50%;
-  color: #fff;
+  color: $white;
   left: 17px;
   text-align: center;
 }
@@ -621,7 +621,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   top: 0;
   z-index: 11111111;
   width: 100%;
-  background: #ffffff;
+  background: $white;
   border-radius: 3px 3px 0 0;
 }
 
@@ -732,7 +732,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   width: 12px;
   height: 12px;
   margin: 2px;
-  border: 2px solid #ffffff;
+  border: 2px solid $white;
   border-radius: 100%;
   -webkit-transition: top 0.3s ease-out, right 0.3s ease-out;
   -moz-transition: top 0.3s ease-out, right 0.3s ease-out;
@@ -811,7 +811,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 
 .company-report li.content-product-list-ticket {
-  background-color: #fff;
+  background-color: $white;
   margin-bottom: 8px;
   border: none !important;
   border-radius: 5px;

@@ -27,7 +27,7 @@
       }
       border-radius: 6px;
       box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-      border: solid 1px #dfe3e8;
+      border: solid 1px $gray-400;
     }
     &__header {
       padding: 20px 24px;
@@ -36,7 +36,7 @@
       z-index: 99;
       background: white;
       top: 0;
-      border-bottom: 1px solid #dfe3e8;
+      border-bottom: 1px solid $gray-400;
       box-shadow: 0px 0px 7px 1px #c4cbd5;
       justify-content: space-between;
     }
@@ -60,7 +60,7 @@
       color: $primary-1;
       cursor: pointer;
       padding: 12px 16px;
-      border-top: 1px solid #dfe3e8;
+      border-top: 1px solid $gray-400;
 
     }
 
@@ -127,7 +127,7 @@
               .button-add {
                 border-radius: 4px;
                 border: solid 1px $primary-1;
-                background-color: #ffffff;
+                background-color: $white;
                 height: 32px;
                 display: flex;
                 align-items: center;

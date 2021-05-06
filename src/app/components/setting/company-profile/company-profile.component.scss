@@ -58,7 +58,7 @@
         width: 128px;
         border-radius: 4px;
         border: solid 1px #c4cbd5;
-        background-color: #ffffff;
+        background-color: $white;
         padding: 9px 14px;
         font-size: 13px;
         font-weight: normal;
@@ -116,7 +116,7 @@
         color: #4f5f79;
         text-transform: none;
         // padding-bottom: 13px;
-        // border-bottom: 1px solid #edf2f6;
+        // border-bottom: 1px solid $background;
     }
     ul{
         &.list-unstyled {
@@ -188,7 +188,7 @@
                     }
                 }
             }
-            
+
         }
     }
 }
@@ -199,11 +199,11 @@
     font-size: 80%;
     color: #dc3545;
   }
-  
+
   input.ng-invalid.is-invalid {
     border: 1px solid red;
   }
-  
+
 /*** Work Place ***/
 
 .cmn-area.workspace {
@@ -253,11 +253,11 @@
 }
 
 input.form-control.sub-label-field, select.cmn-select {
-    background-color: #ffffff;
+    background-color: $white;
     &[disabled] {
         cursor: not-allowed;
-        background-color: #edf2f6;
-        border-color: #edf2f6;
+        background-color: $background;
+        border-color: $background;
     }
 }
 

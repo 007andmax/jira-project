@@ -7,7 +7,7 @@
     padding: 8px 16px;
     border-radius: 4px;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
-    background-color: #ffffff;
+    background-color: $white;
     font-size: 12px;
     color: #4f5f79;
     line-height: 1.33;
@@ -40,13 +40,13 @@
               position: absolute;
               top: -2px;
               right: -2px;
-              border: solid 2px #ffffff;
-              background-color: #2ec866;
+              border: solid 2px $white;
+              background-color: $success;
               border-radius: 50%;
             }
             &.--ofline {
               &::before {
-                background-color: #ff5263;
+                background-color: $error;
               }
             }
           }
@@ -92,8 +92,8 @@
             overflow: hidden;
           }
           .device-name-edit-marker {
-            border: solid 1px #dfe3e8;
-            background-color: #ffffff;
+            border: solid 1px $gray-400;
+            background-color: $white;
             border-radius: 50%;
             margin-left: 8px;
             background-size: 12px;
@@ -130,19 +130,19 @@
           color: #4f5f79;
           vertical-align: top;
           .uptime-tag {
-            border: solid 1px #2ec866;
+            border: solid 1px $success;
             line-height: 1;
             width: fit-content;
             padding: 2px 4px;
             border-radius: 3px;
-            color: #2ec866;
-            background-color: #ffffff;
+            color: $success;
+            background-color: $white;
             letter-spacing: 0.3px;
             font-size: 8px;
             text-transform: uppercase;
             &.--offline {
-              color: #ff5263;
-              border: solid 1px #ff5263;
+              color: $error;
+              border: solid 1px $error;
             }
           }
         }
@@ -206,7 +206,7 @@
       }
       tr:hover {
         .sidebar-system__info-text-input {
-         background-color: #f9fafb;
+         background-color: $gray-200;
         }
       }
     }
@@ -228,13 +228,13 @@
   }
   .connected-tooltip-name {
     font-size: 12px;
-    color: #ffffff;
+    color: $white;
     margin-bottom: -3px;
     white-space: nowrap;
   }
   .connected-tooltip-text {
     font-size: 11px;
-    color: #ffffff;
+    color: $white;
     white-space: nowrap;
   }
 
@@ -245,7 +245,7 @@
     width: 480px;
     top: $header-height;
     right: 0;
-    border-left: 1px solid #dfe3e8;
+    border-left: 1px solid $gray-400;
     height: calc(100vh - #{$header-height});
     z-index: 10;
     box-shadow: -8px 0 8px 0 rgba(0, 0, 0, 0.05);
@@ -263,8 +263,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: #edf2f6;
-      border: 1px solid #dfe3e8;
+      background-color: $background;
+      border: 1px solid $gray-400;
       border-top: none;
       &.--active {
         background-color: white;;
@@ -273,8 +273,8 @@
     &__header {
       height: 56px;
       padding: 16px;
-      background-color: #f9fafb;
-      border-bottom: 1px solid #dfe3e8;
+      background-color: $gray-200;
+      border-bottom: 1px solid $gray-400;
       color: #364656;
     }
     &__header-title {
@@ -296,7 +296,7 @@
     &__arrow-right-icon {
       height: 56px;
       width: 48px;
-      border-left: 1px solid #dfe3e8;
+      border-left: 1px solid $gray-400;
       margin-right: -16px;
       margin-top: 0px;
       cursor: pointer;
@@ -306,7 +306,7 @@
     }
     &__subheader {
       height: 40px;
-      border-bottom: 1px solid #dfe3e8;
+      border-bottom: 1px solid $gray-400;
       box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
       display: flex;
     }
@@ -497,7 +497,7 @@
       height: 120px;
       padding: 16px;
       border-radius: 8px;
-      background-color: #f9fafb;
+      background-color: $gray-200;
     }
     &__icon {
       width: 40px;
@@ -528,7 +528,7 @@
   width: 388px;
   padding: 24px;
   box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-  border: solid 1px #dfe3e8;
+  border: solid 1px $gray-400;
   border-radius: 3px;
   overflow: visible;
   // &::before {

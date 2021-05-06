@@ -7,7 +7,7 @@
   right: 0;
   height: $header-height;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
-  background-color: #ffffff;
+  background-color: $white;
   width: calc(100% - #{$left-panel-width});
   transition: width 300ms;
   display: flex;
@@ -61,7 +61,7 @@
         width: 10px;
         height: 10px;
         border-radius: 50%;
-        background-color: #ff5263;
+        background-color: $error;
         right: 1px;
         top: -1px;
         border: 2px solid white;
@@ -72,7 +72,7 @@
   &__account-info {
     width: fit-content;
     display: flex;
-    border-left: 1px solid #edf0f2;
+    border-left: 1px solid$gray-300;
     padding: 12px 24px 12px 12px;
   }
 
@@ -80,7 +80,7 @@
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    border: 1px solid #c5cdd5;
+    border: 1px solid $gray-500;
     margin-left: 8px;
     display: inline-block;
     background-repeat: no-repeat;
@@ -111,7 +111,7 @@
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background-color: #2ec866;
+      background-color: $success;
       left: -10px;
       top: calc(50% - 3px);
     }

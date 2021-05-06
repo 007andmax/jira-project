@@ -175,8 +175,8 @@
       left: unset !important;
       top: 7px !important;
       box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-      border: solid 1px #dfe3e8;
-      background-color: #ffffff;
+      border: solid 1px $gray-400;
+      background-color: $white;
     }
 
     .add-tax-dropdown:after,
@@ -185,7 +185,7 @@
       right: 10px;
       top: -5px;
       border: 6px solid transparent;
-      border-bottom-color: #fff;
+      border-bottom-color: $white;
       border-top: 0;
     }
   }

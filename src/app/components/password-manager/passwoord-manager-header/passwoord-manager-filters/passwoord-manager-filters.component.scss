@@ -1,7 +1,9 @@
+@import './src/assets/styles/variable';
+
 .plus-btn {
   flex-shrink: 0;
   border: none;
-  background-color: #637382;
+  background-color: $gray-700;
 
   &:hover {
     background-color: #444f58;

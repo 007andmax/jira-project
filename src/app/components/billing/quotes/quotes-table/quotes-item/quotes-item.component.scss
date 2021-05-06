@@ -1,15 +1,15 @@
 @import './src/assets/styles/variable';
 
 .approved {
-  color: #2ec866;
+  color: $success;
   background-color: #2ec86626;
 }
 .archived {
-  color: #ff5263;
+  color: $error;
   background-color: #ff526326;
 }
 .expired {
-  color: #ff5263;
+  color: $error;
   background-color: #ff526326;
 }
 .invoiced {
@@ -17,11 +17,11 @@
   background-color: #16a4fa26;
 }
 .read {
-  color: #7c77cb;
+  color: $secondary-3;
   background-color: #7c77cb26;
 }
 .canceled {
-  color: #ff5263;
+  color: $error;
   background-color: #ff526326;
 }
 .saved {
@@ -33,7 +33,7 @@
   background-color:  #16a4fa26;
 }
 .unread {
-  color: #ffb937;
+  color: $warning;
   background-color: rgba(255, 185, 55, 0.1);
 }
 .tag__modern {

@@ -28,7 +28,7 @@ $graphicMedBold:'Graphik-Medium';
     .c-logo {
         height: 40px;
         border: solid 1px rgba(22, 164, 250, 0.2);
-        background-color: #ffffff;
+        background-color: $white;
         width: 40px;
         display: inline-flex;
         align-items: center;
@@ -74,7 +74,7 @@ $graphicMedBold:'Graphik-Medium';
         display: flex;
         align-items: center;
         width: auto;
-        background: url('../../../../../assets/img/filter-dropdown.svg') no-repeat right 7px center #fff;
+        background: url('../../../../../assets/img/filter-dropdown.svg') no-repeat right 7px center $white;
         background-size: 15px auto;
         cursor: pointer;
     }
@@ -119,7 +119,7 @@ $graphicMedBold:'Graphik-Medium';
         -webkit-box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
         -moz-box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
         box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
-        background-color: #ffffff;
+        background-color: $white;
         form {
             float: left;
             width: 100%;
@@ -139,7 +139,7 @@ $graphicMedBold:'Graphik-Medium';
                 line-height: 1.54;
                 letter-spacing: normal;
                 color: #9ca5b6;
-                background: url(../../../../../assets/img/search-input.svg) no-repeat left 10px center #edf2f6;;
+                background: url(../../../../../assets/img/search-input.svg) no-repeat left 10px center $background;;
                 background-size: 20px auto;
             }
         }
@@ -159,7 +159,7 @@ $graphicMedBold:'Graphik-Medium';
                     background-color: $primary-1;
                     .info{
                         h5,.email{
-                            color: #ffffff;
+                            color: $white;
                         }
                     }
                 }

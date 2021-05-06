@@ -45,8 +45,8 @@
             width: 100%;
             flex-direction: column;
             @include border-radius(5px);
-            border: solid 1px #edf2f6;
-            background-color: $white-color;
+            border: solid 1px $background;
+            background-color: $white;
             padding: 20px 24px 24px;
             margin-bottom: 16px;
 
@@ -148,7 +148,7 @@
                                 font-stretch: normal;
                                 line-height: 1.33;
                                 letter-spacing: normal;
-                                color: #ffffff;
+                                color: $white;
                                 left: 0;
                                 top: -45px;
                                 visibility: hidden;
@@ -195,7 +195,7 @@
             }
             .label-field {
                 border-color: transparent;
-                background-color: #ffffff;
+                background-color: $white;
                 font-size: 16px;
                 font-weight: bold;
                 text-transform: uppercase;
@@ -208,7 +208,7 @@
 
             .sub-label-field {
                 border-color: transparent;
-                background-color: #ffffff;
+                background-color: $white;
                 font-family: 'Graphik-Medium' !important;
             }
 
@@ -233,7 +233,7 @@
                         li {
                             width: calc(50% - 16px);
                             padding: 11px 16px;
-                            border: 2px solid #edf2f6;
+                            border: 2px solid $background;
                             margin: 8px;
                             border-radius: 8px;
                             @include transition(0.4s);
@@ -265,15 +265,15 @@
                                 }
                             }
                         &.c-drive{
-                            border-color: #2ec866;
+                            border-color: $success;
                             background-color: rgba(46, 200, 102, 0.05);
                             .progress-circle{
                                 .value-bar{
-                                    border-color: #2ec866;
+                                    border-color: $success;
                                 }
                                 &.over50{
                                     .first50-bar{
-                                        background-color: #2ec866;
+                                        background-color: $success;
                                     }
                                 }
                             }
@@ -318,11 +318,11 @@
                         &:nth-child(5){
                             .progress-circle{
                                 .value-bar{
-                                    border-color: #2ec866;
+                                    border-color: $success;
                                 }
                                 &.over50{
                                     .first50-bar{
-                                        background-color: #2ec866;
+                                        background-color: $success;
                                     }
                                 }
                             }
@@ -330,11 +330,11 @@
                         &:nth-child(6){
                             .progress-circle{
                                 .value-bar{
-                                    border-color: #2ec866;
+                                    border-color: $success;
                                 }
                                 &.over50{
                                     .first50-bar{
-                                        background-color: #2ec866;
+                                        background-color: $success;
                                     }
                                 }
                             }
@@ -423,7 +423,7 @@
                         flex-direction: row;
                         li {
                             margin-right: 8px;
-                            border: solid 1px #edf2f6;
+                            border: solid 1px $background;
                             display: -ms-flexbox;
                             display: -webkit-flex;
                             display: flex;
@@ -457,7 +457,7 @@
                 overflow: hidden;
                 h2 {
                     padding: 20px 24px;
-                    background-color: #fff;
+                    background-color: $white;
                     position: absolute;
                     top: 0;
                     left: 0;
@@ -563,7 +563,7 @@
                             @include transition(0.4s);
                             cursor: pointer;
                             &:hover{
-                                border:1px solid #ffb937;
+                                border:1px solid $warning;
                                 -ms-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
                                 -o-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
                                 -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
@@ -634,7 +634,7 @@
                                     color: #4f5f79;
                                     border-radius: 3px;
                                     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-                                    background-color: #ffffff;
+                                    background-color: $white;
                                     height: 24px;
                                     display: flex;
                                     align-items: center;

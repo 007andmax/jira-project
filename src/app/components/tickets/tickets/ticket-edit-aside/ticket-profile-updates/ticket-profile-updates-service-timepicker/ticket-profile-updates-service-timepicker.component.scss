@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .start-end-timer {
   display: flex;
   .start, .end {
@@ -28,16 +30,16 @@
     }
 
     &.ui-timepicker-selected {
-      background-color: #edf2f6;
+      background-color: $background;
       color: #364656;
       &:hover {
-        background-color: #edf2f6;
+        background-color: $background;
         color: #364656;
       }
     }
 
     &:hover {
-      background-color: #edf2f6;
+      background-color: $background;
       color: #364656;
 
       .ui-timepicker-duration {

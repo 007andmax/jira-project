@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .devices-aside {
   &__title {
      font-size: 10px;
@@ -21,7 +23,7 @@
     line-height: 1.33;
     cursor: pointer;
     &:hover {
-      background-color: #edf2f6;
+      background-color: $background;
       .devices-aside__device-menu {
       display: block;
       }
@@ -46,7 +48,7 @@
       }
       &.--online {
         &:before {
-          background-color: #2ec866;
+          background-color: $success;
         }
       }
       &.--desktop {

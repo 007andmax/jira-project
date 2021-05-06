@@ -8,8 +8,8 @@
   position: fixed;
   top: 0;
   left: 0;
-  background-color: #212b36;
-  color: #fff;
+  background-color: $primary-2;
+  color: $white;
   transition: width 300ms;
 
   &__header {
@@ -53,7 +53,7 @@
       letter-spacing: 1px;
       padding: 1px 3px;
       border-radius: 2px;
-      background-color: #ff5263;
+      background-color: $error;
       top: 100%;
       left: 34px;
     }
@@ -90,7 +90,7 @@
     font-style: normal;
     line-height: 1.43;
     letter-spacing: normal;
-    color: #919eab;
+    color: $gray-600;
     white-space: nowrap;
     font-family: Graphik-Medium, sans-serif;
   }
@@ -165,7 +165,7 @@
     padding: 0 24px 0 60px;
     cursor: pointer;
     font-size: 13px;
-    color: #fff;
+    color: $white;
     align-items: center;
     position: relative;
     a {
@@ -255,7 +255,7 @@
       opacity: 1;
     }
     &__menu-title {
-      color: #fff;
+      color: $white;
     }
     &__menu-arrow {
       transform: rotate(180deg);

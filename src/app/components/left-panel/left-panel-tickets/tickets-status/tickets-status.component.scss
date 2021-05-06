@@ -9,13 +9,13 @@
       border-color: #ff4940;
     }
     &.--green {
-      border-color: #2ec866;
+      border-color: $success;
     }
     &.--blue {
       border-color: $primary-1;
     }
     &.--yellow {
-      border-color: #ffb937;
+      border-color: $warning;
     }
   }
 

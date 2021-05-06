@@ -92,13 +92,13 @@
   // select contract type
   .contract-type-aside-content {
     padding: 32px;
-    background-color: #f9fafb;
+    background-color: $gray-200;
 
   }
   .contract-type-select {
     border-radius: 6px;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-    background-color: #ffffff;
+    background-color: $white;
     width: 591px;
     padding: 16px 12px 16px 24px;
     display: flex;
@@ -349,7 +349,7 @@
     list-style: none;
     padding-left: 0;
     display: flex;
-    border-bottom: 1px solid #dfe3e8;
+    border-bottom: 1px solid $gray-400;
 
     li {
       font-size: 13px;
@@ -458,7 +458,7 @@
 // start user device billing
 
     .contract-tipe-info {
-      border: 1px dotted #c5cdd5;
+      border: 1px dotted $gray-500;
       height: 32px;
       width: 696px;
       font-size: 12px;
@@ -513,9 +513,9 @@
   }
 
   &__gray-block {
-    border-top: 1px solid #dfe3e8;
-    border-bottom: 1px solid #dfe3e8;
-    background-color: #f9fafb;
+    border-top: 1px solid $gray-400;
+    border-bottom: 1px solid $gray-400;
+    background-color: $gray-200;
   }
 // end user device billing
 }
@@ -687,7 +687,7 @@ thead tr.contracts-table-row-item::before {
   content: '';
   width: 10px;
   height: 105px;
-  background: #edf2f6;
+  background: $background;
   position: absolute;
   transform: translate(-10px, -50px);
 }

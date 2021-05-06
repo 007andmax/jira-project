@@ -27,7 +27,7 @@ main {
                         font-style: normal;
                         line-height: 1.54;
                         letter-spacing: normal;
-                        color: $white-color;
+                        color: $white;
                         font-family: $sourceCode;
                         margin-bottom: 16px;
                         height: 310px;
@@ -112,7 +112,7 @@ main {
             }
             &.terminal-sidebar {
                 right: 0 !important;
-                border-left: 1px solid #dfe3e8;
+                border-left: 1px solid $gray-400;
                 -ms-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
                 -o-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
                 -webkit-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
@@ -181,7 +181,7 @@ main {
                                                         -webkit-box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
                                                         -moz-box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
                                                         box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-                                                        background-color: #ffffff;
+                                                        background-color: $white;
                                                         padding: 6px 0;
                                                         right: 0 !important;
                                                         top: 3px !important;
@@ -305,8 +305,8 @@ main {
                         -webkit-box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
                         -moz-box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
                         box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-                        border: 1px solid #dfe3e8;
-                        background-color: #ffffff;
+                        border: 1px solid $gray-400;
+                        background-color: $white;
                         @include border-radius(5px);
                         padding: 24px;
                         // @media only screen and (max-width:1440px){
@@ -350,8 +350,8 @@ main {
                                         min-width: inherit;
                                         padding: 13px 16px;
                                         &.btn-secondary {
-                                            border: solid 1px #c5cdd5;
-                                            background-color: #ffffff !important;
+                                            border: solid 1px $gray-500;
+                                            background-color: $white !important;
                                         }
                                     }
                                 }
@@ -397,8 +397,8 @@ main {
                 .dropdown{
                     .dropdown-menu{
                         box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-                        border: solid 1px #dfe3e8;
-                        background-color: #ffffff;
+                        border: solid 1px $gray-400;
+                        background-color: $white;
                         border-radius: 4px;
                         padding-top: 8px;
                         button{
@@ -412,10 +412,10 @@ main {
                                 color: #364656;
                                 height: auto;
                                 &:hover{
-                                    background-color: #edf2f6;
+                                    background-color: $background;
                                 }
                                 &:last-child{
-                                    border-top:1px solid  #dfe3e8;
+                                    border-top:1px solid  $gray-400;
                                     font-size: 12px;
                                     font-weight: 500;
                                     font-style: normal;
@@ -437,7 +437,7 @@ main {
                 -webkit-box-shadow: -8px 0 16px 0 rgba(0, 0, 0, 0.1);
                 -moz-box-shadow: -8px 0 16px 0 rgba(0, 0, 0, 0.1);
                 box-shadow: -8px 0 16px 0 rgba(0, 0, 0, 0.1);
-                background-color: #ffffff;
+                background-color: $white;
                 width: 592px;
                 z-index: 99;
                 @include transition(0.4s);
@@ -450,8 +450,8 @@ main {
                     align-items: center;
                     justify-content: space-between;
                     padding: 14px 32px;
-                    background-color: #f9fafb;
-                    border-bottom: 1px solid #dfe3e8;
+                    background-color: $gray-200;
+                    border-bottom: 1px solid $gray-400;
                     h2 {
                         margin: 0;
                         font-size: 20px;
@@ -475,11 +475,11 @@ main {
                                 &.list-unstyled {
                                     &.script-list {
                                         @include border-radius(4px);
-                                        border: solid 1px #dfe3e8;
-                                        background-color: #ffffff;
+                                        border: solid 1px $gray-400;
+                                        background-color: $white;
                                         li {
                                             padding: 16px 16px 20px 16px;
-                                            border-bottom: 1px solid #dfe3e8;
+                                            border-bottom: 1px solid $gray-400;
                                             display: -webkit-flex;
                                             display: -ms-flexbox;
                                             display: flex;
@@ -513,8 +513,8 @@ main {
                                                     text-overflow: ellipsis;
                                                     &.clone-cat {
                                                         border-radius: 3px;
-                                                        border: solid 1px #dfe3e8;
-                                                        background-color: #f9fafb;
+                                                        border: solid 1px $gray-400;
+                                                        background-color: $gray-200;
                                                         font-size: 10px;
                                                         font-weight: 500;
                                                         font-stretch: normal;
@@ -538,8 +538,8 @@ main {
                                                     width: 32px;
                                                     height: 32px;
                                                     @include border-radius(8px);
-                                                    border: solid 1px #dfe3e8;
-                                                    background-color: #ffffff;
+                                                    border: solid 1px $gray-400;
+                                                    background-color: $white;
                                                     display: -webkit-flex;
                                                     display: -ms-flexbox;
                                                     display: flex;
@@ -576,7 +576,7 @@ main {
                                         margin: 0;
                                         width: auto;
                                         margin: 0 auto;
-                                        border: 1px solid #dfe3e8;
+                                        border: 1px solid $gray-400;
                                         float: none;
                                         li {
                                             padding: 0;
@@ -603,7 +603,7 @@ main {
                                                 color: #4f5f79;
                                                 border: none;
                                                 padding: 0;
-                                                border-right: solid 1px #dfe3e8;
+                                                border-right: solid 1px $gray-400;
                                                 border-bottom: none;
                                             }
                                             &:last-child {
@@ -619,7 +619,7 @@ main {
                                             &.current {
                                                 a {
                                                     background-color: $primary-1;
-                                                    color: #fff;
+                                                    color: $white;
                                                 }
                                             }
                                         }
@@ -643,8 +643,8 @@ main {
                     }
                     .clone-cat {
                         @include border-radius(3px);
-                        border: solid 1px #dfe3e8;
-                        background-color: #fff;
+                        border: solid 1px $gray-400;
+                        background-color: $white;
                         font-size: 10px;
                         font-style: normal;
                         line-height: 1.2;
@@ -683,8 +683,8 @@ main {
                                 padding: 10px 20px;
                                 font-size: 13px;
                                 &.btn-secondary {
-                                    border: solid 1px #c5cdd5;
-                                    background-color: #ffffff !important;
+                                    border: solid 1px $gray-500;
+                                    background-color: $white !important;
                                 }
                             }
                         }
@@ -883,11 +883,11 @@ body {
                         -webkit-box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
                         -moz-box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
                         box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
-                        background-color: #ffffff;
+                        background-color: $white;
                         margin-bottom: 0;
                         .modal-header {
                             padding: 10px 16px 10px 32px;
-                            border-bottom: 1px solid #dfe3e8;
+                            border-bottom: 1px solid $gray-400;
                             display: -ms-flexbox;
                             display: -webkit-flex;
                             display: flex;
@@ -933,12 +933,12 @@ body {
                                     margin-left:10px;
                                     font-size:13px;
                                     &.btn-secondary{
-                                        border: solid 1px #c5cdd5;
-                                        background-color: #ffffff !important;
+                                        border: solid 1px $gray-500;
+                                        background-color: $white !important;
                                     }
                                     &.btn-remove{
-                                        background-color: #ff5263;
-                                        border-color:#ff5263;
+                                        background-color: $error;
+                                        border-color:$error;
                                     }
                                 }
                             }
@@ -977,11 +977,11 @@ body {
                                 align-items: center;
                                 justify-content: center;
                                 @include border-radius(4px);
-                                border: solid 1px #dfe3e8;
-                                background-color: #ffffff;
+                                border: solid 1px $gray-400;
+                                background-color: $white;
                                 &.edit-cat{
-                                    background-color: #637382;
-                                    border-color: #637382;
+                                    background-color: $gray-700;
+                                    border-color: $gray-700;
                                 }
                                 &::before{
                                     left: -14px;

@@ -1,9 +1,11 @@
+@import './src/assets/styles/variable';
+
 .breadcrumbs {
   display: flex;
   padding: 30px 0px 0px 0px;
   padding-left: 24px;
   align-items: center;
-  background-color: #edf2f6;
+  background-color: $background;
   div {
     display: flex;
     align-items: stretch;
@@ -15,7 +17,7 @@
 
     &.breadcrumbs-path {
       span {
-        color: #919eab;
+        color: $gray-600;
       }
     }
 
@@ -30,8 +32,8 @@
     }
   }
 }
- 
- 
+
+
 .breadcrumbs-company-password-manager {
   background-color: #f3f7f9;
 }

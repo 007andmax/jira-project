@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .users-aside {
   &__title {
      font-size: 10px;
@@ -23,7 +25,7 @@
        cursor: pointer;
        display: flex;
        &:hover {
-         background-color: #edf2f6;
+         background-color: $background;
          .users-aside__user-menu {
            display: block;
          }
@@ -32,7 +34,7 @@
        &.--online {
          .users-aside__user-avatar {
            &:before {
-             background-color: #2ec866;
+             background-color: $success;
            }
          }
        }
@@ -40,7 +42,7 @@
        &.--away {
           .users-aside__user-avatar {
             &:before {
-              background-color: #ffb937;
+              background-color: $warning;
             }
           }
         }
@@ -71,7 +73,7 @@
       position: absolute;
       width: 8px;
       height: 8px;
-      border: solid 2px #ffffff;
+      border: solid 2px $white;
       background-color: #9ca5b6;
       border-radius: 50%;
       top: calc(69%);

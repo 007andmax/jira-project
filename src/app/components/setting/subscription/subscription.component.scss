@@ -63,8 +63,8 @@
             justify-content: space-between;
             align-items: center;
             border-radius: 4px;
-            border: solid 1px #edf2f6;
-            background-color: #ffffff;
+            border: solid 1px $background;
+            background-color: $white;
             padding: 15px 24px;
             margin-bottom: 40px;
             flex-direction: row;
@@ -118,7 +118,7 @@
             .btn {
                 padding: 13px 24px;
                 margin-left: 24px;
-                color:$white-color;
+                color:$white;
                 letter-spacing: normal;
                 @media only screen and (max-width: 576px){
                     padding: 11px 15px;
@@ -257,8 +257,8 @@
         td {
             padding: 13.5px 30px 13.5px 14px;
             text-align: center;
-            background-color: #fff;
-            border-bottom: solid 1px #edf2f6;
+            background-color: $white;
+            border-bottom: solid 1px $background;
             font-size: 13px;
             line-height: 1.54;
             letter-spacing: normal;
@@ -267,7 +267,7 @@
         }
         th.h-title {
             padding: 18px 30px 18px 15px;
-            background-color: #fff;
+            background-color: $white;
             font-family: $font-body;
             font-weight: normal;
             width: 236px;
@@ -276,7 +276,7 @@
             letter-spacing: normal;
             text-align: center;
             color: #364656;
-            border-bottom:  solid 1px #edf2f6;
+            border-bottom:  solid 1px $background;
             text-transform: capitalize;
             position: relative;
         }
@@ -287,8 +287,8 @@
             line-height: 1.54;
             letter-spacing: normal;
             color: #364656;
-            background-color: #fff;
-            border-bottom: solid 1px #edf2f6;
+            background-color: $white;
+            border-bottom: solid 1px $background;
             padding: 13px 24px;
         }
 
@@ -315,7 +315,7 @@
         }
         th.h-title.professional{
             &::after{
-                background-color: #ffb937;
+                background-color: $warning;
             }
         }
     tr:first-child th.h-title:first-child::before {background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.1));top: 63px;width: 24px;right: 0;}
@@ -328,7 +328,7 @@
         font-weight: 500;
         letter-spacing: normal;
         &.btn-yellow{
-            background-color: #ffb937;
+            background-color: $warning;
 
         }
         &.btn-secondary{
@@ -387,7 +387,7 @@
   right: -25px;
   font-size: 0;
   top: 0;
-  background-color: #fff;
+  background-color: $white;
 
   @media only screen and (max-width:768px){
     width: 100%;
@@ -399,10 +399,10 @@
     right: 0;
     font-size: 0;
     top: 0;
-    background-color: #fff;
+    background-color: $white;
     left: 0;
     background-color: #27303f;
-    color: #fff;
+    color: $white;
     display: flex;
     flex-direction: row;
     font-size: 16px;
@@ -484,7 +484,7 @@
             width: 14px;
             height: 14px;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
-            background-color: #ffffff;
+            background-color: $white;
             border-radius: 50%;
             @include transition(0.4s);
             cursor: pointer;

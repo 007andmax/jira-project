@@ -1,9 +1,11 @@
+@import './src/assets/styles/variable';
+
 .qt-aside-modern {
   color: #4f5f79;
   background: white;
   width: 592px;
   position: absolute;
-  border-left: 1px solid #dfe3e8;
+  border-left: 1px solid $gray-400;
   height: 100%;
   right: 0;
   box-shadow: -8px 0 8px 0 rgba(0, 0, 0, 0.05);
@@ -23,8 +25,8 @@
 
   &__header {
     height: 56px;
-    background-color: #f9fafb;
-    border-bottom: 1px solid #dfe3e8;
+    background-color: $gray-200;
+    border-bottom: 1px solid $gray-400;
     display: flex;
     align-items: center;
     justify-content: space-between;

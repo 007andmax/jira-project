@@ -1,6 +1,8 @@
+@import './src/assets/styles/variable';
+
 .billing-dashboard-page {
   width: 100%;
-  background-color: #edf2f6;
+  background-color: $background;
   min-height: 100vh;
   overflow: auto;
   &__content {
@@ -42,7 +44,7 @@
     width: 33.33%;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
     border-radius: 8px;
-    background-color: #ffffff;
+    background-color: $white;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -69,8 +71,8 @@
           left: auto;
           right: 0;
         }
-        i.icn-remove-old {	
-          right: 2px;	
+        i.icn-remove-old {
+          right: 2px;
         }
       }
     }
@@ -113,7 +115,7 @@
       display: flex;
       justify-content: space-between;
       padding: 12px 32px;
-      border-top: 1px solid #edf0f2;
+      border-top: 1px solid $gray-300;
     }
     &__footer-item-title-block {
       display: flex;
@@ -151,7 +153,7 @@
     height: 96px;
     border-radius: 8px;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
-    background-color: #ffffff;
+    background-color: $white;
     padding: 20px 10px 12px 16px;
 
     &__container {
@@ -172,7 +174,7 @@
       width: 40px;
       height: 40px;
       box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-      background-color: #ffffff;
+      background-color: $white;
       border-radius: 50%;
       background-repeat: no-repeat;
       background-position: center;
@@ -210,13 +212,13 @@
         margin-right: 2px;
       }
       &.--up {
-        color: #2ec866;
+        color: $success;
         .contract-info-card__arrow-icon {
           background-image: url('/assets/img/icons/growth.svg');
         }
       }
       &.--down {
-        color: #ff5263;
+        color: $error;
         .contract-info-card__arrow-icon {
           background-image: url('/assets/img/icons/loss.svg');
         }
@@ -230,7 +232,7 @@
     height: 285px;
     border-radius: 6px;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
-    background-color: #ffffff;
+    background-color: $white;
 
     &__title {
       padding: 16px 24px 14px 24px;
@@ -243,7 +245,7 @@
       width: 100%;
       border-collapse: collapse;
       th {
-        background-color: #f9fafb;
+        background-color: $gray-200;
         height: 24px;
         text-transform: uppercase;
         font-size: 10px;
@@ -262,7 +264,7 @@
         color: #4f5f79;
         font-size: 12px;
         height: 40px;
-        border-bottom: 1px solid #edf0f2;
+        border-bottom: 1px solid $gray-300;
       }
       tr:last-child {
         td {
@@ -297,7 +299,7 @@
         width: 18px;
         height: 18px;
         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-        background-color: #ffffff;
+        background-color: $white;
         border-radius: 50%;
         display: flex;
         align-items: center;
@@ -321,7 +323,7 @@
     width: 33.33%;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
     border-radius: 8px;
-    background-color: #ffffff;
+    background-color: $white;
     &__header-title {
       font-family: Graphik-Medium, sans-serif;
       font-size: 26px;
@@ -353,7 +355,7 @@
       display: flex;
       align-items: center;
       padding: 12px 0px;
-      border-bottom: 1px solid #edf0f2;
+      border-bottom: 1px solid $gray-300;
     }
     &__list-item-box {
       width: 10px;
@@ -388,7 +390,7 @@
         opacity: 0;
       }
       line {
-        stroke: #edf0f2;
+        stroke: $gray-300;
       }
     }
     .nvd3 text {
