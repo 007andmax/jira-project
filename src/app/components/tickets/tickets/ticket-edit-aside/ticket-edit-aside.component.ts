@@ -93,7 +93,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       this.ticketStateService.getServicesList(this.ticketProfile);
       this.ticketStateService.subsribeToTicket(this.ticketProfile.id);
       this.ticketMessage.reset();
-
+      this.appService.toggleMobileAside(true);
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
       }
@@ -429,6 +429,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     this.ticketStateService.unsubscribeTicket();
     this.ticketStateService.onTicketClosed();
     this.ticketMessage.reset();
+    this.appService.toggleMobileAside(false);
     if (!this.cd['destroyed']) {
       this.cd.detectChanges();
     }

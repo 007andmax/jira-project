@@ -1,4 +1,4 @@
-@import './src/assets/styles/variable';
+@import "./src/assets/styles/variable";
 
 table.qt-table-modern {
   width: 100%;
@@ -46,37 +46,37 @@ table.qt-table-modern {
 
       &.--selected {
         td {
-          background: $gray-200;
+          background: #f4fbff;
           border-color: $primary-1;
         }
       }
     }
   }
   .qt-table-modern__circle-avatar {
-      width: 24px;
-      height: 24px;
-      min-width: 24px;
-      min-height: 24px;
-      border-radius: 50%;
-      background-position: center;
-      background-size: cover;
-      margin-right: 8px;
-      color: $white;
-      align-items: center;
-      justify-content: center;
-      display: flex;
-      font-size: 10px;
-      font-weight: 700;
-      &.transparent-text:before {
-        content: '.';
-        color: transparent;
-        position: relative;
-      }
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    min-height: 24px;
+    border-radius: 50%;
+    background-position: center;
+    background-size: cover;
+    margin-right: 8px;
+    color: $white;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    font-size: 10px;
+    font-weight: 700;
+    &.transparent-text:before {
+      content: ".";
+      color: transparent;
+      position: relative;
     }
-    .--strong {
-      font-weight: 500;
-      color: $primary-2;
-    }
+  }
+  .--strong {
+    font-weight: 500;
+    color: $primary-2;
+  }
 }
 
 // TODO Mobile Style
@@ -92,7 +92,7 @@ table.qt-table-modern {
       background: $white;
       border-radius: 8px;
       margin-bottom: 8px;
-      box-shadow: 0 0 3px rgba(0,0,0,.05)
+      box-shadow: 0 0 3px rgba(0, 0, 0, 0.05);
     }
 
     & > div {
@@ -141,7 +141,7 @@ table.qt-table-modern {
 
         &:first-child,
         &:last-child {
-          border-color: $primary-1
+          border-color: $primary-1;
         }
       }
     }
@@ -270,14 +270,13 @@ table.qt-table-modern {
   }
 }
 @media (max-width: 767px) {
- .page-list-ticket {
-   .qt-page-list__header-thead-container {
-     display: none;
-   }
- }
+  .page-list-ticket {
+    .qt-page-list__header-thead-container {
+      display: none;
+    }
+  }
 }
 // End Mobile style
-
 
 .qt-table-modern__sorting {
   position: relative;
@@ -288,18 +287,18 @@ table.qt-table-modern {
   top: 2px;
 
   &:before {
-    content: '';
+    content: "";
     position: absolute;
     width: 8px;
     height: 6px;
-    background-image: url('/assets/img/icons/sorting-up.svg');
+    background-image: url("/assets/img/icons/sorting-up.svg");
   }
   &:after {
-    content: '';
+    content: "";
     position: absolute;
     width: 8px;
     height: 6px;
     top: 6px;
-    background-image: url('/assets/img/icons/sorting-down.svg');
+    background-image: url("/assets/img/icons/sorting-down.svg");
   }
 }

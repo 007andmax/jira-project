@@ -173,7 +173,6 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     this.ticketProfileFormUpdate = new TicketProfileFormUpdate();
   }
   closeMobile() {
-    this.appService.toggleMobileAside(false);
     this.ticketStateService.setTabUpdate(null);
   }
   getUsersForUpdate() {

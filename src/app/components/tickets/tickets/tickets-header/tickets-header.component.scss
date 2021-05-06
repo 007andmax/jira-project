@@ -1,5 +1,5 @@
 //@import "../../../../../assets/styles/variable";
-@import './src/assets/styles/variable';
+@import "./src/assets/styles/variable";
 
 .tickets-list-search {
   margin-right: 8px;
@@ -13,10 +13,10 @@
   background-color: $white;
   color: $primary-2;
   border: none;
-  background-image: url('../../../../../assets/img/icons/filter.svg');
+  background-image: url("../../../../../assets/img/icons/filter.svg");
   // TODO mobile style
   @media (max-width: 767px) {
-    background-image: url('/assets/img/icons/filter-white.svg');
+    background-image: url("/assets/img/icons/filter-white.svg");
     background-color: transparent;
     background-size: 24px;
     height: 24px;
@@ -34,5 +34,10 @@
     background-color: #16a4fa10;
     border: none;
     background-image: url(../../../../../assets/img/icons/filter-active.svg);
+  }
+}
+.icon__search-white {
+  @media (max-width: 767px) {
+    display: none;
   }
 }

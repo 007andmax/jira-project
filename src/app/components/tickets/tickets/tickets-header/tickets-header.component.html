@@ -33,8 +33,8 @@
                 </button>
                 <button
                     class="qt-btn filter-button qt-mr-8 d-f"
-                    [ngClass]="{'active':!toggleFilter}"
-                    (click)="toggleFilter = !toggleFilter"
+                    [ngClass]="{'active':toggleFilter}"
+                    (click)="onToggleFilter(!toggleFilter)"
                 >
                     <span [textContent]="getTextCountFilters()"></span>
                 </button>
@@ -48,27 +48,15 @@
             </div>
         </div>
     </div>
-
-
-
-
-
-
     <div class="qt-page-list__header-filters">
         <app-tickets-filter
             class="qt-w100"
             #filter
             (changeCountFilter)="onChangeCountFilter($event)"
-            [hidden]="toggleFilter"
-            (onClose)="toggleFilter = true"
+            [hidden]="!toggleFilter"
+            (onClose)="onToggleFilter(false)"
         ></app-tickets-filter>
     </div>
-
-
-
-
-
-
     <!-- <div class="qt-page-list__header-thead-container"> -->
     <!-- <table class="qt-table-modern qt-page-list__header-thead"> -->
     <!-- <thead> -->
@@ -83,7 +71,6 @@
     <!-- </thead> -->
     <!-- </table> -->
     <!-- </div> -->
-
 
 
 

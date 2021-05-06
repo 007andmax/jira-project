@@ -18,7 +18,6 @@ export class ModalAddUpdateTicketComponent implements OnInit {
   ngOnInit() {
   }
   setTabUpdate(data) {
-    this.appService.toggleMobileAside(true);
     this.ticketStateService.setTabUpdate(data);
     this.activeModal.dismiss('Cross click');
   }

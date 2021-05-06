@@ -31,7 +31,7 @@ export class TicketsPermissionsService {
           return ticket.hasInvoice;
 
         } else if (option === 'billable') {
-          return this.isBillable(ticket);
+          return !ticket.hasInvoice;
 
         } else {
           return true;

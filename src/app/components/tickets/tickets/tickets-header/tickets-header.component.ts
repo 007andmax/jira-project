@@ -26,7 +26,7 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
   title: string = 'My Tickets';
   sub: Subscription = new Subscription();
   count = 0;
-  toggleFilter: boolean = true;
+  toggleFilter: boolean = false;
   countFilter: number = 0;
   selectedListType: TitleListType = new TitleListType('My Tickets', 'USERS');
   constructor(private ticketsStateService: TicketsStateService,
@@ -59,6 +59,7 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
     }
     /* END */
   }
+
   toggleMobileLeftPanel() {
     this.leftPanelStateService.toggleMobileLeftPanel(true);
     this.appService.toggleMobileAside(true);
@@ -81,6 +82,10 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
   public setTitle(title) {
     this.title = `${title} (${this.count})`;
 
+  }
+  onToggleFilter(data) {
+    if (this.appService.checkMobile()) this.appService.toggleMobileAside(data);
+    this.toggleFilter = data;
   }
   onAddTicket() {
     this.ticketsStateService.onToggleAddTicket();
