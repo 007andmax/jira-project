@@ -17,7 +17,7 @@
         font-style: normal;
         line-height: 1.33;
         letter-spacing: normal;
-        color: #4f5f79;
+        color: $gray-800;
         padding-left: 25px;
         min-height: 16px;
         &:hover{
@@ -150,7 +150,7 @@
                 h5 {
                     margin-bottom: 4px;
                     letter-spacing: normal;
-                    color: #4f5f79;
+                    color: $gray-800;
                 }
                 .colum {
                     float: left;
@@ -177,7 +177,7 @@
         font-style: normal;
         line-height: 1.33;
         letter-spacing: normal;
-        color: #364656;
+        color: $primary-2;
         min-width: 78px;
         img {
             display: inline-block;
@@ -224,7 +224,7 @@
                 background-color: $success;
             }
             &.offline {
-                background-color: #ff6e61;
+                background-color: $error;
             }
             &.away {
                 background-color: $warning;

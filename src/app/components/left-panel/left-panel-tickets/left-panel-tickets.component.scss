@@ -8,7 +8,7 @@
   left: 76px;
   top: 0;
   z-index: 992;
-  background: #354053;
+  background:$primary-2;
   overflow-x: scroll;
   transition: left 300ms;
 
@@ -88,7 +88,7 @@
   border: 2px solid;
   border-radius: 50%;
   &.--red {
-    border-color: #ff4940;
+    border-color: $error;
   }
   &.--green {
     border-color: $success;
@@ -117,7 +117,7 @@
    /* display: none !important;*/
 }
 .active {
-    background: #3e4b61;
+    background: $gray-800;
      color: $primary-1;
     border-left: 2px solid $primary-1;
 }

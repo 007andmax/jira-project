@@ -4,7 +4,7 @@
   &__title {
      font-size: 10px;
      font-weight: 700;
-     color: #4f5f79;
+     color: $gray-800;
      padding: 22px 16px 16px;
      text-transform: uppercase;
    }
@@ -34,7 +34,7 @@
        width: 6px;
        height: 6px;
        left: 16px;
-       background-color: #9ca5b6;
+       background-color: $gray-600;
        border-radius: 50%;
        top: calc(50% - 3px);
       }
@@ -73,10 +73,10 @@
       }
       &__device-name {
          font-weight: 600;
-         color: #4f5f79;
+         color: $gray-800;
        }
        &__device-owner {
-         color: #9ca5b6;
+         color: $gray-600;
        }
   }
   &__device-menu {

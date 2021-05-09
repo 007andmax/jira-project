@@ -17,9 +17,9 @@
         width: 50%;
         top: 0;
         input{
-            border: solid 1px #c4cbd5;
+            border: solid 1px $gray-500;
             @include border-radius(4px);
-            color:#4f5f79;
+            color:$gray-800;
         }
     }
 }
@@ -93,7 +93,7 @@
                         font-family: $graphicMedBold;
                         line-height: 1.54;
                         letter-spacing: normal;
-                        color: #4f5f79;
+                        color: $gray-800;
                         padding: 0 18px;
                         background: url(../../../../assets/img/device/bullet.svg) no-repeat 5px 5px;
                         margin: 6px 0;
@@ -104,7 +104,7 @@
                         flex-direction: row;
                         span{
                             font-family: $font-body;
-                            color: #9ca5b6;
+                            color: $gray-600;
                             margin-right: 2px;
                             display: inline-block;
                             vertical-align: bottom;
@@ -117,7 +117,7 @@
                             font-family: $graphicMedBold;
                             line-height: 1.54;
                             letter-spacing: normal;
-                            color: #4f5f79;
+                            color: $gray-800;
                         }
                         span.edit-field{
                             top: -6px;
@@ -130,7 +130,7 @@
                                 line-height: 1;
                                 font-size: 13px;
                                 font-family: $graphicSemibold;
-                                color: #4f5f79;
+                                color: $gray-800;
                             }
                         }
                         span.edit-field[data-tooltip]{
@@ -141,7 +141,7 @@
                                 text-align: center;
                                 width: 216px;
                                 border-radius: 3px;
-                                background-color: #4f5f79;
+                                background-color: $gray-800;
                                 font-size: 12px;
                                 font-weight: 500;
                                 font-style: normal;
@@ -169,7 +169,7 @@
                                 position: absolute;
                                 pointer-events: none;
                                 border-color: rgba(79, 95, 121, 0);
-                                border-top-color: #4f5f79;
+                                border-top-color: $gray-800;
                                 border-width: 6px;
                                 margin-left: -80px;
                                 bottom: 32px;
@@ -184,7 +184,7 @@
                                     visibility: visible;
                                 }
                                 .sub-label-field {
-                                    border: solid 1px #c4cbd5;
+                                    border: solid 1px $gray-500;
                                     outline: 0;
                                 }
                             }
@@ -202,7 +202,7 @@
             }
 
             .label-field:hover, .label-field:focus {
-                border: solid 1px #c4cbd5;
+                border: solid 1px $gray-500;
                 outline: 0;
             }
 
@@ -213,7 +213,7 @@
             }
 
             .sub-label-field:hover, .sub-label-field:focus {
-                border: solid 1px #c4cbd5;
+                border: solid 1px $gray-500;
                 outline: 0;
             }
 
@@ -281,11 +281,11 @@
                         &:nth-child(2){
                             .progress-circle{
                                 .value-bar{
-                                    background-color: #0057a8;
+                                    background-color: $secondary-1;
                                 }
                                 &.over50{
                                     .first50-bar{
-                                        background-color: #0057a8;
+                                        background-color: $secondary-1;
                                     }
                                 }
 
@@ -434,11 +434,11 @@
                             position: relative;
                             height: 28px;
                             @include border-radius(4px);
-                            background-color: #f8f9fa;
+                            background-color: $gray-100;
                             .tag {
                                 font-size: 12px;
                                 line-height: 1.33;
-                                color: #4f5f79;
+                                color: $gray-800;
                             }
                             .tag-close {
                                 position: absolute;
@@ -502,12 +502,12 @@
                                     }
                                     .time-by{
                                         font-size: 10px;
-                                        color: #9ca5b6;
+                                        color: $gray-600;
                                     }
                                 }
                                 .device-added-by {
                                     font-size: 12px;
-                                    color: #4f5f79;
+                                    color: $gray-800;
                                     line-height: 1.33;
                                 }
                                 &::before {
@@ -581,7 +581,7 @@
                             p {
                                 margin: 2px 0;
                                 font-size: 13px;
-                                color: #4f5f79;
+                                color: $gray-800;
                             }
                             .notes-by {
                                 display: -ms-flexbox;
@@ -616,7 +616,7 @@
                                     .name {
                                         font-size: 12px;
                                         font-family: $graphicSemibold;
-                                        color: #4f5f79;
+                                        color: $gray-800;
 
                                     }
                                 }
@@ -631,7 +631,7 @@
                                 a {
                                     font-size: 12px;
                                     line-height: 1;
-                                    color: #4f5f79;
+                                    color: $gray-800;
                                     border-radius: 3px;
                                     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
                                     background-color: $white;

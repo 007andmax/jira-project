@@ -7,7 +7,7 @@
 
 
 .cmn-area.incming-email{
-    margin-top: 3px; 
+    margin-top: 3px;
     p{
         margin-bottom: 24px;
         font-size: 13px;
@@ -16,14 +16,14 @@
         font-stretch: normal;
         line-height: 1.54;
         letter-spacing: normal;
-        color: #4f5f79;
-    } 
+        color: $gray-800;
+    }
     .f-row{
         margin-bottom: 0;
         @media only screen and (max-width: 768px){
             margin:0;
         }
-        .f-col{ 
+        .f-col{
             width: 416px;
             @media only screen and (max-width: 768px){
                 width: 100%;
@@ -47,7 +47,7 @@ p{
     font-stretch: normal;
     line-height: 1.54;
     letter-spacing: normal;
-    color: #4f5f79;
+    color: $gray-800;
 }
 .f-col{
     &.col-25 {
@@ -75,7 +75,7 @@ p{
     }
 }
 
-}    
+}
 .test-server {
 text-align: right;
 margin-top: -15px;

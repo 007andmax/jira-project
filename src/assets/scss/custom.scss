@@ -1,4 +1,4 @@
-// Font Family  
+// Font Family
 
 $font-body: 'Graphik-Regular';
 $grahic-light:'Graphik-Light';
@@ -9,11 +9,11 @@ $graphicMedBold:'Graphik-Medium';
 
 
 @mixin body-font {
-    color: $metal;
+    color: $gray-800;
     font-family: $font-body;
     font-size: 13px;
     line-height: 1.54;
-}  
+}
 
 
 @mixin border-radius($radius) {
@@ -67,7 +67,7 @@ $graphicMedBold:'Graphik-Medium';
     pointer-events: none;
 }
 
-// Background properties  
+// Background properties
 @mixin bg-cmn {
     background-position: top center;
     background-repeat: no-repeat;
@@ -84,7 +84,7 @@ $graphicMedBold:'Graphik-Medium';
     -moz-transform: $value;
     -ms-transform: $value;
     -o-transform: $value;
-    transform: $value; 
+    transform: $value;
   }
 
 @mixin flexbox() {

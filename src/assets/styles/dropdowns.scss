@@ -7,13 +7,13 @@
   &.with-placeholder {
     height: 40px;
     border-radius: 3px;
-    border: 1px solid #c4cbd5;
+    border: 1px solid $gray-500;
     .placeholder {
       position: absolute;
       left: 12px;
       top: 50%;
       transform: translateY(-50%);
-      color: #9ca5b6;
+      color: $gray-600;
       font-size: 13px;
       font-family: "Graphik-Regular", sans-serif;
     }
@@ -58,7 +58,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
       transition: all .3s;
-      color: #4c5c6f;
+      color: $gray-800;
       &:hover {
         color: $white;
         background: $primary-1;
@@ -103,7 +103,7 @@
     background: #313a4d;
     .dropdown-item {
       background: #313a4d;
-      color: #9ca5b6;
+      color: $gray-600;
     }
   }
 }
@@ -121,7 +121,7 @@
     .dropdown-item {
       &:hover {
         background: $background;
-        color: #4c5c6f;
+        color: $gray-800;
       }
     }
   }
@@ -264,7 +264,7 @@
           }
           &.collapsed {
             background-color: $white;
-            color: #4c5c6f;
+            color: $gray-800;
             .report-caret-icon {
               transform: rotate(0);
               background: url('/assets/img/report-caret.png');
@@ -299,7 +299,7 @@
           }
           .title {
             font-size: 13px;
-            color: #4f5f79;
+            color: $gray-800;
             display: inline-block;
             word-break: break-all;
             max-height: 50px;
@@ -308,13 +308,13 @@
           .total-count {
             font-weight: 500;
             font-size: 13px;
-            color: #364656;
+            color: $primary-2;
             font-family: "Graphik-Medium", sans-serif;
           }
           .col-md-12 {
             span {
               font-size: 11px;
-              color: #9ca5b6;
+              color: $gray-600;
               word-break: break-all;
               &:first-child {
                 margin-right: 15px;
@@ -341,7 +341,7 @@
   &-preview {
     height: 40px;
     border-radius: 3px;
-    border: solid 1px #c4cbd5;
+    border: solid 1px $gray-500;
     padding: 7px 12px;
     display: flex;
     background: $white;
@@ -490,7 +490,7 @@
 }
 .ngb-dp-today {
   .custom-day {
-    background: #3ba5fa;
+    background: $primary-1;
     color: white;
   }
 }

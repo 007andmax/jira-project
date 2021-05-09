@@ -1,7 +1,7 @@
 @import './src/assets/styles/variable';
 
 .qt-aside-modern {
-  color: #4f5f79;
+  color: $gray-800;
   background: white;
   width: 592px;
   position: absolute;
@@ -25,7 +25,7 @@
 
   &__header {
     height: 56px;
-    background-color: $gray-200;
+    background-color: $gray-100;
     border-bottom: 1px solid $gray-400;
     display: flex;
     align-items: center;
@@ -37,7 +37,7 @@
   &__header-title {
     font-size: 20px;
     font-family: Graphik-Medium, sans-serif;
-    color: #364656;
+    color: $primary-2;
   }
 
   &__header-close {
@@ -99,7 +99,7 @@
   &__title {
     font-size: 20px;
     font-weight: 500;
-    color: #364656;
+    color: $primary-2;
     font-weight: 600;
   }
 

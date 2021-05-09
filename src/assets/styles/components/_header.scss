@@ -89,7 +89,7 @@
   }
 
   &__account-info-company-name {
-    color: #4f5f79;
+    color: $gray-800;
     font-size: 13px;
     line-height: 1.54;
     margin-bottom: 2px;
@@ -99,7 +99,7 @@
   }
 
   &__account-info-user-name {
-    color: #9ca5b6;
+    color: $gray-600;
     font-size: 12px;
     line-height: 1.33;
     text-align: right;

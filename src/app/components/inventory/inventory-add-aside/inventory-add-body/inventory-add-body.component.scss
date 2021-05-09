@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 /deep/.new-product-gl-select {
     .dropdown-menu {
        width: 208px;
@@ -6,6 +8,6 @@
 
 .inventory-add-body__input {
   &::placeholder {
-    color: #9ca5b6;
+    color: $gray-600;
   }
 }

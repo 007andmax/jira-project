@@ -21,7 +21,7 @@
 
 .tax-title {
   font-size: 15px;
-  color: #364656;
+  color: $primary-2;
   margin-bottom: 16px;
   font-family: Graphik-Semibold, sans-serif;
 }
@@ -56,7 +56,7 @@
       height: 40px;
       padding: 0 12px;
       font-size: 13px;
-      border: 1px solid #c4cbd5;
+      border: 1px solid $gray-500;
       border-radius: 4px;
       margin-bottom: 17px;
       color: rgb(64, 75, 95);
@@ -67,7 +67,7 @@
       margin-bottom: 11px;
       font-family: Graphik-Medium, sans-serif;
 
-      color: #4f5f79;
+      color: $gray-800;
     }
 
     .control-label {
@@ -102,7 +102,7 @@
       display: flex;
       position: relative;
       button {
-        color: #4c5c6f;
+        color: $gray-800;
       }
   }
 }
@@ -112,12 +112,12 @@
   height: 40px;
   padding: 0 12px;
   font-size: 13px;
-  border: 1px solid #c4cbd5;
+  border: 1px solid $gray-500;
   border-radius: 4px;
   width: 100%;
   background: white;
   &::placeholder {
-    color: #9ca5b6;
+    color: $gray-600;
   }
 }
 

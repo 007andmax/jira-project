@@ -13,12 +13,12 @@
       height: 40px;
       font-size: 13px;
       border-radius: 3px;
-      border: solid 1px #c4cbd5;
+      border: solid 1px $gray-500;
       background-color: white;
-      color: #4f5f79;
+      color: $gray-800;
       padding: 10px 12px;
       &::placeholder {
-        color: #9ca5b6;
+        color: $gray-600;
       }
     }
     &__dropdown {
@@ -37,7 +37,7 @@
       background: white;
       top: 0;
       border-bottom: 1px solid $gray-400;
-      box-shadow: 0px 0px 7px 1px #c4cbd5;
+      box-shadow: 0px 0px 7px 1px $gray-500;
       justify-content: space-between;
     }
 
@@ -81,13 +81,13 @@
     /deep/ .card {
       &.opened-card {
         padding: 0 24px 16px 24px;
-        background-color: #f4f6f8;
+        background-color: $gray-200;
 
         .select-product {
           &__item-title {
             background: transparent;
             font-size: 13px;
-            color: #4f5f79;
+            color: $gray-800;
             padding-left: 0 !important;
             padding-right: 0 !important;
           }
@@ -150,7 +150,7 @@
             }
             .manufacture {
               font-size: 11px;
-              color: #9ca5b6;
+              color: $gray-600;
             }
           }
       }
@@ -184,7 +184,7 @@
     z-index: 1;
   }
   .select-product__input {
-    background: #f4f6f8;
+    background: $gray-200;
     position: relative;
     padding-left: 32px;
   }

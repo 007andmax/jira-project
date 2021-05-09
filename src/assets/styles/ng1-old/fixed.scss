@@ -51,8 +51,8 @@
 .btn.btn-new.default,
 .btn-new.default {
   background: $background;
-  color: #4f5f79;
-  border: 1px solid #c4cbd5;
+  color: $gray-800;
+  border: 1px solid $gray-500;
 }
 
 .btn.btn-new.disabled:hover,
@@ -63,7 +63,7 @@
 .btn-new.disabled:active,
 .btn.btn-new.default:active,
 .btn-new.default:active {
-  background: #c4cbd5;
+  background: $gray-500;
 }
 
 .btn.btn-new.default:hover,
@@ -71,7 +71,7 @@
 .btn.btn-new.default:hover,
 .btn-new.default:hover {
   color: $white;
-  background: #c4cbd5;
+  background: $gray-500;
 }
 
 .dropdown-assign-ticket.fixed-assign {
@@ -117,13 +117,13 @@
 .dropdown-assign-ticket.fixed-assign .users-list .user-item a {
   padding: 6px 20px;
   transition: all .3s;
-  color: #4f5f79;
+  color: $gray-800;
   font-family: 'Graphik-Medium', sans-serif;
   font-weight: 500;
 }
 
 .dropdown-assign-ticket.fixed-assign .users-list .user-item p {
-  color: #4f5f79;
+  color: $gray-800;
   font-size: 13px;
   font-weight: 700;
   margin: 0;
@@ -132,7 +132,7 @@
 .dropdown-assign-ticket.fixed-assign .users-list .user-item p:last-child {
   margin: -5px 0 0;
   font-size: 12px;
-  color: #9ca5b6;
+  color: $gray-600;
   font-weight: 500;
 }
 

@@ -2,7 +2,7 @@
 
 @media (max-width: 414px) {
   .mob-filters-header.desktop-hidden {
-    background: #27303f;
+    background: $primary-2;
     height: 56px;
     display: flex !important;
     justify-content: flex-start;
@@ -111,7 +111,7 @@
           &__header {
             font-size: 12px;
             text-transform: uppercase;
-            color: #9ca5b6;
+            color: $gray-600;
           }
           &__content {
             p {

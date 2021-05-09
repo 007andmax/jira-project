@@ -31,7 +31,7 @@
   &__email {
   font-size: 13px;
   margin-bottom: 12px;
-  color: #4f5f79;
+  color: $gray-800;
   }
   &__rating {
      display: flex;
@@ -53,14 +53,14 @@
   }
   &__row-info-label {
    font-size: 11px;
-   color: #9ca5b6;
+   color: $gray-600;
    line-height: 12px;
    margin-bottom: 4px;
   }
   &__row-info-value {
    font-size: 13px;
    line-height: 16px;
-   color: #4f5f79;
+   color: $gray-800;
   }
   &__get-direction {
     font-size: 11px;
@@ -85,7 +85,7 @@
   &__primary-contacts-title {
     font-size: 10px;
     font-weight: 600;
-    color: #4f5f79;
+    color: $gray-800;
     margin-bottom: 14px;
     line-height: 12px;
     text-transform: uppercase;
@@ -94,7 +94,7 @@
   &__primary-contact-name {
     font-size: 12px;
     font-weight: 600;
-    color: #4f5f79;
+    color: $gray-800;
     line-height: 16px;
   }
 
@@ -102,7 +102,7 @@
   &__primary-contact-email {
      font-size: 12px;
      font-stretch: normal;
-     color: #4f5f79;
+     color: $gray-800;
      line-height: 1.33;
   }
 
@@ -135,12 +135,12 @@
    font-size: 12px;
    font-weight: 600;
    line-height: 1.33;
-   color: #4f5f79;
+   color: $gray-800;
    margin-bottom: 4px;
   }
   &__history-block-date {
    font-size: 11px;
    line-height: 1.45;
-   color: #4f5f79;
+   color: $gray-800;
   }
 }

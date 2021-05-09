@@ -5,7 +5,7 @@ body {
         padding: 0;
         margin: 0;
         @include body-font;
-        background-color: $bodyColor;
+        background-color: $gray-200;
 /*** Default stylesheet reset ***/
 *,*::before,*::after{box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;-o-box-sizing:border-box;}
 
@@ -45,7 +45,7 @@ h1,.h1{
     font-family: $graphicSemibold;
     line-height: 1.4;
     letter-spacing: -0.3px;
-    color: $heavyMetal;
+    color: $primary-2;
     margin:0 0 20px 0;
     text-transform: capitalize;
 }
@@ -54,7 +54,7 @@ h2,.h2{
     font-family: $graphicSemibold;
     line-height: 1.4;
     letter-spacing: normal;
-    color: $heavyMetal;
+    color: $primary-2;
     margin:0 0 20px 0;
     text-transform: capitalize;
 }
@@ -63,7 +63,7 @@ h3,.h3{
     font-family: $graphicSemibold;
     line-height: 1.2;
     letter-spacing: normal;
-    color: $heavyMetal;
+    color: $primary-2;
     margin:0 0 20px 0;
     text-transform: capitalize;
     font-weight: 600;
@@ -73,7 +73,7 @@ h4,.h4{
     font-family: $graphicSemibold;
     line-height: 1.2;
     letter-spacing: normal;
-    color: $heavyMetal;
+    color: $primary-2;
     margin:0 0 20px 0;
     text-transform: capitalize;
 }
@@ -82,7 +82,7 @@ h5,.h5{
     font-family: $graphicMedBold;
     line-height: 1.54;
     letter-spacing: normal;
-    color: $heavyMetal;
+    color: $primary-2;
     margin:0 0 20px 0;
     text-transform: capitalize;
     font-weight: 500;
@@ -93,7 +93,7 @@ h6,.h6{
   font-family: $graphicSemibold;
   line-height: 0.8;
   letter-spacing: normal;
-  color: $heavyMetal;
+  color: $primary-2;
   margin:0 0 20px 0;
   text-transform: capitalize;
 
@@ -105,12 +105,12 @@ p{margin:0 0 20px 0;}
 
 ul{margin:0px 0px 30px;padding:0;}
 ul li{list-style:none;margin:0px 0px 20px;padding:0px 0px 0px 15px;position:relative;}
-ul li:not(.cps-block__nav-item):before{content:"";width:4px;height:4px;position:absolute;left:0px;top:7px;background:$secondary-color;@include border-radius(50%);}
+ul li:not(.cps-block__nav-item):before{content:"";width:4px;height:4px;position:absolute;left:0px;top:7px;background:$primary-2;@include border-radius(50%);}
 ul.list-unstyled li{margin:0px;padding:0px;}
 ul.list-unstyled li:before{content:normal;}
 ol{margin:0px 0px 30px;padding:0px;list-style:none;}
-ol li{counter-increment:av-counter;list-style:none;color:$secondary-color;margin:0px 0px 20px;padding:0px 0px 0px 20px;position:relative;}
-ol li:before{content:counter(av-counter) ".";counter-increment:none;color:$secondary-color;position:absolute;left:0px;top:0px;}
+ol li{counter-increment:av-counter;list-style:none;color:$primary-2;margin:0px 0px 20px;padding:0px 0px 0px 20px;position:relative;}
+ol li:before{content:counter(av-counter) ".";counter-increment:none;color:$primary-2;position:absolute;left:0px;top:0px;}
 
 /*** All buttons ***/
 
@@ -139,16 +139,16 @@ ol li:before{content:counter(av-counter) ".";counter-increment:none;color:$secon
         background-color: $primary-1 !important;
         color: $white !important;
         &:hover{
-            background-color: #1286cc !important;
+            background-color: $primary-1;
             color: $white !important;
         }
     }
     &.btn-secondary{
         background-color: $background !important;
-        color: $metal !important;
+        color: $gray-800;
         &:hover{
             background-color: $background !important;
-            color: $metal !important;
+            color: $gray-800;
         }
     }
 }
@@ -184,7 +184,7 @@ form{
         font-style: normal;
         line-height: 1.54;
         letter-spacing: normal;
-        color: $metal;
+        color: $gray-800;
         text-transform: capitalize;
         margin-bottom: 10px;
         display: -webkit-flex;
@@ -199,7 +199,7 @@ form{
         float: left;
         width: 100%;
         @include border-radius(4px);
-        border: solid 1px $border-color;
+        border: solid 1px $gray-500;
         background-color: $white;
         padding: 9px 15px;
         font-size: 13px;
@@ -207,13 +207,13 @@ form{
         font-family: $font-body;
         line-height: 1.54;
         letter-spacing: normal;
-        color: $metal;
+        color: $gray-800;
         outline: none !important;
         &:hover{
-            border-color:#9ca5b6;
+            border-color:$gray-600;
         }
         &:focus{
-            border-color:#9ca5b6;
+            border-color:$gray-600;
         }
 
     }
@@ -236,37 +236,37 @@ form{
 /*** Placeholder ***/
 
 .form-input::-webkit-input-placeholder {
-    color: #9ca5b6;
+    color: $gray-600;
     @include opacity(1);
   }
   .form-input::-moz-placeholder {
-    color: #9ca5b6;
+    color: $gray-600;
     @include opacity(1);
   }
   .form-input:-ms-input-placeholder {
-    color: #9ca5b6;
+    color: $gray-600;
     @include opacity(1)
   }
   .form-input:-moz-placeholder {
-    color: #9ca5b6;
+    color: $gray-600;
         @include opacity(1);
   }
 
 
   .cmn-dropdown .cmn-dropdon-list form input[type="text"]::-webkit-input-placeholder {
-    color: #9ca5b6;
+    color: $gray-600;
     @include opacity(1);
   }
   .cmn-dropdown .cmn-dropdon-list form input[type="text"]::-moz-placeholder {
-    color: #9ca5b6;
+    color: $gray-600;
     @include opacity(1);
   }
   .cmn-dropdown .cmn-dropdon-list form input[type="text"]:-ms-input-placeholder {
-    color: #9ca5b6;
+    color: $gray-600;
     @include opacity(1)
   }
   .cmn-dropdown .cmn-dropdon-list form input[type="text"]:-moz-placeholder {
-    color: #9ca5b6;
+    color: $gray-600;
         @include opacity(1);
   }
 
@@ -274,7 +274,7 @@ form{
 
 header{
     position: fixed;
-    background-color: $secondary-color;
+    background-color: $primary-2;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
@@ -355,7 +355,7 @@ header{
                         font-family:$font-body;
                         line-height: 1.2;
                         letter-spacing: normal;
-                        color: #9ca5b6;
+                        color: $gray-600;
                         width: 100%;
                     }
                     h5 {
@@ -419,7 +419,7 @@ header{
                 background-color: $success;
             }
             &.btn-shutDown {
-                background-color: #ff6e61;
+                background-color: $error;
             }
         }
 
@@ -537,7 +537,7 @@ header{
                 }
             &:hover,&.active{
                 a{
-                    background-color: $secondLight;
+                    background-color: $gray-800;
                     border-color: $primary-1;
                     font-family: $graphicSemibold;
                 }
@@ -646,7 +646,7 @@ header{
             font-style: normal;
             line-height: 1.2;
             letter-spacing: normal;
-            color: #9ca5b6;
+            color: $gray-600;
         }
     }
 
@@ -790,7 +790,7 @@ header{
         line-height: 1.2;
         letter-spacing: normal;
         text-align: right;
-        color: #9ca5b6;
+        color: $gray-600;
     }
     .task-status-row {
         display: -ms-flexbox;
@@ -841,7 +841,7 @@ header{
         font-style: normal;
         line-height: 1.33;
         letter-spacing: normal;
-        color: $metal;
+        color: $gray-800;
         .id {
             font-size: 10px;
             font-weight: 500;
@@ -849,10 +849,10 @@ header{
             font-style: normal;
             line-height: 1.2;
             letter-spacing: normal;
-            color: #9ca5b6;
+            color: $gray-600;
         }
         .name{
-            &::before {content: "";display: inline-block;width: 4px;height: 4px;background-color: #9ca5b6;border-radius: 50%;vertical-align: middle;margin: 0 8px;}
+            &::before {content: "";display: inline-block;width: 4px;height: 4px;background-color: $gray-600;border-radius: 50%;vertical-align: middle;margin: 0 8px;}
         }
     }
 
@@ -863,7 +863,7 @@ header{
          font-style: normal;
          line-height: 1.2;
          letter-spacing: normal;
-         color: $metal;
+         color: $gray-800;
          &:hover{
              color:$primary-1;
          }
@@ -949,7 +949,7 @@ header{
     justify-content: center;
     align-items: center;
     &:hover{
-        background-color: $hover-color;
+        background-color: $primary-1;
     }
 }
 
@@ -989,7 +989,7 @@ ngb-tabset {
                 font-size: 12px;
                 line-height: normal;
                 letter-spacing: normal;
-                color: $metal;
+                color: $gray-800;
                 display: block;
                 text-transform: capitalize;
                 @include transition(0.4s);
@@ -1027,7 +1027,7 @@ ngb-tabset {
     form {
         .form-row {
             &.primary-phone {
-                border: solid 1px #c4cbd5;
+                border: solid 1px $gray-500;
                 display: flex;
                 flex-direction: row;
                 align-items: center;
@@ -1081,7 +1081,7 @@ ngb-tabset {
                 font-style: normal;
                 line-height: 1.33;
                 letter-spacing: normal;
-                color: #9ca5b6;
+                color: $gray-600;
             }
         }
         .static-link{
@@ -1124,7 +1124,7 @@ ngb-tabset {
         text-align: center;
         width: 67px;
         border-radius: 3px;
-        background-color: $metal;
+        background-color: $gray-800;
         font-size: 12px;
         font-weight: 500;
         font-style: normal;
@@ -1149,7 +1149,7 @@ ngb-tabset {
         position: absolute;
         pointer-events: none;
         border-color: rgba(79, 95, 121, 0);
-        border-top-color: $metal;
+        border-top-color: $gray-800;
         border-width: 6px;
         margin-left: -6px;
         bottom: 15px;
@@ -1266,7 +1266,7 @@ table {
             font-style: normal;
             line-height: normal;
             letter-spacing: normal;
-            color: $heavyMetal;
+            color: $primary-2;
             font-family: $graphicMedBold;
             font-weight: 500;
     }
@@ -1421,7 +1421,7 @@ table {
             font-style: normal;
             line-height: normal;
             letter-spacing: normal;
-            color: $metal;
+            color: $gray-800;
         }
     }
     .delete{display: inline-block;}
@@ -1479,7 +1479,7 @@ table {
                 font-size: 12px;
                 line-height: 1.33;
                 letter-spacing: normal;
-                color: $metal;
+                color: $gray-800;
                 margin-right: 16px;
                 margin-bottom: 0;
             }
@@ -1507,7 +1507,7 @@ table {
 
             }
             .dp-info {
-                span{font-size: 11px;color: $metal}
+                span{font-size: 11px;color: $gray-800;}
             }
         }
         form {
@@ -1560,14 +1560,14 @@ table {
         float: left;
         width: 100%;
         @include border-radius(4px);
-        border: solid 1px $border-color;
+        border: solid 1px $gray-500;
         background-color: $white;
         padding: 9px 15px;
         font-size: 13px;
         font-weight: normal;
         line-height: 1.54;
         letter-spacing: normal;
-        color: $heavyMetal;
+        color: $primary-2;
         outline: none !important;
         // background: url('/assets/img/device/selct-arrow.svg') no-repeat right 15px center;
         cursor: pointer;
@@ -1586,7 +1586,7 @@ table {
         font-style: normal;
         line-height: normal;
         text-align: center;
-        color: $metal;
+        color: $gray-800;
     }
     .selected-opt {
         font-size: 12px;
@@ -1596,7 +1596,7 @@ table {
         line-height: 1.33;
         letter-spacing: normal;
         text-align: right;
-        color: $metal;
+        color: $gray-800;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -1634,7 +1634,7 @@ table {
                 font-stretch: normal;
                 line-height: 1.54;
                 letter-spacing: normal;
-                color: #4f5f79;
+                color: $gray-800;
                 background: url('/assets/img/device/search.svg') no-repeat left 10px center rgba(237, 242, 246,0.5);
                 background-size: 20px auto;
                 &:focus{
@@ -1681,7 +1681,7 @@ table {
             margin-left: 10px;
             h5 {
                 margin: 0;
-                color: $metal;
+                color: $gray-800;
             }
             .email {
                 font-size: 12px;
@@ -1690,7 +1690,7 @@ table {
                 font-stretch: normal;
                 line-height: 1.33;
                 letter-spacing: normal;
-                color: $metal;
+                color: $gray-800;
             }
         }
    }
@@ -1708,7 +1708,7 @@ table {
         font-style: normal;
         line-height: 1.33;
         letter-spacing: normal;
-        color: $heavyMetal;
+        color: $primary-2;
         padding: 8px 30px 8px 8px;
         position: relative;
         display: -webkit-flex;
@@ -1734,7 +1734,7 @@ table {
         }
         &.high{
             &::before{
-                background-color: #ff6e61;
+                background-color: $error;
             }
         }
         &::after{
@@ -1757,7 +1757,7 @@ table {
             a.dropdown-item {
                 padding: 3px 14px;
                 font-size: 12px;
-                color: $heavyMetal;
+                color: $primary-2;
                 text-transform: capitalize;
                 display: block;
                 &:hover{
@@ -1801,7 +1801,7 @@ table {
                 line-height: 1.33;
                 letter-spacing: normal;
                 text-align: center;
-                color: $metal;
+                color: $gray-800;
                 img {
                     margin-right: 9px;
                 }
@@ -1840,7 +1840,7 @@ table {
             height: 32px;
             align-items: center;
             overflow: hidden;
-            color: $metal;
+            color: $gray-800;
             padding: 8px 36px;
 
             .f-name {
@@ -1850,7 +1850,7 @@ table {
                 font-style: normal;
                 line-height: 1.33;
                 letter-spacing: normal;
-                color: $metal;
+                color: $gray-800;
             }
             i.ionicon.ion-close-round {
                 position: absolute;
@@ -1979,7 +1979,7 @@ ul.user-list {
     font-style: normal;
     line-height: normal;
     letter-spacing: normal;
-    color: #4f5f79;
+    color: $gray-800;
     border:1px solid $gray-400;
     .bs-datepicker-container{
         padding: 0;
@@ -1997,7 +1997,7 @@ ul.user-list {
             font-style: normal;
             line-height: normal;
             letter-spacing: normal;
-            color: #4f5f79;
+            color: $gray-800;
         }
         .bs-datepicker-body {
             padding: 0;
@@ -2009,7 +2009,7 @@ ul.user-list {
             width: 100%;
         }
         .bs-datepicker-head button{
-            color: #4f5f79;
+            color: $gray-800;
             width: auto;
             height: auto;
             line-height: 17px;
@@ -2047,7 +2047,7 @@ bs-datepicker-navigation-view {
     border-radius: 0;
     max-width: inherit;
     padding: 0 1px;
-    color: #4f5f79;
+    color: $gray-800;
     font-family: $graphicSemibold;
     font-size: 12px;
     text-transform: uppercase;
@@ -2063,7 +2063,7 @@ bs-datepicker-navigation-view {
     line-height: 1;
     letter-spacing: normal;
     text-align: center;
-    color: #4f5f79;
+    color: $gray-800;
     border-bottom: 1px solid $background;
     padding: 25px 5px 10px 5px;
     text-align: center;
@@ -2079,7 +2079,7 @@ bs-datepicker-navigation-view {
   font-style: normal;
   line-height: normal;
   letter-spacing: normal;
-  color: #4f5f79;
+  color: $gray-800;
   padding:5px 5px 4px 5px;;
 }
 .bs-datepicker-body table.days span {
@@ -2088,7 +2088,7 @@ bs-datepicker-navigation-view {
     line-height: 25px;
     text-align: center;
     font-size: 12px;
-    color: #4f5f79;
+    color: $gray-800;
 }
 .theme-green .bs-datepicker-body table td span.selected, .theme-green .bs-datepicker-body table td.selected span, .theme-green .bs-datepicker-body table td span[class*="select-"]:after, .theme-green .bs-datepicker-body table td[class*="select-"] span:after,.bs-datepicker-body table td span.selected, .bs-datepicker-body table td.selected span,.bs-datepicker-body table td.is-highlighted span,.bs-datepicker-body table.days td:hover span{background-color: $primary-1;color: $white;}
 .bs-datepicker-body table td.is-highlighted:not(.disabled):not(.selected) span, .bs-datepicker-body table td span.is-highlighted:not(.disabled):not(.selected){background-color: $primary-1;color: $white;cursor: not-allowed;}
@@ -2142,7 +2142,7 @@ ngb-datepicker{
     font-style: normal;
     line-height: normal;
     letter-spacing: normal;
-    color: #4f5f79;
+    color: $gray-800;
     border: 1px solid $gray-400 !important;
     z-index: 9;
 
@@ -2165,7 +2165,7 @@ ngb-datepicker{
             .ngb-dp-navigation-select{
                 select{
                     @include app-none();
-                    border: solid 1px #c4cbd5;
+                    border: solid 1px $gray-500;
                     margin: 0 -1px;
                     outline: none !important;
                     background: url('/assets/img/device/selct-arrow.svg') no-repeat right 10px center;
@@ -2224,7 +2224,7 @@ ngb-datepicker{
             line-height: 1;
             letter-spacing: normal;
             text-align: center;
-            color: #4f5f79;
+            color: $gray-800;
             border-bottom: 1px solid $background;
             padding: 25px 5px 10px 5px;
             text-align: center;
@@ -2260,7 +2260,7 @@ ngb-datepicker{
                 font-style: normal;
                 line-height: normal;
                 letter-spacing: normal;
-                color: #4f5f79;
+                color: $gray-800;
                 text-align: center;
                 padding: 5px 5px 5px 5px;
                 border: none !important;
@@ -2283,7 +2283,7 @@ ngb-datepicker{
                     font-style: normal;
                     line-height: normal;
                     letter-spacing: normal;
-                    color: #4f5f79;
+                    color: $gray-800;
                     text-align: center;
                     min-width: 24px;
                     min-height: 24px;
@@ -2415,7 +2415,7 @@ ul.dropdown-menu {
             font-style: normal;
             line-height: 1.54;
             letter-spacing: normal;
-            color: #4f5f79;
+            color: $gray-800;
             display: -ms-flexbox;
             display: -webkit-flex;
             display: flex;
@@ -2426,7 +2426,7 @@ ul.dropdown-menu {
 
             }
             &:active,&:hover,&:focus{
-                background-color: #f3f7f9;
+                background-color: $gray-200;
             }
             img {
                 width: auto;
@@ -2523,7 +2523,7 @@ ul.dropdown-menu {
             font-family: $graphicSemibold;
             line-height: 1.33;
             letter-spacing: normal;
-            color: #364656;
+            color: $primary-2;
             margin-bottom: 21px;
             text-align: left;
         }
@@ -2686,7 +2686,7 @@ ngx-loading > div {
                     font-style: normal;
                     line-height: 1.54;
                     letter-spacing: normal;
-                    color: #4f5f79;
+                    color: $gray-800;
                 }
 
             }
@@ -2721,11 +2721,11 @@ ngx-loading > div {
         text-overflow: ellipsis;
         -webkit-transition: all .3s;
         transition: all .3s;
-        color: #4c5c6f;
+        color: $gray-800;
 
         &:hover {
             background: $background;
-            color: #4c5c6f;
+            color: $gray-800;
         }
     }
 }
@@ -2797,7 +2797,7 @@ table.dataTable tbody tr td:last-child {
     border-bottom-right-radius: 5px;
 }
 table.dataTable tbody tr td {
-    border-bottom: 2px solid #f3f7f9;
+    border-bottom: 2px solid $gray-200;
 }
 
 table.dataTable thead tr th.sorting_desc, table.dataTable thead tr th.sorting_asc, table.dataTable thead tr th.sorting {

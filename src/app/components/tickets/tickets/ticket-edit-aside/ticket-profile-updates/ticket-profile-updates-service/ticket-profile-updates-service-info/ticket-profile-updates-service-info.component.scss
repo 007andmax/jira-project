@@ -2,7 +2,7 @@
 
 .ticket-updates {
     padding: 24px 32px;
-    background-color: $gray-200;
+    background-color: $gray-100;
     font-size: 13px;
 
     &__count {
@@ -29,7 +29,7 @@
         font-weight: 600;
     }
     &__add-note {
-        color: #9ca5b6;
+        color: $gray-600;
         cursor: pointer;
     }
     &__edit, &__delete{
@@ -45,7 +45,7 @@
       font-size: 12px;
     }
     &__people-added {
-      color: #9ca5b6;
+      color: $gray-600;
       margin-right: 8px;
     }
 

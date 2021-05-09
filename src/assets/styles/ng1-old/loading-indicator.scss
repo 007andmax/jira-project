@@ -16,8 +16,8 @@
   left: auto;
   width: 20px;
   height: 20px;
-  border: 0.1rem solid #4f5f79;
-  border-top-color: #9ca5b6;
+  border: 0.1rem solid $gray-800;
+  border-top-color: $gray-600;
 }
 .recurring-tickets-content__modal--content .loading.xs {
   top: -3px;

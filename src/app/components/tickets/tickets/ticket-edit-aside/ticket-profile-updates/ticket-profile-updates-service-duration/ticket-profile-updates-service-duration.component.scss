@@ -40,7 +40,7 @@
     width: 34px;
     height: 32px;
     border-radius: 6px;
-    color: #364656;
+    color: $primary-2;
     &:hover {
       color: $primary-1;
     }
@@ -105,14 +105,14 @@
   background: white;
   height: 40px;
   border-radius: 3px;
-  border: solid 1px #c4cbd5;
+  border: solid 1px $gray-500;
   padding: 0px 12px;
   display: flex;
   align-items: center;
 
   input {
     font-size: 13px !important;
-    color: #404b5f !important;
+    color: $gray-800 !important;
     height: 40px !important;
   }
 }

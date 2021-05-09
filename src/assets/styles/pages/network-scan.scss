@@ -31,21 +31,21 @@
     font-size: 18px;
     margin-bottom: 4px;
     line-height: 1.56;
-    color: #364656;
+    color: $primary-2;
   }
   &__empty-content-subtitle {
     font-size: 14px;
     margin-bottom: 48px;
     line-height: 1.43;
-    color: #4f5f79;
+    color: $gray-800;
     text-align: center;
   }
   &__empty-content-or-divider {
     height: 32px;
     width: 32px;
     margin-bottom: 12px;
-    background-color: #f4f6f8;
-    color: #4f5f79;
+    background-color: $gray-200;
+    color: $gray-800;
     text-transform: uppercase;
     font-size: 10px;
     display: flex;
@@ -112,13 +112,13 @@
     }
     &__title {
       font-family: Graphik-Semibold, sans-serif;
-      color: #364656;
+      color: $primary-2;
       font-size: 16px;
       line-height: 1.63;
     }
     &__text, &__text-cred {
       font-size: 13px;
-      color: #4f5f79;
+      color: $gray-800;
       width: 155px;
       text-align: center;
       line-height: 1.54;
@@ -145,7 +145,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #4f5f79;
+      color: $gray-800;
       font-size: 13px;
       font-family: Graphik-Semibold, sans-serif;
       border-radius: 50%;
@@ -162,9 +162,9 @@
 
     th {
       height: 40px;
-      background: $gray-200;
+      background: $gray-100;
       font-size: 11px;
-      color: #364656;
+      color: $primary-2;
       text-transform: uppercase;
       text-align: left;
       padding: 0 8px;
@@ -183,7 +183,7 @@
       text-align: left;
       background: white;
       font-size: 13px;
-      color: #4f5f79;
+      color: $gray-800;
       border-top: 1px solid $gray-300;
     }
 
@@ -283,7 +283,7 @@
 
     .aside-header {
       height: 56px;
-      background-color: $gray-200;
+      background-color: $gray-100;
       border-bottom: 1px solid $gray-400;
       .icon__close {
         background-size: cover;
@@ -317,7 +317,7 @@
       }
       &__username {
         font-size: 13px;
-        color: #4f5f79;
+        color: $gray-800;
         line-height: 1.54;
       }
       &__pass {

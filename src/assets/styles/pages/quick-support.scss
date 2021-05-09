@@ -39,12 +39,12 @@
       display: flex;
       align-items: center;
       font-size: 12px;
-      color: #364656;
+      color: $primary-2;
     }
     &__title {
       font-family: Graphik-Medium, sans-serif;
       font-size: 13px;
-      color: #364656;
+      color: $primary-2;
       display: flex;
       align-items: center;
     }
@@ -52,7 +52,7 @@
       width: 32px;
       height: 32px;
       border-radius: 50%;
-      background-color: #f4f6f8;
+      background-color: $gray-200;
       background-position: center;
       background-size: 18px;
       background-repeat: no-repeat;
@@ -76,14 +76,14 @@
   }
   &__number {
     width: 88px;
-    color: #4f5f79;
+    color: $gray-800;
     font-size: 13px;
     font-family: Graphik-Medium, sans-serif;
     margin-right: 8px;
   }
   &__button {
     width: 32px;
-    background-color: $gray-200;
+    background-color: $gray-100;
     height: 100%;
     border-left: 1px solid $gray-400;
     background-position: center;
@@ -120,7 +120,7 @@
   &__step2 {
     width: 40px;
     height: 40px;
-    background-color: #f4f6f8;
+    background-color: $gray-200;
     border-radius: 50%;
     background-position: center;
     background-repeat: no-repeat;
@@ -138,7 +138,7 @@
   &__line-title {
     text-align: center;
     font-size: 12px;
-    color: #4f5f79;
+    color: $gray-800;
     position: absolute;
     width: 100%;
     font-family: Graphik-Medium, sans-serif;
@@ -149,7 +149,7 @@
     flex-direction: column;
     line-height: 14px;
     &.line-title--gray, .line-title--gray {
-      color: #9ca5b6;
+      color: $gray-600;
       font-family: Graphik-Regular, sans-serif;
     }
   }

@@ -425,7 +425,7 @@
 
 .reports-all {
   padding: 45px 30px;
-  color: #404b5f;
+  color: $gray-800;
   height: calc(100vh - 78px);
   background-color: #f4f4f4;
   display: flex;
@@ -709,12 +709,12 @@
 }
 
 .customer-ticket__header--item:nth-child(3) p:last-child {
-  color: #9ca5b6;
+  color: $gray-600;
   position: relative;
 }
 
 .customer-ticket__header--item:nth-child(3) p:last-child span {
-  color: #404b5f;
+  color: $gray-800;
 }
 
 .customer-ticket__header--item:nth-child(3) .ticket-report-time {
@@ -741,7 +741,7 @@
 }
 
 .service-color-2:before {
-  background-color: #ff6e61;
+  background-color: $error;
 }
 
 .service-color-3:before {
@@ -809,7 +809,7 @@
 .report-header,
 .report-footer {
   height: 88px;
-  background-color: #364656;
+  background-color: $primary-2;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -839,7 +839,7 @@
 
 .report-header p,
 .report-footer p {
-  color: #9ca5b6;
+  color: $gray-600;
   font-size: 12px;
   font-weight: 300;
 }

@@ -14,7 +14,7 @@
     font-stretch: normal;
     line-height: 1.54;
     letter-spacing: normal;
-    color: #4f5f79;
+    color: $gray-800;
   }
   .f-row {
     margin-bottom: 0;
@@ -42,7 +42,7 @@
             z-index: 1;
             width: 100%;
           }
-        }    
+        }
   }
   margin-top: 3px;
   p {
@@ -53,7 +53,7 @@
     font-stretch: normal;
     line-height: 1.54;
     letter-spacing: normal;
-    color: #4f5f79;
+    color: $gray-800;
   }
   .f-col {
     &.col-25 {

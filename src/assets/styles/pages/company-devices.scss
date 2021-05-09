@@ -9,7 +9,7 @@
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
     background-color: $white;
     font-size: 12px;
-    color: #4f5f79;
+    color: $gray-800;
     line-height: 1.33;
   }
   table.company-devices-table {
@@ -62,7 +62,7 @@
           width: max-content;
           min-width: 345px;
           .company-devices-table-device-name {
-            color: #364656;
+            color: $primary-2;
             text-overflow: ellipsis;
             white-space: nowrap;
             overflow: hidden;
@@ -76,7 +76,7 @@
               width: 100%;
               height: 24px;
               padding-left: 0;
-              border: 1px solid #c4cbd5;
+              border: 1px solid $gray-500;
               border-radius: 4px;
               &:focus {
                 outline: none;
@@ -84,7 +84,7 @@
             }
           }
           .company-device-desc {
-            color: #9ca5b6;
+            color: $gray-600;
             line-height: 1.33;
             font-size: 12px;
             text-overflow: ellipsis;
@@ -108,13 +108,13 @@
           padding: 12px 8px 11px 8px;
           vertical-align: top;
           .logged-name {
-            color: #364656;
+            color: $primary-2;
             text-overflow: ellipsis;
             white-space: nowrap;
             overflow: hidden;
           }
           .logged-time {
-            color: #9ca5b6;
+            color: $gray-600;
             line-height: 1.33;
             font-size: 12px;
             text-overflow: ellipsis;
@@ -127,7 +127,7 @@
           max-width: 105px;
           min-width: 105px;
           padding: 12px 8px 12px 8px;
-          color: #4f5f79;
+          color: $gray-800;
           vertical-align: top;
           .uptime-tag {
             border: solid 1px $success;
@@ -151,7 +151,7 @@
           max-width: 195px;
           min-width: 195px;
           padding: 12px 0px 12px 8px;
-          color: #4f5f79;
+          color: $gray-800;
           vertical-align: top;
           word-break: break-word;
           position: relative;
@@ -161,7 +161,7 @@
           max-width: 218px;
           min-width: 218px;
           padding: 12px 8px 12px 0px;
-          color: #4f5f79;
+          color: $gray-800;
           vertical-align: top;
           text-overflow: ellipsis;
           white-space: nowrap;
@@ -190,7 +190,7 @@
 
       tr th {
         font-size: 11px;
-        color: #364656;
+        color: $primary-2;
         text-transform: uppercase;
         padding-top: 4px !important;
         padding-bottom: 4px !important;
@@ -206,7 +206,7 @@
       }
       tr:hover {
         .sidebar-system__info-text-input {
-         background-color: $gray-200;
+         background-color: $gray-100;
         }
       }
     }
@@ -273,9 +273,9 @@
     &__header {
       height: 56px;
       padding: 16px;
-      background-color: $gray-200;
+      background-color: $gray-100;
       border-bottom: 1px solid $gray-400;
-      color: #364656;
+      color: $primary-2;
     }
     &__header-title {
       text-overflow: ellipsis;
@@ -372,7 +372,7 @@
     &__title {
       font-size: 11px;
       line-height: 1.45;
-      color: #364656;
+      color: $primary-2;
       margin-bottom: 24px;
       text-transform: uppercase;
     }
@@ -405,7 +405,7 @@
     &__info-title {
       font-size: 12px;
       line-height: 1.33;
-      color: #364656;
+      color: $primary-2;
       width: 132px;
       min-width: 132px;
       max-width: 132px;
@@ -414,7 +414,7 @@
     &__info-text {
       font-size: 12px;
       line-height: 1.33;
-      color: #4f5f79;
+      color: $gray-800;
     }
     &__info-text-input {
       border: 1px solid #dde1e6;
@@ -449,19 +449,19 @@
     &__row-title {
       font-size: 12px;
       line-height: 1.33;
-      color: #364656;
+      color: $primary-2;
       font-family: Graphik-Medium, sans-serif;
       margin-bottom: 2px;
     }
     &__date {
       font-size: 12px;
       font-family: Graphik-Medium, sans-serif;
-      color: #9ca5b6;
+      color: $gray-600;
     }
     &__size {
       font-size: 12px;
       line-height: 1.33;
-      color: #4f5f79;
+      color: $gray-800;
       min-width: 70px;
       width: 70px;
       max-width: 70px;
@@ -482,7 +482,7 @@
     &__tab-title {
       font-size: 11px;
       line-height: 1.45;
-      color: #364656;
+      color: $primary-2;
       margin-bottom: 24px;
       text-transform: uppercase;
     }
@@ -497,7 +497,7 @@
       height: 120px;
       padding: 16px;
       border-radius: 8px;
-      background-color: $gray-200;
+      background-color: $gray-100;
     }
     &__icon {
       width: 40px;
@@ -506,7 +506,7 @@
     }
     &__title {
       font-size: 13px;
-      color: #364656;
+      color: $primary-2;
       font-family: Graphik-Semibold, sans-serif;
       margin-bottom: 4px;
       line-height: 1.54;
@@ -514,7 +514,7 @@
     &__subtitle {
       font-size: 12px;
       line-height: 1.33;
-      color: #4f5f79;
+      color: $gray-800;
       &.--link {
         color: $primary-1;
         text-decoration: underline;

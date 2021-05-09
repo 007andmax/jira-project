@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .cps-block, .csp-block-support {
     .support-timeline-status__line {
       width: 140px !important;
@@ -5,7 +7,7 @@
     &__status-msg {
       width: 100%;
       font-size: 12px;
-      color: #364656;
+      color: $primary-2;
       line-height: 1.33;
       border: 1px solid #fff1d6;
       height: 24px;

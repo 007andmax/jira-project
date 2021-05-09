@@ -30,9 +30,9 @@
         text-align: left;
       }
       &:hover {
-        background: $gray-200;
+        background: $gray-100;
         button {
-          color: #4c5c6f;
+          color: $gray-800;
         }
       }
     }

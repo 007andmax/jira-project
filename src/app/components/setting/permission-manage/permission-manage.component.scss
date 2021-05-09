@@ -19,7 +19,7 @@
   .pr-data {
     h5 {
       margin-bottom: 0;
-      color: #364656;
+      color: $primary-2;
     }
 
     .no-border {
@@ -122,7 +122,7 @@
       text-align: center;
       width: 70px;
       border-radius: 3px;
-      background-color: #4f5f79;
+      background-color: $gray-800;
       font-size: 12px;
       font-weight: 500;
       font-style: normal;
@@ -144,7 +144,7 @@
       position: absolute;
       pointer-events: none;
       border-color: rgba(79, 95, 121, 0);
-      border-top-color: #4f5f79;
+      border-top-color: $gray-800;
       border-width: 6px;
       margin-left: -6px;
       bottom: 11px;
@@ -196,7 +196,7 @@
     font-style: normal;
     line-height: 1.45;
     letter-spacing: normal;
-    color: #9ca5b6;
+    color: $gray-600;
     margin-bottom: 15px;
     font-size: 11px;
     font-family: $graphicSemibold;
@@ -235,7 +235,7 @@
       line-height: normal;
       letter-spacing: normal;
       text-align: center;
-      color: #4f5f79;
+      color: $gray-800;
       overflow: hidden;
       @include border-radius(50%);
       font-family: $graphicSemibold;
@@ -260,7 +260,7 @@
       font-family: $graphicMedBold;
       line-height: 13px;
       letter-spacing: normal;
-      color: #4f5f79;
+      color: $gray-800;
     }
     a {
       font-size: 12px;
@@ -269,13 +269,13 @@
       font-stretch: normal;
       line-height: 1.33;
       letter-spacing: normal;
-      color: #4f5f79;
+      color: $gray-800;
     }
     span {
       font-size: 11px;
       line-height: 1.45;
       letter-spacing: normal;
-      color: #9ca5b6;
+      color: $gray-600;
     }
   }
   .warn-msg {
@@ -317,7 +317,7 @@
       font-stretch: normal;
       line-height: 1.45;
       letter-spacing: normal;
-      color: #9ca5b6;
+      color: $gray-600;
       font-weight: 500;
       font-family: $graphicMedBold;
       text-transform: uppercase;

@@ -4,7 +4,7 @@
     border: 1px solid red !important;
 }
 .disabled {
-  background-color: #ebebe4;
+  background-color: $gray-400;
   cursor: default !important;
 }
 /deep/.qt-dropdown {
@@ -12,13 +12,13 @@
   &.with-placeholder {
     height: 40px;
     border-radius: 3px;
-    border: 1px solid #c4cbd5;
+    border: 1px solid $gray-500;
     .placeholder {
       position: absolute;
       left: 12px;
       top: 50%;
       transform: translateY(-50%);
-      color: #9ca5b6;
+      color: $gray-600;
       font-size: 13px;
     }
     .selected {
@@ -62,7 +62,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
       transition: all .3s;
-      color: #4c5c6f;
+      color: $gray-800;
       &:hover {
         color: $white;
         background: $primary-1;
@@ -73,11 +73,11 @@
      height: 40px;
      padding: 10px 14px;
      border-radius: 4px;
-     border: solid 1px #c4cbd5;
+     border: solid 1px $gray-500;
      background-color: $white;
      width: 100%;
      &:placeholder {
-        color: #9ca5b6;
+        color: $gray-600;
      }
   }
   .icn-remove-old,

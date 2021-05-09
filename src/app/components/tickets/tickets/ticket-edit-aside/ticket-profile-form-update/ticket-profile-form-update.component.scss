@@ -2,7 +2,7 @@
 
 .cps-block {
     padding: 20px 40px;
-    border-top: 1px solid $gray-200;
+    border-top: 1px solid $gray-100;
 
     &__header {
       margin-bottom: 20px;
@@ -25,7 +25,7 @@
       font-size: 13px;
       font-weight: 600;
       margin-right: 30px;
-      color: #4f5f79;
+      color: $gray-800;
       cursor: pointer;
       padding-left: 25px;
       background-repeat: no-repeat;
@@ -69,7 +69,7 @@
     &__support-message {
       width: 100%;
       font-size: 12px;
-      color: #364656;
+      color: $primary-2;
       line-height: 1.33;
       border: 1px solid #fff1d6;
       height: 24px;
@@ -133,7 +133,7 @@
         content: '';
         width: 16px;
         height: 16px;
-        border: 1px solid #c4cbd5;
+        border: 1px solid $gray-500;
         background: white;
         border-radius: 50%;
         bottom: -7px;

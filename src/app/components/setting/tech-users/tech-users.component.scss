@@ -55,14 +55,14 @@
                 display: none;
             }
             a {
-                color: #4f5f79;
+                color: $gray-800;
             }
             span{
                 font-size: 12px;
                 font-weight: normal;
                 line-height: 1.33;
                 letter-spacing: normal;
-                color: #9ca5b6;
+                color: $gray-600;
                 display: block;
             }
         }
@@ -131,7 +131,7 @@
         }
         &.offline{
             &::after{
-                background-color: #9ca5b6;
+                background-color: $gray-600;
             }
         }
     }
@@ -150,7 +150,7 @@
         line-height: normal;
         letter-spacing: normal;
         text-align: center;
-        color: #4f5f79;
+        color: $gray-800;
         overflow: hidden;
         @include border-radius(50%);
         font-family: $graphicSemibold;
@@ -172,7 +172,7 @@
         font-size: 11px;
         line-height: 1.45;
         letter-spacing: normal;
-        color: #9ca5b6;
+        color: $gray-600;
     }
 }
 
@@ -214,7 +214,7 @@
         }
         h5{
             margin-bottom: 15px;
-            color:#4f5f79;
+            color:$gray-800;
 
         }
     }
@@ -225,7 +225,7 @@
 .email-dropdown {
     border-radius: 3px;
     border: solid 1px $background;
-    background: url('/assets/img/filter-dropdown.svg') no-repeat right 7px center #f8f9fa;
+    background: url('/assets/img/filter-dropdown.svg') no-repeat right 7px center $gray-100;
     background-size: 14px auto;
     width: auto;
     max-width: 200px;
