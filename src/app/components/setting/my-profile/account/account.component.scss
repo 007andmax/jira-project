@@ -1,12 +1,13 @@
+@import './src/assets/styles/variable';
+
 
 .invalid-feedback {
     // width: 100%;
     margin-top: .25rem;
     font-size: 80%;
-    color: #dc3545;
+    color: $error;
   }
-  
+
   input.ng-invalid.is-invalid {
-    border: 1px solid red;
+    border: 1px solid $error;
   }
-  

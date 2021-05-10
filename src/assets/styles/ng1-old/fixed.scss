@@ -28,14 +28,14 @@
 .btn.btn-new.btn-primary:active,
 .btn-new.btn-primary:active {
   color: $white;
-  background: #117ebf;
+  background: $secondary-1;
 }
 
 .btn.btn-new.btn-success,
 .btn-new.btn-success {
   color: $white;
   background: $success;
-  border: 1px solid #189947;
+  border: 1px solid $success;
 }
 
 .btn.btn-new.btn-success:hover,
@@ -43,7 +43,7 @@
 .btn.btn-new.btn-success:active,
 .btn-new.btn-success:active {
   color: $white;
-  background: #189947;
+  background: $success;
 }
 
 .btn.btn-new.disabled,
@@ -159,7 +159,7 @@
   border: none;
   height: 40px;
   padding: 10px 10px 10px 38px;
-  background: #f6f8fa;
+  background: $gray-100;
   font-size: 13px;
 }
 

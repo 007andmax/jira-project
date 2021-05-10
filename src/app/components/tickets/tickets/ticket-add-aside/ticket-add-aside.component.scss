@@ -8,7 +8,7 @@
       .dropdown-toggle {
         height: 32px;
         border: none;
-        background-color: white;
+        background-color: $white;
       }
       .default-value {
         top: 0;
@@ -112,7 +112,7 @@
         width: 16px;
         height: 16px;
         border: 1px solid $gray-500;
-        background: white;
+        background: $white;
         border-radius: 50%;
         bottom: -7px;
       }

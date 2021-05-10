@@ -4,7 +4,7 @@ tr {
   cursor: pointer;
   &:hover {
     td {
-      background: #f4fbff;
+      background: $gray-200;
       border-color: $primary-1;
     }
   }

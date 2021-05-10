@@ -149,7 +149,7 @@
 // Inverted navbar
 .navbar-inverse {
   @include gradient-vertical($start-color: lighten($navbar-inverse-bg, 10%), $end-color: $navbar-inverse-bg);
-  @include reset-filter; // Remove gradient in IE<10 to fix bug where dropdowns don't get triggered; see https://github.com/twbs/bootstrap/issues/10257
+  @include reset-filter; // Remove gradient in IE<10 to fix bug where dropdowns don't get trigge$error; see https://github.com/twbs/bootstrap/issues/10257
   border-radius: $navbar-border-radius;
   .navbar-nav > .open > a,
   .navbar-nav > .active > a {

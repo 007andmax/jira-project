@@ -55,7 +55,7 @@
   }
 
   label {
-    color: white;
+    color: $white;
     width: 183px;
     height: 44px;
     border-radius: 21.5px;
@@ -110,7 +110,7 @@
       margin: 0;
       margin-bottom: 0.25rem;
       .file-error {
-        color: red;
+        color: $error;
       }
     }
 

@@ -1,7 +1,7 @@
 @import './src/assets/styles/variable';
 
 .no-valid {
-    border: 1px solid red !important;
+    border: 1px solid $error !important;
 }
 /deep/.qt-dropdown {
   position: relative;

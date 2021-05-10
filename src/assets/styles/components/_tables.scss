@@ -43,7 +43,7 @@ table.qt-table-modern {
 
       &.--selected {
         td {
-          background: #f4fbff;
+          background: $gray-200;
           border-color: $primary-1;
         }
       }
@@ -59,7 +59,7 @@ table.qt-table-modern {
       background-size: cover;
       margin-right: 8px;
       font-weight: 600;
-      color: white;
+      color: $white;
       align-items: center;
       justify-content: center;
       display: flex;

@@ -51,7 +51,7 @@ app-drop-down {
 
 
   &__dropdown {
-    background-color: white;
+    background-color: $white;
     padding: 8px 0;
 
     button {
@@ -60,7 +60,7 @@ app-drop-down {
       border: none;
       width: 100%;
       text-align: left;
-      background: white;
+      background: $white;
       font-size: 13px;
       color: $primary-2;
       text-overflow: ellipsis;

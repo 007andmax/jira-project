@@ -17,7 +17,7 @@
     font-size: 13px;
     border-radius: 3px;
     border: solid 1px $gray-500;
-    background-color: white;
+    background-color: $white;
     color: $gray-800;
     padding: 10px 12px;
     &::placeholder {
@@ -39,7 +39,7 @@
     display: flex;
     position: sticky;
     z-index: 99;
-    background: white;
+    background: $white;
     top: 0;
     border-bottom: 1px solid $gray-400;
     box-shadow: 0px 0px 7px 1px $gray-500;
@@ -94,11 +94,11 @@
 
       .category-product {
           padding: 11px 16px !important;
-          background: white;
+          background: $white;
           border-radius: 4px;
           box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
           margin-bottom: 4px !important;
-          border: 1px solid white !important;
+          border: 1px solid $white !important;
           display: flex;
           justify-content: space-between;
           flex-direction: column;
@@ -112,7 +112,7 @@
           }
           &:hover {
             border: solid 1px $primary-1 !important;
-            background-color: #e7f5fe;
+            background-color: $gray-200;
             display: flex;
             flex-direction: row;
             align-items: center;

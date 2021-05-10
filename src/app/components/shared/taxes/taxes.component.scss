@@ -31,7 +31,7 @@
 
   .control-label {
     top: -13px !important;
-    color: red;
+    color: $error;
   }
   .new-tax {
     overflow: visible;
@@ -115,7 +115,7 @@
   border: 1px solid $gray-500;
   border-radius: 4px;
   width: 100%;
-  background: white;
+  background: $white;
   &::placeholder {
     color: $gray-600;
   }
@@ -129,6 +129,6 @@
 .cancel-tax-item, .cancel-tax-item:hover {
   width: auto !important;
   background-color: $background !important;
-  color: #4f5f79 !important
+  color: $gray-800 !important
 }
 

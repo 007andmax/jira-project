@@ -11,7 +11,7 @@
     }
 }
 .category-name  {
-    color: white;
+    color: $white;
 }
 
 
@@ -35,7 +35,7 @@
     .empty-logo {
       width: 24px;
       height: 24px;
-      border: 1px solid gray;
+      border: 1px solid $gray-800;
       border-radius: 100%;
       display: flex;
       justify-content: center;

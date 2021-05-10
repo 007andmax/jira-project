@@ -110,7 +110,7 @@
 }
 
 .top-product-list-ticket {
-  border-bottom: 1px solid #d3d8e1;
+  border-bottom: 1px solid $gray-400;
   height: 65px;
   text-transform: uppercase;
 }
@@ -127,7 +127,7 @@
   font-weight: 600;
   cursor: pointer;
   min-height: 65px;
-  border-bottom: 1px solid #d3d8e1;
+  border-bottom: 1px solid $gray-400;
 }
 
 .product-list-ticket li.content-product-list-ticket [class*=col-md-] {
@@ -317,7 +317,7 @@
 }
 
 .run-report-content {
-  border-bottom: 1px solid #d3d8e1;
+  border-bottom: 1px solid $gray-400;
 }
 
 .run-report-content .form-group .report-caret-icon {
@@ -328,7 +328,7 @@
 .run-report-content .btn {
   margin-bottom: 20px;
   vertical-align: bottom;
-  background-color: #90c56b;
+  background-color: $success;
   width: 100px;
 }
 
@@ -399,7 +399,7 @@
   width: 100%;
   height: 36px;
   border-radius: 4px 3px 3px 4px;
-  border: 1px solid #d3d8e1;
+  border: 1px solid $gray-400;
   background-color: $white;
 }
 

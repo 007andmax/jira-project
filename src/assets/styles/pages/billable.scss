@@ -60,7 +60,7 @@
   }
   tr.--selected {
     td {
-      background-color: #f4fbff;
+      background-color: $gray-200;
       border-color: $primary-1 !important;
     }
   }
@@ -161,7 +161,7 @@
         }
 
         td {
-          background-color: white;
+          background-color: $white;
           font-size: 12px;
           font-weight: 500;
         }
@@ -336,7 +336,7 @@ app-invoice-preview {
     }
 
     &__item-header-number {
-      color: white;
+      color: $white;
       background-color: $gray-700;
       margin-left: -13px;
       height: 20px;
@@ -430,7 +430,7 @@ app-invoice-form {
   .billable-popup-add-note{
     width: 485px;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 2px 20px 10px;
-    background-color: rgb(255, 255, 255);
+    background-color: $white;
     border-width: 1px;
     border-style: solid;
     border-color: rgb(223, 227, 232);
@@ -449,14 +449,14 @@ app-invoice-form-ticket-edit-service,app-invoice-form-ticket-edit-product {
 .billing-aside-edit-mode {
   color: $primary-1;
   border: 1px solid $primary-1;
-  background-color: white;
+  background-color: $white;
   border-radius: 4px;
 }
 
 .billing-aside-save-mode {
   border-radius: 4px;
   background-color: $primary-1;
-  color: white;
+  color: $white;
   border: 1px solid $primary-1;
 }
 
@@ -464,7 +464,7 @@ app-invoice-form-ticket-edit-service,app-invoice-form-ticket-edit-product {
   border-radius: 4px;
   color: $gray-800;
   border: solid 1px $gray-500;
-  background-color: white;
+  background-color: $white;
 }
 
 
@@ -651,7 +651,7 @@ app-invoice-form-ticket-edit-service,app-invoice-form-ticket-edit-product {
 }
 
 .billable-address-empty-popup {
-  background: white;
+  background: $white;
   position: fixed;
   top: 154px;
   right: 24px;

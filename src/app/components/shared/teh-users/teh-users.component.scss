@@ -3,7 +3,7 @@
 .select-wrapper {
   position: absolute;
   display: block;
-  background: white;
+  background: $white;
   height: 240px;
   bottom: 55px;
   margin-top: 5px;
@@ -33,7 +33,7 @@
         }
       }
       &:hover {
-        background-color: #e7ecf2;
+        background-color: $gray-300;
       }
     }
   }

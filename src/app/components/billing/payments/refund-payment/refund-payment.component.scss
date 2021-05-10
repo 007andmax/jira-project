@@ -3,7 +3,7 @@
 
 .payments-page__aside {
     color: $gray-800;
-    background: white;
+    background: $white;
     width: 880px;
     position: absolute;
     border-left: 1px solid $gray-400;
@@ -19,5 +19,5 @@
 .aside-footer {
     height: 72px;
     border-top: 1px solid $gray-400;
-    background: white;
+    background: $white;
 }

@@ -25,7 +25,7 @@
       height: 32px;
       width: 100%;
       box-shadow: 0 0px 11px 0px rgba(0, 0, 0, 0.05);
-      background: white;
+      background: $white;
       font-weight: 600;
       display: flex;
       align-items: center;
@@ -102,7 +102,7 @@
 
 /deep/ igx-time-picker {
   width: 100%;
-  background: white;
+  background: $white;
   height: 40px;
   border-radius: 3px;
   border: solid 1px $gray-500;
@@ -149,7 +149,7 @@
     border: none;
     font-weight: 600;
     background: $primary-1;
-    color: white;
+    color: $white;
     width: 100%;
   }
 }

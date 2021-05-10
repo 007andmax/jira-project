@@ -222,7 +222,7 @@
       display: none;
     }
     tbody tr.--selected td {
-      background: #f4fbff !important;
+      background: $gray-200 !important;
       border-color: $primary-1 !important;
     }
   }
@@ -240,7 +240,7 @@
 
   // ASIDE
   &__aside{
-    background: white;
+    background: $white;
     position: fixed;
     width: 480px;
     top: $header-height;
@@ -267,7 +267,7 @@
       border: 1px solid $gray-400;
       border-top: none;
       &.--active {
-        background-color: white;;
+        background-color: $white;;
       }
     }
     &__header {
@@ -389,11 +389,11 @@
 
       .date-picker {
         input {
-          border: 1px solid #dde1e6;
+          border: 1px solid $gray-400;
           border-radius: 4px;
           border-color: transparent;
           &:hover, &:focus {
-            border-color: #dde1e6;
+            border-color: $gray-400;
             outline: none;
           }
         }
@@ -417,12 +417,12 @@
       color: $gray-800;
     }
     &__info-text-input {
-      border: 1px solid #dde1e6;
+      border: 1px solid $gray-400;
       border-radius: 4px;
       width: 100%;
       border-color: transparent;
       &:hover, &:focus {
-        border-color: #dde1e6;
+        border-color: $gray-400;
         outline: none;
       }
     }
@@ -536,7 +536,7 @@
   //   content: '';
   //   width: 10px;
   //   height: 10px;
-  //   background: white;
+  //   background: $white;
   //   transform: rotate(45deg);
   //   top: -4px;
   //   left: 15px;

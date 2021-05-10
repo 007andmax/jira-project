@@ -34,8 +34,8 @@ body .left-panel-full {
 }
 
 .btn-success {
-  background-color: #90c56b;
-  border-color: #90c56b;
+  background-color: $success;
+  border-color: $success;
 }
 .icn-remove-old {
   background-image: url('/assets/img/icons/close-10.png');
@@ -142,29 +142,29 @@ body .left-panel-full {
   opacity: 1;
 }
 .form-control::-moz-placeholder {
-  color: #b2becd;
+  color: $gray-500;
   opacity: 1;
 }
 
 .form-control:-ms-input-placeholder {
-  color: #b2becd;
+  color: $gray-500;
 }
 
 .form-control::-webkit-input-placeholder {
-  color: #b2becd;
+  color: $gray-500;
 }
 
 .form-control-search::-moz-placeholder {
-  color: #b2becd;
+  color: $gray-500;
   opacity: 1;
 }
 
 .form-control-search:-ms-input-placeholder {
-  color: #b2becd;
+  color: $gray-500;
 }
 
 .form-control-search::-webkit-input-placeholder {
-  color: #b2becd;
+  color: $gray-500;
 }
 
 .recurring-tickets-content__modal .checkbox-wrapper .with-checkbox, .new-companies-content__modal .checkbox-wrapper .with-checkbox, .new-users-content__modal .checkbox-wrapper .with-checkbox {
@@ -245,7 +245,7 @@ body .topNavbar strong span {
 }
 
 .custom-scroll::-webkit-scrollbar-thumb:hover {
-  background-color: #b2becd;
+  background-color: $gray-500;
 }
 
 .dropdown-assign-ticket .users-list::-webkit-scrollbar-thumb {
@@ -480,7 +480,7 @@ strong {
 
 /* Textarea */
 .password-content__modal--content textarea {
-  /* background: #fff8eb; */
+  /* background: $gray-400; */
   /* border: 1px solid #ffe3af; */
   border: 1px solid $gray-500;
   border-radius: 4px;
@@ -574,7 +574,7 @@ textarea {
 }
 
 .form-control[disabled], input[disabled] {
-  background-color: rgb(235, 235, 228);
+  background-color: $gray-400;
 }
 
 .left-panel-filter i, .new-users-content__modal--content i, .recurring-tickets-content__modal--content i, .password-content__modal--content i {
@@ -596,7 +596,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 .info-block {
   padding: 10px 10px 10px 50px;
-  background-color: #e7f5fe;
+  background-color: $gray-200;
   color: $primary-1;
   position: relative;
   border-radius: 3px;
@@ -697,7 +697,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   display: inline-block;
   width: 26px;
   height: 26px;
-  background-color: #b2becd;
+  background-color: $gray-500;
 }
 
 .avatar-26.remove:hover {
@@ -722,7 +722,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 
 .avatar .no-avatar {
-  background-color: #b2becd;
+  background-color: $gray-500;
 }
 
 .avatar > i {

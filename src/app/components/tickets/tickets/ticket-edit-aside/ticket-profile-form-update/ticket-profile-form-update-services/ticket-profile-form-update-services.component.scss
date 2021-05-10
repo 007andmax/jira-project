@@ -47,7 +47,7 @@
       padding: 0;
       /deep/ .dropdown-toggle {
         width: 100%;
-        background: white;
+        background: $white;
         border: none;
         height: 38px;
         border-radius: 3px;
@@ -76,6 +76,6 @@
     border: solid 1px $gray-500;
     border-radius: 4px;
     padding: 10px 12px;
-    background: white;
+    background: $white;
   }
 }

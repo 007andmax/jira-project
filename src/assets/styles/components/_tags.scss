@@ -10,13 +10,13 @@
   &.--success {
     color: $success;
     border-color: $success;
-    background-color: #ebfff2;
+    background-color: $gray-300;
   }
 
   &.--info {
     color: $primary-1;
     border-color: $primary-1;
-    background-color: #edf8ff;
+    background-color: $background;
   }
 
   &.--warning {

@@ -121,7 +121,7 @@
     button.dropdown-item {
       text-align: left;
       border: none;
-      background: white;
+      background: $white;
       min-height: 32px;
       color: $primary-2;
       padding: 0 15px;
@@ -225,7 +225,7 @@ app-default-services-item,app-default-services-contracts {
       text-align: left !important;
       line-height: 1.33 !important;
       font-size: 12px !important;
-      color: white !important;
+      color: $white !important;
       font-family: 'Graphik-Regular', sans-serif !important;
     }
   }

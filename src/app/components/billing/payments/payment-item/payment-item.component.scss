@@ -11,7 +11,7 @@ tr:hover {
   }
   tr.--selected {
     td {
-      background-color: #f4fbff;
+      background-color: $gray-200;
       border-color: $primary-1 !important;
     }
   }

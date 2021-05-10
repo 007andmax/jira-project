@@ -2253,7 +2253,7 @@ ngx-loading > div {
 .ng7 .cmn-area.email-note{margin-top: 0;}
 .ng7 .map-area{margin:-30px -30px 20px -30px;}
 .ng7 tabset{overflow: hidden;}
-body.ng7{background-color: white;}
+body.ng7{background-color: $white;}
 .ng7 .account-info .ul .li:last-child form{width: 100%;margin-bottom: 25px;}
 .ng7 .page-insider .heading .heading-serach .btn-outline {position: fixed;bottom: 0;left: 0;
     width: 100%;right: 0;margin: 0;background-color: $primary-1;color: $white;@include border-radius(0);border-color: $primary-1;
@@ -2387,7 +2387,7 @@ div#editor.angular-editor-textarea {
   resize: none;
   border-radius: 0 0 4px 4px;
   height: 153px !important;
-  border: 1px solid #ddd;
+  border: 1px solid $gray-400;
 }
 
 .invalid-feedback{margin-top: 5px;float: left;width: 100%;}
@@ -2454,7 +2454,7 @@ div#editor.angular-editor-textarea {
         margin-top: 5px !important;
         margin-bottom: 0;
         font-family: $font-body !important;
-        color: red !important;
+        color: $error !important;
         font-size: 13px !important;
         line-height: 18px;
         text-transform: capitalize;

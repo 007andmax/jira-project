@@ -294,11 +294,11 @@
                         &:nth-child(3){
                             .progress-circle{
                                 .value-bar{
-                                    border-color: #00d8e7;
+                                    border-color:$secondary-4;
                                 }
                                 &.over50{
                                     .first50-bar{
-                                        background-color: #00d8e7;
+                                        background-color:$secondary-4;
                                     }
                                 }
                             }
@@ -552,7 +552,7 @@
                             width: 160px;
                             @include border-radius(6px);
                             border: 1px dashed rgba(255, 185, 55, 0.4);
-                            background-color: #fffbf5;
+                            background-color: $gray-100;
                             display: -ms-flexbox;
                             display: -webkit-flex;
                             display: flex;
@@ -673,7 +673,7 @@
         justify-content: center;
         align-items: center;
         text-align: center;
-        background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) -25%, #ffffff 73%, #ffffff 73%);
+        background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) -25%, $white 73%, $white 73%);
         left: 0;
         right: 0;
     }

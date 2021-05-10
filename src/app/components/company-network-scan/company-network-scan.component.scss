@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .list-devices {
     height: fit-content;
 }
@@ -16,5 +18,5 @@ app-company-network-scan-item {
     top: 60px;
 }
 .offline-device {
-    color: #bec2c7;
+    color: $gray-500;
 }

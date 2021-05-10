@@ -102,11 +102,11 @@
 .invalid-feedback {
   margin-top: .25rem;
   font-size: 80%;
-  color: #dc3545;
+  color: $error;
 }
 
 input.ng-invalid.is-invalid {
-  border: 1px solid red;
+  border: 1px solid $error;
 }
 
 // #toast-container > div {

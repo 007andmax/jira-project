@@ -5,7 +5,7 @@
 }
 
 .users-list .user-card {
-  border: 1px solid #e7ecf2;
+  border: 1px solid $gray-300;
   float: left;
   height: 236px;
   margin-left: 30px;
@@ -36,7 +36,7 @@
 }
 
 .users-list .user-card .avatar.no-avatar {
-  background: #e7ecf2;
+  background: $gray-300;
   text-align: center;
   vertical-align: middle;
 }

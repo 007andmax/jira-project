@@ -169,7 +169,7 @@
     align-items: center;
     position: relative;
     a {
-      color: white;
+      color: $white;
       position: absolute;
       width: 100%;
       height: 100%;
@@ -183,7 +183,7 @@
     &.--active {
       color: $primary-1;
       font-family: Graphik-Medium, sans-serif;
-      background-color: #171e26;
+      background-color: darken($primary-2, 5%);
       a {
         color: $primary-1;
       }
@@ -231,7 +231,7 @@
     }
 
     &__menu.--active {
-      background: #171e26;
+      background: $primary-2;
       border-radius: 6px;
     }
 

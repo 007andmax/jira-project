@@ -107,7 +107,7 @@
 .add-tax-dropdown .form-control {
   width: 100%;
   border: none;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid $gray-400;
   outline: none;
   padding: 10px 0;
   background-color: $white;
@@ -136,7 +136,7 @@
 }
 .add-category-lp-dropdown-btns .btn-success {
   background-color: $success !important;
-  border: 1px solid #189947;
+  border: 1px solid $success;
   color: $white;
 }
 .add-category-lp-dropdown-btns {
@@ -166,7 +166,7 @@
   width: 80px;
 }
 .add-category-lp-dropdown-btns   {
-  background-color: #189947 !important;
+  background-color: $success !important;
 }
 .archive-modal button,
 .image-confirm-modal button,
@@ -221,7 +221,7 @@
 
 .tab-btns .btn:hover,
 .tab-btns .btn.active {
-  background-color: #e8f6ff;
+  background-color: $background;
   color: $primary-1;
   border: 1px solid transparent;
 }
@@ -253,7 +253,7 @@
 }
 .textarea.email-text-block::placeholder,
 .textarea.quote-text-block::placeholder {
-  color: #c0bfcd;
+  color: $gray-500;
 }
 
 .email-text-block textarea,

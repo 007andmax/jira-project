@@ -2,7 +2,7 @@
 
 .qt-aside-modern {
   color: $gray-800;
-  background: white;
+  background: $white;
   width: 592px;
   position: absolute;
   border-left: 1px solid $gray-400;
@@ -84,7 +84,7 @@
   }
 
   &__header {
-    background-color: #E7F5FE;
+    background-color: $gray-200;
     padding: 26px 24px 26px 39px;
     display: flex;
   }
@@ -98,7 +98,7 @@
 
   &__title {
     font-size: 20px;
-    font-weight: 500;
+    //font-weight: 500;
     color: $primary-2;
     font-weight: 600;
   }

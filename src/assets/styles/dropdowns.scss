@@ -100,9 +100,9 @@
 
 .dark-dropdown {
   .dropdown-menu {
-    background: #313a4d;
+    background: $gray-800;
     .dropdown-item {
-      background: #313a4d;
+      background: $gray-800;
       color: $gray-600;
     }
   }
@@ -185,7 +185,7 @@
       transition: all .3s;
       border-radius: 3px;
       &:hover {
-        background: #e7ecf2;
+        background: $gray-300;
       }
     }
     .bg-primary {
@@ -289,7 +289,7 @@
             border-bottom: 1px solid $background;
           }
           &:hover {
-            background-color: #f3faff;
+            background-color: $gray-200;
           }
           .col-md-10 {
             width: 75%;
@@ -491,14 +491,14 @@
 .ngb-dp-today {
   .custom-day {
     background: $primary-1;
-    color: white;
+    color: $white;
   }
 }
 .company-time-zone-drop-down {
   .app-drop-down__dropdown {
     width: fit-content !important;
     .dropdown-item {
-      color: #364657 !important;
+      color: $gray-800 !important;
     }
   }
 }

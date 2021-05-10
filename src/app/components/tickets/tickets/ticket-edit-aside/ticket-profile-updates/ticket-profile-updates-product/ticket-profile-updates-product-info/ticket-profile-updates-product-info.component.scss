@@ -61,7 +61,7 @@
        background-position: center;
        background-size: cover;
        text-align: center;
-       color: white;
+       color: $white;
        font-weight: 600;
     }
     &__ticket-info {
@@ -72,7 +72,7 @@
     }
     &__ticket-body {
       padding: 8px;
-      background-color: white;
+      background-color: $white;
       border: solid 1px $gray-400;
     }
     &__done-status {
@@ -202,7 +202,7 @@
       color: $success;
       font-size: 10px;
       border-color: $success;
-      background: white;
+      background: $white;
     }
   }
 

@@ -17,7 +17,7 @@
     &__item {
       width: 100%;
       border-radius: 6px;
-      background-color: white;
+      background-color: $white;
       margin-bottom: 8px;
       min-width: 1128px;
       max-width: 1128px;
@@ -65,7 +65,7 @@
   display: flex;
   border: 1px solid $gray-400;
   border-radius: 4px;
-  background-color: white;
+  background-color: $white;
   height: 28px;
   align-items: center;
   width: fit-content;

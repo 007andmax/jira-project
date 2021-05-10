@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .qt-modal {
   &__header {
     padding: 24px 24px 12px 24px;
@@ -28,7 +30,7 @@
 
   .qt-modal-bot-error {
     font-size: 12px;
-    color: #f44336;
+    color: $error;
   }
 }
 .quote-send-modal,.lock-screen-modal {

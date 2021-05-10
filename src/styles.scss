@@ -110,7 +110,7 @@
     width: 16px;
     background-color: $white;
     border-radius: 50%;
-    border: 1px solid #c7cdd7;
+    border: 1px solid $gray-500;
     transition: all .3s;
     &:after {
       content: "";
@@ -238,7 +238,7 @@
         margin: 0;
         width: 100%;
         border: 0;
-        background-color: #313a4d;
+        background-color: $gray-800;
         color: $gray-600;
         border: none;
         border-radius: 3px;
@@ -301,7 +301,7 @@ app-left-panel-tags {
       border-radius: 4px;
       padding: 8px;
       min-height: 40px;
-      background: #313a4d;
+      background: $gray-800;
       input {
         padding: 0;
         height: 32px;
@@ -649,7 +649,7 @@ app-left-panel-tags {
         top: 0;
         width: 48px;
         height: 48px;
-        background: #ffeceb;
+        background: $gray-300;
         border-radius: 50%;
       }
       &:after {
@@ -688,7 +688,7 @@ app-left-panel-tags {
         height: 19px;
       }
       &:before {
-        background: #e1f2fd;
+        background: $background;
       }
     }
   }
@@ -751,7 +751,7 @@ ngb-typeahead-window {
   }
 }
 .has-error {
-  border-color: red !important;
+  border-color: $error !important;
 }
 .avoid-clicks {
   pointer-events: none;
@@ -766,7 +766,7 @@ ngb-typeahead-window {
     top: 50%;
     transform: translateY(-50%);
     font-size: 13px;
-    color: #a2a5bf;
+    color: $gray-600;
     width: auto;
   }
 }
@@ -775,7 +775,7 @@ ngb-typeahead-window {
   right: 15px;
   top: 6px;
   font-size: 13px;
-  color: red;
+  color: $error;
 }
 .left-panel-full-wrapper .loading {
   top: 10px;
@@ -976,7 +976,7 @@ app-quotes-item {
 .new-companies-content,
 .password-content {
   padding: 21px 24px;
-  background: #f5fafd;
+  background: $gray-200;
   position: relative;
   min-height: calc(100vh - 86px);
 }
@@ -1060,7 +1060,7 @@ app-quotes-item {
   align-items: center;
   justify-content: center;
   background: $success;
-  border: 1px solid #189947;
+  border: 1px solid $success;
   border-radius: 4px;
   width: 40px;
   height: 40px;
@@ -1070,7 +1070,7 @@ app-quotes-item {
   transition: all .3s;
 }
 .plus-btn:hover {
-  background: #189947;
+  background: $success;
 }
 .products-content__list .products-content__list--item [class*='col-md-'],
 .new-companies-content__list .new-companies-content__list--item [class*='col-md-'],
@@ -1251,7 +1251,7 @@ app-quotes-item {
       padding: 0 12px;
       font-size: 12px;
       text-align: left;
-      background-color: white;
+      background-color: $white;
     }
     .report-caret-icon {
       width: 8px;
@@ -1442,7 +1442,7 @@ app-quotes-item {
     .no-valid-service,
     .no-valid-product {
       input {
-        border: 1px solid red !important;
+        border: 1px solid $error !important;
       }
     }
     .editable-description {
@@ -1636,7 +1636,7 @@ app-quotes-item {
 .date-picker {
   .ngb-dp-month-name {
     background: $primary-1;
-    color: white;
+    color: $white;
     font-weight: 600;
   }
   .custom-day {
@@ -1647,12 +1647,12 @@ app-quotes-item {
     height: 100%;
 
     &:hover {
-      background: #c7c7c7;
+      background: $gray-400;
       color: whitesmoke;
     }
     &.range {
       background: $primary-1;
-      color: white;
+      color: $white;
     }
     &.faded {
       background: $gray-300;
@@ -1716,7 +1716,7 @@ app-quotes-item {
         position: absolute;
         width: 113%;
         left: -35px;
-        border-top: 1px solid #eee;
+        border-top: 1px solid $gray-200;
         padding: 16px 0 0 50px;
         color: $gray-600;
         font-size: 12px;
@@ -1769,23 +1769,23 @@ app-quotes-item {
     left: 100px;
   }
   .info-block {
-    background: #fff8eb;
+    background: $gray-400;
     font-size: 12px;
-    color: #7f5c1b;
+    color: $primary-2;
     width: 83%;
     margin: 0 15px;
     &:before {
       content: '';
       background: transparent;
-      color: #7f5c1b;
-      border: 1px solid #7f5c1b;
+      color: $primary-2;
+      border: 1px solid $primary-2;
       top: 50%;
       transform: translateY(-50%);
     }
     &:after {
       position: absolute;
       content: 'i';
-      color: #7f5c1b;
+      color: $primary-2;
       left: 25px;
       top: 50%;
       transform: translateY(-50%);
@@ -1813,7 +1813,7 @@ app-quotes-item {
     align-items: center;
   }
   .col-md-2 button {
-    border: 1px solid lightblue;
+    border: 1px solid $background;
     border-radius: 4px;
     background: transparent;
     width: 32px;
@@ -1877,7 +1877,7 @@ app-quotes-item {
     font-size: 14px;
     &::placeholder {
       font-size: 14px;
-      color: #c0bfcd;
+      color: $gray-500;
     }
   }
   .mat-form-field-should-float {
@@ -1897,7 +1897,7 @@ app-quotes-item {
     }
   }
   .mat-form-field-underline {
-    background-color: #e5e7eb;
+    background-color: $gray-400;
   }
   .mat-form-field {
     font-size: 16px;
@@ -2093,7 +2093,7 @@ ngb-datepicker {
             margin: 0;
             width: 100%;
             border: 0;
-            background-color: #313a4d;
+            background-color: $gray-800;
             color: $gray-600;
             border: none;
             border-radius: 3px;
@@ -2158,7 +2158,7 @@ ngb-datepicker {
 
   th, td {
     padding: 15px 8px;
-    border-bottom: 1px solid #d3d8e1;
+    border-bottom: 1px solid $gray-400;
     &:first-child {
       padding-left: 15px;
     }
@@ -2179,7 +2179,7 @@ ngb-datepicker {
       }
     }
     th, td {
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid $gray-200
     }
   }
 }
@@ -2253,7 +2253,7 @@ ngb-typeahead-window {
 }
 
 .has-error {
-  border-color: red !important;
+  border-color: $error !important;
 }
 
 .avoid-clicks {
@@ -2271,7 +2271,7 @@ ngb-typeahead-window {
     top: 50%;
     transform: translateY(-50%);
     font-size: 13px;
-    color: #a2a5bf;
+    color: $gray-600;
     width: auto;
   }
 }
@@ -2281,7 +2281,7 @@ ngb-typeahead-window {
   right: 15px;
   top: 6px;
   font-size: 13px;
-  color: red;
+  color: $error;
 }
 
 .left-panel-full-wrapper .loading {
@@ -2321,11 +2321,11 @@ ngb-typeahead-window {
 .invalid-feedback {
   margin-top: 0.25rem;
   font-size: 80%;
-  color: #dc3545;
+  color: $error;
 }
 
 input.ng-invalid.is-invalid {
-  border: 1px solid red;
+  border: 1px solid $error;
 }
 
 // @import './assets/styles/mobile.scss';
@@ -2376,7 +2376,7 @@ input.ng-invalid.is-invalid {
   &__submenu {
     right: calc(100% + 4px);
     top: -6px !important;
-    background: white;
+    background: $white;
     display: block !important;
   }
 
@@ -2430,7 +2430,7 @@ input.ng-invalid.is-invalid {
 
 .ticket-updates__photo-people {
   text-align: center;
-  color: white;
+  color: $white;
 }
 .ticket-updates__author {
   font-weight : 600;
@@ -2442,7 +2442,7 @@ input.ng-invalid.is-invalid {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: $white;
   font-weight: 600;
 }
 
@@ -2496,7 +2496,7 @@ app-ticket-profile-updates-service-timepicker {
   font-size: 13px;
   border-radius: 3px;
   border: solid 1px $gray-500;
-  background-color: white;
+  background-color: $white;
   color: $gray-800;
   padding: 10px 12px;
 }
@@ -2673,7 +2673,7 @@ app-ticket-profile-updates-service-timepicker {
 app-ticket-profile-form-update {
   position: sticky !important;
   bottom: 0;
-  background: white;
+  background: $white;
   z-index: 30;
   .cps-block__content {
     min-height: 106px;
@@ -2720,7 +2720,7 @@ app-ticket-profile-form-update {
   height: 28px;
   background-position: center;
   background-repeat: no-repeat;
-  background-color: white;
+  background-color: $white;
   position: fixed;
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
   border: solid 1px $gray-400;
@@ -2748,7 +2748,7 @@ app-add-assigned-user {
 .ticket-edit-aside {
   position: fixed;
   z-index: 2;
-  background: white;
+  background: $white;
   right: 0;
   top: $header-height;
   display: flex;
@@ -2844,7 +2844,7 @@ app-ticket-edit-aside-devices  {
 
   .btn-second {
     color: $primary-1;
-    background: white;
+    background: $white;
     border: 1px solid $primary-1;
   }
 
@@ -2853,13 +2853,13 @@ app-ticket-edit-aside-devices  {
     border: none;
 
     &:hover {
-      color: white;
+      color: $white;
     }
   }
 
   .new-taxes-area .dropdown-item:hover {
     button {
-      color: white !important;
+      color: $white !important;
     }
   }
 
@@ -2877,7 +2877,7 @@ app-ticket-edit-aside-devices  {
 }
 
 .product-popup-triangle {
-  background: white;
+  background: $white;
   position: absolute;
   width: 8px;
   height: 8px;
@@ -2949,7 +2949,7 @@ app-ticket-edit-aside-devices  {
   position: absolute;
   background-color: $error;
   padding: 8px;
-  color: white;
+  color: $white;
   font-size: 12px;
   line-height: 1.33;
   top: calc(100% + 6px);

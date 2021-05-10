@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .form-group.full-width label.control {
   margin-top: 17px;
   margin-bottom: 13px;
@@ -36,6 +38,6 @@
   position: absolute;
   right: 15px;
   top: 30px;
-  color: #b2becd;
+  color: $gray-500;
   padding-left: 13px;
 }

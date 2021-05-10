@@ -26,12 +26,12 @@
 .invalid-feedback {
   margin-top: 0.25rem;
   font-size: 80%;
-  color: #dc3545;
+  color: $error;
   text-align: left;
 }
 
 input.ng-invalid.is-invalid {
-  border: 1px solid red;
+  border: 1px solid $error;
 }
 
 .manage-tags {

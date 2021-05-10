@@ -19,7 +19,7 @@ main {
                     .terminal-box {
                         float: left;
                         width: 100%;
-                        background-color: #151b21;
+                        background-color: $primary-2;
                         padding: 22px 20px;
                         font-size: 13px;
                         font-weight: normal;
@@ -60,7 +60,7 @@ main {
                             @include border-radius(4px);
                             border: solid 1px $gray-500;
                             padding: 10px 14px;
-                            color: #4f5f79 !important;
+                            color: $gray-800 !important;
                             font-family: $sourceCode;
                             height: 120px;
                             // max-height: 150px !important;
@@ -379,7 +379,7 @@ main {
                                         margin: 0;
                                         padding: 0;
                                         text-align: center;
-                                        color: #151b21;
+                                        color: $primary-2;
                                         font-family: $sourceCode;
                                         &::before {
                                             width: 0;
@@ -761,7 +761,7 @@ main {
                                 margin: 0;
                                 padding: 0;
                                 text-align: center;
-                                color: #151b21;
+                                color: $primary-2;
                                 &::before {
                                     width: 0;
                                 }
@@ -819,7 +819,7 @@ main {
         .cmn-tbs-content {
             &.command {
                 li {
-                    border-bottom: 1px dotted #ccc;
+                    border-bottom: 1px dotted $gray-400;
                     padding: 7.5px 0;
                     position: relative;
                     padding-right: 15px;

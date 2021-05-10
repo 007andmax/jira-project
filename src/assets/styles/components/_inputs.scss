@@ -99,7 +99,7 @@ span.qt-input-search input.qt-input-search {
   border-radius: 4px;
   width: 100%;
   height: 32px;
-  background-color: white;
+  background-color: $white;
   &::placeholder {
     color: $gray-600;
   }
@@ -118,7 +118,7 @@ ngb-typeahead-window.dropdown-menu {
     display: block;
     border: none;
     height: 32px;
-    background: white;
+    background: $white;
     width: 100%;
     text-align: left;
     padding: 0 15px;

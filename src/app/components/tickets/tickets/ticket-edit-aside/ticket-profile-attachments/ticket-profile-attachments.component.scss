@@ -58,7 +58,7 @@
       border-radius: 11px;
       font-size: 10px;
       font-weight: 600;
-      color: white;
+      color: $white;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -83,7 +83,7 @@
 
     &:hover {
       border: solid 1px $primary-1;
-      background-color: #e7f5fe;
+      background-color: $gray-200;
       .attachment-item {
         &__download {
           display: block;
