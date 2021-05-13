@@ -1,0 +1,122 @@
+.documents-page {
+  .documents-table {
+    .menu {
+      height: 30px;
+      display: flex;
+      align-items: center;
+    }
+    .menu-expand {
+      margin-top: 8px;
+      opacity: 0;
+      overflow: hidden;
+      max-height: 0;
+
+      &__item {
+        height: 40px;
+        display: flex;
+        align-items: center;
+      }
+    }
+    tr td {
+      padding: 8px;
+    }
+    tr {
+      &.menu-expand-show .menu-expand {
+        animation-name: showExpandTableMenu;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+      }
+      &.menu-expand-hide .menu-expand {
+        margin-top: 0;
+        animation-name: hideExpandTableMenu;
+        animation-duration: 0.2s;
+        animation-fill-mode: forwards;
+      }
+    }
+    &__created-title {
+      //width: -webkit-max-content;
+      //width: -moz-max-content;
+      //width: max-content;
+      width: 100%;
+      min-width: 300px;
+    }
+    &__create-by {
+      width: 150px;
+      max-width: 150px;
+      min-width: 150px;
+    }
+    &__created-date {
+      width: 110px;
+      max-width: 110px;
+      min-width: 110px;
+    }
+    &__review-date {
+      width: 110px;
+      max-width: 110px;
+      min-width: 110px;
+    }
+    &__company {
+      width: 340px;
+      max-width: 340px;
+      min-width: 340px;
+    }
+    &__menu {
+      width: 28px;
+      max-width: 28px;
+      min-width: 28px;
+
+      .menu {
+        display: block;
+        height: 16px;
+      }
+    }
+    &__shared {
+      width: 32px;
+      max-width: 32px;
+      min-width: 32px;
+    }
+  }
+
+  .documents-table__title-menu {
+    display: flex;
+    align-items: center;
+    line-height: 1;
+
+    &.menu-expand__item {
+      padding-left: 38px;
+    }
+
+    &.menu {
+      font-family: Graphik-Medium, sans-serif;
+    }
+  }
+  tr td:last-child {
+    padding-left: 0;
+  }
+}
+
+@keyframes showExpandTableMenu {
+  0% {
+    max-height: 0%;
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+    max-height: 100%;
+  }
+}
+@keyframes hideExpandTableMenu {
+  0% {
+    opacity: 1;
+    max-height: 100%;
+  }
+  100% {
+    height: 0;
+    max-height: 0%;
+    opacity: 0;
+  }
+}
+

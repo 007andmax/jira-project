@@ -1,67 +1,407 @@
+<!--<tr>-->
+<!--    <td class="password-table__check">-->
+<!--        <p-->
+<!--            class="category"-->
+<!--            [textContent]="item.name"-->
+<!--        ></p>-->
+<!--        <ng-template-->
+<!--            ngFor-->
+<!--            let-document-->
+<!--            [ngForOf]="item.list"-->
+<!--            [ngForTrackBy]="trackById"-->
+<!--        >-->
+<!--            <p [textContent]="document.title"></p>-->
+<!--        </ng-template>-->
+<!--    </td>-->
+<!--    <td>-->
+<!--        <p [textContent]="getCreateByForCategory(item.list)"></p>-->
+<!--        <ng-template-->
+<!--            ngFor-->
+<!--            let-document-->
+<!--            [ngForOf]="item.list"-->
+<!--            [ngForTrackBy]="trackById"-->
+<!--        >-->
+<!--            <p [textContent]="getCreateBy(document.createdBy)"></p>-->
+<!--        </ng-template>-->
+<!--    </td>-->
+<!--    <td>-->
+<!--        <p [textContent]="parseUpdateAtForCategory(item.list)"></p>-->
+<!--        <ng-template-->
+<!--            ngFor-->
+<!--            let-document-->
+<!--            [ngForOf]="item.list"-->
+<!--            [ngForTrackBy]="trackById"-->
+<!--        >-->
+<!--            <p [textContent]="parseUpdateAt(document.updatedAt)"></p>-->
+<!--        </ng-template>-->
+<!--    </td>-->
+<!--    <td [textContent]="'-'"></td>-->
+<!--    <td class="password-table__menu">-->
+<!--        &lt;!&ndash; <div class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"></div> &ndash;&gt;-->
+<!--        <div-->
+<!--            ngbDropdown-->
+<!--            [container]="'body'"-->
+<!--            [placement]="'bottom-right'"-->
+<!--        >-->
+<!--            <div-->
+<!--                class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"-->
+<!--                id="dropdownBasic1"-->
+<!--                ngbDropdownToggle-->
+<!--            ></div>-->
+<!--            <ul-->
+<!--                class="qt-dropdown-menu"-->
+<!--                ngbDropdownMenu-->
+<!--                aria-labelledby="dropdownBasic1"-->
+<!--            >-->
+<!--                <li-->
+<!--                    class="pointer"-->
+<!--                    (click)="deleteRecord()"-->
+<!--                    ngbDropdownItem-->
+<!--                >-->
+<!--                    <div class="icon__remove qt-sz-16 qt-bg-contain qt-mr-8"></div>-->
+<!--                    Remove-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--    </td>-->
+<!--</tr>-->
+<tr class="menu-expand-hide">
+  <td class="documents-table__title">
+    <div class="documents-table__title-menu menu">
+      <div class="icon__arrow-expand qt-sz-12 qt-bg-contain"></div>
+      <div class="icon__folder qt-sz-16 qt-bg-contain qt-mr-8 qt-ml-6"></div>
+      <div class="title">Guideline Document</div>
+    </div>
+    <div class="menu-expand">
+      <div class="documents-table__title-menu menu-expand__item">
+        <div class="icon__documents qt-sz-16 qt-bg-contain qt-mr-8"></div>
+        <div class="title">Printer Installation Guide</div>
+      </div>
+      <div class="documents-table__title-menu menu-expand__item">
+        <div class="icon__documents qt-sz-16 qt-bg-contain qt-mr-8"></div>
+        <div class="title">Printer Installation Guide</div>
+      </div>
+    </div>
+  </td>
+  <td class="documents-table__create-by">
+    <div class="menu">
+      Alma Romero
+    </div>
+    <div class="menu-expand">
+      <div class="menu-expand__item">
+        Cory Bush
+      </div>
+      <div class="menu-expand__item">
+        Theresa Herrera
+      </div>
+    </div>
+  </td>
+  <td class="documents-table__created-date">
+    <div class="menu">
+      12 Feb 2021
+    </div>
+    <div class="menu-expand">
+      <div class="menu-expand__item">
+        03 Feb 2021
+      </div>
+      <div class="menu-expand__item">
+        02 Jun 2021
+      </div>
+    </div>
+  </td>
+  <td class="documents-table__review-date">
+    <div class="menu">
+      22 Dec 2021
+    </div>
+    <div class="menu-expand">
+      <div class="menu-expand__item">
+        05 May 2021
+      </div>
+      <div class="menu-expand__item">
+        12 Jan 2021
+      </div>
+    </div>
+  </td>
+  <td class="documents-table__company">
+    <div class="menu">
+      LifePath Inveremere
+    </div>
+    <div class="menu-expand">
+      <div class="menu-expand__item">
+        Corinthia Dental
+      </div>
+      <div class="menu-expand__item">
+        Vantage Integrative Health And Wellness
+      </div>
+    </div>
+  </td>
+  <td class="documents-table__shared">
+    <div class="menu"></div>
+    <div class="menu-expand">
+      <div class="menu-expand__item"></div>
+      <div class="menu-expand__item"></div>
+    </div>
+  </td>
+  <td class="documents-table__menu">
+    <div
+      ngbDropdown
+      [container]="'body'"
+      [placement]="'bottom-right'"
+      class="menu"
+    >
+      <div
+        class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"
+        ngbDropdownToggle
+      ></div>
+      <ul
+        class="qt-dropdown-menu"
+        ngbDropdownMenu
+        aria-labelledby="dropdownBasic1"
+      >
+        <li
+          class="pointer"
+          ngbDropdownItem
+        >
+          <div class="icon__remove qt-sz-16 qt-bg-contain qt-mr-8"></div>
+          Remove
+        </li>
+      </ul>
+    </div>
+    <div class="menu-expand">
+      <div class="menu-expand__item"></div>
+      <div class="menu-expand__item"></div>
+    </div>
+  </td>
+</tr>
+
+<tr class="menu-expand-show">
+  <td class="documents-table__title">
+    <div class="documents-table__title-menu menu">
+      <div class="icon__arrow-expand qt-sz-12 qt-bg-contain"></div>
+      <div class="icon__folder qt-sz-16 qt-bg-contain qt-mr-8 qt-ml-6"></div>
+      <div class="title">Guideline Document</div>
+    </div>
+    <div class="menu-expand">
+      <div class="documents-table__title-menu menu-expand__item">
+        <div class="icon__documents qt-sz-16 qt-bg-contain qt-mr-8"></div>
+        <div class="title">Printer Installation Guide</div>
+      </div>
+      <div class="documents-table__title-menu menu-expand__item">
+        <div class="icon__documents qt-sz-16 qt-bg-contain qt-mr-8"></div>
+        <div class="title">Printer Installation Guide</div>
+      </div>
+    </div>
+  </td>
+  <td class="documents-table__create-by">
+    <div class="menu">
+      Alma Romero
+    </div>
+    <div class="menu-expand">
+      <div class="menu-expand__item">
+        Ricky Hernandez
+      </div>
+      <div class="menu-expand__item">
+        Jerry Matthews
+      </div>
+    </div>
+  </td>
+  <td class="documents-table__created-date">
+    <div class="menu">
+      12 Feb 2021
+    </div>
+    <div class="menu-expand">
+      <div class="menu-expand__item">
+        02 Aug 2021
+      </div>
+      <div class="menu-expand__item">
+        22 Jan 2021
+      </div>
+    </div>
+  </td>
+  <td class="documents-table__review-date">
+    <div class="menu">
+      22 Dec 2021
+    </div>
+    <div class="menu-expand">
+      <div class="menu-expand__item">
+        24 Apr 2021
+      </div>
+      <div class="menu-expand__item">
+        04 Jan 2021
+      </div>
+    </div>
+  </td>
+  <td class="documents-table__company">
+    <div class="menu">
+      LifePath Inveremere
+    </div>
+    <div class="menu-expand">
+      <div class="menu-expand__item">
+        Dental One
+      </div>
+      <div class="menu-expand__item">
+        LifePath Inveremere
+      </div>
+    </div>
+  </td>
+  <td class="documents-table__shared">
+    <div class="menu"></div>
+    <div class="menu-expand">
+      <div class="menu-expand__item">
+        <div class="icon__shared qt-sz-16 qt-bg-contain "></div>
+      </div>
+      <div class="menu-expand__item"></div>
+    </div>
+  </td>
+  <td class="documents-table__menu">
+      <div
+          ngbDropdown
+          [container]="'body'"
+          [placement]="'bottom-right'"
+          class="menu"
+      >
+          <div
+              class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"
+              id="dropdownBasic1"
+              ngbDropdownToggle
+          ></div>
+          <ul
+              class="qt-dropdown-menu"
+              ngbDropdownMenu
+              aria-labelledby="dropdownBasic1"
+          >
+              <li
+                  class="pointer"
+                  ngbDropdownItem
+              >
+                  <div class="icon__remove qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                  Remove
+              </li>
+          </ul>
+      </div>
+      <div class="menu-expand">
+        <div class="menu-expand__item"></div>
+        <div class="menu-expand__item"></div>
+      </div>
+  </td>
+</tr>
+
 <tr>
-    <td class="password-table__check">
-        <p
-            class="category"
-            [textContent]="item.name"
-        ></p>
-        <ng-template
-            ngFor
-            let-document
-            [ngForOf]="item.list"
-            [ngForTrackBy]="trackById"
+  <td class="documents-table__title">
+    <div class="documents-table__title-menu menu">
+      <div class="icon__documents qt-sz-16 qt-bg-contain qt-mr-8 qt-ml-16"></div>
+      <div class="title">Guideline Document</div>
+    </div>
+  </td>
+  <td class="documents-table__create-by">
+    <div class="menu">
+      Alma Romero
+    </div>
+  </td>
+  <td class="documents-table__created-date">
+    <div class="menu">
+      12 Feb 2021
+    </div>
+  </td>
+  <td class="documents-table__review-date">
+    <div class="menu">
+      22 Dec 2021
+    </div>
+  </td>
+  <td class="documents-table__company">
+    <div class="menu">
+      LifePath Inveremere
+    </div>
+  </td>
+  <td class="documents-table__shared">
+    <div class="menu">
+      <div class="icon__shared qt-sz-16 qt-bg-contain "></div>
+    </div>
+  </td>
+  <td class="documents-table__menu">
+    <div
+      ngbDropdown
+      [container]="'body'"
+      [placement]="'bottom-right'"
+      class="menu"
+    >
+      <div
+        class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"
+        ngbDropdownToggle
+      ></div>
+      <ul
+        class="qt-dropdown-menu"
+        ngbDropdownMenu
+        aria-labelledby="dropdownBasic1"
+      >
+        <li
+          class="pointer"
+          ngbDropdownItem
         >
-            <p [textContent]="document.title"></p>
-        </ng-template>
-    </td>
-    <td>
-        <p [textContent]="getCreateByForCategory(item.list)"></p>
-        <ng-template
-            ngFor
-            let-document
-            [ngForOf]="item.list"
-            [ngForTrackBy]="trackById"
+          <div class="icon__remove qt-sz-16 qt-bg-contain qt-mr-8"></div>
+          Remove
+        </li>
+      </ul>
+    </div>
+  </td>
+</tr>
+
+<tr>
+  <td class="documents-table__title">
+    <div class="documents-table__title-menu menu">
+      <div class="icon__documents qt-sz-16 qt-bg-contain qt-mr-8 qt-ml-16"></div>
+      <div class="title">Guideline Document</div>
+    </div>
+  </td>
+  <td class="documents-table__create-by">
+    <div class="menu">
+      Alma Romero
+    </div>
+  </td>
+  <td class="documents-table__created-date">
+    <div class="menu">
+      12 Feb 2021
+    </div>
+  </td>
+  <td class="documents-table__review-date">
+    <div class="menu">
+      22 Dec 2021
+    </div>
+  </td>
+  <td class="documents-table__company">
+    <div class="menu">
+      LifePath Inveremere
+    </div>
+  </td>
+  <td class="documents-table__shared">
+    <div class="menu">
+      <div class="icon__shared qt-sz-16 qt-bg-contain "></div>
+    </div>
+  </td>
+  <td class="documents-table__menu">
+    <div
+      ngbDropdown
+      [container]="'body'"
+      [placement]="'bottom-right'"
+      class="menu"
+    >
+      <div
+        class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"
+        ngbDropdownToggle
+      ></div>
+      <ul
+        class="qt-dropdown-menu"
+        ngbDropdownMenu
+        aria-labelledby="dropdownBasic1"
+      >
+        <li
+          class="pointer"
+          ngbDropdownItem
         >
-            <p [textContent]="getCreateBy(document.createdBy)"></p>
-        </ng-template>
-    </td>
-    <td>
-        <p [textContent]="parseUpdateAtForCategory(item.list)"></p>
-        <ng-template
-            ngFor
-            let-document
-            [ngForOf]="item.list"
-            [ngForTrackBy]="trackById"
-        >
-            <p [textContent]="parseUpdateAt(document.updatedAt)"></p>
-        </ng-template>
-    </td>
-    <td [textContent]="'-'"></td>
-    <td class="password-table__menu">
-        <!-- <div class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"></div> -->
-        <div
-            ngbDropdown
-            [container]="'body'"
-            [placement]="'bottom-right'"
-        >
-            <div
-                class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"
-                id="dropdownBasic1"
-                ngbDropdownToggle
-            ></div>
-            <ul
-                class="qt-dropdown-menu"
-                ngbDropdownMenu
-                aria-labelledby="dropdownBasic1"
-            >
-                <li
-                    class="pointer"
-                    (click)="deleteRecord()"
-                    ngbDropdownItem
-                >
-                    <div class="icon__remove qt-sz-16 qt-bg-contain qt-mr-8"></div>
-                    Remove
-                </li>
-            </ul>
-        </div>
-    </td>
+          <div class="icon__remove qt-sz-16 qt-bg-contain qt-mr-8"></div>
+          Remove
+        </li>
+      </ul>
+    </div>
+  </td>
 </tr>

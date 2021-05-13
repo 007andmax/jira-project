@@ -69,38 +69,74 @@
 
 
 
-    <div class="qt-page-list__header-thead-container">
-        <table class="qt-table-modern qt-page-list__header-thead">
-            <thead>
-                <tr>
-                    <th
-                        class="quotes-table__date pointer"
-                        (click)="sortBy('date')"
-                    >
-                        Title
-                        <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
-                        class="quotes-table__number"
-                        (click)="sortBy('number')"
-                    >
-                        Create By
-                        <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th
-                        class="quotes-table__company pointer"
-                        (click)="sortBy('customerName')"
-                    >
-                        Updated
-                        <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th class="quotes-table__description pointer">
-                        shared with
-                        <span class="qt-table-modern__sorting"></span>
-                    </th>
-                    <th class="quotes-table__description pointer"></th>
-                </tr>
-            </thead>
-        </table>
-    </div>
+<!--    <div class="qt-page-list__header-thead-container">-->
+<!--        <table class="qt-table-modern qt-page-list__header-thead">-->
+<!--            <thead>-->
+<!--                <tr>-->
+<!--                    <th-->
+<!--                        class="quotes-table__date pointer"-->
+<!--                        (click)="sortBy('date')"-->
+<!--                    >-->
+<!--                        Title-->
+<!--                        <span class="qt-table-modern__sorting"></span>-->
+<!--                    </th>-->
+<!--                    <th-->
+<!--                        class="quotes-table__number"-->
+<!--                        (click)="sortBy('number')"-->
+<!--                    >-->
+<!--                        Create By-->
+<!--                        <span class="qt-table-modern__sorting"></span>-->
+<!--                    </th>-->
+<!--                    <th-->
+<!--                        class="quotes-table__company pointer"-->
+<!--                        (click)="sortBy('customerName')"-->
+<!--                    >-->
+<!--                        Updated-->
+<!--                        <span class="qt-table-modern__sorting"></span>-->
+<!--                    </th>-->
+<!--                    <th class="quotes-table__description pointer">-->
+<!--                        shared with-->
+<!--                        <span class="qt-table-modern__sorting"></span>-->
+<!--                    </th>-->
+<!--                    <th class="quotes-table__description pointer"></th>-->
+<!--                </tr>-->
+<!--            </thead>-->
+<!--        </table>-->
+<!--    </div>-->
+  <div class="qt-page-list__header-thead-container">
+    <table class="qt-table-modern qt-page-list__header-thead">
+      <thead>
+      <tr>
+        <th
+          class="documents-table__title pointer"
+        >
+          Title
+          <span class="qt-table-modern__sorting"></span>
+        </th>
+        <th
+          class="documents-table__create-by"
+        >
+          Create By
+          <span class="qt-table-modern__sorting"></span>
+        </th>
+        <th
+          class="documents-table__created-date pointer"
+        >
+          Created Date
+          <span class="qt-table-modern__sorting"></span>
+        </th>
+        <th class="documents-table__review-date pointer">
+          Review Date
+          <span class="qt-table-modern__sorting"></span>
+        </th>
+        <th class="documents-table__company pointer">
+          Company
+          <span class="qt-table-modern__sorting"></span>
+        </th>
+        <th class="documents-table__shared pointer"></th>
+        <th class="documents-table__menu pointer"></th>
+      </tr>
+      </thead>
+    </table>
+  </div>
 </div>

@@ -278,11 +278,23 @@
   &__hide {
     background-image: url("/assets/img/icons/hide.svg");
   }
+  &__documents {
+    background-image: url("/assets/img/icons/documents.svg");
+  }
+  &__folder {
+    background-image: url("/assets/img/icons/folder.svg");
+  }
+  &__arrow-expand {
+    background-image: url("/assets/img/icons/arrow-expand.svg");
+  }
   &__calendar {
     background-image: url("/assets/img/icons/calander.svg");
   }
   &__user-grey {
     background-image: url("/assets/img/icons/user-grey.svg");
+  }
+  &__shared {
+    background-image: url("/assets/img/icons/shared.svg");
   }
   &__payment-received {
     background-image: url("/assets/img/icons/payment-received.svg");
