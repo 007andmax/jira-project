@@ -1,38 +1,5 @@
 .documents-page {
   .documents-table {
-    .menu {
-      height: 30px;
-      display: flex;
-      align-items: center;
-    }
-    .menu-expand {
-      margin-top: 8px;
-      opacity: 0;
-      overflow: hidden;
-      max-height: 0;
-
-      &__item {
-        height: 40px;
-        display: flex;
-        align-items: center;
-      }
-    }
-    tr td {
-      padding: 8px;
-    }
-    tr {
-      &.menu-expand-show .menu-expand {
-        animation-name: showExpandTableMenu;
-        animation-duration: 0.5s;
-        animation-fill-mode: forwards;
-      }
-      &.menu-expand-hide .menu-expand {
-        margin-top: 0;
-        animation-name: hideExpandTableMenu;
-        animation-duration: 0.2s;
-        animation-fill-mode: forwards;
-      }
-    }
     &__created-title {
       //width: -webkit-max-content;
       //width: -moz-max-content;
@@ -56,9 +23,9 @@
       min-width: 110px;
     }
     &__company {
-      width: 340px;
-      max-width: 340px;
-      min-width: 340px;
+      width: 290px;
+      max-width: 290px;
+      min-width: 290px;
     }
     &__menu {
       width: 28px;
@@ -82,11 +49,7 @@
     align-items: center;
     line-height: 1;
 
-    &.menu-expand__item {
-      padding-left: 38px;
-    }
-
-    &.menu {
+    .title {
       font-family: Graphik-Medium, sans-serif;
     }
   }
@@ -95,28 +58,12 @@
   }
 }
 
-@keyframes showExpandTableMenu {
-  0% {
-    max-height: 0%;
-    opacity: 0;
-  }
-  25% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 1;
-    max-height: 100%;
-  }
-}
-@keyframes hideExpandTableMenu {
-  0% {
-    opacity: 1;
-    max-height: 100%;
-  }
-  100% {
-    height: 0;
-    max-height: 0%;
-    opacity: 0;
-  }
+.qt-dropdown-menu li.remove-item {
+  border-top: 1px solid #dfe3e8;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin-top: 8px;
+  height: 40px;
+
 }
 

@@ -284,14 +284,17 @@
   &__folder {
     background-image: url("/assets/img/icons/folder.svg");
   }
-  &__arrow-expand {
-    background-image: url("/assets/img/icons/arrow-expand.svg");
-  }
   &__calendar {
     background-image: url("/assets/img/icons/calander.svg");
   }
   &__user-grey {
     background-image: url("/assets/img/icons/user-grey.svg");
+  }
+  &__move {
+    background-image: url("/assets/img/icons/move.svg");
+  }
+  &__share-folder {
+    background-image: url("/assets/img/icons/share-folder.svg");
   }
   &__shared {
     background-image: url("/assets/img/icons/shared.svg");
@@ -420,6 +423,12 @@
   &__download-pdf {
     background-image: url("/assets/img/icons/download-pdf.svg");
   }
+  &__add-document {
+    background-image: url("/assets/img/icons/add-document.svg");
+  }
+  &__rename {
+    background-image: url("/assets/img/icons/rename.svg");
+  }
   &__payment-history {
     background-image: url("/assets/img/icons/payment_history.svg");
   }
@@ -487,6 +496,9 @@
   }
   &__search {
     background-image: url('/assets/img/icons/search.svg');
+  }
+  &__search-gray {
+    background-image: url('/assets/img/icons/search-gray.svg');
   }
   &__force-create {
     background-image: url('/assets/img/icons/force-create.svg');
@@ -632,6 +644,9 @@
   }
   &__link-gray {
     background-image: url("/assets/img/icons/link-gray.svg") ;
+  }
+  &__clone-document {
+    background-image: url("/assets/img/icons/clone-document.svg") ;
   }
   &__new-ticket-support {
     background-image: url("/assets/img/icons/new-ticket-support.svg") ;
