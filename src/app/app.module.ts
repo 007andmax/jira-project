@@ -436,6 +436,7 @@ import { DocumentsAddEditCategoriesComponent } from './components/documents/docu
 import { DocumentsTableComponent } from './components/documents/documents-table/documents-table.component';
 import { DocumentsHeaderComponent } from './components/documents/documents-header/documents-header.component';
 import { DocumentsFilterComponent } from './components/documents/documents-header/documents-filter/documents-filter.component';
+import { DocumentsCategoryComponent } from './components/documents/documents-category/documents-category.component';
 declare var $: any;
 /**
  * This module represents the main application module
@@ -823,7 +824,8 @@ declare var $: any;
     DocumentsAddEditCategoriesComponent,
     DocumentsTableComponent,
     DocumentsHeaderComponent,
-    DocumentsFilterComponent
+    DocumentsFilterComponent,
+    DocumentsCategoryComponent
   ],
   imports: [
     BrowserModule,

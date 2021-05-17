@@ -54,6 +54,7 @@ import { CompanyDevicesComponent } from './components/company-devices/company-de
 import { SupportComponent } from './components/support/support.component';
 import { DocumentsComponent } from './components/documents/documents.component';
 import { DocumentsAddComponent } from './components/documents/documents-add/documents-add.component';
+import { DocumentsCategoryComponent } from './components/documents/documents-category/documents-category.component';
 
 const routes: Routes = [
   {
@@ -188,6 +189,11 @@ const routes: Routes = [
   {
     path: 'ng2/documents/add',
     component: DocumentsAddComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'ng2/documents/category/:id',
+    component: DocumentsCategoryComponent,
     pathMatch: 'full'
   },
   {

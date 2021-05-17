@@ -1,248 +1,234 @@
-<!--<tr>-->
-<!--    <td class="password-table__check">-->
-<!--        <p-->
-<!--            class="category"-->
-<!--            [textContent]="item.name"-->
-<!--        ></p>-->
-<!--        <ng-template-->
-<!--            ngFor-->
-<!--            let-document-->
-<!--            [ngForOf]="item.list"-->
-<!--            [ngForTrackBy]="trackById"-->
-<!--        >-->
-<!--            <p [textContent]="document.title"></p>-->
-<!--        </ng-template>-->
-<!--    </td>-->
-<!--    <td>-->
-<!--        <p [textContent]="getCreateByForCategory(item.list)"></p>-->
-<!--        <ng-template-->
-<!--            ngFor-->
-<!--            let-document-->
-<!--            [ngForOf]="item.list"-->
-<!--            [ngForTrackBy]="trackById"-->
-<!--        >-->
-<!--            <p [textContent]="getCreateBy(document.createdBy)"></p>-->
-<!--        </ng-template>-->
-<!--    </td>-->
-<!--    <td>-->
-<!--        <p [textContent]="parseUpdateAtForCategory(item.list)"></p>-->
-<!--        <ng-template-->
-<!--            ngFor-->
-<!--            let-document-->
-<!--            [ngForOf]="item.list"-->
-<!--            [ngForTrackBy]="trackById"-->
-<!--        >-->
-<!--            <p [textContent]="parseUpdateAt(document.updatedAt)"></p>-->
-<!--        </ng-template>-->
-<!--    </td>-->
-<!--    <td [textContent]="'-'"></td>-->
-<!--    <td class="password-table__menu">-->
-<!--        &lt;!&ndash; <div class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"></div> &ndash;&gt;-->
-<!--        <div-->
-<!--            ngbDropdown-->
-<!--            [container]="'body'"-->
-<!--            [placement]="'bottom-right'"-->
-<!--        >-->
-<!--            <div-->
-<!--                class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"-->
-<!--                id="dropdownBasic1"-->
-<!--                ngbDropdownToggle-->
-<!--            ></div>-->
-<!--            <ul-->
-<!--                class="qt-dropdown-menu"-->
-<!--                ngbDropdownMenu-->
-<!--                aria-labelledby="dropdownBasic1"-->
-<!--            >-->
-<!--                <li-->
-<!--                    class="pointer"-->
-<!--                    (click)="deleteRecord()"-->
-<!--                    ngbDropdownItem-->
-<!--                >-->
-<!--                    <div class="icon__remove qt-sz-16 qt-bg-contain qt-mr-8"></div>-->
-<!--                    Remove-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--        </div>-->
-<!--    </td>-->
-<!--</tr>-->
+<!-- <tr> -->
+<!-- <td class="password-table__check"> -->
+<!-- <p -->
+<!-- class="category" -->
+<!-- [textContent]="item.name" -->
+<!-- ></p> -->
+<!-- <ng-template -->
+<!-- ngFor -->
+<!-- let-document -->
+<!-- [ngForOf]="item.list" -->
+<!-- [ngForTrackBy]="trackById" -->
+<!-- > -->
+<!-- <p [textContent]="document.title"></p> -->
+<!-- </ng-template> -->
+<!-- </td> -->
+<!-- <td> -->
+<!-- <p [textContent]="getCreateByForCategory(item.list)"></p> -->
+<!-- <ng-template -->
+<!-- ngFor -->
+<!-- let-document -->
+<!-- [ngForOf]="item.list" -->
+<!-- [ngForTrackBy]="trackById" -->
+<!-- > -->
+<!-- <p [textContent]="getCreateBy(document.createdBy)"></p> -->
+<!-- </ng-template> -->
+<!-- </td> -->
+<!-- <td> -->
+<!-- <p [textContent]="parseUpdateAtForCategory(item.list)"></p> -->
+<!-- <ng-template -->
+<!-- ngFor -->
+<!-- let-document -->
+<!-- [ngForOf]="item.list" -->
+<!-- [ngForTrackBy]="trackById" -->
+<!-- > -->
+<!-- <p [textContent]="parseUpdateAt(document.updatedAt)"></p> -->
+<!-- </ng-template> -->
+<!-- </td> -->
+<!-- <td [textContent]="'-'"></td> -->
+<!-- <td class="password-table__menu"> -->
+<!-- &lt;!&ndash; <div class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"></div> &ndash;&gt; -->
+<!-- <div -->
+<!-- ngbDropdown -->
+<!-- [container]="'body'" -->
+<!-- [placement]="'bottom-right'" -->
+<!-- > -->
+<!-- <div -->
+<!-- class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain" -->
+<!-- id="dropdownBasic1" -->
+<!-- ngbDropdownToggle -->
+<!-- ></div> -->
+<!-- <ul -->
+<!-- class="qt-dropdown-menu" -->
+<!-- ngbDropdownMenu -->
+<!-- aria-labelledby="dropdownBasic1" -->
+<!-- > -->
+<!-- <li -->
+<!-- class="pointer" -->
+<!-- (click)="deleteRecord()" -->
+<!-- ngbDropdownItem -->
+<!-- > -->
+<!-- <div class="icon__remove qt-sz-16 qt-bg-contain qt-mr-8"></div> -->
+<!-- Remove -->
+<!-- </li> -->
+<!-- </ul> -->
+<!-- </div> -->
+<!-- </td> -->
+<!-- </tr> -->
+
 
 <tr>
-  <td class="documents-table__title">
-    <div class="documents-table__title-menu">
-      <div class="icon__folder qt-sz-16 qt-bg-contain qt-mr-8"></div>
-      <div class="title ellipsis">Guideline Document</div>
-    </div>
-  </td>
-  <td class="documents-table__create-by ellipsis">
-      Alma Romero
-  </td>
-  <td class="documents-table__created-date ellipsis">
-      12 Feb 2021
-  </td>
-  <td class="documents-table__review-date ellipsis">
-      22 Dec 2021
-  </td>
-  <td class="documents-table__company ellipsis">
-      LifePath Inveremere
-  </td>
-  <td class="documents-table__shared">
-    <div></div>
-  </td>
-  <td class="documents-table__menu">
-      <div
-          ngbDropdown
-          [container]="'body'"
-          [placement]="'bottom-right'"
-      >
-          <div
-              class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"
-              id="dropdownBasic1"
-              ngbDropdownToggle
-          ></div>
-          <ul
-              class="qt-dropdown-menu"
-              ngbDropdownMenu
-              aria-labelledby="dropdownBasic1"
-          >
-              <li
-                  class="pointer"
-                  ngbDropdownItem
-              >
-                <div class="icon__add-document qt-sz-16 qt-bg-contain qt-mr-8"></div>
-                Add New Document
-              </li>
-            <li
-              class="pointer"
-              ngbDropdownItem
+    <td class="documents-table__title">
+        <div class="documents-table__title-menu">
+            <div class="icon__folder qt-sz-16 qt-bg-contain qt-mr-8"></div>
+            <div class="title ellipsis">Guideline Document</div>
+        </div>
+    </td>
+    <td class="documents-table__create-by ellipsis">Alma Romero</td>
+    <td class="documents-table__created-date ellipsis">12 Feb 2021</td>
+    <td class="documents-table__review-date ellipsis">22 Dec 2021</td>
+    <td class="documents-table__company ellipsis">LifePath Inveremere</td>
+    <td class="documents-table__shared">
+        <div></div>
+    </td>
+    <td class="documents-table__menu">
+        <div
+            ngbDropdown
+            [container]="'body'"
+            [placement]="'bottom-right'"
+        >
+            <div
+                class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"
+                id="dropdownBasic1"
+                ngbDropdownToggle
+            ></div>
+            <ul
+                class="qt-dropdown-menu"
+                ngbDropdownMenu
+                aria-labelledby="dropdownBasic1"
             >
-              <div class="icon__share-folder qt-sz-16 qt-bg-contain qt-mr-8"></div>
-              Share Folder
-            </li>
-            <li
-              class="pointer"
-              ngbDropdownItem
-            >
-              <div class="icon__rename qt-sz-16 qt-bg-contain qt-mr-8"></div>
-              Rename Folder
-            </li>
-            <li
-              class="pointer"
-              ngbDropdownItem
-            >
-              <div class="icon__remove qt-sz-16 qt-bg-contain qt-mr-8"></div>
-              Delete Folder
-            </li>
-          </ul>
-      </div>
-  </td>
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                >
+                    <div class="icon__add-document qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    Add New Document
+                </li>
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                >
+                    <div class="icon__share-folder qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    Share Folder
+                </li>
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                >
+                    <div class="icon__rename qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    Rename Folder
+                </li>
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                >
+                    <div class="icon__remove qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    Delete Folder
+                </li>
+            </ul>
+        </div>
+    </td>
 </tr>
 
 
+
 <tr>
-  <td class="documents-table__title">
-    <div class="documents-table__title-menu menu">
-      <div class="icon__documents qt-sz-16 qt-bg-contain qt-mr-8"></div>
-      <div class="title ellipsis">Guideline Document</div>
-    </div>
-  </td>
-  <td class="documents-table__create-by ellipsis">
-      Alma Romero
-  </td>
-  <td class="documents-table__created-date ellipsis">
-      12 Feb 2021
-  </td>
-  <td class="documents-table__review-date ellipsis">
-      22 Dec 2021
-  </td>
-  <td class="documents-table__company ellipsis">
-      LifePath Inveremere
-  </td>
-  <td class="documents-table__shared">
-    <div>
-      <div class="icon__shared qt-sz-16 qt-bg-contain "></div>
-    </div>
-  </td>
-  <td class="documents-table__menu">
-    <div
-      ngbDropdown
-      [container]="'body'"
-      [placement]="'bottom-right'"
-      class="menu"
-    >
-      <div
-        class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"
-        ngbDropdownToggle
-      ></div>
-      <ul
-        class="qt-dropdown-menu"
-        ngbDropdownMenu
-        aria-labelledby="dropdownBasic1"
-      >
-        <li
-          class="pointer"
-          ngbDropdownItem
+    <td class="documents-table__title">
+        <div class="documents-table__title-menu menu">
+            <div class="icon__documents qt-sz-16 qt-bg-contain qt-mr-8"></div>
+            <div class="title ellipsis">Guideline Document</div>
+        </div>
+    </td>
+    <td class="documents-table__create-by ellipsis">Alma Romero</td>
+    <td class="documents-table__created-date ellipsis">12 Feb 2021</td>
+    <td class="documents-table__review-date ellipsis">22 Dec 2021</td>
+    <td class="documents-table__company ellipsis">LifePath Inveremere</td>
+    <td class="documents-table__shared">
+        <div>
+            <div class="icon__shared qt-sz-16 qt-bg-contain "></div>
+        </div>
+    </td>
+    <td class="documents-table__menu">
+        <div
+            ngbDropdown
+            [container]="'body'"
+            [placement]="'bottom-right'"
+            class="menu"
         >
-          <div class="icon__share-folder qt-sz-16 qt-bg-contain qt-mr-8"></div>
-          Share...
-        </li>
-        <li
-          class="pointer"
-          ngbDropdownItem
-        >
-          <div class="icon__move qt-sz-16 qt-bg-contain qt-mr-8"></div>
-          Move...
-        </li>
-        <li
-          class="pointer"
-          ngbDropdownItem
-        >
-          <div class="icon__copy-gray qt-sz-16 qt-bg-contain qt-mr-8"></div>
-          Copy to…
-        </li>
-        <li
-          class="pointer"
-          ngbDropdownItem
-        >
-          <div class="icon__clone-document qt-sz-16 qt-bg-contain qt-mr-8"></div>
-          Clone Document
-        </li>
-        <li
-          class="pointer"
-          ngbDropdownItem
-        >
-          <div class="icon__search-gray qt-sz-16 qt-bg-contain qt-mr-8"></div>
-          Find within document
-        </li>
-        <li
-          class="pointer"
-          ngbDropdownItem
-        >
-          <div class="icon__link-gray qt-sz-16 qt-bg-contain qt-mr-8"></div>
-          Copy Internal Link
-        </li>
-        <li
-          class="pointer"
-          ngbDropdownItem
-        >
-          <div class="icon__print qt-sz-16 qt-bg-contain qt-mr-8"></div>
-          Print
-        </li>
-        <li
-          class="pointer"
-          ngbDropdownItem
-        >
-          <div class="icon__download-pdf qt-sz-16 qt-bg-contain qt-mr-8"></div>
-          Export PDF
-        </li>
-        <li
-          class="pointer"
-          ngbDropdownItem
-          class="remove-item"
-        >
-          <div class="icon__remove qt-sz-16 qt-bg-contain qt-mr-8"></div>
-          Move to Trash
-        </li>
-      </ul>
-    </div>
-  </td>
+            <div
+                class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"
+                ngbDropdownToggle
+            ></div>
+            <ul
+                class="qt-dropdown-menu"
+                ngbDropdownMenu
+                aria-labelledby="dropdownBasic1"
+            >
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                >
+                    <div class="icon__share-folder qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    Share...
+                </li>
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                >
+                    <div class="icon__move qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    Move...
+                </li>
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                >
+                    <div class="icon__copy-gray qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    Copy to…
+                </li>
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                >
+                    <div class="icon__clone-document qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    Clone Document
+                </li>
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                >
+                    <div class="icon__search-gray qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    Find within document
+                </li>
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                >
+                    <div class="icon__link-gray qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    Copy Internal Link
+                </li>
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                >
+                    <div class="icon__print qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    Print
+                </li>
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                >
+                    <div class="icon__download-pdf qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    Export PDF
+                </li>
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                    class="remove-item"
+                >
+                    <div class="icon__remove qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    Move to Trash
+                </li>
+            </ul>
+        </div>
+    </td>
 </tr>

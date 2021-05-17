@@ -19,7 +19,7 @@
   &__body {
     overflow: auto;
     height: calc(100% - 80px);
-     &::-webkit-scrollbar-thumb {
+    &::-webkit-scrollbar-thumb {
       background: transparent;
     }
     &::-webkit-scrollbar {
@@ -30,7 +30,6 @@
   &__header-logo-mini {
     display: none;
     &.--active {
-
     }
   }
 
@@ -44,7 +43,7 @@
   &__header-logo.--beta {
     &::after {
       position: absolute;
-      content: 'Beta';
+      content: "Beta";
       line-height: 1.25;
       text-transform: uppercase;
       font-size: 8px;
@@ -79,7 +78,6 @@
     height: 16px;
     background-image: url("/assets/img/icons-left-sidebar/dropdown-arrow-down.svg");
     margin-left: auto;
-
   }
 
   &__menu-title {
@@ -99,7 +97,7 @@
     height: 24px;
     margin-right: 12px;
     background-position: center;
-    opacity: .5;
+    opacity: 0.5;
 
     &.--quick-support {
       background-image: url("/assets/img/icons-left-sidebar/menu-quick-support.svg");
@@ -135,12 +133,12 @@
 
   &__submenu-icon {
     display: block;
-    width: 16px;
+    min-width: 16px;
     height: 16px;
     margin-right: 8px;
     background-position: center;
     background-size: contain;
-    opacity: .5;
+    opacity: 0.5;
     &.--folder {
       background-image: url("/assets/img/icons-left-sidebar/submenu-folder.svg");
     }
@@ -160,7 +158,7 @@
   &__menu-expand {
     list-style: none;
     padding: 0;
-     margin-bottom: 0;
+    margin-bottom: 0;
     &.top-menu {
       opacity: 0;
       overflow: hidden;
@@ -219,8 +217,6 @@
   &__menu-expand.icon-list li {
     justify-content: flex-start;
   }
-
-
 }
 
 .app-left-panel.--mini {
@@ -248,7 +244,7 @@
       width: 40px;
       height: 40px;
       margin: 0 auto;
-       padding-bottom: 4px;
+      padding-bottom: 4px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -260,7 +256,7 @@
     }
 
     &__menu-icon {
-      margin: 0
+      margin: 0;
     }
 
     &__menu-title {

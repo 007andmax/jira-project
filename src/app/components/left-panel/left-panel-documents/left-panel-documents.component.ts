@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { DocumentsService } from 'src/app/services/documents/documents.service';
+import { CategoryDocument } from './class/category-document';
 
 @Component({
   selector: 'app-left-panel-documents',
@@ -9,10 +11,13 @@ export class LeftPanelDocumentsComponent implements OnInit {
 
   @Output() onChangeState = new EventEmitter();
   @Input() activePage: string = "";
-
-  constructor() { }
+  categories: Array<CategoryDocument> = [];
+  constructor(private documentsService: DocumentsService) { }
 
   ngOnInit() {
+    this.documentsService.getCategories().subscribe((data: any) => {
+      this.categories = data.map(item => new CategoryDocument(item));
+    })
   }
 
   public goToState() {

@@ -8,11 +8,19 @@
     <div class="app-left-panel__menu-arrow"></div>
 </div>
 <ul class="app-left-panel__menu-expand icon-list top-menu menu-expand-show">
-  <li class="app-left-panel__menu-expand-item-icon">
-    <span class="app-left-panel__submenu-icon --folder"></span>
-    How it Work</li>
-  <li class="app-left-panel__menu-expand-item-icon">
-    <span class="app-left-panel__submenu-icon --add-folder"></span>
-    New Folder
-  </li>
+    <ng-template
+        ngFor
+        let-category
+        [ngForOf]="categories"
+        [ngForTrackBy]="trackById"
+    >
+        <li class="app-left-panel__menu-expand-item-icon">
+            <span class="app-left-panel__submenu-icon --folder"></span>
+            {{category.name}}
+        </li>
+    </ng-template>
+    <!-- <li class="app-left-panel__menu-expand-item-icon">
+        <span class="app-left-panel__submenu-icon --add-folder"></span>
+        New Folder
+    </li> -->
 </ul>

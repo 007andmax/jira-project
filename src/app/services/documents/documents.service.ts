@@ -24,7 +24,9 @@ export class DocumentsService {
    */
 
 
-
+  public getCategories() {
+    return this.http.get(this.apiUrl + `documents/categories`);
+  }
   public add(data) {
     return this.http.post(this.apiUrl + `documents`, data);
   }
