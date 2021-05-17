@@ -28,7 +28,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   opened = false;
   company: CompanyProfile = new CompanyProfile();
   industries: Array<string> = [];
-  selectedTechLead: string = null;
+  selectedTechLead: any = null;
   companyTypes = [new CompanySetting('Client', 'CLIENT'), new CompanySetting('Lead', 'LEAD'), new CompanySetting('Vendor', 'VENDOR')];
   phoneTypes = ['Office', 'Mobile', 'Fax'];
   paymentTerms = [new CompanySetting('COD', 0), new CompanySetting('7 days', 7), new CompanySetting('15 days', 15), new CompanySetting('30 days', 30)];
@@ -155,12 +155,13 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
       let indexServiceType = this.serviceTypes.findIndex(item => item.value === this.company.serviceType);
       if (indexServiceType > -1) this.onSelectServiceTypes(indexServiceType);
       let indexPersone = this.listPersons.findIndex(item => item.id === this.company.techLeadId);
-      if (indexPersone > -1) this.selectedTechLead = this.listPersons[indexPersone].name;
+      if (indexPersone > -1) this.selectedTechLead = this.listPersons[indexPersone];
       let indexType = this.companyTypes.findIndex(item => item.value === this.company.clientType);
       if (indexType > -1) this.onSelectCompanyTypes(indexType);
       this.tagsState.setTagsFromtEdit(this.company.tags);
       this.elRef.nativeElement.querySelector("#company-description").value = this.company.description;
       this.opened = true;
+      console.log("this.selectedTechLead", this.selectedTechLead);
       this.cd.detectChanges();
     })
     this.sub.add(getCompanyFromEdit);

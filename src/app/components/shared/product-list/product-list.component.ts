@@ -90,7 +90,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   onCreateProduct() {
     this.products_dropDown.close();
-    this.isCreateproduct = true;
+    //  this.isCreateproduct = true;
+    this.inventoryStateService.toggleAsideForAdd();
   }
 
   /**
