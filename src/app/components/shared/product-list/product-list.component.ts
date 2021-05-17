@@ -24,7 +24,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   classAddProduct: string
   public isFormValid = false;
-  isCreateproduct: boolean = false;
   search: string = '';
   resetSearch: boolean = false;
   selectedItem = false;
@@ -90,7 +89,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   onCreateProduct() {
     this.products_dropDown.close();
-    //  this.isCreateproduct = true;
     this.inventoryStateService.toggleAsideForAdd();
   }
 

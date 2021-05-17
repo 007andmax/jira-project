@@ -28,6 +28,7 @@ export class DashboardBillingComponent implements OnInit {
   showPreloader: boolean = true;
   isDashboardReady: boolean = false;
   isTopReady: boolean = false;
+  typeDashboard: string = "WEEKLY";
   constructor(private dashboardBillingService: DashboardBillingService,
     private reportsService: ReportsService,
     public cd: ChangeDetectorRef,
@@ -42,6 +43,7 @@ export class DashboardBillingComponent implements OnInit {
     return moment(this.accountingStartDate).format('DD MMM YYYY');
   }
   getDashboard(type) {
+    this.typeDashboard = type;
     this.dashboardBillingService.getDashboard(type).subscribe(data => {
       this.dashboard = data;
       this.contractsDashboard = new ContractsDashboard(this.dashboard.serviceAgreementCounters);
@@ -75,6 +77,7 @@ export class DashboardBillingComponent implements OnInit {
       this.topDashboard.setInvoiceAmountsStartDate(moment(this.accountingStartDate).format('YYYY/MM/DD'));
       this.topDashboard.setInvoiceAmountsEndDate(moment(new Date()).format('YYYY/MM/DD'));
       this.cd.detectChanges();
+      this.getDashboard(this.typeDashboard);
       this.getTops();
       this.invoiceRevenue.updateStartDate();
       this.invoiceRevenue.getInvoiceRevenue();

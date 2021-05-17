@@ -7,6 +7,7 @@ import { data } from 'jquery';
 import { ConstantsStateService } from 'src/app/states/constants/constants-state.service';
 import { Subscription } from 'rxjs';
 import { CompanyDevicesRemoteAccessComponent } from '../../../company-devices/company-devices-remote-access/company-devices-remote-access.component';
+import { createPopper } from '@popperjs/core';
 
 @Component({
   selector: 'app-ticket-edit-aside-devices',
@@ -63,6 +64,20 @@ export class TicketEditAsideDevicesComponent implements OnInit, OnDestroy {
     });
     let viewportOffset = input.getBoundingClientRect();
     $(dropDown).css({ top: `${viewportOffset.y}px`, left: `${viewportOffset.x - $(dropDown).height()}px`, display: 'block' });
+    /* createPopper(input, dropDown, {
+       modifiers: [
+         {
+           name: 'offset',
+           options: {
+             offset: [0, 10],
+           },
+         },
+         {
+           name: 'flip',
+           enabled: false,
+         },
+       ],
+     });*/
     this.isOpenDropDown = true;
   }
   hiddenDropDown(data) {
