@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CurrentUser } from 'src/class/current-user/current-user';
 import * as moment from "moment";
 import { Document } from '../class/document';
@@ -12,6 +12,8 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 })
 export class DocumentsTableComponent implements OnInit {
   @Input() item: Document;
+  @Output() onRemoveCategory = new EventEmitter<any>();
+  @Output() onRemoveDocument = new EventEmitter<any>();
   currentUser: CurrentUser;
   constructor(private usersStateService: UsersStateService,
     private companiesStateService: CompaniesStateService) { }
@@ -41,7 +43,12 @@ export class DocumentsTableComponent implements OnInit {
     let listCompanies = this.item.linked.companies.map(item => this.companiesStateService.getCompanies().find(company => company.id === item));
     return listCompanies.map(item => item.name).join(",");
   }
-
+  removeCategory() {
+    this.onRemoveCategory.emit(this.item);
+  }
+  removeDocument() {
+    this.onRemoveDocument.emit(this.item);
+  }
   /* getSharedWith() {
      if (this.item.list.length === 1 && this.item.list[0].createdBy.id === this.currentUser.id) return "Only you";
      if (this.item.list.length >= 1) return this.item.list.length;

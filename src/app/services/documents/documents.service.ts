@@ -22,7 +22,12 @@ export class DocumentsService {
    * Get devices from company
    * @param companyId - id of company
    */
-
+  public removeDocument(id) {
+    return this.http.delete(this.apiUrl + `documents/${id}`);
+  }
+  public removeCategories(id) {
+    return this.http.delete(this.apiUrl + `documents/categories/${id}`);
+  }
   public addCategories(name) {
     return this.http.post(this.apiUrl + `documents/categories`, { name: name });
   }

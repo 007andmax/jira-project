@@ -11,7 +11,9 @@
                         [ngForTrackBy]="trackById"
                     >
                         <documents-table
-                          [item]="item"
+                            [item]="item"
+                            (onRemoveCategory)="onRemoveCategory($event)"
+                            (onRemoveDocument)="onRemoveDocument($event)"
                         >
                         </documents-table>
                     </ng-template>

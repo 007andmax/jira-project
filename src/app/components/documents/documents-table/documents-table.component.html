@@ -78,6 +78,9 @@
 
 
 
+
+
+
 <tr>
     <td class="documents-table__title">
         <div class="documents-table__title-menu">
@@ -152,6 +155,7 @@
                 <li
                     class="pointer"
                     ngbDropdownItem
+                    (click)="removeCategory()"
                 >
                     <div class="icon__remove qt-sz-16 qt-bg-contain qt-mr-8"></div>
                     Delete Folder
@@ -223,6 +227,7 @@
                     class="pointer"
                     ngbDropdownItem
                     class="remove-item"
+                    (click)="removeDocument()"
                 >
                     <div class="icon__remove qt-sz-16 qt-bg-contain qt-mr-8"></div>
                     Move to Trash
@@ -231,6 +236,9 @@
         </div>
     </td>
 </tr>
+
+
+
 
 
 
