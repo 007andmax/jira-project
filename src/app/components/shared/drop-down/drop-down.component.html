@@ -15,62 +15,64 @@
         [textContent]="errorMessage"
     >
     </mat-error>
-    <input
-        type="text"
-        [ngStyle]="{'width': '100%', 'height': heightInput ? heightInput : '40px' }"
-        [ngClass]="{'disabled': isDisabled, '--input-error' : !validate}"
-        [disabled]="isDisabled"
-        [value]="getSelectedItemText()"
-        autocomplete="new-password"
-        [placeholder]="placeholder"
-        id="dropdown1"
-        [attr.maxlength]="maxlength"
-        (input)="onCheckAdd($event)"
-        [readonly]="!change"
-        ngbDropdownToggle
-    >
-    <span
-        class="app-drop-down__right-icon pointer"
-        *ngIf="list && !isDisabled"
-        [ngStyle]="{'bottom': heightInput ? dividePosition(heightInput) : '20px' }"
-    >
-        <i
-            *ngIf="selectedItem && !isAdd && !isBlockClear"
-            class="icn-sm icn-remove-old"
-            (click)="clearClient()"
-        ></i>
-        <i
-            *ngIf="(!selectedItem || isBlockClear) && !isAdd && !preloader"
-            class="icn-sm report-caret-icon"
-        ></i>
-        <i
-            *ngIf="isAdd"
-            (click)="addItem()"
-            class="icn-sm icn-product-save"
-        ></i>
-    </span>
-    <i
-        class="loading xs"
-        *ngIf="preloader"
-    ></i>
-    <div
-        ngbDropdownMenu
-        [ngStyle]="{'width': dropdownWidth ? dropdownWidth : '100%', 'max-height': dropdownHeight ? dropdownHeight : '175px'}"
-        aria-labelledby="dropdown1"
-        class="app-drop-down__dropdown"
-    >
-        <ng-template
-            ngFor
-            let-item
-            [ngForOf]="list"
-            let-i="index"
+    <form>
+        <input
+            type="text"
+            [ngStyle]="{'width': '100%', 'height': heightInput ? heightInput : '40px' }"
+            [ngClass]="{'disabled': isDisabled, '--input-error' : !validate}"
+            [disabled]="isDisabled"
+            [value]="getSelectedItemText()"
+            autocomplete="new-password"
+            [placeholder]="placeholder"
+            id="dropdown1"
+            [attr.maxlength]="maxlength"
+            (input)="onCheckAdd($event)"
+            [readonly]="!change"
+            ngbDropdownToggle
         >
-            <button
-                ngbDropdownItem
-                [textContent]="reduceItemName(item)"
-                (click)="onSelect(item)"
-                [title]="reduceItemName(item)"
-            ></button>
-        </ng-template>
-    </div>
+        <span
+            class="app-drop-down__right-icon pointer"
+            *ngIf="list && !isDisabled"
+            [ngStyle]="{'bottom': heightInput ? dividePosition(heightInput) : '20px' }"
+        >
+            <i
+                *ngIf="selectedItem && !isAdd && !isBlockClear"
+                class="icn-sm icn-remove-old"
+                (click)="clearClient()"
+            ></i>
+            <i
+                *ngIf="(!selectedItem || isBlockClear) && !isAdd && !preloader"
+                class="icn-sm report-caret-icon"
+            ></i>
+            <i
+                *ngIf="isAdd"
+                (click)="addItem()"
+                class="icn-sm icn-product-save"
+            ></i>
+        </span>
+        <i
+            class="loading xs"
+            *ngIf="preloader"
+        ></i>
+        <div
+            ngbDropdownMenu
+            [ngStyle]="{'width': dropdownWidth ? dropdownWidth : '100%', 'max-height': dropdownHeight ? dropdownHeight : '175px'}"
+            aria-labelledby="dropdown1"
+            class="app-drop-down__dropdown"
+        >
+            <ng-template
+                ngFor
+                let-item
+                [ngForOf]="list"
+                let-i="index"
+            >
+                <button
+                    ngbDropdownItem
+                    [textContent]="reduceItemName(item)"
+                    (click)="onSelect(item)"
+                    [title]="reduceItemName(item)"
+                ></button>
+            </ng-template>
+        </div>
+    </form>
 </div>

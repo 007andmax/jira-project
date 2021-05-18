@@ -1,60 +1,118 @@
 <div class="devices-aside">
-  <div class="devices-aside__title" [textContent]="'Devices (' + devices.length +')'">
-  </div>
-
-  <div class="devices-aside__search">
-    <span  class="qt-input-search devices-aside__search-devices --dark">
-      <input  class="qt-input-search" placeholder="Search Device…" title="Search device" type="text" (input)="onSearch($event)">
-    </span>
-  </div>
-
-  <div class="devices-aside__device-list">
-    <ng-template ngFor let-device [ngForOf]="devices" [ngForTrackBy]="trackById" let-i="index">
-
-      <div class="devices-aside__device" [ngClass]="{'--online': device.online,
+    <div
+        class="devices-aside__title"
+        [textContent]="'Devices (' + devices.length +')'"
+    >
+    </div>
+    <div class="devices-aside__search">
+        <span class="qt-input-search devices-aside__search-devices --dark">
+            <input
+                class="qt-input-search"
+                placeholder="Search Device…"
+                title="Search device"
+                type="text"
+                (input)="onSearch($event)"
+            >
+        </span>
+    </div>
+    <div class="devices-aside__device-list">
+        <ng-template
+            ngFor
+            let-device
+            [ngForOf]="devices"
+            [ngForTrackBy]="trackById"
+            let-i="index"
+        >
+            <div
+                class="devices-aside__device"
+                [ngClass]="{'--online': device.online,
        '--desktop' : device.type === 'workstation',
        '--server' : device.type === 'server',
        '--tables' : device.type === 'tablet',
-       '--printer' : device.type === 'printer'}"   ngbDropdown   >
-      <div [ngClass]="'devices-aside__device-' + i">
-        <div class="devices-aside__device-name" [textContent]="(device.hostName.length > 0) ? device.hostName  :  'Name is not defined'"></div>
-        <div class="devices-aside__device-owner" [textContent]="device.userName"></div>
-        <div class="devices-aside__device-menu" id="dropdownForm1" (click)="onOpenDropDown(input,bodyDropDown)"  #input>
-        </div>
-
-        <div ngbDropdownMenu class="dropdown-menu-qt" aria-labelledby="dropdownForm1"  #bodyDropDown appClickOtside [init]="true" [class]="'.devices-aside__device-' + i" (onOutSide)="hiddenDropDown(bodyDropDown)">
-          <ul>
-            <li (click)="showRemoteAccess = !showRemoteAccess ">
-              <span class="dropdown-menu-qt__item-icon icon__remote-access"></span>Remote Access
-              <ul class="dropdown-menu-qt__submenu dropdown-menu" *ngIf="showRemoteAccess">
-                <li ngbDropdownItem (click)="remoteAccess('CSS', device)">Custom Share Screen</li>
-                <li ngbDropdownItem (click)="remoteAccess('RDP', device)">Remote desktop protocol</li>
-              </ul>
-            </li>
-
-
-
-            <li ngbDropdownItem (click)="restart(device)">
-              <span class="dropdown-menu-qt__item-icon icon__restart"></span>Restart
-            </li>
-
-            <li ngbDropdownItem (click)="shutdown(device)">
-              <span class="dropdown-menu-qt__item-icon icon__shutdown"></span>Shutdown
-            </li>
-
-            <li ngbDropdownItem (click)="remove(device)">
-              <span class="dropdown-menu-qt__item-icon icon__remove-12"></span>Remove
-            </li>
-
-            <li ngbDropdownItem (click)="markDeviceAsMaster(device)">
-              <span class="dropdown-menu-qt__item-icon icon__mark-as-master"></span>Mark as master
-            </li>
-          </ul>
-        </div>
-      </div>
-      </div>
-
-      </ng-template>
-
-  </div>
+       '--printer' : device.type === 'printer'}"
+                ngbDropdown
+                [container]="'body'"
+            >
+                <div [ngClass]="'devices-aside__device-' + i">
+                    <div
+                        class="devices-aside__device-name"
+                        [textContent]="(device.hostName.length > 0) ? device.hostName  :  'Name is not defined'"
+                    ></div>
+                    <div
+                        class="devices-aside__device-owner"
+                        [textContent]="device.userName"
+                    ></div>
+                    <div
+                        class="devices-aside__device-menu"
+                        [attr.id]="'dropdownForm' + i"
+                        (click)="onOpenDropDown(input,bodyDropDown)"
+                        #input
+                    >
+                    </div>
+                    <div
+                        ngbDropdownMenu
+                        class="dropdown-menu-qt"
+                        [attr.aria-labelledby]="'dropdownForm' + i"
+                        #bodyDropDown
+                        appClickOtside
+                        [init]="true"
+                        [class]="'.devices-aside__device-' + i"
+                        (onOutSide)="hiddenDropDown(bodyDropDown)"
+                    >
+                        <ul>
+                            <li (click)="showRemoteAccess = !showRemoteAccess ">
+                                <span class="dropdown-menu-qt__item-icon icon__remote-access"></span>
+                                Remote Access
+                                <ul
+                                    class="dropdown-menu-qt__submenu dropdown-menu"
+                                    *ngIf="showRemoteAccess"
+                                >
+                                    <li
+                                        ngbDropdownItem
+                                        (click)="remoteAccess('CSS', device)"
+                                    >
+                                        Custom Share Screen
+                                    </li>
+                                    <li
+                                        ngbDropdownItem
+                                        (click)="remoteAccess('RDP', device)"
+                                    >
+                                        Remote desktop protocol
+                                    </li>
+                                </ul>
+                            </li>
+                            <li
+                                ngbDropdownItem
+                                (click)="restart(device)"
+                            >
+                                <span class="dropdown-menu-qt__item-icon icon__restart"></span>
+                                Restart
+                            </li>
+                            <li
+                                ngbDropdownItem
+                                (click)="shutdown(device)"
+                            >
+                                <span class="dropdown-menu-qt__item-icon icon__shutdown"></span>
+                                Shutdown
+                            </li>
+                            <li
+                                ngbDropdownItem
+                                (click)="remove(device)"
+                            >
+                                <span class="dropdown-menu-qt__item-icon icon__remove-12"></span>
+                                Remove
+                            </li>
+                            <li
+                                ngbDropdownItem
+                                (click)="markDeviceAsMaster(device)"
+                            >
+                                <span class="dropdown-menu-qt__item-icon icon__mark-as-master"></span>
+                                Mark as master
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </div>
 </div>
