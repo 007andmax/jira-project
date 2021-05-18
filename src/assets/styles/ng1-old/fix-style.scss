@@ -3,7 +3,9 @@ html {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   overflow-y: scroll;
-  overflow-x: hidden;
+  //overflow-x: hidden;
+  overflow-x: auto;
+  min-width: 1280px;
   font-size: 16px;
 }
 
@@ -212,7 +214,9 @@ body .topNavbar strong span {
   width: 8px;
   height: 4px;
 }
-
+html::-webkit-scrollbar {
+  height: 8px;
+}
 ::-webkit-scrollbar-track {
   /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);*/
 }
@@ -913,6 +917,63 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 /* End Btn closed */
 
+/* Download agent modal */
+.download-agent-modal {
+  padding: 50px 75px;
+  position: relative;
+}
+.download-agent-modal h3 {
+  font-family: "Graphik-Medium", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+}
+.download-agent-modal .btn {
+  background-color: #16a4fa;
+  width: 100%;
+  text-align: left;
+  height: 48px;
+  margin-bottom: 10px;
+}
+.download-agent-modal .btn-primary.not-active {
+  background-color: #c4cbd5;
+  border-color: #c4cbd5;
+  cursor: default;
+  pointer-events: none;
+}
+.download-agent-modal p {
+  margin: 14px 0 16px;
+  text-align: center;
+  font-family: "Graphik-Medium", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #9ca5b6;
+  line-height: 1;
+}
+.download-agent-modal .btn span {
+  font-size: 14px;
+  font-weight: 500;
+  font-family: "Graphik-Medium", sans-serif;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+}
+.download-agent-modal i {
+  margin-right: 5px;
+}
+/* End Download agent modal */
+.primary-default.btn {
+  background-color: transparent;
+  color: #16a4fa;
+  border-radius: 4px;
+  border: 1px solid #16a4fa;
+  text-align: center;
+  font-family: "Graphik-Medium", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+}
 @media (min-width: 992px) {
   .col-md-12 {
     width: 100%;
