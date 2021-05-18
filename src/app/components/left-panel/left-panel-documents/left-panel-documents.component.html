@@ -1,13 +1,22 @@
 <div
     class="app-left-panel__menu"
-    (click)="goToState()"
-    [ngClass]="{'--active': activePage === 'new-documents'}"
+    [ngClass]="{'--active': open}"
+    (click)="open = !open;openPanel()"
 >
     <div class="app-left-panel__menu-icon --documents"></div>
     <div class="app-left-panel__menu-title">Documents</div>
     <div class="app-left-panel__menu-arrow"></div>
 </div>
-<ul class="app-left-panel__menu-expand icon-list top-menu menu-expand-show">
+<ul
+    class="app-left-panel__menu-expand icon-list top-menu"
+    [ngClass]="{'menu-expand-show': open, 'menu-expand-hide': !open}"
+>
+    <li
+        class="app-left-panel__menu-expand-item-icon"
+        (click)="goToState()"
+    >
+        All documents
+    </li>
     <ng-template
         ngFor
         let-category
@@ -19,8 +28,21 @@
             {{category.name}}
         </li>
     </ng-template>
-    <!-- <li class="app-left-panel__menu-expand-item-icon">
+    <li
+        class="app-left-panel__menu-expand-item-icon"
+        *ngIf="toggleAddCategory"
+    >
+        <input
+            type="text"
+            [(ngModel)]="categoryName"
+            (blur)="onAddCategory()"
+        >
+    </li>
+    <li
+        class="app-left-panel__menu-expand-item-icon"
+        (click)="toggleAddCategory = true"
+    >
         <span class="app-left-panel__submenu-icon --add-folder"></span>
         New Folder
-    </li> -->
+    </li>
 </ul>

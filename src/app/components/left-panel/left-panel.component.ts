@@ -4,6 +4,7 @@ import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.
 import { LeftPanelBillingComponent } from './left-panel-billing/left-panel-billing.component';
 import { LeftPanelCompaniesComponent } from './left-panel-companies/left-panel-companies.component';
 import { LeftPanelCompanyComponent } from './left-panel-company/left-panel-company.component';
+import { LeftPanelDocumentsComponent } from './left-panel-documents/left-panel-documents.component';
 import { LeftPanelSettingsComponent } from './left-panel-settings/left-panel-settings.component';
 import { LeftPanelSupportComponent } from './left-panel-support/left-panel-support.component';
 import { LeftPanelTicketsComponent } from './left-panel-tickets/left-panel-tickets.component';
@@ -25,6 +26,7 @@ export class LeftPanelComponent implements OnInit {
   @ViewChild('panelCompanies') panelCompanies: LeftPanelCompaniesComponent;
 
   @ViewChild('panelSettings') panelSettings: LeftPanelSettingsComponent;
+  @ViewChild('panelDocuments') panelDocuments: LeftPanelDocumentsComponent;
   @ViewChild('panelSupport') panelSupport: LeftPanelSupportComponent;
   @ViewChild('panelTickets') panelTickets: LeftPanelTicketsComponent;
   @ViewChild('panelUsers') panelUsers: LeftPanelUsersComponent;
@@ -129,6 +131,7 @@ export class LeftPanelComponent implements OnInit {
       this.panelSupport.close();
       this.panelTickets.close();
       this.panelUsers.close();
+      this.panelDocuments.close();
 
       this.panelCompanies.openPanel();
       this.panelCompanies.togglePanel(true);

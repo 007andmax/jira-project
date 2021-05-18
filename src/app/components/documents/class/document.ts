@@ -1,22 +1,33 @@
 import { CurrentUser } from "src/class/current-user/current-user";
+import { DocumentLinked } from "./document-linked";
 
 export class Document {
-    id: string;
-    title: string;
-    documentCategory: string;
-    documentType: string;
+    categoryId: string;
+    categoryName: string;
     clientType: string;
-    createdBy: CurrentUser;
-    createdAt: number;
-    updatedAt: number;
+    createdAt: string;
+    createdBy: string;
+    description: string;
+    documentType: string;
+    id: string;
+    linked: DocumentLinked;
+    reviewDate: string;
+    tags: []
+    title: string;
+    updatedAt: string;
     constructor(data) {
-        this.id = data.id;
-        this.title = data.title;
-        this.documentCategory = data.documentCategory;
-        this.documentType = data.documentType;
+        this.categoryId = data.categoryId;
+        this.categoryName = data.categoryName;
         this.clientType = data.clientType;
-        this.createdBy = data.createdBy;
         this.createdAt = data.createdAt;
+        this.createdBy = data.createdBy;
+        this.description = data.description;
+        this.documentType = data.documentType;
+        this.id = data.id;
+        this.linked = data.linked;
+        this.reviewDate = data.reviewDate;
+        this.tags = data.tags;
+        this.title = data.title;
         this.updatedAt = data.updatedAt;
     }
 }

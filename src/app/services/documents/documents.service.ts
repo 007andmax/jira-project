@@ -23,7 +23,9 @@ export class DocumentsService {
    * @param companyId - id of company
    */
 
-
+  public addCategories(name) {
+    return this.http.post(this.apiUrl + `documents/categories`, { name: name });
+  }
   public getCategories() {
     return this.http.get(this.apiUrl + `documents/categories`);
   }

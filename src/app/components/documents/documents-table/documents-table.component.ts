@@ -4,6 +4,7 @@ import { DocumentsCategory } from '../class/documents-category';
 import * as moment from "moment";
 import { Document } from '../class/document';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
   selector: 'documents-table',
@@ -11,9 +12,10 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
   styleUrls: ['./documents-table.component.css']
 })
 export class DocumentsTableComponent implements OnInit {
-  @Input() item: DocumentsCategory;
+  @Input() item: Document;
   currentUser: CurrentUser;
-  constructor(private usersStateService: UsersStateService) { }
+  constructor(private usersStateService: UsersStateService,
+    private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
     if (this.usersStateService.getCurrentUser()) {
@@ -21,25 +23,29 @@ export class DocumentsTableComponent implements OnInit {
 
     }
   }
-  getCreateBy(createdBy: CurrentUser) {
-    return `${createdBy.firstName} ${createdBy.lastName}`;
+
+  isCategory() {
+    return this.item.categoryId;
   }
-  getCreateByForCategory(list: Array<Document>) {
-    let list_updatedAt = list.map(item => item.updatedAt);
-    let updateAt = Math.max.apply(null, list_updatedAt);
-    let find = list.find(item => item.updatedAt === updateAt);
-    return this.getCreateBy(find.createdBy);
+  getCreateBy() {
+    let user = this.usersStateService.getAllUsers().find(item => item.id === this.item.createdBy)
+    return `${user.firstName} ${user.lastName}`;
   }
-  parseUpdateAtForCategory(list: Array<Document>) {
-    let list_updatedAt = list.map(item => item.updatedAt);
-    return moment(new Date(Math.max.apply(null, list_updatedAt))).format('DD MMM YYYY');
+  parseCreateAt() {
+    return moment(new Date(this.item.createdAt)).format('DD MMM YYYY');
   }
-  parseUpdateAt(updatedAt) {
-    return moment(new Date(updatedAt)).format('DD MMM YYYY');
+  parseReviewAt() {
+    return moment(new Date(this.item.reviewDate)).format('DD MMM YYYY');
   }
-  getSharedWith() {
-    if (this.item.list.length === 1 && this.item.list[0].createdBy.id === this.currentUser.id) return "Only you";
-    if (this.item.list.length >= 1) return this.item.list.length;
-    return "";
+  getCompanies() {
+    if (this.companiesStateService.getCompanies().length === 0) return '';
+    let listCompanies = this.item.linked.companies.map(item => this.companiesStateService.getCompanies().find(company => company.id === item));
+    return listCompanies.map(item => item.name).join(",");
   }
+
+  /* getSharedWith() {
+     if (this.item.list.length === 1 && this.item.list[0].createdBy.id === this.currentUser.id) return "Only you";
+     if (this.item.list.length >= 1) return this.item.list.length;
+     return "";
+   }*/
 }

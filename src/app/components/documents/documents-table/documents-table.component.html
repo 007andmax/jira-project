@@ -67,17 +67,47 @@
 <!-- </tr> -->
 
 
+
+
+
+
+
+
+
+
+
+
+
 <tr>
     <td class="documents-table__title">
         <div class="documents-table__title-menu">
-            <div class="icon__folder qt-sz-16 qt-bg-contain qt-mr-8"></div>
-            <div class="title ellipsis">Guideline Document</div>
+            <div
+                class="qt-sz-16 qt-bg-contain qt-mr-8"
+                [ngClass]="{'icon__folder':item.categoryId,
+            'icon__documents':!item.categoryId}"
+            ></div>
+            <div
+                class="title ellipsis"
+                [textContent]="isCategory() ? item.categoryName : item.title"
+            ></div>
         </div>
     </td>
-    <td class="documents-table__create-by ellipsis">Alma Romero</td>
-    <td class="documents-table__created-date ellipsis">12 Feb 2021</td>
-    <td class="documents-table__review-date ellipsis">22 Dec 2021</td>
-    <td class="documents-table__company ellipsis">LifePath Inveremere</td>
+    <td
+        class="documents-table__create-by ellipsis"
+        [textContent]="isCategory() ? '' : getCreateBy()"
+    ></td>
+    <td
+        class="documents-table__created-date ellipsis"
+        [textContent]="isCategory() ? '' : parseCreateAt()"
+    ></td>
+    <td
+        class="documents-table__review-date ellipsis"
+        [textContent]="isCategory() ? '' : parseReviewAt()"
+    ></td>
+    <td
+        class="documents-table__company ellipsis"
+        [textContent]="isCategory() ? '' : getCompanies()"
+    ></td>
     <td class="documents-table__shared">
         <div></div>
     </td>
@@ -95,6 +125,7 @@
             <ul
                 class="qt-dropdown-menu"
                 ngbDropdownMenu
+                *ngIf="isCategory()"
                 aria-labelledby="dropdownBasic1"
             >
                 <li
@@ -126,13 +157,95 @@
                     Delete Folder
                 </li>
             </ul>
+            <ul
+                class="qt-dropdown-menu"
+                ngbDropdownMenu
+                *ngIf="!isCategory()"
+                aria-labelledby="dropdownBasic1"
+            >
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                >
+                    <div class="icon__share-folder qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    Share...
+                </li>
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                >
+                    <div class="icon__move qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    Move...
+                </li>
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                >
+                    <div class="icon__copy-gray qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    Copy to…
+                </li>
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                >
+                    <div class="icon__clone-document qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    Clone Document
+                </li>
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                >
+                    <div class="icon__search-gray qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    Find within document
+                </li>
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                >
+                    <div class="icon__link-gray qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    Copy Internal Link
+                </li>
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                >
+                    <div class="icon__print qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    Print
+                </li>
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                >
+                    <div class="icon__download-pdf qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    Export PDF
+                </li>
+                <li
+                    class="pointer"
+                    ngbDropdownItem
+                    class="remove-item"
+                >
+                    <div class="icon__remove qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    Move to Trash
+                </li>
+            </ul>
         </div>
     </td>
 </tr>
 
 
 
-<tr>
+
+
+
+
+
+
+
+
+
+
+
+<!-- <tr>
     <td class="documents-table__title">
         <div class="documents-table__title-menu menu">
             <div class="icon__documents qt-sz-16 qt-bg-contain qt-mr-8"></div>
@@ -231,4 +344,4 @@
             </ul>
         </div>
     </td>
-</tr>
+</tr> -->

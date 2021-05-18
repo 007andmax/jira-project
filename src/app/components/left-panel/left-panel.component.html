@@ -56,6 +56,8 @@
         (onChangeState)="onChangeState($event)"
     ></app-left-panel-reports>
     <app-left-panel-documents
+        #panelDocuments
+        (onOpenPanel)="onOpenPanel()"
         (onChangeState)="onChangeState($event)"
         [activePage]="state"
     ></app-left-panel-documents>
