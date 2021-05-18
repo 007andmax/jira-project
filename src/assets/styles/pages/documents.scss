@@ -102,7 +102,7 @@
 }
 
 app-documents-add {
-  margin-right: 68px;
+  //margin-right: 68px;
   height: 100%;
   display: block;
 }
@@ -119,4 +119,19 @@ app-documents-add-info {
   border-left: 1px solid #dfe3e8;
   width: 48px;
   box-shadow: 0 2px 8px 0 rgba(0,0,0,.5);
+}
+
+.documents-details {
+  margin-right: 480px;
+
+  &.--large {
+    margin-right: 56px;
+  }
+
+  .qt-aside-modern__header {
+    .toggle-aside {
+      width: 24px;
+      height: 24px;
+    }
+  }
 }

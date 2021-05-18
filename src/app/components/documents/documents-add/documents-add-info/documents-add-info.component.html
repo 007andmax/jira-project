@@ -1,18 +1,174 @@
-<div
-    class="toggle-aside icon__panel-open"
-    [ngClass]="{'opened' : toggleAside}"
-    (click)="toggleAside = !toggleAside"
-></div>
-<div
-    class="documents-add-info"
-    *ngIf="toggleAside"
->
+<!--<div-->
+<!--  class="toggle-aside icon__panel-open"-->
+<!--  [ngClass]="{'opened' : toggleAside}"-->
+<!--  (click)="toggleAside = !toggleAside"-->
+<!--&gt;</div>-->
+<!--<div-->
+<!--  class="documents-add-info"-->
+<!--  *ngIf="toggleAside"-->
+<!--&gt;-->
+<!--  <div-->
+<!--    class="qt-aside-modern__header-close icon__close"-->
+<!--    routerLink="/ng2/documents"-->
+<!--  ></div>-->
+<!--  <button (click)="toggleEditCategories = true">Edit</button>-->
+<!--</div>-->
+<!--<documents-add-edit-categories-->
+<!--  *ngIf="toggleEditCategories"-->
+<!--  (onClosed)="toggleEditCategories = false"-->
+<!--&gt;</documents-add-edit-categories>-->
+
+<div class="qt-aside-modern documents-create">
+
+  <div class="qt-aside-modern__header">
     <div
-        class="qt-aside-modern__header-close icon__close"
-        routerLink="/ng2/documents"
+      class="toggle-aside icon__panel-open qt-mr-16"
+      [ngClass]="{'opened' : toggleAside}"
+      (click)="toggleAside = !toggleAside"
     ></div>
-    <button (click)="toggleEditCategories = true">Edit</button>
+    <div class="qt-aside-modern__header-title qt-mr-auto">Create Document</div>
+    <div
+      class="qt-aside-modern__header-close icon__close"
+      routerLink="/ng2/documents"
+    >
+    </div>
+  </div>
+
+  <div class="qt-aside-modern__content --no-padding">
+    <!-- Tab Header -->
+    <div class="documents-create-panel__subheader">
+      <!-- Document Info Tab -->
+      <div
+        class="documents-create-panel__subheader-item subheader-item-system pointer"
+        [ngClass]="{'--active':tab === 'DOCUMENT_INFO'}"
+        (click)="tab = 'DOCUMENT_INFO'"
+      >
+        Document Info
+      </div>
+      <!-- End Document Info Tab -->
+      <!-- Permissions Tab -->
+      <div
+        class="documents-create-panel__subheader-item subheader-item-network pointer"
+        [ngClass]="{'--active':tab === 'PERMISSIONS'}"
+        (click)="tab = 'PERMISSIONS'"
+      >
+        Permissions
+      </div>
+      <!-- End Permissions -->
+      <!-- Tab Document History -->
+      <div
+        class="documents-create-panel__subheader-item subheader-item-software pointer"
+        [ngClass]="{'--active':tab === 'DOCUMENT_HISTORY'}"
+        (click)="tab = 'DOCUMENT_HISTORY'"
+      >
+        Document History
+      </div>
+      <!-- End Document History -->
+      <!-- End Tab Aside Header -->
+    </div>
+    <!-- End Tab Header -->
+    <!-- Tab Body -->
+    <div class="documents-create-panel__body">
+      <!-- Password Detail Tab Content -->
+      <div
+        class="qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24"
+        *ngIf="tab === 'DOCUMENT_INFO'"
+      >
+
+        <div class="documents-create__col --required">
+          <p class="label-name">Document Title</p>
+          <input
+            type="text"
+            class="qt-input-40 documents-add-body__input"
+            placeholder="Printer Installation Guide"
+          >
+        </div>
+
+        <div class="documents-create__col --required">
+          <p class="label-name">Document Description</p>
+          <textarea
+            appTextArea
+            [limit]="160"
+            id=""
+            placeholder="Write Description"
+          ></textarea>
+        </div>
+
+        <div class="documents-create__col select-open-top --required">
+          <div class="qt-df qt-jc-sb">
+            <p class="label-name">Document Category</p>
+            <p
+              class="qt-color-info"
+              (click)="toggleEditCategories = true"
+            >
+              Edit
+            </p>
+          </div>
+          <app-drop-down
+            [class]="['light-dropdown', 'qt-select-input-40']"
+            [placeholder]="'Select Category'"
+            [errorMessage]="'Category is required'"
+            [field]="'name'"
+            [add]="true"
+            [list]=""
+            [search]="true"
+            [change]="true"
+          >
+          </app-drop-down>
+        </div>
+
+        <div
+          class="documents-create__col"
+        >
+          <p class="label-name">Link To</p>
+          <div
+            class="documents-create-user pointer"
+          >
+            <div class="selected-user">
+              <i class="icon__user-grey qt-sz-16 qt-bg-contain qt-mr-6"></i>
+              admin admin3
+              <i class="icn-sm icn-remove-old"></i>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+      <!-- End Password Detail Tab Content -->
+      <!-- Linked Devices Tab Content -->
+      <div
+        class="qt-pt-12 qt-pl-24 qt-pr-24"
+        *ngIf="tab === 'PERMISSIONS'"
+      >
+        22222
+      </div>
+      <!-- End Linked Devices Tab Content -->
+      <!-- Document History Tab Content -->
+      <div
+        class="qt-pb-24"
+        *ngIf="tab === 'DOCUMENT_HISTORY'"
+      >
+        3333
+      </div>
+      <!-- End Document History Tab Content -->
+    </div>
+    <!-- End Tab Body -->
+  </div>
+
 </div>
+
+
+
+<!--<div-->
+<!--    class="documents-add-info"-->
+<!--    *ngIf="toggleAside"-->
+<!--&gt;-->
+<!--    <div-->
+<!--        class="qt-aside-modern__header-close icon__close"-->
+<!--        routerLink="/ng2/documents"-->
+<!--    ></div>-->
+<!--    <button (click)="toggleEditCategories = true">Edit</button>-->
+<!--</div>-->
 <documents-add-edit-categories
     *ngIf="toggleEditCategories"
     (onClosed)="toggleEditCategories = false"
