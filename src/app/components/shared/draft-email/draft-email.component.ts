@@ -144,7 +144,6 @@ export class DraftEmailComponent implements OnInit {
 
   }
   onSend() {
-    console.log("this.draftEmail", this.draftEmail);
     if (this.tab === 'html') {
       this.draftEmail.setCustomHtml(true);
       this.draftEmail.setContent(this.messageHTML.replace(/(\r\n|\n|\r)/gm, ""));
@@ -152,14 +151,11 @@ export class DraftEmailComponent implements OnInit {
       this.draftEmail.setCustomHtml(false);
       this.draftEmail.setContent(this.messageContent);
     }
-
     this.filesInfo.files.forEach(item => {
       if (!item.error) this.draftEmail.setAttachment(item.id)
     });
     this.draftEmailService.sendMessage(this.draftEmail).subscribe((data) => {
-
       this.close();
-
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
       }
