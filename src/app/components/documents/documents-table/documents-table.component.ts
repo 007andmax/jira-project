@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CurrentUser } from 'src/class/current-user/current-user';
-import { DocumentsCategory } from '../class/documents-category';
 import * as moment from "moment";
 import { Document } from '../class/document';
 import { UsersStateService } from 'src/app/states/users/users-state.service';

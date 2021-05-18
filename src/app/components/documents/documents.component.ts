@@ -3,7 +3,7 @@ import FroalaEditor from 'froala-editor';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { Document } from './class/document';
-import { DocumentsCategory } from './class/documents-category';
+
 
 
 @Component({
