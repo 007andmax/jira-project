@@ -1,11 +1,69 @@
 <div class="documents-create-aside-categories qt-aside-modern">
-<!--  <p>documents-add-edit-categories works!</p>-->
   <div class="qt-aside-modern__header">
     <div class="qt-aside-modern__header-title qt-mr-auto">Edit Categories</div>
     <div
-      class="icon__remove qt-sz-16 qt-bg-contain"
+      class="icon__remove disable qt-sz-16 qt-bg-contain"
     >
     </div>
   </div>
-  <button (click)="close()">Cancel</button>
+  <div class="qt-aside-modern__content --no-padding">
+    <div class="qt-pb-24 qt-pl-24 qt-pr-24">
+
+      <div class="documents-create__col checkbox-wrapper">
+        <div class="with-checkbox">
+          <label class="checkbox-container disable">
+            <input type="checkbox">
+            <span class="checkbox-mark"></span>
+          </label>
+          <p>How it work <span>(45)</span></p>
+        </div>
+      </div>
+
+      <div class="documents-create__col checkbox-wrapper">
+        <div class="with-checkbox">
+          <label class="checkbox-container">
+            <input type="checkbox">
+            <span class="checkbox-mark"></span>
+          </label>
+          <p>Guideline Document</p>
+        </div>
+      </div>
+
+      <div class="documents-create__col checkbox-wrapper">
+        <div class="with-checkbox">
+          <label class="checkbox-container">
+            <input type="checkbox">
+            <span class="checkbox-mark"></span>
+          </label>
+          <div class="qt-w100 qt-df qt-jc-sb">
+            <p>Guideline Document</p>
+            <div
+              class="icon__remove qt-sz-16 qt-bg-contain qt-ml-6"
+            >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn-new btn-primary-white">+ Add New</button>
+
+    </div>
+  </div>
+
+  <div class="qt-aside-modern__footer">
+    <div class="qt-df">
+      <button class="qt-button qt-mr-12">
+        Save Changes
+      </button>
+      <button
+        class="qt-button --gray"
+        (click)="close()"
+        >
+        Cancel
+      </button>
+    </div>
+  </div>
 </div>
+
+<!--<button (click)="close()">Cancel</button>-->
+<!--  <p>documents-add-edit-categories works!</p>-->

@@ -95,7 +95,6 @@
 
 .document-header__dropdown {
 
-
   input {
     border: none;
   }
@@ -134,4 +133,9 @@ app-documents-add-info {
       height: 24px;
     }
   }
+}
+
+.input-group {
+  max-width: calc(50% - 8px);
+  width: 100%;
 }

@@ -1,14 +1,6 @@
-.toggle-aside {
-        cursor: pointer;
-    height: 36px;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 24px;
-    width: 47px;
-}
-
 .documents-create {
   max-width: 480px;
+  height: 100vh;
 
   .toggle-aside.opened {
       transform: rotate(
@@ -97,6 +89,14 @@
     display: flex;
     flex-flow: row wrap;
   }
+
+  .checkbox-container {
+    margin-bottom: 6px;
+  }
+
+  .checkbox-wrapper .with-checkbox label {
+    margin-right: 8px;
+  }
 }
 
 .selected-user {
@@ -113,4 +113,13 @@
     margin-left: 6px;
     transform: none;
   }
+}
+
+.toggle-aside {
+  cursor: pointer;
+  height: 36px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 24px;
+  width: 47px;
 }

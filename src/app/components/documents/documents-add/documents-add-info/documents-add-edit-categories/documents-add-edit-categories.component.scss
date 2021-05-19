@@ -1,4 +1,55 @@
 .documents-create-aside-categories {
   max-width: 288px;
   z-index: 6;
+
+  .qt-aside-modern__header {
+    padding-left: 24px;
+    padding-right: 24px;
+    background-color: #fff;
+    border-bottom: none;
+  }
+
+ .checkbox-wrapper {
+   margin-bottom: 12px;
+
+   .with-checkbox {
+     margin-right: 0;
+   }
+ }
+
+  .btn-new.btn-primary-white {
+    padding: 6px;
+    line-height: 1.3;
+    height: auto;
+  }
+
+
+  .checkbox-wrapper .with-checkbox label {
+    margin-bottom: 6px;
+  }
+  .checkbox-container.disable {
+    span {
+
+      &::after {
+        position: absolute;
+        content: "";
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: #edf2f6;
+        border: 1px solid #c4cbd5 ;
+      }
+    }
+  }
+
+  .icon__remove {
+    &.disable {
+      opacity: .6;
+    }
+  }
 }
+.qt-aside-modern__header-title {
+  font-size: 16px;
+}
+

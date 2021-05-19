@@ -89,7 +89,6 @@
           <textarea
             appTextArea
             [limit]="160"
-            id=""
             placeholder="Write Description"
           ></textarea>
         </div>
@@ -132,6 +131,88 @@
           </div>
         </div>
 
+        <div class="documents-create__col checkbox-wrapper">
+          <div class="with-checkbox">
+            <label class="checkbox-container">
+              <input
+                type="checkbox"
+              >
+              <span class="checkbox-mark"></span>
+            </label>
+            <p>Show in Knowledge base</p>
+          </div>
+        </div>
+
+        <div class="documents-create__col">
+          <app-drop-down
+            class="dropdown"
+            [placeholder]="'Select Category'"
+            [list]=""
+            [field]="'name'"
+            [search]="true"
+            [change]="true"
+            heightInput="40px"
+            widthInput="100%"
+          ></app-drop-down>
+        </div>
+
+        <div class="documents-create__col checkbox-wrapper">
+        <div class="with-checkbox">
+          <label class="checkbox-container">
+            <input
+              id=""
+              type="checkbox"
+            >
+            <span class="checkbox-mark"></span>
+          </label>
+          <p>Required by Company Type</p>
+        </div>
+      </div>
+
+      <div class="documents-create__col">
+        <app-drop-down
+          class="dropdown"
+          [placeholder]="'Select Company Type'"
+          [list]=""
+          [field]="'name'"
+          [search]="true"
+          [change]="true"
+          heightInput="40px"
+          widthInput="100%"
+        ></app-drop-down>
+      </div>
+
+      <div class="documents-create__col">
+        <p class="label-name">Document Review Date</p>
+        <app-date-picker
+          [editMode]="true"
+          [useMinDate]="false"
+        ></app-date-picker>
+      </div>
+
+      <div class="documents-create__col">
+        <div class="qt-df qt-jc-sb qt-ai-c">
+          <p class="label-name">Share Document Link</p>
+          <div class="qt-df qt-ai-c pointer">
+            <div class="icon__link qt-sz-16 qt-bg-contain"></div>
+            <div class="qt-color-info qt-ff-gm qt-mr-4 qt-ml-4">
+              Copy Link
+            </div>
+            <div class="qt-df">
+              <div
+                class="qt-toggle qt-mr-8"
+              >
+                <div class="qt-toggle__circle"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <input
+          type="text"
+          class="qt-input-40 documents-add-body__input"
+          placeholder="https://www.quicktech.com/shard/s593/sh/04d5c…"
+        >
+      </div>
 
       </div>
       <!-- End Password Detail Tab Content -->

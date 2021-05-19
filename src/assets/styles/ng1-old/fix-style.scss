@@ -165,7 +165,7 @@ body .left-panel-full {
   color: #b2becd;
 }
 
-.recurring-tickets-content__modal .checkbox-wrapper .with-checkbox, .new-companies-content__modal .checkbox-wrapper .with-checkbox, .new-users-content__modal .checkbox-wrapper .with-checkbox {
+.recurring-tickets-content__modal .checkbox-wrapper .with-checkbox, .new-companies-content__modal .checkbox-wrapper .with-checkbox, .new-users-content__modal .checkbox-wrapper .with-checkbox, .documents-create .checkbox-wrapper .with-checkbox, .documents-create-aside-categories .checkbox-wrapper .with-checkbox {
   display: -webkit-box;
   display: flex;
   -webkit-box-align: center;
@@ -317,7 +317,7 @@ p {
   margin-top: 20px;
 }
 
-.new-users-content__modal--content > [class*="col-md-"] input, .recurring-tickets-content__modal--content > [class*="col-md-"] input, .new-companies-content__modal--content > [class*="col-md-"] input, .new-users-content__modal--content app-interval > [class*="col-md-"] input, .recurring-tickets-content__modal--content app-interval > [class*="col-md-"] input, .password-content__modal--content > [class*="col-md-"] input {
+.new-users-content__modal--content > [class*="col-md-"] input, .recurring-tickets-content__modal--content > [class*="col-md-"] input, .new-companies-content__modal--content > [class*="col-md-"] input, .new-users-content__modal--content app-interval > [class*="col-md-"] input, .recurring-tickets-content__modal--content app-interval > [class*="col-md-"] input, .password-content__modal--content > [class*="col-md-"] input, .documents-create .input-group.date-picker input {
   outline: none;
   height: 40px;
   padding: 0 12px;
@@ -326,7 +326,7 @@ p {
   border-radius: 4px;
 }
 
-.new-companies-content__modal--content > [class*="col-md-"] input, .recurring-tickets-content__modal--content > [class*="col-md-"] input, .new-users-content__modal--content > [class*="col-md-"] input, .recurring-tickets-content__modal--content app-interval > [class*="col-md-"] input, .new-users-content__modal--content app-interval > [class*="col-md-"] input, .password-content__modal--content > [class*="col-md-"] input {
+.new-companies-content__modal--content > [class*="col-md-"] input, .recurring-tickets-content__modal--content > [class*="col-md-"] input, .new-users-content__modal--content > [class*="col-md-"] input, .recurring-tickets-content__modal--content app-interval > [class*="col-md-"] input, .new-users-content__modal--content app-interval > [class*="col-md-"] input, .password-content__modal--content > [class*="col-md-"] input, .documents-create .input-group.date-picker input {
   width: 100%;
 }
 
