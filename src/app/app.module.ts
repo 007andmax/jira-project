@@ -437,6 +437,7 @@ import { DocumentsTableComponent } from './components/documents/documents-table/
 import { DocumentsHeaderComponent } from './components/documents/documents-header/documents-header.component';
 import { DocumentsFilterComponent } from './components/documents/documents-header/documents-filter/documents-filter.component';
 import { DocumentsCategoryComponent } from './components/documents/documents-category/documents-category.component';
+import { DocumentsFilterTagsComponent } from './components/documents/documents-header/documents-filter/documents-filter-tags/documents-filter-tags.component';
 declare var $: any;
 /**
  * This module represents the main application module
@@ -825,7 +826,8 @@ declare var $: any;
     DocumentsTableComponent,
     DocumentsHeaderComponent,
     DocumentsFilterComponent,
-    DocumentsCategoryComponent
+    DocumentsCategoryComponent,
+    DocumentsFilterTagsComponent
   ],
   imports: [
     BrowserModule,

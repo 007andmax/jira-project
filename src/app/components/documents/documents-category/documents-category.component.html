@@ -1,3 +1,27 @@
-<p>
-  documents-category works!
-</p>
+<div class="qt-page-list documents-page ">
+    <documents-header (onSortBy)="sortBy($event)"></documents-header>
+    <div class="qt-page-list__body">
+        <div class="qt-page-list__body-table-container">
+            <table class="qt-page-list__body-tbody qt-table-modern documents-table">
+                <tbody>
+                    <ng-template
+                        ngFor
+                        let-item
+                        [ngForOf]="list"
+                        [ngForTrackBy]="trackById"
+                    >
+                        <documents-table
+                            [item]="item"
+                            (onRemoveDocument)="onRemoveDocument($event)"
+                        >
+                        </documents-table>
+                    </ng-template>
+                </tbody>
+            </table>
+            <div
+                class="loading"
+                *ngIf="showPreloader"
+            ></div>
+        </div>
+    </div>
+</div>

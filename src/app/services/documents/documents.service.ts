@@ -37,6 +37,9 @@ export class DocumentsService {
   public add(data) {
     return this.http.post(this.apiUrl + `documents`, data);
   }
+  public filterDocuments(data) {
+    return this.http.post(this.apiUrl + `documents/filtered`, data);
+  }
   public getList() {
     return this.http.get(this.apiUrl + `documents`);
   }

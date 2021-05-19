@@ -38,6 +38,9 @@ export class LeftPanelDocumentsComponent implements OnInit, OnDestroy {
     })
     this.documentsService.getCategories().subscribe((data: any) => {
       this.categories = data.map(item => new CategoryDocument(item));
+      this.categories.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+        1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+
     })
   }
   onAddCategory() {
@@ -53,7 +56,7 @@ export class LeftPanelDocumentsComponent implements OnInit, OnDestroy {
   }
 
   isDocumentsState(state) {
-    return (state === 'new-documents')
+    return (state === 'new-documents' || state === 'new-category-documents')
   }
   public close() {
     this.open = false;

@@ -4,6 +4,7 @@ import * as moment from "moment";
 import { Document } from '../class/document';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'documents-table',
@@ -16,6 +17,7 @@ export class DocumentsTableComponent implements OnInit {
   @Output() onRemoveDocument = new EventEmitter<any>();
   currentUser: CurrentUser;
   constructor(private usersStateService: UsersStateService,
+    private router: Router,
     private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
@@ -24,7 +26,11 @@ export class DocumentsTableComponent implements OnInit {
 
     }
   }
-
+  navigateToCategory() {
+    if (!this.isCategory()) return;
+    this.router.navigate(
+      ['/ng2/documents/category/', this.item.categoryId]);
+  }
   isCategory() {
     return this.item.categoryId;
   }

@@ -81,8 +81,16 @@
 
 
 
+
+
+
+
+
 <tr>
-    <td class="documents-table__title">
+    <td
+        class="documents-table__title"
+        (click)="navigateToCategory()"
+    >
         <div class="documents-table__title-menu">
             <div
                 class="qt-sz-16 qt-bg-contain qt-mr-8"
@@ -98,20 +106,27 @@
     <td
         class="documents-table__create-by ellipsis"
         [textContent]="isCategory() ? '' : getCreateBy()"
+        (click)="navigateToCategory()"
     ></td>
     <td
         class="documents-table__created-date ellipsis"
         [textContent]="isCategory() ? '' : parseCreateAt()"
+        (click)="navigateToCategory()"
     ></td>
     <td
         class="documents-table__review-date ellipsis"
         [textContent]="isCategory() ? '' : parseReviewAt()"
+        (click)="navigateToCategory()"
     ></td>
     <td
         class="documents-table__company ellipsis"
         [textContent]="isCategory() ? '' : getCompanies()"
+        (click)="navigateToCategory()"
     ></td>
-    <td class="documents-table__shared">
+    <td
+        class="documents-table__shared"
+        (click)="navigateToCategory()"
+    >
         <div></div>
     </td>
     <td class="documents-table__menu">
@@ -236,6 +251,11 @@
         </div>
     </td>
 </tr>
+
+
+
+
+
 
 
 

@@ -1,4 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
+import { REMOVE_DOCUMENT } from 'src/app/const/confirm';
+import { DocumentsService } from 'src/app/services/documents/documents.service';
+import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
+import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { ConfirmComponent } from '../../shared/confirm/confirm.component';
+import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
+import { Document } from '../class/document';
+import { DocumentFilter } from '../class/document-filter';
 
 @Component({
   selector: 'documents-category',
@@ -7,9 +19,57 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DocumentsCategoryComponent implements OnInit {
 
-  constructor() { }
+  showPreloader: boolean = true;
+  list: Array<Document> = [];
+  filter: DocumentFilter = new DocumentFilter();
+  sub: Subscription = new Subscription();
+  constructor(private usersStateService: UsersStateService,
+    private documentsStateService: DocumentsStateService,
+    private confirmStateService: ConfirmStateService,
+    private modalService: NgbModal,
+    private activateRoute: ActivatedRoute,
+    private leftPanelStateService: LeftPanelStateService,
+    private documentsService: DocumentsService) {
+
+  }
+
 
   ngOnInit() {
+    let id = this.activateRoute.snapshot.params['id'];
+    this.filter.setCategoryId(id);
+    console.log("id", id);
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === REMOVE_DOCUMENT) this.removeDocument(this.documentsStateService.getDocumentForRemove());
+
+      }
+    })
+    this.sub.add(getConfirm);
+    this.documentsService.filterDocuments(this.filter).subscribe((data: any) => {
+
+
+      data.map(item => this.list.push(new Document(item)));
+      this.list.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
+        1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));
+      this.showPreloader = false;
+      console.log("this.list", this.list);
+    })
+    this.leftPanelStateService.changeStateWithoutNavigate("new-category-documents");
+  }
+
+  removeDocument(item) {
+    this.documentsService.removeDocument(item.id).subscribe(data => {
+
+    })
+  }
+  onRemoveDocument(data) {
+    this.confirmStateService.setConfirmAction(REMOVE_DOCUMENT);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    modalRef.componentInstance.message = `Do you want to delete this document?`;
+    this.documentsStateService.setDocumentForRemove(data);
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
 }

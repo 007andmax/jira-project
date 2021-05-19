@@ -1,0 +1,23 @@
+.content {
+    width: 23%;
+    max-width: 208px;
+    display: inline-block;
+    margin-bottom: 0px;
+    position: relative;
+    vertical-align: middle;
+}
+.filter-documents-date {
+    width: 23%;
+    max-width: 208px;
+}
+documents-filter-tags {
+    flex: 1;
+    /* max-width: 380px;*/
+}
+/deep/.date-picker {
+    overflow-x: visible;
+}
+.documents-company-filter {
+    width: 35%;
+    max-width: 308px;
+}

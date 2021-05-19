@@ -1,24 +1,28 @@
-<div class="left-panel-ng2__content--filters">
-    <app-tickets-filter-tags (tagsChange)="onChangeTags($event)"></app-tickets-filter-tags>
-    <app-tech-users-list-report
-        [sort]="true"
-        [search]="true"
-        [change]="true"
-        [errorMessage]="'Select any user'"
-        (onSelectedItem)="onSelectTechUser($event)"
-    ></app-tech-users-list-report>
-    <app-date-picker
-        [formatDate]="formatDate"
-        [useMinDate]="false"
-        [editMode]="true"
-        [editDate]="defaultDate"
-        (onChange)="onChangeDate($event)"
-    ></app-date-picker>
-    <app-date-picker
-        [formatDate]="formatDate"
-        [useMinDate]="false"
-        [editMode]="true"
-        [editDate]="defaultDate"
-        (onChange)="onChangeDate($event)"
-    ></app-date-picker>
+<div class="qt-df qt-ai-c">
+    <app-select-search
+        class="search-company documents-company-filter qt-mr-8"
+        #companyDp
+        [placeholder]="'Select Company'"
+        [change]="false"
+        [class]="['qt-dropdown']"
+        [field]="'name'"
+        [list]="companies"
+        (onSelectedItem)="onSelectCompany($event)"
+    ></app-select-search>
+    <documents-filter-tags class="documents-filter-tags qt-mr-8"></documents-filter-tags>
+    <div class="grey-dropdown form-group content qt-mr-8">
+        <app-tech-users-list-report
+            [class]="['filter-users-documents']"
+            [sort]="true"
+            [search]="true"
+            [change]="true"
+            [errorMessage]="'Select any user'"
+            (onSelectedItem)="onSelectTechUser($event)"
+        ></app-tech-users-list-report>
+    </div>
+    <app-multi-datepicker
+        class="qt-input-block qt-header-date-filter filter-documents-date"
+        #datesDp
+        (selectedDate)="filterByDate($event)"
+    ></app-multi-datepicker>
 </div>

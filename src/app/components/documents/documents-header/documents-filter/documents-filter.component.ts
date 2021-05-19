@@ -10,7 +10,7 @@ import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 @Component({
   selector: 'documents-filter',
   templateUrl: './documents-filter.component.html',
-  styleUrls: ['./documents-filter.component.css']
+  styleUrls: ['./documents-filter.component.scss']
 })
 export class DocumentsFilterComponent implements OnInit {
   formatDate: string = FORMAT_DATE_2;
