@@ -23,7 +23,10 @@
         [ngForOf]="categories"
         [ngForTrackBy]="trackById"
     >
-        <li class="app-left-panel__menu-expand-item-icon">
+        <li
+            class="app-left-panel__menu-expand-item-icon"
+            [routerLink]="['/ng2/documents/category/',category.id]"
+        >
             <span class="app-left-panel__submenu-icon --folder"></span>
             {{category.name}}
         </li>

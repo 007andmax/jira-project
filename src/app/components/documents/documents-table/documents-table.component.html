@@ -86,6 +86,8 @@
 
 
 
+
+
 <tr>
     <td
         class="documents-table__title"
@@ -94,33 +96,33 @@
         <div class="documents-table__title-menu">
             <div
                 class="qt-sz-16 qt-bg-contain qt-mr-8"
-                [ngClass]="{'icon__folder':item.categoryId,
-            'icon__documents':!item.categoryId}"
+                [ngClass]="{'icon__folder':item.isCategory,
+            'icon__documents':!item.isCategory}"
             ></div>
             <div
                 class="title ellipsis"
-                [textContent]="isCategory() ? item.categoryName : item.title"
+                [textContent]="item.isCategory ? item.categoryName : item.title"
             ></div>
         </div>
     </td>
     <td
         class="documents-table__create-by ellipsis"
-        [textContent]="isCategory() ? '' : getCreateBy()"
+        [textContent]="item.isCategory ? '' : getCreateBy()"
         (click)="navigateToCategory()"
     ></td>
     <td
         class="documents-table__created-date ellipsis"
-        [textContent]="isCategory() ? '' : parseCreateAt()"
+        [textContent]="item.isCategory ? '' : parseCreateAt()"
         (click)="navigateToCategory()"
     ></td>
     <td
         class="documents-table__review-date ellipsis"
-        [textContent]="isCategory() ? '' : parseReviewAt()"
+        [textContent]="item.isCategory ? '' : parseReviewAt()"
         (click)="navigateToCategory()"
     ></td>
     <td
         class="documents-table__company ellipsis"
-        [textContent]="isCategory() ? '' : getCompanies()"
+        [textContent]="item.isCategory ? '' : getCompanies()"
         (click)="navigateToCategory()"
     ></td>
     <td
@@ -143,7 +145,7 @@
             <ul
                 class="qt-dropdown-menu"
                 ngbDropdownMenu
-                *ngIf="isCategory()"
+                *ngIf="item.isCategory"
                 aria-labelledby="dropdownBasic1"
             >
                 <li
@@ -179,7 +181,7 @@
             <ul
                 class="qt-dropdown-menu"
                 ngbDropdownMenu
-                *ngIf="!isCategory()"
+                *ngIf="!item.isCategory"
                 aria-labelledby="dropdownBasic1"
             >
                 <li
@@ -251,6 +253,8 @@
         </div>
     </td>
 </tr>
+
+
 
 
 

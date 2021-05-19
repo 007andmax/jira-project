@@ -9,6 +9,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { ConfirmComponent } from '../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../shared/confirm/services/confirm-state.service';
 import { Document } from './class/document';
+import { DocumentFilter } from './class/document-filter';
 
 
 
@@ -20,6 +21,7 @@ import { Document } from './class/document';
 export class DocumentsComponent implements OnInit, OnDestroy {
   showPreloader: boolean = true;
   list: Array<Document> = [];
+  filter: DocumentFilter = new DocumentFilter();
   sub: Subscription = new Subscription();
   constructor(private usersStateService: UsersStateService,
     private documentsStateService: DocumentsStateService,
@@ -31,6 +33,16 @@ export class DocumentsComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+    let filter = this.documentsStateService.filter.subscribe(data => {
+      this.showPreloader = true;
+      this.filter.setFilters(data);
+      if (this.filter.isExistFilters()) {
+        this.getFilterList();
+      } else {
+        this.getList();
+      }
+    })
+    this.sub.add(filter);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REMOVE_CATEGORY_DOCUMENT) this.removeCategory(this.documentsStateService.getCategoryForRemove());
@@ -39,11 +51,29 @@ export class DocumentsComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
+    this.getList();
+  }
+  getList() {
+    this.showPreloader = true;
+    this.list = [];
     this.documentsService.getList().subscribe((data: any) => {
-      data.categories.map(item => this.list.push(new Document({ categoryId: item.id, categoryName: item.name })));
+
+      data.categories.map(item => this.list.push(new Document({ categoryId: item.id, categoryName: item.name }, true)));
       data.documents.map(item => this.list.push(new Document(item)));
       this.list.sort((a, b) => (this.getNameDocument(a).toLowerCase() > this.getNameDocument(b).toLowerCase()) ?
         1 : ((this.getNameDocument(b).toLowerCase() > this.getNameDocument(a).toLowerCase()) ? -1 : 0));
+      this.showPreloader = false;
+      console.log("this.list", this.list);
+    })
+  }
+  getFilterList() {
+    this.showPreloader = true;
+    this.list = [];
+    this.documentsService.filterDocuments(this.filter).subscribe((data: any) => {
+
+      data.map(item => this.list.push(new Document(item)));
+      this.list.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
+        1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));
       this.showPreloader = false;
       console.log("this.list", this.list);
     })

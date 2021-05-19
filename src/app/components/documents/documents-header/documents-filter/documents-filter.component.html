@@ -9,9 +9,13 @@
         [list]="companies"
         (onSelectedItem)="onSelectCompany($event)"
     ></app-select-search>
-    <documents-filter-tags class="documents-filter-tags qt-mr-8"></documents-filter-tags>
+    <documents-filter-tags
+        class="documents-filter-tags qt-mr-8"
+        (onSelectedItems)="onSelectTags($event)"
+    ></documents-filter-tags>
     <div class="grey-dropdown form-group content qt-mr-8">
         <app-tech-users-list-report
+            #usersDp
             [class]="['filter-users-documents']"
             [sort]="true"
             [search]="true"

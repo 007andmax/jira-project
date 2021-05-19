@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
@@ -17,7 +17,7 @@ import { DocumentFilter } from '../class/document-filter';
   templateUrl: './documents-category.component.html',
   styleUrls: ['./documents-category.component.css']
 })
-export class DocumentsCategoryComponent implements OnInit {
+export class DocumentsCategoryComponent implements OnInit, OnDestroy {
 
   showPreloader: boolean = true;
   list: Array<Document> = [];
@@ -29,15 +29,29 @@ export class DocumentsCategoryComponent implements OnInit {
     private modalService: NgbModal,
     private activateRoute: ActivatedRoute,
     private leftPanelStateService: LeftPanelStateService,
-    private documentsService: DocumentsService) {
 
+    private documentsService: DocumentsService) {
+    let id = this.activateRoute.snapshot.params['id'];
+    let subscription = this.activateRoute.params.subscribe(params => {
+      this.showPreloader = true;
+      id = params['id'];
+      this.filter.setCategoryId(id);
+      console.log("id", id);
+      this.getList();
+    });
+    this.sub.add(subscription);
   }
 
 
   ngOnInit() {
-    let id = this.activateRoute.snapshot.params['id'];
-    this.filter.setCategoryId(id);
-    console.log("id", id);
+
+    let filter = this.documentsStateService.filter.subscribe(data => {
+      this.showPreloader = true;
+      this.filter.setFilters(data);
+      this.getList();
+    })
+    this.sub.add(filter);
+
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REMOVE_DOCUMENT) this.removeDocument(this.documentsStateService.getDocumentForRemove());
@@ -45,8 +59,12 @@ export class DocumentsCategoryComponent implements OnInit {
       }
     })
     this.sub.add(getConfirm);
-    this.documentsService.filterDocuments(this.filter).subscribe((data: any) => {
 
+    this.leftPanelStateService.changeStateWithoutNavigate("new-category-documents");
+  }
+  getList() {
+    this.list = [];
+    this.documentsService.filterDocuments(this.filter).subscribe((data: any) => {
 
       data.map(item => this.list.push(new Document(item)));
       this.list.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
@@ -54,7 +72,6 @@ export class DocumentsCategoryComponent implements OnInit {
       this.showPreloader = false;
       console.log("this.list", this.list);
     })
-    this.leftPanelStateService.changeStateWithoutNavigate("new-category-documents");
   }
 
   removeDocument(item) {

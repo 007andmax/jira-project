@@ -15,7 +15,8 @@ export class Document {
     tags: []
     title: string;
     updatedAt: string;
-    constructor(data) {
+    isCategory: boolean = false;
+    constructor(data, isCategory = false) {
         this.categoryId = data.categoryId;
         this.categoryName = data.categoryName;
         this.clientType = data.clientType;
@@ -29,5 +30,7 @@ export class Document {
         this.tags = data.tags;
         this.title = data.title;
         this.updatedAt = data.updatedAt;
+        this.isCategory = isCategory;
     }
+
 }

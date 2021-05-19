@@ -27,16 +27,14 @@ export class DocumentsTableComponent implements OnInit {
     }
   }
   navigateToCategory() {
-    if (!this.isCategory()) return;
+    if (!this.item.isCategory) return;
     this.router.navigate(
       ['/ng2/documents/category/', this.item.categoryId]);
   }
-  isCategory() {
-    return this.item.categoryId;
-  }
+
   getCreateBy() {
     let user = this.usersStateService.getAllUsers().find(item => item.id === this.item.createdBy)
-    return `${user.firstName} ${user.lastName}`;
+    return (user) ? `${user.firstName} ${user.lastName}` : '';
   }
   parseCreateAt() {
     return moment(new Date(this.item.createdAt)).format('DD MMM YYYY');
@@ -47,7 +45,7 @@ export class DocumentsTableComponent implements OnInit {
   getCompanies() {
     if (this.companiesStateService.getCompanies().length === 0) return '';
     let listCompanies = this.item.linked.companies.map(item => this.companiesStateService.getCompanies().find(company => company.id === item));
-    return listCompanies.map(item => item.name).join(",");
+    return listCompanies.map(item => item.name).join(", ");
   }
   removeCategory() {
     this.onRemoveCategory.emit(this.item);

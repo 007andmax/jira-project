@@ -1,11 +1,15 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { QuoteFilter } from 'src/app/components/billing/quotes/class/quote-filter';
+import { TechUsersListReportComponent } from 'src/app/components/reports/report-menu/tech-users-list-report/tech-users-list-report.component';
 import { MultiDatepickerComponent } from 'src/app/components/shared/multi-datepicker/multi-datepicker.component';
 import { SelectSearchComponent } from 'src/app/components/shared/select-search/select-search.component';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
+import { DocumentFilter } from '../../class/document-filter';
+import * as moment from "moment";
 
 @Component({
   selector: 'documents-filter',
@@ -17,14 +21,14 @@ export class DocumentsFilterComponent implements OnInit {
   companies = [];
   defaultDate: number = new Date().getTime();
   @ViewChild('companyDp') companyDp: SelectSearchComponent;
-  @ViewChild('statusDp') statusDp: SelectSearchComponent;
+  @ViewChild('usersDp') usersDp: TechUsersListReportComponent;
   @ViewChild('datesDp') datesDp: MultiDatepickerComponent;
   sub: Subscription = new Subscription();
-  quotesFilter: QuoteFilter = new QuoteFilter();
+  documentsFilter: DocumentFilter = new DocumentFilter();
   @Output() changeCountFilter = new EventEmitter<any>();
 
   constructor(private companiesState: CompaniesStateService,
-    private quoteStateService: QuoteStateService) { }
+    private documentsStateService: DocumentsStateService) { }
 
   ngOnInit() {
     if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
@@ -33,11 +37,7 @@ export class DocumentsFilterComponent implements OnInit {
     })
     this.sub.add(getOnCompanies);
   }
-  onSelectStatus(status) {
-    this.quotesFilter.setStatus((status) ? status.value : null);
-    this.quoteStateService.onInitFilter(this.quotesFilter);
-    this.onChangeCounterFilter();
-  }
+
   private getClientsList(data) {
     this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
@@ -45,46 +45,50 @@ export class DocumentsFilterComponent implements OnInit {
   public onClearAll() {
     this.companyDp.clearWithOutChanges();
     this.datesDp.clearWithOutChanges();
-    this.statusDp.clearWithOutChanges();
-    this.quotesFilter.setStatus(null);
-    this.quotesFilter.setCompanyName(null);
-    this.quotesFilter.setStartDate(null);
-    this.quotesFilter.setEndDate(null);
-    this.quotesFilter.setQuoteNumber(null);
-    this.quoteStateService.onInitFilter(this.quotesFilter);
+    this.usersDp.clearWithOutChanges();
+    this.documentsFilter.setCategoryId(null);
+    this.documentsFilter.setCompanyId(null);
+    this.documentsFilter.setTags([]);
+    this.documentsFilter.setUserId(null);
+    this.documentsFilter.setReviewDateStart(null);
+    this.documentsFilter.setReviewDateEnd(null);
+    this.documentsStateService.onInitFilter(this.documentsFilter);
     this.onChangeCounterFilter();
   }
-  public onSelectCompany(item) {
-    if (!item) {
-      this.quotesFilter.setCompanyName(null);
-    } else {
-      this.quotesFilter.setCompanyName(item.name);
-    }
-    this.quoteStateService.onInitFilter(this.quotesFilter);
+  public onSelectCompany(data) {
+    this.documentsFilter.setCompanyId((data) ? data.id : null);
+    this.documentsStateService.onInitFilter(this.documentsFilter);
     this.onChangeCounterFilter();
   }
-  public onSetNumberQuote(event) {
-    this.quotesFilter.setQuoteNumber((event.target.value.length > 0) ? event.target.value : null);
-    this.quoteStateService.onInitFilter(this.quotesFilter);
+  public onSelectTags(data) {
+    this.documentsFilter.setTags(data);
+    this.documentsStateService.onInitFilter(this.documentsFilter);
     this.onChangeCounterFilter();
   }
+  onSelectTechUser(data) {
+    this.documentsFilter.setUserId((data) ? data.id : null);
+    this.documentsStateService.onInitFilter(this.documentsFilter);
+    this.onChangeCounterFilter();
+  }
+
   public filterByDate(value) {
     if (value.start !== '' && value.end !== '') {
-      this.quotesFilter.setStartDate(new Date(value.start).getTime());
-      this.quotesFilter.setEndDate(new Date(value.end).getTime());
+      this.documentsFilter.setReviewDateStart(moment(new Date(value.start)).format('YYYY/DD/MM'));
+      this.documentsFilter.setReviewDateEnd(moment(new Date(value.end)).format('YYYY/DD/MM'));
     } else {
-      this.quotesFilter.setStartDate(null);
-      this.quotesFilter.setEndDate(null);
+      this.documentsFilter.setReviewDateStart(null);
+      this.documentsFilter.setReviewDateEnd(null);
     }
-    this.quoteStateService.onInitFilter(this.quotesFilter);
+    this.documentsStateService.onInitFilter(this.documentsFilter);
     this.onChangeCounterFilter();
   }
   public onChangeCounterFilter() {
     let count = 0;
-    if (this.quotesFilter.companyName) count++;
-    if (this.quotesFilter.endDate && this.quotesFilter.date) count++;
-    if (this.quotesFilter.quoteNumber) count++;
-    if (this.quotesFilter.status) count++;
+    if (this.documentsFilter.categoryId) count++;
+    if (this.documentsFilter.reviewDateStart && this.documentsFilter.reviewDateEnd) count++;
+    if (this.documentsFilter.tags) count++;
+    if (this.documentsFilter.userId) count++;
+    if (this.documentsFilter.companyId) count++;
     this.changeCountFilter.emit(count);
   }
 
