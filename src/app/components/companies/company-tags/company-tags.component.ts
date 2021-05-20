@@ -45,7 +45,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-    let getTags = this.tagsService.geCompanytTags().subscribe((data) => {
+    let getTags = this.tagsService.geCompanyTags().subscribe((data: Array<Tag>) => {
       this.tags = data.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
         1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
       this.reqTags = data.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
@@ -83,10 +83,10 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
       const input = event.target.input;
       const value = event.target.value;
       if ((value || '').trim()) {
-        let tag: Tag = {
+        let tag: any = {
           colorCode: 0, usedCounter: 0, word: value.trim(), id: ''
         }
-        let setTags = this.tagsService.setCompanyTags(this.companiesStateService.getCurrentCompany().id, tag.word).subscribe((res) => {
+        let setTags = this.tagsService.addCompanyTags(tag).subscribe((res) => {
           tag.id = res.id;
           this.reqTags.push(tag);
           this.tags = this.reqTags;

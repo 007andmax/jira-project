@@ -18,7 +18,7 @@ export class DocumentsFilterTagsComponent implements OnInit, OnDestroy {
     private tagsService: TagsService) { }
 
   ngOnInit() {
-    let getTags = this.tagsService.geCompanytTags().subscribe((data) => {
+    let getTags = this.tagsService.geCompanyTags().subscribe((data: any) => {
       this.tags = data.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
         1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
     })

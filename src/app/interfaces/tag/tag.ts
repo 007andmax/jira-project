@@ -1,6 +1,6 @@
 export interface Tag {
-    colorCode: number;
+    defaultTag: string;
+    id: string;
     usedCounter: number;
     word: string;
-    id:string;
 }
