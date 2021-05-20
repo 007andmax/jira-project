@@ -19,6 +19,7 @@ import { DocumentFilter } from './class/document-filter';
   styleUrls: ['./documents.component.scss']
 })
 export class DocumentsComponent implements OnInit, OnDestroy {
+
   showPreloader: boolean = true;
   list: Array<Document> = [];
   filter: DocumentFilter = new DocumentFilter();
@@ -69,7 +70,7 @@ export class DocumentsComponent implements OnInit, OnDestroy {
   getFilterList() {
     this.showPreloader = true;
     this.list = [];
-    this.documentsService.filterDocuments(this.filter).subscribe((data: any) => {
+    this.documentsService.filterDocuments(this.filter.getDataForFilter()).subscribe((data: any) => {
 
       data.map(item => this.list.push(new Document(item)));
       this.list.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
@@ -77,6 +78,9 @@ export class DocumentsComponent implements OnInit, OnDestroy {
       this.showPreloader = false;
       console.log("this.list", this.list);
     })
+  }
+  public onFilter(field) {
+    this.filter.onFilter(field, this.list, this.usersStateService.getAllUsers())
   }
   removeCategory(item) {
     this.documentsService.removeCategories(item.categoryId).subscribe(data => {

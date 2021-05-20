@@ -10,9 +10,19 @@
 
 
 
+
+
+
+
+
         <div class="qt-page-list__header-title-line--rigth">
             <div class="d-f ai-c">
                 <div class="qt-page-list__search qt-ml-8 search-container">
+
+
+
+
+
 
 
 
@@ -61,6 +71,11 @@
 
 
 
+
+
+
+
+
     <div class="qt-page-list__header-filters">
         <documents-filter
             class="qt-w100"
@@ -69,6 +84,11 @@
             [hidden]="toggleFilter"
         ></documents-filter>
     </div>
+
+
+
+
+
 
 
 
@@ -111,26 +131,35 @@
         <table class="qt-table-modern qt-page-list__header-thead">
             <thead>
                 <tr>
-                    <th class="documents-table__title pointer">
+                    <th
+                        class="documents-table__title pointer"
+                        (click)="onFilter('title')"
+                    >
                         Title
                         <span class="qt-table-modern__sorting"></span>
                     </th>
-                    <th class="documents-table__create-by">
+                    <th
+                        class="documents-table__create-by pointer"
+                        (click)="onFilter('createBy')"
+                    >
                         Create By
                         <span class="qt-table-modern__sorting"></span>
                     </th>
-                    <th class="documents-table__created-date pointer">
+                    <th
+                        class="documents-table__created-date pointer"
+                        (click)="onFilter('createdDate')"
+                    >
                         Created Date
                         <span class="qt-table-modern__sorting"></span>
                     </th>
-                    <th class="documents-table__review-date pointer">
+                    <th
+                        class="documents-table__review-date pointer"
+                        (click)="onFilter('reviewDate')"
+                    >
                         Review Date
                         <span class="qt-table-modern__sorting"></span>
                     </th>
-                    <th class="documents-table__company pointer">
-                        Company
-                        <span class="qt-table-modern__sorting"></span>
-                    </th>
+                    <th class="documents-table__company">Company</th>
                     <th class="documents-table__shared pointer"></th>
                     <th class="documents-table__menu pointer"></th>
                 </tr>

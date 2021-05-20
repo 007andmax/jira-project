@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-documents-add-info',
@@ -6,11 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./documents-add-info.component.scss']
 })
 export class DocumentsAddInfoComponent implements OnInit {
-  toggleAside: boolean = true;
+  openAside: boolean = true;
   toggleEditCategories: boolean = false;
+  @Output() onToggleAside = new EventEmitter<any>();
   constructor() { }
 
   ngOnInit() {
   }
 
+  public toggleAside() {
+    this.openAside = !this.openAside;
+    this.onToggleAside.emit(this.openAside);
+  }
 }

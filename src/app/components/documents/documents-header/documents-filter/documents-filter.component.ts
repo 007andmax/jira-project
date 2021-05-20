@@ -86,7 +86,7 @@ export class DocumentsFilterComponent implements OnInit {
     let count = 0;
     if (this.documentsFilter.categoryId) count++;
     if (this.documentsFilter.reviewDateStart && this.documentsFilter.reviewDateEnd) count++;
-    if (this.documentsFilter.tags) count++;
+    if (this.documentsFilter.tags.length > 0) count++;
     if (this.documentsFilter.userId) count++;
     if (this.documentsFilter.companyId) count++;
     this.changeCountFilter.emit(count);

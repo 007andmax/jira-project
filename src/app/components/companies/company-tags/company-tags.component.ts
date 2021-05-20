@@ -5,6 +5,7 @@ import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Tag } from 'src/app/interfaces/tag/tag';
 import { TagsService } from 'src/app/services/tags/tags.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
   selector: 'app-company-tags',
@@ -36,6 +37,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
   public constructor(
     public tagsService: TagsService,
     private tagsState: CompanyTagsStateService,
+    private companiesStateService: CompaniesStateService,
     public cd: ChangeDetectorRef
   ) { }
 
@@ -84,7 +86,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
         let tag: Tag = {
           colorCode: 0, usedCounter: 0, word: value.trim(), id: ''
         }
-        let setTags = this.tagsService.setCompanyTags(tag.word).subscribe((res) => {
+        let setTags = this.tagsService.setCompanyTags(this.companiesStateService.getCurrentCompany().id, tag.word).subscribe((res) => {
           tag.id = res.id;
           this.reqTags.push(tag);
           this.tags = this.reqTags;

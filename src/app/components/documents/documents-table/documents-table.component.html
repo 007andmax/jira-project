@@ -88,10 +88,13 @@
 
 
 
+
+
 <tr>
     <td
         class="documents-table__title"
         (click)="navigateToCategory()"
+        [ngClass]="{'pointer':item.isCategory}"
     >
         <div class="documents-table__title-menu">
             <div
@@ -109,25 +112,30 @@
         class="documents-table__create-by ellipsis"
         [textContent]="item.isCategory ? '' : getCreateBy()"
         (click)="navigateToCategory()"
+        [ngClass]="{'pointer':item.isCategory}"
     ></td>
     <td
         class="documents-table__created-date ellipsis"
         [textContent]="item.isCategory ? '' : parseCreateAt()"
         (click)="navigateToCategory()"
+        [ngClass]="{'pointer':item.isCategory}"
     ></td>
     <td
         class="documents-table__review-date ellipsis"
         [textContent]="item.isCategory ? '' : parseReviewAt()"
         (click)="navigateToCategory()"
+        [ngClass]="{'pointer':item.isCategory}"
     ></td>
     <td
         class="documents-table__company ellipsis"
         [textContent]="item.isCategory ? '' : getCompanies()"
         (click)="navigateToCategory()"
+        [ngClass]="{'pointer':item.isCategory}"
     ></td>
     <td
         class="documents-table__shared"
         (click)="navigateToCategory()"
+        [ngClass]="{'pointer':item.isCategory}"
     >
         <div></div>
     </td>
@@ -253,6 +261,8 @@
         </div>
     </td>
 </tr>
+
+
 
 
 

@@ -8,6 +8,7 @@ import { DocumentAdd } from './class/document-add';
   styleUrls: ['./documents-add.component.scss']
 })
 export class DocumentsAddComponent implements OnInit {
+  openAside: boolean = true;
   currentUser: any;
   showPreloader: boolean = true;
   documentAdd: DocumentAdd = new DocumentAdd();

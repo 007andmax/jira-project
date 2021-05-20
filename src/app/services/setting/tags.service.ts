@@ -17,7 +17,7 @@ export class TagsService {
 
 
   getAllCompany() {
-    return this.http.get(`${this.apiUrl}company/tags/getAll`);
+    return this.http.get(`${this.apiUrl}commonTags/getAll`);
   }
 
   saveAllowingCreateCustomTags(value) {
@@ -28,7 +28,7 @@ export class TagsService {
     if (tag === "ticket") {
       return this.http.post(`${this.apiUrl}tags`, tags);
     } else {
-      return this.http.post(`${this.apiUrl}company/tags`, tags);
+      return this.http.post(`${this.apiUrl}commonTags`, tags);
     }
   }
 
@@ -40,7 +40,7 @@ export class TagsService {
       );
     } else {
       return this.http.put(
-        `${this.apiUrl}company/tags/setWordForTag?tagId=${tagId}&word=${word}`,
+        `${this.apiUrl}commonTags/setWordForTag?tagId=${tagId}&word=${word}`,
         {}
       );
     }

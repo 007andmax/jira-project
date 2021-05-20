@@ -62,9 +62,12 @@ export class DocumentsCategoryComponent implements OnInit, OnDestroy {
 
     this.leftPanelStateService.changeStateWithoutNavigate("new-category-documents");
   }
+  public onFilter(field) {
+    this.filter.onFilter(field, this.list, this.usersStateService.getAllUsers())
+  }
   getList() {
     this.list = [];
-    this.documentsService.filterDocuments(this.filter).subscribe((data: any) => {
+    this.documentsService.filterDocuments(this.filter.getDataForFilter()).subscribe((data: any) => {
 
       data.map(item => this.list.push(new Document(item)));
       this.list.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?

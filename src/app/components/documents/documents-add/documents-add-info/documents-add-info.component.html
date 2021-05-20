@@ -1,255 +1,296 @@
-<!--<div-->
-<!--  class="toggle-aside icon__panel-open"-->
-<!--  [ngClass]="{'opened' : toggleAside}"-->
-<!--  (click)="toggleAside = !toggleAside"-->
-<!--&gt;</div>-->
-<!--<div-->
-<!--  class="documents-add-info"-->
-<!--  *ngIf="toggleAside"-->
-<!--&gt;-->
-<!--  <div-->
-<!--    class="qt-aside-modern__header-close icon__close"-->
-<!--    routerLink="/ng2/documents"-->
-<!--  ></div>-->
-<!--  <button (click)="toggleEditCategories = true">Edit</button>-->
-<!--</div>-->
-<!--<documents-add-edit-categories-->
-<!--  *ngIf="toggleEditCategories"-->
-<!--  (onClosed)="toggleEditCategories = false"-->
-<!--&gt;</documents-add-edit-categories>-->
+<!-- <div -->
+<!-- class="toggle-aside icon__panel-open" -->
+<!-- [ngClass]="{'opened' : toggleAside}" -->
+<!-- (click)="toggleAside = !toggleAside" -->
+<!-- &gt;</div> -->
+<!-- <div -->
+<!-- class="documents-add-info" -->
+<!-- *ngIf="toggleAside" -->
+<!-- &gt; -->
+<!-- <div -->
+<!-- class="qt-aside-modern__header-close icon__close" -->
+<!-- routerLink="/ng2/documents" -->
+<!-- ></div> -->
+<!-- <button (click)="toggleEditCategories = true">Edit</button> -->
+<!-- </div> -->
+<!-- <documents-add-edit-categories -->
+<!-- *ngIf="toggleEditCategories" -->
+<!-- (onClosed)="toggleEditCategories = false" -->
+<!-- &gt;</documents-add-edit-categories> -->
 
-<div class="qt-aside-modern documents-create">
 
-  <div class="qt-aside-modern__header">
-    <div
-      class="toggle-aside icon__panel-open qt-mr-16"
-      [ngClass]="{'opened' : toggleAside}"
-      (click)="toggleAside = !toggleAside"
-    ></div>
-    <div class="qt-aside-modern__header-title qt-mr-auto">Create Document</div>
-    <div
-      class="qt-aside-modern__header-close icon__close"
-      routerLink="/ng2/documents"
-    >
-    </div>
-  </div>
 
-  <div class="qt-aside-modern__content --no-padding">
-    <!-- Tab Header -->
-    <div class="documents-create-panel__subheader">
-      <!-- Document Info Tab -->
-      <div
-        class="documents-create-panel__subheader-item subheader-item-system pointer"
-        [ngClass]="{'--active':tab === 'DOCUMENT_INFO'}"
-        (click)="tab = 'DOCUMENT_INFO'"
-      >
-        Document Info
-      </div>
-      <!-- End Document Info Tab -->
-      <!-- Permissions Tab -->
-      <div
-        class="documents-create-panel__subheader-item subheader-item-network pointer"
-        [ngClass]="{'--active':tab === 'PERMISSIONS'}"
-        (click)="tab = 'PERMISSIONS'"
-      >
-        Permissions
-      </div>
-      <!-- End Permissions -->
-      <!-- Tab Document History -->
-      <div
-        class="documents-create-panel__subheader-item subheader-item-software pointer"
-        [ngClass]="{'--active':tab === 'DOCUMENT_HISTORY'}"
-        (click)="tab = 'DOCUMENT_HISTORY'"
-      >
-        Document History
-      </div>
-      <!-- End Document History -->
-      <!-- End Tab Aside Header -->
-    </div>
-    <!-- End Tab Header -->
-    <!-- Tab Body -->
-    <div class="documents-create-panel__body">
-      <!-- Password Detail Tab Content -->
-      <div
-        class="qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24"
-        *ngIf="tab === 'DOCUMENT_INFO'"
-      >
 
-        <div class="documents-create__col --required">
-          <p class="label-name">Document Title</p>
-          <input
-            type="text"
-            class="qt-input-40 documents-add-body__input"
-            placeholder="Printer Installation Guide"
-          >
-        </div>
+<div
+    class="qt-aside-modern documents-create"
+    [ngClass]="{'--mini' : !openAside}"
+>
 
-        <div class="documents-create__col --required">
-          <p class="label-name">Document Description</p>
-          <textarea
-            appTextArea
-            [limit]="160"
-            placeholder="Write Description"
-          ></textarea>
-        </div>
 
-        <div class="documents-create__col select-open-top --required">
-          <div class="qt-df qt-jc-sb">
-            <p class="label-name">Document Category</p>
-            <p
-              class="qt-color-info"
-              (click)="toggleEditCategories = true"
-            >
-              Edit
-            </p>
-          </div>
-          <app-drop-down
-            [class]="['light-dropdown', 'qt-select-input-40']"
-            [placeholder]="'Select Category'"
-            [errorMessage]="'Category is required'"
-            [field]="'name'"
-            [add]="true"
-            [list]=""
-            [search]="true"
-            [change]="true"
-          >
-          </app-drop-down>
-        </div>
 
+
+    <div class="qt-aside-modern__header">
         <div
-          class="documents-create__col"
+            class="toggle-aside icon__panel-open qt-mr-16"
+            [ngClass]="{'opened' : openAside}"
+            (click)="toggleAside()"
+        ></div>
+        <div class="qt-aside-modern__header-title qt-mr-auto">Create Document</div>
+        <div
+            class="qt-aside-modern__header-close icon__close"
+            routerLink="/ng2/documents"
         >
-          <p class="label-name">Link To</p>
-          <div
-            class="documents-create-user pointer"
-          >
-            <div class="selected-user">
-              <i class="icon__user-grey qt-sz-16 qt-bg-contain qt-mr-6"></i>
-              admin admin3
-              <i class="icn-sm icn-remove-old"></i>
-            </div>
-          </div>
         </div>
-
-        <div class="documents-create__col checkbox-wrapper">
-          <div class="with-checkbox">
-            <label class="checkbox-container">
-              <input
-                type="checkbox"
-              >
-              <span class="checkbox-mark"></span>
-            </label>
-            <p>Show in Knowledge base</p>
-          </div>
-        </div>
-
-        <div class="documents-create__col">
-          <app-drop-down
-            class="dropdown"
-            [placeholder]="'Select Category'"
-            [list]=""
-            [field]="'name'"
-            [search]="true"
-            [change]="true"
-            heightInput="40px"
-            widthInput="100%"
-          ></app-drop-down>
-        </div>
-
-        <div class="documents-create__col checkbox-wrapper">
-        <div class="with-checkbox">
-          <label class="checkbox-container">
-            <input
-              id=""
-              type="checkbox"
-            >
-            <span class="checkbox-mark"></span>
-          </label>
-          <p>Required by Company Type</p>
-        </div>
-      </div>
-
-      <div class="documents-create__col">
-        <app-drop-down
-          class="dropdown"
-          [placeholder]="'Select Company Type'"
-          [list]=""
-          [field]="'name'"
-          [search]="true"
-          [change]="true"
-          heightInput="40px"
-          widthInput="100%"
-        ></app-drop-down>
-      </div>
-
-      <div class="documents-create__col">
-        <p class="label-name">Document Review Date</p>
-        <app-date-picker
-          [editMode]="true"
-          [useMinDate]="false"
-        ></app-date-picker>
-      </div>
-
-      <div class="documents-create__col">
-        <div class="qt-df qt-jc-sb qt-ai-c">
-          <p class="label-name">Share Document Link</p>
-          <div class="qt-df qt-ai-c pointer">
-            <div class="icon__link qt-sz-16 qt-bg-contain"></div>
-            <div class="qt-color-info qt-ff-gm qt-mr-4 qt-ml-4">
-              Copy Link
-            </div>
-            <div class="qt-df">
-              <div
-                class="qt-toggle qt-mr-8"
-              >
-                <div class="qt-toggle__circle"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <input
-          type="text"
-          class="qt-input-40 documents-add-body__input"
-          placeholder="https://www.quicktech.com/shard/s593/sh/04d5c…"
-        >
-      </div>
-
-      </div>
-      <!-- End Password Detail Tab Content -->
-      <!-- Linked Devices Tab Content -->
-      <div
-        class="qt-pt-12 qt-pl-24 qt-pr-24"
-        *ngIf="tab === 'PERMISSIONS'"
-      >
-        22222
-      </div>
-      <!-- End Linked Devices Tab Content -->
-      <!-- Document History Tab Content -->
-      <div
-        class="qt-pb-24"
-        *ngIf="tab === 'DOCUMENT_HISTORY'"
-      >
-        3333
-      </div>
-      <!-- End Document History Tab Content -->
     </div>
-    <!-- End Tab Body -->
-  </div>
+
+
+
+
+    <div class="qt-aside-modern__content --no-padding">
+        <!-- Tab Header -->
+        <div class="documents-create-panel__subheader">
+            <!-- Document Info Tab -->
+            <div
+                class="documents-create-panel__subheader-item subheader-item-system pointer"
+                [ngClass]="{'--active':tab === 'DOCUMENT_INFO'}"
+                (click)="tab = 'DOCUMENT_INFO'"
+            >
+                Document Info
+            </div>
+            <!-- End Document Info Tab -->
+            <!-- Permissions Tab -->
+            <div
+                class="documents-create-panel__subheader-item subheader-item-network pointer"
+                [ngClass]="{'--active':tab === 'PERMISSIONS'}"
+                (click)="tab = 'PERMISSIONS'"
+            >
+                Permissions
+            </div>
+            <!-- End Permissions -->
+            <!-- Tab Document History -->
+            <div
+                class="documents-create-panel__subheader-item subheader-item-software pointer"
+                [ngClass]="{'--active':tab === 'DOCUMENT_HISTORY'}"
+                (click)="tab = 'DOCUMENT_HISTORY'"
+            >
+                Document History
+            </div>
+            <!-- End Document History -->
+            <!-- End Tab Aside Header -->
+        </div>
+        <!-- End Tab Header -->
+        <!-- Tab Body -->
+        <div class="documents-create-panel__body">
+            <!-- Password Detail Tab Content -->
+            <div
+                class="qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24"
+                *ngIf="tab === 'DOCUMENT_INFO'"
+            >
+
+
+
+
+                <div class="documents-create__col --required">
+                    <p class="label-name">Document Title</p>
+                    <input
+                        type="text"
+                        class="qt-input-40 documents-add-body__input"
+                        placeholder="Printer Installation Guide"
+                    >
+                </div>
+
+
+
+
+                <div class="documents-create__col --required">
+                    <p class="label-name">Document Description</p>
+                    <textarea
+                        appTextArea
+                        [limit]="160"
+                        placeholder="Write Description"
+                    ></textarea>
+                </div>
+
+
+
+
+                <div class="documents-create__col select-open-top --required">
+                    <div class="qt-df qt-jc-sb">
+                        <p class="label-name">Document Category</p>
+                        <p
+                            class="qt-color-info"
+                            (click)="toggleEditCategories = true"
+                        >
+                            Edit
+                        </p>
+                    </div>
+                    <app-drop-down
+                        [class]="['light-dropdown', 'qt-select-input-40']"
+                        [placeholder]="'Select Category'"
+                        [errorMessage]="'Category is required'"
+                        [field]="'name'"
+                        [add]="true"
+                        [list]
+                        [search]="true"
+                        [change]="true"
+                    >
+                    </app-drop-down>
+                </div>
+
+
+
+
+                <div class="documents-create__col">
+                    <p class="label-name">Link To</p>
+                    <div class="documents-create-user pointer">
+                        <div class="selected-user">
+                            <i class="icon__user-grey qt-sz-16 qt-bg-contain qt-mr-6"></i>
+                            admin admin3
+                            <i class="icn-sm icn-remove-old"></i>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="documents-create__col checkbox-wrapper">
+                    <div class="with-checkbox">
+                        <label class="checkbox-container">
+                            <input type="checkbox">
+                            <span class="checkbox-mark"></span>
+                        </label>
+                        <p>Show in Knowledge base</p>
+                    </div>
+                </div>
+
+
+
+
+                <div class="documents-create__col">
+                    <app-drop-down
+                        class="dropdown"
+                        [placeholder]="'Select Category'"
+                        [list]
+                        [field]="'name'"
+                        [search]="true"
+                        [change]="true"
+                        heightInput="40px"
+                        widthInput="100%"
+                    ></app-drop-down>
+                </div>
+
+
+
+
+                <div class="documents-create__col checkbox-wrapper">
+                    <div class="with-checkbox">
+                        <label class="checkbox-container">
+                            <input
+                                id
+                                type="checkbox"
+                            >
+                            <span class="checkbox-mark"></span>
+                        </label>
+                        <p>Required by Company Type</p>
+                    </div>
+                </div>
+
+
+
+
+                <div class="documents-create__col">
+                    <app-drop-down
+                        class="dropdown"
+                        [placeholder]="'Select Company Type'"
+                        [list]
+                        [field]="'name'"
+                        [search]="true"
+                        [change]="true"
+                        heightInput="40px"
+                        widthInput="100%"
+                    ></app-drop-down>
+                </div>
+
+
+
+
+                <div class="documents-create__col">
+                    <p class="label-name">Document Review Date</p>
+                    <app-date-picker
+                        [editMode]="true"
+                        [useMinDate]="false"
+                    ></app-date-picker>
+                </div>
+
+
+
+
+                <div class="documents-create__col">
+                    <div class="qt-df qt-jc-sb qt-ai-c">
+                        <p class="label-name">Share Document Link</p>
+                        <div class="qt-df qt-ai-c pointer">
+                            <div class="icon__link qt-sz-16 qt-bg-contain"></div>
+                            <div class="qt-color-info qt-ff-gm qt-mr-4 qt-ml-4">Copy Link</div>
+                            <div class="qt-df">
+                                <div class="qt-toggle qt-mr-8">
+                                    <div class="qt-toggle__circle"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <input
+                        type="text"
+                        class="qt-input-40 documents-add-body__input"
+                        placeholder="https://www.quicktech.com/shard/s593/sh/04d5c…"
+                    >
+                </div>
+
+
+
+
+            </div>
+            <!-- End Password Detail Tab Content -->
+            <!-- Linked Devices Tab Content -->
+            <div
+                class="qt-pt-12 qt-pl-24 qt-pr-24"
+                *ngIf="tab === 'PERMISSIONS'"
+            >
+                22222
+            </div>
+            <!-- End Linked Devices Tab Content -->
+            <!-- Document History Tab Content -->
+            <div
+                class="qt-pb-24"
+                *ngIf="tab === 'DOCUMENT_HISTORY'"
+            >
+                3333
+            </div>
+            <!-- End Document History Tab Content -->
+        </div>
+        <!-- End Tab Body -->
+    </div>
+
+
+
 
 </div>
 
 
 
-<!--<div-->
-<!--    class="documents-add-info"-->
-<!--    *ngIf="toggleAside"-->
-<!--&gt;-->
-<!--    <div-->
-<!--        class="qt-aside-modern__header-close icon__close"-->
-<!--        routerLink="/ng2/documents"-->
-<!--    ></div>-->
-<!--    <button (click)="toggleEditCategories = true">Edit</button>-->
-<!--</div>-->
+
+
+
+<!-- <div -->
+<!-- class="documents-add-info" -->
+<!-- *ngIf="toggleAside" -->
+<!-- &gt; -->
+<!-- <div -->
+<!-- class="qt-aside-modern__header-close icon__close" -->
+<!-- routerLink="/ng2/documents" -->
+<!-- ></div> -->
+<!-- <button (click)="toggleEditCategories = true">Edit</button> -->
+<!-- </div> -->
 <documents-add-edit-categories
     *ngIf="toggleEditCategories"
     (onClosed)="toggleEditCategories = false"

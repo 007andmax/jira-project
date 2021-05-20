@@ -19,12 +19,12 @@ export class TagsService {
     private http: HttpClient
   ) { }
   public geCompanytTags() {
-    return this.http.get(this.apiUrl + `company/tags/getAll`).pipe(
+    return this.http.get(this.apiUrl + `commonTags/getAll`).pipe(
       tap((data: any) => data.data));
   }
 
-  public setCompanyTags(word) {
-    return this.http.post(this.apiUrl + `company/tags`, { word: word }).pipe(
+  public setCompanyTags(companyId, word) {
+    return this.http.post(this.apiUrl + `commonTags/company/${companyId}`, { word: word }).pipe(
       tap((data: any) => data.data));
   }
 
@@ -34,7 +34,7 @@ export class TagsService {
   }
 
   public setTags(tag: Tag) {
-    return this.http.post(this.apiUrl + `tags`, tag).pipe(
+    return this.http.post(this.apiUrl + `commonTags`, tag).pipe(
       tap((data: any) => data.data));
   }
 }

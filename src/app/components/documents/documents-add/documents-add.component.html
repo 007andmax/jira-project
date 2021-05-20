@@ -1,6 +1,9 @@
-<div class="documents-details qt-page-list">
-  <app-documents-add-header></app-documents-add-header>
-  <app-documents-add-body (onChangeContent)="onChangeContent($event)"></app-documents-add-body>
-  <app-documents-add-footer [documentAdd]="documentAdd"></app-documents-add-footer>
-  <app-documents-add-info></app-documents-add-info>
+<div
+    class="documents-details qt-page-list"
+    [ngClass]="{'--large' : !openAside}"
+>
+    <app-documents-add-header></app-documents-add-header>
+    <app-documents-add-body (onChangeContent)="onChangeContent($event)"></app-documents-add-body>
+    <app-documents-add-footer [documentAdd]="documentAdd"></app-documents-add-footer>
+    <app-documents-add-info (onToggleAside)="openAside  =$event"></app-documents-add-info>
 </div>
