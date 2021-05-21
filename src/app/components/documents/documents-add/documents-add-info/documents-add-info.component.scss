@@ -3,9 +3,7 @@
   height: 100vh;
 
   .toggle-aside.opened {
-      transform: rotate(
-          180deg
-      );
+    transform: rotate(180deg);
   }
 
   &.--mini {

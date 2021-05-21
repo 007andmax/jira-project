@@ -27,10 +27,14 @@
 
 
 
+
+
 <div
     class="qt-aside-modern documents-create"
     [ngClass]="{'--mini' : !openAside}"
 >
+
+
 
 
 
@@ -54,6 +58,8 @@
         >
         </div>
     </div>
+
+
 
 
 
@@ -114,6 +120,8 @@
 
 
 
+
+
                 <div class="documents-create__col --required">
                     <p class="label-name">Document Title</p>
                     <input
@@ -132,6 +140,8 @@
 
 
 
+
+
                 <div class="documents-create__col --required">
                     <p class="label-name">Document Description</p>
                     <textarea
@@ -140,6 +150,8 @@
                         placeholder="Write Description"
                     ></textarea>
                 </div>
+
+
 
 
 
@@ -181,12 +193,16 @@
 
 
 
+
+
                 <div class="documents-create__col">
                     <documents-linked
                         #linked
                         (onSelectedItem)="onChangeLinked($event)"
                     ></documents-linked>
                 </div>
+
+
 
 
 
@@ -206,6 +222,8 @@
                         <p>Show in Knowledge base</p>
                     </div>
                 </div>
+
+
 
 
 
@@ -238,6 +256,8 @@
 
 
 
+
+
                 <div class="documents-create__col checkbox-wrapper">
                     <div class="with-checkbox">
                         <label class="checkbox-container">
@@ -250,6 +270,8 @@
                         <p>Required by Company Type</p>
                     </div>
                 </div>
+
+
 
 
 
@@ -282,6 +304,8 @@
 
 
 
+
+
                 <div class="documents-create__col">
                     <p class="label-name">Document Review Date</p>
                     <app-date-picker
@@ -296,6 +320,8 @@
                         (onSelectedItems)="onSelectTags($event)"
                     ></documents-filter-tags>
                 </div>
+
+
 
 
 
@@ -323,6 +349,8 @@
                         placeholder="https://www.quicktech.com/shard/s593/sh/04d5c…"
                     >
                 </div>
+
+
 
 
 
@@ -364,7 +392,11 @@
 
 
 
+
+
 </div>
+
+
 
 
 

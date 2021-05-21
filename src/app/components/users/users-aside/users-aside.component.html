@@ -273,7 +273,11 @@
                 (subscribeChange)="onChangeSubscriptions($event)"
             ></app-company-subscription>
         </div>
-        <app-company-tags (tagsChange)="onChangeTags($event)"></app-company-tags>
+        <app-company-tags
+            class="users-filter-tags"
+            [placement]="'top'"
+            (tagsChange)="onChangeTags($event)"
+        ></app-company-tags>
     </div>
     <div class="qt-aside-modern__footer">
         <div class="qt-df">

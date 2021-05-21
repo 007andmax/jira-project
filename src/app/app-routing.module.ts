@@ -55,6 +55,7 @@ import { SupportComponent } from './components/support/support.component';
 import { DocumentsComponent } from './components/documents/documents.component';
 import { DocumentsAddComponent } from './components/documents/documents-add/documents-add.component';
 import { DocumentsCategoryComponent } from './components/documents/documents-category/documents-category.component';
+import { DocumentsTemplatesComponent } from './components/documents/documents-templates/documents-templates.component';
 
 const routes: Routes = [
   {
@@ -300,6 +301,11 @@ const routes: Routes = [
   {
     path: 'ng2/documents',
     component: DocumentsComponent,
+
+  },
+  {
+    path: 'ng2/documents/templates',
+    component: DocumentsTemplatesComponent,
 
   },
 ];

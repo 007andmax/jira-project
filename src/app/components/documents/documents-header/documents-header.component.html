@@ -15,9 +15,27 @@
 
 
 
+
+
+
+
+
+
+
+
+
         <div class="qt-page-list__header-title-line--rigth">
             <div class="d-f ai-c">
                 <div class="qt-page-list__search qt-ml-8 search-container">
+
+
+
+
+
+
+
+
+
 
 
 
@@ -58,15 +76,57 @@
                     ></span>
                     Filters
                 </button>
-                <button
-                    class="qt-btn --outline-blue qt-ml-8"
-                    routerLink="/ng2/documents/add"
-                >
-                    Create Document
-                </button>
+                <div class="qt-df">
+                    <div
+                        class="qt-pos-rel"
+                        ngbDropdown
+                        [placement]="'bottom-right'"
+                    >
+                        <ul
+                            class="qt-dropdown-menu"
+                            ngbDropdownMenu
+                            aria-labelledby="dropdownSave"
+                        >
+                            <li
+                                ngbDropdownItem
+                                routerLink="/ng2/documents/templates"
+                            >
+                                <div class="icon__download qt-sz-16 qt-mr-8"></div>
+                                Create from template
+                            </li>
+                        </ul>
+                        <button class=" qt-button --with-menu qt-mr-12">
+                            <span
+                                class="save-billable-aside-btn left-side"
+                                routerLink="/ng2/documents/add"
+                            >
+                                <span>Create Document</span>
+                            </span>
+                            <div
+                                class="button-menu"
+                                id="dropdownSave"
+                                ngbDropdownToggle
+                            >
+                                <div class="qt-sz-16 qt-ic-c icon__dropdown-arrow-up"></div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+
+
             </div>
         </div>
     </div>
+
+
+
+
+
+
+
+
+
 
 
 
@@ -84,6 +144,15 @@
             [hidden]="toggleFilter"
         ></documents-filter>
     </div>
+
+
+
+
+
+
+
+
+
 
 
 

@@ -26,6 +26,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
   reqTags: Array<Tag> = [];
   sub = new Subscription();
   editItem: any;
+  @Input() placement: string = 'bottom';
   @Input() blockCreateTag: boolean = false;
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @Output() tagsChange = new EventEmitter();

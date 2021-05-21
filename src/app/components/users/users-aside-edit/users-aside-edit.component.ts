@@ -22,7 +22,7 @@ import { CompanyTagsStateService } from '../../companies/company-tags/states/com
 @Component({
   selector: 'users-aside-edit',
   templateUrl: './users-aside-edit.component.html',
-  styleUrls: ['./users-aside-edit.component.css'],
+  styleUrls: ['./users-aside-edit.component.scss'],
   providers: [UsersAsideService]
 })
 export class UsersAsideEditComponent implements OnInit {
