@@ -16,7 +16,7 @@ export class UserAdd {
   primaryEmail: string;
   designation: string;
   companyId: string;
-
+  tags: Array<any> = [];
   constructor(data: UserProfile) {
     this.role = data.role;
     if (data.phoneNumbers.length === 1 && data.phoneNumbers[0].number === '') {
@@ -34,7 +34,9 @@ export class UserAdd {
     this.primaryEmail = data.primaryEmail;
     this.designation = data.designation;
     this.companyId = data.companyId;
-
+    this.tags = data.tags.map(item => {
+      return { id: item.id };
+    })
 
   }
 }

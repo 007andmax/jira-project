@@ -17,6 +17,7 @@ import { ImageCropperComponent } from '../../shared/image-cropper/image-cropper.
 import { CompanySubscriptionStateService } from '../../companies/company-subscription/class/company-subscription-state.service';
 import { Company } from 'src/app/interfaces/company/company';
 import { TitleListType } from '../../tickets/tickets/tickets-header/class/title-list-type';
+import { CompanyTagsStateService } from '../../companies/company-tags/states/company-tags-state.service';
 
 @Component({
   selector: 'users-aside-edit',
@@ -44,6 +45,7 @@ export class UsersAsideEditComponent implements OnInit {
     private companiesStateService: CompaniesStateService,
     private modalImageCropperStateService: ModalImageCropperStateService,
     private companiesService: CompaniesService,
+    private tagsState: CompanyTagsStateService,
     private companySubscriptionState: CompanySubscriptionStateService,
     private modalService: NgbModal,
     public cd: ChangeDetectorRef) { }
@@ -60,7 +62,8 @@ export class UsersAsideEditComponent implements OnInit {
 
       this.opened = true;
       this.user.onEdit(this.usersStateService.getuserForEdit());
-
+      console.log("this.user", this.user);
+      this.tagsState.setTagsFromtEdit(this.user.tags);
       this.selectedUserType = this.userTypes.find(item => item.type === this.user.role);
       this.validate.addPhoneNumbers(this.user.phoneNumbers);
       this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.user.companyId);
@@ -74,6 +77,9 @@ export class UsersAsideEditComponent implements OnInit {
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.getClientsList(data);
     })
+  }
+  public onChangeTags(tags) {
+    this.user.setTags(tags);
   }
   getClientsList(data) {
     this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
