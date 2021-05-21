@@ -22,10 +22,20 @@
 
 
 
+
+
+
+
+
 <div
     class="qt-aside-modern documents-create"
     [ngClass]="{'--mini' : !openAside}"
 >
+
+
+
+
+
 
 
 
@@ -44,6 +54,11 @@
         >
         </div>
     </div>
+
+
+
+
+
 
 
 
@@ -94,6 +109,11 @@
 
 
 
+
+
+
+
+
                 <div class="documents-create__col --required">
                     <p class="label-name">Document Title</p>
                     <input
@@ -107,6 +127,11 @@
 
 
 
+
+
+
+
+
                 <div class="documents-create__col --required">
                     <p class="label-name">Document Description</p>
                     <textarea
@@ -115,6 +140,11 @@
                         placeholder="Write Description"
                     ></textarea>
                 </div>
+
+
+
+
+
 
 
 
@@ -147,16 +177,21 @@
 
 
 
+
+
+
+
                 <div class="documents-create__col">
-                    <p class="label-name">Link To</p>
-                    <div class="documents-create-user pointer">
-                        <div class="selected-user">
-                            <i class="icon__user-grey qt-sz-16 qt-bg-contain qt-mr-6"></i>
-                            admin admin3
-                            <i class="icn-sm icn-remove-old"></i>
-                        </div>
-                    </div>
+                    <documents-linked
+                        #linked
+                        (onSelectedItem)="onChangeLinked($event)"
+                    ></documents-linked>
                 </div>
+
+
+
+
+
 
 
 
@@ -171,6 +206,11 @@
                         <p>Show in Knowledge base</p>
                     </div>
                 </div>
+
+
+
+
+
 
 
 
@@ -193,6 +233,11 @@
 
 
 
+
+
+
+
+
                 <div class="documents-create__col checkbox-wrapper">
                     <div class="with-checkbox">
                         <label class="checkbox-container">
@@ -210,6 +255,11 @@
 
 
 
+
+
+
+
+
                 <div class="documents-create__col">
                     <app-drop-down
                         class="dropdown"
@@ -222,6 +272,11 @@
                         widthInput="100%"
                     ></app-drop-down>
                 </div>
+
+
+
+
+
 
 
 
@@ -245,6 +300,10 @@
 
 
 
+
+
+
+
                 <div class="documents-create__col">
                     <div class="qt-df qt-jc-sb qt-ai-c">
                         <p class="label-name">Share Document Link</p>
@@ -264,6 +323,11 @@
                         placeholder="https://www.quicktech.com/shard/s593/sh/04d5c…"
                     >
                 </div>
+
+
+
+
+
 
 
 
@@ -295,7 +359,17 @@
 
 
 
+
+
+
+
+
 </div>
+
+
+
+
+
 
 
 

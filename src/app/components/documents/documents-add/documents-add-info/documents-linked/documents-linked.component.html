@@ -1,0 +1,88 @@
+<div
+    class="col-md-12 --required"
+    (clickOutside)="hideSelectWrapper()"
+>
+    <p class="title-link-to">Link To</p>
+    <div
+        class="device-user pointer"
+        [ngClass]="{ 'has-placeholder': !selectedUserAndCompanies.length}"
+        (click)="showSelectWrapper($event)"
+    >
+        <ng-template
+            ngFor
+            let-item
+            let-i="index"
+            [ngForOf]="selectedUserAndCompanies"
+            [ngForTrackBy]="trackByIndex"
+        >
+            <div class="selected-user">
+                <i
+                    class="icon__user-grey qt-sz-16 qt-bg-contain"
+                    *ngIf="item.type === 'USER'"
+                ></i>
+                <i
+                    class="icon__devices-grey qt-sz-16 qt-bg-contain"
+                    *ngIf="item.type === 'COMPANY'"
+                ></i>
+                {{item.name}}
+                <i
+                    class="icn-sm icn-remove-old"
+                    (click)="removeItem(i)"
+                ></i>
+            </div>
+        </ng-template>
+    </div>
+
+    <div
+        class="select-wrapper"
+        *ngIf="showSelect"
+    >
+        <div class="tab-wrapper">
+            <div
+                class="tab"
+                (click)="setCurrentTab($event, item)"
+                *ngFor="let item of tabs"
+                [ngClass]="{'active' : (currentTab === item)}"
+            >
+                {{item}}
+            </div>
+        </div>
+        <div
+            class="content"
+            (click)="$event.preventDefault()"
+        >
+            <div *ngIf="currentTab === 'User'">
+                <div
+                    *ngFor="let item of usersList; let i = index"
+                    (click)="toggleItem(item,'USER')"
+                >
+                    <label class="qt-checkbox pointer">
+                        <input
+                            type="checkbox"
+                            [checked]="isSeleted(item)"
+                            readonly
+                        >
+                        <span></span>
+                        {{item.firstName}} {{item.lastName}}
+                    </label>
+                </div>
+            </div>
+            <div *ngIf="currentTab === 'Company'">
+                <div
+                    *ngFor="let item of companiesList; let i = index"
+                    (click)="toggleItem(item,'COMPANY')"
+                >
+                    <label class="qt-checkbox pointer">
+                        <input
+                            type="checkbox"
+                            [checked]="isSeleted(item)"
+                            readonly
+                        >
+                        <span></span>
+                        {{item.name}}
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

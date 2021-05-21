@@ -18,4 +18,7 @@ export class DocumentsAddInfoComponent implements OnInit {
     this.openAside = !this.openAside;
     this.onToggleAside.emit(this.openAside);
   }
+  onChangeLinked(data) {
+
+  }
 }
