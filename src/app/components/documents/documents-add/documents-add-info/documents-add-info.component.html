@@ -18,32 +18,10 @@
 <!-- (onClosed)="toggleEditCategories = false" -->
 <!-- &gt;</documents-add-edit-categories> -->
 
-
-
-
-
-
-
-
-
-
-
-
 <div
     class="qt-aside-modern documents-create"
     [ngClass]="{'--mini' : !openAside}"
 >
-
-
-
-
-
-
-
-
-
-
-
 
     <div class="qt-aside-modern__header">
         <div
@@ -58,17 +36,6 @@
         >
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
 
     <div class="qt-aside-modern__content --no-padding">
         <!-- Tab Header -->
@@ -111,17 +78,6 @@
                 *ngIf="tab === 'DOCUMENT_INFO'"
             >
 
-
-
-
-
-
-
-
-
-
-
-
                 <div class="documents-create__col --required">
                     <p class="label-name">Document Title</p>
                     <input
@@ -131,17 +87,6 @@
                     >
                 </div>
 
-
-
-
-
-
-
-
-
-
-
-
                 <div class="documents-create__col --required">
                     <p class="label-name">Document Description</p>
                     <textarea
@@ -150,17 +95,6 @@
                         placeholder="Write Description"
                     ></textarea>
                 </div>
-
-
-
-
-
-
-
-
-
-
-
 
                 <div class="documents-create__col select-open-top --required">
                     <div class="qt-df qt-jc-sb">
@@ -185,33 +119,12 @@
                     </app-drop-down>
                 </div>
 
-
-
-
-
-
-
-
-
-
-
                 <div class="documents-create__col">
                     <documents-linked
                         #linked
                         (onSelectedItem)="onChangeLinked($event)"
                     ></documents-linked>
                 </div>
-
-
-
-
-
-
-
-
-
-
-
 
                 <div class="documents-create__col checkbox-wrapper">
                     <div class="with-checkbox">
@@ -222,17 +135,6 @@
                         <p>Show in Knowledge base</p>
                     </div>
                 </div>
-
-
-
-
-
-
-
-
-
-
-
 
                 <div class="documents-create__col">
                     <app-drop-down
@@ -247,17 +149,6 @@
                     ></app-drop-down>
                 </div>
 
-
-
-
-
-
-
-
-
-
-
-
                 <div class="documents-create__col checkbox-wrapper">
                     <div class="with-checkbox">
                         <label class="checkbox-container">
@@ -270,17 +161,6 @@
                         <p>Required by Company Type</p>
                     </div>
                 </div>
-
-
-
-
-
-
-
-
-
-
-
 
                 <div class="documents-create__col">
                     <app-drop-down
@@ -295,17 +175,6 @@
                     ></app-drop-down>
                 </div>
 
-
-
-
-
-
-
-
-
-
-
-
                 <div class="documents-create__col">
                     <p class="label-name">Document Review Date</p>
                     <app-date-picker
@@ -316,19 +185,10 @@
                 <div class="documents-create__col">
                     <p class="label-name">Tags</p>
                     <documents-filter-tags
-                        class="documents-filter-tags qt-mr-8"
+                        class="documents-filter-tags"
                         (onSelectedItems)="onSelectTags($event)"
                     ></documents-filter-tags>
                 </div>
-
-
-
-
-
-
-
-
-
 
                 <div class="documents-create__col">
                     <div class="qt-df qt-jc-sb qt-ai-c">
@@ -350,17 +210,6 @@
                     >
                 </div>
 
-
-
-
-
-
-
-
-
-
-
-
             </div>
             <!-- End Password Detail Tab Content -->
             <!-- Linked Devices Tab Content -->
@@ -376,37 +225,76 @@
                 class="qt-pb-24"
                 *ngIf="tab === 'DOCUMENT_HISTORY'"
             >
-                3333
+                <div class="qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
+
+                  <div
+                    class="documents-create__document-history-item"
+
+                  >
+                    <div
+                      class="documents-create__document-history-avatar"
+
+                    ></div>
+                    <div class="history-user-info">
+                      <p
+                        class="documents-create__document-history-name"
+                      >
+                        Tony Dawson
+                      </p>
+                      <p class="documents-create__document-history-text">
+                        Created on 10 April 2021, 06:30 PM ФЫВФЫВ
+                      </p>
+                    </div>
+                  </div>
+
+                  <div
+                    class="documents-create__document-history-item"
+
+                  >
+                    <div
+                      class="documents-create__document-history-avatar"
+
+                    ></div>
+                    <div class="history-user-info">
+                      <p
+                        class="documents-create__document-history-name"
+                      >
+                        Tony Dawson
+                      </p>
+                      <p class="documents-create__document-history-text">
+                        Created on 10 April 2021, 06:30 PM ФЫВФЫВ
+                      </p>
+                    </div>
+                  </div>
+
+                  <div
+                    class="documents-create__document-history-item"
+
+                  >
+                    <div
+                      class="documents-create__document-history-avatar"
+
+                    ></div>
+                    <div class="history-user-info">
+                      <p
+                        class="documents-create__document-history-name"
+                      >
+                        Tony Dawson
+                      </p>
+                      <p class="documents-create__document-history-text">
+                        Created on 10 April 2021, 06:30 PM ФЫВФЫВ
+                      </p>
+                    </div>
+                  </div>
+
+                </div>
             </div>
             <!-- End Document History Tab Content -->
         </div>
         <!-- End Tab Body -->
     </div>
 
-
-
-
-
-
-
-
-
-
-
-
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <!-- <div -->
