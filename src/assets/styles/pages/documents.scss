@@ -42,6 +42,10 @@
       max-width: 32px;
       min-width: 32px;
     }
+
+    tr td:last-child {
+      padding-left: 0;
+    }
   }
 
   .documents-table__title-menu {
@@ -53,8 +57,21 @@
       font-family: Graphik-Medium, sans-serif;
     }
   }
-  tr td:last-child {
-    padding-left: 0;
+
+  .qt-button {
+    height: 36px;
+  }
+
+  .qt-page-list__header {
+    .dropdown-menu {
+      margin: 6px 0 6px 8px;
+
+      li {
+        height: 48px;
+        padding: 14px 12px 14px 20px;
+        font-family: Graphik-Medium, sans-serif;
+      }
+    }
   }
 }
 

@@ -34,6 +34,10 @@
     border-radius: 4px 3px 3px 4px;
     border: 1px solid #d3d8e1;
     background-color: #fff;
+
+    &::placeholder {
+      color: #9ca5b6;
+    }
   }
   .dropdown-menu {
     right: 0;

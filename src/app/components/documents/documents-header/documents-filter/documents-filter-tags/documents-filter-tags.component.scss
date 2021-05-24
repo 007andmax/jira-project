@@ -4,7 +4,57 @@
     }
 }
 .documents-filter-tags-body {
-    padding: 0px;
+    padding: 0;
+
+  .qt-checkbox {
+
+    .text-content {
+      padding: 3px 0 16px;
+      flex: 1;
+    }
+    .name,
+    .description {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: calc(298px - 23px);
+      width: 100%;
+    }
+
+    .name {
+      font-family: Graphik-Medium, sans-serif;
+    }
+
+    .description {
+      margin-top: 6px;
+    }
+
+    span {
+      margin-right: 8px;
+    }
+  }
+  .select-wrapper {
+    height: 260px;
+
+    .content {
+      height: calc(100% - 10px);
+
+      > div {
+        > div {
+          min-height: 30px;
+          max-height: 60px;
+          height: auto;
+        }
+      }
+      .qt-checkbox {
+        width: 100%;
+        min-height: 30px;
+        max-height: 50px;
+        height: auto;
+        align-items: flex-start;
+      }
+    }
+  }
 }
 .device-user {
     outline: none;

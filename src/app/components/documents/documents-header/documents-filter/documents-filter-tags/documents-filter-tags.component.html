@@ -45,8 +45,10 @@
                             readonly
                         >
                         <span></span>
-                        {{item.word}}
-                        <span *ngIf="item.defaultTag === 'USER_TAG'">Company Name</span>
+                        <div class="text-content">
+                          <div class="name">{{item.word}}</div>
+                          <div class="description" *ngIf="item.defaultTag === 'USER_TAG'">Company Name</div>
+                        </div>
                         <i
                             *ngIf="item.defaultTag === 'USER_TAG'"
                             class="icon__user-grey qt-sz-16 qt-bg-contain qt-ml-8"
