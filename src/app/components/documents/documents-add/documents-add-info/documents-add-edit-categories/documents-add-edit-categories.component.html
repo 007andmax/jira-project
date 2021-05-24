@@ -1,69 +1,122 @@
 <div class="documents-create-aside-categories qt-aside-modern">
-  <div class="qt-aside-modern__header">
-    <div class="qt-aside-modern__header-title qt-mr-auto">Edit Categories</div>
-    <div
-      class="icon__remove disable qt-sz-16 qt-bg-contain"
-    >
+    <div class="qt-aside-modern__header">
+        <div class="qt-aside-modern__header-title qt-mr-auto">Edit Categories</div>
+        <div class="icon__remove disable qt-sz-16 qt-bg-contain"></div>
     </div>
-  </div>
-  <div class="qt-aside-modern__content --no-padding">
-    <div class="qt-pb-24 qt-pl-24 qt-pr-24">
-
-      <div class="documents-create__col checkbox-wrapper">
-        <div class="with-checkbox">
-          <label class="checkbox-container disable">
-            <input type="checkbox">
-            <span class="checkbox-mark"></span>
-          </label>
-          <p>How it work <span>(45)</span></p>
-        </div>
-      </div>
-
-      <div class="documents-create__col checkbox-wrapper">
-        <div class="with-checkbox">
-          <label class="checkbox-container">
-            <input type="checkbox">
-            <span class="checkbox-mark"></span>
-          </label>
-          <p>Guideline Document</p>
-        </div>
-      </div>
-
-      <div class="documents-create__col checkbox-wrapper">
-        <div class="with-checkbox">
-          <label class="checkbox-container">
-            <input type="checkbox">
-            <span class="checkbox-mark"></span>
-          </label>
-          <div class="qt-w100 qt-df qt-jc-sb">
-            <p>Guideline Document</p>
-            <div
-              class="icon__remove qt-sz-16 qt-bg-contain qt-ml-6"
+    <div class="qt-aside-modern__content --no-padding">
+        <div class="qt-pb-24 qt-pl-24 qt-pr-24 ">
+            <ng-template
+                ngFor
+                let-item
+                [ngForOf]="categories"
+                [ngForTrackBy]="trackById"
             >
+                <app-dynamic-tooltip
+                    [content]="'you can`t remove this category which is in use'"
+                    [position]="'top'"
+                    #pointerTooltip
+                ></app-dynamic-tooltip>
+                <div
+                    class="documents-create__col checkbox-wrapper categories-item"
+                    (mouseenter)="pointerTooltip.show($event.target)"
+                    (mouseleave)="pointerTooltip.hide()"
+                >
+                    <div class="with-checkbox">
+                        <label
+                            class="checkbox-container "
+                            [ngClass]="{'disable':item.count > 0}"
+                        >
+                            <input
+                                type="checkbox"
+                                [disabled]="item.count > 0"
+                            >
+                            <span class="checkbox-mark"></span>
+                        </label>
+                        <div class="qt-w100 qt-df qt-jc-sb">
+                            <input
+                                *ngIf="editCategory.isEditMode(item.id)"
+                                type="text"
+                                [(ngModel)]="editCategory.newName"
+                                (blur)="onEditCategory()"
+                            >
+                            <p
+                                *ngIf="!editCategory.isEditMode(item.id)"
+                                class="pointer"
+                                (click)="toggleEditCategory(item)"
+                            >
+                                {{item.name}}
+                                <span>({{item.count}})</span>
+                            </p>
+                            <div
+                                (click)="onRemoveCategory(item)"
+                                *ngIf="item.count === 0 && !editCategory.isEditMode(item.id)"
+                                class="icon__remove qt-sz-16 qt-bg-contain qt-ml-6"
+                            ></div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+            <div
+                class="documents-create__col checkbox-wrapper"
+                *ngIf="toggleAddCategory"
+            >
+                <div class="with-checkbox">
+                    <div class="qt-w100 qt-df qt-jc-sb">
+                        <input
+                            type="text"
+                            [(ngModel)]="categoryName"
+                            (blur)="onAddCategory()"
+                        >
+                    </div>
+                </div>
             </div>
-          </div>
+            <button
+                class="btn-new btn-primary-white"
+                (click)="toggleCategory()"
+            >
+                + Add New
+            </button>
         </div>
-      </div>
-
-      <button class="btn-new btn-primary-white">+ Add New</button>
-
     </div>
-  </div>
-
-  <div class="qt-aside-modern__footer">
-    <div class="qt-df">
-      <button class="qt-button qt-mr-12">
-        Save Changes
-      </button>
-      <button
-        class="qt-button --gray"
-        (click)="close()"
-        >
-        Cancel
-      </button>
+    <div class="qt-aside-modern__footer">
+        <div class="qt-df">
+            <button class="qt-button qt-mr-12">Save Changes</button>
+            <button
+                class="qt-button --gray"
+                (click)="close()"
+            >
+                Cancel
+            </button>
+        </div>
     </div>
-  </div>
 </div>
 
-<!--<button (click)="close()">Cancel</button>-->
-<!--  <p>documents-add-edit-categories works!</p>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <button (click)="close()">Cancel</button> -->
+<!-- <p>documents-add-edit-categories works!</p> -->

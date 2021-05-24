@@ -9,13 +9,13 @@
     border-bottom: none;
   }
 
- .checkbox-wrapper {
-   margin-bottom: 12px;
+  .checkbox-wrapper {
+    margin-bottom: 12px;
 
-   .with-checkbox {
-     margin-right: 0;
-   }
- }
+    .with-checkbox {
+      margin-right: 0;
+    }
+  }
 
   .btn-new.btn-primary-white {
     padding: 6px;
@@ -23,13 +23,11 @@
     height: auto;
   }
 
-
   .checkbox-wrapper .with-checkbox label {
     margin-bottom: 6px;
   }
   .checkbox-container.disable {
     span {
-
       &::after {
         position: absolute;
         content: "";
@@ -38,14 +36,14 @@
         bottom: 0;
         right: 0;
         background: #edf2f6;
-        border: 1px solid #c4cbd5 ;
+        border: 1px solid #c4cbd5;
       }
     }
   }
 
   .icon__remove {
     &.disable {
-      opacity: .6;
+      opacity: 0.6;
     }
   }
 }
@@ -53,3 +51,8 @@
   font-size: 16px;
 }
 
+.categories-item {
+  &:hover {
+    background-color: #f9fafb;
+  }
+}

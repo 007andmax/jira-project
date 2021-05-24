@@ -31,6 +31,9 @@ export class DocumentsService {
   public addCategories(name) {
     return this.http.post(this.apiUrl + `documents/categories`, { name: name });
   }
+  public editNameCategory(id, name) {
+    return this.http.put(this.apiUrl + `documents/categories/${id}`, { name: name });
+  }
   public getCategories() {
     return this.http.get(this.apiUrl + `documents/categories`);
   }
