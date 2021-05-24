@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { Tag } from 'src/app/interfaces/tag/tag';
 import { TagsService } from 'src/app/services/tags/tags.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { TagsStateService } from 'src/app/states/tags/tags-state.service';
 
 @Component({
   selector: 'app-company-tags',
@@ -38,7 +39,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
   public constructor(
     public tagsService: TagsService,
     private tagsState: CompanyTagsStateService,
-    private companiesStateService: CompaniesStateService,
+    private tagsStateService: TagsStateService,
     public cd: ChangeDetectorRef
   ) { }
 
@@ -46,11 +47,11 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-    let getTags = this.tagsService.geCompanyTags().subscribe((data: Array<Tag>) => {
-      this.tags = data.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
-        1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
-      this.reqTags = data.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
-        1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
+    this.tags = this.tagsStateService.getTags();
+    let getTags = this.tagsStateService.onGetTags.subscribe((data: Array<Tag>) => {
+      console.log("data", data);
+      this.tags = data;
+      this.reqTags = data;
     })
     this.sub.add(getTags);
     this.onInitClearState();

@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output }
 import { Subscription } from 'rxjs';
 import { Tag } from 'src/app/interfaces/tag/tag';
 import { TagsService } from 'src/app/services/tags/tags.service';
+import { TagsStateService } from 'src/app/states/tags/tags-state.service';
 
 @Component({
   selector: 'documents-filter-tags',
@@ -15,12 +16,14 @@ export class DocumentsFilterTagsComponent implements OnInit, OnDestroy {
   @Output() onSelectedItems = new EventEmitter<any>();
   sub = new Subscription();
   constructor(public cd: ChangeDetectorRef,
+    private tagsStateService: TagsStateService,
     private tagsService: TagsService) { }
 
   ngOnInit() {
-    let getTags = this.tagsService.geCompanyTags().subscribe((data: any) => {
-      this.tags = data.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
-        1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
+    this.tags = this.tagsStateService.getTags();
+    let getTags = this.tagsStateService.onGetTags.subscribe((data: Array<Tag>) => {
+      console.log("data", data);
+      this.tags = data;
     })
     this.sub.add(getTags);
   }

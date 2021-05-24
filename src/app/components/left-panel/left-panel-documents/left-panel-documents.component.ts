@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
+import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { CategoryDocument } from './class/category-document';
 
@@ -19,6 +20,7 @@ export class LeftPanelDocumentsComponent implements OnInit, OnDestroy {
   categories: Array<CategoryDocument> = [];
   sub: Subscription = new Subscription();
   constructor(private documentsService: DocumentsService,
+    private documentsStateService: DocumentsStateService,
     private leftPanelStateService: LeftPanelStateService,) { }
 
   ngOnInit() {
@@ -36,11 +38,8 @@ export class LeftPanelDocumentsComponent implements OnInit, OnDestroy {
     this.leftPanelStateService.onFirstOpen.subscribe(data => {
       if (this.isDocumentsState(data)) this.open = true;
     })
-    this.documentsService.getCategories().subscribe((data: any) => {
-      this.categories = data.map(item => new CategoryDocument(item));
-      this.categories.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-        1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-
+    this.documentsStateService.onGetCategories.subscribe((data: any) => {
+      this.categories = data;
     })
   }
   onAddCategory() {

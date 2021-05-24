@@ -20,6 +20,8 @@ import { ModalSessionScreenComponent } from './services/modal/modal-session-scre
 import { PasswordManagerStateService } from './states/password-manager/password-manager-state.service';
 import { Router } from '@angular/router';
 import { PAGE_DEVICE, PAGE_MAIN } from './const/app';
+import { TagsStateService } from './states/tags/tags-state.service';
+import { DocumentsStateService } from './states/documents/documents-state.service';
 
 
 /**
@@ -66,6 +68,8 @@ export class AppComponent implements OnInit {
     private ticketsStateService: TicketsStateService,
     private constantsStateService: ConstantsStateService,
     private leftPanelStateService: LeftPanelStateService,
+    private tagsStateService: TagsStateService,
+    private documentsStateService: DocumentsStateService,
     private modalService: NgbModal,
     private router: Router,
     public cd: ChangeDetectorRef,
@@ -92,6 +96,8 @@ export class AppComponent implements OnInit {
     this.inventoryStateService.onInit();
     this.ticketsStateService.onInit();
     this.constantsStateService.onInit();
+    this.tagsStateService.onInit();
+    this.documentsStateService.onInit();
     //  this.userService.getCurrentUser();
 
     this.websocketService.initializeWebSocketConnection();

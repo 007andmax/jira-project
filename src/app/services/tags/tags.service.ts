@@ -23,6 +23,7 @@ export class TagsService {
   }
 
   public geCompanyTags() {
+    console.log("geCompanyTags");
     return this.http.get(this.apiUrl + `commonTags/getAll`)
   }
 

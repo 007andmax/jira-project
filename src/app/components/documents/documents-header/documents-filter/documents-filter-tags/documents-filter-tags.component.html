@@ -46,6 +46,19 @@
                         >
                         <span></span>
                         {{item.word}}
+                        <span *ngIf="item.defaultTag === 'USER_TAG'">Company Name</span>
+                        <i
+                            *ngIf="item.defaultTag === 'USER_TAG'"
+                            class="icon__user-grey qt-sz-16 qt-bg-contain qt-ml-8"
+                        ></i>
+                        <i
+                            *ngIf="!item.defaultTag"
+                            class="icn-tags qt-sz-16 qt-bg-contain qt-ml-8"
+                        ></i>
+                        <i
+                            *ngIf="item.defaultTag === 'COMPANY_TAG'"
+                            class="icon__office-account qt-za-16 qt-sz-16 qt-bg-contain qt-ml-8"
+                        ></i>
                     </label>
                 </div>
             </div>

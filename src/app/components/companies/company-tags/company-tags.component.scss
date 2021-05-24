@@ -1,7 +1,9 @@
 .dropdown-menu {
-    transform: translate(0, 0) !important;
-    top: auto !important;
-    left: 17px !important;
-    width: 230px;
-  }
-  
+  transform: translate(0, 0) !important;
+  top: auto !important;
+  left: 17px !important;
+  width: 230px;
+}
+.company-tag-item {
+  display: flex !important;
+}

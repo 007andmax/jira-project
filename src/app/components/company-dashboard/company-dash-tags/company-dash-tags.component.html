@@ -1,38 +1,79 @@
-<div class="light-dropdown"
-     ngbDropdown #products="ngbDropdown">
-  <mat-form-field>
-    <mat-chip-list #chipList aria-label="Fruit selection">
-      <mat-chip
-        *ngFor="let tag of selectedTag; let i = index"
-        [selectable]="selectable"
-        [removable]="removable"
-        (removed)="remove(i)">
-        {{tag.word}}
-        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-      </mat-chip>
-      <input
-        id="dropdownServices" ngbDropdownToggle
-        placeholder="eg. Window update, Monthly maintainace"
-        #userInput
-        class="pointer"
-        [formControl]="tagCtrl"
-        [matChipInputFor]="chipList"
-        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-        [matChipInputAddOnBlur]="addOnBlur"
-        (input)="onSearch($event)"
-        (keyup)="onKeyUp($event)"
+<div
+    class="light-dropdown"
+    ngbDropdown
+    #products="ngbDropdown"
+>
+    <mat-form-field>
+        <mat-chip-list
+            #chipList
+            aria-label="Fruit selection"
         >
-    </mat-chip-list>
+            <mat-chip
+                *ngFor="let tag of selectedTag; let i = index"
+                [selectable]="selectable"
+                [removable]="removable"
+                (removed)="remove(i)"
+            >
+                {{tag.word}}
+                <mat-icon
+                    matChipRemove
+                    *ngIf="removable"
+                >
+                    cancel
+                </mat-icon>
+            </mat-chip>
+            <input
+                id="dropdownServices"
+                ngbDropdownToggle
+                placeholder="eg. Window update, Monthly maintainace"
+                #userInput
+                class="pointer"
+                [formControl]="tagCtrl"
+                [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]="addOnBlur"
+                (input)="onSearch($event)"
+                (keyup)="onKeyUp($event)"
+            >
+        </mat-chip-list>
 
-  </mat-form-field>
-  <div class="dropdown-menu tag-menu"
-       ngbDropdownMenu aria-labelledby="dropdownServices">
-    <ng-template ngFor let-tag [ngForOf]="tags" [ngForTrackBy]="trackById">
-      <button ngbDropdownItem class="dropdown-item"
-              (click)="selected(tag)"
-              [textContent]="tag.word">
-      </button>
-    </ng-template>
-  </div>
+
+
+
+
+
+    </mat-form-field>
+    <div
+        class="dropdown-menu tag-menu"
+        ngbDropdownMenu
+        aria-labelledby="dropdownServices"
+    >
+        <ng-template
+            ngFor
+            let-tag
+            [ngForOf]="tags"
+            [ngForTrackBy]="trackById"
+        >
+            <div
+                ngbDropdownItem
+                class="company-tag-item dropdown-item"
+                (click)="selected(tag)"
+            >
+                <span [textContent]="tag.word"></span>
+                <span *ngIf="tag.defaultTag === 'USER_TAG'">Company Name</span>
+                <i
+                    *ngIf="tag.defaultTag === 'USER_TAG'"
+                    class="icon__user-grey qt-sz-16 qt-bg-contain qt-ml-8"
+                ></i>
+                <i
+                    *ngIf="!tag.defaultTag"
+                    class="icn-tags qt-sz-16 qt-bg-contain qt-ml-8"
+                ></i>
+                <i
+                    *ngIf="tag.defaultTag === 'COMPANY_TAG'"
+                    class="icon__office-account qt-za-16 qt-sz-16 qt-bg-contain qt-ml-8"
+                ></i>
+            </div>
+        </ng-template>
+    </div>
 </div>
-

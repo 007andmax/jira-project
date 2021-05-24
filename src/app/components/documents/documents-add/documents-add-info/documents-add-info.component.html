@@ -17,12 +17,10 @@
 <!-- *ngIf="toggleEditCategories" -->
 <!-- (onClosed)="toggleEditCategories = false" -->
 <!-- &gt;</documents-add-edit-categories> -->
-
 <div
     class="qt-aside-modern documents-create"
     [ngClass]="{'--mini' : !openAside}"
 >
-
     <div class="qt-aside-modern__header">
         <div
             class="toggle-aside icon__panel-open qt-mr-16"
@@ -36,7 +34,6 @@
         >
         </div>
     </div>
-
     <div class="qt-aside-modern__content --no-padding">
         <!-- Tab Header -->
         <div class="documents-create-panel__subheader">
@@ -77,7 +74,6 @@
                 class="qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24"
                 *ngIf="tab === 'DOCUMENT_INFO'"
             >
-
                 <div class="documents-create__col --required">
                     <p class="label-name">Document Title</p>
                     <input
@@ -86,7 +82,6 @@
                         placeholder="Printer Installation Guide"
                     >
                 </div>
-
                 <div class="documents-create__col --required">
                     <p class="label-name">Document Description</p>
                     <textarea
@@ -95,7 +90,6 @@
                         placeholder="Write Description"
                     ></textarea>
                 </div>
-
                 <div class="documents-create__col select-open-top --required">
                     <div class="qt-df qt-jc-sb">
                         <p class="label-name">Document Category</p>
@@ -118,14 +112,19 @@
                     >
                     </app-drop-down>
                 </div>
-
                 <div class="documents-create__col">
                     <documents-linked
                         #linked
                         (onSelectedItem)="onChangeLinked($event)"
                     ></documents-linked>
                 </div>
-
+                <div class="documents-create__col">
+                    <p class="label-name">Tags</p>
+                    <documents-filter-tags
+                        class="documents-filter-tags"
+                        (onSelectedItems)="onSelectTags($event)"
+                    ></documents-filter-tags>
+                </div>
                 <div class="documents-create__col checkbox-wrapper">
                     <div class="with-checkbox">
                         <label class="checkbox-container">
@@ -135,12 +134,11 @@
                         <p>Show in Knowledge base</p>
                     </div>
                 </div>
-
                 <div class="documents-create__col">
                     <app-drop-down
                         class="dropdown"
                         [placeholder]="'Select Category'"
-                        [list]
+                        [list]="categories"
                         [field]="'name'"
                         [search]="true"
                         [change]="true"
@@ -148,48 +146,41 @@
                         widthInput="100%"
                     ></app-drop-down>
                 </div>
-
                 <div class="documents-create__col checkbox-wrapper">
                     <div class="with-checkbox">
                         <label class="checkbox-container">
                             <input
                                 id
                                 type="checkbox"
+                                [(ngModel)]="requiredCompanyType"
+                                (change)="onResetCompanyType()"
                             >
                             <span class="checkbox-mark"></span>
                         </label>
                         <p>Required by Company Type</p>
                     </div>
                 </div>
-
                 <div class="documents-create__col">
                     <app-drop-down
+                        #companyTypeDp
                         class="dropdown"
                         [placeholder]="'Select Company Type'"
-                        [list]
-                        [field]="'name'"
+                        [list]="companyTypes"
+                        [field]="'title'"
                         [search]="true"
                         [change]="true"
+                        [isDisabled]="!requiredCompanyType"
                         heightInput="40px"
                         widthInput="100%"
                     ></app-drop-down>
                 </div>
-
-                <div class="documents-create__col">
+                <div class="documents-create__col qt-input-block qt-w50">
                     <p class="label-name">Document Review Date</p>
                     <app-date-picker
                         [editMode]="true"
                         [useMinDate]="false"
                     ></app-date-picker>
                 </div>
-                <div class="documents-create__col">
-                    <p class="label-name">Tags</p>
-                    <documents-filter-tags
-                        class="documents-filter-tags"
-                        (onSelectedItems)="onSelectTags($event)"
-                    ></documents-filter-tags>
-                </div>
-
                 <div class="documents-create__col">
                     <div class="qt-df qt-jc-sb qt-ai-c">
                         <p class="label-name">Share Document Link</p>
@@ -209,7 +200,6 @@
                         placeholder="https://www.quicktech.com/shard/s593/sh/04d5c…"
                     >
                 </div>
-
             </div>
             <!-- End Password Detail Tab Content -->
             <!-- Linked Devices Tab Content -->
@@ -226,77 +216,40 @@
                 *ngIf="tab === 'DOCUMENT_HISTORY'"
             >
                 <div class="qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
-
-                  <div
-                    class="documents-create__document-history-item"
-
-                  >
-                    <div
-                      class="documents-create__document-history-avatar"
-
-                    ></div>
-                    <div class="history-user-info">
-                      <p
-                        class="documents-create__document-history-name"
-                      >
-                        Tony Dawson
-                      </p>
-                      <p class="documents-create__document-history-text">
-                        Created on 10 April 2021, 06:30 PM ФЫВФЫВ
-                      </p>
+                    <div class="documents-create__document-history-item">
+                        <div class="documents-create__document-history-avatar"></div>
+                        <div class="history-user-info">
+                            <p class="documents-create__document-history-name">Tony Dawson</p>
+                            <p class="documents-create__document-history-text">
+                                Created on 10 April 2021, 06:30 PM ФЫВФЫВ
+                            </p>
+                        </div>
                     </div>
-                  </div>
-
-                  <div
-                    class="documents-create__document-history-item"
-
-                  >
-                    <div
-                      class="documents-create__document-history-avatar"
-
-                    ></div>
-                    <div class="history-user-info">
-                      <p
-                        class="documents-create__document-history-name"
-                      >
-                        Tony Dawson
-                      </p>
-                      <p class="documents-create__document-history-text">
-                        Created on 10 April 2021, 06:30 PM ФЫВФЫВ
-                      </p>
+                    <div class="documents-create__document-history-item">
+                        <div class="documents-create__document-history-avatar"></div>
+                        <div class="history-user-info">
+                            <p class="documents-create__document-history-name">Tony Dawson</p>
+                            <p class="documents-create__document-history-text">
+                                Created on 10 April 2021, 06:30 PM ФЫВФЫВ
+                            </p>
+                        </div>
                     </div>
-                  </div>
-
-                  <div
-                    class="documents-create__document-history-item"
-
-                  >
-                    <div
-                      class="documents-create__document-history-avatar"
-
-                    ></div>
-                    <div class="history-user-info">
-                      <p
-                        class="documents-create__document-history-name"
-                      >
-                        Tony Dawson
-                      </p>
-                      <p class="documents-create__document-history-text">
-                        Created on 10 April 2021, 06:30 PM ФЫВФЫВ
-                      </p>
+                    <div class="documents-create__document-history-item">
+                        <div class="documents-create__document-history-avatar"></div>
+                        <div class="history-user-info">
+                            <p class="documents-create__document-history-name">Tony Dawson</p>
+                            <p class="documents-create__document-history-text">
+                                Created on 10 April 2021, 06:30 PM ФЫВФЫВ
+                            </p>
+                        </div>
                     </div>
-                  </div>
-
                 </div>
             </div>
             <!-- End Document History Tab Content -->
         </div>
         <!-- End Tab Body -->
     </div>
-
 </div>
-
-
 <!-- <div -->
 <!-- class="documents-add-info" -->
 <!-- *ngIf="toggleAside" -->

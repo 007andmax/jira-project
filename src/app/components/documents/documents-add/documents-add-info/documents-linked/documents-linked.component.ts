@@ -42,6 +42,8 @@ export class DocumentsLinkedComponent implements OnInit {
     this.usersList = data.filter(item => {
       if (item.accountType !== 'TECH' && !item.deletedAt) return item;
     });
+    this.usersList.sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?
+      1 : ((`${b.firstName} ${b.lastName}`.toLowerCase() > `${a.firstName} ${a.lastName}`.toLowerCase()) ? -1 : 0));
 
   }
   private getClientsList(data) {
