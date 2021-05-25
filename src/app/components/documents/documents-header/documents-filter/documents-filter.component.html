@@ -2,7 +2,7 @@
     <app-select-search
         class="search-company documents-company-filter qt-mr-8"
         #companyDp
-        [placeholder]="'Select Company'"
+        [placeholder]="'Select By Company'"
         [change]="false"
         [class]="['qt-dropdown']"
         [field]="'name'"
@@ -17,6 +17,7 @@
         <app-tech-users-list-report
             #usersDp
             [class]="['filter-users-documents']"
+            [placeholder]="'Search By User'"
             [sort]="true"
             [search]="true"
             [change]="true"
@@ -27,6 +28,7 @@
     <app-multi-datepicker
         class="qt-input-block qt-header-date-filter filter-documents-date"
         #datesDp
+        [placeholder]="'Review Date'"
         (selectedDate)="filterByDate($event)"
     ></app-multi-datepicker>
 </div>

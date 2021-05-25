@@ -18,8 +18,8 @@
                 ></app-dynamic-tooltip>
                 <div
                     class="documents-create__col checkbox-wrapper categories-item"
-                    (mouseenter)="pointerTooltip.show($event.target)"
-                    (mouseleave)="pointerTooltip.hide()"
+                    (mouseenter)="item.count > 0 ? pointerTooltip.show($event.target) : null"
+                    (mouseleave)="item.count > 0 ? pointerTooltip.hide() : null"
                 >
                     <div class="with-checkbox">
                         <label
@@ -80,7 +80,6 @@
     </div>
     <div class="qt-aside-modern__footer">
         <div class="qt-df">
-            <button class="qt-button qt-mr-12">Save Changes</button>
             <button
                 class="qt-button --gray"
                 (click)="close()"
@@ -90,33 +89,5 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- <button (click)="close()">Cancel</button> -->
 <!-- <p>documents-add-edit-categories works!</p> -->
