@@ -1,7 +1,7 @@
 <div class="documents-create-aside-categories qt-aside-modern">
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-title qt-mr-auto">Edit Categories</div>
-        <div class="icon__remove disable qt-sz-16 qt-bg-contain"></div>
+        <div class="icon__remove disable qt-sz-16 qt-bg-contain pointer"></div>
     </div>
     <div class="qt-aside-modern__content --no-padding">
         <div class="qt-pb-24 qt-pl-24 qt-pr-24 ">
@@ -50,7 +50,7 @@
                             <div
                                 (click)="onRemoveCategory(item)"
                                 *ngIf="item.count === 0 && !editCategory.isEditMode(item.id)"
-                                class="icon__remove qt-sz-16 qt-bg-contain qt-ml-6"
+                                class="icon__remove qt-sz-16 qt-bg-contain qt-ml-6 pointer"
                             ></div>
                         </div>
                     </div>
