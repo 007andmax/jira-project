@@ -24,6 +24,7 @@ import { ShellRealTimeService } from '../../states/shell/shell-real-time.service
 import { AppService } from '../../states/app/app.service';
 import { PasswordManagerStateService } from '../../states/password-manager/password-manager-state.service';
 import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service';
+import { DocumentsRealTimeService } from 'src/app/states/documents/documents-real-time.service';
 
 /**
  * Websocket service to work with api
@@ -64,7 +65,8 @@ export class WebsocketService {
     private defaultServicesRealTimeService: DefaultServicesRealTimeService,
     private contractsRealTimeService: ContractsRealTimeService,
     private shellRealTimeService: ShellRealTimeService,
-    private tagsRealTimeService: TagsRealTimeService
+    private tagsRealTimeService: TagsRealTimeService,
+    private documentsRealTimeService: DocumentsRealTimeService,
 
   ) {
   }
@@ -96,6 +98,7 @@ export class WebsocketService {
       that.subsribeToSubmittedOneTimeConnection();
       that.subsribeToLockScreen();
       that.subsribeToTags();
+      that.subsribeToDocuments();
     });
   }
   private subsribeToDevices() {
@@ -408,6 +411,19 @@ export class WebsocketService {
       });
     }, 3000);
 
+  }
+
+  public subsribeToDocuments() {
+
+    setTimeout(() => {
+
+      this.stompClient.subscribe(`/user/watch/documentCategory`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.documentsRealTimeService.handleRealTimeChanges(newChange);
+
+      });
+
+    }, 3000);
   }
 
   public subsribeToTags() {
