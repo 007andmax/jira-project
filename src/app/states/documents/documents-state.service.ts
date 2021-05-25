@@ -30,7 +30,7 @@ export class DocumentsStateService {
         if (findIndex > -1) this.categories[findIndex] = new CategoryDocument(data.data);
       }
       if (data.action === "DOCUMENT_CATEGORY_REMOVED") {
-        let findIndex = this.categories.findIndex(item => item.id === data.data.id);
+        let findIndex = this.categories.findIndex(item => item.id === data.data);
         if (findIndex > -1) this.categories.splice(findIndex, 1);
       }
       this.onGetCategories.emit(this.categories);
