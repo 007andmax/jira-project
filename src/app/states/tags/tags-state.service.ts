@@ -19,8 +19,12 @@ export class TagsStateService {
         1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
       this.onGetTags.emit(this.tags);
     })
-    this.tagsRealTimeService.changeTagsArray.subscribe(data => {
-      if (data.action === "TAG_SAVED") this.tags.push(data.data);
+    this.tagsRealTimeService.changeTagsArray.subscribe((data: any) => {
+      if (data.action === "TAG_SAVED" && data.data instanceof Array) this.tags = [...this.tags, ...data.data];
+      if (data.action === "TAG_SAVED" && data.data instanceof Object) {
+        let index = this.tags.findIndex(item => item.id === data.data.id);
+        if (index > -1) this.tags[index] = data.data;
+      }
       if (data.action === "TAG_REMOVED") {
         let index = this.tags.findIndex(item => item.id === data.data.id);
         if (index > -1) this.tags.splice(index, 1);
