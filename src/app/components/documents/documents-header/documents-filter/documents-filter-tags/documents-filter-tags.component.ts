@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output }
 import { Subscription } from 'rxjs';
 import { Tag } from 'src/app/interfaces/tag/tag';
 import { TagsService } from 'src/app/services/tags/tags.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { TagsStateService } from 'src/app/states/tags/tags-state.service';
 
 @Component({
@@ -17,6 +18,7 @@ export class DocumentsFilterTagsComponent implements OnInit, OnDestroy {
   sub = new Subscription();
   constructor(public cd: ChangeDetectorRef,
     private tagsStateService: TagsStateService,
+    private companiesStateService: CompaniesStateService,
     private tagsService: TagsService) { }
 
   ngOnInit() {
@@ -26,6 +28,10 @@ export class DocumentsFilterTagsComponent implements OnInit, OnDestroy {
       this.tags = data;
     })
     this.sub.add(getTags);
+  }
+  getCompanyName(tag) {
+    let company = this.companiesStateService.getCompanies().find(item => item.id === tag.companyId);
+    return (company) ? company.name : '';
   }
   public hideSelectWrapper() {
     this.showSelect = false;

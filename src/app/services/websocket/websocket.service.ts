@@ -23,6 +23,7 @@ import { ContractsRealTimeService } from '../../states/contracts/contracts-real-
 import { ShellRealTimeService } from '../../states/shell/shell-real-time.service';
 import { AppService } from '../../states/app/app.service';
 import { PasswordManagerStateService } from '../../states/password-manager/password-manager-state.service';
+import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service';
 
 /**
  * Websocket service to work with api
@@ -62,7 +63,8 @@ export class WebsocketService {
     private invoiceRealTimeService: InvoiceRealTimeService,
     private defaultServicesRealTimeService: DefaultServicesRealTimeService,
     private contractsRealTimeService: ContractsRealTimeService,
-    private shellRealTimeService: ShellRealTimeService
+    private shellRealTimeService: ShellRealTimeService,
+    private tagsRealTimeService: TagsRealTimeService
 
   ) {
   }
@@ -93,6 +95,7 @@ export class WebsocketService {
       that.subsribeToSubmittedServiceAgreement();
       that.subsribeToSubmittedOneTimeConnection();
       that.subsribeToLockScreen();
+      that.subsribeToTags();
     });
   }
   private subsribeToDevices() {
@@ -406,6 +409,20 @@ export class WebsocketService {
     }, 3000);
 
   }
+
+  public subsribeToTags() {
+
+    setTimeout(() => {
+
+      this.stompClient.subscribe(`/user/watch/tagManagement`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.tagsRealTimeService.handleRealTimeChanges(newChange);
+
+      });
+
+    }, 3000);
+  }
+
   getCookie(name) {
     var matches = document.cookie.match(new RegExp(
       "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"

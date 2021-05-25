@@ -24,7 +24,6 @@
             </div>
         </ng-template>
     </div>
-
     <div
         class="select-wrapper"
         *ngIf="showSelect"
@@ -46,15 +45,20 @@
                         >
                         <span></span>
                         <div class="text-content">
-                          <div class="name">{{item.word}}</div>
-                          <div class="description" *ngIf="item.defaultTag === 'USER_TAG'">Company Name</div>
+                            <div class="name">{{item.word}}</div>
+                            <div
+                                class="description"
+                                *ngIf="item.defaultTag === 'USER_TAG'"
+                                [textContent]="getCompanyName(item)"
+                            >
+                            </div>
                         </div>
                         <i
                             *ngIf="item.defaultTag === 'USER_TAG'"
                             class="icon__user-grey qt-sz-16 qt-bg-contain qt-ml-8"
                         ></i>
                         <i
-                            *ngIf="!item.defaultTag"
+                            *ngIf="item.defaultTag === 'COMMON'"
                             class="icn-tags qt-sz-16 qt-bg-contain qt-ml-8"
                         ></i>
                         <i
@@ -64,6 +68,11 @@
                     </label>
                 </div>
             </div>
+
+
+
+
+
 
         </div>
     </div>

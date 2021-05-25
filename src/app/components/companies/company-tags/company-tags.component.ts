@@ -40,6 +40,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
     public tagsService: TagsService,
     private tagsState: CompanyTagsStateService,
     private tagsStateService: TagsStateService,
+    private companiesStateService: CompaniesStateService,
     public cd: ChangeDetectorRef
   ) { }
 
@@ -48,16 +49,21 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
    */
   public ngOnInit() {
     this.tags = this.tagsStateService.getTags();
+    this.reqTags = JSON.parse(JSON.stringify(this.tagsStateService.getTags()));
     let getTags = this.tagsStateService.onGetTags.subscribe((data: Array<Tag>) => {
       console.log("data", data);
       this.tags = data;
-      this.reqTags = data;
+      this.reqTags = JSON.parse(JSON.stringify(data));
+      console.log("reqTags", this.reqTags);
     })
     this.sub.add(getTags);
     this.onInitClearState();
     this.onCheckEditItem();
   }
-
+  getCompanyName(tag) {
+    let company = this.companiesStateService.getCompanies().find(item => item.id === tag.companyId);
+    return (company) ? company.name : '';
+  }
   onSearch(event) {
     this.tags = this.reqTags.filter(item => item.word.includes(event.target.value));
   }
@@ -125,7 +131,9 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
     this.tagsChange.emit(this.selectedTag);
     this.userInput.nativeElement.value = '';
     this.tagCtrl.setValue(null);
+    console.log("this.reqTags", this.reqTags);
     this.tags = this.reqTags;
+    console.log("this.tags", this.tags);
   }
 
   /**

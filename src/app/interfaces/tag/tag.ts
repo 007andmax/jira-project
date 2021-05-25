@@ -3,4 +3,5 @@ export interface Tag {
     id: string;
     usedCounter: number;
     word: string;
+    companyId: string;
 }

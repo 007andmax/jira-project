@@ -55,13 +55,16 @@
                 (click)="selected(tag)"
             >
                 <span [textContent]="tag.word"></span>
-                <span *ngIf="tag.defaultTag === 'USER_TAG'">Company Name</span>
+                <span
+                    *ngIf="tag.defaultTag === 'USER_TAG'"
+                    [textContent]="getCompanyName(tag)"
+                ></span>
                 <i
                     *ngIf="tag.defaultTag === 'USER_TAG'"
                     class="icon__user-grey qt-sz-16 qt-bg-contain qt-ml-8"
                 ></i>
                 <i
-                    *ngIf="!tag.defaultTag"
+                    *ngIf="tag.defaultTag === 'COMMON'"
                     class="icn-tags qt-sz-16 qt-bg-contain qt-ml-8"
                 ></i>
                 <i

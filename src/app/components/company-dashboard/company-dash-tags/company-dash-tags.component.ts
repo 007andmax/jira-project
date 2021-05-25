@@ -51,17 +51,21 @@ export class CompanyDashTagsComponent implements OnInit, OnDestroy {
    */
   public ngOnInit() {
     this.tags = this.tagsStateService.getTags();
+    this.reqTags = JSON.parse(JSON.stringify(this.tagsStateService.getTags()));
     let getTags = this.tagsStateService.onGetTags.subscribe((data: Array<Tag>) => {
       console.log("data", data);
       this.tags = data;
-      this.reqTags = data;
+      this.reqTags = JSON.parse(JSON.stringify(data));
     })
     this.sub.add(getTags);
     this.onInitClearState();
     this.selectedTag = this.tagList;
   }
 
-
+  getCompanyName(tag) {
+    let company = this.companiesStateService.getCompanies().find(item => item.id === tag.companyId);
+    return (company) ? company.name : '';
+  }
   onSearch(event) {
 
     this.tags = this.reqTags.filter(item => item.word.includes(event.target.value));
