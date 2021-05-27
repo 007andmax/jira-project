@@ -2,9 +2,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-var aesjs = require('aes-js');
-var pbkdf2 = require('pbkdf2');
-var randomBytes = require('randombytes');
 import * as CryptoJS from 'crypto-js';
 
 @Injectable({
