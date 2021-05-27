@@ -1,15 +1,38 @@
+import { DocumentAddLinked } from "./document-add-linked";
+
 export class DocumentAdd {
-    title: string;
+
+    title: string = "";;
     content: string;
-    documentCategory: string;
+    categoryId: string;
+    description: string;
     documentType: string;
     clientType: string;
+    reviewDate: string;
+    tags: Array<string> = [];
+    linked: DocumentAddLinked = new DocumentAddLinked();
     constructor() {
-        this.title = "First document";
 
-        this.documentCategory = "test category";
-        this.documentType = "DOCUMENT";
-        this.clientType = "CLIENT";
+
+    }
+    public setDocumentType(data) {
+        this.documentType = data;
+    }
+    public setLinked(users, companies) {
+        this.linked.users = users;
+        this.linked.companies = companies;
+    }
+    public setClientType(data) {
+        this.clientType = data;
+    }
+    public setTags(data) {
+        this.tags = data;
+    }
+    public setCategoryId(data) {
+        this.categoryId = data;
+    }
+    public setReviewDate(data) {
+        this.reviewDate = data;
     }
     public setContent(data) {
         this.content = data;

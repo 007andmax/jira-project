@@ -24,9 +24,11 @@
 
 
 
+
         <div class="qt-page-list__header-title-line--rigth">
             <div class="d-f ai-c">
                 <div class="qt-page-list__search qt-ml-8 search-container">
+
 
 
 
@@ -98,7 +100,7 @@
                         <button class=" qt-button --with-menu qt-ml-8">
                             <span
                                 class="save-billable-aside-btn left-side"
-                                routerLink="/ng2/documents/add"
+                                (click)="goToAddDocument()"
                             >
                                 <span>Create Document</span>
                             </span>
@@ -115,9 +117,11 @@
 
 
 
+
             </div>
         </div>
     </div>
+
 
 
 
@@ -144,6 +148,7 @@
             [hidden]="toggleFilter"
         ></documents-filter>
     </div>
+
 
 
 

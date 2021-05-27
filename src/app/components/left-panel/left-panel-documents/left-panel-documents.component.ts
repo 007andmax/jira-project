@@ -55,7 +55,7 @@ export class LeftPanelDocumentsComponent implements OnInit, OnDestroy {
   }
 
   isDocumentsState(state) {
-    return (state === 'new-documents' || state === 'new-category-documents')
+    return (state === 'new-documents' || state === 'new-category-documents' || state === 'new-add-documents')
   }
   public close() {
     this.open = false;

@@ -76,10 +76,19 @@
             >
                 <div class="documents-create__col --required">
                     <p class="label-name">Document Title</p>
+                    <mat-error
+                        class="qt-tooltip-error"
+                        *ngIf="!documentValidate.getTitle()"
+                        [textContent]="'Document title is required'"
+                    >
+                    </mat-error>
                     <input
                         type="text"
                         class="qt-input-40 documents-add-body__input"
                         placeholder="Printer Installation Guide"
+                        [(ngModel)]="documentAdd.title"
+                        [ngClass]="{'--input-error':!documentValidate.getTitle()}"
+                        (input)="documentValidate.resetTitle()"
                     >
                 </div>
                 <div class="documents-create__col --required">
@@ -88,6 +97,7 @@
                         appTextArea
                         [limit]="160"
                         placeholder="Write Description"
+                        [(ngModel)]="documentAdd.description"
                     ></textarea>
                 </div>
                 <div class="documents-create__col select-open-top --required">
@@ -109,6 +119,7 @@
                         [list]="categories"
                         [search]="true"
                         [change]="true"
+                        (onSelectedItem)="onSelectCategory($event)"
                     >
                     </app-drop-down>
                 </div>
@@ -172,6 +183,7 @@
                         [isDisabled]="!requiredCompanyType"
                         heightInput="40px"
                         widthInput="100%"
+                        (onSelectedItem)="onSelectCompanyType($event)"
                     ></app-drop-down>
                 </div>
                 <div class="documents-create__col qt-input-block qt-w50">
@@ -179,6 +191,7 @@
                     <app-date-picker
                         [editMode]="true"
                         [useMinDate]="false"
+                        (onChange)="onChangeReviewDate($event)"
                     ></app-date-picker>
                 </div>
                 <div class="documents-create__col">

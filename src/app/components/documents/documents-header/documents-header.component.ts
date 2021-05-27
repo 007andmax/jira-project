@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 
 
 @Component({
@@ -25,7 +26,7 @@ export class DocumentsHeaderComponent implements OnInit {
    * @param {permissionsService} permissionsService to work with permissions service
    */
   constructor(
-
+    private leftPanelStateService: LeftPanelStateService,
     private permissionsService: PermissionsService,
   ) { }
 
@@ -39,6 +40,7 @@ export class DocumentsHeaderComponent implements OnInit {
     this.searchText = "";
     this.onSearch.emit("");
   }
+
   toggleAll(data) {
     this.selectAll = true;
     this.onSelectAll.emit(data);
@@ -49,7 +51,9 @@ export class DocumentsHeaderComponent implements OnInit {
   search(event) {
     this.onSearch.emit(event.target.value);
   }
-
+  goToAddDocument() {
+    this.leftPanelStateService.goToState('new-add-documents');
+  }
   onChangeCountFilter(data) {
     this.countFilter = data;
   }
