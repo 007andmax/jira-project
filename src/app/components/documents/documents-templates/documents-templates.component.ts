@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./documents-templates.component.scss']
 })
 export class DocumentsTemplatesComponent implements OnInit {
-
+  openCategories: boolean = false;
   constructor() { }
 
   ngOnInit() {
   }
+  toggleOpenCategories() {
 
+    this.openCategories = !this.openCategories;
+    console.log("toggleOpenCategories", this.openCategories)
+  }
 }

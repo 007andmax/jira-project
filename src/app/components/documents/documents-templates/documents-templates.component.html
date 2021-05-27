@@ -1,397 +1,493 @@
-<!--<p>-->
-<!--  documents-templates works!-->
-<!--</p>-->
+<!-- <p> -->
+<!-- documents-templates works! -->
+<!-- </p> -->
 <div class="qt-page-list__header documents-templates-page">
-  <div class="qt-page-list__header-title-line">
-    <h3 class="qt-page-list__header-title">Templates</h3>
-    <div class="documents-templates-panel__subheader">
-      <!-- Template Gallery -->
-      <div
-        [ngClass]="{'--active':tab === 'TEMPLATE_GALLERY'}"
-        (click)="tab = 'TEMPLATE_GALLERY'"
-        class="documents-templates-panel__subheader-item pointer"
-      >
-        Template Gallery
-      </div>
-      <!-- End Template Gallery -->
-      <!-- My Templates -->
-      <div
-        [ngClass]="{'--active':tab === 'MY_TEMPLATES'}"
-        (click)="tab = 'MY_TEMPLATES'"
-        class="documents-templates-panel__subheader-item pointer">
-        My Templates
-      </div>
-      <!-- END My Templates -->
+    <div class="qt-page-list__header-title-line">
+        <h3 class="qt-page-list__header-title">Templates</h3>
+        <div class="documents-templates-panel__subheader">
+            <!-- Template Gallery -->
+            <div
+                [ngClass]="{'--active':tab === 'TEMPLATE_GALLERY'}"
+                (click)="tab = 'TEMPLATE_GALLERY'"
+                class="documents-templates-panel__subheader-item pointer"
+            >
+                Template Gallery
+            </div>
+            <!-- End Template Gallery -->
+            <!-- My Templates -->
+            <div
+                [ngClass]="{'--active':tab === 'MY_TEMPLATES'}"
+                (click)="tab = 'MY_TEMPLATES'"
+                class="documents-templates-panel__subheader-item pointer"
+            >
+                My Templates
+            </div>
+            <!-- END My Templates -->
+        </div>
+        <div class="qt-aside-modern__header-close icon__close"></div>
     </div>
-    <div class="qt-aside-modern__header-close icon__close"></div>
-  </div>
 </div>
+
 
 <div class="qt-page-list documents-templates-page">
 
-  <div class="documents-create-panel__body">
-    <!-- TEMPLATE_GALLERY Tab Content -->
-    <div
-      class=""
-      *ngIf="tab === 'TEMPLATE_GALLERY'"
-    >
 
-      <div class="category-line">
-
-        <label class="category-search pointer">
-         <span class="category-search__icon">
-            <span class="icon__search qt-za-16 qt-sz-16 qt-bg-contain"></span>
-         </span>
-          <input
-            class="category-search__input"
-            placeholder="Search Templates"
-          >
-        </label>
-
-        <div class="category-item-line">
-
-          <div class="category-item --active">All <strong>86</strong></div>
-          <div class="category-item">How it works <strong>14</strong></div>
-          <div class="category-item">Installation <strong>8</strong></div>
-          <div class="category-item">IT Support <strong>13</strong></div>
-          <div class="category-item">Tech User Guideline <strong>19</strong></div>
-          <div class="category-item">Tech User Guideline <strong>14</strong></div>
-          <div class="category-item">Wi-Fi Drafts <strong>3</strong></div>
-          <div class="category-item">New Connection <strong>24</strong></div>
-          <div class="category-item">New Connection <strong>24</strong></div>
-          <div class="category-item">Business strategy <strong>5</strong></div>
-          <div class="category-item">Tech User Guideline <strong>19</strong></div>
-          <div class="category-item">Tech User Guideline <strong>19</strong></div>
-          <div class="category-item">Wi-Fi Drafts <strong>3</strong></div>
-          <div class="category-item">New Connection <strong>24</strong></div>
-
-          <div class="hidden-category-btn pointer">
-            <div class="icon__down-arrow qt-za-16 qt-sz-16 qt-bg-contain"></div>
-          </div>
-
-        </div>
-
-        <div class="more-category-btn pointer">
-          <div class="icon__down-arrow qt-za-16 qt-sz-16 qt-bg-contain"></div>
-        </div>
+    <div class="documents-create-panel__body">
+        <!-- TEMPLATE_GALLERY Tab Content -->
+        <div
+            class
+            *ngIf="tab === 'TEMPLATE_GALLERY'"
+        >
 
 
-      </div>
+            <div
+                class="category-line"
+                [ngClass]="{'--show-all-category':openCategories}"
+            >
 
-      <div class="card-line">
 
-        <div class="card">
-          <div class="qt-df qt-ai-c qt-jc-sb">
-            <div class="card__icon">
-              <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
+                <label
+                    class="category-search pointer"
+                    [ngClass]="{'--active':openCategories}"
+                >
+                    <span class="category-search__icon">
+                        <span class="icon__search qt-za-16 qt-sz-16 qt-bg-contain"></span>
+                    </span>
+                    <input
+                        class="category-search__input"
+                        placeholder="Search Templates"
+                    >
+                </label>
+
+
+                <div class="category-item-line">
+
+
+                    <div class="category-item --active">
+                        All
+                        <strong>86</strong>
+                    </div>
+                    <div class="category-item">
+                        How it works
+                        <strong>14</strong>
+                    </div>
+                    <div class="category-item">
+                        Installation
+                        <strong>8</strong>
+                    </div>
+                    <div class="category-item">
+                        IT Support
+                        <strong>13</strong>
+                    </div>
+                    <div class="category-item">
+                        Tech User Guideline
+                        <strong>19</strong>
+                    </div>
+                    <div class="category-item">
+                        Tech User Guideline
+                        <strong>14</strong>
+                    </div>
+                    <div class="category-item">
+                        Wi-Fi Drafts
+                        <strong>3</strong>
+                    </div>
+                    <div class="category-item">
+                        New Connection
+                        <strong>24</strong>
+                    </div>
+                    <div class="category-item">
+                        New Connection
+                        <strong>24</strong>
+                    </div>
+                    <div class="category-item">
+                        Business strategy
+                        <strong>5</strong>
+                    </div>
+                    <div class="category-item">
+                        Tech User Guideline
+                        <strong>19</strong>
+                    </div>
+                    <div class="category-item">
+                        Tech User Guideline
+                        <strong>19</strong>
+                    </div>
+                    <div class="category-item">
+                        Wi-Fi Drafts
+                        <strong>3</strong>
+                    </div>
+                    <div class="category-item">
+                        New Connection
+                        <strong>24</strong>
+                    </div>
+
+
+                    <div
+                        class="hidden-category-btn pointer"
+                        (click)="toggleOpenCategories()"
+                    >
+                        <div class="icon__down-arrow qt-za-16 qt-sz-16 qt-bg-contain"></div>
+                    </div>
+
+
+                </div>
+
+
+                <div
+                    class="more-category-btn pointer"
+                    (click)="toggleOpenCategories()"
+                >
+                    <div class="icon__down-arrow qt-za-16 qt-sz-16 qt-bg-contain"></div>
+                </div>
+
+
+
             </div>
-            <div class="qt-button qt-ml-6">Use</div>
-          </div>
-          <div class="card__title">Competitive analysis</div>
-          <div class="card__description">Product Management</div>
-        </div>
 
-        <div class="card">
-          <div class="qt-df qt-ai-c qt-jc-sb">
-            <div class="card__icon">
-              <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
+
+            <div class="card-line">
+
+
+                <div class="card">
+                    <div class="qt-df qt-ai-c qt-jc-sb">
+                        <div class="card__icon">
+                            <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
+                        </div>
+                        <div class="qt-button qt-ml-6">Use</div>
+                    </div>
+                    <div class="card__title">Competitive analysis</div>
+                    <div class="card__description">Product Management</div>
+                </div>
+
+
+                <div class="card">
+                    <div class="qt-df qt-ai-c qt-jc-sb">
+                        <div class="card__icon">
+                            <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
+                        </div>
+                        <div class="qt-button qt-ml-6">Use</div>
+                    </div>
+                    <div class="card__title">Company email domain setup</div>
+                    <div class="card__description">Product Management</div>
+                </div>
+
+
+                <div class="card">
+                    <div class="qt-df qt-ai-c qt-jc-sb">
+                        <div class="card__icon">
+                            <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
+                        </div>
+                        <div class="qt-button qt-ml-6">Use</div>
+                    </div>
+                    <div class="card__title">
+                        Company email domain setup Company email domain setup
+                    </div>
+                    <div class="card__description">Product Management</div>
+                </div>
+
+
+                <div class="card">
+                    <div class="qt-df qt-ai-c qt-jc-sb">
+                        <div class="card__icon">
+                            <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
+                        </div>
+                        <div class="qt-button qt-ml-6">Use</div>
+                    </div>
+                    <div class="card__title">Competitive analysis</div>
+                    <div class="card__description">Product Management</div>
+                </div>
+
+
+                <div class="card">
+                    <div class="qt-df qt-ai-c qt-jc-sb">
+                        <div class="card__icon">
+                            <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
+                        </div>
+                        <div class="qt-button qt-ml-6">Use</div>
+                    </div>
+                    <div class="card__title">Competitive analysis</div>
+                    <div class="card__description">Product Management</div>
+                </div>
+
+
+                <div class="card">
+                    <div class="qt-df qt-ai-c qt-jc-sb">
+                        <div class="card__icon">
+                            <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
+                        </div>
+                        <div class="qt-button qt-ml-6">Use</div>
+                    </div>
+                    <div class="card__title">Competitive analysis</div>
+                    <div class="card__description">Product Management</div>
+                </div>
+
+
+                <div class="card">
+                    <div class="qt-df qt-ai-c qt-jc-sb">
+                        <div class="card__icon">
+                            <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
+                        </div>
+                        <div class="qt-button qt-ml-6">Use</div>
+                    </div>
+                    <div class="card__title">Competitive analysis</div>
+                    <div class="card__description">Product Management</div>
+                </div>
+
+
+                <div class="card">
+                    <div class="qt-df qt-ai-c qt-jc-sb">
+                        <div class="card__icon">
+                            <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
+                        </div>
+                        <div class="qt-button qt-ml-6">Use</div>
+                    </div>
+                    <div class="card__title">Competitive analysis</div>
+                    <div class="card__description">Product Management</div>
+                </div>
+
+
+                <div class="card">
+                    <div class="qt-df qt-ai-c qt-jc-sb">
+                        <div class="card__icon">
+                            <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
+                        </div>
+                        <div class="qt-button qt-ml-6">Use</div>
+                    </div>
+                    <div class="card__title">Competitive analysis</div>
+                    <div class="card__description">Product Management</div>
+                </div>
+
+
+                <div class="card">
+                    <div class="qt-df qt-ai-c qt-jc-sb">
+                        <div class="card__icon">
+                            <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
+                        </div>
+                        <div class="qt-button qt-ml-6">Use</div>
+                    </div>
+                    <div class="card__title">Competitive analysis</div>
+                    <div class="card__description">Product Management</div>
+                </div>
+
+
+                <div class="card">
+                    <div class="qt-df qt-ai-c qt-jc-sb">
+                        <div class="card__icon">
+                            <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
+                        </div>
+                        <div class="qt-button qt-ml-6">Use</div>
+                    </div>
+                    <div class="card__title">Competitive analysis</div>
+                    <div class="card__description">Product Management</div>
+                </div>
+
+
+                <div class="card">
+                    <div class="qt-df qt-ai-c qt-jc-sb">
+                        <div class="card__icon">
+                            <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
+                        </div>
+                        <div class="qt-button qt-ml-6">Use</div>
+                    </div>
+                    <div class="card__title">Competitive analysis</div>
+                    <div class="card__description">Product Management</div>
+                </div>
+
+
+                <div class="card">
+                    <div class="qt-df qt-ai-c qt-jc-sb">
+                        <div class="card__icon">
+                            <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
+                        </div>
+                        <div class="qt-button qt-ml-6">Use</div>
+                    </div>
+                    <div class="card__title">Competitive analysis</div>
+                    <div class="card__description">Product Management</div>
+                </div>
+
+
+                <div class="card">
+                    <div class="qt-df qt-ai-c qt-jc-sb">
+                        <div class="card__icon">
+                            <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
+                        </div>
+                        <div class="qt-button qt-ml-6">Use</div>
+                    </div>
+                    <div class="card__title">Competitive analysis</div>
+                    <div class="card__description">Product Management</div>
+                </div>
+
+
+                <div class="card">
+                    <div class="qt-df qt-ai-c qt-jc-sb">
+                        <div class="card__icon">
+                            <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
+                        </div>
+                        <div class="qt-button qt-ml-6">Use</div>
+                    </div>
+                    <div class="card__title">Competitive analysis</div>
+                    <div class="card__description">Product Management</div>
+                </div>
+
+
+                <div class="card">
+                    <div class="qt-df qt-ai-c qt-jc-sb">
+                        <div class="card__icon">
+                            <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
+                        </div>
+                        <div class="qt-button qt-ml-6">Use</div>
+                    </div>
+                    <div class="card__title">Competitive analysis</div>
+                    <div class="card__description">Product Management</div>
+                </div>
+
+
+                <div class="card">
+                    <div class="qt-df qt-ai-c qt-jc-sb">
+                        <div class="card__icon">
+                            <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
+                        </div>
+                        <div class="qt-button qt-ml-6">Use</div>
+                    </div>
+                    <div class="card__title">Competitive analysis</div>
+                    <div class="card__description">Product Management</div>
+                </div>
+
+
+                <div class="card">
+                    <div class="qt-df qt-ai-c qt-jc-sb">
+                        <div class="card__icon">
+                            <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
+                        </div>
+                        <div class="qt-button qt-ml-6">Use</div>
+                    </div>
+                    <div class="card__title">Competitive analysis</div>
+                    <div class="card__description">Product Management</div>
+                </div>
+
+
+                <div class="card">
+                    <div class="qt-df qt-ai-c qt-jc-sb">
+                        <div class="card__icon">
+                            <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
+                        </div>
+                        <div class="qt-button qt-ml-6">Use</div>
+                    </div>
+                    <div class="card__title">Competitive analysis</div>
+                    <div class="card__description">Product Management</div>
+                </div>
+
+
+                <div class="card">
+                    <div class="qt-df qt-ai-c qt-jc-sb">
+                        <div class="card__icon">
+                            <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
+                        </div>
+                        <div class="qt-button qt-ml-6">Use</div>
+                    </div>
+                    <div class="card__title">Competitive analysis</div>
+                    <div class="card__description">Product Management</div>
+                </div>
+
+
+                <div class="card">
+                    <div class="qt-df qt-ai-c qt-jc-sb">
+                        <div class="card__icon">
+                            <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
+                        </div>
+                        <div class="qt-button qt-ml-6">Use</div>
+                    </div>
+                    <div class="card__title">Competitive analysis</div>
+                    <div class="card__description">Product Management</div>
+                </div>
+
+
+                <div class="card">
+                    <div class="qt-df qt-ai-c qt-jc-sb">
+                        <div class="card__icon">
+                            <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
+                        </div>
+                        <div class="qt-button qt-ml-6">Use</div>
+                    </div>
+                    <div class="card__title">Competitive analysis</div>
+                    <div class="card__description">Product Management</div>
+                </div>
+
+
+                <div class="card">
+                    <div class="qt-df qt-ai-c qt-jc-sb">
+                        <div class="card__icon">
+                            <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
+                        </div>
+                        <div class="qt-button qt-ml-6">Use</div>
+                    </div>
+                    <div class="card__title">Competitive analysis</div>
+                    <div class="card__description">Product Management</div>
+                </div>
+
+
+                <div class="card">
+                    <div class="qt-df qt-ai-c qt-jc-sb">
+                        <div class="card__icon">
+                            <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
+                        </div>
+                        <div class="qt-button qt-ml-6">Use</div>
+                    </div>
+                    <div class="card__title">Competitive analysis</div>
+                    <div class="card__description">Product Management</div>
+                </div>
+
+
+                <div class="card">
+                    <div class="qt-df qt-ai-c qt-jc-sb">
+                        <div class="card__icon">
+                            <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
+                        </div>
+                        <div class="qt-button qt-ml-6">Use</div>
+                    </div>
+                    <div class="card__title">Competitive analysis</div>
+                    <div class="card__description">Product Management</div>
+                </div>
+
+
+                <div class="card">
+                    <div class="qt-df qt-ai-c qt-jc-sb">
+                        <div class="card__icon">
+                            <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
+                        </div>
+                        <div class="qt-button qt-ml-6">Use</div>
+                    </div>
+                    <div class="card__title">Competitive analysis</div>
+                    <div class="card__description">Product Management</div>
+                </div>
+
+
+                <div class="card">
+                    <div class="qt-df qt-ai-c qt-jc-sb">
+                        <div class="card__icon">
+                            <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
+                        </div>
+                        <div class="qt-button qt-ml-6">Use</div>
+                    </div>
+                    <div class="card__title">Competitive analysis</div>
+                    <div class="card__description">Product Management</div>
+                </div>
+
+
             </div>
-            <div class="qt-button qt-ml-6">Use</div>
-          </div>
-          <div class="card__title">Company email domain setup</div>
-          <div class="card__description">Product Management</div>
+
+
         </div>
-
-        <div class="card">
-          <div class="qt-df qt-ai-c qt-jc-sb">
-            <div class="card__icon">
-              <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
-            </div>
-            <div class="qt-button qt-ml-6">Use</div>
-          </div>
-          <div class="card__title">Company email domain setup Company email domain setup</div>
-          <div class="card__description">Product Management</div>
+        <!-- END TEMPLATE_GALLERY Tab Content -->
+        <!-- MY_TEMPLATES Tab Content -->
+        <div
+            class="qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24"
+            *ngIf="tab === 'MY_TEMPLATES'"
+        >
+            lallalal222
         </div>
-
-        <div class="card">
-          <div class="qt-df qt-ai-c qt-jc-sb">
-            <div class="card__icon">
-              <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
-            </div>
-            <div class="qt-button qt-ml-6">Use</div>
-          </div>
-          <div class="card__title">Competitive analysis</div>
-          <div class="card__description">Product Management</div>
-        </div>
-
-        <div class="card">
-          <div class="qt-df qt-ai-c qt-jc-sb">
-            <div class="card__icon">
-              <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
-            </div>
-            <div class="qt-button qt-ml-6">Use</div>
-          </div>
-          <div class="card__title">Competitive analysis</div>
-          <div class="card__description">Product Management</div>
-        </div>
-
-        <div class="card">
-          <div class="qt-df qt-ai-c qt-jc-sb">
-            <div class="card__icon">
-              <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
-            </div>
-            <div class="qt-button qt-ml-6">Use</div>
-          </div>
-          <div class="card__title">Competitive analysis</div>
-          <div class="card__description">Product Management</div>
-        </div>
-
-        <div class="card">
-          <div class="qt-df qt-ai-c qt-jc-sb">
-            <div class="card__icon">
-              <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
-            </div>
-            <div class="qt-button qt-ml-6">Use</div>
-          </div>
-          <div class="card__title">Competitive analysis</div>
-          <div class="card__description">Product Management</div>
-        </div>
-
-        <div class="card">
-          <div class="qt-df qt-ai-c qt-jc-sb">
-            <div class="card__icon">
-              <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
-            </div>
-            <div class="qt-button qt-ml-6">Use</div>
-          </div>
-          <div class="card__title">Competitive analysis</div>
-          <div class="card__description">Product Management</div>
-        </div>
-
-        <div class="card">
-          <div class="qt-df qt-ai-c qt-jc-sb">
-            <div class="card__icon">
-              <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
-            </div>
-            <div class="qt-button qt-ml-6">Use</div>
-          </div>
-          <div class="card__title">Competitive analysis</div>
-          <div class="card__description">Product Management</div>
-        </div>
-
-        <div class="card">
-          <div class="qt-df qt-ai-c qt-jc-sb">
-            <div class="card__icon">
-              <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
-            </div>
-            <div class="qt-button qt-ml-6">Use</div>
-          </div>
-          <div class="card__title">Competitive analysis</div>
-          <div class="card__description">Product Management</div>
-        </div>
-
-        <div class="card">
-          <div class="qt-df qt-ai-c qt-jc-sb">
-            <div class="card__icon">
-              <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
-            </div>
-            <div class="qt-button qt-ml-6">Use</div>
-          </div>
-          <div class="card__title">Competitive analysis</div>
-          <div class="card__description">Product Management</div>
-        </div>
-
-        <div class="card">
-          <div class="qt-df qt-ai-c qt-jc-sb">
-            <div class="card__icon">
-              <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
-            </div>
-            <div class="qt-button qt-ml-6">Use</div>
-          </div>
-          <div class="card__title">Competitive analysis</div>
-          <div class="card__description">Product Management</div>
-        </div>
-
-        <div class="card">
-          <div class="qt-df qt-ai-c qt-jc-sb">
-            <div class="card__icon">
-              <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
-            </div>
-            <div class="qt-button qt-ml-6">Use</div>
-          </div>
-          <div class="card__title">Competitive analysis</div>
-          <div class="card__description">Product Management</div>
-        </div>
-
-        <div class="card">
-          <div class="qt-df qt-ai-c qt-jc-sb">
-            <div class="card__icon">
-              <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
-            </div>
-            <div class="qt-button qt-ml-6">Use</div>
-          </div>
-          <div class="card__title">Competitive analysis</div>
-          <div class="card__description">Product Management</div>
-        </div>
-
-        <div class="card">
-          <div class="qt-df qt-ai-c qt-jc-sb">
-            <div class="card__icon">
-              <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
-            </div>
-            <div class="qt-button qt-ml-6">Use</div>
-          </div>
-          <div class="card__title">Competitive analysis</div>
-          <div class="card__description">Product Management</div>
-        </div>
-
-        <div class="card">
-          <div class="qt-df qt-ai-c qt-jc-sb">
-            <div class="card__icon">
-              <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
-            </div>
-            <div class="qt-button qt-ml-6">Use</div>
-          </div>
-          <div class="card__title">Competitive analysis</div>
-          <div class="card__description">Product Management</div>
-        </div>
-
-        <div class="card">
-          <div class="qt-df qt-ai-c qt-jc-sb">
-            <div class="card__icon">
-              <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
-            </div>
-            <div class="qt-button qt-ml-6">Use</div>
-          </div>
-          <div class="card__title">Competitive analysis</div>
-          <div class="card__description">Product Management</div>
-        </div>
-
-        <div class="card">
-          <div class="qt-df qt-ai-c qt-jc-sb">
-            <div class="card__icon">
-              <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
-            </div>
-            <div class="qt-button qt-ml-6">Use</div>
-          </div>
-          <div class="card__title">Competitive analysis</div>
-          <div class="card__description">Product Management</div>
-        </div>
-
-        <div class="card">
-          <div class="qt-df qt-ai-c qt-jc-sb">
-            <div class="card__icon">
-              <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
-            </div>
-            <div class="qt-button qt-ml-6">Use</div>
-          </div>
-          <div class="card__title">Competitive analysis</div>
-          <div class="card__description">Product Management</div>
-        </div>
-
-        <div class="card">
-          <div class="qt-df qt-ai-c qt-jc-sb">
-            <div class="card__icon">
-              <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
-            </div>
-            <div class="qt-button qt-ml-6">Use</div>
-          </div>
-          <div class="card__title">Competitive analysis</div>
-          <div class="card__description">Product Management</div>
-        </div>
-
-        <div class="card">
-          <div class="qt-df qt-ai-c qt-jc-sb">
-            <div class="card__icon">
-              <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
-            </div>
-            <div class="qt-button qt-ml-6">Use</div>
-          </div>
-          <div class="card__title">Competitive analysis</div>
-          <div class="card__description">Product Management</div>
-        </div>
-
-        <div class="card">
-          <div class="qt-df qt-ai-c qt-jc-sb">
-            <div class="card__icon">
-              <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
-            </div>
-            <div class="qt-button qt-ml-6">Use</div>
-          </div>
-          <div class="card__title">Competitive analysis</div>
-          <div class="card__description">Product Management</div>
-        </div>
-
-        <div class="card">
-          <div class="qt-df qt-ai-c qt-jc-sb">
-            <div class="card__icon">
-              <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
-            </div>
-            <div class="qt-button qt-ml-6">Use</div>
-          </div>
-          <div class="card__title">Competitive analysis</div>
-          <div class="card__description">Product Management</div>
-        </div>
-
-        <div class="card">
-          <div class="qt-df qt-ai-c qt-jc-sb">
-            <div class="card__icon">
-              <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
-            </div>
-            <div class="qt-button qt-ml-6">Use</div>
-          </div>
-          <div class="card__title">Competitive analysis</div>
-          <div class="card__description">Product Management</div>
-        </div>
-
-        <div class="card">
-          <div class="qt-df qt-ai-c qt-jc-sb">
-            <div class="card__icon">
-              <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
-            </div>
-            <div class="qt-button qt-ml-6">Use</div>
-          </div>
-          <div class="card__title">Competitive analysis</div>
-          <div class="card__description">Product Management</div>
-        </div>
-
-        <div class="card">
-          <div class="qt-df qt-ai-c qt-jc-sb">
-            <div class="card__icon">
-              <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
-            </div>
-            <div class="qt-button qt-ml-6">Use</div>
-          </div>
-          <div class="card__title">Competitive analysis</div>
-          <div class="card__description">Product Management</div>
-        </div>
-
-        <div class="card">
-          <div class="qt-df qt-ai-c qt-jc-sb">
-            <div class="card__icon">
-              <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
-            </div>
-            <div class="qt-button qt-ml-6">Use</div>
-          </div>
-          <div class="card__title">Competitive analysis</div>
-          <div class="card__description">Product Management</div>
-        </div>
-
-      </div>
-
+        <!-- END MY_TEMPLATES Tab Content -->
     </div>
-    <!-- END TEMPLATE_GALLERY Tab Content -->
-    <!-- MY_TEMPLATES Tab Content -->
-    <div
-      class="qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24"
-      *ngIf="tab === 'MY_TEMPLATES'"
-    >
 
-      lallalal222
-
-    </div>
-    <!-- END MY_TEMPLATES Tab Content -->
-  </div>
 
 
 </div>

@@ -14,7 +14,7 @@
         type="text"
         [value]="getSelectedUser()"
         autocomplete="new-password"
-        placeholder="Tech users"
+        [attr.placeholder]="placeholder"
         id="dropdown1"
         (input)="onCheckAdd($event)"
         ngbDropdownToggle
