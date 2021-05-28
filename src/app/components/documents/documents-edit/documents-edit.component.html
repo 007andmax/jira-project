@@ -1,0 +1,26 @@
+<div
+    class="documents-details qt-page-list"
+    [ngClass]="{'--large' : !openAside}"
+>
+    <app-documents-add-header *ngIf="!showPreloader"></app-documents-add-header>
+    <app-documents-add-body
+        *ngIf="!showPreloader"
+        [editorContent]="documentEdit.content"
+        (onChangeContent)="onChangeContent($event)"
+    ></app-documents-add-body>
+    <app-documents-add-footer
+        *ngIf="!showPreloader"
+        [documentValidate]="documentValidate"
+        [documentEdit]="documentEdit"
+    ></app-documents-add-footer>
+    <documents-edit-info
+        *ngIf="!showPreloader"
+        [documentValidate]="documentValidate"
+        [documentEdit]="documentEdit"
+        (onToggleAside)="openAside  =$event"
+    ></documents-edit-info>
+    <div
+        class="loading"
+        *ngIf="showPreloader"
+    ></div>
+</div>

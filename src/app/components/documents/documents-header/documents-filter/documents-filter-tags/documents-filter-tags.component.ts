@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Tag } from 'src/app/interfaces/tag/tag';
 import { TagsService } from 'src/app/services/tags/tags.service';
@@ -14,6 +14,7 @@ export class DocumentsFilterTagsComponent implements OnInit, OnDestroy {
   public showSelect = false;
   selected: Array<Tag> = [];
   tags: Array<Tag> = [];
+  @Input() editItems: Array<string>;
   @Output() onSelectedItems = new EventEmitter<any>();
   sub = new Subscription();
   constructor(public cd: ChangeDetectorRef,
@@ -23,9 +24,11 @@ export class DocumentsFilterTagsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.tags = this.tagsStateService.getTags();
+    this.setEditItems();
     let getTags = this.tagsStateService.onGetTags.subscribe((data: Array<Tag>) => {
       console.log("data", data);
       this.tags = data;
+      this.setEditItems();
     })
     this.sub.add(getTags);
   }
@@ -35,6 +38,11 @@ export class DocumentsFilterTagsComponent implements OnInit, OnDestroy {
   }
   public hideSelectWrapper() {
     this.showSelect = false;
+  }
+  public setEditItems() {
+    if (this.editItems) this.editItems.forEach(item => {
+      this.selected.push(this.tags.find(tag => tag.id === item));
+    })
 
   }
   public showSelectWrapper($event) {

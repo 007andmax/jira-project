@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { DocumentAdd } from './class/document-add';
@@ -16,6 +18,8 @@ export class DocumentsAddComponent implements OnInit {
   documentValidate: DocumentValidate = new DocumentValidate();
   documentAdd: DocumentAdd = new DocumentAdd();
   constructor(private usersStateService: UsersStateService,
+    public activateRoute: ActivatedRoute,
+    public documentsService: DocumentsService,
     private leftPanelStateService: LeftPanelStateService) { }
 
   ngOnInit() {

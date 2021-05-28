@@ -1,8 +1,10 @@
-import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+
 import { Subscription } from 'rxjs';
 import { Company } from 'src/app/interfaces/company/company';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { DocumentLinked } from '../../../class/document-linked';
 import { DocumentCompanyUser } from '../../class/document-company-user';
 
 @Component({
@@ -14,7 +16,7 @@ export class DocumentsLinkedComponent implements OnInit {
 
   public selectedUserAndCompanies: Array<DocumentCompanyUser> = [];
   public showSelect = false;
-
+  @Input() editItems: DocumentLinked;
   public tabs = ['User', 'Company'];
   public currentTab = this.tabs[0];
   public usersList = [];
@@ -38,17 +40,29 @@ export class DocumentsLinkedComponent implements OnInit {
     })
     this.sub.add(getOnUsers);
   }
+
   public onGetUsers(data) {
     this.usersList = data.filter(item => {
       if (item.accountType !== 'TECH' && !item.deletedAt) return item;
     });
     this.usersList.sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?
       1 : ((`${b.firstName} ${b.lastName}`.toLowerCase() > `${a.firstName} ${a.lastName}`.toLowerCase()) ? -1 : 0));
-
+    if (this.editItems) {
+      this.editItems.users.forEach(item => {
+        let user = this.usersList.find(userItem => userItem.id === item);
+        this.selectedUserAndCompanies.push(new DocumentCompanyUser(user.id, `${user.firstName} ${user.lastName}`, "USER"))
+      });
+    }
   }
   private getClientsList(data) {
     this.companiesList = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+    if (this.editItems) {
+      this.editItems.companies.forEach(item => {
+        let company = this.companiesList.find(companyItem => companyItem.id === item);
+        this.selectedUserAndCompanies.push(new DocumentCompanyUser(company.id, company.name, "COMPANY"))
+      });
+    }
   }
 
 

@@ -8,6 +8,8 @@ import { DocumentAdd } from '../class/document-add';
 import * as moment from "moment";
 import { DocumentCompanyUser } from '../class/document-company-user';
 import { DocumentValidate } from '../class/document-validate';
+import { ActivatedRoute } from '@angular/router';
+import { DocumentsService } from 'src/app/services/documents/documents.service';
 
 @Component({
   selector: 'app-documents-add-info',
@@ -25,7 +27,9 @@ export class DocumentsAddInfoComponent implements OnInit {
   @Input() documentValidate: DocumentValidate = new DocumentValidate();
   @ViewChild('companyTypeDp') companyTypeDp: DropDownComponent;
   @Output() onToggleAside = new EventEmitter<any>();
-  constructor(private documentsStateService: DocumentsStateService,) { }
+  constructor(public documentsStateService: DocumentsStateService,
+    public documentsService: DocumentsService,
+    public activateRoute: ActivatedRoute,) { }
 
   ngOnInit() {
     this.categories = this.documentsStateService.getCategories();

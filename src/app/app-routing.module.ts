@@ -56,6 +56,7 @@ import { DocumentsComponent } from './components/documents/documents.component';
 import { DocumentsAddComponent } from './components/documents/documents-add/documents-add.component';
 import { DocumentsCategoryComponent } from './components/documents/documents-category/documents-category.component';
 import { DocumentsTemplatesComponent } from './components/documents/documents-templates/documents-templates.component';
+import { DocumentsEditComponent } from './components/documents/documents-edit/documents-edit.component';
 
 const routes: Routes = [
   {
@@ -190,6 +191,11 @@ const routes: Routes = [
   {
     path: 'ng2/documents/add',
     component: DocumentsAddComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'ng2/documents/edit/:id',
+    component: DocumentsEditComponent,
     pathMatch: 'full'
   },
   {

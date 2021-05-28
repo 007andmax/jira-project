@@ -15,6 +15,7 @@ export class DocumentsTableComponent implements OnInit {
   @Input() item: Document;
   @Output() onRemoveCategory = new EventEmitter<any>();
   @Output() onRemoveDocument = new EventEmitter<any>();
+  @Output() onEditDocument = new EventEmitter<any>();
   currentUser: CurrentUser;
   constructor(private usersStateService: UsersStateService,
     private router: Router,
@@ -52,6 +53,10 @@ export class DocumentsTableComponent implements OnInit {
   }
   removeDocument() {
     this.onRemoveDocument.emit(this.item);
+  }
+  editDocument() {
+    this.router.navigate(
+      ['/ng2/documents/edit/', this.item.id]);
   }
   /* getSharedWith() {
      if (this.item.list.length === 1 && this.item.list[0].createdBy.id === this.currentUser.id) return "Only you";

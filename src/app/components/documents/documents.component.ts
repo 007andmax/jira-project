@@ -97,6 +97,7 @@ export class DocumentsComponent implements OnInit, OnDestroy {
     return item.title;
 
   }
+
   onRemoveCategory(data) {
     this.confirmStateService.setConfirmAction(REMOVE_CATEGORY_DOCUMENT);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });

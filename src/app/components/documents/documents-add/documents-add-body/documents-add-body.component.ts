@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { environment } from 'src/environments/environment';
 declare const Codox: any;
@@ -10,7 +10,7 @@ declare const Codox: any;
 })
 export class DocumentsAddBodyComponent implements OnInit {
   private apiUrl = environment.apiUrl;
-  editorContent = "<p>Hello, Froala!</p><p>wefwefwf</p><p>wefwefwef</p><p>wefwefwef</p><p>wef</p>";
+  @Input() editorContent = "<p>Hello, Froala!</p><p>wefwefwf</p><p>wefwefwef</p><p>wefwefwef</p><p>wef</p>";
   public options: Object;
   codox: any;
   editor: any;

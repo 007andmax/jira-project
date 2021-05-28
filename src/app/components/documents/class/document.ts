@@ -8,6 +8,7 @@ export class Document {
     createdAt: string;
     createdBy: string;
     description: string;
+    content: string;
     documentType: string;
     id: string;
     linked: DocumentLinked;
@@ -30,7 +31,11 @@ export class Document {
         this.tags = data.tags;
         this.title = data.title;
         this.updatedAt = data.updatedAt;
+        this.content = data.content;
         this.isCategory = isCategory;
+    }
+    public parseReviewDate() {
+        return new Date(this.reviewDate).getTime();
     }
 
 }

@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { Document } from '../../class/document';
 import { DocumentAdd } from '../class/document-add';
 import { DocumentValidate } from '../class/document-validate';
 
@@ -12,6 +13,7 @@ import { DocumentValidate } from '../class/document-validate';
 })
 export class DocumentsAddFooterComponent implements OnInit {
   @Input() documentAdd: DocumentAdd = new DocumentAdd();
+  @Input() documentEdit: Document;
   @Input() documentValidate: DocumentValidate = new DocumentValidate();
   constructor(private documentsService: DocumentsService,
     private leftPanelStateService: LeftPanelStateService,

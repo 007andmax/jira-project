@@ -440,6 +440,8 @@ import { DocumentsFilterTagsComponent } from './components/documents/documents-h
 import { PasswordManagerLinkedComponent } from './components/password-manager/password-manager-add-aside/password-manager-linked/password-manager-linked.component';
 import { DocumentsLinkedComponent } from './components/documents/documents-add/documents-add-info/documents-linked/documents-linked.component';
 import { DocumentsTemplatesComponent } from './components/documents/documents-templates/documents-templates.component';
+import { DocumentsEditComponent } from './components/documents/documents-edit/documents-edit.component';
+import { DocumentsEditInfoComponent } from './components/documents/documents-edit/documents-edit-info/documents-edit-info.component';
 
 declare var $: any;
 /**
@@ -832,7 +834,9 @@ declare var $: any;
     DocumentsFilterTagsComponent,
     PasswordManagerLinkedComponent,
     DocumentsLinkedComponent,
-    DocumentsTemplatesComponent
+    DocumentsTemplatesComponent,
+    DocumentsEditComponent,
+    DocumentsEditInfoComponent
   ],
   imports: [
     BrowserModule,

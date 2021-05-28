@@ -1,95 +1,3 @@
-<!-- <tr> -->
-<!-- <td class="password-table__check"> -->
-<!-- <p -->
-<!-- class="category" -->
-<!-- [textContent]="item.name" -->
-<!-- ></p> -->
-<!-- <ng-template -->
-<!-- ngFor -->
-<!-- let-document -->
-<!-- [ngForOf]="item.list" -->
-<!-- [ngForTrackBy]="trackById" -->
-<!-- > -->
-<!-- <p [textContent]="document.title"></p> -->
-<!-- </ng-template> -->
-<!-- </td> -->
-<!-- <td> -->
-<!-- <p [textContent]="getCreateByForCategory(item.list)"></p> -->
-<!-- <ng-template -->
-<!-- ngFor -->
-<!-- let-document -->
-<!-- [ngForOf]="item.list" -->
-<!-- [ngForTrackBy]="trackById" -->
-<!-- > -->
-<!-- <p [textContent]="getCreateBy(document.createdBy)"></p> -->
-<!-- </ng-template> -->
-<!-- </td> -->
-<!-- <td> -->
-<!-- <p [textContent]="parseUpdateAtForCategory(item.list)"></p> -->
-<!-- <ng-template -->
-<!-- ngFor -->
-<!-- let-document -->
-<!-- [ngForOf]="item.list" -->
-<!-- [ngForTrackBy]="trackById" -->
-<!-- > -->
-<!-- <p [textContent]="parseUpdateAt(document.updatedAt)"></p> -->
-<!-- </ng-template> -->
-<!-- </td> -->
-<!-- <td [textContent]="'-'"></td> -->
-<!-- <td class="password-table__menu"> -->
-<!-- &lt;!&ndash; <div class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"></div> &ndash;&gt; -->
-<!-- <div -->
-<!-- ngbDropdown -->
-<!-- [container]="'body'" -->
-<!-- [placement]="'bottom-right'" -->
-<!-- > -->
-<!-- <div -->
-<!-- class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain" -->
-<!-- id="dropdownBasic1" -->
-<!-- ngbDropdownToggle -->
-<!-- ></div> -->
-<!-- <ul -->
-<!-- class="qt-dropdown-menu" -->
-<!-- ngbDropdownMenu -->
-<!-- aria-labelledby="dropdownBasic1" -->
-<!-- > -->
-<!-- <li -->
-<!-- class="pointer" -->
-<!-- (click)="deleteRecord()" -->
-<!-- ngbDropdownItem -->
-<!-- > -->
-<!-- <div class="icon__remove qt-sz-16 qt-bg-contain qt-mr-8"></div> -->
-<!-- Remove -->
-<!-- </li> -->
-<!-- </ul> -->
-<!-- </div> -->
-<!-- </td> -->
-<!-- </tr> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <tr>
     <td
         class="documents-table__title"
@@ -202,6 +110,14 @@
                 <li
                     class="pointer"
                     ngbDropdownItem
+                    (click)="editDocument()"
+                >
+                    <div class="icon__edit qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                    Edit
+                </li>
+                <li
+                    class="pointer"
+                    ngbDropdownItem
                 >
                     <div class="icon__move qt-sz-16 qt-bg-contain qt-mr-8"></div>
                     Move...
@@ -261,6 +177,8 @@
         </div>
     </td>
 </tr>
+
+
 
 
 
