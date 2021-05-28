@@ -21,8 +21,9 @@ export class DocumentsAddFooterComponent implements OnInit {
 
   ngOnInit() {
   }
-  add() {
+  add(documentType) {
     console.log("documentAdd", this.documentAdd);
+    this.documentAdd.setDocumentType(documentType);
     if (!this.documentValidate.isValidate(this.documentAdd)) return;
     this.documentsService.add(this.documentAdd).subscribe(data => {
       this.leftPanelStateService.goToState('new-documents');

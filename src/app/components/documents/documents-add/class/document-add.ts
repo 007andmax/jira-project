@@ -37,4 +37,7 @@ export class DocumentAdd {
     public setContent(data) {
         this.content = data;
     }
+    public isTemplate() {
+        return this.linked.companies.length === 0 && this.linked.users.length === 0;
+    }
 }

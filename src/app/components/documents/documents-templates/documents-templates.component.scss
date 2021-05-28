@@ -1,6 +1,5 @@
 .documents-templates {
   &-page {
-
     &.qt-page-list__header {
       padding: 0 24px;
       background: #fff;
@@ -29,9 +28,7 @@
 
     .hidden-category-btn {
       display: none;
-      transform: rotate(
-          180deg
-      );
+      transform: rotate(180deg);
     }
 
     .category-line {
@@ -39,7 +36,6 @@
       align-items: flex-start;
 
       &.--show-all-category {
-
         .category-item-line {
           height: auto;
         }
@@ -164,7 +160,6 @@
       &:hover .qt-button {
         opacity: 1;
       }
-
     }
 
     .documents-create-panel__body {
@@ -189,10 +184,7 @@
       }
     }
   }
-
 }
-
-
 
 @media (min-width: 1920px) {
   .documents-templates-page .documents-create-panel__body {

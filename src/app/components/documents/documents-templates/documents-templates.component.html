@@ -8,7 +8,7 @@
             <!-- Template Gallery -->
             <div
                 [ngClass]="{'--active':tab === 'TEMPLATE_GALLERY'}"
-                (click)="tab = 'TEMPLATE_GALLERY'"
+                (click)="onChangeTemplate('TEMPLATE_GALLERY')"
                 class="documents-templates-panel__subheader-item pointer"
             >
                 Template Gallery
@@ -17,7 +17,7 @@
             <!-- My Templates -->
             <div
                 [ngClass]="{'--active':tab === 'MY_TEMPLATES'}"
-                (click)="tab = 'MY_TEMPLATES'"
+                (click)="onChangeTemplate('MY_TEMPLATES')"
                 class="documents-templates-panel__subheader-item pointer"
             >
                 My Templates
@@ -27,126 +27,15 @@
         <div class="qt-aside-modern__header-close icon__close"></div>
     </div>
 </div>
-
-
+<documents-templates-header></documents-templates-header>
 <div class="qt-page-list documents-templates-page">
-
-
     <div class="documents-create-panel__body">
         <!-- TEMPLATE_GALLERY Tab Content -->
         <div
             class
             *ngIf="tab === 'TEMPLATE_GALLERY'"
         >
-
-
-            <div
-                class="category-line"
-                [ngClass]="{'--show-all-category':openCategories}"
-            >
-
-
-                <label
-                    class="category-search pointer"
-                    [ngClass]="{'--active':openCategories}"
-                >
-                    <span class="category-search__icon">
-                        <span class="icon__search qt-za-16 qt-sz-16 qt-bg-contain"></span>
-                    </span>
-                    <input
-                        class="category-search__input"
-                        placeholder="Search Templates"
-                    >
-                </label>
-
-
-                <div class="category-item-line">
-
-
-                    <div class="category-item --active">
-                        All
-                        <strong>86</strong>
-                    </div>
-                    <div class="category-item">
-                        How it works
-                        <strong>14</strong>
-                    </div>
-                    <div class="category-item">
-                        Installation
-                        <strong>8</strong>
-                    </div>
-                    <div class="category-item">
-                        IT Support
-                        <strong>13</strong>
-                    </div>
-                    <div class="category-item">
-                        Tech User Guideline
-                        <strong>19</strong>
-                    </div>
-                    <div class="category-item">
-                        Tech User Guideline
-                        <strong>14</strong>
-                    </div>
-                    <div class="category-item">
-                        Wi-Fi Drafts
-                        <strong>3</strong>
-                    </div>
-                    <div class="category-item">
-                        New Connection
-                        <strong>24</strong>
-                    </div>
-                    <div class="category-item">
-                        New Connection
-                        <strong>24</strong>
-                    </div>
-                    <div class="category-item">
-                        Business strategy
-                        <strong>5</strong>
-                    </div>
-                    <div class="category-item">
-                        Tech User Guideline
-                        <strong>19</strong>
-                    </div>
-                    <div class="category-item">
-                        Tech User Guideline
-                        <strong>19</strong>
-                    </div>
-                    <div class="category-item">
-                        Wi-Fi Drafts
-                        <strong>3</strong>
-                    </div>
-                    <div class="category-item">
-                        New Connection
-                        <strong>24</strong>
-                    </div>
-
-
-                    <div
-                        class="hidden-category-btn pointer"
-                        (click)="toggleOpenCategories()"
-                    >
-                        <div class="icon__down-arrow qt-za-16 qt-sz-16 qt-bg-contain"></div>
-                    </div>
-
-
-                </div>
-
-
-                <div
-                    class="more-category-btn pointer"
-                    (click)="toggleOpenCategories()"
-                >
-                    <div class="icon__down-arrow qt-za-16 qt-sz-16 qt-bg-contain"></div>
-                </div>
-
-
-
-            </div>
-
-
             <div class="card-line">
-
-
                 <div class="card">
                     <div class="qt-df qt-ai-c qt-jc-sb">
                         <div class="card__icon">
@@ -157,8 +46,6 @@
                     <div class="card__title">Competitive analysis</div>
                     <div class="card__description">Product Management</div>
                 </div>
-
-
                 <div class="card">
                     <div class="qt-df qt-ai-c qt-jc-sb">
                         <div class="card__icon">
@@ -169,8 +56,6 @@
                     <div class="card__title">Company email domain setup</div>
                     <div class="card__description">Product Management</div>
                 </div>
-
-
                 <div class="card">
                     <div class="qt-df qt-ai-c qt-jc-sb">
                         <div class="card__icon">
@@ -183,8 +68,6 @@
                     </div>
                     <div class="card__description">Product Management</div>
                 </div>
-
-
                 <div class="card">
                     <div class="qt-df qt-ai-c qt-jc-sb">
                         <div class="card__icon">
@@ -195,8 +78,6 @@
                     <div class="card__title">Competitive analysis</div>
                     <div class="card__description">Product Management</div>
                 </div>
-
-
                 <div class="card">
                     <div class="qt-df qt-ai-c qt-jc-sb">
                         <div class="card__icon">
@@ -207,8 +88,6 @@
                     <div class="card__title">Competitive analysis</div>
                     <div class="card__description">Product Management</div>
                 </div>
-
-
                 <div class="card">
                     <div class="qt-df qt-ai-c qt-jc-sb">
                         <div class="card__icon">
@@ -219,8 +98,6 @@
                     <div class="card__title">Competitive analysis</div>
                     <div class="card__description">Product Management</div>
                 </div>
-
-
                 <div class="card">
                     <div class="qt-df qt-ai-c qt-jc-sb">
                         <div class="card__icon">
@@ -231,8 +108,6 @@
                     <div class="card__title">Competitive analysis</div>
                     <div class="card__description">Product Management</div>
                 </div>
-
-
                 <div class="card">
                     <div class="qt-df qt-ai-c qt-jc-sb">
                         <div class="card__icon">
@@ -243,8 +118,6 @@
                     <div class="card__title">Competitive analysis</div>
                     <div class="card__description">Product Management</div>
                 </div>
-
-
                 <div class="card">
                     <div class="qt-df qt-ai-c qt-jc-sb">
                         <div class="card__icon">
@@ -255,8 +128,6 @@
                     <div class="card__title">Competitive analysis</div>
                     <div class="card__description">Product Management</div>
                 </div>
-
-
                 <div class="card">
                     <div class="qt-df qt-ai-c qt-jc-sb">
                         <div class="card__icon">
@@ -267,8 +138,6 @@
                     <div class="card__title">Competitive analysis</div>
                     <div class="card__description">Product Management</div>
                 </div>
-
-
                 <div class="card">
                     <div class="qt-df qt-ai-c qt-jc-sb">
                         <div class="card__icon">
@@ -279,8 +148,6 @@
                     <div class="card__title">Competitive analysis</div>
                     <div class="card__description">Product Management</div>
                 </div>
-
-
                 <div class="card">
                     <div class="qt-df qt-ai-c qt-jc-sb">
                         <div class="card__icon">
@@ -291,8 +158,6 @@
                     <div class="card__title">Competitive analysis</div>
                     <div class="card__description">Product Management</div>
                 </div>
-
-
                 <div class="card">
                     <div class="qt-df qt-ai-c qt-jc-sb">
                         <div class="card__icon">
@@ -303,8 +168,6 @@
                     <div class="card__title">Competitive analysis</div>
                     <div class="card__description">Product Management</div>
                 </div>
-
-
                 <div class="card">
                     <div class="qt-df qt-ai-c qt-jc-sb">
                         <div class="card__icon">
@@ -315,8 +178,6 @@
                     <div class="card__title">Competitive analysis</div>
                     <div class="card__description">Product Management</div>
                 </div>
-
-
                 <div class="card">
                     <div class="qt-df qt-ai-c qt-jc-sb">
                         <div class="card__icon">
@@ -327,8 +188,6 @@
                     <div class="card__title">Competitive analysis</div>
                     <div class="card__description">Product Management</div>
                 </div>
-
-
                 <div class="card">
                     <div class="qt-df qt-ai-c qt-jc-sb">
                         <div class="card__icon">
@@ -339,8 +198,6 @@
                     <div class="card__title">Competitive analysis</div>
                     <div class="card__description">Product Management</div>
                 </div>
-
-
                 <div class="card">
                     <div class="qt-df qt-ai-c qt-jc-sb">
                         <div class="card__icon">
@@ -351,8 +208,6 @@
                     <div class="card__title">Competitive analysis</div>
                     <div class="card__description">Product Management</div>
                 </div>
-
-
                 <div class="card">
                     <div class="qt-df qt-ai-c qt-jc-sb">
                         <div class="card__icon">
@@ -363,8 +218,6 @@
                     <div class="card__title">Competitive analysis</div>
                     <div class="card__description">Product Management</div>
                 </div>
-
-
                 <div class="card">
                     <div class="qt-df qt-ai-c qt-jc-sb">
                         <div class="card__icon">
@@ -375,8 +228,6 @@
                     <div class="card__title">Competitive analysis</div>
                     <div class="card__description">Product Management</div>
                 </div>
-
-
                 <div class="card">
                     <div class="qt-df qt-ai-c qt-jc-sb">
                         <div class="card__icon">
@@ -387,8 +238,6 @@
                     <div class="card__title">Competitive analysis</div>
                     <div class="card__description">Product Management</div>
                 </div>
-
-
                 <div class="card">
                     <div class="qt-df qt-ai-c qt-jc-sb">
                         <div class="card__icon">
@@ -399,8 +248,6 @@
                     <div class="card__title">Competitive analysis</div>
                     <div class="card__description">Product Management</div>
                 </div>
-
-
                 <div class="card">
                     <div class="qt-df qt-ai-c qt-jc-sb">
                         <div class="card__icon">
@@ -411,8 +258,6 @@
                     <div class="card__title">Competitive analysis</div>
                     <div class="card__description">Product Management</div>
                 </div>
-
-
                 <div class="card">
                     <div class="qt-df qt-ai-c qt-jc-sb">
                         <div class="card__icon">
@@ -423,8 +268,6 @@
                     <div class="card__title">Competitive analysis</div>
                     <div class="card__description">Product Management</div>
                 </div>
-
-
                 <div class="card">
                     <div class="qt-df qt-ai-c qt-jc-sb">
                         <div class="card__icon">
@@ -435,8 +278,6 @@
                     <div class="card__title">Competitive analysis</div>
                     <div class="card__description">Product Management</div>
                 </div>
-
-
                 <div class="card">
                     <div class="qt-df qt-ai-c qt-jc-sb">
                         <div class="card__icon">
@@ -447,8 +288,6 @@
                     <div class="card__title">Competitive analysis</div>
                     <div class="card__description">Product Management</div>
                 </div>
-
-
                 <div class="card">
                     <div class="qt-df qt-ai-c qt-jc-sb">
                         <div class="card__icon">
@@ -459,8 +298,6 @@
                     <div class="card__title">Competitive analysis</div>
                     <div class="card__description">Product Management</div>
                 </div>
-
-
                 <div class="card">
                     <div class="qt-df qt-ai-c qt-jc-sb">
                         <div class="card__icon">
@@ -471,11 +308,7 @@
                     <div class="card__title">Competitive analysis</div>
                     <div class="card__description">Product Management</div>
                 </div>
-
-
             </div>
-
-
         </div>
         <!-- END TEMPLATE_GALLERY Tab Content -->
         <!-- MY_TEMPLATES Tab Content -->
@@ -483,11 +316,9 @@
             class="qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24"
             *ngIf="tab === 'MY_TEMPLATES'"
         >
-            lallalal222
+
+
         </div>
         <!-- END MY_TEMPLATES Tab Content -->
     </div>
-
-
-
 </div>

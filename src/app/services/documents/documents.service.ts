@@ -22,6 +22,9 @@ export class DocumentsService {
    * Get devices from company
    * @param companyId - id of company
    */
+  public getTemplateCategories(isDefault) {
+    return this.http.get(this.apiUrl + `documents/categories?documentType=TEMPLATE&defaultTemplate=${isDefault}`);
+  }
   public removeDocument(id) {
     return this.http.delete(this.apiUrl + `documents/${id}`);
   }

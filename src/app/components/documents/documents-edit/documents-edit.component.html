@@ -1,5 +1,6 @@
 <div
-    class="documents-details qt-page-list"
+    class=" qt-page-list"
+    [ngClass]="{'documents-details':!showPreloader}"
     [ngClass]="{'--large' : !openAside}"
 >
     <app-documents-add-header *ngIf="!showPreloader"></app-documents-add-header>

@@ -4,14 +4,15 @@
             class="qt-button qt-mr-12"
             appDisabledBtn
             #addBtn="disabled"
-            (onClick)="add()"
+            (onClick)="add('DOCUMENT')"
         >
             <span *ngIf="!addBtn.isBlock()">Save Document</span>
             <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
         </button>
         <button
             class="qt-button --gray"
-            (click)="closed()"
+            [disabled]="!documentAdd.isTemplate()"
+            (click)="add('TEMPLATE')"
         >
             Save as Template
         </button>

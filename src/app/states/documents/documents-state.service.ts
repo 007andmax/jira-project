@@ -9,6 +9,8 @@ import { DocumentsRealTimeService } from './documents-real-time.service';
 })
 export class DocumentsStateService {
   filter: EventEmitter<any> = new EventEmitter();
+  filterTemplate: EventEmitter<any> = new EventEmitter();
+  onGetCategoriesTemplate: EventEmitter<any> = new EventEmitter();
   categoryForRemove: Document;
   documentForRemove: Document;
   onGetCategories: EventEmitter<any> = new EventEmitter();
@@ -40,11 +42,15 @@ export class DocumentsStateService {
   public getCategories() {
     return this.categories;
   }
-
+  public setCategoriesTemplate(data) {
+    this.onGetCategoriesTemplate.emit(data);
+  }
   public onInitFilter(data) {
     this.filter.emit(data);
   }
-
+  public onInitFilterTemplate(data) {
+    this.filterTemplate.emit(data);
+  }
   public setCategoryForRemove(data) {
     this.categoryForRemove = data;
   }

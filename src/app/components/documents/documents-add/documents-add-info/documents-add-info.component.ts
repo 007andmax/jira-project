@@ -38,7 +38,7 @@ export class DocumentsAddInfoComponent implements OnInit {
       console.log("this.categories", this.categories);
     })
     this.documentAdd.setReviewDate(moment(new Date()).format('YYYY/MM/DD'));
-    this.documentAdd.setDocumentType("DOCUMENT");
+
   }
   onResetCompanyType() {
     this.companyTypeDp.clearWithOutChanges();

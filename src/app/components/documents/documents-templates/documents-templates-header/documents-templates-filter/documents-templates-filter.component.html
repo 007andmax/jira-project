@@ -1,0 +1,16 @@
+<div class="qt-df qt-ai-fs">
+    <app-drop-down
+        #companyDp
+        class="search-company documents-company-filter qt-mr-8"
+        [sort]="true"
+        [placeholder]="'Select By Category'"
+        [field]="'name'"
+        [change]="false"
+        [class]="['qt-dropdown']"
+        [list]="categories"
+        [isBlockClear]="true"
+        [reducerItem]="reducerItem"
+        (onSelectedItem)="onSelectCategory($event)"
+    ></app-drop-down>
+
+</div>
