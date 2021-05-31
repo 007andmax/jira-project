@@ -1,6 +1,7 @@
 .documents-templates {
   &-page {
     &.qt-page-list__header {
+      max-width: 100%;
       padding: 0 24px;
       background: #fff;
     }
@@ -162,11 +163,11 @@
       }
     }
 
-    .documents-create-panel__body {
-      margin: 0 auto;
-      max-width: 1320px;
-      width: 100%;
-    }
+    //.documents-create-panel__body {
+    //  margin: 0 auto;
+    //  max-width: 1320px;
+    //  width: 100%;
+    //}
   }
 
   &-panel__subheader {
@@ -187,8 +188,8 @@
 }
 
 @media (min-width: 1920px) {
-  .documents-templates-page .documents-create-panel__body {
-    width: 85%;
+  .documents-templates-page {
+    width: 100%;
     max-width: unset;
   }
 }

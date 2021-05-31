@@ -137,6 +137,7 @@
 
 .documents-details {
   margin-right: 480px;
+  overflow: auto;
 
   &.--large {
     margin-right: 56px;
@@ -171,5 +172,12 @@
 
   .icn-remove-old {
     margin-bottom: 11px;
+  }
+
+  .fr-box {
+    width: 595px;
+    max-width: 595px;
+    min-width: 595px;
+    margin: 0 auto;
   }
 }
