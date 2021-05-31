@@ -10,6 +10,7 @@ import { DocumentCompanyUser } from '../class/document-company-user';
 import { DocumentValidate } from '../class/document-validate';
 import { ActivatedRoute } from '@angular/router';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
+import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 
 @Component({
   selector: 'app-documents-add-info',
@@ -28,6 +29,7 @@ export class DocumentsAddInfoComponent implements OnInit {
   @ViewChild('companyTypeDp') companyTypeDp: DropDownComponent;
   @Output() onToggleAside = new EventEmitter<any>();
   constructor(public documentsStateService: DocumentsStateService,
+    public leftPanelStateService: LeftPanelStateService,
     public documentsService: DocumentsService,
     public activateRoute: ActivatedRoute,) { }
 
@@ -39,6 +41,9 @@ export class DocumentsAddInfoComponent implements OnInit {
     })
     this.documentAdd.setReviewDate(moment(new Date()).format('YYYY/MM/DD'));
 
+  }
+  public goToDocumentsList() {
+    this.leftPanelStateService.goToState('new-documents');
   }
   onResetCompanyType() {
     this.companyTypeDp.clearWithOutChanges();

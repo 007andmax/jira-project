@@ -23,6 +23,7 @@ export class DocumentsEditComponent extends DocumentsAddComponent {
     });
     this.sub.add(subscription);
   }
+
   getDocument(id) {
     this.documentsService.getDocument(id).subscribe(data => {
       console.log('data', data);

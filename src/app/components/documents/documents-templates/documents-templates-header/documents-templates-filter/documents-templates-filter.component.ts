@@ -30,6 +30,11 @@ export class DocumentsTemplatesFilterComponent implements OnInit {
     this.documentsStateService.onInitFilterTemplate(this.documentTemplateFilter);
     this.onChangeCounterFilter();
   }
+  public onSetSearch(data) {
+    this.documentTemplateFilter.setSearch(data);
+    this.documentsStateService.onInitFilterTemplate(this.documentTemplateFilter);
+    this.onChangeCounterFilter();
+  }
   public onChangeCounterFilter() {
     let count = 0;
     if (this.documentTemplateFilter.categoryId) count++;
@@ -37,6 +42,11 @@ export class DocumentsTemplatesFilterComponent implements OnInit {
     this.changeCountFilter.emit(count);
   }
 
-
+  public onClearAll() {
+    this.categoryDp.clearWithOutChanges();
+    this.documentTemplateFilter.setCategoryId(null);
+    this.documentsStateService.onInitFilterTemplate(this.documentTemplateFilter);
+    this.onChangeCounterFilter();
+  }
 
 }

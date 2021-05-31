@@ -36,14 +36,16 @@ export class DocumentsTemplatesHeaderComponent implements OnInit {
     this.searchText = "";
     this.onSearch.emit("");
   }
-  clearSearchWithoutChange() {
-    this.searchText = "";
-  }
+
 
   search(event) {
+    this.searchText = event.target.value;
     this.onSearch.emit(event.target.value);
   }
+  clearAll() {
 
+    this.filter.onClearAll();
+  }
   onChangeCountFilter(data) {
     this.countFilter = data;
   }

@@ -20,7 +20,7 @@ export class DocumentsAddComponent implements OnInit {
   constructor(private usersStateService: UsersStateService,
     public activateRoute: ActivatedRoute,
     public documentsService: DocumentsService,
-    private leftPanelStateService: LeftPanelStateService) { }
+    public leftPanelStateService: LeftPanelStateService) { }
 
   ngOnInit() {
     //this.leftPanelStateService.setBillingPage('new-add-documents');

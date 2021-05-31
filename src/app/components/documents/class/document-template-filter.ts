@@ -1,6 +1,6 @@
 export class DocumentTemplateFilter {
     categoryId: string;
-    searchText: string;
+    searchText: string = "";
     documentType: string = "TEMPLATE";
     isDefaultTemplate: boolean = true;
     constructor() {
@@ -9,13 +9,13 @@ export class DocumentTemplateFilter {
     public getDataForFilter() {
         return {
             categoryId: this.categoryId,
-            searchText: this.searchText,
             documentType: this.documentType,
             isDefaultTemplate: this.isDefaultTemplate
         }
     }
     public setFilters(data) {
         this.categoryId = data.categoryId;
+
     }
     public setIsDefaultTemplate(data) {
         this.isDefaultTemplate = data;
@@ -28,6 +28,13 @@ export class DocumentTemplateFilter {
     }
     public setSearch(data) {
         this.searchText = data;
+    }
+    public getFilterList(reqList) {
+        return reqList.filter(item => {
+            let title = item.title ? item.title.toLowerCase() : "";
+            let description = item.description ? item.description.toLowerCase() : "";
+            return (this.searchText.length === 0) ? true : title.includes(this.searchText) || description.includes(this.searchText);
+        });
     }
 
 }
