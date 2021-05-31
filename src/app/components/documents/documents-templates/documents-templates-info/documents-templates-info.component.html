@@ -1,0 +1,41 @@
+<div
+    class="qt-aside-modern documents-create"
+    *ngIf="openAside"
+>
+    <div
+        class="qt-aside-modern__header"
+        *ngIf="!showPreloader"
+    >
+        <div
+            class="toggle-aside icon__panel-open qt-mr-16 opened"
+            (click)="toggleAside()"
+        ></div>
+
+        <div
+            class="qt-aside-modern__header-close icon__close"
+            (click)="openAside = false"
+        >
+        </div>
+    </div>
+    <div
+        class="qt-aside-modern__content --no-padding"
+        *ngIf="!showPreloader"
+    >
+        <!-- Tab Header -->
+        <div class="documents-create-panel__subheader">
+            <p [textContent]="document.title"></p>
+            <span [textContent]="document.description"></span>
+        </div>
+        <!-- End Tab Header -->
+        <!-- Tab Body -->
+        <div
+            class="documents-create-panel__body"
+            [innerHTML]="document.content"
+        ></div>
+        <!-- End Tab Body -->
+    </div>
+    <div
+        class="loading"
+        *ngIf="showPreloader"
+    ></div>
+</div>

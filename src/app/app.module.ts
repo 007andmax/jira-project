@@ -444,6 +444,7 @@ import { DocumentsEditComponent } from './components/documents/documents-edit/do
 import { DocumentsEditInfoComponent } from './components/documents/documents-edit/documents-edit-info/documents-edit-info.component';
 import { DocumentsTemplatesHeaderComponent } from './components/documents/documents-templates/documents-templates-header/documents-templates-header.component';
 import { DocumentsTemplatesFilterComponent } from './components/documents/documents-templates/documents-templates-header/documents-templates-filter/documents-templates-filter.component';
+import { DocumentsTemplatesInfoComponent } from './components/documents/documents-templates/documents-templates-info/documents-templates-info.component';
 
 declare var $: any;
 /**
@@ -840,7 +841,8 @@ declare var $: any;
     DocumentsEditComponent,
     DocumentsEditInfoComponent,
     DocumentsTemplatesHeaderComponent,
-    DocumentsTemplatesFilterComponent
+    DocumentsTemplatesFilterComponent,
+    DocumentsTemplatesInfoComponent
   ],
   imports: [
     BrowserModule,

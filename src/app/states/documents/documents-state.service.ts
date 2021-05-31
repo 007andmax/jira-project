@@ -13,6 +13,7 @@ export class DocumentsStateService {
   onGetCategoriesTemplate: EventEmitter<any> = new EventEmitter();
   categoryForRemove: Document;
   documentForRemove: Document;
+  onGetTemplate: EventEmitter<any> = new EventEmitter();
   onGetCategories: EventEmitter<any> = new EventEmitter();
   categories: Array<CategoryDocument> = [];
   constructor(private documentsService: DocumentsService,
@@ -38,6 +39,9 @@ export class DocumentsStateService {
       }
       this.onGetCategories.emit(this.categories);
     })
+  }
+  public onInitGetTemplate(data) {
+    this.onGetTemplate.emit(data);
   }
   public getCategories() {
     return this.categories;
