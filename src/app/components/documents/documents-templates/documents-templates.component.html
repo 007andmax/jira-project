@@ -60,51 +60,120 @@
                             <div class="card__icon">
                                 <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
                             </div>
-                            <div class="qt-button qt-ml-6">Use</div>
+                            <div
+                                class="qt-button qt-ml-6"
+                                (click)="editDocument(item)"
+                            >
+                                Use
+                            </div>
                         </div>
                         <div
                             class="card__title"
                             [textContent]="item.title"
                         ></div>
-                      <div class="qt-df qt-ai-c qt-jc-sb">
-                        <div
-                            class="card__description"
-                            [textContent]="item.description"
-                        ></div>
-                        <div class="card__description__menu">
-                          <div
-                            ngbDropdown
-                            [container]="'body'"
-                            [placement]="'bottom-right'"
-                          >
+                        <div class="qt-df qt-ai-c qt-jc-sb">
                             <div
-                              class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"
-                              ngbDropdownToggle
+                                class="card__description"
+                                [textContent]="item.description"
                             ></div>
-                            <ul
-                              class="qt-dropdown-menu"
-                              ngbDropdownMenu
-                              aria-labelledby="dropdownBasic1"
-                            >
-                              <li
-                                class="pointer"
-                              >
-                                <div class="icon__remove qt-sz-16 qt-bg-contain qt-mr-8"></div>
-                                Remove
-                              </li>
-                            </ul>
-                          </div>
+                            <div class="card__description__menu">
+                                <div
+                                    ngbDropdown
+                                    [container]="'body'"
+                                    [placement]="'bottom-right'"
+                                >
+                                    <div
+                                        class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"
+                                        ngbDropdownToggle
+                                    ></div>
+                                    <ul
+                                        class="qt-dropdown-menu"
+                                        ngbDropdownMenu
+                                        aria-labelledby="dropdownBasic1"
+                                    >
+                                        <li
+                                            class="pointer"
+                                            ngbDropdownItem
+                                        >
+                                            <div class="icon__share-folder qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                                            Share...
+                                        </li>
+                                        <li
+                                            class="pointer"
+                                            ngbDropdownItem
+                                        >
+                                            <div class="icon__edit qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                                            Edit
+                                        </li>
+                                        <li
+                                            class="pointer"
+                                            ngbDropdownItem
+                                        >
+                                            <div class="icon__move qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                                            Move...
+                                        </li>
+                                        <li
+                                            class="pointer"
+                                            ngbDropdownItem
+                                        >
+                                            <div class="icon__copy-gray qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                                            Copy to…
+                                        </li>
+                                        <li
+                                            class="pointer"
+                                            ngbDropdownItem
+                                        >
+                                            <div class="icon__clone-document qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                                            Clone Document
+                                        </li>
+                                        <li
+                                            class="pointer"
+                                            ngbDropdownItem
+                                        >
+                                            <div class="icon__search-gray qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                                            Find within document
+                                        </li>
+                                        <li
+                                            class="pointer"
+                                            ngbDropdownItem
+                                        >
+                                            <div class="icon__link-gray qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                                            Copy Internal Link
+                                        </li>
+                                        <li
+                                            class="pointer"
+                                            ngbDropdownItem
+                                        >
+                                            <div class="icon__print qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                                            Print
+                                        </li>
+                                        <li
+                                            class="pointer"
+                                            ngbDropdownItem
+                                        >
+                                            <div class="icon__download-pdf qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                                            Export PDF
+                                        </li>
+                                        <li
+                                            class="pointer"
+                                            ngbDropdownItem
+                                            class="remove-item"
+                                            (click)="removeDocument()"
+                                        >
+                                            <div class="icon__remove qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                                            Move to Trash
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
-                      </div>
                     </div>
                 </ng-template>
             </div>
         </div>
         <!-- END TEMPLATE_GALLERY Tab Content -->
         <!-- MY_TEMPLATES Tab Content -->
-        <div
-            *ngIf="tab === 'MY_TEMPLATES'"
-        >
+        <div *ngIf="tab === 'MY_TEMPLATES'">
             <div class="card-line">
                 <ng-template
                     ngFor
@@ -126,36 +195,34 @@
                             class="card__title"
                             [textContent]="item.title"
                         ></div>
-                      <div class="qt-df qt-ai-c qt-jc-sb">
-                        <div
-                            class="card__description"
-                            [textContent]="item.description"
-                        ></div>
-                        <div class="card__description__menu">
-                        <div
-                          ngbDropdown
-                          [container]="'body'"
-                          [placement]="'bottom-right'"
-                        >
-                          <div
-                            class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"
-                            ngbDropdownToggle
-                          ></div>
-                          <ul
-                            class="qt-dropdown-menu"
-                            ngbDropdownMenu
-                            aria-labelledby="dropdownBasic1"
-                          >
-                            <li
-                              class="pointer"
-                            >
-                              <div class="icon__remove qt-sz-16 qt-bg-contain qt-mr-8"></div>
-                              Remove
-                            </li>
-                          </ul>
+                        <div class="qt-df qt-ai-c qt-jc-sb">
+                            <div
+                                class="card__description"
+                                [textContent]="item.description"
+                            ></div>
+                            <div class="card__description__menu">
+                                <div
+                                    ngbDropdown
+                                    [container]="'body'"
+                                    [placement]="'bottom-right'"
+                                >
+                                    <div
+                                        class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"
+                                        ngbDropdownToggle
+                                    ></div>
+                                    <ul
+                                        class="qt-dropdown-menu"
+                                        ngbDropdownMenu
+                                        aria-labelledby="dropdownBasic1"
+                                    >
+                                        <li class="pointer">
+                                            <div class="icon__remove qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                                            Remove
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
-                        </div>
-                      </div>
                     </div>
                 </ng-template>
             </div>

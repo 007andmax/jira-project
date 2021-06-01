@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
 import { Document } from '../class/document';
@@ -20,6 +21,7 @@ export class DocumentsTemplatesComponent implements OnInit {
   reqList: Array<Document> = [];
   filter: DocumentTemplateFilter = new DocumentTemplateFilter();
   constructor(private documentsService: DocumentsService,
+    private router: Router,
     private documentsStateService: DocumentsStateService) { }
 
   ngOnInit() {
@@ -70,6 +72,10 @@ export class DocumentsTemplatesComponent implements OnInit {
       this.showPreloader = false;
       console.log("this.list", this.list);
     })
+  }
+  editDocument(item) {
+    this.router.navigate(
+      ['/ng2/documents/edit/', item.id]);
   }
   onChangeTemplate(data) {
     this.tab = data;
