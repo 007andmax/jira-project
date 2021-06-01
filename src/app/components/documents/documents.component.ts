@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import FroalaEditor from 'froala-editor';
 import { Subscription } from 'rxjs';
@@ -28,6 +28,7 @@ export class DocumentsComponent implements OnInit, OnDestroy {
     private documentsStateService: DocumentsStateService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
+    public cd: ChangeDetectorRef,
     private documentsService: DocumentsService) {
 
   }
@@ -41,6 +42,9 @@ export class DocumentsComponent implements OnInit, OnDestroy {
         if (findIndex > -1) this.list.splice(findIndex, 1);
         console.log("findIndex", findIndex);
       }
+      this.list.sort((a, b) => (this.getNameDocument(a).toLowerCase() > this.getNameDocument(b).toLowerCase()) ?
+        1 : ((this.getNameDocument(b).toLowerCase() > this.getNameDocument(a).toLowerCase()) ? -1 : 0));
+      this.cd.detectChanges();
     })
     this.sub.add(onChangeDocument);
     let filter = this.documentsStateService.filter.subscribe(data => {

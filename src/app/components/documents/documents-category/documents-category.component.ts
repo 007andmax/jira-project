@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
@@ -28,6 +28,7 @@ export class DocumentsCategoryComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     private activateRoute: ActivatedRoute,
+    public cd: ChangeDetectorRef,
     private leftPanelStateService: LeftPanelStateService,
 
     private documentsService: DocumentsService) {
@@ -51,6 +52,10 @@ export class DocumentsCategoryComponent implements OnInit, OnDestroy {
         if (findIndex > -1) this.list.splice(findIndex, 1);
         console.log("findIndex", findIndex);
       }
+      this.list.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
+        1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));
+      this.cd.detectChanges();
+
     })
     this.sub.add(onChangeDocument);
     let filter = this.documentsStateService.filter.subscribe(data => {
