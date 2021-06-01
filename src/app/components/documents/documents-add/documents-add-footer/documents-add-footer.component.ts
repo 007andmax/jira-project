@@ -12,7 +12,7 @@ import { DocumentValidate } from '../class/document-validate';
   styleUrls: ['./documents-add-footer.component.scss']
 })
 export class DocumentsAddFooterComponent implements OnInit {
-  @Input() documentAdd: DocumentAdd = new DocumentAdd();
+  @Input() documentAdd: DocumentAdd;
   @Input() documentEdit: Document;
   @Input() documentValidate: DocumentValidate = new DocumentValidate();
   constructor(private documentsService: DocumentsService,
@@ -26,6 +26,14 @@ export class DocumentsAddFooterComponent implements OnInit {
     this.documentAdd.setDocumentType(documentType);
     if (!this.documentValidate.isValidate(this.documentAdd)) return;
     this.documentsService.add(this.documentAdd).subscribe(data => {
+      this.leftPanelStateService.goToState('new-documents');
+    })
+  }
+  edit() {
+    console.log("documentEdit", this.documentEdit);
+
+    if (!this.documentValidate.isValidate(this.documentEdit)) return;
+    this.documentsService.edit(this.documentEdit.id, this.documentEdit.getDataForEdit()).subscribe(data => {
       this.leftPanelStateService.goToState('new-documents');
     })
   }

@@ -78,6 +78,7 @@ export class DocumentsCategoryComponent implements OnInit, OnDestroy {
   public onFilter(field) {
     this.filter.onFilter(field, this.list, this.usersStateService.getAllUsers())
   }
+
   getList() {
     this.list = [];
     this.documentsService.filterDocuments(this.filter.getDataForFilter()).subscribe((data: any) => {

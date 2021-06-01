@@ -13,6 +13,7 @@ export class DocumentsStateService {
   onGetCategoriesTemplate: EventEmitter<any> = new EventEmitter();
   categoryForRemove: Document;
   documentForRemove: Document;
+  categoriesForRemove: Array<CategoryDocument>;
   onGetTemplate: EventEmitter<any> = new EventEmitter();
   onGetCategories: EventEmitter<any> = new EventEmitter();
   categories: Array<CategoryDocument> = [];
@@ -43,6 +44,12 @@ export class DocumentsStateService {
     this.documentsRealTimeService.changeDocumentsArray.subscribe(data => {
       this.onChangeDocument.emit(data);
     })
+  }
+  public getCategoriesForRemove() {
+    return this.categoriesForRemove;
+  }
+  public setCategoriesForRemove(data) {
+    this.categoriesForRemove = data;
   }
   public onInitGetTemplate(data) {
     this.onGetTemplate.emit(data);

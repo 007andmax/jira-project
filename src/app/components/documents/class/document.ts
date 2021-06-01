@@ -34,8 +34,23 @@ export class Document {
         this.content = data.content;
         this.isCategory = isCategory;
     }
+    public getDataForEdit() {
+        return {
+            title: this.title,
+            content: this.content,
+            documentType: this.documentType,
+            clientType: this.clientType,
+            description: this.description,
+            reviewDate: this.reviewDate,
+            categoryId: this.categoryId,
+            tags: this.tags,
+            linked: this.linked
+        }
+    }
     public parseReviewDate() {
         return new Date(this.reviewDate).getTime();
     }
-
+    public isTemplate() {
+        return this.linked.companies.length === 0 && this.linked.users.length === 0;
+    }
 }

@@ -46,6 +46,9 @@ export class DocumentsService {
   public add(data) {
     return this.http.post(this.apiUrl + `documents`, data);
   }
+  public edit(id, data) {
+    return this.http.put(this.apiUrl + `documents/${id}`, data);
+  }
   public filterDocuments(data) {
     return this.http.post(this.apiUrl + `documents/filtered`, data);
   }

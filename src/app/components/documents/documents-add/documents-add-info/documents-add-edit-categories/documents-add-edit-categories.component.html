@@ -1,7 +1,11 @@
 <div class="documents-create-aside-categories qt-aside-modern">
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-title qt-mr-auto">Edit Categories</div>
-        <div class="icon__remove disable qt-sz-16 qt-bg-contain pointer"></div>
+        <div
+            class="icon__remove  qt-sz-16 qt-bg-contain pointer"
+            [ngClass]="{'disable':selectedCategories.length === 0}"
+            (click)="onRemoveAllCategories()"
+        ></div>
     </div>
     <div class="qt-aside-modern__content --no-padding">
         <div class="qt-pb-24 qt-pl-24 qt-pr-24 ">
@@ -29,10 +33,11 @@
                             <input
                                 type="checkbox"
                                 [disabled]="item.count > 0"
+                                (change)="onSelectCategory($event,item)"
                             >
                             <span class="checkbox-mark"></span>
                         </label>
-                        <div class="qt-w100 qt-df qt-jc-sb">
+                        <div class="qt-w100 qt-df qt-jc-sb ">
                             <input
                                 *ngIf="editCategory.isEditMode(item.id)"
                                 type="text"
@@ -61,10 +66,18 @@
                 *ngIf="toggleAddCategory"
             >
                 <div class="with-checkbox">
-                    <div class="qt-w100 qt-df qt-jc-sb">
+                    <div class="qt-w100 qt-df qt-jc-sb --required">
+                        <mat-error
+                            class="qt-tooltip-error"
+                            *ngIf="!addCategory.getValidate()"
+                            [textContent]="'Document title is required'"
+                        >
+                        </mat-error>
                         <input
                             type="text"
-                            [(ngModel)]="categoryName"
+                            [(ngModel)]="addCategory.categoryName"
+                            (input)="onCheckNameCategory()"
+                            [ngClass]="{'--input-error':!addCategory.getValidate()}"
                             (blur)="onAddCategory()"
                         >
                     </div>

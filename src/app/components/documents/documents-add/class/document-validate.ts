@@ -11,8 +11,8 @@ export class DocumentValidate {
         this.tittle = true;
     }
 
-    public isValidate(documentAdd: DocumentAdd) {
-        if (documentAdd.title.length === 0) this.tittle = false;
+    public isValidate(document) {
+        if (document.title.length === 0) this.tittle = false;
         return this.tittle;
     }
 }
