@@ -16,6 +16,7 @@ export class DocumentsStateService {
   onGetTemplate: EventEmitter<any> = new EventEmitter();
   onGetCategories: EventEmitter<any> = new EventEmitter();
   categories: Array<CategoryDocument> = [];
+  onChangeDocument: EventEmitter<any> = new EventEmitter();
   constructor(private documentsService: DocumentsService,
     private documentsRealTimeService: DocumentsRealTimeService) { }
 
@@ -40,7 +41,7 @@ export class DocumentsStateService {
       this.onGetCategories.emit(this.categories);
     })
     this.documentsRealTimeService.changeDocumentsArray.subscribe(data => {
-      console.log("data", data);
+      this.onChangeDocument.emit(data);
     })
   }
   public onInitGetTemplate(data) {

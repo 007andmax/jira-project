@@ -18,7 +18,7 @@ import { DocumentFilter } from '../class/document-filter';
   styleUrls: ['./documents-category.component.css']
 })
 export class DocumentsCategoryComponent implements OnInit, OnDestroy {
-
+  categoryId: string;
   showPreloader: boolean = true;
   list: Array<Document> = [];
   filter: DocumentFilter = new DocumentFilter();
@@ -31,12 +31,12 @@ export class DocumentsCategoryComponent implements OnInit, OnDestroy {
     private leftPanelStateService: LeftPanelStateService,
 
     private documentsService: DocumentsService) {
-    let id = this.activateRoute.snapshot.params['id'];
+    this.categoryId = this.activateRoute.snapshot.params['id'];
     let subscription = this.activateRoute.params.subscribe(params => {
       this.showPreloader = true;
-      id = params['id'];
-      this.filter.setCategoryId(id);
-      console.log("id", id);
+      this.categoryId = params['id'];
+      this.filter.setCategoryId(this.categoryId);
+      console.log("this.categoryId", this.categoryId);
       this.getList();
     });
     this.sub.add(subscription);
@@ -44,7 +44,15 @@ export class DocumentsCategoryComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-
+    let onChangeDocument = this.documentsStateService.onChangeDocument.subscribe(data => {
+      if (data.action === "DOCUMENT_SAVED" && this.categoryId === data.data.categoryId) this.list.push(new Document(data.data));
+      if (data.action === "DOCUMENT_REMOVED") {
+        let findIndex = this.list.findIndex(item => item.id === data.data);
+        if (findIndex > -1) this.list.splice(findIndex, 1);
+        console.log("findIndex", findIndex);
+      }
+    })
+    this.sub.add(onChangeDocument);
     let filter = this.documentsStateService.filter.subscribe(data => {
       this.showPreloader = true;
       this.filter.setFilters(data);
