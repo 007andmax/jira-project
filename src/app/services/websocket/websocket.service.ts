@@ -99,6 +99,7 @@ export class WebsocketService {
       that.subsribeToLockScreen();
       that.subsribeToTags();
       that.subsribeToDocuments();
+      that.subsribeToDocumentsCategory();
     });
   }
   private subsribeToDevices() {
@@ -413,13 +414,26 @@ export class WebsocketService {
 
   }
 
-  public subsribeToDocuments() {
+  public subsribeToDocumentsCategory() {
 
     setTimeout(() => {
 
       this.stompClient.subscribe(`/user/watch/documentCategory`, (message) => {
         var newChange = JSON.parse(message.body);
-        this.documentsRealTimeService.handleRealTimeChanges(newChange);
+        this.documentsRealTimeService.handleRealTimeCategoriesChanges(newChange);
+
+      });
+
+    }, 3000);
+  }
+
+  public subsribeToDocuments() {
+
+    setTimeout(() => {
+
+      this.stompClient.subscribe(`/user/watch/documents`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.documentsRealTimeService.handleRealTimeDocumentsChanges(newChange);
 
       });
 

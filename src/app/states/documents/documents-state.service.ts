@@ -26,7 +26,7 @@ export class DocumentsStateService {
         1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
       this.onGetCategories.emit(this.categories);
     })
-    this.documentsRealTimeService.changeDocumentsArray.subscribe(data => {
+    this.documentsRealTimeService.changeCategoriesArray.subscribe(data => {
       if (data.action === "DOCUMENT_CATEGORY_SAVED") this.categories.push(new CategoryDocument(data.data));
       if (data.action === "DOCUMENT_CATEGORY_EDITED") {
         let findIndex = this.categories.findIndex(item => item.id === data.data.id);
@@ -38,6 +38,9 @@ export class DocumentsStateService {
         console.log("findIndex", findIndex);
       }
       this.onGetCategories.emit(this.categories);
+    })
+    this.documentsRealTimeService.changeDocumentsArray.subscribe(data => {
+      console.log("data", data);
     })
   }
   public onInitGetTemplate(data) {

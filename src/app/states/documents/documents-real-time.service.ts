@@ -6,6 +6,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 export class DocumentsRealTimeService {
 
   public changeDocumentsArray: EventEmitter<any> = new EventEmitter();
+  public changeCategoriesArray: EventEmitter<any> = new EventEmitter();
 
 
   /**
@@ -17,8 +18,11 @@ export class DocumentsRealTimeService {
    * Handle quote real time changes
    * @newChange - new quotes array changes
    */
-  public handleRealTimeChanges(newChange) {
+  public handleRealTimeDocumentsChanges(newChange) {
     this.changeDocumentsArray.emit(newChange);
+  }
+  public handleRealTimeCategoriesChanges(newChange) {
+    this.changeCategoriesArray.emit(newChange);
   }
 
 }
