@@ -431,7 +431,7 @@ export class WebsocketService {
 
     setTimeout(() => {
 
-      this.stompClient.subscribe(`/user/watch/documents`, (message) => {
+      this.stompClient.subscribe(`/user/watch/document`, (message) => {
         var newChange = JSON.parse(message.body);
         this.documentsRealTimeService.handleRealTimeDocumentsChanges(newChange);
 
