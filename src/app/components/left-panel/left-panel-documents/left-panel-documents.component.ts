@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { DocumentCategoryAdd } from '../../documents/documents-add/class/document-category-add';
 import { CategoryDocument } from './class/category-document';
 
 @Component({
@@ -15,8 +16,9 @@ export class LeftPanelDocumentsComponent implements OnInit, OnDestroy {
   @Output() onChangeState = new EventEmitter();
   @Output() onOpenPanel = new EventEmitter();
   @Input() activePage: string = "";
-  categoryName: string = "";
+
   toggleAddCategory: boolean = false;
+  addCategory: DocumentCategoryAdd = new DocumentCategoryAdd();
   categories: Array<CategoryDocument> = [];
   sub: Subscription = new Subscription();
   constructor(private documentsService: DocumentsService,
@@ -42,18 +44,28 @@ export class LeftPanelDocumentsComponent implements OnInit, OnDestroy {
       this.categories = data;
     })
   }
+  onCheckNameCategory() {
+    let find = this.categories.find(item => item.name === this.addCategory.categoryName);
+    if (!find) this.addCategory.setValidate(true);
+  }
   onAddCategory() {
-    if (this.categoryName.length > 0) {
-      this.documentsService.addCategories(this.categoryName).subscribe(data => {
+    if (this.addCategory.categoryName.length > 0) {
+      if (!this.addCategory.isValidate(this.categories.find(item => item.name === this.addCategory.categoryName))) return;
+      this.documentsService.addCategories(this.addCategory.categoryName).subscribe(data => {
         this.toggleAddCategory = false;
-        this.categoryName = "";
+        this.addCategory.categoryName = "";
+        this.addCategory = new DocumentCategoryAdd();
       })
     } else {
+      this.addCategory = new DocumentCategoryAdd();
       this.toggleAddCategory = false;
-      this.categoryName = "";
+      this.addCategory.categoryName = "";
     }
   }
-
+  toggleCategory() {
+    this.toggleAddCategory = !this.toggleAddCategory;
+    this.addCategory = new DocumentCategoryAdd();
+  }
   isDocumentsState(state) {
     return (state === 'new-documents' || state === 'new-category-documents' || state === 'new-add-documents')
   }

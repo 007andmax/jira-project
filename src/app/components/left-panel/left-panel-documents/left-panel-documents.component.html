@@ -32,18 +32,26 @@
         </li>
     </ng-template>
     <li
-        class="app-left-panel__menu-expand-item-icon"
+        class="app-left-panel__menu-expand-item-icon --required"
         *ngIf="toggleAddCategory"
     >
+        <mat-error
+            class="qt-tooltip-error"
+            *ngIf="!addCategory.getValidate()"
+            [textContent]="'This category name is already occupied'"
+        >
+        </mat-error>
         <input
             type="text"
-            [(ngModel)]="categoryName"
+            [(ngModel)]="addCategory.categoryName"
+            [ngClass]="{'--input-error':!addCategory.getValidate()}"
+            (input)="onCheckNameCategory()"
             (blur)="onAddCategory()"
         >
     </li>
     <li
         class="app-left-panel__menu-expand-item-icon"
-        (click)="toggleAddCategory = true"
+        (click)="toggleCategory()"
     >
         <span class="app-left-panel__submenu-icon --add-folder"></span>
         New Folder
