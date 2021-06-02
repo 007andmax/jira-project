@@ -12,7 +12,7 @@
         <button
             class="qt-button --gray"
             [disabled]="documentAdd && !documentAdd.isTemplate() || documentEdit && !documentEdit.isTemplate()"
-            (click)="add('TEMPLATE')"
+            (click)="documentAdd ? add('TEMPLATE') : edit()"
         >
             Save as Template
         </button>

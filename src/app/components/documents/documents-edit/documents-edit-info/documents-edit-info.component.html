@@ -131,6 +131,7 @@
                             >
                             <span class="checkbox-mark"></span>
 
+
                         </label>
                         <p>Show in Knowledge base</p>
                     </div>
@@ -221,35 +222,7 @@
                 class="qt-pb-24"
                 *ngIf="tab === 'DOCUMENT_HISTORY'"
             >
-                <div class="qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
-                    <div class="documents-create__document-history-item">
-                        <div class="documents-create__document-history-avatar"></div>
-                        <div class="history-user-info">
-                            <p class="documents-create__document-history-name">Tony Dawson</p>
-                            <p class="documents-create__document-history-text">
-                                Created on 10 April 2021, 06:30 PM ФЫВФЫВ
-                            </p>
-                        </div>
-                    </div>
-                    <div class="documents-create__document-history-item">
-                        <div class="documents-create__document-history-avatar"></div>
-                        <div class="history-user-info">
-                            <p class="documents-create__document-history-name">Tony Dawson</p>
-                            <p class="documents-create__document-history-text">
-                                Created on 10 April 2021, 06:30 PM ФЫВФЫВ
-                            </p>
-                        </div>
-                    </div>
-                    <div class="documents-create__document-history-item">
-                        <div class="documents-create__document-history-avatar"></div>
-                        <div class="history-user-info">
-                            <p class="documents-create__document-history-name">Tony Dawson</p>
-                            <p class="documents-create__document-history-text">
-                                Created on 10 April 2021, 06:30 PM ФЫВФЫВ
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                <documents-edit-history [documentEdit]="documentEdit"></documents-edit-history>
             </div>
             <!-- End Document History Tab Content -->
         </div>

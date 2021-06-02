@@ -98,6 +98,7 @@ export class LeftPanelComponent implements OnInit {
           if (this.router.url.includes(`ng2/documents`)) this.state = 'new-documents';
           if (this.router.url.includes(`ng2/documents/add`)) this.state = 'new-add-documents';
           if (this.router.url.includes(`ng2/documents/category`)) this.state = 'new-category-documents';
+          if (this.router.url.includes(`ng2/documents/edit`)) this.state = 'new-edit-documents';
 
           if (this.router.url.includes(`ng2/report/byProducts`)) this.state = 'byProducts';
           if (this.router.url.includes(`ng2/report/byCustomers`)) this.state = 'byCustomers';

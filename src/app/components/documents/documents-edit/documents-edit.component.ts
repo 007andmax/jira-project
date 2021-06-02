@@ -22,6 +22,7 @@ export class DocumentsEditComponent extends DocumentsAddComponent {
       this.getDocument(id);
     });
     this.sub.add(subscription);
+    this.leftPanelStateService.changeStateWithoutNavigate('new-edit-documents');
   }
 
   getDocument(id) {

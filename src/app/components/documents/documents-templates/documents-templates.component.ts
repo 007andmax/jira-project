@@ -21,7 +21,7 @@ export class DocumentsTemplatesComponent implements OnInit {
   reqList: Array<Document> = [];
   filter: DocumentTemplateFilter = new DocumentTemplateFilter();
   constructor(private documentsService: DocumentsService,
-    private router: Router,
+
     private documentsStateService: DocumentsStateService) { }
 
   ngOnInit() {
@@ -37,10 +37,7 @@ export class DocumentsTemplatesComponent implements OnInit {
     this.getListCategories();
     this.getFilterList();
   }
-  showTemplate(item) {
-    console.log("item", item);
-    if (item) this.documentsStateService.onInitGetTemplate(item);
-  }
+
   onSearch(data) {
     this.filter.setSearch(data);
     this.list = this.filter.getFilterList(this.reqList);
@@ -73,10 +70,7 @@ export class DocumentsTemplatesComponent implements OnInit {
       console.log("this.list", this.list);
     })
   }
-  editDocument(item) {
-    this.router.navigate(
-      ['/ng2/documents/edit/', item.id]);
-  }
+
   onChangeTemplate(data) {
     this.tab = data;
     this.header.filter.onClearAll();

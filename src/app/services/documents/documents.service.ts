@@ -43,6 +43,9 @@ export class DocumentsService {
   public getDocument(id) {
     return this.http.get(this.apiUrl + `documents/${id}`);
   }
+  public getHistory(id) {
+    return this.http.get(this.apiUrl + `documents/${id}/history`);
+  }
   public add(data) {
     return this.http.post(this.apiUrl + `documents`, data);
   }

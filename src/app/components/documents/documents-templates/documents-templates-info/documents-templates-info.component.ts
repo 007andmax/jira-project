@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
 import { Document } from '../../class/document';
@@ -8,15 +9,17 @@ import { Document } from '../../class/document';
   templateUrl: './documents-templates-info.component.html',
   styleUrls: ['./documents-templates-info.component.scss']
 })
-export class DocumentsTemplatesInfoComponent implements OnInit {
+export class DocumentsTemplatesInfoComponent implements OnInit, OnDestroy {
   openAside: boolean = false;
   showPreloader: boolean = true;
   document: Document;
+  sub: Subscription = new Subscription();
   constructor(private documentsStateService: DocumentsStateService,
     private documentsService: DocumentsService) { }
 
+
   ngOnInit() {
-    this.documentsStateService.onGetTemplate.subscribe(data => {
+    let onGetTemplate = this.documentsStateService.onGetTemplate.subscribe(data => {
       this.openAside = true;
       this.showPreloader = true;
       this.documentsService.getDocument(data.id).subscribe(document => {
@@ -25,6 +28,9 @@ export class DocumentsTemplatesInfoComponent implements OnInit {
       })
 
     })
+    this.sub.add(onGetTemplate);
   }
-
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }
