@@ -32,7 +32,7 @@ export class DocumentsAddBodyComponent implements OnInit {
     this.options = {
       saveParam: 'file',
       // Set the save URL.
-      saveURL: self.apiUrl + 'file?isAvatar=false',
+      //  saveURL: self.apiUrl + 'file?isAvatar=false',
       // HTTP request type.
       saveMethod: 'POST',
       // Additional save params.

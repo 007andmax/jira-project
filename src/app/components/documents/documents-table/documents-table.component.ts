@@ -5,34 +5,38 @@ import { Document } from '../class/document';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { Router } from '@angular/router';
+import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
 
 @Component({
   selector: 'documents-table',
   templateUrl: './documents-table.component.html',
-  styleUrls: ['./documents-table.component.css']
+  styleUrls: ['./documents-table.component.scss']
 })
 export class DocumentsTableComponent implements OnInit {
   @Input() item: Document;
   @Output() onRemoveCategory = new EventEmitter<any>();
   @Output() onRemoveDocument = new EventEmitter<any>();
   @Output() onEditDocument = new EventEmitter<any>();
+  showNotificationReview: boolean = false;
   currentUser: CurrentUser;
   constructor(private usersStateService: UsersStateService,
     private router: Router,
+    private documentsStateService: DocumentsStateService,
     private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
-    if (this.usersStateService.getCurrentUser()) {
-      this.currentUser = this.usersStateService.getCurrentUser();
-
-    }
+    if (this.usersStateService.getCurrentUser()) this.currentUser = this.usersStateService.getCurrentUser();
+    this.showNotificationReview = new Date(this.item.reviewDate).getTime() < new Date().getTime() && !this.item.isCategory;
   }
   navigateToCategory() {
     if (!this.item.isCategory) return;
     this.router.navigate(
       ['/ng2/documents/category/', this.item.categoryId]);
   }
-
+  showTemplate() {
+    console.log("item", this.item);
+    if (!this.item.isCategory) this.documentsStateService.onInitGetTemplate(this.item);
+  }
   getCreateBy() {
     let user = this.usersStateService.getAllUsers().find(item => item.id === this.item.createdBy)
     return (user) ? `${user.firstName} ${user.lastName}` : '';

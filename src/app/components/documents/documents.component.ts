@@ -67,6 +67,7 @@ export class DocumentsComponent implements OnInit, OnDestroy {
     this.sub.add(getConfirm);
     this.getList();
   }
+
   getList() {
     this.showPreloader = true;
     this.list = [];

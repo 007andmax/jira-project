@@ -22,6 +22,7 @@ export class DocumentsAddInfoComponent implements OnInit {
   toggleEditCategories: boolean = false;
   tab: string = 'DOCUMENT_INFO';
   categories: Array<CategoryDocument> = [];
+  selectedCategory: CategoryDocument;
   companyTypes = [new TitleListType('All companies', 'ALL'), new TitleListType('Client', 'CLIENT'), new TitleListType('Lead', 'LEAD'), new TitleListType('Vendor', 'VENDOR')];
   requiredCompanyType: boolean = false;
   @Input() documentAdd: DocumentAdd = new DocumentAdd();
@@ -31,7 +32,14 @@ export class DocumentsAddInfoComponent implements OnInit {
   constructor(public documentsStateService: DocumentsStateService,
     public leftPanelStateService: LeftPanelStateService,
     public documentsService: DocumentsService,
-    public activateRoute: ActivatedRoute,) { }
+    public activateRoute: ActivatedRoute,) {
+    activateRoute.queryParams.subscribe(
+      (queryParam: any) => {
+        this.selectedCategory = this.documentsStateService.getCategories().find(item => item.id === queryParam['id_category']);
+        console.log("this.selectedCategory", this.selectedCategory);
+      }
+    );
+  }
 
   ngOnInit() {
     this.categories = this.documentsStateService.getCategories();
@@ -70,6 +78,7 @@ export class DocumentsAddInfoComponent implements OnInit {
     this.documentAdd.setTags(data);
   }
   onSelectCategory(data) {
+    this.selectedCategory = data;
     this.documentAdd.setCategoryId((data) ? data.id : null);
   }
 }

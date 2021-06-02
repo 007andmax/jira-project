@@ -23,7 +23,7 @@ export class DocumentsAddComponent implements OnInit {
     public leftPanelStateService: LeftPanelStateService) { }
 
   ngOnInit() {
-    //this.leftPanelStateService.setBillingPage('new-add-documents');
+    this.leftPanelStateService.changeStateWithoutNavigate('new-add-documents');
     if (this.usersStateService.getCurrentUser()) {
       this.currentUser = this.usersStateService.getCurrentUser();
       this.showPreloader = false;
