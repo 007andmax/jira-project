@@ -97,7 +97,7 @@ export class InventoryComponent implements OnInit {
           this.inventoryList[Index] = new InventoryItem(data.data);
           if (!this.filter.isFilterItem(data.data)) this.inventoryList.splice(Index, 1);
         }
-        if (Index === -1 && this.filter.isFilterItem(data.data)) {
+        if (Index === -1 && this.filter.isFilterItem(new InventoryItem(data.data))) {
           this.inventoryList.push(new InventoryItem(data.data));
           this.inventoryList = this.filter.getFilterList(this.inventoryList);
           // this.inventoryList = this.inventoryList.filter(item => (this.productSearchName.length > 0) ? item.description.toLowerCase().includes(this.productSearchName.toLowerCase()) : true);
