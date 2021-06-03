@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable, Observer } from 'rxjs';
 
@@ -52,6 +52,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     private toastr: ToastrService,
     private settingService: SettingService,
     private settingStateService: SettingStateService,
+    public cd: ChangeDetectorRef,
     private companiesStateService: CompaniesStateService,
   ) {
     const currentComapnyId = localStorage.getItem('currentComapnyId');
@@ -330,6 +331,8 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
   removeUserConfirm(techuser: any) {
     this.userId = techuser;
     this.deletepopup = true;
+    console.log("removeUserConfirm", this.deletepopup)
+    this.cd.detectChanges();
   }
 
   /**
