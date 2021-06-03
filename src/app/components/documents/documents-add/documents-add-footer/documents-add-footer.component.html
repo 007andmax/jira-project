@@ -1,18 +1,33 @@
 <div class="qt-aside-modern__footer">
     <div class="qt-df">
         <button
+            *ngIf="documentAdd"
             class="qt-button qt-mr-12"
             appDisabledBtn
             #addBtn="disabled"
-            (onClick)="documentAdd ? add('DOCUMENT') : edit()"
+            (onClick)=" add('DOCUMENT')"
         >
             <span *ngIf="!addBtn.isBlock()">Save Document</span>
             <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
         </button>
         <button
+            *ngIf="documentEdit"
+            class="qt-button qt-mr-12"
+            appDisabledBtn
+            #addBtn="disabled"
+            (onClick)="edit()"
+        >
+            <span
+                *ngIf="!addBtn.isBlock()"
+                [textContent]="documentEdit.isTemplateForEdit() ? 'Save template' : 'Save Document'"
+            ></span>
+            <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
+        </button>
+        <button
+            *ngIf="documentAdd"
             class="qt-button --gray"
-            [disabled]="documentAdd && !documentAdd.isTemplate() || documentEdit && !documentEdit.isTemplate()"
-            (click)="documentAdd ? add('TEMPLATE') : edit()"
+            [disabled]="documentAdd && !documentAdd.isTemplate()"
+            (click)="add('TEMPLATE')"
         >
             Save as Template
         </button>

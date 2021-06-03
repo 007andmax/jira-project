@@ -109,6 +109,7 @@
                 <div class="documents-create__col">
                     <documents-linked
                         #linked
+                        [isDisabled]="documentEdit.isTemplateForEdit()"
                         [editItems]="documentEdit.linked"
                         (onSelectedItem)="onChangeLinked($event)"
                     ></documents-linked>
@@ -130,6 +131,10 @@
                                 disabled
                             >
                             <span class="checkbox-mark"></span>
+
+
+
+
 
 
                         </label>

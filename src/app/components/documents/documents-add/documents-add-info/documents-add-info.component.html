@@ -88,7 +88,7 @@
                         placeholder="Printer Installation Guide"
                         [(ngModel)]="documentAdd.title"
                         [ngClass]="{'--input-error':!documentValidate.getTitle()}"
-                        (input)="documentValidate.resetTitle()"
+                        (blur)="onChangeTitle()"
                     >
                 </div>
                 <div class="documents-create__col --required">
@@ -114,7 +114,7 @@
                         [class]="['light-dropdown', 'qt-select-input-40']"
                         [placeholder]="'Select Category'"
                         [errorMessage]="'Category is required'"
-                        [editItem]="selectedCategory"
+                        [editItem]="getSelectedCategory()"
                         [field]="'name'"
                         [add]="true"
                         [list]="categories"
@@ -127,6 +127,7 @@
                 <div class="documents-create__col">
                     <documents-linked
                         #linked
+                        [editItems]="documentAdd.linked"
                         (onSelectedItem)="onChangeLinked($event)"
                     ></documents-linked>
                 </div>
@@ -134,6 +135,7 @@
                     <p class="label-name">Tags</p>
                     <documents-filter-tags
                         class="documents-filter-tags"
+                        [editItems]="documentAdd.tags"
                         (onSelectedItems)="onSelectTags($event)"
                     ></documents-filter-tags>
                 </div>
@@ -145,10 +147,6 @@
                                 disabled
                             >
                             <span class="checkbox-mark"></span>
-
-
-
-
                         </label>
                         <p>Show in Knowledge base</p>
                     </div>
@@ -185,6 +183,7 @@
                         #companyTypeDp
                         class="dropdown"
                         [placeholder]="'Select Company Type'"
+                        [editItem]="getSelectedClientType()"
                         [list]="companyTypes"
                         [field]="'title'"
                         [search]="true"
@@ -198,6 +197,8 @@
                 <div class="documents-create__col qt-input-block qt-w50">
                     <p class="label-name">Document Review Date</p>
                     <app-date-picker
+                        #reviewDp
+                        [editDate]="documentAdd.parseReviewDate()"
                         [editMode]="true"
                         [useMinDate]="false"
                         (onChange)="onChangeReviewDate($event)"

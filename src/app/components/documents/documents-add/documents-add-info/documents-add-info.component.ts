@@ -11,6 +11,7 @@ import { DocumentValidate } from '../class/document-validate';
 import { ActivatedRoute } from '@angular/router';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
 
 @Component({
   selector: 'app-documents-add-info',
@@ -22,26 +23,22 @@ export class DocumentsAddInfoComponent implements OnInit {
   toggleEditCategories: boolean = false;
   tab: string = 'DOCUMENT_INFO';
   categories: Array<CategoryDocument> = [];
-  selectedCategory: CategoryDocument;
+
   companyTypes = [new TitleListType('All companies', 'ALL'), new TitleListType('Client', 'CLIENT'), new TitleListType('Lead', 'LEAD'), new TitleListType('Vendor', 'VENDOR')];
   requiredCompanyType: boolean = false;
   @Input() documentAdd: DocumentAdd = new DocumentAdd();
   @Input() documentValidate: DocumentValidate = new DocumentValidate();
   @ViewChild('companyTypeDp') companyTypeDp: DropDownComponent;
+  @ViewChild('reviewDp') reviewDp: DatePickerComponent;
   @Output() onToggleAside = new EventEmitter<any>();
   constructor(public documentsStateService: DocumentsStateService,
     public leftPanelStateService: LeftPanelStateService,
     public documentsService: DocumentsService,
     public activateRoute: ActivatedRoute,) {
-    activateRoute.queryParams.subscribe(
-      (queryParam: any) => {
-        this.selectedCategory = this.documentsStateService.getCategories().find(item => item.id === queryParam['id_category']);
-        console.log("this.selectedCategory", this.selectedCategory);
-      }
-    );
   }
 
   ngOnInit() {
+    if (this.documentAdd.clientType) this.requiredCompanyType = true;
     this.categories = this.documentsStateService.getCategories();
     this.documentsStateService.onGetCategories.subscribe((data: any) => {
       this.categories = data;
@@ -49,6 +46,13 @@ export class DocumentsAddInfoComponent implements OnInit {
     })
     this.documentAdd.setReviewDate(moment(new Date()).format('YYYY/MM/DD'));
 
+  }
+  onChangeTitle() {
+    this.documentsService.checkTitle(this.documentAdd.title).subscribe(data => {
+      console.log("data", data);
+      this.documentValidate.setTitle(data)
+    })
+    // 
   }
   public goToDocumentsList() {
     this.leftPanelStateService.goToState('new-documents');
@@ -77,8 +81,14 @@ export class DocumentsAddInfoComponent implements OnInit {
     console.log("data", data);
     this.documentAdd.setTags(data);
   }
+  getSelectedClientType() {
+    return this.companyTypes.find(item => item.type === this.documentAdd.clientType);
+  }
+  getSelectedCategory() {
+    return this.categories.find(item => item.id === this.documentAdd.categoryId);
+  }
   onSelectCategory(data) {
-    this.selectedCategory = data;
+
     this.documentAdd.setCategoryId((data) ? data.id : null);
   }
 }

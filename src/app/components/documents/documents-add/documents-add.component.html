@@ -1,16 +1,26 @@
 <div
-    class="documents-details qt-page-list"
-    [ngClass]="{'--large' : !openAside}"
+    class="qt-page-list"
+    [ngClass]="{'--large' : !openAside,'documents-details':!showPreloader}"
 >
-    <app-documents-add-header></app-documents-add-header>
-    <app-documents-add-body (onChangeContent)="onChangeContent($event)"></app-documents-add-body>
+    <app-documents-add-header *ngIf="!showPreloader"></app-documents-add-header>
+    <app-documents-add-body
+        *ngIf="!showPreloader"
+        [editorContent]="documentAdd.content"
+        (onChangeContent)="onChangeContent($event)"
+    ></app-documents-add-body>
     <app-documents-add-footer
+        *ngIf="!showPreloader"
         [documentValidate]="documentValidate"
         [documentAdd]="documentAdd"
     ></app-documents-add-footer>
     <app-documents-add-info
+        *ngIf="!showPreloader"
         [documentValidate]="documentValidate"
         [documentAdd]="documentAdd"
         (onToggleAside)="openAside  =$event"
     ></app-documents-add-info>
+    <div
+        class="loading"
+        *ngIf="showPreloader"
+    ></div>
 </div>

@@ -3,7 +3,10 @@
         width: 100%;
     }
 }
-
+.disabled {
+    background-color: rgb(235, 235, 228);
+    cursor: default !important;
+}
 .device-user {
     outline: none;
     min-height: 40px;

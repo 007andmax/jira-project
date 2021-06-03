@@ -8,7 +8,9 @@
         </div>
         <div
             class="qt-button qt-ml-6"
-            (click)="editDocument(item,$event)"
+            routerLink="/ng2/documents/add"
+            [queryParams]="{'clone_document':item.id}"
+            (click)="$event.stopPropagation();"
         >
             Use
         </div>
@@ -50,6 +52,7 @@
                     <li
                         class="pointer"
                         ngbDropdownItem
+                        (click)="editDocument(item)"
                     >
                         <div class="icon__edit qt-sz-16 qt-bg-contain qt-mr-8"></div>
                         Edit
@@ -71,6 +74,8 @@
                     <li
                         class="pointer"
                         ngbDropdownItem
+                        routerLink="/ng2/documents/add"
+                        [queryParams]="{'clone_document':item.id}"
                     >
                         <div class="icon__clone-document qt-sz-16 qt-bg-contain qt-mr-8"></div>
                         Clone Document

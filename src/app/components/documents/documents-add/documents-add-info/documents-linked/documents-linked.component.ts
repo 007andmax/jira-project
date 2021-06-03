@@ -17,6 +17,7 @@ export class DocumentsLinkedComponent implements OnInit {
   public selectedUserAndCompanies: Array<DocumentCompanyUser> = [];
   public showSelect = false;
   @Input() editItems: DocumentLinked;
+  @Input() isDisabled: boolean = false;
   public tabs = ['User', 'Company'];
   public currentTab = this.tabs[0];
   public usersList = [];
@@ -92,6 +93,7 @@ export class DocumentsLinkedComponent implements OnInit {
 
   }
   public showSelectWrapper($event) {
+    if (this.isDisabled) return;
     this.showSelect = !this.showSelect;
     this.stopEvent($event);
     this.cd.detectChanges();

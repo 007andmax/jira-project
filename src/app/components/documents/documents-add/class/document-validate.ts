@@ -10,6 +10,9 @@ export class DocumentValidate {
     public resetTitle() {
         this.tittle = true;
     }
+    public setTitle(data) {
+        this.tittle = data;
+    }
 
     public isValidate(document) {
         if (document.title.length === 0) this.tittle = false;

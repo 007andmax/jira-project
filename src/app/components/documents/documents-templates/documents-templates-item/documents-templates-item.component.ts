@@ -19,8 +19,8 @@ export class DocumentsTemplatesItemComponent implements OnInit {
     console.log("item", item);
     if (item) this.documentsStateService.onInitGetTemplate(item);
   }
-  editDocument(item, event) {
-    event.stopPropagation();
+  editDocument(item) {
+
     this.router.navigate(
       ['/ng2/documents/edit/', item.id]);
   }

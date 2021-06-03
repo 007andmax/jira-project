@@ -13,7 +13,18 @@ export class DocumentAdd {
     linked: DocumentAddLinked = new DocumentAddLinked();
     constructor() {
 
+    }
 
+    public setData(data) {
+        this.title = data.title;
+        this.content = data.content;
+        this.categoryId = data.categoryId;
+        this.description = data.description;
+        this.documentType = data.documentType;
+        this.clientType = data.clientType;
+        this.reviewDate = data.reviewDate;
+        this.tags = data.tags;
+        this.linked = data.linked;
     }
     public setDocumentType(data) {
         this.documentType = data;
@@ -39,5 +50,8 @@ export class DocumentAdd {
     }
     public isTemplate() {
         return this.linked.companies.length === 0 && this.linked.users.length === 0;
+    }
+    public parseReviewDate() {
+        return new Date(this.reviewDate).getTime();
     }
 }

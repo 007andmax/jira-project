@@ -5,7 +5,7 @@
     <p class="title-link-to">Link To</p>
     <div
         class="device-user pointer"
-        [ngClass]="{ 'has-placeholder': !selectedUserAndCompanies.length}"
+        [ngClass]="{ 'has-placeholder': !selectedUserAndCompanies.length,'disabled': isDisabled}"
         (click)="showSelectWrapper($event)"
     >
         <ng-template
@@ -32,6 +32,10 @@
             </div>
         </ng-template>
     </div>
+
+
+
+
 
     <div
         class="select-wrapper"

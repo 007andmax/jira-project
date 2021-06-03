@@ -25,6 +25,9 @@ export class DocumentsService {
   public getTemplateCategories(isDefault) {
     return this.http.get(this.apiUrl + `documents/categories?documentType=TEMPLATE&defaultTemplate=${isDefault}`);
   }
+  public checkTitle(title) {
+    return this.http.get(this.apiUrl + `documents/checkTitleUnique?title=${title}`);
+  }
   public removeDocument(id) {
     return this.http.delete(this.apiUrl + `documents/${id}`);
   }
