@@ -69,7 +69,7 @@
                         placeholder="Printer Installation Guide"
                         [(ngModel)]="documentEdit.title"
                         [ngClass]="{'--input-error':!documentValidate.getTitle()}"
-                        (input)="documentValidate.resetTitle()"
+                        (blur)="onChangeTitle()"
                     >
                 </div>
                 <div class="documents-create__col --required">
@@ -131,6 +131,8 @@
                                 disabled
                             >
                             <span class="checkbox-mark"></span>
+
+
 
 
 

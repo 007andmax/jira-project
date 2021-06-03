@@ -31,7 +31,13 @@ export class DocumentsEditInfoComponent extends DocumentsAddInfoComponent {
     //  if (this.categories.length > 0) this.categoriesDp.editItem = this.categories.find(item => item.id === this.documentEdit.categoryId);
 
   }
-
+  onChangeTitle() {
+    this.documentsService.checkTitle(this.documentEdit.title, this.documentEdit.id).subscribe(data => {
+      console.log("data", data);
+      this.documentValidate.setTitle(data)
+    })
+    // 
+  }
   getSelectedClientType() {
     return this.companyTypes.find(item => item.type === this.documentEdit.clientType);
   }
