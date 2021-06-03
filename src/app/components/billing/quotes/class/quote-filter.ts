@@ -20,6 +20,9 @@ export class QuoteFilter {
         this.offset = data.offset;
         this.limit = data.limit;
     }
+    public isExistFilters() {
+        return this.companyName || this.quoteNumber || this.status || this.date || this.endDate;
+    }
     public clearSortBy() {
         this.sortBy = undefined;
     }
