@@ -90,12 +90,12 @@ export class InventoryComponent implements OnInit {
         const Index = this.inventoryList.findIndex((item) => item.versionedId.id === data.data.versionedId.id);
         if (reqIndex > -1) {
           this.reqInventoryList[reqIndex] = new InventoryItem(data.data);
-          if (!this.filter.isFilterItem(data.data)) this.reqInventoryList.splice(reqIndex, 1);
+          if (!this.filter.isFilterItem(new InventoryItem(data.data))) this.reqInventoryList.splice(reqIndex, 1);
         }
-        if (reqIndex === -1 && this.filter.isFilterItem(data.data)) this.reqInventoryList.push(new InventoryItem(data.data));
+        if (reqIndex === -1 && this.filter.isFilterItem(new InventoryItem(data.data))) this.reqInventoryList.push(new InventoryItem(data.data));
         if (Index > -1) {
           this.inventoryList[Index] = new InventoryItem(data.data);
-          if (!this.filter.isFilterItem(data.data)) this.inventoryList.splice(Index, 1);
+          if (!this.filter.isFilterItem(new InventoryItem(data.data))) this.inventoryList.splice(Index, 1);
         }
         if (Index === -1 && this.filter.isFilterItem(new InventoryItem(data.data))) {
           this.inventoryList.push(new InventoryItem(data.data));
