@@ -52,7 +52,7 @@ export class DocumentsHeaderComponent implements OnInit {
     this.onSearch.emit(event.target.value);
   }
   goToAddDocument() {
-    this.leftPanelStateService.goToState('new-add-documents');
+    if (this.getPermissions('CREATE_DOCUMENT')) this.leftPanelStateService.goToState('new-add-documents');
   }
   onChangeCountFilter(data) {
     this.countFilter = data;

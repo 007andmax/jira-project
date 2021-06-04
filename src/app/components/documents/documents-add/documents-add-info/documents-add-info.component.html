@@ -106,6 +106,7 @@
                         <p
                             class="qt-color-info"
                             (click)="toggleEditCategories = true"
+                            *ngIf="getPermissions('EDIT_CATEGORY')"
                         >
                             Edit
                         </p>

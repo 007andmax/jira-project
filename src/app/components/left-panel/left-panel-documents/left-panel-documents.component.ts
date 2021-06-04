@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { DocumentCategoryAdd } from '../../documents/documents-add/class/document-category-add';
@@ -23,6 +24,7 @@ export class LeftPanelDocumentsComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   constructor(private documentsService: DocumentsService,
     private documentsStateService: DocumentsStateService,
+    private permissionsService: PermissionsService,
     private leftPanelStateService: LeftPanelStateService,) { }
 
   ngOnInit() {
@@ -77,6 +79,9 @@ export class LeftPanelDocumentsComponent implements OnInit, OnDestroy {
   }
   public goToState() {
     this.onChangeState.emit('new-documents');
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

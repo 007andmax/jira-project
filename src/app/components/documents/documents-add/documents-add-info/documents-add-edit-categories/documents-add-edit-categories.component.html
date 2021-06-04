@@ -4,6 +4,7 @@
         <div
             class="icon__remove  qt-sz-16 qt-bg-contain pointer"
             [ngClass]="{'disable':selectedCategories.length === 0}"
+            *ngIf="getPermissions('DELETE_CATEGORY')"
             (click)="onRemoveAllCategories()"
         ></div>
     </div>
@@ -29,6 +30,7 @@
                         <label
                             class="checkbox-container "
                             [ngClass]="{'disable':item.count > 0}"
+                            *ngIf="getPermissions('DELETE_CATEGORY')"
                         >
                             <input
                                 type="checkbox"
@@ -61,7 +63,7 @@
                             </p>
                             <div
                                 (click)="onRemoveCategory(item)"
-                                *ngIf="item.count === 0 && !editCategory.isEditMode(item.id)"
+                                *ngIf="item.count === 0 && !editCategory.isEditMode(item.id) && getPermissions('DELETE_CATEGORY')"
                                 class="icon__remove qt-sz-16 qt-bg-contain qt-ml-6 pointer"
                             ></div>
                         </div>
@@ -93,6 +95,7 @@
             <button
                 class="btn-new btn-primary-white"
                 (click)="toggleCategory()"
+                *ngIf="getPermissions('CREATE_CATEGORY')"
             >
                 + Add New
             </button>

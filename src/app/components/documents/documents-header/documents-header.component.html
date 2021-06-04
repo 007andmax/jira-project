@@ -46,20 +46,10 @@
                         ngbDropdown
                         [placement]="'bottom-right'"
                     >
-                        <ul
-                            class="qt-dropdown-menu"
-                            ngbDropdownMenu
-                            aria-labelledby="dropdownSave"
+                        <button
+                            class=" qt-button --with-menu qt-ml-8"
+                            [ngClass]="{'disabled':getPermissions('CREATE_DOCUMENT')}"
                         >
-                            <li
-                                ngbDropdownItem
-                                routerLink="/ng2/documents/templates"
-                            >
-                                <div class="icon__create-template qt-sz-16 qt-mr-8"></div>
-                                Create from Template
-                            </li>
-                        </ul>
-                        <button class=" qt-button --with-menu qt-ml-8">
                             <span
                                 class="save-billable-aside-btn left-side"
                                 (click)="goToAddDocument()"
@@ -74,6 +64,19 @@
                                 <div class="qt-sz-16 qt-ic-c icon__dropdown-arrow-up"></div>
                             </div>
                         </button>
+                        <ul
+                            class="qt-dropdown-menu"
+                            ngbDropdownMenu
+                            aria-labelledby="dropdownSave"
+                        >
+                            <li
+                                ngbDropdownItem
+                                routerLink="/ng2/documents/templates"
+                            >
+                                <div class="icon__create-template qt-sz-16 qt-mr-8"></div>
+                                Create from Template
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>

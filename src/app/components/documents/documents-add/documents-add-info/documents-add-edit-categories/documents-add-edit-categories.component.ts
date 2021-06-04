@@ -6,6 +6,7 @@ import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.comp
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { REMOVE_ALL_CATEGORIES, REMOVE_CATEGORY_DOCUMENT } from 'src/app/const/confirm';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
 import { DocumentCategoryAdd } from '../../class/document-category-add';
 import { DocumentCategoryEdit } from '../../class/document-category-edit';
@@ -26,6 +27,7 @@ export class DocumentsAddEditCategoriesComponent implements OnInit, OnDestroy {
   constructor(private documentsStateService: DocumentsStateService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
+    private permissionsService: PermissionsService,
     private documentsService: DocumentsService,) { }
 
   ngOnInit() {
@@ -122,6 +124,9 @@ export class DocumentsAddEditCategoriesComponent implements OnInit, OnDestroy {
       this.toggleAddCategory = false;
       this.addCategory.categoryName = "";
     }
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   close() {
     this.onClosed.emit(null);

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { Document } from '../../class/document';
 import { DocumentAdd } from '../class/document-add';
@@ -17,6 +18,7 @@ export class DocumentsAddFooterComponent implements OnInit {
   @Input() documentValidate: DocumentValidate = new DocumentValidate();
   constructor(private documentsService: DocumentsService,
     private leftPanelStateService: LeftPanelStateService,
+    private permissionsService: PermissionsService,
     private router: Router,) { }
 
   ngOnInit() {
@@ -36,5 +38,8 @@ export class DocumentsAddFooterComponent implements OnInit {
     this.documentsService.edit(this.documentEdit.id, this.documentEdit.getDataForEdit()).subscribe(data => {
       this.leftPanelStateService.goToState('new-documents');
     })
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
 }

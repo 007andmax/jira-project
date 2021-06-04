@@ -85,6 +85,18 @@ export class PermissionManageService {
       'VIEW_TAXES_SETTINGS',
       'VIEW_EMAIL_TEMPLATES_SETTINGS',
       'VIEW_TAGS_SETTINGS'
+    ],
+    Documents: [
+      'VIEW_DOCUMENT',
+      'CREATE_DOCUMENT',
+      'EDIT_DOCUMENT',
+      'DELETE_DOCUMENT',
+      'CREATE_CATEGORY',
+      'EDIT_CATEGORY',
+      'DELETE_CATEGORY',
+      'CREATE_TEMPLATE',
+      'EDIT_TEMPLATE',
+      'DELETE_TEMPLATE'
     ]
   };
 

@@ -6,6 +6,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { Router } from '@angular/router';
 import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   selector: 'documents-table',
@@ -21,6 +22,7 @@ export class DocumentsTableComponent implements OnInit {
   currentUser: CurrentUser;
   constructor(private usersStateService: UsersStateService,
     private router: Router,
+    private permissionsService: PermissionsService,
     private documentsStateService: DocumentsStateService,
     private companiesStateService: CompaniesStateService) { }
 
@@ -35,7 +37,7 @@ export class DocumentsTableComponent implements OnInit {
   }
   showTemplate() {
     console.log("item", this.item);
-    if (!this.item.isCategory) this.documentsStateService.onInitGetTemplate(this.item);
+    if (!this.item.isCategory && this.getPermissions('VIEW_DOCUMENT')) this.documentsStateService.onInitGetTemplate(this.item);
   }
   getCreateBy() {
     let user = this.usersStateService.getAllUsers().find(item => item.id === this.item.createdBy)
@@ -61,6 +63,9 @@ export class DocumentsTableComponent implements OnInit {
   editDocument() {
     this.router.navigate(
       ['/ng2/documents/edit/', this.item.id]);
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   /* getSharedWith() {
      if (this.item.list.length === 1 && this.item.list[0].createdBy.id === this.currentUser.id) return "Only you";

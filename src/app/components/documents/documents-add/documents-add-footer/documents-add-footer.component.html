@@ -1,13 +1,13 @@
 <div class="qt-aside-modern__footer">
     <div class="qt-df">
         <button
-            *ngIf="documentAdd"
+            *ngIf="documentAdd && getPermissions('CREATE_DOCUMENT')"
             class="qt-button qt-mr-12"
             appDisabledBtn
             #addBtn="disabled"
             (onClick)=" add('DOCUMENT')"
         >
-            <span *ngIf="!addBtn.isBlock()">Save Document</span>
+            <span *ngIf="!addBtn.isBlock()">Create Document</span>
             <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
         </button>
         <button

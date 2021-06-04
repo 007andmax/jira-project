@@ -12,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   selector: 'app-documents-add-info',
@@ -34,6 +35,7 @@ export class DocumentsAddInfoComponent implements OnInit {
   constructor(public documentsStateService: DocumentsStateService,
     public leftPanelStateService: LeftPanelStateService,
     public documentsService: DocumentsService,
+    private permissionsService: PermissionsService,
     public activateRoute: ActivatedRoute,) {
   }
 
@@ -86,6 +88,9 @@ export class DocumentsAddInfoComponent implements OnInit {
   }
   getSelectedCategory() {
     return this.categories.find(item => item.id === this.documentAdd.categoryId);
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   onSelectCategory(data) {
 

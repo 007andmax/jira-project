@@ -52,6 +52,7 @@
     <li
         class="app-left-panel__menu-expand-item-icon"
         (click)="toggleCategory()"
+        *ngIf="getPermissions('CREATE_CATEGORY')"
     >
         <span class="app-left-panel__submenu-icon --add-folder"></span>
         New Folder

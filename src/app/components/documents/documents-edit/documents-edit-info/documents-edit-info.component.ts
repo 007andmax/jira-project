@@ -39,6 +39,7 @@ export class DocumentsEditInfoComponent extends DocumentsAddInfoComponent {
     // 
   }
   getSelectedClientType() {
+
     return this.companyTypes.find(item => item.type === this.documentEdit.clientType);
   }
   getSelectedCategory() {
