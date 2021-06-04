@@ -82,7 +82,6 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
    */
   public ngOnInit() {
     this.initResendMode();
-    console.log("this.data", this.data);
     this.getAllUsers((this.data instanceof QuoteEdit) ? this.data.company.id : this.data.companyId);
     this.userInput.nativeElement.onblur = (e) => {
       if (this.matAutocomplete.isOpen) {
@@ -146,14 +145,12 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
     this.quoteStateService.setUsersEmail(this.usersEmails);
     this.userInput.nativeElement.blur();
     this.userCtrl.setValue(null);
-    console.log("event", event);
   }
 
   /**
    * Get user list
    */
   private getAllUsers(companyId) {
-    console.log("companyId", companyId);
     let userList = this.usersStateService.getAllUsers();
     this.initialized = true;
     const techUser = userList.filter((item) => item.accountType === USER.TYPE.TECH && !item.deletedAt && item.primaryEmail !== "");
@@ -162,7 +159,6 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
       1 : ((b.primaryEmail.toLowerCase() > a.primaryEmail.toLowerCase()) ? -1 : 0));
     this.reqUsersList = [...techUser, ...clientUser].sort((a, b) => (a.primaryEmail.toLowerCase() > b.primaryEmail.toLowerCase()) ?
       1 : ((b.primaryEmail.toLowerCase() > a.primaryEmail.toLowerCase()) ? -1 : 0));
-    console.log("this.reqUsersList", this.reqUsersList);
   }
 
   /**
@@ -242,7 +238,6 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
 
   public onAdd(e) {
     e.stopPropagation();
-    console.log("e.target.value", e.target.value);
     if (e.target.value.length === 0) return;
     const input = e.target;
     const value = e.target.value;

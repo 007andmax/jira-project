@@ -331,7 +331,6 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
   removeUserConfirm(techuser: any) {
     this.userId = techuser;
     this.deletepopup = true;
-    console.log("removeUserConfirm", this.deletepopup)
     this.cd.detectChanges();
   }
 
