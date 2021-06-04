@@ -140,6 +140,8 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
       if (typeof recipients === "string") item.recipients = recipients.split(',');
       this.quoteServices.getQuote(item.id).subscribe((data) => {
         let quote: QuoteEdit = new QuoteEdit(data);
+
+        console.log("quote", quote);
         const modalRef = this.modalService.open(ModalQuoteComponent, { windowClass: 'quote-send-modal' });
         modalRef.componentInstance.data = quote;
         modalRef.componentInstance.action = QUOTE_MODAL_ACTION_LIST;
