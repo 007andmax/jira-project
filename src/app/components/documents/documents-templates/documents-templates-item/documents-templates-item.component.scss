@@ -8,6 +8,12 @@
     max-width: 252px;
     width: 100%;
     margin: 12px;
+    border: 2px solid transparent;
+    //transition: border .3s ease-in;
+
+    &:hover {
+      border-color: #16a4fa;
+    }
 
     .qt-button {
         opacity: 0;
