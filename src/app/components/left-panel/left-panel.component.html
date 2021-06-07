@@ -50,17 +50,17 @@
         [activePage]="state"
         (onChangeState)="onChangeState($event)"
     ></app-left-panel-password-manager>
+    <app-left-panel-documents
+      #panelDocuments
+      (onOpenPanel)="onOpenPanel()"
+      (onChangeState)="onChangeState($event)"
+      [activePage]="state"
+    ></app-left-panel-documents>
     <hr class="app-left-panel__divider">
     <app-left-panel-reports
         [activePage]="state"
         (onChangeState)="onChangeState($event)"
     ></app-left-panel-reports>
-    <app-left-panel-documents
-        #panelDocuments
-        (onOpenPanel)="onOpenPanel()"
-        (onChangeState)="onChangeState($event)"
-        [activePage]="state"
-    ></app-left-panel-documents>
     <app-left-panel-settings
         #panelSettings
         (onOpenPanel)="onOpenPanel()"
