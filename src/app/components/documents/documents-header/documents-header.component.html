@@ -1,6 +1,10 @@
 <div class="qt-page-list__header --sticky">
     <div class="qt-page-list__header-title-line">
         <div class="qt-page-list__header-title-line--left">
+            <div
+                class="qt-page-list__back-button icon__collapse-arrow button-icon pointer"
+                (click)="back()"
+            ></div>
             <h3
                 class="qt-page-list__header-title"
                 [textContent]="'Documents'"
@@ -48,7 +52,7 @@
                     >
                         <button
                             class=" qt-button --with-menu qt-ml-8"
-                            [ngClass]="{'disabled':getPermissions('CREATE_DOCUMENT')}"
+                            [ngClass]="{'disabled':!getPermissions('CREATE_DOCUMENT')}"
                         >
                             <span
                                 class="save-billable-aside-btn left-side"

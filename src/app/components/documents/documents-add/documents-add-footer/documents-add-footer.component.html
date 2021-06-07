@@ -24,7 +24,7 @@
             <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
         </button>
         <button
-            *ngIf="documentAdd"
+            *ngIf="documentAdd && getPermissions('CREATE_TEMPLATE')"
             class="qt-button --gray"
             [disabled]="documentAdd && !documentAdd.isTemplate()"
             (click)="add('TEMPLATE')"

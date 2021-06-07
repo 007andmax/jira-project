@@ -52,6 +52,7 @@
                     <li
                         class="pointer"
                         ngbDropdownItem
+                        *ngIf="getPermissions('EDIT_TEMPLATE')"
                         (click)="editDocument(item)"
                     >
                         <div class="icon__edit qt-sz-16 qt-bg-contain qt-mr-8"></div>
@@ -111,6 +112,7 @@
                     <li
                         class="pointer"
                         ngbDropdownItem
+                        *ngIf="getPermissions('DELETE_TEMPLATE')"
                         class="remove-item"
                         (click)="removeDocument()"
                     >

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
 import { Document } from '../../class/document';
 
@@ -11,6 +12,7 @@ import { Document } from '../../class/document';
 export class DocumentsTemplatesItemComponent implements OnInit {
   @Input() item: Document;
   constructor(private documentsStateService: DocumentsStateService,
+    private permissionsService: PermissionsService,
     private router: Router,) { }
 
   ngOnInit() {
@@ -23,5 +25,8 @@ export class DocumentsTemplatesItemComponent implements OnInit {
 
     this.router.navigate(
       ['/ng2/documents/edit/', item.id]);
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
 }

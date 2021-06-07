@@ -1,4 +1,4 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { UsersService } from '../../services/users/users.service';
 import { CurrentUser } from 'src/class/current-user/current-user';
 import { User } from '../../components/users/class/user';
@@ -28,7 +28,9 @@ export class UsersStateService {
   onChangeUsers: EventEmitter<UserChange> = new EventEmitter();
   filter: UserFilter = new UserFilter();
   showArchivedCompanies: boolean = false;
-  constructor(private userService: UsersService, private usersRealTimeService: UsersRealTimeService) {
+  constructor(private userService: UsersService,
+    public cd: ChangeDetectorRef,
+    private usersRealTimeService: UsersRealTimeService) {
 
   }
   public onInit() {
@@ -161,6 +163,7 @@ export class UsersStateService {
  * @permissions - permissions to change
  */
   public changeUserPermissions(permissions) {
-    return this.currentUser.permissions = permissions;
+    this.currentUser.permissions = permissions;
+    this.cd.detectChanges();
   }
 }

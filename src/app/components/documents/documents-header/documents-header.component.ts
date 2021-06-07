@@ -40,7 +40,9 @@ export class DocumentsHeaderComponent implements OnInit {
     this.searchText = "";
     this.onSearch.emit("");
   }
-
+  back() {
+    this.leftPanelStateService.goToState('new-documents');
+  }
   toggleAll(data) {
     this.selectAll = true;
     this.onSelectAll.emit(data);
