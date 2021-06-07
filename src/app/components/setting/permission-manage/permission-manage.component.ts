@@ -408,6 +408,12 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
         case 'VIEW_PASSWORD':
           relatedPermissions = this.passwordsRelatedPermissions;
           break;
+        case 'VIEW_DOCUMENT':
+          relatedPermissions = this.viewDocumentsRelatedPermissions;
+          break;
+        case 'EDIT_CATEGORY':
+          relatedPermissions = this.editCategoryDocumentsRelatedPermissions;
+          break;
         default:
           break;
       }

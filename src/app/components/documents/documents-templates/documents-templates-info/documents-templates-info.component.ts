@@ -13,6 +13,7 @@ export class DocumentsTemplatesInfoComponent implements OnInit, OnDestroy {
   openAside: boolean = false;
   showPreloader: boolean = true;
   document: Document;
+  body: any;
   sub: Subscription = new Subscription();
   constructor(private documentsStateService: DocumentsStateService,
     private documentsService: DocumentsService) { }
@@ -23,7 +24,13 @@ export class DocumentsTemplatesInfoComponent implements OnInit, OnDestroy {
       this.openAside = true;
       this.showPreloader = true;
       this.documentsService.getDocument(data.id).subscribe(document => {
+
         this.document = new Document(document);
+        var parser = new DOMParser();
+        var htmlDoc = parser.parseFromString(this.document.content, 'text/html');
+        console.log("htmlDoc", htmlDoc);
+        console.log("htmlDoc", htmlDoc.textContent);
+        this.body = htmlDoc.body;
         this.showPreloader = false;
       })
 
