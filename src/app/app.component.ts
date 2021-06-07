@@ -141,6 +141,10 @@ export class AppComponent implements OnInit {
         this.cd.detectChanges();
       }
     })
+    this.usersStateService.onChangeUserPermissions.subscribe(data => {
+      this.usersStateService.changeUserPermissions(data);
+      this.cd.detectChanges();
+    })
   }
   ngDoCheck() {
     this.qtListHeaaderScroller = document.querySelector('.qt-page-list__header-thead-container');

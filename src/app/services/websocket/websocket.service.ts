@@ -131,7 +131,7 @@ export class WebsocketService {
     setTimeout(() => {
       this.stompClient.subscribe("/user/watch/permissions", (message) => {
         var newChange = JSON.parse(message.body);
-        this.usersState.changeUserPermissions(newChange.data.permissions);
+        this.usersRealTimeService.handleRealTimePermissions(newChange);//permissions
         if (message.body) { }
       });
     }, 3000);

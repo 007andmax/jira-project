@@ -22,6 +22,7 @@ export class UsersStateService {
   onFilter: EventEmitter<any> = new EventEmitter();
   openAside: EventEmitter<any> = new EventEmitter();
   openEditAside: EventEmitter<any> = new EventEmitter();
+  onChangeUserPermissions: EventEmitter<any> = new EventEmitter();
   userForArchive: User = null;
   usersForArchive: Array<User> = [];
   userForDeArchive: User = null;
@@ -29,7 +30,6 @@ export class UsersStateService {
   filter: UserFilter = new UserFilter();
   showArchivedCompanies: boolean = false;
   constructor(private userService: UsersService,
-    public cd: ChangeDetectorRef,
     private usersRealTimeService: UsersRealTimeService) {
 
   }
@@ -64,6 +64,10 @@ export class UsersStateService {
         if (Index > -1) this.allUsers[Index].userStatistic.ticketsSubmitted = prevValue;
       }
       this.onChangeUsers.emit(new UserChange(newChange.action, newChange.data, this.allUsers));
+    });
+    this.usersRealTimeService.changePermissionsUsers.subscribe(newChange => {
+
+      this.onChangeUserPermissions.emit(newChange.data.permissions);
     });
   }
   public onInitGetCurrentUser() {
@@ -164,6 +168,6 @@ export class UsersStateService {
  */
   public changeUserPermissions(permissions) {
     this.currentUser.permissions = permissions;
-    this.cd.detectChanges();
+
   }
 }
