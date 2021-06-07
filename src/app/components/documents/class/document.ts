@@ -47,6 +47,19 @@ export class Document {
             linked: this.linked
         }
     }
+    public setLinked(users, companies) {
+        this.linked.users = users;
+        this.linked.companies = companies;
+    }
+    public setTags(data) {
+        this.tags = data;
+    }
+    public setClientType(data) {
+        this.clientType = data;
+    }
+    public setReviewDate(data) {
+        this.reviewDate = data;
+    }
     public parseReviewDate() {
         return new Date(this.reviewDate).getTime();
     }

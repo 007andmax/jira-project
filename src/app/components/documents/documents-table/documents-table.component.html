@@ -80,7 +80,7 @@
                     <div class="icon__add-document qt-sz-16 qt-bg-contain qt-mr-8"></div>
                     Add New Document
                 </li>
-                <li
+                <!-- <li
                     class="pointer"
                     ngbDropdownItem
                 >
@@ -93,7 +93,7 @@
                 >
                     <div class="icon__rename qt-sz-16 qt-bg-contain qt-mr-8"></div>
                     Rename Folder
-                </li>
+                </li> -->
                 <li
                     class="pointer"
                     ngbDropdownItem
@@ -109,23 +109,23 @@
                 *ngIf="!item.isCategory"
                 aria-labelledby="dropdownBasic1"
             >
-                <li
+                <!-- <li
                     class="pointer"
                     ngbDropdownItem
                 >
                     <div class="icon__share-folder qt-sz-16 qt-bg-contain qt-mr-8"></div>
                     Share...
-                </li>
+                </li> -->
                 <li
                     class="pointer"
                     ngbDropdownItem
                     (click)="editDocument()"
-                    *ngIf="getPermissions('VIEW_DOCUMENT') || getPermissions('EDIT_DOCUMENT')"
+                    *ngIf="getPermissions('EDIT_DOCUMENT')"
                 >
                     <div class="icon__edit qt-sz-16 qt-bg-contain qt-mr-8"></div>
                     Edit
                 </li>
-                <li
+                <!-- <li
                     class="pointer"
                     ngbDropdownItem
                 >
@@ -138,7 +138,7 @@
                 >
                     <div class="icon__copy-gray qt-sz-16 qt-bg-contain qt-mr-8"></div>
                     Copy to…
-                </li>
+                </li> -->
                 <li
                     class="pointer"
                     ngbDropdownItem
@@ -149,7 +149,7 @@
                     <div class="icon__clone-document qt-sz-16 qt-bg-contain qt-mr-8"></div>
                     Clone Document
                 </li>
-                <li
+                <!-- <li
                     class="pointer"
                     ngbDropdownItem
                 >
@@ -162,7 +162,7 @@
                 >
                     <div class="icon__link-gray qt-sz-16 qt-bg-contain qt-mr-8"></div>
                     Copy Internal Link
-                </li>
+                </li> -->
                 <li
                     class="pointer"
                     ngbDropdownItem

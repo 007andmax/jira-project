@@ -2,10 +2,11 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { Document } from '../../class/document';
-
+import * as moment from "moment";
 import { DocumentsAddInfoComponent } from '../../documents-add/documents-add-info/documents-add-info.component';
 import { DocumentsLinkedComponent } from '../../documents-add/documents-add-info/documents-linked/documents-linked.component';
 import { DocumentsFilterTagsComponent } from '../../documents-header/documents-filter/documents-filter-tags/documents-filter-tags.component';
+import { DocumentCompanyUser } from '../../documents-add/class/document-company-user';
 
 @Component({
   selector: 'documents-edit-info',
@@ -37,6 +38,22 @@ export class DocumentsEditInfoComponent extends DocumentsAddInfoComponent {
       this.documentValidate.setTitle(data)
     })
     // 
+  }
+  onChangeLinked(data: Array<DocumentCompanyUser>) {
+    console.log("data", data);
+    this.documentEdit.setLinked(data.filter(item => item.type === "USER").map(item => item.id),
+      data.filter(item => item.type === "COMPANY").map(item => item.id));
+  }
+  onSelectTags(data) {
+    console.log("data", data);
+    this.documentEdit.setTags(data);
+  }
+  onSelectCompanyType(data) {
+    console.log('data', data);
+    this.documentEdit.setClientType((data) ? data.type : null);
+  }
+  onChangeReviewDate(date) {
+    this.documentEdit.setReviewDate(moment(new Date(date.year, date.month - 1, date.day)).format('YYYY/MM/DD'));
   }
   getSelectedClientType() {
 

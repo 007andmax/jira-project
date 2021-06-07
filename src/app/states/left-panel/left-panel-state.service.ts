@@ -29,15 +29,18 @@ export class LeftPanelStateService {
     this.onFirstOpen.emit(data);
   }
   public changeStateWithoutNavigate(data) {
+    this.activePage = data;
     this.onChangeStateWithoutNavigate.emit(data);
   }
   public openCompanPage() {
     this.onOpenCompanyPage.emit(null);
   }
   public changeState(data) {
+    this.activePage = data;
     this.onChangeState.emit(data);
   }
   public goToState(data) {
+    this.activePage = data;
     this.onGoToState.emit(data);
   }
   public setBillingPage(data) {

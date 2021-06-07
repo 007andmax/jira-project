@@ -3,6 +3,7 @@
         <div class="qt-page-list__header-title-line--left">
             <div
                 class="qt-page-list__back-button icon__collapse-arrow button-icon pointer"
+                *ngIf="activePage === 'new-category-documents'"
                 (click)="back()"
             ></div>
             <h3

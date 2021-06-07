@@ -12,6 +12,7 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 export class DocumentsHeaderComponent implements OnInit {
   toggleFilter: boolean = true;
   countFilter: number = 0;
+  activePage: string = "";
   @Output() onChangeFilterField = new EventEmitter<any>();
   @Output() onSelectAll = new EventEmitter<any>();
   @Output() onSearch = new EventEmitter<any>();
@@ -34,7 +35,12 @@ export class DocumentsHeaderComponent implements OnInit {
    * Initializes Password manager header. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
-
+    this.activePage = this.leftPanelStateService.activePage;
+    this.leftPanelStateService.onFirstOpen.subscribe(data => {
+      this.activePage = data;
+      console.log("this.activePage", this.activePage);
+    })
+    console.log("this.activePage", this.activePage);
   }
   clearSearch() {
     this.searchText = "";
