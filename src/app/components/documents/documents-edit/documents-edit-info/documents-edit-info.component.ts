@@ -44,6 +44,10 @@ export class DocumentsEditInfoComponent extends DocumentsAddInfoComponent {
     this.documentEdit.setLinked(data.filter(item => item.type === "USER").map(item => item.id),
       data.filter(item => item.type === "COMPANY").map(item => item.id));
   }
+  onSelectCategory(data) {
+
+    this.documentEdit.setCategoryId((data) ? data.id : null);
+  }
   onSelectTags(data) {
     console.log("data", data);
     this.documentEdit.setTags(data);

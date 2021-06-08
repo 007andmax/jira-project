@@ -51,6 +51,9 @@ export class Document {
         this.linked.users = users;
         this.linked.companies = companies;
     }
+    public setCategoryId(data) {
+        this.categoryId = data;
+    }
     public setTags(data) {
         this.tags = data;
     }
