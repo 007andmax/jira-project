@@ -37,6 +37,11 @@ export class DocumentsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     let onChangeDocument = this.documentsStateService.onChangeDocument.subscribe(data => {
       if (data.action === "DOCUMENT_SAVED" && !data.data.categoryId) this.list.push(new Document(data.data));
+      if (data.action === "DOCUMENT_EDITED" && !data.data.categoryId) {
+        let findIndex = this.list.findIndex(item => item.id === data.data);
+        if (findIndex > -1) this.list[findIndex] = new Document(data.data)
+      }
+
       if (data.action === "DOCUMENT_REMOVED") {
         let findIndex = this.list.findIndex(item => item.id === data.data);
         if (findIndex > -1) this.list.splice(findIndex, 1);
