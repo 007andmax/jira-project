@@ -1,7 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
+import { REMOVE_DOCUMENT } from 'src/app/const/confirm';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
+import { ConfirmComponent } from '../../shared/confirm/confirm.component';
+import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { Document } from '../class/document';
 import { DocumentFilter } from '../class/document-filter';
 import { DocumentTemplateFilter } from '../class/document-template-filter';
@@ -12,7 +17,7 @@ import { DocumentsTemplatesHeaderComponent } from './documents-templates-header/
   templateUrl: './documents-templates.component.html',
   styleUrls: ['./documents-templates.component.scss']
 })
-export class DocumentsTemplatesComponent implements OnInit {
+export class DocumentsTemplatesComponent implements OnInit, OnDestroy {
   openCategories: boolean = false;
   showPreloader: boolean = true;
   tab = 'TEMPLATE_GALLERY';
@@ -20,24 +25,38 @@ export class DocumentsTemplatesComponent implements OnInit {
   list: Array<Document> = [];
   reqList: Array<Document> = [];
   filter: DocumentTemplateFilter = new DocumentTemplateFilter();
+  sub: Subscription = new Subscription();
   constructor(private documentsService: DocumentsService,
-
+    private confirmStateService: ConfirmStateService,
+    private modalService: NgbModal,
     private documentsStateService: DocumentsStateService) { }
 
   ngOnInit() {
 
     this.filter.setDocumentType("TEMPLATE");
-    this.documentsStateService.filterTemplate.subscribe(data => {
+    let filterTemplate = this.documentsStateService.filterTemplate.subscribe(data => {
       // this.showPreloader = true;
       this.filter.setFilters(data);
 
       this.getFilterList();
 
     })
+    this.sub.add(filterTemplate);
     this.getListCategories();
     this.getFilterList();
-  }
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === REMOVE_DOCUMENT) this.removeDocument(this.documentsStateService.getDocumentForRemove());
 
+      }
+    })
+    this.sub.add(getConfirm);
+  }
+  removeDocument(item) {
+    this.documentsService.removeDocument(item.id).subscribe(data => {
+
+    })
+  }
   onSearch(data) {
     this.filter.setSearch(data);
     this.list = this.filter.getFilterList(this.reqList);
@@ -70,7 +89,12 @@ export class DocumentsTemplatesComponent implements OnInit {
       console.log("this.list", this.list);
     })
   }
-
+  onRemoveDocument(data) {
+    this.confirmStateService.setConfirmAction(REMOVE_DOCUMENT);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    modalRef.componentInstance.message = `Do you want to delete this template?`;
+    this.documentsStateService.setDocumentForRemove(data);
+  }
   onChangeTemplate(data) {
     this.tab = data;
     this.header.filter.onClearAll();
@@ -81,4 +105,8 @@ export class DocumentsTemplatesComponent implements OnInit {
     this.openCategories = !this.openCategories;
     console.log("toggleOpenCategories", this.openCategories)
   }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
 }

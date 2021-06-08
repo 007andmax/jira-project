@@ -1,9 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
 import { Document } from '../../class/document';
-
+declare var $: any;
 @Component({
   selector: 'documents-templates-info',
   templateUrl: './documents-templates-info.component.html',
@@ -16,6 +16,7 @@ export class DocumentsTemplatesInfoComponent implements OnInit, OnDestroy {
   body: any;
   sub: Subscription = new Subscription();
   constructor(private documentsStateService: DocumentsStateService,
+    private elRef: ElementRef,
     private documentsService: DocumentsService) { }
 
 
@@ -30,7 +31,10 @@ export class DocumentsTemplatesInfoComponent implements OnInit, OnDestroy {
         var htmlDoc = parser.parseFromString(this.document.content, 'text/html');
         console.log("htmlDoc", htmlDoc);
         console.log("htmlDoc", htmlDoc.textContent);
-        this.body = htmlDoc.body;
+        //console.log("$('.documents-create-panel__body')", $('.documents-create-panel__body'));
+        //$('.documents-create-panel__body').parseHTML(this.document.content);
+        this.elRef.nativeElement.querySelector(".documents-create-panel__body").insertAdjacentHTML('afterbegin', this.document.content);
+        // this.body = htmlDoc.getRootNode();
         this.showPreloader = false;
       })
 

@@ -10,8 +10,6 @@
             class="toggle-aside icon__panel-open qt-mr-16 opened"
             (click)="toggleAside()"
         ></div>
-
-
         <div
             class="qt-aside-modern__header-close icon__close"
             (click)="openAside = false"
@@ -20,28 +18,36 @@
     </div>
     <div
         class="qt-aside-modern__content --no-padding"
-        *ngIf="!showPreloader"
+        [hidden]="showPreloader"
     >
         <!-- Tab Header -->
         <div class="documents-create-panel__subheader">
-          <div class="documents-create-panel__card-icon qt-mr-12">
-            <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
-          </div>
-         <div class="documents-create-panel__text-content">
-           <div class="qt-df qt-jc-sb qt-ai-fs">
-             <div class="documents-create-panel__title" [textContent]="document.title"></div>
-             <div class="icon__close qt-sz-32 qt-bg-contain pointer"></div>
-           </div>
-           <div class="documents-create-panel__desctiption" [textContent]="document.description"></div>
-           <button class="qt-button qt-mt-16"><span class="ng-star-inserted">Use Template</span></button>
-         </div>
+            <div class="documents-create-panel__card-icon qt-mr-12">
+                <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
+            </div>
+            <div
+                class="documents-create-panel__text-content"
+                *ngIf="!showPreloader"
+            >
+                <div class="qt-df qt-jc-sb qt-ai-fs">
+                    <div
+                        class="documents-create-panel__title"
+                        [textContent]="document.title"
+                    ></div>
+                    <div class="icon__close qt-sz-32 qt-bg-contain pointer"></div>
+                </div>
+                <div
+                    class="documents-create-panel__desctiption"
+                    [textContent]="document.description"
+                ></div>
+                <button class="qt-button qt-mt-16">
+                    <span class="ng-star-inserted">Use Template</span>
+                </button>
+            </div>
         </div>
         <!-- End Tab Header -->
         <!-- Tab Body -->
-        <div
-            class="documents-create-panel__body qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24"
-            [innerHTML]="body"
-        ></div>
+        <div class="documents-create-panel__body qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24"></div>
         <!-- End Tab Body -->
     </div>
     <div

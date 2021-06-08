@@ -22,6 +22,12 @@
                 class="loading"
                 *ngIf="showPreloader"
             ></div>
+            <div
+                class="no-exist-documents"
+                *ngIf="!showPreloader && list.length === 0"
+            >
+                No documents
+            </div>
         </div>
     </div>
 </div>

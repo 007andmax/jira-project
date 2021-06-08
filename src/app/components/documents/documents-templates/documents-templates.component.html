@@ -52,7 +52,10 @@
                     [ngForOf]="list"
                     [ngForTrackBy]="trackById"
                 >
-                    <documents-templates-item [item]="item"></documents-templates-item>
+                    <documents-templates-item
+                        [item]="item"
+                        (onRemoveDocument)="onRemoveDocument(item)"
+                    ></documents-templates-item>
                 </ng-template>
             </div>
         </div>
@@ -66,7 +69,10 @@
                     [ngForOf]="list"
                     [ngForTrackBy]="trackById"
                 >
-                    <documents-templates-item [item]="item"></documents-templates-item>
+                    <documents-templates-item
+                        [item]="item"
+                        (onRemoveDocument)="onRemoveDocument(item)"
+                    ></documents-templates-item>
                 </ng-template>
             </div>
         </div>

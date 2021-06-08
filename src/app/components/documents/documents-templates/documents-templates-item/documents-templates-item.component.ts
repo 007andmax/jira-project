@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
@@ -11,6 +11,7 @@ import { Document } from '../../class/document';
 })
 export class DocumentsTemplatesItemComponent implements OnInit {
   @Input() item: Document;
+  @Output() onRemoveDocument = new EventEmitter<any>();
   constructor(private documentsStateService: DocumentsStateService,
     private permissionsService: PermissionsService,
     private router: Router,) { }
@@ -20,6 +21,9 @@ export class DocumentsTemplatesItemComponent implements OnInit {
   showTemplate(item) {
     console.log("item", item);
     if (item) this.documentsStateService.onInitGetTemplate(item);
+  }
+  removeDocument() {
+    this.onRemoveDocument.emit(this.item);
   }
   editDocument(item) {
 
