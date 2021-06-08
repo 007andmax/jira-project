@@ -48,10 +48,11 @@ export class DocumentsCategoryComponent implements OnInit, OnDestroy {
     let onChangeDocument = this.documentsStateService.onChangeDocument.subscribe(data => {
       console.log("data", data);
       if (data.action === "DOCUMENT_SAVED" && this.categoryId === data.data.categoryId) this.list.push(new Document(data.data));
-      if (data.action === "DOCUMENT_EDITED" && this.categoryId === data.data.categoryId) {
+      if (data.action === "DOCUMENT_EDITED") {
 
         let findIndex = this.list.findIndex(item => item.id === data.data.id);
-        if (findIndex > -1) this.list[findIndex] = new Document(data.data);
+        if (findIndex > -1 && this.categoryId === data.data.categoryId) this.list[findIndex] = new Document(data.data);
+        if (findIndex > -1 && this.categoryId !== data.data.categoryId) this.list.splice(findIndex, 1);
         console.log("findIndex", findIndex);
       }
       if (data.action === "DOCUMENT_REMOVED") {
