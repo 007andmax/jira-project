@@ -106,6 +106,9 @@ export class DocumentsCategoryComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.message = `Do you want to delete this document?`;
     this.documentsStateService.setDocumentForRemove(data);
   }
+  public trackById(index, item) {
+    return item.id;
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
