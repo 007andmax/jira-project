@@ -99,6 +99,8 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`ng2/documents/add`)) this.state = 'new-add-documents';
           if (window.location.href.includes(`ng2/documents/category`)) this.state = 'new-category-documents';
           if (window.location.href.includes(`ng2/documents/edit`)) this.state = 'new-edit-documents';
+          if (window.location.href.includes(`ng2/documents/templates`)) this.state = 'new-template-documents';
+
 
           if (window.location.href.includes(`ng2/report/byProducts`)) this.state = 'byProducts';
           if (window.location.href.includes(`ng2/report/byCustomers`)) this.state = 'byCustomers';
@@ -117,6 +119,7 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`ng2/report/ticket-report`)) this.state = 'ticket-report';
           if (window.location.href.includes(`ng2/report/service-report`)) this.state = 'service-report';
           if (window.location.href.includes(`ng2/report/income-accounts`)) this.state = 'income-accounts';
+
 
 
           this.leftPanelStateService.firstOpen(this.state);
@@ -201,7 +204,7 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'new-billable-tickets') this.goToLink('/ng2/billable-tickets');
       if (this.state === 'new-documents') this.goToLink('/ng2/documents');
       if (this.state === 'new-add-documents') this.goToLink('/ng2/documents/add');
-
+      if (this.state === 'new-template-documents') this.goToLink('/ng2/documents/templates');
 
 
       if (this.state === 'byProducts' ||

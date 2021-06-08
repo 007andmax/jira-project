@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { REMOVE_DOCUMENT } from 'src/app/const/confirm';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
+import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { Document } from '../class/document';
@@ -29,9 +30,11 @@ export class DocumentsTemplatesComponent implements OnInit, OnDestroy {
   constructor(private documentsService: DocumentsService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
+    public leftPanelStateService: LeftPanelStateService,
     private documentsStateService: DocumentsStateService) { }
 
   ngOnInit() {
+    this.leftPanelStateService.changeStateWithoutNavigate('new-template-documents');
 
     this.filter.setDocumentType("TEMPLATE");
     let filterTemplate = this.documentsStateService.filterTemplate.subscribe(data => {

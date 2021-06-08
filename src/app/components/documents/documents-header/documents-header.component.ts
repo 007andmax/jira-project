@@ -62,6 +62,9 @@ export class DocumentsHeaderComponent implements OnInit {
   goToAddDocument() {
     if (this.getPermissions('CREATE_DOCUMENT')) this.leftPanelStateService.goToState('new-add-documents');
   }
+  goToTemplates() {
+    this.leftPanelStateService.goToState('new-template-documents');
+  }
   onChangeCountFilter(data) {
     this.countFilter = data;
   }
