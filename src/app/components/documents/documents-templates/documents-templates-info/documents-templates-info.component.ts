@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
 import { Document } from '../../class/document';
 declare var $: any;
@@ -17,6 +18,7 @@ export class DocumentsTemplatesInfoComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   constructor(private documentsStateService: DocumentsStateService,
     private elRef: ElementRef,
+    private permissionsService: PermissionsService,
     private documentsService: DocumentsService) { }
 
 
@@ -40,6 +42,9 @@ export class DocumentsTemplatesInfoComponent implements OnInit, OnDestroy {
 
     })
     this.sub.add(onGetTemplate);
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

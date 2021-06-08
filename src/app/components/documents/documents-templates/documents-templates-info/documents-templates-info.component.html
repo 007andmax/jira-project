@@ -21,7 +21,10 @@
         [hidden]="showPreloader"
     >
         <!-- Tab Header -->
-        <div class="documents-create-panel__subheader">
+        <div
+            class="documents-create-panel__subheader"
+            *ngIf="document.documentType === 'TEMPLATE'"
+        >
             <div class="documents-create-panel__card-icon qt-mr-12">
                 <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
             </div>
@@ -40,7 +43,12 @@
                     class="documents-create-panel__desctiption"
                     [textContent]="document.description"
                 ></div>
-                <button class="qt-button qt-mt-16">
+                <button
+                    class="qt-button qt-mt-16"
+                    routerLink="/ng2/documents/add"
+                    [queryParams]="{'clone_document':document.id}"
+                    *ngIf="getPermissions('CREATE_TEMPLATE') || getPermissions('CREATE_DOCUMENT')"
+                >
                     <span class="ng-star-inserted">Use Template</span>
                 </button>
             </div>

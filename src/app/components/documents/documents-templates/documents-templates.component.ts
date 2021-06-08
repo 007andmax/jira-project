@@ -40,9 +40,7 @@ export class DocumentsTemplatesComponent implements OnInit, OnDestroy {
     let filterTemplate = this.documentsStateService.filterTemplate.subscribe(data => {
       // this.showPreloader = true;
       this.filter.setFilters(data);
-
       this.getFilterList();
-
     })
     this.sub.add(filterTemplate);
     this.getListCategories();
@@ -50,7 +48,6 @@ export class DocumentsTemplatesComponent implements OnInit, OnDestroy {
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REMOVE_DOCUMENT) this.removeDocument(this.documentsStateService.getDocumentForRemove());
-
       }
     })
     this.sub.add(getConfirm);
