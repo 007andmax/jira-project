@@ -50,7 +50,7 @@ export class DocumentsCategoryComponent implements OnInit, OnDestroy {
       if (data.action === "DOCUMENT_SAVED" && this.categoryId === data.data.categoryId) this.list.push(new Document(data.data));
       if (data.action === "DOCUMENT_EDITED" && this.categoryId === data.data.categoryId) {
 
-        let findIndex = this.list.findIndex(item => item.id === data.data);
+        let findIndex = this.list.findIndex(item => item.id === data.data.id);
         if (findIndex > -1) this.list[findIndex] = new Document(data.data);
         console.log("findIndex", findIndex);
       }
