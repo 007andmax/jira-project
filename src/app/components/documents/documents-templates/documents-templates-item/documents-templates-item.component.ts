@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { CategoryDocument } from 'src/app/components/left-panel/left-panel-documents/class/category-document';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
@@ -16,6 +16,7 @@ export class DocumentsTemplatesItemComponent implements OnInit {
   categories: Array<CategoryDocument> = [];
   constructor(private documentsStateService: DocumentsStateService,
     private permissionsService: PermissionsService,
+    public cd: ChangeDetectorRef,
     private router: Router,) { }
 
   ngOnInit() {
@@ -23,6 +24,7 @@ export class DocumentsTemplatesItemComponent implements OnInit {
     this.documentsStateService.onGetCategories.subscribe((data: any) => {
       this.categories = data;
       console.log("this.categories", this.categories);
+      this.cd.detectChanges();
     })
   }
   getCategoryName() {
