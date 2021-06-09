@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
@@ -30,6 +30,7 @@ export class DocumentsTemplatesComponent implements OnInit, OnDestroy {
   constructor(private documentsService: DocumentsService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
+    public cd: ChangeDetectorRef,
     public leftPanelStateService: LeftPanelStateService,
     private documentsStateService: DocumentsStateService) { }
 
@@ -51,6 +52,27 @@ export class DocumentsTemplatesComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
+
+    let onChangeDocument = this.documentsStateService.onChangeDocument.subscribe(data => {
+      console.log("data", data);
+      if (data.action === "DOCUMENT_SAVED" && this.tab !== 'TEMPLATE_GALLERY') this.list.push(new Document(data.data));
+      if (data.action === "DOCUMENT_EDITED") {
+        let findIndex = this.list.findIndex(item => item.id === data.data.id);
+        this.list[findIndex] = new Document(data.data);
+
+        console.log("findIndex", findIndex);
+      }
+
+      if (data.action === "DOCUMENT_REMOVED") {
+        let findIndex = this.list.findIndex(item => item.id === data.data);
+        if (findIndex > -1) this.list.splice(findIndex, 1);
+        console.log("findIndex", findIndex);
+      }
+      /* this.list.sort((a, b) => (this.getNameDocument(a).toLowerCase() > this.getNameDocument(b).toLowerCase()) ?
+         1 : ((this.getNameDocument(b).toLowerCase() > this.getNameDocument(a).toLowerCase()) ? -1 : 0));*/
+      this.cd.detectChanges();
+    })
+    this.sub.add(onChangeDocument);
   }
   removeDocument(item) {
     this.documentsService.removeDocument(item.id).subscribe(data => {
