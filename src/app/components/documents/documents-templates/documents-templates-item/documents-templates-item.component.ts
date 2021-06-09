@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { CategoryDocument } from 'src/app/components/left-panel/left-panel-documents/class/category-document';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
 import { Document } from '../../class/document';
@@ -12,11 +13,21 @@ import { Document } from '../../class/document';
 export class DocumentsTemplatesItemComponent implements OnInit {
   @Input() item: Document;
   @Output() onRemoveDocument = new EventEmitter<any>();
+  categories: Array<CategoryDocument> = [];
   constructor(private documentsStateService: DocumentsStateService,
     private permissionsService: PermissionsService,
     private router: Router,) { }
 
   ngOnInit() {
+    this.categories = this.documentsStateService.getCategories();
+    this.documentsStateService.onGetCategories.subscribe((data: any) => {
+      this.categories = data;
+      console.log("this.categories", this.categories);
+    })
+  }
+  getCategoryName() {
+    let find = this.categories.find(item => item.id === this.item.categoryId);
+    return (find) ? find.name : '';
   }
   showTemplate(item) {
     console.log("item", item);

@@ -23,7 +23,7 @@
     <div class="qt-df qt-ai-c qt-jc-sb">
         <div
             class="card__description"
-            [textContent]="item.description"
+            [textContent]="getCategoryName()"
         ></div>
         <div
             class="card__description__menu"
@@ -119,7 +119,7 @@
                         (click)="removeDocument()"
                     >
                         <div class="icon__remove qt-sz-16 qt-bg-contain qt-mr-8"></div>
-                        Move to Trash
+                        Delete
                     </li>
                 </ul>
             </div>

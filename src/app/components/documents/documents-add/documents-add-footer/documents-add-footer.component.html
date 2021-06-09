@@ -27,6 +27,7 @@
             *ngIf="documentAdd && getPermissions('CREATE_TEMPLATE')"
             class="qt-button --gray"
             [disabled]="documentAdd && !documentAdd.isTemplate()"
+            [ngClass]="{'disabled':documentAdd && !documentAdd.isTemplate()}"
             (click)="add('TEMPLATE')"
         >
             Save as Template
