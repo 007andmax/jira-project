@@ -37,11 +37,9 @@ export class DocumentTemplateFilter {
         });
     }
     public isMatchIheFilter(item) {
-
         let title = item.title ? item.title.toLowerCase() : "";
         let description = item.description ? item.description.toLowerCase() : "";
-        return (this.searchText.length === 0) ? true : title.includes(this.searchText) || description.includes(this.searchText);
-
+        return (this.searchText.length === 0) ? true : title.includes(this.searchText) || description.includes(this.searchText) || item.categoryId === this.categoryId;
     }
 
 }
