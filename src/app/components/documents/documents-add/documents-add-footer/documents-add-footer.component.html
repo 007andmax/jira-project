@@ -3,9 +3,11 @@
         <button
             *ngIf="documentAdd && getPermissions('CREATE_DOCUMENT')"
             class="qt-button qt-mr-12"
+            [disabled]="requiredCompanyType"
+            [ngClass]="{'disabled-add-document':requiredCompanyType}"
             appDisabledBtn
             #addBtn="disabled"
-            (onClick)=" add('DOCUMENT')"
+            (onClick)="add('DOCUMENT')"
         >
             <span *ngIf="!addBtn.isBlock()">Create Document</span>
             <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>

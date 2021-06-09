@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { CompanySetting } from 'src/app/components/companies/class/company-setting';
 import { CategoryDocument } from 'src/app/components/left-panel/left-panel-documents/class/category-document';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
@@ -26,7 +26,8 @@ export class DocumentsAddInfoComponent implements OnInit {
   categories: Array<CategoryDocument> = [];
 
   companyTypes = [new TitleListType('All companies', 'ALL'), new TitleListType('Client', 'CLIENT'), new TitleListType('Lead', 'LEAD'), new TitleListType('Vendor', 'VENDOR')];
-  requiredCompanyType: boolean = false;
+  requiredCompanyType: boolean;
+  @Output() onChangeRequiredCompanyType = new EventEmitter<any>();
   @Input() documentAdd: DocumentAdd = new DocumentAdd();
   @Input() documentValidate: DocumentValidate = new DocumentValidate();
   @ViewChild('companyTypeDp') companyTypeDp: DropDownComponent;
@@ -35,6 +36,7 @@ export class DocumentsAddInfoComponent implements OnInit {
   constructor(public documentsStateService: DocumentsStateService,
     public leftPanelStateService: LeftPanelStateService,
     public documentsService: DocumentsService,
+    public cd: ChangeDetectorRef,
     private permissionsService: PermissionsService,
     public activateRoute: ActivatedRoute,) {
   }
@@ -61,6 +63,10 @@ export class DocumentsAddInfoComponent implements OnInit {
   }
   onResetCompanyType() {
     this.companyTypeDp.clearWithOutChanges();
+    this.documentAdd.setClientType(null);
+    console.log("requiredCompanyType", this.requiredCompanyType);
+    this.onChangeRequiredCompanyType.emit(this.requiredCompanyType);
+    this.cd.detectChanges();
   }
   public toggleAside() {
     this.openAside = !this.openAside;

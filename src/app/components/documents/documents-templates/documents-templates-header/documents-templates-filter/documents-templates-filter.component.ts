@@ -22,6 +22,7 @@ export class DocumentsTemplatesFilterComponent implements OnInit {
     this.documentsStateService.onGetCategoriesTemplate.subscribe(data => {
       this.categories = data;
       console.log("this.categories", this.categories);
+      this.categoryDp.reset(this.categories);
     })
 
   }

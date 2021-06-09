@@ -52,6 +52,10 @@ export class DocumentsEditInfoComponent extends DocumentsAddInfoComponent {
     console.log("data", data);
     this.documentEdit.setTags(data);
   }
+  onResetCompanyType() {
+    this.companyTypeDp.clearWithOutChanges();
+    this.documentEdit.setClientType(null);
+  }
   onSelectCompanyType(data) {
     console.log('data', data);
     this.documentEdit.setClientType((data) ? data.type : null);

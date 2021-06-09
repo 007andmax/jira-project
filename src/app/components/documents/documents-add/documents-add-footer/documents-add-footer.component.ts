@@ -13,6 +13,7 @@ import { DocumentValidate } from '../class/document-validate';
   styleUrls: ['./documents-add-footer.component.scss']
 })
 export class DocumentsAddFooterComponent implements OnInit {
+  @Input() requiredCompanyType: boolean;
   @Input() documentAdd: DocumentAdd;
   @Input() documentEdit: Document;
   @Input() documentValidate: DocumentValidate = new DocumentValidate();

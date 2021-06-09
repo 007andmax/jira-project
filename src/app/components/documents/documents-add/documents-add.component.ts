@@ -16,6 +16,7 @@ export class DocumentsAddComponent implements OnInit {
   openAside: boolean = true;
   currentUser: any;
   showPreloader: boolean = false;
+  requiredCompanyType: boolean = false;
   documentValidate: DocumentValidate = new DocumentValidate();
   documentAdd: DocumentAdd = new DocumentAdd();
   sub: Subscription = new Subscription();

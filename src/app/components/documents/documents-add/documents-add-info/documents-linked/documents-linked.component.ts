@@ -115,6 +115,7 @@ export class DocumentsLinkedComponent implements OnInit {
   }
   removeItem(index) {
     this.selectedUserAndCompanies.splice(index, 1);
+    this.onSelectedItem.emit(this.selectedUserAndCompanies);
   }
   public trackByIndex(index, item) {
     return index;

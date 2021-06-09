@@ -80,6 +80,9 @@ export class DocumentsTemplatesComponent implements OnInit, OnDestroy {
 
     })
   }
+  public goToDocumentsList() {
+    this.leftPanelStateService.goToState('new-documents');
+  }
   onSearch(data) {
     this.filter.setSearch(data);
     this.list = this.filter.getFilterList(this.reqList);

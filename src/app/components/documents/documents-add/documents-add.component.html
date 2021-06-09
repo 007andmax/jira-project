@@ -10,11 +10,13 @@
     ></app-documents-add-body>
     <app-documents-add-footer
         *ngIf="!showPreloader"
+        [requiredCompanyType]="requiredCompanyType"
         [documentValidate]="documentValidate"
         [documentAdd]="documentAdd"
     ></app-documents-add-footer>
     <app-documents-add-info
         *ngIf="!showPreloader"
+        (onChangeRequiredCompanyType)="requiredCompanyType = $event"
         [documentValidate]="documentValidate"
         [documentAdd]="documentAdd"
         (onToggleAside)="openAside  =$event"
