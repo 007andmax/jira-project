@@ -37,9 +37,11 @@ export class DocumentsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.documentsStateService.onGetCategories.subscribe(data => {
       data.forEach(element => {
-        let findIndex = this.list.findIndex(item => item.id === element.id);
-        if (findIndex > -1) this.list[findIndex].categoryName = data.name;
+        let findIndex = this.list.findIndex(item => item.categoryId === element.id);
+        if (findIndex > -1) this.list[findIndex].categoryName = element.name;
+        if (findIndex > -1) console.log("this.list[findIndex]", this.list[findIndex]);
       });
+      this.cd.detectChanges();
     })
     let onChangeDocument = this.documentsStateService.onChangeDocument.subscribe(data => {
       console.log("data", data);
