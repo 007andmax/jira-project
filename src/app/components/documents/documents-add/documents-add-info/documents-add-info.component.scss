@@ -45,6 +45,10 @@
       font-size: 13px;
       border: 1px solid #c4cbd5;
       border-radius: 4px;
+
+      &::placeholder {
+        color: #9ca5b6;
+      }
     }
 
     textarea {
@@ -55,6 +59,10 @@
       padding: 15px;
       font-size: 13px;
       outline: none;
+
+      &::placeholder {
+        color: #9ca5b6;
+      }
     }
   }
 
