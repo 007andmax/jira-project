@@ -28,7 +28,10 @@ export class DocumentsTableComponent implements OnInit {
 
   ngOnInit() {
     if (this.usersStateService.getCurrentUser()) this.currentUser = this.usersStateService.getCurrentUser();
+  }
+  ngDoCheck() {
     this.showNotificationReview = new Date(this.item.reviewDate).getTime() < new Date().getTime() && !this.item.isCategory;
+
   }
   navigateToCategory() {
     if (!this.item.isCategory) return;

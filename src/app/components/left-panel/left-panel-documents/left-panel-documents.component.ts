@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
@@ -25,6 +25,7 @@ export class LeftPanelDocumentsComponent implements OnInit, OnDestroy {
   constructor(private documentsService: DocumentsService,
     private documentsStateService: DocumentsStateService,
     private permissionsService: PermissionsService,
+    public cd: ChangeDetectorRef,
     private leftPanelStateService: LeftPanelStateService,) { }
 
   ngOnInit() {
@@ -44,6 +45,7 @@ export class LeftPanelDocumentsComponent implements OnInit, OnDestroy {
     })
     this.documentsStateService.onGetCategories.subscribe((data: any) => {
       this.categories = data;
+      this.cd.detectChanges();
     })
   }
   onCheckNameCategory() {
