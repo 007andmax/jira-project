@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { forkJoin, Subscription } from 'rxjs';
 import { CategoryDocument } from 'src/app/components/left-panel/left-panel-documents/class/category-document';
@@ -27,6 +27,7 @@ export class DocumentsAddEditCategoriesComponent implements OnInit, OnDestroy {
   constructor(private documentsStateService: DocumentsStateService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
+    public cd: ChangeDetectorRef,
     private permissionsService: PermissionsService,
     private documentsService: DocumentsService,) { }
 
@@ -34,6 +35,7 @@ export class DocumentsAddEditCategoriesComponent implements OnInit, OnDestroy {
     this.categories = this.documentsStateService.getCategories();
     this.documentsStateService.onGetCategories.subscribe((data: any) => {
       this.categories = data;
+      this.cd.detectChanges();
       console.log("this.categories", this.categories);
     })
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
