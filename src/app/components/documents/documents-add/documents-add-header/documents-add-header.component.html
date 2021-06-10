@@ -1,98 +1,101 @@
 <div class="document-header">
-  <div class="qt-df qt-ai-c">
-    <!--<p>documents-add-header works!</p>-->
-    <button (click)="onToggleLeftPanel()"
-        class="btn-expand qt-mr-16"
-    >
-      <div class="icon__expand-redactor qt-za-16 qt-sz-16 qt-bg-contain"></div>
-    </button>
-  </div>
- <div class="qt-df qt-ai-c">
-   <div class="document-header__info">Only you</div>
-   <button class="qt-button qt-mr-16 qt-ml-16">
-     <span>Invite</span>
-   </button>
-   <div
-     class="invoce-table__menu"
-     ngbDropdown
-     [container]="'body'"
-   >
-     <div
-       class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"
-       id="dropdownBasic1"
-       ngbDropdownToggle
-     >
-       <ul
-         class="qt-dropdown-menu invoice-items-dropdown"
-         ngbDropdownMenu
-         aria-labelledby="dropdownBasic1"
-       >
-         <li
-           class="pointer"
-           ngbDropdownItem
-         >
-           <div class="icon__share-folder qt-za-16 qt-sz-16 qt-bg-contain qt-mr-8"></div>
-           Share...
-         </li>
-         <li
-           class="pointer"
-           ngbDropdownItem
-         >
-           <div class="icon__move qt-za-16 qt-sz-16 qt-bg-contain qt-mr-8"></div>
-           Move...
-         </li>
-         <li
-           class="pointer"
-           ngbDropdownItem
-         >
-           <div class="icon__copy-gray qt-za-16 qt-sz-16 qt-bg-contain qt-mr-8"></div>
-           Copy to...
-         </li>
-         <li
-           class="pointer"
-           ngbDropdownItem
-         >
-           <div class="icon__clone-document qt-za-16 qt-sz-16 qt-bg-contain qt-mr-8"></div>
-           Clone Document
-         </li>
-         <li
-           class="pointer"
-           ngbDropdownItem
-         >
-           <div class="icon__search-gray qt-za-16 qt-sz-16 qt-bg-contain qt-mr-8"></div>
-           Find within document
-         </li>
-         <li
-           class="pointer"
-           ngbDropdownItem
-         >
-           <div class="icon__link-gray qt-za-16 qt-sz-16 qt-bg-contain qt-mr-8"></div>
-           Copy Internal Link
-         </li>
-         <li
-           class="pointer"
-           ngbDropdownItem
-         >
-           <div class="icon__print qt-za-16 qt-sz-16 qt-bg-contain qt-mr-8"></div>
-           Print
-         </li>
-         <li
-           class="pointer"
-           ngbDropdownItem
-         >
-           <div class="icon__download-pdf qt-za-16 qt-sz-16 qt-bg-contain qt-mr-8"></div>
-           Export PDF
-         </li>
-         <hr>
-         <li
-           class="pointer"
-           ngbDropdownItem
-         >
-           <div class="icon__remove qt-za-16 qt-sz-16 qt-bg-contain qt-mr-8"></div>
-           Move to Trash
-         </li>
-       </ul>
-     </div>
-   </div>
- </div>
+    <div class="qt-df qt-ai-c">
+        <!-- <p>documents-add-header works!</p> -->
+        <button
+            (click)="onToggleLeftPanel()"
+            class="btn-expand qt-mr-16"
+        >
+            <div class="icon__expand-redactor qt-za-16 qt-sz-16 qt-bg-contain"></div>
+        </button>
+    </div>
+    <div class="qt-df qt-ai-c">
+        <div class="document-header__info">Only you</div>
+        <button class="qt-button qt-mr-16 qt-ml-16">
+            <span>Invite</span>
+        </button>
+        <div
+            class="invoce-table__menu"
+            ngbDropdown
+            [container]="'body'"
+        >
+            <div
+                class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"
+                id="dropdownBasic1"
+                ngbDropdownToggle
+            >
+                <ul
+                    class="qt-dropdown-menu invoice-items-dropdown"
+                    ngbDropdownMenu
+                    aria-labelledby="dropdownBasic1"
+                >
+                    <li
+                        class="pointer"
+                        ngbDropdownItem
+                    >
+                        <div class="icon__share-folder qt-za-16 qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                        Share...
+                    </li>
+                    <li
+                        class="pointer"
+                        ngbDropdownItem
+                    >
+                        <div class="icon__move qt-za-16 qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                        Move...
+                    </li>
+                    <li
+                        class="pointer"
+                        ngbDropdownItem
+                    >
+                        <div class="icon__copy-gray qt-za-16 qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                        Copy to...
+                    </li>
+                    <li
+                        class="pointer"
+                        ngbDropdownItem
+                    >
+                        <div class="icon__clone-document qt-za-16 qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                        Clone Document
+                    </li>
+                    <li
+                        class="pointer"
+                        ngbDropdownItem
+                        (click)="toggleFind = true"
+                    >
+                        <div class="icon__search-gray qt-za-16 qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                        Find within document
+                    </li>
+                    <li
+                        class="pointer"
+                        ngbDropdownItem
+                    >
+                        <div class="icon__link-gray qt-za-16 qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                        Copy Internal Link
+                    </li>
+                    <li
+                        class="pointer"
+                        ngbDropdownItem
+                    >
+                        <div class="icon__print qt-za-16 qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                        Print
+                    </li>
+                    <li
+                        class="pointer"
+                        ngbDropdownItem
+                    >
+                        <div class="icon__download-pdf qt-za-16 qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                        Export PDF
+                    </li>
+                    <hr>
+                    <li
+                        class="pointer"
+                        ngbDropdownItem
+                    >
+                        <div class="icon__remove qt-za-16 qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                        Move to Trash
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <find-within-document *ngIf="toggleFind"></find-within-document>
+    </div>
 </div>

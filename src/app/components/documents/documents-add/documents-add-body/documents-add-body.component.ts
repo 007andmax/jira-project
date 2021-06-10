@@ -1,8 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { environment } from 'src/environments/environment';
-declare const Codox: any;
 
+
+declare const Codox: any;
+declare const CodeMirror: any;
 @Component({
   selector: 'app-documents-add-body',
   templateUrl: './documents-add-body.component.html',
@@ -23,6 +25,8 @@ export class DocumentsAddBodyComponent implements OnInit {
   ngOnInit() {
     this.currentUser = this.usersStateService.getCurrentUser();
     this.onInitFloara();
+    console.log('document.getElementById("froala-editor")', document.getElementById("froala-editor"));
+    var editor = CodeMirror(document.getElementById("froala-editor"));
   }
   ngDoCheck() {
     this.onChangeContent.emit(this.editorContent);
@@ -56,7 +60,15 @@ export class DocumentsAddBodyComponent implements OnInit {
       // Allow to upload PNG and JPG.
       imageAllowedTypes: ['jpeg', 'jpg', 'png'],
 
-
+      codeMirror: true,
+      codeMirrorOptions: {
+        indentWithTabs: true,
+        lineNumbers: true,
+        lineWrapping: true,
+        mode: 'text/html',
+        tabMode: 'indent',
+        tabSize: 4
+      },
       events: {
         "initialized": function () {
           let config = {
@@ -73,6 +85,7 @@ export class DocumentsAddBodyComponent implements OnInit {
           };
           //start!
           self.codox.init(config);
+
         },
         'save.before': function (e, editor) {
           // Before save request is made.

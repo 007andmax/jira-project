@@ -8,6 +8,7 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 })
 export class DocumentsAddHeaderComponent implements OnInit {
   hideleLeftPanel: boolean = false;
+  toggleFind: boolean = false;
   constructor(private leftPanelStateService: LeftPanelStateService,) { }
 
   ngOnInit() {

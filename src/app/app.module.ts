@@ -415,6 +415,8 @@ import 'froala-editor/js/plugins.pkgd.min.js';
 // Import a single Froala Editor plugin.
 import 'froala-editor/js/plugins/align.min.js';
 
+import 'froala-editor/js/plugins/code_view.min.js';
+
 // Import a Froala Editor language file.
 import 'froala-editor/js/languages/de.js';
 
@@ -447,6 +449,8 @@ import { DocumentsTemplatesFilterComponent } from './components/documents/docume
 import { DocumentsTemplatesInfoComponent } from './components/documents/documents-templates/documents-templates-info/documents-templates-info.component';
 import { DocumentsTemplatesItemComponent } from './components/documents/documents-templates/documents-templates-item/documents-templates-item.component';
 import { DocumentsEditHistoryComponent } from './components/documents/documents-edit/documents-edit-history/documents-edit-history.component';
+import { FindWithinDocumentComponent } from './components/documents/documents-edit/find-within-document/find-within-document.component';
+import { DocumentPreviewComponent } from './components/documents/document-preview/document-preview.component';
 
 declare var $: any;
 /**
@@ -846,7 +850,9 @@ declare var $: any;
     DocumentsTemplatesFilterComponent,
     DocumentsTemplatesInfoComponent,
     DocumentsTemplatesItemComponent,
-    DocumentsEditHistoryComponent
+    DocumentsEditHistoryComponent,
+    FindWithinDocumentComponent,
+    DocumentPreviewComponent
   ],
   imports: [
     BrowserModule,

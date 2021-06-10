@@ -1,0 +1,30 @@
+<div
+    class="qt-aside-modern__header"
+    *ngIf="!showPreloader"
+>
+
+    <!-- <button class="qt-button --gray qt-mr-8">Share</button> -->
+    <button class="qt-button --gray qt-mr-8">Edit</button>
+    <!-- <button class="qt-button --gray qt-mr-8">Print</button>
+    <button class="qt-button qt-mr-12 qt-mr-8">Export PDF</button> -->
+
+    <div
+        class="qt-aside-modern__header-close icon__close"
+        (click)="goToDocumentsList()"
+    >
+    </div>
+</div>
+<div
+    class="qt-aside-modern__content --no-padding"
+    [hidden]="showPreloader"
+>
+    <!-- Tab Header -->
+    <!-- End Tab Header -->
+    <!-- Tab Body -->
+    <div class="documents-create-panel__body qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24"></div>
+    <!-- End Tab Body -->
+</div>
+<div
+    class="loading"
+    *ngIf="showPreloader"
+></div>

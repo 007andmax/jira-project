@@ -67,6 +67,13 @@ export class DocumentsTableComponent implements OnInit {
     this.router.navigate(
       ['/ng2/documents/edit/', this.item.id]);
   }
+  previewDocument() {
+    /* this.router.navigate(
+       ['/ng2/documents/edit/', this.item.id]);*/
+    const url = `/#/ng2/documents/preview/${this.item.id}`;
+    console.log("url", url);
+    window.open(url, '_blank');
+  }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
   }

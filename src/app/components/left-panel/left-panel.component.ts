@@ -100,6 +100,7 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`ng2/documents/category`)) this.state = 'new-category-documents';
           if (window.location.href.includes(`ng2/documents/edit`)) this.state = 'new-edit-documents';
           if (window.location.href.includes(`ng2/documents/templates`)) this.state = 'new-template-documents';
+          if (window.location.href.includes(`ng2/documents/preview`)) this.state = 'new-preview-documents';
 
 
           if (window.location.href.includes(`ng2/report/byProducts`)) this.state = 'byProducts';

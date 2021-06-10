@@ -57,6 +57,7 @@ import { DocumentsAddComponent } from './components/documents/documents-add/docu
 import { DocumentsCategoryComponent } from './components/documents/documents-category/documents-category.component';
 import { DocumentsTemplatesComponent } from './components/documents/documents-templates/documents-templates.component';
 import { DocumentsEditComponent } from './components/documents/documents-edit/documents-edit.component';
+import { DocumentPreviewComponent } from './components/documents/document-preview/document-preview.component';
 
 const routes: Routes = [
   {
@@ -204,6 +205,11 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'ng2/documents/preview/:id',
+    component: DocumentPreviewComponent,
+    pathMatch: 'full'
+  },
+  {
     path: 'ng2/company/products',
     component: CompanyProductsComponent,
     pathMatch: 'full'
@@ -314,6 +320,7 @@ const routes: Routes = [
     component: DocumentsTemplatesComponent,
 
   },
+
 ];
 
 /**
