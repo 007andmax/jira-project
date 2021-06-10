@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { DocumentsFilterComponent } from './documents-filter/documents-filter.component';
 
 
 @Component({
@@ -13,6 +14,7 @@ export class DocumentsHeaderComponent implements OnInit {
   toggleFilter: boolean = true;
   countFilter: number = 0;
   activePage: string = "";
+  @ViewChild('filter') filter: DocumentsFilterComponent;
   @Output() onChangeFilterField = new EventEmitter<any>();
   @Output() onSelectAll = new EventEmitter<any>();
   @Output() onSearch = new EventEmitter<any>();
@@ -55,6 +57,10 @@ export class DocumentsHeaderComponent implements OnInit {
   }
   public onFilter(field) {
     this.onChangeFilterField.emit(field);
+  }
+  clearAll() {
+
+    this.filter.onClearAll();
   }
   search(event) {
     this.onSearch.emit(event.target.value);
