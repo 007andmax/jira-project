@@ -56,7 +56,8 @@ export class DocumentsTemplatesComponent implements OnInit, OnDestroy {
     let onChangeDocument = this.documentsStateService.onChangeDocument.subscribe(data => {
       console.log("data", data);
       console.log("this.filter", this.filter);
-      if (data.action === "DOCUMENT_SAVED" && this.tab !== 'TEMPLATE_GALLERY' && this.filter.isMatchIheFilter(data.data)) this.list.push(new Document(data.data));
+      console.log("this.filter.isMatchIheFilter(data.data)", this.filter.isMatchIheFilter(data.data));
+      if (data.action === "DOCUMENT_SAVED" && this.tab === 'MY_TEMPLATES' && this.filter.isMatchIheFilter(data.data)) this.list.push(new Document(data.data));
       if (data.action === "DOCUMENT_EDITED") {
         let findIndex = this.list.findIndex(item => item.id === data.data.id);
         this.list[findIndex] = new Document(data.data);
