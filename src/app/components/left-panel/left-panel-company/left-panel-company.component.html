@@ -74,4 +74,10 @@
     >
         Service Agreements
     </li>
+    <li
+        [ngClass]="{'--active':activePage === 'company-documents'}"
+        (click)="goToState('company-documents')"
+    >
+        Documents
+    </li>
 </ul>

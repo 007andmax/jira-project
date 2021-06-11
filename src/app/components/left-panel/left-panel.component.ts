@@ -103,6 +103,9 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`ng2/documents/preview`)) this.state = 'new-preview-documents';
 
 
+
+
+
           if (window.location.href.includes(`ng2/report/byProducts`)) this.state = 'byProducts';
           if (window.location.href.includes(`ng2/report/byCustomers`)) this.state = 'byCustomers';
           if (window.location.href.includes(`ng2/report/byTaxes`)) this.state = 'byTaxes';
@@ -208,6 +211,7 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'new-documents') this.goToLink('/ng2/documents');
       if (this.state === 'new-add-documents') this.goToLink('/ng2/documents/add');
       if (this.state === 'new-template-documents') this.goToLink('/ng2/documents/templates');
+      if (this.state === 'company-documents') this.goToLink(`/ng2/company/${localStorage.getItem('company_id')}/documents`);
 
 
       if (this.state === 'byProducts' ||

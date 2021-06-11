@@ -62,6 +62,9 @@ export class DocumentsFilterTagsComponent implements OnInit, OnDestroy {
   isSeleted(item) {
     return this.selected.find(element => element.id === item.id);
   }
+  public clearWithOutChanges() {
+    this.selected = [];
+  }
   public toggleItem(newItem) {
     let findIndex = this.selected.findIndex(item => item.id === newItem.id);
     if (findIndex > -1) {

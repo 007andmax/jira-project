@@ -1,10 +1,13 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import FroalaEditor from 'froala-editor';
 import { Subscription } from 'rxjs';
 import { REMOVE_CATEGORY_DOCUMENT, REMOVE_DOCUMENT } from 'src/app/const/confirm';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
+import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { ConfirmComponent } from '../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../shared/confirm/services/confirm-state.service';
@@ -25,10 +28,13 @@ export class DocumentsComponent implements OnInit, OnDestroy {
   filter: DocumentFilter = new DocumentFilter();
   sub: Subscription = new Subscription();
   constructor(private usersStateService: UsersStateService,
-    private documentsStateService: DocumentsStateService,
-    private confirmStateService: ConfirmStateService,
+    public documentsStateService: DocumentsStateService,
+    public confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     public cd: ChangeDetectorRef,
+    public activateRoute: ActivatedRoute,
+    public leftPanelStateService: LeftPanelStateService,
+    public companiesStateService: CompaniesStateService,
     private documentsService: DocumentsService) {
 
   }
