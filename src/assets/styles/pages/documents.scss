@@ -229,4 +229,17 @@
       border: 1px solid #ddd;
     }
   }
+
+  .documents-filter-tags {
+    .icn-remove-old {
+      transform: translateY(0px);
+    }
+  }
+}
+
+.documents-create-aside-categories {
+  .tooltip {
+    left: 100% !important;
+    width: 100%;
+  }
 }
