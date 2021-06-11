@@ -130,3 +130,11 @@
     width: 794px;
     margin: 0px auto;
 }
+/deep/document-preview {
+    table {
+        td {
+            min-width: 5px;
+            border: 1px solid #ddd;
+        }
+    }
+}

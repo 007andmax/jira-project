@@ -54,7 +54,8 @@ export class DocumentsFilterTagsComponent implements OnInit, OnDestroy {
     $event.preventDefault();
     $event.stopPropagation();
   }
-  removeItem(index) {
+  removeItem(index, e) {
+    this.stopEvent(e);
     this.selected.splice(index, 1);
     this.onSelectedItems.emit(this.selected.map(item => item.id));
   }

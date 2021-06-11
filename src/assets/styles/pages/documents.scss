@@ -163,9 +163,8 @@
     padding-top: 10px;
     border-left: 1px solid #dfe3e8;
     width: 48px;
-    box-shadow: 0 2px 8px 0 rgba(0,0,0,.5);
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.5);
   }
-
 }
 
 .documents-details {
@@ -195,7 +194,6 @@
   }
 
   .document-header__dropdown {
-
     input {
       border: none;
     }
@@ -222,7 +220,8 @@
   }
 }
 
-.documents-create {
+.documents-create,
+.documents-preview {
   table {
     td {
       min-width: 5px;

@@ -24,7 +24,7 @@
                     class="icon__devices-grey qt-sz-16 qt-bg-contain"
                     *ngIf="item.type === 'COMPANY'"
                 ></i>
-                {{item.name}}
+                <span>{{item.name}}</span>
                 <i
                     class="icn-sm icn-remove-old"
                     (click)="removeItem(i)"
@@ -32,6 +32,7 @@
             </div>
         </ng-template>
     </div>
+
 
 
 

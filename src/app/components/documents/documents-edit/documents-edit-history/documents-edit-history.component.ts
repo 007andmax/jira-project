@@ -25,15 +25,15 @@ export class DocumentsEditHistoryComponent implements OnInit {
     return this.usersStateService.getAllUsers().find(item => item.id === userId);
   }
   getUserAvatarUrl(user) {
-    if (!(user && user.avatar)) return '';
+    if (!(user && user.avatar)) return '#7c77bc';
 
     if (user.id) {
-      return `url(${'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt :
+      return `#7c77bc url(${'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt :
         '')}) 0% 0% / cover no-repeat`
     } else if (user.avatar && user.avatar.origin && user.avatar.origin.id) {
-      return `url(/file/${(user.avatar.origin.id)}.jpg) 0% 0% / cover no-repeat`;
+      return `#7c77bc url(/file/${(user.avatar.origin.id)}.jpg) 0% 0% / cover no-repeat`;
     } else {
-      return 'url(/users/default/image.jpg) 0% 0% / cover no-repeat';
+      return '#7c77bc url(/users/default/image.jpg) 0% 0% / cover no-repeat';
     }
   };
   getNameForAvatar(user) {

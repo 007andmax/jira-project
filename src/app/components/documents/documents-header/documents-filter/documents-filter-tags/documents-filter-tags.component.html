@@ -1,12 +1,13 @@
 <div
     class="col-md-12 --required documents-filter-tags-body"
-    (clickOutside)="hideSelectWrapper()"
+    ngbDropdown
 >
     <div
         class="device-user pointer"
         [ngClass]="{
                 'has-placeholder': !selected.length}"
-        (click)="showSelectWrapper($event)"
+        id="dropdownSave"
+        ngbDropdownToggle
     >
         <ng-template
             ngFor
@@ -16,17 +17,18 @@
             [ngForTrackBy]="trackByIndex"
         >
             <div class="selected-user">
-                {{item.word}}
+                <span>{{item.word}}</span>
                 <i
                     class="icn-sm icn-remove-old"
-                    (click)="removeItem(i)"
+                    (click)="removeItem(i,$event)"
                 ></i>
             </div>
         </ng-template>
     </div>
     <div
         class="select-wrapper"
-        *ngIf="showSelect"
+        ngbDropdownMenu
+        aria-labelledby="dropdownSave"
     >
         <div
             class="content"

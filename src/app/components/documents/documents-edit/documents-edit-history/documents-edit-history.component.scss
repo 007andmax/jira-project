@@ -92,9 +92,6 @@
         margin-bottom: 6px;
     }
 
-    .checkbox-wrapper .with-checkbox label {
-        margin-right: 4px;
-    }
     &__document-history-item {
         display: flex;
         padding: 9px 24px;
@@ -167,6 +164,7 @@
         justify-content: center;
         font-family: Graphik-Medium, sans-serif;
         flex-shrink: 0;
+        color: white;
     }
     &__document-history-name {
         font-size: 13px;
