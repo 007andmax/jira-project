@@ -188,6 +188,7 @@
                     <p class="label-name">Document Review Date</p>
                     <app-date-picker
                         [editMode]="true"
+                        [placement]="'top'"
                         [editDate]="documentEdit.parseReviewDate()"
                         [useMinDate]="false"
                         (onChange)="onChangeReviewDate($event)"

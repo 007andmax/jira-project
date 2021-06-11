@@ -26,7 +26,7 @@ export class DocumentsAddBodyComponent implements OnInit {
     this.currentUser = this.usersStateService.getCurrentUser();
     this.onInitFloara();
     console.log('document.getElementById("froala-editor")', document.getElementById("froala-editor"));
-    var editor = CodeMirror(document.getElementById("froala-editor"));
+    //  var editor = CodeMirror(document.getElementById("froala-editor"));
   }
   ngDoCheck() {
     this.onChangeContent.emit(this.editorContent);

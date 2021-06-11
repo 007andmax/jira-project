@@ -4,7 +4,13 @@
 >
 
     <!-- <button class="qt-button --gray qt-mr-8">Share</button> -->
-    <button class="qt-button --gray qt-mr-8">Edit</button>
+    <button
+        class="qt-button --gray qt-mr-8"
+        (click)="editDocument()"
+        *ngIf="getPermissions('EDIT_DOCUMENT')"
+    >
+        Edit
+    </button>
     <!-- <button class="qt-button --gray qt-mr-8">Print</button>
     <button class="qt-button qt-mr-12 qt-mr-8">Export PDF</button> -->
 
@@ -21,7 +27,16 @@
     <!-- Tab Header -->
     <!-- End Tab Header -->
     <!-- Tab Body -->
-    <div class="documents-create-panel__body qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24"></div>
+    <div class="documents-create-panel__body qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
+        <div
+            class="documents-create-panel__header"
+            *ngIf="!showPreloader"
+        >
+            <p [textContent]="getLastEdit()"></p>
+            <h3 [textContent]="document.title"></h3>
+        </div>
+        <div class="documents-create-panel__content"></div>
+    </div>
     <!-- End Tab Body -->
 </div>
 <div
