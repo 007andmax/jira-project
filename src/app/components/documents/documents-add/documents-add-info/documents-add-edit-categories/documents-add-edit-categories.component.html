@@ -2,14 +2,13 @@
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-title qt-mr-auto">Edit Categories</div>
         <div
-            class="icon__remove  qt-sz-16 qt-bg-contain pointer"
-            [ngClass]="{'disable':selectedCategories.length === 0}"
-            *ngIf="getPermissions('DELETE_CATEGORY')"
-            (click)="onRemoveAllCategories()"
-        ></div>
+          class="qt-aside-modern__header-close icon__close"
+          (click)="close()"
+        >
+        </div>
     </div>
     <div class="qt-aside-modern__content --no-padding">
-        <div class="qt-pb-24 qt-pl-24 qt-pr-24 ">
+        <div class="qt-pt-12 qt-pb-24 qt-pl-24 qt-pr-24 ">
             <ng-template
                 ngFor
                 let-item
@@ -92,13 +91,24 @@
                     </div>
                 </div>
             </div>
-            <button
+            <div class="qt-df qt-ai-c qt-jc-sb">
+              <button
                 class="btn-new btn-primary-white"
                 (click)="toggleCategory()"
                 *ngIf="getPermissions('CREATE_CATEGORY')"
-            >
+              >
                 + Add New
-            </button>
+              </button>
+              <div
+                class="qt-df qt-ai-c pointer"
+                [ngClass]="{'disable':selectedCategories.length === 0}"
+                *ngIf="getPermissions('DELETE_CATEGORY')"
+                (click)="onRemoveAllCategories()"
+              >
+                Delete all
+                <div class="icon__remove  qt-sz-16 qt-bg-contain qt-ml-6"></div>
+              </div>
+            </div>
         </div>
     </div>
     <div class="qt-aside-modern__footer">
