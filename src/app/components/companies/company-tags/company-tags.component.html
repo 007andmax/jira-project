@@ -1,5 +1,5 @@
 <div
-    class="col-md-12 light-dropdown"
+    class="col-md-12"
     [placement]="placement"
     ngbDropdown
     #products="ngbDropdown"
@@ -49,29 +49,39 @@
             [ngForOf]="tags"
             [ngForTrackBy]="trackById"
         >
-            <div
-                class="company-tag-item dropdown-item"
-                ngbDropdownItem
-                (click)="selected(tag)"
+          <label
+            class="qt-checkbox pointer"
+            ngbDropdownItem
+            (click)="selected(tag)"
+          >
+            <input
+              type="checkbox"
+              readonly
             >
-                <span [textContent]="tag.word"></span>
-                <span
-                    *ngIf="tag.defaultTag === 'USER_TAG'"
-                    [textContent]="getCompanyName(tag)"
-                ></span>
-                <i
-                    *ngIf="tag.defaultTag === 'USER_TAG'"
-                    class="icon__user-grey qt-sz-16 qt-bg-contain qt-ml-8"
-                ></i>
-                <i
-                    *ngIf="tag.defaultTag === 'COMMON'"
-                    class="icn-tags qt-sz-16 qt-bg-contain qt-ml-8"
-                ></i>
-                <i
-                    *ngIf="tag.defaultTag === 'COMPANY_TAG'"
-                    class="icon__office-account qt-za-16 qt-sz-16 qt-bg-contain qt-ml-8"
-                ></i>
+            <span></span>
+            <div
+              class="text-content">
+              <div class="name">
+                {{tag.word}}
+              </div>
+                <div class="description"
+                  *ngIf="tag.defaultTag === 'USER_TAG'"
+                  [textContent]="getCompanyName(tag)"
+                ></div>
             </div>
+            <i
+              *ngIf="tag.defaultTag === 'USER_TAG'"
+              class="icon__user-light-gray qt-sz-16 qt-bg-contain qt-ml-8"
+            ></i>
+            <i
+              *ngIf="tag.defaultTag === 'COMMON'"
+              class="icon__tag-light-gray qt-sz-16 qt-bg-contain qt-ml-8"
+            ></i>
+            <i
+              *ngIf="tag.defaultTag === 'COMPANY_TAG'"
+              class="icon__office-account qt-za-16 qt-sz-16 qt-bg-contain qt-ml-8"
+            ></i>
+          </label>
         </ng-template>
     </div>
 </div>

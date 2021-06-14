@@ -499,6 +499,57 @@ textarea {
 }
 /* End Textarea */
 
+.new-companies-content__modal {
+  .qt-checkbox {
+    width: 100%;
+    min-height: 30px;
+    max-height: 50px;
+    height: auto;
+    align-items: flex-start;
+    font-size: 13px;
+    display: flex;
+
+    span {
+      margin-right: 8px;
+    }
+  }
+
+  i {
+    display: block;
+    flex-shrink: 0;
+  }
+
+  .text-content {
+    flex: 1;
+    padding: 3px 0 16px;
+  }
+
+  .name,
+  .description {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: calc(298px - 23px);
+    width: 100%;
+  }
+
+  .name {
+    font-family: Graphik-Medium, sans-serif;
+    color: #454f5b;
+  }
+
+  .description {
+    margin-top: 6px;
+    color: #637382;
+    font-size: 12px;
+  }
+
+  .mat-chip-list-wrapper .mat-standard-chip,
+  .mat-chip-list-wrapper input.mat-input-element {
+    margin: 2px;
+  }
+}
+
 .new-companies-content__modal--content .password-actions, .new-users-content__modal--content .password-actions, .recurring-tickets-content__modal--content .password-actions, .password-content__modal--content .password-actions {
   display: -webkit-box;
   display: flex;

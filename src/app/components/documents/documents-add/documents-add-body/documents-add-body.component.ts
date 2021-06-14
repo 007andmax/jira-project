@@ -34,7 +34,7 @@ export class DocumentsAddBodyComponent implements OnInit {
   onInitFloara() {
     const self = this;
     this.options = {
-      height: 600,
+      height: 1123,
       saveParam: 'file',
       // Set the save URL.
       //  saveURL: self.apiUrl + 'file?isAvatar=false',
