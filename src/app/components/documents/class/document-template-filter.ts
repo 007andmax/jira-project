@@ -27,7 +27,7 @@ export class DocumentTemplateFilter {
         this.categoryId = data;
     }
     public setSearch(data) {
-        this.searchText = data;
+        this.searchText = data.toLocaleLowerCase();
     }
     public getFilterList(reqList) {
         return reqList.filter(item => {

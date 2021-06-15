@@ -65,14 +65,16 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`ng2/quotes`)) this.state = 'quotes-component';
           if (window.location.href.includes(`ng2/payments`)) this.state = 'new-payments-ng2';
           if (window.location.href.includes(`ng2/contracts`)) this.state = 'new-contracts';
-          if (window.location.href.includes(`ng2/company/dashboard`)) this.state = 'company-dashboard';
-          if (window.location.href.includes(`ng2/company/tickets`)) this.state = 'company-tickets';
-          if (window.location.href.includes(`ng2/company/user`)) this.state = 'company-user';
-          if (window.location.href.includes(`ng2/company/devices`)) this.state = 'company-devices';
-          if (window.location.href.includes(`ng2/company/network-scan`)) this.state = 'company-network-scan';
-          if (window.location.href.includes(`ng2/company/password-manager`)) this.state = 'company-password-manager';
-          if (window.location.href.includes(`ng2/company/products`)) this.state = 'company-products';
-          if (window.location.href.includes(`ng2/company/contracts`)) this.state = 'company-contracts';
+          if (window.location.href.includes(`ng2/company/`) && window.location.href.includes(`dashboard`)) this.state = 'company-dashboard';
+          if (window.location.href.includes(`ng2/company/`) && window.location.href.includes(`tickets`)) this.state = 'company-tickets';
+          if (window.location.href.includes(`ng2/company/`) && window.location.href.includes(`user`)) this.state = 'company-user';
+          if (window.location.href.includes(`ng2/company/`) && window.location.href.includes(`devices`)) this.state = 'company-devices';
+          if (window.location.href.includes(`ng2/company/`) && window.location.href.includes(`network-scan`)) this.state = 'company-network-scan';
+          if (window.location.href.includes(`ng2/company/`) && window.location.href.includes(`password-manager`)) this.state = 'company-password-manager';
+          if (window.location.href.includes(`ng2/company/`) && window.location.href.includes(`products`)) this.state = 'company-products';
+          if (window.location.href.includes(`ng2/company/`) && window.location.href.includes(`contracts`)) this.state = 'company-contracts';
+          if (window.location.href.includes(`ng2/company/`) && window.location.href.includes(`documents`)) this.state = 'company-documents';
+
           if (window.location.href.includes(`ng2/inventory/products`)) this.state = 'inventory';
           if (window.location.href.includes(`ng2/password-manager`)) this.state = 'password-manager';
           if (window.location.href.includes(`ng2/setting/myprofile`)) this.state = 'myprofile-component';

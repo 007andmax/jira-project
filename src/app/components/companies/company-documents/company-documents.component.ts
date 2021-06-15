@@ -24,7 +24,6 @@ export class CompanyDocumentsComponent extends DocumentsComponent {
 
       let company = this.companiesStateService.getCompanies().find(item => item.id === this.companyId);
       this.header.filter.companyDp.isDisabled = true;
-      this.header.filter.companyDp.isBlockClear = true;
       this.header.filter.companyDp.editItem = company;
       this.header.filter.documentsFilter.setCompanyId(this.companyId);
       this.header.filter.onChangeCounterFilter();

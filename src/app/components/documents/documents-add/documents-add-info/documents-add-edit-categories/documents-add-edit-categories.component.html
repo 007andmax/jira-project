@@ -2,8 +2,8 @@
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-title qt-mr-auto">Edit Categories</div>
         <div
-          class="qt-aside-modern__header-close icon__close"
-          (click)="close()"
+            class="qt-aside-modern__header-close icon__close"
+            (click)="close()"
         >
         </div>
     </div>
@@ -87,27 +87,28 @@
                             (input)="onCheckNameCategory()"
                             [ngClass]="{'--input-error':!addCategory.getValidate()}"
                             (blur)="onAddCategory()"
+                            (keyup)="onAddCategoryByEnter($event)"
                         >
                     </div>
                 </div>
             </div>
             <div class="qt-df qt-ai-c qt-jc-sb">
-              <button
-                class="btn-new btn-primary-white"
-                (click)="toggleCategory()"
-                *ngIf="getPermissions('CREATE_CATEGORY')"
-              >
-                + Add New
-              </button>
-              <div
-                class="qt-df qt-ai-c pointer"
-                [ngClass]="{'disable':selectedCategories.length === 0}"
-                *ngIf="getPermissions('DELETE_CATEGORY')"
-                (click)="onRemoveAllCategories()"
-              >
-                Delete all
-                <div class="icon__remove  qt-sz-16 qt-bg-contain qt-ml-6"></div>
-              </div>
+                <button
+                    class="btn-new btn-primary-white"
+                    (click)="toggleCategory()"
+                    *ngIf="getPermissions('CREATE_CATEGORY')"
+                >
+                    + Add New
+                </button>
+                <div
+                    class="qt-df qt-ai-c pointer"
+                    [ngClass]="{'disable':selectedCategories.length === 0}"
+                    *ngIf="getPermissions('DELETE_CATEGORY')"
+                    (click)="onRemoveAllCategories()"
+                >
+                    Delete all
+                    <div class="icon__remove  qt-sz-16 qt-bg-contain qt-ml-6"></div>
+                </div>
             </div>
         </div>
     </div>

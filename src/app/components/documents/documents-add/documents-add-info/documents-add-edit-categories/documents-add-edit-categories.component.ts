@@ -79,7 +79,9 @@ export class DocumentsAddEditCategoriesComponent implements OnInit, OnDestroy {
         }
       );
   }
-
+  onAddCategoryByEnter(event) {
+    if (event.keyCode === 13) this.onAddCategory();
+  }
   onRemoveAllCategories() {
     if (this.selectedCategories.length === 0) return;
     this.confirmStateService.setConfirmAction(REMOVE_ALL_CATEGORIES);

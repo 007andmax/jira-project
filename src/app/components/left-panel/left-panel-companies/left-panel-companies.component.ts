@@ -108,7 +108,8 @@ export class LeftPanelCompaniesComponent implements OnInit {
 
   }
   public isCompanyPage(state) {
-    return (state == 'new-companies' || state == 'company-dashboard' || state == 'company-tickets' || state == 'company-user' || state == 'company-devices' || state == 'company-network-scan' || state == 'company-password-manager' || state == 'company-products' || state == 'company-contracts')
+    return (state == 'new-companies' || state == 'company-dashboard' || state == 'company-tickets' || state == 'company-user' || state == 'company-devices' || state == 'company-network-scan' || state == 'company-password-manager' || state == 'company-products' || state == 'company-contracts'
+      || state == 'company-documents')
   }
   public selectTechLead(name) {
 
