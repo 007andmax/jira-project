@@ -13,9 +13,19 @@ import { REMOVE_RECORD } from '../../const/confirm';
 })
 export class CompanyPasswordManagerComponent extends PasswordManagerComponent {
 
+  companyId: string;
   ngOnInit() {
     window.scrollTo(0, 0);
-    this.getRecords();
+    this.leftPanelStateService.changeStateWithoutNavigate('company-password-manager');
+    this.companyId = this.activateRoute.snapshot.params['id'];
+    let subscription = this.activateRoute.params.subscribe(params => {
+      this.showPreloader = true;
+      this.companyId = params['id'];
+      console.log("id", this.companyId);
+      this.getRecords();
+    });
+    this.sub.add(subscription);
+
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REMOVE_RECORD) this.onRemoveRecord(this.passwordManagerStateService.getRecordForRemove().id);
@@ -49,9 +59,10 @@ export class CompanyPasswordManagerComponent extends PasswordManagerComponent {
     this.sub.add(onChangeRealTime);
     if (this.passwordManagerStateService.getCategories().length === 0) this.passwordManagerStateService.onInit();
   }
+
   public getRecords() {
-    this.passwordManagerService.getCompanyRecords(localStorage.getItem('company_id')).subscribe((res: any) => {
-      this.filter.setCompany(this.companiesStateService.getCompanies().find(item => item.id == localStorage.getItem('company_id')));
+    this.passwordManagerService.getCompanyRecords(this.companyId).subscribe((res: any) => {
+      this.filter.setCompany(this.companiesStateService.getCompanies().find(item => item.id == this.companyId));
       this.recordsData = res.map(item => new PasswordRecord(item));
       this.recordsData.sort((a, b) => (a.companyName.toLowerCase() > b.companyName.toLowerCase()) ?
         1 : ((b.companyName.toLowerCase() > a.companyName.toLowerCase()) ? -1 : 0));

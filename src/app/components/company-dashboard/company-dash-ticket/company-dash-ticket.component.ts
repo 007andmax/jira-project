@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-company-dash-ticket',
@@ -17,12 +18,21 @@ export class CompanyDashTicketComponent implements OnInit {
   lineChartColors: string[] = ["#0747a6", "#00ccff", '#2bc7c6', '#7C77CB'];
 
   public constructor(private companiesService: CompaniesService,
+    public activateRoute: ActivatedRoute,
     public cd: ChangeDetectorRef
   ) { }
 
   public ngOnInit() {
-    this._id = /[^/]*$/.exec(window.location.href)[0];
-    this.getTicketGraph(this.ticketFrequency);
+    this._id = this.activateRoute.snapshot.params['id'];
+    let subscription = this.activateRoute.params.subscribe(params => {
+
+      this._id = params['id'];
+      console.log("id", this._id);
+      this.getTicketGraph(this.ticketFrequency);
+    });
+    this.sub.add(subscription);
+    //  this._id = /[^/]*$/.exec(window.location.href)[0];
+
     this.lineChartOptions = {
       chart: {
         type: 'lineChart',

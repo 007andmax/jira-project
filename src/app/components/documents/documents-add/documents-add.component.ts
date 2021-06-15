@@ -13,6 +13,7 @@ import { DocumentValidate } from './class/document-validate';
   styleUrls: ['./documents-add.component.scss']
 })
 export class DocumentsAddComponent implements OnInit {
+  companyId: string;
   openAside: boolean = true;
   currentUser: any;
   showPreloader: boolean = false;
@@ -31,6 +32,7 @@ export class DocumentsAddComponent implements OnInit {
   ngOnInit() {
     let queryParams = this.activateRoute.queryParams.subscribe(
       (queryParam: any) => {
+        if (queryParam['companyId']) this.companyId = queryParam['companyId'];
         if (queryParam['id_category']) this.documentAdd.setCategoryId(queryParam['id_category']);
         if (queryParam['clone_document']) {
           this.showPreloader = true;

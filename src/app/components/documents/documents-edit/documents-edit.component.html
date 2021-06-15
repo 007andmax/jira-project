@@ -15,6 +15,7 @@
     ></app-documents-add-footer>
     <documents-edit-info
         *ngIf="!showPreloader"
+        [companyId]="companyId"
         [documentValidate]="documentValidate"
         [documentEdit]="documentEdit"
         (onToggleAside)="openAside  =$event"

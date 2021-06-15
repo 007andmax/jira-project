@@ -1,6 +1,7 @@
 <div class="qt-page-list documents-page ">
     <documents-header
         #header
+        [companyId]="companyId"
         (onChangeFilterField)="onFilter($event)"
     ></documents-header>
     <div class="qt-page-list__body">
@@ -14,6 +15,7 @@
                         [ngForTrackBy]="trackById"
                     >
                         <documents-table
+                            [companyId]="companyId"
                             [item]="item"
                             (onRemoveCategory)="onRemoveCategory($event)"
                             (onRemoveDocument)="onRemoveDocument($event)"

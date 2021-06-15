@@ -16,6 +16,7 @@
     ></app-documents-add-footer>
     <app-documents-add-info
         *ngIf="!showPreloader"
+        [companyId]="companyId"
         (onChangeRequiredCompanyType)="requiredCompanyType = $event"
         [documentValidate]="documentValidate"
         [documentAdd]="documentAdd"

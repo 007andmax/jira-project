@@ -24,7 +24,7 @@ export class CompanyProductsComponent implements OnInit {
     public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
-    this.leftPanelStateService.setCompanyPage("company-products");
+    this.leftPanelStateService.changeStateWithoutNavigate('company-products');
     this.reportsStateService.includePurchaseCost = true;
 
   }

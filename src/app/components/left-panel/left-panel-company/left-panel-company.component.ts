@@ -27,9 +27,6 @@ export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.companyId = localStorage.getItem("company_id");
-
-
-
     this.activePage = this.leftPanelStateService.activePage;
     let getOnBillingPage = this.leftPanelStateService.getOnCompanyPage().subscribe(data => {
       this.activePage = data;

@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { REMOVE_DOCUMENT } from 'src/app/const/confirm';
@@ -19,6 +19,7 @@ import { DocumentsTemplatesHeaderComponent } from './documents-templates-header/
   styleUrls: ['./documents-templates.component.scss']
 })
 export class DocumentsTemplatesComponent implements OnInit, OnDestroy {
+  companyId: string;
   openCategories: boolean = false;
   showPreloader: boolean = true;
   tab = 'TEMPLATE_GALLERY';
@@ -31,12 +32,20 @@ export class DocumentsTemplatesComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     public cd: ChangeDetectorRef,
+    public activateRoute: ActivatedRoute,
+    private router: Router,
     public leftPanelStateService: LeftPanelStateService,
     private documentsStateService: DocumentsStateService) { }
 
   ngOnInit() {
     this.leftPanelStateService.changeStateWithoutNavigate('new-template-documents');
+    let queryParams = this.activateRoute.queryParams.subscribe(
+      (queryParam: any) => {
+        if (queryParam['companyId']) this.companyId = queryParam['companyId'];
 
+      }
+    );
+    this.sub.add(queryParams);
     this.filter.setDocumentType("TEMPLATE");
     let filterTemplate = this.documentsStateService.filterTemplate.subscribe(data => {
       // this.showPreloader = true;
@@ -82,7 +91,13 @@ export class DocumentsTemplatesComponent implements OnInit, OnDestroy {
     })
   }
   public goToDocumentsList() {
-    this.leftPanelStateService.goToState('new-documents');
+    if (this.companyId) {
+      this.router.navigate(
+        ['/ng2/company/', this.companyId, 'documents']);
+    } else {
+      this.leftPanelStateService.goToState('new-documents');
+    }
+
   }
   onSearch(data) {
     this.filter.setSearch(data);

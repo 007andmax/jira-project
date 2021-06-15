@@ -73,22 +73,22 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'ng2/company/password-manager',
+    path: 'ng2/company/:id/password-manager',
     component: CompanyPasswordManagerComponent,
     pathMatch: 'full'
   },
   {
-    path: 'ng2/company/user',
+    path: 'ng2/company/:id/user',
     component: CompanyUserComponent,
     pathMatch: 'full'
   },
   {
-    path: 'ng2/company/tickets',
+    path: 'ng2/company/:id/tickets',
     component: CompanyTicketsComponent,
     pathMatch: 'full'
   },
   {
-    path: 'ng2/company/dashboard/:companyId',
+    path: 'ng2/company/:id/dashboard',
     component: CompanyDashboardComponent,
     pathMatch: 'full'
   },
@@ -216,7 +216,7 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'ng2/company/products',
+    path: 'ng2/company/:id/products',
     component: CompanyProductsComponent,
     pathMatch: 'full'
   },
@@ -295,7 +295,7 @@ const routes: Routes = [
 
   },
   {
-    path: 'ng2/company/contracts',
+    path: 'ng2/company/:id/contracts',
     component: CompanyContractsComponent
   },
   {
@@ -303,11 +303,11 @@ const routes: Routes = [
     component: TicketsDashboardComponent
   },
   {
-    path: 'ng2/company/network-scan',
+    path: 'ng2/company/:id/network-scan',
     component: CompanyNetworkScanComponent
   },
   {
-    path: 'ng2/company/devices',
+    path: 'ng2/company/:id/devices',
     component: CompanyDevicesComponent,
 
   },

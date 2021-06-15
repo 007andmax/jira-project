@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
@@ -19,6 +20,7 @@ export class DocumentsHeaderComponent implements OnInit {
   @Output() onSelectAll = new EventEmitter<any>();
   @Output() onSearch = new EventEmitter<any>();
   @Input() selectAll: boolean = false;
+  @Input() companyId: string;
 
 
   sub: Subscription = new Subscription();
@@ -31,6 +33,7 @@ export class DocumentsHeaderComponent implements OnInit {
   constructor(
     private leftPanelStateService: LeftPanelStateService,
     private permissionsService: PermissionsService,
+    private router: Router,
   ) { }
 
   /**
@@ -66,10 +69,16 @@ export class DocumentsHeaderComponent implements OnInit {
     this.onSearch.emit(event.target.value);
   }
   goToAddDocument() {
-    if (this.getPermissions('CREATE_DOCUMENT')) this.leftPanelStateService.goToState('new-add-documents');
+    if (this.getPermissions('CREATE_DOCUMENT')) {
+      this.router.navigate(
+        ['/ng2/documents/add'], { queryParams: { companyId: this.companyId } });
+    }
   }
   goToTemplates() {
-    this.leftPanelStateService.goToState('new-template-documents');
+    //this.leftPanelStateService.goToState('new-template-documents');
+    this.router.navigate(
+      ['/ng2/documents/templates'], { queryParams: { companyId: this.companyId } });
+
   }
   onChangeCountFilter(data) {
     this.countFilter = data;

@@ -119,12 +119,18 @@
                 <li
                     class="pointer"
                     ngbDropdownItem
-                    (click)="editDocument()"
+                    [routerLink]="['/ng2/documents/edit/',item.id]"
+                    [queryParams]="{'companyId':companyId}"
                     *ngIf="getPermissions('EDIT_DOCUMENT')"
                 >
                     <div class="icon__edit qt-sz-16 qt-bg-contain qt-mr-8"></div>
                     Edit
                 </li>
+
+
+
+
+
 
 
                 <!-- <li
@@ -145,7 +151,8 @@
                     class="pointer"
                     ngbDropdownItem
                     routerLink="/ng2/documents/add"
-                    [queryParams]="{'clone_document':item.id}"
+                    [queryParams]="{'clone_document':item.id,
+                'companyId':companyId}"
                     *ngIf="getPermissions('CREATE_DOCUMENT')"
                 >
                     <div class="icon__clone-document qt-sz-16 qt-bg-contain qt-mr-8"></div>

@@ -14,6 +14,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { TicketProfileFormService } from '../../../../app/components/tickets/tickets/ticket-edit-aside/class/ticket-profile-form-service';
 import { CompanyServiceType } from '../../companies/class/company-service-type';
 import { CompanyDetaill } from './company-detailing';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-company-dash-detail',
@@ -271,12 +272,19 @@ export class CompanyDashDetailComponent implements OnInit {
     private tagsState: CompanyTagsStateService,
     private companiesStateService: CompaniesStateService,
     private sanitizer: DomSanitizer,
+    public activateRoute: ActivatedRoute,
     public cd: ChangeDetectorRef
   ) { }
 
   public ngOnInit() {
-    this._id = /[^/]*$/.exec(window.location.href)[0];
-    this.getCompanyDetails();
+    this._id = this.activateRoute.snapshot.params['id'];
+    let subscription = this.activateRoute.params.subscribe(params => {
+
+      this._id = params['id'];
+      console.log("id", this._id);
+      this.getCompanyDetails();
+    });
+    this.sub.add(subscription);
     this.currentService = new TicketProfileFormService();
   }
 

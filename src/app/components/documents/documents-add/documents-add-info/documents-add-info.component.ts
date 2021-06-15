@@ -8,7 +8,7 @@ import { DocumentAdd } from '../class/document-add';
 import * as moment from "moment";
 import { DocumentCompanyUser } from '../class/document-company-user';
 import { DocumentValidate } from '../class/document-validate';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
@@ -29,6 +29,7 @@ export class DocumentsAddInfoComponent implements OnInit {
   requiredCompanyType: boolean;
   @Output() onChangeRequiredCompanyType = new EventEmitter<any>();
   @Input() documentAdd: DocumentAdd = new DocumentAdd();
+  @Input() companyId: string;
   @Input() documentValidate: DocumentValidate = new DocumentValidate();
   @ViewChild('companyTypeDp') companyTypeDp: DropDownComponent;
   @ViewChild('reviewDp') reviewDp: DatePickerComponent;
@@ -37,6 +38,7 @@ export class DocumentsAddInfoComponent implements OnInit {
     public leftPanelStateService: LeftPanelStateService,
     public documentsService: DocumentsService,
     public cd: ChangeDetectorRef,
+    private router: Router,
     private permissionsService: PermissionsService,
     public activateRoute: ActivatedRoute,) {
   }
@@ -59,7 +61,12 @@ export class DocumentsAddInfoComponent implements OnInit {
     // 
   }
   public goToDocumentsList() {
-    this.leftPanelStateService.goToState('new-documents');
+    if (this.companyId) {
+      this.router.navigate(
+        ['/ng2/company/', this.companyId, 'documents']);
+    } else {
+      this.leftPanelStateService.goToState('new-documents');
+    }
   }
   onResetCompanyType() {
     this.companyTypeDp.clearWithOutChanges();

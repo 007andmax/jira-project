@@ -14,6 +14,7 @@ import { UserChange } from '../users/class/user-change';
 import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
 import { UsersHeaderComponent } from '../users/users-header/users-header.component';
 import { TYPE_LIST_COMPANY_USERS } from '../../const/users';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'company-user',
@@ -39,15 +40,22 @@ export class CompanyUserComponent implements OnInit {
     private confirmStateService: ConfirmStateService,
     private usersService: UsersService,
     public cd: ChangeDetectorRef,
+    public activateRoute: ActivatedRoute,
     private draftEmailStateService: DraftEmailStateService,
     private leftPanelStateService: LeftPanelStateService,
     private websocketService: WebsocketService) { }
 
   ngOnInit() {
-    this.leftPanelStateService.setCompanyPage("company-user");
-    let company_id = localStorage.getItem("company_id") || null;
-    if (!company_id) return;
-    this.onInitFilters(company_id);
+    this.leftPanelStateService.changeStateWithoutNavigate('company-user');
+
+    let id = this.activateRoute.snapshot.params['id'];
+    let subscription = this.activateRoute.params.subscribe(params => {
+      this.showPreloader = true;
+      id = params['id'];
+      console.log("id", id);
+      this.onInitFilters(id);
+    });
+
 
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
       this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title);
@@ -87,7 +95,7 @@ export class CompanyUserComponent implements OnInit {
 
         const reqIndex = this.reqUsers.findIndex((item) => item.id === data.data.id);
         if (reqIndex > -1) this.reqUsers[reqIndex] = new User(data.data);
-        if (reqIndex === -1 && data.data.company.id === company_id) {
+        if (reqIndex === -1 && data.data.company.id === id) {
           this.reqUsers.unshift(new User(data.data));
           this.users.unshift(new User(data.data));
 
@@ -122,13 +130,13 @@ export class CompanyUserComponent implements OnInit {
     this.userListService.addSubscription(getChangeCompanies);
     this.onInitSubscribe();
   }
-  public onInitFilters(company_id) {
-    let company = this.companiesStateService.getCompanies().find(item => item.id === company_id);
+  public onInitFilters(id) {
+    let company = this.companiesStateService.getCompanies().find(item => item.id === id);
     this.header.filter.companiesDp.isDisabled = true;
     this.header.filter.companiesDp.editItem = company;
-    this.header.filter.filter.setCompany(company_id);
+    this.header.filter.filter.setCompany(id);
     this.header.filter.onChangeCounterFilter();
-    this.filter.setLeftFilters(null, company_id, null, null);
+    this.filter.setLeftFilters(null, id, null, null);
     this.cd.detectChanges();
   }
   showMobileFilter() {

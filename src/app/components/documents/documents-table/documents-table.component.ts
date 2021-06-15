@@ -15,6 +15,7 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 })
 export class DocumentsTableComponent implements OnInit {
   @Input() item: Document;
+  @Input() companyId: string;
   @Output() onRemoveCategory = new EventEmitter<any>();
   @Output() onRemoveDocument = new EventEmitter<any>();
   @Output() onEditDocument = new EventEmitter<any>();
@@ -63,10 +64,7 @@ export class DocumentsTableComponent implements OnInit {
   removeDocument() {
     this.onRemoveDocument.emit(this.item);
   }
-  editDocument() {
-    this.router.navigate(
-      ['/ng2/documents/edit/', this.item.id]);
-  }
+
   previewDocument() {
     /* this.router.navigate(
        ['/ng2/documents/edit/', this.item.id]);*/

@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { NETWORK_REMOVE_DEVICE } from '../../const/confirm';
 import { DisabledBtnDirective } from '../../directives/disabled-btn.directive';
@@ -48,7 +49,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     private networkScanStateService: NetworkScanStateService,
     private devicesRealTimeService: DevicesRealTimeService,
     private passwordManagerService: PasswordManagerService,
-
+    public activateRoute: ActivatedRoute,
     private confirmStateService: ConfirmStateService,
     private companyNetworkScanService: CompanyNetworkScanService,
     private leftPanelStateService: LeftPanelStateService,
@@ -56,19 +57,18 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
-    this.leftPanelStateService.setCompanyPage("company-network-scan");
-    this.companyId = localStorage.getItem("company_id");
-    this.devicesStateService.subsribeToNetScan(this.companyId);
-    if (this.devicesStateService.getAllDevices()) {
-      this.devices = (this.devicesStateService.getAllDevices()[this.companyId]) ? JSON.parse(JSON.stringify(this.devicesStateService.getAllDevices()[this.companyId])).map(item => new Device(item)) : [];
-      this.companyNetworkScanService.onFilterName(this.devices);
-      if (this.devices.length > 0) this.getSomeInfoForDevices().then(result => {
-        this.findMasterAgent();
-        if (this.getPermissions('NETWORK_SCAN_CLIENTS') && this.masterAgent.online) this.runScanDevices();
-      });
-      this.showPreloader = false;
-      this.cd.detectChanges();
-    }
+    this.leftPanelStateService.changeStateWithoutNavigate('company-network-scan');
+
+    let id = this.activateRoute.snapshot.params['id'];
+    let subscription = this.activateRoute.params.subscribe(params => {
+
+      id = params['id'];
+      console.log("id", id);
+      this.companyId = id;
+      this.devicesStateService.subsribeToNetScan(this.companyId);
+      this.getDevices();
+    });
+    this.sub.add(subscription);
     let getOnDevices = this.devicesStateService.getOnDevices().subscribe(data => {
       this.devices = (data[this.companyId]) ? JSON.parse(JSON.stringify(data[this.companyId])).map(item => new Device(item)) : [];
       this.companyNetworkScanService.onFilterName(this.devices);
@@ -142,6 +142,18 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
+  }
+  getDevices() {
+    if (this.devicesStateService.getAllDevices()) {
+      this.devices = (this.devicesStateService.getAllDevices()[this.companyId]) ? JSON.parse(JSON.stringify(this.devicesStateService.getAllDevices()[this.companyId])).map(item => new Device(item)) : [];
+      this.companyNetworkScanService.onFilterName(this.devices);
+      if (this.devices.length > 0) this.getSomeInfoForDevices().then(result => {
+        this.findMasterAgent();
+        if (this.getPermissions('NETWORK_SCAN_CLIENTS') && this.masterAgent.online) this.runScanDevices();
+      });
+      this.showPreloader = false;
+      this.cd.detectChanges();
+    }
   }
   checkCanInstallAgent() {
     return this.checkSelected() && this.networkScanInstallAgent.getCredential();

@@ -9,6 +9,8 @@ import { ConfirmStateService } from '../shared/confirm/services/confirm-state.se
 import { REMOVE_RECORD } from '../../const/confirm';
 import { PasswordManagerStateService } from '../../states/password-manager/password-manager-state.service';
 import { CompaniesStateService } from '../../states/company/companies-state.service';
+import { ActivatedRoute } from '@angular/router';
+import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 
 /**
  * Password manager component
@@ -36,6 +38,8 @@ export class PasswordManagerComponent implements OnInit {
     public confirmStateService: ConfirmStateService,
     public passwordManagerStateService: PasswordManagerStateService,
     public companiesStateService: CompaniesStateService,
+    public activateRoute: ActivatedRoute,
+    public leftPanelStateService: LeftPanelStateService,
     public cd: ChangeDetectorRef,
   ) { }
 

@@ -6,6 +6,7 @@ import { InvoicesAsidePreviewComponent } from '../../billing/invoices/invoices-a
 import { Invoice } from '../../billing/invoices/class/invoice';
 import { InvoicesService } from '../../../services/invoices/invoices.service';
 import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-company-dash-invoice',
@@ -29,10 +30,19 @@ export class CompanyDashInvoiceComponent implements OnInit {
   public constructor(private companiesService: CompaniesService,
     private invoiceStateService: InvoiceStateService,
     private invoicesService: InvoicesService,
+    public activateRoute: ActivatedRoute,
     public cd: ChangeDetectorRef) { }
 
   public ngOnInit() {
-    this._id = /[^/]*$/.exec(window.location.href)[0];
+    this._id = this.activateRoute.snapshot.params['id'];
+    let subscription = this.activateRoute.params.subscribe(params => {
+
+      this._id = params['id'];
+      console.log("id", this._id);
+
+    });
+    this.sub.add(subscription);
+
     // this.getRecentInvoiceList();
 
   }

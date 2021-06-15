@@ -22,6 +22,13 @@ export class DocumentsEditComponent extends DocumentsAddComponent {
       this.getDocument(id);
     });
     this.sub.add(subscription);
+    let queryParams = this.activateRoute.queryParams.subscribe(
+      (queryParam: any) => {
+        if (queryParam['companyId']) this.companyId = queryParam['companyId'];
+        console.log("this.companyId", this.companyId);
+      }
+    );
+    this.sub.add(queryParams);
     this.leftPanelStateService.changeStateWithoutNavigate('new-edit-documents');
   }
 

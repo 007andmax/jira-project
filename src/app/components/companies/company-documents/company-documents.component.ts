@@ -10,22 +10,23 @@ import { DocumentsComponent } from '../../documents/documents.component';
   styleUrls: ['./company-documents.component.scss']
 })
 export class CompanyDocumentsComponent extends DocumentsComponent {
-
+  companyId: string;
   @ViewChild('header') header: DocumentsHeaderComponent;
 
   ngOnInit() {
-    let id = this.activateRoute.snapshot.params['id'];
+    this.companyId = this.activateRoute.snapshot.params['id'];
     let subscription = this.activateRoute.params.subscribe(params => {
       this.showPreloader = true;
-      id = params['id'];
-      console.log("id", id);
-      this.filter.setCompanyId(id);
+      this.companyId = params['id'];
+      console.log("id", this.companyId);
+      this.filter.setCompanyId(this.companyId);
       this.getFilterList();
 
-      let company = this.companiesStateService.getCompanies().find(item => item.id === id);
+      let company = this.companiesStateService.getCompanies().find(item => item.id === this.companyId);
       this.header.filter.companyDp.isDisabled = true;
+      this.header.filter.companyDp.isBlockClear = true;
       this.header.filter.companyDp.editItem = company;
-      this.header.filter.documentsFilter.setCompanyId(id);
+      this.header.filter.documentsFilter.setCompanyId(this.companyId);
       this.header.filter.onChangeCounterFilter();
     });
     this.sub.add(subscription);
