@@ -35,7 +35,7 @@ export class DocumentsAddBodyComponent implements OnInit {
     const self = this;
     this.options = {
       heightMin: 1123,
-      toolbarSticky: true,
+      // toolbarSticky: true,
       saveParam: 'file',
       // Set the save URL.
       //  saveURL: self.apiUrl + 'file?isAvatar=false',

@@ -219,9 +219,9 @@
   &.qt-page-list {
     display: flex;
     flex-direction: column;
-    //padding: 0 24px 24px 24px;
     padding: 0;
-    height: calc(100vh - 64px);
+    height: calc(100vh - 66px);
+    min-height: calc(100vh - 66px);
   }
 
   &.--large {
@@ -265,6 +265,13 @@
     max-width: 794px;
     min-width: 794px;
     margin: 0 auto;
+  }
+
+  .fr-toolbar.fr-top {
+    position: sticky;
+    top: -10px !important;
+    z-index: 2;
+    border-radius: 0;
   }
 }
 
