@@ -51,6 +51,7 @@
                                 [(ngModel)]="editCategory.newName"
                                 (input)="onCheckNameCategoryForEdit()"
                                 (blur)="onEditCategory()"
+                                (keyup)="onEditCategoryByEnter($event)"
                             >
                             <p
                                 *ngIf="!editCategory.isEditMode(item.id)"

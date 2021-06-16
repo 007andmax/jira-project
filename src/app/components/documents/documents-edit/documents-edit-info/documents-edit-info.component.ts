@@ -35,7 +35,8 @@ export class DocumentsEditInfoComponent extends DocumentsAddInfoComponent {
   onChangeTitle() {
     this.documentsService.checkTitle(this.documentEdit.title, this.documentEdit.id).subscribe(data => {
       console.log("data", data);
-      this.documentValidate.setTitle(data)
+      this.documentValidate.setUniqueTittle(data);
+      this.documentValidate.resetTitle();
     })
     // 
   }

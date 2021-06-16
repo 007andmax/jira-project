@@ -83,9 +83,10 @@ export class LeftPanelDocumentsComponent implements OnInit, OnDestroy {
   openPanel() {
     this.onOpenPanel.emit(null);
   }
-  public goToState() {
-    this.onChangeState.emit('new-documents');
+  public goToState(state) {
+    this.onChangeState.emit(state);
   }
+
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
   }

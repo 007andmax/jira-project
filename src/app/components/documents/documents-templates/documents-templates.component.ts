@@ -22,7 +22,7 @@ export class DocumentsTemplatesComponent implements OnInit, OnDestroy {
   companyId: string;
   openCategories: boolean = false;
   showPreloader: boolean = true;
-  tab = 'TEMPLATE_GALLERY';
+  tab = 'MY_TEMPLATES';
   @ViewChild('header') header: DocumentsTemplatesHeaderComponent;
   list: Array<Document> = [];
   reqList: Array<Document> = [];

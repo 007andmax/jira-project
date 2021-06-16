@@ -97,6 +97,9 @@ export class DocumentsAddEditCategoriesComponent implements OnInit, OnDestroy {
     let find = this.categories.find(item => item.name === this.editCategory.newName);
     if (!find) this.editCategory.setValidate(true);
   }
+  onEditCategoryByEnter(event) {
+    if (event.keyCode === 13) this.onEditCategory();
+  }
   onEditCategory() {
     console.log("onEditCategory");
     if (this.editCategory.name !== this.editCategory.newName) {

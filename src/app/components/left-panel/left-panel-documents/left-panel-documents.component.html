@@ -13,9 +13,15 @@
 >
     <li
         class="app-left-panel__menu-expand-item-icon"
-        (click)="goToState()"
+        (click)="goToState('new-documents')"
     >
         All documents
+    </li>
+    <li
+        class="app-left-panel__menu-expand-item-icon"
+        (click)="goToState('new-template-documents')"
+    >
+        All templates
     </li>
     <ng-template
         ngFor

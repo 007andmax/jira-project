@@ -39,7 +39,7 @@ export class DocumentsAddComponent implements OnInit {
           this.cd.detectChanges();
           this.documentsService.getDocument(queryParam['clone_document']).subscribe(data => {
             this.documentAdd.setData(data);
-            this.documentValidate.setTitle(false);
+            this.documentValidate.setUniqueTittle(false);
             // this.reviewDp.setEditDate(this.documentAdd.parseReviewDate());
             // if (this.documentAdd.clientType) this.requiredCompanyType = true;
             console.log("this.documentAdd", this.documentAdd);

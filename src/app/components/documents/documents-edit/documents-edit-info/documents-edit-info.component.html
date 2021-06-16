@@ -63,12 +63,18 @@
                         [textContent]="'Document title is required'"
                     >
                     </mat-error>
+                    <mat-error
+                        class="qt-tooltip-error"
+                        *ngIf="!documentValidate.getUniqueTittle()"
+                        [textContent]="'Document title value must be unique'"
+                    >
+                    </mat-error>
                     <input
                         type="text"
                         class="qt-input-40 documents-add-body__input"
                         placeholder="Printer Installation Guide"
                         [(ngModel)]="documentEdit.title"
-                        [ngClass]="{'--input-error':!documentValidate.getTitle()}"
+                        [ngClass]="{'--input-error':!documentValidate.getTitle() || !documentValidate.getUniqueTittle()}"
                         (blur)="onChangeTitle()"
                     >
                 </div>

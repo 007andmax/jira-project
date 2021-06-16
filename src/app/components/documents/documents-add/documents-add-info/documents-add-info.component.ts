@@ -50,13 +50,16 @@ export class DocumentsAddInfoComponent implements OnInit {
       this.categories = data;
       console.log("this.categories", this.categories);
     })
-    this.documentAdd.setReviewDate(moment(new Date()).format('YYYY/MM/DD'));
+    let currentDate = new Date();
+    currentDate.setFullYear(currentDate.getFullYear() + 1);
+    this.documentAdd.setReviewDate(moment(currentDate).format('YYYY/MM/DD'));
 
   }
   onChangeTitle() {
     this.documentsService.checkTitle(this.documentAdd.title).subscribe(data => {
       console.log("data", data);
-      this.documentValidate.setTitle(data)
+      this.documentValidate.setUniqueTittle(data);
+      this.documentValidate.resetTitle();
     })
     // 
   }
