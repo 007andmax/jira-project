@@ -147,6 +147,9 @@ export class DocumentsTemplatesComponent implements OnInit, OnDestroy {
     this.openCategories = !this.openCategories;
     console.log("toggleOpenCategories", this.openCategories)
   }
+  public trackById(index, item) {
+    return item.id;
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

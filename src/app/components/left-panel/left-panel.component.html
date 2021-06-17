@@ -1,17 +1,11 @@
-<div
-    class="app-left-panel__header"
-    *ngIf="!hideleLeftPanel"
->
+<div class="app-left-panel__header">
     <div class="app-left-panel__header-logo --beta"></div>
     <div
         class="app-left-panel__header-resize-btn"
         (click)="onToggleLeftPanel()"
     ></div>
 </div>
-<div
-    class="app-left-panel__body"
-    *ngIf="!hideleLeftPanel"
->
+<div class="app-left-panel__body">
     <app-left-panel-support
         #panelSupport
         (onOpenPanel)="onOpenPanel()"
@@ -51,10 +45,10 @@
         (onChangeState)="onChangeState($event)"
     ></app-left-panel-password-manager>
     <app-left-panel-documents
-      #panelDocuments
-      (onOpenPanel)="onOpenPanel()"
-      (onChangeState)="onChangeState($event)"
-      [activePage]="state"
+        #panelDocuments
+        (onOpenPanel)="onOpenPanel()"
+        (onChangeState)="onChangeState($event)"
+        [activePage]="state"
     ></app-left-panel-documents>
     <hr class="app-left-panel__divider">
     <app-left-panel-reports

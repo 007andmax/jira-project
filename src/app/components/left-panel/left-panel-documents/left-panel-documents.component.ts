@@ -90,6 +90,9 @@ export class LeftPanelDocumentsComponent implements OnInit, OnDestroy {
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
   }
+  public trackById(index, item) {
+    return item.id;
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

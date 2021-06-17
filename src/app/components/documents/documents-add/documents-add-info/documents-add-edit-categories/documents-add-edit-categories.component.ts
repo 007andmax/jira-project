@@ -138,6 +138,9 @@ export class DocumentsAddEditCategoriesComponent implements OnInit, OnDestroy {
   close() {
     this.onClosed.emit(null);
   }
+  public trackById(index, item) {
+    return item.id;
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

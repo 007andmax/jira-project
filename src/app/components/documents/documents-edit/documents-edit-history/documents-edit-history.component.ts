@@ -43,5 +43,7 @@ export class DocumentsEditHistoryComponent implements OnInit {
   parseDate(item) {
     return `${item.historyType === "OPEN" ? 'Opened' : 'Edited'} on ${moment(item.actionDate).format('DD MMM YYYY')}`
   }
-
+  public trackById(index, item) {
+    return item.id;
+  }
 }
