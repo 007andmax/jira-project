@@ -14,8 +14,8 @@ export class CompanyContractsComponent extends ContractsComponent implements OnI
     this.leftPanelStateService.changeStateWithoutNavigate("company-contracts");
     let id = this.activateRoute.snapshot.params['id'];
     let subscription = this.activateRoute.params.subscribe(params => {
-
       id = params['id'];
+      this.companiesStateService.setSelectedCompanyId(id);
       console.log("id", id);
       this.companyContracts = this.companiesStateService.getCompanies().find(item => item.id === id);
     });

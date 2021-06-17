@@ -8,6 +8,7 @@ import { ContractsService } from 'src/app/services/contracts/contracts.service';
 import { ServiceAgreement } from '../../billing/contracts/class/service-agreement';
 import { CompanyContractType } from '../../companies/class/company-contract-type';
 import { ActivatedRoute } from '@angular/router';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
   selector: 'app-company-dash-contract',
@@ -36,6 +37,7 @@ export class CompanyDashContractComponent implements OnInit {
     public cd: ChangeDetectorRef,
     public activateRoute: ActivatedRoute,
     public contractsStateService: ContractsStateService,
+    private companiesStateService: CompaniesStateService,
     private contractsService: ContractsService) { }
 
   public ngOnInit() {
@@ -44,6 +46,7 @@ export class CompanyDashContractComponent implements OnInit {
 
       this._id = params['id'];
       console.log("id", this._id);
+      this.companiesStateService.setSelectedCompanyId(this._id);
       this.getContractsList();
     });
     this.sub.add(subscription);

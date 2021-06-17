@@ -21,6 +21,7 @@ export class CompanyPasswordManagerComponent extends PasswordManagerComponent {
     let subscription = this.activateRoute.params.subscribe(params => {
       this.showPreloader = true;
       this.companyId = params['id'];
+      this.companiesStateService.setSelectedCompanyId(this.companyId);
       console.log("id", this.companyId);
       this.getRecords();
     });
@@ -40,7 +41,7 @@ export class CompanyPasswordManagerComponent extends PasswordManagerComponent {
     })
     this.sub.add(geLefttFilter);
     let onChangeRealTime = this.passwordManagerStateService.onChangeRealTime.subscribe(newChange => {
-      if (newChange.action === 'PASSWORD_RECORD_CREATED' && newChange.data.companyId === localStorage.getItem('company_id')) {
+      if (newChange.action === 'PASSWORD_RECORD_CREATED' && newChange.data.companyId === this.companiesStateService.getSelectedCompanyId()) {
         this.recordsData.push(new PasswordRecord(newChange.data));
         if (this.passwordManagerListService.getBlockList()) this.list_records.push(new PasswordRecord(newChange.data));
       } else if (newChange.action === 'PASSWORD_RECORD_UPDATED') {

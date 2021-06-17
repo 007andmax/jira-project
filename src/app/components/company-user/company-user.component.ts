@@ -53,6 +53,7 @@ export class CompanyUserComponent implements OnInit {
       this.showPreloader = true;
       id = params['id'];
       console.log("id", id);
+      this.companiesStateService.setSelectedCompanyId(id);
       this.onInitFilters(id);
     });
 

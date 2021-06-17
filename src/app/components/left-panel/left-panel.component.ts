@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from "@angular/router";
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
 import { LeftPanelBillingComponent } from './left-panel-billing/left-panel-billing.component';
 import { LeftPanelCompaniesComponent } from './left-panel-companies/left-panel-companies.component';
@@ -39,6 +40,7 @@ export class LeftPanelComponent implements OnInit {
   constructor(
     private router: Router,
     private leftPanelStateService: LeftPanelStateService,
+    public companiesStateService: CompaniesStateService,
     public cd: ChangeDetectorRef,
   ) { }
 
@@ -180,7 +182,7 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'quotes-component') this.goToLink('/ng2/quotes');
       if (this.state === 'new-payments-ng2') this.goToLink('/ng2/payments');
       if (this.state === 'new-contracts') this.goToLink('/ng2/contracts');
-      if (this.state === 'company-dashboard') this.goToLink(`/ng2/company/dashboard/${localStorage.getItem("company_id")}`);
+      if (this.state === 'company-dashboard') this.goToLink(`/ng2/company/dashboard/${this.companiesStateService.getSelectedCompanyId()}`);
       if (this.state === 'company-tickets') this.goToLink('/ng2/company/tickets');
       if (this.state === 'company-user') this.goToLink('/ng2/company/user');
       if (this.state === 'company-devices') this.goToLink('/ng2/company/devices');
@@ -213,7 +215,7 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'new-documents') this.goToLink('/ng2/documents');
       if (this.state === 'new-add-documents') this.goToLink('/ng2/documents/add');
       if (this.state === 'new-template-documents') this.goToLink('/ng2/documents/templates');
-      if (this.state === 'company-documents') this.goToLink(`/ng2/company/${localStorage.getItem('company_id')}/documents`);
+      if (this.state === 'company-documents') this.goToLink(`/ng2/company/${this.companiesStateService.getSelectedCompanyId()}/documents`);
 
 
       if (this.state === 'byProducts' ||

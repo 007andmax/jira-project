@@ -78,7 +78,7 @@ export class LeftPanelCompaniesComponent implements OnInit {
     this.onOpenPanel.emit(null);
   }
   ngDoCheck() {
-    if (localStorage.getItem("company_id") && this.companiesState.getCompanies().length > 0) this.selectedCompany = this.companiesState.getCompanies().find(item => item.id === localStorage.getItem("company_id"));
+    if (this.companiesState.getSelectedCompanyId() && this.companiesState.getCompanies().length > 0) this.selectedCompany = this.companiesState.getCompanies().find(item => item.id === this.companiesState.getSelectedCompanyId());
 
   }
   /* private getIndustries() {

@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { REBOOT_DEVICE, REMOVE_DEVICES, SHUTDOWN_DEVICE } from '../../const/confirm';
 import { DevicesService } from '../../services/devices/devices.service';
 import { DeviceStatus } from '../../states/devices/class/device-status';
@@ -30,6 +31,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
   constructor(private devicesStateService: DevicesStateService,
     private devicesService: DevicesService,
     private confirmStateService: ConfirmStateService,
+    private companiesStateService: CompaniesStateService,
     private modalService: NgbModal,
     public cd: ChangeDetectorRef,
     public activateRoute: ActivatedRoute,
@@ -43,6 +45,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     let subscription = this.activateRoute.params.subscribe(params => {
       id = params['id'];
       console.log("id", id);
+      this.companiesStateService.setSelectedCompanyId(id);
       this.companyId = id;
       if (this.devicesStateService.getAllDevices()) {
         this.devices = (this.devicesStateService.getAllDevices()[this.companyId]) ? JSON.parse(JSON.stringify(this.devicesStateService.getAllDevices()[this.companyId])).map(item => new DeviceCompany(item, this.companyId)) : [];

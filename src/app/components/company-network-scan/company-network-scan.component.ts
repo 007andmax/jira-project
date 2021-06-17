@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { NETWORK_REMOVE_DEVICE } from '../../const/confirm';
 import { DisabledBtnDirective } from '../../directives/disabled-btn.directive';
 import { DevicesService } from '../../services/devices/devices.service';
@@ -53,6 +54,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService,
     private companyNetworkScanService: CompanyNetworkScanService,
     private leftPanelStateService: LeftPanelStateService,
+    private companiesStateService: CompaniesStateService,
     private websocketService: WebsocketService,
     public cd: ChangeDetectorRef,) { }
 
@@ -64,6 +66,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
 
       id = params['id'];
       console.log("id", id);
+      this.companiesStateService.setSelectedCompanyId(id);
       this.companyId = id;
       this.devicesStateService.subsribeToNetScan(this.companyId);
       this.getDevices();

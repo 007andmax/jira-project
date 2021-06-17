@@ -14,6 +14,7 @@ import { WebsocketService } from '../../services/websocket/websocket.service';
 export class CompaniesStateService {
   allCompanies = [];
   industries = [];
+  selectedCompanyId: string = null;
   onFilterTags: EventEmitter<any> = new EventEmitter();
   onGetCompanies: EventEmitter<any> = new EventEmitter();
   onChangeCompanies: EventEmitter<CompanyUpdate> = new EventEmitter();
@@ -66,6 +67,12 @@ export class CompaniesStateService {
       }
       this.isInitCurrentCompany = true;
     })
+  }
+  public getSelectedCompanyId() {
+    return this.selectedCompanyId;
+  }
+  public setSelectedCompanyId(data) {
+    this.selectedCompanyId = data;
   }
   public setShowArchivedCompanies(data) {
     this.showArchivedCompanies = data;

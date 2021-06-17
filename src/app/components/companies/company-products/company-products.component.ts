@@ -5,6 +5,9 @@ import { CompanyproductsFilter } from './class/company-products-filter';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { ReportsStateService } from 'src/app/states/reports/reports-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'company-products',
   templateUrl: './company-products.component.html',
@@ -18,12 +21,19 @@ export class CompanyProductsComponent implements OnInit {
   filter: CompanyproductsFilter = new CompanyproductsFilter();
   purchaseCostSum: number = 0;
   salesPriceSum: number = 0;
+  sub: Subscription = new Subscription();
   constructor(private permissionsService: PermissionsService,
     private reportsStateService: ReportsStateService,
     private leftPanelStateService: LeftPanelStateService,
+    public companiesStateService: CompaniesStateService,
+    public activateRoute: ActivatedRoute,
     public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
+    let subscription = this.activateRoute.params.subscribe(params => {
+      this.companiesStateService.setSelectedCompanyId(params['id']);
+    });
+    this.sub.add(subscription);
     this.leftPanelStateService.changeStateWithoutNavigate('company-products');
     this.reportsStateService.includePurchaseCost = true;
 

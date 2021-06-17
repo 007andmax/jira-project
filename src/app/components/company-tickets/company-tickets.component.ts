@@ -54,12 +54,10 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
       this.idEditTicket = '';
     })
     this.leftPanelService.getColors().subscribe((data: any) => {
-
       let listColors = data.map(item => {
         return new StatusColor(item.backgroundColor, item.borderColor);
       })
       this.ticketsStateService.onColorStatus(listColors);
-
     })
     this.leftPanelService.getTicketsStatus().subscribe((data: any) => {
 
@@ -109,6 +107,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     let subscription = this.activateRoute.params.subscribe(params => {
       this.showPreloader = true;
       id = params['id'];
+      this.companiesStateService.setSelectedCompanyId(id);
       console.log("id", id);
       let ticket_id = id;
       let company = this.companiesStateService.getCompanies().find(item => item.id === ticket_id);

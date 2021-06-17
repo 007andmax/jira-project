@@ -100,8 +100,9 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
   }
 
   goToDashboard() {
-    localStorage.setItem("company_id", this.company.id);
+
     // this.leftPanelStateService.goToState('company-dashboard');
+    this.companiesStateService.setSelectedCompanyId(this.company.id);
     this.router.navigate(
       ['/ng2/company/', this.company.id, 'dashboard']);
   }

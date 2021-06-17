@@ -27,7 +27,7 @@ export class BreadcrumbsComponent implements OnInit {
         })
     }
     ngDoCheck() {
-        if (localStorage.getItem("company_id")) this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === localStorage.getItem("company_id"));
+        if (this.companiesStateService.getSelectedCompanyId()) this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.companiesStateService.getSelectedCompanyId());
 
     }
     isCompanyState() {

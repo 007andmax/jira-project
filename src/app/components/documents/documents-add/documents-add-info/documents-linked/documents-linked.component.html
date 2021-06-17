@@ -2,7 +2,14 @@
     class="col-md-12 --required"
     (clickOutside)="hideSelectWrapper()"
 >
-    <p class="title-link-to">Link To</p>
+    <div class="header">
+        <p class="title-link-to">Link To</p>
+        <i
+            class="icn-sm icn-help"
+            placement="right"
+            ngbTooltip="The link to value can be used for documents"
+        ></i>
+    </div>
     <div
         class="device-user pointer"
         [ngClass]="{ 'has-placeholder': !selectedUserAndCompanies.length,'disabled': isDisabled}"
@@ -32,6 +39,11 @@
             </div>
         </ng-template>
     </div>
+
+
+
+
+
 
 
 

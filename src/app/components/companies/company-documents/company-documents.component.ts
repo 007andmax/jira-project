@@ -18,6 +18,7 @@ export class CompanyDocumentsComponent extends DocumentsComponent {
     let subscription = this.activateRoute.params.subscribe(params => {
       this.showPreloader = true;
       this.companyId = params['id'];
+      this.companiesStateService.setSelectedCompanyId(this.companyId);
       console.log("id", this.companyId);
       this.filter.setCompanyId(this.companyId);
       this.getFilterList();
