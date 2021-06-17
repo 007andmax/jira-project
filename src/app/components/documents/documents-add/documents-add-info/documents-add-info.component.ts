@@ -97,7 +97,7 @@ export class DocumentsAddInfoComponent implements OnInit {
   }
   onSelectTags(data) {
     console.log("data", data);
-    this.documentAdd.setTags(data);
+    this.documentAdd.setTags(data.map(item => item.id));
   }
   getSelectedClientType() {
     return this.companyTypes.find(item => item.type === this.documentAdd.clientType);

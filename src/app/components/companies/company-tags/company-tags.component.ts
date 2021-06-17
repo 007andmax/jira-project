@@ -14,20 +14,18 @@ import { TagsStateService } from 'src/app/states/tags/tags-state.service';
   styleUrls: ['./company-tags.component.scss']
 })
 export class CompanyTagsComponent implements OnInit, OnDestroy {
-  visible = true;
+
   selectable = true;
   removable = true;
   addOnBlur = true;
-  focus = false;
-  isResend = false;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   tagCtrl = new FormControl();
   selectedTag = [];
   tags: Array<Tag> = [];
   reqTags: Array<Tag> = [];
   sub = new Subscription();
-  editItem: any;
-  @Input() placement: string = 'bottom';
+  @Input() editItems: Array<string>;
+  @Input() placement: string;
   @Input() blockCreateTag: boolean = false;
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @Output() tagsChange = new EventEmitter();
@@ -51,10 +49,10 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
     this.tags = this.tagsStateService.getTags();
     this.reqTags = JSON.parse(JSON.stringify(this.tagsStateService.getTags()));
     let getTags = this.tagsStateService.onGetTags.subscribe((data: Array<Tag>) => {
-      console.log("data", data);
+
       this.tags = data;
       this.reqTags = JSON.parse(JSON.stringify(data));
-      console.log("reqTags", this.reqTags);
+      this.onCheckEditItem();
     })
     this.sub.add(getTags);
     this.onInitClearState();
@@ -72,12 +70,18 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
   * Subscribe for edit mode
   */
   onCheckEditItem() {
+    if (this.editItems) this.editItems.forEach(item => {
+      this.selectedTag.push(this.tags.find(tag => tag.id === item));
+    })
     let getTagsFromEdit = this.tagsState.getTagsFromEdit().subscribe((data) => {
       this.selectedTag = data;
     });
     this.sub.add(getTagsFromEdit);
   }
+  public clearWithOutChanges() {
 
+    this.selectedTag = [];
+  }
   /**
   * Subscribe for clear data
   */
@@ -121,19 +125,17 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     }
   }
-
-  /**
-   * Add tag to selected
-   * @param tag - selected tag
-   */
-  public selected(tag): void {
-    this.selectedTag.push(tag);
+  isSeleted(item) {
+    return this.selectedTag.find(element => element.id === item.id);
+  }
+  public toggleItem(newItem) {
+    let findIndex = this.selectedTag.findIndex(item => item.id === newItem.id);
+    if (findIndex > -1) {
+      this.selectedTag.splice(findIndex, 1);
+    } else {
+      this.selectedTag.push(newItem);
+    }
     this.tagsChange.emit(this.selectedTag);
-    this.userInput.nativeElement.value = '';
-    this.tagCtrl.setValue(null);
-    console.log("this.reqTags", this.reqTags);
-    this.tags = this.reqTags;
-    console.log("this.tags", this.tags);
   }
 
   /**

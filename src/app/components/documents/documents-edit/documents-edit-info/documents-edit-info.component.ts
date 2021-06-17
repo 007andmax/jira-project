@@ -7,6 +7,7 @@ import { DocumentsAddInfoComponent } from '../../documents-add/documents-add-inf
 import { DocumentsLinkedComponent } from '../../documents-add/documents-add-info/documents-linked/documents-linked.component';
 import { DocumentsFilterTagsComponent } from '../../documents-header/documents-filter/documents-filter-tags/documents-filter-tags.component';
 import { DocumentCompanyUser } from '../../documents-add/class/document-company-user';
+import { CompanyTagsComponent } from 'src/app/components/companies/company-tags/company-tags.component';
 
 @Component({
   selector: 'documents-edit-info',
@@ -18,7 +19,7 @@ export class DocumentsEditInfoComponent extends DocumentsAddInfoComponent {
   @Input() documentEdit: Document;
   @Input() linked: DocumentsLinkedComponent;
   @ViewChild('categoriesDp') categoriesDp: DropDownComponent;
-  @ViewChild('tagsDp') tagsDp: DocumentsFilterTagsComponent;
+  @ViewChild('tagsDp') tagsDp: CompanyTagsComponent;
   sub: Subscription = new Subscription();
 
   ngOnInit() {
@@ -51,7 +52,7 @@ export class DocumentsEditInfoComponent extends DocumentsAddInfoComponent {
   }
   onSelectTags(data) {
     console.log("data", data);
-    this.documentEdit.setTags(data);
+    this.documentEdit.setTags(data.map(item => item.id));
   }
   onResetCompanyType() {
     this.companyTypeDp.clearWithOutChanges();

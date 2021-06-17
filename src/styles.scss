@@ -390,9 +390,38 @@
     }
   }
 }
+documents-filter {
+  app-company-tags {
+    .mat-form-field-wrapper {
+      &::before {
+        content: "" !important;
+      }
+    }
+    .mat-form-field {
+      margin-top: 0px !important;
+    }
+    .mat-form-field-infix {
+      input {
+        height: 35px !important;
+      }
+    }
+    .mat-form-field-infix {
+      min-height: 40px !important;
+      &::before {
+        top: 11px !important;
+      }
+    }
+    .filter-tags-body {
+      background-color: #fff;
+    }
+  }
+}
 .new-companies-content__modal--content,
 .new-users-content__modal--content,
-.recurring-tickets-content__modal--content {
+.recurring-tickets-content__modal--content,
+documents-filter,
+app-documents-add-info,
+documents-edit-info {
   .tab-btns {
     display: flex;
     margin: 0 20px;

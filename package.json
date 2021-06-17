@@ -62,7 +62,7 @@
     "rxjs-compat": "^6.4.0",
     "zone.js": "0.9.0",
     "ngx-mask": "^8.1.7",
-    "froala-editor": "^3.2.6-1"
+    "froala-editor": "4.0.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.13.0",

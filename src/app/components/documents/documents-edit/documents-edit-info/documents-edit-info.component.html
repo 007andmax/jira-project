@@ -122,13 +122,12 @@
                     ></documents-linked>
                 </div>
                 <div class="documents-create__col">
-                    <p class="label-name">Tags</p>
-                    <documents-filter-tags
+                    <app-company-tags
                         #tagsDp
                         [editItems]="documentEdit.tags"
                         class="documents-filter-tags"
-                        (onSelectedItems)="onSelectTags($event)"
-                    ></documents-filter-tags>
+                        (tagsChange)="onSelectTags($event)"
+                    ></app-company-tags>
                 </div>
                 <!-- <div class="documents-create__col checkbox-wrapper">
                     <div class="with-checkbox">

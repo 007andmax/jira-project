@@ -1,10 +1,9 @@
 <div
-    class="col-md-12"
-    [placement]="placement"
+    class="col-md-12 --required filter-tags-body"
     ngbDropdown
     #products="ngbDropdown"
 >
-    <mat-form-field>
+    <mat-form-field ngbDropdownAnchor>
         <mat-chip-list
             #chipList
             aria-label="Fruit selection"
@@ -26,7 +25,7 @@
             <input
                 id="dropdownServices"
                 ngbDropdownToggle
-                placeholder="eg. Window update, Monthly maintainace"
+                placeholder="Search By Tags"
                 #userInput
                 class="pointer"
                 [formControl]="tagCtrl"
@@ -39,49 +38,50 @@
         </mat-chip-list>
     </mat-form-field>
     <div
-        class="dropdown-menu"
+        class="select-wrapper"
         ngbDropdownMenu
         aria-labelledby="dropdownServices"
     >
-        <ng-template
-            ngFor
-            let-tag
-            [ngForOf]="tags"
-            [ngForTrackBy]="trackById"
+        <div
+            class="content"
+            (click)="$event.preventDefault()"
         >
-          <label
-            class="qt-checkbox pointer"
-            ngbDropdownItem
-            (click)="selected(tag)"
-          >
-            <input
-              type="checkbox"
-              readonly
-            >
-            <span></span>
-            <div
-              class="text-content">
-              <div class="name">
-                {{tag.word}}
-              </div>
-                <div class="description"
-                  *ngIf="tag.defaultTag === 'USER_TAG'"
-                  [textContent]="getCompanyName(tag)"
-                ></div>
+            <div>
+                <div
+                    *ngFor="let item of tags; let i = index"
+                    (click)="toggleItem(item)"
+                >
+                    <label class="qt-checkbox pointer">
+                        <input
+                            type="checkbox"
+                            [checked]="isSeleted(item)"
+                            readonly
+                        >
+                        <span></span>
+                        <div class="text-content">
+                            <div class="name">{{item.word}}</div>
+                            <div
+                                class="description"
+                                *ngIf="item.defaultTag === 'USER_TAG'"
+                                [textContent]="getCompanyName(item)"
+                            >
+                            </div>
+                        </div>
+                        <i
+                            *ngIf="item.defaultTag === 'USER_TAG'"
+                            class="icon__user-light-gray qt-sz-16 qt-bg-contain qt-ml-8"
+                        ></i>
+                        <i
+                            *ngIf="item.defaultTag === 'COMMON'"
+                            class="icon__tag-light-gray qt-sz-16 qt-bg-contain qt-ml-8"
+                        ></i>
+                        <i
+                            *ngIf="item.defaultTag === 'COMPANY_TAG'"
+                            class="icon__office-account qt-za-16 qt-sz-16 qt-bg-contain qt-ml-8"
+                        ></i>
+                    </label>
+                </div>
             </div>
-            <i
-              *ngIf="tag.defaultTag === 'USER_TAG'"
-              class="icon__user-light-gray qt-sz-16 qt-bg-contain qt-ml-8"
-            ></i>
-            <i
-              *ngIf="tag.defaultTag === 'COMMON'"
-              class="icon__tag-light-gray qt-sz-16 qt-bg-contain qt-ml-8"
-            ></i>
-            <i
-              *ngIf="tag.defaultTag === 'COMPANY_TAG'"
-              class="icon__office-account qt-za-16 qt-sz-16 qt-bg-contain qt-ml-8"
-            ></i>
-          </label>
-        </ng-template>
+        </div>
     </div>
 </div>

@@ -11,6 +11,7 @@ import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { DocumentFilter } from '../../class/document-filter';
 import * as moment from "moment";
 import { DocumentsFilterTagsComponent } from './documents-filter-tags/documents-filter-tags.component';
+import { CompanyTagsComponent } from 'src/app/components/companies/company-tags/company-tags.component';
 
 @Component({
   selector: 'documents-filter',
@@ -24,7 +25,7 @@ export class DocumentsFilterComponent implements OnInit {
   @ViewChild('companyDp') companyDp: SelectSearchComponent;
   @ViewChild('usersDp') usersDp: TechUsersListReportComponent;
   @ViewChild('datesDp') datesDp: MultiDatepickerComponent;
-  @ViewChild('tagsDp') tagsDp: DocumentsFilterTagsComponent;
+  @ViewChild('tagsDp') tagsDp: CompanyTagsComponent;
   sub: Subscription = new Subscription();
   documentsFilter: DocumentFilter = new DocumentFilter();
   @Output() changeCountFilter = new EventEmitter<any>();
@@ -64,7 +65,7 @@ export class DocumentsFilterComponent implements OnInit {
     this.onChangeCounterFilter();
   }
   public onSelectTags(data) {
-    this.documentsFilter.setTags(data);
+    this.documentsFilter.setTags(data.map(item => item.id));
     this.documentsStateService.onInitFilter(this.documentsFilter);
     this.onChangeCounterFilter();
   }
