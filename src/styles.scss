@@ -399,20 +399,45 @@ documents-filter {
     }
     .mat-form-field {
       margin-top: 0px !important;
+      height: 100%;
     }
-    .mat-form-field-infix {
+
+    .dropdown-toggle .mat-form-field-wrapper .mat-form-field-infix {
       input {
-        height: 35px !important;
+        position: absolute;
+        width: calc(100% - 36px);
+        height: 100%;
+        top: 0
       }
     }
     .mat-form-field-infix {
-      min-height: 40px !important;
+      min-height: 36px !important;
       &::before {
-        top: 11px !important;
+        top: 9px !important;
       }
     }
-    .filter-tags-body {
+    .mat-form-field-appearance-legacy .mat-form-field-infix {
+      padding: 0;
       background-color: #fff;
+      z-index: 1;
+    }
+    .dropdown-toggle {
+      .mat-form-field-wrapper {
+        height: 100%;
+      }
+    }
+    .mat-chip-list-wrapper {
+      margin: 0;
+    }
+    .mat-chip-list-wrapper .mat-standard-chip,
+    .mat-chip-list-wrapper input.mat-input-element {
+      margin: 2px;
+    }
+    .mat-standard-chip.mat-chip-with-trailing-icon {
+      position: relative;
+      z-index: 1;
+      padding-top: 5px;
+      padding-bottom: 5px;
     }
   }
 }

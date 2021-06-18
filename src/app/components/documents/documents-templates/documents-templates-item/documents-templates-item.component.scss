@@ -41,6 +41,14 @@
         line-height: 22px;
     }
 
+   &__label {
+     flex: 1;
+     margin-left: 8px;
+     margin-right: 4px;
+     font-family: Graphik-Medium, sans-serif;
+     color: #ff5263;
+   }
+
     &__description {
         font-size: 13px;
         color: #637382;
