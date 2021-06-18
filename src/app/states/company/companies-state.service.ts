@@ -15,6 +15,7 @@ export class CompaniesStateService {
   allCompanies = [];
   industries = [];
   selectedCompanyId: string = null;
+  onChangeSelectedCompanyId: EventEmitter<any> = new EventEmitter();
   onFilterTags: EventEmitter<any> = new EventEmitter();
   onGetCompanies: EventEmitter<any> = new EventEmitter();
   onChangeCompanies: EventEmitter<CompanyUpdate> = new EventEmitter();
@@ -72,6 +73,8 @@ export class CompaniesStateService {
     return this.selectedCompanyId;
   }
   public setSelectedCompanyId(data) {
+    console.log("selectedCompanyId", data);
+    this.onChangeSelectedCompanyId.emit(data);
     this.selectedCompanyId = data;
   }
   public setShowArchivedCompanies(data) {

@@ -1,13 +1,10 @@
-<div
-    class="col-md-12 --required"
-    (clickOutside)="hideSelectWrapper()"
->
+<div class="col-md-12 --required">
     <div class="header">
         <p class="title-link-to">Link To</p>
         <i
             class="icn-sm icn-help"
             placement="right"
-            ngbTooltip="The link to value can be used for documents"
+            ngbTooltip="The 'Link to' value can be used only for documents"
         ></i>
     </div>
     <div
@@ -39,20 +36,10 @@
             </div>
         </ng-template>
     </div>
-
-
-
-
-
-
-
-
-
-
-
     <div
         class="select-wrapper"
         *ngIf="showSelect"
+        (clickOutside)="hideSelectWrapper()"
     >
         <div class="tab-wrapper">
             <div

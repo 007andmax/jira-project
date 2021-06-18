@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { CategoryDocument } from 'src/app/components/left-panel/left-panel-documents/class/category-document';
+import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header/class/title-list-type';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
 import { Document } from '../../class/document';
@@ -14,6 +15,8 @@ export class DocumentsTemplatesItemComponent implements OnInit {
   @Input() item: Document;
   @Output() onRemoveDocument = new EventEmitter<any>();
   categories: Array<CategoryDocument> = [];
+  companyTypes = [new TitleListType('All companies', 'ALL'), new TitleListType('Client', 'CLIENT'), new TitleListType('Lead', 'LEAD'), new TitleListType('Vendor', 'VENDOR')];
+
   constructor(private documentsStateService: DocumentsStateService,
     private permissionsService: PermissionsService,
     public cd: ChangeDetectorRef,
@@ -26,6 +29,10 @@ export class DocumentsTemplatesItemComponent implements OnInit {
       console.log("this.categories", this.categories);
       this.cd.detectChanges();
     })
+  }
+  getCompanyType() {
+    let find = this.companyTypes.find(item => item.type === this.item.clientType);
+    return (find) ? find.title : '';
   }
   getCategoryName() {
     let find = this.categories.find(item => item.id === this.item.categoryId);

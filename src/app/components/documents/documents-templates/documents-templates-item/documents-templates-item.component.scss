@@ -12,7 +12,7 @@
     //transition: border .3s ease-in;
 
     &:hover {
-      border-color: #16a4fa;
+        border-color: #16a4fa;
     }
 
     .qt-button {
@@ -41,13 +41,13 @@
         line-height: 22px;
     }
 
-   &__label {
-     flex: 1;
-     margin-left: 8px;
-     margin-right: 4px;
-     font-family: Graphik-Medium, sans-serif;
-     color: #ff5263;
-   }
+    &__label {
+        flex: 1;
+        margin-left: 8px;
+        margin-right: 4px;
+        font-family: Graphik-Medium, sans-serif;
+        color: #000;
+    }
 
     &__description {
         font-size: 13px;

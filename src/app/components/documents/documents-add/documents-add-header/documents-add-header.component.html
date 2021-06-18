@@ -8,7 +8,10 @@
             <div class="icon__expand-redactor qt-za-16 qt-sz-16 qt-bg-contain"></div>
         </button>
     </div>
-    <div class="qt-df qt-ai-c">
+    <div
+        class="qt-df qt-ai-c"
+        *ngIf="documentEdit"
+    >
         <div class="document-header__info">Only you</div>
         <button class="qt-button qt-mr-16 qt-ml-16">
             <span>Invite</span>
@@ -31,67 +34,44 @@
                     <li
                         class="pointer"
                         ngbDropdownItem
+                        routerLink="/ng2/documents/add"
+                        [queryParams]="{'clone_document':documentEdit.id}"
+                        *ngIf="getPermissions('CREATE_DOCUMENT')"
                     >
-                        <div class="icon__share-folder qt-za-16 qt-sz-16 qt-bg-contain qt-mr-8"></div>
-                        Share...
-                    </li>
-                    <li
-                        class="pointer"
-                        ngbDropdownItem
-                    >
-                        <div class="icon__move qt-za-16 qt-sz-16 qt-bg-contain qt-mr-8"></div>
-                        Move...
-                    </li>
-                    <li
-                        class="pointer"
-                        ngbDropdownItem
-                    >
-                        <div class="icon__copy-gray qt-za-16 qt-sz-16 qt-bg-contain qt-mr-8"></div>
-                        Copy to...
-                    </li>
-                    <li
-                        class="pointer"
-                        ngbDropdownItem
-                    >
-                        <div class="icon__clone-document qt-za-16 qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                        <div class="icon__clone-document qt-sz-16 qt-bg-contain qt-mr-8"></div>
                         Clone Document
                     </li>
                     <li
                         class="pointer"
                         ngbDropdownItem
-                        (click)="toggleFind = true"
                     >
-                        <div class="icon__search-gray qt-za-16 qt-sz-16 qt-bg-contain qt-mr-8"></div>
-                        Find within document
-                    </li>
-                    <li
-                        class="pointer"
-                        ngbDropdownItem
-                    >
-                        <div class="icon__link-gray qt-za-16 qt-sz-16 qt-bg-contain qt-mr-8"></div>
-                        Copy Internal Link
-                    </li>
-                    <li
-                        class="pointer"
-                        ngbDropdownItem
-                    >
-                        <div class="icon__print qt-za-16 qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                        <div class="icon__print qt-sz-16 qt-bg-contain qt-mr-8"></div>
                         Print
                     </li>
                     <li
                         class="pointer"
                         ngbDropdownItem
                     >
-                        <div class="icon__download-pdf qt-za-16 qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                        <div class="icon__download-pdf qt-sz-16 qt-bg-contain qt-mr-8"></div>
                         Export PDF
                     </li>
-                    <hr>
                     <li
                         class="pointer"
                         ngbDropdownItem
+                        (click)="previewDocument()"
                     >
-                        <div class="icon__remove qt-za-16 qt-sz-16 qt-bg-contain qt-mr-8"></div>
-                        Move to Trash
+                        <div class="icon__go-to qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                        Open in new tab
+                    </li>
+                    <li
+                        class="pointer"
+                        ngbDropdownItem
+                        class="remove-item"
+                        (click)="onRemoveDocument()"
+                        *ngIf="getPermissions('DELETE_DOCUMENT')"
+                    >
+                        <div class="icon__remove qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                        Delete
                     </li>
                 </ul>
             </div>

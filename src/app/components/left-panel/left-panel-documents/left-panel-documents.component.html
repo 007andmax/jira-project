@@ -21,9 +21,9 @@
         class="app-left-panel__menu-expand-item-icon"
         (click)="goToState('new-template-documents')"
     >
-        All templates
+        Templates
     </li>
-    <ng-template
+    <!-- <ng-template
         ngFor
         let-category
         [ngForOf]="categories"
@@ -36,7 +36,7 @@
             <span class="app-left-panel__submenu-icon --folder"></span>
             {{category.name}}
         </li>
-    </ng-template>
+    </ng-template> -->
     <li
         class="app-left-panel__menu-expand-item-icon --required"
         *ngIf="toggleAddCategory"

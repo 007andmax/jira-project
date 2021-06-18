@@ -6,8 +6,10 @@
         <div class="card__icon">
             <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
         </div>
-        <div class="card__label">
-          All companies
+        <div
+            class="card__label"
+            [textContent]="getCompanyType()"
+        >
         </div>
         <div
             class="qt-button qt-ml-6"
