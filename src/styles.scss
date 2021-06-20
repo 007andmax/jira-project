@@ -1810,6 +1810,50 @@ app-quotes-item {
   .app-drop-down__right-icon {
     right: 0;
   }
+
+  .filter-tags-body {
+    .mat-form-field-flex {
+      .mat-form-field-infix {
+        &::before {
+          top: 11px;
+        }
+      }
+    }
+    .mat-form-field-infix {
+      min-height: 40px !important;
+      padding: 0;
+
+      input {
+        position: absolute;
+        height: 100% !important;
+        width: 100%;
+        top: 0;
+        left: 0;
+        text-indent: 34px;
+        border: none;
+      }
+    }
+
+    .mat-form-field-wrapper {
+      margin-top: 17px;
+    }
+
+    .mat-standard-chip {
+      margin: 2px;
+
+      &.mat-chip-with-trailing-icon {
+        z-index: 1;
+      }
+    }
+    .mat-chip-list-wrapper {
+      margin: 0;
+    }
+
+    .mat-form-field-label {
+      top: 12px;
+    }
+  }
+
 }
 .new-companies-content__list--item {
   position: relative;

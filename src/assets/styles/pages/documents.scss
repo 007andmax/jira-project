@@ -308,5 +308,37 @@
   .mat-form-field-wrapper {
     margin-top: 17px;
   }
+  .documents-filter-tags {
+    .mat-form-field-infix {
+      min-height: 40px;
+      padding: 0;
+      padding-left: 36px;
+
+      &::before {
+        top: 11px;
+      }
+
+      input {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        text-indent: 34px;
+      }
+    }
+    .mat-chip-list-wrapper {
+      margin: 0;
+    }
+    .mat-standard-chip.mat-chip-with-trailing-icon {
+      z-index: 1;
+    }
+    .mat-standard-chip {
+      margin: 2px;
+    }
+    .mat-form-field-label {
+      top: 12px;
+    }
+  }
 }
 
