@@ -12,6 +12,7 @@ import {
 } from '@angular/upgrade/static';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { IgxTimePickerModule } from 'igniteui-angular';
@@ -405,7 +406,7 @@ import { TicketsFilterTagsComponent } from './components/tickets/tickets/tickets
 
 import { DocumentsComponent } from './components/documents/documents.component';
 import { LeftPanelDocumentsComponent } from './components/left-panel/left-panel-documents/left-panel-documents.component';
-import { FroalaEditorModule, FroalaViewModule } from './modules/froala-editor';
+//import { FroalaEditorModule, FroalaViewModule } from './modules/froala-editor';
 
 
 
@@ -892,8 +893,8 @@ declare var $: any;
     DisabledBtnModule,
     NgxUploaderModule,
     AngularEditorModule,
-    FroalaEditorModule,
-    FroalaViewModule,
+    FroalaEditorModule.forRoot(),
+    FroalaViewModule.forRoot(),
     NgxMaskModule.forRoot()
   ],
   entryComponents: [

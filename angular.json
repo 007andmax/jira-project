@@ -35,7 +35,8 @@
               "./node_modules/timepicker/jquery.timepicker.css",
               "./node_modules/ngx-toastr/toastr.css",
               "src/app/components/device/styles.scss",
-              "node_modules/froala-editor/css/froala_editor.pkgd.css"
+              "./node_modules/froala-editor/css/froala_editor.pkgd.min.css",
+              "./node_modules/froala-editor/css/froala_style.min.css"
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js"
