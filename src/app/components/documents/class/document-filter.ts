@@ -11,6 +11,7 @@ export class DocumentFilter {
     reviewDateStart: string;
     reviewDateEnd: string;
     companyId: string;
+    isCompanyScope: boolean;
     constructor() {
 
     }
@@ -92,14 +93,18 @@ export class DocumentFilter {
     private getTtitle(item) {
         return item.isCategory ? item.categoryName : item.title
     }
+    public setCompanyScope(data) {
+        this.isCompanyScope = data;
+    }
     public getDataForFilter() {
         return {
-            categoryId: this.categoryId,
-            tags: (this.tags.length > 0) ? this.tags : null,
-            userId: this.userId,
-            reviewDateStart: this.reviewDateStart,
-            reviewDateEnd: this.reviewDateEnd,
-            companyId: this.companyId,
+            categoryId: (this.categoryId) ? this.categoryId : undefined,
+            tags: (this.tags.length > 0) ? this.tags : undefined,
+            userId: (this.userId) ? this.userId : undefined,
+            reviewDateStart: (this.reviewDateStart) ? this.reviewDateStart : undefined,
+            reviewDateEnd: (this.reviewDateEnd) ? this.reviewDateEnd : undefined,
+            companyId: (this.companyId) ? this.companyId : undefined,
+            isCompanyScope: (this.isCompanyScope) ? this.isCompanyScope : undefined
         }
     }
     public isExistFilters() {

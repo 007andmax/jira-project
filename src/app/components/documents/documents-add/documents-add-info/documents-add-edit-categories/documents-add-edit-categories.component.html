@@ -52,6 +52,8 @@
                                 (input)="onCheckNameCategoryForEdit()"
                                 (blur)="onEditCategory()"
                                 (keyup)="onEditCategoryByEnter($event)"
+                                min="1"
+                                max="100"
                             >
                             <p
                                 *ngIf="!editCategory.isEditMode(item.id)"
@@ -88,6 +90,8 @@
                             (input)="onCheckNameCategory()"
                             [ngClass]="{'--input-error':!addCategory.getValidate()}"
                             (blur)="onAddCategory()"
+                            min="1"
+                            max="100"
                             (keyup)="onAddCategoryByEnter($event)"
                         >
                     </div>

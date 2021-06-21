@@ -40,7 +40,7 @@ export class Document {
             content: this.content,
             documentType: this.documentType,
             clientType: this.clientType,
-            description: this.description,
+            description: (this.description && this.description.length > 0) ? this.description : undefined,
             reviewDate: this.reviewDate,
             categoryId: this.categoryId,
             tags: this.tags,

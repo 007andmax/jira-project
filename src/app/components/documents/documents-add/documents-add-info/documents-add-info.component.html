@@ -88,6 +88,8 @@
                         [(ngModel)]="documentAdd.title"
                         [ngClass]="{'--input-error':!documentValidate.getTitle() || !documentValidate.getUniqueTittle()}"
                         (blur)="onChangeTitle()"
+                        min="1"
+                        max="250"
                     >
                 </div>
                 <div class="documents-create__col --required">
@@ -95,6 +97,8 @@
                     <textarea
                         appTextArea
                         [limit]="160"
+                        minlength="1"
+                        maxlength="1000"
                         placeholder="Write Description"
                         [(ngModel)]="documentAdd.description"
                     ></textarea>
@@ -127,6 +131,7 @@
                 <div class="documents-create__col">
                     <documents-linked
                         #linked
+                        [isDisabled]="templateId"
                         [editItems]="documentAdd.linked"
                         (onSelectedItem)="onChangeLinked($event)"
                     ></documents-linked>
@@ -169,6 +174,7 @@
                             <input
                                 id
                                 type="checkbox"
+                                [disabled]="templateId"
                                 [(ngModel)]="requiredCompanyType"
                                 (change)="onResetCompanyType()"
                             >

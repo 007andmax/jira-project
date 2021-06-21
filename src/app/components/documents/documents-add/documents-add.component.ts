@@ -14,6 +14,7 @@ import { DocumentValidate } from './class/document-validate';
 })
 export class DocumentsAddComponent implements OnInit {
   companyId: string;
+  templateId: string;
   openAside: boolean = true;
   currentUser: any;
   showPreloader: boolean = false;
@@ -33,6 +34,7 @@ export class DocumentsAddComponent implements OnInit {
     let queryParams = this.activateRoute.queryParams.subscribe(
       (queryParam: any) => {
         if (queryParam['companyId']) this.companyId = queryParam['companyId'];
+        if (queryParam['template']) this.templateId = queryParam['template'];
         if (queryParam['id_category']) this.documentAdd.setCategoryId(queryParam['id_category']);
         if (queryParam['clone_document']) {
           this.showPreloader = true;
@@ -40,12 +42,17 @@ export class DocumentsAddComponent implements OnInit {
           this.documentsService.getDocument(queryParam['clone_document']).subscribe(data => {
             this.documentAdd.setData(data);
             this.documentValidate.setUniqueTittle(false);
+            if (queryParam['template']) {
+              this.documentAdd.setClientType(null);
+              this.documentAdd.linked.companies.push(this.companyId);
+            }
             // this.reviewDp.setEditDate(this.documentAdd.parseReviewDate());
             // if (this.documentAdd.clientType) this.requiredCompanyType = true;
             console.log("this.documentAdd", this.documentAdd);
             this.showPreloader = false;
           })
         }
+        console.log("this.templateId", this.templateId);
       }
     );
     this.sub.add(queryParams);

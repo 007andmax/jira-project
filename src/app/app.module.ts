@@ -452,6 +452,7 @@ import { DocumentsEditHistoryComponent } from './components/documents/documents-
 import { FindWithinDocumentComponent } from './components/documents/documents-edit/find-within-document/find-within-document.component';
 import { DocumentPreviewComponent } from './components/documents/document-preview/document-preview.component';
 import { CompanyDocumentsComponent } from './components/companies/company-documents/company-documents.component';
+import { CompanyDocumentsTableComponent } from './components/companies/company-documents/company-documents-table/company-documents-table.component';
 
 declare var $: any;
 /**
@@ -854,7 +855,8 @@ declare var $: any;
     DocumentsEditHistoryComponent,
     FindWithinDocumentComponent,
     DocumentPreviewComponent,
-    CompanyDocumentsComponent
+    CompanyDocumentsComponent,
+    CompanyDocumentsTableComponent
   ],
   imports: [
     BrowserModule,

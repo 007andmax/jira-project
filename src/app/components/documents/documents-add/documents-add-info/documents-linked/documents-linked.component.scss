@@ -145,7 +145,7 @@
 .title-link-to {
     font-family: "Graphik-Medium", sans-serif;
     font-size: 13px;
-    margin-bottom: 8px;
+
     //margin-top: 20px;
 }
 .qt-checkbox {
@@ -156,8 +156,9 @@
 .header {
     display: flex;
     align-items: center;
+    margin-bottom: 8px;
 }
 .icn-help {
-    margin: 0px 0px 8px 4px;
+    margin: 0px 0px 0px 4px;
     cursor: pointer;
 }

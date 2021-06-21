@@ -22,9 +22,9 @@ export class DocumentsTableComponent implements OnInit {
   showNotificationReview: boolean = false;
   currentUser: CurrentUser;
   constructor(private usersStateService: UsersStateService,
-    private router: Router,
+    public router: Router,
     private permissionsService: PermissionsService,
-    private documentsStateService: DocumentsStateService,
+    public documentsStateService: DocumentsStateService,
     private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {

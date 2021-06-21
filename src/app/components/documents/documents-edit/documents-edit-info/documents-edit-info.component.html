@@ -76,6 +76,8 @@
                         [(ngModel)]="documentEdit.title"
                         [ngClass]="{'--input-error':!documentValidate.getTitle() || !documentValidate.getUniqueTittle()}"
                         (blur)="onChangeTitle()"
+                        min="1"
+                        max="250"
                     >
                 </div>
                 <div class="documents-create__col --required">
@@ -83,6 +85,8 @@
                     <textarea
                         appTextArea
                         [limit]="160"
+                        minlength="1"
+                        maxlength="1000"
                         placeholder="Write Description"
                         [(ngModel)]="documentEdit.description"
                     ></textarea>

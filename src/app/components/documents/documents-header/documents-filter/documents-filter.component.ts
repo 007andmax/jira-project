@@ -46,12 +46,12 @@ export class DocumentsFilterComponent implements OnInit {
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
   public onClearAll() {
-    if (this.companyDp.isDisabled) this.companyDp.clearWithOutChanges();
+    if (!this.companyDp.isDisabled) this.companyDp.clearWithOutChanges();
     this.datesDp.clearWithOutChanges();
     this.usersDp.clearWithOutChanges();
     this.tagsDp.clearWithOutChanges();
     this.documentsFilter.setCategoryId(null);
-    if (this.companyDp.isDisabled) this.documentsFilter.setCompanyId(null);
+    if (!this.companyDp.isDisabled) this.documentsFilter.setCompanyId(null);
     this.documentsFilter.setTags([]);
     this.documentsFilter.setUserId(null);
     this.documentsFilter.setReviewDateStart(null);

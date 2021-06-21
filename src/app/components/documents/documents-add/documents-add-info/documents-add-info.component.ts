@@ -13,6 +13,7 @@ import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { DocumentsLinkedComponent } from './documents-linked/documents-linked.component';
 
 @Component({
   selector: 'app-documents-add-info',
@@ -30,8 +31,11 @@ export class DocumentsAddInfoComponent implements OnInit {
   @Output() onChangeRequiredCompanyType = new EventEmitter<any>();
   @Input() documentAdd: DocumentAdd = new DocumentAdd();
   @Input() companyId: string;
+  @Input() templateId: string;
+
   @Input() documentValidate: DocumentValidate = new DocumentValidate();
   @ViewChild('companyTypeDp') companyTypeDp: DropDownComponent;
+  @ViewChild('linked') linked: DocumentsLinkedComponent;
   @ViewChild('reviewDp') reviewDp: DatePickerComponent;
   @Output() onToggleAside = new EventEmitter<any>();
   constructor(public documentsStateService: DocumentsStateService,
@@ -44,7 +48,9 @@ export class DocumentsAddInfoComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log("this.templateId", this.templateId);
     if (this.documentAdd.clientType) this.requiredCompanyType = true;
+    if (this.templateId) this.linked.isDisabled = true;
     this.categories = this.documentsStateService.getCategories();
     this.documentsStateService.onGetCategories.subscribe((data: any) => {
       this.categories = data;

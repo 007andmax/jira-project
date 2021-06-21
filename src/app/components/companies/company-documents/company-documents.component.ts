@@ -21,6 +21,7 @@ export class CompanyDocumentsComponent extends DocumentsComponent {
       this.companiesStateService.setSelectedCompanyId(this.companyId);
       console.log("id", this.companyId);
       this.filter.setCompanyId(this.companyId);
+      this.filter.setCompanyScope(true);
       this.getFilterList();
 
       let company = this.companiesStateService.getCompanies().find(item => item.id === this.companyId);

@@ -1,50 +1,50 @@
 <div class="qt-aside-modern__footer">
     <div class="qt-aside-modern__footer-inner">
         <div class="qt-df qt-ai-c">
-          <button
-            *ngIf="documentAdd && getPermissions('CREATE_DOCUMENT')"
-            class="qt-button qt-mr-12"
-            [disabled]="requiredCompanyType"
-            [ngClass]="{'disabled-add-document':requiredCompanyType}"
-            appDisabledBtn
-            #addBtn="disabled"
-            (onClick)="add('DOCUMENT')"
-          >
-            <span *ngIf="!addBtn.isBlock()">Create Document</span>
-            <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
-          </button>
-          <button
-            *ngIf="documentEdit"
-            class="qt-button qt-mr-12"
-            appDisabledBtn
-            #addBtn="disabled"
-            (onClick)="edit()"
-          >
-            <span
-              *ngIf="!addBtn.isBlock()"
-              [textContent]="documentEdit.isTemplateForEdit() ? 'Save template' : 'Save Document'"
-            ></span>
-            <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
-          </button>
-          <button
-            *ngIf="documentAdd && getPermissions('CREATE_TEMPLATE')"
-            class="qt-button --gray"
-            [disabled]="documentAdd && !documentAdd.isTemplate()"
-            [ngClass]="{'disabled':documentAdd && !documentAdd.isTemplate()}"
-            (click)="add('TEMPLATE')"
-          >
-            Save as Template
-          </button>
+            <button
+                *ngIf="documentAdd && getPermissions('CREATE_DOCUMENT')"
+                class="qt-button qt-mr-12"
+                [disabled]="requiredCompanyType"
+                [ngClass]="{'disabled-add-document':requiredCompanyType}"
+                appDisabledBtn
+                #addBtn="disabled"
+                (onClick)="add('DOCUMENT')"
+            >
+                <span *ngIf="!addBtn.isBlock()">Create Document</span>
+                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
+            </button>
+            <button
+                *ngIf="documentEdit"
+                class="qt-button qt-mr-12"
+                appDisabledBtn
+                #addBtn="disabled"
+                (onClick)="edit()"
+            >
+                <span
+                    *ngIf="!addBtn.isBlock()"
+                    [textContent]="documentEdit.isTemplateForEdit() ? 'Save template' : 'Save Document'"
+                ></span>
+                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
+            </button>
+            <button
+                *ngIf="documentAdd && getPermissions('CREATE_TEMPLATE') && !templateId"
+                class="qt-button --gray"
+                [disabled]="documentAdd && !documentAdd.isTemplate()"
+                [ngClass]="{'disabled':documentAdd && !documentAdd.isTemplate()}"
+                (click)="add('TEMPLATE')"
+            >
+                Save as Template
+            </button>
         </div>
         <div class="qt-df qt-ai-c">
-          <button class="btn-new btn-primary-white qt-mr-8">
-            <div class="icon__templete-blue qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6"></div>
-            Templates
-          </button>
-          <button class="btn-new btn-primary-white">
-            <div class="icon__copy-blue qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6"></div>
-            Clone Document
-          </button>
+            <button class="btn-new btn-primary-white qt-mr-8">
+                <div class="icon__templete-blue qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6"></div>
+                Templates
+            </button>
+            <button class="btn-new btn-primary-white">
+                <div class="icon__copy-blue qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6"></div>
+                Clone Document
+            </button>
         </div>
     </div>
 </div>

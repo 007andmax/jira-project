@@ -13,6 +13,8 @@
     ></app-documents-add-body>
     <app-documents-add-footer
         *ngIf="!showPreloader"
+        [templateId]="templateId"
+        [companyId]="companyId"
         [requiredCompanyType]="requiredCompanyType"
         [documentValidate]="documentValidate"
         [documentAdd]="documentAdd"
@@ -20,6 +22,7 @@
     <app-documents-add-info
         *ngIf="!showPreloader"
         [companyId]="companyId"
+        [templateId]="templateId"
         (onChangeRequiredCompanyType)="requiredCompanyType = $event"
         [documentValidate]="documentValidate"
         [documentAdd]="documentAdd"

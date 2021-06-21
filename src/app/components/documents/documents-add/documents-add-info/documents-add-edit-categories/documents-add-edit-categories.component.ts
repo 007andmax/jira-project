@@ -102,7 +102,7 @@ export class DocumentsAddEditCategoriesComponent implements OnInit, OnDestroy {
   }
   onEditCategory() {
     console.log("onEditCategory");
-    if (this.editCategory.name !== this.editCategory.newName) {
+    if (this.editCategory.name !== this.editCategory.newName && this.editCategory.newName.length > 0) {
       if (!this.editCategory.isValidate(this.categories.find(item => item.name === this.editCategory.newName))) return;
       this.documentsService.editNameCategory(this.editCategory.id, this.editCategory.newName).subscribe(data => {
         this.editCategory = new DocumentCategoryEdit();

@@ -14,7 +14,34 @@ export class DocumentAdd {
     constructor() {
 
     }
-
+    public getDataForAdd() {
+        return {
+            title: this.title,
+            content: this.content,
+            categoryId: this.categoryId,
+            description: (this.description && this.description.length > 0) ? this.description : undefined,
+            documentType: this.documentType,
+            clientType: this.clientType,
+            reviewDate: this.reviewDate,
+            tags: this.tags,
+            linked: this.linked,
+        }
+    }
+    public getDataForAdByTemplate(templateId, clientCompanyId) {
+        return {
+            title: this.title,
+            content: this.content,
+            categoryId: this.categoryId,
+            description: (this.description && this.description.length > 0) ? this.description : undefined,
+            documentType: this.documentType,
+            clientType: this.clientType,
+            reviewDate: this.reviewDate,
+            tags: this.tags,
+            templateId: templateId,
+            clientCompanyId: clientCompanyId,
+            linked: this.linked,
+        }
+    }
     public setData(data) {
         this.title = data.title;
         this.content = data.content;

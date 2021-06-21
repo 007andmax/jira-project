@@ -16,6 +16,9 @@ export class DocumentsAddFooterComponent implements OnInit {
   @Input() requiredCompanyType: boolean;
   @Input() documentAdd: DocumentAdd;
   @Input() documentEdit: Document;
+  @Input() templateId: string;
+  @Input() companyId: string;
+
   @Input() documentValidate: DocumentValidate = new DocumentValidate();
   constructor(private documentsService: DocumentsService,
     private leftPanelStateService: LeftPanelStateService,
@@ -28,9 +31,16 @@ export class DocumentsAddFooterComponent implements OnInit {
     console.log("documentAdd", this.documentAdd);
     this.documentAdd.setDocumentType(documentType);
     if (!this.documentValidate.isValidate(this.documentAdd)) return;
-    this.documentsService.add(this.documentAdd).subscribe(data => {
-      this.leftPanelStateService.goToState('new-documents');
-    })
+    if (this.templateId) {
+      this.documentsService.add(this.documentAdd.getDataForAdByTemplate(this.templateId, this.companyId)).subscribe(data => {
+        this.leftPanelStateService.goToState('new-documents');
+      })
+    } else {
+      this.documentsService.add(this.documentAdd.getDataForAdd()).subscribe(data => {
+        this.leftPanelStateService.goToState('new-documents');
+      })
+    }
+
   }
   edit() {
     console.log("documentEdit", this.documentEdit);

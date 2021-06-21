@@ -4,7 +4,7 @@
         <i
             class="icn-sm icn-help"
             placement="right"
-            ngbTooltip="The 'Link to' value can be used only for documents"
+            ngbTooltip='The "Link to" value can be used only for documents'
         ></i>
     </div>
     <div
@@ -31,6 +31,7 @@
                 <span>{{item.name}}</span>
                 <i
                     class="icn-sm icn-remove-old"
+                    *ngIf="!isDisabled"
                     (click)="removeItem(i)"
                 ></i>
             </div>
