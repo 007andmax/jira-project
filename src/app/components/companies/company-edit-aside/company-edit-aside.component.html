@@ -431,10 +431,12 @@
 
 
         </div>
-        <app-company-tags
+        <div class="col-md-12">
+          <app-company-tags
             #companyTags
             (tagsChange)="onChangeTags($event)"
-        ></app-company-tags>
+          ></app-company-tags>
+        </div>
         <div class="col-md-12 editable-field">
             <p>Note for Company</p>
             <div class="editable-description">
