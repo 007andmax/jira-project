@@ -62,6 +62,24 @@ export class DocumentsAddBodyComponent implements OnInit {
       // Allow to upload PNG and JPG.
       imageAllowedTypes: ['jpeg', 'jpg', 'png'],
 
+
+      filesManagerUploadURL: self.apiUrl + 'file?isAvatar=false&documentFile=true',
+      filesManagerUploadParams: {
+        id: 'my_editor'
+      },
+      filesManagerMaxSize: 1024 * 1024 * 5,
+
+
+
+      fileUpload: true,
+      fileUploadURL: self.apiUrl + 'file?isAvatar=false&documentFile=true',
+      fileUploadParams: {
+        id: 'my_editor'
+      },
+      fileUploadMethod: 'POST',
+      fileMaxSize: 1024 * 1024 * 5,
+      fileAllowedTypes: ['*'],
+
       codeMirror: true,
       codeMirrorOptions: {
         indentWithTabs: true,
@@ -131,7 +149,18 @@ export class DocumentsAddBodyComponent implements OnInit {
           // this is the editor instance.
           console.log(files);
           console.log(response);
-        }
+        },
+        'file.beforeUpload': function (files) {
+          // Return false if you want to stop the file upload.
+          console.log(files);
+        },
+        'file.uploaded': function (response) {
+          // File was uploaded to the server.
+          console.log(response);
+        },
+        'file.inserted': function ($file, response) {
+          // File was inserted in the editor.
+        },
 
       }
     };

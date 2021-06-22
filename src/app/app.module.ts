@@ -423,6 +423,7 @@ import 'froala-editor/js/languages/de.js';
 
 
 import 'froala-editor/js/plugins/image.min.js';
+import 'froala-editor/js/plugins/file.min.js';
 
 // Import a third-party plugin.
 import 'froala-editor/js/third_party/font_awesome.min';
