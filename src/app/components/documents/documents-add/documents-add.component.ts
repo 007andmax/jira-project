@@ -50,6 +50,7 @@ export class DocumentsAddComponent implements OnInit {
             // if (this.documentAdd.clientType) this.requiredCompanyType = true;
             console.log("this.documentAdd", this.documentAdd);
             this.showPreloader = false;
+            this.cd.detectChanges();
           })
         }
         console.log("this.templateId", this.templateId);

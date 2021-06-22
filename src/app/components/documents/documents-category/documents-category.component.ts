@@ -45,6 +45,7 @@ export class DocumentsCategoryComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+    window.scrollTo(0, 0);
     this.documentsStateService.onGetCategories.subscribe(data => {
       data.forEach(element => {
         let findIndex = this.list.findIndex(item => item.categoryId === element.id);

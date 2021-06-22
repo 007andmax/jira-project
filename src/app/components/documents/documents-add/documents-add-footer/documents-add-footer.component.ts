@@ -33,21 +33,29 @@ export class DocumentsAddFooterComponent implements OnInit {
     if (!this.documentValidate.isValidate(this.documentAdd)) return;
     if (this.templateId) {
       this.documentsService.add(this.documentAdd.getDataForAdByTemplate(this.templateId, this.companyId)).subscribe(data => {
-        this.leftPanelStateService.goToState('new-documents');
+        this.goToDocumentsList();
       })
     } else {
       this.documentsService.add(this.documentAdd.getDataForAdd()).subscribe(data => {
-        this.leftPanelStateService.goToState('new-documents');
+        this.goToDocumentsList();
       })
     }
 
+  }
+  public goToDocumentsList() {
+    if (this.companyId) {
+      this.router.navigate(
+        ['/ng2/company/', this.companyId, 'documents']);
+    } else {
+      this.leftPanelStateService.goToState('new-documents');
+    }
   }
   edit() {
     console.log("documentEdit", this.documentEdit);
 
     if (!this.documentValidate.isValidate(this.documentEdit)) return;
     this.documentsService.edit(this.documentEdit.id, this.documentEdit.getDataForEdit()).subscribe(data => {
-      this.leftPanelStateService.goToState('new-documents');
+      this.goToDocumentsList();
     })
   }
   public getPermissions(action) {

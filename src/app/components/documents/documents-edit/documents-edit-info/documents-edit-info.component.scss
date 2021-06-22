@@ -90,6 +90,23 @@
 
     .checkbox-container {
         margin-bottom: 6px;
+        span {
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 16px;
+            height: 16px;
+            border: 1px solid #c4cbd5;
+            background: white;
+            min-width: 16px;
+            border-radius: 2px;
+            margin: 0;
+            display: block;
+        }
+        input:checked ~ span {
+            background-image: url(/html/assets/img/icons/checkbox-on.svg);
+            border: none;
+        }
     }
 
     .checkbox-wrapper .with-checkbox label {

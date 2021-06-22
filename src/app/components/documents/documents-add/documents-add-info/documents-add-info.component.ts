@@ -50,7 +50,7 @@ export class DocumentsAddInfoComponent implements OnInit {
   ngOnInit() {
     console.log("this.templateId", this.templateId);
     if (this.documentAdd.clientType) this.requiredCompanyType = true;
-    if (this.templateId) this.linked.isDisabled = true;
+    // if (this.templateId) this.linked.isDisabled = true;
     this.categories = this.documentsStateService.getCategories();
     this.documentsStateService.onGetCategories.subscribe((data: any) => {
       this.categories = data;
