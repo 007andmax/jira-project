@@ -35,6 +35,7 @@ export class DocumentsTemplatesInfoComponent implements OnInit, OnDestroy {
         console.log("htmlDoc", htmlDoc.textContent);
         //console.log("$('.documents-create-panel__body')", $('.documents-create-panel__body'));
         //$('.documents-create-panel__body').parseHTML(this.document.content);
+        this.elRef.nativeElement.querySelector(".documents-create-panel__body").innerHTML = '';
         this.elRef.nativeElement.querySelector(".documents-create-panel__body").insertAdjacentHTML('afterbegin', this.document.content);
         // this.body = htmlDoc.getRootNode();
         this.showPreloader = false;

@@ -17,6 +17,7 @@ export class Document {
     title: string;
     updatedAt: string;
     isCategory: boolean = false;
+    isDefault: boolean;
     constructor(data, isCategory = false) {
         this.categoryId = data.categoryId;
         this.categoryName = data.categoryName;
@@ -33,6 +34,7 @@ export class Document {
         this.updatedAt = data.updatedAt;
         this.content = data.content;
         this.isCategory = isCategory;
+        this.isDefault = data.isDefault;
     }
     public getDataForEdit() {
         return {

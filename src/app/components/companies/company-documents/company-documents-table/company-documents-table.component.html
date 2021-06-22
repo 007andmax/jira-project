@@ -10,7 +10,8 @@
         <div class="documents-table__title-menu">
             <div
                 class="qt-sz-16 qt-bg-contain qt-mr-8"
-                [ngClass]="{ 'icon__documents':item.documentType === 'DOCUMENT'}"
+                [ngClass]="{ 'icon__documents':item.documentType === 'DOCUMENT',
+            'icon__templete-thumb':item.documentType === 'TEMPLATE'}"
             ></div>
             <div
                 class="title ellipsis"
