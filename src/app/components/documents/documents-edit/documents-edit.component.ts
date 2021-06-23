@@ -26,6 +26,7 @@ export class DocumentsEditComponent extends DocumentsAddComponent {
       (queryParam: any) => {
         if (queryParam['companyId']) this.companyId = queryParam['companyId'];
         console.log("this.companyId", this.companyId);
+        this.cd.detectChanges();
       }
     );
     this.sub.add(queryParams);

@@ -13,6 +13,7 @@
     ></app-documents-add-body>
     <app-documents-add-footer
         *ngIf="!showPreloader"
+        [companyId]="companyId"
         [documentValidate]="documentValidate"
         [documentEdit]="documentEdit"
     ></app-documents-add-footer>
