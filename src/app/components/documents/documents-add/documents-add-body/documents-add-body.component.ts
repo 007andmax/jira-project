@@ -160,7 +160,7 @@ export class DocumentsAddBodyComponent implements OnInit {
         },
         'file.inserted': function ($file, response) {
           console.log($file);
-          $file.href = `${$file}/attachment`;
+          $file[0].href = `${$file[0]}/attachment`;
           console.log(response);
           // File was inserted in the editor.
         },
