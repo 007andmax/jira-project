@@ -12,7 +12,7 @@ declare const CodeMirror: any;
 })
 export class DocumentsAddBodyComponent implements OnInit {
   private apiUrl = environment.apiUrl;
-  @Input() editorContent = "<p>Hello, Froala!</p><p>wefwefwf</p><p>wefwefwef</p><p>wefwefwef</p><p>wef</p>";
+  @Input() editorContent = "";
   public options: Object;
   codox: any;
   editor: any;
@@ -25,7 +25,7 @@ export class DocumentsAddBodyComponent implements OnInit {
   ngOnInit() {
     this.currentUser = this.usersStateService.getCurrentUser();
     this.onInitFloara();
-    console.log('document.getElementById("froala-editor")', document.getElementById("froala-editor"));
+
     //  var editor = CodeMirror(document.getElementById("froala-editor"));
   }
   ngDoCheck() {
@@ -38,7 +38,6 @@ export class DocumentsAddBodyComponent implements OnInit {
       toolbarSticky: false,
       saveParam: 'file',
       // Set the save URL.
-      //  saveURL: self.apiUrl + 'file?isAvatar=false',
       // HTTP request type.
       saveMethod: 'POST',
       // Additional save params.
@@ -80,15 +79,7 @@ export class DocumentsAddBodyComponent implements OnInit {
       fileMaxSize: 1024 * 1024 * 4,
       fileAllowedTypes: ['*'],
 
-      codeMirror: true,
-      codeMirrorOptions: {
-        indentWithTabs: true,
-        lineNumbers: true,
-        lineWrapping: true,
-        mode: 'text/html',
-        tabMode: 'indent',
-        tabSize: 4
-      },
+
       events: {
         "initialized": function () {
           let config = {
