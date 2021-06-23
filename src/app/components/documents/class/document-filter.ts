@@ -98,12 +98,12 @@ export class DocumentFilter {
     }
     public getDataForFilter() {
         return {
-            linkedCompanyId: (this.categoryId) ? this.categoryId : undefined,
+            categoryId: (this.categoryId) ? this.categoryId : undefined,
             tags: (this.tags.length > 0) ? this.tags : undefined,
             userId: (this.userId) ? this.userId : undefined,
             reviewDateStart: (this.reviewDateStart) ? this.reviewDateStart : undefined,
             reviewDateEnd: (this.reviewDateEnd) ? this.reviewDateEnd : undefined,
-            companyId: (this.companyId) ? this.companyId : undefined,
+            linkedCompanyId: (this.companyId) ? this.companyId : undefined,
             isCompanyScope: (this.isCompanyScope) ? this.isCompanyScope : undefined
         }
     }

@@ -1,4 +1,3 @@
-import { CurrentUser } from "src/class/current-user/current-user";
 import { DocumentLinked } from "./document-linked";
 
 export class Document {
