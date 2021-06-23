@@ -105,6 +105,7 @@
                     <li
                         class="pointer"
                         ngbDropdownItem
+                        (click)="printPdf()"
                     >
                         <div class="icon__print qt-sz-16 qt-bg-contain qt-mr-8"></div>
                         Print
@@ -112,6 +113,7 @@
                     <li
                         class="pointer"
                         ngbDropdownItem
+                        (click)="exportPdf()"
                     >
                         <div class="icon__download-pdf qt-sz-16 qt-bg-contain qt-mr-8"></div>
                         Export PDF

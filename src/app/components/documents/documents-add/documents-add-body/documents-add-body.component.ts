@@ -57,7 +57,7 @@ export class DocumentsAddBodyComponent implements OnInit {
       imageUploadMethod: 'POST',
 
       // Set max image size to 5MB.
-      imageMaxSize: 5 * 1024 * 1024,
+      imageMaxSize: 4 * 1024 * 1024,
 
       // Allow to upload PNG and JPG.
       imageAllowedTypes: ['jpeg', 'jpg', 'png'],
@@ -67,7 +67,7 @@ export class DocumentsAddBodyComponent implements OnInit {
       filesManagerUploadParams: {
         id: 'my_editor'
       },
-      filesManagerMaxSize: 1024 * 1024 * 5,
+      filesManagerMaxSize: 1024 * 1024 * 4,
 
 
 
@@ -77,7 +77,7 @@ export class DocumentsAddBodyComponent implements OnInit {
         id: 'my_editor'
       },
       fileUploadMethod: 'POST',
-      fileMaxSize: 1024 * 1024 * 5,
+      fileMaxSize: 1024 * 1024 * 4,
       fileAllowedTypes: ['*'],
 
       codeMirror: true,
@@ -159,6 +159,8 @@ export class DocumentsAddBodyComponent implements OnInit {
           console.log(response);
         },
         'file.inserted': function ($file, response) {
+          console.log($file);
+          console.log(response);
           // File was inserted in the editor.
         },
 

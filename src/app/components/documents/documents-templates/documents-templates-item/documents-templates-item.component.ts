@@ -53,4 +53,15 @@ export class DocumentsTemplatesItemComponent implements OnInit {
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
   }
+  exportPdf() {
+    const url = `/documents/export?id=${this.item.id}`;
+    console.log("url", url);
+    window.open(url, '_blank');
+  }
+  printPdf() {
+    const url = `/documents/show/${this.item.id}/pdf`;
+    console.log("url", url);
+    let open = window.open(url, '_blank');
+    open.print();
+  }
 }

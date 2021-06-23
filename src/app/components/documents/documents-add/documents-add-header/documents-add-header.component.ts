@@ -63,6 +63,17 @@ export class DocumentsAddHeaderComponent implements OnInit, OnDestroy {
     this.hideleLeftPanel = !this.hideleLeftPanel;
     this.leftPanelStateService.hideLeftPanel(this.hideleLeftPanel);
   }
+  exportPdf() {
+    const url = `/documents/export?id=${this.documentEdit.id}`;
+    console.log("url", url);
+    window.open(url, '_blank');
+  }
+  printPdf() {
+    const url = `/documents/show/${this.documentEdit.id}/pdf`;
+    console.log("url", url);
+    let open = window.open(url, '_blank');
+    open.print();
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

@@ -60,6 +60,17 @@ export class DocumentPreviewComponent implements OnInit {
       this.cd.detectChanges();
     })
   }
+  exportPdf() {
+    const url = `/documents/export?id=${this.document.id}`;
+    console.log("url", url);
+    window.open(url, '_blank');
+  }
+  printPdf() {
+    const url = `/documents/show/${this.document.id}/pdf`;
+    console.log("url", url);
+    let open = window.open(url, '_blank');
+    open.print();
+  }
   editDocument() {
     this.leftPanelStateService.hideLeftPanel(false);
     this.router.navigate(

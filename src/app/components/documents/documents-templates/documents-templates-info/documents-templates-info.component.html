@@ -14,7 +14,7 @@
     </div>
     <div
         class="qt-aside-modern__content --no-padding"
-        [hidden]="showPreloader"
+        [ngStyle]="{'opacity':(!showPreloader) ? 1 : 0}"
     >
         <!-- Tab Header -->
         <div
