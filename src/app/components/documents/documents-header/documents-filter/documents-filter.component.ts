@@ -73,8 +73,8 @@ export class DocumentsFilterComponent implements OnInit {
 
   public filterByDate(value) {
     if (value.start !== '' && value.end !== '') {
-      this.documentsFilter.setReviewDateStart(moment(new Date(value.start)).format('YYYY/DD/MM'));
-      this.documentsFilter.setReviewDateEnd(moment(new Date(value.end)).format('YYYY/DD/MM'));
+      this.documentsFilter.setReviewDateStart(moment(new Date(value.start)).format('YYYY/MM/DD'));
+      this.documentsFilter.setReviewDateEnd(moment(new Date(value.end)).format('YYYY/MM/DD'));
     } else {
       this.documentsFilter.setReviewDateStart(null);
       this.documentsFilter.setReviewDateEnd(null);

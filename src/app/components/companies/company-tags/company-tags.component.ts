@@ -134,6 +134,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
       this.selectedTag.splice(findIndex, 1);
     } else {
       this.selectedTag.push(newItem);
+      this.tags = this.reqTags;
     }
     this.tagsChange.emit(this.selectedTag);
     this.tagCtrl.setValue(null);
