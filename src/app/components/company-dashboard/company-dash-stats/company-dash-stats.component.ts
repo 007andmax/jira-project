@@ -47,13 +47,9 @@ export class CompanyDashStatsComponent implements OnInit {
   ) { }
 
   public ngOnInit() {
-    //this._id = /[^/]*$/.exec(window.location.href)[0];
     this._id = this.activateRoute.snapshot.params['id'];
     let subscription = this.activateRoute.params.subscribe(params => {
-
       this._id = params['id'];
-      console.log("id", this._id);
-
     });
     this.sub.add(subscription);
     if (this.usersStateService.getAllUsers().length > 0) this.onGetUsersCount(this.usersStateService.getAllUsers());

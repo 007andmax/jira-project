@@ -102,13 +102,11 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
       this.statusColor = data;
     })
     this.header.setTitle("All Tickets");
-
     let id = this.activateRoute.snapshot.params['id'];
     let subscription = this.activateRoute.params.subscribe(params => {
       this.showPreloader = true;
       id = params['id'];
       this.companiesStateService.setSelectedCompanyId(id);
-      console.log("id", id);
       let ticket_id = id;
       let company = this.companiesStateService.getCompanies().find(item => item.id === ticket_id);
       this.header.filter.setTypeFilterWithoutChange("ALL");
@@ -119,7 +117,6 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
       this.ticketsFilter.setListType("ALL");
       this.ticketsFilter.setCompany(company);
       this.header.filter.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.company.id === company.id));
-
       this.getCount();
       this.onScroll();
     });

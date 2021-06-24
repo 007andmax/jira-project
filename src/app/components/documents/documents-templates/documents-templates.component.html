@@ -1,11 +1,7 @@
-<!-- <p> -->
-<!-- documents-templates works! -->
-<!-- </p> -->
 <div class="qt-page-list__header documents-templates-page">
     <div class="qt-page-list__header-title-line">
         <h3 class="qt-page-list__header-title">Templates</h3>
         <div class="documents-templates-panel__subheader">
-            <!-- Template Gallery -->
             <div
                 [ngClass]="{'--active':tab === 'MY_TEMPLATES'}"
                 (click)="onChangeTemplate('MY_TEMPLATES')"
@@ -20,9 +16,6 @@
             >
                 Template Gallery
             </div>
-            <!-- End Template Gallery -->
-            <!-- My Templates -->
-            <!-- END My Templates -->
         </div>
         <div
             class="qt-aside-modern__header-close icon__close"
@@ -36,7 +29,6 @@
 ></documents-templates-header>
 <div class="qt-page-list documents-templates-page">
     <div class="documents-create-panel__body">
-        <!-- TEMPLATE_GALLERY Tab Content -->
         <div
             class="loading"
             *ngIf="showPreloader"
@@ -59,8 +51,6 @@
                 </ng-template>
             </div>
         </div>
-        <!-- END TEMPLATE_GALLERY Tab Content -->
-        <!-- MY_TEMPLATES Tab Content -->
         <div *ngIf="tab === 'MY_TEMPLATES'">
             <div class="card-line">
                 <ng-template
@@ -76,7 +66,6 @@
                 </ng-template>
             </div>
         </div>
-        <!-- END MY_TEMPLATES Tab Content -->
     </div>
 </div>
 <documents-templates-info></documents-templates-info>

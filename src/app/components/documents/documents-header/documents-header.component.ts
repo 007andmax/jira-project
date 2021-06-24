@@ -5,7 +5,6 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { DocumentsFilterComponent } from './documents-filter/documents-filter.component';
 
-
 @Component({
   selector: 'documents-header',
   templateUrl: './documents-header.component.html',
@@ -43,9 +42,7 @@ export class DocumentsHeaderComponent implements OnInit {
     this.activePage = this.leftPanelStateService.activePage;
     this.leftPanelStateService.onFirstOpen.subscribe(data => {
       this.activePage = data;
-      console.log("this.activePage", this.activePage);
     })
-    console.log("this.activePage", this.activePage);
   }
   clearSearch() {
     this.searchText = "";
@@ -62,7 +59,6 @@ export class DocumentsHeaderComponent implements OnInit {
     this.onChangeFilterField.emit(field);
   }
   clearAll() {
-
     this.filter.onClearAll();
   }
   search(event) {
@@ -75,10 +71,8 @@ export class DocumentsHeaderComponent implements OnInit {
     }
   }
   goToTemplates() {
-    //this.leftPanelStateService.goToState('new-template-documents');
     this.router.navigate(
       ['/ng2/documents/templates'], { queryParams: { companyId: this.companyId } });
-
   }
   onChangeCountFilter(data) {
     this.countFilter = data;
@@ -90,5 +84,4 @@ export class DocumentsHeaderComponent implements OnInit {
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
-
 }

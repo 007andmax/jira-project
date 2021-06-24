@@ -73,7 +73,6 @@ export class CompaniesStateService {
     return this.selectedCompanyId;
   }
   public setSelectedCompanyId(data) {
-    console.log("selectedCompanyId", data);
     this.onChangeSelectedCompanyId.emit(data);
     this.selectedCompanyId = data;
   }

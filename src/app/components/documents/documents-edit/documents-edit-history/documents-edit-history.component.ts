@@ -17,7 +17,6 @@ export class DocumentsEditHistoryComponent implements OnInit {
 
   ngOnInit() {
     this.documentsService.getHistory(this.documentEdit.id).subscribe((data: any) => {
-      console.log("data", data);
       this.list = data.map(item => new DocumentHistory(item));
     })
   }
@@ -26,7 +25,6 @@ export class DocumentsEditHistoryComponent implements OnInit {
   }
   getUserAvatarUrl(user) {
     if (!(user && user.avatar)) return '#7c77bc';
-
     if (user.id) {
       return `#7c77bc url(${'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt :
         '')}) 0% 0% / cover no-repeat`

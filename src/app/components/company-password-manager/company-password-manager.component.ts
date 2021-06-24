@@ -22,7 +22,6 @@ export class CompanyPasswordManagerComponent extends PasswordManagerComponent {
       this.showPreloader = true;
       this.companyId = params['id'];
       this.companiesStateService.setSelectedCompanyId(this.companyId);
-      console.log("id", this.companyId);
       this.getRecords();
     });
     this.sub.add(subscription);

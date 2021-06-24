@@ -60,12 +60,9 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.leftPanelStateService.changeStateWithoutNavigate('company-network-scan');
-
     let id = this.activateRoute.snapshot.params['id'];
     let subscription = this.activateRoute.params.subscribe(params => {
-
       id = params['id'];
-      console.log("id", id);
       this.companiesStateService.setSelectedCompanyId(id);
       this.companyId = id;
       this.devicesStateService.subsribeToNetScan(this.companyId);

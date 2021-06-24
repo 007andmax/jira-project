@@ -279,9 +279,7 @@ export class CompanyDashDetailComponent implements OnInit {
   public ngOnInit() {
     this._id = this.activateRoute.snapshot.params['id'];
     let subscription = this.activateRoute.params.subscribe(params => {
-
       this._id = params['id'];
-      console.log("id", this._id);
       this.getCompanyDetails();
     });
     this.sub.add(subscription);

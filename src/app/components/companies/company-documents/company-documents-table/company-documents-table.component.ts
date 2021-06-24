@@ -8,9 +8,7 @@ import { DocumentsTableComponent } from 'src/app/components/documents/documents-
 })
 export class CompanyDocumentsTableComponent extends DocumentsTableComponent {
 
-
   showTemplate() {
-    console.log("item", this.item);
     if (this.getPermissions('VIEW_DOCUMENT')) {
       if (this.item.documentType === "DOCUMENT") this.documentsStateService.onInitGetTemplate(this.item);
       if (this.item.documentType === "TEMPLATE") {

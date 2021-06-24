@@ -16,7 +16,6 @@ export class CompanyContractsComponent extends ContractsComponent implements OnI
     let subscription = this.activateRoute.params.subscribe(params => {
       id = params['id'];
       this.companiesStateService.setSelectedCompanyId(id);
-      console.log("id", id);
       this.companyContracts = this.companiesStateService.getCompanies().find(item => item.id === id);
     });
     this.sub.add(subscription);

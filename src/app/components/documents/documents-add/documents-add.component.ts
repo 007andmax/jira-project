@@ -27,7 +27,6 @@ export class DocumentsAddComponent implements OnInit {
     public documentsService: DocumentsService,
     public cd: ChangeDetectorRef,
     public leftPanelStateService: LeftPanelStateService) {
-
   }
 
   ngOnInit() {
@@ -46,25 +45,17 @@ export class DocumentsAddComponent implements OnInit {
               this.documentAdd.setClientType(null);
               this.documentAdd.linked.companies.push(this.companyId);
             }
-            // this.reviewDp.setEditDate(this.documentAdd.parseReviewDate());
-            // if (this.documentAdd.clientType) this.requiredCompanyType = true;
-            console.log("this.documentAdd", this.documentAdd);
             this.showPreloader = false;
             this.cd.detectChanges();
           })
         }
-        console.log("this.templateId", this.templateId);
       }
     );
     this.sub.add(queryParams);
     this.leftPanelStateService.changeStateWithoutNavigate('new-add-documents');
-    if (this.usersStateService.getCurrentUser()) {
-      this.currentUser = this.usersStateService.getCurrentUser();
-
-    }
+    if (this.usersStateService.getCurrentUser()) this.currentUser = this.usersStateService.getCurrentUser();
     this.usersStateService.getOnGetCurrentuser().subscribe(data => {
       this.currentUser = data;
-
     })
   }
   onChangeContent(data) {

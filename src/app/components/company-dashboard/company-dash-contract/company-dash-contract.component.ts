@@ -43,17 +43,12 @@ export class CompanyDashContractComponent implements OnInit {
   public ngOnInit() {
     this._id = this.activateRoute.snapshot.params['id'];
     let subscription = this.activateRoute.params.subscribe(params => {
-
       this._id = params['id'];
-      console.log("id", this._id);
       this.companiesStateService.setSelectedCompanyId(this._id);
       this.getContractsList();
     });
     this.sub.add(subscription);
-    // this._id = /[^/]*$/.exec(window.location.href)[0];
-
     let getOnTogglePreview = this.contractsStateService.getOnTogglePreview().subscribe(data => {
-
       this.showContractPreview = false;
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
@@ -69,7 +64,6 @@ export class CompanyDashContractComponent implements OnInit {
     })
     this.sub.add(getOnEdit);
     let getOnToggleEdit = this.contractsStateService.getOnToggleEdit().subscribe(data => {
-
       this.showContractEdit = data;
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();

@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import FroalaEditor from 'froala-editor';
 import { Subscription } from 'rxjs';
 import { REMOVE_CATEGORY_DOCUMENT, REMOVE_DOCUMENT } from 'src/app/const/confirm';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
@@ -14,15 +13,12 @@ import { ConfirmStateService } from '../shared/confirm/services/confirm-state.se
 import { Document } from './class/document';
 import { DocumentFilter } from './class/document-filter';
 
-
-
 @Component({
   selector: 'app-documents',
   templateUrl: './documents.component.html',
   styleUrls: ['./documents.component.scss']
 })
 export class DocumentsComponent implements OnInit, OnDestroy {
-
   showPreloader: boolean = true;
   list: Array<Document> = [];
   filter: DocumentFilter = new DocumentFilter();
@@ -35,10 +31,8 @@ export class DocumentsComponent implements OnInit, OnDestroy {
     public activateRoute: ActivatedRoute,
     public leftPanelStateService: LeftPanelStateService,
     public companiesStateService: CompaniesStateService,
-    private documentsService: DocumentsService) {
-
+    public documentsService: DocumentsService) {
   }
-
 
   ngOnInit() {
     window.scrollTo(0, 0);
@@ -46,24 +40,19 @@ export class DocumentsComponent implements OnInit, OnDestroy {
       data.forEach(element => {
         let findIndex = this.list.findIndex(item => item.categoryId === element.id);
         if (findIndex > -1) this.list[findIndex].categoryName = element.name;
-        if (findIndex > -1) console.log("this.list[findIndex]", this.list[findIndex]);
       });
       this.cd.detectChanges();
     })
     let onChangeDocument = this.documentsStateService.onChangeDocument.subscribe(data => {
-      console.log("data", data);
       if (data.action === "DOCUMENT_SAVED" && !data.data.categoryId) this.list.push(new Document(data.data));
       if (data.action === "DOCUMENT_EDITED") {
         let findIndex = this.list.findIndex(item => item.id === data.data.id);
         if (findIndex > -1 && !data.data.categoryId) this.list[findIndex] = new Document(data.data);
         if (findIndex > -1 && data.data.categoryId) this.list.splice(findIndex, 1);
-        console.log("findIndex", findIndex);
       }
-
       if (data.action === "DOCUMENT_REMOVED") {
         let findIndex = this.list.findIndex(item => item.id === data.data);
         if (findIndex > -1) this.list.splice(findIndex, 1);
-        console.log("findIndex", findIndex);
       }
       this.list.sort((a, b) => (this.getNameDocument(a).toLowerCase() > this.getNameDocument(b).toLowerCase()) ?
         1 : ((this.getNameDocument(b).toLowerCase() > this.getNameDocument(a).toLowerCase()) ? -1 : 0));
@@ -95,25 +84,21 @@ export class DocumentsComponent implements OnInit, OnDestroy {
     this.showPreloader = true;
     this.list = [];
     this.documentsService.getList().subscribe((data: any) => {
-
       data.categories.map(item => this.list.push(new Document({ categoryId: item.id, categoryName: item.name }, true)));
       data.documents.map(item => this.list.push(new Document(item)));
       this.list.sort((a, b) => (this.getNameDocument(a).toLowerCase() > this.getNameDocument(b).toLowerCase()) ?
         1 : ((this.getNameDocument(b).toLowerCase() > this.getNameDocument(a).toLowerCase()) ? -1 : 0));
       this.showPreloader = false;
-      console.log("this.list", this.list);
     })
   }
   getFilterList() {
     this.showPreloader = true;
     this.list = [];
     this.documentsService.filterDocuments(this.filter.getDataForFilter()).subscribe((data: any) => {
-
       data.map(item => this.list.push(new Document(item)));
       this.list.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
         1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));
       this.showPreloader = false;
-      console.log("this.list", this.list);
     })
   }
   public onFilter(field) {
@@ -121,18 +106,15 @@ export class DocumentsComponent implements OnInit, OnDestroy {
   }
   removeCategory(item) {
     this.documentsService.removeCategories(item.categoryId).subscribe(data => {
-
     })
   }
   removeDocument(item) {
     this.documentsService.removeDocument(item.id).subscribe(data => {
-
     })
   }
   getNameDocument(item: Document) {
     if (item.categoryId) return item.categoryName;
     return item.title;
-
   }
 
   onRemoveCategory(data) {

@@ -25,14 +25,10 @@ export class CompanyDashTicketComponent implements OnInit {
   public ngOnInit() {
     this._id = this.activateRoute.snapshot.params['id'];
     let subscription = this.activateRoute.params.subscribe(params => {
-
       this._id = params['id'];
-      console.log("id", this._id);
       this.getTicketGraph(this.ticketFrequency);
     });
     this.sub.add(subscription);
-    //  this._id = /[^/]*$/.exec(window.location.href)[0];
-
     this.lineChartOptions = {
       chart: {
         type: 'lineChart',

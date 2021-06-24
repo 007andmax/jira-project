@@ -26,7 +26,6 @@ export class DocumentsTemplatesItemComponent implements OnInit {
     this.categories = this.documentsStateService.getCategories();
     this.documentsStateService.onGetCategories.subscribe((data: any) => {
       this.categories = data;
-      console.log("this.categories", this.categories);
       this.cd.detectChanges();
     })
   }
@@ -39,14 +38,12 @@ export class DocumentsTemplatesItemComponent implements OnInit {
     return (find) ? find.name : '';
   }
   showTemplate(item) {
-    console.log("item", item);
     if (item) this.documentsStateService.onInitGetTemplate(item);
   }
   removeDocument() {
     this.onRemoveDocument.emit(this.item);
   }
   editDocument(item) {
-
     this.router.navigate(
       ['/ng2/documents/edit/', item.id]);
   }
@@ -55,12 +52,10 @@ export class DocumentsTemplatesItemComponent implements OnInit {
   }
   exportPdf() {
     const url = `/documents/export?id=${this.item.id}`;
-    console.log("url", url);
     window.open(url, '_blank');
   }
   printPdf() {
     const url = `/documents/show/${this.item.id}/pdf`;
-    console.log("url", url);
     let open = window.open(url, '_blank');
     open.print();
   }

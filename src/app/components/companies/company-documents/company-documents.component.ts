@@ -19,11 +19,9 @@ export class CompanyDocumentsComponent extends DocumentsComponent {
       this.showPreloader = true;
       this.companyId = params['id'];
       this.companiesStateService.setSelectedCompanyId(this.companyId);
-      console.log("id", this.companyId);
       this.filter.setCompanyId(this.companyId);
       this.filter.setCompanyScope(true);
       this.getFilterList();
-
       let company = this.companiesStateService.getCompanies().find(item => item.id === this.companyId);
       this.header.filter.companyDp.isDisabled = true;
       this.header.filter.companyDp.editItem = company;
@@ -32,29 +30,23 @@ export class CompanyDocumentsComponent extends DocumentsComponent {
     });
     this.sub.add(subscription);
     this.leftPanelStateService.changeStateWithoutNavigate('company-documents');
-
     this.documentsStateService.onGetCategories.subscribe(data => {
       data.forEach(element => {
         let findIndex = this.list.findIndex(item => item.categoryId === element.id);
         if (findIndex > -1) this.list[findIndex].categoryName = element.name;
-        if (findIndex > -1) console.log("this.list[findIndex]", this.list[findIndex]);
       });
       this.cd.detectChanges();
     })
     let onChangeDocument = this.documentsStateService.onChangeDocument.subscribe(data => {
-      console.log("data", data);
       if (data.action === "DOCUMENT_SAVED" && !data.data.categoryId) this.list.push(new Document(data.data));
       if (data.action === "DOCUMENT_EDITED") {
         let findIndex = this.list.findIndex(item => item.id === data.data.id);
         if (findIndex > -1 && !data.data.categoryId) this.list[findIndex] = new Document(data.data);
         if (findIndex > -1 && data.data.categoryId) this.list.splice(findIndex, 1);
-        console.log("findIndex", findIndex);
       }
-
       if (data.action === "DOCUMENT_REMOVED") {
         let findIndex = this.list.findIndex(item => item.id === data.data);
         if (findIndex > -1) this.list.splice(findIndex, 1);
-        console.log("findIndex", findIndex);
       }
       this.list.sort((a, b) => (this.getNameDocument(a).toLowerCase() > this.getNameDocument(b).toLowerCase()) ?
         1 : ((this.getNameDocument(b).toLowerCase() > this.getNameDocument(a).toLowerCase()) ? -1 : 0));
@@ -71,10 +63,23 @@ export class CompanyDocumentsComponent extends DocumentsComponent {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REMOVE_CATEGORY_DOCUMENT) this.removeCategory(this.documentsStateService.getCategoryForRemove());
         if (this.confirmStateService.getConfirmAction() === REMOVE_DOCUMENT) this.removeDocument(this.documentsStateService.getDocumentForRemove());
-
       }
     })
     this.sub.add(getConfirm);
+  }
+  getFilterList() {
+    this.showPreloader = true;
+    this.list = [];
+    this.documentsService.filterDocuments(this.filter.getDataForFilter()).subscribe((data: any) => {
 
+      let templates = data.filter(item => item.documentType === 'TEMPLATE').map(item => new Document(item));
+      let documents = data.filter(item => item.documentType === 'DOCUMENT').map(item => new Document(item));
+      templates.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
+        1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));
+      documents.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
+        1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));
+      this.list = [...templates, ...documents];
+      this.showPreloader = false;
+    })
   }
 }

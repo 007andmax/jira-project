@@ -52,7 +52,6 @@ export class CompanyUserComponent implements OnInit {
     let subscription = this.activateRoute.params.subscribe(params => {
       this.showPreloader = true;
       id = params['id'];
-      console.log("id", id);
       this.companiesStateService.setSelectedCompanyId(id);
       this.onInitFilters(id);
     });

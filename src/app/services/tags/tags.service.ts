@@ -23,14 +23,12 @@ export class TagsService {
   }
 
   public geCompanyTags() {
-    console.log("geCompanyTags");
     return this.http.get(this.apiUrl + `commonTags/getAll`)
   }
 
   saveAllowingCreateCustomTags(value) {
     return this.http.put(`${this.apiUrl}settings/companyProfile/allowUsersCreateTags?allow=${value}`, {});
   }
-
 
   setWordForTag(tagId, word, tag) {
     if (tag === "ticket") {
@@ -44,7 +42,6 @@ export class TagsService {
         {}
       );
     }
-    // https://dev.quicktech.com/tags/setWordForTag?tagId=50299099-52cd-465d-a2e7-f4bf69954345&word=acrobat
   }
 
   removeCompanyTag(tagId: string, tag: string) {

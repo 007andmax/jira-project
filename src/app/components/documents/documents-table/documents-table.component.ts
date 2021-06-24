@@ -32,7 +32,6 @@ export class DocumentsTableComponent implements OnInit {
   }
   ngDoCheck() {
     this.showNotificationReview = new Date(this.item.reviewDate).getTime() < new Date().getTime() && !this.item.isCategory;
-
   }
   navigateToCategory() {
     if (!this.item.isCategory) return;
@@ -40,7 +39,6 @@ export class DocumentsTableComponent implements OnInit {
       ['/ng2/documents/category/', this.item.categoryId]);
   }
   showTemplate() {
-    console.log("item", this.item);
     if (!this.item.isCategory && this.getPermissions('VIEW_DOCUMENT')) this.documentsStateService.onInitGetTemplate(this.item);
   }
   getCreateBy() {
@@ -66,10 +64,7 @@ export class DocumentsTableComponent implements OnInit {
   }
 
   previewDocument() {
-    /* this.router.navigate(
-       ['/ng2/documents/edit/', this.item.id]);*/
     const url = `/#/ng2/documents/preview/${this.item.id}`;
-    console.log("url", url);
     window.open(url, '_blank');
   }
   public getPermissions(action) {
@@ -77,18 +72,11 @@ export class DocumentsTableComponent implements OnInit {
   }
   exportPdf() {
     const url = `/documents/export?id=${this.item.id}`;
-    console.log("url", url);
     window.open(url, '_blank');
   }
   printPdf() {
     const url = `/documents/show/${this.item.id}/pdf`;
-    console.log("url", url);
     let open = window.open(url, '_blank');
     open.print();
   }
-  /* getSharedWith() {
-     if (this.item.list.length === 1 && this.item.list[0].createdBy.id === this.currentUser.id) return "Only you";
-     if (this.item.list.length >= 1) return this.item.list.length;
-     return "";
-   }*/
 }

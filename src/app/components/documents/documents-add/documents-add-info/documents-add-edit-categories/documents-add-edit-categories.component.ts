@@ -36,20 +36,17 @@ export class DocumentsAddEditCategoriesComponent implements OnInit, OnDestroy {
     this.documentsStateService.onGetCategories.subscribe((data: any) => {
       this.categories = data;
       this.cd.detectChanges();
-      console.log("this.categories", this.categories);
     })
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REMOVE_CATEGORY_DOCUMENT) this.removeCategory(this.documentsStateService.getCategoryForRemove());
         if (this.confirmStateService.getConfirmAction() === REMOVE_ALL_CATEGORIES) this.removeAllCategories();
-
       }
     })
     this.sub.add(getConfirm);
   }
   removeCategory(item) {
     this.documentsService.removeCategories(item.id).subscribe(data => {
-
     })
   }
   onSelectCategory(event, item) {
@@ -68,14 +65,12 @@ export class DocumentsAddEditCategoriesComponent implements OnInit, OnDestroy {
     this.addCategory = new DocumentCategoryAdd();
   }
   removeAllCategories() {
-    console.log("this.documentsStateService.getCategoriesForRemove()", this.documentsStateService.getCategoriesForRemove());
     forkJoin(this.documentsStateService.getCategoriesForRemove().map(item => this.documentsService.removeCategories(item.id)))
       .subscribe(
         () => {
           this.selectedCategories = [];
         },
         error => {
-
         }
       );
   }
@@ -101,7 +96,6 @@ export class DocumentsAddEditCategoriesComponent implements OnInit, OnDestroy {
     if (event.keyCode === 13) this.onEditCategory();
   }
   onEditCategory() {
-    console.log("onEditCategory");
     if (this.editCategory.name !== this.editCategory.newName && this.editCategory.newName.length > 0) {
       if (!this.editCategory.isValidate(this.categories.find(item => item.name === this.editCategory.newName))) return;
       this.documentsService.editNameCategory(this.editCategory.id, this.editCategory.newName).subscribe(data => {
@@ -118,7 +112,6 @@ export class DocumentsAddEditCategoriesComponent implements OnInit, OnDestroy {
     this.documentsStateService.setCategoryForRemove(data);
   }
   onAddCategory() {
-    console.log("this.addCategory.categoryName", this.addCategory.categoryName);
     if (this.addCategory.categoryName.length > 0) {
       if (!this.addCategory.isValidate(this.categories.find(item => item.name === this.addCategory.categoryName))) return;
       this.documentsService.addCategories(this.addCategory.categoryName).subscribe(data => {

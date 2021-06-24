@@ -37,39 +37,19 @@ export class DocumentsAddBodyComponent implements OnInit {
       heightMin: 1123,
       toolbarSticky: false,
       saveParam: 'file',
-      // Set the save URL.
-      // HTTP request type.
       saveMethod: 'POST',
-      // Additional save params.
       saveParams: { id: 'my_editor' },
-
-
       imageUploadParam: 'file',
-
-      // Set the image upload URL.
       imageUploadURL: self.apiUrl + 'file?isAvatar=false&documentFile=true',
-
-      // Additional upload params.
       imageUploadParams: { id: 'my_editor' },
-
-      // Set request type.
       imageUploadMethod: 'POST',
-
-      // Set max image size to 5MB.
       imageMaxSize: 4 * 1024 * 1024,
-
-      // Allow to upload PNG and JPG.
       imageAllowedTypes: ['jpeg', 'jpg', 'png'],
-
-
       filesManagerUploadURL: self.apiUrl + 'file?isAvatar=false&documentFile=true',
       filesManagerUploadParams: {
         id: 'my_editor'
       },
       filesManagerMaxSize: 1024 * 1024 * 4,
-
-
-
       fileUpload: true,
       fileUploadURL: self.apiUrl + 'file?isAvatar=false&documentFile=true',
       fileUploadParams: {
@@ -78,8 +58,6 @@ export class DocumentsAddBodyComponent implements OnInit {
       fileUploadMethod: 'POST',
       fileMaxSize: 1024 * 1024 * 4,
       fileAllowedTypes: ['*'],
-
-
       events: {
         "initialized": function () {
           let config = {
@@ -96,70 +74,49 @@ export class DocumentsAddBodyComponent implements OnInit {
           };
           //start!
           self.codox.init(config);
-
         },
         'save.before': function (e, editor) {
           // Before save request is made.
-          console.log(editor);
         },
-
         'save.after': function (e, editor) {
           // After successfully save request.
-          console.log(editor);
         },
-
         'save.error': function (e, editor) {
           // Do something here.
-          console.log(editor);
         },
         'image.beforePasteUpload': function (img) {
           // Do something here.
           // this is the editor instance.
-          console.log(img);
         },
         'image.loaded': function ($img) {
           // Do something here.
           // this is the editor instance.
-          console.log($img);
         },
         'image.uploaded': function ($img) {
           // Do something here.
           // this is the editor instance.
           var img = JSON.parse($img);
-          console.log(img);
           return img;
-
         },
         'image.beforeUpload': function (files) {
           // Do something here.
           // this is the editor instance.
-          console.log(files);
         },
         'image.inserted': function (files, response) {
           // Do something here.
           // this is the editor instance.
-          console.log(files);
-          console.log(response);
         },
         'file.beforeUpload': function (files) {
           // Return false if you want to stop the file upload.
-          console.log(files);
         },
         'file.uploaded': function (response) {
           // File was uploaded to the server.
-          console.log(response);
         },
         'file.inserted': function ($file, response) {
-          console.log($file);
           $file[0].href = `${$file[0]}/attachment`;
-          console.log(response);
           // File was inserted in the editor.
         },
-
       }
     };
   }
-
-
-
 }

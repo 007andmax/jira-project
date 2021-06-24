@@ -28,7 +28,6 @@ export class DocumentsAddFooterComponent implements OnInit {
   ngOnInit() {
   }
   add(documentType) {
-    console.log("documentAdd", this.documentAdd);
     this.documentAdd.setDocumentType(documentType);
     if (!this.documentValidate.isValidate(this.documentAdd)) return;
     if (this.templateId) {
@@ -40,7 +39,6 @@ export class DocumentsAddFooterComponent implements OnInit {
         this.goToDocumentsList();
       })
     }
-
   }
   public goToDocumentsList() {
     if (this.companyId) {
@@ -51,8 +49,6 @@ export class DocumentsAddFooterComponent implements OnInit {
     }
   }
   edit() {
-    console.log("documentEdit", this.documentEdit);
-
     if (!this.documentValidate.isValidate(this.documentEdit)) return;
     this.documentsService.edit(this.documentEdit.id, this.documentEdit.getDataForEdit()).subscribe(data => {
       this.goToDocumentsList();

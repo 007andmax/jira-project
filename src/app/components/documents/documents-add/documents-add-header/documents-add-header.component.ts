@@ -54,9 +54,7 @@ export class DocumentsAddHeaderComponent implements OnInit, OnDestroy {
     this.documentsStateService.setDocumentForRemove(this.documentEdit);
   }
   previewDocument() {
-
     const url = `/#/ng2/documents/preview/${this.documentEdit.id}`;
-    console.log("url", url);
     window.open(url, '_blank');
   }
   onToggleLeftPanel() {
@@ -65,12 +63,10 @@ export class DocumentsAddHeaderComponent implements OnInit, OnDestroy {
   }
   exportPdf() {
     const url = `/documents/export?id=${this.documentEdit.id}`;
-    console.log("url", url);
     window.open(url, '_blank');
   }
   printPdf() {
     const url = `/documents/show/${this.documentEdit.id}/pdf`;
-    console.log("url", url);
     let open = window.open(url, '_blank');
     open.print();
   }

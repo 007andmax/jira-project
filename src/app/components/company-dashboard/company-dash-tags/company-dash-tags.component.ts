@@ -53,7 +53,6 @@ export class CompanyDashTagsComponent implements OnInit, OnDestroy {
     this.tags = this.tagsStateService.getTags();
     this.reqTags = JSON.parse(JSON.stringify(this.tagsStateService.getTags()));
     let getTags = this.tagsStateService.onGetTags.subscribe((data: Array<Tag>) => {
-      console.log("data", data);
       this.tags = data;
       this.reqTags = JSON.parse(JSON.stringify(data));
     })

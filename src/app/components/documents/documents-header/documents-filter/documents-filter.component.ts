@@ -1,16 +1,13 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { QuoteFilter } from 'src/app/components/billing/quotes/class/quote-filter';
 import { TechUsersListReportComponent } from 'src/app/components/reports/report-menu/tech-users-list-report/tech-users-list-report.component';
 import { MultiDatepickerComponent } from 'src/app/components/shared/multi-datepicker/multi-datepicker.component';
 import { SelectSearchComponent } from 'src/app/components/shared/select-search/select-search.component';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
-import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { DocumentFilter } from '../../class/document-filter';
 import * as moment from "moment";
-import { DocumentsFilterTagsComponent } from './documents-filter-tags/documents-filter-tags.component';
 import { CompanyTagsComponent } from 'src/app/components/companies/company-tags/company-tags.component';
 
 @Component({
@@ -29,7 +26,6 @@ export class DocumentsFilterComponent implements OnInit {
   sub: Subscription = new Subscription();
   documentsFilter: DocumentFilter = new DocumentFilter();
   @Output() changeCountFilter = new EventEmitter<any>();
-
   constructor(private companiesState: CompaniesStateService,
     private documentsStateService: DocumentsStateService) { }
 

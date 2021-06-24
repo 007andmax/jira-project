@@ -16,9 +16,7 @@
         </div>
     </div>
     <div class="qt-aside-modern__content --no-padding">
-        <!-- Tab Header -->
         <div class="documents-create-panel__subheader">
-            <!-- Document Info Tab -->
             <div
                 class="documents-create-panel__subheader-item subheader-item-system pointer"
                 [ngClass]="{'--active':tab === 'DOCUMENT_INFO'}"
@@ -26,8 +24,6 @@
             >
                 Document Info
             </div>
-            <!-- End Document Info Tab -->
-            <!-- Permissions Tab -->
             <div
                 class="documents-create-panel__subheader-item subheader-item-network pointer"
                 [ngClass]="{'--active':tab === 'PERMISSIONS'}"
@@ -35,8 +31,6 @@
             >
                 Permissions
             </div>
-            <!-- End Permissions -->
-            <!-- Tab Document History -->
             <div
                 class="documents-create-panel__subheader-item subheader-item-software pointer"
                 [ngClass]="{'--active':tab === 'DOCUMENT_HISTORY'}"
@@ -44,13 +38,8 @@
             >
                 Document History
             </div>
-            <!-- End Document History -->
-            <!-- End Tab Aside Header -->
         </div>
-        <!-- End Tab Header -->
-        <!-- Tab Body -->
         <div class="documents-create-panel__body">
-            <!-- Password Detail Tab Content -->
             <div
                 class="qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24"
                 *ngIf="tab === 'DOCUMENT_INFO'"
@@ -223,36 +212,20 @@
                     >
                 </div> -->
             </div>
-            <!-- End Password Detail Tab Content -->
-            <!-- Linked Devices Tab Content -->
             <div
                 class="qt-pt-12 qt-pl-24 qt-pr-24"
                 *ngIf="tab === 'PERMISSIONS'"
             >
             </div>
-            <!-- End Linked Devices Tab Content -->
-            <!-- Document History Tab Content -->
             <div
                 class="qt-pb-24"
                 *ngIf="tab === 'DOCUMENT_HISTORY'"
             >
                 <documents-edit-history [documentEdit]="documentEdit"></documents-edit-history>
             </div>
-            <!-- End Document History Tab Content -->
         </div>
-        <!-- End Tab Body -->
     </div>
 </div>
-<!-- <div -->
-<!-- class="documents-add-info" -->
-<!-- *ngIf="toggleAside" -->
-<!-- &gt; -->
-<!-- <div -->
-<!-- class="qt-aside-modern__header-close icon__close" -->
-<!-- routerLink="/ng2/documents" -->
-<!-- ></div> -->
-<!-- <button (click)="toggleEditCategories = true">Edit</button> -->
-<!-- </div> -->
 <documents-add-edit-categories
     *ngIf="toggleEditCategories"
     (onClosed)="toggleEditCategories = false"

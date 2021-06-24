@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Document } from '../class/document';
-import { DocumentAdd } from '../documents-add/class/document-add';
 import { DocumentsAddComponent } from '../documents-add/documents-add.component';
 
 @Component({
@@ -18,14 +17,12 @@ export class DocumentsEditComponent extends DocumentsAddComponent {
     let subscription = this.activateRoute.params.subscribe(params => {
       this.showPreloader = true;
       id = params['id'];
-      console.log("id", id);
       this.getDocument(id);
     });
     this.sub.add(subscription);
     let queryParams = this.activateRoute.queryParams.subscribe(
       (queryParam: any) => {
         if (queryParam['companyId']) this.companyId = queryParam['companyId'];
-        console.log("this.companyId", this.companyId);
         this.cd.detectChanges();
       }
     );
@@ -35,7 +32,6 @@ export class DocumentsEditComponent extends DocumentsAddComponent {
 
   getDocument(id) {
     this.documentsService.getDocument(id).subscribe(data => {
-      console.log('data', data);
       this.documentEdit = new Document(data, false);
       this.showPreloader = false;
     })

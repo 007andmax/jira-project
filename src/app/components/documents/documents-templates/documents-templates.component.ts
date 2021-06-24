@@ -9,7 +9,6 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { Document } from '../class/document';
-import { DocumentFilter } from '../class/document-filter';
 import { DocumentTemplateFilter } from '../class/document-template-filter';
 import { DocumentsTemplatesHeaderComponent } from './documents-templates-header/documents-templates-header.component';
 
@@ -42,13 +41,11 @@ export class DocumentsTemplatesComponent implements OnInit, OnDestroy {
     let queryParams = this.activateRoute.queryParams.subscribe(
       (queryParam: any) => {
         if (queryParam['companyId']) this.companyId = queryParam['companyId'];
-
       }
     );
     this.sub.add(queryParams);
     this.filter.setDocumentType("TEMPLATE");
     let filterTemplate = this.documentsStateService.filterTemplate.subscribe(data => {
-      // this.showPreloader = true;
       this.filter.setFilters(data);
       this.getFilterList();
     })
@@ -61,33 +58,22 @@ export class DocumentsTemplatesComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
-
     let onChangeDocument = this.documentsStateService.onChangeDocument.subscribe(data => {
-      console.log("data", data);
-      console.log("this.filter", this.filter);
-      console.log("this.filter.isMatchIheFilter(data.data)", this.filter.isMatchIheFilter(data.data));
       if (data.action === "DOCUMENT_SAVED" && this.tab === 'MY_TEMPLATES' && this.filter.isMatchIheFilter(data.data)) this.list.push(new Document(data.data));
       if (data.action === "DOCUMENT_EDITED") {
         let findIndex = this.list.findIndex(item => item.id === data.data.id);
         this.list[findIndex] = new Document(data.data);
-
-        console.log("findIndex", findIndex);
       }
-
       if (data.action === "DOCUMENT_REMOVED") {
         let findIndex = this.list.findIndex(item => item.id === data.data);
         if (findIndex > -1) this.list.splice(findIndex, 1);
-        console.log("findIndex", findIndex);
       }
-      /* this.list.sort((a, b) => (this.getNameDocument(a).toLowerCase() > this.getNameDocument(b).toLowerCase()) ?
-         1 : ((this.getNameDocument(b).toLowerCase() > this.getNameDocument(a).toLowerCase()) ? -1 : 0));*/
       this.cd.detectChanges();
     })
     this.sub.add(onChangeDocument);
   }
   removeDocument(item) {
     this.documentsService.removeDocument(item.id).subscribe(data => {
-
     })
   }
   public goToDocumentsList() {
@@ -97,16 +83,13 @@ export class DocumentsTemplatesComponent implements OnInit, OnDestroy {
     } else {
       this.leftPanelStateService.goToState('new-documents');
     }
-
   }
   onSearch(data) {
     this.filter.setSearch(data);
     this.list = this.filter.getFilterList(this.reqList);
-    console.log("this.list", this.list);
   }
   getListCategories() {
     this.documentsService.getTemplateCategories((this.tab === 'TEMPLATE_GALLERY')).subscribe(data => {
-      console.log("data", data);
       this.documentsStateService.setCategoriesTemplate(data);
     })
   }
@@ -114,21 +97,16 @@ export class DocumentsTemplatesComponent implements OnInit, OnDestroy {
     this.showPreloader = true;
     this.list = [];
     this.reqList = [];
-    console.log("this.filter", this.filter);
     this.filter.setIsDefaultTemplate((this.tab === 'TEMPLATE_GALLERY'));
     this.documentsService.filterDocuments(this.filter.getDataForFilter()).subscribe((data: any) => {
-
       data.map(item => this.list.push(new Document(item)));
       data.map(item => this.reqList.push(new Document(item)));
-
       this.list = this.filter.getFilterList(this.reqList);
       this.list.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
         1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));
-
       this.reqList.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
         1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));
       this.showPreloader = false;
-      console.log("this.list", this.list);
     })
   }
   onRemoveDocument(data) {
@@ -143,9 +121,7 @@ export class DocumentsTemplatesComponent implements OnInit, OnDestroy {
     this.getListCategories();
   }
   toggleOpenCategories() {
-
     this.openCategories = !this.openCategories;
-    console.log("toggleOpenCategories", this.openCategories)
   }
   public trackById(index, item) {
     return item.id;

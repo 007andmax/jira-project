@@ -16,7 +16,6 @@
         class="qt-aside-modern__content --no-padding"
         [ngStyle]="{'opacity':(!showPreloader) ? 1 : 0}"
     >
-        <!-- Tab Header -->
         <div
             class="documents-create-panel__subheader"
             *ngIf="!showPreloader && document.documentType === 'TEMPLATE'"
@@ -49,10 +48,7 @@
                 </button>
             </div>
         </div>
-        <!-- End Tab Header -->
-        <!-- Tab Body -->
         <div class="documents-create-panel__body qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24"></div>
-        <!-- End Tab Body -->
     </div>
     <div
         class="loading"

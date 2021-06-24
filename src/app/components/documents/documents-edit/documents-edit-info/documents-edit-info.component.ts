@@ -5,7 +5,6 @@ import { Document } from '../../class/document';
 import * as moment from "moment";
 import { DocumentsAddInfoComponent } from '../../documents-add/documents-add-info/documents-add-info.component';
 import { DocumentsLinkedComponent } from '../../documents-add/documents-add-info/documents-linked/documents-linked.component';
-import { DocumentsFilterTagsComponent } from '../../documents-header/documents-filter/documents-filter-tags/documents-filter-tags.component';
 import { DocumentCompanyUser } from '../../documents-add/class/document-company-user';
 import { CompanyTagsComponent } from 'src/app/components/companies/company-tags/company-tags.component';
 
@@ -26,32 +25,23 @@ export class DocumentsEditInfoComponent extends DocumentsAddInfoComponent {
     this.categories = this.documentsStateService.getCategories();
     this.documentsStateService.onGetCategories.subscribe((data: any) => {
       this.categories = data;
-      //   this.categoriesDp.editItem = this.categories.find(item => item.id === this.documentEdit.categoryId);
-      console.log("this.categories", this.categories);
     })
     if (this.documentEdit.clientType) this.requiredCompanyType = true;
-    //  if (this.categories.length > 0) this.categoriesDp.editItem = this.categories.find(item => item.id === this.documentEdit.categoryId);
-
   }
   onChangeTitle() {
     this.documentsService.checkTitle(this.documentEdit.title, this.documentEdit.id).subscribe(data => {
-      console.log("data", data);
       this.documentValidate.setUniqueTittle(data);
       this.documentValidate.resetTitle();
     })
-    // 
   }
   onChangeLinked(data: Array<DocumentCompanyUser>) {
-    console.log("data", data);
     this.documentEdit.setLinked(data.filter(item => item.type === "USER").map(item => item.id),
       data.filter(item => item.type === "COMPANY").map(item => item.id));
   }
   onSelectCategory(data) {
-
     this.documentEdit.setCategoryId((data) ? data.id : null);
   }
   onSelectTags(data) {
-    console.log("data", data);
     this.documentEdit.setTags(data.map(item => item.id));
   }
   onResetCompanyType() {
@@ -59,19 +49,15 @@ export class DocumentsEditInfoComponent extends DocumentsAddInfoComponent {
     this.documentEdit.setClientType(null);
   }
   onSelectCompanyType(data) {
-    console.log('data', data);
     this.documentEdit.setClientType((data) ? data.type : null);
   }
   onChangeReviewDate(date) {
     this.documentEdit.setReviewDate(moment(new Date(date.year, date.month - 1, date.day)).format('YYYY/MM/DD'));
   }
   getSelectedClientType() {
-
     return this.companyTypes.find(item => item.type === this.documentEdit.clientType);
   }
   getSelectedCategory() {
     return this.categories.find(item => item.id === this.documentEdit.categoryId);
   }
-
-
 }

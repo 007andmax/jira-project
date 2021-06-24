@@ -1,5 +1,4 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { CategoryDocument } from 'src/app/components/left-panel/left-panel-documents/class/category-document';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
 import { DocumentTemplateFilter } from '../../../class/document-template-filter';
@@ -21,10 +20,8 @@ export class DocumentsTemplatesFilterComponent implements OnInit {
   ngOnInit() {
     this.documentsStateService.onGetCategoriesTemplate.subscribe(data => {
       this.categories = data;
-      console.log("this.categories", this.categories);
       this.categoryDp.reset(this.categories);
     })
-
   }
   public onSelectCategory(data) {
     this.documentTemplateFilter.setCategoryId((data) ? data.id : null);
@@ -39,7 +36,6 @@ export class DocumentsTemplatesFilterComponent implements OnInit {
   public onChangeCounterFilter() {
     let count = 0;
     if (this.documentTemplateFilter.categoryId) count++;
-
     this.changeCountFilter.emit(count);
   }
 
@@ -49,5 +45,4 @@ export class DocumentsTemplatesFilterComponent implements OnInit {
     this.documentsStateService.onInitFilterTemplate(this.documentTemplateFilter);
     this.onChangeCounterFilter();
   }
-
 }

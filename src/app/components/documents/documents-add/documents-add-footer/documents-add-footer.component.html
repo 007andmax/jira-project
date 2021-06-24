@@ -1,18 +1,28 @@
 <div class="qt-aside-modern__footer">
     <div class="qt-aside-modern__footer-inner">
         <div class="qt-df qt-ai-c">
-            <button
-                *ngIf="documentAdd && getPermissions('CREATE_DOCUMENT')"
-                class="qt-button qt-mr-12"
-                [disabled]="requiredCompanyType"
-                [ngClass]="{'disabled-add-document':requiredCompanyType}"
-                appDisabledBtn
-                #addBtn="disabled"
-                (onClick)="add('DOCUMENT')"
+            <app-dynamic-tooltip
+                [content]="'The required type value can be used only for templates'"
+                [position]="'top'"
+                #addTooltip
+            ></app-dynamic-tooltip>
+            <div
+                (mouseenter)="requiredCompanyType ? addTooltip.show($event.target) : null"
+                (mouseleave)="requiredCompanyType ? addTooltip.hide() : null"
             >
-                <span *ngIf="!addBtn.isBlock()">Create Document</span>
-                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
-            </button>
+                <button
+                    *ngIf="documentAdd && getPermissions('CREATE_DOCUMENT')"
+                    class="qt-button qt-mr-12"
+                    [disabled]="requiredCompanyType"
+                    [ngClass]="{'disabled-add-document':requiredCompanyType}"
+                    appDisabledBtn
+                    #addBtn="disabled"
+                    (onClick)="add('DOCUMENT')"
+                >
+                    <span *ngIf="!addBtn.isBlock()">Create Document</span>
+                    <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
+                </button>
+            </div>
             <button
                 *ngIf="documentEdit"
                 class="qt-button qt-mr-12"
@@ -26,15 +36,25 @@
                 ></span>
                 <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
             </button>
-            <button
-                *ngIf="documentAdd && getPermissions('CREATE_TEMPLATE') && !templateId"
-                class="qt-button --gray"
-                [disabled]="documentAdd && !documentAdd.isTemplate()"
-                [ngClass]="{'disabled':documentAdd && !documentAdd.isTemplate()}"
-                (click)="add('TEMPLATE')"
+            <app-dynamic-tooltip
+                [content]="'The «Link to» value can be used only for documents'"
+                [position]="'top'"
+                #saveTemplateTooltip
+            ></app-dynamic-tooltip>
+            <div
+                (mouseenter)="documentAdd && !documentAdd.isTemplate() ? saveTemplateTooltip.show($event.target) : null"
+                (mouseleave)="documentAdd && !documentAdd.isTemplate() ? saveTemplateTooltip.hide() : null"
             >
-                Save as Template
-            </button>
+                <button
+                    *ngIf="documentAdd && getPermissions('CREATE_TEMPLATE') && !templateId"
+                    class="qt-button --gray"
+                    [disabled]="documentAdd && !documentAdd.isTemplate()"
+                    [ngClass]="{'disabled':documentAdd && !documentAdd.isTemplate()}"
+                    (click)="add('TEMPLATE')"
+                >
+                    Save as Template
+                </button>
+            </div>
         </div>
         <!-- <div class="qt-df qt-ai-c">
             <button class="btn-new btn-primary-white qt-mr-8">

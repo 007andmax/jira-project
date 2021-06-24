@@ -33,12 +33,10 @@ export class DocumentPreviewComponent implements OnInit {
     let subscription = this.activateRoute.params.subscribe(params => {
       this.showPreloader = true;
       id = params['id'];
-      console.log("id", id);
       this.getDocument(id);
     });
     this.sub.add(subscription);
     this.leftPanelStateService.changeStateWithoutNavigate('new-preview-documents');
-
   }
   public goToDocumentsList() {
     this.leftPanelStateService.hideLeftPanel(false);
@@ -47,27 +45,18 @@ export class DocumentPreviewComponent implements OnInit {
   getDocument(id) {
     this.showPreloader = true;
     this.documentsService.getDocument(id).subscribe((document: any) => {
-
       this.document = new Document(document);
-      var parser = new DOMParser();
-      var htmlDoc = parser.parseFromString(this.document.content, 'text/html');
-      console.log("htmlDoc", htmlDoc);
-      console.log("htmlDoc", htmlDoc.textContent);
-
       this.elRef.nativeElement.querySelector(".documents-create-panel__content").insertAdjacentHTML('afterbegin', this.document.content);
-
       this.showPreloader = false;
       this.cd.detectChanges();
     })
   }
   exportPdf() {
     const url = `/documents/export?id=${this.document.id}`;
-    console.log("url", url);
     window.open(url, '_blank');
   }
   printPdf() {
     const url = `/documents/show/${this.document.id}/pdf`;
-    console.log("url", url);
     let open = window.open(url, '_blank');
     open.print();
   }

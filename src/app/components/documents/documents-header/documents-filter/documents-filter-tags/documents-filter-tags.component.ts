@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Tag } from 'src/app/interfaces/tag/tag';
-import { TagsService } from 'src/app/services/tags/tags.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { TagsStateService } from 'src/app/states/tags/tags-state.service';
 
@@ -19,14 +18,12 @@ export class DocumentsFilterTagsComponent implements OnInit, OnDestroy {
   sub = new Subscription();
   constructor(public cd: ChangeDetectorRef,
     private tagsStateService: TagsStateService,
-    private companiesStateService: CompaniesStateService,
-    private tagsService: TagsService) { }
+    private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
     this.tags = this.tagsStateService.getTags();
     this.setEditItems();
     let getTags = this.tagsStateService.onGetTags.subscribe((data: Array<Tag>) => {
-      console.log("data", data);
       this.tags = data;
       this.setEditItems();
     })
@@ -83,5 +80,4 @@ export class DocumentsFilterTagsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
-
 }

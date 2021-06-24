@@ -1,5 +1,4 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-
 import { Subscription } from 'rxjs';
 import { Company } from 'src/app/interfaces/company/company';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -21,7 +20,6 @@ export class DocumentsLinkedComponent implements OnInit {
   public tabs = ['User', 'Company'];
   public currentTab = this.tabs[0];
   public usersList = [];
-
   companiesList: Array<Company> = [];
   @Output() onSelectedItem = new EventEmitter<any>();
   sub: Subscription = new Subscription();
@@ -66,26 +64,20 @@ export class DocumentsLinkedComponent implements OnInit {
     }
   }
 
-
-
   public toggleItem(newItem, type) {
-
     let findIndex = this.selectedUserAndCompanies.findIndex(item => item.id === newItem.id && item.type === type);
     if (findIndex > -1) {
       this.selectedUserAndCompanies.splice(findIndex, 1);
     } else {
       if (type === "USER") this.selectedUserAndCompanies.push(new DocumentCompanyUser(newItem.id, `${newItem.firstName} ${newItem.lastName}`, "USER"));
       if (type === "COMPANY") this.selectedUserAndCompanies.push(new DocumentCompanyUser(newItem.id, newItem.name, "COMPANY"));
-      console.log("this.selectedUserAndCompanies", this.selectedUserAndCompanies);
     }
     this.onSelectedItem.emit(this.selectedUserAndCompanies);
-
   }
 
   public setCurrentTab($event, item) {
     this.stopEvent($event);
     this.currentTab = item;
-
     this.cd.detectChanges();
   }
   public hideSelectWrapper() {
@@ -106,7 +98,6 @@ export class DocumentsLinkedComponent implements OnInit {
   public onClosed() {
     this.companiesList = [];
     this.usersList = [];
-
     this.currentTab = this.tabs[0];
     this.showSelect = false;
   }
@@ -120,5 +111,4 @@ export class DocumentsLinkedComponent implements OnInit {
   public trackByIndex(index, item) {
     return index;
   }
-
 }
