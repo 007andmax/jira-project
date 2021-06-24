@@ -233,3 +233,10 @@
         opacity: 1;
     }
 }
+.disabled {
+    input,
+    span {
+        background: rgb(235, 235, 228) !important;
+        cursor: not-allowed;
+    }
+}

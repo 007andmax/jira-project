@@ -390,6 +390,18 @@
     }
   }
 }
+app-company-tags {
+  .dropdown-toggle .mat-form-field-wrapper .mat-form-field-infix {
+    input {
+      /* position: absolute; */
+      width: calc(100% - 36px);
+      /* height: 100%; */
+      top: 0;
+      flex: 1;
+      height: 30px;
+    }
+  }
+}
 documents-filter {
   app-company-tags {
     .mat-form-field-wrapper {
@@ -400,15 +412,6 @@ documents-filter {
     .mat-form-field {
       margin-top: 0px !important;
       height: 100%;
-    }
-
-    .dropdown-toggle .mat-form-field-wrapper .mat-form-field-infix {
-      input {
-        position: absolute;
-        width: calc(100% - 36px);
-        height: 100%;
-        top: 0
-      }
     }
     .mat-form-field-infix {
       min-height: 36px !important;
@@ -1824,12 +1827,6 @@ app-quotes-item {
       padding: 0;
 
       input {
-        position: absolute;
-        height: 100% !important;
-        width: 100%;
-        top: 0;
-        left: 0;
-        text-indent: 34px;
         border: none;
       }
     }
@@ -1853,7 +1850,6 @@ app-quotes-item {
       top: 12px;
     }
   }
-
 }
 .new-companies-content__list--item {
   position: relative;

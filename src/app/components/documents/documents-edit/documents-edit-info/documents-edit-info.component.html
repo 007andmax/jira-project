@@ -149,10 +149,14 @@
                 </div> -->
                 <div class="documents-create__col checkbox-wrapper">
                     <div class="with-checkbox">
-                        <label class="checkbox-container">
+                        <label
+                            class="checkbox-container"
+                            [ngClass]="{'disabled':documentEdit.documentType === 'DOCUMENT'}"
+                        >
                             <input
                                 id
                                 type="checkbox"
+                                [disabled]="documentEdit.documentType === 'DOCUMENT'"
                                 [(ngModel)]="requiredCompanyType"
                                 (change)="onResetCompanyType()"
                             >

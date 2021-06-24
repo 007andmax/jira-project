@@ -29,7 +29,9 @@ export class DocumentsEditComponent extends DocumentsAddComponent {
     this.sub.add(queryParams);
     this.leftPanelStateService.changeStateWithoutNavigate('new-edit-documents');
   }
-
+  onChangeContent(data) {
+    this.documentEdit.setContent(data);
+  }
   getDocument(id) {
     this.documentsService.getDocument(id).subscribe(data => {
       this.documentEdit = new Document(data, false);

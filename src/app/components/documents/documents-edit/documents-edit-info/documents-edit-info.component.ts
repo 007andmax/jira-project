@@ -22,6 +22,7 @@ export class DocumentsEditInfoComponent extends DocumentsAddInfoComponent {
   sub: Subscription = new Subscription();
 
   ngOnInit() {
+
     this.categories = this.documentsStateService.getCategories();
     this.documentsStateService.onGetCategories.subscribe((data: any) => {
       this.categories = data;

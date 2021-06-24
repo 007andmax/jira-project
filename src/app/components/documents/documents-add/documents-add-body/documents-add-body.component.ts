@@ -29,6 +29,7 @@ export class DocumentsAddBodyComponent implements OnInit {
     //  var editor = CodeMirror(document.getElementById("froala-editor"));
   }
   ngDoCheck() {
+    console.log("this.editorContent", this.editorContent);
     this.onChangeContent.emit(this.editorContent);
   }
   onInitFloara() {

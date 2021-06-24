@@ -70,6 +70,9 @@ export class Document {
     public isTemplate() {
         return this.linked.companies.length === 0 && this.linked.users.length === 0;
     }
+    public setContent(data) {
+        this.content = data;
+    }
     public isTemplateForEdit() {
         return this.documentType === 'TEMPLATE';
     }
