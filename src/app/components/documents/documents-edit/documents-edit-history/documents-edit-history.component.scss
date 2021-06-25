@@ -206,3 +206,18 @@
     background-size: 24px;
     width: 47px;
 }
+.button-loader {
+    position: relative;
+    width: fit-content;
+    text-decoration: underline;
+    cursor: pointer;
+    margin: 20px auto 0px auto;
+    font-weight: 600;
+    .loading {
+        width: 20px;
+        height: 20px;
+        right: -28px;
+        left: unset;
+        top: calc(50% - 10px);
+    }
+}

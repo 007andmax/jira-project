@@ -24,4 +24,19 @@
             </div>
         </div>
     </ng-template>
+    <div
+        class="loading"
+        *ngIf="showPreloader"
+    ></div>
+    <div
+        *ngIf="showLoadMore && list.length > 0"
+        class="button-loader"
+        (click)="getHistory()"
+    >
+        Load More Updates
+        <span
+            *ngIf="showMiniPreloader"
+            class="loading"
+        ></span>
+    </div>
 </div>

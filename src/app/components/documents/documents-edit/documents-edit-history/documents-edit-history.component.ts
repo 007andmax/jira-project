@@ -11,13 +11,25 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 })
 export class DocumentsEditHistoryComponent implements OnInit {
   @Input() documentEdit: Document;
+  showLoadMore: boolean = false;
+  showPreloader: boolean = true;
+  showMiniPreloader: boolean = false;
   list: Array<DocumentHistory> = []
+  page: number = 0;
   constructor(private documentsService: DocumentsService,
     private usersStateService: UsersStateService,) { }
 
   ngOnInit() {
-    this.documentsService.getHistory(this.documentEdit.id).subscribe((data: any) => {
-      this.list = data.map(item => new DocumentHistory(item));
+    this.getHistory();
+  }
+  getHistory() {
+    this.showMiniPreloader = true;
+    this.documentsService.getHistory(this.documentEdit.id, this.page).subscribe((data: any) => {
+      this.list = [...this.list, ...data.documentHistoryDtoSet.map(item => new DocumentHistory(item))];
+      this.showLoadMore = (this.list.length < data.totalElements);
+      this.page++;
+      this.showPreloader = false;
+      this.showMiniPreloader = false;
     })
   }
   getUserById(userId) {
