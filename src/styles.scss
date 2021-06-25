@@ -1314,7 +1314,7 @@ app-quotes-item {
 .new-companies-content .new-companies__list--header {
   display: flex;
 }
-.new-companies-content {
+.companies-page {
   background: #edf2f6;
 
   .new-companies-content__header {
@@ -1358,6 +1358,14 @@ app-quotes-item {
       width: 160px;
       max-width: 160px;
       min-width: 160px;
+
+      .name {
+        color: #4f5f79;
+      }
+
+      .phone {
+        color: #9ca5b6;
+      }
     }
     &__email-address {
       width: 180px;
@@ -1383,11 +1391,39 @@ app-quotes-item {
       width: 40px;
       max-width: 40px;
       min-width: 40px;
+
+      button {
+        background: none;
+        border: none;
+      }
     }
     &__menu {
       width: 32px;
       max-width: 32px;
       min-width: 32px;
+      padding: 23px 16px 23px 8px;
+    }
+  }
+
+  app-companies-table {
+    display: contents;
+  }
+
+  .companies-table {
+    tr.--selected {
+      td {
+        background-color: #f4fbff;
+        border-top-color: #16a4fa !important;
+        border-bottom-color: #16a4fa !important;
+
+        &:first-child {
+          border-left-color: #16a4fa !important;
+        }
+
+        &:last-child {
+          border-right-color: #16a4fa !important;
+        }
+      }
     }
   }
 }
