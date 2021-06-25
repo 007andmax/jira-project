@@ -32,15 +32,23 @@
                 </div>
             </div>
         </div>
-        <div
-            class="col-md-12 google-plus"
-            [ngClass]="{'error-field':!validate.getName() || validate.getNameIsExist() }"
-        >
-            <mat-error *ngIf="validate.getNameIsExist()">This company name already occupied</mat-error>
-            <mat-error *ngIf="!validate.getName()">Company name is required</mat-error>
+        <div class="col-md-12 google-plus --required">
+            <mat-error
+                class="qt-tooltip-error"
+                *ngIf="validate.getNameIsExist()"
+            >
+                This company name already occupied
+            </mat-error>
+            <mat-error
+                class="qt-tooltip-error"
+                *ngIf="!validate.getName()"
+            >
+                Company name is required
+            </mat-error>
             <p>Company Name</p>
             <input
                 type="text"
+                [ngClass]="{'--input-error':!validate.getName() || validate.getNameIsExist() }"
                 [(ngModel)]="company.name"
                 (blur)="onChangeName()"
                 placeholder="Write Company or Search Company"
@@ -63,38 +71,35 @@
             </app-drop-down>
         </div>
         <div class="col-md-6">
-            <p>Client Type</p>
-            <div class="light-dropdown">
-                <app-select-search
-                    [class]="['light-dropdown']"
-                    [editItem]="(company.clientIndustry.name) ? company.clientIndustry.name : null"
-                    [list]="industries"
-                    (onSelectedItem)="onSelectClientIndustry($event)"
-                ></app-select-search>
-            </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
+            <app-drop-down
+                [class]="['light-dropdown', 'qt-select-input-40']"
+                [placeholder]="'Select Client Type'"
+                [editItem]="(company.clientIndustry.name) ? company.clientIndustry.name : null"
+                [list]="industries"
+                [search]="true"
+                [change]="true"
+                [title]="'Client Type'"
+                (onSelectedItem)="onSelectClientIndustry($event)"
+            >
+            </app-drop-down>
         </div>
-        <div
-            class="col-md-12"
-            [ngClass]="{'error-field':!validate.getDomain() }"
-        >
-            <mat-error *ngIf="!validate.getDomain()">Please enter a valid domain</mat-error>
-            <mat-error *ngIf="validate.getDomainIsExist()">This company domain already occupied</mat-error>
+        <div class="col-md-12 --required">
+            <mat-error
+                class="qt-tooltip-error"
+                *ngIf="!validate.getDomain()"
+            >
+                Please enter a valid domain
+            </mat-error>
+            <mat-error
+                class="qt-tooltip-error"
+                *ngIf="validate.getDomainIsExist()"
+            >
+                This company domain already occupied
+            </mat-error>
             <p>Domain Name</p>
             <input
                 type="text"
+                [ngClass]="{'--input-error' : !validate.getDomain() || validate.getDomainIsExist()}"
                 (blur)="onChangeDomain()"
                 [(ngModel)]="company.domain"
                 placeholder="example.com"
@@ -126,57 +131,37 @@
                 placeholder="Enter Zip"
             >
         </div>
-        <div
-            class="col-md-5"
-            [ngClass]="{'error-field':!validate.getPhoneNumber() }"
-        >
-            <mat-error *ngIf="!validate.getPhoneNumber()">Phone number is required</mat-error>
+        <div class="col-md-5 --required">
+            <mat-error
+                class="qt-tooltip-error"
+                *ngIf="!validate.getPhoneNumber()"
+            >
+                Phone number is required
+            </mat-error>
             <p>Phone Number</p>
             <input
                 type="text"
+                [ngClass]="{'--input-error' : !validate.getPhoneNumber()}"
                 *ngIf="company.addresses[0].phoneNumbers.length > 0"
                 (input)="onChangePhoneNumber()"
                 [(ngModel)]="company.addresses[0].phoneNumbers[0].number"
                 placeholder="Enter Phone Number"
             >
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
         <div class="col-md-12 details-divider">
             <p>Contact Detail</p>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <div
-            class="col-md-6"
-            [ngClass]="{'error-field':!validate.getFirstName() }"
-        >
-            <mat-error *ngIf="!validate.getFirstName()">First name is required</mat-error>
+        <div class="col-md-6 --required">
+            <mat-error
+                class="qt-tooltip-error"
+                *ngIf="!validate.getFirstName()"
+            >
+                First name is required
+            </mat-error>
             <p>First Name</p>
             <input
                 type="text"
+                [ngClass]="{'--input-error' : !validate.getFirstName()}"
                 (input)="onChangeFirstName()"
                 [(ngModel)]="company.contacts[0].firstName"
                 placeholder="Enter First Name"
@@ -191,59 +176,22 @@
             >
         </div>
         <div class="col-md-6">
-            <p>Designation</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <app-select-search
-                [placeholder]="'Select Designation'"
-                [maxlength]="30"
-                [add]="true"
+            <app-drop-down
                 #role
-                [class]="['light-dropdown']"
+                [class]="['light-dropdown', 'qt-select-input-40']"
+                [placeholder]="'Select Designation'"
                 [editItem]="(company.contacts[0].designation) ? company.contacts[0].designation : null"
                 [list]="allTitles"
+                [search]="true"
+                [change]="true"
+                [title]="'Designation'"
+                [maxlength]="30"
+                [add]="true"
                 (onSelectedItem)="onSelectDesignation($event)"
-            ></app-select-search>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            >
+            </app-drop-down>
         </div>
         <div class="col-md-6">
-
-
-
-
-
-
-
-
-
-
-
-
-
             <p>Phone Number</p>
             <div class="with-number-types">
                 <div
@@ -274,19 +222,6 @@
                                 (click)="company.contacts[0].phoneNumbers[0].typeNumber = item.toUpperCase()"
                             ></button>
                         </ng-template>
-
-
-
-
-
-
-
-
-
-
-
-
-
                     </div>
                 </div>
                 <input
@@ -297,16 +232,24 @@
                 >
             </div>
         </div>
-        <div
-            class="col-md-6"
-            [ngClass]="{'error-field':!validate.getPrimaryContactEmail() }"
-        >
-            <mat-error *ngIf="!validate.getPrimaryContactEmail()">Please enter a valid email address</mat-error>
-            <mat-error *ngIf="!validate.getExistPrimaryContactEmail()">The email address is already occupied</mat-error>
+        <div class="col-md-6 --required">
+            <mat-error
+                class="qt-tooltip-error"
+                *ngIf="!validate.getPrimaryContactEmail()"
+            >
+                Please enter a valid email address
+            </mat-error>
+            <mat-error
+                class="qt-tooltip-error"
+                *ngIf="!validate.getExistPrimaryContactEmail()"
+            >
+                The email address is already occupied
+            </mat-error>
             <p>Primary Contact Email</p>
             <input
                 type="text"
                 (input)="onChangePrimaryEmail()"
+                [ngClass]="{'--input-error' : !validate.getPrimaryContactEmail() || !validate.getExistPrimaryContactEmail()}"
                 [(ngModel)]="company.contacts[0].primaryEmail"
                 (blur)="onCheckEmail()"
                 placeholder="Primary Email Address"
@@ -316,176 +259,67 @@
             <p>Get Subscribe</p>
             <app-company-subscription (subscribeChange)="onChangeSubscribe($event)"></app-company-subscription>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
         <div class="col-md-12 details-divider">
             <p>Settings</p>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
         <div class="col-md-6">
             <app-company-time-zone (selectedOffsetItem)="onChangeTimeZone($event)"></app-company-time-zone>
         </div>
         <div class="col-md-6">
-            <p>Payment Terms</p>
-            <div
-                class="light-dropdown"
-                ngbDropdown
+            <app-drop-down
+                [class]="['light-dropdown', 'qt-select-input-40']"
+                [placeholder]="'Select Payment Terms'"
+                [field]="'title'"
+                [editItem]="getSelectedPaymentTerms()"
+                [list]="paymentTerms"
+                [search]="true"
+                [change]="true"
+                [title]="'Payment Terms'"
+                (onSelectedItem)="onSelectPaymentTerms($event)"
             >
-                <i class="icn-sm report-caret-icon"></i>
-                <input
-                    type="text"
-                    [value]="getSelectedPaymentTerms()"
-                    autocomplete="new-password"
-                    placeholder="Select Payment Terms"
-                    id="dropdownPaymentTerms"
-                    ngbDropdownToggle
-                >
-                <div
-                    ngbDropdownMenu
-                    aria-labelledby="dropdownPaymentTerms"
-                >
-                    <ng-template
-                        ngFor
-                        let-item
-                        [ngForOf]="paymentTerms"
-                        let-i="index"
-                    >
-                        <button
-                            ngbDropdownItem
-                            [textContent]="item.title"
-                            (click)="onSelectPaymentTerms(i)"
-                        ></button>
-                    </ng-template>
-                </div>
-            </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
+            </app-drop-down>
         </div>
         <div class="col-md-6">
-            <p>Payment Method</p>
-            <div
-                class="light-dropdown"
-                ngbDropdown
+            <app-drop-down
+                [class]="['light-dropdown', 'qt-select-input-40']"
+                [placeholder]="'Select Payment Method'"
+                [field]="'title'"
+                [editItem]="getSelectedPaymentMethod()"
+                [list]="paymentMethods"
+                [search]="true"
+                [change]="true"
+                [title]="'Payment Method'"
+                (onSelectedItem)="onSelectPaymentMethod($event)"
             >
-                <i class="icn-sm report-caret-icon"></i>
-                <input
-                    type="text"
-                    [value]="getSelectedPaymentMethod()"
-                    autocomplete="new-password"
-                    placeholder="Select Payment Method"
-                    id="dropdownPaymentMethods"
-                    ngbDropdownToggle
-                >
-                <div
-                    ngbDropdownMenu
-                    aria-labelledby="dropdownPaymentMethods"
-                >
-                    <ng-template
-                        ngFor
-                        let-item
-                        [ngForOf]="paymentMethods"
-                    >
-                        <button
-                            ngbDropdownItem
-                            [textContent]="item.title"
-                            (click)="company.defaultPaymentMethod = item.value"
-                        ></button>
-                    </ng-template>
-                </div>
-            </div>
+            </app-drop-down>
         </div>
         <div class="col-md-6">
-            <p>Service Type</p>
-            <div
-                class="light-dropdown"
-                ngbDropdown
+            <app-drop-down
+                [class]="['light-dropdown', 'qt-select-input-40']"
+                [placeholder]="'Select Service Type'"
+                [field]="'title'"
+                [editItem]="getSelectedServiceType()"
+                [list]="serviceTypes"
+                [search]="true"
+                [change]="true"
+                [title]="'Service Type'"
+                (onSelectedItem)="onSelectServiceTypes($event)"
             >
-                <i class="icn-sm report-caret-icon"></i>
-                <input
-                    type="text"
-                    [value]="getSelectedServiceType()"
-                    autocomplete="new-password"
-                    placeholder="Select Service Type"
-                    id="dropdownPaymentType"
-                    ngbDropdownToggle
-                >
-                <div
-                    ngbDropdownMenu
-                    aria-labelledby="dropdownPaymentType"
-                >
-                    <ng-template
-                        ngFor
-                        let-item
-                        [ngForOf]="serviceTypes"
-                        let-i="index"
-                    >
-                        <button
-                            ngbDropdownItem
-                            [textContent]="item.title"
-                            (click)="onSelectServiceTypes(i)"
-                        ></button>
-                    </ng-template>
-                </div>
-            </div>
+            </app-drop-down>
         </div>
         <div class="col-md-6">
-            <p>Sales Person</p>
-            <div class="light-dropdown">
-                <app-select-search
-                    [class]="['light-dropdown']"
-                    [editItem]="selectedTechLead"
-                    [field]="'name'"
-                    [list]="listPersons"
-                    (onSelectedItem)="onSelectTechLead($event)"
-                ></app-select-search>
-            </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
+            <app-drop-down
+                [class]="['light-dropdown', 'qt-select-input-40']"
+                [placeholder]="'Select Sales Person'"
+                [field]="'name'"
+                [list]="listPersons"
+                [editItem]="selectedTechLead"
+                [search]="true"
+                [change]="true"
+                [title]="'Sales Person'"
+                (onSelectedItem)="onSelectTechLead($event)"
+            >
+            </app-drop-down>
         </div>
         <div class="col-md-12">
             <app-company-tags
@@ -506,18 +340,6 @@
             </div>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
     <div class="qt-aside-modern__footer">
         <div class="qt-df qt-jc-sb qt-ai-c qt-w100">
             <div class="qt-df">
@@ -527,36 +349,12 @@
                 >
                     Update Company
                 </button>
-
-
-
-
-
-
-
-
-
-
-
-
                 <button
                     class="qt-button --gray"
                     (click)="close()"
                 >
                     Cancel
                 </button>
-
-
-
-
-
-
-
-
-
-
-
-
             </div>
             <div class="qt-mr-50">
                 <div class="create-contract">
@@ -565,18 +363,4 @@
             </div>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </div>
