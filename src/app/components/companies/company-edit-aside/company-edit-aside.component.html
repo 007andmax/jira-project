@@ -9,10 +9,6 @@
             (click)="close()"
         ></div>
     </div>
-
-
-
-
     <div class="qt-aside-modern__content --less-padding new-companies-content__modal--content">
         <div class="col-md-12">
             <div class="logo-upload d-f">
@@ -34,18 +30,8 @@
                         (input)="uploadFileOnBrower($event)"
                     >
                 </div>
-
-
-
-
-
             </div>
         </div>
-
-
-
-
-
         <div
             class="col-md-12 google-plus"
             [ngClass]="{'error-field':!validate.getName() || validate.getNameIsExist() }"
@@ -60,39 +46,21 @@
                 placeholder="Write Company or Search Company"
             >
         </div>
-        <div
-            class="col-md-6"
-            ngbDropdown
-            [ngClass]="{'error-field':!validate.getType() }"
-        >
-            <mat-error *ngIf="!validate.getType()">Client Type is required</mat-error>
-            <p>Company Type</p>
-            <input
-                type="text"
-                [value]="getSelectedCompanyTypes()"
-                autocomplete="new-password"
-                (input)="onChangeType()"
-                placeholder="Select Company Type"
-                id="dropdownTypeCompany"
-                ngbDropdownToggle
+        <div class="col-md-6">
+            <app-drop-down
+                [class]="['light-dropdown', 'qt-select-input-40']"
+                [placeholder]="'Select Company Type'"
+                [editItem]="getSelectedCompanyTypes()"
+                [field]="'title'"
+                [list]="companyTypes"
+                [search]="true"
+                [change]="true"
+                [validate]="validate.getType()"
+                [errorMessage]="'Client Type is required'"
+                [title]="'Company Type'"
+                (onSelectedItem)="onSelectCompanyTypes($event)"
             >
-            <div
-                ngbDropdownMenu
-                aria-labelledby="dropdownTypeCompany"
-            >
-                <ng-template
-                    ngFor
-                    let-item
-                    [ngForOf]="companyTypes"
-                    let-i="index"
-                >
-                    <button
-                        ngbDropdownItem
-                        [textContent]="item.title"
-                        (click)="onSelectCompanyTypes(i)"
-                    ></button>
-                </ng-template>
-            </div>
+            </app-drop-down>
         </div>
         <div class="col-md-6">
             <p>Client Type</p>
@@ -104,6 +72,14 @@
                     (onSelectedItem)="onSelectClientIndustry($event)"
                 ></app-select-search>
             </div>
+
+
+
+
+
+
+
+
 
 
 
@@ -169,9 +145,25 @@
 
 
 
+
+
+
+
+
+
+
+
         <div class="col-md-12 details-divider">
             <p>Contact Detail</p>
         </div>
+
+
+
+
+
+
+
+
 
 
 
@@ -205,6 +197,14 @@
 
 
 
+
+
+
+
+
+
+
+
             <app-select-search
                 [placeholder]="'Select Designation'"
                 [maxlength]="30"
@@ -221,8 +221,24 @@
 
 
 
+
+
+
+
+
+
+
+
         </div>
         <div class="col-md-6">
+
+
+
+
+
+
+
+
 
 
 
@@ -263,6 +279,14 @@
 
 
 
+
+
+
+
+
+
+
+
                     </div>
                 </div>
                 <input
@@ -297,9 +321,25 @@
 
 
 
+
+
+
+
+
+
+
+
         <div class="col-md-12 details-divider">
             <p>Settings</p>
         </div>
+
+
+
+
+
+
+
+
 
 
 
@@ -341,6 +381,14 @@
                     </ng-template>
                 </div>
             </div>
+
+
+
+
+
+
+
+
 
 
 
@@ -430,12 +478,20 @@
 
 
 
+
+
+
+
+
+
+
+
         </div>
         <div class="col-md-12">
-          <app-company-tags
-            #companyTags
-            (tagsChange)="onChangeTags($event)"
-          ></app-company-tags>
+            <app-company-tags
+                #companyTags
+                (tagsChange)="onChangeTags($event)"
+            ></app-company-tags>
         </div>
         <div class="col-md-12 editable-field">
             <p>Note for Company</p>
@@ -454,6 +510,14 @@
 
 
 
+
+
+
+
+
+
+
+
     <div class="qt-aside-modern__footer">
         <div class="qt-df qt-jc-sb qt-ai-c qt-w100">
             <div class="qt-df">
@@ -463,6 +527,14 @@
                 >
                     Update Company
                 </button>
+
+
+
+
+
+
+
+
 
 
 
@@ -477,6 +549,14 @@
 
 
 
+
+
+
+
+
+
+
+
             </div>
             <div class="qt-mr-50">
                 <div class="create-contract">
@@ -485,6 +565,14 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+
+
+
 
 
 

@@ -1,0 +1,310 @@
+<div class="qt-aside-modern__content --less-padding new-companies-content__modal--content">
+    <div class="col-md-12">
+        <div class="logo-upload d-f">
+            <img
+                *ngIf="company.logo"
+                [src]="company.logo.base64"
+            >
+            <i
+                class="icn-64 upload-logo"
+                *ngIf="!company.logo"
+            ></i>
+            <div>
+                <div class="new-link">Upload Company logo</div>
+                <p>Maximum size of 2MB. JPG, GIF, PNG</p>
+            </div>
+            <input
+                id="upload-file"
+                type="file"
+                (input)="uploadFileOnBrower($event)"
+            >
+        </div>
+    </div>
+    <div class="col-md-12 google-plus --required">
+        <mat-error
+            class="qt-tooltip-error"
+            *ngIf="validate.getNameIsExist()"
+        >
+            This company name already occupied
+        </mat-error>
+        <mat-error
+            class="qt-tooltip-error"
+            *ngIf="!validate.getName()"
+        >
+            Company name is required
+        </mat-error>
+        <p>Company Name</p>
+        <input
+            type="text"
+            [(ngModel)]="company.name"
+            [ngClass]="{'--input-error' : validate.getNameIsExist() || !validate.getName()}"
+            (blur)="onChangeName()"
+            placeholder="Write Company or Search Company"
+        >
+    </div>
+    <div class="col-md-6">
+        <app-drop-down
+            [class]="['light-dropdown', 'qt-select-input-40']"
+            [placeholder]="'Select Company Type'"
+            [field]="'title'"
+            [list]="companyTypes"
+            [search]="true"
+            [change]="true"
+            [validate]="validate.getType()"
+            [errorMessage]="'Client Type is required'"
+            [title]="'Company Type'"
+            (onSelectedItem)="onSelectCompanyTypes($event)"
+        >
+        </app-drop-down>
+    </div>
+    <div class="col-md-6">
+        <app-drop-down
+            [class]="['light-dropdown', 'qt-select-input-40']"
+            [placeholder]="'Select Client Type'"
+            [list]="industries"
+            [search]="true"
+            [change]="true"
+            [title]="'Client Type'"
+            (onSelectedItem)="onSelectClientIndustry($event)"
+        >
+        </app-drop-down>
+    </div>
+    <div class="col-md-12 --required">
+        <mat-error
+            class="qt-tooltip-error"
+            *ngIf="!validate.getDomain()"
+        >
+            Please enter a valid domain
+        </mat-error>
+        <p>Domain Name</p>
+        <input
+            type="text"
+            [ngClass]="{'--input-error' : !validate.getDomain()}"
+            [(ngModel)]="company.domain"
+            (blur)="onChangeDomain()"
+            placeholder="example.com"
+        >
+    </div>
+    <div class="col-md-12">
+        <p>Location</p>
+        <input
+            type="text"
+            #addresstext
+            [(ngModel)]="company.addresses[0].address"
+            (focus)="onCheckGoogleAutoComplete()"
+            placeholder="Enter Location"
+        >
+    </div>
+    <div class="col-md-4">
+        <p>Suite No.</p>
+        <input
+            type="text"
+            [(ngModel)]="company.addresses[0].suiteNumber"
+            placeholder="Enter Suite Number"
+        >
+    </div>
+    <div class="col-md-3">
+        <p>Zip</p>
+        <input
+            type="text"
+            [(ngModel)]="company.addresses[0].postalCode"
+            placeholder="Enter Zip"
+        >
+    </div>
+    <div class="col-md-5 --required">
+        <mat-error
+            class="qt-tooltip-error"
+            *ngIf="!validate.getPhoneNumber()"
+        >
+            Phone number is required
+        </mat-error>
+        <p>Phone Number</p>
+        <input
+            type="text"
+            (input)="onChangePhoneNumber()"
+            [ngClass]="{'--input-error' : !validate.getPhoneNumber()}"
+            *ngIf="company.addresses[0].phoneNumbers.length > 0"
+            [(ngModel)]="company.addresses[0].phoneNumbers[0].number"
+            placeholder="Enter Phone Number"
+        >
+    </div>
+    <div class="col-md-12 details-divider">
+        <p>Contact Detail</p>
+    </div>
+    <div class="col-md-6 --required">
+        <mat-error
+            class="qt-tooltip-error"
+            *ngIf="!validate.getFirstName()"
+        >
+            First name is required
+        </mat-error>
+        <p>First Name</p>
+        <input
+            type="text"
+            [ngClass]="{'--input-error' : !validate.getFirstName()}"
+            (input)="onChangeFirstName()"
+            [(ngModel)]="company.contacts[0].firstName"
+            placeholder="Enter First Name"
+        >
+    </div>
+    <div class="col-md-6">
+        <p>Last Name</p>
+        <input
+            type="text"
+            [(ngModel)]="company.contacts[0].lastName"
+            placeholder="Enter Last Name"
+        >
+    </div>
+    <div class="col-md-6">
+        <app-drop-down
+            #role
+            [class]="['light-dropdown', 'qt-select-input-40']"
+            [placeholder]="'Select Designation'"
+            [list]="allTitles"
+            [search]="true"
+            [change]="true"
+            [title]="'Designation'"
+            [maxlength]="30"
+            [add]="true"
+            (onSelectedItem)="onSelectDesignation($event)"
+        >
+        </app-drop-down>
+    </div>
+    <div class="col-md-6">
+        <p>Phone Number</p>
+        <div class="with-number-types">
+            <div
+                class="grey-dropdown"
+                ngbDropdown
+            >
+                <button
+                    class="types-btn"
+                    id="dropdownBasic"
+                    *ngIf="company.contacts[0].phoneNumbers.length > 0"
+                    ngbDropdownToggle
+                    [textContent]="company.contacts[0].phoneNumbers[0].typeNumber"
+                >
+                </button>
+                <i class="icn-sm report-caret-icon"></i>
+                <div
+                    ngbDropdownMenu
+                    aria-labelledby="dropdownBasic"
+                >
+                    <ng-template
+                        ngFor
+                        let-item
+                        [ngForOf]="phoneTypes"
+                    >
+                        <button
+                            ngbDropdownItem
+                            [textContent]="item"
+                            (click)="company.contacts[0].phoneNumbers[0].typeNumber = item.toUpperCase()"
+                        ></button>
+                    </ng-template>
+                </div>
+            </div>
+            <input
+                type="text"
+                *ngIf="company.contacts[0].phoneNumbers.length > 0"
+                [(ngModel)]="company.contacts[0].phoneNumbers[0].number"
+                placeholder="Enter Phone Number"
+            >
+        </div>
+    </div>
+    <div class="col-md-6 --required">
+        <mat-error
+            class="qt-tooltip-error"
+            *ngIf="!validate.getPrimaryContactEmail()"
+        >
+            Please enter a valid email address
+        </mat-error>
+        <p>Primary Contact Email</p>
+        <input
+            type="text"
+            [ngClass]="{'--input-error' : !validate.getPrimaryContactEmail()}"
+            (input)="onChangePrimaryEmail()"
+            [(ngModel)]="company.contacts[0].primaryEmail"
+            placeholder="Primary Email Address"
+        >
+    </div>
+    <div class="col-md-12">
+        <p>Get Subscribe</p>
+        <app-company-subscription
+            [editItem]="company.contacts[0].subscription"
+            (subscribeChange)="onChangeSubscribe($event)"
+        ></app-company-subscription>
+    </div>
+    <div class="col-md-12 details-divider">
+        <p>Settings</p>
+    </div>
+    <div class="col-md-6">
+        <app-company-time-zone (selectedOffsetItem)="onChangeTimeZone($event)"></app-company-time-zone>
+    </div>
+    <div class="col-md-6">
+        <app-drop-down
+            [class]="['light-dropdown', 'qt-select-input-40']"
+            [placeholder]="'Select Payment Terms'"
+            [field]="'title'"
+            [list]="paymentTerms"
+            [search]="true"
+            [change]="true"
+            [title]="'Payment Terms'"
+            (onSelectedItem)="onSelectPaymentTerms($event)"
+        >
+        </app-drop-down>
+    </div>
+    <div class="col-md-6">
+        <app-drop-down
+            [class]="['light-dropdown', 'qt-select-input-40']"
+            [placeholder]="'Select Payment Method'"
+            [field]="'title'"
+            [list]="paymentMethods"
+            [search]="true"
+            [change]="true"
+            [title]="'Payment Method'"
+            (onSelectedItem)="onSelectPaymentMethod($event)"
+        >
+        </app-drop-down>
+    </div>
+    <div class="col-md-6">
+        <app-drop-down
+            [class]="['light-dropdown', 'qt-select-input-40']"
+            [placeholder]="'Select Service Type'"
+            [field]="'title'"
+            [list]="serviceTypes"
+            [search]="true"
+            [change]="true"
+            [title]="'Service Type'"
+            (onSelectedItem)="onSelectServiceTypes($event)"
+        >
+        </app-drop-down>
+    </div>
+    <div class="col-md-6">
+        <app-drop-down
+            [class]="['light-dropdown', 'qt-select-input-40']"
+            [placeholder]="'Select Sales Person'"
+            [field]="'name'"
+            [list]="listPersons"
+            [search]="true"
+            [change]="true"
+            [title]="'Sales Person'"
+            (onSelectedItem)="onSelectTechLead($event)"
+        >
+        </app-drop-down>
+    </div>
+    <div class="col-md-12">
+        <app-company-tags (tagsChange)="onChangeTags($event)"></app-company-tags>
+    </div>
+    <div class="col-md-12 editable-field">
+        <p>Note for Company</p>
+        <div class="editable-description">
+            <textarea
+                appTextArea
+                [limit]="250"
+                id="company-description"
+                placeholder="Write Description"
+                (input)="onChangeDescription($event)"
+            ></textarea>
+        </div>
+    </div>
+</div>

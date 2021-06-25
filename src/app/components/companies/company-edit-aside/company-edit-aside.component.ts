@@ -157,7 +157,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
       let indexPersone = this.listPersons.findIndex(item => item.id === this.company.techLeadId);
       if (indexPersone > -1) this.selectedTechLead = this.listPersons[indexPersone].name;
       let indexType = this.companyTypes.findIndex(item => item.value === this.company.clientType);
-      if (indexType > -1) this.onSelectCompanyTypes(indexType);
+      if (indexType > -1) this.onSelectCompanyTypes(this.companyTypes[indexType]);
       this.tagsState.setTagsFromtEdit(this.company.tags);
       this.elRef.nativeElement.querySelector("#company-description").value = this.company.description;
       this.opened = true;
@@ -165,13 +165,16 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getCompanyFromEdit);
   }
-
-  public onSelectCompanyTypes(index) {
-    this.companyTypes.forEach(item => item.selected = false);
-    this.companyTypes[index].selected = true;
-    this.company.clientType = this.companyTypes[index].value;
+  public onSelectCompanyTypes(type) {
+    this.company.clientType = type.value;
     this.validate.resetType();
+    this.onChangeType();
   }
+  public onChangeType() {
+    this.validate.checkValidType(this.company.clientType);
+  }
+
+
   public onSelectTechLead(event) {
     if (event) {
       this.company.techLeadId = event.id;
@@ -240,9 +243,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   public onChangeFirstName() {
     this.validate.checkValidFirstname(this.company.contacts[0].firstName);
   }
-  public onChangeType() {
-    this.validate.checkValidType(this.company.clientType);
-  }
+
   public onChangeTimeZone(data) {
     this.company.addresses[0].locale = (data) ? data.second : '';
   }
@@ -290,8 +291,8 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   }
   getSelectedCompanyTypes() {
     let index = this.companyTypes.findIndex(item => item.selected === true);
-    if (index > -1) return this.companyTypes[index].title;
-    return "";
+    if (index > -1) return this.companyTypes[index];
+    return null;
   }
   getSelectedServiceType() {
     let index = this.serviceTypes.findIndex(item => item.selected === true);
