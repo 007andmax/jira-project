@@ -1317,6 +1317,17 @@ app-quotes-item {
 .companies-page {
   background: #edf2f6;
 
+  .new-companies-content__header-buttons {
+    display: flex;
+    padding: 8px 16px;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .05);
+    background-color: #ffffff;
+    font-size: 12px;
+    color: #4f5f79;
+    line-height: 1.33;
+  }
+
   .new-companies-content__header {
     .btn-new {
       height: 36px;
@@ -1338,9 +1349,9 @@ app-quotes-item {
 
   .companies-table {
     &__check {
-      width: 38px;
-      max-width: 38px;
-      min-width: 38px;
+      width: 40px;
+      max-width: 40px;
+      min-width: 40px;
     }
     &__name {
       width: -webkit-max-content;
