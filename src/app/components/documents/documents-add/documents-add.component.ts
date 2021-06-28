@@ -3,7 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { TagsStateService } from 'src/app/states/tags/tags-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { CompanyTagsStateService } from '../../companies/company-tags/states/company-tags-state.service';
 import { DocumentAdd } from './class/document-add';
 import { DocumentValidate } from './class/document-validate';
 
@@ -26,6 +28,7 @@ export class DocumentsAddComponent implements OnInit {
     public activateRoute: ActivatedRoute,
     public documentsService: DocumentsService,
     public cd: ChangeDetectorRef,
+    private tagsStateService: TagsStateService,
     public leftPanelStateService: LeftPanelStateService) {
   }
 
@@ -40,8 +43,12 @@ export class DocumentsAddComponent implements OnInit {
           this.cd.detectChanges();
           this.documentsService.getDocument(queryParam['clone_document']).subscribe(data => {
             this.documentAdd.setData(data);
+
             this.documentValidate.setUniqueTittle(false);
             if (queryParam['template']) {
+              let companyTag = this.tagsStateService.getTags().find(item => item.companyId === this.companyId);
+              console.log("companyTag", companyTag);
+              if (companyTag) this.documentAdd.tags.push(companyTag.id);
               this.documentAdd.setClientType(null);
               this.documentAdd.linked.companies.push(this.companyId);
             }
