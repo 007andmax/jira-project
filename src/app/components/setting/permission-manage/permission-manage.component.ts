@@ -38,6 +38,8 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
   productsRelatedPermissions = [];
   passwordsRelatedPermissions = [];
   viewPasswordsRelatedPermissions = [];
+  viewDocumentsRelatedPermissions = [];
+  editCategoryDocumentsRelatedPermissions = [];
   sections = {};
 
   delete = false;
@@ -56,6 +58,8 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
     this.productsRelatedPermissions = this.permissionManageService.getProductsRelatedPermissions();
     this.passwordsRelatedPermissions = this.permissionManageService.getPasswordsRelatedPermissions();
     this.viewPasswordsRelatedPermissions = this.permissionManageService.getViewPasswordsRelatedPermissions();
+    this.viewDocumentsRelatedPermissions = this.permissionManageService.getViewDocumentsRelatedPermissions();
+    this.editCategoryDocumentsRelatedPermissions = this.permissionManageService.getEditCategoryDocumentsRelatedPermissions();
     this.sections = this.permissionManageService.getsections();
   }
 
@@ -404,6 +408,12 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
         case 'VIEW_PASSWORD':
           relatedPermissions = this.passwordsRelatedPermissions;
           break;
+        case 'VIEW_DOCUMENT':
+          relatedPermissions = this.viewDocumentsRelatedPermissions;
+          break;
+        case 'EDIT_CATEGORY':
+          relatedPermissions = this.editCategoryDocumentsRelatedPermissions;
+          break;
         default:
           break;
       }
@@ -458,9 +468,20 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
       this.viewPasswordsRelatedPermissions.indexOf(permission) > -1
     ) {
       return true;
+    } else if (
+      role.permissions.indexOf('VIEW_DOCUMENT') === -1 &&
+      this.viewDocumentsRelatedPermissions.indexOf(permission) > -1
+    ) {
+      return true;
+    } else if (
+      role.permissions.indexOf('EDIT_CATEGORY') === -1 &&
+      this.editCategoryDocumentsRelatedPermissions.indexOf(permission) > -1
+    ) {
+      return true;
     } else {
       return false;
     }
+
   }
 
   /**

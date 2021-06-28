@@ -1,0 +1,236 @@
+<div
+    class="qt-aside-modern documents-create"
+    [ngClass]="{'--mini' : !openAside}"
+>
+    <div class="qt-aside-modern__header">
+        <div
+            class="toggle-aside icon__panel-open qt-mr-16"
+            [ngClass]="{'opened' : openAside}"
+            (click)="toggleAside()"
+        ></div>
+        <div class="qt-aside-modern__header-title qt-mr-auto">Create Document</div>
+        <div
+            class="qt-aside-modern__header-close icon__close"
+            (click)="goToDocumentsList()"
+        >
+        </div>
+    </div>
+    <div class="qt-aside-modern__content --no-padding">
+        <div class="documents-create-panel__subheader">
+            <div
+                class="documents-create-panel__subheader-item subheader-item-system pointer"
+                [ngClass]="{'--active':tab === 'DOCUMENT_INFO'}"
+                (click)="tab = 'DOCUMENT_INFO'"
+            >
+                Document Info
+            </div>
+            <div
+                class="documents-create-panel__subheader-item subheader-item-network pointer"
+                [ngClass]="{'--active':tab === 'PERMISSIONS'}"
+                (click)="tab = 'PERMISSIONS'"
+            >
+                Permissions
+            </div>
+            <div
+                class="documents-create-panel__subheader-item subheader-item-software pointer"
+                [ngClass]="{'--active':tab === 'DOCUMENT_HISTORY'}"
+                (click)="tab = 'DOCUMENT_HISTORY'"
+            >
+                Document History
+            </div>
+        </div>
+        <div class="documents-create-panel__body">
+            <div
+                class="qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24"
+                *ngIf="tab === 'DOCUMENT_INFO'"
+            >
+                <div class="documents-create__col --required">
+                    <p class="label-name">Document Title</p>
+                    <mat-error
+                        class="qt-tooltip-error"
+                        *ngIf="!documentValidate.getTitle()"
+                        [textContent]="'Document title is required'"
+                    >
+                    </mat-error>
+                    <mat-error
+                        class="qt-tooltip-error"
+                        *ngIf="!documentValidate.getUniqueTittle()"
+                        [textContent]="'Document title value must be unique'"
+                    >
+                    </mat-error>
+                    <input
+                        type="text"
+                        class="qt-input-40 documents-add-body__input"
+                        placeholder="Printer Installation Guide"
+                        [(ngModel)]="documentEdit.title"
+                        [ngClass]="{'--input-error':!documentValidate.getTitle() || !documentValidate.getUniqueTittle()}"
+                        (blur)="onChangeTitle()"
+                        min="1"
+                        max="250"
+                    >
+                </div>
+                <div class="documents-create__col --required">
+                    <p class="label-name">Document Description</p>
+                    <textarea
+                        appTextArea
+                        [limit]="160"
+                        minlength="1"
+                        maxlength="1000"
+                        placeholder="Write Description"
+                        [(ngModel)]="documentEdit.description"
+                    ></textarea>
+                </div>
+                <div class="documents-create__col --required">
+                    <div class="qt-df qt-jc-sb">
+                        <p class="label-name">Document Category</p>
+                        <p
+                            class="qt-color-info"
+                            (click)="toggleEditCategories = true"
+                            *ngIf="getPermissions('EDIT_CATEGORY')"
+                        >
+                            Edit
+                        </p>
+                    </div>
+                    <app-drop-down
+                        #categoriesDp
+                        [class]="['light-dropdown', 'qt-select-input-40']"
+                        [placeholder]="'Select Category'"
+                        [errorMessage]="'Category is required'"
+                        [editItem]="getSelectedCategory()"
+                        [field]="'name'"
+                        [add]="true"
+                        [list]="categories"
+                        [search]="true"
+                        [change]="true"
+                        (onSelectedItem)="onSelectCategory($event)"
+                    >
+                    </app-drop-down>
+                </div>
+                <div class="documents-create__col">
+                    <documents-linked
+                        #linked
+                        [isDisabled]="documentEdit.isTemplateForEdit()"
+                        [editItems]="documentEdit.linked"
+                        (onSelectedItem)="onChangeLinked($event)"
+                    ></documents-linked>
+                </div>
+                <div class="documents-create__col">
+                    <app-company-tags
+                        #tagsDp
+                        [editItems]="documentEdit.tags"
+                        class="documents-filter-tags"
+                        (tagsChange)="onSelectTags($event)"
+                    ></app-company-tags>
+                </div>
+                <!-- <div class="documents-create__col checkbox-wrapper">
+                    <div class="with-checkbox">
+                        <label class="checkbox-container">
+                            <input
+                                type="checkbox"
+                                disabled
+                            >
+                            <span class="checkbox-mark"></span>
+                        </label>
+                        <p>Show in Knowledge base</p>
+                    </div>
+                </div>
+                <div class="documents-create__col">
+                    <app-drop-down
+                        class="dropdown"
+                        [placeholder]="'Select Category'"
+                        [isDisabled]="true"
+                        [list]="categories"
+                        [field]="'name'"
+                        [search]="true"
+                        [change]="true"
+                        heightInput="40px"
+                        widthInput="100%"
+                    ></app-drop-down>
+                </div> -->
+                <div class="documents-create__col checkbox-wrapper">
+                    <div class="with-checkbox">
+                        <label
+                            class="checkbox-container"
+                            [ngClass]="{'disabled':documentEdit.documentType === 'DOCUMENT'}"
+                        >
+                            <input
+                                id
+                                type="checkbox"
+                                [disabled]="documentEdit.documentType === 'DOCUMENT'"
+                                [(ngModel)]="requiredCompanyType"
+                                (change)="onResetCompanyType()"
+                            >
+                            <span></span>
+                        </label>
+                        <p>Required by Company Type</p>
+                        <i
+                            class="icn-sm icn-help"
+                            placement="top"
+                            ngbTooltip="The required type value can be used only for templates"
+                        ></i>
+                    </div>
+                </div>
+                <div class="documents-create__col">
+                    <app-drop-down
+                        #companyTypeDp
+                        class="dropdown"
+                        [placeholder]="'Select Company Type'"
+                        [editItem]="getSelectedClientType()"
+                        [list]="companyTypes"
+                        [field]="'title'"
+                        [search]="true"
+                        [change]="true"
+                        [isDisabled]="!requiredCompanyType"
+                        heightInput="40px"
+                        widthInput="100%"
+                        (onSelectedItem)="onSelectCompanyType($event)"
+                    ></app-drop-down>
+                </div>
+                <div class="documents-create__col qt-input-block qt-w50">
+                    <p class="label-name">Document Review Date</p>
+                    <app-date-picker
+                        [editMode]="true"
+                        [placement]="'top'"
+                        [editDate]="documentEdit.parseReviewDate()"
+                        [useMinDate]="false"
+                        (onChange)="onChangeReviewDate($event)"
+                    ></app-date-picker>
+                </div>
+                <!-- <div class="documents-create__col">
+                    <div class="qt-df qt-jc-sb qt-ai-c">
+                        <p class="label-name">Share Document Link</p>
+                        <div class="qt-df qt-ai-c pointer">
+                            <div class="icon__link qt-sz-16 qt-bg-contain"></div>
+                            <div class="qt-color-info qt-ff-gm qt-mr-4 qt-ml-4">Copy Link</div>
+                            <div class="qt-df">
+                                <div class="qt-toggle qt-mr-8">
+                                    <div class="qt-toggle__circle"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <input
+                        type="text"
+                        class="qt-input-40 documents-add-body__input"
+                        placeholder="https://www.quicktech.com/shard/s593/sh/04d5c…"
+                    >
+                </div> -->
+            </div>
+            <div
+                class="qt-pt-12 qt-pl-24 qt-pr-24"
+                *ngIf="tab === 'PERMISSIONS'"
+            >
+            </div>
+            <div
+                class="qt-pb-24"
+                *ngIf="tab === 'DOCUMENT_HISTORY'"
+            >
+                <documents-edit-history [documentEdit]="documentEdit"></documents-edit-history>
+            </div>
+        </div>
+    </div>
+</div>
+<documents-add-edit-categories
+    *ngIf="toggleEditCategories"
+    (onClosed)="toggleEditCategories = false"
+></documents-add-edit-categories>

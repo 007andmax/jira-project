@@ -1,0 +1,71 @@
+<div class="qt-page-list__header documents-templates-page">
+    <div class="qt-page-list__header-title-line">
+        <h3 class="qt-page-list__header-title">Templates</h3>
+        <div class="documents-templates-panel__subheader">
+            <div
+                [ngClass]="{'--active':tab === 'MY_TEMPLATES'}"
+                (click)="onChangeTemplate('MY_TEMPLATES')"
+                class="documents-templates-panel__subheader-item pointer"
+            >
+                My Templates
+            </div>
+            <div
+                [ngClass]="{'--active':tab === 'TEMPLATE_GALLERY'}"
+                (click)="onChangeTemplate('TEMPLATE_GALLERY')"
+                class="documents-templates-panel__subheader-item pointer"
+            >
+                Template Gallery
+            </div>
+        </div>
+        <div
+            class="qt-aside-modern__header-close icon__close"
+            (click)="goToDocumentsList()"
+        ></div>
+    </div>
+</div>
+<documents-templates-header
+    #header
+    (onSearch)="onSearch($event)"
+></documents-templates-header>
+<div class="qt-page-list documents-templates-page">
+    <div class="documents-create-panel__body">
+        <div
+            class="loading"
+            *ngIf="showPreloader"
+        ></div>
+        <div
+            class
+            *ngIf="tab === 'TEMPLATE_GALLERY'"
+        >
+            <div class="card-line">
+                <ng-template
+                    ngFor
+                    let-item
+                    [ngForOf]="list"
+                    [ngForTrackBy]="trackById"
+                >
+                    <documents-templates-item
+                        [item]="item"
+                        (onRemoveDocument)="onRemoveDocument(item)"
+                    ></documents-templates-item>
+                </ng-template>
+            </div>
+        </div>
+        <div *ngIf="tab === 'MY_TEMPLATES'">
+            <div class="card-line">
+                <ng-template
+                    ngFor
+                    let-item
+                    [ngForOf]="list"
+                    [ngForTrackBy]="trackById"
+                >
+                    <documents-templates-item
+                        [item]="item"
+                        (onRemoveDocument)="onRemoveDocument(item)"
+                    ></documents-templates-item>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>
+<documents-templates-info></documents-templates-info>

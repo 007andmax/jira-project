@@ -1,6 +1,8 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { REBOOT_DEVICE, REMOVE_DEVICES, SHUTDOWN_DEVICE } from '../../const/confirm';
 import { DevicesService } from '../../services/devices/devices.service';
 import { DeviceStatus } from '../../states/devices/class/device-status';
@@ -29,20 +31,30 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
   constructor(private devicesStateService: DevicesStateService,
     private devicesService: DevicesService,
     private confirmStateService: ConfirmStateService,
+    private companiesStateService: CompaniesStateService,
     private modalService: NgbModal,
     public cd: ChangeDetectorRef,
+    public activateRoute: ActivatedRoute,
     private leftPanelStateService: LeftPanelStateService,
     private devicesRealTimeService: DevicesRealTimeService) { }
 
   ngOnInit() {
-    this.leftPanelStateService.setCompanyPage("company-devices");
-    this.companyId = localStorage.getItem("company_id");
-    if (this.devicesStateService.getAllDevices()) {
-      this.devices = (this.devicesStateService.getAllDevices()[this.companyId]) ? JSON.parse(JSON.stringify(this.devicesStateService.getAllDevices()[this.companyId])).map(item => new DeviceCompany(item, this.companyId)) : [];
-      this.filter.onFilterName(this.devices);
-      this.showPreloader = false;
-    }
-    if (this.devices.length > 0) this.sendDeviceStatusRequest(this.companyId, this.devices.filter(item => item.agentId).map(item => item.agentId));
+
+    this.leftPanelStateService.changeStateWithoutNavigate('company-devices');
+    let id = this.activateRoute.snapshot.params['id'];
+    let subscription = this.activateRoute.params.subscribe(params => {
+      id = params['id'];
+      this.companiesStateService.setSelectedCompanyId(id);
+      this.companyId = id;
+      if (this.devicesStateService.getAllDevices()) {
+        this.devices = (this.devicesStateService.getAllDevices()[this.companyId]) ? JSON.parse(JSON.stringify(this.devicesStateService.getAllDevices()[this.companyId])).map(item => new DeviceCompany(item, this.companyId)) : [];
+        this.filter.onFilterName(this.devices);
+        this.showPreloader = false;
+      }
+      if (this.devices.length > 0) this.sendDeviceStatusRequest(this.companyId, this.devices.filter(item => item.agentId).map(item => item.agentId));
+    });
+    this.sub.add(subscription);
+
     let getOnDevices = this.devicesStateService.getOnDevices().subscribe(data => {
       //  if (this.devices.length === 0 && data[this.companyId]) this.sendDeviceStatusRequest(this.companyId, data[this.companyId].filter(item => item.agentId).map(item => item.agentId));
       if (!data[this.companyId] && this.devices.length === 0) return;

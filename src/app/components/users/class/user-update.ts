@@ -21,26 +21,27 @@ export class UserUpdate {
   isContact: boolean;
   priority: number;
   userEnabled: boolean;
+  tags: Array<any> = [];
   constructor(data: UserProfile, user: User) {
     this.role = data.role;
-     
-    if (!user.phoneNumbers || data.phoneNumbers.length === 1 && data.phoneNumbers[0].number === '' && user.phoneNumbers.length === 0){
+
+    if (!user.phoneNumbers || data.phoneNumbers.length === 1 && data.phoneNumbers[0].number === '' && user.phoneNumbers.length === 0) {
       this.phoneNumbers = [];
     } else {
       this.phoneNumbers = data.phoneNumbers.map((item, index) => {
-        if (user.phoneNumbers.length === 0){
+        if (user.phoneNumbers.length === 0) {
           return new UserPhoneNumber(null, item.number, item.typeNumber, null);
-    
+
         } else {
-           
+
           return new UserPhoneNumber(user.phoneNumbers[index].id, item.number, item.typeNumber, user.phoneNumbers[index].priority);
-    
+
         }
-       });
+      });
     }
-    
-   
-   
+
+
+
     this.subscription = new UserSubscription(user.subscription.id, data.subscription.invoice, data.subscription.ticket, data.subscription.ticketManager);
     this.welcomeEmail = data.welcomeEmail;
     this.avatar = data.avatar;
@@ -56,5 +57,8 @@ export class UserUpdate {
     this.isContact = user.isContact;
     this.priority = user.priority;
     this.userEnabled = user.userEnabled;
+    this.tags = data.tags.map(item => {
+      return { id: item.id }
+    })
   }
 }

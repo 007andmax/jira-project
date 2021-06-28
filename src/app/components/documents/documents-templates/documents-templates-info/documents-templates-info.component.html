@@ -1,0 +1,57 @@
+<div
+    class="qt-aside-modern documents-preview"
+    *ngIf="openAside"
+>
+    <div
+        class="qt-aside-modern__header"
+        *ngIf="!showPreloader"
+    >
+        <div
+            class="qt-aside-modern__header-close icon__close"
+            (click)="openAside = false"
+        >
+        </div>
+    </div>
+    <div
+        class="qt-aside-modern__content --no-padding"
+        [ngStyle]="{'opacity':(!showPreloader) ? 1 : 0}"
+    >
+        <div
+            class="documents-create-panel__subheader"
+            *ngIf="!showPreloader && document.documentType === 'TEMPLATE'"
+        >
+            <div class="documents-create-panel__card-icon qt-mr-12">
+                <div class="icon__templete-thumb qt-za-16 qt-sz-16 qt-bg-contain"></div>
+            </div>
+            <div
+                class="documents-create-panel__text-content"
+                *ngIf="!showPreloader"
+            >
+                <div class="qt-df qt-jc-sb qt-ai-fs">
+                    <div
+                        class="documents-create-panel__title"
+                        [textContent]="document.title"
+                    ></div>
+                    <div class="icon__close qt-sz-32 qt-bg-contain pointer"></div>
+                </div>
+                <div
+                    class="documents-create-panel__desctiption"
+                    [textContent]="document.description"
+                ></div>
+                <button
+                    class="qt-button qt-mt-16"
+                    routerLink="/ng2/documents/add"
+                    [queryParams]="{'clone_document':document.id}"
+                    *ngIf="getPermissions('CREATE_TEMPLATE') || getPermissions('CREATE_DOCUMENT')"
+                >
+                    <span class="ng-star-inserted">Use Template</span>
+                </button>
+            </div>
+        </div>
+        <div class="documents-create-panel__body qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24"></div>
+    </div>
+    <div
+        class="loading"
+        *ngIf="showPreloader"
+    ></div>
+</div>

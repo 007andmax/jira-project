@@ -52,6 +52,13 @@ import { TicketsDashboardComponent } from './components/tickets/tickets-dashboar
 import { CompanyNetworkScanComponent } from './components/company-network-scan/company-network-scan.component';
 import { CompanyDevicesComponent } from './components/company-devices/company-devices.component';
 import { SupportComponent } from './components/support/support.component';
+import { DocumentsComponent } from './components/documents/documents.component';
+import { DocumentsAddComponent } from './components/documents/documents-add/documents-add.component';
+import { DocumentsCategoryComponent } from './components/documents/documents-category/documents-category.component';
+import { DocumentsTemplatesComponent } from './components/documents/documents-templates/documents-templates.component';
+import { DocumentsEditComponent } from './components/documents/documents-edit/documents-edit.component';
+import { DocumentPreviewComponent } from './components/documents/document-preview/document-preview.component';
+import { CompanyDocumentsComponent } from './components/companies/company-documents/company-documents.component';
 
 const routes: Routes = [
   {
@@ -66,22 +73,22 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'ng2/company/password-manager',
+    path: 'ng2/company/:id/password-manager',
     component: CompanyPasswordManagerComponent,
     pathMatch: 'full'
   },
   {
-    path: 'ng2/company/user',
+    path: 'ng2/company/:id/user',
     component: CompanyUserComponent,
     pathMatch: 'full'
   },
   {
-    path: 'ng2/company/tickets',
+    path: 'ng2/company/:id/tickets',
     component: CompanyTicketsComponent,
     pathMatch: 'full'
   },
   {
-    path: 'ng2/company/dashboard/:companyId',
+    path: 'ng2/company/:id/dashboard',
     component: CompanyDashboardComponent,
     pathMatch: 'full'
   },
@@ -184,7 +191,32 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'ng2/company/products',
+    path: 'ng2/documents/add',
+    component: DocumentsAddComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'ng2/documents/edit/:id',
+    component: DocumentsEditComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'ng2/documents/category/:id',
+    component: DocumentsCategoryComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'ng2/company/:id/documents',
+    component: CompanyDocumentsComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'ng2/documents/preview/:id',
+    component: DocumentPreviewComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'ng2/company/:id/products',
     component: CompanyProductsComponent,
     pathMatch: 'full'
   },
@@ -263,7 +295,7 @@ const routes: Routes = [
 
   },
   {
-    path: 'ng2/company/contracts',
+    path: 'ng2/company/:id/contracts',
     component: CompanyContractsComponent
   },
   {
@@ -271,11 +303,11 @@ const routes: Routes = [
     component: TicketsDashboardComponent
   },
   {
-    path: 'ng2/company/network-scan',
+    path: 'ng2/company/:id/network-scan',
     component: CompanyNetworkScanComponent
   },
   {
-    path: 'ng2/company/devices',
+    path: 'ng2/company/:id/devices',
     component: CompanyDevicesComponent,
 
   },
@@ -284,6 +316,17 @@ const routes: Routes = [
     component: SupportComponent,
 
   },
+  {
+    path: 'ng2/documents',
+    component: DocumentsComponent,
+
+  },
+  {
+    path: 'ng2/documents/templates',
+    component: DocumentsTemplatesComponent,
+
+  },
+
 ];
 
 /**

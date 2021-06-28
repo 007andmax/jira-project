@@ -20,6 +20,8 @@ import { ModalSessionScreenComponent } from './services/modal/modal-session-scre
 import { PasswordManagerStateService } from './states/password-manager/password-manager-state.service';
 import { Router } from '@angular/router';
 import { PAGE_DEVICE, PAGE_MAIN } from './const/app';
+import { TagsStateService } from './states/tags/tags-state.service';
+import { DocumentsStateService } from './states/documents/documents-state.service';
 
 
 /**
@@ -38,6 +40,7 @@ export class AppComponent implements OnInit {
   qtListHeaaderScroller;
   qtListBodyScroller;
   toggleLeftPanel: boolean = false;
+  hideleLeftPanel: boolean = false;
   showSessionScreen: boolean = false;
   showLockScreen: boolean = false;
   main_page: string = PAGE_MAIN;
@@ -65,6 +68,8 @@ export class AppComponent implements OnInit {
     private ticketsStateService: TicketsStateService,
     private constantsStateService: ConstantsStateService,
     private leftPanelStateService: LeftPanelStateService,
+    private tagsStateService: TagsStateService,
+    private documentsStateService: DocumentsStateService,
     private modalService: NgbModal,
     private router: Router,
     public cd: ChangeDetectorRef,
@@ -91,6 +96,8 @@ export class AppComponent implements OnInit {
     this.inventoryStateService.onInit();
     this.ticketsStateService.onInit();
     this.constantsStateService.onInit();
+    this.tagsStateService.onInit();
+    this.documentsStateService.onInit();
     //  this.userService.getCurrentUser();
 
     this.websocketService.initializeWebSocketConnection();
@@ -114,6 +121,10 @@ export class AppComponent implements OnInit {
       this.toggleLeftPanel = data;
       this.cd.detectChanges();
     })
+    this.leftPanelStateService.onHideLeftPanel.subscribe(data => {
+      this.hideleLeftPanel = data;
+      this.cd.detectChanges();
+    })
     this.appService.onLockScreen.subscribe(data => {
       if (!this.showLockScreen) {
         this.contentLockScreenModal.reload = data;
@@ -129,6 +140,10 @@ export class AppComponent implements OnInit {
         this.showSessionScreen = true;
         this.cd.detectChanges();
       }
+    })
+    this.usersStateService.onChangeUserPermissions.subscribe(data => {
+      this.usersStateService.changeUserPermissions(data);
+      this.cd.detectChanges();
     })
   }
   ngDoCheck() {

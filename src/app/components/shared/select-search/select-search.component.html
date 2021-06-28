@@ -7,7 +7,7 @@
         type="text"
         [(ngModel)]="selectedItem"
         class="pointer typeahead-focus1"
-        [ngClass]="(!valid) ? 'no-valid' : 'AAAAAAAAAAAAAAAAA'"
+        [ngClass]="{'no-valid':!valid}"
         [inputFormatter]="formatter"
         [resultFormatter]="formatter"
         [ngbTypeahead]="search"

@@ -1,0 +1,35 @@
+<div class="qt-page-list documents-page ">
+    <documents-header (onChangeFilterField)="onFilter($event)"></documents-header>
+    <div class="qt-page-list__body">
+        <div class="qt-page-list__body-table-container">
+            <table class="qt-page-list__body-tbody qt-table-modern documents-table">
+                <tbody>
+                    <ng-template
+                        ngFor
+                        let-item
+                        [ngForOf]="list"
+                        [ngForTrackBy]="trackById"
+                    >
+                        <documents-table
+                            [item]="item"
+                            (onRemoveCategory)="onRemoveCategory($event)"
+                            (onRemoveDocument)="onRemoveDocument($event)"
+                        >
+                        </documents-table>
+                    </ng-template>
+                </tbody>
+            </table>
+            <div
+                class="loading"
+                *ngIf="showPreloader"
+            ></div>
+            <div
+                class="no-exist-documents"
+                *ngIf="!showPreloader && list.length === 0"
+            >
+                No documents
+            </div>
+        </div>
+    </div>
+</div>
+<documents-templates-info></documents-templates-info>

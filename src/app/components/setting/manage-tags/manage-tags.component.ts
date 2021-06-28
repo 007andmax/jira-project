@@ -6,7 +6,7 @@ import {
   OnDestroy,
   ViewContainerRef
 } from "@angular/core";
-import { TagsService } from "src/app/services/setting/tags.service";
+
 import { forkJoin, Observable, Subject } from "rxjs";
 import { map } from "rxjs/operators";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -14,6 +14,8 @@ import { ToastrService } from "ngx-toastr";
 import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { SettingStateService } from "src/app/states/setting/setting-state.service";
 import { CompaniesStateService } from "src/app/states/company/companies-state.service";
+import { TagsService } from "src/app/services/tags/tags.service";
+import { DataTableDirective } from "angular-datatables";
 declare var $: any;
 @Component({
   selector: "app-manage-tags",
@@ -42,6 +44,8 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     paging: false,
     info: false
   };
+  @ViewChild("dataTable")
+  dtElement: DataTableDirective;
   @ViewChild("tickets") tickets: ElementRef;
   private tabSet: ViewContainerRef;
 
@@ -74,10 +78,14 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       this.getCurrentCompany(res);
     })
     this.serviceAllTickets = this.tagsService.getAllTickets();
-    this.serviceAllCompany = this.tagsService.getAllCompany();
+    this.serviceAllCompany = this.tagsService.geCompanyTags();
 
     this.getAllTags();
     this.settingStateService.setComponentName('ManageTagsComponent');
+  }
+
+  ngAfterViewInit(): void {
+    this.dtTrigger.next();
   }
 
   /**
@@ -168,6 +176,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     } else if (this.tabSet['activeId'] === 'tab3') {
       this.setActiveTab = "device";
     }
+
     // if (this.tickets.nativeElement.className.indexOf("active") > -1) {
     //   this.setActiveTab = "ticket";
     // } else {

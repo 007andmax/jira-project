@@ -13,6 +13,7 @@ import { TicketsHeaderComponent } from '../tickets/tickets/tickets-header/ticket
 import { LeftPanelService } from '../../services/left-panel/left-panel.service';
 import { TicketStateService } from '../tickets/tickets/ticket-edit-aside/services/ticket-state.service';
 import { UsersStateService } from '../../states/users/users-state.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'company-tickets',
@@ -41,22 +42,22 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     private ticketStateService: TicketStateService,
     private leftPanelService: LeftPanelService,
     private usersStateService: UsersStateService,
+    public activateRoute: ActivatedRoute,
     private companiesStateService: CompaniesStateService,
     private leftPanelStateService: LeftPanelStateService,
     private ticketsStateService: TicketsStateService) { }
 
   ngOnInit() {
-    this.leftPanelStateService.setCompanyPage("company-tickets");
+
+    this.leftPanelStateService.changeStateWithoutNavigate('company-tickets');
     this.ticketStateService.getOnTicketClosed().subscribe(data => {
       this.idEditTicket = '';
     })
     this.leftPanelService.getColors().subscribe((data: any) => {
-
       let listColors = data.map(item => {
         return new StatusColor(item.backgroundColor, item.borderColor);
       })
       this.ticketsStateService.onColorStatus(listColors);
-
     })
     this.leftPanelService.getTicketsStatus().subscribe((data: any) => {
 
@@ -101,8 +102,12 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
       this.statusColor = data;
     })
     this.header.setTitle("All Tickets");
-    if (localStorage.getItem('company_id')) {
-      let ticket_id = localStorage.getItem('company_id');
+    let id = this.activateRoute.snapshot.params['id'];
+    let subscription = this.activateRoute.params.subscribe(params => {
+      this.showPreloader = true;
+      id = params['id'];
+      this.companiesStateService.setSelectedCompanyId(id);
+      let ticket_id = id;
       let company = this.companiesStateService.getCompanies().find(item => item.id === ticket_id);
       this.header.filter.setTypeFilterWithoutChange("ALL");
       this.header.filter.companyDp.isDisabled = true;
@@ -112,10 +117,10 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
       this.ticketsFilter.setListType("ALL");
       this.ticketsFilter.setCompany(company);
       this.header.filter.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.company.id === company.id));
-
       this.getCount();
       this.onScroll();
-    }
+    });
+    this.sub.add(subscription);
   }
   private getCount() {
     this.ticketsService.getCount(this.ticketsFilter.getDataForRequest()).subscribe(data => {

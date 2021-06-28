@@ -13,6 +13,8 @@ import { GlobalSearchResultItem } from './class/global-search-result-item';
 import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.service';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { Router } from '@angular/router';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
   selector: 'app-global-search',
@@ -34,6 +36,8 @@ export class GlobalSearchComponent implements OnInit {
     private defaultServicesService: DefaultServicesService,
     private usersStateService: UsersStateService,
     private productService: ProductService,
+    private router: Router,
+    public companiesStateService: CompaniesStateService,
     public leftPanelStateService: LeftPanelStateService,
     private inventoryStateService: InventoryStateService,
     public ticketsListService: TicketsListService,
@@ -63,9 +67,11 @@ export class GlobalSearchComponent implements OnInit {
   }
   showInfo(item: GlobalSearchResultItem) {
     if (item.type === 'COMPANIES') {
-      localStorage.setItem("company_id", item.id);
 
-      this.leftPanelStateService.goToState('company-dashboard');
+      this.companiesStateService.setSelectedCompanyId(item.id);
+      // this.leftPanelStateService.goToState('company-dashboard');
+      this.router.navigate(
+        ['/ng2/company/', item.id, 'dashboard']);
 
       this.leftPanelStateService.openCompanPage();
 

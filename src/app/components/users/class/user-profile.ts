@@ -5,6 +5,7 @@ import { ImageCropper } from '../../shared/image-cropper/class/image-cropper';
 import { User } from './user';
 import { UserUpdate } from './user-update';
 import { UserAdd } from './user-add';
+import { Tag } from 'src/app/interfaces/tag/tag';
 
 export class UserProfile {
     role: string = 'USER';
@@ -17,11 +18,14 @@ export class UserProfile {
     primaryEmail: string;
     designation: string;
     companyId: string;
-
+    tags: Array<Tag> = [];
     constructor() {
         this.subscription = {
             invoice: false, ticket: true, ticketManager: false
         }
+    }
+    public setTags(data) {
+        this.tags = data;
     }
     public onEdit(user: User) {
         this.role = user.role;
@@ -44,6 +48,7 @@ export class UserProfile {
         this.primaryEmail = user.primaryEmail;
         this.designation = user.designation;
         this.companyId = user.company.id;
+        this.tags = user.tags;
 
     }
     public editLogo(data) {

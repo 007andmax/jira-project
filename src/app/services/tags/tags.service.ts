@@ -18,14 +18,39 @@ export class TagsService {
   constructor(
     private http: HttpClient
   ) { }
-  public geCompanytTags() {
-    return this.http.get(this.apiUrl + `company/tags/getAll`).pipe(
-      tap((data: any) => data.data));
+  getAllTickets() {
+    return this.http.get(`${this.apiUrl}tags/getAll`);
   }
 
-  public setCompanyTags(word) {
-    return this.http.post(this.apiUrl + `company/tags`, { word: word }).pipe(
-      tap((data: any) => data.data));
+  public geCompanyTags() {
+    return this.http.get(this.apiUrl + `commonTags/getAll`)
+  }
+
+  saveAllowingCreateCustomTags(value) {
+    return this.http.put(`${this.apiUrl}settings/companyProfile/allowUsersCreateTags?allow=${value}`, {});
+  }
+
+  setWordForTag(tagId, word, tag) {
+    if (tag === "ticket") {
+      return this.http.put(
+        `${this.apiUrl}tags/setWordForTag?tagId=${tagId}&word=${word}`,
+        {}
+      );
+    } else {
+      return this.http.put(
+        `${this.apiUrl}commonTags/setWordForTag?tagId=${tagId}&word=${word}`,
+        {}
+      );
+    }
+  }
+
+  removeCompanyTag(tagId: string, tag: string) {
+    if (tag === "ticket") {
+      return this.http.delete(`${this.apiUrl}tags/removeTag?tagId=${tagId}`);
+    }
+    return this.http.delete(
+      `${this.apiUrl}commonTags/removeTag?tagId=${tagId}`
+    );
   }
 
   public getTags() {
@@ -33,8 +58,19 @@ export class TagsService {
       tap((data: any) => data.data));
   }
 
-  public setTags(tag: Tag) {
+  tags(tags, tag) {
+    if (tag === "ticket") {
+      return this.http.post(`${this.apiUrl}tags`, tags);
+    } else {
+      return this.http.post(`${this.apiUrl}commonTags`, tags);
+    }
+  }
+  public addTicketsTags(tag: Tag) {
     return this.http.post(this.apiUrl + `tags`, tag).pipe(
+      tap((data: any) => data.data));
+  }
+  public addCompanyTags(tag: Tag) {
+    return this.http.post(this.apiUrl + `commonTags`, tag).pipe(
       tap((data: any) => data.data));
   }
 }

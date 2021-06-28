@@ -23,4 +23,9 @@
   }
 }
 
-
+documents-header {
+  .qt-page-list__header-filters .dropdown-menu {
+    right: 0;
+    left: unset;
+  }
+}

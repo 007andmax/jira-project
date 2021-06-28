@@ -1,0 +1,19 @@
+.--sticky {
+    margin-top: 0px !important;
+    padding: 24px 24px 0px 24px !important;
+}
+.search-clear {
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    right: 12px;
+    top: calc(50% - 6px);
+    cursor: pointer;
+}
+.search-container {
+    position: relative;
+}
+.documents-templates-page {
+  width: 100%;
+  max-width: unset;
+}

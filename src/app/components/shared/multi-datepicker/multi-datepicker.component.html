@@ -10,7 +10,7 @@
     </mat-error>
     <input
         type="text"
-        placeholder="Filter by date"
+        [attr.placeholder]="placeholder"
         (click)="toggleDatePicker()"
         [(ngModel)]="selectedDateModel"
         [ngClass]="{'disabled': isDisabled,'--input-error' : !validate}"

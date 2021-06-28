@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import * as moment from "moment";
 import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-company-dash-revenue',
@@ -22,11 +23,18 @@ export class CompanyDashRevenueComponent implements OnInit {
   chartColors: string[] = ["#0747a6", "#00ccff", '#cdecff'];
 
   public constructor(private companiesService: CompaniesService,
+    public activateRoute: ActivatedRoute,
     public cd: ChangeDetectorRef) { }
 
   public ngOnInit() {
-    this._id = /[^/]*$/.exec(window.location.href)[0];
-    this.getInvoiceRevenue('12');
+    this._id = this.activateRoute.snapshot.params['id'];
+    let subscription = this.activateRoute.params.subscribe(params => {
+      this._id = params['id'];
+      this.getInvoiceRevenue('12');
+    });
+    this.sub.add(subscription);
+
+
     this.chartOptions = {
       chart: {
         type: 'pieChart',

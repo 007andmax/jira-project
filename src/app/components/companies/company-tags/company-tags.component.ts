@@ -5,6 +5,8 @@ import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Tag } from 'src/app/interfaces/tag/tag';
 import { TagsService } from 'src/app/services/tags/tags.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { TagsStateService } from 'src/app/states/tags/tags-state.service';
 
 @Component({
   selector: 'app-company-tags',
@@ -12,19 +14,18 @@ import { TagsService } from 'src/app/services/tags/tags.service';
   styleUrls: ['./company-tags.component.scss']
 })
 export class CompanyTagsComponent implements OnInit, OnDestroy {
-  visible = true;
+
   selectable = true;
   removable = true;
   addOnBlur = true;
-  focus = false;
-  isResend = false;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   tagCtrl = new FormControl();
   selectedTag = [];
   tags: Array<Tag> = [];
   reqTags: Array<Tag> = [];
   sub = new Subscription();
-  editItem: any;
+  @Input() editItems: Array<string>;
+  @Input() placement: string;
   @Input() blockCreateTag: boolean = false;
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @Output() tagsChange = new EventEmitter();
@@ -36,6 +37,8 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
   public constructor(
     public tagsService: TagsService,
     private tagsState: CompanyTagsStateService,
+    private tagsStateService: TagsStateService,
+    private companiesStateService: CompaniesStateService,
     public cd: ChangeDetectorRef
   ) { }
 
@@ -43,17 +46,22 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-    let getTags = this.tagsService.geCompanytTags().subscribe((data) => {
-      this.tags = data.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
-        1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
-      this.reqTags = data.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
-        1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
+    this.tags = this.tagsStateService.getTags();
+    this.reqTags = JSON.parse(JSON.stringify(this.tagsStateService.getTags()));
+    let getTags = this.tagsStateService.onGetTags.subscribe((data: Array<Tag>) => {
+
+      this.tags = data;
+      this.reqTags = JSON.parse(JSON.stringify(data));
+      this.onCheckEditItem();
     })
     this.sub.add(getTags);
     this.onInitClearState();
     this.onCheckEditItem();
   }
-
+  getCompanyName(tag) {
+    let company = this.companiesStateService.getCompanies().find(item => item.id === tag.companyId);
+    return (company) ? company.name : '';
+  }
   onSearch(event) {
     this.tags = this.reqTags.filter(item => item.word.includes(event.target.value));
   }
@@ -62,12 +70,18 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
   * Subscribe for edit mode
   */
   onCheckEditItem() {
+    if (this.editItems) this.editItems.forEach(item => {
+      this.selectedTag.push(this.tags.find(tag => tag.id === item));
+    })
     let getTagsFromEdit = this.tagsState.getTagsFromEdit().subscribe((data) => {
       this.selectedTag = data;
     });
     this.sub.add(getTagsFromEdit);
   }
+  public clearWithOutChanges() {
 
+    this.selectedTag = [];
+  }
   /**
   * Subscribe for clear data
   */
@@ -81,10 +95,10 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
       const input = event.target.input;
       const value = event.target.value;
       if ((value || '').trim()) {
-        let tag: Tag = {
+        let tag: any = {
           colorCode: 0, usedCounter: 0, word: value.trim(), id: ''
         }
-        let setTags = this.tagsService.setCompanyTags(tag.word).subscribe((res) => {
+        let setTags = this.tagsService.addCompanyTags(tag).subscribe((res) => {
           tag.id = res.id;
           this.reqTags.push(tag);
           this.tags = this.reqTags;
@@ -111,17 +125,19 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     }
   }
-
-  /**
-   * Add tag to selected
-   * @param tag - selected tag
-   */
-  public selected(tag): void {
-    this.selectedTag.push(tag);
+  isSeleted(item) {
+    return this.selectedTag.find(element => element.id === item.id);
+  }
+  public toggleItem(newItem) {
+    let findIndex = this.selectedTag.findIndex(item => item.id === newItem.id);
+    if (findIndex > -1) {
+      this.selectedTag.splice(findIndex, 1);
+    } else {
+      this.selectedTag.push(newItem);
+      this.tags = this.reqTags;
+    }
     this.tagsChange.emit(this.selectedTag);
-    this.userInput.nativeElement.value = '';
     this.tagCtrl.setValue(null);
-    this.tags = this.reqTags;
   }
 
   /**
