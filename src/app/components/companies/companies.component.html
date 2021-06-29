@@ -1,140 +1,142 @@
-<!--<div class="new-companies-content">-->
-<!--    <app-companies-header></app-companies-header>-->
-<!--    <div class="new-companies__list">-->
-<!--&lt;!&ndash;        <div class="new-companies__list&#45;&#45;header clearfix mob-hidden">&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="col-md-3 with-checkbox">&ndash;&gt;-->
-<!--&lt;!&ndash;                <label class="checkbox-container">&ndash;&gt;-->
-<!--&lt;!&ndash;                    <input&ndash;&gt;-->
-<!--&lt;!&ndash;                        type="checkbox"&ndash;&gt;-->
-<!--&lt;!&ndash;                        (change)="onSelectAllCompanies($event)"&ndash;&gt;-->
-<!--&lt;!&ndash;                    >&ndash;&gt;-->
-<!--&lt;!&ndash;                    <span class="checkbox-mark"></span>&ndash;&gt;-->
-<!--&lt;!&ndash;                </label>&ndash;&gt;-->
-<!--&lt;!&ndash;                <p&ndash;&gt;-->
-<!--&lt;!&ndash;                    class="pointer"&ndash;&gt;-->
-<!--&lt;!&ndash;                    (click)="onFilter('name')"&ndash;&gt;-->
-<!--&lt;!&ndash;                >&ndash;&gt;-->
-<!--&lt;!&ndash;                    Name&ndash;&gt;-->
-<!--&lt;!&ndash;                </p>&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            <div&ndash;&gt;-->
-<!--&lt;!&ndash;                class="col-md-3 pointer"&ndash;&gt;-->
-<!--&lt;!&ndash;                (click)="onFilter('address')"&ndash;&gt;-->
-<!--&lt;!&ndash;            >&ndash;&gt;-->
-<!--&lt;!&ndash;                Address&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            <div&ndash;&gt;-->
-<!--&lt;!&ndash;                class="col-md-4 pointer"&ndash;&gt;-->
-<!--&lt;!&ndash;                (click)="onFilter('primary_contact')"&ndash;&gt;-->
-<!--&lt;!&ndash;            >&ndash;&gt;-->
-<!--&lt;!&ndash;                Primary Contact&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            <div&ndash;&gt;-->
-<!--&lt;!&ndash;                class="col-md-4 pointer"&ndash;&gt;-->
-<!--&lt;!&ndash;                (click)="onFilter('email')"&ndash;&gt;-->
-<!--&lt;!&ndash;            >&ndash;&gt;-->
-<!--&lt;!&ndash;                Email Address&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            <div&ndash;&gt;-->
-<!--&lt;!&ndash;                class="col-md-1 pointer"&ndash;&gt;-->
-<!--&lt;!&ndash;                (click)="onFilter('tickets')"&ndash;&gt;-->
-<!--&lt;!&ndash;            >&ndash;&gt;-->
-<!--&lt;!&ndash;                Tickets&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            <div&ndash;&gt;-->
-<!--&lt;!&ndash;                class="col-md-1 pointer"&ndash;&gt;-->
-<!--&lt;!&ndash;                (click)="onFilter('devices')"&ndash;&gt;-->
-<!--&lt;!&ndash;            >&ndash;&gt;-->
-<!--&lt;!&ndash;                Devices&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            <div&ndash;&gt;-->
-<!--&lt;!&ndash;                class="col-md-1 pointer"&ndash;&gt;-->
-<!--&lt;!&ndash;                (click)="onFilter('users')"&ndash;&gt;-->
-<!--&lt;!&ndash;            >&ndash;&gt;-->
-<!--&lt;!&ndash;                Users&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="col-md-2"></div>&ndash;&gt;-->
-<!--&lt;!&ndash;        </div>&ndash;&gt;-->
-<!--        <div-->
-<!--            class="company-content"-->
-<!--            infiniteScroll-->
-<!--            [infiniteScrollDistance]="2"-->
-<!--            [infiniteScrollThrottle]="50"-->
-<!--            [infiniteScrollDisabled]="infiniteScrollDisabled"-->
-<!--            (scrolled)="onScroll()"-->
-<!--        >-->
-<!--            <ng-template-->
-<!--                ngFor-->
-<!--                let-company-->
-<!--                [ngForOf]="CompaniesList"-->
-<!--                [ngForTrackBy]="trackById"-->
-<!--            >-->
-<!--              <div class="qt-page-list__body">-->
-<!--                <div class="qt-page-list__body-table-container">-->
-<!--                  <table class="qt-page-list__body-tbody qt-table-modern compnay-table">-->
-<!--                    <tbody>-->
-<!--                      <app-companies-table-->
-<!--                        [showArchivedCompanies]="showArchivedCompanies"-->
-<!--                        [company]="company"-->
-<!--                      ></app-companies-table>-->
-<!--                    </tbody>-->
-<!--                  </table>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </ng-template>-->
-<!--            <div-->
-<!--                class="loading"-->
-<!--                *ngIf="showPreloader"-->
-<!--            ></div>-->
-<!--        </div>-->
-<!--        <button-->
-<!--            class="mob-filters-btn mobile-btn primary"-->
-<!--            (click)="showMobileFilter()"-->
-<!--        >-->
-<!--            Filters-->
-<!--        </button>-->
-<!--        <div-->
-<!--            class="loading"-->
-<!--            style="display: none;"-->
-<!--        ></div>-->
-<!--    </div>-->
-<!--</div>-->
-<!--&lt;!&ndash; <app-company-add-aside></app-company-add-aside> &ndash;&gt;-->
-<!--<app-company-edit-aside></app-company-edit-aside>-->
+<!-- <div class="new-companies-content"> -->
+<!-- <app-companies-header></app-companies-header> -->
+<!-- <div class="new-companies__list"> -->
+<!-- &lt;!&ndash;        <div class="new-companies__list&#45;&#45;header clearfix mob-hidden">&ndash;&gt; -->
+<!-- &lt;!&ndash;            <div class="col-md-3 with-checkbox">&ndash;&gt; -->
+<!-- &lt;!&ndash;                <label class="checkbox-container">&ndash;&gt; -->
+<!-- &lt;!&ndash;                    <input&ndash;&gt; -->
+<!-- &lt;!&ndash;                        type="checkbox"&ndash;&gt; -->
+<!-- &lt;!&ndash;                        (change)="onSelectAllCompanies($event)"&ndash;&gt; -->
+<!-- &lt;!&ndash;                    >&ndash;&gt; -->
+<!-- &lt;!&ndash;                    <span class="checkbox-mark"></span>&ndash;&gt; -->
+<!-- &lt;!&ndash;                </label>&ndash;&gt; -->
+<!-- &lt;!&ndash;                <p&ndash;&gt; -->
+<!-- &lt;!&ndash;                    class="pointer"&ndash;&gt; -->
+<!-- &lt;!&ndash;                    (click)="onFilter('name')"&ndash;&gt; -->
+<!-- &lt;!&ndash;                >&ndash;&gt; -->
+<!-- &lt;!&ndash;                    Name&ndash;&gt; -->
+<!-- &lt;!&ndash;                </p>&ndash;&gt; -->
+<!-- &lt;!&ndash;            </div>&ndash;&gt; -->
+<!-- &lt;!&ndash;            <div&ndash;&gt; -->
+<!-- &lt;!&ndash;                class="col-md-3 pointer"&ndash;&gt; -->
+<!-- &lt;!&ndash;                (click)="onFilter('address')"&ndash;&gt; -->
+<!-- &lt;!&ndash;            >&ndash;&gt; -->
+<!-- &lt;!&ndash;                Address&ndash;&gt; -->
+<!-- &lt;!&ndash;            </div>&ndash;&gt; -->
+<!-- &lt;!&ndash;            <div&ndash;&gt; -->
+<!-- &lt;!&ndash;                class="col-md-4 pointer"&ndash;&gt; -->
+<!-- &lt;!&ndash;                (click)="onFilter('primary_contact')"&ndash;&gt; -->
+<!-- &lt;!&ndash;            >&ndash;&gt; -->
+<!-- &lt;!&ndash;                Primary Contact&ndash;&gt; -->
+<!-- &lt;!&ndash;            </div>&ndash;&gt; -->
+<!-- &lt;!&ndash;            <div&ndash;&gt; -->
+<!-- &lt;!&ndash;                class="col-md-4 pointer"&ndash;&gt; -->
+<!-- &lt;!&ndash;                (click)="onFilter('email')"&ndash;&gt; -->
+<!-- &lt;!&ndash;            >&ndash;&gt; -->
+<!-- &lt;!&ndash;                Email Address&ndash;&gt; -->
+<!-- &lt;!&ndash;            </div>&ndash;&gt; -->
+<!-- &lt;!&ndash;            <div&ndash;&gt; -->
+<!-- &lt;!&ndash;                class="col-md-1 pointer"&ndash;&gt; -->
+<!-- &lt;!&ndash;                (click)="onFilter('tickets')"&ndash;&gt; -->
+<!-- &lt;!&ndash;            >&ndash;&gt; -->
+<!-- &lt;!&ndash;                Tickets&ndash;&gt; -->
+<!-- &lt;!&ndash;            </div>&ndash;&gt; -->
+<!-- &lt;!&ndash;            <div&ndash;&gt; -->
+<!-- &lt;!&ndash;                class="col-md-1 pointer"&ndash;&gt; -->
+<!-- &lt;!&ndash;                (click)="onFilter('devices')"&ndash;&gt; -->
+<!-- &lt;!&ndash;            >&ndash;&gt; -->
+<!-- &lt;!&ndash;                Devices&ndash;&gt; -->
+<!-- &lt;!&ndash;            </div>&ndash;&gt; -->
+<!-- &lt;!&ndash;            <div&ndash;&gt; -->
+<!-- &lt;!&ndash;                class="col-md-1 pointer"&ndash;&gt; -->
+<!-- &lt;!&ndash;                (click)="onFilter('users')"&ndash;&gt; -->
+<!-- &lt;!&ndash;            >&ndash;&gt; -->
+<!-- &lt;!&ndash;                Users&ndash;&gt; -->
+<!-- &lt;!&ndash;            </div>&ndash;&gt; -->
+<!-- &lt;!&ndash;            <div class="col-md-2"></div>&ndash;&gt; -->
+<!-- &lt;!&ndash;        </div>&ndash;&gt; -->
+<!-- <div -->
+<!-- class="company-content" -->
+<!-- infiniteScroll -->
+<!-- [infiniteScrollDistance]="2" -->
+<!-- [infiniteScrollThrottle]="50" -->
+<!-- [infiniteScrollDisabled]="infiniteScrollDisabled" -->
+<!-- (scrolled)="onScroll()" -->
+<!-- > -->
+<!-- <ng-template -->
+<!-- ngFor -->
+<!-- let-company -->
+<!-- [ngForOf]="CompaniesList" -->
+<!-- [ngForTrackBy]="trackById" -->
+<!-- > -->
+<!-- <div class="qt-page-list__body"> -->
+<!-- <div class="qt-page-list__body-table-container"> -->
+<!-- <table class="qt-page-list__body-tbody qt-table-modern compnay-table"> -->
+<!-- <tbody> -->
+<!-- <app-companies-table -->
+<!-- [showArchivedCompanies]="showArchivedCompanies" -->
+<!-- [company]="company" -->
+<!-- ></app-companies-table> -->
+<!-- </tbody> -->
+<!-- </table> -->
+<!-- </div> -->
+<!-- </div> -->
+<!-- </ng-template> -->
+<!-- <div -->
+<!-- class="loading" -->
+<!-- *ngIf="showPreloader" -->
+<!-- ></div> -->
+<!-- </div> -->
+<!-- <button -->
+<!-- class="mob-filters-btn mobile-btn primary" -->
+<!-- (click)="showMobileFilter()" -->
+<!-- > -->
+<!-- Filters -->
+<!-- </button> -->
+<!-- <div -->
+<!-- class="loading" -->
+<!-- style="display: none;" -->
+<!-- ></div> -->
+<!-- </div> -->
+<!-- </div> -->
+<!-- &lt;!&ndash; <app-company-add-aside></app-company-add-aside> &ndash;&gt; -->
+<!-- <app-company-edit-aside></app-company-edit-aside> -->
+
 
 <div class="qt-page-list companies-page">
-  <app-companies-header></app-companies-header>
-  <div class="qt-page-list__body">
-    <div class="qt-page-list__body-table-container">
-      <table class="qt-page-list__body-tbody qt-table-modern companies-table">
-        <tbody
-          class=""
-          infiniteScroll
-          [infiniteScrollDistance]="2"
-          [infiniteScrollThrottle]="50"
-          [infiniteScrollDisabled]="infiniteScrollDisabled"
-          (scrolled)="onScroll()"
-        >
-          <ng-template
-            ngFor
-            let-company
-            [ngForOf]="CompaniesList"
-            [ngForTrackBy]="trackById"
-          >
+    <app-companies-header (onChangeFilterField)="onFilter($event)"></app-companies-header>
+    <div class="qt-page-list__body">
+        <div class="qt-page-list__body-table-container">
+            <table class="qt-page-list__body-tbody qt-table-modern companies-table">
+                <tbody
+                    class
+                    infiniteScroll
+                    [infiniteScrollDistance]="2"
+                    [infiniteScrollThrottle]="50"
+                    [infiniteScrollDisabled]="infiniteScrollDisabled"
+                    (scrolled)="onScroll()"
+                >
+                    <ng-template
+                        ngFor
+                        let-company
+                        [ngForOf]="CompaniesList"
+                        [ngForTrackBy]="trackById"
+                    >
 
-            <app-companies-table
-              [showArchivedCompanies]="showArchivedCompanies"
-              [company]="company"
-            ></app-companies-table>
-          </ng-template>
-          <div
-            class="loading"
-            *ngIf="showPreloader"
-          ></div>
-        </tbody>
-      </table>
+
+                        <app-companies-table
+                            [showArchivedCompanies]="showArchivedCompanies"
+                            [company]="company"
+                        ></app-companies-table>
+                    </ng-template>
+                    <div
+                        class="loading"
+                        *ngIf="showPreloader"
+                    ></div>
+                </tbody>
+            </table>
+        </div>
     </div>
-  </div>
 </div>
 <!-- <app-company-add-aside></app-company-add-aside> -->
 <app-company-edit-aside></app-company-edit-aside>

@@ -75,11 +75,6 @@
             [hidden]="toggleFilter"
         ></companies-filter>
     </div>
-
-
-
-
-
     <div class="qt-page-list__header-thead-container">
         <div class="qt-table-modern qt-page-list__header-thead">
             <thead>
@@ -90,33 +85,57 @@
                                 <input
                                     type="checkbox"
                                     class="ng-untouched ng-pristine ng-valid"
+                                    (change)="onSelectAllCompanies($event)"
                                 >
                                 <span></span>
                             </label>
                         </div>
                     </th>
-                    <th class="companies-table__name pointer">Name</th>
-                    <th class="companies-table__address pointer">
+                    <th
+                        class="companies-table__name pointer"
+                        (click)="onFilter('name')"
+                    >
+                        Name
+                    </th>
+                    <th
+                        class="companies-table__address pointer"
+                        (click)="onFilter('address')"
+                    >
                         Address
                         <div class="qt-table-modern__sorting"></div>
                     </th>
-                    <th class="companies-table__primary-contact pointer">
+                    <th
+                        class="companies-table__primary-contact pointer"
+                        (click)="onFilter('primary_contact')"
+                    >
                         Primary Contact
                         <div class="qt-table-modern__sorting"></div>
                     </th>
-                    <th class="companies-table__email-address pointer">
+                    <th
+                        class="companies-table__email-address pointer"
+                        (click)="onFilter('email')"
+                    >
                         Email Address
                         <div class="qt-table-modern__sorting"></div>
                     </th>
-                    <th class="companies-table__tickets pointer">
+                    <th
+                        class="companies-table__tickets pointer"
+                        (click)="onFilter('tickets')"
+                    >
                         Tickets
                         <div class="qt-table-modern__sorting"></div>
                     </th>
-                    <th class="companies-table__devices pointer">
+                    <th
+                        class="companies-table__devices pointer"
+                        (click)="onFilter('devices')"
+                    >
                         Devices
                         <div class="qt-table-modern__sorting"></div>
                     </th>
-                    <th class="companies-table__users pointer">
+                    <th
+                        class="companies-table__users pointer"
+                        (click)="onFilter('users')"
+                    >
                         Users
                         <div class="qt-table-modern__sorting"></div>
                     </th>
@@ -125,76 +144,5 @@
                 </tr>
             </thead>
         </div>
-
-
-
-
-
     </div>
-
-
-
-
-
 </div>
-
-
-
-
-
-<!-- <div class="qt-page-list__header-thead-container"> -->
-<!-- <div class="new-companies__list&#45;&#45;header clearfix mob-hidden"> -->
-<!-- <div class="col-md-3 with-checkbox"> -->
-<!-- <label class="checkbox-container"> -->
-<!-- <input -->
-<!-- type="checkbox" -->
-<!-- (change)="onSelectAllCompanies($event)" -->
-<!-- > -->
-<!-- <span class="checkbox-mark"></span> -->
-<!-- </label> -->
-<!-- <p -->
-<!-- class="pointer" -->
-<!-- (click)="onFilter('name')" -->
-<!-- > -->
-<!-- Name -->
-<!-- </p> -->
-<!-- </div> -->
-<!-- <div -->
-<!-- class="col-md-3 pointer" -->
-<!-- (click)="onFilter('address')" -->
-<!-- > -->
-<!-- Address -->
-<!-- </div> -->
-<!-- <div -->
-<!-- class="col-md-4 pointer" -->
-<!-- (click)="onFilter('primary_contact')" -->
-<!-- > -->
-<!-- Primary Contact -->
-<!-- </div> -->
-<!-- <div -->
-<!-- class="col-md-4 pointer" -->
-<!-- (click)="onFilter('email')" -->
-<!-- > -->
-<!-- Email Address -->
-<!-- </div> -->
-<!-- <div -->
-<!-- class="col-md-1 pointer" -->
-<!-- (click)="onFilter('tickets')" -->
-<!-- > -->
-<!-- Tickets -->
-<!-- </div> -->
-<!-- <div -->
-<!-- class="col-md-1 pointer" -->
-<!-- (click)="onFilter('devices')" -->
-<!-- > -->
-<!-- Devices -->
-<!-- </div> -->
-<!-- <div -->
-<!-- class="col-md-1 pointer" -->
-<!-- (click)="onFilter('users')" -->
-<!-- > -->
-<!-- Users -->
-<!-- </div> -->
-<!-- <div class="col-md-2"></div> -->
-<!-- </div> -->
-<!-- </div> -->

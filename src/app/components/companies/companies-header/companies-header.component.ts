@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
 import { CompanyCalculateCount } from '../class/company-calculate-count';
@@ -14,6 +14,7 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
   toggleFilter: boolean = true;
   countFilter: number = 0;
   calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
+  @Output() onChangeFilterField = new EventEmitter<any>();
   sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
     private draftEmailStateService: DraftEmailStateService,
@@ -35,6 +36,9 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
   }
   public showAsideForAdd() {
     this.companiesStateService.toggleAsideForAdd();
+  }
+  onFilter(data) {
+    this.onChangeFilterField.emit(data);
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

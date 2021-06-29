@@ -207,6 +207,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   }
 
   onFilter(field) {
+    console.log("field", field);
     let index = this.filter.findIndex(item => item.field === field);
     if (index > -1) {
       let sort = this.filter[index].filter;
