@@ -1,4 +1,5 @@
 import { Company } from "src/app/interfaces/company/company";
+import { CompanyItem } from "./company-item";
 
 export class CompanyFilter {
     clientType: string;
@@ -8,7 +9,7 @@ export class CompanyFilter {
     constructor() {
 
     }
-    public getFilterList(reqCompaniesList: Array<Company>) {
+    public getFilterList(reqCompaniesList: Array<CompanyItem>) {
         let list = reqCompaniesList.filter(item => {
             if (item.companyInfo.contacts[0].tags) console.log("item.companyInfo.contacts[0].tags", item.companyInfo.contacts[0].tags);
             let tags = (item.companyInfo.contacts[0].tags) ? item.companyInfo.contacts[0].tags.find(tag => this.tags.find(idTag => idTag === tag.id)) : null;

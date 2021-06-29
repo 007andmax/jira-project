@@ -15,6 +15,8 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
   countFilter: number = 0;
   calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
   @Output() onChangeFilterField = new EventEmitter<any>();
+  @Output() onSelectAllCompanies = new EventEmitter<any>();
+
   sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
     private draftEmailStateService: DraftEmailStateService,
@@ -26,6 +28,12 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
       this.calculateCount = data;
     })
     this.sub.add(getOnCalculateCount);
+  }
+  selectAllCompanies(event) {
+    this.onSelectAllCompanies.emit(event);
+  }
+  public getCountSelected() {
+    return this.draftEmailStateService.getSelectedCompanies().length;
   }
   public showAsideForDraftEmail() {
     this.draftEmailStateService.setAction(COMPANIES);

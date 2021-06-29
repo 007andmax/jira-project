@@ -17,6 +17,7 @@ import { CompanyUpdate } from './class/company-update';
 import { ARCHIVE_COMPANY, DEARCHIVE_COMPANY } from '../../const/confirm';
 import { DraftEmailStateService } from '../../states/draft-email/draft-email-state.service';
 import { CompanyFilter } from './class/company-filter';
+import { CompanyItem } from './class/company-item';
 
 @Component({
   selector: 'app-companies',
@@ -25,8 +26,8 @@ import { CompanyFilter } from './class/company-filter';
   providers: [CompaniesListService]
 })
 export class CompaniesComponent implements OnInit, OnDestroy {
-  CompaniesList: Array<Company> = [];
-  reqCompaniesList: Array<Company> = [];
+  CompaniesList: Array<CompanyItem> = [];
+  reqCompaniesList: Array<CompanyItem> = [];
   showPreloader: boolean = true;
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
@@ -119,17 +120,17 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     let getChangeCompanies = this.companiesStateService.getChangeCompanies().subscribe((data: CompanyUpdate) => {
       if (data.action === 'COMPANY_SAVED' || data.action === 'COMPANY_ARCHIVED') {
         const reqIndex = this.reqCompaniesList.findIndex((item) => item.id === data.data.id);
-        if (reqIndex > -1) this.reqCompaniesList[reqIndex] = data.data;
+        if (reqIndex > -1) this.reqCompaniesList[reqIndex] = new CompanyItem(data.data);
         if (reqIndex === -1) {
-          this.reqCompaniesList.unshift(data.data);
-          this.CompaniesList.unshift(data.data);
+          this.reqCompaniesList.unshift(new CompanyItem(data.data));
+          this.CompaniesList.unshift(new CompanyItem(data.data));
         }
         const companyIndex = this.CompaniesList.findIndex((item) => item.id === data.data.id);
-        if (companyIndex > -1) this.CompaniesList[companyIndex] = data.data;
+        if (companyIndex > -1) this.CompaniesList[companyIndex] = new CompanyItem(data.data);
       }
       if (data.action === 'COMPANY_DEARCHIVED') {
         const reqIndex = this.reqCompaniesList.findIndex((item) => item.id === data.data.id);
-        if (reqIndex > -1) this.reqCompaniesList[reqIndex] = data.data;
+        if (reqIndex > -1) this.reqCompaniesList[reqIndex] = new CompanyItem(data.data);
         if (this.showArchivedCompanies) {
           const companyIndex = this.CompaniesList.findIndex((item) => item.id === data.data.id);
           if (companyIndex > -1) this.CompaniesList.splice(companyIndex, 1);
@@ -156,19 +157,17 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   }
   onSelectAllCompanies(event) {
     if (event.target.checked) {
-      let list_company_table = document.body.querySelectorAll('app-companies-table');
-      list_company_table.forEach(item => {
-        (<any>item.querySelector('input[type="checkbox"]')).checked = true;
-      });
+      let listFilter = this.companyFilter.getFilterList(this.reqCompaniesList);
       this.draftEmailStateService.resetSelectedCompanies();
-      this.CompaniesList.forEach(user => {
-        this.draftEmailStateService.addSelectedCompany(user);
-      })
+      listFilter.forEach(item => {
+        item.selected = true;
+        this.draftEmailStateService.addSelectedCompany(item);
+      });
     } else {
       this.draftEmailStateService.resetSelectedCompanies();
-      let list_company_table = document.body.querySelectorAll('app-companies-table');
-      list_company_table.forEach(item => {
-        (<any>item.querySelector('input[type="checkbox"]')).checked = false;
+
+      this.reqCompaniesList.forEach(item => {
+        item.selected = false;
       });
     }
   }

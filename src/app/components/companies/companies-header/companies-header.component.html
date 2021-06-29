@@ -4,20 +4,23 @@
             All Companies ({{calculateCount.getCurrent()}})
         </h3>
         <div class="qt-page-list__header-title-line--rigth">
-            <div class="new-companies-content__header-buttons">
-                <div>3 Selected</div>
+            <div
+                class="new-companies-content__header-buttons"
+                *ngIf="getCountSelected() > 0"
+            >
+                <div [textContent]="getCountSelected() + ' Selected'"></div>
                 <div class="qt-ml-25 qt-ff-gm qt-df qt-color-info qt-ai-c pointer">
                     <div class="icon__email-blue qt-za-16 qt-sz-16 qt-mr-6 qt-bg-contain"></div>
                     <div>Write Draft</div>
                 </div>
-                <div class="qt-ml-16 qt-ff-gm qt-df qt-color-info qt-ai-c pointer">
+                <!-- <div class="qt-ml-16 qt-ff-gm qt-df qt-color-info qt-ai-c pointer">
                     <div class="icon__print-blue qt-za-16 qt-sz-16 qt-mr-6 qt-bg-contain"></div>
                     <div>Print</div>
                 </div>
                 <div class="qt-ml-16 qt-ff-gm qt-df qt-color-info qt-ai-c qt-pointer ng-star-inserted">
                     <div class="icon__export-blue qt-za-16 qt-sz-16 qt-mr-6 qt-bg-contain"></div>
                     <div>Export</div>
-                </div>
+                </div> -->
             </div>
             <div class="new-companies-content__header--search">
                 <div class="new-companies-selected">
@@ -85,7 +88,7 @@
                                 <input
                                     type="checkbox"
                                     class="ng-untouched ng-pristine ng-valid"
-                                    (change)="onSelectAllCompanies($event)"
+                                    (change)="selectAllCompanies($event)"
                                 >
                                 <span></span>
                             </label>

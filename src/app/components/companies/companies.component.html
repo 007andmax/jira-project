@@ -103,8 +103,12 @@
 <!-- <app-company-edit-aside></app-company-edit-aside> -->
 
 
+
 <div class="qt-page-list companies-page">
-    <app-companies-header (onChangeFilterField)="onFilter($event)"></app-companies-header>
+    <app-companies-header
+        (onChangeFilterField)="onFilter($event)"
+        (onSelectAllCompanies)="onSelectAllCompanies($event)"
+    ></app-companies-header>
     <div class="qt-page-list__body">
         <div class="qt-page-list__body-table-container">
             <table class="qt-page-list__body-tbody qt-table-modern companies-table">
@@ -122,6 +126,7 @@
                         [ngForOf]="CompaniesList"
                         [ngForTrackBy]="trackById"
                     >
+
 
 
                         <app-companies-table
