@@ -990,9 +990,12 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   .image-confirm-modal .close-modal {
     background-image: url('/assets/img/icons/close-16.png');
     position: absolute;
-    right: 45px;
-    top: 28px;
+    //right: 45px;
+    right: 24px;
+    top: 24px;
+    //top: 28px;
     background-size: cover;
+    z-index: 1;
   }
 }
 /* End Btn closed */

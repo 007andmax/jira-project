@@ -619,7 +619,7 @@ documents-edit-info {
 }
 .archive-modal,
 .image-confirm-modal {
-  padding: 40px 70px 40px 40px;
+  padding: 24px;
   position: relative;
   &.confirm-user-modal {
     h3 {
@@ -635,13 +635,14 @@ documents-edit-info {
       }
     }
   }
-  .close-modal {
-    background: transparent;
-    border: none;
+  .modal-content {
+    .close-modal {
+      background: transparent;
+      border: none;
+    }
   }
   &__body {
     margin-bottom: 50px;
-    padding-left: 70px;
     h3 {
       font-family: "Graphik-Semibold", sans-serif;
       font-size: 20px;
@@ -649,44 +650,32 @@ documents-edit-info {
       line-height: 1.4;
       color: #364656;
       position: relative;
-      margin: 0;
-      &:before,
-      &:after {
-        content: "";
-        position: absolute;
-      }
-      &:before {
-        left: -70px;
-        top: 0;
-        width: 48px;
-        height: 48px;
-        background: #ffeceb;
-        border-radius: 50%;
-      }
-      &:after {
-        left: -58px;
-        top: 10px;
-        width: 24px;
-        height: 24px;
-        background: url("assets/img/icons/archive-red-ng2.png") no-repeat;
-      }
+      margin: 0 0 4px;
     }
     p {
       font-family: "Graphik-Regular", sans-serif;
       font-size: 13px;
       line-height: 1.54;
+      max-width: 398px;
     }
   }
   &__footer {
     .btn-new {
-      border: none;
       height: 48px;
       border-radius: 4px;
       font-size: 14px;
       font-family: "Graphik-Medium", sans-serif;
+      background-color: transparent;
+      border: 1px solid #c5cdd5;
     }
     .btn-primary {
+      border: none;
       margin-right: 16px;
+      background-color: #ff5263;
+
+      &:hover {
+        background-color: darken(#ff5263, 10%);
+      }
     }
   }
   &.de-archive {
@@ -1340,6 +1329,81 @@ app-quotes-item {
     line-height: 1.33;
   }
 
+  .qt-page-list__header-filters {
+    .companies-filter-tags {
+      .mat-form-field {
+        max-width: 100%;
+        width: 100%;
+      }
+
+      .filter-tags-body {
+        height: 36px;
+      }
+
+      .mat-chip-list-wrapper input.mat-input-element {
+        margin: 0;
+      }
+
+      .mat-form-field-appearance-legacy.mat-form-field-can-float .mat-input-server:focus+.mat-form-field-label-wrapper .mat-form-field-label,
+      .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+        width: 100%;
+        transform: none;
+        color: #4f5f79;
+      }
+
+      .mat-form-field-appearance-legacy .mat-form-field-underline,
+      .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+        display: none;
+      }
+
+      .mat-form-field-appearance-legacy .mat-form-field-label {
+        padding: 9px 10px 9px 36px;
+        color: #9ea6b7;
+        font-family: Graphik-Regular, sans-serif;
+        top: 12px;
+      }
+      .mat-form-field-infix {
+        min-height: 36px !important;
+        border: none;
+        &::before {
+          left: 12px;
+          top: 9px;
+          position: absolute;
+          content: "";
+          width: 16px;
+          height: 16px;
+          background: url(/assets/img/icons/tag-ng2.png);
+        }
+      }
+      .mat-form-field-appearance-legacy .mat-form-field-infix {
+        padding: 0;
+        background-color: #fff;
+        z-index: 1;
+        border: 1px solid #c4cbd5;
+        border-radius: 4px;
+        padding-left: 36px;
+      }
+      .dropdown-toggle {
+        .mat-form-field-wrapper {
+          height: 100%;
+        }
+      }
+      .mat-chip-list-wrapper {
+        margin: 0;
+      }
+      .mat-chip-list-wrapper .mat-standard-chip,
+      .mat-chip-list-wrapper input.mat-input-element {
+        margin: 2px;
+      }
+      .mat-standard-chip.mat-chip-with-trailing-icon {
+        position: relative;
+        z-index: 1;
+        padding-top: 5px;
+        padding-bottom: 5px;
+      }
+    }
+  }
+
   .new-companies-content__header {
     .btn-new {
       height: 36px;
@@ -1939,15 +2003,33 @@ app-quotes-item {
     top: calc(50% - 4px) !important;
     right: 11px;
   }
-
+  company-add-aside-full {
+    .light-dropdown {
+      .app-drop-down__title {
+        margin-bottom: 7px;
+        line-height: 1.9;
+      }
+    }
+  }
   .company-time-zone-drop-down {
-    margin-top: 7px;
+    .report-caret-icon {
+      position: absolute;
+      right: 15px;
+      top: calc(50% - 2px);
+    }
   }
 
   .details-divider {
     p {
       font-size: 11px;
       margin-bottom: 0;
+      text-transform: uppercase;
+    }
+  }
+
+  .new-companies-content__modal--content {
+    .logo-upload {
+      padding-bottom: 6px;
     }
   }
 
