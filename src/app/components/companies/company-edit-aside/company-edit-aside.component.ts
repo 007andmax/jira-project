@@ -18,6 +18,7 @@ import { ModalImageCropperStateService } from 'src/app/services/modal/modal-imag
 import { ImageCroper } from 'src/app/services/modal/modal-image-cropper/class/image-croper';
 import { CompanyEditLogo } from '../class/company-edit-logo';
 import { UsersService } from 'src/app/services/users/users.service';
+import { User } from '../../users/class/user';
 
 @Component({
   selector: 'app-company-edit-aside',
@@ -28,7 +29,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   opened = false;
   company: CompanyProfile = new CompanyProfile();
   industries: Array<string> = [];
-  selectedTechLead: any = null;
+  selectedTechLead: ItemFilterPerson;
   companyTypes = [new CompanySetting('Client', 'CLIENT'), new CompanySetting('Lead', 'LEAD'), new CompanySetting('Vendor', 'VENDOR')];
   phoneTypes = ['Office', 'Mobile', 'Fax'];
   paymentTerms = [new CompanySetting('COD', 0), new CompanySetting('7 days', 7), new CompanySetting('15 days', 15), new CompanySetting('30 days', 30)];
@@ -92,8 +93,8 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   }
   getSelectedPaymentMethod() {
     let index = this.paymentMethods.findIndex(item => item.value === this.company.defaultPaymentMethod);
-    if (index > -1) return this.paymentMethods[index].title;
-    return "";
+    if (index > -1) return this.paymentMethods[index];
+    return null;
   }
   onSelectDesignation(data) {
     this.company.contacts[0].designation = data;
@@ -151,13 +152,13 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
       this.companySubscriptionState.onEditMode(this.company.contacts[0].subscription);
       this.companyTimeZoneState.onEditMode(this.company.addresses[0].timeZone);
       let indexTerms = this.paymentTerms.findIndex(item => item.value === this.company.paymentTerms);
-      if (indexTerms > -1) this.onSelectPaymentTerms(indexTerms);
+      if (indexTerms > -1) this.onSelectPaymentTerms(this.paymentTerms[indexTerms]);
       let indexServiceType = this.serviceTypes.findIndex(item => item.value === this.company.serviceType);
-      if (indexServiceType > -1) this.onSelectServiceTypes(indexServiceType);
+      if (indexServiceType > -1) this.onSelectServiceTypes(this.serviceTypes[indexServiceType]);
       let indexPersone = this.listPersons.findIndex(item => item.id === this.company.techLeadId);
       if (indexPersone > -1) this.selectedTechLead = this.listPersons[indexPersone];
       let indexType = this.companyTypes.findIndex(item => item.value === this.company.clientType);
-      if (indexType > -1) this.onSelectCompanyTypes(indexType);
+      if (indexType > -1) this.onSelectCompanyTypes(this.companyTypes[indexType]);
       this.tagsState.setTagsFromtEdit(this.company.tags);
       this.elRef.nativeElement.querySelector("#company-description").value = this.company.description;
       this.opened = true;
@@ -165,30 +166,33 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getCompanyFromEdit);
   }
-
-  public onSelectCompanyTypes(index) {
-    this.companyTypes.forEach(item => item.selected = false);
-    this.companyTypes[index].selected = true;
-    this.company.clientType = this.companyTypes[index].value;
+  public onSelectCompanyTypes(type) {
+    this.company.clientType = type.value;
     this.validate.resetType();
+    this.onChangeType();
   }
+  public onChangeType() {
+    this.validate.checkValidType(this.company.clientType);
+  }
+
+
   public onSelectTechLead(event) {
     if (event) {
       this.company.techLeadId = event.id;
-      this.selectedTechLead = null;
+      this.selectedTechLead = event;
     } else {
       this.company.techLeadId = null;
+      this.selectedTechLead = null;
     }
   }
-  public onSelectPaymentTerms(index) {
-    this.paymentTerms.forEach(item => item.selected = false);
-    this.paymentTerms[index].selected = true;
-    this.company.paymentTerms = this.paymentTerms[index].value;
+  public onSelectPaymentMethod(item) {
+    this.company.defaultPaymentMethod = item.value;
   }
-  public onSelectServiceTypes(index) {
-    this.serviceTypes.forEach(item => item.selected = false);
-    this.serviceTypes[index].selected = true;
-    this.company.serviceType = this.serviceTypes[index].value;
+  public onSelectPaymentTerms(item) {
+    this.company.paymentTerms = item.value;
+  }
+  public onSelectServiceTypes(item) {
+    this.company.serviceType = item.value;
   }
   onCheckEmail() {
     if (this.company.contacts[0].primaryEmail && this.company.contacts[0].primaryEmail.length > 0) this.onCheckValidPrimaryEmail();
@@ -240,9 +244,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   public onChangeFirstName() {
     this.validate.checkValidFirstname(this.company.contacts[0].firstName);
   }
-  public onChangeType() {
-    this.validate.checkValidType(this.company.clientType);
-  }
+
   public onChangeTimeZone(data) {
     this.company.addresses[0].locale = (data) ? data.second : '';
   }
@@ -289,19 +291,19 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     })
   }
   getSelectedCompanyTypes() {
-    let index = this.companyTypes.findIndex(item => item.selected === true);
-    if (index > -1) return this.companyTypes[index].title;
-    return "";
+    let index = this.companyTypes.findIndex(item => item.value === this.company.clientType);
+    if (index > -1) return this.companyTypes[index];
+    return null;
   }
   getSelectedServiceType() {
-    let index = this.serviceTypes.findIndex(item => item.selected === true);
+    let index = this.serviceTypes.findIndex(item => item.value === this.company.serviceType);
     if (index > -1) return this.serviceTypes[index].title;
     return "";
   }
   getSelectedPaymentTerms() {
-    let index = this.paymentTerms.findIndex(item => item.selected === true);
-    if (index > -1) return this.paymentTerms[index].title;
-    return "";
+    let index = this.paymentTerms.findIndex(item => item.value === this.company.paymentTerms);
+    if (index > -1) return this.paymentTerms[index];
+    return null;
   }
   getSelectedDropDown(value) {
     if (!value) return "";

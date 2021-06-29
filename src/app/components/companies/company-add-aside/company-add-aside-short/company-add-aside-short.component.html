@@ -1,0 +1,142 @@
+<div class="qt-aside-modern__content --less-padding new-companies-content__modal--content ">
+    <div class="col-md-12 google-plus --required">
+        <mat-error
+            class="qt-tooltip-error"
+            *ngIf="validate.getNameIsExist()"
+        >
+            This company name already occupied
+        </mat-error>
+        <mat-error
+            class="qt-tooltip-error"
+            *ngIf="!validate.getName()"
+        >
+            Company name is required
+        </mat-error>
+        <p>Company Name</p>
+        <input
+            [ngClass]="{'--input-error' : validate.getNameIsExist() || !validate.getName()}"
+            type="text"
+            [(ngModel)]="company.name"
+            placeholder="Write Company or Search Company"
+            (blur)="onChangeName()"
+        >
+    </div>
+    <div class="col-md-6">
+        <app-drop-down
+            [class]="['light-dropdown', 'qt-select-input-40']"
+            [placeholder]="'Select Company Type'"
+            [field]="'title'"
+            [list]="companyTypes"
+            [search]="true"
+            [change]="true"
+            [validate]="validate.getType()"
+            [errorMessage]="'Client Type is required'"
+            [title]="'Company Type'"
+            (onSelectedItem)="onSelectCompanyTypes($event)"
+        >
+        </app-drop-down>
+    </div>
+    <div class="col-md-6 primary-number">
+        <p>Primary Number</p>
+        <input
+            type="text"
+            *ngIf="company.contacts[0].phoneNumbers.length > 0"
+            [(ngModel)]="company.contacts[0].phoneNumbers[0].number"
+            placeholder="Enter Primary Phone"
+        >
+    </div>
+    <div class="col-md-12 --required">
+        <mat-error
+            class="qt-tooltip-error"
+            *ngIf="!validate.getDomain()"
+        >
+            Please enter a valid domain
+        </mat-error>
+        <mat-error
+            class="qt-tooltip-error"
+            *ngIf="validate.getDomainIsExist()"
+        >
+            This company domain already occupied
+        </mat-error>
+        <p>Domain Name</p>
+        <input
+            type="text"
+            [ngClass]="{'--input-error' : !validate.getDomain() || validate.getDomainIsExist()}"
+            (blur)="onChangeDomain()"
+            [(ngModel)]="company.domain"
+            placeholder="example.com"
+        >
+    </div>
+    <div class="col-md-6 --required">
+        <mat-error
+            class="qt-tooltip-error"
+            *ngIf="!validate.getFirstName()"
+        >
+            First name is required
+        </mat-error>
+        <p>First Name</p>
+        <input
+            type="text"
+            [ngClass]="{'--input-error' : !validate.getFirstName()}"
+            [(ngModel)]="company.contacts[0].firstName"
+            (input)="onChangeFirstName()"
+            placeholder="Enter First Name"
+        >
+    </div>
+    <div class="col-md-6">
+        <p>Last Name</p>
+        <input
+            type="text"
+            [(ngModel)]="company.contacts[0].lastName"
+            placeholder="Enter Last Name"
+        >
+    </div>
+    <div class="col-md-6 --required">
+        <mat-error
+            class="qt-tooltip-error"
+            *ngIf="!validate.getPhoneNumber()"
+        >
+            Phone number is required
+        </mat-error>
+        <p>Phone Number</p>
+        <input
+            type="text"
+            *ngIf="company.addresses[0].phoneNumbers.length > 0"
+            [ngClass]="{'--input-error' : !validate.getPhoneNumber()}"
+            [(ngModel)]="company.addresses[0].phoneNumbers[0].number"
+            placeholder="Enter Phone Number"
+            (input)="onChangePhoneNumber()"
+        >
+    </div>
+    <div class="col-md-6 --required">
+        <mat-error
+            class="qt-tooltip-error"
+            *ngIf="!validate.getPrimaryContactEmail()"
+        >
+            Please enter a valid email address
+        </mat-error>
+        <p>Primary Contact Email</p>
+        <input
+            type="text"
+            [ngClass]="{'--input-error' : !validate.getPrimaryContactEmail()}"
+            [(ngModel)]="company.contacts[0].primaryEmail"
+            (input)="onChangePrimaryEmail()"
+            placeholder="Primary Email Address"
+        >
+    </div>
+    <div class="col-md-12">
+        <div
+            class="new-link"
+            (click)="initFullVersion()"
+        >
+            Would you like to Create Company in Advance mode?
+        </div>
+    </div>
+    <div
+        class="info-block"
+        style="float: left;margin-top: 15px;"
+    >
+        Advance Company mode will provide user to add more detail like Settings, Primary
+Contact detail etc…
+    </div>
+</div>

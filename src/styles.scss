@@ -2130,14 +2130,18 @@ ngb-datepicker {
     margin: 0 !important;
     padding: 0 !important;
   }
+
+  .upload-logo {
+    position: static;
+    margin-right: 20px;
+  }
+}
+.recurring-tickets-content__modal,
+.new-users-content__modal {
   .mat-error {
     position: absolute;
     top: -17px;
     font-size: 12px;
-  }
-  .upload-logo {
-    position: static;
-    margin-right: 20px;
   }
 }
 // LEFT PANEL
