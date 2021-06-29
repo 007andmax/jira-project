@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/cor
 import { Subscription } from 'rxjs';
 import { ItemFilterPerson } from 'src/app/components/left-panel/left-panel-companies/class/item-filter-person';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
+import { CompanyIndustry } from 'src/app/interfaces/company/company-industry';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CompanyFilter } from '../../class/company-filter';
@@ -15,7 +16,7 @@ import { CompanyTagsComponent } from '../../company-tags/company-tags.component'
 })
 export class CompaniesFilterComponent implements OnInit {
   companyTypes = [new CompanySetting('Client', 'CLIENT'), new CompanySetting('Lead', 'LEAD'), new CompanySetting('Vendor', 'VENDOR')];
-  industries: Array<string> = [];
+  industries: Array<CompanyIndustry> = [];
   listPersons: Array<ItemFilterPerson> = [];
   companyFilter: CompanyFilter = new CompanyFilter();
   @ViewChild('typesDp') typesDp: DropDownComponent;
@@ -29,6 +30,9 @@ export class CompaniesFilterComponent implements OnInit {
 
   ngOnInit() {
     this.industries = this.companiesStateService.getIndustries();
+    this.companiesStateService.onGetIndustries.subscribe(data => {
+      this.industries = data;
+    })
     if (this.usersStateService.getAllUsers().length > 0) {
       this.getTehusers(this.usersStateService.getAllUsers());
 

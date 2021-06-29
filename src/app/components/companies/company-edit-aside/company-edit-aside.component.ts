@@ -19,6 +19,8 @@ import { ImageCroper } from 'src/app/services/modal/modal-image-cropper/class/im
 import { CompanyEditLogo } from '../class/company-edit-logo';
 import { UsersService } from 'src/app/services/users/users.service';
 import { User } from '../../users/class/user';
+import { CompanyIndustry } from 'src/app/interfaces/company/company-industry';
+import { CompanyTagsComponent } from '../company-tags/company-tags.component';
 
 @Component({
   selector: 'app-company-edit-aside',
@@ -28,7 +30,7 @@ import { User } from '../../users/class/user';
 export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   opened = false;
   company: CompanyProfile = new CompanyProfile();
-  industries: Array<string> = [];
+  industries: Array<CompanyIndustry> = [];
   selectedTechLead: ItemFilterPerson;
   companyTypes = [new CompanySetting('Client', 'CLIENT'), new CompanySetting('Lead', 'LEAD'), new CompanySetting('Vendor', 'VENDOR')];
   phoneTypes = ['Office', 'Mobile', 'Fax'];
@@ -47,6 +49,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   validate: CompanyValdiate = new CompanyValdiate();
   sub: Subscription = new Subscription();
   locationIsinit: boolean = false;
+  @ViewChild('companyTags') companyTags: CompanyTagsComponent;
   @ViewChild('addresstext') addresstext: any;
   allTitles: Array<string> = [];
   constructor(private companiesStateService: CompaniesStateService, private companiesService: CompaniesService,
@@ -63,6 +66,9 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.company.fullVersion();
     this.industries = this.companiesStateService.getIndustries();
+    this.companiesStateService.onGetIndustries.subscribe(data => {
+      this.industries = data;
+    })
     if (this.usersStateService.getAllUsers().length > 0) {
       this.getTehusers(this.usersStateService.getAllUsers());
       this.getUsersTitle(this.usersStateService.getAllUsers());
@@ -91,6 +97,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
       }, []).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
         1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
   }
+
   getSelectedPaymentMethod() {
     let index = this.paymentMethods.findIndex(item => item.value === this.company.defaultPaymentMethod);
     if (index > -1) return this.paymentMethods[index];
@@ -134,8 +141,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   close() {
     this.opened = false;
     this.locationIsinit = false;
-    this.companySubscriptionState.onInitClear();
-    this.companyTagsStateService.onInitClear();
+
     this.company = new CompanyProfile();
     this.companyTypes.forEach(item => item.selected = false);
     this.paymentTerms.forEach(item => item.selected = false);
@@ -159,7 +165,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
       if (indexPersone > -1) this.selectedTechLead = this.listPersons[indexPersone];
       let indexType = this.companyTypes.findIndex(item => item.value === this.company.clientType);
       if (indexType > -1) this.onSelectCompanyTypes(this.companyTypes[indexType]);
-      this.tagsState.setTagsFromtEdit(this.company.tags);
+      this.companyTags.setEditItems(this.company.tags.map(item => item.id));
       this.elRef.nativeElement.querySelector("#company-description").value = this.company.description;
       this.opened = true;
       this.cd.detectChanges();

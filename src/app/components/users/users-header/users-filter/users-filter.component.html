@@ -23,6 +23,7 @@
         class="qt-w100"
         [placeholder]="'Search By Industry'"
         [list]="industries"
+        [field]="'name'"
         [search]="true"
         [change]="true"
         (onSelectedItem)="onSelectClientIndustry($event)"

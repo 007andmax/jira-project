@@ -12,6 +12,7 @@ import { CompanyProfile } from '../../class/company-profile';
 import { CompanySetting } from '../../class/company-setting';
 import { CompanyValdiate } from '../../class/company-validate';
 import { } from 'google-maps';
+import { CompanyIndustry } from 'src/app/interfaces/company/company-industry';
 
 @Component({
   selector: 'company-add-aside-full',
@@ -28,7 +29,7 @@ export class CompanyAddAsideFullComponent implements OnInit {
   new CompanySetting('Wire Transfer', 'WIRE_TRANSFER')];
   serviceTypes = [new CompanySetting('Hourly', 'HOURLY'), new CompanySetting('Block time', 'BLOCK_TIME'), new CompanySetting('Semi managed', 'SEMI_MANAGED'), new CompanySetting('Fully managed', 'FULLY_MANAGED')];
   @ViewChild('addresstext') addresstext: any;
-  industries: Array<string> = [];
+  industries: Array<CompanyIndustry> = [];
   locationIsinit: boolean = false;
   allTitles: Array<string> = [];
   listPersons: Array<ItemFilterPerson> = [];
@@ -44,6 +45,9 @@ export class CompanyAddAsideFullComponent implements OnInit {
 
   ngOnInit() {
     this.industries = this.companiesStateService.getIndustries();
+    this.companiesStateService.onGetIndustries.subscribe(data => {
+      this.industries = data;
+    })
     if (this.usersStateService.getAllUsers().length > 0) {
       this.getTehusers(this.usersStateService.getAllUsers());
       this.getUsersTitle(this.usersStateService.getAllUsers());

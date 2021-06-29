@@ -1,9 +1,10 @@
 import { Company } from "src/app/interfaces/company/company";
+import { CompanyIndustry } from "src/app/interfaces/company/company-industry";
 import { CompanyItem } from "./company-item";
 
 export class CompanyFilter {
     clientType: string;
-    clientIndustry: string;
+    clientIndustry: CompanyIndustry;
     tags: Array<string> = [];
     tehUser: string;
     constructor() {
@@ -14,7 +15,7 @@ export class CompanyFilter {
             "tagIds": (this.tags.length > 0) ? this.tags : null,
             "clientType": this.clientType,
             "techLeadId": this.tehUser,
-            // "clientIndustryId": "e8d14095-8948-412c-8203-24ca5baadca7"
+            "clientIndustryId": (this.clientIndustry) ? this.clientIndustry.id : null
         }
     }
     public getFilterList(reqCompaniesList: Array<CompanyItem>) {
@@ -22,9 +23,9 @@ export class CompanyFilter {
             if (item.companyInfo.contacts[0].tags) console.log("item.companyInfo.contacts[0].tags", item.companyInfo.contacts[0].tags);
             let tags = (item.companyInfo.contacts[0].tags) ? item.companyInfo.contacts[0].tags.find(tag => this.tags.find(idTag => idTag === tag.id)) : null;
 
-            if (this.clientType && this.clientType === item.clientType || this.tehUser && this.tehUser === item.techLeadId || this.clientIndustry && this.clientIndustry === ((item.clientIndustry) ? item.clientIndustry.name : '') || (this.tags.length > 0) && tags !== null) {
+            if (this.clientType && this.clientType === item.clientType || this.tehUser && this.tehUser === item.techLeadId || this.clientIndustry && this.clientIndustry.name === ((item.clientIndustry) ? item.clientIndustry.name : '') || (this.tags.length > 0) && tags !== null) {
                 return true;
-            } else if (this.clientType && this.clientType !== item.clientType || this.tehUser && this.tehUser !== item.techLeadId || this.clientIndustry && this.clientIndustry !== ((item.clientIndustry) ? item.clientIndustry.name : '') || (this.tags.length > 0) && tags === null) {
+            } else if (this.clientType && this.clientType !== item.clientType || this.tehUser && this.tehUser !== item.techLeadId || this.clientIndustry && this.clientIndustry.name !== ((item.clientIndustry) ? item.clientIndustry.name : '') || (this.tags.length > 0) && tags === null) {
                 return false;
             }
             return true;

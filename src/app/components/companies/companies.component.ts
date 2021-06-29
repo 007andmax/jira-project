@@ -109,8 +109,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       this.companyFilter.setFilters(data);
       window.scrollTo(0, 0);
       this.setDefaultScoll();
-      this.onScroll();
-      this.onInirCalculate();
+      this.getClientsList();
     })
     this.sub.add(filter);
     let getChangeCompanies = this.companiesStateService.getChangeCompanies().subscribe((data: CompanyUpdate) => {

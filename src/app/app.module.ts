@@ -862,7 +862,7 @@ declare var $: any;
     DocumentPreviewComponent,
     CompanyDocumentsComponent,
     CompanyDocumentsTableComponent,
-    CompaniesFilterComponent
+    CompaniesFilterComponent,
     CompanyAddAsideShortComponent,
     CompanyAddAsideFullComponent
   ],
