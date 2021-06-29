@@ -1364,6 +1364,11 @@ app-quotes-item {
       width: 40px;
       max-width: 40px;
       min-width: 40px;
+
+      .checkbox-container {
+        margin-bottom: 0;
+        margin-top: 5px;
+      }
     }
     &__name {
       width: -webkit-max-content;
@@ -1868,8 +1873,9 @@ app-quotes-item {
         margin-right: 20px;
       }
       p {
-        font-size: 11px;
+        font-size: 12px;
         font-family: Graphik-Regular, sans-serif;
+        line-height: 1.3;
       }
     }
     .new-link {
@@ -1903,28 +1909,28 @@ app-quotes-item {
     height: 30px;
     left: 100px;
   }
-  .info-block {
-    background: #fff8eb;
+  .info-section {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 8px;
+    padding: 8px 12px;
+    background: transparent;
     font-size: 12px;
-    color: #7f5c1b;
-    width: 83%;
-    margin: 0 15px;
-    &:before {
-      content: "";
-      background: transparent;
-      color: #7f5c1b;
-      border: 1px solid #7f5c1b;
-      top: 50%;
-      transform: translateY(-50%);
+    color: #4f5f79;
+    line-height: 1.3;
+    border: 1px dashed rgba(0,0,0,.2);
+    border-radius: 6px;
+
+    .icon__tips {
+      flex-shrink: 0;
     }
-    &:after {
-      position: absolute;
-      content: "i";
-      color: #7f5c1b;
-      left: 25px;
-      top: 50%;
-      transform: translateY(-50%);
-    }
+  }
+
+  .btn-new.btn-primary-white {
+    display: inline-flex;
+    padding: 6px 8px;
+    height: 28px;
   }
 }
 .new-companies-content__modal {
@@ -1934,15 +1940,26 @@ app-quotes-item {
     right: 11px;
   }
 
-  .app-drop-down__right-icon {
-    right: 0;
+  .company-time-zone-drop-down {
+    margin-top: 7px;
   }
+
+  .details-divider {
+    p {
+      font-size: 11px;
+      margin-bottom: 0;
+    }
+  }
+
+  //.app-drop-down__right-icon {
+  //  right: 0;
+  //}
 
   .filter-tags-body {
     .mat-form-field-flex {
       .mat-form-field-infix {
         &::before {
-          top: 11px;
+          top: 12px;
         }
       }
     }
@@ -1971,7 +1988,7 @@ app-quotes-item {
     }
 
     .mat-form-field-label {
-      top: 12px;
+      top: 14px;
     }
   }
 }
@@ -2102,7 +2119,7 @@ ngb-datepicker {
 .new-users-content__modal {
   .logo-upload {
     padding-bottom: 20px;
-    border-bottom: 1px solid #edf2f6;
+      //border-bottom: 1px solid #edf2f6;
     align-items: center;
     p {
       font-size: 11px !important;
