@@ -28,6 +28,7 @@ export class CompaniesStateService {
   calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
   currentCompany: any = null;
   onCurrentCompany: EventEmitter<any> = new EventEmitter();
+  filter: EventEmitter<any> = new EventEmitter();
   showArchivedCompanies: boolean = false;
   isInitCurrentCompany: boolean = false;
   constructor(private companiesService: CompaniesService,
@@ -68,6 +69,9 @@ export class CompaniesStateService {
       }
       this.isInitCurrentCompany = true;
     })
+  }
+  public onInitFilter(data) {
+    this.filter.emit(data);
   }
   public getSelectedCompanyId() {
     return this.selectedCompanyId;

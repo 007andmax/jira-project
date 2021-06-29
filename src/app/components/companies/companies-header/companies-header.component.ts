@@ -11,7 +11,8 @@ import { COMPANIES } from 'src/app/const/emails';
   styleUrls: ['./companies-header.component.scss']
 })
 export class CompaniesHeaderComponent implements OnInit, OnDestroy {
-
+  toggleFilter: boolean = true;
+  countFilter: number = 0;
   calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
   sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
@@ -28,6 +29,9 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
   public showAsideForDraftEmail() {
     this.draftEmailStateService.setAction(COMPANIES);
     this.draftEmailStateService.toggleAsideForAdd();
+  }
+  onChangeCountFilter(data) {
+    this.countFilter = data;
   }
   public showAsideForAdd() {
     this.companiesStateService.toggleAsideForAdd();

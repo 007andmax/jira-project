@@ -16,6 +16,7 @@ import { CompaniesRealTimeService } from '../../states/company/companies-real-ti
 import { CompanyUpdate } from './class/company-update';
 import { ARCHIVE_COMPANY, DEARCHIVE_COMPANY } from '../../const/confirm';
 import { DraftEmailStateService } from '../../states/draft-email/draft-email-state.service';
+import { CompanyFilter } from './class/company-filter';
 
 @Component({
   selector: 'app-companies',
@@ -36,6 +37,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   new CompanyFilterTop('tickets', ''),
   new CompanyFilterTop('devices', ''),
   new CompanyFilterTop('users', '')];
+  companyFilter: CompanyFilter = new CompanyFilter();
   public showArchivedCompanies: boolean = false;
   devices = [];
   users = [];
@@ -103,6 +105,17 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       this.onInirCalculate();
     })
     this.sub.add(geLefttFilter);
+
+    let filter = this.companiesStateService.filter.subscribe(data => {
+      console.log("data", data);
+      this.showPreloader = true;
+      this.companyFilter.setFilters(data);
+      window.scrollTo(0, 0);
+      this.setDefaultScoll();
+      this.onScroll();
+      this.onInirCalculate();
+    })
+    this.sub.add(filter);
     let getChangeCompanies = this.companiesStateService.getChangeCompanies().subscribe((data: CompanyUpdate) => {
       if (data.action === 'COMPANY_SAVED' || data.action === 'COMPANY_ARCHIVED') {
         const reqIndex = this.reqCompaniesList.findIndex((item) => item.id === data.data.id);
@@ -180,7 +193,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       return;
     }
     this.page_number += 1;
-    let listFilter = this.left_filter.getFilterList(this.reqCompaniesList);
+    let listFilter = this.companyFilter.getFilterList(this.reqCompaniesList);
     let start = (this.page_number - 1) * 30;
     let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;
     let CompaniesList = [];
@@ -190,6 +203,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.CompaniesList = [...this.CompaniesList, ...CompaniesList];
     this.infiniteScrollDisabled = false;
     if ((this.page_number * 30) > listFilter.length) this.companiesList.setBlockList(true);
+    this.showPreloader = false;
   }
 
   onFilter(field) {

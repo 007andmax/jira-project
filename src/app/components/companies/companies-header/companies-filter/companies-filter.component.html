@@ -1,0 +1,46 @@
+<app-drop-down
+    class="filter-category qt-mr-8 dropdown"
+    [placeholder]="'By Types'"
+    [list]="companyTypes"
+    [field]="'title'"
+    [search]="true"
+    [change]="true"
+    [heightInput]="'36px'"
+    [widthInput]="'22%'"
+    (onSelectedItem)="onSelectType($event)"
+></app-drop-down>
+<app-drop-down
+    class="filter-category qt-mr-8 dropdown"
+    [placeholder]="'Search By Sales Person'"
+    [list]="listPersons"
+    [field]="'name'"
+    [search]="true"
+    [change]="true"
+    [heightInput]="'36px'"
+    [widthInput]="'22%'"
+    (onSelectedItem)="onSelectTechLead($event)"
+></app-drop-down>
+<app-drop-down
+    class="filter-category qt-mr-8 dropdown"
+    [placeholder]="'Search By Industry'"
+    [list]="industries"
+    [search]="true"
+    [change]="true"
+    [heightInput]="'36px'"
+    [widthInput]="'22%'"
+    (onSelectedItem)="onSelectClientIndustry($event)"
+></app-drop-down>
+<app-company-tags
+    class="filter-category dropdown companies-filter-tags"
+    (tagsChange)="onChangeTags($event)"
+></app-company-tags>
+<!-- <app-drop-down
+    class="filter-category dropdown companies-filter-tags"
+    [placeholder]="'Search By Tags'"
+    [list]
+    [field]="'title'"
+    [search]="true"
+    [change]="true"
+    heightInput="36px"
+    widthInput="30%"
+></app-drop-down> -->
