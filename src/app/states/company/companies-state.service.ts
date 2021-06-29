@@ -16,7 +16,6 @@ export class CompaniesStateService {
   industries = [];
   selectedCompanyId: string = null;
   onChangeSelectedCompanyId: EventEmitter<any> = new EventEmitter();
-  onFilterTags: EventEmitter<any> = new EventEmitter();
   onGetCompanies: EventEmitter<any> = new EventEmitter();
   onChangeCompanies: EventEmitter<CompanyUpdate> = new EventEmitter();
   showAsideForAdd: EventEmitter<any> = new EventEmitter();

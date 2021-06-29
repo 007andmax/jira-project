@@ -1,10 +1,12 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ItemFilterPerson } from 'src/app/components/left-panel/left-panel-companies/class/item-filter-person';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CompanyFilter } from '../../class/company-filter';
 import { CompanySetting } from '../../class/company-setting';
+import { CompanyTagsComponent } from '../../company-tags/company-tags.component';
 
 @Component({
   selector: 'companies-filter',
@@ -16,6 +18,10 @@ export class CompaniesFilterComponent implements OnInit {
   industries: Array<string> = [];
   listPersons: Array<ItemFilterPerson> = [];
   companyFilter: CompanyFilter = new CompanyFilter();
+  @ViewChild('typesDp') typesDp: DropDownComponent;
+  @ViewChild('personsDp') personsDp: DropDownComponent;
+  @ViewChild('industriesDp') industriesDp: DropDownComponent;
+  @ViewChild('tagsDp') tagsDp: CompanyTagsComponent;
   @Output() changeCountFilter = new EventEmitter<any>();
   sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
@@ -41,6 +47,19 @@ export class CompaniesFilterComponent implements OnInit {
           1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
       }
     })
+  }
+  public onClearAll() {
+    this.typesDp.clearWithOutChanges();
+    this.personsDp.clearWithOutChanges();
+    this.industriesDp.clearWithOutChanges();
+    this.tagsDp.clearWithOutChanges();
+
+    this.companyFilter.setClientType(null);
+    this.companyFilter.setClientIndustry(null);
+    this.companyFilter.setTehUser(null);
+    this.companyFilter.setTags([]);
+    this.companiesStateService.onInitFilter(this.companyFilter);
+    this.onChangeCounterFilter();
   }
   public onSelectTechLead(data) {
     console.log("onSelectTechLead", data);

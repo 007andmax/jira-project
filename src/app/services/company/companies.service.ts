@@ -40,6 +40,9 @@ export class CompaniesService {
       this.clientsCompany.next(response);
     })*/
   }
+  public getCompaniesListByFilter(data) {
+    return this.http.post(this.apiUrl + 'company/filter', data);
+  }
   public getCompany(id) {
     return this.http.get(this.apiUrl + `company/${id}/data`);
   }

@@ -9,11 +9,11 @@
                 *ngIf="getCountSelected() > 0"
             >
                 <div [textContent]="getCountSelected() + ' Selected'"></div>
-                <div class="qt-ml-25 qt-ff-gm qt-df qt-color-info qt-ai-c pointer">
+                <!-- <div class="qt-ml-25 qt-ff-gm qt-df qt-color-info qt-ai-c pointer">
                     <div class="icon__email-blue qt-za-16 qt-sz-16 qt-mr-6 qt-bg-contain"></div>
                     <div>Write Draft</div>
                 </div>
-                <!-- <div class="qt-ml-16 qt-ff-gm qt-df qt-color-info qt-ai-c pointer">
+               <div class="qt-ml-16 qt-ff-gm qt-df qt-color-info qt-ai-c pointer">
                     <div class="icon__print-blue qt-za-16 qt-sz-16 qt-mr-6 qt-bg-contain"></div>
                     <div>Print</div>
                 </div>
@@ -32,6 +32,13 @@
                         <i class="icn-16 email-ng2"></i>
                     </div>
                 </div>
+                <button
+                    class="qt-btn --transparent"
+                    (click)="clearAll()"
+                    *ngIf="countFilter > 0"
+                >
+                    Clear All
+                </button>
                 <button
                     class="qt-btn btn-filter qt-mr-8 qt-ml-8 d-f"
                     [ngClass]="{'active':!toggleFilter}"

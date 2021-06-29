@@ -154,7 +154,7 @@ export class LeftPanelCompaniesComponent implements OnInit {
     tags.forEach(item => {
       outTags.push(item.id);
     })
-    this.companiesState.onFilterTags.emit(outTags);
+
   }
 
   onShowAll() {

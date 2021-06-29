@@ -69,14 +69,10 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       this.left_filter.setClientType(null);
       this.clearFilter();
       this.setDefaultScoll();
-      this.getClientsList(this.companiesStateService.getCompanies());
+      this.getClientsList();
     })
     this.sub.add(getOnShowArchived);
-    if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
-    let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
-      this.getClientsList(data);
-    })
-    this.sub.add(getOnCompanies);
+    this.getClientsList();
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === ARCHIVE_COMPANY) {
@@ -138,22 +134,6 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getChangeCompanies);
-
-    let onFilterTags = this.companiesStateService.onFilterTags.subscribe(tags => {
-      if (tags.length > 0) {
-        let getClientsByTags = this.companiesService.getClientsByTags(tags).subscribe(data => {
-          this.showPreloader = true;
-          this.setDefaultScoll();
-          this.getClientsList(data);
-        })
-        this.sub.add(getClientsByTags);
-      } else {
-        this.setDefaultScoll();
-        this.getClientsList(this.companiesStateService.getCompanies());
-      }
-      this.cd.detectChanges();
-    })
-    this.sub.add(onFilterTags);
   }
   onSelectAllCompanies(event) {
     if (event.target.checked) {
@@ -178,13 +158,17 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.calculateCount.onCalculate(this.reqCompaniesList, this.left_filter);
     this.companiesStateService.setCalculateCount(this.calculateCount);
   }
-  private getClientsList(data) {
-    this.reqCompaniesList = data.filter(item => item.accountType === 'CLIENT' && ((!this.showArchivedCompanies) ? !item.deletedAt : item.deletedAt));
-    this.onInirCalculate();
-    this.reqCompaniesList.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-    this.onScroll();
-    this.showPreloader = false;
+  private getClientsList() {
+    this.companiesService.getCompaniesListByFilter(this.companyFilter.getDataForFilter()).subscribe((data: any) => {
+      this.reqCompaniesList = data;
+      this.onInirCalculate();
+      this.reqCompaniesList.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+        1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+      this.onScroll();
+      this.showPreloader = false;
+    })
+    //this.reqCompaniesList = data.filter(item => item.accountType === 'CLIENT' && ((!this.showArchivedCompanies) ? !item.deletedAt : item.deletedAt));
+
   }
   private getCompanies() {
     if (this.companiesList.getBlockList()) {
@@ -192,6 +176,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       return;
     }
     this.page_number += 1;
+
     let listFilter = this.companyFilter.getFilterList(this.reqCompaniesList);
     let start = (this.page_number - 1) * 30;
     let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;

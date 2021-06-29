@@ -9,6 +9,14 @@ export class CompanyFilter {
     constructor() {
 
     }
+    getDataForFilter() {
+        return {
+            "tagIds": (this.tags.length > 0) ? this.tags : null,
+            "clientType": this.clientType,
+            "techLeadId": this.tehUser,
+            // "clientIndustryId": "e8d14095-8948-412c-8203-24ca5baadca7"
+        }
+    }
     public getFilterList(reqCompaniesList: Array<CompanyItem>) {
         let list = reqCompaniesList.filter(item => {
             if (item.companyInfo.contacts[0].tags) console.log("item.companyInfo.contacts[0].tags", item.companyInfo.contacts[0].tags);
