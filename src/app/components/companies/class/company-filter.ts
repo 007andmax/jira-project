@@ -7,31 +7,36 @@ export class CompanyFilter {
     clientIndustry: CompanyIndustry;
     tags: Array<string> = [];
     tehUser: string;
+    isArchived: boolean;
     constructor() {
 
     }
     getDataForFilter() {
         return {
-            "tagIds": (this.tags.length > 0) ? this.tags : null,
-            "clientType": this.clientType,
-            "techLeadId": this.tehUser,
-            "clientIndustryId": (this.clientIndustry) ? this.clientIndustry.id : null
+            tagIds: (this.tags.length > 0) ? this.tags : undefined,
+            clientType: (this.clientType) ? this.clientType : undefined,
+            techLeadId: (this.tehUser) ? this.tehUser : undefined,
+            clientIndustryId: (this.clientIndustry) ? this.clientIndustry.id : undefined,
+            isArchived: (this.isArchived) ? true : undefined
         }
     }
-    public getFilterList(reqCompaniesList: Array<CompanyItem>) {
-        let list = reqCompaniesList.filter(item => {
-            if (item.companyInfo.contacts[0].tags) console.log("item.companyInfo.contacts[0].tags", item.companyInfo.contacts[0].tags);
-            let tags = (item.companyInfo.contacts[0].tags) ? item.companyInfo.contacts[0].tags.find(tag => this.tags.find(idTag => idTag === tag.id)) : null;
-
-            if (this.clientType && this.clientType === item.clientType || this.tehUser && this.tehUser === item.techLeadId || this.clientIndustry && this.clientIndustry.name === ((item.clientIndustry) ? item.clientIndustry.name : '') || (this.tags.length > 0) && tags !== null) {
-                return true;
-            } else if (this.clientType && this.clientType !== item.clientType || this.tehUser && this.tehUser !== item.techLeadId || this.clientIndustry && this.clientIndustry.name !== ((item.clientIndustry) ? item.clientIndustry.name : '') || (this.tags.length > 0) && tags === null) {
-                return false;
-            }
-            return true;
-        })
-        return list;
-
+    /*  public getFilterList(reqCompaniesList: Array<CompanyItem>) {
+          let list = reqCompaniesList.filter(item => {
+              //  if (item.companyInfo.contacts[0].tags) console.log("item.companyInfo.contacts[0].tags", item.companyInfo.contacts[0].tags);
+              let tags = (item.companyInfo.contacts[0].tags) ? item.companyInfo.contacts[0].tags.find(tag => this.tags.find(idTag => idTag === tag.id)) : null;
+  
+              if (this.clientType && this.clientType === item.clientType || this.tehUser && this.tehUser === item.techLeadId || this.clientIndustry && this.clientIndustry.name === ((item.clientIndustry) ? item.clientIndustry.name : '') || (this.tags.length > 0) && tags !== null) {
+                  return true;
+              } else if (this.clientType && this.clientType !== item.clientType || this.tehUser && this.tehUser !== item.techLeadId || this.clientIndustry && this.clientIndustry.name !== ((item.clientIndustry) ? item.clientIndustry.name : '') || (this.tags.length > 0) && tags === null) {
+                  return false;
+              }
+              return true;
+          })
+          return list;
+  
+      }*/
+    public setArchived(data) {
+        this.isArchived = data;
     }
     public setTehUser(data) {
         this.tehUser = data;

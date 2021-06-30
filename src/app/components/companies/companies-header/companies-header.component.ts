@@ -12,6 +12,7 @@ import { CompaniesFilterComponent } from './companies-filter/companies-filter.co
   styleUrls: ['./companies-header.component.scss']
 })
 export class CompaniesHeaderComponent implements OnInit, OnDestroy {
+
   toggleFilter: boolean = true;
   countFilter: number = 0;
   calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
@@ -31,7 +32,7 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnCalculateCount);
   }
-  selectAllCompanies(event) {
+  toggleAllCompanies(event) {
     this.onSelectAllCompanies.emit(event);
   }
   public getCountSelected() {

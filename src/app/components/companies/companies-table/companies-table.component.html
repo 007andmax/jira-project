@@ -1,4 +1,7 @@
-<tr (click)="showInfo()">
+<tr
+    (click)="showInfo()"
+    [ngClass]="{'--selected':company.selected}"
+>
     <td class="companies-table__check">
         <label class="checkbox-container">
             <input

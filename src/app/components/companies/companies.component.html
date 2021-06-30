@@ -101,9 +101,6 @@
 <!-- </div> -->
 <!-- &lt;!&ndash; <app-company-add-aside></app-company-add-aside> &ndash;&gt; -->
 <!-- <app-company-edit-aside></app-company-edit-aside> -->
-
-
-
 <div class="qt-page-list companies-page">
     <app-companies-header
         (onChangeFilterField)="onFilter($event)"
@@ -126,9 +123,6 @@
                         [ngForOf]="CompaniesList"
                         [ngForTrackBy]="trackById"
                     >
-
-
-
                         <app-companies-table
                             [showArchivedCompanies]="showArchivedCompanies"
                             [company]="company"

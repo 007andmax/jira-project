@@ -1,3 +1,9 @@
 .company-email {
   word-break: break-all;
 }
+.--selected {
+  td {
+    background: #f4fbff;
+    border-color: #16a4fa;
+  }
+}

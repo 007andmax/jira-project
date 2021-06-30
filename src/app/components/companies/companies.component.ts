@@ -26,20 +26,22 @@ import { CompanyItem } from './class/company-item';
   providers: [CompaniesListService]
 })
 export class CompaniesComponent implements OnInit, OnDestroy {
+
   CompaniesList: Array<CompanyItem> = [];
   reqCompaniesList: Array<CompanyItem> = [];
   showPreloader: boolean = true;
-  public infiniteScrollDisabled = false;
-  public page_number: number = 0;
-  filter: Array<CompanyFilterTop> = [new CompanyFilterTop('name', 'ASC'),
-  new CompanyFilterTop('address', ''),
-  new CompanyFilterTop('primary_contact', ''),
-  new CompanyFilterTop('email', ''),
-  new CompanyFilterTop('tickets', ''),
-  new CompanyFilterTop('devices', ''),
-  new CompanyFilterTop('users', '')];
+  infiniteScrollDisabled = false;
+  page_number: number = 0;
+  filter: Array<CompanyFilterTop> = [
+    new CompanyFilterTop('name', 'ASC'),
+    new CompanyFilterTop('address', ''),
+    new CompanyFilterTop('primary_contact', ''),
+    new CompanyFilterTop('email', ''),
+    new CompanyFilterTop('tickets', ''),
+    new CompanyFilterTop('devices', ''),
+    new CompanyFilterTop('users', '')];
   companyFilter: CompanyFilter = new CompanyFilter();
-  public showArchivedCompanies: boolean = false;
+  showArchivedCompanies: boolean = false;
   devices = [];
   users = [];
   sub: Subscription = new Subscription();
@@ -64,15 +66,21 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.left_filter = this.leftPanelStateService.getFilter();
     this.showArchivedCompanies = this.companiesStateService.getShowArchivedCompanies();
     let getOnShowArchived = this.companiesStateService.getOnShowArchived().subscribe(data => {
+      this.showPreloader = true;
       this.showArchivedCompanies = data;
       window.scrollTo(0, 0);
-      this.left_filter.setClientType(null);
+      (<any>document.body.querySelector(".qt-page-list__header-thead-container .qt-checkbox input")).checked = false;
+      this.companyFilter.setArchived(data);
       this.clearFilter();
       this.setDefaultScoll();
-      this.getClientsList();
+      this.getClientsListByFilter();
     })
     this.sub.add(getOnShowArchived);
-    this.getClientsList();
+    if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
+    let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
+      this.getClientsList(data);
+    })
+    this.sub.add(getOnCompanies);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === ARCHIVE_COMPANY) {
@@ -94,22 +102,23 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       this.users = data;
     })
     this.sub.add(getOnUsers);
-    let geLefttFilter = this.leftPanelStateService.getOnFilter().subscribe((data) => {
-      window.scrollTo(0, 0);
-      this.left_filter = data;
-      this.setDefaultScoll();
-      this.onScroll();
-      this.onInirCalculate();
-    })
-    this.sub.add(geLefttFilter);
+    /* let geLefttFilter = this.leftPanelStateService.getOnFilter().subscribe((data) => {
+       window.scrollTo(0, 0);
+       this.left_filter = data;
+       this.setDefaultScoll();
+       this.onScroll();
+       this.onInirCalculate();
+     })
+     this.sub.add(geLefttFilter);*/
 
     let filter = this.companiesStateService.filter.subscribe(data => {
       console.log("data", data);
       this.showPreloader = true;
       this.companyFilter.setFilters(data);
       window.scrollTo(0, 0);
+      (<any>document.body.querySelector(".qt-page-list__header-thead-container .qt-checkbox input")).checked = false;
       this.setDefaultScoll();
-      this.getClientsList();
+      this.getClientsListByFilter();
     })
     this.sub.add(filter);
     let getChangeCompanies = this.companiesStateService.getChangeCompanies().subscribe((data: CompanyUpdate) => {
@@ -135,8 +144,9 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.sub.add(getChangeCompanies);
   }
   onSelectAllCompanies(event) {
+
     if (event.target.checked) {
-      let listFilter = this.companyFilter.getFilterList(this.reqCompaniesList);
+      let listFilter = this.reqCompaniesList;
       this.draftEmailStateService.resetSelectedCompanies();
       listFilter.forEach(item => {
         item.selected = true;
@@ -157,7 +167,17 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.calculateCount.onCalculate(this.reqCompaniesList, this.left_filter);
     this.companiesStateService.setCalculateCount(this.calculateCount);
   }
-  private getClientsList() {
+  private getClientsList(data) {
+    this.reqCompaniesList = data.filter(item => item.accountType === 'CLIENT' && ((!this.showArchivedCompanies) ? !item.deletedAt : item.deletedAt));
+
+    this.onInirCalculate();
+    this.reqCompaniesList.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+    this.onScroll();
+    this.showPreloader = false;
+
+  }
+  private getClientsListByFilter() {
     this.companiesService.getCompaniesListByFilter(this.companyFilter.getDataForFilter()).subscribe((data: any) => {
       this.reqCompaniesList = data;
       this.onInirCalculate();
@@ -176,7 +196,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     }
     this.page_number += 1;
 
-    let listFilter = this.companyFilter.getFilterList(this.reqCompaniesList);
+    let listFilter = this.reqCompaniesList;
     let start = (this.page_number - 1) * 30;
     let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;
     let CompaniesList = [];
