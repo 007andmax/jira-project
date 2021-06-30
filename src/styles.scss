@@ -471,6 +471,7 @@ documents-edit-info {
   app-tags,
   app-company-tags,
   app-taxes,
+  documents-linked,
   app-draft-email-recipients,
   draft-email-user-recipients {
     > .col-md-12,
@@ -524,6 +525,13 @@ documents-edit-info {
           height: 42px;
           margin: 0;
         }
+      }
+    }
+  }
+  documents-linked {
+    .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+      &:before {
+        content: "" !important;
       }
     }
   }

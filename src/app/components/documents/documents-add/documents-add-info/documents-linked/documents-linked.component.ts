@@ -1,4 +1,6 @@
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Company } from 'src/app/interfaces/company/company';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -12,15 +14,21 @@ import { DocumentCompanyUser } from '../../class/document-company-user';
   styleUrls: ['./documents-linked.component.scss']
 })
 export class DocumentsLinkedComponent implements OnInit {
-
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  linkedCtrl = new FormControl();
   public selectedUserAndCompanies: Array<DocumentCompanyUser> = [];
-  public showSelect = false;
+
   @Input() editItems: DocumentLinked;
   @Input() isDisabled: boolean = false;
   public tabs = ['User', 'Company'];
   public currentTab = this.tabs[0];
   public usersList = [];
   companiesList: Array<Company> = [];
+  public requsersList = [];
+  reqcompaniesList: Array<Company> = [];
   @Output() onSelectedItem = new EventEmitter<any>();
   sub: Subscription = new Subscription();
   constructor(public cd: ChangeDetectorRef,
@@ -40,6 +48,11 @@ export class DocumentsLinkedComponent implements OnInit {
     this.sub.add(getOnUsers);
   }
 
+  onSearch(event) {
+    this.usersList = this.requsersList.filter(item => `${item.firstName} ${item.lastName}`.toLowerCase().includes(event.target.value));
+    this.companiesList = this.reqcompaniesList.filter(item => item.name.toLowerCase().includes(event.target.value));
+  }
+
   public onGetUsers(data) {
     this.usersList = data.filter(item => {
       if (item.accountType !== 'TECH' && !item.deletedAt) return item;
@@ -52,6 +65,7 @@ export class DocumentsLinkedComponent implements OnInit {
         this.selectedUserAndCompanies.push(new DocumentCompanyUser(user.id, `${user.firstName} ${user.lastName}`, "USER"))
       });
     }
+    this.requsersList = JSON.parse(JSON.stringify(this.usersList));
   }
   private getClientsList(data) {
     this.companiesList = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
@@ -62,6 +76,7 @@ export class DocumentsLinkedComponent implements OnInit {
         this.selectedUserAndCompanies.push(new DocumentCompanyUser(company.id, company.name, "COMPANY"))
       });
     }
+    this.reqcompaniesList = JSON.parse(JSON.stringify(this.companiesList));
   }
 
   public toggleItem(newItem, type) {
@@ -73,6 +88,9 @@ export class DocumentsLinkedComponent implements OnInit {
       if (type === "COMPANY") this.selectedUserAndCompanies.push(new DocumentCompanyUser(newItem.id, newItem.name, "COMPANY"));
     }
     this.onSelectedItem.emit(this.selectedUserAndCompanies);
+    this.linkedCtrl.setValue(null);
+    this.usersList = JSON.parse(JSON.stringify(this.requsersList));
+    this.companiesList = JSON.parse(JSON.stringify(this.reqcompaniesList));
   }
 
   public setCurrentTab($event, item) {
@@ -80,27 +98,14 @@ export class DocumentsLinkedComponent implements OnInit {
     this.currentTab = item;
     this.cd.detectChanges();
   }
-  public hideSelectWrapper() {
-    this.showSelect = false;
 
-  }
-  public showSelectWrapper($event) {
-    if (this.isDisabled) return;
-    this.showSelect = !this.showSelect;
-    this.stopEvent($event);
-    this.cd.detectChanges();
-  }
+
   private stopEvent($event) {
     $event.preventDefault();
     $event.stopPropagation();
   }
 
-  public onClosed() {
-    this.companiesList = [];
-    this.usersList = [];
-    this.currentTab = this.tabs[0];
-    this.showSelect = false;
-  }
+
   isSeleted(item) {
     return this.selectedUserAndCompanies.find(element => element.id === item.id);
   }

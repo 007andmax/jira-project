@@ -3,6 +3,9 @@
         width: 100%;
     }
 }
+.col-md-12 {
+    margin-top: 0px !important;
+}
 .disabled {
     background-color: rgb(235, 235, 228);
     cursor: default !important;
@@ -20,15 +23,15 @@
 }
 
 .select-wrapper {
-    position: absolute;
-    display: block;
+    /* position: absolute;
+    display: block;*/
     width: 366px;
     background: white;
     height: 220px;
-    margin-top: 5px;
+    /* margin-top: 5px;*/
     border-radius: 3px;
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
-    z-index: 9999;
+    /* z-index: 9999;*/
     overflow: hidden;
     .tab-wrapper {
         display: flex;
@@ -81,10 +84,7 @@
                     margin-left: 20px;
                 }
             }
-            > div {
-                display: flex;
-                align-items: center;
-                font-size: 13px !important;
+            .content-item {
                 height: 30px;
                 cursor: pointer;
                 i {
@@ -161,4 +161,37 @@
 .icn-help {
     margin: 0px 0px 0px 4px;
     cursor: pointer;
+}
+/deep/.documents-linkeds-body {
+    .mat-form-field-wrapper,
+    mat-form-field {
+        margin-top: 0px !important;
+    }
+
+    .mat-form-field-infix {
+        min-height: 40px !important;
+        padding: 0 !important;
+
+        &::before {
+            top: 11px;
+            display: none !important;
+        }
+
+        input {
+            height: 38px !important;
+        }
+    }
+    .mat-chip-list-wrapper {
+        margin: 0;
+    }
+    .mat-standard-chip.mat-chip-with-trailing-icon {
+        z-index: 1;
+    }
+    .mat-standard-chip {
+        margin: 2px;
+    }
+    .mat-form-field-label {
+        top: 12px;
+        padding: 12px 10px 10px 10px !important;
+    }
 }
