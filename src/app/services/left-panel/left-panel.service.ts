@@ -25,18 +25,4 @@ export class LeftPanelService {
   public getColors() {
     return this.http.get(this.apiUrl + 'data/getColors');
   }
-
-
-
-  public getCompaniesHistoryTickets() {
-    return this.http.get(this.apiUrl + 'customStorage/user?customKey=ticketPageFilterByCompanyHistory');
-  }
-  public getCompaniesHistoryTicketsUser() {
-    return this.http.get(this.apiUrl + 'customStorage/user?customKey=ticketPageFilterByClientUsersHistory');
-  }
-  public getCompaniesHistoryTechUsers() {
-    return this.http.get(this.apiUrl + 'customStorage/user?customKey=ticketPageFilterByTechUsersHistory');
-  }
-
-
 }

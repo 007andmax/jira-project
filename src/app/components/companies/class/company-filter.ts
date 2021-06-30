@@ -47,6 +47,9 @@ export class CompanyFilter {
         this.tehUser = data.tehUser;
         this.tags = data.tags;
     }
+    public isExistFilters() {
+        return this.clientType || this.clientIndustry || this.tehUser || this.tags.length > 0;
+    }
     public setClientIndustry(data) {
         this.clientIndustry = data;
     }

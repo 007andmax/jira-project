@@ -73,7 +73,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       this.companyFilter.setArchived(data);
       this.clearFilter();
       this.setDefaultScoll();
-      this.getClientsListByFilter();
+      this.getClientsList(this.companiesStateService.getCompanies());
     })
     this.sub.add(getOnShowArchived);
     if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
@@ -118,7 +118,8 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       window.scrollTo(0, 0);
       (<any>document.body.querySelector(".qt-page-list__header-thead-container .qt-checkbox input")).checked = false;
       this.setDefaultScoll();
-      this.getClientsListByFilter();
+      if (this.companyFilter.isExistFilters()) this.getClientsListByFilter();
+      if (!this.companyFilter.isExistFilters()) this.getClientsList(this.companiesStateService.getCompanies());
     })
     this.sub.add(filter);
     let getChangeCompanies = this.companiesStateService.getChangeCompanies().subscribe((data: CompanyUpdate) => {
