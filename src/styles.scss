@@ -1012,8 +1012,8 @@ app-quotes-item {
 .new-users-content__header h3,
 .recurring-tickets-content__header h3,
 .password-content__header h3 {
-  font-family: "Graphik-Regular", sans-serif;
-  font-size: 20px;
+  font-family: Graphik-Semibold, sans-serif;
+  font-size: 16px;
   margin: 0;
 }
 //.products-content__header--search,
@@ -1440,16 +1440,40 @@ app-quotes-item {
       width: max-content;
       min-width: 210px;
       width: 100%;
+
+      .circle-avatar {
+        background-color: #7c77bc;
+        color: #fff;
+        border: none;
+
+        &.with-logo img {
+          margin: 0;
+          border: none;
+          float: unset;
+        }
+      }
     }
     &__address {
       width: 210px;
       max-width: 210px;
       min-width: 210px;
+
+      @media screen and (max-width: 1600px) {
+        width: 260px;
+        max-width: 260px;
+        min-width: 260px;
+      }
     }
     &__primary-contact {
       width: 160px;
       max-width: 160px;
       min-width: 160px;
+
+      @media screen and (max-width: 1600px) {
+        width: 210px;
+        max-width: 210px;
+        min-width: 210px;
+      }
 
       .name {
         color: #4f5f79;
@@ -1463,6 +1487,12 @@ app-quotes-item {
       width: 180px;
       max-width: 180px;
       min-width: 180px;
+
+      @media screen and (max-width: 1600px) {
+        width: 230px;
+        max-width: 230px;
+        min-width: 230px;
+      }
     }
     &__tickets {
       width: 75px;
@@ -1478,6 +1508,13 @@ app-quotes-item {
       width: 65px;
       max-width: 65px;
       min-width: 65px;
+    }
+    &__tickets,
+    &__devices,
+    &__users {
+      @media screen and (max-width: 1600px) {
+        display: none;
+      }
     }
     &__download-btn {
       width: 40px;
@@ -2014,9 +2051,35 @@ app-quotes-item {
   .company-time-zone-drop-down {
     .report-caret-icon {
       position: absolute;
-      right: 15px;
+      right: 10px;
       top: calc(50% - 2px);
     }
+  }
+
+  .user-subscription {
+    background: #fff;
+  }
+  
+  .details-background {
+    padding: 6px 17px 30px;
+    background: #f9fafb;
+    border-top: 1px solid #dfe3e8;
+    border-bottom: 1px solid #dfe3e8;
+    width: calc(100% + 34px);
+    margin-left: -17px;
+    margin-top: 24px;
+
+    > [class*="col-md-"] {
+      margin-top: 20px;
+    }
+  }
+
+  .company-time-zone-drop-down {
+    margin-top: 7px;
+  }
+
+  .light-dropdown .report-caret-icon {
+    right: 10px;
   }
 
   .details-divider {
