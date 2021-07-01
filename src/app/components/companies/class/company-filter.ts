@@ -42,7 +42,8 @@ export class CompanyFilter {
         this.tehUser = data;
     }
     public setFilters(data) {
-        this.clientType = data.clientType;
+        if (data.clientType !== "ARCHIVE") this.clientType = data.clientType;
+        if (data.clientType === "ARCHIVE") this.clientType = null;
         this.clientIndustry = data.clientIndustry;
         this.tehUser = data.tehUser;
         this.tags = data.tags;

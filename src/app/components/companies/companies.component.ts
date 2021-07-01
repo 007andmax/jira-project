@@ -118,8 +118,11 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       window.scrollTo(0, 0);
       (<any>document.body.querySelector(".qt-page-list__header-thead-container .qt-checkbox input")).checked = false;
       this.setDefaultScoll();
+      this.showArchivedCompanies = (data.clientType === "ARCHIVE");
+      this.companyFilter.setArchived(data.clientType === "ARCHIVE");
       if (this.companyFilter.isExistFilters()) this.getClientsListByFilter();
       if (!this.companyFilter.isExistFilters()) this.getClientsList(this.companiesStateService.getCompanies());
+
     })
     this.sub.add(filter);
     let getChangeCompanies = this.companiesStateService.getChangeCompanies().subscribe((data: CompanyUpdate) => {

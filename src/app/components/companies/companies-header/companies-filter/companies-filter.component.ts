@@ -4,6 +4,7 @@ import { ItemFilterPerson } from 'src/app/components/left-panel/left-panel-compa
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { CompanyIndustry } from 'src/app/interfaces/company/company-industry';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CompanyFilter } from '../../class/company-filter';
 import { CompanySetting } from '../../class/company-setting';
@@ -15,7 +16,10 @@ import { CompanyTagsComponent } from '../../company-tags/company-tags.component'
   styleUrls: ['./companies-filter.component.scss']
 })
 export class CompaniesFilterComponent implements OnInit {
-  companyTypes = [new CompanySetting('Client', 'CLIENT'), new CompanySetting('Lead', 'LEAD'), new CompanySetting('Vendor', 'VENDOR')];
+  companyTypes = [new CompanySetting('Client', 'CLIENT'),
+  new CompanySetting('Lead', 'LEAD'),
+  new CompanySetting('Vendor', 'VENDOR'),
+  new CompanySetting('Archive', 'ARCHIVE')];
   industries: Array<CompanyIndustry> = [];
   listPersons: Array<ItemFilterPerson> = [];
   companyFilter: CompanyFilter = new CompanyFilter();
@@ -26,6 +30,7 @@ export class CompaniesFilterComponent implements OnInit {
   @Output() changeCountFilter = new EventEmitter<any>();
   sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
+    private leftPanelStateService: LeftPanelStateService,
     private usersStateService: UsersStateService) { }
 
   ngOnInit() {
@@ -42,6 +47,10 @@ export class CompaniesFilterComponent implements OnInit {
 
     })
     this.sub.add(getOnUsers);
+    let onChangeFilter = this.leftPanelStateService.onChangeFilter.subscribe(data => {
+      this.typesDp.onSelect(this.companyTypes.find(item => item.value === data));
+    })
+    this.sub.add(onChangeFilter);
   }
   private getTehusers(list) {
     list.forEach((item) => {
