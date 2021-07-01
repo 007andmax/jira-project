@@ -78,6 +78,9 @@ export class CompanyDashTagsComponent implements OnInit, OnDestroy {
     this.sub.add(getClearState);
   }
 
+  public setSelectedTag(data) {
+    this.selectedTag = data;
+  }
   onKeyUp(event) {
 
     if (event.keyCode === 13) {

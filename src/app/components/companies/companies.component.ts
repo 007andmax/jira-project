@@ -64,18 +64,6 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     window.scrollTo(0, 0);
     this.left_filter = this.leftPanelStateService.getFilter();
-    this.showArchivedCompanies = this.companiesStateService.getShowArchivedCompanies();
-    let getOnShowArchived = this.companiesStateService.getOnShowArchived().subscribe(data => {
-      this.showPreloader = true;
-      this.showArchivedCompanies = data;
-      window.scrollTo(0, 0);
-      (<any>document.body.querySelector(".qt-page-list__header-thead-container .qt-checkbox input")).checked = false;
-      this.companyFilter.setArchived(data);
-      this.clearFilter();
-      this.setDefaultScoll();
-      this.getClientsList(this.companiesStateService.getCompanies());
-    })
-    this.sub.add(getOnShowArchived);
     if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.getClientsList(data);

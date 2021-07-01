@@ -74,7 +74,7 @@
             <app-drop-down
                 [class]="['light-dropdown', 'qt-select-input-40']"
                 [placeholder]="'Select Client Type'"
-                [editItem]="(company.clientIndustry.name) ? company.clientIndustry.name : null"
+                [editItem]="getSelectedClientTypes()"
                 [list]="industries"
                 [field]="'name'"
                 [search]="true"
@@ -231,6 +231,7 @@
                         </ng-template>
                     </div>
                 </div>
+
 
 
             </div>

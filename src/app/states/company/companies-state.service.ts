@@ -21,7 +21,6 @@ export class CompaniesStateService {
   onGetIndustries: EventEmitter<any> = new EventEmitter();
   onChangeCompanies: EventEmitter<CompanyUpdate> = new EventEmitter();
   showAsideForAdd: EventEmitter<any> = new EventEmitter();
-  onShowArchived: EventEmitter<any> = new EventEmitter();
   onEditCompany: EventEmitter<CompanyProfile> = new EventEmitter();
   companyForArchive: Company = null;
   companyForDeArchive: Company = null;
@@ -142,12 +141,6 @@ export class CompaniesStateService {
   }
   public getCompanyFortDeArchive() {
     return this.companyForDeArchive;
-  }
-  public getOnShowArchived() {
-    return this.onShowArchived;
-  }
-  public setOnShowArchived(data) {
-    this.onShowArchived.emit(data);
   }
   public toggleAsideForAdd() {
     this.showAsideForAdd.emit();

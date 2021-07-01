@@ -64,9 +64,8 @@ export class LeftPanelCompaniesComponent implements OnInit {
 
   onShowAll() {
     this.clientType = null;
-    this.companiesState.setOnShowArchived(false);
     this.showArchivedCompanies = false;
-    this.companiesState.setShowArchivedCompanies(false);
+    this.leftPanelStateService.onInitFilter(null);
   }
   onShowArchived() {
     this.clientType = null;

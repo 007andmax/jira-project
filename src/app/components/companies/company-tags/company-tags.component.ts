@@ -146,6 +146,10 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
     this.tagCtrl.setValue(null);
   }
 
+  public setSelectedTag(data) {
+    this.selectedTag = data;
+  }
+
   /**
    * Close tags list
    */

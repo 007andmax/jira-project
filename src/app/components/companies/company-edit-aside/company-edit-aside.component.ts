@@ -165,7 +165,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
       if (indexPersone > -1) this.selectedTechLead = this.listPersons[indexPersone];
       let indexType = this.companyTypes.findIndex(item => item.value === this.company.clientType);
       if (indexType > -1) this.onSelectCompanyTypes(this.companyTypes[indexType]);
-      this.companyTags.setEditItems(this.company.tags.map(item => item.id));
+      this.companyTags.setSelectedTag(this.company.tags);
       this.elRef.nativeElement.querySelector("#company-description").value = this.company.description;
       this.opened = true;
       this.cd.detectChanges();
@@ -295,6 +295,11 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
           1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
       }
     })
+  }
+  getSelectedClientTypes() {
+    let index = this.industries.findIndex(item => item.name === (this.company.clientIndustry.name) ? this.company.clientIndustry.name : null);
+    if (index > -1) return this.industries[index];
+    return null;
   }
   getSelectedCompanyTypes() {
     let index = this.companyTypes.findIndex(item => item.value === this.company.clientType);
