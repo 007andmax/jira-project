@@ -398,6 +398,8 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     return item.id;
   }
   ngOnDestroy(): void {
+    this.reqCompaniesList.forEach(item => item.selected = false);
+    this.draftEmailStateService.resetSelectedCompanies();
     this.sub.unsubscribe();
   }
 }

@@ -195,6 +195,12 @@
         <div class="col-md-6">
             <p>Phone Number</p>
             <div class="with-number-types">
+                <input
+                    type="text"
+                    *ngIf="company.contacts[0].phoneNumbers.length > 0"
+                    [(ngModel)]="company.contacts[0].phoneNumbers[0].number"
+                    placeholder="Enter Phone Number"
+                >
                 <div
                     class="grey-dropdown"
                     ngbDropdown
@@ -225,12 +231,8 @@
                         </ng-template>
                     </div>
                 </div>
-                <input
-                    type="text"
-                    *ngIf="company.contacts[0].phoneNumbers.length > 0"
-                    [(ngModel)]="company.contacts[0].phoneNumbers[0].number"
-                    placeholder="Enter Phone Number"
-                >
+
+
             </div>
         </div>
         <div class="col-md-6 --required">

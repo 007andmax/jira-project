@@ -20,6 +20,7 @@ import { CompanyIndustry } from 'src/app/interfaces/company/company-industry';
   styleUrls: ['./company-add-aside-full.component.scss']
 })
 export class CompanyAddAsideFullComponent implements OnInit {
+  phoneTypes = ['Office', 'Mobile', 'Fax'];
   companyTypes = [new CompanySetting('Client', 'CLIENT'), new CompanySetting('Lead', 'LEAD'), new CompanySetting('Vendor', 'VENDOR')];
   paymentTerms = [new CompanySetting('COD', 0), new CompanySetting('7 days', 7), new CompanySetting('15 days', 15), new CompanySetting('30 days', 30)];
   paymentMethods = [new CompanySetting('Cash', 'CASH'),
