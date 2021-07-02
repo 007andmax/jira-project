@@ -156,7 +156,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     document.body.querySelector('app-left-panel-companies').classList.add('show');
   }
   private onInirCalculate() {
-    this.calculateCount.onCalculate(this.reqCompaniesList, this.left_filter);
+    this.calculateCount.onCalculate(this.reqCompaniesList, this.companyFilter.clientType);
     this.companiesStateService.setCalculateCount(this.calculateCount);
   }
   private getClientsList(data) {
