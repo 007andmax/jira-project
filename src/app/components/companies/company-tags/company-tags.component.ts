@@ -7,20 +7,24 @@ import { Tag } from 'src/app/interfaces/tag/tag';
 import { TagsService } from 'src/app/services/tags/tags.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { TagsStateService } from 'src/app/states/tags/tags-state.service';
+import { CompanyTagsListService } from './services/company-tags-list.service';
 
 @Component({
   selector: 'app-company-tags',
   templateUrl: './company-tags.component.html',
-  styleUrls: ['./company-tags.component.scss']
+  styleUrls: ['./company-tags.component.scss'],
+  providers: [CompanyTagsListService]
 })
 export class CompanyTagsComponent implements OnInit, OnDestroy {
-
+  page: number = 0;
+  public infiniteScrollDisabled = true;
+  searchName: string = "";
   selectable = true;
   removable = true;
   addOnBlur = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   tagCtrl = new FormControl();
-  selectedTag = [];
+  @Input() selectedTag: Array<Tag> = [];
   tags: Array<Tag> = [];
   reqTags: Array<Tag> = [];
   sub = new Subscription();
@@ -39,6 +43,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
     private tagsState: CompanyTagsStateService,
     private tagsStateService: TagsStateService,
     private companiesStateService: CompaniesStateService,
+    private companyTagsListService: CompanyTagsListService,
     public cd: ChangeDetectorRef
   ) { }
 
@@ -46,15 +51,15 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-    this.tags = this.tagsStateService.getTags();
-    this.reqTags = JSON.parse(JSON.stringify(this.tagsStateService.getTags()));
-    let getTags = this.tagsStateService.onGetTags.subscribe((data: Array<Tag>) => {
-
-      this.tags = data;
-      this.reqTags = JSON.parse(JSON.stringify(data));
-      this.onCheckEditItem();
-    })
-    this.sub.add(getTags);
+    /* this.tags = this.tagsStateService.getTags();
+     this.reqTags = JSON.parse(JSON.stringify(this.tagsStateService.getTags()));
+     let getTags = this.tagsStateService.onGetTags.subscribe((data: Array<Tag>) => {
+ 
+       this.tags = data;
+       this.reqTags = JSON.parse(JSON.stringify(data));
+       this.onCheckEditItem();
+     })
+     this.sub.add(getTags);*/
     this.onInitClearState();
     this.onCheckEditItem();
   }
@@ -63,7 +68,9 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
     return (company) ? company.name : '';
   }
   onSearch(event) {
-    this.tags = this.reqTags.filter(item => item.word.includes(event.target.value));
+    this.searchName = event.target.value;
+    this.setDefaultScoll();
+    this.onScroll();
   }
 
   /**
@@ -82,6 +89,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
 
     this.selectedTag = [];
   }
+
   /**
   * Subscribe for clear data
   */
@@ -89,7 +97,36 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
     let getClearState = this.tagsState.getClearState().subscribe(() => this.close());
     this.sub.add(getClearState);
   }
-
+  public setDefaultScoll() {
+    this.page = 0;
+    this.companyTagsListService.setBlockList(false);
+    this.tags = [];
+    this.reqTags = [];
+  }
+  public onScroll() {
+    console.log("onScroll");
+    this.infiniteScrollDisabled = true;
+    this.getTags();
+  }
+  getTags() {
+    if (this.companyTagsListService.getBlockList()) {
+      this.infiniteScrollDisabled = false;
+      return;
+    }
+    this.tagsService.search(this.page, this.searchName).subscribe((data: any) => {
+      this.tags = [...this.tags, ...data.commonTagViews];
+      this.reqTags = [...this.reqTags, ...JSON.parse(JSON.stringify(data.commonTagViews))];
+      this.page++;
+      this.infiniteScrollDisabled = false;
+      if (this.reqTags.length === data.totalElements) this.companyTagsListService.setBlockList(true);
+    })
+  }
+  openChange(open) {
+    if (open) {
+      this.setDefaultScoll();
+      this.onScroll();
+    }
+  }
   onKeyUp(event) {
     if (event.keyCode === 13) {
       const input = event.target.input;

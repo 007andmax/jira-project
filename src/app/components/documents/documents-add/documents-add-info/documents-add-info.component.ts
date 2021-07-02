@@ -13,6 +13,7 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { DocumentsLinkedComponent } from './documents-linked/documents-linked.component';
+import { CompanyTagsStateService } from 'src/app/components/companies/company-tags/states/company-tags-state.service';
 
 @Component({
   selector: 'app-documents-add-info',
@@ -40,6 +41,7 @@ export class DocumentsAddInfoComponent implements OnInit {
     public documentsService: DocumentsService,
     public cd: ChangeDetectorRef,
     private router: Router,
+    public tagsState: CompanyTagsStateService,
     private permissionsService: PermissionsService,
     public activateRoute: ActivatedRoute,) {
   }
@@ -93,7 +95,7 @@ export class DocumentsAddInfoComponent implements OnInit {
     this.documentAdd.setReviewDate(moment(new Date(date.year, date.month - 1, date.day)).format('YYYY/MM/DD'));
   }
   onSelectTags(data) {
-    this.documentAdd.setTags(data.map(item => item.id));
+    this.documentAdd.setTags(data);
   }
   getSelectedClientType() {
     return this.companyTypes.find(item => item.type === this.documentAdd.clientType);

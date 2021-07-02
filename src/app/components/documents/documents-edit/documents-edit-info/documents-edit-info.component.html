@@ -117,8 +117,8 @@
                 <div class="documents-create__col">
                     <app-company-tags
                         #tagsDp
-                        [editItems]="documentEdit.tags"
                         class="documents-filter-tags"
+                        [selectedTag]="documentEdit.tags"
                         (tagsChange)="onSelectTags($event)"
                     ></app-company-tags>
                 </div>

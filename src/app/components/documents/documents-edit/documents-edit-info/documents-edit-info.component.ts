@@ -28,6 +28,9 @@ export class DocumentsEditInfoComponent extends DocumentsAddInfoComponent {
       this.categories = data;
     })
     if (this.documentEdit.clientType) this.requiredCompanyType = true;
+    console.log("this.documentEdit", this.documentEdit);
+    console.log("tagsDp", this.tagsDp);
+
   }
   onChangeTitle() {
     this.documentsService.checkTitle(this.documentEdit.title, this.documentEdit.id).subscribe(data => {
@@ -43,7 +46,7 @@ export class DocumentsEditInfoComponent extends DocumentsAddInfoComponent {
     this.documentEdit.setCategoryId((data) ? data.id : null);
   }
   onSelectTags(data) {
-    this.documentEdit.setTags(data.map(item => item.id));
+    this.documentEdit.setTags(data);
   }
   onResetCompanyType() {
     this.companyTypeDp.clearWithOutChanges();

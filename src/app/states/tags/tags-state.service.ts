@@ -13,8 +13,8 @@ export class TagsStateService {
     private tagsRealTimeService: TagsRealTimeService,) { }
 
   public onInit() {
-    this.tagsService.geCompanyTags().subscribe((data: Array<Tag>) => {
-      this.tags = data.sort((a, b) => ((a.word ? a.word : "").toLowerCase() > (b.word ? b.word : "").toLowerCase()) ?
+    this.tagsService.geCompanyTags().subscribe((data: any) => {
+      this.tags = data.commonTagViews.sort((a, b) => ((a.word ? a.word : "").toLowerCase() > (b.word ? b.word : "").toLowerCase()) ?
         1 : (((b.word ? b.word : "").toLowerCase() > (a.word ? a.word : "").toLowerCase()) ? -1 : 0));
       this.onGetTags.emit(this.tags);
     })

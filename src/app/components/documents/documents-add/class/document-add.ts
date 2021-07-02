@@ -1,3 +1,4 @@
+import { Tag } from "src/app/interfaces/tag/tag";
 import { DocumentAddLinked } from "./document-add-linked";
 
 export class DocumentAdd {
@@ -9,7 +10,7 @@ export class DocumentAdd {
     documentType: string;
     clientType: string;
     reviewDate: string;
-    tags: Array<string> = [];
+    tags: Array<Tag> = [];
     linked: DocumentAddLinked = new DocumentAddLinked();
     constructor() {
 
@@ -23,7 +24,9 @@ export class DocumentAdd {
             documentType: this.documentType,
             clientType: this.clientType,
             reviewDate: this.reviewDate,
-            tags: this.tags,
+            tags: this.tags.map((item: any) => {
+                return { id: item.id }
+            }),
             linked: this.linked,
         }
     }
@@ -36,7 +39,9 @@ export class DocumentAdd {
             documentType: this.documentType,
             clientType: this.clientType,
             reviewDate: this.reviewDate,
-            tags: this.tags,
+            tags: this.tags.map((item: any) => {
+                return { id: item.id }
+            }),
             templateId: templateId,
             clientCompanyId: clientCompanyId,
             linked: this.linked,

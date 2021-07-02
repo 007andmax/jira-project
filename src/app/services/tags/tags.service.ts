@@ -30,6 +30,14 @@ export class TagsService {
     return this.http.put(`${this.apiUrl}settings/companyProfile/allowUsersCreateTags?allow=${value}`, {});
   }
 
+  search(page, partWord) {
+    if (partWord.length === 0) return this.http.get(this.apiUrl + `commonTags/getAll?page=${page}&size=20`)
+    return this.http.get(this.apiUrl + `commonTags/filter?page=${page}&size=20&partWord=${partWord}`)
+  }
+  getTagsCompanyById(companyId) {
+    return this.http.get(this.apiUrl + `commonTags/filter?page=0&size=20&companyId=${companyId}`)
+
+  }
   setWordForTag(tagId, word, tag) {
     if (tag === "ticket") {
       return this.http.put(

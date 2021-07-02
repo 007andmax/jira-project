@@ -1,3 +1,4 @@
+import { Tag } from "src/app/interfaces/tag/tag";
 import { DocumentLinked } from "./document-linked";
 
 export class Document {
@@ -12,7 +13,7 @@ export class Document {
     id: string;
     linked: DocumentLinked;
     reviewDate: string;
-    tags: []
+    tags: Array<Tag> = [];
     title: string;
     updatedAt: string;
     isCategory: boolean = false;
@@ -44,7 +45,9 @@ export class Document {
             description: (this.description && this.description.length > 0) ? this.description : undefined,
             reviewDate: this.reviewDate,
             categoryId: this.categoryId,
-            tags: this.tags,
+            tags: this.tags.map((item: any) => {
+                return { id: item.id }
+            }),
             linked: this.linked
         }
     }

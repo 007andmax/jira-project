@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
+import { TagsService } from 'src/app/services/tags/tags.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { TagsStateService } from 'src/app/states/tags/tags-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
@@ -28,6 +29,7 @@ export class DocumentsAddComponent implements OnInit {
     public activateRoute: ActivatedRoute,
     public documentsService: DocumentsService,
     public cd: ChangeDetectorRef,
+    public tagsService: TagsService,
     private tagsStateService: TagsStateService,
     public leftPanelStateService: LeftPanelStateService) {
   }
@@ -46,11 +48,14 @@ export class DocumentsAddComponent implements OnInit {
 
             this.documentValidate.setUniqueTittle(false);
             if (queryParam['template']) {
-              let companyTag = this.tagsStateService.getTags().find(item => item.companyId === this.companyId);
-              console.log("companyTag", companyTag);
-              if (companyTag) this.documentAdd.tags.push(companyTag.id);
-              this.documentAdd.setClientType(null);
-              this.documentAdd.linked.companies.push(this.companyId);
+              this.tagsService.getTagsCompanyById(this.companyId).subscribe((tags: any) => {
+                let companyTag = tags.commonTagViews;
+                console.log("companyTag", companyTag);
+                if (companyTag) this.documentAdd.tags.push(...companyTag);
+                this.documentAdd.setClientType(null);
+                this.documentAdd.linked.companies.push(this.companyId);
+              })
+
             }
             this.showPreloader = false;
             this.cd.detectChanges();
