@@ -13,11 +13,7 @@ export class TagsStateService {
     private tagsRealTimeService: TagsRealTimeService,) { }
 
   public onInit() {
-    this.tagsService.geCompanyTags().subscribe((data: any) => {
-      this.tags = data.commonTagViews.sort((a, b) => ((a.word ? a.word : "").toLowerCase() > (b.word ? b.word : "").toLowerCase()) ?
-        1 : (((b.word ? b.word : "").toLowerCase() > (a.word ? a.word : "").toLowerCase()) ? -1 : 0));
-      this.onGetTags.emit(this.tags);
-    })
+
     this.tagsRealTimeService.changeTagsArray.subscribe((data: any) => {
       if (data.action === "TAG_SAVED" && data.data instanceof Array) this.tags = [...this.tags, ...data.data];
       if (data.action === "TAG_SAVED" && data.data instanceof Object) {

@@ -22,10 +22,6 @@ export class TagsService {
     return this.http.get(`${this.apiUrl}tags/getAll`);
   }
 
-  public geCompanyTags() {
-    return this.http.get(this.apiUrl + `commonTags/getAll`)
-  }
-
   saveAllowingCreateCustomTags(value) {
     return this.http.put(`${this.apiUrl}settings/companyProfile/allowUsersCreateTags?allow=${value}`, {});
   }

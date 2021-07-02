@@ -18,6 +18,7 @@ import { CompanyTagsListService } from './services/company-tags-list.service';
 export class CompanyTagsComponent implements OnInit, OnDestroy {
   page: number = 0;
   public infiniteScrollDisabled = true;
+  showPreloader: boolean = true;
   searchName: string = "";
   selectable = true;
   removable = true;
@@ -119,10 +120,12 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
       this.page++;
       this.infiniteScrollDisabled = false;
       if (this.reqTags.length === data.totalElements) this.companyTagsListService.setBlockList(true);
+      this.showPreloader = false;
     })
   }
   openChange(open) {
     if (open) {
+      this.showPreloader = true;
       this.setDefaultScoll();
       this.onScroll();
     }
