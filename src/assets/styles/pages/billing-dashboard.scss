@@ -81,7 +81,7 @@
       line-height: 1.56;
       letter-spacing: -0.5px;
       color: $primary-2;
-      font-family: Graphik-Medium, sans-serif;
+     font-weight: 600;
       white-space: nowrap;
     }
     &__chart-content {
@@ -94,7 +94,7 @@
       justify-content: center;
     }
     &__title {
-      font-family: Graphik-Semibold, sans-serif;
+      font-weight: 600;
       font-size: 22px;
       line-height: 1.27;
       color: $primary-2;
@@ -133,7 +133,7 @@
       font-size: 12px;
       color: $primary-2;
       line-height: 1.33;
-      font-family: Graphik-Medium, sans-serif;
+     font-weight: 600;
   }
 
 
@@ -186,7 +186,7 @@
       flex-direction: column;
     }
     &__title {
-      font-family: Graphik-Semibold, sans-serif;
+      font-weight: 600;
       font-size: 22px;
       line-height: 1.27;
       color: $primary-2;
@@ -200,7 +200,7 @@
       width: 100%;
     }
     &__grow-info {
-      font-family: Graphik-Medium, sans-serif;
+     font-weight: 600;
       font-size: 10px;
       display: flex;
       align-items: center;
@@ -238,7 +238,7 @@
       padding: 16px 24px 14px 24px;
       font-size: 15px;
       color: $primary-2;
-      font-family: Graphik-Semibold, sans-serif;
+      font-weight: 600;
       line-height: 1.47;
     }
     &__table {
@@ -250,7 +250,7 @@
         text-transform: uppercase;
         font-size: 10px;
         color: $gray-600;
-        font-family: Graphik-Medium, sans-serif;
+       font-weight: 600;
         &.contract-info-list__table--number {
           padding-left: 26px;
           width: 52px;
@@ -284,7 +284,7 @@
       }
       &--revenue {
         text-align: right;
-        font-family: Graphik-Medium, sans-serif;
+       font-weight: 600;
       }
       &--number-circle-outer {
         width: 24px;
@@ -306,7 +306,7 @@
         justify-content: center;
         font-size: 10px;
         color: $gray-800;
-        font-family: Graphik-Medium, sans-serif;
+       font-weight: 600;
       }
     }
 
@@ -325,7 +325,7 @@
     border-radius: 8px;
     background-color: $white;
     &__header-title {
-      font-family: Graphik-Medium, sans-serif;
+     font-weight: 600;
       font-size: 26px;
       line-height: 1.31;
       letter-spacing: -0.5px;
@@ -376,7 +376,7 @@
       font-size: 12px;
       line-height: 1.33;
       color: $primary-2;
-      font-family: Graphik-Medium, sans-serif;
+     font-weight: 600;
     }
   }
 
@@ -396,7 +396,7 @@
     .nvd3 text {
       font-size: 12px;
       fill: $gray-800;
-      font-family: Graphik-Regular, sans-serif;
+      font-weight: 400;
     }
     .nv-axisMaxMin, .nv-axisMaxMin, .nv-axisMaxMin, .nv-axisMinMax {
       opacity: 0;

@@ -36,7 +36,7 @@
 
   .payment-info-lines {
     &__title {
-      font-family: Graphik-Medium, sans-serif;
+     font-weight: 600;
       font-size: 13px;
       width: 142px;
       color: $primary-2;
@@ -82,12 +82,12 @@
     th {
       border-top: solid 1px $gray-400;
       background-color: $gray-100;
-      font-family: Graphik-Medium, sans-serif;
+     font-weight: 600;
     }
 
     td.payment-table__number {
       color: $primary-1;
-      font-family: Graphik-Medium, sans-serif;
+     font-weight: 600;
     }
   }
 

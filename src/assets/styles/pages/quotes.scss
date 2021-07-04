@@ -75,7 +75,7 @@
       padding-right: 8px;
     }
     td.quotes-table__number {
-      font-family: Graphik-Medium, sans-serif;
+     font-weight: 600;
       color: $primary-1;
       padding-top: 14px;
     }
@@ -348,7 +348,7 @@
       line-height: 1.54;
       letter-spacing: normal;
       color: $gray-600;
-      font-family: Graphik-Regular, sans-serif;
+      font-weight: 400;
       position: absolute;
       left: 14px;
       top: 22px;

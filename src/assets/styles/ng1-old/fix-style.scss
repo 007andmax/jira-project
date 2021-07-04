@@ -1,7 +1,8 @@
 @import './src/assets/styles/variable';
 
 html {
-  font-family: 'Graphik-Regular', sans-serif;
+  font-family: "Inter";
+  font-weight: 400;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   overflow-y: scroll;
@@ -14,9 +15,12 @@ body {
   /*min-width: 1200px;*/
   overflow: hidden;
   display: initial;
-  font-family: 'Graphik-Regular', sans-serif;
-  font-size: 14px;
-  line-height: 24px;
+  //font-weight: 400;
+  //font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  line-height: 20;
+  //line-height: 24px;
   color: $gray-800;
   background-color: $white;
 }
@@ -30,7 +34,7 @@ body input::-ms-clear {
 
 _::-webkit-:host:not(:root:root),
 body .left-panel-full {
-  font-family: 'Graphik-Medium', sans-serif;
+  font-weight: 600;
 }
 
 .btn-success {
@@ -85,7 +89,7 @@ body .left-panel-full {
     margin-bottom: 24px;
 
     p {
-      font-family: "Graphik-Medium", sans-serif;
+      font-weight: 600;
       font-size: 13px;
       margin-bottom: 8px;
     }
@@ -101,7 +105,7 @@ body .left-panel-full {
     background: none;
     color: $primary-1;
     font-size: 16px;
-    font-family: "Graphik-Regular", sans-serif;
+    font-weight: 400;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -176,7 +180,7 @@ body .left-panel-full {
 }
 
 .recurring-tickets-content__modal .checkbox-wrapper .with-checkbox p, .new-companies-content__modal .checkbox-wrapper .with-checkbox p, .new-users-content__modal .checkbox-wrapper .with-checkbox p {
-  font-family: "Graphik-Regular", sans-serif;
+  font-weight: 400;
   margin: 0;
 }
 
@@ -202,11 +206,11 @@ a:hover, a:focus {
 }
 
 body .topNavbar {
-  font-family: 'Graphik-Medium', sans-serif;
+  font-weight: 600;
 }
 
 body .topNavbar strong span {
-  font-family: 'Graphik-Medium', sans-serif;
+  font-weight: 600;
 }
 
 /* SCROLLBAR */
@@ -306,11 +310,11 @@ p {
   font-size: 14px;
   margin: 0;
   line-height: 24px;
-  font-family: 'Graphik-Regular', sans-serif;
+  font-weight: 400;
 }
 
 .new-companies-content__modal--content > [class*="col-md-"] p, .new-users-content__modal--content > [class*="col-md-"] p, .recurring-tickets-content__modal--content > [class*="col-md-"] p, .new-users-content__modal--content app-interval > [class*="col-md-"] p, .recurring-tickets-content__modal--content app-interval > [class*="col-md-"] p, .password-content__modal--content > [class*="col-md-"] p {
-  font-family: "Graphik-Medium", sans-serif;
+  font-weight: 600;
   font-size: 13px;
   margin-bottom: 8px;
 }
@@ -349,7 +353,7 @@ p {
 }
 
 .new-link {
-  font-family: "Graphik Regular", sans-serif;
+  font-weight: 400;
   font-size: 12px;
   color: $primary-1 !important;
   text-decoration: none;
@@ -467,11 +471,11 @@ strong {
   font-weight: 700;
 }
 .company-new-cover-wrapper p, strong {
-  font-family: 'Graphik-Medium', sans-serif;
+  font-weight: 600;
 }
 
 .company-new-cover-wrapper p, strong {
-  font-family: 'Graphik-Medium', sans-serif;
+  font-weight: 600;
 }
 
 .p-0 {
@@ -514,7 +518,7 @@ textarea {
   padding: 0 10px;
   font-size: 11px;
   border-radius: 3px;
-  font-family: "Graphik-Medium", sans-serif;
+  font-weight: 600;
   border: none;
   text-align: center;
   width: auto;
@@ -807,7 +811,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   border: none;
   background: $gray-200;
   box-shadow: none;
-  font-family: "Graphik-Medium", sans-serif;
+  font-weight: 600;
 }
 
 .company-report li.content-product-list-ticket {

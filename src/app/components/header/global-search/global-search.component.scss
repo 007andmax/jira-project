@@ -57,7 +57,7 @@
       justify-content: center;
       border-bottom: 2px solid transparent;
       flex-grow: 1;
-      font-family: Graphik-Medium, sans-serif;
+     font-weight: 600;
       &.--active {
         border-color: $primary-1;
         color: $primary-1;
@@ -82,7 +82,7 @@
     font-size: 13px;
     line-height: 1.54;
     color: $primary-2;
-    font-family: Graphik-Medium, sans-serif;
+   font-weight: 600;
   }
 
   &__menu-item-subtitle {
@@ -103,7 +103,7 @@
     color: $white;
     font-size: 12px;
     margin-right: 8px;
-    font-family: Graphik-Medium, sans-serif;
+   font-weight: 600;
     cursor: pointer;
   }
 

@@ -92,7 +92,7 @@
     letter-spacing: normal;
     color: $gray-600;
     white-space: nowrap;
-    font-family: Graphik-Medium, sans-serif;
+   font-weight: 600;
   }
 
   &__menu-icon {
@@ -182,7 +182,7 @@
     }
     &.--active {
       color: $primary-1;
-      font-family: Graphik-Medium, sans-serif;
+     font-weight: 600;
       background-color: darken($primary-2, 5%);
       a {
         color: $primary-1;

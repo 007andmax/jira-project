@@ -27,7 +27,6 @@ $secondary-4: #2bc7c6;
 $success: #2ec866;
 $warning: #ffb937;
 $error: #ff5263;
-//$gray-900: #212b36;
 $gray-800: #454f5b;
 $gray-700: #637382;
 $gray-600: #919eab;
@@ -39,6 +38,38 @@ $gray-100: #f9fafb;
 $white: #ffffff;
 $background: #edf2f6;
 
+//font
+$fs-light: 300;
+$fs-regular: 400;
+$fs-medium: 500;
+$fs-semi-bold: 600;
+$fs-bold: 700;
+$fs-extra-bold: 800;
+$fs-black: 900;
 
+@mixin font-style($fsize, $fline-height, $fweight, $letter-spacing) {
+  font-size: $fsize;
+  line-height: $fline-height;
+  font-weight: $fweight;
+  letter-spacing: $letter-spacing;
+}
 
+//.body-l {
+//  @include font-style(40px, 48px, 300, -2.5px);
+//}
+//.body-m {
+//  @include font-style(40px, 48px, 300, -2.5px);
+//}
+//.сaption-l {
+//  @include font-style(40px, 48px, 300, -2.5px);
+//}
+//.сaption-m {
+//  @include font-style(40px, 48px, 300, -2.5px);
+//}
+//.label-l {
+//  @include font-style(40px, 48px, 300, -2.5px);
+//}
+//.label-m {
+//  @include font-style(40px, 48px, 300, -2.5px);
+//}
 

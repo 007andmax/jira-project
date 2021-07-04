@@ -111,7 +111,7 @@
 
     }
     &__title {
-      font-family: Graphik-Semibold, sans-serif;
+      font-weight: 600;
       color: $primary-2;
       font-size: 16px;
       line-height: 1.63;
@@ -147,7 +147,7 @@
       justify-content: center;
       color: $gray-800;
       font-size: 13px;
-      font-family: Graphik-Semibold, sans-serif;
+      font-weight: 600;
       border-radius: 50%;
     }
   }
@@ -230,7 +230,7 @@
         .tag__modern {
           text-transform: uppercase;
           font-size: 9px;
-          font-family: Graphik-Semibold, sans-serif;
+          font-weight: 600;
           padding-left: 6px;
           padding-right: 6px;
         }

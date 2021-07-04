@@ -21,7 +21,7 @@
   align-items: center;
 }
 .ff-g-m {
-  font-family: Graphik-Medium, sans-serif;
+ font-weight: 600;
 }
 .fw-600 {
   font-weight: 600;
@@ -65,7 +65,7 @@
   border-radius: 50%;
   text-transform: uppercase;
   font-size: 11px;
-  font-family: Graphik-Medium, sans-serif;
+ font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -86,7 +86,6 @@
   color: $primary-1;
   border: 1px solid $primary-1;
   font-size: 12px;
-  font-family: "Graphik-Semibold", sans-serif;
   font-weight: 600;
   &:hover {
     background: $primary-1;
@@ -393,7 +392,7 @@ app-left-panel-tags {
       }
     }
     .ngx-editor-placeholder {
-      font-family: "Graphik-Regular", sans-serif !important;
+      font-weight: 400;
       font-size: 13px !important;
       padding: 24px !important;
       line-height: 1.54;
@@ -445,7 +444,7 @@ app-left-panel-tags {
     margin: 0 20px;
     font-size: 12px;
     > div {
-      font-family: "Graphik-Semibold", sans-serif;
+      font-weight: 600;
       padding: 3px 0;
       cursor: pointer;
       margin-right: 24px;
@@ -482,7 +481,7 @@ app-left-panel-tags {
         &:before {
           position: absolute;
           content: 'Tags';
-          font-family: "Graphik-Medium", sans-serif;
+          font-weight: 600;
           font-size: 13px;
           left: 0;
           top: -28px;
@@ -491,7 +490,7 @@ app-left-panel-tags {
       .mat-form-field-appearance-legacy .mat-form-field-label {
         padding: 12px 10px 10px 36px;
         font-size: 13px;
-        font-family: "Graphik-Regular", sans-serif;
+        font-weight: 400;
         color: $gray-600;
       }
       .mat-form-field-infix {
@@ -612,10 +611,9 @@ app-left-panel-tags {
   position: relative;
   &.confirm-user-modal {
     h3 {
-      font-family: 'Graphik-Regular', sans-serif !important;
+      font-weight: 400;
       font-size: 13px !important;
       margin: 15px 0 !important;
-      font-weight: 500 !important;
       &:before {
         top: -17px !important;
       }
@@ -632,9 +630,8 @@ app-left-panel-tags {
     margin-bottom: 50px;
     padding-left: 70px;
     h3 {
-      font-family: "Graphik-Semibold", sans-serif;
-      font-size: 20px;
       font-weight: 600;
+      font-size: 20px;
       line-height: 1.4;
       color: $primary-2;
       position: relative;
@@ -661,7 +658,7 @@ app-left-panel-tags {
       }
     }
     p {
-      font-family: "Graphik-Regular", sans-serif;
+      font-weight: 400;
       font-size: 13px;
       line-height: 1.54;
     }
@@ -672,7 +669,7 @@ app-left-panel-tags {
       height: 48px;
       border-radius: 4px;
       font-size: 14px;
-      font-family: "Graphik-Medium", sans-serif;
+      font-weight: 600;
     }
     .btn-primary {
       margin-right: 16px;
@@ -1012,7 +1009,7 @@ app-quotes-item {
 .new-users-content__header h3,
 .recurring-tickets-content__header h3,
 .password-content__header h3 {
-  font-family: "Graphik-Regular", sans-serif;
+  font-weight: 600;
   font-size: 20px;
   margin: 0;
 }
@@ -1093,7 +1090,7 @@ app-quotes-item {
 .password-content__list--header div {
   text-transform: uppercase;
   font-size: 11px;
-  font-family: "Graphik-Medium", sans-serif;
+  font-weight: 600;
   color: $primary-2;
 }
 .products-content__list--header,
@@ -1213,7 +1210,7 @@ app-quotes-item {
 .recurring-tickets-content__list--item [class*='col-md-'],
 .password-content__list--item [class*='col-md-'] {
   font-size: 13px;
-  font-family: "Graphik-Regular", sans-serif;
+  font-weight: 400;
   p {
     word-break: break-all;
   }
@@ -1373,8 +1370,7 @@ app-quotes-item {
       [class*='col-md-'] p {
         font-size: 12px;
         color: $primary-2;
-        font-family: Graphik-Medium, sans-serif;
-        font-weight: 500;
+        font-weight: 600;
       }
     }
   }
@@ -1485,7 +1481,6 @@ app-quotes-item {
         border-bottom: 2px solid transparent;
         padding: 8px 0;
         font-size: 12px;
-        font-family: "Graphik-Semibold", sans-serif;
         font-weight: 600;
         cursor: pointer;
         .tab-product,
@@ -1540,7 +1535,7 @@ app-quotes-item {
         align-items: center;
         margin-right: 20px;
         p {
-          font-family: "Graphik-Regular", sans-serif;
+          font-weight: 400;
           margin: 0;
         }
         label {
@@ -1561,7 +1556,7 @@ app-quotes-item {
       }
       .save-template {
         position: relative;
-        font-family: Graphik-Medium, sans-serif;
+       font-weight: 600;
         font-weight: 600;
         font-size: 12px;
         color: $gray-800;
@@ -1705,7 +1700,7 @@ app-quotes-item {
         content: 'Max 300 Words';
         right: 15px;
         bottom: -22px;
-        font-family: "Graphik-Regular", sans-serif;
+        font-weight: 400;
         font-size: 11px;
         color: $gray-600;
       }
@@ -1720,7 +1715,7 @@ app-quotes-item {
         padding: 16px 0 0 50px;
         color: $gray-600;
         font-size: 12px;
-        font-family: "Graphik-Semibold", sans-serif;
+        font-weight: 600;
       }
     }
     .logo-upload {
@@ -1734,7 +1729,7 @@ app-quotes-item {
       }
       p {
         font-size: 11px;
-        font-family: Graphik-Regular, sans-serif;
+        font-weight: 400;
       }
     }
     .new-link {
@@ -1919,7 +1914,7 @@ app-quotes-item {
     letter-spacing: 0;
     pointer-events: none;
     z-index: 99;
-    font-family: "Graphik-Medium", sans-serif;
+    font-weight: 600;
   }
 }
 ngb-datepicker {
@@ -1934,7 +1929,7 @@ ngb-datepicker {
     align-items: center;
     p {
       font-size: 11px !important;
-      font-family: Graphik-Regular, sans-serif !important;
+      font-weight: 400;
     }
   }
   .new-link {
@@ -1960,7 +1955,7 @@ ngb-datepicker {
     color: $white;
     .list-item,
     .types-item {
-      font-family: "Graphik-Regular", sans-serif;
+      font-weight: 400;
       padding: 4px 24px;
       font-size: 12px;
       border-left: 2px solid transparent;
@@ -1968,7 +1963,7 @@ ngb-datepicker {
       cursor: pointer;
       &:hover,
       &.active {
-        //font-family: "Graphik-Medium", sans-serif;
+        //font-weight: 600;
         //font-weight: 500;
         background: $gray-800;
         border-left: 2px solid $primary-1;
@@ -1983,10 +1978,9 @@ ngb-datepicker {
     .filter-item__header {
       padding: 8px 24px;
       opacity: .5;
-      font-family: "Graphik-Semibold", sans-serif;
+      font-weight: 600;
       font-size: 11px;
       text-transform: uppercase;
-      font-weight: 600;
     }
   }
 }
@@ -2025,14 +2019,14 @@ ngb-datepicker {
     }
     .list-item,
     .types-item {
-      font-family: "Graphik-Regular", sans-serif;
+      font-weight: 400;
       padding: 8px 24px;
       border-left: 2px solid transparent;
       transition: all .3s;
       cursor: pointer;
       &:hover,
       &.active {
-        //font-family: "Graphik-Medium", sans-serif;
+        //font-weight: 600;
         //font-weight: 500;
         background: $gray-800;
         border-left: 2px solid $primary-1;
@@ -2132,10 +2126,9 @@ ngb-datepicker {
     .filter-item__header {
       padding: 8px 24px;
       opacity: .5;
-      font-family: "Graphik-Semibold", sans-serif;
+      font-weight: 600;
       font-size: 11px;
       text-transform: uppercase;
-      font-weight: 600;
     }
     .filter-item__header {
       cursor: pointer;
@@ -2146,7 +2139,7 @@ ngb-datepicker {
 .quicktech__table {
   width: 100%;
   font-size: 12px;
-  font-family: 'Graphik-Medium', sans-serif;
+  font-weight: 600;
 
   thead {
     text-transform: uppercase;
@@ -2169,7 +2162,7 @@ ngb-datepicker {
 
   &--list {
     font-size: 14px;
-    font-family: 'Graphik-Regular', sans-serif;
+    font-weight: 400;
     thead {
       text-transform: none;
       th {
@@ -3094,7 +3087,7 @@ input.--input-error {
     top: 10.5px;
     padding: 12px 10px 10px 12px;
     font-size: 13px;
-    font-family: "Graphik-Regular", sans-serif;
+    font-weight: 400;
     color: $gray-600;
   }
   .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {

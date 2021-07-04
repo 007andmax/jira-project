@@ -31,7 +31,7 @@
     .control-label {
       top: -13px !important;
       color: $error;
-      font-family: Graphik-Regular, sans-serif !important;
+      font-weight: 400;
     }
     .new-tax {
       overflow: visible;
@@ -79,7 +79,7 @@
   }
 
   .label-name {
-    font-family: Graphik-Medium, sans-serif;
+   font-weight: 600;
     font-size: 13px;
     margin-bottom: 8px;
   }
@@ -132,5 +132,5 @@
 }
 
 label.checkbox {
-  font-family: Graphik-Regular, sans-serif !important;
+  font-weight: 400;
 }

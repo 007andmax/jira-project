@@ -207,9 +207,10 @@
 .qt-text-upper {text-transform: uppercase;}
 
 
-.qt-ff-gm {font-family: Graphik-Medium, sans-serif;}
-.qt-ff-gr {font-family: Graphik-Regular, sans-serif;}
-.qt-ff-sb {font-family: Graphik-Semibold, sans-serif;}
+//.qt-ff-gm {font-family: Graphik-Medium, sans-serif;}
+.qt-ff-gm {font-weight: 600;} // Need to replace
+.qt-ff-gr {font-weight: 400;} // Need to replace
+.qt-ff-sb {font-weight: 600;} // Need to replace
 
 .qt-fw-sb {
   font-weight: 600;
@@ -283,7 +284,7 @@
   display: flex;
   flex-direction: column;
   label {
-    font-family: Graphik-Medium, sans-serif;
+   font-weight: 600;
     font-size: 13px;
     margin-bottom: 12px;
     color: $gray-800;
@@ -345,7 +346,7 @@
   width: 100%;
   padding: 10px 14px;
   font-size: 13px;
-  font-family: Graphik-Regular, sans-serif;
+  font-weight: 400;
   &::placeholder {
     color: $gray-600;
   }
@@ -363,7 +364,7 @@
   border: none;
   width: fit-content;
   cursor: pointer;
-  font-family: Graphik-Medium, sans-serif;
+ font-weight: 600;
   position: relative;
 
   &.--disabled {
@@ -450,7 +451,7 @@
   color: $white;
   padding: 4px 6px;
   width: fit-content;
-  font-family: Graphik-Medium, sans-serif;
+ font-weight: 600;
   display: flex;
   align-items: center;
 }
@@ -505,7 +506,7 @@
   align-items: center;
   justify-content: center;
   font-size: 15px;
-  font-family: Graphik-Semibold, sans-serif;
+  font-weight: 600;
 }
 
 .qt-input-prepend {
@@ -527,7 +528,7 @@
   align-items: center;
   justify-content: center;
   font-size: 15px;
-  font-family: Graphik-Semibold, sans-serif;
+  font-weight: 600;
 }
 
 .qt-input-afterpend {
@@ -721,7 +722,7 @@
   th {
     border-top: solid 1px $gray-400;
     background-color: $gray-100;
-    font-family: Graphik-Medium, sans-serif;
+   font-weight: 600;
     &:first-child {
       border-top-left-radius: 4px;
     }
@@ -818,7 +819,7 @@
   display: flex;
   align-items: center;
   border-radius: 4px;
-  font-family: Graphik-Medium, sans-serif;
+ font-weight: 600;
   &.--outline {
     color: $primary-1;
     border: solid 1px $primary-1;

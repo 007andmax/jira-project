@@ -1044,7 +1044,7 @@ body {
             padding: 0 8px;
             justify-content: center;
             // a {
-            //     font-family: "Graphik-Medium";
+            //     font-weight: 600;
             //     font-size: 13px;
             //     font-weight: 500;
             //     font-style: normal;
@@ -1075,7 +1075,7 @@ body {
                     line-height: 1.33;
                     letter-spacing: normal;
                     color: $gray-800;
-                    font-family: "Graphik-Medium";
+                    font-weight: 600;
                     font-weight: 600;
                     &.active{
                         color: $primary-1;

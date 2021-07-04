@@ -149,9 +149,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: "Graphik-Medium", sans-serif;
+  font-weight: 600;
   font-size: 14px;
-  font-weight: 500;
 }
 
 .add-category-lp-dropdown-btns .btn-success {
@@ -211,12 +210,11 @@
 .tab-btns .btn {
   background-color: $white;
   font-size: 13px;
-  font-weight: 500;
   color: $gray-800;
   display: inline-block;
   margin: 0;
   border: 1px solid $background;
-  font-family: "Graphik-Medium", sans-serif;
+  font-weight: 600;
 }
 
 .tab-btns .btn:hover,

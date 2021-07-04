@@ -9,7 +9,7 @@ Created by FontForge 20090622 at Mon Dec  3 17:10:34 2018
 <defs>
 <font id="Graphik-Medium" horiz-adv-x="600" >
   <font-face
-    font-family="Graphik-Medium"
+<!--    font-family="Graphik-Medium"-->
     font-weight="500"
     font-stretch="normal"
     units-per-em="1000"

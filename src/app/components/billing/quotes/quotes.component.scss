@@ -22,7 +22,7 @@
         margin: 0;
         font-size: 20px;
         font-weight: 500;
-        font-family: "Graphik-Regular", sans-serif;
+        font-weight: 400;
       }
       .quotes-actions {
         display: flex;
@@ -51,9 +51,8 @@
     &--bottom {
       [class*='col-md-'] {
         text-transform: uppercase;
-        font-family: "Graphik-Medium", sans-serif;
+        font-weight: 600;
         font-size: 11px;
-        font-weight: 500;
         @media (max-width: 1366px) {
           font-size: 10px;
         }
@@ -69,7 +68,7 @@
       padding: 24px 0;
       margin-bottom: 2px;
       [class*='col-md-'] {
-        font-family: "Graphik-Regular", sans-serif;
+        font-weight: 400;
         font-size: 13px;
         @media (max-width: 1366px) {
           font-size: 11px;
@@ -148,7 +147,7 @@
   }
   [class*='col-md-'].g-m {
     font-weight: bold;
-    font-family: "Graphik-Medium", sans-serif;
+    font-weight: 600;
   }
   .btn-new {
     @media (max-width: 1280px) {

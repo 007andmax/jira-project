@@ -214,7 +214,7 @@
     .company-devices-table__ip-address-buttons {
       display: none;
       font-size: 12px;
-      font-family: Graphik-Medium, sans-serif;
+     font-weight: 600;
       color: $primary-1;
       padding-top: 8px;
     }
@@ -409,7 +409,7 @@
       width: 132px;
       min-width: 132px;
       max-width: 132px;
-      font-family: Graphik-Medium, sans-serif;
+     font-weight: 600;
     }
     &__info-text {
       font-size: 12px;
@@ -450,12 +450,12 @@
       font-size: 12px;
       line-height: 1.33;
       color: $primary-2;
-      font-family: Graphik-Medium, sans-serif;
+     font-weight: 600;
       margin-bottom: 2px;
     }
     &__date {
       font-size: 12px;
-      font-family: Graphik-Medium, sans-serif;
+     font-weight: 600;
       color: $gray-600;
     }
     &__size {
@@ -507,7 +507,7 @@
     &__title {
       font-size: 13px;
       color: $primary-2;
-      font-family: Graphik-Semibold, sans-serif;
+      font-weight: 600;
       margin-bottom: 4px;
       line-height: 1.54;
     }

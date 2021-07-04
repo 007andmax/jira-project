@@ -26,11 +26,11 @@
         justify-content: center;
         color: $white;
         margin-right: 10px;
-        font-family: Graphik-Medium, sans-serif;
+       font-weight: 600;
       }
 
       &--user-name {
-        font-family: Graphik-Medium, sans-serif;
+       font-weight: 600;
         font-size: 13px;
         line-height: 1.54;
         color: $primary-2;
@@ -128,7 +128,7 @@
       line-height: 1.33;
       margin-bottom: 4px;
       font-size: 12px;
-      font-family: Graphik-Medium, sans-serif;
+     font-weight: 600;
     }
     &__subtitle {
       line-height: 1.33;

@@ -51,15 +51,15 @@
            <button class="selected-item" id="dropdownBasic1" ngbDropdownToggle>{{companyOpen}}</button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
               <button class="item" ngbDropdownItem *ngFor="let hours of workingDays">{{hours.dayOfWeek}}<span *ngIf="hours.startTime !== 0 && hours.endTime !== 0">{{hours.timing}}</span><span *ngIf="(hours.startTime === 0 || hours.startTime === null) && (hours.endTime === 0 || hours.endTime === null)">Close</span></button>
-              <div class="item"> 
-                <button class="btn btn-outline" (click)="open(contentHour)"> 
-                  <img src="html/assets/img/company-details/edit-blue.svg" alt="user" />  
+              <div class="item">
+                <button class="btn btn-outline" (click)="open(contentHour)">
+                  <img src="html/assets/img/company-details/edit-blue.svg" alt="user" />
                   Edit Suggestions</button>
-              </div> 
-            </div> 
+              </div>
+            </div>
           </div>
           <span class="closing-tag" *ngIf="closingSoon == true">Closing Soon</span>
-      </div>  
+      </div>
     </div>
     <div class="other-info-col d-flex" *ngIf="companyDetailing?.clientIndustry !== undefined && companyDetailing?.clientIndustry !== null && companyDetailing?.clientIndustry !== ''">
       <div class="small-title">Industry</div>
@@ -120,7 +120,7 @@
 
 <ng-template #contentHour let-modal>
   <div class="modal-header d-flex">
-    <h1>Edit Hours</h1>
+      <h1>Edit Hours</h1>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       close
     </button>
@@ -154,8 +154,8 @@
                       <button class="selected-item" [attr.disabled]="!work.checked ? 'disabled' : null" [id]=" 'from-'+work.dayOfWeek" ngbDropdownToggle>{{filterTime(fromTime_convert(work.startTime))}}</button>
                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                          <button class="item" (click)="startTimeChange(work, hours.value)" ngbDropdownItem *ngFor="let hours of workingHoursList" [class.active]="fromTime_convert(work.startTime) == hours.value">{{hours.name}}</button>
-                         
-                       </div> 
+
+                       </div>
                      </div>
                   </div>
                   <div class="tl-col">
@@ -168,8 +168,8 @@
                       <button class="selected-item" [attr.disabled]="!work.checked ? 'disabled' : null" [id]="'to-'+work.dayOfWeek" ngbDropdownToggle>{{filterTime(toTime_convert(work.endTime))}}</button>
                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                          <button class="item" (click)="endTimeChange(work,hours.value)" ngbDropdownItem *ngFor="let hours of workingHoursList" [class.active]="toTime_convert(work.endTime) == hours.value">{{hours.name}}</button>
-                         
-                       </div> 
+
+                       </div>
                      </div>
                   </div>
                 </div>
@@ -181,29 +181,29 @@
         <button type="button" class="btn btn-primary" (click)="saveHours();modal.dismiss();">Save Changes</button>
       </div>
   </div>
-  
+
 </ng-template>
 
 
 <!-- MAP -->
 
 <ng-template #content let-modal class="map-modal">
-  
+
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       close
     </button>
   <div class="modal-body d-flex">
     <div class="h1">Get Direction</div>
     <iframe
-      frameborder="0" 
-      scrolling="no" 
-      marginheight="0" 
-      marginwidth="0" 
+      frameborder="0"
+      scrolling="no"
+      marginheight="0"
+      marginwidth="0"
       [src]="mapUrl()"
     >
     </iframe>
   </div>
-  
+
 </ng-template>
 
 <ng-template #tag let-modal class="map-modal">
@@ -214,7 +214,7 @@
     </button>
   </div>
 <div class="modal-body tag d-flex">
-  
+
   <app-company-dash-tags (tagsChange)="onChangeTags($event)" [tagList]="tags"></app-company-dash-tags>
   <div class="footer-area-modal d-flex">
     <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Cancel</button>
