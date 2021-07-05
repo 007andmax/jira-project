@@ -16,6 +16,8 @@ import { CompaniesRealTimeService } from '../../states/company/companies-real-ti
 import { CompanyUpdate } from './class/company-update';
 import { ARCHIVE_COMPANY, DEARCHIVE_COMPANY } from '../../const/confirm';
 import { DraftEmailStateService } from '../../states/draft-email/draft-email-state.service';
+import { CompanyFilter } from './class/company-filter';
+import { CompanyItem } from './class/company-item';
 
 @Component({
   selector: 'app-companies',
@@ -24,19 +26,22 @@ import { DraftEmailStateService } from '../../states/draft-email/draft-email-sta
   providers: [CompaniesListService]
 })
 export class CompaniesComponent implements OnInit, OnDestroy {
-  CompaniesList: Array<Company> = [];
-  reqCompaniesList: Array<Company> = [];
+
+  CompaniesList: Array<CompanyItem> = [];
+  reqCompaniesList: Array<CompanyItem> = [];
   showPreloader: boolean = true;
-  public infiniteScrollDisabled = false;
-  public page_number: number = 0;
-  filter: Array<CompanyFilterTop> = [new CompanyFilterTop('name', 'ASC'),
-  new CompanyFilterTop('address', ''),
-  new CompanyFilterTop('primary_contact', ''),
-  new CompanyFilterTop('email', ''),
-  new CompanyFilterTop('tickets', ''),
-  new CompanyFilterTop('devices', ''),
-  new CompanyFilterTop('users', '')];
-  public showArchivedCompanies: boolean = false;
+  infiniteScrollDisabled = false;
+  page_number: number = 0;
+  filter: Array<CompanyFilterTop> = [
+    new CompanyFilterTop('name', 'ASC'),
+    new CompanyFilterTop('address', ''),
+    new CompanyFilterTop('primary_contact', ''),
+    new CompanyFilterTop('email', ''),
+    new CompanyFilterTop('tickets', ''),
+    new CompanyFilterTop('devices', ''),
+    new CompanyFilterTop('users', '')];
+  companyFilter: CompanyFilter = new CompanyFilter();
+  showArchivedCompanies: boolean = false;
   devices = [];
   users = [];
   sub: Subscription = new Subscription();
@@ -59,16 +64,6 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     window.scrollTo(0, 0);
     this.left_filter = this.leftPanelStateService.getFilter();
-    this.showArchivedCompanies = this.companiesStateService.getShowArchivedCompanies();
-    let getOnShowArchived = this.companiesStateService.getOnShowArchived().subscribe(data => {
-      this.showArchivedCompanies = data;
-      window.scrollTo(0, 0);
-      this.left_filter.setClientType(null);
-      this.clearFilter();
-      this.setDefaultScoll();
-      this.getClientsList(this.companiesStateService.getCompanies());
-    })
-    this.sub.add(getOnShowArchived);
     if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.getClientsList(data);
@@ -95,28 +90,43 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       this.users = data;
     })
     this.sub.add(getOnUsers);
-    let geLefttFilter = this.leftPanelStateService.getOnFilter().subscribe((data) => {
+    /* let geLefttFilter = this.leftPanelStateService.getOnFilter().subscribe((data) => {
+       window.scrollTo(0, 0);
+       this.left_filter = data;
+       this.setDefaultScoll();
+       this.onScroll();
+       this.onInirCalculate();
+     })
+     this.sub.add(geLefttFilter);*/
+
+    let filter = this.companiesStateService.filter.subscribe(data => {
+      console.log("data", data);
+      this.showPreloader = true;
+      this.companyFilter.setFilters(data);
       window.scrollTo(0, 0);
-      this.left_filter = data;
+      (<any>document.body.querySelector(".qt-page-list__header-thead-container .qt-checkbox input")).checked = false;
       this.setDefaultScoll();
-      this.onScroll();
-      this.onInirCalculate();
+      this.showArchivedCompanies = (data.clientType === "ARCHIVE");
+      this.companyFilter.setArchived(data.clientType === "ARCHIVE");
+      if (this.companyFilter.isExistFilters()) this.getClientsListByFilter();
+      if (!this.companyFilter.isExistFilters()) this.getClientsList(this.companiesStateService.getCompanies());
+
     })
-    this.sub.add(geLefttFilter);
+    this.sub.add(filter);
     let getChangeCompanies = this.companiesStateService.getChangeCompanies().subscribe((data: CompanyUpdate) => {
       if (data.action === 'COMPANY_SAVED' || data.action === 'COMPANY_ARCHIVED') {
         const reqIndex = this.reqCompaniesList.findIndex((item) => item.id === data.data.id);
-        if (reqIndex > -1) this.reqCompaniesList[reqIndex] = data.data;
+        if (reqIndex > -1) this.reqCompaniesList[reqIndex] = new CompanyItem(data.data);
         if (reqIndex === -1) {
-          this.reqCompaniesList.unshift(data.data);
-          this.CompaniesList.unshift(data.data);
+          this.reqCompaniesList.unshift(new CompanyItem(data.data));
+          this.CompaniesList.unshift(new CompanyItem(data.data));
         }
         const companyIndex = this.CompaniesList.findIndex((item) => item.id === data.data.id);
-        if (companyIndex > -1) this.CompaniesList[companyIndex] = data.data;
+        if (companyIndex > -1) this.CompaniesList[companyIndex] = new CompanyItem(data.data);
       }
       if (data.action === 'COMPANY_DEARCHIVED') {
         const reqIndex = this.reqCompaniesList.findIndex((item) => item.id === data.data.id);
-        if (reqIndex > -1) this.reqCompaniesList[reqIndex] = data.data;
+        if (reqIndex > -1) this.reqCompaniesList[reqIndex] = new CompanyItem(data.data);
         if (this.showArchivedCompanies) {
           const companyIndex = this.CompaniesList.findIndex((item) => item.id === data.data.id);
           if (companyIndex > -1) this.CompaniesList.splice(companyIndex, 1);
@@ -124,38 +134,21 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getChangeCompanies);
-
-    let onFilterTags = this.companiesStateService.onFilterTags.subscribe(tags => {
-      if (tags.length > 0) {
-        let getClientsByTags = this.companiesService.getClientsByTags(tags).subscribe(data => {
-          this.showPreloader = true;
-          this.setDefaultScoll();
-          this.getClientsList(data);
-        })
-        this.sub.add(getClientsByTags);
-      } else {
-        this.setDefaultScoll();
-        this.getClientsList(this.companiesStateService.getCompanies());
-      }
-      this.cd.detectChanges();
-    })
-    this.sub.add(onFilterTags);
   }
   onSelectAllCompanies(event) {
+
     if (event.target.checked) {
-      let list_company_table = document.body.querySelectorAll('app-companies-table');
-      list_company_table.forEach(item => {
-        (<any>item.querySelector('input[type="checkbox"]')).checked = true;
-      });
+      let listFilter = this.reqCompaniesList;
       this.draftEmailStateService.resetSelectedCompanies();
-      this.CompaniesList.forEach(user => {
-        this.draftEmailStateService.addSelectedCompany(user);
-      })
+      listFilter.forEach(item => {
+        item.selected = true;
+        this.draftEmailStateService.addSelectedCompany(item);
+      });
     } else {
       this.draftEmailStateService.resetSelectedCompanies();
-      let list_company_table = document.body.querySelectorAll('app-companies-table');
-      list_company_table.forEach(item => {
-        (<any>item.querySelector('input[type="checkbox"]')).checked = false;
+
+      this.reqCompaniesList.forEach(item => {
+        item.selected = false;
       });
     }
   }
@@ -163,16 +156,30 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     document.body.querySelector('app-left-panel-companies').classList.add('show');
   }
   private onInirCalculate() {
-    this.calculateCount.onCalculate(this.reqCompaniesList, this.left_filter);
+    this.calculateCount.onCalculate(this.reqCompaniesList, this.companyFilter.clientType);
     this.companiesStateService.setCalculateCount(this.calculateCount);
   }
   private getClientsList(data) {
     this.reqCompaniesList = data.filter(item => item.accountType === 'CLIENT' && ((!this.showArchivedCompanies) ? !item.deletedAt : item.deletedAt));
+
     this.onInirCalculate();
     this.reqCompaniesList.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
     this.onScroll();
     this.showPreloader = false;
+
+  }
+  private getClientsListByFilter() {
+    this.companiesService.getCompaniesListByFilter(this.companyFilter.getDataForFilter()).subscribe((data: any) => {
+      this.reqCompaniesList = data;
+      this.onInirCalculate();
+      this.reqCompaniesList.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+        1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+      this.onScroll();
+      this.showPreloader = false;
+    })
+    //this.reqCompaniesList = data.filter(item => item.accountType === 'CLIENT' && ((!this.showArchivedCompanies) ? !item.deletedAt : item.deletedAt));
+
   }
   private getCompanies() {
     if (this.companiesList.getBlockList()) {
@@ -180,7 +187,8 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       return;
     }
     this.page_number += 1;
-    let listFilter = this.left_filter.getFilterList(this.reqCompaniesList);
+
+    let listFilter = this.reqCompaniesList;
     let start = (this.page_number - 1) * 30;
     let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;
     let CompaniesList = [];
@@ -190,9 +198,11 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.CompaniesList = [...this.CompaniesList, ...CompaniesList];
     this.infiniteScrollDisabled = false;
     if ((this.page_number * 30) > listFilter.length) this.companiesList.setBlockList(true);
+    this.showPreloader = false;
   }
 
   onFilter(field) {
+    console.log("field", field);
     let index = this.filter.findIndex(item => item.field === field);
     if (index > -1) {
       let sort = this.filter[index].filter;
@@ -376,6 +386,8 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     return item.id;
   }
   ngOnDestroy(): void {
+    this.reqCompaniesList.forEach(item => item.selected = false);
+    this.draftEmailStateService.resetSelectedCompanies();
     this.sub.unsubscribe();
   }
 }

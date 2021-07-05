@@ -18,6 +18,7 @@ import { CompanySubscriptionStateService } from '../../companies/company-subscri
 import { Company } from 'src/app/interfaces/company/company';
 import { TitleListType } from '../../tickets/tickets/tickets-header/class/title-list-type';
 import { CompanyTagsStateService } from '../../companies/company-tags/states/company-tags-state.service';
+import { CompanyTagsComponent } from '../../companies/company-tags/company-tags.component';
 
 @Component({
   selector: 'users-aside-edit',
@@ -36,6 +37,7 @@ export class UsersAsideEditComponent implements OnInit {
   selectedUserType = new TitleListType('Standar User', 'USER');
   userTypes: Array<TitleListType> = [new TitleListType('Standar User', 'USER'),
   new TitleListType('Manager', 'ADMIN')];
+  @ViewChild('companyTags') companyTags: CompanyTagsComponent;
   constructor(private imageCropperStateService: ImageCropperStateService, private usersStateService: UsersStateService,
     private usersAsideService: UsersAsideService,
     private usersService: UsersService,
@@ -56,7 +58,7 @@ export class UsersAsideEditComponent implements OnInit {
     this.usersStateService.getOpenEditAside().subscribe(data => {
       this.opened = true;
       this.user.onEdit(this.usersStateService.getuserForEdit());
-      this.tagsState.setTagsFromtEdit(this.user.tags);
+      this.companyTags.setSelectedTag(this.user.tags);
       this.selectedUserType = this.userTypes.find(item => item.type === this.user.role);
       this.validate.addPhoneNumbers(this.user.phoneNumbers);
       this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.user.companyId);

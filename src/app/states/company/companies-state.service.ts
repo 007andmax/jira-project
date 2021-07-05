@@ -7,20 +7,20 @@ import { CompaniesRealTimeService } from './companies-real-time.service';
 import { CompanyUpdate } from '../../components/companies/class/company-update';
 import { User } from '../../components/users/class/user';
 import { WebsocketService } from '../../services/websocket/websocket.service';
+import { CompanyIndustry } from 'src/app/interfaces/company/company-industry';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CompaniesStateService {
   allCompanies = [];
-  industries = [];
+  industries: Array<CompanyIndustry> = [];
   selectedCompanyId: string = null;
   onChangeSelectedCompanyId: EventEmitter<any> = new EventEmitter();
-  onFilterTags: EventEmitter<any> = new EventEmitter();
   onGetCompanies: EventEmitter<any> = new EventEmitter();
+  onGetIndustries: EventEmitter<any> = new EventEmitter();
   onChangeCompanies: EventEmitter<CompanyUpdate> = new EventEmitter();
   showAsideForAdd: EventEmitter<any> = new EventEmitter();
-  onShowArchived: EventEmitter<any> = new EventEmitter();
   onEditCompany: EventEmitter<CompanyProfile> = new EventEmitter();
   companyForArchive: Company = null;
   companyForDeArchive: Company = null;
@@ -28,6 +28,7 @@ export class CompaniesStateService {
   calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
   currentCompany: any = null;
   onCurrentCompany: EventEmitter<any> = new EventEmitter();
+  filter: EventEmitter<any> = new EventEmitter();
   showArchivedCompanies: boolean = false;
   isInitCurrentCompany: boolean = false;
   constructor(private companiesService: CompaniesService,
@@ -52,9 +53,10 @@ export class CompaniesStateService {
       }
       this.onChangeCompanies.emit(new CompanyUpdate(newChange.action, newChange.data, this.allCompanies));
     })
-    this.companiesService.getIndustries().subscribe((data: Array<string>) => {
-      this.industries = data.sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
-        1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
+    this.companiesService.getIndustries().subscribe((data: Array<CompanyIndustry>) => {
+      this.industries = data.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+        1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+      this.onGetIndustries.emit(this.industries);
     })
   }
   public onInitGetCurrentCompany() {
@@ -68,6 +70,9 @@ export class CompaniesStateService {
       }
       this.isInitCurrentCompany = true;
     })
+  }
+  public onInitFilter(data) {
+    this.filter.emit(data);
   }
   public getSelectedCompanyId() {
     return this.selectedCompanyId;
@@ -136,12 +141,6 @@ export class CompaniesStateService {
   }
   public getCompanyFortDeArchive() {
     return this.companyForDeArchive;
-  }
-  public getOnShowArchived() {
-    return this.onShowArchived;
-  }
-  public setOnShowArchived(data) {
-    this.onShowArchived.emit(data);
   }
   public toggleAsideForAdd() {
     this.showAsideForAdd.emit();

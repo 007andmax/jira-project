@@ -363,6 +363,49 @@ app-users-table {
   }
 }
 
+.draft-email-aside {
+  .angular-editor-wrapper .angular-editor-textarea {
+    margin-top: 0;
+  }
+
+  .dropdown-menu.unique-down {
+    .dropdown-item:nth-child(even) {
+      background-color: #edf2f6;
+    }
+  }
+
+  .mat-form-field-wrapper {
+    .mat-form-field-infix{
+      padding: 0 !important;
+
+      &::before {
+        display: none;
+      }
+    }
+
+    .mat-form-field-label {
+      padding-left: 14px !important;
+    }
+
+    .mat-chip-input {
+      text-indent: 10px;
+    }
+
+   .mat-input-element {
+      min-height: 35px !important;
+      height: 40px !important;
+    }
+
+    .mat-chip-list-wrapper {
+      margin: 0;
+
+      input.mat-input-element {
+        padding: 2px 3px;
+      }
+    }
+  }
+}
+
 .remove-user-dialog {
   width: 552px;
   height: 216px;

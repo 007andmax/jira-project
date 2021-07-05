@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="64" viewBox="0 0 64 64">
+    <defs>
+        <circle id="p74nqkg29a" cx="32" cy="32" r="31"/>
+        <mask id="zqc1x0ggbb" width="62" height="62" x="0" y="0" fill="#fff" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox">
+            <use xlink:href="#p74nqkg29a"/>
+        </mask>
+    </defs>
+    <g fill="none" fill-rule="evenodd" stroke-linejoin="round">
+        <g stroke="#16A4FA">
+            <g>
+                <g transform="translate(-880.000000, -144.000000) translate(848.000000, 64.000000) translate(32.000000, 80.000000)">
+                    <use stroke-dasharray="3 2" stroke-width="2" mask="url(#zqc1x0ggbb)" xlink:href="#p74nqkg29a"/>
+                    <path stroke-linecap="round" d="M24 23h10c.552 0 1 .448 1 1v18h0-11c-.552 0-1-.448-1-1V24c0-.552.448-1 1-1zM35 29h5c.552 0 1 .448 1 1v11c0 .552-.448 1-1 1h-5 0V29zM27 28L27 29M31 28L31 29M27 32L27 33M31 32L31 33M27 36L27 37M31 36L31 37M38 33L38 34M38 37L38 38M43 20L43 26M40 23L46 23"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

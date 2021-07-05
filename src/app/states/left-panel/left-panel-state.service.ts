@@ -7,7 +7,7 @@ import { LeftPanelCompaniesFilter } from '../../components/left-panel/left-panel
 export class LeftPanelStateService {
   activePage: string = "";
   filter: LeftPanelCompaniesFilter = new LeftPanelCompaniesFilter();
-  onFilter: EventEmitter<any> = new EventEmitter();
+  onChangeFilter: EventEmitter<any> = new EventEmitter();
   onBillingPage: EventEmitter<any> = new EventEmitter();
   onCompanyPage: EventEmitter<any> = new EventEmitter();
   onDocumentsPage: EventEmitter<any> = new EventEmitter();
@@ -69,9 +69,7 @@ export class LeftPanelStateService {
   }
   public onInitFilter(data) {
     this.filter = data;
-    this.onFilter.emit(data);
+    this.onChangeFilter.emit(data);
   }
-  public getOnFilter() {
-    return this.onFilter;
-  }
+
 }

@@ -29,6 +29,12 @@
         color: #16a4fa;
     }
 
+    &.--outline-white {
+      background-color: #ffffff;
+      border: solid 1px transparent;
+      color: #364656;
+    }
+
     &.--light-blue {
       background-color: #16a4fa10;
       border: none;

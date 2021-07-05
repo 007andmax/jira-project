@@ -18,6 +18,7 @@ import { AppService } from 'src/app/states/app/app.service';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { Router } from '@angular/router';
+import { CompanyItem } from '../class/company-item';
 
 @Component({
   selector: 'app-companies-table',
@@ -25,7 +26,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./companies-table.component.scss']
 })
 export class CompaniesTableComponent implements OnInit, OnDestroy {
-  @Input() company: Company;
+  @Input() company: CompanyItem;
   @Input() public showArchivedCompanies: boolean = false;
   public primaryContact: CompanyAndressContact;
   public primaryAddress: CompanyAndress;

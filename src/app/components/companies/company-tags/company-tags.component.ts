@@ -86,6 +86,12 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
     });
     this.sub.add(getTagsFromEdit);
   }
+  public setEditItems(data) {
+    this.editItems = data;
+    this.editItems.forEach(item => {
+      this.selectedTag.push(this.tags.find(tag => tag.id === item));
+    })
+  }
   public clearWithOutChanges() {
 
     this.selectedTag = [];
@@ -185,6 +191,10 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
       this.onScroll();
     }
 
+  }
+
+  public setSelectedTag(data) {
+    this.selectedTag = data;
   }
 
   /**

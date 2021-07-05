@@ -464,6 +464,9 @@ import { FindWithinDocumentComponent } from './components/documents/documents-ed
 import { DocumentPreviewComponent } from './components/documents/document-preview/document-preview.component';
 import { CompanyDocumentsComponent } from './components/companies/company-documents/company-documents.component';
 import { CompanyDocumentsTableComponent } from './components/companies/company-documents/company-documents-table/company-documents-table.component';
+import { CompaniesFilterComponent } from './components/companies/companies-header/companies-filter/companies-filter.component';
+import { CompanyAddAsideShortComponent } from './components/companies/company-add-aside/company-add-aside-short/company-add-aside-short.component';
+import { CompanyAddAsideFullComponent } from './components/companies/company-add-aside/company-add-aside-full/company-add-aside-full.component';
 
 declare var $: any;
 /**
@@ -866,7 +869,10 @@ declare var $: any;
     FindWithinDocumentComponent,
     DocumentPreviewComponent,
     CompanyDocumentsComponent,
-    CompanyDocumentsTableComponent
+    CompanyDocumentsTableComponent,
+    CompaniesFilterComponent,
+    CompanyAddAsideShortComponent,
+    CompanyAddAsideFullComponent
   ],
   imports: [
     BrowserModule,

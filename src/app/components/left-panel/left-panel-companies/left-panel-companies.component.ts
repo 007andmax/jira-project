@@ -1,12 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { UsersStateService } from 'src/app/states/users/users-state.service';
-import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
-import { CompaniesService } from 'src/app/services/company/companies.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
-import { LeftPanelCompaniesFilter } from './class/left-panel-companies-filter';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
-import { CompanyCalculateCount } from '../../companies/class/company-calculate-count';
-import { ItemFilterPerson } from './class/item-filter-person';
 import { Company } from 'src/app/interfaces/company/company';
 
 @Component({
@@ -16,48 +10,17 @@ import { Company } from 'src/app/interfaces/company/company';
 })
 export class LeftPanelCompaniesComponent implements OnInit {
   open: boolean = false;
-  listPersons: Array<ItemFilterPerson> = [];
-  clientIndustry: string = '';
-  industryHistory = [];
-  salesHistory = [];
-  industries = [];
   showArchivedCompanies: boolean = false;
-  calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
-  selectedTechLead: ItemFilterPerson = null;
-  selectedClientIndustry: string = null;
-  @Output() onFilterTags = new EventEmitter();
-  filter: LeftPanelCompaniesFilter = new LeftPanelCompaniesFilter();
   selectedCompany: Company;
+  clientType: string;
   @Input() activePage: string = "";
   @Output() onGoToLink = new EventEmitter();
   @Output() onChangeState = new EventEmitter();
   @Output() onOpenPanel = new EventEmitter();
-  constructor(private usersStateService: UsersStateService,
-    private leftPanelService: LeftPanelService,
-    private companiesService: CompaniesService,
-    private companiesState: CompaniesStateService,
-
+  constructor(private companiesState: CompaniesStateService,
     private leftPanelStateService: LeftPanelStateService) { }
 
   ngOnInit() {
-    this.calculateCount = this.companiesState.getCalculateCount();
-    if (this.usersStateService.getAllUsers().length > 0) this.getTehusers(this.usersStateService.getAllUsers());
-    this.usersStateService.getOnUsers().subscribe((data) => {
-      this.getTehusers(data);
-    })
-
-    this.leftPanelService.getIndustryHistory().subscribe((data: Array<string>) => {
-      this.industryHistory = data;
-    })
-    this.leftPanelService.getSalesHistory().subscribe((data: Array<string>) => {
-      this.salesHistory = data;
-    })
-    //this.getIndustries();
-    this.industries = this.companiesState.getIndustries();
-    this.companiesState.getOnCalculateCount().subscribe((data) => {
-      this.calculateCount = data;
-
-    })
     this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
       if (data) this.open = false;
     })
@@ -67,6 +30,13 @@ export class LeftPanelCompaniesComponent implements OnInit {
     this.leftPanelStateService.onFirstOpen.subscribe(data => {
       if (this.isCompanyPage(data)) this.open = true;
     })
+    this.companiesState.filter.subscribe(data => {
+      this.showArchivedCompanies = (data.clientType === "ARCHIVE");
+      this.clientType = (data.clientType !== "ARCHIVE") ? data.clientType : null;
+    })
+  }
+  getCount(clientType) {
+    return this.companiesState.getCompanies().filter(item => item.accountType === "CLIENT" && item.clientType === clientType && !item.deletedAt).length;
   }
   public close() {
     this.open = false;
@@ -79,141 +49,37 @@ export class LeftPanelCompaniesComponent implements OnInit {
   }
   ngDoCheck() {
     if (this.companiesState.getSelectedCompanyId() && this.companiesState.getCompanies().length > 0) this.selectedCompany = this.companiesState.getCompanies().find(item => item.id === this.companiesState.getSelectedCompanyId());
-
-  }
-  /* private getIndustries() {
-     this.companiesService.getIndustries().subscribe((data: Array<string>) => {
-       this.industries = data.sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
-       1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
-        
-     })
-   }*/
-  /* getSelectedTechLead() {
-     let index = this.listPersons.findIndex(item => item.selected === true);
-     if (index > -1) return this.listPersons[index].firstName + ' ' + this.listPersons[index].lastName;
-     return "";
-   }*/
-  private getTehusers(list) {
-    list.forEach((item) => {
-      if (item.accountType === "TECH" && !item.deletedAt) {
-        // item.selected = false;
-        this.listPersons.push(new ItemFilterPerson(item.id, `${item.firstName} ${item.lastName}`));
-      }
-    })
-    /* this.listPersons.sort((a, b) => ((a.firstName + ' ' + a.lastName).toLowerCase() > (b.firstName + ' ' + b.lastName).toLowerCase()) ?
-     1 : (((b.firstName + ' ' + b.lastName).toLowerCase() > (a.firstName + ' ' + a.lastName).toLowerCase()) ? -1 : 0));*/
-
-    this.listPersons.sort((a, b) => ((a.name).toLowerCase() > (b.name).toLowerCase()) ?
-      1 : (((b.name).toLowerCase() > (a.name).toLowerCase()) ? -1 : 0));
-
   }
   public isCompanyPage(state) {
     return (state == 'new-companies' || state == 'company-dashboard' || state == 'company-tickets' || state == 'company-user' || state == 'company-devices' || state == 'company-network-scan' || state == 'company-password-manager' || state == 'company-products' || state == 'company-contracts'
       || state == 'company-documents')
   }
-  public selectTechLead(name) {
 
-    //  this.showClearSalesPerson = true;
-    // this.listPersons.forEach(item => item.selected = false);
-    let index = this.listPersons.findIndex(item => item.name === name);
-    if (index > -1) {
-      this.selectedTechLead = this.listPersons[index];
-      //  this.listPersons[index].selected = true;
-      this.filter.setTehUser(this.listPersons[index].id);
-      this.leftPanelStateService.onInitFilter(this.filter);
-    }
-  }
-  public selectClientIndustry(item) {
-    this.selectedClientIndustry = item;
-    //  this.showClearIndustry = true;
-    this.clientIndustry = item;
-    this.filter.setClientIndustry(this.clientIndustry);
-    this.leftPanelStateService.onInitFilter(this.filter);
-  }
   closeMobileFilter() {
     document.body.querySelector('app-left-panel-companies').classList.remove('show');
   }
   toggleFilter(event) {
     event.target.parentNode.classList.toggle('show-filter');
   }
-  clearSalesPerson() {
-    //    this.showClearSalesPerson = false;
-    //  this.listPersons.forEach(item => item.selected = false);
-    this.filter.setTehUser(null);
-    this.leftPanelStateService.onInitFilter(this.filter);
-  }
-
-  clearClientIndustry() {
-    //  this.showClearIndustry = false;
-    this.clientIndustry = '';
-    this.filter.setClientIndustry(null);
-    this.leftPanelStateService.onInitFilter(this.filter);
-  }
-  public onChangeTags(tags) {
-    let outTags = [];
-    tags.forEach(item => {
-      outTags.push(item.id);
-    })
-    this.companiesState.onFilterTags.emit(outTags);
-  }
 
   onShowAll() {
-    this.filter.setClientType(null);
-    this.companiesState.setOnShowArchived(false);
+    this.clientType = null;
     this.showArchivedCompanies = false;
-    this.companiesState.setShowArchivedCompanies(false);
+    this.leftPanelStateService.onInitFilter(null);
   }
   onShowArchived() {
-    this.companiesState.setOnShowArchived(true);
+    this.clientType = null;
     this.showArchivedCompanies = true;
-    this.companiesState.setShowArchivedCompanies(true);
+    this.leftPanelStateService.onInitFilter("ARCHIVE");
   }
+
   onSetFilterClientType(data) {
-    this.calculateCount.onCulculateCurrent(data);
-    this.companiesState.setCalculateCount(this.calculateCount);
-    this.filter.setClientType(data);
-    this.leftPanelStateService.onInitFilter(this.filter);
+    this.clientType = data;
+    this.leftPanelStateService.onInitFilter(data);
   }
 
-  public onSelectTechLead(item) {
-    if (!item) {
-      this.clearSalesPerson();
-      return;
-    }
-    this.selectedTechLead = null;
-    //  this.showClearSalesPerson = true;
-    //  this.listPersons.forEach(item => item.selected = false);
-    //  this.listPersons[index].selected = true;
-    this.filter.setTehUser(item.id);
-    this.leftPanelStateService.onInitFilter(this.filter);
-    this.salesHistory.pop();
-    this.salesHistory.unshift(item.name);
-
-    this.companiesService.setСustomStorage("companiesPageFilterBySalesHistory", this.salesHistory).subscribe(data => {
-
-    })
-  }
   public goToState(data) {
     this.onChangeState.emit(data);
-  }
-  public onSelectClientIndustry(item) {
-    if (!item) {
-      this.clearClientIndustry();
-      return;
-    }
-    this.selectedClientIndustry = null;
-
-    //   this.showClearIndustry = true;
-    this.clientIndustry = item;
-    this.filter.setClientIndustry(this.clientIndustry);
-    this.leftPanelStateService.onInitFilter(this.filter);
-    this.industryHistory.pop();
-    this.industryHistory.unshift(item);
-    //this.company.techLeadId = this.listPersons[index].id;
-
-    this.companiesService.setСustomStorage("companiesPageFilterByIndustryHistory", this.industryHistory).subscribe(data => {
-
-    })
   }
 
   public trackByIndex(index, item) {

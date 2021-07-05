@@ -73,6 +73,9 @@
 .restore-ng2 {
   background: url("/assets/img/icons/restore-company.png");
 }
+.restore-company {
+  background: url("/assets/img/icons/restore-company.svg");
+}
 
 .upload-logo {
   background: url("/assets/img/icons/upload-logo.png");
@@ -247,6 +250,9 @@
   &__export-dark {
     background-image: url("/assets/img/icons/export-dark.svg");
   }
+  &__export-blue {
+    background-image: url("/assets/img/icons/export-blue.svg");
+  }
   &__plus-white {
     background-image: url("/assets/img/icons/plus-white.svg");
   }
@@ -276,6 +282,9 @@
   }
   &__email-blue {
     background-image: url("/assets/img/icons/email-blue.svg");
+  }
+  &__upload-company-logo {
+    background-image: url("/assets/img/icons/upload-company-logo.svg");
   }
   &__view {
     background-image: url("/assets/img/icons/view.svg");

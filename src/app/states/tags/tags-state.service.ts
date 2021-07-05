@@ -13,7 +13,6 @@ export class TagsStateService {
     private tagsRealTimeService: TagsRealTimeService,) { }
 
   public onInit() {
-
     this.tagsRealTimeService.changeTagsArray.subscribe((data: any) => {
       if (data.action === "TAG_SAVED" && data.data instanceof Array) this.tags = [...this.tags, ...data.data];
       if (data.action === "TAG_SAVED" && data.data instanceof Object) {

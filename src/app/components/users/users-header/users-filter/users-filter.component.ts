@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { CompanyIndustry } from 'src/app/interfaces/company/company-industry';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { DropDownComponent } from '../../../shared/drop-down/drop-down.component';
@@ -15,7 +16,7 @@ export class UsersFilterComponent implements OnInit {
   @ViewChild('companiesDp') companiesDp: DropDownComponent;
   @ViewChild('industriesDp') industriesDp: DropDownComponent;
   companies = [];
-  industries = [];
+  industries: Array<CompanyIndustry> = [];
   allTitles: Array<string> = [];
   public filter: UserFilter = new UserFilter();
   sub: Subscription = new Subscription();
@@ -34,6 +35,9 @@ export class UsersFilterComponent implements OnInit {
     })
     this.sub.add(getOnCompanies);
     this.industries = this.companiesState.getIndustries();
+    this.companiesState.onGetIndustries.subscribe(data => {
+      this.industries = data;
+    })
   }
   getUsersTitle(allUsers) {
     this.allTitles = allUsers
