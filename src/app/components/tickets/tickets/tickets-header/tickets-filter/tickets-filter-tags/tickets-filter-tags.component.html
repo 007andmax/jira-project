@@ -37,6 +37,7 @@
             >
         </mat-chip-list>
 
+
     </mat-form-field>
     <div
         class="dropdown-menu"
@@ -52,7 +53,7 @@
             <button
                 ngbDropdownItem
                 class="dropdown-item"
-                (click)="selected(tag)"
+                (click)="toggleItem(tag)"
                 [textContent]="tag.word"
             >
             </button>

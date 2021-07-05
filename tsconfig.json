@@ -18,11 +18,17 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "skipLibCheck": true
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
+  },
+  "paths": {
+    "crypto": [
+      "./node_modules/crypto-js"
+    ]
   },
   "include": [
     "src/**/*",

@@ -20,6 +20,10 @@
   background: url("/assets/img/user-icn.png");
 }
 
+.icn-help {
+  background: url("/assets/img/icons/help-12.svg");
+}
+
 .icn-device {
   background: url("/assets/img/device-icn.png");
 }
@@ -36,6 +40,9 @@
   background: url("/assets/img/attachment-blue.svg");
 }
 
+.icn-tags {
+  background: url("/assets/img/icons/tag-ng2.png");
+}
 .icn-delete {
   background-image: url(/assets/img/icons/icn-remove.png) !important;
   width: 16px;
@@ -130,113 +137,111 @@
   background: url("/assets/img/icons/add-users.svg");
 }
 
-
-
 .icon {
- &__assign-date {
-  background-image: url("/assets/img/icons/assign-date.svg");
+  &__assign-date {
+    background-image: url("/assets/img/icons/assign-date.svg");
   }
- &__assign-user {
+  &__assign-user {
     background-image: url("/assets/img/icons/assign-user.svg");
   }
 
- &__task-pending {
+  &__task-pending {
     background-image: url("/assets/img/icons/task-pending.svg");
     &.--done {
       background-image: url("/assets/img/icons/task-completed.svg");
     }
- }
- &__users {
-    background-image: url("/assets/img/icons/addusers.svg")
- }
- &__close {
-    background-image: url("/assets/img/icons/close.svg")
- }
- &__remove {
-    background-image: url("/assets/img/icons/remove.svg")
- }
- &__attachment {
-    background-image: url("/assets/img/icons/attachment.svg")
- }
- &__selected {
-     background-image: url("/assets/img/icons/selected.svg")
- }
- &__chat {
+  }
+  &__users {
+    background-image: url("/assets/img/icons/addusers.svg");
+  }
+  &__close {
+    background-image: url("/assets/img/icons/close.svg");
+  }
+  &__remove {
+    background-image: url("/assets/img/icons/remove.svg");
+  }
+  &__attachment {
+    background-image: url("/assets/img/icons/attachment.svg");
+  }
+  &__selected {
+    background-image: url("/assets/img/icons/selected.svg");
+  }
+  &__chat {
     background-image: url("/assets/img/icons/chat.svg");
     &.active {
-        background-image: url("/assets/img/icons/chat-blue.svg");
-      }
- }
- &__products {
-   background-image: url("/assets/img/icons/products.svg");
-   &.active {
-     background-image: url("/assets/img/icons/products-blue.svg");
-   }
- }
- &__service {
-  background-image: url("/assets/img/icons/service.svg");
-  &.active {
-     background-image: url("/assets/img/icons/service-blue.svg");
+      background-image: url("/assets/img/icons/chat-blue.svg");
+    }
   }
- }
- &__quick-support {
-  background-image: url("/assets/img/icons/quick-support-gray.svg");
-  &.active {
-    background-image: url("/assets/img/icons/quick-support.svg");
+  &__products {
+    background-image: url("/assets/img/icons/products.svg");
+    &.active {
+      background-image: url("/assets/img/icons/products-blue.svg");
+    }
   }
- }
- &__attach-blue {
-   background-image: url("/assets/img/attachment-blue.svg");
- }
- &__filters {
-   background-image: url("/assets/img/icons/filters.svg");
- }
- &__collapse-arrow {
-   background-image: url("/assets/img/icons/collapse-arrow.svg");
- }
- &__company-info {
-   background-image: url("/assets/img/icons/company-info.svg");
- }
- &__devices {
-   background-image: url("/assets/img/icons/devices.svg");
- }
- &__devices-grey {
-   background-image: url("/assets/img/icons/devices-grey.svg");
- }
- &__office-account {
-  background-image: url("/assets/img/icons/office-account.svg");
- }
- &__unlock-screen {
-   background-image: url("/assets/img/icons/unlock-screen.svg");
- }
+  &__service {
+    background-image: url("/assets/img/icons/service.svg");
+    &.active {
+      background-image: url("/assets/img/icons/service-blue.svg");
+    }
+  }
+  &__quick-support {
+    background-image: url("/assets/img/icons/quick-support-gray.svg");
+    &.active {
+      background-image: url("/assets/img/icons/quick-support.svg");
+    }
+  }
+  &__attach-blue {
+    background-image: url("/assets/img/attachment-blue.svg");
+  }
+  &__filters {
+    background-image: url("/assets/img/icons/filters.svg");
+  }
+  &__collapse-arrow {
+    background-image: url("/assets/img/icons/collapse-arrow.svg");
+  }
+  &__company-info {
+    background-image: url("/assets/img/icons/company-info.svg");
+  }
+  &__devices {
+    background-image: url("/assets/img/icons/devices.svg");
+  }
+  &__devices-grey {
+    background-image: url("/assets/img/icons/devices-grey.svg");
+  }
+  &__office-account {
+    background-image: url("/assets/img/icons/office-account.svg");
+  }
+  &__unlock-screen {
+    background-image: url("/assets/img/icons/unlock-screen.svg");
+  }
   &__custom-category {
-  background-image: url("/assets/img/icons/custom-category.svg");
- }
- &__generic {
-   background-image: url("/assets/img/icons/generic.svg");
- }
- &__panel-open {
-   background-image: url("/assets/img/icons/panel-open.svg");
- }
- &__users {
-   background-image: url("/assets/img/icons/users.svg");
- }
+    background-image: url("/assets/img/icons/custom-category.svg");
+  }
+  &__generic {
+    background-image: url("/assets/img/icons/generic.svg");
+  }
+  &__panel-open {
+    background-image: url("/assets/img/icons/panel-open.svg");
+  }
+  &__users {
+    background-image: url("/assets/img/icons/users.svg");
+  }
   &__user-account {
     background-image: url("/assets/img/icons/local-user-account.svg");
   }
- &__get-direction {
+  &__get-direction {
     background-image: url("/assets/img/icons/get-direction.svg");
- }
-  &__panel-close{
-     background-image: url("/assets/img/icons/panel-close.svg");
   }
-  &__rating-filled{
-     background-image: url("/assets/img/icons/rating-filled.svg");
+  &__panel-close {
+    background-image: url("/assets/img/icons/panel-close.svg");
   }
-  &__rating{
-     background-image: url("/assets/img/icons/rating.svg");
+  &__rating-filled {
+    background-image: url("/assets/img/icons/rating-filled.svg");
   }
-  &__expand{
+  &__rating {
+    background-image: url("/assets/img/icons/rating.svg");
+  }
+  &__expand {
     background-image: url("/assets/img/icons/expand.svg");
   }
   &__export-dark {
@@ -249,13 +254,13 @@
     background-image: url("/assets/img/icons/tag-close.svg");
   }
   &__more {
-    background-image: url("/assets/img/icons/more-vertical-ng2.png") ;
+    background-image: url("/assets/img/icons/more-vertical-ng2.png");
   }
   &__claim-ticket {
     background-image: url("/assets/img/icons/claim-ticket.svg");
   }
   &__ticket-status {
-    background: url("/assets/img/icons/ticket-status.svg") ;
+    background: url("/assets/img/icons/ticket-status.svg");
   }
   &__tips {
     background-image: url("/assets/img/icons/tips.svg");
@@ -278,6 +283,12 @@
   &__hide {
     background-image: url("/assets/img/icons/hide.svg");
   }
+  &__documents {
+    background-image: url("/assets/img/icons/documents.svg");
+  }
+  &__folder {
+    background-image: url("/assets/img/icons/folder.svg");
+  }
   &__calendar {
     background-image: url("/assets/img/icons/calander.svg");
   }
@@ -289,6 +300,15 @@
   }
   &__linux {
     background-image: url("/assets/img/icons/linux.png");
+  }
+  &__move {
+    background-image: url("/assets/img/icons/move.svg");
+  }
+  &__share-folder {
+    background-image: url("/assets/img/icons/share-folder.svg");
+  }
+  &__shared {
+    background-image: url("/assets/img/icons/shared.svg");
   }
   &__payment-received {
     background-image: url("/assets/img/icons/payment-received.svg");
@@ -330,55 +350,55 @@
     background-image: url("/assets/img/icons/shutdown.svg");
   }
   &__clock-timer {
-    background-image: url('/assets/img/icons/timer-counter.svg');
+    background-image: url("/assets/img/icons/timer-counter.svg");
   }
   &__add-task {
-    background-image: url('/assets/img/icons/add-task.svg');
+    background-image: url("/assets/img/icons/add-task.svg");
   }
   &__calander {
-    background-image: url('/assets/img/icons/calander.svg');
+    background-image: url("/assets/img/icons/calander.svg");
   }
   &__company-address {
-    background-image: url('/assets/img/icons/company-address.svg');
+    background-image: url("/assets/img/icons/company-address.svg");
   }
   &__discount {
-    background-image: url('/assets/img/icons/discount.svg');
+    background-image: url("/assets/img/icons/discount.svg");
   }
   &__raw-clear {
-    background-image: url('/assets/img/icons/raw-clear.svg');
+    background-image: url("/assets/img/icons/raw-clear.svg");
   }
   &__timer-counter {
-    background-image: url('/assets/img/icons/timer-counter.svg');
+    background-image: url("/assets/img/icons/timer-counter.svg");
   }
   &__move-light {
-    background-image: url('/assets/img/icons/move-light.svg');
+    background-image: url("/assets/img/icons/move-light.svg");
   }
   &__dropdown-arrow-up {
-    background-image: url('/assets/img/icons/dropdown-arrow-up.svg');
+    background-image: url("/assets/img/icons/dropdown-arrow-up.svg");
   }
   &__company-info {
-    background-image: url('/assets/img/icons/company-info.svg');
+    background-image: url("/assets/img/icons/company-info.svg");
   }
   &__invoice-expired {
-    background-image: url('/assets/img/icons/invoice-expired.svg');
+    background-image: url("/assets/img/icons/invoice-expired.svg");
   }
   &__print {
-    background-image: url('/assets/img/icons/print.svg');
+    background-image: url("/assets/img/icons/print.svg");
   }
   &__print-blue {
-    background-image: url('/assets/img/icons/print-blue.svg');
+    background-image: url("/assets/img/icons/print-blue.svg");
   }
   &__email-dark {
-    background-image: url('/assets/img/icons/email-dark.svg');
+    background-image: url("/assets/img/icons/email-dark.svg");
   }
   &__invoice-expired {
-    background-image: url('/assets/img/icons/invoice-expired.svg');
+    background-image: url("/assets/img/icons/invoice-expired.svg");
   }
   &__download {
-    background-image: url('/assets/img/icons/download.svg');
+    background-image: url("/assets/img/icons/download.svg");
   }
   &__locked {
-    background-image: url('/assets/img/icons/locked.svg');
+    background-image: url("/assets/img/icons/locked.svg");
   }
   &__filter-active {
     background-image: url("/assets/img/icons/filter-active.svg");
@@ -411,8 +431,17 @@
   &__email-dark {
     background-image: url("/assets/img/icons/email-dark.svg");
   }
+  &__expand-redactor {
+    background-image: url("/assets/img/icons/expand-redactor.svg");
+  }
   &__download-pdf {
     background-image: url("/assets/img/icons/download-pdf.svg");
+  }
+  &__add-document {
+    background-image: url("/assets/img/icons/add-document.svg");
+  }
+  &__rename {
+    background-image: url("/assets/img/icons/rename.svg");
   }
   &__payment-history {
     background-image: url("/assets/img/icons/payment_history.svg");
@@ -428,155 +457,173 @@
   }
 
   &__block-time-billing {
-    background-image: url('/assets/img/icons/block-time-billing.svg');
+    background-image: url("/assets/img/icons/block-time-billing.svg");
   }
   &__contract-claim-ticket {
-    background-image: url('/assets/img/icons/contract-claim-ticket.svg');
+    background-image: url("/assets/img/icons/contract-claim-ticket.svg");
   }
   &__per-user {
-    background-image: url('/assets/img/icons/per-user.svg');
+    background-image: url("/assets/img/icons/per-user.svg");
   }
   &__product-contract {
-    background-image: url('/assets/img/icons/product-contract.svg');
+    background-image: url("/assets/img/icons/product-contract.svg");
   }
 
   &__question-help {
-    background-image: url('/assets/img/icons/question-help.svg');
+    background-image: url("/assets/img/icons/question-help.svg");
   }
   &__info-question {
     background-image: url("/assets/img/icons/info-question.svg");
   }
   &__growth {
-    background-image: url('/assets/img/icons/growth.svg');
+    background-image: url("/assets/img/icons/growth.svg");
   }
   &__loss {
-    background-image: url('/assets/img/icons/loss.svg');
+    background-image: url("/assets/img/icons/loss.svg");
   }
   &__quotes {
-    background-image: url('/assets/img/icons/quotes.svg');
+    background-image: url("/assets/img/icons/quotes.svg");
   }
   &__total-sales {
-    background-image: url('/assets/img/icons/total-sales.svg');
+    background-image: url("/assets/img/icons/total-sales.svg");
   }
   &__unbilled-amount {
-    background-image: url('/assets/img/icons/unbilled-amount.svg');
+    background-image: url("/assets/img/icons/unbilled-amount.svg");
   }
   &__unpaid-invoice {
-    background-image: url('/assets/img/icons/unpaid-invoice.svg');
+    background-image: url("/assets/img/icons/unpaid-invoice.svg");
   }
   &__profile-dropdown {
-    background-image: url('/assets/img/icons/profile-dropdown.svg');
+    background-image: url("/assets/img/icons/profile-dropdown.svg");
   }
   &__message-forward {
-    background-image: url('/assets/img/icons/message-forward.svg');
+    background-image: url("/assets/img/icons/message-forward.svg");
   }
   &__message-response {
-    background-image: url('/assets/img/icons/message-response.svg');
+    background-image: url("/assets/img/icons/message-response.svg");
   }
   &__copy-gray {
-    background-image: url('/assets/img/icons/copy-gray.svg');
+    background-image: url("/assets/img/icons/copy-gray.svg");
   }
   &__terminate {
-    background-image: url('/assets/img/icons/terminate.svg');
+    background-image: url("/assets/img/icons/terminate.svg");
   }
   &__search {
-    background-image: url('/assets/img/icons/search.svg');
+    background-image: url("/assets/img/icons/search.svg");
+  }
+  &__search-gray {
+    background-image: url("/assets/img/icons/search-gray.svg");
+  }
+  &__templete-thumb {
+    background-image: url("/assets/img/icons/templete-thumb.svg");
   }
   &__force-create {
-    background-image: url('/assets/img/icons/force-create.svg');
+    background-image: url("/assets/img/icons/force-create.svg");
   }
   &__avg-response {
-    background-image: url('/assets/img/icons/avg-response.svg');
+    background-image: url("/assets/img/icons/avg-response.svg");
   }
   &__tickets-on-time {
-    background-image: url('/assets/img/icons/tickets-on-time.svg');
+    background-image: url("/assets/img/icons/tickets-on-time.svg");
   }
   &__new-tickets {
-    background-image: url('/assets/img/icons/new-tickets.svg');
+    background-image: url("/assets/img/icons/new-tickets.svg");
   }
   &__on-hold-tickets {
-    background-image: url('/assets/img/icons/on-hold-tickets.svg');
+    background-image: url("/assets/img/icons/on-hold-tickets.svg");
   }
   &__recurring-tickets {
-    background-image: url('/assets/img/icons/recurring-tickets.svg');
+    background-image: url("/assets/img/icons/recurring-tickets.svg");
   }
   &__solved-tickets {
-    background-image: url('/assets/img/icons/solved-tickets.svg');
+    background-image: url("/assets/img/icons/solved-tickets.svg");
   }
   &__no-devices-installed {
-    background-image: url('/assets/img/no-devices-installed.svg');
+    background-image: url("/assets/img/no-devices-installed.svg");
   }
   &__link {
-    background-image: url('/assets/img/icons/link.svg');
+    background-image: url("/assets/img/icons/link.svg");
   }
   &__play {
-    background-image: url('/assets/img/icons/play.svg');
+    background-image: url("/assets/img/icons/play.svg");
   }
   &__computer {
-    background-image: url('/assets/img/icons/computer.svg');
+    background-image: url("/assets/img/icons/computer.svg");
+  }
+  &__create-template {
+    background-image: url("/assets/img/icons/create-template.svg");
+  }
+  &__tag-light-gray {
+    background-image: url("/assets/img/icons/tag-light-gray.svg");
+  }
+  &__user-light-gray {
+    background-image: url("/assets/img/icons/user-light-gray.svg");
+  }
+  &__down-arrow {
+    background-image: url("/assets/img/icons/down-arrow.svg");
   }
   &__printer {
-    background-image: url('/assets/img/icons/printer.svg');
+    background-image: url("/assets/img/icons/printer.svg");
   }
   &__server {
-    background-image: url('/assets/img/icons/server.svg');
+    background-image: url("/assets/img/icons/server.svg");
   }
   &__tablet {
-    background-image: url('/assets/img/icons/tablet.svg');
+    background-image: url("/assets/img/icons/tablet.svg");
   }
   &__master-agent-badge {
-    background-image: url('/assets/img/icons/master-agent-badge.svg');
+    background-image: url("/assets/img/icons/master-agent-badge.svg");
   }
   &__agent {
-    background-image: url('/assets/img/icons/agent.svg');
+    background-image: url("/assets/img/icons/agent.svg");
   }
   &__quick-connect {
-    background-image: url('/assets/img/icons/quick-connect.svg');
+    background-image: url("/assets/img/icons/quick-connect.svg");
   }
   &__go-to {
-    background-image: url('/assets/img/icons/go-to.svg');
+    background-image: url("/assets/img/icons/go-to.svg");
   }
   &__network {
-    background-image: url('/assets/img/icons/network.svg');
+    background-image: url("/assets/img/icons/network.svg");
   }
   &__software {
-    background-image: url('/assets/img/icons/software.svg');
+    background-image: url("/assets/img/icons/software.svg");
   }
   &__wifi {
-    background-image: url('/assets/img/icons/wifi-network.svg');
+    background-image: url("/assets/img/icons/wifi-network.svg");
   }
   &__microsoft {
-    background-image: url('/assets/img/icons/microsoft.svg');
+    background-image: url("/assets/img/icons/microsoft.svg");
   }
-   &__hosting {
-    background-image: url('/assets/img/icons/hosting.svg');
+  &__hosting {
+    background-image: url("/assets/img/icons/hosting.svg");
   }
   &__system {
-    background-image: url('/assets/img/icons/system.svg');
+    background-image: url("/assets/img/icons/system.svg");
   }
   &__updates {
-    background-image: url('/assets/img/icons/updates.svg');
+    background-image: url("/assets/img/icons/updates.svg");
   }
   &__remove-blue {
-    background-image: url('/assets/img/icons/remove-blue.svg');
+    background-image: url("/assets/img/icons/remove-blue.svg");
   }
   &__restart-blue {
-    background-image: url('/assets/img/icons/restart-blue.svg');
+    background-image: url("/assets/img/icons/restart-blue.svg");
   }
   &__shutdown-blue {
-    background-image: url('/assets/img/icons/shutdown-blue.svg');
+    background-image: url("/assets/img/icons/shutdown-blue.svg");
   }
   &__connected-device {
-    background-image: url('/assets/img/icons/connected-device.svg');
+    background-image: url("/assets/img/icons/connected-device.svg");
   }
   &__more-vertical {
-    background-image: url('/assets/img/icons/more-vertical.svg');
+    background-image: url("/assets/img/icons/more-vertical.svg");
   }
   &__arrow-right {
-    background-image: url('/assets/img/icons/arrow-right.svg');
+    background-image: url("/assets/img/icons/arrow-right.svg");
   }
   &__collapse {
-    background-image: url('/assets/img/icons/collapse.svg');
+    background-image: url("/assets/img/icons/collapse.svg");
   }
   &__drivers-missing {
     background-image: url("/assets/img/icons/drivers-missing.svg");
@@ -603,7 +650,7 @@
     background-image: url("/assets/img/icons/upload-avtar.svg");
   }
   &__dropdown-down {
-    background-image: url("/assets/img/icons/dropdown-down.svg") ;
+    background-image: url("/assets/img/icons/dropdown-down.svg");
   }
   &__notifications {
     background-image: url("/assets/img/icons/notifications.svg");
@@ -619,34 +666,43 @@
   }
 
   &__key {
-    background-image: url("/assets/img/icons/key.svg") ;
+    background-image: url("/assets/img/icons/key.svg");
   }
   &__copy {
-    background-image: url("/assets/img/icons/copy.svg") ;
+    background-image: url("/assets/img/icons/copy.svg");
+  }
+  &__copy-blue {
+    background-image: url("/assets/img/icons/copy-blue.svg");
+  }
+  &__templete-blue {
+    background-image: url("/assets/img/icons/templete-blue.svg");
   }
   &__link-gray {
-    background-image: url("/assets/img/icons/link-gray.svg") ;
+    background-image: url("/assets/img/icons/link-gray.svg");
+  }
+  &__clone-document {
+    background-image: url("/assets/img/icons/clone-document.svg");
   }
   &__new-ticket-support {
-    background-image: url("/assets/img/icons/new-ticket-support.svg") ;
+    background-image: url("/assets/img/icons/new-ticket-support.svg");
   }
   &__remote-access-green {
-    background-image: url("/assets/img/icons/remote-access-green.svg") ;
+    background-image: url("/assets/img/icons/remote-access-green.svg");
   }
   &__remote-access-gray {
-    background-image: url("/assets/img/icons/remote-access-gray.svg") ;
+    background-image: url("/assets/img/icons/remote-access-gray.svg");
   }
   &__connected-device-green {
-    background-image: url("/assets/img/icons/connected-device-green.svg") ;
+    background-image: url("/assets/img/icons/connected-device-green.svg");
   }
   &__computer-green {
-    background-image: url("/assets/img/icons/computer-green.svg") ;
+    background-image: url("/assets/img/icons/computer-green.svg");
   }
 
   &.--updated {
     position: relative;
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       width: 20px;
       height: 20px;
@@ -658,7 +714,7 @@
   &.--alert {
     position: relative;
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       width: 20px;
       height: 20px;
@@ -667,10 +723,11 @@
       background-image: url("/assets/img/icons/alert.svg");
     }
   }
-  &.--online, &.--offline {
+  &.--online,
+  &.--offline {
     position: relative;
     &::before {
-      content: '';
+      content: "";
       width: 10px;
       height: 10px;
       position: absolute;
@@ -680,7 +737,6 @@
       background-color: #2ec866;
       border-radius: 50%;
     }
-
   }
   &.--offline {
     &::before {
@@ -702,10 +758,13 @@
   background-size: contain;
   display: inline-block;
 
-  &.--high {background-image: url("/assets/img/icons/priority-high.png");}
-  &.--medium {background-image: url("/assets/img/icons/priority-medium.png");}
-  &.--low    {background-image: url("/assets/img/icons/priority-low.png");}
+  &.--high {
+    background-image: url("/assets/img/icons/priority-high.png");
+  }
+  &.--medium {
+    background-image: url("/assets/img/icons/priority-medium.png");
+  }
+  &.--low {
+    background-image: url("/assets/img/icons/priority-low.png");
+  }
 }
-
-
-

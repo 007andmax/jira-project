@@ -1,0 +1,27 @@
+.content {
+    width: 18%;
+    //max-width: 208px;
+    //display: inline-block;
+    margin-bottom: 0px;
+    //position: relative;
+    //vertical-align: middle;
+}
+.filter-documents-date {
+    //width: 23%;
+    max-width: 208px;
+    min-width: 208px;
+    width: 208px;
+}
+app-company-tags {
+    flex: 1;
+    /* max-width: 380px;*/
+    //width: 32%;
+    min-width: 320px;
+}
+/deep/.date-picker {
+    overflow-x: visible;
+}
+.documents-company-filter {
+    width: 28%;
+    //max-width: 308px;
+}

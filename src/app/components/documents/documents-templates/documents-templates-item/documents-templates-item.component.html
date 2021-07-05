@@ -1,0 +1,135 @@
+<div
+    class="card pointer"
+    (click)="showTemplate(item)"
+>
+    <div class="qt-df qt-ai-c qt-jc-sb">
+        <div class="card__icon">
+            <div class="icon__documents qt-za-16 qt-sz-16 qt-bg-contain"></div>
+        </div>
+        <div
+            class="card__label"
+            [textContent]="getCompanyType()"
+        >
+        </div>
+        <div
+            class="qt-button qt-ml-6"
+            routerLink="/ng2/documents/add"
+            [queryParams]="{'clone_document':item.id}"
+            *ngIf="getPermissions('CREATE_TEMPLATE') || getPermissions('CREATE_DOCUMENT')"
+            (click)="$event.stopPropagation();"
+        >
+            Use
+        </div>
+    </div>
+    <div
+        class="card__title"
+        [textContent]="item.title"
+    ></div>
+    <div class="qt-df qt-ai-c qt-jc-sb">
+        <div
+            class="card__description"
+            [textContent]="getCategoryName()"
+        ></div>
+        <div
+            class="card__description__menu"
+            (click)="$event.stopPropagation();"
+        >
+            <div
+                ngbDropdown
+                [container]="'body'"
+                [placement]="'bottom-right'"
+            >
+                <div
+                    class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"
+                    ngbDropdownToggle
+                ></div>
+                <ul
+                    class="qt-dropdown-menu"
+                    ngbDropdownMenu
+                    aria-labelledby="dropdownBasic1"
+                >
+                    <!-- <li
+                        class="pointer"
+                        ngbDropdownItem
+                    >
+                        <div class="icon__share-folder qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                        Share...
+                    </li> -->
+                    <li
+                        class="pointer"
+                        ngbDropdownItem
+                        *ngIf="!item.isDefault && getPermissions('EDIT_TEMPLATE')"
+                        (click)="editDocument(item)"
+                    >
+                        <div class="icon__edit qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                        Edit
+                    </li>
+                    <!-- <li
+                        class="pointer"
+                        ngbDropdownItem
+                    >
+                        <div class="icon__move qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                        Move...
+                    </li>
+                    <li
+                        class="pointer"
+                        ngbDropdownItem
+                    >
+                        <div class="icon__copy-gray qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                        Copy to…
+                    </li> -->
+                    <li
+                        class="pointer"
+                        ngbDropdownItem
+                        routerLink="/ng2/documents/add"
+                        [queryParams]="{'clone_document':item.id}"
+                        *ngIf="getPermissions('CREATE_TEMPLATE') || getPermissions('CREATE_DOCUMENT')"
+                    >
+                        <div class="icon__clone-document qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                        Clone Document
+                    </li>
+                    <!-- <li
+                        class="pointer"
+                        ngbDropdownItem
+                    >
+                        <div class="icon__search-gray qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                        Find within document
+                    </li>
+                    <li
+                        class="pointer"
+                        ngbDropdownItem
+                    >
+                        <div class="icon__link-gray qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                        Copy Internal Link
+                    </li> -->
+                    <li
+                        class="pointer"
+                        ngbDropdownItem
+                        (click)="printPdf()"
+                    >
+                        <div class="icon__print qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                        Print
+                    </li>
+                    <li
+                        class="pointer"
+                        ngbDropdownItem
+                        (click)="exportPdf()"
+                    >
+                        <div class="icon__download-pdf qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                        Export PDF
+                    </li>
+                    <li
+                        class="pointer"
+                        ngbDropdownItem
+                        *ngIf="!item.isDefault && getPermissions('DELETE_TEMPLATE')"
+                        class="remove-item"
+                        (click)="removeDocument()"
+                    >
+                        <div class="icon__remove qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                        Delete
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

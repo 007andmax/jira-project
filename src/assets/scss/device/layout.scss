@@ -3,7 +3,7 @@ body {
         padding: 0;
         margin: 0;
         @include body-font;
-        background-color: $bodyColor;        
+        background-color: $bodyColor;
 /*** Default stylesheet reset ***/
 *,*::before,*::after{box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;-o-box-sizing:border-box;}
 
@@ -43,8 +43,8 @@ h1,.h1{
     font-family: $graphicSemibold;
     line-height: 1.4;
     letter-spacing: -0.3px;
-    color: $heavyMetal;   
-    margin:0 0 20px 0; 
+    color: $heavyMetal;
+    margin:0 0 20px 0;
     text-transform: capitalize;
 }
 h2,.h2{
@@ -144,7 +144,7 @@ ol li:before{content:counter(av-counter) ".";counter-increment:none;color:$secon
     &.btn-secondary{
         background-color: #edf2f6 !important;
         color: $metal !important;
-        &:hover{ 
+        &:hover{
             background-color: #edf2f6 !important;
             color: $metal !important;
         }
@@ -213,7 +213,7 @@ form{
         &:focus{
             border-color:#9ca5b6;
         }
-        
+
     }
 
     textarea{
@@ -233,11 +233,11 @@ form{
 
 /*** Placeholder ***/
 
-.form-input::-webkit-input-placeholder { 
+.form-input::-webkit-input-placeholder {
     color: #9ca5b6;
     @include opacity(1);
   }
-  .form-input::-moz-placeholder { 
+  .form-input::-moz-placeholder {
     color: #9ca5b6;
     @include opacity(1);
   }
@@ -245,17 +245,17 @@ form{
     color: #9ca5b6;
     @include opacity(1)
   }
-  .form-input:-moz-placeholder { 
+  .form-input:-moz-placeholder {
     color: #9ca5b6;
         @include opacity(1);
   }
 
-  
-  .cmn-dropdown .cmn-dropdon-list form input[type="text"]::-webkit-input-placeholder { 
+
+  .cmn-dropdown .cmn-dropdon-list form input[type="text"]::-webkit-input-placeholder {
     color: #9ca5b6;
     @include opacity(1);
   }
-  .cmn-dropdown .cmn-dropdon-list form input[type="text"]::-moz-placeholder { 
+  .cmn-dropdown .cmn-dropdon-list form input[type="text"]::-moz-placeholder {
     color: #9ca5b6;
     @include opacity(1);
   }
@@ -263,7 +263,7 @@ form{
     color: #9ca5b6;
     @include opacity(1)
   }
-  .cmn-dropdown .cmn-dropdon-list form input[type="text"]:-moz-placeholder { 
+  .cmn-dropdown .cmn-dropdon-list form input[type="text"]:-moz-placeholder {
     color: #9ca5b6;
         @include opacity(1);
   }
@@ -294,7 +294,7 @@ header{
         float: left;
         width: 100%;
     }
-    
+
     .cmn-wrapper {
         display: -webkit-flex;
         display: -ms-flexbox;
@@ -336,7 +336,7 @@ header{
                         max-height: 100%;
                         display: inline-block;
                     }
-                   
+
                 }
                 .head-device {
                     display: -webkit-flex;
@@ -420,10 +420,10 @@ header{
                 background-color: #ff6e61;
             }
         }
-        
-        
+
+
     }
-    
+
     .head-counter {
         position: absolute;
         right: 32px;
@@ -477,7 +477,7 @@ header{
             }
         }
     }
-   
+
 }
 
 /*** Left sidebar ***/
@@ -493,7 +493,7 @@ header{
     height: 100%;
     app-nav{
         float: left;
-        width: 100%;    
+        width: 100%;
         height: 100%;
     }
     nav{
@@ -539,13 +539,13 @@ header{
                     border-color: $primary-color;
                     font-family: $graphicSemibold;
                 }
-            } 
+            }
             &.back{
                 a{
                     font-size: 12px;
                     padding-left: 40px;
                 }
-            }   
+            }
             }
         }
     }
@@ -591,8 +591,8 @@ header{
             margin-bottom: 14px;
         }
     }
-    
-   
+
+
     .user-info-hp {
         float: left;
         width: 100%;
@@ -608,7 +608,7 @@ header{
         border-radius: 6px;
         position: relative;
     }
-    
+
     .user-hp-dp {
         width: 32px;
         height: 32px;
@@ -626,7 +626,7 @@ header{
             object-fit: cover;
         }
     }
-    
+
     .user-log-info {
         float: right;
         width: calc(100% - 40px);
@@ -647,7 +647,7 @@ header{
             color: #9ca5b6;
         }
     }
-    
+
     .user-status {
         position: absolute;
         top: 8px;
@@ -666,14 +666,14 @@ header{
             background-color: #2ec866;
         }
     }
-    
-  
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
 }
 
 /*** Right Sidebar  ***/
@@ -742,7 +742,7 @@ header{
             overflow-y: auto;
             overflow-x: hidden;
         }
-        
+
     }
     .add-btn{
         position: absolute;
@@ -799,7 +799,7 @@ header{
         align-items: center;
         width: 100%;
     }
-    
+
     .status {
         font-size: 10px;
         font-family: $graphicMedBold;
@@ -853,7 +853,7 @@ header{
             &::before {content: "";display: inline-block;width: 4px;height: 4px;background-color: #9ca5b6;border-radius: 50%;vertical-align: middle;margin: 0 8px;}
         }
     }
-    
+
     .more {
         font-size: 10px;
          font-weight: normal;
@@ -867,7 +867,7 @@ header{
          }
      }
 
-    
+
 
    &.task {
        padding-left: 30px;
@@ -894,7 +894,7 @@ header{
             }
         }
     }
-   
+
     .img-bunch-row {
         float: left;
         width: auto;
@@ -928,10 +928,10 @@ header{
             object-fit: cover;
         }
     }
-    
+
    }
-    
-    
+
+
 }
 
 
@@ -995,10 +995,10 @@ ngb-tabset {
                 &:hover,&.active{
                     border-color: $primary-color;
                     color: $primary-color;
-               
-            }  
+
             }
-           
+            }
+
         }
     }
     .tab-content{
@@ -1114,7 +1114,7 @@ ngb-tabset {
     display: inline-block;
     vertical-align: middle;
     position: relative;
-   
+
     &::before{
         position: absolute;
         padding:9px 7px;
@@ -1302,7 +1302,7 @@ table {
         width: 7%;
         position: relative;
     }
-    
+
     .s-name {
         width: 35% !important;
         padding-left: 0;
@@ -1313,11 +1313,11 @@ table {
     .version {
         width: 15% !important;
     }
-    
+
     .install {
         width: 15% !important;
     }
-    
+
     .c-version {
         width: 15% !important;
     }
@@ -1333,7 +1333,7 @@ table {
         background-color: #fff;
         @include border-radius(5px);
         margin-bottom: 2px;
-      
+
     }
     &.cmn-tab-head {
         width: 100%;
@@ -1348,8 +1348,8 @@ table {
         text-align: center;
         padding: 16px 5px;
     }
-    
-    
+
+
 }
 
 /*** Common Checkbox ***/
@@ -1487,7 +1487,7 @@ table {
                 }
             }
         }
-        
+
     }
     .middle-content {
         float: left;
@@ -1502,7 +1502,7 @@ table {
             margin-bottom: 33px;
             .dp{
                 height: 63px;width: 63px;
-                
+
             }
             .dp-info {
                 span{font-size: 11px;color: $metal}
@@ -1528,7 +1528,7 @@ table {
                 box-shadow: none;
                 padding: 0 8px;
                 margin-bottom: 30px;
-            } 
+            }
         }
         .btn-row{
             float: left;width: 100%;
@@ -1618,7 +1618,7 @@ table {
             float: left;
             width: 100%;
             padding: 15px;
-            
+
             input[type="text"] {
                 // @include opacity(0.5);
                 @include border-radius(3px);
@@ -1640,7 +1640,7 @@ table {
                 }
             }
         }
-   
+
         ul {
             float: left;
             width: 100%;
@@ -1765,7 +1765,7 @@ table {
             }
         }
     }
-    
+
 }
 
 /*** File Uploader ***/
@@ -1813,10 +1813,10 @@ table {
                         display: none;
                     }
                 }
-                
+
             }
-           
-            
+
+
         }
     }
     .upload-item {
@@ -1840,7 +1840,7 @@ table {
             overflow: hidden;
             color: $metal;
             padding: 8px 36px;
-            
+
             .f-name {
                 font-size: 12px;
                 font-weight: normal;
@@ -1861,7 +1861,7 @@ table {
             }
         }
     }
-    
+
 }
 
 
@@ -1891,7 +1891,7 @@ ul.user-list {
             .user-added{
                 &::after{
                     background: url(/assets/img/device/selected.svg) no-repeat center;
-                } 
+                }
          }
         }
         &.device-unselected{
@@ -1899,7 +1899,7 @@ ul.user-list {
                 &::after{
                     background: url(/assets/img/device/unselected.svg) no-repeat center;
                 }
-            }    
+            }
         }
         .user-added {
             display: inline-block;
@@ -1931,8 +1931,8 @@ ul.user-list {
                 object-fit: cover;
             }
         }
-       
-        
+
+
     }
 }
 .user-list-info {
@@ -2077,7 +2077,7 @@ bs-datepicker-navigation-view {
   font-style: normal;
   line-height: normal;
   letter-spacing: normal;
-  color: #4f5f79; 
+  color: #4f5f79;
   padding:5px 5px 4px 5px;;
 }
 .bs-datepicker-body table.days span {
@@ -2086,12 +2086,12 @@ bs-datepicker-navigation-view {
     line-height: 25px;
     text-align: center;
     font-size: 12px;
-    color: #4f5f79; 
+    color: #4f5f79;
 }
 .theme-green .bs-datepicker-body table td span.selected, .theme-green .bs-datepicker-body table td.selected span, .theme-green .bs-datepicker-body table td span[class*="select-"]:after, .theme-green .bs-datepicker-body table td[class*="select-"] span:after,.bs-datepicker-body table td span.selected, .bs-datepicker-body table td.selected span,.bs-datepicker-body table td.is-highlighted span,.bs-datepicker-body table.days td:hover span{background-color: #16a4fa;color: #fff;}
 .bs-datepicker-body table td.is-highlighted:not(.disabled):not(.selected) span, .bs-datepicker-body table td span.is-highlighted:not(.disabled):not(.selected){background-color: #16a4fa;color: #fff;cursor: not-allowed;}
 .bs-datepicker-body table td span.is-other-month, .bs-datepicker-body table td.is-other-month span {
-cursor: not-allowed;    
+cursor: not-allowed;
 }
 .bs-datepicker-body table.months td span {
     padding: 2px;
@@ -2143,7 +2143,7 @@ ngb-datepicker{
     color: #4f5f79;
     border: 1px solid #dfe3e8 !important;
     z-index: 9;
-   
+
     .ngb-dp-header{
         padding: 0;
         margin: 0;
@@ -2160,7 +2160,7 @@ ngb-datepicker{
             align-items: center;
             justify-content: space-between;
             width: 100%;
-            .ngb-dp-navigation-select{ 
+            .ngb-dp-navigation-select{
                 select{
                     @include app-none();
                     border: solid 1px #c4cbd5;
@@ -2202,7 +2202,7 @@ ngb-datepicker{
             &.right{
                 .btn{
                     &.btn-link {
-                        
+
                         &.ngb-dp-arrow-btn{
                             background: url(/assets/img/device/next.svg) no-repeat right center;float: right;
                             min-width: inherit;
@@ -2210,7 +2210,7 @@ ngb-datepicker{
                     }
                 }
             }
-            
+
         }
     }
     .ngb-dp-weekdays {
@@ -2234,7 +2234,7 @@ ngb-datepicker{
         .ngb-dp-month{
             width: 100%;
         }
-      
+
     }
     ngb-datepicker-month-view{
         width: 100%;
@@ -2246,7 +2246,7 @@ ngb-datepicker{
                 height: auto;
                 width: auto;
                 display: table-cell;
-    
+
             }
             .ngb-dp-day{
                 height: auto;
@@ -2258,7 +2258,7 @@ ngb-datepicker{
                 font-style: normal;
                 line-height: normal;
                 letter-spacing: normal;
-                color: #4f5f79; 
+                color: #4f5f79;
                 text-align: center;
                 padding: 5px 5px 5px 5px;
                 border: none !important;
@@ -2274,14 +2274,14 @@ ngb-datepicker{
                     height: auto;
                     width: auto;
                     line-height: 1 !important;
-                    font-size: 12px;    
+                    font-size: 12px;
                     font-weight: normal;
                     font-family:$font-body;
                     font-stretch: normal;
                     font-style: normal;
                     line-height: normal;
                     letter-spacing: normal;
-                    color: #4f5f79; 
+                    color: #4f5f79;
                     text-align: center;
                     min-width: 24px;
                     min-height: 24px;
@@ -2290,7 +2290,7 @@ ngb-datepicker{
                     justify-content: center;
                     @include border-radius(50%);
                     &.active{
-                        
+
                         background-color: #16a4fa;
                         color:#fff;
                     }
@@ -2343,7 +2343,7 @@ ngb-datepicker{
             .h1{
                 margin-bottom: 30px;
             }
-            
+
         }
         button.close{
             height: 20px;
@@ -2373,9 +2373,9 @@ ngb-datepicker{
     align-items: center;
     min-height: calc(100% - 1rem);
     @media only screen and (min-width:576px){
-        
+
             min-height: calc(100% - 3.5rem);
-       
+
     }
 }
 
@@ -2482,7 +2482,7 @@ ul.dropdown-menu {
     box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
     border: solid 1px #edf2f6;
     padding: 32px;
-    width: 346px; 
+    width: 346px;
     display: none;
     &.opened{
         display: block;
@@ -2498,7 +2498,7 @@ ul.dropdown-menu {
         position: absolute;
         pointer-events: none;
     }
-    
+
     &:after {
         border-color: rgba(255, 255, 255, 0);
         border-bottom-color: #fff;
@@ -2525,7 +2525,7 @@ ul.dropdown-menu {
             margin-bottom: 21px;
             text-align: left;
         }
-        
+
     }
     .modal-body{
         padding: 0;
@@ -2567,7 +2567,7 @@ ul.list-unstyled.breadCumb {
         &::after{
             content:"\\";
             display: inline-block;
-            
+
         }
         &:last-child{
             &::after{
@@ -2625,9 +2625,9 @@ ngx-loading > div {
             background: url('/assets/img/icons/close.svg');
             font-size:0;
 
-          } 
+          }
     }
-    
+
   }
 
   .btn-crops {
@@ -2686,9 +2686,9 @@ ngx-loading > div {
                     letter-spacing: normal;
                     color: #4f5f79;
                 }
-            
+
             }
-            
+
         }
     }
 }
@@ -2817,7 +2817,7 @@ table.dataTable thead tr th.sorting_desc, table.dataTable thead tr th.sorting_as
                     main{
                         margin-right: 352px;
                     }
-                } 
+                }
                 .right-sidebar{
                     right: 0;
                     .panel-bar{
@@ -2825,11 +2825,11 @@ table.dataTable thead tr th.sorting_desc, table.dataTable thead tr th.sorting_as
                         img{
                             transform: rotate(180deg);
                         }
-                            
-                        
+
+
                     }
                 }
-    
+
             }
         }
     }

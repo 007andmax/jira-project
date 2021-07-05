@@ -1,0 +1,50 @@
+<div
+    class="qt-aside-modern__header"
+    *ngIf="!showPreloader"
+>
+    <!-- <button class="qt-button --gray qt-mr-8">Share</button> -->
+    <button
+        class="qt-button --gray qt-mr-8"
+        (click)="editDocument()"
+        *ngIf="getPermissions('EDIT_DOCUMENT')"
+    >
+        Edit
+    </button>
+    <button
+        class="qt-button --gray qt-mr-8"
+        (click)="printPdf()"
+    >
+        Print
+    </button>
+    <button
+        class="qt-button qt-mr-12 qt-mr-8"
+        (click)="exportPdf()"
+    >
+        Export PDF
+    </button>
+
+    <div
+        class="qt-aside-modern__header-close icon__close"
+        (click)="goToDocumentsList()"
+    >
+    </div>
+</div>
+<div
+    class="qt-aside-modern__content --no-padding"
+    [hidden]="showPreloader"
+>
+    <div class="documents-create-panel__body qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
+        <div
+            class="documents-create-panel__header"
+            *ngIf="!showPreloader"
+        >
+            <p [textContent]="getLastEdit()"></p>
+            <h3 [textContent]="document.title"></h3>
+        </div>
+        <div class="documents-create-panel__content"></div>
+    </div>
+</div>
+<div
+    class="loading"
+    *ngIf="showPreloader"
+></div>

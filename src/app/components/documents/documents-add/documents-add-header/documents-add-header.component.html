@@ -1,0 +1,82 @@
+<div class="document-header">
+    <div class="qt-df qt-ai-c">
+        <button
+            (click)="onToggleLeftPanel()"
+            class="btn-expand qt-mr-16"
+        >
+            <div class="icon__expand-redactor qt-za-16 qt-sz-16 qt-bg-contain"></div>
+        </button>
+    </div>
+    <div
+        class="qt-df qt-ai-c"
+        *ngIf="documentEdit"
+    >
+        <!-- <div class="document-header__info">Only you</div>
+        <button class="qt-button qt-mr-16 qt-ml-16">
+            <span>Invite</span>
+        </button> -->
+        <div
+            class="invoce-table__menu"
+            ngbDropdown
+            [container]="'body'"
+        >
+            <div
+                class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"
+                id="dropdownBasic1"
+                ngbDropdownToggle
+            >
+                <ul
+                    class="qt-dropdown-menu invoice-items-dropdown"
+                    ngbDropdownMenu
+                    aria-labelledby="dropdownBasic1"
+                >
+                    <li
+                        class="pointer"
+                        ngbDropdownItem
+                        routerLink="/ng2/documents/add"
+                        [queryParams]="{'clone_document':documentEdit.id}"
+                        *ngIf="getPermissions('CREATE_DOCUMENT')"
+                    >
+                        <div class="icon__clone-document qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                        Clone Document
+                    </li>
+                    <li
+                        class="pointer"
+                        ngbDropdownItem
+                        (click)="printPdf()"
+                    >
+                        <div class="icon__print qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                        Print
+                    </li>
+                    <li
+                        class="pointer"
+                        ngbDropdownItem
+                        (click)="exportPdf()"
+                    >
+                        <div class="icon__download-pdf qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                        Export PDF
+                    </li>
+                    <li
+                        class="pointer"
+                        ngbDropdownItem
+                        (click)="previewDocument()"
+                    >
+                        <div class="icon__go-to qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                        Open in new tab
+                    </li>
+                    <li
+                        class="pointer"
+                        ngbDropdownItem
+                        class="remove-item"
+                        (click)="onRemoveDocument()"
+                        *ngIf="getPermissions('DELETE_DOCUMENT')"
+                    >
+                        <div class="icon__remove qt-sz-16 qt-bg-contain qt-mr-8"></div>
+                        Delete
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <find-within-document *ngIf="toggleFind"></find-within-document>
+    </div>
+</div>

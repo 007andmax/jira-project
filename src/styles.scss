@@ -1,8 +1,7 @@
-
-@import './assets/styles/dropdowns.scss';
-@import './assets/styles/icons.scss';
+@import "./assets/styles/dropdowns.scss";
+@import "./assets/styles/icons.scss";
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-@import './assets/styles/main.scss';
+@import "./assets/styles/main.scss";
 //COMMON STYLES ----------------------------
 .d-f {
   display: flex;
@@ -40,19 +39,20 @@
 .pr-0 {
   padding-right: 0 !important;
 }
-.with-dollar, .with-percent {
+.with-dollar,
+.with-percent {
   position: relative;
   input {
     padding-left: 20px !important;
   }
   &:before {
     position: absolute;
-    content: '$';
+    content: "$";
   }
 }
 .with-percent {
   &:before {
-    content: '%';
+    content: "%";
   }
 }
 .circle-avatar {
@@ -110,7 +110,7 @@
     background-color: #fff;
     border-radius: 50%;
     border: 1px solid #c7cdd7;
-    transition: all .3s;
+    transition: all 0.3s;
     &:after {
       content: "";
       position: absolute;
@@ -189,7 +189,7 @@
       background: transparent;
       border: none;
       &:before {
-        content: '';
+        content: "";
         position: absolute;
         top: 1px;
         left: -1px;
@@ -260,52 +260,6 @@
   app-select-search {
     > div {
       padding: 0 !important;
-    }
-  }
-}
-app-left-panel-tags {
-  > .col-md-12 {
-    padding: 0 24px;
-    .dropdown-menu {
-      width: 192px;
-      left: 24px !important;
-    }
-    .mat-form-field {
-      width: 100%;
-    }
-    .mat-form-field-infix {
-      border: none;
-    }
-    input.mat-chip-input {
-      width: 5px;
-      flex: 1 0 5px;
-    }
-    .mat-standard-chip.mat-chip-with-trailing-icon {
-      padding: 2px 8px;
-      border-radius: 3px;
-      border: solid 1px rgba(255, 255, 255, 0.3);
-      color: #fff;
-      background: transparent;
-    }
-    .mat-form-field-appearance-legacy .mat-form-field-underline,
-    .mat-form-field-label-wrapper,
-    .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label,
-    .mat-form-field-appearance-legacy .mat-form-field-label {
-      display: none;
-    }
-    .mat-form-field-appearance-legacy .mat-form-field-wrapper {
-      padding: 0;
-    }
-    .mat-form-field-infix {
-      border-radius: 4px;
-      padding: 8px;
-      min-height: 40px;
-      background: #313a4d;
-      input {
-        padding: 0;
-        height: 32px;
-        margin: 0;
-      }
     }
   }
 }
@@ -436,9 +390,68 @@ app-left-panel-tags {
     }
   }
 }
+app-company-tags {
+  .dropdown-toggle .mat-form-field-wrapper .mat-form-field-infix {
+    input {
+      /* position: absolute; */
+      width: calc(100% - 36px);
+      /* height: 100%; */
+      top: 0;
+      flex: 1;
+      height: 30px;
+    }
+  }
+}
+documents-filter {
+  app-company-tags {
+    .mat-form-field-wrapper {
+      &::before {
+        content: "" !important;
+      }
+    }
+    .mat-form-field {
+      margin-top: 0px !important;
+      height: 100%;
+    }
+    .mat-form-field-infix {
+      min-height: 36px !important;
+      &::before {
+        top: 9px !important;
+      }
+    }
+    .mat-form-field-appearance-legacy .mat-form-field-infix {
+      padding: 0;
+      background-color: #fff;
+      z-index: 1;
+    }
+    .dropdown-toggle {
+      .mat-form-field-wrapper {
+        height: 100%;
+      }
+    }
+    .mat-chip-list-wrapper {
+      margin: 0;
+    }
+    .mat-chip-list-wrapper .mat-standard-chip,
+    .mat-chip-list-wrapper input.mat-input-element {
+      margin: 2px;
+    }
+    .mat-standard-chip.mat-chip-with-trailing-icon {
+      position: relative;
+      z-index: 1;
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+  }
+}
 .new-companies-content__modal--content,
 .new-users-content__modal--content,
-.recurring-tickets-content__modal--content {
+.recurring-tickets-content__modal--content,
+.billing-dashboard-page__content,
+documents-filter,
+app-documents-add-info,
+.company-dashboard-add-tag,
+documents-edit-info {
   .tab-btns {
     display: flex;
     margin: 0 20px;
@@ -449,7 +462,7 @@ app-left-panel-tags {
       cursor: pointer;
       margin-right: 24px;
       border-bottom: 2px solid transparent;
-      transition: all .3s;
+      transition: all 0.3s;
       &:hover,
       &.active {
         border-color: #16a4fa;
@@ -460,9 +473,11 @@ app-left-panel-tags {
   app-tags,
   app-company-tags,
   app-taxes,
+  documents-linked,
   app-draft-email-recipients,
   draft-email-user-recipients {
-    > .col-md-12,.col-md-6 {
+    > .col-md-12,
+    .col-md-6 {
       margin-top: 40px;
       .mat-form-field {
         width: 100%;
@@ -480,7 +495,7 @@ app-left-panel-tags {
         position: relative;
         &:before {
           position: absolute;
-          content: 'Tags';
+          content: "Tags";
           font-family: "Graphik-Medium", sans-serif;
           font-size: 13px;
           left: 0;
@@ -503,7 +518,7 @@ app-left-panel-tags {
           left: 12px;
           top: 15px;
           position: absolute;
-          content: '';
+          content: "";
           width: 16px;
           height: 16px;
           background: url("./assets/img/icons/tag-ng2.png");
@@ -515,16 +530,23 @@ app-left-panel-tags {
       }
     }
   }
+  documents-linked {
+    .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+      &:before {
+        content: "" !important;
+      }
+    }
+  }
   app-taxes .mat-form-field-appearance-legacy .mat-form-field-wrapper {
     &:before {
-      content: 'Taxes' !important;
+      content: "Taxes" !important;
     }
   }
   app-draft-email-recipients {
     > .col-md-12 {
       .mat-form-field-appearance-legacy .mat-form-field-wrapper {
         &:before {
-          content: 'Add Recipient';
+          content: "Add Recipient";
         }
       }
     }
@@ -533,7 +555,7 @@ app-left-panel-tags {
     > .col-md-12 {
       .mat-form-field-appearance-legacy .mat-form-field-wrapper {
         &:before {
-          content: 'Add Recipient Email Address';
+          content: "Add Recipient Email Address";
         }
       }
     }
@@ -548,7 +570,7 @@ app-left-panel-tags {
         padding-bottom: 20px;
         &:after {
           position: absolute;
-          content: '';
+          content: "";
           left: 15px;
           bottom: 0;
           height: 1px;
@@ -611,7 +633,7 @@ app-left-panel-tags {
   position: relative;
   &.confirm-user-modal {
     h3 {
-      font-family: 'Graphik-Regular', sans-serif !important;
+      font-family: "Graphik-Regular", sans-serif !important;
       font-size: 13px !important;
       margin: 15px 0 !important;
       font-weight: 500 !important;
@@ -640,7 +662,7 @@ app-left-panel-tags {
       margin: 0;
       &:before,
       &:after {
-        content: '';
+        content: "";
         position: absolute;
       }
       &:before {
@@ -656,7 +678,7 @@ app-left-panel-tags {
         top: 10px;
         width: 24px;
         height: 24px;
-        background: url("assets/img/icons/archive-red-ng2.png") no-repeat;;
+        background: url("assets/img/icons/archive-red-ng2.png") no-repeat;
       }
     }
     p {
@@ -722,7 +744,7 @@ app-left-panel-tags {
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;
-  background-color: #edf2f6;
+  background-color: #f8f9fa;
   float: left;
   cursor: inherit;
   .mat-chip-remove {
@@ -732,7 +754,7 @@ app-left-panel-tags {
     height: 0;
     margin: 0;
     &:before {
-      content: '';
+      content: "";
       position: absolute;
       top: -1px;
       right: -6px;
@@ -760,7 +782,7 @@ ngb-typeahead-window {
   position: relative;
   &:before {
     position: absolute;
-    content: '';
+    content: "";
     left: 10px;
     top: 50%;
     transform: translateY(-50%);
@@ -1066,23 +1088,23 @@ app-quotes-item {
   color: #fff;
   font-size: 24px;
   outline: none;
-  transition: all .3s;
+  transition: all 0.3s;
 }
 .plus-btn:hover {
   background: #189947;
 }
-.products-content__list .products-content__list--item [class*='col-md-'],
-.new-companies-content__list .new-companies-content__list--item [class*='col-md-'],
-.new-users-content__list .new-users-content__list--item [class*='col-md-'],
-.recurring-tickets-content__list .recurring-tickets-content__list--item [class*='col-md-'],
-.password-content__list .password-content__list--item [class*='col-md-'] {
+.products-content__list .products-content__list--item [class*="col-md-"],
+.new-companies-content__list .new-companies-content__list--item [class*="col-md-"],
+.new-users-content__list .new-users-content__list--item [class*="col-md-"],
+.recurring-tickets-content__list .recurring-tickets-content__list--item [class*="col-md-"],
+.password-content__list .password-content__list--item [class*="col-md-"] {
   word-break: break-all;
 }
-.products-content__list .products-content__list--header [class*='col-md-'],
-.new-companies-content__list .new-companies-content__list--header [class*='col-md-'],
-.new-users-content__list .new-users-content__list--header [class*='col-md-'],
-.recurring-tickets-content__list .recurring-tickets-content__list--header [class*='col-md-'],
-.password-content__list .password-content__list--header [class*='col-md-'] {
+.products-content__list .products-content__list--header [class*="col-md-"],
+.new-companies-content__list .new-companies-content__list--header [class*="col-md-"],
+.new-users-content__list .new-users-content__list--header [class*="col-md-"],
+.recurring-tickets-content__list .recurring-tickets-content__list--header [class*="col-md-"],
+.password-content__list .password-content__list--header [class*="col-md-"] {
   white-space: nowrap;
 }
 .products-content__list--header div,
@@ -1144,7 +1166,7 @@ app-quotes-item {
 }
 .password-content__list--item .col-md-3:before {
   position: absolute;
-  content: '';
+  content: "";
   width: 40px;
   height: 40px;
   left: -40px;
@@ -1206,11 +1228,11 @@ app-quotes-item {
   margin-left: 20px;
   cursor: pointer;
 }
-.products-content__list--item [class*='col-md-'],
-.new-companies-content__list--item [class*='col-md-'],
-.new-users-content__list--item [class*='col-md-'],
-.recurring-tickets-content__list--item [class*='col-md-'],
-.password-content__list--item [class*='col-md-'] {
+.products-content__list--item [class*="col-md-"],
+.new-companies-content__list--item [class*="col-md-"],
+.new-users-content__list--item [class*="col-md-"],
+.recurring-tickets-content__list--item [class*="col-md-"],
+.password-content__list--item [class*="col-md-"] {
   font-size: 13px;
   font-family: "Graphik-Regular", sans-serif;
   p {
@@ -1280,7 +1302,7 @@ app-quotes-item {
   }
   .col-md-2 {
     width: 7%;
-    @media(max-width: 1366px) {
+    @media (max-width: 1366px) {
       width: 9%;
     }
   }
@@ -1289,7 +1311,7 @@ app-quotes-item {
   }
   .col-md-1 {
     width: 7%;
-    @media(max-width: 1366px) {
+    @media (max-width: 1366px) {
       width: 6%;
     }
   }
@@ -1368,8 +1390,8 @@ app-quotes-item {
           margin-right: 15px;
         }
       }
-      [class*='col-md-'],
-      [class*='col-md-'] p {
+      [class*="col-md-"],
+      [class*="col-md-"] p {
         font-size: 12px;
         color: #364656;
         font-family: Graphik-Medium, sans-serif;
@@ -1384,14 +1406,14 @@ app-quotes-item {
     .office-phone-icn {
       margin-right: 5px;
     }
-    [class*='col-md-'] {
+    [class*="col-md-"] {
       min-height: 40px;
       display: flex;
       align-items: center;
     }
     .circle-avatar {
       margin: 0 15px;
-      @media(max-width: 1366px) {
+      @media (max-width: 1366px) {
         margin: 0 3px;
       }
     }
@@ -1468,7 +1490,7 @@ app-quotes-item {
       display: flex;
       position: relative;
       &:before {
-        content: '';
+        content: "";
         position: absolute;
         background: #4f5f79;
         width: 94%;
@@ -1523,7 +1545,7 @@ app-quotes-item {
         padding-left: 36px !important;
       }
       &:before {
-        content: '';
+        content: "";
         position: absolute;
         width: 16px;
         height: 16px;
@@ -1566,7 +1588,7 @@ app-quotes-item {
         color: #4f5f79;
         cursor: pointer;
         &:before {
-          content: '';
+          content: "";
           position: absolute;
           background: url("./assets/img/icons/adduser.png");
           left: -40px;
@@ -1687,7 +1709,7 @@ app-quotes-item {
     margin-right: 20px;
     &:after {
       position: absolute;
-      content: '';
+      content: "";
       background: url("./assets/img/icons/help.png");
       height: 16px;
       width: 16px;
@@ -1701,7 +1723,7 @@ app-quotes-item {
       position: relative;
       &:after {
         position: absolute;
-        content: 'Max 300 Words';
+        content: "Max 300 Words";
         right: 15px;
         bottom: -22px;
         font-family: "Graphik-Regular", sans-serif;
@@ -1774,7 +1796,7 @@ app-quotes-item {
     width: 83%;
     margin: 0 15px;
     &:before {
-      content: '';
+      content: "";
       background: transparent;
       color: #7f5c1b;
       border: 1px solid #7f5c1b;
@@ -1783,7 +1805,7 @@ app-quotes-item {
     }
     &:after {
       position: absolute;
-      content: 'i';
+      content: "i";
       color: #7f5c1b;
       left: 25px;
       top: 50%;
@@ -1801,10 +1823,47 @@ app-quotes-item {
   .app-drop-down__right-icon {
     right: 0;
   }
+
+  .filter-tags-body {
+    .mat-form-field-flex {
+      .mat-form-field-infix {
+        &::before {
+          top: 11px;
+        }
+      }
+    }
+    .mat-form-field-infix {
+      min-height: 40px !important;
+      padding: 0;
+
+      input {
+        border: none;
+      }
+    }
+
+    .mat-form-field-wrapper {
+      margin-top: 17px;
+    }
+
+    .mat-standard-chip {
+      margin: 2px;
+
+      &.mat-chip-with-trailing-icon {
+        z-index: 1;
+      }
+    }
+    .mat-chip-list-wrapper {
+      margin: 0;
+    }
+
+    .mat-form-field-label {
+      top: 12px;
+    }
+  }
 }
 .new-companies-content__list--item {
   position: relative;
-  [class*='col-md-'] {
+  [class*="col-md-"] {
     align-items: flex-start;
   }
   .col-md-3:first-child,
@@ -1829,7 +1888,7 @@ app-quotes-item {
     width: 90%;
     height: 100%;
     cursor: pointer;
-    @media(max-width: 1366px) {
+    @media (max-width: 1366px) {
       width: 87%;
     }
   }
@@ -1857,7 +1916,7 @@ app-quotes-item {
     }
     .mat-option {
       font-size: 14px;
-      transition: all .3s;
+      transition: all 0.3s;
       &:hover {
         background-color: #16a4fa;
         color: #fff;
@@ -1963,7 +2022,7 @@ ngb-datepicker {
       padding: 4px 24px;
       font-size: 12px;
       border-left: 2px solid transparent;
-      transition: all .3s;
+      transition: all 0.3s;
       cursor: pointer;
       &:hover,
       &.active {
@@ -1981,7 +2040,7 @@ ngb-datepicker {
     .tags-header,
     .filter-item__header {
       padding: 8px 24px;
-      opacity: .5;
+      opacity: 0.5;
       font-family: "Graphik-Semibold", sans-serif;
       font-size: 11px;
       text-transform: uppercase;
@@ -1994,7 +2053,7 @@ ngb-datepicker {
   z-index: 2;
 }
 .left-panel-ng2 {
-  @media(max-width: 414px) {
+  @media (max-width: 414px) {
     margin-bottom: 110px;
   }
   [class*="left-panel-ng2__content"] {
@@ -2009,7 +2068,7 @@ ngb-datepicker {
     justify-content: center;
     font-size: 20px;
     line-height: 1em;
-    font-family: 'Graphik-Light', sans-serif;
+    font-family: "Graphik-Light", sans-serif;
     position: fixed;
     width: 240px;
     background: #354053;
@@ -2019,7 +2078,7 @@ ngb-datepicker {
   &__content {
     color: #fff;
     margin-top: $header-height;
-    @media(max-width: 414px) {
+    @media (max-width: 414px) {
       margin-top: 0;
     }
     .list-item,
@@ -2027,7 +2086,7 @@ ngb-datepicker {
       font-family: "Graphik-Regular", sans-serif;
       padding: 8px 24px;
       border-left: 2px solid transparent;
-      transition: all .3s;
+      transition: all 0.3s;
       cursor: pointer;
       &:hover,
       &.active {
@@ -2063,7 +2122,7 @@ ngb-datepicker {
           }
         }
         .report-caret-icon {
-          transition: all .3s;
+          transition: all 0.3s;
           position: absolute;
           top: 15px;
           right: 24px;
@@ -2075,7 +2134,7 @@ ngb-datepicker {
           transform: scaleY(0);
           opacity: 0;
           transform-origin: center top;
-          transition: all .3s;
+          transition: all 0.3s;
           overflow: hidden;
           padding: 0 24px;
           .report-caret-icon {
@@ -2115,7 +2174,7 @@ ngb-datepicker {
             &__content {
               p {
                 cursor: pointer;
-                transition: all .3s;
+                transition: all 0.3s;
                 color: #16a4fa;
                 &:hover {
                   color: #fff;
@@ -2130,7 +2189,7 @@ ngb-datepicker {
     .tags-header,
     .filter-item__header {
       padding: 8px 24px;
-      opacity: .5;
+      opacity: 0.5;
       font-family: "Graphik-Semibold", sans-serif;
       font-size: 11px;
       text-transform: uppercase;
@@ -2145,7 +2204,7 @@ ngb-datepicker {
 .quicktech__table {
   width: 100%;
   font-size: 12px;
-  font-family: 'Graphik-Medium', sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
 
   thead {
     text-transform: uppercase;
@@ -2155,7 +2214,8 @@ ngb-datepicker {
     }
   }
 
-  th, td {
+  th,
+  td {
     padding: 15px 8px;
     border-bottom: 1px solid #d3d8e1;
     &:first-child {
@@ -2168,7 +2228,7 @@ ngb-datepicker {
 
   &--list {
     font-size: 14px;
-    font-family: 'Graphik-Regular', sans-serif;
+    font-family: "Graphik-Regular", sans-serif;
     thead {
       text-transform: none;
       th {
@@ -2177,7 +2237,8 @@ ngb-datepicker {
         padding: 20px 8px;
       }
     }
-    th, td {
+    th,
+    td {
       border-bottom: 1px solid #eee;
     }
   }
@@ -2191,7 +2252,6 @@ ngb-datepicker {
   width: 400px !important;
 }
 
-
 .inventory .nano-content {
   overflow: visible !important;
 }
@@ -2201,7 +2261,8 @@ ngb-datepicker {
     padding-bottom: 100px !important;
   }
 
-  .report-header, .report-footer {
+  .report-header,
+  .report-footer {
     display: flex;
     margin: 0;
   }
@@ -2213,15 +2274,10 @@ ngb-datepicker {
   //}
 }
 
+@import "./assets/styles/mobile.scss";
 
-
-
-
-
-@import './assets/styles/mobile.scss';
-
-@import './assets/styles/dropdowns.scss';
-@import './assets/styles/icons.scss';
+@import "./assets/styles/dropdowns.scss";
+@import "./assets/styles/icons.scss";
 
 .main-container:nth-child(2) {
   display: none;
@@ -2265,7 +2321,7 @@ ngb-typeahead-window {
 
   &:before {
     position: absolute;
-    content: '';
+    content: "";
     left: 10px;
     top: 50%;
     transform: translateY(-50%);
@@ -2330,15 +2386,15 @@ input.ng-invalid.is-invalid {
 // @import './assets/styles/mobile.scss';
 
 /*** All css files include ***/
-@import './assets/scss/fonts';
-@import './assets/scss/variable';
-@import './assets/scss/mixin';
-@import './assets/scss/custom';
-@import './assets/scss/layout';
+@import "./assets/scss/fonts";
+@import "./assets/scss/variable";
+@import "./assets/scss/mixin";
+@import "./assets/scss/custom";
+@import "./assets/scss/layout";
 
 /* Add application styles & imports to this file! */
 #toast-container > div {
-  opacity:1;
+  opacity: 1;
 }
 .igx-overlay__wrapper {
   z-index: 9999 !important;
@@ -2432,7 +2488,7 @@ input.ng-invalid.is-invalid {
   color: white;
 }
 .ticket-updates__author {
-  font-weight : 600;
+  font-weight: 600;
   line-height: 2.5;
 }
 
@@ -2446,20 +2502,20 @@ input.ng-invalid.is-invalid {
 }
 
 .service-item {
-    margin-bottom: 20px;
-    &:last-child {
-      margin-bottom: 0;
-    }
+  margin-bottom: 20px;
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
- .ticket-updates__date-icon {
-    width: 24px !important;
-    height: 24px !important;
-    margin-right: 8px;
+.ticket-updates__date-icon {
+  width: 24px !important;
+  height: 24px !important;
+  margin-right: 8px;
 }
 
 // .ticket-updates__update-info {
-  // margin-left: -48px;
+// margin-left: -48px;
 // }
 
 app-ticket-profile-updates-product-item,
@@ -2476,10 +2532,8 @@ app-ticket-profile-updates-note {
   }
 }
 
-
-
 // .ticket-updates__message-line {
-  // max-width: 533px;
+// max-width: 533px;
 // }
 
 app-ticket-profile-updates-service-timepicker {
@@ -2504,7 +2558,6 @@ app-ticket-profile-updates-service-timepicker {
   min-width: 24px;
 }
 
-
 .ticket-updates__done-status,
 .ticket-updates__date-icon,
 .ticket-updates__photo-people {
@@ -2518,7 +2571,6 @@ app-ticket-profile-updates-service-timepicker {
 .pointer {
   cursor: pointer;
 }
-
 
 @mixin product-item-label {
   position: relative;
@@ -2543,7 +2595,7 @@ app-ticket-profile-updates-service-timepicker {
   @include product-item-label;
   &:before {
     @include product-item-input;
-    content: 'Serial No';
+    content: "Serial No";
   }
   input {
     padding-left: 65px !important;
@@ -2557,11 +2609,11 @@ app-ticket-profile-updates-service-timepicker {
   min-width: 128px;
   &:before {
     @include product-item-input;
-    content: 'Cost';
+    content: "Cost";
   }
   &:after {
     @include product-item-input;
-    content: '$';
+    content: "$";
     left: unset;
     right: 22px;
     font-size: 13px;
@@ -2581,7 +2633,7 @@ app-ticket-profile-updates-service-timepicker {
   min-width: 80px;
   &:before {
     @include product-item-input;
-    content: 'Qty';
+    content: "Qty";
   }
   input {
     padding-left: 38px !important;
@@ -2595,11 +2647,11 @@ app-ticket-profile-updates-service-timepicker {
   min-width: 128px;
   &:before {
     @include product-item-input;
-    content: 'Price';
+    content: "Price";
   }
   &:after {
     @include product-item-input;
-    content: '$';
+    content: "$";
     left: unset;
     right: 22px;
     font-size: 13px;
@@ -2619,11 +2671,11 @@ app-ticket-profile-updates-service-timepicker {
   min-width: 124px;
   &:before {
     @include product-item-input;
-    content: 'Discount';
+    content: "Discount";
   }
   &:after {
     @include product-item-input;
-    content: '%';
+    content: "%";
     left: unset;
     right: 22px;
     font-size: 13px;
@@ -2649,7 +2701,6 @@ app-ticket-profile-updates-service-timepicker {
   margin-bottom: 16px;
 }
 
-
 .ticket-updates .ticket-updates__ticket-item {
   &:last-child {
     .ticket-updates__update-block {
@@ -2657,7 +2708,6 @@ app-ticket-profile-updates-service-timepicker {
     }
   }
 }
-
 
 .ticket-updates__delete {
   width: 24px;
@@ -2667,7 +2717,6 @@ app-ticket-profile-updates-service-timepicker {
   background-size: 16px;
   cursor: pointer;
 }
-
 
 app-ticket-profile-form-update {
   position: sticky !important;
@@ -2686,7 +2735,6 @@ app-ticket-profile-form-update {
 .ticket-updates__content {
   flex-grow: 1;
 }
-
 
 .tooltip {
   font-size: 12px;
@@ -2713,7 +2761,6 @@ app-ticket-profile-form-update {
   transform: rotate(-90deg);
 }
 
-
 .collapse-arrow {
   width: 28px;
   height: 28px;
@@ -2735,7 +2782,7 @@ app-add-assigned-user {
   }
 
   .mat-chip-remove:before {
-    background: url('./assets/img/icons/tag-user-close.svg') no-repeat !important;
+    background: url("./assets/img/icons/tag-user-close.svg") no-repeat !important;
     filter: brightness(1) !important;
     width: 16px !important;
     top: 1px !important;
@@ -2757,13 +2804,11 @@ app-add-assigned-user {
 .ticket-edit-aside__body,
 app-ticket-edit-aside-company-info,
 app-ticket-edit-aside-users,
-app-ticket-edit-aside-devices  {
+app-ticket-edit-aside-devices {
   &::-webkit-scrollbar {
     display: none;
   }
 }
-
-
 
 // create product
 .create-product {
@@ -2783,7 +2828,7 @@ app-ticket-edit-aside-devices  {
     z-index: 100;
   }
   &::before {
-    content: '';
+    content: "";
     position: absolute;
   }
 
@@ -2802,6 +2847,11 @@ app-ticket-edit-aside-devices  {
     padding-left: 0;
     margin-top: 17px !important;
     position: relative;
+
+    .qt-checkbox {
+      width: auto;
+      align-items: center;
+    }
 
     .mat-error {
       font-size: 12px;
@@ -2827,7 +2877,7 @@ app-ticket-edit-aside-devices  {
   }
 
   #inventory-description {
-  //  height: 40px !important;
+    //  height: 40px !important;
     padding: 8px 14px;
   }
 
@@ -2894,7 +2944,6 @@ app-ticket-edit-aside-devices  {
   transform: translate(0px, 0px) !important;
 }
 
-
 .create-product {
   .label-name {
     font-size: 13px !important;
@@ -2954,7 +3003,7 @@ app-ticket-edit-aside-devices  {
   top: calc(100% + 6px);
   height: fit-content;
   &:before {
-    content: '';
+    content: "";
     position: absolute;
     top: -3px;
     left: 12px;
@@ -2970,7 +3019,6 @@ app-ticket-edit-aside-devices  {
 
 input.--input-error {
   border: solid 1px #ff5263 !important;
-
 }
 
 .--input-error {
@@ -2993,7 +3041,7 @@ input.--input-error {
 }
 
 .product-list-report {
-  .run-report-content input  {
+  .run-report-content input {
     height: 40px;
   }
 

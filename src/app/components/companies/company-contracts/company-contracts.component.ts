@@ -11,11 +11,15 @@ export class CompanyContractsComponent extends ContractsComponent implements OnI
   companyContracts: Company = null;
   showNotificationReview: boolean = false;
   ngOnInit() {
-    this.leftPanelStateService.setCompanyPage("company-contracts");
-    if (localStorage.getItem('company_id')) {
-      let company_id = localStorage.getItem('company_id');
-      this.companyContracts = this.companiesStateService.getCompanies().find(item => item.id === company_id);
-    }
+    this.leftPanelStateService.changeStateWithoutNavigate("company-contracts");
+    let id = this.activateRoute.snapshot.params['id'];
+    let subscription = this.activateRoute.params.subscribe(params => {
+      id = params['id'];
+      this.companiesStateService.setSelectedCompanyId(id);
+      this.companyContracts = this.companiesStateService.getCompanies().find(item => item.id === id);
+    });
+    this.sub.add(subscription);
+
     let getOnShowNotificationReview = this.contractsStateService.getOnShowNotificationReview().subscribe(data => {
       this.showNotificationReview = true;
     })

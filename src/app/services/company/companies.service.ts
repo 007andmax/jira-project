@@ -138,7 +138,7 @@ export class CompaniesService {
   }
 
   public removeTag(id, data) {
-    return this.http.put(this.apiUrl + 'company/tags?companyId=' + id, data);
+    return this.http.put(this.apiUrl + 'commonTags/company/' + id, data);
   }
 
   public editWoringHours(data) {

@@ -1,0 +1,73 @@
+<div
+    class="col-md-12 --required documents-filter-tags-body"
+    ngbDropdown
+>
+    <div
+        class="device-user pointer"
+        [ngClass]="{
+                'has-placeholder': !selected.length}"
+        ngbDropdownToggle
+    >
+        <ng-template
+            ngFor
+            let-item
+            let-i="index"
+            [ngForOf]="selected"
+            [ngForTrackBy]="trackByIndex"
+        >
+            <div class="selected-user">
+                <span>{{item.word}}</span>
+                <i
+                    class="icn-sm icn-remove-old"
+                    (click)="removeItem(i,$event)"
+                ></i>
+            </div>
+        </ng-template>
+    </div>
+    <div
+        class="select-wrapper"
+        ngbDropdownMenu
+    >
+        <div
+            class="content"
+            (click)="$event.preventDefault()"
+        >
+            <div>
+                <div
+                    *ngFor="let item of tags; let i = index"
+                    (click)="toggleItem(item)"
+                >
+                    <label class="qt-checkbox pointer">
+                        <input
+                            type="checkbox"
+                            [checked]="isSeleted(item)"
+                            readonly
+                        >
+                        <span></span>
+                        <div class="text-content">
+                            <div class="name">{{item.word}}</div>
+                            <div
+                                class="description"
+                                *ngIf="item.defaultTag === 'USER_TAG'"
+                                [textContent]="getCompanyName(item)"
+                            >
+                            </div>
+                        </div>
+                        <i
+                            *ngIf="item.defaultTag === 'USER_TAG'"
+                            class="icon__user-light-gray qt-sz-16 qt-bg-contain qt-ml-8"
+                        ></i>
+                        <i
+                            *ngIf="item.defaultTag === 'COMMON'"
+                            class="icon__tag-light-gray qt-sz-16 qt-bg-contain qt-ml-8"
+                        ></i>
+                        <i
+                            *ngIf="item.defaultTag === 'COMPANY_TAG'"
+                            class="icon__office-account qt-za-16 qt-sz-16 qt-bg-contain qt-ml-8"
+                        ></i>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

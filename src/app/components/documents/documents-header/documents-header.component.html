@@ -1,0 +1,137 @@
+<div class="qt-page-list__header --sticky">
+    <div class="qt-page-list__header-title-line">
+        <div class="qt-page-list__header-title-line--left">
+            <div
+                class="qt-page-list__back-button icon__collapse-arrow button-icon pointer"
+                *ngIf="activePage === 'new-category-documents'"
+                (click)="back()"
+            ></div>
+            <h3
+                class="qt-page-list__header-title"
+                [textContent]="'Documents'"
+            ></h3>
+        </div>
+        <div class="qt-page-list__header-title-line--rigth">
+            <div class="d-f ai-c">
+                <!-- <div class="qt-page-list__search qt-ml-8 search-container">
+                    <input
+                        type="text"
+                        placeholder="Search document"
+                        (input)="search($event)"
+                        [(ngModel)]="searchText"
+                    >
+                    <span
+                        class="search-clear icon__close-round"
+                        *ngIf="searchText.length > 0"
+                        (click)="clearSearch()"
+                    ></span>
+                </div> -->
+                <button
+                    class="qt-btn --transparent"
+                    (click)="clearAll()"
+                    *ngIf="countFilter > 0"
+                >
+                    Clear All
+                </button>
+                <button
+                    class="qt-btn btn-filter qt-ml-8"
+                    [ngClass]="{'active':!toggleFilter}"
+                    (click)="toggleFilter  = !toggleFilter"
+                >
+                    <span
+                        class="filter-counter qt-circle qt-sz-18 qt-ff-sb qt-fs-10 qt-color-white qt-bg-info qt-mr-8 qt-df qt-ai-c qt-jc-c"
+                        *ngIf="countFilter > 0"
+                        [textContent]="countFilter"
+                    ></span>
+                    Filters
+                </button>
+                <div class="qt-df">
+                    <div
+                        class="qt-pos-rel"
+                        ngbDropdown
+                        [placement]="'bottom-right'"
+                    >
+                        <button
+                            class=" qt-button --with-menu qt-ml-8"
+                            [ngClass]="{'disabled':!getPermissions('CREATE_DOCUMENT')}"
+                        >
+                            <span
+                                class="save-billable-aside-btn left-side"
+                                (click)="goToAddDocument()"
+                            >
+                                <span>Create Document</span>
+                            </span>
+                            <div
+                                class="button-menu"
+                                id="dropdownSave"
+                                ngbDropdownToggle
+                            >
+                                <div class="qt-sz-16 qt-ic-c icon__dropdown-arrow-up"></div>
+                            </div>
+                        </button>
+                        <ul
+                            class="qt-dropdown-menu"
+                            ngbDropdownMenu
+                            aria-labelledby="dropdownSave"
+                        >
+                            <li
+                                ngbDropdownItem
+                                (click)="goToTemplates()"
+                            >
+                                <div class="icon__create-template qt-sz-16 qt-mr-8"></div>
+                                Create from Template
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="qt-page-list__header-filters">
+        <documents-filter
+            class="qt-w100"
+            #filter
+            (changeCountFilter)="onChangeCountFilter($event)"
+            [hidden]="toggleFilter"
+        ></documents-filter>
+    </div>
+    <div class="qt-page-list__header-thead-container">
+        <table class="qt-table-modern qt-page-list__header-thead">
+            <thead>
+                <tr>
+                    <th
+                        class="documents-table__title pointer"
+                        (click)="onFilter('title')"
+                    >
+                        Title
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th
+                        class="documents-table__create-by pointer"
+                        (click)="onFilter('createBy')"
+                    >
+                        Create By
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th
+                        class="documents-table__created-date pointer"
+                        (click)="onFilter('createdDate')"
+                    >
+                        Created Date
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th
+                        class="documents-table__review-date pointer"
+                        (click)="onFilter('reviewDate')"
+                    >
+                        Review Date
+                        <span class="qt-table-modern__sorting"></span>
+                    </th>
+                    <th class="documents-table__company">Company</th>
+                    <th class="documents-table__shared pointer"></th>
+                    <th class="documents-table__menu pointer"></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>

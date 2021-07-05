@@ -78,7 +78,7 @@ export class LeftPanelCompaniesComponent implements OnInit {
     this.onOpenPanel.emit(null);
   }
   ngDoCheck() {
-    if (localStorage.getItem("company_id") && this.companiesState.getCompanies().length > 0) this.selectedCompany = this.companiesState.getCompanies().find(item => item.id === localStorage.getItem("company_id"));
+    if (this.companiesState.getSelectedCompanyId() && this.companiesState.getCompanies().length > 0) this.selectedCompany = this.companiesState.getCompanies().find(item => item.id === this.companiesState.getSelectedCompanyId());
 
   }
   /* private getIndustries() {
@@ -108,7 +108,8 @@ export class LeftPanelCompaniesComponent implements OnInit {
 
   }
   public isCompanyPage(state) {
-    return (state == 'new-companies' || state == 'company-dashboard' || state == 'company-tickets' || state == 'company-user' || state == 'company-devices' || state == 'company-network-scan' || state == 'company-password-manager' || state == 'company-products' || state == 'company-contracts')
+    return (state == 'new-companies' || state == 'company-dashboard' || state == 'company-tickets' || state == 'company-user' || state == 'company-devices' || state == 'company-network-scan' || state == 'company-password-manager' || state == 'company-products' || state == 'company-contracts'
+      || state == 'company-documents')
   }
   public selectTechLead(name) {
 

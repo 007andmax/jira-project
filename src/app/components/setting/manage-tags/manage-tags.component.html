@@ -11,6 +11,7 @@
                         [(ngModel)]="searchTag"
                         name="searchTag"
                         placeholder="Search Tags…"
+                        (input)="onSearch()"
                     >
                 </form>
                 <a
@@ -100,6 +101,7 @@
         <ngb-tabset
             (click)="setTab()"
             #tabset="ngbTabset"
+            [destroyOnHide]="false"
         >
             <!-- Companies -->
             <ngb-tab
@@ -128,98 +130,113 @@
                                         <th class="action">&nbsp;</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr *ngFor="
-                    let company of companyTags | tag: searchTag;
-                    let i = index
-                  ">
-                                        <td>{{ company.word | titlecase }}</td>
-                                        <td>{{ company.usedCounter }}</td>
-                                        <td class="action">
-                                            <a
-                                                href="javascript:;"
-                                                data-tooltip="Edit"
-                                                class="edit"
-                                                (click)="editTag(company, i)"
-                                            >
-                                                <img
-                                                    src="/html/assets/img/icons/edit.svg"
-                                                    alt="Edit"
+                                <tbody
+                                    infiniteScroll
+                                    [infiniteScrollDistance]="2"
+                                    [infiniteScrollThrottle]="50"
+                                    [infiniteScrollDisabled]="infiniteScrollDisabled"
+                                    (scrolled)="onScroll()"
+                                >
+                                    <ng-template
+                                        ngFor
+                                        let-company
+                                        let-i="index"
+                                        [ngForOf]="companyTags"
+                                        [ngForTrackBy]="trackById"
+                                    >
+                                        <tr>
+                                            <td>{{ company.word | titlecase }}</td>
+                                            <td>{{ company.usedCounter }}</td>
+                                            <td class="action">
+                                                <a
+                                                    href="javascript:;"
+                                                    data-tooltip="Edit"
+                                                    class="edit"
+                                                    (click)="editTag(company, i)"
                                                 >
-                                            </a>
-                                            <a
-                                                href="javascript:;"
-                                                data-tooltip="Remove"
-                                                class="remove"
-                                                (click)="ConfirmDelete(company.id)"
-                                            >
-                                                <img
-                                                    src="/html/assets/img/icons/remove.svg"
-                                                    alt="Remove"
+                                                    <img
+                                                        src="/html/assets/img/icons/edit.svg"
+                                                        alt="Edit"
+                                                    >
+                                                </a>
+                                                <a
+                                                    href="javascript:;"
+                                                    data-tooltip="Remove"
+                                                    class="remove"
+                                                    (click)="ConfirmDelete(company.id)"
                                                 >
-                                            </a>
-                                            <!-- Edit create Tags -->
-                                            <div
-                                                class="modal-content toggle-area"
-                                                [ngClass]="{ opened: selectedIdx === i }"
-                                            >
-                                                <div class="modal-wrapper">
-                                                    <div class="toggle-header">
-                                                        <h2 class="h1">Edit Tag</h2>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form
-                                                            [formGroup]="compnayForm"
-                                                            (ngSubmit)="onSubmit()"
-                                                        >
-                                                            <div class="f-row">
-                                                                <div class="f-col col-100">
-                                                                    <label>Tag Name</label>
-                                                                    <div class="form-row">
-                                                                        <input
-                                                                            type="text"
-                                                                            formControlName="word"
-                                                                            class="form-input"
-                                                                            placeholder="Enter Tag Name"
-                                                                        >
-                                                                        <div
-                                                                            *ngIf="submitted && f.word.errors"
-                                                                            class="invalid-feedback"
-                                                                        >
-                                                                            <div *ngIf="f.word.errors.required">Tag Name is required</div>
+                                                    <img
+                                                        src="/html/assets/img/icons/remove.svg"
+                                                        alt="Remove"
+                                                    >
+                                                </a>
+                                                <!-- Edit create Tags -->
+                                                <div
+                                                    class="modal-content toggle-area"
+                                                    [ngClass]="{ opened: selectedIdx === i }"
+                                                >
+                                                    <div class="modal-wrapper">
+                                                        <div class="toggle-header">
+                                                            <h2 class="h1">Edit Tag</h2>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form
+                                                                [formGroup]="compnayForm"
+                                                                (ngSubmit)="onSubmit()"
+                                                            >
+                                                                <div class="f-row">
+                                                                    <div class="f-col col-100">
+                                                                        <label>Tag Name</label>
+                                                                        <div class="form-row">
+                                                                            <input
+                                                                                type="text"
+                                                                                formControlName="word"
+                                                                                class="form-input"
+                                                                                placeholder="Enter Tag Name"
+                                                                            >
+                                                                            <div
+                                                                                *ngIf="submitted && f.word.errors"
+                                                                                class="invalid-feedback"
+                                                                            >
+                                                                                <div *ngIf="f.word.errors.required">Tag Name is required</div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <input
+                                                                        type="text"
+                                                                        hidden
+                                                                        formControlName="id"
+                                                                        class="form-input"
+                                                                    >
+                                                                    <div class="m-btn-row">
+                                                                        <div class="m-btn-col">
+                                                                            <input
+                                                                                type="submit"
+                                                                                value="Save"
+                                                                                class="btn btn-primary"
+                                                                            >
+                                                                            <a
+                                                                                href="javascript:;"
+                                                                                class="btn btn-secondary"
+                                                                                aria-label="Close"
+                                                                                (click)="selectedIdx = -1"
+                                                                            >
+                                                                                Cancel
+                                                                            </a>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <input
-                                                                    type="text"
-                                                                    hidden
-                                                                    formControlName="id"
-                                                                    class="form-input"
-                                                                >
-                                                                <div class="m-btn-row">
-                                                                    <div class="m-btn-col">
-                                                                        <input
-                                                                            type="submit"
-                                                                            value="Save"
-                                                                            class="btn btn-primary"
-                                                                        >
-                                                                        <a
-                                                                            href="javascript:;"
-                                                                            class="btn btn-secondary"
-                                                                            aria-label="Close"
-                                                                            (click)="selectedIdx = -1"
-                                                                        >
-                                                                            Cancel
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </form>
+                                                            </form>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                        </tr>
+                                    </ng-template>
+
+
+
+
                                 </tbody>
                             </table>
                         </div>
@@ -367,6 +384,21 @@
         </ngb-tabset>
         <!-- <div class="loading" *ngIf="loading"></div> -->
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

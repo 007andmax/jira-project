@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>CE262BC4-7202-4912-B3DD-D5FA71960EA6</title>
+    <defs>
+        <path d="M4,0 L376,0 C378.209139,-4.05812251e-16 380,1.790861 380,4 L380,252 C380,254.209139 378.209139,256 376,256 L4,256 C1.790861,256 2.705415e-16,254.209139 0,252 L0,4 C-2.705415e-16,1.790861 1.790861,4.05812251e-16 4,0 Z" id="path-1"></path>
+        <filter x="-12.1%" y="-17.2%" width="124.2%" height="135.9%" filterUnits="objectBoundingBox" id="filter-2">
+            <feMorphology radius="5" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="0" dy="2" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="10" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.05 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Documents" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="1v-Filter-By-Tags" transform="translate(-952.000000, -244.000000)">
+            <rect fill="#EDF2F6" x="0" y="0" width="1440" height="960"></rect>
+            <g id="Group-21" transform="translate(288.000000, 192.000000)">
+                <g id="Group" transform="translate(0.000000, 28.000000)">
+                    <rect id="Rectangle-9" fill="#FFFFFF" x="0" y="0" width="1128" height="48" rx="6"></rect>
+                    <text id="21-Oct-2021" font-family="Inter-Regular, Inter" font-size="13" font-weight="normal" line-spacing="20" fill="#454F5B">
+                        <tspan x="592" y="27">21 Oct 2021</tspan>
+                    </text>
+                </g>
+            </g>
+            <g id="Group-20" transform="translate(604.000000, 140.000000)">
+                <g id="Group-2" transform="translate(0.000000, 40.000000)">
+                    <g id="Rectangle-11">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                        <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    </g>
+                    <g id="Group-14-Copy" transform="translate(0.000000, 56.000000)">
+                        <rect id="Rectangle" fill="#FFFFFF" x="0" y="0" width="380" height="48"></rect>
+                        <g id="Actions-/-1px-/-User" transform="translate(348.000000, 8.000000)" stroke="#919EAB" stroke-linecap="round" stroke-linejoin="round">
+                            <g id="Group-2" transform="translate(2.500000, 1.146125)">
+                                <path d="M10.0833333,13.3869312 L0.916666667,13.3869312 C0.410414583,13.3869312 0,12.9765396 0,12.4702646 L0,12.1640292 C0,10.831975 0.826397917,9.63968958 2.07372917,9.1722125 C4.28287292,8.34423333 6.71712708,8.34423333 8.92627083,9.1722125 C10.1736021,9.63968958 11,10.831975 11,12.1640292 L11,12.4702646 C11,12.9765396 10.5895854,13.3869312 10.0833333,13.3869312 Z" id="Path"></path>
+                                <path d="M4.1023125,6.25230833 C4.9795625,6.70291875 6.02025417,6.70291875 6.89748125,6.25230833 C7.71391042,5.83293333 8.29883542,5.06909792 8.4909,4.17158958 L8.54214167,3.93204167 C8.7385375,3.01422917 8.52875833,2.05633542 7.96675,1.3046 L7.88445625,1.19453125 C7.32235625,0.442704167 6.43862083,-1.22124533e-15 5.49990833,-1.22124533e-15 C4.56119583,-1.22124533e-15 3.6774375,0.442704167 3.11536042,1.19453125 L3.03306667,1.3046 C2.47103542,2.05633542 2.26127917,3.01422917 2.45765208,3.93204167 L2.50891667,4.17158958 C2.70095833,5.06909792 3.28590625,5.83293333 4.1023125,6.25230833 Z" id="Path"></path>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

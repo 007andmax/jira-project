@@ -12,6 +12,7 @@ import {
 } from '@angular/upgrade/static';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { IgxTimePickerModule } from 'igniteui-angular';
@@ -73,7 +74,6 @@ import { CompanyEditAsideComponent } from './components/companies/company-edit-a
 import { CompanyTagsComponent } from './components/companies/company-tags/company-tags.component';
 import { DraftEmailComponent } from './components/shared/draft-email/draft-email.component';
 import { DraftEmailRecipientsComponent } from './components/shared/draft-email/draft-email-recipients/draft-email-recipients.component';
-import { LeftPanelTagsComponent } from './components/left-panel/left-panel-companies/left-panel-tags-companies/left-panel-tags-companies.component';
 import { SelectSearchComponent } from './components/shared/select-search/select-search.component';
 import { CompanyPasswordManagerComponent } from './components/company-password-manager/company-password-manager.component';
 import { FilterPipe } from './pipe/filter.pipe';
@@ -360,7 +360,6 @@ import { NetworkScanCredentialsAddComponent } from './components/company-network
 import { NetworkScanCredentialsAsideItemComponent } from './components/company-network-scan/network-scan-credentials-aside/network-scan-credentials-aside-item/network-scan-credentials-aside-item.component';
 import { CompanyNetworkScanItemComponent } from './components/company-network-scan/company-network-scan-item/company-network-scan-item.component';
 import { CompanyNetworkScanItemTooltipComponent } from './components/company-network-scan/company-network-scan-item/company-network-scan-item-tooltip/company-network-scan-item-tooltip.component';
-import { CompanyDashTagsComponent } from './components/company-dashboard/company-dash-tags/company-dash-tags.component';
 import { CompanyDashDetailComponent } from './components/company-dashboard/company-dash-detail/company-dash-detail.component';
 import { CompanyDashStatsComponent } from './components/company-dashboard/company-dash-stats/company-dash-stats.component';
 import { CompanyDashTicketComponent } from './components/company-dashboard/company-dash-ticket/company-dash-ticket.component';
@@ -404,7 +403,67 @@ import { PasswordManagerEditLinkedComponent } from './components/password-manage
 import { AfterViewInitDirective } from './directives/after-view-init.directive';
 import { TicketsFilterTagsComponent } from './components/tickets/tickets/tickets-header/tickets-filter/tickets-filter-tags/tickets-filter-tags.component';
 
+import { DocumentsComponent } from './components/documents/documents.component';
+import { LeftPanelDocumentsComponent } from './components/left-panel/left-panel-documents/left-panel-documents.component';
+//import { FroalaEditorModule, FroalaViewModule } from './modules/froala-editor';
 
+
+
+// Import all Froala Editor plugins.
+import 'froala-editor/js/plugins.pkgd.min.js';
+
+// Import a single Froala Editor plugin.
+import 'froala-editor/js/plugins/align.min.js';
+
+import 'froala-editor/js/plugins/code_view.min.js';
+
+import 'froala-editor/js/plugins/track_changes.min.js';
+import 'froala-editor/js/plugins/markdown.min.js';
+import 'froala-editor/js/plugins/paragraph_format.min.js';
+import 'froala-editor/js/plugins/paragraph_style.min.js';
+import 'froala-editor/js/plugins/edit_in_popup.min.js';
+import 'froala-editor/js/plugins/font_family.min.js';
+import 'froala-editor/js/plugins/quote.min.js';
+
+
+
+// Import a Froala Editor language file.
+import 'froala-editor/js/languages/de.js';
+
+
+import 'froala-editor/js/plugins/image.min.js';
+import 'froala-editor/js/plugins/file.min.js';
+
+// Import a third-party plugin.
+import 'froala-editor/js/third_party/font_awesome.min';
+import 'froala-editor/js/third_party/image_tui.min';
+import 'froala-editor/js/third_party/spell_checker.min';
+import 'froala-editor/js/third_party/embedly.min';
+import { DocumentsAddComponent } from './components/documents/documents-add/documents-add.component';
+import { DocumentsAddBodyComponent } from './components/documents/documents-add/documents-add-body/documents-add-body.component';
+import { DocumentsAddHeaderComponent } from './components/documents/documents-add/documents-add-header/documents-add-header.component';
+import { DocumentsAddFooterComponent } from './components/documents/documents-add/documents-add-footer/documents-add-footer.component';
+import { DocumentsAddInfoComponent } from './components/documents/documents-add/documents-add-info/documents-add-info.component';
+import { DocumentsAddEditCategoriesComponent } from './components/documents/documents-add/documents-add-info/documents-add-edit-categories/documents-add-edit-categories.component';
+import { DocumentsTableComponent } from './components/documents/documents-table/documents-table.component';
+import { DocumentsHeaderComponent } from './components/documents/documents-header/documents-header.component';
+import { DocumentsFilterComponent } from './components/documents/documents-header/documents-filter/documents-filter.component';
+import { DocumentsCategoryComponent } from './components/documents/documents-category/documents-category.component';
+import { DocumentsFilterTagsComponent } from './components/documents/documents-header/documents-filter/documents-filter-tags/documents-filter-tags.component';
+import { PasswordManagerLinkedComponent } from './components/password-manager/password-manager-add-aside/password-manager-linked/password-manager-linked.component';
+import { DocumentsLinkedComponent } from './components/documents/documents-add/documents-add-info/documents-linked/documents-linked.component';
+import { DocumentsTemplatesComponent } from './components/documents/documents-templates/documents-templates.component';
+import { DocumentsEditComponent } from './components/documents/documents-edit/documents-edit.component';
+import { DocumentsEditInfoComponent } from './components/documents/documents-edit/documents-edit-info/documents-edit-info.component';
+import { DocumentsTemplatesHeaderComponent } from './components/documents/documents-templates/documents-templates-header/documents-templates-header.component';
+import { DocumentsTemplatesFilterComponent } from './components/documents/documents-templates/documents-templates-header/documents-templates-filter/documents-templates-filter.component';
+import { DocumentsTemplatesInfoComponent } from './components/documents/documents-templates/documents-templates-info/documents-templates-info.component';
+import { DocumentsTemplatesItemComponent } from './components/documents/documents-templates/documents-templates-item/documents-templates-item.component';
+import { DocumentsEditHistoryComponent } from './components/documents/documents-edit/documents-edit-history/documents-edit-history.component';
+import { FindWithinDocumentComponent } from './components/documents/documents-edit/find-within-document/find-within-document.component';
+import { DocumentPreviewComponent } from './components/documents/document-preview/document-preview.component';
+import { CompanyDocumentsComponent } from './components/companies/company-documents/company-documents.component';
+import { CompanyDocumentsTableComponent } from './components/companies/company-documents/company-documents-table/company-documents-table.component';
 
 declare var $: any;
 /**
@@ -461,7 +520,6 @@ declare var $: any;
     ImageCropperComponent,
     CompanyEditAsideComponent,
     CompanyTagsComponent,
-    CompanyDashTagsComponent,
     CompanyDashDetailComponent,
     CompanyDashStatsComponent,
     CompanyDashTicketComponent,
@@ -470,7 +528,6 @@ declare var $: any;
     CompanyDashContractComponent,
     DraftEmailComponent,
     DraftEmailRecipientsComponent,
-    LeftPanelTagsComponent,
     SelectSearchComponent,
     CompanyPasswordManagerComponent,
     FilterPipe,
@@ -782,7 +839,34 @@ declare var $: any;
     PasswoordManagerFiltersComponent,
     PasswordManagerEditLinkedComponent,
     AfterViewInitDirective,
-    TicketsFilterTagsComponent
+    TicketsFilterTagsComponent,
+    DocumentsComponent,
+    LeftPanelDocumentsComponent,
+    DocumentsAddComponent,
+    DocumentsAddBodyComponent,
+    DocumentsAddHeaderComponent,
+    DocumentsAddFooterComponent,
+    DocumentsAddInfoComponent,
+    DocumentsAddEditCategoriesComponent,
+    DocumentsTableComponent,
+    DocumentsHeaderComponent,
+    DocumentsFilterComponent,
+    DocumentsCategoryComponent,
+    DocumentsFilterTagsComponent,
+    PasswordManagerLinkedComponent,
+    DocumentsLinkedComponent,
+    DocumentsTemplatesComponent,
+    DocumentsEditComponent,
+    DocumentsEditInfoComponent,
+    DocumentsTemplatesHeaderComponent,
+    DocumentsTemplatesFilterComponent,
+    DocumentsTemplatesInfoComponent,
+    DocumentsTemplatesItemComponent,
+    DocumentsEditHistoryComponent,
+    FindWithinDocumentComponent,
+    DocumentPreviewComponent,
+    CompanyDocumentsComponent,
+    CompanyDocumentsTableComponent
   ],
   imports: [
     BrowserModule,
@@ -818,7 +902,9 @@ declare var $: any;
     DisabledBtnModule,
     NgxUploaderModule,
     AngularEditorModule,
-    NgxMaskModule.forRoot(),
+    FroalaEditorModule.forRoot(),
+    FroalaViewModule.forRoot(),
+    NgxMaskModule.forRoot()
   ],
   entryComponents: [
     ModalQuoteComponent,

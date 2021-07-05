@@ -70,10 +70,10 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
     if (event.target.closest('.selected-tag-ticket')) return;
     if (!event.target.closest('app-ticket-edit-tags') && !event.target.closest('.dropdown-menu') && (this.init || this.isChangeInput)) {
       if (this.isChangeInput) {
-        let tag: Tag = {
+        let tag: any = {
           colorCode: 0, usedCounter: 0, word: this.userInput.nativeElement.value.trim(), id: ''
         }
-        let setTags = this.tagsService.setTags(tag).subscribe((res) => {
+        let setTags = this.tagsService.addTicketsTags(tag).subscribe((res) => {
           tag.id = res.id;
           this.tags.push(tag);
           this.selectedTag.push(tag);
@@ -107,11 +107,11 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
       const value = event.target.value;
 
       if ((value || '').trim()) {
-        let tag: Tag = {
+        let tag: any = {
           colorCode: 0, usedCounter: 0, word: value.trim(), id: ''
         }
 
-        let setTags = this.tagsService.setTags(tag).subscribe((res) => {
+        let setTags = this.tagsService.addTicketsTags(tag).subscribe((res) => {
           this.init = true;
           tag.id = res.id;
           this.tags.push(tag);

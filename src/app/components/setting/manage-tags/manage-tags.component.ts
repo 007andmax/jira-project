@@ -6,7 +6,7 @@ import {
   OnDestroy,
   ViewContainerRef
 } from "@angular/core";
-import { TagsService } from "src/app/services/setting/tags.service";
+
 import { forkJoin, Observable, Subject } from "rxjs";
 import { map } from "rxjs/operators";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -14,18 +14,27 @@ import { ToastrService } from "ngx-toastr";
 import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { SettingStateService } from "src/app/states/setting/setting-state.service";
 import { CompaniesStateService } from "src/app/states/company/companies-state.service";
+import { TagsService } from "src/app/services/tags/tags.service";
+import { DataTableDirective } from "angular-datatables";
+import { ManageTagsListService } from "./services/manage-tags-list.service";
 declare var $: any;
 @Component({
   selector: "app-manage-tags",
   templateUrl: "./manage-tags.component.html",
-  styleUrls: ["./manage-tags.component.scss"]
+  styleUrls: ["./manage-tags.component.scss"],
+  providers: [ManageTagsListService]
 })
 export class ManageTagsComponent implements OnDestroy, OnInit {
   searchTag = "";
   ticketTags: any[] = [];
+  page: number = 0;
+  public infiniteScrollDisabled = true;
+
+
   companyTags: any[] = [];
+  reqcompanyTags: any[] = [];
   serviceAllTickets: Observable<any>;
-  serviceAllCompany: Observable<any>;
+
   serviceCreateCustomTags: Observable<any>;
   allowCreateTags: any;
   compnayForm: FormGroup;
@@ -42,6 +51,8 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     paging: false,
     info: false
   };
+  @ViewChild("dataTable")
+  dtElement: DataTableDirective;
   @ViewChild("tickets") tickets: ElementRef;
   private tabSet: ViewContainerRef;
 
@@ -56,6 +67,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     private toaster: ToastrService,
     private settingStateService: SettingStateService,
     private companiesStateService: CompaniesStateService,
+    private manageTagsListService: ManageTagsListService,
   ) { }
 
   /**
@@ -74,10 +86,14 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       this.getCurrentCompany(res);
     })
     this.serviceAllTickets = this.tagsService.getAllTickets();
-    this.serviceAllCompany = this.tagsService.getAllCompany();
+
 
     this.getAllTags();
     this.settingStateService.setComponentName('ManageTagsComponent');
+  }
+
+  ngAfterViewInit(): void {
+    this.dtTrigger.next();
   }
 
   /**
@@ -85,12 +101,14 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
    */
   getAllTags() {
     this.loading = true; $(".loading").css("display", "block");
-    forkJoin([this.serviceAllTickets, this.serviceAllCompany])
+    forkJoin([this.serviceAllTickets])
       .pipe(
         map(data => {
           this.loading = false; $(".loading").css("display", "none");
           this.ticketTags = data[0];
-          this.companyTags = data[1];
+
+          this.setDefaultScoll();
+          this.onScroll();
         })
       )
       .subscribe(
@@ -117,22 +135,43 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       }
     );
   }
+  onSearch() {
+
+    this.setDefaultScoll();
+    this.onScroll();
+  }
+  public setDefaultScoll() {
+    this.page = 0;
+    this.manageTagsListService.setBlockList(false);
+    this.companyTags = [];
+    this.reqcompanyTags = [];
+  }
+  public onScroll() {
+    console.log("onScroll");
+    this.infiniteScrollDisabled = true;
+    this.getTags();
+  }
+  getTags() {
+    if (this.manageTagsListService.getBlockList()) {
+      this.infiniteScrollDisabled = false;
+      return;
+    }
+    this.tagsService.search(this.page, this.searchTag).subscribe((data: any) => {
+      this.companyTags = [...this.companyTags, ...data.commonTagViews];
+      this.reqcompanyTags = [...this.reqcompanyTags, ...JSON.parse(JSON.stringify(data.commonTagViews))];
+      this.page++;
+      this.infiniteScrollDisabled = false;
+      if (this.reqcompanyTags.length === data.totalElements) this.manageTagsListService.setBlockList(true);
+
+    })
+  }
 
   /**
    * get all companies
    */
   getAllCompany() {
     this.loading = true; $(".loading").css("display", "block");
-    this.serviceAllCompany.subscribe(
-      res => {
-        this.companyTags = res;
-        this.loading = false; $(".loading").css("display", "none");
-      },
-      error => {
-        this.loading = false; $(".loading").css("display", "none");
 
-      }
-    );
   }
 
   /**
@@ -168,6 +207,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     } else if (this.tabSet['activeId'] === 'tab3') {
       this.setActiveTab = "device";
     }
+
     // if (this.tickets.nativeElement.className.indexOf("active") > -1) {
     //   this.setActiveTab = "ticket";
     // } else {
@@ -334,7 +374,9 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();
   }
-
+  public trackById(index, item) {
+    return item.id;
+  }
   trackByFn(index, item) {
     return item.id;
   }

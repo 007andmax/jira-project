@@ -1,6 +1,6 @@
 .dropdown-item {
-      height: 55px !important;
-      padding: 6px 20px !important;
+  height: 55px !important;
+  padding: 6px 20px !important;
 }
 
 .dropdown-link {
@@ -25,4 +25,23 @@
   width: 32px;
   height: 32px;
   background-color: #b2becd;
+}
+.filter-users-documents {
+  input {
+    height: 40px;
+    outline: none;
+    width: 100%;
+    border-radius: 4px 3px 3px 4px;
+    border: 1px solid #d3d8e1;
+    background-color: #fff;
+
+    &::placeholder {
+      color: #9ca5b6;
+    }
+  }
+  .dropdown-menu {
+    right: 0;
+    left: unset;
+    width: fit-content;
+  }
 }

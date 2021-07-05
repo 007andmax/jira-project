@@ -32,6 +32,8 @@ export class PermissionManageService {
     'DELETE_PASSWORD'
   ];
   viewPasswordsRelatedPermissions = ['CREATE_PASSWORD', 'EDIT_PASSWORD'];
+  viewDocumentsRelatedPermissions = ['CREATE_DOCUMENT', 'EDIT_DOCUMENT'];
+  editCategoryDocumentsRelatedPermissions = ['DELETE_CATEGORY'];
   sections = {
     'Tickets Area': [
       'EDIT_TICKETS',
@@ -85,8 +87,21 @@ export class PermissionManageService {
       'VIEW_TAXES_SETTINGS',
       'VIEW_EMAIL_TEMPLATES_SETTINGS',
       'VIEW_TAGS_SETTINGS'
+    ],
+    Documents: [
+      'VIEW_DOCUMENT',
+      'CREATE_DOCUMENT',
+      'EDIT_DOCUMENT',
+      'DELETE_DOCUMENT',
+      'CREATE_CATEGORY',
+      'EDIT_CATEGORY',
+      'DELETE_CATEGORY',
+      'CREATE_TEMPLATE',
+      'EDIT_TEMPLATE',
+      'DELETE_TEMPLATE'
     ]
   };
+
 
   constructor(private http: HttpClient) { }
 
@@ -144,6 +159,14 @@ export class PermissionManageService {
   getViewPasswordsRelatedPermissions() {
     return this.viewPasswordsRelatedPermissions.slice();
   }
+
+  getViewDocumentsRelatedPermissions() {
+    return this.viewDocumentsRelatedPermissions.slice();
+  }
+  getEditCategoryDocumentsRelatedPermissions() {
+    return this.editCategoryDocumentsRelatedPermissions.slice();
+  }
+
 
   getsections() {
     return this.sections;

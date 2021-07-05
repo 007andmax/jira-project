@@ -29,7 +29,9 @@ export class CompanyDashboardComponent implements OnInit {
     private leftPanelStateService: LeftPanelStateService,
     public contractsStateService: ContractsStateService) { }
 
-  ngOnInit() { this.leftPanelStateService.setCompanyPage("company-dashboard"); }
+  ngOnInit() {
+    this.leftPanelStateService.changeStateWithoutNavigate('company-dashboard');
+  }
 
   totalTicketsChangedHandler(data: number) {
     this.totalTickets = data;

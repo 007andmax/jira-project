@@ -4,6 +4,7 @@ import { ServiceAgreement } from './class/service-agreement';
 import { Subscription } from 'rxjs';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'contracts',
@@ -19,6 +20,7 @@ export class ContractsComponent implements OnInit, OnDestroy {
   constructor(public contractsStateService: ContractsStateService,
     public leftPanelStateService: LeftPanelStateService,
     public companiesStateService: CompaniesStateService,
+    public activateRoute: ActivatedRoute,
     public cd: ChangeDetectorRef
   ) { }
 

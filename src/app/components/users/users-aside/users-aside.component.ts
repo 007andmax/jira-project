@@ -100,6 +100,9 @@ export class UsersAsideComponent implements OnInit {
     this.user.addPhoneNumber();
     this.validate.addPhoneNumber();
   }
+  public onChangeTags(tags) {
+    this.user.setTags(tags);
+  }
   onChangeSubscriptions(data) {
 
     data.forEach(item => this.user.subscription[item.field] = item.selected);

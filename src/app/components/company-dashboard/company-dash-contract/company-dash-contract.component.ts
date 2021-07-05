@@ -7,6 +7,8 @@ import { ContractsStateService } from 'src/app/states/contracts/contracts-state.
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
 import { ServiceAgreement } from '../../billing/contracts/class/service-agreement';
 import { CompanyContractType } from '../../companies/class/company-contract-type';
+import { ActivatedRoute } from '@angular/router';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
   selector: 'app-company-dash-contract',
@@ -33,14 +35,20 @@ export class CompanyDashContractComponent implements OnInit {
 
   public constructor(private companiesService: CompaniesService,
     public cd: ChangeDetectorRef,
+    public activateRoute: ActivatedRoute,
     public contractsStateService: ContractsStateService,
+    private companiesStateService: CompaniesStateService,
     private contractsService: ContractsService) { }
 
   public ngOnInit() {
-    this._id = /[^/]*$/.exec(window.location.href)[0];
-    this.getContractsList();
+    this._id = this.activateRoute.snapshot.params['id'];
+    let subscription = this.activateRoute.params.subscribe(params => {
+      this._id = params['id'];
+      this.companiesStateService.setSelectedCompanyId(this._id);
+      this.getContractsList();
+    });
+    this.sub.add(subscription);
     let getOnTogglePreview = this.contractsStateService.getOnTogglePreview().subscribe(data => {
-
       this.showContractPreview = false;
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
@@ -56,7 +64,6 @@ export class CompanyDashContractComponent implements OnInit {
     })
     this.sub.add(getOnEdit);
     let getOnToggleEdit = this.contractsStateService.getOnToggleEdit().subscribe(data => {
-
       this.showContractEdit = data;
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();

@@ -17,16 +17,15 @@ import { ImageCropperComponent } from '../../shared/image-cropper/image-cropper.
 import { CompanySubscriptionStateService } from '../../companies/company-subscription/class/company-subscription-state.service';
 import { Company } from 'src/app/interfaces/company/company';
 import { TitleListType } from '../../tickets/tickets/tickets-header/class/title-list-type';
+import { CompanyTagsStateService } from '../../companies/company-tags/states/company-tags-state.service';
 
 @Component({
   selector: 'users-aside-edit',
   templateUrl: './users-aside-edit.component.html',
-  styleUrls: ['./users-aside-edit.component.css'],
+  styleUrls: ['./users-aside-edit.component.scss'],
   providers: [UsersAsideService]
 })
 export class UsersAsideEditComponent implements OnInit {
-
-  // @ViewChild('role') role: any;
   public opened = false;
   user: UserProfile = new UserProfile();
   allTitles: Array<string> = [];
@@ -43,9 +42,8 @@ export class UsersAsideEditComponent implements OnInit {
     private companiesState: SelectClientCompanyStateService,
     private companiesStateService: CompaniesStateService,
     private modalImageCropperStateService: ModalImageCropperStateService,
-    private companiesService: CompaniesService,
+    private tagsState: CompanyTagsStateService,
     private companySubscriptionState: CompanySubscriptionStateService,
-    private modalService: NgbModal,
     public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -56,24 +54,21 @@ export class UsersAsideEditComponent implements OnInit {
     this.usersAsideService.addSubscription(getOnUsers);
     this.onCroppImage();
     this.usersStateService.getOpenEditAside().subscribe(data => {
-      // this.role.clearClient()
-
       this.opened = true;
       this.user.onEdit(this.usersStateService.getuserForEdit());
-
+      this.tagsState.setTagsFromtEdit(this.user.tags);
       this.selectedUserType = this.userTypes.find(item => item.type === this.user.role);
       this.validate.addPhoneNumbers(this.user.phoneNumbers);
       this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.user.companyId);
-
-
       this.companySubscriptionState.onEditMode(this.user.subscription);
-
-
     })
     if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.getClientsList(data);
     })
+  }
+  public onChangeTags(tags) {
+    this.user.setTags(tags);
   }
   getClientsList(data) {
     this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
@@ -82,27 +77,12 @@ export class UsersAsideEditComponent implements OnInit {
   public onCroppImage() {
     let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
       if (!this.opened || !data || this.imageCropperStateService.getAction() !== CROPP_AVATAR_USER) return;
-
       this.usersService.changeAvatar(this.usersStateService.getuserForEdit().id, new CompanyEditLogo(data.croppedImage.base64, data.croppedImage.height,
         this.usersStateService.getuserForEdit().id, (data.edit) ? this.user.avatar.origin.id : data.id, data.croppedImage.width, data.croppedImage.imagePosition.x1, data.croppedImage.imagePosition.y1)).subscribe(res => {
           this.user.editLogo(res);
         })
-
-
     })
     this.usersAsideService.addSubscription(getConfirm);
-    /* let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
-       if (!this.opened || !data || this.imageCropperStateService.getAction() !== CROPP_AVATAR_USER) return;
- 
- 
-       if (data.edit) {
-         //  this.company.editLogo(data);
-       } else {
-         this.user.setLogo(data);
-       }
- 
-     })
-     this.usersAsideService.addSubscription(getConfirm);*/
   }
 
   getUsersTitle(allUsers) {
