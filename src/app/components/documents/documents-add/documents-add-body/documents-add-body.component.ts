@@ -35,6 +35,27 @@ export class DocumentsAddBodyComponent implements OnInit {
   onInitFloara() {
     const self = this;
     this.options = {
+      //  toolbarButtons: ['bold', 'italic', 'underline', 'moreText', '|', 'alignLeft', 'alignCenter', 'formatOLSimple', 'moreParagraph', '|', 'trackChanges', 'markdown', 'insertLink', 'insertFiles', 'moreRich', '|', 'undo', 'redo', 'moreMisc'],
+      /*  toolbarButtons: {
+          // Key represents the more button from the toolbar.
+          moreText: {
+            // List of buttons used in the  group.
+            buttons: ['bold', 'italic'],
+  
+            // Alignment of the group in the toolbar.
+            align: 'left',
+  
+  
+          },
+          moreParagraph: {
+            buttons: ['alignLeft', 'alignCenter', 'alignRight', 'alignJustify'],
+            align: 'left',
+            buttonsVisible: 1
+          },
+  
+  
+        },*/
+
       heightMin: 1123,
       toolbarSticky: false,
       saveParam: 'file',

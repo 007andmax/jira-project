@@ -360,7 +360,6 @@ import { NetworkScanCredentialsAddComponent } from './components/company-network
 import { NetworkScanCredentialsAsideItemComponent } from './components/company-network-scan/network-scan-credentials-aside/network-scan-credentials-aside-item/network-scan-credentials-aside-item.component';
 import { CompanyNetworkScanItemComponent } from './components/company-network-scan/company-network-scan-item/company-network-scan-item.component';
 import { CompanyNetworkScanItemTooltipComponent } from './components/company-network-scan/company-network-scan-item/company-network-scan-item-tooltip/company-network-scan-item-tooltip.component';
-import { CompanyDashTagsComponent } from './components/company-dashboard/company-dash-tags/company-dash-tags.component';
 import { CompanyDashDetailComponent } from './components/company-dashboard/company-dash-detail/company-dash-detail.component';
 import { CompanyDashStatsComponent } from './components/company-dashboard/company-dash-stats/company-dash-stats.component';
 import { CompanyDashTicketComponent } from './components/company-dashboard/company-dash-ticket/company-dash-ticket.component';
@@ -417,6 +416,16 @@ import 'froala-editor/js/plugins.pkgd.min.js';
 import 'froala-editor/js/plugins/align.min.js';
 
 import 'froala-editor/js/plugins/code_view.min.js';
+
+import 'froala-editor/js/plugins/track_changes.min.js';
+import 'froala-editor/js/plugins/markdown.min.js';
+import 'froala-editor/js/plugins/paragraph_format.min.js';
+import 'froala-editor/js/plugins/paragraph_style.min.js';
+import 'froala-editor/js/plugins/edit_in_popup.min.js';
+import 'froala-editor/js/plugins/font_family.min.js';
+import 'froala-editor/js/plugins/quote.min.js';
+
+
 
 // Import a Froala Editor language file.
 import 'froala-editor/js/languages/de.js';
@@ -511,7 +520,6 @@ declare var $: any;
     ImageCropperComponent,
     CompanyEditAsideComponent,
     CompanyTagsComponent,
-    CompanyDashTagsComponent,
     CompanyDashDetailComponent,
     CompanyDashStatsComponent,
     CompanyDashTicketComponent,

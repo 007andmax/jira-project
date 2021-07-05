@@ -177,6 +177,8 @@
   content: "Search By Tags";
 }
 .pengind-loading {
-  width: 50px !important;
-  height: 50px !important;
+  width: 25px !important;
+  height: 25px !important;
+  min-height: auto !important;
+  left: calc(50% - 12px) !important;
 }

@@ -25,6 +25,11 @@
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
   },
+  "paths": {
+    "crypto": [
+      "./node_modules/crypto-js"
+    ]
+  },
   "include": [
     "src/**/*",
     "node_modules/ng2-stomp-service/dist/stomp.service.ts"

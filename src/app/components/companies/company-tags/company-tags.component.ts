@@ -178,6 +178,13 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
     }
     this.tagsChange.emit(this.selectedTag);
     this.tagCtrl.setValue(null);
+
+    if (this.searchName.length > 0) {
+      this.searchName = "";
+      this.setDefaultScoll();
+      this.onScroll();
+    }
+
   }
 
   /**

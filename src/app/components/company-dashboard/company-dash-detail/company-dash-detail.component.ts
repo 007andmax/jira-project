@@ -312,6 +312,7 @@ export class CompanyDashDetailComponent implements OnInit {
       this.totalTicketsChanged.emit(this.companyDetailing.totalTickets);
       this.averageResponseTimeChanged.emit(this.companyDetailing.averageResponseTime);
       this.tags = this.companyDetailing.tags;
+      console.log("this.tags", this.tags);
       let day = moment(new Date()).format('dddd');
       this.workingDays = data.workingDays;
       if (this.workingDays.length !== 0) {
