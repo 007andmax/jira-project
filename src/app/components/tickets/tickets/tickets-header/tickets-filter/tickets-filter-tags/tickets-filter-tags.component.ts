@@ -18,15 +18,19 @@ export class TicketsFilterTagsComponent extends CompanyTagsComponent {
     })
     this.sub.add(getTags);
     let changeTagsArray = this.tagsRealTimeService.changeTagsArray.subscribe((data: any) => {
-      if (data.action === "TAG_SAVED" && data.data instanceof Array) {
-        this.tags = [...this.tags, ...data.data];
-        this.reqTags = [...this.reqTags, ...data.data];
-      }
-      if (data.action === "TAG_SAVED" && data.data instanceof Object) {
+      if (data.action === "TAG_SAVED") {
         let index = this.tags.findIndex(item => item.id === data.data.id);
         let indexreqTags = this.reqTags.findIndex(item => item.id === data.data.id);
-        if (index > -1) this.tags[index] = data.data;
-        if (indexreqTags > -1) this.reqTags[index] = data.data;
+        if (index > -1) {
+          this.tags[index] = data.data;
+        } else {
+          this.tags.push(data.data);
+        }
+        if (indexreqTags > -1) {
+          this.reqTags[index] = data.data;
+        } else {
+          this.reqTags.push(data.data);
+        }
       }
       if (data.action === "TAG_REMOVED") {
         let index = this.tags.findIndex(item => item.id === data.data);

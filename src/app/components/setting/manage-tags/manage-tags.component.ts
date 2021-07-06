@@ -92,10 +92,13 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     this.settingStateService.setComponentName('ManageTagsComponent');
 
     let changeTagsArray = this.tagsRealTimeService.changeTagsArray.subscribe((data: any) => {
-      if (data.action === "TAG_SAVED" && data.data instanceof Array) this.ticketTags = [...this.ticketTags, ...data.data];
-      if (data.action === "TAG_SAVED" && data.data instanceof Object) {
+      if (data.action === "TAG_SAVED") {
         let index = this.ticketTags.findIndex(item => item.id === data.data.id);
-        if (index > -1) this.ticketTags[index] = data.data;
+        if (index > -1) {
+          this.ticketTags[index] = data.data;
+        } else {
+          this.ticketTags.push(data.data);
+        }
       }
       if (data.action === "TAG_REMOVED") {
         let index = this.ticketTags.findIndex(item => item.id === data.data);
