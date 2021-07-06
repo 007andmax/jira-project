@@ -162,7 +162,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       this.page++;
       this.infiniteScrollDisabled = false;
       if (this.reqcompanyTags.length === data.totalElements) this.manageTagsListService.setBlockList(true);
-
+      this.loading = false; $(".loading").css("display", "none");
     })
   }
 
@@ -201,10 +201,18 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     this.searchTag = "";
     this.compnayForm.patchValue({ word: "" });
     if (this.tabSet['activeId'] === 'tab1') {
+      this.loading = true; $(".loading").css("display", "block");
       this.setActiveTab = "company";
+      this.searchTag = "";
+      this.companyTags = [];
+      this.reqcompanyTags = [];
+      this.setDefaultScoll();
+      this.onScroll();
     } else if (this.tabSet['activeId'] === 'tab2') {
+      this.infiniteScrollDisabled = true;
       this.setActiveTab = "ticket";
     } else if (this.tabSet['activeId'] === 'tab3') {
+      this.infiniteScrollDisabled = true;
       this.setActiveTab = "device";
     }
 
