@@ -98,7 +98,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
         if (index > -1) this.ticketTags[index] = data.data;
       }
       if (data.action === "TAG_REMOVED") {
-        let index = this.ticketTags.findIndex(item => item.id === data.data.id);
+        let index = this.ticketTags.findIndex(item => item.id === data.data);
         if (index > -1) this.ticketTags.splice(index, 1);
       }
     })
