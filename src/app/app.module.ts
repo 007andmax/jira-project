@@ -431,7 +431,6 @@ import { DocumentsTableComponent } from './components/documents/documents-table/
 import { DocumentsHeaderComponent } from './components/documents/documents-header/documents-header.component';
 import { DocumentsFilterComponent } from './components/documents/documents-header/documents-filter/documents-filter.component';
 import { DocumentsCategoryComponent } from './components/documents/documents-category/documents-category.component';
-import { DocumentsFilterTagsComponent } from './components/documents/documents-header/documents-filter/documents-filter-tags/documents-filter-tags.component';
 import { PasswordManagerLinkedComponent } from './components/password-manager/password-manager-add-aside/password-manager-linked/password-manager-linked.component';
 import { DocumentsLinkedComponent } from './components/documents/documents-add/documents-add-info/documents-linked/documents-linked.component';
 import { DocumentsTemplatesComponent } from './components/documents/documents-templates/documents-templates.component';
@@ -834,7 +833,6 @@ declare var $: any;
     DocumentsHeaderComponent,
     DocumentsFilterComponent,
     DocumentsCategoryComponent,
-    DocumentsFilterTagsComponent,
     PasswordManagerLinkedComponent,
     DocumentsLinkedComponent,
     DocumentsTemplatesComponent,
