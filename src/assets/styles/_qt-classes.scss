@@ -206,19 +206,15 @@
 }
 .qt-text-upper {text-transform: uppercase;}
 
-
-//.qt-ff-gm {font-family: Graphik-Medium, sans-serif;}
-.qt-ff-gm {font-weight: 600;} // Need to replace
-.qt-ff-gr {font-weight: 400;} // Need to replace
-.qt-ff-sb {font-weight: 600;} // Need to replace
-
-.qt-fw-sb {
+.qt-fw-400 {
+  font-weight: 400;
+}
+.qt-fw-600 {
   font-weight: 600;
 }
 .qt-fw-b {
   font-weight: 700;
 }
-
 
 .qt-sz-12 {width: 12px; height: 12px;}
 .qt-sz-16 {width: 16px; height: 16px;}

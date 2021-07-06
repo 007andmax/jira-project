@@ -35,7 +35,7 @@
                 @include border-radius(50%);
                 font-size: 11px;
                 font-weight: 500;
-                font-family: $graphicMedBold;
+                font-weight: 600;
                 line-height: normal;
                 letter-spacing: normal;
                 text-align: center;
@@ -122,20 +122,18 @@
             }
             strong{
                 font-size: 12px;
-                font-weight: 500;
                 font-style: normal;
                 font-stretch: normal;
                 line-height: 1.33;
                 letter-spacing: normal;
                 color: $primary-2;
-                font-family: $graphicMedBold;
+                font-weight: 600;
             }
             h5{
                 color: $gray-800;
                 margin: 6px 0;
                 max-width: 420px;
-                font-family: $graphicMedBold;
-                font-weight: 500;
+                font-weight: 600;
                 text-transform: none;
             }
             h5.headings{
@@ -143,7 +141,7 @@
                 margin-top:0;
                 position: relative;
                 max-width: initial;
-                font-family: $graphicSemibold;
+                font-weight: 600;
                 color: $primary-2;
                 &::before{
                     position: absolute;

@@ -199,7 +199,7 @@
     color: $gray-600;
     margin-bottom: 15px;
     font-size: 11px;
-    font-family: $graphicSemibold;
+    font-weight: 600;
     text-transform: uppercase;
   }
   .t-user {
@@ -238,7 +238,7 @@
       color: $gray-800;
       overflow: hidden;
       @include border-radius(50%);
-      font-family: $graphicSemibold;
+      font-weight: 600;
     }
   }
   .t-info {
@@ -254,10 +254,9 @@
     h5 {
       margin-bottom: 0;
       font-size: 13px;
-      font-weight: 500;
       font-style: normal;
       font-stretch: normal;
-      font-family: $graphicMedBold;
+      font-weight: 600;
       line-height: 13px;
       letter-spacing: normal;
       color: $gray-800;
@@ -318,8 +317,7 @@
       line-height: 1.45;
       letter-spacing: normal;
       color: $gray-600;
-      font-weight: 500;
-      font-family: $graphicMedBold;
+      font-weight: 600;
       text-transform: uppercase;
       margin-bottom: 15px;
     }

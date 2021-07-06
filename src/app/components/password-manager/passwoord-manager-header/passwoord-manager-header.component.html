@@ -13,15 +13,15 @@
                     *ngIf="getSelectedCount() > 0"
                 >
                     <div [textContent]="getSelectedCount() + ' Selected'"></div>
-                    <div class="qt-ml-25 qt-ff-gm qt-df qt-color-info qt-ai-c qt-pointer">
+                    <div class="qt-ml-25 qt-fw-600 qt-df qt-color-info qt-ai-c qt-pointer">
                         <div class="email-ng2 qt-za-16 qt-sz-16 qt-bg-contain qt-ic-c qt-mr-6"></div>
                         <div>Share via Email</div>
                     </div>
-                    <div class="qt-ml-16 qt-ff-gm qt-df qt-color-info qt-ai-c qt-pointer">
+                    <div class="qt-ml-16 qt-fw-600 qt-df qt-color-info qt-ai-c qt-pointer">
                         <div class="icon__print-blue qt-za-16 qt-sz-16 qt-bg-contain qt-ic-c qt-mr-6"></div>
                         <div>Print</div>
                     </div>
-                    <div class="qt-ml-16 qt-ff-gm qt-df qt-color-info qt-ai-c qt-pointer">
+                    <div class="qt-ml-16 qt-fw-600 qt-df qt-color-info qt-ai-c qt-pointer">
                         <div class="export-ng2 qt-za-16 qt-sz-16 qt-bg-contain qt-ic-c qt-mr-6"></div>
                         <div>Export</div>
                     </div>
@@ -46,7 +46,7 @@
                     (click)="toggleFilter  = !toggleFilter"
                 >
                     <span
-                        class="filter-counter qt-circle qt-sz-18 qt-ff-sb qt-fs-10 qt-color-white qt-bg-info qt-mr-8 qt-df qt-ai-c qt-jc-c"
+                        class="filter-counter qt-circle qt-sz-18 qt-fw-600 qt-fs-10 qt-color-white qt-bg-info qt-mr-8 qt-df qt-ai-c qt-jc-c"
                         *ngIf="countFilter > 0"
                         [textContent]="countFilter"
                     ></span>

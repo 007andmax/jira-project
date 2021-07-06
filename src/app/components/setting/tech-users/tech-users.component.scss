@@ -12,8 +12,7 @@
         .heading{
             .heading-serach{
                 .stati-link{
-                    font-family: $graphicSemibold;
-                    font-weight: 500;
+                    font-weight: 600;
                     font-size: 12px;
                     font-style: normal;
                     line-height: 1.33;
@@ -143,7 +142,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        font-weight: 500;
         font-stretch: normal;
         font-style: normal;
         font-size: 11px;
@@ -153,7 +151,7 @@
         color: $gray-800;
         overflow: hidden;
         @include border-radius(50%);
-        font-family: $graphicSemibold;
+        font-weight: 600;
 
     }
 }

@@ -48,7 +48,7 @@
     .h1 {
         font-size: 22px;
         font-style: normal;
-        font-family: $graphicSemibold;
+        font-weight: 600;
         line-height: 1.27;
         color: $primary-2;
         text-transform: capitalize;
@@ -56,7 +56,7 @@
     h2,
     .h2 {
         font-size: 18px;
-        font-family: $graphicSemibold;
+        font-weight: 600;
         line-height: 1.4;
         letter-spacing: normal;
         color: $primary-2;
@@ -66,7 +66,7 @@
     h3,
     .h3 {
         font-size: 16px;
-        font-family: $graphicSemibold;
+        font-weight: 600;
         line-height: 1.2;
         letter-spacing: normal;
         color: $primary-2;
@@ -76,7 +76,7 @@
     h4,
     .h4 {
         font-size: 14px;
-        font-family: $graphicSemibold;
+        font-weight: 600;
         line-height: 1.2;
         letter-spacing: normal;
         color: $primary-2;
@@ -86,7 +86,7 @@
     h5,
     .h5 {
         font-size: 13px;
-        font-family: $graphicSemibold;
+        font-weight: 600;
         line-height: 1.54;
         letter-spacing: normal;
         color: $primary-2;
@@ -96,7 +96,7 @@
     h6,
     .h6 {
         font-size: 10px;
-        font-family: $graphicSemibold;
+        font-weight: 600;
         line-height: 0.8;
         letter-spacing: normal;
         color: $primary-2;
@@ -167,8 +167,7 @@
 
     .btn {
         font-size: 13px;
-        font-family: $graphicMedBold;
-        font-weight: 500;
+        font-weight: 600;
         line-height: normal;
         letter-spacing: normal;
         color: $white;
@@ -214,8 +213,7 @@
     /*** static link ***/
     .static-link {
         font-size: 12px;
-        font-family: $graphicMedBold;
-        font-weight: 500;
+        font-weight: 600;
         line-height: 1.33;
         letter-spacing: -0.3px;
         color: $primary-1;
@@ -240,9 +238,8 @@
         }
         label,
         .form-label {
-            font-family: $graphicMedBold;
+            font-weight: 600;
             font-size: 13px;
-            font-weight: 500;
             font-style: normal;
             font-stretch: normal;
             line-height: 1.54;
@@ -268,7 +265,7 @@
             padding: 9px 14px;
             font-size: 13px;
             font-weight: normal;
-            font-family: $font-body;
+            font-weight: 400;
             line-height: 1.54;
             letter-spacing: normal;
             color: $gray-800;
@@ -439,7 +436,7 @@
                     @include border-radius(50%);
                     font-size: 18px;
                     font-weight: 500;
-                    font-family: $graphicSemibold;
+                    font-weight: 600;
                     font-style: normal;
                     line-height: 1.44;
                     text-align: center;
@@ -463,8 +460,7 @@
                     padding-bottom: 30px;
                     .small-title {
                         font-size: 11px;
-                        font-weight: 500;
-                        font-family: $graphicMedBold;
+                        font-weight: 600;
                         line-height: 1.09;
                         letter-spacing: normal;
                         color: $gray-600;
@@ -502,8 +498,7 @@
                                 justify-content: center;
                                 @include flexbox;
                                 font-size: 12px;
-                                font-weight: 500;
-                                font-family: $graphicMedBold;
+                                font-weight: 600;
                                 line-height: 1.33;
                                 color: $primary-1;
                                 img {
@@ -550,7 +545,7 @@
                                     border: 1px solid rgba(22, 164, 250, 0.2);
                                     border-radius: 50%;
                                     font-size: 11px;
-                                    font-family: $graphicSemibold;
+                                    font-weight: 600;
                             }
                             .primary-contact-info {
                                 width: calc(100% - 60px);
@@ -650,7 +645,7 @@
                     h1 {
                         margin: 0;
                         font-weight: 400;
-                        font-family: $font-body;
+                        font-weight: 400;
                     }
                     a {
                         font-size: 13px;
@@ -690,7 +685,7 @@
                         background-color: $gray-100;
                         padding: 5px 6px;
                         font-size: 12px;
-                        font-family: $font-body;
+                        font-weight: 400;
                         line-height: 1;
                         color: $gray-800;
                         margin: 0 2px;
@@ -842,7 +837,7 @@
                                 padding-left: 15px !important;
                                 margin: 0 15px;
                                 .title {
-                                    font-family: $font-body;
+                                    font-weight: 400;
                                     font-size: 11px;
                                     font-weight: normal;
                                     line-height: 1.09;
@@ -852,8 +847,7 @@
                                 }
                                 .title-data {
                                     font-size: 12px;
-                                    font-family: $graphicMedBold;
-                                    font-weight: 500;
+                                    font-weight: 600;
                                     line-height: 1.33;
                                     letter-spacing: normal;
                                     color: $primary-2;
@@ -1054,8 +1048,7 @@
                                             }
                                             b {
                                                 color: $primary-2;
-                                                font-weight: 500;
-                                                font-family: $graphicMedBold;
+                                                font-weight: 600;
                                             }
                                         }
                                     }
@@ -1071,8 +1064,7 @@
                                         h6 {
                                             margin-bottom: 10px;
                                             font-size: 12px;
-                                            font-weight: 500;
-                                            font-family: $graphicMedBold;
+                                            font-weight: 600;
                                             line-height: 1.33;
                                             position: relative;
                                             padding-left: 20px;
@@ -1117,8 +1109,7 @@
                                 thead {
                                     th {
                                         font-size: 10px;
-                                        font-family: $graphicMedBold;
-                                        font-weight: 500;
+                                        font-weight: 600;
                                         line-height: 1.2;
                                         letter-spacing: normal;
                                         color: $gray-600;
@@ -1150,20 +1141,17 @@
                                     &:last-child {
                                         padding-right: 0;
                                         text-align: right;
-                                        font-family: $graphicMedBold;
-                                        font-weight: 500;
+                                        font-weight: 600;
                                         @media only screen and (max-width: 1439px) {
                                             padding-right: 0;
                                         }
                                     }
                                     &.ov-d {
-                                        font-family: $graphicMedBold;
-                                        font-weight: 500;
+                                        font-weight: 600;
                                         color: $error;
                                     }
                                     &.paid {
-                                        font-family: $graphicMedBold;
-                                        font-weight: 500;
+                                        font-weight: 600;
                                         color: $success;
                                     }
                                 }
@@ -1243,7 +1231,7 @@
                     &.selected,
                     &:hover {
                         color: $primary-2;
-                        font-family: $graphicMedBold;
+                        font-weight: 600;
                     }
                     span {
                         width: 80px;
@@ -1327,7 +1315,7 @@
                     &.selected,
                     &:hover {
                         color: $primary-2;
-                        font-family: $graphicMedBold;
+                        font-weight: 600;
                         background-color: $background;
                     }
                     &:last-child{
@@ -1400,7 +1388,6 @@
             h3 {
                 margin: 0;
                 font-size: 13px;
-                font-family: $graphicSemibold;
                 font-weight: 600;
                 font-stretch: normal;
                 font-style: normal;
@@ -1410,8 +1397,7 @@
             }
             .cmn-static-link {
                 font-size: 11px;
-                font-family: $graphicMedBold;
-                font-weight: 500;
+                font-weight: 600;
                 line-height: 1.09;
                 letter-spacing: normal;
                 color: $primary-1;
@@ -1425,8 +1411,7 @@
             @include border-radius(4px);
             background-color: $secondary-2;
             font-size: 12px;
-            font-family: $graphicMedBold;
-            font-weight: 500;
+            font-weight: 600;
             line-height: 1.33;
             letter-spacing: normal;
             color: $primary-1;
@@ -1462,13 +1447,13 @@
                     h6 {
                         font-size: 12px;
                         font-weight: normal;
-                        font-family: $font-body;
+                        font-weight: 400;
                         line-height: 1.33;
                         margin-bottom: 8px;
                         text-transform: none;
                         a {
                             color: $gray-800;
-                            font-family: $graphicMedBold;
+                            font-weight: 600;
                         }
                     }
                     span {
@@ -1590,7 +1575,7 @@
                 line-height: 1.33;
                 letter-spacing: normal;
                 color: $gray-800;
-                font-family: 'Graphik-Regular';
+                font-weight: 400;
                 fill: $gray-800;
             }
             line{
@@ -1605,7 +1590,7 @@
                 line-height: 1.33;
                 letter-spacing: normal;
                 color: $gray-800;
-                font-family: 'Graphik-Regular';
+                font-weight: 400;
                 fill: $gray-800;
             }
         }
@@ -1691,7 +1676,7 @@
                     border-bottom: 1px solid $gray-400;
                     h1 {
                         font-size: 20px;
-                        font-family: $graphicSemibold;
+                        font-weight: 600;
                         font-style: normal;
                         line-height: 1;
                         letter-spacing: -0.5px;
@@ -1705,8 +1690,7 @@
                     h5 {
                         margin: 0 0 16px 0;
                         font-size: 13px;
-                        font-family: $graphicMedBold;
-                        font-weight: 500;
+                        font-weight: 600;
                         font-stretch: normal;
                         font-style: normal;
                         line-height: 1.54;
@@ -1761,7 +1745,7 @@
                         //                 @include border-radius(4px);
                         //                 align-items: center;
                         //                 margin: 0;
-                        //                 font-family: $font-body;
+                        //                 font-weight: 400;
                         //                 text-transform: uppercase;
                         //                 outline: none !important;
                         //             }
@@ -1876,8 +1860,7 @@
                                 border: solid 1px $gray-500;
                                 background-color: $white;
                                 font-size: 13px;
-                                font-family: $graphicMedBold;
-                                font-weight: 500;
+                                font-weight: 600;
                                 line-height: normal;
                                 letter-spacing: normal;
                                 color: $gray-800;
@@ -1885,8 +1868,7 @@
                             }
                             &.btn-primary {
                                 font-size: 13px;
-                                font-family: $graphicMedBold;
-                                font-weight: 500;
+                                font-weight: 600;
                                 line-height: normal;
                                 letter-spacing: normal;
                                 color: $white;
@@ -1943,7 +1925,7 @@
                     .h1{
                         font-size: 20px;
                         padding: 10px 32px;
-                        font-family: $graphicSemibold;
+                        font-weight: 600;
                         font-weight: 600;
                         line-height: 1.4;
                     }
@@ -1974,7 +1956,7 @@
             line-height: 1.54;
             letter-spacing: normal;
             color: $gray-800;
-            font-family: $font-body;
+            font-weight: 400;
             text-transform: uppercase;
             &:hover {
                 background-color: rgba(237, 242, 246, 0.5);

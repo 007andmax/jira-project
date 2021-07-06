@@ -288,7 +288,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
       .pipe(
         map(resp => {
           this.emailPreviewHtml = resp;
-          this.emailPreviewHtml = this.emailPreviewHtml.replace(/font-family: Graphik, sans-serif;/gi, '')
+          this.emailPreviewHtml = this.emailPreviewHtml.replace(/font-family: Inter, sans-serif;/gi, '')
           this.gettingEmailTemplatePreview = false;
           this.modalService.open(template, { ariaLabelledBy: 'modal-basic-title', windowClass: "manage-tags", centered: true }).result.then((result) => {
 
@@ -324,7 +324,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     // this.templeteForm.patchValue({
     //   body: this.body.nativeElement.value,
     //   subject: this.subject.nativeElement.value
-    // });    
+    // });
     this.templeteForm.patchValue({
       // body: this.templeteForm.value.body,
       body: document.getElementById("myEditor")['value'],

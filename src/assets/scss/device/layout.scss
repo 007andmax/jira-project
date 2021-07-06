@@ -42,7 +42,7 @@ img{display:inline-block;max-width:100%;}
 h1,.h1{
     font-size: 20px;
     font-style: normal;
-    font-family: $graphicSemibold;
+    font-weight: 600;
     line-height: 1.4;
     letter-spacing: -0.3px;
     color: $primary-2;
@@ -51,7 +51,7 @@ h1,.h1{
 }
 h2,.h2{
     font-size: 18px;
-    font-family: $graphicSemibold;
+    font-weight: 600;
     line-height: 1.4;
     letter-spacing: normal;
     color: $primary-2;
@@ -60,17 +60,16 @@ h2,.h2{
 }
 h3,.h3{
      font-size: 16px;
-    font-family: $graphicSemibold;
+    font-weight: 600;
     line-height: 1.2;
     letter-spacing: normal;
     color: $primary-2;
     margin:0 0 20px 0;
     text-transform: capitalize;
-    font-weight: 600;
 }
 h4,.h4{
     font-size: 14px;
-    font-family: $graphicSemibold;
+    font-weight: 600;
     line-height: 1.2;
     letter-spacing: normal;
     color: $primary-2;
@@ -79,18 +78,17 @@ h4,.h4{
 }
 h5,.h5{
     font-size: 13px;
-    font-family: $graphicMedBold;
+    font-weight: 600;
     line-height: 1.54;
     letter-spacing: normal;
     color: $primary-2;
     margin:0 0 20px 0;
     text-transform: capitalize;
-    font-weight: 500;
 }
 h6,.h6{
 
   font-size: 10px;
-  font-family: $graphicSemibold;
+  font-weight: 600;
   line-height: 0.8;
   letter-spacing: normal;
   color: $primary-2;
@@ -116,8 +114,7 @@ ol li:before{content:counter(av-counter) ".";counter-increment:none;color:$prima
 
 .btn{
     font-size: 14px;
-    font-family: $graphicMedBold;
-    font-weight: 500;
+    font-weight: 600;
     line-height: normal;
     letter-spacing: normal;
     color: $white;
@@ -156,8 +153,7 @@ ol li:before{content:counter(av-counter) ".";counter-increment:none;color:$prima
 /*** static link ***/
 .static-link{
     font-size: 12px;
-    font-family: $graphicMedBold;
-    font-weight: 500;
+    font-weight: 600;
     line-height: 1.33;
     letter-spacing: -0.3px;
     color: $primary-1;
@@ -178,9 +174,8 @@ form{
         margin: 0 0 17px 0;
     }
     label,.form-label{
-        font-family: $graphicMedBold;
+        font-weight: 600;
         font-size: 13px;
-        font-weight: 500;
         font-style: normal;
         line-height: 1.54;
         letter-spacing: normal;
@@ -204,7 +199,7 @@ form{
         padding: 9px 15px;
         font-size: 13px;
         font-weight: normal;
-        font-family: $font-body;
+        font-weight: 400;
         line-height: 1.54;
         letter-spacing: normal;
         color: $gray-800;
@@ -350,9 +345,8 @@ header{
                     h6 {
                         margin: 0;
                         font-size: 10px;
-                        font-weight: normal;
                         font-style: normal;
-                        font-family:$font-body;
+                        font-weight: 400;
                         line-height: 1.2;
                         letter-spacing: normal;
                         color: $gray-600;
@@ -360,9 +354,8 @@ header{
                     }
                     h5 {
                         font-size: 12px;
-                        font-weight: 500;
                         font-style: normal;
-                        font-family:$font-body;
+                        font-weight: 400;
                         line-height: 1.33;
                         letter-spacing: normal;
                         color: $white;
@@ -398,7 +391,6 @@ header{
             .head-btn {
                 font-size: 12px;
                 font-weight: 600;
-                font-family: $graphicSemibold;
                 font-stretch: normal;
                 font-style: normal;
                 line-height: 1.33;
@@ -444,7 +436,7 @@ header{
         letter-spacing: normal;
         color: $white;
         padding: 7.5px 7px;
-        font-family: $font-body;
+        font-weight: 400;
         .sub-head-counter {
             right: 32px;
             top: 0;
@@ -539,7 +531,7 @@ header{
                 a{
                     background-color: $gray-800;
                     border-color: $primary-1;
-                    font-family: $graphicSemibold;
+                    font-weight: 600;
                 }
             }
             &.back{
@@ -575,8 +567,7 @@ header{
                 border: solid 1px $primary-1;
                 @include border-radius(50%);
                 font-size: 11px;
-                font-weight: 500;
-                font-family: $graphicSemibold;
+                font-weight: 600;
                 font-style: normal;
                 line-height: normal;
                 letter-spacing: normal;
@@ -638,7 +629,7 @@ header{
             color: $white;
             line-height: normal;
             font-weight: normal;
-            font-family: $font-body;
+            font-weight: 400;
         }
         span {
             font-size: 10px;
@@ -804,8 +795,7 @@ header{
 
     .status {
         font-size: 10px;
-        font-family: $graphicMedBold;
-        font-weight: 500;
+        font-weight: 600;
         font-stretch: normal;
         font-style: normal;
         letter-spacing: normal;
@@ -993,7 +983,7 @@ ngb-tabset {
                 display: block;
                 text-transform: capitalize;
                 @include transition(0.4s);
-                font-family:$graphicSemibold;
+                font-weight: 600;
                 &:hover,&.active{
                     border-color: $primary-1;
                     color: $primary-1;
@@ -1190,7 +1180,7 @@ ngb-tabset {
         right: -10px;
         bottom: -41px;
         z-index: 1;
-        font-family: $font-body;
+        font-weight: 400;
     }
     &::after{
         top: auto;
@@ -1267,8 +1257,7 @@ table {
             line-height: normal;
             letter-spacing: normal;
             color: $primary-2;
-            font-family: $graphicMedBold;
-            font-weight: 500;
+            font-weight: 600;
     }
     td {
         padding: 9px 5px;
@@ -1810,7 +1799,7 @@ table {
                     color: $primary-1;
                     cursor: pointer;
                     text-decoration: underline;
-                    font-family: $font-body;
+                    font-weight: 400;
                     input{
                         display: none;
                     }
@@ -2048,7 +2037,7 @@ bs-datepicker-navigation-view {
     max-width: inherit;
     padding: 0 1px;
     color: $gray-800;
-    font-family: $graphicSemibold;
+    font-weight: 600;
     font-size: 12px;
     text-transform: uppercase;
 }
@@ -2057,8 +2046,7 @@ bs-datepicker-navigation-view {
 
 .bs-datepicker-body table th {
     font-size: 10px;
-    font-weight: 500;
-    font-family: $graphicSemibold;
+    font-weight: 600;
     font-style: normal;
     line-height: 1;
     letter-spacing: normal;
@@ -2218,8 +2206,7 @@ ngb-datepicker{
     .ngb-dp-weekdays {
         .ngb-dp-weekday {
             font-size: 10px;
-            font-weight: 500;
-            font-family: $graphicSemibold;
+            font-weight: 600;
             font-style: normal;
             line-height: 1;
             letter-spacing: normal;
@@ -2277,8 +2264,7 @@ ngb-datepicker{
                     width: auto;
                     line-height: 1 !important;
                     font-size: 12px;
-                    font-weight: normal;
-                    font-family:$font-body;
+                    font-weight: 400;
                     font-stretch: normal;
                     font-style: normal;
                     line-height: normal;
@@ -2446,7 +2432,7 @@ ul.dropdown-menu {
     background-color: $white;
     padding: 9.5px 16px;
     font-size: 12px;
-    font-family: $graphicSemibold;
+    font-weight: 600;
     line-height: 1.33;
     letter-spacing: normal;
     color: $primary-1;
@@ -2520,7 +2506,6 @@ ul.dropdown-menu {
         h2{
             font-size: 15px;
             font-weight: 600;
-            font-family: $graphicSemibold;
             line-height: 1.33;
             letter-spacing: normal;
             color: $primary-2;

@@ -226,8 +226,7 @@
     h5 {
       margin-bottom: 5px;
       font-size: 13px;
-      font-weight: 500;
-      font-family: $graphicMedBold;
+      font-weight: 600;
       font-style: normal;
       font-stretch: normal;
       line-height: normal;
@@ -265,7 +264,6 @@
   margin-bottom: 10px;
   th {
     font-size: 12px;
-    font-weight: 500;
     font-style: normal;
     font-stretch: normal;
     line-height: normal;
@@ -274,7 +272,7 @@
     border-bottom: solid 1px $gray-800;
     vertical-align: middle;
     padding: 0 10px 13px 0;
-    font-family: $graphicMedBold;
+    font-weight: 600;
     &:last-child {
       padding-right: 0;
       text-align: right;
@@ -333,7 +331,7 @@
 .t-power {
   display: block;
   font-size: 12px;
-  font-family: $font-body;
+  font-weight: 400;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;

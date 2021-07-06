@@ -29,7 +29,7 @@
             [autoClose]="'inside'"
             #editCustomer="ngbDropdown"
         >
-            <div class="qt-fs-10 qt-ff-sb  qt-df qt-ai-c qt-mb-4 qt-lh-12">
+            <div class="qt-fs-10 qt-fw-600  qt-df qt-ai-c qt-mb-4 qt-lh-12">
                 <div class="qt-sz-16 icon__company-address qt-ic-c qt-mr-4"></div>
                 BILLING ADDRESS
             </div>
@@ -54,7 +54,7 @@
                 [textContent]="(quoteCompany.companyInfo.contacts.length > 0) ? quoteCompany.companyInfo.contacts[0].primaryEmail : ''"
             ></div>
             <div
-                class="qt-ff-gm qt-mt-10 qt-fs-12 qt-lh-133 qt-color-info qt-pointer"
+                class="qt-fw-600 qt-mt-10 qt-fs-12 qt-lh-133 qt-color-info qt-pointer"
                 id="dropdownForm1"
                 *ngIf="quoteCompany"
                 ngbDropdownToggle
@@ -225,9 +225,9 @@
         </div>
     </div>
     <div class="terms-n-conditions qt-pl-30 qt-pr-30 qt-pb-24 qt-pt-16">
-        <div class="qt-fs-13 qt-ff-gm qt-mb-12">Terms & Conditions</div>
+        <div class="qt-fs-13 qt-fw-600 qt-mb-12">Terms & Conditions</div>
         <div
-            class="qt-fs-12 qt-color-info qt-ff-gm pointer"
+            class="qt-fs-12 qt-color-info qt-fw-600 pointer"
             *ngIf="changeGlobalNote"
             (click)="onUpdateGlobalNote()"
         >

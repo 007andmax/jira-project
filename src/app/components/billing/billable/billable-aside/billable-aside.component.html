@@ -10,11 +10,11 @@
                 *ngIf="billableTaimer && !billableTaimer.isFinished"
             ></div>
             <div
-                class="qt-fs-13 qt-ff-gr qt-mr-16 qt-color-dark-light"
+                class="qt-fs-13 qt-fw-400 qt-mr-16 qt-color-dark-light"
                 *ngIf="billableTaimer && !billableTaimer.isFinished"
             >
                 <span
-                    class="qt-ff-gm qt-color-dark"
+                    class="qt-fw-600 qt-color-dark"
                     [textContent]="billableTaimer.getTimeText()"
                 ></span>
                 mins remaining until unlock
@@ -24,7 +24,7 @@
                 *ngIf="billableTaimer && billableTaimer.isFinished"
             ></div>
             <div
-                class="qt-fs-13 qt-ff-gr qt-mr-16 qt-color-dark-light"
+                class="qt-fs-13 qt-fw-400 qt-mr-16 qt-color-dark-light"
                 *ngIf="billableTaimer && billableTaimer.isFinished"
             >
                 Invoice has been expired and it cannot be saved

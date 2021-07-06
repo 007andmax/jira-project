@@ -22,13 +22,12 @@ main {
                         background-color: $primary-2;
                         padding: 22px 20px;
                         font-size: 13px;
-                        font-weight: normal;
                         font-stretch: normal;
                         font-style: normal;
                         line-height: 1.54;
                         letter-spacing: normal;
                         color: $white;
-                        font-family: $sourceCode;
+                        font-weight: 500;
                         margin-bottom: 16px;
                         height: 310px;
                         // max-height: 310px !important;
@@ -44,7 +43,7 @@ main {
                         // }
                         p {
                             margin-bottom: 0;
-                            font-family: $sourceCode;
+                            font-weight: 500;
                         }
                     }
                     .terminal-btn-row {
@@ -61,7 +60,7 @@ main {
                             border: solid 1px $gray-500;
                             padding: 10px 14px;
                             color: $gray-800 !important;
-                            font-family: $sourceCode;
+                            font-weight: 500;
                             height: 120px;
                             // max-height: 150px !important;
                             margin-bottom: 0;
@@ -269,7 +268,7 @@ main {
                                                         max-width: calc(100% - 20px);
                                                         color: $gray-800;
                                                         font-size: 12px;
-                                                        font-family: $graphicMedBold;
+                                                        font-weight: 600;
                                                     }
                                                 }
                                             }
@@ -277,10 +276,8 @@ main {
                                                 h5 {
                                                     font-size: 12px;
                                                     font-weight: bold;
-                                                    font-family: $sourceCode;
                                                 }
                                                 span {
-                                                    font-family: $sourceCode;
                                                     font-size: 12px;
                                                     font-weight: normal;
                                                     font-style: normal;
@@ -343,7 +340,7 @@ main {
                                         }
                                         textarea {
                                             height: 315px;
-                                            font-family: $sourceCode;
+                                            font-weight: 500;
                                         }
                                     }
                                     .btn {
@@ -380,7 +377,7 @@ main {
                                         padding: 0;
                                         text-align: center;
                                         color: $primary-2;
-                                        font-family: $sourceCode;
+                                        font-weight: 500;
                                         &::before {
                                             width: 0;
                                         }
@@ -417,12 +414,11 @@ main {
                                 &:last-child{
                                     border-top:1px solid  $gray-400;
                                     font-size: 12px;
-                                    font-weight: 500;
                                     font-style: normal;
                                     line-height: 1.33;
                                     letter-spacing: normal;
                                     color: $primary-1;
-                                    font-family:$graphicMedBold;
+                                    font-weight: 600;
                                     padding: 12px 15px;
                                 }
                             }
@@ -651,7 +647,7 @@ main {
                         letter-spacing: normal;
                         color: $gray-800;
                         padding: 3px 8px;
-                        font-family: $graphicMedBold;
+                        font-weight: 600;
                     }
                 }
                 .script-details-area {
@@ -704,7 +700,7 @@ main {
                         line-height: 1.45;
                         letter-spacing: -0.5px;
                         margin-bottom: 20px;
-                        font-family: $font-body;
+                        font-weight: 400;
                         text-transform: none;
                     }
                     .script-info {
@@ -784,7 +780,7 @@ main {
                 vertical-align: middle;
                 margin-left: 23px;
                 font-size: 12px;
-                font-family: $graphicMedBold;
+                font-weight: 600;
                 font-stretch: normal;
                 font-style: normal;
                 line-height: 1.33;
@@ -839,18 +835,17 @@ main {
                     line-height: 1.33;
                     letter-spacing: normal;
                     color: $gray-800;
-                    font-family: $sourceCode;
                 }
                 .copy {
                     font-size: 0;
                     width: 16px;
                     height: 16px;
                     position: relative;
-                    font-family: $sourceCode;
+                    font-weight: 500;
                     background: url("../../../../assets/img/device/send-to-front.svg") no-repeat center;
                     &::before {
                         font-weight: 400;
-                        font-family: $font-body;
+                        font-weight: 400;
                         width: 85px;
                     }
                 }
@@ -861,7 +856,6 @@ main {
                     margin-bottom: 18px;
                     font-size: 12px;
                     font-weight: normal;
-                    font-family: $sourceCode;
                     line-height: 1.33;
                     color: $gray-800;
                 }
@@ -901,7 +895,7 @@ body {
                                 line-height: 1.4;
                                 letter-spacing: -0.5px;
                                 text-transform: capitalize;
-                                font-family: $graphicSemibold;
+                                font-weight: 600;
                                 margin: 0;
                             }
                             button{
@@ -1093,8 +1087,7 @@ body {
                 button.dropdown-item{
                     &:last-child{
                         color: $primary-2;
-                        font-family: $font-body !important;
-                        font-weight: normal !important;
+                        font-weight: 400;
                     }
                 }
             }

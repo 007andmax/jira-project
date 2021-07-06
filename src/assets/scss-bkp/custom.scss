@@ -1,16 +1,6 @@
-// Font Family
-
-$font-body: 'Graphik-Regular';
-$grahic-light:'Graphik-Light';
-$graphicSemibold:'Graphik-Semibold';
-$graphic-bold:'Graphik-Bold';
-$graphicMedBold:'Graphik-Medium';
-
-
-
 @mixin body-font {
     color: $gray-800;
-    font-family: $font-body;
+    font-weight: 400;
     font-size: 13px;
     line-height: 1.54;
 }

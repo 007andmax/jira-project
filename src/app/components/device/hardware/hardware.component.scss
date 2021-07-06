@@ -49,8 +49,7 @@
                     margin-bottom: 0;
                     margin-left: 8px;
                     max-width: calc(100% - 40px);
-                    font-family: $graphicMedBold;
-                    font-weight: 500;
+                    font-weight: 600;
                 }
 
             }
@@ -61,9 +60,8 @@
                 li {
                     width: 100%;
                     font-size: 13px;
-                    font-weight: 500;
                     font-style: normal;
-                    font-family: $graphicMedBold;
+                    font-weight: 600;
                     line-height: 1.54;
                     letter-spacing: normal;
                     color: $gray-800;
@@ -74,7 +72,7 @@
                     align-items: center;
                     flex-direction: revert;
                     span{
-                        font-family: $font-body;
+                        font-weight: 400;
                         color: $gray-600;
                         margin-right: 2px;
                         display: inline-block;
@@ -82,7 +80,7 @@
                         min-width: 130px;
                     }
                     & > div{
-                        font-family: $font-body;
+                        font-weight: 400;
                     }
                 }
             }
