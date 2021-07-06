@@ -13,7 +13,6 @@ import {
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
-
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { IgxTimePickerModule } from 'igniteui-angular';
 import { AngularEditorModule } from '@kolkov/angular-editor';
@@ -402,35 +401,18 @@ import { PasswoordManagerFiltersComponent } from './components/password-manager/
 import { PasswordManagerEditLinkedComponent } from './components/password-manager/password-manager-edit-aside/password-manager-edit-linked/password-manager-edit-linked.component';
 import { AfterViewInitDirective } from './directives/after-view-init.directive';
 import { TicketsFilterTagsComponent } from './components/tickets/tickets/tickets-header/tickets-filter/tickets-filter-tags/tickets-filter-tags.component';
-
 import { DocumentsComponent } from './components/documents/documents.component';
 import { LeftPanelDocumentsComponent } from './components/left-panel/left-panel-documents/left-panel-documents.component';
-//import { FroalaEditorModule, FroalaViewModule } from './modules/froala-editor';
-
-
 
 // Import all Froala Editor plugins.
 import 'froala-editor/js/plugins.pkgd.min.js';
 
 // Import a single Froala Editor plugin.
 import 'froala-editor/js/plugins/align.min.js';
-
 import 'froala-editor/js/plugins/code_view.min.js';
-
-import 'froala-editor/js/plugins/track_changes.min.js';
-import 'froala-editor/js/plugins/markdown.min.js';
-import 'froala-editor/js/plugins/paragraph_format.min.js';
-import 'froala-editor/js/plugins/paragraph_style.min.js';
-import 'froala-editor/js/plugins/edit_in_popup.min.js';
-import 'froala-editor/js/plugins/font_family.min.js';
-import 'froala-editor/js/plugins/quote.min.js';
-
-
 
 // Import a Froala Editor language file.
 import 'froala-editor/js/languages/de.js';
-
-
 import 'froala-editor/js/plugins/image.min.js';
 import 'froala-editor/js/plugins/file.min.js';
 

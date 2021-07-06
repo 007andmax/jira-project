@@ -29,12 +29,21 @@ export class DocumentsAddBodyComponent implements OnInit {
     //  var editor = CodeMirror(document.getElementById("froala-editor"));
   }
   ngDoCheck() {
-    console.log("this.editorContent", this.editorContent);
+
     this.onChangeContent.emit(this.editorContent);
   }
   onInitFloara() {
     const self = this;
     this.options = {
+
+      toolbarButtons: ['fullscreen', 'undo', 'redo', 'getPDF', 'print', '|',
+        'bold', 'italic', 'underline', 'textColor', 'backgroundColor', 'clearFormatting', '|',
+        'alignLeft', 'alignCenter', 'alignRight', 'alignJustify', '|',
+        'formatOL', 'formatUL', 'indent', 'outdent', '|',
+        'paragraphFormat', '|',
+        'fontFamily', '|',
+        'fontSize', '|',
+        'insertLink', 'insertImage', 'quote', 'insertTable'],
       //  toolbarButtons: ['bold', 'italic', 'underline', 'moreText', '|', 'alignLeft', 'alignCenter', 'formatOLSimple', 'moreParagraph', '|', 'trackChanges', 'markdown', 'insertLink', 'insertFiles', 'moreRich', '|', 'undo', 'redo', 'moreMisc'],
       /*  toolbarButtons: {
           // Key represents the more button from the toolbar.
@@ -94,6 +103,7 @@ export class DocumentsAddBodyComponent implements OnInit {
               "shape": "arrow"
             }
           };
+          console.log("self", self.options);
           //start!
           self.codox.init(config);
         },
