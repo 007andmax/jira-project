@@ -50,7 +50,7 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
   public ngOnInit() {
     let getTags = this.tagsService.getTags().subscribe((data) => {
       this.tags = data;
-      this.reqTags = data;
+      this.reqTags = JSON.parse(JSON.stringify(data));
       this.sortTags();
     })
     this.sub.add(getTags);
