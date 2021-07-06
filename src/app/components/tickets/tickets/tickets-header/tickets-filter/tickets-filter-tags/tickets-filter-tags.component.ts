@@ -18,6 +18,25 @@ export class TicketsFilterTagsComponent extends CompanyTagsComponent {
         1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
     })
     this.sub.add(getTags);
+    let changeTagsArray = this.tagsRealTimeService.changeTagsArray.subscribe((data: any) => {
+      if (data.action === "TAG_SAVED" && data.data instanceof Array) {
+        this.tags = [...this.tags, ...data.data];
+        this.reqTags = [...this.reqTags, ...data.data];
+      }
+      if (data.action === "TAG_SAVED" && data.data instanceof Object) {
+        let index = this.tags.findIndex(item => item.id === data.data.id);
+        let indexreqTags = this.reqTags.findIndex(item => item.id === data.data.id);
+        if (index > -1) this.tags[index] = data.data;
+        if (indexreqTags > -1) this.reqTags[index] = data.data;
+      }
+      if (data.action === "TAG_REMOVED") {
+        let index = this.tags.findIndex(item => item.id === data.data);
+        let indexreqTags = this.reqTags.findIndex(item => item.id === data.data);
+        if (index > -1) this.tags.splice(index, 1);
+        if (indexreqTags > -1) this.reqTags.splice(index, 1);
+      }
+    })
+    this.sub.add(changeTagsArray);
     this.onInitClearState();
     this.onCheckEditItem();
   }
