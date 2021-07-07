@@ -36,6 +36,7 @@ export class DocumentsEditComponent extends DocumentsAddComponent {
     this.documentsService.getDocument(id).subscribe(data => {
       this.documentEdit = new Document(data, false);
       this.showPreloader = false;
+
     })
   }
 }

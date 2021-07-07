@@ -13,6 +13,7 @@ import { TicketsColor } from 'src/app/components/left-panel/left-panel-tickets/t
 import { SelectSearchComponent } from 'src/app/components/shared/select-search/select-search.component';
 import { ItemStatus } from 'src/app/components/left-panel/left-panel-tickets/tickets-status/class/item-status';
 import { Subscribable, Subscription } from 'rxjs';
+import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service';
 
 @Component({
   selector: 'app-tickets-filter',
@@ -102,6 +103,8 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
     this.sub.add(getOnUpdateCounts);
+
+
   }
   public onClearAll() {
 

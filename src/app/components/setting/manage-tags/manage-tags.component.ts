@@ -4,10 +4,11 @@ import {
   ViewChild,
   ElementRef,
   OnDestroy,
-  ViewContainerRef
+  ViewContainerRef,
+  ChangeDetectorRef
 } from "@angular/core";
 
-import { forkJoin, Observable, Subject } from "rxjs";
+import { forkJoin, Observable, Subject, Subscription } from "rxjs";
 import { map } from "rxjs/operators";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
@@ -17,6 +18,7 @@ import { CompaniesStateService } from "src/app/states/company/companies-state.se
 import { TagsService } from "src/app/services/tags/tags.service";
 import { DataTableDirective } from "angular-datatables";
 import { ManageTagsListService } from "./services/manage-tags-list.service";
+import { TagsRealTimeService } from "src/app/states/tags/tags-real-time.service";
 declare var $: any;
 @Component({
   selector: "app-manage-tags",
@@ -60,7 +62,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     this.tabSet = content;
   };
   dtTrigger = new Subject();
-
+  sub: Subscription = new Subscription();
   constructor(
     private tagsService: TagsService,
     private formBuilder: FormBuilder,
@@ -68,6 +70,8 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     private settingStateService: SettingStateService,
     private companiesStateService: CompaniesStateService,
     private manageTagsListService: ManageTagsListService,
+    private tagsRealTimeService: TagsRealTimeService,
+    public cd: ChangeDetectorRef,
   ) { }
 
   /**
@@ -86,10 +90,25 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       this.getCurrentCompany(res);
     })
     this.serviceAllTickets = this.tagsService.getAllTickets();
-
-
     this.getAllTags();
     this.settingStateService.setComponentName('ManageTagsComponent');
+
+    let changeTagsArray = this.tagsRealTimeService.changeTagsArray.subscribe((data: any) => {
+      if (data.action === "TAG_SAVED") {
+        let index = this.ticketTags.findIndex(item => item.id === data.data.id);
+        if (index > -1) {
+          this.ticketTags[index] = data.data;
+        } else {
+          this.ticketTags.push(data.data);
+        }
+      }
+      if (data.action === "TAG_REMOVED") {
+        let index = this.ticketTags.findIndex(item => item.id === data.data);
+        if (index > -1) this.ticketTags.splice(index, 1);
+      }
+      this.cd.detectChanges();
+    })
+    this.sub.add(changeTagsArray);
   }
 
   ngAfterViewInit(): void {
@@ -136,7 +155,6 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     );
   }
   onSearch() {
-
     this.setDefaultScoll();
     this.onScroll();
   }
@@ -147,7 +165,6 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     this.reqcompanyTags = [];
   }
   public onScroll() {
-    console.log("onScroll");
     this.infiniteScrollDisabled = true;
     this.getTags();
   }
@@ -162,7 +179,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       this.page++;
       this.infiniteScrollDisabled = false;
       if (this.reqcompanyTags.length === data.totalElements) this.manageTagsListService.setBlockList(true);
-
+      this.loading = false; $(".loading").css("display", "none");
     })
   }
 
@@ -186,7 +203,6 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       },
       error => {
         this.loading = false; $(".loading").css("display", "none");
-
       }
     );
   }
@@ -194,17 +210,25 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
   // TODO
   getAllDevice() { }
 
-  setTab() {
+  setTab(data) {
     if (this.edit) {
       return;
     }
     this.searchTag = "";
     this.compnayForm.patchValue({ word: "" });
-    if (this.tabSet['activeId'] === 'tab1') {
+    if (data['nextId'] === 'tab1') {
+      this.loading = true; $(".loading").css("display", "block");
       this.setActiveTab = "company";
-    } else if (this.tabSet['activeId'] === 'tab2') {
+      this.searchTag = "";
+      this.companyTags = [];
+      this.reqcompanyTags = [];
+      this.setDefaultScoll();
+      this.onScroll();
+    } else if (data['nextId'] === 'tab2') {
+      this.infiniteScrollDisabled = true;
       this.setActiveTab = "ticket";
-    } else if (this.tabSet['activeId'] === 'tab3') {
+    } else if (data['nextId'] === 'tab3') {
+      this.infiniteScrollDisabled = true;
       this.setActiveTab = "device";
     }
 
@@ -266,11 +290,11 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
         this.loading = false; $(".loading").css("display", "none");
         this.deletePopup = false;
         this.toaster.success("Tag Removed Successfully");
-        if (this.setActiveTab === "ticket") {
-          this.getAllTickets();
-        } else {
-          this.getAllCompany();
-        }
+        /*  if (this.setActiveTab === "ticket") {
+            this.getAllTickets();
+          } else {
+            this.getAllCompany();
+          }*/
       },
       error => {
         this.loading = false; $(".loading").css("display", "none");
@@ -304,11 +328,11 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
         res => {
           this.loading = false; $(".loading").css("display", "none");
           this.toaster.success("Tag Saved Successfully");
-          if (this.setActiveTab === "ticket") {
-            this.getAllTickets();
-          } else {
-            this.getAllCompany();
-          }
+          /* if (this.setActiveTab === "ticket") {
+             this.getAllTickets();
+           } else {
+             this.getAllCompany();
+           }*/
 
           this.submitted = false;
           this.compnayForm.patchValue({ word: "" });
@@ -373,6 +397,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     $('body').removeClass('ng7');
     // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();
+    this.sub.unsubscribe();
   }
   public trackById(index, item) {
     return item.id;

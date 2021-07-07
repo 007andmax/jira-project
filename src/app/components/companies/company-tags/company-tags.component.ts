@@ -8,6 +8,7 @@ import { TagsService } from 'src/app/services/tags/tags.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { TagsStateService } from 'src/app/states/tags/tags-state.service';
 import { CompanyTagsListService } from './services/company-tags-list.service';
+import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service';
 
 @Component({
   selector: 'app-company-tags',
@@ -45,6 +46,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
     private tagsStateService: TagsStateService,
     private companiesStateService: CompaniesStateService,
     private companyTagsListService: CompanyTagsListService,
+    public tagsRealTimeService: TagsRealTimeService,
     public cd: ChangeDetectorRef
   ) { }
 
@@ -52,15 +54,6 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-    /* this.tags = this.tagsStateService.getTags();
-     this.reqTags = JSON.parse(JSON.stringify(this.tagsStateService.getTags()));
-     let getTags = this.tagsStateService.onGetTags.subscribe((data: Array<Tag>) => {
- 
-       this.tags = data;
-       this.reqTags = JSON.parse(JSON.stringify(data));
-       this.onCheckEditItem();
-     })
-     this.sub.add(getTags);*/
     this.onInitClearState();
     this.onCheckEditItem();
   }

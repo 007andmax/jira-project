@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, HostListener, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, HostListener, Input, ChangeDetectorRef } from '@angular/core';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -6,6 +6,7 @@ import { TagsStateService } from 'src/app/components/shared/tags/services/tags-s
 import { MatChipInputEvent } from '@angular/material';
 import { TagsService } from 'src/app/services/tags/tags.service';
 import { Tag } from 'src/app/interfaces/tag/tag';
+import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service';
 
 @Component({
   selector: 'app-ticket-edit-tags',
@@ -38,7 +39,9 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
    */
   public constructor(
     private tagsService: TagsService,
-    private tagsState: TagsStateService
+    private tagsState: TagsStateService,
+    public tagsRealTimeService: TagsRealTimeService,
+    public cd: ChangeDetectorRef
   ) { }
 
   /**
@@ -46,15 +49,45 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
    */
   public ngOnInit() {
     let getTags = this.tagsService.getTags().subscribe((data) => {
-      this.tags = data.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
-        1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
-      this.reqTags = data;
+      this.tags = data;
+      this.reqTags = JSON.parse(JSON.stringify(data));
+      this.sortTags();
     })
     this.sub.add(getTags);
+    let changeTagsArray = this.tagsRealTimeService.changeTagsArray.subscribe((data: any) => {
+      if (data.action === "TAG_SAVED") {
+        let index = this.tags.findIndex(item => item.id === data.data.id);
+        let indexreqTags = this.reqTags.findIndex(item => item.id === data.data.id);
+        if (index > -1) {
+          this.tags[index] = data.data;
+        } else {
+          this.tags.push(data.data);
+        }
+        if (indexreqTags > -1) {
+          this.reqTags[index] = data.data;
+        } else {
+          this.reqTags.push(data.data);
+        }
+      }
+      if (data.action === "TAG_REMOVED") {
+        let index = this.tags.findIndex(item => item.id === data.data);
+        let indexreqTags = this.reqTags.findIndex(item => item.id === data.data);
+        if (index > -1) this.tags.splice(index, 1);
+        if (indexreqTags > -1) this.reqTags.splice(index, 1);
+      }
+      this.sortTags();
+      this.cd.detectChanges();
+    })
+    this.sub.add(changeTagsArray);
     this.onInitClearState();
     this.onCheckEditItem();
   }
-
+  sortTags() {
+    this.tags = this.tags.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
+      1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
+    this.reqTags = this.reqTags.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
+      1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
+  }
   /**
   * Subscribe for edit mode
   */

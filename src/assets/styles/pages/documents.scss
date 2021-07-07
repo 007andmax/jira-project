@@ -336,3 +336,8 @@
     }
   }
 }
+.fr-popup.fr-above {
+  left: calc(50% - 150px) !important;
+  top: calc(50% - 60px) !important;
+  z-index: 9999 !important;
+}

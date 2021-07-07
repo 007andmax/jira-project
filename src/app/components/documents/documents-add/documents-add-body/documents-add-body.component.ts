@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { environment } from 'src/environments/environment';
 
@@ -10,17 +10,20 @@ declare const CodeMirror: any;
   templateUrl: './documents-add-body.component.html',
   styleUrls: ['./documents-add-body.component.scss']
 })
-export class DocumentsAddBodyComponent implements OnInit {
+export class DocumentsAddBodyComponent implements OnInit, OnDestroy {
   private apiUrl = environment.apiUrl;
   @Input() editorContent = "";
   public options: Object;
   codox: any;
   editor: any;
   currentUser: any;
+  froalaEditor: any;
   @Output() onChangeContent = new EventEmitter<any>();
-  constructor(private usersStateService: UsersStateService) {
+  constructor(private usersStateService: UsersStateService,
+    public cd: ChangeDetectorRef,) {
     this.codox = new Codox()
   }
+
 
   ngOnInit() {
     this.currentUser = this.usersStateService.getCurrentUser();
@@ -28,13 +31,26 @@ export class DocumentsAddBodyComponent implements OnInit {
 
     //  var editor = CodeMirror(document.getElementById("froala-editor"));
   }
+  ngAfterViewInit() {
+
+    this.cd.detectChanges();
+  }
   ngDoCheck() {
-    console.log("this.editorContent", this.editorContent);
+
     this.onChangeContent.emit(this.editorContent);
   }
   onInitFloara() {
     const self = this;
     this.options = {
+      key: "lSA3D-17E4B3A1C2D1H2rXYb1VPUGRHYZNRJd1JVOOb1HAc1zG2B1A2A2D6B1A1C4G1I4==",
+      toolbarButtons: ['fullscreen', 'undo', 'redo', 'getPDF', 'print', '|',
+        'bold', 'italic', 'underline', 'textColor', 'backgroundColor', 'clearFormatting', '|',
+        'alignLeft', 'alignCenter', 'alignRight', 'alignJustify', '|',
+        'formatOL', 'formatUL', 'indent', 'outdent', '|',
+        'paragraphFormat', '|',
+        'fontFamily', '|',
+        'fontSize', 'insertFiles', 'insertFile', '|',
+        'insertLink', 'insertImage', 'quote', 'insertTable'],
       //  toolbarButtons: ['bold', 'italic', 'underline', 'moreText', '|', 'alignLeft', 'alignCenter', 'formatOLSimple', 'moreParagraph', '|', 'trackChanges', 'markdown', 'insertLink', 'insertFiles', 'moreRich', '|', 'undo', 'redo', 'moreMisc'],
       /*  toolbarButtons: {
           // Key represents the more button from the toolbar.
@@ -62,18 +78,18 @@ export class DocumentsAddBodyComponent implements OnInit {
       saveMethod: 'POST',
       saveParams: { id: 'my_editor' },
       imageUploadParam: 'file',
-      imageUploadURL: self.apiUrl + 'file?isAvatar=false&documentFile=true',
+      imageUploadURL: self.apiUrl + 'file?isAvatar=false&documentFile=true&attachmentType=DOCUMENT',
       imageUploadParams: { id: 'my_editor' },
       imageUploadMethod: 'POST',
       imageMaxSize: 4 * 1024 * 1024,
       imageAllowedTypes: ['jpeg', 'jpg', 'png'],
-      filesManagerUploadURL: self.apiUrl + 'file?isAvatar=false&documentFile=true',
+      filesManagerUploadURL: self.apiUrl + 'file?isAvatar=false&documentFile=true&attachmentType=DOCUMENT',
       filesManagerUploadParams: {
         id: 'my_editor'
       },
       filesManagerMaxSize: 1024 * 1024 * 4,
       fileUpload: true,
-      fileUploadURL: self.apiUrl + 'file?isAvatar=false&documentFile=true',
+      fileUploadURL: self.apiUrl + 'file?isAvatar=false&documentFile=true&attachmentType=DOCUMENT',
       fileUploadParams: {
         id: 'my_editor'
       },
@@ -81,7 +97,7 @@ export class DocumentsAddBodyComponent implements OnInit {
       fileMaxSize: 1024 * 1024 * 4,
       fileAllowedTypes: ['*'],
       events: {
-        "initialized": function () {
+        "initialized": function (data) {
           let config = {
             "docId": "e1626875-8d25-4f98-abd8-abfdd7010d81",
             "user": { "name": `${self.usersStateService.getCurrentUser().firstName} ${self.usersStateService.getCurrentUser().lastName}` },
@@ -94,8 +110,11 @@ export class DocumentsAddBodyComponent implements OnInit {
               "shape": "arrow"
             }
           };
+          console.log("self", data);
+          self.froalaEditor = data;
           //start!
-          self.codox.init(config);
+          //self.codox.init(config);
+
         },
         'save.before': function (e, editor) {
           // Before save request is made.
@@ -140,5 +159,8 @@ export class DocumentsAddBodyComponent implements OnInit {
         },
       }
     };
+  }
+  ngOnDestroy(): void {
+    // this.froalaEditor.destroy();
   }
 }

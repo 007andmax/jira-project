@@ -3513,3 +3513,6 @@ input.--input-error {
     top: 7px;
   }
 }
+.fr-command.fr-btn.fr-active + .fr-dropdown-menu {
+  margin-left: auto !important;
+}
