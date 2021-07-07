@@ -4,3 +4,10 @@
   margin-right: 10px;
   margin-left: 5px;
 }
+companies-filter {
+  app-company-tags {
+    .mat-form-field-wrapper {
+      padding-bottom: 0px !important;
+    }
+  }
+}
