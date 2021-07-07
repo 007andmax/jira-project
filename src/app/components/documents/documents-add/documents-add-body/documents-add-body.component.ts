@@ -42,7 +42,7 @@ export class DocumentsAddBodyComponent implements OnInit {
         'formatOL', 'formatUL', 'indent', 'outdent', '|',
         'paragraphFormat', '|',
         'fontFamily', '|',
-        'fontSize', '|',
+        'fontSize', 'insertFiles', 'insertFile', '|',
         'insertLink', 'insertImage', 'quote', 'insertTable'],
       //  toolbarButtons: ['bold', 'italic', 'underline', 'moreText', '|', 'alignLeft', 'alignCenter', 'formatOLSimple', 'moreParagraph', '|', 'trackChanges', 'markdown', 'insertLink', 'insertFiles', 'moreRich', '|', 'undo', 'redo', 'moreMisc'],
       /*  toolbarButtons: {
@@ -71,18 +71,18 @@ export class DocumentsAddBodyComponent implements OnInit {
       saveMethod: 'POST',
       saveParams: { id: 'my_editor' },
       imageUploadParam: 'file',
-      imageUploadURL: self.apiUrl + 'file?isAvatar=false&documentFile=true',
+      imageUploadURL: self.apiUrl + 'file?isAvatar=false&documentFile=true&attachmentType=DOCUMENT',
       imageUploadParams: { id: 'my_editor' },
       imageUploadMethod: 'POST',
       imageMaxSize: 4 * 1024 * 1024,
       imageAllowedTypes: ['jpeg', 'jpg', 'png'],
-      filesManagerUploadURL: self.apiUrl + 'file?isAvatar=false&documentFile=true',
+      filesManagerUploadURL: self.apiUrl + 'file?isAvatar=false&documentFile=true&attachmentType=DOCUMENT',
       filesManagerUploadParams: {
         id: 'my_editor'
       },
       filesManagerMaxSize: 1024 * 1024 * 4,
       fileUpload: true,
-      fileUploadURL: self.apiUrl + 'file?isAvatar=false&documentFile=true',
+      fileUploadURL: self.apiUrl + 'file?isAvatar=false&documentFile=true&attachmentType=DOCUMENT',
       fileUploadParams: {
         id: 'my_editor'
       },
