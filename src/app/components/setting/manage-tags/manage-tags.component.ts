@@ -119,7 +119,6 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
    * load all services
    */
   getAllTags() {
-    console.log("getAllTags");
     this.loading = true; $(".loading").css("display", "block");
     forkJoin([this.serviceAllTickets])
       .pipe(
@@ -156,21 +155,16 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     );
   }
   onSearch() {
-    console.log("onSearch");
     this.setDefaultScoll();
     this.onScroll();
   }
   public setDefaultScoll() {
-    console.log("setDefaultScoll");
     this.page = 0;
     this.manageTagsListService.setBlockList(false);
     this.companyTags = [];
     this.reqcompanyTags = [];
   }
   public onScroll() {
-    console.log("onScroll");
-    console.log("this.manageTagsListService.getBlockList()", this.manageTagsListService.getBlockList())
-
     this.infiniteScrollDisabled = true;
     this.getTags();
   }
@@ -201,7 +195,6 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
    * get all tickets
    */
   getAllTickets() {
-    console.log("getAllTickets");
     this.loading = true; $(".loading").css("display", "block");
     this.serviceAllTickets.subscribe(
       res => {
@@ -210,7 +203,6 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       },
       error => {
         this.loading = false; $(".loading").css("display", "none");
-
       }
     );
   }
@@ -219,7 +211,6 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
   getAllDevice() { }
 
   setTab(data) {
-    console.log("setTab", data);
     if (this.edit) {
       return;
     }
@@ -283,12 +274,8 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
 
 
   ConfirmDelete(tID: string) {
-    console.log("ConfirmDelete");
-
-    console.log("this.manageTagsListService.getBlockList()", this.manageTagsListService.getBlockList())
     this.tagId = tID;
     this.deletePopup = true;
-
   }
 
   /**

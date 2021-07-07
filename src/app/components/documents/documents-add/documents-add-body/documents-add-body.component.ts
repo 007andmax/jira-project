@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { environment } from 'src/environments/environment';
 
@@ -10,23 +10,30 @@ declare const CodeMirror: any;
   templateUrl: './documents-add-body.component.html',
   styleUrls: ['./documents-add-body.component.scss']
 })
-export class DocumentsAddBodyComponent implements OnInit {
+export class DocumentsAddBodyComponent implements OnInit, OnDestroy {
   private apiUrl = environment.apiUrl;
   @Input() editorContent = "";
   public options: Object;
   codox: any;
   editor: any;
   currentUser: any;
+  froalaEditor: any;
   @Output() onChangeContent = new EventEmitter<any>();
-  constructor(private usersStateService: UsersStateService) {
+  constructor(private usersStateService: UsersStateService,
+    public cd: ChangeDetectorRef,) {
     this.codox = new Codox()
   }
+
 
   ngOnInit() {
     this.currentUser = this.usersStateService.getCurrentUser();
     this.onInitFloara();
 
     //  var editor = CodeMirror(document.getElementById("froala-editor"));
+  }
+  ngAfterViewInit() {
+
+    this.cd.detectChanges();
   }
   ngDoCheck() {
 
@@ -90,7 +97,7 @@ export class DocumentsAddBodyComponent implements OnInit {
       fileMaxSize: 1024 * 1024 * 4,
       fileAllowedTypes: ['*'],
       events: {
-        "initialized": function () {
+        "initialized": function (data) {
           let config = {
             "docId": "e1626875-8d25-4f98-abd8-abfdd7010d81",
             "user": { "name": `${self.usersStateService.getCurrentUser().firstName} ${self.usersStateService.getCurrentUser().lastName}` },
@@ -103,9 +110,11 @@ export class DocumentsAddBodyComponent implements OnInit {
               "shape": "arrow"
             }
           };
-          console.log("self", self.options);
+          console.log("self", data);
+          self.froalaEditor = data;
           //start!
-          self.codox.init(config);
+          //self.codox.init(config);
+
         },
         'save.before': function (e, editor) {
           // Before save request is made.
@@ -150,5 +159,8 @@ export class DocumentsAddBodyComponent implements OnInit {
         },
       }
     };
+  }
+  ngOnDestroy(): void {
+    // this.froalaEditor.destroy();
   }
 }
