@@ -99,7 +99,7 @@
             </div>
         </div>
         <ngb-tabset
-            (click)="setTab()"
+            (tabChange)="setTab($event)"
             #tabset="ngbTabset"
             [destroyOnHide]="false"
         >
@@ -233,6 +233,9 @@
                                             </td>
                                         </tr>
                                     </ng-template>
+
+
+
 
 
 
@@ -384,6 +387,9 @@
         </ngb-tabset>
         <!-- <div class="loading" *ngIf="loading"></div> -->
     </div>
+
+
+
 
 
 

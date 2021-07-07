@@ -4,7 +4,8 @@ import {
   ViewChild,
   ElementRef,
   OnDestroy,
-  ViewContainerRef
+  ViewContainerRef,
+  ChangeDetectorRef
 } from "@angular/core";
 
 import { forkJoin, Observable, Subject, Subscription } from "rxjs";
@@ -69,7 +70,8 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     private settingStateService: SettingStateService,
     private companiesStateService: CompaniesStateService,
     private manageTagsListService: ManageTagsListService,
-    private tagsRealTimeService: TagsRealTimeService
+    private tagsRealTimeService: TagsRealTimeService,
+    public cd: ChangeDetectorRef,
   ) { }
 
   /**
@@ -104,6 +106,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
         let index = this.ticketTags.findIndex(item => item.id === data.data);
         if (index > -1) this.ticketTags.splice(index, 1);
       }
+      this.cd.detectChanges();
     })
     this.sub.add(changeTagsArray);
   }
@@ -116,6 +119,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
    * load all services
    */
   getAllTags() {
+    console.log("getAllTags");
     this.loading = true; $(".loading").css("display", "block");
     forkJoin([this.serviceAllTickets])
       .pipe(
@@ -152,11 +156,12 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     );
   }
   onSearch() {
-
+    console.log("onSearch");
     this.setDefaultScoll();
     this.onScroll();
   }
   public setDefaultScoll() {
+    console.log("setDefaultScoll");
     this.page = 0;
     this.manageTagsListService.setBlockList(false);
     this.companyTags = [];
@@ -164,6 +169,8 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
   }
   public onScroll() {
     console.log("onScroll");
+    console.log("this.manageTagsListService.getBlockList()", this.manageTagsListService.getBlockList())
+
     this.infiniteScrollDisabled = true;
     this.getTags();
   }
@@ -194,6 +201,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
    * get all tickets
    */
   getAllTickets() {
+    console.log("getAllTickets");
     this.loading = true; $(".loading").css("display", "block");
     this.serviceAllTickets.subscribe(
       res => {
@@ -210,13 +218,14 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
   // TODO
   getAllDevice() { }
 
-  setTab() {
+  setTab(data) {
+    console.log("setTab", data);
     if (this.edit) {
       return;
     }
     this.searchTag = "";
     this.compnayForm.patchValue({ word: "" });
-    if (this.tabSet['activeId'] === 'tab1') {
+    if (data['nextId'] === 'tab1') {
       this.loading = true; $(".loading").css("display", "block");
       this.setActiveTab = "company";
       this.searchTag = "";
@@ -224,10 +233,10 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       this.reqcompanyTags = [];
       this.setDefaultScoll();
       this.onScroll();
-    } else if (this.tabSet['activeId'] === 'tab2') {
+    } else if (data['nextId'] === 'tab2') {
       this.infiniteScrollDisabled = true;
       this.setActiveTab = "ticket";
-    } else if (this.tabSet['activeId'] === 'tab3') {
+    } else if (data['nextId'] === 'tab3') {
       this.infiniteScrollDisabled = true;
       this.setActiveTab = "device";
     }
@@ -274,8 +283,12 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
 
 
   ConfirmDelete(tID: string) {
+    console.log("ConfirmDelete");
+
+    console.log("this.manageTagsListService.getBlockList()", this.manageTagsListService.getBlockList())
     this.tagId = tID;
     this.deletePopup = true;
+
   }
 
   /**
