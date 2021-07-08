@@ -8,7 +8,7 @@
     ></app-documents-add-header>
     <app-documents-add-body
         *ngIf="!showPreloader"
-        [editorContent]="documentEdit.content"
+        [editorContent]="content"
         (onChangeContent)="onChangeContent($event)"
     ></app-documents-add-body>
     <app-documents-add-footer

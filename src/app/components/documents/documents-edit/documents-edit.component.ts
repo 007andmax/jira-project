@@ -10,6 +10,7 @@ import { DocumentsAddComponent } from '../documents-add/documents-add.component'
 })
 export class DocumentsEditComponent extends DocumentsAddComponent {
   showPreloader: boolean = true;
+  content: string;
   @Input() documentEdit: Document;
   sub: Subscription = new Subscription();
   ngOnInit() {
@@ -30,11 +31,12 @@ export class DocumentsEditComponent extends DocumentsAddComponent {
     this.leftPanelStateService.changeStateWithoutNavigate('new-edit-documents');
   }
   onChangeContent(data) {
-    this.documentEdit.setContent(data);
+    this.documentEdit.setNewContent(data);
   }
   getDocument(id) {
-    this.documentsService.getDocument(id).subscribe(data => {
+    this.documentsService.getDocument(id).subscribe((data: any) => {
       this.documentEdit = new Document(data, false);
+      this.content = JSON.parse(JSON.stringify(data.content));
       this.showPreloader = false;
 
     })

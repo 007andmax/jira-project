@@ -40,6 +40,32 @@ export class DocumentsAddFooterComponent implements OnInit {
       })
     }
   }
+  checkAttachments() {
+    if (this.documentEdit.content != this.documentEdit.newContent) {
+      let oldAttachments = [];
+      let newAttachments = [];
+      let removedAttachments = [];
+      var urlRegex = /(((https?:\/\/)|(http?:\/\/)|(www\.))[^\s]+)/g;
+      this.documentEdit.content.replace(urlRegex, function (url) {
+        var hyperlink = url;
+        // console.log("hyperlink", hyperlink);
+        oldAttachments.push(url);
+        return url;
+      });
+      this.documentEdit.newContent.replace(urlRegex, function (url) {
+        var hyperlink = url;
+        // console.log("hyperlink", hyperlink);
+        newAttachments.push(url);
+        return url;
+      });
+      console.log("oldAttachments", oldAttachments);
+      console.log("newAttachments", newAttachments);
+      oldAttachments.forEach(item => {
+        if (!newAttachments.find(newItem => newItem === item)) removedAttachments.push(item);
+      })
+      console.log("removedAttachments", removedAttachments);
+    }
+  }
   public goToDocumentsList() {
     if (this.companyId) {
       this.router.navigate(
@@ -51,6 +77,7 @@ export class DocumentsAddFooterComponent implements OnInit {
   edit() {
     if (!this.documentValidate.isValidate(this.documentEdit)) return;
     this.documentsService.edit(this.documentEdit.id, this.documentEdit.getDataForEdit()).subscribe(data => {
+      this.checkAttachments();
       this.goToDocumentsList();
     })
   }

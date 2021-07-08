@@ -16,6 +16,7 @@ export class Document {
     tags: Array<Tag> = [];
     title: string;
     updatedAt: string;
+    newContent: string;
     isCategory: boolean = false;
     isDefault: boolean;
     constructor(data, isCategory = false) {
@@ -75,6 +76,9 @@ export class Document {
     }
     public setContent(data) {
         this.content = data;
+    }
+    public setNewContent(data) {
+        this.newContent = data;
     }
     public isTemplateForEdit() {
         return this.documentType === 'TEMPLATE';
