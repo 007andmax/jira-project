@@ -43,40 +43,40 @@ export class DocumentsAddFooterComponent implements OnInit {
     }
   }
   checkAttachments() {
-    if (this.documentEdit.content != this.documentEdit.newContent) {
-      let oldAttachments = this.attachments;
-      let newAttachments = [];
-      let removedAttachments = [];
-      var urlRegex = /(((https?:\/\/)|(http?:\/\/)|(www\.))[^\s]+)/g;
-      this.documentEdit.content.replace(urlRegex, function (url) {
-        oldAttachments.push(url.replace('\"', ''));
-        return url;
+    //  if (this.documentEdit.content != this.documentEdit.newContent) {
+    let oldAttachments = this.attachments;
+    let newAttachments = [];
+    let removedAttachments = [];
+    var urlRegex = /(((https?:\/\/)|(http?:\/\/)|(www\.))[^\s]+)/g;
+    this.documentEdit.content.replace(urlRegex, function (url) {
+      oldAttachments.push(url.replace('\"', ''));
+      return url;
+    });
+    this.documentEdit.newContent.replace(urlRegex, function (url) {
+      newAttachments.push(url.replace('\"', ''));
+      return url;
+    });
+    console.log("oldAttachments", oldAttachments);
+    console.log("newAttachments", newAttachments);
+
+    //  removedAttachments = this.diff(oldAttachments, newAttachments)
+
+
+    oldAttachments.forEach(item => {
+      if (!newAttachments.find(newItem => newItem === item)) removedAttachments.push(item);
+    })
+
+
+    console.log("removedAttachments", removedAttachments);
+    let removedAttachmentsIds = removedAttachments.map(item => item.substring(item.indexOf("file/") + 5, item.length));
+    console.log("removedAttachmentsIds", removedAttachmentsIds);
+    forkJoin(
+      [...removedAttachmentsIds.map(item => this.documentsService.removeDocumentAttachment(item))]
+    )
+      .subscribe(res => {
+
       });
-      this.documentEdit.newContent.replace(urlRegex, function (url) {
-        newAttachments.push(url.replace('\"', ''));
-        return url;
-      });
-      console.log("oldAttachments", oldAttachments);
-      console.log("newAttachments", newAttachments);
-
-      //  removedAttachments = this.diff(oldAttachments, newAttachments)
-
-
-      oldAttachments.forEach(item => {
-        if (!newAttachments.find(newItem => newItem === item)) removedAttachments.push(item);
-      })
-
-
-      console.log("removedAttachments", removedAttachments);
-      let removedAttachmentsIds = removedAttachments.map(item => item.substring(item.indexOf("file/") + 5, item.length));
-      console.log("removedAttachmentsIds", removedAttachmentsIds);
-      forkJoin(
-        [...removedAttachmentsIds.map(item => this.documentsService.removeDocumentAttachment(item))]
-      )
-        .subscribe(res => {
-
-        });
-    }
+    // }
   }
 
   public goToDocumentsList() {
