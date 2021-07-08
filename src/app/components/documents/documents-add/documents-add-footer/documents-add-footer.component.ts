@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { environment } from 'src/environments/environment';
 import { Document } from '../../class/document';
 import { DocumentAdd } from '../class/document-add';
 import { DocumentValidate } from '../class/document-validate';
@@ -49,13 +50,13 @@ export class DocumentsAddFooterComponent implements OnInit {
       this.documentEdit.content.replace(urlRegex, function (url) {
         var hyperlink = url;
         // console.log("hyperlink", hyperlink);
-        oldAttachments.push(url);
+        oldAttachments.push(url.replace('\"', ''));
         return url;
       });
       this.documentEdit.newContent.replace(urlRegex, function (url) {
         var hyperlink = url;
         // console.log("hyperlink", hyperlink);
-        newAttachments.push(url);
+        newAttachments.push(url.replace('\"', ''));
         return url;
       });
       console.log("oldAttachments", oldAttachments);
@@ -64,6 +65,8 @@ export class DocumentsAddFooterComponent implements OnInit {
         if (!newAttachments.find(newItem => newItem === item)) removedAttachments.push(item);
       })
       console.log("removedAttachments", removedAttachments);
+      let removedAttachmentsIds = removedAttachments.map(item => item.substring(item.indexOf("file/"), item.length));
+      console.log("removedAttachmentsIds", removedAttachmentsIds);
     }
   }
   public goToDocumentsList() {
