@@ -62,19 +62,13 @@ export class DocumentsAddFooterComponent implements OnInit {
       console.log("oldAttachments", oldAttachments);
       console.log("newAttachments", newAttachments);
 
-      removedAttachments = this.diff(oldAttachments, newAttachments)
+      //  removedAttachments = this.diff(oldAttachments, newAttachments)
 
-      /* if (oldAttachments.length === newAttachments.length) {
-         oldAttachments.forEach(item => {
-           if (!newAttachments.find(newItem => newItem === item)) removedAttachments.push(item);
-         })
-       }
- 
-       if (oldAttachments.length !== newAttachments.length) {
-         oldAttachments.forEach(item => {
-           if (!newAttachments.find(newItem => newItem === item)) removedAttachments.push(item);
-         })
-       }*/
+
+      oldAttachments.forEach(item => {
+        if (!newAttachments.find(newItem => newItem === item)) removedAttachments.push(item);
+      })
+
 
       console.log("removedAttachments", removedAttachments);
       let removedAttachmentsIds = removedAttachments.map(item => item.substring(item.indexOf("file/") + 5, item.length));
