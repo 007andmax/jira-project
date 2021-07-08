@@ -34,10 +34,12 @@ export class DocumentsAddFooterComponent implements OnInit {
     if (!this.documentValidate.isValidate(this.documentAdd)) return;
     if (this.templateId) {
       this.documentsService.add(this.documentAdd.getDataForAdByTemplate(this.templateId, this.companyId)).subscribe(data => {
+        this.checkAttachments();
         this.goToDocumentsList();
       })
     } else {
       this.documentsService.add(this.documentAdd.getDataForAdd()).subscribe(data => {
+        this.checkAttachments();
         this.goToDocumentsList();
       })
     }

@@ -22,6 +22,7 @@ export class DocumentsAddComponent implements OnInit {
   currentUser: any;
   showPreloader: boolean = false;
   requiredCompanyType: boolean = false;
+  attachments = [];
   documentValidate: DocumentValidate = new DocumentValidate();
   documentAdd: DocumentAdd = new DocumentAdd();
   sub: Subscription = new Subscription();
@@ -71,7 +72,7 @@ export class DocumentsAddComponent implements OnInit {
     })
   }
   onChangeAttachments(data) {
-
+    this.attachments = data;
   }
   onChangeContent(data) {
     this.documentAdd.setContent(data);
