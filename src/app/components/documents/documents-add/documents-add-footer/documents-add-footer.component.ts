@@ -50,11 +50,11 @@ export class DocumentsAddFooterComponent implements OnInit {
     let newAttachments = [];
     let removedAttachments = [];
     var urlRegex = /(((https?:\/\/)|(http?:\/\/)|(www\.))[^\s]+)/g;
-    this.documentEdit.content.replace(urlRegex, function (url) {
+    (this.documentEdit.content ? this.documentEdit.content : "").replace(urlRegex, function (url) {
       oldAttachments.push(url.replace('\"', ''));
       return url;
     });
-    this.documentEdit.newContent.replace(urlRegex, function (url) {
+    (this.documentEdit.newContent ? this.documentEdit.newContent : "").replace(urlRegex, function (url) {
       newAttachments.push(url.replace('\"', ''));
       return url;
     });
