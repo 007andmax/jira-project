@@ -1461,6 +1461,12 @@ app-quotes-item {
       max-width: 210px;
       min-width: 210px;
 
+      @media screen and (min-width: 2250px) {
+        width: 360px;
+        max-width: 360px;
+        min-width: 360px;
+      }
+
       @media screen and (max-width: 1600px) {
         width: 260px;
         max-width: 260px;
@@ -1471,6 +1477,12 @@ app-quotes-item {
       width: 160px;
       max-width: 160px;
       min-width: 160px;
+
+      @media screen and (min-width: 2250px) {
+        width: 300px;
+        max-width: 300px;
+        min-width: 300px;
+      }
 
       @media screen and (max-width: 1600px) {
         width: 210px;
@@ -1490,6 +1502,12 @@ app-quotes-item {
       width: 180px;
       max-width: 180px;
       min-width: 180px;
+
+      @media screen and (min-width: 2250px) {
+        width: 340px;
+        max-width: 340px;
+        min-width: 340px;
+      }
 
       @media screen and (max-width: 1600px) {
         width: 230px;
