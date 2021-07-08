@@ -34,27 +34,27 @@ export class DocumentsAddFooterComponent implements OnInit {
     if (!this.documentValidate.isValidate(this.documentAdd)) return;
     if (this.templateId) {
       this.documentsService.add(this.documentAdd.getDataForAdByTemplate(this.templateId, this.companyId)).subscribe(data => {
-        this.checkAttachments();
+        this.checkAttachments("", this.documentAdd.content);
         this.goToDocumentsList();
       })
     } else {
       this.documentsService.add(this.documentAdd.getDataForAdd()).subscribe(data => {
-        this.checkAttachments();
+        this.checkAttachments("", this.documentAdd.content);
         this.goToDocumentsList();
       })
     }
   }
-  checkAttachments() {
+  checkAttachments(content, newContent) {
     //  if (this.documentEdit.content != this.documentEdit.newContent) {
     let oldAttachments = this.attachments;
     let newAttachments = [];
     let removedAttachments = [];
     var urlRegex = /(((https?:\/\/)|(http?:\/\/)|(www\.))[^\s]+)/g;
-    (this.documentEdit.content ? this.documentEdit.content : "").replace(urlRegex, function (url) {
+    content.replace(urlRegex, function (url) {
       oldAttachments.push(url.replace('\"', ''));
       return url;
     });
-    (this.documentEdit.newContent ? this.documentEdit.newContent : "").replace(urlRegex, function (url) {
+    newContent.replace(urlRegex, function (url) {
       newAttachments.push(url.replace('\"', ''));
       return url;
     });
@@ -92,7 +92,7 @@ export class DocumentsAddFooterComponent implements OnInit {
   edit() {
     if (!this.documentValidate.isValidate(this.documentEdit)) return;
     this.documentsService.edit(this.documentEdit.id, this.documentEdit.getDataForEdit()).subscribe(data => {
-      this.checkAttachments();
+      this.checkAttachments(this.documentEdit.content, this.documentEdit.newContent);
       this.goToDocumentsList();
     })
   }
