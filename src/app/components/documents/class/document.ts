@@ -34,13 +34,14 @@ export class Document {
         this.title = data.title;
         this.updatedAt = data.updatedAt;
         this.content = data.content;
+        if (data.content) this.newContent = JSON.parse(JSON.stringify(data.content));
         this.isCategory = isCategory;
         this.isDefault = data.isDefault;
     }
     public getDataForEdit() {
         return {
             title: this.title,
-            content: this.content,
+            content: this.newContent,
             documentType: this.documentType,
             clientType: this.clientType,
             description: (this.description && this.description.length > 0) ? this.description : undefined,

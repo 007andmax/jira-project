@@ -31,6 +31,9 @@ export class DocumentsService {
   public removeDocument(id) {
     return this.http.delete(this.apiUrl + `documents/${id}`);
   }
+  public removeDocumentAttachment(id) {
+    return this.http.delete(this.apiUrl + `file/${id}`);
+  }
   public removeCategories(id) {
     return this.http.delete(this.apiUrl + `documents/categories/${id}`);
   }

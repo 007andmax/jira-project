@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { forkJoin } from 'rxjs';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
@@ -19,7 +20,7 @@ export class DocumentsAddFooterComponent implements OnInit {
   @Input() documentEdit: Document;
   @Input() templateId: string;
   @Input() companyId: string;
-
+  @Input() attachments = [];
   @Input() documentValidate: DocumentValidate = new DocumentValidate();
   constructor(private documentsService: DocumentsService,
     private leftPanelStateService: LeftPanelStateService,
@@ -43,19 +44,15 @@ export class DocumentsAddFooterComponent implements OnInit {
   }
   checkAttachments() {
     if (this.documentEdit.content != this.documentEdit.newContent) {
-      let oldAttachments = [];
+      let oldAttachments = this.attachments;
       let newAttachments = [];
       let removedAttachments = [];
       var urlRegex = /(((https?:\/\/)|(http?:\/\/)|(www\.))[^\s]+)/g;
       this.documentEdit.content.replace(urlRegex, function (url) {
-        var hyperlink = url;
-        // console.log("hyperlink", hyperlink);
         oldAttachments.push(url.replace('\"', ''));
         return url;
       });
       this.documentEdit.newContent.replace(urlRegex, function (url) {
-        var hyperlink = url;
-        // console.log("hyperlink", hyperlink);
         newAttachments.push(url.replace('\"', ''));
         return url;
       });
@@ -73,11 +70,13 @@ export class DocumentsAddFooterComponent implements OnInit {
       console.log("removedAttachments", removedAttachments);
       let removedAttachmentsIds = removedAttachments.map(item => item.substring(item.indexOf("file/") + 5, item.length));
       console.log("removedAttachmentsIds", removedAttachmentsIds);
+      forkJoin(
+        [...removedAttachmentsIds.map(item => this.documentsService.removeDocumentAttachment(item))]
+      )
+        .subscribe(res => {
+
+        });
     }
-  }
-  diff(a1, a2) {
-    return a1.filter(i => !a2.includes(i))
-      .concat(a2.filter(i => !a1.includes(i)))
   }
 
   public goToDocumentsList() {

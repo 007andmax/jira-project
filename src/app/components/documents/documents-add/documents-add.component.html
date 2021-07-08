@@ -10,6 +10,7 @@
         *ngIf="!showPreloader"
         [editorContent]="documentAdd.content"
         (onChangeContent)="onChangeContent($event)"
+        (onChangeAttachments)="onChangeAttachments($event)"
     ></app-documents-add-body>
     <app-documents-add-footer
         *ngIf="!showPreloader"

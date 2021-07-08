@@ -12,6 +12,7 @@ export class DocumentsEditComponent extends DocumentsAddComponent {
   showPreloader: boolean = true;
   content: string;
   @Input() documentEdit: Document;
+  attachments = [];
   sub: Subscription = new Subscription();
   ngOnInit() {
     let id = this.activateRoute.snapshot.params['id'];
@@ -32,6 +33,9 @@ export class DocumentsEditComponent extends DocumentsAddComponent {
   }
   onChangeContent(data) {
     this.documentEdit.setNewContent(data);
+  }
+  onChangeAttachments(data) {
+    this.attachments = data;
   }
   getDocument(id) {
     this.documentsService.getDocument(id).subscribe((data: any) => {

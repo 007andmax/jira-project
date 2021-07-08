@@ -70,6 +70,9 @@ export class DocumentsAddComponent implements OnInit {
       this.currentUser = data;
     })
   }
+  onChangeAttachments(data) {
+
+  }
   onChangeContent(data) {
     this.documentAdd.setContent(data);
   }
