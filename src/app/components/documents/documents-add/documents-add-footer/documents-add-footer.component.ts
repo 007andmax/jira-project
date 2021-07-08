@@ -61,14 +61,31 @@ export class DocumentsAddFooterComponent implements OnInit {
       });
       console.log("oldAttachments", oldAttachments);
       console.log("newAttachments", newAttachments);
-      oldAttachments.forEach(item => {
-        if (!newAttachments.find(newItem => newItem === item)) removedAttachments.push(item);
-      })
+
+      removedAttachments = this.diff(oldAttachments, newAttachments)
+
+      /* if (oldAttachments.length === newAttachments.length) {
+         oldAttachments.forEach(item => {
+           if (!newAttachments.find(newItem => newItem === item)) removedAttachments.push(item);
+         })
+       }
+ 
+       if (oldAttachments.length !== newAttachments.length) {
+         oldAttachments.forEach(item => {
+           if (!newAttachments.find(newItem => newItem === item)) removedAttachments.push(item);
+         })
+       }*/
+
       console.log("removedAttachments", removedAttachments);
-      let removedAttachmentsIds = removedAttachments.map(item => item.substring(item.indexOf("file/"), item.length));
+      let removedAttachmentsIds = removedAttachments.map(item => item.substring(item.indexOf("file/") + 5, item.length));
       console.log("removedAttachmentsIds", removedAttachmentsIds);
     }
   }
+  diff(a1, a2) {
+    return a1.filter(i => !a2.includes(i))
+      .concat(a2.filter(i => !a1.includes(i)))
+  }
+
   public goToDocumentsList() {
     if (this.companyId) {
       this.router.navigate(
