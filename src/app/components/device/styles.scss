@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 /*** All css files include ***/
-@import '../../../assets/scss/device/fonts';
+//@import '../../../assets/scss/device/fonts';
 @import '../../../assets/scss/device/variable';
 @import '../../../assets/scss/device/mixin';
 @import '../../../assets/scss/device/custom';
@@ -10,7 +10,7 @@
 
 
 
-.modal { 
+.modal {
     .modal-dialog.session, .modal-dialog.lock
     {
         max-width: 420px;
@@ -35,19 +35,19 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+  background: #f1f1f1;
   border-radius: 10px;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgb(92,105,119); 
+  background: rgb(92,105,119);
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(92,105,119); 
+  background: rgb(92,105,119);
 }
 }
 
