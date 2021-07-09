@@ -34,6 +34,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
   @Input() placement: string;
   @Input() blockCreateTag: boolean = false;
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
+  @ViewChild('dp') dp: any;
   @Output() tagsChange = new EventEmitter();
   /**
    * Creates an instance of the TagsComponent with the injected services
@@ -161,6 +162,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
           }
           this.tagCtrl.setValue(null);
           this.searchName = "";
+          this.dp.close();
           return;
         }
         let tag: any = {

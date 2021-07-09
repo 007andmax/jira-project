@@ -155,7 +155,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     let getCompanyFromEdit = this.companiesStateService.getCompanyFromEdit().subscribe((data: CompanyProfile) => {
       this.company = new CompanyProfile();
       this.company.onEditMode(data);
-      this.companySubscriptionState.onEditMode(this.company.contacts[0].subscription);
+      if (this.company.contacts[0].subscription) this.companySubscriptionState.onEditMode(this.company.contacts[0].subscription);
       this.companyTimeZoneState.onEditMode(this.company.addresses[0].timeZone);
       let indexTerms = this.paymentTerms.findIndex(item => item.value === this.company.paymentTerms);
       if (indexTerms > -1) this.onSelectPaymentTerms(this.paymentTerms[indexTerms]);
@@ -297,7 +297,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     })
   }
   getSelectedClientTypes() {
-    let index = this.industries.findIndex(item => item.name === (this.company.clientIndustry.name) ? this.company.clientIndustry.name : null);
+    let index = this.industries.findIndex(item => item.name === (this.company.clientIndustry && this.company.clientIndustry.name) ? this.company.clientIndustry.name : null);
     if (index > -1) return this.industries[index];
     return null;
   }
