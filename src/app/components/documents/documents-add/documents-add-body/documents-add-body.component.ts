@@ -74,6 +74,7 @@ export class DocumentsAddBodyComponent implements OnInit, OnDestroy {
   
         },*/
 
+      attribution: false,
       heightMin: 1123,
       toolbarSticky: false,
       saveParam: 'file',
@@ -112,8 +113,12 @@ export class DocumentsAddBodyComponent implements OnInit, OnDestroy {
               "shape": "arrow"
             }
           };
-          console.log("self", data);
-          self.froalaEditor = data;
+          console.log("thus", this);
+          data.froalaInit.subscribe(event => {
+            console.log("event", event);
+          })
+          console.log("self", data.editor);
+
           //start!
           //self.codox.init(config);
 
@@ -153,7 +158,12 @@ export class DocumentsAddBodyComponent implements OnInit, OnDestroy {
       }
     };
   }
+  initialize(initControls) {
+    console.log("initControls", initControls);
+    this.froalaEditor = initControls;
+    this.froalaEditor.initialize();
+  }
   ngOnDestroy(): void {
-    // this.froalaEditor.destroy();
+    this.froalaEditor.destroy();
   }
 }

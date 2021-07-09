@@ -51,11 +51,11 @@ export class DocumentsAddFooterComponent implements OnInit {
     let removedAttachments = [];
     var urlRegex = /(((https?:\/\/)|(http?:\/\/)|(www\.))[^\s]+)/g;
     content.replace(urlRegex, function (url) {
-      oldAttachments.push(url.replace('\"', ''));
+      oldAttachments.push(url.replace('\"', '').replace('/attachment', ''));
       return url;
     });
     newContent.replace(urlRegex, function (url) {
-      newAttachments.push(url.replace('\"', ''));
+      newAttachments.push(url.replace('\"', '').replace('/attachment', ''));
       return url;
     });
     console.log("oldAttachments", oldAttachments);

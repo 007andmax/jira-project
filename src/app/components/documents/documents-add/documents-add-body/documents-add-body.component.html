@@ -3,6 +3,7 @@
     class="CodeMirror-scroll cm-s-default"
     [froalaEditor]="options"
     [(froalaModel)]="editorContent"
+    (froalaInit)="initialize($event)"
 >
     Hello, Froala!
 </div>
