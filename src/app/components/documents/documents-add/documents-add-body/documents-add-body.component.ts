@@ -18,7 +18,9 @@ export class DocumentsAddBodyComponent implements OnInit, OnDestroy {
   editor: any;
   currentUser: any;
   froalaEditor: any;
+  attachments = [];
   @Output() onChangeContent = new EventEmitter<any>();
+  @Output() onChangeAttachments = new EventEmitter<any>();
   constructor(private usersStateService: UsersStateService,
     public cd: ChangeDetectorRef,) {
     this.codox = new Codox()
@@ -72,6 +74,7 @@ export class DocumentsAddBodyComponent implements OnInit, OnDestroy {
   
         },*/
 
+      attribution: false,
       heightMin: 1123,
       toolbarSticky: false,
       saveParam: 'file',
@@ -110,57 +113,57 @@ export class DocumentsAddBodyComponent implements OnInit, OnDestroy {
               "shape": "arrow"
             }
           };
-          console.log("self", data);
-          self.froalaEditor = data;
+          console.log("thus", this);
+          data.froalaInit.subscribe(event => {
+            console.log("event", event);
+          })
+          console.log("self", data.editor);
+
           //start!
           //self.codox.init(config);
 
         },
-        'save.before': function (e, editor) {
-          // Before save request is made.
-        },
-        'save.after': function (e, editor) {
-          // After successfully save request.
-        },
-        'save.error': function (e, editor) {
-          // Do something here.
-        },
-        'image.beforePasteUpload': function (img) {
-          // Do something here.
-          // this is the editor instance.
-        },
-        'image.loaded': function ($img) {
-          // Do something here.
-          // this is the editor instance.
-        },
+
         'image.uploaded': function ($img) {
           // Do something here.
           // this is the editor instance.
+          var file = JSON.parse($img);
+          self.attachments.push(file.link);
+          self.onChangeAttachments.emit(self.attachments);
           var img = JSON.parse($img);
+          console.log("$img", $img);
           return img;
         },
-        'image.beforeUpload': function (files) {
-          // Do something here.
-          // this is the editor instance.
-        },
-        'image.inserted': function (files, response) {
-          // Do something here.
-          // this is the editor instance.
-        },
-        'file.beforeUpload': function (files) {
-          // Return false if you want to stop the file upload.
-        },
+
         'file.uploaded': function (response) {
+          console.log("files", response);
+          var file = JSON.parse(response);
+          self.attachments.push(file.link);
+          self.onChangeAttachments.emit(self.attachments);
           // File was uploaded to the server.
         },
         'file.inserted': function ($file, response) {
+          console.log("$file", $file);
           $file[0].href = `${$file[0]}/attachment`;
           // File was inserted in the editor.
         },
+        'filesManager.uploaded': function (response) {
+          // Do something here.
+          // this is the editor instance.
+          var file = JSON.parse(response);
+          self.attachments.push(file.link);
+          self.onChangeAttachments.emit(self.attachments);
+          console.log("response", response);
+        }
       }
     };
   }
+  initialize(initControls) {
+    console.log("initControls", initControls);
+    this.froalaEditor = initControls;
+    this.froalaEditor.initialize();
+  }
   ngOnDestroy(): void {
-    // this.froalaEditor.destroy();
+    this.froalaEditor.destroy();
   }
 }

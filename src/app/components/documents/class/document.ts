@@ -16,6 +16,7 @@ export class Document {
     tags: Array<Tag> = [];
     title: string;
     updatedAt: string;
+    newContent: string;
     isCategory: boolean = false;
     isDefault: boolean;
     constructor(data, isCategory = false) {
@@ -33,13 +34,14 @@ export class Document {
         this.title = data.title;
         this.updatedAt = data.updatedAt;
         this.content = data.content;
+        if (data.content) this.newContent = JSON.parse(JSON.stringify(data.content));
         this.isCategory = isCategory;
         this.isDefault = data.isDefault;
     }
     public getDataForEdit() {
         return {
             title: this.title,
-            content: this.content,
+            content: this.newContent,
             documentType: this.documentType,
             clientType: this.clientType,
             description: (this.description && this.description.length > 0) ? this.description : undefined,
@@ -75,6 +77,9 @@ export class Document {
     }
     public setContent(data) {
         this.content = data;
+    }
+    public setNewContent(data) {
+        this.newContent = data;
     }
     public isTemplateForEdit() {
         return this.documentType === 'TEMPLATE';

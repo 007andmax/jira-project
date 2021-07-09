@@ -8,11 +8,13 @@
     ></app-documents-add-header>
     <app-documents-add-body
         *ngIf="!showPreloader"
-        [editorContent]="documentEdit.content"
+        [editorContent]="content"
+        (onChangeAttachments)="onChangeAttachments($event)"
         (onChangeContent)="onChangeContent($event)"
     ></app-documents-add-body>
     <app-documents-add-footer
         *ngIf="!showPreloader"
+        [attachments]="attachments"
         [companyId]="companyId"
         [documentValidate]="documentValidate"
         [documentEdit]="documentEdit"
