@@ -64,7 +64,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
   onSearch(event) {
     this.searchName = event.target.value;
     this.setDefaultScoll();
-    this.onScroll();
+    this.onScroll(JSON.parse(JSON.stringify(this.searchName)));
   }
 
   /**
@@ -103,23 +103,40 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
     this.tags = [];
     this.reqTags = [];
   }
-  public onScroll() {
-    console.log("onScroll");
+  public onScroll(searchName = null) {
+
     this.infiniteScrollDisabled = true;
-    this.getTags();
+    this.getTags(searchName);
   }
-  getTags() {
+  getTags(searchName = null) {
+    console.log("this.companyTagsListService.getBlockList()", this.companyTagsListService.getBlockList());
     if (this.companyTagsListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;
     }
     this.tagsService.search(this.page, this.searchName).subscribe((data: any) => {
+      console.log("this.page", this.page);
+      console.log("this.searchName", this.searchName);
+      console.log("searchName", searchName);
+      if (searchName && this.tags.length > 0) {
+        this.tags = [];
+        this.reqTags = [];
+        this.page = 0;
+        console.log("clear", data);
+
+      }
       this.tags = [...this.tags, ...data.commonTagViews];
       this.reqTags = [...this.reqTags, ...JSON.parse(JSON.stringify(data.commonTagViews))];
       this.page++;
       this.infiniteScrollDisabled = false;
-      if (this.reqTags.length === data.totalElements) this.companyTagsListService.setBlockList(true);
+      if (this.reqTags.length === data.totalElements) {
+        this.companyTagsListService.setBlockList(true);
+      } else {
+        this.companyTagsListService.setBlockList(false);
+      }
       this.showPreloader = false;
+      console.log("this.tags", this.tags);
+      this.cd.detectChanges();
     })
   }
   openChange(open) {
@@ -134,6 +151,18 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
       const input = event.target.input;
       const value = event.target.value;
       if ((value || '').trim()) {
+        let search = this.tags.find(item => item.word == value);
+        console.log("search", search);
+        if (search) {
+          this.selectedTag.push(search);
+          this.tagsChange.emit(this.selectedTag);
+          if (input) {
+            input.value = '';
+          }
+          this.tagCtrl.setValue(null);
+          this.searchName = "";
+          return;
+        }
         let tag: any = {
           colorCode: 0, usedCounter: 0, word: value.trim(), id: ''
         }
@@ -147,6 +176,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
             input.value = '';
           }
           this.tagCtrl.setValue(null);
+          this.searchName = "";
         });
         this.sub.add(setTags);
       }
