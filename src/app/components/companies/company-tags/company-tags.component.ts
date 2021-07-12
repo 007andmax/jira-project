@@ -9,6 +9,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { TagsStateService } from 'src/app/states/tags/tags-state.service';
 import { CompanyTagsListService } from './services/company-tags-list.service';
 import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service';
+import { CompanyTag } from './class/company-tag';
 
 @Component({
   selector: 'app-company-tags',
@@ -26,9 +27,9 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
   addOnBlur = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   tagCtrl = new FormControl();
-  @Input() selectedTag: Array<Tag> = [];
-  tags: Array<Tag> = [];
-  reqTags: Array<Tag> = [];
+  @Input() selectedTag: Array<CompanyTag> = [];
+  tags: Array<CompanyTag> = [];
+  reqTags: Array<CompanyTag> = [];
   sub = new Subscription();
   @Input() editItems: Array<string>;
   @Input() placement: string;
@@ -48,6 +49,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
     private companiesStateService: CompaniesStateService,
     private companyTagsListService: CompanyTagsListService,
     public tagsRealTimeService: TagsRealTimeService,
+    private elRef: ElementRef,
     public cd: ChangeDetectorRef
   ) { }
 
@@ -126,7 +128,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
         console.log("clear", data);
 
       }
-      this.tags = [...this.tags, ...data.commonTagViews];
+      this.tags = [...this.tags, ...data.commonTagViews.map(item => new CompanyTag(item))];
       this.reqTags = [...this.reqTags, ...JSON.parse(JSON.stringify(data.commonTagViews))];
       this.page++;
       this.infiniteScrollDisabled = false;
@@ -148,7 +150,41 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
     }
   }
   onKeyUp(event) {
+    if (event.keyCode === 40) {
+      let indexSelected = this.tags.findIndex(item => item.isHover);
+      if (indexSelected > -1) this.tags[indexSelected].isHover = false;
+      indexSelected++;
+      if (indexSelected === this.tags.length) indexSelected = 0;
+      this.tags[indexSelected].isHover = true;
+      let isScrolledIntoView = this.isScrolledIntoView(this.elRef.nativeElement.querySelector(`#tag-${this.tags[indexSelected].id}`));
+      if (!isScrolledIntoView) this.elRef.nativeElement.querySelector('.content').scrollTop = ((indexSelected < 8) ? 0 : indexSelected * 32);
+      return;
+    }
+    if (event.keyCode === 38) {
+      let indexSelected = this.tags.findIndex(item => item.isHover);
+      if (indexSelected > -1) this.tags[indexSelected].isHover = false;
+      if (indexSelected === 0 || indexSelected === -1) {
+        indexSelected = this.tags.length - 1;
+      } else {
+        indexSelected--;
+      }
+      this.tags[indexSelected].isHover = true;
+      let isScrolledIntoView = this.isScrolledIntoView(this.elRef.nativeElement.querySelector(`#tag-${this.tags[indexSelected].id}`));
+      if (!isScrolledIntoView) this.elRef.nativeElement.querySelector('.content').scrollTop = ((indexSelected < 8) ? 0 : indexSelected * 32);
+      return;
+    }
     if (event.keyCode === 13) {
+      let indexSelected = this.tags.findIndex(item => item.isHover);
+      if (indexSelected > -1) {
+        let findTag = this.selectedTag.find(item => item.id === this.tags[indexSelected].id);
+        if (!findTag) {
+          this.searchName = "";
+          this.selectedTag.push(this.tags[indexSelected]);
+          this.tagsChange.emit(this.selectedTag);
+        }
+        return;
+      }
+
       const input = event.target.input;
       const value = event.target.value;
       if ((value || '').trim()) {
@@ -183,6 +219,14 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
         this.sub.add(setTags);
       }
     }
+  }
+
+  isScrolledIntoView(el) {
+    var rect = el.getBoundingClientRect();
+    var elemTop = rect.top;
+    var elemBottom = rect.bottom;
+    var isVisible = (elemTop >= 0) && (elemBottom <= this.elRef.nativeElement.querySelector(".content").innerHeight);
+    return isVisible;
   }
 
   /**
