@@ -113,15 +113,7 @@ export class DocumentsAddBodyComponent implements OnInit, OnDestroy {
               "shape": "arrow"
             }
           };
-          console.log("thus", this);
-          data.froalaInit.subscribe(event => {
-            console.log("event", event);
-          })
-          console.log("self", data.editor);
-
-          //start!
           //self.codox.init(config);
-
         },
 
         'image.uploaded': function ($img) {
@@ -130,20 +122,16 @@ export class DocumentsAddBodyComponent implements OnInit, OnDestroy {
           var file = JSON.parse($img);
           self.attachments.push(file.link);
           self.onChangeAttachments.emit(self.attachments);
-          var img = JSON.parse($img);
-          console.log("$img", $img);
-          return img;
+          return file;
         },
 
         'file.uploaded': function (response) {
-          console.log("files", response);
           var file = JSON.parse(response);
           self.attachments.push(file.link);
           self.onChangeAttachments.emit(self.attachments);
           // File was uploaded to the server.
         },
         'file.inserted': function ($file, response) {
-          console.log("$file", $file);
           $file[0].href = `${$file[0]}/attachment`;
           // File was inserted in the editor.
         },
@@ -153,13 +141,11 @@ export class DocumentsAddBodyComponent implements OnInit, OnDestroy {
           var file = JSON.parse(response);
           self.attachments.push(file.link);
           self.onChangeAttachments.emit(self.attachments);
-          console.log("response", response);
         }
       }
     };
   }
   initialize(initControls) {
-    console.log("initControls", initControls);
     this.froalaEditor = initControls;
     this.froalaEditor.initialize();
   }

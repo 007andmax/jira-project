@@ -46,17 +46,14 @@ export class DocumentsAddComponent implements OnInit {
           this.cd.detectChanges();
           this.documentsService.getDocument(queryParam['clone_document']).subscribe(data => {
             this.documentAdd.setData(data);
-
             this.documentValidate.setUniqueTittle(false);
             if (queryParam['template']) {
               this.tagsService.getTagsCompanyById(this.companyId).subscribe((tags: any) => {
                 let companyTag = tags.commonTagViews;
-                console.log("companyTag", companyTag);
                 if (companyTag) this.documentAdd.tags.push(...companyTag);
                 this.documentAdd.setClientType(null);
                 this.documentAdd.linked.companies.push(this.companyId);
               })
-
             }
             this.showPreloader = false;
             this.cd.detectChanges();

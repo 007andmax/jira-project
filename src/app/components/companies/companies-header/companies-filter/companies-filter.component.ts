@@ -75,7 +75,6 @@ export class CompaniesFilterComponent implements OnInit {
     this.onChangeCounterFilter();
   }
   public onSelectTechLead(data) {
-    console.log("onSelectTechLead", data);
     this.companyFilter.setTehUser((data) ? data.id : null);
     this.companiesStateService.onInitFilter(this.companyFilter);
     this.onChangeCounterFilter();

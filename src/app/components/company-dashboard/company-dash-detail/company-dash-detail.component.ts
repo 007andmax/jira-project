@@ -295,10 +295,7 @@ export class CompanyDashDetailComponent implements OnInit {
   }
 
   getCompanyDetails() {
-    // 07ed6152-997c-4389-81f9-a261e262e307
-    // d9adf435-0f98-41cc-98a2-22ddf4a83a2f
     let getCompany = this.companiesService.getCompany(this._id).subscribe((data: CompanyProfile) => {
-      // this.companyDetail = data;
       this.companyDetail.onEditMode(data);
       this.companyDetailing = this.companyDetail.getDataForDashboard();
       if (this.companyDetailing.reputation === undefined || this.companyDetailing.reputation === null) {
@@ -312,7 +309,6 @@ export class CompanyDashDetailComponent implements OnInit {
       this.totalTicketsChanged.emit(this.companyDetailing.totalTickets);
       this.averageResponseTimeChanged.emit(this.companyDetailing.averageResponseTime);
       this.tags = this.companyDetailing.tags;
-      console.log("this.tags", this.tags);
       let day = moment(new Date()).format('dddd');
       this.workingDays = data.workingDays;
       if (this.workingDays.length !== 0) {

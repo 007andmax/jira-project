@@ -45,7 +45,6 @@ export class DocumentsAddFooterComponent implements OnInit {
     }
   }
   checkAttachments(content, newContent) {
-    //  if (this.documentEdit.content != this.documentEdit.newContent) {
     let oldAttachments = this.attachments;
     let newAttachments = [];
     let removedAttachments = [];
@@ -58,27 +57,15 @@ export class DocumentsAddFooterComponent implements OnInit {
       newAttachments.push(url.replace('\"', '').replace('/attachment', ''));
       return url;
     });
-    console.log("oldAttachments", oldAttachments);
-    console.log("newAttachments", newAttachments);
-
-    //  removedAttachments = this.diff(oldAttachments, newAttachments)
-
-
     oldAttachments.forEach(item => {
       if (!newAttachments.find(newItem => newItem === item)) removedAttachments.push(item);
     })
-
-
-    console.log("removedAttachments", removedAttachments);
     let removedAttachmentsIds = removedAttachments.map(item => item.substring(item.indexOf("file/") + 5, item.length));
-    console.log("removedAttachmentsIds", removedAttachmentsIds);
     forkJoin(
       [...removedAttachmentsIds.map(item => this.documentsService.removeDocumentAttachment(item))]
     )
       .subscribe(res => {
-
       });
-    // }
   }
 
   public goToDocumentsList() {

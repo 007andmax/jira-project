@@ -3,7 +3,6 @@ import { CompanyTagsStateService } from './states/company-tags-state.service';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { Tag } from 'src/app/interfaces/tag/tag';
 import { TagsService } from 'src/app/services/tags/tags.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { TagsStateService } from 'src/app/states/tags/tags-state.service';
@@ -112,21 +111,15 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
     this.getTags(searchName);
   }
   getTags(searchName = null) {
-    console.log("this.companyTagsListService.getBlockList()", this.companyTagsListService.getBlockList());
     if (this.companyTagsListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;
     }
     this.tagsService.search(this.page, this.searchName).subscribe((data: any) => {
-      console.log("this.page", this.page);
-      console.log("this.searchName", this.searchName);
-      console.log("searchName", searchName);
       if (searchName && this.tags.length > 0) {
         this.tags = [];
         this.reqTags = [];
         this.page = 0;
-        console.log("clear", data);
-
       }
       this.tags = [...this.tags, ...data.commonTagViews.map(item => new CompanyTag(item))];
       this.reqTags = [...this.reqTags, ...JSON.parse(JSON.stringify(data.commonTagViews))];
@@ -138,7 +131,6 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
         this.companyTagsListService.setBlockList(false);
       }
       this.showPreloader = false;
-      console.log("this.tags", this.tags);
       this.cd.detectChanges();
     })
   }
@@ -189,7 +181,6 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
       const value = event.target.value;
       if ((value || '').trim()) {
         let search = this.tags.find(item => item.word == value);
-        console.log("search", search);
         if (search) {
           this.selectedTag.push(search);
           this.tagsChange.emit(this.selectedTag);
