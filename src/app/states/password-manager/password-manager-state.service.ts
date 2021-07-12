@@ -23,7 +23,7 @@ export class PasswordManagerStateService {
     })
     this.onChangeRealTime.subscribe(newChange => {
       if (newChange.action === 'PASSWORD_CATEGORY_DELETED') console.log("newChange", newChange);
-      if (newChange.action === 'PASSWORD_CATEGORY_CREATED') this.categories.push(new PasswordRecordCategories(newChange.data));
+      if (newChange.action === 'PASSWORD_CATEGORY_CREATED') newChange.data.forEach(element => this.categories.push(new PasswordRecordCategories(element)));
       if (newChange.action === 'PASSWORD_CATEGORY_UPDATED') console.log("newChange", newChange);
       this.onGetCategories.emit(this.categories);
     })

@@ -39,7 +39,10 @@ export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
   public close() {
     this.open = false;
   }
-
+  isShowDoucments() {
+    let ids = ["72381bff-127c-4a63-9d2e-6e952350dcbd", "73221c72-f87c-4519-8235-c4b57ad1cc19"];
+    return (this.companiesStateService.getCurrentCompany()) ? ids.find(id => id === this.companiesStateService.getCurrentCompany()) : false;
+  }
   checkLogo() {
     return (this.selectedCompany && this.selectedCompany.logo && this.selectedCompany.logo.cropped && this.selectedCompany.logo.cropped.id || this.selectedCompany && this.selectedCompany.logo && this.selectedCompany.logo.origin && this.selectedCompany.logo.origin.id)
   }

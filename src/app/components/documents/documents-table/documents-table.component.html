@@ -1,5 +1,6 @@
 <tr
-    [ngClass]="(showNotificationReview) ? 'documents-no-valid' : ''"
+    [ngClass]="{'pointer':!item.isCategory && getPermissions('VIEW_DOCUMENT'),
+    'documents-no-valid' : showNotificationReview}"
     (click)="showTemplate()"
 >
     <td

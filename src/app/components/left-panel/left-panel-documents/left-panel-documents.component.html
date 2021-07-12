@@ -1,5 +1,6 @@
 <div
     class="app-left-panel__menu"
+    *ngIf="isShowDoucments()"
     [ngClass]="{'--active': open}"
     (click)="open = !open;openPanel()"
 >
@@ -10,6 +11,7 @@
 <ul
     class="app-left-panel__menu-expand icon-list top-menu"
     [ngClass]="{'menu-expand-show': open, 'menu-expand-hide': !open}"
+    *ngIf="isShowDoucments()"
 >
     <li
         class="app-left-panel__menu-expand-item-icon"

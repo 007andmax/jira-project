@@ -84,6 +84,7 @@ export class DocumentsComponent implements OnInit, OnDestroy {
     this.showPreloader = true;
     this.list = [];
     this.documentsService.getList().subscribe((data: any) => {
+      this.list = [];
       data.categories.map(item => this.list.push(new Document({ categoryId: item.id, categoryName: item.name }, true)));
       data.documents.map(item => this.list.push(new Document(item)));
       this.list.sort((a, b) => (this.getNameDocument(a).toLowerCase() > this.getNameDocument(b).toLowerCase()) ?
@@ -95,7 +96,9 @@ export class DocumentsComponent implements OnInit, OnDestroy {
     this.showPreloader = true;
     this.list = [];
     this.documentsService.filterDocuments(this.filter.getDataForFilter()).subscribe((data: any) => {
+      this.list = [];
       data.map(item => this.list.push(new Document(item)));
+      console.log("this.list", this.list);
       this.list.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
         1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));
       this.showPreloader = false;

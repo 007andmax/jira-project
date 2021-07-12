@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, O
 import { Subscription } from 'rxjs';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { DocumentCategoryAdd } from '../../documents/documents-add/class/document-category-add';
@@ -26,6 +27,7 @@ export class LeftPanelDocumentsComponent implements OnInit, OnDestroy {
     private documentsStateService: DocumentsStateService,
     private permissionsService: PermissionsService,
     public cd: ChangeDetectorRef,
+    private companiesStateService: CompaniesStateService,
     private leftPanelStateService: LeftPanelStateService,) { }
 
   ngOnInit() {
@@ -47,6 +49,10 @@ export class LeftPanelDocumentsComponent implements OnInit, OnDestroy {
       this.categories = data;
       this.cd.detectChanges();
     })
+  }
+  isShowDoucments() {
+    let ids = ["72381bff-127c-4a63-9d2e-6e952350dcbd", "73221c72-f87c-4519-8235-c4b57ad1cc19"];
+    return (this.companiesStateService.getCurrentCompany()) ? ids.find(id => id === this.companiesStateService.getCurrentCompany()) : false;
   }
   onCheckNameCategory() {
     let find = this.categories.find(item => item.name === this.addCategory.categoryName);

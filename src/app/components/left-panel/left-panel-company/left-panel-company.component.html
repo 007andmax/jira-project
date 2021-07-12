@@ -78,6 +78,7 @@
     <li
         [ngClass]="{'--active':activePage === 'company-documents'}"
         [routerLink]="['/ng2/company/',companyId,'documents']"
+        *ngIf="isShowDoucments()"
     >
         Documents
     </li>
