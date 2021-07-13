@@ -510,6 +510,19 @@ textarea {
     color: #364656;
   }
 
+  .light-dropdown .icn-remove-old {
+    top: calc(50% - 7px) !important;
+    right: 4px;
+  }
+
+  .light-dropdown .report-caret-icon {
+    right: 4px;
+  }
+
+  .app-drop-down__right-icon {
+    right: 15px;
+  }
+
   .with-number-types {
     input {
       border-bottom-left-radius: 4px !important;

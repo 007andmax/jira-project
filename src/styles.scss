@@ -1524,6 +1524,9 @@ app-quotes-item {
       width: 180px;
       max-width: 180px;
       min-width: 180px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
 
       @media screen and (min-width: 2048px) {
         width: 250px;
@@ -2084,6 +2087,10 @@ app-quotes-item {
   }
 }
 .new-companies-content__modal {
+  .app-drop-down__title {
+    margin-bottom: 8px;
+    line-height: 24px;
+  }
   .icn-product-save {
     position: absolute;
     top: calc(50% - 4px) !important;
@@ -2100,7 +2107,8 @@ app-quotes-item {
   .company-time-zone-drop-down {
     .report-caret-icon {
       position: absolute;
-      right: 10px;
+      //right: 10px;
+      right: 4px;
       top: calc(50% - 2px);
     }
   }
@@ -2123,12 +2131,13 @@ app-quotes-item {
     }
   }
 
-  .company-time-zone-drop-down {
-    margin-top: 7px;
-  }
+  //.company-time-zone-drop-down {
+  //  margin-top: 7px;
+  //}
 
   .light-dropdown .report-caret-icon {
-    right: 10px;
+    //right: 10px;
+    right: 2px;
   }
 
   .details-divider {
