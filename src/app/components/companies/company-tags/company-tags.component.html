@@ -47,17 +47,14 @@
             class="content"
             #content
             (click)="$event.preventDefault()"
+            infiniteScroll
+            [infiniteScrollContainer]="content"
+            [infiniteScrollDistance]="2"
+            [infiniteScrollThrottle]="50"
+            [infiniteScrollDisabled]="infiniteScrollDisabled"
+            [fromRoot]="true"
+            (scrolled)="onScroll()"
         >
-            <!-- <div
-                class="company-tags-scroll"
-                infiniteScroll
-                [infiniteScrollContainer]="content"
-                [infiniteScrollDistance]="2"
-                [infiniteScrollThrottle]="50"
-                [infiniteScrollDisabled]="infiniteScrollDisabled"
-                [fromRoot]="true"
-                (scrolled)="onScroll()"
-            > -->
             <ng-template
                 ngFor
                 let-item
@@ -106,7 +103,6 @@
                 class="loading pengind-loading"
                 *ngIf="showPreloader"
             ></div>
-            <!-- </div> -->
         </div>
     </div>
 </div>
