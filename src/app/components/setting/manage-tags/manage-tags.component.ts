@@ -173,7 +173,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       this.infiniteScrollDisabled = false;
       return;
     }
-    this.tagsService.search(this.page, this.searchTag).subscribe((data: any) => {
+    this.tagsService.searchManageTag(this.page, this.searchTag).subscribe((data: any) => {
       this.companyTags = [...this.companyTags, ...data.commonTagViews];
       this.reqcompanyTags = [...this.reqcompanyTags, ...JSON.parse(JSON.stringify(data.commonTagViews))];
       this.page++;

@@ -27,6 +27,10 @@ export class TagsService {
   }
 
   search(page, partWord) {
+    if (partWord.length === 0) return this.http.get(this.apiUrl + `commonTags/getAll?page=${page}&size=20`)
+    return this.http.get(this.apiUrl + `commonTags/filter?page=${page}&size=20&partWord=${partWord}`)
+  }
+  searchManageTag(page, partWord) {
     if (partWord.length === 0) return this.http.get(this.apiUrl + `commonTags/getAll?page=${page}&size=20&defaultTag=COMMON`)
     return this.http.get(this.apiUrl + `commonTags/filter?page=${page}&size=20&partWord=${partWord}`)
   }

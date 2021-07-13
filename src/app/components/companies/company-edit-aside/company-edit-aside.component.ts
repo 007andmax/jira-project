@@ -308,7 +308,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   }
   getSelectedServiceType() {
     let index = this.serviceTypes.findIndex(item => item.value === this.company.serviceType);
-    if (index > -1) return this.serviceTypes[index].title;
+    if (index > -1) return this.serviceTypes[index];
     return "";
   }
   getSelectedPaymentTerms() {

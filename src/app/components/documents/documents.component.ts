@@ -98,7 +98,6 @@ export class DocumentsComponent implements OnInit, OnDestroy {
     this.documentsService.filterDocuments(this.filter.getDataForFilter()).subscribe((data: any) => {
       this.list = [];
       data.map(item => this.list.push(new Document(item)));
-      console.log("this.list", this.list);
       this.list.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
         1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));
       this.showPreloader = false;

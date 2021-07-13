@@ -34,6 +34,12 @@
             *ngIf="showPreloader"
         ></div>
         <div
+            class="no-exist-templates"
+            *ngIf="!showPreloader && list.length === 0"
+        >
+            No templates
+        </div>
+        <div
             class
             *ngIf="tab === 'TEMPLATE_GALLERY'"
         >
