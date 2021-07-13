@@ -52,7 +52,7 @@ export class LeftPanelDocumentsComponent implements OnInit, OnDestroy {
   }
   isShowDoucments() {
     let ids = ["72381bff-127c-4a63-9d2e-6e952350dcbd", "73221c72-f87c-4519-8235-c4b57ad1cc19"];
-    return (this.companiesStateService.getCurrentCompany()) ? ids.find(id => id === this.companiesStateService.getCurrentCompany()) : false;
+    return (this.companiesStateService.getCurrentCompany()) ? ids.find(id => id === this.companiesStateService.getCurrentCompany().id) : false;
   }
   onCheckNameCategory() {
     let find = this.categories.find(item => item.name === this.addCategory.categoryName);
