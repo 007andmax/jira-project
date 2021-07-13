@@ -3,11 +3,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AppService } from '../../states/app/app.service';
-import { ToastrService } from 'ngx-toastr';
+
 @Injectable()
 export class HttpInterceptorService implements HttpInterceptor {
-  constructor(private appService: AppService,
-    private toastrService: ToastrService
+  constructor(private appService: AppService
   ) { }
 
   intercept(
@@ -19,13 +18,10 @@ export class HttpInterceptorService implements HttpInterceptor {
     return next.handle(req).pipe(
       tap(
         (event) => {
-          console.log("event", event);
-          // this.toastrService.e
           let isDisabled = (req.body && req.body.data) ? req.body.data.message === 'userDisabled' : false;
           if (isDisabled) this.appService.showSessionScreen('Your account has been disabled.')
         },
         (err) => {
-          console.log("err", err);
           if (err instanceof HttpErrorResponse) {
             let unlockExpiredHeader = err.headers.get('SESSION_UNLOCK_EXPIRED');
             let isUnauthorized = (err.error) ? err.error.errorMessage === 'unauthorized' || err.error.authMessage === 'unauthorized' : false;
