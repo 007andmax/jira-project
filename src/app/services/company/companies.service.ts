@@ -2,6 +2,9 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environment } from '../../../environments/environment';
 import { Subject } from "rxjs";
+import { tap } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 
 /**
  * Companies service to work with endpoints
@@ -25,7 +28,9 @@ export class CompaniesService {
    * @param {HttpClient} http Service to work with request
    */
   public constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService
   ) { }
 
   public deArchive(id) {
@@ -72,7 +77,12 @@ export class CompaniesService {
   public createCompany(data) {
     /* let company = data;
      company.onCheckFullVersion();*/
-    return this.http.post(this.apiUrl + 'company', data);
+    return this.http.post(this.apiUrl + 'company', data).pipe(
+      tap(data => {
+        this.toastrService.success("The new company has been successfully created");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public updateCompany(data) {
     // let company = data;

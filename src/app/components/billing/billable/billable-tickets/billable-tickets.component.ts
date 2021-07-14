@@ -16,6 +16,8 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { BillableRealTimeService } from 'src/app/states/billable/billable-real-time.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { ToastrService } from 'ngx-toastr';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 
 @Component({
   selector: 'billable-tickets',
@@ -42,6 +44,8 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
     private notificationStateService: NotificationStateService,
     private billableRealTimeService: BillableRealTimeService,
     private leftPanelStateService: LeftPanelStateService,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService,
     public cd: ChangeDetectorRef,) { }
 
 
@@ -61,7 +65,8 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REMOVE_TICKET_BILLABLE) {
           this.ticketsService.deleteTicket([this.ticketForRemove.id]).subscribe(data => {
-            this.notificationStateService.oninitShowNotification(`The ticket “${this.ticketForRemove.ticketNumber}” has been deleted`);
+            this.toastrService.success("The billable item has been successfully removed");
+            this.appStateService.changeDetectorRef();
             let index = this.billableProfile.tickets.findIndex(item => item.id === this.ticketForRemove.id);
             this.billableProfile.tickets.splice(index, 1);
           })

@@ -25,6 +25,8 @@ import { TicketProfileUpdate } from '../class/ticket-profile-update';
 import { Subscription } from 'rxjs';
 import { TicketEditAsideRightPanelComponent } from './ticket-edit-aside-right-panel/ticket-edit-aside-right-panel.component';
 import { TicketMessageComponent } from './ticket-message/ticket-message.component';
+import { ToastrService } from 'ngx-toastr';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 @Component({
   selector: 'app-ticket-edit-aside',
   templateUrl: './ticket-edit-aside.component.html',
@@ -59,6 +61,8 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     public ticketsPermissionsService: TicketsPermissionsService,
     private notificationStateService: NotificationStateService,
     public cd: ChangeDetectorRef,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService,
     private companiesStateService: CompaniesStateService) { }
 
 
@@ -261,6 +265,8 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       }
       this.ticketMessage.isMarkAsOpen = false;
       this.notificationStateService.oninitShowNotification(`The ticket “${this.ticketProfile.number}” has been marked as open`);
+      this.toastrService.success("The ticket has been successfully changed");
+      this.appStateService.changeDetectorRef();
     })
   };
   onDeleteForever() {

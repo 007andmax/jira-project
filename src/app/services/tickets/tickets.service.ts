@@ -5,13 +5,17 @@ import { Ticket } from '../../components/tickets/class/ticket';
 import { map, tap } from 'rxjs/operators';
 import { TicketProfile } from '../../components/tickets/tickets/class/ticket-profile';
 import { DashboardTickets } from '../../components/tickets/tickets-dashboard/class/dashboard-tickets';
+import { ToastrService } from 'ngx-toastr';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TicketsService {
   private apiUrl = environment.apiUrl;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService) { }
 
   public getDashboardByServices(data) {
     return this.http.post(this.apiUrl + `dashboard/ticket/byServices`, data);
@@ -79,11 +83,23 @@ export class TicketsService {
   }
   public deleteTicket(ids) {
 
-    return this.http.post(this.apiUrl + `v2/tickets/delete/`, { ids: ids });
+    return this.http.post(this.apiUrl + `v2/tickets/delete/`, { ids: ids }).pipe(
+      tap(data => {
+        this.toastrService.success("The ticket has been successfully changed");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public updateTicket(data, close = false) {
 
-    return this.http.post(this.apiUrl + `v2/tickets/updates?close=${close}`, data);
+    return this.http.post(this.apiUrl + `v2/tickets/updates?close=${close}`, data).pipe(
+      tap(data => {
+        if (close) {
+          this.toastrService.success("The  ticket has been successfully closed.");
+          this.appStateService.changeDetectorRef();
+        }
+        return data;
+      }));
   }
   public changeStatus(id, value) {
     let data = { value: value };
@@ -91,15 +107,30 @@ export class TicketsService {
   }
   public reportAsSpamTicket(id, value) {
     let data = { value: value };
-    return this.http.put(this.apiUrl + `v2/tickets/${id}/reportAsSpam`, data);
+    return this.http.put(this.apiUrl + `v2/tickets/${id}/reportAsSpam`, data).pipe(
+      tap(data => {
+        this.toastrService.success("The ticket has been successfully changed");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public markAsSpamTicket(id, value) {
     let data = { value: value };
-    return this.http.put(this.apiUrl + `v2/tickets/${id}/markAsSpam`, data);
+    return this.http.put(this.apiUrl + `v2/tickets/${id}/markAsSpam`, data).pipe(
+      tap(data => {
+        this.toastrService.success("The ticket has been successfully changed");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public trashTicket(id, value) {
     let data = { value: value };
-    return this.http.put(this.apiUrl + `v2/tickets/${id}/trash`, data);
+    return this.http.put(this.apiUrl + `v2/tickets/${id}/trash`, data).pipe(
+      tap(data => {
+        this.toastrService.success("The ticket has been successfully changed");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public linkedAgentToTicket(id, value) {
     let data = { value: value };
@@ -123,7 +154,12 @@ export class TicketsService {
     return this.http.get(this.apiUrl + `data/actualNumber?type=TICKET`);
   }
   public addTicket(data) {
-    return this.http.post(this.apiUrl + `v2/tickets`, data);
+    return this.http.post(this.apiUrl + `v2/tickets`, data).pipe(
+      tap(data => {
+        this.toastrService.success("The new  ticket has been successfully created");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public getCount(data) {
     return this.http.post(this.apiUrl + `v2/tickets/count`, data);

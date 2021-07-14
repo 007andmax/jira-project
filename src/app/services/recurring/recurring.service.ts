@@ -6,13 +6,17 @@ import { throwError, forkJoin, Observable } from 'rxjs';
 import { CreateRecurringTickets } from '../../components/tickets/recurring-tickets/class/create-recurring-tickets';
 import { RecurringTicket } from '../../components/tickets/recurring-tickets/class/recurring-ticket';
 import { map } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecurringService {
   private apiUrl = environment.apiUrl;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService) { }
 
   public onInitEditProducts(products): Observable<any[]> {
     let out = [];
@@ -44,8 +48,11 @@ export class RecurringService {
 
   public createTicket(data: CreateRecurringTickets) {
     return this.http.post(this.apiUrl + `recurringTickets/create`, data).pipe(
-      tap(res => res),
-      catchError(this.handleError));
+      tap(data => {
+        this.toastrService.success("The new recurring ticket has been successfully created");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public removeTicket(id: string) {
     return this.http.delete(this.apiUrl + `recurringTickets/${id}`).pipe(

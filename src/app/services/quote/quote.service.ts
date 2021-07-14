@@ -6,6 +6,8 @@ import { throwError } from 'rxjs';
 import { NotificationStateService } from '../../components/shared/notification/services/notification-state.service';
 import { Quote } from '../../components/billing/quotes/class/quote';
 import { QuoteStateService } from '../../states/quote/quote-state.service';
+import { ToastrService } from 'ngx-toastr';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 
 
 /**
@@ -26,7 +28,9 @@ export class QuoteService {
   constructor(
     private http: HttpClient,
     private quoteStateService: QuoteStateService,
-    private notificationStateService: NotificationStateService
+    private notificationStateService: NotificationStateService,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService
 
   ) { }
 
@@ -37,8 +41,11 @@ export class QuoteService {
    */
   public createQuote(data, notification) {
     return this.http.post(`${this.apiUrl}saleQuotes`, data).pipe(
-      tap(data => this.handleQuoteSent(data, (notification) ? 'Quote has been sent' : 'Quote has been saved')),
-      catchError(this.handleError));
+      tap(data => {
+        this.toastrService.success("The new quote has been successfully saved");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 
   /**
@@ -49,8 +56,11 @@ export class QuoteService {
    */
   public editQuote(data) {
     return this.http.put(`${this.apiUrl}saleQuotes/${data.id}`, data).pipe(
-      tap(data => this.handleQuoteSent(data, 'Quote has been saved')),
-      catchError(this.handleError));
+      tap(data => {
+        this.toastrService.success("The quote has been successfully saved");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 
   /**
@@ -138,8 +148,11 @@ export class QuoteService {
     return this.http.post(this.apiUrl +
       `saleQuotes/approveQuote?companyId=${company.id}`, [quoteId]
     ).pipe(
-      tap(data => this.handleQuoteSent(data, 'Quote has been approved')),
-      catchError(this.handleError));
+      tap(data => {
+        this.toastrService.success("The quote has been successfully approved");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 
   /**

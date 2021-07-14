@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { ContractItem } from '../../components/billing/contracts/class/contract-item';
 import { ServiceAgreement } from '../../components/billing/contracts/class/service-agreement';
+import { ToastrService } from 'ngx-toastr';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +19,17 @@ export class ContractsService {
    * @param {HttpClient} http Service to work with request
    */
   public constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService
   ) { }
   public forceCreate(id) {
-    return this.http.get(this.apiUrl + `serviceAgreements/forceCreate?id=${id}`);
+    return this.http.get(this.apiUrl + `serviceAgreements/forceCreate?id=${id}`).pipe(
+      tap(data => {
+        this.toastrService.success("The billable item has been successfully created");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public delete(id) {
     return this.http.delete(this.apiUrl + `serviceAgreements/${id}`, {});
