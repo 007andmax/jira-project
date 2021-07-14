@@ -27,10 +27,20 @@ export class TicketsService {
     return this.http.get(this.apiUrl + `dashboard/ticket?frequency=${frequency}`).pipe(map((data: any) => new DashboardTickets(data)));
   }
   public updateExpense(data) {
-    return this.http.put(this.apiUrl + `v2/tickets/ticketUpdate/updateExpense`, data);
+    return this.http.put(this.apiUrl + `v2/tickets/ticketUpdate/updateExpense`, data).pipe(
+      tap(data => {
+        this.toastrService.success("The ticket update has been successfully changed");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public updateNote(ticketId, updateId, note) {
-    return this.http.put(this.apiUrl + `v2/tickets/${ticketId}/updates/${updateId}/updateNote`, { note: note });
+    return this.http.put(this.apiUrl + `v2/tickets/${ticketId}/updates/${updateId}/updateNote`, { note: note }).pipe(
+      tap(data => {
+        this.toastrService.success("The note has been successfully updated");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public fetchUpdates(ticket) {
     var loadedIds = [];
@@ -57,7 +67,12 @@ export class TicketsService {
       body: { "productExpenseIds": null, "serviceExpenseIds": [serviceId] }
     };
 
-    return this.http.delete(this.apiUrl + `v2/tickets/${ticketId}/updates/${updateId}/deleteExpenses`, options);
+    return this.http.delete(this.apiUrl + `v2/tickets/${ticketId}/updates/${updateId}/deleteExpenses`, options).pipe(
+      tap(data => {
+        this.toastrService.success("The ticket update has been successfully removed");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public removeProduct(ticketId, updateId, productId) {
     const options = {
@@ -67,7 +82,12 @@ export class TicketsService {
       body: { "productExpenseIds": [productId], "serviceExpenseIds": null }
     };
 
-    return this.http.delete(this.apiUrl + `v2/tickets/${ticketId}/updates/${updateId}/deleteExpenses`, options);
+    return this.http.delete(this.apiUrl + `v2/tickets/${ticketId}/updates/${updateId}/deleteExpenses`, options).pipe(
+      tap(data => {
+        this.toastrService.success("The ticket update has been successfully removed");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public downloadFile(id, contentType) {
     return this.http.get(this.apiUrl + `file/${id}/attachment`, {
@@ -79,13 +99,18 @@ export class TicketsService {
   }
   public deleteUpdate(id, updateId) {
 
-    return this.http.delete(this.apiUrl + `v2/tickets/${id}/updates/${updateId}`);
+    return this.http.delete(this.apiUrl + `v2/tickets/${id}/updates/${updateId}`).pipe(
+      tap(data => {
+        this.toastrService.success("The ticket update has been successfully removed");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public deleteTicket(ids) {
 
     return this.http.post(this.apiUrl + `v2/tickets/delete/`, { ids: ids }).pipe(
       tap(data => {
-        this.toastrService.success("The ticket has been successfully changed");
+        this.toastrService.success("The ticket has been successfully removed");
         this.appStateService.changeDetectorRef();
         return data;
       }));
@@ -95,7 +120,10 @@ export class TicketsService {
     return this.http.post(this.apiUrl + `v2/tickets/updates?close=${close}`, data).pipe(
       tap(data => {
         if (close) {
-          this.toastrService.success("The  ticket has been successfully closed.");
+          this.toastrService.success("The ticket has been successfully closed.");
+          this.appStateService.changeDetectorRef();
+        } else {
+          this.toastrService.success("The update has been added");
           this.appStateService.changeDetectorRef();
         }
         return data;

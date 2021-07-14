@@ -26,6 +26,9 @@
     </div>
 
 
+
+
+
     <div
         class="ticket-notify__item"
         *ngIf="ticketsPermissionsService.isActionVisible('claim_ticket', ticketProfile,null,null)"
@@ -49,6 +52,9 @@
     </div>
 
 
+
+
+
     <div
         class="ticket-notify__item"
         *ngIf="ticketsPermissionsService.isActionVisible('reopen', ticketProfile, 'old',null)"
@@ -69,6 +75,9 @@
             </div>
         </div>
     </div>
+
+
+
 
 
     <div
@@ -96,6 +105,9 @@
     </div>
 
 
+
+
+
     <div
         class="ticket-notify__item"
         *ngIf="ticketsPermissionsService.isActionVisible('reopen', ticketProfile, 'billed',null)"
@@ -117,9 +129,12 @@
     </div>
 
 
+
+
+
     <div
         class="ticket-notify__item"
-        *ngIf="ticketsPermissionsService.isActionVisible('restore', ticketProfile, 'from_trash',null) && ticketProfile.deletePerformer.id !== currentUser.id"
+        *ngIf="ticketsPermissionsService.isActionVisible('restore', ticketProfile, 'from_trash',null) && currentUser && ticketProfile.deletePerformer.id !== currentUser.id"
     >
         <div class="ticket-notify__item-icon icon__ticket-status"></div>
         <div>
@@ -153,6 +168,9 @@
             Restore
         </button>
     </div>
+
+
+
 
 
     <div
@@ -191,13 +209,19 @@
     </div>
 
 
+
+
+
     <div
         class="ticket-notify__item"
         *ngIf="ticketsPermissionsService.isActionVisible('restore', ticketProfile, 'from_spam',null)"
     >
         <div class="ticket-notify__item-icon icon__ticket-status"></div>
         <div>
-            <div class="ticket-notify__item-title">
+            <div
+                class="ticket-notify__item-title"
+                *ngIf="currentUser"
+            >
                 <strong class="text-info">
                     {{ getUserName(ticketProfile.spamMarker ? ticketProfile.spamMarker : ticketProfile.spamReporter) }}
                 </strong>
@@ -220,7 +244,7 @@
         </button>
         <button
             class="ticket-notify__item-btn"
-            *ngIf="currentUser.isOwner && !ticketProfile.spamMarker"
+            *ngIf="currentUser && currentUser.isOwner && !ticketProfile.spamMarker"
             (click)="moveIntoSpam()"
         >
             Mark as Spam

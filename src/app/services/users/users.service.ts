@@ -4,6 +4,8 @@ import { environment } from '../../../environments/environment';
 import { UsersStateService } from '../../states/users/users-state.service';
 import { tap, map } from 'rxjs/operators';
 import { User } from '../../components/users/class/user';
+import { ToastrService } from 'ngx-toastr';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 
 /**
  * Users service to work with api
@@ -22,6 +24,8 @@ export class UsersService {
    */
   public constructor(
     private http: HttpClient,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService
 
   ) { }
 
@@ -58,7 +62,12 @@ export class UsersService {
 
   public addUser(data) {
 
-    return this.http.post(this.apiUrl + `users`, data);
+    return this.http.post(this.apiUrl + `users`, data).pipe(
+      tap(data => {
+        this.toastrService.success("The new user has been successfully created");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public changeAvatar(id, data) {
 
@@ -66,10 +75,20 @@ export class UsersService {
   }
   public updateUser(data) {
 
-    return this.http.put(this.apiUrl + `users/${data.id}`, data);
+    return this.http.put(this.apiUrl + `users/${data.id}`, data).pipe(
+      tap(data => {
+        this.toastrService.success("The user has been successfully updated");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public onArchiveUsers(ids) {
-    return this.http.post(this.apiUrl + `users/archive`, { ids: ids });
+    return this.http.post(this.apiUrl + `users/archive`, { ids: ids }).pipe(
+      tap(data => {
+        this.toastrService.success("The user has been successfully archived");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public onDeArchiveUsers(ids) {
     return this.http.post(this.apiUrl + `users/dearchive`, { ids: ids });

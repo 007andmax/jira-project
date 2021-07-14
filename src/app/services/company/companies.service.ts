@@ -61,7 +61,12 @@ export class CompaniesService {
   }
 
   public archiveCompany(id) {
-    return this.http.get(this.apiUrl + 'company/archive/' + id);
+    return this.http.get(this.apiUrl + 'company/archive/' + id).pipe(
+      tap(data => {
+        this.toastrService.success("The company has been successfully archived");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 
   public getClientsByTags(tags) {
@@ -87,7 +92,12 @@ export class CompaniesService {
   public updateCompany(data) {
     // let company = data;
     // company.onCheckFullVersion();
-    return this.http.put(this.apiUrl + 'company', data);
+    return this.http.put(this.apiUrl + 'company', data).pipe(
+      tap(data => {
+        this.toastrService.success("The company has been successfully updated");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 
   /**

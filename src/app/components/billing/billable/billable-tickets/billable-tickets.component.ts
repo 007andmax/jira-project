@@ -65,8 +65,7 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REMOVE_TICKET_BILLABLE) {
           this.ticketsService.deleteTicket([this.ticketForRemove.id]).subscribe(data => {
-            this.toastrService.success("The billable item has been successfully removed");
-            this.appStateService.changeDetectorRef();
+
             let index = this.billableProfile.tickets.findIndex(item => item.id === this.ticketForRemove.id);
             this.billableProfile.tickets.splice(index, 1);
           })

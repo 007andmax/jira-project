@@ -36,6 +36,7 @@ export class TicketMessageComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = this.usersStateService.getCurrentUser();
+    console.log("this.currentUser", this.currentUser);
   }
   public getUserName(user: CurrentUser) {
     return (user) ? `${user.firstName} ${user.lastName}` : '';
