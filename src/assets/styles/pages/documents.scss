@@ -289,6 +289,32 @@
   }
 }
 
+document-preview,
+.documents-create,
+.documents-preview {
+  img {
+    position: relative;
+    max-width: 100%;
+    padding: 0 1px;
+  }
+
+  .fr-dib {
+    margin: 5px auto;
+    display: block;
+    float: none;
+    vertical-align: top;
+
+    &.fr-fil {
+      margin-left: 0;
+      text-align: left;
+    }
+
+    &.fr-fir {
+      margin-right: 0;
+      text-align: right;
+    }
+  }
+}
 .documents-create,
 .documents-preview {
   table {
