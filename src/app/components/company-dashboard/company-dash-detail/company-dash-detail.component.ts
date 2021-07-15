@@ -304,7 +304,7 @@ export class CompanyDashDetailComponent implements OnInit {
         this.selectedRating = this.companyDetailing.reputation;
         this.unSelectedRating = 5 - this.selectedRating;
       }
-      this.companyDetail = data;
+      // this.companyDetail = data;
       this.companyNameChanged.emit(this.companyDetailing.name);
       this.totalTicketsChanged.emit(this.companyDetailing.totalTickets);
       this.averageResponseTimeChanged.emit(this.companyDetailing.averageResponseTime);
@@ -338,6 +338,7 @@ export class CompanyDashDetailComponent implements OnInit {
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
       }
+      console.log("this.companyDetailing", this.companyDetailing);
     })
     this.sub.add(getCompany);
   }
