@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
 import { catchError, map, tap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { NotificationStateService } from '../../components/shared/notification/services/notification-state.service';
 import { Quote } from '../../components/billing/quotes/class/quote';
 import { QuoteStateService } from '../../states/quote/quote-state.service';
 import { ToastrService } from 'ngx-toastr';
@@ -28,7 +27,6 @@ export class QuoteService {
   constructor(
     private http: HttpClient,
     private quoteStateService: QuoteStateService,
-    private notificationStateService: NotificationStateService,
     private toastrService: ToastrService,
     private appStateService: AppStateService
 
@@ -249,10 +247,4 @@ export class QuoteService {
     let err = error.error;
     return throwError(error);
   }
-
-  private handleQuoteSent = (data, message) => {
-    this.notificationStateService.oninitShowNotification(message);
-    return data;
-  }
-
 }

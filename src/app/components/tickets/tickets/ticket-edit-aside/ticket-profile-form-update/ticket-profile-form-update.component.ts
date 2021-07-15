@@ -8,8 +8,6 @@ import { TicketsListService } from '../../services/tickets-list.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketProfileFormUpdateProductsComponent } from './ticket-profile-form-update-products/ticket-profile-form-update-products.component';
 import { TicketProfileFormUpdateServicesComponent } from './ticket-profile-form-update-services/ticket-profile-form-update-services.component';
-import { NotificationStateService } from 'src/app/components/shared/notification/services/notification-state.service';
-import { ErrorNotificationStateService } from 'src/app/components/shared/error-notification/services/error-notification-state.service';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
 import { RemoteSession } from 'src/app/components/support/class/remote-sessions';
 import { SupportService } from 'src/app/services/support/support.service';
@@ -64,8 +62,6 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private devicesService: DevicesService,
     private supportService: SupportService,
-    private errorNotificationStateService: ErrorNotificationStateService,
-    private notificationStateService: NotificationStateService,
     private supportStateService: SupportStateService,
     private devicesRealTimeService: DevicesRealTimeService,
     private draftEmailService: DraftEmailService,
@@ -190,7 +186,6 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
         this.ticketsStateService.onClearFormUpdate();
       }
       this.ticketProfileFormUpdate.clearShares();
-      this.notificationStateService.oninitShowNotification(`Update has been added`);
       this.files = [];
       this.ticketProfileFormUpdate.clearAttachments();
       this.updateBtn.setDisabled(false);
@@ -235,14 +230,12 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
         this.ticketsStateService.onClearFormUpdate();
       }
       this.ticketProfileFormUpdate.clearShares();
-      this.notificationStateService.oninitShowNotification(`Ticket has been closed`);
       this.files = [];
       this.ticketProfileFormUpdate.clearAttachments();
       this.onClosed.emit(null);
       this.update_closeBtn.setDisabled(false);
     }, err => {
       this.isUpdateAndClose = false;
-      this.errorNotificationStateService.oninitShowNotification(err.error.message);
       this.update_closeBtn.setDisabled(false);
     })
   }

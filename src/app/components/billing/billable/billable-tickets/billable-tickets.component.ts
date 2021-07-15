@@ -10,7 +10,6 @@ import { ConfirmStateService } from '../../../shared/confirm/services/confirm-st
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
 import { BillableProfileTicket } from '../class/billable-profile-ticket';
-import { NotificationStateService } from '../../../shared/notification/services/notification-state.service';
 import { Subscription } from 'rxjs';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
@@ -41,7 +40,6 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private usersStateService: UsersStateService,
     private companiesStateService: CompaniesStateService,
-    private notificationStateService: NotificationStateService,
     private billableRealTimeService: BillableRealTimeService,
     private leftPanelStateService: LeftPanelStateService,
     private toastrService: ToastrService,

@@ -9,7 +9,6 @@ import { REMOVE_CONTRACT } from 'src/app/const/confirm';
 import { Subscription } from 'rxjs';
 import { ContractsRealTimeService } from 'src/app/states/contracts/contracts-real-time.service';
 import { ContractsListService } from '../services/contracts-list.service';
-import { NotificationStateService } from '../../../shared/notification/services/notification-state.service';
 import { Company } from 'src/app/interfaces/company/company';
 
 @Component({
@@ -31,7 +30,6 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService,
     private contractsRealTimeService: ContractsRealTimeService,
     private contractsListService: ContractsListService,
-    private notificationStateService: NotificationStateService,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
@@ -112,7 +110,7 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
   }
   onForceCreate(data) {
     this.contractsService.forceCreate(data.id).subscribe(data => {
-      this.notificationStateService.oninitShowNotification("Billable item created");
+
     })
   }
   onDelete(data) {

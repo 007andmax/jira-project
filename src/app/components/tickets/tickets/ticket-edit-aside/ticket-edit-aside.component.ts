@@ -12,7 +12,6 @@ import { TicketsPermissionsService } from './services/tickets-permissions.servic
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketsListService } from '../services/tickets-list.service';
 import { TicketStateService } from './services/ticket-state.service';
-import { NotificationStateService } from '../../../shared/notification/services/notification-state.service';
 import { ConfirmStateService } from '../../../shared/confirm/services/confirm-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MOVE_TO_TRASH_TICKET, DELETE_FOREVER, MOVE_TO_SPAM_OR_REPORT_TICKET } from 'src/app/const/confirm';
@@ -59,7 +58,6 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     private usersStateService: UsersStateService,
     private ticketStateService: TicketStateService,
     public ticketsPermissionsService: TicketsPermissionsService,
-    private notificationStateService: NotificationStateService,
     public cd: ChangeDetectorRef,
     private toastrService: ToastrService,
     private appStateService: AppStateService,
@@ -181,19 +179,15 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
   onMoveIntoSpam() {
     if (this.usersStateService.getCurrentUser().isOwner) {
       this.ticketsService.markAsSpamTicket(this.ticketProfile.id, false).subscribe(data => {
-        this.notificationStateService.oninitShowNotification(`The ticket “${this.ticketProfile.number}” has been marked as spam`);
       });
     } else {
       this.ticketsService.reportAsSpamTicket(this.ticketProfile.id, false).subscribe(data => {
-        this.notificationStateService.oninitShowNotification(`The ticket “${this.ticketProfile.number}” has been reported as spam`);
-
       });
     }
   }
   moveToTrash(data) {
     this.ticketsService.trashTicket(this.ticketProfile.id, data).subscribe(res => {
       if (data) {
-        this.notificationStateService.oninitShowNotification(`The ticket “${this.ticketProfile.number}” has been moved to Trash`);
       }
     })
   }
@@ -260,18 +254,15 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     this.ticketsService.changeStatus(this.ticketProfile.id, 'IN_PROGRESS').subscribe((data: any) => {
       if (data.code == 403) {
         var user = this.usersStateService.getAllUsers().find(item => item.id === data.message);
-        this.notificationStateService.oninitShowNotification(`${this.getUserName(user)} locked this ticket to create invoice!`);
         return;
       }
       this.ticketMessage.isMarkAsOpen = false;
-      this.notificationStateService.oninitShowNotification(`The ticket “${this.ticketProfile.number}” has been marked as open`);
       this.toastrService.success("The ticket has been successfully changed");
       this.appStateService.changeDetectorRef();
     })
   };
   onDeleteForever() {
     this.ticketsService.deleteTicket([this.ticketProfile.id]).subscribe(data => {
-      this.notificationStateService.oninitShowNotification(`The ticket “${this.ticketProfile.number}” has been deleted`);
     })
   }
   public getUserName(user) {

@@ -5,7 +5,6 @@ import { TicketsColor } from 'src/app/components/left-panel/left-panel-tickets/t
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { TitleListType } from '../../tickets-header/class/title-list-type';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
-import { NotificationStateService } from 'src/app/components/shared/notification/services/notification-state.service';
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 
@@ -21,7 +20,6 @@ export class TicketChangeStatusComponent implements OnInit {
   list: Array<TitleListType> = [new TitleListType('In Progress', 'IN_PROGRESS'),
   new TitleListType('On Hold', 'ON_HOLD')];
   constructor(private ticketsStateService: TicketsStateService,
-    private notificationStateService: NotificationStateService,
     private toastrService: ToastrService,
     private appStateService: AppStateService,
     private ticketsService: TicketsService,) { }
@@ -39,7 +37,6 @@ export class TicketChangeStatusComponent implements OnInit {
   }
   changeTicketStatus(type, title) {
     this.ticketsService.changeStatus(this.ticketProfile.id, type).subscribe((data: any) => {
-      this.notificationStateService.oninitShowNotification(`The tickets “${this.ticketProfile.number}” status has been changed`);
       this.toastrService.success(`The tickets “${this.ticketProfile.number}” status has been changed`);
       this.appStateService.changeDetectorRef();
     })

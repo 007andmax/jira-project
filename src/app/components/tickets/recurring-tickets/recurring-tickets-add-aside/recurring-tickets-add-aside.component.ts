@@ -4,7 +4,6 @@ import { ProductService } from 'src/app/services/product/product.service';
 import { ForCreateProduct } from '../class/for-create-product';
 import { RecurringService } from 'src/app/services/recurring/recurring.service';
 import { ForCreateService } from '../class/for-create-service';
-
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { SelectClientCompanyStateService } from '../../../shared/select-client-company/services/select-client-company-state.service';
 import { RecurringTicketsStateService } from '../services/recurring-tickets-state.service';
@@ -13,9 +12,7 @@ import { RecurringTicketsService } from '../services/recurring-tickets.service';
 import { Validate } from '../class/validate';
 import { CreateRecurringTicketsProduct } from '../class/create-recurring-tickets-product';
 import { CreateRecurringTicketsService } from '../class/create-recurring-tickets-service';
-
 import { DevicesRecurringTicketsStateService } from '../devices-recurring-tickets/services/devices-recurring-tickets-state.service';
-import { NotificationStateService } from '../../../shared/notification/services/notification-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TechUserItem } from '../../../shared/teh-users/class/tech-user-item';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
@@ -62,7 +59,6 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     private companiesState: SelectClientCompanyStateService,
     public recurringState: RecurringTicketsStateService,
     public createService: RecurringTicketsService,
-    private notificationStateService: NotificationStateService,
     private devicesRecurringTicketsStateService: DevicesRecurringTicketsStateService,
     private usersStateService: UsersStateService,
   ) {
@@ -456,17 +452,13 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.createService.setRulesCreateTicket(this.recurringState.getCreateTicket());
     this.products.forEach((item: ForCreateProduct) => (item.name || item.description) && this.recurringState.getCreateTicket().addProdct(new CreateRecurringTicketsProduct(item.versionedId.id, item.quantity, item.discount)));
     this.services.forEach((item: ForCreateService) => (item.name) && this.recurringState.getCreateTicket().addService(new CreateRecurringTicketsService(item.versionedId.id, item.description, item.duration)));
-
     this.recurringService.createTicket(this.recurringState.getCreateTicket()).subscribe((res) => {
-      this.notificationStateService.oninitShowNotification("Recurring ticket has been created");
       if (!this.copy) {
         this.close();
       } else {
         this.copy = false;
         this.resetDataForCopy();
       }
-
-
     })
   }
 

@@ -2,7 +2,6 @@ import { Component, OnInit, Input, OnDestroy, Output, EventEmitter, ChangeDetect
 import { TicketProfileUpdate } from '../../class/ticket-profile-update';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { TicketProfile } from '../../class/ticket-profile';
-import { NotificationStateService } from 'src/app/components/shared/notification/services/notification-state.service';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { REMOVE_UPDATE_TICKET, REMOVE_UPDATE_TICKET_SERVICE, REMOVE_UPDATE_TICKET_PRODUCT } from 'src/app/const/confirm';
 import { TicketStateService } from '../services/ticket-state.service';
@@ -27,8 +26,7 @@ export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService,
     private ticketStateService: TicketStateService,
     public cd: ChangeDetectorRef,
-    public ticketsPermissionsService: TicketsPermissionsService,
-    private notificationStateService: NotificationStateService,) { }
+    public ticketsPermissionsService: TicketsPermissionsService,) { }
   ngOnInit() {
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
@@ -57,7 +55,6 @@ export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
   }
   removeUpdate() {
     this.ticketsService.deleteUpdate(this.ticketProfile.id, this.ticketStateService.getUpdateForRemove().id).subscribe(data => {
-      this.notificationStateService.oninitShowNotification(`The ticket update containing a note has been deleted`);
     })
   }
   fetchUpdates() {

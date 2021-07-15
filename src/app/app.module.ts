@@ -84,7 +84,6 @@ import { UsersTableComponent } from './components/users/users-table/users-table.
 import { UsersAsideComponent } from './components/users/users-aside/users-aside.component';
 import { LeftPanelUsersComponent } from './components/left-panel/left-panel-users/left-panel-users.component';
 import { UserTableSubscriptionComponent } from './components/users/users-table/user-table-subscription/user-table-subscription.component';
-import { NotificationComponent } from './components/shared/notification/notification.component';
 import { UsersAsideEditComponent } from './components/users/users-aside-edit/users-aside-edit.component';
 import { ModalImageCropperComponent } from './services/modal/modal-image-cropper/modal-image-cropper.component';
 import { DraftEmailUserRecipientsComponent } from './components/shared/draft-email/draft-email-user-recipients/draft-email-user-recipients.component';
@@ -196,7 +195,6 @@ import { TicketProfileUpdatesProductEditComponent } from './components/tickets/t
 import { TicketChangeStatusComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-change-status/ticket-change-status.component';
 import { PreloaderTicketComponent } from './components/tickets/tickets/preloader-ticket/preloader-ticket.component';
 import { TicketProfileAttachmentsComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-attachments/ticket-profile-attachments.component';
-import { ErrorNotificationComponent } from './components/shared/error-notification/error-notification.component';
 import { PreviewAttachmentComponent } from './components/tickets/tickets/ticket-edit-aside/preview-attachment/preview-attachment.component';
 import { TicketProfileUpdatesNoteItemComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-note/ticket-profile-updates-note-item/ticket-profile-updates-note-item.component';
 import { TicketProfileUpdatesNoteInfoComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-note/ticket-profile-updates-note-info/ticket-profile-updates-note-info.component';
@@ -523,7 +521,6 @@ declare var $: any;
     UsersAsideComponent,
     LeftPanelUsersComponent,
     UserTableSubscriptionComponent,
-    NotificationComponent,
     UsersAsideEditComponent,
     ModalImageCropperComponent,
     DraftEmailUserRecipientsComponent,
@@ -625,7 +622,6 @@ declare var $: any;
     TicketChangeStatusComponent,
     PreloaderTicketComponent,
     TicketProfileAttachmentsComponent,
-    ErrorNotificationComponent,
     PreviewAttachmentComponent,
     TicketProfileUpdatesNoteItemComponent,
     TicketProfileUpdatesNoteInfoComponent,

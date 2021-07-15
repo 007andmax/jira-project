@@ -10,7 +10,6 @@ import { TitleListType } from '../tickets-header/class/title-list-type';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { TicketValidate } from '../class/ticket-validate';
 import { UploadAreaComponent } from '../../../shared/upload-area/upload-area.component';
-import { NotificationStateService } from '../../../shared/notification/services/notification-state.service';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 import { DropDownComponent } from '../../../shared/drop-down/drop-down.component';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
@@ -48,7 +47,6 @@ export class TicketAddAsideComponent implements OnInit {
     private usersStateService: UsersStateService,
     private ticketsService: TicketsService,
     private devicesStateService: DevicesStateService,
-    private notificationStateService: NotificationStateService,
     private elRef: ElementRef,
     public cd: ChangeDetectorRef,
     private companiesState: CompaniesStateService,) { }
@@ -75,10 +73,8 @@ export class TicketAddAsideComponent implements OnInit {
     if (this.ticketValidate.isValidate(this.ticketAdd)) {
       this.ticketAdd.onAddSharedUsers(this.shareUsersList);
       this.addBtn.setDisabled(true);
-
       this.ticketsService.addTicket(this.ticketAdd).subscribe(data => {
         this.addBtn.setDisabled(false);
-        this.notificationStateService.oninitShowNotification("Ticket has been created");
         this.closed();
       }, error => {
         this.addBtn.setDisabled(false);

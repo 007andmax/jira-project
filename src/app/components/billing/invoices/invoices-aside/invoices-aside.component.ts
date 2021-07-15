@@ -8,7 +8,6 @@ import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { CompanySetting } from '../../../companies/class/company-setting';
 import * as moment from "moment";
 import { Payment } from './class/payment';
-import { NotificationStateService } from '../../../shared/notification/services/notification-state.service';
 import { PaymentInvoice } from './class/payment-invoice';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
 import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.service';
@@ -42,7 +41,6 @@ export class InvoicesAsideComponent implements OnInit {
   selectedInvoices: Array<Invoice> = [];
   @Output() onClose = new EventEmitter<any>();
   constructor(private companiesState: CompaniesStateService,
-    private notificationStateService: NotificationStateService,
     private invoiceStateService: InvoiceStateService,
     private invoicesService: InvoicesService) { }
 
@@ -122,7 +120,6 @@ export class InvoicesAsideComponent implements OnInit {
       this.recordPayment.setDisabled(false);
       this.payment.resetInvoiceIds();
       this.payment.resetPartialPayments();
-      this.notificationStateService.oninitShowNotification("The payment has been received");
       this.close();
     }, err => {
       this.validate.setValidPayment(false);

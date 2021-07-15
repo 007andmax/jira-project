@@ -7,7 +7,6 @@ import { ModalQuoteComponent } from 'src/app/services/modal/modal-quote/modal-qu
 import { QuoteService } from 'src/app/services/quote/quote.service';
 import { BillableStateService } from 'src/app/states/billable/billable-state.service';
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
-import { NotificationStateService } from '../../../shared/notification/services/notification-state.service';
 import { QuoteAdd } from '../class/quote-add';
 import { QuotePreview } from '../class/quote-preview';
 import { QuoteValdiate } from '../class/quote-vildate';
@@ -31,7 +30,6 @@ export class QuoteAsideAddComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   constructor(private quoteStateService: QuoteStateService,
     private billableStateService: BillableStateService,
-    private notificationStateService: NotificationStateService,
     private modalService: NgbModal,
     private quoteService: QuoteService,) { }
 
@@ -81,7 +79,6 @@ export class QuoteAsideAddComponent implements OnInit, OnDestroy {
       const id = data['id'];
       this.quoteService.downloadPdf(data['id']).subscribe((res) => {
         this.quoteService.downLoadFile(res, id, data.company.name, data.number);
-        this.notificationStateService.oninitShowNotification('Quote has been saved');
         this.saveAndDownloadBtn.setDisabled(false);
         this.close();
       });
