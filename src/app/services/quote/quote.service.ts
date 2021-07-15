@@ -67,8 +67,11 @@ export class QuoteService {
    */
   public repeatSend(quoteId) {
     return this.http.post(`${this.apiUrl}saleQuotes/${quoteId}/send`, {}).pipe(
-      tap(data => data),
-      catchError(this.handleError));
+      tap(data => {
+        this.toastrService.success("The quote has been successfully sent");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 
   /**
@@ -183,8 +186,11 @@ export class QuoteService {
     return this.http.post(this.apiUrl +
       `saleQuotes/archiveQuote?companyId=${company.id}`, [quote_id]
     ).pipe(
-      tap(data => data),
-      catchError(this.handleError));
+      tap(data => {
+        this.toastrService.success("The quote has been successfully archived");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 
   /**

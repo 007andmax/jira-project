@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { forkJoin } from 'rxjs';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { environment } from 'src/environments/environment';
 import { Document } from '../../class/document';
@@ -25,6 +27,8 @@ export class DocumentsAddFooterComponent implements OnInit {
   constructor(private documentsService: DocumentsService,
     private leftPanelStateService: LeftPanelStateService,
     private permissionsService: PermissionsService,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService,
     private router: Router,) { }
 
   ngOnInit() {
@@ -34,14 +38,26 @@ export class DocumentsAddFooterComponent implements OnInit {
     if (!this.documentValidate.isValidate(this.documentAdd)) return;
     if (this.templateId) {
       this.documentsService.add(this.documentAdd.getDataForAdByTemplate(this.templateId, this.companyId)).subscribe(data => {
+        this.showNotificationAfterCreate(documentType);
         this.checkAttachments("", this.documentAdd.content);
         this.goToDocumentsList();
       })
     } else {
       this.documentsService.add(this.documentAdd.getDataForAdd()).subscribe(data => {
+        this.showNotificationAfterCreate(documentType);
         this.checkAttachments("", this.documentAdd.content);
         this.goToDocumentsList();
       })
+    }
+  }
+  showNotificationAfterCreate(documentType) {
+    if (documentType === "DOCUMENT") {
+      this.toastrService.success("The new document been successfully created");
+      this.appStateService.changeDetectorRef();
+    }
+    if (documentType === "TEMPLATE") {
+      this.toastrService.success("The new template been successfully created");
+      this.appStateService.changeDetectorRef();
     }
   }
   checkAttachments(content, newContent) {
@@ -79,6 +95,13 @@ export class DocumentsAddFooterComponent implements OnInit {
   edit() {
     if (!this.documentValidate.isValidate(this.documentEdit)) return;
     this.documentsService.edit(this.documentEdit.id, this.documentEdit.getDataForEdit()).subscribe(data => {
+      if (this.documentEdit.isTemplateForEdit()) {
+        this.toastrService.success("The template has been successfully updated");
+        this.appStateService.changeDetectorRef();
+      } else {
+        this.toastrService.success("The document has been successfully updated");
+        this.appStateService.changeDetectorRef();
+      }
       this.checkAttachments(this.documentEdit.content, this.documentEdit.newContent);
       this.goToDocumentsList();
     })

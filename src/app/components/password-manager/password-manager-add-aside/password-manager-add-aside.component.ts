@@ -17,6 +17,8 @@ import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 import { Subscription } from 'rxjs';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
 import { PasswordManagerLinkedComponent } from './password-manager-linked/password-manager-linked.component';
+import { ToastrService } from 'ngx-toastr';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 
 
 @Component({
@@ -62,6 +64,8 @@ export class PasswordManagerAddAsideComponent implements OnInit {
     private companiesState: CompaniesStateService,
     private devicesStateService: DevicesStateService,
     private usersStateService: UsersStateService,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService
   ) { }
 
   /**
