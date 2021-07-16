@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { CompaniesService } from 'src/app/services/company/companies.service';
 import { Company } from '../../interfaces/company/company';
 import { CompaniesStateService } from '../../states/company/companies-state.service';
 import { DefaultServicesStateService } from '../../states/default-services/default-services-state.service';
@@ -15,6 +16,7 @@ import { UsersStateService } from '../../states/users/users-state.service';
 })
 export class HeaderComponent implements OnInit {
   currentCompany: Company;
+  techCompanies: Array<string> = [];
   toggleLeftPanel: boolean = false;
   constructor(private usersStateService: UsersStateService,
     private ticketsStateService: TicketsStateService,
@@ -23,9 +25,14 @@ export class HeaderComponent implements OnInit {
     private defaultServicesStateService: DefaultServicesStateService,
     private leftPanelStateService: LeftPanelStateService,
     public cd: ChangeDetectorRef,
+    private companiesService: CompaniesService,
     private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
+    this.techCompanies = this.companiesStateService.getTechCompanies();
+    this.companiesStateService.onGetTechCompanies.subscribe(data => {
+      this.techCompanies = data;
+    })
     this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
       this.toggleLeftPanel = data;
       this.cd.detectChanges();
@@ -48,6 +55,13 @@ export class HeaderComponent implements OnInit {
        var e = document.createEvent('MouseEvents');
        e.initEvent('click', true, true);
        link.dispatchEvent(e);*/
+  }
+  goToTehCompany(data) {
+    if (this.companiesStateService.getCurrentCompany().name !== data) {
+      this.companiesService.switchScope(data, this.usersStateService.getCurrentUser().primaryEmail).subscribe(res => {
+        location.href = "/";
+      })
+    }
   }
   onAddTicket() {
     this.ticketsStateService.onToggleAddTicket();

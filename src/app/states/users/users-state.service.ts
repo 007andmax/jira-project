@@ -53,6 +53,12 @@ export class UsersStateService {
           if (Index > -1) this.allUsers[Index] = new User(data);
         });
       }
+      if (newChange.action === 'USER_ONLINE') {
+        if (this.getCurrentUser().id === newChange.data.id) {
+          window.location.href = '/logout';
+          window.location.hash = '';
+        }
+      }
       this.onChangeUsers.emit(new UserChange(newChange.action, newChange.data, this.allUsers));
     })
 

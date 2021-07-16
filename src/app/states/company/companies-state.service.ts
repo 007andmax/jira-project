@@ -18,6 +18,7 @@ export class CompaniesStateService {
   selectedCompanyId: string = null;
   onChangeSelectedCompanyId: EventEmitter<any> = new EventEmitter();
   onGetCompanies: EventEmitter<any> = new EventEmitter();
+  onGetTechCompanies: EventEmitter<any> = new EventEmitter();
   onGetIndustries: EventEmitter<any> = new EventEmitter();
   onChangeCompanies: EventEmitter<CompanyUpdate> = new EventEmitter();
   showAsideForAdd: EventEmitter<any> = new EventEmitter();
@@ -31,6 +32,7 @@ export class CompaniesStateService {
   filter: EventEmitter<any> = new EventEmitter();
   showArchivedCompanies: boolean = false;
   isInitCurrentCompany: boolean = false;
+  techCompanies: Array<string> = [];
   constructor(private companiesService: CompaniesService,
     private companiesRealTimeService: CompaniesRealTimeService,
     private websocketService: WebsocketService) {
@@ -40,6 +42,10 @@ export class CompaniesStateService {
     this.companiesService.getCompaniesList().subscribe((data: any) => {
       this.setAllCompanies(data);
       this.onInitGetCompanies(data);
+    })
+    this.companiesService.getTechCompanies().subscribe((data: any) => {
+      this.techCompanies = data;
+      this.onGetTechCompanies.emit(data);
     })
     this.companiesRealTimeService.changeCompanyArray.subscribe(newChange => {
       if (newChange.action === 'COMPANY_SAVED' || newChange.action === 'COMPANY_ARCHIVED') {
@@ -70,6 +76,9 @@ export class CompaniesStateService {
       }
       this.isInitCurrentCompany = true;
     })
+  }
+  public getTechCompanies() {
+    return this.techCompanies;
   }
   public onInitFilter(data) {
     this.filter.emit(data);
