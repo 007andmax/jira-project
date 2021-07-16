@@ -34,7 +34,7 @@ export class DocumentsService {
     return this.http.get(this.apiUrl + `documents/checkTitleUnique?title=${title}${someDocumentId ? `&documentId=${someDocumentId}` : ''}`);
   }
   public removeDocument(id) {
-    return this.http.delete(this.apiUrl + `documents/${id}`);
+    return this.http.delete(this.apiUrl + `documents/${id}`)
   }
   public removeDocumentAttachment(id) {
     return this.http.delete(this.apiUrl + `file/${id}`);

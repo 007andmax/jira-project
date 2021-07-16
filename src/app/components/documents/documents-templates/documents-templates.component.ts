@@ -1,9 +1,11 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { REMOVE_DOCUMENT } from 'src/app/const/confirm';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
@@ -34,6 +36,8 @@ export class DocumentsTemplatesComponent implements OnInit, OnDestroy {
     public activateRoute: ActivatedRoute,
     private router: Router,
     public leftPanelStateService: LeftPanelStateService,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService,
     private documentsStateService: DocumentsStateService) { }
 
   ngOnInit() {
@@ -74,6 +78,8 @@ export class DocumentsTemplatesComponent implements OnInit, OnDestroy {
   }
   removeDocument(item) {
     this.documentsService.removeDocument(item.id).subscribe(data => {
+      this.toastrService.success("The template has been successfully removed");
+      this.appStateService.changeDetectorRef();
     })
   }
   public goToDocumentsList() {
