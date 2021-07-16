@@ -44,7 +44,12 @@ export class InvoicesService {
     return this.http.get(`${this.apiUrl}invoice/getDataByInvoiceId?invoiceId=${invoiceId}`);
   }
   public rollback(invoiceId) {
-    return this.http.put(`${this.apiUrl}invoice/rollback?invoiceId=${invoiceId}`, {});
+    return this.http.put(`${this.apiUrl}invoice/rollback?invoiceId=${invoiceId}`, {}).pipe(
+      tap(data => {
+        this.toastrService.success("The invoice has been successfully rollbacked");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public remove(invoiceId) {
     return this.http.delete(`${this.apiUrl}invoice/delete?invoiceId=${invoiceId}`, {});

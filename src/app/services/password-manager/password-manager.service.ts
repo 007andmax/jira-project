@@ -111,7 +111,7 @@ export class PasswordManagerService {
 
     return this.http.post(this.apiUrl + 'passwordRecords', recordInfo).pipe(
       tap(data => {
-        this.toastrService.success("The new tax has been successfully created");
+        this.toastrService.success("The new password has been successfully created");
         this.appStateService.changeDetectorRef();
         return data;
       }));
