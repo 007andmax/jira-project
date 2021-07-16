@@ -160,7 +160,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       .getUsers()
       .pipe(
         map((users: any) => {
-          this.userlist = users.filter((u: any) => u.deletedAt !== null);
+          this.userlist = users.filter((u: any) => u.deletedAt !== null && u.accountType.toLowerCase() === 'tech');
           return users.filter(
             (user: any) =>
               user.accountType.toLowerCase() === 'tech' &&
