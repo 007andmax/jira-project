@@ -44,6 +44,9 @@ export class CompanyDashContractComponent implements OnInit {
     this._id = this.activateRoute.snapshot.params['id'];
     let subscription = this.activateRoute.params.subscribe(params => {
       this._id = params['id'];
+      this.statisticsCount = 0;
+      this.contractsList = [];
+      this.statistics = [];
       this.companiesStateService.setSelectedCompanyId(this._id);
       this.getContractsList();
     });

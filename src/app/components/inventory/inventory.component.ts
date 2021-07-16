@@ -25,7 +25,7 @@ export class InventoryComponent implements OnInit {
   inventoryList: Array<InventoryItem> = [];
   reqInventoryList: Array<InventoryItem> = [];
   filter: InventoryFilter = new InventoryFilter();
-  public infiniteScrollDisabled = false;
+  public infiniteScrollDisabled = true;
   public page_number: number = 0;
   showPreloader: boolean = true;
   companies = [];
