@@ -148,12 +148,10 @@ export class AppComponent implements OnInit {
       this.cd.detectChanges();
     })
     this.appStateService.onChangeDetectorRef.subscribe(data => {
-      console.log("onChangeDetectorRef");
       setTimeout(() => {
         this.cd.detectChanges();
         document.body.click();
       }, 500);
-
     })
   }
   ngDoCheck() {
