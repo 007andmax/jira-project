@@ -5,7 +5,6 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketProfile } from '../../class/ticket-profile';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
-import { NotificationStateService } from 'src/app/components/shared/notification/services/notification-state.service';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { MOVE_TO_SPAM_TICKET, MOVE_TO_TRASH_TICKET } from 'src/app/const/confirm';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
@@ -28,7 +27,6 @@ export class TicketProfileActionsComponent implements OnInit, OnDestroy {
     public ticketsPermissionsService: TicketsPermissionsService,
     private devicesStateService: DevicesStateService,
     private ticketsService: TicketsService,
-    private notificationStateService: NotificationStateService,
     private usersStateService: UsersStateService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
@@ -51,18 +49,15 @@ export class TicketProfileActionsComponent implements OnInit, OnDestroy {
   }
   onMoveToTrash() {
     this.ticketsService.trashTicket(this.ticketProfile.id, this.movedWay).subscribe(res => {
-      if (this.movedWay) this.notificationStateService.oninitShowNotification(`The ticket “${this.ticketProfile.number}” has been moved to Trash`);
     })
   }
   onMoveToSpam() {
     if (this.currentUser.isOwner) {
       this.ticketsService.markAsSpamTicket(this.ticketProfile.id, false).subscribe(res => {
-        this.notificationStateService.oninitShowNotification(`The ticket “${this.ticketProfile.number}” has been marked as spam`);
       })
 
     } else {
       this.ticketsService.reportAsSpamTicket(this.ticketProfile.id, false).subscribe(res => {
-        this.notificationStateService.oninitShowNotification(`The ticket “${this.ticketProfile.number}” has been reported as spam`);
       })
     }
   }

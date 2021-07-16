@@ -2,6 +2,9 @@ import { EventEmitter, Injectable } from '@angular/core';
 
 import { environment } from "../../../environments/environment";
 import { HttpClient } from "@angular/common/http";
+import { ToastrService } from 'ngx-toastr';
+import { AppStateService } from 'src/app/states/app/app-state.service';
+import { tap } from 'rxjs/operators';
 
 /**
  * Password manager service
@@ -32,7 +35,9 @@ export class PasswordManagerService {
    * @param {HttpClient} http Service to work with request
    */
   public constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService
   ) { }
   public showAddForm() {
     this.onAddForm.emit(null);
@@ -104,7 +109,12 @@ export class PasswordManagerService {
    */
   public saveRecord(recordInfo) {
 
-    return this.http.post(this.apiUrl + 'passwordRecords', recordInfo);
+    return this.http.post(this.apiUrl + 'passwordRecords', recordInfo).pipe(
+      tap(data => {
+        this.toastrService.success("The new password has been successfully created");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 
   public createRecord(data) {
@@ -118,7 +128,12 @@ export class PasswordManagerService {
    */
   public editRecord(recordInfo) {
 
-    return this.http.put(this.apiUrl + 'passwordRecords', recordInfo);
+    return this.http.put(this.apiUrl + 'passwordRecords', recordInfo).pipe(
+      tap(data => {
+        this.toastrService.success("The password has been successfully updated");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 
   public getCompanyRecords(id) {
@@ -142,7 +157,12 @@ export class PasswordManagerService {
   }
 
   public addCategories(name) {
-    return this.http.post(this.apiUrl + `passwordRecords/types?name=${name}`, {});
+    return this.http.post(this.apiUrl + `passwordRecords/types?name=${name}`, {}).pipe(
+      tap(data => {
+        this.toastrService.success("The new category has been successfully created");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 
   /**
@@ -150,7 +170,12 @@ export class PasswordManagerService {
   * @param recordId - id of record
   */
   public deleteRecord(recordId) {
-    return this.http.delete(this.apiUrl + `passwordRecords/${recordId}`);
+    return this.http.delete(this.apiUrl + `passwordRecords/${recordId}`).pipe(
+      tap(data => {
+        this.toastrService.success("The password has been successfully removed");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 
   /**

@@ -22,6 +22,7 @@ import { Router } from '@angular/router';
 import { PAGE_DEVICE, PAGE_MAIN } from './const/app';
 import { TagsStateService } from './states/tags/tags-state.service';
 import { DocumentsStateService } from './states/documents/documents-state.service';
+import { AppStateService } from './states/app/app-state.service';
 
 
 /**
@@ -73,6 +74,7 @@ export class AppComponent implements OnInit {
     private modalService: NgbModal,
     private router: Router,
     public cd: ChangeDetectorRef,
+    private appStateService: AppStateService
 
   ) { }
 
@@ -144,6 +146,14 @@ export class AppComponent implements OnInit {
     this.usersStateService.onChangeUserPermissions.subscribe(data => {
       this.usersStateService.changeUserPermissions(data);
       this.cd.detectChanges();
+    })
+    this.appStateService.onChangeDetectorRef.subscribe(data => {
+      console.log("onChangeDetectorRef");
+      setTimeout(() => {
+        this.cd.detectChanges();
+        document.body.click();
+      }, 500);
+
     })
   }
   ngDoCheck() {

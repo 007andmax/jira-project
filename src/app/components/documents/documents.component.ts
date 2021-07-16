@@ -1,9 +1,11 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { REMOVE_CATEGORY_DOCUMENT, REMOVE_DOCUMENT } from 'src/app/const/confirm';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
@@ -31,6 +33,8 @@ export class DocumentsComponent implements OnInit, OnDestroy {
     public activateRoute: ActivatedRoute,
     public leftPanelStateService: LeftPanelStateService,
     public companiesStateService: CompaniesStateService,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService,
     public documentsService: DocumentsService) {
   }
 
@@ -112,6 +116,8 @@ export class DocumentsComponent implements OnInit, OnDestroy {
   }
   removeDocument(item) {
     this.documentsService.removeDocument(item.id).subscribe(data => {
+      this.toastrService.success("The document has been successfully removed");
+      this.appStateService.changeDetectorRef();
     })
   }
   getNameDocument(item: Document) {

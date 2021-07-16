@@ -1,5 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { tap } from 'rxjs/operators';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -15,6 +18,8 @@ export class DocumentsService {
    */
   public constructor(
     private http: HttpClient,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService
 
   ) { }
 
@@ -29,7 +34,7 @@ export class DocumentsService {
     return this.http.get(this.apiUrl + `documents/checkTitleUnique?title=${title}${someDocumentId ? `&documentId=${someDocumentId}` : ''}`);
   }
   public removeDocument(id) {
-    return this.http.delete(this.apiUrl + `documents/${id}`);
+    return this.http.delete(this.apiUrl + `documents/${id}`)
   }
   public removeDocumentAttachment(id) {
     return this.http.delete(this.apiUrl + `file/${id}`);
@@ -56,7 +61,7 @@ export class DocumentsService {
     return this.http.post(this.apiUrl + `documents`, data);
   }
   public edit(id, data) {
-    return this.http.put(this.apiUrl + `documents/${id}`, data);
+    return this.http.put(this.apiUrl + `documents/${id}`, data)
   }
   public filterDocuments(data) {
     return this.http.post(this.apiUrl + `documents/filtered`, data);

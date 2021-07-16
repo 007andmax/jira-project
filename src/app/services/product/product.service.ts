@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 
 import { environment } from "../../../environments/environment";
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { CategoryProductitem } from 'src/class/category-product-item';
 import { InventoryItem } from '../../components/inventory/class/inventory-item';
 import { CategoryProduct } from '../../interfaces/product/category-product';
+import { ToastrService } from 'ngx-toastr';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 
 /**
  * Product service to work with api
@@ -22,7 +24,9 @@ export class ProductService {
    * @param {HttpClient} http Service to work with request
    */
   public constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService
   ) { }
 
   /**
@@ -50,7 +54,12 @@ export class ProductService {
   * remove product 
   */
   public removeProduct(id) {
-    return this.http.delete(`${this.apiUrl}products/${id}`);
+    return this.http.delete(`${this.apiUrl}products/${id}`).pipe(
+      tap(data => {
+        this.toastrService.success("The product has been successfully removed");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 
   /**
@@ -95,7 +104,12 @@ export class ProductService {
 * add  category
 */
   public addCategory(name) {
-    return this.http.post(`${this.apiUrl}products/categories`, { name: name });
+    return this.http.post(`${this.apiUrl}products/categories`, { name: name }).pipe(
+      tap(data => {
+        this.toastrService.success("The new category has been successfully created");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 
   /**
