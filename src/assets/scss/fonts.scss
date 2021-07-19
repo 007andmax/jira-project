@@ -1,20 +1,3 @@
-//@mixin font($fname, $furl, $fstyle, $fweight ) {
-//  @font-face {
-//    font-family: $fname;
-//    src: url($furl) format('truetype');
-//    font-style: $fstyle;
-//    font-weight: $fweight;
-//  }
-//}
-//
-//@include font('Inter', '/assets/fonts/inter/Inter-Light.ttf', normal, 300);
-//@include font('Inter', '/assets/fonts/inter/Inter-Regular.ttf', normal, 400);
-//@include font('Inter', '/assets/fonts/inter/Inter-Medium.ttf', normal, 500);
-//@include font('Inter', '/assets/fonts/inter/Inter-SemiBold.ttf', normal, 600);
-//@include font('Inter', '/assets/fonts/inter/Inter-Bold.ttf', normal, 700);
-//@include font('Inter', '/assets/fonts/inter/Inter-ExtraBold.ttf', normal, 800);
-//@include font('Inter', '/assets/fonts/inter/Inter-Black.ttf', normal, 900);
-
 @mixin font($ffname, $path, $fname, $flocal, $fstyle, $fweight ) {
   @font-face {
     font-family: $ffname;

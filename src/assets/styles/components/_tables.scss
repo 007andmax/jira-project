@@ -1,4 +1,5 @@
 @import './src/assets/styles/variable';
+@import './assets/styles/fonts.scss';
 
 table.qt-table-modern {
   width: 100%;
@@ -9,6 +10,9 @@ table.qt-table-modern {
     font-size: 12px;
     th {
       padding: 8px;
+      @extend %сaption-m-sb;
+      color: $primary-2;
+      text-transform: uppercase;
       &:first-child {
         padding-left: 16px;
       }
@@ -18,7 +22,8 @@ table.qt-table-modern {
     }
   }
   tbody {
-    font-size: 13px;
+    //font-size: 13px;
+    @extend %body-m;
     tr {
       td {
         background: $white;

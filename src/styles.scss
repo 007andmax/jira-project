@@ -3,6 +3,69 @@
 @import './assets/styles/icons.scss';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import './assets/styles/main.scss';
+@import './assets/styles/fonts.scss';
+
+h3, .h3 {
+  @extend %h3;
+  margin: 0;
+}
+h4, .h4 {
+  @extend %h4;
+  margin: 0;
+}
+h5, .h5 {
+  @extend %h5;
+  margin: 0;
+}
+h6, .h6 {
+  @extend %h6;
+  margin: 0;
+}
+.сaption-l {
+  @extend %сaption-l;
+}
+
+//h1, h2, h3, h4, h5, h6 {
+//  color: $primary-2;
+//}
+//.h1 {
+//  @include font-style(40px, 48px, 300, -2.5px);
+//}
+//.h2 {
+//  @include font-style(32px, 40px, 500, -0.5px);
+//}
+//h3, .h3 {
+//  @include font-style(26px, 34px, 400, -0.5px);
+//}
+//h4, .h4 {
+//  @include font-style(22px, 32px, 400, 0);
+//  margin: 0;
+//}
+//.h5 {
+//  @include font-style(20px, 28px, 400, -0.5px);
+//}
+//h6, .h6 {
+//  @include font-style(18px, 26px, 400, 0);
+//  margin: 0;
+//}
+//.body-l {
+//  @include font-style(16px, 24px, 400, 0);
+//}
+//.body-m {
+//  @include font-style(14px, 20px, 400, 0);
+//}
+//.сaption-l {
+//  @include font-style(12px, 16px, 400, 0);
+//}
+//.сaption-m {
+//  @include font-style(11px, 16px, 400, 0);
+//}
+//.label-l {
+//  @include font-style(10px, 12px, 400, 0);
+//}
+//.label-m {
+//  @include font-style(9px, 10px, 400, 0);
+//}
 
 //COMMON STYLES ----------------------------
 .d-f {
@@ -1004,6 +1067,7 @@ app-quotes-item {
     width: 450px;
   }
 }
+// To Do Fix
 .products-content__header h3,
 .new-companies-content__header h3,
 .new-users-content__header h3,
@@ -1368,9 +1432,9 @@ app-quotes-item {
       }
       [class*='col-md-'],
       [class*='col-md-'] p {
-        font-size: 12px;
+        @extend %сaption-m-sb;
         color: $primary-2;
-        font-weight: 600;
+        text-transform: uppercase;
       }
     }
   }
@@ -2806,8 +2870,9 @@ app-ticket-edit-aside-devices  {
 
   app-taxes {
     .label-name {
-      font-weight: 600;
-      line-height: 21px;
+      //font-weight: 600;
+      //line-height: 21px;
+      margin-bottom: 5px;
     }
 
     .new-taxes-area {
@@ -2891,9 +2956,11 @@ app-ticket-edit-aside-devices  {
 
 .create-product {
   .label-name {
-    font-size: 13px !important;
-    margin-bottom: 8px !important;
-    font-weight: 600;
+    //font-size: 13px !important;
+    //margin-bottom: 8px !important;
+    margin-bottom: 8px;
+    @extend %body-m-sb;
+    font-weight: 700;
   }
 }
 
