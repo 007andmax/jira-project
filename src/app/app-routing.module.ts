@@ -334,10 +334,7 @@ const routes: Routes = [
  */
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, {
-      useHash: true,
-      enableTracing: false,
-    }),
+    RouterModule.forRoot(routes),
   ],
   exports: [RouterModule],
 })
