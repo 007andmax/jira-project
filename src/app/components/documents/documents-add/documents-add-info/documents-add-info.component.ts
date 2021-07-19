@@ -68,7 +68,7 @@ export class DocumentsAddInfoComponent implements OnInit {
   public goToDocumentsList() {
     if (this.companyId) {
       this.router.navigate(
-        ['/ng2/company/', this.companyId, 'documents']);
+        ['/company/', this.companyId, 'documents']);
     } else {
       this.leftPanelStateService.goToState('new-documents');
     }

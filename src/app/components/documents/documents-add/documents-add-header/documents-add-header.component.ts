@@ -10,6 +10,7 @@ import { REMOVE_DOCUMENT } from 'src/app/const/confirm';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { Subscription } from 'rxjs';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
   selector: 'app-documents-add-header',
@@ -27,6 +28,7 @@ export class DocumentsAddHeaderComponent implements OnInit, OnDestroy {
     private documentsService: DocumentsService,
     public documentsStateService: DocumentsStateService,
     public confirmStateService: ConfirmStateService,
+    private companiesStateService: CompaniesStateService,
     private permissionsService: PermissionsService,) { }
 
 
@@ -54,7 +56,7 @@ export class DocumentsAddHeaderComponent implements OnInit, OnDestroy {
     this.documentsStateService.setDocumentForRemove(this.documentEdit);
   }
   previewDocument() {
-    const url = `/#/ng2/documents/preview/${this.documentEdit.id}`;
+    const url = `/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/documents/preview/${this.documentEdit.id}`;
     window.open(url, '_blank');
   }
   onToggleLeftPanel() {

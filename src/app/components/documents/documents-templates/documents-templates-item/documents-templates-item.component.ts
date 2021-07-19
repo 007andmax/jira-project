@@ -45,7 +45,7 @@ export class DocumentsTemplatesItemComponent implements OnInit {
   }
   editDocument(item) {
     this.router.navigate(
-      ['/ng2/documents/edit/', item.id]);
+      ['/documents/edit/', item.id]);
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)

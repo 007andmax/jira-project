@@ -11,6 +11,7 @@ import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { DeviceCompanyAsideParams } from '../class/device-company-aside-params';
 import { CompanyDevicesEditLabelComponent } from '../company-devices-edit-label/company-devices-edit-label.component';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
   selector: 'app-company-devices-item',
@@ -28,6 +29,7 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
     private permissionsService: PermissionsService,
     private devicesStateService: DevicesStateService,
     private confirmStateService: ConfirmStateService,
+    private companiesStateService: CompaniesStateService,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
@@ -51,7 +53,7 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
   gotiDetailDevice() {
     localStorage.setItem('agentId', this.device.agentId);
     localStorage.setItem('type', this.device.type);
-    var url = `/#/ng2/device/dashboard/${this.device.type}/${this.device.agentId}`;
+    var url = `/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/dashboard/${this.device.type}/${this.device.agentId}`;
     window.open(url, '_blank');
   };
   remoteAccess(connectionType) {

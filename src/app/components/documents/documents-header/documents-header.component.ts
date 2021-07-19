@@ -67,12 +67,12 @@ export class DocumentsHeaderComponent implements OnInit {
   goToAddDocument() {
     if (this.getPermissions('CREATE_DOCUMENT')) {
       this.router.navigate(
-        ['/ng2/documents/add'], { queryParams: { companyId: this.companyId } });
+        ['/documents/add'], { queryParams: { companyId: this.companyId } });
     }
   }
   goToTemplates() {
     this.router.navigate(
-      ['/ng2/documents/templates'], { queryParams: { companyId: this.companyId } });
+      ['/documents/templates'], { queryParams: { companyId: this.companyId } });
   }
   onChangeCountFilter(data) {
     this.countFilter = data;

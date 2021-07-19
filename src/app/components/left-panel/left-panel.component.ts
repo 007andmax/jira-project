@@ -59,74 +59,74 @@ export class LeftPanelComponent implements OnInit {
           this.leftPanelStateService.toggleLeftPanel(false);
         }
         if (this.state === '') {
-          if (window.location.href.includes(`ng2/companies`)) this.state = 'new-companies';
-          if (window.location.href.includes(`ng2/billing-dashboard`)) this.state = 'billing-dashboard';
-          if (window.location.href.includes(`ng2/default-services`)) this.state = 'new-services';
-          if (window.location.href.includes(`ng2/billable`)) this.state = 'new-billable';
-          if (window.location.href.includes(`ng2/invoices`)) this.state = 'new-billable-invoices';
-          if (window.location.href.includes(`ng2/quotes`)) this.state = 'quotes-component';
-          if (window.location.href.includes(`ng2/payments`)) this.state = 'new-payments-ng2';
-          if (window.location.href.includes(`ng2/contracts`)) this.state = 'new-contracts';
-          if (window.location.href.includes(`ng2/company/`) && window.location.href.includes(`dashboard`)) this.state = 'company-dashboard';
-          if (window.location.href.includes(`ng2/company/`) && window.location.href.includes(`tickets`)) this.state = 'company-tickets';
-          if (window.location.href.includes(`ng2/company/`) && window.location.href.includes(`user`)) this.state = 'company-user';
-          if (window.location.href.includes(`ng2/company/`) && window.location.href.includes(`devices`)) this.state = 'company-devices';
-          if (window.location.href.includes(`ng2/company/`) && window.location.href.includes(`network-scan`)) this.state = 'company-network-scan';
-          if (window.location.href.includes(`ng2/company/`) && window.location.href.includes(`password-manager`)) this.state = 'company-password-manager';
-          if (window.location.href.includes(`ng2/company/`) && window.location.href.includes(`products`)) this.state = 'company-products';
-          if (window.location.href.includes(`ng2/company/`) && window.location.href.includes(`contracts`)) this.state = 'company-contracts';
-          if (window.location.href.includes(`ng2/company/`) && window.location.href.includes(`documents`)) this.state = 'company-documents';
+          if (window.location.href.includes(`/companies`)) this.state = 'new-companies';
+          if (window.location.href.includes(`/billing-dashboard`)) this.state = 'billing-dashboard';
+          if (window.location.href.includes(`/default-services`)) this.state = 'new-services';
+          if (window.location.href.includes(`/billable`)) this.state = 'new-billable';
+          if (window.location.href.includes(`/invoices`)) this.state = 'new-billable-invoices';
+          if (window.location.href.includes(`/quotes`)) this.state = 'quotes-component';
+          if (window.location.href.includes(`/payments`)) this.state = 'new-payments-ng2';
+          if (window.location.href.includes(`/contracts`)) this.state = 'new-contracts';
+          if (window.location.href.includes(`/company/`) && window.location.href.includes(`dashboard`)) this.state = 'company-dashboard';
+          if (window.location.href.includes(`/company/`) && window.location.href.includes(`tickets`)) this.state = 'company-tickets';
+          if (window.location.href.includes(`/company/`) && window.location.href.includes(`user`)) this.state = 'company-user';
+          if (window.location.href.includes(`/company/`) && window.location.href.includes(`devices`)) this.state = 'company-devices';
+          if (window.location.href.includes(`/company/`) && window.location.href.includes(`network-scan`)) this.state = 'company-network-scan';
+          if (window.location.href.includes(`/company/`) && window.location.href.includes(`password-manager`)) this.state = 'company-password-manager';
+          if (window.location.href.includes(`/company/`) && window.location.href.includes(`products`)) this.state = 'company-products';
+          if (window.location.href.includes(`/company/`) && window.location.href.includes(`contracts`)) this.state = 'company-contracts';
+          if (window.location.href.includes(`/company/`) && window.location.href.includes(`documents`)) this.state = 'company-documents';
 
-          if (window.location.href.includes(`ng2/inventory/products`)) this.state = 'inventory';
-          if (window.location.href.includes(`ng2/password-manager`)) this.state = 'password-manager';
-          if (window.location.href.includes(`ng2/setting/myprofile`)) this.state = 'myprofile-component';
-          if (window.location.href.includes(`ng2/setting/tags`)) this.state = 'manage-tags-component';
-          if (window.location.href.includes(`ng2/setting/glnumber`)) this.state = 'glnumber-component';
-          if (window.location.href.includes(`ng2/setting/companyprofile`)) this.state = 'company-profile-component';
-          if (window.location.href.includes(`ng2/setting/techUsers`)) this.state = 'tech-component';
-          if (window.location.href.includes(`ng2/setting/emailSetting`)) this.state = 'email-setting-component';
-          if (window.location.href.includes(`ng2/setting/taxes`)) this.state = 'taxes-component';
-          if (window.location.href.includes(`ng2/setting/permission`)) this.state = 'permission-manage-component';
-          if (window.location.href.includes(`ng2/setting/emailTemplete`)) this.state = 'email-templete-component';
-          if (window.location.href.includes(`ng2/setting/integration`)) this.state = 'integrations-component';
-          if (window.location.href.includes(`ng2/setting/invoiceTickets`)) this.state = 'invoice-ticket-component';
-          if (window.location.href.includes(`ng2/setting/commission`)) this.state = 'commission-component';
-          if (window.location.href.includes(`ng2/setting/subscription`)) this.state = 'subscription-component';
-          if (window.location.href.includes(`ng2/users`)) this.state = 'new-users';
-          if (window.location.href.includes(`ng2/reports`)) this.state = 'new-reports';
-          if (window.location.href.includes(`ng2/tickets-dashboard`)) this.state = 'new-tickets-dashboard';
-          if (window.location.href.includes(`ng2/tickets`)) this.state = 'new-tickets';
-          if (window.location.href.includes(`ng2/recurring-tickets`)) this.state = 'recurring-tickets';
-          if (window.location.href.includes(`ng2/quickSupport`)) this.state = 'new-quickSupport';
-          if (window.location.href.includes(`ng2/billable-tickets`)) this.state = 'new-billable-tickets';
-          if (window.location.href.includes(`ng2/documents`)) this.state = 'new-documents';
-          if (window.location.href.includes(`ng2/documents/add`)) this.state = 'new-add-documents';
-          if (window.location.href.includes(`ng2/documents/category`)) this.state = 'new-category-documents';
-          if (window.location.href.includes(`ng2/documents/edit`)) this.state = 'new-edit-documents';
-          if (window.location.href.includes(`ng2/documents/templates`)) this.state = 'new-template-documents';
-          if (window.location.href.includes(`ng2/documents/preview`)) this.state = 'new-preview-documents';
-
-
+          if (window.location.href.includes(`/inventory/products`)) this.state = 'inventory';
+          if (window.location.href.includes(`/password-manager`)) this.state = 'password-manager';
+          if (window.location.href.includes(`/setting/myprofile`)) this.state = 'myprofile-component';
+          if (window.location.href.includes(`/setting/tags`)) this.state = 'manage-tags-component';
+          if (window.location.href.includes(`/setting/glnumber`)) this.state = 'glnumber-component';
+          if (window.location.href.includes(`/setting/companyprofile`)) this.state = 'company-profile-component';
+          if (window.location.href.includes(`/setting/techUsers`)) this.state = 'tech-component';
+          if (window.location.href.includes(`/setting/emailSetting`)) this.state = 'email-setting-component';
+          if (window.location.href.includes(`/setting/taxes`)) this.state = 'taxes-component';
+          if (window.location.href.includes(`/setting/permission`)) this.state = 'permission-manage-component';
+          if (window.location.href.includes(`/setting/emailTemplete`)) this.state = 'email-templete-component';
+          if (window.location.href.includes(`/setting/integration`)) this.state = 'integrations-component';
+          if (window.location.href.includes(`/setting/invoiceTickets`)) this.state = 'invoice-ticket-component';
+          if (window.location.href.includes(`/setting/commission`)) this.state = 'commission-component';
+          if (window.location.href.includes(`/setting/subscription`)) this.state = 'subscription-component';
+          if (window.location.href.includes(`/users`)) this.state = 'new-users';
+          if (window.location.href.includes(`/reports`)) this.state = 'new-reports';
+          if (window.location.href.includes(`/tickets-dashboard`)) this.state = 'new-tickets-dashboard';
+          if (window.location.href.includes(`/tickets`)) this.state = 'new-tickets';
+          if (window.location.href.includes(`/recurring-tickets`)) this.state = 'recurring-tickets';
+          if (window.location.href.includes(`/quickSupport`)) this.state = 'new-quickSupport';
+          if (window.location.href.includes(`/billable-tickets`)) this.state = 'new-billable-tickets';
+          if (window.location.href.includes(`/documents`)) this.state = 'new-documents';
+          if (window.location.href.includes(`/documents/add`)) this.state = 'new-add-documents';
+          if (window.location.href.includes(`/documents/category`)) this.state = 'new-category-documents';
+          if (window.location.href.includes(`/documents/edit`)) this.state = 'new-edit-documents';
+          if (window.location.href.includes(`/documents/templates`)) this.state = 'new-template-documents';
+          if (window.location.href.includes(`/documents/preview`)) this.state = 'new-preview-documents';
 
 
 
-          if (window.location.href.includes(`ng2/report/byProducts`)) this.state = 'byProducts';
-          if (window.location.href.includes(`ng2/report/byCustomers`)) this.state = 'byCustomers';
-          if (window.location.href.includes(`ng2/report/byTaxes`)) this.state = 'byTaxes';
-          if (window.location.href.includes(`ng2/report/common-commissions`)) this.state = 'common-commissions';
-          if (window.location.href.includes(`ng2/report/detailed-commissions`)) this.state = 'detailed-commissions';
-          if (window.location.href.includes(`ng2/report/accounts-receivable`)) this.state = 'accounts-receivable';
-          if (window.location.href.includes(`ng2/report/accounting-report`)) this.state = 'accounting-report';
-          if (window.location.href.includes(`ng2/report/remote-access`)) this.state = 'remote-access';
-          if (window.location.href.includes(`ng2/report/software-summary`)) this.state = 'software-summary';
-          if (window.location.href.includes(`ng2/report/hardware-summary`)) this.state = 'hardware-summary';
-          if (window.location.href.includes(`ng2/report/device-ip-summary`)) this.state = 'device-ip-summary';
-          if (window.location.href.includes(`ng2/report/tech-sales`)) this.state = 'tech-sales';
-          if (window.location.href.includes(`ng2/report/tech-ticket`)) this.state = 'tech-ticket';
-          if (window.location.href.includes(`ng2/report/tech-service`)) this.state = 'tech-service';
-          if (window.location.href.includes(`ng2/report/ticket-report`)) this.state = 'ticket-report';
-          if (window.location.href.includes(`ng2/report/service-report`)) this.state = 'service-report';
-          if (window.location.href.includes(`ng2/report/income-accounts`)) this.state = 'income-accounts';
+
+
+          if (window.location.href.includes(`/report/byProducts`)) this.state = 'byProducts';
+          if (window.location.href.includes(`/report/byCustomers`)) this.state = 'byCustomers';
+          if (window.location.href.includes(`/report/byTaxes`)) this.state = 'byTaxes';
+          if (window.location.href.includes(`/report/common-commissions`)) this.state = 'common-commissions';
+          if (window.location.href.includes(`/report/detailed-commissions`)) this.state = 'detailed-commissions';
+          if (window.location.href.includes(`/report/accounts-receivable`)) this.state = 'accounts-receivable';
+          if (window.location.href.includes(`/report/accounting-report`)) this.state = 'accounting-report';
+          if (window.location.href.includes(`/report/remote-access`)) this.state = 'remote-access';
+          if (window.location.href.includes(`/report/software-summary`)) this.state = 'software-summary';
+          if (window.location.href.includes(`/report/hardware-summary`)) this.state = 'hardware-summary';
+          if (window.location.href.includes(`/report/device-ip-summary`)) this.state = 'device-ip-summary';
+          if (window.location.href.includes(`/report/tech-sales`)) this.state = 'tech-sales';
+          if (window.location.href.includes(`/report/tech-ticket`)) this.state = 'tech-ticket';
+          if (window.location.href.includes(`/report/tech-service`)) this.state = 'tech-service';
+          if (window.location.href.includes(`/report/ticket-report`)) this.state = 'ticket-report';
+          if (window.location.href.includes(`/report/service-report`)) this.state = 'service-report';
+          if (window.location.href.includes(`/report/income-accounts`)) this.state = 'income-accounts';
 
 
 
@@ -166,53 +166,53 @@ export class LeftPanelComponent implements OnInit {
   }
 
   public goToLink(url) {
-    this.router.navigate([url]);
+    this.router.navigate([this.companiesStateService.getCurrentCompany().name.replaceAll(' ', ''), url]);
   }
   onChangeState(data) {
     if (this.state !== data) {
       this.state = data;
-      if (this.state === 'new-companies') this.goToLink(`/ng2/companies`);
-      if (this.state === 'billing-dashboard') this.goToLink('/ng2/billing-dashboard');
-      if (this.state === 'new-services') this.goToLink('/ng2/default-services');
-      if (this.state === 'new-billable') this.goToLink('/ng2/billable');
-      if (this.state === 'new-billable-invoices') this.goToLink('/ng2/invoices');
-      if (this.state === 'quotes-component') this.goToLink('/ng2/quotes');
-      if (this.state === 'new-payments-ng2') this.goToLink('/ng2/payments');
-      if (this.state === 'new-contracts') this.goToLink('/ng2/contracts');
-      if (this.state === 'company-dashboard') this.goToLink(`/ng2/company/dashboard/${this.companiesStateService.getSelectedCompanyId()}`);
-      if (this.state === 'company-tickets') this.goToLink('/ng2/company/tickets');
-      if (this.state === 'company-user') this.goToLink('/ng2/company/user');
-      if (this.state === 'company-devices') this.goToLink('/ng2/company/devices');
-      if (this.state === 'company-network-scan') this.goToLink('/ng2/company/network-scan');
-      if (this.state === 'company-password-manager') this.goToLink('/ng2/company/password-manager');
-      if (this.state === 'company-products') this.goToLink('/ng2/company/products');
-      if (this.state === 'company-contracts') this.goToLink('/ng2/company/contracts');
-      if (this.state === 'inventory') this.goToLink(`/ng2/inventory/products`);
-      if (this.state === 'password-manager') this.goToLink(`/ng2/password-manager`);
-      if (this.state === 'myprofile-component') this.goToLink('/ng2/setting/myprofile');
-      if (this.state === 'manage-tags-component') this.goToLink('/ng2/setting/tags');
-      if (this.state === 'glnumber-component') this.goToLink('/ng2/setting/glnumber');
-      if (this.state === 'company-profile-component') this.goToLink('/ng2/setting/companyprofile');
-      if (this.state === 'tech-component') this.goToLink('/ng2/setting/techUsers');
-      if (this.state === 'email-setting-component') this.goToLink('/ng2/setting/emailSetting');
-      if (this.state === 'taxes-component') this.goToLink('/ng2/setting/taxes');
-      if (this.state === 'permission-manage-component') this.goToLink('/ng2/setting/permission');
-      if (this.state === 'email-templete-component') this.goToLink('/ng2/setting/emailTemplete');
-      if (this.state === 'integrations-component') this.goToLink('/ng2/setting/integration');
-      if (this.state === 'invoice-ticket-component') this.goToLink('/ng2/setting/invoiceTickets');
-      if (this.state === 'commission-component') this.goToLink('/ng2/setting/commission');
-      if (this.state === 'subscription-component') this.goToLink('/ng2/setting/subscription');
-      if (this.state === 'new-users') this.goToLink('/ng2/users');
-      if (this.state === 'new-reports') this.goToLink('/ng2/reports');
-      if (this.state === 'new-tickets-dashboard') this.goToLink('/ng2/tickets-dashboard');
-      if (this.state === 'new-tickets') this.goToLink('/ng2/tickets');
-      if (this.state === 'recurring-tickets') this.goToLink('/ng2/recurring-tickets');
-      if (this.state === 'new-quickSupport') this.goToLink('/ng2/quickSupport');
-      if (this.state === 'new-billable-tickets') this.goToLink('/ng2/billable-tickets');
-      if (this.state === 'new-documents') this.goToLink('/ng2/documents');
-      if (this.state === 'new-add-documents') this.goToLink('/ng2/documents/add');
-      if (this.state === 'new-template-documents') this.goToLink('/ng2/documents/templates');
-      if (this.state === 'company-documents') this.goToLink(`/ng2/company/${this.companiesStateService.getSelectedCompanyId()}/documents`);
+      if (this.state === 'new-companies') this.goToLink(`companies`);
+      if (this.state === 'billing-dashboard') this.goToLink('billing-dashboard');
+      if (this.state === 'new-services') this.goToLink('default-services');
+      if (this.state === 'new-billable') this.goToLink('billable');
+      if (this.state === 'new-billable-invoices') this.goToLink('invoices');
+      if (this.state === 'quotes-component') this.goToLink('quotes');
+      if (this.state === 'new-payments-ng2') this.goToLink('payments');
+      if (this.state === 'new-contracts') this.goToLink('contracts');
+      if (this.state === 'company-dashboard') this.goToLink(`company/dashboard/${this.companiesStateService.getSelectedCompanyId()}`);
+      if (this.state === 'company-tickets') this.goToLink('company/tickets');
+      if (this.state === 'company-user') this.goToLink('company/user');
+      if (this.state === 'company-devices') this.goToLink('company/devices');
+      if (this.state === 'company-network-scan') this.goToLink('company/network-scan');
+      if (this.state === 'company-password-manager') this.goToLink('company/password-manager');
+      if (this.state === 'company-products') this.goToLink('company/products');
+      if (this.state === 'company-contracts') this.goToLink('company/contracts');
+      if (this.state === 'inventory') this.goToLink(`inventory/products`);
+      if (this.state === 'password-manager') this.goToLink(`password-manager`);
+      if (this.state === 'myprofile-component') this.goToLink('setting/myprofile');
+      if (this.state === 'manage-tags-component') this.goToLink('setting/tags');
+      if (this.state === 'glnumber-component') this.goToLink('setting/glnumber');
+      if (this.state === 'company-profile-component') this.goToLink('setting/companyprofile');
+      if (this.state === 'tech-component') this.goToLink('setting/techUsers');
+      if (this.state === 'email-setting-component') this.goToLink('setting/emailSetting');
+      if (this.state === 'taxes-component') this.goToLink('setting/taxes');
+      if (this.state === 'permission-manage-component') this.goToLink('setting/permission');
+      if (this.state === 'email-templete-component') this.goToLink('setting/emailTemplete');
+      if (this.state === 'integrations-component') this.goToLink('setting/integration');
+      if (this.state === 'invoice-ticket-component') this.goToLink('setting/invoiceTickets');
+      if (this.state === 'commission-component') this.goToLink('setting/commission');
+      if (this.state === 'subscription-component') this.goToLink('setting/subscription');
+      if (this.state === 'new-users') this.goToLink('users');
+      if (this.state === 'new-reports') this.goToLink('reports');
+      if (this.state === 'new-tickets-dashboard') this.goToLink('tickets-dashboard');
+      if (this.state === 'new-tickets') this.goToLink('tickets');
+      if (this.state === 'recurring-tickets') this.goToLink('recurring-tickets');
+      if (this.state === 'new-quickSupport') this.goToLink('quickSupport');
+      if (this.state === 'new-billable-tickets') this.goToLink('billable-tickets');
+      if (this.state === 'new-documents') this.goToLink('documents');
+      if (this.state === 'new-add-documents') this.goToLink('documents/add');
+      if (this.state === 'new-template-documents') this.goToLink('documents/templates');
+      if (this.state === 'company-documents') this.goToLink(`company/${this.companiesStateService.getSelectedCompanyId()}/documents`);
 
 
       if (this.state === 'byProducts' ||
@@ -231,7 +231,7 @@ export class LeftPanelComponent implements OnInit {
         this.state === 'tech-service' ||
         this.state === 'ticket-report' ||
         this.state === 'service-report' ||
-        this.state === 'income-accounts') this.goToLink('/ng2/report/' + this.state);
+        this.state === 'income-accounts') this.goToLink('report/' + this.state);
 
 
       this.leftPanelStateService.changeState(this.state);

@@ -36,7 +36,7 @@ export class DocumentsTableComponent implements OnInit {
   navigateToCategory() {
     if (!this.item.isCategory) return;
     this.router.navigate(
-      ['/ng2/documents/category/', this.item.categoryId]);
+      ['/documents/category/', this.item.categoryId]);
   }
   showTemplate() {
     if (!this.item.isCategory && this.getPermissions('VIEW_DOCUMENT')) this.documentsStateService.onInitGetTemplate(this.item);
@@ -64,7 +64,7 @@ export class DocumentsTableComponent implements OnInit {
   }
 
   previewDocument() {
-    const url = `/#/ng2/documents/preview/${this.item.id}`;
+    const url = `/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/documents/preview/${this.item.id}`;
     window.open(url, '_blank');
   }
   public getPermissions(action) {

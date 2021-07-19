@@ -13,7 +13,7 @@ export class CompanyDocumentsTableComponent extends DocumentsTableComponent {
       if (this.item.documentType === "DOCUMENT") this.documentsStateService.onInitGetTemplate(this.item);
       if (this.item.documentType === "TEMPLATE") {
         this.router.navigate(
-          ['/ng2/documents/add/'], {
+          ['/documents/add/'], {
           queryParams: {
             template: this.item.id,
             clone_document: this.item.id,

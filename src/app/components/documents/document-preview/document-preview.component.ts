@@ -63,7 +63,7 @@ export class DocumentPreviewComponent implements OnInit {
   editDocument() {
     this.leftPanelStateService.hideLeftPanel(false);
     this.router.navigate(
-      ['/ng2/documents/edit/', this.document.id]);
+      ['/documents/edit/', this.document.id]);
   }
   getLastEdit() {
     let date = new Date(this.document.updatedAt);

@@ -71,7 +71,7 @@ export class GlobalSearchComponent implements OnInit {
       this.companiesStateService.setSelectedCompanyId(item.id);
       // this.leftPanelStateService.goToState('company-dashboard');
       this.router.navigate(
-        ['/ng2/company/', item.id, 'dashboard']);
+        ['/company/', item.id, 'dashboard']);
 
       this.leftPanelStateService.openCompanPage();
 
