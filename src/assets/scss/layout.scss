@@ -259,7 +259,7 @@ img{display:inline-block;max-width:100%;}
 }
 
 /*** Heading ***/
-
+// TODO repalce h
 h1,.h1{
     font-size: 20px;
     font-style: normal;
@@ -297,26 +297,26 @@ h4,.h4{
     margin:0 0 20px 0;
     text-transform: capitalize;
 }
-h5,.h5{
-    font-size: 13px;
-    font-weight: 600;
-    line-height: 1.54;
-    letter-spacing: normal;
-    color: $primary-2;
-    margin:0 0 20px 0;
-    text-transform: capitalize;
-}
-h6,.h6{
-
-  font-size: 10px;
-  font-weight: 600;
-  line-height: 0.8;
-  letter-spacing: normal;
-  color: $primary-2;
-  margin:0 0 20px 0;
-  text-transform: capitalize;
-
-}
+//h5,.h5{
+//    font-size: 13px;
+//    font-weight: 600;
+//    line-height: 1.54;
+//    letter-spacing: normal;
+//    color: $primary-2;
+//    margin:0 0 20px 0;
+//    text-transform: capitalize;
+//}
+//h6,.h6{
+//
+//  font-size: 10px;
+//  font-weight: 600;
+//  line-height: 0.8;
+//  letter-spacing: normal;
+//  color: $primary-2;
+//  margin:0 0 20px 0;
+//  text-transform: capitalize;
+//
+//}
 a{color:$primary-1;text-decoration: none;text-decoration: none !important;}
 p{margin:0 0 20px 0;}
 
@@ -999,7 +999,7 @@ header{
             z-index: 99;
 
         }
-        h1{
+        h5 {
             margin: 0;
             @media only screen and (max-width: 768px){
                 color: $white;
@@ -1576,6 +1576,7 @@ ngb-tabset {
     {
         float: left;
         width: 100%;
+        // TODO Delete after setting replace
         h2{
             font-size: 15px;
             font-weight: 600;

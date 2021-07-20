@@ -2,7 +2,7 @@
 <div class="page-container manage-tech">
     <div class="page-insider">
         <div class="heading">
-            <h1>Manage Tech Users</h1>
+            <h5 class="qt-fw-600">Manage Tech Users</h5>
             <div class="heading-serach">
                 <a
                     class="stati-link"
@@ -70,9 +70,9 @@
                                         >
                                     </span>
                                     <div class="t-info">
-                                        <h5>
+                                        <div class="t-info__title">
                                             {{ techUser.firstName }} {{ techUser.lastName }}
-                                        </h5>
+                                        </div>
                                         <span>10:30 AM, 14 Jun</span>
                                     </div>
                                 </div>
@@ -101,7 +101,7 @@
                                         class="email-note-wrape"
                                         *ngIf="techUseremailNotificationList && techUseremailNotificationList[techUser.id]"
                                     >
-                                        <h5>Set Email Notification for Tech User</h5>
+                                        <div class="body-m qt-fw-600 qt-mb-16">Set Email Notification for Tech User</div>
                                         <ul class="list-unstyled">
                                             <li class="cmn-checkbox">
                                                 <input
@@ -250,9 +250,9 @@
                                         </span>
                                     </span>
                                     <div class="t-info">
-                                        <h5>
+                                        <div class="t-info__title">
                                             {{ techUser.firstName }} {{ techUser.lastName }}
-                                        </h5>
+                                        </div>
                                         <span>10:30 AM, 14 Jun</span>
                                     </div>
                                 </div>
@@ -281,7 +281,7 @@
                                         class="email-note-wrape"
                                         *ngIf="archivedtechUseremailNotificationList && archivedtechUseremailNotificationList[techUser.id]"
                                     >
-                                        <h5>Set Email Notification for Tech User</h5>
+                                        <div class="body-m qt-fw-600 qt-mb-16">Set Email Notification for Tech User</div>
                                         <ul class="list-unstyled">
                                             <li class="cmn-checkbox">
                                                 <input
@@ -539,7 +539,7 @@
                 </div>
                 <div class="qt-pl-10 qt-pr-10">
                     <div class="email-note-wrape">
-                        <h5>Set Email Notification for Tech User</h5>
+                        <div class="body-m qt-fw-600 qt-mb-16">Set Email Notification for Tech User</div>
                         <ul class="list-unstyled">
                             <li class="cmn-checkbox">
                                 <input
@@ -852,7 +852,7 @@
                 </div>
                 <div class="eml-ntl-list">
                     <div class="email-note-wrape">
-                        <h5>Set Email Notification for Tech User</h5>
+                        <div class="body-m qt-fw-600 qt-mb-16">Set Email Notification for Tech User</div>
                         <ul class="list-unstyled">
                             <li class="cmn-checkbox">
                                 <input
@@ -989,7 +989,7 @@
                         >
                     </span>
                     <div class="message-right">
-                        <h1>Delete User</h1>
+                        <h5 class="qt-fw-600">Delete User</h5>
                         <p>Are you sure you want to delete?</p>
                     </div>
                     <a

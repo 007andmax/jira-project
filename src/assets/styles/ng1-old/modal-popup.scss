@@ -187,7 +187,34 @@
   background-image: url("/assets/img/icons/close-16.png");
   background-size: cover;
 }
+.download-agent-modal {
+  padding: 50px 75px;
+  position: relative;
 
+  h5 {
+    margin: 14px 0 20px;
+  }
+
+  p {
+    margin: 6px 0 14px;
+    text-align: center;
+  }
+
+  .btn {
+    background-color: #16a4fa;
+    width: 100%;
+    text-align: left;
+    height: 48px;
+    margin-bottom: 10px;
+  }
+
+  .btn-primary.not-active {
+    background-color: #c4cbd5;
+    border-color: #c4cbd5;
+    cursor: default;
+    pointer-events: none;
+  }
+}
 .download-agent-modal .close-modal {
   outline: none;
   position: absolute;

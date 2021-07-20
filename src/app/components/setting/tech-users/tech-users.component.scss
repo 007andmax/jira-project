@@ -4,7 +4,7 @@
 @import '../../../../assets/scss/mixin';
 @import '../../../../assets/scss/custom';
 @import './src/assets/styles/variable';
-
+@import './src/assets/styles/fonts';
 
 .page-container{
     &.manage-tech{
@@ -162,9 +162,13 @@
     display: inline-block;
     margin-left: 10px;
     vertical-align: middle;
-    h5 {
+    text-transform: capitalize;
+    &__title {
+        @extend %body-m;
         margin-bottom: 0;
         line-height: initial;
+        color: $primary-2;
+        font-weight: $fs-semi-bold;
     }
     span {
         font-size: 11px;

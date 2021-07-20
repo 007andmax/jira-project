@@ -1,7 +1,7 @@
 <div class="page-container permissin-manage">
     <div class="page-insider">
         <div class="heading">
-            <h1>Permission Management</h1>
+            <h5 class="qt-fw-600">Permission Management</h5>
             <div
                 class="heading-serach"
                 *ngIf="roles && roles.length < 5"
@@ -61,7 +61,7 @@
                                 >
                                     <div class="modal-wrapper">
                                         <div class="toggle-header">
-                                            <h2 class="h1">Edit Role</h2>
+                                            <h6 class="qt-fw-600 qt-mb-20 qt-text-left">Edit Role</h6>
                                         </div>
                                         <div class="modal-body">
                                             <form method="POST">
@@ -111,7 +111,7 @@
                                     class="t-tile"
                                     colspan="4"
                                 >
-                                    <h5>{{ section.key }}</h5>
+                                    <div class="t-tile__title">{{ section.key }}</div>
                                 </td>
                             </tr>
                             <tr *ngFor="let permission of section.value">
@@ -158,7 +158,7 @@
 >
     <!-- header -->
     <div class="sidebar-header">
-        <div class="h1">Delete Role?</div>
+        <h5 class="qt-fw-600">Delete Role?</h5>
         <a
             class="close"
             href="javascript:;"
@@ -185,7 +185,7 @@
     <div class="middle-content">
         <form #editForm="ngForm">
             <div class="tech-list">
-                <h6>Tech Users</h6>
+                <div class=".caption-m qt-text-upper qt-mb-16">Tech Users</div>
                 <ul class="list-unstyled">
                     <li *ngFor="let user of usersToShift">
                         <div class="t-user">
@@ -218,9 +218,9 @@
                                 <span class="simple-dp">{{ displayFrstLstChar(user) }}</span>
                             </span>
                             <div class="t-info">
-                                <h5>
+                                <div class="t-tile__title">
                                     {{ user.firstName + " " + user.lastName }}
-                                </h5>
+                                </div>
                                 <a href="mailto:{{ user.primaryEmail }}">
                                     {{
                   user.primaryEmail
