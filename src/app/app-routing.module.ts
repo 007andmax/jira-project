@@ -248,7 +248,7 @@ const routes: Routes = [
     component: PaymentsComponent,
   },
   {
-    path: 'device/dashboard/:type/:id',
+    path: ':company/device/dashboard/:type/:id',
     component: DashboardComponent
   },
   {
@@ -268,7 +268,7 @@ const routes: Routes = [
     component: AntivirusComponent
   },
   {
-    path: 'device/terminal/:type/:id',
+    path: ':company/device/terminal/:type/:id',
     component: TerminalComponent
   },
   {
