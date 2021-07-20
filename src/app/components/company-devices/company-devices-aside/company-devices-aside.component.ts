@@ -71,6 +71,7 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
     return this.permissionsService.isAllowed(action)
   }
   gotiDetailDevice() {
+    localStorage.setItem('company_id', this.companyId);
     localStorage.setItem('agentId', this.currentDevice.agentId);
     localStorage.setItem('type', this.currentDevice.type);
     var url = '/#/ng2/device/dashboard';
