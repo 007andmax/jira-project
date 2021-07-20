@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CategoryDocument } from 'src/app/components/left-panel/left-panel-documents/class/category-document';
 import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header/class/title-list-type';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
 import { Document } from '../../class/document';
 
@@ -20,6 +21,7 @@ export class DocumentsTemplatesItemComponent implements OnInit {
   constructor(private documentsStateService: DocumentsStateService,
     private permissionsService: PermissionsService,
     public cd: ChangeDetectorRef,
+    public companiesStateService: CompaniesStateService,
     private router: Router,) { }
 
   ngOnInit() {
@@ -45,7 +47,7 @@ export class DocumentsTemplatesItemComponent implements OnInit {
   }
   editDocument(item) {
     this.router.navigate(
-      ['/documents/edit/', item.id]);
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/documents/edit/`, item.id]);
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)

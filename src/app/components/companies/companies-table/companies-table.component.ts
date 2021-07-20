@@ -105,7 +105,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     // this.leftPanelStateService.goToState('company-dashboard');
     this.companiesStateService.setSelectedCompanyId(this.company.id);
     this.router.navigate(
-      ['/company/', this.company.id, 'dashboard']);
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/company/`, this.company.id, 'dashboard']);
   }
   showInfo() {
     if (this.IS_MOBILE) {

@@ -62,11 +62,7 @@ import { CompanyDocumentsComponent } from './components/companies/company-docume
 import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
-  {
-    path: '',
 
-    component: HomeComponent,
-  },
   {
     path: ':company/tickets',
     component: TicketsComponent,
@@ -79,176 +75,176 @@ const routes: Routes = [
 
   },
   {
-    path: 'company/:id/password-manager',
+    path: ':company/company/:id/password-manager',
     component: CompanyPasswordManagerComponent,
     pathMatch: 'full'
   },
   {
-    path: 'company/:id/user',
+    path: ':company/company/:id/user',
     component: CompanyUserComponent,
     pathMatch: 'full'
   },
   {
-    path: 'company/:id/tickets',
+    path: ':company/company/:id/tickets',
     component: CompanyTicketsComponent,
     pathMatch: 'full'
   },
   {
-    path: 'company/:id/dashboard',
+    path: ':company/company/:id/dashboard',
     component: CompanyDashboardComponent,
     pathMatch: 'full'
   },
   {
-    path: 'quotes',
+    path: ':company/quotes',
     component: QuotesComponent,
     pathMatch: 'full'
   },
   {
-    path: 'recurring-tickets',
+    path: ':company/recurring-tickets',
     component: RecurringTicketsComponent,
     pathMatch: 'full'
   },
   {
-    path: 'companies',
+    path: ':company/companies',
     component: CompaniesComponent,
   }, {
-    path: 'users',
+    path: ':company/users',
     component: UsersComponent,
     pathMatch: 'full'
   },
   {
-    path: 'reports',
+    path: ':company/reports',
     component: ReportsComponent,
     pathMatch: 'full'
   },
   {
-    path: 'report/:id',
+    path: ':company/report/:id',
     component: ItemReportComponent
   },
   {
-    path: 'setting/myprofile',
+    path: ':company/setting/myprofile',
     component: MyProfileComponent,
     pathMatch: 'full'
   },
   {
-    path: 'setting/tags',
+    path: ':company/setting/tags',
     component: ManageTagsComponent,
     pathMatch: 'full',
 
   },
   {
-    path: 'setting/companyprofile',
+    path: ':company/setting/companyprofile',
     component: CompanyProfileComponent,
     pathMatch: 'full',
   },
   {
-    path: 'setting/techUsers',
+    path: ':company/setting/techUsers',
     component: TechUsersComponent,
     pathMatch: 'full',
   },
   {
-    path: 'setting/emailSetting',
+    path: ':company/setting/emailSetting',
     component: EmailSettingComponent,
     pathMatch: 'full',
   },
   {
-    path: 'setting/taxes',
+    path: ':company/setting/taxes',
     component: TaxesSettingsComponent,
     pathMatch: 'full',
   },
   {
-    path: 'setting/glnumber',
+    path: ':company/setting/glnumber',
     component: GlNumberSettingsComponent,
     pathMatch: 'full',
   },
   {
-    path: 'setting/permission',
+    path: ':company/setting/permission',
     component: PermissionManageComponent,
     pathMatch: 'full',
   },
   {
-    path: 'setting/emailTemplete',
+    path: ':company/setting/emailTemplete',
     component: EmailTempleteComponent,
     pathMatch: 'full',
   },
   {
-    path: 'setting/integration',
+    path: ':company/setting/integration',
     component: IntegrationsComponent,
     pathMatch: 'full',
   },
   {
-    path: 'setting/invoiceTickets',
+    path: ':company/setting/invoiceTickets',
     component: InvoiceTicketsComponent,
     pathMatch: 'full',
   },
   {
-    path: 'setting/commission',
+    path: ':company/setting/commission',
     component: CommissionComponent,
     pathMatch: 'full',
   },
   {
-    path: 'setting/subscription',
+    path: ':company/setting/subscription',
     component: SubscriptionComponent,
     pathMatch: 'full',
   },
   {
-    path: 'inventory/products',
+    path: ':company/inventory/products',
     component: InventoryComponent,
     pathMatch: 'full'
   },
   {
-    path: 'documents/add',
+    path: ':company/documents/add',
     component: DocumentsAddComponent,
     pathMatch: 'full'
   },
   {
-    path: 'documents/edit/:id',
+    path: ':company/documents/edit/:id',
     component: DocumentsEditComponent,
     pathMatch: 'full'
   },
   {
-    path: 'documents/category/:id',
+    path: ':company/documents/category/:id',
     component: DocumentsCategoryComponent,
     pathMatch: 'full'
   },
   {
-    path: 'company/:id/documents',
+    path: ':company/company/:id/documents',
     component: CompanyDocumentsComponent,
     pathMatch: 'full'
   },
   {
-    path: 'documents/preview/:id',
+    path: ':company/documents/preview/:id',
     component: DocumentPreviewComponent,
     pathMatch: 'full'
   },
   {
-    path: 'company/:id/products',
+    path: ':company/company/:id/products',
     component: CompanyProductsComponent,
     pathMatch: 'full'
   },
 
   {
-    path: 'billable',
+    path: ':company/billable',
     component: BillableComponent,
   },
   {
-    path: 'default-services',
+    path: ':company/default-services',
     component: DefaultServicesComponent,
   },
   {
-    path: 'invoices',
+    path: ':company/invoices',
     component: InvoicesComponent,
   },
   {
-    path: 'billable-tickets',
+    path: ':company/billable-tickets',
     component: BillableTicketsComponent,
   },
   {
-    path: 'contracts',
+    path: ':company/contracts',
     component: ContractsComponent,
   },
   {
-    path: 'payments',
+    path: ':company/payments',
     component: PaymentsComponent,
   },
   {
@@ -256,19 +252,19 @@ const routes: Routes = [
     component: DashboardComponent
   },
   {
-    path: 'device/hardware/:type/:id',
+    path: ':company/device/hardware/:type/:id',
     component: HardwareComponent
   },
   {
-    path: 'device/software/:type/:id',
+    path: ':company/device/software/:type/:id',
     component: SoftwareComponent
   },
   {
-    path: 'device/service',
+    path: ':company/device/service',
     component: ServicesComponent
   },
   {
-    path: 'device/antivirus',
+    path: ':company/device/antivirus',
     component: AntivirusComponent
   },
   {
@@ -276,56 +272,56 @@ const routes: Routes = [
     component: TerminalComponent
   },
   {
-    path: 'device/password',
+    path: ':company/device/password',
     component: PasswordComponent
   },
   {
-    path: 'device/window',
+    path: ':company/device/window',
     component: WindowsComponent
   },
   {
-    path: 'device/startup',
+    path: ':company/device/startup',
     component: StartupComponent
   },
   {
-    path: 'device/file',
+    path: ':company/device/file',
     component: FileComponent
   },
   {
-    path: 'billing-dashboard',
+    path: ':company/billing-dashboard',
     component: DashboardBillingComponent,
     canActivate: [PermissionDasnboardBillingService]
 
   },
   {
-    path: 'company/:id/contracts',
+    path: ':company/company/:id/contracts',
     component: CompanyContractsComponent
   },
   {
-    path: 'tickets-dashboard',
+    path: ':company/tickets-dashboard',
     component: TicketsDashboardComponent
   },
   {
-    path: 'company/:id/network-scan',
+    path: ':company/company/:id/network-scan',
     component: CompanyNetworkScanComponent
   },
   {
-    path: 'company/:id/devices',
+    path: ':company/company/:id/devices',
     component: CompanyDevicesComponent,
 
   },
   {
-    path: 'quickSupport',
+    path: ':company/quickSupport',
     component: SupportComponent,
 
   },
   {
-    path: 'documents',
+    path: ':company/documents',
     component: DocumentsComponent,
 
   },
   {
-    path: 'documents/templates',
+    path: ':company/documents/templates',
     component: DocumentsTemplatesComponent,
 
   },
@@ -337,7 +333,7 @@ const routes: Routes = [
  */
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, { useHash: true }),
   ],
   exports: [RouterModule],
 })

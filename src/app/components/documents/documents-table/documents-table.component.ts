@@ -25,7 +25,7 @@ export class DocumentsTableComponent implements OnInit {
     public router: Router,
     private permissionsService: PermissionsService,
     public documentsStateService: DocumentsStateService,
-    private companiesStateService: CompaniesStateService) { }
+    public companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
     if (this.usersStateService.getCurrentUser()) this.currentUser = this.usersStateService.getCurrentUser();
@@ -36,7 +36,7 @@ export class DocumentsTableComponent implements OnInit {
   navigateToCategory() {
     if (!this.item.isCategory) return;
     this.router.navigate(
-      ['/documents/category/', this.item.categoryId]);
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/documents/category/`, this.item.categoryId]);
   }
   showTemplate() {
     if (!this.item.isCategory && this.getPermissions('VIEW_DOCUMENT')) this.documentsStateService.onInitGetTemplate(this.item);

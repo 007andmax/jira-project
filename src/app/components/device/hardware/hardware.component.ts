@@ -59,7 +59,7 @@ export class HardwareComponent implements OnInit {
     this._id = window.location.href.split('/')[window.location.href.split('/').length - 1];
     // $('main').css('margin-right', '64px')
     if (this.type === 'printer') {
-      this.router.navigate([`/device/dashboard/${this.type}/${this._id}`]);
+      this.router.navigate([`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/dashboard/${this.type}/${this._id}`]);
     }
     this.deviceDetail = JSON.parse(localStorage.getItem('deviceDetail_' + this._id));
     this.hardwareDetail = this.deviceDetailService.getDevice();

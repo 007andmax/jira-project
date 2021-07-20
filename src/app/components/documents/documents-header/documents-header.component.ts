@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angu
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { DocumentsFilterComponent } from './documents-filter/documents-filter.component';
 
@@ -33,6 +34,7 @@ export class DocumentsHeaderComponent implements OnInit {
     private leftPanelStateService: LeftPanelStateService,
     private permissionsService: PermissionsService,
     private router: Router,
+    private companiesStateService: CompaniesStateService,
   ) { }
 
   /**
@@ -67,12 +69,12 @@ export class DocumentsHeaderComponent implements OnInit {
   goToAddDocument() {
     if (this.getPermissions('CREATE_DOCUMENT')) {
       this.router.navigate(
-        ['/documents/add'], { queryParams: { companyId: this.companyId } });
+        [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/documents/add`], { queryParams: { companyId: this.companyId } });
     }
   }
   goToTemplates() {
     this.router.navigate(
-      ['/documents/templates'], { queryParams: { companyId: this.companyId } });
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/documents/templates`], { queryParams: { companyId: this.companyId } });
   }
   onChangeCountFilter(data) {
     this.countFilter = data;
