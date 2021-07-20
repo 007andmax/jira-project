@@ -3,6 +3,8 @@ import { CommonHttpServices } from './../_services/common_http.service';
 import { CommonServices } from './../_services/common.service';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
   selector: 'app-nav',
@@ -20,6 +22,8 @@ export class NavComponent implements OnInit {
   type: string = '';
   constructor(private commonHttpServices: CommonHttpServices,
     private toastr: ToastrService,
+    public router: Router,
+    public companiesStateService: CompaniesStateService,
     public commonServices: CommonServices) { }
 
   ngOnInit() {
@@ -29,40 +33,54 @@ export class NavComponent implements OnInit {
     // this.deviceType = 'printer';
     this.getCurrentUser();
     this.getCurrentCompany();
-  } 
-
-  getCurrentUser() {
-	
-    this.commonHttpServices.getCurrentUser()
-    .pipe(first())
-    .subscribe(
-      resp => {
-        
-        this.currentUser = (resp.firstName + ' ' + resp.lastName).trim();
-        localStorage.setItem('currentUser', this.currentUser);
-        localStorage.setItem('imId', resp.avatar === null ? '' : resp.avatar.cropped.id);
-        this.imgUrl = resp.avatar === null ? '' : `/users/${resp.id}/image.jpg?t=${resp.avatar.updatedAt}`;
-      },
-      error => {
-      this.toastr.error('Something went wrong please try again.');
-      }
-    );
   }
 
+  getCurrentUser() {
+
+    this.commonHttpServices.getCurrentUser()
+      .pipe(first())
+      .subscribe(
+        resp => {
+
+          this.currentUser = (resp.firstName + ' ' + resp.lastName).trim();
+          localStorage.setItem('currentUser', this.currentUser);
+          localStorage.setItem('imId', resp.avatar === null ? '' : resp.avatar.cropped.id);
+          this.imgUrl = resp.avatar === null ? '' : `/users/${resp.id}/image.jpg?t=${resp.avatar.updatedAt}`;
+        },
+        error => {
+          this.toastr.error('Something went wrong please try again.');
+        }
+      );
+  }
+  goToDashboard() {
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/dashboard/${this.type}/${this._id}`]);
+  }
+  goToHardware() {
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/hardware/${this.type}/${this._id}`]);
+  }
+  goToSoftware() {
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/software/${this.type}/${this._id}`]);
+  }
+  goToTerminal() {
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/terminal/${this.type}/${this._id}`]);
+  }
   getCurrentCompany() {
-	
+
     this.commonHttpServices.getCurrentCompany()
-    .pipe(first())
-    .subscribe(
-      resp => {
-        this.currentCompany = resp.name;
-        localStorage.setItem('currentCompanyName', this.currentCompany);
-        // localStorage.setItem('currentCompany', resp.id);
-      },
-      error => {
-      this.toastr.error('Something went wrong please try again.');
-      }
-    );
+      .pipe(first())
+      .subscribe(
+        resp => {
+          this.currentCompany = resp.name;
+          localStorage.setItem('currentCompanyName', this.currentCompany);
+        },
+        error => {
+          this.toastr.error('Something went wrong please try again.');
+        }
+      );
   }
 
 }

@@ -61,4 +61,14 @@ export class DocumentsTemplatesItemComponent implements OnInit {
     let open = window.open(url, '_blank');
     open.print();
   }
+  goToAddDocument() {
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/documents/add`],
+      {
+        queryParams: {
+          'clone_document': this.item.id
+        }
+      });
+  }
+
 }

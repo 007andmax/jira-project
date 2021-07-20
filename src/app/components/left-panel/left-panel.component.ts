@@ -166,7 +166,7 @@ export class LeftPanelComponent implements OnInit {
   }
 
   public goToLink(url) {
-    this.router.navigate([this.companiesStateService.getCurrentCompany().name.replaceAll(' ', ''), url]);
+    this.router.navigate([`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/${url}`]);
   }
   onChangeState(data) {
     if (this.state !== data) {

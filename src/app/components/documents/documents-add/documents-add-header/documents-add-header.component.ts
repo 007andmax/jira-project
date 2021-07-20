@@ -11,6 +11,7 @@ import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.comp
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { Subscription } from 'rxjs';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-documents-add-header',
@@ -25,6 +26,7 @@ export class DocumentsAddHeaderComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   constructor(private leftPanelStateService: LeftPanelStateService,
     private modalService: NgbModal,
+    public router: Router,
     private documentsService: DocumentsService,
     public documentsStateService: DocumentsStateService,
     public confirmStateService: ConfirmStateService,
@@ -56,7 +58,7 @@ export class DocumentsAddHeaderComponent implements OnInit, OnDestroy {
     this.documentsStateService.setDocumentForRemove(this.documentEdit);
   }
   previewDocument() {
-    const url = `/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/documents/preview/${this.documentEdit.id}`;
+    const url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/documents/preview/${this.documentEdit.id}`;
     window.open(url, '_blank');
   }
   onToggleLeftPanel() {
@@ -71,6 +73,15 @@ export class DocumentsAddHeaderComponent implements OnInit, OnDestroy {
     const url = `/documents/show/${this.documentEdit.id}/pdf`;
     let open = window.open(url, '_blank');
     open.print();
+  }
+  goToCloneDocument() {
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/documents/add`],
+      {
+        queryParams: {
+          'clone_document': this.documentEdit.id
+        }
+      });
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

@@ -53,7 +53,7 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
   gotiDetailDevice() {
     localStorage.setItem('agentId', this.device.agentId);
     localStorage.setItem('type', this.device.type);
-    var url = `/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/dashboard/${this.device.type}/${this.device.agentId}`;
+    var url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/dashboard/${this.device.type}/${this.device.agentId}`;
     window.open(url, '_blank');
   };
   remoteAccess(connectionType) {

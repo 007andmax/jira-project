@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Company } from 'src/app/interfaces/company/company';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
@@ -21,6 +22,7 @@ export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
   @Output() onChangeState = new EventEmitter();
 
   constructor(//private quoteStateService: QuoteStateService,
+    public router: Router,
     private permissionsService: PermissionsService,
     private companiesStateService: CompaniesStateService,
     private leftPanelStateService: LeftPanelStateService) { }
@@ -38,6 +40,10 @@ export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
   }
   public close() {
     this.open = false;
+  }
+  goToCompanySection(section) {
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/company/`, this.companyId, section]);
   }
   isShowDoucments() {
     let ids = ["72381bff-127c-4a63-9d2e-6e952350dcbd", "73221c72-f87c-4519-8235-c4b57ad1cc19"];

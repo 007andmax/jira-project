@@ -76,7 +76,7 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
     localStorage.setItem('agentId', this.currentDevice.agentId);
     localStorage.setItem('type', this.currentDevice.type);
 
-    var url = `/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/dashboard`;
+    var url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/dashboard`;
     window.open(url, '_blank');
   };
   turnOff(action) {

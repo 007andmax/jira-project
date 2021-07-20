@@ -316,15 +316,16 @@ const routes: Routes = [
 
   },
   {
-    path: ':company/documents',
-    component: DocumentsComponent,
-
-  },
-  {
     path: ':company/documents/templates',
     component: DocumentsTemplatesComponent,
 
   },
+  {
+    path: ':company/documents',
+    component: DocumentsComponent,
+
+  },
+
 
 ];
 
