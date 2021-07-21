@@ -1,4 +1,5 @@
 @import './src/assets/styles/variable';
+@import '../fonts';
 
 .billing-dashboard-page {
   width: 100%;
@@ -81,7 +82,7 @@
       line-height: 1.56;
       letter-spacing: -0.5px;
       color: $primary-2;
-     font-weight: 600;
+      font-weight: 600;
       white-space: nowrap;
     }
     &__chart-content {

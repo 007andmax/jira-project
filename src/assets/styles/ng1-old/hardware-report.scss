@@ -1,4 +1,5 @@
 @import './src/assets/styles/variable';
+@import './src/assets/styles/fonts';
 
 .product-list-report {
   padding: 30px 30px 30px;
@@ -11,6 +12,7 @@
   position: absolute;
   top: 35px;
   left: 65px;
+  font-weight: $fs-semi-bold;
 }
 
 .product-list-ticket {
@@ -60,11 +62,14 @@
 .product-list-ticket-tech .header-product-list-ticket {
   position: static;
 }
-
-.product-list-ticket-tech .header-product-list-ticket h4 {
+// TODO DELETE
+//.product-list-ticket-tech .header-product-list-ticket h4 {
+//  padding-top: 20px;
+//}
+.product-list-ticket-tech .header-product-list-ticket__title {
   padding-top: 20px;
+  @extend %body-l-sb;
 }
-
 .product-list-report-btn {
   width: 940px;
   margin: 0 auto;
@@ -674,10 +679,15 @@
   margin-bottom: 40px;
 }
 
-.customer-ticket__report--summary h3,
-.customer-ticket__report--details h3 {
-  font-size: 16px;
+// TODO Delete
+//.customer-ticket__report--summary h3,
+//.customer-ticket__report--details h3 {
+//  font-size: 16px;
+//  padding: 0 60px;
+//}
+.customer-ticket__report--summary-title  {
   padding: 0 60px;
+  @extend %body-l-sb;
 }
 
 .customer-ticket__report--summary,

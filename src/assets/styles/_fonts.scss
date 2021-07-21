@@ -1,5 +1,12 @@
 @import './src/assets/styles/variable';
 
+@mixin font-style($fsize, $fline-height, $fweight, $letter-spacing) {
+  font-size: $fsize;
+  line-height: $fline-height;
+  font-weight: $fweight;
+  letter-spacing: $letter-spacing;
+}
+
 .h1 {
   @include font-style(40px, 48px, 300, -2.5px);
 }
@@ -22,8 +29,12 @@
 %h6 {
   @include font-style(18px, 26px, 400, 0);
 }
-.body-l {
+%body-l {
   @include font-style(16px, 24px, 400, 0);
+
+  &-sb {
+    @include font-style(16px, 24px, 600, 0);
+  }
 }
 %body-m {
   @include font-style(13px, 20px, 400, 0);

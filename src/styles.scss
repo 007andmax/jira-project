@@ -3,7 +3,7 @@
 @import './assets/styles/icons.scss';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import './assets/styles/main.scss';
-@import './assets/styles/fonts.scss';
+@import './assets/styles/fonts';
 
 h3, .h3 {
   @extend %h3;
@@ -22,12 +22,12 @@ h6, .h6 {
   margin: 0;
 }
 // TODO delete
-//.сaption-l {
-//  @extend %сaption-l;
-//}
-//.сaption-m {
-//  @extend %сaption-m;
-//}
+.сaption-l {
+  @extend %сaption-l;
+}
+.сaption-m {
+  @extend %сaption-m;
+}
 
 //h1, h2, h3, h4, h5, h6 {
 //  color: $primary-2;

@@ -47,10 +47,3 @@ $fs-bold: 700;
 $fs-extra-bold: 800;
 $fs-black: 900;
 
-@mixin font-style($fsize, $fline-height, $fweight, $letter-spacing) {
-  font-size: $fsize;
-  line-height: $fline-height;
-  font-weight: $fweight;
-  letter-spacing: $letter-spacing;
-}
-

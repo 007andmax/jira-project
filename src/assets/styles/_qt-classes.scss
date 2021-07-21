@@ -1,5 +1,5 @@
 @import './src/assets/styles/variable';
-@import './src/assets/styles/fonts';
+@import 'fonts';
 
 .qt-checkbox {
   margin: 0;
@@ -206,13 +206,6 @@
   padding-top: 0 !important;
 }
 .qt-text-upper {text-transform: uppercase;}
-
-.сaption-l {
-  @extend %сaption-l;
-}
-.сaption-m {
-  @extend %сaption-m;
-}
 
 .qt-fw-400 {
   font-weight: 400;

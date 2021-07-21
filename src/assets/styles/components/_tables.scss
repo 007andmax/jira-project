@@ -1,5 +1,5 @@
 @import './src/assets/styles/variable';
-@import './assets/styles/fonts.scss';
+@import './src/assets/styles/fonts';
 
 table.qt-table-modern {
   width: 100%;
@@ -11,6 +11,7 @@ table.qt-table-modern {
     th {
       padding: 8px;
       @extend %сaption-m-sb;
+      font-size: 20px;
       color: $primary-2;
       text-transform: uppercase;
       &:first-child {
