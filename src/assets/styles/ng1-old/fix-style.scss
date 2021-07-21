@@ -1,5 +1,5 @@
 @import './src/assets/styles/variable';
-@import '../fonts';
+@import './src/assets/styles/fonts';
 
 html {
   font-family: "Inter";
@@ -812,7 +812,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 .company-report li.content-product-list-ticket {
   background-color: $white;
-  margin-bottom: 8px;
+  margin-bottom: 2px;
   border: none !important;
   border-radius: 5px;
   box-shadow: 0 8px 16px 0 rgba(54,70,86,.02);
@@ -823,15 +823,11 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 .company-report .content-product-list-ticket .control.checkbox {
   margin-top: 20px;
 }
-.company-report .top-product-list-ticket .control.checkbox {
-  margin-top: 7px;
-}
 .company-report [class*=col-md-] {
   padding: 12px 6px;
-  font-weight: $fs-bold;
 }
 .company-report .top-product-list-ticket [class*=col-md-] {
-  font-size: 11px;
+  @extend %сaption-m-sb;
 }
 .list-of-product .report-title {
   left: 30px;
