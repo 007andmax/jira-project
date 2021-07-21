@@ -85,7 +85,7 @@
     //    text-transform: capitalize;
     //}
     h4 {
-      font-weight: $fs-bold;
+      font-weight: $fw-bold;
       color: $primary-2;
     }
     //h5,
@@ -99,7 +99,7 @@
     //    text-transform: capitalize;
     //}
     h6 {
-      font-weight: $fs-semi-bold;
+      font-weight: $fw-semi-bold;
       color: $primary-2;
     }
     //h6,
@@ -563,7 +563,7 @@
                                 justify-content: flex-start;
                                 .caption-l {
                                   @extend %сaption-l;
-                                  font-weight: $fs-semi-bold;
+                                  font-weight: $fw-semi-bold;
                                   color: $primary-2;
                                 }
                                 a {
@@ -940,7 +940,7 @@
                             overflow: hidden;
                             h6 {
                                 //font-size: 15px;
-                                font-weight: $fs-semi-bold;
+                                font-weight: $fw-semi-bold;
                                 //font-style: normal;
                                 //line-height: 1.47;
                                 //letter-spacing: normal;
@@ -962,7 +962,7 @@
                                             text-transform: none;
                                             line-height: 1;
                                             margin: 0;
-                                            font-weight: $fs-semi-bold;
+                                            font-weight: $fw-semi-bold;
                                         }
                                         .st-hrs {
                                             font-size: 12px;
