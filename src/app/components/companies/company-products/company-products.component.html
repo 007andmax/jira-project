@@ -1,5 +1,5 @@
 <div class="product-list-report product-list list-of-product">
-    <p class="report-title">List of products sold</p>
+    <h6 class="report-title qt-fw-600">List of products sold</h6>
     <div>
         <app-report-menu
             [report]="'company-roducts-report'"
@@ -32,11 +32,11 @@
 
 
             <div class="report-header">
-                <h1>List of products sold</h1>
+                <h5>List of products sold</h5>
                 <div class="company-info">
-                    <h3>
+                    <h5 class="qt-fw-600">
                         {{productsCompanyReport.clientCompanyName}}
-                    </h3>
+                    </h5>
                     <p>
                         <span>{{productsCompanyReport.startDate}}</span>
                         -
@@ -46,9 +46,9 @@
             </div>
             <div *ngIf="productsCompanyReport.lines.length > 0">
                 <div class="header-product-list-ticket">
-                    <h3>
+                    <h5 class="qt-fw-600">
                         {{ productsCompanyReport.techCompanyName }}
-                    </h3>
+                    </h5>
                     <p *ngIf="productsCompanyReport.type ==='DETAILED' ">
                         Detailed sales for
                         <span>

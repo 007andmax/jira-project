@@ -1,5 +1,7 @@
+@import './src/assets/styles/variable';
+
 .ticket-edit-aside {
-  
+
 
 // aside menu
 
@@ -20,7 +22,7 @@
     flex-direction: column;
     align-items: center;
     padding-top: 10px;
-    border-left: 1px solid #dfe3e8;
+    border-left: 1px solid $gray-400;
   }
 
   .aside-menu-item {
@@ -32,7 +34,7 @@
     width: 100%;
     &.active {
       background-color: #edf2f67d;
-      border: 1px solid #dfe3e8;
+      border: 1px solid $gray-400;
       border-left: none;
       border-right: none;
     }
@@ -47,5 +49,5 @@
   app-ticket-edit-aside-devices {
     overflow: auto;
     width: 272px;
-    border-left: 1px solid #dfe3e8;
+    border-left: 1px solid $gray-400;
   }

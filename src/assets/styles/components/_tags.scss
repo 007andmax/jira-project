@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .tag__modern {
   font-size: 10px;
   border: 1px solid;
@@ -6,25 +8,25 @@
   white-space: nowrap;
 
   &.--success {
-    color: #2ec866;
-    border-color: #2ec866;
-    background-color: #ebfff2;
+    color: $success;
+    border-color: $success;
+    background-color: $gray-300;
   }
 
   &.--info {
-    color: #16a4fa;
-    border-color: #16a4fa;
-    background-color: #edf8ff;
+    color: $primary-1;
+    border-color: $primary-1;
+    background-color: $background;
   }
 
   &.--warning {
-    color: #ffb937;
-    border-color: #ffb937;
+    color: $warning;
+    border-color: $warning;
     background-color: rgba(255, 185, 55, 0.1);
   }
   &.--error {
-    color: #ff5263;
-    border-color: #ff5263;
+    color: $error;
+    border-color: $error;
     background-color: rgba(255, 82, 99, 0.1);
     }
 }

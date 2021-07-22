@@ -19,7 +19,7 @@
             <tbody>
                 <tr>
                     <td class="p-name">
-                        <h5 class="headings">Hourly Contracts</h5>
+                        <div class="body-m headings">Hourly Contracts</div>
                         <p>
                             Hourly Contracts will use the service default commission rate.
                         </p>
@@ -35,7 +35,7 @@
             <tbody>
                 <tr>
                     <td class="p-name">
-                        <h5 class="headings">Block Time Contracts</h5>
+                        <div class="body-m headings">Block Time Contracts</div>
                         <p>
                             Block time contracts will be separated in two commissions rates,
               the first will be for the included Hours, a second rate can be set
@@ -48,9 +48,9 @@
                 </tr>
                 <tr>
                     <td class="p-name">
-                        <h5>
+                        <div class="body-m">
                             Block time Included Hours commission Rate
-                        </h5>
+                        </div>
                     </td>
                     <td class="rate">
                         {{ agreementsCommissions?.blockTimeContractCommission }}
@@ -94,7 +94,7 @@
                         >
                             <div class="modal-wrapper">
                                 <div class="toggle-header">
-                                    <h2 class="h1">Edit Rate</h2>
+                                    <h6 class="qt-fw-600 qt-mb-20 qt-text-left">Edit Rate</h6>
                                 </div>
                                 <div class="modal-body">
                                     <form method="POST">
@@ -141,9 +141,9 @@
                 </tr>
                 <tr>
                     <td class="p-name">
-                        <h5>
+                        <div class="body-m">
                             Rate for hours Exceeding Included hours on Black Time Contracts
-                        </h5>
+                        </div>
                     </td>
                     <td class="rate">
                         {{ agreementsCommissions?.blockTimeContractCommissionExceeding }}
@@ -240,7 +240,7 @@
             <tbody>
                 <tr>
                     <td class="p-name">
-                        <h5 class="headings">Per User and Device Cotracts</h5>
+                        <div class="body-m headings">Per User and Device Cotracts</div>
                         <p>
                             Managed Service. contracts will have two commissions rates, one
               for the Contract , and one for Exceeding maximum hours included in
@@ -256,7 +256,7 @@
                 </tr>
                 <tr>
                     <td class="p-name">
-                        <h5>Per User and Per Device Contracts</h5>
+                        <div class="body-m">Per User and Per Device Contracts</div>
                     </td>
                     <td class="rate">
                         {{ agreementsCommissions?.userOrDeviceContractCommission }}
@@ -345,9 +345,9 @@
                 </tr>
                 <tr>
                     <td class="p-name">
-                        <h5>
+                        <div class="body-m">
                             Rate for hours Exceeding Included hours on Block Time contracts
-                        </h5>
+                        </div>
                     </td>
                     <td class="rate">
                         {{ agreementsCommissions?.userOrDeviceContractCommissionExceeding }}
@@ -457,7 +457,7 @@
             <tbody>
                 <tr>
                     <td class="p-name">
-                        <h5 class="headings">Other Contracts</h5>
+                        <div class="body-m headings">Other Contracts</div>
                         <p>
                             commission rate will be calculated based on their Product and
               Service Commissions rates set in the Product and Service
@@ -487,7 +487,7 @@
                     >
                 </span>
                 <div class="message-right">
-                    <h1>Delete Commission Rate</h1>
+                    <h5 class="qt-fw-600">Delete Commission Rate</h5>
                     <p>
                         Are you sure you want to change rate to be zero & this rate to fact old items?
                     </p>

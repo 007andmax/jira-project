@@ -79,7 +79,7 @@
         }
     }
     .label {
-        border: 1px solid #000;
+        border: 1px solid $primary-2;
     }
 
     .table {
@@ -87,13 +87,13 @@
 
         td,
         th {
-            background-color: #fff !important;
+            background-color: $white !important;
         }
     }
     .table-bordered {
         th,
         td {
-            border: 1px solid #ddd !important;
+            border: 1px solid $gray-400 !important;
         }
     }
 

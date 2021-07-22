@@ -1,11 +1,11 @@
 @import "../../../../assets/styles/variable";
 
 .quotes {
-  background: #f3f7f9;
+  background: $gray-200;
   min-height: calc(100vh - #{$header-height});
   &__header {
     top: $header-height;
-    background: #f3f7f9;
+    background: $gray-200;
     padding: 24px;
     position: fixed;
     width: calc(100vw - 324px);
@@ -22,7 +22,7 @@
         margin: 0;
         font-size: 20px;
         font-weight: 500;
-        font-family: "Graphik-Regular", sans-serif;
+        font-weight: 400;
       }
       .quotes-actions {
         display: flex;
@@ -51,9 +51,8 @@
     &--bottom {
       [class*='col-md-'] {
         text-transform: uppercase;
-        font-family: "Graphik-Medium", sans-serif;
+        font-weight: 600;
         font-size: 11px;
-        font-weight: 500;
         @media (max-width: 1366px) {
           font-size: 10px;
         }
@@ -64,12 +63,12 @@
     padding: 0 24px 24px;
     margin-top: 135px;
     &--item {
-      background: #fff;
+      background: $white;
       border-radius: 5px;
       padding: 24px 0;
       margin-bottom: 2px;
       [class*='col-md-'] {
-        font-family: "Graphik-Regular", sans-serif;
+        font-weight: 400;
         font-size: 13px;
         @media (max-width: 1366px) {
           font-size: 11px;
@@ -148,7 +147,7 @@
   }
   [class*='col-md-'].g-m {
     font-weight: bold;
-    font-family: "Graphik-Medium", sans-serif;
+    font-weight: 600;
   }
   .btn-new {
     @media (max-width: 1280px) {
@@ -166,7 +165,7 @@
   background: #e0faec;
   border: 2px solid #b9f0d1;
   border-radius: 4px;
-  color: #189947;
+  color: $success;
   padding: 6px 10px 6px 40px;
   z-index: 999;
 }

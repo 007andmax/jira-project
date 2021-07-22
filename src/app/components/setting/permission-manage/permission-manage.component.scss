@@ -1,6 +1,8 @@
-@import "../../../../assets/scss/variable";
+//@import "../../../../assets/scss/variable";
 @import "../../../../assets/scss/mixin";
 @import "../../../../assets/scss/custom";
+@import './src/assets/styles/variable';
+@import '../../../../assets/styles/fonts';
 
 .page-container {
   &.permissin-manage {
@@ -18,7 +20,7 @@
   .pr-data {
     h5 {
       margin-bottom: 0;
-      color: #364656;
+      color: $primary-2;
     }
 
     .no-border {
@@ -31,25 +33,27 @@
             display: inline-block;
           }
           hr {
-            border-color: #edf2f6;
+            border-color: $background;
             margin: 15px 0 0 0;
           }
         }
         .t-tile {
           padding-top: 6px;
           padding-bottom: 6px;
-          h5 {
+          .t-tile__title {
             position: relative;
             margin-top: 11px;
+            @extend %body-m;
+            font-weight: $fw-semi-bold;
             &::before {
               position: absolute;
               left: -20px;
               height: 6px;
               width: 6px;
-              background-color: #16a4fa;
+              background-color: $primary-1;
               @include border-radius(50%);
               content: "";
-              top: 6px;
+              top: 7px;
             }
           }
         }
@@ -96,7 +100,7 @@
   &::after {
     width: 10px;
     height: 10px;
-    border: solid 2px #ffffff;
+    border: solid 2px $white;
     background-color: transparent;
     content: "";
     position: absolute;
@@ -121,14 +125,14 @@
       text-align: center;
       width: 70px;
       border-radius: 3px;
-      background-color: #4f5f79;
+      background-color: $gray-800;
       font-size: 12px;
       font-weight: 500;
       font-style: normal;
       font-stretch: normal;
       line-height: 1.33;
       letter-spacing: normal;
-      color: #ffffff;
+      color: $white;
       left: -26px;
       top: -40px;
       visibility: hidden;
@@ -143,7 +147,7 @@
       position: absolute;
       pointer-events: none;
       border-color: rgba(79, 95, 121, 0);
-      border-top-color: #4f5f79;
+      border-top-color: $gray-800;
       border-width: 6px;
       margin-left: -6px;
       bottom: 11px;
@@ -190,17 +194,6 @@
 }
 
 .sidebar-popup.role-dlt {
-  h6 {
-    font-weight: 500;
-    font-style: normal;
-    line-height: 1.45;
-    letter-spacing: normal;
-    color: #9ca5b6;
-    margin-bottom: 15px;
-    font-size: 11px;
-    font-family: $graphicSemibold;
-    text-transform: uppercase;
-  }
   .t-user {
     display: flex;
     flex-direction: row;
@@ -223,7 +216,7 @@
       width: 32px;
       height: 32px;
       border: solid 1px rgba(22, 164, 250, 0.2);
-      background-color: #ffffff;
+      background-color: $white;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -234,10 +227,10 @@
       line-height: normal;
       letter-spacing: normal;
       text-align: center;
-      color: #4f5f79;
+      color: $gray-800;
       overflow: hidden;
       @include border-radius(50%);
-      font-family: $graphicSemibold;
+      font-weight: 600;
     }
   }
   .t-info {
@@ -253,13 +246,12 @@
     h5 {
       margin-bottom: 0;
       font-size: 13px;
-      font-weight: 500;
       font-style: normal;
       font-stretch: normal;
-      font-family: $graphicMedBold;
+      font-weight: 600;
       line-height: 13px;
       letter-spacing: normal;
-      color: #4f5f79;
+      color: $gray-800;
     }
     a {
       font-size: 12px;
@@ -268,20 +260,20 @@
       font-stretch: normal;
       line-height: 1.33;
       letter-spacing: normal;
-      color: #4f5f79;
+      color: $gray-800;
     }
     span {
       font-size: 11px;
       line-height: 1.45;
       letter-spacing: normal;
-      color: #9ca5b6;
+      color: $gray-600;
     }
   }
   .warn-msg {
     display: flex;
     flex-direction: row;
     align-items: center;
-    background-color: #fff8eb;
+    background-color: $gray-400;
     padding: 8px 24px 8px 40px;
     @media only screen and (max-width: 768px) {
       padding: 8px 24px 8px 24px;
@@ -291,7 +283,7 @@
       font-weight: normal;
       line-height: 1.54;
       letter-spacing: normal;
-      color: #7f5c1b;
+      color: $primary-2;
       margin-bottom: 0;
       margin-left: 10px;
       @media only screen and (max-width: 768px) {
@@ -316,9 +308,8 @@
       font-stretch: normal;
       line-height: 1.45;
       letter-spacing: normal;
-      color: #9ca5b6;
-      font-weight: 500;
-      font-family: $graphicMedBold;
+      color: $gray-600;
+      font-weight: 600;
       text-transform: uppercase;
       margin-bottom: 15px;
     }

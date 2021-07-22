@@ -1,8 +1,10 @@
+@import './src/assets/styles/variable';
+
 .users-aside {
   &__title {
      font-size: 10px;
      font-weight: 700;
-     color: #4f5f79;
+     color: $gray-800;
      padding: 22px 16px 16px;
      text-transform: uppercase;
    }
@@ -23,7 +25,7 @@
        cursor: pointer;
        display: flex;
        &:hover {
-         background-color: #edf2f6;
+         background-color: $background;
          .users-aside__user-menu {
            display: block;
          }
@@ -32,7 +34,7 @@
        &.--online {
          .users-aside__user-avatar {
            &:before {
-             background-color: #2ec866;
+             background-color: $success;
            }
          }
        }
@@ -40,7 +42,7 @@
        &.--away {
           .users-aside__user-avatar {
             &:before {
-              background-color: #ffb937;
+              background-color: $warning;
             }
           }
         }
@@ -59,8 +61,8 @@
     border-radius: 50%;
     margin-right: 10px;
     position: relative;
-    background-color: white;
-    color: #4f5f79;
+    background-color: $white;
+    color: $gray-800;
     font-size: 10px;
     font-weight: 600;
     &.--letter-avatar {
@@ -71,8 +73,8 @@
       position: absolute;
       width: 8px;
       height: 8px;
-      border: solid 2px #ffffff;
-      background-color: #9ca5b6;
+      border: solid 2px $white;
+      background-color: $gray-600;
       border-radius: 50%;
       top: calc(69%);
       left: calc(78%);
@@ -85,7 +87,7 @@
   }
   &__user-email {
     line-height: 1.33;
-    color: #9ca5b6;
+    color: $gray-600;
   }
 
    &__user-menu {

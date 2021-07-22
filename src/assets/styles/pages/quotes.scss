@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .quotes-page {
   .quotes-company-filter {
     width: 35%;
@@ -73,8 +75,8 @@
       padding-right: 8px;
     }
     td.quotes-table__number {
-      font-family: Graphik-Medium, sans-serif;
-      color: #16a4fa;
+     font-weight: 600;
+      color: $primary-1;
       padding-top: 14px;
     }
 
@@ -166,7 +168,7 @@
     }
 
     .company-info {
-      border-bottom: 1px solid #dfe3e8;
+      border-bottom: 1px solid $gray-400;
       margin-left: -30px;
       margin-right: -30px;
       padding-left: 30px;
@@ -174,19 +176,19 @@
     }
 
     .company-info-left-side {
-      border-right: 1px solid #dfe3e8;
+      border-right: 1px solid $gray-400;
     }
 
     .company-info-description {
       min-height: 40px;
       border-radius: 4px;
-      border: solid 1px #c4cbd5;
-      background-color: #ffffff;
+      border: solid 1px $gray-500;
+      background-color: $white;
       padding: 9px 14px;
       font-size: 13px;
       line-height: 1.54;
       &::placeholder {
-        color: #9ca5b6;
+        color: $gray-600;
       }
     }
 
@@ -297,7 +299,7 @@
     }
 
     .terms-n-conditions {
-      background: #f9fafb;
+      background: $gray-100;
       margin-left: -30px;
       margin-right: -30px;
       &__textarea {
@@ -321,7 +323,7 @@
     .mat-form-field-wrapper {
       padding: 0;
       border-radius: 4px;
-      border: solid 1px #c4cbd5;
+      border: solid 1px $gray-500;
     }
     .mat-form-field-infix {
       padding: 0;
@@ -345,8 +347,8 @@
       font-style: normal;
       line-height: 1.54;
       letter-spacing: normal;
-      color: #9ca5b6;
-      font-family: Graphik-Regular, sans-serif;
+      color: $gray-600;
+      font-weight: 400;
       position: absolute;
       left: 14px;
       top: 22px;
@@ -361,8 +363,8 @@
     .mat-chip.mat-primary {
       height: 32px;
       margin: 2px;
-      background-color: #f8f9fa;
-      color: #4f5f79;
+      background-color: $gray-100;
+      color: $gray-800;
     }
     .mat-chip-remove.mat-icon {
       width: 18px;
@@ -382,13 +384,13 @@
   }
   .quote-text-block {
     border-radius: 4px;
-    border: solid 1px #c4cbd5;
-    background-color: #ffffff;
+    border: solid 1px $gray-500;
+    background-color: $white;
     padding: 10px 14px;
     font-size: 13px;
     height: 104px;
     &::placeholder {
-      color: #9ca5b6;
+      color: $gray-600;
     }
   }
 }
@@ -402,13 +404,13 @@
     border: 3px solid #5e6b78 !important;
   }
   .mat-option {
-    color: #364656;
+    color: $primary-2;
     font-size: 13px;
     height: 32px;
     padding: 6px 15px;
     &:hover {
-      background-color: #edf2f6 !important;
-      color: #364656 !important;
+      background-color: $background !important;
+      color: $primary-2;
     }
   }
 }

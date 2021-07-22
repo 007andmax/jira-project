@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .default-services-page {
   min-height: calc(100vh - #{$header-height});
 
@@ -80,19 +82,19 @@
     width: 112px;
     height: 32px;
     border-radius: 4px;
-    background-color: #f4f6f8;
+    background-color: $gray-200;
     border: none;
   }
 
   .gl-number-dropdown {
-    background: #f4f6f8;
+    background: $gray-200;
     height: 32px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 10px;
     border-radius: 4px;
-    color: #4f5f79;
+    color: $gray-800;
     font-size: 13px;
     position: relative;
     margin-top: 7px;
@@ -119,9 +121,9 @@
     button.dropdown-item {
       text-align: left;
       border: none;
-      background: white;
+      background: $white;
       min-height: 32px;
-      color: #364656;
+      color: $primary-2;
       padding: 0 15px;
       &:hover {
         background: #edf2f67d;
@@ -144,7 +146,7 @@
 .default-services-page__aside {
   .add-tax-btn {
     line-height: 1;
-    color: #16a4fa;
+    color: $primary-1;
   }
 
   .create-product-taxes-select {
@@ -156,14 +158,14 @@
       line-height: 1;
       margin-bottom: 12px !important;
       font-size: 13px !important;
-      color: #4f5f79;
-      font-family: Graphik-Medium, sans-serif !important;
+      color: $gray-800;
+      font-weight: 600;
       height: 12px;
     }
 
     .add-tax.add-tax-inventory {
       line-height: 1;
-      font-family: Graphik-Medium, sans-serif;
+     font-weight: 600;
       font-size: 12px;
     }
 
@@ -173,8 +175,8 @@
       left: unset !important;
       top: 7px !important;
       box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-      border: solid 1px #dfe3e8;
-      background-color: #ffffff;
+      border: solid 1px $gray-400;
+      background-color: $white;
     }
 
     .add-tax-dropdown:after,
@@ -183,7 +185,7 @@
       right: 10px;
       top: -5px;
       border: 6px solid transparent;
-      border-bottom-color: #fff;
+      border-bottom-color: $white;
       border-top: 0;
     }
   }
@@ -223,8 +225,8 @@ app-default-services-item,app-default-services-contracts {
       text-align: left !important;
       line-height: 1.33 !important;
       font-size: 12px !important;
-      color: white !important;
-      font-family: 'Graphik-Regular', sans-serif !important;
+      color: $white !important;
+      font-weight: 400;
     }
   }
 }

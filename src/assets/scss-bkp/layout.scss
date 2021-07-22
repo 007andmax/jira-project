@@ -1,4 +1,5 @@
 @import "../../assets/scss/fonts";
+@import "./src/assets/styles/variable";
 
 /*** Angular one css conflcit resolved ***/
 
@@ -6,12 +7,12 @@ body {
     padding: 0;
     margin: 0;
     @include body-font;
-    background-color: $bodyColor;
+    background-color: $gray-200;
     &.ng7 {
         padding: 0;
         margin: 0;
         @include body-font;
-        background-color: $bodyColor;
+        background-color: $gray-200;
 
         .topNavbar-content {
             .btn-primary {
@@ -96,12 +97,10 @@ body {
         display: inline-block;
         max-width: 100%;
     }
-
-    /*** Heading ***/
-
-    h1,
-    .h1 {
-        font-size: 20px;
+    label,
+    .form-label {
+        font-weight: 600;
+        font-size: 13px;
         font-style: normal;
         font-family: $graphicSemibold;
         line-height: 1.4;
@@ -116,49 +115,69 @@ body {
         font-family: $graphicSemibold;
         line-height: 1.4;
         letter-spacing: normal;
-        color: $heavyMetal;
-        margin: 0 0 20px 0;
+        color: $gray-800;
         text-transform: capitalize;
     }
-    h3,
-    .h3 {
-        font-size: 16px;
-        font-family: $graphicSemibold;
-        line-height: 1.2;
-        letter-spacing: normal;
-        color: $heavyMetal;
-        margin: 0 0 20px 0;
-        text-transform: capitalize;
-    }
-    h4,
-    .h4 {
-        font-size: 14px;
-        font-family: $graphicSemibold;
-        line-height: 1.2;
-        letter-spacing: normal;
-        color: $heavyMetal;
-        margin: 0 0 20px 0;
-        text-transform: capitalize;
-    }
-    h5,
-    .h5 {
+    .form-input {
+        float: left;
+        width: 100%;
+        @include border-radius(4px);
+        border: solid 1px $gray-500;
+        background-color: $white;
+        padding: 9px 14px;
         font-size: 13px;
-        font-family: $graphicSemibold;
+        font-weight: normal;
+        font-weight: 400;
         line-height: 1.54;
         letter-spacing: normal;
-        color: $heavyMetal;
-        margin: 0 0 20px 0;
-        text-transform: capitalize;
+        color: $gray-800;
+        outline: none !important;
+        height: auto;
+        &:focus {
+            border-color: $gray-600;
+        }
+        &:hover {
+            border-color: $gray-600;
+        }
+        &:disabled {
+            cursor: not-allowed;
+            background-color: $background;
+            border-color: $background;
+        }
+        &.link {
+            background-image: url("/assets/img/link.svg");
+            background-repeat: no-repeat;
+            background-position: right 13px center;
+            padding-right: 25px;
+        }
+        &::-webkit-input-placeholder {
+            color: $gray-600;
+            @include opacity(1);
+        }
+        &::-moz-placeholder {
+            color: $gray-600;
+            @include opacity(1);
+        }
+        &:-ms-input-placeholder {
+            color: $gray-600;
+            @include opacity(1);
+        }
+        &:-moz-placeholder {
+            color: $gray-600;
+            @include opacity(1);
+        }
+        textarea {
+            resize: none;
+        }
     }
-    h6,
-    .h6 {
-        font-size: 10px;
-        font-family: $graphicSemibold;
-        line-height: 0.8;
-        letter-spacing: normal;
-        color: $heavyMetal;
-        margin: 0 0 20px 0;
-        text-transform: capitalize;
+    select.cmn-select {
+        @include app-none();
+        background: url("/assets/img/selct-arrow.svg") no-repeat right 15px center;
+        padding-right: 30px;
+        option {
+            padding: 10px;
+            background-color: $white;
+        }
     }
     a {
         color: $primary-color;
@@ -167,6 +186,112 @@ body {
     }
     p {
         margin: 0 0 20px 0;
+    }
+}
+.dataTables_wrapper {
+    float: left;
+    width: 100%;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    &.dataTable {
+        border-collapse: collapse;
+        vertical-align: middle;
+        thead {
+            th {
+                padding: 0 15px 12px 0;
+                border-bottom: 1px solid $background;
+                font-size: 12px;
+                font-weight: 600;
+                font-style: normal;
+                line-height: 1.33;
+                letter-spacing: normal;
+                color: $primary-2;
+                text-transform: capitalize;
+                text-align: left;
+                outline: none !important;
+                word-break: break-word;
+                span {
+                    position: relative;
+                    &::after {
+                        content: "";
+                        display: inline-block;
+                        vertical-align: middle;
+                        height: 16px;
+                        width: 16px;
+                        background: url("/assets/img/sorting.svg") no-repeat center;
+                        background-size: 16px auto;
+                        margin-left: 5px;
+                        margin-top: -2px;
+                    }
+                }
+                &.sorting,
+                &.sorting_desc,
+                &.sorting_asc {
+                    background-image: none;
+                }
+                &.action {
+                    padding-right: 0;
+                    width: 50px;
+                    position: relative;
+                }
+                &.c-tag {
+                    width: 255px;
+                }
+                &.count {
+                    width: 343px;
+                }
+            }
+        }
+        tbody {
+            tr {
+                background-color: $white !important;
+                &:last-child {
+                    td {
+                        border-bottom: transparent;
+                    }
+                }
+                td {
+                    padding: 12px 15px 12px 0;
+                    border: 0;
+                    border-bottom: 1px solid $gray-200;
+                    font-size: 13px;
+                    font-weight: normal;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 1.54;
+                    letter-spacing: normal;
+                    color: $gray-800;
+                    background-color: $white !important;
+                    word-break: break-word;
+                    &.action {
+                        padding-right: 0;
+                        text-align: right;
+                        .static-link {
+                            margin-right: 10px;
+                            display: inline-block;
+                            position: relative;
+                            vertical-align: middle;
+                            bottom: -2px;
+                        }
+                        a {
+                            margin: 0;
+                            margin-left: 15px;
+                            &:first-child {
+                                margin-left: 0;
+                            }
+                        }
+                    }
+                    &.last-seen {
+                        color: $gray-600;
+                    }
+                }
+            }
+        }
+        &.no-footer {
+            border: none;
+        }
     }
 
     /*** Listing ***/
@@ -277,7 +402,7 @@ body {
         line-height: 1.33;
         letter-spacing: normal;
         text-align: center;
-        color: $primary-color;
+        color: $white;
         padding: 9.5px 16px;
         margin-left: 16px;
         @include transition(0.4s);
@@ -808,7 +933,7 @@ body {
             width: 100%;
             position: relative;
             padding: 6px 25px 7px 45px;
-            color: $white-color;
+            color: $white;
             text-transform: capitalize;
             .nav-ico {
                 position: absolute;
@@ -842,7 +967,7 @@ body {
         .page-insider {
             float: left;
             width: 100%;
-            background-color: $white-color;
+            background-color: $primary-2;
             @include border-radius(4px);
             &.profile-insider,
             &.email-insider {
@@ -874,7 +999,7 @@ body {
             }
             @media only screen and (max-width: 768px) {
                 padding: 15.5px 16px;
-                background-color: #27303f;
+                background-color: #27303f; /* TODO replace color */
                 position: fixed;
                 top: 0;
                 left: 0;
@@ -945,11 +1070,10 @@ body {
                     border: 0;
                     padding-bottom: 13px;
                     font-size: 12px;
-                    font-family: $graphicMedBold;
                     font-weight: 600;
                     line-height: normal;
                     letter-spacing: normal;
-                    color: #4f5f79;
+                    color: $gray-800;
                     display: block;
                     text-transform: capitalize;
                     @include transition(0.4s);
@@ -968,9 +1092,9 @@ body {
                 &:hover,
                 &.active {
                     .nav-link {
-                        color: #16a4fa;
+                        color: $primary-1;
                         &::after {
-                            border-color: #16a4fa;
+                            border-color: $primary-1;
                         }
                     }
                 }
@@ -1000,7 +1124,7 @@ body {
         form {
             .form-row {
                 &.primary-phone {
-                    border: solid 1px #c4cbd5;
+                    border: solid 1px $gray-500;
                     display: flex;
                     flex-direction: row;
                     align-items: center;
@@ -1217,7 +1341,7 @@ body {
                 float: left;
                 width: 100%;
                 margin-bottom: 29px;
-                border-bottom: 1px solid #edf2f6;
+                border-bottom: 1px solid $background;
                 padding-bottom: 14px;
                 &:last-child {
                     margin-bottom: 8px;
@@ -1239,7 +1363,7 @@ body {
             width: 100%;
             h5 {
                 margin-bottom: 11px;
-                color: #4f5f79;
+                color: $gray-800;
                 line-height: normal;
             }
         }
@@ -1402,14 +1526,14 @@ body {
         position: absolute;
         right: 0;
         top: 50px;
-        background-color: $white-color;
+        background-color: $white;
         z-index: 1;
         -ms-box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
         -o-box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
         -webkit-box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
         -moz-box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
         box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-        border: solid 1px #edf2f6;
+        border: solid 1px $background;
         padding: 30px 32px 24px 32px;
         width: 346px;
         display: none;
@@ -1447,7 +1571,6 @@ body {
             h2 {
                 font-size: 15px;
                 font-weight: 600;
-                font-family: $graphicSemibold;
                 line-height: 1.33;
                 letter-spacing: normal;
                 color: #364656;
@@ -1474,7 +1597,7 @@ body {
         width: 592px;
         height: auto;
         box-shadow: -8px 0 16px 0 rgba(0, 0, 0, 0.1);
-        background-color: #ffffff;
+        background-color: $white;
         top: $header-height;
         bottom: 0;
         position: fixed;
@@ -1499,6 +1622,7 @@ body {
                 justify-content: flex-start;
             }
             .h1 {
+                /* TODO check h1 style */
                 margin-bottom: 0;
                 @media only screen and (max-width: 768px) {
                     font-size: 16px;
@@ -1519,7 +1643,7 @@ body {
                 height: calc(100% - 55px);
             }
             .dp-area {
-                border-bottom: 1px solid #edf2f6;
+                border-bottom: 1px solid #edf2f6; /* TODO replace color */
                 padding-bottom: 21px;
                 margin-bottom: 33px;
                 @media only screen and (max-width: 768px) {
@@ -1534,7 +1658,7 @@ body {
                     width: 64px;
                     height: 64px;
                     border: solid 1px rgba(22, 164, 250, 0.2);
-                    background-color: #ffffff;
+                    background-color: #ffffff; /* TODO replace color */
                     display: flex;
                     justify-content: center;
                     align-items: center;
@@ -1545,10 +1669,9 @@ body {
                     line-height: normal;
                     letter-spacing: normal;
                     text-align: center;
-                    color: #4f5f79;
+                    color: #4f5f79; /* TODO replace color */
                     overflow: hidden;
                     @include border-radius(50%);
-                    font-family: $graphicSemibold;
                 }
                 .dp-info {
                     @media only screen and (max-width: 768px) {
@@ -1556,8 +1679,12 @@ body {
                     }
                     span {
                         font-size: 11px;
-                        color: #4f5f79;
+                        color: #4f5f79; /* TODO replace color */
                     }
+                }
+                span {
+                    font-size: 11px;
+                    color: $gray-800;
                 }
             }
             form {
@@ -1726,7 +1853,7 @@ body {
     .cropper .resize .square {
         width: 2px !important;
         height: 2px !important;
-        background-color: #16a4fa !important;
+        background-color: $primary-1 !important;
     }
 
     /*** Loader ****/
@@ -1766,15 +1893,15 @@ body {
 /*** Common layout ***/
 
 .ng7 .ngx-dropdown-container[_ngcontent-c6] .ngx-dropdown-button[_ngcontent-c6] {
-    border: solid 1px #c4cbd5;
-    background-color: #ffffff;
+    border: solid 1px $gray-500;
+    background-color: $white;
     padding: 9px 14px;
     font-size: 13px;
     font-weight: normal;
-    font-family: "Graphik-Regular";
+    font-weight: 400;
     line-height: 1.54;
     letter-spacing: normal;
-    color: #4f5f79;
+    color: $gray-800;
 }
 .ng7
     .ngx-dropdown-container[_ngcontent-c6]
@@ -1858,7 +1985,7 @@ body {
     line-height: 1.33;
     letter-spacing: normal;
     text-align: left;
-    color: #4f5f79;
+    color: $gray-800;
 }
 .ng7 .ng-select .ng-select-container .ng-value-container .ng-value b {
     padding-left: 5px;
@@ -1878,7 +2005,7 @@ body {
     line-height: 1.33;
     letter-spacing: normal;
     text-align: left;
-    color: #4f5f79;
+    color: $gray-800;
 }
 .ng7 .ng-select .ng-arrow-wrapper .ng-arrow {
     border: none;
@@ -1918,7 +2045,7 @@ body {
     font-size: 13px;
     font-weight: 500;
     letter-spacing: normal;
-    color: #4f5f79;
+    color: $gray-800;
     margin-bottom: 0;
 }
 .ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option > span {
@@ -1936,7 +2063,7 @@ body {
     line-height: normal;
     letter-spacing: normal;
     text-align: center;
-    color: #4f5f79;
+    color: $gray-800;
     overflow: hidden;
     @include border-radius(50%);
     font-family: $graphicSemibold;
@@ -1963,7 +2090,7 @@ body {
     -webkit-box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
     box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
-    background-color: #ffffff;
+    background-color: $white;
     border: none;
 }
 
@@ -1992,24 +2119,24 @@ body {
 .ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked,
 .ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected,
 .ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked {
-    background-color: #16a4fa;
+    background-color: #16a4fa; /* TODO replace color */
 }
 .ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected > span,
 .ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked > span {
-    color: #fff;
-    border-color: #fff;
+    color: $white;
+    border-color: $white;
 }
 .ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected > .info span,
 .ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected > .info h5 {
-    color: #fff;
+    color: $white;
 }
 .ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked > .info h5,
 .ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked > .info span {
-    color: #fff;
-    border-color: #fff;
+    color: $white;
+    border-color: $white;
 }
 .ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked > span {
-    color: #4f5f79;
+    color: #4f5f79; /* TODO replace color */
 }
 
 /*** Common responsive ***/
@@ -2206,7 +2333,7 @@ body {
         overflow: hidden;
     }
     body.ng7 {
-        background-color: white;
+        background-color: $white;
     }
     .ng7 .account-info .ul .li:last-child form {
         width: 100%;
@@ -2219,10 +2346,10 @@ body {
         width: 100%;
         right: 0;
         margin: 0;
-        background-color: #16a4fa;
-        color: #fff;
+        background-color: $primary-1;
+        color: $white;
         @include border-radius(0);
-        border-color: #16a4fa;
+        border-color: $primary-1;
         font-size: 14px;
         padding: 14px 15px;
     }
@@ -2249,10 +2376,10 @@ body {
     }
     .ng7 .page-insider .heading .heading-serach > form .form-input:focus {
         width: 288px;
-        border-color: #c4cbd5;
+        border-color: $gray-500;
         padding: 7px 14px 7px 34px;
         margin: 0;
-        background-color: #fff;
+        background-color: $white;
     }
     .ng7 .data-table-wrap table.dataTable {
         table-layout: fixed;
@@ -2417,12 +2544,12 @@ body {
 }
 .angular-editor-toolbar {
     background-color: transparent !important;
-    border: solid 1px #c4cbd5 !important;
+    border: solid 1px $gray-500;
     padding: 10px 15px !important;
     border-top: 0 !important;
 }
 .angular-editor-toolbar .angular-editor-toolbar-set {
-    background-color: #fff !important;
+    background-color: $white !important;
     border: 1px solid transparent !important;
     margin-bottom: 0 !important;
 }
@@ -2434,15 +2561,15 @@ body {
     height: 32px !important;
     border-radius: 4px !important;
     border: solid 1px rgba(196, 203, 213, 0.4) !important;
-    background-color: #f8f9fa !important;
-    font-family: $font-body;
+    background-color: $gray-100 !important;
+    font-weight: 400;
     font-size: 11px;
     font-weight: 500;
     font-stretch: normal;
     font-style: normal;
     line-height: 1.45;
     letter-spacing: normal;
-    color: #4f5f79;
+    color: $gray-800;
 }
 .angular-editor .angular-editor-wrapper .angular-editor-textarea {
     background-color: transparent !important;
@@ -2456,7 +2583,7 @@ body {
 }
 .angular-editor-toolbar .angular-editor-toolbar-set .angular-editor-button.active,
 .angular-editor-toolbar .angular-editor-toolbar-set .angular-editor-button:hover {
-    background-color: #f8f9fa !important;
+    background-color: $gray-100 !important;
     border-radius: 4px !important;
 }
 .angular-editor-wrapper p {
@@ -2468,7 +2595,7 @@ div#editor.angular-editor-textarea {
     resize: none;
     border-radius: 0 0 4px 4px;
     height: 153px !important;
-    border: 1px solid #ddd;
+    border: 1px solid $gray-400;
 }
 
 .invalid-feedback {
@@ -2528,7 +2655,7 @@ div#editor.angular-editor-textarea {
                         font-style: normal;
                         line-height: 1.54;
                         letter-spacing: normal;
-                        color: #4f5f79;
+                        color: $gray-800;
                     }
                 }
             }

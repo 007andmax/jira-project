@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .buttons-container {
   padding: 10px 0 40px;
 }
@@ -70,7 +72,7 @@
   margin-right: 10px;
 
 }
- 
+
 .user-item:nth-child(even) .default-user-avatar, li:nth-child(even) .default-user-avatar {
   background-color: #ffe3af;
 }
@@ -85,7 +87,7 @@
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
   padding: 15px;
   position: relative;
-  background: #fff;
+  background: $white;
   margin: 0;
 }
 
@@ -95,7 +97,7 @@
   width: 0;
   height: 0;
   border: 9px solid transparent;
-  border-bottom-color: #fff;
+  border-bottom-color: $white;
   border-top: 0;
   position: absolute;
   top: -8px;
@@ -105,22 +107,22 @@
 .add-tax-dropdown .form-control {
   width: 100%;
   border: none;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid $gray-400;
   outline: none;
   padding: 10px 0;
-  background-color: #fff;
+  background-color: $white;
 }
 .add-tax-dropdown [class*='col-md-']{
   margin-bottom: 20px;
 }
 .add-tax-dropdown input::placeholder{
-  color: #9ca5b6;
+  color: $gray-600;
   font-size: 13px;
   font-weight: 500;
   letter-spacing: .5px;
 }
 .add-tax-dropdown label {
-  color: #4f5f79;
+  color: $gray-800;
   font-size: 13px;
   padding-left: 25px;
 }
@@ -128,14 +130,14 @@
   top: -1px;
 }
 .add-category-lp-dropdown-btns .btn-default  {
-  background-color: #edf2f6 !important;
-  border: 1px solid #c4cbd5;
-  color: #4f5f79;
+  background-color: $background !important;
+  border: 1px solid $gray-500;
+  color: $gray-800;
 }
 .add-category-lp-dropdown-btns .btn-success {
-  background-color: #2ec866 !important;
-  border: 1px solid #189947;
-  color: #fff;
+  background-color: $success !important;
+  border: 1px solid $success;
+  color: $white;
 }
 .add-category-lp-dropdown-btns {
   display: flex;
@@ -147,24 +149,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: "Graphik-Medium", sans-serif;
+  font-weight: 600;
   font-size: 14px;
-  font-weight: 500;
 }
 
 .add-category-lp-dropdown-btns .btn-success {
   width: 130px;
 }
 .add-category-lp-dropdown-btns .btn-default:hover  {
-  background-color: #c4cbd5 !important;
-  color: #4f5f79;
+  background-color: $gray-500;
+  color: $gray-800;
 }
 .add-category-lp-dropdown-btns .btn-default {
   margin-left: 12px;
   width: 80px;
 }
 .add-category-lp-dropdown-btns   {
-  background-color: #189947 !important;
+  background-color: $success !important;
 }
 .archive-modal button,
 .image-confirm-modal button,
@@ -186,7 +187,34 @@
   background-image: url("/assets/img/icons/close-16.png");
   background-size: cover;
 }
+.download-agent-modal {
+  padding: 50px 75px;
+  position: relative;
 
+  h5 {
+    margin: 14px 0 20px;
+  }
+
+  p {
+    margin: 6px 0 14px;
+    text-align: center;
+  }
+
+  .btn {
+    background-color: #16a4fa;
+    width: 100%;
+    text-align: left;
+    height: 48px;
+    margin-bottom: 10px;
+  }
+
+  .btn-primary.not-active {
+    background-color: #c4cbd5;
+    border-color: #c4cbd5;
+    cursor: default;
+    pointer-events: none;
+  }
+}
 .download-agent-modal .close-modal {
   outline: none;
   position: absolute;
@@ -207,20 +235,19 @@
 }
 
 .tab-btns .btn {
-  background-color: #fff;
+  background-color: $white;
   font-size: 13px;
-  font-weight: 500;
-  color: #4f5f79;
+  color: $gray-800;
   display: inline-block;
   margin: 0;
-  border: 1px solid #edf2f6;
-  font-family: "Graphik-Medium", sans-serif;
+  border: 1px solid $background;
+  font-weight: 600;
 }
 
 .tab-btns .btn:hover,
 .tab-btns .btn.active {
-  background-color: #e8f6ff;
-  color: #16a4fa;
+  background-color: $background;
+  color: $primary-1;
   border: 1px solid transparent;
 }
 
@@ -235,13 +262,13 @@
 }
 .email-text-block,
 .quote-text-block {
-  border: 1px solid #edf2f6;
+  border: 1px solid $background;
   border-radius: 4px;
   padding: 14px 20px;
 }
 .textarea.email-text-block,
 .textarea.quote-text-block {
-  border: 1px solid #c4cbd5 !important;
+  border: 1px solid $gray-500;
   width: 100%;
   min-height: 273px;
   outline: none;
@@ -251,7 +278,7 @@
 }
 .textarea.email-text-block::placeholder,
 .textarea.quote-text-block::placeholder {
-  color: #c0bfcd;
+  color: $gray-500;
 }
 
 .email-text-block textarea,
@@ -260,10 +287,10 @@
   width: 100%;
   border: none;
   font-size: 13px;
-  color: #4f5f79;
+  color: $gray-800;
   outline: none;
   padding: 8px 0;
-  border-bottom: 1px solid #edf2f6;
+  border-bottom: 1px solid $background;
 }
 .email-text-block .wysiwyg-controls-wrapper {
   padding: 0;
@@ -289,7 +316,7 @@
 
 .email-text-block textarea::placeholder,
 .quote-text-block textarea::placeholder {
-  color: #9ca5b6;
+  color: $gray-600;
 }
 .location {
   position: relative;

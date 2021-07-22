@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .qt-fileupload {
   input[type=file] {
     user-select:none;
@@ -5,7 +7,7 @@
   }
   &__label {
     width: 100%;
-    border: 2px dotted #16a4fa;
+    border: 2px dotted $primary-1;
     border-radius: 4px;
     display: block;
     cursor: pointer;
@@ -17,11 +19,11 @@
     justify-content: center;
   }
   &__title {
-    color: #4f5f79;
+    color: $gray-800;
   }
   &__link {
     text-decoration: underline;
-    color: #16a4fa;
+    color: $primary-1;
   }
 
   &__attach-icon {
@@ -53,7 +55,7 @@
   }
 
   label {
-    color: white;
+    color: $white;
     width: 183px;
     height: 44px;
     border-radius: 21.5px;
@@ -108,7 +110,7 @@
       margin: 0;
       margin-bottom: 0.25rem;
       .file-error {
-        color: red;
+        color: $error;
       }
     }
 

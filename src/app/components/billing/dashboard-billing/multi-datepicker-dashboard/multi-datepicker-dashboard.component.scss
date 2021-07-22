@@ -1,5 +1,7 @@
+@import './src/assets/styles/variable';
+
 .disabled {
-    background-color: rgb(235, 235, 228);
+    background-color: $gray-400;
     cursor: default !important;
 }
 .icn-calendar-light {

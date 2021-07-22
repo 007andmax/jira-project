@@ -1,10 +1,10 @@
 .qt-page-list {
   padding: 24px;
-  background-color: #edf2f6;
+  background-color: $background;
   min-height: calc(100vh - #{$header-height});
 
   &__header {
-    background-color: #edf2f6;
+    background-color: $background;
     margin: 0 auto;
     max-width: 1320px;
     width: 100%;
@@ -18,9 +18,10 @@
   }
 
   &__header-title {
-    font-size: 16px;
-    font-family: Graphik-Semibold, sans-serif;
-    margin: 0;
+    font-weight: 600;
+    //font-size: 18px;
+    //line-height: 26px;
+    //margin: 0;
   }
 
   &__header-title-line {
@@ -65,7 +66,7 @@
     width: 28px;
     height: 28px;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
-    background-color: #ffffff;
+    background-color: $white;
     border-radius: 50%;
     margin-right: 8px;
     background-size: 16px;
@@ -99,13 +100,13 @@
       border: none;
       padding: 6px 8px 6px 40px;
       border-radius: 4px;
-      background: #ffffff;
+      background: $white;
       font-size: 13px;
       outline: none;
       position: relative;
 
       &::placeholder {
-        color: #9ca5b6;
+        color: $gray-600;
         opacity: 1;
       }
     }
@@ -115,7 +116,7 @@
   position: sticky;
   top: $header-height;
   padding: 24px 0 0 0;
-  background-color: #edf2f6;
+  background-color: $background;
   margin: 0 auto;
   max-width: 1320px;
   width: 100%;
@@ -125,7 +126,7 @@
   width: 100%;
   position: sticky;
   top: 144px;
-  background-color: #edf2f6;
+  background-color: $background;
   // overflow: auto;
   max-width: 1320px;
   margin: 0 auto;

@@ -6,11 +6,11 @@
                 [textContent]="'Tkt# ' + ticket.number"
             ></div>
             <div class="qt-fs-12 qt-mr-16">
-                <span class="qt-fs-11 qt-ff-sb">Date</span>
+                <span class="qt-fs-11 qt-fw-600">Date</span>
                 {{getDate(ticket.closedAt)}}
             </div>
             <div class="qt-fs-12 invoice-item__subject">
-                <span class="qt-fs-11 qt-ff-sb">Subject:</span>
+                <span class="qt-fs-11 qt-fw-600">Subject:</span>
                 {{ticket.subject}}
             </div>
         </div>
@@ -28,12 +28,12 @@
         <thead>
             <tr>
                 <th></th>
-                <th class="invoice-item__col-item  qt-ff-sb">Item</th>
-                <th class="invoice-item__col-desc  qt-ff-sb">Description</th>
-                <th class="invoice-item__col-price qt-ff-sb">Unit Price</th>
-                <th class="invoice-item__col-quentity qt-ff-sb">Quantity</th>
-                <th class="invoice-item__col-tax qt-ff-sb">Tax</th>
-                <th class="invoice-item__col-amount qt-ff-sb">Amount</th>
+                <th class="invoice-item__col-item  qt-fw-600">Item</th>
+                <th class="invoice-item__col-desc  qt-fw-600">Description</th>
+                <th class="invoice-item__col-price qt-fw-600">Unit Price</th>
+                <th class="invoice-item__col-quentity qt-fw-600">Quantity</th>
+                <th class="invoice-item__col-tax qt-fw-600">Tax</th>
+                <th class="invoice-item__col-amount qt-fw-600">Amount</th>
                 <th></th>
             </tr>
         </thead>

@@ -1,6 +1,6 @@
 <div class="network-scan-page">
     <div class="network-scan-page__content">
-        <div class="network-scan-page__header-title qt-ff-gm">Network Scan</div>
+        <h6 class="qt-fw-600 fw-600 qt-mb-24">Network Scan</h6>
         <app-company-network-scan-no-exist-devices
             *ngIf="!showPreloader && devices.length === 0"
             [companyId]="companyId"
@@ -74,7 +74,7 @@
                     <span>You have using below credentials:</span>
                     <br>
                     <span
-                        class="qt-ff-gm"
+                        class="qt-fw-600"
                         [textContent]="networkScanInstallAgent.getCredentialText()"
                     ></span>
                 </div>

@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .company-info-aside {
   padding: 24px;
   &__main-info {
@@ -16,10 +18,10 @@
   background-size: cover;
   background-position: center;
   font-weight: 600;
-  color: white;
+  color: $white;
   margin-bottom: 10px;
-  // border: solid 1px #dfe3e8;
-  background: rgb(22, 164, 250);
+  // border: solid 1px $gray-400;
+  background: $primary-1;
   border: 1px solid rgba(22, 164, 250, 0.2);
   overflow: hidden;
   }
@@ -29,7 +31,7 @@
   &__email {
   font-size: 13px;
   margin-bottom: 12px;
-  color: #4f5f79;
+  color: $gray-800;
   }
   &__rating {
      display: flex;
@@ -40,7 +42,7 @@
    margin-right: 4px;
   }
   &__divider {
-  border-top: 1px dashed #dfe3e8;
+  border-top: 1px dashed $gray-400;
   margin: 16px 0;
   }
   &__row-info {
@@ -51,20 +53,20 @@
   }
   &__row-info-label {
    font-size: 11px;
-   color: #9ca5b6;
+   color: $gray-600;
    line-height: 12px;
    margin-bottom: 4px;
   }
   &__row-info-value {
    font-size: 13px;
    line-height: 16px;
-   color: #4f5f79;
+   color: $gray-800;
   }
   &__get-direction {
     font-size: 11px;
     font-weight: 600;
     line-height: 1.45;
-    color: #16a4fa;
+    color: $primary-1;
     margin-top: 7px;
     cursor: pointer;
     display: flex;
@@ -83,7 +85,7 @@
   &__primary-contacts-title {
     font-size: 10px;
     font-weight: 600;
-    color: #4f5f79;
+    color: $gray-800;
     margin-bottom: 14px;
     line-height: 12px;
     text-transform: uppercase;
@@ -92,7 +94,7 @@
   &__primary-contact-name {
     font-size: 12px;
     font-weight: 600;
-    color: #4f5f79;
+    color: $gray-800;
     line-height: 16px;
   }
 
@@ -100,7 +102,7 @@
   &__primary-contact-email {
      font-size: 12px;
      font-stretch: normal;
-     color: #4f5f79;
+     color: $gray-800;
      line-height: 1.33;
   }
 
@@ -117,12 +119,12 @@
     align-items: center;
     justify-content: center;
     font-weight: 600;
-    color: white;
+    color: $white;
   }
   &__history-block {
     border-radius: 6px;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.05);
-    border: solid 1px #dfe3e8;
+    border: solid 1px $gray-400;
     padding: 9px 12px;
     margin-bottom: 6px;
     margin-top: 0;
@@ -133,12 +135,12 @@
    font-size: 12px;
    font-weight: 600;
    line-height: 1.33;
-   color: #4f5f79;
+   color: $gray-800;
    margin-bottom: 4px;
   }
   &__history-block-date {
    font-size: 11px;
    line-height: 1.45;
-   color: #4f5f79;
+   color: $gray-800;
   }
 }

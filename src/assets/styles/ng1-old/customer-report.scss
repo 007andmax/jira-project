@@ -67,7 +67,7 @@ html.no-d3-tooltip .nvtooltip .value {
 
 .customer-ticket__report--summary, .customer-ticket__report--details-plus {
   padding: 15px;
-  border-bottom: 1px solid #d3d8e1;
+  border-bottom: 1px solid $gray-400;
 }
 
 .customer-ticket__report--summary table, .customer-ticket__report--details table, .customer-ticket__report--details-plus table {
@@ -77,7 +77,7 @@ html.no-d3-tooltip .nvtooltip .value {
 }
 
 .customer-ticket__report--summary .details-futures-info, .customer-ticket__report--details-plus .details-futures-info {
-  border: 1px solid #d3d8e1;
+  border: 1px solid $gray-400;
   min-height: 50px;
   padding: 5px;
 }
@@ -110,7 +110,7 @@ html.no-d3-tooltip .nvtooltip .value {
 }
 
 .details-futures-info {
-  border: 1px solid #d3d8e1;
+  border: 1px solid $gray-400;
   display: inline-block;
   width: 100%;
   position: relative;
@@ -121,7 +121,7 @@ html.no-d3-tooltip .nvtooltip .value {
 }
 
 .report-info-point {
-  border-bottom: 1px solid #d3d8e1;
+  border-bottom: 1px solid $gray-400;
 }
 
 .legend-customer {

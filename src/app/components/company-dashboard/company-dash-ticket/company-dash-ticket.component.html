@@ -1,13 +1,13 @@
 <div class="cmp-board-tickets cmn-box d-flex">
   <div class="cmp-board-title-wrap d-flex">
-    <h2>Tickets</h2>
+    <h6>Tickets</h6>
     <div ngbDropdown class="d-flex">
       <button class="selected-item" id="dropdownBasic1" ngbDropdownToggle>{{ticketFrequency}}</button>
       <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
         <button class="item" ngbDropdownItem (click)="getTicketGraph('Monthly')">Monthly</button>
         <button class="item" ngbDropdownItem (click)="getTicketGraph('Weekly')">Weekly</button>
         <button class="item" ngbDropdownItem (click)="getTicketGraph('Daily')">Daily</button>
-      </div> 
+      </div>
     </div>
    </div>
   <nvd3 [options]="lineChartOptions" [data]="lineData"></nvd3>

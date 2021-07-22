@@ -16,7 +16,7 @@
         [autoClose]="'inside'"
         #editCustomer="ngbDropdown"
     >
-        <div class="qt-fs-10 qt-ff-sb  qt-df qt-ai-c qt-mb-4 qt-lh-154">
+        <div class="qt-fs-10 qt-fw-600  qt-df qt-ai-c qt-mb-4 qt-lh-154">
             <div class="qt-sz-16 icon__company-address qt-ic-c qt-mr-4"></div>
             BILLING ADDRESS
         </div>
@@ -179,7 +179,7 @@
             *ngIf="!toggleDiscount"
         >
             <div
-                class="info-button-sm qt-ff-gm"
+                class="info-button-sm qt-fw-600"
                 (click)="toggleDiscount = !toggleDiscount"
             >
                 <div class="icon__discount qt-mr-4 qt-sz-16 qt-ic-c"></div>
@@ -221,9 +221,9 @@
     </div>
 </div>
 <div class="terms-n-conditions qt-pl-30 qt-pr-30 qt-pb-24 qt-pt-16">
-    <div class="qt-fs-13 qt-ff-gm qt-mb-12">Terms & Conditions</div>
+    <div class="qt-fs-13 qt-fw-600 qt-mb-12">Terms & Conditions</div>
     <div
-        class="qt-fs-12 qt-color-info qt-ff-gm pointer"
+        class="qt-fs-12 qt-color-info qt-fw-600 pointer"
         *ngIf="changeGlobalNote"
         (click)="onUpdateGlobalNote()"
     >

@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .products-accordion {
     position: static;
   }
@@ -11,12 +13,12 @@
       height: 40px;
       font-size: 13px;
       border-radius: 3px;
-      border: solid 1px #c4cbd5;
-      background-color: white;
-      color: #4f5f79;
+      border: solid 1px $gray-500;
+      background-color: $white;
+      color: $gray-800;
       padding: 10px 12px;
       &::placeholder {
-        color: #9ca5b6;
+        color: $gray-600;
       }
     }
     &__dropdown {
@@ -25,17 +27,17 @@
       }
       border-radius: 6px;
       box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-      border: solid 1px #dfe3e8;
+      border: solid 1px $gray-400;
     }
     &__header {
       padding: 20px 24px;
       display: flex;
       position: sticky;
       z-index: 99;
-      background: white;
+      background: $white;
       top: 0;
-      border-bottom: 1px solid #dfe3e8;
-      box-shadow: 0px 0px 7px 1px #c4cbd5;
+      border-bottom: 1px solid $gray-400;
+      box-shadow: 0px 0px 7px 1px $gray-500;
       justify-content: space-between;
     }
 
@@ -48,17 +50,17 @@
     &__header-add-product {
       font-size: 12px;
       font-weight: 500;
-      color: #16a4fa;
+      color: $primary-1;
       cursor: pointer;
     }
 
     &__footer-add-product {
       font-size: 12px;
       font-weight: 500;
-      color: #16a4fa;
+      color: $primary-1;
       cursor: pointer;
       padding: 12px 16px;
-      border-top: 1px solid #dfe3e8;
+      border-top: 1px solid $gray-400;
 
     }
 
@@ -79,13 +81,13 @@
     /deep/ .card {
       &.opened-card {
         padding: 0 24px 16px 24px;
-        background-color: #f4f6f8;
+        background-color: $gray-200;
 
         .select-product {
           &__item-title {
             background: transparent;
             font-size: 13px;
-            color: #4f5f79;
+            color: $gray-800;
             padding-left: 0 !important;
             padding-right: 0 !important;
           }
@@ -97,11 +99,11 @@
 
         .category-product {
             padding: 11px 16px !important;
-            background: white;
+            background: $white;
             border-radius: 4px;
             box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
             margin-bottom: 4px !important;
-            border: 1px solid white !important;
+            border: 1px solid $white !important;
             display: flex;
             justify-content: space-between;
             flex-direction: column;
@@ -114,8 +116,8 @@
               display: none;
             }
             &:hover {
-              border: solid 1px #16a4fa !important;
-              background-color: #e7f5fe;
+              border: solid 1px $primary-1 !important;
+              background-color: $gray-200;
               display: flex;
               flex-direction: row;
               align-items: center;
@@ -124,14 +126,14 @@
               }
               .button-add {
                 border-radius: 4px;
-                border: solid 1px #16a4fa;
-                background-color: #ffffff;
+                border: solid 1px $primary-1;
+                background-color: $white;
                 height: 32px;
                 display: flex;
                 align-items: center;
                 padding: 8px 12px;
                 font-size: 12px;
-                color: #16a4fa;
+                color: $primary-1;
                 font-weight: 600;
                 white-space: nowrap;
               }
@@ -148,7 +150,7 @@
             }
             .manufacture {
               font-size: 11px;
-              color: #9ca5b6;
+              color: $gray-600;
             }
           }
       }
@@ -182,7 +184,7 @@
     z-index: 1;
   }
   .select-product__input {
-    background: #f4f6f8;
+    background: $gray-200;
     position: relative;
     padding-left: 32px;
   }

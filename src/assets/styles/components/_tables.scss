@@ -1,3 +1,6 @@
+@import './src/assets/styles/variable';
+@import './src/assets/styles/fonts';
+
 table.qt-table-modern {
   width: 100%;
   border-collapse: separate;
@@ -7,6 +10,10 @@ table.qt-table-modern {
     font-size: 12px;
     th {
       padding: 8px;
+      @extend %сaption-m-sb;
+      font-size: 20px;
+      color: $primary-2;
+      text-transform: uppercase;
       &:first-child {
         padding-left: 16px;
       }
@@ -16,10 +23,11 @@ table.qt-table-modern {
     }
   }
   tbody {
-    font-size: 13px;
+    //font-size: 13px;
+    @extend %body-m;
     tr {
       td {
-        background: #ffffff;
+        background: $white;
         padding: 0 8px 0 8px;
         height: 48px;
         border-top: 1px solid transparent;
@@ -41,8 +49,8 @@ table.qt-table-modern {
 
       &.--selected {
         td {
-          background: #f4fbff;
-          border-color: #16a4fa;
+          background: $gray-200;
+          border-color: $primary-1;
         }
       }
     }
@@ -57,7 +65,7 @@ table.qt-table-modern {
       background-size: cover;
       margin-right: 8px;
       font-weight: 600;
-      color: white;
+      color: $white;
       align-items: center;
       justify-content: center;
       display: flex;

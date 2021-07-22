@@ -1,5 +1,9 @@
+@import './src/assets/styles/variable';
+@import './src/assets/styles/fonts';
+
 html {
-  font-family: 'Graphik-Regular', sans-serif;
+  font-family: "Inter";
+  font-weight: 400;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   overflow-y: scroll;
@@ -11,14 +15,12 @@ html {
 
 body {
   margin: 0;
-  /*min-width: 1200px;*/
   overflow: hidden;
   display: initial;
-  font-family: 'Graphik-Regular', sans-serif;
-  font-size: 14px;
-  line-height: 24px;
-  color: #404b5f;
-  background-color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  @extend %body-m;
+  color: $gray-800;
+  background-color: $white;
 }
 html body {
   line-height: 24px;
@@ -30,12 +32,12 @@ body input::-ms-clear {
 
 _::-webkit-:host:not(:root:root),
 body .left-panel-full {
-  font-family: 'Graphik-Medium', sans-serif;
+  font-weight: 600;
 }
 
 .btn-success {
-  background-color: #90c56b;
-  border-color: #90c56b;
+  background-color: $success;
+  border-color: $success;
 }
 .icn-remove-old {
   background-image: url('/assets/img/icons/close-10.png');
@@ -55,7 +57,7 @@ hr {
 
 
 .text-muted {
-  color: #4f5f79;
+  color: $gray-800;
   font-size: 13px;
 }
 
@@ -83,7 +85,7 @@ hr {
     height: 40px;
     padding: 0 12px;
     font-size: 13px;
-    border: 1px solid #c4cbd5;
+    border: 1px solid $gray-500;
     border-radius: 4px;
   }
   .form-group {
@@ -91,7 +93,7 @@ hr {
     margin-bottom: 24px;
 
     p {
-      font-family: "Graphik-Medium", sans-serif;
+      font-weight: 600;
       font-size: 13px;
       margin-bottom: 8px;
     }
@@ -99,19 +101,19 @@ hr {
   .qt-button {
     padding: 10px 16px;
     &.--red {
-      background: #fff;
-      color: #ff5263;
+      background: $white;
+      color: $error;
     }
   }
   .button-verification {
     background: none;
-    color: #16a4fa;
+    color: $primary-1;
     font-size: 16px;
-    font-family: "Graphik-Regular", sans-serif;
+    font-weight: 400;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-top: 1px solid #dfe3e8;
+    border-top: 1px solid $gray-400;
     padding: 14px 0;
     height: auto;
     width: 100%;
@@ -134,43 +136,43 @@ hr {
 .recurring-tickets-content__modal--content app-interval > [class*="col-md-"] input::placeholder,
 .password-content__modal--content > [class*="col-md-"] input::placeholder {
   opacity: 1;
-  color: #9ca5b6;
+  color: $gray-600;
 }
 
 .new-companies-content__modal--content textarea::placeholder,
 .new-users-content__modal--content textarea::placeholder,
 .recurring-tickets-content__modal--content textarea::placeholder,
 .password-content__modal--content textarea::placeholder {
-  color: #9ca5b6;
+  color: $gray-600;
 }
 .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
   /* background-color: #fcfdfd; */
   opacity: 1;
 }
 .form-control::-moz-placeholder {
-  color: #b2becd;
+  color: $gray-500;
   opacity: 1;
 }
 
 .form-control:-ms-input-placeholder {
-  color: #b2becd;
+  color: $gray-500;
 }
 
 .form-control::-webkit-input-placeholder {
-  color: #b2becd;
+  color: $gray-500;
 }
 
 .form-control-search::-moz-placeholder {
-  color: #b2becd;
+  color: $gray-500;
   opacity: 1;
 }
 
 .form-control-search:-ms-input-placeholder {
-  color: #b2becd;
+  color: $gray-500;
 }
 
 .form-control-search::-webkit-input-placeholder {
-  color: #b2becd;
+  color: $gray-500;
 }
 
 .recurring-tickets-content__modal .checkbox-wrapper .with-checkbox, .new-companies-content__modal .checkbox-wrapper .with-checkbox, .new-users-content__modal .checkbox-wrapper .with-checkbox, .documents-create .checkbox-wrapper .with-checkbox, .documents-create-aside-categories .checkbox-wrapper .with-checkbox {
@@ -182,7 +184,7 @@ hr {
 }
 
 .recurring-tickets-content__modal .checkbox-wrapper .with-checkbox p, .new-companies-content__modal .checkbox-wrapper .with-checkbox p, .new-users-content__modal .checkbox-wrapper .with-checkbox p {
-  font-family: "Graphik-Regular", sans-serif;
+  font-weight: 400;
   margin: 0;
 }
 
@@ -208,11 +210,11 @@ a:hover, a:focus {
 }
 
 body .topNavbar {
-  font-family: 'Graphik-Medium', sans-serif;
+  font-weight: 600;
 }
 
 body .topNavbar strong span {
-  font-family: 'Graphik-Medium', sans-serif;
+  font-weight: 600;
 }
 
 /* SCROLLBAR */
@@ -248,12 +250,12 @@ html::-webkit-scrollbar {
 
 .custom-scroll::-webkit-scrollbar-thumb {
   background-color: #d2dae4;
-  border: 3px solid #ffffff;
+  border: 3px solid $white;
   border-radius: 10px;
 }
 
 .custom-scroll::-webkit-scrollbar-thumb:hover {
-  background-color: #b2becd;
+  background-color: $gray-500;
 }
 
 .dropdown-assign-ticket .users-list::-webkit-scrollbar-thumb {
@@ -307,7 +309,7 @@ html::-webkit-scrollbar {
   list-style: none;
   font-size: 14px;
   text-align: left;
-  background-color: #ffffff;
+  background-color: $white;
   border-radius: 4px;
   -webkit-box-shadow: 0 4px 20px 0 rgba(10, 45, 89, 0.1);
   box-shadow: 0 4px 20px 0 rgba(10, 45, 89, 0.1);
@@ -319,11 +321,11 @@ p {
   font-size: 14px;
   margin: 0;
   line-height: 24px;
-  font-family: 'Graphik-Regular', sans-serif;
+  font-weight: 400;
 }
 
 .new-companies-content__modal--content > [class*="col-md-"] p, .new-users-content__modal--content > [class*="col-md-"] p, .recurring-tickets-content__modal--content > [class*="col-md-"] p, .new-users-content__modal--content app-interval > [class*="col-md-"] p, .recurring-tickets-content__modal--content app-interval > [class*="col-md-"] p, .password-content__modal--content > [class*="col-md-"] p {
-  font-family: "Graphik-Medium", sans-serif;
+  font-weight: 600;
   font-size: 13px;
   margin-bottom: 8px;
 }
@@ -337,7 +339,7 @@ p {
   height: 40px;
   padding: 0 12px;
   font-size: 13px;
-  border: 1px solid #c4cbd5;
+  border: 1px solid $gray-500;
   border-radius: 4px;
 }
 
@@ -362,9 +364,9 @@ p {
 }
 
 .new-link {
-  font-family: "Graphik Regular", sans-serif;
+  font-weight: 400;
   font-size: 12px;
-  color: #16a4fa !important;
+  color: $primary-1 !important;
   text-decoration: none;
   cursor: pointer;
   font-style: normal;
@@ -383,7 +385,7 @@ label {
   font-size: 14px;
   line-height: 12px;
   font-weight: 400;
-  color: #404b5f;
+  color: $gray-800;
   cursor: inherit;
 }
 .radio, .checkbox {
@@ -397,7 +399,7 @@ label {
   position: relative;
   display: inline-block;
   padding-left: 1.5rem;
-  color: #4c5c6f;
+  color: $gray-800;
   cursor: pointer;
   font-size: 14px;
   -webkit-user-select: none;
@@ -418,19 +420,19 @@ label {
   height: 16px;
   line-height: 16px;
   font-size: 65%;
-  color: #ffffff;
+  color: $white;
   text-align: center;
   //border: 1px solid #d2dae4;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  background-color: #ffffff;
+  background-color: $white;
 }
 //.control input:checked ~ .control-indicator {
 //  background-position: -858px -120px;
-//  background-color: #2ec866;
-//  border-color: #2ec866;
+//  background-color: $success;
+//  border-color: $success;
 //}
 .checkbox .control-indicator {
   position: absolute;
@@ -480,11 +482,11 @@ strong {
   font-weight: 700;
 }
 .company-new-cover-wrapper p, strong {
-  font-family: 'Graphik-Medium', sans-serif;
+  font-weight: 600;
 }
 
 .company-new-cover-wrapper p, strong {
-  font-family: 'Graphik-Medium', sans-serif;
+  font-weight: 600;
 }
 
 .p-0 {
@@ -493,9 +495,9 @@ strong {
 
 /* Textarea */
 .password-content__modal--content textarea {
-  /* background: #fff8eb; */
+  /* background: $gray-400; */
   /* border: 1px solid #ffe3af; */
-  border: 1px solid #c4cbd5;
+  border: 1px solid $gray-500;
   border-radius: 4px;
   min-height: 80px;
   width: 100%;
@@ -614,7 +616,7 @@ textarea {
   padding: 0 10px;
   font-size: 11px;
   border-radius: 3px;
-  font-family: "Graphik-Medium", sans-serif;
+  font-weight: 600;
   border: none;
   text-align: center;
   width: auto;
@@ -623,13 +625,13 @@ textarea {
 
 .status-in-progress {
   background-color: #d0edfe;
-  color: #16a4fa;
+  color: $primary-1;
   display: inline-block;
 }
 
 .payment-status.paid, .status-success, .dashboard-network-scan-list .success-status, .invoices .success-status {
   background-color: #d5f4e0;
-  color: #2ec866;
+  color: $success;
   display: inline-block;
 }
 
@@ -674,7 +676,7 @@ textarea {
 }
 
 .form-control[disabled], input[disabled] {
-  background-color: rgb(235, 235, 228);
+  background-color: $gray-400;
 }
 
 .left-panel-filter i, .new-users-content__modal--content i, .recurring-tickets-content__modal--content i, .password-content__modal--content i {
@@ -689,15 +691,15 @@ h3, .h3 {
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: inherit;
-  color: #404b5f;
+  color: $gray-800;
   margin-top: revert;
   margin-bottom: revert;
   font-weight: bold;
 }
 .info-block {
   padding: 10px 10px 10px 50px;
-  background-color: #e7f5fe;
-  color: #16a4fa;
+  background-color: $gray-200;
+  color: $primary-1;
   position: relative;
   border-radius: 3px;
   width: 88%;
@@ -707,9 +709,9 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   content: 'i';
   width: 20px;
   height: 20px;
-  background-color: #16a4fa;
+  background-color: $primary-1;
   border-radius: 50%;
-  color: #fff;
+  color: $white;
   left: 17px;
   text-align: center;
 }
@@ -721,7 +723,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   top: 0;
   z-index: 11111111;
   width: 100%;
-  background: #ffffff;
+  background: $white;
   border-radius: 3px 3px 0 0;
 }
 
@@ -797,7 +799,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   display: inline-block;
   width: 26px;
   height: 26px;
-  background-color: #b2becd;
+  background-color: $gray-500;
 }
 
 .avatar-26.remove:hover {
@@ -822,7 +824,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 
 .avatar .no-avatar {
-  background-color: #b2becd;
+  background-color: $gray-500;
 }
 
 .avatar > i {
@@ -832,7 +834,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   width: 12px;
   height: 12px;
   margin: 2px;
-  border: 2px solid #ffffff;
+  border: 2px solid $white;
   border-radius: 100%;
   -webkit-transition: top 0.3s ease-out, right 0.3s ease-out;
   -moz-transition: top 0.3s ease-out, right 0.3s ease-out;
@@ -905,14 +907,14 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   width: 100%;
   padding: 0;
   border: none;
-  background: #f3f7f9;
+  background: $gray-200;
   box-shadow: none;
-  font-family: "Graphik-Medium", sans-serif;
+  font-weight: 600;
 }
 
 .company-report li.content-product-list-ticket {
-  background-color: #fff;
-  margin-bottom: 8px;
+  background-color: $white;
+  margin-bottom: 2px;
   border: none !important;
   border-radius: 5px;
   box-shadow: 0 8px 16px 0 rgba(54,70,86,.02);
@@ -923,21 +925,17 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 .company-report .content-product-list-ticket .control.checkbox {
   margin-top: 20px;
 }
-.company-report .top-product-list-ticket .control.checkbox {
-  margin-top: 7px;
-}
 .company-report [class*=col-md-] {
   padding: 12px 6px;
-  font-weight: 500;
 }
 .company-report .top-product-list-ticket [class*=col-md-] {
-  font-size: 11px;
+  @extend %сaption-m-sb;
 }
 .list-of-product .report-title {
   left: 30px;
 }
 .company-report .top-product-list-ticket {
-  color: #364656 !important;
+  color: $primary-2;
   border: none;
   padding: 0 15px;
 }
@@ -991,7 +989,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   clear: both;
   font-weight: normal;
   line-height: 2;
-  color: #4c5c6f;
+  color: $gray-800;
   white-space: nowrap;
   text-decoration: none;
   overflow: hidden;

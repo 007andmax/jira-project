@@ -59,7 +59,7 @@
     <td class="company-devices-table__device-name">
         <div>
             <div class="qt-df qt-fd-c">
-                <div class="company-devices-table-device-name qt-ff-gm qt-df qt-ai-c">
+                <div class="company-devices-table-device-name qt-fw-600 qt-df qt-ai-c">
                     <span [textContent]="getLabelForEdit()"></span>
                     <!-- <app-company-devices-edit-label
                         #editLabel
@@ -80,7 +80,7 @@
     <td class="company-devices-table__logged-user">
         <div class="qt-df qt-fd-c">
             <span
-                class="logged-name qt-ff-gm"
+                class="logged-name qt-fw-600"
                 [textContent]="device.userName || ''"
             ></span>
             <span
@@ -129,7 +129,7 @@
             </span>
             <span
                 *ngIf="device.online"
-                class="uptime-tag qt-ff-gm"
+                class="uptime-tag qt-fw-600"
                 [textContent]="'Online'"
             ></span>
             <span
@@ -137,7 +137,7 @@
                 placement="top"
                 container="body"
                 [ngbTooltip]="tipOfflineDevice"
-                class="uptime-tag qt-ff-gm --offline"
+                class="uptime-tag qt-fw-600 --offline"
                 [textContent]="'Offline'"
             ></span>
         </div>

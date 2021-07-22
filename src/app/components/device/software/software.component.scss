@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .user-list-info{
     margin-top: 8px;
     margin-bottom: 38px;
@@ -16,8 +18,8 @@ li.add-user {
     display: flex;
     align-items: center;
     a {
-        border: solid 1px #dfe3e8;
-        background: #fff;
+        border: solid 1px $gray-400;
+        background: $white;
         border-radius: 50%;
         display: flex;
         justify-content: center;
@@ -34,14 +36,14 @@ li.add-user {
         text-align: center;
         width: 70px;
         border-radius: 3px;
-        background-color: #4f5f79;
+        background-color: $gray-800;
         font-size: 12px;
         font-weight: 500;
         font-style: normal;
         font-stretch: normal;
         line-height: 1.33;
         letter-spacing: normal;
-        color: #ffffff;
+        color: $white;
         left: -22px;
         top: -40px;
         visibility: hidden;
@@ -65,7 +67,7 @@ li.add-user {
         position: absolute;
         pointer-events: none;
         border-color: rgba(79, 95, 121, 0);
-        border-top-color: #4f5f79;
+        border-top-color: $gray-800;
         border-width: 6px;
         margin-left: -6px;
         bottom: 25px;
@@ -83,7 +85,7 @@ li.add-user {
             background: url(/assets/img/search-ico.svg) no-repeat 12px center;
             font-size: 12px;
             line-height: 1.67;
-            background-color: #ffffff;
+            background-color: $white;
             width: 200px;
         }
     }

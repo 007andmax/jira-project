@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .left-panel-ng2 {
   display: block;
   height: 100vh;
@@ -6,14 +8,13 @@
   left: 76px;
   top: 0;
   z-index: 992;
-  background: #354053;
+  background:$primary-2;
   overflow-x: scroll;
   transition: left 300ms;
 
   &__header {
     font-size: 12px;
-    font-family: 'Graphik Medium', sans-serif;
-    font-weight: 500;
+    font-weight: 400;
   }
   &::-webkit-scrollbar-thumb,
   &::-webkit-scrollbar{
@@ -86,16 +87,16 @@
   border: 2px solid;
   border-radius: 50%;
   &.--red {
-    border-color: #ff4940;
+    border-color: $error;
   }
   &.--green {
-    border-color: #2ec866;
+    border-color: $success;
   }
   &.--blue {
-    border-color: #16a4fa;
+    border-color: $primary-1;
   }
   &.--yellow {
-    border-color: #ffb937;
+    border-color: $warning;
   }
 }
 
@@ -115,15 +116,15 @@
    /* display: none !important;*/
 }
 .active {
-    background: #3e4b61;
-     color: #16a4fa;
-    border-left: 2px solid #16a4fa;
+    background: $gray-800;
+     color: $primary-1;
+    border-left: 2px solid $primary-1;
 }
 .category-item {
     &:hover {
-        color: #16a4fa;
+        color: $primary-1;
     }
 }
 .category-name  {
-    color: white;
+    color: $white;
 }

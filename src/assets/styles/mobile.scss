@@ -1,12 +1,14 @@
+@import './src/assets/styles/variable';
+
 @media (max-width: 414px) {
   .mob-filters-header.desktop-hidden {
-    background: #27303f;
+    background: $primary-2;
     height: 56px;
     display: flex !important;
     justify-content: flex-start;
     align-items: center;
     padding: 20px !important;
-    color: #fff;
+    color: $white;
     width: 100vw;
     font-size: 16px;
   }
@@ -57,7 +59,7 @@
     }
   }
   .password-content__modal .password-modal-actions button {
-    background-color: #fff !important;
+    background-color: $white !important;
   }
 
   //  COMPANIES FILTERS MOB VERSION
@@ -77,9 +79,9 @@
         width: 90%;
         margin: 20px 20px 0;
         padding: 0 0 10px 0;
-        font-family: "Graphik-Medium", sans-serif;
+        font-weight: 600;
         font-size: 13px;
-        color: #fff;
+        color: $white;
         text-transform: capitalize;
         font-weight: 100;
         opacity: 1;
@@ -97,7 +99,7 @@
             height: 36px;
             border: none;
             border-radius: 3px;
-            background: #313a4d;
+            background: $gray-800;
             width: 100%;
             &::placeholder {
               color: #9faaba;
@@ -109,11 +111,11 @@
           &__header {
             font-size: 12px;
             text-transform: uppercase;
-            color: #9ca5b6;
+            color: $gray-600;
           }
           &__content {
             p {
-              color: #16a4fa;
+              color: $primary-1;
             }
           }
         }

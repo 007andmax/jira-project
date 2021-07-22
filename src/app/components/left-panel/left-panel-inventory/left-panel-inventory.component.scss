@@ -1,3 +1,5 @@
- .category-name  {
-    color: white;
+@import './src/assets/styles/variable';
+
+.category-name  {
+    color: $white;
 }

@@ -1,10 +1,13 @@
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
+
 .qt-checkbox {
   margin: 0;
   cursor: pointer;
 
   span {
-    border: 1px solid #c4cbd5;
-    background: white;
+    border: 1px solid $gray-500;
+    background: $white;
     min-width: 16px;
     width: 16px;
     height: 16px;
@@ -28,7 +31,7 @@
 
   &.--disabled {
     span {
-      background: #c4cbd5;
+      background: $gray-500;
     }
   }
 }
@@ -502,17 +505,18 @@
   text-transform: uppercase;
 }
 
-.qt-ff-gm {
-  font-family: Graphik-Medium, sans-serif;
+// TODO delete
+.сaption-l {
+  @extend %сaption-l;
 }
-.qt-ff-gr {
-  font-family: Graphik-Regular, sans-serif;
-}
-.qt-ff-sb {
-  font-family: Graphik-Semibold, sans-serif;
+.сaption-m {
+  @extend %сaption-m;
 }
 
-.qt-fw-sb {
+.qt-fw-400 {
+  font-weight: 400;
+}
+.qt-fw-600 {
   font-weight: 600;
 }
 .qt-fw-b {
@@ -590,6 +594,29 @@
 }
 
 .qt-color-dark {
+  color: $primary-2;
+}
+.qt-color-dark-light {
+  color: $gray-800;
+}
+.qt-color-light {
+  color: $gray-600;
+}
+.qt-color-info {
+  color: $primary-1;
+}
+.qt-color-white {
+  color: $white;
+}
+
+.qt-bg-info {
+  background-color: $primary-1;
+}
+.qt-bg-white {
+  background-color: $white;
+}
+
+.qt-color-dark {
   color: #364656;
 }
 .qt-color-dark-light {
@@ -635,10 +662,10 @@
   display: flex;
   flex-direction: column;
   label {
-    font-family: Graphik-Medium, sans-serif;
+    font-weight: 600;
     font-size: 13px;
     margin-bottom: 12px;
-    color: #4f5f79;
+    color: $gray-800;
     line-height: 12px;
   }
 
@@ -666,14 +693,14 @@
   input {
     height: 40px;
     border-radius: 4px;
-    border: solid 1px #c4cbd5;
-    background-color: #ffffff;
+    border: solid 1px $gray-500;
+    background-color: $white;
     padding: 10px 14px;
-    color: #4f5f79;
+    color: $gray-800;
     font-size: 13px;
     width: 100%;
     &::placeholder {
-      color: #9ca5b6;
+      color: $gray-600;
     }
   }
   &.h36 {
@@ -686,35 +713,35 @@
 
 .input_inside_white_important,
 .input_inside_white_important input {
-  background-color: white !important;
+  background-color: $white !important;
 }
 
 .qt-textarea {
   border-radius: 4px;
-  border: solid 1px #c4cbd5;
-  background-color: #ffffff;
+  border: solid 1px $gray-500;
+  background-color: $white;
   width: 100%;
   padding: 10px 14px;
   font-size: 13px;
-  font-family: Graphik-Regular, sans-serif;
+  font-weight: 400;
   &::placeholder {
-    color: #9ca5b6;
+    color: $gray-600;
   }
 }
 
 .qt-button {
   height: 40px;
   border-radius: 4px;
-  background-color: #16a4fa;
+  background-color: $primary-1;
   font-size: 13px;
-  color: white;
+  color: $white;
   padding: 10px 20px;
   display: flex;
   align-items: center;
   border: none;
   width: fit-content;
   cursor: pointer;
-  font-family: Graphik-Medium, sans-serif;
+  font-weight: 600;
   position: relative;
 
   &.--disabled {
@@ -723,21 +750,21 @@
   }
 
   &.--outline {
-    color: #16a4fa;
-    border: 1px solid #16a4fa;
-    background-color: white;
+    color: $primary-1;
+    border: 1px solid $primary-1;
+    background-color: $white;
   }
 
   &.--gray {
-    color: #4f5f79;
-    border: solid 1px #c5cdd5;
-    background-color: white;
+    color: $gray-800;
+    border: solid 1px $gray-500;
+    background-color: $white;
   }
 
   &.--red {
-    color: white;
-    border: solid 1px #ff5263;
-    background-color: #ff5263;
+    color: $white;
+    border: solid 1px $error;
+    background-color: $error;
   }
 
   &.--with-menu {
@@ -780,7 +807,7 @@
 
 .qt-popup-arrow {
   left: 20px;
-  background: white;
+  background: $white;
   width: 10px;
   height: 10px;
   top: -5px;
@@ -794,12 +821,12 @@
 .qt-green-label {
   height: 20px;
   border-radius: 3px;
-  background-color: #2ec866;
+  background-color: $success;
   font-size: 10px;
-  color: white;
+  color: $white;
   padding: 4px 6px;
   width: fit-content;
-  font-family: Graphik-Medium, sans-serif;
+  font-weight: 600;
   display: flex;
   align-items: center;
 }
@@ -808,11 +835,11 @@
   width: 40px;
   height: 40px;
   border-radius: 4px;
-  background-color: #637382;
+  background-color: $gray-700;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: $white;
   font-size: 21px;
   background-repeat: no-repeat;
   background-position: center;
@@ -829,14 +856,14 @@
 .qt-input {
   height: 40px;
   border-radius: 4px;
-  border: solid 1px #c4cbd5;
-  background-color: #ffffff;
+  border: solid 1px $gray-500;
+  background-color: $white;
   padding: 10px 14px;
-  color: #4f5f79;
+  color: $gray-800;
   font-size: 13px;
   flex-grow: 1;
   &::placeholder {
-    color: #9ca5b6;
+    color: $gray-600;
   }
 }
 
@@ -845,8 +872,8 @@
   height: 40px;
   min-width: 40px;
   border-radius: 4px;
-  border: solid 1px #c4cbd5;
-  background-color: #f4f6f8;
+  border: solid 1px $gray-500;
+  background-color: $gray-200;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   border-right: none;
@@ -854,7 +881,7 @@
   align-items: center;
   justify-content: center;
   font-size: 15px;
-  font-family: Graphik-Semibold, sans-serif;
+  font-weight: 600;
 }
 
 .qt-input-prepend {
@@ -867,8 +894,8 @@
   height: 40px;
   min-width: 40px;
   border-radius: 4px;
-  border: solid 1px #c4cbd5;
-  background-color: #f4f6f8;
+  border: solid 1px $gray-500;
+  background-color: $gray-200;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   border-left: none;
@@ -876,7 +903,7 @@
   align-items: center;
   justify-content: center;
   font-size: 15px;
-  font-family: Graphik-Semibold, sans-serif;
+  font-weight: 600;
 }
 
 .qt-input-afterpend {
@@ -888,10 +915,10 @@
   list-style-type: none;
   position: absolute;
   top: calc(100% + 4px);
-  background: white;
+  background: $white;
   border-radius: 4px;
   box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-  background-color: #ffffff;
+  background-color: $white;
   padding: 8px 0;
   margin: 0;
   overflow: visible;
@@ -915,21 +942,21 @@
   &.--border {
     padding-top: 8px;
     padding-bottom: 8px;
-    border: 1px solid #dfe3e8;
+    border: 1px solid $gray-400;
   }
   li {
     height: 32px;
-    background-color: white;
+    background-color: $white;
     padding: 0 16px;
     display: flex;
     align-items: center;
-    color: #4f5f79;
+    color: $gray-800;
     font-size: 13px;
     cursor: pointer;
     position: relative;
     white-space: nowrap;
     &:hover {
-      background-color: #edf2f6;
+      background-color: $background;
     }
   }
   &.--dropdown-icons {
@@ -1009,7 +1036,7 @@
   user-select: none;
   font-size: 13px;
   line-height: 1.54;
-  color: #364656;
+  color: $primary-2;
 }
 
 .qt-radio label:before {
@@ -1019,14 +1046,14 @@
   height: 16px;
   position: absolute;
   left: 0;
-  background: white;
-  border: 1px solid #dfe3e8;
+  background: $white;
+  border: 1px solid $gray-400;
   border-radius: 50%;
 }
 
 /* Checked */
 .qt-radio input[type="radio"]:checked + label:before {
-  border: 1px solid #16a4fa;
+  border: 1px solid $primary-1;
 }
 
 .qt-radio input[type="radio"]:checked + label:after {
@@ -1038,35 +1065,35 @@
   left: 5px;
   top: 5px;
   border-radius: 50%;
-  background: #16a4fa;
+  background: $primary-1;
 }
 
 .qt-gray-table {
   width: 100%;
   border-spacing: 0;
-  color: #364656;
+  color: $primary-2;
   th,
   td {
     height: 36px;
-    border-bottom: solid 1px #dfe3e8;
-    border-right: solid 1px #dfe3e8;
+    border-bottom: solid 1px $gray-400;
+    border-right: solid 1px $gray-400;
     padding: 0 14px;
     font-size: 11px;
     line-height: 1.54;
-    color: #364656;
+    color: $primary-2;
     text-align: left;
     vertical-align: middle;
     &:last-child {
-      border-right: solid 1px #dfe3e8;
+      border-right: solid 1px $gray-400;
     }
     &:first-child {
-      border-left: solid 1px #dfe3e8;
+      border-left: solid 1px $gray-400;
     }
   }
   th {
-    border-top: solid 1px #dfe3e8;
-    background-color: #f9fafb;
-    font-family: Graphik-Medium, sans-serif;
+    border-top: solid 1px $gray-400;
+    background-color: $gray-100;
+    font-weight: 600;
     &:first-child {
       border-top-left-radius: 4px;
     }
@@ -1075,7 +1102,7 @@
     }
   }
   td {
-    background-color: white;
+    background-color: $white;
   }
   tr:last-child {
     td {
@@ -1103,7 +1130,7 @@
         }
       }
       &:nth-last-child(2) {
-        border-right: solid 1px #dfe3e8;
+        border-right: solid 1px $gray-400;
       }
     }
     th {
@@ -1134,7 +1161,7 @@
         }
       }
       &:nth-child(2) {
-        border-left: solid 1px #dfe3e8;
+        border-left: solid 1px $gray-400;
       }
     }
     th {
@@ -1158,18 +1185,18 @@
   border-width: 1px;
   padding: 0 12px;
   height: 100%;
-  border: solid 1px #9ca5b6;
+  border: solid 1px $gray-600;
 }
 
 .qt-btn {
   display: flex;
   align-items: center;
   border-radius: 4px;
-  font-family: Graphik-Medium, sans-serif;
+  font-weight: 600;
   &.--outline {
-    color: #16a4fa;
-    border: solid 1px #16a4fa;
-    background-color: #ffffff;
+    color: $primary-1;
+    border: solid 1px $primary-1;
+    background-color: $white;
   }
   &.--small {
     height: 28px;
@@ -1183,7 +1210,7 @@
   width: 32px;
   height: 18px;
   border-radius: 12px;
-  background-color: #dfe3e8;
+  background-color: $gray-400;
   display: flex;
   align-items: center;
   padding-left: 2px;
@@ -1193,28 +1220,28 @@
     width: 14px;
     height: 14px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
-    background-color: #ffffff;
+    background-color: $white;
     border-radius: 50%;
   }
   &.--on {
     justify-content: flex-end;
-    background-color: #16a4fa;
+    background-color: $primary-1;
   }
 }
 
 .qt-horisontal-line {
   border-top: 0;
-  border-bottom: 1px solid #dfe3e8;
+  border-bottom: 1px solid $gray-400;
 }
 
 .qt-divider {
-  border-top: 1px solid #dfe3e8;
+  border-top: 1px solid $gray-400;
   border-bottom: none;
 }
 
 .qt-input-block.--required label::after {
   content: "*";
-  color: #ff5263;
+  color: $error;
 }
 
 .qt-taxes-multiselect {
@@ -1223,7 +1250,7 @@
     position: relative;
     button {
       border: none;
-      background: white;
+      background: $white;
       width: 100%;
       text-align: left;
       height: 100%;
@@ -1262,7 +1289,7 @@
 .qt-card {
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
   border-radius: 8px;
-  background-color: #ffffff;
+  background-color: $white;
 }
 
 .qt-loading {
@@ -1276,7 +1303,7 @@
     left: calc(50% - 9px);
     top: calc(50% - 9px);
     border-radius: 50%;
-    border: 2px solid white;
+    border: 2px solid $white;
     border-top: 2px solid rgba(255, 255, 255, 0.3);
     animation: spin 2s linear infinite;
   }
@@ -1285,8 +1312,8 @@
   }
   &.--blue {
     &::before {
-      border: 2px solid #16a4fa;
-      border-top: 2px solid #cdecff;
+      border: 2px solid $primary-1;
+      border-top: 2px solid $secondary-2;
     }
   }
 }

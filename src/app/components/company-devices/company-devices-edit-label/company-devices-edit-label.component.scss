@@ -1,11 +1,13 @@
+@import './src/assets/styles/variable';
+
 .device-table__input-name {
   width: 100%;
-  border: 1px solid #dfe3e8;
+  border: 1px solid $gray-400;
   border-radius: 4px;
   outline: none;
   border-color: transparent;
   &:hover, &:focus {
-    border-color:#dfe3e8;
+    border-color:$gray-400;
     outline: none;
   }
 }

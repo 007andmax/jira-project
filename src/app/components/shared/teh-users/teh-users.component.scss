@@ -1,7 +1,9 @@
+@import './src/assets/styles/variable';
+
 .select-wrapper {
   position: absolute;
   display: block;
-  background: white;
+  background: $white;
   height: 240px;
   bottom: 55px;
   margin-top: 5px;
@@ -25,13 +27,13 @@
     }
     .user-item {
       &.active {
-        background: #16a4fa;
+        background: $primary-1;
         p {
-          color: #fff;
+          color: $white;
         }
       }
       &:hover {
-        background-color: #e7ecf2;
+        background-color: $gray-300;
       }
     }
   }

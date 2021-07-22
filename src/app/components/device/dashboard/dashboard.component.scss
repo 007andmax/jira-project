@@ -1,9 +1,9 @@
 /*** All css files include ***/
 @import '../../../../assets/scss/device/css-circular-prog-bar';
-@import '../../../../assets/scss/device/variable';
+//@import '../../../../assets/scss/device/variable';
 @import '../../../../assets/scss/device/mixin';
 @import '../../../../assets/scss/device/custom';
-
+@import './src/assets/styles/variable';
 
 .cmn-wrapper.dashboard {
     width: 100%;
@@ -17,9 +17,9 @@
         width: 50%;
         top: 0;
         input{
-            border: solid 1px #c4cbd5;
+            border: solid 1px $gray-500;
             @include border-radius(4px);
-            color:#4f5f79;
+            color:$gray-800;
         }
     }
 }
@@ -45,11 +45,11 @@
             width: 100%;
             flex-direction: column;
             @include border-radius(5px);
-            border: solid 1px #edf2f6;
-            background-color: $white-color;
+            border: solid 1px $background;
+            background-color: $white;
             padding: 20px 24px 24px;
             margin-bottom: 16px;
-            
+
             h2 {
                 margin-bottom: 15px;
             }
@@ -66,10 +66,9 @@
                     margin-bottom: 0;
                     margin-left: 8px;
                     max-width: calc(100% - 40px);
-                    font-family: $graphicMedBold;
-                    font-weight: 500;
+                    font-weight: 600;
                 }
-                
+
             }
            &.col-50{
                width: 50%;
@@ -88,12 +87,11 @@
                     li {
                         width: 33.33%;
                         font-size: 13px;
-                        font-weight: 500;
                         font-style: normal;
-                        font-family: $graphicMedBold;
+                        font-weight: 600;
                         line-height: 1.54;
                         letter-spacing: normal;
-                        color: #4f5f79;
+                        color: $gray-800;
                         padding: 0 18px;
                         background: url(../../../../assets/img/device/bullet.svg) no-repeat 5px 5px;
                         margin: 6px 0;
@@ -103,8 +101,8 @@
                         display: flex;
                         flex-direction: row;
                         span{
-                            font-family: $font-body;
-                            color: #9ca5b6;
+                            font-weight: 400;
+                            color: $gray-600;
                             margin-right: 2px;
                             display: inline-block;
                             vertical-align: bottom;
@@ -112,12 +110,11 @@
                         }
                         & > div{
                             font-size: 13px;
-                            font-weight: 500;
                             font-style: normal;
-                            font-family: $graphicMedBold;
+                            font-weight: 600;
                             line-height: 1.54;
                             letter-spacing: normal;
-                            color: #4f5f79;
+                            color: $gray-800;
                         }
                         span.edit-field{
                             top: -6px;
@@ -129,8 +126,8 @@
                                 height: auto;
                                 line-height: 1;
                                 font-size: 13px;
-                                font-family: $graphicSemibold;
-                                color: #4f5f79;
+                                font-weight: 600;
+                                color: $gray-800;
                             }
                         }
                         span.edit-field[data-tooltip]{
@@ -141,14 +138,14 @@
                                 text-align: center;
                                 width: 216px;
                                 border-radius: 3px;
-                                background-color: #4f5f79;
+                                background-color: $gray-800;
                                 font-size: 12px;
                                 font-weight: 500;
                                 font-style: normal;
                                 font-stretch: normal;
                                 line-height: 1.33;
                                 letter-spacing: normal;
-                                color: #ffffff;
+                                color: $white;
                                 left: 0;
                                 top: -45px;
                                 visibility: hidden;
@@ -169,7 +166,7 @@
                                 position: absolute;
                                 pointer-events: none;
                                 border-color: rgba(79, 95, 121, 0);
-                                border-top-color: #4f5f79;
+                                border-top-color: $gray-800;
                                 border-width: 6px;
                                 margin-left: -80px;
                                 bottom: 32px;
@@ -184,40 +181,40 @@
                                     visibility: visible;
                                 }
                                 .sub-label-field {
-                                    border: solid 1px #c4cbd5;
+                                    border: solid 1px $gray-500;
                                     outline: 0;
                                 }
                             }
                         }
-                        
+
                     }
                 }
             }
             .label-field {
                 border-color: transparent;
-                background-color: #ffffff;
+                background-color: $white;
                 font-size: 16px;
                 font-weight: bold;
                 text-transform: uppercase;
             }
-            
+
             .label-field:hover, .label-field:focus {
-                border: solid 1px #c4cbd5;
+                border: solid 1px $gray-500;
                 outline: 0;
             }
 
             .sub-label-field {
                 border-color: transparent;
-                background-color: #ffffff;
-                font-family: 'Graphik-Medium' !important;
+                background-color: $white;
+                font-weight: 600;
             }
-            
+
             .sub-label-field:hover, .sub-label-field:focus {
-                border: solid 1px #c4cbd5;
+                border: solid 1px $gray-500;
                 outline: 0;
             }
 
-            
+
             &.disk-drive {
                 h2{
                     margin-bottom: 7px;
@@ -233,7 +230,7 @@
                         li {
                             width: calc(50% - 16px);
                             padding: 11px 16px;
-                            border: 2px solid #edf2f6;
+                            border: 2px solid $background;
                             margin: 8px;
                             border-radius: 8px;
                             @include transition(0.4s);
@@ -245,10 +242,10 @@
                             .pie-chart,.progress-circle {
                                 @include border-radius(50%);
                                 margin-right: 11px;
-                                font-family: $graphicSemibold;
+                                font-weight: 600;
 
                                 *{
-                                    font-family: $graphicSemibold;
+                                    font-weight: 600;
                                 }
                             }
                             .drive-status {
@@ -258,22 +255,22 @@
                                 display: flex;
                                 flex-direction: column;
                                 .drive-name {
-                                    font-family: $graphicMedBold;
+                                    font-weight: 600;
                                 }
                                 .drive-limit {
                                     font-size: 12px;
                                 }
                             }
                         &.c-drive{
-                            border-color: #2ec866;
+                            border-color: $success;
                             background-color: rgba(46, 200, 102, 0.05);
                             .progress-circle{
                                 .value-bar{
-                                    border-color: #2ec866;
+                                    border-color: $success;
                                 }
                                 &.over50{
                                     .first50-bar{
-                                        background-color: #2ec866;
+                                        background-color: $success;
                                     }
                                 }
                             }
@@ -281,36 +278,36 @@
                         &:nth-child(2){
                             .progress-circle{
                                 .value-bar{
-                                    background-color: #0057a8;
+                                    background-color: $secondary-1;
                                 }
                                 &.over50{
                                     .first50-bar{
-                                        background-color: #0057a8;
+                                        background-color: $secondary-1;
                                     }
                                 }
-                                
+
                             }
-                        } 
+                        }
                         &:nth-child(3){
                             .progress-circle{
                                 .value-bar{
-                                    border-color: #00d8e7;
+                                    border-color:$secondary-4;
                                 }
                                 &.over50{
                                     .first50-bar{
-                                        background-color: #00d8e7;
+                                        background-color:$secondary-4;
                                     }
                                 }
                             }
-                        }  
+                        }
                         &:nth-child(4){
                             .progress-circle{
                                 .value-bar{
-                                    border-color: #16a4fa;
+                                    border-color: $primary-1;
                                 }
                                 &.over50{
                                     .first50-bar{
-                                        background-color: #16a4fa;
+                                        background-color: $primary-1;
                                     }
                                 }
                             }
@@ -318,11 +315,11 @@
                         &:nth-child(5){
                             .progress-circle{
                                 .value-bar{
-                                    border-color: #2ec866;
+                                    border-color: $success;
                                 }
                                 &.over50{
                                     .first50-bar{
-                                        background-color: #2ec866;
+                                        background-color: $success;
                                     }
                                 }
                             }
@@ -330,18 +327,18 @@
                         &:nth-child(6){
                             .progress-circle{
                                 .value-bar{
-                                    border-color: #2ec866;
+                                    border-color: $success;
                                 }
                                 &.over50{
                                     .first50-bar{
-                                        background-color: #2ec866;
+                                        background-color: $success;
                                     }
                                 }
                             }
                         }
                     }
                 }
-                
+
               }
             }
             &.services {
@@ -423,7 +420,7 @@
                         flex-direction: row;
                         li {
                             margin-right: 8px;
-                            border: solid 1px #edf2f6;
+                            border: solid 1px $background;
                             display: -ms-flexbox;
                             display: -webkit-flex;
                             display: flex;
@@ -434,11 +431,11 @@
                             position: relative;
                             height: 28px;
                             @include border-radius(4px);
-                            background-color: #f8f9fa;
+                            background-color: $gray-100;
                             .tag {
                                 font-size: 12px;
                                 line-height: 1.33;
-                                color: #4f5f79;
+                                color: $gray-800;
                             }
                             .tag-close {
                                 position: absolute;
@@ -457,7 +454,7 @@
                 overflow: hidden;
                 h2 {
                     padding: 20px 24px;
-                    background-color: #fff;
+                    background-color: $white;
                     position: absolute;
                     top: 0;
                     left: 0;
@@ -478,7 +475,7 @@
                             display: flex;
                             flex-direction: column;
                             margin: 0;
-                           
+
                             li {
                                 display: -ms-flexbox;
                                 display: -webkit-flex;
@@ -486,7 +483,7 @@
                                 flex-direction: column;
                                 position: relative;
                                 padding-left: 15px;
-                                border-left: 1px solid #16a4fa;
+                                border-left: 1px solid $primary-1;
                                 padding-bottom: 13px;
                                 .activity-name {
                                     display: -ms-flexbox;
@@ -502,12 +499,12 @@
                                     }
                                     .time-by{
                                         font-size: 10px;
-                                        color: #9ca5b6;
+                                        color: $gray-600;
                                     }
                                 }
                                 .device-added-by {
                                     font-size: 12px;
-                                    color: #4f5f79;
+                                    color: $gray-800;
                                     line-height: 1.33;
                                 }
                                 &::before {
@@ -527,7 +524,7 @@
                         }
                     }
                 }
-               
+
             }
             &.notes {
                 width: 100% !important;
@@ -552,7 +549,7 @@
                             width: 160px;
                             @include border-radius(6px);
                             border: 1px dashed rgba(255, 185, 55, 0.4);
-                            background-color: #fffbf5;
+                            background-color: $gray-100;
                             display: -ms-flexbox;
                             display: -webkit-flex;
                             display: flex;
@@ -563,7 +560,7 @@
                             @include transition(0.4s);
                             cursor: pointer;
                             &:hover{
-                                border:1px solid #ffb937;
+                                border:1px solid $warning;
                                 -ms-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
                                 -o-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
                                 -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
@@ -581,7 +578,7 @@
                             p {
                                 margin: 2px 0;
                                 font-size: 13px;
-                                color: #4f5f79;
+                                color: $gray-800;
                             }
                             .notes-by {
                                 display: -ms-flexbox;
@@ -615,8 +612,8 @@
                                     justify-content: center;
                                     .name {
                                         font-size: 12px;
-                                        font-family: $graphicSemibold;
-                                        color: #4f5f79;
+                                        font-weight: 600;
+                                        color: $gray-800;
 
                                     }
                                 }
@@ -631,10 +628,10 @@
                                 a {
                                     font-size: 12px;
                                     line-height: 1;
-                                    color: #4f5f79;
+                                    color: $gray-800;
                                     border-radius: 3px;
                                     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-                                    background-color: #ffffff;
+                                    background-color: $white;
                                     height: 24px;
                                     display: flex;
                                     align-items: center;
@@ -646,7 +643,7 @@
                             & > .more-link {
                                 font-size: 11px;
                             }
-                            
+
                         }
                     }
                 }
@@ -660,7 +657,7 @@
             margin: 0 8px 16px 8px;
             width: calc(50% - 16px);
         }
-    }    
+    }
     }
 
    .load-more {
@@ -673,7 +670,7 @@
         justify-content: center;
         align-items: center;
         text-align: center;
-        background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) -25%, #ffffff 73%, #ffffff 73%);
+        background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) -25%, $white 73%, $white 73%);
         left: 0;
         right: 0;
     }

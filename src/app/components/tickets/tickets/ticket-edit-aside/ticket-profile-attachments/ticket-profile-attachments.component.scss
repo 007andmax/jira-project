@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .attachment-component {
   padding: 0 32px;
   margin-bottom: 16px;
@@ -12,8 +14,8 @@
     margin-right: 8px;
     height: 30px;
     border-radius: 16px;
-    border: solid 1px #dfe3e8;
-    background-color: #ffffff;
+    border: solid 1px $gray-400;
+    background-color: $white;
     padding: 5px 13px 5px 5px;
     display: flex;
     align-items: center;
@@ -22,7 +24,7 @@
     font-size: 12px;
 
     &__header {
-      border-bottom: 1px solid #dfe3e8;
+      border-bottom: 1px solid $gray-400;
       margin-bottom: 16px;
       display: flex;
       justify-content: space-between;
@@ -39,8 +41,8 @@
     &__show-hide-btn {
       width: 32px;
       height: 32px;
-      border: solid 1px #dfe3e8;
-      background-color: #ffffff;
+      border: solid 1px $gray-400;
+      background-color: $white;
       border-radius: 50%;
       background-position: center;
       background-repeat: no-repeat;
@@ -56,7 +58,7 @@
       border-radius: 11px;
       font-size: 10px;
       font-weight: 600;
-      color: white;
+      color: $white;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -80,8 +82,8 @@
     }
 
     &:hover {
-      border: solid 1px #16a4fa;
-      background-color: #e7f5fe;
+      border: solid 1px $primary-1;
+      background-color: $gray-200;
       .attachment-item {
         &__download {
           display: block;
@@ -99,35 +101,35 @@
     &.image\/png {
       .attachment-item {
         &__type {
-          background: #2bc7c6;
+          background: $secondary-4;
         }
       }
     }
     &.image\/jpg, &.image\/jpeg {
       .attachment-item {
         &__type {
-          background: #7c77cb;
+          background: $secondary-3;
         }
       }
     }
     &.application\/pdf {
       .attachment-item {
         &__type {
-          background: #ff5263;
+          background: $error;
         }
       }
     }
     &.archive\/zip {
       .attachment-item {
         &__type {
-          background: #ff5263;
+          background: $error;
         }
       }
     }
     &.image\/bmp {
       .attachment-item {
         &__type {
-          background: #7c77cb;
+          background: $secondary-3;
         }
       }
     }

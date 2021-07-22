@@ -1,7 +1,9 @@
+@import './src/assets/styles/variable';
+
 .quote-message-block {
   border-radius: 6px;
-  border: solid 1px #dfe3e8;
-  background-color: #ffffff;
+  border: solid 1px $gray-400;
+  background-color: $white;
   &.--closed {
     max-height: 40px;
     overflow: hidden;
@@ -15,8 +17,8 @@
 }
 .quote-message-list-item {
   border-radius: 8px;
-  border: solid 1px #edf0f2;
-  background-color: #f9fafb;
+  border: solid 1px $gray-300;
+  background-color: $gray-100;
   padding: 12px;
   border-top-left-radius: 0;
   margin-bottom: 4px;

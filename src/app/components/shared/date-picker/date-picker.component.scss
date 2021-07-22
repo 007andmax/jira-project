@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .date-picker {
     overflow: visible;
   }
@@ -8,12 +10,12 @@
   .icon__assign-date {
     width: 20px;
     height: 20px;
-    // background-color: red;
+    // background-color: $error;
   }
 .hidden-icon {
  visibility: hidden;
 }
 .btn-icon-date-picker {
     border: none;
-    background-color: #fff;
+    background-color: $white;
 }

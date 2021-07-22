@@ -2,7 +2,7 @@
 @import '../../../../assets/scss/device/variable';
 @import '../../../../assets/scss/device/mixin';
 @import '../../../../assets/scss/device/custom';
-
+@import './src/assets/styles/variable';
 
 
 .file-explore{
@@ -54,13 +54,13 @@
             font-style: normal;
             line-height: 1.33;
             letter-spacing: normal;
-            color: #16a4fa;
+            color: $primary-1;
             align-items: center;
             img {
                 vertical-align: middle;
                 margin-right: 5px;
             }
-            
+
         }
     }
     .explore-search {
@@ -79,7 +79,7 @@
             padding-left: 34px;
             padding-right: 30px;
             font-size: 12px;
-            background: url(../../../../assets/img/device/search-explore.svg) no-repeat left 12px center #fff;
+            background: url(../../../../assets/img/device/search-explore.svg) no-repeat left 12px center $white;
             &:focus + .clear{
                 visibility: visible;
             }
@@ -96,7 +96,7 @@
             justify-content: center;
             font-size: 0;
             background: url(../../../../assets/img/device/search-clear.svg) no-repeat center transparent;
-            color: #4f5f79;
+            color: $gray-800;
             height: 100%;
             width: 35px;
             z-index: 1;
@@ -116,7 +116,7 @@
         margin: 0;
         height: calc(100vh - 165px);
         .coulmn {
-            background-color: #fff;
+            background-color: $white;
             display: -ms-flexbox;
             display: -webkit-flex;
             display: flex;
@@ -124,7 +124,7 @@
             height: 100%;
             padding: 18px 0;
             overflow-y: auto;
-            & >ul{ 
+            & >ul{
                 display: -ms-flexbox;
                 display: -webkit-flex;
                 display: flex;
@@ -141,7 +141,7 @@
                     font-style: normal;
                     line-height: 1.33;
                     letter-spacing: normal;
-                    color: #364656;
+                    color: $primary-2;
                     margin: 2px 0;
                    & > a{
                         display: -webkit-box;
@@ -153,13 +153,13 @@
                         font-style: normal;
                         line-height: 1;
                         letter-spacing: normal;
-                        color: #364656;
+                        color: $primary-2;
                         padding: 6px 20px 6px 48px;
                         align-items: center;
                         @include transition(0.4s);
                         position: relative;
                         &:hover{
-                            background-color: #edf2f6 !important;
+                            background-color: $background !important;
                         }
                         &::after{
                             background: url('../../../../assets/img/device/path-arrow.svg') no-repeat center;
@@ -171,21 +171,20 @@
                             bottom: 0;
                             margin: auto;
                             content: "";
-                            
+
                         }
 
                     }
                     &.drive-list{
                         a{
-                            font-family: $graphicMedBold;
-                            font-weight: 500;
-                            color: #364656;
+                            font-weight: 600;
+                            color: $primary-2;
                             background: url('../../../../assets/img/device/drive.svg') no-repeat left 16px center;
                         }
                     }
                     &.folder-list{
                         a{
-                            color: #364656;
+                            color: $primary-2;
                             background: url('../../../../assets/img/device/folder.svg') no-repeat left 16px center;
                             padding-left: 40px;
                         }
@@ -204,10 +203,10 @@
 
 
     }
-    
-    
-    
-    
+
+
+
+
 }
 
 
@@ -230,7 +229,7 @@
             font-size: 10px;
             line-height: 1.2;
             letter-spacing: normal;
-            color: #4f5f79;
+            color: $gray-800;
             border-bottom: 1px solid #e1e9f5;
             padding-top: 0;
             padding-bottom: 10px;
@@ -254,7 +253,7 @@
             &.col-size {
                 width: 10%;
             }
-            
+
             .filter {
                 display: inline-block;
                 vertical-align: middle;
@@ -270,13 +269,13 @@
             }
         }
         td {
-           
+
                 border-bottom: 1px solid #e1e9f5;
                 padding: 10px 0;
                 font-size: 12px;
                 line-height: 1.33;
                 letter-spacing: normal;
-                color: #364656;
+                color: $primary-2;
                 vertical-align: middle;
                & > span {
                     display: inline-block;
@@ -292,7 +291,7 @@
                         margin: 0;
                     }
                 }
-           
+
             img {
                 margin-right: 5px;
             }
@@ -310,7 +309,7 @@
                 text-align: right;
                 position: relative;
             }
-            
+
         }
         tr{
             td{
@@ -331,7 +330,7 @@
             &:last-child {
                 td{
                     border-bottom: 0 !important;
-                    
+
                     .dropdown-menu{
                         top: auto !important;
                         right: 3px !important;
@@ -350,7 +349,7 @@
             }
         }
     }
-    
+
 }
 
 

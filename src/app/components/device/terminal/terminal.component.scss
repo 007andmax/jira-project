@@ -2,6 +2,7 @@
 @import "../../../../assets/scss/device/variable";
 @import "../../../../assets/scss/device/mixin";
 @import "../../../../assets/scss/device/custom";
+@import './src/assets/styles/variable';
 
 main {
     &.terminal-page-area {
@@ -18,16 +19,15 @@ main {
                     .terminal-box {
                         float: left;
                         width: 100%;
-                        background-color: #151b21;
+                        background-color: $primary-2;
                         padding: 22px 20px;
                         font-size: 13px;
-                        font-weight: normal;
                         font-stretch: normal;
                         font-style: normal;
                         line-height: 1.54;
                         letter-spacing: normal;
-                        color: $white-color;
-                        font-family: $sourceCode;
+                        color: $white;
+                        font-weight: 500;
                         margin-bottom: 16px;
                         height: 310px;
                         // max-height: 310px !important;
@@ -43,7 +43,7 @@ main {
                         // }
                         p {
                             margin-bottom: 0;
-                            font-family: $sourceCode;
+                            font-weight: 500;
                         }
                     }
                     .terminal-btn-row {
@@ -57,10 +57,10 @@ main {
                         .editCmd {
                             width: 100%;
                             @include border-radius(4px);
-                            border: solid 1px #c4cbd5;
+                            border: solid 1px $gray-500;
                             padding: 10px 14px;
-                            color: #4f5f79 !important;
-                            font-family: $sourceCode;
+                            color: $gray-800 !important;
+                            font-weight: 500;
                             height: 120px;
                             // max-height: 150px !important;
                             margin-bottom: 0;
@@ -81,18 +81,18 @@ main {
                             @include border-radius(4px);
                             padding: 11.5px 10px;
                             width: 125px;
-                            text-align: center; 
+                            text-align: center;
                             font-size: 13px;
                             position: absolute;
                             right: 8px;
                             bottom: 8px;
                         }
                     }
-                   
-                    
+
+
                 }
             }
-        } 
+        }
         .right-sidebar {
             & > div {
                 & > .btn.btn-primary {
@@ -111,7 +111,7 @@ main {
             }
             &.terminal-sidebar {
                 right: 0 !important;
-                border-left: 1px solid #dfe3e8;
+                border-left: 1px solid $gray-400;
                 -ms-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
                 -o-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
                 -webkit-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
@@ -120,7 +120,7 @@ main {
                 @media only screen and (min-width: 1601px) {
                     width: 448px;
                 }
-                
+
                     ul.nav-tabs {
                         -ms-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
                         -o-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
@@ -138,7 +138,7 @@ main {
                             .cmn-tbs-content {
                                 & > ul {
                                     & > li {
-                                        border-bottom: 1px dotted #c4cbd5;
+                                        border-bottom: 1px dotted $gray-500;
                                         padding: 8px 0;
                                         .terminal-cmd-opt {
                                             display: -ms-flexbox;
@@ -169,7 +169,7 @@ main {
                                                         margin: 0;
                                                         background: url("../../../../assets/img/device/more-terminal.svg")
                                                             no-repeat center;
-                                                        line-height: 1; 
+                                                        line-height: 1;
                                                     }
 
                                                     .dropdown-menu {
@@ -180,7 +180,7 @@ main {
                                                         -webkit-box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
                                                         -moz-box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
                                                         box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-                                                        background-color: #ffffff;
+                                                        background-color: $white;
                                                         padding: 6px 0;
                                                         right: 0 !important;
                                                         top: 3px !important;
@@ -198,7 +198,7 @@ main {
                                                                 font-size: 13px;
                                                                 line-height: 1.54;
                                                                 letter-spacing: normal;
-                                                                color: #4f5f79;
+                                                                color: $gray-800;
                                                                 padding: 7px 15px;
                                                                 border: none;
                                                                 img {
@@ -241,7 +241,7 @@ main {
                                 &.history-cmd {
                                     & > ul {
                                         & > li {
-                                            border-bottom: 1px dotted #c4cbd5;
+                                            border-bottom: 1px dotted $gray-500;
                                             padding: 8px 0;
                                             .terminal-cmd-opt {
                                                 margin-bottom: 0;
@@ -253,7 +253,7 @@ main {
                                                         line-height: 1.2;
                                                         letter-spacing: normal;
                                                         text-align: right;
-                                                        color: #4f5f79;
+                                                        color: $gray-800;
                                                     }
                                                 }
 
@@ -266,9 +266,9 @@ main {
                                                     h5 {
                                                         margin: 0;
                                                         max-width: calc(100% - 20px);
-                                                        color: #4f5f79;
+                                                        color: $gray-800;
                                                         font-size: 12px;
-                                                        font-family: $graphicMedBold;
+                                                        font-weight: 600;
                                                     }
                                                 }
                                             }
@@ -276,16 +276,14 @@ main {
                                                 h5 {
                                                     font-size: 12px;
                                                     font-weight: bold;
-                                                    font-family: $sourceCode;
                                                 }
                                                 span {
-                                                    font-family: $sourceCode;
                                                     font-size: 12px;
                                                     font-weight: normal;
                                                     font-style: normal;
                                                     line-height: 1.33;
                                                     letter-spacing: normal;
-                                                    color: #4f5f79;
+                                                    color: $gray-800;
                                                 }
                                             }
                                         }
@@ -294,7 +292,7 @@ main {
                             }
                         }
                     }
-                
+
 
                 .modal-content {
                     &.toggle-area {
@@ -304,8 +302,8 @@ main {
                         -webkit-box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
                         -moz-box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
                         box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-                        border: 1px solid #dfe3e8;
-                        background-color: #ffffff;
+                        border: 1px solid $gray-400;
+                        background-color: $white;
                         @include border-radius(5px);
                         padding: 24px;
                         // @media only screen and (max-width:1440px){
@@ -342,15 +340,15 @@ main {
                                         }
                                         textarea {
                                             height: 315px;
-                                            font-family: $sourceCode;
+                                            font-weight: 500;
                                         }
                                     }
                                     .btn {
                                         min-width: inherit;
                                         padding: 13px 16px;
                                         &.btn-secondary {
-                                            border: solid 1px #c5cdd5;
-                                            background-color: #ffffff !important;
+                                            border: solid 1px $gray-500;
+                                            background-color: $white !important;
                                         }
                                     }
                                 }
@@ -359,13 +357,13 @@ main {
                             #cmd {
                                 display: flex;
                                 border-radius: 4px;
-                                border: solid 1px #c4cbd5;
+                                border: solid 1px $gray-500;
                                 height: 317px;
                                 #cmd_line {
                                     width: 40px;
-                                    border-right: solid 1px #c4cbd5;
-                                    background-color: #f3f7f9; 
-                                    list-style-type: none; 
+                                    border-right: solid 1px $gray-500;
+                                    background-color: $gray-200;
+                                    list-style-type: none;
                                     padding: 10px 0;
                                     margin: 0;
                                     overflow-y: auto;
@@ -378,12 +376,12 @@ main {
                                         margin: 0;
                                         padding: 0;
                                         text-align: center;
-                                        color: #151b21;
-                                        font-family: $sourceCode;
+                                        color: $primary-2;
+                                        font-weight: 500;
                                         &::before {
                                             width: 0;
                                         }
-                                    } 
+                                    }
                                 }
                                 textarea {
                                     border-radius: 0;
@@ -396,8 +394,8 @@ main {
                 .dropdown{
                     .dropdown-menu{
                         box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-                        border: solid 1px #dfe3e8;
-                        background-color: #ffffff;
+                        border: solid 1px $gray-400;
+                        background-color: $white;
                         border-radius: 4px;
                         padding-top: 8px;
                         button{
@@ -408,20 +406,19 @@ main {
                                 font-style: normal;
                                 line-height: 1.54;
                                 letter-spacing: normal;
-                                color: #364656;
+                                color: $primary-2;
                                 height: auto;
                                 &:hover{
-                                    background-color: #edf2f6;
+                                    background-color: $background;
                                 }
                                 &:last-child{
-                                    border-top:1px solid  #dfe3e8;
+                                    border-top:1px solid  $gray-400;
                                     font-size: 12px;
-                                    font-weight: 500;
                                     font-style: normal;
                                     line-height: 1.33;
                                     letter-spacing: normal;
-                                    color: #16a4fa; 
-                                    font-family:$graphicMedBold;
+                                    color: $primary-1;
+                                    font-weight: 600;
                                     padding: 12px 15px;
                                 }
                             }
@@ -436,7 +433,7 @@ main {
                 -webkit-box-shadow: -8px 0 16px 0 rgba(0, 0, 0, 0.1);
                 -moz-box-shadow: -8px 0 16px 0 rgba(0, 0, 0, 0.1);
                 box-shadow: -8px 0 16px 0 rgba(0, 0, 0, 0.1);
-                background-color: #ffffff;
+                background-color: $white;
                 width: 592px;
                 z-index: 99;
                 @include transition(0.4s);
@@ -449,8 +446,8 @@ main {
                     align-items: center;
                     justify-content: space-between;
                     padding: 14px 32px;
-                    background-color: #f9fafb;
-                    border-bottom: 1px solid #dfe3e8;
+                    background-color: $gray-100;
+                    border-bottom: 1px solid $gray-400;
                     h2 {
                         margin: 0;
                         font-size: 20px;
@@ -462,7 +459,7 @@ main {
                 }
 
                 & > div {
-                    
+
                         .nav-tabs {
                             padding: 18px 32px 0 32px;
                         }
@@ -474,11 +471,11 @@ main {
                                 &.list-unstyled {
                                     &.script-list {
                                         @include border-radius(4px);
-                                        border: solid 1px #dfe3e8;
-                                        background-color: #ffffff;
+                                        border: solid 1px $gray-400;
+                                        background-color: $white;
                                         li {
                                             padding: 16px 16px 20px 16px;
-                                            border-bottom: 1px solid #dfe3e8;
+                                            border-bottom: 1px solid $gray-400;
                                             display: -webkit-flex;
                                             display: -ms-flexbox;
                                             display: flex;
@@ -504,7 +501,7 @@ main {
                                                     font-style: normal;
                                                     line-height: 1.54;
                                                     letter-spacing: normal;
-                                                    color: #4f5f79;
+                                                    color: $gray-800;
                                                     max-width: 100%;
                                                     display: block;
                                                     white-space: nowrap;
@@ -512,15 +509,15 @@ main {
                                                     text-overflow: ellipsis;
                                                     &.clone-cat {
                                                         border-radius: 3px;
-                                                        border: solid 1px #dfe3e8;
-                                                        background-color: #f9fafb;
+                                                        border: solid 1px $gray-400;
+                                                        background-color: $gray-100;
                                                         font-size: 10px;
                                                         font-weight: 500;
                                                         font-stretch: normal;
                                                         font-style: normal;
                                                         line-height: 1.2;
                                                         letter-spacing: normal;
-                                                        color: #4f5f79;
+                                                        color: $gray-800;
                                                         padding: 3px 8px;
                                                         margin-top: 3px;
                                                     }
@@ -537,8 +534,8 @@ main {
                                                     width: 32px;
                                                     height: 32px;
                                                     @include border-radius(8px);
-                                                    border: solid 1px #dfe3e8;
-                                                    background-color: #ffffff;
+                                                    border: solid 1px $gray-400;
+                                                    background-color: $white;
                                                     display: -webkit-flex;
                                                     display: -ms-flexbox;
                                                     display: flex;
@@ -555,8 +552,8 @@ main {
                                                         top: -9px;
                                                     }
                                                     &:hover {
-                                                        background-color: #f4f6f8;
-                                                        border-color: #f4f6f8;
+                                                        background-color: $gray-200;
+                                                        border-color: $gray-200;
                                                     }
                                                     img {
                                                         max-width: 16px;
@@ -575,7 +572,7 @@ main {
                                         margin: 0;
                                         width: auto;
                                         margin: 0 auto;
-                                        border: 1px solid #dfe3e8;
+                                        border: 1px solid $gray-400;
                                         float: none;
                                         li {
                                             padding: 0;
@@ -599,10 +596,10 @@ main {
                                                 line-height: 1.33;
                                                 letter-spacing: normal;
                                                 text-align: center;
-                                                color: #4f5f79;
+                                                color: $gray-800;
                                                 border: none;
                                                 padding: 0;
-                                                border-right: solid 1px #dfe3e8;
+                                                border-right: solid 1px $gray-400;
                                                 border-bottom: none;
                                             }
                                             &:last-child {
@@ -617,8 +614,8 @@ main {
                                             }
                                             &.current {
                                                 a {
-                                                    background-color: #16a4fa;
-                                                    color: #fff;
+                                                    background-color: $primary-1;
+                                                    color: $white;
                                                 }
                                             }
                                         }
@@ -631,7 +628,7 @@ main {
                                     12px center;
                             }
                         }
-                    
+
                 }
             }
             &.script-details {
@@ -642,15 +639,15 @@ main {
                     }
                     .clone-cat {
                         @include border-radius(3px);
-                        border: solid 1px #dfe3e8;
-                        background-color: #fff;
+                        border: solid 1px $gray-400;
+                        background-color: $white;
                         font-size: 10px;
                         font-style: normal;
                         line-height: 1.2;
                         letter-spacing: normal;
-                        color: #4f5f79;
+                        color: $gray-800;
                         padding: 3px 8px;
-                        font-family: $graphicMedBold;
+                        font-weight: 600;
                     }
                 }
                 .script-details-area {
@@ -682,8 +679,8 @@ main {
                                 padding: 10px 20px;
                                 font-size: 13px;
                                 &.btn-secondary {
-                                    border: solid 1px #c5cdd5;
-                                    background-color: #ffffff !important;
+                                    border: solid 1px $gray-500;
+                                    background-color: $white !important;
                                 }
                             }
                         }
@@ -703,7 +700,7 @@ main {
                         line-height: 1.45;
                         letter-spacing: -0.5px;
                         margin-bottom: 20px;
-                        font-family: $font-body;
+                        font-weight: 400;
                         text-transform: none;
                     }
                     .script-info {
@@ -734,20 +731,20 @@ main {
                                 font-style: normal;
                                 line-height: 1.33;
                                 letter-spacing: normal;
-                                color: #364656;
+                                color: $primary-2;
                             }
                         }
                     }
                     #cmd_detail {
                         display: flex;
                         border-radius: 4px;
-                        border: solid 1px #c4cbd5;
+                        border: solid 1px $gray-500;
                         height: 317px;
                         #cmd_detail_line {
                             width: 40px;
-                            border-right: solid 1px #c4cbd5;
-                            background-color: #f3f7f9; 
-                            list-style-type: none; 
+                            border-right: solid 1px $gray-500;
+                            background-color: $gray-200;
+                            list-style-type: none;
                             padding: 10px 0;
                             margin: 0;
                             overflow-y: auto;
@@ -760,11 +757,11 @@ main {
                                 margin: 0;
                                 padding: 0;
                                 text-align: center;
-                                color: #151b21;
+                                color: $primary-2;
                                 &::before {
                                     width: 0;
                                 }
-                            } 
+                            }
                         }
                         textarea {
                             border-radius: 0;
@@ -783,16 +780,16 @@ main {
                 vertical-align: middle;
                 margin-left: 23px;
                 font-size: 12px;
-                font-family: $graphicMedBold;
+                font-weight: 600;
                 font-stretch: normal;
                 font-style: normal;
                 line-height: 1.33;
                 letter-spacing: normal;
-                color: #4f5f79;
+                color: $gray-800;
                 padding-left: 25px;
                 min-height: 16px;
                 &:hover {
-                    color: #16a4fa;
+                    color: $primary-1;
                 }
                 &.Command {
                     margin-left: 0;
@@ -800,7 +797,7 @@ main {
                     cursor: pointer;
                     &.active {
                         background: url("../../../../assets/img/device/command-line-blue.svg") no-repeat left 0;
-                        color: #16a4fa;
+                        color: $primary-1;
                     }
                 }
                 &.Power {
@@ -808,17 +805,17 @@ main {
                     cursor: pointer;
                     &.active {
                         background: url("../../../../assets/img/device/Powershell_Blue.svg") no-repeat left 0;
-                        color: #16a4fa;
+                        color: $primary-1;
                     }
                 }
             }
         }
 
-       
+
         .cmn-tbs-content {
             &.command {
                 li {
-                    border-bottom: 1px dotted #ccc;
+                    border-bottom: 1px dotted $gray-400;
                     padding: 7.5px 0;
                     position: relative;
                     padding-right: 15px;
@@ -826,7 +823,7 @@ main {
                 h5 {
                     margin-top: 0;
                     font-size: 12px;
-                    color: #4f5f79;
+                    color: $gray-800;
                     line-height: 1.33;
                     margin-bottom: 3px;
                 }
@@ -837,19 +834,18 @@ main {
                     font-style: normal;
                     line-height: 1.33;
                     letter-spacing: normal;
-                    color: #4f5f79;
-                    font-family: $sourceCode;
+                    color: $gray-800;
                 }
                 .copy {
                     font-size: 0;
                     width: 16px;
                     height: 16px;
                     position: relative;
-                    font-family: $sourceCode;
+                    font-weight: 500;
                     background: url("../../../../assets/img/device/send-to-front.svg") no-repeat center;
                     &::before {
                         font-weight: 400;
-                        font-family: $font-body;
+                        font-weight: 400;
                         width: 85px;
                     }
                 }
@@ -860,9 +856,8 @@ main {
                     margin-bottom: 18px;
                     font-size: 12px;
                     font-weight: normal;
-                    font-family: $sourceCode;
                     line-height: 1.33;
-                    color: #4f5f79;
+                    color: $gray-800;
                 }
             }
         }
@@ -882,11 +877,11 @@ body {
                         -webkit-box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
                         -moz-box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
                         box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
-                        background-color: #ffffff;
+                        background-color: $white;
                         margin-bottom: 0;
                         .modal-header {
                             padding: 10px 16px 10px 32px;
-                            border-bottom: 1px solid #dfe3e8;
+                            border-bottom: 1px solid $gray-400;
                             display: -ms-flexbox;
                             display: -webkit-flex;
                             display: flex;
@@ -900,7 +895,7 @@ body {
                                 line-height: 1.4;
                                 letter-spacing: -0.5px;
                                 text-transform: capitalize;
-                                font-family: $graphicSemibold;
+                                font-weight: 600;
                                 margin: 0;
                             }
                             button{
@@ -932,12 +927,12 @@ body {
                                     margin-left:10px;
                                     font-size:13px;
                                     &.btn-secondary{
-                                        border: solid 1px #c5cdd5;
-                                        background-color: #ffffff !important;
+                                        border: solid 1px $gray-500;
+                                        background-color: $white !important;
                                     }
                                     &.btn-remove{
-                                        background-color: #ff5263;
-                                        border-color:#ff5263;
+                                        background-color: $error;
+                                        border-color:$error;
                                     }
                                 }
                             }
@@ -976,11 +971,11 @@ body {
                                 align-items: center;
                                 justify-content: center;
                                 @include border-radius(4px);
-                                border: solid 1px #dfe3e8;
-                                background-color: #ffffff;
+                                border: solid 1px $gray-400;
+                                background-color: $white;
                                 &.edit-cat{
-                                    background-color: #637382;
-                                    border-color: #637382;
+                                    background-color: $gray-700;
+                                    border-color: $gray-700;
                                 }
                                 &::before{
                                     left: -14px;
@@ -993,22 +988,22 @@ body {
                                 }
                                 &.delete{
                                     &:hover{
-                                        background-color: #f4f6f8;
-                                        border-color:#f4f6f8;
+                                        background-color: $gray-200;
+                                        border-color:$gray-200;
                                     }
                                 }
                             }
                         }
                     }
                 }
-                
-                
-                
-                
-                
-                
-                
-                
+
+
+
+
+
+
+
+
             }
             &.category-modal {
                 .confirm-btn {
@@ -1018,8 +1013,8 @@ body {
                         &.btn.btn-small {
                             margin-left: 0 !important;
                             background-color: transparent;
-                            border: 1px solid #16a4fa;
-                            color: #16a4fa;
+                            border: 1px solid $primary-1;
+                            color: $primary-1;
                             font-size: 12px !important;
                             padding: 9px 8px !important;
                             display: -ms-flexbox !important;
@@ -1043,23 +1038,23 @@ body {
             padding: 0 8px;
             justify-content: center;
             // a {
-            //     font-family: "Graphik-Medium";
+            //     font-weight: 600;
             //     font-size: 13px;
             //     font-weight: 500;
             //     font-style: normal;
             //     line-height: 1.54;
             //     letter-spacing: normal;
-            //     color: #4f5f79;
+            //     color: $gray-800;
             //     text-transform: capitalize;
             //     margin-bottom: 10px;
             //     &.active {
-            //         color: #16a4fa;
+            //         color: $primary-1;
             //     }
             // }
             .label {
                 margin-bottom: 0;
                 padding: 0 0 10px 0;
-                color: #4f5f79;
+                color: $gray-800;
                 display: -ms-flexbox;
                 display: -webkit-flex;
                 display: flex;
@@ -1073,12 +1068,12 @@ body {
                     font-weight: 600;
                     line-height: 1.33;
                     letter-spacing: normal;
-                    color: #4f5f79;
-                    font-family: "Graphik-Medium";
+                    color: $gray-800;
+                    font-weight: 600;
                     font-weight: 600;
                     &.active{
-                        color: #16a4fa;
-                        border-color: #16a4fa;
+                        color: $primary-1;
+                        border-color: $primary-1;
                     }
                    }
                 }
@@ -1091,9 +1086,8 @@ body {
             .dropdown-menu{
                 button.dropdown-item{
                     &:last-child{
-                        color: #364656 !important;
-                        font-family: $font-body !important;
-                        font-weight: normal !important;
+                        color: $primary-2;
+                        font-weight: 400;
                     }
                 }
             }

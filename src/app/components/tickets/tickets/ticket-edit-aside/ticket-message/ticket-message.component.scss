@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .ticket-notify {
     padding: 0 32px;
     margin-top: 20px;
@@ -5,8 +7,8 @@
     &__item {
       border-radius: 10px;
       box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
-      border: dashed 1px #c5cdd5;
-      background-color: #ffffff;
+      border: dashed 1px $gray-500;
+      background-color: $white;
       padding: 16px;
       display: flex;
       margin-bottom: 16px;
@@ -30,10 +32,10 @@
       padding: 14px 20px;
       white-space: nowrap;
       font-size: 13px;
-      color: #ffffff;
+      color: $white;
       font-weight: 600;
       border-radius: 4px;
-      background-color: #16a4fa;
+      background-color: $primary-1;
       height: 40px;
       line-height: normal;
       border: none;
@@ -57,7 +59,7 @@
     &__item-desc-text {
       font-size: 12px;
       line-height: 1.33;
-      color: #4f5f79;
+      color: $gray-800;
       margin-top: 2px;
     }
   }

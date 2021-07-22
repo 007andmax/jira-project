@@ -1,13 +1,7 @@
-
-$font-body: 'Graphik-Regular';
-$grahic-light:'Graphik-Light';
-$graphicSemibold:'Graphik-Semibold';
-$graphic-bold:'Graphik-Bold';
-$graphicMedBold:'Graphik-Medium';
-
+@import './src/assets/styles/variable';
 .contract{
     hr{
-        border-bottom: 1px solid #f3f7f9;
+        border-bottom: 1px solid $gray-200;
         margin: 20px 0 20px 0;
         padding: 0;
         border-top: 0;
@@ -20,7 +14,7 @@ $graphicMedBold:'Graphik-Medium';
         box-sizing: border-box;
         &:first-child{
             margin-bottom: 18px;
-            border-bottom: 1px solid #f3f7f9;
+            border-bottom: 1px solid $gray-200;
             td{
                 padding: 0 15px 12px 0
             }
@@ -40,39 +34,38 @@ $graphicMedBold:'Graphik-Medium';
         }
         strong{
             font-size: 12px;
-            font-weight: 500;
             font-style: normal;
             font-stretch: normal;
             line-height: 1.33;
             letter-spacing: normal;
-            color: #364656;
-            font-family: $graphicMedBold;
+            color: $primary-2;
+            font-weight: 600;
         }
-        h5{
-            color: #4f5f79;
-            margin: 6px 0;
-            max-width: 420px;
-            font-family: $graphicMedBold;
-            font-weight: 500;
-            text-transform: none;
-        }
-        h5.headings{
+        .body-m {
+          color: $gray-800;
+          margin: 6px 0;
+          max-width: 420px;
+          font-weight: 600;
+          text-transform: none;
+
+          &.headings {
             margin-bottom: 4px;
             margin-top:0;
             position: relative;
             max-width: initial;
-            font-family: $graphicSemibold;
-            color: #364656;
+            font-weight: 600;
+            color: $primary-2;
             &::before{
-                position: absolute;
-                left: -20px;
-                height: 6px;
-                width: 6px;
-                background-color: #16a4fa;
-                border-radius: 50%;
-                content: "";
-                top: 6px;
+              position: absolute;
+              left: -20px;
+              height: 6px;
+              width: 6px;
+              background-color: $primary-1;
+              border-radius: 50%;
+              content: "";
+              top: 7px;
             }
+          }
         }
         p{
             margin-bottom: 20px;
@@ -82,7 +75,7 @@ $graphicMedBold:'Graphik-Medium';
             font-style: normal;
             line-height: 1.54;
             letter-spacing: normal;
-            color: #4f5f79;
+            color: $gray-800;
             &:last-child{
                 margin-bottom: 0;
             }

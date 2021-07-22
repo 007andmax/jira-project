@@ -15,7 +15,7 @@
       border: none;
       padding: 6px 8px 6px 40px;
       border-radius: 4px;
-      background: #ffffff;
+      background: $white;
       font-size: 13px;
       outline: none;
       position: relative;
@@ -41,24 +41,21 @@
       //width: -webkit-max-content;
       //width: -moz-max-content;
       //width: max-content;
-      font-family: "Graphik-Medium", sans-serif;
-      font-size: 13px;
+      font-weight: 600;
     }
 
     &__category {
       width: 144px;
       max-width: 144px;
       min-width: 144px;
-      font-size: 13px;
-      color: #4f5f79;
+      color: $gray-800;
     }
 
     &__menu {
       width: 62px;
       max-width: 62px;
       min-width: 62px;
-      font-size: 13px;
-      color: #4f5f79;
+      color: $gray-800;
     }
 
     &__menu {
@@ -73,8 +70,7 @@
       width: 92px;
       max-width: 92px;
       min-width: 92px;
-      font-size: 13px;
-      color: #4f5f79;
+      color: $gray-800;
     }
 
     &__sale-price,
@@ -84,8 +80,7 @@
       width: 120px;
       max-width: 120px;
       min-width: 120px;
-      font-size: 13px;
-      color: #4f5f79;
+      color: $gray-800;
     }
   }
 }

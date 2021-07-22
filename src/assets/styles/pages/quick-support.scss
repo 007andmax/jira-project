@@ -1,10 +1,12 @@
+@import './src/assets/styles/variable';
+
 .quick-support-page {
-  background-color: #edf2f6;
+  background-color: $background;
   min-height: calc(100vh - #{$header-height});
 
   &__header {
     max-width: 1128px;
-    margin: 0 auto;
+    margin: 0 auto 20px;
   }
 
   .support-tickets-list {
@@ -15,7 +17,7 @@
     &__item {
       width: 100%;
       border-radius: 6px;
-      background-color: white;
+      background-color: $white;
       margin-bottom: 8px;
       min-width: 1128px;
       max-width: 1128px;
@@ -37,12 +39,12 @@
       display: flex;
       align-items: center;
       font-size: 12px;
-      color: #364656;
+      color: $primary-2;
     }
     &__title {
-      font-family: Graphik-Medium, sans-serif;
+     font-weight: 600;
       font-size: 13px;
-      color: #364656;
+      color: $primary-2;
       display: flex;
       align-items: center;
     }
@@ -50,7 +52,7 @@
       width: 32px;
       height: 32px;
       border-radius: 50%;
-      background-color: #f4f6f8;
+      background-color: $gray-200;
       background-position: center;
       background-size: 18px;
       background-repeat: no-repeat;
@@ -61,9 +63,9 @@
 
 .support-item-menu {
   display: flex;
-  border: 1px solid #dfe3e8;
+  border: 1px solid $gray-400;
   border-radius: 4px;
-  background-color: white;
+  background-color: $white;
   height: 28px;
   align-items: center;
   width: fit-content;
@@ -74,16 +76,16 @@
   }
   &__number {
     width: 88px;
-    color: #4f5f79;
+    color: $gray-800;
     font-size: 13px;
-    font-family: Graphik-Medium, sans-serif;
+   font-weight: 600;
     margin-right: 8px;
   }
   &__button {
     width: 32px;
-    background-color: #f9fafb;
+    background-color: $gray-100;
     height: 100%;
-    border-left: 1px solid #dfe3e8;
+    border-left: 1px solid $gray-400;
     background-position: center;
     background-repeat: no-repeat;
     cursor: pointer;
@@ -118,7 +120,7 @@
   &__step2 {
     width: 40px;
     height: 40px;
-    background-color: #f4f6f8;
+    background-color: $gray-200;
     border-radius: 50%;
     background-position: center;
     background-repeat: no-repeat;
@@ -126,20 +128,20 @@
   &__line {
     width: 192px;
     border: none;
-    border-top: 2px dotted #c5cdd5;
+    border-top: 2px dotted $gray-500;
     margin: 0 8px;
     position: relative;
     &.--success {
-      border-color: #2ec866;
+      border-color: $success;
     }
   }
   &__line-title {
     text-align: center;
     font-size: 12px;
-    color: #4f5f79;
+    color: $gray-800;
     position: absolute;
     width: 100%;
-    font-family: Graphik-Medium, sans-serif;
+   font-weight: 600;
     top: 7px;
     display: flex;
     justify-content: center;
@@ -147,8 +149,8 @@
     flex-direction: column;
     line-height: 14px;
     &.line-title--gray, .line-title--gray {
-      color: #9ca5b6;
-      font-family: Graphik-Regular, sans-serif;
+      color: $gray-600;
+      font-weight: 400;
     }
   }
 }

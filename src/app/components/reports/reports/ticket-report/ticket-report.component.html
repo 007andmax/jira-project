@@ -31,11 +31,11 @@
         >
             <div class="customer-ticket__report">
                 <div class="report-header">
-                    <h1>Tickets Report</h1>
+                    <h5 class="qt-fw-600 qt-color-white">Tickets Report</h5>
                     <div class="company-info">
-                        <h3>
+                        <div class="body-m qt-color-white qt-text-right">
                             {{ ticketsReport.companyName || 'All companies' }}
-                        </h3>
+                        </div>
                         <p>
                             <span>{{ticketsReport.startDate}}</span>
                             -
@@ -47,7 +47,7 @@
                     *ngIf="showHeader"
                     class="customer-ticket__report--summary"
                 >
-                    <h3>Resolved Tickets</h3>
+                    <div class="customer-ticket__report--summary-title">Resolved Tickets</div>
                     <div class="customer-ticket__header">
                         <div class="customer-ticket__header--item canvas-chart no-value">
                             <nvd3
@@ -106,7 +106,7 @@
 
                 </div>
                 <div class="customer-ticket__report--details">
-                    <h3>Ticket Details</h3>
+                    <div class="customer-ticket__report--summary-titlqt-mb-12">Ticket Details</div>
                     <div class="details-header clearfix">
                         <div
                             class="col-md-8"

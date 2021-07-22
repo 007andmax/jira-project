@@ -1,9 +1,11 @@
+@import './src/assets/styles/variable';
+
 tr {
   cursor: pointer;
   &:hover {
     td {
-      background: #f4fbff;
-      border-color: #16a4fa;
+      background: $gray-200;
+      border-color: $primary-1;
     }
   }
 }

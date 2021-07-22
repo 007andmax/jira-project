@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 /deep/ .ticket-table {
 
     th {
@@ -27,7 +29,7 @@
   }
 
   /deep/.main-container {
-    background-color: #edf2f6;
+    background-color: $background;
   }
 
   .ticket-fileupload {

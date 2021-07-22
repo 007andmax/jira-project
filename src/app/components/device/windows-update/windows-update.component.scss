@@ -2,8 +2,8 @@
 @import '../../../../assets/scss/device/variable';
 @import '../../../../assets/scss/device/mixin';
 @import '../../../../assets/scss/device/custom';
+@import './src/assets/styles/variable';
 
-    
 .update-info {
     display: inline-block;
     vertical-align: middle;
@@ -12,36 +12,36 @@
         vertical-align: middle;
         margin-left: 23px;
         font-size: 12px;
-        font-family: $graphicMedBold;
+        font-weight: 600;
         font-stretch: normal;
         font-style: normal;
         line-height: 1.33;
         letter-spacing: normal;
-        color: #4f5f79;
+        color: $gray-800;
         padding-left: 25px;
         min-height: 16px;
         &:hover{
-            color: #16a4fa;
+            color: $primary-1;
         }
         &.update{
             background: url('../../../../assets/img/device/allupdate.svg') no-repeat left 0;
             margin-left: 0;
                 &.active{
                     background: url('../../../../assets/img/device/allupdate-blue.svg') no-repeat left 0;
-                    color: #16a4fa;
+                    color: $primary-1;
                 }
-            }        
+            }
             &.hidden{
                 background: url('../../../../assets/img/device/hide-update.svg') no-repeat left 0;
                     &.active{
                         background: url('../../../../assets/img/device/hide-update-blue.svg') no-repeat left 0;
-                        color: #16a4fa;
+                        color: $primary-1;
                     }
             }
             &.installed{
                 background: url('../../../../assets/img/device/install.svg') no-repeat left 0;
                 &:hover{
-                    color: #16a4fa;
+                    color: $primary-1;
                 }
             }
     }
@@ -102,21 +102,20 @@
         width: 143px;
         @include border-radius(4px);
         border: solid 1px rgba(22, 164, 250, 0.3);
-        background-color: #ffffff;
+        background-color: $white;
         padding: 5px 15px;
         font-size: 12px;
-        font-family: $graphicSemibold;
         font-weight: 600;
         font-stretch: normal;
         font-style: normal;
         line-height: 1.33;
         letter-spacing: normal;
-        color: #16a4fa;
+        color: $primary-1;
         display: inline-block;
         margin-left: 23px;
     }
-    
-    
+
+
 }
 .sidebar-popup.upload-details {
     .h1 {
@@ -150,7 +149,7 @@
                 h5 {
                     margin-bottom: 4px;
                     letter-spacing: normal;
-                    color: #4f5f79;
+                    color: $gray-800;
                 }
                 .colum {
                     float: left;
@@ -166,7 +165,7 @@
         width: auto;
         height: auto;
         @include border-radius(3px);
-        background-color: $white-color;
+        background-color: $white;
         display: inline-flex;
         justify-content: center;
         align-items: center;
@@ -177,7 +176,7 @@
         font-style: normal;
         line-height: 1.33;
         letter-spacing: normal;
-        color: #364656;
+        color: $primary-2;
         min-width: 78px;
         img {
             display: inline-block;
@@ -185,7 +184,7 @@
             margin-right: 2px;
         }
     }
-    
+
 }
 
 .sidebar-tabel {
@@ -208,7 +207,7 @@
             padding-right: 16px;
                 &:last-child {
                  padding-right: 0;
-            }    
+            }
         }
         .user-status {
             display: inline-block;
@@ -217,17 +216,17 @@
             height: 6px;
             @include border-radius(50%);
             vertical-align: middle;
-            background-color: #2ec866;
+            background-color: $success;
             margin-top: -3px;
             margin-right: 3px;
             &.online {
-                background-color: #2ec866;
+                background-color: $success;
             }
             &.offline {
-                background-color: #ff6e61;
+                background-color: $error;
             }
             &.away {
-                background-color: #ffb937;
+                background-color: $warning;
             }
         }
         .dn {
@@ -247,7 +246,7 @@
                 td{
                     border-bottom: 0;
                 }
-                
+
             }
         }
 }

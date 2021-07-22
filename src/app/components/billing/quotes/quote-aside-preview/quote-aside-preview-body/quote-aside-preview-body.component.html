@@ -13,7 +13,7 @@
                 alt
             >
             <div
-                class="qt-fs-13 qt-color-dark qt-ff-gm"
+                class="qt-fs-13 qt-color-dark qt-fw-600"
                 [textContent]="currentCompany.name"
             ></div>
             <div
@@ -34,16 +34,16 @@
             </ng-container>
         </div>
         <div
-            class="qt-color-dark qt-lh-131 qt-pr-24 qt-fs-26 qt-text-upper qt-ff-gm"
+            class="qt-color-dark qt-lh-131 qt-pr-24 qt-fs-26 qt-text-upper qt-fw-600"
             [textContent]="'Quote#' + quote.number"
         >
         </div>
     </div>
     <div class="qt-mt-24 qt-mb-32 qt-df qt-jc-sb">
         <div class="qt-lh-154">
-            <div class="qt-fs-10 qt-color-light qt-mb-8 qt-ff-sb qt-lh-12">BILLING ADDRESS</div>
+            <div class="qt-fs-10 qt-color-light qt-mb-8 qt-fw-600 qt-lh-12">BILLING ADDRESS</div>
             <div
-                class="qt-fs-13 qt-color-dark qt-ff-gm"
+                class="qt-fs-13 qt-color-dark qt-fw-600"
                 *ngIf="quoteCompany"
                 [textContent]="quoteCompany.name"
             ></div>
@@ -65,21 +65,21 @@
         </div>
         <div class="qt-fs-13 qt-text-right qt-lh-154">
             <div class="qt-df qt-jc-sb qt-mb-8">
-                <div class="qt-ff-gm qt-text-right invoice-info-title">Estimate Date:</div>
+                <div class="qt-fw-600 qt-text-right invoice-info-title">Estimate Date:</div>
                 <div
                     class="invoice-info-value"
                     [textContent]="getDate(quote.date)"
                 ></div>
             </div>
             <div class="qt-df qt-jc-sb qt-mb-8">
-                <div class="qt-ff-gm qt-text-right invoice-info-title">Expiry Date:</div>
+                <div class="qt-fw-600 qt-text-right invoice-info-title">Expiry Date:</div>
                 <div
                     class="invoice-info-value"
                     [textContent]="getDate(quote.validUntil)"
                 ></div>
             </div>
             <div class="qt-df qt-jc-sb qt-mb-8">
-                <div class="qt-ff-gm qt-text-right invoice-info-title">Grand Total:</div>
+                <div class="qt-fw-600 qt-text-right invoice-info-title">Grand Total:</div>
                 <div
                     class="invoice-info-value"
                     [textContent]="quote.totalAmount | currency"
@@ -172,11 +172,11 @@
             </table>
         </div>
     </div>
-    <div class="qt-df qt-w100 qt-jc-sb qt-color-dark qt-fs-12 qt-ff-gm qt-mb-20 qt-lh-133">
+    <div class="qt-df qt-w100 qt-jc-sb qt-color-dark qt-fs-12 qt-fw-600 qt-mb-20 qt-lh-133">
         <div class="qt-mb-20 invoice-preview-notes">
-            <div class="qt-fs-12 qt-mb-4 qt-ff-qm qt-color-dark qt-ff-gm qt-lh-133">Customer Note</div>
+            <div class="qt-fs-12 qt-mb-4 qt-ff-qm qt-color-dark qt-fw-600 qt-lh-133">Customer Note</div>
             <div
-                class="qt-fs-13 qt-lh-154 note qt-ff-gr"
+                class="qt-fs-13 qt-lh-154 note qt-fw-400"
                 *ngIf="quote.regularNote"
                 [textContent]="(quote.regularNote && quote.regularNote.line1) ? quote.regularNote.line1 : ''"
             ></div>
@@ -214,7 +214,7 @@
     </div>
     <div>
         <div>
-            <div class="qt-fs-12 qt-mb-4 qt-ff-qm qt-color-dark qt-ff-gm qt-lh-133">Terms & Conditions</div>
+            <div class="qt-fs-12 qt-mb-4 qt-ff-qm qt-color-dark qt-fw-600 qt-lh-133">Terms & Conditions</div>
             <div
                 class="qt-fs-13 qt-lh-154 note"
                 *ngIf="quote.termsAndConditions"

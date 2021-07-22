@@ -1,19 +1,21 @@
+@import './src/assets/styles/variable';
+
 .ticket-status-circle {
     width: 12px;
     height: 12px;
     border: 2px solid;
     border-radius: 50%;
     &.--red {
-      border-color: #ff4940;
+      border-color: $error;
     }
     &.--green {
-      border-color: #2ec866;
+      border-color: $success;
     }
     &.--blue {
-      border-color: #16a4fa;
+      border-color: $primary-1;
     }
     &.--yellow {
-      border-color: #ffb937;
+      border-color: $warning;
     }
   }
 
@@ -26,8 +28,8 @@
     font-size: 12px;
   }
   .active {
-    background: #3e4b61;
-    border-left: 2px solid #16a4fa;
+    background: $gray-800;
+    border-left: 2px solid $primary-1;
   }
 
 .ticket-status-color {

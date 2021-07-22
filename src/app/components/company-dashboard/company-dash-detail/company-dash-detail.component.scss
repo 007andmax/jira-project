@@ -1,9 +1,11 @@
+@import './src/assets/styles/variable';
+
 .working-hour {
     .selected-item {
         padding: 9px 10px 9px 0;
         width: 100%;
         border-radius: 4px;
-        border: solid 1px #c4cbd5;
+        border: solid 1px $gray-500;
         line-height: 1.54;
         letter-spacing: normal;
         height: auto;
@@ -13,14 +15,14 @@
         -moz-appearance: none;
         outline: none;
         &:disabled {
-            background-color: #f4f6f8;
-            border: 1px solid #f4f6f8;
+            background-color: $gray-200;
+            border: 1px solid $gray-200;
         }
     }
     .item {
         width: 100%;
         padding: 7px 15px;
-        background-color: #fff;
+        background-color: $white;
         outline: none;
         border: none;
         text-align: left;
@@ -30,18 +32,18 @@
         font-style: normal;
         line-height: 1.4;
         letter-spacing: normal;
-        color: #4f5f79;
+        color: $gray-800;
         display: -webkit-box;
         display: flex;
         -webkit-box-align: center;
         align-items: center;
         &:hover {
-            color: #364656;
-            background-color: #edf2f6;
+            color: $primary-2;
+            background-color: $background;
         }
         &.active {
-            color: #364656;
-            background-color: #edf2f6;
+            color: $primary-2;
+            background-color: $background;
         }
     }
 }

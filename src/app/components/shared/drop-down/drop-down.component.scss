@@ -1,5 +1,7 @@
+@import "./src/assets/styles/variable";
+
 .disabled {
-    background-color: #ebebe4 !important;
+    background-color: $gray-400 !important;
 }
 .icon__check {
     background-size: 15px;

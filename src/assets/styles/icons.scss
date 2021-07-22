@@ -1,3 +1,5 @@
+@import './src/assets/styles/variable';
+
 .icn-64 {
   display: block;
   width: 64px;
@@ -742,14 +744,14 @@
       position: absolute;
       top: -2px;
       right: -2px;
-      border: solid 2px #ffffff;
-      background-color: #2ec866;
+      border: solid 2px $white;
+      background-color: $success;
       border-radius: 50%;
     }
   }
   &.--offline {
     &::before {
-      background-color: #ff5263;
+      background-color: $error;
     }
   }
 }
