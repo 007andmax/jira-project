@@ -320,8 +320,8 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
           if (res) {
             this.cProfile.address = res.addresses;
             this.cProfile.address[0].timeZone = new TimeZone({
-              first: res.addresses[0].timeZone.displayName,
-              second: res.addresses[0].timeZone.name,
+              first: (res.addresses[0].timeZone) ? res.addresses[0].timeZone.displayName : "",
+              second: (res.addresses[0].timeZone) ? res.addresses[0].timeZone.name : "",
             })
             this.cProfile.logo = res.logo;
             this.cProfile.name = res.name;
