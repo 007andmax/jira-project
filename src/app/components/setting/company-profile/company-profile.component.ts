@@ -352,7 +352,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
 
             this.cProfileForm.patchValue({
               name: res.name,
-              url: res.supportMailBox,
+              url: res.domain,
               suiteNumber: res.addresses.length === 0 ? '' : res.addresses[0].suiteNumber,
               address: res.addresses.length === 0 ? '' : res.addresses[0].address,
               postalCode: res.addresses.length === 0 ? '' : res.addresses[0].postalCode
@@ -394,6 +394,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
               }
             }
           }
+          console.log("this.cProfileForm", this.cProfileForm);
         },
         error => {
           this.loading = false; $(".loading").css("display", "none");
@@ -403,6 +404,28 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     } catch (error) {
       this.loading = false; $(".loading").css("display", "none");
     }
+  }
+  checkDomain() {
+    this.companyProfileService.checkDomain(this.cProfileForm.get(
+      'url'
+    ).value).subscribe(data => {
+      this.cProfileForm.get(
+        'url'
+      ).setErrors({ 'incorrect': true });
+    }, err => {
+      this.cProfileForm.get(
+        'url'
+      ).setErrors({ 'incorrect': false });
+      this.setDomain();
+    })
+
+  }
+  setDomain() {
+    this.companyProfileService.setDomain(this.cProfileForm.get(
+      'url'
+    ).value).subscribe(data => {
+
+    })
   }
 
   /**
@@ -446,7 +469,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
           this.url = this.url
             ? this.url + '.' + res['website.dns']
             : res['website.dns'];
-          this.cProfileForm.patchValue({ url: this.url });
+          // this.cProfileForm.patchValue({ url: this.url });
         }
       },
       error => { }
