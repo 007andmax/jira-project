@@ -26,9 +26,9 @@ export class TagsService {
     return this.http.put(`${this.apiUrl}settings/companyProfile/allowUsersCreateTags?allow=${value}`, {});
   }
 
-  search(page, partWord) {
-    if (partWord.length === 0) return this.http.get(this.apiUrl + `commonTags/getAll?page=${page}&size=20`)
-    return this.http.get(this.apiUrl + `commonTags/filter?page=${page}&size=20&partWord=${partWord}`)
+  search(page, partWord, filter = null) {
+    if (partWord.length === 0) return this.http.get(this.apiUrl + `commonTags/getAll?page=${page}&size=20${(filter) ? '&defaultTag=COMMON' : ''}`)
+    return this.http.get(this.apiUrl + `commonTags/filter?page=${page}&size=20&partWord=${partWord}${(filter) ? '&defaultTag=COMMON' : ''}`)
   }
   searchManageTag(page, partWord) {
     if (partWord.length === 0) return this.http.get(this.apiUrl + `commonTags/getAll?page=${page}&size=20&defaultTag=COMMON`)
