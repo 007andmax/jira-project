@@ -37,18 +37,13 @@ export class CompaniesService {
     return this.http.get(this.apiUrl + 'company/dearchive/' + id);
   }
 
-  public switchScope(name, email) {
-    return this.http.post(this.apiUrl + 'switchScope?Company-Name=' + encodeURI(name), { email: email });
-  }
   /**
    * Get all companies list
    */
   public getCompaniesList() {
     return this.http.get(this.apiUrl + 'company/clients');
   }
-  public getTechCompanies() {
-    return this.http.get(this.apiUrl + 'availableDomains');
-  }
+
   public getCompaniesListByFilter(data) {
     return this.http.post(this.apiUrl + 'company/filter', data);
   }

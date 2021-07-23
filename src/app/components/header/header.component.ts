@@ -16,7 +16,6 @@ import { UsersStateService } from '../../states/users/users-state.service';
 })
 export class HeaderComponent implements OnInit {
   currentCompany: Company;
-  techCompanies: Array<string> = [];
   toggleLeftPanel: boolean = false;
   constructor(private usersStateService: UsersStateService,
     private ticketsStateService: TicketsStateService,
@@ -29,10 +28,6 @@ export class HeaderComponent implements OnInit {
     private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
-    this.techCompanies = this.companiesStateService.getTechCompanies();
-    this.companiesStateService.onGetTechCompanies.subscribe(data => {
-      this.techCompanies = data;
-    })
     this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
       this.toggleLeftPanel = data;
       this.cd.detectChanges();
@@ -56,13 +51,7 @@ export class HeaderComponent implements OnInit {
        e.initEvent('click', true, true);
        link.dispatchEvent(e);*/
   }
-  goToTehCompany(data) {
-    if (this.companiesStateService.getCurrentCompany().name !== data) {
-      this.companiesService.switchScope(data, this.usersStateService.getCurrentUser().primaryEmail).subscribe(res => {
-        location.href = "/";
-      })
-    }
-  }
+
   onAddTicket() {
     this.ticketsStateService.onToggleAddTicket();
   }
