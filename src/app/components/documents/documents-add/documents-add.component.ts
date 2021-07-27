@@ -48,6 +48,7 @@ export class DocumentsAddComponent implements OnInit {
             this.documentAdd.setData(data);
             this.documentValidate.setUniqueTittle(false);
             if (queryParam['template']) {
+              this.documentAdd.setClientType(null);
               this.tagsService.getTagsCompanyById(this.companyId).subscribe((tags: any) => {
                 let companyTag = tags.commonTagViews;
                 if (companyTag) this.documentAdd.tags.push(...companyTag);
