@@ -1,0 +1,220 @@
+<div class="col-md-12 --required">
+    <div class="header">
+        <p class="title-link-to">Link To</p>
+        <i
+            class="icn-sm icn-help"
+            placement="right"
+            ngbTooltip='The "Link to" value can be used only for documents'
+        ></i>
+    </div>
+    <div
+        class="--required documents-linkeds-body"
+        ngbDropdown
+        #products="ngbDropdown"
+        [ngClass]="{ 'disabled': isDisabled}"
+    >
+        <mat-form-field ngbDropdownAnchor>
+            <mat-chip-list
+                #chipList
+                aria-label="Fruit selection"
+            >
+                <mat-chip
+                    *ngFor="let item of selectedUserAndCompanies; let i = index"
+                    [selectable]="selectable"
+                    [removable]="removable"
+                    (removed)="removeItem(i)"
+                >
+                    <i
+                        class="icon__user-grey qt-sz-16 qt-bg-contain"
+                        *ngIf="item.type === 'USER'"
+                    ></i>
+                    <i
+                        class="icon__devices-grey qt-sz-16 qt-bg-contain"
+                        *ngIf="item.type === 'COMPANY'"
+                    ></i>
+                    {{item.name}}
+                    <mat-icon
+                        matChipRemove
+                        *ngIf="removable"
+                    >
+                        cancel
+                    </mat-icon>
+                </mat-chip>
+                <input
+                    id="dropdownServices"
+                    ngbDropdownToggle
+                    placeholder="Select Company and User to link"
+                    #userInput
+                    class="pointer"
+                    [formControl]="linkedCtrl"
+                    [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [matChipInputAddOnBlur]="addOnBlur"
+                    [attr.disabled]="isDisabled ? '' : null"
+                    (input)="onSearch($event)"
+                >
+            </mat-chip-list>
+        </mat-form-field>
+        <div
+            class="select-wrapper"
+            ngbDropdownMenu
+            aria-labelledby="dropdownServices"
+        >
+            <div class="tab-wrapper">
+                <div
+                    class="tab"
+                    (click)="setCurrentTab($event, item)"
+                    *ngFor="let item of tabs"
+                    [ngClass]="{'active' : (currentTab === item)}"
+                >
+                    {{item}}
+                </div>
+            </div>
+            <div
+                class="content"
+                (click)="$event.preventDefault()"
+            >
+                <div>
+                    <div *ngIf="currentTab === 'User'">
+                        <div
+                            class="content-item"
+                            *ngFor="let item of usersList; let i = index"
+                            (click)="toggleItem(item,'USER')"
+                        >
+                            <label class="qt-checkbox pointer">
+                                <input
+                                    type="checkbox"
+                                    [checked]="isSeleted(item)"
+                                    readonly
+                                >
+                                <span></span>
+                                {{item.firstName}} {{item.lastName}}
+                            </label>
+                        </div>
+                    </div>
+                    <div *ngIf="currentTab === 'Company'">
+                        <div
+                            class="content-item"
+                            *ngFor="let item of companiesList; let i = index"
+                            (click)="toggleItem(item,'COMPANY')"
+                        >
+                            <label class="qt-checkbox pointer">
+                                <input
+                                    type="checkbox"
+                                    [checked]="isSeleted(item)"
+                                    readonly
+                                >
+                                <span></span>
+                                {{item.name}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <div
+        class="device-user pointer"
+        [ngClass]="{ 'has-placeholder': !selectedUserAndCompanies.length,'disabled': isDisabled}"
+        (click)="showSelectWrapper($event)"
+    >
+        <ng-template
+            ngFor
+            let-item
+            let-i="index"
+            [ngForOf]="selectedUserAndCompanies"
+            [ngForTrackBy]="trackByIndex"
+        >
+            <div class="selected-user">
+                <i
+                    class="icon__user-grey qt-sz-16 qt-bg-contain"
+                    *ngIf="item.type === 'USER'"
+                ></i>
+                <i
+                    class="icon__devices-grey qt-sz-16 qt-bg-contain"
+                    *ngIf="item.type === 'COMPANY'"
+                ></i>
+                <span>{{item.name}}</span>
+                <i
+                    class="icn-sm icn-remove-old"
+                    *ngIf="!isDisabled"
+                    (click)="removeItem(i)"
+                ></i>
+            </div>
+        </ng-template>
+    </div>
+    <div
+        class="select-wrapper"
+        *ngIf="showSelect"
+        (clickOutside)="hideSelectWrapper()"
+    >
+        <div class="tab-wrapper">
+            <div
+                class="tab"
+                (click)="setCurrentTab($event, item)"
+                *ngFor="let item of tabs"
+                [ngClass]="{'active' : (currentTab === item)}"
+            >
+                {{item}}
+            </div>
+        </div>
+        <div
+            class="content"
+            (click)="$event.preventDefault()"
+        >
+            <div *ngIf="currentTab === 'User'">
+                <div
+                    *ngFor="let item of usersList; let i = index"
+                    (click)="toggleItem(item,'USER')"
+                >
+                    <label class="qt-checkbox pointer">
+                        <input
+                            type="checkbox"
+                            [checked]="isSeleted(item)"
+                            readonly
+                        >
+                        <span></span>
+                        {{item.firstName}} {{item.lastName}}
+                    </label>
+                </div>
+            </div>
+            <div *ngIf="currentTab === 'Company'">
+                <div
+                    *ngFor="let item of companiesList; let i = index"
+                    (click)="toggleItem(item,'COMPANY')"
+                >
+                    <label class="qt-checkbox pointer">
+                        <input
+                            type="checkbox"
+                            [checked]="isSeleted(item)"
+                            readonly
+                        >
+                        <span></span>
+                        {{item.name}}
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div> -->
+</div>

@@ -11,56 +11,58 @@
             [textContent]="'Invoice#' + invoiceProfile.number"
         >
         </div>
-
-
-
-
-
         <div class="qt-df qt-ai-c">
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__payment-received"
                 (click)="onCreatePayment()"
                 *ngIf="!invoiceProfile.paidOn"
+                placement="top"
+                ngbTooltip="Record payment"
+                container="body"
             ></div>
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__email-dark"
                 (click)="resendInvoices()"
+                placement="top"
+                ngbTooltip="Send"
+                container="body"
             ></div>
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__print"
                 (click)="print()"
+                placement="top"
+                ngbTooltip="Print"
+                container="body"
             ></div>
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__download-pdf"
                 (click)="downloadPDF()"
+                placement="top"
+                ngbTooltip="Download"
+                container="body"
             ></div>
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__remove"
                 *ngIf="!invoiceProfile.paidOn"
                 (click)="rollbackInvoice()"
+                placement="top"
+                ngbTooltip="Rollback"
+                container="body"
             ></div>
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__restart"
                 *ngIf="invoiceProfile.paidOn"
                 (click)="refundPayments()"
+                placement="top"
+                ngbTooltip="Refund payment"
+                container="body"
             ></div>
-
-
-
-
-
             <div
                 class="icon__close qt-aside-modern__header-close"
                 (click)="close()"
             ></div>
         </div>
     </div>
-
-
-
-
-
-
     <div class="qt-aside-modern__content --no-padding --no-footer">
         <div
             class="loading"
@@ -70,12 +72,6 @@
             class="qt-pl-30 qt-pr-30 qt-pt-24 qt-pb-50"
             *ngIf="!showPreloader"
         >
-
-
-
-
-
-
             <div
                 class="invoice-status-timeline qt-pt-10 qt-pl-16 qt-pr-16 qt-pb-20 qt-mb-24 qt-mr-20 qt-ml-20"
                 [ngClass]="{'--closed': !toggleStatus}"
@@ -89,12 +85,6 @@
                     ></div>
                     <!-- by clicking this button you should toggle class '--closed' for .invoice-status-timeline -->
                 </div>
-
-
-
-
-
-
                 <div
                     class="invoice-status-timeline__line"
                     *ngIf="toggleStatus"
@@ -110,22 +100,10 @@
                         [ngClass]="{'not-completed-status':!invoiceProfile.paidOn}"
                     ></div>
                 </div>
-
-
-
-
-
-
                 <div
                     class="invoice-status-timeline__steps qt-df"
                     *ngIf="toggleStatus"
                 >
-
-
-
-
-
-
                     <div class="qt-df qt-ai-c invoice-status-timeline__steps-info">
                         <div class="step-citcle qt-mr-5 icon__invoice-check"></div>
                         <div>
@@ -136,12 +114,6 @@
                             ></div>
                         </div>
                     </div>
-
-
-
-
-
-
                     <div class="qt-df qt-ai-c invoice-status-timeline__steps-info">
                         <div class="step-citcle qt-mr-5 icon__invoice-email"></div>
                         <div>
@@ -149,12 +121,6 @@
                             <!-- <div class="qt-fs-11 qt-lh-145 qt-color-dark-light">21/05/2020 09:47 AM</div> -->
                         </div>
                     </div>
-
-
-
-
-
-
                     <div class="qt-df qt-ai-c invoice-status-timeline__steps-info">
                         <div class="step-citcle qt-mr-5 icon__read-on"></div>
                         <div>
@@ -166,12 +132,6 @@
                             ></div>
                         </div>
                     </div>
-
-
-
-
-
-
                     <div class="qt-df qt-ai-c invoice-status-timeline__steps-info">
                         <div class="step-citcle qt-mr-5 icon__get-paid"></div>
                         <div>
@@ -183,27 +143,8 @@
                             ></div>
                         </div>
                     </div>
-
-
-
-
-
-
                 </div>
-
-
-
-
-
-
             </div>
-
-
-
-
-
-
-
             <!-- <div class="qt-mb-24">
     <div class="invoice-aside-info-block qt-df qt-ai-c qt-jc-sb qt-pb-12 qt-pt-12 qt-pl-16 qt-pr-16">
       <div class="qt-df qt-ai-c">
@@ -217,23 +158,11 @@
       </div>
     </div>
   </div> -->
-
-
-
-
-
-
             <div class="invoice-preview qt-pos-rel">
                 <div
                     class="invoice-preview__status"
                     [ngClass]="{'--paid': invoiceProfile.paidOn, '--overdue': invoiceProfile.isOverDue && !invoiceProfile.paidOn}"
                 ></div>
-
-
-
-
-
-
                 <div class="qt-df qt-jc-sb qt-pb-24 company-info">
                     <div class="qt-lh-154">
                         <img
@@ -254,30 +183,12 @@
                             [textContent]="(invoiceProfile.phoneNumbers && invoiceProfile.phoneNumbers.length > 0) ? invoiceProfile.phoneNumbers[0].number : ''"
                         ></div>
                     </div>
-
-
-
-
-
-
                     <div
                         class="qt-color-dark qt-lh-131 qt-pr-24 qt-fs-26 qt-text-upper qt-ff-gm"
                         [textContent]="'Invoice#' + invoiceProfile.number"
                     >
-
-
-
-
-
-
                     </div>
                 </div>
-
-
-
-
-
-
                 <div class="qt-mt-24 qt-mb-32 qt-df qt-jc-sb">
                     <div class="qt-lh-154">
                         <div class="qt-fs-10 qt-color-light qt-mb-8 qt-ff-sb qt-lh-12">BILLING ADDRESS</div>
@@ -305,12 +216,6 @@
                             [textContent]="(invoiceProfile.invoiceContact.phoneNumbers && invoiceProfile.invoiceContact.phoneNumbers.length > 0) ? invoiceProfile.invoiceContact.phoneNumbers[0].number : ''"
                         ></div>
                     </div>
-
-
-
-
-
-
                     <div class="qt-fs-13 qt-text-right qt-lh-154">
                         <div class="qt-df qt-jc-sb qt-mb-8">
                             <div
@@ -345,12 +250,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
-
-
                 <div class="invoice-preview__items">
                     <ng-template
                         ngFor
@@ -456,47 +355,12 @@
                                             ></td>
                                         </tr>
                                     </ng-template>
-
-
-
-
-
-
                                 </tbody>
                             </table>
-
-
-
-
-
-
-
-
                         </div>
                     </ng-template>
-
-
-
-
-
-
-
-
                 </div>
-
-
-
-
-
-
-
                 <div class="qt-df qt-w100 qt-jc-sb qt-color-dark qt-fs-12 qt-ff-gm qt-mb-20 qt-lh-133">
-
-
-
-
-
-
                     <div class="qt-mb-20 invoice-preview-notes">
                         <div class="qt-fs-12 qt-mb-4 qt-ff-qm qt-color-dark qt-ff-gm qt-lh-133">Customer Note</div>
                         <div
@@ -506,13 +370,6 @@
         (invoiceProfile.regularNote.line2 || '')"
                         ></div>
                     </div>
-
-
-
-
-
-
-
                     <div class="invoice-preview__total-block">
                         <div class="qt-df qt-jc-sb qt-pl-12 qt-pr-12">
                             <div class="qt-text-left">Sub Total</div>
@@ -522,12 +379,6 @@
           currency"
                             ></div>
                         </div>
-
-
-
-
-
-
                         <div
                             class="qt-df qt-jc-sb qt-pl-12 qt-pt-10 qt-pr-12"
                             *ngIf="invoiceProfile.invoiceDiscount"
@@ -555,12 +406,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
-
-
                 <div>
                     <div>
                         <div class="qt-fs-12 qt-mb-4 qt-ff-qm qt-color-dark qt-ff-gm qt-lh-133">Terms & Conditions</div>
@@ -571,33 +416,7 @@
                         ></div>
                     </div>
                 </div>
-
-
-
-
-
-
-
             </div>
-
-
-
-
-
-
-
         </div>
-
-
-
-
-
-
     </div>
-
-
-
-
-
-
 </div>

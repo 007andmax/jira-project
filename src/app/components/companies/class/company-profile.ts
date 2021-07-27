@@ -50,6 +50,7 @@ export class CompanyProfile {
         this.id = company.id;
         this.accountNumber = company.accountNumber;
         this.addresses = company.addresses;
+        if (this.addresses.length == 0) this.addresses = [new CompanyProfileAddress()];
         this.agentLinkToEmail = company.agentLinkToEmail;
         this.clientIndustry = company.clientIndustry;
         this.clientType = company.clientType;

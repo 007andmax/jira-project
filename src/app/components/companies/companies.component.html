@@ -1,95 +1,37 @@
-<div class="new-companies-content">
-    <app-companies-header></app-companies-header>
-    <div class="new-companies__list">
-        <div class="new-companies__list--header clearfix mob-hidden">
-            <div class="col-md-3 with-checkbox">
-                <label class="checkbox-container">
-                    <input
-                        type="checkbox"
-                        (change)="onSelectAllCompanies($event)"
-                    >
-                    <span class="checkbox-mark"></span>
-                </label>
-                <p
-                    class="pointer"
-                    (click)="onFilter('name')"
+<div class="qt-page-list companies-page">
+    <app-companies-header
+        (onChangeFilterField)="onFilter($event)"
+        (onSelectAllCompanies)="onSelectAllCompanies($event)"
+    ></app-companies-header>
+    <div class="qt-page-list__body">
+        <div class="qt-page-list__body-table-container">
+            <table class="qt-page-list__body-tbody qt-table-modern companies-table">
+                <tbody
+                    class
+                    infiniteScroll
+                    [infiniteScrollDistance]="2"
+                    [infiniteScrollThrottle]="50"
+                    [infiniteScrollDisabled]="infiniteScrollDisabled"
+                    (scrolled)="onScroll()"
                 >
-                    Name
-                </p>
-            </div>
-            <div
-                class="col-md-3 pointer"
-                (click)="onFilter('address')"
-            >
-                Address
-            </div>
-            <div
-                class="col-md-4 pointer"
-                (click)="onFilter('primary_contact')"
-            >
-                Primary Contact
-            </div>
-            <div
-                class="col-md-4 pointer"
-                (click)="onFilter('email')"
-            >
-                Email Address
-            </div>
-            <div
-                class="col-md-1 pointer"
-                (click)="onFilter('tickets')"
-            >
-                Tickets
-            </div>
-            <div
-                class="col-md-1 pointer"
-                (click)="onFilter('devices')"
-            >
-                Devices
-            </div>
-            <div
-                class="col-md-1 pointer"
-                (click)="onFilter('users')"
-            >
-                Users
-            </div>
-            <div class="col-md-2"></div>
+                    <ng-template
+                        ngFor
+                        let-company
+                        [ngForOf]="CompaniesList"
+                        [ngForTrackBy]="trackById"
+                    >
+                        <app-companies-table
+                            [showArchivedCompanies]="showArchivedCompanies"
+                            [company]="company"
+                        ></app-companies-table>
+                    </ng-template>
+                    <div
+                        class="loading"
+                        *ngIf="showPreloader"
+                    ></div>
+                </tbody>
+            </table>
         </div>
-        <div
-            class="company-content"
-            infiniteScroll
-            [infiniteScrollDistance]="2"
-            [infiniteScrollThrottle]="50"
-            [infiniteScrollDisabled]="infiniteScrollDisabled"
-            (scrolled)="onScroll()"
-        >
-            <ng-template
-                ngFor
-                let-company
-                [ngForOf]="CompaniesList"
-                [ngForTrackBy]="trackById"
-            >
-                <app-companies-table
-                    [showArchivedCompanies]="showArchivedCompanies"
-                    [company]="company"
-                ></app-companies-table>
-            </ng-template>
-            <div
-                class="loading"
-                *ngIf="showPreloader"
-            ></div>
-        </div>
-        <button
-            class="mob-filters-btn mobile-btn primary"
-            (click)="showMobileFilter()"
-        >
-            Filters
-        </button>
-        <div
-            class="loading"
-            style="display: none;"
-        ></div>
     </div>
 </div>
-<!-- <app-company-add-aside></app-company-add-aside> -->
 <app-company-edit-aside></app-company-edit-aside>

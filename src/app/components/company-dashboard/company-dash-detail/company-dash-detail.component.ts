@@ -14,6 +14,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { TicketProfileFormService } from '../../../../app/components/tickets/tickets/ticket-edit-aside/class/ticket-profile-form-service';
 import { CompanyServiceType } from '../../companies/class/company-service-type';
 import { CompanyDetaill } from './company-detailing';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-company-dash-detail',
@@ -271,12 +272,17 @@ export class CompanyDashDetailComponent implements OnInit {
     private tagsState: CompanyTagsStateService,
     private companiesStateService: CompaniesStateService,
     private sanitizer: DomSanitizer,
+    public activateRoute: ActivatedRoute,
     public cd: ChangeDetectorRef
   ) { }
 
   public ngOnInit() {
-    this._id = /[^/]*$/.exec(window.location.href)[0];
-    this.getCompanyDetails();
+    this._id = this.activateRoute.snapshot.params['id'];
+    let subscription = this.activateRoute.params.subscribe(params => {
+      this._id = params['id'];
+      this.getCompanyDetails();
+    });
+    this.sub.add(subscription);
     this.currentService = new TicketProfileFormService();
   }
 
@@ -289,10 +295,7 @@ export class CompanyDashDetailComponent implements OnInit {
   }
 
   getCompanyDetails() {
-    // 07ed6152-997c-4389-81f9-a261e262e307
-    // d9adf435-0f98-41cc-98a2-22ddf4a83a2f
     let getCompany = this.companiesService.getCompany(this._id).subscribe((data: CompanyProfile) => {
-      // this.companyDetail = data;
       this.companyDetail.onEditMode(data);
       this.companyDetailing = this.companyDetail.getDataForDashboard();
       if (this.companyDetailing.reputation === undefined || this.companyDetailing.reputation === null) {
@@ -301,7 +304,7 @@ export class CompanyDashDetailComponent implements OnInit {
         this.selectedRating = this.companyDetailing.reputation;
         this.unSelectedRating = 5 - this.selectedRating;
       }
-      this.companyDetail = data;
+      // this.companyDetail = data;
       this.companyNameChanged.emit(this.companyDetailing.name);
       this.totalTicketsChanged.emit(this.companyDetailing.totalTickets);
       this.averageResponseTimeChanged.emit(this.companyDetailing.averageResponseTime);
@@ -335,6 +338,7 @@ export class CompanyDashDetailComponent implements OnInit {
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
       }
+      console.log("this.companyDetailing", this.companyDetailing);
     })
     this.sub.add(getCompany);
   }

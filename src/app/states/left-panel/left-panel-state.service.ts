@@ -7,13 +7,16 @@ import { LeftPanelCompaniesFilter } from '../../components/left-panel/left-panel
 export class LeftPanelStateService {
   activePage: string = "";
   filter: LeftPanelCompaniesFilter = new LeftPanelCompaniesFilter();
-  onFilter: EventEmitter<any> = new EventEmitter();
+  onChangeFilter: EventEmitter<any> = new EventEmitter();
   onBillingPage: EventEmitter<any> = new EventEmitter();
   onCompanyPage: EventEmitter<any> = new EventEmitter();
+  onDocumentsPage: EventEmitter<any> = new EventEmitter();
   onOpenCompanyPage: EventEmitter<any> = new EventEmitter();
   onToggleLeftPanel: EventEmitter<any> = new EventEmitter();
+  onHideLeftPanel: EventEmitter<any> = new EventEmitter();
   onGoToState: EventEmitter<any> = new EventEmitter();
   onChangeState: EventEmitter<any> = new EventEmitter();
+  onChangeStateWithoutNavigate: EventEmitter<any> = new EventEmitter();
   onFirstOpen: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
@@ -25,21 +28,34 @@ export class LeftPanelStateService {
     this.activePage = data;
     this.onFirstOpen.emit(data);
   }
+  public changeStateWithoutNavigate(data) {
+    this.activePage = data;
+    this.onChangeStateWithoutNavigate.emit(data);
+  }
   public openCompanPage() {
     this.onOpenCompanyPage.emit(null);
   }
   public changeState(data) {
+    this.activePage = data;
     this.onChangeState.emit(data);
   }
   public goToState(data) {
+    this.activePage = data;
     this.onGoToState.emit(data);
   }
   public setBillingPage(data) {
     this.activePage = data;
     this.onBillingPage.emit(data);
   }
+  public setDocumentsPage(data) {
+    this.activePage = data;
+    this.onDocumentsPage.emit(data);
+  }
   public toggleLeftPanel(data) {
     this.onToggleLeftPanel.emit(data);
+  }
+  public hideLeftPanel(data) {
+    this.onHideLeftPanel.emit(data);
   }
   public setCompanyPage(data) {
     this.activePage = data;
@@ -53,9 +69,7 @@ export class LeftPanelStateService {
   }
   public onInitFilter(data) {
     this.filter = data;
-    this.onFilter.emit(data);
+    this.onChangeFilter.emit(data);
   }
-  public getOnFilter() {
-    return this.onFilter;
-  }
+
 }

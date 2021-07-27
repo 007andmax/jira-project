@@ -1,35 +1,158 @@
-<div class="new-companies-content__header">
-    <h3>
-        Companies ({{calculateCount.getCurrent()}})
-    </h3>
-    <div class="new-companies-content__header--search">
-        <div class="new-companies-selected">
-            <div class="new-companies-selected-qty">
-                <span>2</span>
-                Selected
+<div class="qt-page-list__header --sticky">
+    <div class="new-companies-content__header">
+        <h3>
+            All Companies ({{calculateCount.getCurrent()}})
+        </h3>
+        <div class="qt-page-list__header-title-line--rigth">
+            <div
+                class="new-companies-content__header-buttons"
+                *ngIf="getCountSelected() > 0"
+            >
+                <div [textContent]="getCountSelected() + ' Selected'"></div>
+                <!-- <div class="qt-ml-25 qt-ff-gm qt-df qt-color-info qt-ai-c pointer">
+                    <div class="icon__email-blue qt-za-16 qt-sz-16 qt-mr-6 qt-bg-contain"></div>
+                    <div>Write Draft</div>
+                </div>
+               <div class="qt-ml-16 qt-ff-gm qt-df qt-color-info qt-ai-c pointer">
+                    <div class="icon__print-blue qt-za-16 qt-sz-16 qt-mr-6 qt-bg-contain"></div>
+                    <div>Print</div>
+                </div>
+                <div class="qt-ml-16 qt-ff-gm qt-df qt-color-info qt-ai-c qt-pointer ng-star-inserted">
+                    <div class="icon__export-blue qt-za-16 qt-sz-16 qt-mr-6 qt-bg-contain"></div>
+                    <div>Export</div>
+                </div> -->
             </div>
-            <div class="new-companies-selected-actions">
-                <i class="icn-16 email-ng2"></i>
+            <div class="new-companies-content__header--search">
+                <div class="new-companies-selected">
+                    <div class="new-companies-selected-qty">
+                        <span>2</span>
+                        Selected
+                    </div>
+                    <div class="new-companies-selected-actions">
+                        <i class="icn-16 email-ng2"></i>
+                    </div>
+                </div>
+                <button
+                    class="qt-btn --transparent"
+                    (click)="clearAll()"
+                    *ngIf="countFilter > 0"
+                >
+                    Clear All
+                </button>
+                <button
+                    class="qt-btn btn-filter qt-mr-8 qt-ml-8 d-f"
+                    [ngClass]="{'active':!toggleFilter}"
+                    (click)="toggleFilter  = !toggleFilter"
+                >
+                    <span
+                        class="filter-counter qt-circle qt-sz-18 qt-ff-sb qt-fs-10 qt-color-white qt-bg-info qt-mr-8 qt-df qt-ai-c qt-jc-c"
+                        *ngIf="countFilter > 0"
+                        [textContent]="countFilter"
+                    ></span>
+                    Filters
+                </button>
+                <button
+                    class="qt-btn --outline-white qt-mr-8"
+                    uib-tooltip="Draft email"
+                    tooltip-placement="top"
+                    (click)="showAsideForDraftEmail()"
+                >
+                    <!-- <i class="icn-16 email-ng2 qt-mr-6"></i> -->
+                    <i class="icon__email-dark qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6"></i>
+                    Send email
+                </button>
+                <button
+                    class="new-link desktop-hidden"
+                    style="font-size: 13px;"
+                    (click)="showAsideForAdd()"
+                >
+                    Add Company
+                </button>
+                <button
+                    class="btn-new btn-primary-white mob-hidden"
+                    (click)="showAsideForAdd()"
+                >
+                    Add Company
+                </button>
             </div>
         </div>
-        <i
-            class="icn-16 email-ng2"
-            uib-tooltip="Draft email"
-            tooltip-placement="top"
-            (click)="showAsideForDraftEmail()"
-        ></i>
-        <button
-            class="new-link desktop-hidden"
-            style="font-size: 13px;"
-            (click)="showAsideForAdd()"
-        >
-            Add Company
-        </button>
-        <button
-            class="btn-new btn-primary-white mob-hidden"
-            (click)="showAsideForAdd()"
-        >
-            Add Company
-        </button>
+    </div>
+    <div class="qt-page-list__header-filters">
+        <companies-filter
+            class="qt-w100"
+            #filter
+            (changeCountFilter)="onChangeCountFilter($event)"
+            [hidden]="toggleFilter"
+        ></companies-filter>
+    </div>
+    <div class="qt-page-list__header-thead-container">
+        <div class="qt-table-modern qt-page-list__header-thead">
+            <thead>
+                <tr>
+                    <th class="companies-table__check">
+                        <div class="d-f qt-jc-fe">
+                            <label class="qt-checkbox">
+                                <input
+                                    type="checkbox"
+                                    class="ng-untouched ng-pristine ng-valid"
+                                    (change)="toggleAllCompanies($event)"
+                                >
+                                <span></span>
+                            </label>
+                        </div>
+                    </th>
+                    <th
+                        class="companies-table__name pointer"
+                        (click)="onFilter('name')"
+                    >
+                        Name
+                    </th>
+                    <th
+                        class="companies-table__address pointer"
+                        (click)="onFilter('address')"
+                    >
+                        Address
+                        <div class="qt-table-modern__sorting"></div>
+                    </th>
+                    <th
+                        class="companies-table__primary-contact pointer"
+                        (click)="onFilter('primary_contact')"
+                    >
+                        Primary Contact
+                        <div class="qt-table-modern__sorting"></div>
+                    </th>
+                    <th
+                        class="companies-table__email-address pointer"
+                        (click)="onFilter('email')"
+                    >
+                        Email Address
+                        <div class="qt-table-modern__sorting"></div>
+                    </th>
+                    <th
+                        class="companies-table__tickets pointer"
+                        (click)="onFilter('tickets')"
+                    >
+                        Tickets
+                        <div class="qt-table-modern__sorting"></div>
+                    </th>
+                    <th
+                        class="companies-table__devices pointer"
+                        (click)="onFilter('devices')"
+                    >
+                        Devices
+                        <div class="qt-table-modern__sorting"></div>
+                    </th>
+                    <th
+                        class="companies-table__users pointer"
+                        (click)="onFilter('users')"
+                    >
+                        Users
+                        <div class="qt-table-modern__sorting"></div>
+                    </th>
+                    <th class="companies-table__download-btn  pointer"></th>
+                    <th class="companies-table__menu pointer"></th>
+                </tr>
+            </thead>
+        </div>
     </div>
 </div>

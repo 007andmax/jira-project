@@ -16,6 +16,9 @@ import { PasswordManagerStateService } from 'src/app/states/password-manager/pas
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 import { Subscription } from 'rxjs';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { PasswordManagerLinkedComponent } from './password-manager-linked/password-manager-linked.component';
+import { ToastrService } from 'ngx-toastr';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 
 
 @Component({
@@ -28,20 +31,18 @@ export class PasswordManagerAddAsideComponent implements OnInit {
   companies: Array<Company> = [];
   categories: Array<PasswordRecordCategories> = [];
   passwordRecordAdd: PasswordRecordAdd = new PasswordRecordAdd();
-  public devicesList = [];
-  public usersList = [];
-  public gadgets = [];
   public selectedUserAndDevices: Array<PasswordDeviceUser> = [];
-  public showSelect = false;
+
+
   showAddCategory: boolean = false;
-  public tabs = ['User', 'Device', 'Not monitored'];
-  public currentTab = this.tabs[0];
+
   public opened: boolean = false;
   validate: PasswordRecordValidate = new PasswordRecordValidate();
   formatDate: string = FORMAT_DATE_2;
-  public showGadgetsForm: any;
-  public newGadgets: any;
+
+
   sub: Subscription = new Subscription();
+  @ViewChild('linked') linked: PasswordManagerLinkedComponent;
   @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
   @ViewChild('addRecord') addRecord: DisabledBtnDirective;
   /**
@@ -63,6 +64,8 @@ export class PasswordManagerAddAsideComponent implements OnInit {
     private companiesState: CompaniesStateService,
     private devicesStateService: DevicesStateService,
     private usersStateService: UsersStateService,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService
   ) { }
 
   /**
@@ -102,71 +105,7 @@ export class PasswordManagerAddAsideComponent implements OnInit {
   }
   selectCompany(data) {
     this.passwordRecordAdd.setCompany(data);
-    this.usersList = [];
-    this.devicesList = [];
-    this.gadgets = [];
-    if (data) {
-      let users = this.usersStateService.getAllUsers().filter(item => {
-        let company = this.companies.find(itemCompany => itemCompany.id === item.company.id);
-        let isArchived = item.deletedAt || !company;
-        return !isArchived && item.company.id === data.id
-      });
-      users.forEach(item => {
-        this.usersList.push(new PasswordDeviceUser(item.id, `${item.firstName} ${item.lastName}`, 'USER'));
-      })
-      this.usersList.sort((a, b) => (`${a.name}`.toLowerCase() > `${b.name}`.toLowerCase()) ?
-        1 : ((`${b.name}`.toLowerCase() > `${a.name}`.toLowerCase()) ? -1 : 0));
-      let devices = (this.devicesStateService.getAllDevices()[data.id]) ? this.devicesStateService.getAllDevices()[data.id] : [];
-      devices.forEach(item => {
-        this.devicesList.push(new PasswordDeviceUser(item.id, this.getLabelDevice(item), 'DEVICE'));
-      })
-      this.devicesList.sort((a, b) => (`${a.name}`.toLowerCase() > `${b.name}`.toLowerCase()) ?
-        1 : ((`${b.name}`.toLowerCase() > `${a.name}`.toLowerCase()) ? -1 : 0));
-      this.getGadgets();
-    }
-    this.validate.resetCompany();
-  }
-  isSeleted(item) {
-    return this.selectedUserAndDevices.find(element => element.id === item.id);
-  }
-  removeItem(index) {
-    this.selectedUserAndDevices.splice(index, 1);
-  }
-  private stopEvent($event) {
-    $event.preventDefault();
-    $event.stopPropagation();
-  }
-  public deleteGadget($event, id) {
-    this.stopEvent($event);
-    this.gadgetsService.deleteGadget(id)
-      .subscribe((res: any) => this.gadgets = this.gadgets.filter((item) => item.id !== id))
-  }
-  public setCurrentTab($event, item) {
-    this.stopEvent($event);
-    this.currentTab = item;
-    this.showGadgetsForm = false;
-    this.cd.detectChanges();
-  }
-  public addGadgetsform() {
-    const clientCompanyId = this.passwordRecordAdd.client.id;
-    const name = this.newGadgets;
-    this.gadgetsService.addNewGadget(clientCompanyId, name).subscribe((res: any) => {
-      this.gadgets.push(new PasswordDeviceUser(res.id, res.name, 'GADGET'));
-      this.showGadgetsForm = false;
-    })
-  }
-  public showGadgetsAddForm($event) {
-    this.stopEvent($event);
-    this.showGadgetsForm = !this.showGadgetsForm;
-  }
-  public getGadgets() {
-    this.gadgetsService.getCompanyDevices().subscribe((res: any) => {
-      this.gadgets = res.map(item => new PasswordDeviceUser(item.id, item.name, 'GADGET'));
-    });
-  }
-  getLabelDevice(item) {
-    if (item.label) return item.label;
-    return item.hostName || item.ip;
+    this.linked.onSelectCompany(data);
   }
   selectType(data) {
     this.passwordRecordAdd.setType(data);
@@ -175,24 +114,11 @@ export class PasswordManagerAddAsideComponent implements OnInit {
   onChangeDatePicker(data) {
     this.passwordRecordAdd.setExpiryDate(moment(new Date(data.year, data.month - 1, data.day)).format('YYYY/MM/DD'));
   }
-  public toggleItem(newItem) {
-    let findIndex = this.selectedUserAndDevices.findIndex(item => item.id === newItem.id);
-    if (findIndex > -1) {
-      this.selectedUserAndDevices.splice(findIndex, 1);
-    } else {
-      this.selectedUserAndDevices.push(newItem);
-    }
-    this.validate.resetLinkTo();
+
+  public onChangeLinked(data) {
+    this.selectedUserAndDevices = data;
   }
-  public showSelectWrapper($event) {
-    this.showSelect = !this.showSelect;
-    this.stopEvent($event);
-    this.cd.detectChanges();
-  }
-  public hideSelectWrapper() {
-    this.showSelect = false;
-    this.showGadgetsForm = false;
-  }
+
   public save() {
     if (!this.validate.isValidate(this.passwordRecordAdd, this.selectedUserAndDevices)) return;
     this.addRecord.setDisabled(true);
@@ -209,11 +135,7 @@ export class PasswordManagerAddAsideComponent implements OnInit {
     this.passwordRecordAdd = new PasswordRecordAdd();
     this.validate = new PasswordRecordValidate();
     this.selectedUserAndDevices = [];
-    this.devicesList = [];
-    this.usersList = [];
-    this.gadgets = [];
-    this.currentTab = this.tabs[0];
-    this.showSelect = false;
+    this.linked.onClosed();
     this.showAddCategory = false;
   }
   public getPermissions(action) {

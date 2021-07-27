@@ -9,9 +9,6 @@
         [list]="companies"
         (onSelectedItem)="onSelectCompany($event)"
     ></app-select-search>
-
-
-
     <app-select-search
         class="search-users"
         #usersDp
@@ -21,9 +18,6 @@
         [list]="getUserList()"
         (onSelectedItem)="onSelectUser($event)"
     ></app-select-search>
-
-
-
     <app-select-search
         class="search-tech-users"
         #techUsersDp
@@ -33,8 +27,6 @@
         [list]="getTechUserList()"
         (onSelectedItem)="onSelectTechUser($event)"
     ></app-select-search>
-
-
     <app-select-search
         class="search-status"
         #statusDp
@@ -45,7 +37,5 @@
         [field]="'title'"
         (onSelectedItem)="onSelectStatus($event)"
     ></app-select-search>
-
-
     <app-tickets-filter-tags (tagsChange)="onChangeTags($event)"></app-tickets-filter-tags>
 </div>

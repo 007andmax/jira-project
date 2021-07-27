@@ -20,6 +20,7 @@ import { CompanyDevicesEditLabelComponent } from '../company-devices-edit-label/
 export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
   @ViewChild('editLabel') editLabel: CompanyDevicesEditLabelComponent;
   @Input() device: DeviceCompany;
+  @Input() companyId: string;
   timer: any = null;
   @Output() onChangeSelect = new EventEmitter();
   constructor(private modalService: NgbModal,
@@ -49,6 +50,7 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
     this.onChangeSelect.emit(null);
   }
   gotiDetailDevice() {
+    localStorage.setItem('company_id', this.companyId);
     localStorage.setItem('agentId', this.device.agentId);
     localStorage.setItem('type', this.device.type);
     var url = `/#/ng2/device/dashboard/${this.device.type}/${this.device.agentId}`;

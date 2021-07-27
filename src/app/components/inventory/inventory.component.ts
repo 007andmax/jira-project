@@ -25,7 +25,7 @@ export class InventoryComponent implements OnInit {
   inventoryList: Array<InventoryItem> = [];
   reqInventoryList: Array<InventoryItem> = [];
   filter: InventoryFilter = new InventoryFilter();
-  public infiniteScrollDisabled = false;
+  public infiniteScrollDisabled = true;
   public page_number: number = 0;
   showPreloader: boolean = true;
   companies = [];
@@ -90,14 +90,14 @@ export class InventoryComponent implements OnInit {
         const Index = this.inventoryList.findIndex((item) => item.versionedId.id === data.data.versionedId.id);
         if (reqIndex > -1) {
           this.reqInventoryList[reqIndex] = new InventoryItem(data.data);
-          if (!this.filter.isFilterItem(data.data)) this.reqInventoryList.splice(reqIndex, 1);
+          if (!this.filter.isFilterItem(new InventoryItem(data.data))) this.reqInventoryList.splice(reqIndex, 1);
         }
-        if (reqIndex === -1 && this.filter.isFilterItem(data.data)) this.reqInventoryList.push(new InventoryItem(data.data));
+        if (reqIndex === -1 && this.filter.isFilterItem(new InventoryItem(data.data))) this.reqInventoryList.push(new InventoryItem(data.data));
         if (Index > -1) {
           this.inventoryList[Index] = new InventoryItem(data.data);
-          if (!this.filter.isFilterItem(data.data)) this.inventoryList.splice(Index, 1);
+          if (!this.filter.isFilterItem(new InventoryItem(data.data))) this.inventoryList.splice(Index, 1);
         }
-        if (Index === -1 && this.filter.isFilterItem(data.data)) {
+        if (Index === -1 && this.filter.isFilterItem(new InventoryItem(data.data))) {
           this.inventoryList.push(new InventoryItem(data.data));
           this.inventoryList = this.filter.getFilterList(this.inventoryList);
           // this.inventoryList = this.inventoryList.filter(item => (this.productSearchName.length > 0) ? item.description.toLowerCase().includes(this.productSearchName.toLowerCase()) : true);

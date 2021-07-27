@@ -9,6 +9,7 @@ import { ModalLockValidate } from './class/modal-lock-validate';
   selector: 'modal-lock-screen',
   templateUrl: './modal-lock-screen.component.html',
   styleUrls: ['./modal-lock-screen.component.css'],
+
 })
 
 export class ModalLockScreenComponent implements OnInit {

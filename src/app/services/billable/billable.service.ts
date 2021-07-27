@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { ConstantsStateService } from '../../states/constants/constants-state.service';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { InvoiceNote } from '../../components/billing/billable/class/invoice-note';
 import { InvoiceTaxNumber } from '../../components/billing/billable/class/invoice-tax-number';
 import { InvoiceLock } from '../../components/billing/billable/class/invoice-lock';
+import { ToastrService } from 'ngx-toastr';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -19,7 +21,9 @@ export class BillableService {
    */
   public constructor(
     private http: HttpClient,
-    private constantsStateService: ConstantsStateService
+    private constantsStateService: ConstantsStateService,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService
   ) { }
 
   public deleteDiscount(lockId) {
@@ -29,9 +33,12 @@ export class BillableService {
     return this.http.post(this.apiUrl + `invoice/addDiscount/${lockId}`, data);
   }
   public create(lockId, isSend, contactId, addressId) {
-
-    return this.http.get(this.apiUrl + `/invoice/create/${lockId}?isSendNotification=${isSend}&billTo=${contactId}&shipTo=${addressId}`);
-
+    return this.http.get(this.apiUrl + `/invoice/create/${lockId}?isSendNotification=${isSend}&billTo=${contactId}&shipTo=${addressId}`).pipe(
+      tap(data => {
+        this.toastrService.success("The billable item has been successfully created");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public unlock(lockId) {
     return this.http.get(this.apiUrl + `invoice/unlock/${lockId}`);

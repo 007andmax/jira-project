@@ -1,0 +1,42 @@
+<div class="qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
+    <ng-template
+        ngFor
+        let-item
+        [ngForOf]="list"
+        [ngForTrackBy]="trackById"
+    >
+        <div class="documents-create__document-history-item">
+            <div
+                class="documents-create__document-history-avatar"
+                [ngStyle]="{'background':  getUserAvatarUrl(getUserById(item.userId))}"
+                [textContent]="getNameForAvatar(getUserById(item.userId))"
+            ></div>
+            <div class="history-user-info">
+                <p
+                    class="documents-create__document-history-name"
+                    [textContent]="item.userName"
+                ></p>
+                <p
+                    class="documents-create__document-history-text"
+                    [textContent]="parseDate(item)"
+                >
+                </p>
+            </div>
+        </div>
+    </ng-template>
+    <div
+        class="loading"
+        *ngIf="showPreloader"
+    ></div>
+    <div
+        *ngIf="showLoadMore && list.length > 0"
+        class="button-loader"
+        (click)="getHistory()"
+    >
+        Load More Updates
+        <span
+            *ngIf="showMiniPreloader"
+            class="loading"
+        ></span>
+    </div>
+</div>

@@ -1,0 +1,68 @@
+<div
+    class="app-left-panel__menu"
+    *ngIf="isShowDoucments()"
+    [ngClass]="{'--active': open}"
+    (click)="open = !open;openPanel()"
+>
+    <div class="app-left-panel__menu-icon --documents"></div>
+    <div class="app-left-panel__menu-title">Documents</div>
+    <div class="app-left-panel__menu-arrow"></div>
+</div>
+<ul
+    class="app-left-panel__menu-expand icon-list top-menu"
+    [ngClass]="{'menu-expand-show': open, 'menu-expand-hide': !open}"
+    *ngIf="isShowDoucments()"
+>
+    <li
+        class="app-left-panel__menu-expand-item-icon"
+        (click)="goToState('new-documents')"
+    >
+        All documents
+    </li>
+    <li
+        class="app-left-panel__menu-expand-item-icon"
+        (click)="goToState('new-template-documents')"
+    >
+        Templates
+    </li>
+    <!-- <ng-template
+        ngFor
+        let-category
+        [ngForOf]="categories"
+        [ngForTrackBy]="trackById"
+    >
+        <li
+            class="app-left-panel__menu-expand-item-icon"
+            [routerLink]="['/ng2/documents/category/',category.id]"
+        >
+            <span class="app-left-panel__submenu-icon --folder"></span>
+            {{category.name}}
+        </li>
+    </ng-template>
+    <li
+        class="app-left-panel__menu-expand-item-icon --required"
+        *ngIf="toggleAddCategory"
+    >
+        <mat-error
+            class="qt-tooltip-error"
+            *ngIf="!addCategory.getValidate()"
+            [textContent]="'This category name is already occupied'"
+        >
+        </mat-error>
+        <input
+            type="text"
+            [(ngModel)]="addCategory.categoryName"
+            [ngClass]="{'--input-error':!addCategory.getValidate()}"
+            (input)="onCheckNameCategory()"
+            (blur)="onAddCategory()"
+        >
+    </li>
+    <li
+        class="app-left-panel__menu-expand-item-icon"
+        (click)="toggleCategory()"
+        *ngIf="getPermissions('CREATE_CATEGORY')"
+    >
+        <span class="app-left-panel__submenu-icon --add-folder"></span>
+        New Folder
+    </li> -->
+</ul>

@@ -73,7 +73,7 @@ export class TicketProfile {
                 return new TicketProfileShare(item);
             })
             this.tags = data.tags.map(item => {
-                let tag: Tag = {
+                let tag: any = {
                     colorCode: item.colorCode,
                     usedCounter: item.usedCounter,
                     word: item.word,
@@ -121,7 +121,7 @@ export class TicketProfile {
             return new TicketProfileShare(item);
         })
         if (data.tags) this.tags = data.tags.map(item => {
-            let tag: Tag = {
+            let tag: any = {
                 colorCode: item.colorCode,
                 usedCounter: item.usedCounter,
                 word: item.word,

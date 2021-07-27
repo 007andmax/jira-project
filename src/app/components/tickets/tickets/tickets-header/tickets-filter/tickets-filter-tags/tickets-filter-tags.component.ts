@@ -1,22 +1,58 @@
 import { Component, OnInit } from '@angular/core';
 import { CompanyTagsComponent } from 'src/app/components/companies/company-tags/company-tags.component';
+import { CompanyTagsListService } from 'src/app/components/companies/company-tags/services/company-tags-list.service';
 
 @Component({
   selector: 'app-tickets-filter-tags',
   templateUrl: './tickets-filter-tags.component.html',
-  styleUrls: ['./tickets-filter-tags.component.scss']
+  styleUrls: ['./tickets-filter-tags.component.scss'],
+  providers: [CompanyTagsListService]
 })
 export class TicketsFilterTagsComponent extends CompanyTagsComponent {
 
   public ngOnInit() {
     let getTags = this.tagsService.getTags().subscribe((data) => {
-      this.tags = data.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
-        1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
-      this.reqTags = data.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
-        1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
+      this.tags = data;
+      this.reqTags = JSON.parse(JSON.stringify(data));
+      this.sortTags();
     })
     this.sub.add(getTags);
+    let changeTagsArray = this.tagsRealTimeService.changeTagsArray.subscribe((data: any) => {
+      if (data.action === "TAG_SAVED") {
+        let index = this.tags.findIndex(item => item.id === data.data.id);
+        let indexreqTags = this.reqTags.findIndex(item => item.id === data.data.id);
+        if (index > -1) {
+          this.tags[index] = data.data;
+        } else {
+          this.tags.push(data.data);
+        }
+        if (indexreqTags > -1) {
+          this.reqTags[index] = data.data;
+        } else {
+          this.reqTags.push(data.data);
+        }
+      }
+      if (data.action === "TAG_REMOVED") {
+        let index = this.tags.findIndex(item => item.id === data.data);
+        let indexreqTags = this.reqTags.findIndex(item => item.id === data.data);
+        if (index > -1) this.tags.splice(index, 1);
+        if (indexreqTags > -1) this.reqTags.splice(index, 1);
+      }
+      this.sortTags();
+      this.cd.detectChanges();
+    })
+    this.sub.add(changeTagsArray);
     this.onInitClearState();
     this.onCheckEditItem();
+  }
+  sortTags() {
+    this.tags = this.tags.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
+      1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
+    this.reqTags = this.reqTags.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
+      1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
+  }
+  onSearch(event) {
+    this.tags = this.reqTags.filter(item => item.word.toLowerCase().includes(event.target.value));
+
   }
 }

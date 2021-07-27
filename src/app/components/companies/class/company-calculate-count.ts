@@ -9,13 +9,14 @@ export class CompanyCalculateCount {
     vendor: number = 0;
     constructor() { }
 
-    public onCalculate(list: Array<Company>, filter: LeftPanelCompaniesFilter) {
-        let filterList = filter.getFilterList(list);
+    public onCalculate(list: Array<Company>, clientType: string) {
+
         this.all = list.length;
         this.clients = list.filter(item => item.clientType === "CLIENT").length;
         this.leads = list.filter(item => item.clientType === "LEAD").length;
         this.vendor = list.filter(item => item.clientType === "VENDOR").length;
-        this.current = JSON.parse(JSON.stringify(filterList.length));
+        if (!clientType) this.current = JSON.parse(JSON.stringify(list.length));
+        if (clientType) this.onCulculateCurrent(clientType);
     }
 
     public getCurrent() {

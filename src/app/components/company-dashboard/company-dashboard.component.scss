@@ -225,9 +225,15 @@ $parot: #2ec866;
         }
     }
 
+   .light-dropdown .icn-remove-old {
+      top: calc(50% - 7px) !important;
+      right: 4px;
+    }
+
     /*** Form elements ***/
 
     form {
+        position: relative;
         width: 100%;
         float: left;
         .form-row {

@@ -17,6 +17,8 @@ import { DEARCHIVE_COMPANY, ARCHIVE_COMPANY } from 'src/app/const/confirm';
 import { AppService } from 'src/app/states/app/app.service';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { Router } from '@angular/router';
+import { CompanyItem } from '../class/company-item';
 
 @Component({
   selector: 'app-companies-table',
@@ -24,7 +26,7 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
   styleUrls: ['./companies-table.component.scss']
 })
 export class CompaniesTableComponent implements OnInit, OnDestroy {
-  @Input() company: Company;
+  @Input() company: CompanyItem;
   @Input() public showArchivedCompanies: boolean = false;
   public primaryContact: CompanyAndressContact;
   public primaryAddress: CompanyAndress;
@@ -42,6 +44,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     private companiesService: CompaniesService,
     private downloadAgentStateService: DownloadAgentStateService,
     private appService: AppService,
+    private router: Router,
     private draftEmailStateService: DraftEmailStateService,
     private leftPanelStateService: LeftPanelStateService,
     private elRef: ElementRef) { }
@@ -98,8 +101,11 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
   }
 
   goToDashboard() {
-    localStorage.setItem("company_id", this.company.id);
-    this.leftPanelStateService.goToState('company-dashboard');
+
+    // this.leftPanelStateService.goToState('company-dashboard');
+    this.companiesStateService.setSelectedCompanyId(this.company.id);
+    this.router.navigate(
+      ['/ng2/company/', this.company.id, 'dashboard']);
   }
   showInfo() {
     if (this.IS_MOBILE) {

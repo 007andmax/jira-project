@@ -31,4 +31,5 @@ export interface CompanyAndressContact {
     twoFactorAuthType: any;
     userEnabled: any;
     userStatistic: any;
+    tags: any;
 }

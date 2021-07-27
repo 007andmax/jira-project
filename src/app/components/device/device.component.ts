@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { CommonHttpServices } from './_services/common_http.service';
 import { RemoteControlService } from './_services/remoteControl.service';
@@ -19,7 +19,7 @@ declare var $: any;
   templateUrl: './device.component.html',
   styleUrls: ['./device.component.scss']
 })
-export class DeviceComponent implements OnInit {
+export class DeviceComponent implements OnInit, OnDestroy {
   title = 'quck-device';
   totalSeconds: any = 0;
   totalMinutes: any = 0;
@@ -46,6 +46,7 @@ export class DeviceComponent implements OnInit {
     private usersStateService: UsersStateService,
     private shellStateService: ShellStateService,
     private terminalService: TerminalService) { }
+
   openModal(template) {
     if (this.deviceDetail.online === true) {
       this.modalService.open(template, { ariaLabelledBy: 'modal-basic-title', centered: true }).result.then((result) => {
@@ -155,6 +156,7 @@ export class DeviceComponent implements OnInit {
         this.deviceDetail = deviceList[index];
         localStorage.setItem('deviceDetail_' + this._id, JSON.stringify(deviceList[index]))
         localStorage.setItem('company_id', deviceList[index].company_id);
+        this.deviceDetailService.setDevice(JSON.stringify(deviceList[index]));
         // this.getDeviceDetail();
       },
         error => {
@@ -263,5 +265,8 @@ export class DeviceComponent implements OnInit {
       this.toastr.error('The device is offline');
     }
 
+  }
+  ngOnDestroy(): void {
+    this.deviceDetailService.setDevice(null);
   }
 }

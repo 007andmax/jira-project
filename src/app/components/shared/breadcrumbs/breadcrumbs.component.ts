@@ -21,9 +21,13 @@ export class BreadcrumbsComponent implements OnInit {
             this.state = data;
             this.cd.detectChanges();
         })
+        this.leftPanelStateService.onChangeStateWithoutNavigate.subscribe(data => {
+            this.state = data;
+            this.cd.detectChanges();
+        })
     }
     ngDoCheck() {
-        if (localStorage.getItem("company_id")) this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === localStorage.getItem("company_id"));
+        if (this.companiesStateService.getSelectedCompanyId()) this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.companiesStateService.getSelectedCompanyId());
 
     }
     isCompanyState() {
@@ -34,7 +38,10 @@ export class BreadcrumbsComponent implements OnInit {
             || this.state === 'company-network-scan'
             || this.state === 'company-password-manager'
             || this.state === 'company-products'
-            || this.state === 'company-contracts';
+            || this.state === 'company-contracts'
+            || this.state === 'company-documents';
+
+
     }
     public getPath() {
         if (this.state === 'company-dashboard') return 'Dashboard';
@@ -45,6 +52,7 @@ export class BreadcrumbsComponent implements OnInit {
         if (this.state === 'company-password-manager') return 'Password Manager';
         if (this.state === 'company-products') return 'Products';
         if (this.state === 'company-contracts') return 'Service Agreements';
+        if (this.state === 'company-documents') return 'Documents';
     }
     public back() {
         this.leftPanelStateService.goToState('new-companies');

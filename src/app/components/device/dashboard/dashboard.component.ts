@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { UploadOutput, UploadInput, UploadFile, humanizeBytes, UploaderOptions, } from 'ngx-uploader';
 import { HardwareService } from './../_services/hardware.service';
@@ -9,12 +9,14 @@ import { environment } from '../../../../environments/environment';
 import { NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
 import { NgbCalendar, NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { AgentService } from 'src/app/services/agent/agent.service';
+import { DeviceDetailService } from '../_services/device_detail.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
   @ViewChild(NgbDatepicker) d: NgbDatepicker;
   url = environment.apiUrl + 'upload';
   formData: FormData;
@@ -53,7 +55,9 @@ export class DashboardComponent implements OnInit {
   _id = '';
   DateFormat = CONFIGCONSTANTS.DateFormat1;
   myDateValue: Date;
+  sub: Subscription = new Subscription();
   constructor(private hardwareService: HardwareService,
+    private deviceDetailService: DeviceDetailService,
     private agentService: AgentService,
     private toastr: ToastrService) {
     this.options = { concurrency: 1, maxUploads: 10, maxFileSize: 1000000 };
@@ -61,6 +65,7 @@ export class DashboardComponent implements OnInit {
     this.uploadInput = new EventEmitter<UploadInput>();
     this.humanizeBytes = humanizeBytes;
   }
+
   onUploadOutput(output: UploadOutput): void {
     if (output.type === 'allAddedToQueue') {
       const event: UploadInput = {
@@ -110,11 +115,19 @@ export class DashboardComponent implements OnInit {
     this.type = window.location.href.split('/')[window.location.href.split('/').length - 2];
     this._id = window.location.href.split('/')[window.location.href.split('/').length - 1];
     this.myDateValue = new Date();
+    if (this.deviceDetailService.device) this.setPreviewDataDevice();
+    let onGetDevice = this.deviceDetailService.onGetDevice.subscribe(data => {
+      this.setPreviewDataDevice();
+    })
+    this.sub.add(onGetDevice);
+
+    // this.getVirusInfo();
+  }
+  setPreviewDataDevice() {
     this.deviceDetail = JSON.parse(localStorage.getItem('deviceDetail_' + this._id));
     this.hostName = this.deviceDetail.hostName;
     this.label = this.deviceDetail.label;
     this.getDeviceDetail();
-
     this.agentService.getAgentToken("QuickTech", "s8Y1IuPCUUYlSLMbFijHvut5uOi/KnKNqOLtn57CBlw=").subscribe(data => {
       console.log("data", data);
       this.agentService.setAccessToken(data.AccessToken);
@@ -278,5 +291,8 @@ export class DashboardComponent implements OnInit {
   }
   format(date: NgbDateStruct | null): string {
     return date ? date.day + '/' + date.month + '/' + date.year : '';
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

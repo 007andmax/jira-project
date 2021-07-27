@@ -76,13 +76,19 @@ export class DraftEmailRecipientsComponent implements OnInit {
 
   }
   private setCompanyList(data) {
-    this.reqCompanyList = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt && item.companyInfo.contacts[0].primaryEmail != '').sort((a, b) => (a.companyInfo.contacts[0].primaryEmail.toLowerCase() > b.companyInfo.contacts[0].primaryEmail.toLowerCase()) ?
+    this.reqCompanyList = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt && item.companyInfo.contacts && item.companyInfo.contacts.length > 0 && item.companyInfo.contacts[0].primaryEmail != '').sort((a, b) => (a.companyInfo.contacts[0].primaryEmail.toLowerCase() > b.companyInfo.contacts[0].primaryEmail.toLowerCase()) ?
       1 : ((b.companyInfo.contacts[0].primaryEmail.toLowerCase() > a.companyInfo.contacts[0].primaryEmail.toLowerCase()) ? -1 : 0));
-    this.companyList = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt && item.companyInfo.contacts[0].primaryEmail != '').sort((a, b) => (a.companyInfo.contacts[0].primaryEmail.toLowerCase() > b.companyInfo.contacts[0].primaryEmail.toLowerCase()) ?
+    this.companyList = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt && item.companyInfo.contacts && item.companyInfo.contacts.length > 0 && item.companyInfo.contacts[0].primaryEmail != '').sort((a, b) => (a.companyInfo.contacts[0].primaryEmail.toLowerCase() > b.companyInfo.contacts[0].primaryEmail.toLowerCase()) ?
       1 : ((b.companyInfo.contacts[0].primaryEmail.toLowerCase() > a.companyInfo.contacts[0].primaryEmail.toLowerCase()) ? -1 : 0));
     this.companiesSelected.forEach(item => {
-      this.selectedCompanies.push(item.companyInfo.contacts[0].primaryEmail);
-      this.companyEmails.push(item.companyInfo.contacts[0].primaryEmail);
+      let primaryContact;
+      if (item.companyInfo) {
+        if (item.companyInfo.contacts) {
+          for (let contact of item.companyInfo.contacts) if (!primaryContact || contact.priority > primaryContact.priority) primaryContact = contact;
+        }
+      }
+      if (primaryContact) this.selectedCompanies.push(primaryContact.primaryEmail);
+      if (primaryContact) this.companyEmails.push(primaryContact.primaryEmail);
     })
     this.onCompanyEmails.emit(this.companyEmails);
   }

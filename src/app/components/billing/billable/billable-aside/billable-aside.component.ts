@@ -13,7 +13,6 @@ import { BillableTaimer } from './class/billable-taimer';
 import { ConfirmStateService } from '../../../shared/confirm/services/confirm-state.service';
 import { REMOVE_TICKET_INVOICE } from 'src/app/const/confirm';
 import { environment } from 'src/environments/environment';
-import { NotificationStateService } from '../../../shared/notification/services/notification-state.service';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
 import { InvoiceRealTimeService } from 'src/app/states/invoice/invoice-real-time.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -51,7 +50,6 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
     private companiesService: CompaniesService,
     public cd: ChangeDetectorRef,
     private companiesStateService: CompaniesStateService,
-    private notificationStateService: NotificationStateService,
     private confirmStateService: ConfirmStateService,
     private invoiceRealTimeService: InvoiceRealTimeService,
     private leftPanelStateService: LeftPanelStateService,
@@ -124,9 +122,6 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
       this.isUnlock = false;
     })
   }
-  onShowNotificationAfterCreate() {
-    this.notificationStateService.oninitShowNotification("The invoice has been created");
-  }
   disabledSaveBtns() {
     this.saveAndSendBtn.setDisabled(true);
     this.saveAndPrintBtn.setDisabled(true);
@@ -141,7 +136,6 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
     this.disabledSaveBtns();
     this.billableService.create(this.invoice.lockId, true, this.invoice.invoiceDataDto.billTo[0].id, this.invoice.invoiceDataDto.shipTo[0].id).subscribe(data => {
       this.unlock();
-      this.onShowNotificationAfterCreate();
       this.activeSaveBtns();
       this.moToBillable();
     })
@@ -151,7 +145,6 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
     window.open(this.apiUrl + `/invoice/show/lock/${this.invoice.lockId}/pdf?isEditable=${true}&billTo=${this.invoice.invoiceDataDto.billTo[0].id}&shipTo=${this.invoice.invoiceDataDto.shipTo[0].id}`, "_blank");
     this.billableService.create(this.invoice.lockId, false, this.invoice.invoiceDataDto.billTo[0].id, this.invoice.invoiceDataDto.shipTo[0].id).subscribe(data => {
       this.unlock();
-      this.onShowNotificationAfterCreate();
       this.activeSaveBtns();
       this.moToBillable();
     })
@@ -164,7 +157,6 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
     window.open(this.apiUrl + `/invoice/show/lock/${this.invoice.lockId}/pdf?isDownload=${true}&shipTo=${this.invoice.invoiceDataDto.shipTo[0].id}&billTo=${this.invoice.invoiceDataDto.billTo[0].id}.pdf`, "_blank");
     this.billableService.create(this.invoice.lockId, false, this.invoice.invoiceDataDto.billTo[0].id, this.invoice.invoiceDataDto.shipTo[0].id).subscribe(data => {
       this.unlock();
-      this.onShowNotificationAfterCreate();
       this.activeSaveBtns();
       this.moToBillable();
     })

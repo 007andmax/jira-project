@@ -7,7 +7,7 @@
         type="text"
         [(ngModel)]="selectedItem"
         class="pointer typeahead-focus1"
-        [ngClass]="(!valid) ? 'no-valid' : 'AAAAAAAAAAAAAAAAA'"
+        [ngClass]="{'no-valid':!valid}"
         [inputFormatter]="formatter"
         [resultFormatter]="formatter"
         [ngbTypeahead]="search"
@@ -36,7 +36,7 @@
         <i
             *ngIf="isAdd"
             (click)="addItem()"
-            class="icn-sm icn-product-save"
+            class="icn-sm icn-product-save icon__check"
         ></i>
     </span>
     <i

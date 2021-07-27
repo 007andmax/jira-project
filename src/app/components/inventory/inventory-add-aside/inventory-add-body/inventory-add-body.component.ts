@@ -14,6 +14,8 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { ProductService } from 'src/app/services/product/product.service';
 import { GlNumberService } from 'src/app/services/gl-number/gl-number.service';
 import { DropDownComponent } from '../../../shared/drop-down/drop-down.component';
+import { ToastrService } from 'ngx-toastr';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 
 @Component({
   selector: 'app-inventory-add-body',
@@ -45,6 +47,8 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
     private productService: ProductService,
     private elRef: ElementRef,
     public cd: ChangeDetectorRef,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService,
     private glNumberService: GlNumberService) { }
 
   ngOnInit() {
@@ -169,6 +173,8 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
   add() {
     if (!this.validate.isValidate(this.inventory)) return;
     this.productService.addProduct(this.inventory.getForAdd()).subscribe(data => {
+      this.toastrService.success("The new product has been successfully created");
+      this.appStateService.changeDetectorRef();
       this.close();
     })
   }

@@ -1,0 +1,35 @@
+<div class="qt-df qt-ai-fs">
+    <app-select-search
+        class="search-company documents-company-filter qt-mr-8"
+        #companyDp
+        [placeholder]="'Select By Company'"
+        [change]="false"
+        [class]="['qt-dropdown']"
+        [field]="'name'"
+        [list]="companies"
+        (onSelectedItem)="onSelectCompany($event)"
+    ></app-select-search>
+    <app-company-tags
+        #tagsDp
+        class="documents-filter-tags qt-mr-8"
+        (tagsChange)="onSelectTags($event)"
+    ></app-company-tags>
+    <div class="grey-dropdown form-group content qt-mr-8">
+        <app-tech-users-list-report
+            #usersDp
+            [class]="['filter-users-documents']"
+            [placeholder]="'Search By User'"
+            [sort]="true"
+            [search]="true"
+            [change]="true"
+            [errorMessage]="'Select any user'"
+            (onSelectedItem)="onSelectTechUser($event)"
+        ></app-tech-users-list-report>
+    </div>
+    <app-multi-datepicker
+        class="qt-input-block qt-header-date-filter filter-documents-date"
+        #datesDp
+        [placeholder]="'Review Date'"
+        (selectedDate)="filterByDate($event)"
+    ></app-multi-datepicker>
+</div>

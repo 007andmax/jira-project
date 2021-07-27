@@ -4,6 +4,7 @@ import { CompanyPrimaryContact } from '../../companies/class/company-primary-con
 import { Subscription } from 'rxjs';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-company-dash-stats',
@@ -41,11 +42,18 @@ export class CompanyDashStatsComponent implements OnInit {
   public constructor(
     private usersStateService: UsersStateService,
     private devicesState: DevicesStateService,
+    public activateRoute: ActivatedRoute,
     public cd: ChangeDetectorRef
   ) { }
 
   public ngOnInit() {
-    this._id = /[^/]*$/.exec(window.location.href)[0];
+    this._id = this.activateRoute.snapshot.params['id'];
+    let subscription = this.activateRoute.params.subscribe(params => {
+      this._id = params['id'];
+      if (this.usersStateService.getAllUsers().length > 0) this.onGetUsersCount(this.usersStateService.getAllUsers());
+      if (this.devicesState.getAllDevices()) this.onGetDevicesCount(this.devicesState.getAllDevices());
+    });
+    this.sub.add(subscription);
     if (this.usersStateService.getAllUsers().length > 0) this.onGetUsersCount(this.usersStateService.getAllUsers());
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.showArchivedCompanies = false;

@@ -14,6 +14,7 @@ import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { QUOTE_MODAL_ACTION_ADD, QUOTE_MODAL_ACTION_EDIT, QUOTE_MODAL_ACTION_LIST, QUOTE_MODAL_ACTION_PREVIEW } from 'src/app/const/quote';
 import { SUPPORT_MODAL_ACTION_SEND } from 'src/app/const/support';
 import { SupportStateService } from 'src/app/states/support/support-state.service';
+import { QuoteEdit } from 'src/app/components/billing/quotes/class/quote-edit';
 
 /**
  * Modal quote component
@@ -81,7 +82,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
    */
   public ngOnInit() {
     this.initResendMode();
-    this.getAllUsers(this.data.companyId);
+    this.getAllUsers((this.data instanceof QuoteEdit) ? this.data.company.id : this.data.companyId);
     this.userInput.nativeElement.onblur = (e) => {
       if (this.matAutocomplete.isOpen) {
         let modal = this.matAutocomplete.panel.nativeElement;
@@ -142,8 +143,9 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
     this.selectedUsers.push(event.option.viewValue);
     this.usersEmails.push(event.option.value.primaryEmail);
     this.quoteStateService.setUsersEmail(this.usersEmails);
-    this.userInput.nativeElement.blur();
+    // this.userInput.nativeElement.blur();
     this.userCtrl.setValue(null);
+    this.userInput.nativeElement.value = '';
   }
 
   /**
@@ -236,6 +238,8 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
   }
 
   public onAdd(e) {
+    e.stopPropagation();
+    if (e.target.value.length === 0) return;
     const input = e.target;
     const value = e.target.value;
     if (value.length > 0) {

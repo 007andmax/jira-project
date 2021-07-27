@@ -81,11 +81,11 @@ export class TagsComponent implements OnInit, OnDestroy {
     const value = event.value;
 
     if ((value || '').trim()) {
-      let tag: Tag = {
+      let tag: any = {
         colorCode: 0, usedCounter: 0, word: value.trim(), id: ''
       }
 
-      this.tagsService.setTags(tag).subscribe((res) => {
+      this.tagsService.addCompanyTags(tag).subscribe((res) => {
         tag.id = res.id;
         this.tags.push(tag);
         this.selectedTag.push(tag);

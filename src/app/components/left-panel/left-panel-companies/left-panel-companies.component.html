@@ -18,21 +18,21 @@
         All Companies
     </li>
     <li
-        [ngClass]="{'--active':activePage === 'new-companies' && filter.getClientType() === 'CLIENT'}"
+        [ngClass]="{'--active':activePage === 'new-companies' && clientType === 'CLIENT'}"
         (click)="goToState('new-companies');onSetFilterClientType('CLIENT')"
-        [textContent]="(activePage === 'new-companies') ? 'Clients ('+calculateCount.getClients() +')' : 'Clients'"
+        [textContent]="(activePage === 'new-companies') ? 'Clients ('+getCount('CLIENT') +')' : 'Clients'"
     >
     </li>
     <li
-        [ngClass]="{'--active':activePage === 'new-companies' && filter.getClientType() === 'LEAD'}"
+        [ngClass]="{'--active':activePage === 'new-companies' && clientType === 'LEAD'}"
         (click)="goToState('new-companies');onSetFilterClientType('LEAD')"
-        [textContent]="(activePage === 'new-companies') ? 'Leads ('+calculateCount.getLeads() +')' : 'Leads'"
+        [textContent]="(activePage === 'new-companies') ? 'Leads ('+getCount('LEAD') +')' : 'Leads'"
     >
     </li>
     <li
-        [ngClass]="{'--active':activePage === 'new-companies' && filter.getClientType() === 'VENDOR'}"
+        [ngClass]="{'--active':activePage === 'new-companies' && clientType === 'VENDOR'}"
         (click)="goToState('new-companies');onSetFilterClientType('VENDOR')"
-        [textContent]="(activePage === 'new-companies') ? 'Vendor ('+calculateCount.getVndors() +')' : 'Vendor'"
+        [textContent]="(activePage === 'new-companies') ? 'Vendor ('+getCount('VENDOR') +')' : 'Vendor'"
     >
     </li>
     <li

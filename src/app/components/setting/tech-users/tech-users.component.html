@@ -375,6 +375,11 @@
 
 
 
+
+
+
+
+
 </div>
 <!-- sidebar popup -->
 <div
@@ -894,20 +899,6 @@
                     </div>
                 </div>
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         </form>
     </div>
     <div class="qt-aside-modern__footer">
@@ -926,99 +917,97 @@
             </button>
         </div>
     </div>
-    <!-- tag delete popup -->
-    <div
-        class="img-croparea deletePopup"
-        *ngIf="popup"
-    >
-        <div class="crop-inner">
-            <div class="cropping">
-                <div class="popup-message">
-                    <span class="icon-part">
-                        <img
-                            src="/html/assets/img/device/delete-red.svg"
-                            alt="delete"
-                        >
-                    </span>
-                    <div class="message-right">
-                        <h1>Restore User</h1>
-                        <p>Are you sure you want to restore user?</p>
-                    </div>
-                    <a
-                        class="close-ico"
-                        href="javascript:;"
-                        (click)="popup = false"
+</div>
+<div
+    class="img-croparea deletePopup"
+    *ngIf="popup"
+>
+    <div class="crop-inner">
+        <div class="cropping">
+            <div class="popup-message">
+                <span class="icon-part">
+                    <img
+                        src="/html/assets/img/device/delete-red.svg"
+                        alt="delete"
                     >
-                        <img
-                            src="/html/assets/img/icons/close.svg"
-                            alt="close"
-                        >
-                    </a>
+                </span>
+                <div class="message-right">
+                    <h1>Restore User</h1>
+                    <p>Are you sure you want to restore user?</p>
                 </div>
-                <div class="btn-crops">
-                    <button
-                        type="button"
-                        class="btn btn-primary"
-                        (click)="restoreUser()"
+                <a
+                    class="close-ico"
+                    href="javascript:;"
+                    (click)="popup = false"
+                >
+                    <img
+                        src="/html/assets/img/icons/close.svg"
+                        alt="close"
                     >
-                        Yes, I am sure
-                    </button>
-                    <button
-                        type="button"
-                        class="btn btn-secondary"
-                        (click)="popup = false"
-                    >
-                        Cancel
-                    </button>
-                </div>
+                </a>
+            </div>
+            <div class="btn-crops">
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="restoreUser()"
+                >
+                    Yes, I am sure
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    (click)="popup = false"
+                >
+                    Cancel
+                </button>
             </div>
         </div>
     </div>
-    <!-- tag delete popup -->
-    <div
-        class="img-croparea deletePopup"
-        *ngIf="deletepopup"
-    >
-        <div class="crop-inner">
-            <div class="cropping">
-                <div class="popup-message">
-                    <span class="icon-part">
-                        <img
-                            src="/html/assets/img/device/delete-red.svg"
-                            alt="delete"
-                        >
-                    </span>
-                    <div class="message-right">
-                        <h1>Delete User</h1>
-                        <p>Are you sure you want to delete?</p>
-                    </div>
-                    <a
-                        class="close-ico"
-                        href="javascript:;"
-                        (click)="deletepopup = false"
+</div>
+<div
+    class="img-croparea deletePopup"
+    *ngIf="deletepopup"
+>
+    <div class="crop-inner">
+        <div class="cropping">
+            <div class="popup-message">
+                <span class="icon-part">
+                    <img
+                        src="/html/assets/img/device/delete-red.svg"
+                        alt="delete"
                     >
-                        <img
-                            src="/html/assets/img/icons/close.svg"
-                            alt="close"
-                        >
-                    </a>
+                </span>
+                <div class="message-right">
+                    <h1>Delete User</h1>
+                    <p>Are you sure you want to delete?</p>
                 </div>
-                <div class="btn-crops">
-                    <button
-                        type="button"
-                        class="btn btn-primary"
-                        (click)="removeTechUser()"
+                <a
+                    class="close-ico"
+                    href="javascript:;"
+                    (click)="deletepopup = false"
+                >
+                    <img
+                        src="/html/assets/img/icons/close.svg"
+                        alt="close"
                     >
-                        Yes, I am sure
-                    </button>
-                    <button
-                        type="button"
-                        class="btn btn-secondary"
-                        (click)="deletepopup = false"
-                    >
-                        Cancel
-                    </button>
-                </div>
+                </a>
+            </div>
+            <div class="btn-crops">
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="removeTechUser()"
+                >
+                    Yes, I am sure
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    (click)="deletepopup = false"
+                >
+                    Cancel
+                </button>
             </div>
         </div>
     </div>

@@ -3,30 +3,39 @@ import { CompanyTagsStateService } from './states/company-tags-state.service';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { Tag } from 'src/app/interfaces/tag/tag';
 import { TagsService } from 'src/app/services/tags/tags.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { TagsStateService } from 'src/app/states/tags/tags-state.service';
+import { CompanyTagsListService } from './services/company-tags-list.service';
+import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service';
+import { CompanyTag } from './class/company-tag';
 
 @Component({
   selector: 'app-company-tags',
   templateUrl: './company-tags.component.html',
-  styleUrls: ['./company-tags.component.scss']
+  styleUrls: ['./company-tags.component.scss'],
+  providers: [CompanyTagsListService]
 })
 export class CompanyTagsComponent implements OnInit, OnDestroy {
-  visible = true;
+  page: number = 0;
+  public infiniteScrollDisabled = true;
+  showPreloader: boolean = true;
+  searchName: string = "";
   selectable = true;
   removable = true;
   addOnBlur = true;
-  focus = false;
-  isResend = false;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   tagCtrl = new FormControl();
-  selectedTag = [];
-  tags: Array<Tag> = [];
-  reqTags: Array<Tag> = [];
+  @Input() selectedTag: Array<CompanyTag> = [];
+  tags: Array<CompanyTag> = [];
+  reqTags: Array<CompanyTag> = [];
   sub = new Subscription();
-  editItem: any;
+  @Input() editItems: Array<string>;
+  @Input() placement: string;
+  @Input() filter: boolean = false;
   @Input() blockCreateTag: boolean = false;
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
+  @ViewChild('dp') dp: any;
   @Output() tagsChange = new EventEmitter();
   /**
    * Creates an instance of the TagsComponent with the injected services
@@ -36,6 +45,11 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
   public constructor(
     public tagsService: TagsService,
     private tagsState: CompanyTagsStateService,
+    private tagsStateService: TagsStateService,
+    private companiesStateService: CompaniesStateService,
+    private companyTagsListService: CompanyTagsListService,
+    public tagsRealTimeService: TagsRealTimeService,
+    private elRef: ElementRef,
     public cd: ChangeDetectorRef
   ) { }
 
@@ -43,29 +57,40 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-    let getTags = this.tagsService.geCompanytTags().subscribe((data) => {
-      this.tags = data.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
-        1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
-      this.reqTags = data.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
-        1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
-    })
-    this.sub.add(getTags);
     this.onInitClearState();
     this.onCheckEditItem();
   }
-
+  getCompanyName(tag) {
+    let company = this.companiesStateService.getCompanies().find(item => item.id === tag.companyId);
+    return (company) ? company.name : '';
+  }
   onSearch(event) {
-    this.tags = this.reqTags.filter(item => item.word.includes(event.target.value));
+    this.searchName = event.target.value;
+    this.setDefaultScoll();
+    this.onScroll(JSON.parse(JSON.stringify(this.searchName)));
   }
 
   /**
   * Subscribe for edit mode
   */
   onCheckEditItem() {
+    if (this.editItems) this.editItems.forEach(item => {
+      this.selectedTag.push(this.tags.find(tag => tag.id === item));
+    })
     let getTagsFromEdit = this.tagsState.getTagsFromEdit().subscribe((data) => {
       this.selectedTag = data;
     });
     this.sub.add(getTagsFromEdit);
+  }
+  public setEditItems(data) {
+    this.editItems = data;
+    this.editItems.forEach(item => {
+      this.selectedTag.push(this.tags.find(tag => tag.id === item));
+    })
+  }
+  public clearWithOutChanges() {
+
+    this.selectedTag = [];
   }
 
   /**
@@ -75,16 +100,103 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
     let getClearState = this.tagsState.getClearState().subscribe(() => this.close());
     this.sub.add(getClearState);
   }
+  public setDefaultScoll() {
+    this.page = 0;
+    this.companyTagsListService.setBlockList(false);
+    this.tags = [];
+    this.reqTags = [];
+  }
+  public onScroll(searchName = null) {
 
+    this.infiniteScrollDisabled = true;
+    this.getTags(searchName);
+  }
+  getTags(searchName = null) {
+    if (this.companyTagsListService.getBlockList()) {
+      this.infiniteScrollDisabled = false;
+      return;
+    }
+    this.tagsService.search(this.page, this.searchName, this.filter).subscribe((data: any) => {
+      if (searchName && this.tags.length > 0) {
+        this.tags = [];
+        this.reqTags = [];
+        this.page = 0;
+      }
+      this.tags = [...this.tags, ...data.commonTagViews.map(item => new CompanyTag(item))];
+      this.reqTags = [...this.reqTags, ...JSON.parse(JSON.stringify(data.commonTagViews))];
+      this.page++;
+      this.infiniteScrollDisabled = false;
+      if (this.reqTags.length === data.totalElements) {
+        this.companyTagsListService.setBlockList(true);
+      } else {
+        this.companyTagsListService.setBlockList(false);
+      }
+      this.showPreloader = false;
+      this.cd.detectChanges();
+    })
+  }
+  openChange(open) {
+    if (open) {
+      this.showPreloader = true;
+      this.setDefaultScoll();
+      this.onScroll();
+    }
+  }
   onKeyUp(event) {
+    if (event.keyCode === 40) {
+      let indexSelected = this.tags.findIndex(item => item.isHover);
+      if (indexSelected > -1) this.tags[indexSelected].isHover = false;
+      indexSelected++;
+      if (indexSelected === this.tags.length) indexSelected = 0;
+      this.tags[indexSelected].isHover = true;
+      let isScrolledIntoView = this.isScrolledIntoView(this.elRef.nativeElement.querySelector(`#tag-${this.tags[indexSelected].id}`));
+      if (!isScrolledIntoView) this.elRef.nativeElement.querySelector('.content').scrollTop = ((indexSelected < 8) ? 0 : indexSelected * 32);
+      return;
+    }
+    if (event.keyCode === 38) {
+      let indexSelected = this.tags.findIndex(item => item.isHover);
+      if (indexSelected > -1) this.tags[indexSelected].isHover = false;
+      if (indexSelected === 0 || indexSelected === -1) {
+        indexSelected = this.tags.length - 1;
+      } else {
+        indexSelected--;
+      }
+      this.tags[indexSelected].isHover = true;
+      let isScrolledIntoView = this.isScrolledIntoView(this.elRef.nativeElement.querySelector(`#tag-${this.tags[indexSelected].id}`));
+      if (!isScrolledIntoView) this.elRef.nativeElement.querySelector('.content').scrollTop = ((indexSelected < 8) ? 0 : indexSelected * 32);
+      return;
+    }
     if (event.keyCode === 13) {
+      let indexSelected = this.tags.findIndex(item => item.isHover);
+      if (indexSelected > -1) {
+        let findTag = this.selectedTag.find(item => item.id === this.tags[indexSelected].id);
+        if (!findTag) {
+          this.searchName = "";
+          this.selectedTag.push(this.tags[indexSelected]);
+          this.tagsChange.emit(this.selectedTag);
+        }
+        return;
+      }
+
       const input = event.target.input;
       const value = event.target.value;
       if ((value || '').trim()) {
-        let tag: Tag = {
+        let search = this.tags.find(item => item.word == value);
+        if (search) {
+          this.selectedTag.push(search);
+          this.tagsChange.emit(this.selectedTag);
+          if (input) {
+            input.value = '';
+          }
+          this.tagCtrl.setValue(null);
+          this.searchName = "";
+          this.dp.close();
+          return;
+        }
+        let tag: any = {
           colorCode: 0, usedCounter: 0, word: value.trim(), id: ''
         }
-        let setTags = this.tagsService.setCompanyTags(tag.word).subscribe((res) => {
+        let setTags = this.tagsService.addCompanyTags(tag).subscribe((res) => {
           tag.id = res.id;
           this.reqTags.push(tag);
           this.tags = this.reqTags;
@@ -94,10 +206,19 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
             input.value = '';
           }
           this.tagCtrl.setValue(null);
+          this.searchName = "";
         });
         this.sub.add(setTags);
       }
     }
+  }
+
+  isScrolledIntoView(el) {
+    var rect = el.getBoundingClientRect();
+    var elemTop = rect.top;
+    var elemBottom = rect.bottom;
+    var isVisible = (elemTop >= 0) && (elemBottom <= this.elRef.nativeElement.querySelector(".content").innerHeight);
+    return isVisible;
   }
 
   /**
@@ -111,17 +232,30 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     }
   }
-
-  /**
-   * Add tag to selected
-   * @param tag - selected tag
-   */
-  public selected(tag): void {
-    this.selectedTag.push(tag);
+  isSeleted(item) {
+    return this.selectedTag.find(element => element.id === item.id);
+  }
+  public toggleItem(newItem) {
+    let findIndex = this.selectedTag.findIndex(item => item.id === newItem.id);
+    if (findIndex > -1) {
+      this.selectedTag.splice(findIndex, 1);
+    } else {
+      this.selectedTag.push(newItem);
+      this.tags = this.reqTags;
+    }
     this.tagsChange.emit(this.selectedTag);
-    this.userInput.nativeElement.value = '';
     this.tagCtrl.setValue(null);
-    this.tags = this.reqTags;
+
+    if (this.searchName.length > 0) {
+      this.searchName = "";
+      this.setDefaultScoll();
+      this.onScroll();
+    }
+
+  }
+
+  public setSelectedTag(data) {
+    this.selectedTag = data;
   }
 
   /**

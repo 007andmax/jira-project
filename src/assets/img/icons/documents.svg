@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <path fill="#EDF2F6" d="M0 0H1440V960H0z" transform="translate(-348 -278)"/>
+            <g>
+                <g>
+                    <path fill="#FFF" d="M6 0h1116c3.314 0 6 2.686 6 6v244c0 3.314-2.686 6-6 6H6c-3.314 0-6-2.686-6-6V6c0-3.314 2.686-6 6-6z" transform="translate(-348 -278) translate(288 88) translate(0 130)"/>
+                    <g>
+                        <path d="M0 0H1128V40H0z" transform="translate(-348 -278) translate(288 88) translate(0 130) translate(0 48)"/>
+                        <g fill="#919EAB" fill-rule="nonzero">
+                            <path d="M5.5 7.995H5v1h.5v-1zm6 1h.5v-1h-.5v1zm-6 1.998H5v1h.5v-1zm6 1.007h.5v-1h-.5v1zm-6-7.003H5v1h.5v-1zM9.5 6h.5V5h-.5v1zm2-4.5l.354-.354L11.707 1H11.5v.5zm3 3h.5v-.207l-.146-.147-.354.354zm-9 4.495h6v-1h-6v1zm0 2.998l6 .007v-1l-6-.007v1zm0-5.996L9.5 6V5l-4-.003v1zm8 9.003h-10v1h10v-1zM3 14.5v-12H2v12h1zM3.5 2h8V1h-8v1zM14 4.5v10h1v-10h-1zm-2.854-2.646l3 3 .708-.708-3-3-.708.708zM3.5 15c-.276 0-.5-.224-.5-.5H2c0 .828.672 1.5 1.5 1.5v-1zm10 1c.828 0 1.5-.672 1.5-1.5h-1c0 .276-.224.5-.5.5v1zM3 2.5c0-.276.224-.5.5-.5V1C2.672 1 2 1.672 2 2.5h1z" transform="translate(-348 -278) translate(288 88) translate(0 130) translate(0 48) translate(60 12)"/>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

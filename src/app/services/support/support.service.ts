@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
+import { map, tap } from 'rxjs/operators';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 
 import { environment } from 'src/environments/environment';
 import { RemoteSession } from '../../components/support/class/remote-sessions';
@@ -18,13 +20,25 @@ export class SupportService {
     * @param {HttpClient} http Service to work with request
     */
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService
   ) { }
   public deleteRemoteSession(data) {
-    return this.http.post(this.apiUrl + `remote/deleteRemoteSession`, data);
+    return this.http.post(this.apiUrl + `remote/deleteRemoteSession`, data).pipe(
+      tap(data => {
+        this.toastrService.success("The remote session has been successfully removed");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public createOneTimeRemoteSession() {
-    return this.http.get(this.apiUrl + `remote/createOneTimeRemoteSession`);
+    return this.http.get(this.apiUrl + `remote/createOneTimeRemoteSession`).pipe(
+      tap(data => {
+        this.toastrService.success("The new remote session has been successfully created");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public getRemoteSessions() {
     return this.http.get(this.apiUrl + `remote/getRemoteSessions`).pipe(map((data: any) => data.map(item => new RemoteSession(item))));

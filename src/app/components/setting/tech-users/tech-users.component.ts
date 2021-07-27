@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable, Observer } from 'rxjs';
 
@@ -52,17 +52,15 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     private toastr: ToastrService,
     private settingService: SettingService,
     private settingStateService: SettingStateService,
+    public cd: ChangeDetectorRef,
     private companiesStateService: CompaniesStateService,
   ) {
-    const currentComapnyId = localStorage.getItem('currentComapnyId');
-    if (currentComapnyId) {
-      this.currentCompanyId = currentComapnyId;
-    } else {
-      if (this.companiesStateService.getCurrentCompany()) this.currentCompany(this.companiesStateService.getCurrentCompany());
-      this.companiesStateService.onCurrentCompany.subscribe(res => {
-        this.currentCompany(res);
-      })
-    }
+
+    if (this.companiesStateService.getCurrentCompany()) this.currentCompany(this.companiesStateService.getCurrentCompany());
+    this.companiesStateService.onCurrentCompany.subscribe(res => {
+      this.currentCompany(res);
+    })
+
   }
 
   /**
@@ -159,7 +157,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       .getUsers()
       .pipe(
         map((users: any) => {
-          this.userlist = users.filter((u: any) => u.deletedAt !== null);
+          this.userlist = users.filter((u: any) => u.deletedAt !== null && u.accountType.toLowerCase() === 'tech');
           return users.filter(
             (user: any) =>
               user.accountType.toLowerCase() === 'tech' &&
@@ -330,6 +328,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
   removeUserConfirm(techuser: any) {
     this.userId = techuser;
     this.deletepopup = true;
+    this.cd.detectChanges();
   }
 
   /**

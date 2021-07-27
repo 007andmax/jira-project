@@ -3,9 +3,10 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
 import { catchError, map, tap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { NotificationStateService } from '../../components/shared/notification/services/notification-state.service';
 import { Quote } from '../../components/billing/quotes/class/quote';
 import { QuoteStateService } from '../../states/quote/quote-state.service';
+import { ToastrService } from 'ngx-toastr';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 
 
 /**
@@ -26,7 +27,8 @@ export class QuoteService {
   constructor(
     private http: HttpClient,
     private quoteStateService: QuoteStateService,
-    private notificationStateService: NotificationStateService
+    private toastrService: ToastrService,
+    private appStateService: AppStateService
 
   ) { }
 
@@ -37,8 +39,11 @@ export class QuoteService {
    */
   public createQuote(data, notification) {
     return this.http.post(`${this.apiUrl}saleQuotes`, data).pipe(
-      tap(data => this.handleQuoteSent(data, (notification) ? 'Quote has been sent' : 'Quote has been saved')),
-      catchError(this.handleError));
+      tap(data => {
+        this.toastrService.success("The new quote has been successfully saved");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 
   /**
@@ -49,8 +54,11 @@ export class QuoteService {
    */
   public editQuote(data) {
     return this.http.put(`${this.apiUrl}saleQuotes/${data.id}`, data).pipe(
-      tap(data => this.handleQuoteSent(data, 'Quote has been saved')),
-      catchError(this.handleError));
+      tap(data => {
+        this.toastrService.success("The quote has been successfully saved");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 
   /**
@@ -59,8 +67,11 @@ export class QuoteService {
    */
   public repeatSend(quoteId) {
     return this.http.post(`${this.apiUrl}saleQuotes/${quoteId}/send`, {}).pipe(
-      tap(data => data),
-      catchError(this.handleError));
+      tap(data => {
+        this.toastrService.success("The quote has been successfully sent");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 
   /**
@@ -138,8 +149,11 @@ export class QuoteService {
     return this.http.post(this.apiUrl +
       `saleQuotes/approveQuote?companyId=${company.id}`, [quoteId]
     ).pipe(
-      tap(data => this.handleQuoteSent(data, 'Quote has been approved')),
-      catchError(this.handleError));
+      tap(data => {
+        this.toastrService.success("The quote has been successfully approved");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 
   /**
@@ -172,8 +186,11 @@ export class QuoteService {
     return this.http.post(this.apiUrl +
       `saleQuotes/archiveQuote?companyId=${company.id}`, [quote_id]
     ).pipe(
-      tap(data => data),
-      catchError(this.handleError));
+      tap(data => {
+        this.toastrService.success("The quote has been successfully archived");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 
   /**
@@ -236,10 +253,4 @@ export class QuoteService {
     let err = error.error;
     return throwError(error);
   }
-
-  private handleQuoteSent = (data, message) => {
-    this.notificationStateService.oninitShowNotification(message);
-    return data;
-  }
-
 }

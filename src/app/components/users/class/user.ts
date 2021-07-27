@@ -3,6 +3,7 @@ import { UserAvatar } from './user-avatar';
 import { UserSubscription } from './user-subscription';
 import { UserStatistic } from './user-statistic';
 import { ImageCropper } from '../../shared/image-cropper/class/image-cropper';
+import { Tag } from 'src/app/interfaces/tag/tag';
 
 export class User {
     accountType: string;
@@ -36,6 +37,7 @@ export class User {
     userEnabled: boolean;
     userStatistic: UserStatistic;
     selected: boolean = false;
+    tags: Array<Tag> = [];
     constructor(data = null) {
         if (data) {
             for (const key in data) {

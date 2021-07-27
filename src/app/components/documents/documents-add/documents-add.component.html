@@ -1,0 +1,37 @@
+<div
+    class="qt-page-list"
+    [ngClass]="{'--large' : !openAside,'documents-details':!showPreloader}"
+>
+    <app-documents-add-header
+        [documentAdd]="documentAdd"
+        *ngIf="!showPreloader"
+    ></app-documents-add-header>
+    <app-documents-add-body
+        *ngIf="!showPreloader"
+        [editorContent]="documentAdd.content"
+        (onChangeContent)="onChangeContent($event)"
+        (onChangeAttachments)="onChangeAttachments($event)"
+    ></app-documents-add-body>
+    <app-documents-add-footer
+        *ngIf="!showPreloader"
+        [templateId]="templateId"
+        [companyId]="companyId"
+        [attachments]="attachments"
+        [requiredCompanyType]="requiredCompanyType"
+        [documentValidate]="documentValidate"
+        [documentAdd]="documentAdd"
+    ></app-documents-add-footer>
+    <app-documents-add-info
+        *ngIf="!showPreloader"
+        [companyId]="companyId"
+        [templateId]="templateId"
+        (onChangeRequiredCompanyType)="requiredCompanyType = $event"
+        [documentValidate]="documentValidate"
+        [documentAdd]="documentAdd"
+        (onToggleAside)="openAside  =$event"
+    ></app-documents-add-info>
+    <div
+        class="loading"
+        *ngIf="showPreloader"
+    ></div>
+</div>

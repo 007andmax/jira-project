@@ -10,12 +10,13 @@ import { ConfirmStateService } from '../../../shared/confirm/services/confirm-st
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
 import { BillableProfileTicket } from '../class/billable-profile-ticket';
-import { NotificationStateService } from '../../../shared/notification/services/notification-state.service';
 import { Subscription } from 'rxjs';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { BillableRealTimeService } from 'src/app/states/billable/billable-real-time.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { ToastrService } from 'ngx-toastr';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 
 @Component({
   selector: 'billable-tickets',
@@ -39,9 +40,10 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private usersStateService: UsersStateService,
     private companiesStateService: CompaniesStateService,
-    private notificationStateService: NotificationStateService,
     private billableRealTimeService: BillableRealTimeService,
     private leftPanelStateService: LeftPanelStateService,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService,
     public cd: ChangeDetectorRef,) { }
 
 
@@ -61,7 +63,7 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REMOVE_TICKET_BILLABLE) {
           this.ticketsService.deleteTicket([this.ticketForRemove.id]).subscribe(data => {
-            this.notificationStateService.oninitShowNotification(`The ticket “${this.ticketForRemove.ticketNumber}” has been deleted`);
+
             let index = this.billableProfile.tickets.findIndex(item => item.id === this.ticketForRemove.id);
             this.billableProfile.tickets.splice(index, 1);
           })

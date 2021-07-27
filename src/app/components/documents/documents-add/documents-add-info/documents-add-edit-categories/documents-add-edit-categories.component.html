@@ -1,0 +1,131 @@
+<div class="documents-create-aside-categories qt-aside-modern">
+    <div class="qt-aside-modern__header">
+        <div class="qt-aside-modern__header-title qt-mr-auto">Edit Categories</div>
+        <div
+            class="qt-aside-modern__header-close icon__close"
+            (click)="close()"
+        >
+        </div>
+    </div>
+    <div class="qt-aside-modern__content --no-padding">
+        <div class="qt-pt-12 qt-pb-24 qt-pl-24 qt-pr-24 ">
+            <ng-template
+                ngFor
+                let-item
+                [ngForOf]="categories"
+                [ngForTrackBy]="trackById"
+            >
+                <app-dynamic-tooltip
+                    [content]="'you can`t remove this category which is in use'"
+                    [position]="'top'"
+                    #pointerTooltip
+                ></app-dynamic-tooltip>
+                <div
+                    class="documents-create__col checkbox-wrapper categories-item"
+                    (mouseenter)="item.count > 0 ? pointerTooltip.show($event.target) : null"
+                    (mouseleave)="item.count > 0 ? pointerTooltip.hide() : null"
+                >
+                    <div class="with-checkbox">
+                        <label
+                            class="checkbox-container "
+                            [ngClass]="{'disable':item.count > 0}"
+                            *ngIf="getPermissions('DELETE_CATEGORY')"
+                        >
+                            <input
+                                type="checkbox"
+                                [disabled]="item.count > 0"
+                                (change)="onSelectCategory($event,item)"
+                            >
+                            <span class="checkbox-mark"></span>
+                        </label>
+                        <div class="qt-w100 qt-df qt-jc-sb --required">
+                            <mat-error
+                                class="qt-tooltip-error"
+                                *ngIf="!editCategory.getValidate() && editCategory.isEditMode(item.id)"
+                                [textContent]="'This category name is already occupied'"
+                            >
+                            </mat-error>
+                            <input
+                                *ngIf="editCategory.isEditMode(item.id)"
+                                type="text"
+                                [(ngModel)]="editCategory.newName"
+                                (input)="onCheckNameCategoryForEdit()"
+                                (blur)="onEditCategory()"
+                                (keyup)="onEditCategoryByEnter($event)"
+                                min="1"
+                                max="100"
+                            >
+                            <p
+                                *ngIf="!editCategory.isEditMode(item.id)"
+                                class="pointer"
+                                (click)="toggleEditCategory(item)"
+                            >
+                                {{item.name}}
+                                <span>({{item.count}})</span>
+                            </p>
+                            <div
+                                (click)="onRemoveCategory(item)"
+                                *ngIf="item.count === 0 && !editCategory.isEditMode(item.id) && getPermissions('DELETE_CATEGORY')"
+                                class="icon__remove qt-sz-16 qt-bg-contain qt-ml-6 pointer"
+                            ></div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+            <div
+                class="documents-create__col checkbox-wrapper"
+                *ngIf="toggleAddCategory"
+            >
+                <div class="with-checkbox">
+                    <div class="qt-w100 qt-df qt-jc-sb --required">
+                        <mat-error
+                            class="qt-tooltip-error"
+                            *ngIf="!addCategory.getValidate()"
+                            [textContent]="'This category name is already occupied'"
+                        >
+                        </mat-error>
+                        <input
+                            type="text"
+                            [(ngModel)]="addCategory.categoryName"
+                            (input)="onCheckNameCategory()"
+                            [ngClass]="{'--input-error':!addCategory.getValidate()}"
+                            (blur)="onAddCategory()"
+                            min="1"
+                            max="100"
+                            (keyup)="onAddCategoryByEnter($event)"
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="qt-df qt-ai-c qt-jc-sb">
+                <button
+                    class="btn-new btn-primary-white"
+                    (click)="toggleCategory()"
+                    *ngIf="getPermissions('CREATE_CATEGORY')"
+                >
+                    + Add New
+                </button>
+                <div
+                    class="qt-df qt-ai-c pointer"
+                    [ngClass]="{'disable':selectedCategories.length === 0}"
+                    *ngIf="getPermissions('DELETE_CATEGORY')"
+                    (click)="onRemoveAllCategories()"
+                >
+                    Delete all
+                    <div class="icon__remove  qt-sz-16 qt-bg-contain qt-ml-6"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="qt-aside-modern__footer">
+        <div class="qt-df">
+            <button
+                class="qt-button --gray"
+                (click)="close()"
+            >
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>
+<!-- <button (click)="close()">Cancel</button> -->

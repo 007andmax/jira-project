@@ -1,4 +1,4 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { UsersService } from '../../services/users/users.service';
 import { CurrentUser } from 'src/class/current-user/current-user';
 import { User } from '../../components/users/class/user';
@@ -22,13 +22,15 @@ export class UsersStateService {
   onFilter: EventEmitter<any> = new EventEmitter();
   openAside: EventEmitter<any> = new EventEmitter();
   openEditAside: EventEmitter<any> = new EventEmitter();
+  onChangeUserPermissions: EventEmitter<any> = new EventEmitter();
   userForArchive: User = null;
   usersForArchive: Array<User> = [];
   userForDeArchive: User = null;
   onChangeUsers: EventEmitter<UserChange> = new EventEmitter();
   filter: UserFilter = new UserFilter();
   showArchivedCompanies: boolean = false;
-  constructor(private userService: UsersService, private usersRealTimeService: UsersRealTimeService) {
+  constructor(private userService: UsersService,
+    private usersRealTimeService: UsersRealTimeService) {
 
   }
   public onInit() {
@@ -62,6 +64,10 @@ export class UsersStateService {
         if (Index > -1) this.allUsers[Index].userStatistic.ticketsSubmitted = prevValue;
       }
       this.onChangeUsers.emit(new UserChange(newChange.action, newChange.data, this.allUsers));
+    });
+    this.usersRealTimeService.changePermissionsUsers.subscribe(newChange => {
+
+      this.onChangeUserPermissions.emit(newChange.data.permissions);
     });
   }
   public onInitGetCurrentUser() {
@@ -161,6 +167,7 @@ export class UsersStateService {
  * @permissions - permissions to change
  */
   public changeUserPermissions(permissions) {
-    return this.currentUser.permissions = permissions;
+    this.currentUser.permissions = permissions;
+
   }
 }
