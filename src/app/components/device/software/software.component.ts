@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { Subject } from "rxjs";
 import * as moment from "moment";
 import { environment } from './../../../../environments/environment';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
   selector: 'app-software',
@@ -65,6 +66,7 @@ export class SoftwareComponent implements OnInit, OnDestroy {
     private hardwareService: HardwareService,
     private router: Router,
     private excelService: ExcelService,
+    private companiesStateService: CompaniesStateService,
     private commonHttpServices: CommonHttpServices) {
   }
 
@@ -77,7 +79,7 @@ export class SoftwareComponent implements OnInit, OnDestroy {
     this.type = window.location.href.split('/')[window.location.href.split('/').length - 2];
     this._id = window.location.href.split('/')[window.location.href.split('/').length - 1];
     if (this.type === 'printer') {
-      this.router.navigate([`/device/dashboard/${this.type}/${this._id}`]);
+      this.router.navigate([`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/dashboard/${this.type}/${this._id}`]);
     }
     this.myDateValue = new Date();
     this.deviceDetail = JSON.parse(localStorage.getItem('deviceDetail_' + this._id));

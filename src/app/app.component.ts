@@ -84,12 +84,13 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.router.events
       .subscribe((event) => {
-        if (this.router.url.includes('ng2/device')) {
+        if (this.router.url.includes('/device') && !this.router.url.includes('/devices')) {
           this.main_page = PAGE_DEVICE;
         } else {
           this.main_page = PAGE_MAIN;
         }
       });
+
     this.devicesState.onInit();
     this.usersStateService.onInit();
     this.companiesState.onInit();
@@ -152,6 +153,14 @@ export class AppComponent implements OnInit {
         this.cd.detectChanges();
         document.body.click();
       }, 500);
+    })
+    this.companiesState.onCurrentCompany.subscribe(data => {
+      console.log("data", data.name);
+      console.log("this.router.url", this.router.url);
+
+      if (this.router.url === "/") this.router.navigate(
+        [`${data.name.replaceAll(' ', '')}/tickets/`]);
+
     })
   }
   ngDoCheck() {

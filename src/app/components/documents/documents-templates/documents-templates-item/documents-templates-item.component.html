@@ -13,10 +13,8 @@
         </div>
         <div
             class="qt-button qt-ml-6"
-            routerLink="/ng2/documents/add"
-            [queryParams]="{'clone_document':item.id}"
+            (click)="$event.stopPropagation();goToAddDocument()"
             *ngIf="getPermissions('CREATE_TEMPLATE') || getPermissions('CREATE_DOCUMENT')"
-            (click)="$event.stopPropagation();"
         >
             Use
         </div>
@@ -81,8 +79,7 @@
                     <li
                         class="pointer"
                         ngbDropdownItem
-                        routerLink="/ng2/documents/add"
-                        [queryParams]="{'clone_document':item.id}"
+                        (click)="goToAddDocument()"
                         *ngIf="getPermissions('CREATE_TEMPLATE') || getPermissions('CREATE_DOCUMENT')"
                     >
                         <div class="icon__clone-document qt-sz-16 qt-bg-contain qt-mr-8"></div>

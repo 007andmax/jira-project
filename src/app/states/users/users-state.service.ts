@@ -8,6 +8,7 @@ import { UserProfile } from '../../components/users/class/user-profile';
 import { UsersRealTimeService } from './users-real-time.service';
 import { UserChange } from '../../components/users/class/user-change';
 import { UserFilter } from '../../components/users/class/user-filter';
+import { AppService } from '../app/app.service';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,7 @@ export class UsersStateService {
   filter: UserFilter = new UserFilter();
   showArchivedCompanies: boolean = false;
   constructor(private userService: UsersService,
+    private appService: AppService,
     private usersRealTimeService: UsersRealTimeService) {
 
   }
@@ -52,6 +54,11 @@ export class UsersStateService {
           const Index = this.allUsers.findIndex((item) => item.id === data.id);
           if (Index > -1) this.allUsers[Index] = new User(data);
         });
+      }
+      if (newChange.action === 'USER_ONLINE') {
+        if (this.getCurrentUser().id === newChange.data.id) {
+          this.appService.showSessionScreen('Someone just logged into your account. This session has been signed out');
+        }
       }
       this.onChangeUsers.emit(new UserChange(newChange.action, newChange.data, this.allUsers));
     })

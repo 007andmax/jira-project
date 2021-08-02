@@ -14,6 +14,7 @@ import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { DocumentsLinkedComponent } from './documents-linked/documents-linked.component';
 import { CompanyTagsStateService } from 'src/app/components/companies/company-tags/states/company-tags-state.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
   selector: 'app-documents-add-info',
@@ -43,6 +44,7 @@ export class DocumentsAddInfoComponent implements OnInit {
     private router: Router,
     public tagsState: CompanyTagsStateService,
     private permissionsService: PermissionsService,
+    private companiesStateService: CompaniesStateService,
     public activateRoute: ActivatedRoute,) {
   }
 
@@ -68,7 +70,7 @@ export class DocumentsAddInfoComponent implements OnInit {
   public goToDocumentsList() {
     if (this.companyId) {
       this.router.navigate(
-        ['/ng2/company/', this.companyId, 'documents']);
+        [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/company/`, this.companyId, 'documents']);
     } else {
       this.leftPanelStateService.goToState('new-documents');
     }

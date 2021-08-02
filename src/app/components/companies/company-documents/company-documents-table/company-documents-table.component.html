@@ -74,8 +74,7 @@
                 <li
                     class="pointer"
                     ngbDropdownItem
-                    routerLink="/ng2/documents/add"
-                    [queryParams]="{'id_category':item.categoryId}"
+                    (click)="goToAddDocumentInCategory()"
                     *ngIf="getPermissions('CREATE_DOCUMENT')"
                 >
                     <div class="icon__add-document qt-sz-16 qt-bg-contain qt-mr-8"></div>
@@ -120,13 +119,16 @@
                 <li
                     class="pointer"
                     ngbDropdownItem
-                    [routerLink]="['/ng2/documents/edit/',item.id]"
-                    [queryParams]="{'companyId':companyId}"
+                    (click)="goToEditDocument()"
                     *ngIf="getPermissions('EDIT_DOCUMENT')"
                 >
                     <div class="icon__edit qt-sz-16 qt-bg-contain qt-mr-8"></div>
                     Edit
                 </li>
+
+
+
+
 
                 <!-- <li
                     class="pointer"
@@ -145,9 +147,7 @@
                 <li
                     class="pointer"
                     ngbDropdownItem
-                    routerLink="/ng2/documents/add"
-                    [queryParams]="{'clone_document':item.id,
-                'companyId':companyId}"
+                    (click)="goToCloneDoucment()"
                     *ngIf="getPermissions('CREATE_DOCUMENT')"
                 >
                     <div class="icon__clone-document qt-sz-16 qt-bg-contain qt-mr-8"></div>
