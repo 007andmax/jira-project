@@ -266,12 +266,19 @@
                                             >
                                                 Ticket Subject is required
                                             </mat-error>
+                                            <mat-error
+                                                class="qt-tooltip-error"
+                                                *ngIf="cProfileForm.get('url').getError('invalidate')"
+                                            >
+                                                Please enter a valid company domain.
+                                            </mat-error>
                                             <input
-                                                [ngClass]="{'--input-error' : cProfileForm.get('url').getError('incorrect')}"
+                                                [ngClass]="{'--input-error' : cProfileForm.get('url').getError('incorrect') || cProfileForm.get('url').getError('invalidate')}"
                                                 type="text"
                                                 class="form-input"
                                                 placeholder="Enter Your Company URL"
                                                 formControlName="url"
+                                                (input)="checkValidateDomain()"
                                             >
                                             <span class="slug">.quicktech.com</span>
                                         </div>
