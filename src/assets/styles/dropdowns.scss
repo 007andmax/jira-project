@@ -55,7 +55,7 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      transition: all .3s;
+      transition: all 0.3s;
       color: #4c5c6f;
       &:hover {
         color: #fff;
@@ -140,7 +140,7 @@
   }
   .dropdown-menu {
     border: none;
-    box-shadow: 0 4px 20px 0 rgba(10, 45, 89, .1);
+    box-shadow: 0 4px 20px 0 rgba(10, 45, 89, 0.1);
   }
   .ngb-dp-header,
   .ngb-dp-weekdays {
@@ -180,7 +180,7 @@
     border: none;
     outline: none;
     div {
-      transition: all .3s;
+      transition: all 0.3s;
       border-radius: 3px;
       &:hover {
         background: #e7ecf2;
@@ -240,7 +240,7 @@
           background-color: #16a4fa;
           padding: 10px 16px;
           cursor: pointer;
-          transition: all .3s;
+          transition: all 0.3s;
           margin: 0;
           height: auto;
           min-width: auto;
@@ -258,21 +258,21 @@
             right: 16px;
             top: calc(50% - 3px) !important;
             transform: rotate(180deg);
-            background: url('/assets/img/report-caret-right.png');
+            background: url("/assets/img/report-caret-right.png");
           }
           &.collapsed {
             background-color: #fff;
             color: #4c5c6f;
             .report-caret-icon {
               transform: rotate(0);
-              background: url('/assets/img/report-caret.png');
+              background: url("/assets/img/report-caret.png");
             }
           }
           &:hover {
             background-color: #16a4fa;
             color: #fff;
             .report-caret-icon {
-              background: url('/assets/img/report-caret-right.png');
+              background: url("/assets/img/report-caret-right.png");
             }
           }
         }
@@ -282,7 +282,7 @@
           padding: 10px 16px 10px 36px;
           margin: 0;
           cursor: pointer;
-          transition: all .3s;
+          transition: all 0.3s;
           &:not(:last-child) {
             border-bottom: 1px solid #edf2f6;
           }
@@ -387,11 +387,11 @@
           }
           .arrow-top {
             top: 7px;
-            background: url('/assets/img/icons/scroll-up.png');
+            background: url("/assets/img/icons/scroll-up.png");
           }
           .arrow-bottom {
             bottom: 11px;
-            background: url('/assets/img/icons/scroll-down.png')
+            background: url("/assets/img/icons/scroll-down.png");
           }
         }
       }
@@ -415,7 +415,7 @@
           display: flex;
           justify-content: center;
           align-items: center;
-          transition: all .3s;
+          transition: all 0.3s;
           &:hover,
           &.active {
             color: #fff;
@@ -462,7 +462,7 @@
         height: 30px;
         padding: 0 14px;
         cursor: pointer;
-        transition: all .3s;
+        transition: all 0.3s;
         &:hover {
           background: #16a4fa;
           color: #fff;
@@ -498,5 +498,10 @@
     .dropdown-item {
       color: #364657 !important;
     }
+  }
+}
+app-company-time-zone {
+  form {
+    position: relative;
   }
 }

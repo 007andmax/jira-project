@@ -201,6 +201,12 @@
                                         [selectedItem]="cProfile.address[0].timeZone"
                                         (selectedOffsetItem)="onChangeTimeZone($event)"
                                     ></app-company-time-zone>
+                                    <div
+                                        *ngIf="submitted && f.locale.errors"
+                                        class="invalid-feedback"
+                                    >
+                                        <div *ngIf="f.locale.errors.required">Time zone value is required</div>
+                                    </div>
                                 </div>
                                 <div
                                     class="f-col col-50"
