@@ -33,7 +33,9 @@ export class UserProfile {
             this.phoneNumbers = [new PhoneNumber('OFFICE')];
         } else {
             this.phoneNumbers = user.phoneNumbers.map((item) => {
-                return new PhoneNumber(item.typeNumber, item.number);
+                let number = item.number;
+                if (number[0] === "1") number = `+${number}`;
+                return new PhoneNumber(item.typeNumber, number);
             })
         }
 

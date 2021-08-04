@@ -144,6 +144,8 @@
                             [(ngModel)]="user.phoneNumbers[0].number"
                             (input)="onCheckPhoneNumber(0)"
                             placeholder="Enter Primary Phone"
+                            prefix="+1"
+                            mask="(000) 000-0000"
                         >
                         <div
                             class="grey-dropdown primary-phone-selector"
@@ -216,6 +218,8 @@
                                     [(ngModel)]="phone.number"
                                     (input)="onCheckPhoneNumber(i)"
                                     placeholder="Enter Primary Phone"
+                                    prefix="+1"
+                                    mask="(000) 000-0000"
                                 >
                                 <div
                                     class="grey-dropdown primary-phone-selector"
