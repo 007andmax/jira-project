@@ -165,7 +165,8 @@ export class UsersAsideEditComponent implements OnInit {
 
   onSave() {
     if (!this.validate.isValidate(this.user)) return;
-
+    console.log("this.user", this.user);
+    console.log("this.usersStateService.getuserForEdit()", this.usersStateService.getuserForEdit());
 
     this.usersService.updateUser(this.user.getUserForUpdate(this.usersStateService.getuserForEdit())).subscribe(data => {
       this.close();

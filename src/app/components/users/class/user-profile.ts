@@ -38,8 +38,6 @@ export class UserProfile {
                 return new PhoneNumber(item.typeNumber, number);
             })
         }
-
-
         this.subscription = {
             invoice: user.subscription.invoice, ticket: user.subscription.ticket, ticketManager: user.subscription.ticketManager
         }
