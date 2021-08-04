@@ -32,7 +32,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   companyFilter: CompanyFilter = new CompanyFilter();
   showArchivedCompanies: boolean = false;
   sub: Subscription = new Subscription();
-  left_filter: LeftPanelCompaniesFilter = new LeftPanelCompaniesFilter();
+  left_filter: string;
   calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
 
   constructor(private companiesService: CompaniesService,
@@ -50,11 +50,20 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     window.scrollTo(0, 0);
     this.left_filter = this.leftPanelStateService.getFilter();
-    if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
+    if (this.companiesStateService.getCompanies().length > 0 && !this.left_filter) this.getClientsList(this.companiesStateService.getCompanies());
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
-      this.getClientsList(data);
+      if (!this.left_filter) this.getClientsList(data);
     })
     this.sub.add(getOnCompanies);
+    if (this.left_filter) {
+      if (this.left_filter !== "ARCHIVE") this.companyFilter.setClientType(this.left_filter);
+      window.scrollTo(0, 0);
+      this.setDefaultScoll();
+      this.showArchivedCompanies = (this.left_filter === "ARCHIVE");
+      this.companyFilter.setShowArchivedCompanies(this.showArchivedCompanies);
+      this.companyFilter.setArchived(this.left_filter === "ARCHIVE");
+      this.getClientsListByFilter();
+    }
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === ARCHIVE_COMPANY) {
