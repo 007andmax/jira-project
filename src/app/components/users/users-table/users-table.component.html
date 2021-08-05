@@ -64,7 +64,10 @@
                         class="qt-sz-16 qt-mr-6 icon__phone-gray"
                     ></div>
                 </div>
-                <div class="users-table__contract-no--number">{{phone.number}}</div>
+                <div
+                    class="users-table__contract-no--number"
+                    [textContent]="phone.number | mask: '(000) 000-0000'"
+                ></div>
             </div>
         </ng-template>
     </td>

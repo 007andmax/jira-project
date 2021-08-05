@@ -75,12 +75,26 @@ export class CompanyProfile {
                 number: '',
                 typeNumber: 'OFFICE'
             }];
+        } else {
+            this.addresses[0].phoneNumbers.map((item) => {
+                let number = item.number;
+                if (number[0] === "1") number = `+${number}`;
+                item.number = number;
+                return item;
+            })
         }
         if (this.contacts[0].phoneNumbers.length === 0) {
             this.contacts[0].phoneNumbers = [{
                 number: '',
                 typeNumber: 'OFFICE'
             }];
+        } else {
+            this.contacts[0].phoneNumbers.map((item) => {
+                let number = item.number;
+                if (number[0] === "1") number = `+${number}`;
+                item.number = number;
+                return item;
+            })
         }
         if (!company.clientIndustry) {
             this.clientIndustry = {

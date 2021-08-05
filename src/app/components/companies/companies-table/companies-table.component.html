@@ -57,7 +57,7 @@
         ></p>
         <p
             class="phone"
-            [textContent]="(primaryPhone && primaryPhone.number) ? primaryPhone.number : ''"
+            [textContent]="getPhoneNumner() | mask: '(000) 000-0000'"
         ></p>
     </td>
     <td
