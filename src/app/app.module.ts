@@ -448,6 +448,7 @@ import { CompanyAddAsideShortComponent } from './components/companies/company-ad
 import { CompanyAddAsideFullComponent } from './components/companies/company-add-aside/company-add-aside-full/company-add-aside-full.component';
 import { CommonModule, HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { HomeComponent } from './components/home/home.component';
+import { PreparePhonePipe } from './pipe/prepare-phone.pipe';
 
 
 declare var $: any;
@@ -852,7 +853,8 @@ declare var $: any;
     CompaniesFilterComponent,
     CompanyAddAsideShortComponent,
     CompanyAddAsideFullComponent,
-    HomeComponent
+    HomeComponent,
+    PreparePhonePipe
   ],
   imports: [
     BrowserModule,
@@ -907,7 +909,6 @@ declare var $: any;
     // RecurringTicketsComponent
   ],
   exports: [
-    PhonePipe,
     OrderByPipe,
   ],
   providers: [

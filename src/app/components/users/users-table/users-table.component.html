@@ -66,7 +66,7 @@
                 </div>
                 <div
                     class="users-table__contract-no--number"
-                    [textContent]="phone.number | mask: '(000) 000-0000'"
+                    [textContent]="phone.number | preparePhone | mask: '(000) 000-0000' | phone"
                 ></div>
             </div>
         </ng-template>
