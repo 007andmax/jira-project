@@ -3,6 +3,7 @@ import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnDestro
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { CompanyAssociateItem } from './class/company-associate-item';
 
 @Component({
   selector: 'company-associate',
@@ -10,18 +11,16 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
   styleUrls: ['./company-associate.component.scss']
 })
 export class CompanyAssociateComponent implements OnInit, OnDestroy {
-  page: number = 0;
-  public infiniteScrollDisabled = true;
-
+  @Input() company: any;
   searchName: string = "";
   selectable = true;
   removable = true;
   addOnBlur = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   tagCtrl = new FormControl();
-  @Input() selectedCompanies = [];
-  companies = [];
-  reqCompanies = [];
+  @Input() selectedCompanies: Array<CompanyAssociateItem> = [];
+  companies: Array<CompanyAssociateItem> = [];
+  reqCompanies: Array<CompanyAssociateItem> = [];
   sub = new Subscription();
   @Input() editItems: Array<string>;
   @Input() placement: string;
@@ -47,18 +46,19 @@ export class CompanyAssociateComponent implements OnInit, OnDestroy {
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-    if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
+    if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies().map(item => new CompanyAssociateItem(item)));
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
-      this.getClientsList(data);
+      this.getClientsList(data.map(item => new CompanyAssociateItem(item)));
     })
     this.sub.add(getOnCompanies);
-    this.onCheckEditItem();
+
   }
   getClientsList(data) {
-    this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+    this.companies = data.filter(item => item.id !== this.company.id && item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-    this.reqCompanies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+    this.reqCompanies = data.filter(item => item.id !== this.company.id && item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+    this.onCheckEditItem();
   }
   getCompanyName(tag) {
     let company = this.companiesStateService.getCompanies().find(item => item.id === tag.companyId);
@@ -66,7 +66,6 @@ export class CompanyAssociateComponent implements OnInit, OnDestroy {
   }
   onSearch(event) {
     this.searchName = event.target.value;
-    this.setDefaultScoll();
     this.companies = this.reqCompanies.filter(item => item.name.toLowerCase().includes(this.searchName.toLowerCase()));
     this.cd.detectChanges();
   }
@@ -104,7 +103,7 @@ export class CompanyAssociateComponent implements OnInit, OnDestroy {
   openChange(open) {
     if (open) {
 
-      this.setDefaultScoll();
+
       this.companies = this.reqCompanies;
     }
   }
@@ -194,7 +193,7 @@ export class CompanyAssociateComponent implements OnInit, OnDestroy {
   public remove(index): void {
     if (index >= 0) {
       this.selectedCompanies.splice(index, 1);
-      this.companiesChange.emit(this.selectedCompanies);
+      this.companiesChange.emit(this.selectedCompanies.map(item => item.id));
       this.cd.detectChanges();
     }
   }
@@ -207,9 +206,9 @@ export class CompanyAssociateComponent implements OnInit, OnDestroy {
       this.selectedCompanies.splice(findIndex, 1);
     } else {
       this.selectedCompanies.push(newItem);
-      this.selectedCompanies = this.reqCompanies;
+      this.companies = this.reqCompanies;
     }
-    this.companiesChange.emit(this.selectedCompanies);
+    this.companiesChange.emit(this.selectedCompanies.map(item => item.id));
     this.tagCtrl.setValue(null);
 
     if (this.searchName.length > 0) {
@@ -230,7 +229,7 @@ export class CompanyAssociateComponent implements OnInit, OnDestroy {
   public close() {
     this.selectedCompanies = [];
     this.companies = this.reqCompanies;
-    this.companiesChange.emit(this.selectedCompanies);
+    this.companiesChange.emit([]);
   }
 
   public trackById(index, item) {

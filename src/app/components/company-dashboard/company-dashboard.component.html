@@ -1,5 +1,12 @@
 <div class="cmp-dashboard-body">
-    <div class="cmp-dboard-container d-flex">
+    <div
+        class="loading"
+        *ngIf="showPreloader"
+    ></div>
+    <div
+        class="cmp-dboard-container d-flex"
+        [hidden]="showPreloader"
+    >
         <div class="cmp-dboard-row d-flex">
             <app-company-dash-detail
                 class="cmp-dboard-col left-profilebar cmn-box d-flex"
@@ -12,7 +19,7 @@
                 class="cmp-dboard-col right-stasticsbar d-flex"
                 *ngIf="company && company.clientType === 'VENDOR'"
             >
-                <company-dash-associate></company-dash-associate>
+                <company-dash-associate [company]="company"></company-dash-associate>
             </div>
             <div
                 class="cmp-dboard-col right-stasticsbar d-flex"
@@ -32,6 +39,9 @@
                         <app-company-dash-contract class="cmp-board-info-col d-flex"></app-company-dash-contract>
                     </div>
                 </div>
+
+
+
 
 
 
@@ -134,7 +144,13 @@
 
 
 
+
+
+
                 <!-- Modal -->
+
+
+
 
 
 

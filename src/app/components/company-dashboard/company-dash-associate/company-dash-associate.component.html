@@ -1,4 +1,8 @@
-<p>
-    company-dash-associate works!
-    <company-associate></company-associate>
-</p>
+<div class="cmp-dboard-stastics cmn-box d-flex">
+    <h3>Associated Company's</h3>
+    <company-associate
+        [company]="company"
+        [editItems]="getAssociatedCompaniesIds()"
+        (companiesChange)="onChangedAssociatedCompanies($event)"
+    ></company-associate>
+</div>

@@ -390,7 +390,8 @@
     }
   }
 }
-app-company-tags {
+app-company-tags,
+company-associate {
   .dropdown-toggle .mat-form-field-wrapper .mat-form-field-infix {
     input {
       /* position: absolute; */
@@ -472,6 +473,7 @@ documents-edit-info {
   }
   app-tags,
   app-company-tags,
+  company-associate,
   app-taxes,
   documents-linked,
   app-draft-email-recipients,
