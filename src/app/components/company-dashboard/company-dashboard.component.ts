@@ -33,6 +33,9 @@ export class CompanyDashboardComponent implements OnInit {
     this.leftPanelStateService.changeStateWithoutNavigate('company-dashboard');
   }
 
+  onCompanyChanged(data) {
+    this.company = data;
+  }
   totalTicketsChangedHandler(data: number) {
     this.totalTickets = data;
   }

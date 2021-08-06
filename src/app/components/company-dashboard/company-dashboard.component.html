@@ -6,8 +6,18 @@
                 (companyNameChanged)="companyNameChangedHandler($event)"
                 (totalTicketsChanged)="totalTicketsChangedHandler($event)"
                 (averageResponseTimeChanged)="averageResponseTimeChangedHandler($event)"
+                (companyChanged)="onCompanyChanged($event)"
             ></app-company-dash-detail>
-            <div class="cmp-dboard-col right-stasticsbar d-flex">
+            <div
+                class="cmp-dboard-col right-stasticsbar d-flex"
+                *ngIf="company && company.clientType === 'VENDOR'"
+            >
+                <company-dash-associate></company-dash-associate>
+            </div>
+            <div
+                class="cmp-dboard-col right-stasticsbar d-flex"
+                *ngIf="company && company.clientType !== 'VENDOR'"
+            >
                 <app-company-dash-stats
                     [totalTickets]="totalTickets"
                     [averageResponseTime]="averageResponseTime"
@@ -22,6 +32,10 @@
                         <app-company-dash-contract class="cmp-board-info-col d-flex"></app-company-dash-contract>
                     </div>
                 </div>
+
+
+
+
 
 
 
@@ -116,6 +130,10 @@
 
 
 
+
+
+
+
                 <!-- Modal -->
 
 
@@ -125,9 +143,11 @@
 
 
 
+
+
+
+
             </div>
-
-
         </div>
     </div>
 </div>
