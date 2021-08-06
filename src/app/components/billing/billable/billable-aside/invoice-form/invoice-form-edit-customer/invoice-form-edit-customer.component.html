@@ -84,6 +84,8 @@
             [(ngModel)]="company.contacts[0].phoneNumbers[0].number"
             placeholder="Enter Phone Number"
             (input)="onChangePhoneNumber()"
+            prefix="+1"
+            mask=" (000) 000-0000"
         >
         <mat-error *ngIf="!validate.getPhoneNumber()">Phone number is required</mat-error>
     </div>

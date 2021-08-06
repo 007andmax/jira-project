@@ -1,70 +1,173 @@
 <div class="users-aside">
-  <div class="users-aside__title" [textContent]="'Users (' + users.length + ')'">
-
-  </div>
-
-  <div class="users-aside__search">
-    <span  class="qt-input-search users-aside__search-devices --dark">
-      <input  class="qt-input-search" placeholder="Search Users…" title="Search users" type="text" (input)="onSearch($event)">
-    </span>
-  </div>
-
-  <div class="users-aside__users-list">
-    <ng-template ngFor let-user [ngForOf]="users" [ngForTrackBy]="trackById" let-i="index">
-      <div class="users-aside__user" [ngClass]="{'--online': user.online, '--away' : !user.online}" ngbDropdown>
-        <div [ngClass]="'users-aside__user-' + i" class="d-f" >
-        <div  class="users-aside__user-avatar" [ngClass]="{'--letter-avatar': ticketsListService.getAssignedUserNameForAvatar(user)}"
-        [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
-        [ngStyle]="{'background': getStyleAvatar(user)}"
-        ></div>
-        <div>
-          <div class="users-aside__user-name" [textContent]="ticketsListService.getUserName(user)"></div>
-          <ng-template ngFor let-phoneNumber [ngForOf]="user.phoneNumbers" [ngForTrackBy]="trackById">
-            <div class="users-aside__user-email" [textContent]="phoneNumber.number"></div>
-            </ng-template>
-
-          <div class="users-aside__user-email" [textContent]="user.primaryEmail"></div>
-        </div>
-
-        <div class="users-aside__user-menu" id="dropdownForm1" (click)="onOpenDropDown(input,bodyDropDown)"  #input></div>
-
-        <div class="dropdown-menu-qt" ngbDropdownMenu aria-labelledby="dropdownForm1"
-        #bodyDropDown appClickOtside [init]="true" [class]="'.users-aside__user-' + i" (onOutSide)="hiddenDropDown(bodyDropDown)">
-          <ul>
-            <li (click)="sendEmail(user)"><span class="dropdown-menu-qt__item-icon icon__email-dark"></span>Email</li>
-
-            <li (click)="showPrivilege = !showPrivilege">
-              <span class="dropdown-menu-qt__item-icon icon__set-privilege"></span>Set {{ user.firstName }} Privilege
-
-              <ul class="dropdown-menu-qt__submenu dropdown-menu" *ngIf="showPrivilege">
-                <li *ngIf="user.role !== 'USER'" ngbDropdownItem (click)="changeUserRole(user,'USER')">User</li>
-                <li ngbDropdownItem *ngIf="user.role !== 'ADMIN'"  (click)="changeUserRole(user,'ADMIN')">Administrator</li>
-              </ul>
-
-            </li>
-
-            <li (click)="showSubscription = !showSubscription">
-              <span class="dropdown-menu-qt__item-icon icon__subscribe"></span>Subscribe {{ user.firstName }} to...
-              <ul *ngIf="showSubscription" class="dropdown-menu-qt__submenu dropdown-menu">
-
-                <li >
-                  <label class="checkbox-container dropdown-menu-qt__input-item" [attr.for]="'ticket-' + i" (click)="onChangeSubscriptions('ticket',user)"><input [attr.id]="'ticket-' + i"  [checked]="user.subscription.ticket" type="checkbox"><span class="checkbox-mark"></span> Ticket Updates</label>
-                </li>
-
-                <li >
-                  <label class="checkbox-container dropdown-menu-qt__input-item" [attr.for]="'invoice-' + i" (click)="onChangeSubscriptions('invoice',user)"><input [attr.id]="'invoice-' + i"  [checked]="user.subscription.invoice" type="checkbox"><span class="checkbox-mark"></span>Invoice Updates</label>
-                </li>
-
-                <li>
-                  <label class="checkbox-container dropdown-menu-qt__input-item" [attr.for]="'ticketManager-' + i" (click)="onChangeSubscriptions('ticketManager',user)"><input [attr.id]="'ticketManager-' + i"  [checked]="user.subscription.ticketManager" type="checkbox"><span class="checkbox-mark"></span>Ticket Manager</label>
-                </li>
-            </ul>
-            </li>
-
-            <li ngbDropdownItem (click)="archiveUser(user)"><span class="dropdown-menu-qt__item-icon icon__archive"></span>Archive</li>
-          </ul>
-        </div>
-      </div>
+    <div
+        class="users-aside__title"
+        [textContent]="'Users (' + users.length + ')'"
+    >
     </div>
-      </ng-template>
+    <div class="users-aside__search">
+        <span class="qt-input-search users-aside__search-devices --dark">
+            <input
+                class="qt-input-search"
+                placeholder="Search Users…"
+                title="Search users"
+                type="text"
+                (input)="onSearch($event)"
+            >
+        </span>
+    </div>
+    <div class="users-aside__users-list">
+        <ng-template
+            ngFor
+            let-user
+            [ngForOf]="users"
+            [ngForTrackBy]="trackById"
+            let-i="index"
+        >
+            <div
+                class="users-aside__user"
+                [ngClass]="{'--online': user.online, '--away' : !user.online}"
+                ngbDropdown
+            >
+                <div
+                    [ngClass]="'users-aside__user-' + i"
+                    class="d-f"
+                >
+                    <div
+                        class="users-aside__user-avatar"
+                        [ngClass]="{'--letter-avatar': ticketsListService.getAssignedUserNameForAvatar(user)}"
+                        [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
+                        [ngStyle]="{'background': getStyleAvatar(user)}"
+                    ></div>
+                    <div>
+                        <div
+                            class="users-aside__user-name"
+                            [textContent]="ticketsListService.getUserName(user)"
+                        ></div>
+                        <ng-template
+                            ngFor
+                            let-phoneNumber
+                            [ngForOf]="user.phoneNumbers"
+                            [ngForTrackBy]="trackById"
+                        >
+                            <div
+                                class="users-aside__user-email"
+                                [textContent]="phoneNumber.number | preparePhone | mask: '(000) 000-0000' | phone"
+                            ></div>
+                        </ng-template>
+                        <div
+                            class="users-aside__user-email"
+                            [textContent]="user.primaryEmail"
+                        ></div>
+                    </div>
+                    <div
+                        class="users-aside__user-menu"
+                        id="dropdownForm1"
+                        (click)="onOpenDropDown(input,bodyDropDown)"
+                        #input
+                    ></div>
+                    <div
+                        class="dropdown-menu-qt"
+                        ngbDropdownMenu
+                        aria-labelledby="dropdownForm1"
+                        #bodyDropDown
+                        appClickOtside
+                        [init]="true"
+                        [class]="'.users-aside__user-' + i"
+                        (onOutSide)="hiddenDropDown(bodyDropDown)"
+                    >
+                        <ul>
+                            <li (click)="sendEmail(user)">
+                                <span class="dropdown-menu-qt__item-icon icon__email-dark"></span>
+                                Email
+                            </li>
+                            <li (click)="showPrivilege = !showPrivilege">
+                                <span class="dropdown-menu-qt__item-icon icon__set-privilege"></span>
+                                Set {{ user.firstName }} Privilege
+                                <ul
+                                    class="dropdown-menu-qt__submenu dropdown-menu"
+                                    *ngIf="showPrivilege"
+                                >
+                                    <li
+                                        *ngIf="user.role !== 'USER'"
+                                        ngbDropdownItem
+                                        (click)="changeUserRole(user,'USER')"
+                                    >
+                                        User
+                                    </li>
+                                    <li
+                                        ngbDropdownItem
+                                        *ngIf="user.role !== 'ADMIN'"
+                                        (click)="changeUserRole(user,'ADMIN')"
+                                    >
+                                        Administrator
+                                    </li>
+                                </ul>
+                            </li>
+                            <li (click)="showSubscription = !showSubscription">
+                                <span class="dropdown-menu-qt__item-icon icon__subscribe"></span>
+                                Subscribe {{ user.firstName }} to...
+                                <ul
+                                    *ngIf="showSubscription"
+                                    class="dropdown-menu-qt__submenu dropdown-menu"
+                                >
+                                    <li>
+                                        <label
+                                            class="checkbox-container dropdown-menu-qt__input-item"
+                                            [attr.for]="'ticket-' + i"
+                                            (click)="onChangeSubscriptions('ticket',user)"
+                                        >
+                                            <input
+                                                [attr.id]="'ticket-' + i"
+                                                [checked]="user.subscription.ticket"
+                                                type="checkbox"
+                                            >
+                                            <span class="checkbox-mark"></span>
+                                            Ticket Updates
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label
+                                            class="checkbox-container dropdown-menu-qt__input-item"
+                                            [attr.for]="'invoice-' + i"
+                                            (click)="onChangeSubscriptions('invoice',user)"
+                                        >
+                                            <input
+                                                [attr.id]="'invoice-' + i"
+                                                [checked]="user.subscription.invoice"
+                                                type="checkbox"
+                                            >
+                                            <span class="checkbox-mark"></span>
+                                            Invoice Updates
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label
+                                            class="checkbox-container dropdown-menu-qt__input-item"
+                                            [attr.for]="'ticketManager-' + i"
+                                            (click)="onChangeSubscriptions('ticketManager',user)"
+                                        >
+                                            <input
+                                                [attr.id]="'ticketManager-' + i"
+                                                [checked]="user.subscription.ticketManager"
+                                                type="checkbox"
+                                            >
+                                            <span class="checkbox-mark"></span>
+                                            Ticket Manager
+                                        </label>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li
+                                ngbDropdownItem
+                                (click)="archiveUser(user)"
+                            >
+                                <span class="dropdown-menu-qt__item-icon icon__archive"></span>
+                                Archive
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </div>
 </div>
