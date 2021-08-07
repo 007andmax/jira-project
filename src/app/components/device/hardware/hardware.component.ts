@@ -240,8 +240,8 @@ export class HardwareComponent implements OnInit {
       font-style: normal;
       line-height: 1.33;
       letter-spacing: normal;
-      color: $gray-800;
-      background-color: #f3f7f9;
+      color: #454f5b;
+      background-color: #edf2f6;
     }
     h1,
     h2,

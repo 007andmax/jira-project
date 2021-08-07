@@ -208,10 +208,10 @@
         padding: 12px 10px 10px 36px;
         font-size: 13px;
         font-family: "Graphik-Regular", sans-serif;
-        color: #9ca5b6;
+        color: $gray-600;
       }
       .mat-form-field-infix {
-        border: 1px solid #c4cbd5;
+        border: 1px solid $gray-800;
         border-radius: 4px;
         padding-left: 36px;
         position: relative;
@@ -369,7 +369,7 @@ app-users-table {
 
   .dropdown-menu.unique-down {
     .dropdown-item:nth-child(even) {
-      background-color: #edf2f6;
+      background-color: $background;
     }
   }
 

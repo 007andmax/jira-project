@@ -1,3 +1,5 @@
+@import "./src/assets/styles/variable";
+
 .documents-preview {
     width: 816px;
     height: 100vh;
@@ -43,12 +45,12 @@
             height: 40px;
             padding: 0 12px;
             font-size: 13px;
-            border: 1px solid #c4cbd5;
+            border: 1px solid $gray-800;
             border-radius: 4px;
         }
 
         textarea {
-            border: 1px solid #c4cbd5;
+            border: 1px solid $gray-800;
             border-radius: 4px;
             min-height: 80px;
             width: 100%;
@@ -60,7 +62,7 @@
 
     &-panel {
         &__subheader {
-            border-bottom: 1px solid #dfe3e8;
+            border-bottom: 1px solid $gray-400;
             display: flex;
 
             &-item {
@@ -70,7 +72,7 @@
                 border: 1px solid transparent;
 
                 &.--active {
-                    border-bottom-color: #16a4fa;
+                    border-bottom-color: $primary-1;
                 }
             }
         }
@@ -81,7 +83,7 @@
         min-height: 40px;
         padding: 4px 4px 0;
         font-size: 13px;
-        border: 1px solid #c4cbd5;
+        border: 1px solid $gray-800;
         border-radius: 4px;
         width: 100%;
         display: flex;
@@ -98,7 +100,7 @@
     &__document-history-item {
         display: flex;
         padding: 9px 24px;
-        //border-bottom: 1px solid #dfe3e8;
+        //border-bottom: 1px solid $gray-400;
         position: relative;
 
         &::before,
@@ -113,7 +115,7 @@
             height: calc(100% - 20px);
             transform: translate(-50%, 10px);
             width: 2px;
-            background: #edf0f2;
+            background: $gray-300;
             border-radius: 1px;
         }
 
@@ -122,8 +124,8 @@
             transform: translate(-50%, -50%);
             width: 16px;
             height: 16px;
-            background: #919eab;
-            border: 5px solid #f4f6f8;
+            background: $gray-600;
+            border: 5px solid $gray-200;
             border-radius: 50%;
         }
 
@@ -151,7 +153,7 @@
             transform: translateY(9px);
             width: 100%;
             height: 1px;
-            background: #dfe3e8;
+            background: $gray-400;
         }
     }
     &__document-history-avatar {
@@ -193,7 +195,7 @@
 
             .icon__close {
                 padding: 6px;
-                background-color: #f4f6f8;
+                background-color: $gray-200;
                 border-radius: 50%;
                 background-size: 24px 24px;
                 background-position: center;
@@ -203,17 +205,17 @@
         &__title {
             font-size: 18px;
             font-family: Graphik-Medium, sans-serif;
-            color: #364656;
+            color: $primary-2;
         }
 
         &__description {
-            color: #454f5b;
+            color: $gray-800;
         }
 
         &__card-icon {
             padding: 8px;
             border-radius: 8px;
-            background-color: #e6f5ff;
+            background-color: $gray-200;
             flex-shrink: 0;
         }
 
@@ -224,13 +226,13 @@
 }
 
 .selected-user {
-    border: 1px solid #edf2f6;
+    border: 1px solid $background;
     border-radius: 3px;
     padding: 0 5px;
     height: 32px;
     display: flex;
     align-items: center;
-    background: #f8f9fa;
+    background: $gray-100;
     margin: 0 4px 4px 0;
 
     .icn-remove-old {

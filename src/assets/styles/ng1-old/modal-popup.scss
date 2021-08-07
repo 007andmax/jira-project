@@ -201,7 +201,7 @@
   }
 
   .btn {
-    background-color: #16a4fa;
+    background-color: $primary-1;
     width: 100%;
     text-align: left;
     height: 48px;
@@ -209,8 +209,8 @@
   }
 
   .btn-primary.not-active {
-    background-color: #c4cbd5;
-    border-color: #c4cbd5;
+    background-color: $gray-800;
+    border-color: $gray-800;
     cursor: default;
     pointer-events: none;
   }

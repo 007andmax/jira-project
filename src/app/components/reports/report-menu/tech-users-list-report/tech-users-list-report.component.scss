@@ -34,11 +34,11 @@
     outline: none;
     width: 100%;
     border-radius: 4px 3px 3px 4px;
-    border: 1px solid #d3d8e1;
-    background-color: #fff;
+    border: 1px solid $gray-400;
+    background-color: $white;
 
     &::placeholder {
-      color: #9ca5b6;
+      color: $gray-500;
     }
   }
   .dropdown-menu {

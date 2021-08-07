@@ -1,3 +1,5 @@
+@import "./src/assets/styles/variable";
+
 tr:hover td {
-    background-color: #f9fafb;
+    background-color: $gray-100;
 }

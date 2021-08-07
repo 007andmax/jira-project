@@ -1,3 +1,5 @@
+@import "./src/assets/styles/variable";
+
 .documents-create-aside-categories {
   max-width: 288px;
   z-index: 6;
@@ -5,8 +7,6 @@
   .qt-aside-modern__header {
     padding-left: 24px;
     padding-right: 24px;
-    //background-color: #fff;
-    //border-bottom: none;
   }
 
   .checkbox-wrapper {
@@ -43,8 +43,8 @@
         left: 0;
         bottom: 0;
         right: 0;
-        background: #edf2f6;
-        border: 1px solid #c4cbd5;
+        background: $background;
+        border: 1px solid $gray-400;
       }
     }
   }
@@ -65,7 +65,7 @@
 
 .categories-item {
   &:hover {
-    background-color: #f9fafb;
+    background-color: $gray-100;
   }
 }
 .--required {

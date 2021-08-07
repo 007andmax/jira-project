@@ -1,3 +1,5 @@
+@import "./src/assets/styles/variable";
+
 .customer-ticket p {
   font-weight: 600;
 }
@@ -18,7 +20,7 @@ html.no-d3-tooltip .nvtooltip .value {
 
 .commission-customer .details-content h3 {
   padding: 10px 60px;
-  background: #f1f5f8;
+  background: $gray-200;
   margin: 15px -60px;
 }
 

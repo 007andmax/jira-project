@@ -3,29 +3,6 @@
 @import './src/assets/styles/variable';
 @import './src/assets/styles/fonts';
 
-/*** Custom Color Variables For this components ***/
-
-//$bodyColor: $background;
-//$black-color: #000000;
-//$white-color: $white;
-//$primary-color: $primary-1;
-//$secondary-color:$primary-2;
-//$secondLight: $gray-800;
-//$grey-color: #6e6e6e;
-//$gry-light: $background;
-//$bodyFontColor: $gray-800;
-//$metal: $gray-800;
-//$heavyMetal: $primary-2;
-//$gray-500: #c5cdd5;
-//$border-hover: $gray-600;
-//$light-blue: #1286cc;
-//$titleColor: $primary-2;
-//$parot: $success;
-
-// body {
-//     @include body-font;
-//     background-color: $gray-200;
-// }
 .d-flex {
     @include flexbox;
 }

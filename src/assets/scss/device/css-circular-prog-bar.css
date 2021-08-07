@@ -6,7 +6,7 @@
    padding: 0;
    width: 5em;
    height: 5em;
-   background-color:#f4f6f8;
+   background-color: #f4f6f8;
    border-radius: 50%;
    line-height: 5em;
 }
@@ -39,7 +39,6 @@
    font-weight: 600;
    letter-spacing: normal;
    text-align: center;
-   /*color: #4f5f79;*/
    color: #454f5b;
    align-items: center;
    justify-content: center;

@@ -1,10 +1,12 @@
+@import "./src/assets/styles/variable";
+
 .disabled {
-    background-color: #f4f6f8;
+    background-color: $gray-200;
     cursor: default !important;
-    color: #919eab;
+    color: $gray-600;
 }
 .disabled-add-document {
     background-color: #96d4fa;
     cursor: default !important;
-    color: #ffffff;
+    color: $white;
 }

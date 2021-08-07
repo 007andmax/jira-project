@@ -617,23 +617,23 @@
 }
 
 .qt-color-dark {
-  color: #364656;
+  color: $primary-2;
 }
 .qt-color-dark-light {
-  color: #4f5f79;
+  color: $gray-800;
 }
 .qt-color-light {
-  color: #9ca5b6;
+  color: $gray-600;
 }
 .qt-color-info {
-  color: #16a4fa;
+  color: $primary-1;
 }
 .qt-color-white {
   color: white;
 }
 
 .qt-bg-info {
-  background-color: #16a4fa;
+  background-color: $primary-1;
 }
 .qt-bg-white {
   background-color: white;
