@@ -1,8 +1,9 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { map } from "rxjs/operators";
+import { exhaustMap, map } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import * as CryptoJS from "crypto-js";
+import { json } from "d3";
 
 @Injectable({
   providedIn: "root",
@@ -59,6 +60,36 @@ export class AgentService {
 
   public setAccessToken(data) {
     this.AccessToken = data;
+  }
+
+  public overrideAsset(data) {
+    delete data.Version;
+    delete data.Caption;
+    return this.http
+      .post(
+        `${this.apiAgent}agent/Asset`,
+        this.encrypt128(this.key, JSON.stringify(data)),
+        { headers: this.getHeader(), responseType: "text" }
+      )
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
+  public getOperatingSystemByAssetId(asset_id) {
+    return this.http
+      .get(`${this.apiAgent}agent/OperatingSystem/${asset_id}`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
+  public getAssetByGuid(Guid) {
+    return this.http
+      .get(`${this.apiAgent}agent/Asset/GUID/${Guid}`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
   }
 
   public getDiskDriveByAssetId(asset_id) {

@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  Injectable,
+} from "@angular/core";
 import { EventEmitter } from "@angular/core";
 import {
   UploadOutput,
@@ -7,8 +13,6 @@ import {
   humanizeBytes,
   UploaderOptions,
 } from "ngx-uploader";
-import { HardwareService } from "./../_services/hardware.service";
-import { first } from "rxjs/operators";
 import { ToastrService } from "ngx-toastr";
 import { CONFIGCONSTANTS } from "../config/app-constants";
 import { environment } from "../../../../environments/environment";
@@ -20,56 +24,110 @@ import {
   NgbDateStruct,
 } from "@ng-bootstrap/ng-bootstrap";
 import { AgentService } from "src/app/services/agent/agent.service";
-import { DeviceDetailService } from "../_services/device_detail.service";
 import { Subscription } from "rxjs";
+
+/**
+ * This Service handles how the date is represented in scripts i.e. ngModel.
+ */
+@Injectable()
+export class CustomAdapter extends NgbDateAdapter<string> {
+  readonly DELIMITER = "-";
+  fromModel(value: string | null): NgbDateStruct | null {
+    if (value) {
+      if (value.indexOf("T") > 0) {
+        let date = value.split("T")[0].split(this.DELIMITER);
+        return {
+          day: parseInt(date[2], 10),
+          month: parseInt(date[1], 10),
+          year: parseInt(date[0], 10),
+        };
+      } else {
+        let date = value.split(this.DELIMITER);
+        return {
+          day: parseInt(date[0], 10),
+          month: parseInt(date[1], 10),
+          year: parseInt(date[2], 10),
+        };
+      }
+    }
+    return null;
+  }
+
+  toModel(date: NgbDateStruct | null): string | null {
+    return date
+      ? (date.day < 10 ? "0" + date.day : date.day) +
+          this.DELIMITER +
+          (date.month < 10 ? "0" + date.month : date.month) +
+          this.DELIMITER +
+          date.year
+      : null;
+  }
+}
+
+/**
+ * This Service handles how the date is rendered and parsed from keyboard i.e. in the bound input field.
+ */
+@Injectable()
+export class CustomDateParserFormatter extends NgbDateParserFormatter {
+  readonly DELIMITER = "/";
+
+  parse(value: string): NgbDateStruct | null {
+    if (value) {
+      let date = value.split(this.DELIMITER);
+      return {
+        day: parseInt(date[0], 10),
+        month: parseInt(date[1], 10),
+        year: parseInt(date[2], 10),
+      };
+    }
+    return null;
+  }
+
+  format(date: NgbDateStruct | null): string {
+    return date
+      ? (date.day < 10 ? "0" + date.day : date.day) +
+          this.DELIMITER +
+          (date.month < 10 ? "0" + date.month : date.month) +
+          this.DELIMITER +
+          date.year
+      : "";
+  }
+}
+
 @Component({
   selector: "app-dashboard",
   templateUrl: "./dashboard.component.html",
   styleUrls: ["./dashboard.component.scss"],
+  providers: [
+    { provide: NgbDateAdapter, useClass: CustomAdapter },
+    { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter },
+  ],
 })
 export class DashboardComponent implements OnInit, OnDestroy {
-  @ViewChild(NgbDatepicker) d: NgbDatepicker;
+  @ViewChild(NgbDatepicker) expire: NgbDatepicker;
   url = environment.apiUrl + "upload";
-  formData: FormData;
   files: UploadFile[];
   uploadInput: EventEmitter<UploadInput>;
   humanizeBytes: Function;
   dragOver: boolean;
   options: UploaderOptions;
-  show = false;
   deviceDetail: any = {};
-  windows_info: string = "";
-  system = {
-    install_date: null,
-    manufacturer: "",
-    asset_tag: "",
-    warranty: null,
-    architecture: "",
-    model: "",
-    caption: "",
-    version: "",
-    release_id: "",
-  };
-  networkAdapters = {
-    ip_address: "",
-  };
+  asset: any = undefined;
+  virusprotection: string = "";
   logicalDisk: any = [];
   virusInfo: any = [];
   hostName = "";
   label: string = "";
-  showInput = true;
-  progressClass = "p20";
   visible = false;
   editNote = false;
   create = false;
   type = "";
   _id = "";
   DateFormat = CONFIGCONSTANTS.DateFormat1;
-  myDateValue: Date;
+  DateTimeFormat = CONFIGCONSTANTS.DateTimeFormat1;
   sub: Subscription = new Subscription();
+
   constructor(
-    private hardwareService: HardwareService,
-    private deviceDetailService: DeviceDetailService,
     private agentService: AgentService,
     private toastr: ToastrService
   ) {
@@ -146,13 +204,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
       window.location.href.split("/")[
         window.location.href.split("/").length - 1
       ];
-    this.myDateValue = new Date();
-    if (this.deviceDetailService.device) this.setPreviewDataDevice();
-    let onGetDevice = this.deviceDetailService.onGetDevice.subscribe((data) => {
-      this.setPreviewDataDevice();
-    });
-    this.sub.add(onGetDevice);
-    // this.getVirusInfo();
+
+    this.setPreviewDataDevice();
   }
 
   setPreviewDataDevice() {
@@ -160,8 +213,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
       localStorage.getItem("deviceDetail_" + this._id)
     );
     this.hostName = this.deviceDetail.hostName;
-    this.label = this.deviceDetail.label;
-    this.getDeviceDetail();
     this.agentService
       .getAgentToken(
         "QuickTech",
@@ -170,6 +221,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
       .subscribe((data) => {
         console.log("data", data);
         this.agentService.setAccessToken(data.AccessToken);
+        this.getAssetDetail();
+        this.getOprationSystemDetail();
         this.getDiskDriveDetail();
         this.agentService
           .getAssetsByCompanyId("fdadb2df-ed3d-4e28-b41e-741617b7ffa6")
@@ -179,14 +232,55 @@ export class DashboardComponent implements OnInit, OnDestroy {
       });
   }
 
+  getAssetDetail() {
+    this.agentService
+      .getAssetByGuid("48e23c98-cbe4-4a8e-82bd-8c36fe5c9502")
+      .subscribe((resp) => {
+        this.label = resp[0].Name;
+        this.asset = resp[0];
+        this.asset.IsUpdated = true;
+        this.getVirusProtection(resp[0].VirusProtectionProducts);
+      });
+  }
+
+  getVirusProtection(inputVirusproctection: string) {
+    this.virusprotection = "";
+    if (inputVirusproctection.length > 0) {
+      let finalVirus = inputVirusproctection.split(",");
+
+      for (let i = 0; i < finalVirus.length; i++) {
+        let virus = finalVirus[i].split("|");
+        if (virus.length == 3) {
+          if (virus[2].toLowerCase() == "enabled") {
+            this.virusprotection = virus[1];
+            break;
+          }
+        }
+      }
+
+      if (this.virusprotection == "" && finalVirus.length > 0) {
+        let dVirus = finalVirus[0].split("|");
+        if (dVirus.length == 3) {
+          this.virusprotection = dVirus[1];
+        }
+      }
+    }
+  }
+
+  getOprationSystemDetail() {
+    this.agentService.getOperatingSystemByAssetId("1").subscribe((resp) => {
+      this.asset.Version = resp[0].Version;
+      this.asset.Caption = resp[0].Caption;
+    });
+  }
+
   getDiskDriveDetail() {
     this.agentService.getDiskDriveByAssetId("1").subscribe((resp) => {
       this.logicalDisk = resp.filter((x) => x.IsActive);
       let colors = ["#0057a8", "#00d8e7", "#16a4fa", "#0CB2B2", "#485EF0"];
       let count = 0;
       this.logicalDisk.forEach((element) => {
-        element.is_system = true; // TODO: need to update once we get field from api
-        if (element.is_system === true) {
+        if (element.IsSystem === true) {
           element.color = "#2ec866";
         } else {
           element.color = colors[count];
@@ -224,118 +318,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
     });
   }
 
-  getDeviceDetail() {
-    console.log(this.deviceDetail.agentId);
-    this.hardwareService
-      .getAllHardwareList(
-        localStorage.getItem("company_id"),
-        this.deviceDetail.agentId
-      )
-      .pipe(first())
-      .subscribe(
-        (resp) => {
-          this.virusInfo = resp.reports[0].antivirus[0];
-          this.system = resp.reports[0].system || {};
-          let caption = this.system.caption.replace("Microsoft ", "");
-          let release_id =
-            this.system.release_id === ""
-              ? ""
-              : ` Version ${this.system.release_id}`;
-          let architecture =
-            this.system.architecture === ""
-              ? ""
-              : ` ( ${this.system.architecture} )`;
-          this.windows_info = `${caption}${architecture}${release_id}`;
-          if (this.system.install_date !== "") {
-            this.system.install_date = {
-              day: new Date(this.system.install_date).getDate(),
-              month: new Date(this.system.install_date).getMonth() + 1,
-              year: new Date(this.system.install_date).getFullYear(),
-            };
-          }
-          this.networkAdapters =
-            resp["reports"][0].networkAdapters.filter(
-              (value) => value.ip_enabled === true
-            )[0] || {};
-          if (this.system.warranty !== "") {
-            this.system.warranty = {
-              day: new Date(this.system.warranty).getDate(),
-              month: new Date(this.system.warranty).getMonth() + 1,
-              year: new Date(this.system.warranty).getFullYear(),
-            };
-          }
-          document
-            .getElementById("tag")
-            .setAttribute("data-tooltip", this.system.asset_tag);
-          document
-            .getElementById("manufacture")
-            .setAttribute("data-tooltip", this.system.manufacturer);
-        },
-        (error) => {
-          this.toastr.error("Something went wrong please try again.");
-        }
-      );
-  }
-
-  getVirusInfo() {
-    this.hardwareService
-      .getVirusInfo(localStorage.getItem("company_id"))
-      .pipe(first())
-      .subscribe(
-        (resp) => {
-          // this.virusInfo = resp;
-        },
-        (error) => {
-          this.toastr.error("Something went wrong please try again.");
-        }
-      );
-  }
-
   onDateChange(newDate: Date) {}
-  updateDashboard(type: any) {
-    let obj = {
-      system: {},
-    };
-    if (type === "manufacturer") {
-      obj.system["manufacturer"] = this.system.manufacturer;
-    } else if (type === "model") {
-      obj.system["model"] = this.system.model;
-    } else if (type === "asset_tag") {
-      obj.system["asset_tag"] = this.system.asset_tag;
-    } else if (type === "architecture") {
-      obj.system["architecture"] = this.system.architecture;
-    } else if (type === "install_date") {
-      obj.system["install_date"] =
-        this.system.install_date.year +
-        "/" +
-        this.system.install_date.month +
-        "/" +
-        this.system.install_date.day;
-    } else if (type === "warranty") {
-      obj.system["warranty"] =
-        this.system.warranty.year +
-        "/" +
-        this.system.warranty.month +
-        "/" +
-        this.system.warranty.day;
-    }
-    const data = {
-      agentId: this._id,
-      companyId: localStorage.getItem("company_id"),
-      override: obj,
-    };
-    this.hardwareService
-      .overrideHardware(data)
-      .pipe(first())
-      .subscribe(
-        (resp) => {
-          if (resp.errors === "success") {
-          }
-        },
-        (error) => {
-          this.toastr.error("Something went wrong please try again.");
-        }
-      );
+
+  updateAsset() {
+    this.agentService.overrideAsset(this.asset).subscribe(
+      (resp) => {
+        this.toastr.success("Asset info save successfully.");
+      },
+      (error) => {
+        this.toastr.error("Something went wrong please try again.");
+      }
+    );
   }
 
   convertToGB(value) {
@@ -346,36 +339,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     let val1 = (parseInt(v1) / 1024 / 1024 / 1024).toFixed(2);
     let val2 = (parseInt(v2) / 1024 / 1024 / 1024).toFixed(2);
     return (parseFloat(val1) - parseFloat(val2)).toFixed(0);
-  }
-
-  saveLabel() {
-    this.label = this.label.toUpperCase();
-    const data = {
-      agentId: this._id,
-      companyId: localStorage.getItem("company_id"),
-      newLabelValue: this.label,
-    };
-
-    this.hardwareService
-      .saveDeviceName(data)
-      .pipe(first())
-      .subscribe(
-        (resp) => {
-          $("#head-label").text(this.label);
-          let obj = JSON.parse(
-            localStorage.getItem("deviceDetail_" + this._id)
-          );
-          obj.label = this.label;
-          localStorage.setItem("deviceDetail_" + this._id, JSON.stringify(obj));
-        },
-        (error) => {
-          this.toastr.error("Something went wrong please try again.");
-        }
-      );
-  }
-
-  format(date: NgbDateStruct | null): string {
-    return date ? date.day + "/" + date.month + "/" + date.year : "";
   }
 
   ngOnDestroy(): void {

@@ -1,13 +1,14 @@
 <div class="page-wrapper">
   <!-- header  -->
   <header id="deviceHeader">
-      <div class="cmn-wrapper"> 
+      <div class="cmn-wrapper">
         <div class="header-left">
             <div class="hp-device-info">
                 <span class="device-icn"><img src="{{deviceImg}}" alt="device" /></span>
                   <div class="head-device">
                       <h6>Device</h6>
-                      <h5 id="head-label">{{deviceDetail.label || deviceDetail.hostName || deviceDetail.ip}}</h5>
+                      <!-- <h5 id="head-label">{{deviceDetail.label || deviceDetail.hostName || deviceDetail.ip}}</h5> -->
+                      <h5 id="head-label">{{deviceName}}</h5>
                   </div>
             </div>
             <div class="hp-device-info">
@@ -36,10 +37,10 @@
       <app-nav></app-nav>
   </aside>
   <!-- Main content bar -->
-    
+
       <router-outlet></router-outlet>
-    
- 
+
+
 </div>
   <!-- Modal create Tags -->
   <ng-template #template let-modal>
@@ -47,7 +48,7 @@
           <button type="button" class="close pull-right" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
           </button>
-  
+
             <div class="remote-area">
                 <ul class="list-unstyled">
                     <li>
@@ -66,7 +67,7 @@
                       </span>
                       <div class="remote-info">
                           <h3>Remote Desktop</h3>
-                          <p>Launch our app already installed on your device. If not installed, we will attempt the next option after 2 seconds 
+                          <p>Launch our app already installed on your device. If not installed, we will attempt the next option after 2 seconds
                             have elapsed.</p>
                           <a (click)="createConnection('RDP');" class="btn btn-primary">Launch RDP Connect</a>
                       </div>
@@ -78,5 +79,5 @@
                 <a (click)="getViewer();" class="btn btn-dowanload">Download Viewer</a>
             </div>
      </div>
- </ng-template> 
+ </ng-template>
  <div class="loading" *ngIf="loading"></div>

@@ -49,7 +49,7 @@
             background-color: $white-color;
             padding: 20px 24px 24px;
             margin-bottom: 16px;
-            
+
             h2 {
                 margin-bottom: 15px;
             }
@@ -69,7 +69,7 @@
                     font-family: $graphicMedBold;
                     font-weight: 500;
                 }
-                
+
             }
            &.col-50{
                width: 50%;
@@ -132,6 +132,16 @@
                                 font-family: $graphicSemibold;
                                 color: #4f5f79;
                             }
+                            & > div{
+                              padding: 8px 10px;
+                              font-size: 13px;
+                              font-weight: 500;
+                              font-style: normal;
+                              font-family: $graphicMedBold;
+                              line-height: 1.54;
+                              letter-spacing: normal;
+                              color: #4f5f79;
+                          }
                         }
                         span.edit-field[data-tooltip]{
                             &::before{
@@ -139,7 +149,6 @@
                                 padding:9px 7px;
                                 content: attr(data-tooltip);
                                 text-align: center;
-                                width: 216px;
                                 border-radius: 3px;
                                 background-color: #4f5f79;
                                 font-size: 12px;
@@ -150,7 +159,7 @@
                                 letter-spacing: normal;
                                 color: #ffffff;
                                 left: 0;
-                                top: -45px;
+                                top: -30px;
                                 visibility: hidden;
                                 white-space: nowrap;
                                 overflow: hidden;
@@ -160,7 +169,7 @@
                                 }
                             }
                             &::after{
-                                top: auto;
+                                top: 3px;
                                 left: 50%;
                                 border: solid transparent;
                                 content: " ";
@@ -189,7 +198,6 @@
                                 }
                             }
                         }
-                        
                     }
                 }
             }
@@ -200,7 +208,7 @@
                 font-weight: bold;
                 text-transform: uppercase;
             }
-            
+
             .label-field:hover, .label-field:focus {
                 border: solid 1px #c4cbd5;
                 outline: 0;
@@ -211,13 +219,13 @@
                 background-color: #ffffff;
                 font-family: 'Graphik-Medium' !important;
             }
-            
+
             .sub-label-field:hover, .sub-label-field:focus {
                 border: solid 1px #c4cbd5;
                 outline: 0;
             }
 
-            
+
             &.disk-drive {
                 h2{
                     margin-bottom: 7px;
@@ -267,81 +275,22 @@
                         &.c-drive{
                             border-color: #2ec866;
                             background-color: rgba(46, 200, 102, 0.05);
-                            .progress-circle{
-                                .value-bar{
-                                    border-color: #2ec866;
-                                }
-                                &.over50{
-                                    .first50-bar{
-                                        background-color: #2ec866;
-                                    }
-                                }
-                            }
                          }
-                        &:nth-child(2){
-                            .progress-circle{
-                                .value-bar{
-                                    background-color: #0057a8;
-                                }
-                                &.over50{
-                                    .first50-bar{
-                                        background-color: #0057a8;
-                                    }
-                                }
-                                
-                            }
-                        } 
-                        &:nth-child(3){
-                            .progress-circle{
-                                .value-bar{
-                                    border-color: #00d8e7;
-                                }
-                                &.over50{
-                                    .first50-bar{
-                                        background-color: #00d8e7;
-                                    }
-                                }
-                            }
-                        }  
-                        &:nth-child(4){
-                            .progress-circle{
-                                .value-bar{
-                                    border-color: #16a4fa;
-                                }
-                                &.over50{
-                                    .first50-bar{
-                                        background-color: #16a4fa;
-                                    }
-                                }
-                            }
-                        }
-                        &:nth-child(5){
-                            .progress-circle{
-                                .value-bar{
-                                    border-color: #2ec866;
-                                }
-                                &.over50{
-                                    .first50-bar{
-                                        background-color: #2ec866;
-                                    }
-                                }
-                            }
-                        }
-                        &:nth-child(6){
-                            .progress-circle{
-                                .value-bar{
-                                    border-color: #2ec866;
-                                }
-                                &.over50{
-                                    .first50-bar{
-                                        background-color: #2ec866;
-                                    }
-                                }
-                            }
-                        }
+                         &:nth-child(1){
+                          .progress-circle{
+                              .value-bar{
+                                border-color: #0057a8;
+                              }
+                              &.over50{
+                                  .first50-bar{
+                                      background-color: #0057a8;
+                                  }
+                              }
+
+                          }
+                      }
                     }
                 }
-                
               }
             }
             &.services {
@@ -478,7 +427,7 @@
                             display: flex;
                             flex-direction: column;
                             margin: 0;
-                           
+
                             li {
                                 display: -ms-flexbox;
                                 display: -webkit-flex;
@@ -527,7 +476,7 @@
                         }
                     }
                 }
-               
+
             }
             &.notes {
                 width: 100% !important;
@@ -646,7 +595,7 @@
                             & > .more-link {
                                 font-size: 11px;
                             }
-                            
+
                         }
                     }
                 }
@@ -660,7 +609,7 @@
             margin: 0 8px 16px 8px;
             width: calc(50% - 16px);
         }
-    }    
+    }
     }
 
    .load-more {
