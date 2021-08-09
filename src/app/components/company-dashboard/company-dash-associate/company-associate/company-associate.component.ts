@@ -53,10 +53,10 @@ export class CompanyAssociateComponent implements OnInit, OnDestroy {
     this.sub.add(getOnCompanies);
 
   }
-  getClientsList(data) {
-    this.companies = data.filter(item => item.id !== this.company.id && item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+  public getClientsList(data) {
+    this.companies = data.filter(item => ((this.company) ? item.id !== this.company.id : true) && item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-    this.reqCompanies = data.filter(item => item.id !== this.company.id && item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+    this.reqCompanies = data.filter(item => ((this.company) ? item.id !== this.company.id : true) && item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
     this.onCheckEditItem();
   }

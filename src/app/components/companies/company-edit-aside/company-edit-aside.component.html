@@ -333,6 +333,14 @@
                 (tagsChange)="onChangeTags($event)"
             ></app-company-tags>
         </div>
+        <div class="col-md-12">
+            <company-associate
+                #companyAssociate
+                [company]="company"
+                [editItems]="getAssociatedCompaniesIds()"
+                (companiesChange)="onChangedAssociatedCompanies($event)"
+            ></company-associate>
+        </div>
         <div class="col-md-12 editable-field">
             <p>Note for Company</p>
             <div class="editable-description">

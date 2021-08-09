@@ -450,6 +450,7 @@ import { CommonModule, HashLocationStrategy, LocationStrategy, PathLocationStrat
 import { HomeComponent } from './components/home/home.component';
 import { CompanyDashAssociateComponent } from './components/company-dashboard/company-dash-associate/company-dash-associate.component';
 import { CompanyAssociateComponent } from './components/company-dashboard/company-dash-associate/company-associate/company-associate.component';
+import { CompanyDashAssociateInfoComponent } from './components/company-dashboard/company-dash-associate-info/company-dash-associate-info.component';
 
 
 declare var $: any;
@@ -856,7 +857,8 @@ declare var $: any;
     CompanyAddAsideFullComponent,
     HomeComponent,
     CompanyDashAssociateComponent,
-    CompanyAssociateComponent
+    CompanyAssociateComponent,
+    CompanyDashAssociateInfoComponent
   ],
   imports: [
     BrowserModule,

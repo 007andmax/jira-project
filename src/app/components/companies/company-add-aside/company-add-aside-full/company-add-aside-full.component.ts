@@ -21,7 +21,7 @@ import { CompanyIndustry } from 'src/app/interfaces/company/company-industry';
 })
 export class CompanyAddAsideFullComponent implements OnInit {
   phoneTypes = ['Office', 'Mobile', 'Fax'];
-  companyTypes = [new CompanySetting('Client', 'CLIENT'), new CompanySetting('Lead', 'LEAD'), new CompanySetting('Vendor', 'VENDOR')];
+  companyTypes = [new CompanySetting('Client', 'CLIENT'), new CompanySetting('Lead', 'LEAD'), new CompanySetting('Vendor', 'VENDOR'), new CompanySetting('Supplier', 'SUPPLIER')];
   paymentTerms = [new CompanySetting('COD', 0), new CompanySetting('7 days', 7), new CompanySetting('15 days', 15), new CompanySetting('30 days', 30)];
   paymentMethods = [new CompanySetting('Cash', 'CASH'),
   new CompanySetting('Cheque', 'CHEQUE'),
@@ -188,6 +188,11 @@ export class CompanyAddAsideFullComponent implements OnInit {
         this.company.addresses[0].countryCode = item.short_name;
       }
       this.cd.detectChanges();
+    })
+  }
+  public onChangedAssociatedCompanies(data) {
+    this.company.associatedCompanies = data.map(item => {
+      return { id: item };
     })
   }
   public onChangePhoneNumber() {

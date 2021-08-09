@@ -22,6 +22,7 @@ import { User } from '../../users/class/user';
 import { CompanyIndustry } from 'src/app/interfaces/company/company-industry';
 import { CompanyTagsComponent } from '../company-tags/company-tags.component';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
+import { CompanyAssociateComponent } from '../../company-dashboard/company-dash-associate/company-associate/company-associate.component';
 
 @Component({
   selector: 'app-company-edit-aside',
@@ -33,7 +34,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   company: CompanyProfile = new CompanyProfile();
   industries: Array<CompanyIndustry> = [];
   selectedTechLead: ItemFilterPerson;
-  companyTypes = [new CompanySetting('Client', 'CLIENT'), new CompanySetting('Lead', 'LEAD'), new CompanySetting('Vendor', 'VENDOR')];
+  companyTypes = [new CompanySetting('Client', 'CLIENT'), new CompanySetting('Lead', 'LEAD'), new CompanySetting('Vendor', 'VENDOR'), new CompanySetting('Supplier', 'SUPPLIER')];
   phoneTypes = ['Office', 'Mobile', 'Fax'];
   paymentTerms = [new CompanySetting('COD', 0), new CompanySetting('7 days', 7), new CompanySetting('15 days', 15), new CompanySetting('30 days', 30)];
   serviceTypes = [new CompanySetting('Hourly', 'HOURLY'), new CompanySetting('Block time', 'BLOCK_TIME'), new CompanySetting('Semi managed', 'SEMI_MANAGED'), new CompanySetting('Fully managed', 'FULLY_MANAGED')];
@@ -57,6 +58,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   @ViewChild('paymentTerm') paymentTerm: DropDownComponent;
   @ViewChild('paymentMethod') paymentMethod: DropDownComponent;
   @ViewChild('serviceType') serviceType: DropDownComponent;
+  @ViewChild('companyAssociate') companyAssociate: CompanyAssociateComponent;
   allTitles: Array<string> = [];
   constructor(private companiesStateService: CompaniesStateService, private companiesService: CompaniesService,
     private usersStateService: UsersStateService, private modalService: NgbModal, private imageCropperStateService: ImageCropperStateService,
@@ -160,6 +162,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     this.paymentTerm.clearWithOutChanges();
     this.paymentMethod.clearWithOutChanges();
     this.serviceType.clearWithOutChanges();
+    this.companyAssociate.clearWithOutChanges();
 
 
   }
@@ -179,6 +182,8 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
       if (indexType > -1) this.onSelectCompanyTypes(this.companyTypes[indexType]);
       this.companyTags.setSelectedTag(this.company.tags);
       this.elRef.nativeElement.querySelector("#company-description").value = this.company.description;
+      this.companyAssociate.setEditItems(this.company.associatedCompanies.map(item => item.id));
+      // this.companyAssociate.getClientsList(this.companiesStateService.getCompanies());
       this.opened = true;
       this.cd.detectChanges();
     })
@@ -192,7 +197,11 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   public onChangeType() {
     this.validate.checkValidType(this.company.clientType);
   }
-
+  public onChangedAssociatedCompanies(data) {
+    this.company.associatedCompanies = data.map(item => {
+      return { id: item };
+    })
+  }
 
   public onSelectTechLead(event) {
     if (event) {
@@ -268,6 +277,9 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   }
   onSelectClientIndustry(item) {
     this.company.clientIndustry.name = (item) ? item.name : null;
+  }
+  getAssociatedCompaniesIds() {
+    return this.company.associatedCompanies.map(item => item.id);
   }
   public onChangeTags(tags) {
     this.company.setTags(tags);

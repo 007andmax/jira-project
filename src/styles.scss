@@ -532,6 +532,19 @@ documents-edit-info {
       }
     }
   }
+  company-associate {
+    .mat-form-field-wrapper {
+      &:before {
+        content: "Associated Companies" !important;
+      }
+    }
+    .mat-form-field-infix {
+      &:before {
+        display: none;
+      }
+      padding-left: 0px !important;
+    }
+  }
   documents-linked {
     .mat-form-field-appearance-legacy .mat-form-field-wrapper {
       &:before {

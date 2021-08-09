@@ -298,6 +298,9 @@
     <div class="col-md-12">
         <app-company-tags (tagsChange)="onChangeTags($event)"></app-company-tags>
     </div>
+    <div class="col-md-12">
+        <company-associate (companiesChange)="onChangedAssociatedCompanies($event)"></company-associate>
+    </div>
     <div class="col-md-12 editable-field">
         <p>Note for Company</p>
         <div class="editable-description">

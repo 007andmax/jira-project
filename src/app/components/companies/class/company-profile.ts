@@ -93,11 +93,12 @@ export class CompanyProfile {
         this.reputation = company.reputation;
         this.companyTicketStatistic = company.companyTicketStatistic;
         this.associatedCompanies = company.associatedCompanies.map(item => new CompanyAssociated(item));
-
+        console.log("this.associatedCompanies", this.associatedCompanies);
     }
     public getDataForUpdate() {
         let contacts = JSON.parse(JSON.stringify(this.contacts));
         return {
+            associatedCompanies: this.associatedCompanies,
             accountNumber: this.accountNumber,
             addresses: this.addresses,
             agentLinkToEmail: this.agentLinkToEmail,
@@ -128,6 +129,7 @@ export class CompanyProfile {
     public getDataForAdd() {
         let contacts = JSON.parse(JSON.stringify(this.contacts));
         return {
+            associatedCompanies: this.associatedCompanies,
             accountNumber: this.accountNumber,
             addresses: this.addresses,
             agentLinkToEmail: this.agentLinkToEmail,

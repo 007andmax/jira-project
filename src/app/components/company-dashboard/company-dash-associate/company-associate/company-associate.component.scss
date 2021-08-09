@@ -36,6 +36,7 @@
         }
     }
     .select-wrapper {
+        width: 366px !important;
         height: 260px;
         overflow: hidden;
         margin: 4px 0 0 !important;
@@ -50,7 +51,7 @@
 
             .qt-checkbox {
                 width: 100%;
-                /*  min-height: 30px;*/
+                min-height: auto;
                 max-height: 50px;
                 height: auto;
                 align-items: flex-start;
