@@ -18,10 +18,8 @@
   }
 
   &__header-title {
-    font-weight: 600;
-    //font-size: 18px;
-    //line-height: 26px;
-    //margin: 0;
+    @extend %h6-sb;
+    color: $primary-2;
   }
 
   &__header-title-line {

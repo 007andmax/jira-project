@@ -164,13 +164,13 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        font-family: Graphik-Medium, sans-serif;
+        font-weight: $fw-medium;
         flex-shrink: 0;
         color: white;
     }
     &__document-history-name {
         font-size: 13px;
-        font-family: Graphik-Medium, sans-serif;
+        font-weight: $fw-medium;
         margin-bottom: 6px;
         line-height: 1;
     }

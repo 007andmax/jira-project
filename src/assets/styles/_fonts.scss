@@ -26,6 +26,10 @@
 }
 %h6 {
   @include font-style(18px, 26px, 400, 0);
+
+  &-sb {
+    @include font-style(18px, 26px, 600, 0);
+  }
 }
 %body-l {
   @include font-style(16px, 24px, 400, 0);
@@ -34,8 +38,19 @@
     @include font-style(16px, 24px, 600, 0);
   }
 }
+%body-r {
+  @include font-style(14px, 20px, 400, 0);
+
+  &-m {
+    @include font-style(14px, 20px, 500, 0);
+  }
+}
 %body-m {
   @include font-style(13px, 20px, 400, 0);
+
+  &-m {
+    @include font-style(13px, 20px, 500, 0);
+  }
 
   &-sb {
     @include font-style(13px, 20px, 600, 0);

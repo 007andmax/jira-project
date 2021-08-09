@@ -166,12 +166,12 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        font-family: Graphik-Medium, sans-serif;
+        font-weight: $fw-medium;
         flex-shrink: 0;
     }
     &__document-history-name {
         font-size: 13px;
-        font-family: Graphik-Medium, sans-serif;
+        font-weight: $fw-medium;
         margin-bottom: 6px;
         line-height: 1;
     }
@@ -186,6 +186,7 @@
 
     .documents-create-panel {
         &__subheader {
+            display: flex;
             align-items: flex-start;
             padding: 24px;
 
@@ -204,7 +205,7 @@
 
         &__title {
             font-size: 18px;
-            font-family: Graphik-Medium, sans-serif;
+            font-weight: $fw-medium;
             color: $primary-2;
         }
 

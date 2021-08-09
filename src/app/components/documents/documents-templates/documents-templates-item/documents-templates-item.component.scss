@@ -35,7 +35,7 @@
         color: $primary-2;
         margin-top: 12px;
         margin-bottom: 16px;
-        font-family: Graphik-Semibold, sans-serif;
+        font-weight: $fw-medium;
         max-height: 44px;
         min-height: 44px;
         height: 44px;
@@ -47,7 +47,7 @@
         flex: 1;
         margin-left: 8px;
         margin-right: 4px;
-        font-family: Graphik-Medium, sans-serif;
+        font-weight: $fw-medium;
         color: $gray-700;
     }
 

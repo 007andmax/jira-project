@@ -83,6 +83,19 @@
       color: $gray-800;
     }
   }
+
+  th.products-table {
+    &__category,
+    &__cost,
+    &__sale-price,
+    &__mfg,
+    &__tac,
+    &__ilc,
+    &__gl {
+      color: $primary-2;
+    }
+  }
+
 }
 
 app-inventory-table {

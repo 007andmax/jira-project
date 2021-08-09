@@ -139,7 +139,7 @@
         color: $primary-2;
         margin-top: 12px;
         margin-bottom: 16px;
-        font-family: Graphik-Semibold, sans-serif;
+        font-weight: $fw-semi-bold;
         max-height: 44px;
         min-height: 44px;
         height: 44px;
@@ -176,7 +176,7 @@
     display: flex;
 
     &-item {
-      font-family: Graphik-Medium, sans-serif;
+      font-weight: $fw-medium;
       border-bottom: 2px solid transparent;
       padding: 14px 16px;
 

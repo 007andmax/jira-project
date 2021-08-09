@@ -109,14 +109,11 @@
   }
 
   &__menu-title {
-    font-size: 14px;
+    @extend %body-r-m;
     font-stretch: normal;
-    font-style: normal;
-    line-height: 1.43;
-    letter-spacing: normal;
     color: $gray-600;
     white-space: nowrap;
-    font-weight: 600;
+    font-weight: $fw-medium;
   }
 
   &__menu-icon {
@@ -216,11 +213,10 @@
     justify-content: space-between;
     padding: 0 24px 0 60px;
     cursor: pointer;
-    font-size: 13px;
+    @extend %body-m;
     color: $white;
     align-items: center;
     position: relative;
-    line-height: 1.1;
     a {
       color: $white;
       position: absolute;
@@ -315,6 +311,7 @@
     }
     &__menu-title {
       color: $white;
+      @extend %body-r-m;
     }
     &__menu-arrow {
       transform: rotate(180deg);

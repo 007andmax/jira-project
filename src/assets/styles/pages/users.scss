@@ -1,6 +1,11 @@
 @import "./src/assets/styles/variable";
 
 .users-page {
+  th.users-table__company,
+  th.users-table__contract-no,
+  th.users-table__tickets {
+    color: $primary-2;
+  }
   .users-table {
     &__check {
       padding: 12px 6px 12px 16px;
@@ -198,7 +203,7 @@
         &:before {
           position: absolute;
           content: "Tags";
-          font-family: "Graphik-Medium", sans-serif;
+          font-weight: $fw-semi-bold;
           font-size: 13px;
           left: 0;
           top: -28px;
@@ -207,7 +212,7 @@
       .mat-form-field-appearance-legacy .mat-form-field-label {
         padding: 12px 10px 10px 36px;
         font-size: 13px;
-        font-family: "Graphik-Regular", sans-serif;
+        font-weight: $fw-regular;
         color: $gray-600;
       }
       .mat-form-field-infix {

@@ -3,7 +3,7 @@
 @import "./assets/styles/icons.scss";
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "./assets/styles/main.scss";
-//@import "./assets/styles/fonts";
+@import "./assets/styles/fonts";
 
 .h1,
 h1 {
@@ -1467,7 +1467,7 @@ app-quotes-item {
       .mat-form-field-appearance-legacy .mat-form-field-label {
         padding: 9px 10px 9px 36px;
         color: #9ea6b7;
-        font-family: Graphik-Regular, sans-serif;
+        font-weight: $fw-regular;
         top: 12px;
       }
       .mat-form-field-infix {
@@ -1529,6 +1529,9 @@ app-quotes-item {
 
   .qt-table-modern th {
     padding: 8px;
+    @extend %сaption-m-sb;
+    color: $primary-2;
+    text-transform: uppercase;
   }
 
   .companies-table {
@@ -3414,7 +3417,7 @@ app-ticket-edit-aside-devices {
   height: 40px !important;
   padding: 0 12px !important;
   font-size: 13px !important;
-  border: 1px solid $gray-500;
+  border: 1px solid $gray-500 !important;
   border-radius: 4px !important;
 }
 

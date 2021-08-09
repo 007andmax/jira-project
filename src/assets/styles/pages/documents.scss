@@ -24,7 +24,7 @@
         padding-left: 5px;
         text-transform: uppercase;
         font-size: 8px;
-        font-family: "Graphik-Semibold", sans-serif;
+        font-weight: $fw-semi-bold;
         color: $white;
         top: -1px;
         left: -1px;
@@ -45,9 +45,9 @@
       min-width: 150px;
     }
     &__created-date {
-      width: 110px;
-      max-width: 110px;
-      min-width: 110px;
+      width: 116px;
+      max-width: 116px;
+      min-width: 116px;
     }
     &__review-date {
       width: 110px;
@@ -92,7 +92,7 @@
     line-height: 1;
 
     .title {
-      font-family: Graphik-Medium, sans-serif;
+      font-weight: $fw-medium;
     }
   }
 
@@ -111,7 +111,7 @@
       li {
         height: 48px;
         padding: 14px 12px 14px 20px;
-        font-family: Graphik-Medium, sans-serif;
+        font-weight: $fw-semi-bold;
       }
     }
   }

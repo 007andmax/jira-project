@@ -402,9 +402,7 @@ body {
     /*** All buttons ***/
 
     .btn {
-        font-size: 14px;
-        font-weight: 500;
-        line-height: 14px;
+        @extend %body-m-sb;
         letter-spacing: normal;
         color: $white;
         cursor: pointer;
@@ -434,8 +432,8 @@ body {
             }
         }
         &.btn-secondary {
-            background-color: $background;
-            // color: $gray-800;
+            background-color: $gray-300;
+            color: $gray-800;
             &:hover,
             &:focus {
                 background-color: $background;
