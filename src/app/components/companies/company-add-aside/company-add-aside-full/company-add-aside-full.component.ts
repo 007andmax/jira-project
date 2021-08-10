@@ -143,7 +143,7 @@ export class CompanyAddAsideFullComponent implements OnInit {
     this.validate.checkValidType(this.company.clientType);
   }
   onSelectClientIndustry(item) {
-    this.company.clientIndustry.name = item
+    this.company.clientIndustry.name = (item) ? item.name : null;
   }
   public onChangeDomain() {
     this.validate.checkValidDomain(this.company.domain);

@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { AppStateService } from 'src/app/states/app/app-state.service';
+import { ToastrService } from 'ngx-toastr';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +11,9 @@ import { HttpClient } from '@angular/common/http';
 export class CompanyProfileService {
   private apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService) { }
 
   getGroupedLocales() {
     return this.http.get(`${this.apiUrl}addresses/getGroupedLocales`);
@@ -16,6 +21,19 @@ export class CompanyProfileService {
 
   getCompanyProfile() {
     return this.http.get(`${this.apiUrl}settings/companyProfile/`);
+  }
+
+  checkDomain(domain) {
+    return this.http.get(`${this.apiUrl}domain/${domain}/check`);
+  }
+
+  setDomain(data) {
+    return this.http.post(`${this.apiUrl}settings/companyProfile/setNewDomain`, { domain: data }).pipe(
+      tap(data => {
+        this.toastrService.success("The new domain value has been successfully updated");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 
 

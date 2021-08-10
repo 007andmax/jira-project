@@ -4,6 +4,7 @@ import { forkJoin, Subscription } from 'rxjs';
 import { REBOOT_DEVICE, REMOVE_DEVICES, SHUTDOWN_DEVICE } from 'src/app/const/confirm';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
@@ -29,6 +30,7 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private permissionsService: PermissionsService,
     private confirmStateService: ConfirmStateService,
+    private companiesStateService: CompaniesStateService,
     private devicesService: DevicesService) { }
 
   ngOnInit() {
@@ -74,7 +76,8 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
     localStorage.setItem('company_id', this.companyId);
     localStorage.setItem('agentId', this.currentDevice.agentId);
     localStorage.setItem('type', this.currentDevice.type);
-    var url = '/#/ng2/device/dashboard';
+
+    var url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/dashboard/${this.currentDevice.type}/${this.currentDevice.agentId}`;
     window.open(url, '_blank');
   };
   turnOff(action) {

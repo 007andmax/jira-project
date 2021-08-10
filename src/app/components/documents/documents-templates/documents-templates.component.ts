@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { REMOVE_DOCUMENT } from 'src/app/const/confirm';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { AppStateService } from 'src/app/states/app/app-state.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
@@ -38,6 +39,7 @@ export class DocumentsTemplatesComponent implements OnInit, OnDestroy {
     public leftPanelStateService: LeftPanelStateService,
     private toastrService: ToastrService,
     private appStateService: AppStateService,
+    public companiesStateService: CompaniesStateService,
     private documentsStateService: DocumentsStateService) { }
 
   ngOnInit() {
@@ -85,7 +87,7 @@ export class DocumentsTemplatesComponent implements OnInit, OnDestroy {
   public goToDocumentsList() {
     if (this.companyId) {
       this.router.navigate(
-        ['/ng2/company/', this.companyId, 'documents']);
+        [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/company/`, this.companyId, 'documents']);
     } else {
       this.leftPanelStateService.goToState('new-documents');
     }

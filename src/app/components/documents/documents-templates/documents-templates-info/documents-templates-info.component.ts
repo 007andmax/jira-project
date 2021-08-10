@@ -1,7 +1,9 @@
 import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
 import { Document } from '../../class/document';
 declare var $: any;
@@ -17,6 +19,8 @@ export class DocumentsTemplatesInfoComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   constructor(private documentsStateService: DocumentsStateService,
     private elRef: ElementRef,
+    public router: Router,
+    public companiesStateService: CompaniesStateService,
     private permissionsService: PermissionsService,
     private documentsService: DocumentsService) { }
 
@@ -35,6 +39,15 @@ export class DocumentsTemplatesInfoComponent implements OnInit, OnDestroy {
       })
     })
     this.sub.add(onGetTemplate);
+  }
+  goToCloneDocument() {
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/documents/add`],
+      {
+        queryParams: {
+          'clone_document': this.document.id
+        }
+      });
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)

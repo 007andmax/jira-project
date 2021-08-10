@@ -59,273 +59,273 @@ import { DocumentsTemplatesComponent } from './components/documents/documents-te
 import { DocumentsEditComponent } from './components/documents/documents-edit/documents-edit.component';
 import { DocumentPreviewComponent } from './components/documents/document-preview/document-preview.component';
 import { CompanyDocumentsComponent } from './components/companies/company-documents/company-documents.component';
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
+
   {
-    path: '',
-    pathMatch: 'full',
-    redirectTo: '/ng2/tickets',
+    path: ':company/tickets',
+    component: TicketsComponent,
+    pathMatch: 'full'
   },
 
   {
-    path: 'ng2/password-manager',
+    path: ':company/password-manager',
     component: PasswordManagerComponent,
-    pathMatch: 'full'
+
   },
   {
-    path: 'ng2/company/:id/password-manager',
+    path: ':company/company/:id/password-manager',
     component: CompanyPasswordManagerComponent,
     pathMatch: 'full'
   },
   {
-    path: 'ng2/company/:id/user',
+    path: ':company/company/:id/user',
     component: CompanyUserComponent,
     pathMatch: 'full'
   },
   {
-    path: 'ng2/company/:id/tickets',
+    path: ':company/company/:id/tickets',
     component: CompanyTicketsComponent,
     pathMatch: 'full'
   },
   {
-    path: 'ng2/company/:id/dashboard',
+    path: ':company/company/:id/dashboard',
     component: CompanyDashboardComponent,
     pathMatch: 'full'
   },
   {
-    path: 'ng2/quotes',
+    path: ':company/quotes',
     component: QuotesComponent,
     pathMatch: 'full'
   },
   {
-    path: 'ng2/recurring-tickets',
+    path: ':company/recurring-tickets',
     component: RecurringTicketsComponent,
     pathMatch: 'full'
   },
   {
-    path: 'ng2/companies',
+    path: ':company/companies',
     component: CompaniesComponent,
   }, {
-    path: 'ng2/users',
+    path: ':company/users',
     component: UsersComponent,
     pathMatch: 'full'
   },
   {
-    path: 'ng2/reports',
+    path: ':company/reports',
     component: ReportsComponent,
     pathMatch: 'full'
   },
   {
-    path: 'ng2/report/:id',
+    path: ':company/report/:id',
     component: ItemReportComponent
   },
   {
-    path: 'ng2/setting/myprofile',
+    path: ':company/setting/myprofile',
     component: MyProfileComponent,
     pathMatch: 'full'
   },
   {
-    path: 'ng2/setting/tags',
+    path: ':company/setting/tags',
     component: ManageTagsComponent,
     pathMatch: 'full',
 
   },
   {
-    path: 'ng2/setting/companyprofile',
+    path: ':company/setting/companyprofile',
     component: CompanyProfileComponent,
     pathMatch: 'full',
   },
   {
-    path: 'ng2/setting/techUsers',
+    path: ':company/setting/techUsers',
     component: TechUsersComponent,
     pathMatch: 'full',
   },
   {
-    path: 'ng2/setting/emailSetting',
+    path: ':company/setting/emailSetting',
     component: EmailSettingComponent,
     pathMatch: 'full',
   },
   {
-    path: 'ng2/setting/taxes',
+    path: ':company/setting/taxes',
     component: TaxesSettingsComponent,
     pathMatch: 'full',
   },
   {
-    path: 'ng2/setting/glnumber',
+    path: ':company/setting/glnumber',
     component: GlNumberSettingsComponent,
     pathMatch: 'full',
   },
   {
-    path: 'ng2/setting/permission',
+    path: ':company/setting/permission',
     component: PermissionManageComponent,
     pathMatch: 'full',
   },
   {
-    path: 'ng2/setting/emailTemplete',
+    path: ':company/setting/emailTemplete',
     component: EmailTempleteComponent,
     pathMatch: 'full',
   },
   {
-    path: 'ng2/setting/integration',
+    path: ':company/setting/integration',
     component: IntegrationsComponent,
     pathMatch: 'full',
   },
   {
-    path: 'ng2/setting/invoiceTickets',
+    path: ':company/setting/invoiceTickets',
     component: InvoiceTicketsComponent,
     pathMatch: 'full',
   },
   {
-    path: 'ng2/setting/commission',
+    path: ':company/setting/commission',
     component: CommissionComponent,
     pathMatch: 'full',
   },
   {
-    path: 'ng2/setting/subscription',
+    path: ':company/setting/subscription',
     component: SubscriptionComponent,
     pathMatch: 'full',
   },
   {
-    path: 'ng2/inventory/products',
+    path: ':company/inventory/products',
     component: InventoryComponent,
     pathMatch: 'full'
   },
   {
-    path: 'ng2/documents/add',
+    path: ':company/documents/add',
     component: DocumentsAddComponent,
     pathMatch: 'full'
   },
   {
-    path: 'ng2/documents/edit/:id',
+    path: ':company/documents/edit/:id',
     component: DocumentsEditComponent,
     pathMatch: 'full'
   },
   {
-    path: 'ng2/documents/category/:id',
+    path: ':company/documents/category/:id',
     component: DocumentsCategoryComponent,
     pathMatch: 'full'
   },
   {
-    path: 'ng2/company/:id/documents',
+    path: ':company/company/:id/documents',
     component: CompanyDocumentsComponent,
     pathMatch: 'full'
   },
   {
-    path: 'ng2/documents/preview/:id',
+    path: ':company/documents/preview/:id',
     component: DocumentPreviewComponent,
     pathMatch: 'full'
   },
   {
-    path: 'ng2/company/:id/products',
+    path: ':company/company/:id/products',
     component: CompanyProductsComponent,
     pathMatch: 'full'
   },
+
   {
-    path: 'ng2/tickets',
-    component: TicketsComponent,
-  },
-  {
-    path: 'ng2/billable',
+    path: ':company/billable',
     component: BillableComponent,
   },
   {
-    path: 'ng2/default-services',
+    path: ':company/default-services',
     component: DefaultServicesComponent,
   },
   {
-    path: 'ng2/invoices',
+    path: ':company/invoices',
     component: InvoicesComponent,
   },
   {
-    path: 'ng2/billable-tickets',
+    path: ':company/billable-tickets',
     component: BillableTicketsComponent,
   },
   {
-    path: 'ng2/contracts',
+    path: ':company/contracts',
     component: ContractsComponent,
   },
   {
-    path: 'ng2/payments',
+    path: ':company/payments',
     component: PaymentsComponent,
   },
   {
-    path: 'ng2/device/dashboard/:type/:id',
+    path: ':company/device/dashboard/:type/:id',
     component: DashboardComponent
   },
   {
-    path: 'ng2/device/hardware/:type/:id',
+    path: ':company/device/hardware/:type/:id',
     component: HardwareComponent
   },
   {
-    path: 'ng2/device/software/:type/:id',
+    path: ':company/device/software/:type/:id',
     component: SoftwareComponent
   },
   {
-    path: 'ng2/device/service',
+    path: ':company/device/service',
     component: ServicesComponent
   },
   {
-    path: 'ng2/device/antivirus',
+    path: ':company/device/antivirus',
     component: AntivirusComponent
   },
   {
-    path: 'ng2/device/terminal/:type/:id',
+    path: ':company/device/terminal/:type/:id',
     component: TerminalComponent
   },
   {
-    path: 'ng2/device/password',
+    path: ':company/device/password',
     component: PasswordComponent
   },
   {
-    path: 'ng2/device/window',
+    path: ':company/device/window',
     component: WindowsComponent
   },
   {
-    path: 'ng2/device/startup',
+    path: ':company/device/startup',
     component: StartupComponent
   },
   {
-    path: 'ng2/device/file',
+    path: ':company/device/file',
     component: FileComponent
   },
   {
-    path: 'ng2/billing-dashboard',
+    path: ':company/billing-dashboard',
     component: DashboardBillingComponent,
     canActivate: [PermissionDasnboardBillingService]
 
   },
   {
-    path: 'ng2/company/:id/contracts',
+    path: ':company/company/:id/contracts',
     component: CompanyContractsComponent
   },
   {
-    path: 'ng2/tickets-dashboard',
+    path: ':company/tickets-dashboard',
     component: TicketsDashboardComponent
   },
   {
-    path: 'ng2/company/:id/network-scan',
+    path: ':company/company/:id/network-scan',
     component: CompanyNetworkScanComponent
   },
   {
-    path: 'ng2/company/:id/devices',
+    path: ':company/company/:id/devices',
     component: CompanyDevicesComponent,
 
   },
   {
-    path: 'ng2/quickSupport',
+    path: ':company/quickSupport',
     component: SupportComponent,
 
   },
   {
-    path: 'ng2/documents',
-    component: DocumentsComponent,
-
-  },
-  {
-    path: 'ng2/documents/templates',
+    path: ':company/documents/templates',
     component: DocumentsTemplatesComponent,
 
   },
+  {
+    path: ':company/documents',
+    component: DocumentsComponent,
+
+  },
+
 
 ];
 
@@ -334,10 +334,7 @@ const routes: Routes = [
  */
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, {
-      useHash: true,
-      enableTracing: false,
-    }),
+    RouterModule.forRoot(routes, { useHash: true }),
   ],
   exports: [RouterModule],
 })

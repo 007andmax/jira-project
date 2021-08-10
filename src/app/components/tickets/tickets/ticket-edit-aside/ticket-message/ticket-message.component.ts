@@ -38,9 +38,7 @@ export class TicketMessageComponent implements OnInit {
     this.currentUser = this.usersStateService.getCurrentUser();
     this.usersStateService.onGetCurrentUser.subscribe(data => {
       this.currentUser = data;
-      console.log("this.currentUser", this.currentUser);
     })
-    console.log("this.currentUser", this.currentUser);
   }
   public getUserName(user: CurrentUser) {
     return (user) ? `${user.firstName} ${user.lastName}` : '';

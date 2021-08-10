@@ -319,10 +319,16 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
           this.loading = false; $(".loading").css("display", "none");
           if (res) {
             this.cProfile.address = res.addresses;
-            this.cProfile.address[0].timeZone = new TimeZone({
-              first: res.addresses[0].timeZone.displayName,
-              second: res.addresses[0].timeZone.name,
+            if (this.cProfile.address.length > 0) this.cProfile.address[0].timeZone = new TimeZone({
+              first: (res.addresses.length > 0 && res.addresses[0].timeZone) ? res.addresses[0].timeZone.displayName : "",
+              second: (res.addresses.length > 0 && res.addresses[0].timeZone) ? res.addresses[0].timeZone.name : "",
             })
+            if (this.cProfile.address.length === 0) this.cProfile.address = [{
+              timeZone: new TimeZone({
+                first: "",
+                second: "",
+              })
+            }]
             this.cProfile.logo = res.logo;
             this.cProfile.name = res.name;
             this.cProfile.timeSettings = res.responseTimeSettings;
@@ -352,7 +358,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
 
             this.cProfileForm.patchValue({
               name: res.name,
-              url: res.supportMailBox,
+              url: res.domain,
               suiteNumber: res.addresses.length === 0 ? '' : res.addresses[0].suiteNumber,
               address: res.addresses.length === 0 ? '' : res.addresses[0].address,
               postalCode: res.addresses.length === 0 ? '' : res.addresses[0].postalCode
@@ -367,9 +373,9 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
 
             for (let i = 0; i < this.cProfile.address.length; i++) {
               const phoneNumbers = this.cProfile.address[i].phoneNumbers,
-                firstPhone = phoneNumbers[0],
+                firstPhone = (phoneNumbers) ? phoneNumbers[0] : null,
                 lastPhone =
-                  phoneNumbers.length > 1
+                  phoneNumbers && phoneNumbers.length > 1
                     ? phoneNumbers[phoneNumbers.length - 1]
                     : '';
 
@@ -397,12 +403,49 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
         },
         error => {
           this.loading = false; $(".loading").css("display", "none");
-
         }
       );
     } catch (error) {
       this.loading = false; $(".loading").css("display", "none");
     }
+  }
+  checkValidateDomain() {
+    var regex = /^[a-zA-Z\d\-]+$/;
+
+    if (!regex.test(this.cProfileForm.get(
+      'url'
+    ).value)) this.cProfileForm.get(
+      'url'
+    ).setErrors({ 'invalidate': true });
+    if (regex.test(this.cProfileForm.get(
+      'url'
+    ).value)) this.cProfileForm.get(
+      'url'
+    ).setErrors({ 'invalidate': false });
+
+  }
+  checkDomain() {
+    if (this.cProfileForm.get('url').getError('invalidate')) return;
+    this.companyProfileService.checkDomain(this.cProfileForm.get(
+      'url'
+    ).value).subscribe(data => {
+      this.cProfileForm.get(
+        'url'
+      ).setErrors({ 'incorrect': true });
+    }, err => {
+      this.cProfileForm.get(
+        'url'
+      ).setErrors({ 'incorrect': false });
+      this.setDomain();
+    })
+
+  }
+  setDomain() {
+    this.companyProfileService.setDomain(this.cProfileForm.get(
+      'url'
+    ).value).subscribe(data => {
+
+    })
   }
 
   /**
@@ -446,7 +489,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
           this.url = this.url
             ? this.url + '.' + res['website.dns']
             : res['website.dns'];
-          this.cProfileForm.patchValue({ url: this.url });
+          // this.cProfileForm.patchValue({ url: this.url });
         }
       },
       error => { }

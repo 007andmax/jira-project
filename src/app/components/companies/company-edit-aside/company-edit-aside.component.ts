@@ -21,6 +21,7 @@ import { UsersService } from 'src/app/services/users/users.service';
 import { User } from '../../users/class/user';
 import { CompanyIndustry } from 'src/app/interfaces/company/company-industry';
 import { CompanyTagsComponent } from '../company-tags/company-tags.component';
+import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 
 @Component({
   selector: 'app-company-edit-aside',
@@ -51,6 +52,11 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   locationIsinit: boolean = false;
   @ViewChild('companyTags') companyTags: CompanyTagsComponent;
   @ViewChild('addresstext') addresstext: any;
+  @ViewChild('clientType') clientType: DropDownComponent;
+  @ViewChild('designation') designation: DropDownComponent;
+  @ViewChild('paymentTerm') paymentTerm: DropDownComponent;
+  @ViewChild('paymentMethod') paymentMethod: DropDownComponent;
+  @ViewChild('serviceType') serviceType: DropDownComponent;
   allTitles: Array<string> = [];
   constructor(private companiesStateService: CompaniesStateService, private companiesService: CompaniesService,
     private usersStateService: UsersStateService, private modalService: NgbModal, private imageCropperStateService: ImageCropperStateService,
@@ -149,6 +155,12 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(item => item.selected = false);
     this.selectedTechLead = null;
     this.validate = new CompanyValdiate();
+    this.clientType.clearWithOutChanges();
+    this.designation.clearWithOutChanges();
+    this.paymentTerm.clearWithOutChanges();
+    this.paymentMethod.clearWithOutChanges();
+    this.serviceType.clearWithOutChanges();
+
 
   }
   onEditCompany() {
@@ -255,7 +267,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     this.company.addresses[0].locale = (data) ? data.second : '';
   }
   onSelectClientIndustry(item) {
-    this.company.clientIndustry.name = item
+    this.company.clientIndustry.name = (item) ? item.name : null;
   }
   public onChangeTags(tags) {
     this.company.setTags(tags);
