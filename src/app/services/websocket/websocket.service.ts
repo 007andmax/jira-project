@@ -75,7 +75,9 @@ export class WebsocketService {
     let ws = new SockJS(this.serverUrl);
     this.stompClient = Stomp.over(ws);
     this.onConnect();
-
+    ws.onclose = (data) => {
+      console.log("onclose 1", data);
+    };
 
   }
   onConnect() {
