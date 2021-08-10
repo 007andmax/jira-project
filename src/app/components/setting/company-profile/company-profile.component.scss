@@ -1,29 +1,30 @@
-
 /*** All css files include ***/
-@import "./src/assets/styles/variable";
-@import '../../../../assets/scss/mixin';
-@import '../../../../assets/scss/custom';
+@import "../../../../assets/scss/variable";
+@import "../../../../assets/scss/mixin";
+@import "../../../../assets/scss/custom";
 
-.company-profile{
+.company-profile {
     margin-bottom: 25px;
-    .f-row{overflow: visible;}
+    .f-row {
+        overflow: visible;
+    }
     .cmn-area {
         .dp-area {
-            .dp-info{
-                @media only screen and (max-width:768px){
+            .dp-info {
+                @media only screen and (max-width: 768px) {
                     width: calc(100% - 200px);
                 }
-                @media only screen and (max-width:576px){
+                @media only screen and (max-width: 576px) {
                     width: 100%;
                     margin-top: 15px;
                 }
             }
-            .dp{
+            .dp {
                 width: auto;
                 height: auto;
                 max-width: 200px;
                 @include border-radius(0);
-                img{
+                img {
                     height: auto;
                     width: auto;
                     max-width: 100%;
@@ -35,13 +36,15 @@
             }
         }
     }
-    @media only screen and (max-width:768px){
-    .btn.btn-primary{position: fixed;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 1;
-        width: 100%;}
+    @media only screen and (max-width: 768px) {
+        .btn.btn-primary {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+            width: 100%;
+        }
     }
 }
 .outlair {
@@ -79,16 +82,16 @@
                 line-height: 15px;
                 height: 8px;
                 width: 8px;
-                right:5px;
+                right: 5px;
                 position: absolute;
-                &.plus{
+                &.plus {
                     background: url("../../../../assets/img/filter-dropdown-up.svg") no-repeat center;
-                    top:5px;
+                    top: 5px;
                     background-size: 8px auto;
                 }
-                &.minus{
+                &.minus {
                     background: url("../../../../assets/img/filter-dropdown-down.svg") no-repeat center;
-                    top:15px;
+                    top: 15px;
                     background-size: 8px auto;
                 }
             }
@@ -104,7 +107,6 @@
             margin-left: 2px;
         }
     }
-
 }
 .c-hours {
     float: left;
@@ -117,11 +119,11 @@
         // padding-bottom: 13px;
         // border-bottom: 1px solid $background;
     }
-    ul{
+    ul {
         &.list-unstyled {
             margin-bottom: 0;
             width: 100%;
-            @media only screen and (max-width:576px){
+            @media only screen and (max-width: 576px) {
                 margin-bottom: 20px;
             }
             li {
@@ -130,19 +132,19 @@
                 align-items: center;
                 flex-direction: row;
                 margin-bottom: 16px !important;
-                @media only screen and (max-width:576px){
+                @media only screen and (max-width: 576px) {
                     flex-direction: column;
                     align-items: flex-start;
                 }
-                &:last-child{
+                &:last-child {
                     margin-bottom: 0 !important;
                 }
-            & > div {
+                & > div {
                     position: relative;
                     &.cmn-checkbox {
                         width: 173px;
                         padding-right: 15px;
-                        @media only screen and (max-width:576px){
+                        @media only screen and (max-width: 576px) {
                             margin-bottom: 15px;
                             width: 100%;
                         }
@@ -150,7 +152,7 @@
                     &.time-zone {
                         display: inline-block;
                         vertical-align: middle;
-                        @media only screen and (max-width:576px){
+                        @media only screen and (max-width: 576px) {
                             display: block;
                             width: 100%;
                         }
@@ -160,7 +162,7 @@
                             width: 120px;
                             margin-right: 44px;
                             position: relative;
-                            @media only screen and (max-width:576px){
+                            @media only screen and (max-width: 576px) {
                                 width: 41%;
                             }
                             &:last-child {
@@ -187,21 +189,20 @@
                     }
                 }
             }
-
         }
     }
 }
 
 .invalid-feedback {
     // width: 100%;
-    margin-top: .25rem;
+    margin-top: 0.25rem;
     font-size: 80%;
     color: $error;
-  }
+}
 
-  input.ng-invalid.is-invalid {
+input.ng-invalid.is-invalid {
     border: 1px solid $error;
-  }
+}
 
 /*** Work Place ***/
 
@@ -240,18 +241,17 @@
     }
 }
 
-
-
 .date-area {
     position: relative;
-    a{
+    a {
         position: absolute;
         top: 0;
         right: 15px;
     }
 }
 
-input.form-control.sub-label-field, select.cmn-select {
+input.form-control.sub-label-field,
+select.cmn-select {
     background-color: $white;
     &[disabled] {
         cursor: not-allowed;
@@ -259,22 +259,6 @@ input.form-control.sub-label-field, select.cmn-select {
         border-color: $background;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.--required {
+    position: relative;
+}

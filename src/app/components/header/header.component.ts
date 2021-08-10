@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { CompaniesService } from 'src/app/services/company/companies.service';
 import { Company } from '../../interfaces/company/company';
 import { CompaniesStateService } from '../../states/company/companies-state.service';
 import { DefaultServicesStateService } from '../../states/default-services/default-services-state.service';
@@ -23,6 +24,7 @@ export class HeaderComponent implements OnInit {
     private defaultServicesStateService: DefaultServicesStateService,
     private leftPanelStateService: LeftPanelStateService,
     public cd: ChangeDetectorRef,
+    private companiesService: CompaniesService,
     private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
@@ -49,6 +51,7 @@ export class HeaderComponent implements OnInit {
        e.initEvent('click', true, true);
        link.dispatchEvent(e);*/
   }
+
   onAddTicket() {
     this.ticketsStateService.onToggleAddTicket();
   }

@@ -55,15 +55,12 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     private companiesStateService: CompaniesStateService,
   ) {
-    const currentComapnyId = localStorage.getItem('currentComapnyId');
-    if (currentComapnyId) {
-      this.currentCompanyId = currentComapnyId;
-    } else {
-      if (this.companiesStateService.getCurrentCompany()) this.currentCompany(this.companiesStateService.getCurrentCompany());
-      this.companiesStateService.onCurrentCompany.subscribe(res => {
-        this.currentCompany(res);
-      })
-    }
+
+    if (this.companiesStateService.getCurrentCompany()) this.currentCompany(this.companiesStateService.getCurrentCompany());
+    this.companiesStateService.onCurrentCompany.subscribe(res => {
+      this.currentCompany(res);
+    })
+
   }
 
   /**

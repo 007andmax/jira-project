@@ -173,13 +173,13 @@
             </app-drop-down>
         </div>
         <div class="col-md-6">
-            <p>Phone Number</p>
+            <p>Primary Phone Number</p>
             <div class="with-number-types">
                 <input
                     type="text"
                     *ngIf="company.contacts[0].phoneNumbers.length > 0"
                     [(ngModel)]="company.contacts[0].phoneNumbers[0].number"
-                    placeholder="Enter Phone Number"
+                    placeholder="Enter Primary Number"
                 >
                 <div
                     class="grey-dropdown"

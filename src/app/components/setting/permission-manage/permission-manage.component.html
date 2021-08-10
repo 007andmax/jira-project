@@ -46,7 +46,7 @@
                                         href="javascript:;"
                                         data-tooltip="Remove"
                                         class="delete-ico"
-                                        (click)="deleteRole(role.id, true); delete = !delete"
+                                        (click)="deleteRole(role.id, true);"
                                     >
                                         <img
                                             src="/html/assets/img/icons/remove-12.svg"
@@ -141,20 +141,11 @@
         </div>
         <!-- <div class="loading" *ngIf="loading"></div> -->
     </div>
-
-
-
-
-
-
-
-
 </div>
 <!-- sidebar popup edit -->
 <div
-    class="sidebar-popup role-dlt"
-    [class.opened]="delete"
-    *ngIf="usersToShift"
+    class="sidebar-popup role-dlt opened"
+    *ngIf="showDeleteRole"
 >
     <!-- header -->
     <div class="sidebar-header">
@@ -162,7 +153,7 @@
         <a
             class="close"
             href="javascript:;"
-            (click)="delete = !delete"
+            (click)="showDeleteRole = !showDeleteRole"
         >
             <img
                 src="/html/assets/img/icons/close.svg"
@@ -262,7 +253,7 @@
                 <a
                     href="javascrip:;"
                     class="btn btn-secondary"
-                    (click)="delete = !delete"
+                    (click)="showDeleteRole = !showDeleteRole"
                 >
                     Cancel
                 </a>

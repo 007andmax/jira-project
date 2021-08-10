@@ -66,12 +66,14 @@
                 [validate]="validate.getType()"
                 [errorMessage]="'Client Type is required'"
                 [title]="'Company Type'"
+                [isBlockClear]="true"
                 (onSelectedItem)="onSelectCompanyTypes($event)"
             >
             </app-drop-down>
         </div>
         <div class="col-md-6">
             <app-drop-down
+                #clientType
                 [class]="['light-dropdown', 'qt-select-input-40']"
                 [placeholder]="'Select Client Type'"
                 [editItem]="getSelectedClientTypes()"
@@ -178,7 +180,7 @@
         </div>
         <div class="col-md-6">
             <app-drop-down
-                #role
+                #designation
                 [class]="['light-dropdown', 'qt-select-input-40']"
                 [placeholder]="'Select Designation'"
                 [editItem]="(company.contacts[0].designation) ? company.contacts[0].designation : null"
@@ -231,9 +233,6 @@
                         </ng-template>
                     </div>
                 </div>
-
-
-
             </div>
         </div>
         <div class="col-md-6 --required">
@@ -271,6 +270,7 @@
         </div>
         <div class="col-md-6">
             <app-drop-down
+                #paymentTerm
                 [class]="['light-dropdown', 'qt-select-input-40']"
                 [placeholder]="'Select Payment Terms'"
                 [field]="'title'"
@@ -285,6 +285,7 @@
         </div>
         <div class="col-md-6">
             <app-drop-down
+                #paymentMethod
                 [class]="['light-dropdown', 'qt-select-input-40']"
                 [placeholder]="'Select Payment Method'"
                 [field]="'title'"
@@ -299,6 +300,7 @@
         </div>
         <div class="col-md-6">
             <app-drop-down
+                #serviceType
                 [class]="['light-dropdown', 'qt-select-input-40']"
                 [placeholder]="'Select Service Type'"
                 [field]="'title'"

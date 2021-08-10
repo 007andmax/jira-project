@@ -37,6 +37,7 @@
 ></app-drop-down>
 <app-company-tags
     #tagsDp
+    [filter]="true"
     class="filter-category dropdown companies-filter-tags"
     (tagsChange)="onChangeTags($event)"
 ></app-company-tags>

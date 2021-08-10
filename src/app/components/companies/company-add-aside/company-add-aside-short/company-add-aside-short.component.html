@@ -37,12 +37,20 @@
         </app-drop-down>
     </div>
     <div class="col-md-6 primary-number">
-        <p>Primary Number</p>
+        <mat-error
+            class="qt-tooltip-error"
+            *ngIf="!validate.getPhoneNumber()"
+        >
+            Phone number is required
+        </mat-error>
+        <p>Phone Number</p>
         <input
             type="text"
-            *ngIf="company.contacts[0].phoneNumbers.length > 0"
-            [(ngModel)]="company.contacts[0].phoneNumbers[0].number"
-            placeholder="Enter Primary Phone"
+            *ngIf="company.addresses[0].phoneNumbers.length > 0"
+            [ngClass]="{'--input-error' : !validate.getPhoneNumber()}"
+            [(ngModel)]="company.addresses[0].phoneNumbers[0].number"
+            placeholder="Enter Phone Number"
+            (input)="onChangePhoneNumber()"
         >
     </div>
     <div class="col-md-12 --required">
@@ -92,20 +100,12 @@
         >
     </div>
     <div class="col-md-6 --required">
-        <mat-error
-            class="qt-tooltip-error"
-            *ngIf="!validate.getPhoneNumber()"
-        >
-            Phone number is required
-        </mat-error>
-        <p>Phone Number</p>
+        <p>Primary Number</p>
         <input
             type="text"
-            *ngIf="company.addresses[0].phoneNumbers.length > 0"
-            [ngClass]="{'--input-error' : !validate.getPhoneNumber()}"
-            [(ngModel)]="company.addresses[0].phoneNumbers[0].number"
-            placeholder="Enter Phone Number"
-            (input)="onChangePhoneNumber()"
+            *ngIf="company.contacts[0].phoneNumbers.length > 0"
+            [(ngModel)]="company.contacts[0].phoneNumbers[0].number"
+            placeholder="Enter Primary Phone"
         >
     </div>
     <div class="col-md-6 --required">
@@ -125,23 +125,19 @@
         >
     </div>
     <div class="col-md-12">
-        <div
-            class="switch-link"
-        >
+        <div class="switch-link">
             Would you like to Create Company in Advance mode?
         </div>
-      <div
-        class="info-section"
-      >
-        <div class="icon__tips qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6"></div>
-        Advance Company mode will provide user to add more detail like Settings, Primary
+        <div class="info-section">
+            <div class="icon__tips qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6"></div>
+            Advance Company mode will provide user to add more detail like Settings, Primary
         Contact detail etc…
-      </div>
-      <button
-        class="btn-new btn-primary-white qt-mt-16"
-        (click)="initFullVersion()"
-      >
-        + Create Company in Advance Mode
-      </button>
+        </div>
+        <button
+            class="btn-new btn-primary-white qt-mt-16"
+            (click)="initFullVersion()"
+        >
+            + Create Company in Advance Mode
+        </button>
     </div>
 </div>

@@ -32,6 +32,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
   sub = new Subscription();
   @Input() editItems: Array<string>;
   @Input() placement: string;
+  @Input() filter: boolean = false;
   @Input() blockCreateTag: boolean = false;
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @ViewChild('dp') dp: any;
@@ -115,7 +116,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
       this.infiniteScrollDisabled = false;
       return;
     }
-    this.tagsService.search(this.page, this.searchName).subscribe((data: any) => {
+    this.tagsService.search(this.page, this.searchName, this.filter).subscribe((data: any) => {
       if (searchName && this.tags.length > 0) {
         this.tags = [];
         this.reqTags = [];

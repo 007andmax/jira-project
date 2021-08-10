@@ -253,18 +253,32 @@
                     <div class="cmn-area workspace">
                         <form
                             [formGroup]="cProfileForm"
-                            (ngSubmit)="onSubmit()"
+                            (ngSubmit)="checkDomain()"
                         >
                             <div class="f-row">
                                 <div class="f-col col-100">
                                     <label>Company URL</label>
                                     <div class="form-row">
-                                        <div class="custm-url">
+                                        <div class="custm-url --required">
+                                            <mat-error
+                                                class="qt-tooltip-error"
+                                                *ngIf="cProfileForm.get('url').getError('incorrect')"
+                                            >
+                                                Ticket Subject is required
+                                            </mat-error>
+                                            <mat-error
+                                                class="qt-tooltip-error"
+                                                *ngIf="cProfileForm.get('url').getError('invalidate')"
+                                            >
+                                                Please enter a valid company domain.
+                                            </mat-error>
                                             <input
+                                                [ngClass]="{'--input-error' : cProfileForm.get('url').getError('incorrect') || cProfileForm.get('url').getError('invalidate')}"
                                                 type="text"
                                                 class="form-input"
                                                 placeholder="Enter Your Company URL"
                                                 formControlName="url"
+                                                (input)="checkValidateDomain()"
                                             >
                                             <span class="slug">.quicktech.com</span>
                                         </div>
@@ -378,18 +392,6 @@
             </ngb-tab>
             <ngb-tab title="Accounting Year">
                 <ng-template ngbTabContent>
-
-
-
-
-
-
-
-
-
-
-
-
                     <form (ngSubmit)="saveAccountingDate()">
                         <div class="f-row">
                             <div class="f-col col-50  date-area">
@@ -439,16 +441,4 @@
         </ngb-tabset>
         <!-- <div class="loading" *ngIf="loading"></div> -->
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
 </div>

@@ -33,8 +33,7 @@
                     <li
                         class="pointer"
                         ngbDropdownItem
-                        routerLink="/ng2/documents/add"
-                        [queryParams]="{'clone_document':documentEdit.id}"
+                        (click)="goToCloneDocument()"
                         *ngIf="getPermissions('CREATE_DOCUMENT')"
                     >
                         <div class="icon__clone-document qt-sz-16 qt-bg-contain qt-mr-8"></div>

@@ -9,7 +9,8 @@ import { CONFIGCONSTANTS } from '../config/app-constants';
 import { Router } from '@angular/router';
 import * as moment from "moment";
 import { System, Graphics, Motherboard, Bios, Processor, Display, LogicalDisk, Memory, Adapter, DeviceDetail } from './class/system';
-declare var $:any;
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+declare var $: any;
 @Component({
   selector: 'app-hardware',
   templateUrl: './hardware.component.html',
@@ -18,7 +19,7 @@ declare var $:any;
 export class HardwareComponent implements OnInit {
 
   companyUuid: string = '';
-  hardwareDetail: object ={};
+  hardwareDetail: object = {};
   system: System;
   graphics: Graphics;
   motherBoard: Motherboard;
@@ -47,17 +48,18 @@ export class HardwareComponent implements OnInit {
   type: string = '';
   DateTimeFormat = CONFIGCONSTANTS.DateTimeFormat;
   constructor(private hardwareService: HardwareService, private toastr: ToastrService,
-				 private commonHttpServices: CommonHttpServices,
-         private deviceDetailService: DeviceDetailService,
-         private router: Router,
-         private excelService: ExcelService) {}
+    private commonHttpServices: CommonHttpServices,
+    private deviceDetailService: DeviceDetailService,
+    private router: Router,
+    private companiesStateService: CompaniesStateService,
+    private excelService: ExcelService) { }
 
   ngOnInit() {
     this.type = window.location.href.split('/')[window.location.href.split('/').length - 2];
     this._id = window.location.href.split('/')[window.location.href.split('/').length - 1];
     // $('main').css('margin-right', '64px')
-    if(this.type === 'printer') {
-      this.router.navigate([`/ng2/device/dashboard/${this.type}/${this._id}`]);
+    if (this.type === 'printer') {
+      this.router.navigate([`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/dashboard/${this.type}/${this._id}`]);
     }
     this.deviceDetail = JSON.parse(localStorage.getItem('deviceDetail_' + this._id));
     this.hardwareDetail = this.deviceDetailService.getDevice();
@@ -74,23 +76,23 @@ export class HardwareComponent implements OnInit {
 
     this.loading = true;
     this.hardwareService.getAllHardwareList(localStorage.getItem('company_id'), this.deviceDetail['agentId'])
-    .pipe(first())
-    .subscribe(
-      resp => {
-        this.deviceDetailService.addDevice(resp);
-        this.hardwareDetail = this.deviceDetailService.getDevice();
-        this.setData();
-        this.getPdfData();
-        this.loading = false;
-      },
-      error => {
-      this.loading = false;
-      this.toastr.error('Something went wrong please try again.');
-      }
-    );
+      .pipe(first())
+      .subscribe(
+        resp => {
+          this.deviceDetailService.addDevice(resp);
+          this.hardwareDetail = this.deviceDetailService.getDevice();
+          this.setData();
+          this.getPdfData();
+          this.loading = false;
+        },
+        error => {
+          this.loading = false;
+          this.toastr.error('Something went wrong please try again.');
+        }
+      );
   }
 
-  setData () {
+  setData() {
     this.system = this.hardwareDetail['reports'][0].system || {};
     this.deviceName = this.hardwareDetail['reports'][0].deviceName;
     this.graphics = this.hardwareDetail['reports'][0].videoCards[0] || {};
@@ -122,14 +124,14 @@ export class HardwareComponent implements OnInit {
       ['Socket & Cache(s)', 'N/A']
     ];
     this.printMemory = [
-      ['Memory', this.memory['capacity'] != undefined ? (this.memory['capacity']/1024/1024) + ' MB RAM' : 'N/A']
+      ['Memory', this.memory['capacity'] != undefined ? (this.memory['capacity'] / 1024 / 1024) + ' MB RAM' : 'N/A']
     ];
     this.printNetwork = [
       ['Model(s)', this.networkAdapters['description'] || 'N/A'],
       ['IP', this.networkAdapters['ip_address'] || 'N/A'],
       ['Subnet Mask', this.networkAdapters['subnet'] || 'N/A'],
       ['Preferred DNS Server', this.networkAdapters['dns'] || 'N/A'],
-      ['Link Speed', this.networkAdapters['speed'] != undefined ? (this.networkAdapters['speed']/1000000) + ' (MegaBit)' : 'N/A'],
+      ['Link Speed', this.networkAdapters['speed'] != undefined ? (this.networkAdapters['speed'] / 1000000) + ' (MegaBit)' : 'N/A'],
       ['External IP', this.externalIp || 'N/A'],
       ['MAC', this.formatMacAddress(this.networkAdapters['mac']) || 'N/A'],
       ['DHCP', this.networkAdapters['dhcp_server'] || 'N/A'],
@@ -137,7 +139,7 @@ export class HardwareComponent implements OnInit {
     this.printGraphic = [
       ['Model', this.graphics['hardwareDeviceName'] || 'N/A'],
       ['Video Processor', 'N/A'],
-      ['Memory Size', this.graphics['memory'] != undefined ? (this.graphics['memory']/1024/1024) + ' MB VRAM' : 'N/A'],
+      ['Memory Size', this.graphics['memory'] != undefined ? (this.graphics['memory'] / 1024 / 1024) + ' MB VRAM' : 'N/A'],
       ['Driver', 'version ' + this.graphics['driverVersion']]
     ];
     this.printDisplay = [
@@ -149,8 +151,8 @@ export class HardwareComponent implements OnInit {
     this.printDisk = [
       ['Model', this.logicalDisks['device_id'] || 'N/A'],
       ['File Format(s)', 'NTFS ' + this.logicalDisks['device_id']],
-      ['Size', this.logicalDisks['size'] != undefined ? (this.logicalDisks['size']/1024/1024) + ' GB' : 'N/A'],
-      ['Free Space', this.logicalDisks['free_space'] != undefined ? (this.logicalDisks['free_space']/1024/1024) + ' GB' : 'N/A']
+      ['Size', this.logicalDisks['size'] != undefined ? (this.logicalDisks['size'] / 1024 / 1024) + ' GB' : 'N/A'],
+      ['Free Space', this.logicalDisks['free_space'] != undefined ? (this.logicalDisks['free_space'] / 1024 / 1024) + ' GB' : 'N/A']
     ];
     this.printOS = [
       ['Name', this.system['caption'] || 'N/A'],
@@ -161,7 +163,7 @@ export class HardwareComponent implements OnInit {
   }
 
   formatMacAddress = function (mac: any) {
-    if(mac) {
+    if (mac) {
       return mac.match(/.{1,2}/g).join(' ');
     } else {
       return 'N/A';
@@ -169,51 +171,51 @@ export class HardwareComponent implements OnInit {
 
   };
 
-  downloadCsv(){
+  downloadCsv() {
     let downloadCsvList = [];
-    downloadCsvList.push({label: 'Computer', value: ''});
+    downloadCsvList.push({ label: 'Computer', value: '' });
     this.printSystem.forEach(element => {
-      downloadCsvList.push({label: element[0], value: element[1]});
+      downloadCsvList.push({ label: element[0], value: element[1] });
     });
-    downloadCsvList.push({label: '', value: ''});
-    downloadCsvList.push({label: 'Motherboard', value: ''});
+    downloadCsvList.push({ label: '', value: '' });
+    downloadCsvList.push({ label: 'Motherboard', value: '' });
     this.printMotherBoard.forEach(element => {
-      downloadCsvList.push({label: element[0], value: element[1]})
+      downloadCsvList.push({ label: element[0], value: element[1] })
     });
-    downloadCsvList.push({label: '', value: ''});
-    downloadCsvList.push({label: 'Processor', value: ''});
+    downloadCsvList.push({ label: '', value: '' });
+    downloadCsvList.push({ label: 'Processor', value: '' });
     this.printProcessor.forEach(element => {
-      downloadCsvList.push({label: element[0], value: element[1]})
+      downloadCsvList.push({ label: element[0], value: element[1] })
     });
-    downloadCsvList.push({label: '', value: ''});
-    downloadCsvList.push({label: 'Memory', value: ''});
+    downloadCsvList.push({ label: '', value: '' });
+    downloadCsvList.push({ label: 'Memory', value: '' });
     this.printMemory.forEach(element => {
-      downloadCsvList.push({label: element[0], value: element[1]})
+      downloadCsvList.push({ label: element[0], value: element[1] })
     });
-    downloadCsvList.push({label: '', value: ''});
-    downloadCsvList.push({label: 'Network Card', value: ''});
+    downloadCsvList.push({ label: '', value: '' });
+    downloadCsvList.push({ label: 'Network Card', value: '' });
     this.printNetwork.forEach(element => {
-      downloadCsvList.push({label: element[0], value: element[1]})
+      downloadCsvList.push({ label: element[0], value: element[1] })
     });
-    downloadCsvList.push({label: '', value: ''});
-    downloadCsvList.push({label: 'Graphics Card', value: ''});
+    downloadCsvList.push({ label: '', value: '' });
+    downloadCsvList.push({ label: 'Graphics Card', value: '' });
     this.printGraphic.forEach(element => {
-      downloadCsvList.push({label: element[0], value: element[1]})
+      downloadCsvList.push({ label: element[0], value: element[1] })
     });
-    downloadCsvList.push({label: '', value: ''});
-    downloadCsvList.push({label: 'Display', value: ''});
+    downloadCsvList.push({ label: '', value: '' });
+    downloadCsvList.push({ label: 'Display', value: '' });
     this.printDisplay.forEach(element => {
-      downloadCsvList.push({label: element[0], value: element[1]})
+      downloadCsvList.push({ label: element[0], value: element[1] })
     });
-    downloadCsvList.push({label: '', value: ''});
-    downloadCsvList.push({label: 'Hard Disk', value: ''});
+    downloadCsvList.push({ label: '', value: '' });
+    downloadCsvList.push({ label: 'Hard Disk', value: '' });
     this.printDisk.forEach(element => {
-      downloadCsvList.push({label: element[0], value: element[1]})
+      downloadCsvList.push({ label: element[0], value: element[1] })
     });
-    downloadCsvList.push({label: '', value: ''});
-    downloadCsvList.push({label: 'Operating System', value: ''});
+    downloadCsvList.push({ label: '', value: '' });
+    downloadCsvList.push({ label: 'Operating System', value: '' });
     this.printOS.forEach(element => {
-      downloadCsvList.push({label: element[0], value: element[1]})
+      downloadCsvList.push({ label: element[0], value: element[1] })
     });
     let fileName = 'Hardware Detail';
     this.excelService.generateExcel(downloadCsvList, fileName, 'hardware');
@@ -302,12 +304,12 @@ export class HardwareComponent implements OnInit {
                   </tr>
               </thead>
               <tbody>`
-              this.printSystem.forEach(element => {
-                html = html + `<tr style="width: 100%;">`;
-                html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
-                html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
-              });
-              html = html + `</tbody>
+    this.printSystem.forEach(element => {
+      html = html + `<tr style="width: 100%;">`;
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
+    });
+    html = html + `</tbody>
             </table>
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;margin-bottom: 8px;table-layout:fixed;">
               <thead>
@@ -316,12 +318,12 @@ export class HardwareComponent implements OnInit {
                   </tr>
               </thead>
               <tbody>`
-              this.printMotherBoard.forEach(element => {
-                html = html + `<tr style="width: 100%;">`;
-                html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
-                html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
-              });
-              html = html + `</tbody>
+    this.printMotherBoard.forEach(element => {
+      html = html + `<tr style="width: 100%;">`;
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
+    });
+    html = html + `</tbody>
             </table>
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;margin-bottom: 8px;table-layout:fixed;">
               <thead>
@@ -330,12 +332,12 @@ export class HardwareComponent implements OnInit {
                   </tr>
               </thead>
               <tbody>`
-              this.printProcessor.forEach(element => {
-                html = html + `<tr style="width: 100%;">`;
-                html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
-                html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
-              });
-              html = html + `</tbody>
+    this.printProcessor.forEach(element => {
+      html = html + `<tr style="width: 100%;">`;
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
+    });
+    html = html + `</tbody>
             </table>
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;margin-bottom: 8px;table-layout:fixed;">
               <thead>
@@ -344,12 +346,12 @@ export class HardwareComponent implements OnInit {
                   </tr>
               </thead>
               <tbody>`
-              this.printMemory.forEach(element => {
-                html = html + `<tr style="width: 100%;">`;
-                html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
-                html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
-              });
-              html = html + `</tbody>
+    this.printMemory.forEach(element => {
+      html = html + `<tr style="width: 100%;">`;
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
+    });
+    html = html + `</tbody>
             </table>
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;margin-bottom: 8px;table-layout:fixed;">
               <thead>
@@ -358,12 +360,12 @@ export class HardwareComponent implements OnInit {
                   </tr>
               </thead>
               <tbody>`
-              this.printNetwork.forEach(element => {
-                html = html + `<tr style="width: 100%;">`;
-                html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
-                html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
-              });
-              html = html + `</tbody>
+    this.printNetwork.forEach(element => {
+      html = html + `<tr style="width: 100%;">`;
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
+    });
+    html = html + `</tbody>
             </table>
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;margin-bottom: 8px;table-layout:fixed;">
               <thead>
@@ -372,12 +374,12 @@ export class HardwareComponent implements OnInit {
                   </tr>
               </thead>
               <tbody>`
-              this.printGraphic.forEach(element => {
-                html = html + `<tr style="width: 100%;">`;
-                html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
-                html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
-              });
-              html = html + `</tbody>
+    this.printGraphic.forEach(element => {
+      html = html + `<tr style="width: 100%;">`;
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
+    });
+    html = html + `</tbody>
             </table>
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;margin-bottom: 8px;table-layout:fixed;">
               <thead>
@@ -386,12 +388,12 @@ export class HardwareComponent implements OnInit {
                   </tr>
               </thead>
               <tbody>`
-              this.printDisplay.forEach(element => {
-                html = html + `<tr style="width: 100%;">`;
-                html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
-                html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
-              });
-              html = html + `</tbody>
+    this.printDisplay.forEach(element => {
+      html = html + `<tr style="width: 100%;">`;
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
+    });
+    html = html + `</tbody>
             </table>
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;margin-bottom: 8px;table-layout:fixed;">
               <thead>
@@ -400,12 +402,12 @@ export class HardwareComponent implements OnInit {
                   </tr>
               </thead>
               <tbody>`
-              this.printDisk.forEach(element => {
-                html = html + `<tr style="width: 100%;">`;
-                html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
-                html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
-              });
-              html = html + `</tbody>
+    this.printDisk.forEach(element => {
+      html = html + `<tr style="width: 100%;">`;
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
+    });
+    html = html + `</tbody>
             </table>
             <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;table-layout:fixed;">
               <thead>
@@ -414,12 +416,12 @@ export class HardwareComponent implements OnInit {
                   </tr>
               </thead>
               <tbody>`
-              this.printOS.forEach(element => {
-                html = html + `<tr style="width: 100%;">`;
-                html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
-                html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
-              });
-              html = html + `</tbody>
+    this.printOS.forEach(element => {
+      html = html + `<tr style="width: 100%;">`;
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 16.7%;">` + element[0] + `</td>`;
+      html = html + `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;font-weight: bold;color: $gray-800;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 83.3%;">` + element[1] + `</td></tr>`
+    });
+    html = html + `</tbody>
             </table>
      </td>
    </tr>
@@ -445,24 +447,24 @@ export class HardwareComponent implements OnInit {
       content: html,
       id: '',
       fileName: 'Hardware Summary Report',
-      orientation:'PORTRAIT'
+      orientation: 'PORTRAIT'
     };
     this.loading = true;
     this.commonHttpServices.printPdf(data)
-    .pipe()
-    .subscribe(data => {
-      this.loading = false;
-      this.pdfUrl = data.url;
-    },
-    error => {
-      this.loading = false;
-      const statusError = error;
-      if (statusError && statusError.meta) {
-        this.toastr.error(statusError.meta.message);
-      } else {
-        this.toastr.error('Something went wrong please try again.');
-      }
-    });
+      .pipe()
+      .subscribe(data => {
+        this.loading = false;
+        this.pdfUrl = data.url;
+      },
+        error => {
+          this.loading = false;
+          const statusError = error;
+          if (statusError && statusError.meta) {
+            this.toastr.error(statusError.meta.message);
+          } else {
+            this.toastr.error('Something went wrong please try again.');
+          }
+        });
   }
 
   printPdf() {
@@ -477,18 +479,18 @@ export class HardwareComponent implements OnInit {
       newLabelValue: this.deviceName
     }
     this.hardwareService.saveDeviceName(data)
-    .pipe(first())
-    .subscribe(
-      resp => {
-        $('#head-label').text(this.deviceName);
-        let obj = JSON.parse(localStorage.getItem('deviceDetail_' + this._id));
-        obj.label = this.deviceName;
-        localStorage.setItem('deviceDetail_' + this._id, JSON.stringify(obj));
-      },
-      error => {
-        this.toastr.error('Something went wrong please try again.');
-      }
-    );
+      .pipe(first())
+      .subscribe(
+        resp => {
+          $('#head-label').text(this.deviceName);
+          let obj = JSON.parse(localStorage.getItem('deviceDetail_' + this._id));
+          obj.label = this.deviceName;
+          localStorage.setItem('deviceDetail_' + this._id, JSON.stringify(obj));
+        },
+        error => {
+          this.toastr.error('Something went wrong please try again.');
+        }
+      );
   }
 
 }

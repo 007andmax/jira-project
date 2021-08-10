@@ -5,6 +5,7 @@ import { forkJoin } from 'rxjs';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { AppStateService } from 'src/app/states/app/app-state.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { environment } from 'src/environments/environment';
 import { Document } from '../../class/document';
@@ -29,6 +30,7 @@ export class DocumentsAddFooterComponent implements OnInit {
     private permissionsService: PermissionsService,
     private toastrService: ToastrService,
     private appStateService: AppStateService,
+    private companiesStateService: CompaniesStateService,
     private router: Router,) { }
 
   ngOnInit() {
@@ -87,7 +89,7 @@ export class DocumentsAddFooterComponent implements OnInit {
   public goToDocumentsList() {
     if (this.companyId) {
       this.router.navigate(
-        ['/ng2/company/', this.companyId, 'documents']);
+        [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/company/`, this.companyId, 'documents']);
     } else {
       this.leftPanelStateService.goToState('new-documents');
     }

@@ -25,59 +25,59 @@
     <!-- (click)="goToState('company-dashboard')" -->
     <li
         [ngClass]="{'--active':activePage === 'company-dashboard'}"
-        [routerLink]="['/ng2/company/',companyId,'dashboard']"
+        (click)="goToCompanySection('dashboard')"
     >
         Dashboard
     </li>
     <li
         [ngClass]="{'--active':activePage === 'company-tickets'}"
-        [routerLink]="['/ng2/company/',companyId,'tickets']"
+        (click)="goToCompanySection('tickets')"
     >
         Tickets
     </li>
     <li
         [ngClass]="{'--active':activePage === 'company-user'}"
-        [routerLink]="['/ng2/company/',companyId,'user']"
+        (click)="goToCompanySection('user')"
     >
         Users
     </li>
     <li
         [ngClass]="{'--active':activePage === 'company-devices'}"
-        [routerLink]="['/ng2/company/',companyId,'devices']"
+        (click)="goToCompanySection('devices')"
     >
         <div>Devices</div>
         <!-- <div class="qt-sz-16 icon__create-folder"></div> -->
     </li>
     <li
         [ngClass]="{'--active':activePage === 'company-network-scan'}"
-        [routerLink]="['/ng2/company/',companyId,'network-scan']"
+        (click)="goToCompanySection('network-scan')"
     >
         Network Scan
     </li>
     <li
         *ngIf="getPermissions('VIEW_PASSWORD_SECTION')"
         [ngClass]="{'--active':activePage === 'company-password-manager'}"
-        [routerLink]="['/ng2/company/',companyId,'password-manager']"
+        (click)="goToCompanySection('password-manager')"
     >
         Password Manager
     </li>
     <li
         *ngIf="getPermissions('VIEW_SALES_REPORT')"
         [ngClass]="{'--active':activePage === 'company-products'}"
-        [routerLink]="['/ng2/company/',companyId,'products']"
+        (click)="goToCompanySection('products')"
     >
         Products
     </li>
     <li
         *ngIf="getPermissions('VIEW_SERVICE_AGREEMENTS') && selectedCompany &&  selectedCompany.clientType !== 'LEAD' && selectedCompany.clientType !== 'VENDOR'"
         [ngClass]="{'--active':activePage === 'company-contracts'}"
-        [routerLink]="['/ng2/company/',companyId,'contracts']"
+        (click)="goToCompanySection('contracts')"
     >
         Service Agreements
     </li>
     <li
         [ngClass]="{'--active':activePage === 'company-documents'}"
-        [routerLink]="['/ng2/company/',companyId,'documents']"
+        (click)="goToCompanySection('documents')"
         *ngIf="isShowDoucments()"
     >
         Documents

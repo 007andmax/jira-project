@@ -338,7 +338,6 @@ export class CompanyDashDetailComponent implements OnInit {
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
       }
-      console.log("this.companyDetailing", this.companyDetailing);
     })
     this.sub.add(getCompany);
   }

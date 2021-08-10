@@ -446,6 +446,9 @@ import { CompanyDocumentsTableComponent } from './components/companies/company-d
 import { CompaniesFilterComponent } from './components/companies/companies-header/companies-filter/companies-filter.component';
 import { CompanyAddAsideShortComponent } from './components/companies/company-add-aside/company-add-aside-short/company-add-aside-short.component';
 import { CompanyAddAsideFullComponent } from './components/companies/company-add-aside/company-add-aside-full/company-add-aside-full.component';
+import { CommonModule, HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { HomeComponent } from './components/home/home.component';
+
 
 declare var $: any;
 /**
@@ -848,10 +851,12 @@ declare var $: any;
     CompanyDocumentsTableComponent,
     CompaniesFilterComponent,
     CompanyAddAsideShortComponent,
-    CompanyAddAsideFullComponent
+    CompanyAddAsideFullComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     BrowserAnimationsModule,
     UpgradeModule,
     HttpClientModule,
