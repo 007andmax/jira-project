@@ -78,7 +78,9 @@ export class WebsocketService {
     ws.onclose = (data) => {
       console.log("onclose 1", data);
     };
-
+    setInterval(() => {
+      console.log("ws", ws.readyState);
+    }, 1000);
 
   }
   onConnect() {
