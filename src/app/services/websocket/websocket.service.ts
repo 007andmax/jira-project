@@ -74,6 +74,11 @@ export class WebsocketService {
   public initializeWebSocketConnection() {
     let ws = new SockJS(this.serverUrl);
     this.stompClient = Stomp.over(ws);
+    this.onConnect();
+
+
+  }
+  onConnect() {
     let that = this;
     this.stompClient.connect({}, function (data) {
       that.subsribeToPermissions();
@@ -103,22 +108,24 @@ export class WebsocketService {
       console.log("data", data);
     });
     console.log("this.stompClient", this.stompClient);
-    console.log("ws", ws);
-    ws.onopen = function (data) {
-      console.log("onopen", data);
-    }
-    ws.onclose = function (data) {
-      console.log("onclose", data);
-    }
 
-    this.stompClient.ws.onopen = function (data) {
-      console.log("onopen", data);
-    }
-    this.stompClient.ws.onclose = function (data) {
-      console.log("onclose", data);
-    }
 
+    this.stompClient.ws.onopen = (data) => {
+      console.log("onopen 2", data);
+    }
+    this.stompClient.ws.onclose = (data) => {
+      console.log("onclose 2", data);
+      let checkOnline = setInterval(() => {
+
+        if (window.navigator.onLine) {
+          clearInterval(checkOnline);
+          this.onConnect();
+
+        }
+      }, 1000);
+    }
   }
+
   private subsribeToDevices() {
     setTimeout(() => {
       this.stompClient.subscribe(`/user/watch/device`, (message) => {
