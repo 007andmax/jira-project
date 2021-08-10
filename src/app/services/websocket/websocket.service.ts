@@ -104,16 +104,20 @@ export class WebsocketService {
     });
     console.log("this.stompClient", this.stompClient);
     console.log("ws", ws);
-    this.stompClient.connectCallback((data) => {
-      console.log("connectCallback", data);
-    })
-    this.stompClient.ws.onclose((data => {
-      console.log("stompClient", data);
-    }))
+    ws.onopen = function (data) {
+      console.log("onopen", data);
+    }
+    ws.onclose = function (data) {
+      console.log("onclose", data);
+    }
 
-    /* this.stompClient.onConnect(() => {
-       console.log("onConnect");
-     })*/
+    this.stompClient.ws.onopen = function (data) {
+      console.log("onopen", data);
+    }
+    this.stompClient.ws.onclose = function (data) {
+      console.log("onclose", data);
+    }
+
   }
   private subsribeToDevices() {
     setTimeout(() => {
