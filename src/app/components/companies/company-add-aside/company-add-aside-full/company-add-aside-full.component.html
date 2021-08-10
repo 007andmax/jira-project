@@ -60,12 +60,12 @@
     <div class="col-md-6">
         <app-drop-down
             [class]="['light-dropdown', 'qt-select-input-40']"
-            [placeholder]="'Select Client Type'"
+            [placeholder]="'Select Industry'"
             [list]="industries"
             [field]="'name'"
             [search]="true"
             [change]="true"
-            [title]="'Client Type'"
+            [title]="'Industry'"
             (onSelectedItem)="onSelectClientIndustry($event)"
         >
         </app-drop-down>

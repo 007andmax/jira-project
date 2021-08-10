@@ -162,7 +162,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     this.paymentTerm.clearWithOutChanges();
     this.paymentMethod.clearWithOutChanges();
     this.serviceType.clearWithOutChanges();
-    this.companyAssociate.clearWithOutChanges();
+    //this.companyAssociate.clearWithOutChanges();
 
 
   }
@@ -182,7 +182,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
       if (indexType > -1) this.onSelectCompanyTypes(this.companyTypes[indexType]);
       this.companyTags.setSelectedTag(this.company.tags);
       this.elRef.nativeElement.querySelector("#company-description").value = this.company.description;
-      this.companyAssociate.setEditItems(this.company.associatedCompanies.map(item => item.id));
+      //  this.companyAssociate.setEditItems(this.company.associatedCompanies.map(item => item.id));
       // this.companyAssociate.getClientsList(this.companiesStateService.getCompanies());
       this.opened = true;
       this.cd.detectChanges();

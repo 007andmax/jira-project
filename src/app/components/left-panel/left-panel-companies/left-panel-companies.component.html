@@ -36,6 +36,12 @@
     >
     </li>
     <li
+        [ngClass]="{'--active':activePage === 'new-companies' && clientType === 'SUPPLIER'}"
+        (click)="onSetFilterClientType('SUPPLIER');goToState('new-companies');"
+        [textContent]="(activePage === 'new-companies') ? 'Supplier ('+getCount('SUPPLIER') +')' : 'Supplier'"
+    >
+    </li>
+    <li
         [ngClass]="{'--active':activePage === 'new-companies' && showArchivedCompanies}"
         (click)="onShowArchived();goToState('new-companies');"
     >

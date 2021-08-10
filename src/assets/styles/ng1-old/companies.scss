@@ -48,3 +48,10 @@ company-associate {
     }
   }
 }
+company-dash-associate {
+  company-associate {
+    .mat-form-field-label {
+      padding: 12px 10px 10px 0px !important;
+    }
+  }
+}
