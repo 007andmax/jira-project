@@ -79,6 +79,7 @@ export class WebsocketService {
       console.log("onclose 1", data);
     };
 
+
   }
   onConnect() {
     let that = this;
@@ -126,6 +127,9 @@ export class WebsocketService {
         }
       }, 1000);
     }
+    setInterval(() => {
+      console.log("this.stompClient.ws", this.stompClient.ws.readyState);
+    }, 1000);
   }
 
   private subsribeToDevices() {
