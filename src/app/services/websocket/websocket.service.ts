@@ -75,7 +75,7 @@ export class WebsocketService {
     let ws = new SockJS(this.serverUrl);
     this.stompClient = Stomp.over(ws);
     let that = this;
-    this.stompClient.connect({}, function () {
+    this.stompClient.connect({}, function (data) {
       that.subsribeToPermissions();
       that.subsribeToUsers();
       that.subsribeToDevices();
@@ -100,7 +100,20 @@ export class WebsocketService {
       that.subsribeToTags();
       that.subsribeToDocuments();
       that.subsribeToDocumentsCategory();
+      console.log("data", data);
     });
+    console.log("this.stompClient", this.stompClient);
+    console.log("ws", ws);
+    this.stompClient.connectCallback((data) => {
+      console.log("connectCallback", data);
+    })
+    this.stompClient.ws.onclose((data => {
+      console.log("stompClient", data);
+    }))
+
+    /* this.stompClient.onConnect(() => {
+       console.log("onConnect");
+     })*/
   }
   private subsribeToDevices() {
     setTimeout(() => {
