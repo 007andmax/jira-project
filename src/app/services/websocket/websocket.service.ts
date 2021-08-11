@@ -76,6 +76,7 @@ export class WebsocketService {
   }
 
   public initializeWebSocketConnection() {
+
     /* this.stompClient = Stomp.client(environment.apiUrl + this.serverUrl);
      console.log("client", this.stompClient);
      this.stompClient.debug = (data) => {

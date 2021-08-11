@@ -458,11 +458,12 @@ import {
   rxStompServiceFactory
 } from '@stomp/ng2-stompjs';
 import { environment } from 'src/environments/environment';
+import * as SockJS from 'sockjs-client';
 
 
 export const myRxStompConfig: InjectableRxStompConfig = {
   // Which server?
-  brokerURL: environment.realTime,
+
 
 
 
@@ -480,7 +481,7 @@ export const myRxStompConfig: InjectableRxStompConfig = {
   // It can be quite verbose, not recommended in production
   // Skip this key to stop logging to console
   debug: (msg: string): void => {
-    //console.log(new Date(), msg);
+    console.log(new Date(), msg);
   },
 };
 
