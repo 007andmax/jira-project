@@ -41,7 +41,7 @@ export class WebsocketService {
   private serverUrl = 'realtime';
   private stompClient;
   private netScanSub;
-
+  isResetWebSocket: boolean = false;
   /**
    * Users api service constructor
    * @param {UsersService} usersService Service to work users
@@ -99,9 +99,7 @@ export class WebsocketService {
     this.stompClient.onStompError = (data) => {
       console.log("onStompError", new Date(), data);
     }
-    setInterval(() => {
-      console.log("ws", this.stompClient.state);
-    }, 1000);
+
 
   }
   onConnect() {
@@ -135,24 +133,15 @@ export class WebsocketService {
     });
     console.log("this.stompClient", this.stompClient);
 
-
-    /* this.stompClient.ws.onopen = (data) => {
-       console.log("onopen 2", data);
-     }
-     this.stompClient.ws.onclose = (data) => {
-       console.log("onclose 2", data);
-       let checkOnline = setInterval(() => {
- 
-         if (window.navigator.onLine) {
-           clearInterval(checkOnline);
-           this.onConnect();
- 
-         }
-       }, 1000);
-     }
-     setInterval(() => {
-       console.log("this.stompClient.ws", this.stompClient.ws.readyState);
-     }, 1000);*/
+    let checkOnline = setInterval(() => {
+      console.log("window.navigator.onLine", window.navigator.onLine);
+      if (!window.navigator.onLine) this.isResetWebSocket = true;
+      if (this.isResetWebSocket && window.navigator.onLine) {
+        this.isResetWebSocket = false;
+        clearInterval(checkOnline);
+        this.onConnect();
+      }
+    }, 1000);
   }
 
   private subsribeToDevices() {
