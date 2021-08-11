@@ -25,6 +25,9 @@ import { PasswordManagerStateService } from '../../states/password-manager/passw
 import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service';
 import { DocumentsRealTimeService } from 'src/app/states/documents/documents-real-time.service';
 import { RxStompService } from '@stomp/ng2-stompjs';
+import { Stomp } from '@stomp/stompjs';
+import { environment } from 'src/environments/environment';
+import * as SockJS from 'sockjs-client';
 
 
 /**
@@ -35,7 +38,7 @@ import { RxStompService } from '@stomp/ng2-stompjs';
 })
 export class WebsocketService {
 
-  private serverUrl = '/realtime';
+  private serverUrl = 'realtime';
   private stompClient;
   private netScanSub;
 
@@ -68,24 +71,38 @@ export class WebsocketService {
     private shellRealTimeService: ShellRealTimeService,
     private tagsRealTimeService: TagsRealTimeService,
     private documentsRealTimeService: DocumentsRealTimeService,
-    private rxStompService: RxStompService
+
   ) {
   }
 
   public initializeWebSocketConnection() {
+    /* this.stompClient = Stomp.client(environment.apiUrl + this.serverUrl);
+     console.log("client", this.stompClient);
+     this.stompClient.debug = (data) => {
+       console.log(new Date(), data);
+     }
+     this.onConnect();*/
+    //  this.rxStompService.activate();
 
-    this.rxStompService.activate();
+    let ws = new SockJS(this.serverUrl);
+    this.stompClient = Stomp.over(ws);
+    this.onConnect();
+    this.stompClient.debug = (data) => {
+      console.log("debug", new Date(), data);
+    }
+    this.stompClient.onConnect = (data) => {
+      console.log("onConnect", new Date(), data);
+    }
+    this.stompClient.onDisconnect = (data) => {
+      console.log("onDisconnect", new Date(), data);
+    }
+    this.stompClient.onStompError = (data) => {
+      console.log("onStompError", new Date(), data);
+    }
+    setInterval(() => {
+      console.log("ws", this.stompClient.state);
+    }, 1000);
 
-    /* let ws = new SockJS(this.serverUrl);
-     this.stompClient = Stomp.over(ws);
-     this.onConnect();
-     ws.onclose = (data) => {
-       console.log("onclose 1", data);
-     };
-     setInterval(() => {
-       console.log("ws", ws.readyState);
-     }, 1000);
- */
   }
   onConnect() {
     let that = this;
@@ -119,23 +136,23 @@ export class WebsocketService {
     console.log("this.stompClient", this.stompClient);
 
 
-    this.stompClient.ws.onopen = (data) => {
-      console.log("onopen 2", data);
-    }
-    this.stompClient.ws.onclose = (data) => {
-      console.log("onclose 2", data);
-      let checkOnline = setInterval(() => {
-
-        if (window.navigator.onLine) {
-          clearInterval(checkOnline);
-          this.onConnect();
-
-        }
-      }, 1000);
-    }
-    setInterval(() => {
-      console.log("this.stompClient.ws", this.stompClient.ws.readyState);
-    }, 1000);
+    /* this.stompClient.ws.onopen = (data) => {
+       console.log("onopen 2", data);
+     }
+     this.stompClient.ws.onclose = (data) => {
+       console.log("onclose 2", data);
+       let checkOnline = setInterval(() => {
+ 
+         if (window.navigator.onLine) {
+           clearInterval(checkOnline);
+           this.onConnect();
+ 
+         }
+       }, 1000);
+     }
+     setInterval(() => {
+       console.log("this.stompClient.ws", this.stompClient.ws.readyState);
+     }, 1000);*/
   }
 
   private subsribeToDevices() {

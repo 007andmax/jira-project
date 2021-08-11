@@ -464,12 +464,7 @@ export const myRxStompConfig: InjectableRxStompConfig = {
   // Which server?
   brokerURL: environment.realTime,
 
-  // Headers
-  // Typical keys: login, passcode, host
-  connectHeaders: {
-    login: 'guest',
-    passcode: 'guest',
-  },
+
 
   // How often to heartbeat?
   // Interval in milliseconds, set to 0 to disable
@@ -485,7 +480,7 @@ export const myRxStompConfig: InjectableRxStompConfig = {
   // It can be quite verbose, not recommended in production
   // Skip this key to stop logging to console
   debug: (msg: string): void => {
-    console.log(new Date(), msg);
+    //console.log(new Date(), msg);
   },
 };
 
@@ -955,15 +950,7 @@ export const myRxStompConfig: InjectableRxStompConfig = {
       multi: true,
     },
     PermissionDasnboardBillingService,
-    {
-      provide: InjectableRxStompConfig,
-      useValue: myRxStompConfig,
-    },
-    {
-      provide: RxStompService,
-      useFactory: rxStompServiceFactory,
-      deps: [InjectableRxStompConfig],
-    },
+
   ],
   bootstrap: [AppComponent]
 })
