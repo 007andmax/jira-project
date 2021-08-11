@@ -451,6 +451,9 @@ import { HomeComponent } from './components/home/home.component';
 
 
 declare var $: any;
+
+
+
 /**
  * This module represents the main application module
  */
@@ -916,7 +919,8 @@ declare var $: any;
       useClass: HttpInterceptorService,
       multi: true,
     },
-    PermissionDasnboardBillingService
+    PermissionDasnboardBillingService,
+
   ],
   bootstrap: [AppComponent]
 })
