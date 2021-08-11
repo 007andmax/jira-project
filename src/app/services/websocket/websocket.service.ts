@@ -96,10 +96,6 @@ export class WebsocketService {
     }
     this.stompClient.onConnect = (data) => {
       console.log("onConnect", new Date(), data);
-
-    }
-    this.stompClient.onDisconnect = (data) => {
-      console.log("onDisconnect", new Date(), data);
       this.subsribeToPermissions();
       this.subsribeToUsers();
       this.subsribeToDevices();
@@ -124,6 +120,10 @@ export class WebsocketService {
       this.subsribeToTags();
       this.subsribeToDocuments();
       this.subsribeToDocumentsCategory();
+    }
+    this.stompClient.onDisconnect = (data) => {
+      console.log("onDisconnect", new Date(), data);
+
     }
     this.stompClient.onStompError = (data) => {
       console.log("onStompError", new Date(), data);
