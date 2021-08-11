@@ -21,82 +21,51 @@
                                             alt="computer"
                                         >
                                     </span>
-                                    <span class="edit-field">
-                                        <input
-                                            type="text"
-                                            class="form-control label-field"
-                                            [(ngModel)]="label"
-                                            (blur)="updateAsset()"
-                                        >
-                                    </span>
+                                    <div class="computer">
+                                        <span class="edit-field ok">
+                                            <input
+                                                type="text"
+                                                class="form-control label-field"
+                                                [(ngModel)]="asset.Title"
+                                                (blur)="updateAsset()"
+                                            >
+                                        </span>
+                                        <span class="edit-field showme">
+                                            <div>{{ label }}</div>
+                                        </span>
+                                    </div>
                                 </div>
                                 <ul class="list-unstyled">
                                     <li>
-                                        <span>Description</span>
+                                        <span>Host Name</span>
+                                        <span
+                                            class="edit-field"
+                                            [attr.data-tooltip]="tooltip(asset.Name)"
+                                        >
+                                            <div>{{ displayValue(asset.Name) }}</div>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span>Warranty Date</span>
                                         <span class="edit-field">
                                             <input
                                                 type="text"
                                                 class="form-control sub-label-field"
-                                                [(ngModel)]="asset.Description"
-                                                (blur)="updateAsset()"
+                                                [(ngModel)]="asset.WarrantyExpires"
+                                                ngbDatepicker
+                                                #expire="ngbDatepicker"
+                                                (click)="expire.toggle()"
+                                                (dateSelect)="updateAsset()"
                                             >
                                         </span>
                                     </li>
                                     <li>
-                                        <span>Deployment Date</span>
-                                        <div>
-                                            {{ asset.InstallDate | date: DateFormat }}
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <span>Manufacturer</span>
+                                        <span>Window Version</span>
                                         <span
-                                            id="manufacturer"
                                             class="edit-field"
-                                            [attr.data-tooltip]="
-                        asset.Manufacturer && asset.Manufacturer.length > 20
-                          ? asset.Manufacturer
-                          : null
-                      "
+                                            [attr.data-tooltip]="tooltip(asset.Caption)"
                                         >
-                                            <div>
-                                                {{
-                          asset.Manufacturer && asset.Manufacturer.length > 20
-                            ? asset.Manufacturer.substring(0, 20) + "..."
-                            : asset.Manufacturer
-                        }}
-                                            </div>
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <span>Asset Tag</span>
-                                        <span class="edit-field">
-                                            <input
-                                                type="text"
-                                                class="form-control sub-label-field"
-                                                [(ngModel)]="asset.Tag"
-                                                (blur)="updateAsset()"
-                                            >
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <span>Computer Model</span>
-                                        <span
-                                            id="computerModel"
-                                            class="edit-field"
-                                            [attr.data-tooltip]="
-                        asset.Model && asset.Model.length > 20
-                          ? asset.Model
-                          : null
-                      "
-                                        >
-                                            <div>
-                                                {{
-                          asset.Model && asset.Model.length > 20
-                            ? asset.Model.substring(0, 20) + "..."
-                            : asset.Model
-                        }}
-                                            </div>
+                                            <div>{{ displayValue(asset.Caption) }}</div>
                                         </span>
                                     </li>
                                     <li>
@@ -111,73 +80,51 @@
                                         </span>
                                     </li>
                                     <li>
-                                        <span>System Type</span>
+                                        <span>Deployment Date</span>
+                                        <div>
+                                            {{ asset.InstallDate | date: DateFormat }}
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span>Manufacturer</span>
                                         <span
-                                            id="systemType"
                                             class="edit-field"
-                                            [attr.data-tooltip]="
-                        asset.Caption && asset.Caption.length > 20
-                          ? asset.Caption
-                          : null
-                      "
+                                            [attr.data-tooltip]="tooltip(asset.Manufacturer)"
                                         >
-                                            <div>
-                                                {{
-                          asset.Caption && asset.Caption.length > 20
-                            ? asset.Caption.substring(0, 20) + "..."
-                            : asset.Caption
-                        }}
-                                            </div>
+                                            <div>{{ displayValue(asset.Manufacturer) }}</div>
                                         </span>
                                     </li>
                                     <li>
-                                        <span>Time Zone</span>
-                                        <div>{{ asset.TimeZone }}</div>
-                                    </li>
-                                    <li>
-                                        <span>Expire Date</span>
-                                        <span class="edit-field">
-                                            <input
-                                                placeholder="dd/mm/yyyy"
-                                                type="text"
-                                                class="form-control sub-label-field"
-                                                [(ngModel)]="asset.WarrantyExpires"
-                                                ngbDatepicker
-                                                #expire="ngbDatepicker"
-                                                (click)="expire.toggle()"
-                                                (dateSelect)="updateAsset()"
-                                            >
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <span>Warranty</span>
+                                        <span>Asset Tag</span>
                                         <span class="edit-field">
                                             <input
                                                 type="text"
                                                 class="form-control sub-label-field"
-                                                [(ngModel)]="asset.WarrantyYears"
+                                                [(ngModel)]="asset.Tag"
                                                 (blur)="updateAsset()"
                                             >
                                         </span>
                                     </li>
                                     <li>
-                                        <span>Location</span>
-                                        <span class="edit-field">
-                                            <input
-                                                type="text"
-                                                class="form-control sub-label-field"
-                                                [(ngModel)]="asset.Location"
-                                                (blur)="updateAsset()"
-                                            >
-                                        </span>
+                                        <span>Install Date</span>
+                                        <div>
+                                            {{ asset.InstallDate | date: DateFormat }}
+                                        </div>
                                     </li>
                                     <li>
-                                        <span>IP</span>
-                                        <div>{{ asset.InternalIPAddress }}</div>
+                                        <span>Model</span>
+                                        <span
+                                            class="edit-field"
+                                            [attr.data-tooltip]="tooltip(asset.Model)"
+                                        >
+                                            <div>{{ displayValue(asset.Model) }}</div>
+                                        </span>
                                     </li>
                                     <li>
                                         <span>Agent Version</span>
-                                        <div>{{ asset.AgentVersion }}</div>
+                                        <span class="edit-field">
+                                            <div>{{ asset.AgentVersion }}</div>
+                                        </span>
                                     </li>
                                     <li>
                                         <span>Last Reboot</span>
@@ -186,23 +133,12 @@
                                         </div>
                                     </li>
                                     <li>
-                                        <span>Window Version</span>
+                                        <span>Serial Number</span>
                                         <span
-                                            id="windowVesion"
                                             class="edit-field"
-                                            [attr.data-tooltip]="
-                        asset.Version && asset.Version.length > 20
-                          ? asset.Version
-                          : null
-                      "
+                                            [attr.data-tooltip]="tooltip(asset.SerialNumber)"
                                         >
-                                            <div>
-                                                {{
-                          asset.Version && asset.Version.length > 20
-                            ? asset.Version.substring(0, 20) + "..."
-                            : asset.Version
-                        }}
-                                            </div>
+                                            <div>{{ displayValue(asset.SerialNumber) }}</div>
                                         </span>
                                     </li>
                                 </ul>
@@ -213,20 +149,8 @@
                                 <h2>Disk Drives</h2>
                                 <ul class="list-unstyled">
                                     <li
-                                        [ngStyle]="{
-                      'border-color':
-                        drive.percent > 80 && drive.IsSystem == true
-                          ? 'red'
-                          : ''
-                    }"
-                                        [ngClass]="{
-                      'e-drive': drive.IsSystem == false,
-                      'c-drive': drive.IsSystem == true,
-                      'd-drive':
-                        drive.IsSystem == false && drive.caption == 'D:',
-                      'f-drive':
-                        drive.IsSystem == false && drive.caption == 'F:'
-                    }"
+                                        [ngStyle]="driveBorderColor(drive.percent, drive.IsSystem)"
+                                        [ngClass]="driveClass(drive.IsSystem, drive.caption)"
                                         *ngFor="let drive of logicalDisk"
                                     >
                                         <div
@@ -237,37 +161,23 @@
                                             <div class="left-half-clipper">
                                                 <div
                                                     class="first50-bar"
-                                                    [ngStyle]="{
-                            'border-color':
-                              drive.percent > 80
-                                ? 'red'
-                                : drive.percent > 75 && drive.percent < 80
-                                ? 'yellow'
-                                : drive.IsSystem
-                                ? drive.color
-                                : '',
-                            'background-color':
-                              drive.percent > 80
-                                ? 'red'
-                                : drive.percent > 75 && drive.percent < 80
-                                ? 'yellow'
-                                : drive.IsSystem
-                                ? drive.color
-                                : ''
-                          }"
+                                                    [ngStyle]="
+                            first50BarStyle(
+                              drive.percent,
+                              drive.IsSystem,
+                              drive.color
+                            )
+                          "
                                                 ></div>
                                                 <div
                                                     class="value-bar"
-                                                    [ngStyle]="{
-                            'border-color':
-                              drive.percent > 80
-                                ? 'red'
-                                : drive.percent > 75 && drive.percent < 80
-                                ? 'yellow'
-                                : drive.IsSystem
-                                ? drive.color
-                                : ''
-                          }"
+                                                    [ngStyle]="
+                            valueBarStyle(
+                              drive.percent,
+                              drive.IsSystem,
+                              drive.color
+                            )
+                          "
                                                 ></div>
                                             </div>
                                         </div>
@@ -292,10 +202,12 @@
                             <div class="dashboard-col col-50 services">
                                 <h2>Services</h2>
                                 <ul class="list-unstyled">
-                                    <li [ngClass]="{
-                      updated: asset.VirusProtectionInstalled == true,
-                      alert: asset.VirusProtectionInstalled == false
-                    }">
+                                    <li [ngClass]="
+                      serviceClass(
+                        asset.VirusProtectionInstalled,
+                        !asset.VirusProtectionInstalled
+                      )
+                    ">
                                         <figure>
                                             <img
                                                 src="/html/assets/img/device/virus-protection.svg"
@@ -305,10 +217,12 @@
                                         <h4>Virus Protection</h4>
                                         <span>{{ virusprotection }}</span>
                                     </li>
-                                    <li [ngClass]="{
-                      updated: asset.WindowsUpdatesPending == false,
-                      alert: asset.WindowsUpdatesPending == true
-                    }">
+                                    <li [ngClass]="
+                      serviceClass(
+                        !asset.WindowsUpdatesPending,
+                        asset.WindowsUpdatesPending
+                      )
+                    ">
                                         <figure>
                                             <img
                                                 src="/html/assets/img/device/security-update.svg"
@@ -317,16 +231,6 @@
                                         </figure>
                                         <h4>Security Update</h4>
                                         <span>&nbsp;</span>
-                                    </li>
-                                    <li class="updated">
-                                        <figure>
-                                            <img
-                                                src="/html/assets/img/device/drivers-missing.svg"
-                                                alt="drivers-missing"
-                                            >
-                                        </figure>
-                                        <h4>Drivers Missing</h4>
-                                        <span>Up-to-date</span>
                                     </li>
                                 </ul>
                             </div>

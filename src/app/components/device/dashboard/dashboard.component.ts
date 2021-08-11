@@ -1,98 +1,16 @@
-import {
-  Component,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-  Injectable,
-} from "@angular/core";
+import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { EventEmitter } from "@angular/core";
-import {
-  UploadOutput,
-  UploadInput,
-  UploadFile,
-  humanizeBytes,
-  UploaderOptions,
-} from "ngx-uploader";
+import { UploadOutput,  UploadInput,  UploadFile,  humanizeBytes,  UploaderOptions } from "ngx-uploader";
 import { ToastrService } from "ngx-toastr";
 import { CONFIGCONSTANTS } from "../config/app-constants";
 import { environment } from "../../../../environments/environment";
 import { NgbDatepicker } from "@ng-bootstrap/ng-bootstrap";
-import {
-  NgbCalendar,
-  NgbDateAdapter,
-  NgbDateParserFormatter,
-  NgbDateStruct,
-} from "@ng-bootstrap/ng-bootstrap";
+import { NgbDateAdapter, NgbDateParserFormatter } from "@ng-bootstrap/ng-bootstrap";
 import { AgentService } from "src/app/services/agent/agent.service";
 import { Subscription } from "rxjs";
-
-/**
- * This Service handles how the date is represented in scripts i.e. ngModel.
- */
-@Injectable()
-export class CustomAdapter extends NgbDateAdapter<string> {
-  readonly DELIMITER = "-";
-  fromModel(value: string | null): NgbDateStruct | null {
-    if (value) {
-      if (value.indexOf("T") > 0) {
-        let date = value.split("T")[0].split(this.DELIMITER);
-        return {
-          day: parseInt(date[2], 10),
-          month: parseInt(date[1], 10),
-          year: parseInt(date[0], 10),
-        };
-      } else {
-        let date = value.split(this.DELIMITER);
-        return {
-          day: parseInt(date[0], 10),
-          month: parseInt(date[1], 10),
-          year: parseInt(date[2], 10),
-        };
-      }
-    }
-    return null;
-  }
-
-  toModel(date: NgbDateStruct | null): string | null {
-    return date
-      ? (date.day < 10 ? "0" + date.day : date.day) +
-          this.DELIMITER +
-          (date.month < 10 ? "0" + date.month : date.month) +
-          this.DELIMITER +
-          date.year
-      : null;
-  }
-}
-
-/**
- * This Service handles how the date is rendered and parsed from keyboard i.e. in the bound input field.
- */
-@Injectable()
-export class CustomDateParserFormatter extends NgbDateParserFormatter {
-  readonly DELIMITER = "/";
-
-  parse(value: string): NgbDateStruct | null {
-    if (value) {
-      let date = value.split(this.DELIMITER);
-      return {
-        day: parseInt(date[0], 10),
-        month: parseInt(date[1], 10),
-        year: parseInt(date[2], 10),
-      };
-    }
-    return null;
-  }
-
-  format(date: NgbDateStruct | null): string {
-    return date
-      ? (date.day < 10 ? "0" + date.day : date.day) +
-          this.DELIMITER +
-          (date.month < 10 ? "0" + date.month : date.month) +
-          this.DELIMITER +
-          date.year
-      : "";
-  }
-}
+import { CustomAdapter } from "./CustomDateAdapter";
+import { CustomDateParserFormatter } from "./CustomDateParserFormatter";
+import { reduce } from "rxjs/operators";
 
 @Component({
   selector: "app-dashboard",
@@ -219,16 +137,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
         "s8Y1IuPCUUYlSLMbFijHvut5uOi/KnKNqOLtn57CBlw="
       )
       .subscribe((data) => {
-        console.log("data", data);
         this.agentService.setAccessToken(data.AccessToken);
         this.getAssetDetail();
-        this.getOprationSystemDetail();
         this.getDiskDriveDetail();
         this.agentService
           .getAssetsByCompanyId("fdadb2df-ed3d-4e28-b41e-741617b7ffa6")
-          .subscribe((res) => {
-            console.log("res", res);
-          });
+          .subscribe((res) => {});
       });
   }
 
@@ -236,10 +150,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.agentService
       .getAssetByGuid("48e23c98-cbe4-4a8e-82bd-8c36fe5c9502")
       .subscribe((resp) => {
-        this.label = resp[0].Name;
-        this.asset = resp[0];
-        this.asset.IsUpdated = true;
-        this.getVirusProtection(resp[0].VirusProtectionProducts);
+        if (resp.length > 0) {
+          if (resp[0].Title != "") {
+            this.label =
+              resp[0].Domain != ""
+                ? resp[0].Title + " " + "(" + resp[0].Domain + ")"
+                : resp[0].Title + " " + "(" + "In workgroup" + ")";
+          }
+          this.asset = resp[0];
+          this.asset.IsUpdated = true;
+          this.getOprationSystemDetail();
+          this.getVirusProtection(resp[0].VirusProtectionProducts);
+        }
       });
   }
 
@@ -269,8 +191,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   getOprationSystemDetail() {
     this.agentService.getOperatingSystemByAssetId("1").subscribe((resp) => {
-      this.asset.Version = resp[0].Version;
-      this.asset.Caption = resp[0].Caption;
+      this.asset.SerialNumber = resp[0].SerialNumber;
+      this.asset.Caption =
+        resp[0].Caption.replace("Microsoft", "") +
+        " " +
+        resp[0].OSArchitecture +
+        " " +
+        resp[0].Version;
     });
   }
 
@@ -339,6 +266,73 @@ export class DashboardComponent implements OnInit, OnDestroy {
     let val1 = (parseInt(v1) / 1024 / 1024 / 1024).toFixed(2);
     let val2 = (parseInt(v2) / 1024 / 1024 / 1024).toFixed(2);
     return (parseFloat(val1) - parseFloat(val2)).toFixed(0);
+  }
+
+  tooltip(value?: string) {
+    if (value !== undefined && value !== null && value !== "") {
+      return value.length > 18 ? value : null;
+    } else {
+      return value;
+    }
+  }
+
+  displayValue(value?: string) {
+    if (value !== undefined && value !== null && value !== "") {
+      return value.length > 18 ? value.substring(0, 18) + "... " : value;
+    } else {
+      return value;
+    }
+  }
+
+  driveBorderColor(percent: number, IsSystem: boolean) {
+    return { "border-color": percent > 80 && IsSystem == true ? "red" : "" };
+  }
+
+  driveClass(IsSystem: boolean, caption?: string) {
+    return {
+      "e-drive": IsSystem == false,
+      "c-drive": IsSystem == true,
+      "d-drive": IsSystem == false && caption == "D:",
+      "f-drive": IsSystem == false && caption == "F:",
+    };
+  }
+
+  first50BarStyle(percent: number, IsSystem: boolean, color: string) {
+    return {
+      "border-color":
+        percent > 80
+          ? "red"
+          : percent > 75 && percent < 80
+          ? "yellow"
+          : IsSystem == true
+          ? color
+          : "",
+      "background-color":
+        percent > 80
+          ? "red"
+          : percent > 75 && percent < 80
+          ? "yellow"
+          : IsSystem == true
+          ? color
+          : "",
+    };
+  }
+
+  valueBarStyle(percent: number, IsSystem: boolean, color: string) {
+    return {
+      "border-color":
+        percent > 80
+          ? "red"
+          : percent > 75 && percent < 80
+          ? "yellow"
+          : IsSystem == true
+          ? color
+          : "",
+    };
+  }
+
+  serviceClass(update: boolean, alert: boolean) {
+    return { updated: update == true, alert: alert == true };
   }
 
   ngOnDestroy(): void {

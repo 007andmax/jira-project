@@ -69,6 +69,17 @@
                     font-family: $graphicMedBold;
                     font-weight: 500;
                 }
+              .computer{
+                &.showme{
+                  display: none;
+                }
+                &:hover .showme{
+                  display: none;
+                }
+                &:hover .ok{
+                  display: block;
+                }
+              }
 
             }
            &.col-50{
@@ -132,6 +143,7 @@
                                 font-family: $graphicSemibold;
                                 color: #4f5f79;
                             }
+
                             & > div{
                               padding: 8px 10px;
                               font-size: 13px;
@@ -302,7 +314,8 @@
                         display: flex;
                         flex-direction: row;
                         li {
-                            width: 33.33%;
+                            //width: 33.33%;
+                            width:50%;
                             padding: 0 15px;
                             display: -ms-flexbox;
                             display: -webkit-flex;
@@ -361,6 +374,12 @@
                     h2{
                         margin: 0;
                     }
+                }
+                .dropdown-menu {
+                  transform: translate(0, 0) !important;
+                  top: auto !important;
+                  left: 17px !important;
+                  width: 230px;
                 }
                 ul{
                     &.list-unstyled {

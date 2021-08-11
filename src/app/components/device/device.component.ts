@@ -98,7 +98,6 @@ export class DeviceComponent implements OnInit, OnDestroy {
     this.usersStateService.onInit();
     this.shellStateService.onInit();
     this.socketService.initializeWebSocketConnection();
-    //this.deviceName = 'CHRIS-WORKSATIO';
     localStorage.setItem("uuid_" + this._id, uuidv4());
     this.deviceType = this.type;
     if (this.deviceType === "printer") {

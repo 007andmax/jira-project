@@ -4,6 +4,7 @@ import { exhaustMap, map } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import * as CryptoJS from "crypto-js";
 import { json } from "d3";
+import { data } from "jquery";
 
 @Injectable({
   providedIn: "root",
@@ -63,7 +64,7 @@ export class AgentService {
   }
 
   public overrideAsset(data) {
-    delete data.Version;
+    delete data.SerialNumber;
     delete data.Caption;
     return this.http
       .post(
@@ -72,6 +73,16 @@ export class AgentService {
         { headers: this.getHeader(), responseType: "text" }
       )
       .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
+  public getAssetTagByAssetId(asset_id)
+  {
+    return this.http
+    .get(`${this.apiAgent}​​agent​/Tag​/${asset_id}`, {
+      headers: this.getHeader(),
+      responseType: "text",
+    })
+    .pipe(map((data: string) => this.decrypt128(data, this.key)));
   }
 
   public getOperatingSystemByAssetId(asset_id) {
