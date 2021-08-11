@@ -244,7 +244,8 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   }
   public onChangeTimeZone(data) {
     this.cProfileForm.patchValue({
-      timeZone: data
+      timeZone: data,
+      locale: (data) ? data.second : ''
     });
   }
   // get current position
@@ -274,7 +275,8 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
       secondaryPhoneType: new FormControl(''),
       suiteNumber: new FormControl(''),
       address: new FormControl(''),
-      postalCode: new FormControl('')
+      postalCode: new FormControl(''),
+      locale: new FormControl('', Validators.required),
     });
   }
 
@@ -319,10 +321,15 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
           this.loading = false; $(".loading").css("display", "none");
           if (res) {
             this.cProfile.address = res.addresses;
-            if (this.cProfile.address.length > 0) this.cProfile.address[0].timeZone = new TimeZone({
-              first: (res.addresses.length > 0 && res.addresses[0].timeZone) ? res.addresses[0].timeZone.displayName : "",
-              second: (res.addresses.length > 0 && res.addresses[0].timeZone) ? res.addresses[0].timeZone.name : "",
-            })
+            if (this.cProfile.address.length > 0) {
+              this.cProfile.address[0].timeZone = new TimeZone({
+                first: (res.addresses.length > 0 && res.addresses[0].timeZone) ? res.addresses[0].timeZone.displayName : "",
+                second: (res.addresses.length > 0 && res.addresses[0].timeZone) ? res.addresses[0].timeZone.name : "",
+              })
+              this.cProfileForm.patchValue({
+                locale: res.addresses[0].timeZone.second
+              });
+            }
             if (this.cProfile.address.length === 0) this.cProfile.address = [{
               timeZone: new TimeZone({
                 first: "",
@@ -332,7 +339,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
             this.cProfile.logo = res.logo;
             this.cProfile.name = res.name;
             this.cProfile.timeSettings = res.responseTimeSettings;
-            //this.companyTimeZoneState.onEditMode(this.cProfile.address[0].timeZone);
+            // this.companyTimeZoneState.onEditMode(this.cProfile.address[0].timeZone);
             if (res.responseTimeSettings) {
               const workingDays = res.responseTimeSettings.workingDays;
               for (let i = 0; i < this.weekDays.length; i++) {
@@ -759,7 +766,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
    */
   onSubmit() {
     this.submitted = true;
-
+    console.log("this.cProfileForm", this.cProfileForm);
     // stop here if form is invalid
     if (this.cProfileForm.invalid) {
       return;
@@ -768,6 +775,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     data['id'] = this.currentCompany.addresses.length > 0 ? this.currentCompany.addresses[0].id : '';
     data['isPrimary'] = true;
     data['suiteNumber'] = this.cProfileForm.get('suiteNumber').value;
+    data['locale'] = this.cProfileForm.get('locale').value;
     let dis = this.cProfile.address.length > 0 ? this.cProfile.address[0].timeZone == null ? '' : this.cProfile.address[0].timeZone.displayName : '';
     data['timeZone'] = {
       name: this.cProfileForm.get(
@@ -789,11 +797,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
       'postalCode'
     ).value;
     data['country'] = this.country;
-    data['locale'] = this.cProfileForm.get(
-      'timeZone'
-    ).value == undefined ? '' : this.cProfileForm.get(
-      'timeZone'
-    ).value.second;
     data['countryCode'] = this.countryCode;
     data['locationLat'] = this.latitude;
     data['locationLng'] = this.longitude;
@@ -813,9 +816,9 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     // this.cProfile.address[0].postalCode = this.cProfileForm.get(
     //   'postalCode'
     // ).value;
-    if (data['address'] == '') {
-      return;
-    }
+    /*    if (data['address'] == '') {
+          return;
+        }*/
     const phones = [];
     if (this.cProfileForm.value.primaryPhone) {
       phones.push({
