@@ -27,12 +27,5 @@ export class CustomAdapter extends NgbDateAdapter<string> {
           this.DELIMITER +
           (date.day < 10 ? "0" + date.day : date.day)
       : null;
-    //  return date
-    //    ? (date.day < 10 ? "0" + date.day : date.day) +
-    //        this.DELIMITER +
-    //        (date.month < 10 ? "0" + date.month : date.month) +
-    //        this.DELIMITER +
-    //        date.year
-    //    : null;
   }
 }
