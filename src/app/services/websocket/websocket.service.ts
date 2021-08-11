@@ -100,41 +100,50 @@ export class WebsocketService {
     }
     this.stompClient.onDisconnect = (data) => {
       console.log("onDisconnect", new Date(), data);
+      this.subsribeToPermissions();
+      this.subsribeToUsers();
+      this.subsribeToDevices();
+      this.subsribeToCompany();
+      this.subsribeToPasswordRecods();
+      this.subsribeToTaxes();
+      this.subsribeToCategories();
+      this.subsribeToProducts();
+      this.subsribeToTicketActualNumber();
+      this.subsribeToTickets();
+      this.subsribeToCmdShellOutput();
+      this.subsribeToBillable();
+      this.subsribeToInvoiceNumber();
+      this.subsribeToBillableCount();
+      this.subsribeToInvoice();
+      this.subsribeToSubmittedTicket();
+      this.subsribeToPayments();
+      this.subsribeToSubmittedService();
+      this.subsribeToSubmittedServiceAgreement();
+      this.subsribeToSubmittedOneTimeConnection();
+      this.subsribeToLockScreen();
+      this.subsribeToTags();
+      this.subsribeToDocuments();
+      this.subsribeToDocumentsCategory();
     }
     this.stompClient.onStompError = (data) => {
       console.log("onStompError", new Date(), data);
     }
 
+    this.stompClient.onWebSocketError = (data) => {
+      console.log("onWebSocketError", new Date(), data);
+    }
+
+    this.stompClient.onWebSocketClose = (data) => {
+      console.log("onWebSocketClose", new Date(), data);
+    }
+
+
   }
   connect() {
     let that = this;
-    this.stompClient.connect({}, data => {
-      that.subsribeToPermissions();
-      that.subsribeToUsers();
-      that.subsribeToDevices();
-      that.subsribeToCompany();
-      that.subsribeToPasswordRecods();
-      that.subsribeToTaxes();
-      that.subsribeToCategories();
-      that.subsribeToProducts();
-      that.subsribeToTicketActualNumber();
-      that.subsribeToTickets();
-      that.subsribeToCmdShellOutput();
-      that.subsribeToBillable();
-      that.subsribeToInvoiceNumber();
-      that.subsribeToBillableCount();
-      that.subsribeToInvoice();
-      that.subsribeToSubmittedTicket();
-      that.subsribeToPayments();
-      that.subsribeToSubmittedService();
-      that.subsribeToSubmittedServiceAgreement();
-      that.subsribeToSubmittedOneTimeConnection();
-      that.subsribeToLockScreen();
-      that.subsribeToTags();
-      that.subsribeToDocuments();
-      that.subsribeToDocumentsCategory();
-      console.log("data", data);
-    })
+    this.stompClient.connect({}, () => {
+      console.log("connect");
+    });
     console.log("this.stompClient", this.stompClient);
   }
   onConnect() {
