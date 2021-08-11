@@ -462,7 +462,7 @@ import { environment } from 'src/environments/environment';
 
 export const myRxStompConfig: InjectableRxStompConfig = {
   // Which server?
-  brokerURL: 'wss://dev.quicktech.com/realtime',
+  brokerURL: environment.realTime,
 
   // Headers
   // Typical keys: login, passcode, host
