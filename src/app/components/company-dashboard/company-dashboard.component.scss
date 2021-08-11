@@ -1,7 +1,6 @@
 @import "../../../assets/scss/custom";
 @import "../../../assets/styles/variable";
 
-
 /*** Custom Color Variables For this components ***/
 
 $bodyColor: #edf2f6;
@@ -225,9 +224,9 @@ $parot: #2ec866;
         }
     }
 
-   .light-dropdown .icn-remove-old {
-      top: calc(50% - 7px) !important;
-      right: 4px;
+    .light-dropdown .icn-remove-old {
+        top: calc(50% - 7px) !important;
+        right: 4px;
     }
 
     /*** Form elements ***/
@@ -415,6 +414,7 @@ $parot: #2ec866;
     /*** Company components Style ***/
 
     .cmp-dboard-row {
+        display: contents;
         // width: 100%;
         flex-direction: row;
         // align-items: flex-start;
@@ -550,13 +550,12 @@ $parot: #2ec866;
                                     max-width: 100%;
                                     max-height: 100%;
                                 }
-
                             }
-                            .no-user-init{
-                                    border: 1px solid rgba(22, 164, 250, 0.2);
-                                    border-radius: 50%;
-                                    font-size: 11px;
-                                    font-family: $graphicSemibold;
+                            .no-user-init {
+                                border: 1px solid rgba(22, 164, 250, 0.2);
+                                border-radius: 50%;
+                                font-size: 11px;
+                                font-family: $graphicSemibold;
                             }
                             .primary-contact-info {
                                 width: calc(100% - 60px);
@@ -810,7 +809,7 @@ $parot: #2ec866;
                                 padding-left: 22px;
                                 background: url("../../../assets/img/cmp-calander.svg") no-repeat left top;
                                 min-height: 16px;
-                                .dropdown-toggle{
+                                .dropdown-toggle {
                                     margin-top: 2px;
                                 }
                             }
@@ -1032,13 +1031,13 @@ $parot: #2ec866;
                                                 background-color: #cdecff;
                                             }
                                             &.color4::before {
-                                                background-color: #16A4FA;
+                                                background-color: #16a4fa;
                                             }
                                             &.color5::before {
-                                                background-color: #7C77CB;
+                                                background-color: #7c77cb;
                                             }
                                             &.color6::before {
-                                                background-color: #2BC7C6;
+                                                background-color: #2bc7c6;
                                             }
                                             &.block-tile {
                                                 &::before {
@@ -1082,8 +1081,7 @@ $parot: #2ec866;
                                             line-height: 1.33;
                                             position: relative;
                                             padding-left: 20px;
-                                            background: url(/assets/img/company-details/tips.svg)
-                                                no-repeat left top;
+                                            background: url(/assets/img/company-details/tips.svg) no-repeat left top;
                                         }
                                         p {
                                             margin: 0;
@@ -1231,12 +1229,10 @@ $parot: #2ec866;
                     color: #4f5f79;
                     padding: 0 15px 0 0;
                     text-align: left;
-                    background: url(/assets/img/company-details/filter-drop-down.svg) no-repeat right
-                        center #fff;
+                    background: url(/assets/img/company-details/filter-drop-down.svg) no-repeat right center #fff;
                     background-size: 16px;
                     display: flex;
                 }
-
             }
             .dropdown-menu {
                 width: 220px;
@@ -1277,32 +1273,31 @@ $parot: #2ec866;
                 min-width: 74px;
             }
         }
-      .cmp-board-tickets,
-      .cmp-board-revenue {
-          .dropdown {
-            position: relative;
-            width: 115px;
+        .cmp-board-tickets,
+        .cmp-board-revenue {
+            .dropdown {
+                position: relative;
+                width: 115px;
 
-            .dropdown-toggle {
-                width: 100%;
-                outline: none;
-                border: none;
-                background-color: transparent;
-                font-size: 13px;
-                font-weight: normal;
-                font-style: normal;
-                line-height: 1.23;
-                letter-spacing: normal;
-                color: #4f5f79;
-                padding: 0 15px 0 0;
-                text-align: left;
-                background: url(/assets/img/company-details/filter-drop-down.svg) no-repeat right center
-                #fff;
-                background-size: 16px;
-                display: flex;
-              }
-          }
-      }
+                .dropdown-toggle {
+                    width: 100%;
+                    outline: none;
+                    border: none;
+                    background-color: transparent;
+                    font-size: 13px;
+                    font-weight: normal;
+                    font-style: normal;
+                    line-height: 1.23;
+                    letter-spacing: normal;
+                    color: #4f5f79;
+                    padding: 0 15px 0 0;
+                    text-align: left;
+                    background: url(/assets/img/company-details/filter-drop-down.svg) no-repeat right center #fff;
+                    background-size: 16px;
+                    display: flex;
+                }
+            }
+        }
         .dropdown {
             .dropdown-menu {
                 width: 220px;
@@ -1336,7 +1331,7 @@ $parot: #2ec866;
                         font-family: $graphicMedBold;
                         background-color: #edf2f6;
                     }
-                    &:last-child{
+                    &:last-child {
                         background-color: #fff !important;
                     }
                     span {
@@ -1510,7 +1505,8 @@ $parot: #2ec866;
             }
             .dropdown {
                 width: 50%;
-                &.light-dropdown, &.grey-dropdown {
+                &.light-dropdown,
+                &.grey-dropdown {
                     width: 100%;
                 }
                 input.dropdown-toggle {
@@ -1574,14 +1570,13 @@ $parot: #2ec866;
                     background: none;
                 }
             }
-
         }
     }
     svg.nvd3-svg {
         overflow: visible;
     }
     .nv-axis.nv-x .tick line {
-        display:none;
+        display: none;
     }
     .nvd3 {
         &.nv-pie path {
@@ -1591,15 +1586,15 @@ $parot: #2ec866;
             display: none;
         }
         .tick {
-            text{
+            text {
                 font-size: 12px;
                 line-height: 1.33;
                 letter-spacing: normal;
                 color: #4f5f79;
-                font-family: 'Graphik-Regular';
+                font-family: "Graphik-Regular";
                 fill: #4f5f79;
             }
-            line{
+            line {
                 fill: #edf0f2;
                 stroke: #edf0f2;
                 stroke-width: 0.8px;
@@ -1611,13 +1606,13 @@ $parot: #2ec866;
                 line-height: 1.33;
                 letter-spacing: normal;
                 color: #4f5f79;
-                font-family: 'Graphik-Regular';
+                font-family: "Graphik-Regular";
                 fill: #4f5f79;
             }
         }
         .nv-legend {
-           -webkit-transform: translate(calc(-49% + 260px), -40px);
-           transform: translate(calc(-49% + 260px), -40px);
+            -webkit-transform: translate(calc(-49% + 260px), -40px);
+            transform: translate(calc(-49% + 260px), -40px);
         }
     }
 }
@@ -1774,13 +1769,13 @@ $parot: #2ec866;
                         //         }
                         //     }
                         // }
-                        ul{
+                        ul {
                             width: 100%;
                             flex-direction: column;
                             margin-bottom: 28px;
                             &.list-unstyled {
                                 display: block;
-                                @media only screen and (max-width:576px){
+                                @media only screen and (max-width: 576px) {
                                     margin-bottom: 20px;
                                 }
                                 li {
@@ -1789,19 +1784,19 @@ $parot: #2ec866;
                                     align-items: center;
                                     flex-direction: row;
                                     margin-bottom: 16px !important;
-                                    @media only screen and (max-width:576px){
+                                    @media only screen and (max-width: 576px) {
                                         flex-direction: column;
                                         align-items: flex-start;
                                     }
-                                    &:last-child{
+                                    &:last-child {
                                         margin-bottom: 0 !important;
                                     }
-                                & > div {
+                                    & > div {
                                         position: relative;
                                         &.cmn-checkbox {
                                             width: 173px;
                                             padding-right: 15px;
-                                            @media only screen and (max-width:576px){
+                                            @media only screen and (max-width: 576px) {
                                                 margin-bottom: 15px;
                                                 width: 100%;
                                             }
@@ -1809,7 +1804,7 @@ $parot: #2ec866;
                                         &.time-zone {
                                             display: inline-block;
                                             vertical-align: middle;
-                                            @media only screen and (max-width:576px){
+                                            @media only screen and (max-width: 576px) {
                                                 display: block;
                                                 width: 100%;
                                             }
@@ -1819,7 +1814,7 @@ $parot: #2ec866;
                                                 width: 110px;
                                                 margin-right: 55px;
                                                 position: relative;
-                                                @media only screen and (max-width:576px){
+                                                @media only screen and (max-width: 576px) {
                                                     width: 41%;
                                                 }
                                                 select.form-input {
@@ -1830,12 +1825,13 @@ $parot: #2ec866;
                                                     line-height: 1.54;
                                                     letter-spacing: normal;
                                                     height: auto;
-                                                    background: url("/assets/img/selct-arrow.svg") no-repeat right 15px center;
+                                                    background: url("/assets/img/selct-arrow.svg") no-repeat right 15px
+                                                        center;
                                                     padding-right: 30px;
                                                     -webkit-appearance: none;
                                                     -moz-appearance: none;
                                                     outline: none;
-                                                    ::-ms-expand{
+                                                    ::-ms-expand {
                                                         display: none;
                                                     }
                                                 }
@@ -1863,7 +1859,6 @@ $parot: #2ec866;
                                         }
                                     }
                                 }
-
                             }
                         }
                     }
@@ -1916,8 +1911,7 @@ $parot: #2ec866;
                 position: absolute;
                 right: 16px;
                 top: 16px;
-                background: url(/assets/img/company-details/tag-close-12.svg) no-repeat center
-                    transparent;
+                background: url(/assets/img/company-details/tag-close-12.svg) no-repeat center transparent;
                 background-size: 20px auto;
                 font-size: 0;
                 padding: 0;
@@ -1928,39 +1922,39 @@ $parot: #2ec866;
                 z-index: 1;
             }
         }
-    &.map{
-        .modal-dialog{
-            width: 744px;
-            height: 392px;
-            left: 0;
-            right: 0;
-            margin-left: auto;
-            margin-right: auto;
-            .modal-content{
-                height: 100%;
-                overflow: hidden;
-                .close{
-                    right: 16px;
-                    top: 13px;
-                }
-                .modal-body{
+        &.map {
+            .modal-dialog {
+                width: 744px;
+                height: 392px;
+                left: 0;
+                right: 0;
+                margin-left: auto;
+                margin-right: auto;
+                .modal-content {
                     height: 100%;
-                    padding: 0;
-                    .h1{
-                        font-size: 20px;
-                        padding: 10px 32px;
-                        font-family: $graphicSemibold;
-                        font-weight: 600;
-                        line-height: 1.4;
+                    overflow: hidden;
+                    .close {
+                        right: 16px;
+                        top: 13px;
                     }
-                    iframe{
-                        width: 100%;
+                    .modal-body {
                         height: 100%;
+                        padding: 0;
+                        .h1 {
+                            font-size: 20px;
+                            padding: 10px 32px;
+                            font-family: $graphicSemibold;
+                            font-weight: 600;
+                            line-height: 1.4;
+                        }
+                        iframe {
+                            width: 100%;
+                            height: 100%;
+                        }
                     }
                 }
             }
         }
-    }
     }
 }
 
@@ -2006,7 +2000,7 @@ app-company-dash-tags {
         padding-bottom: 0 !important;
         &::before {
             position: absolute;
-            content: 'Tags';
+            content: "Tags";
             font-family: "Graphik-Medium", sans-serif;
             font-size: 13px;
             left: 0;
@@ -2029,7 +2023,7 @@ app-company-dash-tags {
             left: 12px;
             top: 15px;
             position: absolute;
-            content: '';
+            content: "";
             width: 16px;
             height: 16px;
             background: url("./../../../assets/img/icons/tag-ng2.png");
@@ -2041,10 +2035,14 @@ app-company-dash-tags {
             outline: none;
         }
     }
-    .mat-form-field-underline, .mat-form-field-label-wrapper {
+    .mat-form-field-underline,
+    .mat-form-field-label-wrapper {
         display: none;
     }
     .footer-area-modal {
         margin-top: 64px;
     }
+}
+app-company-dash-contract {
+    margin-bottom: 16px;
 }

@@ -390,7 +390,8 @@
     }
   }
 }
-app-company-tags {
+app-company-tags,
+company-associate {
   .dropdown-toggle .mat-form-field-wrapper .mat-form-field-infix {
     input {
       /* position: absolute; */
@@ -472,6 +473,7 @@ documents-edit-info {
   }
   app-tags,
   app-company-tags,
+  company-associate,
   app-taxes,
   documents-linked,
   app-draft-email-recipients,
@@ -528,6 +530,22 @@ documents-edit-info {
           margin: 0;
         }
       }
+    }
+  }
+  company-associate {
+    .mat-form-field-wrapper {
+      &:before {
+        content: "Associated Companies" !important;
+      }
+    }
+    .mat-form-field-infix {
+      &:before {
+        display: none;
+      }
+      padding-left: 0px !important;
+    }
+    .mat-form-field-label {
+      padding: 12px 10px 10px 0px;
     }
   }
   documents-linked {

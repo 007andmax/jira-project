@@ -7,6 +7,7 @@ import { CompanyLogo } from './company-logo';
 import { ImageCropper } from '../../shared/image-cropper/class/image-cropper';
 import { Tag } from 'src/app/interfaces/tag/tag';
 import { CompanyConditions } from './company-conditions';
+import { CompanyAssociated } from './company-associated';
 
 export class CompanyProfile {
     accountNumber: any;
@@ -33,6 +34,7 @@ export class CompanyProfile {
     techLeadId: string;
     id: string;
     tags: Array<Tag>;
+    associatedCompanies: Array<CompanyAssociated> = [];
     reputation?: number = 0;
     constructor() {
         this.logo = null;
@@ -90,11 +92,13 @@ export class CompanyProfile {
         this.tags = company.tags;
         this.reputation = company.reputation;
         this.companyTicketStatistic = company.companyTicketStatistic;
-
+        this.associatedCompanies = company.associatedCompanies.map(item => new CompanyAssociated(item));
+        console.log("this.associatedCompanies", this.associatedCompanies);
     }
     public getDataForUpdate() {
         let contacts = JSON.parse(JSON.stringify(this.contacts));
         return {
+            associatedCompanies: this.associatedCompanies,
             accountNumber: this.accountNumber,
             addresses: this.addresses,
             agentLinkToEmail: this.agentLinkToEmail,
@@ -125,6 +129,7 @@ export class CompanyProfile {
     public getDataForAdd() {
         let contacts = JSON.parse(JSON.stringify(this.contacts));
         return {
+            associatedCompanies: this.associatedCompanies,
             accountNumber: this.accountNumber,
             addresses: this.addresses,
             agentLinkToEmail: this.agentLinkToEmail,
