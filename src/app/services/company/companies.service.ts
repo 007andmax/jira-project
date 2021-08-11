@@ -41,10 +41,9 @@ export class CompaniesService {
    * Get all companies list
    */
   public getCompaniesList() {
-    return this.http.get(this.apiUrl + 'company/clients');/*.subscribe((response)=> {
-      this.clientsCompany.next(response);
-    })*/
+    return this.http.get(this.apiUrl + 'company/clients');
   }
+
   public getCompaniesListByFilter(data) {
     return this.http.post(this.apiUrl + 'company/filter', data);
   }

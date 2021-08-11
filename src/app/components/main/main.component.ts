@@ -20,8 +20,8 @@ export class MainComponent implements OnInit {
     @Inject(DOCUMENT) private document: Document,
   ) {
     this.router.events.subscribe(event => {
-      const appType = this.router.url.startsWith('/ng2') ? 'ng2' : 'ng1';
-      this.setAppType(appType);
+
+      this.setAppType('ng2');
     });
   }
 
@@ -33,7 +33,7 @@ export class MainComponent implements OnInit {
     this.appType = appType;
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
   isAppTypeIsNg2() {
     return this.appType === 'ng2';
   }

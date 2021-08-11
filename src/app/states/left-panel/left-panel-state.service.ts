@@ -6,7 +6,7 @@ import { LeftPanelCompaniesFilter } from '../../components/left-panel/left-panel
 })
 export class LeftPanelStateService {
   activePage: string = "";
-  filter: LeftPanelCompaniesFilter = new LeftPanelCompaniesFilter();
+  filter: string;
   onChangeFilter: EventEmitter<any> = new EventEmitter();
   onBillingPage: EventEmitter<any> = new EventEmitter();
   onCompanyPage: EventEmitter<any> = new EventEmitter();

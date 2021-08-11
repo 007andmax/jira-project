@@ -25,7 +25,7 @@ export class DocumentsTableComponent implements OnInit {
     public router: Router,
     private permissionsService: PermissionsService,
     public documentsStateService: DocumentsStateService,
-    private companiesStateService: CompaniesStateService) { }
+    public companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
     if (this.usersStateService.getCurrentUser()) this.currentUser = this.usersStateService.getCurrentUser();
@@ -36,7 +36,7 @@ export class DocumentsTableComponent implements OnInit {
   navigateToCategory() {
     if (!this.item.isCategory) return;
     this.router.navigate(
-      ['/ng2/documents/category/', this.item.categoryId]);
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/documents/category/`, this.item.categoryId]);
   }
   showTemplate() {
     if (!this.item.isCategory && this.getPermissions('VIEW_DOCUMENT')) this.documentsStateService.onInitGetTemplate(this.item);
@@ -64,7 +64,7 @@ export class DocumentsTableComponent implements OnInit {
   }
 
   previewDocument() {
-    const url = `/#/ng2/documents/preview/${this.item.id}`;
+    const url = `/#/${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/documents/preview/${this.item.id}`;
     window.open(url, '_blank');
   }
   public getPermissions(action) {
@@ -78,5 +78,33 @@ export class DocumentsTableComponent implements OnInit {
     const url = `/documents/show/${this.item.id}/pdf`;
     let open = window.open(url, '_blank');
     open.print();
+  }
+  goToAddDocument() {
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/documents/add`],
+      {
+        queryParams: {
+          'id_category': this.item.categoryId
+        }
+      });
+  }
+  goToCloneDocument() {
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/documents/add`],
+      {
+        queryParams: {
+          'clone_document': this.item.id,
+          'companyId': this.companyId
+        }
+      });
+  }
+  goToEditDocument() {
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/documents/edit/`, this.item.id],
+      {
+        queryParams: {
+          companyId: this.companyId
+        }
+      });
   }
 }

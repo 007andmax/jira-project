@@ -98,7 +98,7 @@ export class CompanyProfile {
             accountNumber: this.accountNumber,
             addresses: this.addresses,
             agentLinkToEmail: this.agentLinkToEmail,
-            clientIndustry: (!this.clientIndustry.name || this.clientIndustry.name.length === 0) ? {} : this.clientIndustry,
+            clientIndustry: (!this.clientIndustry.name || this.clientIndustry.name.length === 0) ? {} : { name: this.clientIndustry.name },
             clientType: this.clientType,
             contacts: contacts.map((item, index) => {
                 if (index === 0 && (!item.phoneNumbers[0].number || item.phoneNumbers[0].number.length === 0)) item.phoneNumbers = [];
@@ -128,7 +128,7 @@ export class CompanyProfile {
             accountNumber: this.accountNumber,
             addresses: this.addresses,
             agentLinkToEmail: this.agentLinkToEmail,
-            clientIndustry: (!this.clientIndustry.name || this.clientIndustry.name.length === 0) ? {} : this.clientIndustry,
+            clientIndustry: (!this.clientIndustry.name || this.clientIndustry.name.length === 0) ? {} : { name: this.clientIndustry.name },
             clientType: this.clientType,
             contacts: contacts.map((item, index) => {
                 if (index === 0 && (!item.phoneNumbers[0].number || item.phoneNumbers[0].number.length === 0)) item.phoneNumbers = [];

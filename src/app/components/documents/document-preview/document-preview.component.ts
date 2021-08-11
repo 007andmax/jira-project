@@ -7,6 +7,7 @@ import { DocumentsStateService } from 'src/app/states/documents/documents-state.
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { Document } from '../class/document';
 import * as moment from "moment";
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
   selector: 'document-preview',
@@ -24,6 +25,7 @@ export class DocumentPreviewComponent implements OnInit {
     public activateRoute: ActivatedRoute,
     public cd: ChangeDetectorRef,
     private router: Router,
+    private companiesStateService: CompaniesStateService,
     private leftPanelStateService: LeftPanelStateService,
     private documentsService: DocumentsService) { }
 
@@ -63,7 +65,7 @@ export class DocumentPreviewComponent implements OnInit {
   editDocument() {
     this.leftPanelStateService.hideLeftPanel(false);
     this.router.navigate(
-      ['/ng2/documents/edit/', this.document.id]);
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/documents/edit/`, this.document.id]);
   }
   getLastEdit() {
     let date = new Date(this.document.updatedAt);

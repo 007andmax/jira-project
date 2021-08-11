@@ -42,7 +42,7 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
   editCategoryDocumentsRelatedPermissions = [];
   sections = {};
 
-  delete = false;
+  showDeleteRole = false;
 
   constructor(
     private permissionManageService: PermissionManageService,
@@ -272,9 +272,10 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
           });
 
           this.roleToDelete = id;
+          this.showDeleteRole = true;
 
         } else {
-          this.delete = false;
+          this.showDeleteRole = false;
           this.loading = false; $(".loading").css("display", "none");
           this.roles = this.roles.filter(el => {
             return el.id !== id;
@@ -304,10 +305,10 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
 
             return newUser;
           });
-
+          this.showDeleteRole = true;
           this.roleToDelete = id;
         } else {
-          this.delete = false;
+          this.showDeleteRole = false;
           this.roles = this.roles.filter(el => {
             return el.id !== id;
           });
