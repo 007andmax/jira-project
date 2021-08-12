@@ -94,32 +94,33 @@ export class WebsocketService {
     this.stompClient.debug = (data) => {
       console.log("debug", new Date(), data);
     }
+    let that = this;
     this.stompClient.onConnect = (data) => {
       console.log("onConnect", new Date(), data);
-      this.subsribeToPermissions();
-      this.subsribeToUsers();
-      this.subsribeToDevices();
-      this.subsribeToCompany();
-      this.subsribeToPasswordRecods();
-      this.subsribeToTaxes();
-      this.subsribeToCategories();
-      this.subsribeToProducts();
-      this.subsribeToTicketActualNumber();
-      this.subsribeToTickets();
-      this.subsribeToCmdShellOutput();
-      this.subsribeToBillable();
-      this.subsribeToInvoiceNumber();
-      this.subsribeToBillableCount();
-      this.subsribeToInvoice();
-      this.subsribeToSubmittedTicket();
-      this.subsribeToPayments();
-      this.subsribeToSubmittedService();
-      this.subsribeToSubmittedServiceAgreement();
-      this.subsribeToSubmittedOneTimeConnection();
-      this.subsribeToLockScreen();
-      this.subsribeToTags();
-      this.subsribeToDocuments();
-      this.subsribeToDocumentsCategory();
+      that.subsribeToPermissions();
+      that.subsribeToUsers();
+      that.subsribeToDevices();
+      that.subsribeToCompany();
+      that.subsribeToPasswordRecods();
+      that.subsribeToTaxes();
+      that.subsribeToCategories();
+      that.subsribeToProducts();
+      that.subsribeToTicketActualNumber();
+      that.subsribeToTickets();
+      that.subsribeToCmdShellOutput();
+      that.subsribeToBillable();
+      that.subsribeToInvoiceNumber();
+      that.subsribeToBillableCount();
+      that.subsribeToInvoice();
+      that.subsribeToSubmittedTicket();
+      that.subsribeToPayments();
+      that.subsribeToSubmittedService();
+      that.subsribeToSubmittedServiceAgreement();
+      that.subsribeToSubmittedOneTimeConnection();
+      that.subsribeToLockScreen();
+      that.subsribeToTags();
+      that.subsribeToDocuments();
+      that.subsribeToDocumentsCategory();
     }
     this.stompClient.onDisconnect = (data) => {
       console.log("onDisconnect", new Date(), data);
@@ -140,10 +141,11 @@ export class WebsocketService {
 
   }
   connect() {
-    let that = this;
+
     this.stompClient.connect({}, () => {
       console.log("connect");
     });
+    this.stompClient.activate();
     console.log("this.stompClient", this.stompClient);
   }
   onConnect() {
@@ -155,7 +157,7 @@ export class WebsocketService {
       if (!window.navigator.onLine) this.isResetWebSocket = true;
       if (this.isResetWebSocket && window.navigator.onLine) {
         this.isResetWebSocket = false;
-        clearInterval(checkOnline);
+        //  clearInterval(checkOnline);
         this.connect();
       }
     }, 1000);
