@@ -32,13 +32,13 @@
     <li
         [ngClass]="{'--active':activePage === 'new-companies' && clientType === 'VENDOR'}"
         (click)="onSetFilterClientType('VENDOR');goToState('new-companies');"
-        [textContent]="(activePage === 'new-companies') ? 'Vendor ('+getCount('VENDOR') +')' : 'Vendor'"
+        [textContent]="(activePage === 'new-companies') ? 'Vendors ('+getCount('VENDOR') +')' : 'Vendors'"
     >
     </li>
     <li
         [ngClass]="{'--active':activePage === 'new-companies' && clientType === 'SUPPLIER'}"
         (click)="onSetFilterClientType('SUPPLIER');goToState('new-companies');"
-        [textContent]="(activePage === 'new-companies') ? 'Supplier ('+getCount('SUPPLIER') +')' : 'Supplier'"
+        [textContent]="(activePage === 'new-companies') ? 'Suppliers ('+getCount('SUPPLIER') +')' : 'Suppliers'"
     >
     </li>
     <li

@@ -26,7 +26,11 @@ export class DocumentsAddInfoComponent implements OnInit {
   toggleEditCategories: boolean = false;
   tab: string = 'DOCUMENT_INFO';
   categories: Array<CategoryDocument> = [];
-  companyTypes = [new TitleListType('All companies', 'ALL'), new TitleListType('Client', 'CLIENT'), new TitleListType('Lead', 'LEAD'), new TitleListType('Vendor', 'VENDOR')];
+  companyTypes = [new TitleListType('All companies', 'ALL'),
+  new TitleListType('Client', 'CLIENT'),
+  new TitleListType('Lead', 'LEAD'),
+  new TitleListType('Supplier', 'SUPPLIER'),
+  new TitleListType('Vendor', 'VENDOR')];
   requiredCompanyType: boolean;
   @Output() onChangeRequiredCompanyType = new EventEmitter<any>();
   @Input() documentAdd: DocumentAdd = new DocumentAdd();
