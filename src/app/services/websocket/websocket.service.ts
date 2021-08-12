@@ -112,6 +112,15 @@ export class WebsocketService {
       that.subsribeToDocuments();
       that.subsribeToDocumentsCategory();
     }
+    this.stompClient.onUnhandledMessage = (data) => {
+      console.log("onUnhandledMessage", data);
+    }
+    this.stompClient.onUnhandledReceipt = (data) => {
+      console.log("onUnhandledReceipt", data);
+    }
+    this.stompClient.debug = (data) => {
+      console.log("debug", data);
+    }
   }
   connect() {
     this.stompClient.connect({}, () => {
