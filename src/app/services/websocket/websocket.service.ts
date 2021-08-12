@@ -121,6 +121,21 @@ export class WebsocketService {
     this.stompClient.debug = (data) => {
       console.log("debug", data);
     }
+    this.stompClient.onChangeState = (data) => {
+      console.log("onChangeState", data);
+    }
+    this.stompClient.onDisconnect = (data) => {
+      console.log(" onDisconnect", data);
+    }
+    this.stompClient.onStompError = (data) => {
+      console.log("  onStompError", data);
+    }
+    this.stompClient.onWebSocketClose = (data) => {
+      console.log("  onWebSocketClose", data);
+    }
+    this.stompClient.onWebSocketError = (data) => {
+      console.log("  onWebSocketError", data);
+    }
   }
   connect() {
     this.stompClient.connect({}, () => {
