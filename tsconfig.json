@@ -30,6 +30,5 @@
   },
   "include": [
     "src/**/*",
-    "node_modules/ng2-stomp-service/dist/stomp.service.ts"
   ]
 }

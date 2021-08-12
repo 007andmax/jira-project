@@ -24,7 +24,6 @@ import { AppService } from '../../states/app/app.service';
 import { PasswordManagerStateService } from '../../states/password-manager/password-manager-state.service';
 import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service';
 import { DocumentsRealTimeService } from 'src/app/states/documents/documents-real-time.service';
-import { RxStompService } from '@stomp/ng2-stompjs';
 import { Stomp } from '@stomp/stompjs';
 import { environment } from 'src/environments/environment';
 import * as SockJS from 'sockjs-client';
