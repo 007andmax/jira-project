@@ -82,9 +82,7 @@ export class WebsocketService {
     this.stompClient = Stomp.over(ws);
     this.stompClient.logRawCommunication = true;
     this.onConnect();
-    this.stompClient.debug = (data) => {
 
-    }
     let that = this;
     this.stompClient.onConnect = (data) => {
       that.subsribeToPermissions();

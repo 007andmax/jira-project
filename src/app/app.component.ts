@@ -160,7 +160,7 @@ export class AppComponent implements OnInit {
     })
   }
   onTest() {
-    this.websocketService.connect();
+    this.websocketService.onInitConnect();
   }
   ngDoCheck() {
     this.qtListHeaaderScroller = document.querySelector('.qt-page-list__header-thead-container');
