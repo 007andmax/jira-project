@@ -5,7 +5,7 @@
       <span class="checkbox-mark"></span>
     </label>
     <div class="circle-avatar" [textContent]="getParseShortName(ticket.company.name)"></div>
-    <p class="ff-g-m fw-600" [textContent]="ticket.company.name"></p>
+    <p [textContent]="ticket.company.name"></p>
   </div>
   <div class="col-md-2" [textContent]="(ticket.agent) ? ticket.agent.label : ''"></div>
   <div class="col-md-3" [textContent]="ticket.description"></div>

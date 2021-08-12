@@ -7,7 +7,7 @@
         *ngIf="!showPreloader"
     >
         <div
-            class="qt-aside-modern__header-close icon__close"
+            class="qt-aside-modern__header-close icon__close qt-ml-auto"
             (click)="openAside = false"
         >
         </div>
@@ -32,7 +32,6 @@
                         class="documents-create-panel__title"
                         [textContent]="document.title"
                     ></div>
-                    <div class="icon__close qt-sz-32 qt-bg-contain pointer"></div>
                 </div>
                 <div
                     class="documents-create-panel__desctiption"

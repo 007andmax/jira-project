@@ -34,11 +34,10 @@ app-drop-down {
   }
 
   &__title {
-    font-size: 13px;
-    line-height: 12px;
+    @extend %body-m-sb;
     color: $gray-800;
-    font-weight: $fw-semi-bold;
-    margin-bottom: 12px;
+    //margin-bottom: 12px; //TODO delete after replace all label on 8px
+    margin-bottom: 8px;
   }
 
   &__error {

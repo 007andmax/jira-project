@@ -6,7 +6,7 @@
   top: calc(50% - 25px);
   left: calc(50% - 25px);
   border: 0.35rem solid rgba(0, 0, 0, 0.2);
-  border-top-color: black;
+  border-top-color: $primary-2;
   animation: spin 1s infinite linear;
 }
 

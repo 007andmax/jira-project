@@ -52,7 +52,7 @@
       justify-content: flex-start;
       padding: 0 20px;
       border: none;
-      font-size: 14px;
+      @extend %body-m-m;
       text-align: left;
       white-space: nowrap;
       overflow: hidden;

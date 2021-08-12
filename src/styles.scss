@@ -1,3 +1,4 @@
+@import "./assets/scss/fonts";
 @import "./src/assets/styles/variable";
 @import "./assets/styles/dropdowns.scss";
 @import "./assets/styles/icons.scss";
@@ -499,7 +500,7 @@ documents-filter {
     }
     .mat-form-field-appearance-legacy .mat-form-field-infix {
       padding: 0;
-      background-color: #fff;
+      background-color: $white;
       z-index: 1;
     }
     .dropdown-toggle {
@@ -1321,6 +1322,8 @@ app-quotes-item {
   font-weight: 400;
   p {
     word-break: break-all;
+    @extend %body-m-m;
+    color: $primary-2;
   }
 }
 .with-number-types {
@@ -1692,15 +1695,15 @@ app-quotes-item {
     tr.--selected {
       td {
         background-color: #f4fbff;
-        border-top-color: #16a4fa !important;
-        border-bottom-color: #16a4fa !important;
+        border-top-color: $primary-1 !important;
+        border-bottom-color: $primary-1 !important;
 
         &:first-child {
-          border-left-color: #16a4fa !important;
+          border-left-color: $primary-1 !important;
         }
 
         &:last-child {
-          border-right-color: #16a4fa !important;
+          border-right-color: $primary-1 !important;
         }
       }
     }
@@ -1716,7 +1719,7 @@ app-quotes-item {
   border-radius: 4px;
   display: flex;
   &.--input-error {
-    border-color: $warning !important;
+    border-color: $error !important;
   }
   textarea {
     width: 100%;
@@ -2037,7 +2040,7 @@ app-quotes-item {
 
     &:hover {
       background: $gray-400;
-      color: whitesmoke;
+      color: $gray-100;
     }
     &.range {
       background: $primary-1;
@@ -3449,16 +3452,16 @@ app-ticket-edit-aside-devices {
 }
 
 input.--input-error {
-  border: solid 1px $warning !important;
+  border: solid 1px $error !important;
 }
 
 .--input-error {
   input {
-    border: solid 1px $warning !important;
+    border: solid 1px $error !important;
     // border-left: none !important;
   }
   .qt-input-prefix {
-    border: solid 1px $warning !important;
+    border: solid 1px $error !important;
     // border-right: none !important;
   }
 }

@@ -58,6 +58,14 @@
 }
 %сaption-l {
   @include font-style(12px, 16px, 400, 0);
+
+  &-m {
+    @include font-style(12px, 16px, 500, 0);
+  }
+
+  &-sb {
+    @include font-style(12px, 16px, 600, 0);
+  }
 }
 %сaption-m {
   @include font-style(11px, 16px, 400, 0);

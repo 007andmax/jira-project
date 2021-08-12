@@ -1,4 +1,5 @@
 @import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
 
 .device-user-wrap {
   * {
@@ -10,7 +11,7 @@
   margin-top: 0px !important;
   .qt-checkbox {
     .text-content {
-      padding: 3px 0 0px;
+      margin-top: -2px;
       flex: 1;
     }
     .name,
@@ -23,14 +24,13 @@
     }
 
     .name {
-      font-weight: 600;
+      font-weight: 500;
       color: $gray-800;
     }
 
     .description {
-      margin-top: 6px;
       color: $gray-700;
-      font-size: 12px;
+      @extend %сaption-l;
     }
 
     span {
@@ -75,7 +75,7 @@
 .select-wrapper {
   position: absolute;
   width: 366px;
-  background: white;
+  background: $white;
   height: 220px;
   margin-top: 5px;
   border-radius: 3px;
@@ -122,7 +122,7 @@
       label {
         width: auto;
         height: 16px;
-        font-size: 13px;
+        @extend %body-m;
         display: flex;
         align-items: center;
       }
