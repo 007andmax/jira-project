@@ -81,6 +81,7 @@ export class WebsocketService {
   onInitConnect() {
     let ws = new SockJS(this.serverUrl);
     this.stompClient = Stomp.over(ws);
+    this.stompClient.logRawCommunication = true;
     this.onConnect();
     this.stompClient.debug = (data) => {
 
