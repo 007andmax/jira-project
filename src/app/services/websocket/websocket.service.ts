@@ -76,15 +76,6 @@ export class WebsocketService {
   }
 
   public initializeWebSocketConnection() {
-
-    /* this.stompClient = Stomp.client(environment.apiUrl + this.serverUrl);
-     console.log("client", this.stompClient);
-     this.stompClient.debug = (data) => {
-       console.log(new Date(), data);
-     }
-     this.onConnect();*/
-    //  this.rxStompService.activate();
-
     this.onInitConnect();
   }
   onInitConnect() {
@@ -92,11 +83,10 @@ export class WebsocketService {
     this.stompClient = Stomp.over(ws);
     this.onConnect();
     this.stompClient.debug = (data) => {
-      console.log("debug", new Date(), data);
+
     }
     let that = this;
     this.stompClient.onConnect = (data) => {
-      console.log("onConnect", new Date(), data);
       that.subsribeToPermissions();
       that.subsribeToUsers();
       that.subsribeToDevices();
@@ -122,38 +112,16 @@ export class WebsocketService {
       that.subsribeToDocuments();
       that.subsribeToDocumentsCategory();
     }
-    this.stompClient.onDisconnect = (data) => {
-      console.log("onDisconnect", new Date(), data);
-
-    }
-    this.stompClient.onStompError = (data) => {
-      console.log("onStompError", new Date(), data);
-    }
-
-    this.stompClient.onWebSocketError = (data) => {
-      console.log("onWebSocketError", new Date(), data);
-    }
-
-    this.stompClient.onWebSocketClose = (data) => {
-      console.log("onWebSocketClose", new Date(), data);
-    }
-
-
   }
   connect() {
-
     this.stompClient.connect({}, () => {
-      console.log("connect");
+
     });
     this.stompClient.activate();
-    console.log("this.stompClient", this.stompClient);
   }
   onConnect() {
     this.connect();
-
-
     let checkOnline = setInterval(() => {
-      console.log("window.navigator.onLine", window.navigator.onLine);
       if (!window.navigator.onLine) this.isResetWebSocket = true;
       if (this.isResetWebSocket && window.navigator.onLine) {
         this.isResetWebSocket = false;
