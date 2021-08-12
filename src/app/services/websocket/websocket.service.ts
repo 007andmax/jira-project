@@ -27,6 +27,7 @@ import { DocumentsRealTimeService } from 'src/app/states/documents/documents-rea
 import { Stomp } from '@stomp/stompjs';
 import { environment } from 'src/environments/environment';
 import * as SockJS from 'sockjs-client';
+import { ConstantsService } from '../constants/constants.service';
 
 
 /**
@@ -70,6 +71,7 @@ export class WebsocketService {
     private shellRealTimeService: ShellRealTimeService,
     private tagsRealTimeService: TagsRealTimeService,
     private documentsRealTimeService: DocumentsRealTimeService,
+    private constantsService: ConstantsService
 
   ) {
   }
@@ -130,11 +132,21 @@ export class WebsocketService {
     }
     this.stompClient.onWebSocketClose = (data) => {
       console.log("  onWebSocketClose", data);
+      this.checkConnectWithBack();
       // this.connect();
     }
     this.stompClient.onWebSocketError = (data) => {
       console.log("  onWebSocketError", data);
     }
+  }
+  checkConnectWithBack() {
+    this.constantsService.getConstants().subscribe(data => {
+      this.onInitConnect();
+    }, err => {
+      setTimeout(() => {
+        this.checkConnectWithBack();
+      }, 10000);
+    })
   }
   connect() {
     this.stompClient.connect({}, () => {
