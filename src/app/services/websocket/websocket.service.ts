@@ -134,7 +134,10 @@ export class WebsocketService {
     }
     this.stompClient.onWebSocketClose = (data) => {
       console.log("  onWebSocketClose", data);
-      this.onInitConnect();
+      setTimeout(() => {
+        this.onInitConnect();
+      }, 20000);
+
       // this.connect();
     }
     this.stompClient.onWebSocketError = (data) => {
