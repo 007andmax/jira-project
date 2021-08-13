@@ -73,6 +73,7 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
   updateTagByRealTimes(data) {
     let index = this.tags.findIndex(item => item.id === data.id);
     let indexreqTags = this.reqTags.findIndex(item => item.id === data.id);
+    console.log("data", data);
     if (index > -1) {
       this.tags[index] = data;
     } else {
@@ -83,6 +84,7 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
     } else {
       this.reqTags.push(data);
     }
+    console.log("this.tags", this.tags);
   }
   sortTags() {
     this.tags = this.tags.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
