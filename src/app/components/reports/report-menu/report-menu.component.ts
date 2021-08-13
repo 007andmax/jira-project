@@ -245,7 +245,7 @@ export class ReportMenuComponent implements OnInit {
       this.deviceIpSummary.setCompanyId(selectClient.id);
       this.remoteConnectionReport.setCompanyId(selectClient.id);
       this.getDevicesByCompany(selectClient.id);
-      this.getSoftByCompany(selectClient.id);
+      if (this.report === 'software-summary' || this.report === 'hardware-summary' || this.report === 'device-ip-summary') this.getSoftByCompany(selectClient.id);
       if (this.ticketsReport.startDate === '' && this.ticketsReport.endDate === '') this.ticketsReport.setDatesByCompany(this.selectedClient);
       if (this.serviceReport.startDate === '' && this.serviceReport.endDate === '') this.serviceReport.setDatesByCompany(this.selectedClient);
       this.validate.resetCompany();
