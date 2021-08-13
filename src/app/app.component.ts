@@ -159,9 +159,6 @@ export class AppComponent implements OnInit {
         [`${data.name.replaceAll(' ', '')}/tickets/`]);
     })
   }
-  onTest() {
-    this.websocketService.onInitConnect();
-  }
   ngDoCheck() {
     this.qtListHeaaderScroller = document.querySelector('.qt-page-list__header-thead-container');
     this.qtListBodyScroller = document.querySelector('.qt-page-list__body-table-container');

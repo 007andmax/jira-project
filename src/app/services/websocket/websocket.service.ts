@@ -81,12 +81,10 @@ export class WebsocketService {
     this.onInitConnect();
   }
   onInitConnect() {
-    console.log("onInitConnect");
     this.ws = new SockJS(this.serverUrl);
     this.stompClient = Stomp.over(this.ws);
     this.stompClient.logRawCommunication = true;
     this.onConnect();
-
     let that = this;
     this.stompClient.onConnect = (data) => {
       that.subsribeToPermissions();
@@ -114,59 +112,14 @@ export class WebsocketService {
       that.subsribeToDocuments();
       that.subsribeToDocumentsCategory();
     }
-    this.stompClient.onUnhandledMessage = (data) => {
-      console.log("onUnhandledMessage", data);
-    }
-    this.stompClient.onUnhandledReceipt = (data) => {
-      console.log("onUnhandledReceipt", data);
-    }
     this.stompClient.debug = (data) => {
       console.log("debug", data);
     }
-    this.stompClient.onChangeState = (data) => {
-      console.log("onChangeState", data);
-    }
-    this.stompClient.onDisconnect = (data) => {
-      console.log(" onDisconnect", data);
-    }
-    this.stompClient.onStompError = (data) => {
-      console.log("  onStompError", data);
-    }
     this.stompClient.onWebSocketClose = (data) => {
-      console.log("  onWebSocketClose", data);
       setTimeout(() => {
         this.onInitConnect();
       }, 20000);
-
-      // this.connect();
     }
-    this.stompClient.onWebSocketError = (data) => {
-      console.log("  onWebSocketError", data);
-    }
-  }
-  checkConnectWithBack() {
-    console.log("checkConnectWithBack");
-    this.onInitConnect();
-    /* setInterval(() => {
-       if (this.stompClient.readyState === 3) {
-         this.onInitConnect();
-       }
-       console.log("this.ws", this.ws);
-       console.log("this.stompClient", this.stompClient.readyState);
-       console.log("this.stompClient.connected()", this.stompClient.connected());
-       console.log("this.stompClient.active()", this.stompClient.active());
-       this.onInitConnect();
-     }, 10000);*/
-
-    /*  this.constantsService.getConstants().subscribe(data => {
-        console.log("data", data);
-        this.onInitConnect();
-      }, err => {
-        console.log("err", err);
-        setTimeout(() => {
-          this.checkConnectWithBack();
-        }, 10000);
-      })*/
   }
   connect() {
     this.stompClient.connect({}, () => {
