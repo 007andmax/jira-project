@@ -42,6 +42,7 @@ export class WebsocketService {
   private stompClient;
   private netScanSub;
   isResetWebSocket: boolean = false;
+  ws;
   /**
    * Users api service constructor
    * @param {UsersService} usersService Service to work users
@@ -81,8 +82,8 @@ export class WebsocketService {
   }
   onInitConnect() {
     console.log("onInitConnect");
-    let ws = new SockJS(this.serverUrl);
-    this.stompClient = Stomp.over(ws);
+    this.ws = new SockJS(this.serverUrl);
+    this.stompClient = Stomp.over(this.ws);
     this.stompClient.logRawCommunication = true;
     this.onConnect();
 
@@ -142,9 +143,14 @@ export class WebsocketService {
   }
   checkConnectWithBack() {
     console.log("checkConnectWithBack");
+    this.onInitConnect();
     setInterval(() => {
+
+      console.log("this.ws", this.ws);
+      console.log("this.stompClient", this.stompClient);
       console.log("this.stompClient.connected()", this.stompClient.connected());
       console.log("this.stompClient.active()", this.stompClient.active());
+      this.onInitConnect();
     }, 10000);
 
     /*  this.constantsService.getConstants().subscribe(data => {
