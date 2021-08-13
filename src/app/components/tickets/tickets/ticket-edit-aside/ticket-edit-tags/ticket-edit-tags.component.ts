@@ -55,6 +55,9 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getTags);
     let changeTagsArray = this.tagsRealTimeService.changeTagsArray.subscribe((data: any) => {
+      console.log("data.data instanceof", typeof data.data);
+      console.log("data.data instanceof", data.data instanceof Array);
+      console.log("data.data instanceof", data.data instanceof Object);
       if (data.action === "TAG_SAVED" && data.data instanceof Array) data.data.forEach(element => this.updateTagByRealTimes(element));
       if (data.action === "TAG_SAVED" && data.data instanceof Object) this.updateTagByRealTimes(data.data);
       if (data.action === "TAG_REMOVED") {
