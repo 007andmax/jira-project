@@ -142,15 +142,20 @@ export class WebsocketService {
   }
   checkConnectWithBack() {
     console.log("checkConnectWithBack");
-    this.constantsService.getConstants().subscribe(data => {
-      console.log("data", data);
-      this.onInitConnect();
-    }, err => {
-      console.log("err", err);
-      setTimeout(() => {
-        this.checkConnectWithBack();
-      }, 10000);
-    })
+    setInterval(() => {
+      console.log("this.stompClient.connected()", this.stompClient.connected());
+      console.log("this.stompClient.active()", this.stompClient.active());
+    }, 10000);
+
+    /*  this.constantsService.getConstants().subscribe(data => {
+        console.log("data", data);
+        this.onInitConnect();
+      }, err => {
+        console.log("err", err);
+        setTimeout(() => {
+          this.checkConnectWithBack();
+        }, 10000);
+      })*/
   }
   connect() {
     this.stompClient.connect({}, () => {
