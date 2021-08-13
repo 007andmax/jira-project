@@ -766,7 +766,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
    */
   onSubmit() {
     this.submitted = true;
-    console.log("this.cProfileForm", this.cProfileForm);
     // stop here if form is invalid
     if (this.cProfileForm.invalid) {
       return;

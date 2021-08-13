@@ -72,7 +72,6 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
         }
         if (findIndex > -1) {
           this.list[findIndex] = new ContractItem(data.data);
-          console.log("this.list[findIndex]", this.list[findIndex]);
         } else {
           if (this.filter.checkFilterItem(data.data)) this.list.push(new ContractItem(data.data));
         }

@@ -93,7 +93,6 @@ export class CompanyProfile {
         this.reputation = company.reputation;
         this.companyTicketStatistic = company.companyTicketStatistic;
         this.associatedCompanies = company.associatedCompanies.map(item => new CompanyAssociated(item));
-        console.log("this.associatedCompanies", this.associatedCompanies);
     }
     public getDataForUpdate() {
         let contacts = JSON.parse(JSON.stringify(this.contacts));
