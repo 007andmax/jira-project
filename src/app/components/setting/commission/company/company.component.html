@@ -27,16 +27,14 @@
             {{ getClinetUrl(company) }}
                     </td>
                     <td class="sp">
-                        <div class>
-                            <app-teh-users
-                                [users]="activeTechUsers"
-                                [editMode]="true"
-                                [type]="'COMPANY_SETTINGS'"
-                                [selectedMode]="'SINGLE'"
-                                [editUsers]="selectedActiveTechUsers(company, i)"
-                                (usersChange)="setTechLead($event,company)"
-                            ></app-teh-users>
-                        </div>
+                        <app-teh-users
+                            [users]="activeTechUsers"
+                            [editMode]="true"
+                            [type]="'COMPANY_SETTINGS'"
+                            [selectedMode]="'SINGLE'"
+                            [editUsers]="selectedActiveTechUsers(company, i)"
+                            (usersChange)="setTechLead($event,company)"
+                        ></app-teh-users>
                     </td>
                 </tr>
             </tbody>
