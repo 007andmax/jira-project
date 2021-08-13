@@ -80,6 +80,7 @@ export class WebsocketService {
     this.onInitConnect();
   }
   onInitConnect() {
+    console.log("onInitConnect");
     let ws = new SockJS(this.serverUrl);
     this.stompClient = Stomp.over(ws);
     this.stompClient.logRawCommunication = true;
@@ -140,9 +141,12 @@ export class WebsocketService {
     }
   }
   checkConnectWithBack() {
+    console.log("checkConnectWithBack");
     this.constantsService.getConstants().subscribe(data => {
+      console.log("data", data);
       this.onInitConnect();
     }, err => {
+      console.log("err", err);
       setTimeout(() => {
         this.checkConnectWithBack();
       }, 10000);
