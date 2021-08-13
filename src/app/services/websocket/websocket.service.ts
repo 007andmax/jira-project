@@ -134,7 +134,7 @@ export class WebsocketService {
     }
     this.stompClient.onWebSocketClose = (data) => {
       console.log("  onWebSocketClose", data);
-      this.checkConnectWithBack();
+      this.onInitConnect();
       // this.connect();
     }
     this.stompClient.onWebSocketError = (data) => {
@@ -144,14 +144,16 @@ export class WebsocketService {
   checkConnectWithBack() {
     console.log("checkConnectWithBack");
     this.onInitConnect();
-    setInterval(() => {
-
-      console.log("this.ws", this.ws);
-      console.log("this.stompClient", this.stompClient);
-      console.log("this.stompClient.connected()", this.stompClient.connected());
-      console.log("this.stompClient.active()", this.stompClient.active());
-      this.onInitConnect();
-    }, 10000);
+    /* setInterval(() => {
+       if (this.stompClient.readyState === 3) {
+         this.onInitConnect();
+       }
+       console.log("this.ws", this.ws);
+       console.log("this.stompClient", this.stompClient.readyState);
+       console.log("this.stompClient.connected()", this.stompClient.connected());
+       console.log("this.stompClient.active()", this.stompClient.active());
+       this.onInitConnect();
+     }, 10000);*/
 
     /*  this.constantsService.getConstants().subscribe(data => {
         console.log("data", data);
