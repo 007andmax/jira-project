@@ -42,8 +42,7 @@
       color: $primary-2;
     }
     &__title {
-     font-weight: 600;
-      font-size: 13px;
+      @extend %body-m-sb;
       color: $primary-2;
       display: flex;
       align-items: center;

@@ -35,16 +35,13 @@
       }
 
       &--user-name {
-        font-weight: 600;
-        font-size: 13px;
-        line-height: 1.54;
+        @extend %body-m-m;
         color: $primary-2;
       }
 
       &--profession {
-        font-size: 12px;
-        line-height: 1.33;
-        color: $gray-600;
+        @extend %body-m;
+        color: $gray-800;
       }
     }
 
@@ -313,8 +310,8 @@ app-users-table {
 
   &__editor-tab {
     display: flex;
-    color: $gray-800;
-    font-size: 12px;
+    color: $primary-2;
+    @extend %сaption-l-sb;
   }
 
   &__editor-tab-item {

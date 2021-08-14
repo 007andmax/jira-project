@@ -734,7 +734,7 @@
   height: 40px;
   border-radius: 4px;
   background-color: $primary-1;
-  font-size: 13px;
+  @extend %body-m-sb;
   color: $white;
   padding: 10px 20px;
   display: flex;
@@ -742,7 +742,6 @@
   border: none;
   width: fit-content;
   cursor: pointer;
-  font-weight: 600;
   position: relative;
 
   &.--disabled {
@@ -757,7 +756,7 @@
   }
 
   &.--gray {
-    color: $gray-800;
+    color: $primary-2;
     border: solid 1px $gray-500;
     background-color: $white;
   }

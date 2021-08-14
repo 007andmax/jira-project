@@ -1,4 +1,5 @@
 @import './src/assets/styles/variable';
+@import './src/assets/styles/fonts';
 
 .no-valid {
     border: 1px solid $error !important;
@@ -56,13 +57,13 @@
       justify-content: flex-start;
       padding: 0 20px;
       border: none;
-      font-size: 14px;
+      @extend %body-m-m;
       text-align: left;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       transition: all .3s;
-      color: $gray-800;
+      color: $primary-2;
       &:hover {
         color: $white;
         background: $primary-1;
@@ -76,7 +77,7 @@
      border: solid 1px $gray-500;
      background-color: $white;
      width: 100%;
-     &:placeholder {
+     &::placeholder {
         color: $gray-600;
      }
   }

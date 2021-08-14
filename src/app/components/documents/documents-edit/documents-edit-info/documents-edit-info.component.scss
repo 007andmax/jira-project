@@ -1,4 +1,5 @@
 @import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
 
 .documents-create {
     max-width: 480px;
@@ -26,9 +27,9 @@
     }
 
     .label-name {
-        font-size: 13px !important;
+        @extend %body-m-sb;
+        color: $primary-2;
         margin-bottom: 8px !important;
-        font-weight: 600;
     }
 
     &__col {
@@ -50,7 +51,7 @@
         }
 
         textarea {
-            border: 1px solid $gray-800;
+            border: 1px solid $gray-500;
             border-radius: 4px;
             min-height: 80px;
             width: 100%;
@@ -62,17 +63,19 @@
 
     &-panel {
         &__subheader {
-            border-bottom: 1px solid $gray-400;
+            border-bottom: 1px solid $gray-500;
             display: flex;
+            @extend %сaption-l-sb;
 
             &-item {
                 flex: 1 0 auto;
-                padding: 8px 0;
+                padding: 11px 0;
                 text-align: center;
                 border: 1px solid transparent;
 
                 &.--active {
                     border-bottom-color: $primary-1;
+                    color: $primary-1;
                 }
             }
         }
@@ -98,7 +101,7 @@
             top: 2px;
             width: 16px;
             height: 16px;
-            border: 1px solid $gray-800;
+            border: 1px solid $gray-500;
             background: $white;
             min-width: 16px;
             border-radius: 2px;

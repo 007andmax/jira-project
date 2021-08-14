@@ -1,4 +1,5 @@
 @import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
 
 .documents-create {
     max-width: 480px;
@@ -169,18 +170,14 @@
         color: $white;
     }
     &__document-history-name {
-        font-size: 13px;
-        font-weight: $fw-medium;
-        margin-bottom: 6px;
-        line-height: 1;
+        @extend %body-m-m;
     }
     &__document-history-text {
-        font-size: 12px;
+        @extend %сaption-l;
+        color: $gray-700;
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
-        //max-width: calc(100% - 40px);
-        line-height: 1;
     }
 }
 

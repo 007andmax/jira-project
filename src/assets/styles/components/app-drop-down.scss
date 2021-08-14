@@ -58,7 +58,7 @@ app-drop-down {
       width: 100%;
       text-align: left;
       background: $white;
-      font-size: 13px;
+      @extend %body-m-m;
       color: $primary-2;
       text-overflow: ellipsis;
       overflow: hidden;

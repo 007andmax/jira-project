@@ -520,6 +520,8 @@ documents-filter {
       z-index: 1;
       padding-top: 5px;
       padding-bottom: 5px;
+      color: $primary-2;
+      @extend %сaption-l;
     }
   }
 }
@@ -768,10 +770,9 @@ documents-edit-info {
   }
   &__footer {
     .btn-new {
-      height: 48px;
+      height: 40px;
       border-radius: 4px;
-      font-size: 14px;
-      font-weight: 600;
+      @extend %body-m-sb;
     }
     .btn-primary {
       border: none;
@@ -1511,6 +1512,8 @@ app-quotes-item {
         z-index: 1;
         padding-top: 5px;
         padding-bottom: 5px;
+        color: $primary-2;
+        @extend %сaption-l;
       }
     }
   }
@@ -1566,6 +1569,11 @@ app-quotes-item {
           float: unset;
         }
       }
+
+      p {
+        @extend %body-m-m;
+        color: $primary-2;
+      }
     }
     &__address {
       width: 210px;
@@ -1614,10 +1622,12 @@ app-quotes-item {
       }
 
       .name {
-        color: $gray-800;
+        @extend %body-m-m;
+        color: $primary-2;
       }
 
       .phone {
+        @extend %body-m;
         color: $gray-600;
       }
     }
@@ -2232,8 +2242,7 @@ app-quotes-item {
   //}
 
   .light-dropdown .report-caret-icon {
-    //right: 10px;
-    right: 2px;
+    right: 15px;
   }
 
   .details-divider {

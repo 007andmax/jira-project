@@ -1,4 +1,5 @@
 @import './src/assets/styles/variable';
+@import './src/assets/styles/fonts';
 
 tr:hover {
     td {
@@ -26,6 +27,10 @@ tr:hover {
     padding: 0px;
   }
 .billable-payment-table__invoice {
- font-weight: 600;
+  font-weight: 600;
   color: $primary-1;
+
+  p {
+    @extend %body-m;
+  }
 }

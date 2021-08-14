@@ -1,4 +1,5 @@
 @import './src/assets/styles/variable';
+@import './src/assets/styles/fonts';
 
 .qt-aside {
   &__body {
@@ -185,8 +186,7 @@
   }
 
   &__ticket-subject {
-    font-size: 22px;
-    font-weight: 600;
+    @extend %h4-sb;
     margin-bottom: 10px
   }
 
