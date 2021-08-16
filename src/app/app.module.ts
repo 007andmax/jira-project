@@ -451,6 +451,7 @@ import { HomeComponent } from './components/home/home.component';
 import { CompanyDashAssociateComponent } from './components/company-dashboard/company-dash-associate/company-dash-associate.component';
 import { CompanyAssociateComponent } from './components/company-dashboard/company-dash-associate/company-associate/company-associate.component';
 import { CompanyDashAssociateInfoComponent } from './components/company-dashboard/company-dash-associate-info/company-dash-associate-info.component';
+import { PreparePhonePipe } from './pipe/prepare-phone.pipe';
 
 
 declare var $: any;
@@ -858,7 +859,8 @@ declare var $: any;
     HomeComponent,
     CompanyDashAssociateComponent,
     CompanyAssociateComponent,
-    CompanyDashAssociateInfoComponent
+    CompanyDashAssociateInfoComponent,
+    PreparePhonePipe
   ],
   imports: [
     BrowserModule,
@@ -913,7 +915,6 @@ declare var $: any;
     // RecurringTicketsComponent
   ],
   exports: [
-    PhonePipe,
     OrderByPipe,
   ],
   providers: [

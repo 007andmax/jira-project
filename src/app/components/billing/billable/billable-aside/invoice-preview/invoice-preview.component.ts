@@ -28,6 +28,12 @@ export class InvoicePreviewComponent implements OnInit {
     this.selectedNote = this.billableStateService.getRegularNote();
     this.currentCompany = this.companiesStateService.getCurrentCompany();
   }
+  getCurrentCompanyPhone() {
+    return (this.currentCompany.addresses[0].phoneNumbers.length > 0) ? this.currentCompany.addresses[0].phoneNumbers[0].number : ''
+  }
+  getContactsPhone() {
+    return (this.company.contacts[0].phoneNumbers && this.company.contacts[0].phoneNumbers.length > 0) ? this.company.contacts[0].phoneNumbers[0].number : ''
+  }
   getCompanyLogoUrl() {
     if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo && this.currentCompany.logo.base64 && !this.currentCompany.logo.cropped) return this.currentCompany.logo.base64;
     if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.cropped && this.currentCompany.logo.cropped.id) return `/file/${this.currentCompany.logo.cropped.id}`;

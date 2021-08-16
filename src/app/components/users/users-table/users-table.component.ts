@@ -54,12 +54,7 @@ export class UsersTableComponent implements OnInit {
   getUserName() {
     return `${this.user.firstName} ${this.user.lastName}`;
   }
-  getContact() {
-    let str = '';
-    if (this.user.phoneNumbers && this.user.phoneNumbers.length && this.user.phoneNumbers[0] && this.user.phoneNumbers[0].number) str += this.user.phoneNumbers[0].number;
-    if (this.user.phoneNumbers && this.user.phoneNumbers.length && this.user.phoneNumbers[1] && this.user.phoneNumbers[1].number) str += '<br/>' + this.user.phoneNumbers[1].number;
-    return str;
-  }
+
   getUserCompanyName() {
     if (this.user.company.isDefault) return '';
     let index = this.companies.findIndex(item => item.id === this.user.company.id);

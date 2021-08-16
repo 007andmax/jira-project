@@ -25,22 +25,17 @@ export class UserUpdate {
   constructor(data: UserProfile, user: User) {
     this.role = data.role;
 
-    if (!user.phoneNumbers || data.phoneNumbers.length === 1 && data.phoneNumbers[0].number === '' && user.phoneNumbers.length === 0) {
-      this.phoneNumbers = [];
-    } else {
-      this.phoneNumbers = data.phoneNumbers.map((item, index) => {
-        if (user.phoneNumbers.length === 0) {
-          return new UserPhoneNumber(null, item.number, item.typeNumber, null);
 
-        } else {
+    this.phoneNumbers = data.phoneNumbers.map((item, index) => {
+      if (!user.phoneNumbers || user.phoneNumbers && user.phoneNumbers.length === 0) {
+        return new UserPhoneNumber(null, item.number, item.typeNumber, null);
 
-          return new UserPhoneNumber(user.phoneNumbers[index].id, item.number, item.typeNumber, user.phoneNumbers[index].priority);
+      } else {
 
-        }
-      });
-    }
+        return new UserPhoneNumber(user.phoneNumbers[index].id, item.number, item.typeNumber, user.phoneNumbers[index].priority);
 
-
+      }
+    });
 
     this.subscription = new UserSubscription(user.subscription.id, data.subscription.invoice, data.subscription.ticket, data.subscription.ticketManager);
     this.welcomeEmail = data.welcomeEmail;
