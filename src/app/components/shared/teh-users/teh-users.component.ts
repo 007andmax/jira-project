@@ -1,5 +1,4 @@
 import { Component, OnInit, Output, EventEmitter, OnDestroy, Input, ChangeDetectorRef } from '@angular/core';
-import { TehUsersService } from 'src/app/services/teh-users/teh-users.service';
 import { TehUsersSateService } from './services/teh-users-sate.service';
 import { Subscription } from 'rxjs';
 import { RecurringTicketUser } from '../../tickets/recurring-tickets/interfaces/recurring-ticket-user';
@@ -36,7 +35,7 @@ export class TehUsersComponent implements OnInit, OnDestroy {
   * @param {tehService} TehUsersService Service to work with teh users
   * @param {TehUsersSateService} tehState to work with teh users state
   */
-  constructor(private tehService: TehUsersService,
+  constructor(
     private tehState: TehUsersSateService,
     public cd: ChangeDetectorRef,
     public ticketsListService: TicketsListService

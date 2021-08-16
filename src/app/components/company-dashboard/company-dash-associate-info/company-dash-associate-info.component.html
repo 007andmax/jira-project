@@ -6,13 +6,12 @@
                 <tr>
                     <th>Name</th>
                     <th>Phone</th>
-
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let item of company.associatedCompanies">
                     <td [textContent]="getCompanyName(item.id)"></td>
-                    <td [textContent]="getPhoneNumber(item.id)"></td>
+                    <td [textContent]="getPhoneNumber(item.id) | preparePhone | mask: '(000) 000-0000' | phone"></td>
                 </tr>
             </tbody>
         </table>
