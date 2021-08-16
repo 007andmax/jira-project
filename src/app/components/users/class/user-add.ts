@@ -16,6 +16,7 @@ export class UserAdd {
   primaryEmail: string;
   designation: string;
   companyId: string;
+  jobDescription: string;
   tags: Array<any> = [];
   constructor(data: UserProfile) {
     this.role = data.role;
@@ -37,6 +38,7 @@ export class UserAdd {
     this.tags = data.tags.map(item => {
       return { id: item.id };
     })
+    this.jobDescription = data.jobDescription;
 
   }
 }

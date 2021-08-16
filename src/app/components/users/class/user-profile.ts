@@ -19,6 +19,7 @@ export class UserProfile {
     designation: string;
     companyId: string;
     tags: Array<Tag> = [];
+    jobDescription: string;
     constructor() {
         this.subscription = {
             invoice: false, ticket: true, ticketManager: false
@@ -49,6 +50,7 @@ export class UserProfile {
         this.designation = user.designation;
         this.companyId = user.company.id;
         this.tags = user.tags;
+        this.jobDescription = user.jobDescription;
 
     }
     public editLogo(data) {
