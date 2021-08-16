@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { EventEmitter } from "@angular/core";
-import { UploadOutput,  UploadInput,  UploadFile,  humanizeBytes,  UploaderOptions } from "ngx-uploader";
+import { UploadOutput, UploadInput, UploadFile, humanizeBytes, UploaderOptions } from "ngx-uploader";
 import { ToastrService } from "ngx-toastr";
 import { CONFIGCONSTANTS } from "../config/app-constants";
 import { environment } from "../../../../environments/environment";
@@ -10,7 +10,7 @@ import { AgentService } from "src/app/services/agent/agent.service";
 import { Subscription } from "rxjs";
 import { CustomAdapter } from "./CustomDateAdapter";
 import { CustomDateParserFormatter } from "./CustomDateParserFormatter";
-import { reduce } from "rxjs/operators";
+import * as _ from "lodash";
 
 @Component({
   selector: "app-dashboard",
@@ -23,6 +23,8 @@ import { reduce } from "rxjs/operators";
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   @ViewChild(NgbDatepicker) expire: NgbDatepicker;
+  DateFormat = CONFIGCONSTANTS.DateFormat1;
+  DateTimeFormat = CONFIGCONSTANTS.DateTimeFormat1;
   url = environment.apiUrl + "upload";
   files: UploadFile[];
   uploadInput: EventEmitter<UploadInput>;
@@ -34,15 +36,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
   virusprotection: string = "";
   logicalDisk: any = [];
   virusInfo: any = [];
+  assetTag: any = [];
+  assetNotes;
   hostName = "";
   label: string = "";
+  selectedTag = [];
+  filteredTag = [];
+  tagFilterValue = "";
   visible = false;
   editNote = false;
   create = false;
   type = "";
   _id = "";
-  DateFormat = CONFIGCONSTANTS.DateFormat1;
-  DateTimeFormat = CONFIGCONSTANTS.DateTimeFormat1;
   sub: Subscription = new Subscription();
 
   constructor(
@@ -139,11 +144,72 @@ export class DashboardComponent implements OnInit, OnDestroy {
       .subscribe((data) => {
         this.agentService.setAccessToken(data.AccessToken);
         this.getAssetDetail();
-        this.getDiskDriveDetail();
         this.agentService
           .getAssetsByCompanyId("fdadb2df-ed3d-4e28-b41e-741617b7ffa6")
           .subscribe((res) => {});
       });
+  }
+
+  onSearchTag(value: string) {
+    let filter = value.toLowerCase();
+
+    if (filter != "" && this.filteredTag.length > 0) {
+      this.filteredTag = _.differenceBy(
+        this.filteredTag.filter((x) => x.Name.toLowerCase().includes(filter)),
+        this.selectedTag,
+        "ID"
+      );
+    } else if (this.filteredTag.length > 0) {
+      this.filteredTag = _.differenceBy(
+        this.filteredTag,
+        this.selectedTag,
+        "ID"
+      );
+    } else {
+      this.filteredTag = this.assetTag;
+    }
+  }
+
+  onSelectTag(tag: any): void {
+    const addTag: any = { ID: tag.ID, AssetID: this.asset.ID, Name: tag.Name };
+    this.agentService.addAssetTag(addTag).subscribe(
+      (resp) => {
+        this.selectedTag.push(addTag);
+        this.filteredTag = _.differenceBy(
+          this.assetTag,
+          this.selectedTag,
+          "ID"
+        );
+        this.tagFilterValue = "";
+        this.toastr.success("Asset tag save successfully.");
+      },
+      (error) => {
+        this.toastr.error("Something went wrong please try again.");
+      }
+    );
+  }
+
+  onRemoveTag(index: number): void {
+    const removetag: any = {
+      ID: this.asset.ID,
+      ID2: this.selectedTag[index].ID,
+      Password: "s8Y1IuPCUUYlSLMbFijHvuYhDDrEWfYjLyyYWDFvgW",
+    };
+
+    this.agentService.removeAssetTag(removetag).subscribe(
+      (resp) => {
+        this.selectedTag.splice(index, 1);
+        this.filteredTag = _.differenceBy(
+          this.assetTag,
+          this.selectedTag,
+          "ID"
+        );
+        this.toastr.success("Asset tag delete successfully.");
+      },
+      (error) => {
+        this.toastr.error("Something went wrong please try again.");
+      }
+    );
   }
 
   getAssetDetail() {
@@ -161,8 +227,36 @@ export class DashboardComponent implements OnInit, OnDestroy {
           this.asset.IsUpdated = true;
           this.getOprationSystemDetail();
           this.getVirusProtection(resp[0].VirusProtectionProducts);
+          this.getDiskDriveDetail();
+          this.getAssetTagDetail();
+          this.getAssetTagDropDownDetail();
         }
       });
+  }
+
+  getAssetNotesDetail() {
+    this.agentService.getAssetNotes(this.asset.ID).subscribe((res) => {
+      this.assetNotes = res.filter((x) => x.IsActive);
+      this.assetNotes.ID = this.asset.ID;
+    });
+  }
+
+  getAssetTagDetail() {
+    this.agentService.getAssetTagByAssetId(this.asset.ID).subscribe((res) => {
+      this.selectedTag = res;
+    });
+  }
+
+  getAssetTagDropDownDetail() {
+    this.agentService.getAssetTag().subscribe((resp) => {
+      if (this.selectedTag.length !== 0) {
+        this.assetTag = resp;
+        this.filteredTag = _.differenceBy(resp, this.selectedTag, "ID");
+      } else {
+        this.assetTag = resp;
+        this.filteredTag = resp;
+      }
+    });
   }
 
   getVirusProtection(inputVirusproctection: string) {
@@ -190,19 +284,21 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   getOprationSystemDetail() {
-    this.agentService.getOperatingSystemByAssetId("1").subscribe((resp) => {
-      this.asset.SerialNumber = resp[0].SerialNumber;
-      this.asset.Caption =
-        resp[0].Caption.replace("Microsoft", "") +
-        " " +
-        resp[0].OSArchitecture +
-        " " +
-        resp[0].Version;
-    });
+    this.agentService
+      .getOperatingSystemByAssetId(this.asset.ID)
+      .subscribe((resp) => {
+        this.asset.SerialNumber = resp[0].SerialNumber;
+        this.asset.Caption =
+          resp[0].Caption.replace("Microsoft", "") +
+          " " +
+          resp[0].OSArchitecture +
+          " " +
+          resp[0].Version;
+      });
   }
 
   getDiskDriveDetail() {
-    this.agentService.getDiskDriveByAssetId("1").subscribe((resp) => {
+    this.agentService.getDiskDriveByAssetId(this.asset.ID).subscribe((resp) => {
       this.logicalDisk = resp.filter((x) => x.IsActive);
       let colors = ["#0057a8", "#00d8e7", "#16a4fa", "#0CB2B2", "#485EF0"];
       let count = 0;

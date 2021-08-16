@@ -260,11 +260,11 @@ const routes: Routes = [
     component: SoftwareComponent
   },
   {
-    path: ':company/device/service',
+    path: ':company/device/service/:type/:id',
     component: ServicesComponent
   },
   {
-    path: ':company/device/antivirus',
+    path: ':company/device/antivirus/:type/:id',
     component: AntivirusComponent
   },
   {
@@ -272,19 +272,19 @@ const routes: Routes = [
     component: TerminalComponent
   },
   {
-    path: ':company/device/password',
+    path: ':company/device/password/:type/:id',
     component: PasswordComponent
   },
   {
-    path: ':company/device/window',
+    path: ':company/device/window/:type/:id',
     component: WindowsComponent
   },
   {
-    path: ':company/device/startup',
+    path: ':company/device/startup/:type/:id',
     component: StartupComponent
   },
   {
-    path: ':company/device/file',
+    path: ':company/device/file/:type/:id',
     component: FileComponent
   },
   {

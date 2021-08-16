@@ -248,236 +248,49 @@
                                         +Add Tags
                                     </a>
                                 </div>
-                                <ul class="list-unstyled">
-                                    <li>
-                                        <span class="tag">Server Exchange Server</span>
-                                        <a
-                                            href="javascript:;"
-                                            class="tag-close"
-                                        >
-                                            <img
-                                                src="/html/assets/img/device/tag-close-2.svg"
-                                                alt="Tag close"
+                                <div
+                                    class="grey-dropdown"
+                                    ngbDropdown
+                                    #products="ngbDropdown"
+                                >
+                                    <mat-form-field appearance="none">
+                                        <mat-chip-list #chipList>
+                                            <mat-chip
+                                                *ngFor="let tag of selectedTag; let i = index"
+                                                (removed)="onRemoveTag(i)"
                                             >
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="tag">DNS</span>
-                                        <a
-                                            href="javascript:;"
-                                            class="tag-close"
+                                                {{ tag.Name }}
+                                                <mat-icon matChipRemove>cancel</mat-icon>
+                                            </mat-chip>
+                                        </mat-chip-list>
+                                        <input
+                                            id="dropdownServices"
+                                            [(ngModel)]="tagFilterValue"
+                                            ngbDropdownToggle
+                                            class="pointer"
+                                            [matChipInputFor]="chipList"
+                                            (keyup)="onSearchTag($event.target.value)"
                                         >
-                                            <img
-                                                src="/html/assets/img/device/tag-close-2.svg"
-                                                alt="Tag close"
-                                            >
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="tag">SQL</span>
-                                        <a
-                                            href="javascript:;"
-                                            class="tag-close"
+                                    </mat-form-field>
+                                    <div
+                                        class="dropdown-menu"
+                                        ngbDropdownMenu
+                                        aria-labelledby="dropdownServices"
+                                    >
+                                        <ng-template
+                                            ngFor
+                                            let-tag
+                                            [ngForOf]="filteredTag"
                                         >
-                                            <img
-                                                src="/html/assets/img/device/tag-close-2.svg"
-                                                alt="Tag close"
-                                            >
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="tag">FIle Server</span>
-                                        <a
-                                            href="javascript:;"
-                                            class="tag-close"
-                                        >
-                                            <img
-                                                src="/html/assets/img/device/tag-close-2.svg"
-                                                alt="Tag close"
-                                            >
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="tag">Support Files</span>
-                                        <a
-                                            href="javascript:;"
-                                            class="tag-close"
-                                        >
-                                            <img
-                                                src="/html/assets/img/device/tag-close-2.svg"
-                                                alt="Tag close"
-                                            >
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="tag">Carestream</span>
-                                        <a
-                                            href="javascript:;"
-                                            class="tag-close"
-                                        >
-                                            <img
-                                                src="/html/assets/img/device/tag-close-2.svg"
-                                                alt="Tag close"
-                                            >
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="tag">Server Cleardent</span>
-                                        <a
-                                            href="javascript:;"
-                                            class="tag-close"
-                                        >
-                                            <img
-                                                src="/html/assets/img/device/tag-close-2.svg"
-                                                alt="Tag close"
-                                            >
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="tag">SQL Master</span>
-                                        <a
-                                            href="javascript:;"
-                                            class="tag-close"
-                                        >
-                                            <img
-                                                src="/html/assets/img/device/tag-close-2.svg"
-                                                alt="Tag close"
-                                            >
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="tag">Server Exchange Server</span>
-                                        <a
-                                            href="javascript:;"
-                                            class="tag-close"
-                                        >
-                                            <img
-                                                src="/html/assets/img/device/tag-close-2.svg"
-                                                alt="Tag close"
-                                            >
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="tag">DNS</span>
-                                        <a
-                                            href="javascript:;"
-                                            class="tag-close"
-                                        >
-                                            <img
-                                                src="/html/assets/img/device/tag-close-2.svg"
-                                                alt="Tag close"
-                                            >
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="tag">SQL</span>
-                                        <a
-                                            href="javascript:;"
-                                            class="tag-close"
-                                        >
-                                            <img
-                                                src="/html/assets/img/device/tag-close-2.svg"
-                                                alt="Tag close"
-                                            >
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="tag">FIle Server</span>
-                                        <a
-                                            href="javascript:;"
-                                            class="tag-close"
-                                        >
-                                            <img
-                                                src="/html/assets/img/device/tag-close-2.svg"
-                                                alt="Tag close"
-                                            >
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="tag">Support Files</span>
-                                        <a
-                                            href="javascript:;"
-                                            class="tag-close"
-                                        >
-                                            <img
-                                                src="/html/assets/img/device/tag-close-2.svg"
-                                                alt="Tag close"
-                                            >
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="tag">Carestream</span>
-                                        <a
-                                            href="javascript:;"
-                                            class="tag-close"
-                                        >
-                                            <img
-                                                src="/html/assets/img/device/tag-close-2.svg"
-                                                alt="Tag close"
-                                            >
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="tag">Server Cleardent</span>
-                                        <a
-                                            href="javascript:;"
-                                            class="tag-close"
-                                        >
-                                            <img
-                                                src="/html/assets/img/device/tag-close-2.svg"
-                                                alt="Tag close"
-                                            >
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="tag">SQL Master</span>
-                                        <a
-                                            href="javascript:;"
-                                            class="tag-close"
-                                        >
-                                            <img
-                                                src="/html/assets/img/device/tag-close-2.svg"
-                                                alt="Tag close"
-                                            >
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="tag">Carestream</span>
-                                        <a
-                                            href="javascript:;"
-                                            class="tag-close"
-                                        >
-                                            <img
-                                                src="/html/assets/img/device/tag-close-2.svg"
-                                                alt="Tag close"
-                                            >
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="tag">Server Cleardent</span>
-                                        <a
-                                            href="javascript:;"
-                                            class="tag-close"
-                                        >
-                                            <img
-                                                src="/html/assets/img/device/tag-close-2.svg"
-                                                alt="Tag close"
-                                            >
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="tag">SQL Master</span>
-                                        <a
-                                            href="javascript:;"
-                                            class="tag-close"
-                                        >
-                                            <img
-                                                src="/html/assets/img/device/tag-close-2.svg"
-                                                alt="Tag close"
-                                            >
-                                        </a>
-                                    </li>
-                                </ul>
+                                            <button
+                                                ngbDropdownItem
+                                                class="dropdown-item"
+                                                (click)="onSelectTag(tag)"
+                                                [textContent]="tag.Name"
+                                            ></button>
+                                        </ng-template>
+                                    </div>
+                                </div>
                             </div>
                             <div class="dashboard-col col-50 recent-activity">
                                 <h2>Recent Activity</h2>

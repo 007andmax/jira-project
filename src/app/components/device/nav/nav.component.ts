@@ -64,9 +64,33 @@ export class NavComponent implements OnInit {
     this.router.navigate(
       [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/software/${this.type}/${this._id}`]);
   }
+  goToStartProgrames(){
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/startup/${this.type}/${this._id}`]);
+  }
+  goToServices(){
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/service/${this.type}/${this._id}`]);
+  }
+  goToAntivirus(){
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/antivirus/${this.type}/${this._id}`]);
+  }
   goToTerminal() {
     this.router.navigate(
       [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/terminal/${this.type}/${this._id}`]);
+  }
+  goToWindowUpdate(){
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/window/${this.type}/${this._id}`]);
+  }
+  goToFileExplorer(){
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/file/${this.type}/${this._id}`]);
+  }
+  goToPasswords(){
+    this.router.navigate(
+      [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/device/password/${this.type}/${this._id}`]);
   }
   getCurrentCompany() {
 
