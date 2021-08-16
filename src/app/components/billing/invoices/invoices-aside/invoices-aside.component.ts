@@ -67,7 +67,6 @@ export class InvoicesAsideComponent implements OnInit {
     this.payment.setPaymentMethod(data.value);
   }
   onChangeAmountReceived(event) {
-    console.log("event.target.value", event.target.value);
     this.amountReceived = Number(event.target.value);
     this.amountReceived = parseFloat((this.amountReceived).toFixed(2));
     this.isChangeAmountReceived = (this.amountReceived > 0);
@@ -103,7 +102,7 @@ export class InvoicesAsideComponent implements OnInit {
     this.amountReceived = 0;
   }
   public onChangePayment(val, invoice) {
-    let value = Number(val);
+    let value = Number(val.target.value);
     invoice.paymentAmount = parseFloat((((value) * 100) / 100).toFixed(2));
     this.validate.setValidPayment(true);
     if (!this.validate.getAmountReceived()) this.validate.checkAmountReceived(this.amountReceived, this.invoices);
