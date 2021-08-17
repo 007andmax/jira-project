@@ -4,7 +4,7 @@
 @import "./assets/styles/icons.scss";
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "./assets/styles/main.scss";
-@import "./assets/styles/fonts";
+@import "./src/assets/styles/fonts";
 
 .h1,
 h1 {
@@ -118,8 +118,7 @@ h6,
   background: $white;
   color: $primary-1;
   border: 1px solid $primary-1;
-  font-size: 12px;
-  font-weight: 600;
+  @extend %сaption-l-m;
   &:hover {
     background: $primary-1;
     color: $white;
@@ -3302,9 +3301,8 @@ app-ticket-edit-aside-devices {
 
   app-taxes {
     .label-name {
-      //font-weight: 600;
-      //line-height: 21px;
-      margin-bottom: 5px;
+      margin-bottom: 8px;
+      color: $primary-2;
     }
 
     .new-taxes-area {
@@ -3564,10 +3562,15 @@ input.--input-error {
       padding-left: 6px;
 
       input {
+        @extend %сaption-l;
         height: 34px;
         margin: 0;
         width: 100%;
         flex: 1;
+
+        &::placeholder {
+          color: $gray-600;
+        }
       }
     }
   }

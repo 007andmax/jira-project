@@ -35,8 +35,7 @@ app-drop-down {
 
   &__title {
     @extend %body-m-sb;
-    color: $gray-800;
-    //margin-bottom: 12px; //TODO delete after replace all label on 8px
+    color: $primary-2;
     margin-bottom: 8px;
   }
 

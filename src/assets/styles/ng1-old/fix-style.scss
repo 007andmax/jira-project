@@ -1,4 +1,5 @@
 @import './src/assets/styles/variable';
+@import './src/assets/styles/fonts';
 
 html {
   font-family: "Inter";
@@ -327,8 +328,8 @@ p {
 }
 
 .new-companies-content__modal--content > [class*="col-md-"] p, .new-users-content__modal--content > [class*="col-md-"] p, .recurring-tickets-content__modal--content > [class*="col-md-"] p, .new-users-content__modal--content app-interval > [class*="col-md-"] p, .recurring-tickets-content__modal--content app-interval > [class*="col-md-"] p, .password-content__modal--content > [class*="col-md-"] p {
-  font-weight: 600;
-  font-size: 13px;
+  @extend %body-m-sb;
+  color: $primary-2;
   margin-bottom: 8px;
 }
 
@@ -514,8 +515,7 @@ textarea {
 
 .new-companies-content__modal {
   .switch-link {
-    font-weight: $fw-medium;
-    font-size: 13px;
+    @extend %body-m-sb;
     color: $primary-2;
   }
 
@@ -544,7 +544,7 @@ textarea {
       border-top-right-radius: 4px;
       border-bottom-left-radius: 0;
       border-top-left-radius: 0;
-      border-right: 1px solid $gray-800;
+      border-right: 1px solid $gray-500;
       border-left: none;
     }
   }
@@ -570,7 +570,6 @@ textarea {
 
   .text-content {
     flex: 1;
-    padding: 3px 0 16px;
   }
 
   .name,
@@ -588,7 +587,6 @@ textarea {
   }
 
   .description {
-    margin-top: 6px;
     color: $gray-700;
     font-size: 12px;
   }
@@ -613,6 +611,17 @@ textarea {
   z-index: 2;
 }
 
+.new-companies-content__modal--content .info-section {
+  display: flex;
+  justify-content: flex-start;
+  padding: 8px 12px;
+  border: 1px dashed $gray-500;
+  border-radius: 6px;
+
+  .text {
+    @extend %сaption-l;
+  }
+}
 
 .payment-status, .network-scan-status, .invoice-status, .quote-status {
   padding: 0 10px;

@@ -11,8 +11,10 @@
   margin-top: 0px !important;
   .qt-checkbox {
     .text-content {
+      @extend %body-m;
       margin-top: -2px;
       flex: 1;
+
     }
     .name,
     .description {
@@ -52,7 +54,7 @@
 
       .qt-checkbox {
         width: 100%;
-        /*  min-height: 30px;*/
+        min-height: auto;
         max-height: 50px;
         height: auto;
         align-items: flex-start;

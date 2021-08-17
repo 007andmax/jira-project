@@ -1,4 +1,5 @@
 @import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
 
 .device-user-wrap {
     * {
@@ -144,10 +145,8 @@
     content: "Select Company and User to link";
 }
 .title-link-to {
-    font-weight: $fw-medium;
-    font-size: 13px;
-
-    //margin-top: 20px;
+   @extend %body-m-sb;
+   color: $primary-2;
 }
 .qt-checkbox {
     span {
