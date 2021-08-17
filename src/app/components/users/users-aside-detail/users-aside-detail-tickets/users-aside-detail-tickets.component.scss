@@ -1,0 +1,28 @@
+/deep/ .ticket-table {
+    th {
+        white-space: nowrap;
+    }
+    td {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+}
+
+.priority-icon {
+    margin-left: 8px;
+}
+
+users-aside-detail-tickets-item {
+    display: contents;
+}
+.qt-page-list__body-tbody {
+    min-width: auto !important;
+}
+.qt-page-list__body-table-container {
+    position: relative;
+}
+.pengind-loading {
+    bottom: 20px;
+    top: auto;
+}

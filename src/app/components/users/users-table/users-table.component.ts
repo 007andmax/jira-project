@@ -42,6 +42,7 @@ export class UsersTableComponent implements OnInit {
     private elRef: ElementRef) { }
 
   onChangeSubscriptions(data) {
+    console.log("data", data);
     this.usersService.setSubscriptions(data).subscribe(res => {
 
       this.user.subscription = data;

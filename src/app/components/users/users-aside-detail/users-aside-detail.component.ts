@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { UsersService } from 'src/app/services/users/users.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { PhoneNumber } from 'src/class/phone-number';
@@ -17,11 +18,13 @@ export class UsersAsideDetailComponent implements OnInit {
   open: boolean = false;
   constructor(public ticketsListService: TicketsListService,
     private usersStateService: UsersStateService,
+    private usersService: UsersService,
     private companiesStateService: CompaniesStateService,) { }
 
   ngOnInit() {
     this.usersStateService.openDetailAside.subscribe(data => {
       this.user = data;
+      console.log("this.user", this.user);
       if (this.user.phoneNumbers && this.user.phoneNumbers.length === 0 || !this.user.phoneNumbers) {
         this.user.phoneNumbers = [new PhoneNumber('OFFICE')];
       } else {
@@ -41,5 +44,10 @@ export class UsersAsideDetailComponent implements OnInit {
     let find = this.companiesStateService.getCompanies().find(item => item.id === this.user.company.id);
     return (find) ? find.name : '';
   }
+  onChangeSubscriptions(data) {
+    this.usersService.setSubscriptions(data).subscribe(res => {
 
+      this.user.subscription = data;
+    })
+  }
 }

@@ -453,6 +453,8 @@ import { CompanyAssociateComponent } from './components/company-dashboard/compan
 import { CompanyDashAssociateInfoComponent } from './components/company-dashboard/company-dash-associate-info/company-dash-associate-info.component';
 import { PreparePhonePipe } from './pipe/prepare-phone.pipe';
 import { UsersAsideDetailComponent } from './components/users/users-aside-detail/users-aside-detail.component';
+import { UsersAsideDetailTicketsComponent } from './components/users/users-aside-detail/users-aside-detail-tickets/users-aside-detail-tickets.component';
+import { UsersAsideDetailTicketsItemComponent } from './components/users/users-aside-detail/users-aside-detail-tickets/users-aside-detail-tickets-item/users-aside-detail-tickets-item.component';
 
 
 declare var $: any;
@@ -863,7 +865,9 @@ declare var $: any;
     CompanyAssociateComponent,
     CompanyDashAssociateInfoComponent,
     PreparePhonePipe,
-    UsersAsideDetailComponent
+    UsersAsideDetailComponent,
+    UsersAsideDetailTicketsComponent,
+    UsersAsideDetailTicketsItemComponent
   ],
   imports: [
     BrowserModule,
