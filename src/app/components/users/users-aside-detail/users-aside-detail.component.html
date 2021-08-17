@@ -1,0 +1,88 @@
+<div
+    class="invoices-page__aside qt-aside-modern --x-large aside-preview"
+    *ngIf="open"
+>
+    <div class="qt-aside-modern__header">
+        <div class="qt-aside-modern__header-title">User Detail</div>
+        <div class="qt-df qt-ai-c">
+            <div
+                class="icon__close qt-aside-modern__header-close"
+                (click)="close()"
+            ></div>
+        </div>
+    </div>
+    <div class="qt-aside-modern__content --no-padding --no-footer">
+        <div class="qt-pl-30 qt-pr-30 qt-pt-24 qt-pb-50">
+            <div class="user-detail-aside__header d-f jc-sb ai-c">
+                <div class="d-f">
+                    <div
+                        class="user-detail-aside__header-avatar"
+                        [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
+                        [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
+                    ></div>
+                    <div>
+                        <div class="d-f ai-c">
+                            <div class="user-detail-aside__header-company">
+                                <span [textContent]="ticketsListService.getUserName(user)"></span>
+                            </div>
+                        </div>
+                        <div class="user-detail-aside__header-info">
+                            <span [textContent]="user.designation"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="user-detail-aside__divider">
+            <div class="user-detail__row-info">
+                <div class="user-detail__row-info-line">
+                    <div class="user-detail__row-info-label">Company</div>
+                    <div
+                        class="user-detail__row-info-value"
+                        [textContent]="getCompanyName()"
+                    ></div>
+                </div>
+                <div class="user-detail__row-info-line">
+                    <div class="user-detail__row-info-label">Email Address</div>
+                    <div
+                        class="user-detail__row-info-value"
+                        [textContent]="user.primaryEmail"
+                    ></div>
+                </div>
+                <div class="user-detail__row-info-line">
+                    <div class="user-detail__row-info-label">Primary Phone</div>
+                    <div
+                        class="user-detail__row-info-value"
+                        [textContent]="user.phoneNumbers[0].number | preparePhone | mask: '(000) 000-0000' | phone"
+                    ></div>
+                </div>
+            </div>
+            <hr class="user-detail__divider">
+            <div class="user-detail__row-info">
+                <div class="user-detail__row-info-line">
+                    <div class="user-detail__row-info-label">Subscription</div>
+                    <app-company-subscription
+                        [editItem]="user.subscription"
+                        (subscribeChange)="onChangeSubscriptions($event)"
+                    ></app-company-subscription>
+                </div>
+                <div class="user-detail__row-info-line">
+                    <div class="user-detail__row-info-label">Job Description</div>
+                    <div
+                        class="user-detail__row-info-value"
+                        [textContent]="user.jobDescription"
+                    ></div>
+                </div>
+                <div class="user-detail__row-info-line">
+                    <div class="user-detail__row-info-label">Tags</div>
+                    <app-company-tags
+                        #companyTags
+                        [showLabel]="false"
+                        [selectedTag]="user.tags"
+                        [placement]="'top'"
+                        (tagsChange)="onChangeTags($event)"
+                    ></app-company-tags>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

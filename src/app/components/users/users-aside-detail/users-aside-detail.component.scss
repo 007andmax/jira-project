@@ -1,0 +1,48 @@
+.user-detail-aside__header {
+    font-size: 13px;
+    font-weight: 600;
+    margin-right: 10px;
+}
+.user-detail-aside__header-avatar {
+    width: 40px;
+    height: 40px;
+    margin-right: 12px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: white;
+}
+.user-detail-aside__header-company {
+    font-size: 13px;
+    font-weight: 600;
+    margin-right: 10px;
+}
+.user-detail-aside__header-info {
+    color: #4f5f79;
+    font-size: 13px;
+}
+.user-detail-aside__divider {
+    border-top: 1px dashed #dfe3e8;
+    margin: 16px 0;
+}
+.user-detail__row-info {
+    margin-top: 24px;
+}
+.user-detail__row-info-line {
+    margin-bottom: 16px;
+    .user-detail__row-info-label {
+        font-size: 11px;
+        color: #9ca5b6;
+        line-height: 12px;
+        margin-bottom: 4px;
+    }
+    .user-detail__row-info-value {
+        font-size: 13px;
+        line-height: 16px;
+        color: #4f5f79;
+    }
+}

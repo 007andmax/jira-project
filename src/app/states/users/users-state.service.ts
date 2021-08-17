@@ -23,6 +23,7 @@ export class UsersStateService {
   onFilter: EventEmitter<any> = new EventEmitter();
   openAside: EventEmitter<any> = new EventEmitter();
   openEditAside: EventEmitter<any> = new EventEmitter();
+  openDetailAside: EventEmitter<any> = new EventEmitter();
   onChangeUserPermissions: EventEmitter<any> = new EventEmitter();
   userForArchive: User = null;
   usersForArchive: Array<User> = [];
@@ -88,6 +89,9 @@ export class UsersStateService {
   }
   public getShowArchivedCompanies() {
     return this.showArchivedCompanies;
+  }
+  public showDetailUser(data) {
+    this.openDetailAside.emit(data);
   }
   public getFilter() {
     return this.filter;

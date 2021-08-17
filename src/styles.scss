@@ -402,6 +402,13 @@ company-associate {
       height: 30px;
     }
   }
+  .hidde-label {
+    .mat-form-field-wrapper {
+      &::before {
+        display: none;
+      }
+    }
+  }
 }
 documents-filter {
   app-company-tags {
@@ -452,6 +459,7 @@ documents-filter {
 documents-filter,
 app-documents-add-info,
 .company-dashboard-add-tag,
+users-aside-detail,
 documents-edit-info {
   .tab-btns {
     display: flex;

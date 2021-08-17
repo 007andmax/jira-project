@@ -54,7 +54,9 @@ export class UsersTableComponent implements OnInit {
   getUserName() {
     return `${this.user.firstName} ${this.user.lastName}`;
   }
-
+  showDetailUser() {
+    this.usersStateService.showDetailUser(this.user);
+  }
   getUserCompanyName() {
     if (this.user.company.isDefault) return '';
     let index = this.companies.findIndex(item => item.id === this.user.company.id);

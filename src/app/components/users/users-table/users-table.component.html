@@ -15,7 +15,10 @@
             </label>
         </div>
     </td>
-    <td class="users-table__name">
+    <td
+        class="users-table__name"
+        (click)="showDetailUser()"
+    >
         <div class="qt-df qt-ai-c">
             <div
                 class="users-table__name--avatar"
@@ -37,16 +40,21 @@
     <td
         class="users-table__company"
         *ngIf="type === TYPE_LIST_ALL_USERS"
+        (click)="showDetailUser()"
     >
         <span>{{ getUserCompanyName() }}</span>
     </td>
     <td
         class="users-table__company"
         *ngIf="type === TYPE_LIST_COMPANY_USERS"
+        (click)="showDetailUser()"
     >
         <span>{{ user.primaryEmail }}</span>
     </td>
-    <td class="users-table__contract-no">
+    <td
+        class="users-table__contract-no"
+        (click)="showDetailUser()"
+    >
         <ng-template
             ngFor
             let-phone
@@ -82,6 +90,7 @@
     <td
         class="users-table__tickets"
         [textContent]="user.userStatistic.ticketsSubmitted || 0"
+        (click)="showDetailUser()"
     ></td>
     <td class="users-table__email">
         <app-dynamic-tooltip

@@ -452,6 +452,7 @@ import { CompanyDashAssociateComponent } from './components/company-dashboard/co
 import { CompanyAssociateComponent } from './components/company-dashboard/company-dash-associate/company-associate/company-associate.component';
 import { CompanyDashAssociateInfoComponent } from './components/company-dashboard/company-dash-associate-info/company-dash-associate-info.component';
 import { PreparePhonePipe } from './pipe/prepare-phone.pipe';
+import { UsersAsideDetailComponent } from './components/users/users-aside-detail/users-aside-detail.component';
 
 
 declare var $: any;
@@ -861,7 +862,8 @@ declare var $: any;
     CompanyDashAssociateComponent,
     CompanyAssociateComponent,
     CompanyDashAssociateInfoComponent,
-    PreparePhonePipe
+    PreparePhonePipe,
+    UsersAsideDetailComponent
   ],
   imports: [
     BrowserModule,
