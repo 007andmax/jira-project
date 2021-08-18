@@ -39,12 +39,14 @@ export class UsersAsideDetailComponent implements OnInit {
           return new PhoneNumber(item.typeNumber, number);
         })
       }
-      this.open = true;
       this.cd.detectChanges();
       if (this.ticketsDetail) {
         this.ticketsDetail.setDefaultScoll();
         this.ticketsDetail.onScroll();
       }
+      this.open = true;
+
+
     })
   }
   onChangeTags(data) {
@@ -73,7 +75,7 @@ export class UsersAsideDetailComponent implements OnInit {
     }
     data.forEach(item => subscription[item.field] = item.selected);
     this.usersService.setSubscriptions(subscription).subscribe(res => {
-      this.user.subscription = data;
+
     })
   }
 }

@@ -2,10 +2,10 @@
     <div
         class="qt-page-list__body-table-container"
         [ngStyle]="{'padding-bottom': (showPendingPreloader) ? '65px' : '0px'}"
+        #content
     >
         <table class="qt-page-list__body-tbody qt-table-modern ticket-table">
             <tbody
-                #content
                 infiniteScroll
                 [infiniteScrollContainer]="content"
                 [infiniteScrollDistance]="2"
