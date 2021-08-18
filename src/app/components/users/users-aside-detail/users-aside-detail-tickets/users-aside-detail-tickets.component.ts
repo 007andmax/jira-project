@@ -23,7 +23,7 @@ export class UsersAsideDetailTicketsComponent implements OnInit {
   @Input() set setUser(value) {
     this.user = value;
     this.ticketsFilter.setUser(this.user);
-    console.log("this.user", this.user);
+
   };
 
   showPreloader: boolean = true;
@@ -43,7 +43,8 @@ export class UsersAsideDetailTicketsComponent implements OnInit {
 
   ngOnInit() {
     this.ticketsFilter.setListType("ALL");
-
+    this.listColors = this.ticketsStateService.getListStatusColor();
+    this.statusColor = this.ticketsStateService.getTicketsColor();
     this.ticketsStateService.getOnAddTicket().subscribe(data => {
       if (this.ticketsListService.isTicketMatchesFilters(this.ticketsFilter, data)) {
         this.tickets.unshift(data);
@@ -116,6 +117,7 @@ export class UsersAsideDetailTicketsComponent implements OnInit {
     this.ticketsListService.setBlockList(false);
     this.tickets = [];
     this.showPreloader = true;
+    this.cd.detectChanges();
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

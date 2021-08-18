@@ -1,9 +1,13 @@
-import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 import { TagsService } from 'src/app/services/tags/tags.service';
 import { UsersService } from 'src/app/services/users/users.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { PhoneNumber } from 'src/class/phone-number';
+import { StatusColor } from '../../left-panel/left-panel-tickets/tickets-status/class/status-color';
+import { TicketsColor } from '../../left-panel/left-panel-tickets/tickets-status/class/tickets-color';
 
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { User } from '../class/user';
@@ -18,12 +22,15 @@ import { UsersAsideDetailTicketsComponent } from './users-aside-detail-tickets/u
 export class UsersAsideDetailComponent implements OnInit {
   user: User;
   open: boolean = false;
+  @Output() onClosed = new EventEmitter<any>();
   @ViewChild('ticketsDetail') ticketsDetail: UsersAsideDetailTicketsComponent;
   constructor(public ticketsListService: TicketsListService,
     private usersStateService: UsersStateService,
     private usersService: UsersService,
     private tagsService: TagsService,
     public cd: ChangeDetectorRef,
+    private leftPanelService: LeftPanelService,
+    private ticketsStateService: TicketsStateService,
     private companiesStateService: CompaniesStateService,) { }
 
   ngOnInit() {
@@ -48,6 +55,17 @@ export class UsersAsideDetailComponent implements OnInit {
 
 
     })
+    this.leftPanelService.getColors().subscribe((data: any) => {
+      let listColors = data.map(item => {
+        return new StatusColor(item.backgroundColor, item.borderColor);
+      })
+      this.ticketsStateService.onColorStatus(listColors);
+    })
+    this.leftPanelService.getTicketsStatus().subscribe((data: any) => {
+
+      let ticketsColor = new TicketsColor(data);
+      this.ticketsStateService.onInitStatus(ticketsColor);
+    })
   }
   onChangeTags(data) {
     console.log("onChangeTags", data);
@@ -60,6 +78,7 @@ export class UsersAsideDetailComponent implements OnInit {
   }
   close() {
     this.open = false;
+    this.onClosed.emit(null);
   }
   getCompanyName() {
     let find = this.companiesStateService.getCompanies().find(item => item.id === this.user.company.id);

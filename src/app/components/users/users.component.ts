@@ -148,7 +148,7 @@ export class UsersComponent implements OnInit {
     })
     this.userListService.addSubscription(archiveUser);
   }
-  detailUser(data) {
+  setIdDetailUser(data) {
     this.idDetailUser = data;
   }
   showMobileFilter() {

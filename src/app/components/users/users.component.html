@@ -27,7 +27,7 @@
                     >
                         <app-users-table
                             [selected]="idDetailUser === user.id"
-                            (click)="detailUser(user.id)"
+                            (click)="setIdDetailUser(user.id)"
                             [type]="TYPE_LIST_ALL_USERS"
                             [showArchivedUsers]="showArchivedUsers"
                             (onSelectUser)="onSelectUser($event)"
@@ -42,5 +42,5 @@
             ></div>
         </div>
     </div>
-    <users-aside-detail></users-aside-detail>
+    <users-aside-detail (onClosed)="setIdDetailUser('')"></users-aside-detail>
 </div>
