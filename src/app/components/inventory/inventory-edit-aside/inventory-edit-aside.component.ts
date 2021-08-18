@@ -31,17 +31,17 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
   glNumbers: Array<GlNumber> = [];
   taxes: Array<Tax> = [];
   sub: Subscription = new Subscription();
-  vendors: Array<Company> = [];
+  suppliers: Array<Company> = [];
   companies: Array<Company> = [];
   categories: Array<CategoryProduct> = [];
   validate: InventoryValidate = new InventoryValidate();
-  editVendor: Company = null;
+  editSupplier: Company = null;
   cost: string;
   sale: string;
   @ViewChild('addTax') containerAddTax;
   @ViewChild('glNumberSelect') glNumberSelect: SelectSearchComponent;
   @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
-  @ViewChild('vendorsSelect') vendorsSelect: SelectSearchComponent;
+  @ViewChild('suppliersSelect') suppliersSelect: SelectSearchComponent;
   @ViewChild(TextAreaDirective) set appTextArea(directive: TextAreaDirective) {
     this.description = directive;
   };
@@ -68,9 +68,9 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnTaxess);
 
-    if (this.companiesStateService.getCompanies().length > 0) this.onInitVendors(this.companiesStateService.getCompanies());
+    if (this.companiesStateService.getCompanies().length > 0) this.onInitSuppliers(this.companiesStateService.getCompanies());
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
-      this.onInitVendors(data);
+      this.onInitSuppliers(data);
     })
     this.sub.add(getOnCompanies);
     if (this.inventoryStateService.getCategories().length > 0) this.categories = this.inventoryStateService.getCategories();
@@ -89,7 +89,7 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
         return (index > -1) ? true : false;
       })
       this.taxesStateService.setTaxesFromtEdit(taxes);
-      this.editVendor = this.vendors.find(item => item.id === this.inventory.companyId);
+      this.editSupplier = this.suppliers.find(item => item.id === this.inventory.companyId);
       this.elRef.nativeElement.querySelector("#inventory-description").value = this.inventory.description;
       this.opened = true;
       this.cost = (this.inventory.cost) ? this.inventory.cost.toFixed(2) : "0.00";
@@ -111,9 +111,9 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
       if (!data.value) this.validate.setManufactureIsExist();
     })
   }
-  private onInitVendors(data) {
-    this.vendors = data.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0)).filter(item => !item.deletedAt && !item.isDefault && item.clientType && item.clientType.toLowerCase() === 'vendor');
+  private onInitSuppliers(data) {
+    this.suppliers = data.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0)).filter(item => !item.deletedAt && !item.isDefault && item.clientType && item.clientType.toLowerCase() === 'supplier');
   }
   onAddCategory(data) {
     this.productService.addCategory(data).subscribe((data: any) => {
@@ -133,7 +133,7 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
       this.inventory.glNumber = res;
     })
   }
-  onSelectVendor(data) {
+  onSelectSupplier(data) {
     if (data) this.inventory.companyId = data.id;
     if (!data) this.inventory.companyId = null;
   }
@@ -173,7 +173,7 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
     this.opened = false;
     this.glNumberSelect.clearClient();
     this.categoriesSelect.clearClient();
-    this.vendorsSelect.clearClient();
+    this.suppliersSelect.clearClient();
     this.taxesStateService.onInitClear();
     this.elRef.nativeElement.querySelector('#inventory-description').value = '';
     this.validate = new InventoryValidate();
