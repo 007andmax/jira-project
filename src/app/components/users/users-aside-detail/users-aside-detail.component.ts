@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { TagsService } from 'src/app/services/tags/tags.service';
 import { UsersService } from 'src/app/services/users/users.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -7,6 +7,7 @@ import { PhoneNumber } from 'src/class/phone-number';
 
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { User } from '../class/user';
+import { UsersAsideDetailTicketsComponent } from './users-aside-detail-tickets/users-aside-detail-tickets.component';
 
 @Component({
   selector: 'users-aside-detail',
@@ -17,10 +18,12 @@ import { User } from '../class/user';
 export class UsersAsideDetailComponent implements OnInit {
   user: User;
   open: boolean = false;
+  @ViewChild('ticketsDetail') ticketsDetail: UsersAsideDetailTicketsComponent;
   constructor(public ticketsListService: TicketsListService,
     private usersStateService: UsersStateService,
     private usersService: UsersService,
     private tagsService: TagsService,
+    public cd: ChangeDetectorRef,
     private companiesStateService: CompaniesStateService,) { }
 
   ngOnInit() {
@@ -37,6 +40,11 @@ export class UsersAsideDetailComponent implements OnInit {
         })
       }
       this.open = true;
+      this.cd.detectChanges();
+      if (this.ticketsDetail) {
+        this.ticketsDetail.setDefaultScoll();
+        this.ticketsDetail.onScroll();
+      }
     })
   }
   onChangeTags(data) {

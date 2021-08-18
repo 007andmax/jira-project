@@ -91,18 +91,10 @@
         </div>
         <div class="qt-pl-30 qt-pr-30 qt-pt-24 qt-pb-50 user-detail-statictics">
             <div class>Tickets</div>
-
-
-
-
-
-
-
-
-
-
-
-            <users-aside-detail-tickets [user]="user"></users-aside-detail-tickets>
+            <users-aside-detail-tickets
+                #ticketsDetail
+                [setUser]="user"
+            ></users-aside-detail-tickets>
         </div>
     </div>
 </div>

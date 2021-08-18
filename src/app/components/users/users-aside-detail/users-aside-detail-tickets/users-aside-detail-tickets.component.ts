@@ -18,8 +18,14 @@ import { User } from '../../class/user';
   providers: [TicketsListService]
 })
 export class UsersAsideDetailTicketsComponent implements OnInit {
-  @Input() user: User;
+  user: User;
   ticketsFilter: TicketsFilter = new TicketsFilter();
+  @Input() set setUser(value) {
+    this.user = value;
+    this.ticketsFilter.setUser(this.user);
+    console.log("this.user", this.user);
+  };
+
   showPreloader: boolean = true;
   public infiniteScrollDisabled = true;
   public page_number: number = 0;
@@ -36,7 +42,8 @@ export class UsersAsideDetailTicketsComponent implements OnInit {
     private ticketsStateService: TicketsStateService) { }
 
   ngOnInit() {
-    this.ticketsFilter.setUser(this.user);
+    this.ticketsFilter.setListType("ALL");
+
     this.ticketsStateService.getOnAddTicket().subscribe(data => {
       if (this.ticketsListService.isTicketMatchesFilters(this.ticketsFilter, data)) {
         this.tickets.unshift(data);
@@ -104,6 +111,12 @@ export class UsersAsideDetailTicketsComponent implements OnInit {
 
   }
 
+  public setDefaultScoll() {
+    this.page_number = 0;
+    this.ticketsListService.setBlockList(false);
+    this.tickets = [];
+    this.showPreloader = true;
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
