@@ -20,6 +20,7 @@ import { TYPE_LIST_ALL_USERS } from '../../const/users';
   providers: [UserListService]
 })
 export class UsersComponent implements OnInit {
+  idDetailUser: string = '';
   users: Array<User> = [];
   companies: Array<Company> = [];
   reqUsers: Array<User> = [];
@@ -146,6 +147,9 @@ export class UsersComponent implements OnInit {
 
     })
     this.userListService.addSubscription(archiveUser);
+  }
+  detailUser(data) {
+    this.idDetailUser = data;
   }
   showMobileFilter() {
     document.body.querySelector('app-left-panel-users').classList.add('show');

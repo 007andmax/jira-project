@@ -17,21 +17,22 @@
     color: white;
 }
 .user-detail-aside__header-company {
-    font-size: 13px;
+    font-size: 16px;
+    line-height: 24px;
     font-weight: 600;
-    margin-right: 10px;
+    // margin-right: 10px;
+    color: #212b36;
 }
 .user-detail-aside__header-info {
-    color: #4f5f79;
+    color: #637382;
     font-size: 13px;
+    line-height: 20px;
 }
 .user-detail-aside__divider {
     border-top: 1px dashed #dfe3e8;
     margin: 16px 0;
 }
-.user-detail__row-info {
-    margin-top: 24px;
-}
+
 .user-detail__row-info-line {
     margin-bottom: 16px;
     .user-detail__row-info-label {
@@ -43,12 +44,25 @@
     .user-detail__row-info-value {
         font-size: 13px;
         line-height: 16px;
-        color: #4f5f79;
+        color: #212b36;
     }
 }
 .qt-aside-modern__content {
     display: flex;
 }
 .user-detail-statictics {
-    width: 100%;
+    flex: 1;
+}
+.qt-aside-modern {
+    z-index: 2 !important;
+}
+.user-detail-info {
+    width: 360px;
+
+    padding: 16px 23px;
+}
+.user-detail-aside-subscription {
+    .user-detail__row-info-label {
+        margin-bottom: 8px;
+    }
 }

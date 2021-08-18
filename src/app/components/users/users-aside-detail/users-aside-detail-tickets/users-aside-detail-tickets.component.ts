@@ -29,7 +29,6 @@ export class UsersAsideDetailTicketsComponent implements OnInit {
   statusColor: TicketsColor;
   offset: number = 15;
   showPendingPreloader: boolean = false;
-  idEditTicket: string = '';
   constructor(private ticketsService: TicketsService,
     private ticketsListService: TicketsListService,
     private ticketStateService: TicketStateService,
@@ -71,7 +70,14 @@ export class UsersAsideDetailTicketsComponent implements OnInit {
 
   }
 
-
+  editTicket(id) {
+    let ticket = this.tickets.find(item => item.id === id);
+    this.ticketsStateService.onOpenTicket();
+    this.ticketsService.getTicket(id).subscribe(data => {
+      data.setUserCompanies(ticket.userCompanies);
+      this.ticketsStateService.onEditTicket(data);
+    })
+  }
   private getTickets() {
     if (this.ticketsListService.getBlockList()) {
       this.infiniteScrollDisabled = false;

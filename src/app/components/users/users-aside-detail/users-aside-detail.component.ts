@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { TagsService } from 'src/app/services/tags/tags.service';
 import { UsersService } from 'src/app/services/users/users.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
@@ -19,6 +20,7 @@ export class UsersAsideDetailComponent implements OnInit {
   constructor(public ticketsListService: TicketsListService,
     private usersStateService: UsersStateService,
     private usersService: UsersService,
+    private tagsService: TagsService,
     private companiesStateService: CompaniesStateService,) { }
 
   ngOnInit() {
@@ -37,6 +39,15 @@ export class UsersAsideDetailComponent implements OnInit {
       this.open = true;
     })
   }
+  onChangeTags(data) {
+    console.log("onChangeTags", data);
+    let ids = data.map(item => {
+      return { id: item.id }
+    });
+    this.tagsService.setTagsUser(this.user.id, ids).subscribe(data => {
+
+    })
+  }
   close() {
     this.open = false;
   }
@@ -45,8 +56,15 @@ export class UsersAsideDetailComponent implements OnInit {
     return (find) ? find.name : '';
   }
   onChangeSubscriptions(data) {
-    this.usersService.setSubscriptions(data).subscribe(res => {
-
+    console.log("onChangeSubscriptions", data);
+    let subscription = {
+      id: this.user.subscription.id,
+      invoice: true,
+      ticket: true,
+      ticketManager: true,
+    }
+    data.forEach(item => subscription[item.field] = item.selected);
+    this.usersService.setSubscriptions(subscription).subscribe(res => {
       this.user.subscription = data;
     })
   }

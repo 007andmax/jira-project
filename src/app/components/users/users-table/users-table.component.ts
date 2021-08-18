@@ -23,6 +23,7 @@ import { TYPE_LIST_ALL_USERS, TYPE_LIST_COMPANY_USERS } from 'src/app/const/user
   providers: [UsersTableService]
 })
 export class UsersTableComponent implements OnInit {
+  @Input() selected: boolean = false;
   @Input() user: User;
   @Input() type: string;
   @Input() showArchivedUsers: boolean;
