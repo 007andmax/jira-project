@@ -22,6 +22,7 @@ import { UsersAsideDetailTicketsComponent } from './users-aside-detail-tickets/u
 export class UsersAsideDetailComponent implements OnInit {
   user: User;
   open: boolean = false;
+  tab: string = 'tickets';
   @Output() onClosed = new EventEmitter<any>();
   @ViewChild('ticketsDetail') ticketsDetail: UsersAsideDetailTicketsComponent;
   constructor(public ticketsListService: TicketsListService,
@@ -46,14 +47,13 @@ export class UsersAsideDetailComponent implements OnInit {
           return new PhoneNumber(item.typeNumber, number);
         })
       }
+      this.tab = 'tickets';
       this.cd.detectChanges();
       if (this.ticketsDetail) {
         this.ticketsDetail.setDefaultScoll();
         this.ticketsDetail.onScroll();
       }
       this.open = true;
-
-
     })
     this.leftPanelService.getColors().subscribe((data: any) => {
       let listColors = data.map(item => {
@@ -75,6 +75,9 @@ export class UsersAsideDetailComponent implements OnInit {
     this.tagsService.setTagsUser(this.user.id, ids).subscribe(data => {
 
     })
+  }
+  setTab(data) {
+    this.tab = data;
   }
   close() {
     this.open = false;

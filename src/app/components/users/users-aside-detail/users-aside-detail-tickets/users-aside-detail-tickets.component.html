@@ -5,6 +5,13 @@
         #content
     >
         <table class="qt-page-list__body-tbody qt-table-modern ticket-table">
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
             <tbody
                 infiniteScroll
                 [infiniteScrollContainer]="content"
@@ -29,13 +36,13 @@
                 </ng-template>
             </tbody>
         </table>
-        <div
-            class="loading pengind-loading"
-            *ngIf="showPendingPreloader"
-        ></div>
-        <div
-            class="loading"
-            *ngIf="showPreloader"
-        ></div>
     </div>
+    <div
+        class="loading pengind-loading"
+        *ngIf="showPendingPreloader"
+    ></div>
+    <div
+        class="loading"
+        *ngIf="showPreloader"
+    ></div>
 </div>

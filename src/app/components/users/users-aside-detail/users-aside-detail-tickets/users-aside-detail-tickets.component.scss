@@ -28,3 +28,17 @@ users-aside-detail-tickets-item {
     bottom: 20px;
     top: auto;
 }
+.qt-page-list__body {
+    position: relative;
+}
+th {
+    font-size: 10px;
+    font-family: "Graphik-Medium";
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: normal;
+    color: #9ca5b6;
+    background-color: #f9fafb;
+    padding: 6px 10px 6px 0;
+    text-transform: uppercase;
+}

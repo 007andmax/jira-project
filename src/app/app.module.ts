@@ -455,6 +455,8 @@ import { PreparePhonePipe } from './pipe/prepare-phone.pipe';
 import { UsersAsideDetailComponent } from './components/users/users-aside-detail/users-aside-detail.component';
 import { UsersAsideDetailTicketsComponent } from './components/users/users-aside-detail/users-aside-detail-tickets/users-aside-detail-tickets.component';
 import { UsersAsideDetailTicketsItemComponent } from './components/users/users-aside-detail/users-aside-detail-tickets/users-aside-detail-tickets-item/users-aside-detail-tickets-item.component';
+import { UsersAsideDetailDocumentsComponent } from './components/users/users-aside-detail/users-aside-detail-documents/users-aside-detail-documents.component';
+import { UsersAsideDetailDocumentsItemComponent } from './components/users/users-aside-detail/users-aside-detail-documents/users-aside-detail-documents-item/users-aside-detail-documents-item.component';
 
 
 declare var $: any;
@@ -867,7 +869,9 @@ declare var $: any;
     PreparePhonePipe,
     UsersAsideDetailComponent,
     UsersAsideDetailTicketsComponent,
-    UsersAsideDetailTicketsItemComponent
+    UsersAsideDetailTicketsItemComponent,
+    UsersAsideDetailDocumentsComponent,
+    UsersAsideDetailDocumentsItemComponent
   ],
   imports: [
     BrowserModule,

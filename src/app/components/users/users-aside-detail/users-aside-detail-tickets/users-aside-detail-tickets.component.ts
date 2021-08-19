@@ -23,9 +23,7 @@ export class UsersAsideDetailTicketsComponent implements OnInit {
   @Input() set setUser(value) {
     this.user = value;
     this.ticketsFilter.setUser(this.user);
-
   };
-
   showPreloader: boolean = true;
   public infiniteScrollDisabled = true;
   public page_number: number = 0;
@@ -35,6 +33,7 @@ export class UsersAsideDetailTicketsComponent implements OnInit {
   statusColor: TicketsColor;
   offset: number = 15;
   showPendingPreloader: boolean = false;
+
   constructor(private ticketsService: TicketsService,
     private ticketsListService: TicketsListService,
     private ticketStateService: TicketStateService,
@@ -45,14 +44,15 @@ export class UsersAsideDetailTicketsComponent implements OnInit {
     this.ticketsFilter.setListType("ALL");
     this.listColors = this.ticketsStateService.getListStatusColor();
     this.statusColor = this.ticketsStateService.getTicketsColor();
-    this.ticketsStateService.getOnAddTicket().subscribe(data => {
+    let getOnAddTicket = this.ticketsStateService.getOnAddTicket().subscribe(data => {
       if (this.ticketsListService.isTicketMatchesFilters(this.ticketsFilter, data)) {
         this.tickets.unshift(data);
         this.cd.detectChanges();
       }
     })
+    this.sub.add(getOnAddTicket);
 
-    this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
+    let getOnUpdateTicket = this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
       let ticket = new Ticket(data);
       if (data.assignedUser) ticket.setAssignedUserId(data.assignedUser.id);
       let findIndex = this.tickets.findIndex(item => item.id === ticket.id);
@@ -63,11 +63,13 @@ export class UsersAsideDetailTicketsComponent implements OnInit {
       }
       this.cd.detectChanges();
     })
+    this.sub.add(getOnUpdateTicket);
 
-    this.ticketsStateService.getOnRemoveTicket().subscribe(data => {
+    let getOnRemoveTicket = this.ticketsStateService.getOnRemoveTicket().subscribe(data => {
       let findIndex = this.tickets.findIndex(item => item.id === data.id);
       if (findIndex > -1) this.tickets.splice(findIndex, 1);
     });
+
     this.onScroll();
     this.ticketsStateService.getOnInitColor().subscribe(data => {
       this.listColors = data;
