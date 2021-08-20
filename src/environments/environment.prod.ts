@@ -3,6 +3,6 @@
  */
 export const environment = {
   production: true,
-  apiUrl: 'https://quicktech.com/',
+  apiUrl: 'https://app.quicktech.com/',
   realTime: 'wss://quicktech.com/realtime/'
 };
