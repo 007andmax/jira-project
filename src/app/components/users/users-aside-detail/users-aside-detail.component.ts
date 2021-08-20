@@ -1,4 +1,5 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 import { TagsService } from 'src/app/services/tags/tags.service';
 import { UsersService } from 'src/app/services/users/users.service';
@@ -19,12 +20,13 @@ import { UsersAsideDetailTicketsComponent } from './users-aside-detail-tickets/u
   styleUrls: ['./users-aside-detail.component.scss'],
   providers: [TicketsListService]
 })
-export class UsersAsideDetailComponent implements OnInit {
+export class UsersAsideDetailComponent implements OnInit, OnDestroy {
   user: User;
   open: boolean = false;
   tab: string = 'tickets';
   @Output() onClosed = new EventEmitter<any>();
   @ViewChild('ticketsDetail') ticketsDetail: UsersAsideDetailTicketsComponent;
+  sub: Subscription = new Subscription();
   constructor(public ticketsListService: TicketsListService,
     private usersStateService: UsersStateService,
     private usersService: UsersService,
@@ -34,8 +36,9 @@ export class UsersAsideDetailComponent implements OnInit {
     private ticketsStateService: TicketsStateService,
     private companiesStateService: CompaniesStateService,) { }
 
+
   ngOnInit() {
-    this.usersStateService.openDetailAside.subscribe(data => {
+    let openDetailAside = this.usersStateService.openDetailAside.subscribe(data => {
       this.user = data;
       console.log("this.user", this.user);
       if (this.user.phoneNumbers && this.user.phoneNumbers.length === 0 || !this.user.phoneNumbers) {
@@ -55,6 +58,7 @@ export class UsersAsideDetailComponent implements OnInit {
       }
       this.open = true;
     })
+    this.sub.add(openDetailAside);
     this.leftPanelService.getColors().subscribe((data: any) => {
       let listColors = data.map(item => {
         return new StatusColor(item.backgroundColor, item.borderColor);
@@ -99,5 +103,8 @@ export class UsersAsideDetailComponent implements OnInit {
     this.usersService.setSubscriptions(subscription).subscribe(res => {
 
     })
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

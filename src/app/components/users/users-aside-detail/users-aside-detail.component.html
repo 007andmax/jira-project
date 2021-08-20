@@ -119,6 +119,10 @@
                 *ngIf="tab === 'documents'"
                 [user]="user"
             ></users-aside-detail-documents>
+            <users-aside-detail-passwords
+                *ngIf="tab === 'passwords'"
+                [user]="user"
+            ></users-aside-detail-passwords>
         </div>
     </div>
 </div>

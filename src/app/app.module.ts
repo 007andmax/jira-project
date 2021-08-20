@@ -457,6 +457,8 @@ import { UsersAsideDetailTicketsComponent } from './components/users/users-aside
 import { UsersAsideDetailTicketsItemComponent } from './components/users/users-aside-detail/users-aside-detail-tickets/users-aside-detail-tickets-item/users-aside-detail-tickets-item.component';
 import { UsersAsideDetailDocumentsComponent } from './components/users/users-aside-detail/users-aside-detail-documents/users-aside-detail-documents.component';
 import { UsersAsideDetailDocumentsItemComponent } from './components/users/users-aside-detail/users-aside-detail-documents/users-aside-detail-documents-item/users-aside-detail-documents-item.component';
+import { UsersAsideDetailPasswordsComponent } from './components/users/users-aside-detail/users-aside-detail-passwords/users-aside-detail-passwords.component';
+import { UsersAsideDetailPasswordsItemComponent } from './components/users/users-aside-detail/users-aside-detail-passwords/users-aside-detail-passwords-item/users-aside-detail-passwords-item.component';
 
 
 declare var $: any;
@@ -871,7 +873,9 @@ declare var $: any;
     UsersAsideDetailTicketsComponent,
     UsersAsideDetailTicketsItemComponent,
     UsersAsideDetailDocumentsComponent,
-    UsersAsideDetailDocumentsItemComponent
+    UsersAsideDetailDocumentsItemComponent,
+    UsersAsideDetailPasswordsComponent,
+    UsersAsideDetailPasswordsItemComponent
   ],
   imports: [
     BrowserModule,
