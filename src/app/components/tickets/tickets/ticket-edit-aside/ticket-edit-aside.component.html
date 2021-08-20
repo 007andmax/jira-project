@@ -44,7 +44,10 @@
                                     (mouseenter)="userCompanyTooltip.show($event.target)"
                                     (mouseleave)="userCompanyTooltip.hide()"
                                 ></span>
-                                <span [textContent]="' - ' + getNameCreateUser()"></span>
+                                <span
+                                    [textContent]="' - ' + getNameCreateUser()"
+                                    (click)="showDetailUser()"
+                                ></span>
                                 <div
                                     *ngIf="ticketProfile.ticketSource === 'FROM_EMAIL' && !checkExistServicesProducts()"
                                     ngbDropdownMenu

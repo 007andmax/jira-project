@@ -24,7 +24,6 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
   user: User;
   open: boolean = false;
   tab: string = 'tickets';
-  @Output() onClosed = new EventEmitter<any>();
   @ViewChild('ticketsDetail') ticketsDetail: UsersAsideDetailTicketsComponent;
   sub: Subscription = new Subscription();
   constructor(public ticketsListService: TicketsListService,
@@ -85,9 +84,10 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
   }
   close() {
     this.open = false;
-    this.onClosed.emit(null);
+    this.usersStateService.hideDetailUser();
   }
   getCompanyName() {
+    if (!this.user.company) return '';
     let find = this.companiesStateService.getCompanies().find(item => item.id === this.user.company.id);
     return (find) ? find.name : '';
   }

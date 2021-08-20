@@ -135,6 +135,9 @@ export class UsersComponent implements OnInit {
       }
     })
     this.userListService.addSubscription(getChangeCompanies);
+    this.usersStateService.closeDetailAside.subscribe(data => {
+      this.setIdDetailUser('');
+    })
     this.onInitSubscribe();
   }
   private onArchiveUsers(ids) {

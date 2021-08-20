@@ -148,6 +148,12 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     });
   }
+  showDetailUser() {
+    this.usersStateService.showDetailUser(this.ticketProfile.createdUser);
+    (<any>document.body.querySelector(".ticket-edit-aside")).style.zIndex = "1";
+    //  (<any>document.body.querySelector(".user-aside-detail-page__aside")).style.zIndex = "3";
+
+  }
   checkExistServicesProducts() {
     return this.ticketProfile.updates.filter(item => item.type == 'PRODUCT' || item.type == 'SERVICE').length > 0;
   }

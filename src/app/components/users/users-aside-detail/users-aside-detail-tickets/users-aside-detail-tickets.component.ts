@@ -86,6 +86,9 @@ export class UsersAsideDetailTicketsComponent implements OnInit {
     this.ticketsService.getTicket(id).subscribe(data => {
       data.setUserCompanies(ticket.userCompanies);
       this.ticketsStateService.onEditTicket(data);
+      (<any>document.body.querySelector(".ticket-edit-aside")).style.zIndex = "2";
+      (<any>document.body.querySelector(".user-aside-detail-page__aside")).style.zIndex = "1";
+
     })
   }
   private getTickets() {
