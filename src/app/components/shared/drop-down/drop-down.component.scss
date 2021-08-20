@@ -1,7 +1,9 @@
 @import "./src/assets/styles/variable";
 
 .disabled {
-    background-color: $gray-400 !important;
+    //background-color: $gray-400 !important; //TODO delete after check new style disabled
+  background: $gray-200;
+  color: $gray-600;
 }
 .icon__check {
     background-size: 15px;

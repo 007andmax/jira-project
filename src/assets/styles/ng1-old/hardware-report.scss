@@ -1,10 +1,9 @@
 @import './src/assets/styles/variable';
 
-
 .product-list-report {
   padding: 30px 30px 30px;
   height: 100%;
-  background-color: #f4f4f4;
+  background-color: $background;
   min-height: 92vh;
 }
 
@@ -430,7 +429,7 @@
   padding: 45px 30px;
   color: $gray-800;
   height: calc(100vh - 78px);
-  background-color: #f4f4f4;
+  background-color: $background;
   display: flex;
   justify-content: center;
 }
@@ -455,8 +454,7 @@
 }
 
 .reports-all .report p {
-  font-size: 18px;
-  font-weight: 600;
+ @extend %h6-sb;
   position: relative;
   margin-bottom: 20px;
 }
@@ -489,8 +487,7 @@
 }
 
 .reports-all .report ul li {
-  font-size: 14px;
-  font-weight: 300;
+  @extend %body-r;
   margin-bottom: 12px;
   cursor: pointer;
   position: relative;

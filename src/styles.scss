@@ -1,4 +1,3 @@
-@import "./assets/scss/fonts";
 @import "./src/assets/styles/variable";
 @import "./assets/styles/dropdowns.scss";
 @import "./assets/styles/icons.scss";
@@ -686,6 +685,13 @@ documents-edit-info {
         transform: translateY(-50%);
         width: auto;
       }
+    }
+  }
+}
+.billing-dashboard-page__content {
+  .input-group {
+    .btn-icon-date-picker {
+      background-color: transparent;
     }
   }
 }
@@ -3483,12 +3489,20 @@ input.--input-error {
 
 .product-list-report {
   .run-report-content input {
-    height: 40px;
+    height: 36px;
+  }
+
+  #dropdown1 {
+    height: 36px !important;
   }
 
   .btn {
-    height: 40px;
+    height: 36px;
     flex-shrink: 0;
+  }
+
+  .btn-primary-white {
+    height: 36px;
   }
 
   .product-list-ticket {

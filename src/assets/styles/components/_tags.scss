@@ -1,10 +1,10 @@
 @import './src/assets/styles/variable';
 
 .tag__modern {
-  font-size: 10px;
+  @extend %label-m-sb;
   border: 1px solid;
   border-radius: 3px;
-  padding: 4px 8px;
+  padding: 5px 6px;
   white-space: nowrap;
 
   &.--success {
