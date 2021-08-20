@@ -92,18 +92,21 @@
         <div class="qt-pl-30 qt-pr-30 qt-pt-24 qt-pb-50 user-detail-statictics">
             <div class="tabs">
                 <span
+                    class="pointer"
                     [ngClass]="{'active':tab === 'tickets'}"
                     (click)="setTab('tickets')"
                 >
                     Tickets
                 </span>
                 <span
+                    class="pointer"
                     [ngClass]="{'active':tab === 'passwords'}"
                     (click)="setTab('passwords')"
                 >
                     Passwords
                 </span>
                 <span
+                    class="pointer"
                     [ngClass]="{'active':tab === 'documents'}"
                     (click)="setTab('documents')"
                 >
