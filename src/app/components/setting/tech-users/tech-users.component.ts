@@ -727,7 +727,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
         }
       );
 
-    this.saveUsersEmailNotifications(this.selectedTechUser.id);
+    // this.saveUsersEmailNotifications(this.selectedTechUser.id);
   }
 
   /**

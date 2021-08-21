@@ -84,7 +84,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.router.events
       .subscribe((event) => {
-        if (this.router.url.includes('/device') && !this.router.url.includes('/devices')) {
+        if (this.router.url.includes('/device/')) {
           this.main_page = PAGE_DEVICE;
         } else {
           this.main_page = PAGE_MAIN;
