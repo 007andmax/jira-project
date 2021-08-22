@@ -294,6 +294,10 @@ h6,
     }
   }
 }
+.mat-form-field {
+  font-family: "Inter", sans-serif;
+  @extend %body-m;
+}
 app-left-panel-tags {
   > .col-md-12 {
     padding: 0 24px;
@@ -1474,10 +1478,10 @@ app-quotes-item {
       }
 
       .mat-form-field-appearance-legacy .mat-form-field-label {
+        @extend %body-m;
+        color: $gray-600;
         padding: 9px 10px 9px 36px;
-        color: #9ea6b7;
-        font-weight: $fw-regular;
-        top: 12px;
+        top: 10px;
       }
       .mat-form-field-infix {
         min-height: 36px !important;
@@ -3576,7 +3580,7 @@ input.--input-error {
       padding-left: 6px;
 
       input {
-        @extend %сaption-l;
+        @extend %сaption-m;
         height: 34px;
         margin: 0;
         width: 100%;
@@ -3584,6 +3588,7 @@ input.--input-error {
 
         &::placeholder {
           color: $gray-600;
+          font-family: inherit;
         }
       }
     }
@@ -3598,10 +3603,10 @@ input.--input-error {
     pointer-events: none;
   }
   .mat-form-field-label {
-    top: 10.5px;
+    top: 8.5px;
     padding: 12px 10px 10px 12px;
     font-size: 13px;
-    font-weight: 400;
+    @extend %body-m;
     color: $gray-600;
   }
   .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {

@@ -6,27 +6,24 @@
   border-radius: 3px;
   padding: 5px 6px;
   white-space: nowrap;
+  text-transform: uppercase;
 
   &.--success {
     color: $success;
     border-color: $success;
-    background-color: $gray-300;
   }
 
   &.--info {
     color: $primary-1;
     border-color: $primary-1;
-    background-color: $background;
   }
 
   &.--warning {
     color: $warning;
     border-color: $warning;
-    background-color: rgba(255, 185, 55, 0.1);
   }
   &.--error {
     color: $error;
     border-color: $error;
-    background-color: rgba(255, 82, 99, 0.1);
-    }
+  }
 }

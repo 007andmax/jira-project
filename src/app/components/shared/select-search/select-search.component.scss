@@ -20,7 +20,7 @@
       top: 50%;
       transform: translateY(-50%);
       color: $gray-600;
-      font-size: 13px;
+      @extend %body-m;
     }
     .selected {
       background: transparent;
@@ -76,8 +76,9 @@
      border-radius: 4px;
      border: solid 1px $gray-500;
      background-color: $white;
+     color: $gray-800;
      width: 100%;
-     @extend %сaption-l;
+     @extend %body-m;
      &::placeholder {
         color: $gray-600;
      }
