@@ -602,6 +602,89 @@ app-invoices-item,app-payment-item {
 
 }
 
+.user-aside-detail-page__aside {
+  .qt-aside-modern__content {
+    overflow: unset;
+    height: 100%;
+  }
+  &.aside-preview {
+    width: 960px; //TODO after add style to aside move style to .invoices-page__aside.aside-preview
+    .user-detail-statictics {
+      .tabs .active::after {
+        bottom: -15px;
+        height: 2px;
+        z-index: 1;
+      }
+    }
+  }
+  thead {
+    tr {
+     th {
+       padding: 10px 16px;
+       font-size: 12px;
+       line-height: 16px;
+       color: #212b36;
+       border-top: 1px solid #edf0f2;
+       border-bottom: 1px solid #edf0f2;
+     }
+    }
+  }
+
+  tbody {
+    padding: 0 16px;
+
+    tr {
+      td {
+        font-size: 13px;
+        line-height: 20px;
+        color: #212b36;
+        font-weight: 500;
+      }
+    }
+  }
+
+  users-aside-detail-tickets {
+   tbody {
+     td {
+       position: relative;
+
+       &::after {
+         position: absolute;
+         content: "";
+         bottom: 0;
+         right: 0;
+         height: 1px;
+         width: 100%;
+         background: #edf0f2;
+       }
+
+       &:first-child {
+         max-width: 340px;
+         width: 340px;
+         min-width: 340px;
+
+         &::after {
+           right: 0;
+           width: calc(100% - 16px);
+         }
+       }
+
+       &:last-child {
+         max-width: 80px;
+         width: 80px;
+         min-width: 80px;
+
+         &::after {
+           left: 0;
+           width: calc(100% - 16px);
+         }
+       }
+     }
+   }
+  }
+}
+
+
 .invoice-preview-notes {
   max-width: 530px;
 }

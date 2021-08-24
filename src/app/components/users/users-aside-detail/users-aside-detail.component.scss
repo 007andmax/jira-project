@@ -27,23 +27,23 @@
     color: #637382;
     font-size: 13px;
     line-height: 20px;
+    font-weight: 400;
 }
 .user-detail-aside__divider {
-    border-top: 1px dashed #dfe3e8;
+    border-top: 1px solid #dfe3e8;
     margin: 16px 0;
 }
 
 .user-detail__row-info-line {
     margin-bottom: 16px;
     .user-detail__row-info-label {
-        font-size: 11px;
-        color: #9ca5b6;
-        line-height: 12px;
-        margin-bottom: 4px;
+        font-size: 12px;
+        color: #919eab;
+        line-height: 16px;
     }
     .user-detail__row-info-value {
         font-size: 13px;
-        line-height: 16px;
+        line-height: 20px;
         color: #212b36;
     }
 }
@@ -58,12 +58,16 @@
 }
 .user-detail-info {
     width: 360px;
+    padding: 16px 24px;
+    border-right: 1px solid #edf0f2;
+    flex-shrink: 0;
+    overflow: auto;
+    height: calc(100% - 64px);
 
-    padding: 16px 23px;
-}
-.user-detail-aside-subscription {
-    .user-detail__row-info-label {
-        margin-bottom: 8px;
+    .user-detail__row-info {
+      .mat-form-field {
+        margin-top: 0;
+      }
     }
 }
 users-aside-detail-tickets,

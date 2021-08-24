@@ -141,4 +141,9 @@
     width: 85%;
     max-width: unset;
   }
+  .user-aside-detail-page__aside {
+    .qt-page-list__body {
+      width: 100%;
+    }
+  }
 }

@@ -635,6 +635,16 @@ documents-edit-info {
     }
   }
 }
+.user-detail-info {
+  .user-detail__row-info {
+    .mat-form-field {
+      margin-top: 0;
+    }
+    .mat-chip-list-wrapper .mat-standard-chip, .mat-chip-list-wrapper input.mat-input-element {
+      margin: 2px 2px 2px 0;
+    }
+  }
+}
 .user-subscription {
   display: flex;
   height: 40px;
