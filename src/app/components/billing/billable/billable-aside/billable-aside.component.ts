@@ -13,7 +13,7 @@ import { BillableTaimer } from './class/billable-taimer';
 import { ConfirmStateService } from '../../../shared/confirm/services/confirm-state.service';
 import { REMOVE_TICKET_INVOICE } from 'src/app/const/confirm';
 import { environment } from 'src/environments/environment';
-import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { InvoiceRealTimeService } from 'src/app/states/invoice/invoice-real-time.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { InvoiceFormComponent } from './invoice-form/invoice-form.component';

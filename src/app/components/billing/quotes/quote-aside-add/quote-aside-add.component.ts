@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { QUOTE_MODAL_ACTION_ADD } from 'src/app/const/quote';
-import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { ModalQuoteComponent } from 'src/app/services/modal/modal-quote/modal-quote.component';
 import { QuoteService } from 'src/app/services/quote/quote.service';
 import { BillableStateService } from 'src/app/states/billable/billable-state.service';

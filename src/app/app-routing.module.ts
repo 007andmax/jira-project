@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { PasswordManagerComponent } from './components/password-manager/password-manager.component';
 import { QuotesComponent } from './components/billing/quotes/quotes.component';
 import { MyProfileComponent } from './components/setting/my-profile/my-profile.component';
 import { ManageTagsComponent } from './components/setting/manage-tags/manage-tags.component';
@@ -71,7 +70,7 @@ const routes: Routes = [
 
   {
     path: ':company/password-manager',
-    component: PasswordManagerComponent,
+    loadChildren: './components/password-manager/password-manager.module#PasswordManagerModule'
 
   },
   {
@@ -334,7 +333,9 @@ const routes: Routes = [
  */
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { useHash: true }),
+    RouterModule.forRoot(routes, {
+      useHash: true,
+    }),
   ],
   exports: [RouterModule],
 })

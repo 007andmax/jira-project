@@ -1,9 +1,9 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { NETWORK_REMOVE_DEVICE } from '../../const/confirm';
-import { DisabledBtnDirective } from '../../directives/disabled-btn.directive';
 import { DevicesService } from '../../services/devices/devices.service';
 import { PasswordManagerService } from '../../services/password-manager/password-manager.service';
 import { PermissionsService } from '../../services/permissions/permissions.service';

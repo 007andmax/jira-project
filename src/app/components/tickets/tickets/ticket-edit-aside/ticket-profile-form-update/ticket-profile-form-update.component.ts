@@ -8,7 +8,7 @@ import { TicketsListService } from '../../services/tickets-list.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketProfileFormUpdateProductsComponent } from './ticket-profile-form-update-products/ticket-profile-form-update-products.component';
 import { TicketProfileFormUpdateServicesComponent } from './ticket-profile-form-update-services/ticket-profile-form-update-services.component';
-import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { RemoteSession } from 'src/app/components/support/class/remote-sessions';
 import { SupportService } from 'src/app/services/support/support.service';
 import { Subscription } from 'rxjs';

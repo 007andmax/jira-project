@@ -8,7 +8,7 @@ import { GlNumberService } from 'src/app/services/gl-number/gl-number.service';
 import { DefaultServicesService } from 'src/app/services/default-services/default-services.service';
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
 import { Tax } from 'src/app/interfaces/service/tax';
-import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { DefaultServicesStateService } from 'src/app/states/default-services/default-services-state.service';
 
 @Component({

@@ -3,7 +3,7 @@ import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
 import { Subscription } from 'rxjs';
 import { DefaultServiceValidate } from '../../../../default-services/class/default-service-validate';
 import { Tax } from 'src/class/taxes/tax';
-import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { DefaultServicesService } from 'src/app/services/default-services/default-services.service';
 import * as moment from "moment";
 import { ContractsHourly } from '../../class/contracts-hourly';

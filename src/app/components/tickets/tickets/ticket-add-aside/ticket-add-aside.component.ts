@@ -12,7 +12,7 @@ import { TicketValidate } from '../class/ticket-validate';
 import { UploadAreaComponent } from '../../../shared/upload-area/upload-area.component';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 import { DropDownComponent } from '../../../shared/drop-down/drop-down.component';
-import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 
 

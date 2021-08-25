@@ -16,9 +16,9 @@ import { RecurringTicket } from '../class/recurring-ticket';
 import { Validate } from '../class/validate';
 import { ChangeDatePicker } from '../../../shared/date-picker/class/change-date-picker';
 import { DevicesRecurringTicketsStateService } from '../devices-recurring-tickets/services/devices-recurring-tickets-state.service';
-import { TextAreaDirective } from 'src/app/directives/text-area.directive';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TechUserItem } from '../../../shared/teh-users/class/tech-user-item';
+import { TextAreaDirective } from 'src/app/directives/text-area/text-area.directive';
 
 @Component({
   selector: 'app-recurring-tickets-edit-aside',

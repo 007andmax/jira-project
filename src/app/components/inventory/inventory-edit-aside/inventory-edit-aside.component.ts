@@ -14,10 +14,10 @@ import { ProductService } from 'src/app/services/product/product.service';
 import { GlNumberService } from 'src/app/services/gl-number/gl-number.service';
 import { CompanyProfile } from '../../companies/class/company-profile';
 import { SelectSearchComponent } from '../../shared/select-search/select-search.component';
-import { TextAreaDirective } from 'src/app/directives/text-area.directive';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
+import { TextAreaDirective } from 'src/app/directives/text-area/text-area.directive';
 
 @Component({
   selector: 'app-inventory-edit-aside',

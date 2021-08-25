@@ -10,7 +10,7 @@ import { SelectClientCompanyStateService } from '../../shared/select-client-comp
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ImageCropperComponent } from '../../shared/image-cropper/image-cropper.component';
 import { CompanySubscriptionStateService } from '../../companies/company-subscription/class/company-subscription-state.service';
-import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { TitleListType } from '../../tickets/tickets/tickets-header/class/title-list-type';
 

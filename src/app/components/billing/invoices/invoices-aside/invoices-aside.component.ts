@@ -9,7 +9,7 @@ import { CompanySetting } from '../../../companies/class/company-setting';
 import * as moment from "moment";
 import { Payment } from './class/payment';
 import { PaymentInvoice } from './class/payment-invoice';
-import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.service';
 
 

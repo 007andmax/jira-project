@@ -16,7 +16,7 @@ import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { PasswordRecordCategories } from '../class/password-record-categories';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 import { Subscription } from 'rxjs';
-import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 /**
  * Password manager edit aside component

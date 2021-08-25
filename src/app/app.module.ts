@@ -24,17 +24,14 @@ import { MatAutocompleteModule, MatIconModule } from '@angular/material';
 import { ImageCropperModule } from 'ngx-image-cropper';
 // import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 import { AppComponent } from './app.component';
-import { PasswordManagerComponent } from './components/password-manager/password-manager.component';
 import { LeftPanelComponent } from './components/left-panel/left-panel.component';
 import { LeftPanelPasswordManagerComponent } from './components/left-panel/left-panel-password-manager/left-panel-password-manager.component';
 import { MainComponent } from './components/main/main.component';
-import { PasswordManagerTableComponent } from './components/password-manager/password-manager-table/password-manager-table.component';
 import { PasswoordManagerHeaderComponent } from './components/password-manager/passwoord-manager-header/passwoord-manager-header.component';
 import { QuotesComponent } from './components/billing/quotes/quotes.component';
 import { UserPipe } from './pipe/user.pipe';
 import { DateFormatPipe } from './pipe/date-format.pipe';
 import { CompanyPipe } from './pipe/company.pipe';
-import { PasswordManagerEditAsideComponent } from './components/password-manager/password-manager-edit-aside/password-manager-edit-aside.component';
 import { DeviceUserPipe } from './pipe/device-user.pipe';
 import { PasswordCategoryPipe } from './pipe/password-category.pipe';
 import { SanitizeHtmlPipe } from './pipe/sanitize-html.pipe';
@@ -55,7 +52,6 @@ import { IntervalComponent } from './components/shared/interval/interval.compone
 import { DurationComponent } from './components/shared/duration/duration.component';
 import { TehUsersComponent } from './components/shared/teh-users/teh-users.component';
 import { numberDirective } from './directives/number.directive';
-import { TextAreaDirective } from './directives/text-area.directive';
 import { DatePickerComponent } from './components/shared/date-picker/date-picker.component';
 import { RecurringTicketsAddAsideComponent } from './components/tickets/recurring-tickets/recurring-tickets-add-aside/recurring-tickets-add-aside.component';
 import { AlertComponent } from './components/shared/alert/alert.component';
@@ -193,7 +189,7 @@ import { TicketProfileUpdatesProductItemComponent } from './components/tickets/t
 import { TicketProfileUpdatesProductInfoComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-product/ticket-profile-updates-product-info/ticket-profile-updates-product-info.component';
 import { TicketProfileUpdatesProductEditComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-product/ticket-profile-updates-product-edit/ticket-profile-updates-product-edit.component';
 import { TicketChangeStatusComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-change-status/ticket-change-status.component';
-import { PreloaderTicketComponent } from './components/tickets/tickets/preloader-ticket/preloader-ticket.component';
+import { PreloaderTicketComponent } from './components/shared/preloader-ticket/preloader-ticket.component';
 import { TicketProfileAttachmentsComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-attachments/ticket-profile-attachments.component';
 import { PreviewAttachmentComponent } from './components/tickets/tickets/ticket-edit-aside/preview-attachment/preview-attachment.component';
 import { TicketProfileUpdatesNoteItemComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-note/ticket-profile-updates-note-item/ticket-profile-updates-note-item.component';
@@ -219,7 +215,6 @@ import { InvoiceAddNoteComponent } from './components/billing/billable/billable-
 import { InvoiceSelectNoteComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-select-note/invoice-select-note.component';
 import { InvoiceRegularNoteComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-regular-note/invoice-regular-note.component';
 import { TicketsFilterComponent } from './components/tickets/tickets/tickets-header/tickets-filter/tickets-filter.component';
-import { DisabledBtnModule } from './modules/disabled-btn/disabled-btn.module';
 import { InvoiceFormTicketInfoComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-info/invoice-form-ticket-info.component';
 import { InvoiceFormTicketEditComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit.component';
 import { InvoiceFormTicketEditServiceComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-service/invoice-form-ticket-edit-service.component';
@@ -392,11 +387,6 @@ import { KeyUpEnterDirective } from './directives/key-up-enter.directive';
 import { InventoryAddCategoryComponent } from './components/inventory/inventory-add-category/inventory-add-category.component';
 import { InventoryHeaderComponent } from './components/inventory/inventory-header/inventory-header.component';
 import { InventoryFilterComponent } from './components/inventory/inventory-header/inventory-filter/inventory-filter.component';
-import { PasswordManagerAddCategoryComponent } from './components/password-manager/password-manager-add-category/password-manager-add-category.component';
-import { PasswordManagerAddAsideComponent } from './components/password-manager/password-manager-add-aside/password-manager-add-aside.component';
-import { PasswoordManagerDevicesUsersComponent } from './components/password-manager/passwoord-manager-devices-users/passwoord-manager-devices-users.component';
-import { PasswoordManagerFiltersComponent } from './components/password-manager/passwoord-manager-header/passwoord-manager-filters/passwoord-manager-filters.component';
-import { PasswordManagerEditLinkedComponent } from './components/password-manager/password-manager-edit-aside/password-manager-edit-linked/password-manager-edit-linked.component';
 import { AfterViewInitDirective } from './directives/after-view-init.directive';
 import { TicketsFilterTagsComponent } from './components/tickets/tickets/tickets-header/tickets-filter/tickets-filter-tags/tickets-filter-tags.component';
 import { DocumentsComponent } from './components/documents/documents.component';
@@ -429,7 +419,6 @@ import { DocumentsTableComponent } from './components/documents/documents-table/
 import { DocumentsHeaderComponent } from './components/documents/documents-header/documents-header.component';
 import { DocumentsFilterComponent } from './components/documents/documents-header/documents-filter/documents-filter.component';
 import { DocumentsCategoryComponent } from './components/documents/documents-category/documents-category.component';
-import { PasswordManagerLinkedComponent } from './components/password-manager/password-manager-add-aside/password-manager-linked/password-manager-linked.component';
 import { DocumentsLinkedComponent } from './components/documents/documents-add/documents-add-info/documents-linked/documents-linked.component';
 import { DocumentsTemplatesComponent } from './components/documents/documents-templates/documents-templates.component';
 import { DocumentsEditComponent } from './components/documents/documents-edit/documents-edit.component';
@@ -452,6 +441,19 @@ import { CompanyDashAssociateComponent } from './components/company-dashboard/co
 import { CompanyAssociateComponent } from './components/company-dashboard/company-dash-associate/company-associate/company-associate.component';
 import { CompanyDashAssociateInfoComponent } from './components/company-dashboard/company-dash-associate-info/company-dash-associate-info.component';
 import { PreparePhonePipe } from './pipe/prepare-phone.pipe';
+import { PasswordManagerAddAsideComponent } from './components/password-manager/password-manager-add-aside/password-manager-add-aside.component';
+import { PasswordManagerLinkedComponent } from './components/password-manager/password-manager-add-aside/password-manager-linked/password-manager-linked.component';
+import { PasswordManagerEditAsideComponent } from './components/password-manager/password-manager-edit-aside/password-manager-edit-aside.component';
+import { PasswordManagerEditLinkedComponent } from './components/password-manager/password-manager-edit-aside/password-manager-edit-linked/password-manager-edit-linked.component';
+import { PasswordManagerTableComponent } from './components/password-manager/password-manager-table/password-manager-table.component';
+import { DropDownModule } from './components/shared/drop-down/drop-down.module';
+import { TextAreaModule } from './directives/text-area/text-area.module';
+import { DatePickerModule } from './components/shared/date-picker/date-picker.module';
+import { PreloaderTicketModule } from './components/shared/preloader-ticket/preloader-ticket.module';
+import { DisabledBtnModule } from './directives/disabled-btn/disabled-btn.module';
+import { PasswoordManagerFiltersComponent } from './components/password-manager/passwoord-manager-header/passwoord-manager-filters/passwoord-manager-filters.component';
+import { PasswordManagerAddCategoryComponent } from './components/password-manager/password-manager-add-category/password-manager-add-category.component';
+import { PasswoordManagerDevicesUsersComponent } from './components/password-manager/passwoord-manager-devices-users/passwoord-manager-devices-users.component';
 
 
 declare var $: any;
@@ -463,16 +465,19 @@ declare var $: any;
 @NgModule({
   declarations: [
     AppComponent,
-    PasswordManagerComponent,
+
     LeftPanelComponent,
     LeftPanelPasswordManagerComponent,
     MainComponent,
     CompanyPipe,
-    PasswordManagerTableComponent,
-    PasswoordManagerHeaderComponent,
+    //  PasswordManagerTableComponent,
+    // PasswoordManagerFiltersComponent,
+    //  PasswoordManagerHeaderComponent,
+    //  PasswordManagerAddCategoryComponent,
+    //  PasswoordManagerDevicesUsersComponent,
     UserPipe,
     DateFormatPipe,
-    PasswordManagerEditAsideComponent,
+    //  PasswordManagerEditAsideComponent,
     DeviceUserPipe,
     PasswordCategoryPipe,
     SanitizeHtmlPipe,
@@ -494,8 +499,8 @@ declare var $: any;
     DurationComponent,
     TehUsersComponent,
     numberDirective,
-    TextAreaDirective,
-    DatePickerComponent,
+
+
     RecurringTicketsAddAsideComponent,
     AlertComponent,
     CompaniesComponent,
@@ -628,7 +633,7 @@ declare var $: any;
     TicketProfileUpdatesProductInfoComponent,
     TicketProfileUpdatesProductEditComponent,
     TicketChangeStatusComponent,
-    PreloaderTicketComponent,
+    //  PreloaderTicketComponent,
     TicketProfileAttachmentsComponent,
     PreviewAttachmentComponent,
     TicketProfileUpdatesNoteItemComponent,
@@ -715,7 +720,7 @@ declare var $: any;
     TicketTaskComponent,
     searchTextPipe,
     SoftwarePipe,
-    DropDownComponent,
+    //  DropDownComponent,
     ContractsAsideHourlyBillingPreviewComponent,
     ContractsPreviewComponent,
     ContractsEditComponent,
@@ -821,11 +826,8 @@ declare var $: any;
     InventoryAddCategoryComponent,
     InventoryHeaderComponent,
     InventoryFilterComponent,
-    PasswordManagerAddCategoryComponent,
-    PasswordManagerAddAsideComponent,
-    PasswoordManagerDevicesUsersComponent,
-    PasswoordManagerFiltersComponent,
-    PasswordManagerEditLinkedComponent,
+    //  PasswordManagerAddAsideComponent,
+    //   PasswordManagerEditLinkedComponent,
     AfterViewInitDirective,
     TicketsFilterTagsComponent,
     DocumentsComponent,
@@ -840,7 +842,7 @@ declare var $: any;
     DocumentsHeaderComponent,
     DocumentsFilterComponent,
     DocumentsCategoryComponent,
-    PasswordManagerLinkedComponent,
+    //  PasswordManagerLinkedComponent,
     DocumentsLinkedComponent,
     DocumentsTemplatesComponent,
     DocumentsEditComponent,
@@ -900,7 +902,11 @@ declare var $: any;
     AngularEditorModule,
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot(),
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    DropDownModule,
+    TextAreaModule,
+    DatePickerModule,
+    PreloaderTicketModule
   ],
   entryComponents: [
     ModalQuoteComponent,
@@ -917,6 +923,7 @@ declare var $: any;
   ],
   exports: [
     OrderByPipe,
+
   ],
   providers: [
     {

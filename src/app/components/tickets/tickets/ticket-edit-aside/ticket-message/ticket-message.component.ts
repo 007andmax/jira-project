@@ -8,7 +8,7 @@ import { ConfirmStateService } from 'src/app/components/shared/confirm/services/
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DELETE_FOREVER, MOVE_TO_SPAM_TICKET, MOVE_TO_SPAM_OR_REPORT_TICKET } from 'src/app/const/confirm';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
-import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 @Component({
   selector: 'app-ticket-message',

@@ -22,7 +22,7 @@ import { NoteService } from 'src/app/services/note/note.service';
 import { InvoiceValidate } from './class/invoice-validate';
 import { InvoiceProfileTicket } from '../../class/invoice-profile-ticket';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
-import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 
 @Component({

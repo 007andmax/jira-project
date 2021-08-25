@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { Tax } from 'src/app/interfaces/service/tax';
 import { DefaultServicesService } from 'src/app/services/default-services/default-services.service';
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';

@@ -25,12 +25,12 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 export class PasswordManagerComponent implements OnInit {
   public recordsData: Array<PasswordRecord> = [];
   public list_records: Array<PasswordRecord> = [];
-  showPreloader: boolean = true;
+  public showPreloader: boolean = true;
   public infiniteScrollDisabled = true;
   public page_number: number = 0;
   public filter: FilterPasswordManager = new FilterPasswordManager();
-  selectAll: boolean = false;
-  sub: Subscription = new Subscription();
+  public selectAll: boolean = false;
+  public sub: Subscription = new Subscription();
   constructor(
     public passwordManagerService: PasswordManagerService,
     private permissionsService: PermissionsService,
