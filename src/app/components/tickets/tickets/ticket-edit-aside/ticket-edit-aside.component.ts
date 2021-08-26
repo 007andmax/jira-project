@@ -149,7 +149,8 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     });
   }
   showDetailUser() {
-    this.usersStateService.showDetailUser(this.ticketProfile.createdUser);
+    let user = this.usersStateService.getAllUsers().find(item => item.id === this.ticketProfile.createdUser.id);
+    this.usersStateService.showDetailUser(user);
     (<any>document.body.querySelector(".ticket-edit-aside")).style.zIndex = "1";
     //  (<any>document.body.querySelector(".user-aside-detail-page__aside")).style.zIndex = "3";
 

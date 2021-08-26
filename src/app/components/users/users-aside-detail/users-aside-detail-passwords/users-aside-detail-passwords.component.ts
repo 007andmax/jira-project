@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { PasswordRecord } from 'src/app/components/password-manager/class/password-record';
 import { PasswordManagerComponent } from 'src/app/components/password-manager/password-manager.component';
 import { PasswordManagerListService } from 'src/app/components/password-manager/services/password-manager-list.service';
+import { REMOVE_RECORD } from 'src/app/const/confirm';
 import { User } from '../../class/user';
 
 @Component({
@@ -13,6 +14,41 @@ import { User } from '../../class/user';
 export class UsersAsideDetailPasswordsComponent extends PasswordManagerComponent {
   @Input() user: User;
 
+  ngOnInit() {
+
+    this.getRecords();
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === REMOVE_RECORD) this.onRemoveRecord(this.passwordManagerStateService.getRecordForRemove().id);
+      }
+    })
+    this.sub.add(getConfirm);
+    let geLefttFilter = this.passwordManagerStateService.getOnFilter().subscribe((data) => {
+
+      this.filter.setFilter(data);
+      this.setDefaultScoll();
+      this.onScroll();
+    })
+    this.sub.add(geLefttFilter);
+    let onChangeRealTime = this.passwordManagerStateService.onChangeRealTime.subscribe(newChange => {
+      if (newChange.action === 'PASSWORD_RECORD_CREATED') {
+        this.recordsData.push(new PasswordRecord(newChange.data));
+      } else if (newChange.action === 'PASSWORD_RECORD_UPDATED') {
+        let index = this.recordsData.findIndex(item => item.id === newChange.data.id);
+        if (index > -1) this.recordsData[index] = new PasswordRecord(newChange.data);
+        let indexList = this.list_records.findIndex(item => item.id === newChange.data.id);
+        if (indexList > -1) this.list_records[indexList] = new PasswordRecord(newChange.data);
+      } else if (newChange.action === 'PASSWORD_RECORD_DELETED') {
+        let index = this.recordsData.findIndex(item => item.id === newChange.data.id);
+        let indexList = this.list_records.findIndex(item => item.id === newChange.data.id);
+        if (index > -1) this.recordsData.splice(index, 1);
+        if (indexList > -1) this.list_records.splice(indexList, 1);
+      }
+      if (!this.cd['destroyed']) this.cd.detectChanges();
+    })
+    this.sub.add(onChangeRealTime);
+    if (this.passwordManagerStateService.getCategories().length === 0) this.passwordManagerStateService.onInit();
+  }
   public getRecords() {
     this.passwordManagerService.getRecordsForUserDetail(this.user.id).subscribe((res: any) => {
       this.recordsData = res.map(item => new PasswordRecord(item));
