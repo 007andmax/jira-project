@@ -105,7 +105,7 @@ const routes: Routes = [
   },
   {
     path: ':company/companies',
-    component: CompaniesComponent,
+    loadChildren: './components/companies/companies.module#CompaniesModule'
   }, {
     path: ':company/users',
     component: UsersComponent,

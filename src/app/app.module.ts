@@ -157,7 +157,7 @@ import { ContractComponent } from './components/setting/commission/contract/cont
 import { ServiceComponent } from './components/setting/commission/service/service.component';
 // import { AngularEditorModule } from '@kolkov/angular-editor';
 import { AutocompleteComponent } from './shared/autocomplete/autocomplete.component';
-import { PhonePipe } from './pipe/phone.pipe';
+
 import { OrderByPipe } from './pipe/order-by.pipe';
 import { TaxesComponent } from './components/shared/taxes/taxes.component';
 import { TicketsTableItemComponent } from './components/tickets/tickets/tickets-table/tickets-table-item/tickets-table-item.component';
@@ -440,7 +440,7 @@ import { HomeComponent } from './components/home/home.component';
 import { CompanyDashAssociateComponent } from './components/company-dashboard/company-dash-associate/company-dash-associate.component';
 import { CompanyAssociateComponent } from './components/company-dashboard/company-dash-associate/company-associate/company-associate.component';
 import { CompanyDashAssociateInfoComponent } from './components/company-dashboard/company-dash-associate-info/company-dash-associate-info.component';
-import { PreparePhonePipe } from './pipe/prepare-phone.pipe';
+import { PreparePhonePipe } from './pipe/prepare-phone/prepare-phone.pipe';
 import { PasswordManagerAddAsideComponent } from './components/password-manager/password-manager-add-aside/password-manager-add-aside.component';
 import { PasswordManagerLinkedComponent } from './components/password-manager/password-manager-add-aside/password-manager-linked/password-manager-linked.component';
 import { PasswordManagerEditAsideComponent } from './components/password-manager/password-manager-edit-aside/password-manager-edit-aside.component';
@@ -454,6 +454,15 @@ import { DisabledBtnModule } from './directives/disabled-btn/disabled-btn.module
 import { PasswoordManagerFiltersComponent } from './components/password-manager/passwoord-manager-header/passwoord-manager-filters/passwoord-manager-filters.component';
 import { PasswordManagerAddCategoryComponent } from './components/password-manager/password-manager-add-category/password-manager-add-category.component';
 import { PasswoordManagerDevicesUsersComponent } from './components/password-manager/passwoord-manager-devices-users/passwoord-manager-devices-users.component';
+import { CompaniesModule } from './components/companies/companies.module';
+import { CompanyEditAsideModule } from './components/companies/company-edit-aside/company-edit-aside.module';
+import { CompanySubscriptionModule } from './components/companies/company-subscription/company-subscription.module';
+import { CompanyTimeZoneModule } from './components/companies/company-time-zone/company-time-zone.module';
+import { CompanyTagsModule } from './components/companies/company-tags/company-tags.module';
+import { CompanyAssociateModule } from './components/company-dashboard/company-dash-associate/company-associate/company-associate.module';
+import { PhoneModule } from './pipe/phone/phone.module';
+import { PreparePhoneModule } from './pipe/prepare-phone/prepare-phone.module';
+import { DynamicTooltipModule } from './components/shared/dynamic-tooltip/dynamic-tooltip.module';
 
 
 declare var $: any;
@@ -503,18 +512,18 @@ declare var $: any;
 
     RecurringTicketsAddAsideComponent,
     AlertComponent,
-    CompaniesComponent,
+
     LeftPanelCompaniesComponent,
-    CompaniesHeaderComponent,
-    CompaniesTableComponent,
+    //  CompaniesHeaderComponent,
+    // CompaniesTableComponent,
     CompanyAddAsideComponent,
     ConfirmComponent,
     DownloadAgentComponent,
-    CompanySubscriptionComponent,
-    CompanyTimeZoneComponent,
+    // CompanySubscriptionComponent,
+    // CompanyTimeZoneComponent,
     ImageCropperComponent,
-    CompanyEditAsideComponent,
-    CompanyTagsComponent,
+    // CompanyEditAsideComponent,
+    //  CompanyTagsComponent,
     CompanyDashDetailComponent,
     CompanyDashStatsComponent,
     CompanyDashTicketComponent,
@@ -566,7 +575,7 @@ declare var $: any;
     ContractComponent,
     ServiceComponent,
     AutocompleteComponent,
-    PhonePipe,
+
     OrderByPipe,
     ReportsComponent,
     ItemReportComponent,
@@ -802,7 +811,7 @@ declare var $: any;
     UsersFilterComponent,
     SupportComponent,
     SupportItemComponent,
-    DynamicTooltipComponent,
+    //  DynamicTooltipComponent,
     TicketProfileFormUpdateSupportComponent,
     LeftPanelSupportComponent,
     HeaderComponent,
@@ -856,14 +865,14 @@ declare var $: any;
     DocumentPreviewComponent,
     CompanyDocumentsComponent,
     CompanyDocumentsTableComponent,
-    CompaniesFilterComponent,
+    //  CompaniesFilterComponent,
     CompanyAddAsideShortComponent,
     CompanyAddAsideFullComponent,
     HomeComponent,
     CompanyDashAssociateComponent,
-    CompanyAssociateComponent,
+    //  CompanyAssociateComponent,
     CompanyDashAssociateInfoComponent,
-    PreparePhonePipe
+    // PreparePhonePipe
   ],
   imports: [
     BrowserModule,
@@ -906,7 +915,15 @@ declare var $: any;
     DropDownModule,
     TextAreaModule,
     DatePickerModule,
-    PreloaderTicketModule
+    PreloaderTicketModule,
+    CompanyEditAsideModule,
+    CompanySubscriptionModule,
+    CompanyTimeZoneModule,
+    CompanyTagsModule,
+    CompanyAssociateModule,
+    PhoneModule,
+    PreparePhoneModule,
+    DynamicTooltipModule
   ],
   entryComponents: [
     ModalQuoteComponent,
@@ -923,7 +940,6 @@ declare var $: any;
   ],
   exports: [
     OrderByPipe,
-
   ],
   providers: [
     {
