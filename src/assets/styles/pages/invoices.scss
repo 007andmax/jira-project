@@ -611,7 +611,7 @@ app-invoices-item,app-payment-item {
     width: 960px; //TODO after add style to aside move style to .invoices-page__aside.aside-preview
     .user-detail-statictics {
       .tabs .active::after {
-        bottom: -15px;
+        bottom: -13px;
         height: 2px;
         z-index: 1;
       }
@@ -620,11 +620,10 @@ app-invoices-item,app-payment-item {
   thead {
     tr {
      th {
-       padding: 10px 16px;
+       padding: 10px 8px;
        font-size: 12px;
        line-height: 16px;
        color: #212b36;
-       border-top: 1px solid #edf0f2;
        border-bottom: 1px solid #edf0f2;
      }
     }
@@ -632,6 +631,36 @@ app-invoices-item,app-payment-item {
 
   tbody {
     padding: 0 16px;
+
+    td {
+      position: relative;
+
+      &::after {
+        position: absolute;
+        content: "";
+        bottom: 0;
+        right: 0;
+        height: 1px;
+        width: 100%;
+        background: #edf0f2;
+      }
+
+      &:first-child {
+
+        &::after {
+          right: 0;
+          width: calc(100% - 16px);
+        }
+      }
+
+      &:last-child {
+
+        &::after {
+          left: 0;
+          width: calc(100% - 16px);
+        }
+      }
+    }
 
     tr {
       td {
@@ -643,49 +672,89 @@ app-invoices-item,app-payment-item {
     }
   }
 
-  users-aside-detail-tickets {
-   tbody {
-     td {
-       position: relative;
+  .qt-page-list__body {
+    users-aside-detail-passwords-item {
+      td {
+        padding: 12px 0;
+      }
+    }
+  }
+  .ticket-table {
+    &__subject {
+      width: 100%;
+      min-width: 300px;
+    }
+    &__status {
+      max-width: 115px;
+      width: 115px;
+      min-width: 115px;
+    }
+    &__created-date {
+      max-width: 110px;
+      width: 110px;
+      min-width: 110px;
+    }
+  }
+  .documents-table {
+    tbody {
+      td {
+        position: relative;
 
-       &::after {
-         position: absolute;
-         content: "";
-         bottom: 0;
-         right: 0;
-         height: 1px;
-         width: 100%;
-         background: #edf0f2;
-       }
+        &::after {
+          position: absolute;
+          content: "";
+          bottom: 0;
+          right: 0;
+          height: 1px;
+          width: 100%;
+          background: #edf0f2;
+        }
+        &:first-child {
+          &::after {
+            right: 0;
+            width: calc(100% - 16px);
+          }
+        }
+        &:last-child {
+          &::after {
+            left: 0;
+            width: calc(100% - 16px);
+          }
+        }
+      }
+    }
 
-       &:first-child {
-         max-width: 340px;
-         width: 340px;
-         min-width: 340px;
+    &__title {
+      max-width: 200px;
+      width: 200px;
+      min-width: 200px;
 
-         &::after {
-           right: 0;
-           width: calc(100% - 16px);
-         }
-       }
+      .icon__templete-thumb {
+        flex-shrink: 0;
+      }
+    }
+    &__create-by {
+      width: 130px;
+      max-width: 130px;
+      min-width: 130px;
+    }
+    &__review-date,
+    &__created-date {
+      width: 100px;
+      max-width: 100px;
+      min-width: 100px;
+    }
+    &__company {
+      width: 290px;
+      max-width: 290px;
+      min-width: 290px;
+    }
+    &__menu {
 
-       &:last-child {
-         max-width: 80px;
-         width: 80px;
-         min-width: 80px;
-
-         &::after {
-           left: 0;
-           width: calc(100% - 16px);
-         }
-       }
-     }
-   }
+    }
   }
 }
-
 
 .invoice-preview-notes {
   max-width: 530px;
 }
-
