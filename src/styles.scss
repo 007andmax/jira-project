@@ -3186,7 +3186,7 @@ app-ticket-profile-form-update {
 }
 
 .tooltip {
-  font-size: 12px;
+  @extend %сaption-l-m;
   border-radius: 4px;
   div {
     margin-top: 5px;

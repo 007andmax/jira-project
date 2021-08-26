@@ -1,25 +1,21 @@
 @import './src/assets/styles/variable';
+@import './src/assets/styles/fonts';
 
 .tooltip {
     display: none;
-    opacity: .9;
     position: absolute;
     z-index: 1070;
     margin: 0;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1.5;
+    @extend %сaption-l-m;
     text-align: left;
     text-align: start;
     text-decoration: none;
     text-shadow: none;
     text-transform: none;
-    letter-spacing: normal;
     word-break: normal;
     word-spacing: normal;
     white-space: normal;
     line-break: auto;
-    font-size: .875rem;
     word-wrap: break-word;
     .arrow {
         position: absolute;
@@ -35,12 +31,11 @@
     }
     .tooltip-inner {
         max-width: 200px;
-        padding: .25rem .5rem;
+        padding: 6px 8px;
         color: $white;
         text-align: center;
         background-color: $gray-800;
         border-radius: .25rem;
-        font-size: 12px;
     }
     &.bs-tooltip-bottom .arrow, &.bs-tooltip-top .arrow {
         left: calc(50% - .4rem);
@@ -48,7 +43,7 @@
         &::before {
           top: 0;
           border-width: 0 .4rem .4rem .4rem;
-          border-bottom-color:  $gray-800;
+          border-bottom-color: $gray-800;
         }
     }
     &.bs-tooltip-top .arrow {
