@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { EventEmitter } from "@angular/core";
-import { UploadOutput, UploadInput, UploadFile, humanizeBytes, UploaderOptions } from "ngx-uploader";
+import { UploadInput, UploadFile, humanizeBytes, UploaderOptions } from "ngx-uploader";
 import { ToastrService } from "ngx-toastr";
 import { CONFIGCONSTANTS } from "../config/app-constants";
 import { environment } from "../../../../environments/environment";
@@ -11,6 +11,9 @@ import { Subscription } from "rxjs";
 import { CustomAdapter } from "./CustomDateAdapter";
 import { CustomDateParserFormatter } from "./CustomDateParserFormatter";
 import * as _ from "lodash";
+import { NotesAdd } from "./class/dashboard";
+import { ActivatedRoute } from "@angular/router";
+import * as moment from "moment";
 
 @Component({
   selector: "app-dashboard",
@@ -25,6 +28,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   @ViewChild(NgbDatepicker) expire: NgbDatepicker;
   DateFormat = CONFIGCONSTANTS.DateFormat1;
   DateTimeFormat = CONFIGCONSTANTS.DateTimeFormat1;
+  DateFormats = CONFIGCONSTANTS.DateFormat;
   url = environment.apiUrl + "upload";
   files: UploadFile[];
   uploadInput: EventEmitter<UploadInput>;
@@ -33,6 +37,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   options: UploaderOptions;
   deviceDetail: any = {};
   asset: any = undefined;
+  operatingSystem: any = undefined;
+  System: any = undefined;
   virusprotection: string = "";
   logicalDisk: any = [];
   virusInfo: any = [];
@@ -49,10 +55,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
   type = "";
   _id = "";
   sub: Subscription = new Subscription();
+  noteAdd: NotesAdd = new NotesAdd();
+  noteEdit: NotesAdd = new NotesAdd();
+  currentUser: string = "";
+  caption: string = "";
+  serialnumber: string = "";
 
   constructor(
     private agentService: AgentService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    public activateRoute: ActivatedRoute
   ) {
     this.options = { concurrency: 1, maxUploads: 10, maxFileSize: 1000000 };
     this.files = [];
@@ -60,74 +72,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.humanizeBytes = humanizeBytes;
   }
 
-  onUploadOutput(output: UploadOutput): void {
-    if (output.type === "allAddedToQueue") {
-      const event: UploadInput = {
-        type: "uploadAll",
-        url: this.url,
-        method: "POST",
-        data: { foo: "bar" },
-      };
-      this.uploadInput.emit(event);
-    } else if (
-      output.type === "addedToQueue" &&
-      typeof output.file !== "undefined"
-    ) {
-      this.files.push(output.file);
-    } else if (
-      output.type === "uploading" &&
-      typeof output.file !== "undefined"
-    ) {
-      const index = this.files.findIndex(
-        (file) =>
-          typeof output.file !== "undefined" && file.id === output.file.id
-      );
-      this.files[index] = output.file;
-    } else if (output.type === "cancelled" || output.type === "removed") {
-      this.files = this.files.filter(
-        (file: UploadFile) => file !== output.file
-      );
-    } else if (output.type === "dragOver") {
-      this.dragOver = true;
-    } else if (output.type === "dragOut") {
-      this.dragOver = false;
-    } else if (output.type === "drop") {
-      this.dragOver = false;
-    } else if (
-      output.type === "rejected" &&
-      typeof output.file !== "undefined"
-    ) {
-    }
-    // this.files = this.files.filter(file => file.progress.status !== UploadStatus.Done);
-  }
-  startUpload(): void {
-    const event: UploadInput = {
-      type: "uploadAll",
-      url: this.url,
-      method: "POST",
-      data: { foo: "bar" },
-    };
-    this.uploadInput.emit(event);
-  }
-  cancelUpload(id: string): void {
-    this.uploadInput.emit({ type: "cancel", id: id });
-  }
-  removeFile(id: string): void {
-    this.uploadInput.emit({ type: "remove", id: id });
-  }
-  removeAllFiles(): void {
-    this.uploadInput.emit({ type: "removeAll" });
-  }
   ngOnInit() {
-    this.type =
-      window.location.href.split("/")[
-        window.location.href.split("/").length - 2
-      ];
-    this._id =
-      window.location.href.split("/")[
-        window.location.href.split("/").length - 1
-      ];
-
+    this.type = this.activateRoute.snapshot.params["type"];
+    this._id = this.activateRoute.snapshot.params["id"];
     this.setPreviewDataDevice();
   }
 
@@ -136,6 +83,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       localStorage.getItem("deviceDetail_" + this._id)
     );
     this.hostName = this.deviceDetail.hostName;
+    this.currentUser = localStorage.getItem("currentUser");
     this.agentService
       .getAgentToken(
         "QuickTech",
@@ -148,6 +96,67 @@ export class DashboardComponent implements OnInit, OnDestroy {
           .getAssetsByCompanyId("fdadb2df-ed3d-4e28-b41e-741617b7ffa6")
           .subscribe((res) => {});
       });
+  }
+
+  AddTags(Tag) {
+    const newTag: any = { AssetID: this.asset.ID, Name: Tag };
+    this.agentService.addNewTag(newTag).subscribe(
+      (res) => {
+        this.tagFilterValue = "";
+        this.getAssetTagDropDownDetail();
+        this.toastr.success("Asset Tag save successfully.");
+      },
+      (error) => {
+        this.toastr.error("Something went wrong please try again.");
+      }
+    );
+  }
+
+  editAssetNote(frm) {
+    this.noteEdit.AssetID = this.asset.ID;
+    this.agentService.overrideAssetNotes(this.noteEdit).subscribe(
+      (res) => {
+        this.editCloseNotes();
+        //this.getAssetNotesDetail();
+        this.toastr.success("Asset Notes save successfully.");
+      },
+      (error) => {
+        this.toastr.error("Something went wrong please try again.");
+      }
+    );
+  }
+
+  addAssetNote() {
+    this.noteAdd.AssetID = this.asset.ID;
+    this.agentService.addAssetNotes(this.noteAdd).subscribe(
+      (res) => {
+        this.closeNotes();
+        this.getAssetNotesDetail();
+        this.toastr.success("Asset Notes save successfully.");
+      },
+      (error) => {
+        this.closeNotes();
+        this.toastr.error("Something went wrong please try again.");
+      }
+    );
+  }
+
+  editNotes(id: any) {
+    this.noteEdit = this.assetNotes.find((x) => x.ID == id);
+    this.editNote = !this.editNote;
+  }
+
+  openNotes() {
+    this.noteAdd = new NotesAdd();
+    this.create = !this.create;
+  }
+
+  closeNotes() {
+    this.create = !this.create;
+  }
+
+  editCloseNotes() {
+    this.editNote = !this.editNote;
   }
 
   onSearchTag(value: string) {
@@ -217,19 +226,30 @@ export class DashboardComponent implements OnInit, OnDestroy {
       .getAssetByGuid("48e23c98-cbe4-4a8e-82bd-8c36fe5c9502")
       .subscribe((resp) => {
         if (resp.length > 0) {
-          if (resp[0].Title != "") {
-            this.label =
-              resp[0].Domain != ""
-                ? resp[0].Title + " " + "(" + resp[0].Domain + ")"
-                : resp[0].Title + " " + "(" + "In workgroup" + ")";
-          }
           this.asset = resp[0];
           this.asset.IsUpdated = true;
+          if(this.minDate(this.asset.WarrantyExpires)){
+            this.asset.WarrantyExpires ="";
+          }
+
+          if(this.minDate(this.asset.InstallDate)){
+            this.asset.InstallDate ="";
+          }
+
+          if(this.minDate(this.asset.DeploymentDate)){
+            this.asset.DeploymentDate ="";
+          }
+
+          if(this.minDate(this.asset.LastRebootDate)){
+            this.asset.LastRebootDate ="";
+          }
+
+          this.getlabel(this.asset.Title, this.asset.Domain, this.asset.Name);
           this.getOprationSystemDetail();
           this.getVirusProtection(resp[0].VirusProtectionProducts);
           this.getDiskDriveDetail();
-          this.getAssetTagDetail();
           this.getAssetTagDropDownDetail();
+          this.getAssetNotesDetail();
         }
       });
   }
@@ -237,25 +257,22 @@ export class DashboardComponent implements OnInit, OnDestroy {
   getAssetNotesDetail() {
     this.agentService.getAssetNotes(this.asset.ID).subscribe((res) => {
       this.assetNotes = res.filter((x) => x.IsActive);
-      this.assetNotes.ID = this.asset.ID;
-    });
-  }
-
-  getAssetTagDetail() {
-    this.agentService.getAssetTagByAssetId(this.asset.ID).subscribe((res) => {
-      this.selectedTag = res;
     });
   }
 
   getAssetTagDropDownDetail() {
     this.agentService.getAssetTag().subscribe((resp) => {
-      if (this.selectedTag.length !== 0) {
-        this.assetTag = resp;
-        this.filteredTag = _.differenceBy(resp, this.selectedTag, "ID");
-      } else {
-        this.assetTag = resp;
-        this.filteredTag = resp;
-      }
+      this.agentService.getAssetTagByAssetId(this.asset.ID).subscribe((res) => {
+        this.selectedTag = res;
+
+        if (this.selectedTag.length !== 0) {
+          this.assetTag = resp;
+          this.filteredTag = _.differenceBy(resp, this.selectedTag, "ID");
+        } else {
+          this.assetTag = resp;
+          this.filteredTag = resp;
+        }
+      });
     });
   }
 
@@ -287,13 +304,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.agentService
       .getOperatingSystemByAssetId(this.asset.ID)
       .subscribe((resp) => {
-        this.asset.SerialNumber = resp[0].SerialNumber;
-        this.asset.Caption =
-          resp[0].Caption.replace("Microsoft", "") +
-          " " +
-          resp[0].OSArchitecture +
-          " " +
-          resp[0].Version;
+        this.System = resp.filter((x) => x.IsActive);
+        if (this.System.length > 0) {
+          this.operatingSystem = this.System[0];
+          this.serialnumber = this.System[0].SerialNumber;
+          this.caption =
+            this.System[0].Caption.replace("Microsoft", "") +
+            " " +
+            this.System[0].OSArchitecture +
+            " " +
+            this.System[0].Version;
+        }
       });
   }
 
@@ -344,6 +365,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   onDateChange(newDate: Date) {}
 
   updateAsset() {
+    this.getlabel(this.asset.Title, this.asset.Domain, this.asset.Name);
     this.agentService.overrideAsset(this.asset).subscribe(
       (resp) => {
         this.toastr.success("Asset info save successfully.");
@@ -354,8 +376,42 @@ export class DashboardComponent implements OnInit, OnDestroy {
     );
   }
 
+  updateSerialNo() {
+    this.operatingSystem;
+    this.operatingSystem.SerialNumber = this.serialnumber;
+    this.agentService.overrideOperationSystem(this.operatingSystem).subscribe(
+      (resp) => {
+        this.toastr.success("Asset info save successfully.");
+      },
+      (error) => {
+        this.toastr.error("Something went wrong please try again.");
+      }
+    );
+  }
+
+  getlabel(title?: string, domain?: string, name?: string) {
+    if (title == "") {
+      title = name;
+      this.asset.Title = title;
+    }
+    this.label =
+      domain != ""
+        ? title + " " + "(" + domain + ")"
+        : title + " " + "(" + "In workgroup" + ")";
+  }
+
   convertToGB(value) {
     return (parseInt(value) / 1024 / 1024 / 1024).toFixed(0);
+  }
+
+  minDate(dateVal: any) {
+    var minDate = moment.utc("0001-01-01");
+    var receiveDate = moment(dateVal);
+    if (moment.utc(receiveDate).isAfter(minDate)) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   diskSpaceDiff(v1, v2) {
@@ -364,17 +420,19 @@ export class DashboardComponent implements OnInit, OnDestroy {
     return (parseFloat(val1) - parseFloat(val2)).toFixed(0);
   }
 
-  tooltip(value?: string) {
+  tooltip(txtLength: number, value?: string) {
     if (value !== undefined && value !== null && value !== "") {
-      return value.length > 18 ? value : null;
+      return value.length > txtLength ? value : null;
     } else {
       return value;
     }
   }
 
-  displayValue(value?: string) {
+  displayValue(txtLength: number, value?: string) {
     if (value !== undefined && value !== null && value !== "") {
-      return value.length > 18 ? value.substring(0, 18) + "... " : value;
+      return value.length > txtLength
+        ? value.substring(0, txtLength) + "... "
+        : value;
     } else {
       return value;
     }

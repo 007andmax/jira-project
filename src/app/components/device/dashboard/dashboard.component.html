@@ -44,9 +44,9 @@
                                         <span>Host Name</span>
                                         <span
                                             class="edit-field"
-                                            [attr.data-tooltip]="tooltip(asset.Name)"
+                                            [attr.data-tooltip]="tooltip(20,asset.Name)"
                                         >
-                                            <div>{{ displayValue(asset.Name) }}</div>
+                                            <div>{{ displayValue(20,asset.Name) }}</div>
                                         </span>
                                     </li>
                                     <li>
@@ -67,9 +67,9 @@
                                         <span>Window Version</span>
                                         <span
                                             class="edit-field"
-                                            [attr.data-tooltip]="tooltip(asset.Caption)"
+                                            [attr.data-tooltip]="tooltip(20,caption)"
                                         >
-                                            <div>{{ displayValue(asset.Caption) }}</div>
+                                            <div>{{ displayValue(20,caption) }}</div>
                                         </span>
                                     </li>
                                     <li>
@@ -85,17 +85,27 @@
                                     </li>
                                     <li>
                                         <span>Deployment Date</span>
-                                        <div>
-                                            {{ asset.InstallDate | date: DateFormat }}
-                                        </div>
+                                        <span class="edit-field">
+                                            <input
+                                                type="text"
+                                                class="form-control sub-label-field"
+                                                [(ngModel)]="asset.DeploymentDate"
+                                                ngbDatepicker
+                                                #deploy="ngbDatepicker"
+                                                (click)="deploy.toggle()"
+                                                (dateSelect)="updateAsset()"
+                                            >
+                                        </span>
                                     </li>
                                     <li>
                                         <span>Manufacturer</span>
-                                        <span
-                                            class="edit-field"
-                                            [attr.data-tooltip]="tooltip(asset.Manufacturer)"
-                                        >
-                                            <div>{{ displayValue(asset.Manufacturer) }}</div>
+                                        <span class="edit-field">
+                                            <input
+                                                type="text"
+                                                class="form-control sub-label-field"
+                                                [(ngModel)]="asset.Manufacturer"
+                                                (blur)="updateAsset()"
+                                            >
                                         </span>
                                     </li>
                                     <li>
@@ -111,17 +121,27 @@
                                     </li>
                                     <li>
                                         <span>Install Date</span>
-                                        <div>
-                                            {{ asset.InstallDate | date: DateFormat }}
-                                        </div>
+                                        <span class="edit-field">
+                                            <input
+                                                type="text"
+                                                class="form-control sub-label-field"
+                                                [(ngModel)]="asset.InstallDate"
+                                                ngbDatepicker
+                                                #install="ngbDatepicker"
+                                                (click)="install.toggle()"
+                                                (dateSelect)="updateAsset()"
+                                            >
+                                        </span>
                                     </li>
                                     <li>
                                         <span>Model</span>
-                                        <span
-                                            class="edit-field"
-                                            [attr.data-tooltip]="tooltip(asset.Model)"
-                                        >
-                                            <div>{{ displayValue(asset.Model) }}</div>
+                                        <span class="edit-field">
+                                            <input
+                                                type="text"
+                                                class="form-control sub-label-field"
+                                                [(ngModel)]="asset.Model"
+                                                (blur)="updateAsset()"
+                                            >
                                         </span>
                                     </li>
                                     <li>
@@ -138,11 +158,13 @@
                                     </li>
                                     <li>
                                         <span>Serial Number</span>
-                                        <span
-                                            class="edit-field"
-                                            [attr.data-tooltip]="tooltip(asset.SerialNumber)"
-                                        >
-                                            <div>{{ displayValue(asset.SerialNumber) }}</div>
+                                        <span class="edit-field">
+                                            <input
+                                                type="text"
+                                                class="form-control sub-label-field"
+                                                [(ngModel)]="serialnumber"
+                                                (blur)="updateSerialNo()"
+                                            >
                                         </span>
                                     </li>
                                 </ul>
@@ -241,12 +263,6 @@
                             <div class="dashboard-col col-50 tags">
                                 <div class="col-title">
                                     <h2>Tags</h2>
-                                    <a
-                                        click
-                                        class="static-link disabled"
-                                    >
-                                        +Add Tags
-                                    </a>
                                 </div>
                                 <div
                                     class="grey-dropdown"
@@ -269,6 +285,8 @@
                                             ngbDropdownToggle
                                             class="pointer"
                                             [matChipInputFor]="chipList"
+                                            (blur)="AddTags($event.target.value)"
+                                            (keyup.enter)="AddTags($event.target.value)"
                                             (keyup)="onSearchTag($event.target.value)"
                                         >
                                     </mat-form-field>
@@ -335,38 +353,29 @@
                                     <h2>Notes</h2>
                                     <a
                                         href="#javascript:;"
-                                        class="static-link disabled"
-                                        (click)="create = create"
+                                        class="static-link"
+                                        (click)="openNotes()"
                                     >
                                         +Add Notes
                                     </a>
                                 </div>
                                 <ul class="list-unstyled">
-                                    <li (click)="editNote = !editNote">
-                                        <a
-                                            href="javascript:;"
-                                            class="attashmnets"
+                                    <li
+                                        *ngFor="let note of assetNotes"
+                                        (click)="editNotes(note.ID)"
+                                    >
+                                        <span
+                                            class="notes-title"
+                                            [attr.data-tooltip]="tooltip(17,note.Title)"
                                         >
-                                            <img
-                                                src="/html/assets/img/device/attachment-12.svg"
-                                                alt="attachment"
-                                            >
-                                        </a>
-                                        <h5>System Credentials</h5>
-                                        <p>
-                                            Duis aute irure dolor in reprehenderit in voluptate velit
-                      ess…
-                                        </p>
-                                        <div class="small-tag">
-                                            <a href="javascript:;">Agent</a>
-                                            <a href="javascript:;">Credentials</a>
-                                        </div>
-                                        <a
-                                            href="javascript:;"
-                                            class="more-link"
+                                            <h5>{{ displayValue(17,note.Title)}}</h5>
+                                        </span>
+                                        <span
+                                            class="notes-description"
+                                            [attr.data-tooltip]="tooltip(61,note.Description)"
                                         >
-                                            +2 more
-                                        </a>
+                                            <p>{{displayValue(61,note.Description)}}</p>
+                                        </span>
                                         <div class="notes-by">
                                             <figure>
                                                 <img
@@ -375,153 +384,8 @@
                                                 >
                                             </figure>
                                             <div class="other-info">
-                                                <span class="name">Alberta Stanley</span>
-                                                <span class="date">24 Mar 2020</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li (click)="editNote = !editNote">
-                                        <h5>System Credentials</h5>
-                                        <p>
-                                            Duis aute irure dolor in reprehenderit in voluptate velit
-                      ess…
-                                        </p>
-                                        <div class="small-tag">
-                                            <a href="javascript:;">Agent</a>
-                                            <a href="javascript:;">Credentials</a>
-                                        </div>
-                                        <a
-                                            href="javascript:;"
-                                            class="more-link"
-                                        >
-                                            +2 more
-                                        </a>
-                                        <div class="notes-by">
-                                            <figure>
-                                                <img
-                                                    src="/html/assets/img/device/user.jpg"
-                                                    alt="user"
-                                                >
-                                            </figure>
-                                            <div class="other-info">
-                                                <span class="name">Alberta Stanley</span>
-                                                <span class="date">24 Mar 2020</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li (click)="editNote = !editNote">
-                                        <h5>System Credentials</h5>
-                                        <p>
-                                            Duis aute irure dolor in reprehenderit in voluptate velit
-                      ess…
-                                        </p>
-                                        <div class="small-tag">
-                                            <a href="javascript:;">Agent</a>
-                                            <a href="javascript:;">Credentials</a>
-                                        </div>
-                                        <a
-                                            href="javascript:;"
-                                            class="more-link"
-                                        >
-                                            +2 more
-                                        </a>
-                                        <div class="notes-by">
-                                            <figure>
-                                                <img
-                                                    src="/html/assets/img/device/user.jpg"
-                                                    alt="user"
-                                                >
-                                            </figure>
-                                            <div class="other-info">
-                                                <span class="name">Alberta Stanley</span>
-                                                <span class="date">24 Mar 2020</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li (click)="editNote = !editNote">
-                                        <h5>System Credentials</h5>
-                                        <p>
-                                            Duis aute irure dolor in reprehenderit in voluptate velit
-                      ess…
-                                        </p>
-                                        <div class="small-tag">
-                                            <a href="javascript:;">Agent</a>
-                                            <a href="javascript:;">Credentials</a>
-                                        </div>
-                                        <a
-                                            href="javascript:;"
-                                            class="more-link"
-                                        >
-                                            +2 more
-                                        </a>
-                                        <div class="notes-by">
-                                            <figure>
-                                                <img
-                                                    src="/html/assets/img/device/user.jpg"
-                                                    alt="user"
-                                                >
-                                            </figure>
-                                            <div class="other-info">
-                                                <span class="name">Alberta Stanley</span>
-                                                <span class="date">24 Mar 2020</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li (click)="editNote = !editNote">
-                                        <h5>System Credentials</h5>
-                                        <p>
-                                            Duis aute irure dolor in reprehenderit in voluptate velit
-                      ess…
-                                        </p>
-                                        <div class="small-tag">
-                                            <a href="javascript:;">Agent</a>
-                                            <a href="javascript:;">Credentials</a>
-                                        </div>
-                                        <a
-                                            href="javascript:;"
-                                            class="more-link"
-                                        >
-                                            +2 more
-                                        </a>
-                                        <div class="notes-by">
-                                            <figure>
-                                                <img
-                                                    src="/html/assets/img/device/user.jpg"
-                                                    alt="user"
-                                                >
-                                            </figure>
-                                            <div class="other-info">
-                                                <span class="name">Alberta Stanley</span>
-                                                <span class="date">24 Mar 2020</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li (click)="editNote = !editNote">
-                                        <h5>System Credentials</h5>
-                                        <p>
-                                            Duis aute irure dolor in reprehenderit in voluptate velit
-                      ess…
-                                        </p>
-                                        <div class="small-tag">
-                                            <a href="javascript:;">Agent</a>
-                                            <a href="javascript:;">Credentials</a>
-                                        </div>
-                                        <a
-                                            href="javascript:;"
-                                            class="more-link"
-                                        >
-                                            +2 more
-                                        </a>
-                                        <div class="notes-by">
-                                            <figure>
-                                                <img
-                                                    src="/html/assets/img/device/user.jpg"
-                                                    alt="user"
-                                                >
-                                            </figure>
-                                            <div class="other-info">
-                                                <span class="name">Alberta Stanley</span>
-                                                <span class="date">24 Mar 2020</span>
+                                                <span class="name">{{currentUser}}</span>
+                                                <span class="date">{{note.CreateDate | date: DateFormats}}</span>
                                             </div>
                                         </div>
                                     </li>
@@ -544,7 +408,7 @@
                     <a
                         class="close"
                         href="javascript:;"
-                        (click)="create = !create"
+                        (click)="closeNotes()"
                     >
                         <img
                             src="/html/assets/img/icons/close.svg"
@@ -553,7 +417,10 @@
                     </a>
                 </div>
                 <div class="middle-content">
-                    <form method="POST">
+                    <form
+                        (ngSubmit)="addAssetNote()"
+                        #assetNotesForm="ngForm"
+                    >
                         <div class="f-row">
                             <div class="f-col col-100">
                                 <label>Note Subject</label>
@@ -561,8 +428,20 @@
                                     <input
                                         type="text"
                                         placeholder="Write Ticket subject"
+                                        required
                                         class="form-input"
+                                        [(ngModel)]="noteAdd.Title"
+                                        id="title"
+                                        name="title"
+                                        #title="ngModel"
+                                        maxlength="60"
                                     >
+                                    <div
+                                        [hidden]="title.valid || title.pristine"
+                                        class="alert alert-danger"
+                                    >
+                                        Title is required
+                                    </div>
                                 </div>
                             </div>
                             <div class="f-col col-100">
@@ -571,272 +450,130 @@
                                     <textarea
                                         class="form-input"
                                         placeholder="Write Description here…"
+                                        required
+                                        [(ngModel)]="noteAdd.Description"
+                                        id="description"
+                                        name="description"
+                                        #description="ngModel"
+                                        maxlength="500"
                                     ></textarea>
-                                </div>
-                            </div>
-                            <div class="f-col col-100">
-                                <label>Add Tags</label>
-                                <div class="form-row">
-                                    <input
-                                        type="text"
-                                        class="form-input"
-                                        placeholder="Start typing tags. Hit tab, comma, or return to
-                    complete."
+                                    <div
+                                        [hidden]="description.valid || description.pristine"
+                                        class="alert alert-danger"
                                     >
-                                </div>
-                            </div>
-                            <div class="f-col col-100">
-                                <!-- File Uploader -->
-                                <div class="upload-box">
-                                    <div class="upload-box-content">
-                                        <div
-                                            class="drop-container"
-                                            ngFileDrop
-                                            [options]="options"
-                                            (uploadOutput)="onUploadOutput($event)"
-                                            [uploadInput]="uploadInput"
-                                        >
-                                            <p>
-                                                <img
-                                                    src="/html/assets/img/device/attachment.svg"
-                                                    alt="attach"
-                                                >
-                                                <span>Drag your file here or</span>
-                                                <label class="upload-button">
-                                                    <input
-                                                        type="file"
-                                                        ngFileSelect
-                                                        [options]="options"
-                                                        (uploadOutput)="onUploadOutput($event)"
-                                                        [uploadInput]="uploadInput"
-                                                        multiple
-                                                    >
-                                                    Upload manually
-                                                </label>
-                                            </p>
-                                        </div>
-                                        <div class="upload-item">
-                                            <div
-                                                class="add-file-raw"
-                                                style="display: none"
-                                            >
-                                                <a
-                                                    href="javascript:;"
-                                                    class="add-files"
-                                                    title="Add Files"
-                                                >
-                                                    <img
-                                                        src="/html/assets/img/device/addmore.svg"
-                                                        alt="Add More"
-                                                    >
-                                                </a>
-                                            </div>
-                                            <div
-                                                class="upload-item-content"
-                                                *ngFor="let f of files; let i = index"
-                                            >
-                                                <span class="f-name">{{ f.name }}</span>
-                                                <i
-                                                    class="ionicon ion-close-round"
-                                                    (click)="cancelUpload(f.id)"
-                                                    title="Close Tag"
-                                                ></i>
-
-
-                                                <!-- File Upload progress content -->
-                                                <!-- <div class="progress-content">
-                                  <div class="progress">
-                                    <span class="bar" [style.width]="f?.progress?.data?.percentage + '%'" [class.is-done]="f?.progress?.data?.percentage === 100"></span>
-                                  </div>
-                                </div> -->
-                                                <!-- <div class="progress-text-content">
-                                  <span class="progress-text" [class.is-done]="f?.progress?.data?.percentage === 100">
-                                    <span>{{ f.progress?.data?.percentage }}% </span>
-                                    <span *ngIf="f.progress?.data?.percentage !== 100">Uploading...</span>
-                                    <span *ngIf="f.progress?.data?.percentage === 100">Done</span>
-                                  </span>
-                                  <span class="speed-and-eta-text" *ngIf="f.progress?.data?.percentage !== 0 && f.progress?.data?.percentage !== 100">
-                                    <span>{{ f.progress?.data?.speedHuman }} </span>
-                                    <span>ETA {{ f.progress?.data?.etaHuman }}</span>
-                                  </span>
-                                </div> -->
-                                            </div>
-                                        </div>
+                                        Title is required
                                     </div>
                                 </div>
-                                <!-- End of File Uploader -->
                             </div>
                         </div>
                         <div class="btn-row">
-                            <input
+                            <button
                                 type="submit"
-                                value="Create Note"
                                 class="btn btn-primary"
+                                [disabled]="!assetNotesForm.form.valid"
                             >
+                                Create Note
+                            </button>
                             <a
                                 href="javascrip:;"
                                 class="btn btn-secondary"
-                                (click)="create = !create"
+                                (click)="closeNotes()"
                             >
                                 Cancel
                             </a>
                         </div>
                     </form>
                 </div>
-            </div>
-            <div
-                class="sidebar-popup note"
-                [class.opened]="editNote"
-            >
-                <!-- header -->
-                <div class="sidebar-header">
-                    <div class="sidebar-title">
-                        <div class="h1">Edit Note</div>
-                    </div>
-                    <a
-                        class="close"
-                        href="javascript:;"
-                        (click)="editNote = !editNote"
-                    >
-                        <img
-                            src="/html/assets/img/icons/close.svg"
-                            alt="close"
+
+
+                <div
+                    class="sidebar-popup note"
+                    [class.opened]="editNote"
+                >
+                    <!-- header -->
+                    <div class="sidebar-header">
+                        <div class="sidebar-title">
+                            <div class="h1">Edit Note</div>
+                        </div>
+                        <a
+                            class="close"
+                            href="javascript:;"
+                            (click)="editCloseNotes()"
                         >
-                    </a>
-                </div>
-                <div class="middle-content">
-                    <form method="POST">
-                        <div class="f-row">
-                            <div class="f-col col-100">
-                                <label>Note Subject</label>
-                                <div class="form-row">
-                                    <input
-                                        type="text"
-                                        value="Driver Install guide"
-                                        class="form-input"
-                                    >
-                                </div>
-                            </div>
-                            <div class="f-col col-100">
-                                <label>Description</label>
-                                <div class="form-row">
-                                    <textarea
-                                        class="form-input"
-                                        value="There are many variations of passages of Lorem Ipsum
-                    available, but themajority have suffered alteration in some
-                    form, by injected humour."
-                                    >
-                                    </textarea>
-                                </div>
-                            </div>
-                            <div class="f-col col-100">
-                                <label>Add Tags</label>
-                                <div class="form-row">
-                                    <input
-                                        type="text"
-                                        class="form-input"
-                                        placeholder="Start typing tags. Hit tab, comma, or return to
-                    complete."
-                                    >
-                                </div>
-                            </div>
-                            <div class="f-col col-100">
-                                <!-- File Uploader -->
-                                <div class="upload-box">
-                                    <div class="upload-box-content">
-                                        <div
-                                            class="drop-container"
-                                            ngFileDrop
-                                            [options]="options"
-                                            (uploadOutput)="onUploadOutput($event)"
-                                            [uploadInput]="uploadInput"
+                            <img
+                                src="/html/assets/img/icons/close.svg"
+                                alt="close"
+                            >
+                        </a>
+                    </div>
+                    <div class="middle-content">
+                        <form
+                            (ngSubmit)="editAssetNote()"
+                            #editassetNotesForm="ngForm"
+                        >
+                            <div class="f-row">
+                                <div class="f-col col-100">
+                                    <label>Note Subject</label>
+                                    <div class="form-row">
+                                        <input
+                                            type="text"
+                                            placeholder="Write Ticket subject"
+                                            required
+                                            class="form-input"
+                                            [(ngModel)]="noteEdit.Title"
+                                            id="title"
+                                            name="title"
+                                            #title="ngModel"
+                                            maxlength="60"
                                         >
-                                            <p>
-                                                <img
-                                                    src="/html/assets/img/device/attachment.svg"
-                                                    alt="attach"
-                                                >
-                                                <span>Drag your file here or</span>
-                                                <label class="upload-button">
-                                                    <input
-                                                        type="file"
-                                                        ngFileSelect
-                                                        [options]="options"
-                                                        (uploadOutput)="onUploadOutput($event)"
-                                                        [uploadInput]="uploadInput"
-                                                        multiple
-                                                    >
-                                                    Upload manually
-                                                </label>
-                                            </p>
-                                        </div>
-                                        <div class="upload-item">
-                                            <div
-                                                class="add-file-raw"
-                                                style="display: none"
-                                            >
-                                                <a
-                                                    href="javascript:;"
-                                                    class="add-files"
-                                                    title="Add Files"
-                                                >
-                                                    <img
-                                                        src="/html/assets/img/device/addmore.svg"
-                                                        alt="Add More"
-                                                    >
-                                                </a>
-                                            </div>
-                                            <div
-                                                class="upload-item-content"
-                                                *ngFor="let f of files; let i = index"
-                                            >
-                                                <span class="f-name">{{ f.name }}</span>
-                                                <i
-                                                    class="ionicon ion-close-round"
-                                                    (click)="cancelUpload(f.id)"
-                                                    title="Close Tag"
-                                                ></i>
-
-
-                                                <!-- File Upload progress content -->
-                                                <!-- <div class="progress-content">
-                                  <div class="progress">
-                                    <span class="bar" [style.width]="f?.progress?.data?.percentage + '%'" [class.is-done]="f?.progress?.data?.percentage === 100"></span>
-                                  </div>
-                                </div> -->
-                                                <!-- <div class="progress-text-content">
-                                  <span class="progress-text" [class.is-done]="f?.progress?.data?.percentage === 100">
-                                    <span>{{ f.progress?.data?.percentage }}% </span>
-                                    <span *ngIf="f.progress?.data?.percentage !== 100">Uploading...</span>
-                                    <span *ngIf="f.progress?.data?.percentage === 100">Done</span>
-                                  </span>
-                                  <span class="speed-and-eta-text" *ngIf="f.progress?.data?.percentage !== 0 && f.progress?.data?.percentage !== 100">
-                                    <span>{{ f.progress?.data?.speedHuman }} </span>
-                                    <span>ETA {{ f.progress?.data?.etaHuman }}</span>
-                                  </span>
-                                </div> -->
-                                            </div>
+                                        <div
+                                            [hidden]="title.valid || title.pristine"
+                                            class="alert alert-danger"
+                                        >
+                                            Title is required
                                         </div>
                                     </div>
                                 </div>
-                                <!-- End of File Uploader -->
+                                <div class="f-col col-100">
+                                    <label>Description</label>
+                                    <div class="form-row">
+                                        <textarea
+                                            class="form-input"
+                                            placeholder="Write Description here…"
+                                            required
+                                            [(ngModel)]="noteEdit.Description"
+                                            id="description"
+                                            name="description"
+                                            #description="ngModel"
+                                            maxlength="500"
+                                        ></textarea>
+                                        <div
+                                            [hidden]="description.valid || description.pristine"
+                                            class="alert alert-danger"
+                                        >
+                                            Title is required
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="btn-row">
-                            <input
-                                type="submit"
-                                value="Edit Note"
-                                class="btn btn-primary"
-                            >
-                            <a
-                                href="javascrip:;"
-                                class="btn btn-secondary"
-                                (click)="editNote = !editNote"
-                            >
-                                Cancel
-                            </a>
-                        </div>
-                    </form>
+                            <div class="btn-row">
+                                <button
+                                    type="submit"
+                                    class="btn btn-primary"
+                                    [disabled]="!editassetNotesForm.form.valid"
+                                >
+                                    Edit Note
+                                </button>
+                                <a
+                                    href="javascrip:;"
+                                    class="btn btn-secondary"
+                                    (click)="editCloseNotes()"
+                                >
+                                    Cancel
+                                </a>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
