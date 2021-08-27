@@ -5,7 +5,13 @@
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-title">User Detail</div>
         <div class="qt-df qt-ai-c">
-            <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-16 header-circle-icon icon__email-dark qt-mr-16 pointer"></div>
+            <div
+                class="qt-sz-32 qt-circle qt-bg-white qt-mr-16 header-circle-icon icon__email-dark qt-mr-16 pointer"
+                (click)="showAsideForDraftEmail()"
+                placement="top"
+                container="body"
+                [ngbTooltip]="'Draft Email'"
+            ></div>
             <div
                 class="icon__close qt-aside-modern__header-close"
                 (click)="close()"
@@ -52,11 +58,11 @@
                 <div class="user-detail__row-info-line">
                     <div class="user-detail__row-info-label qt-mb-4">Contact No.</div>
                     <div class="qt-df qt-ai-c">
-                      <div class="icon__phone-gray qt-za-16 qt-sz-16 qt-bg-contain qt-mr-4"></div>
-                      <div
-                        class="user-detail__row-info-value"
-                        [textContent]="user.phoneNumbers[0].number | preparePhone | mask: '(000) 000-0000' | phone"
-                      ></div>
+                        <div class="icon__phone-gray qt-za-16 qt-sz-16 qt-bg-contain qt-mr-4"></div>
+                        <div
+                            class="user-detail__row-info-value"
+                            [textContent]="user.phoneNumbers[0].number | preparePhone | mask: '(000) 000-0000' | phone"
+                        ></div>
                     </div>
                 </div>
             </div>
@@ -64,8 +70,8 @@
             <div class="user-detail__row-info">
                 <div class="user-detail__row-info-line user-detail-aside-subscription">
                     <div class="qt-df qt-jc-sb qt-ai-c qt-mb-8">
-                      <div class="user-detail__row-info-label">Subscription</div>
-                      <div class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"></div>
+                        <div class="user-detail__row-info-label">Subscription</div>
+                        <div class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"></div>
                     </div>
                     <app-company-subscription
                         [editItem]="user.subscription"
@@ -87,8 +93,8 @@
                 <hr class="user-detail-aside__divider">
                 <div class="user-detail__row-info-line">
                     <div class="qt-df qt-jc-sb qt-ai-c qt-mb-4">
-                      <div class="user-detail__row-info-label">Tags</div>
-                      <div class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"></div>
+                        <div class="user-detail__row-info-label">Tags</div>
+                        <div class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"></div>
                     </div>
                     <app-company-tags
                         #companyTags

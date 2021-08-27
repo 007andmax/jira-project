@@ -56,7 +56,6 @@ export class UsersAsideEditComponent implements OnInit {
     this.usersAsideService.addSubscription(getOnUsers);
     this.onCroppImage();
     this.usersStateService.getOpenEditAside().subscribe(data => {
-      console.log("data", this.usersStateService.getuserForEdit());
       this.opened = true;
       this.user.onEdit(this.usersStateService.getuserForEdit());
       this.companyTags.setSelectedTag(this.user.tags);
@@ -88,7 +87,6 @@ export class UsersAsideEditComponent implements OnInit {
     this.usersAsideService.addSubscription(getConfirm);
   }
   onChangeJobDescription(event) {
-    console.log("onChangeJobDescription", event.target.value);
     this.user.jobDescription = event.target.value;
   }
   getUsersTitle(allUsers) {

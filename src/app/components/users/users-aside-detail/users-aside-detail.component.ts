@@ -1,9 +1,11 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { USERS } from 'src/app/const/emails';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 import { TagsService } from 'src/app/services/tags/tags.service';
 import { UsersService } from 'src/app/services/users/users.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { PhoneNumber } from 'src/class/phone-number';
@@ -33,13 +35,13 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     private leftPanelService: LeftPanelService,
     private ticketsStateService: TicketsStateService,
+    private draftEmailStateService: DraftEmailStateService,
     private companiesStateService: CompaniesStateService,) { }
 
 
   ngOnInit() {
     let openDetailAside = this.usersStateService.openDetailAside.subscribe(data => {
       this.user = data;
-      console.log("this.user", this.user);
       if (this.user.phoneNumbers && this.user.phoneNumbers.length === 0 || !this.user.phoneNumbers) {
         this.user.phoneNumbers = [new PhoneNumber('OFFICE')];
       } else {
@@ -70,8 +72,13 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
       this.ticketsStateService.onInitStatus(ticketsColor);
     })
   }
+  public showAsideForDraftEmail() {
+    this.draftEmailStateService.setAction(USERS);
+    this.draftEmailStateService.resetSelectedUsers();
+    this.draftEmailStateService.addSelectedUser(this.user);
+    this.draftEmailStateService.toggleAsideForAdd();
+  }
   onChangeTags(data) {
-    console.log("onChangeTags", data);
     let ids = data.map(item => {
       return { id: item.id }
     });
@@ -92,7 +99,6 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
     return (find) ? find.name : '';
   }
   onChangeSubscriptions(data) {
-    console.log("onChangeSubscriptions", data);
     let subscription = {
       id: this.user.subscription.id,
       invoice: true,
