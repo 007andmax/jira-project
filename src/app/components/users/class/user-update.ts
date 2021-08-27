@@ -22,6 +22,7 @@ export class UserUpdate {
   priority: number;
   userEnabled: boolean;
   tags: Array<any> = [];
+  jobDescription: string;
   constructor(data: UserProfile, user: User) {
     this.role = data.role;
 
@@ -55,5 +56,6 @@ export class UserUpdate {
     this.tags = data.tags.map(item => {
       return { id: item.id }
     })
+    this.jobDescription = data.jobDescription;
   }
 }

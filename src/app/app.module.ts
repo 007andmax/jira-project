@@ -452,6 +452,13 @@ import { CompanyDashAssociateComponent } from './components/company-dashboard/co
 import { CompanyAssociateComponent } from './components/company-dashboard/company-dash-associate/company-associate/company-associate.component';
 import { CompanyDashAssociateInfoComponent } from './components/company-dashboard/company-dash-associate-info/company-dash-associate-info.component';
 import { PreparePhonePipe } from './pipe/prepare-phone.pipe';
+import { UsersAsideDetailComponent } from './components/users/users-aside-detail/users-aside-detail.component';
+import { UsersAsideDetailTicketsComponent } from './components/users/users-aside-detail/users-aside-detail-tickets/users-aside-detail-tickets.component';
+import { UsersAsideDetailTicketsItemComponent } from './components/users/users-aside-detail/users-aside-detail-tickets/users-aside-detail-tickets-item/users-aside-detail-tickets-item.component';
+import { UsersAsideDetailDocumentsComponent } from './components/users/users-aside-detail/users-aside-detail-documents/users-aside-detail-documents.component';
+import { UsersAsideDetailDocumentsItemComponent } from './components/users/users-aside-detail/users-aside-detail-documents/users-aside-detail-documents-item/users-aside-detail-documents-item.component';
+import { UsersAsideDetailPasswordsComponent } from './components/users/users-aside-detail/users-aside-detail-passwords/users-aside-detail-passwords.component';
+import { UsersAsideDetailPasswordsItemComponent } from './components/users/users-aside-detail/users-aside-detail-passwords/users-aside-detail-passwords-item/users-aside-detail-passwords-item.component';
 
 
 declare var $: any;
@@ -861,7 +868,14 @@ declare var $: any;
     CompanyDashAssociateComponent,
     CompanyAssociateComponent,
     CompanyDashAssociateInfoComponent,
-    PreparePhonePipe
+    PreparePhonePipe,
+    UsersAsideDetailComponent,
+    UsersAsideDetailTicketsComponent,
+    UsersAsideDetailTicketsItemComponent,
+    UsersAsideDetailDocumentsComponent,
+    UsersAsideDetailDocumentsItemComponent,
+    UsersAsideDetailPasswordsComponent,
+    UsersAsideDetailPasswordsItemComponent
   ],
   imports: [
     BrowserModule,

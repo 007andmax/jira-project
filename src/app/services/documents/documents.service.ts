@@ -66,6 +66,9 @@ export class DocumentsService {
   public filterDocuments(data) {
     return this.http.post(this.apiUrl + `documents/filtered`, data);
   }
+  public filterDocumentsForUserDetail(user_id) {
+    return this.http.post(this.apiUrl + `documents/filtered`, { "linkedUserId": user_id });
+  }
   public getList() {
     return this.http.get(this.apiUrl + `documents`);
   }

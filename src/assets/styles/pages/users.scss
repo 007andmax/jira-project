@@ -375,7 +375,7 @@ app-users-table {
   }
 
   .mat-form-field-wrapper {
-    .mat-form-field-infix{
+    .mat-form-field-infix {
       padding: 0 !important;
 
       &::before {
@@ -391,7 +391,7 @@ app-users-table {
       text-indent: 10px;
     }
 
-   .mat-input-element {
+    .mat-input-element {
       min-height: 35px !important;
       height: 40px !important;
     }
@@ -447,5 +447,32 @@ draft-email-user-recipients .mat-form-field-appearance-legacy {
 
   .mat-chip-list-wrapper {
     margin: 0 !important;
+  }
+}
+users-aside-detail {
+  app-company-subscription {
+    .user-subscription {
+      border: none;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      height: auto;
+      min-height: 36px;
+      > div {
+        margin-bottom: 4px;
+      }
+    }
+    .report-caret-icon {
+      display: none;
+    }
+  }
+  app-company-tags {
+    .mat-form-field-infix {
+      border: none !important;
+      padding-left: 4px !important;
+      &::before {
+        display: none;
+      }
+    }
   }
 }

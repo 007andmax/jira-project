@@ -60,7 +60,9 @@ export class TagsService {
       `${this.apiUrl}commonTags/removeTag?tagId=${tagId}`
     );
   }
-
+  public setTagsUser(user_id, data) {
+    return this.http.put(this.apiUrl + `commonTags/user/${user_id}`, data);
+  }
   public getTags() {
     return this.http.get(this.apiUrl + `tags/getAll`).pipe(
       tap((data: any) => data.data));

@@ -402,6 +402,13 @@ company-associate {
       height: 30px;
     }
   }
+  .hidde-label {
+    .mat-form-field-wrapper {
+      &::before {
+        display: none;
+      }
+    }
+  }
 }
 documents-filter {
   app-company-tags {
@@ -452,6 +459,7 @@ documents-filter {
 documents-filter,
 app-documents-add-info,
 .company-dashboard-add-tag,
+users-aside-detail,
 documents-edit-info {
   .tab-btns {
     display: flex;
@@ -624,6 +632,16 @@ documents-edit-info {
         transform: translateY(-50%);
         width: auto;
       }
+    }
+  }
+}
+.user-detail-info {
+  .user-detail__row-info {
+    .mat-form-field {
+      margin-top: 0;
+    }
+    .mat-chip-list-wrapper .mat-standard-chip, .mat-chip-list-wrapper input.mat-input-element {
+      margin: 2px 2px 2px 0;
     }
   }
 }

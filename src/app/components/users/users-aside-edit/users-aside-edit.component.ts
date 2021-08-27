@@ -86,7 +86,9 @@ export class UsersAsideEditComponent implements OnInit {
     })
     this.usersAsideService.addSubscription(getConfirm);
   }
-
+  onChangeJobDescription(event) {
+    this.user.jobDescription = event.target.value;
+  }
   getUsersTitle(allUsers) {
     this.allTitles = allUsers
       .map((user) => {

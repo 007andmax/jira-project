@@ -1,11 +1,11 @@
 .phones-numbers {
+  display: flex;
+  flex-direction: column;
+  .item-phone {
     display: flex;
-    flex-direction: column;
-    .item-phone {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-    }
+    align-items: center;
+    justify-content: flex-start;
+  }
 }
 
 .user-details {
@@ -13,4 +13,13 @@
 }
 .drop-down-users {
   width: fit-content;
+}
+tr {
+  cursor: pointer;
+  &:hover {
+    td {
+      background: #f4fbff;
+      border-color: #16a4fa;
+    }
+  }
 }
