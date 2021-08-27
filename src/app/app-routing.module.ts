@@ -90,8 +90,7 @@ const routes: Routes = [
   },
   {
     path: ':company/company/:id/dashboard',
-    component: CompanyDashboardComponent,
-    pathMatch: 'full'
+    loadChildren: './components/company-dashboard/company-dashboard.module#CompanyDashboardModule'
   },
   {
     path: ':company/quotes',

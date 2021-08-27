@@ -463,6 +463,9 @@ import { CompanyAssociateModule } from './components/company-dashboard/company-d
 import { PhoneModule } from './pipe/phone/phone.module';
 import { PreparePhoneModule } from './pipe/prepare-phone/prepare-phone.module';
 import { DynamicTooltipModule } from './components/shared/dynamic-tooltip/dynamic-tooltip.module';
+import { CompanyDashboardModule } from './components/company-dashboard/company-dashboard.module';
+import { ContractsPreviewModule } from './components/billing/contracts/contracts-preview/contracts-preview.module';
+import { SelectSearchModule } from './components/shared/select-search/select-search.module';
 
 
 declare var $: any;
@@ -524,15 +527,15 @@ declare var $: any;
     ImageCropperComponent,
     // CompanyEditAsideComponent,
     //  CompanyTagsComponent,
-    CompanyDashDetailComponent,
-    CompanyDashStatsComponent,
-    CompanyDashTicketComponent,
-    CompanyDashRevenueComponent,
-    CompanyDashInvoiceComponent,
-    CompanyDashContractComponent,
+    //  CompanyDashDetailComponent,
+    //  CompanyDashStatsComponent,
+    // CompanyDashTicketComponent,
+    // CompanyDashRevenueComponent,
+    //  CompanyDashInvoiceComponent,
+    // CompanyDashContractComponent,
     DraftEmailComponent,
     DraftEmailRecipientsComponent,
-    SelectSearchComponent,
+    //  SelectSearchComponent,
     CompanyPasswordManagerComponent,
     FilterPipe,
     ClickOtsideDirective,
@@ -653,7 +656,7 @@ declare var $: any;
     CompanyInfoHistoryComponent,
     TicketEditAsideRightPanelComponent,
     CompanyTicketsComponent,
-    CompanyDashboardComponent,
+    // CompanyDashboardComponent,
     InventoryAddBodyComponent,
     ServicePipe,
     LeftPanelSettingsComponent,
@@ -730,8 +733,8 @@ declare var $: any;
     searchTextPipe,
     SoftwarePipe,
     //  DropDownComponent,
-    ContractsAsideHourlyBillingPreviewComponent,
-    ContractsPreviewComponent,
+    //  ContractsAsideHourlyBillingPreviewComponent,
+    // ContractsPreviewComponent,
     ContractsEditComponent,
     ContractsAsideHourlyEditComponent,
     ContractsAsideBlockTimeBillingCustomerServiceComponent,
@@ -742,15 +745,15 @@ declare var $: any;
     ContractsAsideBlockTimeBillingUsersComponent,
     ContractsConfirmComponent,
     ContractsAsideEditHourlyAddDefaultServiceComponent,
-    ContractsAsideBlockTimeBillingPreviewComponent,
+    //  ContractsAsideBlockTimeBillingPreviewComponent,
     ContractsAsideBlockTimeEditComponent,
     ContractsAsideBlockTimeEditCustomerServiceComponent,
     ContractsAsideUserDeviceServiceComponent,
-    ContractsAsideUserDeviceBillingPreviewComponent,
+    //   ContractsAsideUserDeviceBillingPreviewComponent,
     ContractsAsideUserDeviceEditComponent,
     ContractsAsideOtherProductComponent,
     ContractsAsideOtherServiceComponent,
-    ContractsAsideProductServicePreviewComponent,
+    //  ContractsAsideProductServicePreviewComponent,
     ContractsAsideProductServiceEditComponent,
     ContractsAsideOtherServiceEditComponent,
     DashboardBillingComponent,
@@ -869,9 +872,9 @@ declare var $: any;
     CompanyAddAsideShortComponent,
     CompanyAddAsideFullComponent,
     HomeComponent,
-    CompanyDashAssociateComponent,
+    // CompanyDashAssociateComponent,
     //  CompanyAssociateComponent,
-    CompanyDashAssociateInfoComponent,
+    // CompanyDashAssociateInfoComponent,
     // PreparePhonePipe
   ],
   imports: [
@@ -923,7 +926,9 @@ declare var $: any;
     CompanyAssociateModule,
     PhoneModule,
     PreparePhoneModule,
-    DynamicTooltipModule
+    DynamicTooltipModule,
+    ContractsPreviewModule,
+    SelectSearchModule
   ],
   entryComponents: [
     ModalQuoteComponent,
@@ -935,7 +940,8 @@ declare var $: any;
     ContractsConfirmComponent,
     CompanyDevicesRemoteAccessComponent,
     ModalLockScreenComponent,
-    ModalSessionScreenComponent
+    ModalSessionScreenComponent,
+
     // RecurringTicketsComponent
   ],
   exports: [
