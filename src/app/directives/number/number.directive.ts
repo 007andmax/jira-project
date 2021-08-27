@@ -3,7 +3,7 @@ import {
     ElementRef, Injectable, Input
 } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { CommonService } from '../services/common/common.service';
+import { CommonService } from '../../services/common/common.service';
 
 @Directive({
     selector: '[number]',
@@ -16,14 +16,14 @@ export class numberDirective {
     @Input("useFixed") useFixed: boolean = true;
     constructor(private element: ElementRef, private commonService: CommonService) { }
     ngOnInit() {
-      
+
         this.element.nativeElement.addEventListener("input", (event) => {
             event.target.value = this.commonService.validateNumber(event.target.value);
         });
         if (this.money) {
             this.element.nativeElement.addEventListener("blur", (event) => {
                 if (event.target.value) {
-                    event.target.value = (this.useFixed) ?  parseFloat(event.target.value).toFixed(2) : parseFloat(event.target.value)
+                    event.target.value = (this.useFixed) ? parseFloat(event.target.value).toFixed(2) : parseFloat(event.target.value)
                 } else {
                     event.target.value = 0;
                 }

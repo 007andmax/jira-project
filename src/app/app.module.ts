@@ -51,7 +51,7 @@ import { TagsComponent } from './components/shared/tags/tags.component';
 import { IntervalComponent } from './components/shared/interval/interval.component';
 import { DurationComponent } from './components/shared/duration/duration.component';
 import { TehUsersComponent } from './components/shared/teh-users/teh-users.component';
-import { numberDirective } from './directives/number.directive';
+import { numberDirective } from './directives/number/number.directive';
 import { DatePickerComponent } from './components/shared/date-picker/date-picker.component';
 import { RecurringTicketsAddAsideComponent } from './components/tickets/recurring-tickets/recurring-tickets-add-aside/recurring-tickets-add-aside.component';
 import { AlertComponent } from './components/shared/alert/alert.component';
@@ -278,7 +278,7 @@ import { ContractsEditComponent } from './components/billing/contracts/contracts
 import { ContractsAsideHourlyEditComponent } from './components/billing/contracts/contracts-edit/contracts-aside-hourly-edit/contracts-aside-hourly-edit.component';
 import { ContractsAsideHourlyBillingEditDefaultServiceComponent } from './components/billing/contracts/contracts-edit/contracts-aside-hourly-edit/contracts-aside-hourly-billing-edit-default-service/contracts-aside-hourly-billing-edit-default-service.component';
 import { ContractsAsideBlockTimeBillingCustomerServiceComponent } from './components/billing/contracts/contracts-aside/contracts-aside-block-time-billing/contracts-aside-block-time-billing-customer-service/contracts-aside-block-time-billing-customer-service.component';
-import { DecimalNumberDirective } from './directives/decimal-number.directive';
+//import { DecimalNumberDirective } from './directives/decimal-number.directive';
 import { ContractsAsideBlockTimeBillingDefaultServiceComponent } from './components/billing/contracts/contracts-aside/contracts-aside-block-time-billing/contracts-aside-block-time-billing-default-service/contracts-aside-block-time-billing-default-service.component';
 import { ContractsAsideBlockTimeBillingAddDefaultServiceComponent } from './components/billing/contracts/contracts-aside/contracts-aside-block-time-billing/contracts-aside-block-time-billing-add-default-service/contracts-aside-block-time-billing-add-default-service.component';
 import { ContractsAsideBlockTimeBillingUsersComponent } from './components/billing/contracts/contracts-aside/contracts-aside-block-time-billing/contracts-aside-block-time-billing-users/contracts-aside-block-time-billing-users.component';
@@ -466,6 +466,15 @@ import { DynamicTooltipModule } from './components/shared/dynamic-tooltip/dynami
 import { CompanyDashboardModule } from './components/company-dashboard/company-dashboard.module';
 import { ContractsPreviewModule } from './components/billing/contracts/contracts-preview/contracts-preview.module';
 import { SelectSearchModule } from './components/shared/select-search/select-search.module';
+import { ContractsEditModule } from './components/billing/contracts/contracts-edit/contracts-edit.module';
+import { InvoiceFormTicketEditTaxesModule } from './components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.module';
+import { DecimalNumberModule } from './directives/decimal-number/decimal-number.module';
+import { ContractsAsideBlockTimeBillingDefaultServiceModule } from './components/billing/contracts/contracts-aside/contracts-aside-block-time-billing/contracts-aside-block-time-billing-default-service/contracts-aside-block-time-billing-default-service.module';
+import { NumberModule } from './directives/number/number.module';
+import { ContractsAsideBlockTimeBillingAddDefaultServiceModule } from './components/billing/contracts/contracts-aside/contracts-aside-block-time-billing/contracts-aside-block-time-billing-add-default-service/contracts-aside-block-time-billing-add-default-service.module';
+import { TehUsersModule } from './components/shared/teh-users/teh-users.module';
+import { ContractsAsideBlockTimeBillingUsersModule } from './components/billing/contracts/contracts-aside/contracts-aside-block-time-billing/contracts-aside-block-time-billing-users/contracts-aside-block-time-billing-users.module';
+import { ContractsAsideUserDeviceServiceModule } from './components/billing/contracts/contracts-aside/contracts-aside-user-device-billing/contracts-aside-user-device-service/contracts-aside-user-device-service.module';
 
 
 declare var $: any;
@@ -509,8 +518,8 @@ declare var $: any;
     TagsComponent,
     IntervalComponent,
     DurationComponent,
-    TehUsersComponent,
-    numberDirective,
+    //  TehUsersComponent,
+    //  numberDirective,
 
 
     RecurringTicketsAddAsideComponent,
@@ -675,7 +684,6 @@ declare var $: any;
     InvoiceFormTicketEditComponent,
     InvoiceFormTicketEditServiceComponent,
     InvoiceFormTicketEditProductComponent,
-    InvoiceFormTicketEditTaxesComponent,
     InvoiceDiscountComponent,
     ContractsComponent,
     CreateContractsComponent,
@@ -735,26 +743,26 @@ declare var $: any;
     //  DropDownComponent,
     //  ContractsAsideHourlyBillingPreviewComponent,
     // ContractsPreviewComponent,
-    ContractsEditComponent,
-    ContractsAsideHourlyEditComponent,
+    //  ContractsEditComponent,
+    // ContractsAsideHourlyEditComponent,
     ContractsAsideBlockTimeBillingCustomerServiceComponent,
-    DecimalNumberDirective,
-    ContractsAsideBlockTimeBillingDefaultServiceComponent,
-    ContractsAsideBlockTimeBillingAddDefaultServiceComponent,
-    ContractsAsideHourlyBillingEditDefaultServiceComponent,
-    ContractsAsideBlockTimeBillingUsersComponent,
+    //  DecimalNumberDirective,
+    // ContractsAsideBlockTimeBillingDefaultServiceComponent,
+    // ContractsAsideBlockTimeBillingAddDefaultServiceComponent,
+    // ContractsAsideHourlyBillingEditDefaultServiceComponent,
+    // ContractsAsideBlockTimeBillingUsersComponent,
     ContractsConfirmComponent,
-    ContractsAsideEditHourlyAddDefaultServiceComponent,
+    // ContractsAsideEditHourlyAddDefaultServiceComponent,
     //  ContractsAsideBlockTimeBillingPreviewComponent,
-    ContractsAsideBlockTimeEditComponent,
-    ContractsAsideBlockTimeEditCustomerServiceComponent,
-    ContractsAsideUserDeviceServiceComponent,
+    // ContractsAsideBlockTimeEditComponent,
+    //  ContractsAsideBlockTimeEditCustomerServiceComponent,
+    // ContractsAsideUserDeviceServiceComponent,
     //   ContractsAsideUserDeviceBillingPreviewComponent,
-    ContractsAsideUserDeviceEditComponent,
+    // ContractsAsideUserDeviceEditComponent,
     ContractsAsideOtherProductComponent,
     ContractsAsideOtherServiceComponent,
     //  ContractsAsideProductServicePreviewComponent,
-    ContractsAsideProductServiceEditComponent,
+    // ContractsAsideProductServiceEditComponent,
     ContractsAsideOtherServiceEditComponent,
     DashboardBillingComponent,
     InvoiceRevenueComponent,
@@ -928,7 +936,16 @@ declare var $: any;
     PreparePhoneModule,
     DynamicTooltipModule,
     ContractsPreviewModule,
-    SelectSearchModule
+    SelectSearchModule,
+    ContractsEditModule,
+    InvoiceFormTicketEditTaxesModule,
+    DecimalNumberModule,
+    ContractsAsideBlockTimeBillingDefaultServiceModule,
+    NumberModule,
+    ContractsAsideBlockTimeBillingAddDefaultServiceModule,
+    TehUsersModule,
+    ContractsAsideBlockTimeBillingUsersModule,
+    ContractsAsideUserDeviceServiceModule
   ],
   entryComponents: [
     ModalQuoteComponent,

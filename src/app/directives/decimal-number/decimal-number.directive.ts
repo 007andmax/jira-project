@@ -1,5 +1,6 @@
 import { Directive, Injectable, Input, ElementRef, Output, EventEmitter } from '@angular/core';
-import { CommonService } from '../services/common/common.service';
+import { CommonService } from 'src/app/services/common/common.service';
+
 
 @Directive({
   selector: '[decimalNumber]',

@@ -17,6 +17,7 @@ import { CompanyEditAsideModule } from '../companies/company-edit-aside/company-
 import { CompanyAssociateModule } from './company-dash-associate/company-associate/company-associate.module';
 import { NvD3Module } from 'ng2-nvd3';
 import { ContractsPreviewModule } from '../billing/contracts/contracts-preview/contracts-preview.module';
+import { ContractsEditModule } from '../billing/contracts/contracts-edit/contracts-edit.module';
 
 
 
@@ -41,7 +42,8 @@ import { ContractsPreviewModule } from '../billing/contracts/contracts-preview/c
         CompanyEditAsideModule,
         CompanyAssociateModule,
         NvD3Module,
-        ContractsPreviewModule
+        ContractsPreviewModule,
+        ContractsEditModule
 
     ],
 
