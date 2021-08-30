@@ -41,6 +41,8 @@ export class UsersAsideDetailTicketsComponent implements OnInit {
     private ticketsStateService: TicketsStateService) { }
 
   ngOnInit() {
+    console.log("getWidth", this.getWidth());
+    if (this.getWidth() >= 1920) this.offset = 25;
     this.ticketsFilter.setListType("ALL");
     this.listColors = this.ticketsStateService.getListStatusColor();
     this.statusColor = this.ticketsStateService.getTicketsColor();
@@ -79,7 +81,15 @@ export class UsersAsideDetailTicketsComponent implements OnInit {
     })
 
   }
-
+  getWidth() {
+    return Math.max(
+      document.body.scrollWidth,
+      document.documentElement.scrollWidth,
+      document.body.offsetWidth,
+      document.documentElement.offsetWidth,
+      document.documentElement.clientWidth
+    );
+  }
   editTicket(id) {
     let ticket = this.tickets.find(item => item.id === id);
     this.ticketsStateService.onOpenTicket();
