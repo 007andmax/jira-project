@@ -38,6 +38,7 @@ export class User {
     userStatistic: UserStatistic;
     selected: boolean = false;
     tags: Array<Tag> = [];
+    jobDescription: string;
     constructor(data = null) {
         if (data) {
             for (const key in data) {

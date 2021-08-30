@@ -1,0 +1,19 @@
+<div class="cmp-board-invoice cmn-box d-flex">
+    <h2>Associated companies</h2>
+    <div class="cmp-dash-table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Phone</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of company.associatedCompanies">
+                    <td [textContent]="getCompanyName(item.id)"></td>
+                    <td [textContent]="getPhoneNumber(item.id) | preparePhone | mask: '(000) 000-0000' | phone"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

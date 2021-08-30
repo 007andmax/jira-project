@@ -19,6 +19,7 @@ export class CompaniesFilterComponent implements OnInit {
   companyTypes = [new CompanySetting('Client', 'CLIENT'),
   new CompanySetting('Lead', 'LEAD'),
   new CompanySetting('Vendor', 'VENDOR'),
+  new CompanySetting('Supplier', 'SUPPLIER'),
   new CompanySetting('Archive', 'ARCHIVE')];
   industries: Array<CompanyIndustry> = [];
   listPersons: Array<ItemFilterPerson> = [];

@@ -54,8 +54,10 @@
             *ngIf="companyDetailing.phoneNumber !== ''"
         >
             <div class="small-title">Telephone</div>
-            <a href="tel:{{companyDetailing?.addresses[0]?.phoneNumbers[0]?.number}}">
-                {{companyDetailing?.addresses[0]?.phoneNumbers[0]?.number}}
+            <a
+                href="tel:{{companyDetailing?.addresses[0]?.phoneNumbers[0]?.number}}"
+                [textContent]="companyDetailing?.addresses[0]?.phoneNumbers[0]?.number | mask: '(000) 000-0000'"
+            >
             </a>
         </div>
         <div class="other-info-col d-flex">
@@ -155,8 +157,8 @@
                 <a
                     *ngIf="companyDetailing?.primaryContact.phoneNumber !== ''"
                     href="tel:{{companyDetailing?.primaryContact.phoneNumber}}"
+                    [textContent]="companyDetailing?.primaryContact.phoneNumber | mask: '(000) 000-0000'"
                 >
-                    {{companyDetailing?.primaryContact.phoneNumber}}
                 </a>
             </div>
         </div>

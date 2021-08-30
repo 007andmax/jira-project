@@ -7,6 +7,7 @@ export class CompanyCalculateCount {
     clients: number = 0;
     leads: number = 0;
     vendor: number = 0;
+    supplier: number = 0;
     constructor() { }
 
     public onCalculate(list: Array<Company>, clientType: string) {
@@ -15,6 +16,7 @@ export class CompanyCalculateCount {
         this.clients = list.filter(item => item.clientType === "CLIENT").length;
         this.leads = list.filter(item => item.clientType === "LEAD").length;
         this.vendor = list.filter(item => item.clientType === "VENDOR").length;
+        this.supplier = list.filter(item => item.clientType === "SUPPLIER").length;
         if (!clientType) this.current = JSON.parse(JSON.stringify(list.length));
         if (clientType) this.onCulculateCurrent(clientType);
     }
@@ -45,6 +47,9 @@ export class CompanyCalculateCount {
         }
         if (type === "VENDOR") {
             this.current = JSON.parse(JSON.stringify(this.vendor));
+        }
+        if (type === "SUPPLIER") {
+            this.current = JSON.parse(JSON.stringify(this.supplier));
         }
     }
 }

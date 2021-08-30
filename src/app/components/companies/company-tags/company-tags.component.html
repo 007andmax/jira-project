@@ -4,7 +4,10 @@
     (openChange)="openChange($event)"
     #dp="ngbDropdown"
 >
-    <mat-form-field ngbDropdownAnchor>
+    <mat-form-field
+        ngbDropdownAnchor
+        [ngClass]="{'hidde-label' :!showLabel}"
+    >
         <mat-chip-list
             #chipList
             aria-label="Fruit selection"
@@ -35,6 +38,7 @@
                 [matChipInputAddOnBlur]="addOnBlur"
                 (input)="onSearch($event)"
                 (keyup)="onKeyUp($event)"
+                autocomplete="off"
             >
         </mat-chip-list>
     </mat-form-field>

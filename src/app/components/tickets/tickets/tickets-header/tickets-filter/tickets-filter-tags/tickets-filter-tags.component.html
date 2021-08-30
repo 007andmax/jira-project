@@ -32,12 +32,11 @@
                 [matChipInputFor]="chipList"
                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                 [matChipInputAddOnBlur]="addOnBlur"
+                autocomplete="off"
                 (input)="onSearch($event)"
                 (keyup)="onKeyUp($event)"
             >
         </mat-chip-list>
-
-
     </mat-form-field>
     <div
         class="dropdown-menu"

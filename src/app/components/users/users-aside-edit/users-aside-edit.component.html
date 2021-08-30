@@ -106,6 +106,23 @@
                 ></app-drop-down>
             </div>
         </div>
+        <div class="qt-df qt-mb-24">
+            <div class="qt-input-block job-description">
+                <label>Job Description</label>
+                <textarea
+                    id="description-global-note"
+                    [ngModel]="user.jobDescription"
+                    (input)="onChangeJobDescription($event)"
+                    class="terms-n-conditions__textarea qt-textarea"
+                    placeholder="Enter job description"
+                    appTextArea
+                    maxlength="500"
+                    cols="30"
+                    rows="3"
+                    [default]="3"
+                ></textarea>
+            </div>
+        </div>
         <div class="qt-w100 qt-mb-24">
             <app-drop-down
                 [placeholder]="'Company'"
@@ -144,6 +161,8 @@
                             [(ngModel)]="user.phoneNumbers[0].number"
                             (input)="onCheckPhoneNumber(0)"
                             placeholder="Enter Primary Phone"
+                            prefix="+1"
+                            mask=" (000) 000-0000"
                         >
                         <div
                             class="grey-dropdown primary-phone-selector"
@@ -216,6 +235,8 @@
                                     [(ngModel)]="phone.number"
                                     (input)="onCheckPhoneNumber(i)"
                                     placeholder="Enter Primary Phone"
+                                    prefix="+1"
+                                    mask="(000) 000-0000"
                                 >
                                 <div
                                     class="grey-dropdown primary-phone-selector"

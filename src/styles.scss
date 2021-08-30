@@ -471,7 +471,8 @@ app-left-panel-tags {
     }
   }
 }
-app-company-tags {
+app-company-tags,
+company-associate {
   .dropdown-toggle .mat-form-field-wrapper .mat-form-field-infix {
     input {
       /* position: absolute; */
@@ -480,6 +481,13 @@ app-company-tags {
       top: 0;
       flex: 1;
       height: 30px;
+    }
+  }
+  .hidde-label {
+    .mat-form-field-wrapper {
+      &::before {
+        display: none;
+      }
     }
   }
 }
@@ -534,6 +542,7 @@ documents-filter {
 documents-filter,
 app-documents-add-info,
 .company-dashboard-add-tag,
+users-aside-detail,
 documents-edit-info {
   .tab-btns {
     display: flex;
@@ -555,6 +564,7 @@ documents-edit-info {
   }
   app-tags,
   app-company-tags,
+  company-associate,
   app-taxes,
   documents-linked,
   app-draft-email-recipients,
@@ -611,6 +621,22 @@ documents-edit-info {
           margin: 0;
         }
       }
+    }
+  }
+  company-associate {
+    .mat-form-field-wrapper {
+      &:before {
+        content: "Associated Companies" !important;
+      }
+    }
+    .mat-form-field-infix {
+      &:before {
+        display: none;
+      }
+      padding-left: 0px !important;
+    }
+    .mat-form-field-label {
+      padding: 12px 10px 10px 0px;
     }
   }
   documents-linked {
@@ -696,6 +722,17 @@ documents-edit-info {
   .input-group {
     .btn-icon-date-picker {
       background-color: transparent;
+    }
+  }
+}
+.user-detail-info {
+  .user-detail__row-info {
+    .mat-form-field {
+      margin-top: 0;
+    }
+    .mat-chip-list-wrapper .mat-standard-chip,
+    .mat-chip-list-wrapper input.mat-input-element {
+      margin: 2px 2px 2px 0;
     }
   }
 }

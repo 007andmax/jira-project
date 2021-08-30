@@ -84,7 +84,10 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
             if (address.isPrimary) primaryAddress = address;
           }
         }
-        if (primaryAddress && primaryAddress.phoneNumbers.length) primaryPhone = primaryAddress.phoneNumbers[0];
+        if (primaryAddress && primaryAddress.phoneNumbers.length) {
+          primaryPhone = primaryAddress.phoneNumbers[0];
+          if (primaryPhone.number[0] === "1") primaryPhone.number = `+${primaryPhone.number}`;
+        }
       }
       this.primaryContact = primaryContact;
       this.primaryAddress = primaryAddress;
@@ -100,6 +103,9 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     return (this.company && this.company.logo && this.company.logo.cropped && this.company.logo.cropped.id || this.company && this.company.logo && this.company.logo.origin && this.company.logo.origin.id)
   }
 
+  getPhoneNumner() {
+    return (this.primaryPhone && this.primaryPhone.number) ? this.primaryPhone.number : '';
+  }
   goToDashboard() {
 
     // this.leftPanelStateService.goToState('company-dashboard');

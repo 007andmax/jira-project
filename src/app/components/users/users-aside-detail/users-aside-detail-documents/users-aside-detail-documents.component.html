@@ -1,0 +1,43 @@
+<div class="qt-page-list documents-page ">
+    <div class="qt-page-list__body">
+        <div class="qt-page-list__body-table-container">
+            <table class="qt-page-list__body-tbody qt-table-modern documents-table">
+                <thead>
+                    <tr>
+                        <th class="documents-table__title">Title</th>
+                        <th class="documents-table__create-by">Create By</th>
+                        <th class="documents-table__created-date">Created Date</th>
+                        <th class="documents-table__review-date">Review Date</th>
+                        <th class="documents-table__menu"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-template
+                        ngFor
+                        let-item
+                        [ngForOf]="list"
+                        [ngForTrackBy]="trackById"
+                    >
+                        <users-aside-detail-documents-item
+                            [item]="item"
+                            (onRemoveCategory)="onRemoveCategory($event)"
+                            (onRemoveDocument)="onRemoveDocument($event)"
+                        >
+                        </users-aside-detail-documents-item>
+                    </ng-template>
+                </tbody>
+            </table>
+            <div
+                class="loading"
+                *ngIf="showPreloader"
+            ></div>
+            <div
+                class="no-exist-documents"
+                *ngIf="!showPreloader && list.length === 0"
+            >
+                No documents
+            </div>
+        </div>
+    </div>
+</div>
+<documents-templates-info></documents-templates-info>

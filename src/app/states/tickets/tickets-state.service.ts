@@ -6,6 +6,8 @@ import { TicketChangeField } from '../../components/tickets/tickets/class/ticket
 import { WebsocketService } from '../../services/websocket/websocket.service';
 import { TicketsService } from '../../services/tickets/tickets.service';
 import { TicketsCounts } from '../../components/tickets/tickets/class/tickets-counts';
+import { StatusColor } from 'src/app/components/left-panel/left-panel-tickets/tickets-status/class/status-color';
+import { TicketsColor } from 'src/app/components/left-panel/left-panel-tickets/tickets-status/class/tickets-color';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +34,8 @@ export class TicketsStateService {
   tagsFilter: EventEmitter<any> = new EventEmitter();
   leftPanelFilter: EventEmitter<any> = new EventEmitter();
   ticketChangedActions = ['ASSIGNED_USER', 'PRIORITY_CHANGED', 'STATUS', 'TRASH', 'REPORT_AS_SPAM', 'RESTORE_FROM_SPAM', 'TICKET_SHARE', 'MARKED_AS_SPAM', 'EDITED_TICKET'];
+  listStatusColor: Array<StatusColor> = [];
+  ticketsColor: TicketsColor;
   constructor(private ticketsRealTimeService: TicketsRealTimeService,
     private ticketsService: TicketsService) { }
 
@@ -61,6 +65,12 @@ export class TicketsStateService {
     })
 
 
+  }
+  public getTicketsColor() {
+    return this.ticketsColor;
+  }
+  public getListStatusColor() {
+    return this.listStatusColor;
   }
   public getTicketsCounts() {
     return this.ticketsCounts;
@@ -125,9 +135,11 @@ export class TicketsStateService {
     this.filter.emit(data);
   }
   public onColorStatus(data) {
+    this.listStatusColor = data;
     this.colorStatus.emit(data);
   }
   public onInitStatus(data) {
+    this.ticketsColor = data;
     this.status.emit(data);
   }
   public onToggleAddTicket() {

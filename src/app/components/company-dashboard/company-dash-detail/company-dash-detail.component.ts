@@ -59,6 +59,7 @@ export class CompanyDashDetailComponent implements OnInit {
   modalReference: any;
   @Output() totalTicketsChanged: EventEmitter<number> = new EventEmitter();
   @Output() companyNameChanged: EventEmitter<string> = new EventEmitter();
+  @Output() companyChanged: EventEmitter<any> = new EventEmitter();
   @Output() averageResponseTimeChanged: EventEmitter<string> = new EventEmitter();
   currentService: TicketProfileFormService = new TicketProfileFormService();
   serviceTypesMap: CompanyServiceType = {
@@ -305,6 +306,7 @@ export class CompanyDashDetailComponent implements OnInit {
         this.unSelectedRating = 5 - this.selectedRating;
       }
       // this.companyDetail = data;
+      this.companyChanged.emit(this.companyDetail);
       this.companyNameChanged.emit(this.companyDetailing.name);
       this.totalTicketsChanged.emit(this.companyDetailing.totalTickets);
       this.averageResponseTimeChanged.emit(this.companyDetailing.averageResponseTime);

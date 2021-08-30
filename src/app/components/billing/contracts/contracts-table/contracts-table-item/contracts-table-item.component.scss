@@ -1,26 +1,25 @@
-@import './src/assets/styles/variable';
+@import "./src/assets/styles/variable";
 
 tr:hover {
-    td {
-      background-color: $gray-100;
-
-    }
+  td {
+    background-color: $gray-100;
   }
-  tr {
-      cursor: pointer;
+}
+tr {
+  cursor: pointer;
+}
+.no-valid {
+  position: relative;
+  &:before {
+    content: "update";
+    position: absolute;
+    left: -2px;
+    bottom: 0px;
+    text-transform: uppercase;
+    font-size: 8px;
+    font-weight: 600;
+    color: $white;
+    display: block;
+    z-index: 2;
   }
-  .no-valid {
-    position: relative;
-    &:before {
-      content: 'update';
-      position: absolute;
-      left: -2px;
-      bottom: 0px;
-      text-transform: uppercase;
-      font-size: 8px;
-      font-weight: 600;
-      color: $white;
-      display: block;
-      z-index: 2;
-    }
-  }
+}

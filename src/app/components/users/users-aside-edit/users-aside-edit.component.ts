@@ -86,7 +86,9 @@ export class UsersAsideEditComponent implements OnInit {
     })
     this.usersAsideService.addSubscription(getConfirm);
   }
-
+  onChangeJobDescription(event) {
+    this.user.jobDescription = event.target.value;
+  }
   getUsersTitle(allUsers) {
     this.allTitles = allUsers
       .map((user) => {
@@ -165,8 +167,6 @@ export class UsersAsideEditComponent implements OnInit {
 
   onSave() {
     if (!this.validate.isValidate(this.user)) return;
-
-
     this.usersService.updateUser(this.user.getUserForUpdate(this.usersStateService.getuserForEdit())).subscribe(data => {
       this.close();
     })

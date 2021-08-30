@@ -604,7 +604,159 @@ app-invoices-item,app-payment-item {
 
 }
 
+.user-aside-detail-page__aside {
+  .qt-aside-modern__content {
+    overflow: unset;
+    height: 100%;
+  }
+  &.aside-preview {
+    width: 960px; //TODO after add style to aside move style to .invoices-page__aside.aside-preview
+    .user-detail-statictics {
+      .tabs .active::after {
+        bottom: -13px;
+        height: 2px;
+        z-index: 1;
+      }
+    }
+  }
+  thead {
+    tr {
+     th {
+       padding: 10px 8px;
+       font-size: 12px;
+       line-height: 16px;
+       color: #212b36;
+       border-bottom: 1px solid #edf0f2;
+     }
+    }
+  }
+
+  tbody {
+    padding: 0 16px;
+
+    td {
+      position: relative;
+
+      &::after {
+        position: absolute;
+        content: "";
+        bottom: 0;
+        right: 0;
+        height: 1px;
+        width: 100%;
+        background: #edf0f2;
+      }
+
+      &:first-child {
+
+        &::after {
+          right: 0;
+          width: calc(100% - 16px);
+        }
+      }
+
+      &:last-child {
+
+        &::after {
+          left: 0;
+          width: calc(100% - 16px);
+        }
+      }
+    }
+
+    tr {
+      td {
+        font-size: 13px;
+        line-height: 20px;
+        color: #212b36;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .qt-page-list__body {
+    users-aside-detail-passwords-item {
+      td {
+        padding: 18px 0 11px;
+      }
+    }
+  }
+  .ticket-table {
+    &__subject {
+      width: 100%;
+      min-width: 300px;
+    }
+    &__status {
+      max-width: 115px;
+      width: 115px;
+      min-width: 115px;
+    }
+    &__created-date {
+      max-width: 110px;
+      width: 110px;
+      min-width: 110px;
+    }
+  }
+  .documents-table {
+    tbody {
+      td {
+        position: relative;
+
+        &::after {
+          position: absolute;
+          content: "";
+          bottom: 0;
+          right: 0;
+          height: 1px;
+          width: 100%;
+          background: #edf0f2;
+        }
+        &:first-child {
+          &::after {
+            right: 0;
+            width: calc(100% - 16px);
+          }
+        }
+        &:last-child {
+          &::after {
+            left: 0;
+            width: calc(100% - 16px);
+          }
+        }
+      }
+    }
+
+    &__title {
+      max-width: 200px;
+      width: 200px;
+      min-width: 200px;
+
+      .icon__templete-thumb {
+        flex-shrink: 0;
+      }
+    }
+    &__create-by {
+      width: 130px;
+      max-width: 130px;
+      min-width: 130px;
+    }
+    &__review-date,
+    &__created-date {
+      width: 100px;
+      max-width: 100px;
+      min-width: 100px;
+    }
+    &__company {
+      width: 290px;
+      max-width: 290px;
+      min-width: 290px;
+    }
+    &__menu {
+
+    }
+  }
+}
+
 .invoice-preview-notes {
   max-width: 530px;
 }
-

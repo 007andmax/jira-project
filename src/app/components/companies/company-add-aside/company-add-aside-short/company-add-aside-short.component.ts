@@ -12,7 +12,7 @@ import { CompanyValdiate } from '../../class/company-validate';
   styleUrls: ['./company-add-aside-short.component.scss']
 })
 export class CompanyAddAsideShortComponent implements OnInit, OnDestroy {
-  companyTypes = [new CompanySetting('Client', 'CLIENT'), new CompanySetting('Lead', 'LEAD'), new CompanySetting('Vendor', 'VENDOR')];
+  companyTypes = [new CompanySetting('Client', 'CLIENT'), new CompanySetting('Lead', 'LEAD'), new CompanySetting('Vendor', 'VENDOR'), new CompanySetting('Supplier', 'SUPPLIER')];
   @Input() validate: CompanyValdiate = new CompanyValdiate();
   @Input() company: CompanyProfile = new CompanyProfile();
 

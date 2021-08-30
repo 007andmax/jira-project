@@ -51,6 +51,8 @@
             [(ngModel)]="company.addresses[0].phoneNumbers[0].number"
             placeholder="Enter Phone Number"
             (input)="onChangePhoneNumber()"
+            prefix="+1"
+            mask=" (000) 000-0000"
         >
     </div>
     <div class="col-md-12 --required">
@@ -106,6 +108,8 @@
             *ngIf="company.contacts[0].phoneNumbers.length > 0"
             [(ngModel)]="company.contacts[0].phoneNumbers[0].number"
             placeholder="Enter Primary Phone"
+            prefix="+1"
+            mask=" (000) 000-0000"
         >
     </div>
     <div class="col-md-6 --required">

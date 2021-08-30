@@ -1,0 +1,78 @@
+<div
+    class="col-md-12 --required filter-tags-body"
+    ngbDropdown
+    (openChange)="openChange($event)"
+    #dp="ngbDropdown"
+>
+    <mat-form-field ngbDropdownAnchor>
+        <mat-chip-list
+            #chipList
+            aria-label="Fruit selection"
+        >
+            <mat-chip
+                *ngFor="let company of selectedCompanies; let i = index"
+                [selectable]="selectable"
+                [removable]="removable"
+                (removed)="remove(i)"
+            >
+                {{company.name}}
+                <mat-icon
+                    matChipRemove
+                    *ngIf="removable"
+                >
+                    cancel
+                </mat-icon>
+            </mat-chip>
+            <input
+                id="dropdownServices"
+                ngbDropdownToggle
+                placeholder="Search By Associated Companies"
+                #userInput
+                class="pointer"
+                [formControl]="tagCtrl"
+                [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]="addOnBlur"
+                (input)="onSearch($event)"
+            >
+            <!-- (keyup)="onKeyUp($event)" -->
+        </mat-chip-list>
+    </mat-form-field>
+    <div
+        class="select-wrapper"
+        ngbDropdownMenu
+        aria-labelledby="dropdownServices"
+    >
+        <div
+            class="content"
+            (click)="$event.preventDefault()"
+        >
+            <ng-template
+                ngFor
+                let-item
+                let-i="index"
+                [ngForOf]="companies"
+                [ngForTrackBy]="trackById"
+            >
+                <div
+                    (click)="toggleItem(item)"
+                    class="company-tag-item"
+                    [ngClass]="{'is-hover':item.isHover}"
+                    [id]="'company-' + item.id"
+                >
+                    <label class="qt-checkbox pointer">
+                        <input
+                            type="checkbox"
+                            [checked]="isSeleted(item)"
+                            readonly
+                        >
+                        <span></span>
+                        <div class="text-content">
+                            <div class="name">{{item.name}}</div>
+                        </div>
+                    </label>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>

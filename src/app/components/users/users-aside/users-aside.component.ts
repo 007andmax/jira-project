@@ -96,6 +96,9 @@ export class UsersAsideComponent implements OnInit {
       }, []).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
         1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
   }
+  onChangeJobDescription(event) {
+    this.user.jobDescription = event.target.value;
+  }
   addPhoneNumber() {
     this.user.addPhoneNumber();
     this.validate.addPhoneNumber();

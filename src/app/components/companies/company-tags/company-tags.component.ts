@@ -32,6 +32,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
   sub = new Subscription();
   @Input() editItems: Array<string>;
   @Input() placement: string;
+  @Input() showLabel: boolean = true;
   @Input() filter: boolean = false;
   @Input() blockCreateTag: boolean = false;
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
@@ -75,7 +76,8 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
   */
   onCheckEditItem() {
     if (this.editItems) this.editItems.forEach(item => {
-      this.selectedTag.push(this.tags.find(tag => tag.id === item));
+      let find = this.tags.find(tag => tag.id === item);
+      if (find) this.selectedTag.push(find);
     })
     let getTagsFromEdit = this.tagsState.getTagsFromEdit().subscribe((data) => {
       this.selectedTag = data;
@@ -85,7 +87,8 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
   public setEditItems(data) {
     this.editItems = data;
     this.editItems.forEach(item => {
-      this.selectedTag.push(this.tags.find(tag => tag.id === item));
+      let find = this.tags.find(tag => tag.id === item);
+      if (find) this.selectedTag.push(find);
     })
   }
   public clearWithOutChanges() {

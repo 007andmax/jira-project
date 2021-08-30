@@ -19,6 +19,7 @@ export class UserProfile {
     designation: string;
     companyId: string;
     tags: Array<Tag> = [];
+    jobDescription: string;
     constructor() {
         this.subscription = {
             invoice: false, ticket: true, ticketManager: false
@@ -33,11 +34,11 @@ export class UserProfile {
             this.phoneNumbers = [new PhoneNumber('OFFICE')];
         } else {
             this.phoneNumbers = user.phoneNumbers.map((item) => {
-                return new PhoneNumber(item.typeNumber, item.number);
+                let number = item.number;
+                if (number[0] === "1") number = `+${number}`;
+                return new PhoneNumber(item.typeNumber, number);
             })
         }
-
-
         this.subscription = {
             invoice: user.subscription.invoice, ticket: user.subscription.ticket, ticketManager: user.subscription.ticketManager
         }
@@ -49,6 +50,7 @@ export class UserProfile {
         this.designation = user.designation;
         this.companyId = user.company.id;
         this.tags = user.tags;
+        this.jobDescription = user.jobDescription;
 
     }
     public editLogo(data) {

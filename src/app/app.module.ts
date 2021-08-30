@@ -448,9 +448,21 @@ import { CompanyAddAsideShortComponent } from './components/companies/company-ad
 import { CompanyAddAsideFullComponent } from './components/companies/company-add-aside/company-add-aside-full/company-add-aside-full.component';
 import { CommonModule, HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { HomeComponent } from './components/home/home.component';
+import { CompanyDashAssociateComponent } from './components/company-dashboard/company-dash-associate/company-dash-associate.component';
+import { CompanyAssociateComponent } from './components/company-dashboard/company-dash-associate/company-associate/company-associate.component';
+import { CompanyDashAssociateInfoComponent } from './components/company-dashboard/company-dash-associate-info/company-dash-associate-info.component';
+import { PreparePhonePipe } from './pipe/prepare-phone.pipe';
+import { UsersAsideDetailComponent } from './components/users/users-aside-detail/users-aside-detail.component';
+import { UsersAsideDetailTicketsComponent } from './components/users/users-aside-detail/users-aside-detail-tickets/users-aside-detail-tickets.component';
+import { UsersAsideDetailTicketsItemComponent } from './components/users/users-aside-detail/users-aside-detail-tickets/users-aside-detail-tickets-item/users-aside-detail-tickets-item.component';
+import { UsersAsideDetailDocumentsComponent } from './components/users/users-aside-detail/users-aside-detail-documents/users-aside-detail-documents.component';
+import { UsersAsideDetailDocumentsItemComponent } from './components/users/users-aside-detail/users-aside-detail-documents/users-aside-detail-documents-item/users-aside-detail-documents-item.component';
+import { UsersAsideDetailPasswordsComponent } from './components/users/users-aside-detail/users-aside-detail-passwords/users-aside-detail-passwords.component';
+import { UsersAsideDetailPasswordsItemComponent } from './components/users/users-aside-detail/users-aside-detail-passwords/users-aside-detail-passwords-item/users-aside-detail-passwords-item.component';
 
 
 declare var $: any;
+
 /**
  * This module represents the main application module
  */
@@ -852,7 +864,18 @@ declare var $: any;
     CompaniesFilterComponent,
     CompanyAddAsideShortComponent,
     CompanyAddAsideFullComponent,
-    HomeComponent
+    HomeComponent,
+    CompanyDashAssociateComponent,
+    CompanyAssociateComponent,
+    CompanyDashAssociateInfoComponent,
+    PreparePhonePipe,
+    UsersAsideDetailComponent,
+    UsersAsideDetailTicketsComponent,
+    UsersAsideDetailTicketsItemComponent,
+    UsersAsideDetailDocumentsComponent,
+    UsersAsideDetailDocumentsItemComponent,
+    UsersAsideDetailPasswordsComponent,
+    UsersAsideDetailPasswordsItemComponent
   ],
   imports: [
     BrowserModule,
@@ -907,7 +930,6 @@ declare var $: any;
     // RecurringTicketsComponent
   ],
   exports: [
-    PhonePipe,
     OrderByPipe,
   ],
   providers: [
@@ -916,7 +938,7 @@ declare var $: any;
       useClass: HttpInterceptorService,
       multi: true,
     },
-    PermissionDasnboardBillingService
+    PermissionDasnboardBillingService,
   ],
   bootstrap: [AppComponent]
 })

@@ -88,6 +88,9 @@ export class TicketEditAsideCompanyInfoComponent implements OnInit {
       }
     }
   }
+  getPrimaryPhone() {
+    return (this.primaryPhone && this.primaryPhone.number) ? this.primaryPhone.number : ''
+  }
   getPhoneNumbers(userId) {
     let user = this.usersStateService.getAllUsers().find(item => item.id === userId);
     if (user && user.phoneNumbers) return user.phoneNumbers;

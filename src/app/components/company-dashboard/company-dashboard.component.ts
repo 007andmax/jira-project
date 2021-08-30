@@ -17,7 +17,7 @@ import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.
   imports: [NgbDropdownToggle, NgbModal]
 })
 export class CompanyDashboardComponent implements OnInit {
-
+  showPreloader: boolean = true;
   company: Company;
   totalTickets: number = 0;
   averageResponseTime: string = '';
@@ -33,6 +33,10 @@ export class CompanyDashboardComponent implements OnInit {
     this.leftPanelStateService.changeStateWithoutNavigate('company-dashboard');
   }
 
+  onCompanyChanged(data) {
+    this.company = data;
+    this.showPreloader = false;
+  }
   totalTicketsChangedHandler(data: number) {
     this.totalTickets = data;
   }

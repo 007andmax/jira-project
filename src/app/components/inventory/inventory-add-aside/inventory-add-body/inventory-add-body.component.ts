@@ -26,7 +26,7 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
   @ViewChild('addTax') containerAddTax;
   @ViewChild('glNumberSelect') glNumberSelect: SelectSearchComponent;
   @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
-  @ViewChild('vendorsSelect') vendorsSelect: SelectSearchComponent;
+  @ViewChild('suppliersSelect') suppliersSelect: SelectSearchComponent;
   @Output() onClose: EventEmitter<any> = new EventEmitter();
   @Input() class: string;
   //opened: boolean = false;
@@ -35,7 +35,7 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
   taxes: Array<Tax> = [];
   defaultSelectedTax: Array<Tax> = [];
   sub: Subscription = new Subscription();
-  vendors: Array<Company> = [];
+  suppliers: Array<Company> = [];
   companies: Array<Company> = [];
   categories: Array<CategoryProduct> = [];
   validate: InventoryValidate = new InventoryValidate();
@@ -65,9 +65,9 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnTaxess);
     this.setDefaultTaxes();
-    if (this.companiesStateService.getCompanies().length > 0) this.onInitVendors(this.companiesStateService.getCompanies());
+    if (this.companiesStateService.getCompanies().length > 0) this.onInitSuppliers(this.companiesStateService.getCompanies());
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
-      this.onInitVendors(data);
+      this.onInitSuppliers(data);
     })
     this.sub.add(getOnCompanies);
     if (this.inventoryStateService.getCategories().length > 0) this.categories = this.inventoryStateService.getCategories();
@@ -93,9 +93,9 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
       if (!data.value) this.validate.setManufactureIsExist();
     })
   }
-  private onInitVendors(data) {
-    this.vendors = data.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0)).filter(item => !item.deletedAt && !item.isDefault && item.clientType && item.clientType.toLowerCase() === 'vendor');
+  private onInitSuppliers(data) {
+    this.suppliers = data.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0)).filter(item => !item.deletedAt && !item.isDefault && item.clientType && item.clientType.toLowerCase() === 'supplier');
   }
   onAddCategory(data) {
     this.productService.addCategory(data).subscribe((data: any) => {
@@ -115,7 +115,7 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
       this.inventory.glNumber = res;
     })
   }
-  onSelectVendor(data) {
+  onSelectSupplier(data) {
     if (data) this.inventory.companyId = data.id;
     if (!data) this.inventory.companyId = null;
   }
@@ -163,7 +163,7 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
     // this.opened = false;
     this.glNumberSelect.clearClient();
     this.categoriesSelect.clearClient();
-    this.vendorsSelect.clearClient();
+    this.suppliersSelect.clearClient();
     this.taxesStateService.onInitClear();
     this.elRef.nativeElement.querySelector('#inventory-description').value = '';
     this.validate = new InventoryValidate();

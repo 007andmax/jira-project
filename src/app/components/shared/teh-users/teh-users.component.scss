@@ -1,4 +1,4 @@
-@import './src/assets/styles/variable';
+@import "./src/assets/styles/variable";
 
 .select-wrapper {
   position: absolute;
@@ -41,18 +41,26 @@
 .teh-user-body {
   overflow: visible;
 }
- .tech__user-icon{
+.tech__user-icon {
   width: 24px;
   height: 24px;
   border-radius: 50%;
   background-size: cover;
   background-position: center;
- }
- .ticket-updates__photo-people {
+}
+.ticket-updates__photo-people {
   width: 24px;
   height: 24px;
   border-radius: 50%;
   background-size: cover;
   background-position: center;
-    border: none;
- }
+  border: none;
+}
+.company-settings-user {
+  display: flex;
+  align-items: center;
+  width: auto;
+  .ticket-updates__photo-people {
+    margin-right: 10px;
+  }
+}

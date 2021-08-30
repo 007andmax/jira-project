@@ -23,6 +23,7 @@ import { TYPE_LIST_ALL_USERS, TYPE_LIST_COMPANY_USERS } from 'src/app/const/user
   providers: [UsersTableService]
 })
 export class UsersTableComponent implements OnInit {
+  @Input() selected: boolean = false;
   @Input() user: User;
   @Input() type: string;
   @Input() showArchivedUsers: boolean;
@@ -54,11 +55,8 @@ export class UsersTableComponent implements OnInit {
   getUserName() {
     return `${this.user.firstName} ${this.user.lastName}`;
   }
-  getContact() {
-    let str = '';
-    if (this.user.phoneNumbers && this.user.phoneNumbers.length && this.user.phoneNumbers[0] && this.user.phoneNumbers[0].number) str += this.user.phoneNumbers[0].number;
-    if (this.user.phoneNumbers && this.user.phoneNumbers.length && this.user.phoneNumbers[1] && this.user.phoneNumbers[1].number) str += '<br/>' + this.user.phoneNumbers[1].number;
-    return str;
+  showDetailUser() {
+    this.usersStateService.showDetailUser(this.user);
   }
   getUserCompanyName() {
     if (this.user.company.isDefault) return '';

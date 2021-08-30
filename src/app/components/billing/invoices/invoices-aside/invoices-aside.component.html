@@ -185,7 +185,7 @@
                                     number
                                     [money]="true"
                                     [ngModel]="invoice.paymentAmount"
-                                    (ngModelChange)="onChangePayment($event,invoice)"
+                                    (change)="onChangePayment($event,invoice)"
                                     appToFixed
                                 >
                             </td>

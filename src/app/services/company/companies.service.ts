@@ -47,6 +47,10 @@ export class CompaniesService {
   public getCompaniesListByFilter(data) {
     return this.http.post(this.apiUrl + 'company/filter', data);
   }
+
+  public setAssociatedCompanies(id, data) {
+    return this.http.post(this.apiUrl + `company/${id}/associate`, data);
+  }
   public getCompany(id) {
     return this.http.get(this.apiUrl + `company/${id}/data`);
   }

@@ -111,15 +111,15 @@
             </app-drop-down>
         </div>
         <div class="col-md-12">
-            <p>Vendors</p>
+            <p>Suppliers</p>
             <app-select-search
                 [class]="['light-dropdown']"
-                [list]="vendors"
-                #vendorsSelect
+                [list]="suppliers"
+                #suppliersSelect
                 [field]="'name'"
-                [placeholder]="'Select Vendor'"
-                [editItem]="editVendor"
-                (onSelectedItem)="onSelectVendor($event)"
+                [placeholder]="'Select Supplier'"
+                [editItem]="editSupplier"
+                (onSelectedItem)="onSelectSupplier($event)"
             ></app-select-search>
         </div>
         <div class="col-md-12 qt-df qt-ai-c">

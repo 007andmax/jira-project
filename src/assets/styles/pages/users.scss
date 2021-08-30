@@ -456,3 +456,30 @@ draft-email-user-recipients .mat-form-field-appearance-legacy {
     margin: 0 !important;
   }
 }
+users-aside-detail {
+  app-company-subscription {
+    .user-subscription {
+      border: none;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      height: auto;
+      min-height: 36px;
+      > div {
+        margin-bottom: 4px;
+      }
+    }
+    .report-caret-icon {
+      display: none;
+    }
+  }
+  app-company-tags {
+    .mat-form-field-infix {
+      border: none !important;
+      padding-left: 4px !important;
+      &::before {
+        display: none;
+      }
+    }
+  }
+}

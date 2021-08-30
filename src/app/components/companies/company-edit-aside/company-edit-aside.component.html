@@ -75,13 +75,13 @@
             <app-drop-down
                 #clientType
                 [class]="['light-dropdown', 'qt-select-input-40']"
-                [placeholder]="'Select Client Type'"
+                [placeholder]="'Select Industry'"
                 [editItem]="getSelectedClientTypes()"
                 [list]="industries"
                 [field]="'name'"
                 [search]="true"
                 [change]="true"
-                [title]="'Client Type'"
+                [title]="'Industry'"
                 (onSelectedItem)="onSelectClientIndustry($event)"
             >
             </app-drop-down>
@@ -149,6 +149,8 @@
                 (input)="onChangePhoneNumber()"
                 [(ngModel)]="company.addresses[0].phoneNumbers[0].number"
                 placeholder="Enter Phone Number"
+                prefix="+1"
+                mask=" (000) 000-0000"
             >
         </div>
         <div class="col-md-12 details-divider">
@@ -202,6 +204,8 @@
                     *ngIf="company.contacts[0].phoneNumbers.length > 0"
                     [(ngModel)]="company.contacts[0].phoneNumbers[0].number"
                     placeholder="Enter Phone Number"
+                    prefix="+1"
+                    mask=" (000) 000-0000"
                 >
                 <div
                     class="grey-dropdown"
@@ -332,6 +336,15 @@
                 #companyTags
                 (tagsChange)="onChangeTags($event)"
             ></app-company-tags>
+        </div>
+        <div class="col-md-12">
+            <company-associate
+                *ngIf="opened"
+                #companyAssociate
+                [company]="company"
+                [editItems]="getAssociatedCompaniesIds()"
+                (companiesChange)="onChangedAssociatedCompanies($event)"
+            ></company-associate>
         </div>
         <div class="col-md-12 editable-field">
             <p>Note for Company</p>

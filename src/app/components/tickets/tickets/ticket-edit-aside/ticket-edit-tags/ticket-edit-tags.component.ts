@@ -55,20 +55,8 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getTags);
     let changeTagsArray = this.tagsRealTimeService.changeTagsArray.subscribe((data: any) => {
-      if (data.action === "TAG_SAVED") {
-        let index = this.tags.findIndex(item => item.id === data.data.id);
-        let indexreqTags = this.reqTags.findIndex(item => item.id === data.data.id);
-        if (index > -1) {
-          this.tags[index] = data.data;
-        } else {
-          this.tags.push(data.data);
-        }
-        if (indexreqTags > -1) {
-          this.reqTags[index] = data.data;
-        } else {
-          this.reqTags.push(data.data);
-        }
-      }
+      if (data.action === "TAG_SAVED" && Array.isArray(data.data)) data.data.forEach(element => this.updateTagByRealTimes(element));
+      if (data.action === "TAG_SAVED" && !Array.isArray(data.data)) this.updateTagByRealTimes(data.data);
       if (data.action === "TAG_REMOVED") {
         let index = this.tags.findIndex(item => item.id === data.data);
         let indexreqTags = this.reqTags.findIndex(item => item.id === data.data);
@@ -81,6 +69,20 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
     this.sub.add(changeTagsArray);
     this.onInitClearState();
     this.onCheckEditItem();
+  }
+  updateTagByRealTimes(data) {
+    let index = this.tags.findIndex(item => item.id === data.id);
+    let indexreqTags = this.reqTags.findIndex(item => item.id === data.id);
+    if (index > -1) {
+      this.tags[index] = data;
+    } else {
+      this.tags.push(data);
+    }
+    if (indexreqTags > -1) {
+      this.reqTags[index] = data;
+    } else {
+      this.reqTags.push(data);
+    }
   }
   sortTags() {
     this.tags = this.tags.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?

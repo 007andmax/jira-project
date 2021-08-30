@@ -13,6 +13,29 @@
         Assigned Users
     </div>
     <div
+        class="device-user pointer"
+        *ngIf="type === 'RECURRING_TICEKTS' || type === 'COMPANY_SETTINGS' && selectedUsers.length === 0"
+        id="dropdownTehuser"
+        style="margin-bottom: 10px;width: 109px;"
+        ngbDropdownToggle
+    >
+        Assigned Users
+    </div>
+    <div
+        class="device-user pointer company-settings-user"
+        *ngIf="type === 'COMPANY_SETTINGS' && selectedUsers.length === 1"
+        id="dropdownTehuser"
+        ngbDropdownToggle
+    >
+        <div
+            class="ticket-updates__photo-people"
+            [textContent]="ticketsListService.getAssignedUserNameForAvatar(selectedUsers[0])"
+            [ngStyle]="{'background': ticketsListService.getStyleAvatar(selectedUsers[0])}"
+        >
+        </div>
+        <span [textContent]="ticketsListService.getUserName(selectedUsers[0])"></span>
+    </div>
+    <div
         class="tech__user-icon icon__assign-user"
         *ngIf="type === 'TICEKTS' && selectedUsers.length === 0 || type === 'CONTRACT'"
         id="dropdownTehuser"

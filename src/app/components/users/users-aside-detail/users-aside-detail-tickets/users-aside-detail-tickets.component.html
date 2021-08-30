@@ -1,0 +1,48 @@
+<div class="qt-page-list__body">
+    <div
+        class="qt-page-list__body-table-container"
+        [ngStyle]="{'padding-bottom': (showPendingPreloader) ? '65px' : '0px'}"
+        #content
+    >
+        <table class="qt-page-list__body-tbody qt-table-modern ticket-table">
+            <thead>
+                <tr>
+                    <th class="ticket-table__subject">Subject</th>
+                    <th class="ticket-table__status">Status</th>
+                    <th class="ticket-table__created-date"></th>
+                </tr>
+            </thead>
+            <tbody
+                infiniteScroll
+                [infiniteScrollContainer]="content"
+                [infiniteScrollDistance]="2"
+                [infiniteScrollThrottle]="15"
+                [infiniteScrollDisabled]="infiniteScrollDisabled"
+                [fromRoot]="true"
+                (scrolled)="onScroll()"
+            >
+                <ng-template
+                    ngFor
+                    let-ticket
+                    [ngForOf]="tickets"
+                    [ngForTrackBy]="trackById"
+                >
+                    <users-aside-detail-tickets-item
+                        (click)="editTicket(ticket.id)"
+                        [listColors]="listColors"
+                        [statusColor]="statusColor"
+                        [ticket]="ticket"
+                    ></users-aside-detail-tickets-item>
+                </ng-template>
+            </tbody>
+        </table>
+    </div>
+    <div
+        class="loading pengind-loading"
+        *ngIf="showPendingPreloader"
+    ></div>
+    <div
+        class="loading"
+        *ngIf="showPreloader"
+    ></div>
+</div>

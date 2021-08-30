@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as Stomp from 'stompjs';
-import * as SockJS from 'sockjs-client';
+
 import { UsersService } from "../users/users.service";
 import { CompaniesService } from "../company/companies.service";
 import { QuoteRealTimeService } from "../../components/billing/quotes/quote-realtime/quote-realtime.service";
@@ -25,6 +24,11 @@ import { AppService } from '../../states/app/app.service';
 import { PasswordManagerStateService } from '../../states/password-manager/password-manager-state.service';
 import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service';
 import { DocumentsRealTimeService } from 'src/app/states/documents/documents-real-time.service';
+import { Stomp } from '@stomp/stompjs';
+import { environment } from 'src/environments/environment';
+import * as SockJS from 'sockjs-client';
+import { ConstantsService } from '../constants/constants.service';
+
 
 /**
  * Websocket service to work with api
@@ -34,10 +38,11 @@ import { DocumentsRealTimeService } from 'src/app/states/documents/documents-rea
 })
 export class WebsocketService {
 
-  private serverUrl = '/realtime';
+  private serverUrl = 'realtime';
   private stompClient;
   private netScanSub;
-
+  isResetWebSocket: boolean = false;
+  ws;
   /**
    * Users api service constructor
    * @param {UsersService} usersService Service to work users
@@ -67,15 +72,21 @@ export class WebsocketService {
     private shellRealTimeService: ShellRealTimeService,
     private tagsRealTimeService: TagsRealTimeService,
     private documentsRealTimeService: DocumentsRealTimeService,
+    private constantsService: ConstantsService
 
   ) {
   }
 
   public initializeWebSocketConnection() {
-    let ws = new SockJS(this.serverUrl);
-    this.stompClient = Stomp.over(ws);
+    this.onInitConnect();
+  }
+  onInitConnect() {
+    this.ws = new SockJS(this.serverUrl);
+    this.stompClient = Stomp.over(this.ws);
+    this.stompClient.logRawCommunication = true;
+    this.onConnect();
     let that = this;
-    this.stompClient.connect({}, function () {
+    this.stompClient.onConnect = (data) => {
       that.subsribeToPermissions();
       that.subsribeToUsers();
       that.subsribeToDevices();
@@ -100,8 +111,34 @@ export class WebsocketService {
       that.subsribeToTags();
       that.subsribeToDocuments();
       that.subsribeToDocumentsCategory();
-    });
+    }
+    this.stompClient.debug = (data) => {
+      console.log("debug", data);
+    }
+    this.stompClient.onWebSocketClose = (data) => {
+      setTimeout(() => {
+        this.onInitConnect();
+      }, 20000);
+    }
   }
+  connect() {
+    this.stompClient.connect({}, () => {
+
+    });
+    this.stompClient.activate();
+  }
+  onConnect() {
+    this.connect();
+    let checkOnline = setInterval(() => {
+      if (!window.navigator.onLine) this.isResetWebSocket = true;
+      if (this.isResetWebSocket && window.navigator.onLine) {
+        this.isResetWebSocket = false;
+        //  clearInterval(checkOnline);
+        this.connect();
+      }
+    }, 1000);
+  }
+
   private subsribeToDevices() {
     setTimeout(() => {
       this.stompClient.subscribe(`/user/watch/device`, (message) => {

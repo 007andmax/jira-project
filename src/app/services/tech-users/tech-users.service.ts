@@ -7,7 +7,7 @@ import { throwError } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class TehUsersService {
+export class TechUsersService {
 
   private apiUrl = environment.apiUrl;
   constructor(private http: HttpClient) { }

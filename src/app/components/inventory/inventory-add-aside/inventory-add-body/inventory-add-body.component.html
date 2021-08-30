@@ -141,14 +141,14 @@
     </div>
     <div class="qt-inputs-row">
         <div class="create-product__col select-open-top">
-            <p class="label-name">Vendors</p>
+            <p class="label-name">Suppliers</p>
             <app-select-search
                 [class]="['light-dropdown', 'qt-select-input-40']"
-                [list]="vendors"
+                [list]="suppliers"
                 [field]="'name'"
-                [placeholder]="'Select Vendor'"
-                #vendorsSelect
-                (onSelectedItem)="onSelectVendor($event)"
+                [placeholder]="'Select Supplier'"
+                #suppliersSelect
+                (onSelectedItem)="onSelectSupplier($event)"
             ></app-select-search>
         </div>
     </div>
