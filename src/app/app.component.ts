@@ -155,8 +155,9 @@ export class AppComponent implements OnInit {
       }, 500);
     })
     this.companiesState.onCurrentCompany.subscribe(data => {
-      if (this.router.url === "/") this.router.navigate(
-        [`${data.name.replaceAll(' ', '')}/tickets/`]);
+      console.log("window.location.href", window.location.href);
+      /*if (this.router.url === "/") this.router.navigate(
+        [`${data.name.replaceAll(' ', '')}/tickets/`]);*/
     })
   }
   ngDoCheck() {

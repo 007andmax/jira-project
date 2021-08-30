@@ -53,6 +53,7 @@ export class LeftPanelComponent implements OnInit {
     })
     this.router.events
       .subscribe((event) => {
+        console.log("this.state", this.state);
         if (window.location.href.includes('report')) {
           this.leftPanelStateService.toggleLeftPanel(true);
         } else {
@@ -169,6 +170,7 @@ export class LeftPanelComponent implements OnInit {
     this.router.navigate([`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/${url}`]);
   }
   onChangeState(data) {
+    console.log("data", data);
     if (this.state !== data) {
       this.state = data;
       if (this.state === 'new-companies') this.goToLink(`companies`);
