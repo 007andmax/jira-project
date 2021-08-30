@@ -1,6 +1,8 @@
+@import './src/assets/styles/variable';
+@import './src/assets/styles/fonts';
+
 .user-detail-aside__header {
-    font-size: 13px;
-    font-weight: 600;
+    @extend %body-m-sb;
     margin-right: 10px;
 }
 .user-detail-aside__header-avatar {
@@ -14,37 +16,30 @@
     align-items: center;
     justify-content: center;
     font-weight: 600;
-    color: white;
+    color: $white;
 }
 .user-detail-aside__header-company {
-    font-size: 16px;
-    line-height: 24px;
-    font-weight: 600;
-    // margin-right: 10px;
-    color: #212b36;
+    @extend %body-l-sb;
+    color: $primary-2;
 }
 .user-detail-aside__header-info {
-    color: #637382;
-    font-size: 13px;
-    line-height: 20px;
-    font-weight: 400;
+    color: $gray-700;
+    @extend %body-m;
 }
 .user-detail-aside__divider {
-    border-top: 1px solid #dfe3e8;
+    border-top: 1px solid $gray-400;
     margin: 16px 0;
 }
 
 .user-detail__row-info-line {
     margin-bottom: 16px;
     .user-detail__row-info-label {
-        font-size: 12px;
-        color: #919eab;
-        line-height: 16px;
+        @extend %сaption-l;
+        color: $gray-600;
     }
     .user-detail__row-info-value {
-        font-size: 13px;
-        line-height: 20px;
-        color: #212b36;
+        @extend %body-m-m;
+        color: $primary-2;
     }
 }
 .qt-aside-modern__content {
@@ -59,7 +54,7 @@
 .user-detail-info {
     width: 360px;
     padding: 16px 24px;
-    border-right: 1px solid #edf0f2;
+    border-right: 1px solid $gray-300;
     flex-shrink: 0;
     overflow: auto;
     height: calc(100% - 64px);
@@ -81,28 +76,28 @@ users-aside-detail-passwords {
     display: flex;
     align-items: center;
     padding: 12px 16px;
-    border-bottom: 1px solid #edf0f2;
+    border-bottom: 1px solid $gray-300;
     span {
         font-size: 12px;
         font-weight: 600;
-        color: #212b36;
-        margin: 0px 16px 0px 0px;
+        color: $primary-2;
+        margin: 0 16px 0 0;
         line-height: 16px;
         &:last-child {
-            margin: 0px;
+            margin: 0;
         }
     }
     .active {
-        color: #16a4fa;
+        color: $primary-1;
         position: relative;
         &::after {
             content: " ";
             position: absolute;
             bottom: -11px;
-            left: 0px;
-            right: 0px;
+            left: 0;
+            right: 0;
             height: 1px;
-            background-color: #16a4fa;
+            background-color: $primary-1;
         }
     }
 }

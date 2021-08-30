@@ -85,6 +85,10 @@
 %label-l {
   @include font-style(10px, 12px, 400, 0);
 
+  &-m {
+    @include font-style(10px, 12px, 500, 0);
+  }
+
   &-sb {
     @include font-style(10px, 12px, 600, 0);
   }

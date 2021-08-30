@@ -1,3 +1,6 @@
+@import './src/assets/styles/variable';
+@import './src/assets/styles/fonts';
+
 /deep/ .ticket-table {
     th {
         white-space: nowrap;
@@ -31,14 +34,11 @@ users-aside-detail-tickets-item {
 .qt-page-list__body {
     position: relative;
 }
-th {
-    font-size: 10px;
-    font-family: "Graphik-Medium";
-    font-weight: 500;
-    line-height: 1.2;
-    letter-spacing: normal;
-    color: #9ca5b6;
-    background-color: #f9fafb;
-    padding: 6px 10px 6px 0;
+table.qt-table-modern thead {
+  th {
+    @extend %label-l-sb;
+    color: $primary-2;
+    background-color: $gray-100;
     text-transform: uppercase;
+  }
 }
