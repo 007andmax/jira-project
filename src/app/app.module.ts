@@ -71,7 +71,7 @@ import { DraftEmailComponent } from './components/shared/draft-email/draft-email
 import { DraftEmailRecipientsComponent } from './components/shared/draft-email/draft-email-recipients/draft-email-recipients.component';
 import { SelectSearchComponent } from './components/shared/select-search/select-search.component';
 import { CompanyPasswordManagerComponent } from './components/company-password-manager/company-password-manager.component';
-import { FilterPipe } from './pipe/filter.pipe';
+import { FilterPipe } from './pipe/filter/filter.pipe';
 import { ClickOtsideDirective } from './directives/click-otside.directive';
 import { SortByPipe } from './pipe/sort-by.pipe';
 import { UsersComponent } from './components/users/users.component';
@@ -475,6 +475,12 @@ import { ContractsAsideBlockTimeBillingAddDefaultServiceModule } from './compone
 import { TehUsersModule } from './components/shared/teh-users/teh-users.module';
 import { ContractsAsideBlockTimeBillingUsersModule } from './components/billing/contracts/contracts-aside/contracts-aside-block-time-billing/contracts-aside-block-time-billing-users/contracts-aside-block-time-billing-users.module';
 import { ContractsAsideUserDeviceServiceModule } from './components/billing/contracts/contracts-aside/contracts-aside-user-device-billing/contracts-aside-user-device-service/contracts-aside-user-device-service.module';
+import { ContractsAsideBlockTimeBillingCustomerServiceModule } from './components/billing/contracts/contracts-aside/contracts-aside-block-time-billing/contracts-aside-block-time-billing-customer-service/contracts-aside-block-time-billing-customer-service.module';
+import { ContractsAsideOtherServiceModule } from './components/billing/contracts/contracts-aside/contracts-aside-product-service-contracts/contracts-aside-other-service/contracts-aside-other-service.module';
+import { ContractsAsideOtherProductModule } from './components/billing/contracts/contracts-aside/contracts-aside-product-service-contracts/contracts-aside-other-product/contracts-aside-other-product.module';
+import { ProductListModule } from './components/shared/product-list/product-list.module';
+import { TicketProfileUpdatesServiceDurationModule } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-duration/ticket-profile-updates-service-duration.module';
+import { FilterModule } from './pipe/filter/filter.module';
 
 
 declare var $: any;
@@ -504,7 +510,7 @@ declare var $: any;
     SanitizeHtmlPipe,
     QuotesComponent,
     SelectClientCompanyComponent,
-    ProductListComponent,
+    //  ProductListComponent,
     ServicesListComponent,
     MultiDatepickerComponent,
     LeftPanelBillingComponent,
@@ -546,7 +552,7 @@ declare var $: any;
     DraftEmailRecipientsComponent,
     //  SelectSearchComponent,
     CompanyPasswordManagerComponent,
-    FilterPipe,
+    // FilterPipe,
     ClickOtsideDirective,
     SortByPipe,
     UsersComponent,
@@ -645,7 +651,7 @@ declare var $: any;
     TicketProfileUpdatesProductComponent,
     TicketProfileUpdatesFooterComponent,
     TicketProfileUpdatesServiceComponent,
-    TicketProfileUpdatesServiceDurationComponent,
+    // TicketProfileUpdatesServiceDurationComponent,
     TicketProfileUpdatesServiceTimepickerComponent,
     TicketProfileUpdatesServiceInfoComponent,
     TicketProfileUpdatesServiceEditComponent,
@@ -745,7 +751,7 @@ declare var $: any;
     // ContractsPreviewComponent,
     //  ContractsEditComponent,
     // ContractsAsideHourlyEditComponent,
-    ContractsAsideBlockTimeBillingCustomerServiceComponent,
+    // ContractsAsideBlockTimeBillingCustomerServiceComponent,
     //  DecimalNumberDirective,
     // ContractsAsideBlockTimeBillingDefaultServiceComponent,
     // ContractsAsideBlockTimeBillingAddDefaultServiceComponent,
@@ -759,8 +765,8 @@ declare var $: any;
     // ContractsAsideUserDeviceServiceComponent,
     //   ContractsAsideUserDeviceBillingPreviewComponent,
     // ContractsAsideUserDeviceEditComponent,
-    ContractsAsideOtherProductComponent,
-    ContractsAsideOtherServiceComponent,
+    // ContractsAsideOtherProductComponent,
+    //   ContractsAsideOtherServiceComponent,
     //  ContractsAsideProductServicePreviewComponent,
     // ContractsAsideProductServiceEditComponent,
     ContractsAsideOtherServiceEditComponent,
@@ -945,7 +951,13 @@ declare var $: any;
     ContractsAsideBlockTimeBillingAddDefaultServiceModule,
     TehUsersModule,
     ContractsAsideBlockTimeBillingUsersModule,
-    ContractsAsideUserDeviceServiceModule
+    ContractsAsideUserDeviceServiceModule,
+    ContractsAsideBlockTimeBillingCustomerServiceModule,
+    ContractsAsideOtherServiceModule,
+    TicketProfileUpdatesServiceDurationModule,
+    ContractsAsideOtherProductModule,
+    ProductListModule,
+    FilterModule
   ],
   entryComponents: [
     ModalQuoteComponent,

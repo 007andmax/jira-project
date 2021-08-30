@@ -18,6 +18,9 @@ import { CompanyAssociateModule } from './company-dash-associate/company-associa
 import { NvD3Module } from 'ng2-nvd3';
 import { ContractsPreviewModule } from '../billing/contracts/contracts-preview/contracts-preview.module';
 import { ContractsEditModule } from '../billing/contracts/contracts-edit/contracts-edit.module';
+import { PhoneModule } from 'src/app/pipe/phone/phone.module';
+import { PreparePhoneModule } from 'src/app/pipe/prepare-phone/prepare-phone.module';
+import { CompanyDashboardRoutingModule } from './company-dashboard-routing.module';
 
 
 
@@ -35,6 +38,7 @@ import { ContractsEditModule } from '../billing/contracts/contracts-edit/contrac
     ],
     imports: [
         CommonModule,
+        CompanyDashboardRoutingModule,
         CompanyTagsModule,
         NgxMaskModule,
         NgbModule,
@@ -43,7 +47,9 @@ import { ContractsEditModule } from '../billing/contracts/contracts-edit/contrac
         CompanyAssociateModule,
         NvD3Module,
         ContractsPreviewModule,
-        ContractsEditModule
+        ContractsEditModule,
+        PhoneModule,
+        PreparePhoneModule
 
     ],
 

@@ -23,6 +23,10 @@ import { ContractsAsideBlockTimeBillingAddDefaultServiceModule } from '../contra
 import { TehUsersModule } from 'src/app/components/shared/teh-users/teh-users.module';
 import { ContractsAsideBlockTimeBillingUsersModule } from '../contracts-aside/contracts-aside-block-time-billing/contracts-aside-block-time-billing-users/contracts-aside-block-time-billing-users.module';
 import { ContractsAsideUserDeviceServiceModule } from '../contracts-aside/contracts-aside-user-device-billing/contracts-aside-user-device-service/contracts-aside-user-device-service.module';
+import { ContractsAsideBlockTimeBillingCustomerServiceModule } from '../contracts-aside/contracts-aside-block-time-billing/contracts-aside-block-time-billing-customer-service/contracts-aside-block-time-billing-customer-service.module';
+import { ContractsAsideOtherServiceModule } from '../contracts-aside/contracts-aside-product-service-contracts/contracts-aside-other-service/contracts-aside-other-service.module';
+import { ContractsAsideOtherProductModule } from '../contracts-aside/contracts-aside-product-service-contracts/contracts-aside-other-product/contracts-aside-other-product.module';
+import { NumberModule } from 'src/app/directives/number/number.module';
 
 
 
@@ -53,8 +57,14 @@ import { ContractsAsideUserDeviceServiceModule } from '../contracts-aside/contra
         ContractsAsideBlockTimeBillingAddDefaultServiceModule,
         TehUsersModule,
         ContractsAsideBlockTimeBillingUsersModule,
-        ContractsAsideUserDeviceServiceModule
+        ContractsAsideUserDeviceServiceModule,
+        ContractsAsideBlockTimeBillingCustomerServiceModule,
+        ContractsAsideOtherServiceModule,
+        ContractsAsideOtherProductModule,
+        NumberModule
     ],
+    exports: [ContractsEditComponent,
+        ContractsAsideEditHourlyAddDefaultServiceComponent]
 
 
 
