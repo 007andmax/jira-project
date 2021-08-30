@@ -32,6 +32,7 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.listType = this.ticketsStateService.getListType();
+    console.log("activePage", this.activePage);
     this.ticketsStateService.getOnChangeLeftPanelFilter().subscribe(data => {
       this.listType = data;
     })

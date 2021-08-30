@@ -53,7 +53,7 @@ export class LeftPanelComponent implements OnInit {
     })
     this.router.events
       .subscribe((event) => {
-        console.log("this.state", this.state);
+
         if (window.location.href.includes('report')) {
           this.leftPanelStateService.toggleLeftPanel(true);
         } else {
@@ -129,7 +129,7 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/report/service-report`)) this.state = 'service-report';
           if (window.location.href.includes(`/report/income-accounts`)) this.state = 'income-accounts';
 
-
+          if (this.state === '' && this.companiesStateService.getCurrentCompany()) this.goToDefaultPage();
 
           this.leftPanelStateService.firstOpen(this.state);
           this.leftPanelStateService.changeState(this.state);
@@ -156,6 +156,18 @@ export class LeftPanelComponent implements OnInit {
       this.state = data;
       this.cd.detectChanges();
     })
+    this.companiesStateService.onCurrentCompany.subscribe(data => {
+      if (this.state === '') {
+        this.leftPanelStateService.firstOpen(this.state);
+        this.leftPanelStateService.changeState(this.state);
+        this.cd.detectChanges();
+        this.goToDefaultPage();
+      }
+    })
+  }
+  goToDefaultPage() {
+    this.state = 'new-tickets';
+    this.goToLink('tickets');
   }
   onOpenPanel() {
     this.leftPanelStateService.toggleLeftPanel(false);
