@@ -42,7 +42,15 @@ export class UsersAsideDetailTicketsComponent implements OnInit {
 
   ngOnInit() {
     console.log("getWidth", this.getWidth());
-    if (this.getWidth() >= 1920) this.offset = 25;
+
+    if (this.getWidth() >= 1920) {
+      this.offset = 25;
+      this.ticketsFilter.setSize(25);
+    }
+    if (this.getWidth() >= 3200) {
+      this.offset = 35;
+      this.ticketsFilter.setSize(35);
+    }
     this.ticketsFilter.setListType("ALL");
     this.listColors = this.ticketsStateService.getListStatusColor();
     this.statusColor = this.ticketsStateService.getTicketsColor();
