@@ -485,6 +485,8 @@ import { CompanyTicketsModule } from './components/company-tickets/company-ticke
 import { TicketsHeaderModule } from './components/tickets/tickets/tickets-header/tickets-header.module';
 import { TicketsTableItemModule } from './components/tickets/tickets/tickets-table/tickets-table-item/tickets-table-item.module';
 import { PreviewAttachmentModule } from './components/tickets/tickets/ticket-edit-aside/preview-attachment/preview-attachment.module';
+import { UsersHeaderModule } from './components/users/users-header/users-header.module';
+import { UsersTableModule } from './components/users/users-table/users-table.module';
 
 
 declare var $: any;
@@ -560,11 +562,11 @@ declare var $: any;
     ClickOtsideDirective,
     SortByPipe,
     UsersComponent,
-    UsersHeaderComponent,
-    UsersTableComponent,
+    //  UsersHeaderComponent,
+    // UsersTableComponent,
     UsersAsideComponent,
     LeftPanelUsersComponent,
-    UserTableSubscriptionComponent,
+    //  UserTableSubscriptionComponent,
     UsersAsideEditComponent,
     ModalImageCropperComponent,
     DraftEmailUserRecipientsComponent,
@@ -606,7 +608,7 @@ declare var $: any;
     SelectComponent,
     ReportAdditionalActionsComponent,
     ReportSendEmailComponent,
-    CompanyUserComponent,
+    // CompanyUserComponent,
     TicketsComponent,
     TicketsTableComponent,
     // TicketsHeaderComponent,
@@ -829,7 +831,7 @@ declare var $: any;
     CompanyNetworkScanItemComponent,
     CompanyNetworkScanItemTooltipComponent,
     LeftPanelCompanyComponent,
-    UsersFilterComponent,
+    //UsersFilterComponent,
     SupportComponent,
     SupportItemComponent,
     //  DynamicTooltipComponent,
@@ -964,7 +966,9 @@ declare var $: any;
     FilterModule,
     TicketsHeaderModule,
     TicketsTableItemModule,
-    PreviewAttachmentModule
+    PreviewAttachmentModule,
+    UsersHeaderModule,
+    UsersTableModule
   ],
   entryComponents: [
     ModalQuoteComponent,

@@ -80,8 +80,8 @@ const routes: Routes = [
   },
   {
     path: ':company/company/:id/user',
-    component: CompanyUserComponent,
-    pathMatch: 'full'
+    loadChildren: './components/company-user/company-user.module#CompanyUserModule'
+
   },
   {
     path: ':company/company/:id/tickets',
