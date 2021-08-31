@@ -85,8 +85,8 @@ const routes: Routes = [
   },
   {
     path: ':company/company/:id/tickets',
-    component: CompanyTicketsComponent,
-    pathMatch: 'full'
+    loadChildren: './components/company-tickets/company-tickets.module#CompanyTicketsModule'
+
   },
   {
     path: ':company/company/:id/dashboard',

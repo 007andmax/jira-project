@@ -481,6 +481,10 @@ import { ContractsAsideOtherProductModule } from './components/billing/contracts
 import { ProductListModule } from './components/shared/product-list/product-list.module';
 import { TicketProfileUpdatesServiceDurationModule } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-duration/ticket-profile-updates-service-duration.module';
 import { FilterModule } from './pipe/filter/filter.module';
+import { CompanyTicketsModule } from './components/company-tickets/company-tickets.module';
+import { TicketsHeaderModule } from './components/tickets/tickets/tickets-header/tickets-header.module';
+import { TicketsTableItemModule } from './components/tickets/tickets/tickets-table/tickets-table-item/tickets-table-item.module';
+import { PreviewAttachmentModule } from './components/tickets/tickets/ticket-edit-aside/preview-attachment/preview-attachment.module';
 
 
 declare var $: any;
@@ -605,7 +609,7 @@ declare var $: any;
     CompanyUserComponent,
     TicketsComponent,
     TicketsTableComponent,
-    TicketsHeaderComponent,
+    // TicketsHeaderComponent,
     TicketAddAsideComponent,
     UploadAreaComponent,
     TicketEditAsideComponent,
@@ -631,7 +635,7 @@ declare var $: any;
     CompanyProductsComponent,
     TaxesComponent,
     GlNumberSettingsComponent,
-    TicketsTableItemComponent,
+    //  TicketsTableItemComponent,
     TicketEditAsideCompanyInfoComponent,
     TicketEditAsideDevicesComponent,
     TicketEditAsideUsersComponent,
@@ -662,7 +666,7 @@ declare var $: any;
     TicketChangeStatusComponent,
     //  PreloaderTicketComponent,
     TicketProfileAttachmentsComponent,
-    PreviewAttachmentComponent,
+    //PreviewAttachmentComponent,
     TicketProfileUpdatesNoteItemComponent,
     TicketProfileUpdatesNoteInfoComponent,
     TicketProfileUpdatesNoteEditComponent,
@@ -670,7 +674,7 @@ declare var $: any;
     MapModalComponent,
     CompanyInfoHistoryComponent,
     TicketEditAsideRightPanelComponent,
-    CompanyTicketsComponent,
+    // CompanyTicketsComponent,
     // CompanyDashboardComponent,
     InventoryAddBodyComponent,
     ServicePipe,
@@ -685,7 +689,7 @@ declare var $: any;
     InvoiceAddNoteComponent,
     InvoiceSelectNoteComponent,
     InvoiceRegularNoteComponent,
-    TicketsFilterComponent,
+    //   TicketsFilterComponent,
     InvoiceFormTicketInfoComponent,
     InvoiceFormTicketEditComponent,
     InvoiceFormTicketEditServiceComponent,
@@ -855,7 +859,7 @@ declare var $: any;
     //  PasswordManagerAddAsideComponent,
     //   PasswordManagerEditLinkedComponent,
     AfterViewInitDirective,
-    TicketsFilterTagsComponent,
+    // TicketsFilterTagsComponent,
     DocumentsComponent,
     LeftPanelDocumentsComponent,
     DocumentsAddComponent,
@@ -957,7 +961,10 @@ declare var $: any;
     TicketProfileUpdatesServiceDurationModule,
     ContractsAsideOtherProductModule,
     ProductListModule,
-    FilterModule
+    FilterModule,
+    TicketsHeaderModule,
+    TicketsTableItemModule,
+    PreviewAttachmentModule
   ],
   entryComponents: [
     ModalQuoteComponent,
