@@ -65,9 +65,9 @@
     height: calc(100% - 64px);
 
     .user-detail__row-info {
-      .mat-form-field {
-        margin-top: 0;
-      }
+        .mat-form-field {
+            margin-top: 0;
+        }
     }
 }
 users-aside-detail-tickets,
@@ -105,4 +105,13 @@ users-aside-detail-passwords {
             background-color: #16a4fa;
         }
     }
+}
+.container {
+    height: 32px;
+    overflow: hidden;
+}
+
+.show {
+    overflow: visible;
+    height: auto;
 }

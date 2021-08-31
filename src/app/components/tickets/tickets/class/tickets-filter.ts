@@ -163,6 +163,8 @@ export class TicketsFilter {
     public onInitAll() {
         this.payloadAll = this.getAllPayLoad();
         this.payloadAll.offset = 0;
+    }
+    public onSetSizeAll() {
         this.payloadAll.size = this.size;
     }
     public onInitUnassigned() {
