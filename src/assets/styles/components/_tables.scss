@@ -10,7 +10,6 @@ table.qt-table-modern {
     th {
       padding: 8px;
       @extend %сaption-m-sb;
-      font-size: 20px;
       color: $primary-2;
       text-transform: uppercase;
       &:first-child {

@@ -36,11 +36,3 @@ users-aside-detail-documents-item {
     background-color: $white !important;
     width: 100%;
 }
-table.qt-table-modern thead {
-  th {
-    @extend %label-l-sb;
-    color: $primary-2;
-    background-color: $gray-100;
-    text-transform: uppercase;
-  }
-}

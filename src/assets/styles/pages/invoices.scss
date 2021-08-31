@@ -1,8 +1,6 @@
 @import './src/assets/styles/variable';
 
 .invoices-page {
-
-
   .pengind-loading {
     bottom: -10px;
     top: auto;
@@ -73,8 +71,6 @@
     min-height: calc(100vh - 102px);
   }
 
-
-
   .filters-icon {
     background-color: $white;
     border: solid 1px $gray-400;
@@ -141,8 +137,6 @@
   }
 
   .invoce-table__amount {
-
-
     width: 89px;
     min-width: 89px;
     padding-left: 8px;
@@ -195,7 +189,6 @@
     border-spacing: 0;
     border-collapse: initial;
     color: $primary-2;
-
 
     .payment-input {
       width: 100%;
@@ -616,6 +609,23 @@ app-invoices-item,app-payment-item {
         bottom: -13px;
         height: 2px;
         z-index: 1;
+      }
+    }
+  }
+  .user-detail-statictics {
+    thead {
+      th {
+        padding: 8px;
+        @extend %label-l-sb;
+        color: $primary-2;
+        background: $gray-100;
+        text-transform: uppercase;
+        &:first-child {
+          padding-left: 16px;
+        }
+        &:last-child {
+          padding-right: 16px;
+        }
       }
     }
   }
