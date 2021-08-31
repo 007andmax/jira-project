@@ -93,8 +93,9 @@
                         <button
                             *ngIf="!showFullJobDescription && user.jobDescription.length > 120"
                             (click)="showFullJobDescription = !showFullJobDescription"
+                            class="read-more"
                         >
-                            Show More
+                            read more...
                         </button>
                     </div>
                 </div>

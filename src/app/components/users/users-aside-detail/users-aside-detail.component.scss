@@ -1,9 +1,10 @@
-.user-detail-aside__header {
+.user-aside-detail-page__aside {
+  .user-detail-aside__header {
     font-size: 13px;
     font-weight: 600;
     margin-right: 10px;
-}
-.user-detail-aside__header-avatar {
+  }
+  .user-detail-aside__header-avatar {
     width: 40px;
     height: 40px;
     margin-right: 12px;
@@ -15,48 +16,47 @@
     justify-content: center;
     font-weight: 600;
     color: white;
-}
-.user-detail-aside__header-company {
+  }
+  .user-detail-aside__header-company {
     font-size: 16px;
     line-height: 24px;
     font-weight: 600;
-    // margin-right: 10px;
     color: #212b36;
-}
-.user-detail-aside__header-info {
+  }
+  .user-detail-aside__header-info {
     color: #637382;
     font-size: 13px;
     line-height: 20px;
     font-weight: 400;
-}
-.user-detail-aside__divider {
+  }
+  .user-detail-aside__divider {
     border-top: 1px solid #dfe3e8;
     margin: 16px 0;
-}
+  }
 
-.user-detail__row-info-line {
+  .user-detail__row-info-line {
     margin-bottom: 16px;
     .user-detail__row-info-label {
-        font-size: 12px;
-        color: #919eab;
-        line-height: 16px;
+      font-size: 12px;
+      color: #919eab;
+      line-height: 16px;
     }
     .user-detail__row-info-value {
-        font-size: 13px;
-        line-height: 20px;
-        color: #212b36;
+      font-size: 13px;
+      line-height: 20px;
+      color: #212b36;
     }
-}
-.qt-aside-modern__content {
+  }
+  .qt-aside-modern__content {
     display: flex;
-}
-.user-detail-statictics {
+  }
+  .user-detail-statictics {
     flex: 1;
-}
-.qt-aside-modern {
+  }
+  .qt-aside-modern {
     z-index: 2 !important;
-}
-.user-detail-info {
+  }
+  .user-detail-info {
     width: 360px;
     padding: 16px 24px;
     border-right: 1px solid #edf0f2;
@@ -65,53 +65,64 @@
     height: calc(100% - 64px);
 
     .user-detail__row-info {
-        .mat-form-field {
-            margin-top: 0;
-        }
+      .mat-form-field {
+        margin-top: 0;
+      }
     }
-}
-users-aside-detail-tickets,
-users-aside-detail-documents,
-users-aside-detail-passwords {
+  }
+  users-aside-detail-tickets,
+  users-aside-detail-documents,
+  users-aside-detail-passwords {
     height: 100%;
     flex: 1;
     display: flex;
-}
-.tabs {
+  }
+  .tabs {
     display: flex;
     align-items: center;
     padding: 12px 16px;
     border-bottom: 1px solid #edf0f2;
     span {
-        font-size: 12px;
-        font-weight: 600;
-        color: #212b36;
-        margin: 0px 16px 0px 0px;
-        line-height: 16px;
-        &:last-child {
-            margin: 0px;
-        }
+      font-size: 12px;
+      font-weight: 600;
+      color: #212b36;
+      margin: 0 16px 0 0;
+      line-height: 16px;
+      &:last-child {
+        margin: 0;
+      }
     }
     .active {
-        color: #16a4fa;
-        position: relative;
-        &::after {
-            content: " ";
-            position: absolute;
-            bottom: -11px;
-            left: 0px;
-            right: 0px;
-            height: 1px;
-            background-color: #16a4fa;
-        }
+      color: #16a4fa;
+      position: relative;
+      &::after {
+        content: " ";
+        position: absolute;
+        bottom: -11px;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background-color: #16a4fa;
+      }
     }
-}
-.container {
-    height: 32px;
-    overflow: hidden;
-}
+  }
 
-.show {
+  .container {
+    padding: 0;
+    width: auto;
+  }
+
+  .show {
     overflow: visible;
     height: auto;
+  }
+
+  .read-more {
+    display: inline-block;
+    color: #16a4fa;
+    background: none;
+    border: none;
+    outline: none;
+  }
 }
+
