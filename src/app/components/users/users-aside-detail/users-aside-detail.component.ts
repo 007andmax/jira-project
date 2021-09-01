@@ -75,8 +75,7 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
   }
   getJobDescription(val) {
     let value = val;
-    console.log("val.length", val.length);
-    if (val.length >= 120 && !this.showFullJobDescription) return value.substring(0, 120);
+    if (val && val.length >= 120 && !this.showFullJobDescription) return value.substring(0, 120);
     return val;
   }
   public showAsideForDraftEmail() {

@@ -91,7 +91,7 @@
                     >
                         <span [textContent]="getJobDescription(user.jobDescription)"></span>
                         <button
-                            *ngIf="!showFullJobDescription && user.jobDescription.length > 120"
+                            *ngIf="!showFullJobDescription && user.jobDescription && user.jobDescription.length > 120"
                             (click)="showFullJobDescription = !showFullJobDescription"
                             class="read-more"
                         >
