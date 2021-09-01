@@ -301,7 +301,8 @@ const routes: Routes = [
   },
   {
     path: ':company/company/:id/network-scan',
-    component: CompanyNetworkScanComponent
+    loadChildren: './components/company-network-scan/company-network-scan.module#CompanyNetworkScanModule'
+
   },
   {
     path: ':company/company/:id/devices',
