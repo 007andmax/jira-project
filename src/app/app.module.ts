@@ -488,6 +488,11 @@ import { PreviewAttachmentModule } from './components/tickets/tickets/ticket-edi
 import { UsersHeaderModule } from './components/users/users-header/users-header.module';
 import { UsersTableModule } from './components/users/users-table/users-table.module';
 import { CompanyDevicesEditLabelModule } from './components/company-devices/company-devices-edit-label/company-devices-edit-label.module';
+import { ReportMenuModule } from './components/reports/report-menu/report-menu.module';
+import { MultiDatepickerModule } from './components/shared/multi-datepicker/multi-datepicker.module';
+import { TechUsersListReportModule } from './components/reports/report-menu/tech-users-list-report/tech-users-list-report.module';
+import { ReportAdditionalActionsModule } from './components/reports/report-additional-actions/report-additional-actions.module';
+import { ReportFooterModule } from './components/reports/report-footer/report-footer.module';
 
 
 declare var $: any;
@@ -519,7 +524,7 @@ declare var $: any;
     SelectClientCompanyComponent,
     //  ProductListComponent,
     ServicesListComponent,
-    MultiDatepickerComponent,
+    //  MultiDatepickerComponent,
     LeftPanelBillingComponent,
     ToNumerPipe,
     ModalQuoteComponent,
@@ -605,9 +610,9 @@ declare var $: any;
     ReportsComponent,
     ItemReportComponent,
     OverviewReportComponent,
-    ReportMenuComponent,
+    // ReportMenuComponent,
     SelectComponent,
-    ReportAdditionalActionsComponent,
+    // ReportAdditionalActionsComponent,
     ReportSendEmailComponent,
     // CompanyUserComponent,
     TicketsComponent,
@@ -620,12 +625,12 @@ declare var $: any;
     LeftPanelTicketsComponent,
     GlNumberComponent,
     AccountsReceivableComponent,
-    ReportFooterComponent,
+    // ReportFooterComponent,
     TaxesReportComponent,
     ProductSalesReportComponent,
     CustomerSalesReportComponent,
     TicketReportComponent,
-    TechUsersListReportComponent,
+    //  TechUsersListReportComponent,
     ReportTimePipe,
     ServiceReportComponent,
     InventoryComponent,
@@ -635,7 +640,7 @@ declare var $: any;
     InventoryEditAsideComponent,
     LeftPanelInventoryComponent,
     AddCategoryProductComponent,
-    CompanyProductsComponent,
+    // CompanyProductsComponent,
     TaxesComponent,
     GlNumberSettingsComponent,
     //  TicketsTableItemComponent,
@@ -847,7 +852,7 @@ declare var $: any;
     ToFixedPipe,
     CommonCommissionsReportComponent,
     SoftwareSummaryReportComponent,
-    SoftwareSummaryDevicesDroDownComponent,
+    // SoftwareSummaryDevicesDroDownComponent,
     HardwareSummaryReportComponent,
     DeviceIpSummaryReportComponent,
     RemoteConnectionReportComponent,
@@ -970,7 +975,12 @@ declare var $: any;
     PreviewAttachmentModule,
     UsersHeaderModule,
     UsersTableModule,
-    CompanyDevicesEditLabelModule
+    CompanyDevicesEditLabelModule,
+    ReportMenuModule,
+    MultiDatepickerModule,
+    TechUsersListReportModule,
+    ReportAdditionalActionsModule,
+    ReportFooterModule
   ],
   entryComponents: [
     ModalQuoteComponent,

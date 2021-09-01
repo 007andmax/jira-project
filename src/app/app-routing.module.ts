@@ -217,8 +217,7 @@ const routes: Routes = [
   },
   {
     path: ':company/company/:id/products',
-    component: CompanyProductsComponent,
-    pathMatch: 'full'
+    loadChildren: './components/companies/company-products/company-products.module#CompanyProductsModule'
   },
 
   {
