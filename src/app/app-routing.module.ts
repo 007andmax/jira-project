@@ -75,8 +75,8 @@ const routes: Routes = [
   },
   {
     path: ':company/company/:id/password-manager',
-    component: CompanyPasswordManagerComponent,
-    pathMatch: 'full'
+    loadChildren: './components/company-password-manager/company-password-manager.module#CompanyPasswordManagerModule'
+
   },
   {
     path: ':company/company/:id/user',

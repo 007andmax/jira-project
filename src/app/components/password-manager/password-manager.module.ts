@@ -22,18 +22,22 @@ import { PasswordManagerAddCategoryComponent } from './password-manager-add-cate
 import { PasswordManagerEditAsideComponent } from './password-manager-edit-aside/password-manager-edit-aside.component';
 import { PasswordManagerEditLinkedComponent } from './password-manager-edit-aside/password-manager-edit-linked/password-manager-edit-linked.component';
 import { PasswordManagerTableComponent } from './password-manager-table/password-manager-table.component';
+import { PasswoordManagerHeaderModule } from './passwoord-manager-header/passwoord-manager-header.module';
+import { PasswordManagerTableModule } from './password-manager-table/password-manager-table.module';
+import { PasswordManagerEditAsideModule } from './password-manager-edit-aside/password-manager-edit-aside.module';
+import { PasswordManagerAddAsideModule } from './password-manager-add-aside/password-manager-add-aside.module';
 
 @NgModule({
     declarations: [PasswordManagerComponent,
-        PasswordManagerAddCategoryComponent,
-        PasswoordManagerDevicesUsersComponent,
-        PasswoordManagerFiltersComponent,
-        PasswoordManagerHeaderComponent,
-        PasswordManagerTableComponent,
-        PasswordManagerEditAsideComponent,
-        PasswordManagerAddAsideComponent,
-        PasswordManagerEditLinkedComponent,
-        PasswordManagerLinkedComponent
+        // PasswordManagerAddCategoryComponent,
+        //  PasswoordManagerDevicesUsersComponent,
+        //  PasswoordManagerFiltersComponent,
+        // PasswoordManagerHeaderComponent,
+        // PasswordManagerTableComponent,
+        //   PasswordManagerEditAsideComponent,
+        //  PasswordManagerAddAsideComponent,
+        //  PasswordManagerEditLinkedComponent,
+        //  PasswordManagerLinkedComponent
     ],
     imports: [
         CommonModule,
@@ -47,17 +51,21 @@ import { PasswordManagerTableComponent } from './password-manager-table/password
         TextAreaModule,
         DatePickerModule,
         PreloaderTicketModule,
-        DisabledBtnModule
+        DisabledBtnModule,
+        PasswoordManagerHeaderModule,
+        PasswordManagerTableModule,
+        PasswordManagerEditAsideModule,
+        PasswordManagerAddAsideModule
     ],
-    exports: [PasswordManagerAddCategoryComponent,
-        PasswoordManagerDevicesUsersComponent,
-        PasswoordManagerFiltersComponent,
-        PasswoordManagerHeaderComponent,
-        PasswordManagerTableComponent,
-        PasswordManagerEditAsideComponent,
-        PasswordManagerAddAsideComponent,
-        PasswordManagerEditLinkedComponent,
-        PasswordManagerLinkedComponent]
+    exports: [//PasswordManagerAddCategoryComponent,
+        //   PasswoordManagerDevicesUsersComponent,
+        //   PasswoordManagerFiltersComponent,
+        //  PasswoordManagerHeaderComponent,
+        //  PasswordManagerTableComponent,
+        //  PasswordManagerEditAsideComponent,
+        //  PasswordManagerAddAsideComponent,
+        //  PasswordManagerEditLinkedComponent,
+    ]
 
 
 })

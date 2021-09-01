@@ -558,7 +558,7 @@ declare var $: any;
     DraftEmailComponent,
     DraftEmailRecipientsComponent,
     //  SelectSearchComponent,
-    CompanyPasswordManagerComponent,
+    //  CompanyPasswordManagerComponent,
     // FilterPipe,
     ClickOtsideDirective,
     SortByPipe,
