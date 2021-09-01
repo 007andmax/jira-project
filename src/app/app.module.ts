@@ -487,6 +487,7 @@ import { TicketsTableItemModule } from './components/tickets/tickets/tickets-tab
 import { PreviewAttachmentModule } from './components/tickets/tickets/ticket-edit-aside/preview-attachment/preview-attachment.module';
 import { UsersHeaderModule } from './components/users/users-header/users-header.module';
 import { UsersTableModule } from './components/users/users-table/users-table.module';
+import { CompanyDevicesEditLabelModule } from './components/company-devices/company-devices-edit-label/company-devices-edit-label.module';
 
 
 declare var $: any;
@@ -809,20 +810,20 @@ declare var $: any;
     TicketsBillableHoursWidgetComponent,
     TechTicketsWidgetComponent,
     CompanyNetworkScanComponent,
-    CompanyDevicesComponent,
-    CompanyDevicesItemComponent,
-    CompanyDevicesHeaderComponent,
+    //  CompanyDevicesComponent,
+    //  CompanyDevicesItemComponent,
+    // CompanyDevicesHeaderComponent,
     CompanyDevicesRemoteAccessComponent,
     CompanyDevicesEditNameComponent,
-    CompanyDevicesAsideComponent,
-    CompanyDevicesAsideDeviceIconComponent,
-    CompanyDevicesAsideSystemComponent,
-    CompanyDevicesAsideNetworkTabComponent,
-    CompanyDevicesAsideSoftwareComponent,
-    CompanyDevicesAsideUpdatesComponent,
-    CompanyDevicesExistRemoteSessionsComponent,
-    CompanyDevicesNoExistRemoteSessionsComponent,
-    CompanyDevicesEditLabelComponent,
+    // CompanyDevicesAsideComponent,
+    // CompanyDevicesAsideDeviceIconComponent,
+    // CompanyDevicesAsideSystemComponent,
+    // CompanyDevicesAsideNetworkTabComponent,
+    //CompanyDevicesAsideSoftwareComponent,
+    // CompanyDevicesAsideUpdatesComponent,
+    //CompanyDevicesExistRemoteSessionsComponent,
+    // CompanyDevicesNoExistRemoteSessionsComponent,
+    // CompanyDevicesEditLabelComponent,
     CompanyDevicesAsideTooltipComponent,
     CompanyNetworkScanNoExistDevicesComponent,
     NetworkScanCredentialsAsideComponent,
@@ -968,7 +969,8 @@ declare var $: any;
     TicketsTableItemModule,
     PreviewAttachmentModule,
     UsersHeaderModule,
-    UsersTableModule
+    UsersTableModule,
+    CompanyDevicesEditLabelModule
   ],
   entryComponents: [
     ModalQuoteComponent,

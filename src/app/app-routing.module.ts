@@ -305,7 +305,7 @@ const routes: Routes = [
   },
   {
     path: ':company/company/:id/devices',
-    component: CompanyDevicesComponent,
+    loadChildren: './components/company-devices/company-devices.module#CompanyDevicesModule'
 
   },
   {
