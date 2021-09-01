@@ -41,7 +41,6 @@ export class UsersAsideDetailTicketsComponent implements OnInit {
     private ticketsStateService: TicketsStateService) { }
 
   ngOnInit() {
-    console.log("getWidth", this.getWidth());
     this.ticketsFilter.setListType("ALL");
     if (this.getWidth() >= 1920) {
       this.offset = 25;
