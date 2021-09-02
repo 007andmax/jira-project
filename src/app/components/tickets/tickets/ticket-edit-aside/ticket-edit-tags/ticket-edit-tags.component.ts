@@ -117,9 +117,13 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
           this.isChangeInput = false;
           this.init = false;
           this.tagsChange.emit(this.selectedTag);
+        }, err => {
+          this.isChangeInput = false;
+
         });
         this.sub.add(setTags);
       } else {
+        this.isChangeInput = false;
         this.init = false;
         this.tagsChange.emit(this.selectedTag);
       }
@@ -147,6 +151,7 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
         }
 
         let setTags = this.tagsService.addTicketsTags(tag).subscribe((res) => {
+          this.isChangeInput = false;
           this.init = true;
           tag.id = res.id;
           this.tags.push(tag);
@@ -155,6 +160,8 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
             input.value = '';
           }
           this.tagCtrl.setValue(null);
+        }, err => {
+          this.isChangeInput = false;
         });
         this.sub.add(setTags);
       }
