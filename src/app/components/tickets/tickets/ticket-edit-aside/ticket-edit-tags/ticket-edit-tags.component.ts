@@ -108,6 +108,7 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
         let tag: any = {
           colorCode: 0, usedCounter: 0, word: this.userInput.nativeElement.value.trim(), id: ''
         }
+        this.tagsDp.close();
         let setTags = this.tagsService.addTicketsTags(tag).subscribe((res) => {
           tag.id = res.id;
           this.tags.push(tag);
@@ -117,7 +118,7 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
           this.isChangeInput = false;
           this.init = false;
           this.tagsChange.emit(this.selectedTag);
-          this.tagsDp.close();
+
         }, err => {
           this.isChangeInput = false;
 
@@ -150,10 +151,10 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
         let tag: any = {
           colorCode: 0, usedCounter: 0, word: value.trim(), id: ''
         }
-
+        this.tagsDp.close();
         let setTags = this.tagsService.addTicketsTags(tag).subscribe((res) => {
           this.isChangeInput = false;
-          this.init = true;
+          //  this.init = true;
           tag.id = res.id;
           this.tags.push(tag);
           this.selectedTag.push(tag);
@@ -161,7 +162,7 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
             input.value = '';
           }
           this.tagCtrl.setValue(null);
-          this.tagsDp.close();
+          this.tagsChange.emit(this.selectedTag);
         }, err => {
           this.isChangeInput = false;
         });
@@ -179,8 +180,9 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
   public remove(index): void {
     if (index >= 0) {
       this.selectedTag.splice(index, 1);
+      this.tagsChange.emit(this.selectedTag);
     }
-    this.init = true;
+    //   this.init = true;
   }
 
   /**
@@ -188,13 +190,14 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
    * @param tag - selected tag
    */
   public selected(tag): void {
-    this.init = true;
+    // this.init = true;
     let find = this.selectedTag.find(item => item.id === tag.id);
     if (!find) {
       this.selectedTag.push(tag);
     }
     this.isChangeInput = false;
     this.tagCtrl.setValue(null);
+    this.tagsChange.emit(this.selectedTag);
   }
 
   onSearch(event) {
