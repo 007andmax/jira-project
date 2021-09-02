@@ -496,6 +496,8 @@ import { ReportFooterModule } from './components/reports/report-footer/report-fo
 import { ContractsHeaderModule } from './components/billing/contracts/contracts-header/contracts-header.module';
 import { ContractsTableModule } from './components/billing/contracts/contracts-table/contracts-table.module';
 import { ContractsAsideModule } from './components/billing/contracts/contracts-aside/contracts-aside.module';
+import { DocumentsHeaderModule } from './components/documents/documents-header/documents-header.module';
+import { DocumentsTemplatesInfoModule } from './components/documents/documents-templates/documents-templates-info/documents-templates-info.module';
 
 
 declare var $: any;
@@ -880,8 +882,8 @@ declare var $: any;
     DocumentsAddInfoComponent,
     DocumentsAddEditCategoriesComponent,
     DocumentsTableComponent,
-    DocumentsHeaderComponent,
-    DocumentsFilterComponent,
+    // DocumentsHeaderComponent,
+    // DocumentsFilterComponent,
     DocumentsCategoryComponent,
     //  PasswordManagerLinkedComponent,
     DocumentsLinkedComponent,
@@ -890,13 +892,13 @@ declare var $: any;
     DocumentsEditInfoComponent,
     DocumentsTemplatesHeaderComponent,
     DocumentsTemplatesFilterComponent,
-    DocumentsTemplatesInfoComponent,
+    // DocumentsTemplatesInfoComponent,
     DocumentsTemplatesItemComponent,
     DocumentsEditHistoryComponent,
     FindWithinDocumentComponent,
     DocumentPreviewComponent,
-    CompanyDocumentsComponent,
-    CompanyDocumentsTableComponent,
+    //  CompanyDocumentsComponent,
+    //  CompanyDocumentsTableComponent,
     //  CompaniesFilterComponent,
     CompanyAddAsideShortComponent,
     CompanyAddAsideFullComponent,
@@ -986,7 +988,9 @@ declare var $: any;
     ReportFooterModule,
     ContractsHeaderModule,
     ContractsTableModule,
-    ContractsAsideModule
+    ContractsAsideModule,
+    DocumentsHeaderModule,
+    DocumentsTemplatesInfoModule
   ],
   entryComponents: [
     ModalQuoteComponent,

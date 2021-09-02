@@ -207,8 +207,8 @@ const routes: Routes = [
   },
   {
     path: ':company/company/:id/documents',
-    component: CompanyDocumentsComponent,
-    pathMatch: 'full'
+    loadChildren: './components/companies/company-documents/company-documents.module#CompanyDocumentsModule'
+
   },
   {
     path: ':company/documents/preview/:id',
