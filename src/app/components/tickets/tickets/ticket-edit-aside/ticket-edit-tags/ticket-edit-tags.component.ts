@@ -31,7 +31,7 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
   isChangeInput: boolean = false;
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @Output() tagsChange = new EventEmitter();
-
+  @ViewChild('tagsDp') tagsDp: any;
   /**
    * Creates an instance of the TagsComponent with the injected services
    * @param {TagsService} tagsService Service to work with tags
@@ -117,6 +117,7 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
           this.isChangeInput = false;
           this.init = false;
           this.tagsChange.emit(this.selectedTag);
+          this.tagsDp.close();
         }, err => {
           this.isChangeInput = false;
 
@@ -160,6 +161,7 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
             input.value = '';
           }
           this.tagCtrl.setValue(null);
+          this.tagsDp.close();
         }, err => {
           this.isChangeInput = false;
         });
