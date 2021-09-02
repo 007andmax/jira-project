@@ -493,6 +493,9 @@ import { MultiDatepickerModule } from './components/shared/multi-datepicker/mult
 import { TechUsersListReportModule } from './components/reports/report-menu/tech-users-list-report/tech-users-list-report.module';
 import { ReportAdditionalActionsModule } from './components/reports/report-additional-actions/report-additional-actions.module';
 import { ReportFooterModule } from './components/reports/report-footer/report-footer.module';
+import { ContractsHeaderModule } from './components/billing/contracts/contracts-header/contracts-header.module';
+import { ContractsTableModule } from './components/billing/contracts/contracts-table/contracts-table.module';
+import { ContractsAsideModule } from './components/billing/contracts/contracts-aside/contracts-aside.module';
 
 
 declare var $: any;
@@ -705,9 +708,9 @@ declare var $: any;
     InvoiceDiscountComponent,
     ContractsComponent,
     CreateContractsComponent,
-    ContractsHeaderComponent,
-    ContractsTableComponent,
-    ContractsAsideComponent,
+    //  ContractsHeaderComponent,
+    // ContractsTableComponent,
+    // ContractsAsideComponent,
     InvoicesComponent,
     InvoicesAsideComponent,
     InvoicesItemComponent,
@@ -728,15 +731,15 @@ declare var $: any;
     EditPaymentComponent,
     TechServiceReportComponent,
     AccountingReportComponent,
-    ContractsTableItemComponent,
-    ContractsAsideSelectTypeComponent,
-    ContractsAsideHourlyBillingComponent,
-    ContractsAsideBlockTimeBillingComponent,
-    ContractsAsideUserDeviceBillingComponent,
-    ContractsAsideProductServiceContractsComponent,
-    ContractsFilterComponent,
-    ContractsAsideTopComponent,
-    ContractsAsideHourlyBillingDefaultServiceComponent,
+    // ContractsTableItemComponent,
+    //  ContractsAsideSelectTypeComponent,
+    // ContractsAsideHourlyBillingComponent,
+    // ContractsAsideBlockTimeBillingComponent,
+    // ContractsAsideUserDeviceBillingComponent,
+    // ContractsAsideProductServiceContractsComponent,
+    //ContractsFilterComponent,
+    // ContractsAsideTopComponent,
+    //ContractsAsideHourlyBillingDefaultServiceComponent,
     ContractsAsideHourlyBillingAddServiceComponent,
     DefaultServicesComponent,
     DefaultServicesAddComponent,
@@ -791,7 +794,7 @@ declare var $: any;
     DashboardStatsComponent,
     DashboardQuotesComponent,
     DashboardSalesAnalyticsComponent,
-    CompanyContractsComponent,
+    // CompanyContractsComponent,
     QuotesTableComponent,
     QuotesHeaderComponent,
     QuotesItemComponent,
@@ -980,7 +983,10 @@ declare var $: any;
     MultiDatepickerModule,
     TechUsersListReportModule,
     ReportAdditionalActionsModule,
-    ReportFooterModule
+    ReportFooterModule,
+    ContractsHeaderModule,
+    ContractsTableModule,
+    ContractsAsideModule
   ],
   entryComponents: [
     ModalQuoteComponent,

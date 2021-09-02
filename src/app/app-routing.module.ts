@@ -292,7 +292,8 @@ const routes: Routes = [
   },
   {
     path: ':company/company/:id/contracts',
-    component: CompanyContractsComponent
+    loadChildren: './components/companies/company-contracts/company-contracts.module#CompanyContractsModule'
+
   },
   {
     path: ':company/tickets-dashboard',

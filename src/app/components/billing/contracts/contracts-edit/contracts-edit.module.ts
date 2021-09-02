@@ -27,6 +27,7 @@ import { ContractsAsideBlockTimeBillingCustomerServiceModule } from '../contract
 import { ContractsAsideOtherServiceModule } from '../contracts-aside/contracts-aside-product-service-contracts/contracts-aside-other-service/contracts-aside-other-service.module';
 import { ContractsAsideOtherProductModule } from '../contracts-aside/contracts-aside-product-service-contracts/contracts-aside-other-product/contracts-aside-other-product.module';
 import { NumberModule } from 'src/app/directives/number/number.module';
+import { ContractsAsideEditHourlyAddDefaultServiceModule } from './contracts-aside-hourly-edit/contracts-aside-edit-hourly-add-default-service/contracts-aside-edit-hourly-add-default-service.module';
 
 
 
@@ -37,7 +38,7 @@ import { NumberModule } from 'src/app/directives/number/number.module';
         ContractsAsideUserDeviceEditComponent,
         ContractsAsideProductServiceEditComponent,
         ContractsAsideHourlyBillingEditDefaultServiceComponent,
-        ContractsAsideEditHourlyAddDefaultServiceComponent,
+        //  ContractsAsideEditHourlyAddDefaultServiceComponent,
         ContractsAsideBlockTimeEditCustomerServiceComponent
     ],
     imports: [
@@ -61,10 +62,11 @@ import { NumberModule } from 'src/app/directives/number/number.module';
         ContractsAsideBlockTimeBillingCustomerServiceModule,
         ContractsAsideOtherServiceModule,
         ContractsAsideOtherProductModule,
-        NumberModule
+        NumberModule,
+        ContractsAsideEditHourlyAddDefaultServiceModule
     ],
     exports: [ContractsEditComponent,
-        ContractsAsideEditHourlyAddDefaultServiceComponent]
+    ]
 
 
 
