@@ -25,6 +25,7 @@ import { UsersAsideDetailTicketsComponent } from './users-aside-detail-tickets/u
 export class UsersAsideDetailComponent implements OnInit, OnDestroy {
   user: User;
   open: boolean = false;
+  showFullJobDescription: boolean = false;
   tab: string = 'tickets';
   @ViewChild('ticketsDetail') ticketsDetail: UsersAsideDetailTicketsComponent;
   sub: Subscription = new Subscription();
@@ -72,6 +73,11 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
       this.ticketsStateService.onInitStatus(ticketsColor);
     })
   }
+  getJobDescription(val) {
+    let value = val;
+    if (val && val.length >= 120 && !this.showFullJobDescription) return value.substring(0, 120);
+    return val;
+  }
   public showAsideForDraftEmail() {
     this.draftEmailStateService.setAction(USERS);
     this.draftEmailStateService.resetSelectedUsers();
@@ -91,6 +97,7 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
   }
   close() {
     this.open = false;
+    this.showFullJobDescription = false;
     this.usersStateService.hideDetailUser();
   }
   getCompanyName() {

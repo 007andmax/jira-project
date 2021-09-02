@@ -1,103 +1,121 @@
-@import './src/assets/styles/variable';
-@import './src/assets/styles/fonts';
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
 
 .user-detail-aside__header {
-    @extend %body-m-sb;
-    margin-right: 10px;
+  @extend %body-m-sb;
+  margin-right: 10px;
 }
 .user-detail-aside__header-avatar {
-    width: 40px;
-    height: 40px;
-    margin-right: 12px;
-    background-position: center;
-    background-size: cover;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 600;
-    color: $white;
+  width: 40px;
+  height: 40px;
+  margin-right: 12px;
+  background-position: center;
+  background-size: cover;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: $white;
 }
 .user-detail-aside__header-company {
-    @extend %body-l-sb;
-    color: $primary-2;
+  @extend %body-l-sb;
+  color: $primary-2;
 }
 .user-detail-aside__header-info {
-    color: $gray-700;
-    @extend %body-m;
+  color: $gray-700;
+  @extend %body-m;
 }
 .user-detail-aside__divider {
-    border-top: 1px solid $gray-400;
-    margin: 16px 0;
+  border-top: 1px solid $gray-400;
+  margin: 16px 0;
 }
 
 .user-detail__row-info-line {
-    margin-bottom: 16px;
-    .user-detail__row-info-label {
-        @extend %сaption-l;
-        color: $gray-600;
-    }
-    .user-detail__row-info-value {
-        @extend %body-m-m;
-        color: $primary-2;
-    }
+  margin-bottom: 16px;
+  .user-detail__row-info-label {
+    @extend %сaption-l;
+    color: $gray-600;
+  }
+  .user-detail__row-info-value {
+    @extend %body-m-m;
+    color: $primary-2;
+  }
 }
 .qt-aside-modern__content {
-    display: flex;
+  display: flex;
 }
 .user-detail-statictics {
-    flex: 1;
+  flex: 1;
 }
 .qt-aside-modern {
-    z-index: 2 !important;
+  z-index: 2 !important;
 }
 .user-detail-info {
-    width: 360px;
-    padding: 16px 24px;
-    border-right: 1px solid $gray-300;
-    flex-shrink: 0;
-    overflow: auto;
-    height: calc(100% - 64px);
+  width: 360px;
+  padding: 16px 24px;
+  border-right: 1px solid $gray-300;
+  flex-shrink: 0;
+  overflow: auto;
+  height: calc(100% - 64px);
 
-    .user-detail__row-info {
-      .mat-form-field {
-        margin-top: 0;
-      }
+  .user-detail__row-info {
+    .mat-form-field {
+      margin-top: 0;
     }
+  }
 }
 users-aside-detail-tickets,
 users-aside-detail-documents,
 users-aside-detail-passwords {
-    height: 100%;
-    flex: 1;
-    display: flex;
+  height: 100%;
+  flex: 1;
+  display: flex;
 }
 .tabs {
-    display: flex;
-    align-items: center;
-    padding: 12px 16px;
-    border-bottom: 1px solid $gray-300;
-    span {
-        font-size: 12px;
-        font-weight: 600;
-        color: $primary-2;
-        margin: 0 16px 0 0;
-        line-height: 16px;
-        &:last-child {
-            margin: 0;
-        }
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid $gray-300;
+  span {
+    font-size: 12px;
+    font-weight: 600;
+    color: $primary-2;
+    margin: 0 16px 0 0;
+    line-height: 16px;
+    &:last-child {
+      margin: 0;
     }
-    .active {
-        color: $primary-1;
-        position: relative;
-        &::after {
-            content: " ";
-            position: absolute;
-            bottom: -11px;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background-color: $primary-1;
-        }
+  }
+  .active {
+    color: $primary-1;
+    position: relative;
+    &::after {
+      content: " ";
+      position: absolute;
+      bottom: -11px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background-color: $primary-1;
     }
+  }
+}
+
+.container {
+  padding: 0;
+  width: auto;
+}
+
+.show {
+  overflow: visible;
+  height: auto;
+}
+
+.read-more {
+  display: inline-block;
+  color: #16a4fa;
+  background: none;
+  border: none;
+  outline: none;
 }

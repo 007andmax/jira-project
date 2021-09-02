@@ -84,11 +84,20 @@
                     ></app-user-table-subscription> -->
                 </div>
                 <div class="user-detail__row-info-line">
-                    <div class="user-detail__row-info-label qt-mb-4">Notes</div>
+                    <div class="user-detail__row-info-label qt-mb-4">Job description</div>
                     <div
                         class="user-detail__row-info-value"
-                        [textContent]="user.jobDescription"
-                    ></div>
+                        [ngClass]="{'container':!showFullJobDescription}"
+                    >
+                        <span [textContent]="getJobDescription(user.jobDescription)"></span>
+                        <button
+                            *ngIf="!showFullJobDescription && user.jobDescription && user.jobDescription.length > 120"
+                            (click)="showFullJobDescription = !showFullJobDescription"
+                            class="read-more"
+                        >
+                            read more...
+                        </button>
+                    </div>
                 </div>
                 <hr class="user-detail-aside__divider">
                 <div class="user-detail__row-info-line">

@@ -21,8 +21,12 @@ export class TicketsFilter {
     selectedTechUser: User = null;
     selectedUser: User = null;
     selectedStatus: string = null;
+    size: number = 15;
     constructor() {
         this.onInitUser();
+    }
+    public setSize(data) {
+        this.size = data;
     }
     public setStatus(data) {
         this.selectedStatus = data;
@@ -159,6 +163,9 @@ export class TicketsFilter {
     public onInitAll() {
         this.payloadAll = this.getAllPayLoad();
         this.payloadAll.offset = 0;
+    }
+    public onSetSizeAll() {
+        this.payloadAll.size = this.size;
     }
     public onInitUnassigned() {
         this.payloadUnassigned = this.getUnassignedPayLoad();
