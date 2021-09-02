@@ -448,6 +448,8 @@ import { CompanyAddAsideShortComponent } from './components/companies/company-ad
 import { CompanyAddAsideFullComponent } from './components/companies/company-add-aside/company-add-aside-full/company-add-aside-full.component';
 import { CommonModule, HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { HomeComponent } from './components/home/home.component';
+import { CompanyDeviceBetaComponent } from './components/company-device-beta/company-device-beta.component';
+import { DeviceBeta } from './pipe/device-beta.pipe';
 
 
 declare var $: any;
@@ -852,7 +854,9 @@ declare var $: any;
     CompaniesFilterComponent,
     CompanyAddAsideShortComponent,
     CompanyAddAsideFullComponent,
-    HomeComponent
+    HomeComponent,
+    CompanyDeviceBetaComponent,
+    DeviceBeta
   ],
   imports: [
     BrowserModule,

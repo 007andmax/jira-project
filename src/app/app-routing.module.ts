@@ -60,6 +60,7 @@ import { DocumentsEditComponent } from './components/documents/documents-edit/do
 import { DocumentPreviewComponent } from './components/documents/document-preview/document-preview.component';
 import { CompanyDocumentsComponent } from './components/companies/company-documents/company-documents.component';
 import { HomeComponent } from './components/home/home.component';
+import { CompanyDeviceBetaComponent } from './components/company-device-beta/company-device-beta.component';
 
 const routes: Routes = [
 
@@ -309,6 +310,10 @@ const routes: Routes = [
     path: ':company/company/:id/devices',
     component: CompanyDevicesComponent,
 
+  },
+  {
+    path: ':company/company/:id/devices-beta',
+    component: CompanyDeviceBetaComponent,
   },
   {
     path: ':company/quickSupport',

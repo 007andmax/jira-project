@@ -4,7 +4,6 @@ import { map } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import * as CryptoJS from "crypto-js";
 
-
 @Injectable({
   providedIn: "root",
 })
@@ -62,35 +61,33 @@ export class AgentService {
     this.AccessToken = data;
   }
 
-  public addNewTag(Tag)
-  {
+  public addNewTag(Tag) {
     return this.http
-    .put(
-      `${this.apiAgent}agent/Tag`,
-      this.encrypt128(this.key, JSON.stringify(Tag)),
-      { headers: this.getHeader(), responseType: "text" }
-    )
-    .pipe(map((data: string) => data));
+      .put(
+        `${this.apiAgent}agent/Tag`,
+        this.encrypt128(this.key, JSON.stringify(Tag)),
+        { headers: this.getHeader(), responseType: "text" }
+      )
+      .pipe(map((data: string) => data));
   }
 
-  public deleteSoftware(data)
-  {
+  public deleteSoftware(data) {
     const httpOptions = {
       headers: this.getHeader(),
       body: this.encrypt128(this.key, JSON.stringify(data)),
     };
     return this.http
-      .delete(`${this.apiAgent}agent/SoftwareItem`,httpOptions)
-      .pipe(map((data:string)=>data));
+      .delete(`${this.apiAgent}agent/SoftwareItem`, httpOptions)
+      .pipe(map((data: string) => data));
   }
 
-  public getSoftwareListByAssetId(asset_id){
+  public getSoftwareListByAssetId(asset_id) {
     return this.http
-      .get(`${this.apiAgent}agent/SoftwareItem/${asset_id}`,{
+      .get(`${this.apiAgent}agent/SoftwareItem/${asset_id}`, {
         headers: this.getHeader(),
-        responseType:"text",
+        responseType: "text",
       })
-      .pipe(map((data:string)=> this.decrypt128(data, this.key)));
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
   }
 
   public overrideAsset(data) {
@@ -103,44 +100,44 @@ export class AgentService {
       .pipe(map((data: string) => data));
   }
 
-  public overrideOperationSystem(system)
-  {
+  public overrideOperationSystem(system) {
     return this.http
-    .post(
-      `${this.apiAgent}agent/OperatingSystem`,
-      this.encrypt128(this.key,JSON.stringify(system)),
-      {
-        headers: this.getHeader(),
-        responseType: "text",
-      }
-    )
-    .pipe(map((data:string)=>data));
+      .post(
+        `${this.apiAgent}agent/OperatingSystem`,
+        this.encrypt128(this.key, JSON.stringify(system)),
+        {
+          headers: this.getHeader(),
+          responseType: "text",
+        }
+      )
+      .pipe(map((data: string) => data));
   }
 
-
-  public overrideAssetNotes(notes)
-  {
+  public overrideAssetNotes(notes) {
     delete notes.CreateDate;
     return this.http
-      .post(`${this.apiAgent}agent/AssetNote`,
-          this.encrypt128(this.key,JSON.stringify(notes)),
-          {
-            headers: this.getHeader(),
-            responseType: "text",
-          })
-          .pipe(map((data:string)=> data));
+      .post(
+        `${this.apiAgent}agent/AssetNote`,
+        this.encrypt128(this.key, JSON.stringify(notes)),
+        {
+          headers: this.getHeader(),
+          responseType: "text",
+        }
+      )
+      .pipe(map((data: string) => data));
   }
 
-  public addAssetNotes(notes)
-  {
+  public addAssetNotes(notes) {
     return this.http
-    .put(`${this.apiAgent}agent/AssetNote`,
-    this.encrypt128(this.key,JSON.stringify(notes)),
-    {
-      headers:this.getHeader(),
-      responseType: "text",
-    })
-    .pipe(map((data:string)=> data));
+      .put(
+        `${this.apiAgent}agent/AssetNote`,
+        this.encrypt128(this.key, JSON.stringify(notes)),
+        {
+          headers: this.getHeader(),
+          responseType: "text",
+        }
+      )
+      .pipe(map((data: string) => data));
   }
 
   public getAssetNotes(asset_id) {

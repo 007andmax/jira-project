@@ -214,6 +214,7 @@
                                             </span>
 
 
+
                                             <span
                                                 class="drive-limit"
                                                 *ngIf="drive.FreeSpace != '' && drive.Size != ''"
@@ -486,6 +487,7 @@
                 </div>
 
 
+
                 <div
                     class="sidebar-popup note"
                     [class.opened]="editNote"
@@ -520,7 +522,7 @@
                                             placeholder="Write Ticket subject"
                                             required
                                             class="form-input"
-                                            [(ngModel)]="noteEdit.Title"
+                                            [(ngModel)]="notesTitle"
                                             id="title"
                                             name="title"
                                             #title="ngModel"
@@ -541,7 +543,7 @@
                                             class="form-input"
                                             placeholder="Write Description here…"
                                             required
-                                            [(ngModel)]="noteEdit.Description"
+                                            [(ngModel)]="notesDescription"
                                             id="description"
                                             name="description"
                                             #description="ngModel"

@@ -1,0 +1,104 @@
+<div class="qt-page-list company-devices-beta-page">
+    <div class="qt-page-list__header --sticky">
+        <div class="qt-page-list__header-title-line--left">
+            <h3
+                class="qt-page-list__header-title"
+                [textContent]="'Devices'"
+            ></h3>
+            <form method="GET">
+                <input
+                    type="search"
+                    class="form-input-search device-beta-search"
+                    [(ngModel)]="search"
+                    name="search"
+                    placeholder="Search Devices…"
+                    autocomplete="off"
+                >
+            </form>
+        </div>
+
+        <div class="qt-page-list__header-thead-container">
+            <table class="qt-table-modern qt-page-list__header-thead">
+                <thead>
+                    <tr>
+                        <th class="company-devices-table__check">
+                            <div class="d-f">
+                                <label class="qt-checkbox">
+                                    <input
+                                        type="checkbox"
+                                        [(ngModel)]="selectAllDevices"
+                                        (change)="toogleDevices()"
+                                    >
+                                    <span></span>
+                                </label>
+                            </div>
+                        </th>
+                        <th class="company-devices-table__device-types"></th>
+                        <th
+                            class="company-devices-table__device-name pointer"
+                            (click)="onFilter('Name')"
+                        >
+                            Device Name
+                            <span class="qt-table-modern__sorting"></span>
+                        </th>
+                        <th class="company-devices-table__windows">Windows</th>
+                        <th class="company-devices-table__ip-address">Ip address</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+    <div class="qt-df qt-fd-c qt-jc-sb">
+        <div class="qt-page-list__body">
+            <div class="qt-page-list__body-table-container">
+                <table class="qt-page-list__body-tbody qt-table-modern company-devices-table">
+                    <tbody>
+                        <tr *ngFor="let asset of AssetList | beta: search; let i = index">
+                            <td class="company-devices-table__check">
+                                <div class="d-f">
+                                    <label class="qt-checkbox">
+                                        <input
+                                            type="checkbox"
+                                            [(ngModel)]="asset.selected"
+                                            (change)="onSelectDevice()"
+                                        >
+                                        <span></span>
+                                    </label>
+                                </div>
+                            </td>
+                            <td class="company-devices-table__device-type">
+                                <img
+                                    src="/assets/img/icons/computer.svg"
+                                    alt
+                                >
+                            </td>
+                            <td class="company-devices-table__device-name">{{ asset.Name || "N/A" }}</td>
+                            <td class="company-devices-table__windows">{{ asset.Caption || "N/A" }}</td>
+                            <td class="company-devices-table__ip-address">{{ asset.InternalIPAddress || "N/A" }}</td>
+                            <td class="company-devices-table__go-to">
+                                <ng-template
+                                    #tipDeviceDetail
+                                    class="tooltip"
+                                >
+                                    Device Detail
+                                </ng-template>
+                                <div
+                                    class="qt-ic-c icon__go-to qt-pointer qt-sz-24 qt-bgsz-16"
+                                    placement="top"
+                                    *ngIf="asset.ID"
+                                    [ngbTooltip]="tipDeviceDetail"
+                                    (click)="gotiDetailDevice(asset.Guid)"
+                                ></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div
+                class="loading"
+                *ngIf="showPreloader"
+            ></div>
+        </div>
+    </div>
+</div>

@@ -42,8 +42,6 @@ export class SoftwareComponent implements OnInit, OnDestroy {
 
   constructor(
     private toastr: ToastrService,
-    private deviceDetailService: DeviceDetailService,
-    private hardwareService: HardwareService,
     private router: Router,
     private excelService: ExcelService,
     private companiesStateService: CompaniesStateService,

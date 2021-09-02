@@ -60,6 +60,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   currentUser: string = "";
   caption: string = "";
   serialnumber: string = "";
+  notesTitle: string ="";
+  notesDescription: string="";
 
   constructor(
     private agentService: AgentService,
@@ -79,10 +81,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   setPreviewDataDevice() {
-    this.deviceDetail = JSON.parse(
-      localStorage.getItem("deviceDetail_" + this._id)
-    );
-    this.hostName = this.deviceDetail.hostName;
     this.currentUser = localStorage.getItem("currentUser");
     this.agentService
       .getAgentToken(
@@ -92,9 +90,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
       .subscribe((data) => {
         this.agentService.setAccessToken(data.AccessToken);
         this.getAssetDetail();
-        this.agentService
-          .getAssetsByCompanyId("fdadb2df-ed3d-4e28-b41e-741617b7ffa6")
-          .subscribe((res) => {});
       });
   }
 
@@ -112,12 +107,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
     );
   }
 
-  editAssetNote(frm) {
+  editAssetNote() {
     this.noteEdit.AssetID = this.asset.ID;
+    this.noteEdit.Title = this.notesTitle;
+    this.noteEdit.Description = this.notesDescription;
     this.agentService.overrideAssetNotes(this.noteEdit).subscribe(
       (res) => {
         this.editCloseNotes();
-        //this.getAssetNotesDetail();
         this.toastr.success("Asset Notes save successfully.");
       },
       (error) => {
@@ -143,6 +139,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   editNotes(id: any) {
     this.noteEdit = this.assetNotes.find((x) => x.ID == id);
+    this.notesTitle = this.noteEdit.Title;
+    this.notesDescription = this.noteEdit.Description ;
     this.editNote = !this.editNote;
   }
 
@@ -377,7 +375,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   updateSerialNo() {
-    this.operatingSystem;
     this.operatingSystem.SerialNumber = this.serialnumber;
     this.agentService.overrideOperationSystem(this.operatingSystem).subscribe(
       (resp) => {

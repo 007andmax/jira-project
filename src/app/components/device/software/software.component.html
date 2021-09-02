@@ -112,14 +112,14 @@
                                         <div class="cmn-checkbox">
                                             <input
                                                 type="checkbox"
-                                                name="check_{{i}}"
+                                                [attr.name]="'check_' + i"
                                                 (change)="selectedRecord('single', i);"
-                                                id="check_{{i}}"
+                                                [attr.id]="'check_' + i"
                                                 [(ngModel)]="software.checked"
                                                 [value]="true"
                                             >
                                             <label
-                                                for="check_{{i}}"
+                                                [attr.for]="'check_' + i"
                                                 aria-label="checkbox"
                                             ></label>
                                         </div>

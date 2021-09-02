@@ -49,6 +49,12 @@
         <!-- <div class="qt-sz-16 icon__create-folder"></div> -->
     </li>
     <li
+        [ngClass]="{'--active':activePage === 'company-devices-beta'}"
+        (click)="goToCompanySection('devices-beta')"
+    >
+        <div>Devices Beta</div>
+    </li>
+    <li
         [ngClass]="{'--active':activePage === 'company-network-scan'}"
         (click)="goToCompanySection('network-scan')"
     >
