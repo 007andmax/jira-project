@@ -498,6 +498,9 @@ import { ContractsTableModule } from './components/billing/contracts/contracts-t
 import { ContractsAsideModule } from './components/billing/contracts/contracts-aside/contracts-aside.module';
 import { DocumentsHeaderModule } from './components/documents/documents-header/documents-header.module';
 import { DocumentsTemplatesInfoModule } from './components/documents/documents-templates/documents-templates-info/documents-templates-info.module';
+import { InvoiceFormEditCustomerModule } from './components/billing/billable/billable-aside/invoice-form/invoice-form-edit-customer/invoice-form-edit-customer.module';
+import { InvoiceRegularNoteModule } from './components/billing/billable/billable-aside/invoice-form/invoice-regular-note/invoice-regular-note.module';
+import { TicketProfileUpdatesServiceTimepickerModule } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-timepicker/ticket-profile-updates-service-timepicker.module';
 
 
 declare var $: any;
@@ -669,7 +672,7 @@ declare var $: any;
     TicketProfileUpdatesFooterComponent,
     TicketProfileUpdatesServiceComponent,
     // TicketProfileUpdatesServiceDurationComponent,
-    TicketProfileUpdatesServiceTimepickerComponent,
+    // TicketProfileUpdatesServiceTimepickerComponent,
     TicketProfileUpdatesServiceInfoComponent,
     TicketProfileUpdatesServiceEditComponent,
     TicketProfileUpdatesServiceItemComponent,
@@ -694,20 +697,20 @@ declare var $: any;
     LeftPanelSettingsComponent,
     BillableComponent,
     BillableItemComponent,
-    BillableAsideComponent,
-    InvoiceFormComponent,
-    BillableTicketsComponent,
-    InvoiceFormEditCustomerComponent,
-    InvoicePreviewComponent,
-    InvoiceAddNoteComponent,
-    InvoiceSelectNoteComponent,
-    InvoiceRegularNoteComponent,
+    // BillableAsideComponent,
+    //  InvoiceFormComponent,
+    // BillableTicketsComponent,
+    // InvoiceFormEditCustomerComponent,
+    //InvoicePreviewComponent,
+    //InvoiceAddNoteComponent,
+    //  InvoiceSelectNoteComponent,
+    // InvoiceRegularNoteComponent,
     //   TicketsFilterComponent,
-    InvoiceFormTicketInfoComponent,
-    InvoiceFormTicketEditComponent,
-    InvoiceFormTicketEditServiceComponent,
-    InvoiceFormTicketEditProductComponent,
-    InvoiceDiscountComponent,
+    // InvoiceFormTicketInfoComponent,
+    // InvoiceFormTicketEditComponent,
+    // InvoiceFormTicketEditServiceComponent,
+    //InvoiceFormTicketEditProductComponent,
+    // InvoiceDiscountComponent,
     ContractsComponent,
     CreateContractsComponent,
     //  ContractsHeaderComponent,
@@ -990,7 +993,10 @@ declare var $: any;
     ContractsTableModule,
     ContractsAsideModule,
     DocumentsHeaderModule,
-    DocumentsTemplatesInfoModule
+    DocumentsTemplatesInfoModule,
+    InvoiceFormEditCustomerModule,
+    InvoiceRegularNoteModule,
+    TicketProfileUpdatesServiceTimepickerModule
   ],
   entryComponents: [
     ModalQuoteComponent,

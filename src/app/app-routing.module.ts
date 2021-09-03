@@ -233,7 +233,8 @@ const routes: Routes = [
   },
   {
     path: ':company/billable-tickets',
-    component: BillableTicketsComponent,
+    loadChildren: './components/billing/billable/billable-tickets/billable-tickets.module#BillableTicketsModule'
+
   },
   {
     path: ':company/contracts',
