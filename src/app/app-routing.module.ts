@@ -287,7 +287,7 @@ const routes: Routes = [
   },
   {
     path: ':company/billing-dashboard',
-    component: DashboardBillingComponent,
+    loadChildren: './components/billing/dashboard-billing/dashboard-billing.module#DashboardBillingModule',
     canActivate: [PermissionDasnboardBillingService]
 
   },

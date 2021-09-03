@@ -501,6 +501,7 @@ import { DocumentsTemplatesInfoModule } from './components/documents/documents-t
 import { InvoiceFormEditCustomerModule } from './components/billing/billable/billable-aside/invoice-form/invoice-form-edit-customer/invoice-form-edit-customer.module';
 import { InvoiceRegularNoteModule } from './components/billing/billable/billable-aside/invoice-form/invoice-regular-note/invoice-regular-note.module';
 import { TicketProfileUpdatesServiceTimepickerModule } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-timepicker/ticket-profile-updates-service-timepicker.module';
+import { DashboardStatsModule } from './components/billing/dashboard-billing/dashboard-stats/dashboard-stats.module';
 
 
 declare var $: any;
@@ -790,15 +791,15 @@ declare var $: any;
     //  ContractsAsideProductServicePreviewComponent,
     // ContractsAsideProductServiceEditComponent,
     ContractsAsideOtherServiceEditComponent,
-    DashboardBillingComponent,
-    InvoiceRevenueComponent,
-    MultiDatepickerDashboardComponent,
-    ContractsDashboardComponent,
-    TopDashboardComponent,
-    TopProductDashboardComponent,
-    DashboardStatsComponent,
-    DashboardQuotesComponent,
-    DashboardSalesAnalyticsComponent,
+    //   DashboardBillingComponent,
+    //  InvoiceRevenueComponent,
+    //  MultiDatepickerDashboardComponent,
+    //  ContractsDashboardComponent,
+    //  TopDashboardComponent,
+    // TopProductDashboardComponent,
+    // DashboardStatsComponent,
+    //  DashboardQuotesComponent,
+    // DashboardSalesAnalyticsComponent,
     // CompanyContractsComponent,
     QuotesTableComponent,
     QuotesHeaderComponent,
@@ -996,7 +997,8 @@ declare var $: any;
     DocumentsTemplatesInfoModule,
     InvoiceFormEditCustomerModule,
     InvoiceRegularNoteModule,
-    TicketProfileUpdatesServiceTimepickerModule
+    TicketProfileUpdatesServiceTimepickerModule,
+    DashboardStatsModule
   ],
   entryComponents: [
     ModalQuoteComponent,
