@@ -572,7 +572,7 @@ declare var $: any;
     // FilterPipe,
     ClickOtsideDirective,
     SortByPipe,
-    UsersComponent,
+    //   UsersComponent,
     //  UsersHeaderComponent,
     // UsersTableComponent,
     UsersAsideComponent,

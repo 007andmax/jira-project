@@ -107,8 +107,7 @@ const routes: Routes = [
     loadChildren: './components/companies/companies.module#CompaniesModule'
   }, {
     path: ':company/users',
-    component: UsersComponent,
-    pathMatch: 'full'
+    loadChildren: './components/users/users.module#UsersModule'
   },
   {
     path: ':company/reports',
