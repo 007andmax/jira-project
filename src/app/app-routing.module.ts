@@ -221,7 +221,8 @@ const routes: Routes = [
 
   {
     path: ':company/billable',
-    component: BillableComponent,
+    loadChildren: './components/billing/billable/billable.module#BillableModule'
+
   },
   {
     path: ':company/default-services',
