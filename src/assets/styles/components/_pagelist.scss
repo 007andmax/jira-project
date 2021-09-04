@@ -3,6 +3,11 @@
   background-color: $background;
   min-height: calc(100vh - #{$header-height});
 
+  // TODO mobile style
+  @media (max-width: 767px) {
+    padding: 8px 0;
+  }
+
   &__header {
     background-color: $background;
     margin: 0 auto;
@@ -14,6 +19,10 @@
       top: $header-height;
       padding-top: 24px;
       margin-top: -24px;
+      // TODO mobile style
+      @media (max-width: 767px) {
+        top: 0;
+      }
     }
   }
 
@@ -58,6 +67,12 @@
   &__header-thead,
   &__body-tbody {
     min-width: 1064px;
+
+    // TODO mobile style
+    @media (max-width: 767px) {
+     min-width: 100%;
+     width: 100%;
+    }
   }
 
   &__back-button {

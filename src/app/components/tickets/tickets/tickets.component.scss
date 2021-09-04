@@ -12,71 +12,71 @@
 
 
 /deep/ .ticket-table {
-  &__requested-by {
-    max-width: 166px;
-    width: 166px;
-    min-width: 166px;
-  }
-  &__subject {
-    max-width: 345px;
-    width: 345px;
-    min-width: 345px;
-  }
-  &__company {
-    max-width: 148px;
-    width: 148px;
-    min-width: 148px;
-
-  }
-  &__assignee {
-     max-width: 147px;
-     width: 147px;
-     min-width: 147px;
-     overflow: auto !important;
-  }
-  &__status {
-    max-width: 100px;
-    width: 100px;
-    min-width: 100px;
-  }
-  &__created-date {
-     max-width: 100px;
-     width: 100px;
-     min-width: 100px;
-  }
+  //&__requested-by {
+  //  max-width: 166px;
+  //  width: 166px;
+  //  min-width: 166px;
+  //}
+  //&__subject {
+  //  max-width: 345px;
+  //  width: 345px;
+  //  min-width: 345px;
+  //}
+  //&__company {
+  //  max-width: 148px;
+  //  width: 148px;
+  //  min-width: 148px;
+  //
+  //}
+  //&__assignee {
+  //   max-width: 147px;
+  //   width: 147px;
+  //   min-width: 147px;
+  //   overflow: auto !important;
+  //}
+  //&__status {
+  //  max-width: 100px;
+  //  width: 100px;
+  //  min-width: 100px;
+  //}
+  //&__created-date {
+  //   max-width: 100px;
+  //   width: 100px;
+  //   min-width: 100px;
+  //}
 }
 
 @media (min-width: 1920px) {
   /deep/ .ticket-table {
-    &__requested-by {
-      max-width: 300px;
-      width: 300px;
-      min-width: 300px;
-    }
-    &__company {
-      max-width: 250px;
-      width: 250px;
-      min-width: 250px;
-    }
-    &__status {
-      max-width: 110px;
-      width: 110px;
-      min-width: 110px;
-    }
-    &__created-date {
-       max-width: 110px;
-       width: 110px;
-       min-width: 110px;
-    }
-    &__assignee {
-      max-width: 180px;
-      width: 180px;
-      min-width: 180px;
-      overflow: auto !important;
-   }
-    &__subject {
-      // max-width: 650px;
-      width: max-content;
-    }
+   // &__requested-by {
+   //   max-width: 300px;
+   //   width: 300px;
+   //   min-width: 300px;
+   // }
+   // &__company {
+   //   max-width: 250px;
+   //   width: 250px;
+   //   min-width: 250px;
+   // }
+   // &__status {
+   //   max-width: 110px;
+   //   width: 110px;
+   //   min-width: 110px;
+   // }
+   // &__created-date {
+   //    max-width: 110px;
+   //    width: 110px;
+   //    min-width: 110px;
+   // }
+   // &__assignee {
+   //   max-width: 180px;
+   //   width: 180px;
+   //   min-width: 180px;
+   //   overflow: auto !important;
+   //}
+   // &__subject {
+   //   // max-width: 650px;
+   //   width: max-content;
+   // }
   }
 }

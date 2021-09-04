@@ -252,6 +252,13 @@
   &__menu-expand.icon-list li {
     justify-content: flex-start;
   }
+
+  // TODO mobile style
+  @media (max-width: 767px) {
+    position: fixed;
+    height: 0;
+    opacity: 0;
+  }
 }
 
 .app-left-panel.--mini {
