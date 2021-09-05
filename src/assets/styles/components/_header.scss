@@ -14,6 +14,11 @@
   align-items: center;
   justify-content: space-between;
 
+  // TODO mobile style
+  @media (max-width: 767px) {
+    right: -100%;
+  }
+
   &.--full-width {
     width: calc(100% - #{$left-panel-mini-width});
   }

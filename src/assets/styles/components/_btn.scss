@@ -72,7 +72,7 @@
   background-color: $white;
   color: $primary-2;
   border: none;
-  background-image: url(/assets/img/icons/filter.svg);
+  background-image: url('/assets/img/icons/filter.svg');
   &.active {
     background-color: #16a4fa10;
     color: $primary-1;

@@ -8,6 +8,21 @@
     padding: 8px 0;
   }
 
+  &.page-list-ticket {
+    // TODO mobile style
+    @media (max-width: 767px) {
+      padding: 0;
+    }
+    .icon__menu-white {
+      display: none;
+
+      // TODO mobile style
+      @media (max-width: 767px) {
+        display: block;
+      }
+    }
+  }
+
   &__header {
     background-color: $background;
     margin: 0 auto;
@@ -22,13 +37,33 @@
       // TODO mobile style
       @media (max-width: 767px) {
         top: 0;
+        background: $primary-2;
+        padding: 16px 16px;
+        margin-bottom: 8px;
+        margin-top: 0;
+        margin-left: -8px;
+        margin-right: 8px;
+        width: calc(100% + 16px);
       }
     }
   }
 
   &__header-title {
-    @extend %h6-sb;
+    //@extend %h6-sb; // TODO fix problem with Cascading mobile styles
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: -0.5px;
+    font-weight: 600;
     color: $primary-2;
+
+    // TODO mobile style
+    @media (max-width: 767px) {
+      color: $white;
+      font-size: 16px; // TODO Replace style with extensions
+      line-height: 24px;
+      letter-spacing: 0;
+      font-weight: 600;
+    }
   }
 
   &__header-title-line {
@@ -47,6 +82,11 @@
     margin-top: 16px;
     width: 100%;
     align-items: center;
+
+    // TODO mobile style
+    @media (max-width: 767px) {
+      margin-top: 0;
+    }
   }
 
   &__header-thead-container,

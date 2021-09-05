@@ -13,8 +13,22 @@
   background-color: $white;
   color: $primary-2;
   border: none;
-  background-image: url(../../../../../assets/img/icons/filter.svg);
-
+  background-image: url('../../../../../assets/img/icons/filter.svg');
+  // TODO mobile style
+  @media (max-width: 767px) {
+    background-image: url('/assets/img/icons/filter-white.svg');
+    background-color: transparent;
+    background-size: 24px;
+    height: 24px;
+    width: 24px;
+    background-position: center;
+    padding: 0;
+  }
+  span {
+    @media (max-width: 767px) {
+      display: none;
+    }
+  }
   &.active {
     color: $primary-1;
     background-color: #16a4fa10;

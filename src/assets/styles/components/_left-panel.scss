@@ -255,9 +255,7 @@
 
   // TODO mobile style
   @media (max-width: 767px) {
-    position: fixed;
-    height: 0;
-    opacity: 0;
+    left: -100%;
   }
 }
 

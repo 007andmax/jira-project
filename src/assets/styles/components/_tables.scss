@@ -84,6 +84,7 @@ table.qt-table-modern {
   &__row {
     display: flex;
     margin-bottom: 2px;
+    position: relative;
     // TODO mobile style
     @media (max-width: 767px) {
       flex-wrap: wrap;
@@ -91,6 +92,7 @@ table.qt-table-modern {
       background: $white;
       border-radius: 8px;
       margin-bottom: 8px;
+      box-shadow: 0 0 3px rgba(0,0,0,.05)
     }
 
     & > div {
@@ -188,6 +190,7 @@ table.qt-table-modern {
       @media (max-width: 767px) {
         flex: 1 0 60%;
         order: -1;
+        color: $gray-700;
       }
     }
 
@@ -265,7 +268,7 @@ table.qt-table-modern {
 }
 @media (max-width: 767px) {
  .page-list-ticket {
-   app-tickets-header {
+   .qt-page-list__header-thead-container {
      display: none;
    }
  }

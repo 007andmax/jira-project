@@ -34,6 +34,16 @@
     }
   }
 }
+// TODO mobile style
+.qt-d-none {
+  display: none;
+}
+// TODO add mixin
+.qt-md-d-none {
+  @media (max-width: 767px) {
+    display: none !important;
+  }
+}
 
 .qt-df {
   display: flex;

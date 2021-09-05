@@ -162,6 +162,15 @@
   &__close {
     background-image: url("/assets/img/icons/close.svg");
   }
+  &__menu-white {
+    background-image: url("/assets/img/icons/menu-white.svg");
+  }
+  &__tickets-gray {
+    background-image: url("/assets/img/icons/tickets-gray.svg");
+  }
+  &__company-gray {
+    background-image: url("/assets/img/icons/company-gray.svg");
+  }
   &__remove {
     background-image: url("/assets/img/icons/remove.svg");
   }
@@ -233,6 +242,9 @@
   }
   &__user-account {
     background-image: url("/assets/img/icons/local-user-account.svg");
+  }
+  &__users-gray {
+    background-image: url("/assets/img/icons/users-gray.svg");
   }
   &__get-direction {
     background-image: url("/assets/img/icons/get-direction.svg");
@@ -473,6 +485,12 @@
   &__block-time-billing {
     background-image: url("/assets/img/icons/block-time-billing.svg");
   }
+  &__billing-gray {
+    background-image: url("/assets/img/icons/billing-gray.svg");
+  }
+  &__inventory-gray {
+    background-image: url("/assets/img/icons/inventory-gray.svg");
+  }
   &__contract-claim-ticket {
     background-image: url("/assets/img/icons/contract-claim-ticket.svg");
   }
@@ -524,6 +542,9 @@
   }
   &__search {
     background-image: url("/assets/img/icons/search.svg");
+  }
+  &__search-white {
+    background-image: url("/assets/img/icons/search-white.svg");
   }
   &__search-gray {
     background-image: url("/assets/img/icons/search-gray.svg");
@@ -772,13 +793,35 @@
   background-size: contain;
   display: inline-block;
 
+  @media (max-width: 767px) {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 5px;
+    height: 100%;
+    border-radius: 8px 0 0 8px;
+  }
+
   &.--high {
     background-image: url("/assets/img/icons/priority-high.png");
+
+    @media (max-width: 767px) {
+      background: $error;
+    }
   }
   &.--medium {
     background-image: url("/assets/img/icons/priority-medium.png");
+
+    @media (max-width: 767px) {
+      background: $warning;
+    }
   }
   &.--low {
     background-image: url("/assets/img/icons/priority-low.png");
+
+    @media (max-width: 767px) {
+      background: $success;
+    }
   }
 }
+
