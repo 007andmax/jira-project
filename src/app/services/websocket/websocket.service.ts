@@ -25,6 +25,7 @@ import { AppService } from '../../states/app/app.service';
 import { PasswordManagerStateService } from '../../states/password-manager/password-manager-state.service';
 import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service';
 import { DocumentsRealTimeService } from 'src/app/states/documents/documents-real-time.service';
+import { KafkaRealTimeService } from 'src/app/states/kafka/kafka-real-time.service';
 
 /**
  * Websocket service to work with api
@@ -67,6 +68,7 @@ export class WebsocketService {
     private shellRealTimeService: ShellRealTimeService,
     private tagsRealTimeService: TagsRealTimeService,
     private documentsRealTimeService: DocumentsRealTimeService,
+    private kafkaRealTimeService: KafkaRealTimeService
 
   ) {
   }
@@ -100,8 +102,11 @@ export class WebsocketService {
       that.subsribeToTags();
       that.subsribeToDocuments();
       that.subsribeToDocumentsCategory();
+      that.subsribeToKafka();
     });
   }
+
+
   private subsribeToDevices() {
     setTimeout(() => {
       this.stompClient.subscribe(`/user/watch/device`, (message) => {
@@ -450,6 +455,15 @@ export class WebsocketService {
 
       });
 
+    }, 3000);
+  }
+
+  public subsribeToKafka() {
+    setTimeout(() => {
+      this.stompClient.subscribe(`/kafka`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.kafkaRealTimeService.handleRealTimeChanges(newChange);
+      });
     }, 3000);
   }
 

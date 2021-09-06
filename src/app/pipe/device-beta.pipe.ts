@@ -12,7 +12,7 @@ export class DeviceBeta implements PipeTransform{
     args = args.toLowerCase();
 
     return items.filter(it => {
-      return it.Name.toLowerCase().includes(args);
+      return it.Title.toLowerCase().includes(args);
     });
   }
 }

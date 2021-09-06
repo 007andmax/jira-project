@@ -69,8 +69,8 @@ export class CompanyDeviceBetaComponent implements OnInit {
       .subscribe((resp) => {
         this.AssetList = resp;
         this.AssetList.forEach((element, index) => {
-          this.AssetList[index].Name =
-            element.Name != "" ? element.Name : element.Domain;
+          this.AssetList[index].Title =
+            element.Title != "" ? element.Title : element.Name;
           this.OperatingSystem(element.ID, index);
         });
       });

@@ -81,6 +81,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   setPreviewDataDevice() {
+    this.agentService.KafkaList().subscribe((resp=>{
+      console.log(resp);
+    }))
     this.currentUser = localStorage.getItem("currentUser");
     this.agentService
       .getAgentToken(

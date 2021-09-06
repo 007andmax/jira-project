@@ -9,6 +9,7 @@ import * as CryptoJS from "crypto-js";
 })
 export class AgentService {
   private apiAgent = environment.apiAgent;
+  private apiurl = environment.apiUrl;
   key: string = "DD2B2B8B6EAE91C7";
   INITIALIZATION_VECTOR: string = "0000000000000000";
   AccessToken: string = "";
@@ -59,6 +60,14 @@ export class AgentService {
 
   public setAccessToken(data) {
     this.AccessToken = data;
+  }
+
+  public KafkaList() {
+    const data = {
+      AssetID: 1,
+      MessageType: "Ack",
+    };
+    return this.http.post(this.apiurl + "sendMessageToKafka", data);
   }
 
   public addNewTag(Tag) {
