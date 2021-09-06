@@ -94,8 +94,8 @@ const routes: Routes = [
   },
   {
     path: ':company/quotes',
-    component: QuotesComponent,
-    pathMatch: 'full'
+    loadChildren: './components/billing/quotes/quotes.module#QuotesModule'
+
   },
   {
     path: ':company/recurring-tickets',
@@ -226,11 +226,12 @@ const routes: Routes = [
   },
   {
     path: ':company/default-services',
-    component: DefaultServicesComponent,
+    loadChildren: './components/billing/default-services/default-services.module#DefaultServicesModule'
   },
   {
     path: ':company/invoices',
-    component: InvoicesComponent,
+    loadChildren: './components/billing/invoices/invoices.module#InvoicesModule'
+
   },
   {
     path: ':company/billable-tickets',
@@ -243,7 +244,8 @@ const routes: Routes = [
   },
   {
     path: ':company/payments',
-    component: PaymentsComponent,
+    loadChildren: './components/billing/payments/payments.module#PaymentsModule'
+
   },
   {
     path: ':company/device/dashboard/:type/:id',
