@@ -240,7 +240,8 @@ const routes: Routes = [
   },
   {
     path: ':company/contracts',
-    component: ContractsComponent,
+    loadChildren: './components/billing/contracts/contracts.module#ContractsModule'
+
   },
   {
     path: ':company/payments',

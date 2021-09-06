@@ -712,7 +712,7 @@ declare var $: any;
     // InvoiceFormTicketEditServiceComponent,
     //InvoiceFormTicketEditProductComponent,
     // InvoiceDiscountComponent,
-    ContractsComponent,
+    // ContractsComponent,
     CreateContractsComponent,
     //  ContractsHeaderComponent,
     // ContractsTableComponent,
