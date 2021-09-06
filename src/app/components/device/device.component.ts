@@ -52,7 +52,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
     private shellStateService: ShellStateService,
     private terminalService: TerminalService,
     private agentService: AgentService
-  ) {}
+  ) { }
 
   openModal(template) {
     if (this.deviceDetail.online === true) {
@@ -89,15 +89,14 @@ export class DeviceComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.type =
       window.location.href.split("/")[
-        window.location.href.split("/").length - 2
+      window.location.href.split("/").length - 2
       ];
     this._id =
       window.location.href.split("/")[
-        window.location.href.split("/").length - 1
+      window.location.href.split("/").length - 1
       ];
     this.usersStateService.onInit();
     this.shellStateService.onInit();
-    this.socketService.initializeWebSocketConnection();
     localStorage.setItem("uuid_" + this._id, uuidv4());
     this.deviceType = this.type;
     if (this.deviceType === "printer") {
@@ -176,11 +175,11 @@ export class DeviceComponent implements OnInit, OnDestroy {
     }
     $("#counter").text(
       this.padNumber(this.totalHours) +
-        " hr : " +
-        this.padNumber(this.totalMinutes) +
-        " min : " +
-        this.padNumber(this.totalSeconds) +
-        " sec"
+      " hr : " +
+      this.padNumber(this.totalMinutes) +
+      " min : " +
+      this.padNumber(this.totalSeconds) +
+      " sec"
     );
   }
   getDevicesByCompany() {
@@ -225,7 +224,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
         (resp) => {
           this.loading = false;
         },
-        (error) => {}
+        (error) => { }
       );
   }
   getConstant(sessionId) {
@@ -245,7 +244,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
             sessionId;
           window.open(url, "_self");
         },
-        (error) => {}
+        (error) => { }
       );
   }
   createConnection(type) {
@@ -325,7 +324,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
         .sendCommand(data)
         .pipe(first())
         .subscribe(
-          (resp) => {},
+          (resp) => { },
           (error) => {
             const statusError = error;
           }

@@ -9,14 +9,14 @@ export class KafkaStateService {
   constructor(
     private agentService: AgentService,
     private kafkaRealTimeService: KafkaRealTimeService
-  ) {}
+  ) { }
 
   public onInit() {
     this.agentService.KafkaList().subscribe((data: any) => {
       console.log(data);
     });
 
-    this.kafkaRealTimeService.changeDeviceArray.subscribe((newChange) => {
+    this.kafkaRealTimeService.changeKafkarray.subscribe((newChange) => {
       console.log(newChange);
     });
   }

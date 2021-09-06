@@ -4,19 +4,19 @@ import { EventEmitter, Injectable } from "@angular/core";
   providedIn: "root",
 })
 export class KafkaRealTimeService {
-  public changeDeviceArray: EventEmitter<any> = new EventEmitter();
+  public changeKafkarray: EventEmitter<any> = new EventEmitter();
 
   /**
    * Quote real time service constructor
    */
 
-  constructor() {}
+  constructor() { }
 
   /**
    * Handle quote real time changes
    * @newChange - new quotes array changes
    */
   public handleRealTimeChanges(newChange) {
-    this.changeDeviceArray.emit(newChange);
+    this.changeKafkarray.emit(newChange);
   }
 }

@@ -460,7 +460,7 @@ export class WebsocketService {
 
   public subsribeToKafka() {
     setTimeout(() => {
-      this.stompClient.subscribe(`/kafka`, (message) => {
+      this.stompClient.subscribe(`/user/watch/kafka`, (message) => {
         var newChange = JSON.parse(message.body);
         this.kafkaRealTimeService.handleRealTimeChanges(newChange);
       });
