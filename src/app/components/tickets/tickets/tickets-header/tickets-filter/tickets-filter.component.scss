@@ -1,3 +1,5 @@
+@import "./src/assets/styles/variable";
+
 .left-panel-ng2__content--filters {
   display: flex;
   app-select-search {
@@ -7,20 +9,102 @@
     }
   }
 
+  .search-users,
+  .search-tech-users,
+  .search-status,
+  .search-company,
+  .light-dropdown.dropdown,
+  app-tickets-filter-tags {
+    @media (max-width: 767px) {
+      margin-bottom: 16px;
+    }
+
+    &::before {
+      color: $primary-2;
+      font-weight: 600;
+      line-height: 20px;
+    }
+  }
+
   .search-company {
     width: 34%;
+
+    @media (max-width: 767px) {
+      width: 100%;
+    }
+
+    &::before {
+      @media (max-width: 767px) {
+        content: "Company";
+      }
+    }
   }
 
   .search-users {
     width: 23%;
+
+    @media (max-width: 767px) {
+      width: 100%;
+    }
+
+    &::before {
+      @media (max-width: 767px) {
+        content: "User";
+      }
+    }
   }
 
   .search-tech-users {
     width: 23%;
+
+    @media (max-width: 767px) {
+      width: 100%;
+    }
+
+    &::before {
+      @media (max-width: 767px) {
+        content: "Tech Team";
+      }
+    }
   }
 
   .search-status {
     width: 20%;
+
+    @media (max-width: 767px) {
+      width: 100%;
+    }
+
+    &::before {
+      @media (max-width: 767px) {
+        content: "Status";
+      }
+    }
   }
 
+  app-tickets-filter-tags {
+    @media (max-width: 767px) {
+      width: 100%;
+    }
+
+    &::before {
+      @media (max-width: 767px) {
+        content: "Tags";
+      }
+    }
+  }
+
+  @media (max-width: 767px) {
+    align-items: flex-start;
+    max-height: calc(100vh - 74px);
+    top: 0;
+    left: 0;
+    background-color: $white;
+    padding: 16px;
+    padding-top: 72px;
+    flex-direction: column;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
 }

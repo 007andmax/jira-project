@@ -3602,6 +3602,10 @@ input.--input-error {
   }
   .mat-form-field {
     background: $white;
+
+    @media (max-width: 767px) {
+      width: 100%;
+    }
   }
   .mat-form-field-wrapper {
     padding: 0;
@@ -3655,6 +3659,20 @@ input.--input-error {
   .mat-chip-list-wrapper {
     .mat-standard-chip {
       padding: 4px 6px 3px 8px;
+    }
+  }
+  .icon__search-white {
+    display: none;
+
+    @media (max-width: 767px) {
+      display: block;
+    }
+  }
+  .left-panel-ng2__content--filters {
+    .qt-dropdown {
+      @media (max-width: 767px) {
+        padding-top: 8px;
+      }
     }
   }
 }

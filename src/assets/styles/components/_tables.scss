@@ -169,6 +169,9 @@ table.qt-table-modern {
 
     &__subject {
       flex: 2 0 345px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
 
       // TODO mobile style
       @media (max-width: 767px) {
