@@ -185,8 +185,8 @@ const routes: Routes = [
   },
   {
     path: ':company/inventory/products',
-    component: InventoryComponent,
-    pathMatch: 'full'
+    loadChildren: './components/inventory/inventory.module#InventoryModule'
+
   },
   {
     path: ':company/documents/add',
