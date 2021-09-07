@@ -315,7 +315,8 @@ const routes: Routes = [
   },
   {
     path: ':company/quickSupport',
-    component: SupportComponent,
+    loadChildren: './components/support/support.module#SupportModule'
+
 
   },
   {
