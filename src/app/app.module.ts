@@ -501,7 +501,6 @@ import { InvoiceFormEditCustomerModule } from './components/billing/billable/bil
 import { InvoiceRegularNoteModule } from './components/billing/billable/billable-aside/invoice-form/invoice-regular-note/invoice-regular-note.module';
 import { TicketProfileUpdatesServiceTimepickerModule } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-timepicker/ticket-profile-updates-service-timepicker.module';
 import { DashboardStatsModule } from './components/billing/dashboard-billing/dashboard-stats/dashboard-stats.module';
-import { TicketsModule } from './components/tickets/tickets/tickets.module';
 import { ServicesListModule } from './components/shared/services-list/services-list.module';
 import { ServiceModule } from './pipe/service/service.module';
 
@@ -818,13 +817,13 @@ declare var $: any;
     //  ProductItemQuoteEditComponent,
     // QuoteAsideEditBodyComponent,
     //  ServiceItemQuoteComponent,
-    TicketsDashboardComponent,
-    RecurringTicketWidgetComponent,
-    TicketsAnalyticsWidgetComponent,
-    TicketPriorityWidgetComponent,
-    TimeOnTicketsWidgetComponent,
-    TicketsBillableHoursWidgetComponent,
-    TechTicketsWidgetComponent,
+    //   TicketsDashboardComponent,
+    //  RecurringTicketWidgetComponent,
+    // TicketsAnalyticsWidgetComponent,
+    //  TicketPriorityWidgetComponent,
+    // TimeOnTicketsWidgetComponent,
+    //  TicketsBillableHoursWidgetComponent,
+    // TechTicketsWidgetComponent,
     //   CompanyNetworkScanComponent,
     //  CompanyDevicesComponent,
     //  CompanyDevicesItemComponent,

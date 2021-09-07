@@ -300,7 +300,8 @@ const routes: Routes = [
   },
   {
     path: ':company/tickets-dashboard',
-    component: TicketsDashboardComponent
+    loadChildren: './components/tickets/tickets-dashboard/tickets-dashboard.module#TicketsDashboardModule'
+
   },
   {
     path: ':company/company/:id/network-scan',
