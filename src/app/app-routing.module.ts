@@ -64,8 +64,8 @@ const routes: Routes = [
 
   {
     path: ':company/tickets',
-    component: TicketsComponent,
-    pathMatch: 'full'
+    loadChildren: './components/tickets/tickets/tickets.module#TicketsModule'
+
   },
 
   {
@@ -99,8 +99,7 @@ const routes: Routes = [
   },
   {
     path: ':company/recurring-tickets',
-    component: RecurringTicketsComponent,
-    pathMatch: 'full'
+    loadChildren: './components/tickets/recurring-tickets/recurring-tickets.module#RecurringTicketsModule'
   },
   {
     path: ':company/companies',

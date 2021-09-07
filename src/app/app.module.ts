@@ -202,7 +202,6 @@ import { TicketEditAsideRightPanelComponent } from './components/tickets/tickets
 import { CompanyTicketsComponent } from './components/company-tickets/company-tickets.component';
 import { CompanyDashboardComponent } from './components/company-dashboard/company-dashboard.component';
 import { InventoryAddBodyComponent } from './components/inventory/inventory-add-aside/inventory-add-body/inventory-add-body.component';
-import { ServicePipe } from './pipe/service.pipe';
 import { LeftPanelSettingsComponent } from './components/left-panel/left-panel-settings/left-panel-settings.component';
 import { BillableComponent } from './components/billing/billable/billable.component';
 import { BillableItemComponent } from './components/billing/billable/billable-item/billable-item.component';
@@ -502,6 +501,9 @@ import { InvoiceFormEditCustomerModule } from './components/billing/billable/bil
 import { InvoiceRegularNoteModule } from './components/billing/billable/billable-aside/invoice-form/invoice-regular-note/invoice-regular-note.module';
 import { TicketProfileUpdatesServiceTimepickerModule } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-timepicker/ticket-profile-updates-service-timepicker.module';
 import { DashboardStatsModule } from './components/billing/dashboard-billing/dashboard-stats/dashboard-stats.module';
+import { TicketsModule } from './components/tickets/tickets/tickets.module';
+import { ServicesListModule } from './components/shared/services-list/services-list.module';
+import { ServiceModule } from './pipe/service/service.module';
 
 
 declare var $: any;
@@ -530,26 +532,26 @@ declare var $: any;
     PasswordCategoryPipe,
     SanitizeHtmlPipe,
     //   QuotesComponent,
-    SelectClientCompanyComponent,
+    //  SelectClientCompanyComponent,
     //  ProductListComponent,
-    ServicesListComponent,
+    // ServicesListComponent,
     //  MultiDatepickerComponent,
     LeftPanelBillingComponent,
     ToNumerPipe,
     ModalQuoteComponent,
-    RecurringTicketsComponent,
-    RecurringTicketsHeaderComponent,
-    RecurringTicketsEditAsideComponent,
-    RecurringTicketsTableComponent,
-    DevicesRecurringTicketsComponent,
-    TagsComponent,
-    IntervalComponent,
-    DurationComponent,
+    //  RecurringTicketsComponent,
+    //  RecurringTicketsHeaderComponent,
+    // RecurringTicketsEditAsideComponent,
+    // RecurringTicketsTableComponent,
+    // DevicesRecurringTicketsComponent,
+    // TagsComponent,
+    // IntervalComponent,
+    //   DurationComponent,
     //  TehUsersComponent,
     //  numberDirective,
 
 
-    RecurringTicketsAddAsideComponent,
+    // RecurringTicketsAddAsideComponent,
     AlertComponent,
 
     LeftPanelCompaniesComponent,
@@ -624,8 +626,8 @@ declare var $: any;
     // ReportAdditionalActionsComponent,
     ReportSendEmailComponent,
     // CompanyUserComponent,
-    TicketsComponent,
-    TicketsTableComponent,
+    //   TicketsComponent,
+    // TicketsTableComponent,
     // TicketsHeaderComponent,
     TicketAddAsideComponent,
     UploadAreaComponent,
@@ -694,7 +696,7 @@ declare var $: any;
     // CompanyTicketsComponent,
     // CompanyDashboardComponent,
     InventoryAddBodyComponent,
-    ServicePipe,
+    //  ServicePipe,
     LeftPanelSettingsComponent,
     //  BillableComponent,
     //  BillableItemComponent,
@@ -998,7 +1000,9 @@ declare var $: any;
     InvoiceFormEditCustomerModule,
     InvoiceRegularNoteModule,
     TicketProfileUpdatesServiceTimepickerModule,
-    DashboardStatsModule
+    DashboardStatsModule,
+    ServicesListModule,
+    ServiceModule
   ],
   entryComponents: [
     ModalQuoteComponent,
