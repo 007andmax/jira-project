@@ -503,6 +503,12 @@ import { TicketProfileUpdatesServiceTimepickerModule } from './components/ticket
 import { DashboardStatsModule } from './components/billing/dashboard-billing/dashboard-stats/dashboard-stats.module';
 import { ServicesListModule } from './components/shared/services-list/services-list.module';
 import { ServiceModule } from './pipe/service/service.module';
+import { DocumentsTableModule } from './components/documents/documents-table/documents-table.module';
+import { DocumentsAddHeaderModule } from './components/documents/documents-add/documents-add-header/documents-add-header.module';
+import { DocumentsAddBodyModule } from './components/documents/documents-add/documents-add-body/documents-add-body.module';
+import { DocumentsAddFooterModule } from './components/documents/documents-add/documents-add-footer/documents-add-footer.module';
+import { DocumentsLinkedModule } from './components/documents/documents-add/documents-add-info/documents-linked/documents-linked.module';
+import { DocumentsAddEditCategoriesModule } from './components/documents/documents-add/documents-add-info/documents-add-edit-categories/documents-add-edit-categories.module';
 
 
 declare var $: any;
@@ -878,30 +884,30 @@ declare var $: any;
     //   PasswordManagerEditLinkedComponent,
     AfterViewInitDirective,
     // TicketsFilterTagsComponent,
-    DocumentsComponent,
+    //  DocumentsComponent,
     LeftPanelDocumentsComponent,
-    DocumentsAddComponent,
-    DocumentsAddBodyComponent,
-    DocumentsAddHeaderComponent,
-    DocumentsAddFooterComponent,
-    DocumentsAddInfoComponent,
-    DocumentsAddEditCategoriesComponent,
-    DocumentsTableComponent,
+    // DocumentsAddComponent,
+    // DocumentsAddBodyComponent,
+    // DocumentsAddHeaderComponent,
+    //DocumentsAddFooterComponent,
+    //  DocumentsAddInfoComponent,
+    // DocumentsAddEditCategoriesComponent,
+    //DocumentsTableComponent,
     // DocumentsHeaderComponent,
     // DocumentsFilterComponent,
-    DocumentsCategoryComponent,
+    // DocumentsCategoryComponent,
     //  PasswordManagerLinkedComponent,
-    DocumentsLinkedComponent,
-    DocumentsTemplatesComponent,
-    DocumentsEditComponent,
-    DocumentsEditInfoComponent,
-    DocumentsTemplatesHeaderComponent,
-    DocumentsTemplatesFilterComponent,
+    //  DocumentsLinkedComponent,
+    //  DocumentsTemplatesComponent,
+    //  DocumentsEditComponent,
+    // DocumentsEditInfoComponent,
+    // DocumentsTemplatesHeaderComponent,
+    // DocumentsTemplatesFilterComponent,
     // DocumentsTemplatesInfoComponent,
-    DocumentsTemplatesItemComponent,
-    DocumentsEditHistoryComponent,
-    FindWithinDocumentComponent,
-    DocumentPreviewComponent,
+    // DocumentsTemplatesItemComponent,
+    //  DocumentsEditHistoryComponent,
+    //  FindWithinDocumentComponent,
+    // DocumentPreviewComponent,
     //  CompanyDocumentsComponent,
     //  CompanyDocumentsTableComponent,
     //  CompaniesFilterComponent,
@@ -1001,7 +1007,13 @@ declare var $: any;
     TicketProfileUpdatesServiceTimepickerModule,
     DashboardStatsModule,
     ServicesListModule,
-    ServiceModule
+    ServiceModule,
+    DocumentsTableModule,
+    DocumentsAddHeaderModule,
+    DocumentsAddBodyModule,
+    DocumentsAddFooterModule,
+    DocumentsLinkedModule,
+    DocumentsAddEditCategoriesModule
   ],
   entryComponents: [
     ModalQuoteComponent,

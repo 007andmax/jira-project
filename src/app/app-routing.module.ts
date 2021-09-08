@@ -190,18 +190,17 @@ const routes: Routes = [
   },
   {
     path: ':company/documents/add',
-    component: DocumentsAddComponent,
-    pathMatch: 'full'
+    loadChildren: './components/documents/documents-add/documents-add.module#DocumentsAddModule'
   },
   {
     path: ':company/documents/edit/:id',
-    component: DocumentsEditComponent,
-    pathMatch: 'full'
+    loadChildren: './components/documents/documents-edit/documents-edit.module#DocumentsEditModule'
+
   },
   {
     path: ':company/documents/category/:id',
-    component: DocumentsCategoryComponent,
-    pathMatch: 'full'
+    loadChildren: './components/documents/documents-category/documents-category.module#DocumentsCategoryModule'
+
   },
   {
     path: ':company/company/:id/documents',
@@ -210,8 +209,8 @@ const routes: Routes = [
   },
   {
     path: ':company/documents/preview/:id',
-    component: DocumentPreviewComponent,
-    pathMatch: 'full'
+    loadChildren: './components/documents/document-preview/document-preview.module#DocumentPreviewModule'
+
   },
   {
     path: ':company/company/:id/products',
@@ -321,12 +320,12 @@ const routes: Routes = [
   },
   {
     path: ':company/documents/templates',
-    component: DocumentsTemplatesComponent,
+    loadChildren: './components/documents/documents-templates/documents-templates.module#DocumentsTemplatesModule'
 
   },
   {
     path: ':company/documents',
-    component: DocumentsComponent,
+    loadChildren: './components/documents/documents.module#DocumentsModule'
 
   },
 
