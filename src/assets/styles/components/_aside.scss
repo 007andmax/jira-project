@@ -15,6 +15,12 @@
   height: calc(100vh - #{$header-height});
   z-index: 5;
 
+  @media (max-width: 767px) {
+    width: 100%;
+    top: 0;
+    height: 100vh;
+  }
+
   &.--large {
     width: 642px;
   }
@@ -32,6 +38,18 @@
     justify-content: space-between;
     padding-left: 32px;
     padding-right: 16px;
+
+    @media (max-width: 767px) {
+      background-color: $primary-2;
+    }
+
+    &-info {
+      @media (max-width: 767px) {
+        width: 100%;
+        justify-content: center;
+        order: 1;
+      }
+    }
   }
 
   &__header-title {
@@ -53,6 +71,10 @@
     overflow: auto;
     height: calc(100% - 127px);
 
+    @media (max-width: 767px) {
+      padding: 16px;
+    }
+
     &.--no-footer {
       height: calc(100% - 67px);;
     }
@@ -71,6 +93,29 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @media (max-width: 767px) {
+      padding: 16px;
+    }
+
+    > div {
+      @media (max-width: 767px) {
+        width: 100%;
+      }
+    }
+
+    .qt-button {
+      @media (max-width: 767px) {
+        width: 100%;
+        justify-content: center;
+        margin: 0;
+      }
+
+      &.--gray {
+        order: -1;
+        margin-right: 12px;
+      }
+    }
   }
 }
 
@@ -96,10 +141,20 @@
   }
 
   &__title {
-    font-size: 20px;
     //font-weight: 500;
     color: $primary-2;
+    //@extend %h5-sb; // TODO fix priority extend
+    font-size: 20px;
+    line-height: 28px;
     font-weight: 600;
+    letter-spacing: -0.5px;
+
+    @media (max-width: 767px) {
+      color: $white;
+      font-size: 16px; // TODO add extend in media
+      line-height: 24;
+      letter-spacing: 0;
+    }
   }
 
   &__body {

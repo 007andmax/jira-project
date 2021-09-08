@@ -1,9 +1,13 @@
 @import './src/assets/styles/variable';
+@import './src/assets/styles/fonts';
 
 .ticket-add-aside {
   .ticket-priority {
       width: 160px;
       font-size: 12px;
+      @media (max-width: 767px) {
+        display: none;
+      }
 
       .dropdown-toggle {
         height: 32px;
@@ -17,19 +21,55 @@
         align-items: center;
       }
   }
+  .icon__close {
+    @media (max-width: 767px) {
+      background-image: url('/assets/img/icons/close-white.svg');
+    }
+  }
+  .qt-input-line {
+    @media (max-width: 767px) {
+      flex-direction: column;
+    }
 
+    .qt-input-block {
+      @media (max-width: 767px) {
+        margin: 0 0 16px 0;
+      }
+
+      &:last-child {
+        @media (max-width: 767px) {
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  .users-to-notify {
+    margin-top: 0;
+  }
+
+  &__priority-level-input {
+    display: none;
+
+    @media (max-width: 767px) {
+      display: block;
+    }
+  }
 }
 
-.qt-aside{
+.qt-aside {
   &__title {
     margin-right: 24px;
   }
 
   &__ticket-name {
-    font-size: 12px;
+    @extend %сaption-l-sb;
     color: $gray-800;
     margin-right: 16px;
-    font-weight: 600;
+
+    @media (max-width: 767px) {
+      display: none;
+    }
   }
 
   .create-ticket-btn {
@@ -44,8 +84,8 @@
 .users-to-notify {
   margin-top: 35px;
   &__title {
-    font-weight: 600;
-    font-size: 12px;
+    @extend %сaption-l-sb;
+    color: $primary-2;
     margin-bottom: 14px;
   }
 
@@ -60,7 +100,7 @@
       margin-right: 4px;
       overflow: hidden;
       color: transparent;
-      background-image: url('/assets/img/icons/assign-user.svg');
+      background-image: url('/assets/img/icons/adduser.svg');
       background-size: cover;
       background-repeat: no-repeat;
   }
@@ -141,9 +181,6 @@
 }
 .assigned-users-type {
   display: flex;
-}
-.assigned-users-type-clients {
-  border-right: 1px solid #ccc;
 }
 #add-ticket-describe-issue {
   height: auto;

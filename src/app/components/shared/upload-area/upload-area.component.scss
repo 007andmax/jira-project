@@ -1,4 +1,5 @@
 @import './src/assets/styles/variable';
+@import './src/assets/styles/fonts';
 
 .qt-fileupload {
   input[type=file] {
@@ -7,19 +8,26 @@
   }
   &__label {
     width: 100%;
-    border: 2px dotted $primary-1;
+    border: 1px dotted $gray-500;
     border-radius: 4px;
     display: block;
     cursor: pointer;
-    background-color: rgba(22, 164, 250, 0.05);
     padding: 24px;
     font-size: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media (max-width: 767px) {
+      padding: 16px;
+    }
   }
   &__title {
     color: $gray-800;
+
+    @media (max-width: 767px) {
+      display: none;
+    }
   }
   &__link {
     text-decoration: underline;
@@ -30,6 +38,23 @@
     margin-right: 8px;
     width: 24px;
     height: 24px;
+
+    @media (max-width: 767px) {
+      display: none;
+    }
+  }
+
+  &__mobile-text {
+    color: $primary-2;
+    @extend %сaption-l-sb;
+    display: none;
+
+    @media (max-width: 767px) {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
   }
 }
 
@@ -76,7 +101,7 @@
 }
 
 .files-list {
-  margin-top: 1.5rem;
+  margin-top: 16px;
 
   .single-file {
     display: flex;

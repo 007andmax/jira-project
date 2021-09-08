@@ -41,7 +41,7 @@ span.qt-input-search input.qt-input-search {
 
 .qt-input-line {
   display: flex;
-  margin-bottom: 17px;
+  margin-bottom: 16px;
   .qt-input-block {
     flex-grow: 1;
     margin-right: 16px;
@@ -58,7 +58,7 @@ span.qt-input-search input.qt-input-search {
 
   &__label {
     @extend %body-m-sb;
-    color: $gray-800;
+    color: $primary-2;
     margin-bottom: 11px;
     line-height: unset;
   }
