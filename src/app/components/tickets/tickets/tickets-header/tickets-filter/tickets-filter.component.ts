@@ -14,6 +14,7 @@ import { SelectSearchComponent } from 'src/app/components/shared/select-search/s
 import { ItemStatus } from 'src/app/components/left-panel/left-panel-tickets/tickets-status/class/item-status';
 import { Subscribable, Subscription } from 'rxjs';
 import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service';
+import { AppService } from 'src/app/states/app/app.service';
 
 @Component({
   selector: 'app-tickets-filter',
@@ -41,6 +42,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   blockFilterUser: boolean = false;
   ticketsCounts: TicketsCounts;
   sub: Subscription = new Subscription();
+  @Output() onClose = new EventEmitter();
   @Output() changeCountFilter = new EventEmitter<any>();
   constructor(private ticketsStateService: TicketsStateService,
     private companiesState: CompaniesStateService,
@@ -49,6 +51,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     private companiesService: CompaniesService,
     private elRef: ElementRef,
     public cd: ChangeDetectorRef,
+    private appService: AppService,
     private leftPanelService: LeftPanelService) { }
 
 
@@ -140,7 +143,9 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   getCountByField(field) {
     return (this.ticketsCounts) ? this.ticketsCounts[field] : 0;
   }
-
+  close() {
+    this.onClose.emit(null);
+  }
   private getClientsList(data) {
     this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
@@ -152,8 +157,11 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   public setTypeFilter(type) {
     this.listType = type;
     this.ticketsFilter.setListType(type);
-    this.ticketsStateService.onInitFilter(this.ticketsFilter);
-    if (type !== 'RECURRING_TICKETS') this.getCount();
+    if (!this.appService.checkMobile()) {
+      this.ticketsStateService.onInitFilter(this.ticketsFilter);
+      if (type !== 'RECURRING_TICKETS') this.getCount();
+    }
+
   }
 
   public onGetUsers(data) {
@@ -187,10 +195,11 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
 
     }
 
-
-    this.ticketsStateService.onInitFilter(this.ticketsFilter);
-    this.getCount();
-    this.onChangeCounterFilter();
+    if (!this.appService.checkMobile()) {
+      this.ticketsStateService.onInitFilter(this.ticketsFilter);
+      this.getCount();
+      this.onChangeCounterFilter();
+    }
   }
   onSelectTechUser(item) {
 
@@ -205,10 +214,12 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       if (indexTechUser > -1) this.ticketsFilter.setTechUser(this.techUsersList[indexTechUser]);
 
     }
+    if (!this.appService.checkMobile()) {
+      this.ticketsStateService.onInitFilter(this.ticketsFilter);
+      this.getCount();
+      this.onChangeCounterFilter();
+    }
 
-    this.ticketsStateService.onInitFilter(this.ticketsFilter);
-    this.getCount();
-    this.onChangeCounterFilter();
   }
 
   onSelectStatus(item) {
@@ -236,20 +247,31 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       if (indexhUser > -1) this.ticketsFilter.setUser(this.users[indexhUser]);
 
     }
-    if (!this.blockFilterUser) {
+
+    if (!this.blockFilterUser && !this.appService.checkMobile()) {
       this.ticketsStateService.onInitFilter(this.ticketsFilter);
       this.getCount();
     }
     this.blockFilterUser = false;
-    this.onChangeCounterFilter();
+    if (!this.appService.checkMobile()) this.onChangeCounterFilter();
   }
 
   onChangeTags(tags) {
     //   this.ticketsStateService.onChangeTagsFilter(tags);
     this.ticketsFilter.setTags(tags);
+    if (!this.appService.checkMobile()) {
+      this.ticketsStateService.onInitFilter(this.ticketsFilter);
+      this.getCount();
+      this.onChangeCounterFilter();
+    }
+
+  }
+  applyFilters() {
+
     this.ticketsStateService.onInitFilter(this.ticketsFilter);
-    this.getCount();
+    if (this.listType !== 'RECURRING_TICKETS') this.getCount();
     this.onChangeCounterFilter();
+    this.close();
   }
   getTechUserList() {
     return this.techUsersList.map(item => {

@@ -1,7 +1,10 @@
 <div class="left-panel-ng2__content--filters">
     <div class="content-filters-header">
-      <div class="icon__close-white qt-sz-20 qt-bg-contain"></div>
-      <div class="content-filters-header__title pointer">Filters</div>
+        <div
+            class="icon__close-white qt-sz-20 qt-bg-contain"
+            (click)="close()"
+        ></div>
+        <div class="content-filters-header__title pointer">Filters</div>
     </div>
     <app-select-search
         class="search-company"
@@ -42,12 +45,17 @@
         (onSelectedItem)="onSelectStatus($event)"
     ></app-select-search>
     <app-tickets-filter-tags (tagsChange)="onChangeTags($event)"></app-tickets-filter-tags>
-    <!-- Mobile  -->
+    <!-- Mobile -->
     <div class="qt-aside-modern__footer">
-      <div class="qt-df qt-w100">
-        <button class="qt-button --gray qt-mr-12">Clear All</button>
-        <button class="qt-button">Apply Filters</button>
-      </div>
+        <div class="qt-df qt-w100">
+            <button class="qt-button --gray qt-mr-12">Clear All</button>
+            <button
+                class="qt-button"
+                (click)="applyFilters()"
+            >
+                Apply Filters
+            </button>
+        </div>
     </div>
-    <!-- Mobile  -->
+    <!-- Mobile -->
 </div>

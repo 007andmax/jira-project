@@ -120,9 +120,9 @@ export class AppService {
   }
 
   public onCheckMobile = () => {
-    if (document.documentElement.clientWidth <= 414 && !this.checkMobile()) {
+    if (document.documentElement.clientWidth <= 768 && !this.checkMobile()) {
       this.setMobile(true);
-    } else if (document.documentElement.clientWidth > 414 && this.checkMobile()) {
+    } else if (document.documentElement.clientWidth > 768 && this.checkMobile()) {
       this.setMobile(false);
     }
   }
