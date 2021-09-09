@@ -120,8 +120,8 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.techUsersDp.clearWithOutChanges();
     this.statusDp.clearWithOutChanges();
 
-    this.listType = "ALL";
-    this.ticketsFilter.setListType("ALL");
+    //  this.listType = "ALL";
+    // this.ticketsFilter.setListType("ALL");
     this.ticketsStateService.onInitFilter(this.ticketsFilter);
     this.onChangeCounterFilter();
     if (this.listType !== 'RECURRING_TICKETS') this.getCount();

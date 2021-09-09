@@ -1,0 +1,61 @@
+<div class="qt-modal quote-email-modal">
+    <div class="qt-modal__header">
+        <div class="qt-modal__header-title qt-fw-600">Add Users to notify</div>
+        <div
+            class="qt-modal__close icon__close qt-pointer"
+            (click)="close()"
+        ></div>
+    </div>
+    <div class="qt-modal__body">
+        <div class="qt-input-block qt-mb-24 qt-w100">
+            <input
+                type="text"
+                #userInput
+                placeholder="Search Users"
+                (input)="onSearchUser($event)"
+            >
+        </div>
+        <div class="qt-input-block qt-w100 email-selects qt-mb-24">
+            <div
+                class="ai-c"
+                *ngFor="let user of users"
+                (click)="toggleUser(user)"
+            >
+                <div class="assigne-user-item">
+                    <div
+                        class="assigne-user-avatar"
+                        [textContent]="getAssignedUserNameForAvatar(user)"
+                        [ngStyle]="{'background': getStyleAvatar(user),'background-size': 'cover'}"
+                    ></div>
+                    <div
+                        class="assigne-user-name"
+                        [textContent]="getUserName(user)"
+                    ></div>
+                    <span
+                        class="assigne-user-email"
+                        [textContent]="user.primaryEmail"
+                    ></span>
+                    <input
+                        type="checkbox"
+                        [checked]="isSelected(user)"
+                        (change)="selectUser($event)"
+                    >
+                </div>
+            </div>
+        </div>
+        <div class="qt-modal__footer">
+            <button
+                class="qt-button --gray qt-mr-12"
+                (click)="close()"
+            >
+                Cancel
+            </button>
+            <button
+                class="qt-button qt-mr-12"
+                (click)="applyUsers()"
+            >
+                Add User
+            </button>
+        </div>
+    </div>
+</div>

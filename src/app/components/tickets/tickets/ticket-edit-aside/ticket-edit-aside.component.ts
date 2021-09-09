@@ -26,6 +26,9 @@ import { TicketEditAsideRightPanelComponent } from './ticket-edit-aside-right-pa
 import { TicketMessageComponent } from './ticket-message/ticket-message.component';
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
+import { ModalAddUpdateTicketComponent } from 'src/app/services/modal/modal-add-update-ticket/modal-add-update-ticket.component';
+import { AppService } from 'src/app/states/app/app.service';
+import { ModalAddUsersNotifyComponent } from 'src/app/services/modal/modal-add-users-notify/modal-add-users-notify.component';
 @Component({
   selector: 'app-ticket-edit-aside',
   templateUrl: './ticket-edit-aside.component.html',
@@ -61,6 +64,8 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     private toastrService: ToastrService,
     private appStateService: AppStateService,
+    private modalService: NgbModal,
+    private appService: AppService,
     private companiesStateService: CompaniesStateService) { }
 
 
@@ -69,6 +74,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       this.showPreloader = true;
     })
     let getOnEditTicket = this.ticketsStateService.getOnEditTicket().subscribe(data => {
+      if (this.appService.checkMobile()) this.showModalAddUpdate();
       this.ticketStateService.unsubscribeTicket();
       if (this.updateForm) this.updateForm.reset();
       this.ticketProfile = data;
@@ -80,6 +86,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       this.ticketStateService.getServicesList(this.ticketProfile);
       this.ticketStateService.subsribeToTicket(this.ticketProfile.id);
       this.ticketMessage.reset();
+
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
       }
@@ -147,6 +154,18 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       if (newChange.action == 'UPDATE_DELETED') this.ticketProfile.removeUpdate(newChange.data);
       this.cd.detectChanges();
     });
+    let onChangeAssignedUser = this.ticketStateService.onChangeAssignedUser.subscribe(data => {
+      this.onSelectAssignedUser(data);
+      if (this.listAssignedUser.length > 0 && !this.checkAssignedUser()) {
+        let ids = this.listAssignedUser.map(item => {
+          return item.id;
+        })
+        this.ticketsService.addAssignUsers(this.ticketProfile.id, ids).subscribe(data => {
+
+        })
+      }
+    })
+    this.sub.add(onChangeAssignedUser);
   }
   showDetailUser() {
     let user = this.usersStateService.getAllUsers().find(item => item.id === this.ticketProfile.createdUser.id);
@@ -154,6 +173,11 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     (<any>document.body.querySelector(".ticket-edit-aside")).style.zIndex = "1";
     //  (<any>document.body.querySelector(".user-aside-detail-page__aside")).style.zIndex = "3";
 
+  }
+  showModalAddUpdate() {
+    console.log("showModalAddUpdate");
+    const modalRef = this.modalService.open(ModalAddUpdateTicketComponent, { windowClass: 'quote-send-modal' });
+    console.log("modalRef", modalRef);
   }
   checkExistServicesProducts() {
     return this.ticketProfile.updates.filter(item => item.type == 'PRODUCT' || item.type == 'SERVICE').length > 0;
@@ -279,6 +303,12 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     this.listAssignedUser = data;
   }
   onToggleAddAssignedUser() {
+    if (this.appService.checkMobile()) {
+      const modalRef = this.modalService.open(ModalAddUsersNotifyComponent, { windowClass: 'quote-send-modal' });
+      modalRef.componentInstance.userList = this.getUsersForAssign();
+      modalRef.componentInstance.selectedUsers = this.listAssignedUser;
+      return;
+    }
     this.showAddAssignedUser = !this.showAddAssignedUser;
 
     if (!this.showAddAssignedUser && this.listAssignedUser.length > 0 && !this.checkAssignedUser()) {

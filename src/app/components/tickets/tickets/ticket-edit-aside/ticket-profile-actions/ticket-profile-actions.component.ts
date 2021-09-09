@@ -10,6 +10,8 @@ import { MOVE_TO_SPAM_TICKET, MOVE_TO_TRASH_TICKET } from 'src/app/const/confirm
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
+import { ModalAgentLinkComponent } from 'src/app/services/modal/modal-agent-link/modal-agent-link.component';
+import { AppService } from 'src/app/states/app/app.service';
 
 @Component({
   selector: 'app-ticket-profile-actions',
@@ -30,6 +32,7 @@ export class TicketProfileActionsComponent implements OnInit, OnDestroy {
     private usersStateService: UsersStateService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
+    public appService: AppService,
   ) { }
 
 
@@ -46,6 +49,13 @@ export class TicketProfileActionsComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
+  }
+  showAgentLink() {
+    if (!this.appService.checkMobile()) return;
+    const modalRef = this.modalService.open(ModalAgentLinkComponent, { windowClass: 'xs-modal user-modal' });
+    modalRef.componentInstance.devices = this.getDevicesByCompany();
+    modalRef.componentInstance.ticketProfile = this.ticketProfile;
+
   }
   onMoveToTrash() {
     this.ticketsService.trashTicket(this.ticketProfile.id, this.movedWay).subscribe(res => {

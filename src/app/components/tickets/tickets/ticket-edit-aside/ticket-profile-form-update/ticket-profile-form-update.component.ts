@@ -22,6 +22,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { TicketStateService } from '../services/ticket-state.service';
 import { CompanyDevicesRemoteAccessComponent } from 'src/app/components/company-devices/company-devices-remote-access/company-devices-remote-access.component';
+import { AppService } from 'src/app/states/app/app.service';
 
 @Component({
   selector: 'app-ticket-profile-form-update',
@@ -68,9 +69,11 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     private constantsStateService: ConstantsStateService,
     private devicesStateService: DevicesStateService,
     private ticketStateService: TicketStateService,
+    private appService: AppService,
     public ticketsListService: TicketsListService) { }
 
   ngOnInit() {
+    if (this.appService.checkMobile()) this.tab = '';
     this.currentUser = this.usersStateService.getCurrentUser();
     this.supportStateService.getHandleSendMode().subscribe(data => {
       let draftEmail: DraftEmail = new DraftEmail();
@@ -105,6 +108,9 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
       if (this.remoteSession) this.removeSession();
     })
     this.sub.add(getOnEditTicket);
+    this.ticketStateService.onSetTabUpdate.subscribe(data => {
+      this.setTab(data);
+    })
   }
   onConnectRemoteAccess(data) {
     this.companyIdForSupport = data.companyId;

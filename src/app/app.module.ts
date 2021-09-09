@@ -459,6 +459,9 @@ import { UsersAsideDetailDocumentsComponent } from './components/users/users-asi
 import { UsersAsideDetailDocumentsItemComponent } from './components/users/users-aside-detail/users-aside-detail-documents/users-aside-detail-documents-item/users-aside-detail-documents-item.component';
 import { UsersAsideDetailPasswordsComponent } from './components/users/users-aside-detail/users-aside-detail-passwords/users-aside-detail-passwords.component';
 import { UsersAsideDetailPasswordsItemComponent } from './components/users/users-aside-detail/users-aside-detail-passwords/users-aside-detail-passwords-item/users-aside-detail-passwords-item.component';
+import { ModalAddUpdateTicketComponent } from './services/modal/modal-add-update-ticket/modal-add-update-ticket.component';
+import { ModalAgentLinkComponent } from './services/modal/modal-agent-link/modal-agent-link.component';
+import { ModalAddUsersNotifyComponent } from './services/modal/modal-add-users-notify/modal-add-users-notify.component';
 
 
 declare var $: any;
@@ -875,7 +878,10 @@ declare var $: any;
     UsersAsideDetailDocumentsComponent,
     UsersAsideDetailDocumentsItemComponent,
     UsersAsideDetailPasswordsComponent,
-    UsersAsideDetailPasswordsItemComponent
+    UsersAsideDetailPasswordsItemComponent,
+    ModalAddUpdateTicketComponent,
+    ModalAgentLinkComponent,
+    ModalAddUsersNotifyComponent
   ],
   imports: [
     BrowserModule,
@@ -926,7 +932,10 @@ declare var $: any;
     ContractsConfirmComponent,
     CompanyDevicesRemoteAccessComponent,
     ModalLockScreenComponent,
-    ModalSessionScreenComponent
+    ModalSessionScreenComponent,
+    ModalAddUpdateTicketComponent,
+    ModalAgentLinkComponent,
+    ModalAddUsersNotifyComponent
     // RecurringTicketsComponent
   ],
   exports: [

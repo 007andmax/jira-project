@@ -1,4 +1,4 @@
-@import './src/assets/styles/variable';
+@import "./src/assets/styles/variable";
 
 .qt-modal-circle-button {
     width: 32px;
@@ -10,4 +10,15 @@
     background-repeat: no-repeat;
     background-position: center;
     cursor: pointer;
+}
+.dropdown-submenu-wrapper {
+    left: -160px;
+    top: -7px;
+}
+.dropdown-submenu {
+    &:hover {
+        .dropdown-submenu-wrapper {
+            display: block;
+        }
+    }
 }
