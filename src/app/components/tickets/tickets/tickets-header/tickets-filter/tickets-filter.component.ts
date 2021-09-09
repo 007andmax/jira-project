@@ -124,7 +124,9 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.ticketsFilter.setListType("ALL");
     this.ticketsStateService.onInitFilter(this.ticketsFilter);
     this.onChangeCounterFilter();
+    if (this.listType !== 'RECURRING_TICKETS') this.getCount();
     this.ticketsStateService.onChangeLeftPanelFilter(this.listType);
+    if (this.appService.checkMobile()) this.close();
   }
 
   public onChangeCounterFilter() {
@@ -266,6 +268,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     }
 
   }
+
   applyFilters() {
 
     this.ticketsStateService.onInitFilter(this.ticketsFilter);

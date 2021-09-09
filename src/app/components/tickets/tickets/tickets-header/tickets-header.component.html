@@ -24,7 +24,7 @@
                 <button
                     class="qt-btn --outline-blue qt-mr-8"
                     (click)="clearAll()"
-                    *ngIf="countFilter > 0"
+                    *ngIf="countFilter > 0 && !appService.checkMobile()"
                 >
                     Clear all
                 </button>
@@ -49,6 +49,7 @@
 
 
 
+
     <div class="qt-page-list__header-filters">
         <app-tickets-filter
             class="qt-w100"
@@ -58,6 +59,7 @@
             (onClose)="toggleFilter = true"
         ></app-tickets-filter>
     </div>
+
 
 
 
@@ -76,6 +78,7 @@
     <!-- </thead> -->
     <!-- </table> -->
     <!-- </div> -->
+
 
 
     <!-- Mobile Version -->

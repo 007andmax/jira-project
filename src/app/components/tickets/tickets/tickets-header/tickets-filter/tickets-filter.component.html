@@ -48,7 +48,12 @@
     <!-- Mobile -->
     <div class="qt-aside-modern__footer">
         <div class="qt-df qt-w100">
-            <button class="qt-button --gray qt-mr-12">Clear All</button>
+            <button
+                class="qt-button --gray qt-mr-12"
+                (click)="onClearAll()"
+            >
+                Clear All
+            </button>
             <button
                 class="qt-button"
                 (click)="applyFilters()"

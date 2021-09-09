@@ -3,6 +3,7 @@ import { TitleListType } from './class/title-list-type';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { Subscription } from 'rxjs';
 import { TicketsFilterComponent } from './tickets-filter/tickets-filter.component';
+import { AppService } from 'src/app/states/app/app.service';
 
 @Component({
   selector: 'app-tickets-header',
@@ -28,6 +29,7 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
   countFilter: number = 0;
   selectedListType: TitleListType = new TitleListType('My Tickets', 'USERS');
   constructor(private ticketsStateService: TicketsStateService,
+    public appService: AppService,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
