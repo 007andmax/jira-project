@@ -5,7 +5,6 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { of } from "rxjs";
 import { ToastrService } from "ngx-toastr";
 import { DomSanitizer } from '@angular/platform-browser';
-import { SanitizeHtmlPipe } from './../../../pipe/sanitize-html.pipe';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { SettingStateService } from "src/app/states/setting/setting-state.service";
 // import { AngularEditorConfig } from "@kolkov/angular-editor";

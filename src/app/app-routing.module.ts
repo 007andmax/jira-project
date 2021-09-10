@@ -123,14 +123,14 @@ const routes: Routes = [
   },
   {
     path: ':company/setting/tags',
-    component: ManageTagsComponent,
-    pathMatch: 'full',
+    loadChildren: './components/setting/manage-tags/manage-tags.module#ManageTagsModule'
+
 
   },
   {
     path: ':company/setting/companyprofile',
-    component: CompanyProfileComponent,
-    pathMatch: 'full',
+    loadChildren: './components/setting/company-profile/company-profile.module#CompanyProfileModule'
+
   },
   {
     path: ':company/setting/techUsers',
@@ -139,8 +139,8 @@ const routes: Routes = [
   },
   {
     path: ':company/setting/emailSetting',
-    component: EmailSettingComponent,
-    pathMatch: 'full',
+    loadChildren: './components/setting/email-setting/email-setting.module#EmailSettingModule'
+
   },
   {
     path: ':company/setting/taxes',
@@ -149,8 +149,8 @@ const routes: Routes = [
   },
   {
     path: ':company/setting/glnumber',
-    component: GlNumberSettingsComponent,
-    pathMatch: 'full',
+    loadChildren: './components/setting/gl-number/gl-number-settings.module#GlNumberSettingsModule'
+
   },
   {
     path: ':company/setting/permission',
@@ -159,23 +159,22 @@ const routes: Routes = [
   },
   {
     path: ':company/setting/emailTemplete',
-    component: EmailTempleteComponent,
-    pathMatch: 'full',
+    loadChildren: './components/setting/email-templete/email-templete.module#EmailTempleteModule'
+
   },
   {
     path: ':company/setting/integration',
-    component: IntegrationsComponent,
-    pathMatch: 'full',
+    loadChildren: './components/setting/integrations/integrations.module#IntegrationsModule'
+
   },
   {
     path: ':company/setting/invoiceTickets',
-    component: InvoiceTicketsComponent,
-    pathMatch: 'full',
+    loadChildren: './components/setting/invoice-tickets/invoice-tickets.module#InvoiceTicketsModule'
+
   },
   {
     path: ':company/setting/commission',
-    component: CommissionComponent,
-    pathMatch: 'full',
+    loadChildren: './components/setting/commission/commission.module#CommissionModule'
   },
   {
     path: ':company/setting/subscription',
