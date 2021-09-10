@@ -370,7 +370,6 @@ import { ReportListItemComponent } from './components/reports/report-list-item/r
 import { LeftPanelReportsComponent } from './components/left-panel/left-panel-reports/left-panel-reports.component';
 import { BreadcrumbsComponent } from './components/shared/breadcrumbs/breadcrumbs.component';
 import { DetailedCommissionsReportComponent } from './components/reports/reports/detailed-commissions-report/detailed-commissions-report.component';
-import { ToFixedPipe } from './pipe/to-fixed.pipe';
 import { CommonCommissionsReportComponent } from './components/reports/reports/common-commissions-report/common-commissions-report.component';
 import { SoftwareSummaryReportComponent } from './components/reports/reports/software-summary-report/software-summary-report.component';
 import { SoftwareSummaryDevicesDroDownComponent } from './components/reports/reports/software-summary-report/software-summary-devices-dro-down/software-summary-devices-dro-down.component';
@@ -509,6 +508,7 @@ import { DocumentsAddBodyModule } from './components/documents/documents-add/doc
 import { DocumentsAddFooterModule } from './components/documents/documents-add/documents-add-footer/documents-add-footer.module';
 import { DocumentsLinkedModule } from './components/documents/documents-add/documents-add-info/documents-linked/documents-linked.module';
 import { DocumentsAddEditCategoriesModule } from './components/documents/documents-add/documents-add-info/documents-add-edit-categories/documents-add-edit-categories.module';
+import { ToFixedModule } from './pipe/to-fixed/to-fixed.module';
 
 
 declare var $: any;
@@ -623,9 +623,9 @@ declare var $: any;
     AutocompleteComponent,
 
     OrderByPipe,
-    ReportsComponent,
-    ItemReportComponent,
-    OverviewReportComponent,
+    //  ReportsComponent,
+    //  ItemReportComponent,
+    // OverviewReportComponent,
     // ReportMenuComponent,
     SelectComponent,
     // ReportAdditionalActionsComponent,
@@ -639,16 +639,16 @@ declare var $: any;
     TicketEditAsideComponent,
     TicketsPrioritiesComponent,
     LeftPanelTicketsComponent,
-    GlNumberComponent,
-    AccountsReceivableComponent,
+    // GlNumberComponent,
+    //  AccountsReceivableComponent,
     // ReportFooterComponent,
-    TaxesReportComponent,
-    ProductSalesReportComponent,
-    CustomerSalesReportComponent,
-    TicketReportComponent,
+    // TaxesReportComponent,
+    // ProductSalesReportComponent,
+    //   CustomerSalesReportComponent,
+    // TicketReportComponent,
     //  TechUsersListReportComponent,
     ReportTimePipe,
-    ServiceReportComponent,
+    //ServiceReportComponent,
     // InventoryComponent,
     //  InventoryTableComponent,
     InventoryAddAsideComponent,
@@ -742,8 +742,8 @@ declare var $: any;
     // PaymentsAsideComponent,
     //  RefundPaymentComponent,
     //  EditPaymentComponent,
-    TechServiceReportComponent,
-    AccountingReportComponent,
+    //  TechServiceReportComponent,
+    //   AccountingReportComponent,
     // ContractsTableItemComponent,
     //  ContractsAsideSelectTypeComponent,
     // ContractsAsideHourlyBillingComponent,
@@ -861,19 +861,19 @@ declare var $: any;
     LeftPanelSupportComponent,
     HeaderComponent,
     GlobalSearchComponent,
-    ReportListItemComponent,
+    //  ReportListItemComponent,
     LeftPanelReportsComponent,
     BreadcrumbsComponent,
-    DetailedCommissionsReportComponent,
-    ToFixedPipe,
-    CommonCommissionsReportComponent,
-    SoftwareSummaryReportComponent,
+    // DetailedCommissionsReportComponent,
+    // ToFixedPipe,
+    // CommonCommissionsReportComponent,
+    // SoftwareSummaryReportComponent,
     // SoftwareSummaryDevicesDroDownComponent,
-    HardwareSummaryReportComponent,
-    DeviceIpSummaryReportComponent,
-    RemoteConnectionReportComponent,
-    TechSalesReportComponent,
-    TechTicketReportComponent,
+    // HardwareSummaryReportComponent,
+    // DeviceIpSummaryReportComponent,
+    // RemoteConnectionReportComponent,
+    // TechSalesReportComponent,
+    //  TechTicketReportComponent,
     ModalLockScreenComponent,
     ModalSessionScreenComponent,
     KeyUpEnterDirective,
@@ -1013,7 +1013,8 @@ declare var $: any;
     DocumentsAddBodyModule,
     DocumentsAddFooterModule,
     DocumentsLinkedModule,
-    DocumentsAddEditCategoriesModule
+    DocumentsAddEditCategoriesModule,
+    ToFixedModule
   ],
   entryComponents: [
     ModalQuoteComponent,

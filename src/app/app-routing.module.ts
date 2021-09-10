@@ -110,12 +110,11 @@ const routes: Routes = [
   },
   {
     path: ':company/reports',
-    component: ReportsComponent,
-    pathMatch: 'full'
+    loadChildren: './components/reports/reports.module#ReportsModule'
   },
   {
     path: ':company/report/:id',
-    component: ItemReportComponent
+    loadChildren: './components/reports/item-report/item-report.module#ItemReportModule'
   },
   {
     path: ':company/setting/myprofile',
