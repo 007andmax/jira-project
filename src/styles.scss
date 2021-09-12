@@ -2166,7 +2166,120 @@ app-quotes-item {
 }
 .user-modal {
   .modal-dialog {
-    width: 490px;
+    //max-width: 490px;
+    max-width: 520px;
+    width: 100%;
+    max-height: calc(100vh - 20px);
+    overflow: auto;
+    transform: translate(-50%, -50%) !important;
+    margin: 0;
+    padding: 0 15px;
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+
+    li {
+      font-weight: 500;
+      color: $primary-2;
+      margin-bottom: 20px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .qt-modal__header {
+    padding: 16px 16px 22px;
+  }
+
+  .qt-modal__body {
+    padding: 0 16px 16px;
+  }
+}
+.modal-open {
+  .users-to-notify {
+    .qt-modal__header {
+      padding: 16px 16px 8px;
+    }
+    .qt-modal__body {
+      padding: 0 16px 16px;
+    }
+  }
+}
+.users-to-notify {
+  .assigne-user {
+    &-item {
+      display: flex;
+      align-items: center;
+    }
+
+    &-avatar {
+      @extend %сaption-l-sb;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-position: center;
+      background-size: cover;
+      color: white;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      flex-shrink: 0;
+      margin-bottom: 0 !important; // TODO add new modal and remove important
+    }
+  }
+
+  .qt-checkbox {
+    span {
+      width: 16px;
+      height: 16px;
+      line-height: 0;
+      border-radius: 50%;
+    }
+    input:checked ~ span {
+      background-image: url("/assets/img/icons/selected.svg");
+      border: none;
+    }
+  }
+
+  .text-content {
+    margin: 0 10px !important; // TODO add new modal and remove important
+    flex: 1;
+
+    .assigne-user-name {
+      margin-bottom: 2px !important; // TODO add new modal and remove important
+    }
+  }
+
+  .qt-input-block {
+    > div {
+      border-bottom: 1px solid $gray-400;
+      padding: 10px 0;
+      margin-bottom: 0 !important;
+    }
+  }
+  .qt-modal__body {
+    height: calc(100vh - 52px);
+  }
+  .email-selects {
+    overflow: auto;
+    margin-bottom: 0 !important;
+    height: calc(100% - 116px);
+  }
+  .qt-modal__footer {
+    padding: 16px 0;
+    justify-content: space-between;
+
+    .qt-button {
+      max-width: calc(100% - 8px);
+      width: 100%;
+      justify-content: center;
+    }
   }
 }
 .new-users-content__modal,

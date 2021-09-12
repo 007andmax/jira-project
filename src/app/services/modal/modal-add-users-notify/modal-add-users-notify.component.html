@@ -1,4 +1,4 @@
-<div class="qt-modal quote-email-modal">
+<div class="qt-modal quote-email-modal users-to-notify">
     <div class="qt-modal__header">
         <div class="qt-modal__header-title qt-fw-600">Add Users to notify</div>
         <div
@@ -27,19 +27,30 @@
                         [textContent]="getAssignedUserNameForAvatar(user)"
                         [ngStyle]="{'background': getStyleAvatar(user),'background-size': 'cover'}"
                     ></div>
-                    <div
+                    <div class="text-content">
+                      <div
                         class="assigne-user-name"
                         [textContent]="getUserName(user)"
-                    ></div>
-                    <span
+                      ></div>
+                      <span
                         class="assigne-user-email"
                         [textContent]="user.primaryEmail"
-                    ></span>
-                    <input
+                      ></span>
+                    </div>
+<!--                    <input-->
+<!--                        type="checkbox"-->
+<!--                        [checked]="isSelected(user)"-->
+<!--                        (change)="selectUser($event)"-->
+<!--                    >-->
+                    <label class="qt-checkbox">
+                      <input
                         type="checkbox"
+                        class="ng-valid ng-dirty ng-touched"
                         [checked]="isSelected(user)"
                         (change)="selectUser($event)"
-                    >
+                      >
+                      <span></span>
+                    </label>
                 </div>
             </div>
         </div>
@@ -51,7 +62,7 @@
                 Cancel
             </button>
             <button
-                class="qt-button qt-mr-12"
+                class="qt-button"
                 (click)="applyUsers()"
             >
                 Add User
