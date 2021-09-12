@@ -192,11 +192,17 @@
       background-image: url("/assets/img/icons/products-blue.svg");
     }
   }
+  &__products-new {
+    background-image: url("/assets/img/icons/products-new.svg");
+  }
   &__service {
     background-image: url("/assets/img/icons/service.svg");
     &.active {
       background-image: url("/assets/img/icons/service-blue.svg");
     }
+  }
+  &__service-new {
+    background-image: url("/assets/img/icons/service-new.svg");
   }
   &__quick-support {
     background-image: url("/assets/img/icons/quick-support-gray.svg");

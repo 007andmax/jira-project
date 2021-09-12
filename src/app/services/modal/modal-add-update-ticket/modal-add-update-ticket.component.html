@@ -1,9 +1,18 @@
 <div class="qt-modal quote-email-modal">
 
     <div class="qt-modal__body">
-        <p (click)="setTabUpdate('NOTE')">Add Conversation</p>
-        <p (click)="setTabUpdate('PRODUCT')">Add Product</p>
-        <p (click)="setTabUpdate('SERVICE')">Add Service</p>
+        <div class="d-f qt-ai-c" (click)="setTabUpdate('NOTE')">
+          <div class="icon__chat qt-sz-20 qt-bg-contain qt-mr-8"></div>
+          Add Conversation
+        </div>
+        <div class="d-f qt-ai-c" (click)="setTabUpdate('PRODUCT')">
+          <div class="icon__products-new qt-sz-20 qt-bg-contain qt-mr-8"></div>
+          Add Product
+        </div>
+        <div class="d-f qt-ai-c" (click)="setTabUpdate('SERVICE')">
+          <div class="icon__service-new qt-sz-20 qt-bg-contain qt-mr-8"></div>
+          Add Service
+        </div>
     </div>
 
 </div>

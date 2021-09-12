@@ -695,6 +695,17 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+
+  @media (max-width: 767px) {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100vh;
+    overflow: auto;
+    padding-bottom: 72px;
+  }
 }
 
 /deep/ .cps-block {

@@ -1,5 +1,6 @@
 <div class="cps-block">
     <div class="cps-block__header d-f">
+        <div class="qt-aside__close-modal icon__close"></div>
         <div
             class="cps-block__photo"
             [textContent]="ticketsListService.getAssignedUserNameForAvatar(currentUser)"
@@ -75,6 +76,16 @@
                     ></i>
                 </div>
             </div>
+            <!-- Mobile -->
+            <div class="qt-aside-modern__footer">
+              <div class="qt-df">
+                <button class="qt-button --gray">Cancel</button>
+                <button class="qt-button">
+                  <span class="ng-star-inserted">Save</span>
+                </button>
+              </div>
+            </div>
+            <!-- End Mobile -->
         </div>
         <app-ticket-profile-form-update-products
             #selectProducts

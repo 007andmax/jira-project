@@ -10,6 +10,11 @@
     color: $gray-800;
     padding: 9px 12px;
     width: 90px;
+
+    @media (max-width: 767px) {
+      width: calc(50% - 8px);
+      margin-right: 0;
+    }
   }
 }
 

@@ -1162,6 +1162,43 @@ app-quotes-item {
     width: 450px;
   }
 }
+
+// TODO check width for other modals
+.modal-open {
+  .quote-send-modal {
+    .modal-dialog {
+      @media (max-width: 767px) {
+        font-size: 13px;
+        line-height: 20px;
+        letter-spacing: 0;
+        font-weight: 600;
+        color: $primary-2;
+        max-width: 240px;
+        width: 100%;
+        margin: 0;
+        transform: translate(-50%, -50%);
+      }
+    }
+    .qt-modal__body {
+      @media (max-width: 767px) {
+        padding: 20px;
+      }
+
+      div {
+        @media (max-width: 767px) {
+          margin-bottom: 20px;
+        }
+
+        &:last-child {
+          @media (max-width: 767px) {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
 // To Do Fix
 .products-content__header h3,
 .new-companies-content__header h3,
@@ -3027,6 +3064,127 @@ app-ticket-profile-updates-note {
 
 app-ticket-profile-updates-service-timepicker {
   display: flex;
+
+  @media (max-width: 767px) {
+    margin-top: 42px;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .start-end-timer {
+    @media (max-width: 767px) {
+      position: relative;
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    &::before,
+    &::after {
+      @media (max-width: 767px) {
+        position: absolute;
+        content: "Time In";
+        left: 0;
+        top: -28px;
+        color: #212b36;
+        font-size: 13px;
+        line-height: 20px;
+        letter-spacing: 0;
+        font-weight: 600;
+      }
+    }
+
+    &::after {
+      @media (max-width: 767px) {
+        content: "Time Out";
+        left: calc(50% + 8px);
+      }
+    }
+  }
+
+  .time {
+    .start,
+    .end {
+      &::before {
+        left: 0;
+        top: -28px;
+        color: #212b36;
+        font-size: 13px;
+        line-height: 20px;
+        letter-spacing: 0;
+        font-weight: 600;
+      }
+    }
+
+    .start::after {
+      content: "Time In";
+    }
+    .end::after {
+      content: "Time Out";
+    }
+  }
+}
+
+app-ticket-profile-form-update {
+  app-date-picker {
+    @media (max-width: 767px) {
+      width: 100%;
+      margin-top: 42px;
+    }
+
+    .input-group {
+      @media (max-width: 767px) {
+        width: 100%;
+        position: relative;
+      }
+
+      @media (max-width: 767px) {
+        &::after {
+          position: absolute;
+          content: "Service Date";
+          left: 0;
+          top: -28px;
+          color: #212b36;
+          font-size: 13px;
+          line-height: 20px;
+          letter-spacing: 0;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+  .editable-description {
+    @media (max-width: 767px) {
+      margin-top: 42px;
+      overflow: unset;
+    }
+
+    textarea {
+      @media (max-width: 767px) {
+        border-radius: 4px;
+      }
+    }
+
+    &::after {
+      @media (max-width: 767px) {
+        position: absolute;
+        content: "Description";
+        left: 0;
+        top: -28px;
+        color: #212b36;
+        font-size: 13px;
+        line-height: 20px;
+        letter-spacing: 0;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .service-item:last-child {
+    @media (max-width: 767px) {
+      margin-bottom: 16px;
+    }
+  }
 }
 
 .ticket-updates__ticket-photo {
@@ -3214,6 +3372,160 @@ app-ticket-profile-form-update {
   z-index: 30;
   .cps-block__content {
     min-height: 106px;
+
+    @media (max-width: 767px) {
+      padding: 0 16px;
+    }
+
+    .d-f { // TODO replace .d-f for class
+      @media (max-width: 767px) {
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+    }
+
+    label {
+      @media (max-width: 767px) {
+        margin-top: 42px;
+        width: 100%;
+        max-width: 100%;
+        margin-right: 0;
+      }
+
+      &::before {
+        @media (max-width: 767px) {
+          left: 0;
+          top: -28px;
+          color: $primary-2;
+          font-size: 13px;
+          line-height: 20px;
+          letter-spacing: 0;
+          font-weight: 600;
+        }
+      }
+
+      input {
+        @media (max-width: 767px) {
+          padding: 10px 14px !important;
+        }
+      }
+
+      .product-item__cost-input {
+        &::after {
+          @media (max-width: 767px) {
+            left: unset;
+            right: 16px;
+          }
+        }
+      }
+
+      .product-item__price-input {
+        &::after {
+          @media (max-width: 767px) {
+            left: unset;
+            right: 16px;
+          }
+        }
+      }
+
+      .product-item__discount-input {
+        &::after {
+          @media (max-width: 767px) {
+            right: 16px;
+          }
+        }
+      }
+    }
+
+    .product-dropdown-new-ng {
+      @media (max-width: 767px) {
+        margin-top: 42px;
+      }
+
+      &::after {
+        @media (max-width: 767px) {
+          position: absolute;
+          content: "Product";
+          left: 0;
+          top: -28px;
+          color: #212b36;
+          font-size: 13px;
+          line-height: 20px;
+          letter-spacing: 0;
+          font-weight: 600;
+        }
+      }
+    }
+
+    .product-item__cost-input,
+    .product-item__qty-input,
+    .product-item__price-input,
+    .product-item__discount-input {
+      @media (max-width: 767px) {
+        max-width: calc(50% - 8px);
+      }
+    }
+  }
+
+  .qt-aside__buttons {
+    padding: 0 16px;
+    position: relative;
+    margin-top: 28px;
+
+    &::after {
+      content: "Add Users to notify";
+      position: absolute;
+      left: 16px;
+      top: -28px;
+      color: #212b36;
+      font-size: 13px;
+      line-height: 20px;
+      letter-spacing: 0;
+      font-weight: 600;
+    }
+
+    .ticket-edit-aside__users-linked,
+    .d-f + .d-f { // TODO repalce .d-f for class
+      @media (max-width: 767px) {
+        display: none;
+      }
+    }
+  }
+
+  .qt-aside-modern__footer {
+    display: none;
+
+    @media (max-width: 767px) {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #fff;
+      z-index: 1;
+    }
+  }
+
+  .qt-aside__close-modal {
+    background-image: url('/assets/img/icons/close-white.svg');
+    position: absolute;
+    top: 50%;
+    left: 26px;
+    transform: translate(-50%, -50%);
+    display: none;
+
+    @media (max-width: 767px) {
+      display: block;
+    }
+  }
+
+  .cps-block__chat-block {
+    @media (max-width: 767px) {
+      margin-bottom: 16px;
+    }
   }
 }
 
