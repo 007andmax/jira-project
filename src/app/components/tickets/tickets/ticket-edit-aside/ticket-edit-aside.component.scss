@@ -35,19 +35,97 @@
       font-size: 11px;
       transform: translateY(-17px);
     }
+
+    @media (max-width: 767px) {
+      width: 100%;
+    }
   }
-.prelaoder-body {
-  display: block;
-  position: absolute;
-  z-index: 1000;
-  top: 0px;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
-  background-color: $white;
-}
+  .prelaoder-body {
+    display: block;
+    position: absolute;
+    z-index: 1000;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background-color: $white;
+  }
   &__header {
     padding: 24px 24px 24px 32px;
+
+    @media (max-width: 767px) {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 12px 16px;
+    }
+
+    &-client-info {
+      display: flex;
+
+      @media (max-width: 767px) {
+        order: 1;
+      }
+    }
+
+    &-menu {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      @media (max-width: 767px) {
+        position: fixed;
+        top: 0;
+        right: 0;
+        padding-right: 16px;
+        background: $white;
+        padding-top: 20px;
+      }
+    }
+
+    &-subject {
+      display: none;
+      margin: 12px 0 8px;
+      @extend %h6-sb;
+
+      @media (max-width: 767px) {
+        display: block;
+      }
+    }
+  }
+
+  .qt-aside-modern__footer.updata-close {
+    display: none;
+
+    @media (max-width: 767px) {
+      width: 100%;
+      display: block;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      background: $white;
+      z-index: 1;
+      padding: 12px 16px;
+    }
+  }
+
+  .collapse-arrow {
+    @media (max-width: 767px) {
+      width: 36px;
+      height: 36px;
+      transform: none;
+      top: 10px;
+      left: 18px;
+      background-image: url('/assets/img/icons/collapse-arrow.svg');
+    }
+  }
+
+  app-ticket-change-status {
+    @media (max-width: 767px) {
+      position: fixed;
+      top: 15px;
+      left: 64px;
+    }
   }
 
   &__header-avatar {
@@ -697,7 +775,7 @@
   justify-content: flex-end;
 
   @media (max-width: 767px) {
-    position: fixed !important;
+    position: fixed;
     top: 0;
     left: 0;
     justify-content: flex-start;
@@ -705,6 +783,11 @@
     height: 100vh;
     overflow: auto;
     padding-bottom: 72px;
+    display: none;
+  }
+
+  &.--open {
+    display: flex;
   }
 }
 

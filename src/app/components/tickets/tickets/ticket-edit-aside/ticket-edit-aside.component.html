@@ -15,7 +15,7 @@
         </div>
         <div class="qt-aside__body ticket-edit-aside__body">
             <div class="ticket-edit-aside__header d-f jc-sb ai-c">
-                <div class="d-f">
+                <div class="ticket-edit-aside__header-client-info">
                     <div
                         class="ticket-edit-aside__header-avatar"
                         [textContent]="ticketsListService.getAssignedUserNameForAvatar(ticketProfile.createdUser)"
@@ -82,7 +82,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="d-f ai-c">
+                <div class="ticket-edit-aside__header-menu">
                     <div
                         class="ticket-edit-aside__more-users-title"
                         *ngIf="listAssignedUser.length > 3"
@@ -119,6 +119,18 @@
                         ngbTooltip="Settings"
                     ></app-ticket-profile-actions>
                 </div>
+                <!-- Mobile -->
+                <div
+                  class="ticket-edit-aside__header-subject"
+                  [hidden]="modeSubject === 'edit'"
+                  (click)="toggleSubject()"
+                >
+                  <span [ngClass]="getClassType()"></span>
+                  <span [textContent]="'Tkt# ' + ticketProfile.number"></span>
+                  <span>-</span>
+                  <span [textContent]="ticketProfile.subject"></span>
+                </div>
+                <!-- End mobile -->
             </div>
             <app-ticket-edit-tags
                 [selectedTag]="ticketProfile.tags"
@@ -204,4 +216,11 @@
         #rightPanel
         [ticketProfile]="ticketProfile"
     ></app-ticket-edit-aside-right-panel>
+    <!-- Mobile -->
+    <div class="qt-aside-modern__footer updata-close">
+      <button class="qt-button">
+        <span>Update & Close</span></button>
+    </div>
+    <!-- End Mobile -->
 </div>
+

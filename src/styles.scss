@@ -1163,37 +1163,117 @@ app-quotes-item {
   }
 }
 
-// TODO check width for other modals
 .modal-open {
-  .quote-send-modal {
+  .modal-ticket-profile-form-update {
     .modal-dialog {
-      @media (max-width: 767px) {
-        font-size: 13px;
-        line-height: 20px;
-        letter-spacing: 0;
-        font-weight: 600;
-        color: $primary-2;
-        max-width: 240px;
-        width: 100%;
-        margin: 0;
-        transform: translate(-50%, -50%);
+      font-size: 13px;
+      line-height: 20px;
+      letter-spacing: 0;
+      font-weight: 600;
+      color: $primary-2;
+      max-width: 240px;
+      width: 100%;
+      margin: 0;
+      transform: translate(-50%, -50%);
+    }
+    .qt-modal__body {
+      padding: 20px;
+
+      div {
+        margin-bottom: 20px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}
+
+.quote-send-modal-users-to-notify {
+  .modal-dialog {
+    margin: 0;
+    transform: translate(-50%, -50%) !important;
+    max-width: 360px;
+  }
+
+  .users-to-notify {
+    .qt-modal__header {
+      padding: 16px 16px 8px;
+    }
+    .qt-modal__body {
+      padding: 0 16px 16px;
+    }
+  }
+
+  .users-to-notify {
+    .assigne-user {
+      &-item {
+        display: flex;
+        align-items: center;
+      }
+
+      &-avatar {
+        @extend %сaption-l-sb;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-position: center;
+        background-size: cover;
+        color: white;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        flex-shrink: 0;
+        margin-bottom: 0 !important; // TODO add new modal and remove important
+      }
+    }
+
+    .qt-checkbox {
+      span {
+        width: 16px;
+        height: 16px;
+        line-height: 0;
+        border-radius: 50%;
+      }
+      input:checked ~ span {
+        background-image: url("/assets/img/icons/selected.svg");
+        border: none;
+      }
+    }
+
+    .text-content {
+      margin: 0 10px !important; // TODO add new modal and remove important
+      flex: 1;
+
+      .assigne-user-name {
+        margin-bottom: 2px !important; // TODO add new modal and remove important
+      }
+    }
+
+    .qt-input-block {
+      > div {
+        border-bottom: 1px solid $gray-400;
+        padding: 10px 0;
+        margin-bottom: 0 !important;
       }
     }
     .qt-modal__body {
-      @media (max-width: 767px) {
-        padding: 20px;
-      }
+      height: calc(100vh - 52px);
+    }
+    .email-selects {
+      overflow: auto;
+      margin-bottom: 0 !important;
+      height: calc(100% - 116px);
+    }
+    .qt-modal__footer {
+      padding: 16px 0;
+      justify-content: space-between;
 
-      div {
-        @media (max-width: 767px) {
-          margin-bottom: 20px;
-        }
-
-        &:last-child {
-          @media (max-width: 767px) {
-            margin-bottom: 0;
-          }
-        }
+      .qt-button {
+        max-width: calc(100% - 8px);
+        width: 100%;
+        justify-content: center;
       }
     }
   }
@@ -2199,87 +2279,6 @@ app-quotes-item {
 
   .qt-modal__body {
     padding: 0 16px 16px;
-  }
-}
-.modal-open {
-  .users-to-notify {
-    .qt-modal__header {
-      padding: 16px 16px 8px;
-    }
-    .qt-modal__body {
-      padding: 0 16px 16px;
-    }
-  }
-}
-.users-to-notify {
-  .assigne-user {
-    &-item {
-      display: flex;
-      align-items: center;
-    }
-
-    &-avatar {
-      @extend %сaption-l-sb;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background-position: center;
-      background-size: cover;
-      color: white;
-      align-items: center;
-      justify-content: center;
-      display: flex;
-      flex-shrink: 0;
-      margin-bottom: 0 !important; // TODO add new modal and remove important
-    }
-  }
-
-  .qt-checkbox {
-    span {
-      width: 16px;
-      height: 16px;
-      line-height: 0;
-      border-radius: 50%;
-    }
-    input:checked ~ span {
-      background-image: url("/assets/img/icons/selected.svg");
-      border: none;
-    }
-  }
-
-  .text-content {
-    margin: 0 10px !important; // TODO add new modal and remove important
-    flex: 1;
-
-    .assigne-user-name {
-      margin-bottom: 2px !important; // TODO add new modal and remove important
-    }
-  }
-
-  .qt-input-block {
-    > div {
-      border-bottom: 1px solid $gray-400;
-      padding: 10px 0;
-      margin-bottom: 0 !important;
-    }
-  }
-  .qt-modal__body {
-    height: calc(100vh - 52px);
-  }
-  .email-selects {
-    overflow: auto;
-    margin-bottom: 0 !important;
-    height: calc(100% - 116px);
-  }
-  .qt-modal__footer {
-    padding: 16px 0;
-    justify-content: space-between;
-
-    .qt-button {
-      max-width: calc(100% - 8px);
-      width: 100%;
-      justify-content: center;
-    }
   }
 }
 .new-users-content__modal,
@@ -3479,7 +3478,8 @@ app-ticket-profile-form-update {
 }
 
 app-ticket-profile-form-update {
-  position: sticky !important;
+  //position: sticky !important;
+  position: sticky; //TODO Check other modal
   bottom: 0;
   background: $white;
   z-index: 30;
@@ -3713,7 +3713,37 @@ app-add-assigned-user {
   top: $header-height;
   display: flex;
   height: calc(100% - #{$header-height});
+
+  @media (max-width: 767px) {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 52px;
+    overflow: auto;
+    top: 0;
+  }
 }
+
+.ticket-edit-aside {
+  app-ticket-edit-tags {
+    .tag-icon {
+      @media (max-width: 767px) {
+        display: none;
+      }
+    }
+    input {
+      @media (max-width: 767px) {
+        z-index: -1;
+        visibility: hidden;
+      }
+    }
+    .mat-form-field-label-wrapper {
+      @media (max-width: 767px) {
+        display: none;
+      }
+    }
+  }
+}
+
 
 .ticket-edit-aside__body,
 app-ticket-edit-aside-company-info,
