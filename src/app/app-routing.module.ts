@@ -118,8 +118,8 @@ const routes: Routes = [
   },
   {
     path: ':company/setting/myprofile',
-    component: MyProfileComponent,
-    pathMatch: 'full'
+    loadChildren: './components/setting/my-profile/my-profile.module#MyProfileModule'
+
   },
   {
     path: ':company/setting/tags',
@@ -144,8 +144,8 @@ const routes: Routes = [
   },
   {
     path: ':company/setting/taxes',
-    component: TaxesSettingsComponent,
-    pathMatch: 'full',
+    loadChildren: './components/setting/taxes/taxes-settings.module#TaxesSettingsModule'
+
   },
   {
     path: ':company/setting/glnumber',
@@ -154,8 +154,8 @@ const routes: Routes = [
   },
   {
     path: ':company/setting/permission',
-    component: PermissionManageComponent,
-    pathMatch: 'full',
+    loadChildren: './components/setting/permission-manage/permission-manage.module#PermissionManageModule'
+
   },
   {
     path: ':company/setting/emailTemplete',
@@ -178,8 +178,8 @@ const routes: Routes = [
   },
   {
     path: ':company/setting/subscription',
-    component: SubscriptionComponent,
-    pathMatch: 'full',
+    loadChildren: './components/setting/subscription/subscription.module#SubscriptionModule'
+
   },
   {
     path: ':company/inventory/products',
