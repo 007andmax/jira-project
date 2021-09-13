@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddAssignedUserComponent } from 'src/app/components/tickets/tickets/ticket-edit-aside/add-assigned-user/add-assigned-user.component';
+import { TicketStateService } from 'src/app/components/tickets/tickets/ticket-edit-aside/services/ticket-state.service';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
   selector: 'modal-add-users-notify',
@@ -8,7 +11,13 @@ import { AddAssignedUserComponent } from 'src/app/components/tickets/tickets/tic
 })
 export class ModalAddUsersNotifyComponent extends AddAssignedUserComponent {
 
-
+  public constructor(
+    public usersStateService: UsersStateService,
+    public activeModal: NgbActiveModal,
+    public ticketStateService: TicketStateService
+  ) {
+    super(usersStateService, ticketStateService);
+  }
 
   isSelected(user) {
     return this.selectedUsers.find(item => item.id === user.id);

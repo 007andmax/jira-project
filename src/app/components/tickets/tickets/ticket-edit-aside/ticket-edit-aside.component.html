@@ -191,6 +191,7 @@
                 [updates]="ticketProfile.updates"
             ></app-ticket-profile-updates>
             <app-ticket-profile-form-update
+                [ngClass]="{'--open':openedMobileUpdate}"
                 (onClosed)="close()"
                 [hidden]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
                 #updateForm

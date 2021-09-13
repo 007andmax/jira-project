@@ -73,7 +73,7 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     public ticketsListService: TicketsListService) { }
 
   ngOnInit() {
-    if (this.appService.checkMobile()) this.tab = '';
+    if (this.appService.checkMobile()) this.tab = null;
     this.currentUser = this.usersStateService.getCurrentUser();
     this.supportStateService.getHandleSendMode().subscribe(data => {
       let draftEmail: DraftEmail = new DraftEmail();
@@ -152,10 +152,13 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
   }
   public reset() {
     if (this.tab === "NOTE") this.elRef.nativeElement.querySelector("#chat").value = "";
-    this.tab = "NOTE";
+    if (!this.appService.checkMobile()) this.tab = "NOTE";
     this.files = [];
     this.showAddUpdateUser = false;
     this.ticketProfileFormUpdate = new TicketProfileFormUpdate();
+  }
+  closeMobile() {
+    this.ticketStateService.setTabUpdate(null);
   }
   getUsersForUpdate() {
     let userList = this.usersStateService.getAllUsers().sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?

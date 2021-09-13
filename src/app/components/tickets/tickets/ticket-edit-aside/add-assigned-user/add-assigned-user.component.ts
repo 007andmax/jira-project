@@ -42,8 +42,7 @@ export class AddAssignedUserComponent implements OnInit {
    * @param {QuoteStateService} quoteStateService to work quote state
    */
   public constructor(
-    private usersStateService: UsersStateService,
-    public activeModal: NgbActiveModal,
+    public usersStateService: UsersStateService,
     public ticketStateService: TicketStateService
   ) {
 

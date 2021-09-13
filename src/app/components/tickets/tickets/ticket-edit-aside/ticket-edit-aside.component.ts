@@ -44,6 +44,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
 
   ticketProfile: TicketProfile = new TicketProfile();
   opened = false;
+  openedMobileUpdate = false;
   modeSubject = 'view';
   modeDescription = 'view';
   showAddAssignedUser = false;
@@ -166,6 +167,9 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(onChangeAssignedUser);
+    this.ticketStateService.onSetTabUpdate.subscribe(data => {
+      this.openedMobileUpdate = (data !== null);
+    })
   }
   showDetailUser() {
     let user = this.usersStateService.getAllUsers().find(item => item.id === this.ticketProfile.createdUser.id);
@@ -176,7 +180,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
   }
   showModalAddUpdate() {
     console.log("showModalAddUpdate");
-    const modalRef = this.modalService.open(ModalAddUpdateTicketComponent, { windowClass: 'quote-send-modal' });
+    const modalRef = this.modalService.open(ModalAddUpdateTicketComponent, { windowClass: 'modal-ticket-profile-form-update' });
     console.log("modalRef", modalRef);
   }
   checkExistServicesProducts() {
@@ -303,8 +307,10 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     this.listAssignedUser = data;
   }
   onToggleAddAssignedUser() {
+    console.log("this.appService.checkMobile()", this.appService.checkMobile());
     if (this.appService.checkMobile()) {
-      const modalRef = this.modalService.open(ModalAddUsersNotifyComponent, { windowClass: 'quote-send-modal' });
+      console.log("this.appService.checkMobile()", this.appService.checkMobile());
+      const modalRef = this.modalService.open(ModalAddUsersNotifyComponent, { windowClass: 'quote-send-modal-users-to-notify' });
       modalRef.componentInstance.userList = this.getUsersForAssign();
       modalRef.componentInstance.selectedUsers = this.listAssignedUser;
       return;
