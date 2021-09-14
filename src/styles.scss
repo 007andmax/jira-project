@@ -2261,7 +2261,6 @@ app-quotes-item {
       padding: 0;
     }
 
-
     li {
       font-weight: 500;
       color: $primary-2;
@@ -3490,7 +3489,8 @@ app-ticket-profile-form-update {
       padding: 0 16px;
     }
 
-    .d-f { // TODO replace .d-f for class
+    .d-f {
+      // TODO replace .d-f for class
       @media (max-width: 767px) {
         flex-wrap: wrap;
         justify-content: space-between;
@@ -3598,7 +3598,8 @@ app-ticket-profile-form-update {
     }
 
     .ticket-edit-aside__users-linked,
-    .d-f + .d-f { // TODO repalce .d-f for class
+    .d-f + .d-f {
+      // TODO repalce .d-f for class
       @media (max-width: 767px) {
         display: none;
       }
@@ -3623,7 +3624,7 @@ app-ticket-profile-form-update {
   }
 
   .qt-aside__close-modal {
-    background-image: url('/assets/img/icons/close-white.svg');
+    background-image: url("/assets/img/icons/close-white.svg");
     position: absolute;
     top: 50%;
     left: 26px;
@@ -3743,7 +3744,6 @@ app-add-assigned-user {
     }
   }
 }
-
 
 .ticket-edit-aside__body,
 app-ticket-edit-aside-company-info,
@@ -4200,4 +4200,9 @@ input.--input-error {
 }
 .fr-command.fr-btn.fr-active + .fr-dropdown-menu {
   margin-left: auto !important;
+}
+#userback_button_container {
+  @media (max-width: 767px) {
+    display: none !important;
+  }
 }

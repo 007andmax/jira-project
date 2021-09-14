@@ -1,10 +1,8 @@
 /deep/ .ticket-table {
-
-
   th {
-   white-space: nowrap;
+    white-space: nowrap;
   }
- td {
+  td {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -19,9 +17,20 @@ app-tickets-table-item {
   display: contents;
 }
 
-
-
 .pengind-loading {
   bottom: 20px;
   top: auto;
+}
+.mobile-action-btn {
+  display: none;
+  width: 48px;
+  height: 48px;
+  background-color: #16a4fa;
+  position: fixed;
+  right: 16px;
+  bottom: 100px;
+  border-radius: 100px;
+  @media (max-width: 767px) {
+    display: block;
+  }
 }

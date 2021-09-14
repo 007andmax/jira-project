@@ -125,6 +125,9 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     this.ticketsListService.setBlockList(false);
     this.tickets = [];
   }
+  onAddTicket() {
+    this.ticketsStateService.onToggleAddTicket();
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

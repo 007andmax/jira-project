@@ -121,14 +121,14 @@
                 </div>
                 <!-- Mobile -->
                 <div
-                  class="ticket-edit-aside__header-subject"
-                  [hidden]="modeSubject === 'edit'"
-                  (click)="toggleSubject()"
+                    class="ticket-edit-aside__header-subject"
+                    [hidden]="modeSubject === 'edit'"
+                    (click)="toggleSubject()"
                 >
-                  <span [ngClass]="getClassType()"></span>
-                  <span [textContent]="'Tkt# ' + ticketProfile.number"></span>
-                  <span>-</span>
-                  <span [textContent]="ticketProfile.subject"></span>
+                    <span [ngClass]="getClassType()"></span>
+                    <span [textContent]="'Tkt# ' + ticketProfile.number"></span>
+                    <span>-</span>
+                    <span [textContent]="ticketProfile.subject"></span>
                 </div>
                 <!-- End mobile -->
             </div>
@@ -218,9 +218,13 @@
     ></app-ticket-edit-aside-right-panel>
     <!-- Mobile -->
     <div class="qt-aside-modern__footer updata-close">
-      <button class="qt-button">
-        <span>Update & Close</span></button>
+        <button class="qt-button">
+            <span>Update & Close</span>
+        </button>
     </div>
+    <div
+        class="mobile-action-btn"
+        (click)="showModalAddUpdate()"
+    ></div>
     <!-- End Mobile -->
 </div>
-

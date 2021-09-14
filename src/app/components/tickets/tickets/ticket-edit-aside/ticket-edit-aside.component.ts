@@ -75,7 +75,6 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       this.showPreloader = true;
     })
     let getOnEditTicket = this.ticketsStateService.getOnEditTicket().subscribe(data => {
-      if (this.appService.checkMobile()) this.showModalAddUpdate();
       this.ticketStateService.unsubscribeTicket();
       if (this.updateForm) this.updateForm.reset();
       this.ticketProfile = data;
