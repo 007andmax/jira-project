@@ -5,6 +5,10 @@
     background-color: $gray-100;
     font-size: 13px;
 
+    @media (max-width: 767px) {
+      padding: 16px;
+    }
+
     &__count {
       font-weight: 600;
     }

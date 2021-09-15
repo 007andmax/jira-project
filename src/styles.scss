@@ -3453,10 +3453,25 @@ app-ticket-profile-form-update {
   margin-bottom: 15px;
 }
 
-.ticket-updates__update-block {
-  border-bottom: 1px solid $gray-400;
-  padding-bottom: 16px;
-  margin-bottom: 16px;
+.ticket-updates {
+  &__update-block {
+    position: relative;
+    border-bottom: 1px solid $gray-400;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+  }
+
+  &__author-line {
+    @media (max-width: 767px) {
+      width: calc(100% - 32px);
+    }
+  }
+
+  app-date-picker {
+    @media (max-width: 767px) {
+      margin-left: auto;
+    }
+  }
 }
 
 .ticket-updates .ticket-updates__ticket-item {
@@ -3475,91 +3490,123 @@ app-ticket-profile-form-update {
   background-size: 16px;
   cursor: pointer;
 }
+app-ticket-edit-aside {
+  app-ticket-profile-form-update {
+    //position: sticky !important;
+    position: sticky; //TODO Check other modal
+    bottom: 0;
+    background: $white;
+    z-index: 30;
+    .cps-block__content {
+      min-height: 106px;
 
-app-ticket-profile-form-update {
-  //position: sticky !important;
-  position: sticky; //TODO Check other modal
-  bottom: 0;
-  background: $white;
-  z-index: 30;
-  .cps-block__content {
-    min-height: 106px;
-
-    @media (max-width: 767px) {
-      padding: 0 16px;
-    }
-
-    .d-f {
-      // TODO replace .d-f for class
       @media (max-width: 767px) {
-        flex-wrap: wrap;
-        justify-content: space-between;
-      }
-    }
-
-    label {
-      @media (max-width: 767px) {
-        margin-top: 42px;
-        width: 100%;
-        max-width: 100%;
-        margin-right: 0;
+        padding: 0 16px;
       }
 
-      &::before {
+      .d-f {
+        // TODO replace .d-f for class
         @media (max-width: 767px) {
-          left: 0;
-          top: -28px;
-          color: $primary-2;
-          font-size: 13px;
-          line-height: 20px;
-          letter-spacing: 0;
-          font-weight: 600;
+          flex-wrap: wrap;
+          justify-content: space-between;
         }
       }
 
-      input {
+      label {
         @media (max-width: 767px) {
-          padding: 10px 14px !important;
+          margin-top: 42px;
+          width: 100%;
+          max-width: 100%;
+          margin-right: 0;
         }
-      }
 
-      .product-item__cost-input {
-        &::after {
+        &::before {
           @media (max-width: 767px) {
-            left: unset;
-            right: 16px;
+            left: 0;
+            top: -28px;
+            color: $primary-2;
+            font-size: 13px;
+            line-height: 20px;
+            letter-spacing: 0;
+            font-weight: 600;
+          }
+        }
+
+        input {
+          @media (max-width: 767px) {
+            padding: 10px 14px !important;
+          }
+        }
+
+        .product-item__cost-input {
+          &::after {
+            @media (max-width: 767px) {
+              left: unset;
+              right: 16px;
+            }
+          }
+        }
+
+        .product-item__price-input {
+          &::after {
+            @media (max-width: 767px) {
+              left: unset;
+              right: 16px;
+            }
+          }
+        }
+
+        .product-item__discount-input {
+          &::after {
+            @media (max-width: 767px) {
+              right: 16px;
+            }
           }
         }
       }
 
-      .product-item__price-input {
+      .product-dropdown-new-ng {
+        @media (max-width: 767px) {
+          margin-top: 42px;
+        }
+
         &::after {
           @media (max-width: 767px) {
-            left: unset;
-            right: 16px;
+            position: absolute;
+            content: "Product";
+            left: 0;
+            top: -28px;
+            color: #212b36;
+            font-size: 13px;
+            line-height: 20px;
+            letter-spacing: 0;
+            font-weight: 600;
           }
         }
       }
 
+      .product-item__cost-input,
+      .product-item__qty-input,
+      .product-item__price-input,
       .product-item__discount-input {
-        &::after {
-          @media (max-width: 767px) {
-            right: 16px;
-          }
+        @media (max-width: 767px) {
+          max-width: calc(50% - 8px);
         }
       }
     }
 
-    .product-dropdown-new-ng {
+    .qt-aside__buttons {
       @media (max-width: 767px) {
-        margin-top: 42px;
+        padding: 0 16px;
+        position: relative;
+        margin-top: 28px;
       }
 
       &::after {
         @media (max-width: 767px) {
+          content: "Add Users to notify";
           position: absolute;
-          content: "Product";
-          left: 0;
+          left: 16px;
           top: -28px;
           color: #212b36;
           font-size: 13px;
@@ -3568,80 +3615,54 @@ app-ticket-profile-form-update {
           font-weight: 600;
         }
       }
-    }
 
-    .product-item__cost-input,
-    .product-item__qty-input,
-    .product-item__price-input,
-    .product-item__discount-input {
-      @media (max-width: 767px) {
-        max-width: calc(50% - 8px);
+      .ticket-edit-aside__users-linked,
+      .d-f + .d-f {
+        // TODO repalce .d-f for class
+        @media (max-width: 767px) {
+          display: none;
+        }
       }
     }
-  }
 
-  .qt-aside__buttons {
-    padding: 0 16px;
-    position: relative;
-    margin-top: 28px;
+    .qt-aside-modern__footer {
+      display: none;
 
-    &::after {
-      content: "Add Users to notify";
-      position: absolute;
-      left: 16px;
-      top: -28px;
-      color: #212b36;
-      font-size: 13px;
-      line-height: 20px;
-      letter-spacing: 0;
-      font-weight: 600;
-    }
-
-    .ticket-edit-aside__users-linked,
-    .d-f + .d-f {
-      // TODO repalce .d-f for class
       @media (max-width: 767px) {
-        display: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        z-index: 1;
       }
     }
-  }
 
-  .qt-aside-modern__footer {
-    display: none;
-
-    @media (max-width: 767px) {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px;
+    .qt-aside__close-modal {
+      background-image: url("/assets/img/icons/close-white.svg");
       position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background: #fff;
-      z-index: 1;
+      top: 50%;
+      left: 26px;
+      transform: translate(-50%, -50%);
+      display: none;
+
+      @media (max-width: 767px) {
+        display: block;
+      }
     }
-  }
 
-  .qt-aside__close-modal {
-    background-image: url("/assets/img/icons/close-white.svg");
-    position: absolute;
-    top: 50%;
-    left: 26px;
-    transform: translate(-50%, -50%);
-    display: none;
-
-    @media (max-width: 767px) {
-      display: block;
-    }
-  }
-
-  .cps-block__chat-block {
-    @media (max-width: 767px) {
-      margin-bottom: 16px;
+    .cps-block__chat-block {
+      @media (max-width: 767px) {
+        margin-bottom: 16px;
+      }
     }
   }
 }
+
 
 .dropdown-menu.services-container.show {
   min-width: 100%;
