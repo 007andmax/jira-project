@@ -113,7 +113,6 @@ import { InventoryEditAsideComponent } from './components/inventory/inventory-ed
 import { LeftPanelInventoryComponent } from './components/left-panel/left-panel-inventory/left-panel-inventory.component';
 import { AddCategoryProductComponent } from './components/left-panel/left-panel-inventory/add-category-product/add-category-product.component';
 import { MyProfileComponent } from './components/setting/my-profile/my-profile.component';
-import { SettingComponent } from './components/setting/setting.component';
 import { ManageTagsComponent } from './components/setting/manage-tags/manage-tags.component';
 import { CompanyProfileComponent } from './components/setting/company-profile/company-profile.component';
 import { TicketReportComponent } from './components/reports/reports/ticket-report/ticket-report.component';
@@ -509,6 +508,7 @@ import { DocumentsAddFooterModule } from './components/documents/documents-add/d
 import { DocumentsLinkedModule } from './components/documents/documents-add/documents-add-info/documents-linked/documents-linked.module';
 import { DocumentsAddEditCategoriesModule } from './components/documents/documents-add/documents-add-info/documents-add-edit-categories/documents-add-edit-categories.module';
 import { ToFixedModule } from './pipe/to-fixed/to-fixed.module';
+import { TicketTaskModule } from './components/device/ticket-task/ticket-task.module';
 
 
 declare var $: any;
@@ -596,7 +596,7 @@ declare var $: any;
     //   SettingComponent,
     // CompanyProfileComponent,
     // ManageTagsComponent,
-    TechUsersComponent,
+    //  TechUsersComponent,
     //  EmailSettingComponent,
     // TaxesSettingsComponent,
     // PermissionManageComponent,
@@ -761,9 +761,9 @@ declare var $: any;
     DefaultServicesEditComponent,
     DeviceComponent,
     NavComponent,
-    DashboardComponent,
-    HardwareComponent,
-    SoftwareComponent,
+    // DashboardComponent,
+    //HardwareComponent,
+    // SoftwareComponent,
     StartupComponent,
     ServicesComponent,
     AntivirusComponent,
@@ -771,9 +771,9 @@ declare var $: any;
     WindowsComponent,
     FileComponent,
     PasswordComponent,
-    TicketTaskComponent,
-    searchTextPipe,
-    SoftwarePipe,
+    //  TicketTaskComponent,
+    //searchTextPipe,
+    //  SoftwarePipe,
     //  DropDownComponent,
     //  ContractsAsideHourlyBillingPreviewComponent,
     // ContractsPreviewComponent,
@@ -1014,7 +1014,8 @@ declare var $: any;
     DocumentsAddFooterModule,
     DocumentsLinkedModule,
     DocumentsAddEditCategoriesModule,
-    ToFixedModule
+    ToFixedModule,
+    TicketTaskModule
   ],
   entryComponents: [
     ModalQuoteComponent,

@@ -78,6 +78,7 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`contracts`)) this.state = 'company-contracts';
           if (window.location.href.includes(`/company/`) && window.location.href.includes(`documents`)) this.state = 'company-documents';
 
+
           if (window.location.href.includes(`/inventory/products`)) this.state = 'inventory';
           if (window.location.href.includes(`/password-manager`)) this.state = 'password-manager';
           if (window.location.href.includes(`/setting/myprofile`)) this.state = 'myprofile-component';
@@ -128,6 +129,8 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/report/ticket-report`)) this.state = 'ticket-report';
           if (window.location.href.includes(`/report/service-report`)) this.state = 'service-report';
           if (window.location.href.includes(`/report/income-accounts`)) this.state = 'income-accounts';
+
+          if (window.location.href.includes(`/device/`)) this.state = 'new-device';
 
           if (this.state === '' && this.companiesStateService.getCurrentCompany()) this.goToDefaultPage();
 

@@ -134,8 +134,8 @@ const routes: Routes = [
   },
   {
     path: ':company/setting/techUsers',
-    component: TechUsersComponent,
-    pathMatch: 'full',
+    loadChildren: './components/setting/tech-users/tech-users.module#TechUsersModule'
+
   },
   {
     path: ':company/setting/emailSetting',
@@ -246,15 +246,16 @@ const routes: Routes = [
   },
   {
     path: ':company/device/dashboard/:type/:id',
-    component: DashboardComponent
+    loadChildren: './components/device/dashboard/dashboard.module#DashboardModule'
   },
   {
     path: ':company/device/hardware/:type/:id',
-    component: HardwareComponent
+    loadChildren: './components/device/hardware/hardware.module#HardwareModule'
+
   },
   {
     path: ':company/device/software/:type/:id',
-    component: SoftwareComponent
+    loadChildren: './components/device/software/software.module#SoftwareModule'
   },
   {
     path: ':company/device/service',
