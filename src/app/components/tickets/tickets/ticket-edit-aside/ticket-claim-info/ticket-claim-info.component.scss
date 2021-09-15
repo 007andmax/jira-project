@@ -5,16 +5,24 @@
     padding: 0 32px;
     color: $gray-800;
     margin-bottom: 10px;
+
+    @media (max-width: 767px) {
+      padding: 0 16px;
+      overflow: hidden;
+    }
   }
 
   .ticket-edit-aside__claimed-info-lines {
     position: absolute;
-    border: 1px solid   $gray-400;
+    border: 1px solid $gray-400;
     border-left: none;
     border-right: none;
     width: calc(100% - 64px);
     height: 4px;
     top: calc(50% - 2px);
+    @media (max-width: 767px) {
+      width: 100%;
+    }
   }
   .ticket-edit-aside__claimed-date {
     border: 1px solid $gray-400;
@@ -23,4 +31,10 @@
     z-index: 1;
     background: $white;
     font-size: 11px;
+    line-height: 16px;
+    text-align: center;
+    @media (max-width: 767px) {
+      width: 100%;
+      padding: 4px 8px;
+    }
   }

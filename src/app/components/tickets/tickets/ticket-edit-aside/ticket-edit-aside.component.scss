@@ -70,13 +70,13 @@
     }
 
     &-menu {
-      width: 100%;
       display: flex;
       align-items: center;
       justify-content: flex-end;
 
       @media (max-width: 767px) {
         position: fixed;
+        width: 100%;
         top: 0;
         right: 0;
         padding-right: 16px;
@@ -87,7 +87,7 @@
 
     &-subject {
       display: none;
-      margin: 12px 0 8px;
+      margin: 44px 0 10px;
       @extend %h6-sb;
 
       @media (max-width: 767px) {
@@ -127,6 +127,7 @@
       position: fixed;
       top: 15px;
       left: 64px;
+      z-index: 1;
     }
   }
 
@@ -269,6 +270,10 @@
   &__ticket-subject {
     @extend %h4-sb;
     margin-bottom: 10px;
+
+    @media (max-width: 767px) {
+      display: none;
+    }
   }
 
   &__ticket-subject-edit {
@@ -323,6 +328,14 @@
       background-color: $white;
       overflow: auto;
       height: auto;
+
+      @media (max-width: 767px) {
+        min-height: 20px;
+        padding: 0;
+        border: none;
+        line-height: 20px;
+        color: $primary-2;
+      }
     }
   }
 
@@ -702,6 +715,10 @@
     line-height: 1.33;
     color: $gray-800;
     margin-top: 2px;
+
+    @media (max-width: 767px) {
+      margin: 16px 0;
+    }
   }
 }
 
