@@ -60,13 +60,13 @@
     <div class="qt-aside-modern__content">
         <!-- Mobile -->
         <div class="qt-input-block qt-input-line ticket-add-aside__priority-level-input">
-          <span class="qt-input-block__label">Priority Level</span>
-          <app-select-search
-            [class]="['qt-dropdown']"
-            [list]=""
-            (onSelectedItem)="onSelectTechUser($event)"
-            [placeholder]="'Low'"
-          ></app-select-search>
+            <span class="qt-input-block__label">Priority Level</span>
+            <app-select-search
+                [class]="['qt-dropdown']"
+                [list]
+                (onSelectedItem)="onSelectTechUser($event)"
+                [placeholder]="'Low'"
+            ></app-select-search>
         </div>
         <!-- End Mobile -->
         <div class="qt-input-block qt-input-line --required">
@@ -171,7 +171,15 @@
         <div class="users-to-notify">
             <div class="users-to-notify__title">Add users to notify them ticket update</div>
             <div class="save-template">
+                <div
+                    class="device-user pointer"
+                    id="dropdownTehuser"
+                    *ngIf="appService.checkMobile()"
+                    (click)="onAddAssignedUser()"
+                >
+                </div>
                 <app-teh-users
+                    *ngIf="!appService.checkMobile()"
                     [users]="listTechUsersForAssign"
                     (usersChange)="onChangeShareUsers($event)"
                 ></app-teh-users>

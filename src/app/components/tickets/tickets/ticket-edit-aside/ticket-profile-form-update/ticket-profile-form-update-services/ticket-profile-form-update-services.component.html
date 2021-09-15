@@ -146,12 +146,33 @@
     </div>
     <!-- Mobile -->
     <div class="qt-aside-modern__footer">
-      <div class="qt-df">
-        <button class="qt-button --gray">Add More</button>
-        <button class="qt-button">
-          <span class="ng-star-inserted">Save</span>
-        </button>
-      </div>
+        <div class="qt-df">
+            <button
+                class="qt-button --gray"
+                [ngClass]="{'--loading':isUpdate}"
+                appDisabledBtn
+                #addMoreMobileBtn="disabled"
+                (onClick)="addMoreMobile()"
+            >
+                <span *ngIf="!isUpdate">Add More</span>
+                <app-preloader-ticket *ngIf="isUpdate"></app-preloader-ticket>
+            </button>
+            <button
+                class="qt-button"
+                [ngClass]="{'--loading':isUpdate}"
+                appDisabledBtn
+                #updateMobileBtn="disabled"
+                (onClick)="updateMobile()"
+            >
+                <span
+                    class="ng-star-inserted"
+                    *ngIf="!isUpdate"
+                >
+                    Save
+                </span>
+                <app-preloader-ticket *ngIf="isUpdate"></app-preloader-ticket>
+            </button>
+        </div>
     </div>
     <!-- End Mobile -->
 </div>

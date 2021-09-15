@@ -787,7 +787,7 @@
   justify-content: flex-end;
 
   @media (max-width: 767px) {
-    position: fixed;
+    position: fixed !important;
     top: 0;
     left: 0;
     justify-content: flex-start;

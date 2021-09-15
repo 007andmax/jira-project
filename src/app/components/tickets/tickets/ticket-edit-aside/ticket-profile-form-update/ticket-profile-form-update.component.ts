@@ -37,6 +37,8 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
   @ViewChild('selectProducts') selectProducts: TicketProfileFormUpdateProductsComponent;
   @ViewChild('update_closeBtn') update_closeBtn: DisabledBtnDirective;
   @ViewChild('updateBtn') updateBtn: DisabledBtnDirective;
+  @ViewChild('addMoreMobileBtn') addMoreMobileBtn: DisabledBtnDirective;
+  @ViewChild('updateMobileBtn') updateMobileBtn: DisabledBtnDirective;
   @ViewChild('selectServices') selectServices: TicketProfileFormUpdateServicesComponent;
   @Input() lisUpdateUser: Array<CurrentUser> = [];
   @Input() set ticket(value) {
@@ -50,6 +52,7 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
   @Output() onClosed = new EventEmitter();
   showAddUpdateUser = false;
   isUpdate: boolean = false;
+  isUpdateMobile: boolean = false;
   isUpdateAndClose: boolean = false;
   files: any[] = [];
   tab: string = "NOTE";
@@ -167,6 +170,10 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     let clientUsers = userList.filter((item) => item.accountType === "CLIENT" && !item.deletedAt && item.company.id === this.ticketProfile.company.id);
     return [...techusers, ...clientUsers];
   }
+  updateMobile() {
+    this.isUpdateMobile = true;
+    this.update();
+  }
   update() {
     if (this.tab === "NOTE") {
       if (!this.ticketProfileFormUpdate.isValidateNote()) return;
@@ -185,6 +192,11 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
   }
   onUpdateTicket(data) {
     this.updateBtn.setDisabled(true);
+    if (this.appService.checkMobile()) {
+      if (this.tab === "PRODUCT") this.selectProducts.initUpdateMobile();
+      if (this.tab === "SERVICE") this.selectServices.initUpdateMobile();
+    }
+    if (this.updateMobileBtn) this.updateMobileBtn.setDisabled(true);
     this.isUpdate = true;
     this.ticketsService.updateTicket(data).subscribe(data => {
       this.isUpdate = false;
@@ -198,13 +210,23 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
       this.files = [];
       this.ticketProfileFormUpdate.clearAttachments();
       this.updateBtn.setDisabled(false);
+      if (this.updateMobileBtn) this.updateMobileBtn.setDisabled(false);
+      if (this.isUpdateMobile) this.closeMobile();
+      if (this.appService.checkMobile()) {
+        if (this.tab === "PRODUCT") this.selectProducts.complateUpdateMobile();
+        if (this.tab === "SERVICE") this.selectServices.complateUpdateMobile();
+      }
+      this.isUpdateMobile = false;
     }, err => {
       this.isUpdate = false;
+      this.isUpdateMobile = false;
       this.updateBtn.setDisabled(false);
+      if (this.updateMobileBtn) this.updateMobileBtn.setDisabled(false);
     })
   }
   updateAndClose() {
     if (!this.checkUpdateAndClose()) return;
+    console.log("updateAndClose");
     if (this.tab === "NOTE") {
       if (this.ticketProfileFormUpdate.isValidateNote()) {
         this.onUpdateTicketAndClose(this.ticketProfileFormUpdate.getDataForUpdateNote());
@@ -225,6 +247,7 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
         this.onUpdateTicketAndClose(this.ticketProfileFormUpdate.getDataForUpdateService());
       } else this.onUpdateTicketAndClose(this.ticketProfileFormUpdate.getDataForClose());
     }
+    if (this.tab == null) this.onUpdateTicketAndClose(this.ticketProfileFormUpdate.getDataForClose());
   }
   onUpdateTicketAndClose(data) {
 

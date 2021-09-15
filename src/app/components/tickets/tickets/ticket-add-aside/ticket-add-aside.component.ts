@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { TicketAdd } from '../class/ticket-add';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -13,6 +13,11 @@ import { UploadAreaComponent } from '../../../shared/upload-area/upload-area.com
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 import { DropDownComponent } from '../../../shared/drop-down/drop-down.component';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
+import { AppService } from 'src/app/states/app/app.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalAddUsersNotifyComponent } from 'src/app/services/modal/modal-add-users-notify/modal-add-users-notify.component';
+import { TicketStateService } from '../ticket-edit-aside/services/ticket-state.service';
+import { Subscription } from 'rxjs';
 
 
 
@@ -21,7 +26,7 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive'
   templateUrl: './ticket-add-aside.component.html',
   styleUrls: ['./ticket-add-aside.component.scss']
 })
-export class TicketAddAsideComponent implements OnInit {
+export class TicketAddAsideComponent implements OnInit, OnDestroy {
   @ViewChild('userDP') userDP: DropDownComponent;
   @ViewChild('techUserDP') techUserDP: SelectSearchComponent;
   @ViewChild('deviceDP') deviceDP: SelectSearchComponent;
@@ -43,13 +48,18 @@ export class TicketAddAsideComponent implements OnInit {
   new TitleListType('Medium Priority', 'MEDIUM'),
   new TitleListType('High Priority', 'HIGH')];
   ticketValidate: TicketValidate = new TicketValidate();
+  sub: Subscription = new Subscription();
   constructor(private ticketsStateService: TicketsStateService,
     private usersStateService: UsersStateService,
     private ticketsService: TicketsService,
     private devicesStateService: DevicesStateService,
     private elRef: ElementRef,
     public cd: ChangeDetectorRef,
+    public appService: AppService,
+    private modalService: NgbModal,
+    private ticketStateService: TicketStateService,
     private companiesState: CompaniesStateService,) { }
+
 
   ngOnInit() {
     this.ticketsStateService.getOnActualNumber().subscribe(data => {
@@ -68,6 +78,15 @@ export class TicketAddAsideComponent implements OnInit {
 
       this.getClientsList(data);
     })
+    let onChangeAssignedUser = this.ticketStateService.onChangeAssignedUser.subscribe(data => {
+      this.onChangeShareUsers(data);
+    })
+    this.sub.add(onChangeAssignedUser);
+  }
+  onAddAssignedUser() {
+    const modalRef = this.modalService.open(ModalAddUsersNotifyComponent, { windowClass: 'quote-send-modal-users-to-notify' });
+    modalRef.componentInstance.userList = this.listTechUsersForAssign;
+    modalRef.componentInstance.selectedUsers = this.shareUsersList;
   }
   add() {
     if (this.ticketValidate.isValidate(this.ticketAdd)) {
@@ -245,5 +264,8 @@ export class TicketAddAsideComponent implements OnInit {
 
   public trackByIndex(index, item) {
     return index;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

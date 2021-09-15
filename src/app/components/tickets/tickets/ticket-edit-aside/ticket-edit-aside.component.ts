@@ -155,6 +155,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     });
     let onChangeAssignedUser = this.ticketStateService.onChangeAssignedUser.subscribe(data => {
+      if (!this.opened) return;
       this.onSelectAssignedUser(data);
       if (this.listAssignedUser.length > 0 && !this.checkAssignedUser()) {
         let ids = this.listAssignedUser.map(item => {
@@ -261,7 +262,10 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     return userList.filter((item) => item.accountType === "TECH" && !item.deletedAt);
 
   }
-
+  updateAndCloseMobile() {
+    console.log("updateAndCloseMobile");
+    this.updateForm.updateAndClose();
+  }
   toggleSubject() {
     var textCurrent = this.elRef.nativeElement.querySelector("#ticket-subject").value;
     var textOld = this.ticketProfile.subject;

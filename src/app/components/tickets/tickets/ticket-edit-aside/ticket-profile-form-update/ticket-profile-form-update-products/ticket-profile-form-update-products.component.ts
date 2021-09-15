@@ -7,6 +7,7 @@ import { TicketsStateService } from 'src/app/states/tickets/tickets-state.servic
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
 import { InventoryChange } from 'src/app/components/inventory/class/inventory-change';
 import { Subscription } from 'rxjs';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
 
 @Component({
   selector: 'app-ticket-profile-form-update-products',
@@ -14,7 +15,12 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./ticket-profile-form-update-products.component.scss']
 })
 export class TicketProfileFormUpdateProductsComponent implements OnInit, OnDestroy {
+  isUpdate: boolean = false;
+  @ViewChild('updateMobileBtn') updateMobileBtn: DisabledBtnDirective;
+  @ViewChild('addMoreMobileBtn') addMoreMobileBtn: DisabledBtnDirective;
   @ViewChild('productDP') productDP: ProductListComponent;
+  @Output() onUpdateMobile = new EventEmitter();
+  @Output() onAddMoreMobile = new EventEmitter();
   addedProductList = [];
   currentProduct: TicketProfileFormProduct = new TicketProfileFormProduct();
   sub: Subscription = new Subscription();
@@ -31,7 +37,22 @@ export class TicketProfileFormUpdateProductsComponent implements OnInit, OnDestr
       this.productDP.clear();
     })
   }
-
+  initUpdateMobile() {
+    this.isUpdate = true;
+    this.updateMobileBtn.setDisabled(true);
+    this.addMoreMobileBtn.setDisabled(true);
+  }
+  updateMobile() {
+    this.onUpdateMobile.emit(null);
+  }
+  addMoreMobile() {
+    this.onAddMoreMobile.emit(null);
+  }
+  public complateUpdateMobile() {
+    this.isUpdate = false;
+    this.addMoreMobileBtn.setDisabled(false);
+    this.updateMobileBtn.setDisabled(false);
+  }
   public onChangeSaleProduct(val, index) {
     let value = Number(val);
     this.addedProductList[index].item.sale = value;
