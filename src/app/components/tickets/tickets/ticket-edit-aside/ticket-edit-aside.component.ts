@@ -67,6 +67,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     private appStateService: AppStateService,
     private modalService: NgbModal,
     private appService: AppService,
+    private devicesStateService: DevicesStateService,
     private companiesStateService: CompaniesStateService) { }
 
 
@@ -130,8 +131,17 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       }
     });
     this.ticketsStateService.getOnChangeFieldTicket().subscribe((data: TicketChangeField) => {
+      console.log("data", data);
       if (this.opened) {
-        if (this.ticketProfile.id === data.id) this.ticketProfile[data.field] = data.value;
+        if (this.ticketProfile.id === data.id) {
+          if (data.field === "agent.deviceId") {
+            console.log("this.devicesStateService.getAllDevices()[this.ticketProfile.company.id]", this.devicesStateService.getAllDevices()[this.ticketProfile.company.id]);
+            let device = this.devicesStateService.getAllDevices()[this.ticketProfile.company.id].find(item => item.agentId === data.value || item.id === data.value);
+            this.ticketProfile.agent.label = device.label;
+          }
+          this.ticketProfile[data.field] = data.value;
+        }
+        this.cd.detectChanges();
       }
     });
     this.ticketStateService.getOnChangeUpdatesTicket().subscribe(newChange => {

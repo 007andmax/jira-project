@@ -60,7 +60,11 @@ export class TicketsStateService {
       if (newChange.action === 'TICKET_DELETED') this.removeTicket.emit(newChange.data);
       if (newChange.action === 'TICKET_BILLABLE') this.changeFieldTicket.emit(new TicketChangeField("isBillable", newChange.data.id, newChange.data.isBillable));
       if (newChange.action === 'TICKET_INVOICED') this.changeFieldTicket.emit(new TicketChangeField("hasInvoice", newChange.data.id, newChange.data.hasInvoice));
-      if (newChange.action === 'LINKED_AGENT_CHANGED') this.changeFieldTicket.emit(new TicketChangeField("agent", newChange.data.id, (newChange.data.deviceId) ? { deviceId: newChange.data.deviceId } : null));
+      if (newChange.action === 'LINKED_AGENT_CHANGED') {
+        newChange.data.ticketIds.forEach(item => {
+          this.changeFieldTicket.emit(new TicketChangeField("agent.deviceId", item, (newChange.data.deviceId) ? newChange.data.deviceId : null));
+        });
+      }
       if (newChange.action === 'DISCOUNT_CHANGED') this.changeFieldTicket.emit(new TicketChangeField("discount", newChange.data.id, newChange.data.discount));
     })
 

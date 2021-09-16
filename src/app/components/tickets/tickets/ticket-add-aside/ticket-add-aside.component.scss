@@ -192,19 +192,6 @@
 }
 .qt-input-block__label {
   &::after {
-    @media (max-width: 767px) {
-      display: none;
-    }
-  }
-}
-.qt-input-block {
-  .--required {
-    label {
-      &::after {
-        @media (max-width: 767px) {
-          display: none;
-        }
-      }
-    }
+    display: none;
   }
 }

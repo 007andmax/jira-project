@@ -38,6 +38,9 @@ export class TicketProfileActionsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.currentUser = this.usersStateService.getCurrentUser();
+    this.usersStateService.getOnGetCurrentuser().subscribe(data => {
+      this.currentUser = data;
+    })
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === MOVE_TO_SPAM_TICKET) {
@@ -49,6 +52,7 @@ export class TicketProfileActionsComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
+    console.log("this.currentUser", this.currentUser);
   }
   showAgentLink() {
     if (!this.appService.checkMobile()) return;
