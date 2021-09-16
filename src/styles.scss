@@ -3053,6 +3053,10 @@ input.ng-invalid.is-invalid {
   display: flex;
   width: fit-content;
   margin-bottom: -28px;
+
+  @media (max-width: 767px) {
+    margin: 0;
+  }
 }
 .ticket-updates__add-note {
   color: $gray-600;
@@ -3659,6 +3663,12 @@ app-ticket-edit-aside {
       @media (max-width: 767px) {
         margin-bottom: 16px;
       }
+    }
+  }
+  app-date-picker {
+    .date-picker {
+      display: block;
+      height: 24px;
     }
   }
 }

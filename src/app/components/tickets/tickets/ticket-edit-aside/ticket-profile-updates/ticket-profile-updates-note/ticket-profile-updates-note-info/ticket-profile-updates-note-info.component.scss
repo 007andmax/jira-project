@@ -25,6 +25,12 @@
       margin-bottom: 8px;
     }
 
+    &__message-line {
+      @media (max-width: 767px) {
+        margin-left: -42px;
+      }
+    }
+
     &__author {
         font-weight: 600;
     }

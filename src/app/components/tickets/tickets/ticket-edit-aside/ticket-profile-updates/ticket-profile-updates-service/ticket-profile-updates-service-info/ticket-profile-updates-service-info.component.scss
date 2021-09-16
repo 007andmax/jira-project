@@ -201,6 +201,10 @@
       border-color: $success;
       background: $white;
       margin-right: 32px;
+
+      @media (max-width: 767px) {
+        display: none;
+      }
     }
 
     // /deep/

@@ -2,12 +2,15 @@
   <span class="ticket-updates__date" [textContent]="getDate()"></span>
   <span class="divider-point"></span>
   <span class="ticket-updates__people-added" [textContent]="' ' + shares.length + ' people added to this update'"></span>
-  <div class="d-f">
+  <div class="ticket-updates__photo-row">
     <ng-template   ngFor let-share [ngForOf]="shares" let-i="index" [ngForTrackBy]="trackByIndex">
       <ng-template #tipContent><div [textContent]="ticketsListService.getUserName(share.user)"></div><div [textContent]="((share.user.accountType === 'TECH') ? 'Tech' : 'Client') + ' user'"></div></ng-template>
       <div class="ticket-updates__photo-people" [textContent]="ticketsListService.getAssignedUserNameForAvatar(share.user)"
       [ngStyle]="{'background': ticketsListService.getStyleAvatar(share.user)}" placement="top" [ngbTooltip]="tipContent"></div>
       </ng-template>
 
-      </div>
+    <div class="tag__modern-row">
+      <span class="tag__modern ticket-updates__service-tag-completed">Completed on 14 Apr 2020</span>
+    </div>
+  </div>
 </div>

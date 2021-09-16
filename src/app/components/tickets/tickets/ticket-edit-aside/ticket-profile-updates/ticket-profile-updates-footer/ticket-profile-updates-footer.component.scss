@@ -43,12 +43,32 @@
 
     &__update-info {
       font-size: 12px;
+
+      @media (max-width: 767px) {
+        flex-wrap: wrap;
+        margin-left: -42px;
+      }
     }
     &__people-added {
       color: $gray-600;
       margin-right: 8px;
     }
+    &__photo-row {
+      display: flex;
 
+      @media (max-width: 767px) {
+        margin-top: 8px;
+        flex: 100%;
+      }
+
+      .tag__modern-row {
+        display: none;
+
+        @media (max-width: 767px) {
+          display: block;
+        }
+      }
+    }
     &__photo-people {
        width: 24px;
        height: 24px;
@@ -56,6 +76,12 @@
        border-radius: 50%;
        background-position: center;
        background-size: cover;
+
+       &:last-child {
+         @media (max-width: 767px) {
+           margin-right: 8px;
+         }
+       }
     }
     &__ticket-info-container {
       margin: 15px 0 8px -48px;
