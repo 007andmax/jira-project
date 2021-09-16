@@ -32,7 +32,7 @@
                     >
                         <li
                             ngbDropdownItem
-                            (click)="ticketAdd.priorityLevel = item.type"
+                            (click)="setPriorityLevel(item)"
                         >
                             <a
                                 tabindex="-1"
@@ -63,8 +63,11 @@
             <span class="qt-input-block__label">Priority Level</span>
             <app-select-search
                 [class]="['qt-dropdown']"
-                [list]
-                (onSelectedItem)="onSelectTechUser($event)"
+                [field]="'title'"
+                [isBlockClear]="true"
+                [editItem]="selectedTicketPriorities"
+                [list]="ticketPriorities"
+                (onSelectedItem)="setPriorityLevel($event)"
                 [placeholder]="'Low'"
             ></app-select-search>
         </div>

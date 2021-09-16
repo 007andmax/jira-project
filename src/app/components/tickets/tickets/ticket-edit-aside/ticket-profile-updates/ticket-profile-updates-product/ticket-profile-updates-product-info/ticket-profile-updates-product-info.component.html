@@ -16,18 +16,18 @@
                 <pre [textContent]="product.item.description"></pre>
             </div>
             <div class="ticket-updates__ticket-data">
-             <div
-               class="ticket-updates__ticket-price"
-               [textContent]="'$' + getPrice()"
-             ></div>
-             <div
-               class="ticket-updates__ticket-qty"
-               [textContent]="product.quantity"
-             ></div>
-             <div
-               class="ticket-updates__ticket-total"
-               [textContent]="'$' + getTotal(product.price,product.quantity)"
-             ></div>
+                <div
+                    class="ticket-updates__ticket-price"
+                    [textContent]="'$' + getPrice()"
+                ></div>
+                <div
+                    class="ticket-updates__ticket-qty"
+                    [textContent]="product.quantity"
+                ></div>
+                <div
+                    class="ticket-updates__ticket-total"
+                    [textContent]="'$' + getTotal(product.price,product.quantity)"
+                ></div>
             </div>
             <app-date-picker
                 [isDisabled]="isBlockChange"

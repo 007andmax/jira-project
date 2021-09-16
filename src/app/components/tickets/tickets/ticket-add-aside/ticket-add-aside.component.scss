@@ -190,3 +190,21 @@
   width: 24px;
   height: 24px;
 }
+.qt-input-block__label {
+  &::after {
+    @media (max-width: 767px) {
+      display: none;
+    }
+  }
+}
+.qt-input-block {
+  .--required {
+    label {
+      &::after {
+        @media (max-width: 767px) {
+          display: none;
+        }
+      }
+    }
+  }
+}

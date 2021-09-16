@@ -44,6 +44,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
   techUsersList = [];
   shareUsersList = [];
   listTechUsersForAssign: Array<TechUserItem> = [];
+  selectedTicketPriorities: TitleListType = new TitleListType('Medium Priority', 'MEDIUM');
   ticketPriorities: Array<TitleListType> = [new TitleListType('Low Priority', 'LOW'),
   new TitleListType('Medium Priority', 'MEDIUM'),
   new TitleListType('High Priority', 'HIGH')];
@@ -208,6 +209,10 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     } else {
       this.ticketAdd.clearDeviceId();
     }
+  }
+  setPriorityLevel(item) {
+    this.ticketAdd.priorityLevel = item.type;
+    this.selectedTicketPriorities = item;
   }
   removeShareUser(id) {
     let index = this.shareUsersList.findIndex(shareUser => shareUser.id === id);

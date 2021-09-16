@@ -1,305 +1,302 @@
-@import './src/assets/styles/variable';
-@import './src/assets/styles/fonts';
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
 
 .ticket-updates {
-    padding: 24px 32px;
-    background-color: $gray-100;
-    font-size: 13px;
+  padding: 24px 32px;
+  background-color: $gray-100;
+  font-size: 13px;
+
+  @media (max-width: 767px) {
+    padding: 16px;
+  }
+
+  &__count {
+    font-weight: 600;
+  }
+  &__ticket-photo {
+    width: 32px;
+    height: 32px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    margin-right: 16px;
+  }
+
+  &__content {
+    flex-grow: 1;
+  }
+
+  &__author-line,
+  &__message-line {
+    margin-bottom: 8px;
+  }
+
+  &__atuhor-line {
+    transform: translateY(5px);
+  }
+
+  &__author {
+    font-weight: 600;
+  }
+  &__add-note {
+    color: $gray-600;
+    cursor: pointer;
+  }
+  &__edit,
+  &__delete {
+    width: 24px;
+    height: 24px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 16px;
+    cursor: pointer;
+  }
+
+  &__update-info {
+    @extend %сaption-l;
+    margin-left: -48px;
+  }
+  &__people-added {
+    color: $gray-600;
+    margin-right: 8px;
+  }
+
+  &__photo-people {
+    width: 24px;
+    height: 24px;
+    margin-right: 2px;
+    border-radius: 50%;
+    background-position: center;
+    background-size: cover;
+    text-align: center;
+    color: $white;
+    font-weight: 600;
+  }
+  &__ticket-info {
+    flex-grow: 1;
+    @extend %сaption-l;
+    margin-right: 8px;
 
     @media (max-width: 767px) {
-      padding: 16px ;
+      margin-right: 0;
     }
+  }
+  &__ticket-body {
+    padding: 8px;
+    background-color: $white;
+    border: solid 1px $gray-400;
 
-    &__count {
-      font-weight: 600;
+    @media (max-width: 767px) {
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 12px 8px;
     }
-    &__ticket-photo {
-        width: 32px;
-        height: 32px;
-        background-position: center;
-        background-size: cover;
-        border-radius: 50%;
-        margin-right: 16px;
-    }
+  }
+  &__done-status {
+    width: 24px;
+    height: 24px;
+    margin-right: 4px;
+  }
+  &__ticket-title {
+    width: 342px;
+    font-weight: 600;
+    // text-overflow: ellipsis;
+    // overflow: hidden;
+    // white-space: nowrap;
+    margin-right: 8px;
 
-    &__content {
-      flex-grow: 1;
+    @media (max-width: 767px) {
+      width: auto;
     }
-
-    &__author-line, &__message-line {
-      margin-bottom: 8px;
-    }
-
-    &__atuhor-line {
-      transform: translateY(5px);
-    }
-
-    &__author {
-        font-weight: 600;
-    }
-    &__add-note {
-        color: $gray-600;
-        cursor: pointer;
-    }
-    &__edit, &__delete{
-      width: 24px;
-      height: 24px;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: 16px;
-      cursor: pointer;
-    }
-
-    &__update-info {
-      @extend %сaption-l;
-      margin-left: -48px;
-    }
-    &__people-added {
-      color: $gray-600;
-      margin-right: 8px;
-    }
-
-    &__photo-people {
-       width: 24px;
-       height: 24px;
-       margin-right: 2px;
-       border-radius: 50%;
-       background-position: center;
-       background-size: cover;
-       text-align: center;
-       color: $white;
-       font-weight: 600;
-    }
-    &__ticket-info {
-      flex-grow: 1;
-      @extend %сaption-l;
-      margin-right: 8px;
-
-      @media (max-width: 767px) {
-        margin-right: 0;
-      }
-    }
-    &__ticket-body {
-      padding: 8px;
-      background-color: $white;
-      border: solid 1px $gray-400;
-
-      @media (max-width: 767px) {
-        align-items: center;
-        flex-wrap: wrap;
-        padding: 12px 8px;
-      }
-    }
-    &__done-status {
-      width: 24px;
-      height: 24px;
-      margin-right: 4px;
-    }
-    &__ticket-title {
-      width: 342px;
-      font-weight: 600;
-      // text-overflow: ellipsis;
-      // overflow: hidden;
-      // white-space: nowrap;
-      margin-right: 8px;
-
-      @media (max-width: 767px) {
-        width: auto;
-      }
-      pre {
-        margin: 0;
-        font-weight: 400;
-        text-overflow: ellipsis;
-        overflow: hidden;
-      }
-    }
-    &__ticket-data {
-      display: flex;
-
-      @media (max-width: 767px) {
-        width: 100%;
-        margin-top: 20px;
-        padding-left: 28px;
-        order: 1;
-      }
-    }
-    &__ticket-price,
-    &__ticket-qty,
-    &__ticket-total {
-      position: relative;
-
-
-      &::after {
-        @extend %label-l-sb;
-
-        @media (max-width: 767px) {
-          content: "";
-          left: 0;
-          top: -14px;
-          color: $gray-600;
-          position: absolute;
-          text-transform: uppercase;
-        }
-      }
-    }
-    &__ticket-price {
-      width: 65px;
-      margin-right: 8px;
-
-      &::after {
-        @media (max-width: 767px) {
-          content: "Price";
-        }
-      }
-    }
-
-    &__ticket-qty {
-      width: 42px;
-      margin-right: 8px;
-
-      &::after {
-        @media (max-width: 767px) {
-          content: "Qty";
-        }
-      }
-    }
-
-    &__ticket-total {
-      margin-right: 8px;
-      width: 65px;
-
-      &::after {
-        @media (max-width: 767px) {
-          content: "Total";
-        }
-      }
-    }
-
-    &__date-icon {
-      width: 24px;
-      height: 24px;
-      cursor: pointer;
-      margin-right: 8px;
-    }
-
-    &__ticket-header {
-      font-weight: 600;
-
-      @media (max-width: 767px) {
-        display: none;
-      }
-    }
-    &__ticket-header-name {
-      width: 378px;
-      margin-right: 8px;
-
-      @media (max-width: 767px) {
-        width: auto;
-      }
-    }
-    &__ticket-header-price {
-      margin-right: 8px;
-      width: 65px;
-    }
-    &__ticket-header-qty {
-      margin-right: 8px;
-      width: 42px;
-    }
-    &__ticket-header-total {
-      margin-right: 8px;
-      width: 65px;
-    }
-
-    &__more {
-      width: 24px;
-      height: 24px;
-      background-repeat: no-repeat;
-      background-position: center;
-      cursor: pointer;
-      position: relative;
-      top: 32px;
-
-      @media (max-width: 767px) {
-        position: relative;
-        top: 5px;
-        background-position: right;
-      }
-    }
-
-    &__service-header-name {
-      width: 289px;
-      margin-right: 8px;
-    }
-
-    &__service-header-price {
-      margin-right: 8px;
-      width: 60px;
-    }
-
-    &__service-header-qty {
-      margin-right: 8px;
-      width: 60px;
-    }
-
-    &__service-header-total {
-      margin-right: 8px;
-      width: 60px;
-    }
-
-    &__service-title {
-      width: 252px;
-      font-weight: 600;
+    pre {
+      margin: 0;
+      font-weight: 400;
       text-overflow: ellipsis;
       overflow: hidden;
-      white-space: nowrap;
-      margin-right: 8px;
     }
+  }
+  &__ticket-data {
+    display: flex;
 
-    &__service-time-in {
-      width: 60px;
-      margin-right: 8px;
+    @media (max-width: 767px) {
+      width: 100%;
+      margin-top: 20px;
+      padding-left: 28px;
+      order: 1;
     }
+  }
+  &__ticket-price,
+  &__ticket-qty,
+  &__ticket-total {
+    position: relative;
 
-    &__service-time-out {
-      width: 60px;
-      margin-right: 8px;
-    }
-
-    &__service-duration {
-      width: 60px;
-      margin-right: 8px;
-    }
-
-    &__service-subinfo {
-      line-height: 1.33;
-      margin-top: 3px;
-      margin-left: 28px;
-    }
-
-    &__service-tag-completed {
-      height: 20px;
-      line-height: 12px;
-      color: $success;
-      font-size: 10px;
-      border-color: $success;
-      background: $white;
+    &::after {
+      @extend %label-l-sb;
 
       @media (max-width: 767px) {
-        display: none;
+        content: "";
+        left: 0;
+        top: -14px;
+        color: $gray-600;
+        position: absolute;
+        text-transform: uppercase;
       }
     }
+  }
+  &__ticket-price {
+    width: 65px;
+    margin-right: 8px;
 
-    &__ticket-info-container {
-      .dropdown {
-        @media (max-width: 767px) {
-          position: absolute;
-          top: 0;
-          right: 0;
-        }
+    &::after {
+      @media (max-width: 767px) {
+        content: "Price";
       }
     }
   }
 
+  &__ticket-qty {
+    width: 42px;
+    margin-right: 8px;
 
+    &::after {
+      @media (max-width: 767px) {
+        content: "Qty";
+      }
+    }
+  }
 
+  &__ticket-total {
+    margin-right: 8px;
+    width: 65px;
 
+    &::after {
+      @media (max-width: 767px) {
+        content: "Total";
+      }
+    }
+  }
+
+  &__date-icon {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    margin-right: 8px;
+  }
+
+  &__ticket-header {
+    font-weight: 600;
+
+    @media (max-width: 767px) {
+      display: none;
+    }
+  }
+  &__ticket-header-name {
+    width: 378px;
+    margin-right: 8px;
+
+    @media (max-width: 767px) {
+      width: auto;
+    }
+  }
+  &__ticket-header-price {
+    margin-right: 8px;
+    width: 65px;
+  }
+  &__ticket-header-qty {
+    margin-right: 8px;
+    width: 42px;
+  }
+  &__ticket-header-total {
+    margin-right: 8px;
+    width: 65px;
+  }
+
+  &__more {
+    width: 24px;
+    height: 24px;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    position: relative;
+    top: 32px;
+
+    @media (max-width: 767px) {
+      position: relative;
+      top: 5px;
+      background-position: right;
+    }
+  }
+
+  &__service-header-name {
+    width: 289px;
+    margin-right: 8px;
+  }
+
+  &__service-header-price {
+    margin-right: 8px;
+    width: 60px;
+  }
+
+  &__service-header-qty {
+    margin-right: 8px;
+    width: 60px;
+  }
+
+  &__service-header-total {
+    margin-right: 8px;
+    width: 60px;
+  }
+
+  &__service-title {
+    width: 252px;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-right: 8px;
+  }
+
+  &__service-time-in {
+    width: 60px;
+    margin-right: 8px;
+  }
+
+  &__service-time-out {
+    width: 60px;
+    margin-right: 8px;
+  }
+
+  &__service-duration {
+    width: 60px;
+    margin-right: 8px;
+  }
+
+  &__service-subinfo {
+    line-height: 1.33;
+    margin-top: 3px;
+    margin-left: 28px;
+  }
+
+  &__service-tag-completed {
+    height: 20px;
+    line-height: 12px;
+    color: $success;
+    font-size: 10px;
+    border-color: $success;
+    background: $white;
+
+    @media (max-width: 767px) {
+      margin: 10px 0px 0px 0px;
+    }
+  }
+
+  &__ticket-info-container {
+    .dropdown {
+      @media (max-width: 767px) {
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+    }
+  }
+}
