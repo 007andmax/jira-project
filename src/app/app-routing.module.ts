@@ -259,19 +259,19 @@ const routes: Routes = [
   },
   {
     path: ':company/device/service',
-    component: ServicesComponent
+    loadChildren: './components/device/services/services.module#ServicesModule'
   },
   {
     path: ':company/device/antivirus',
-    component: AntivirusComponent
+    loadChildren: './components/device/antivirus/antivirus.module#AntivirusModule'
   },
   {
     path: ':company/device/terminal/:type/:id',
-    component: TerminalComponent
+    loadChildren: './components/device/terminal/terminal.module#TerminalModule'
   },
   {
     path: ':company/device/password',
-    component: PasswordComponent
+    loadChildren: './components/device/password/password.module#PasswordModule'
   },
   {
     path: ':company/device/window',
