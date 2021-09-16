@@ -1,3 +1,5 @@
+@import "./src/assets/styles/variable";
+
 /deep/ .ticket-table {
   th {
     white-space: nowrap;
@@ -25,11 +27,13 @@ app-tickets-table-item {
   display: none;
   width: 48px;
   height: 48px;
-  background-color: #16a4fa;
+  background: #16A4FA url('/assets/img/icons/add-product.svg') 16px 16px no-repeat;
+  box-shadow: 0 8px 16px 0 rgba(22, 164, 250, 0.2);
   position: fixed;
   right: 16px;
   bottom: 100px;
-  border-radius: 100px;
+  border-radius: 50%;
+  cursor: pointer;
   @media (max-width: 767px) {
     display: block;
   }

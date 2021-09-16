@@ -109,8 +109,9 @@
       width: auto;
     }
     pre {
+      @extend %сaption-l-sb;
+      color: $primary-2;
       margin: 0;
-      font-weight: 400;
       text-overflow: ellipsis;
       overflow: hidden;
     }
@@ -222,7 +223,7 @@
 
     @media (max-width: 767px) {
       position: relative;
-      top: 5px;
+      top: 1px;
       background-position: right;
     }
   }
@@ -272,18 +273,24 @@
   }
 
   &__service-subinfo {
-    line-height: 1.33;
+    line-height: 16px;
+    color: $primary-2;
     margin-top: 3px;
     margin-left: 28px;
+
+    @media (max-width: 767px) {
+
+    }
   }
 
   &__service-tag-completed {
-    height: 20px;
     line-height: 12px;
     color: $success;
     font-size: 10px;
     border-color: $success;
     background: $white;
+    padding: 4px 6px;
+    text-transform: unset;
 
     @media (max-width: 767px) {
       margin: 10px 0px 0px 0px;

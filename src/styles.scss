@@ -3061,7 +3061,11 @@ input.ng-invalid.is-invalid {
 .ticket-updates__add-note {
   color: $gray-600;
 }
-
+app-ticket-profile-updates-note {
+  .ticket-updates__author-line {
+    width: 100%;
+  }
+}
 .dropdown-menu-qt {
   &.--left-side {
     right: 0;
@@ -3096,7 +3100,7 @@ input.ng-invalid.is-invalid {
       margin: 0 8px 0 0;
     }
     i {
-      margin-right: 3px;
+      margin-right: 8px;
     }
     a {
       color: $gray-800;
@@ -3123,14 +3127,15 @@ input.ng-invalid.is-invalid {
     }
   }
 }
-
 .ticket-updates__photo-people {
   text-align: center;
   color: $white;
 }
 .ticket-updates__author {
   font-weight: 600;
-  line-height: 2.5;
+  //line-height: 2.5;
+  font-size: 12px;
+  line-height: 16px;
 }
 
 .ticket-updates__ticket-photo,
@@ -3671,6 +3676,42 @@ app-ticket-edit-aside {
       height: 24px;
     }
   }
+
+  pre {
+    font-family: 'Inter', sans-serif;
+  }
+
+  .dropdown-menu-qt {
+    .show-mobile {
+      display: none;
+
+      @media (max-width: 767px) {
+        display: flex;
+      }
+    }
+  }
+
+  .ticket-updates__author-line {
+    .ticket-updates__delete {
+      @media (max-width: 767px) {
+        display: none;
+      }
+    }
+  }
+
+  app-ticket-profile-actions {
+    .dropdown-menu-qt li {
+      a {
+        display: flex;
+        align-items: center;
+      }
+
+      i {
+        margin-right: 8px;
+        margin-top: -3px;
+      }
+    }
+  }
 }
 
 
@@ -3752,6 +3793,10 @@ app-add-assigned-user {
     padding-bottom: 52px;
     overflow: auto;
     top: 0;
+  }
+
+  app-teh-users {
+    height: 24px;
   }
 }
 

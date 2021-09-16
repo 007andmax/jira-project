@@ -82,6 +82,7 @@
         padding-right: 16px;
         background: $white;
         padding-top: 20px;
+        z-index: 1;
       }
     }
 
@@ -119,6 +120,7 @@
       top: 10px;
       left: 18px;
       background-image: url("/assets/img/icons/collapse-arrow.svg");
+      z-index: 2;
     }
   }
 
@@ -127,7 +129,7 @@
       position: fixed;
       top: 15px;
       left: 64px;
-      z-index: 1;
+      z-index: 2;
     }
   }
 
@@ -823,11 +825,13 @@ app-ticket-edit-aside-right-panel {
   display: none;
   width: 48px;
   height: 48px;
-  background-color: #16a4fa;
+  background: #16A4FA url('/assets/img/icons/add-product.svg') 16px 16px no-repeat;
+  box-shadow: 0 8px 16px 0 rgba(22, 164, 250, 0.2);
   position: fixed;
   right: 16px;
   bottom: 100px;
-  border-radius: 100px;
+  border-radius: 50%;
+  cursor: pointer;
   @media (max-width: 767px) {
     display: block;
   }

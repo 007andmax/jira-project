@@ -7,7 +7,7 @@
             <div class="ticket-updates__service-header-total">Duration</div>
         </div>
         <div class="ticket-updates__ticket-body">
-            <div class="d-f">
+            <div class="d-f qt-ai-c qt-fw-wrap">
                 <div
                     class="ticket-updates__done-status icon__task-pending"
                     [ngClass]="{'--done':service.completed}"
@@ -17,18 +17,20 @@
                     class="ticket-updates__service-title"
                     [textContent]="service.item.name"
                 ></div>
-                <div
+                <div class="ticket-updates__ticket-data">
+                  <div
                     class="ticket-updates__service-time-in"
                     [textContent]="getTime(service.durationStart)"
-                ></div>
-                <div
+                  ></div>
+                  <div
                     class="ticket-updates__service-time-out"
                     [textContent]="getTime(service.durationEnd)"
-                ></div>
-                <div
+                  ></div>
+                  <div
                     class="ticket-updates__service-duration"
                     [textContent]="getDuration(service.quantity)"
-                ></div>
+                  ></div>
+                </div>
                 <app-date-picker
                     [isDisabled]="isBlockChange"
                     [placement]="'bottom-right'"
