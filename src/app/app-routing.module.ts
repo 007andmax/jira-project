@@ -275,15 +275,17 @@ const routes: Routes = [
   },
   {
     path: ':company/device/window',
-    component: WindowsComponent
+    loadChildren: './components/device/windows-update/windows-update.module#WindowsModule'
   },
   {
     path: ':company/device/startup',
-    component: StartupComponent
+    loadChildren: './components/device/startup-programes/startup-programes.module#StartupModule'
+
   },
   {
     path: ':company/device/file',
-    component: FileComponent
+    loadChildren: './components/device/file-explorer/file-explorer.module#FileModule'
+
   },
   {
     path: ':company/billing-dashboard',
