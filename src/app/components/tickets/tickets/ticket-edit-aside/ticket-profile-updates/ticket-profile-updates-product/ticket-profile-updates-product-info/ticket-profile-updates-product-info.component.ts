@@ -11,6 +11,7 @@ import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.comp
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { AppService } from 'src/app/states/app/app.service';
 
 @Component({
   selector: 'app-ticket-profile-updates-product-info',
@@ -31,6 +32,7 @@ export class TicketProfileUpdatesProductInfoComponent implements OnInit {
     private ticketsService: TicketsService,
     private usersStateService: UsersStateService,
     private companiesStateService: CompaniesStateService,
+    private appService: AppService,
     private modalService: NgbModal) { }
 
   ngOnInit() {
@@ -62,6 +64,10 @@ export class TicketProfileUpdatesProductInfoComponent implements OnInit {
 
   }
   edit() {
+    if (this.appService.checkMobile()) {
+      this.ticketStateService.setEditUpdate({ update: this.product, type: this.update.type });
+      return;
+    }
     this.onEdit.emit(null);
   }
   setComplete() {

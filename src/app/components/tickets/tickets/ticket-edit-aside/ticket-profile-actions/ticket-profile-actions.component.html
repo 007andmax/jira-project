@@ -9,7 +9,7 @@
     >
         <ul
             class
-            style="width: 179px; overflow: visible;"
+            style="width: 205px; overflow: visible;"
             role="menu"
             class="dropdown-qt"
         >
@@ -32,7 +32,7 @@
                     href="javascript:void(0)"
                     class="link-user"
                 >
-                  <i class="icn-16 icon__link-gray"></i>
+                    <i class="icn-16 icon__link-gray"></i>
                     {{ ticketProfile.agent && ticketProfile.agent.deviceId ? 'Relink with another' : 'Link with' }}
             Agent
                 </a>
@@ -84,6 +84,7 @@
                     *ngIf="currentUser && currentUser.isOwner"
                     (click)="moveIntoSpam()"
                 >
+                    <i class="icn-16 icon__disable"></i>
                     Mark as Spam
                 </a>
                 <a
@@ -93,7 +94,7 @@
                     *ngIf="currentUser && !currentUser.isOwner"
                     (click)="moveIntoSpam()"
                 >
-                  <i class="icn-16 icon__disable"></i>
+                    <i class="icn-16 icon__disable"></i>
                     Report as Spam
                 </a>
             </li>

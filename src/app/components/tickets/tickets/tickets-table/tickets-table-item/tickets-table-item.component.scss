@@ -1,4 +1,4 @@
-@import './src/assets/styles/variable';
+@import "./src/assets/styles/variable";
 
 tr {
   cursor: pointer;
@@ -7,5 +7,11 @@ tr {
       background: $gray-200;
       border-color: $primary-1;
     }
+  }
+}
+.--selected {
+  > div {
+    background: $gray-200;
+    border-color: $primary-1;
   }
 }

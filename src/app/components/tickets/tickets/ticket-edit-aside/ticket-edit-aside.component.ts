@@ -29,6 +29,7 @@ import { AppStateService } from 'src/app/states/app/app-state.service';
 import { ModalAddUpdateTicketComponent } from 'src/app/services/modal/modal-add-update-ticket/modal-add-update-ticket.component';
 import { AppService } from 'src/app/states/app/app.service';
 import { ModalAddUsersNotifyComponent } from 'src/app/services/modal/modal-add-users-notify/modal-add-users-notify.component';
+import { TicketProfileEditFormUpdateComponent } from './ticket-profile-edit-form-update/ticket-profile-edit-form-update.component';
 @Component({
   selector: 'app-ticket-edit-aside',
   templateUrl: './ticket-edit-aside.component.html',
@@ -39,12 +40,14 @@ import { ModalAddUsersNotifyComponent } from 'src/app/services/modal/modal-add-u
 export class TicketEditAsideComponent implements OnInit, OnDestroy {
 
   @ViewChild('updateForm') updateForm: TicketProfileFormUpdateComponent;
+  @ViewChild('editUpdateForm') editUpdateForm: TicketProfileEditFormUpdateComponent;
   @ViewChild('rightPanel') rightPanel: TicketEditAsideRightPanelComponent;
   @ViewChild('ticketMessage') ticketMessage: TicketMessageComponent;
 
   ticketProfile: TicketProfile = new TicketProfile();
   opened = false;
   openedMobileUpdate = false;
+  openedMobileEditUpdate = false;
   modeSubject = 'view';
   modeDescription = 'view';
   showAddAssignedUser = false;
@@ -179,6 +182,9 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     this.sub.add(onChangeAssignedUser);
     this.ticketStateService.onSetTabUpdate.subscribe(data => {
       this.openedMobileUpdate = (data !== null);
+    })
+    this.ticketStateService.onEditUpdate.subscribe(data => {
+      this.openedMobileEditUpdate = true;
     })
   }
   showDetailUser() {

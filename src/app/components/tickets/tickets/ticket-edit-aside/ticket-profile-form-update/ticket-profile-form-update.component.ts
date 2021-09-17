@@ -58,21 +58,21 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
   tab: string = "NOTE";
   currentUser: CurrentUser;
   sub: Subscription = new Subscription();
-  constructor(private ticketsStateService: TicketsStateService,
+  constructor(public ticketsStateService: TicketsStateService,
     public cd: ChangeDetectorRef,
-    private usersStateService: UsersStateService,
+    public usersStateService: UsersStateService,
     private ticketsService: TicketsService,
     private elRef: ElementRef,
     private modalService: NgbModal,
     private devicesService: DevicesService,
     private supportService: SupportService,
-    private supportStateService: SupportStateService,
-    private devicesRealTimeService: DevicesRealTimeService,
-    private draftEmailService: DraftEmailService,
+    public supportStateService: SupportStateService,
+    public devicesRealTimeService: DevicesRealTimeService,
+    public draftEmailService: DraftEmailService,
     private constantsStateService: ConstantsStateService,
     private devicesStateService: DevicesStateService,
-    private ticketStateService: TicketStateService,
-    private appService: AppService,
+    public ticketStateService: TicketStateService,
+    public appService: AppService,
     public ticketsListService: TicketsListService) { }
 
   ngOnInit() {

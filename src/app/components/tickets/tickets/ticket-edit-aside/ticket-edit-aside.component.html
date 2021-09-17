@@ -1,5 +1,6 @@
 <div
     class="ticket-edit-aside qt-aside d-f"
+    [ngClass]="{'clear-bottom-padding' :!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)}"
     [hidden]="!opened"
 >
     <div
@@ -210,6 +211,14 @@
                 [ticket]="ticketProfile"
                 [lisUpdateUser]="lisUpdateUser"
             ></app-ticket-profile-form-update>
+            <ticket-profile-edit-form-update
+                [ngClass]="{'--open':openedMobileEditUpdate}"
+                (onClosed)="close()"
+                [hidden]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
+                #editUpdateForm
+                [ticket]="ticketProfile"
+                [lisUpdateUser]="lisUpdateUser"
+            ></ticket-profile-edit-form-update>
         </div>
     </div>
     <app-ticket-edit-aside-right-panel
@@ -217,7 +226,10 @@
         [ticketProfile]="ticketProfile"
     ></app-ticket-edit-aside-right-panel>
     <!-- Mobile -->
-    <div class="qt-aside-modern__footer updata-close">
+    <div
+        class="qt-aside-modern__footer updata-close"
+        [hidden]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
+    >
         <button
             class="qt-button"
             (click)="updateAndCloseMobile()"
@@ -228,6 +240,7 @@
     <div
         class="mobile-action-btn"
         (click)="showModalAddUpdate()"
+        [hidden]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
     ></div>
     <!-- End Mobile -->
 </div>

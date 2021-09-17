@@ -462,6 +462,8 @@ import { UsersAsideDetailPasswordsItemComponent } from './components/users/users
 import { ModalAddUpdateTicketComponent } from './services/modal/modal-add-update-ticket/modal-add-update-ticket.component';
 import { ModalAgentLinkComponent } from './services/modal/modal-agent-link/modal-agent-link.component';
 import { ModalAddUsersNotifyComponent } from './services/modal/modal-add-users-notify/modal-add-users-notify.component';
+import { TicketProfileEditFormUpdateComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-edit-form-update/ticket-profile-edit-form-update.component';
+import { TicketProfileEditFormUpdateProductsComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-edit-form-update/ticket-profile-edit-form-update-products/ticket-profile-edit-form-update-products.component';
 
 
 declare var $: any;
@@ -881,7 +883,9 @@ declare var $: any;
     UsersAsideDetailPasswordsItemComponent,
     ModalAddUpdateTicketComponent,
     ModalAgentLinkComponent,
-    ModalAddUsersNotifyComponent
+    ModalAddUsersNotifyComponent,
+    TicketProfileEditFormUpdateComponent,
+    TicketProfileEditFormUpdateProductsComponent
   ],
   imports: [
     BrowserModule,

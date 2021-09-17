@@ -781,7 +781,8 @@
   }
 }
 
-/deep/ app-ticket-profile-form-update {
+/deep/ app-ticket-profile-form-update,
+ticket-profile-edit-form-update {
   position: relative;
   flex: auto;
   display: flex;
@@ -825,7 +826,7 @@ app-ticket-edit-aside-right-panel {
   display: none;
   width: 48px;
   height: 48px;
-  background: #16A4FA url('/assets/img/icons/add-product.svg') 16px 16px no-repeat;
+  background: #16a4fa url("/assets/img/icons/add-product.svg") 16px 16px no-repeat;
   box-shadow: 0 8px 16px 0 rgba(22, 164, 250, 0.2);
   position: fixed;
   right: 16px;
@@ -835,4 +836,7 @@ app-ticket-edit-aside-right-panel {
   @media (max-width: 767px) {
     display: block;
   }
+}
+.clear-bottom-padding {
+  padding-bottom: 0px !important;
 }

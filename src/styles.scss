@@ -3244,7 +3244,8 @@ app-ticket-profile-updates-service-timepicker {
   }
 }
 
-app-ticket-profile-form-update {
+app-ticket-profile-form-update,
+ticket-profile-edit-form-update {
   app-date-picker {
     @media (max-width: 767px) {
       width: 100%;
@@ -3500,7 +3501,8 @@ app-ticket-profile-form-update {
   cursor: pointer;
 }
 app-ticket-edit-aside {
-  app-ticket-profile-form-update {
+  app-ticket-profile-form-update,
+  ticket-profile-edit-form-update {
     //position: sticky !important;
     position: sticky; //TODO Check other modal
     bottom: 0;
@@ -3678,7 +3680,7 @@ app-ticket-edit-aside {
   }
 
   pre {
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
   }
 
   .dropdown-menu-qt {
@@ -3713,7 +3715,6 @@ app-ticket-edit-aside {
     }
   }
 }
-
 
 .dropdown-menu.services-container.show {
   min-width: 100%;
