@@ -3716,6 +3716,78 @@ app-ticket-edit-aside {
   }
 }
 
+.new-companies-content__modal {
+  .qt-aside-modern__header {
+    @media (max-width: 767px) {
+      position: relative;
+    }
+  }
+
+  .qt-aside-modern__header-close {
+   @media (max-width: 767px) {
+     position: absolute;
+     background-image: url('/assets/img/icons/close-white.svg');
+     top: 50%;
+     left: 26px;
+     padding: 0;
+     transform: translate(-50%, -50%);
+   }
+  }
+
+  .qt-inputs-row {
+    @media (max-width: 767px) {
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    > div {
+      @media (max-width: 767px) {
+        margin-right: 0;
+      }
+    }
+
+    .qt-w-md-50 {
+      @media (max-width: 767px) {
+        max-width: calc(50% - 8px);
+      }
+    }
+  }
+
+  .qt-flex-md-100 {
+    @media (max-width: 767px) {
+      flex: 100%;
+    }
+  }
+
+  .create-product {
+    .label-name {
+      @media (max-width: 767px) {
+        color: $primary-2;
+      }
+    }
+  }
+
+  .editable-description {
+    @media (max-width: 767px) {
+      min-height: 80px;
+    }
+  }
+
+  .qt-aside-modern__footer {
+    .qt-button {
+      @media (max-width: 767px) {
+        margin: 0;
+      }
+      &.--gray {
+        @media (max-width: 767px) {
+          margin-right: 12px;
+          order: -1;
+        }
+      }
+    }
+  }
+}
+
 .dropdown-menu.services-container.show {
   min-width: 100%;
 }

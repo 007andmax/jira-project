@@ -23,6 +23,10 @@
 
   &.--large {
     width: 642px;
+
+    @media (max-width: 767px) {
+      width: 100%;
+    }
   }
 
   &.--x-large {
@@ -53,8 +57,21 @@
   }
 
   &__header-title {
-    @extend %h5-sb;
+    //@extend %h5-sb; // TODO check Cascading for @extand
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
     color: $primary-2;
+
+    @media (max-width: 767px) {
+      color: $white;
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 600;
+      flex: 1;
+      text-align: center;
+    }
   }
 
   &__header-close {
@@ -64,6 +81,10 @@
     background-position: center;
     background-repeat: no-repeat;
     cursor: pointer;
+
+    @media (max-width: 767px) {
+      padding: 16px;
+    }
   }
 
   &__content {
@@ -108,12 +129,12 @@
       @media (max-width: 767px) {
         width: 100%;
         justify-content: center;
-        margin: 0;
+        //margin: 0;
       }
 
       &.--gray {
         //order: -1;
-        margin-left: 12px;
+        //margin-left: 12px;
       }
     }
   }

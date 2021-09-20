@@ -1,4 +1,5 @@
 @import './src/assets/styles/variable';
+@import './src/assets/styles/fonts';
 
 .dropdown-menu {
   transform: translate(0, 0) !important;
@@ -13,7 +14,8 @@
   right: 18px;
   color: $primary-1;
   cursor: pointer;
-  font-size: 14px;
+  //font-size: 14px;
+  @extend %сaption-l-sb;
 }
 .new-tax {
   overflow: hidden;
