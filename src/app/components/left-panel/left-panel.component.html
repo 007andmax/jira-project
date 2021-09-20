@@ -1,9 +1,26 @@
 <div class="app-left-panel__header">
     <div class="app-left-panel__header-logo --beta"></div>
     <div
-        class="app-left-panel__header-resize-btn"
+        class="app-left-panel__header-resize-btn qt-d-md-none"
         (click)="onToggleLeftPanel()"
     ></div>
+  <div
+    class="icon__close-white qt-sz-20 qt-bg-contain qt-d-none qt-d-md-block ppointer"
+  ></div>
+  <div class="app-left-panel__systems-info">
+    <div class="app-left-panel__systems-info-avatar"
+      style="background-color: #e6ffff; color: #24a6a5"
+    >
+      AI
+    </div>
+    <div>
+     <div class="app-left-panel__systems-info-header">Active Information Systems</div>
+     <div class="app-left-panel__systems-info-name">
+       <div class="app-left-panel__systems-info-circle"></div>
+       Roman Semyhran
+     </div>
+    </div>
+  </div>
 </div>
 <div class="app-left-panel__body">
     <app-left-panel-support
@@ -11,6 +28,7 @@
         (onOpenPanel)="onOpenPanel()"
         (onChangeState)="onChangeState($event)"
         [activePage]="state"
+        class="qt-d-md-none"
     ></app-left-panel-support>
     <app-left-panel-tickets
         #panelTickets
@@ -23,6 +41,7 @@
         (onOpenPanel)="onOpenPanel()"
         (onChangeState)="onChangeState($event)"
         [activePage]="state"
+        class="qt-d-md-none"
     ></app-left-panel-users>
     <app-left-panel-companies
         #panelCompanies
@@ -35,30 +54,42 @@
         (onOpenPanel)="onOpenPanel()"
         (onChangeState)="onChangeState($event)"
         [activePage]="state"
+        class="qt-d-md-none"
     ></app-left-panel-billing>
     <app-left-panel-inventory
         [activePage]="state"
         (onChangeState)="onChangeState($event)"
+        class="qt-d-md-none"
     ></app-left-panel-inventory>
     <app-left-panel-password-manager
         [activePage]="state"
         (onChangeState)="onChangeState($event)"
+        class="qt-d-md-none"
     ></app-left-panel-password-manager>
     <app-left-panel-documents
         #panelDocuments
         (onOpenPanel)="onOpenPanel()"
         (onChangeState)="onChangeState($event)"
         [activePage]="state"
+        class="qt-d-md-none"
     ></app-left-panel-documents>
-    <hr class="app-left-panel__divider">
+    <hr class="app-left-panel__divider qt-d-md-none">
     <app-left-panel-reports
         [activePage]="state"
         (onChangeState)="onChangeState($event)"
+        class="qt-d-md-none"
     ></app-left-panel-reports>
     <app-left-panel-settings
         #panelSettings
         (onOpenPanel)="onOpenPanel()"
         (onChangeState)="onChangeState($event)"
         [activePage]="state"
+        class="qt-d-md-none"
     ></app-left-panel-settings>
+    <!-- Mobile -->
+    <div class="app-left-panel__menu qt-d-none qt-d-md-flex">
+      <div class="app-left-panel__menu-icon --logout"></div>
+      <div class="app-left-panel__menu-title">Logout</div>
+    </div>
+    <!-- End Mobile -->
 </div>

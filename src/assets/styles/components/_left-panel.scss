@@ -17,6 +17,62 @@
     display: flex;
     justify-content: space-between;
     padding: 24px;
+
+    @media (max-width: 767px) {
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 16px;
+    }
+  }
+
+  &__systems-info {
+    display: none;
+
+    @media (max-width: 767px) {
+      flex: 100%;
+      display: flex;
+      align-items: center;
+      margin-top: 28px;
+    }
+
+    &-avatar {
+      @extend %сaption-l-sb;
+      @media (max-width: 767px) {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        min-height: 40px;
+        border-radius: 50%;
+        background-position: center;
+        background-size: cover;
+        margin-right: 10px;
+        color: white;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        font-size: 10px;
+        font-weight: 700;
+      }
+    }
+
+    &-header {
+      color: $white;
+      margin-bottom: 4px;
+    }
+    &-name {
+      display: flex;
+      align-items: center;
+      @extend %сaption-l;
+      color: $gray-600;
+
+    }
+    &-circle {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: $success;
+      margin-right: 4px;
+    }
   }
 
   .app-left-panel__menu-info {
@@ -51,7 +107,13 @@
       background: transparent;
     }
     &::-webkit-scrollbar {
-      width: 0px;
+      width: 0;
+    }
+
+    @media (max-width: 767px) {
+      height: calc(100% - 160px);
+      padding-top: 16px;
+      border-top: 1px solid rgba(238,238,238, .08);
     }
   }
 
@@ -85,6 +147,14 @@
   }
 
   &__header-resize-btn {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    background-image: url("/assets/img/icons-left-sidebar/panel-open.svg");
+    transition: transform 300ms;
+  }
+
+  &__header-open-btn {
     width: 24px;
     height: 24px;
     cursor: pointer;
@@ -154,6 +224,9 @@
     &.--documents {
       background-image: url("/assets/img/icons-left-sidebar/menu-documents.svg");
     }
+    &.--logout {
+      background-image: url("/assets/img/icons-left-sidebar/logout.svg");
+    }
   }
 
   &__submenu-icon {
@@ -217,6 +290,9 @@
     color: $white;
     align-items: center;
     position: relative;
+    @media (max-width: 767px) {
+      margin-bottom: 8px;
+    }
     a {
       color: $white;
       position: absolute;
@@ -256,6 +332,8 @@
   // TODO mobile style
   @media (max-width: 767px) {
     left: -100%;
+    width: 100%;
+    transition: .3s ease-in all;
   }
 }
 
@@ -306,6 +384,12 @@
     &__menu-arrow {
       display: none;
     }
+  }
+}
+
+.app-left-panel.--open {
+  @media (max-width: 767px) {
+    left: 0;
   }
 }
 
