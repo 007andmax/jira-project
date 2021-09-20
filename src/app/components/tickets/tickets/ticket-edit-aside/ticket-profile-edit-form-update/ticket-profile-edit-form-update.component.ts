@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DraftEmail } from 'src/app/components/shared/draft-email/class/draft-email';
 import { RemoteSession } from 'src/app/components/support/class/remote-sessions';
 import { TicketProfileProduct } from '../../class/ticket-profile-product';
+import { TicketProfileService } from '../../class/ticket-profile-service';
 import { TicketsListService } from '../../services/tickets-list.service';
 import { TicketProfileFormUpdateComponent } from '../ticket-profile-form-update/ticket-profile-form-update.component';
 
@@ -13,6 +14,8 @@ import { TicketProfileFormUpdateComponent } from '../ticket-profile-form-update/
 })
 export class TicketProfileEditFormUpdateComponent extends TicketProfileFormUpdateComponent {
   product: TicketProfileProduct;
+  service: TicketProfileService;
+  updateId: string;
   ngOnInit() {
     if (this.appService.checkMobile()) this.tab = null;
     this.currentUser = this.usersStateService.getCurrentUser();
@@ -49,13 +52,17 @@ export class TicketProfileEditFormUpdateComponent extends TicketProfileFormUpdat
       if (this.remoteSession) this.removeSession();
     })
     this.sub.add(getOnEditTicket);
-    this.ticketStateService.onSetTabUpdate.subscribe(data => {
-      this.setTab(data);
-    })
-    this.ticketStateService.onEditUpdate.subscribe(data => {
+
+    let onEditUpdate = this.ticketStateService.onEditUpdate.subscribe(data => {
       console.log("data", data);
       if (data.type === "PRODUCT") this.product = data.update;
+      if (data.type === "SERVICE") this.service = data.update;
+      this.updateId = data.updateId;
       this.setTab(data.type);
     })
+    this.sub.add(onEditUpdate);
+  }
+  close() {
+    this.onClosed.emit(null);
   }
 }

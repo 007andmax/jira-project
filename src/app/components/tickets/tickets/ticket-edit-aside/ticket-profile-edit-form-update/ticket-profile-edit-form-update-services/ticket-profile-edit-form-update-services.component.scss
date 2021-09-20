@@ -1,0 +1,109 @@
+@import "./src/assets/styles/variable";
+
+.service-item {
+    &__first-line {
+        margin-bottom: 8px;
+    }
+
+    &__btn-add,
+    &__btn-del {
+        border: none;
+        width: 40px;
+        min-width: 40px;
+        height: 40px;
+        border-radius: 4px;
+        margin-left: 8px;
+        display: flex;
+        background-color: $gray-700;
+        align-items: center;
+        justify-content: center;
+
+        @media (max-width: 767px) {
+            display: none;
+        }
+
+        .btn-icon {
+            width: 16px;
+            height: 16px;
+        }
+    }
+
+    &__btn-del {
+        background-color: $gray-400;
+    }
+
+    &__input {
+        position: relative;
+        height: 40px;
+        border-radius: 3px;
+        border: solid 1px $gray-500;
+        margin-right: 8px;
+        font-size: 13px;
+        padding: 10px 12px;
+        flex-grow: 1;
+        outline: none;
+
+        @media (max-width: 767px) {
+            margin-right: 0;
+            margin-top: 42px;
+        }
+
+        @media (max-width: 767px) {
+            &::after {
+                position: absolute;
+                content: "Service";
+                left: 0;
+                top: -28px;
+                color: #212b36;
+                font-size: 13px;
+                line-height: 20px;
+                letter-spacing: 0;
+                font-weight: 600;
+            }
+        }
+
+        &::placeholder {
+            color: $gray-600;
+        }
+        &.description {
+            width: 100%;
+        }
+        &.device {
+            width: 243px;
+            padding: 0;
+            /deep/ .dropdown-toggle {
+                width: 100%;
+                background: $white;
+                border: none;
+                height: 38px;
+                border-radius: 3px;
+            }
+        }
+        &.time {
+            width: 148px;
+        }
+        &.date {
+            width: 146px;
+            margin: 0;
+        }
+    }
+
+    .cps-block__content-textarea {
+        min-height: 56px;
+        display: block;
+        visibility: visible;
+    }
+
+    /deep/ .date-picker input {
+        height: 40px;
+        width: 146px;
+        border: solid 1px $gray-500;
+        border-radius: 4px;
+        padding: 10px 12px;
+        background: $white;
+
+        @media (max-width: 767px) {
+            width: 100%;
+        }
+    }
+}

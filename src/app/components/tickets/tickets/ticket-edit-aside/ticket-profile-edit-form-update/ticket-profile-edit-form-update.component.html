@@ -2,7 +2,7 @@
     <div class="cps-block__header d-f">
         <div
             class="qt-aside__close-modal icon__close"
-            (click)="closeMobile()"
+            (click)="close()"
         ></div>
         <div
             class="cps-block__photo"
@@ -20,9 +20,8 @@
             <li
                 class="cps-block__nav-item icon__products"
                 [ngClass]="{'active':tab === 'PRODUCT' }"
-                (click)="setTab('PRODUCT')"
             >
-                Products
+                Edit Product
             </li>
             <li
                 class="cps-block__nav-item icon__service"
@@ -115,134 +114,22 @@
             #selectProducts
             *ngIf="tab === 'PRODUCT'"
             [product]="product"
-            (onUpdateMobile)="updateMobile()"
-            (onAddMoreMobile)="update()"
+            [updateId]="updateId"
+            (onClose)="close()"
         ></ticket-profile-edit-form-update-products>
-        <app-ticket-profile-form-update-services
+        <ticket-profile-edit-form-update-services
             #selectServices
-            [ticketProfile]="ticketProfile"
+            [service]="service"
+            [updateId]="updateId"
             *ngIf="tab === 'SERVICE'"
             (onUpdateMobile)="updateMobile()"
             (onAddMoreMobile)="update()"
-        ></app-ticket-profile-form-update-services>
+        ></ticket-profile-edit-form-update-services>
         <app-ticket-profile-form-update-support
             *ngIf="tab === 'QUICK_SUPPORT'"
             (onCreateOneTimeRemoteSession)="onCreateOneTimeRemoteSession()"
             [item]="remoteSession"
             (onConnectRemoteAccess)="onConnectRemoteAccess($event)"
         ></app-ticket-profile-form-update-support>
-    </div>
-</div>
-<div class="qt-aside__buttons jc-sb ai-c">
-    <div class="d-f ticket-edit-aside-bottom-part-users-attack">
-        <!-- <div *ngIf="tab === 'NOTE'"> -->
-        <div
-            class="ticket-edit-aside__attach icon__attachment"
-            placement="top"
-            ngbTooltip="Add Attachment"
-        >
-            <input
-                type="file"
-                #fileDropRef
-                id="fileDropRef"
-                multiple
-                (change)="fileBrowseHandler($event.target.files)"
-            >
-        </div>
-        <div
-            class="ticket-edit-aside__users  icon__assign-user toggle-select-user"
-            *ngIf="!showAddUpdateUser"
-            (click)="onToggleAddUpdateUser()"
-            placement="top"
-            ngbTooltip="Add User"
-        ></div>
-        <app-add-assigned-user
-            [userList]="getUsersForUpdate()"
-            [selectedUsers]="lisUpdateUser"
-            (onSelected)="onSelectUpdateUser($event)"
-            (hidden)="onToggleAddUpdateUser()"
-            *ngIf="showAddUpdateUser"
-        ></app-add-assigned-user>
-        <div class="ticket-edit-aside__users-linked d-f">
-            <ng-template
-                class="assigned-ticket-user"
-                ngFor
-                let-user
-                [ngForOf]="lisUpdateUser"
-                let-i="index"
-                [ngForTrackBy]="trackByIndex"
-            >
-                <ng-template #tipContent>
-                    <div [textContent]="ticketsListService.getUserName(user)"></div>
-                    <div [textContent]="user.primaryEmail"></div>
-                </ng-template>
-                <div
-                    class="ticket-edit-aside__users-linked-author pointer"
-                    placement="top"
-                    [ngbTooltip]="tipContent"
-                    [ngClass]="{'selected':ticketProfileFormUpdate.checkShares(user)}"
-                    (click)="ticketProfileFormUpdate.toggleShares(user)"
-                    *ngIf="user.accountType === 'CLIENT' && !showAddUpdateUser"
-                    [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
-                    [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
-                ></div>
-            </ng-template>
-            <div
-                class="ticket-edit-aside__users-linked-divider"
-                *ngIf="!showAddUpdateUser"
-            ></div>
-            <ng-template
-                class="assigned-ticket-user"
-                ngFor
-                let-user
-                [ngForOf]="lisUpdateUser"
-                let-i="index"
-                [ngForTrackBy]="trackByIndex"
-            >
-                <ng-template #tipContent>
-                    <div [textContent]="ticketsListService.getUserName(user)"></div>
-                    <div [textContent]="user.primaryEmail"></div>
-                </ng-template>
-                <div
-                    class="ticket-edit-aside__users-linked-author pointer"
-                    placement="top"
-                    [ngbTooltip]="tipContent"
-                    [ngClass]="{'selected':ticketProfileFormUpdate.checkShares(user)}"
-                    (click)="ticketProfileFormUpdate.toggleShares(user)"
-                    *ngIf="user.accountType === 'TECH' && !showAddUpdateUser"
-                    [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
-                    [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
-                ></div>
-            </ng-template>
-        </div>
-        <!-- </div> -->
-    </div>
-    <div
-        class="d-f"
-        *ngIf="!showAddUpdateUser"
-    >
-        <div
-            class="qt-btn --btn40h --outline-blue update-ticket-btn"
-            [ngClass]="{'--loading':isUpdate}"
-            appDisabledBtn
-            #updateBtn="disabled"
-            (onClick)="update()"
-        >
-            <span>Update</span>
-            <app-preloader-ticket *ngIf="isUpdate"></app-preloader-ticket>
-        </div>
-        <div
-            class="qt-btn --btn40h"
-            placement="top"
-            ngbTooltip="You cannot close the ticket. It contains incomplete products / services."
-            [disableTooltip]="checkUpdateAndClose()"
-            appDisabledBtn
-            #update_closeBtn="disabled"
-            (onClick)="updateAndClose()"
-            [ngClass]="{'disabled':!checkUpdateAndClose(), '--loading':isUpdateAndClose}"
-        >
-            <span>Update & Close</span>
-            <app-preloader-ticket *ngIf="isUpdateAndClose"></app-preloader-ticket>
-        </div>
     </div>
 </div>

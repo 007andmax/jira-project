@@ -11,6 +11,7 @@ import { TicketProfileService } from '../../../../class/ticket-profile-service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { AppService } from 'src/app/states/app/app.service';
 
 @Component({
   selector: 'app-ticket-profile-updates-service-info',
@@ -31,6 +32,7 @@ export class TicketProfileUpdatesServiceInfoComponent implements OnInit {
     private ticketStateService: TicketStateService,
     private ticketsService: TicketsService,
     private companiesStateService: CompaniesStateService,
+    private appService: AppService,
     private modalService: NgbModal) { }
 
   ngOnInit() {
@@ -39,6 +41,10 @@ export class TicketProfileUpdatesServiceInfoComponent implements OnInit {
     if (this.service.date) this.setDateWithTimeOffset();
   }
   edit() {
+    if (this.appService.checkMobile()) {
+      this.ticketStateService.setEditUpdate({ updateId: this.update.id, update: this.service, type: this.update.type });
+      return;
+    }
     this.onEdit.emit(null);
   }
   public setDateWithTimeOffset() {
