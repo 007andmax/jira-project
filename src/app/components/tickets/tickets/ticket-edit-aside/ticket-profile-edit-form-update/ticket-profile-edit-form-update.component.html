@@ -26,9 +26,8 @@
             <li
                 class="cps-block__nav-item icon__service"
                 [ngClass]="{'active':tab === 'SERVICE' }"
-                (click)="setTab('SERVICE')"
             >
-                Service
+                Edit Service
             </li>
             <li
                 class="cps-block__nav-item icon__quick-support"
@@ -122,8 +121,7 @@
             [service]="service"
             [updateId]="updateId"
             *ngIf="tab === 'SERVICE'"
-            (onUpdateMobile)="updateMobile()"
-            (onAddMoreMobile)="update()"
+            (onClose)="close()"
         ></ticket-profile-edit-form-update-services>
         <app-ticket-profile-form-update-support
             *ngIf="tab === 'QUICK_SUPPORT'"

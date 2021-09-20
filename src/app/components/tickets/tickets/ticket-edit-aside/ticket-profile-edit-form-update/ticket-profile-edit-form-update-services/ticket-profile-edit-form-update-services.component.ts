@@ -1,7 +1,8 @@
-import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { TicketProfileService } from '../../../class/ticket-profile-service';
@@ -17,11 +18,15 @@ import { TicketProfileUpdatesServiceTimepickerComponent } from '../../ticket-pro
 export class TicketProfileEditFormUpdateServicesComponent implements OnInit {
   @Input() service: TicketProfileService;
   @Input() updateId: string;
+  @ViewChild('updateMobileBtn') updateMobileBtn: DisabledBtnDirective;
   @ViewChild('editTimePicker') editTimePicker: TicketProfileUpdatesServiceTimepickerComponent;
-
+  @Output() onClose = new EventEmitter();
+  validate: boolean = true;
+  validateQuantity: boolean = true;
   currentCompany = null;
   minutes: number = 0;
   hours: number = 0;
+  isUpdate: boolean = false;
   durationStart: number = 0;
   durationEnd: number = 0;
   quantity: number = 0;
@@ -46,12 +51,13 @@ export class TicketProfileEditFormUpdateServicesComponent implements OnInit {
     var timeInMinutes = this.service.quantity * 60;
     this.hours = Math.floor(timeInMinutes / 60);
     this.minutes = Math.round(timeInMinutes - (this.hours * 60));
-    this.elRef.nativeElement.querySelector('#service-description').value = this.editService.description;
     this.getServices();
     this.ticketStateService.getOnGetServicesList().subscribe(data => {
       this.getServices();
     })
+    console.log("this.editService", this.editService);
   }
+
   private getServices() {
     this.servicesList = this.ticketStateService.getServicesForTicket();
   }
@@ -69,6 +75,11 @@ export class TicketProfileEditFormUpdateServicesComponent implements OnInit {
     this.cd.detectChanges();
     this.editTimePicker.changeStart();
     this.editService.setQuantity(this.quantity);
+  }
+  public onChangeDatePicker(data) {
+    let date = new Date(data.year, data.month - 1, data.day);
+    this.service.setDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+
   }
   public onChangeEndTimePicker(endDate) {
     this.durationEnd = endDate;
@@ -104,8 +115,14 @@ export class TicketProfileEditFormUpdateServicesComponent implements OnInit {
 
   }
   saveService() {
+    if (!this.validate || !this.validateQuantity) return;
+    this.isUpdate = true;
+    this.updateMobileBtn.setDisabled(true);
     this.ticketsService.updateExpense(this.editService.getDateForUpdate(this.updateId)).subscribe(data => {
       //  this.onEdit.emit(null);
+      this.isUpdate = false;
+      this.updateMobileBtn.setDisabled(false);
+      this.onClose.emit(null);
     })
   }
 

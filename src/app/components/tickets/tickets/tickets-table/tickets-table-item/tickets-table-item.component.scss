@@ -11,7 +11,9 @@ tr {
 }
 .--selected {
   > div {
-    background: $gray-200;
-    border-color: $primary-1;
+    @media (min-width: 767px) {
+      background: #f4fbff;
+      border-color: $primary-1;
+    }
   }
 }

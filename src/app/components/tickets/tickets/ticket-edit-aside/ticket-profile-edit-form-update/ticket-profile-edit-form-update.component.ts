@@ -63,6 +63,7 @@ export class TicketProfileEditFormUpdateComponent extends TicketProfileFormUpdat
     this.sub.add(onEditUpdate);
   }
   close() {
+    this.tab = null;
     this.onClosed.emit(null);
   }
 }
