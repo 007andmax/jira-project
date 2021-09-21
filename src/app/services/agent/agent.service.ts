@@ -62,11 +62,127 @@ export class AgentService {
     this.AccessToken = data;
   }
 
-  public KafkaList() {
+  public getGraphicsCard(asset_id) {
+    return this.http
+      .get(`${this.apiAgent}agent/VideoController/${asset_id}`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
+  public getPointingDevice(asset_id) {
+    return this.http
+      .get(`${this.apiAgent}agent/PointingDevice/${asset_id}`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
+  public getDesktopMonitor(asset_id) {
+    return this.http
+      .get(`${this.apiAgent}agent/DesktopMonitor/${asset_id}`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
+  public getComputer(asset_id) {
+    return this.http
+      .get(`${this.apiAgent}agent/Asset/${asset_id}`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
+  public getMotherBoard(asset_id) {
+    return this.http
+      .get(`${this.apiAgent}agent/Motherboard/${asset_id}`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
+  public getBios(asset_id) {
+    return this.http
+      .get(`${this.apiAgent}agent/BIOS/${asset_id}`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
+  public getProcessor(asset_id) {
+    return this.http
+      .get(`${this.apiAgent}agent/Processor/${asset_id}`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+  public getPhysicalMemory(asset_id) {
+    return this.http
+      .get(`${this.apiAgent}agent/PhysicalMemory/${asset_id}`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+  public getNetworkAdapter(asset_id) {
+    return this.http
+      .get(`${this.apiAgent}agent/NetworkAdapter/${asset_id}`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+  public getHardDisk(asset_id) {
+    return this.http
+      .get(`${this.apiAgent}agent/DiskDrive/${asset_id}`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+  public getKeyboard(asset_id) {
+    return this.http
+      .get(`${this.apiAgent}agent/Keyboard/${asset_id}`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+  public getsoundCard(asset_id) {
+    return this.http
+      .get(`${this.apiAgent}agent/SoundDevice/${asset_id}`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
+  public getOperatingSystem(asset_id) {
+    return this.http
+      .get(`${this.apiAgent}agent/OperatingSystem/${asset_id}`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
+  public GetCurrentConfig() {
     const data = {
-      AssetID: 1,
-      MessageType: "Ack",
+      AssetID: 13,
+      MessageType: "GetCurrentConfig",
     };
+    return this.http.post(this.apiurl + "sendMessageToKafka", data);
+  }
+
+  public SendPowerShellCommand(data:any) {
     return this.http.post(this.apiurl + "sendMessageToKafka", data);
   }
 

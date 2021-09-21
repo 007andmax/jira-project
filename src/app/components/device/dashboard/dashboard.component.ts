@@ -14,6 +14,7 @@ import * as _ from "lodash";
 import { NotesAdd } from "./class/dashboard";
 import { ActivatedRoute } from "@angular/router";
 import * as moment from "moment";
+import { KafkaRealTimeService } from "src/app/states/kafka/kafka-real-time.service";
 
 @Component({
   selector: "app-dashboard",
@@ -62,11 +63,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
   serialnumber: string = "";
   notesTitle: string ="";
   notesDescription: string="";
+  kafkaMessage:any="";
+  securityUpdate:number;
+
 
   constructor(
     private agentService: AgentService,
     private toastr: ToastrService,
-    public activateRoute: ActivatedRoute
+    public activateRoute: ActivatedRoute,
+    public kafkaService: KafkaRealTimeService,
   ) {
     this.options = { concurrency: 1, maxUploads: 10, maxFileSize: 1000000 };
     this.files = [];
@@ -81,9 +86,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   setPreviewDataDevice() {
-    this.agentService.KafkaList().subscribe((resp=>{
-      console.log(resp);
+  setTimeout(() => {
+    this.agentService.GetCurrentConfig().subscribe((resp=>{
     }))
+  },9000);
+  this.kafkaService.changeKafkarray.subscribe((resp)=>{
+    this.kafkaMessage = JSON.parse(resp.data.value);
+    this.securityUpdate = this.kafkaMessage.PendingWindowsUpdates.length;
+  })
     this.currentUser = localStorage.getItem("currentUser");
     this.agentService
       .getAgentToken(
@@ -224,7 +234,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   getAssetDetail() {
     this.agentService
-      .getAssetByGuid("48e23c98-cbe4-4a8e-82bd-8c36fe5c9502")
+      .getAssetByGuid("7e22e026-9da5-41b9-9bbd-252585302310")
       .subscribe((resp) => {
         if (resp.length > 0) {
           this.asset = resp[0];
@@ -340,7 +350,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
           let size = this.convertToGB(element.Size);
           let free = this.convertToGB(element.FreeSpace);
           let osize = parseInt(size) - parseInt(free);
-          element.percent = Math.round((osize / parseInt(size)) * 100);
+          element.percent = isNaN(Math.round((osize / parseInt(size)) * 100)) ? 0 : Math.round((osize / parseInt(size)) * 100);
         } else {
           element.percent = 0;
         }

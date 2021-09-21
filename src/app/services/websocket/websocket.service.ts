@@ -68,7 +68,7 @@ export class WebsocketService {
     private shellRealTimeService: ShellRealTimeService,
     private tagsRealTimeService: TagsRealTimeService,
     private documentsRealTimeService: DocumentsRealTimeService,
-    private kafkaRealTimeService: KafkaRealTimeService
+    private kafkaRealTimeService: KafkaRealTimeService,
 
   ) {
   }
@@ -78,6 +78,7 @@ export class WebsocketService {
     this.stompClient = Stomp.over(ws);
     let that = this;
     this.stompClient.connect({}, function () {
+      that.subsribeToKafka();
       that.subsribeToPermissions();
       that.subsribeToUsers();
       that.subsribeToDevices();
@@ -102,7 +103,6 @@ export class WebsocketService {
       that.subsribeToTags();
       that.subsribeToDocuments();
       that.subsribeToDocumentsCategory();
-      that.subsribeToKafka();
     });
   }
 
@@ -446,19 +446,16 @@ export class WebsocketService {
   }
 
   public subsribeToTags() {
-
     setTimeout(() => {
-
       this.stompClient.subscribe(`/user/watch/tagManagement`, (message) => {
         var newChange = JSON.parse(message.body);
         this.tagsRealTimeService.handleRealTimeChanges(newChange);
-
       });
 
     }, 3000);
   }
 
-  public subsribeToKafka() {
+  public  subsribeToKafka() {
     setTimeout(() => {
       this.stompClient.subscribe(`/user/watch/kafka`, (message) => {
         var newChange = JSON.parse(message.body);
@@ -466,6 +463,7 @@ export class WebsocketService {
       });
     }, 3000);
   }
+
 
   getCookie(name) {
     var matches = document.cookie.match(new RegExp(
@@ -481,3 +479,4 @@ export class WebsocketService {
     return this.stompClient;
   }
 }
+

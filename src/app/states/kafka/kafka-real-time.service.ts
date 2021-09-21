@@ -10,7 +10,7 @@ export class KafkaRealTimeService {
    * Quote real time service constructor
    */
 
-  constructor() { }
+  constructor() {}
 
   /**
    * Handle quote real time changes

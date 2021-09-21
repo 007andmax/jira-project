@@ -215,6 +215,7 @@
 
 
 
+
                                             <span
                                                 class="drive-limit"
                                                 *ngIf="drive.FreeSpace != '' && drive.Size != ''"
@@ -242,7 +243,8 @@
                                             >
                                         </figure>
                                         <h4>Virus Protection</h4>
-                                        <span>{{ virusprotection }}</span>
+                                        <span *ngIf="virusprotection !=''">{{ virusprotection }}</span>
+                                        <span *ngIf="virusprotection ==''">&nbsp;</span>
                                     </li>
                                     <li [ngClass]="
                       serviceClass(
@@ -257,7 +259,8 @@
                                             >
                                         </figure>
                                         <h4>Security Update</h4>
-                                        <span>&nbsp;</span>
+                                        <span *ngIf="securityUpdate != undefined">{{ securityUpdate }} missing Updates</span>
+                                        <span *ngIf="securityUpdate == undefined">&nbsp;</span>
                                     </li>
                                 </ul>
                             </div>
@@ -485,6 +488,7 @@
                         </div>
                     </form>
                 </div>
+
 
 
 
