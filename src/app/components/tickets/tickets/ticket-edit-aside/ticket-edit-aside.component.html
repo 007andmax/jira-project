@@ -214,7 +214,7 @@
             <ticket-profile-edit-form-update
                 [ngClass]="{'--open':openedMobileEditUpdate}"
                 (onClosed)="openedMobileEditUpdate = false"
-                [hidden]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
+                [hidden]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || !appService.checkMobile()"
                 #editUpdateForm
                 [ticket]="ticketProfile"
                 [lisUpdateUser]="lisUpdateUser"

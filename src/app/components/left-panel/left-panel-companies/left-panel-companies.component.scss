@@ -1,8 +1,8 @@
-@import './src/assets/styles/variable';
+@import "./src/assets/styles/variable";
 
 .active {
     background: $gray-800;
-     color: $primary-1;
+    color: $primary-1;
     border-left: 2px solid $primary-1;
 }
 .category-item {
@@ -10,6 +10,11 @@
         color: $primary-1;
     }
 }
-.category-name  {
+.category-name {
     color: $white;
+}
+.app-left-panel__menu {
+    @media (max-width: 767px) {
+        display: none;
+    }
 }

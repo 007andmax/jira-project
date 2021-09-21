@@ -69,7 +69,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     private toastrService: ToastrService,
     private appStateService: AppStateService,
     private modalService: NgbModal,
-    private appService: AppService,
+    public appService: AppService,
     private devicesStateService: DevicesStateService,
     private companiesStateService: CompaniesStateService) { }
 

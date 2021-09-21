@@ -13,6 +13,7 @@
 >
     <li
         [ngClass]="{'--active': listType === 'DASHBOARD' && activePage === 'new-tickets-dashboard'}"
+        class="desktop-version"
         (click)="goToBashboard()"
     >
         <div>Dashboard</div>
@@ -27,6 +28,7 @@
     <li
         [ngClass]="{'--active': listType === 'ALL' && activePage === 'new-tickets'}"
         (click)="setTypeFilter('ALL')"
+        class="desktop-version"
     >
         <div>All Tickets</div>
         <div>{{getCountByField('ALL')}}</div>
@@ -76,12 +78,14 @@
     <li
         [ngClass]="{'--active': listType === 'RECURRING_TICKETS' && activePage === 'recurring-tickets'}"
         (click)="goToRecurringTickets('RECURRING_TICKETS')"
+        class="desktop-version"
     >
         <div>Recurring tickets</div>
     </li>
     <li
         [ngClass]="{'--active': listType === 'RECURRING_TICKETS_OPEN' && activePage === 'new-tickets'}"
         (click)="setTypeFilter('RECURRING_TICKETS_OPEN')"
+        class="desktop-version"
     >
         <div>Recurring tickets Open</div>
         <div>
@@ -91,6 +95,7 @@
     <li
         [ngClass]="{'--active': listType === 'RECURRING_TICKETS_CLOSED' && activePage === 'new-tickets'}"
         (click)="setTypeFilter('RECURRING_TICKETS_CLOSED')"
+        class="desktop-version"
     >
         <div>Recurring tickets Closed</div>
         <div>

@@ -11,15 +11,25 @@
     <div class="app-left-panel__systems-info">
         <div
             class="app-left-panel__systems-info-avatar"
-            style="background-color: #e6ffff; color: #24a6a5"
+            style="color: #24a6a5"
+            [ngStyle]="{'background':  getCompanyLogoUrl()}"
+            *ngIf="checkLogo()"
         >
-            AI
+        </div>
+        <div
+            class="app-left-panel__systems-info-avatar"
+            style="background-color: #e6ffff; color: #24a6a5"
+            *ngIf="!checkLogo()"
+            [textContent]="getShortCompanyName()"
+        >
         </div>
         <div>
-            <div class="app-left-panel__systems-info-header">Active Information Systems</div>
+            <div class="app-left-panel__systems-info-header">
+                {{ (currentCompany) ? currentCompany.name : ''}}
+            </div>
             <div class="app-left-panel__systems-info-name">
                 <div class="app-left-panel__systems-info-circle"></div>
-                Roman Semyhran
+                {{getCurrentUserName()}}
             </div>
         </div>
     </div>

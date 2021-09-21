@@ -1,4 +1,4 @@
-@import './src/assets/styles/variable';
+@import "./src/assets/styles/variable";
 
 .left-panel-ng2 {
   display: block;
@@ -8,7 +8,7 @@
   left: 76px;
   top: 0;
   z-index: 992;
-  background:$primary-2;
+  background: $primary-2;
   overflow-x: scroll;
   transition: left 300ms;
 
@@ -17,14 +17,14 @@
     font-weight: 400;
   }
   &::-webkit-scrollbar-thumb,
-  &::-webkit-scrollbar{
+  &::-webkit-scrollbar {
     display: none;
     width: 0;
   }
   @media (max-width: 414px) {
     width: 100vw;
     left: 0;
-    transition: all .3s;
+    transition: all 0.3s;
     top: 100%;
     &.show {
       top: 0;
@@ -34,7 +34,6 @@
 
 .left-panel-ng2 {
   @media (max-width: 414px) {
-
     .center-category {
       padding: 0 0 50px !important;
     }
@@ -52,7 +51,6 @@
     .desktop-version {
       display: none;
     }
-
   }
 }
 
@@ -61,7 +59,9 @@
 }
 
 .desktop-version {
-  display: block;
+  @media (max-width: 767px) {
+    display: none;
+  }
 }
 
 .header-filter-icon {
@@ -78,7 +78,7 @@
 
 .types-header {
   padding: 0 24px;
-  margin-bottom: 16px
+  margin-bottom: 16px;
 }
 
 .ticket-status-circle {
@@ -102,7 +102,7 @@
 
 .ticket-status-color {
   margin-bottom: 12px;
-  cursor: pointer
+  cursor: pointer;
 }
 
 /deep/ .left-panel-closed {
@@ -113,18 +113,18 @@
 
 // hide old left panel
 /deep/ .left-panel-full {
-   /* display: none !important;*/
+  /* display: none !important;*/
 }
 .active {
-    background: $gray-800;
-     color: $primary-1;
-    border-left: 2px solid $primary-1;
+  background: $gray-800;
+  color: $primary-1;
+  border-left: 2px solid $primary-1;
 }
 .category-item {
-    &:hover {
-        color: $primary-1;
-    }
+  &:hover {
+    color: $primary-1;
+  }
 }
-.category-name  {
-    color: $white;
+.category-name {
+  color: $white;
 }

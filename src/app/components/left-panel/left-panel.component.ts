@@ -1,6 +1,8 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from "@angular/router";
+import { Company } from 'src/app/interfaces/company/company';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
 import { LeftPanelBillingComponent } from './left-panel-billing/left-panel-billing.component';
 import { LeftPanelCompaniesComponent } from './left-panel-companies/left-panel-companies.component';
@@ -20,7 +22,7 @@ import { LeftPanelUsersComponent } from './left-panel-users/left-panel-users.com
   styleUrls: ['./left-panel.component.scss']
 })
 export class LeftPanelComponent implements OnInit {
-
+  currentCompany: Company;
   toggleLeftPanel: boolean = false;
   state: string = '';
   @ViewChild('panelBilling') panelBilling: LeftPanelBillingComponent;
@@ -41,6 +43,7 @@ export class LeftPanelComponent implements OnInit {
     private router: Router,
     private leftPanelStateService: LeftPanelStateService,
     public companiesStateService: CompaniesStateService,
+    private usersStateService: UsersStateService,
     public cd: ChangeDetectorRef,
   ) { }
 
@@ -48,6 +51,11 @@ export class LeftPanelComponent implements OnInit {
    * Initializes left panel. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
+    this.currentCompany = this.companiesStateService.getCurrentCompany();
+    this.companiesStateService.getOnCurrentCompany().subscribe(data => {
+      this.currentCompany = this.companiesStateService.getCurrentCompany();
+    })
+
     this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
       this.toggleLeftPanel = data;
     })
@@ -246,6 +254,20 @@ export class LeftPanelComponent implements OnInit {
       this.cd.detectChanges();
     }
   }
-
-
+  public getCurrentUserName() {
+    let user = this.usersStateService.getCurrentUser();
+    return (user) ? `${user.firstName} ${user.lastName}` : '';
+  }
+  getShortCompanyName() {
+    return `${this.currentCompany.name[0].toUpperCase()}`
+  }
+  checkLogo() {
+    return (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.cropped && this.currentCompany.logo.cropped.id || this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.origin && this.currentCompany.logo.origin.id)
+  }
+  getCompanyLogoUrl() {
+    if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo && this.currentCompany.logo.base64 && !this.currentCompany.logo.cropped) return this.currentCompany.logo.base64;
+    if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.cropped && this.currentCompany.logo.cropped.id) return `/file/${this.currentCompany.logo.cropped.id}`;
+    if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.origin && this.currentCompany.logo.origin.id) return `/file/${this.currentCompany.logo.origin.id}`;
+    return '/company/default/logo.jpg';
+  }
 }
