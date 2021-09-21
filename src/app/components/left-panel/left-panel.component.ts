@@ -164,7 +164,14 @@ export class LeftPanelComponent implements OnInit {
     this.leftPanelStateService.toggleLeftPanel(this.toggleLeftPanel);
     this.cd.detectChanges();
   }
-
+  onToggleMobileLeftPanel() {
+    this.leftPanelStateService.toggleMobileLeftPanel(false);
+    this.cd.detectChanges();
+  }
+  public logOut() {
+    window.location.href = '/logout';
+    window.location.hash = '';
+  }
   public goToLink(url) {
     this.router.navigate([`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/${url}`]);
   }

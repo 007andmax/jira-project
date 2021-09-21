@@ -4,6 +4,7 @@ import { TicketsStateService } from 'src/app/states/tickets/tickets-state.servic
 import { Subscription } from 'rxjs';
 import { TicketsFilterComponent } from './tickets-filter/tickets-filter.component';
 import { AppService } from 'src/app/states/app/app.service';
+import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 
 @Component({
   selector: 'app-tickets-header',
@@ -30,6 +31,7 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
   selectedListType: TitleListType = new TitleListType('My Tickets', 'USERS');
   constructor(private ticketsStateService: TicketsStateService,
     public appService: AppService,
+    private leftPanelStateService: LeftPanelStateService,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
@@ -56,6 +58,9 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
       this.onSetCount();
     }
     /* END */
+  }
+  toggleMobileLeftPanel() {
+    this.leftPanelStateService.toggleMobileLeftPanel(true);
   }
   onSetCount() {
     this.title = `${(this.selectedListType) ? this.selectedListType.title : ''} (${this.count})`;

@@ -1,6 +1,9 @@
 <div class="qt-page-list__header --sticky">
     <div class="qt-page-list__header-title-line">
-        <div class="icon__menu-white qt-sz-24 qt-bg-contain qt-ml-6 pointer"></div>
+        <div
+            class="icon__menu-white qt-sz-24 qt-bg-contain qt-ml-6 pointer"
+            (click)="toggleMobileLeftPanel()"
+        ></div>
         <div class="qt-page-list__header-title-line--left">
             <h6
                 class="qt-page-list__header-title"
@@ -50,6 +53,7 @@
 
 
 
+
     <div class="qt-page-list__header-filters">
         <app-tickets-filter
             class="qt-w100"
@@ -59,6 +63,7 @@
             (onClose)="toggleFilter = true"
         ></app-tickets-filter>
     </div>
+
 
 
 
@@ -78,6 +83,7 @@
     <!-- </thead> -->
     <!-- </table> -->
     <!-- </div> -->
+
 
 
 

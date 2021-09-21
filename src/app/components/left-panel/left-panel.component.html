@@ -4,23 +4,25 @@
         class="app-left-panel__header-resize-btn qt-d-md-none"
         (click)="onToggleLeftPanel()"
     ></div>
-  <div
-    class="icon__close-white qt-sz-20 qt-bg-contain qt-d-none qt-d-md-block ppointer"
-  ></div>
-  <div class="app-left-panel__systems-info">
-    <div class="app-left-panel__systems-info-avatar"
-      style="background-color: #e6ffff; color: #24a6a5"
-    >
-      AI
+    <div
+        class="icon__close-white qt-sz-20 qt-bg-contain qt-d-none qt-d-md-block ppointer"
+        (click)="onToggleMobileLeftPanel()"
+    ></div>
+    <div class="app-left-panel__systems-info">
+        <div
+            class="app-left-panel__systems-info-avatar"
+            style="background-color: #e6ffff; color: #24a6a5"
+        >
+            AI
+        </div>
+        <div>
+            <div class="app-left-panel__systems-info-header">Active Information Systems</div>
+            <div class="app-left-panel__systems-info-name">
+                <div class="app-left-panel__systems-info-circle"></div>
+                Roman Semyhran
+            </div>
+        </div>
     </div>
-    <div>
-     <div class="app-left-panel__systems-info-header">Active Information Systems</div>
-     <div class="app-left-panel__systems-info-name">
-       <div class="app-left-panel__systems-info-circle"></div>
-       Roman Semyhran
-     </div>
-    </div>
-  </div>
 </div>
 <div class="app-left-panel__body">
     <app-left-panel-support
@@ -87,9 +89,12 @@
         class="qt-d-md-none"
     ></app-left-panel-settings>
     <!-- Mobile -->
-    <div class="app-left-panel__menu qt-d-none qt-d-md-flex">
-      <div class="app-left-panel__menu-icon --logout"></div>
-      <div class="app-left-panel__menu-title">Logout</div>
+    <div
+        class="app-left-panel__menu qt-d-none qt-d-md-flex"
+        (click)="logOut()"
+    >
+        <div class="app-left-panel__menu-icon --logout"></div>
+        <div class="app-left-panel__menu-title">Logout</div>
     </div>
     <!-- End Mobile -->
 </div>

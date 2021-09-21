@@ -19,7 +19,7 @@ export class TicketProfileEditFormUpdateComponent extends TicketProfileFormUpdat
   note: TicketProfileUpdate;
   updateId: string;
   ngOnInit() {
-    if (this.appService.checkMobile()) this.tab = null;
+    this.tab = null;
     this.currentUser = this.usersStateService.getCurrentUser();
     let onEditUpdate = this.ticketStateService.onEditUpdate.subscribe(data => {
       console.log("data", data);
