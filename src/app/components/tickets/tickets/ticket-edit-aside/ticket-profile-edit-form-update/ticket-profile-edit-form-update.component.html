@@ -4,18 +4,12 @@
             class="qt-aside__close-modal icon__close"
             (click)="close()"
         ></div>
-        <div
-            class="cps-block__photo"
-            [textContent]="ticketsListService.getAssignedUserNameForAvatar(currentUser)"
-            [ngStyle]="{'background': ticketsListService.getStyleAvatar(currentUser)}"
-        ></div>
         <ul class="cps-block__nav">
             <li
                 class="cps-block__nav-item icon__chat"
                 [ngClass]="{'active':tab === 'NOTE' }"
-                (click)="setTab('NOTE')"
             >
-                Chat
+                Edit Chat
             </li>
             <li
                 class="cps-block__nav-item icon__products"
@@ -28,13 +22,6 @@
                 [ngClass]="{'active':tab === 'SERVICE' }"
             >
                 Edit Service
-            </li>
-            <li
-                class="cps-block__nav-item icon__quick-support"
-                [ngClass]="{'active':tab === 'QUICK_SUPPORT' }"
-                (click)="setTab('QUICK_SUPPORT')"
-            >
-                Quick Support
             </li>
         </ul>
     </div>
@@ -53,49 +40,21 @@
                     maxlength="500"
                     cols="5"
                     rows="1"
+                    [value]="note.note"
                     placeholder="Write ticket conversation here…"
                     (input)="onChangeChat($event)"
                     (onPast)="onPastChat($event)"
                 ></textarea>
             </div>
-            <div class="files-list">
-                <div
-                    class="single-file"
-                    *ngFor="let file of files; let i = index"
-                >
-                    <div class="info">
-                        <h4 class="name">{{ file?.name }}</h4>
-                        <p class="size">
-                            {{ formatBytes(file?.size,2) }}
-                            <span class="file-error">{{(file.showError) ? file.error : ''}}</span>
-                        </p>
-                        <app-upload-area-progress [progress]="file?.progress"></app-upload-area-progress>
-                    </div>
-                    <i
-                        class="icn-sm icn-remove-old"
-                        (click)="deleteFile(i)"
-                    ></i>
-                </div>
-            </div>
             <!-- Mobile -->
             <div class="qt-aside-modern__footer">
                 <div class="qt-df">
-                    <button
-                        class="qt-button --gray"
-                        [ngClass]="{'--loading':isUpdate}"
-                        appDisabledBtn
-                        #addMoreMobileBtn="disabled"
-                        (onClick)="update()"
-                    >
-                        <span *ngIf="!isUpdate">Add more</span>
-                        <app-preloader-ticket *ngIf="isUpdate"></app-preloader-ticket>
-                    </button>
                     <button
                         class="qt-button"
                         [ngClass]="{'--loading':isUpdate}"
                         appDisabledBtn
                         #updateMobileBtn="disabled"
-                        (onClick)="updateMobile()"
+                        (onClick)="saveNote()"
                     >
                         <span
                             *ngIf="!isUpdate"
@@ -123,11 +82,5 @@
             *ngIf="tab === 'SERVICE'"
             (onClose)="close()"
         ></ticket-profile-edit-form-update-services>
-        <app-ticket-profile-form-update-support
-            *ngIf="tab === 'QUICK_SUPPORT'"
-            (onCreateOneTimeRemoteSession)="onCreateOneTimeRemoteSession()"
-            [item]="remoteSession"
-            (onConnectRemoteAccess)="onConnectRemoteAccess($event)"
-        ></app-ticket-profile-form-update-support>
     </div>
 </div>

@@ -61,7 +61,7 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
   constructor(public ticketsStateService: TicketsStateService,
     public cd: ChangeDetectorRef,
     public usersStateService: UsersStateService,
-    private ticketsService: TicketsService,
+    public ticketsService: TicketsService,
     private elRef: ElementRef,
     private modalService: NgbModal,
     private devicesService: DevicesService,
