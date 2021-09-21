@@ -18,6 +18,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalAddUsersNotifyComponent } from 'src/app/services/modal/modal-add-users-notify/modal-add-users-notify.component';
 import { TicketStateService } from '../ticket-edit-aside/services/ticket-state.service';
 import { Subscription } from 'rxjs';
+import { AddUsersNotifyStateService } from 'src/app/services/modal/modal-add-users-notify/state/add-users-notify-state.service';
+import { USERS_TO_ADD_TICKET } from 'src/app/const/add-users-notify';
 
 
 
@@ -59,6 +61,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     public appService: AppService,
     private modalService: NgbModal,
     private ticketStateService: TicketStateService,
+    private addUsersNotifyStateService: AddUsersNotifyStateService,
     private companiesState: CompaniesStateService,) { }
 
 
@@ -79,8 +82,9 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
 
       this.getClientsList(data);
     })
-    let onChangeAssignedUser = this.ticketStateService.onChangeAssignedUser.subscribe(data => {
-      this.onChangeShareUsers(data);
+    let onChangeAssignedUser = this.addUsersNotifyStateService.onChangeAssignedUser.subscribe(data => {
+
+      if (this.addUsersNotifyStateService.getAction() === USERS_TO_ADD_TICKET) this.onChangeShareUsers(data);
     })
     this.sub.add(onChangeAssignedUser);
   }
@@ -88,6 +92,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(ModalAddUsersNotifyComponent, { windowClass: 'quote-send-modal-users-to-notify' });
     modalRef.componentInstance.userList = this.listTechUsersForAssign;
     modalRef.componentInstance.selectedUsers = this.shareUsersList;
+    this.addUsersNotifyStateService.setAction(USERS_TO_ADD_TICKET);
   }
   add() {
     if (this.ticketValidate.isValidate(this.ticketAdd)) {

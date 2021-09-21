@@ -259,6 +259,7 @@ export class LeftPanelComponent implements OnInit {
     return (user) ? `${user.firstName} ${user.lastName}` : '';
   }
   getShortCompanyName() {
+    if (!this.currentCompany) return '';
     return `${this.currentCompany.name[0].toUpperCase()}`
   }
   checkLogo() {

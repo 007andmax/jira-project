@@ -30,6 +30,8 @@ import { ModalAddUpdateTicketComponent } from 'src/app/services/modal/modal-add-
 import { AppService } from 'src/app/states/app/app.service';
 import { ModalAddUsersNotifyComponent } from 'src/app/services/modal/modal-add-users-notify/modal-add-users-notify.component';
 import { TicketProfileEditFormUpdateComponent } from './ticket-profile-edit-form-update/ticket-profile-edit-form-update.component';
+import { AddUsersNotifyStateService } from 'src/app/services/modal/modal-add-users-notify/state/add-users-notify-state.service';
+import { USERS_TO_EDIT_TICKET } from 'src/app/const/add-users-notify';
 @Component({
   selector: 'app-ticket-edit-aside',
   templateUrl: './ticket-edit-aside.component.html',
@@ -71,6 +73,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     public appService: AppService,
     private devicesStateService: DevicesStateService,
+    private addUsersNotifyStateService: AddUsersNotifyStateService,
     private companiesStateService: CompaniesStateService) { }
 
 
@@ -167,8 +170,8 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       if (newChange.action == 'UPDATE_DELETED') this.ticketProfile.removeUpdate(newChange.data);
       this.cd.detectChanges();
     });
-    let onChangeAssignedUser = this.ticketStateService.onChangeAssignedUser.subscribe(data => {
-      if (!this.opened) return;
+    let onChangeAssignedUser = this.addUsersNotifyStateService.onChangeAssignedUser.subscribe(data => {
+      if (!this.opened || this.addUsersNotifyStateService.getAction() !== USERS_TO_EDIT_TICKET) return;
       this.onSelectAssignedUser(data);
       if (this.listAssignedUser.length > 0 && !this.checkAssignedUser()) {
         let ids = this.listAssignedUser.map(item => {
@@ -332,6 +335,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       const modalRef = this.modalService.open(ModalAddUsersNotifyComponent, { windowClass: 'quote-send-modal-users-to-notify' });
       modalRef.componentInstance.userList = this.getUsersForAssign();
       modalRef.componentInstance.selectedUsers = this.listAssignedUser;
+      this.addUsersNotifyStateService.setAction(USERS_TO_EDIT_TICKET);
       return;
     }
     this.showAddAssignedUser = !this.showAddAssignedUser;

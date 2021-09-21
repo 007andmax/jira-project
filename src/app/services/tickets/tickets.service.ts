@@ -34,8 +34,10 @@ export class TicketsService {
         return data;
       }));
   }
-  public updateNote(ticketId, updateId, note) {
-    return this.http.put(this.apiUrl + `v2/tickets/${ticketId}/updates/${updateId}/updateNote`, { note: note }).pipe(
+  public updateNote(ticketId, updateId, note, shares = null) {
+    let data: any = { note: note };
+    if (shares) data.shares = shares;
+    return this.http.put(this.apiUrl + `v2/tickets/${ticketId}/updates/${updateId}/updateNote`, data).pipe(
       tap(data => {
         this.toastrService.success("The note has been successfully updated");
         this.appStateService.changeDetectorRef();

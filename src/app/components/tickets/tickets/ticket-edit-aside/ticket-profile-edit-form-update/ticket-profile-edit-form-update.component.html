@@ -84,3 +84,14 @@
         ></ticket-profile-edit-form-update-services>
     </div>
 </div>
+<div class="qt-aside__buttons jc-sb ai-c">
+    <div class="d-f ticket-edit-aside-bottom-part-users-attack">
+        <div
+            class="ticket-edit-aside__users  icon__assign-user toggle-select-user"
+            *ngIf="!showAddUpdateUser"
+            (click)="onToggleAddUpdateUser()"
+            placement="top"
+            ngbTooltip="Add User"
+        ></div>
+    </div>
+</div>

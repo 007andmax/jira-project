@@ -14,7 +14,6 @@ export class TicketStateService {
   servicesList: EventEmitter<any> = new EventEmitter();
   onSetTabUpdate: EventEmitter<any> = new EventEmitter();
   onEditUpdate: EventEmitter<any> = new EventEmitter();
-  onChangeAssignedUser: EventEmitter<any> = new EventEmitter();
   changeUpdatesTicket: EventEmitter<any> = new EventEmitter();
   closedTicket: EventEmitter<any> = new EventEmitter();
   updateForRemove: TicketProfileUpdate = null;
@@ -31,9 +30,6 @@ export class TicketStateService {
   }
   public setEditUpdate(data) {
     this.onEditUpdate.emit(data);
-  }
-  public setAssignUser(data) {
-    this.onChangeAssignedUser.emit(data);
   }
   public setTabUpdate(data) {
     this.onSetTabUpdate.emit(data);

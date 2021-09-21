@@ -3,6 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddAssignedUserComponent } from 'src/app/components/tickets/tickets/ticket-edit-aside/add-assigned-user/add-assigned-user.component';
 import { TicketStateService } from 'src/app/components/tickets/tickets/ticket-edit-aside/services/ticket-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { AddUsersNotifyStateService } from './state/add-users-notify-state.service';
 
 @Component({
   selector: 'modal-add-users-notify',
@@ -14,7 +15,8 @@ export class ModalAddUsersNotifyComponent extends AddAssignedUserComponent {
   public constructor(
     public usersStateService: UsersStateService,
     public activeModal: NgbActiveModal,
-    public ticketStateService: TicketStateService
+    public ticketStateService: TicketStateService,
+    private addUsersNotifyStateService: AddUsersNotifyStateService,
   ) {
     super(usersStateService, ticketStateService);
   }
@@ -37,7 +39,7 @@ export class ModalAddUsersNotifyComponent extends AddAssignedUserComponent {
     this.reqUsers = JSON.parse(JSON.stringify(this.userList));
   }
   applyUsers() {
-    this.ticketStateService.setAssignUser(this.selectedUsers);
+    this.addUsersNotifyStateService.setAssignUser(this.selectedUsers);
     this.close();
   }
   close() {

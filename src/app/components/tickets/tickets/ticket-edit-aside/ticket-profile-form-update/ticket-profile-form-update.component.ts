@@ -23,6 +23,9 @@ import { DevicesService } from 'src/app/services/devices/devices.service';
 import { TicketStateService } from '../services/ticket-state.service';
 import { CompanyDevicesRemoteAccessComponent } from 'src/app/components/company-devices/company-devices-remote-access/company-devices-remote-access.component';
 import { AppService } from 'src/app/states/app/app.service';
+import { ModalAddUsersNotifyComponent } from 'src/app/services/modal/modal-add-users-notify/modal-add-users-notify.component';
+import { USERS_TO_ADD_UPDATE } from 'src/app/const/add-users-notify';
+import { AddUsersNotifyStateService } from 'src/app/services/modal/modal-add-users-notify/state/add-users-notify-state.service';
 
 @Component({
   selector: 'app-ticket-profile-form-update',
@@ -63,7 +66,7 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     public usersStateService: UsersStateService,
     public ticketsService: TicketsService,
     private elRef: ElementRef,
-    private modalService: NgbModal,
+    public modalService: NgbModal,
     private devicesService: DevicesService,
     private supportService: SupportService,
     public supportStateService: SupportStateService,
@@ -73,6 +76,7 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     private devicesStateService: DevicesStateService,
     public ticketStateService: TicketStateService,
     public appService: AppService,
+    public addUsersNotifyStateService: AddUsersNotifyStateService,
     public ticketsListService: TicketsListService) { }
 
   ngOnInit() {
@@ -114,6 +118,14 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     this.ticketStateService.onSetTabUpdate.subscribe(data => {
       this.setTab(data);
     })
+    let onChangeAssignedUser = this.addUsersNotifyStateService.onChangeAssignedUser.subscribe(data => {
+      if (this.addUsersNotifyStateService.getAction() === USERS_TO_ADD_UPDATE) {
+        this.ticketProfileFormUpdate.clearShares();
+        data.forEach(element => this.ticketProfileFormUpdate.toggleShares(element));
+
+      }
+    })
+    this.sub.add(onChangeAssignedUser);
   }
   onConnectRemoteAccess(data) {
     this.companyIdForSupport = data.companyId;
@@ -295,9 +307,24 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
     this.ticketProfileFormUpdate.setServices(data);
   }
   onToggleAddUpdateUser() {
+    if (this.appService.checkMobile()) {
+      console.log("this.appService.checkMobile()", this.appService.checkMobile());
+      const modalRef = this.modalService.open(ModalAddUsersNotifyComponent, { windowClass: 'quote-send-modal-users-to-notify' });
+      modalRef.componentInstance.userList = this.getUsersForAssign();
+      modalRef.componentInstance.selectedUsers = this.usersStateService.getAllUsers().filter(item => this.ticketProfileFormUpdate.shares.find(share => share.user.id === item.id))
+      this.addUsersNotifyStateService.setAction(USERS_TO_ADD_UPDATE);
+      return;
+    }
     this.showAddUpdateUser = !this.showAddUpdateUser;
   }
+  getUsersForAssign() {
+    let userList = this.usersStateService.getAllUsers().sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?
+      1 : ((`${b.firstName} ${b.lastName}`.toLowerCase() > `${a.firstName} ${a.lastName}`.toLowerCase()) ? -1 : 0));
+    return userList.filter((item) => item.accountType === "TECH" && !item.deletedAt);
+
+  }
   onSelectUpdateUser(data) {
+    console.log("data", data);
     this.lisUpdateUser = data;
     this.addCreatedUser();
   }
