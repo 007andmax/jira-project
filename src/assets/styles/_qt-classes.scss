@@ -38,12 +38,6 @@
 .qt-d-none {
   display: none;
 }
-// TODO add mixin
-.qt-md-d-none {
-  @media (max-width: 767px) {
-    display: none !important;
-  }
-}
 
 .qt-df {
   display: flex;
@@ -1341,5 +1335,19 @@
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+
+
+@media (max-width: 767px) {
+  .qt-d-md-none {
+    display: none !important;
+  }
+  .qt-d-md-block {
+    display: block !important;
+  }
+  .qt-d-md-flex {
+    display: flex !important;
   }
 }
