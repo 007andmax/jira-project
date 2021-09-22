@@ -191,6 +191,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     })
   }
   showDetailUser() {
+    if (this.appService.checkMobile()) return;
     let user = this.usersStateService.getAllUsers().find(item => item.id === this.ticketProfile.createdUser.id);
     this.usersStateService.showDetailUser(user);
     (<any>document.body.querySelector(".ticket-edit-aside")).style.zIndex = "1";

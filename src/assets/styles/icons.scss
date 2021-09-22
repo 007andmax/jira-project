@@ -1,4 +1,4 @@
-@import './src/assets/styles/variable';
+@import "./src/assets/styles/variable";
 
 .icn-64 {
   display: block;
@@ -290,6 +290,9 @@
   }
   &__claim-ticket {
     background-image: url("/assets/img/icons/claim-ticket.svg");
+  }
+  &__claim-edit-ticket {
+    background-image: url("/assets/img/icons/claim-edit-ticket.svg");
   }
   &__ticket-status {
     background: url("/assets/img/icons/ticket-status.svg");
@@ -842,4 +845,3 @@
     }
   }
 }
-

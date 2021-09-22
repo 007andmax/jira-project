@@ -21,7 +21,7 @@ export class TicketProfileEditFormUpdateComponent extends TicketProfileFormUpdat
   service: TicketProfileService;
   note: TicketProfileUpdate;
   updateId: string;
-  shares = [];
+
   ngOnInit() {
     this.tab = null;
     this.currentUser = this.usersStateService.getCurrentUser();
@@ -30,17 +30,11 @@ export class TicketProfileEditFormUpdateComponent extends TicketProfileFormUpdat
       if (data.type === "PRODUCT") this.product = data.update;
       if (data.type === "SERVICE") this.service = data.update;
       if (data.type === "NOTE") this.note = data.update;
-      this.shares = data.shares.map(item => item.user.id)
+
       this.updateId = data.updateId;
       this.setTab(data.type);
     })
     this.sub.add(onEditUpdate);
-    let onChangeAssignedUser = this.addUsersNotifyStateService.onChangeAssignedUser.subscribe(data => {
-      if (this.addUsersNotifyStateService.getAction() === USERS_TO_EDIT_UPDATE) {
-        this.shares = data.map(item => item.id)
-      }
-    })
-    this.sub.add(onChangeAssignedUser);
   }
   public onChangeChat(event) {
     this.note.note = event.target.value.replace(/\n/g, '<br/>');
@@ -51,21 +45,11 @@ export class TicketProfileEditFormUpdateComponent extends TicketProfileFormUpdat
   saveNote() {
     this.isUpdate = true;
     this.updateMobileBtn.setDisabled(true);
-    this.ticketsService.updateNote(this.ticketProfile.id, this.updateId, this.note.note, this.shares).subscribe(data => {
+    this.ticketsService.updateNote(this.ticketProfile.id, this.updateId, this.note.note).subscribe(data => {
       this.isUpdate = false;
       this.updateMobileBtn.setDisabled(false);
       this.close();
     })
-  }
-  onToggleAddUpdateUser() {
-    if (this.appService.checkMobile()) {
-      console.log("this.appService.checkMobile()", this.appService.checkMobile());
-      const modalRef = this.modalService.open(ModalAddUsersNotifyComponent, { windowClass: 'quote-send-modal-users-to-notify' });
-      modalRef.componentInstance.userList = this.getUsersForAssign();
-      modalRef.componentInstance.selectedUsers = this.usersStateService.getAllUsers().filter(item => this.shares.find(share => share === item.id));
-      this.addUsersNotifyStateService.setAction(USERS_TO_EDIT_UPDATE);
-      return;
-    }
   }
   close() {
     this.tab = null;

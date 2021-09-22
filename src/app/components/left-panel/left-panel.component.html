@@ -58,7 +58,8 @@
     <app-left-panel-companies
         #panelCompanies
         (onOpenPanel)="onOpenPanel()"
-        (onChangeState)="onChangeState($event)"app-ticket-profile-form-update
+        (onChangeState)="onChangeState($event)"
+        app-ticket-profile-form-update
         [activePage]="state"
     ></app-left-panel-companies>
     <app-left-panel-billing
@@ -100,7 +101,7 @@
     ></app-left-panel-settings>
     <!-- Mobile -->
     <div
-        class="app-left-panel__menu qt-d-none qt-d-md-flex"
+        class="app-left-panel__menu qt-d-md-flex qt-d-none"
         (click)="logOut()"
     >
         <div class="app-left-panel__menu-icon --logout"></div>
