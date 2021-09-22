@@ -282,6 +282,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     this.updateForm.updateAndClose();
   }
   toggleSubject() {
+    if (this.appService.checkMobile()) return;
     var textCurrent = this.elRef.nativeElement.querySelector("#ticket-subject").value;
     var textOld = this.ticketProfile.subject;
     this.modeSubject = (this.modeSubject === 'view') ? 'edit' : 'view';
@@ -291,6 +292,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     }
   }
   toggleNote() {
+    if (this.appService.checkMobile()) return;
     var textCurrent = this.elRef.nativeElement.querySelector("#ticket-note").innerHTML.replace(/<\/?[^>]+>/ig, "");
     var textOld = (this.ticketProfile.note) ? this.ticketProfile.note.replace(/<\/?[^>]+>/ig, "") : "";
     this.modeDescription = 'view';

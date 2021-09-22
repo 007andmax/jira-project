@@ -30,12 +30,6 @@ export class TicketsPermissionsService {
         if (option === 'billed') {
           return ticket.hasInvoice;
 
-        } else if (option === 'old') {
-          return !ticket.isBillable && !this.isCanBeReOpened(ticket);
-
-        } else if (option === 'open') {
-          return !ticket.isBillable && this.isCanBeReOpened(ticket);
-
         } else if (option === 'billable') {
           return this.isBillable(ticket);
 

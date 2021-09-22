@@ -169,6 +169,7 @@
                     <input
                         id="ticket-subject"
                         [value]="ticketProfile.subject"
+                        [readonly]="appService.checkMobile()"
                     >
                 </div>
                 <div
@@ -181,7 +182,7 @@
                     <div
                         class="form-control editor"
                         (blur)="modeDescription = 'edit'"
-                        contenteditable="true"
+                        [attr.contenteditable]="!appService.checkMobile()"
                         id="ticket-note"
                         placeholder="Enter description here"
                     ></div>
