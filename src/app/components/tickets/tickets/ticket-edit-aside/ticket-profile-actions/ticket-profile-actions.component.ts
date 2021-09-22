@@ -52,7 +52,6 @@ export class TicketProfileActionsComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
-    console.log("this.currentUser", this.currentUser);
   }
   showAgentLink() {
     if (!this.appService.checkMobile()) return;

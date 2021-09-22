@@ -137,11 +137,9 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       }
     });
     this.ticketsStateService.getOnChangeFieldTicket().subscribe((data: TicketChangeField) => {
-      console.log("data", data);
       if (this.opened) {
         if (this.ticketProfile.id === data.id) {
           if (data.field === "agent.deviceId") {
-            console.log("this.devicesStateService.getAllDevices()[this.ticketProfile.company.id]", this.devicesStateService.getAllDevices()[this.ticketProfile.company.id]);
             let device = this.devicesStateService.getAllDevices()[this.ticketProfile.company.id].find(item => item.agentId === data.value || item.id === data.value);
             this.ticketProfile.agent.label = device.label;
           }
@@ -199,9 +197,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
 
   }
   showModalAddUpdate() {
-    console.log("showModalAddUpdate");
     const modalRef = this.modalService.open(ModalAddUpdateTicketComponent, { windowClass: 'modal-ticket-profile-form-update' });
-    console.log("modalRef", modalRef);
   }
   checkExistServicesProducts() {
     return this.ticketProfile.updates.filter(item => item.type == 'PRODUCT' || item.type == 'SERVICE').length > 0;
@@ -283,7 +279,6 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
 
   }
   updateAndCloseMobile() {
-    console.log("updateAndCloseMobile");
     this.updateForm.updateAndClose();
   }
   toggleSubject() {
@@ -330,9 +325,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     this.listAssignedUser = data;
   }
   onToggleAddAssignedUser() {
-    console.log("this.appService.checkMobile()", this.appService.checkMobile());
     if (this.appService.checkMobile()) {
-      console.log("this.appService.checkMobile()", this.appService.checkMobile());
       const modalRef = this.modalService.open(ModalAddUsersNotifyComponent, { windowClass: 'quote-send-modal-users-to-notify' });
       modalRef.componentInstance.userList = this.getUsersForAssign();
       modalRef.componentInstance.selectedUsers = this.listAssignedUser;

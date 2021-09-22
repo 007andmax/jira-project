@@ -126,7 +126,6 @@ export class AppComponent implements OnInit {
       this.cd.detectChanges();
     })
     this.leftPanelStateService.onToggleMobileLeftPanel.subscribe(data => {
-      console.log("data", data);
       this.toggMobileleLeftPanel = data;
       this.cd.detectChanges();
     })

@@ -26,11 +26,9 @@ export class TicketProfileEditFormUpdateComponent extends TicketProfileFormUpdat
     this.tab = null;
     this.currentUser = this.usersStateService.getCurrentUser();
     let onEditUpdate = this.ticketStateService.onEditUpdate.subscribe(data => {
-      console.log("data", data);
       if (data.type === "PRODUCT") this.product = data.update;
       if (data.type === "SERVICE") this.service = data.update;
       if (data.type === "NOTE") this.note = data.update;
-
       this.updateId = data.updateId;
       this.setTab(data.type);
     })

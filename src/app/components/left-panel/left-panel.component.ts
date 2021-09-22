@@ -185,7 +185,6 @@ export class LeftPanelComponent implements OnInit {
   }
   onChangeState(data) {
     if (this.state !== data) {
-      console.log("onGoToState", data);
       this.state = data;
       if (this.state === 'new-companies') this.goToLink(`companies`);
       if (this.state === 'billing-dashboard') this.goToLink('billing-dashboard');

@@ -45,7 +45,6 @@ export class TicketProfileEditFormUpdateServicesComponent implements OnInit {
     this.editService = new TicketProfileService(this.service);
     this.currentCompany = this.companiesStateService.getCurrentCompany();
     this.quantity = JSON.parse(JSON.stringify(this.service.quantity));
-
     this.durationStart = this.service.durationStart;
     this.durationEnd = this.service.durationEnd;
     var timeInMinutes = this.service.quantity * 60;
@@ -55,7 +54,6 @@ export class TicketProfileEditFormUpdateServicesComponent implements OnInit {
     this.ticketStateService.getOnGetServicesList().subscribe(data => {
       this.getServices();
     })
-    console.log("this.editService", this.editService);
   }
 
   private getServices() {

@@ -14,7 +14,6 @@ export class ModalAddUpdateTicketComponent implements OnInit {
     public activeModal: NgbActiveModal,) { }
 
   ngOnInit() {
-    console.log("ModalAddUpdateTicketComponent");
   }
   setTabUpdate(data) {
     this.ticketStateService.setTabUpdate(data);

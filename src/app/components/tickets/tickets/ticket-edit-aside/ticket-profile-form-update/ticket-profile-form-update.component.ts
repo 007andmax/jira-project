@@ -238,7 +238,6 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
   }
   updateAndClose() {
     if (!this.checkUpdateAndClose()) return;
-    console.log("updateAndClose");
     if (this.tab === "NOTE") {
       if (this.ticketProfileFormUpdate.isValidateNote()) {
         this.onUpdateTicketAndClose(this.ticketProfileFormUpdate.getDataForUpdateNote());
@@ -308,7 +307,6 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
   }
   onToggleAddUpdateUser() {
     if (this.appService.checkMobile()) {
-      console.log("this.appService.checkMobile()", this.appService.checkMobile());
       const modalRef = this.modalService.open(ModalAddUsersNotifyComponent, { windowClass: 'quote-send-modal-users-to-notify' });
       modalRef.componentInstance.userList = this.getUsersForAssign();
       modalRef.componentInstance.selectedUsers = this.usersStateService.getAllUsers().filter(item => this.ticketProfileFormUpdate.shares.find(share => share.user.id === item.id))
@@ -324,7 +322,6 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
 
   }
   onSelectUpdateUser(data) {
-    console.log("data", data);
     this.lisUpdateUser = data;
     this.addCreatedUser();
   }
