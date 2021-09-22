@@ -44,6 +44,7 @@
     padding-right: 16px;
 
     @media (max-width: 767px) {
+      position: relative;
       background-color: $primary-2;
     }
 
@@ -159,6 +160,13 @@
     height: 24px;
     background-size: contain;
     cursor: pointer;
+
+    @media (max-width: 767px) {
+      position: absolute;
+      top: 50%;
+      left: 26px;
+      transform: translate(-50%, -50%);
+    }
   }
 
   &__title {

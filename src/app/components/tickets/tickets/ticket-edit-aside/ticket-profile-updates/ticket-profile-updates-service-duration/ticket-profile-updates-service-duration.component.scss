@@ -8,6 +8,15 @@
   border-radius: 4px;
   opacity: 0;
 
+  @media (max-width: 767px) {
+    width: 100% !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    border: none;
+    background: $white;
+  }
+
   .igx-time-picker--dropdown {
     height: 297px !important;
     width: 180px !important;
@@ -16,21 +25,44 @@
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
 
+    @media (max-width: 767px) {
+      width: 100% !important;
+      max-width: calc(100% - 32px) !important;
+      margin: 0 auto;
+    }
+
     position: relative;
-    &:before {
+
+    &::before,
+    &::after {
       content: '\00a0Hour\00a0\00a0\00a0\00a0\00a0\0a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0 Minute';
       font-size: 12px;
       position: absolute;
       top: 0;
       height: 32px;
       width: 100%;
-      box-shadow: 0 0px 11px 0px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 0 11px 0 rgba(0, 0, 0, 0.05);
       background: $white;
       font-weight: 600;
       display: flex;
       align-items: center;
       justify-content: center;
       border-bottom: solid 1px $gray-400;
+
+      @media (max-width: 767px) {
+        color: $primary-2;
+        content: 'Hour';
+        background: transparent;
+        transform: translateX(-25%)
+      }
+    }
+
+    &:after {
+      content: "";
+      @media (max-width: 767px) {
+        content: 'Minute';
+        transform: translateX(25%)
+      }
     }
   }
 
@@ -72,7 +104,6 @@
       position: absolute;
       width: 16px;
       height: 16px;
-      border-radius: 16px;
       box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
       border-radius: 50%;
     }
@@ -84,7 +115,6 @@
       position: absolute;
       width: 16px;
       height: 16px;
-      border-radius: 16px;
       box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
       border-radius: 50%;
     }
