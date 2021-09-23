@@ -79,7 +79,15 @@
                 <li
                     ngbDropdownItem
                     (click)="edit()"
+                    *ngIf="!isIOSDevice()"
+                >
+                    <i class="icn-16 edit-grey-ng2"></i>
+                    Edit
+                </li>
+                <li
+                    ngbDropdownItem
                     (touchstart)="edit()"
+                    *ngIf="isIOSDevice()"
                 >
                     <i class="icn-16 edit-grey-ng2"></i>
                     Edit
@@ -87,6 +95,15 @@
                 <li
                     ngbDropdownItem
                     (click)="removeProduct()"
+                    *ngIf="!isIOSDevice()"
+                >
+                    <i class="icn-16 icon__remove"></i>
+                    Delete
+                </li>
+                <li
+                    ngbDropdownItem
+                    (touchstart)="removeProduct()"
+                    *ngIf="isIOSDevice()"
                 >
                     <i class="icn-16 icon__remove"></i>
                     Delete

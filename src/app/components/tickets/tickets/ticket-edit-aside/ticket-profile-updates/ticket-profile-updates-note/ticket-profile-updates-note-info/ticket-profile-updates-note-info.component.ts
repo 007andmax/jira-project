@@ -31,6 +31,9 @@ export class TicketProfileUpdatesNoteInfoComponent implements OnInit {
     }
     this.onEdit.emit(null);
   }
+  isIOSDevice() {
+    return !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+  }
   public getHtml(value) {
     return this.sanitized.bypassSecurityTrustHtml(value);
   }

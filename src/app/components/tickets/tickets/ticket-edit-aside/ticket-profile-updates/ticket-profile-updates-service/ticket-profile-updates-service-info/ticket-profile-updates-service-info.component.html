@@ -18,18 +18,18 @@
                     [textContent]="service.item.name"
                 ></div>
                 <div class="ticket-updates__ticket-data">
-                  <div
-                    class="ticket-updates__service-time-in"
-                    [textContent]="getTime(service.durationStart)"
-                  ></div>
-                  <div
-                    class="ticket-updates__service-time-out"
-                    [textContent]="getTime(service.durationEnd)"
-                  ></div>
-                  <div
-                    class="ticket-updates__service-duration"
-                    [textContent]="getDuration(service.quantity)"
-                  ></div>
+                    <div
+                        class="ticket-updates__service-time-in"
+                        [textContent]="getTime(service.durationStart)"
+                    ></div>
+                    <div
+                        class="ticket-updates__service-time-out"
+                        [textContent]="getTime(service.durationEnd)"
+                    ></div>
+                    <div
+                        class="ticket-updates__service-duration"
+                        [textContent]="getDuration(service.quantity)"
+                    ></div>
                 </div>
                 <app-date-picker
                     [isDisabled]="isBlockChange"
@@ -83,6 +83,15 @@
                 <li
                     ngbDropdownItem
                     (click)="edit()"
+                    *ngIf="!isIOSDevice()"
+                >
+                    <i class="icn-16 edit-grey-ng2"></i>
+                    Edit
+                </li>
+                <li
+                    ngbDropdownItem
+                    (touchstart)="edit()"
+                    *ngIf="isIOSDevice()"
                 >
                     <i class="icn-16 edit-grey-ng2"></i>
                     Edit
@@ -90,6 +99,15 @@
                 <li
                     ngbDropdownItem
                     (click)="removeService()"
+                    *ngIf="!isIOSDevice()"
+                >
+                    <i class="icn-16 archive-grey-ng2"></i>
+                    Delete
+                </li>
+                <li
+                    ngbDropdownItem
+                    (touchstart)="removeService()"
+                    *ngIf="isIOSDevice()"
                 >
                     <i class="icn-16 archive-grey-ng2"></i>
                     Delete

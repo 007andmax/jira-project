@@ -64,9 +64,7 @@ export class TicketProfileUpdatesProductInfoComponent implements OnInit {
 
   }
   edit() {
-    console.log("edit 1");
     if (this.appService.checkMobile()) {
-      console.log("edit mobile");
       this.ticketStateService.setEditUpdate({ updateId: this.update.id, update: this.product, type: this.update.type });
       return;
     }
@@ -80,6 +78,9 @@ export class TicketProfileUpdatesProductInfoComponent implements OnInit {
   private updateProduct() {
     this.ticketsService.updateExpense(this.product.getDateForUpdate(this.update.id)).subscribe(data => {
     })
+  }
+  isIOSDevice() {
+    return !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
   }
   public onChangeUser(data) {
     if (data.length === 0) this.product.setUser({ id: "" });

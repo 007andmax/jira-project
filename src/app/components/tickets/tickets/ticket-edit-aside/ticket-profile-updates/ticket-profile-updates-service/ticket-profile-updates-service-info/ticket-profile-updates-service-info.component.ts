@@ -72,6 +72,9 @@ export class TicketProfileUpdatesServiceInfoComponent implements OnInit {
       minutes = Math.round(timeInMinutes - (hours * 60));
     return `${(hours < 10) ? '0' + hours : hours} : ${(minutes < 10) ? '0' + minutes : minutes}`
   }
+  isIOSDevice() {
+    return !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+  }
   setComplete() {
     if (this.isBlockChange) return;
     this.service.setCompleted(!this.service.completed);
