@@ -51,7 +51,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     private companiesService: CompaniesService,
     private elRef: ElementRef,
     public cd: ChangeDetectorRef,
-    private appService: AppService,
+    public appService: AppService,
     private leftPanelService: LeftPanelService) { }
 
 

@@ -44,7 +44,10 @@
         [field]="'title'"
         (onSelectedItem)="onSelectStatus($event)"
     ></app-select-search>
-    <app-tickets-filter-tags (tagsChange)="onChangeTags($event)"></app-tickets-filter-tags>
+    <app-tickets-filter-tags
+        [placement]="appService.checkMobile() ? 'top-left' : 'bottom-left'"
+        (tagsChange)="onChangeTags($event)"
+    ></app-tickets-filter-tags>
     <!-- Mobile -->
     <div class="qt-aside-modern__footer">
         <div class="qt-df qt-w100">

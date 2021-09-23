@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CompanyTagsComponent } from 'src/app/components/companies/company-tags/company-tags.component';
 import { CompanyTagsListService } from 'src/app/components/companies/company-tags/services/company-tags-list.service';
 
@@ -9,7 +9,7 @@ import { CompanyTagsListService } from 'src/app/components/companies/company-tag
   providers: [CompanyTagsListService]
 })
 export class TicketsFilterTagsComponent extends CompanyTagsComponent {
-
+  @Input() placement: string = 'bottom-left';
   public ngOnInit() {
     let getTags = this.tagsService.getTags().subscribe((data) => {
       this.tags = data;
