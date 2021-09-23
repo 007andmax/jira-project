@@ -163,6 +163,10 @@ export class AppComponent implements OnInit {
       if (this.router.url === "/") this.router.navigate(
         [`${data.name.replaceAll(' ', '')}/tickets/`]);
     })
+    this.appService.onToggleMobileAside.subscribe(data => {
+      if (data) document.querySelector("html").classList.add("--scrollLock");
+      if (!data) document.querySelector("html").classList.remove("--scrollLock");
+    })
   }
   ngDoCheck() {
     this.qtListHeaaderScroller = document.querySelector('.qt-page-list__header-thead-container');

@@ -66,6 +66,7 @@ export class TicketProfileUpdatesProductInfoComponent implements OnInit {
   edit() {
     if (this.appService.checkMobile()) {
       this.ticketStateService.setEditUpdate({ updateId: this.update.id, update: this.product, type: this.update.type });
+      this.appService.toggleMobileAside(true);
       return;
     }
     this.onEdit.emit(null);

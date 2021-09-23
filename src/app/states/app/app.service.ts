@@ -7,6 +7,7 @@ export class AppService {
   isMobile: boolean = false;
   isInit: boolean = false;
   onMobile: EventEmitter<any> = new EventEmitter();
+  onToggleMobileAside: EventEmitter<any> = new EventEmitter();
   init: EventEmitter<any> = new EventEmitter();
   onLockScreen: EventEmitter<any> = new EventEmitter();
   onSessionScreen: EventEmitter<any> = new EventEmitter();
@@ -15,6 +16,9 @@ export class AppService {
     this.isInit = true;
     this.init.emit(null);
 
+  }
+  public toggleMobileAside(data) {
+    this.onToggleMobileAside.emit(data);
   }
   public showSessionScreen(data) {
     this.onSessionScreen.emit(data);

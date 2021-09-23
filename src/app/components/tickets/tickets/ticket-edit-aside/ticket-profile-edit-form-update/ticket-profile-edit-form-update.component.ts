@@ -52,5 +52,6 @@ export class TicketProfileEditFormUpdateComponent extends TicketProfileFormUpdat
   close() {
     this.tab = null;
     this.onClosed.emit(null);
+    this.appService.toggleMobileAside(false);
   }
 }

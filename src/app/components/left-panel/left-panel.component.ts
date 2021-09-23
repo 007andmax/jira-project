@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from "@angular/router";
 import { Company } from 'src/app/interfaces/company/company';
+import { AppService } from 'src/app/states/app/app.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
@@ -44,6 +45,7 @@ export class LeftPanelComponent implements OnInit {
     private leftPanelStateService: LeftPanelStateService,
     public companiesStateService: CompaniesStateService,
     private usersStateService: UsersStateService,
+    private appService: AppService,
     public cd: ChangeDetectorRef,
   ) { }
 
@@ -174,6 +176,7 @@ export class LeftPanelComponent implements OnInit {
   }
   onToggleMobileLeftPanel() {
     this.leftPanelStateService.toggleMobileLeftPanel(false);
+    this.appService.toggleMobileAside(false);
     this.cd.detectChanges();
   }
   public logOut() {

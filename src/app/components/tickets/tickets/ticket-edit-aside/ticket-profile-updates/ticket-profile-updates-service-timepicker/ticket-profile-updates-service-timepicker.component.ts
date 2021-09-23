@@ -3,6 +3,7 @@ import * as moment from "moment";
 var $ = require("jquery");
 import "timepicker";
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { AppService } from 'src/app/states/app/app.service';
 
 @Component({
   selector: 'app-ticket-profile-updates-service-timepicker',
@@ -26,7 +27,10 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit {
   inputTarget = null;
   timePickerStart;
   timePickerEnd;
-  constructor(private companiesStateService: CompaniesStateService, public cd: ChangeDetectorRef, private elRef: ElementRef,) { }
+  constructor(private companiesStateService: CompaniesStateService,
+    private appService: AppService,
+    public cd: ChangeDetectorRef,
+    private elRef: ElementRef,) { }
 
   ngOnInit() {
 
@@ -43,14 +47,16 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit {
         'showDuration': false,
         'minTime': '12:00am',
         'timeFormat': 'g:ia',
-        'step': this.step
+        'step': this.step,
+        'orientation': this.appService.checkMobile() ? 'bl' : 'l'
 
       });
       this.timePickerEnd.timepicker({
         'showDuration': true,
         'minTime': '12:00am',
         'timeFormat': 'g:ia',
-        'step': this.step
+        'step': this.step,
+        'orientation': this.appService.checkMobile() ? 'bl' : 'l'
       });
       this.timePickerStart.on('selectTime', (data) => {
         this.changeStart();

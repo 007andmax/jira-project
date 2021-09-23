@@ -61,6 +61,7 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
   }
   toggleMobileLeftPanel() {
     this.leftPanelStateService.toggleMobileLeftPanel(true);
+    this.appService.toggleMobileAside(true);
   }
   onSetCount() {
     this.title = `${(this.selectedListType) ? this.selectedListType.title : ''} (${this.count})`;
