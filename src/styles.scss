@@ -168,6 +168,11 @@ h6,
     }
   }
 }
+html {
+  &.--scrollLock {
+    overflow: hidden;
+  }
+}
 .checkbox-container {
   position: relative;
   width: 16px;
@@ -1192,17 +1197,40 @@ app-quotes-item {
 
 .quote-send-modal-users-to-notify {
   .modal-dialog {
-    margin: 0;
-    transform: translate(-50%, -50%) !important;
-    max-width: 360px;
+    @media (max-width: 767px) {
+      height: 100%;
+      margin: 0;
+      transform: translate(-50%, -50%) !important;
+      max-width: 360px;
+    }
+  }
+
+  .modal-content {
+    @media (max-width: 767px) {
+      height: 100%;
+      border: none;
+    }
   }
 
   .users-to-notify {
     .qt-modal__header {
       padding: 16px 16px 8px;
+
+      @media (max-width: 767px) {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        max-width: 360px;
+        z-index: 1;
+      }
     }
     .qt-modal__body {
       padding: 0 16px 16px;
+
+      @media (max-width: 767px) {
+        padding: 0;
+      }
     }
   }
 
@@ -1211,6 +1239,9 @@ app-quotes-item {
       &-item {
         display: flex;
         align-items: center;
+        @media (max-width: 767px) {
+          padding: 0 16px;
+        }
       }
 
       &-avatar {
@@ -1243,32 +1274,96 @@ app-quotes-item {
     }
 
     .text-content {
-      margin: 0 10px !important; // TODO add new modal and remove important
+      margin: 0 10px;
       flex: 1;
 
       .assigne-user-name {
-        margin-bottom: 2px !important; // TODO add new modal and remove important
+        line-height: 20px;
+        font-weight: 500;
+        color: $primary-2;
+      }
+      .assigne-user-email {
+        @extend %сaption-l;
+        color: $gray-700;
       }
     }
 
     .qt-input-block {
       > div {
         border-bottom: 1px solid $gray-400;
-        padding: 10px 0;
+        padding: 8px 0;
         margin-bottom: 0 !important;
+      }
+
+      label {
+        @media (max-width: 767px) {
+          margin-bottom: 0;
+        }
+      }
+      &.qt-modal__body-content {
+
+        input {
+          background-color: $gray-200;
+          padding-left: 34px;
+          border: none;
+          &::placeholder {
+            color: $gray-600;
+          }
+        }
+
+        &::after {
+          position: absolute;
+          content: '';
+          width: 16px;
+          height: 16px;
+          background: url('/html/assets/img/icons/search.png');
+          left: 26px;
+          top: calc(50% - 8px);
+          background-size: contain;
+        }
       }
     }
     .qt-modal__body {
       height: calc(100vh - 70px);
+
+      @media (max-width: 767px) {
+        padding-top: 90px;
+      }
+    }
+    .qt-modal__body-content {
+      @media (max-width: 767px) {
+        position: fixed;
+        top: 42px;
+        left: 0;
+        max-width: 360px;
+        padding: 8px 16px;
+        width: 100%;
+        z-index: 1;
+        margin: 0;
+        background: $white;
+      }
     }
     .email-selects {
       overflow: auto;
       margin-bottom: 0 !important;
       height: calc(100% - 116px);
+
+      @media (max-width: 767px) {
+        height: 100%;
+      }
     }
     .qt-modal__footer {
       padding: 16px 0;
       justify-content: space-between;
+
+      @media (max-width: 767px) {
+        position: fixed;
+        max-width: 360px;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+        padding: 16px;
+      }
 
       .qt-button {
         max-width: calc(100% - 8px);
