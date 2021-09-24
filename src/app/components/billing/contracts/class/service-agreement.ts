@@ -29,7 +29,7 @@ export class ServiceAgreement {
     productExpenses: Array<ContractsOtherProduct> = [];
     rateExceeding: string;
     reviewDate: string;
-    withCustomBillingDate:boolean;
+    withCustomBillingDate: boolean;
     serviceContractServices: Array<ServiceAgreementBlockTimeServices> = [];
     serviceContractServicesToTrack: Array<ServiceAgreementBlockTimeServices> = [];
     serviceExpenses: Array<ServiceAgreementServiceExpenses> = [];
@@ -58,10 +58,11 @@ export class ServiceAgreement {
             this.productExpenses = data.productExpenses.map(item => new ContractsOtherProduct(item.productId, item.quantity, item.salePrice, item.description));
             this.serviceExpenses = data.serviceExpenses.map(item => new ServiceAgreementServiceExpenses(item));
             this.shares = data.shares.map(item => new СontractsBlockTimeShare(item.userId));
+            if (this.customBillingDate) this.withCustomBillingDate = true;
         }
     }
-    public resetCustomBillingDate () {
-        this.customBillingDate  = JSON.parse(JSON.stringify(this.startDate));
+    public resetCustomBillingDate() {
+        this.customBillingDate = JSON.parse(JSON.stringify(this.startDate));
     }
     public checkServiceExpenses() {
         this.serviceExpenses.forEach(item => {
@@ -127,12 +128,12 @@ export class ServiceAgreement {
             let dateDatePicker = new Date(year, month - 1, day).getTime(); // timestamp from calendar
             let finalDate = new Date(dateDatePicker - (current.getTimezoneOffset() * 60000/* dont touch*/) - timeOffset /* timezone.timeOffset */);
             this.customBillingDate = moment(finalDate.getTime()).format('YYYY/MM/DD');
-            
+
         } else {
             let currentTime = new Date(current.getFullYear(), current.getMonth(), current.getDate()).getTime();
             let finalDate = new Date(currentTime - (current.getTimezoneOffset() * 60000) - timeOffset);
             this.customBillingDate = moment(finalDate.getTime()).format('YYYY/MM/DD');
-           
+
         }
 
     }
@@ -282,8 +283,8 @@ export class ServiceAgreement {
             serviceContractServices: this.serviceContractServices.map(item => item.getDataForUpdate()),
             serviceContractServicesToTrack: (!toggleMaximumAmountHours) ? this.blockTimeServices.map(item => item.getDataForUpdate()) : [],
             services: this.services.map(item => item.getDataForCreate()),
-            withCustomBillingDate:this.withCustomBillingDate,
-            customBillingDate:this.customBillingDate,
+            withCustomBillingDate: this.withCustomBillingDate,
+            customBillingDate: this.customBillingDate,
             reviewDate: this.reviewDate,
             startDate: this.startDate,
             taxIds: (toggleMaximumAmountHours) ? this.taxIds : null,
@@ -309,8 +310,8 @@ export class ServiceAgreement {
             startDate: this.startDate,
             taxIds: this.taxIds,
             reviewDate: this.reviewDate,
-            withCustomBillingDate:this.withCustomBillingDate,
-            customBillingDate:this.customBillingDate,
+            withCustomBillingDate: this.withCustomBillingDate,
+            customBillingDate: this.customBillingDate,
             type: "BLOCK_TIME"
         }
     }
@@ -328,6 +329,7 @@ export class ServiceAgreement {
             serviceExpenses: this.serviceExpenses.map(item => item.getDataForUpdate()),
             reviewDate: this.reviewDate,
             startDate: this.startDate,
+            customBillingDate: this.customBillingDate,
             type: this.type
         }
     }
