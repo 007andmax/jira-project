@@ -50,7 +50,9 @@
     </div>
   </div>
   <div class="--strong ticket-table__subject">
-    {{'Tkt# ' + ticket.number + ' - ' + ticket.subject}} <span [ngClass]="getClassType()"></span>
+    <div class="ellipsis">
+      {{'Tkt# ' + ticket.number + ' - ' + ticket.subject}} <span [ngClass]="getClassType()"></span>
+    </div>
   </div>
   <div class="ticket-table__company" [textContent]="getCompanyName()"></div>
   <div class="ticket-table__assignee" *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length > 0">

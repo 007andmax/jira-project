@@ -7,6 +7,10 @@
 .dropdown-menu {
   min-height: 350px;
   width: 100%;
+
+  @media (max-width: 767px) {
+    min-height: 389px;
+  }
 }
 
 
@@ -42,19 +46,25 @@
     background: $white;
     top: 0;
     border-bottom: 1px solid $gray-400;
-    box-shadow: 0px 0px 7px 1px $gray-500;
+    box-shadow: 0 0 7px 1px $gray-500;
     justify-content: space-between;
+
+    @media (max-width: 767px) {
+      padding: 14px 16px;
+      box-shadow: 0 0 5px 1px rgba(197, 205, 213, .37);
+    }
   }
 
   &__header-title {
     font-size: 11px;
     font-weight: 600;
     text-transform: uppercase;
+    color: $primary-2;
   }
 
   &__header-add-product {
     font-size: 12px;
-    font-weight: 500;
+    font-weight: 600;
     color: $primary-1;
     cursor: pointer;
   }
@@ -78,6 +88,10 @@
       padding: 0 24px 16px 24px;
       background-color: $gray-200;
 
+      @media (max-width: 767px) {
+        padding: 0 16px 14px 16px;
+      }
+
       .select-product {
         &__item-title {
           background: transparent;
@@ -85,6 +99,11 @@
           color: $gray-800;
           padding-left: 0 !important;
           padding-right: 0 !important;
+
+          @media (max-width: 767px) {
+            border-color: transparent;
+            font-weight: 600;
+          }
         }
 
         &__expand {
@@ -103,6 +122,10 @@
           justify-content: space-between;
           flex-direction: column;
           align-items: flex-start;
+
+          @media (max-width: 767px) {
+            padding: 8px 16px !important;
+          }
           &__main-info {
             width: 100%;
             flex-direction: column;
@@ -141,11 +164,13 @@
           .title {
             margin-right: 30px;
             font-size: 13px;
-            font-weight: 600;
+            font-weight: 500;
+            line-height: 20px;
           }
           .manufacture {
             font-size: 11px;
             color: $gray-600;
+            line-height: 16px;
           }
         }
     }

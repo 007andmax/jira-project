@@ -1198,10 +1198,11 @@ app-quotes-item {
 .quote-send-modal-users-to-notify {
   .modal-dialog {
     @media (max-width: 767px) {
-      height: 100%;
       margin: 0;
       transform: translate(-50%, -50%) !important;
       max-width: 360px;
+      max-height: 552px;
+      height: 100%;
     }
   }
 
@@ -1213,6 +1214,10 @@ app-quotes-item {
   }
 
   .users-to-notify {
+    @media (max-width: 767px) {
+      height: 100%;
+    }
+
     .qt-modal__header {
       padding: 16px 16px 8px;
 
@@ -1291,8 +1296,8 @@ app-quotes-item {
     .qt-input-block {
       > div {
         border-bottom: 1px solid $gray-400;
-        padding: 8px 0;
-        margin-bottom: 0 !important;
+        padding: 9px 0;
+        margin-bottom: 0;
       }
 
       label {
@@ -1324,7 +1329,7 @@ app-quotes-item {
       }
     }
     .qt-modal__body {
-      height: calc(100vh - 70px);
+      height: calc(100% - 70px);
 
       @media (max-width: 767px) {
         padding-top: 90px;
@@ -1363,6 +1368,7 @@ app-quotes-item {
         bottom: 0;
         left: 0;
         padding: 16px;
+        background-color: $white;
       }
 
       .qt-button {

@@ -255,6 +255,11 @@
           font-weight: 600;
           text-align: left;
           position: relative;
+          @media (max-width: 767px) {
+            border-bottom: 1px solid #dfe3e8;
+            font-weight: 400;
+            padding: 8px 16px !important;
+          }
           .report-caret-icon {
             position: absolute;
             right: 16px;
@@ -273,6 +278,12 @@
           &:hover {
             background-color: $primary-1;
             color: $white;
+
+            @media (max-width: 767px) {
+              background-color: $white;
+              color: $primary-2;
+            }
+
             .report-caret-icon {
               background: url("/assets/img/report-caret-right.png");
             }
@@ -306,9 +317,8 @@
             overflow: hidden;
           }
           .total-count {
-            font-size: 13px;
             color: $primary-2;
-            font-weight: 600;
+            @extend %сaption-l;
           }
           .col-md-12 {
             span {
