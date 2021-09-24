@@ -28,28 +28,27 @@
                         [ngStyle]="{'background': getStyleAvatar(user),'background-size': 'cover'}"
                     ></div>
                     <div class="text-content">
-                      <div
-                        class="assigne-user-name"
-                        [textContent]="getUserName(user)"
-                      ></div>
-                      <div
-                        class="assigne-user-email"
-                        [textContent]="user.primaryEmail"
-                      ></div>
+                        <div
+                            class="assigne-user-name"
+                            [textContent]="getUserName(user)"
+                        ></div>
+                        <div
+                            class="assigne-user-email"
+                            [textContent]="user.primaryEmail"
+                        ></div>
                     </div>
-<!--                    <input-->
-<!--                        type="checkbox"-->
-<!--                        [checked]="isSelected(user)"-->
-<!--                        (change)="selectUser($event)"-->
-<!--                    >-->
+                    <!-- <input -->
+                    <!-- type="checkbox" -->
+                    <!-- [checked]="isSelected(user)" -->
+                    <!-- (change)="selectUser($event)" -->
+                    <!-- > -->
                     <label class="qt-checkbox">
-                      <input
-                        type="checkbox"
-                        class="ng-valid ng-dirty ng-touched"
-                        [checked]="isSelected(user)"
-                        (change)="selectUser($event)"
-                      >
-                      <span></span>
+                        <input
+                            type="checkbox"
+                            class="ng-valid ng-dirty ng-touched"
+                            [checked]="isSelected(user)"
+                        >
+                        <span></span>
                     </label>
                 </div>
             </div>

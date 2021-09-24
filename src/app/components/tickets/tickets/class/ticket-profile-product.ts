@@ -32,6 +32,7 @@ export class TicketProfileProduct {
     totalSum: number;
     updatedAt: number;
     user: CurrentUser;
+    serialNumber: string;
     constructor(data = null) {
         if (data) {
             for (const key in data) {

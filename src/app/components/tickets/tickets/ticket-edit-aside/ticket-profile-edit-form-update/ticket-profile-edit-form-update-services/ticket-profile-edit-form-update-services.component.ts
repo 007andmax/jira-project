@@ -35,7 +35,7 @@ export class TicketProfileEditFormUpdateServicesComponent implements OnInit {
   constructor(public ticketsListService: TicketsListService,
     private confirmStateService: ConfirmStateService,
     private ticketStateService: TicketStateService,
-    private companiesStateService: CompaniesStateService,
+    public companiesStateService: CompaniesStateService,
     private elRef: ElementRef,
     public cd: ChangeDetectorRef,
     private ticketsService: TicketsService,
