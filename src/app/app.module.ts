@@ -510,6 +510,7 @@ import { DocumentsAddEditCategoriesModule } from './components/documents/documen
 import { ToFixedModule } from './pipe/to-fixed/to-fixed.module';
 import { TicketTaskModule } from './components/device/ticket-task/ticket-task.module';
 import { TicketEditAsideModule } from './components/tickets/tickets/ticket-edit-aside/ticket-edit-aside.module';
+import { LeftPanelModule } from './components/left-panel/left-panel.module';
 
 
 declare var $: any;
@@ -522,8 +523,8 @@ declare var $: any;
   declarations: [
     AppComponent,
 
-    LeftPanelComponent,
-    LeftPanelPasswordManagerComponent,
+    // LeftPanelComponent,
+    //  LeftPanelPasswordManagerComponent,
     MainComponent,
     CompanyPipe,
     //  PasswordManagerTableComponent,
@@ -542,7 +543,7 @@ declare var $: any;
     //  ProductListComponent,
     // ServicesListComponent,
     //  MultiDatepickerComponent,
-    LeftPanelBillingComponent,
+    //   LeftPanelBillingComponent,
     ToNumerPipe,
     ModalQuoteComponent,
     //  RecurringTicketsComponent,
@@ -560,7 +561,7 @@ declare var $: any;
     // RecurringTicketsAddAsideComponent,
     AlertComponent,
 
-    LeftPanelCompaniesComponent,
+    // LeftPanelCompaniesComponent,
     //  CompaniesHeaderComponent,
     // CompaniesTableComponent,
     CompanyAddAsideComponent,
@@ -588,7 +589,7 @@ declare var $: any;
     //  UsersHeaderComponent,
     // UsersTableComponent,
     UsersAsideComponent,
-    LeftPanelUsersComponent,
+    //  LeftPanelUsersComponent,
     //  UserTableSubscriptionComponent,
     UsersAsideEditComponent,
     ModalImageCropperComponent,
@@ -639,7 +640,7 @@ declare var $: any;
     UploadAreaComponent,
     //  TicketEditAsideComponent,
     TicketsPrioritiesComponent,
-    LeftPanelTicketsComponent,
+    // LeftPanelTicketsComponent,
     // GlNumberComponent,
     //  AccountsReceivableComponent,
     // ReportFooterComponent,
@@ -655,7 +656,7 @@ declare var $: any;
     InventoryAddAsideComponent,
     //   TaxesSettingsComponent,
     InventoryEditAsideComponent,
-    LeftPanelInventoryComponent,
+    // LeftPanelInventoryComponent,
     AddCategoryProductComponent,
     // CompanyProductsComponent,
     TaxesComponent,
@@ -703,7 +704,7 @@ declare var $: any;
     // CompanyDashboardComponent,
     InventoryAddBodyComponent,
     //  ServicePipe,
-    LeftPanelSettingsComponent,
+    //LeftPanelSettingsComponent,
     //  BillableComponent,
     //  BillableItemComponent,
     // BillableAsideComponent,
@@ -853,17 +854,17 @@ declare var $: any;
     // NetworkScanCredentialsAsideItemComponent,
     // CompanyNetworkScanItemComponent,
     // CompanyNetworkScanItemTooltipComponent,
-    LeftPanelCompanyComponent,
+    //LeftPanelCompanyComponent,
     //UsersFilterComponent,
     // SupportComponent,
     //  SupportItemComponent,
     //  DynamicTooltipComponent,
     //  TicketProfileFormUpdateSupportComponent,
-    LeftPanelSupportComponent,
+    //LeftPanelSupportComponent,
     HeaderComponent,
     GlobalSearchComponent,
     //  ReportListItemComponent,
-    LeftPanelReportsComponent,
+    // LeftPanelReportsComponent,
     BreadcrumbsComponent,
     // DetailedCommissionsReportComponent,
     // ToFixedPipe,
@@ -886,7 +887,7 @@ declare var $: any;
     AfterViewInitDirective,
     // TicketsFilterTagsComponent,
     //  DocumentsComponent,
-    LeftPanelDocumentsComponent,
+    // LeftPanelDocumentsComponent,
     // DocumentsAddComponent,
     // DocumentsAddBodyComponent,
     // DocumentsAddHeaderComponent,
@@ -1017,7 +1018,8 @@ declare var $: any;
     DocumentsAddEditCategoriesModule,
     ToFixedModule,
     TicketTaskModule,
-    TicketEditAsideModule
+    TicketEditAsideModule,
+    LeftPanelModule
   ],
   entryComponents: [
     ModalQuoteComponent,
