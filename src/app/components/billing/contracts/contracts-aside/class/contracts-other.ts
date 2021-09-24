@@ -17,7 +17,7 @@ export class ContractsOther extends ContractsUserDevice {
             this.intervalstring = (data.customInterval === 30) ? '30 days' : (data.customInterval === 15) ? '15 days' : '7 days';
         }
         this.productExpenses = data.productExpenses;
-        this.serviceExpenses = data.serviceExpenses.map(item => new ContractsOtherService(item.date, item.description, item.quantity, item.serviceId,item.name));
+        this.serviceExpenses = data.serviceExpenses.map(item => new ContractsOtherService(item.date, item.description, item.quantity, item.serviceId, item.name));
         this.startDate = data.startDate;
         this.reviewDate = data.reviewDate;
         this.calculateEndDate();
@@ -39,7 +39,7 @@ export class ContractsOther extends ContractsUserDevice {
         return totalAmount;
     }
     public getDataForCreateOther() {
-        
+
         return {
             billType: "OTHER",
             companyId: this.companyId,
@@ -51,6 +51,7 @@ export class ContractsOther extends ContractsUserDevice {
             serviceExpenses: this.serviceExpenses.map(item => item.getDataForCrate()),
             startDate: this.startDate,
             reviewDate: this.reviewDate,
+            customBillingDate: this.customBillingDate,
             type: "SERVICE_CONTRACT"
         }
     }

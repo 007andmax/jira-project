@@ -179,6 +179,33 @@
         </mat-error>
     </div>
     <div class="qt-pt-16 qt-pl-32 qt-pr-32 qt-pb-32">
+        <div class="qt-df qt-jc-sb qt-ai-c qt-mb-16">
+            <div class="qt-df">
+                <div
+                    class="qt-toggle  qt-mr-8"
+                    [ngClass]="{'--on':contractsOther.withCustomBillingDate}"
+                    (click)="setToggleCustomBillingDate(!contractsOther.withCustomBillingDate)"
+                >
+                    <div class="qt-toggle__circle"></div>
+                </div>
+                <div class="qt-fs-13 qt-ff-gm qt-lh-154 qt-color-dark-light">Custom Billing Date</div>
+            </div>
+            <div
+                class="notify-to-agents-assign-icon qt-df qt-ai-c qt-input-block"
+                *ngIf="contractsOther.withCustomBillingDate"
+            >
+                <app-date-picker
+                    #customDateDP
+                    [formatDate]="formatDate"
+                    [editMode]="true"
+                    [editDate]="contractsOther.getCustomDateByMilliseconds()"
+                    [minDate]="minCustomDate"
+                    (onChange)="onChangeCustomDate($event)"
+                ></app-date-picker>
+            </div>
+        </div>
+    </div>
+    <div class="qt-pt-16 qt-pl-32 qt-pr-32 qt-pb-32">
         <div class="qt-df qt-jc-fe">
             <div class="contract-total qt-color-dark">
                 <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
