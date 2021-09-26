@@ -603,7 +603,7 @@ app-invoices-item,app-payment-item {
     height: 100%;
   }
   &.aside-preview {
-    width: 960px; //TODO after add style to aside move style to .invoices-page__aside.aside-preview
+    width: 960px;
     .user-detail-statictics {
       .tabs .active::after {
         bottom: -13px;

@@ -34,7 +34,7 @@
     }
   }
 }
-// TODO mobile style
+
 .qt-d-none {
   display: none;
 }
@@ -518,14 +518,6 @@
   text-transform: uppercase;
 }
 
-// TODO delete
-.сaption-l {
-  @extend %сaption-l;
-}
-.сaption-m {
-  @extend %сaption-m;
-}
-
 .qt-fw-400 {
   font-weight: 400;
 }
@@ -676,7 +668,6 @@
   flex-direction: column;
   label {
     @extend %body-m-sb;
-    //margin-bottom: 12px; //TODO delete after replace all label on 8px
     margin-bottom: 8px;
     color: $primary-2;
   }

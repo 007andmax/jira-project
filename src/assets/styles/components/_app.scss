@@ -3,7 +3,6 @@
   &.--large {
     margin-left: $left-panel-mini-width;
   }
-  // TODO mobile style
   @media (max-width: 767px) {
     margin-left: 0;
     padding: 0 8px;

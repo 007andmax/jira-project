@@ -1261,7 +1261,7 @@ app-quotes-item {
         justify-content: center;
         display: flex;
         flex-shrink: 0;
-        margin-bottom: 0 !important; // TODO add new modal and remove important
+        margin-bottom: 0;
       }
     }
 
@@ -3654,8 +3654,7 @@ app-ticket-profile-form-update {
 app-ticket-edit-aside {
   app-ticket-profile-form-update,
   ticket-profile-edit-form-update {
-    //position: sticky !important;
-    position: sticky; //TODO Check other modal
+    position: sticky;
     bottom: 0;
     background: $white;
     z-index: 30;

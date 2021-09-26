@@ -1,7 +1,6 @@
 @import './src/assets/styles/variable';
 
 .disabled {
-    //background-color: #dfe3e8 !important; //TODO delete after check new style disabled
   background: $gray-200;
   color: $gray-600;
 }
