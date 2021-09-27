@@ -2329,6 +2329,22 @@ app-quotes-item {
     }
   }
 }
+.page-list-ticket .qt-aside-modern__footer,
+.password-page .qt-aside-modern__footer {
+  display: none;
+
+  @media (max-width: 767px) {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: 100%;
+    padding: 16px;
+    background: $white;
+  }
+}
 .new-users-content__modal--content {
   app-user-table-subscription {
     .subs-list {
