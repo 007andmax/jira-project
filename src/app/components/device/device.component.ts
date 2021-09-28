@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 import { CommonHttpServices } from "./_services/common_http.service";
 import { RemoteControlService } from "./_services/remoteControl.service";
@@ -53,7 +53,8 @@ export class DeviceComponent implements OnInit, OnDestroy {
     private shellStateService: ShellStateService,
     private agentService: AgentService,
     public kakfaService: KafkaRealTimeService,
-    private kafkaStateService: KafkaStateService
+    private kafkaStateService: KafkaStateService,
+    public cd: ChangeDetectorRef,
   ) {}
 
   openModal(template) {
@@ -143,6 +144,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
           let Time = this.kafkaMessage.IdleTime.split("Idle for");
           this.UpTime = Time[1] != "" ? Time[1] : "";
         }
+        this.cd.detectChanges();
       }
     });
   }

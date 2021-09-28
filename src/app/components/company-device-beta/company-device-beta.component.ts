@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { AgentService } from "src/app/services/agent/agent.service";
 import { CompaniesStateService } from "src/app/states/company/companies-state.service";
 import { KafkaStateService } from "src/app/states/kafka/kafka-state.service";
@@ -25,7 +25,8 @@ export class CompanyDeviceBetaComponent implements OnInit {
     private leftPanelStateService: LeftPanelStateService,
     private agentService: AgentService,
     private companiesStateService: CompaniesStateService,
-    private kafkaStateService: KafkaStateService
+    private kafkaStateService: KafkaStateService,
+    public cd: ChangeDetectorRef,
   ) {}
 
   ngOnInit() {
@@ -112,7 +113,9 @@ export class CompanyDeviceBetaComponent implements OnInit {
             this.AssetList[index].IdelTime = Time[1] != "" ? Time[1] : "";
           }
         });
+        this.cd.detectChanges();
       }
+
     });
   }
 }
