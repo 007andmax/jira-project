@@ -22,6 +22,127 @@
     border: none;
   }
 
+  &.password-edit-aside {
+    .qt-aside-modern__header {
+      @media (max-width: 767px) {
+        position: relative;
+      }
+    }
+
+    .password-edit-aside__body {
+      > div {
+        @media (max-width: 767px) {
+          padding: 16px 16px 0;
+        }
+      }
+      .password-history-body {
+        @media (max-width: 767px) {
+          padding: 0;
+        }
+      }
+    }
+
+    .qt-aside-modern__header-close {
+      @media (max-width: 767px) {
+        position: absolute;
+        left: 16px;
+        background-size: 20px;
+        background-image: url('/assets/img/icons/close-white.svg');
+      }
+    }
+
+    .header-circle-icon {
+      @media (max-width: 767px) {
+        left: 16px;
+        width: 16px;
+        height: 16px;
+        margin-right: 0;
+        background-image: url('/assets/img/icons/remove-red.svg');
+        background-color: transparent;
+        border: none;
+      }
+    }
+
+    .password-edit-aside__info {
+      @media (max-width: 767px) {
+        flex-wrap: wrap;
+      }
+
+      input,
+      textarea {
+        @media (max-width: 767px) {
+          width: 100%;
+          border: solid 1px $gray-500;
+          margin-top: 8px;
+        }
+      }
+      input {
+        @media (max-width: 767px) {
+          height: 40px !important;
+        }
+      }
+
+      textarea {
+        @media (max-width: 767px) {
+          height: 80px;
+        }
+      }
+
+      app-date-picker {
+        @media (max-width: 767px) {
+          width: 100%;
+        }
+
+        .date-picker {
+          @media (max-width: 767px) {
+            width: 100%;
+          }
+
+          i {
+            @media (max-width: 767px) {
+              top: 19px;
+            }
+          }
+        }
+      }
+    }
+
+    .password-edit-aside__info-password {
+      @media (max-width: 767px) {
+        align-items: flex-end;
+      }
+
+      input {
+        @media (max-width: 767px) {
+          max-width: calc(100% - 40px);
+          border-radius: 4px 0 0 4px;
+          border-right: transparent;
+        }
+      }
+
+      .icon__view {
+        @media (max-width: 767px) {
+          border: 1px solid $gray-500;
+          height: 40px;
+          margin-left: 0;
+          width: 40px;
+          background-size: 18px;
+          border-radius: 0 4px 4px 0;
+          background-position: center;
+          background-color: $gray-100;
+        }
+      }
+    }
+    .qt-aside-modern__footer {
+      .qt-button:not(.--gray) {
+        @media (max-width: 767px) {
+          order: 1;
+          margin: 0 0 0 12px;
+        }
+      }
+    }
+  }
+
   &.--large {
     width: 642px;
 
