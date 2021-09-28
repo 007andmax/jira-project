@@ -1,4 +1,4 @@
-<div class="qt-page-list company-devices-beta-page">
+<div class="qt-page-list company-devices-page">
     <div class="qt-page-list__header --sticky">
         <div class="qt-page-list__header-title-line--left">
             <h3
@@ -33,7 +33,7 @@
                                 </label>
                             </div>
                         </th>
-                        <th class="company-devices-table__device-types"></th>
+                        <th class="company-devices-table__device-type"></th>
                         <th
                             class="company-devices-table__device-name pointer"
                             (click)="onFilter('Name')"
@@ -41,8 +41,15 @@
                             Device Name
                             <span class="qt-table-modern__sorting"></span>
                         </th>
+                        <th class="company-devices-table__logged-user pointer">Logged in user</th>
+                        <th class="company-devices-table__up-time">Up time</th>
                         <th class="company-devices-table__windows">Windows</th>
-                        <th class="company-devices-table__ip-address">Ip address</th>
+                        <th class="company-devices-table__ip-address">
+                            <span class="qt-pl-30">Ip address</span>
+                        </th>
+                        <th class="company-devices-table__go-to"></th>
+                        <th class="company-devices-table__connect"></th>
+                        <th class="company-devices-table__menu"></th>
                     </tr>
                 </thead>
             </table>
@@ -68,12 +75,64 @@
                                 </div>
                             </td>
                             <td class="company-devices-table__device-type">
-                                <img
-                                    src="/assets/img/icons/computer.svg"
-                                    alt
-                                >
+                                <div>
+                                    <img
+                                        src="/assets/img/icons/computer.svg"
+                                        alt
+                                    >
+                                </div>
                             </td>
-                            <td class="company-devices-table__device-name">{{ asset.Title || "N/A" }}</td>
+                            <td class="company-devices-table__device-name">
+                                <div>
+                                    <div class="qt-df qt-fd-c">
+                                        <div class="company-devices-table-device-name qt-ff-gm qt-df qt-ai-c">
+                                            <span [textContent]="asset.Title"></span>
+                                        </div>
+                                        <span
+                                            class="company-device-desc"
+                                            [textContent]
+                                        ></span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="company-devices-table__logged-user">
+                                <div class="qt-df qt-fd-c">
+                                    <span
+                                        class="logged-name qt-ff-gm"
+                                        [textContent]="asset.CurrentUser || ''"
+                                    ></span>
+                                    <span class="logged-time" *ngIf="asset.IdelTime">
+                                        Idle:
+                                        <span>{{asset.IdelTime}}</span>
+                                    </span>
+                                </div>
+                            </td>
+                            <td class="company-devices-table__up-time">
+                                <div class="qt-df qt-fd-c">
+                                    <span>
+                                        <span>{{asset.IdelTime}}</span>
+                                        <ng-template
+                                            #tipOfflineDevice
+                                            class="tooltip"
+                                        >
+                                            <span>{{asset.IdelTime}}</span>
+                                        </ng-template>
+                                    </span>
+                                    <span
+                                        *ngIf="asset.IdelTime!='' && asset.IdelTime!=undefined && asset.IdelTime!=null"
+                                        class="uptime-tag qt-ff-gm"
+                                        [textContent]="'Online'"
+                                    ></span>
+                                    <span
+                                        *ngIf="asset.IdelTime=='' || asset.IdelTime==undefined || asset.IdelTime==null"
+                                        placement="top"
+                                        container="body"
+                                        [ngbTooltip]="tipOfflineDevice"
+                                        class="uptime-tag qt-ff-gm --offline"
+                                        [textContent]="'Offline'"
+                                    ></span>
+                                </div>
+                            </td>
                             <td class="company-devices-table__windows">{{ asset.Caption || "N/A" }}</td>
                             <td class="company-devices-table__ip-address">{{ asset.InternalIPAddress || "N/A" }}</td>
                             <td class="company-devices-table__go-to">
@@ -90,6 +149,50 @@
                                     [ngbTooltip]="tipDeviceDetail"
                                     (click)="gotiDetailDevice(asset.Guid)"
                                 ></div>
+                            </td>
+                            <td class="company-devices-table__connect"></td>
+                            <td class="company-devices-table__menu">
+                                <div
+                                    class="company-devices-table__menu-body"
+                                    ngbDropdown
+                                    placement="bottom-right"
+                                    container="body"
+                                >
+                                    <div
+                                        class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"
+                                        ngbDropdownToggle
+                                    ></div>
+                                    <ul
+                                        class="qt-dropdown-menu invoice-items-dropdown"
+                                        ngbDropdownMenu
+                                    >
+                                        <li
+                                            class="pointer"
+                                            ngbDropdownItem
+                                        >
+                                            <div class="icon__restart qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                            Restart
+                                        </li>
+                                        <li
+                                            class="pointer"
+                                            ngbDropdownItem
+                                        >
+                                            <div class="icon__shutdown qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                            Shutdown
+                                        </li>
+                                        <li
+                                            class="pointer"
+                                            ngbDropdownItem
+                                        >
+                                            <div class="icon__master-agent qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                            Set as Master Agent
+                                        </li>
+                                        <li class="pointer">
+                                            <div class="icon__remove qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                            Remove
+                                        </li>
+                                    </ul>
+                                </div>
                             </td>
                         </tr>
                     </tbody>

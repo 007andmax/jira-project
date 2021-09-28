@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AgentService } from "src/app/services/agent/agent.service";
 import { CompaniesStateService } from "src/app/states/company/companies-state.service";
+import { KafkaStateService } from "src/app/states/kafka/kafka-state.service";
 import { LeftPanelStateService } from "src/app/states/left-panel/left-panel-state.service";
 import { CompanyDeviceBetaFilter } from "./class/device-beta";
 
@@ -12,15 +13,19 @@ import { CompanyDeviceBetaFilter } from "./class/device-beta";
 export class CompanyDeviceBetaComponent implements OnInit {
   selectAllDevices: boolean = false;
   AssetList: any[] = [];
+  Asset_ID: any[] = [];
   system: any;
   showPreloader: boolean = true;
   search = "";
   filter: CompanyDeviceBetaFilter = new CompanyDeviceBetaFilter();
   selected: boolean = false;
+  kafkaMessage: any;
+
   constructor(
     private leftPanelStateService: LeftPanelStateService,
     private agentService: AgentService,
-    private companiesStateService: CompaniesStateService
+    private companiesStateService: CompaniesStateService,
+    private kafkaStateService: KafkaStateService
   ) {}
 
   ngOnInit() {
@@ -39,6 +44,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
       .subscribe((data) => {
         this.agentService.setAccessToken(data.AccessToken);
         this.AssetDetail();
+        this.CurrentUser();
       });
   }
 
@@ -72,6 +78,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
           this.AssetList[index].Title =
             element.Title != "" ? element.Title : element.Name;
           this.OperatingSystem(element.ID, index);
+          this.AssetID(element.ID);
         });
       });
     this.showPreloader = false;
@@ -85,6 +92,27 @@ export class CompanyDeviceBetaComponent implements OnInit {
         resp[0].OSArchitecture +
         " " +
         resp[0].Version;
+    });
+  }
+
+  AssetID(Asset_ID: any) {
+    this.agentService.GetCurrentConfig(Asset_ID);
+  }
+
+  CurrentUser() {
+    this.kafkaStateService.onCurrentConfig.subscribe((resp) => {
+      if (resp.length > 0) {
+        this.AssetList.forEach((element, index) => {
+          let item = resp.find((x) => x.key == element.ID);
+          if (item != undefined) {
+            this.kafkaMessage = JSON.parse(item.value);
+            this.AssetList[index].CurrentUser =
+              this.kafkaMessage.CurrentLoggedInUser;
+            let Time = this.kafkaMessage.IdleTime.split("Idle for");
+            this.AssetList[index].IdelTime = Time[1] != "" ? Time[1] : "";
+          }
+        });
+      }
     });
   }
 }

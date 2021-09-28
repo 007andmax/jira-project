@@ -174,12 +174,15 @@ export class AgentService {
       .pipe(map((data: string) => this.decrypt128(data, this.key)));
   }
 
-  public GetCurrentConfig() {
+  public GetCurrentConfig(asset_ID) {
     const data = {
-      AssetID: 13,
+      AssetID: asset_ID,
       MessageType: "GetCurrentConfig",
     };
-    return this.http.post(this.apiurl + "sendMessageToKafka", data);
+
+     setTimeout(()=>{
+     this.http.post(this.apiurl + "sendMessageToKafka", data).subscribe(()=>{console.log("sent confing message")});
+     },10);
   }
 
   public SendPowerShellCommand(data:any) {

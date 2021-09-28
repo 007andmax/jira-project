@@ -1,14 +1,13 @@
-.form-input-search{
+.form-input-search {
   padding: 7px 14px 7px 34px;
-    background: url(/html/assets/img/search-ico.svg) no-repeat 12px center;
-    font-size: 12px;
-    line-height: 1.67;
-    background-color: #ffffff;
-    width: 500px;
-
+  background: url(/html/assets/img/search-ico.svg) no-repeat 12px center;
+  font-size: 12px;
+  line-height: 1.67;
+  background-color: #ffffff;
+  width: 500px;
 }
 
-.device-beta-search{
+.device-beta-search {
   height: 32px;
   border-radius: 4px;
   border: solid 1px #edf2f6;
@@ -16,5 +15,37 @@
   margin: 0 25px 0 27px;
 }
 
+.icon-list i {
+  display: block;
+}
+.company-devices-table__menu-body {
+  position: relative;
+}
+.company-device-hover:hover {
+  td {
+    background-color: #f9fafb;
+    .company-devices-table__ip-address-text,
+    .company-devices-table__ip-windows-text {
+      opacity: 0;
+    }
+    .company-devices-table__system-network-buttons,
+    .company-devices-table__ip-address-buttons {
+      position: absolute;
+      top: 7px;
+      display: flex;
+    }
+    .company-devices-table__ip-address-buttons {
+      left: -15px;
+    }
+    .device-name-edit-marker {
+      display: flex;
+    }
+    input.name-text-input {
+      background-color: #f9fafb;
+    }
+  }
+}
 
-
+.sidebar-system__info-text-input {
+  background-color: orange;
+}

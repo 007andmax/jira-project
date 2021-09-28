@@ -1,11 +1,19 @@
 import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { EventEmitter } from "@angular/core";
-import { UploadInput, UploadFile, humanizeBytes, UploaderOptions } from "ngx-uploader";
+import {
+  UploadInput,
+  UploadFile,
+  humanizeBytes,
+  UploaderOptions,
+} from "ngx-uploader";
 import { ToastrService } from "ngx-toastr";
 import { CONFIGCONSTANTS } from "../config/app-constants";
 import { environment } from "../../../../environments/environment";
 import { NgbDatepicker } from "@ng-bootstrap/ng-bootstrap";
-import { NgbDateAdapter, NgbDateParserFormatter } from "@ng-bootstrap/ng-bootstrap";
+import {
+  NgbDateAdapter,
+  NgbDateParserFormatter,
+} from "@ng-bootstrap/ng-bootstrap";
 import { AgentService } from "src/app/services/agent/agent.service";
 import { Subscription } from "rxjs";
 import { CustomAdapter } from "./CustomDateAdapter";
@@ -15,6 +23,8 @@ import { NotesAdd } from "./class/dashboard";
 import { ActivatedRoute } from "@angular/router";
 import * as moment from "moment";
 import { KafkaRealTimeService } from "src/app/states/kafka/kafka-real-time.service";
+import { KafkaStateService } from "src/app/states/kafka/kafka-state.service";
+import { json } from "d3";
 
 @Component({
   selector: "app-dashboard",
@@ -61,17 +71,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
   currentUser: string = "";
   caption: string = "";
   serialnumber: string = "";
-  notesTitle: string ="";
-  notesDescription: string="";
-  kafkaMessage:any="";
-  securityUpdate:number;
-
+  notesTitle: string = "";
+  notesDescription: string = "";
+  kafkaMessage: any = "";
+  securityUpdate: number;
 
   constructor(
     private agentService: AgentService,
     private toastr: ToastrService,
     public activateRoute: ActivatedRoute,
     public kafkaService: KafkaRealTimeService,
+    public kafkaStateService: KafkaStateService
   ) {
     this.options = { concurrency: 1, maxUploads: 10, maxFileSize: 1000000 };
     this.files = [];
@@ -86,14 +96,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   setPreviewDataDevice() {
-  setTimeout(() => {
-    this.agentService.GetCurrentConfig().subscribe((resp=>{
-    }))
-  },9000);
-  this.kafkaService.changeKafkarray.subscribe((resp)=>{
-    this.kafkaMessage = JSON.parse(resp.data.value);
-    this.securityUpdate = this.kafkaMessage.PendingWindowsUpdates.length;
-  })
+    this.kafkaStateService.onCurrentConfig.subscribe((resp) => {
+      if (this.asset.ID != undefined && this.asset.ID != 0) {
+        let item = resp.find((x) => x.key == this.asset.ID);
+        if (item != undefined) {
+          this.kafkaMessage = JSON.parse(item.value);
+          this.securityUpdate = this.kafkaMessage.PendingWindowsUpdates.length;
+        }
+      }
+    });
+
     this.currentUser = localStorage.getItem("currentUser");
     this.agentService
       .getAgentToken(
@@ -153,7 +165,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   editNotes(id: any) {
     this.noteEdit = this.assetNotes.find((x) => x.ID == id);
     this.notesTitle = this.noteEdit.Title;
-    this.notesDescription = this.noteEdit.Description ;
+    this.notesDescription = this.noteEdit.Description;
     this.editNote = !this.editNote;
   }
 
@@ -239,20 +251,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
         if (resp.length > 0) {
           this.asset = resp[0];
           this.asset.IsUpdated = true;
-          if(this.minDate(this.asset.WarrantyExpires)){
-            this.asset.WarrantyExpires ="";
+          if (this.minDate(this.asset.WarrantyExpires)) {
+            this.asset.WarrantyExpires = "";
           }
 
-          if(this.minDate(this.asset.InstallDate)){
-            this.asset.InstallDate ="";
+          if (this.minDate(this.asset.InstallDate)) {
+            this.asset.InstallDate = "";
           }
 
-          if(this.minDate(this.asset.DeploymentDate)){
-            this.asset.DeploymentDate ="";
+          if (this.minDate(this.asset.DeploymentDate)) {
+            this.asset.DeploymentDate = "";
           }
 
-          if(this.minDate(this.asset.LastRebootDate)){
-            this.asset.LastRebootDate ="";
+          if (this.minDate(this.asset.LastRebootDate)) {
+            this.asset.LastRebootDate = "";
           }
 
           this.getlabel(this.asset.Title, this.asset.Domain, this.asset.Name);
@@ -261,6 +273,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
           this.getDiskDriveDetail();
           this.getAssetTagDropDownDetail();
           this.getAssetNotesDetail();
+          this.agentService.GetCurrentConfig(this.asset.ID);
         }
       });
   }
@@ -350,7 +363,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
           let size = this.convertToGB(element.Size);
           let free = this.convertToGB(element.FreeSpace);
           let osize = parseInt(size) - parseInt(free);
-          element.percent = isNaN(Math.round((osize / parseInt(size)) * 100)) ? 0 : Math.round((osize / parseInt(size)) * 100);
+          element.percent = isNaN(Math.round((osize / parseInt(size)) * 100))
+            ? 0
+            : Math.round((osize / parseInt(size)) * 100);
         } else {
           element.percent = 0;
         }

@@ -13,6 +13,7 @@ import { UsersStateService } from "src/app/states/users/users-state.service";
 import { TerminalService } from "./_services/terminal.service";
 import { AgentService } from "src/app/services/agent/agent.service";
 import { KafkaRealTimeService } from "src/app/states/kafka/kafka-real-time.service";
+import { KafkaStateService } from "src/app/states/kafka/kafka-state.service";
 declare var $: any;
 @Component({
   selector: "app-device-root",
@@ -39,6 +40,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
   deviceName;
   kafkaMessage: any = "";
   UpTime: any = "";
+  asset: any = undefined;
   constructor(
     private modalService: NgbModal,
     private commonHttpServices: CommonHttpServices,
@@ -50,7 +52,8 @@ export class DeviceComponent implements OnInit, OnDestroy {
     private usersStateService: UsersStateService,
     private shellStateService: ShellStateService,
     private agentService: AgentService,
-    public kakfaService: KafkaRealTimeService
+    public kakfaService: KafkaRealTimeService,
+    private kafkaStateService: KafkaStateService
   ) {}
 
   openModal(template) {
@@ -113,12 +116,6 @@ export class DeviceComponent implements OnInit, OnDestroy {
   }
 
   setPreviewDataDevice() {
-    this.kakfaService.changeKafkarray.subscribe((resp) => {
-      this.kafkaMessage = JSON.parse(resp.data.value);
-      let Time = this.kafkaMessage.IdleTime.split("Idle for");
-      this.UpTime = Time[1] != "" ? Time[1] : "";
-    });
-
     this.agentService
       .getAgentToken(
         "QuickTech",
@@ -131,10 +128,24 @@ export class DeviceComponent implements OnInit, OnDestroy {
           .getAssetByGuid("7e22e026-9da5-41b9-9bbd-252585302310")
           .subscribe((resp) => {
             this.deviceName = resp[0].Name;
+            this.asset = resp[0];
+            this.getCurrentConfig(this.asset.ID);
           });
       });
   }
 
+  getCurrentConfig(asset_ID) {
+    this.kafkaStateService.onCurrentConfig.subscribe((resp) => {
+      if (asset_ID != undefined && asset_ID != 0) {
+        let item = resp.find((x) => x.key == asset_ID);
+        if (item != undefined) {
+          this.kafkaMessage = JSON.parse(item.value);
+          let Time = this.kafkaMessage.IdleTime.split("Idle for");
+          this.UpTime = Time[1] != "" ? Time[1] : "";
+        }
+      }
+    });
+  }
   getCurrentCompany() {
     this.commonHttpServices
       .getCurrentCompany()
@@ -312,6 +323,12 @@ export class DeviceComponent implements OnInit, OnDestroy {
       data.AssetID = 13;
       data.MessageType = "RunPowerShellCommand";
       data.Value = "Restart-Computer -force";
+      this.agentService.SendPowerShellCommand(data).subscribe((resp) => {});
+    }
+    if (command === "s") {
+      data.AssetID = 13;
+      data.MessageType = "RunPowerShellCommand";
+      data.value = "Stop-Computer";
       this.agentService.SendPowerShellCommand(data).subscribe((resp) => {});
     }
   }

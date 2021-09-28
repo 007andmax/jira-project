@@ -6,14 +6,17 @@
                 <div class="hp-device-info">
                     <span class="device-icn">
                         <img
-                            src="{{deviceImg}}"
+                            [src]="deviceImg"
                             alt="device"
                         >
                     </span>
                     <div class="head-device">
                         <h6>Device</h6>
                         <!-- <h5 id="head-label">{{deviceDetail.label || deviceDetail.hostName || deviceDetail.ip}}</h5> -->
-                        <h5 id="head-label">{{deviceName}}</h5>
+                        <h5
+                            id="head-label"
+                            [textContent]="deviceName"
+                        ></h5>
                     </div>
                 </div>
                 <div class="hp-device-info">
@@ -70,7 +73,7 @@
             </div>
             <div class="sub-head-counter pointer">
                 <img
-                    src="{{play_pause_path}}"
+                    [src]="play_pause_path"
                     alt="Play"
                     (click)="timerControl()"
                 >
@@ -107,6 +110,8 @@
         >
             <span aria-hidden="true">&times;</span>
         </button>
+
+
 
 
         <div class="remote-area">
