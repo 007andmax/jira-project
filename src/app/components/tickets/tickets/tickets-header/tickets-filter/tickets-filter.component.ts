@@ -15,6 +15,7 @@ import { ItemStatus } from 'src/app/components/left-panel/left-panel-tickets/tic
 import { Subscribable, Subscription } from 'rxjs';
 import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service';
 import { AppService } from 'src/app/states/app/app.service';
+import { TicketsFilterTagsComponent } from './tickets-filter-tags/tickets-filter-tags.component';
 
 @Component({
   selector: 'app-tickets-filter',
@@ -26,9 +27,10 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   @ViewChild('companyDp') companyDp: SelectSearchComponent;
   @ViewChild('techUsersDp') techUsersDp: SelectSearchComponent;
   @ViewChild('statusDp') statusDp: SelectSearchComponent;
+  @ViewChild('tagsDp') tagsDp: TicketsFilterTagsComponent;
   public ticketsFilter: TicketsFilter = new TicketsFilter();
   listType: string = "USERS";
-  selectedCompany: Company = null;
+  public selectedCompany: Company = null;
   selectedTechUser: string = null;
   selectedStatus: string = null;
   selectedUser: string = null;
@@ -114,11 +116,17 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     if (!this.companyDp.isDisabled) this.ticketsFilter.setCompany(null);
     this.ticketsFilter.setTechUser(null);
     this.ticketsFilter.setUser(null);
+    if (this.ticketsFilter.selectedStatus) {
+      this.listType = "ALL";
+      this.ticketsFilter.setListType("ALL");
+    }
     this.ticketsFilter.setStatus(null);
+    this.ticketsFilter.setTags([]);
     this.usersDp.clearWithOutChanges();
     if (!this.companyDp.isDisabled) this.companyDp.clearWithOutChanges();
     this.techUsersDp.clearWithOutChanges();
     this.statusDp.clearWithOutChanges();
+    this.tagsDp.clearWithOutChanges();
 
     //  this.listType = "ALL";
     // this.ticketsFilter.setListType("ALL");
@@ -203,7 +211,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       this.onChangeCounterFilter();
     }
   }
-  onSelectTechUser(item) {
+  public onSelectTechUser(item) {
 
     if (!item) {
       this.ticketsFilter.setTechUser(null);
@@ -224,7 +232,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
 
   }
 
-  onSelectStatus(item) {
+  public onSelectStatus(item) {
     if (!item) {
       this.setTypeFilter("ALL");
       this.ticketsFilter.setStatus(null);
@@ -236,7 +244,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.onChangeCounterFilter();
     this.ticketsStateService.onChangeLeftPanelFilter(this.listType);
   }
-  onSelectUser(item) {
+  public onSelectUser(item) {
 
     if (!item) {
       this.ticketsFilter.setUser(null);

@@ -33,7 +33,8 @@
                 </button>
                 <button
                     class="qt-btn filter-button qt-mr-8 d-f"
-                    [ngClass]="{'active':toggleFilter}"
+                    [ngClass]="{'active':toggleFilter,
+                'is-exist-filters':isExistFilters()}"
                     (click)="onToggleFilter(!toggleFilter)"
                 >
                     <span [textContent]="getTextCountFilters()"></span>
@@ -71,9 +72,6 @@
     <!-- </thead> -->
     <!-- </table> -->
     <!-- </div> -->
-
-
-
     <!-- Mobile Version -->
     <div class="qt-page-list__header-thead-container">
         <div class="qt-table-modern qt-page-list__header-thead">
@@ -87,4 +85,53 @@
             </div>
         </div>
     </div>
+</div>
+<div
+    class="list-filters"
+    *ngIf="ticketsFilter.selectedCompany || 
+    ticketsFilter.selectedTechUser ||
+    ticketsFilter.selectedUser ||
+    ticketsFilter.selectedStatus ||
+    ticketsFilter.tags.length > 0"
+>
+    <mat-form-field>
+        <mat-chip-list aria-label="Fruit selection">
+            <mat-chip
+                *ngIf="ticketsFilter.selectedCompany"
+                (removed)="filter.companyDp.clearClient();refreshFilters()"
+            >
+                {{ticketsFilter.selectedCompany.name}}
+                <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+            <mat-chip
+                *ngIf="ticketsFilter.selectedTechUser"
+                (removed)="filter.techUsersDp.clearClient();refreshFilters()"
+            >
+                {{getUserName(ticketsFilter.selectedTechUser)}}
+                <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+            <mat-chip
+                *ngIf="ticketsFilter.selectedUser"
+                (removed)="filter.usersDp.clearClient();refreshFilters()"
+            >
+                {{getUserName(ticketsFilter.selectedUser)}}
+                <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+            <mat-chip
+                *ngIf="ticketsFilter.selectedStatus"
+                (removed)="filter.statusDp.clearClient();refreshFilters()"
+                class="status"
+            >
+                {{getStatus(ticketsFilter.selectedStatus)}}
+                <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+            <mat-chip
+                *ngFor="let tag of ticketsFilter.tags; let i = index"
+                (removed)="filter.tagsDp.remove(i);refreshFilters()"
+            >
+                {{tag.word}}
+                <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+        </mat-chip-list>
+    </mat-form-field>
 </div>
