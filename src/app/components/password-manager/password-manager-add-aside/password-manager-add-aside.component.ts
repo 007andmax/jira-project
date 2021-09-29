@@ -19,6 +19,7 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive'
 import { PasswordManagerLinkedComponent } from './password-manager-linked/password-manager-linked.component';
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
+import { AppService } from 'src/app/states/app/app.service';
 
 
 @Component({
@@ -65,6 +66,7 @@ export class PasswordManagerAddAsideComponent implements OnInit {
     private devicesStateService: DevicesStateService,
     private usersStateService: UsersStateService,
     private toastrService: ToastrService,
+    public appService: AppService,
     private appStateService: AppStateService
   ) { }
 
@@ -84,6 +86,7 @@ export class PasswordManagerAddAsideComponent implements OnInit {
       current.setFullYear(current.getFullYear() + 1);
       this.passwordRecordAdd.setExpiryDate(moment(current).format('YYYY/MM/DD'));
       this.opened = true;
+      this.appService.toggleMobileAside(true);
     });
     this.sub.add(onAddForm);
     this.categories = this.passwordManagerStateService.getCategories();
@@ -137,6 +140,7 @@ export class PasswordManagerAddAsideComponent implements OnInit {
     this.selectedUserAndDevices = [];
     this.linked.onClosed();
     this.showAddCategory = false;
+    this.appService.toggleMobileAside(false);
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)

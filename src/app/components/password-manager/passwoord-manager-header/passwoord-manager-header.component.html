@@ -118,17 +118,11 @@
 <!-- </table> -->
 <!-- </div> -->
 <!-- </div> -->
-
-
-
-
-
-
 <div class="qt-page-list__header --sticky">
     <div class="qt-page-list__header-title-line qt-mb-16">
         <div
-            _ngcontent-chr-c101
             class="icon__menu-white qt-sz-24 qt-bg-contain qt-ml-6 pointer"
+            (click)="toggleMobileLeftPanel()"
         ></div>
         <div class="qt-page-list__header-title-line--left">
             <h6
@@ -176,7 +170,7 @@
                 <button
                     class="qt-btn btn-filter qt-ml-8 d-f"
                     [ngClass]="{'active':toggleFilter}"
-                    (click)="toggleFilter  = !toggleFilter"
+                    (click)="onToggleFilter(true)"
                 >
                     <span
                         class="filter-counter qt-circle qt-sz-18 qt-fw-600 qt-fs-10 qt-color-white qt-bg-info qt-mr-8 qt-df qt-ai-c qt-jc-c"
@@ -203,7 +197,7 @@
         [hidden]="!toggleFilter"
         [disabledCompany]="disabledCompany"
         (onChangeCountFilter)="onChangeCountFilter($event)"
-        (onClose)="toggleFilter = false"
+        (onClose)="onToggleFilter(false)"
     ></app-passwoord-manager-filters>
     <div class="qt-page-list__header-thead-container">
         <div class="qt-table-modern qt-page-list__header-thead">

@@ -3,6 +3,8 @@ import { PasswordManagerService } from "../../../services/password-manager/passw
 import { PermissionsService } from "../../../services/permissions/permissions.service";
 import { Subscription } from 'rxjs';
 import { PasswordRecord } from '../class/password-record';
+import { AppService } from 'src/app/states/app/app.service';
+import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 
 /**
  * Password manager header component
@@ -32,6 +34,8 @@ export class PasswoordManagerHeaderComponent implements OnInit, OnDestroy {
   constructor(
     private passwordManagerService: PasswordManagerService,
     private permissionsService: PermissionsService,
+    private leftPanelStateService: LeftPanelStateService,
+    public appService: AppService,
   ) { }
 
   /**
@@ -59,6 +63,14 @@ export class PasswoordManagerHeaderComponent implements OnInit, OnDestroy {
   }
   onChangeCountFilter(data) {
     this.countFilter = data;
+  }
+  toggleMobileLeftPanel() {
+    this.leftPanelStateService.toggleMobileLeftPanel(true);
+    this.appService.toggleMobileAside(true);
+  }
+  onToggleFilter(data) {
+    if (this.appService.checkMobile()) this.appService.toggleMobileAside(data);
+    this.toggleFilter = data;
   }
   getSelectedCount() {
     return this.recordsData.filter(item => item.selected).length;
