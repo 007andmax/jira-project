@@ -16,8 +16,9 @@
   @media (max-width: 767px) {
     width: 100%;
     top: 0;
-    height: 100vh;
+    height: 100%;
     border: none;
+    padding-bottom: 128px;
   }
 
   &.--large {
@@ -94,6 +95,7 @@
 
     @media (max-width: 767px) {
       padding: 16px;
+      height: 100%;
     }
 
     &.--no-footer {
