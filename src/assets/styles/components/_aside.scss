@@ -93,8 +93,7 @@
     height: calc(100% - 127px);
 
     @media (max-width: 767px) {
-      height: 100vh;
-      padding: 16px 16px 142px;
+      padding: 16px;
     }
 
     &.--no-footer {
