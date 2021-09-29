@@ -13,7 +13,8 @@ import { PasswordRecord } from '../class/password-record';
   styleUrls: ['./passwoord-manager-header.component.scss']
 })
 export class PasswoordManagerHeaderComponent implements OnInit, OnDestroy {
-  toggleFilter: boolean = true;
+  toggleFilter: boolean = false;
+  toggleSearch: boolean = false;
   countFilter: number = 0;
   @Output() onChangeFilterField = new EventEmitter<any>();
   @Output() onSelectAll = new EventEmitter<any>();

@@ -48,6 +48,7 @@ export class AppComponent implements OnInit {
   main_page: string = PAGE_MAIN;
   PAGE_MAIN = PAGE_MAIN;
   PAGE_DEVICE = PAGE_DEVICE;
+  state: string = '';
   @ViewChild('contentLockScreenModal') contentLockScreenModal: ModalLockScreenComponent;
   @ViewChild('contentSessionScreenModal') contentSessionScreenModal: ModalSessionScreenComponent;
   /**
@@ -167,6 +168,10 @@ export class AppComponent implements OnInit {
       if (data) document.querySelector("html").classList.add("--scrollLock");
       if (!data) document.querySelector("html").classList.remove("--scrollLock");
     })
+    this.leftPanelStateService.onChangeState.subscribe(data => {
+      this.state = data;
+      console.log("this.statre", this.state);
+    })
   }
   ngDoCheck() {
     this.qtListHeaaderScroller = document.querySelector('.qt-page-list__header-thead-container');
@@ -184,6 +189,9 @@ export class AppComponent implements OnInit {
   }
   goToTickets() {
     this.leftPanelStateService.goToState('new-tickets');
+  }
+  goToPasswordManager() {
+    this.leftPanelStateService.goToState('password-manager');
   }
   public setShowLockScreen(data) {
     this.showLockScreen = data;

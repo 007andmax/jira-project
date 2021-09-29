@@ -1,4 +1,4 @@
-@import './src/assets/styles/variable';
+@import "./src/assets/styles/variable";
 
 .footer-nav {
   display: none;
@@ -10,7 +10,7 @@
     left: 0;
     width: 100%;
     background: $white;
-    box-shadow: 0 0 16px rgba(0, 0, 0, .15);
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.15);
     z-index: 2;
 
     &__menu {
@@ -28,11 +28,16 @@
       border-bottom: 2px solid transparent;
       text-align: center;
       line-height: 0;
-      transition: border-color .3s;
+      transition: border-color 0.3s;
 
       &.--active,
       &:hover {
         border-color: $primary-1;
+      }
+      &.--active {
+        span {
+          background-color: $primary-1;
+        }
       }
     }
 
@@ -40,5 +45,4 @@
       display: inline-block;
     }
   }
-
 }

@@ -27,6 +27,7 @@ export class PasswoordManagerFiltersComponent implements OnInit {
   selectedCompany: Company;
   @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
   @Input() disabledCompany: boolean = false;
+  @Output() onClose = new EventEmitter();
   public filter: FilterPasswordManager = new FilterPasswordManager();
   constructor(
     private companiesState: CompaniesStateService,
@@ -106,6 +107,9 @@ export class PasswoordManagerFiltersComponent implements OnInit {
       this.devicesUsers = [];
       this.disabledDevicesUsers = true;
     }
+  }
+  close() {
+    this.onClose.emit(null);
   }
   getLabelDevice(item) {
     if (item.label) return item.label;
