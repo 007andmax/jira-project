@@ -21,7 +21,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   filter: CompanyDeviceBetaFilter = new CompanyDeviceBetaFilter();
   selected: boolean = false;
   kafkaMessage: any;
-  comapnyId: any;
+  companyId: any;
 
   constructor(
     private leftPanelStateService: LeftPanelStateService,
@@ -32,7 +32,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.comapnyId = this.activateRoute.snapshot.params["id"];
+    this.companyId = this.activateRoute.snapshot.params["id"];
     this.leftPanelStateService.changeStateWithoutNavigate(
       "company-devices-beta"
     );
@@ -66,6 +66,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
     this.selectAllDevices = find ? false : true;
   }
   gotoDetailDevice(Guid: string) {
+    localStorage.setItem("company_id", this.companyId);
     const type = "workstation";
     var url = `/#/${this.companiesStateService
       .getCurrentCompany()
@@ -75,7 +76,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
 
   AssetDetail() {
     this.agentService
-      .getAssetsByCompanyId(this.comapnyId)
+      .getAssetsByCompanyId(this.companyId)
       .subscribe((resp) => {
         this.AssetList = resp;
         this.AssetList.forEach((element, index) => {
