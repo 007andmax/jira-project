@@ -5,6 +5,7 @@ import { UsersService } from 'src/app/services/users/users.service';
 import { ToastrService } from 'ngx-toastr';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { CompanySetting } from 'src/app/components/companies/class/company-setting';
 
 @Component({
   selector: 'app-ticket-settings',
@@ -12,6 +13,10 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
   styleUrls: ['./ticket-settings.component.scss']
 })
 export class TicketSettingsComponent implements OnInit {
+  intervals = [new CompanySetting('1 minute', 'ONE_MINUTE'),
+  new CompanySetting('5 minutes', 'FIVE_MINUTES'),
+  new CompanySetting('10 minutes', 'TEN_MINUTES'),
+  new CompanySetting('15 minutes', 'FIFTEEN_MINUTES')];
   loading = false;
   submitted = false;
   used = false;
@@ -52,6 +57,7 @@ export class TicketSettingsComponent implements OnInit {
       ],
       outliersTime: ['', Validators.compose([Validators.required])],
       timepickerType: ['DURATION_PICKER'],
+      interval: ['FIVE_MINUTES'],
       // taxId: [
       //   '',
       //   [
@@ -96,13 +102,18 @@ export class TicketSettingsComponent implements OnInit {
    * current comapny
    */
   getCurrentCompany(res) {
+    let timepickerType = res.serviceExpenseDurationPresentation
+      ? res.serviceExpenseDurationPresentation
+      : 'DURATION_PICKER';
+    let serviceExpenseDurationPickerInterval = res.serviceExpenseDurationPickerInterval
+      ? res.serviceExpenseDurationPickerInterval
+      : 'FIVE_MINUTES';
     this.ticketForm.patchValue({
       outliersTime: res.outliersSeconds
         ? res.outliersSeconds / 3600
         : null,
-      timepickerType: res.serviceExpenseDurationPresentation
-        ? res.serviceExpenseDurationPresentation
-        : 'DURATION_PICKER'
+      timepickerType: timepickerType,
+      interval: serviceExpenseDurationPickerInterval
     });
   }
 
@@ -163,6 +174,11 @@ export class TicketSettingsComponent implements OnInit {
     );
   }
 
+  onChangeType() {
+    this.ticketForm.patchValue({
+      interval: this.ticketForm.value.timepickerType === 'DURATION_PICKER' ? 'FIVE_MINUTES' : 'ONE_MINUTE'
+    });
+  }
   /**
    * saved
    */
@@ -186,7 +202,7 @@ export class TicketSettingsComponent implements OnInit {
       },
       serviceExpenseDurationDto: {
         presentation: this.ticketForm.value.timepickerType,
-        interval: null
+        interval: this.ticketForm.value.interval
       },
       companyWorkingTimeDto: {
         workingDays: null,

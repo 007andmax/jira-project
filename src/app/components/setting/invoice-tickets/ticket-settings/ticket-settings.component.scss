@@ -1,13 +1,11 @@
-
-
 .invalid-feedback {
     margin-bottom: 10px;
- }/*** All css files include ***/
+} /*** All css files include ***/
 @import "./src/assets/styles/variable";
-@import '../../../../../assets/scss/mixin';
-@import '../../../../../assets/scss/custom';
+@import "../../../../../assets/scss/mixin";
+@import "../../../../../assets/scss/custom";
 
-.invoice-ticket{
+.invoice-ticket {
     margin-bottom: 80px;
     .input-number {
         float: left;
@@ -16,13 +14,13 @@
         padding: 0;
         border: none;
         margin: 0;
-        @media only screen and (max-width:768px){
+        @media only screen and (max-width: 768px) {
             width: 50%;
         }
-        @media only screen and (max-width:576px){
+        @media only screen and (max-width: 576px) {
             width: 100%;
         }
-        &::after{
+        &::after {
             content: "Hours";
             position: absolute;
             top: 10px;
@@ -38,7 +36,7 @@
             color: $gray-600;
         }
 
-        .number{
+        .number {
             border-radius: 4px;
             border: solid 1px $gray-500;
             background-color: $white;
@@ -66,16 +64,16 @@
                 line-height: 15px;
                 height: 8px;
                 width: 8px;
-                right:5px;
+                right: 5px;
                 position: absolute;
-                &.plus{
+                &.plus {
                     background: url("../../../../../assets/img/filter-dropdown-up.svg") no-repeat center;
-                    top:5px;
+                    top: 5px;
                     background-size: 8px auto;
                 }
-                &.minus{
+                &.minus {
                     background: url("../../../../../assets/img/filter-dropdown-down.svg") no-repeat center;
-                    top:15px;
+                    top: 15px;
                     background-size: 8px auto;
                 }
             }
@@ -91,35 +89,37 @@
             margin-left: 2px;
         }
     }
-    .heading{
-        h1{
+    .heading {
+        h1 {
             text-transform: none;
         }
     }
-    textarea{
+    textarea {
         height: 65px;
         resize: none;
     }
-  .input-select{
-      width: 160px;
-  }
-  .invoice{
-      .f-row{
-        -webki-display: flex;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        .cmn-checkbox {
-            margin-top: 11px;
-            margin-bottom: 35px;
-            label{
-                text-transform: none;
+    .input-select {
+        width: 160px;
+    }
+    .invoice {
+        .f-row {
+            -webki-display: flex;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            .cmn-checkbox {
+                margin-top: 11px;
+                margin-bottom: 35px;
+                label {
+                    text-transform: none;
+                }
             }
         }
-      }
-  }
+    }
 }
-
+.interval-container {
+    width: 128px !important;
+}
 .invalid-feedback {
     margin-bottom: 10px;
- }
+}
