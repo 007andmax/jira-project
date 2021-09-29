@@ -93,7 +93,8 @@
     height: calc(100% - 127px);
 
     @media (max-width: 767px) {
-      padding: 16px;
+      height: 100vh;
+      padding: 16px 16px 128px;
     }
 
     &.--no-footer {
@@ -117,9 +118,12 @@
 
     @media (max-width: 767px) {
       position: fixed;
+      bottom: 0;
+      left: 0;
       width: 100%;
       background: $white;
       padding: 16px;
+      z-index: 1;
     }
 
     > div {
