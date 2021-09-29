@@ -15,7 +15,8 @@
   @media (max-width: 767px) {
     width: 100%;
     top: 0;
-    height: 100vh;
+    height: 100%;
+    padding-bottom: 128px;
     border: none;
   }
 
@@ -109,15 +110,24 @@
         align-items: flex-end;
       }
 
+      .password-edit-aside__info-title {
+        @media (max-width: 767px) {
+          width: 100%;
+          max-width: 100%;
+        }
+      }
+
       input {
         @media (max-width: 767px) {
-          max-width: calc(100% - 40px);
+          flex: 1;
           border-radius: 4px 0 0 4px;
           border-right: transparent;
         }
       }
 
-      .icon__view {
+      .icon__view,
+      .icon__hide,
+      .icon__copy-gray {
         @media (max-width: 767px) {
           border: 1px solid $gray-500;
           height: 40px;
@@ -127,6 +137,19 @@
           border-radius: 0 4px 4px 0;
           background-position: center;
           background-color: $gray-100;
+        }
+      }
+
+      .icon__hide {
+        @media (max-width: 767px) {
+          border-radius: 0;
+          border-right: transparent;
+        }
+      }
+
+      .icon__copy-gray {
+        @media (max-width: 767px) {
+          border-radius: 0 4px 4px 0;
         }
       }
     }
@@ -213,11 +236,12 @@
     height: calc(100% - 127px);
 
     @media (max-width: 767px) {
+      height: 100%;
       padding: 16px;
     }
 
     &.--no-footer {
-      height: calc(100% - 67px);;
+      height: calc(100% - 67px);
     }
 
     &.--less-padding {
@@ -237,6 +261,8 @@
 
     @media (max-width: 767px) {
       position: fixed;
+      bottom: 0;
+      left: 0;
       width: 100%;
       background: $white;
       padding: 16px;
