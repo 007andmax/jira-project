@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import { AgentService } from "src/app/services/agent/agent.service";
 import { CompaniesStateService } from "src/app/states/company/companies-state.service";
 import { KafkaStateService } from "src/app/states/kafka/kafka-state.service";
@@ -20,16 +21,18 @@ export class CompanyDeviceBetaComponent implements OnInit {
   filter: CompanyDeviceBetaFilter = new CompanyDeviceBetaFilter();
   selected: boolean = false;
   kafkaMessage: any;
+  comapnyId: any;
 
   constructor(
     private leftPanelStateService: LeftPanelStateService,
     private agentService: AgentService,
     private companiesStateService: CompaniesStateService,
-    private kafkaStateService: KafkaStateService,
-    public cd: ChangeDetectorRef,
-  ) {}
+    private kafkaStateService: KafkaStateService,    
+    private activateRoute: ActivatedRoute,
+  ) { }
 
   ngOnInit() {
+    this.comapnyId = this.activateRoute.snapshot.params["id"];
     this.leftPanelStateService.changeStateWithoutNavigate(
       "company-devices-beta"
     );
@@ -62,7 +65,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
     let find = this.AssetList.find((item) => !item.selected);
     this.selectAllDevices = find ? false : true;
   }
-  gotiDetailDevice(Guid: string) {
+  gotoDetailDevice(Guid: string) {
     const type = "workstation";
     var url = `/#/${this.companiesStateService
       .getCurrentCompany()
@@ -72,14 +75,14 @@ export class CompanyDeviceBetaComponent implements OnInit {
 
   AssetDetail() {
     this.agentService
-      .getAssetsByCompanyId("fdadb2df-ed3d-4e28-b41e-741617b7ffa6")
+      .getAssetsByCompanyId(this.comapnyId)
       .subscribe((resp) => {
         this.AssetList = resp;
         this.AssetList.forEach((element, index) => {
           this.AssetList[index].Title =
             element.Title != "" ? element.Title : element.Name;
-          this.OperatingSystem(element.ID, index);
-          this.AssetID(element.ID);
+          this.OperatingSystem(element.ID, index);          
+          this.GetCurrentConfig(element.ID);
         });
       });
     this.showPreloader = false;
@@ -87,16 +90,18 @@ export class CompanyDeviceBetaComponent implements OnInit {
 
   OperatingSystem(value: any, index: any) {
     this.agentService.getOperatingSystemByAssetId(value).subscribe((resp) => {
-      this.AssetList[index].Caption =
-        resp[0].Caption.replace("Microsoft", "") +
-        " " +
-        resp[0].OSArchitecture +
-        " " +
-        resp[0].Version;
+      if (resp && resp.length > 0 && resp[0].Caption) {
+        this.AssetList[index].Caption =
+          resp[0].Caption.replace("Microsoft", "") +
+          " " +
+          resp[0].OSArchitecture +
+          " " +
+          resp[0].Version;
+      }
     });
   }
 
-  AssetID(Asset_ID: any) {
+  GetCurrentConfig(Asset_ID: any) {
     this.agentService.GetCurrentConfig(Asset_ID);
   }
 
@@ -112,10 +117,8 @@ export class CompanyDeviceBetaComponent implements OnInit {
             let Time = this.kafkaMessage.IdleTime.split("Idle for");
             this.AssetList[index].IdelTime = Time[1] != "" ? Time[1] : "";
           }
-        });
-        this.cd.detectChanges();
+        });       
       }
-
     });
   }
 }

@@ -38,6 +38,7 @@ export class WebsocketService {
   private serverUrl = '/realtime';
   private stompClient;
   private netScanSub;
+  public IsKafkaConnected: boolean = false;
 
   /**
    * Users api service constructor
@@ -105,7 +106,6 @@ export class WebsocketService {
       that.subsribeToDocumentsCategory();
     });
   }
-
 
   private subsribeToDevices() {
     setTimeout(() => {
@@ -455,13 +455,17 @@ export class WebsocketService {
     }, 3000);
   }
 
-  public  subsribeToKafka() {
-    setTimeout(() => {
+  public subsribeToKafka() {
+    if (this.stompClient.connected) {
       this.stompClient.subscribe(`/user/watch/kafka`, (message) => {
         var newChange = JSON.parse(message.body);
-        this.kafkaRealTimeService.handleRealTimeChanges(newChange);
+        this.kafkaRealTimeService.handleRealTimeChanges(newChange);       
       });
-    }, 3000);
+      this.IsKafkaConnected = true;
+    }
+    else {
+      setTimeout(() => this.subsribeToKafka(), 3000);
+    }
   }
 
 

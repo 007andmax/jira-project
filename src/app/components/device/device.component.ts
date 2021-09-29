@@ -14,6 +14,7 @@ import { TerminalService } from "./_services/terminal.service";
 import { AgentService } from "src/app/services/agent/agent.service";
 import { KafkaRealTimeService } from "src/app/states/kafka/kafka-real-time.service";
 import { KafkaStateService } from "src/app/states/kafka/kafka-state.service";
+import { ActivatedRoute } from "@angular/router";
 declare var $: any;
 @Component({
   selector: "app-device-root",
@@ -55,7 +56,8 @@ export class DeviceComponent implements OnInit, OnDestroy {
     public kakfaService: KafkaRealTimeService,
     private kafkaStateService: KafkaStateService,
     public cd: ChangeDetectorRef,
-  ) {}
+    private activateRoute: ActivatedRoute,
+  ) { }
 
   openModal(template) {
     if (this.deviceDetail.online === true) {
@@ -92,11 +94,11 @@ export class DeviceComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.type =
       window.location.href.split("/")[
-        window.location.href.split("/").length - 2
+      window.location.href.split("/").length - 2
       ];
     this._id =
       window.location.href.split("/")[
-        window.location.href.split("/").length - 1
+      window.location.href.split("/").length - 1
       ];
     this.usersStateService.onInit();
     this.shellStateService.onInit();
@@ -126,7 +128,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
         console.log("data", data);
         this.agentService.setAccessToken(data.AccessToken);
         this.agentService
-          .getAssetByGuid("7e22e026-9da5-41b9-9bbd-252585302310")
+          .getAssetByGuid(this._id)
           .subscribe((resp) => {
             this.deviceName = resp[0].Name;
             this.asset = resp[0];
@@ -144,6 +146,9 @@ export class DeviceComponent implements OnInit, OnDestroy {
           let Time = this.kafkaMessage.IdleTime.split("Idle for");
           this.UpTime = Time[1] != "" ? Time[1] : "";
         }
+        this.deviceDetail = {};
+        this.deviceDetail.online = true;
+        this.deviceDetail.id = this._id;
         this.cd.detectChanges();
       }
     });
@@ -189,11 +194,11 @@ export class DeviceComponent implements OnInit, OnDestroy {
     }
     $("#counter").text(
       this.padNumber(this.totalHours) +
-        " hr : " +
-        this.padNumber(this.totalMinutes) +
-        " min : " +
-        this.padNumber(this.totalSeconds) +
-        " sec"
+      " hr : " +
+      this.padNumber(this.totalMinutes) +
+      " min : " +
+      this.padNumber(this.totalSeconds) +
+      " sec"
     );
   }
   getDevicesByCompany() {
@@ -238,7 +243,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
         (resp) => {
           this.loading = false;
         },
-        (error) => {}
+        (error) => { }
       );
   }
   getConstant(sessionId) {
@@ -258,7 +263,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
             sessionId;
           window.open(url, "_self");
         },
-        (error) => {}
+        (error) => { }
       );
   }
   createConnection(type) {
@@ -325,13 +330,13 @@ export class DeviceComponent implements OnInit, OnDestroy {
       data.AssetID = 13;
       data.MessageType = "RunPowerShellCommand";
       data.Value = "Restart-Computer -force";
-      this.agentService.SendPowerShellCommand(data).subscribe((resp) => {});
+      this.agentService.SendPowerShellCommand(data).subscribe((resp) => { });
     }
     if (command === "s") {
       data.AssetID = 13;
       data.MessageType = "RunPowerShellCommand";
       data.value = "Stop-Computer";
-      this.agentService.SendPowerShellCommand(data).subscribe((resp) => {});
+      this.agentService.SendPowerShellCommand(data).subscribe((resp) => { });
     }
   }
   ngOnDestroy(): void {

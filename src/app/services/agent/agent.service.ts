@@ -1,3 +1,4 @@
+import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { map } from "rxjs/operators";
@@ -17,7 +18,7 @@ export class AgentService {
    * Device api service constructor
    * @param {HttpClient} http Service to work with request
    */
-  public constructor(private http: HttpClient) {}
+  public constructor(private http: HttpClient, private wsService: WebsocketService) { }
 
   encrypt128(keys, value) {
     var key = CryptoJS.enc.Utf8.parse(keys);
@@ -180,12 +181,15 @@ export class AgentService {
       MessageType: "GetCurrentConfig",
     };
 
-     setTimeout(()=>{
-     this.http.post(this.apiurl + "sendMessageToKafka", data).subscribe(()=>{console.log("sent confing message")});
-     },10);
+    if (this.wsService.IsKafkaConnected) {
+      this.http.post(this.apiurl + "sendMessageToKafka", data).subscribe(() => { console.log("sent confing message: " + asset_ID) });
+    }
+    else {
+      setTimeout(() => this.GetCurrentConfig(asset_ID), 3000);
+    }
   }
 
-  public SendPowerShellCommand(data:any) {
+  public SendPowerShellCommand(data: any) {
     return this.http.post(this.apiurl + "sendMessageToKafka", data);
   }
 

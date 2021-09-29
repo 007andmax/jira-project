@@ -99,12 +99,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
   setPreviewDataDevice() {
     this.kafkaStateService.onCurrentConfig.subscribe((resp) => {
       if (this.asset.ID != undefined && this.asset.ID != 0) {
+
         let item = resp.find((x) => x.key == this.asset.ID);
         if (item != undefined) {
           this.kafkaMessage = JSON.parse(item.value);
           this.securityUpdate = this.kafkaMessage.PendingWindowsUpdates.length;
-        }
-        this.cd.detectChanges();
+        }       
+        this.cd.detectChanges();        
       }
     });
 
@@ -248,9 +249,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   getAssetDetail() {
     this.agentService
-      .getAssetByGuid("7e22e026-9da5-41b9-9bbd-252585302310")
+      .getAssetByGuid(this._id)
       .subscribe((resp) => {
         if (resp.length > 0) {
+
           this.asset = resp[0];
           this.asset.IsUpdated = true;
           if (this.minDate(this.asset.WarrantyExpires)) {
@@ -378,8 +380,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
           return a["Caption"].toLowerCase() > b["Caption"].toLowerCase()
             ? 1
             : b["Caption"].toLowerCase() > a["Caption"].toLowerCase()
-            ? -1
-            : 0;
+              ? -1
+              : 0;
         } else if (a["Caption"]) {
           return 1;
         } else if (b["Caption"]) {
@@ -390,7 +392,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     });
   }
 
-  onDateChange(newDate: Date) {}
+  onDateChange(newDate: Date) { }
 
   updateAsset() {
     this.getlabel(this.asset.Title, this.asset.Domain, this.asset.Name);
@@ -484,18 +486,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
         percent > 80
           ? "red"
           : percent > 75 && percent < 80
-          ? "yellow"
-          : IsSystem == true
-          ? color
-          : "",
+            ? "yellow"
+            : IsSystem == true
+              ? color
+              : "",
       "background-color":
         percent > 80
           ? "red"
           : percent > 75 && percent < 80
-          ? "yellow"
-          : IsSystem == true
-          ? color
-          : "",
+            ? "yellow"
+            : IsSystem == true
+              ? color
+              : "",
     };
   }
 
@@ -505,10 +507,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
         percent > 80
           ? "red"
           : percent > 75 && percent < 80
-          ? "yellow"
-          : IsSystem == true
-          ? color
-          : "",
+            ? "yellow"
+            : IsSystem == true
+              ? color
+              : "",
     };
   }
 
