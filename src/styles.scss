@@ -2329,6 +2329,18 @@ app-quotes-item {
     }
   }
 }
+.add-category-aside-add-record {
+  @media (max-width: 767px) {
+  position: fixed;
+  background: rgba(16, 24, 39, 0.4);
+  transition: opacity 0.15s linear;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  }
+}
 .page-list-ticket .qt-aside-modern__footer,
 .password-page .qt-aside-modern__footer {
   display: none;
