@@ -4,9 +4,7 @@
   color: $gray-800;
   background: $white;
   width: 592px;
-  position: absolute;
   border-left: 1px solid $gray-400;
-  height: 100%;
   right: 0;
   box-shadow: -8px 0 8px 0 rgba(0, 0, 0, 0.05);
   position: fixed;
@@ -18,8 +16,9 @@
   @media (max-width: 767px) {
     width: 100%;
     top: 0;
-    height: 100vh;
+    height: 100%;
     border: none;
+    padding-bottom: 128px;
   }
 
   &.--large {
@@ -96,6 +95,7 @@
 
     @media (max-width: 767px) {
       padding: 16px;
+      height: 100%;
     }
 
     &.--no-footer {
@@ -118,7 +118,13 @@
     justify-content: space-between;
 
     @media (max-width: 767px) {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: $white;
       padding: 16px;
+      z-index: 1;
     }
 
     > div {

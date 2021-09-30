@@ -14,7 +14,6 @@ export class TicketsComponent implements OnInit, OnDestroy {
   constructor(private ticketsStateService: TicketsStateService,
     private ticketsService: TicketsService,) { }
 
-
   ngOnInit() {
     window.scrollTo(0, 0);
     this.listType = this.ticketsStateService.getListType();

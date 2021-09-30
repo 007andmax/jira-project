@@ -41,3 +41,39 @@
     display: none;
   }
 }
+.list-filters {
+  display: none;
+  @media (max-width: 767px) {
+    display: block;
+  }
+  margin: -8px -8px 8px -8px;
+  /deep/.mat-form-field-infix {
+    overflow: auto;
+    border: none;
+    border-radius: 0px;
+  }
+  /deep/.mat-chip-list-wrapper {
+    width: fit-content;
+    margin: 0px;
+    flex-wrap: unset;
+    .mat-standard-chip {
+      margin: 0px 8px 0px 0px;
+    }
+  }
+}
+.status {
+  text-transform: capitalize;
+}
+.is-exist-filters {
+  position: relative;
+  &::before {
+    content: " ";
+    position: absolute;
+    top: 1px;
+    right: 0px;
+    width: 8px;
+    height: 8px;
+    background-color: #ff5263;
+    border-radius: 10px;
+  }
+}

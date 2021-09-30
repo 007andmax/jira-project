@@ -1,5 +1,5 @@
-@import './src/assets/styles/variable';
-@import './src/assets/styles/fonts';
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
 
 .dropdown-menu {
   transform: translate(0, 0) !important;
@@ -48,7 +48,6 @@
   .dropdown {
     left: -30px;
     top: -5px;
-
   }
 
   .add-tax-dropdown {
@@ -67,7 +66,7 @@
     .add-tax-label {
       font-size: 13px;
       margin-bottom: 11px;
-     font-weight: 600;
+      font-weight: 600;
 
       color: $gray-800;
     }
@@ -77,12 +76,11 @@
       top: 15px;
       padding: 0;
     }
-}
-
+  }
 }
 
 .label-name {
- font-weight: 600;
+  font-weight: 600;
   font-size: 13px;
   margin-bottom: 8px;
 }
@@ -100,12 +98,12 @@
   }
 
   .dropdown-item {
-      align-items: center;
-      display: flex;
-      position: relative;
-      button {
-        color: $gray-800;
-      }
+    align-items: center;
+    display: flex;
+    position: relative;
+    button {
+      color: $gray-800;
+    }
   }
 }
 
@@ -128,9 +126,27 @@
   width: auto !important;
 }
 
-.cancel-tax-item, .cancel-tax-item:hover {
+.cancel-tax-item,
+.cancel-tax-item:hover {
   width: auto !important;
   background-color: $background !important;
-  color: $gray-800 !important
+  color: $gray-800 !important;
 }
-
+.add-tax-container {
+  @media (max-width: 767px) {
+    top: 50% !important;
+    bottom: unset !important;
+    left: 50% !important;
+    right: unset !important;
+    transform: translate(-50%, -50%) !important;
+    position: fixed !important;
+    z-index: 4;
+  }
+  .add-tax-dropdown {
+    &::after {
+      @media (max-width: 767px) {
+        display: none;
+      }
+    }
+  }
+}

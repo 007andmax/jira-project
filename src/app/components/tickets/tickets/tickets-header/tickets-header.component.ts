@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { TicketsFilterComponent } from './tickets-filter/tickets-filter.component';
 import { AppService } from 'src/app/states/app/app.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { TicketsFilter } from '../class/tickets-filter';
 
 @Component({
   selector: 'app-tickets-header',
@@ -13,10 +14,11 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 })
 export class TicketsHeaderComponent implements OnInit, OnDestroy {
   @ViewChild('filter') filter: TicketsFilterComponent;
+  ticketsFilter: TicketsFilter = new TicketsFilter();
   titleListTypes: Array<TitleListType> = [new TitleListType('All Tickets', 'ALL'),
   new TitleListType('Unassigned', 'UNASSIGNED'),
   new TitleListType('Open', 'OPEN'),
-  new TitleListType('Close', 'CLOSED'),
+  new TitleListType('Closed', 'CLOSED'),
   new TitleListType('On Hold', 'ON_HOLD'),
   new TitleListType('Trash', 'TRASH'),
   new TitleListType('Spam', 'SPAM'),
@@ -41,6 +43,8 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
     /* END */
     this.title = `${(this.selectedListType) ? this.selectedListType.title : ''} (${this.count})`;
     let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
+      this.ticketsFilter = data;
+      console.log("this.ticketsFilter", this.ticketsFilter);
       this.selectedListType = this.titleListTypes.find(item => item.type === data.listType);
       if (this.selectedListType) this.title = `${this.selectedListType.title} (${this.count})`
     })
@@ -70,6 +74,19 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     }
   }
+  isExistFilters() {
+    return this.ticketsFilter.selectedCompany ||
+      this.ticketsFilter.selectedTechUser ||
+      this.ticketsFilter.selectedUser ||
+      this.ticketsFilter.selectedStatus ||
+      this.ticketsFilter.tags.length > 0
+  }
+  getStatus(selectedStatus) {
+    return selectedStatus.toLowerCase();
+  }
+  refreshFilters() {
+    this.filter.applyFilters();
+  }
   clearAll() {
     this.filter.onClearAll();
   }
@@ -81,7 +98,9 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
   }
   public setTitle(title) {
     this.title = `${title} (${this.count})`;
-
+  }
+  getUserName(user) {
+    return `${user.firstName} ${user.lastName}`;
   }
   onToggleFilter(data) {
     if (this.appService.checkMobile()) this.appService.toggleMobileAside(data);
