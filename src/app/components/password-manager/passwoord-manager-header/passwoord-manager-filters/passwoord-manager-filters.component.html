@@ -31,6 +31,7 @@
         ></app-password-manager-add-category>
     </div>
     <app-drop-down
+        #companiesSelect
         class="filter-company qt-w100 qt-mr-8 dropdown"
         [placeholder]="'Select Company'"
         [isDisabled]="disabledCompany"
@@ -44,6 +45,7 @@
         widthInput="30%"
     ></app-drop-down>
     <app-passwoord-manager-devices-users
+        #deviceUserSelect
         class="filter-device qt-mr-8 dropdown dropdown-devices-users"
         [placeholder]="'Select Device or User'"
         [isDisabled]="disabledDevicesUsers"
@@ -57,6 +59,7 @@
         widthInput="25%"
     ></app-passwoord-manager-devices-users>
     <app-drop-down
+        #dateSelect
         class="filter-data-picker dropdown"
         [placeholder]="'Search by Expire Date'"
         [list]="listDates"
@@ -68,8 +71,18 @@
     ></app-drop-down>
     <div class="qt-aside-modern__footer">
         <div class="qt-df qt-w100">
-            <button class="qt-button --gray qt-mr-12">Clear All</button>
-            <button class="qt-button">Apply Filters</button>
+            <button
+                class="qt-button --gray qt-mr-12"
+                (click)="onClearAll()"
+            >
+                Clear All
+            </button>
+            <button
+                class="qt-button"
+                (click)="applyFilters()"
+            >
+                Apply Filters
+            </button>
         </div>
     </div>
 </div>

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Company } from 'src/app/interfaces/quote/company';
+import { AppService } from 'src/app/states/app/app.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 import { PasswordManagerStateService } from 'src/app/states/password-manager/password-manager-state.service';
@@ -9,6 +10,7 @@ import { TitleListType } from '../../../tickets/tickets/tickets-header/class/tit
 import { FilterPasswordManager } from '../../class/filter-password-manager';
 import { PasswordDeviceUser } from '../../class/password-device-user';
 import { PasswordRecordCategories } from '../../class/password-record-categories';
+import { PasswoordManagerDevicesUsersComponent } from '../../passwoord-manager-devices-users/passwoord-manager-devices-users.component';
 
 @Component({
   selector: 'app-passwoord-manager-filters',
@@ -26,6 +28,9 @@ export class PasswoordManagerFiltersComponent implements OnInit {
   @Output() onChangeCountFilter = new EventEmitter<any>();
   selectedCompany: Company;
   @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
+  @ViewChild('companiesSelect') companiesSelect: DropDownComponent;
+  @ViewChild('deviceUserSelect') deviceUserSelect: PasswoordManagerDevicesUsersComponent;
+  @ViewChild('dateSelect') dateSelect: DropDownComponent;
   @Input() disabledCompany: boolean = false;
   @Output() onClose = new EventEmitter();
   public filter: FilterPasswordManager = new FilterPasswordManager();
@@ -33,6 +38,7 @@ export class PasswoordManagerFiltersComponent implements OnInit {
     private companiesState: CompaniesStateService,
     private passwordManagerStateService: PasswordManagerStateService,
     private usersStateService: UsersStateService,
+    public appService: AppService,
     private devicesStateService: DevicesStateService) { }
 
   ngOnInit() {
@@ -45,6 +51,27 @@ export class PasswoordManagerFiltersComponent implements OnInit {
       this.categories = data;
       this.categoriesSelect.reset(this.categories);
     })
+  }
+  public onClearAll() {
+    this.filter.setCategory(null);
+    this.filter.setCompany(null);
+    this.filter.setDeviceUser(null);
+    this.filter.setDate(null);
+    this.categoriesSelect.clearWithOutChanges();
+    this.companiesSelect.clearWithOutChanges();
+    this.deviceUserSelect.clearWithOutChanges();
+    this.dateSelect.clearWithOutChanges();
+    this.passwordManagerStateService.onInitFilter(this.filter);
+    this.disabledDevicesUsers = false;
+    this.selectedCompany = null;
+    this.onChangeCounterFilter();
+    if (this.appService.checkMobile()) this.close();
+  }
+  applyFilters() {
+
+    this.passwordManagerStateService.onInitFilter(this.filter);
+    this.onChangeCounterFilter();
+    this.close();
   }
   getClientsList(data) {
     this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
@@ -71,24 +98,32 @@ export class PasswoordManagerFiltersComponent implements OnInit {
   }
   selectDate(data) {
     this.filter.setDate(data);
-    this.passwordManagerStateService.onInitFilter(this.filter);
-    this.onChangeCounterFilter();
+    if (!this.appService.checkMobile()) {
+      this.passwordManagerStateService.onInitFilter(this.filter);
+      this.onChangeCounterFilter();
+    }
   }
   selectDeviceUser(data) {
     this.filter.setDeviceUser(data);
-    this.passwordManagerStateService.onInitFilter(this.filter);
-    this.onChangeCounterFilter();
+    if (!this.appService.checkMobile()) {
+      this.passwordManagerStateService.onInitFilter(this.filter);
+      this.onChangeCounterFilter();
+    }
   }
   onSelectCategory(data) {
     this.filter.setCategory(data);
-    this.passwordManagerStateService.onInitFilter(this.filter);
-    this.onChangeCounterFilter();
+    if (!this.appService.checkMobile()) {
+      this.passwordManagerStateService.onInitFilter(this.filter);
+      this.onChangeCounterFilter();
+    }
   }
   selectCompany(data) {
     this.selectedCompany = data;
     this.filter.setCompany(data);
-    this.passwordManagerStateService.onInitFilter(this.filter);
-    this.onChangeCounterFilter();
+    if (!this.appService.checkMobile()) {
+      this.passwordManagerStateService.onInitFilter(this.filter);
+      this.onChangeCounterFilter();
+    }
     if (data) {
       let users = this.usersStateService.getAllUsers().filter(item => {
         let company = this.companies.find(itemCompany => itemCompany.id === item.company.id);
