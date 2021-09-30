@@ -49,6 +49,11 @@ export class HardwareComponent implements OnInit {
   mouse: any = [];
   graphicsCard: any = [];
   pipe = new DatePipe("en-US");
+  memory: number = 0;
+  Memory: any[] = [];
+  differentMemory: any[] = [];
+  graphicscardDriver: any[] = [];
+  TempararyGraphicsDriver: any[] = [];
 
   constructor(
     private toastr: ToastrService,
@@ -81,25 +86,29 @@ export class HardwareComponent implements OnInit {
       )
       .subscribe((data) => {
         this.agentService.setAccessToken(data.AccessToken);
-        this.HardwareList();
+        this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
+          if (resp.length > 0) {
+            this.HardwareList(resp[0].ID);
+          }
+        });
       });
   }
 
-  HardwareList() {
-    this.computerList();
-    this.systemType();
-    this.motherBoardList();
-    this.biosList();
-    this.processorsList();
-    this.pointingDevice();
-    this.memoryList();
-    this.networkList();
-    this.graphicscard();
-    this.desktopMonitor();
-    this.hardDisk();
-    this.keyboard();
-    this.soundCard();
-    this.operatingSystem();
+  HardwareList(Asset_ID) {
+    this.computerList(Asset_ID);
+    this.systemType(Asset_ID);
+    this.motherBoardList(Asset_ID);
+    this.biosList(Asset_ID);
+    this.processorsList(Asset_ID);
+    this.pointingDevice(Asset_ID);
+    this.memoryList(Asset_ID);
+    this.networkList(Asset_ID);
+    this.graphicscard(Asset_ID);
+    this.desktopMonitor(Asset_ID);
+    this.hardDisk(Asset_ID);
+    this.keyboard(Asset_ID);
+    this.soundCard(Asset_ID);
+    this.operatingSystem(Asset_ID);
   }
 
   printcsv() {
@@ -107,21 +116,21 @@ export class HardwareComponent implements OnInit {
     this.getPdfData();
   }
 
-  graphicscard() {
-    this.agentService.getGraphicsCard("13").subscribe((resp) => {
-      debugger;
+  graphicscard(Asset_ID) {
+    this.agentService.getGraphicsCard(Asset_ID).subscribe((resp) => {
       if (resp.length > 0) {
         this.graphicsCard = resp[0];
-        this.graphicsCard.InstalledDisplayDrivers =
-          this.graphicsCard.InstalledDisplayDrivers != undefined
-            ? this.graphicsCard.InstalledDisplayDrivers.replaceAll(
-                ",",
-                "," + " "
-              ) +
-              " " +
-              "version " +
-              this.graphicsCard.DriverVersion
-            : "";
+        let driver = this.graphicsCard.InstalledDisplayDrivers.split(",");
+        if(driver.length>0)
+        {
+          this.graphicscardDriver = driver;
+          this.graphicscardDriver.forEach((element)=>{
+            let rock = element.split('\\');
+            let pieces = rock[rock.length-1];
+            this.TempararyGraphicsDriver.push(pieces);
+          })
+          this.graphicsCard.InstalledDisplayDrivers = this.TempararyGraphicsDriver + " " + "version " + this.graphicsCard.DriverVersion ;
+        }
         if (this.graphicsCard.VideoModeDescription != "") {
           let screenresolution =
             this.graphicsCard.VideoModeDescription.split("x");
@@ -134,9 +143,8 @@ export class HardwareComponent implements OnInit {
     });
   }
 
-  pointingDevice() {
-    this.agentService.getPointingDevice("13").subscribe((resp) => {
-      debugger;
+  pointingDevice(Asset_ID) {
+    this.agentService.getPointingDevice(Asset_ID).subscribe((resp) => {
       if (resp.length > 0) {
         this.mouse = resp[0];
         this.printcsv();
@@ -144,9 +152,8 @@ export class HardwareComponent implements OnInit {
     });
   }
 
-  desktopMonitor() {
-    this.agentService.getDesktopMonitor("13").subscribe((resp) => {
-      debugger;
+  desktopMonitor(Asset_ID) {
+    this.agentService.getDesktopMonitor(Asset_ID).subscribe((resp) => {
       if (resp.length > 0) {
         this.desktop = resp[0];
         this.printcsv();
@@ -154,8 +161,8 @@ export class HardwareComponent implements OnInit {
     });
   }
 
-  computerList() {
-    this.agentService.getComputer("13").subscribe((resp) => {
+  computerList(Asset_ID) {
+    this.agentService.getComputer(Asset_ID).subscribe((resp) => {
       if (resp.length > 0) {
         this.computer = resp[0];
         if (this.computer.Title == "") {
@@ -170,8 +177,8 @@ export class HardwareComponent implements OnInit {
     });
   }
 
-  systemType() {
-    this.agentService.getOperatingSystem("13").subscribe((resp) => {
+  systemType(Asset_ID) {
+    this.agentService.getOperatingSystem(Asset_ID).subscribe((resp) => {
       if (resp.length > 0) {
         this.systemTypes = resp[0];
         this.printcsv();
@@ -179,8 +186,8 @@ export class HardwareComponent implements OnInit {
     });
   }
 
-  motherBoardList() {
-    this.agentService.getMotherBoard("13").subscribe((resp) => {
+  motherBoardList(Asset_ID) {
+    this.agentService.getMotherBoard(Asset_ID).subscribe((resp) => {
       if (resp.length > 0) {
         this.motherBoards = resp[0];
         this.printcsv();
@@ -188,8 +195,8 @@ export class HardwareComponent implements OnInit {
     });
   }
 
-  biosList() {
-    this.agentService.getBios("13").subscribe((resp) => {
+  biosList(Asset_ID) {
+    this.agentService.getBios(Asset_ID).subscribe((resp) => {
       if (resp.length > 0) {
         this.bio = resp[0];
         let date = this.bio.ReleaseDate.split("+");
@@ -199,9 +206,8 @@ export class HardwareComponent implements OnInit {
     });
   }
 
-  processorsList() {
-    this.agentService.getProcessor("13").subscribe((resp) => {
-      debugger;
+  processorsList(Asset_ID) {
+    this.agentService.getProcessor(Asset_ID).subscribe((resp) => {
       if (resp.length > 0) {
         this.processor = resp[0];
         this.printcsv();
@@ -209,19 +215,30 @@ export class HardwareComponent implements OnInit {
     });
   }
 
-  memoryList() {
-    this.agentService.getPhysicalMemory("13").subscribe((resp) => {
+  memoryList(Asset_ID) {
+    this.agentService.getPhysicalMemory(Asset_ID).subscribe((resp) => {
       debugger;
       if (resp.length > 0) {
         this.physicalmemory = resp[0];
+        this.Memory = resp;
+        this.Memory.forEach((element) => {
+          this.memory += element.Capacity;
+          if (element.DeviceLocator != "") {
+            this.differentMemory.push(
+              element.DeviceLocator+":"+' '+ + element.Capacity / 1024 / 1024 +' '+"MB RAM"
+            );
+          }
+        });
+        this.physicalmemory.Capacity = this.memory;
+        let different = this.differentMemory;
+        this.physicalmemory.DeviceLocator = different.toString().replace(/,/g, " ");
         this.printcsv();
       }
     });
   }
 
-  networkList() {
-    this.agentService.getNetworkAdapter("13").subscribe((resp) => {
-      debugger;
+  networkList(Asset_ID) {
+    this.agentService.getNetworkAdapter(Asset_ID).subscribe((resp) => {
       if (resp.length > 0) {
         this.networkAdapter = resp[0];
         this.printcsv();
@@ -229,9 +246,8 @@ export class HardwareComponent implements OnInit {
     });
   }
 
-  hardDisk() {
-    this.agentService.getHardDisk("13").subscribe((resp) => {
-      debugger;
+  hardDisk(Asset_ID) {
+    this.agentService.getHardDisk(Asset_ID).subscribe((resp) => {
       if (resp.length > 0) {
         this.diskDrive = resp[0];
         this.printcsv();
@@ -239,8 +255,8 @@ export class HardwareComponent implements OnInit {
     });
   }
 
-  keyboard() {
-    this.agentService.getKeyboard("13").subscribe((resp) => {
+  keyboard(Asset_ID) {
+    this.agentService.getKeyboard(Asset_ID).subscribe((resp) => {
       if (resp.length > 0) {
         this.keyboards = resp[0];
         this.printcsv();
@@ -248,8 +264,8 @@ export class HardwareComponent implements OnInit {
     });
   }
 
-  soundCard() {
-    this.agentService.getsoundCard("13").subscribe((resp) => {
+  soundCard(Asset_ID) {
+    this.agentService.getsoundCard(Asset_ID).subscribe((resp) => {
       if (resp.length > 0) {
         this.soundCards = resp[0];
         this.printcsv();
@@ -257,9 +273,8 @@ export class HardwareComponent implements OnInit {
     });
   }
 
-  operatingSystem() {
-    this.agentService.getOperatingSystem("13").subscribe((resp) => {
-      debugger;
+  operatingSystem(Asset_ID) {
+    this.agentService.getOperatingSystem(Asset_ID).subscribe((resp) => {
       if (resp.length > 0) {
         this.operatingSystems = resp[0];
         this.printcsv();
@@ -307,13 +322,11 @@ export class HardwareComponent implements OnInit {
     this.printProcessor = [
       ["Model", this.processor["Name"] || "N/A"],
       ["Clock Speed", this.processor["MaxClockSpeed"] + " " + "MHz" || "N/A"],
-      ["Socket & Cache(s)", "N/A"],
     ];
 
     this.printMouse = [
       ["Manufacturer", this.mouse["Manufacturer"] || "N/A"],
       ["Model", this.mouse["Caption"] || "N/A"],
-      ["Connection", "N/A"],
     ];
 
     this.printMemory = [
@@ -323,13 +336,14 @@ export class HardwareComponent implements OnInit {
           ? this.physicalmemory["Capacity"] / 1024 / 1024 + " MB RAM"
           : "N/A",
       ],
+      [ "",this.physicalmemory["DeviceLocator"]!=undefined? this.physicalmemory["DeviceLocator"]:""],
     ];
 
     this.printNetwork = [
       ["Model(s)", this.networkAdapter["Name"] || "N/A"],
       ["IP", this.networkAdapter["IPAddress"] || "N/A"],
       ["MAC", this.networkAdapter["MACAddress"] || "N/A"],
-      ["DHCP", "N/A"],
+      ["DHCP", this.networkAdapter["DHCPEnabled"]],
     ];
 
     this.printGraphic = [
@@ -353,7 +367,7 @@ export class HardwareComponent implements OnInit {
     ];
 
     this.printDisk = [
-      ["Model(s)", "N/A"],
+      ["Model(s)", this.diskDrive["Model"] || "N/A"],
       [
         "File Format(s)",
         this.diskDrive["FileSystem"] + "(" + this.diskDrive["Caption"] + ")",
@@ -405,7 +419,7 @@ export class HardwareComponent implements OnInit {
     this.printOS = [
       ["Name", this.operatingSystems["Caption"] || "N/A"],
       ["Version", this.operatingSystems["Version"] || "N/A"],
-      ["Service Pack", "N/A"],
+      ["Service Pack", this.operatingSystems["Version"] || "N/A"],
     ];
   }
 

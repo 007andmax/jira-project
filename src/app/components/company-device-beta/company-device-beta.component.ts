@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { AgentService } from "src/app/services/agent/agent.service";
 import { CompaniesStateService } from "src/app/states/company/companies-state.service";
@@ -27,7 +27,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
     private leftPanelStateService: LeftPanelStateService,
     private agentService: AgentService,
     private companiesStateService: CompaniesStateService,
-    private kafkaStateService: KafkaStateService,    
+    private kafkaStateService: KafkaStateService,
     private activateRoute: ActivatedRoute,
   ) { }
 
@@ -82,7 +82,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
         this.AssetList.forEach((element, index) => {
           this.AssetList[index].Title =
             element.Title != "" ? element.Title : element.Name;
-          this.OperatingSystem(element.ID, index);          
+          this.OperatingSystem(element.ID, index);
           this.GetCurrentConfig(element.ID);
         });
       });
@@ -118,7 +118,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
             let Time = this.kafkaMessage.IdleTime.split("Idle for");
             this.AssetList[index].IdelTime = Time[1] != "" ? Time[1] : "";
           }
-        });       
+        });
       }
     });
   }

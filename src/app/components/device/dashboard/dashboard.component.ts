@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { EventEmitter } from "@angular/core";
 import {
   UploadInput,
@@ -82,7 +82,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     public activateRoute: ActivatedRoute,
     public kafkaService: KafkaRealTimeService,
     public kafkaStateService: KafkaStateService,
-    public cd: ChangeDetectorRef,
   ) {
     this.options = { concurrency: 1, maxUploads: 10, maxFileSize: 1000000 };
     this.files = [];
@@ -104,8 +103,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         if (item != undefined) {
           this.kafkaMessage = JSON.parse(item.value);
           this.securityUpdate = this.kafkaMessage.PendingWindowsUpdates.length;
-        }       
-        this.cd.detectChanges();        
+        }
       }
     });
 

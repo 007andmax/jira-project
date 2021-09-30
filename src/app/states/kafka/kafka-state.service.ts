@@ -24,6 +24,18 @@ export class KafkaStateService {
         }
         this.assetConfigMessage.push({key:newChange.data.assetID,value:newChange.data.value});
       }
+      if(newChange.data.messageType =="RunPowerShellCommand")
+      {
+        if(this.assetConfigMessage.length > 0)
+        {
+          let index = this.assetConfigMessage.findIndex(x=>x.key=newChange.data.assetID);
+          if(index !=-1)
+          {
+            this.assetConfigMessage.splice(index,1);
+          }
+        }
+        this.assetConfigMessage.push({key:newChange.data.assetID,value:newChange.data.value});
+      }
       this.onCurrentConfig.emit(this.assetConfigMessage);
     });
 

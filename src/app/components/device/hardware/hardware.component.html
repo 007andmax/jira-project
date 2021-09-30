@@ -115,10 +115,6 @@
                                         <span>Clock Speed:</span>
                                         {{ processor.MaxClockSpeed }} MHz
                                     </li>
-                                    <li>
-                                        <span>Socket & Cache(s):</span>
-                                        N/A
-                                    </li>
                                 </ul>
                             </div>
                             <div class="hardware-col">
@@ -140,10 +136,6 @@
                                         <span>Model:</span>
                                         {{ mouse.Caption }}
                                     </li>
-                                    <li>
-                                        <span>Connection:</span>
-                                        N/A
-                                    </li>
                                 </ul>
                             </div>
                             <div class="hardware-col">
@@ -164,6 +156,9 @@
                                     <li *ngIf="physicalmemory.Capacity == undefined">
                                         <span>Size:</span>
                                         N/A
+                                    </li>
+                                    <li *ngFor="let memory of differentMemory">
+                                        {{memory}}
                                     </li>
                                 </ul>
                             </div>
@@ -192,6 +187,7 @@
                                     </li>
                                     <li>
                                         <span>DHCP:</span>
+                                        {{ networkAdapter.DHCPEnabled }}
                                     </li>
                                 </ul>
                             </div>
@@ -276,6 +272,7 @@
                                 <ul class="list-unstyled">
                                     <li>
                                         <span>Model:</span>
+                                        {{diskDrive.Model || "N/A"}}
                                     </li>
                                     <li>
                                         <span>File Format(s):</span>
@@ -370,6 +367,7 @@
                                     </li>
                                     <li>
                                         <span>Service Pack:</span>
+                                        {{ operatingSystems.Version || "N/A" }}
                                     </li>
                                 </ul>
                             </div>
