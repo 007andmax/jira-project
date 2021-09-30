@@ -151,6 +151,11 @@
             </div>
         </div> -->
                 <div
+                    class="icon__close-white qt-sz-20 qt-bg-contain closed-search"
+                    *ngIf="toggleSearch"
+                    (click)="toggleSearch = false"
+                ></div>
+                <div
                     class="qt-page-list__search qt-ml-8 search-container"
                     [ngClass]="{'--open':toggleSearch}"
                 >
@@ -169,7 +174,8 @@
                 </div>
                 <button
                     class="qt-btn btn-filter qt-ml-8 d-f"
-                    [ngClass]="{'active':toggleFilter}"
+                    [ngClass]="{'active':toggleFilter,
+                 'is-exist-filters':isExistFilters()}"
                     (click)="onToggleFilter(true)"
                 >
                     <span
@@ -194,6 +200,7 @@
         </div>
     </div>
     <app-passwoord-manager-filters
+        #filters
         [hidden]="!toggleFilter"
         [disabledCompany]="disabledCompany"
         (onChangeCountFilter)="onChangeCountFilter($event)"
@@ -247,4 +254,45 @@
             </div>
         </div>
     </div>
+</div>
+<div
+    class="list-filters"
+    *ngIf="filter.selectedCompany || 
+    filter.selectedDate ||
+    filter.selectedUserOrDevice ||
+    filter.selectedCategory"
+>
+    <mat-form-field>
+        <mat-chip-list aria-label="Fruit selection">
+            <mat-chip
+                *ngIf="filter.selectedCompany"
+                (removed)="filters.companiesSelect.clearClient();refreshFilters()"
+            >
+                {{filter.selectedCompany.name}}
+                <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+            <mat-chip
+                *ngIf="filter.selectedDate"
+                (removed)="filters.dateSelect.clearClient();refreshFilters()"
+            >
+                {{filter.selectedDate.title}}
+                <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+            <mat-chip
+                *ngIf="filter.selectedUserOrDevice"
+                (removed)="filters.deviceUserSelect.clearClient();refreshFilters()"
+            >
+                {{filter.selectedUserOrDevice.name}}
+                <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+            <mat-chip
+                *ngIf="filter.selectedCategory"
+                (removed)="filters.categoriesSelect.clearClient();refreshFilters()"
+                class="status"
+            >
+                {{filter.selectedCategory.name}}
+                <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+        </mat-chip-list>
+    </mat-form-field>
 </div>
