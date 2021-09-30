@@ -67,7 +67,23 @@
         >
             <div
                 (click)="onSelect(item)"
+                *ngIf="!isIOSDevice()"
                 ngbDropdownItem
+            >
+                <i
+                    class="icon__user-grey qt-sz-16 qt-bg-contain"
+                    *ngIf="item.type === 'USER'"
+                ></i>
+                <i
+                    class="icon__devices-grey qt-sz-16 qt-bg-contain"
+                    *ngIf="item.type === 'DEVICE'"
+                ></i>
+                <span [textContent]="item.name"></span>
+            </div>
+            <div
+                (touchstart)="onSelect(item)"
+                ngbDropdownItem
+                *ngIf="isIOSDevice()"
             >
                 <i
                     class="icon__user-grey qt-sz-16 qt-bg-contain"

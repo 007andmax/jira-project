@@ -1306,7 +1306,6 @@ app-quotes-item {
         }
       }
       &.qt-modal__body-content {
-
         input {
           background-color: $gray-200;
           padding-left: 34px;
@@ -1318,10 +1317,10 @@ app-quotes-item {
 
         &::after {
           position: absolute;
-          content: '';
+          content: "";
           width: 16px;
           height: 16px;
-          background: url('/html/assets/img/icons/search.png');
+          background: url("/html/assets/img/icons/search.png");
           left: 26px;
           top: calc(50% - 8px);
           background-size: contain;
@@ -2331,14 +2330,14 @@ app-quotes-item {
 }
 .add-category-aside-add-record {
   @media (max-width: 767px) {
-  position: fixed;
-  background: rgba(16, 24, 39, 0.4);
-  transition: opacity 0.15s linear;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: 1;
+    position: fixed;
+    background: rgba(16, 24, 39, 0.4);
+    transition: opacity 0.15s linear;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 2;
   }
 }
 .page-list-ticket .qt-aside-modern__footer,
@@ -3919,14 +3918,14 @@ app-ticket-edit-aside {
   }
 
   .qt-aside-modern__header-close {
-   @media (max-width: 767px) {
-     position: absolute;
-     background-image: url('/assets/img/icons/close-white.svg');
-     top: 50%;
-     left: 26px;
-     padding: 0;
-     transform: translate(-50%, -50%);
-   }
+    @media (max-width: 767px) {
+      position: absolute;
+      background-image: url("/assets/img/icons/close-white.svg");
+      top: 50%;
+      left: 26px;
+      padding: 0;
+      transform: translate(-50%, -50%);
+    }
   }
 
   .qt-inputs-row {
