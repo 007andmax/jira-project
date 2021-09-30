@@ -44,7 +44,6 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
     this.title = `${(this.selectedListType) ? this.selectedListType.title : ''} (${this.count})`;
     let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
       this.ticketsFilter.setFilter(data);
-      console.log("this.ticketsFilter", this.ticketsFilter);
       this.selectedListType = this.titleListTypes.find(item => item.type === data.listType);
       if (this.selectedListType) this.title = `${this.selectedListType.title} (${this.count})`
     })

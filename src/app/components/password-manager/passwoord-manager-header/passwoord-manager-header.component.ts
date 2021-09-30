@@ -50,7 +50,6 @@ export class PasswoordManagerHeaderComponent implements OnInit, OnDestroy {
   ngOnInit() {
     let geLefttFilter = this.passwordManagerStateService.getOnFilter().subscribe((data) => {
       this.filter.setFilter(data);
-      console.log("this.filter", this.filter);
     })
     this.sub.add(geLefttFilter);
   }

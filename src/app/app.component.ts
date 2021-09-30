@@ -170,7 +170,6 @@ export class AppComponent implements OnInit {
     })
     this.leftPanelStateService.onChangeState.subscribe(data => {
       this.state = data;
-      console.log("this.statre", this.state);
     })
   }
   ngDoCheck() {
