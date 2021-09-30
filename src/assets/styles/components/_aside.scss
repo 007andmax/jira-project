@@ -1,4 +1,4 @@
-@import './src/assets/styles/variable';
+@import "./src/assets/styles/variable";
 
 .qt-aside-modern {
   color: $gray-800;
@@ -16,8 +16,8 @@
     width: 100%;
     top: 0;
     height: 100%;
-    padding-bottom: 128px;
     border: none;
+    padding-bottom: 128px;
   }
 
   &.password-edit-aside {
@@ -45,7 +45,7 @@
         position: absolute;
         left: 16px;
         background-size: 20px;
-        background-image: url('/assets/img/icons/close-white.svg');
+        background-image: url("/assets/img/icons/close-white.svg");
       }
     }
 
@@ -55,7 +55,7 @@
         width: 16px;
         height: 16px;
         margin-right: 0;
-        background-image: url('/assets/img/icons/remove-red.svg');
+        background-image: url("/assets/img/icons/remove-red.svg");
         background-color: transparent;
         border: none;
       }
@@ -238,6 +238,7 @@
     @media (max-width: 767px) {
       height: 100%;
       padding: 16px;
+      height: 100%;
     }
 
     &.--no-footer {
@@ -266,6 +267,7 @@
       width: 100%;
       background: $white;
       padding: 16px;
+      z-index: 1;
     }
 
     > div {
@@ -289,12 +291,10 @@
   }
 }
 
-
 .qt-aside {
   .ng-sidebar {
     width: 592px;
     height: calc(100vh - #{$header-height});
-
   }
 
   &__header {
@@ -345,4 +345,3 @@
     display: flex;
   }
 }
-

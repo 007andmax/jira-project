@@ -45,6 +45,7 @@
         (onSelectedItem)="onSelectStatus($event)"
     ></app-select-search>
     <app-tickets-filter-tags
+        #tagsDp
         [placement]="appService.checkMobile() ? 'top-left' : 'bottom-left'"
         (tagsChange)="onChangeTags($event)"
     ></app-tickets-filter-tags>
