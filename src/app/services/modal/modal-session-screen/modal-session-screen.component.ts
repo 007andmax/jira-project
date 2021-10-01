@@ -22,7 +22,7 @@ export class ModalSessionScreenComponent implements OnInit {
     this.show = true;
   }
   public logOut() {
-    window.location.href = '/signIn';
+    window.location.href = '/logout';
     window.location.hash = '';
   }
 
