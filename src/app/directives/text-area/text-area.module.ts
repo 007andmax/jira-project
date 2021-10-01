@@ -11,7 +11,6 @@ import { TextAreaDirective } from './text-area.directive';
     ],
     imports: [
         CommonModule,
-
         FormsModule,
         NgbModule,
     ],

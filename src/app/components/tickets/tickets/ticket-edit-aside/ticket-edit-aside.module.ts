@@ -51,6 +51,7 @@ import { TicketProfileUpdatesServiceInfoComponent } from './ticket-profile-updat
 import { TicketProfileUpdatesServiceEditComponent } from './ticket-profile-updates/ticket-profile-updates-service/ticket-profile-updates-service-edit/ticket-profile-updates-service-edit.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { TehUsersModule } from 'src/app/components/shared/teh-users/teh-users.module';
+import { UploadAreaProgressModule } from 'src/app/components/shared/upload-area/upload-area-progress/upload-area-progress.module';
 
 
 @NgModule({
@@ -69,7 +70,6 @@ import { TehUsersModule } from 'src/app/components/shared/teh-users/teh-users.mo
         TicketProfileUpdatesNoteComponent,
         TicketProfileUpdatesProductComponent,
         TicketProfileUpdatesServiceComponent,
-        UploadAreaProgressComponent,
         TicketProfileFormUpdateProductsComponent,
         TicketProfileFormUpdateServicesComponent,
         TicketProfileFormUpdateSupportComponent,
@@ -112,10 +112,10 @@ import { TehUsersModule } from 'src/app/components/shared/teh-users/teh-users.mo
         PreparePhoneModule,
         PhoneModule,
         InfiniteScrollModule,
-        TehUsersModule
+        TehUsersModule,
+        UploadAreaProgressModule
 
     ],
-    exports: [TicketEditAsideComponent, ClickOtsideDirective,
-        UploadAreaProgressComponent]
+    exports: [TicketEditAsideComponent, ClickOtsideDirective,]
 })
 export class TicketEditAsideModule { }

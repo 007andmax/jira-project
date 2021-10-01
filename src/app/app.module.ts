@@ -87,7 +87,6 @@ import { ReportsComponent } from './components/reports/reports.component';
 import { ItemReportComponent } from './components/reports/item-report/item-report.component';
 import { OverviewReportComponent } from './components/reports/overview-report/overview-report.component';
 import { ReportMenuComponent } from './components/reports/report-menu/report-menu.component';
-import { SelectComponent } from './components/shared/select/select.component';
 import { ReportAdditionalActionsComponent } from './components/reports/report-additional-actions/report-additional-actions.component';
 import { ReportSendEmailComponent } from './components/reports/report-additional-actions/report-send-email/report-send-email.component';
 import { CompanyUserComponent } from './components/company-user/company-user.component';
@@ -155,7 +154,6 @@ import { ProductComponent } from './components/setting/commission/product/produc
 import { ContractComponent } from './components/setting/commission/contract/contract.component';
 import { ServiceComponent } from './components/setting/commission/service/service.component';
 // import { AngularEditorModule } from '@kolkov/angular-editor';
-import { AutocompleteComponent } from './shared/autocomplete/autocomplete.component';
 
 import { OrderByPipe } from './pipe/order-by.pipe';
 import { TaxesComponent } from './components/shared/taxes/taxes.component';
@@ -511,6 +509,12 @@ import { ToFixedModule } from './pipe/to-fixed/to-fixed.module';
 import { TicketTaskModule } from './components/device/ticket-task/ticket-task.module';
 import { TicketEditAsideModule } from './components/tickets/tickets/ticket-edit-aside/ticket-edit-aside.module';
 import { LeftPanelModule } from './components/left-panel/left-panel.module';
+import { CompanyAddAsideModule } from './components/companies/company-add-aside/company-add-aside.module';
+import { DraftEmailModule } from './components/shared/draft-email/draft-email.module';
+import { DraftEmailUserRecipientsModule } from './components/shared/draft-email/draft-email-user-recipients/draft-email-user-recipients.module';
+import { UsersAsideModule } from './components/users/users-aside/users-aside.module';
+import { UsersAsideEditModule } from './components/users/users-aside-edit/users-aside-edit.module';
+import { TicketAddAsideModule } from './components/tickets/tickets/ticket-add-aside/ticket-add-aside.module';
 
 
 declare var $: any;
@@ -564,7 +568,7 @@ declare var $: any;
     // LeftPanelCompaniesComponent,
     //  CompaniesHeaderComponent,
     // CompaniesTableComponent,
-    CompanyAddAsideComponent,
+    // CompanyAddAsideComponent,
     ConfirmComponent,
     DownloadAgentComponent,
     // CompanySubscriptionComponent,
@@ -578,8 +582,8 @@ declare var $: any;
     // CompanyDashRevenueComponent,
     //  CompanyDashInvoiceComponent,
     // CompanyDashContractComponent,
-    DraftEmailComponent,
-    DraftEmailRecipientsComponent,
+    // DraftEmailComponent,
+    // DraftEmailRecipientsComponent,
     //  SelectSearchComponent,
     //  CompanyPasswordManagerComponent,
     // FilterPipe,
@@ -588,12 +592,12 @@ declare var $: any;
     //   UsersComponent,
     //  UsersHeaderComponent,
     // UsersTableComponent,
-    UsersAsideComponent,
+    // UsersAsideComponent,
     //  LeftPanelUsersComponent,
     //  UserTableSubscriptionComponent,
-    UsersAsideEditComponent,
+    // UsersAsideEditComponent,
     ModalImageCropperComponent,
-    DraftEmailUserRecipientsComponent,
+    // DraftEmailUserRecipientsComponent,
     //  MyProfileComponent,
     //   SettingComponent,
     // CompanyProfileComponent,
@@ -622,22 +626,22 @@ declare var $: any;
     //   ProductComponent,
     //ContractComponent,
     //  ServiceComponent,
-    AutocompleteComponent,
+    //AutocompleteComponent,
 
     OrderByPipe,
     //  ReportsComponent,
     //  ItemReportComponent,
     // OverviewReportComponent,
     // ReportMenuComponent,
-    SelectComponent,
+    // SelectComponent,
     // ReportAdditionalActionsComponent,
     ReportSendEmailComponent,
     // CompanyUserComponent,
     //   TicketsComponent,
     // TicketsTableComponent,
     // TicketsHeaderComponent,
-    TicketAddAsideComponent,
-    UploadAreaComponent,
+    // TicketAddAsideComponent,
+    //UploadAreaComponent,
     //  TicketEditAsideComponent,
     TicketsPrioritiesComponent,
     // LeftPanelTicketsComponent,
@@ -913,8 +917,8 @@ declare var $: any;
     //  CompanyDocumentsComponent,
     //  CompanyDocumentsTableComponent,
     //  CompaniesFilterComponent,
-    CompanyAddAsideShortComponent,
-    CompanyAddAsideFullComponent,
+    // CompanyAddAsideShortComponent,
+    //CompanyAddAsideFullComponent,
     HomeComponent,
     // CompanyDashAssociateComponent,
     //  CompanyAssociateComponent,
@@ -1019,7 +1023,13 @@ declare var $: any;
     ToFixedModule,
     TicketTaskModule,
     TicketEditAsideModule,
-    LeftPanelModule
+    LeftPanelModule,
+    CompanyAddAsideModule,
+    DraftEmailModule,
+    DraftEmailUserRecipientsModule,
+    UsersAsideModule,
+    UsersAsideEditModule,
+    TicketAddAsideModule
   ],
   entryComponents: [
     ModalQuoteComponent,
