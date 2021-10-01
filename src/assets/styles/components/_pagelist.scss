@@ -11,6 +11,13 @@
     @media (max-width: 767px) {
       padding: 0;
     }
+    app-select-search {
+      .qt-dropdown .report-caret-icon {
+        @media (max-width: 767px) {
+          top: calc(50% + 2px) !important;
+        }
+      }
+    }
     .icon__menu-white {
       display: none;
 

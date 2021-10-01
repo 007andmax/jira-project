@@ -302,6 +302,34 @@ html {
     }
   }
 }
+app-ticket-add-aside {
+  .qt-dropdown {
+    .icn-remove-old {
+      @media (max-width: 767px) {
+        top: calc(50% - 15px) !important;
+        right: 0;
+      }
+    }
+    .app-drop-down__right-icon {
+      @media (max-width: 767px) {
+        right: 0;
+      }
+      .icn-remove-old {
+        @media (max-width: 767px) {
+          right: 12px;
+        }
+      }
+    }
+  }
+  app-select-search {
+    .qt-dropdown .icn-remove-old {
+      @media (max-width: 767px) {
+        right: 12px;
+      }
+    }
+  }
+
+}
 .mat-form-field {
   font-family: "Inter", sans-serif;
   @extend %body-m;
@@ -4280,7 +4308,8 @@ app-ticket-edit-aside-devices {
 }
 
 .qt-tooltip-error {
-  z-index: 200;
+  //z-index: 200; // TODO check error-tooltip
+  z-index: 1;
   border-radius: 3px;
   max-width: 250px;
   position: absolute;
@@ -4290,7 +4319,7 @@ app-ticket-edit-aside-devices {
   font-size: 12px;
   line-height: 1.33;
   top: calc(100% + 6px);
-  height: fit-content;
+  //height: fit-content;
   &:before {
     content: "";
     position: absolute;

@@ -43,6 +43,10 @@ app-drop-down {
     position: absolute;
     font-size: 11px;
     bottom: 35px;
+
+    @media (max-width: 767px) {
+      bottom: unset;
+    }
   }
 
 
