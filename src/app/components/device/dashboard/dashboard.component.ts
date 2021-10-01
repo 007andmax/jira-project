@@ -24,7 +24,6 @@ import { ActivatedRoute } from "@angular/router";
 import * as moment from "moment";
 import { KafkaRealTimeService } from "src/app/states/kafka/kafka-real-time.service";
 import { KafkaStateService } from "src/app/states/kafka/kafka-state.service";
-import { json } from "d3";
 
 @Component({
   selector: "app-dashboard",
@@ -81,7 +80,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private toastr: ToastrService,
     public activateRoute: ActivatedRoute,
     public kafkaService: KafkaRealTimeService,
-    public kafkaStateService: KafkaStateService,
+    public kafkaStateService: KafkaStateService
   ) {
     this.options = { concurrency: 1, maxUploads: 10, maxFileSize: 1000000 };
     this.files = [];
@@ -98,7 +97,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   setPreviewDataDevice() {
     this.kafkaStateService.onCurrentConfig.subscribe((resp) => {
       if (this.asset.ID != undefined && this.asset.ID != 0) {
-
         let item = resp.find((x) => x.key == this.asset.ID);
         if (item != undefined) {
           this.kafkaMessage = JSON.parse(item.value);
@@ -246,38 +244,35 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   getAssetDetail() {
-    this.agentService
-      .getAssetByGuid(this._id)
-      .subscribe((resp) => {
-        if (resp.length > 0) {
-
-          this.asset = resp[0];
-          this.asset.IsUpdated = true;
-          if (this.minDate(this.asset.WarrantyExpires)) {
-            this.asset.WarrantyExpires = "";
-          }
-
-          if (this.minDate(this.asset.InstallDate)) {
-            this.asset.InstallDate = "";
-          }
-
-          if (this.minDate(this.asset.DeploymentDate)) {
-            this.asset.DeploymentDate = "";
-          }
-
-          if (this.minDate(this.asset.LastRebootDate)) {
-            this.asset.LastRebootDate = "";
-          }
-
-          this.getlabel(this.asset.Title, this.asset.Domain, this.asset.Name);
-          this.getOprationSystemDetail();
-          this.getVirusProtection(resp[0].VirusProtectionProducts);
-          this.getDiskDriveDetail();
-          this.getAssetTagDropDownDetail();
-          this.getAssetNotesDetail();
-          this.agentService.GetCurrentConfig(this.asset.ID);
+    this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
+      if (resp.length > 0) {
+        this.asset = resp[0];
+        this.asset.IsUpdated = true;
+        if (this.minDate(this.asset.WarrantyExpires)) {
+          this.asset.WarrantyExpires = "";
         }
-      });
+
+        if (this.minDate(this.asset.InstallDate)) {
+          this.asset.InstallDate = "";
+        }
+
+        if (this.minDate(this.asset.DeploymentDate)) {
+          this.asset.DeploymentDate = "";
+        }
+
+        if (this.minDate(this.asset.LastRebootDate)) {
+          this.asset.LastRebootDate = "";
+        }
+
+        this.getlabel(this.asset.Title, this.asset.Domain, this.asset.Name);
+        this.getOprationSystemDetail();
+        this.getVirusProtection(resp[0].VirusProtectionProducts);
+        this.getDiskDriveDetail();
+        this.getAssetTagDropDownDetail();
+        this.getAssetNotesDetail();
+        this.agentService.GetCurrentConfig(this.asset.ID);
+      }
+    });
   }
 
   getAssetNotesDetail() {
@@ -378,8 +373,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
           return a["Caption"].toLowerCase() > b["Caption"].toLowerCase()
             ? 1
             : b["Caption"].toLowerCase() > a["Caption"].toLowerCase()
-              ? -1
-              : 0;
+            ? -1
+            : 0;
         } else if (a["Caption"]) {
           return 1;
         } else if (b["Caption"]) {
@@ -390,7 +385,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     });
   }
 
-  onDateChange(newDate: Date) { }
+  onDateChange(newDate: Date) {}
 
   updateAsset() {
     this.getlabel(this.asset.Title, this.asset.Domain, this.asset.Name);
@@ -484,18 +479,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
         percent > 80
           ? "red"
           : percent > 75 && percent < 80
-            ? "yellow"
-            : IsSystem == true
-              ? color
-              : "",
+          ? "yellow"
+          : IsSystem == true
+          ? color
+          : "",
       "background-color":
         percent > 80
           ? "red"
           : percent > 75 && percent < 80
-            ? "yellow"
-            : IsSystem == true
-              ? color
-              : "",
+          ? "yellow"
+          : IsSystem == true
+          ? color
+          : "",
     };
   }
 
@@ -505,10 +500,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
         percent > 80
           ? "red"
           : percent > 75 && percent < 80
-            ? "yellow"
-            : IsSystem == true
-              ? color
-              : "",
+          ? "yellow"
+          : IsSystem == true
+          ? color
+          : "",
     };
   }
 

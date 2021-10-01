@@ -28,8 +28,8 @@ export class CompanyDeviceBetaComponent implements OnInit {
     private agentService: AgentService,
     private companiesStateService: CompaniesStateService,
     private kafkaStateService: KafkaStateService,
-    private activateRoute: ActivatedRoute,
-  ) { }
+    private activateRoute: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.companyId = this.activateRoute.snapshot.params["id"];
@@ -75,17 +75,15 @@ export class CompanyDeviceBetaComponent implements OnInit {
   }
 
   AssetDetail() {
-    this.agentService
-      .getAssetsByCompanyId(this.companyId)
-      .subscribe((resp) => {
-        this.AssetList = resp;
-        this.AssetList.forEach((element, index) => {
-          this.AssetList[index].Title =
-            element.Title != "" ? element.Title : element.Name;
-          this.OperatingSystem(element.ID, index);
-          this.GetCurrentConfig(element.ID);
-        });
+    this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {
+      this.AssetList = resp;
+      this.AssetList.forEach((element, index) => {
+        this.AssetList[index].Title =
+          element.Title != "" ? element.Title : element.Name;
+        this.OperatingSystem(element.ID, index);
+        this.GetCurrentConfig(element.ID);
       });
+    });
     this.showPreloader = false;
   }
 
@@ -115,8 +113,10 @@ export class CompanyDeviceBetaComponent implements OnInit {
             this.kafkaMessage = JSON.parse(item.value);
             this.AssetList[index].CurrentUser =
               this.kafkaMessage.CurrentLoggedInUser;
-            let Time = this.kafkaMessage.IdleTime.split("Idle for");
-            this.AssetList[index].IdelTime = Time[1] != "" ? Time[1] : "";
+            if (this.kafkaMessage.IdleTime != null) {
+              let Time = this.kafkaMessage.IdleTime.split("Idle for");
+              this.AssetList[index].IdelTime = Time[1] != "" ? Time[1] : "";
+            }
           }
         });
       }

@@ -17,6 +17,8 @@
             </form>
         </div>
 
+
+
         <div class="qt-page-list__header-thead-container">
             <table class="qt-table-modern qt-page-list__header-thead">
                 <thead>
@@ -55,6 +57,8 @@
             </table>
         </div>
     </div>
+
+
 
     <div class="qt-df qt-fd-c qt-jc-sb">
         <div class="qt-page-list__body">
@@ -101,7 +105,10 @@
                                         class="logged-name qt-ff-gm"
                                         [textContent]="asset.CurrentUser || ''"
                                     ></span>
-                                    <span class="logged-time" *ngIf="asset.IdelTime">
+                                    <span
+                                        class="logged-time"
+                                        *ngIf="asset.IdelTime"
+                                    >
                                         Idle:
                                         <span>{{asset.IdelTime}}</span>
                                     </span>

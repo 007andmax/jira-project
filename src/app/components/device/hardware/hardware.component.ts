@@ -53,7 +53,7 @@ export class HardwareComponent implements OnInit {
   Memory: any[] = [];
   differentMemory: any[] = [];
   graphicscardDriver: any[] = [];
-  TempararyGraphicsDriver: any[] = [];
+  TemporaryGraphicsDriver: any[] = [];
 
   constructor(
     private toastr: ToastrService,
@@ -121,15 +121,18 @@ export class HardwareComponent implements OnInit {
       if (resp.length > 0) {
         this.graphicsCard = resp[0];
         let driver = this.graphicsCard.InstalledDisplayDrivers.split(",");
-        if(driver.length>0)
-        {
+        if (driver.length > 0) {
           this.graphicscardDriver = driver;
-          this.graphicscardDriver.forEach((element)=>{
-            let rock = element.split('\\');
-            let pieces = rock[rock.length-1];
-            this.TempararyGraphicsDriver.push(pieces);
-          })
-          this.graphicsCard.InstalledDisplayDrivers = this.TempararyGraphicsDriver + " " + "version " + this.graphicsCard.DriverVersion ;
+          this.graphicscardDriver.forEach((element) => {
+            let rock = element.split("\\");
+            let pieces = rock[rock.length - 1];
+            this.TemporaryGraphicsDriver.push(pieces);
+          });
+          this.graphicsCard.InstalledDisplayDrivers =
+            this.TemporaryGraphicsDriver +
+            " " +
+            "version " +
+            this.graphicsCard.DriverVersion;
         }
         if (this.graphicsCard.VideoModeDescription != "") {
           let screenresolution =
@@ -217,7 +220,6 @@ export class HardwareComponent implements OnInit {
 
   memoryList(Asset_ID) {
     this.agentService.getPhysicalMemory(Asset_ID).subscribe((resp) => {
-      debugger;
       if (resp.length > 0) {
         this.physicalmemory = resp[0];
         this.Memory = resp;
@@ -225,13 +227,20 @@ export class HardwareComponent implements OnInit {
           this.memory += element.Capacity;
           if (element.DeviceLocator != "") {
             this.differentMemory.push(
-              element.DeviceLocator+":"+' '+ + element.Capacity / 1024 / 1024 +' '+"MB RAM"
+              element.DeviceLocator +
+                ":" +
+                " " +
+                +element.Capacity / 1024 / 1024 +
+                " " +
+                "MB RAM"
             );
           }
         });
         this.physicalmemory.Capacity = this.memory;
         let different = this.differentMemory;
-        this.physicalmemory.DeviceLocator = different.toString().replace(/,/g, " ");
+        this.physicalmemory.DeviceLocator = different
+          .toString()
+          .replace(/,/g, " ");
         this.printcsv();
       }
     });
@@ -336,7 +345,12 @@ export class HardwareComponent implements OnInit {
           ? this.physicalmemory["Capacity"] / 1024 / 1024 + " MB RAM"
           : "N/A",
       ],
-      [ "",this.physicalmemory["DeviceLocator"]!=undefined? this.physicalmemory["DeviceLocator"]:""],
+      [
+        "",
+        this.physicalmemory["DeviceLocator"] != undefined
+          ? this.physicalmemory["DeviceLocator"]
+          : "",
+      ],
     ];
 
     this.printNetwork = [

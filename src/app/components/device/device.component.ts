@@ -10,7 +10,6 @@ import { first } from "rxjs/operators";
 import { v4 as uuidv4 } from "uuid";
 import { ShellStateService } from "src/app/states/shell/shell-state.service";
 import { UsersStateService } from "src/app/states/users/users-state.service";
-import { TerminalService } from "./_services/terminal.service";
 import { AgentService } from "src/app/services/agent/agent.service";
 import { KafkaRealTimeService } from "src/app/states/kafka/kafka-real-time.service";
 import { KafkaStateService } from "src/app/states/kafka/kafka-state.service";
@@ -43,6 +42,8 @@ export class DeviceComponent implements OnInit, OnDestroy {
   UpTime: any = "";
   asset: any = undefined;
   powershellmsg: string = "";
+  TemporaryCommand: string = "";
+
   constructor(
     private modalService: NgbModal,
     private commonHttpServices: CommonHttpServices,
@@ -56,7 +57,6 @@ export class DeviceComponent implements OnInit, OnDestroy {
     private agentService: AgentService,
     public kakfaService: KafkaRealTimeService,
     private kafkaStateService: KafkaStateService,
-    private activateRoute: ActivatedRoute
   ) {}
 
   openModal(template) {
@@ -107,6 +107,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
     if (this.deviceType === "printer") {
       this.deviceImg = "/html/assets/img/device/Device_printer.svg";
     }
+    this.powerShellCommand();
     this.setPreviewDataDevice();
 
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
@@ -141,8 +142,11 @@ export class DeviceComponent implements OnInit, OnDestroy {
         let item = resp.find((x) => x.key == asset_ID);
         if (item != undefined) {
           this.kafkaMessage = JSON.parse(item.value);
-          let Time = this.kafkaMessage.IdleTime.split("Idle for");
-          this.UpTime = Time[1] != "" ? Time[1] : "";
+          if(this.kafkaMessage.IdleTime !=null)
+          {
+            let Time = this.kafkaMessage.IdleTime.split("Idle for");
+            this.UpTime = Time[1] != "" ? Time[1] : "";
+          }
         }
         this.deviceDetail = {};
         this.deviceDetail.online = true;
@@ -321,56 +325,60 @@ export class DeviceComponent implements OnInit, OnDestroy {
     }, 1000);
   }
 
-  sendCommand(command, template) {
+  powerShellCommand() {
+    this.kafkaStateService.OnPowerShellCommand.subscribe((resp) => {});
+  }
+
+  sendCommand(command, template, asset_ID) {
     let data: any = {};
+    this.kafkaStateService.OnPowerShellCommand.subscribe((resp) => {
+      if (asset_ID != undefined && asset_ID != 0) {
+        let item = resp.find((x) => x.key == asset_ID);
+        if (item != undefined) {
+          this.kafkaMessage = item.value;
+          this.powershellmsg = this.kafkaMessage;
+          if (item.value.startsWith("Failed")) {
+            this.modalService.open(template, { windowClass: "modal-md" });
+          }
+        }
+      }
+    });
+
     if (command === "r") {
-      data.AssetID = 13;
+      this.TemporaryCommand = command;
+      data.AssetID = asset_ID;
       data.MessageType = "RunPowerShellCommand";
       data.Value = "Restart-Computer";
-      this.agentService.SendPowerShellCommand(data).subscribe(
-        (resp) => {},
-        (error) => {
-          this.kafkaStateService.onCurrentConfig.subscribe((resp) => {
-            if (data.asset_ID != undefined && data.asset_ID != 0) {
-              let item = resp.find((x) => x.key == data.asset_ID);
-              if (item != undefined) {
-                this.kafkaMessage = JSON.parse(item.value);
-                this.powershellmsg = this.kafkaMessage;
-              }
-            }
-          });
-          this.modalService.open(template, { windowClass: "modal-md" });
-        }
-      );
+      this.agentService.SendPowerShellCommand(data).subscribe((resp) => {});
     }
     if (command === "s") {
-      data.AssetID = 13;
+      this.TemporaryCommand = command;
+      data.AssetID = asset_ID;
       data.MessageType = "RunPowerShellCommand";
       data.value = "Stop-Computer";
-      this.agentService.SendPowerShellCommand(data).subscribe(
-        (resp) => {},
-        (error) => {
-          this.kafkaStateService.onCurrentConfig.subscribe((resp) => {
-            if (data.asset_ID != undefined && data.asset_ID != 0) {
-              let item = resp.find((x) => x.key == data.asset_ID);
-              if (item != undefined) {
-                this.kafkaMessage = JSON.parse(item.value);
-                this.powershellmsg = this.kafkaMessage;
-              }
-            }
-          });
-          this.modalService.open(template, { windowClass: "modal-md" });
-        }
-      );
+      this.agentService.SendPowerShellCommand(data).subscribe((resp) => {});
     }
   }
 
-  Reboot() {
-    let data: any = {};
-    data.AssetID = 13;
-    data.MessageType = "RunPowerShellCommand";
-    data.Value = "Restart-Computer -force";
-    this.agentService.SendPowerShellCommand(data).subscribe((resp) => {});
+  Reboot(asset_ID, command) {
+    if (command == "r") {
+      let data: any = {};
+      data.AssetID = asset_ID;
+      data.MessageType = "RunPowerShellCommand";
+      data.Value = "Restart-Computer -force";
+      this.agentService.SendPowerShellCommand(data).subscribe((resp) => {
+        this.decline();
+      });
+    }
+    if (command == "s") {
+      let data: any = {};
+      data.AssetID = asset_ID;
+      data.MessageType = "RunPowerShellCommand";
+      data.Value = "Stop-Computer -force";
+      this.agentService.SendPowerShellCommand(data).subscribe((resp) => {
+        this.decline();
+      });
+    }
   }
 
   decline() {

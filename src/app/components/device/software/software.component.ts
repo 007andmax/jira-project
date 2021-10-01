@@ -1,10 +1,8 @@
 import { Component, OnInit, TemplateRef, OnDestroy } from "@angular/core";
 import { DatePipe } from "@angular/common";
 import { ToastrService } from "ngx-toastr";
-import { DeviceDetailService } from "./../_services/device_detail.service";
 import { CommonHttpServices } from "./../_services/common_http.service";
 import { ExcelService } from "./../_services/download_csv.service";
-import { HardwareService } from "../_services/hardware.service";
 import { CONFIGCONSTANTS } from "../config/app-constants";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Subject } from "rxjs";
@@ -39,6 +37,7 @@ export class SoftwareComponent implements OnInit, OnDestroy {
   deletesoftwareList: any[] = [];
   softwaretoggle: boolean = false;
   filter: SoftwareFilter = new SoftwareFilter();
+  asset: any = undefined;
 
   constructor(
     private toastr: ToastrService,
@@ -76,10 +75,12 @@ export class SoftwareComponent implements OnInit, OnDestroy {
       )
       .subscribe((data) => {
         this.agentService.setAccessToken(data.AccessToken);
-        this.getSoftwareDetail();
-        this.agentService
-          .getAssetsByCompanyId("fdadb2df-ed3d-4e28-b41e-741617b7ffa6")
-          .subscribe((res) => {});
+        this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
+          if (resp.length > 0) {
+            this.asset = resp[0];
+            this.getSoftwareDetail(this.asset.ID);
+          }
+        });
       });
   }
 
@@ -88,8 +89,8 @@ export class SoftwareComponent implements OnInit, OnDestroy {
     this.getPdfData();
   }
 
-  getSoftwareDetail() {
-    this.agentService.getSoftwareListByAssetId("1").subscribe((resp) => {
+  getSoftwareDetail(assetId) {
+    this.agentService.getSoftwareListByAssetId(assetId).subscribe((resp) => {
       this.softwareList = resp;
       this.getPdfData();
     });
