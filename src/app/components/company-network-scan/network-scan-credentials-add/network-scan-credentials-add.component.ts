@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PasswordManagerService } from 'src/app/services/password-manager/password-manager.service';
+import { PasswordRecordCategories } from '../../password-manager/class/password-record-categories';
 import { NetworkScanCredentialsAdd } from '../class/network-scan-credentials-add';
 
 @Component({
@@ -9,6 +10,7 @@ import { NetworkScanCredentialsAdd } from '../class/network-scan-credentials-add
 })
 export class NetworkScanCredentialsAddComponent implements OnInit {
   @Input() companyId: string;
+  @Input() categoryAgent: PasswordRecordCategories;
   networkScanCredentialsAdd: NetworkScanCredentialsAdd = new NetworkScanCredentialsAdd();
   constructor(private passwordManagerService: PasswordManagerService) { }
 
@@ -16,7 +18,7 @@ export class NetworkScanCredentialsAddComponent implements OnInit {
   }
   add() {
     if (!this.networkScanCredentialsAdd.isValidate()) return;
-    this.passwordManagerService.createRecord(this.networkScanCredentialsAdd.getDataForAdd(this.companyId)).subscribe(data => {
+    this.passwordManagerService.createRecord(this.networkScanCredentialsAdd.getDataForAdd(this.companyId, this.categoryAgent)).subscribe(data => {
     })
   }
   close() {

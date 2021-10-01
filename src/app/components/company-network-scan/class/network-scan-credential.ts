@@ -12,14 +12,14 @@ export class NetworkScanCredential {
     public setUserName(data) {
         this.username = data;
     }
-    public getDataForUpdate(companyId, username, password) {
+    public getDataForUpdate(companyId, username, password, categoryAgent) {
         return {
             companyId: companyId,
             description: "Agent Network Credentials",
             expiredDate: "",
             id: this.id,
             password: password,
-            template: "AGENT",
+            template: { "id": categoryAgent.id, "name": "AGENT", "default": true, "title": "Agent" },
             username: username,
         }
     }
