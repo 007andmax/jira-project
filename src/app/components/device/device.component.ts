@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 import { CommonHttpServices } from "./_services/common_http.service";
 import { RemoteControlService } from "./_services/remoteControl.service";
@@ -21,6 +21,9 @@ declare var $: any;
   styleUrls: ["./device.component.scss"],
 })
 export class DeviceComponent implements OnInit, OnDestroy {
+
+  @ViewChild('templatePowersell') template;
+
   title = "quck-device";
   totalSeconds: any = 0;
   totalMinutes: any = 0;
@@ -43,6 +46,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
   asset: any = undefined;
   powershellmsg: string = "";
   TemporaryCommand: string = "";
+  assetId : number;
 
   constructor(
     private modalService: NgbModal,
@@ -57,33 +61,9 @@ export class DeviceComponent implements OnInit, OnDestroy {
     private agentService: AgentService,
     public kakfaService: KafkaRealTimeService,
     private kafkaStateService: KafkaStateService,
-  ) {}
+    private cd: ChangeDetectorRef,
+  ) { }
 
-  openModal(template) {
-    if (this.deviceDetail.online === true) {
-      this.modalService
-        .open(template, { ariaLabelledBy: "modal-basic-title", centered: true })
-        .result.then(
-          (result) => {
-            this.closeResult = `Closed with: ${result}`;
-          },
-          (reason) => {
-            this.closeResult = `Dismissed ${this.getDismiss(reason)}`;
-          }
-        );
-    } else {
-      this.toastr.error("The device is offline!");
-    }
-  }
-  private getDismiss(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return "by pressing ESC";
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return "by clicking on a backdrop";
-    } else {
-      return `with: ${reason}`;
-    }
-  }
   lock() {
     // this.modalRef = this.modalService.show(
     //   LockScreenComponent,
@@ -92,13 +72,14 @@ export class DeviceComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.setPreviewDataDevice();
     this.type =
       window.location.href.split("/")[
-        window.location.href.split("/").length - 2
+      window.location.href.split("/").length - 2
       ];
     this._id =
       window.location.href.split("/")[
-        window.location.href.split("/").length - 1
+      window.location.href.split("/").length - 1
       ];
     this.usersStateService.onInit();
     this.shellStateService.onInit();
@@ -107,8 +88,11 @@ export class DeviceComponent implements OnInit, OnDestroy {
     if (this.deviceType === "printer") {
       this.deviceImg = "/html/assets/img/device/Device_printer.svg";
     }
-    this.powerShellCommand();
-    this.setPreviewDataDevice();
+    this.deviceDetail = {};
+    this.deviceDetail.id = this._id;
+    this.onGetCurrentConfig();
+    this.onPowerShellCommand();
+   
 
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
@@ -131,29 +115,34 @@ export class DeviceComponent implements OnInit, OnDestroy {
         this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
           this.deviceName = resp[0].Name;
           this.asset = resp[0];
-          this.getCurrentConfig(this.asset.ID);
         });
       });
   }
 
-  getCurrentConfig(asset_ID) {
+  onGetCurrentConfig() {
     this.kafkaStateService.onCurrentConfig.subscribe((resp) => {
-      if (asset_ID != undefined && asset_ID != 0) {
-        let item = resp.find((x) => x.key == asset_ID);
-        if (item != undefined) {
-          this.kafkaMessage = JSON.parse(item.value);
-          if(this.kafkaMessage.IdleTime !=null)
-          {
-            let Time = this.kafkaMessage.IdleTime.split("Idle for");
-            this.UpTime = Time[1] != "" ? Time[1] : "";
-          }
+      console.log('onCurrentConfig');
+      let item = resp.find((x) => x.key == this.asset.ID);
+      if (item != undefined) {
+        
+        this.kafkaMessage = JSON.parse(item.value);
+        if (this.kafkaMessage.IdleTime != null) {
+          let Time = this.kafkaMessage.IdleTime.split("Idle for");
+          this.UpTime = Time[1] != "" ? Time[1] : "";
+          this.cd.detectChanges();
         }
-        this.deviceDetail = {};
+        if(!this.deviceDetail) {
+          this.deviceDetail = {};
+          this.deviceDetail.id = this._id;
+        }
         this.deviceDetail.online = true;
-        this.deviceDetail.id = this._id;
       }
+
     });
   }
+
+
+
   getCurrentCompany() {
     this.commonHttpServices
       .getCurrentCompany()
@@ -195,11 +184,11 @@ export class DeviceComponent implements OnInit, OnDestroy {
     }
     $("#counter").text(
       this.padNumber(this.totalHours) +
-        " hr : " +
-        this.padNumber(this.totalMinutes) +
-        " min : " +
-        this.padNumber(this.totalSeconds) +
-        " sec"
+      " hr : " +
+      this.padNumber(this.totalMinutes) +
+      " min : " +
+      this.padNumber(this.totalSeconds) +
+      " sec"
     );
   }
   getDevicesByCompany() {
@@ -235,6 +224,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
         }
       );
   }
+
   getViewer() {
     this.loading = true;
     this.remoteControlService
@@ -244,9 +234,10 @@ export class DeviceComponent implements OnInit, OnDestroy {
         (resp) => {
           this.loading = false;
         },
-        (error) => {}
+        (error) => { }
       );
   }
+
   getConstant(sessionId) {
     this.remoteControlService
       .getConstant()
@@ -264,7 +255,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
             sessionId;
           window.open(url, "_self");
         },
-        (error) => {}
+        (error) => { }
       );
   }
   createConnection(type) {
@@ -325,38 +316,36 @@ export class DeviceComponent implements OnInit, OnDestroy {
     }, 1000);
   }
 
-  powerShellCommand() {
-    this.kafkaStateService.OnPowerShellCommand.subscribe((resp) => {});
-  }
-
-  sendCommand(command, template, asset_ID) {
-    let data: any = {};
+  onPowerShellCommand() {
     this.kafkaStateService.OnPowerShellCommand.subscribe((resp) => {
-      if (asset_ID != undefined && asset_ID != 0) {
-        let item = resp.find((x) => x.key == asset_ID);
-        if (item != undefined) {
-          this.kafkaMessage = item.value;
-          this.powershellmsg = this.kafkaMessage;
-          if (item.value.startsWith("Failed")) {
-            this.modalService.open(template, { windowClass: "modal-md" });
-          }
+      console.log('OnPowerShellCommand');
+      let item = resp.find((x) => x.key == this._id);
+      if (item != undefined) {
+        this.kafkaMessage = item.value;
+        this.powershellmsg = this.kafkaMessage;
+        if (item.value.startsWith("Failed")) {
+          this.modalService.open(this.template, { windowClass: "modal-md" });
         }
       }
-    });
 
+    });
+  }
+
+  sendCommand(command, template, assetId) {
+    let data: any = {};
     if (command === "r") {
       this.TemporaryCommand = command;
-      data.AssetID = asset_ID;
+      data.AssetID = assetId;
       data.MessageType = "RunPowerShellCommand";
       data.Value = "Restart-Computer";
-      this.agentService.SendPowerShellCommand(data).subscribe((resp) => {});
+      this.agentService.SendPowerShellCommand(data);
     }
     if (command === "s") {
       this.TemporaryCommand = command;
-      data.AssetID = asset_ID;
+      data.AssetID = assetId;
       data.MessageType = "RunPowerShellCommand";
       data.value = "Stop-Computer";
-      this.agentService.SendPowerShellCommand(data).subscribe((resp) => {});
+      this.agentService.SendPowerShellCommand(data);
     }
   }
 
@@ -378,6 +367,33 @@ export class DeviceComponent implements OnInit, OnDestroy {
       this.agentService.SendPowerShellCommand(data).subscribe((resp) => {
         this.decline();
       });
+    }
+  }
+
+
+  openModal(template) {
+    if (this.deviceDetail.online === true) {
+      this.modalService
+        .open(template, { ariaLabelledBy: "modal-basic-title", centered: true })
+        .result.then(
+          (result) => {
+            this.closeResult = `Closed with: ${result}`;
+          },
+          (reason) => {
+            this.closeResult = `Dismissed ${this.getDismiss(reason)}`;
+          }
+        );
+    } else {
+      this.toastr.error("The device is offline!");
+    }
+  }
+  private getDismiss(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return "by pressing ESC";
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return "by clicking on a backdrop";
+    } else {
+      return `with: ${reason}`;
     }
   }
 

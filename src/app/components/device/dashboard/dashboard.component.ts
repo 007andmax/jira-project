@@ -388,6 +388,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
   onDateChange(newDate: Date) {}
 
   updateAsset() {
+    debugger;
+    this.asset.InstallDate =this.asset.InstallDate || '0001-01-01';
+    this.asset.LastRebootDate =this.asset.LastRebootDate || '0001-01-01';
+    this.asset.DeploymentDate =this.asset.DeploymentDate || '0001-01-01';
+    this.asset.WarrantyExpires =this.asset.WarrantyExpires || '0001-01-01';
+        
     this.getlabel(this.asset.Title, this.asset.Domain, this.asset.Name);
     this.agentService.overrideAsset(this.asset).subscribe(
       (resp) => {
@@ -397,6 +403,22 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.toastr.error("Something went wrong please try again.");
       }
     );
+    if (this.minDate(this.asset.WarrantyExpires)) {
+      this.asset.WarrantyExpires = "";
+    }
+
+    if (this.minDate(this.asset.InstallDate)) {
+      this.asset.InstallDate = "";
+    }
+
+    if (this.minDate(this.asset.DeploymentDate)) {
+      this.asset.DeploymentDate = "";
+    }
+
+    if (this.minDate(this.asset.LastRebootDate)) {
+      this.asset.LastRebootDate = "";
+    }
+
   }
 
   updateSerialNo() {
