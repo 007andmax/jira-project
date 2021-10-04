@@ -10,7 +10,6 @@ import { DatePickerComponent } from './date-picker.component';
     ],
     imports: [
         CommonModule,
-
         FormsModule,
         NgbModule,
     ],

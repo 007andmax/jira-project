@@ -6,7 +6,6 @@ import { DELETE_COMPANY } from 'src/app/const/confirm';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
-import { AddCategoryProductComponent } from './add-category-product/add-category-product.component';
 
 @Component({
   selector: 'app-left-panel-inventory',
@@ -18,7 +17,6 @@ export class LeftPanelInventoryComponent implements OnInit {
   countOfCategories: number = 10;
   sortCategoty: CategoryProduct = null;
   @Input() activePage: string = "";
-  @ViewChild('addCategory') addCategory: AddCategoryProductComponent;
   @Output() onChangeState = new EventEmitter();
   @Output() onGoToLink = new EventEmitter();
 
@@ -48,9 +46,6 @@ export class LeftPanelInventoryComponent implements OnInit {
     });
     return count;
   };
-  resetAddCategory() {
-    this.addCategory.clearCategory();
-  }
   changeShowAllCategories() {
     if (this.countOfCategories === 10) {
       this.countOfCategories = this.inventoryCategoryList.length;

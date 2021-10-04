@@ -28,7 +28,9 @@ import { MyProfileRoutingModule } from './my-profile-routing.module';
         ReactiveFormsModule,
         NgxMaskModule,
         FormsModule,
-        AgmCoreModule,
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyAbP4DFpz4f9YcXMWUjdkOdyArX2peNt8s'
+        }),
         MyProfileRoutingModule
     ],
 

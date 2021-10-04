@@ -110,7 +110,7 @@ import { InventoryTableComponent } from './components/inventory/inventory-table/
 import { InventoryAddAsideComponent } from './components/inventory/inventory-add-aside/inventory-add-aside.component';
 import { InventoryEditAsideComponent } from './components/inventory/inventory-edit-aside/inventory-edit-aside.component';
 import { LeftPanelInventoryComponent } from './components/left-panel/left-panel-inventory/left-panel-inventory.component';
-import { AddCategoryProductComponent } from './components/left-panel/left-panel-inventory/add-category-product/add-category-product.component';
+//import { AddCategoryProductComponent } from './components/left-panel/left-panel-inventory/add-category-product/add-category-product.component';
 import { MyProfileComponent } from './components/setting/my-profile/my-profile.component';
 import { ManageTagsComponent } from './components/setting/manage-tags/manage-tags.component';
 import { CompanyProfileComponent } from './components/setting/company-profile/company-profile.component';
@@ -161,7 +161,7 @@ import { TicketsTableItemComponent } from './components/tickets/tickets/tickets-
 import { TicketEditAsideCompanyInfoComponent } from './components/tickets/tickets/ticket-edit-aside-company-info/ticket-edit-aside-company-info.component';
 import { TicketEditAsideDevicesComponent } from './components/tickets/tickets/ticket-edit-aside-devices/ticket-edit-aside-devices.component';
 import { TicketEditAsideUsersComponent } from './components/tickets/tickets/ticket-edit-aside-users/ticket-edit-aside-users.component';
-import { TicketsStatusComponent } from './components/left-panel/left-panel-tickets/tickets-status/tickets-status.component';
+//import { TicketsStatusComponent } from './components/left-panel/left-panel-tickets/tickets-status/tickets-status.component';
 import { UploadAreaProgressComponent } from './components/shared/upload-area/upload-area-progress/upload-area-progress.component';
 import { DndDirective } from './directives/dnd.directive';
 import { AddAssignedUserComponent } from './components/tickets/tickets/ticket-edit-aside/add-assigned-user/add-assigned-user.component';
@@ -218,7 +218,7 @@ import { InvoiceFormTicketEditProductComponent } from './components/billing/bill
 import { InvoiceFormTicketEditTaxesComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.component';
 import { InvoiceDiscountComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-discount/invoice-discount.component';
 import { ContractsComponent } from './components/billing/contracts/contracts.component';
-import { CreateContractsComponent } from './components/billing/contracts/create-contracts/create-contracts.component';
+//import { CreateContractsComponent } from './components/billing/contracts/create-contracts/create-contracts.component';
 import { ContractsHeaderComponent } from './components/billing/contracts/contracts-header/contracts-header.component';
 import { ContractsTableComponent } from './components/billing/contracts/contracts-table/contracts-table.component';
 import { ContractsAsideComponent } from './components/billing/contracts/contracts-aside/contracts-aside.component';
@@ -519,6 +519,9 @@ import { ModalImageCropperModule } from './services/modal/modal-image-cropper/mo
 import { InventoryAddAsideModule } from './components/inventory/inventory-add-aside/inventory-add-aside.module';
 import { TaxesModule } from './components/shared/taxes/taxes.module';
 import { InventoryEditAsideModule } from './components/inventory/inventory-edit-aside/inventory-edit-aside.module';
+import { InvoicesAsideModule } from './components/billing/invoices/invoices-aside/invoices-aside.module';
+import { MapModalModule } from './components/shared/map-modal/map-modal.module';
+//import { CreateContractsModule } from './components/billing/contracts/create-contracts/create-contracts.module';
 
 
 declare var $: any;
@@ -665,7 +668,7 @@ declare var $: any;
     //   TaxesSettingsComponent,
     //  InventoryEditAsideComponent,
     // LeftPanelInventoryComponent,
-    AddCategoryProductComponent,
+    //  AddCategoryProductComponent,
     // CompanyProductsComponent,
     //   TaxesComponent,
     // GlNumberSettingsComponent,
@@ -673,7 +676,7 @@ declare var $: any;
     //  TicketEditAsideCompanyInfoComponent,
     // TicketEditAsideDevicesComponent,
     //  TicketEditAsideUsersComponent,
-    TicketsStatusComponent,
+    // TicketsStatusComponent,
     //  UploadAreaProgressComponent,
     DndDirective,
     // AddAssignedUserComponent,
@@ -705,7 +708,7 @@ declare var $: any;
     //  TicketProfileUpdatesNoteInfoComponent,
     // TicketProfileUpdatesNoteEditComponent,
     ToFixedDirective,
-    MapModalComponent,
+    // MapModalComponent,
     //   CompanyInfoHistoryComponent,
     // TicketEditAsideRightPanelComponent,
     // CompanyTicketsComponent,
@@ -730,12 +733,12 @@ declare var $: any;
     //InvoiceFormTicketEditProductComponent,
     // InvoiceDiscountComponent,
     // ContractsComponent,
-    CreateContractsComponent,
+    // CreateContractsComponent,
     //  ContractsHeaderComponent,
     // ContractsTableComponent,
     // ContractsAsideComponent,
     //   InvoicesComponent,
-    InvoicesAsideComponent,
+    //  InvoicesAsideComponent,
     // InvoicesItemComponent,
     //  InvoicesHeaderComponent,
     // InvoicesFilterComponent,
@@ -949,9 +952,7 @@ declare var $: any;
     // ShowHidePasswordModule,
     AppRoutingModule,
     ImageCropperModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAbP4DFpz4f9YcXMWUjdkOdyArX2peNt8s'
-    }),
+
     ToastrModule.forRoot({
       closeButton: true,
       preventDuplicates: true,
@@ -1037,7 +1038,10 @@ declare var $: any;
     ModalImageCropperModule,
     InventoryAddAsideModule,
     TaxesModule,
-    InventoryEditAsideModule
+    InventoryEditAsideModule,
+    InvoicesAsideModule,
+    MapModalModule,
+    //  CreateContractsModule
   ],
   entryComponents: [
     ModalQuoteComponent,
