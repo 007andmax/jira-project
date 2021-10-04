@@ -96,7 +96,7 @@ import { TicketsHeaderComponent } from './components/tickets/tickets/tickets-hea
 import { TicketAddAsideComponent } from './components/tickets/tickets/ticket-add-aside/ticket-add-aside.component';
 import { UploadAreaComponent } from './components/shared/upload-area/upload-area.component';
 import { TicketEditAsideComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-edit-aside.component';
-import { TicketsPrioritiesComponent } from './components/tickets/tickets-priorities/tickets-priorities.component';
+//import { TicketsPrioritiesComponent } from './components/tickets/tickets-priorities/tickets-priorities.component';
 import { LeftPanelTicketsComponent } from './components/left-panel/left-panel-tickets/left-panel-tickets.component';
 import { GlNumberComponent } from './components/reports/reports/gl-number/gl-number.component';
 import { AccountsReceivableComponent } from './components/reports/reports/accounts-receivable/accounts-receivable.component';
@@ -515,6 +515,10 @@ import { DraftEmailUserRecipientsModule } from './components/shared/draft-email/
 import { UsersAsideModule } from './components/users/users-aside/users-aside.module';
 import { UsersAsideEditModule } from './components/users/users-aside-edit/users-aside-edit.module';
 import { TicketAddAsideModule } from './components/tickets/tickets/ticket-add-aside/ticket-add-aside.module';
+import { ModalImageCropperModule } from './services/modal/modal-image-cropper/modal-image-cropper.module';
+import { InventoryAddAsideModule } from './components/inventory/inventory-add-aside/inventory-add-aside.module';
+import { TaxesModule } from './components/shared/taxes/taxes.module';
+import { InventoryEditAsideModule } from './components/inventory/inventory-edit-aside/inventory-edit-aside.module';
 
 
 declare var $: any;
@@ -596,7 +600,7 @@ declare var $: any;
     //  LeftPanelUsersComponent,
     //  UserTableSubscriptionComponent,
     // UsersAsideEditComponent,
-    ModalImageCropperComponent,
+    // ModalImageCropperComponent,
     // DraftEmailUserRecipientsComponent,
     //  MyProfileComponent,
     //   SettingComponent,
@@ -643,7 +647,7 @@ declare var $: any;
     // TicketAddAsideComponent,
     //UploadAreaComponent,
     //  TicketEditAsideComponent,
-    TicketsPrioritiesComponent,
+    //TicketsPrioritiesComponent,
     // LeftPanelTicketsComponent,
     // GlNumberComponent,
     //  AccountsReceivableComponent,
@@ -657,13 +661,13 @@ declare var $: any;
     //ServiceReportComponent,
     // InventoryComponent,
     //  InventoryTableComponent,
-    InventoryAddAsideComponent,
+    //   InventoryAddAsideComponent,
     //   TaxesSettingsComponent,
-    InventoryEditAsideComponent,
+    //  InventoryEditAsideComponent,
     // LeftPanelInventoryComponent,
     AddCategoryProductComponent,
     // CompanyProductsComponent,
-    TaxesComponent,
+    //   TaxesComponent,
     // GlNumberSettingsComponent,
     //  TicketsTableItemComponent,
     //  TicketEditAsideCompanyInfoComponent,
@@ -706,7 +710,7 @@ declare var $: any;
     // TicketEditAsideRightPanelComponent,
     // CompanyTicketsComponent,
     // CompanyDashboardComponent,
-    InventoryAddBodyComponent,
+    // InventoryAddBodyComponent,
     //  ServicePipe,
     //LeftPanelSettingsComponent,
     //  BillableComponent,
@@ -1029,7 +1033,11 @@ declare var $: any;
     DraftEmailUserRecipientsModule,
     UsersAsideModule,
     UsersAsideEditModule,
-    TicketAddAsideModule
+    TicketAddAsideModule,
+    ModalImageCropperModule,
+    InventoryAddAsideModule,
+    TaxesModule,
+    InventoryEditAsideModule
   ],
   entryComponents: [
     ModalQuoteComponent,
