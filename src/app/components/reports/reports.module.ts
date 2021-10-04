@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReportsComponent } from './reports.component';
 import { ReportListItemComponent } from './report-list-item/report-list-item.component';
 import { ReportsRoutingModule } from './reports-routing.module';
+import { ToFixedModule } from 'src/app/directives/to-fixed/to-fixed.module';
 
 
 
@@ -12,7 +13,8 @@ import { ReportsRoutingModule } from './reports-routing.module';
     ],
     imports: [
         CommonModule,
-        ReportsRoutingModule
+        ReportsRoutingModule,
+        ToFixedModule
 
     ],
 

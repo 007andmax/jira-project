@@ -17,4 +17,4 @@ import { ToFixedPipe } from './to-fixed.pipe';
 
 
 })
-export class ToFixedModule { }
+export class ToFixedPipeModule { }

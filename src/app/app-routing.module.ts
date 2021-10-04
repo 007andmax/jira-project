@@ -58,7 +58,7 @@ import { DocumentsTemplatesComponent } from './components/documents/documents-te
 import { DocumentsEditComponent } from './components/documents/documents-edit/documents-edit.component';
 import { DocumentPreviewComponent } from './components/documents/document-preview/document-preview.component';
 import { CompanyDocumentsComponent } from './components/companies/company-documents/company-documents.component';
-import { HomeComponent } from './components/home/home.component';
+//import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
 

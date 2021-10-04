@@ -10,11 +10,13 @@ import { DatePickerModule } from '../../shared/date-picker/date-picker.module';
 import { PasswordManagerEditLinkedComponent } from './password-manager-edit-linked/password-manager-edit-linked.component';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
+import { AfterViewInitDirective } from 'src/app/directives/after-view-init.directive';
 
 
 @NgModule({
     declarations: [PasswordManagerEditAsideComponent,
-        PasswordManagerEditLinkedComponent
+        PasswordManagerEditLinkedComponent,
+        AfterViewInitDirective
     ],
     imports: [
         CommonModule,

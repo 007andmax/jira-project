@@ -29,18 +29,18 @@ import { LeftPanelPasswordManagerComponent } from './components/left-panel/left-
 import { MainComponent } from './components/main/main.component';
 import { PasswoordManagerHeaderComponent } from './components/password-manager/passwoord-manager-header/passwoord-manager-header.component';
 import { QuotesComponent } from './components/billing/quotes/quotes.component';
-import { UserPipe } from './pipe/user.pipe';
-import { DateFormatPipe } from './pipe/date-format.pipe';
-import { CompanyPipe } from './pipe/company.pipe';
-import { DeviceUserPipe } from './pipe/device-user.pipe';
-import { PasswordCategoryPipe } from './pipe/password-category.pipe';
+import { UserPipe } from './pipe/user/user.pipe';
+import { DateFormatPipe } from './pipe/dateFormat/date-format.pipe';
+import { CompanyPipe } from './pipe/company/company.pipe';
+//import { DeviceUserPipe } from './pipe/device-user.pipe';
+//import { PasswordCategoryPipe } from './pipe/password-category.pipe';
 
 import { SelectClientCompanyComponent } from './components/shared/select-client-company/select-client-company.component';
 import { ProductListComponent } from './components/shared/product-list/product-list.component';
 import { ServicesListComponent } from './components/shared/services-list/services-list.component';
 import { MultiDatepickerComponent } from './components/shared/multi-datepicker/multi-datepicker.component';
 import { LeftPanelBillingComponent } from './components/left-panel/left-panel-billing/left-panel-billing.component';
-import { ToNumerPipe } from './pipe/to-numer.pipe';
+//import { ToNumerPipe } from './pipe/to-numer.pipe';
 import { ModalQuoteComponent } from './services/modal/modal-quote/modal-quote.component';
 import { RecurringTicketsComponent } from './components/tickets/recurring-tickets/recurring-tickets.component';
 import { RecurringTicketsHeaderComponent } from "./components/tickets/recurring-tickets/recurring-tickets-header/recurring-tickets-header.component";
@@ -73,7 +73,7 @@ import { SelectSearchComponent } from './components/shared/select-search/select-
 import { CompanyPasswordManagerComponent } from './components/company-password-manager/company-password-manager.component';
 import { FilterPipe } from './pipe/filter/filter.pipe';
 import { ClickOtsideDirective } from './directives/click-otside.directive';
-import { SortByPipe } from './pipe/sort-by.pipe';
+//import { SortByPipe } from './pipe/sort-by.pipe';
 import { UsersComponent } from './components/users/users.component';
 import { UsersHeaderComponent } from './components/users/users-header/users-header.component';
 import { UsersTableComponent } from './components/users/users-table/users-table.component';
@@ -116,7 +116,7 @@ import { ManageTagsComponent } from './components/setting/manage-tags/manage-tag
 import { CompanyProfileComponent } from './components/setting/company-profile/company-profile.component';
 import { TicketReportComponent } from './components/reports/reports/ticket-report/ticket-report.component';
 import { TechUsersListReportComponent } from './components/reports/report-menu/tech-users-list-report/tech-users-list-report.component';
-import { ReportTimePipe } from './pipe/report-time.pipe';
+//import { ReportTimePipe } from './pipe/report-time.pipe';
 import { ServiceReportComponent } from './components/reports/reports/service-report/service-report.component';
 import { CompanyProductsComponent } from './components/companies/company-products/company-products.component';
 /**
@@ -155,7 +155,7 @@ import { ContractComponent } from './components/setting/commission/contract/cont
 import { ServiceComponent } from './components/setting/commission/service/service.component';
 // import { AngularEditorModule } from '@kolkov/angular-editor';
 
-import { OrderByPipe } from './pipe/order-by.pipe';
+//import { OrderByPipe } from './pipe/order-by.pipe';
 import { TaxesComponent } from './components/shared/taxes/taxes.component';
 import { TicketsTableItemComponent } from './components/tickets/tickets/tickets-table/tickets-table-item/tickets-table-item.component';
 import { TicketEditAsideCompanyInfoComponent } from './components/tickets/tickets/ticket-edit-aside-company-info/ticket-edit-aside-company-info.component';
@@ -192,7 +192,7 @@ import { PreviewAttachmentComponent } from './components/tickets/tickets/ticket-
 import { TicketProfileUpdatesNoteItemComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-note/ticket-profile-updates-note-item/ticket-profile-updates-note-item.component';
 import { TicketProfileUpdatesNoteInfoComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-note/ticket-profile-updates-note-info/ticket-profile-updates-note-info.component';
 import { TicketProfileUpdatesNoteEditComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-note/ticket-profile-updates-note-edit/ticket-profile-updates-note-edit.component';
-import { ToFixedDirective } from './directives/to-fixed.directive';
+//import { ToFixedDirective } from './directives/to-fixed.directive';
 import { MapModalComponent } from './components/shared/map-modal/map-modal.component';
 import { CompanyInfoHistoryComponent } from './components/tickets/tickets/ticket-edit-aside-company-info/company-info-history/company-info-history.component';
 import { TicketEditAsideRightPanelComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-edit-aside-right-panel/ticket-edit-aside-right-panel.component';
@@ -431,7 +431,7 @@ import { CompaniesFilterComponent } from './components/companies/companies-heade
 import { CompanyAddAsideShortComponent } from './components/companies/company-add-aside/company-add-aside-short/company-add-aside-short.component';
 import { CompanyAddAsideFullComponent } from './components/companies/company-add-aside/company-add-aside-full/company-add-aside-full.component';
 import { CommonModule, HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
-import { HomeComponent } from './components/home/home.component';
+//import { HomeComponent } from './components/home/home.component';
 import { CompanyDashAssociateComponent } from './components/company-dashboard/company-dash-associate/company-dash-associate.component';
 import { CompanyAssociateComponent } from './components/company-dashboard/company-dash-associate/company-associate/company-associate.component';
 import { CompanyDashAssociateInfoComponent } from './components/company-dashboard/company-dash-associate-info/company-dash-associate-info.component';
@@ -505,7 +505,7 @@ import { DocumentsAddBodyModule } from './components/documents/documents-add/doc
 import { DocumentsAddFooterModule } from './components/documents/documents-add/documents-add-footer/documents-add-footer.module';
 import { DocumentsLinkedModule } from './components/documents/documents-add/documents-add-info/documents-linked/documents-linked.module';
 import { DocumentsAddEditCategoriesModule } from './components/documents/documents-add/documents-add-info/documents-add-edit-categories/documents-add-edit-categories.module';
-import { ToFixedModule } from './pipe/to-fixed/to-fixed.module';
+import { ToFixedPipeModule } from './pipe/to-fixed/to-fixed.module';
 import { TicketTaskModule } from './components/device/ticket-task/ticket-task.module';
 import { TicketEditAsideModule } from './components/tickets/tickets/ticket-edit-aside/ticket-edit-aside.module';
 import { LeftPanelModule } from './components/left-panel/left-panel.module';
@@ -528,6 +528,10 @@ import { DeviceModule } from './components/device/device-root.module';
 import { HeaderModule } from './components/header/header.module';
 import { BreadcrumbsModule } from './components/shared/breadcrumbs/breadcrumbs.module';
 import { KeyUpEnterModule } from './directives/key-up-enter/key-up-enter.module';
+import { CompanyPipeModule } from './pipe/company/company-pipe.module';
+import { UserPipeModule } from './pipe/user/user-pipe.module';
+import { DateFormatModule } from './pipe/dateFormat/date-format.module';
+import { ToFixedModule } from './directives/to-fixed/to-fixed.module';
 //import { CreateContractsModule } from './components/billing/contracts/create-contracts/create-contracts.module';
 
 
@@ -544,17 +548,17 @@ declare var $: any;
     // LeftPanelComponent,
     //  LeftPanelPasswordManagerComponent,
     MainComponent,
-    CompanyPipe,
+    // CompanyPipe,
     //  PasswordManagerTableComponent,
     // PasswoordManagerFiltersComponent,
     //  PasswoordManagerHeaderComponent,
     //  PasswordManagerAddCategoryComponent,
     //  PasswoordManagerDevicesUsersComponent,
-    UserPipe,
-    DateFormatPipe,
+    // UserPipe,
+    // DateFormatPipe,
     //  PasswordManagerEditAsideComponent,
-    DeviceUserPipe,
-    PasswordCategoryPipe,
+    // DeviceUserPipe,
+    //  PasswordCategoryPipe,
     // SanitizeHtmlPipe,
     //   QuotesComponent,
     //  SelectClientCompanyComponent,
@@ -562,7 +566,7 @@ declare var $: any;
     // ServicesListComponent,
     //  MultiDatepickerComponent,
     //   LeftPanelBillingComponent,
-    ToNumerPipe,
+    // ToNumerPipe,
     ModalQuoteComponent,
     //  RecurringTicketsComponent,
     //  RecurringTicketsHeaderComponent,
@@ -602,7 +606,7 @@ declare var $: any;
     //  CompanyPasswordManagerComponent,
     // FilterPipe,
     //   ClickOtsideDirective,
-    SortByPipe,
+    // SortByPipe,
     //   UsersComponent,
     //  UsersHeaderComponent,
     // UsersTableComponent,
@@ -635,14 +639,14 @@ declare var $: any;
     // TicketSettingsComponent,
     //  InvoiceSettingsComponent,
     // QuotesSettingsComponent,
-    Onlynumber,
+    // Onlynumber,
     // CompanyComponent,
     //   ProductComponent,
     //ContractComponent,
     //  ServiceComponent,
     //AutocompleteComponent,
 
-    OrderByPipe,
+    // OrderByPipe,
     //  ReportsComponent,
     //  ItemReportComponent,
     // OverviewReportComponent,
@@ -667,7 +671,7 @@ declare var $: any;
     //   CustomerSalesReportComponent,
     // TicketReportComponent,
     //  TechUsersListReportComponent,
-    ReportTimePipe,
+    // ReportTimePipe,
     //ServiceReportComponent,
     // InventoryComponent,
     //  InventoryTableComponent,
@@ -685,7 +689,7 @@ declare var $: any;
     //  TicketEditAsideUsersComponent,
     // TicketsStatusComponent,
     //  UploadAreaProgressComponent,
-    DndDirective,
+    // DndDirective,
     // AddAssignedUserComponent,
     // TicketEditTagsComponent,
     // TicketProfileActionsComponent,
@@ -714,7 +718,7 @@ declare var $: any;
     //  TicketProfileUpdatesNoteItemComponent,
     //  TicketProfileUpdatesNoteInfoComponent,
     // TicketProfileUpdatesNoteEditComponent,
-    ToFixedDirective,
+    //  ToFixedDirective,
     // MapModalComponent,
     //   CompanyInfoHistoryComponent,
     // TicketEditAsideRightPanelComponent,
@@ -902,7 +906,7 @@ declare var $: any;
     // InventoryFilterComponent,
     //  PasswordManagerAddAsideComponent,
     //   PasswordManagerEditLinkedComponent,
-    AfterViewInitDirective,
+    //  AfterViewInitDirective,
     // TicketsFilterTagsComponent,
     //  DocumentsComponent,
     // LeftPanelDocumentsComponent,
@@ -946,7 +950,7 @@ declare var $: any;
     UpgradeModule,
     HttpClientModule,
     FormsModule,
-    NgbModule,
+    //  NgbModule,
     //InfiniteScrollModule,
     //  ClickOutsideModule,
     DataTablesModule,
@@ -1054,7 +1058,11 @@ declare var $: any;
     DeviceModule,
     HeaderModule,
     BreadcrumbsModule,
-    KeyUpEnterModule
+    KeyUpEnterModule,
+    CompanyPipeModule,
+    UserPipeModule,
+    DateFormatModule,
+    ToFixedPipeModule
     //  CreateContractsModule
   ],
   entryComponents: [
@@ -1071,9 +1079,7 @@ declare var $: any;
 
     // RecurringTicketsComponent
   ],
-  exports: [
-    OrderByPipe,
-  ],
+
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

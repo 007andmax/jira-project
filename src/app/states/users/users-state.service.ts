@@ -3,7 +3,7 @@ import { UsersService } from '../../services/users/users.service';
 import { CurrentUser } from 'src/class/current-user/current-user';
 import { User } from '../../components/users/class/user';
 import { retry } from 'rxjs/operators';
-import { UserPipe } from '../../pipe/user.pipe';
+import { UserPipe } from '../../pipe/user/user.pipe';
 import { UserProfile } from '../../components/users/class/user-profile';
 import { UsersRealTimeService } from './users-real-time.service';
 import { UserChange } from '../../components/users/class/user-change';

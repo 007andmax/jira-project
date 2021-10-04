@@ -23,8 +23,9 @@ import { ReportAdditionalActionsModule } from '../report-additional-actions/repo
 import { NvD3Module } from 'ng2-nvd3';
 import { ReportFooterModule } from '../report-footer/report-footer.module';
 import { OverviewReportComponent } from '../overview-report/overview-report.component';
-import { ToFixedModule } from 'src/app/pipe/to-fixed/to-fixed.module';
 import { ItemReportRoutingModule } from './item-report-routing.module';
+import { ToFixedModule } from 'src/app/directives/to-fixed/to-fixed.module';
+import { ToFixedPipeModule } from 'src/app/pipe/to-fixed/to-fixed.module';
 
 @NgModule({
     declarations: [ItemReportComponent,
@@ -54,7 +55,8 @@ import { ItemReportRoutingModule } from './item-report-routing.module';
         NvD3Module,
         ReportFooterModule,
         ToFixedModule,
-        ItemReportRoutingModule
+        ItemReportRoutingModule,
+        ToFixedPipeModule
 
     ],
 
