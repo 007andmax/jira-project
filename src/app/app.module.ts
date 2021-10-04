@@ -246,7 +246,7 @@ import { ContractsAsideProductServiceContractsComponent } from './components/bil
 import { ContractsFilterComponent } from './components/billing/contracts/contracts-filter/contracts-filter.component';
 import { ContractsAsideTopComponent } from './components/billing/contracts/contracts-aside/contracts-aside-top/contracts-aside-top.component';
 import { ContractsAsideHourlyBillingDefaultServiceComponent } from './components/billing/contracts/contracts-aside/contracts-aside-hourly-billing/contracts-aside-hourly-billing-default-service/contracts-aside-hourly-billing-default-service.component';
-import { ContractsAsideHourlyBillingAddServiceComponent } from './components/billing/contracts/contracts-aside/contracts-aside-hourly-billing/contracts-aside-hourly-billing-add-service/contracts-aside-hourly-billing-add-service.component';
+//import { ContractsAsideHourlyBillingAddServiceComponent } from './components/billing/contracts/contracts-aside/contracts-aside-hourly-billing/contracts-aside-hourly-billing-add-service/contracts-aside-hourly-billing-add-service.component';
 import { DefaultServicesComponent } from './components/billing/default-services/default-services.component';
 import { DefaultServicesAddComponent } from './components/billing/default-services/default-services-add/default-services-add.component';
 import { DefaultServicesItemComponent } from './components/billing/default-services/default-services-item/default-services-item.component';
@@ -290,7 +290,7 @@ import { ContractsAsideOtherProductComponent } from './components/billing/contra
 import { ContractsAsideOtherServiceComponent } from './components/billing/contracts/contracts-aside/contracts-aside-product-service-contracts/contracts-aside-other-service/contracts-aside-other-service.component';
 import { ContractsAsideProductServicePreviewComponent } from './components/billing/contracts/contracts-preview/contracts-aside-product-service-preview/contracts-aside-product-service-preview.component';
 import { ContractsAsideProductServiceEditComponent } from './components/billing/contracts/contracts-edit/contracts-aside-product-service-edit/contracts-aside-product-service-edit.component';
-import { ContractsAsideOtherServiceEditComponent } from './components/billing/contracts/contracts-edit/contracts-aside-product-service-edit/contracts-aside-other-service-edit/contracts-aside-other-service-edit.component';
+//import { ContractsAsideOtherServiceEditComponent } from './components/billing/contracts/contracts-edit/contracts-aside-product-service-edit/contracts-aside-other-service-edit/contracts-aside-other-service-edit.component';
 import { DashboardBillingComponent } from './components/billing/dashboard-billing/dashboard-billing.component';
 import 'd3';
 import 'nvd3';
@@ -331,7 +331,7 @@ import { CompanyDevicesComponent } from './components/company-devices/company-de
 import { CompanyDevicesItemComponent } from './components/company-devices/company-devices-item/company-devices-item.component';
 import { CompanyDevicesHeaderComponent } from './components/company-devices/company-devices-header/company-devices-header.component';
 import { CompanyDevicesRemoteAccessComponent } from './components/company-devices/company-devices-remote-access/company-devices-remote-access.component';
-import { CompanyDevicesEditNameComponent } from './components/company-devices/company-devices-edit-name/company-devices-edit-name.component';
+//import { CompanyDevicesEditNameComponent } from './components/company-devices/company-devices-edit-name/company-devices-edit-name.component';
 import { CompanyDevicesAsideComponent } from './components/company-devices/company-devices-aside/company-devices-aside.component';
 import { CompanyDevicesAsideDeviceIconComponent } from './components/company-devices/company-devices-aside/company-devices-aside-device-icon/company-devices-aside-device-icon.component';
 import { CompanyDevicesAsideSystemComponent } from './components/company-devices/company-devices-aside/company-devices-aside-system/company-devices-aside-system.component';
@@ -341,7 +341,7 @@ import { CompanyDevicesAsideUpdatesComponent } from './components/company-device
 import { CompanyDevicesExistRemoteSessionsComponent } from './components/company-devices/company-devices-item/company-devices-exist-remote-sessions/company-devices-exist-remote-sessions.component';
 import { CompanyDevicesNoExistRemoteSessionsComponent } from './components/company-devices/company-devices-item/company-devices-no-exist-remote-sessions/company-devices-no-exist-remote-sessions.component';
 import { CompanyDevicesEditLabelComponent } from './components/company-devices/company-devices-edit-label/company-devices-edit-label.component';
-import { CompanyDevicesAsideTooltipComponent } from './components/company-devices/company-devices-aside/company-devices-aside-tooltip/company-devices-aside-tooltip.component';
+//import { CompanyDevicesAsideTooltipComponent } from './components/company-devices/company-devices-aside/company-devices-aside-tooltip/company-devices-aside-tooltip.component';
 import { CompanyNetworkScanNoExistDevicesComponent } from './components/company-network-scan/company-network-scan-no-exist-devices/company-network-scan-no-exist-devices.component';
 import { NetworkScanCredentialsAsideComponent } from './components/company-network-scan/network-scan-credentials-aside/network-scan-credentials-aside.component';
 import { NetworkScanCredentialsAddComponent } from './components/company-network-scan/network-scan-credentials-add/network-scan-credentials-add.component';
@@ -378,7 +378,7 @@ import { TechTicketReportComponent } from './components/reports/reports/tech-tic
 import { ModalLockScreenComponent } from './services/modal/modal-lock-screen/modal-lock-screen.component';
 import { HttpInterceptorService } from './services/http/http-interceptor.service';
 import { ModalSessionScreenComponent } from './services/modal/modal-session-screen/modal-session-screen.component';
-import { KeyUpEnterDirective } from './directives/key-up-enter.directive';
+//import { KeyUpEnterDirective } from './directives/key-up-enter.directive';
 import { InventoryAddCategoryComponent } from './components/inventory/inventory-add-category/inventory-add-category.component';
 import { InventoryHeaderComponent } from './components/inventory/inventory-header/inventory-header.component';
 import { InventoryFilterComponent } from './components/inventory/inventory-header/inventory-filter/inventory-filter.component';
@@ -521,6 +521,13 @@ import { TaxesModule } from './components/shared/taxes/taxes.module';
 import { InventoryEditAsideModule } from './components/inventory/inventory-edit-aside/inventory-edit-aside.module';
 import { InvoicesAsideModule } from './components/billing/invoices/invoices-aside/invoices-aside.module';
 import { MapModalModule } from './components/shared/map-modal/map-modal.module';
+import { InvoicesAsidePreviewModule } from './components/billing/invoices/invoices-aside-preview/invoices-aside-preview.module';
+import { DefaultServicesAddModule } from './components/billing/default-services/default-services-add/default-services-add.module';
+import { DefaultServicesEditModule } from './components/billing/default-services/default-services-edit/default-services-edit.module';
+import { DeviceModule } from './components/device/device-root.module';
+import { HeaderModule } from './components/header/header.module';
+import { BreadcrumbsModule } from './components/shared/breadcrumbs/breadcrumbs.module';
+import { KeyUpEnterModule } from './directives/key-up-enter/key-up-enter.module';
 //import { CreateContractsModule } from './components/billing/contracts/create-contracts/create-contracts.module';
 
 
@@ -742,12 +749,12 @@ declare var $: any;
     // InvoicesItemComponent,
     //  InvoicesHeaderComponent,
     // InvoicesFilterComponent,
-    InvoicesAsidePreviewComponent,
+    //  InvoicesAsidePreviewComponent,
     //  DefaultServicesComponent,
-    DefaultServicesAddComponent,
+    //  DefaultServicesAddComponent,
     //  DefaultServicesItemComponent,
     // DefaultServicesContractsComponent,
-    DefaultServicesEditComponent,
+    // DefaultServicesEditComponent,
     //  PaymentsComponent,
     // PaymentsHeaderComponent,
     //  PaymentItemComponent,
@@ -766,14 +773,14 @@ declare var $: any;
     //ContractsFilterComponent,
     // ContractsAsideTopComponent,
     //ContractsAsideHourlyBillingDefaultServiceComponent,
-    ContractsAsideHourlyBillingAddServiceComponent,
+    // ContractsAsideHourlyBillingAddServiceComponent,
     //  DefaultServicesComponent,
-    DefaultServicesAddComponent,
+    //  DefaultServicesAddComponent,
     //  DefaultServicesItemComponent,
     // DefaultServicesContractsComponent,
-    DefaultServicesEditComponent,
-    DeviceComponent,
-    NavComponent,
+    // DefaultServicesEditComponent,
+    // DeviceComponent,
+    // NavComponent,
     // DashboardComponent,
     //HardwareComponent,
     // SoftwareComponent,
@@ -810,7 +817,7 @@ declare var $: any;
     //   ContractsAsideOtherServiceComponent,
     //  ContractsAsideProductServicePreviewComponent,
     // ContractsAsideProductServiceEditComponent,
-    ContractsAsideOtherServiceEditComponent,
+    //  ContractsAsideOtherServiceEditComponent,
     //   DashboardBillingComponent,
     //  InvoiceRevenueComponent,
     //  MultiDatepickerDashboardComponent,
@@ -848,7 +855,7 @@ declare var $: any;
     //  CompanyDevicesItemComponent,
     // CompanyDevicesHeaderComponent,
     CompanyDevicesRemoteAccessComponent,
-    CompanyDevicesEditNameComponent,
+    // CompanyDevicesEditNameComponent,
     // CompanyDevicesAsideComponent,
     // CompanyDevicesAsideDeviceIconComponent,
     // CompanyDevicesAsideSystemComponent,
@@ -858,7 +865,7 @@ declare var $: any;
     //CompanyDevicesExistRemoteSessionsComponent,
     // CompanyDevicesNoExistRemoteSessionsComponent,
     // CompanyDevicesEditLabelComponent,
-    CompanyDevicesAsideTooltipComponent,
+    //  CompanyDevicesAsideTooltipComponent,
     // CompanyNetworkScanNoExistDevicesComponent,
     // NetworkScanCredentialsAsideComponent,
     // NetworkScanCredentialsAddComponent,
@@ -872,11 +879,11 @@ declare var $: any;
     //  DynamicTooltipComponent,
     //  TicketProfileFormUpdateSupportComponent,
     //LeftPanelSupportComponent,
-    HeaderComponent,
-    GlobalSearchComponent,
+    //  HeaderComponent,
+    // GlobalSearchComponent,
     //  ReportListItemComponent,
     // LeftPanelReportsComponent,
-    BreadcrumbsComponent,
+    //  BreadcrumbsComponent,
     // DetailedCommissionsReportComponent,
     // ToFixedPipe,
     // CommonCommissionsReportComponent,
@@ -889,7 +896,7 @@ declare var $: any;
     //  TechTicketReportComponent,
     ModalLockScreenComponent,
     ModalSessionScreenComponent,
-    KeyUpEnterDirective,
+    // KeyUpEnterDirective,
     // InventoryAddCategoryComponent,
     // InventoryHeaderComponent,
     // InventoryFilterComponent,
@@ -926,7 +933,7 @@ declare var $: any;
     //  CompaniesFilterComponent,
     // CompanyAddAsideShortComponent,
     //CompanyAddAsideFullComponent,
-    HomeComponent,
+    //  HomeComponent,
     // CompanyDashAssociateComponent,
     //  CompanyAssociateComponent,
     // CompanyDashAssociateInfoComponent,
@@ -1041,6 +1048,13 @@ declare var $: any;
     InventoryEditAsideModule,
     InvoicesAsideModule,
     MapModalModule,
+    InvoicesAsidePreviewModule,
+    DefaultServicesAddModule,
+    DefaultServicesEditModule,
+    DeviceModule,
+    HeaderModule,
+    BreadcrumbsModule,
+    KeyUpEnterModule
     //  CreateContractsModule
   ],
   entryComponents: [
