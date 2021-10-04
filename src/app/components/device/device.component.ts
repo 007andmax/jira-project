@@ -1,4 +1,10 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import {
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from "@angular/core";
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 import { CommonHttpServices } from "./_services/common_http.service";
 import { RemoteControlService } from "./_services/remoteControl.service";
@@ -21,8 +27,7 @@ declare var $: any;
   styleUrls: ["./device.component.scss"],
 })
 export class DeviceComponent implements OnInit, OnDestroy {
-
-  @ViewChild('templatePowersell') template;
+  @ViewChild("templatePowersell") template;
 
   title = "quck-device";
   totalSeconds: any = 0;
@@ -61,8 +66,8 @@ export class DeviceComponent implements OnInit, OnDestroy {
     private agentService: AgentService,
     public kakfaService: KafkaRealTimeService,
     private kafkaStateService: KafkaStateService,
-    private cd: ChangeDetectorRef,
-  ) { }
+    private cd: ChangeDetectorRef
+  ) {}
 
   lock() {
     // this.modalRef = this.modalService.show(
@@ -75,11 +80,11 @@ export class DeviceComponent implements OnInit, OnDestroy {
     this.setPreviewDataDevice();
     this.type =
       window.location.href.split("/")[
-      window.location.href.split("/").length - 2
+        window.location.href.split("/").length - 2
       ];
     this._id =
       window.location.href.split("/")[
-      window.location.href.split("/").length - 1
+        window.location.href.split("/").length - 1
       ];
     this.usersStateService.onInit();
     this.shellStateService.onInit();
@@ -90,10 +95,11 @@ export class DeviceComponent implements OnInit, OnDestroy {
     }
     this.deviceDetail = {};
     this.deviceDetail.id = this._id;
-    this.kafkaStateService.onCurrentConfig.subscribe((resp) => this.onGetCurrentConfig(resp));
+    this.kafkaStateService.onCurrentConfig.subscribe((resp) =>
+      this.onGetCurrentConfig(resp)
+    );
 
     this.onPowerShellCommand();
-
 
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
@@ -168,7 +174,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
         }
       );
   }
-  
+
   updateTime() {
     this.totalSeconds++;
     if (parseInt(this.totalSeconds) === 60) {
@@ -181,11 +187,11 @@ export class DeviceComponent implements OnInit, OnDestroy {
     }
     $("#counter").text(
       this.padNumber(this.totalHours) +
-      " hr : " +
-      this.padNumber(this.totalMinutes) +
-      " min : " +
-      this.padNumber(this.totalSeconds) +
-      " sec"
+        " hr : " +
+        this.padNumber(this.totalMinutes) +
+        " min : " +
+        this.padNumber(this.totalSeconds) +
+        " sec"
     );
   }
   getDevicesByCompany() {
@@ -231,7 +237,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
         (resp) => {
           this.loading = false;
         },
-        (error) => { }
+        (error) => {}
       );
   }
 
@@ -252,7 +258,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
             sessionId;
           window.open(url, "_self");
         },
-        (error) => { }
+        (error) => {}
       );
   }
   createConnection(type) {
@@ -315,16 +321,18 @@ export class DeviceComponent implements OnInit, OnDestroy {
 
   onPowerShellCommand() {
     this.kafkaStateService.onPowerShellCommand.subscribe((resp) => {
-      console.log('OnPowerShellCommand');
-      let item = resp.find((x) => x.key == this._id);
+      console.log("OnPowerShellCommand");
+      let item = resp.find((x) => x.key == this.asset.ID);
       if (item != undefined) {
         this.kafkaMessage = item.value;
         this.powershellmsg = this.kafkaMessage;
-        if (item.value.startsWith("Failed")) {
-          this.modalService.open(this.template, { windowClass: "modal-md" });
+        if (item.value.startsWith("Failed") || item.value.startsWith("This")) {
+          this.modalService.open(this.template, {
+            windowClass: "modal-md",
+            centered: true,
+          });
         }
       }
-
     });
   }
 
@@ -352,21 +360,22 @@ export class DeviceComponent implements OnInit, OnDestroy {
       data.AssetID = asset_ID;
       data.MessageType = "RunPowerShellCommand";
       data.Value = "Restart-Computer -force";
-      this.agentService.SendPowerShellCommand(data).subscribe((resp) => {
-        this.decline();
-      });
+      this.agentService.SendPowerShellCommand(data);
+      this.decline();
+      this.toastr.success(
+        "Rebooting computer now, please wait for a min to get it restarted"
+      );
     }
     if (command == "s") {
       let data: any = {};
       data.AssetID = asset_ID;
       data.MessageType = "RunPowerShellCommand";
       data.Value = "Stop-Computer -force";
-      this.agentService.SendPowerShellCommand(data).subscribe((resp) => {
-        this.decline();
-      });
+      this.agentService.SendPowerShellCommand(data);
+      this.decline();
+      this.toastr.success("Shutting down computer now.");
     }
   }
-
 
   openModal(template) {
     if (this.deviceDetail.online === true) {

@@ -21,7 +21,7 @@ export class AgentService {
   public constructor(
     private http: HttpClient,
     private wsService: WebsocketService
-  ) { }
+  ) {}
 
   encrypt128(keys, value) {
     var key = CryptoJS.enc.Utf8.parse(keys);
@@ -185,8 +185,9 @@ export class AgentService {
     };
 
     if (this.wsService.IsKafkaConnected) {
-      this.http.post(this.apiurl + "sendMessageToKafka", data).subscribe(() => {
-      });
+      this.http
+        .post(this.apiurl + "sendMessageToKafka", data)
+        .subscribe(() => {});
     } else {
       setTimeout(() => this.GetCurrentConfig(asset_ID), 3000);
     }
@@ -194,10 +195,11 @@ export class AgentService {
 
   public SendPowerShellCommand(data: any) {
     if (this.wsService.IsKafkaConnected) {
-      console.log('sending powershell command:'+ data.Value);
-      return this.http.post(this.apiurl + "sendMessageToKafka", data);
-    }
-    else {
+      console.log("sending powershell command:" + data.Value);
+      this.http
+        .post(this.apiurl + "sendMessageToKafka", data)
+        .subscribe(() => {});
+    } else {
       setTimeout(() => this.SendPowerShellCommand(data), 3000);
     }
   }

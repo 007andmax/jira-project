@@ -14,23 +14,24 @@ export class KafkaStateService {
   constructor(private kafkaRealTimeService: KafkaRealTimeService) { }
 
   public onInit() {
+
     this.kafkaRealTimeService.changeKafkarray.subscribe((newChange) => {
 
       if (!(newChange && newChange.data && newChange.data.messageType)) {
         return;
       }
-
       switch (newChange.data.messageType) {
+
         case "GetCurrentConfig":
           this.handleGetCurrentConfig(newChange);
           break;
-        case "RunPowershellCommand":
+        case "RunPowerShellCommand":
           this.handleRunPowershellCommand(newChange);
           break;
         case "ACK":
           this.handleAck(newChange);
           break;
-      }     
+      }
     });
   }
 

@@ -41,6 +41,16 @@
                     Remote Control
                 </a>
                 <!-- <a href="javascript:;" class="head-btn-info btn-print" (click)="lock();"><img src="/html/assets/img/device/print-sheet.svg" alt="Print" /></a> -->
+                <!-- <a
+                    href="javascript:;"
+                    (click)="send(templatePowersell)"
+                    class="head-btn-info btn-refresh"
+                >
+                    <img
+                        src="/html/assets/img/device/restart.svg"
+                        alt="Tempararyrestart"
+                    >
+                </a> -->
                 <a
                     href="javascript:;"
                     (click)="sendCommand('r',templatePowersell,this.asset.ID)"
@@ -169,17 +179,17 @@
 
 <ng-template #templatePowersell>
     <div class="modal-content">
-        <div class="modal-header bg-primary">
-            <h5 class="modal-title">Confirmation</h5>
+        <div class="modal-header">
             <button
-                type="button"
-                class="close"
-                (click)="decline()"
-                data-dismiss="modal"
-                aria-label="Close"
-            >
-                <span aria-hidden="true">&times;</span>
-            </button>
+            type="button"
+            class="close"
+            (click)="decline()"
+            data-dismiss="modal"
+            aria-label="Close"
+        >
+            <span aria-hidden="true">&times;</span>
+        </button>
+            <h5 class="modal-title">Confirmation</h5>
         </div>
         <div class="modal-body text-center">
             <p>{{powershellmsg}}</p>
@@ -187,14 +197,14 @@
         <div class="modal-footer">
             <button
                 type="button"
-                class="btn btn-primary"
+                class="btn btn-danger"
                 (click)="Reboot(this.asset.ID,this.TemporaryCommand);"
             >
                 Yes
             </button>
             <button
                 type="button"
-                class="btn btn-warning"
+                class="btn btn-secondary"
                 (click)="decline()"
             >
                 No
