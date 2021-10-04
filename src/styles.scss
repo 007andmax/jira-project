@@ -302,6 +302,34 @@ html {
     }
   }
 }
+app-ticket-add-aside {
+  .qt-dropdown {
+    .icn-remove-old {
+      @media (max-width: 767px) {
+        top: calc(50% - 15px) !important;
+        right: 0;
+      }
+    }
+    .app-drop-down__right-icon {
+      @media (max-width: 767px) {
+        right: 0;
+      }
+      .icn-remove-old {
+        @media (max-width: 767px) {
+          right: 12px;
+        }
+      }
+    }
+  }
+  app-select-search {
+    .qt-dropdown .icn-remove-old {
+      @media (max-width: 767px) {
+        right: 12px;
+      }
+    }
+  }
+
+}
 .mat-form-field {
   font-family: "Inter", sans-serif;
   @extend %body-m;
@@ -1261,7 +1289,7 @@ app-quotes-item {
         justify-content: center;
         display: flex;
         flex-shrink: 0;
-        margin-bottom: 0 !important; // TODO add new modal and remove important
+        margin-bottom: 0;
       }
     }
 
@@ -1306,7 +1334,6 @@ app-quotes-item {
         }
       }
       &.qt-modal__body-content {
-
         input {
           background-color: $gray-200;
           padding-left: 34px;
@@ -1318,10 +1345,10 @@ app-quotes-item {
 
         &::after {
           position: absolute;
-          content: '';
+          content: "";
           width: 16px;
           height: 16px;
-          background: url('/html/assets/img/icons/search.png');
+          background: url("/html/assets/img/icons/search.png");
           left: 26px;
           top: calc(50% - 8px);
           background-size: contain;
@@ -2327,6 +2354,34 @@ app-quotes-item {
       background: $gray-300;
       color: #0f0f0f;
     }
+  }
+}
+.add-category-aside-add-record {
+  @media (max-width: 767px) {
+    position: fixed;
+    background: rgba(16, 24, 39, 0.4);
+    transition: opacity 0.15s linear;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 2;
+  }
+}
+.page-list-ticket .qt-aside-modern__footer,
+.password-page .qt-aside-modern__footer {
+  display: none;
+
+  @media (max-width: 767px) {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: 100%;
+    padding: 16px;
+    background: $white;
   }
 }
 .new-users-content__modal--content {
@@ -3654,8 +3709,7 @@ app-ticket-profile-form-update {
 app-ticket-edit-aside {
   app-ticket-profile-form-update,
   ticket-profile-edit-form-update {
-    //position: sticky !important;
-    position: sticky; //TODO Check other modal
+    position: sticky;
     bottom: 0;
     background: $white;
     z-index: 30;
@@ -3892,14 +3946,14 @@ app-ticket-edit-aside {
   }
 
   .qt-aside-modern__header-close {
-   @media (max-width: 767px) {
-     position: absolute;
-     background-image: url('/assets/img/icons/close-white.svg');
-     top: 50%;
-     left: 26px;
-     padding: 0;
-     transform: translate(-50%, -50%);
-   }
+    @media (max-width: 767px) {
+      position: absolute;
+      background-image: url("/assets/img/icons/close-white.svg");
+      top: 50%;
+      left: 26px;
+      padding: 0;
+      transform: translate(-50%, -50%);
+    }
   }
 
   .qt-inputs-row {
@@ -4021,7 +4075,7 @@ app-add-assigned-user {
 
 .ticket-edit-aside {
   position: fixed;
-  z-index: 2;
+  z-index: 3;
   background: $white;
   right: 0;
   top: $header-height;
@@ -4254,7 +4308,8 @@ app-ticket-edit-aside-devices {
 }
 
 .qt-tooltip-error {
-  z-index: 200;
+  //z-index: 200; // TODO check error-tooltip
+  z-index: 1;
   border-radius: 3px;
   max-width: 250px;
   position: absolute;
@@ -4264,7 +4319,7 @@ app-ticket-edit-aside-devices {
   font-size: 12px;
   line-height: 1.33;
   top: calc(100% + 6px);
-  height: fit-content;
+  //height: fit-content;
   &:before {
     content: "";
     position: absolute;

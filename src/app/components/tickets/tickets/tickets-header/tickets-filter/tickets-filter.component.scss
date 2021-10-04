@@ -97,6 +97,7 @@
   @media (max-width: 767px) {
     align-items: flex-start;
     max-height: calc(100vh - 74px);
+    height: 100%;
     top: 0;
     left: 0;
     background-color: $white;

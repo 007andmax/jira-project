@@ -96,6 +96,10 @@
     //top: calc(50% - 5px) !important;
     top: calc(50% - 8px) !important;
     right: 12px;
+
+    @media (max-width: 767px) {
+      top: calc(50% - 11px) !important;
+    }
   }
   &.right {
     .dropdown-menu {

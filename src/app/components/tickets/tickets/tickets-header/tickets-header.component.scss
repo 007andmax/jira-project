@@ -14,7 +14,6 @@
   color: $primary-2;
   border: none;
   background-image: url("../../../../../assets/img/icons/filter.svg");
-  // TODO mobile style
   @media (max-width: 767px) {
     background-image: url("/assets/img/icons/filter-white.svg");
     background-color: transparent;

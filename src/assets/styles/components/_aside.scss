@@ -1,11 +1,10 @@
-@import './src/assets/styles/variable';
+@import "./src/assets/styles/variable";
 
 .qt-aside-modern {
   color: $gray-800;
   background: $white;
   width: 592px;
   border-left: 1px solid $gray-400;
-  right: 0;
   box-shadow: -8px 0 8px 0 rgba(0, 0, 0, 0.05);
   position: fixed;
   top: $header-height;
@@ -19,6 +18,149 @@
     height: 100%;
     border: none;
     padding-bottom: 128px;
+  }
+
+  &.password-edit-aside {
+    .qt-aside-modern__header {
+      @media (max-width: 767px) {
+        position: relative;
+      }
+    }
+
+    .password-edit-aside__body {
+      > div {
+        @media (max-width: 767px) {
+          padding: 16px 16px 0;
+        }
+      }
+      .password-history-body {
+        @media (max-width: 767px) {
+          padding: 0;
+        }
+      }
+    }
+
+    .qt-aside-modern__header-close {
+      @media (max-width: 767px) {
+        position: absolute;
+        left: 16px;
+        background-size: 20px;
+        background-image: url("/assets/img/icons/close-white.svg");
+      }
+    }
+
+    .header-circle-icon {
+      @media (max-width: 767px) {
+        left: 16px;
+        width: 16px;
+        height: 16px;
+        margin-right: 0;
+        background-image: url("/assets/img/icons/remove-red.svg");
+        background-color: transparent;
+        border: none;
+      }
+    }
+
+    .password-edit-aside__info {
+      @media (max-width: 767px) {
+        flex-wrap: wrap;
+      }
+
+      input,
+      textarea {
+        @media (max-width: 767px) {
+          width: 100%;
+          border: solid 1px $gray-500;
+          margin-top: 8px;
+        }
+      }
+      input {
+        @media (max-width: 767px) {
+          height: 40px !important;
+        }
+      }
+
+      textarea {
+        @media (max-width: 767px) {
+          height: 80px;
+        }
+      }
+
+      app-date-picker {
+        @media (max-width: 767px) {
+          width: 100%;
+        }
+
+        .date-picker {
+          @media (max-width: 767px) {
+            width: 100%;
+          }
+
+          i {
+            @media (max-width: 767px) {
+              top: 19px;
+            }
+          }
+        }
+      }
+    }
+
+    .password-edit-aside__info-password {
+      @media (max-width: 767px) {
+        align-items: flex-end;
+      }
+
+      .password-edit-aside__info-title {
+        @media (max-width: 767px) {
+          width: 100%;
+          max-width: 100%;
+        }
+      }
+
+      input {
+        @media (max-width: 767px) {
+          flex: 1;
+          border-radius: 4px 0 0 4px;
+          border-right: transparent;
+        }
+      }
+
+      .icon__view,
+      .icon__hide,
+      .icon__copy-gray {
+        @media (max-width: 767px) {
+          border: 1px solid $gray-500;
+          height: 40px;
+          margin-left: 0;
+          width: 40px;
+          background-size: 18px;
+          border-radius: 0 4px 4px 0;
+          background-position: center;
+          background-color: $gray-100;
+        }
+      }
+
+      .icon__hide {
+        @media (max-width: 767px) {
+          border-radius: 0;
+          border-right: transparent;
+        }
+      }
+
+      .icon__copy-gray {
+        @media (max-width: 767px) {
+          border-radius: 0 4px 4px 0;
+        }
+      }
+    }
+    .qt-aside-modern__footer {
+      .qt-button:not(.--gray) {
+        @media (max-width: 767px) {
+          order: 1;
+          margin: 0 0 0 12px;
+        }
+      }
+    }
   }
 
   &.--large {
@@ -94,12 +236,13 @@
     height: calc(100% - 127px);
 
     @media (max-width: 767px) {
+      height: 100%;
       padding: 16px;
       height: 100%;
     }
 
     &.--no-footer {
-      height: calc(100% - 67px);;
+      height: calc(100% - 67px);
     }
 
     &.--less-padding {
@@ -148,12 +291,10 @@
   }
 }
 
-
 .qt-aside {
   .ng-sidebar {
     width: 592px;
     height: calc(100vh - #{$header-height});
-
   }
 
   &__header {
@@ -204,4 +345,3 @@
     display: flex;
   }
 }
-

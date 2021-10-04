@@ -120,7 +120,6 @@
                         ngbTooltip="Settings"
                     ></app-ticket-profile-actions>
                 </div>
-                <!-- Mobile -->
                 <div
                     class="ticket-edit-aside__header-subject"
                     [hidden]="modeSubject === 'edit'"
@@ -131,7 +130,6 @@
                     <span>-</span>
                     <span [textContent]="ticketProfile.subject"></span>
                 </div>
-                <!-- End mobile -->
             </div>
             <app-ticket-edit-tags
                 [selectedTag]="ticketProfile.tags"
@@ -226,7 +224,6 @@
         #rightPanel
         [ticketProfile]="ticketProfile"
     ></app-ticket-edit-aside-right-panel>
-    <!-- Mobile -->
     <div
         class="qt-aside-modern__footer updata-close"
         [hidden]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
@@ -243,5 +240,4 @@
         (click)="showModalAddUpdate()"
         [hidden]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
     ></div>
-    <!-- End Mobile -->
 </div>

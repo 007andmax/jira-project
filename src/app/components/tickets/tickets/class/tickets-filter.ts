@@ -25,6 +25,13 @@ export class TicketsFilter {
     constructor() {
         this.onInitUser();
     }
+    public setFilter(data) {
+        this.tags = data.tags;
+        this.selectedCompany = data.selectedCompany;
+        this.selectedTechUser = data.selectedTechUser;
+        this.selectedUser = data.selectedUser;
+        this.selectedStatus = data.selectedStatus;
+    }
     public setSize(data) {
         this.size = data;
     }

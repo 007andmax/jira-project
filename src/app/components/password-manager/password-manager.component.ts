@@ -157,6 +157,9 @@ export class PasswordManagerComponent implements OnInit {
       this.cd.detectChanges();
     });
   }
+  public addRecord() {
+    this.passwordManagerService.showAddForm();
+  }
   public trackById(index, item) {
     return item.id;
   }

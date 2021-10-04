@@ -28,7 +28,6 @@
     <li
         [ngClass]="{'--active': listType === 'ALL' && activePage === 'new-tickets'}"
         (click)="setTypeFilter('ALL')"
-        class="desktop-version"
     >
         <div>All Tickets</div>
         <div>{{getCountByField('ALL')}}</div>
