@@ -13,7 +13,7 @@ import { UsersStateService } from "src/app/states/users/users-state.service";
 import { AgentService } from "src/app/services/agent/agent.service";
 import { KafkaRealTimeService } from "src/app/states/kafka/kafka-real-time.service";
 import { KafkaStateService } from "src/app/states/kafka/kafka-state.service";
-import { ActivatedRoute } from "@angular/router";
+
 declare var $: any;
 @Component({
   selector: "app-device-root",
@@ -46,7 +46,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
   asset: any = undefined;
   powershellmsg: string = "";
   TemporaryCommand: string = "";
-  assetId : number;
+  assetId: number;
 
   constructor(
     private modalService: NgbModal,
@@ -90,9 +90,10 @@ export class DeviceComponent implements OnInit, OnDestroy {
     }
     this.deviceDetail = {};
     this.deviceDetail.id = this._id;
-    this.onGetCurrentConfig();
+    this.kafkaStateService.onCurrentConfig.subscribe((resp) => this.onGetCurrentConfig(resp));
+
     this.onPowerShellCommand();
-   
+
 
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
@@ -119,29 +120,23 @@ export class DeviceComponent implements OnInit, OnDestroy {
       });
   }
 
-  onGetCurrentConfig() {
-    this.kafkaStateService.onCurrentConfig.subscribe((resp) => {
-      console.log('onCurrentConfig');
-      let item = resp.find((x) => x.key == this.asset.ID);
-      if (item != undefined) {
-        
-        this.kafkaMessage = JSON.parse(item.value);
-        if (this.kafkaMessage.IdleTime != null) {
-          let Time = this.kafkaMessage.IdleTime.split("Idle for");
-          this.UpTime = Time[1] != "" ? Time[1] : "";
-          this.cd.detectChanges();
-        }
-        if(!this.deviceDetail) {
-          this.deviceDetail = {};
-          this.deviceDetail.id = this._id;
-        }
-        this.deviceDetail.online = true;
-      }
-
-    });
+  onGetCurrentConfig(resp: any) {
+    let item = resp.find((x) => x.key == this.asset.ID);
+    if (!item) {
+      return;
+    }
+    this.kafkaMessage = JSON.parse(item.value);
+    if (this.kafkaMessage.IdleTime != null) {
+      let Time = this.kafkaMessage.IdleTime.split("Idle for");
+      this.UpTime = Time[1] != "" ? Time[1] : "";
+      this.cd.detectChanges();
+    }
+    if (!this.deviceDetail) {
+      this.deviceDetail = {};
+      this.deviceDetail.id = this._id;
+    }
+    this.deviceDetail.online = true;
   }
-
-
 
   getCurrentCompany() {
     this.commonHttpServices
@@ -156,6 +151,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
         }
       );
   }
+
   getDeviceDetail() {
     this.hardwareService
       .getAllHardwareList(
@@ -172,6 +168,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
         }
       );
   }
+  
   updateTime() {
     this.totalSeconds++;
     if (parseInt(this.totalSeconds) === 60) {
@@ -317,7 +314,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
   }
 
   onPowerShellCommand() {
-    this.kafkaStateService.OnPowerShellCommand.subscribe((resp) => {
+    this.kafkaStateService.onPowerShellCommand.subscribe((resp) => {
       console.log('OnPowerShellCommand');
       let item = resp.find((x) => x.key == this._id);
       if (item != undefined) {

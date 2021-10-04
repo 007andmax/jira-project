@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { EventEmitter } from "@angular/core";
 import {
   UploadInput,
@@ -78,9 +78,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor(
     private agentService: AgentService,
     private toastr: ToastrService,
-    public activateRoute: ActivatedRoute,
-    public kafkaService: KafkaRealTimeService,
-    public kafkaStateService: KafkaStateService
+    private activateRoute: ActivatedRoute,
+    private kafkaStateService: KafkaStateService,
+    private cd: ChangeDetectorRef
   ) {
     this.options = { concurrency: 1, maxUploads: 10, maxFileSize: 1000000 };
     this.files = [];
@@ -91,20 +91,28 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.type = this.activateRoute.snapshot.params["type"];
     this._id = this.activateRoute.snapshot.params["id"];
+
     this.setPreviewDataDevice();
+    this.kafkaStateService.onCurrentConfig.subscribe((resp) => this.onCurrentConfig(resp), (e)=> this.onCurrentConfigError(e));
+  }
+
+  onCurrentConfig(resp: any) {
+    if (this.asset.ID != undefined && this.asset.ID != 0) {
+      let item = resp.find((x) => x.key == this.asset.ID);
+      if (item != undefined) {
+        this.kafkaMessage = JSON.parse(item.value);
+        this.securityUpdate = this.kafkaMessage.PendingWindowsUpdates.length;
+        this.cd.detectChanges();
+      }
+    }
+  }
+
+  onCurrentConfigError(err: any) {
+    console.log('on current config error');
+    this.toastr.error("Something went wrong getting real time data");
   }
 
   setPreviewDataDevice() {
-    this.kafkaStateService.onCurrentConfig.subscribe((resp) => {
-      if (this.asset.ID != undefined && this.asset.ID != 0) {
-        let item = resp.find((x) => x.key == this.asset.ID);
-        if (item != undefined) {
-          this.kafkaMessage = JSON.parse(item.value);
-          this.securityUpdate = this.kafkaMessage.PendingWindowsUpdates.length;
-        }
-      }
-    });
-
     this.currentUser = localStorage.getItem("currentUser");
     this.agentService
       .getAgentToken(
@@ -115,6 +123,39 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.agentService.setAccessToken(data.AccessToken);
         this.getAssetDetail();
       });
+  }
+  
+  getAssetDetail() {
+    this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
+      if (resp.length > 0) {
+        this.asset = resp[0];
+        this.asset.IsUpdated = true;
+        
+        if (this.minDate(this.asset.WarrantyExpires)) {
+          this.asset.WarrantyExpires = "";
+        }
+
+        if (this.minDate(this.asset.InstallDate)) {
+          this.asset.InstallDate = "";
+        }
+
+        if (this.minDate(this.asset.DeploymentDate)) {
+          this.asset.DeploymentDate = "";
+        }
+
+        if (this.minDate(this.asset.LastRebootDate)) {
+          this.asset.LastRebootDate = "";
+        }
+
+        this.getlabel(this.asset.Title, this.asset.Domain, this.asset.Name);
+        this.getOprationSystemDetail();
+        this.getVirusProtection(resp[0].VirusProtectionProducts);
+        this.getDiskDriveDetail();
+        this.getAssetTagDropDownDetail();
+        this.getAssetNotesDetail();
+        this.agentService.GetCurrentConfig(this.asset.ID);
+      }
+    });
   }
 
   AddTags(Tag) {
@@ -243,37 +284,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     );
   }
 
-  getAssetDetail() {
-    this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
-      if (resp.length > 0) {
-        this.asset = resp[0];
-        this.asset.IsUpdated = true;
-        if (this.minDate(this.asset.WarrantyExpires)) {
-          this.asset.WarrantyExpires = "";
-        }
-
-        if (this.minDate(this.asset.InstallDate)) {
-          this.asset.InstallDate = "";
-        }
-
-        if (this.minDate(this.asset.DeploymentDate)) {
-          this.asset.DeploymentDate = "";
-        }
-
-        if (this.minDate(this.asset.LastRebootDate)) {
-          this.asset.LastRebootDate = "";
-        }
-
-        this.getlabel(this.asset.Title, this.asset.Domain, this.asset.Name);
-        this.getOprationSystemDetail();
-        this.getVirusProtection(resp[0].VirusProtectionProducts);
-        this.getDiskDriveDetail();
-        this.getAssetTagDropDownDetail();
-        this.getAssetNotesDetail();
-        this.agentService.GetCurrentConfig(this.asset.ID);
-      }
-    });
-  }
 
   getAssetNotesDetail() {
     this.agentService.getAssetNotes(this.asset.ID).subscribe((res) => {
