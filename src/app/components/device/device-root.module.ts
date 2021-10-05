@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DeviceComponent } from './device.component';
 import { NavComponent } from './nav/nav.component';
 import { RouterModule } from '@angular/router';
+import { DateFormatModule } from 'src/app/pipe/dateFormat/date-format.module';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { RouterModule } from '@angular/router';
     ],
     imports: [
         CommonModule,
-        RouterModule
+        RouterModule,
+        DateFormatModule
     ],
     exports: [DeviceComponent]
 
