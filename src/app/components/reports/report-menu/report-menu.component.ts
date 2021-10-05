@@ -269,7 +269,7 @@ export class ReportMenuComponent implements OnInit {
     this.ticketReportStateService.toggleShowProducts(event.target.checked);
   }
   onSelectTechUser(data) {
-    this.ticketsReport.setTechUser(data);
+    this.ticketsReport.setTechUser((data) ? data.id : null);
     this.techService.setTechUserId((data) ? data.id : null);
     this.remoteConnectionReport.setTechUserId((data) ? data.id : null);
     this.detailedCommissionsReport.setTechUserId((data) ? data.id : null);

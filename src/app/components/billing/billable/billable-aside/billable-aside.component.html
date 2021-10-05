@@ -1,4 +1,7 @@
-<div class="billing-page__aside qt-aside-modern --x-large" *ngIf="opened">
+<div
+    class="billing-page__aside qt-aside-modern --x-large"
+    *ngIf="opened"
+>
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-title">New Invoice</div>
         <div
@@ -61,7 +64,10 @@
     >
         <div class="loading"></div>
     </div>
-    <div class="qt-aside-modern__footer">
+    <div
+        class="qt-aside-modern__footer"
+        *ngIf="!showPreloader"
+    >
         <div class="qt-df">
             <div
                 class="qt-pos-rel"
