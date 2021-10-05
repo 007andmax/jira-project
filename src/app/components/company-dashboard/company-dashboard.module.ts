@@ -40,7 +40,7 @@ import { CompanyDashboardRoutingModule } from './company-dashboard-routing.modul
         CommonModule,
         CompanyDashboardRoutingModule,
         CompanyTagsModule,
-        NgxMaskModule,
+        NgxMaskModule.forRoot(),
         NgbModule,
         FormsModule,
         CompanyEditAsideModule,

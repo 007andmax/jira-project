@@ -108,7 +108,7 @@ import { UploadAreaProgressModule } from 'src/app/components/shared/upload-area/
         TicketProfileUpdatesServiceTimepickerModule,
         TicketProfileUpdatesServiceDurationModule,
         DatePickerModule,
-        NgxMaskModule,
+        NgxMaskModule.forRoot(),
         PreparePhoneModule,
         PhoneModule,
         InfiniteScrollModule,

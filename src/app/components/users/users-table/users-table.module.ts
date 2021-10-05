@@ -21,7 +21,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         CommonModule,
         FormsModule,
         PhoneModule,
-        NgxMaskModule,
+        NgxMaskModule.forRoot(),
         PreparePhoneModule,
         DynamicTooltipModule,
         NgbModule,

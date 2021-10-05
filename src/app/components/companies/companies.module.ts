@@ -39,7 +39,7 @@ import { CompanyTagsModule } from './company-tags/company-tags.module';
         CompanyEditAsideModule,
         CompanySubscriptionModule,
         PhoneModule,
-        NgxMaskModule,
+        NgxMaskModule.forRoot(),
         PreparePhoneModule,
         DynamicTooltipModule,
         DropDownModule,

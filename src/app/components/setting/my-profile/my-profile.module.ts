@@ -26,7 +26,7 @@ import { MyProfileRoutingModule } from './my-profile-routing.module';
         NgbModule,
         ImageCropperModule,
         ReactiveFormsModule,
-        NgxMaskModule,
+        NgxMaskModule.forRoot(),
         FormsModule,
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyAbP4DFpz4f9YcXMWUjdkOdyArX2peNt8s'

@@ -12,9 +12,8 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
     ],
     imports: [
         CommonModule,
-        FroalaEditorModule,
-        FroalaViewModule
-
+        FroalaEditorModule.forRoot(),
+        FroalaViewModule.forRoot()
     ],
     exports: [DocumentsAddBodyComponent]
 
