@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { AgentService } from "src/app/services/agent/agent.service";
 import { CompaniesStateService } from "src/app/states/company/companies-state.service";
@@ -28,7 +28,8 @@ export class CompanyDeviceBetaComponent implements OnInit {
     private agentService: AgentService,
     private companiesStateService: CompaniesStateService,
     private kafkaStateService: KafkaStateService,
-    private activateRoute: ActivatedRoute
+    private activateRoute: ActivatedRoute,
+    private cd: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -117,6 +118,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
               let Time = this.kafkaMessage.IdleTime.split("Idle for");
               this.AssetList[index].IdelTime = Time[1] != "" ? Time[1] : "";
             }
+            this.cd.detectChanges();
           }
         });
       }

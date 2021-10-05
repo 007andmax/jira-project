@@ -1,11 +1,9 @@
-
 /*** All css files include ***/
+
 @import '../../../assets/scss/device/variable';
 @import '../../../assets/scss/device/mixin';
 @import '../../../assets/scss/device/custom';
-
-
-
+@import '../../../assets/scss/device/_modals.scss';
 .remote-area {
     padding: 70px 48px 25px 48px;
     display: -ms-flexbox;
@@ -26,7 +24,7 @@
             margin-bottom: 39px;
             &:last-child {
                 margin-bottom: 0;
-            }  
+            }
             .remote-ico {
                 float: left;
                 width: 66px;
@@ -38,10 +36,10 @@
                 justify-content: center;
                 align-items: center;
             }
-              
         }
     }
 }
+
 .remote-info {
     float: right;
     width: calc(100% - 86px);
@@ -58,7 +56,6 @@
         display: inline-block;
         height: auto;
         line-height: 1;
-        
     }
 }
 
@@ -77,14 +74,12 @@
     background-color: #edf2f6;
     padding: 26px 45px;
     align-items: center;
-    p { 
+    p {
         margin-bottom: 0;
         max-width: 326px;
-        font-size:13px;
+        font-size: 13px;
     }
 }
-
-
 
 .btn-dowanload {
     @include border-radius(4px);
@@ -99,10 +94,24 @@
     text-align: center;
     min-width: 134px;
     @include transition(0.4s);
-        &:hover{
-            background-color: $primary-color;
-            border-color: $primary-color;
-            color: $white-color;
-        }
+    &:hover {
+        background-color: $primary-color;
+        border-color: $primary-color;
+        color: $white-color;
+    }
 }
 
+.restart-modal .modal-title {
+    font-size: 18px;
+    padding: $modal-title-padding;
+    border-bottom: 1px solid $modal-header-border-color;
+    @include clearfix;
+}
+
+.restart-modal .modal-body p {   
+    padding:15px
+}
+
+.restart-modal .close {
+    margin-top:-10px;
+}

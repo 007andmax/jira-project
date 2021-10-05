@@ -327,10 +327,12 @@ export class DeviceComponent implements OnInit, OnDestroy {
         this.kafkaMessage = item.value;
         this.powershellmsg = this.kafkaMessage;
         if (item.value.startsWith("Failed") || item.value.startsWith("This")) {
+          this.powershellmsg = item.value.startsWith("Failed")? this.powershellmsg +'<br/> Do you want to force restart?': this.powershellmsg +'<br/> Do you want to force shutdown?' ;
           this.modalService.open(this.template, {
             windowClass: "modal-md",
             centered: true,
           });
+          this.cd.detectChanges();
         }
       }
     });

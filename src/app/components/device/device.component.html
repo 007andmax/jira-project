@@ -13,10 +13,7 @@
                     <div class="head-device">
                         <h6>Device</h6>
                         <!-- <h5 id="head-label">{{deviceDetail.label || deviceDetail.hostName || deviceDetail.ip}}</h5> -->
-                        <h5
-                            id="head-label"
-                            [textContent]="deviceName"
-                        ></h5>
+                        <h5 id="head-label" [textContent]="deviceName"></h5>
                     </div>
                 </div>
                 <div class="hp-device-info">
@@ -33,11 +30,7 @@
                 </div>
             </div>
             <div class="header-right">
-                <a
-                    href="javascript:;"
-                    class="head-btn"
-                    (click)="openModal(template)"
-                >
+                <a href="javascript:;" class="head-btn" (click)="openModal(template)">
                     Remote Control
                 </a>
                 <!-- <a href="javascript:;" class="head-btn-info btn-print" (click)="lock();"><img src="/html/assets/img/device/print-sheet.svg" alt="Print" /></a> -->
@@ -51,48 +44,23 @@
                         alt="Tempararyrestart"
                     >
                 </a> -->
-                <a
-                    href="javascript:;"
-                    (click)="sendCommand('r',templatePowersell,this.asset.ID)"
-                    class="head-btn-info btn-refresh"
-                >
-                    <img
-                        src="/html/assets/img/device/restart.svg"
-                        alt="restart"
-                    >
+                <a href="javascript:;" (click)="sendCommand('r',templatePowersell,this.asset.ID)" class="head-btn-info btn-refresh">
+                    <img src="/html/assets/img/device/restart.svg" alt="restart">
                 </a>
-                <a
-                    href="javascript:;"
-                    (click)="sendCommand('s',templatePowersell,this.asset.ID)"
-                    class="head-btn-info btn-shutDown"
-                >
-                    <img
-                        src="/html/assets/img/device/shutdown.svg"
-                        alt="shutdown"
-                    >
+                <a href="javascript:;" (click)="sendCommand('s',templatePowersell,this.asset.ID)" class="head-btn-info btn-shutDown">
+                    <img src="/html/assets/img/device/shutdown.svg" alt="shutdown">
                 </a>
             </div>
         </div>
         <div class="head-counter">
             <div class="sub-head-counter pointer">
-                <img
-                    src="/html/assets/img/device/restart.svg"
-                    alt="Play"
-                    (click)="restartTimerControl()"
-                >
+                <img src="/html/assets/img/device/restart.svg" alt="Play" (click)="restartTimerControl()">
             </div>
             <div class="sub-head-counter pointer">
-                <img
-                    [src]="play_pause_path"
-                    alt="Play"
-                    (click)="timerControl()"
-                >
+                <img [src]="play_pause_path" alt="Play" (click)="timerControl()">
             </div>
             <div class="sub-head-counter">
-                <img
-                    src="/html/assets/img/device/counter.svg"
-                    alt="Print"
-                >
+                <img src="/html/assets/img/device/counter.svg" alt="Print">
                 <span id="counter">
                     {{padNumber(this.totalHours)}} hr : {{padNumber(this.totalMinutes)}} min : {{padNumber(this.totalSeconds)}} sec
                 </span>
@@ -107,17 +75,9 @@
     <router-outlet></router-outlet>
 </div>
 <!-- Modal create Tags -->
-<ng-template
-    #template
-    let-modal
->
+<ng-template #template let-modal>
     <div class="modal-body">
-        <button
-            type="button"
-            class="close pull-right"
-            aria-label="Close"
-            (click)="modal.dismiss('Cross click')"
-        >
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
 
@@ -140,10 +100,7 @@
                         <p>
                             Get our Windows Installer package to install the app on your system. The app will be available to join future sessions instantly.
                         </p>
-                        <a
-                            (click)="createConnection('CSS');"
-                            class="btn btn-primary"
-                        >
+                        <a (click)="createConnection('CSS');" class="btn btn-primary">
                             Launch Quicktech Connect
                         </a>
                     </div>
@@ -165,54 +122,32 @@
             <p>
                 You may need to download and install the viewer
             </p>
-            <a
-                (click)="getViewer();"
-                class="btn btn-dowanload"
-            >
+            <a (click)="getViewer();" class="btn btn-dowanload">
                 Download Viewer
             </a>
         </div>
     </div>
 </ng-template>
 
-
-
 <ng-template #templatePowersell>
-    <div class="modal-content">
+    <div class="modal-content restart-modal">
         <div class="modal-header">
-            <button
-            type="button"
-            class="close"
-            (click)="decline()"
-            data-dismiss="modal"
-            aria-label="Close"
-        >
-            <span aria-hidden="true">&times;</span>
-        </button>
             <h5 class="modal-title">Confirmation</h5>
+            <button type="button" class="close" (click)="decline()" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
-        <div class="modal-body text-center">
-            <p>{{powershellmsg}}</p>
+        <div class="modal-body">
+            <p  [innerHTML]="powershellmsg"></p>
         </div>
         <div class="modal-footer">
-            <button
-                type="button"
-                class="btn btn-danger"
-                (click)="Reboot(this.asset.ID,this.TemporaryCommand);"
-            >
+            <button type="button" class="btn btn-danger" (click)="Reboot(this.asset.ID,this.TemporaryCommand);">
                 Yes
             </button>
-            <button
-                type="button"
-                class="btn btn-secondary"
-                (click)="decline()"
-            >
+            <button type="button" class="btn btn-secondary" (click)="decline()">
                 No
             </button>
         </div>
     </div>
 </ng-template>
-<div
-    class="loading"
-    *ngIf="loading"
-></div>
+<div class="loading" *ngIf="loading"></div>
