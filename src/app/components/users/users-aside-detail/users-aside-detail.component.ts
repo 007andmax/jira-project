@@ -9,11 +9,14 @@ import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-s
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { PhoneNumber } from 'src/class/phone-number';
+import { CompanySubscriptionStateService } from '../../companies/company-subscription/class/company-subscription-state.service';
 import { StatusColor } from '../../left-panel/left-panel-tickets/tickets-status/class/status-color';
 import { TicketsColor } from '../../left-panel/left-panel-tickets/tickets-status/class/tickets-color';
 
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { User } from '../class/user';
+import { UserProfile } from '../class/user-profile';
+import { UserValidate } from '../class/user-validate';
 import { UsersAsideDetailTicketsComponent } from './users-aside-detail-tickets/users-aside-detail-tickets.component';
 
 @Component({
@@ -23,10 +26,15 @@ import { UsersAsideDetailTicketsComponent } from './users-aside-detail-tickets/u
   providers: [TicketsListService]
 })
 export class UsersAsideDetailComponent implements OnInit, OnDestroy {
-  user: User;
+  user: UserProfile = new UserProfile();
   open: boolean = false;
+  toggleEditJobDescription = false;
   showFullJobDescription: boolean = false;
+  validate: UserValidate = new UserValidate();
   tab: string = 'tickets';
+  companies = [];
+  selectedCompany = null;
+
   @ViewChild('ticketsDetail') ticketsDetail: UsersAsideDetailTicketsComponent;
   sub: Subscription = new Subscription();
   constructor(public ticketsListService: TicketsListService,
@@ -37,27 +45,24 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
     private leftPanelService: LeftPanelService,
     private ticketsStateService: TicketsStateService,
     private draftEmailStateService: DraftEmailStateService,
+    private companySubscriptionState: CompanySubscriptionStateService,
     private companiesStateService: CompaniesStateService,) { }
 
 
   ngOnInit() {
     let openDetailAside = this.usersStateService.openDetailAside.subscribe(data => {
-      this.user = data;
-      if (this.user.phoneNumbers && this.user.phoneNumbers.length === 0 || !this.user.phoneNumbers) {
-        this.user.phoneNumbers = [new PhoneNumber('OFFICE')];
-      } else {
-        this.user.phoneNumbers = this.user.phoneNumbers.map((item) => {
-          let number = item.number;
-          if (number[0] === "1") number = `+${number}`;
-          return new PhoneNumber(item.typeNumber, number);
-        })
-      }
+      console.log("data", data);
+      this.usersStateService.setUserForEdit(data);
+      this.companySubscriptionState.onEditMode(this.user.subscription);
+      this.user.onEdit(data);
       this.tab = 'tickets';
       this.cd.detectChanges();
       if (this.ticketsDetail) {
         this.ticketsDetail.setDefaultScoll();
         this.ticketsDetail.onScroll();
       }
+      this.validate.addPhoneNumbers(this.user.phoneNumbers);
+      this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.user.companyId);
       this.open = true;
     })
     this.sub.add(openDetailAside);
@@ -72,6 +77,43 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
       let ticketsColor = new TicketsColor(data);
       this.ticketsStateService.onInitStatus(ticketsColor);
     })
+    if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
+    let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
+      this.getClientsList(data);
+    })
+  }
+  onChangeJobDescription(event) {
+    this.user.jobDescription = event.target.value;
+  }
+  onCheckEmail() {
+    if (this.user.primaryEmail && this.user.primaryEmail.length > 0) this.validate.checkValidPrimaryEmail(this.user.primaryEmail);
+    if (this.user.primaryEmail && this.user.primaryEmail.length > 0 && this.selectedCompany) this.onCheckValidPrimaryEmail();
+
+  }
+  onCheckPhoneNumber(i) {
+    this.validate.checkValidPhoneNumber(i, this.user.phoneNumbers[i].number);
+
+  }
+  onUpdatePhoneNumber() {
+    if (this.validate.isValidate(this.user)) this.updateUser();
+  }
+  onCheckValidPrimaryEmail() {
+    this.usersService.checkValidPrimaryEmail(this.user.primaryEmail, this.selectedCompany.id, this.user.id).subscribe((data: any) => {
+
+      this.validate.setExistPrimaryContactEmail(data.value);
+      if (this.validate.isValidate(this.user)) this.updateUser();
+
+      this.cd.detectChanges();
+    })
+  }
+  onSelectCompany(data) {
+    this.selectedCompany = data;
+    this.user.serCompanyId(data.id);
+    this.updateUser();
+  }
+  getClientsList(data) {
+    this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
   getJobDescription(val) {
     let value = val;
@@ -99,15 +141,17 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
     this.open = false;
     this.showFullJobDescription = false;
     this.usersStateService.hideDetailUser();
+    this.validate = new UserValidate();
   }
-  getCompanyName() {
-    if (!this.user.company) return '';
-    let find = this.companiesStateService.getCompanies().find(item => item.id === this.user.company.id);
-    return (find) ? find.name : '';
+
+  updateUser() {
+    this.usersService.updateUser(this.user.getUserForUpdate(this.usersStateService.getuserForEdit())).subscribe(data => {
+
+    })
   }
   onChangeSubscriptions(data) {
     let subscription = {
-      id: this.user.subscription.id,
+      id: this.usersStateService.getuserForEdit().subscription.id,
       invoice: true,
       ticket: true,
       ticketManager: true,
