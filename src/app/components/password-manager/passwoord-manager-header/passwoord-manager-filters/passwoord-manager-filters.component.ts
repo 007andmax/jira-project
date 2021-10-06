@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { Company } from 'src/app/interfaces/quote/company';
+import { Company } from 'src/app/interfaces/company/company';
 import { AppService } from 'src/app/states/app/app.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
