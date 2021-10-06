@@ -66,6 +66,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
     let find = this.AssetList.find((item) => !item.selected);
     this.selectAllDevices = find ? false : true;
   }
+
   gotoDetailDevice(Guid: string) {
     localStorage.setItem("company_id", this.companyId);
     const type = "workstation";
@@ -79,6 +80,8 @@ export class CompanyDeviceBetaComponent implements OnInit {
     this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {
       this.AssetList = resp;
       this.AssetList.forEach((element, index) => {
+        element.iconName = 'workstation';
+        element.online = false;
         this.AssetList[index].Title =
           element.Title != "" ? element.Title : element.Name;
         this.OperatingSystem(element.ID, index);
@@ -117,11 +120,17 @@ export class CompanyDeviceBetaComponent implements OnInit {
             if (this.kafkaMessage.IdleTime != null) {
               let Time = this.kafkaMessage.IdleTime.split("Idle for");
               this.AssetList[index].IdelTime = Time[1] != "" ? Time[1] : "";
+              this.AssetList[index].online = true;
             }
+            
             this.cd.detectChanges();
           }
         });
       }
     });
+  }
+
+  public setIcon(assetId, iconName) {
+    //TODO: Set device icon
   }
 }

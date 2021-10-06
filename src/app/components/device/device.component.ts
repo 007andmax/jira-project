@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   OnDestroy,
@@ -24,7 +25,7 @@ declare var $: any;
 @Component({
   selector: "app-device-root",
   templateUrl: "./device.component.html",
-  styleUrls: ["./device.component.scss"],
+  styleUrls: ["./device.component.scss"]
 })
 export class DeviceComponent implements OnInit, OnDestroy {
   @ViewChild("templatePowersell") template;
@@ -67,7 +68,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
     public kakfaService: KafkaRealTimeService,
     private kafkaStateService: KafkaStateService,
     private cd: ChangeDetectorRef
-  ) {}
+  ) { }
 
   lock() {
     // this.modalRef = this.modalService.show(
@@ -80,11 +81,11 @@ export class DeviceComponent implements OnInit, OnDestroy {
     this.setPreviewDataDevice();
     this.type =
       window.location.href.split("/")[
-        window.location.href.split("/").length - 2
+      window.location.href.split("/").length - 2
       ];
     this._id =
       window.location.href.split("/")[
-        window.location.href.split("/").length - 1
+      window.location.href.split("/").length - 1
       ];
     this.usersStateService.onInit();
     this.shellStateService.onInit();
@@ -187,11 +188,11 @@ export class DeviceComponent implements OnInit, OnDestroy {
     }
     $("#counter").text(
       this.padNumber(this.totalHours) +
-        " hr : " +
-        this.padNumber(this.totalMinutes) +
-        " min : " +
-        this.padNumber(this.totalSeconds) +
-        " sec"
+      " hr : " +
+      this.padNumber(this.totalMinutes) +
+      " min : " +
+      this.padNumber(this.totalSeconds) +
+      " sec"
     );
   }
   getDevicesByCompany() {
@@ -237,7 +238,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
         (resp) => {
           this.loading = false;
         },
-        (error) => {}
+        (error) => { }
       );
   }
 
@@ -258,7 +259,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
             sessionId;
           window.open(url, "_self");
         },
-        (error) => {}
+        (error) => { }
       );
   }
   createConnection(type) {
@@ -327,14 +328,14 @@ export class DeviceComponent implements OnInit, OnDestroy {
         this.kafkaMessage = item.value;
         this.powershellmsg = this.kafkaMessage;
         if (item.value.startsWith("Failed") || item.value.startsWith("This")) {
-          this.powershellmsg = item.value.startsWith("Failed")? this.powershellmsg +'<br/> Do you want to force restart?': this.powershellmsg +'<br/> Do you want to force shutdown?' ;
+          this.powershellmsg = item.value.startsWith("Failed") ? this.powershellmsg + '<br/> Do you want to force restart?' : this.powershellmsg + '<br/> Do you want to force shutdown?';
           this.modalService.open(this.template, {
             windowClass: "modal-md",
             centered: true,
           });
-          this.cd.detectChanges();
         }
       }
+      this.cd.detectChanges();
     });
   }
 

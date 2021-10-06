@@ -1,19 +1,9 @@
 <div class="qt-page-list company-devices-page">
     <div class="qt-page-list__header --sticky">
         <div class="qt-page-list__header-title-line--left">
-            <h3
-                class="qt-page-list__header-title"
-                [textContent]="'Devices'"
-            ></h3>
+            <h3 class="qt-page-list__header-title" [textContent]="'Devices'"></h3>
             <form method="GET">
-                <input
-                    type="search"
-                    class="form-input-search device-beta-search"
-                    [(ngModel)]="search"
-                    name="search"
-                    placeholder="Search Devices…"
-                    autocomplete="off"
-                >
+                <input type="search" class="form-input-search device-beta-search" [(ngModel)]="search" name="search" placeholder="Search Devices…" autocomplete="off">
             </form>
         </div>
 
@@ -36,10 +26,7 @@
                             </div>
                         </th>
                         <th class="company-devices-table__device-type"></th>
-                        <th
-                            class="company-devices-table__device-name pointer"
-                            (click)="onFilter('Name')"
-                        >
+                        <th class="company-devices-table__device-name pointer" (click)="onFilter('Name')">
                             Device Name
                             <span class="qt-table-modern__sorting"></span>
                         </th>
@@ -79,11 +66,27 @@
                                 </div>
                             </td>
                             <td class="company-devices-table__device-type">
-                                <div>
-                                    <img
-                                        src="/assets/img/icons/computer.svg"
-                                        alt
-                                    >
+                                <div ngbDropdown placement="bottom-left" container="body" class="qt-ic-c qt-pointer device-type-icon qt-sz-24" [ngClass]="{'icon__computer' : asset.iconName === 'workstation' || !asset.iconName,
+              'icon__tablet' : asset.iconName === 'device',
+            'icon__printer' : asset.iconName === 'printer',
+          'icon__server' : asset.iconName === 'server',
+        '--ofline': !asset.online }" ngbDropdownToggle>
+                                    <div ngbDropdownMenu>
+                                        <ul class="icon-list qt-dropdown-menu --dropdown-icons device-type-dropdown">
+                                            <li (click)="setIcon(asset.ID,'workstation')" ngbDropdownItem>
+                                                <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__computer"></i>
+                                            </li>
+                                            <li (click)="setIcon(asset.ID,'device')" ngbDropdownItem>
+                                                <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__tablet"></i>
+                                            </li>
+                                            <li (click)="setIcon(asset.ID,'printer')" ngbDropdownItem>
+                                                <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__printer"></i>
+                                            </li>
+                                            <li (click)="setIcon(asset.ID,'server')" ngbDropdownItem>
+                                                <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__server"></i>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </td>
                             <td class="company-devices-table__device-name">
@@ -92,23 +95,14 @@
                                         <div class="company-devices-table-device-name qt-ff-gm qt-df qt-ai-c">
                                             <span [textContent]="asset.Title"></span>
                                         </div>
-                                        <span
-                                            class="company-device-desc"
-                                            [textContent]
-                                        ></span>
+                                        <span class="company-device-desc" [textContent]></span>
                                     </div>
                                 </div>
                             </td>
                             <td class="company-devices-table__logged-user">
                                 <div class="qt-df qt-fd-c">
-                                    <span
-                                        class="logged-name qt-ff-gm"
-                                        [textContent]="asset.CurrentUser || ''"
-                                    ></span>
-                                    <span
-                                        class="logged-time"
-                                        *ngIf="asset.IdelTime"
-                                    >
+                                    <span class="logged-name qt-ff-gm" [textContent]="asset.CurrentUser || ''"></span>
+                                    <span class="logged-time" *ngIf="asset.IdelTime">
                                         Idle:
                                         <span>{{asset.IdelTime}}</span>
                                     </span>
@@ -118,79 +112,36 @@
                                 <div class="qt-df qt-fd-c">
                                     <span>
                                         <span>{{asset.IdelTime}}</span>
-                                        <ng-template
-                                            #tipOfflineDevice
-                                            class="tooltip"
-                                        >
-                                            <span>{{asset.IdelTime}}</span>
-                                        </ng-template>
+                                    <ng-template #tipOfflineDevice class="tooltip">
+                                        <span>{{asset.IdelTime}}</span>
+                                    </ng-template>
                                     </span>
-                                    <span
-                                        *ngIf="asset.IdelTime!='' && asset.IdelTime!=undefined && asset.IdelTime!=null"
-                                        class="uptime-tag qt-ff-gm"
-                                        [textContent]="'Online'"
-                                    ></span>
-                                    <span
-                                        *ngIf="asset.IdelTime=='' || asset.IdelTime==undefined || asset.IdelTime==null"
-                                        placement="top"
-                                        container="body"
-                                        [ngbTooltip]="tipOfflineDevice"
-                                        class="uptime-tag qt-ff-gm --offline"
-                                        [textContent]="'Offline'"
-                                    ></span>
+                                    <span *ngIf="asset.IdelTime!='' && asset.IdelTime!=undefined && asset.IdelTime!=null" class="uptime-tag qt-ff-gm" [textContent]="'Online'"></span>
+                                    <span *ngIf="asset.IdelTime=='' || asset.IdelTime==undefined || asset.IdelTime==null" placement="top" container="body" [ngbTooltip]="tipOfflineDevice" class="uptime-tag qt-ff-gm --offline" [textContent]="'Offline'"></span>
                                 </div>
                             </td>
                             <td class="company-devices-table__windows">{{ asset.Caption || "N/A" }}</td>
                             <td class="company-devices-table__ip-address">{{ asset.InternalIPAddress || "N/A" }}</td>
                             <td class="company-devices-table__go-to">
-                                <ng-template
-                                    #tipDeviceDetail
-                                    class="tooltip"
-                                >
+                                <ng-template #tipDeviceDetail class="tooltip">
                                     Device Detail
                                 </ng-template>
-                                <div
-                                    class="qt-ic-c icon__go-to qt-pointer qt-sz-24 qt-bgsz-16"
-                                    placement="top"
-                                    *ngIf="asset.ID"
-                                    [ngbTooltip]="tipDeviceDetail"
-                                    (click)="gotoDetailDevice(asset.Guid)"
-                                ></div>
+                                <div class="qt-ic-c icon__go-to qt-pointer qt-sz-24 qt-bgsz-16" placement="top" *ngIf="asset.ID" [ngbTooltip]="tipDeviceDetail" (click)="gotoDetailDevice(asset.Guid)"></div>
                             </td>
                             <td class="company-devices-table__connect"></td>
                             <td class="company-devices-table__menu">
-                                <div
-                                    class="company-devices-table__menu-body"
-                                    ngbDropdown
-                                    placement="bottom-right"
-                                    container="body"
-                                >
-                                    <div
-                                        class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"
-                                        ngbDropdownToggle
-                                    ></div>
-                                    <ul
-                                        class="qt-dropdown-menu invoice-items-dropdown"
-                                        ngbDropdownMenu
-                                    >
-                                        <li
-                                            class="pointer"
-                                            ngbDropdownItem
-                                        >
+                                <div class="company-devices-table__menu-body" ngbDropdown placement="bottom-right" container="body">
+                                    <div class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain" ngbDropdownToggle></div>
+                                    <ul class="qt-dropdown-menu invoice-items-dropdown" ngbDropdownMenu>
+                                        <li *ngIf="asset.online" class="pointer" ngbDropdownItem>
                                             <div class="icon__restart qt-bg-contain qt-sz-16 qt-mr-8"></div>
                                             Restart
                                         </li>
-                                        <li
-                                            class="pointer"
-                                            ngbDropdownItem
-                                        >
+                                        <li *ngIf="asset.online" class="pointer" ngbDropdownItem>
                                             <div class="icon__shutdown qt-bg-contain qt-sz-16 qt-mr-8"></div>
                                             Shutdown
                                         </li>
-                                        <li
-                                            class="pointer"
-                                            ngbDropdownItem
-                                        >
+                                        <li *ngIf="asset.online" class="pointer" ngbDropdownItem>
                                             <div class="icon__master-agent qt-bg-contain qt-sz-16 qt-mr-8"></div>
                                             Set as Master Agent
                                         </li>
@@ -205,10 +156,7 @@
                     </tbody>
                 </table>
             </div>
-            <div
-                class="loading"
-                *ngIf="showPreloader"
-            ></div>
+            <div class="loading" *ngIf="showPreloader"></div>
         </div>
     </div>
 </div>
