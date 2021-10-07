@@ -75,7 +75,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     })
     this.ticketsStateService.getToggleAddTicket().subscribe(data => {
       this.opened = !this.opened;
-      this.appService.toggleMobileAside(true);
+      if (this.appService.checkMobile()) this.appService.toggleMobileAside(true);
 
     })
     if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());

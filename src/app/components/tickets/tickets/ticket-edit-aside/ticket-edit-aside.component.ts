@@ -93,7 +93,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       this.ticketStateService.getServicesList(this.ticketProfile);
       this.ticketStateService.subsribeToTicket(this.ticketProfile.id);
       this.ticketMessage.reset();
-      this.appService.toggleMobileAside(true);
+      if (this.appService.checkMobile()) this.appService.toggleMobileAside(true);
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
       }

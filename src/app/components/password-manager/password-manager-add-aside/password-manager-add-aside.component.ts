@@ -86,7 +86,7 @@ export class PasswordManagerAddAsideComponent implements OnInit {
       current.setFullYear(current.getFullYear() + 1);
       this.passwordRecordAdd.setExpiryDate(moment(current).format('YYYY/MM/DD'));
       this.opened = true;
-      this.appService.toggleMobileAside(true);
+      if (this.appService.checkMobile()) this.appService.toggleMobileAside(true);
     });
     this.sub.add(onAddForm);
     this.categories = this.passwordManagerStateService.getCategories();
