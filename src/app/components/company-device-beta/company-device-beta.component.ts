@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
 import { AgentService } from "src/app/services/agent/agent.service";
 import { CompaniesStateService } from "src/app/states/company/companies-state.service";
 import { KafkaStateService } from "src/app/states/kafka/kafka-state.service";
@@ -22,6 +23,8 @@ export class CompanyDeviceBetaComponent implements OnInit {
   selected: boolean = false;
   kafkaMessage: any;
   companyId: any;
+  HardwareType: any[] = [];
+  Asset: any;
 
   constructor(
     private leftPanelStateService: LeftPanelStateService,
@@ -29,7 +32,8 @@ export class CompanyDeviceBetaComponent implements OnInit {
     private companiesStateService: CompaniesStateService,
     private kafkaStateService: KafkaStateService,
     private activateRoute: ActivatedRoute,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {
@@ -79,13 +83,30 @@ export class CompanyDeviceBetaComponent implements OnInit {
   AssetDetail() {
     this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {
       this.AssetList = resp;
+      this.HardwareTypeList(resp[0].TechCompanyGuid);
       this.AssetList.forEach((element, index) => {
-        element.iconName = 'workstation';
+        if (element.HardwareTypeID != null) {
+          if (element.HardwareTypeID == 4) {
+            this.AssetList[index].iconName = "Networking Hardware";
+          }
+          if (element.HardwareTypeID == 3) {
+            this.AssetList[index].iconName = "Printer";
+          }
+          if (element.HardwareTypeID == 2) {
+            this.AssetList[index].iconName = "Workstation";
+          }
+          if (element.HardwareTypeID == 1) {
+            this.AssetList[index].iconName = "Server";
+          }
+        } else {
+          this.AssetList[index].iconName = "";
+        }
         element.online = false;
         this.AssetList[index].Title =
           element.Title != "" ? element.Title : element.Name;
         this.OperatingSystem(element.ID, index);
         this.GetCurrentConfig(element.ID);
+        this.HardwareTypeList(element.TechCompanyGuid);
       });
     });
     this.showPreloader = false;
@@ -122,7 +143,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
               this.AssetList[index].IdelTime = Time[1] != "" ? Time[1] : "";
               this.AssetList[index].online = true;
             }
-            
+
             this.cd.detectChanges();
           }
         });
@@ -130,7 +151,27 @@ export class CompanyDeviceBetaComponent implements OnInit {
     });
   }
 
-  public setIcon(assetId, iconName) {
-    //TODO: Set device icon
+  public setIcon(assetId, hardwareId) {
+    this.agentService.getAssetByAssetId(assetId).subscribe((resp) => {
+      if (resp.length > 0) {
+        this.Asset = resp[0];
+        this.Asset.HardwareTypeID = hardwareId;
+        this.HardwareTypeIdUpdate(this.Asset);
+      }
+    });
+  }
+
+  HardwareTypeIdUpdate(Asset) {
+    this.agentService.overrideAsset(Asset).subscribe((resp) => {
+      this.toastr.success("HardwareType change successfully.");
+    });
+  }
+
+  HardwareTypeList(TechCompanyGuid: any) {
+    this.agentService
+      .getHardwareTypeByTechCompanyGuid(TechCompanyGuid)
+      .subscribe((resp) => {
+        this.HardwareType = resp;
+      });
   }
 }

@@ -108,10 +108,14 @@
     @include clearfix;
 }
 
-.restart-modal .modal-body p {   
+.restart-modal .modal-body p {
     padding:15px
 }
 
 .restart-modal .close {
     margin-top:-10px;
+}
+
+.restart-modal .modal-footer .btn{
+  background-color: #FF0000;
 }

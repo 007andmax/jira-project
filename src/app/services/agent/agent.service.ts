@@ -66,6 +66,34 @@ export class AgentService {
     this.AccessToken = data;
   }
 
+  public getAssetByAssetId(AssetID) {
+    return this.http
+      .get(`${this.apiAgent}agent/Asset/${AssetID}`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
+  public overrideHardwareType(data) {
+    return this.http
+      .post(
+        `${this.apiAgent}agent/HardwareType`,
+        this.encrypt128(this.key, JSON.stringify(data)),
+        { headers: this.getHeader(), responseType: "text" }
+      )
+      .pipe(map((data: string) => data));
+  }
+
+  public getHardwareTypeByTechCompanyGuid(guid) {
+    return this.http
+      .get(`${this.apiAgent}agent/HardwareType/${guid}`, {
+        headers: this.getHeader(),
+        responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
   public getGraphicsCard(asset_id) {
     return this.http
       .get(`${this.apiAgent}agent/VideoController/${asset_id}`, {
