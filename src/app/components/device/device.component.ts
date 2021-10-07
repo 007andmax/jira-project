@@ -127,7 +127,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
     if (!item) {
       return;
     }
-    this.kafkaMessage = JSON.parse(item.value);
+    this.kafkaMessage = JSON.parse(item.Value);
     if (this.kafkaMessage.IdleTime != null) {
       let Time = this.kafkaMessage.IdleTime.split("Idle for");
       this.UpTime = Time[1] != "" ? Time[1] : "";
@@ -334,14 +334,14 @@ export class DeviceComponent implements OnInit, OnDestroy {
       console.log("OnPowerShellCommand");
       let item = resp.find((x) => x.key == this.asset.ID);
       if (item != undefined) {
-        this.kafkaMessage = item.value;
+        this.kafkaMessage = item.Value;
         this.powershellmsg = this.kafkaMessage;
         this.ngZone.run(() => {
           if (
-            item.value.startsWith("Failed") ||
-            item.value.startsWith("This")
+            item.Value.startsWith("Failed") ||
+            item.Value.startsWith("This")
           ) {
-            this.powershellmsg = item.value.startsWith("Failed")
+            this.powershellmsg = item.Value.startsWith("Failed")
               ? this.powershellmsg + "<br/> Do you want to force restart?"
               : this.powershellmsg + "<br/> Do you want to force shutdown?";
             this.modalService.open(this.template, {
@@ -354,7 +354,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
     });
   }
 
-  sendCommand(command, template, assetId) {
+  sendCommand(command, assetId) {
     let data: any = {};
     if (command === "r") {
       this.TemporaryCommand = command;
@@ -367,7 +367,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
       this.TemporaryCommand = command;
       data.AssetID = assetId;
       data.MessageType = "RunPowerShellCommand";
-      data.value = "Stop-Computer";
+      data.Value = "Stop-Computer";
       this.agentService.SendPowerShellCommand(data);
     }
   }

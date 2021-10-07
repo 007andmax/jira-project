@@ -1,4 +1,3 @@
-import { data } from 'jquery';
 import { EventEmitter, Injectable } from "@angular/core";
 import { KafkaRealTimeService } from "./kafka-real-time.service";
 
@@ -16,11 +15,10 @@ export class KafkaStateService {
   public onInit() {
 
     this.kafkaRealTimeService.changeKafkarray.subscribe((newChange) => {
-
-      if (!(newChange && newChange.data && newChange.data.messageType)) {
+      if (!(newChange && newChange.data && newChange.data.MessageType)) {
         return;
       }
-      switch (newChange.data.messageType) {
+      switch (newChange.data.MessageType) {
 
         case "GetCurrentConfig":
           this.handleGetCurrentConfig(newChange);
@@ -38,15 +36,15 @@ export class KafkaStateService {
   private handleGetCurrentConfig(newChange: any) {
     if (this.assetConfigMessage.length > 0) {
       let index = this.assetConfigMessage.findIndex(
-        (x) => (x.key = newChange.data.assetID)
+        (x) => (x.key = newChange.data.AssetID)
       );
       if (index != -1) {
         this.assetConfigMessage.splice(index, 1);
       }
     }
     this.assetConfigMessage.push({
-      key: newChange.data.assetID,
-      value: newChange.data.value,
+      key: newChange.data.AssetID,
+      Value: newChange.data.Value,
     });
     this.onCurrentConfig.emit(this.assetConfigMessage);
   }
@@ -54,15 +52,15 @@ export class KafkaStateService {
   private handleRunPowershellCommand(newChange: any) {
     if (this.assetConfigMessage.length > 0) {
       let index = this.assetConfigMessage.findIndex(
-        (x) => (x.key = newChange.data.assetID)
+        (x) => (x.key = newChange.data.AssetID)
       );
       if (index != -1) {
         this.assetConfigMessage.splice(index, 1);
       }
     }
     this.assetConfigMessage.push({
-      key: newChange.data.assetID,
-      value: newChange.data.value,
+      key: newChange.data.AssetID,
+      Value: newChange.data.Value,
     });
     this.onPowerShellCommand.emit(this.assetConfigMessage);
   }

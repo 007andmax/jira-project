@@ -1,6 +1,6 @@
-import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, NgZone, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { forEach } from "@angular/router/src/utils/collection";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { ToastrService } from "ngx-toastr";
 import { AgentService } from "src/app/services/agent/agent.service";
 import { CompaniesStateService } from "src/app/states/company/companies-state.service";
@@ -14,9 +14,10 @@ import { CompanyDeviceBetaFilter } from "./class/device-beta";
   styleUrls: ["./company-device-beta.component.scss"],
 })
 export class CompanyDeviceBetaComponent implements OnInit {
+  @ViewChild("templatePowersell") template;
   selectAllDevices: boolean = false;
-  AssetList: any[] = [];
-  Asset_ID: any[] = [];
+  assetList: any[] = [];
+  assetID: any[] = [];
   system: any;
   showPreloader: boolean = true;
   search = "";
@@ -25,6 +26,9 @@ export class CompanyDeviceBetaComponent implements OnInit {
   kafkaMessage: any;
   companyId: any;
   hardwareTypes: any[] = [];
+  powershellmsg: string = "";
+  temporaryCommand: string = "";
+  assetId: number;
 
   constructor(
     private leftPanelStateService: LeftPanelStateService,
@@ -33,8 +37,10 @@ export class CompanyDeviceBetaComponent implements OnInit {
     private kafkaStateService: KafkaStateService,
     private activateRoute: ActivatedRoute,
     private cd: ChangeDetectorRef,
-    private toastr: ToastrService
-  ) { }
+    private toastr: ToastrService,
+    private modalService: NgbModal,
+    private ngZone: NgZone
+  ) {}
 
   ngOnInit() {
     this.companyId = this.activateRoute.snapshot.params["id"];
@@ -42,6 +48,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
       "company-devices-beta"
     );
     this.setPreviewDataDevice();
+    this.onPowerShellCommand();
   }
 
   setPreviewDataDevice() {
@@ -58,16 +65,16 @@ export class CompanyDeviceBetaComponent implements OnInit {
   }
 
   toogleDevices() {
-    this.AssetList.forEach((item) => {
+    this.assetList.forEach((item) => {
       item.selected = this.selectAllDevices ? true : false;
     });
   }
   public onFilter(field) {
-    this.filter.onFilter(field, this.AssetList);
+    this.filter.onFilter(field, this.assetList);
   }
 
   onSelectDevice() {
-    let find = this.AssetList.find((item) => !item.selected);
+    let find = this.assetList.find((item) => !item.selected);
     this.selectAllDevices = find ? false : true;
   }
 
@@ -82,11 +89,11 @@ export class CompanyDeviceBetaComponent implements OnInit {
 
   AssetDetail() {
     this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {
-      this.AssetList = resp;
+      this.assetList = resp;
       this.HardwareTypeList(resp[0].TechCompanyGuid);
-      this.AssetList.forEach((element, index) => {
+      this.assetList.forEach((element, index) => {
         element.online = false;
-        this.AssetList[index].Title =
+        this.assetList[index].Title =
           element.Title != "" ? element.Title : element.Name;
         this.OperatingSystem(element.ID, index);
         this.GetCurrentConfig(element.ID);
@@ -98,7 +105,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   OperatingSystem(value: any, index: any) {
     this.agentService.getOperatingSystemByAssetId(value).subscribe((resp) => {
       if (resp && resp.length > 0 && resp[0].Caption) {
-        this.AssetList[index].Caption =
+        this.assetList[index].Caption =
           resp[0].Caption.replace("Microsoft", "") +
           " " +
           resp[0].OSArchitecture +
@@ -108,23 +115,23 @@ export class CompanyDeviceBetaComponent implements OnInit {
     });
   }
 
-  GetCurrentConfig(Asset_ID: any) {
-    this.agentService.GetCurrentConfig(Asset_ID);
+  GetCurrentConfig(assetID: any) {
+    this.agentService.GetCurrentConfig(assetID);
   }
 
   CurrentUser() {
     this.kafkaStateService.onCurrentConfig.subscribe((resp) => {
       if (resp.length > 0) {
-        this.AssetList.forEach((element, index) => {
+        this.assetList.forEach((element, index) => {
           let item = resp.find((x) => x.key == element.ID);
           if (item != undefined) {
-            this.kafkaMessage = JSON.parse(item.value);
-            this.AssetList[index].CurrentUser =
+            this.kafkaMessage = JSON.parse(item.Value);
+            this.assetList[index].CurrentUser =
               this.kafkaMessage.CurrentLoggedInUser;
             if (this.kafkaMessage.IdleTime != null) {
               let Time = this.kafkaMessage.IdleTime.split("Idle for");
-              this.AssetList[index].IdelTime = Time[1] != "" ? Time[1] : "";
-              this.AssetList[index].online = true;
+              this.assetList[index].IdelTime = Time[1] != "" ? Time[1] : "";
+              this.assetList[index].online = true;
             }
 
             this.cd.detectChanges();
@@ -134,14 +141,15 @@ export class CompanyDeviceBetaComponent implements OnInit {
     });
   }
 
-  public setIcon(assetId, hardwareId) {
-    var asset = this.AssetList.find(x => x.ID == assetId);
+  public setIcon(assetId, hardwareId,myDrop) {
+    var asset = this.assetList.find((x) => x.ID == assetId);
     if (asset) {
       asset.HardwareTypeID = hardwareId;
-      var ht = this.hardwareTypes.find(x => x.ID == hardwareId);
+      var ht = this.hardwareTypes.find((x) => x.ID == hardwareId);
       if (ht) {
         asset.iconName = ht.Name;
       }
+      myDrop.close();
       this.agentService.overrideAsset(asset).subscribe((resp) => {
         this.toastr.success("HardwareType change successfully.");
       });
@@ -153,12 +161,83 @@ export class CompanyDeviceBetaComponent implements OnInit {
       .getHardwareTypeByTechCompanyGuid(TechCompanyGuid)
       .subscribe((resp) => {
         this.hardwareTypes = resp;
-        this.AssetList.forEach((element, index) => {
-          var ht = this.hardwareTypes.find(x => x.ID == element.HardwareTypeID);
+        this.assetList.forEach((element, index) => {
+          var ht = this.hardwareTypes.find(
+            (x) => x.ID == element.HardwareTypeID
+          );
           if (ht) {
             element.iconName = ht.Name;
           }
         });
       });
+  }
+
+  onPowerShellCommand() {
+    this.kafkaStateService.onPowerShellCommand.subscribe((resp) => {
+      let item = resp.find((x) => x.key == this.assetId);
+      if (item != undefined) {
+        this.kafkaMessage = item.Value;
+        this.powershellmsg = this.kafkaMessage;
+        this.ngZone.run(() => {
+          if (
+            item.Value.startsWith("Failed") ||
+            item.Value.startsWith("This")
+          ) {
+            this.powershellmsg = item.Value.startsWith("Failed")
+              ? this.powershellmsg + "<br/> Do you want to force restart?"
+              : this.powershellmsg + "<br/> Do you want to force shutdown?";
+            this.modalService.open(this.template, {
+              windowClass: "modal-md",
+              centered: true,
+            });
+          }
+        });
+      }
+    });
+  }
+
+  sendCommand(command, assetId) {
+    let data: any = {};
+    this.assetId = assetId;
+    if (command === "r") {
+      this.temporaryCommand = command;
+      data.AssetID = assetId;
+      data.MessageType = "RunPowerShellCommand";
+      data.Value = "Restart-Computer";
+      this.agentService.SendPowerShellCommand(data);
+    }
+    if (command === "s") {
+      this.temporaryCommand = command;
+      data.AssetID = assetId;
+      data.MessageType = "RunPowerShellCommand";
+      data.Value = "Stop-Computer";
+      this.agentService.SendPowerShellCommand(data);
+    }
+  }
+
+  Reboot(assetID) {
+    let data: any = {};
+    if (this.temporaryCommand == "r") {
+      data.AssetID = assetID;
+      data.MessageType = "RunPowerShellCommand";
+      data.Value = "Restart-Computer -force";
+      this.agentService.SendPowerShellCommand(data);
+      this.decline();
+      this.toastr.success(
+        "Rebooting computer now, please wait for a min to get it restarted"
+      );
+    }
+    if (this.temporaryCommand == "s") {
+      data.AssetID = assetID;
+      data.MessageType = "RunPowerShellCommand";
+      data.Value = "Stop-Computer -force";
+      this.agentService.SendPowerShellCommand(data);
+      this.decline();
+      this.toastr.success("Shutting down computer now.");
+    }
+  }
+
+  decline() {
+    this.modalService.dismissAll();
   }
 }

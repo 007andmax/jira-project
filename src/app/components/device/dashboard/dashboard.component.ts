@@ -1,19 +1,11 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { EventEmitter } from "@angular/core";
-import {
-  UploadInput,
-  UploadFile,
-  humanizeBytes,
-  UploaderOptions,
-} from "ngx-uploader";
+import { UploadInput, UploadFile, humanizeBytes, UploaderOptions } from "ngx-uploader";
 import { ToastrService } from "ngx-toastr";
 import { CONFIGCONSTANTS } from "../config/app-constants";
 import { environment } from "../../../../environments/environment";
 import { NgbDatepicker } from "@ng-bootstrap/ng-bootstrap";
-import {
-  NgbDateAdapter,
-  NgbDateParserFormatter,
-} from "@ng-bootstrap/ng-bootstrap";
+import { NgbDateAdapter, NgbDateParserFormatter } from "@ng-bootstrap/ng-bootstrap";
 import { AgentService } from "src/app/services/agent/agent.service";
 import { Subscription } from "rxjs";
 import { CustomAdapter } from "./CustomDateAdapter";
@@ -22,7 +14,6 @@ import * as _ from "lodash";
 import { NotesAdd } from "./class/dashboard";
 import { ActivatedRoute } from "@angular/router";
 import * as moment from "moment";
-import { KafkaRealTimeService } from "src/app/states/kafka/kafka-real-time.service";
 import { KafkaStateService } from "src/app/states/kafka/kafka-state.service";
 
 @Component({
@@ -100,7 +91,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     if (this.asset.ID != undefined && this.asset.ID != 0) {
       let item = resp.find((x) => x.key == this.asset.ID);
       if (item != undefined) {
-        this.kafkaMessage = JSON.parse(item.value);
+        this.kafkaMessage = JSON.parse(item.Value);
         this.securityUpdate = this.kafkaMessage.PendingWindowsUpdates.length;
         this.cd.detectChanges();
       }
@@ -124,13 +115,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.getAssetDetail();
       });
   }
-  
+
   getAssetDetail() {
     this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
       if (resp.length > 0) {
         this.asset = resp[0];
         this.asset.IsUpdated = true;
-        
+
         if (this.minDate(this.asset.WarrantyExpires)) {
           this.asset.WarrantyExpires = "";
         }
@@ -403,7 +394,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.asset.LastRebootDate =this.asset.LastRebootDate || '0001-01-01';
     this.asset.DeploymentDate =this.asset.DeploymentDate || '0001-01-01';
     this.asset.WarrantyExpires =this.asset.WarrantyExpires || '0001-01-01';
-        
+
     this.getlabel(this.asset.Title, this.asset.Domain, this.asset.Name);
     this.agentService.overrideAsset(this.asset).subscribe(
       (resp) => {
