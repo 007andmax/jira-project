@@ -1,6 +1,6 @@
 <tr [ngClass]="{'--selected': selected}">
     <td class="--strong ticket-table__subject">
-        {{'Tkt# ' + ticket.number + ' - ' + ticket.subject}}
+        <div class="ellipsis">{{'Tkt# ' + ticket.number + ' - ' + ticket.subject}}</div>
         <span [ngClass]="getClassType()"></span>
     </td>
     <td class="ticket-table__status">

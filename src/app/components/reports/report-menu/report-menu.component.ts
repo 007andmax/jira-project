@@ -100,6 +100,15 @@ export class ReportMenuComponent implements OnInit {
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.getClientsList(data);
     })
+    this.softwareSummaryReport.setPreloaderDevices(this.devicesStateService.getPreloaderDevices());
+    this.hardwareSummaryReport.setPreloaderDevices(this.devicesStateService.getPreloaderDevices());
+    this.deviceIpSummary.setPreloaderDevices(this.devicesStateService.getPreloaderDevices());
+    this.devicesStateService.onGetDevices.subscribe(data => {
+      console.log("data", data);
+      this.softwareSummaryReport.setPreloaderDevices(false);
+      this.hardwareSummaryReport.setPreloaderDevices(false);
+      this.deviceIpSummary.setPreloaderDevices(false);
+    })
     //  this.sub.add(getOnCompanies);
   }
   getClientsList(data) {
@@ -114,8 +123,7 @@ export class ReportMenuComponent implements OnInit {
   public getSoftByCompany(companyId) {
     this.softwareSummaryReport.setPreloaderSoft(true);
     this.remoteConnectionReport.setPreloaderDevices(true);
-    this.hardwareSummaryReport.setPreloaderDevices(true);
-    this.deviceIpSummary.setPreloaderDevices(true);
+    // this.deviceIpSummary.setPreloaderDevices(true);
     this.devicesService.getSoft(companyId).subscribe((resp: any) => {
       // $rootScope.softwareSummarySelectedCompany = resp;
 
@@ -145,14 +153,14 @@ export class ReportMenuComponent implements OnInit {
         this.deviceIpSummary.setDevices(resp[companyId]);
       }
       this.softwareSummaryReport.setPreloaderSoft(false);
-      this.deviceIpSummary.setPreloaderDevices(false);
-      this.hardwareSummaryReport.setPreloaderDevices(false);
+      //this.deviceIpSummary.setPreloaderDevices(false);
+
       this.remoteConnectionReport.setPreloaderDevices(false);
     }, err => {
       this.softwareSummaryReport.resetSoft();
       this.softwareSummaryReport.setPreloaderSoft(false);
-      this.deviceIpSummary.setPreloaderDevices(false);
-      this.hardwareSummaryReport.setPreloaderDevices(false);
+      // this.deviceIpSummary.setPreloaderDevices(false);
+
       this.remoteConnectionReport.setPreloaderDevices(false);
     })
   }

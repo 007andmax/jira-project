@@ -695,6 +695,13 @@ app-invoices-item,app-payment-item {
     &__subject {
       width: 100%;
       min-width: 300px;
+      max-width: 375px;
+      display: flex;
+      align-items: center;
+      > div {
+        margin-right: 4px;
+        max-width: 330px;
+      }
     }
     &__status {
       max-width: 115px;
