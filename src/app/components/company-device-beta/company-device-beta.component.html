@@ -96,21 +96,20 @@
                                     <div ngbDropdownMenu>
                                         <ul class="icon-list qt-dropdown-menu --dropdown-icons device-type-dropdown">
                                             <li
-                                                *ngFor="let hardwar of HardwareType"
+                                                *ngFor="let hardwar of hardwareTypes"
                                                 (click)="setIcon(asset.ID,hardwar.ID)"
                                             >
-                                                <span *ngIf='[hardwar.Name]=="Workstation"'>
-                                                    <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__computer"></i>
+                                                <span>
+                                                    <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24"
+                                                    [ngClass]="{
+                                                        'icon__computer' : hardwar.Name === 'Workstation' || ! hardwar.Name,
+                                                        'icon__tablet' :  hardwar.Name === 'Networking Hardware',
+                                                        'icon__printer' :  hardwar.Name === 'Printer',
+                                                        'icon__server' :  hardwar.Name === 'Server'
+                                                    }"
+                                                    ></i>
                                                 </span>
-                                                <span *ngIf='[hardwar.Name]=="Networking Hardware"'>
-                                                    <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__tablet"></i>
-                                                </span>
-                                                <span *ngIf='[hardwar.Name]=="Printer"'>
-                                                    <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__printer"></i>
-                                                </span>
-                                                <span *ngIf='[hardwar.Name]=="Server"'>
-                                                    <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24 icon__server"></i>
-                                                </span>
+                                                
                                             </li>
                                         </ul>
                                     </div>
