@@ -153,14 +153,6 @@
         }
       }
     }
-    .qt-aside-modern__footer {
-      .qt-button:not(.--gray) {
-        @media (max-width: 767px) {
-          order: 1;
-          margin: 0 0 0 12px;
-        }
-      }
-    }
   }
 
   &.--large {
@@ -280,12 +272,14 @@
       @media (max-width: 767px) {
         width: 100%;
         justify-content: center;
-        //margin: 0;
+        margin: 0;
       }
 
       &.--gray {
-        //order: -1;
-        //margin-left: 12px;
+        @media (max-width: 767px) {
+          order: -1;
+          margin-right: 12px;
+        }
       }
     }
   }
