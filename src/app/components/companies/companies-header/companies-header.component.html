@@ -1,6 +1,7 @@
 <div class="qt-page-list__header --sticky">
   <div class="new-companies-content__header">
-    <h6 class="qt-fw-600 qt-color-dark">
+    <div _ngcontent-otb-c83="" class="icon__menu-white qt-sz-24 qt-bg-contain qt-ml-6 pointer qt-d-none qt-d-md-block"></div>
+    <h6 class="qt-page-list__header-title">
       All Companies ({{calculateCount.getCurrent()}})
     </h6>
     <div class="qt-page-list__header-title-line--rigth">
@@ -49,10 +50,10 @@
                       *ngIf="countFilter > 0"
                       [textContent]="countFilter"
                     ></span>
-          Filters
+          <span class="qt-d-md-none">Filters</span>
         </button>
         <button
-          class="qt-btn --outline-white qt-mr-8"
+          class="qt-btn --outline-white qt-mr-8 qt-d-md-none"
           uib-tooltip="Draft email"
           tooltip-placement="top"
           (click)="showAsideForDraftEmail()"
@@ -69,11 +70,12 @@
           Add Company
         </button>
         <button
-          class="btn-new btn-primary-white qt-fs-0 mob-hidden"
+          class="btn-new btn-primary-white qt-fs-0 qt-d-md-none"
           (click)="showAsideForAdd()"
         >
           Add Company
         </button>
+        <div _ngcontent-otb-c105="" class="icon__search-white qt-sz-24 qt-bg-contain qt-ml-8 pointer qt-d-none qt-d-md-block"></div>
       </div>
     </div>
   </div>

@@ -517,6 +517,10 @@ company-associate {
       top: 0;
       flex: 1;
       height: 30px;
+
+      @media (max-width: 767px) {
+        height: 34px;
+      }
     }
   }
   .hidde-label {
@@ -1721,6 +1725,162 @@ app-quotes-item {
 .companies-page {
   background: $background;
 
+  &.qt-page-list {
+    @media (max-width: 767px) {
+      padding: 0;
+    }
+  }
+
+  companies-filter {
+    @media (max-width: 767px) {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      max-height: calc(100vh - 70px);
+      padding: 70px 16px 50px;
+      height: 100%;
+      background: $white;
+      overflow: auto;
+    }
+  }
+
+  .filter-category {
+    @media (max-width: 767px) {
+      position: relative;
+      width: 100% !important;
+      margin-bottom: 16px;
+      margin-right: 0;
+    }
+
+    > div::before {
+      @media (max-width: 767px) {
+        content: "Category";
+        color: #212b36;
+        font-weight: 600;
+        line-height: 20px;
+      }
+    }
+
+    &.type {
+      > div::before {
+        @media (max-width: 767px) {
+          content: "Type";
+        }
+      }
+    }
+
+    &.sales-person {
+      > div::before {
+        @media (max-width: 767px) {
+          content: "Sales person";
+        }
+      }
+    }
+
+    &.industry {
+      > div::before {
+        @media (max-width: 767px) {
+          content: "Industry";
+        }
+      }
+    }
+
+    &.tags {
+      > div::before {
+        @media (max-width: 767px) {
+          content: "Tags";
+        }
+      }
+    }
+
+    form,
+    .mat-form-field-wrapper {
+      @media (max-width: 767px) {
+        margin-top: 8px;
+      }
+    }
+    input:not(.mat-chip-input) {
+      @media (max-width: 767px) {
+        height: 40px !important;
+        color: $primary-2;
+      }
+    }
+
+    .app-drop-down__right-icon {
+      @media (max-width: 767px) {
+        transform: translateY(calc(50% - 2px));
+      }
+    }
+  }
+
+  //.companies-filter-tags {
+  //  > div::before {
+  //    @media (max-width: 767px) {
+  //      content: "Category";
+  //      color: #212b36;
+  //      font-weight: 600;
+  //      line-height: 20px;
+  //    }
+  //  }
+  //}
+
+  .qt-page-list__header {
+    @media (max-width: 767px) {
+      margin: 0;
+    }
+
+    .btn-filter {
+      @media (max-width: 767px) {
+        background-image: url('/assets/img/icons/filter-white.svg');
+        background-color: transparent;
+        background-size: 24px;
+        height: 24px;
+        width: 24px;
+        background-position: center;
+        padding: 0;
+      }
+    }
+
+    .qt-page-list__search {
+      @media (max-width: 767px) {
+        display: none;
+        z-index: 3;
+        position: fixed;
+        left: 0;
+        width: 100%;
+        top: 0;
+        background: #212b36;
+        padding: 10px 16px;
+        margin-left: 0;
+
+      }
+
+      &.--open {
+        @media (max-width: 767px) {
+          display: flex;
+        }
+      }
+    }
+
+    .qt-page-list__header-title {
+      @media (max-width: 767px) {
+        color: #ffffff;
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: 0;
+        font-weight: 600;
+      }
+    }
+
+    .new-companies-content__header {
+      @media (max-width: 767px) {
+        margin: 0;
+      }
+    }
+
+  }
+
   .qt-table-modern__row--lg {
     @media (max-width: 767px) {
       padding: 12px 16px;
@@ -1773,6 +1933,10 @@ app-quotes-item {
         color: $gray-600;
         padding: 9px 10px 9px 36px;
         top: 10px;
+
+        @media (max-width: 767px) {
+          top: 12px;
+        }
       }
       .mat-form-field-infix {
         min-height: 36px !important;
@@ -1784,7 +1948,11 @@ app-quotes-item {
           content: "";
           width: 16px;
           height: 16px;
-          background: url(/assets/img/icons/tag-ng2.png);
+          background: url('/assets/img/icons/tag-ng2.png');
+
+          @media (max-width: 767px) {
+            top: 11px;
+          }
         }
       }
       .mat-form-field-appearance-legacy .mat-form-field-infix {
@@ -2401,7 +2569,8 @@ app-quotes-item {
   }
 }
 .page-list-ticket .qt-aside-modern__footer,
-.password-page .qt-aside-modern__footer {
+.password-page .qt-aside-modern__footer,
+.companies-page .qt-aside-modern__footer {
   display: none;
 
   @media (max-width: 767px) {

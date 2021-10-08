@@ -1,6 +1,10 @@
+<div class="content-filters-header">
+  <div class="icon__close-white qt-sz-20 qt-bg-contain"></div>
+  <div class="content-filters-header__title pointer">Filters</div>
+</div>
 <app-drop-down
     #typesDp
-    class="filter-category qt-mr-8 dropdown"
+    class="filter-category type qt-mr-8 dropdown"
     [placeholder]="'By Types'"
     [list]="companyTypes"
     [field]="'title'"
@@ -13,7 +17,7 @@
 ></app-drop-down>
 <app-drop-down
     #personsDp
-    class="filter-category qt-mr-8 dropdown"
+    class="filter-category sales-person qt-mr-8 dropdown"
     [placeholder]="'Search By Sales Person'"
     [list]="listPersons"
     [field]="'name'"
@@ -25,7 +29,7 @@
 ></app-drop-down>
 <app-drop-down
     #industriesDp
-    class="filter-category qt-mr-8 dropdown"
+    class="filter-category industry qt-mr-8 dropdown"
     [placeholder]="'Search By Industry'"
     [field]="'name'"
     [list]="industries"
@@ -38,6 +42,12 @@
 <app-company-tags
     #tagsDp
     [filter]="true"
-    class="filter-category dropdown companies-filter-tags"
+    class="filter-category tags dropdown companies-filter-tags"
     (tagsChange)="onChangeTags($event)"
 ></app-company-tags>
+<div class="qt-aside-modern__footer">
+  <div class="qt-df qt-w100">
+    <button class="qt-button --gray qt-mr-12"> Clear All </button>
+    <button class="qt-button"> Apply Filters </button>
+  </div>
+</div>
