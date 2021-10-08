@@ -15,6 +15,7 @@ import { TicketProfileFormService } from '../../../../app/components/tickets/tic
 import { CompanyServiceType } from '../../companies/class/company-service-type';
 import { CompanyDetaill } from './company-detailing';
 import { ActivatedRoute } from '@angular/router';
+import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 
 @Component({
   selector: 'app-company-dash-detail',
@@ -274,6 +275,7 @@ export class CompanyDashDetailComponent implements OnInit {
     private companiesStateService: CompaniesStateService,
     private sanitizer: DomSanitizer,
     public activateRoute: ActivatedRoute,
+    private leftPanelStateService: LeftPanelStateService,
     public cd: ChangeDetectorRef
   ) { }
 
@@ -625,7 +627,9 @@ export class CompanyDashDetailComponent implements OnInit {
     const value = h + ':' + m;
     return value;
   }
-
+  public back() {
+    this.leftPanelStateService.goToState('new-companies');
+  }
   changeRating(index, type) {
     let rating = 0;
     if (type === 'selected') {

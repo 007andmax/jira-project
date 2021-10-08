@@ -17,13 +17,13 @@
             ></app-company-dash-detail>
             <div
                 class="cmp-dboard-col right-stasticsbar d-flex"
-                *ngIf="company && company.clientType === 'VENDOR'"
+                *ngIf="company && company.clientType === 'VENDOR' && !appService.checkMobile()"
             >
                 <company-dash-associate [company]="company"></company-dash-associate>
             </div>
             <div
                 class="cmp-dboard-col right-stasticsbar d-flex"
-                *ngIf="company && company.clientType !== 'VENDOR'"
+                *ngIf="company && company.clientType !== 'VENDOR' && !appService.checkMobile()"
             >
                 <app-company-dash-stats
                     [totalTickets]="totalTickets"

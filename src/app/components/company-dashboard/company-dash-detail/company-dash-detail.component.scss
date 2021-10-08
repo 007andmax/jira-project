@@ -1,4 +1,4 @@
-@import './src/assets/styles/variable';
+@import "./src/assets/styles/variable";
 
 .working-hour {
     .selected-item {
@@ -62,5 +62,22 @@
     }
     .footer-area-modal {
         margin-top: 64px;
+    }
+}
+.download-agent {
+    @media (max-width: 767px) {
+        display: none;
+    }
+}
+.collapse-arrow {
+    @media (max-width: 767px) {
+        width: 36px;
+        height: 36px;
+        transform: none;
+        top: 10px;
+        left: 18px;
+        background-color: $white;
+        background-image: url("/assets/img/icons/collapse-arrow.svg");
+        z-index: 3;
     }
 }

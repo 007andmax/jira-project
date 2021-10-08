@@ -442,7 +442,10 @@
                 position: relative;
                 max-width: 30%;
                 width: 30%;
-
+                @media (max-width: 767px) {
+                    max-width: 100%;
+                    width: 100%;
+                }
                 .profile-cmp-board {
                     width: 100%;
                     flex-direction: column;

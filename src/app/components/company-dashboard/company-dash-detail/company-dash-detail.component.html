@@ -1,4 +1,8 @@
 <div class="cmp-dboard-col m-0 d-flex">
+    <div
+        class="collapse-arrow icon__close"
+        (click)="back()"
+    ></div>
     <div class="profile-cmp-board d-flex">
         <div
             class="cmp-profile-dp d-flex"
@@ -196,7 +200,7 @@
         <a
             href="javascript:;"
             (click)="downloadAgent()"
-            class="btn btn-outline"
+            class="btn btn-outline download-agent"
         >
             <img
                 src="html/assets/img/company-details/download.svg"
