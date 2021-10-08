@@ -260,12 +260,12 @@ export class DeviceComponent implements OnInit, OnDestroy {
   createConnection(type) {
     this.loading = true;
     let data = {
-      deviceId: this.deviceDetail.id,
+      assetId: this._id,
       type: type,
       companyId: localStorage.getItem("company_id"),
     };
     this.remoteControlService
-      .createConnection(data)
+      .createConnection2(data)
       .pipe()
       .subscribe(
         (resp) => {

@@ -29,6 +29,13 @@ export class RemoteControlService {
         }))
     }
 
+    createConnection2(data: any) {
+        return this.http.get<any>(CONFIG.createConnectionURL2 + 'assetId=' + data.assetId + '&connectionType=' + data.type + '&companyId=' + data.companyId)
+        .pipe(map(data => {
+            return data;
+        }))
+    }
+
     getConstant() {
         return this.http.get<any>(CONFIG.getConstant)
         .pipe(map(data => {
