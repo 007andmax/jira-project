@@ -11,6 +11,8 @@ import { UserListService } from '../../users/services/user-list.service';
 import { CompaniesRealTimeService } from 'src/app/states/company/companies-real-time.service';
 import { ShellStateService } from 'src/app/states/shell/shell-state.service';
 import { command, script, commandModal, scriptModal } from './../class/device';
+import { AgentService } from 'src/app/services/agent/agent.service';
+import { KafkaStateService } from 'src/app/states/kafka/kafka-state.service';
 
 @Component({
   selector: 'app-terminal',
@@ -91,6 +93,7 @@ export class TerminalComponent implements OnInit {
   _id: string = '';
   type: string = '';
   DateTimeHistoryFormat = CONFIGCONSTANTS.DateTimeHistoryFormat;
+  asset: any = undefined;
   constructor(private terminalService: TerminalService,
     private toastr: ToastrService,
     private modalService: NgbModal,
@@ -99,15 +102,20 @@ export class TerminalComponent implements OnInit {
     private companiesRealTimeService: CompaniesRealTimeService,
     private shellStateService: ShellStateService,
     public cd: ChangeDetectorRef,
+    private agentService: AgentService,
+    private kafkaStateService: KafkaStateService,
   ) { }
 
   ngOnInit() {
     this.type = window.location.href.split('/')[window.location.href.split('/').length - 2];
     this._id = window.location.href.split('/')[window.location.href.split('/').length - 1];
     // this.socketService.initializeWebSocketConnection();
+    this.setPreviewDataDevice();
+    this.onTerminalCommand();
     this.getCommandList();
     this.getCmdCategoryRead();
     this.getHistory();
+    this.onTerminalPowershall();
     // this.socketService.subsribeToCmdShellOutput();
     $('#cmd textarea').scroll(function () {
       $('#cmd_line').scrollTop($('#cmd textarea').scrollTop());
@@ -115,6 +123,53 @@ export class TerminalComponent implements OnInit {
     document.getElementById("terminal").style.height = window.innerHeight - document.getElementById('deviceHeader').offsetHeight - 250 + 'px';
     this.terminalHeight = document.getElementById("terminal").offsetHeight;
     this.cmdHeight = document.getElementById("editCmd").offsetHeight;
+  }
+
+  setPreviewDataDevice() {
+    this.agentService
+      .getAgentToken(
+        "QuickTech",
+        "s8Y1IuPCUUYlSLMbFijHvut5uOi/KnKNqOLtn57CBlw="
+      )
+      .subscribe((data) => {
+        this.agentService.setAccessToken(data.AccessToken);
+        this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
+          this.asset = resp[0];
+        });
+      });
+  }
+
+  onTerminalPowershall()
+  {
+    this.kafkaStateService.onPowerShellCommand.subscribe((resp) => {
+      console.log("OnTerminalCommand");
+      let item = resp.find((x) => x.key == this.asset.ID);
+      if (item) {
+        if(!item.Value.startsWith("Executing"))
+        {
+          let arr = item.Value.split(/\r*\n/)
+          let arr1 = this.splitCommand.concat(arr);
+          this.splitCommand = arr1;
+          this.cd.detectChanges();
+        }
+      }
+    });
+  }
+
+  onTerminalCommand() {
+      this.kafkaStateService.onTerminalCommand.subscribe((resp) => {
+        console.log("OnTerminalCommand");
+        let item = resp.find((x) => x.key == this.asset.ID);
+        if (item) {
+          if(!item.Value.startsWith("Executing"))
+          {
+            let arr = item.Value.split(/\r*\n/)
+            let arr1 = this.splitCommand.concat(arr);
+            this.splitCommand = arr1;
+            this.cd.detectChanges();
+          }
+        }
+      });
   }
 
   getCommandList() {
@@ -663,8 +718,23 @@ export class TerminalComponent implements OnInit {
   }
 
   copyToTerminalFunc(editCmd, type, file) {
-    this.copyToTerminal(editCmd, type, file);
-    this.editCmd = ''
+    let data: any = {};
+    if(this.scriptTyped=="cmd")
+    {
+      data.AssetID = this.asset.ID;
+      data.MessageType = "RunDOSCommand";
+      data.Value = editCmd;
+      this.agentService.TerminalShellCommand(data);
+    }
+    if(this.scriptTyped=="powershell")
+    {
+      data.AssetID = this.asset.ID;
+      data.MessageType = "RunPowerShellCommand";
+      data.Value = editCmd;
+      this.agentService.TerminalShellCommand(data);
+    }
+    //this.copyToTerminal(editCmd, type, file);
+    //this.editCmd = ''
     document.getElementById("terminal").style.height = window.innerHeight - document.getElementById('deviceHeader').offsetHeight - 250 + 'px';
     document.getElementById("editCmd").style.height = '120px';
     this.terminalHeight = document.getElementById("terminal").offsetHeight;

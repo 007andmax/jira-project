@@ -212,6 +212,10 @@ export class CompanyDeviceBetaComponent implements OnInit {
       data.Value = "Stop-Computer";
       this.agentService.SendPowerShellCommand(data);
     }
+    if(command === "ar")
+    {
+      this.agentService.AgentUninstall(assetId);
+    }
   }
 
   Reboot(assetID) {

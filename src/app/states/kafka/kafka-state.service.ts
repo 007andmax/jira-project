@@ -9,11 +9,11 @@ export class KafkaStateService {
   onCurrentConfig: EventEmitter<any> = new EventEmitter();
   onPowerShellCommand: EventEmitter<any> = new EventEmitter();
   onAck: EventEmitter<any> = new EventEmitter();
+  onTerminalCommand: EventEmitter<any> = new EventEmitter();
 
   constructor(private kafkaRealTimeService: KafkaRealTimeService) { }
 
   public onInit() {
-
     this.kafkaRealTimeService.changeKafkarray.subscribe((newChange) => {
       if (!(newChange && newChange.data && newChange.data.MessageType)) {
         return;
@@ -28,6 +28,9 @@ export class KafkaStateService {
           break;
         case "ACK":
           this.handleAck(newChange);
+          break;
+        case "RunDOSCommand":
+          this.handleRunDosCommand(newChange);
           break;
       }
     });
@@ -67,6 +70,22 @@ export class KafkaStateService {
 
   private handleAck(newChange: any) {
     this.onAck.emit(newChange);
+  }
+
+  private handleRunDosCommand(newChange: any){
+    if (this.assetConfigMessage.length > 0) {
+      let index = this.assetConfigMessage.findIndex(
+        (x) => (x.key = newChange.data.AssetID)
+      );
+      if (index != -1) {
+        this.assetConfigMessage.splice(index, 1);
+      }
+    }
+    this.assetConfigMessage.push({
+      key: newChange.data.AssetID,
+      Value: newChange.data.Value,
+    });
+    this.onTerminalCommand.emit(this.assetConfigMessage);
   }
 
 

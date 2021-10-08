@@ -66,23 +66,30 @@ export class AgentService {
     this.AccessToken = data;
   }
 
-  public getAssetByAssetId(AssetID) {
-    return this.http
-      .get(`${this.apiAgent}agent/Asset/${AssetID}`, {
-        headers: this.getHeader(),
-        responseType: "text",
-      })
-      .pipe(map((data: string) => this.decrypt128(data, this.key)));
-  }
+  public AgentUninstall(assetId) {
+    const data = {
+      AssetID: assetId,
+      MessageType: "UninstallAgent",
+    };
 
-  public overrideHardwareType(data) {
-    return this.http
-      .post(
-        `${this.apiAgent}agent/HardwareType`,
-        this.encrypt128(this.key, JSON.stringify(data)),
-        { headers: this.getHeader(), responseType: "text" }
-      )
-      .pipe(map((data: string) => data));
+    if (this.wsService.IsKafkaConnected) {
+      this.http
+        .post(this.apiurl + "sendMessageToKafka", data)
+        .subscribe(() => {});
+    } else {
+      setTimeout(() => this.AgentUninstall(assetId), 3000);
+    }
+  }
+  public TerminalShellCommand(data:any)
+  {
+    if (this.wsService.IsKafkaConnected) {
+      console.log("sending terminal command:" + data.Value);
+      this.http
+        .post(this.apiurl + "sendMessageToKafka", data)
+        .subscribe(() => {});
+    } else {
+      setTimeout(() => this.TerminalShellCommand(data), 3000);
+    }
   }
 
   public getHardwareTypeByTechCompanyGuid(guid) {
