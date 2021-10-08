@@ -131,9 +131,8 @@ export class CompanyDeviceBetaComponent implements OnInit {
             if (this.kafkaMessage.IdleTime != null) {
               let Time = this.kafkaMessage.IdleTime.split("Idle for");
               this.assetList[index].IdelTime = Time[1] != "" ? Time[1] : "";
-              this.assetList[index].online = true;
             }
-
+            this.assetList[index].online = true;
             this.cd.detectChanges();
           }
         });
