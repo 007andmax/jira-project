@@ -1745,6 +1745,7 @@ app-quotes-item {
     }
   }
 
+
   .filter-category {
     @media (max-width: 767px) {
       position: relative;
@@ -1753,6 +1754,38 @@ app-quotes-item {
       margin-right: 0;
     }
 
+    form,
+    .mat-form-field-wrapper {
+      @media (max-width: 767px) {
+        margin-top: 8px;
+      }
+    }
+    input:not(.mat-chip-input) {
+      @media (max-width: 767px) {
+        height: 40px !important;
+        color: $primary-2;
+      }
+    }
+
+    .app-drop-down__right-icon {
+      @media (max-width: 767px) {
+        transform: translateY(calc(50% - 2px));
+      }
+    }
+
+    &.tags {
+      > div::before {
+        @media (max-width: 767px) {
+          content: "Tags";
+          color: #212b36;
+          font-weight: 600;
+          line-height: 20px;
+        }
+      }
+    }
+  }
+
+  app-drop-down.filter-category {
     > div::before {
       @media (max-width: 767px) {
         content: "Category";
@@ -1783,33 +1816,6 @@ app-quotes-item {
         @media (max-width: 767px) {
           content: "Industry";
         }
-      }
-    }
-
-    &.tags {
-      > div::before {
-        @media (max-width: 767px) {
-          content: "Tags";
-        }
-      }
-    }
-
-    form,
-    .mat-form-field-wrapper {
-      @media (max-width: 767px) {
-        margin-top: 8px;
-      }
-    }
-    input:not(.mat-chip-input) {
-      @media (max-width: 767px) {
-        height: 40px !important;
-        color: $primary-2;
-      }
-    }
-
-    .app-drop-down__right-icon {
-      @media (max-width: 767px) {
-        transform: translateY(calc(50% - 2px));
       }
     }
   }
@@ -2087,10 +2093,12 @@ app-quotes-item {
 
       @media screen and (max-width: 1600px) {
         flex: 1 0 210px;
+        max-width: 100%;
       }
 
       > div {
         @media screen and (max-width: 767px) {
+          max-width: 100%;
           display: flex;
           align-items: center;
           padding-left: 80px;
@@ -2108,7 +2116,7 @@ app-quotes-item {
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
-          max-width: 50%;
+          max-width: calc(100% - 112px);
         }
 
         &::after {
@@ -2129,6 +2137,12 @@ app-quotes-item {
       .phone {
         @extend %body-m;
         color: $gray-600;
+        @media (max-width: 767px) {
+          max-width: 108px;
+          overflow: hidden;
+          text-overflow: inherit;
+          white-space: nowrap;
+        }
       }
     }
     &__email-address {
