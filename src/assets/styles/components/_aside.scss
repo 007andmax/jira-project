@@ -40,15 +40,6 @@
       }
     }
 
-    .qt-aside-modern__header-close {
-      @media (max-width: 767px) {
-        position: absolute;
-        left: 16px;
-        background-size: 20px;
-        background-image: url("/assets/img/icons/close-white.svg");
-      }
-    }
-
     .header-circle-icon {
       @media (max-width: 767px) {
         left: 16px;
@@ -163,6 +154,18 @@
     }
   }
 
+  &.password-edit-aside,
+  &.draft-email-aside {
+    .qt-aside-modern__header-close {
+      @media (max-width: 767px) {
+        position: absolute;
+        left: 16px;
+        background-size: 20px;
+        background-image: url("/assets/img/icons/close-white.svg");
+      }
+    }
+  }
+
   &.--large {
     width: 642px;
 
@@ -214,6 +217,7 @@
       font-weight: 600;
       flex: 1;
       text-align: center;
+      letter-spacing: 0;
     }
   }
 

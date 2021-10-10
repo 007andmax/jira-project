@@ -9,7 +9,20 @@
         class="new-companies-content__header-buttons"
         *ngIf="getCountSelected() > 0"
       >
-        <div [textContent]="getCountSelected() + ' Selected'"></div>
+        <div class="new-companies-content__header-buttons-top">
+          <div class="icon__close-white qt-sz-20 qt-bg-contain qt-d-none qt-d-md-block qt-mr-16"></div>
+          <div [textContent]="getCountSelected() + ' Selected'"></div>
+        </div>
+        <div class="new-companies-content__header-buttons-bottom">
+          <div class="qt-df qt-mr-16">
+            <div class="icon__email-blue qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6"></div>
+            Write Draft
+          </div>
+          <div class="qt-df">
+            <div class="icon__archive-blue qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6"></div>
+            Archive Company
+          </div>
+        </div>
         <!-- <div class="qt-ml-25 qt-ff-gm qt-df qt-color-info qt-ai-c pointer">
             <div class="icon__email-blue qt-za-16 qt-sz-16 qt-mr-6 qt-bg-contain"></div>
             <div>Write Draft</div>

@@ -328,6 +328,11 @@ app-users-table {
     padding: 0 8px 8px 8px;
     cursor: pointer;
     border-bottom: 2px solid transparent;
+
+    @media (max-width: 767px) {
+      width: 100%;
+      text-align: center;
+    }
     &.active {
       color: $primary-1;
       border-color: $primary-1;
