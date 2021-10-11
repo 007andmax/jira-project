@@ -1,29 +1,43 @@
 <div class="qt-page-list__header --sticky">
-  <div class="new-companies-content__header">
-    <div _ngcontent-otb-c83="" class="icon__menu-white qt-sz-24 qt-bg-contain qt-ml-6 pointer qt-d-none qt-d-md-block"></div>
-    <h6 class="qt-page-list__header-title">
-      All Companies ({{calculateCount.getCurrent()}})
-    </h6>
-    <div class="qt-page-list__header-title-line--rigth">
-      <div
-        class="new-companies-content__header-buttons"
-        *ngIf="getCountSelected() > 0"
-      >
-        <div class="new-companies-content__header-buttons-top">
-          <div class="icon__close-white qt-sz-20 qt-bg-contain qt-d-none qt-d-md-block qt-mr-16"></div>
-          <div [textContent]="getCountSelected() + ' Selected'"></div>
-        </div>
-        <div class="new-companies-content__header-buttons-bottom">
-          <div class="qt-df qt-mr-16">
-            <div class="icon__email-blue qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6"></div>
-            Write Draft
-          </div>
-          <div class="qt-df">
-            <div class="icon__archive-blue qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6"></div>
-            Archive Company
-          </div>
-        </div>
-        <!-- <div class="qt-ml-25 qt-ff-gm qt-df qt-color-info qt-ai-c pointer">
+    <div class="new-companies-content__header">
+        <div
+            _ngcontent-otb-c83
+            class="icon__menu-white qt-sz-24 qt-bg-contain qt-ml-6 pointer qt-d-none qt-d-md-block"
+            (click)="toggleMobileLeftPanel()"
+        ></div>
+        <h6 class="qt-page-list__header-title">
+            All Companies ({{calculateCount.getCurrent()}})
+        </h6>
+        <div class="qt-page-list__header-title-line--rigth">
+            <div
+                class="new-companies-content__header-buttons"
+                *ngIf="getCountSelected() > 0"
+            >
+                <div class="new-companies-content__header-buttons-top">
+                    <div
+                        class="icon__close-white qt-sz-20 qt-bg-contain qt-d-none qt-d-md-block qt-mr-16"
+                        (click)="clearAllSelectedCompanies()"
+                    ></div>
+                    <div [textContent]="getCountSelected() + ' Selected'"></div>
+                </div>
+                <div class="new-companies-content__header-buttons-bottom">
+                    <div
+                        class="qt-df qt-mr-16"
+                        (click)="showAsideForDraftEmail()"
+                    >
+                        <div class="icon__email-blue qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6"></div>
+                        Write Draft
+                    </div>
+                    <div
+                        class="qt-df"
+                        *ngIf="getCountSelected() === 1"
+                        (click)="archive()"
+                    >
+                        <div class="icon__archive-blue qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6"></div>
+                        Archive Company
+                    </div>
+                </div>
+                <!-- <div class="qt-ml-25 qt-ff-gm qt-df qt-color-info qt-ai-c pointer">
             <div class="icon__email-blue qt-za-16 qt-sz-16 qt-mr-6 qt-bg-contain"></div>
             <div>Write Draft</div>
         </div>
@@ -35,137 +49,139 @@
             <div class="icon__export-blue qt-za-16 qt-sz-16 qt-mr-6 qt-bg-contain"></div>
             <div>Export</div>
         </div> -->
-      </div>
-      <div class="new-companies-content__header--search">
-        <div class="new-companies-selected">
-          <div class="new-companies-selected-qty">
-            <span>2</span>
-            Selected
-          </div>
-          <div class="new-companies-selected-actions">
-            <i class="icn-16 email-ng2"></i>
-          </div>
-        </div>
-        <button
-          class="qt-btn --transparent"
-          (click)="clearAll()"
-          *ngIf="countFilter > 0"
-        >
-          Clear All
-        </button>
-        <button
-          class="qt-btn btn-filter qt-mr-8 qt-ml-8 d-f"
-          [ngClass]="{'active':!toggleFilter}"
-          (click)="toggleFilter  = !toggleFilter"
-        >
+            </div>
+            <div class="new-companies-content__header--search">
+                <div class="new-companies-selected">
+                    <div class="new-companies-selected-qty">
+                        <span>2</span>
+                        Selected
+                    </div>
+                    <div class="new-companies-selected-actions">
+                        <i class="icn-16 email-ng2"></i>
+                    </div>
+                </div>
+                <button
+                    class="qt-btn --transparent"
+                    (click)="clearAll()"
+                    *ngIf="countFilter > 0 && !appService.checkMobile()"
+                >
+                    Clear All
+                </button>
+                <button
+                    class="qt-btn btn-filter qt-mr-8 qt-ml-8 d-f"
+                    [ngClass]="{'active':toggleFilter,
+                 'is-exist-filters':isExistFilters()}"
+                    (click)="onToggleFilter(!toggleFilter)"
+                >
                     <span
-                      class="filter-counter qt-circle qt-sz-18 qt-ff-sb qt-fs-10 qt-color-white qt-bg-info qt-mr-8 qt-df qt-ai-c qt-jc-c"
-                      *ngIf="countFilter > 0"
-                      [textContent]="countFilter"
+                        class="filter-counter qt-circle qt-sz-18 qt-ff-sb qt-fs-10 qt-color-white qt-bg-info qt-mr-8 qt-df qt-ai-c qt-jc-c"
+                        *ngIf="countFilter > 0 && !appService.checkMobile()"
+                        [textContent]="countFilter"
                     ></span>
-          <span class="qt-d-md-none">Filters</span>
-        </button>
-        <button
-          class="qt-btn --outline-white qt-mr-8 qt-d-md-none"
-          uib-tooltip="Draft email"
-          tooltip-placement="top"
-          (click)="showAsideForDraftEmail()"
-        >
-          <!-- <i class="icn-16 email-ng2 qt-mr-6"></i> -->
-          <i class="icon__email-dark qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6"></i>
-          Send email
-        </button>
-        <button
-          class="new-link desktop-hidden"
-          style="font-size: 13px;"
-          (click)="showAsideForAdd()"
-        >
-          Add Company
-        </button>
-        <button
-          class="btn-new btn-primary-white qt-fs-0 qt-d-md-none"
-          (click)="showAsideForAdd()"
-        >
-          Add Company
-        </button>
-<!--        <div _ngcontent-otb-c105="" class="icon__search-white qt-sz-24 qt-bg-contain qt-ml-8 pointer qt-d-none qt-d-md-block"></div>-->
-      </div>
+                    <span class="qt-d-md-none">Filters</span>
+                </button>
+                <button
+                    class="qt-btn --outline-white qt-mr-8 qt-d-md-none"
+                    uib-tooltip="Draft email"
+                    tooltip-placement="top"
+                    (click)="showAsideForDraftEmail()"
+                >
+                    <!-- <i class="icn-16 email-ng2 qt-mr-6"></i> -->
+                    <i class="icon__email-dark qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6"></i>
+                    Send email
+                </button>
+                <button
+                    class="new-link desktop-hidden"
+                    style="font-size: 13px;"
+                    (click)="showAsideForAdd()"
+                >
+                    Add Company
+                </button>
+                <button
+                    class="btn-new btn-primary-white qt-fs-0 qt-d-md-none"
+                    (click)="showAsideForAdd()"
+                >
+                    Add Company
+                </button>
+                <!-- <div _ngcontent-otb-c105="" class="icon__search-white qt-sz-24 qt-bg-contain qt-ml-8 pointer qt-d-none qt-d-md-block"></div> -->
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="qt-page-list__header-filters">
-    <companies-filter
-      class="qt-w100"
-      #filter
-      (changeCountFilter)="onChangeCountFilter($event)"
-      [hidden]="toggleFilter"
-    ></companies-filter>
-  </div>
-  <div class="qt-page-list__header-thead-container">
-    <div class="qt-table-modern qt-page-list__header-thead">
-      <div class="qt-page-list__header-thead__row">
-        <div class="companies-table__check">
-          <div class="d-f qt-jc-fe">
-            <label class="qt-checkbox">
-              <input
-                type="checkbox"
-                class="ng-untouched ng-pristine ng-valid"
-                (change)="toggleAllCompanies($event)"
-              >
-              <span></span>
-            </label>
-          </div>
-        </div>
-        <div
-          class="companies-table__name pointer"
-          (click)="onFilter('name')"
-        >
-          Name
-        </div>
-        <div
-          class="companies-table__address pointer"
-          (click)="onFilter('address')"
-        >
-          Address
-          <div class="qt-table-modern__sorting"></div>
-        </div>
-        <div
-          class="companies-table__primary-contact pointer"
-          (click)="onFilter('primary_contact')"
-        >
-          Primary Contact
-          <div class="qt-table-modern__sorting"></div>
-        </div>
-        <div
-          class="companies-table__email-address pointer"
-          (click)="onFilter('email')"
-        >
-          Email Address
-          <div class="qt-table-modern__sorting"></div>
-        </div>
-        <div
-          class="companies-table__tickets pointer"
-          (click)="onFilter('tickets')"
-        >
-          Tickets
-          <div class="qt-table-modern__sorting"></div>
-        </div>
-        <div
-          class="companies-table__devices pointer"
-          (click)="onFilter('devices')"
-        >
-          Devices
-          <div class="qt-table-modern__sorting"></div>
-        </div>
-        <div
-          class="companies-table__users pointer"
-          (click)="onFilter('users')"
-        >
-          Users
-          <div class="qt-table-modern__sorting"></div>
-        </div>
-        <div class="companies-table__download-btn  pointer"></div>
-        <div class="companies-table__menu pointer"></div>
-      </div>
+    <div class="qt-page-list__header-filters">
+        <companies-filter
+            class="qt-w100"
+            #filter
+            (changeCountFilter)="onChangeCountFilter($event)"
+            (onClose)="onToggleFilter(false)"
+            [hidden]="!toggleFilter"
+        ></companies-filter>
     </div>
-  </div>
+    <div class="qt-page-list__header-thead-container">
+        <div class="qt-table-modern qt-page-list__header-thead">
+            <div class="qt-page-list__header-thead__row">
+                <div class="companies-table__check">
+                    <div class="d-f qt-jc-fe">
+                        <label class="qt-checkbox">
+                            <input
+                                type="checkbox"
+                                class="ng-untouched ng-pristine ng-valid"
+                                (change)="toggleAllCompanies($event)"
+                            >
+                            <span></span>
+                        </label>
+                    </div>
+                </div>
+                <div
+                    class="companies-table__name pointer"
+                    (click)="onFilter('name')"
+                >
+                    Name
+                </div>
+                <div
+                    class="companies-table__address pointer"
+                    (click)="onFilter('address')"
+                >
+                    Address
+                    <div class="qt-table-modern__sorting"></div>
+                </div>
+                <div
+                    class="companies-table__primary-contact pointer"
+                    (click)="onFilter('primary_contact')"
+                >
+                    Primary Contact
+                    <div class="qt-table-modern__sorting"></div>
+                </div>
+                <div
+                    class="companies-table__email-address pointer"
+                    (click)="onFilter('email')"
+                >
+                    Email Address
+                    <div class="qt-table-modern__sorting"></div>
+                </div>
+                <div
+                    class="companies-table__tickets pointer"
+                    (click)="onFilter('tickets')"
+                >
+                    Tickets
+                    <div class="qt-table-modern__sorting"></div>
+                </div>
+                <div
+                    class="companies-table__devices pointer"
+                    (click)="onFilter('devices')"
+                >
+                    Devices
+                    <div class="qt-table-modern__sorting"></div>
+                </div>
+                <div
+                    class="companies-table__users pointer"
+                    (click)="onFilter('users')"
+                >
+                    Users
+                    <div class="qt-table-modern__sorting"></div>
+                </div>
+                <div class="companies-table__download-btn  pointer"></div>
+                <div class="companies-table__menu pointer"></div>
+            </div>
+        </div>
+    </div>
 </div>

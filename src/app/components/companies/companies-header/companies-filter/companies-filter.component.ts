@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { ItemFilterPerson } from 'src/app/components/left-panel/left-panel-companies/class/item-filter-person';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { CompanyIndustry } from 'src/app/interfaces/company/company-industry';
+import { AppService } from 'src/app/states/app/app.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
@@ -29,9 +30,11 @@ export class CompaniesFilterComponent implements OnInit {
   @ViewChild('industriesDp') industriesDp: DropDownComponent;
   @ViewChild('tagsDp') tagsDp: CompanyTagsComponent;
   @Output() changeCountFilter = new EventEmitter<any>();
+  @Output() onClose = new EventEmitter();
   sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
     private leftPanelStateService: LeftPanelStateService,
+    public appService: AppService,
     private usersStateService: UsersStateService) { }
 
   ngOnInit() {
@@ -62,6 +65,7 @@ export class CompaniesFilterComponent implements OnInit {
       }
     })
   }
+
   public onClearAll() {
     this.typesDp.clearWithOutChanges();
     this.personsDp.clearWithOutChanges();
@@ -74,27 +78,44 @@ export class CompaniesFilterComponent implements OnInit {
     this.companyFilter.setTags([]);
     this.companiesStateService.onInitFilter(this.companyFilter);
     this.onChangeCounterFilter();
+    if (this.appService.checkMobile()) this.close();
+  }
+  close() {
+    this.onClose.emit(null);
+  }
+  applyFilters() {
+
+    this.companiesStateService.onInitFilter(this.companyFilter);
+    this.onChangeCounterFilter();
+    this.close();
   }
   public onSelectTechLead(data) {
     this.companyFilter.setTehUser((data) ? data.id : null);
-    this.companiesStateService.onInitFilter(this.companyFilter);
-    this.onChangeCounterFilter();
+    if (!this.appService.checkMobile()) {
+      this.companiesStateService.onInitFilter(this.companyFilter);
+      this.onChangeCounterFilter();
+    }
   }
   public onSelectType(data) {
     this.companyFilter.setClientType((data) ? data.value : null);
-    this.companiesStateService.onInitFilter(this.companyFilter);
-    this.onChangeCounterFilter();
+    if (!this.appService.checkMobile()) {
+      this.companiesStateService.onInitFilter(this.companyFilter);
+      this.onChangeCounterFilter();
+    }
   }
   public onSelectClientIndustry(data) {
     this.companyFilter.setClientIndustry((data) ? data : null);
-    this.companiesStateService.onInitFilter(this.companyFilter);
-    this.onChangeCounterFilter();
+    if (!this.appService.checkMobile()) {
+      this.companiesStateService.onInitFilter(this.companyFilter);
+      this.onChangeCounterFilter();
+    }
   }
   public onChangeTags(data) {
-
     this.companyFilter.setTags(data.map(item => item.id));
-    this.companiesStateService.onInitFilter(this.companyFilter);
-    this.onChangeCounterFilter();
+    if (!this.appService.checkMobile()) {
+      this.companiesStateService.onInitFilter(this.companyFilter);
+      this.onChangeCounterFilter();
+    }
   }
   public onChangeCounterFilter() {
     let count = 0;

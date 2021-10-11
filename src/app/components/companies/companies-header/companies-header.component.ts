@@ -5,6 +5,12 @@ import { CompanyCalculateCount } from '../class/company-calculate-count';
 import { Subscription } from 'rxjs';
 import { COMPANIES } from 'src/app/const/emails';
 import { CompaniesFilterComponent } from './companies-filter/companies-filter.component';
+import { ConfirmComponent } from '../../shared/confirm/confirm.component';
+import { ARCHIVE_COMPANY } from 'src/app/const/confirm';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
+import { AppService } from 'src/app/states/app/app.service';
+import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 
 @Component({
   selector: 'app-companies-header',
@@ -13,7 +19,7 @@ import { CompaniesFilterComponent } from './companies-filter/companies-filter.co
 })
 export class CompaniesHeaderComponent implements OnInit, OnDestroy {
 
-  toggleFilter: boolean = true;
+  toggleFilter: boolean = false;
   countFilter: number = 0;
   calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
   @ViewChild('filter') filter: CompaniesFilterComponent;
@@ -23,6 +29,10 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
     private draftEmailStateService: DraftEmailStateService,
+    private modalService: NgbModal,
+    public appService: AppService,
+    private leftPanelStateService: LeftPanelStateService,
+    private confirmStateService: ConfirmStateService,
     private companiesState: CompaniesStateService) { }
 
   ngOnInit() {
@@ -33,7 +43,10 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
     this.sub.add(getOnCalculateCount);
   }
   toggleAllCompanies(event) {
-    this.onSelectAllCompanies.emit(event);
+    this.onSelectAllCompanies.emit(event.target.checked);
+  }
+  clearAllSelectedCompanies() {
+    this.onSelectAllCompanies.emit(false);
   }
   public getCountSelected() {
     return this.draftEmailStateService.getSelectedCompanies().length;
@@ -41,6 +54,26 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
   public showAsideForDraftEmail() {
     this.draftEmailStateService.setAction(COMPANIES);
     this.draftEmailStateService.toggleAsideForAdd();
+  }
+  archive() {
+    this.confirmStateService.setConfirmAction(ARCHIVE_COMPANY);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    modalRef.componentInstance.message = `Do you want to archive ${this.draftEmailStateService.getSelectedCompanies()[0].name}? All related users and service agreements will be archived and all agents will be uninstalled.`;
+    this.companiesStateService.setCompnayForArchive(this.draftEmailStateService.getSelectedCompanies()[0]);
+  }
+  toggleMobileLeftPanel() {
+    this.leftPanelStateService.toggleMobileLeftPanel(true);
+    this.appService.toggleMobileAside(true);
+  }
+  isExistFilters() {
+    return this.filter.companyFilter.clientType ||
+      this.filter.companyFilter.clientIndustry ||
+      this.filter.companyFilter.tags.length > 0 ||
+      this.filter.companyFilter.tehUser
+  }
+  onToggleFilter(data) {
+    if (this.appService.checkMobile()) this.appService.toggleMobileAside(data);
+    this.toggleFilter = data;
   }
   clearAll() {
     this.filter.onClearAll();

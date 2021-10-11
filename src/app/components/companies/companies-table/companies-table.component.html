@@ -1,147 +1,150 @@
-<!--<tr-->
-<!--    (click)="showInfo()"-->
-<!--    [ngClass]="{'&#45;&#45;selected':company.selected}"-->
-<!--&gt;-->
-<!--    <td class="companies-table__check">-->
-<!--        <label class="checkbox-container">-->
-<!--            <input-->
-<!--                type="checkbox"-->
-<!--                [(ngModel)]="company.selected"-->
-<!--                (change)="onSelectCompany($event)"-->
-<!--            >-->
-<!--            <span class="checkbox-mark"></span>-->
-<!--        </label>-->
-<!--    </td>-->
-<!--    <td-->
-<!--        class="companies-table__name pointer"-->
-<!--        (click)="goToDashboard()"-->
-<!--    >-->
-<!--        <div class="qt-df qt-ai-c">-->
-<!--            <div-->
-<!--                class="circle-avatar qt-mr-10"-->
-<!--                [ngClass]="{'with-logo': checkLogo()}"-->
-<!--            >-->
-<!--                <img-->
-<!--                    [src]="getCompanyLogoUrl()"-->
-<!--                    class="qwe"-->
-<!--                    alt-->
-<!--                    *ngIf="checkLogo()"-->
-<!--                >-->
-<!--                <span-->
-<!--                    *ngIf="!checkLogo()"-->
-<!--                    [textContent]="company.name[0].toUpperCase()"-->
-<!--                ></span>-->
-<!--            </div>-->
-<!--            <div class="mob-styles">-->
-<!--                <p-->
-<!--                    class="ff-g-m fw-500"-->
-<!--                    [textContent]="company.name"-->
-<!--                ></p>-->
-<!--                <p class="desktop-hidden company-phone">979-431-8937</p>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </td>-->
-<!--    <td-->
-<!--        class="companies-table__address pointer"-->
-<!--        (click)="goToDashboard()"-->
-<!--    >-->
-<!--        {{location}}-->
-<!--    </td>-->
-<!--    <td-->
-<!--        class="companies-table__primary-contact pointer"-->
-<!--        (click)="goToDashboard()"-->
-<!--    >-->
-<!--        <p-->
-<!--            class="name"-->
-<!--            [textContent]="getUserName()"-->
-<!--        ></p>-->
-<!--        <p-->
-<!--            class="phone"-->
-<!--            [textContent]="getPhoneNumner() | preparePhone | mask: '(000) 000-0000' | phone"-->
-<!--        ></p>-->
-<!--    </td>-->
-<!--    <td-->
-<!--        (click)="goToDashboard()"-->
-<!--        class="companies-table__email-address pointer"-->
-<!--        [textContent]="(primaryContact) ? primaryContact.primaryEmail : ''"-->
-<!--    >-->
-<!--    </td>-->
-<!--    <td-->
-<!--        (click)="goToDashboard()"-->
-<!--        class="companies-table__tickets pointer"-->
-<!--        [textContent]="company.companyStatistic.ticketsSubmitted || '0'"-->
-<!--    >-->
-<!--    </td>-->
-<!--    <td-->
-<!--        (click)="goToDashboard()"-->
-<!--        class="companies-table__devices pointer"-->
-<!--        [textContent]="countDevices"-->
-<!--    >-->
-<!--    </td>-->
-<!--    <td-->
-<!--        (click)="goToDashboard()"-->
-<!--        class="companies-table__users pointer"-->
-<!--        [textContent]="countUsers"-->
-<!--    >-->
-<!--    </td>-->
-<!--    <td class="companies-table__download-btn  pointer">-->
-<!--        <button-->
-<!--            class="mob-hidden qt-df"-->
-<!--            (click)="downloadAgent()"-->
-<!--            *ngIf="!showArchivedCompanies"-->
-<!--        >-->
-<!--            <i class="icon__download qt-za-16 qt-sz-16 qt-dib qt-bg-contain"></i>-->
-<!--        </button>-->
-<!--        <app-dynamic-tooltip-->
-<!--            [content]="'Restore Company'"-->
-<!--            [position]="'top'"-->
-<!--            #restoreTooltip-->
-<!--        ></app-dynamic-tooltip>-->
-<!--        <button-->
-<!--            (click)="onRestore()"-->
-<!--            *ngIf="showArchivedCompanies"-->
-<!--            (mouseenter)="restoreTooltip.show($event.target)"-->
-<!--            (mouseleave)="restoreTooltip.hide()"-->
-<!--        >-->
-<!--            <i-->
-<!--                style="height: 19px;"-->
-<!--                class="icn-16 restore-company"-->
-<!--            ></i>-->
-<!--        </button>-->
-<!--    </td>-->
-<!--    <td class="companies-table__menu pointer">-->
-<!--        <div-->
-<!--            class="grey-dropdown right with-icons"-->
-<!--            *ngIf="!showArchivedCompanies"-->
-<!--            ngbDropdown-->
-<!--        >-->
-<!--            <i-->
-<!--                class="icn-16 more-vertical-ng2 pointer"-->
-<!--                id="dropdownBasic1"-->
-<!--                ngbDropdownToggle-->
-<!--            ></i>-->
-<!--            <div-->
-<!--                ngbDropdownMenu-->
-<!--                aria-labelledby="dropdownBasic1"-->
-<!--            >-->
-<!--                <button-->
-<!--                    ngbDropdownItem-->
-<!--                    (click)="edit()"-->
-<!--                >-->
-<!--                    <i class="icn-16 edit-grey-ng2"></i>-->
-<!--                    Edit-->
-<!--                </button>-->
-<!--                <button-->
-<!--                    ngbDropdownItem-->
-<!--                    (click)="remove()"-->
-<!--                >-->
-<!--                    <i class="icn-16 archive-grey-ng2"></i>-->
-<!--                    Delete-->
-<!--                </button>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </td>-->
-<!--</tr>-->
+<!-- <tr -->
+<!-- (click)="showInfo()" -->
+<!-- [ngClass]="{'&#45;&#45;selected':company.selected}" -->
+<!-- &gt; -->
+<!-- <td class="companies-table__check"> -->
+<!-- <label class="checkbox-container"> -->
+<!-- <input -->
+<!-- type="checkbox" -->
+<!-- [(ngModel)]="company.selected" -->
+<!-- (change)="onSelectCompany($event)" -->
+<!-- > -->
+<!-- <span class="checkbox-mark"></span> -->
+<!-- </label> -->
+<!-- </td> -->
+<!-- <td -->
+<!-- class="companies-table__name pointer" -->
+<!-- (click)="goToDashboard()" -->
+<!-- > -->
+<!-- <div class="qt-df qt-ai-c"> -->
+<!-- <div -->
+<!-- class="circle-avatar qt-mr-10" -->
+<!-- [ngClass]="{'with-logo': checkLogo()}" -->
+<!-- > -->
+<!-- <img -->
+<!-- [src]="getCompanyLogoUrl()" -->
+<!-- class="qwe" -->
+<!-- alt -->
+<!-- *ngIf="checkLogo()" -->
+<!-- > -->
+<!-- <span -->
+<!-- *ngIf="!checkLogo()" -->
+<!-- [textContent]="company.name[0].toUpperCase()" -->
+<!-- ></span> -->
+<!-- </div> -->
+<!-- <div class="mob-styles"> -->
+<!-- <p -->
+<!-- class="ff-g-m fw-500" -->
+<!-- [textContent]="company.name" -->
+<!-- ></p> -->
+<!-- <p class="desktop-hidden company-phone">979-431-8937</p> -->
+<!-- </div> -->
+<!-- </div> -->
+<!-- </td> -->
+<!-- <td -->
+<!-- class="companies-table__address pointer" -->
+<!-- (click)="goToDashboard()" -->
+<!-- > -->
+<!-- {{location}} -->
+<!-- </td> -->
+<!-- <td -->
+<!-- class="companies-table__primary-contact pointer" -->
+<!-- (click)="goToDashboard()" -->
+<!-- > -->
+<!-- <p -->
+<!-- class="name" -->
+<!-- [textContent]="getUserName()" -->
+<!-- ></p> -->
+<!-- <p -->
+<!-- class="phone" -->
+<!-- [textContent]="getPhoneNumner() | preparePhone | mask: '(000) 000-0000' | phone" -->
+<!-- ></p> -->
+<!-- </td> -->
+<!-- <td -->
+<!-- (click)="goToDashboard()" -->
+<!-- class="companies-table__email-address pointer" -->
+<!-- [textContent]="(primaryContact) ? primaryContact.primaryEmail : ''" -->
+<!-- > -->
+<!-- </td> -->
+<!-- <td -->
+<!-- (click)="goToDashboard()" -->
+<!-- class="companies-table__tickets pointer" -->
+<!-- [textContent]="company.companyStatistic.ticketsSubmitted || '0'" -->
+<!-- > -->
+<!-- </td> -->
+<!-- <td -->
+<!-- (click)="goToDashboard()" -->
+<!-- class="companies-table__devices pointer" -->
+<!-- [textContent]="countDevices" -->
+<!-- > -->
+<!-- </td> -->
+<!-- <td -->
+<!-- (click)="goToDashboard()" -->
+<!-- class="companies-table__users pointer" -->
+<!-- [textContent]="countUsers" -->
+<!-- > -->
+<!-- </td> -->
+<!-- <td class="companies-table__download-btn  pointer"> -->
+<!-- <button -->
+<!-- class="mob-hidden qt-df" -->
+<!-- (click)="downloadAgent()" -->
+<!-- *ngIf="!showArchivedCompanies" -->
+<!-- > -->
+<!-- <i class="icon__download qt-za-16 qt-sz-16 qt-dib qt-bg-contain"></i> -->
+<!-- </button> -->
+<!-- <app-dynamic-tooltip -->
+<!-- [content]="'Restore Company'" -->
+<!-- [position]="'top'" -->
+<!-- #restoreTooltip -->
+<!-- ></app-dynamic-tooltip> -->
+<!-- <button -->
+<!-- (click)="onRestore()" -->
+<!-- *ngIf="showArchivedCompanies" -->
+<!-- (mouseenter)="restoreTooltip.show($event.target)" -->
+<!-- (mouseleave)="restoreTooltip.hide()" -->
+<!-- > -->
+<!-- <i -->
+<!-- style="height: 19px;" -->
+<!-- class="icn-16 restore-company" -->
+<!-- ></i> -->
+<!-- </button> -->
+<!-- </td> -->
+<!-- <td class="companies-table__menu pointer"> -->
+<!-- <div -->
+<!-- class="grey-dropdown right with-icons" -->
+<!-- *ngIf="!showArchivedCompanies" -->
+<!-- ngbDropdown -->
+<!-- > -->
+<!-- <i -->
+<!-- class="icn-16 more-vertical-ng2 pointer" -->
+<!-- id="dropdownBasic1" -->
+<!-- ngbDropdownToggle -->
+<!-- ></i> -->
+<!-- <div -->
+<!-- ngbDropdownMenu -->
+<!-- aria-labelledby="dropdownBasic1" -->
+<!-- > -->
+<!-- <button -->
+<!-- ngbDropdownItem -->
+<!-- (click)="edit()" -->
+<!-- > -->
+<!-- <i class="icn-16 edit-grey-ng2"></i> -->
+<!-- Edit -->
+<!-- </button> -->
+<!-- <button -->
+<!-- ngbDropdownItem -->
+<!-- (click)="remove()" -->
+<!-- > -->
+<!-- <i class="icn-16 archive-grey-ng2"></i> -->
+<!-- Delete -->
+<!-- </button> -->
+<!-- </div> -->
+<!-- </div> -->
+<!-- </td> -->
+<!-- </tr> -->
+
+
+
 
 <div
     class="qt-table-modern__row qt-table-modern__row--lg"
@@ -198,14 +201,14 @@
         (click)="goToDashboard()"
     >
         <div>
-          <p
-            class="name"
-            [textContent]="getUserName()"
-          ></p>
-          <p
-            class="phone"
-            [textContent]="getPhoneNumner() | preparePhone | mask: '(000) 000-0000' | phone"
-          ></p>
+            <p
+                class="name"
+                [textContent]="getUserName()"
+            ></p>
+            <p
+                class="phone"
+                [textContent]="getPhoneNumner() | preparePhone | mask: '(000) 000-0000' | phone"
+            ></p>
         </div>
     </div>
     <div

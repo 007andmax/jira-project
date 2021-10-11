@@ -1,6 +1,9 @@
 <div class="content-filters-header">
-  <div class="icon__close-white qt-sz-20 qt-bg-contain"></div>
-  <div class="content-filters-header__title pointer">Filters</div>
+    <div
+        class="icon__close-white qt-sz-20 qt-bg-contain"
+        (click)="close()"
+    ></div>
+    <div class="content-filters-header__title pointer">Filters</div>
 </div>
 <app-drop-down
     #typesDp
@@ -46,8 +49,18 @@
     (tagsChange)="onChangeTags($event)"
 ></app-company-tags>
 <div class="qt-aside-modern__footer">
-  <div class="qt-df qt-w100">
-    <button class="qt-button --gray qt-mr-12"> Clear All </button>
-    <button class="qt-button"> Apply Filters </button>
-  </div>
+    <div class="qt-df qt-w100">
+        <button
+            class="qt-button --gray qt-mr-12"
+            (click)="onClearAll()"
+        >
+            Clear All
+        </button>
+        <button
+            class="qt-button"
+            (click)="applyFilters()"
+        >
+            Apply Filters
+        </button>
+    </div>
 </div>
