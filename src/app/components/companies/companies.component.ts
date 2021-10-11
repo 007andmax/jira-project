@@ -220,7 +220,9 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.infiniteScrollDisabled = true;
     this.getCompanies();
   }
-
+  onAddCompany() {
+    this.companiesStateService.toggleAsideForAdd();
+  }
   public trackById(index, item) {
     return item.id;
   }

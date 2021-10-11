@@ -58,7 +58,11 @@
                                     <span class="icon__tickets-gray qt-sz-24 qt-bg-contain qt-dib"></span>
                                 </a>
                             </li>
-                            <!-- <li class="footer-nav__list">
+                            <li
+                                class="footer-nav__list"
+                                [ngClass]="{'--active':state === 'new-companies'}"
+                                (click)="goToCompanies()"
+                            >
                                 <a
                                     href="javascript:;"
                                     class="footer-nav__link"
@@ -66,7 +70,7 @@
                                     <span class="icon__company-gray qt-sz-24 qt-bg-contain qt-dib"></span>
                                 </a>
                             </li>
-                            <li class="footer-nav__list">
+                            <!-- <li class="footer-nav__list">
                                 <a
                                     href="javascript:;"
                                     class="footer-nav__link"

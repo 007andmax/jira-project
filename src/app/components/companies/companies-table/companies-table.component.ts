@@ -113,11 +113,6 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     this.router.navigate(
       [`${this.companiesStateService.getCurrentCompany().name.replaceAll(' ', '')}/company/`, this.company.id, 'dashboard']);
   }
-  showInfo() {
-    if (this.IS_MOBILE) {
-      this.elRef.nativeElement.querySelector('.new-companies-content__list--item').classList.toggle('show-details');
-    }
-  }
   getCompanyLogoUrl() {
     if (this.company && this.company.logo && this.company.logo && this.company.logo.base64 && !this.company.logo.cropped) return this.company.logo.base64;
     if (this.company && this.company.logo && this.company.logo.cropped && this.company.logo.cropped.id) return `/file/${this.company.logo.cropped.id}`;

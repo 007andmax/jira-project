@@ -180,7 +180,9 @@
     // background-image: url("/assets/img/icons/password-manager-gray.svg");
   }
   &__company-gray {
-    background-image: url("/assets/img/icons/company-gray.svg");
+    background-color: #919eab;
+    -webkit-mask-image: url("/assets/img/icons/company-gray.svg");
+    mask-image: url("/assets/img/icons/company-gray.svg");
   }
   &__remove {
     background-image: url("/assets/img/icons/remove.svg");

@@ -52,5 +52,5 @@
     [selectedCompany]="selectedCompany"
     (onChangeState)="goToState($event)"
     [activePage]="activePage"
-    *ngIf="open && selectedCompany"
+    *ngIf="open && selectedCompany && !appService.checkMobile()"
 ></app-left-panel-company>

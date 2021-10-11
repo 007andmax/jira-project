@@ -328,7 +328,6 @@ app-ticket-add-aside {
       }
     }
   }
-
 }
 .mat-form-field {
   font-family: "Inter", sans-serif;
@@ -1748,7 +1747,6 @@ app-quotes-item {
     }
   }
 
-
   .filter-category {
     @media (max-width: 767px) {
       position: relative;
@@ -1841,7 +1839,7 @@ app-quotes-item {
 
     .btn-filter {
       @media (max-width: 767px) {
-        background-image: url('/assets/img/icons/filter-white.svg');
+        background-image: url("/assets/img/icons/filter-white.svg");
         background-color: transparent;
         background-size: 24px;
         height: 24px;
@@ -1862,7 +1860,6 @@ app-quotes-item {
         background: #212b36;
         padding: 10px 16px;
         margin-left: 0;
-
       }
 
       &.--open {
@@ -1887,7 +1884,6 @@ app-quotes-item {
         margin: 0;
       }
     }
-
   }
 
   .qt-table-modern__row--lg {
@@ -1996,7 +1992,7 @@ app-quotes-item {
           content: "";
           width: 16px;
           height: 16px;
-          background: url('/assets/img/icons/tag-ng2.png');
+          background: url("/assets/img/icons/tag-ng2.png");
 
           @media (max-width: 767px) {
             top: 11px;
@@ -2057,8 +2053,7 @@ app-quotes-item {
   }
 
   .companies-table {
-
-    &.--seleted {
+    &.--selected {
       @media only screen and (max-width: 768px) {
         padding-top: 40px;
       }
@@ -2171,7 +2166,7 @@ app-quotes-item {
         &::after {
           @media screen and (max-width: 767px) {
             position: absolute;
-            content: '';
+            content: "";
             right: 0;
             top: 50%;
             transform: translateY(-50%);
@@ -2229,7 +2224,7 @@ app-quotes-item {
       }
     }
     &__download-btn {
-      flex: 0 0 44px;;
+      flex: 0 0 44px;
 
       button {
         background: none;
