@@ -43,6 +43,11 @@
         }
       }
     }
+    .qt-page-list__body-tbody {
+      @media (max-width: 767px) {
+        padding-bottom: 48px;
+      }
+    }
   }
 
   &.password-page {
@@ -157,6 +162,11 @@
   }
   &__body-table-container {
     min-height: 100vh;
+
+    @media (max-width: 767px) {
+      height: 100%;
+      min-height: auto;
+    }
     &.--height-unset {
       min-height: unset;
     }

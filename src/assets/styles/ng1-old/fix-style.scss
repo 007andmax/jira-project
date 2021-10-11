@@ -691,6 +691,26 @@ textarea {
   left: 50%;
   margin-left: -251px;
   z-index: 1050;
+
+  @media (max-width: 767px) {
+    width: calc(100% - 32px);
+    transform: translate(-50%, -50%) !important;
+    margin: 0;
+  }
+
+  .archive-modal__footer {
+    button {
+      @media (max-width: 767px) {
+        width: 100%;
+      }
+    }
+    .btn-new.btn-primary {
+      @media (max-width: 767px) {
+        margin: 0 0 0 8px;
+        order: 1;
+      }
+    }
+  }
 }
 
 .recurring-tickets-content__modal--content,
@@ -1036,6 +1056,11 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     //top: 28px;
     background-size: cover;
     z-index: 1;
+
+    @media (max-width: 767px) {
+      top: 16px;
+      right: 16px;
+    }
   }
 }
 /* End Btn closed */

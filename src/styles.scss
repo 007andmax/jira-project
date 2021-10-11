@@ -821,6 +821,10 @@ documents-edit-info {
   }
   &__body {
     margin-bottom: 50px;
+
+    @media (max-width: 767px) {
+      margin-bottom: 32px;
+    }
     h3 {
       font-weight: 600;
       font-size: 20px;
@@ -828,32 +832,17 @@ documents-edit-info {
       color: $primary-2;
       position: relative;
       margin: 0;
-      &:before,
-      &:after {
-        content: "";
-        position: absolute;
-      }
-      &:before {
-        left: -70px;
-        top: 0;
-        width: 48px;
-        height: 48px;
-        background: $gray-300;
-        border-radius: 50%;
-      }
-      &:after {
-        left: -58px;
-        top: 10px;
-        width: 24px;
-        height: 24px;
-        background: url("assets/img/icons/archive-red-ng2.png") no-repeat;
-      }
     }
     p {
       font-weight: 400;
       font-size: 13px;
       line-height: 1.54;
       max-width: 398px;
+      color: $gray-700;
+
+      @media (max-width: 767px) {
+        margin-top: 8px;
+      }
     }
   }
   &__footer {
@@ -866,6 +855,10 @@ documents-edit-info {
       border: none;
       margin-right: 16px;
       background-color: $error;
+
+      @media (max-width: 767px) {
+        margin-right: 8px;
+      }
 
       &:hover {
         background-color: darken($error, 10%);
@@ -884,6 +877,16 @@ documents-edit-info {
       &:before {
         background: $background;
       }
+    }
+  }
+}
+.archive-modal {
+  @media (max-width: 767px) {
+    padding: 16px;
+  }
+  .archive-modal__body h3:before {
+    @media (max-width: 767px) {
+      display: none;
     }
   }
 }
@@ -2142,7 +2145,7 @@ app-quotes-item {
 
       > div {
         @media screen and (max-width: 767px) {
-          max-width: 100%;
+          width: 100%;
           display: flex;
           align-items: center;
           padding-left: 80px;
@@ -2268,6 +2271,10 @@ app-quotes-item {
           border-right-color: $primary-1 !important;
         }
       }
+    }
+
+    @media (max-width: 767px) {
+      padding-bottom: 48px;
     }
   }
 }

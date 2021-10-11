@@ -1,5 +1,9 @@
 <div class="confirm-modal image-confirm-modal">
-  <div class="close-modal" (click)="closeModal()" tabindex="1"></div>
+  <div class="qt-df qt-jc-sb qt-ai-c qt-mb-20">
+    <div class="confirm-modal__title qt-d-none qt-d-md-block">Crop Logo</div>
+    <div class="close-modal" (click)="closeModal()" tabindex="1"></div>
+  </div>
+
   <div class="image-confirm-modal__body" *ngIf="show">
     <image-cropper
 			#imageCroper
@@ -25,3 +29,4 @@
     </div>
   </div>
 </div>
+<div class="image-confirm-modal__overlay"></div>
