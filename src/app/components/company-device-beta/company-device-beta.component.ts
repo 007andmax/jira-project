@@ -1,11 +1,4 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  NgZone,
-  OnInit,
-  ViewChild,
-} from "@angular/core";
-import { element } from "@angular/core/src/render3";
+import { ChangeDetectorRef, Component, NgZone, OnInit, ViewChild,} from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { ToastrService } from "ngx-toastr";
@@ -13,6 +6,7 @@ import { AgentService } from "src/app/services/agent/agent.service";
 import { CompaniesStateService } from "src/app/states/company/companies-state.service";
 import { KafkaStateService } from "src/app/states/kafka/kafka-state.service";
 import { LeftPanelStateService } from "src/app/states/left-panel/left-panel-state.service";
+import { RemoteControlService } from "../device/_services/remoteControl.service";
 import { CompanyDeviceBetaFilter } from "./class/device-beta";
 
 @Component({
@@ -22,6 +16,7 @@ import { CompanyDeviceBetaFilter } from "./class/device-beta";
 })
 export class CompanyDeviceBetaComponent implements OnInit {
   @ViewChild("templatePowersell") template;
+  @ViewChild("templateConnection") templateconnection;
   selectAllDevices: boolean = false;
   assetList: any[] = [];
   assetID: any[] = [];
@@ -36,6 +31,11 @@ export class CompanyDeviceBetaComponent implements OnInit {
   powershellmsg: string = "";
   temporaryCommand: string = "";
   assetId: number;
+  isConnection: boolean = false;
+  connectionType: string = "";
+  restServerAddress = "";
+  remoteConnectPort = 0;
+  guid: number;
 
   constructor(
     private leftPanelStateService: LeftPanelStateService,
@@ -46,7 +46,8 @@ export class CompanyDeviceBetaComponent implements OnInit {
     private cd: ChangeDetectorRef,
     private toastr: ToastrService,
     private modalService: NgbModal,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private remoteControlService: RemoteControlService
   ) {}
 
   ngOnInit() {
@@ -129,7 +130,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   CurrentUser() {
     this.kafkaStateService.onCurrentConfig.subscribe((resp) => {
       if (resp.length > 0) {
-        let asset = this.assetList.find(x=>x.ID === resp[0].key);
+        let asset = this.assetList.find((x) => x.ID === resp[0].key);
         if (asset) {
           this.kafkaMessage = JSON.parse(resp[0].Value);
           asset.CurrentUser = this.kafkaMessage.CurrentLoggedInUser;
@@ -220,8 +221,66 @@ export class CompanyDeviceBetaComponent implements OnInit {
     }
   }
 
-  remoteAccess(){
+  remoteAccess(connectionType, guid) {
+    this.guid = guid;
+    this.connectionType = connectionType;
+    this.modalService.open(this.templateconnection, {
+      windowClass: "modal-md",
+      centered: true,
+    });
+  }
 
+  close() {
+    this.modalService.dismissAll("Cross click");
+  }
+
+  getConstant(sessionId) {
+    this.remoteControlService
+      .getConstant()
+      .pipe()
+      .subscribe(
+        (resp) => {
+          this.restServerAddress = resp["rest.server.url"];
+          this.remoteConnectPort = resp["remote.connect.port"];
+          let url =
+            "quicktech://connect?serverIP=" +
+            this.restServerAddress +
+            "&port=" +
+            this.remoteConnectPort +
+            "&sessionID=" +
+            sessionId;
+          window.open(url, "_self");
+          this.isConnection = true;
+        },
+        (error) => {}
+      );
+  }
+
+  downloadViewer() {
+    window.location.href = "/data/connection-viewer";
+  }
+
+  launchRemoteApp() {
+    let data = {
+      assetId: this.guid,
+      type: this.connectionType,
+      companyId: this.companyId,
+    };
+    this.remoteControlService
+      .createConnection2(data)
+      .pipe()
+      .subscribe(
+        (resp) => {
+          if (this.connectionType === "CSS") {
+            this.getConstant(resp.sessionId);
+          } else {
+            this.getConstant(resp.sessionId);
+          }
+        },
+        (error) => {
+          this.toastr.error("Something went wrong please try again.");
+        }
+      );
   }
 
   Reboot(assetID) {
