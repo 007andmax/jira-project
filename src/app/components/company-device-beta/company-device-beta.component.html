@@ -18,8 +18,6 @@
         </div>
 
 
-
-
         <div class="qt-page-list__header-thead-container">
             <table class="qt-table-modern qt-page-list__header-thead">
                 <thead>
@@ -78,34 +76,45 @@
                             </td>
                             <td class="company-devices-table__device-type">
                                 <div
-                                    ngbDropdown #myDrop="ngbDropdown"
+                                    ngbDropdown
                                     placement="bottom-left"
                                     container="body"
                                     class="qt-ic-c qt-pointer device-type-icon qt-sz-24"
-                                    [ngClass]="{'icon__computer' : asset.iconName === 'Workstation' || !asset.iconName,
-              'icon__tablet' : asset.iconName === 'Networking Hardware',
-            'icon__printer' : asset.iconName === 'Printer',
-          'icon__server' : asset.iconName === 'Server',
-        '--ofline': !asset.online }"
+                                    [ngClass]="{
+                    icon__computer:
+                      asset.iconName === 'Workstation' || !asset.iconName,
+                    icon__tablet: asset.iconName === 'Networking Hardware',
+                    icon__printer: asset.iconName === 'Printer',
+                    icon__server: asset.iconName === 'Server',
+                    '--ofline': !asset.online
+                  }"
                                     ngbDropdownToggle
                                 >
                                     <div ngbDropdownMenu>
-                                        <ul class="icon-list qt-dropdown-menu --dropdown-icons device-type-dropdown">
+                                        <ul class="
+                        icon-list
+                        qt-dropdown-menu
+                        --dropdown-icons
+                        device-type-dropdown
+                      ">
                                             <li
                                                 *ngFor="let hardwar of hardwareTypes"
-                                                (click)="setIcon(asset.ID,hardwar.ID,myDrop)"
+                                                (click)="setIcon(asset.ID, hardwar.ID)"
                                             >
                                                 <span>
-                                                    <i class="qt-ic-c qt-pointer device-type-icon qt-sz-24"
-                                                    [ngClass]="{
-                                                        'icon__computer' : hardwar.Name === 'Workstation' || ! hardwar.Name,
-                                                        'icon__tablet' :  hardwar.Name === 'Networking Hardware',
-                                                        'icon__printer' :  hardwar.Name === 'Printer',
-                                                        'icon__server' :  hardwar.Name === 'Server'
-                                                    }"
+                                                    <i
+                                                        class="qt-ic-c qt-pointer device-type-icon qt-sz-24"
+                                                        ngbDropdownItem
+                                                        [ngClass]="{
+                              icon__computer:
+                                hardwar.Name === 'Workstation' || !hardwar.Name,
+                              icon__tablet:
+                                hardwar.Name === 'Networking Hardware',
+                              icon__printer: hardwar.Name === 'Printer',
+                              icon__server: hardwar.Name === 'Server'
+                            }"
                                                     ></i>
                                                 </span>
-
                                             </li>
                                         </ul>
                                     </div>
@@ -114,7 +123,10 @@
                             <td class="company-devices-table__device-name">
                                 <div>
                                     <div class="qt-df qt-fd-c">
-                                        <div class="company-devices-table-device-name qt-ff-gm qt-df qt-ai-c">
+                                        <div class="
+                        company-devices-table-device-name
+                        qt-ff-gm qt-df qt-ai-c
+                      ">
                                             <span [textContent]="asset.Title"></span>
                                         </div>
                                         <span
@@ -135,28 +147,36 @@
                                         *ngIf="asset.IdelTime"
                                     >
                                         Idle:
-                                        <span>{{asset.IdelTime}}</span>
+                                        <span>{{ asset.IdelTime }}</span>
                                     </span>
                                 </div>
                             </td>
                             <td class="company-devices-table__up-time">
                                 <div class="qt-df qt-fd-c">
                                     <span>
-                                        <span>{{asset.IdelTime}}</span>
+                                        <span>{{ asset.IdelTime }}</span>
                                         <ng-template
                                             #tipOfflineDevice
                                             class="tooltip"
                                         >
-                                            <span>{{asset.IdelTime}}</span>
+                                            <span>{{ asset.IdelTime }}</span>
                                         </ng-template>
                                     </span>
                                     <span
-                                        *ngIf="asset.IdelTime!='' && asset.IdelTime!=undefined && asset.IdelTime!=null"
+                                        *ngIf="
+                      asset.IdelTime != '' &&
+                      asset.IdelTime != undefined &&
+                      asset.IdelTime != null
+                    "
                                         class="uptime-tag qt-ff-gm"
                                         [textContent]="'Online'"
                                     ></span>
                                     <span
-                                        *ngIf="asset.IdelTime=='' || asset.IdelTime==undefined || asset.IdelTime==null"
+                                        *ngIf="
+                      asset.IdelTime == '' ||
+                      asset.IdelTime == undefined ||
+                      asset.IdelTime == null
+                    "
                                         placement="top"
                                         container="body"
                                         [ngbTooltip]="tipOfflineDevice"
@@ -202,7 +222,7 @@
                                             *ngIf="asset.online"
                                             class="pointer"
                                             ngbDropdownItem
-                                            (click)="sendCommand('r',asset.ID)"
+                                            (click)="sendCommand('r', asset.ID)"
                                         >
                                             <div class="icon__restart qt-bg-contain qt-sz-16 qt-mr-8"></div>
                                             Restart
@@ -211,7 +231,7 @@
                                             *ngIf="asset.online"
                                             class="pointer"
                                             ngbDropdownItem
-                                            (click)="sendCommand('s',asset.ID)"
+                                            (click)="sendCommand('s', asset.ID)"
                                         >
                                             <div class="icon__shutdown qt-bg-contain qt-sz-16 qt-mr-8"></div>
                                             Shutdown
@@ -221,10 +241,17 @@
                                             class="pointer"
                                             ngbDropdownItem
                                         >
-                                            <div class="icon__master-agent qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                            <div class="
+                          icon__master-agent
+                          qt-bg-contain qt-sz-16 qt-mr-8
+                        "></div>
                                             Set as Master Agent
                                         </li>
-                                        <li class="pointer" (click)="sendCommand('ar',asset.ID)">
+                                        <li
+                                            class="pointer"
+                                            (click)="sendCommand('ar', asset.ID)"
+                                            ngbDropdownItem
+                                        >
                                             <div class="icon__remove qt-bg-contain qt-sz-16 qt-mr-8"></div>
                                             Remove
                                         </li>
@@ -243,23 +270,37 @@
     </div>
 </div>
 <ng-template #templatePowersell>
-  <div class="modal-content restart-modal">
-      <div class="modal-header">
-          <h5 class="modal-title">Confirmation</h5>
-          <button type="button" class="close" (click)="decline()" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-          </button>
-      </div>
-      <div class="modal-body">
-          <p  [innerHTML]="powershellmsg"></p>
-      </div>
-      <div class="modal-footer">
-          <button type="button" class="btn btn-danger" (click)="Reboot(this.assetId);">
-              Yes
-          </button>
-          <button type="button" class="btn btn-secondary" (click)="decline()">
-              No
-          </button>
-      </div>
-  </div>
+    <div class="modal-content restart-modal">
+        <div class="modal-header">
+            <h5 class="modal-title">Confirmation</h5>
+            <button
+                type="button"
+                class="close"
+                (click)="decline()"
+                data-dismiss="modal"
+                aria-label="Close"
+            >
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p [innerHTML]="powershellmsg"></p>
+        </div>
+        <div class="modal-footer">
+            <button
+                type="button"
+                class="btn btn-danger"
+                (click)="Reboot(this.assetId)"
+            >
+                Yes
+            </button>
+            <button
+                type="button"
+                class="btn btn-secondary"
+                (click)="decline()"
+            >
+                No
+            </button>
+        </div>
+    </div>
 </ng-template>

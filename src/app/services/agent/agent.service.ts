@@ -66,18 +66,19 @@ export class AgentService {
     this.AccessToken = data;
   }
 
-  public AgentUninstall(assetId) {
+  public UninstallAgent(assetId) {
     const data = {
       AssetID: assetId,
       MessageType: "UninstallAgent",
     };
 
     if (this.wsService.IsKafkaConnected) {
+      console.log("sending UninstallAgent command:" + data.MessageType);
       this.http
         .post(this.apiurl + "sendMessageToKafka", data)
         .subscribe(() => {});
     } else {
-      setTimeout(() => this.AgentUninstall(assetId), 3000);
+      setTimeout(() => this.UninstallAgent(assetId), 3000);
     }
   }
   public TerminalShellCommand(data:any)

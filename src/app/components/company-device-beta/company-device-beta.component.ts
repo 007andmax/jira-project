@@ -1,4 +1,11 @@
-import { ChangeDetectorRef, Component, NgZone, OnInit, ViewChild } from "@angular/core";
+import {
+  ChangeDetectorRef,
+  Component,
+  NgZone,
+  OnInit,
+  ViewChild,
+} from "@angular/core";
+import { element } from "@angular/core/src/render3";
 import { ActivatedRoute } from "@angular/router";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { ToastrService } from "ngx-toastr";
@@ -122,25 +129,22 @@ export class CompanyDeviceBetaComponent implements OnInit {
   CurrentUser() {
     this.kafkaStateService.onCurrentConfig.subscribe((resp) => {
       if (resp.length > 0) {
-        this.assetList.forEach((element, index) => {
-          let item = resp.find((x) => x.key == element.ID);
-          if (item != undefined) {
-            this.kafkaMessage = JSON.parse(item.Value);
-            this.assetList[index].CurrentUser =
-              this.kafkaMessage.CurrentLoggedInUser;
-            if (this.kafkaMessage.IdleTime != null) {
-              let Time = this.kafkaMessage.IdleTime.split("Idle for");
-              this.assetList[index].IdelTime = Time[1] != "" ? Time[1] : "";
-            }
-            this.assetList[index].online = true;
-            this.cd.detectChanges();
+        let asset = this.assetList.find(x=>x.ID === resp[0].key);
+        if (asset) {
+          this.kafkaMessage = JSON.parse(resp[0].Value);
+          asset.CurrentUser = this.kafkaMessage.CurrentLoggedInUser;
+          if (this.kafkaMessage.IdleTime != null) {
+            let Time = this.kafkaMessage.IdleTime.split("Idle for");
+            asset.IdelTime = Time[1] != "" ? Time[1] : "";
           }
-        });
+        }
+        asset.online = true;
+        this.cd.detectChanges();
       }
     });
   }
 
-  public setIcon(assetId, hardwareId,myDrop) {
+  public setIcon(assetId, hardwareId) {
     var asset = this.assetList.find((x) => x.ID == assetId);
     if (asset) {
       asset.HardwareTypeID = hardwareId;
@@ -148,7 +152,6 @@ export class CompanyDeviceBetaComponent implements OnInit {
       if (ht) {
         asset.iconName = ht.Name;
       }
-      myDrop.close();
       this.agentService.overrideAsset(asset).subscribe((resp) => {
         this.toastr.success("HardwareType change successfully.");
       });
@@ -174,7 +177,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   onPowerShellCommand() {
     this.kafkaStateService.onPowerShellCommand.subscribe((resp) => {
       let item = resp.find((x) => x.key == this.assetId);
-      if (item != undefined) {
+      if (item) {
         this.kafkaMessage = item.Value;
         this.powershellmsg = this.kafkaMessage;
         this.ngZone.run(() => {
@@ -212,10 +215,13 @@ export class CompanyDeviceBetaComponent implements OnInit {
       data.Value = "Stop-Computer";
       this.agentService.SendPowerShellCommand(data);
     }
-    if(command === "ar")
-    {
-      this.agentService.AgentUninstall(assetId);
+    if (command === "ar") {
+      this.agentService.UninstallAgent(assetId);
     }
+  }
+
+  remoteAccess(){
+
   }
 
   Reboot(assetID) {

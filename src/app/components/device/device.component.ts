@@ -128,7 +128,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
       return;
     }
     this.kafkaMessage = JSON.parse(item.Value);
-    if (this.kafkaMessage.IdleTime != null) {
+    if (this.kafkaMessage.IdleTime) {
       let Time = this.kafkaMessage.IdleTime.split("Idle for");
       this.UpTime = Time[1] != "" ? Time[1] : "";
       this.cd.detectChanges();
@@ -333,7 +333,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
     this.kafkaStateService.onPowerShellCommand.subscribe((resp) => {
       console.log("OnPowerShellCommand");
       let item = resp.find((x) => x.key == this.asset.ID);
-      if (item != undefined) {
+      if (item) {
         this.kafkaMessage = item.Value;
         this.powershellmsg = this.kafkaMessage;
         this.ngZone.run(() => {

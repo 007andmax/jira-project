@@ -88,9 +88,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   onCurrentConfig(resp: any) {
-    if (this.asset.ID != undefined && this.asset.ID != 0) {
+    if (this.asset.ID && this.asset.ID != 0) {
       let item = resp.find((x) => x.key == this.asset.ID);
-      if (item != undefined) {
+      if (item) {
         this.kafkaMessage = JSON.parse(item.Value);
         this.securityUpdate = this.kafkaMessage.PendingWindowsUpdates.length;
         this.cd.detectChanges();
