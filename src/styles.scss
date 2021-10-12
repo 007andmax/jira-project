@@ -2071,11 +2071,7 @@ app-quotes-item {
 
       .checkbox-container {
         margin-bottom: 0;
-        margin-top: 5px;
-
-        @media only screen and (max-width: 768px) {
-          margin-top: 0;
-        }
+        margin-top: 0;
       }
     }
     &__name {

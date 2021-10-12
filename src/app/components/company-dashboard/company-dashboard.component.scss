@@ -365,6 +365,13 @@
         // justify-content: space-between;
         margin: 0 -8px;
         flex-wrap: wrap;
+
+        .collapse-arrow {
+          display: none;
+          @media (max-width: 767px) {
+            display: block;
+          }
+        }
         .cmp-dboard-col {
             flex-direction: column;
             margin: 0 8px;
@@ -1618,6 +1625,9 @@
                 padding-left: 25px;
                 font-size: 13px;
                 color: $gray-800;
+                @media (max-width: 767px) {
+                  font-weight: 600;
+                }
                 &::after {
                     position: absolute;
                     left: 0;
@@ -1627,6 +1637,9 @@
                     background-size: 16px;
                     height: 16px;
                     width: 17px;
+                    @media (max-width: 767px) {
+                      top: -1px;
+                    }
                 }
             }
             input:checked + label::after {
@@ -1783,8 +1796,10 @@
                                             display: inline-block;
                                             vertical-align: middle;
                                             @media only screen and (max-width: 576px) {
-                                                display: block;
+                                                //display: block;
                                                 width: 100%;
+                                                display: flex;
+                                                justify-content: space-between;
                                             }
                                             .tl-col {
                                                 display: inline-block;
@@ -1793,7 +1808,8 @@
                                                 margin-right: 55px;
                                                 position: relative;
                                                 @media only screen and (max-width: 576px) {
-                                                    width: 41%;
+                                                  width: calc(50% - 4px);
+                                                  margin-right: 0;
                                                 }
                                                 select.form-input {
                                                     padding: 9px 10px;
@@ -1832,6 +1848,10 @@
                                                     top: 0;
                                                     bottom: 0;
                                                     margin: auto;
+
+                                                    @media (max-width: 767px) {
+                                                      display: none;
+                                                    }
                                                 }
                                             }
                                         }
@@ -1955,6 +1975,7 @@
                               color: $white;
                               padding: 16px 13px;
                               background: $primary-2;
+                              font-weight: 600;
                             }
                         }
                         iframe {
@@ -1966,6 +1987,66 @@
             }
         }
     }
+
+  &.edit-hours {
+    .modal-dialog {
+      @media (max-width: 767px) {
+        width: 100%;
+        border-radius: 0;
+      }
+      .modal-content  {
+        @media (max-width: 767px) {
+          height: 100vh;
+          overflow: auto;
+        }
+        .modal-body {
+          @media (max-width: 767px) {
+            padding: 70px 16px 58px;
+          }
+        }
+        .modal-header {
+          @media (max-width: 767px) {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1;
+            padding: 16px;
+            background: $primary-2;
+            justify-content: center;
+            border: none;
+          }
+          h1 {
+            @media (max-width: 767px) {
+              font-size: 16px;
+              line-height: 24px;
+              color: $white;
+            }
+          }
+          .close {
+            @media (max-width: 767px) {
+              position: absolute;
+              top: 20px;
+              left: 16px;
+              background-size: 20px;
+              background-image: url('/assets/img/icons/close-white.svg');
+            }
+          }
+        }
+        .footer-area-modal {
+          @media (max-width: 767px) {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 16px;
+            background: $white;
+            z-index: 1;
+          }
+        }
+      }
+    }
+  }
 }
 
 .ui-timepicker-wrapper {

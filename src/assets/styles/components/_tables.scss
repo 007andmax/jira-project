@@ -84,6 +84,19 @@ table.qt-table-modern {
     display: flex;
     margin-bottom: 2px;
     position: relative;
+    border-radius: 5px;
+    height: 48px;
+    border: 1px solid $white;
+
+    &:hover,
+    &.--selected {
+      border-color: $primary-1;
+      background: #f4fbff;
+
+      > div {
+        background: #f4fbff;
+      }
+    }
 
     @media (max-width: 767px) {
       flex-wrap: wrap;
@@ -92,6 +105,7 @@ table.qt-table-modern {
       border-radius: 8px;
       margin-bottom: 8px;
       box-shadow: 0 0 3px rgba(0, 0, 0, 0.05);
+      height: auto;
     }
 
     & > div {
@@ -99,9 +113,7 @@ table.qt-table-modern {
       align-items: center;
       background: $white;
       padding: 0 8px 0 8px;
-      height: 48px;
-      border-top: 1px solid transparent;
-      border-bottom: 1px solid transparent;
+      //height: 48px;
       vertical-align: middle;
       cursor: pointer;
 
@@ -134,12 +146,14 @@ table.qt-table-modern {
     }
 
     &--lg {
+      height: 66px;
       @media screen and (max-width: 767px) {
+        height: auto;
         padding: 15px 16px;
       }
 
       > div {
-        height: 64px;
+        //height: 66px;
 
         @media screen and (max-width: 767px) {
           padding: 0;
@@ -149,7 +163,7 @@ table.qt-table-modern {
     }
 
     @media screen and (min-width: 767px) {
-      &:hover > div {
+      .qt-table-modern__row tr:hover > div {
         background: #f4fbff;
         border-color: $primary-1;
 
@@ -191,12 +205,22 @@ table.qt-table-modern {
       @media (max-width: 767px) {
         flex: 100%;
         font-size: 16px; // TODO replace this font style for @extend
-        line-height: 24px;
         font-weight: 600;
         letter-spacing: 0;
-        max-height: 50px;
         overflow: hidden;
         align-items: stretch;
+        max-height: 40px;
+        height: auto;
+        width: 100%;
+        white-space: unset;
+        line-height: 20px;
+        margin: 5px 0;
+      }
+
+      .ellipsis {
+        @media (max-width: 767px) {
+          white-space: unset;
+        }
       }
     }
 
