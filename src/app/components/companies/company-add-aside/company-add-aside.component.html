@@ -23,29 +23,29 @@
         *ngIf="version === 'full'"
     ></company-add-aside-full>
     <div class="qt-aside-modern__footer">
-        <div class="qt-df qt-jc-sb qt-ai-c qt-w100">
-            <div class="qt-df">
-                <button
-                    *ngIf="version === 'short'"
-                    class="qt-button qt-mr-12"
-                    (click)="onAddShort()"
-                >
-                    Save Company
-                </button>
-                <button
-                    *ngIf="version === 'full'"
-                    class="qt-button qt-mr-12"
-                    (click)="onAddFull()"
-                >
-                    Save Company
-                </button>
-                <button
-                    class="qt-button --gray"
-                    (click)="close()"
-                >
-                    Cancel
-                </button>
-            </div>
+        <!-- <div class="qt-df qt-jc-sb qt-ai-c qt-w100"> -->
+        <div class="qt-df">
+            <button
+                *ngIf="version === 'short'"
+                class="qt-button qt-mr-12"
+                (click)="onAddShort()"
+            >
+                Save Company
+            </button>
+            <button
+                *ngIf="version === 'full'"
+                class="qt-button qt-mr-12"
+                (click)="onAddFull()"
+            >
+                Save Company
+            </button>
+            <button
+                class="qt-button --gray"
+                (click)="close()"
+            >
+                Cancel
+            </button>
         </div>
+        <!-- </div> -->
     </div>
 </div>

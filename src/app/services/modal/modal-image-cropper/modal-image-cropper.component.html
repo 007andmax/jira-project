@@ -1,32 +1,47 @@
 <div class="confirm-modal image-confirm-modal">
-  <div class="qt-df qt-jc-sb qt-ai-c qt-mb-20">
-    <div class="confirm-modal__title qt-d-none qt-d-md-block">Crop Logo</div>
-    <div class="close-modal" (click)="closeModal()" tabindex="1"></div>
-  </div>
-
-  <div class="image-confirm-modal__body" *ngIf="show">
-    <image-cropper
-			#imageCroper
-      [imageBase64]="imageBase64"
-      [maintainAspectRatio]="true"
-      [aspectRatio]="4 / 3"
-      [resizeToWidth]="128"
-
-      (cropperReady)="cropperReady()"
-      format="png"
-      (imageCropped)="imageCropped($event)"
-    ></image-cropper>
-
-    <img [src]="img" />
-  </div>
-  <div class="image-confirm-modal__footer">
-    <div class="d-f jc-fe">
-      <div class="btn-new btn-primary" (click)="approveConfirm()">Crop</div>
-      <div class="btn-new disabled"
-           data-dismiss='modal' (click)="cancelConfirm()">
-        Cancel
-      </div>
+    <div class="qt-df qt-jc-sb qt-ai-c qt-mb-20">
+        <div class="confirm-modal__title qt-d-none qt-d-md-block">Crop Logo</div>
+        <div
+            class="close-modal"
+            (click)="closeModal()"
+            tabindex="1"
+        ></div>
     </div>
-  </div>
+    <div
+        class="image-confirm-modal__body"
+        *ngIf="show"
+    >
+        <image-cropper
+            #imageCroper
+            [imageBase64]="imageBase64"
+            [maintainAspectRatio]="true"
+            [aspectRatio]="4 / 3"
+            [resizeToWidth]="128"
+            (cropperReady)="cropperReady()"
+            format="png"
+            (imageCropped)="imageCropped($event)"
+        ></image-cropper>
+        <img [src]="img">
+    </div>
+    <div class="image-confirm-modal__footer">
+        <div class="d-f jc-fe">
+            <div
+                class="btn-new btn-primary"
+                (click)="approveConfirm()"
+            >
+                Crop
+            </div>
+            <div
+                class="btn-new disabled"
+                data-dismiss='modal'
+                (click)="cancelConfirm()"
+            >
+                Cancel
+            </div>
+        </div>
+    </div>
 </div>
-<div class="image-confirm-modal__overlay"></div>
+<div
+    class="image-confirm-modal__overlay"
+    [ngClass]="{'--open':show}"
+></div>

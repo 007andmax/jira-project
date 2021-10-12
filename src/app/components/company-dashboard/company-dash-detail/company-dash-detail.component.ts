@@ -491,7 +491,7 @@ export class CompanyDashDetailComponent implements OnInit {
 
   open(content: any) {
     this.tagsState.setTagsFromtEdit(this.tags);
-    this.modalReference = this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'cmp-comapny-modal' }).result.then((result) => {
+    this.modalReference = this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'cmp-comapny-modal edit-hours' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     });
   }
