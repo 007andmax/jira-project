@@ -1,0 +1,132 @@
+<div>
+  <div class="report-menu">
+    <div class="run-report-content clearfix">
+      <div class="new-reports-reverse">
+        <button
+          class="form-group btn btn-success"
+          (click)="getReportBySoftwareSummary()"
+        >
+          Get Report
+        </button>
+        <div class="form-group content">
+          <app-drop-down
+            [sort]="true"
+            [placeholder]="'Search software / publisher'"
+            [dropdownHeight]="'300px'"
+            [field]="'DisplayName'"
+            [search]="true"
+            [change]="true"
+            [isDisabled]=""
+            [preloader]=""
+            [list]="software"
+            (onSelectedItem)="onSelectSoftware($event)"
+          ></app-drop-down>
+        </div>
+        <div class="form-group content custom-width dropdown-height">
+          <app-drop-down
+            [sort]="true"
+            [search]="true"
+            [change]="true"
+            [placeholder]="'All devices'"
+            [isDisabled]=""
+            [dropdownHeight]="'300px'"
+            [list]="devices"
+            [field]="'Description'"
+            (onSelectedItem)="onSelectDevice($event)"
+          ></app-drop-down>
+        </div>
+        <div class="grey-dropdown form-group content select-users-list">
+          <app-drop-down
+            [placeholder]="'Select Company'"
+            [list]="companies"
+            [validate]=""
+            [errorMessage]="'Please select the company name'"
+            [field]="'name'"
+            [search]="true"
+            [change]="true"
+            (onSelectedItem)="selectClient($event)"
+          ></app-drop-down>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="product-list___ticket hardware-summary report-show-footer-header"
+  id="product-list-ticket-data"
+>
+  <div class="product-list-ticket software-report" style="width: 1180px">
+    <div class="customer-ticket">
+      <div class="customer-ticket__report">
+        <div class="report-header">
+          <h1>Device IP Summary Report</h1>
+          <div class="company-info">
+            <h3>{{ "Facile" }}</h3>
+            <p>
+              {{ "12-12-2021" }}
+            </p>
+          </div>
+        </div>
+        <div class="customer-ticket__report--summary">
+          <h3>Software Summary Report</h3>
+        </div>
+        <div>
+          <div>
+            <ul class="con-col">
+              <li class="top-product-list-ticket clearfix">
+                <div class="col-md-2">
+                  <strong>Device Name</strong>
+                </div>
+                <div class="col-md-2">
+                  <strong>Software Name</strong>
+                </div>
+                <div class="col-md-2">
+                  <strong>Publisher</strong>
+                </div>
+                <div class="col-md-2">
+                  <strong>Version</strong>
+                </div>
+                <div class="col-md-2">
+                  <strong>Install Date</strong>
+                </div>
+              </li>
+              <div>
+                <div>
+                      <li class="content-product-list-ticket clearfix" *ngFor="let softwareReportList of softwareReportList">
+                          <div
+                              class="col-md-2"
+                          >
+                              {{softwareReportList.AssetNames}}
+                          </div>
+                          <div
+                              class="col-md-2"
+                          >
+                              {{softwareReportList.DisplayName}}
+                          </div>
+                          <div
+                              class="col-md-2"
+                          >
+                              {{softwareReportList.Publisher}}
+                          </div>
+                          <div
+                              class="col-md-2"
+                          >
+                              {{softwareReportList.DisplayVersion}}
+                          </div>
+                          <div
+                              class="col-md-2"
+                          >
+                              {{'12-10-2021'}}
+                          </div>
+                      </li>
+
+              </div>
+              </div>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

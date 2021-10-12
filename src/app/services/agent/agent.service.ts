@@ -66,6 +66,24 @@ export class AgentService {
     this.AccessToken = data;
   }
 
+  public getTechCompanyByTechGuid(techGuid) {
+    return this.http
+      .get(`${this.apiAgent}agent/TechCompany/${techGuid}`,{
+          headers: this.getHeader(),
+          responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
+  public getCompanyApplicationByGuid(companyGuid) {
+    return this.http
+      .get(`${this.apiAgent}report/CompanyApplication/${companyGuid}`,{
+          headers: this.getHeader(),
+          responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
   public UninstallAgent(assetId) {
     const data = {
       AssetID: assetId,

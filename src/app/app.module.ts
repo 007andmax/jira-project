@@ -450,6 +450,7 @@ import { CommonModule, HashLocationStrategy, LocationStrategy, PathLocationStrat
 import { HomeComponent } from './components/home/home.component';
 import { CompanyDeviceBetaComponent } from './components/company-device-beta/company-device-beta.component';
 import { DeviceBeta } from './pipe/device-beta.pipe';
+import { SoftwareSummaryReport1Component } from './components/reports/reports/software-summary-report1/software-summary-report1.component';
 
 
 declare var $: any;
@@ -856,7 +857,8 @@ declare var $: any;
     CompanyAddAsideFullComponent,
     HomeComponent,
     CompanyDeviceBetaComponent,
-    DeviceBeta
+    DeviceBeta,
+    SoftwareSummaryReport1Component
   ],
   imports: [
     BrowserModule,

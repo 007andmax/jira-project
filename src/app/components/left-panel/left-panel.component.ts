@@ -119,6 +119,7 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/report/accounting-report`)) this.state = 'accounting-report';
           if (window.location.href.includes(`/report/remote-access`)) this.state = 'remote-access';
           if (window.location.href.includes(`/report/software-summary`)) this.state = 'software-summary';
+          if (window.location.href.includes(`/report/software-summary1`)) this.state = 'software-summary1';
           if (window.location.href.includes(`/report/hardware-summary`)) this.state = 'hardware-summary';
           if (window.location.href.includes(`/report/device-ip-summary`)) this.state = 'device-ip-summary';
           if (window.location.href.includes(`/report/tech-sales`)) this.state = 'tech-sales';
@@ -224,6 +225,7 @@ export class LeftPanelComponent implements OnInit {
         this.state === 'accounting-report' ||
         this.state === 'remote-access' ||
         this.state === 'software-summary' ||
+        this.state === 'software-summary1' ||
         this.state === 'hardware-summary' ||
         this.state === 'device-ip-summary' ||
         this.state === 'tech-sales' ||
