@@ -535,6 +535,10 @@ textarea {
   .light-dropdown .icn-remove-old {
     top: calc(50% - 7px) !important;
     right: 4px;
+
+    @media (max-width: 767px) {
+      top: calc(50% - 15px) !important;
+    }
   }
 
   .light-dropdown .report-caret-icon {
@@ -543,6 +547,10 @@ textarea {
 
   .app-drop-down__right-icon {
     right: 15px;
+
+    @media (max-width: 767px) {
+      right: 0;
+    }
   }
 
   .with-number-types {

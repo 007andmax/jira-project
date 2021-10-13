@@ -14,6 +14,12 @@
         -webkit-appearance: none;
         -moz-appearance: none;
         outline: none;
+
+        @media (max-width: 767px) {
+          text-align: left;
+          padding-left: 14px;
+        }
+
         &:disabled {
             background-color: $gray-200;
             border: 1px solid $gray-200;

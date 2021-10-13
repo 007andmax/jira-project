@@ -1670,6 +1670,10 @@ app-quotes-item {
       height: 5px;
       background-size: cover;
       right: 8px;
+
+      @media (max-width: 767px) {
+        right: 15px;
+      }
     }
     .dropdown-menu {
       min-width: 80px;
@@ -2828,9 +2832,12 @@ app-quotes-item {
   .company-time-zone-drop-down {
     .report-caret-icon {
       position: absolute;
-      //right: 10px;
       right: 4px;
       top: calc(50% - 2px);
+
+      @media (max-width: 767px) {
+        right: 15px;
+      }
     }
   }
 
@@ -2892,6 +2899,10 @@ app-quotes-item {
 
       input {
         border: none;
+
+        @media (max-width: 767px) {
+          height: 40px !important;
+        }
       }
     }
 
@@ -2912,6 +2923,15 @@ app-quotes-item {
 
     .mat-form-field-label {
       top: 14px;
+
+      @media (max-width: 767px) {
+        top: 11px;
+      }
+    }
+  }
+  company-associate {
+    .mat-form-field-label {
+      padding-left: 16px !important;
     }
   }
 }
