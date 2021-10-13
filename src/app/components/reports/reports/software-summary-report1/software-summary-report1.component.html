@@ -13,10 +13,9 @@
             [sort]="true"
             [placeholder]="'Search software / publisher'"
             [dropdownHeight]="'300px'"
-            [field]="'DisplayName'"
             [search]="true"
             [change]="true"
-            [isDisabled]=""
+            [isDisabled]="!softwareSummaryReport.companyId"
             [preloader]=""
             [list]="software"
             (onSelectedItem)="onSelectSoftware($event)"
@@ -28,10 +27,9 @@
             [search]="true"
             [change]="true"
             [placeholder]="'All devices'"
-            [isDisabled]=""
+            [isDisabled]="!softwareSummaryReport.companyId"
             [dropdownHeight]="'300px'"
             [list]="devices"
-            [field]="'Description'"
             (onSelectedItem)="onSelectDevice($event)"
           ></app-drop-down>
         </div>
@@ -39,7 +37,7 @@
           <app-drop-down
             [placeholder]="'Select Company'"
             [list]="companies"
-            [validate]=""
+            [validate]="validate.getCompany()"
             [errorMessage]="'Please select the company name'"
             [field]="'name'"
             [search]="true"
