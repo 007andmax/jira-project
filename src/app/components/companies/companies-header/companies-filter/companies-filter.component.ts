@@ -53,6 +53,7 @@ export class CompaniesFilterComponent implements OnInit {
     this.sub.add(getOnUsers);
     let onChangeFilter = this.leftPanelStateService.onChangeFilter.subscribe(data => {
       this.typesDp.onSelect(this.companyTypes.find(item => item.value === data));
+      if (this.appService.checkMobile()) this.applyFilters();
     })
     this.sub.add(onChangeFilter);
   }
@@ -111,7 +112,7 @@ export class CompaniesFilterComponent implements OnInit {
     }
   }
   public onChangeTags(data) {
-    this.companyFilter.setTags(data.map(item => item.id));
+    this.companyFilter.setTags(data);
     if (!this.appService.checkMobile()) {
       this.companiesStateService.onInitFilter(this.companyFilter);
       this.onChangeCounterFilter();

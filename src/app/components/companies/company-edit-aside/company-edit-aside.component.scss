@@ -1,0 +1,29 @@
+.col-md-6,
+.col-md-12,
+.col-md-4,
+.col-md-3,
+.col-md-5 {
+    @media (max-width: 767px) {
+        padding-left: 0px;
+        padding-right: 0px;
+        margin-top: 16px;
+        &:first-child {
+            margin-top: 0px;
+        }
+    }
+}
+.create-contract {
+    @media (max-width: 767px) {
+        display: none;
+    }
+}
+.qt-aside-modern__footer > div {
+    @media (max-width: 767px) {
+        width: 100%;
+    }
+}
+.create-contract-container {
+    @media (max-width: 767px) {
+        display: none;
+    }
+}

@@ -135,7 +135,7 @@ export class CompanyAddAsideFullComponent implements OnInit {
     }
   }
   public onSelectCompanyTypes(type) {
-    this.company.clientType = type.value;
+    if (type) this.company.clientType = type.value;
     this.validate.resetType();
     this.onChangeType();
   }

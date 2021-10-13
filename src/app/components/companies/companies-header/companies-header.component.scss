@@ -18,3 +18,38 @@ companies-filter {
     border-radius: 10px;
   }
 }
+.list-filters {
+  display: none;
+  @media (max-width: 767px) {
+    display: block;
+  }
+  margin: -8px -8px 8px -8px;
+  /deep/.mat-form-field-infix {
+    overflow: auto;
+    border: none;
+    border-radius: 0px;
+  }
+  /deep/ .mat-form-field {
+    width: 100%;
+    background: #ffffff;
+  }
+  /deep/ .mat-form-field-flex {
+    padding-left: 8px;
+  }
+  /deep/ .mat-form-field-underline,
+  .mat-form-field-subscript-wrapper {
+    display: none;
+  }
+  /deep/ .mat-form-field-wrapper {
+    padding-bottom: 0px;
+  }
+  /deep/.mat-chip-list-wrapper {
+    width: fit-content;
+    margin: 0px;
+    flex-wrap: unset;
+    .mat-standard-chip {
+      margin: 0px 8px 0px 0px;
+      padding: 4px 6px 3px 8px;
+    }
+  }
+}

@@ -491,19 +491,13 @@ export class CompanyDashDetailComponent implements OnInit {
 
   open(content: any) {
     this.tagsState.setTagsFromtEdit(this.tags);
-    this.modalReference = this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'cmp-comapny-modal edit-hours' }).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    });
+    this.modalReference = this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'cmp-comapny-modal edit-hours' });
   }
   openTag(content: any) {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'cmp-comapny-modal' }).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    });
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'cmp-comapny-modal' });
   }
   openMap(content: any) {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'cmp-comapny-modal map' }).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    });
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'cmp-comapny-modal map' });
   }
 
   deleteTag(index: number) {
@@ -589,6 +583,7 @@ export class CompanyDashDetailComponent implements OnInit {
     if (fromHours < 10) {
       fHours = '0' + fromHours;
     }
+    if (fromHours === 24) fHours = "00";
 
     let fMinutes = '';
     if (fromMinutes < 10) {
@@ -615,7 +610,7 @@ export class CompanyDashDetailComponent implements OnInit {
     if (toHours < 10) {
       tHours = '0' + toHours;
     }
-
+    if (toHours === 24) tHours = "00";
     let tMinutes = '';
     if (toMinutes < 10) {
       tMinutes = '0' + toMinutes;

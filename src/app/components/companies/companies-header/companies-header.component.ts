@@ -11,6 +11,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { AppService } from 'src/app/states/app/app.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
   selector: 'app-companies-header',
@@ -33,6 +34,7 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
     public appService: AppService,
     private leftPanelStateService: LeftPanelStateService,
     private confirmStateService: ConfirmStateService,
+    private usersStateService: UsersStateService,
     private companiesState: CompaniesStateService) { }
 
   ngOnInit() {
@@ -75,11 +77,21 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
     if (this.appService.checkMobile()) this.appService.toggleMobileAside(data);
     this.toggleFilter = data;
   }
+  getClientType(clientType) {
+    return clientType.toLowerCase();
+  }
   clearAll() {
     this.filter.onClearAll();
   }
   onChangeCountFilter(data) {
     this.countFilter = data;
+  }
+  refreshFilters() {
+    this.filter.applyFilters();
+  }
+  getUserName(id) {
+    let user = this.usersStateService.getAllUsers().find(item => item.id == id);
+    return `${user.firstName} ${user.lastName}`;
   }
   public showAsideForAdd() {
     this.companiesStateService.toggleAsideForAdd();

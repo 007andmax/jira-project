@@ -186,7 +186,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     this.sub.add(getCompanyFromEdit);
   }
   public onSelectCompanyTypes(type) {
-    this.company.clientType = type.value;
+    if (type) this.company.clientType = type.value;
     this.validate.resetType();
     this.onChangeType();
   }

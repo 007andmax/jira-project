@@ -1,10 +1,11 @@
 import { CompanyIndustry } from "src/app/interfaces/company/company-industry";
+import { Tag } from "src/app/interfaces/tag/tag";
 import { CompanyFilterTop } from "./company-filter-top";
 
 export class CompanyFilter {
     clientType: string;
     clientIndustry: CompanyIndustry;
-    tags: Array<string> = [];
+    tags: Array<Tag> = [];
     tehUser: string;
     isArchived: boolean;
     devices = [];
@@ -32,7 +33,7 @@ export class CompanyFilter {
     }
     getDataForFilter() {
         return {
-            tagIds: (this.tags.length > 0) ? this.tags : undefined,
+            tagIds: (this.tags.length > 0) ? this.tags.map(item => item.id) : undefined,
             clientType: (this.clientType) ? this.clientType : undefined,
             techLeadId: (this.tehUser) ? this.tehUser : undefined,
             clientIndustryId: (this.clientIndustry) ? this.clientIndustry.id : undefined,

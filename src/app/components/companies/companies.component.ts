@@ -88,6 +88,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnUsers);
     let filter = this.companiesStateService.filter.subscribe(data => {
+      console.log("data", data);
       this.showPreloader = true;
       this.companyFilter.setFilters(data);
       window.scrollTo(0, 0);
@@ -229,6 +230,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.reqCompaniesList.forEach(item => item.selected = false);
     this.draftEmailStateService.resetSelectedCompanies();
+    this.leftPanelStateService.clearFilter();
     this.sub.unsubscribe();
   }
 }

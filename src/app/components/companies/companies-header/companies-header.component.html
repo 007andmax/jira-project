@@ -185,3 +185,40 @@
         </div>
     </div>
 </div>
+<div
+    class="list-filters"
+    *ngIf="isExistFilters()"
+>
+    <mat-form-field>
+        <mat-chip-list aria-label="Fruit selection">
+            <mat-chip
+                *ngIf="filter.companyFilter.clientType"
+                (removed)="filter.typesDp.clearClient();refreshFilters()"
+            >
+                {{getClientType(filter.companyFilter.clientType)}}
+                <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+            <mat-chip
+                *ngIf="filter.companyFilter.clientIndustry"
+                (removed)="filter.industriesDp.clearClient();refreshFilters()"
+            >
+                {{filter.companyFilter.clientIndustry.name}}
+                <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+            <mat-chip
+                *ngIf="filter.companyFilter.tehUser"
+                (removed)="filter.personsDp.clearClient();refreshFilters()"
+            >
+                {{getUserName(filter.companyFilter.tehUser)}}
+                <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+            <mat-chip
+                *ngFor="let tag of filter.companyFilter.tags; let i = index"
+                (removed)="filter.tagsDp.remove(i);refreshFilters()"
+            >
+                {{tag.word}}
+                <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+        </mat-chip-list>
+    </mat-form-field>
+</div>
