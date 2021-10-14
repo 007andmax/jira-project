@@ -88,7 +88,6 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnUsers);
     let filter = this.companiesStateService.filter.subscribe(data => {
-      console.log("data", data);
       this.showPreloader = true;
       this.companyFilter.setFilters(data);
       window.scrollTo(0, 0);
@@ -172,8 +171,6 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       this.onScroll();
       this.showPreloader = false;
     })
-    //this.reqCompaniesList = data.filter(item => item.accountType === 'CLIENT' && ((!this.showArchivedCompanies) ? !item.deletedAt : item.deletedAt));
-
   }
   private getCompanies() {
     if (this.companiesList.getBlockList()) {

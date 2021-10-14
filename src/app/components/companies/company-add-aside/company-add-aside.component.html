@@ -9,21 +9,18 @@
             (click)="close()"
         ></div>
     </div>
-    <!-- BASIC -->
     <company-add-aside-short
         [company]="company"
         [validate]="validate"
         *ngIf="version === 'short'"
         (onInitFullVersion)="onInitFullVersion()"
     ></company-add-aside-short>
-    <!-- ADVANCED -->
     <company-add-aside-full
         [company]="company"
         [validate]="validate"
         *ngIf="version === 'full'"
     ></company-add-aside-full>
     <div class="qt-aside-modern__footer">
-        <!-- <div class="qt-df qt-jc-sb qt-ai-c qt-w100"> -->
         <div class="qt-df">
             <button
                 *ngIf="version === 'short'"
@@ -46,6 +43,5 @@
                 Cancel
             </button>
         </div>
-        <!-- </div> -->
     </div>
 </div>
