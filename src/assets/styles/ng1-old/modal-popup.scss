@@ -229,6 +229,10 @@
   background-image: url("/assets/img/icons/google-plus.png");
   width: 20px;
   height: 13px;
+
+  @media (max-width: 767px) {
+    display: none;
+  }
 }
 .tab-btns {
   font-size: 0;

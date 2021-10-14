@@ -59,7 +59,12 @@
         margin: 10px 0 24px 32px;
         padding: 0;
         @media (max-width: 767px) {
-          margin: 10px 0 24px 16px;
+          margin: 0;
+          justify-content: center;
+          position: relative;
+          background-color: $primary-2;
+          height: 56px;
+          align-items: center;
         }
         .h1 {
             font-size: 20px;
@@ -70,11 +75,23 @@
               font-size: 16px;
               font-weight: 600;
               line-height: 24px;
-              color: $primary-2;
+              color: $white;
             }
         }
         .close {
             top: 5px;
+
+            @media (max-width: 767px) {
+              background-image: url(/assets/img/icons/close-white.svg);
+              position: absolute;
+              top: 50%;
+              left: 26px;
+              transform: translate(-50%, -50%);
+              width: 24px;
+              height: 24px;
+              background-size: contain;
+              cursor: pointer;
+            }
         }
     }
     .footer-area-modal {

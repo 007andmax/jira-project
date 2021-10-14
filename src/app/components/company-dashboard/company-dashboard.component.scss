@@ -172,6 +172,11 @@
     .light-dropdown .icn-remove-old {
         top: calc(50% - 7px) !important;
         right: 4px;
+
+        @media (max-width: 767px) {
+          top: calc(50% - 15px) !important;
+          right: 13px;
+        }
     }
 
     /*** Form elements ***/
@@ -416,6 +421,7 @@
                 @media (max-width: 767px) {
                     max-width: 100%;
                     width: 100%;
+                    padding-bottom: 24px;
                 }
                 .profile-cmp-board {
                     width: 100%;
@@ -603,6 +609,9 @@
                     @media only screen and (max-width: 1439px) {
                         left: 16px;
                         right: 16px;
+                    }
+                    @media (max-width: 767px) {
+                      position: static;
                     }
                     .btn {
                         margin: 0 4px;
@@ -1286,7 +1295,7 @@
                 border: solid 1px $gray-400;
                 background-color: $white;
                 padding: 7px 0 9px 0;
-                z-index: 1;
+                //z-index: 1;
                 .item {
                     width: 100%;
                     padding: 7px 15px;
@@ -2007,6 +2016,11 @@
                 .modal-body {
                     @media (max-width: 767px) {
                         padding: 70px 16px 58px;
+                    }
+                    &.company-dashboard-add-tag {
+                      @media (max-width: 767px) {
+                        padding: 32px 16px 16px;
+                      }
                     }
                 }
                 .modal-header {
