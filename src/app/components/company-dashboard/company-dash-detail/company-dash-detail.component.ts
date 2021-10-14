@@ -445,7 +445,7 @@ export class CompanyDashDetailComponent implements OnInit {
   }
 
   saveCompany() {
-    let savecompany = this.companiesService.editWoringHours(this.companyDetail).subscribe((data: any) => {
+    let savecompany = this.companiesService.editWoringHours(this.companyDetail.getDataForUpdate()).subscribe((data: any) => {
       let msg = 'Working hours updated successfully';
       if (this.tagSaved == true) {
         msg = 'Tags saved successfully';
