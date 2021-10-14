@@ -2773,20 +2773,14 @@ div#editor.angular-editor-textarea {
             margin: 0;
             left: 50%;
             top: 50%;
+            max-width: 360px;
             @media (max-width: 767px) {
               width: calc(100% - 32px);
             }
 
             .modal-content {
-              @media (max-width: 767px) {
-                padding: 16px;
-              }
+              padding: 0;
             }
-           .unlock-screen-wrapper__header {
-             @media (max-width: 767px) {
-               padding: 0;
-             }
-           }
           .qt-button {
             @media (max-width: 767px) {
               width: 100%;
