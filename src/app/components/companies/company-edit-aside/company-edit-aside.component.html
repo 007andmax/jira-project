@@ -12,11 +12,12 @@
     <div class="qt-aside-modern__content --less-padding new-companies-content__modal--content">
         <div class="col-md-12">
             <div class="logo-upload d-f">
-                <img
-                    *ngIf="company.logo"
-                    [src]="getCompanyLogoUrl()"
-                    (click)="onChangeAvatar()"
-                >
+<!--                <img-->
+<!--                    *ngIf="company.logo"-->
+<!--                    [src]="getCompanyLogoUrl()"-->
+<!--                    (click)="onChangeAvatar()"-->
+<!--                >-->
+                <i class="icon__upload-company-logo qt-sz-64 qt-bg-contain qt-mr-16 ng-star-inserted"></i>
                 <i
                     class="icn-64 upload-logo"
                     *ngIf="!company.logo"
