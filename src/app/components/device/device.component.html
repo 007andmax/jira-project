@@ -44,11 +44,17 @@
                         alt="Tempararyrestart"
                     >
                 </a> -->
-                <a href="javascript:;" (click)="sendCommand('r',this.asset.ID)" class="head-btn-info btn-refresh">
+                <a href="javascript:;" (click)="sendCommand('r',asset.ID)" class="head-btn-info btn-refresh" title="Restart" [attr.data-tooltip]="'Restart'">
                     <img src="/html/assets/img/device/restart.svg" alt="restart">
                 </a>
-                <a href="javascript:;" (click)="sendCommand('s',this.asset.ID)" class="head-btn-info btn-shutDown">
+                <a href="javascript:;" (click)="sendCommand('s',asset.ID)" class="head-btn-info btn-shutDown" title="Shutdown">
                     <img src="/html/assets/img/device/shutdown.svg" alt="shutdown">
+                </a>
+                <a href="javascript:;" (click)="sendCommand('u',asset.ID)" class="head-btn-info btn-update" title="Update Agent">
+                    <img src="/html/assets/img/icons/export-blue.svg" alt="update agent">
+                </a>
+                <a href="javascript:;" (click)="sendCommand('d',asset.ID)" class="head-btn-info btn-uninstall" title="Uninstall Agent">
+                    <img src="/html/assets/img/device/remove-terminal.svg" alt="uninstall agent">
                 </a>
             </div>
         </div>
