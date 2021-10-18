@@ -1,9 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import { element } from "@angular/core/src/render3";
+import { CONFIGCONSTANTS } from "src/app/components/device/config/app-constants";
 import { AgentService } from "src/app/services/agent/agent.service";
 import { CompaniesStateService } from "src/app/states/company/companies-state.service";
 import { ReportValidate1 } from "../../class/report-validate1";
 import { SoftwareSummaryReport1 } from "../../class/software-summary-report1";
+import { SoftwareSummaryReportFilter } from "./Class/software-summary-report1-filter";
 
 @Component({
   selector: "software-summary-report1",
@@ -12,17 +13,25 @@ import { SoftwareSummaryReport1 } from "../../class/software-summary-report1";
 })
 export class SoftwareSummaryReport1Component implements OnInit {
   softwareReportList: any = [];
+  tempReport: any = [];
+  tempDevice: any = [];
   report: any;
   companies = [];
   devices = [];
   software = [];
   tempSoftware = [];
+  publisher = [];
   company: any;
+  clientName: string;
   validate: ReportValidate1 = new ReportValidate1();
   softwareSummaryReport: SoftwareSummaryReport1 = new SoftwareSummaryReport1();
+  filter: SoftwareSummaryReportFilter = new SoftwareSummaryReportFilter();
+  date = new Date();
+  DateFormat = CONFIGCONSTANTS.DateFormat1;
+  loadingInProgress: boolean = false;
   constructor(
     private agentService: AgentService,
-    private companiesStateService: CompaniesStateService,
+    private companiesStateService: CompaniesStateService
   ) {}
 
   ngOnInit() {
@@ -59,19 +68,48 @@ export class SoftwareSummaryReport1Component implements OnInit {
     this.agentService
       .getCompanyApplicationByGuid(companyId)
       .subscribe((resp) => {
-        this.softwareReportList = resp;
+        this.tempReport = [];
         if (resp.length > 0) {
-          this.report = this.softwareSummaryReport.softwareSummarySoft != null ? this.softwareReportList.find(x=>x.DisplayName == this.softwareSummaryReport.softwareSummarySoft):resp;
-          this.softwareReportList = [];
-          if(this.softwareSummaryReport.softwareSummarySoft!=null)
-          {
-            this.softwareReportList.push(this.report);
-          }
-          else
-          {
-            this.softwareReportList = this.report;
-          }
+          for (let i = 0; i < resp.length; i++) {
+            if (resp[i].DisplayName != "") {
+              let data = {
+                DisplayName: resp[i].DisplayName,
+              };
+              this.tempSoftware.push(data);
+            }
+            if (resp[i].Publisher != "") {
+              let data = {
+                DisplayName: resp[i].Publisher,
+              };
+              this.tempSoftware.push(data);
+            }
+            this.software = this.tempSoftware
+              .map((item) => item.DisplayName)
+              .filter((value, index, self) => self.indexOf(value) === index);
 
+            if (resp[i].AssetCount > 1) {
+              let Name = resp[i].AssetNames;
+              for (let j = 0; j < Name.length; j++) {
+                let data = {
+                  DisplayName: resp[i].DisplayName,
+                  DisplayVersion: resp[i].DisplayVersion,
+                  Publisher: resp[i].Publisher,
+                  AssetCount: resp[i].AssetCount,
+                  AssetNames: Name[j],
+                };
+                this.tempReport.push(data);
+              }
+            } else {
+              let data = {
+                DisplayName: resp[i].DisplayName,
+                DisplayVersion: resp[i].DisplayVersion,
+                Publisher: resp[i].Publisher,
+                AssetCount: resp[i].AssetCount,
+                AssetNames: resp[i].AssetNames[0],
+              };
+              this.tempReport.push(data);
+            }
+          }
         }
       });
   }
@@ -84,69 +122,67 @@ export class SoftwareSummaryReport1Component implements OnInit {
     )
       return;
     this.getCompanySoftwareList(this.softwareSummaryReport.companyId);
+    this.loadingInProgress = true;
+    if (
+      this.softwareSummaryReport.deviceName &&
+      this.softwareSummaryReport.softwareSummarySoft
+    ) {
+      this.softwareReportList = this.tempReport.filter(
+        ((x) => x.AssetNames == this.softwareSummaryReport.deviceName) ||
+          ((x) =>
+            x.DispalyName == this.softwareSummaryReport.softwareSummarySoft)
+      );
+    } else if (
+      this.softwareSummaryReport.deviceName &&
+      !this.softwareSummaryReport.softwareSummarySoft
+    ) {
+      this.softwareReportList = this.tempReport.filter(
+        (x) => x.AssetNames == this.softwareSummaryReport.deviceName
+      );
+    } else if (
+      this.softwareSummaryReport.softwareSummarySoft &&
+      !this.softwareSummaryReport.deviceName
+    ) {
+      this.softwareReportList = this.tempReport.filter(
+        (x) => x.DisplayName == this.softwareSummaryReport.softwareSummarySoft
+      );
+    } else {
+      this.softwareReportList = this.tempReport;
+    }
   }
 
   onSelectSoftware(data) {
     this.softwareSummaryReport.setSoftwareSoft(data);
   }
 
-  getSoftwareList(data) {
-    return data.sort((a, b) =>
-      a.DisplayName.toLowerCase() > b.DisplayName.toLowerCase()
-        ? 1
-        : b.DisplayName.toLowerCase() > a.DisplayName.toLowerCase()
-        ? -1
-        : 0
-    );
-  }
-
   onSelectDevice(data) {
-    this.softwareSummaryReport.setDeviceId((data) ? data.ID : null);
-    this.agentService.getSoftwareListByAssetId(data.ID).subscribe((resp) => {
-      this.software = this.getSoftwareList(resp);
-    });
-  }
-
-  getDeviceList(data) {
-    return data.sort((a, b) =>
-      a.Description.toLowerCase() > b.Description.toLowerCase()
-        ? 1
-        : b.Description.toLowerCase() > a.Description.toLowerCase()
-        ? -1
-        : 0
-    );
+    this.softwareSummaryReport.setDeviceName(data ? data.Description : null);
   }
 
   public getDevicesByCompany(companyId) {
-    // this.agentService.getAssetsByCompanyId(companyId).subscribe((resp) => {
-    //   if (resp.length > 0) {
-    //     this.devices = this.getDeviceList(
-    //       resp.filter((x) => x.Description != "")
-    //     );
-    //   } else {
-    //     this.devices = [];
-    //   }
-    // });
+    this.agentService.getAssetsByCompanyId(companyId).subscribe((resp) => {
+      if (resp.length > 0) {
+        this.devices = resp.filter((x) => x.Description != "");
+      } else {
+        this.devices = [];
+      }
+    });
   }
 
   selectClient(selectClient) {
     if (selectClient) {
+      this.clientName = selectClient.name;
       this.softwareSummaryReport.setCompanyId(selectClient.id);
       this.getDevicesByCompany(selectClient.id);
       this.validate.resetCompany();
-      this.agentService
-      .getCompanyApplicationByGuid(selectClient.id)
-      .subscribe((resp) => {
-        debugger;
-        if (resp.length > 0) {
-          this.tempSoftware = resp;
-          this.software = this.tempSoftware.map(item => item.DisplayName)
-          .filter((value, index, self) => self.indexOf(value) === index)
-        }
-      });
+      this.getCompanySoftwareList(selectClient.id);
     } else {
       this.softwareSummaryReport.setCompanyId(null);
       this.getDevicesByCompany(null);
     }
+  }
+
+  onFilter(field) {
+    this.filter.onFilter(field, this.softwareReportList);
   }
 }

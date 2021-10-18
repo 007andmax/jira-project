@@ -44,10 +44,10 @@
                         alt="Tempararyrestart"
                     >
                 </a> -->
-                <a href="javascript:;" (click)="sendCommand('r',this.asset.ID)" class="head-btn-info btn-refresh">
+                <a href="javascript:;" (click)="sendCommand('r',asset.ID)" class="head-btn-info btn-refresh">
                     <img src="/html/assets/img/device/restart.svg" alt="restart">
                 </a>
-                <a href="javascript:;" (click)="sendCommand('s',this.asset.ID)" class="head-btn-info btn-shutDown">
+                <a href="javascript:;" (click)="sendCommand('s',asset.ID)" class="head-btn-info btn-shutDown">
                     <img src="/html/assets/img/device/shutdown.svg" alt="shutdown">
                 </a>
             </div>
@@ -141,7 +141,7 @@
             <p  [innerHTML]="powershellmsg"></p>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-danger" (click)="Reboot(this.asset.ID,this.TemporaryCommand);">
+            <button type="button" class="btn btn-danger" (click)="Reboot(asset.ID,TemporaryCommand);">
                 Yes
             </button>
             <button type="button" class="btn btn-secondary" (click)="decline()">
