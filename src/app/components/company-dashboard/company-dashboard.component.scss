@@ -16,7 +16,7 @@
 
     @media (max-width: 767px) {
         position: fixed;
-        height: 100vh;
+        height: 100%;
         top: 0;
         left: 0;
         padding: 0;
@@ -370,6 +370,7 @@
         // justify-content: space-between;
         margin: 0 -8px;
         flex-wrap: wrap;
+        overflow: auto;
 
         .collapse-arrow {
             display: none;
@@ -382,6 +383,8 @@
             margin: 0 8px;
             @media (max-width: 767px) {
                 margin: 0;
+                height: 100%;
+                overflow: auto;
             }
             &.m-0 {
                 margin: 0;
@@ -612,6 +615,7 @@
                     }
                     @media (max-width: 767px) {
                       position: static;
+                      width: 100%;
                     }
                     .btn {
                         margin: 0 4px;
