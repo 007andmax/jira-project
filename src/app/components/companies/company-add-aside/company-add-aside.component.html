@@ -23,14 +23,14 @@
     <div class="qt-aside-modern__footer">
         <div class="qt-df">
             <button
-                *ngIf="version === 'short'"
+                *ngIf="version === 'short' && !appService.checkMobile()"
                 class="qt-button qt-mr-12"
                 (click)="onAddShort()"
             >
                 Save Company
             </button>
             <button
-                *ngIf="version === 'full'"
+                *ngIf="version === 'full' && !appService.checkMobile()"
                 class="qt-button qt-mr-12"
                 (click)="onAddFull()"
             >
@@ -41,6 +41,20 @@
                 (click)="close()"
             >
                 Cancel
+            </button>
+            <button
+                *ngIf="version === 'short' && appService.checkMobile()"
+                class="qt-button  "
+                (click)="onAddShort()"
+            >
+                Save Company
+            </button>
+            <button
+                *ngIf="version === 'full' && appService.checkMobile()"
+                class="qt-button  "
+                (click)="onAddFull()"
+            >
+                Save Company
             </button>
         </div>
     </div>

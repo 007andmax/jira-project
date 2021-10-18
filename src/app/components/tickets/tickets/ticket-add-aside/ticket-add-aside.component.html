@@ -270,6 +270,7 @@
                 appDisabledBtn
                 #addBtn="disabled"
                 (onClick)="add()"
+                *ngIf="!appService.checkMobile()"
             >
                 <span *ngIf="!addBtn.isBlock()">Create Ticket</span>
                 <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
@@ -279,6 +280,16 @@
                 (click)="closed()"
             >
                 Cancel
+            </button>
+            <button
+                class="qt-button qt-ml-12"
+                appDisabledBtn
+                #addBtn="disabled"
+                (onClick)="add()"
+                *ngIf="appService.checkMobile()"
+            >
+                <span *ngIf="!addBtn.isBlock()">Create Ticket</span>
+                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
             </button>
         </div>
     </div>
