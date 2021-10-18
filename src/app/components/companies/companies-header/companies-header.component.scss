@@ -8,6 +8,10 @@ companies-filter {
 .is-exist-filters {
   position: relative;
   &::before {
+    @media (max-width: 767px) {
+      display: block;
+    }
+    display: none;
     content: " ";
     position: absolute;
     top: 1px;

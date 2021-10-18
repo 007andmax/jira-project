@@ -4,9 +4,15 @@
         (click)="back()"
     ></div>
     <div class="profile-cmp-board d-flex">
+        <img
+            [src]="getCompanyLogoUrl()"
+            class="qwe"
+            alt
+            *ngIf="checkLogo()"
+        >
         <div
             class="cmp-profile-dp d-flex"
-            *ngIf="companyDetailing.name !== ''"
+            *ngIf="!checkLogo()"
         >
             <figure class="d-flex">{{getCharacter(companyDetailing.name)}}</figure>
         </div>

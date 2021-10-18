@@ -315,6 +315,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
           1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
       }
     })
+    console.log("this.listPersons", this.listPersons);
   }
   getSelectedClientTypes() {
     let index = this.industries.findIndex(item => item.name === (this.company.clientIndustry && this.company.clientIndustry.name) ? this.company.clientIndustry.name : null);

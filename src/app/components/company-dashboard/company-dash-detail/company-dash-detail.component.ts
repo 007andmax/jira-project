@@ -443,7 +443,15 @@ export class CompanyDashDetailComponent implements OnInit {
       return (objectTimeFormat === 'AM' ? hours * 3600 + minutes * 60 : hours * 3600 + minutes * 60 + 12 * 3600);
     }
   }
-
+  checkLogo() {
+    return (this.companyDetail && this.companyDetail.logo && this.companyDetail.logo.cropped && this.companyDetail.logo.cropped.id || this.companyDetail && this.companyDetail.logo && this.companyDetail.logo.origin && this.companyDetail.logo.origin.id)
+  }
+  getCompanyLogoUrl() {
+    if (this.companyDetail && this.companyDetail.logo && this.companyDetail.logo && this.companyDetail.logo.base64 && !this.companyDetail.logo.cropped) return this.companyDetail.logo.base64;
+    if (this.companyDetail && this.companyDetail.logo && this.companyDetail.logo.cropped && this.companyDetail.logo.cropped.id) return `/file/${this.companyDetail.logo.cropped.id}`;
+    if (this.companyDetail && this.companyDetail.logo && this.companyDetail.logo.origin && this.companyDetail.logo.origin.id) return `/file/${this.companyDetail.logo.origin.id}`;
+    return '/company/default/logo.jpg';
+  }
   saveCompany() {
     let savecompany = this.companiesService.editWoringHours(this.companyDetail.getDataForUpdate()).subscribe((data: any) => {
       let msg = 'Working hours updated successfully';
