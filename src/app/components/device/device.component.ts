@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit, ViewChild,} from "@angular/core";
+import { ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit, ViewChild, } from "@angular/core";
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 import { CommonHttpServices } from "./_services/common_http.service";
 import { RemoteControlService } from "./_services/remoteControl.service";
@@ -46,6 +46,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
   powershellmsg: string = "";
   TemporaryCommand: string = "";
   assetId: number;
+  currentCommand: string;
 
   constructor(
     private modalService: NgbModal,
@@ -62,7 +63,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
     private kafkaStateService: KafkaStateService,
     private cd: ChangeDetectorRef,
     private ngZone: NgZone
-  ) {}
+  ) { }
 
   lock() {
     // this.modalRef = this.modalService.show(
@@ -75,11 +76,11 @@ export class DeviceComponent implements OnInit, OnDestroy {
     this.setPreviewDataDevice();
     this.type =
       window.location.href.split("/")[
-        window.location.href.split("/").length - 2
+      window.location.href.split("/").length - 2
       ];
     this._id =
       window.location.href.split("/")[
-        window.location.href.split("/").length - 1
+      window.location.href.split("/").length - 1
       ];
     this.usersStateService.onInit();
     this.shellStateService.onInit();
@@ -95,7 +96,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
     );
 
     this.onPowerShellCommand();
-    // this.onAck();
+    this.onAck();
 
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
@@ -183,11 +184,11 @@ export class DeviceComponent implements OnInit, OnDestroy {
     }
     $("#counter").text(
       this.padNumber(this.totalHours) +
-        " hr : " +
-        this.padNumber(this.totalMinutes) +
-        " min : " +
-        this.padNumber(this.totalSeconds) +
-        " sec"
+      " hr : " +
+      this.padNumber(this.totalMinutes) +
+      " min : " +
+      this.padNumber(this.totalSeconds) +
+      " sec"
     );
   }
   getDevicesByCompany() {
@@ -233,7 +234,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
         (resp) => {
           this.loading = false;
         },
-        (error) => {}
+        (error) => { }
       );
   }
 
@@ -254,7 +255,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
             sessionId;
           window.open(url, "_self");
         },
-        (error) => {}
+        (error) => { }
       );
   }
   createConnection(type) {
@@ -315,19 +316,18 @@ export class DeviceComponent implements OnInit, OnDestroy {
     }, 1000);
   }
 
-  // onAck(){
-  //   this.kafkaStateService.onAck.subscribe((resp) => {
-  //     console.log("OnAck");
-  //     console.log(resp);
-  //     let item = resp.find((x) => x.key == this.asset.ID);
-  //     if(item)
-  //     {
-  //       this.toastr.success(
-  //         "computer start successfully."
-  //       );
-  //     }
-  //   });
-  // }
+  onAck() {
+    this.kafkaStateService.onAck.subscribe((resp) => {
+      console.log("OnAck");
+      if (resp.data.AssetID == this.asset.ID) {
+        this.ngZone.run(() => {
+          this.toastr.success(
+            "Computer restarted and up now!"
+          );
+        });
+      }
+    });
+  }
 
   onPowerShellCommand() {
     this.kafkaStateService.onPowerShellCommand.subscribe((resp) => {
@@ -349,6 +349,9 @@ export class DeviceComponent implements OnInit, OnDestroy {
               centered: true,
             });
           }
+          else {
+            this.toastr.success(`${this.currentCommand} executed successfully.`);
+          }
         });
       }
     });
@@ -357,19 +360,34 @@ export class DeviceComponent implements OnInit, OnDestroy {
   sendCommand(command, assetId) {
     let data: any = {};
     if (command === "r") {
+      this.currentCommand = 'Restart';
       this.TemporaryCommand = command;
       data.AssetID = assetId;
       data.MessageType = "RunPowerShellCommand";
       data.Value = "Restart-Computer";
       this.agentService.SendPowerShellCommand(data);
     }
-    if (command === "s") {
+    else if (command === "s") {
+      this.currentCommand = 'Shutdown';
       this.TemporaryCommand = command;
       data.AssetID = assetId;
       data.MessageType = "RunPowerShellCommand";
       data.Value = "Stop-Computer";
       this.agentService.SendPowerShellCommand(data);
     }
+    else if (command === 'd') {
+      this.currentCommand = 'Uninstall Agent';
+      data.AssetID = assetId;
+      data.MessageType = "UninstallAgent";      
+      this.agentService.SendPowerShellCommand(data);
+    }
+    else if (command === 'u') {
+      this.currentCommand = 'Update Agent';
+      data.AssetID = assetId;
+      data.MessageType = "UpdateAgent";      
+      this.agentService.SendPowerShellCommand(data);
+    }
+
   }
 
   Reboot(asset_ID, command) {

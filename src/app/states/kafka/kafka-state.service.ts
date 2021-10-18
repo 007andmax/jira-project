@@ -26,7 +26,7 @@ export class KafkaStateService {
         case "RunPowerShellCommand":
           this.handleRunPowershellCommand(newChange);
           break;
-        case "ACK":
+        case "Ack":
           this.handleAck(newChange);
           break;
         case "RunDOSCommand":
