@@ -119,3 +119,44 @@ users-aside-detail-passwords {
   border: none;
   outline: none;
 }
+.qt-input-block {
+  label {
+    color: #919eab;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+  input {
+    height: 30px;
+    width: 100%;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    outline: none;
+    padding: 2px 2px 2px 0px;
+    &:focus,
+    &:hover {
+      border: solid 1px #c5cdd5;
+      outline: none;
+    }
+  }
+  .icon__edit-gray {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+  }
+}
+/deep/.user-detail-edit-company {
+  .dropdown input {
+    padding: 4px 24px 4px 0px;
+    border: unset;
+  }
+  .dropdown:hover input {
+    &:hover {
+      background: #f4f6f8;
+    }
+  }
+  .app-drop-down__right-icon {
+    right: 5px;
+  }
+}
