@@ -104,7 +104,6 @@ export class ReportMenuComponent implements OnInit {
     this.hardwareSummaryReport.setPreloaderDevices(this.devicesStateService.getPreloaderDevices());
     this.deviceIpSummary.setPreloaderDevices(this.devicesStateService.getPreloaderDevices());
     this.devicesStateService.onGetDevices.subscribe(data => {
-      console.log("data", data);
       this.softwareSummaryReport.setPreloaderDevices(false);
       this.hardwareSummaryReport.setPreloaderDevices(false);
       this.deviceIpSummary.setPreloaderDevices(false);

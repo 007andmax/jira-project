@@ -51,7 +51,6 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     let openDetailAside = this.usersStateService.openDetailAside.subscribe(data => {
-      console.log("data", data);
       this.usersStateService.setUserForEdit(data);
       this.companySubscriptionState.onEditMode(this.user.subscription);
       this.user.onEdit(data);
