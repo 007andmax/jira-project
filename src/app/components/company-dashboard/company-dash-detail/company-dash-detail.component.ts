@@ -16,6 +16,8 @@ import { CompanyServiceType } from '../../companies/class/company-service-type';
 import { CompanyDetaill } from './company-detailing';
 import { ActivatedRoute } from '@angular/router';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { AppService } from 'src/app/states/app/app.service';
 
 @Component({
   selector: 'app-company-dash-detail',
@@ -56,6 +58,7 @@ export class CompanyDashDetailComponent implements OnInit {
   tagSaved: boolean = false;
   sub: Subscription = new Subscription();
   tags = [];
+  tab: string = "dashboard";
   closeResult: string = '';
   modalReference: any;
   @Output() totalTicketsChanged: EventEmitter<number> = new EventEmitter();
@@ -266,6 +269,7 @@ export class CompanyDashDetailComponent implements OnInit {
   selectedRating = 0;
   unSelectedRating = 0;
   ratingSaved: boolean = false;
+  usersList = [];
 
   public constructor(private companiesService: CompaniesService,
     private toaster: ToastrService,
@@ -276,6 +280,8 @@ export class CompanyDashDetailComponent implements OnInit {
     private sanitizer: DomSanitizer,
     public activateRoute: ActivatedRoute,
     private leftPanelStateService: LeftPanelStateService,
+    private usersStateService: UsersStateService,
+    public appService: AppService,
     public cd: ChangeDetectorRef
   ) { }
 
@@ -296,7 +302,31 @@ export class CompanyDashDetailComponent implements OnInit {
   public onChangeEndTimePicker(data) {
     this.currentService.setDurationEnd(data);
   }
+  setTab(data) {
+    this.tab = data;
+    if (this.tab === 'users') {
+      this.usersList = this.usersStateService.getAllUsers().filter(item => (!item.deletedAt) && item.accountType !== "TECH" && item.company.id === this.companyDetail.id);
+    }
+  }
+  getUserAvatarUrl(user) {
+    if (!(user && user.avatar)) return '';
 
+    if (user.id) {
+      return `url(${'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt :
+        '')}) 0% 0% / cover no-repeat`
+    } else if (user.avatar && user.avatar.origin && user.avatar.origin.id) {
+      return `url(/file/${(user.avatar.origin.id)}.jpg) 0% 0% / cover no-repeat`;
+    } else {
+      return 'url(/users/default/image.jpg) 0% 0% / cover no-repeat';
+    }
+  };
+  getNameForAvatar(user) {
+    if (!user.avatar) return `${(user.firstName) ? user.firstName[0].toUpperCase() : ''}${(user.lastName) ? user.lastName[0].toUpperCase() : ''}`;
+    return '';
+  }
+  getUserName(user) {
+    return `${user.firstName} ${user.lastName}`;
+  }
   getCompanyDetails() {
     let getCompany = this.companiesService.getCompany(this._id).subscribe((data: CompanyProfile) => {
       this.companyDetail.onEditMode(data);
