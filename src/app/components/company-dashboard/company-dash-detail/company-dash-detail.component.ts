@@ -15,6 +15,7 @@ import { TicketProfileFormService } from '../../../../app/components/tickets/tic
 import { CompanyServiceType } from '../../companies/class/company-service-type';
 import { CompanyDetaill } from './company-detailing';
 import { ActivatedRoute } from '@angular/router';
+import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 
 @Component({
   selector: 'app-company-dash-detail',
@@ -274,6 +275,7 @@ export class CompanyDashDetailComponent implements OnInit {
     private companiesStateService: CompaniesStateService,
     private sanitizer: DomSanitizer,
     public activateRoute: ActivatedRoute,
+    private leftPanelStateService: LeftPanelStateService,
     public cd: ChangeDetectorRef
   ) { }
 
@@ -441,9 +443,17 @@ export class CompanyDashDetailComponent implements OnInit {
       return (objectTimeFormat === 'AM' ? hours * 3600 + minutes * 60 : hours * 3600 + minutes * 60 + 12 * 3600);
     }
   }
-
+  checkLogo() {
+    return (this.companyDetail && this.companyDetail.logo && this.companyDetail.logo.cropped && this.companyDetail.logo.cropped.id || this.companyDetail && this.companyDetail.logo && this.companyDetail.logo.origin && this.companyDetail.logo.origin.id)
+  }
+  getCompanyLogoUrl() {
+    if (this.companyDetail && this.companyDetail.logo && this.companyDetail.logo && this.companyDetail.logo.base64 && !this.companyDetail.logo.cropped) return this.companyDetail.logo.base64;
+    if (this.companyDetail && this.companyDetail.logo && this.companyDetail.logo.cropped && this.companyDetail.logo.cropped.id) return `/file/${this.companyDetail.logo.cropped.id}`;
+    if (this.companyDetail && this.companyDetail.logo && this.companyDetail.logo.origin && this.companyDetail.logo.origin.id) return `/file/${this.companyDetail.logo.origin.id}`;
+    return '/company/default/logo.jpg';
+  }
   saveCompany() {
-    let savecompany = this.companiesService.editWoringHours(this.companyDetail).subscribe((data: any) => {
+    let savecompany = this.companiesService.editWoringHours(this.companyDetail.getDataForUpdate()).subscribe((data: any) => {
       let msg = 'Working hours updated successfully';
       if (this.tagSaved == true) {
         msg = 'Tags saved successfully';
@@ -489,19 +499,13 @@ export class CompanyDashDetailComponent implements OnInit {
 
   open(content: any) {
     this.tagsState.setTagsFromtEdit(this.tags);
-    this.modalReference = this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'cmp-comapny-modal' }).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    });
+    this.modalReference = this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'cmp-comapny-modal edit-hours' });
   }
   openTag(content: any) {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'cmp-comapny-modal' }).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    });
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'cmp-comapny-modal' });
   }
   openMap(content: any) {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'cmp-comapny-modal map' }).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    });
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'cmp-comapny-modal map' });
   }
 
   deleteTag(index: number) {
@@ -587,6 +591,7 @@ export class CompanyDashDetailComponent implements OnInit {
     if (fromHours < 10) {
       fHours = '0' + fromHours;
     }
+    if (fromHours === 24) fHours = "00";
 
     let fMinutes = '';
     if (fromMinutes < 10) {
@@ -613,7 +618,7 @@ export class CompanyDashDetailComponent implements OnInit {
     if (toHours < 10) {
       tHours = '0' + toHours;
     }
-
+    if (toHours === 24) tHours = "00";
     let tMinutes = '';
     if (toMinutes < 10) {
       tMinutes = '0' + toMinutes;
@@ -625,7 +630,9 @@ export class CompanyDashDetailComponent implements OnInit {
     const value = h + ':' + m;
     return value;
   }
-
+  public back() {
+    this.leftPanelStateService.goToState('new-companies');
+  }
   changeRating(index, type) {
     let rating = 0;
     if (type === 'selected') {

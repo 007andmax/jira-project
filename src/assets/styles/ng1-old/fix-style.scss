@@ -1,4 +1,4 @@
-@import './src/assets/styles/variable';
+@import "./src/assets/styles/variable";
 
 html {
   font-family: "Inter";
@@ -18,7 +18,7 @@ html {
 *:before,
 *:after,
 .tooltip {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 .fa::before,
 .fa::after {
@@ -28,7 +28,7 @@ body {
   margin: 0;
   overflow: hidden;
   display: initial;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   @extend %body-m;
   color: $gray-800;
   background-color: $white;
@@ -51,7 +51,7 @@ body .left-panel-full {
   border-color: $success;
 }
 .icn-remove-old {
-  background-image: url('/assets/img/icons/close-10.png');
+  background-image: url("/assets/img/icons/close-10.png");
   background-position: center;
   transform: translateY(2px);
 
@@ -70,7 +70,6 @@ hr {
   margin-top: 4px;
   margin-bottom: 4px;
 }
-
 
 .text-muted {
   color: $gray-800;
@@ -93,7 +92,7 @@ hr {
     margin-left: -180px;
   }
   .modal-content {
-    box-shadow: 0 10px 20px -5px rgba(0,0,0,.1);
+    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
     border: none;
   }
   .form-control {
@@ -134,10 +133,10 @@ hr {
     height: auto;
     width: 100%;
     line-height: 20px;
-    transition: background-color .3s ease-out;
+    transition: background-color 0.3s ease-out;
 
     &:hover {
-      background-color: rgba(15,154,239,.05);
+      background-color: rgba(15, 154, 239, 0.05);
     }
   }
   .text-muted {
@@ -161,7 +160,9 @@ hr {
 .password-content__modal--content textarea::placeholder {
   color: $gray-600;
 }
-.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+.form-control[disabled],
+.form-control[readonly],
+fieldset[disabled] .form-control {
   /* background-color: #fcfdfd; */
   opacity: 1;
 }
@@ -191,7 +192,11 @@ hr {
   color: $gray-500;
 }
 
-.recurring-tickets-content__modal .checkbox-wrapper .with-checkbox, .new-companies-content__modal .checkbox-wrapper .with-checkbox, .new-users-content__modal .checkbox-wrapper .with-checkbox, .documents-create .checkbox-wrapper .with-checkbox, .documents-create-aside-categories .checkbox-wrapper .with-checkbox {
+.recurring-tickets-content__modal .checkbox-wrapper .with-checkbox,
+.new-companies-content__modal .checkbox-wrapper .with-checkbox,
+.new-users-content__modal .checkbox-wrapper .with-checkbox,
+.documents-create .checkbox-wrapper .with-checkbox,
+.documents-create-aside-categories .checkbox-wrapper .with-checkbox {
   display: -webkit-box;
   display: flex;
   -webkit-box-align: center;
@@ -199,7 +204,9 @@ hr {
   margin-right: 20px;
 }
 
-.recurring-tickets-content__modal .checkbox-wrapper .with-checkbox p, .new-companies-content__modal .checkbox-wrapper .with-checkbox p, .new-users-content__modal .checkbox-wrapper .with-checkbox p {
+.recurring-tickets-content__modal .checkbox-wrapper .with-checkbox p,
+.new-companies-content__modal .checkbox-wrapper .with-checkbox p,
+.new-users-content__modal .checkbox-wrapper .with-checkbox p {
   font-weight: 400;
   margin: 0;
 }
@@ -211,7 +218,8 @@ hr {
   margin: 0;
   cursor: pointer;
 }
-a:hover, a:focus {
+a:hover,
+a:focus {
   color: inherit;
   text-decoration: none;
 }
@@ -219,7 +227,11 @@ a:hover, a:focus {
   outline: auto;
   box-shadow: none;
 }
-.icn-xs, .icn-sm, .icn-md, .icn-lg, .control-indicator {
+.icn-xs,
+.icn-sm,
+.icn-md,
+.icn-lg,
+.control-indicator {
   background-repeat: no-repeat;
   display: inline-block;
   margin: auto;
@@ -246,14 +258,14 @@ html::-webkit-scrollbar {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(54, 70, 86, .8);
+  background: rgba(54, 70, 86, 0.8);
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:window-inactive {
-  background: rgba(54, 70, 86, .4);
+  background: rgba(54, 70, 86, 0.4);
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
@@ -294,7 +306,6 @@ html::-webkit-scrollbar {
 }
 /* END SCROLLBAR */
 
-
 /* BOOSTRAP FIX STYLE */
 .row {
   margin-left: 0;
@@ -310,8 +321,8 @@ html::-webkit-scrollbar {
 }
 /* END BOOSTRAP FIX STYLE */
 
-
-.dropdown-menu, .uib-dropdown-menu {
+.dropdown-menu,
+.uib-dropdown-menu {
   position: absolute;
   overflow-y: auto;
   top: calc(100% + 10px);
@@ -340,17 +351,33 @@ p {
   font-weight: 400;
 }
 
-.new-companies-content__modal--content > [class*="col-md-"] p, .new-users-content__modal--content > [class*="col-md-"] p, .recurring-tickets-content__modal--content > [class*="col-md-"] p, .new-users-content__modal--content app-interval > [class*="col-md-"] p, .recurring-tickets-content__modal--content app-interval > [class*="col-md-"] p, .password-content__modal--content > [class*="col-md-"] p {
+.new-companies-content__modal--content > [class*="col-md-"] p,
+.new-users-content__modal--content > [class*="col-md-"] p,
+.recurring-tickets-content__modal--content > [class*="col-md-"] p,
+.new-users-content__modal--content app-interval > [class*="col-md-"] p,
+.recurring-tickets-content__modal--content app-interval > [class*="col-md-"] p,
+.password-content__modal--content > [class*="col-md-"] p {
   @extend %body-m-sb;
   color: $primary-2;
   margin-bottom: 8px;
 }
 
-.new-companies-content__modal--content > [class*="col-md-"], .new-users-content__modal--content > [class*="col-md-"], .recurring-tickets-content__modal--content > [class*="col-md-"], .recurring-tickets-content__modal--content app-interval > [class*="col-md-"], .new-users-content__modal--content app-interval > [class*="col-md-"], .password-content__modal--content > [class*="col-md-"] {
+.new-companies-content__modal--content > [class*="col-md-"],
+.new-users-content__modal--content > [class*="col-md-"],
+.recurring-tickets-content__modal--content > [class*="col-md-"],
+.recurring-tickets-content__modal--content app-interval > [class*="col-md-"],
+.new-users-content__modal--content app-interval > [class*="col-md-"],
+.password-content__modal--content > [class*="col-md-"] {
   margin-top: 20px;
 }
 
-.new-users-content__modal--content > [class*="col-md-"] input, .recurring-tickets-content__modal--content > [class*="col-md-"] input, .new-companies-content__modal--content > [class*="col-md-"] input, .new-users-content__modal--content app-interval > [class*="col-md-"] input, .recurring-tickets-content__modal--content app-interval > [class*="col-md-"] input, .password-content__modal--content > [class*="col-md-"] input, .documents-create .input-group.date-picker input {
+.new-users-content__modal--content > [class*="col-md-"] input,
+.recurring-tickets-content__modal--content > [class*="col-md-"] input,
+.new-companies-content__modal--content > [class*="col-md-"] input,
+.new-users-content__modal--content app-interval > [class*="col-md-"] input,
+.recurring-tickets-content__modal--content app-interval > [class*="col-md-"] input,
+.password-content__modal--content > [class*="col-md-"] input,
+.documents-create .input-group.date-picker input {
   outline: none;
   height: 40px;
   padding: 0 12px;
@@ -359,22 +386,33 @@ p {
   border-radius: 4px;
 }
 
-.new-companies-content__modal--content > [class*="col-md-"] input, .recurring-tickets-content__modal--content > [class*="col-md-"] input, .new-users-content__modal--content > [class*="col-md-"] input, .recurring-tickets-content__modal--content app-interval > [class*="col-md-"] input, .new-users-content__modal--content app-interval > [class*="col-md-"] input, .password-content__modal--content > [class*="col-md-"] input, .documents-create .input-group.date-picker input {
+.new-companies-content__modal--content > [class*="col-md-"] input,
+.recurring-tickets-content__modal--content > [class*="col-md-"] input,
+.new-users-content__modal--content > [class*="col-md-"] input,
+.recurring-tickets-content__modal--content app-interval > [class*="col-md-"] input,
+.new-users-content__modal--content app-interval > [class*="col-md-"] input,
+.password-content__modal--content > [class*="col-md-"] input,
+.documents-create .input-group.date-picker input {
   width: 100%;
 }
 
-.recurring-tickets-content__modal .new-link, .new-companies-content__modal .new-link, .new-users-content__modal .new-link {
+.recurring-tickets-content__modal .new-link,
+.new-companies-content__modal .new-link,
+.new-users-content__modal .new-link {
   width: 100%;
   margin-top: 10px !important;
   padding: 0 15px !important;
   display: inline-block;
 }
 
-.new-users-content__modal .new-link, .new-companies-content__modal .new-link {
+.new-users-content__modal .new-link,
+.new-companies-content__modal .new-link {
   margin: 40px 0 20px 0 !important;
 }
 
-.new-companies-content__modal .new-link, .recurring-tickets-content__modal .new-link, .new-users-content__modal .new-link {
+.new-companies-content__modal .new-link,
+.recurring-tickets-content__modal .new-link,
+.new-users-content__modal .new-link {
   margin: 0 !important;
   padding: 0 !important;
 }
@@ -404,7 +442,8 @@ label {
   color: $gray-800;
   cursor: inherit;
 }
-.radio, .checkbox {
+.radio,
+.checkbox {
   position: relative;
   display: block;
   margin-top: 0px;
@@ -457,12 +496,15 @@ label {
   top: 0;
   width: 16px;
   height: 16px;
-  background: url('/assets/img/icons/checkbox-ng2.png');
+  background: url("/assets/img/icons/checkbox-ng2.png");
 }
 .control input:checked ~ .control-indicator {
   background-position: 16px 0;
 }
-.radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {
+.radio input[type="radio"],
+.radio-inline input[type="radio"],
+.checkbox input[type="checkbox"],
+.checkbox-inline input[type="checkbox"] {
   position: absolute;
   margin-left: -20px;
   margin-top: 4px \9;
@@ -472,11 +514,13 @@ label {
   opacity: 0;
   z-index: -1;
 }
-input[type="radio"], input[type="checkbox"] {
+input[type="radio"],
+input[type="checkbox"] {
   margin: 4px 0 0;
   line-height: normal;
 }
-input[type="checkbox"], input[type="radio"] {
+input[type="checkbox"],
+input[type="radio"] {
   box-sizing: border-box;
   padding: 0;
 }
@@ -485,11 +529,13 @@ input[type="checkbox"], input[type="radio"] {
 }
 /* END Custom Checkbox */
 
-.jc-sb { // for deleted styles from bootstrap
+.jc-sb {
+  // for deleted styles from bootstrap
   -webkit-box-pack: justify;
   justify-content: space-between;
 }
-pre { // for deleted styles from bootstrap
+pre {
+  // for deleted styles from bootstrap
   padding: 0;
   background: 0;
   border: none;
@@ -497,11 +543,13 @@ pre { // for deleted styles from bootstrap
 strong {
   font-weight: 700;
 }
-.company-new-cover-wrapper p, strong {
+.company-new-cover-wrapper p,
+strong {
   font-weight: 600;
 }
 
-.company-new-cover-wrapper p, strong {
+.company-new-cover-wrapper p,
+strong {
   font-weight: 600;
 }
 
@@ -535,6 +583,11 @@ textarea {
   .light-dropdown .icn-remove-old {
     top: calc(50% - 7px) !important;
     right: 4px;
+
+    @media (max-width: 767px) {
+      top: calc(50% - 15px) !important;
+      right: 12px !important;
+    }
   }
 
   .light-dropdown .report-caret-icon {
@@ -543,6 +596,10 @@ textarea {
 
   .app-drop-down__right-icon {
     right: 15px;
+
+    @media (max-width: 767px) {
+      right: 0;
+    }
   }
 
   .with-number-types {
@@ -608,9 +665,19 @@ textarea {
   .mat-chip-list-wrapper input.mat-input-element {
     margin: 2px;
   }
+  app-company-time-zone {
+    .icn-remove-old {
+      @media (max-width: 767px) {
+        transform: translate(-6px, 0px);
+      }
+    }
+  }
 }
 
-.new-companies-content__modal--content .password-actions, .new-users-content__modal--content .password-actions, .recurring-tickets-content__modal--content .password-actions, .password-content__modal--content .password-actions {
+.new-companies-content__modal--content .password-actions,
+.new-users-content__modal--content .password-actions,
+.recurring-tickets-content__modal--content .password-actions,
+.password-content__modal--content .password-actions {
   display: -webkit-box;
   display: flex;
   -webkit-box-align: center;
@@ -636,7 +703,10 @@ textarea {
   }
 }
 
-.payment-status, .network-scan-status, .invoice-status, .quote-status {
+.payment-status,
+.network-scan-status,
+.invoice-status,
+.quote-status {
   padding: 0 10px;
   font-size: 11px;
   border-radius: 3px;
@@ -653,7 +723,10 @@ textarea {
   display: inline-block;
 }
 
-.payment-status.paid, .status-success, .dashboard-network-scan-list .success-status, .invoices .success-status {
+.payment-status.paid,
+.status-success,
+.dashboard-network-scan-list .success-status,
+.invoices .success-status {
   background-color: #d5f4e0;
   color: $success;
   display: inline-block;
@@ -663,7 +736,8 @@ textarea {
 .nav-tabs > li > a:hover {
   border-color: #eeeeee #eeeeee #dddddd;
 }
-.nav > li > a:hover, .nav > li > a:focus {
+.nav > li > a:hover,
+.nav > li > a:focus {
   text-decoration: none;
 }
 .nav-tabs > li > a {
@@ -677,7 +751,8 @@ textarea {
   display: block;
   padding: 10px 15px;
 }
-.nav > li > a:hover, .nav > li > a:focus {
+.nav > li > a:hover,
+.nav > li > a:focus {
   background-color: transparent;
 }
 /* End TABS */
@@ -691,6 +766,26 @@ textarea {
   left: 50%;
   margin-left: -251px;
   z-index: 1050;
+
+  @media (max-width: 767px) {
+    width: calc(100% - 32px);
+    transform: translate(-50%, -50%) !important;
+    margin: 0;
+  }
+
+  .archive-modal__footer {
+    button {
+      @media (max-width: 767px) {
+        width: 100%;
+      }
+    }
+    .btn-new.btn-primary {
+      @media (max-width: 767px) {
+        margin: 0 0 0 8px;
+        order: 1;
+      }
+    }
+  }
 }
 
 .recurring-tickets-content__modal--content,
@@ -699,21 +794,37 @@ textarea {
   padding: 0 15px 20px;
 }
 
-.form-control[disabled], input[disabled] {
+.form-control[disabled],
+input[disabled] {
   background-color: $gray-400;
 }
 
-.left-panel-filter i, .new-users-content__modal--content i, .recurring-tickets-content__modal--content i, .password-content__modal--content i {
+.left-panel-filter i,
+.new-users-content__modal--content i,
+.recurring-tickets-content__modal--content i,
+.password-content__modal--content i {
   position: absolute;
   right: 12px;
   //bottom: 11px;
 }
 
-h3, .h3 {
+h3,
+.h3 {
   font-size: 20px;
 }
 
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
   font-family: inherit;
   color: $gray-800;
   margin-top: revert;
@@ -730,7 +841,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 .info-block:before {
   position: absolute;
-  content: 'i';
+  content: "i";
   width: 20px;
   height: 20px;
   background-color: $primary-1;
@@ -762,7 +873,8 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   overflow-x: hidden;
 }
 
-.default-user-avatar, .default-company-logo {
+.default-user-avatar,
+.default-company-logo {
   width: 40px;
   height: 40px;
   background-color: transparent;
@@ -941,7 +1053,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   margin-bottom: 2px;
   border: none !important;
   border-radius: 5px;
-  box-shadow: 0 8px 16px 0 rgba(54,70,86,.02);
+  box-shadow: 0 8px 16px 0 rgba(54, 70, 86, 0.02);
   padding: 5px 15px 0;
   cursor: default !important;
   min-height: 50px;
@@ -949,10 +1061,10 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 .company-report .content-product-list-ticket .control.checkbox {
   margin-top: 20px;
 }
-.company-report [class*=col-md-] {
+.company-report [class*="col-md-"] {
   padding: 12px 6px;
 }
-.company-report .top-product-list-ticket [class*=col-md-] {
+.company-report .top-product-list-ticket [class*="col-md-"] {
   @extend %сaption-m-sb;
 }
 .list-of-product .report-title {
@@ -966,14 +1078,16 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 /* End Company Products */
 
 /* DropDown Ticket */
-.dropup, .dropdown {
+.dropup,
+.dropdown {
   position: relative;
 }
 .readonly-normal {
   cursor: pointer;
 }
 
-.has-dropdown, .has-dropdown-with-label {
+.has-dropdown,
+.has-dropdown-with-label {
   position: relative;
   padding-right: 35px;
   overflow: hidden;
@@ -998,16 +1112,20 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   margin: 2px 10px 2px 0px;
   border-radius: 50%;
 }
-.priority-dot.low, .priority-dot.yearly {
+.priority-dot.low,
+.priority-dot.yearly {
   background-color: #cddc39;
 }
 .priority-dot.medium {
   background-color: #ffc107;
 }
-.priority-dot.high, .priority-dot.weekly {
+.priority-dot.high,
+.priority-dot.weekly {
   background-color: #e53935;
 }
-.dropdown-menu > li > a, .dropdown-menu .subdropdown-menu > li > a, .dropdown-menu > .nano li a {
+.dropdown-menu > li > a,
+.dropdown-menu .subdropdown-menu > li > a,
+.dropdown-menu > .nano li a {
   display: block;
   padding: 5px 20px;
   clear: both;
@@ -1028,7 +1146,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 .modal-content {
   .archive-modal .close-modal,
   .image-confirm-modal .close-modal {
-    background-image: url('/assets/img/icons/close-16.png');
+    background-image: url("/assets/img/icons/close-16.png");
     position: absolute;
     //right: 45px;
     right: 24px;
@@ -1036,6 +1154,11 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     //top: 28px;
     background-size: cover;
     z-index: 1;
+
+    @media (max-width: 767px) {
+      top: 16px;
+      right: 16px;
+    }
   }
 }
 /* End Btn closed */
@@ -1091,8 +1214,8 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   font-weight: $fw-medium;
   font-size: 15px;
   font-weight: 500;
-  -webkit-transition: all .3s;
-  transition: all .3s;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
 }
 @media (min-width: 992px) {
   .col-md-12 {

@@ -18,7 +18,7 @@
                     (click)="onChangeAvatar()"
                 >
                 <i
-                    class="icn-64 upload-logo"
+                    class="icon__upload-company-logo qt-sz-64 qt-bg-contain qt-mr-16 ng-star-inserted"
                     *ngIf="!company.logo"
                 ></i>
                 <div>
@@ -360,25 +360,43 @@
         </div>
     </div>
     <div class="qt-aside-modern__footer">
-        <div class="qt-df qt-jc-sb qt-ai-c qt-w100">
-            <div class="qt-df">
-                <button
-                    class="qt-button qt-mr-12"
-                    (click)="onUpdateFull()"
-                >
-                    Update Company
-                </button>
-                <button
-                    class="qt-button --gray"
-                    (click)="close()"
-                >
-                    Cancel
-                </button>
-            </div>
-            <div class="qt-mr-50">
-                <div class="create-contract">
-                    <div class="new-link">Create Contract</div>
-                </div>
+        <div
+            class="qt-df"
+            *ngIf="!appService.checkMobile()"
+        >
+            <button
+                class="qt-button qt-mr-12"
+                (click)="onUpdateFull()"
+            >
+                Update Company
+            </button>
+            <button
+                class="qt-button --gray"
+                (click)="close()"
+            >
+                Cancel
+            </button>
+        </div>
+        <div
+            class="qt-df"
+            *ngIf="appService.checkMobile()"
+        >
+            <button
+                class="qt-button --gray"
+                (click)="close()"
+            >
+                Cancel
+            </button>
+            <button
+                class="qt-button"
+                (click)="onUpdateFull()"
+            >
+                Update Company
+            </button>
+        </div>
+        <div class="qt-mr-50 create-contract-container">
+            <div class="create-contract">
+                <div class="new-link">Create Contract</div>
             </div>
         </div>
     </div>

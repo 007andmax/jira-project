@@ -22,6 +22,9 @@ export class LeftPanelStateService {
 
   constructor() { }
 
+  public clearFilter() {
+    this.filter = null;
+  }
   public getFilter() {
     return this.filter;
   }

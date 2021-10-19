@@ -135,7 +135,7 @@ export class CompanyAddAsideFullComponent implements OnInit {
     }
   }
   public onSelectCompanyTypes(type) {
-    this.company.clientType = type.value;
+    if (type) this.company.clientType = type.value;
     this.validate.resetType();
     this.onChangeType();
   }
@@ -220,13 +220,10 @@ export class CompanyAddAsideFullComponent implements OnInit {
     this.company.defaultPaymentMethod = item.value;
   }
   public onSelectServiceTypes(item) {
-
     this.company.serviceType = item.value;
   }
   public onSelectTechLead(event) {
-
     this.company.techLeadId = (event) ? event.id : null;
-
   }
   public onChangeTags(tags) {
     this.company.setTags(tags);

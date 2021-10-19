@@ -9,11 +9,11 @@
   }
 }
 
-@-moz-document url-prefix() {
-  .main-container > .row {
-    min-width: 1000px;
-  }
-}
+//@-moz-document url-prefix() {
+//  .main-container > .row {
+//    min-width: 1000px;
+//  }
+//}
 
 .left-panel-closed .content-container {
   margin-left: 76px;

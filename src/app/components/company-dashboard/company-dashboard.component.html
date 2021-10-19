@@ -17,13 +17,13 @@
             ></app-company-dash-detail>
             <div
                 class="cmp-dboard-col right-stasticsbar d-flex"
-                *ngIf="company && company.clientType === 'VENDOR'"
+                *ngIf="company && company.clientType === 'VENDOR' && !appService.checkMobile()"
             >
                 <company-dash-associate [company]="company"></company-dash-associate>
             </div>
             <div
                 class="cmp-dboard-col right-stasticsbar d-flex"
-                *ngIf="company && company.clientType !== 'VENDOR'"
+                *ngIf="company && company.clientType !== 'VENDOR' && !appService.checkMobile()"
             >
                 <app-company-dash-stats
                     [totalTickets]="totalTickets"
@@ -48,7 +48,7 @@
                 <!-- Sidebar Recent Activity -->
                 <!-- <aside class="cmp-board-sidebar d-flex" [class.opened]="expand">
       <a href="javascript:;" class="sidebar-toogle" (click)="expand=!expand">
-        Sidebar Toogle 
+        Sidebar Toogle
       </a>
       <div class="sidebar-header d-flex">
         <h3>Recent Activity</h3>
@@ -125,7 +125,7 @@
                   <span>5:00 PM, Yesterday</span>
             </div>
           </li>
-          
+
       </ul>
       <a href="javascript:;" class="btn btn-load">Load More…</a>
   </aside> -->

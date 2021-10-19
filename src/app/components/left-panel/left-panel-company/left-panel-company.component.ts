@@ -55,16 +55,6 @@ export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
     if (this.selectedCompany && this.selectedCompany.logo && this.selectedCompany.logo.origin && this.selectedCompany.logo.origin.id) return `/file/${this.selectedCompany.logo.origin.id}`;
     return '/company/default/logo.jpg';
   }
-  /* goToDashboard() {
-     let body = document.querySelector('.main-container');
-     var link = document.createElement('a');
-     body.appendChild(link);
-     // link.href = `#/clients/companyProfile/${this.company.id}?tabName=dashboard`;
-     link.href = `#/company/dashboard/${this.companyId}`
-     var e = document.createEvent('MouseEvents');
-     e.initEvent('click', true, true);
-     link.dispatchEvent(e);
-   }*/
 
   public goToState(state) {
     this.onChangeState.emit(state);

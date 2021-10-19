@@ -328,7 +328,6 @@ app-ticket-add-aside {
       }
     }
   }
-
 }
 .mat-form-field {
   font-family: "Inter", sans-serif;
@@ -517,6 +516,10 @@ company-associate {
       top: 0;
       flex: 1;
       height: 30px;
+
+      @media (max-width: 767px) {
+        height: 34px;
+      }
     }
   }
   .hidde-label {
@@ -629,6 +632,9 @@ documents-edit-info {
           font-size: 13px;
           left: 0;
           top: -28px;
+          @media (max-width: 767px) {
+            color: $primary-2;
+          }
         }
       }
       .mat-form-field-appearance-legacy .mat-form-field-label {
@@ -815,6 +821,10 @@ documents-edit-info {
   }
   &__body {
     margin-bottom: 50px;
+
+    @media (max-width: 767px) {
+      margin-bottom: 32px;
+    }
     h3 {
       font-weight: 600;
       font-size: 20px;
@@ -822,32 +832,17 @@ documents-edit-info {
       color: $primary-2;
       position: relative;
       margin: 0;
-      &:before,
-      &:after {
-        content: "";
-        position: absolute;
-      }
-      &:before {
-        left: -70px;
-        top: 0;
-        width: 48px;
-        height: 48px;
-        background: $gray-300;
-        border-radius: 50%;
-      }
-      &:after {
-        left: -58px;
-        top: 10px;
-        width: 24px;
-        height: 24px;
-        background: url("assets/img/icons/archive-red-ng2.png") no-repeat;
-      }
     }
     p {
       font-weight: 400;
       font-size: 13px;
       line-height: 1.54;
       max-width: 398px;
+      color: $gray-700;
+
+      @media (max-width: 767px) {
+        margin-top: 8px;
+      }
     }
   }
   &__footer {
@@ -860,6 +855,10 @@ documents-edit-info {
       border: none;
       margin-right: 16px;
       background-color: $error;
+
+      @media (max-width: 767px) {
+        margin-right: 8px;
+      }
 
       &:hover {
         background-color: darken($error, 10%);
@@ -878,6 +877,16 @@ documents-edit-info {
       &:before {
         background: $background;
       }
+    }
+  }
+}
+.archive-modal {
+  @media (max-width: 767px) {
+    padding: 16px;
+  }
+  .archive-modal__body h3:before {
+    @media (max-width: 767px) {
+      display: none;
     }
   }
 }
@@ -1661,6 +1670,10 @@ app-quotes-item {
       height: 5px;
       background-size: cover;
       right: 8px;
+
+      @media (max-width: 767px) {
+        right: 15px;
+      }
     }
     .dropdown-menu {
       min-width: 80px;
@@ -1721,6 +1734,171 @@ app-quotes-item {
 .companies-page {
   background: $background;
 
+  &.qt-page-list {
+    @media (max-width: 767px) {
+      padding: 0;
+    }
+  }
+
+  companies-filter {
+    @media (max-width: 767px) {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      max-height: calc(100vh - 70px);
+      padding: 70px 16px 50px;
+      height: 100%;
+      background: $white;
+      overflow: auto;
+    }
+  }
+
+  .filter-category {
+    @media (max-width: 767px) {
+      position: relative;
+      width: 100% !important;
+      margin-bottom: 16px;
+      margin-right: 0;
+    }
+
+    form,
+    .mat-form-field-wrapper {
+      @media (max-width: 767px) {
+        margin-top: 8px;
+      }
+    }
+    input:not(.mat-chip-input) {
+      @media (max-width: 767px) {
+        height: 40px !important;
+        color: $primary-2;
+      }
+    }
+
+    .app-drop-down__right-icon {
+      @media (max-width: 767px) {
+        transform: translateY(calc(50% - 2px));
+      }
+    }
+
+    &.tags {
+      > div::before {
+        @media (max-width: 767px) {
+          content: "Tags";
+          color: #212b36;
+          font-weight: 600;
+          line-height: 20px;
+        }
+      }
+    }
+  }
+
+  app-drop-down.filter-category {
+    > div::before {
+      @media (max-width: 767px) {
+        content: "Category";
+        color: #212b36;
+        font-weight: 600;
+        line-height: 20px;
+      }
+    }
+
+    &.type {
+      > div::before {
+        @media (max-width: 767px) {
+          content: "Type";
+        }
+      }
+    }
+
+    &.sales-person {
+      > div::before {
+        @media (max-width: 767px) {
+          content: "Sales person";
+        }
+      }
+    }
+
+    &.industry {
+      > div::before {
+        @media (max-width: 767px) {
+          content: "Industry";
+        }
+      }
+    }
+  }
+
+  //.companies-filter-tags {
+  //  > div::before {
+  //    @media (max-width: 767px) {
+  //      content: "Category";
+  //      color: #212b36;
+  //      font-weight: 600;
+  //      line-height: 20px;
+  //    }
+  //  }
+  //}
+
+  .qt-page-list__header {
+    @media (max-width: 767px) {
+      margin: 0;
+    }
+
+    .btn-filter {
+      @media (max-width: 767px) {
+        background-image: url("/assets/img/icons/filter-white.svg");
+        background-color: transparent;
+        background-size: 24px;
+        height: 24px;
+        width: 24px;
+        background-position: center;
+        padding: 0;
+      }
+    }
+
+    .qt-page-list__search {
+      @media (max-width: 767px) {
+        display: none;
+        z-index: 3;
+        position: fixed;
+        left: 0;
+        width: 100%;
+        top: 0;
+        background: #212b36;
+        padding: 10px 16px;
+        margin-left: 0;
+      }
+
+      &.--open {
+        @media (max-width: 767px) {
+          display: flex;
+        }
+      }
+    }
+
+    .qt-page-list__header-title {
+      @media (max-width: 767px) {
+        color: #ffffff;
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: 0;
+        font-weight: 600;
+      }
+    }
+
+    .new-companies-content__header {
+      @media (max-width: 767px) {
+        margin: 0;
+      }
+    }
+  }
+
+  .qt-table-modern__row--lg {
+    @media (max-width: 767px) {
+      padding: 12px 16px;
+    }
+  }
+
   .new-companies-content__header-buttons {
     display: flex;
     padding: 8px 16px;
@@ -1730,6 +1908,45 @@ app-quotes-item {
     font-size: 12px;
     color: $gray-800;
     line-height: 1.33;
+
+    @media (max-width: 767px) {
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: block;
+      width: 100%;
+      border-radius: 0;
+      z-index: 3;
+      padding: 0;
+    }
+    &-top,
+    &-bottom {
+      @media (max-width: 767px) {
+        display: flex;
+        align-items: center;
+        padding: 16px;
+      }
+    }
+    &-top {
+      @media (max-width: 767px) {
+        height: 56px;
+        background-color: $primary-2;
+        color: $white;
+        font-size: 13px;
+        line-height: 20px;
+      }
+    }
+    &-bottom {
+      height: 40px;
+      background-color: $white;
+      color: $primary-1;
+      display: none;
+      font-size: 12px;
+      line-height: 16px;
+      @media (max-width: 767px) {
+        display: flex;
+      }
+    }
   }
 
   .qt-page-list__header-filters {
@@ -1767,6 +1984,10 @@ app-quotes-item {
         color: $gray-600;
         padding: 9px 10px 9px 36px;
         top: 10px;
+
+        @media (max-width: 767px) {
+          top: 12px;
+        }
       }
       .mat-form-field-infix {
         min-height: 36px !important;
@@ -1778,7 +1999,11 @@ app-quotes-item {
           content: "";
           width: 16px;
           height: 16px;
-          background: url(/assets/img/icons/tag-ng2.png);
+          background: url("/assets/img/icons/tag-ng2.png");
+
+          @media (max-width: 767px) {
+            top: 11px;
+          }
         }
       }
       .mat-form-field-appearance-legacy .mat-form-field-infix {
@@ -1835,22 +2060,30 @@ app-quotes-item {
   }
 
   .companies-table {
+    &.--selected {
+      @media only screen and (max-width: 768px) {
+        padding-top: 40px;
+      }
+    }
+
     &__check {
-      width: 40px;
-      max-width: 40px;
-      min-width: 40px;
+      flex: 0 0 48px;
+
+      @media only screen and (max-width: 768px) {
+        flex: 0 0 30px;
+      }
 
       .checkbox-container {
         margin-bottom: 0;
-        margin-top: 5px;
+        margin-top: 0;
       }
     }
     &__name {
-      width: -webkit-max-content;
-      width: -moz-max-content;
-      width: max-content;
-      min-width: 210px;
-      width: 100%;
+      flex: 2 0 290px;
+
+      @media only screen and (max-width: 768px) {
+        max-width: calc(100% - 30px);
+      }
 
       .circle-avatar {
         background-color: #7c77bc;
@@ -1865,106 +2098,126 @@ app-quotes-item {
       }
 
       p {
-        @extend %body-m-m;
+        //@extend %body-m-m;
+        font-weight: 500;
         color: $primary-2;
+
+        @media only screen and (max-width: 768px) {
+          font-size: 16px;
+          line-height: 20px;
+          font-weight: 600;
+          max-height: 42px;
+          overflow: hidden;
+        }
       }
     }
     &__address {
-      width: 210px;
-      max-width: 210px;
-      min-width: 210px;
+      flex: 1 0 210px;
+      line-height: 20px;
 
       @media screen and (min-width: 2048px) {
-        width: 290px;
-        max-width: 290px;
-        min-width: 290px;
+        flex: 1 0 290px;
       }
 
       @media screen and (min-width: 2250px) {
-        width: 360px;
-        max-width: 360px;
-        min-width: 360px;
+        flex: 1 0 360px;
       }
 
       @media screen and (max-width: 1600px) {
-        width: 260px;
-        max-width: 260px;
-        min-width: 260px;
+        flex: 1 0 260px;
       }
     }
     &__primary-contact {
-      width: 160px;
-      max-width: 160px;
-      min-width: 160px;
+      flex: 1 0 160px;
 
       @media screen and (min-width: 2048px) {
-        width: 230px;
-        max-width: 230px;
-        min-width: 230px;
+        flex: 1 0 230px;
       }
 
       @media screen and (min-width: 2250px) {
-        width: 300px;
-        max-width: 300px;
-        min-width: 300px;
+        flex: 1 0 300px;
       }
 
       @media screen and (max-width: 1600px) {
-        width: 210px;
-        max-width: 210px;
-        min-width: 210px;
+        flex: 1 0 210px;
+        max-width: 100%;
+      }
+
+      > div {
+        @media screen and (max-width: 767px) {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          padding-left: 80px;
+        }
       }
 
       .name {
+        position: relative;
         @extend %body-m-m;
         color: $primary-2;
+
+        @media screen and (max-width: 767px) {
+          margin-right: 4px;
+          padding-right: 8px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: calc(100% - 112px);
+        }
+
+        &::after {
+          @media screen and (max-width: 767px) {
+            position: absolute;
+            content: "";
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 4px;
+            background: $gray-600;
+            border-radius: 50%;
+          }
+        }
       }
 
       .phone {
         @extend %body-m;
         color: $gray-600;
+        @media (max-width: 767px) {
+          max-width: 108px;
+          overflow: hidden;
+          text-overflow: inherit;
+          white-space: nowrap;
+        }
       }
     }
     &__email-address {
-      width: 180px;
-      max-width: 180px;
-      min-width: 180px;
+      flex: 1 0 180px;
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
 
       @media screen and (min-width: 2048px) {
-        width: 250px;
-        max-width: 250px;
-        min-width: 250px;
+        flex: 1 0 250px;
       }
 
       @media screen and (min-width: 2250px) {
-        width: 340px;
-        max-width: 340px;
-        min-width: 340px;
+        flex: 1 0 340px;
       }
 
       @media screen and (max-width: 1600px) {
-        width: 230px;
-        max-width: 230px;
-        min-width: 230px;
+        flex: 1 0 230px;
       }
     }
     &__tickets {
-      width: 75px;
-      max-width: 75px;
-      min-width: 75px;
+      flex: 0 0 80px;
     }
     &__devices {
-      width: 80px;
-      max-width: 80px;
-      min-width: 80px;
+      flex: 0 0 80px;
     }
     &__users {
-      width: 65px;
-      max-width: 65px;
-      min-width: 65px;
+      flex: 0 0 65px;
     }
     &__tickets,
     &__devices,
@@ -1974,9 +2227,7 @@ app-quotes-item {
       }
     }
     &__download-btn {
-      width: 40px;
-      max-width: 40px;
-      min-width: 40px;
+      flex: 0 0 44px;
 
       button {
         background: none;
@@ -1984,10 +2235,20 @@ app-quotes-item {
       }
     }
     &__menu {
-      width: 32px;
-      max-width: 32px;
-      min-width: 32px;
-      padding: 23px 16px 23px 8px;
+      flex: 0 0 33px;
+      padding: 23px 16px 23px 0px;
+
+      i {
+        background-position: right;
+      }
+    }
+    @media (max-width: 767px) {
+      &__download-btn,
+      &__email-address,
+      &__address,
+      &__menu {
+        display: none;
+      }
     }
   }
 
@@ -2010,6 +2271,10 @@ app-quotes-item {
           border-right-color: $primary-1 !important;
         }
       }
+    }
+
+    @media (max-width: 767px) {
+      padding-bottom: 48px;
     }
   }
 }
@@ -2369,7 +2634,8 @@ app-quotes-item {
   }
 }
 .page-list-ticket .qt-aside-modern__footer,
-.password-page .qt-aside-modern__footer {
+.password-page .qt-aside-modern__footer,
+.companies-page .qt-aside-modern__footer {
   display: none;
 
   @media (max-width: 767px) {
@@ -2556,7 +2822,7 @@ app-quotes-item {
 .new-companies-content__modal {
   .app-drop-down__title {
     margin-bottom: 8px;
-    line-height: 24px;
+    //line-height: 24px;
   }
   .icn-product-save {
     position: absolute;
@@ -2566,9 +2832,12 @@ app-quotes-item {
   .company-time-zone-drop-down {
     .report-caret-icon {
       position: absolute;
-      //right: 10px;
       right: 4px;
       top: calc(50% - 2px);
+
+      @media (max-width: 767px) {
+        right: 15px;
+      }
     }
   }
 
@@ -2630,6 +2899,10 @@ app-quotes-item {
 
       input {
         border: none;
+
+        @media (max-width: 767px) {
+          height: 40px !important;
+        }
       }
     }
 
@@ -2650,6 +2923,15 @@ app-quotes-item {
 
     .mat-form-field-label {
       top: 14px;
+
+      @media (max-width: 767px) {
+        top: 11px;
+      }
+    }
+  }
+  company-associate {
+    .mat-form-field-label {
+      padding-left: 16px !important;
     }
   }
 }
@@ -2785,6 +3067,7 @@ ngb-datepicker {
     p {
       font-size: 11px !important;
       font-weight: 400;
+      margin: 0;
     }
   }
   .new-link {
@@ -4003,7 +4286,6 @@ app-ticket-edit-aside {
       &.--gray {
         @media (max-width: 767px) {
           margin-right: 12px;
-          order: -1;
         }
       }
     }
@@ -4122,6 +4404,14 @@ app-ticket-edit-aside-users,
 app-ticket-edit-aside-devices {
   &::-webkit-scrollbar {
     display: none;
+  }
+}
+
+.draft-email-aside {
+  .mat-form-field-appearance-legacy {
+    .mat-form-field-label {
+      top: 12px;
+    }
   }
 }
 

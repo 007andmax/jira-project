@@ -1,4 +1,4 @@
-@import './src/assets/styles/variable';
+@import "./src/assets/styles/variable";
 
 .breadcrumbs {
   display: flex;
@@ -6,6 +6,9 @@
   padding-left: 24px;
   align-items: center;
   background-color: $background;
+  @media (max-width: 767px) {
+    display: none;
+  }
   div {
     display: flex;
     align-items: stretch;
@@ -25,14 +28,11 @@
       margin-left: 10px;
       margin-right: 10px;
       width: 15px;
-      transform: rotate(
-          90deg
-      );
-       background-image: url(/assets/img/icons-left-sidebar/dropdown-arrow-down.svg) ;
+      transform: rotate(90deg);
+      background-image: url(/assets/img/icons-left-sidebar/dropdown-arrow-down.svg);
     }
   }
 }
-
 
 .breadcrumbs-company-password-manager {
   background-color: $background;
@@ -40,6 +40,3 @@
 .breadcrumbs-company-products {
   background-color: $background;
 }
-
-
-

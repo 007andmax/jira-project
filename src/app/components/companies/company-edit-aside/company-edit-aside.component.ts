@@ -23,6 +23,7 @@ import { CompanyIndustry } from 'src/app/interfaces/company/company-industry';
 import { CompanyTagsComponent } from '../company-tags/company-tags.component';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 import { CompanyAssociateComponent } from '../../company-dashboard/company-dash-associate/company-associate/company-associate.component';
+import { AppService } from 'src/app/states/app/app.service';
 
 @Component({
   selector: 'app-company-edit-aside',
@@ -60,8 +61,11 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   @ViewChild('serviceType') serviceType: DropDownComponent;
   @ViewChild('companyAssociate') companyAssociate: CompanyAssociateComponent;
   allTitles: Array<string> = [];
-  constructor(private companiesStateService: CompaniesStateService, private companiesService: CompaniesService,
-    private usersStateService: UsersStateService, private modalService: NgbModal, private imageCropperStateService: ImageCropperStateService,
+  constructor(private companiesStateService: CompaniesStateService,
+    private companiesService: CompaniesService,
+    private usersStateService: UsersStateService,
+    private modalService: NgbModal,
+    private imageCropperStateService: ImageCropperStateService,
     private elRef: ElementRef,
     private usersService: UsersService,
     private companySubscriptionState: CompanySubscriptionStateService,
@@ -69,6 +73,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     private companyTagsStateService: CompanyTagsStateService,
     private modalImageCropperStateService: ModalImageCropperStateService,
     private tagsState: CompanyTagsStateService,
+    public appService: AppService,
     public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -186,7 +191,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     this.sub.add(getCompanyFromEdit);
   }
   public onSelectCompanyTypes(type) {
-    this.company.clientType = type.value;
+    if (type) this.company.clientType = type.value;
     this.validate.resetType();
     this.onChangeType();
   }

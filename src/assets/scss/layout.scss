@@ -2602,6 +2602,29 @@ body {
     background-color: $white !important;
     border: 1px solid transparent !important;
     margin-bottom: 0 !important;
+
+    .angular-editor-button {
+      @media (max-width: 767px) {
+        min-width: 1rem !important;
+      }
+    }
+
+    &:nth-child(7) {
+      @media (max-width: 767px) {
+        width: 100%;
+        order: -1;
+      }
+
+      select {
+        @media (max-width: 767px) {
+          width: 100% !important;
+          background-color: transparent !important;
+          padding: 8px 12px;
+          margin-bottom: 8px;
+          font-size: 12px;
+        }
+      }
+    }
 }
 .angular-editor-toolbar-set label.block-label {
     display: none !important;

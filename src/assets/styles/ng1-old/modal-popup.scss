@@ -184,7 +184,7 @@
   width: 24px;
   height: 24px;
   margin: 0;
-  background-image: url("/assets/img/icons/close-16.png");
+  background-image: url("/assets/img/icons/close.svg");
   background-size: cover;
 }
 .download-agent-modal {
@@ -229,6 +229,10 @@
   background-image: url("/assets/img/icons/google-plus.png");
   width: 20px;
   height: 13px;
+
+  @media (max-width: 767px) {
+    display: none;
+  }
 }
 .tab-btns {
   font-size: 0;

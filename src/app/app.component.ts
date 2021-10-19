@@ -192,6 +192,9 @@ export class AppComponent implements OnInit {
   goToPasswordManager() {
     this.leftPanelStateService.goToState('password-manager');
   }
+  goToCompanies() {
+    this.leftPanelStateService.goToState('new-companies');
+  }
   public setShowLockScreen(data) {
     this.showLockScreen = data;
   }
