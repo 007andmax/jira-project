@@ -24,7 +24,6 @@ export class DraftEmailStateService {
   }
   public removeSelectedCompany(i) {
     this.selectedCompanies.splice(i, 1);
-    console.log("this.selectedCompanies", this.selectedCompanies);
   }
 
   public setSelectedUser(data) {
