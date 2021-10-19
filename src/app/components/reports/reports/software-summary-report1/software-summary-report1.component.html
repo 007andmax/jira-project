@@ -2,10 +2,10 @@
     <div class="report-menu">
         <div class="run-report-content clearfix">
             <div class="new-reports-reverse">
-                <button class="qt-btn --outline-white qt-ml-8">
+                <button class="qt-btn --outline-white qt-ml-8" (click)="downloadCsv()">
                     <i class="icon__download qt-za-16 qt-sz-16 qt-dib qt-bg-contain summarydownload"></i>
                 </button>
-                <button class="qt-btn --outline-white qt-ml-8">
+                <button class="qt-btn --outline-white qt-ml-8" (click)="printPdf()">
                     <i class="icon__print qt-sz-16 qt-bg-contain qt-mr-8 summaryprint"></i>
                 </button>
                 <button class="qt-btn --outline-white qt-ml-8">
@@ -25,7 +25,6 @@
                         [search]="true"
                         [change]="true"
                         [isDisabled]="!softwareSummaryReport.companyId"
-                        [preloader]
                         [list]="software"
                         (onSelectedItem)="onSelectSoftware($event)"
                     ></app-drop-down>

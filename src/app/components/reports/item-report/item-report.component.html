@@ -25,12 +25,6 @@
     </p>
     <p
         class="report-title"
-        *ngIf="report === 'software-summary1'"
-    >
-        Software Summary Report1
-    </p>
-    <p
-        class="report-title"
         *ngIf="report === 'accounts-receivable'"
     >
         Accounts Receivable
@@ -116,8 +110,7 @@
     <remote-connection-report *ngIf="report === 'remote-access'"></remote-connection-report>
     <device-ip-summary-report *ngIf="report === 'device-ip-summary'"></device-ip-summary-report>
     <app-gl-number *ngIf="report === 'income-accounts'"></app-gl-number>
-    <software-summary-report *ngIf="report === 'software-summary'"></software-summary-report>
-    <software-summary-report1 *ngIf="report === 'software-summary1'"></software-summary-report1>
+    <software-summary-report1 *ngIf="report === 'software-summary'"></software-summary-report1>
     <hardware-summary-report *ngIf="report === 'hardware-summary'"></hardware-summary-report>
     <app-accounts-receivable *ngIf="report === 'accounts-receivable'"></app-accounts-receivable>
     <app-taxes-report *ngIf="report === 'byTaxes'"></app-taxes-report>
