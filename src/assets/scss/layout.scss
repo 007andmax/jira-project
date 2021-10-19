@@ -2792,7 +2792,24 @@ div#editor.angular-editor-textarea {
     }
     .modal.show {
         .modal-dialog {
-            transform: none;
+            transform: translate(-50%, -50%);
+            margin: 0;
+            left: 50%;
+            top: 50%;
+            max-width: 360px;
+            @media (max-width: 767px) {
+              width: calc(100% - 32px);
+            }
+
+            .modal-content {
+              padding: 0;
+            }
+          .qt-button {
+            @media (max-width: 767px) {
+              width: 100%;
+              justify-content: center;
+            }
+          }
         }
     }
     .modal-dialog {
