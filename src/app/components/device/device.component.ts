@@ -97,6 +97,8 @@ export class DeviceComponent implements OnInit, OnDestroy {
 
     this.onPowerShellCommand();
     this.onAck();
+    this.onUninstallAgent();
+    this.onUpdateAgent();
 
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
@@ -378,13 +380,13 @@ export class DeviceComponent implements OnInit, OnDestroy {
     else if (command === 'd') {
       this.currentCommand = 'Uninstall Agent';
       data.AssetID = assetId;
-      data.MessageType = "UninstallAgent";      
+      data.MessageType = "UninstallAgent";
       this.agentService.SendPowerShellCommand(data);
     }
     else if (command === 'u') {
       this.currentCommand = 'Update Agent';
       data.AssetID = assetId;
-      data.MessageType = "UpdateAgent";      
+      data.MessageType = "UpdateAgent";
       this.agentService.SendPowerShellCommand(data);
     }
 
@@ -445,5 +447,37 @@ export class DeviceComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.deviceDetailService.setDevice(null);
+  }
+
+  onUninstallAgent() {
+    this.kafkaStateService.onUninstallAgent.subscribe((resp) => {
+      console.log("onUninstallAgent");
+      let item = resp.find((x) => x.key == this.asset.ID);
+      if (item) {
+        this.kafkaMessage = item.Value;
+        this.powershellmsg = this.kafkaMessage;
+        this.ngZone.run(() => {
+          this.kafkaMessage = item.Value;
+          this.powershellmsg = this.kafkaMessage;
+          this.ngZone.run(() => {
+            this.toastr.success(`${this.powershellmsg}`);
+          });
+        });
+      }
+    });
+  }
+
+  onUpdateAgent() {
+    this.kafkaStateService.onUpdateAgent.subscribe((resp) => {
+      console.log("onUpdateAgent");
+      let item = resp.find((x) => x.key == this.asset.ID);
+      if (item) {
+        this.kafkaMessage = item.Value;
+        this.powershellmsg = this.kafkaMessage;
+        this.ngZone.run(() => {
+          this.toastr.success(`${this.powershellmsg}`);
+        });
+      }
+    });
   }
 }

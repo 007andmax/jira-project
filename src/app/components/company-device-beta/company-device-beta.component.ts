@@ -57,6 +57,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
     );
     this.setPreviewDataDevice();
     this.onPowerShellCommand();
+    this.onAck();
   }
 
   setPreviewDataDevice() {
@@ -141,6 +142,21 @@ export class CompanyDeviceBetaComponent implements OnInit {
         }
         asset.online = true;
         this.cd.detectChanges();
+      }
+    });
+  }
+
+  onAck() {
+    this.kafkaStateService.onAck.subscribe((resp) => {
+      console.log("OnAck");
+      let asset = this.assetList.find((x) => x.ID === resp.data.AssetID);
+      if (asset) {
+        this.ngZone.run(() => {
+          this.toastr.success(
+            "Computer restarted and up now!"
+          );
+          this.GetCurrentConfig(resp.data.AssetID);
+        });
       }
     });
   }
