@@ -10,6 +10,8 @@ export class KafkaStateService {
   onPowerShellCommand: EventEmitter<any> = new EventEmitter();
   onAck: EventEmitter<any> = new EventEmitter();
   onTerminalCommand: EventEmitter<any> = new EventEmitter();
+  onUninstallAgent: EventEmitter<any> = new EventEmitter();
+  onUpdateAgent: EventEmitter<any> = new EventEmitter();
 
   constructor(private kafkaRealTimeService: KafkaRealTimeService) { }
 
@@ -32,6 +34,12 @@ export class KafkaStateService {
         case "RunDOSCommand":
           this.handleRunDosCommand(newChange);
           break;
+        case "UninstallAgent":
+          this.handleUninstallAgentCommand(newChange);
+          break;      
+        case "UpdateAgent":
+          this.handleUpdateAgentCommand(newChange);
+          break;          
       }
     });
   }
@@ -72,7 +80,7 @@ export class KafkaStateService {
     this.onAck.emit(newChange);
   }
 
-  private handleRunDosCommand(newChange: any){
+  private handleRunDosCommand(newChange: any) {
     if (this.assetConfigMessage.length > 0) {
       let index = this.assetConfigMessage.findIndex(
         (x) => (x.key = newChange.data.AssetID)
@@ -88,5 +96,35 @@ export class KafkaStateService {
     this.onTerminalCommand.emit(this.assetConfigMessage);
   }
 
+  private handleUninstallAgentCommand(newChange: any) {
+    if (this.assetConfigMessage.length > 0) {
+      let index = this.assetConfigMessage.findIndex(
+        (x) => (x.key = newChange.data.AssetID)
+      );
+      if (index != -1) {
+        this.assetConfigMessage.splice(index, 1);
+      }
+    }
+    this.assetConfigMessage.push({
+      key: newChange.data.AssetID,
+      Value: newChange.data.Value,
+    });
+    this.onUninstallAgent.emit(this.assetConfigMessage);
+  }
 
+  private handleUpdateAgentCommand(newChange: any) {
+    if (this.assetConfigMessage.length > 0) {
+      let index = this.assetConfigMessage.findIndex(
+        (x) => (x.key = newChange.data.AssetID)
+      );
+      if (index != -1) {
+        this.assetConfigMessage.splice(index, 1);
+      }
+    }
+    this.assetConfigMessage.push({
+      key: newChange.data.AssetID,
+      Value: newChange.data.Value,
+    });
+    this.onUpdateAgent.emit(this.assetConfigMessage);
+  }
 }
