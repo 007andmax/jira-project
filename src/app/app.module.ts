@@ -451,6 +451,7 @@ import { HomeComponent } from './components/home/home.component';
 import { CompanyDeviceBetaComponent } from './components/company-device-beta/company-device-beta.component';
 import { DeviceBeta } from './pipe/device-beta.pipe';
 import { SoftwareSummaryReport1Component } from './components/reports/reports/software-summary-report1/software-summary-report1.component';
+import { ReportDeviceSummaryComponent } from './components/reports/reports/report-device-summary/report-device-summary.component';
 
 
 declare var $: any;
@@ -858,7 +859,8 @@ declare var $: any;
     HomeComponent,
     CompanyDeviceBetaComponent,
     DeviceBeta,
-    SoftwareSummaryReport1Component
+    SoftwareSummaryReport1Component,
+    ReportDeviceSummaryComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,96 @@
+.table-wrap {
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    .device {
+      width: 28% !important;
+      padding: 0 18px 0 18px;
+      background-color: white;
+      height: 40px;
+    }
+    .s-name {
+      width: 30% !important;
+      padding: 0px;
+    }
+    .pulisher {
+      width: 20% !important;
+      padding: 0px;
+    }
+    .version {
+      width: 15% !important;
+      padding: 0px;
+    }
+    .install {
+      width: 15% !important;
+      padding: 0px;
+    }
+    thead {
+      th {
+        background-color: #dfe3e8 !important;
+      }
+    }
+  }
+}
+
+.device-header {
+  text-align: center;
+  padding: 5px 0px 5px 0px;
+  h6 {
+    font-size: 12px !important;
+  }
+}
+
+.device-summary-report-table {
+  td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background-color: white;
+  }
+  tr {
+    td {
+      background: #ffffff;
+      padding: 0 8px 0 8px;
+      height: 48px;
+      border-top: 1px solid transparent;
+      border-bottom: 1px solid transparent;
+      vertical-align: middle;
+      &:last-child {
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        border-right: 1px solid transparent;
+        padding-right: 16px;
+      }
+      &:first-child {
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        border-left: 1px solid transparent;
+        padding-left: 16px;
+      }
+    }
+  }
+}
+
+.qt-btn {
+  &.--outline-blue {
+    height: 40px !important;
+    background-color: #dfe3e8 !important;
+  }
+}
+
+.product-report-btn {
+  border-radius: 0px !important;
+}
+
+.summaryemail {
+  right: 3px !important;
+  top: 9px !important;
+}
+
+.summaryprint {
+  right: 0px !important;
+  top: 9px !important;
+}
+.summarydownload {
+  right: 8px !important;
+  top: 9px !important;
+}

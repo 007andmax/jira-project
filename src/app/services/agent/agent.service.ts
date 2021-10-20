@@ -66,6 +66,15 @@ export class AgentService {
     this.AccessToken = data;
   }
 
+  public getDeviceSummaryByGuid(companyGuid) {
+    return this.http
+      .get(`${this.apiAgent}report/DeviceSummary/${companyGuid}`,{
+          headers: this.getHeader(),
+          responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
   public getTechCompanyByTechGuid(techGuid) {
     return this.http
       .get(`${this.apiAgent}agent/TechCompany/${techGuid}`,{

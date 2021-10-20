@@ -122,6 +122,7 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/report/software-summary1`)) this.state = 'software-summary1';
           if (window.location.href.includes(`/report/hardware-summary`)) this.state = 'hardware-summary';
           if (window.location.href.includes(`/report/device-ip-summary`)) this.state = 'device-ip-summary';
+          if (window.location.href.includes(`/report/report-device-summary`)) this.state = 'report-device-summary';
           if (window.location.href.includes(`/report/tech-sales`)) this.state = 'tech-sales';
           if (window.location.href.includes(`/report/tech-ticket`)) this.state = 'tech-ticket';
           if (window.location.href.includes(`/report/tech-service`)) this.state = 'tech-service';
@@ -228,6 +229,7 @@ export class LeftPanelComponent implements OnInit {
         this.state === 'software-summary1' ||
         this.state === 'hardware-summary' ||
         this.state === 'device-ip-summary' ||
+        this.state === 'report-device-summary'||
         this.state === 'tech-sales' ||
         this.state === 'tech-ticket' ||
         this.state === 'tech-service' ||

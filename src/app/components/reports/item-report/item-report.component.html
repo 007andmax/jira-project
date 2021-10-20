@@ -19,6 +19,12 @@
     </p>
     <p
         class="report-title"
+        *ngIf="report === 'report-device-summary'"
+    >
+        Device Summary Report
+    </p>
+    <p
+        class="report-title"
         *ngIf="report === 'software-summary'"
     >
         Software Summary Report
@@ -108,6 +114,7 @@
     <tech-ticket-report *ngIf="report === 'tech-ticket'"></tech-ticket-report>
     <tech-sales-report *ngIf="report === 'tech-sales'"></tech-sales-report>
     <remote-connection-report *ngIf="report === 'remote-access'"></remote-connection-report>
+    <report-device-summary *ngIf="report === 'report-device-summary'"></report-device-summary>
     <device-ip-summary-report *ngIf="report === 'device-ip-summary'"></device-ip-summary-report>
     <app-gl-number *ngIf="report === 'income-accounts'"></app-gl-number>
     <software-summary-report1 *ngIf="report === 'software-summary'"></software-summary-report1>
