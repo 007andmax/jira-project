@@ -18,6 +18,8 @@ import { ActivatedRoute } from '@angular/router';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { AppService } from 'src/app/states/app/app.service';
+import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
+import { USERS } from 'src/app/const/emails';
 
 @Component({
   selector: 'app-company-dash-detail',
@@ -282,6 +284,7 @@ export class CompanyDashDetailComponent implements OnInit {
     private leftPanelStateService: LeftPanelStateService,
     private usersStateService: UsersStateService,
     public appService: AppService,
+    private draftEmailStateService: DraftEmailStateService,
     public cd: ChangeDetectorRef
   ) { }
 
@@ -298,7 +301,12 @@ export class CompanyDashDetailComponent implements OnInit {
   public onChangeStartTimePicker(data) {
     this.currentService.setDurationStart(data);
   }
-
+  public showAsideForDraftEmail(user) {
+    this.draftEmailStateService.setAction(USERS);
+    this.draftEmailStateService.resetSelectedUsers();
+    this.draftEmailStateService.addSelectedUser(user);
+    this.draftEmailStateService.toggleAsideForAdd();
+  }
   public onChangeEndTimePicker(data) {
     this.currentService.setDurationEnd(data);
   }
