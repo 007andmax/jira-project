@@ -78,63 +78,65 @@
         class="users-list-container"
         *ngIf="tab === 'users'"
     ></div>
-    <ng-template
-        ngFor
-        let-user
-        [ngForOf]="usersList"
-        [ngForTrackBy]="trackById"
-    >
-        <div class="users-list-item">
-            <div class="qt-df qt-ai-c">
-                <div
-                    class="users-table__name--avatar"
-                    [ngStyle]="{'background':  getUserAvatarUrl(user)}"
-                    [textContent]="getNameForAvatar(user)"
-                ></div>
-                <div>
+      <div class="users-list-wrap">
+        <ng-template
+            ngFor
+            let-user
+            [ngForOf]="usersList"
+            [ngForTrackBy]="trackById"
+        >
+            <div class="users-list-item">
+                <div class="qt-df qt-ai-c qt-jc-sb qt-w100">
                     <div
-                        class="users-table__name--user-name"
-                        [textContent]="getUserName(user)"
+                        class="users-table__name--avatar"
+                        [ngStyle]="{'background':  getUserAvatarUrl(user)}"
+                        [textContent]="getNameForAvatar(user)"
                     ></div>
-                    <div
-                        class="users-table__name--profession"
-                        [textContent]="user.designation"
-                    ></div>
-                    <div class="users-table__contract-no">
-                        <ng-template
-                            ngFor
-                            let-phone
-                            [ngForOf]="user.phoneNumbers"
-                            [ngForTrackBy]="trackById"
-                        >
-                            <div class="qt-df qt-ai-c">
-                                <div>
+                    <div class="users-table__name-wrap">
+                        <div
+                            class="users-table__name--user-name ellipsis"
+                            [textContent]="getUserName(user)"
+                        ></div>
+                        <div
+                            class="users-table__name--profession ellipsis"
+                            [textContent]="user.designation"
+                        ></div>
+                        <div class="users-table__contract-no">
+                            <ng-template
+                                ngFor
+                                let-phone
+                                [ngForOf]="user.phoneNumbers"
+                                [ngForTrackBy]="trackById"
+                            >
+                                <div class="qt-df qt-ai-c">
+                                    <div>
+                                        <div
+                                            *ngIf="phone.typeNumber === 'FAX'"
+                                            class="qt-sz-16 qt-mr-6 icon__office-phone-gray"
+                                        ></div>
+                                        <div
+                                            *ngIf="phone.typeNumber === 'MOBILE' || phone.typeNumber === 'OFFICE'"
+                                            class="qt-sz-16 qt-mr-6 icon__phone-gray"
+                                        ></div>
+                                    </div>
                                     <div
-                                        *ngIf="phone.typeNumber === 'FAX'"
-                                        class="qt-sz-16 qt-mr-6 icon__office-phone-gray"
-                                    ></div>
-                                    <div
-                                        *ngIf="phone.typeNumber === 'MOBILE' || phone.typeNumber === 'OFFICE'"
-                                        class="qt-sz-16 qt-mr-6 icon__phone-gray"
+                                        class="users-table__contract-no--number"
+                                        [textContent]="phone.number | preparePhone | mask: '(000) 000-0000' | phone"
                                     ></div>
                                 </div>
-                                <div
-                                    class="users-table__contract-no--number"
-                                    [textContent]="phone.number | preparePhone | mask: '(000) 000-0000' | phone"
-                                ></div>
-                            </div>
-                        </ng-template>
+                            </ng-template>
+                        </div>
+                    </div>
+                    <div class="email-container">
+                        <div
+                            class="icon__email-dark qt-sz-16 pointer"
+                            (click)="showAsideForDraftEmail()"
+                        ></div>
                     </div>
                 </div>
-                <div class="email-container">
-                    <div
-                        class="icon__email-dark qt-sz-16 pointer"
-                        (click)="showAsideForDraftEmail()"
-                    ></div>
-                </div>
             </div>
-        </div>
-    </ng-template>
+        </ng-template>
+    </div>
     <div
         class="profile-cmp-board other-info d-flex"
         *ngIf="tab === 'dashboard'"

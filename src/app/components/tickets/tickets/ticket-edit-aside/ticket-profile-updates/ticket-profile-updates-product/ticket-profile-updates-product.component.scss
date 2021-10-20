@@ -23,6 +23,11 @@
 
   &__content {
     flex-grow: 1;
+
+    @media (max-width: 767px) {
+      width: 100%;
+      margin-top: -28px;
+    }
   }
 
   &__author-line,
@@ -204,7 +209,7 @@
   .ticket-updates__ticket-info-container {
     @media (max-width: 767px) {
       position: relative;
-      margin: 35px 0 8px -40px;
+      margin: 0;
     }
   }
   .ticket-updates__ticket-info-container {
@@ -218,7 +223,7 @@
     .ticket-updates__ticket-info-container {
       .dropdown {
         &:nth-child(2) {
-          top: -45px !important;
+          top: -41px !important;
         }
       }
     }

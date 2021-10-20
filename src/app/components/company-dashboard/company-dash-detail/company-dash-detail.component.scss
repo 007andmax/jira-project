@@ -132,7 +132,7 @@
 .tabs {
     display: none;
     align-items: center;
-    padding: 12px 16px;
+    padding: 12px 0;
     border-bottom: 1px solid $gray-300;
     @media (max-width: 767px) {
         display: flex;
@@ -143,6 +143,10 @@
         color: $primary-2;
         margin: 0 16px 0 0;
         line-height: 16px;
+        @media (max-width: 767px) {
+          width: 100%;
+          text-align: center;
+        }
         &:last-child {
             margin: 0;
         }
@@ -153,22 +157,31 @@
         &::after {
             content: " ";
             position: absolute;
-            bottom: -11px;
+            bottom: -12px;
             left: 0;
             right: 0;
-            height: 1px;
+            height: 2px;
             background-color: $primary-1;
         }
     }
 }
+.users-list-container + .users-list-wrap {
+  padding: 8px;
+  background-color: $background;
+}
+.users-table__name-wrap {
+  flex: 1;
+  max-width: calc(100% - 96px);
+}
 .users-list-item {
-    height: 96px;
+    min-height: 96px;
     margin: 0 0 8px;
     padding: 16px;
     border-radius: 8px;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
-    background-color: #fff;
+    background-color: $white;
     position: relative;
+    display: flex;
     .users-table__name--avatar {
         height: 40px;
         width: 40px;
@@ -179,24 +192,26 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #ffffff;
+        color: $white;
         margin-right: 10px;
         font-weight: 600;
     }
-    .users-table__name--user-name,
-    .users-table__name--profession {
+    .users-table__name--user-name {
+        color: $primary-2;
         font-size: 13px;
         line-height: 20px;
-        font-weight: 400;
-        letter-spacing: 0;
+        font-weight: 500;
+    }
+    .users-table__name--profession {
+      color: $gray-700;
+      font-size: 12px;
+      line-height: 20px;
+      font-weight: 400;
     }
     .email-container {
-        position: absolute;
-        top: calc(50% - 20px);
-        right: 0px;
         height: 40px;
         padding: 12px;
-        background-color: #f4f6f8;
-        border-radius: 40px;
+        background-color: $gray-200;
+        border-radius: 50%;
     }
 }

@@ -79,6 +79,7 @@
 
     @media (max-width: 767px) {
       margin-right: 0;
+      width: 100%;
     }
   }
   &__ticket-body {
@@ -98,14 +99,14 @@
     margin-right: 4px;
   }
   &__ticket-title {
+    display: flex;
+    align-items: center;
     width: 342px;
     font-weight: 600;
-    // text-overflow: ellipsis;
-    // overflow: hidden;
-    // white-space: nowrap;
     margin-right: 8px;
 
     @media (max-width: 767px) {
+      max-width: calc(100% - 94px);
       width: auto;
     }
     pre {
