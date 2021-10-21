@@ -10,12 +10,13 @@ export class ExcelService {
   }
 
   downloadFile(data: any, fileName: any, type: any) {
-    debugger;
     let typeArr: string[];
     if (type === "hardware") {
       typeArr = ["label", "value"];
-    }else if(type === "report"){
-      [(typeArr = ["Device Name","Software Name", "Publisher", "Version"])];
+    } else if (type === "softwaresummaryreport") {
+      [(typeArr = ["Device Name", "Software Name", "Publisher", "Version"])];
+    } else if (type === "devicesummaryreport") {
+      [(typeArr = ["Device Name", "Manufacturer", "Model", "SerialNumber"])];
     } else
       [(typeArr = ["Software Name", "Publisher", "Version", "Installed On"])];
     let csvData = this.ConvertToCSV(data, typeArr, type);
@@ -43,7 +44,11 @@ export class ExcelService {
     let array = typeof objArray != "object" ? JSON.parse(objArray) : objArray;
     let str = "";
     let row = "";
-    if (type === "software" || type === "report") {
+    if (
+      type === "software" ||
+      type === "softwaresummaryreport" ||
+      type === "devicesummaryreport"
+    ) {
       row = "S.No,";
 
       for (let index in headerList) {
@@ -51,17 +56,30 @@ export class ExcelService {
       }
     }
     row = row.slice(0, -1);
-    if (type === "software" || type === "report") {
+    if (
+      type === "software" ||
+      type === "softwaresummaryreport" ||
+      type === "devicesummaryreport"
+    ) {
       str += row + "\r\n";
     }
     for (let i = 0; i < array.length; i++) {
       let line = "";
-      if (type === "software" || type === "report") [(line = i + 1 + "")];
+      if (
+        type === "software" ||
+        type === "softwaresummaryreport" ||
+        type === "devicesummaryreport"
+      )
+        [(line = i + 1 + "")];
       for (let index in headerList) {
         let head = headerList[index];
         if (index === "0" && type === "hardware") {
           line += array[i][head];
-        } else if (type === "software" || type === "report") {
+        } else if (
+          type === "software" ||
+          type === "softwaresummaryreport" ||
+          type === "devicesummaryreport"
+        ) {
           line += "," + array[i][index];
         } else {
           line += "," + array[i][head];

@@ -415,6 +415,10 @@ export class SoftwareSummaryReport1Component implements OnInit {
       ]);
     });
     let fileName = "Software Summary Report List";
-    this.excelService.generateExcel(downloadCsvList, fileName, "report");
+    this.excelService.generateExcel(
+      downloadCsvList,
+      fileName,
+      "softwaresummaryreport"
+    );
   }
 }
