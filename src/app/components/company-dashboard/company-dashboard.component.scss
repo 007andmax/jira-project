@@ -384,7 +384,9 @@
             @media (max-width: 767px) {
                 margin: 0;
                 height: 100%;
-                overflow: auto;
+                overflow-x: hidden;
+                overflow-y: auto;
+                padding-top: 16px;
             }
             &.m-0 {
                 margin: 0;
@@ -424,7 +426,8 @@
                 @media (max-width: 767px) {
                     max-width: 100%;
                     width: 100%;
-                    padding-bottom: 24px;
+                    padding: 0;
+                    border-radius: 0;
                 }
                 .profile-cmp-board {
                     width: 100%;
@@ -433,6 +436,10 @@
                     justify-content: center;
                     border-bottom: 1px dotted $gray-400;
                     padding-bottom: 24px;
+
+                    @media (max-width: 767px) {
+                      padding: 0 16px 24px 16px;
+                    }
                     .small-title {
                         font-size: 11px;
                         font-weight: 600;
@@ -452,6 +459,9 @@
                         flex-direction: column;
                         align-items: flex-start;
                         justify-content: flex-start;
+                        @media (max-width: 767px) {
+                          padding: 16px;
+                        }
                         .other-info-col {
                             width: 100%;
                             flex-direction: column;
@@ -500,8 +510,11 @@
                         }
                     }
                     &.primary-contact {
-                        padding: 18px 0;
+                        padding: 16px 0;
                         align-items: flex-start;
+                        @media (max-width: 767px) {
+                          padding: 16px;
+                        }
                         .small-title {
                             margin-bottom: 12px;
                             text-transform: uppercase;
@@ -559,6 +572,9 @@
                         padding: 16px 0;
                         align-items: flex-start;
                         border-bottom: none;
+                        @media (max-width: 767px) {
+                          padding: 16px;
+                        }
                         .small-title {
                             width: 100%;
                             align-items: center;
@@ -616,6 +632,7 @@
                     @media (max-width: 767px) {
                       position: static;
                       width: 100%;
+                      padding: 0 16px 16px;
                     }
                     .btn {
                         margin: 0 4px;
@@ -2159,7 +2176,4 @@ app-company-dash-tags {
 }
 app-company-dash-contract {
     margin-bottom: 16px;
-}
-.mat-form-field-appearance-legacy .mat-form-field-label {
-    top: 13px;
 }

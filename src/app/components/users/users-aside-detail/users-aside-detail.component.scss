@@ -160,3 +160,10 @@ users-aside-detail-passwords {
     right: 5px;
   }
 }
+.user-detail__row-info {
+  /deep/app-company-tags {
+    .select-wrapper {
+      width: 325px;
+    }
+  }
+}

@@ -3958,11 +3958,15 @@ app-ticket-profile-form-update {
     border-bottom: 1px solid $gray-400;
     padding-bottom: 16px;
     margin-bottom: 16px;
+    @media (max-width: 767px) {
+      flex-wrap: wrap;
+    }
   }
 
   &__author-line {
     @media (max-width: 767px) {
       width: calc(100% - 32px);
+      padding-left: 44px;
     }
   }
 
@@ -4298,6 +4302,11 @@ app-ticket-edit-aside {
 
 .ticket-updates__content {
   flex-grow: 1;
+
+  @media (max-width: 767px) {
+    width: 100%;
+    margin-top: -26px;
+  }
 }
 
 .tooltip {

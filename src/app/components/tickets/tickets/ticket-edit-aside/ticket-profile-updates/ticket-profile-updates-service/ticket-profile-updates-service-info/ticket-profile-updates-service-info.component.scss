@@ -61,6 +61,10 @@
     &__ticket-info-container {
       margin: 15px 0 8px -48px;
 
+      @media (max-width: 767px) {
+        margin: 0;
+      }
+
       .dropdown {
         @media (max-width: 767px) {
           position: absolute;
