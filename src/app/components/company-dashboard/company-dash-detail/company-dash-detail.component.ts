@@ -392,7 +392,9 @@ export class CompanyDashDetailComponent implements OnInit {
     this.tagSaved = true;
     this.saveCompany();
   }
-
+  public trackById(index, item) {
+    return item.id;
+  }
   getCharacter(name) {
     return name === null || name === '' ? '' : name[0] + name[1];
   }
