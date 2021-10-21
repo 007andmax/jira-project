@@ -119,3 +119,10 @@ users-aside-detail-passwords {
   border: none;
   outline: none;
 }
+.user-detail__row-info {
+  /deep/app-company-tags {
+    .select-wrapper {
+      width: 325px;
+    }
+  }
+}

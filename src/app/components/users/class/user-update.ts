@@ -25,16 +25,12 @@ export class UserUpdate {
   jobDescription: string;
   constructor(data: UserProfile, user: User) {
     this.role = data.role;
-
-
     this.phoneNumbers = data.phoneNumbers.map((item, index) => {
       if (!user.phoneNumbers || user.phoneNumbers && user.phoneNumbers.length === 0) {
         return new UserPhoneNumber(null, item.number, item.typeNumber, null);
-
       } else {
-
+        if (user.phoneNumbers.length <= index) return new UserPhoneNumber(null, item.number, item.typeNumber, null);
         return new UserPhoneNumber(user.phoneNumbers[index].id, item.number, item.typeNumber, user.phoneNumbers[index].priority);
-
       }
     });
     if (this.phoneNumbers.length === 1 && this.phoneNumbers[0].number === "") this.phoneNumbers = [];

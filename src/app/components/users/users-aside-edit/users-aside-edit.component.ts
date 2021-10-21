@@ -19,6 +19,7 @@ import { Company } from 'src/app/interfaces/company/company';
 import { TitleListType } from '../../tickets/tickets/tickets-header/class/title-list-type';
 import { CompanyTagsStateService } from '../../companies/company-tags/states/company-tags-state.service';
 import { CompanyTagsComponent } from '../../companies/company-tags/company-tags.component';
+import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 
 @Component({
   selector: 'users-aside-edit',
@@ -38,6 +39,7 @@ export class UsersAsideEditComponent implements OnInit {
   userTypes: Array<TitleListType> = [new TitleListType('Standar User', 'USER'),
   new TitleListType('Manager', 'ADMIN')];
   @ViewChild('companyTags') companyTags: CompanyTagsComponent;
+  @ViewChild('designationDp') designationDp: DropDownComponent;
   constructor(private imageCropperStateService: ImageCropperStateService, private usersStateService: UsersStateService,
     private usersAsideService: UsersAsideService,
     private usersService: UsersService,
@@ -225,6 +227,7 @@ export class UsersAsideEditComponent implements OnInit {
     this.user = new UserProfile();
     this.validate = new UserValidate();
     this.companiesState.onInitClear();
+    this.designationDp.clearWithOutChanges();
     if (!this.cd['destroyed']) {
       this.cd.detectChanges();
     }
