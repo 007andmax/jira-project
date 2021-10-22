@@ -1,70 +1,80 @@
 <div>
     <div class="report-menu">
         <div class="run-report-content clearfix">
-            <div class="new-reports-reverse">
-                <button
-                    class="qt-btn --outline-white qt-ml-8"
-                    (click)="downloadCsv()"
-                >
-                    <i class="icon__download qt-za-16 qt-sz-16 qt-dib qt-bg-contain summarydownload"></i>
-                </button>
-                <button
-                    class="qt-btn --outline-white qt-ml-8"
-                    (click)="printPdf()"
-                >
-                    <i class="icon__print qt-sz-16 qt-bg-contain qt-mr-8 summaryprint"></i>
-                </button>
-                <button class="qt-btn --outline-white qt-ml-8">
-                    <i class="icon__email-dark qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6 summaryemail"></i>
-                </button>
-                <button
-                    class="qt-btn --outline-blue qt-ml-8"
-                    (click)="getReportBySoftwareSummary()"
-                >
-                    Get Report
-                </button>
-                <div class="form-group content">
-                    <app-drop-down
-                        [sort]="true"
-                        [placeholder]="'Search software / publisher'"
-                        [dropdownHeight]="'300px'"
-                        [search]="true"
-                        [change]="true"
-                        [isDisabled]="!softwareSummaryReport.companyId"
-                        [list]="software"
-                        (onSelectedItem)="onSelectSoftware($event)"
-                    ></app-drop-down>
-                </div>
-                <div class="form-group content custom-width dropdown-height">
-                    <app-drop-down
-                        [sort]="true"
-                        [search]="true"
-                        [change]="true"
-                        [field]="'Description'"
-                        [placeholder]="'All devices'"
-                        [isDisabled]="!softwareSummaryReport.companyId"
-                        [dropdownHeight]="'300px'"
-                        [list]="devices"
-                        (onSelectedItem)="onSelectDevice($event)"
-                    ></app-drop-down>
-                </div>
-                <div class="grey-dropdown form-group content select-users-list">
-                    <app-drop-down
-                        [placeholder]="'Select Company'"
-                        [list]="companies"
-                        [validate]="validate.getCompany()"
-                        [errorMessage]="'Please select the company name'"
-                        [field]="'name'"
-                        [search]="true"
-                        [change]="true"
-                        (onSelectedItem)="selectClient($event)"
-                    ></app-drop-down>
-                </div>
+            <div class="grey-dropdown form-group content select-users-list">
+                <app-drop-down
+                    [placeholder]="'Select Company'"
+                    [list]="companies"
+                    [validate]="validate.getCompany()"
+                    [errorMessage]="'Please select the company name'"
+                    [field]="'name'"
+                    [search]="true"
+                    [change]="true"
+                    (onSelectedItem)="selectClient($event)"
+                ></app-drop-down>
             </div>
+            <div class="form-group content custom-width dropdown-height">
+                <app-drop-down
+                    [sort]="true"
+                    [search]="true"
+                    [change]="true"
+                    [field]="'Description'"
+                    [placeholder]="'All devices'"
+                    [isDisabled]="!softwareSummaryReport.companyId"
+                    [dropdownHeight]="'300px'"
+                    [list]="devices"
+                    (onSelectedItem)="onSelectDevice($event)"
+                ></app-drop-down>
+            </div>
+            <div class="form-group content">
+                <app-drop-down
+                    [sort]="true"
+                    [placeholder]="'Search software / publisher'"
+                    [dropdownHeight]="'300px'"
+                    [search]="true"
+                    [change]="true"
+                    [isDisabled]="!softwareSummaryReport.companyId"
+                    [list]="software"
+                    (onSelectedItem)="onSelectSoftware($event)"
+                ></app-drop-down>
+            </div>
+            <button
+                class="qt-btn --outline-blue qt-ml-8"
+                (click)="getReportBySoftwareSummary()"
+            >
+                Get Report
+            </button>
+            <button class="qt-btn --outline-white qt-ml-8">
+                <i class="
+                icon__email-dark
+                qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6
+                summaryemail
+              "></i>
+            </button>
+            <button
+                class="qt-btn --outline-white qt-ml-8"
+                (click)="printPdf()"
+            >
+                <i class="icon__print qt-sz-16 qt-bg-contain qt-mr-8 summaryprint"></i>
+            </button>
+            <button
+                class="qt-btn --outline-white qt-ml-8"
+                (click)="downloadCsv()"
+            >
+                <i class="
+                icon__download
+                qt-za-16 qt-sz-16 qt-dib qt-bg-contain
+                summarydownload
+              "></i>
+            </button>
+            <div
+                class="header-close icon__close"
+                (click)="goToReportList()"
+            ></div>
         </div>
     </div>
 </div>
-<div *ngIf="loadingInProgress">
+<div>
     <div class="Software-header">
         <div>
             <span>{{ clientName }}</span>

@@ -22,7 +22,7 @@
     }
     thead {
       th {
-        background-color: #dfe3e8 !important;
+        background-color: #f4f6f8 !important;
       }
     }
   }
@@ -47,8 +47,8 @@
       background: #ffffff;
       padding: 0 8px 0 8px;
       height: 48px;
-      border-top: 1px solid transparent;
-      border-bottom: 1px solid transparent;
+      border-top: 1px solid #eaeaea;
+      border-bottom: 1px solid #eaeaea;
       vertical-align: middle;
       &:last-child {
         border-top-right-radius: 5px;
@@ -69,7 +69,11 @@
 .qt-btn {
   &.--outline-blue {
     height: 40px !important;
-    background-color: #dfe3e8 !important;
+    background-color: #ffffff !important;
+    margin-right: 260px !important;
+  }
+  &.--outline-white {
+    background-color: #edf2f6 !important;
   }
 }
 
@@ -89,4 +93,20 @@
 .summarydownload {
   right: 8px !important;
   top: 9px !important;
+}
+
+.header-close {
+  height: 24px;
+  width: 24px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  margin: 7px 0px 0px 10px;
+}
+
+.run-report-content {
+  border-bottom: none !important;
+  margin-top: 0px !important;
+  padding-left: 24px !important;
 }

@@ -6,6 +6,7 @@ import { CommonHttpServices } from "src/app/components/device/_services/common_h
 import { ExcelService } from "src/app/components/device/_services/download_csv.service";
 import { AgentService } from "src/app/services/agent/agent.service";
 import { CompaniesStateService } from "src/app/states/company/companies-state.service";
+import { LeftPanelStateService } from "src/app/states/left-panel/left-panel-state.service";
 import { DeviceSummaryReport } from "../../class/device-summary-report";
 import { ReportValidate1 } from "../../class/report-validate1";
 import { DeviceSummaryReportFilter } from "./Class/device-summary-report";
@@ -37,13 +38,17 @@ export class ReportDeviceSummaryComponent implements OnInit {
     private commonHttpServices: CommonHttpServices,
     private toastr: ToastrService,
     private excelService: ExcelService,
-    private companiesState: CompaniesStateService
+    private companiesState: CompaniesStateService,
+    public leftPanelStateService: LeftPanelStateService
   ) {}
 
   ngOnInit() {
     this.clientName = "All Company";
     this.companiesState.onInit();
     this.setPreviewDataDevice();
+    setTimeout(() => {
+      this.getPdfData();
+    }, 5000);
   }
 
   setPreviewDataDevice() {
@@ -55,7 +60,6 @@ export class ReportDeviceSummaryComponent implements OnInit {
       .subscribe((data) => {
         console.log("data", data);
         this.agentService.setAccessToken(data.AccessToken);
-        this.tempararyDevice = [];
         this.companiesStateService.getOnCompanies().subscribe((data) => {
           if (data.length > 0) {
             for (let i = 0; i < data.length; i++) {
@@ -64,7 +68,6 @@ export class ReportDeviceSummaryComponent implements OnInit {
               }
             }
             this.deviceSummaryList = this.tempararyDevice;
-            this.getPdfData();
           }
           this.companies = this.getClientsList(data);
         });
@@ -151,11 +154,14 @@ export class ReportDeviceSummaryComponent implements OnInit {
       this.deviceSummaryReport.setCompanyId(null);
       this.getDevicesByCompany(null);
       this.deviceSummaryList = this.tempararyDeviceSummaryList;
+      this.clientName = "All Company";
+      this.getPdfData();
     }
   }
 
   onFilter(field) {
     this.filter.onFilter(field, this.deviceSummaryList);
+    this.getPdfData();
   }
 
   getPdfData() {
@@ -360,5 +366,9 @@ export class ReportDeviceSummaryComponent implements OnInit {
       fileName,
       "devicesummaryreport"
     );
+  }
+
+  public goToReportList() {
+    this.leftPanelStateService.goToState("new-reports");
   }
 }

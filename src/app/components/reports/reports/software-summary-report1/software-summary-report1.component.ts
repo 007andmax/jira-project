@@ -6,6 +6,7 @@ import { CommonHttpServices } from "src/app/components/device/_services/common_h
 import { ExcelService } from "src/app/components/device/_services/download_csv.service";
 import { AgentService } from "src/app/services/agent/agent.service";
 import { CompaniesStateService } from "src/app/states/company/companies-state.service";
+import { LeftPanelStateService } from "src/app/states/left-panel/left-panel-state.service";
 import { ReportValidate1 } from "../../class/report-validate1";
 import { SoftwareSummaryReport1 } from "../../class/software-summary-report1";
 import { SoftwareSummaryReportFilter } from "./Class/software-summary-report1-filter";
@@ -32,7 +33,6 @@ export class SoftwareSummaryReport1Component implements OnInit {
   filter: SoftwareSummaryReportFilter = new SoftwareSummaryReportFilter();
   date = new Date();
   DateFormat = CONFIGCONSTANTS.DateFormat1;
-  loadingInProgress: boolean = false;
   pdfUrl = "";
   loading = false;
   constructor(
@@ -41,7 +41,8 @@ export class SoftwareSummaryReport1Component implements OnInit {
     private commonHttpServices: CommonHttpServices,
     private toastr: ToastrService,
     private excelService: ExcelService,
-    private companiesState: CompaniesStateService
+    private companiesState: CompaniesStateService,
+    public leftPanelStateService: LeftPanelStateService
   ) {}
 
   ngOnInit() {
@@ -75,10 +76,17 @@ export class SoftwareSummaryReport1Component implements OnInit {
       );
   }
 
-  getCompanySoftwareList(companyId) {
+  getReportBySoftwareSummary() {
+    if (
+      !this.validate.isValidateSoftwareSummary(
+        this.softwareSummaryReport.companyId
+      )
+    )
+      return;
     this.agentService
-      .getCompanyApplicationByGuid(companyId)
+      .getCompanyApplicationByGuid(this.softwareSummaryReport.companyId)
       .subscribe((resp) => {
+        debugger;
         this.tempReport = [];
         if (resp.length > 0) {
           for (let i = 0; i < resp.length; i++) {
@@ -121,69 +129,75 @@ export class SoftwareSummaryReport1Component implements OnInit {
               this.tempReport.push(data);
             }
           }
+
+          if (
+            this.softwareSummaryReport.deviceName &&
+            this.softwareSummaryReport.softwareSummarySoft
+          ) {
+            let filter = this.tempReport.filter(
+              ((x) => x.AssetNames == this.softwareSummaryReport.deviceName) &&
+                ((x) =>
+                  x.DisplayName ==
+                  this.softwareSummaryReport.softwareSummarySoft)
+            );
+            if (filter.length > 0) {
+              this.softwareReportList = [];
+              this.softwareReportList = this.tempReport.filter(
+                ((x) =>
+                  x.AssetNames == this.softwareSummaryReport.deviceName) &&
+                  ((x) =>
+                    x.DisplayName ==
+                    this.softwareSummaryReport.softwareSummarySoft)
+              );
+            } else {
+              this.softwareReportList = [];
+              this.softwareReportList = this.tempReport.filter(
+                ((x) =>
+                  x.AssetNames == this.softwareSummaryReport.deviceName) &&
+                  ((x) =>
+                    x.Publisher ==
+                    this.softwareSummaryReport.softwareSummarySoft)
+              );
+            }
+          } else if (
+            this.softwareSummaryReport.deviceName &&
+            !this.softwareSummaryReport.softwareSummarySoft
+          ) {
+            this.softwareReportList = this.tempReport.filter(
+              (x) => x.AssetNames == this.softwareSummaryReport.deviceName
+            );
+          } else if (
+            this.softwareSummaryReport.softwareSummarySoft &&
+            !this.softwareSummaryReport.deviceName
+          ) {
+            this.softwareReportList = this.tempReport.filter(
+              (x) =>
+                x.DisplayName == this.softwareSummaryReport.softwareSummarySoft
+            );
+          } else {
+            this.softwareReportList = this.tempReport;
+          }
+          this.getPdfData();
         }
       });
   }
 
-  getReportBySoftwareSummary() {
-    if (
-      !this.validate.isValidateSoftwareSummary(
-        this.softwareSummaryReport.companyId
-      )
-    )
-      return;
-    this.getCompanySoftwareList(this.softwareSummaryReport.companyId);
-    this.loadingInProgress = true;
-    if (
-      this.softwareSummaryReport.deviceName &&
-      this.softwareSummaryReport.softwareSummarySoft
-    ) {
-      let filter = this.tempReport.filter(
-        ((x) => x.AssetNames == this.softwareSummaryReport.deviceName) &&
-          ((x) =>
-            x.DisplayName == this.softwareSummaryReport.softwareSummarySoft)
-      );
-      if (filter.length > 0) {
-        this.softwareReportList = [];
-        this.softwareReportList = this.tempReport.filter(
-          ((x) => x.AssetNames == this.softwareSummaryReport.deviceName) &&
-            ((x) =>
-              x.DisplayName == this.softwareSummaryReport.softwareSummarySoft)
-        );
-      } else {
-        this.softwareReportList = [];
-        this.softwareReportList = this.tempReport.filter(
-          ((x) => x.AssetNames == this.softwareSummaryReport.deviceName) &&
-            ((x) =>
-              x.Publisher == this.softwareSummaryReport.softwareSummarySoft)
-        );
-      }
-    } else if (
-      this.softwareSummaryReport.deviceName &&
-      !this.softwareSummaryReport.softwareSummarySoft
-    ) {
-      this.softwareReportList = this.tempReport.filter(
-        (x) => x.AssetNames == this.softwareSummaryReport.deviceName
-      );
-    } else if (
-      this.softwareSummaryReport.softwareSummarySoft &&
-      !this.softwareSummaryReport.deviceName
-    ) {
-      this.softwareReportList = this.tempReport.filter(
-        (x) => x.DisplayName == this.softwareSummaryReport.softwareSummarySoft
-      );
-    } else {
-      this.softwareReportList = this.tempReport;
-    }
-    this.getPdfData();
-  }
-
   onSelectSoftware(data) {
     this.softwareSummaryReport.setSoftwareSoft(data);
+    if (data) {
+      this.getReportBySoftwareSummary();
+    } else {
+      this.getReportBySoftwareSummary();
+    }
   }
 
   onSelectDevice(data) {
     this.softwareSummaryReport.setDeviceName(data ? data.Description : null);
+    if (data) {
+      this.getReportBySoftwareSummary();
+    } else {
+      this.getReportBySoftwareSummary();
+    }
   }
 
   public getDevicesByCompany(companyId) {
@@ -202,10 +216,11 @@ export class SoftwareSummaryReport1Component implements OnInit {
       this.softwareSummaryReport.setCompanyId(selectClient.id);
       this.getDevicesByCompany(selectClient.id);
       this.validate.resetCompany();
-      this.getCompanySoftwareList(selectClient.id);
+      this.getReportBySoftwareSummary();
     } else {
       this.softwareSummaryReport.setCompanyId(null);
       this.getDevicesByCompany(null);
+      this.softwareReportList = [];
     }
   }
 
@@ -420,5 +435,9 @@ export class SoftwareSummaryReport1Component implements OnInit {
       fileName,
       "softwaresummaryreport"
     );
+  }
+
+  goToReportList() {
+    this.leftPanelStateService.goToState("new-reports");
   }
 }

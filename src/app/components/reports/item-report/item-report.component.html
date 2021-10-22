@@ -17,18 +17,12 @@
     >
         Device IP Summary Report
     </p>
-    <p
-        class="report-title"
-        *ngIf="report === 'report-device-summary'"
-    >
-        Device Summary Report
-    </p>
-    <p
+    <!-- <p
         class="report-title"
         *ngIf="report === 'software-summary'"
     >
         Software Summary Report
-    </p>
+    </p> -->
     <p
         class="report-title"
         *ngIf="report === 'accounts-receivable'"
@@ -107,10 +101,10 @@
     >
         Tech Ticket Report
     </p>
-    <i
+    <!-- <i
         class="back-page"
         (click)="back()"
-    ></i>
+    ></i> -->
     <tech-ticket-report *ngIf="report === 'tech-ticket'"></tech-ticket-report>
     <tech-sales-report *ngIf="report === 'tech-sales'"></tech-sales-report>
     <remote-connection-report *ngIf="report === 'remote-access'"></remote-connection-report>
