@@ -295,6 +295,14 @@ export class CompanyDashDetailComponent implements OnInit {
       this.getCompanyDetails();
     });
     this.sub.add(subscription);
+    let onChangeCompanies = this.companiesStateService.onChangeCompanies.subscribe(data => {
+      if (data.action === "COMPANY_EDITED" && data.data.id === this.companyDetail.id) {
+        this.companyDetail.onEditMode(data.data);
+        this.companyDetailing = this.companyDetail.getDataForDashboard();
+        this.setCompanyData(data.data);
+      }
+    })
+    this.sub.add(onChangeCompanies);
     this.currentService = new TicketProfileFormService();
   }
 
@@ -339,49 +347,52 @@ export class CompanyDashDetailComponent implements OnInit {
     let getCompany = this.companiesService.getCompany(this._id).subscribe((data: CompanyProfile) => {
       this.companyDetail.onEditMode(data);
       this.companyDetailing = this.companyDetail.getDataForDashboard();
-      if (this.companyDetailing.reputation === undefined || this.companyDetailing.reputation === null) {
-        this.unSelectedRating = 5
-      } else {
-        this.selectedRating = this.companyDetailing.reputation;
-        this.unSelectedRating = 5 - this.selectedRating;
-      }
-      // this.companyDetail = data;
-      this.companyChanged.emit(this.companyDetail);
-      this.companyNameChanged.emit(this.companyDetailing.name);
-      this.totalTicketsChanged.emit(this.companyDetailing.totalTickets);
-      this.averageResponseTimeChanged.emit(this.companyDetailing.averageResponseTime);
-      this.tags = this.companyDetailing.tags;
-      let day = moment(new Date()).format('dddd');
-      this.workingDays = data.workingDays;
-      if (this.workingDays.length !== 0) {
-        let arr = this.workingDays.filter(val => val.dayOfWeek.toLowerCase() === day.toLowerCase())
-        if (arr.length !== 0 && arr[0].startTime !== 0 && arr[0].endTime !== 0) {
-          this.companyOpen = 'Opens';
-        } else {
-          this.companyOpen = 'Close';
-        }
-        this.workingDays.forEach((element, index) => {
-          element.checked = false;
-          let e1: any, s1: any;
-          if (element.startTime !== 0 && element.endTime !== 0) {
-            element.timing = `${this.timeFormatter(element.startTime)} ${this.getTimeFormat(element.startTime)} - ${this.timeFormatter(element.endTime)} ${this.getTimeFormat(element.endTime)}`
-            s1 = this.timeFormatter(element.startTime) + ':00 ' + this.getTimeFormat(element.startTime)
-            element.sTime = new Date('01/01/1990 ' + s1)
-            e1 = this.timeFormatter(element.endTime) + ':00 ' + this.getTimeFormat(element.endTime)
-            element.eTime = new Date('01/01/1990 ' + e1)
-            element.checked = true
-            let current = parseInt(moment(new Date()).format('hh'));
-            if (day.toLowerCase() === element.dayOfWeek.toLowerCase() && this.getTimeFormat(element.startTime) == moment(new Date()).format('A') && this.timeFormat(element.endTime) - 1 == current) {
-              this.closingSoon = true;
-            }
-          }
-        });
-      }
-      if (!this.cd['destroyed']) {
-        this.cd.detectChanges();
-      }
+      this.setCompanyData(data);
     })
     this.sub.add(getCompany);
+  }
+  private setCompanyData(data) {
+    if (this.companyDetailing.reputation === undefined || this.companyDetailing.reputation === null) {
+      this.unSelectedRating = 5
+    } else {
+      this.selectedRating = this.companyDetailing.reputation;
+      this.unSelectedRating = 5 - this.selectedRating;
+    }
+    // this.companyDetail = data;
+    this.companyChanged.emit(this.companyDetail);
+    this.companyNameChanged.emit(this.companyDetailing.name);
+    this.totalTicketsChanged.emit(this.companyDetailing.totalTickets);
+    this.averageResponseTimeChanged.emit(this.companyDetailing.averageResponseTime);
+    this.tags = this.companyDetailing.tags;
+    let day = moment(new Date()).format('dddd');
+    this.workingDays = data.workingDays;
+    if (this.workingDays.length !== 0) {
+      let arr = this.workingDays.filter(val => val.dayOfWeek.toLowerCase() === day.toLowerCase())
+      if (arr.length !== 0 && arr[0].startTime !== 0 && arr[0].endTime !== 0) {
+        this.companyOpen = 'Opens';
+      } else {
+        this.companyOpen = 'Close';
+      }
+      this.workingDays.forEach((element, index) => {
+        element.checked = false;
+        let e1: any, s1: any;
+        if (element.startTime !== 0 && element.endTime !== 0) {
+          element.timing = `${this.timeFormatter(element.startTime)} ${this.getTimeFormat(element.startTime)} - ${this.timeFormatter(element.endTime)} ${this.getTimeFormat(element.endTime)}`
+          s1 = this.timeFormatter(element.startTime) + ':00 ' + this.getTimeFormat(element.startTime)
+          element.sTime = new Date('01/01/1990 ' + s1)
+          e1 = this.timeFormatter(element.endTime) + ':00 ' + this.getTimeFormat(element.endTime)
+          element.eTime = new Date('01/01/1990 ' + e1)
+          element.checked = true
+          let current = parseInt(moment(new Date()).format('hh'));
+          if (day.toLowerCase() === element.dayOfWeek.toLowerCase() && this.getTimeFormat(element.startTime) == moment(new Date()).format('A') && this.timeFormat(element.endTime) - 1 == current) {
+            this.closingSoon = true;
+          }
+        }
+      });
+    }
+    if (!this.cd['destroyed']) {
+      this.cd.detectChanges();
+    }
   }
 
   public onChangeTags(tags) {

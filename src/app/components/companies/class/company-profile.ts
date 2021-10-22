@@ -105,7 +105,7 @@ export class CompanyProfile {
         }
         this.tags = company.tags;
         this.reputation = company.reputation;
-        this.companyTicketStatistic = company.companyTicketStatistic;
+        if (company.companyTicketStatistic) this.companyTicketStatistic = company.companyTicketStatistic;
         this.associatedCompanies = company.associatedCompanies.map(item => new CompanyAssociated(item));
     }
     public getDataForUpdate() {
