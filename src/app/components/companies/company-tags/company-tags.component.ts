@@ -231,6 +231,8 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
    */
   public remove(index): void {
     if (index >= 0) {
+      console.log("this.selectedTag[index]", this.selectedTag[index]);
+      if (this.selectedTag[index].defaultTag === 'USER_TAG' && this.blockUserTag) return;
       this.selectedTag.splice(index, 1);
       this.tagsChange.emit(this.selectedTag);
       this.cd.detectChanges();
