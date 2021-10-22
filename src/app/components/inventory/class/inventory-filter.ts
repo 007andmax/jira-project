@@ -106,7 +106,7 @@ export class InventoryFilter {
             }
             if (field === 'category') {
                 this.onFilterCategory(reqInventory);
-                if (sort !== 'ASC') reqInventory.reverse();
+                if (sort !== 'ASC') this.onReversFilterCategory(reqInventory);
             }
             if (field === 'cost') {
                 this.onFilterCost(reqInventory);
@@ -162,9 +162,11 @@ export class InventoryFilter {
                 1 : ((next.toLowerCase() > first.toLowerCase()) ? -1 : 0)
         });
     }
+    private onReversFilterCategory(reqInventory) {
+        reqInventory.sort((a, b) => b.category.name.toLowerCase().localeCompare(a.category.name.toLowerCase()));
+    }
     private onFilterCategory(reqInventory) {
-        reqInventory.sort((a, b) => (a.category.name.toLowerCase() > b.category.name.toLowerCase()) ?
-            1 : ((b.category.name.toLowerCase() > a.category.name.toLowerCase()) ? -1 : 0));
+        reqInventory.sort((a, b) => a.category.name.toLowerCase().localeCompare(b.category.name.toLowerCase()) || ((a.description) ? a.description : '').toLowerCase().localeCompare(((b.description) ? b.description : '').toLowerCase()));
     }
     private onFilterIlc(reqInventory) {
         reqInventory.sort((a, b) => (((a.ilc) ? a.ilc : '').toLowerCase() > ((b.ilc) ? b.ilc : '').toLowerCase()) ?
