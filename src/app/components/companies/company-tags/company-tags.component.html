@@ -71,6 +71,7 @@
                     class="company-tag-item"
                     [ngClass]="{'is-hover':item.isHover}"
                     [id]="'tag-' + item.id"
+                    *ngIf="item.defaultTag && item.defaultTag === 'USER_TAG' && !blockUserTag || item.defaultTag && item.defaultTag !== 'USER_TAG'"
                 >
                     <label class="qt-checkbox pointer">
                         <input

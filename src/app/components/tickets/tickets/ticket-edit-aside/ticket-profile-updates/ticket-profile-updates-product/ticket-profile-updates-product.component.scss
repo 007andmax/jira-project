@@ -215,7 +215,9 @@
   .ticket-updates__ticket-info-container {
     .dropdown {
       &:nth-child(2) {
-        top: -30px !important;
+        @media (max-width: 767px) {
+          top: -30px !important;
+        }
       }
     }
   }
@@ -223,7 +225,9 @@
     .ticket-updates__ticket-info-container {
       .dropdown {
         &:nth-child(2) {
-          top: -41px !important;
+          @media (max-width: 767px) {
+            top: -41px !important;
+          }
         }
       }
     }
