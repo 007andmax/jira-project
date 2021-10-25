@@ -17,7 +17,7 @@
                     [sort]="true"
                     [search]="true"
                     [change]="true"
-                    [field]="'Description'"
+                    [field]="'Name'"
                     [placeholder]="'All devices'"
                     [isDisabled]="!deviceSummaryReport.companyId"
                     [dropdownHeight]="'300px'"
@@ -36,7 +36,7 @@
               icon__email-dark
               qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6
               summaryemail
-            "></i>
+            " (click)="sendEmail()"></i>
             </button>
             <button
                 class="qt-btn --outline-white qt-ml-8"

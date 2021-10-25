@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
 import { CONFIGCONSTANTS } from "src/app/components/device/config/app-constants";
@@ -9,6 +10,7 @@ import { CompaniesStateService } from "src/app/states/company/companies-state.se
 import { LeftPanelStateService } from "src/app/states/left-panel/left-panel-state.service";
 import { DeviceSummaryReport } from "../../class/device-summary-report";
 import { ReportValidate1 } from "../../class/report-validate1";
+import { ReportSendEmailComponent } from "../../report-additional-actions/report-send-email/report-send-email.component";
 import { DeviceSummaryReportFilter } from "./Class/device-summary-report";
 
 @Component({
@@ -30,6 +32,12 @@ export class ReportDeviceSummaryComponent implements OnInit {
   filter: DeviceSummaryReportFilter = new DeviceSummaryReportFilter();
   pdfUrl = "";
   loading = false;
+  selectedClient = null;
+  orientation: string = "PORTRAIT";
+  report: string = "";
+  template: string = "PDF_TEMPLATE";
+  fileName: string = "";
+  accountType = 'CLIENT';
 
   constructor(
     private agentService: AgentService,
@@ -38,7 +46,8 @@ export class ReportDeviceSummaryComponent implements OnInit {
     private toastr: ToastrService,
     private excelService: ExcelService,
     private companiesState: CompaniesStateService,
-    public leftPanelStateService: LeftPanelStateService
+    public leftPanelStateService: LeftPanelStateService,
+    private modalService: NgbModal
   ) {}
 
   ngOnInit() {
@@ -63,7 +72,7 @@ export class ReportDeviceSummaryComponent implements OnInit {
       });
   }
 
-  getAllCompanyList(){
+  getAllCompanyList() {
     this.deviceSummaryList = [];
     this.agentService.getDeviceSummaryByGuid("").subscribe((resp) => {
       if (resp.length > 0) {
@@ -116,9 +125,8 @@ export class ReportDeviceSummaryComponent implements OnInit {
 
   public getDevicesByCompany(companyId) {
     this.agentService.getAssetsByCompanyId(companyId).subscribe((resp) => {
-      debugger;
       if (resp.length > 0) {
-        this.devices = resp.filter((x) => x.Description != "");
+        this.devices = resp;
       } else {
         this.devices = [];
       }
@@ -126,7 +134,7 @@ export class ReportDeviceSummaryComponent implements OnInit {
   }
 
   onSelectDevice(data) {
-    this.deviceSummaryReport.setDeviceName(data ? data.Description : null);
+    this.deviceSummaryReport.setDeviceName(data ? data.Name : null);
     if (data) {
       this.getReportByDeviceSummary();
     } else {
@@ -359,5 +367,16 @@ export class ReportDeviceSummaryComponent implements OnInit {
 
   public goToReportList() {
     this.leftPanelStateService.goToState("new-reports");
+  }
+
+  sendEmail() {
+    const modalRef = this.modalService.open(ReportSendEmailComponent, null);
+    modalRef.componentInstance.selectedClient = this.selectedClient;
+    modalRef.componentInstance.orientation = this.orientation;
+    modalRef.componentInstance.report = this.report;
+    modalRef.componentInstance.template = this.template;
+    modalRef.componentInstance.fileName = this.fileName;
+    modalRef.componentInstance.accountType = this.accountType;
+
   }
 }
