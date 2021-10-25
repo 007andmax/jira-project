@@ -90,6 +90,10 @@ hr {
   .modal-dialog {
     width: 360px;
     margin-left: -180px;
+
+    @media (max-width: 767px) {
+      margin: 0;
+    }
   }
   .modal-content {
     box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
