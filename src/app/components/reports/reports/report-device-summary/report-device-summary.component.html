@@ -1,9 +1,9 @@
 <div>
     <div class="report-menu">
-        <div class="run-report-content clearfix">
+        <div class="run-report-content col-md-11 left">
             <div class="grey-dropdown form-group content select-users-list">
                 <app-drop-down
-                    [placeholder]="'All Company'"
+                    [placeholder]="'All Companies'"
                     [list]="companies"
                     [errorMessage]="'Please select the company name'"
                     [field]="'name'"
@@ -54,7 +54,9 @@
               summarydownload
             "></i>
             </button>
-            <div
+        </div>
+        <div class="run-report-content col-md-1 right">
+          <div
                 class="header-close icon__close"
                 (click)="goToReportList()"
             ></div>
@@ -87,24 +89,24 @@
                             class="device"
                             (click)="onFilter('name')"
                         >
-                            Device Name
+                            DEVICE NAME
                             <span class="qt-table-modern__sorting"></span>
                         </th>
                         <th
                             class="manufacturer"
                             (click)="onFilter('manufacturer')"
                         >
-                            Manufacturer
+                            MANUFACTURER
                             <span class="qt-table-modern__sorting"></span>
                         </th>
                         <th
                             class="model"
                             (click)="onFilter('model')"
                         >
-                            Model
+                            MODEL
                             <span class="qt-table-modern__sorting"></span>
                         </th>
-                        <th class="serial">Serial Number</th>
+                        <th class="serial">SERIAL NUMBER</th>
                     </tr>
                 </thead>
                 <tbody class="device-summary-report-table">

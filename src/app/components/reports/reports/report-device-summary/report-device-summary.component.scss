@@ -30,7 +30,7 @@
 
 .device-header {
   text-align: center;
-  padding: 5px 0px 5px 0px;
+  padding: 75px 0px 10px 0px;
   h6 {
     font-size: 12px !important;
   }
@@ -102,7 +102,7 @@
   background-position: center;
   background-repeat: no-repeat;
   cursor: pointer;
-  margin: 7px 0px 0px 10px;
+  margin: 7px 0px 0px 0px;
 }
 
 .run-report-content {
@@ -112,4 +112,21 @@
   display: flex;
   justify-content: center;
   background-color: white;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+  height: 60px;
+  padding-top: 11px;
+  border-left: 1px solid #edf0f2;
 }
+
+.run-report-content{
+  &.left{
+  width:96%
+  }
+}
+
+.run-report-content {
+  &.right{
+    width:4%
+  }
+}
+

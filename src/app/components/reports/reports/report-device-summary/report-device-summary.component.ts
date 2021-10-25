@@ -42,7 +42,7 @@ export class ReportDeviceSummaryComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.clientName = "All Company";
+    this.clientName = "All Companies";
     this.companiesState.onInit();
     this.setPreviewDataDevice();
   }
@@ -116,6 +116,7 @@ export class ReportDeviceSummaryComponent implements OnInit {
 
   public getDevicesByCompany(companyId) {
     this.agentService.getAssetsByCompanyId(companyId).subscribe((resp) => {
+      debugger;
       if (resp.length > 0) {
         this.devices = resp.filter((x) => x.Description != "");
       } else {
@@ -142,7 +143,7 @@ export class ReportDeviceSummaryComponent implements OnInit {
     } else {
       this.deviceSummaryReport.setCompanyId(null);
       this.getDevicesByCompany(null);
-      this.clientName = "All Company";
+      this.clientName = "All Companies";
       this.getAllCompanyList();
     }
   }
