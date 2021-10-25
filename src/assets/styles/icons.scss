@@ -185,7 +185,14 @@
     mask-image: url("/assets/img/icons/company-gray.svg");
   }
   &__remove {
-    background-image: url("/assets/img/icons/remove.svg");
+    background-color: #4f5f79;
+    -webkit-mask-image: url("/assets/img/icons/remove.svg");
+    mask-image: url("/assets/img/icons/remove.svg");
+  }
+  &__remove-disabled {
+    background-color: #919eab;
+    -webkit-mask-image: url("/assets/img/icons/remove.svg");
+    mask-image: url("/assets/img/icons/remove.svg");
   }
   &__attachment {
     background-image: url("/assets/img/icons/attachment.svg");

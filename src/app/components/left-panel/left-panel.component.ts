@@ -91,6 +91,7 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/password-manager`)) this.state = 'password-manager';
           if (window.location.href.includes(`/setting/myprofile`)) this.state = 'myprofile-component';
           if (window.location.href.includes(`/setting/tags`)) this.state = 'manage-tags-component';
+          if (window.location.href.includes(`/setting/customizable-lists`)) this.state = 'customizable-lists';
           if (window.location.href.includes(`/setting/glnumber`)) this.state = 'glnumber-component';
           if (window.location.href.includes(`/setting/companyprofile`)) this.state = 'company-profile-component';
           if (window.location.href.includes(`/setting/techUsers`)) this.state = 'tech-component';
@@ -209,6 +210,7 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'password-manager') this.goToLink(`password-manager`);
       if (this.state === 'myprofile-component') this.goToLink('setting/myprofile');
       if (this.state === 'manage-tags-component') this.goToLink('setting/tags');
+      if (this.state === 'customizable-lists') this.goToLink('setting/customizable-lists');
       if (this.state === 'glnumber-component') this.goToLink('setting/glnumber');
       if (this.state === 'company-profile-component') this.goToLink('setting/companyprofile');
       if (this.state === 'tech-component') this.goToLink('setting/techUsers');

@@ -60,6 +60,7 @@ import { DocumentsEditComponent } from './components/documents/documents-edit/do
 import { DocumentPreviewComponent } from './components/documents/document-preview/document-preview.component';
 import { CompanyDocumentsComponent } from './components/companies/company-documents/company-documents.component';
 import { HomeComponent } from './components/home/home.component';
+import { CustomizableListsComponent } from './components/setting/customizable-lists/customizable-lists.component';
 
 const routes: Routes = [
 
@@ -129,6 +130,12 @@ const routes: Routes = [
   {
     path: ':company/setting/tags',
     component: ManageTagsComponent,
+    pathMatch: 'full',
+
+  },
+  {
+    path: ':company/setting/customizable-lists',
+    component: CustomizableListsComponent,
     pathMatch: 'full',
 
   },

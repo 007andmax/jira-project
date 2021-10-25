@@ -1,0 +1,131 @@
+<!-- Middle Wrapper -->
+<div class="page-container">
+    <div class="page-insider manage-taxes">
+        <div class="heading">
+            <h5 class="qt-fw-600">Manage  product categories</h5>
+            <div class="heading-serach">
+                <a
+                    href="javascript:;"
+                    class="btn-outline"
+                    (click)="openModel(true, 0, {})"
+                >
+                    Create
+                </a>
+            </div>
+        </div>
+        <div class="cmn-area">
+            <div class="data-table-wrap">
+                <table
+                    class="display dataTable"
+                    style="width:100%"
+                >
+                    <thead>
+                        <tr>
+                            <th class="tax-name">Categories</th>
+                            <th class="rate">Amount</th>
+                            <th class="action">&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of categoriesProducts; let i = index">
+                            <td
+                                class="tax-name"
+                                [textContent]="item.name"
+                            >
+                            </td>
+                            <td
+                                class="rate"
+                                [textContent]="item.productsAmount"
+                            ></td>
+                            <td class="action">
+                                <a
+                                    href="javascript:;"
+                                    data-tooltip="Edit"
+                                    (click)="editCategoryProduct(item)"
+                                    class="edit"
+                                >
+                                    <img
+                                        src="/html/assets/img/icons/edit.svg"
+                                        alt="Edit"
+                                    >
+                                </a>
+                                <a
+                                    href="javascript:;"
+                                    data-tooltip="Remove"
+                                    class="remove"
+                                    (click)="remove(item)"
+                                    *ngIf="item.productsAmount === 0"
+                                >
+                                    <div class="icon__remove qt-sz-16 qt-bg-contain"></div>
+                                </a>
+                                <app-dynamic-tooltip
+                                    [content]="'You cannot delete category with existing products'"
+                                    [position]="'top'"
+                                    #deleteTooltip
+                                ></app-dynamic-tooltip>
+                                <a
+                                    href="javascript:;"
+                                    (mouseenter)="deleteTooltip.show($event.target)"
+                                    (mouseleave)="deleteTooltip.hide()"
+                                    class="remove"
+                                    *ngIf="item.productsAmount > 0"
+                                >
+                                    <div class="icon__remove-disabled qt-sz-16 qt-bg-contain"></div>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- <div class="loading" *ngIf="loading"></div> -->
+    </div>
+</div>
+<!-- tag delete popup -->
+<div
+    class="img-croparea deletePopup"
+    *ngIf="popup"
+>
+    <div class="crop-inner">
+        <div class="cropping">
+            <div class="popup-message">
+                <span class="icon-part">
+                    <img
+                        src="/html/assets/img/device/delete-red.svg"
+                        alt="delete"
+                    >
+                </span>
+                <div class="message-right">
+                    <h1>Remove Income Account Number</h1>
+                    <p>Are you sure you want to delete?</p>
+                </div>
+                <a
+                    class="close-ico"
+                    href="javascript:;"
+                    (click)="popup = false"
+                >
+                    <img
+                        src="/html/assets/img/icons/close.svg"
+                        alt="close"
+                    >
+                </a>
+            </div>
+            <div class="btn-crops">
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="removeGL()"
+                >
+                    Yes, I am sure
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    (click)="popup = false"
+                >
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -465,6 +465,8 @@ import { ModalAddUsersNotifyComponent } from './services/modal/modal-add-users-n
 import { TicketProfileEditFormUpdateComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-edit-form-update/ticket-profile-edit-form-update.component';
 import { TicketProfileEditFormUpdateProductsComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-edit-form-update/ticket-profile-edit-form-update-products/ticket-profile-edit-form-update-products.component';
 import { TicketProfileEditFormUpdateServicesComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-edit-form-update/ticket-profile-edit-form-update-services/ticket-profile-edit-form-update-services.component';
+import { CustomizableListsComponent } from './components/setting/customizable-lists/customizable-lists.component';
+import { ModalEditCategoryProductComponent } from './services/modal/modal-edit-category-product/modal-edit-category-product.component';
 
 
 declare var $: any;
@@ -887,7 +889,9 @@ declare var $: any;
     ModalAddUsersNotifyComponent,
     TicketProfileEditFormUpdateComponent,
     TicketProfileEditFormUpdateProductsComponent,
-    TicketProfileEditFormUpdateServicesComponent
+    TicketProfileEditFormUpdateServicesComponent,
+    CustomizableListsComponent,
+    ModalEditCategoryProductComponent
   ],
   imports: [
     BrowserModule,
@@ -941,7 +945,8 @@ declare var $: any;
     ModalSessionScreenComponent,
     ModalAddUpdateTicketComponent,
     ModalAgentLinkComponent,
-    ModalAddUsersNotifyComponent
+    ModalAddUsersNotifyComponent,
+    ModalEditCategoryProductComponent
     // RecurringTicketsComponent
   ],
   exports: [
