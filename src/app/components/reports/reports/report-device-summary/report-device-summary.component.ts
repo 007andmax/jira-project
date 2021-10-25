@@ -19,7 +19,6 @@ import { DeviceSummaryReportFilter } from "./Class/device-summary-report";
 export class ReportDeviceSummaryComponent implements OnInit {
   tempararyDevice: any = [];
   deviceSummaryList: any = [];
-  tempararyDeviceSummaryList: any = [];
   companies = [];
   deviceSummaryReport: DeviceSummaryReport = new DeviceSummaryReport();
   clientName: string;
@@ -46,9 +45,6 @@ export class ReportDeviceSummaryComponent implements OnInit {
     this.clientName = "All Company";
     this.companiesState.onInit();
     this.setPreviewDataDevice();
-    setTimeout(() => {
-      this.getPdfData();
-    }, 5000);
   }
 
   setPreviewDataDevice() {
@@ -60,28 +56,20 @@ export class ReportDeviceSummaryComponent implements OnInit {
       .subscribe((data) => {
         console.log("data", data);
         this.agentService.setAccessToken(data.AccessToken);
+        this.getAllCompanyList();
         this.companiesStateService.getOnCompanies().subscribe((data) => {
-          if (data.length > 0) {
-            for (let i = 0; i < data.length; i++) {
-              if (data[i].accountType === "CLIENT" && !data[i].deletedAt) {
-                this.getDeviceSummary(data[i].id);
-              }
-            }
-            this.deviceSummaryList = this.tempararyDevice;
-          }
           this.companies = this.getClientsList(data);
         });
       });
   }
 
-  getDeviceSummary(id) {
-    this.agentService.getDeviceSummaryByGuid(id).subscribe((resp) => {
+  getAllCompanyList(){
+    this.deviceSummaryList = [];
+    this.agentService.getDeviceSummaryByGuid("").subscribe((resp) => {
       if (resp.length > 0) {
-        for (let j = 0; j < resp.length; j++) {
-          this.tempararyDevice.push(resp[j]);
-          this.tempararyDeviceSummaryList.push(resp[j]);
-        }
+        this.deviceSummaryList = resp;
       }
+      this.getPdfData();
     });
   }
 
@@ -113,6 +101,7 @@ export class ReportDeviceSummaryComponent implements OnInit {
             this.tempararyDevice = resp.filter(
               (x) => x.Name == this.deviceSummaryReport.deviceName
             );
+            this.deviceSummaryList = [];
             this.deviceSummaryList = this.tempararyDevice;
           } else {
             this.deviceSummaryList = [];
@@ -153,9 +142,8 @@ export class ReportDeviceSummaryComponent implements OnInit {
     } else {
       this.deviceSummaryReport.setCompanyId(null);
       this.getDevicesByCompany(null);
-      this.deviceSummaryList = this.tempararyDeviceSummaryList;
       this.clientName = "All Company";
-      this.getPdfData();
+      this.getAllCompanyList();
     }
   }
 
