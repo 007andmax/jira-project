@@ -15,6 +15,7 @@ import { ConfirmStateService } from '../../shared/confirm/services/confirm-state
   styleUrls: ['./customizable-lists.component.scss']
 })
 export class CustomizableListsComponent implements OnInit, OnDestroy {
+  showAddCategory: boolean = false;
   categoriesProducts: Array<CategoryProduct> = [];
   sub: Subscription = new Subscription();
   constructor(private inventoryStateService: InventoryStateService,

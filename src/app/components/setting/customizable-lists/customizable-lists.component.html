@@ -3,14 +3,18 @@
     <div class="page-insider manage-taxes">
         <div class="heading">
             <h5 class="qt-fw-600">Manage  product categories</h5>
-            <div class="heading-serach">
+            <div class="heading-serach add-category-container">
                 <a
                     href="javascript:;"
                     class="btn-outline"
-                    (click)="openModel(true, 0, {})"
+                    (click)="showAddCategory = true"
                 >
                     Create
                 </a>
+                <inventory-add-category
+                    *ngIf="showAddCategory"
+                    (onClose)="showAddCategory = false"
+                ></inventory-add-category>
             </div>
         </div>
         <div class="cmn-area">
@@ -79,53 +83,5 @@
             </div>
         </div>
         <!-- <div class="loading" *ngIf="loading"></div> -->
-    </div>
-</div>
-<!-- tag delete popup -->
-<div
-    class="img-croparea deletePopup"
-    *ngIf="popup"
->
-    <div class="crop-inner">
-        <div class="cropping">
-            <div class="popup-message">
-                <span class="icon-part">
-                    <img
-                        src="/html/assets/img/device/delete-red.svg"
-                        alt="delete"
-                    >
-                </span>
-                <div class="message-right">
-                    <h1>Remove Income Account Number</h1>
-                    <p>Are you sure you want to delete?</p>
-                </div>
-                <a
-                    class="close-ico"
-                    href="javascript:;"
-                    (click)="popup = false"
-                >
-                    <img
-                        src="/html/assets/img/icons/close.svg"
-                        alt="close"
-                    >
-                </a>
-            </div>
-            <div class="btn-crops">
-                <button
-                    type="button"
-                    class="btn btn-primary"
-                    (click)="removeGL()"
-                >
-                    Yes, I am sure
-                </button>
-                <button
-                    type="button"
-                    class="btn btn-secondary"
-                    (click)="popup = false"
-                >
-                    Cancel
-                </button>
-            </div>
-        </div>
     </div>
 </div>
