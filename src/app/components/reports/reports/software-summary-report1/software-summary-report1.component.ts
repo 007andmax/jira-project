@@ -176,7 +176,6 @@ export class SoftwareSummaryReport1Component implements OnInit {
           } else {
             this.softwareReportList = this.tempReport;
           }
-          this.getPdfData();
         }
       });
   }
@@ -225,7 +224,6 @@ export class SoftwareSummaryReport1Component implements OnInit {
 
   onFilter(field) {
     this.filter.onFilter(field, this.softwareReportList);
-    this.getPdfData();
   }
 
   getPdfData() {
@@ -400,7 +398,7 @@ export class SoftwareSummaryReport1Component implements OnInit {
       .subscribe(
         (data) => {
           this.loading = false;
-          this.pdfUrl = data.url;
+          window.open(data.url, "_blank");
         },
         (error) => {
           this.loading = false;
@@ -415,7 +413,7 @@ export class SoftwareSummaryReport1Component implements OnInit {
   }
 
   printPdf() {
-    window.open(this.pdfUrl, "_blank");
+    this.getPdfData();
   }
 
   downloadCsv() {

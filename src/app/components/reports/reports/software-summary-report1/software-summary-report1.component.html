@@ -1,6 +1,6 @@
 <div>
     <div class="report-menu">
-        <div class="run-report-content clearfix">
+        <div class="run-report-content col-md-11 left">
             <div class="grey-dropdown form-group content select-users-list">
                 <app-drop-down
                     [placeholder]="'Select Company'"
@@ -67,6 +67,8 @@
                 summarydownload
               "></i>
             </button>
+        </div>
+        <div class="run-report-content col-md-1 right">
             <div
                 class="header-close icon__close"
                 (click)="goToReportList()"
@@ -134,3 +136,7 @@
         </div>
     </div>
 </div>
+<div
+    class="loading"
+    *ngIf="loading"
+></div>

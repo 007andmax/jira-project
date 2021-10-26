@@ -113,6 +113,9 @@ export class ReportDeviceSummaryComponent implements OnInit {
           } else {
             this.deviceSummaryList = [];
             this.deviceSummaryList = resp;
+            this.devices = resp
+            .map((item) => item.Name)
+            .filter((value, index, self) => self.indexOf(value) === index);
           }
         } else {
           this.deviceSummaryList = [];
@@ -120,18 +123,8 @@ export class ReportDeviceSummaryComponent implements OnInit {
       });
   }
 
-  public getDevicesByCompany(companyId) {
-    this.agentService.getAssetsByCompanyId(companyId).subscribe((resp) => {
-      if (resp.length > 0) {
-        this.devices = resp;
-      } else {
-        this.devices = [];
-      }
-    });
-  }
-
   onSelectDevice(data) {
-    this.deviceSummaryReport.setDeviceName(data ? data.Name : null);
+    this.deviceSummaryReport.setDeviceName(data ? data : null);
     if (data) {
       this.getReportByDeviceSummary();
     } else {
@@ -143,11 +136,10 @@ export class ReportDeviceSummaryComponent implements OnInit {
     if (selectClient) {
       this.clientName = selectClient.name;
       this.deviceSummaryReport.setCompanyId(selectClient.id);
-      this.getDevicesByCompany(selectClient.id);
       this.getReportByDeviceSummary();
     } else {
       this.deviceSummaryReport.setCompanyId(null);
-      this.getDevicesByCompany(null);
+      this.devices = [];
       this.clientName = "All Companies";
       this.getAllCompanyList();
     }
