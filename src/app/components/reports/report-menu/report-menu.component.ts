@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, ViewChild, OnDestroy } from '@angular/core';
 import * as moment from "moment";
 import { Validate } from '../class/validate';
 import { GlNumber } from '../class/gl-number';
@@ -31,6 +31,7 @@ import { RemoteConnectionReport } from '../class/remote-connection-report';
 import { TechSalesReport } from '../class/tech-sales-report';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 import { TechTicketReport } from '../class/tech-ticket-report';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -38,7 +39,7 @@ import { TechTicketReport } from '../class/tech-ticket-report';
   templateUrl: './report-menu.component.html',
   styleUrls: ['./report-menu.component.scss']
 })
-export class ReportMenuComponent implements OnInit {
+export class ReportMenuComponent implements OnInit, OnDestroy {
 
   selectedClient = null;
   className = '';
@@ -69,6 +70,7 @@ export class ReportMenuComponent implements OnInit {
   allDevices = [];
   devices = [];
   companies = [];
+  sub: Subscription = new Subscription();
   @Input() report = "";
   @Output() getReport = new EventEmitter<any>();
   @Output() onRequest = new EventEmitter<any>();
@@ -85,6 +87,7 @@ export class ReportMenuComponent implements OnInit {
     private companiesStateService: CompaniesStateService,
     private ticketReportStateService: TicketReportStateService) { }
 
+
   ngOnInit() {
     if (this.report === 'accounts-receivable') this.getReportByAccountsReceivable();
     if (this.report === 'byProducts' || this.report === 'company-roducts-report') {
@@ -94,8 +97,11 @@ export class ReportMenuComponent implements OnInit {
     if (this.devicesStateService.getAllDevices()) this.allDevices = this.devicesStateService.getAllDevices();
     let getOnDevices = this.devicesStateService.getOnDevices().subscribe((data) => {
       this.allDevices = data;
+      if (this.softwareSummaryReport.companyId) this.getDevicesByCompany(this.softwareSummaryReport.companyId);
+      if (this.hardwareSummaryReport.companyId) this.getDevicesByCompany(this.hardwareSummaryReport.companyId);
+      if (this.deviceIpSummary.companyId) this.getDevicesByCompany(this.deviceIpSummary.companyId);
     })
-    //  this.sub.add(getOnDevices);
+    this.sub.add(getOnDevices);
     if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.getClientsList(data);
@@ -563,5 +569,8 @@ export class ReportMenuComponent implements OnInit {
 
   public onChangeTehUsers(tehusers) {
 
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

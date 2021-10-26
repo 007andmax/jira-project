@@ -54,6 +54,7 @@ export class ModalLockScreenComponent implements OnInit {
         if (this.reload) window.location.reload();
         this.close();
       }, resp => {
+        console.log("resp", resp);
         if (resp.status === 409) this.validate.setWrongCode(false);
         this.lockScreen.setUnlocking(false);
       })
