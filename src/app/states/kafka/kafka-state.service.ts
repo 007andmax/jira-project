@@ -12,6 +12,8 @@ export class KafkaStateService {
   onTerminalCommand: EventEmitter<any> = new EventEmitter();
   onUninstallAgent: EventEmitter<any> = new EventEmitter();
   onUpdateAgent: EventEmitter<any> = new EventEmitter();
+  onUninstallRemoteAgent: EventEmitter<any> = new EventEmitter();
+  onInstallRemoteAgent: EventEmitter<any> = new EventEmitter();
 
   constructor(private kafkaRealTimeService: KafkaRealTimeService) { }
 
@@ -36,10 +38,16 @@ export class KafkaStateService {
           break;
         case "UninstallAgent":
           this.handleUninstallAgentCommand(newChange);
-          break;      
+          break;
         case "UpdateAgent":
           this.handleUpdateAgentCommand(newChange);
-          break;          
+          break;
+        case "InstallRemoteAgent":
+          this.handleInstallRemoteAgent(newChange);
+          break;
+        case "UninstallRemoteAgent":
+          this.handleUninstallRemoteAgent(newChange);
+          break;
       }
     });
   }
@@ -126,5 +134,37 @@ export class KafkaStateService {
       Value: newChange.data.Value,
     });
     this.onUpdateAgent.emit(this.assetConfigMessage);
+  }
+
+  private handleInstallRemoteAgent(newChange: any) {
+    if (this.assetConfigMessage.length > 0) {
+      let index = this.assetConfigMessage.findIndex(
+        (x) => (x.key = newChange.data.AssetID)
+      );
+      if (index != -1) {
+        this.assetConfigMessage.splice(index, 1);
+      }
+    }
+    this.assetConfigMessage.push({
+      key: newChange.data.AssetID,
+      Value: newChange.data.Value,
+    });
+    this.onInstallRemoteAgent.emit(this.assetConfigMessage);
+  }
+
+  private handleUninstallRemoteAgent(newChange: any) {
+    if (this.assetConfigMessage.length > 0) {
+      let index = this.assetConfigMessage.findIndex(
+        (x) => (x.key = newChange.data.AssetID)
+      );
+      if (index != -1) {
+        this.assetConfigMessage.splice(index, 1);
+      }
+    }
+    this.assetConfigMessage.push({
+      key: newChange.data.AssetID,
+      Value: newChange.data.Value,
+    });
+    this.onUninstallRemoteAgent.emit(this.assetConfigMessage);
   }
 }
