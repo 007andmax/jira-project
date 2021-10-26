@@ -63,7 +63,6 @@ export class ReportDeviceSummaryComponent implements OnInit {
         "s8Y1IuPCUUYlSLMbFijHvut5uOi/KnKNqOLtn57CBlw="
       )
       .subscribe((data) => {
-        console.log("data", data);
         this.agentService.setAccessToken(data.AccessToken);
         this.getAllCompanyList();
         this.companiesStateService.getOnCompanies().subscribe((data) => {
@@ -78,7 +77,6 @@ export class ReportDeviceSummaryComponent implements OnInit {
       if (resp.length > 0) {
         this.deviceSummaryList = resp;
       }
-      this.getPdfData();
     });
   }
 
@@ -95,7 +93,7 @@ export class ReportDeviceSummaryComponent implements OnInit {
   }
 
   printPdf() {
-    window.open(this.pdfUrl, "_blank");
+    this.getPdfData();
   }
 
   getReportByDeviceSummary() {
@@ -119,7 +117,6 @@ export class ReportDeviceSummaryComponent implements OnInit {
         } else {
           this.deviceSummaryList = [];
         }
-        this.getPdfData();
       });
   }
 
@@ -158,7 +155,6 @@ export class ReportDeviceSummaryComponent implements OnInit {
 
   onFilter(field) {
     this.filter.onFilter(field, this.deviceSummaryList);
-    this.getPdfData();
   }
 
   getPdfData() {
@@ -333,7 +329,7 @@ export class ReportDeviceSummaryComponent implements OnInit {
       .subscribe(
         (data) => {
           this.loading = false;
-          this.pdfUrl = data.url;
+          window.open(data.url, "_blank");
         },
         (error) => {
           this.loading = false;

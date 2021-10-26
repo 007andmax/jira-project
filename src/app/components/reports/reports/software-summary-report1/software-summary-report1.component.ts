@@ -86,7 +86,6 @@ export class SoftwareSummaryReport1Component implements OnInit {
     this.agentService
       .getCompanyApplicationByGuid(this.softwareSummaryReport.companyId)
       .subscribe((resp) => {
-        debugger;
         this.tempReport = [];
         if (resp.length > 0) {
           for (let i = 0; i < resp.length; i++) {
