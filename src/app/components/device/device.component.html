@@ -30,8 +30,14 @@
                 </div>
             </div>
             <div class="header-right">
-                <a href="javascript:;" class="head-btn" (click)="openModal(template)">
+                <a *ngIf="asset && asset.CanRemoteControl" href="javascript:;" class="head-btn" (click)="openModal(template)">
                     Remote Control
+                </a>
+                <a *ngIf="asset && !asset.CanRemoteControl" href="javascript:;" class="head-btn" (click)="sendCommand('ira',asset.ID)">
+                    Install Remote Control Agent
+                </a>
+                <a *ngIf="asset && asset.CanRemoteControl" href="javascript:;" class="head-btn" (click)="sendCommand('ura',asset.ID)">
+                    <img src="/html/assets/img/device/remove-terminal.svg" alt="uninstall remote aget">
                 </a>
                 <!-- <a href="javascript:;" class="head-btn-info btn-print" (click)="lock();"><img src="/html/assets/img/device/print-sheet.svg" alt="Print" /></a> -->
                 <!-- <a
@@ -68,7 +74,7 @@
             <div class="sub-head-counter">
                 <img src="/html/assets/img/device/counter.svg" alt="Print">
                 <span id="counter">
-                    {{padNumber(this.totalHours)}} hr : {{padNumber(this.totalMinutes)}} min : {{padNumber(this.totalSeconds)}} sec
+                    {{padNumber(totalHours)}} hr : {{padNumber(totalMinutes)}} min : {{padNumber(totalSeconds)}} sec
                 </span>
             </div>
         </div>

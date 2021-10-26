@@ -99,6 +99,8 @@ export class DeviceComponent implements OnInit, OnDestroy {
     this.onAck();
     this.onUninstallAgent();
     this.onUpdateAgent();
+    this.onInstallRemoteAgentCommand();
+    this.onUninstallRemoteAgentCommand();
 
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
@@ -389,7 +391,18 @@ export class DeviceComponent implements OnInit, OnDestroy {
       data.MessageType = "UpdateAgent";
       this.agentService.SendPowerShellCommand(data);
     }
-
+    else if(command === 'ira') {
+      this.currentCommand = 'Install Remote Agent';
+      data.AssetID = assetId;
+      data.MessageType = "InstallRemoteAgent";
+      this.agentService.SendPowerShellCommand(data);
+    }
+    else if(command === 'ura') {
+      this.currentCommand = 'Uninstall Remote Agent';
+      data.AssetID = assetId;
+      data.MessageType = "UninstallRemoteAgent";
+      this.agentService.SendPowerShellCommand(data);
+    }
   }
 
   Reboot(asset_ID, command) {
@@ -431,6 +444,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
       this.toastr.error("The device is offline!");
     }
   }
+
   private getDismiss(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return "by pressing ESC";
@@ -460,7 +474,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
           this.kafkaMessage = item.Value;
           this.powershellmsg = this.kafkaMessage;
           this.ngZone.run(() => {
-            this.toastr.success(`${this.powershellmsg}`);
+            this.toastr.success(`${this.powershellmsg}`);            
           });
         });
       }
@@ -476,6 +490,36 @@ export class DeviceComponent implements OnInit, OnDestroy {
         this.powershellmsg = this.kafkaMessage;
         this.ngZone.run(() => {
           this.toastr.success(`${this.powershellmsg}`);
+        });
+      }
+    });
+  }
+
+  onInstallRemoteAgentCommand() {
+    this.kafkaStateService.onInstallRemoteAgent.subscribe((resp) => {
+      console.log("onInstallRemoteAgent");
+      let item = resp.find((x) => x.key == this.asset.ID);
+      if (item) {
+        this.kafkaMessage = item.Value;
+        this.powershellmsg = this.kafkaMessage;
+        this.ngZone.run(() => {
+          this.toastr.success(`${this.powershellmsg}`);
+          this.setPreviewDataDevice();
+        });
+      }
+    });
+  }
+
+  onUninstallRemoteAgentCommand() {
+    this.kafkaStateService.onUninstallRemoteAgent.subscribe((resp) => {
+      console.log("onUninstallRemoteAgent");
+      let item = resp.find((x) => x.key == this.asset.ID);
+      if (item) {
+        this.kafkaMessage = item.Value;
+        this.powershellmsg = this.kafkaMessage;
+        this.ngZone.run(() => {
+          this.toastr.success(`${this.powershellmsg}`);
+          this.setPreviewDataDevice();
         });
       }
     });
