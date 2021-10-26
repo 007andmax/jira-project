@@ -11,6 +11,7 @@ import { QuoteStateService } from '../../states/quote/quote-state.service';
 export class ReportsComponent implements OnInit {
   listSalesTitles: Array<string> = [];
   listSalesStates: Array<string> = [];
+  title: string = 'Reports';
   constructor(private leftPanelStateService: LeftPanelStateService,
     private quoteStateService: QuoteStateService,
     private permissionsService: PermissionsService,) { }
@@ -46,5 +47,9 @@ export class ReportsComponent implements OnInit {
     if (type === 'PERFORMANCE') return ['tech-sales', 'tech-ticket', 'tech-service'];
     if (type === 'TICKETS') return ['ticket-report', 'service-report'];
     if (type === 'INCOME_ACCOUNTS') return ['income-accounts'];
+  }
+
+  search(){
+
   }
 }
