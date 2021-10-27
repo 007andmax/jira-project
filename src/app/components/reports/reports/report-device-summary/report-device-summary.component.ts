@@ -19,6 +19,7 @@ import { DeviceSummaryReportFilter } from "./Class/device-summary-report";
   styleUrls: ["./report-device-summary.component.scss"],
 })
 export class ReportDeviceSummaryComponent implements OnInit {
+  tempararyDeviceList: any = [];
   tempararyDevice: any = [];
   deviceSummaryList: any = [];
   companies = [];
@@ -37,7 +38,7 @@ export class ReportDeviceSummaryComponent implements OnInit {
   report: string = "";
   template: string = "PDF_TEMPLATE";
   fileName: string = "";
-  accountType = 'CLIENT';
+  accountType = "CLIENT";
 
   constructor(
     private agentService: AgentService,
@@ -101,6 +102,8 @@ export class ReportDeviceSummaryComponent implements OnInit {
       .getDeviceSummaryByGuid(this.deviceSummaryReport.companyId)
       .subscribe((resp) => {
         if (resp.length > 0) {
+          this.tempararyDeviceList = [];
+          this.tempararyDeviceList = resp;
           if (
             this.deviceSummaryReport.companyId &&
             this.deviceSummaryReport.deviceName
@@ -114,11 +117,12 @@ export class ReportDeviceSummaryComponent implements OnInit {
             this.deviceSummaryList = [];
             this.deviceSummaryList = resp;
             this.devices = resp
-            .map((item) => item.Name)
-            .filter((value, index, self) => self.indexOf(value) === index);
+              .map((item) => item.Name)
+              .filter((value, index, self) => self.indexOf(value) === index);
           }
         } else {
           this.deviceSummaryList = [];
+          this.devices = [];
         }
       });
   }
@@ -126,9 +130,19 @@ export class ReportDeviceSummaryComponent implements OnInit {
   onSelectDevice(data) {
     this.deviceSummaryReport.setDeviceName(data ? data : null);
     if (data) {
-      this.getReportByDeviceSummary();
+      if (
+        this.deviceSummaryReport.companyId &&
+        this.deviceSummaryReport.deviceName
+      ) {
+        this.deviceSummaryList = this.tempararyDeviceList.filter(
+          (x) => x.Name == data
+        );
+      }
     } else {
-      this.getReportByDeviceSummary();
+      this.deviceSummaryList = this.tempararyDeviceList;
+      this.devices = this.tempararyDeviceList
+        .map((item) => item.Name)
+        .filter((value, index, self) => self.indexOf(value) === index);
     }
   }
 
@@ -365,6 +379,5 @@ export class ReportDeviceSummaryComponent implements OnInit {
     modalRef.componentInstance.template = this.template;
     modalRef.componentInstance.fileName = this.fileName;
     modalRef.componentInstance.accountType = this.accountType;
-
   }
 }
