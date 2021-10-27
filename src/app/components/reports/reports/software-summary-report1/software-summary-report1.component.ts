@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
 import { CONFIGCONSTANTS } from "src/app/components/device/config/app-constants";
@@ -9,6 +10,7 @@ import { CompaniesStateService } from "src/app/states/company/companies-state.se
 import { LeftPanelStateService } from "src/app/states/left-panel/left-panel-state.service";
 import { ReportValidate1 } from "../../class/report-validate1";
 import { SoftwareSummaryReport1 } from "../../class/software-summary-report1";
+import { ReportSendEmailComponent } from "../../report-additional-actions/report-send-email/report-send-email.component";
 import { SoftwareSummaryReportFilter } from "./Class/software-summary-report1-filter";
 
 @Component({
@@ -22,7 +24,6 @@ export class SoftwareSummaryReport1Component implements OnInit {
   softwareReportList: any = [];
   tempReport: any = [];
   tempDevice: any = [];
-  report: any;
   companies = [];
   devices = [];
   software = [];
@@ -37,6 +38,12 @@ export class SoftwareSummaryReport1Component implements OnInit {
   DateFormat = CONFIGCONSTANTS.DateFormat1;
   pdfUrl = "";
   loading = false;
+  selectedClient = null;
+  orientation: string = "LANDSCAPE";
+  template: string = "PDF_TEMPLATE";
+  fileName: string = "software-summary-report";
+  accountType = "CLIENT";
+  report: string = "software-summary";
   constructor(
     private agentService: AgentService,
     private companiesStateService: CompaniesStateService,
@@ -44,7 +51,8 @@ export class SoftwareSummaryReport1Component implements OnInit {
     private toastr: ToastrService,
     private excelService: ExcelService,
     private companiesState: CompaniesStateService,
-    public leftPanelStateService: LeftPanelStateService
+    public leftPanelStateService: LeftPanelStateService,
+    private modalService: NgbModal,
   ) {}
 
   ngOnInit() {
@@ -286,6 +294,16 @@ export class SoftwareSummaryReport1Component implements OnInit {
 
   onFilter(field) {
     this.filter.onFilter(field, this.softwareReportList);
+  }
+
+  sendEmail(){
+    const modalRef = this.modalService.open(ReportSendEmailComponent, null);
+    modalRef.componentInstance.selectedClient = this.selectedClient;
+    modalRef.componentInstance.orientation = this.orientation;
+    modalRef.componentInstance.report = this.report;
+    modalRef.componentInstance.template = this.template;
+    modalRef.componentInstance.fileName = this.fileName;
+    modalRef.componentInstance.accountType = this.accountType;
   }
 
   getPdfData() {
