@@ -17,6 +17,8 @@ import { SoftwareSummaryReportFilter } from "./Class/software-summary-report1-fi
   styleUrls: ["./software-summary-report1.component.scss"],
 })
 export class SoftwareSummaryReport1Component implements OnInit {
+  tempararyDeviceList: any = [];
+  tempararySoftwareList: any = [];
   softwareReportList: any = [];
   tempReport: any = [];
   tempDevice: any = [];
@@ -87,6 +89,7 @@ export class SoftwareSummaryReport1Component implements OnInit {
       .getCompanyApplicationByGuid(this.softwareSummaryReport.companyId)
       .subscribe((resp) => {
         this.tempReport = [];
+        this.software = [];
         if (resp.length > 0) {
           for (let i = 0; i < resp.length; i++) {
             if (resp[i].DisplayName != "") {
@@ -128,54 +131,15 @@ export class SoftwareSummaryReport1Component implements OnInit {
               this.tempReport.push(data);
             }
           }
+          this.devices = this.tempReport
+          .map((item) => item.AssetNames)
+          .filter((value, index, self) => self.indexOf(value) === index);
 
-          if (
-            this.softwareSummaryReport.deviceName &&
-            this.softwareSummaryReport.softwareSummarySoft
-          ) {
-            let filter = this.tempReport.filter(
-              ((x) => x.AssetNames == this.softwareSummaryReport.deviceName) &&
-                ((x) =>
-                  x.DisplayName ==
-                  this.softwareSummaryReport.softwareSummarySoft)
-            );
-            if (filter.length > 0) {
-              this.softwareReportList = [];
-              this.softwareReportList = this.tempReport.filter(
-                ((x) =>
-                  x.AssetNames == this.softwareSummaryReport.deviceName) &&
-                  ((x) =>
-                    x.DisplayName ==
-                    this.softwareSummaryReport.softwareSummarySoft)
-              );
-            } else {
-              this.softwareReportList = [];
-              this.softwareReportList = this.tempReport.filter(
-                ((x) =>
-                  x.AssetNames == this.softwareSummaryReport.deviceName) &&
-                  ((x) =>
-                    x.Publisher ==
-                    this.softwareSummaryReport.softwareSummarySoft)
-              );
-            }
-          } else if (
-            this.softwareSummaryReport.deviceName &&
-            !this.softwareSummaryReport.softwareSummarySoft
-          ) {
-            this.softwareReportList = this.tempReport.filter(
-              (x) => x.AssetNames == this.softwareSummaryReport.deviceName
-            );
-          } else if (
-            this.softwareSummaryReport.softwareSummarySoft &&
-            !this.softwareSummaryReport.deviceName
-          ) {
-            this.softwareReportList = this.tempReport.filter(
-              (x) =>
-                x.DisplayName == this.softwareSummaryReport.softwareSummarySoft
-            );
-          } else {
-            this.softwareReportList = this.tempReport;
-          }
+          this.softwareReportList = this.tempReport;
+        }
+        else
+        {
+          this.softwareReportList = [];
         }
       });
   }
@@ -183,41 +147,139 @@ export class SoftwareSummaryReport1Component implements OnInit {
   onSelectSoftware(data) {
     this.softwareSummaryReport.setSoftwareSoft(data);
     if (data) {
-      this.getReportBySoftwareSummary();
-    } else {
-      this.getReportBySoftwareSummary();
+      if (
+        this.softwareSummaryReport.deviceName &&
+        this.softwareSummaryReport.softwareSummarySoft
+      ) {
+        let filter = this.tempararySoftwareList.filter(
+          ((x) => x.AssetNames == this.softwareSummaryReport.deviceName) &&
+            ((x) =>
+              x.DisplayName ==
+              this.softwareSummaryReport.softwareSummarySoft)
+        );
+        if (filter.length > 0) {
+          this.softwareReportList = [];
+          this.softwareReportList = this.tempararySoftwareList.filter(
+            ((x) =>
+              x.AssetNames == this.softwareSummaryReport.deviceName) &&
+              ((x) =>
+                x.DisplayName ==
+                this.softwareSummaryReport.softwareSummarySoft)
+          );
+        } else {
+          this.softwareReportList = [];
+          this.softwareReportList = this.tempararySoftwareList.filter(
+            ((x) =>
+              x.AssetNames == this.softwareSummaryReport.deviceName) &&
+              ((x) =>
+                x.Publisher ==
+                this.softwareSummaryReport.softwareSummarySoft)
+          );
+        }
+      }
+      if (
+        this.softwareSummaryReport.softwareSummarySoft &&
+        !this.softwareSummaryReport.deviceName
+      ) {
+        let filter = this.tempReport.filter(
+          ((x) => x.AssetNames == this.softwareSummaryReport.deviceName) &&
+            ((x) =>
+              x.DisplayName ==
+              this.softwareSummaryReport.softwareSummarySoft)
+        );
+        if (filter.length > 0) {
+          this.softwareReportList = [];
+          this.softwareReportList = this.tempReport.filter(
+            ((x) =>
+              x.AssetNames == this.softwareSummaryReport.deviceName) &&
+              ((x) =>
+                x.DisplayName ==
+                this.softwareSummaryReport.softwareSummarySoft)
+          );
+        } else {
+          this.softwareReportList = [];
+          this.softwareReportList = this.tempReport.filter(
+            ((x) =>
+              x.AssetNames == this.softwareSummaryReport.deviceName) &&
+              ((x) =>
+                x.Publisher ==
+                this.softwareSummaryReport.softwareSummarySoft)
+          );
+        }
+      }
+    }  else {
+      if(!this.softwareSummaryReport.deviceName)
+      {
+        this.softwareReportList = this.tempReport;
+      }
+      else
+      {
+        this.softwareReportList = this.tempararySoftwareList;
+      }
+      this.software = this.tempSoftware
+              .map((item) => item.DisplayName)
+              .filter((value, index, self) => self.indexOf(value) === index);
     }
   }
 
   onSelectDevice(data) {
-    this.softwareSummaryReport.setDeviceName(data ? data.Description : null);
+    this.softwareSummaryReport.setDeviceName(data ? data: null);
     if (data) {
-      this.getReportBySoftwareSummary();
-    } else {
-      this.getReportBySoftwareSummary();
-    }
-  }
-
-  public getDevicesByCompany(companyId) {
-    this.agentService.getAssetsByCompanyId(companyId).subscribe((resp) => {
-      if (resp.length > 0) {
-        this.devices = resp.filter((x) => x.Description != "");
-      } else {
-        this.devices = [];
+      if (
+        this.softwareSummaryReport.deviceName &&
+        this.softwareSummaryReport.softwareSummarySoft
+      ) {
+        let filter = this.tempReport.filter(
+          ((x) => x.AssetNames == this.softwareSummaryReport.deviceName) &&
+            ((x) =>
+              x.DisplayName ==
+              this.softwareSummaryReport.softwareSummarySoft)
+        );
+        if (filter.length > 0) {
+          this.softwareReportList = [];
+          this.softwareReportList = this.tempReport.filter(
+            ((x) =>
+              x.AssetNames == this.softwareSummaryReport.deviceName) &&
+              ((x) =>
+                x.DisplayName ==
+                this.softwareSummaryReport.softwareSummarySoft)
+          );
+        } else {
+          this.softwareReportList = [];
+          this.softwareReportList = this.tempReport.filter(
+            ((x) =>
+              x.AssetNames == this.softwareSummaryReport.deviceName) &&
+              ((x) =>
+                x.Publisher ==
+                this.softwareSummaryReport.softwareSummarySoft)
+          );
+        }
+      } if (
+        this.softwareSummaryReport.deviceName &&
+        !this.softwareSummaryReport.softwareSummarySoft
+      ) {
+        this.softwareReportList = this.tempReport.filter(
+          (x) => x.AssetNames == this.softwareSummaryReport.deviceName
+        );
+        this.tempararySoftwareList = this.softwareReportList;
       }
-    });
+    } else {
+      this.softwareReportList = this.tempReport;
+      this.devices = this.tempReport
+      .map((item) => item.AssetNames)
+      .filter((value, index, self) => self.indexOf(value) === index);
+
+    }
   }
 
   selectClient(selectClient) {
     if (selectClient) {
       this.clientName = selectClient.name;
       this.softwareSummaryReport.setCompanyId(selectClient.id);
-      this.getDevicesByCompany(selectClient.id);
       this.validate.resetCompany();
       this.getReportBySoftwareSummary();
     } else {
       this.softwareSummaryReport.setCompanyId(null);
-      this.getDevicesByCompany(null);
       this.softwareReportList = [];
     }
   }
