@@ -55,6 +55,9 @@ export class TicketsService {
     let data = { id: id, subject: subject, note: note, companyId: companyId };
     return this.http.put(this.apiUrl + `v2/tickets/edit`, data);
   }
+  public removeTicketStatus(ticket_id) {
+    return this.http.delete(this.apiUrl + `ticket/status/${ticket_id}`);
+  }
   public restoreFromSpam(id, value) {
     let data = { value: value };
     return this.http.put(this.apiUrl + `v2/tickets/${id}/restoreFromSpam`, data);
@@ -132,6 +135,18 @@ export class TicketsService {
   public changeStatus(id, value) {
     let data = { value: value };
     return this.http.put(this.apiUrl + `v2/tickets/${id}/status`, data);
+  }
+  public addStatus(name, color) {
+
+    return this.http.post(this.apiUrl + `ticket/status`, { name: name, color: color });
+  }
+  public editStatus(data) {
+
+    return this.http.put(this.apiUrl + `ticket/status`, data);
+  }
+  public getTicketStatus() {
+
+    return this.http.get(this.apiUrl + `ticket/status`);
   }
   public reportAsSpamTicket(id, value) {
     let data = { value: value };

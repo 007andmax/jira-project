@@ -467,6 +467,8 @@ import { TicketProfileEditFormUpdateProductsComponent } from './components/ticke
 import { TicketProfileEditFormUpdateServicesComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-edit-form-update/ticket-profile-edit-form-update-services/ticket-profile-edit-form-update-services.component';
 import { CustomizableListsComponent } from './components/setting/customizable-lists/customizable-lists.component';
 import { ModalEditCategoryProductComponent } from './services/modal/modal-edit-category-product/modal-edit-category-product.component';
+import { AddTicketStatusComponent } from './components/setting/customizable-lists/add-ticket-status/add-ticket-status.component';
+import { EditTicketStatusComponent } from './components/setting/customizable-lists/edit-ticket-status/edit-ticket-status.component';
 
 
 declare var $: any;
@@ -891,7 +893,9 @@ declare var $: any;
     TicketProfileEditFormUpdateProductsComponent,
     TicketProfileEditFormUpdateServicesComponent,
     CustomizableListsComponent,
-    ModalEditCategoryProductComponent
+    ModalEditCategoryProductComponent,
+    AddTicketStatusComponent,
+    EditTicketStatusComponent
   ],
   imports: [
     BrowserModule,

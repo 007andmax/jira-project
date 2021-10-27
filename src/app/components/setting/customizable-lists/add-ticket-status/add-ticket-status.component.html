@@ -1,0 +1,80 @@
+<div class="modal-content toggle-area opened">
+    <div class="modal-wrapper">
+        <div class="toggle-header">
+            <h6 class="qt-fw-600 qt-color-dark qt-mb-16">Add Ticket Color</h6>
+        </div>
+        <div class="modal-body">
+            <div class="f-row">
+                <div class="f-col col-100 qt-mb-25">
+                    <label>Name</label>
+                    <div class="form-row">
+                        <input
+                            type="text"
+                            class="form-input"
+                            placeholder="Enter Name Status"
+                            [(ngModel)]="name"
+                            maxlength="20"
+                        >
+                    </div>
+                </div>
+                <div class="f-col col-100 qt-mb-25">
+                    <label>Color</label>
+                    <div
+                        class="form-row"
+                        ngbDropdown
+                        container="body"
+                    >
+                        <div
+                            class="tag-color-item"
+                            id="dropdownBasic1"
+                            ngbDropdownToggle
+                        >
+                            <i
+                                class="tag-color"
+                                [ngStyle]="{'background-color':statusColors[color].borderColor ,
+                            'border-color': statusColors[color].backgroundColor}"
+                            ></i>
+                        </div>
+                        <div
+                            ngbDropdownMenu
+                            aria-labelledby="dropdownBasic1"
+                        >
+                            <div class="status-container">
+                                <div
+                                    class="tag-color-item"
+                                    *ngFor="let tagColor of statusColors; let i = index"
+                                    (click)="setColor(i)"
+                                    ngbDropdownItem
+                                >
+                                    <i
+                                        class="tag-color"
+                                        [ngStyle]="{'background-color':tagColor.borderColor ,
+                            'border-color': tagColor.backgroundColor}"
+                                    ></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-btn-row">
+                    <div class="m-btn-col">
+                        <input
+                            type="submit"
+                            value="Save"
+                            class="btn btn-primary"
+                            (click)="save()"
+                        >
+                        <a
+                            href="javascript:;"
+                            class="btn btn-secondary"
+                            aria-label="Close"
+                            (click)="close()"
+                        >
+                            Cancel
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

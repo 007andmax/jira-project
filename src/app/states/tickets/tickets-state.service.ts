@@ -8,6 +8,7 @@ import { TicketsService } from '../../services/tickets/tickets.service';
 import { TicketsCounts } from '../../components/tickets/tickets/class/tickets-counts';
 import { StatusColor } from 'src/app/components/left-panel/left-panel-tickets/tickets-status/class/status-color';
 import { TicketsColor } from 'src/app/components/left-panel/left-panel-tickets/tickets-status/class/tickets-color';
+import { TicketStatus } from 'src/app/components/setting/customizable-lists/class/ticket-status';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,7 @@ export class TicketsStateService {
   listType: string = "USERS";
   ticketsCounts: TicketsCounts;
   isMoveToTickets: boolean = false;
+  ticketStatusForRemove: TicketStatus = null;
   clearFormUpdate: EventEmitter<any> = new EventEmitter();
   actualNumber: EventEmitter<any> = new EventEmitter();
   addTicket: EventEmitter<any> = new EventEmitter();
@@ -69,6 +71,12 @@ export class TicketsStateService {
     })
 
 
+  }
+  public setTicketStatusForRemove(data) {
+    this.ticketStatusForRemove = data;
+  }
+  public getTicketStatusForRemove() {
+    return this.ticketStatusForRemove;
   }
   public getTicketsColor() {
     return this.ticketsColor;

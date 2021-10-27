@@ -7,7 +7,7 @@
                 <a
                     href="javascript:;"
                     class="btn-outline"
-                    (click)="showAddCategory = true"
+                    (click)="create()"
                 >
                     Create
                 </a>
@@ -15,73 +15,200 @@
                     *ngIf="showAddCategory"
                     (onClose)="showAddCategory = false"
                 ></inventory-add-category>
+                <add-ticket-status
+                    [statusColors]="statusColors"
+                    *ngIf="showAddTicketStatus"
+                    (onClose)="showAddTicketStatus = false"
+                ></add-ticket-status>
             </div>
         </div>
-        <div class="cmn-area">
-            <div class="data-table-wrap">
-                <table
-                    class="display dataTable"
-                    style="width:100%"
-                >
-                    <thead>
-                        <tr>
-                            <th class="tax-name">Categories</th>
-                            <th class="rate">Amount</th>
-                            <th class="action">&nbsp;</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let item of categoriesProducts; let i = index">
-                            <td
-                                class="tax-name"
-                                [textContent]="item.name"
+        <ngb-tabset
+            (tabChange)="setTab($event)"
+            #tabset="ngbTabset"
+            [destroyOnHide]="false"
+        >
+            <ngb-tab
+                title="Product Categories"
+                id="productCategories"
+            >
+                <ng-template ngbTabContent>
+                    <div class="cmn-area">
+                        <div class="data-table-wrap">
+                            <table
+                                class="display dataTable"
+                                style="width:100%"
                             >
-                            </td>
-                            <td
-                                class="rate"
-                                [textContent]="item.productsAmount"
-                            ></td>
-                            <td class="action">
-                                <a
-                                    href="javascript:;"
-                                    data-tooltip="Edit"
-                                    (click)="editCategoryProduct(item)"
-                                    class="edit"
-                                >
-                                    <img
-                                        src="/html/assets/img/icons/edit.svg"
-                                        alt="Edit"
-                                    >
-                                </a>
-                                <a
-                                    href="javascript:;"
-                                    data-tooltip="Remove"
-                                    class="remove"
-                                    (click)="remove(item)"
-                                    *ngIf="item.productsAmount === 0"
-                                >
-                                    <div class="icon__remove qt-sz-16 qt-bg-contain"></div>
-                                </a>
-                                <app-dynamic-tooltip
-                                    [content]="'You cannot delete category with existing products'"
-                                    [position]="'top'"
-                                    #deleteTooltip
-                                ></app-dynamic-tooltip>
-                                <a
-                                    href="javascript:;"
-                                    (mouseenter)="deleteTooltip.show($event.target)"
-                                    (mouseleave)="deleteTooltip.hide()"
-                                    class="remove"
-                                    *ngIf="item.productsAmount > 0"
-                                >
-                                    <div class="icon__remove-disabled qt-sz-16 qt-bg-contain"></div>
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                                <thead>
+                                    <tr>
+                                        <th class="tax-name">Categories</th>
+                                        <th class="rate">Amount</th>
+                                        <th class="action">&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of categoriesProducts; let i = index">
+                                        <td
+                                            class="tax-name"
+                                            [textContent]="item.name"
+                                        >
+                                        </td>
+                                        <td
+                                            class="rate"
+                                            [textContent]="item.productsAmount"
+                                        ></td>
+                                        <td class="action">
+                                            <a
+                                                href="javascript:;"
+                                                data-tooltip="Edit"
+                                                (click)="editCategoryProduct(item)"
+                                                class="edit"
+                                            >
+                                                <img
+                                                    src="/html/assets/img/icons/edit.svg"
+                                                    alt="Edit"
+                                                >
+                                            </a>
+                                            <a
+                                                href="javascript:;"
+                                                data-tooltip="Remove"
+                                                class="remove"
+                                                (click)="removeCategoryProduct(item)"
+                                                *ngIf="item.productsAmount === 0"
+                                            >
+                                                <div class="icon__remove qt-sz-16 qt-bg-contain"></div>
+                                            </a>
+                                            <app-dynamic-tooltip
+                                                [content]="'You cannot delete category with existing products'"
+                                                [position]="'top'"
+                                                #deleteTooltip
+                                            ></app-dynamic-tooltip>
+                                            <a
+                                                href="javascript:;"
+                                                (mouseenter)="deleteTooltip.show($event.target)"
+                                                (mouseleave)="deleteTooltip.hide()"
+                                                class="remove"
+                                                *ngIf="item.productsAmount > 0"
+                                            >
+                                                <div class="icon__remove-disabled qt-sz-16 qt-bg-contain"></div>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </ng-template>
+            </ngb-tab>
+            <!-- Tickets -->
+            <ngb-tab
+                #tickets
+                title="Tickets color"
+                id="ticketStatus"
+            >
+                <ng-template ngbTabContent>
+                    <div class="cmn-area">
+                        <div class="data-table-wrap">
+                            <table
+                                class="display dataTable"
+                                style="width:100%"
+                            >
+                                <thead>
+                                    <tr>
+                                        <th class="tax-name">Status</th>
+                                        <th class="rate">Color</th>
+                                        <th class="action">&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of ticketsStatus; let i = index">
+                                        <td
+                                            class="tax-name"
+                                            [textContent]="item.name"
+                                        >
+                                        </td>
+                                        <td class="rate">
+                                            <i
+                                                class="tag-color"
+                                                [ngStyle]="{'background-color':statusColors[item.color].borderColor ,
+                            'border-color': statusColors[item.color].backgroundColor}"
+                                            ></i>
+                                        </td>
+                                        <td class="action">
+                                            <a
+                                                href="javascript:;"
+                                                data-tooltip="Edit"
+                                                (click)="editTicketsStatus = item"
+                                                class="edit"
+                                            >
+                                                <img
+                                                    src="/html/assets/img/icons/edit.svg"
+                                                    alt="Edit"
+                                                >
+                                            </a>
+                                            <a
+                                                href="javascript:;"
+                                                data-tooltip="Remove"
+                                                class="remove"
+                                                (click)="removeTicketStatus(item)"
+                                                *ngIf="item.custom"
+                                            >
+                                                <div class="icon__remove qt-sz-16 qt-bg-contain"></div>
+                                            </a>
+                                            <edit-ticket-status
+                                                *ngIf="editTicketsStatus && editTicketsStatus.id === item.id"
+                                                [ticketStatus]="item"
+                                                [statusColors]="statusColors"
+                                                (onClose)="resetEditTicketsStatus()"
+                                            ></edit-ticket-status>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </ng-template>
+            </ngb-tab>
+            <!-- Devices -->
+            <ngb-tab
+                title="Devices"
+                id="tab3"
+            >
+                <ng-template ngbTabContent>
+                    <div class="cmn-area"></div>
+                </ng-template>
+            </ngb-tab>
+        </ngb-tabset>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <!-- <div class="loading" *ngIf="loading"></div> -->
     </div>
 </div>
