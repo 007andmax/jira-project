@@ -9,9 +9,9 @@ import { ProductService } from 'src/app/services/product/product.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
-import { StatusColor } from '../../left-panel/left-panel-tickets/tickets-status/class/status-color';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
+import { StatusColor } from '../../tickets/class/status-color';
 import { TicketStatus } from './class/ticket-status';
 
 @Component({

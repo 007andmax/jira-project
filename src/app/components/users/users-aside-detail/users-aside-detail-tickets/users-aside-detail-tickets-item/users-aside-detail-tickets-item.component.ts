@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import * as moment from 'moment';
-import { StatusColor } from 'src/app/components/left-panel/left-panel-tickets/tickets-status/class/status-color';
-import { TicketsColor } from 'src/app/components/left-panel/left-panel-tickets/tickets-status/class/tickets-color';
+import { TicketStatus } from 'src/app/components/setting/customizable-lists/class/ticket-status';
+import { StatusColor } from 'src/app/components/tickets/class/status-color';
 import { Ticket } from 'src/app/components/tickets/class/ticket';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
 
@@ -13,13 +13,10 @@ import { TicketsListService } from 'src/app/components/tickets/tickets/services/
   providers: [TicketsListService]
 })
 export class UsersAsideDetailTicketsItemComponent implements OnInit {
-
   @Input() ticket: Ticket;
-
   @Input() listColors: Array<StatusColor> = [];
-  @Input() statusColor: TicketsColor;
   @Input() selected: boolean = false;
-
+  @Input() ticketsStatus: Array<TicketStatus> = [];
   listColorNoAvatar = ['#0cdeaa', '#16a4fa', '#7c77cb', '#ffb937'];
 
   constructor(public ticketsListService: TicketsListService,) { }
@@ -38,8 +35,9 @@ export class UsersAsideDetailTicketsItemComponent implements OnInit {
     return moment(date).format('DD MMM')
   }
 
-  getStyleStatus(field) {
-    return { 'border-color': (this.statusColor && this.listColors) ? this.listColors[this.statusColor[field]].borderColor : null, 'background-color': (this.statusColor && this.listColors) ? this.listColors[this.statusColor[field]].backgroundColor : null, 'color': (this.statusColor && this.listColors) ? this.listColors[this.statusColor[field]].borderColor : null }
+  getStyleStatus(name) {
+    let find = this.ticketsStatus.find(item => item.name == name);
+    return { 'border-color': (this.listColors) ? this.listColors[find.color].borderColor : null, 'background-color': (this.listColors) ? this.listColors[find.color].backgroundColor : null, 'color': (this.listColors) ? this.listColors[find.color].borderColor : null }
   }
   getClassType() {
     return `priority-icon ${(this.ticket.priorityLevel && this.ticket.priorityLevel !== "MEDIUM") ? '--' + this.ticket.priorityLevel.toLowerCase() : ''}`;

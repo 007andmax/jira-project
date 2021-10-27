@@ -168,7 +168,6 @@ import { TicketsTableItemComponent } from './components/tickets/tickets/tickets-
 import { TicketEditAsideCompanyInfoComponent } from './components/tickets/tickets/ticket-edit-aside-company-info/ticket-edit-aside-company-info.component';
 import { TicketEditAsideDevicesComponent } from './components/tickets/tickets/ticket-edit-aside-devices/ticket-edit-aside-devices.component';
 import { TicketEditAsideUsersComponent } from './components/tickets/tickets/ticket-edit-aside-users/ticket-edit-aside-users.component';
-import { TicketsStatusComponent } from './components/left-panel/left-panel-tickets/tickets-status/tickets-status.component';
 import { UploadAreaProgressComponent } from './components/shared/upload-area/upload-area-progress/upload-area-progress.component';
 import { DndDirective } from './directives/dnd.directive';
 import { AddAssignedUserComponent } from './components/tickets/tickets/ticket-edit-aside/add-assigned-user/add-assigned-user.component';
@@ -620,7 +619,6 @@ declare var $: any;
     TicketEditAsideCompanyInfoComponent,
     TicketEditAsideDevicesComponent,
     TicketEditAsideUsersComponent,
-    TicketsStatusComponent,
     UploadAreaProgressComponent,
     DndDirective,
     AddAssignedUserComponent,

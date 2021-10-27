@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { StatusColor } from 'src/app/components/left-panel/left-panel-tickets/tickets-status/class/status-color';
+import { StatusColor } from 'src/app/components/tickets/class/status-color';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { TicketStatus } from '../class/ticket-status';
 

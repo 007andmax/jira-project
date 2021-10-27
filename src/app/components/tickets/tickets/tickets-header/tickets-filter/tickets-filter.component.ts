@@ -8,14 +8,13 @@ import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
-import { StatusColor } from 'src/app/components/left-panel/left-panel-tickets/tickets-status/class/status-color';
-import { TicketsColor } from 'src/app/components/left-panel/left-panel-tickets/tickets-status/class/tickets-color';
 import { SelectSearchComponent } from 'src/app/components/shared/select-search/select-search.component';
-import { ItemStatus } from 'src/app/components/left-panel/left-panel-tickets/tickets-status/class/item-status';
+import { ItemStatus } from 'src/app/components/tickets/class/item-status';
 import { Subscribable, Subscription } from 'rxjs';
 import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service';
 import { AppService } from 'src/app/states/app/app.service';
 import { TicketsFilterTagsComponent } from './tickets-filter-tags/tickets-filter-tags.component';
+import { StatusColor } from '../../../class/status-color';
 
 @Component({
   selector: 'app-tickets-filter',
@@ -95,11 +94,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       })
       this.ticketsStateService.onColorStatus(listColors);
     })
-    this.leftPanelService.getTicketsStatus().subscribe((data: any) => {
 
-      let ticketsColor = new TicketsColor(data);
-      this.ticketsStateService.onInitStatus(ticketsColor);
-    })
     //    this.getCounts();
 
     let getOnUpdateCounts = this.ticketsStateService.getOnUpdateCounts().subscribe(data => {

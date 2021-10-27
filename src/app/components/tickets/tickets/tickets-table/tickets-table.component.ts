@@ -5,10 +5,9 @@ import { TicketsListService } from '../services/tickets-list.service';
 import { Ticket } from '../../class/ticket';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { Subscription } from 'rxjs';
-import { StatusColor } from '../../../left-panel/left-panel-tickets/tickets-status/class/status-color';
-import { TicketsColor } from '../../../left-panel/left-panel-tickets/tickets-status/class/tickets-color';
 import { TicketStateService } from '../ticket-edit-aside/services/ticket-state.service';
 import { TicketStatus } from 'src/app/components/setting/customizable-lists/class/ticket-status';
+import { StatusColor } from '../../class/status-color';
 
 
 @Component({
@@ -25,7 +24,6 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
   tickets: Array<Ticket> = [];
   sub: Subscription = new Subscription();
   listColors: Array<StatusColor> = [];
-  statusColor: TicketsColor;
   offset: number = 15;
   showPendingPreloader: boolean = false;
   idEditTicket: string = '';
@@ -79,9 +77,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     this.ticketsStateService.getOnInitColor().subscribe(data => {
       this.listColors = data;
     })
-    this.ticketsStateService.getOnInitStatus().subscribe(data => {
-      this.statusColor = data;
-    })
+
     if (localStorage.getItem('billable_ticket_id')) {
       this.editTicket(localStorage.getItem('billable_ticket_id'));
       localStorage.removeItem('billable_ticket_id');

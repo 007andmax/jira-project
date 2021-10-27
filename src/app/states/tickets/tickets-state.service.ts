@@ -6,9 +6,8 @@ import { TicketChangeField } from '../../components/tickets/tickets/class/ticket
 import { WebsocketService } from '../../services/websocket/websocket.service';
 import { TicketsService } from '../../services/tickets/tickets.service';
 import { TicketsCounts } from '../../components/tickets/tickets/class/tickets-counts';
-import { StatusColor } from 'src/app/components/left-panel/left-panel-tickets/tickets-status/class/status-color';
-import { TicketsColor } from 'src/app/components/left-panel/left-panel-tickets/tickets-status/class/tickets-color';
 import { TicketStatus } from 'src/app/components/setting/customizable-lists/class/ticket-status';
+import { StatusColor } from 'src/app/components/tickets/class/status-color';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +28,6 @@ export class TicketsStateService {
   filter: EventEmitter<any> = new EventEmitter();
   updateCounts: EventEmitter<any> = new EventEmitter();
   colorStatus: EventEmitter<any> = new EventEmitter();
-  status: EventEmitter<any> = new EventEmitter();
   count: EventEmitter<number> = new EventEmitter();
   toggleAddTicket: EventEmitter<any> = new EventEmitter();
   typeFilter: EventEmitter<any> = new EventEmitter();
@@ -38,7 +36,6 @@ export class TicketsStateService {
   leftPanelFilter: EventEmitter<any> = new EventEmitter();
   ticketChangedActions = ['ASSIGNED_USER', 'PRIORITY_CHANGED', 'STATUS', 'TRASH', 'REPORT_AS_SPAM', 'RESTORE_FROM_SPAM', 'TICKET_SHARE', 'MARKED_AS_SPAM', 'EDITED_TICKET'];
   listStatusColor: Array<StatusColor> = [];
-  ticketsColor: TicketsColor;
   ticketsStatus: Array<TicketStatus> = [];
   constructor(private ticketsRealTimeService: TicketsRealTimeService,
     private ticketsService: TicketsService) { }
@@ -86,9 +83,7 @@ export class TicketsStateService {
   public getTicketStatusForRemove() {
     return this.ticketStatusForRemove;
   }
-  public getTicketsColor() {
-    return this.ticketsColor;
-  }
+
   public getListStatusColor() {
     return this.listStatusColor;
   }
@@ -158,10 +153,6 @@ export class TicketsStateService {
     this.listStatusColor = data;
     this.colorStatus.emit(data);
   }
-  public onInitStatus(data) {
-    this.ticketsColor = data;
-    this.status.emit(data);
-  }
   public onToggleAddTicket() {
     this.toggleAddTicket.emit(null);
   }
@@ -176,9 +167,6 @@ export class TicketsStateService {
   }
   public getOnInitColor() {
     return this.colorStatus;
-  }
-  public getOnInitStatus() {
-    return this.status;
   }
   public getOnInitCount() {
     return this.count;

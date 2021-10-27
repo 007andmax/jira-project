@@ -4,10 +4,9 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { User } from 'src/app/components/users/class/user';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import * as moment from "moment";
-import { StatusColor } from 'src/app/components/left-panel/left-panel-tickets/tickets-status/class/status-color';
-import { TicketsColor } from 'src/app/components/left-panel/left-panel-tickets/tickets-status/class/tickets-color';
 import { TicketsListService } from '../../services/tickets-list.service';
 import { TicketStatus } from 'src/app/components/setting/customizable-lists/class/ticket-status';
+import { StatusColor } from '../../../class/status-color';
 
 @Component({
   selector: 'app-tickets-table-item',
@@ -23,7 +22,6 @@ export class TicketsTableItemComponent implements OnInit {
     this.requestedUser = this.usersStateService.getAllUsers().find(item => item.id === this.ticket.createdUserId);
   };
   @Input() listColors: Array<StatusColor> = [];
-  @Input() statusColor: TicketsColor;
   @Input() selected: boolean = false;
   @Input() ticketsStatus: Array<TicketStatus> = [];
   assignedUser: User;

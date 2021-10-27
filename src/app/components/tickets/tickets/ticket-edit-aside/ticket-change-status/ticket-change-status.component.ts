@@ -1,7 +1,5 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { TicketProfile } from '../../class/ticket-profile';
-import { StatusColor } from 'src/app/components/left-panel/left-panel-tickets/tickets-status/class/status-color';
-import { TicketsColor } from 'src/app/components/left-panel/left-panel-tickets/tickets-status/class/tickets-color';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { TitleListType } from '../../tickets-header/class/title-list-type';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
@@ -9,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { TicketStatus } from 'src/app/components/setting/customizable-lists/class/ticket-status';
 import { Subscription } from 'rxjs';
+import { StatusColor } from '../../../class/status-color';
 
 @Component({
   selector: 'app-ticket-change-status',
@@ -18,7 +17,6 @@ import { Subscription } from 'rxjs';
 export class TicketChangeStatusComponent implements OnInit, OnDestroy {
   @Input() ticketProfile: TicketProfile = new TicketProfile();
   listColors: Array<StatusColor> = [];
-  statusColor: TicketsColor;
   list: Array<TitleListType> = [new TitleListType('In Progress', 'IN_PROGRESS'),
   new TitleListType('On Hold', 'ON_HOLD')];
   ticketsStatus: Array<TicketStatus> = [];
@@ -32,9 +30,6 @@ export class TicketChangeStatusComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.ticketsStateService.getOnInitColor().subscribe(data => {
       this.listColors = data;
-    })
-    this.ticketsStateService.getOnInitStatus().subscribe(data => {
-      this.statusColor = data;
     })
     this.ticketsStatus = this.ticketsStateService.getTicketsStatus();
     let onGetTicketsStatus = this.ticketsStateService.onGetTicketsStatus.subscribe(data => {
