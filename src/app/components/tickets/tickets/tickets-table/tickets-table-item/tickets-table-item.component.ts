@@ -7,6 +7,7 @@ import * as moment from "moment";
 import { StatusColor } from 'src/app/components/left-panel/left-panel-tickets/tickets-status/class/status-color';
 import { TicketsColor } from 'src/app/components/left-panel/left-panel-tickets/tickets-status/class/tickets-color';
 import { TicketsListService } from '../../services/tickets-list.service';
+import { TicketStatus } from 'src/app/components/setting/customizable-lists/class/ticket-status';
 
 @Component({
   selector: 'app-tickets-table-item',
@@ -24,6 +25,7 @@ export class TicketsTableItemComponent implements OnInit {
   @Input() listColors: Array<StatusColor> = [];
   @Input() statusColor: TicketsColor;
   @Input() selected: boolean = false;
+  @Input() ticketsStatus: Array<TicketStatus> = [];
   assignedUser: User;
   requestedUser: User;
   indexNoAvatar: number = 0;
@@ -64,8 +66,9 @@ export class TicketsTableItemComponent implements OnInit {
     let company = this.companiesStateService.getCompanies().find(item => item.id === this.ticket.companyId);
     return (company) ? company.name : '';
   }
-  getStyleStatus(field) {
-    return { 'border-color': (this.statusColor && this.listColors) ? this.listColors[this.statusColor[field]].borderColor : null, 'background-color': (this.statusColor && this.listColors) ? this.listColors[this.statusColor[field]].backgroundColor : null, 'color': (this.statusColor && this.listColors) ? this.listColors[this.statusColor[field]].borderColor : null }
+  getStyleStatus(name) {
+    let find = this.ticketsStatus.find(item => item.name == name);
+    return { 'border-color': (this.listColors) ? this.listColors[find.color].borderColor : null, 'background-color': (this.listColors) ? this.listColors[find.color].backgroundColor : null, 'color': (this.listColors) ? this.listColors[find.color].borderColor : null }
   }
   getClassType() {
     return `priority-icon ${(this.ticket.priorityLevel && this.ticket.priorityLevel !== "MEDIUM") ? '--' + this.ticket.priorityLevel.toLowerCase() : ''}`;

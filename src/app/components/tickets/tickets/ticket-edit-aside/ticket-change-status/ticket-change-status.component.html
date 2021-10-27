@@ -1,16 +1,54 @@
 <div ngbDropdown>
-<span class="tag__modern" [ngStyle]="getStyleStatus('inProgress')" *ngIf="ticketProfile.status === 'IN_PROGRESS'" ngbDropdownToggle>In Progress</span>
- <span class="tag__modern" [ngStyle]="getStyleStatus('completed')" *ngIf="ticketProfile.status === 'COMPLETED'">Completed</span>
- <span class="tag__modern" [ngStyle]="getStyleStatus('unassigned')" *ngIf="ticketProfile.status === null">Unassigned</span>
- <span class="tag__modern" [ngStyle]="getStyleStatus('onHold')" *ngIf="ticketProfile.status === 'ON_HOLD'" ngbDropdownToggle>On Hold</span>
- <div ngbDropdownMenu
-  aria-labelledby="dropdown1">
-  <div class="dropdown-menu-qt">
-    <ul>
-      <ng-template ngFor let-item [ngForOf]="list" let-i="index">
-        <li ngbDropdownItem class="" [textContent]="item.title"  (click)="changeTicketStatus(item.type,item.title)"></li>
-      </ng-template>
-    </ul>
-  </div>
-</div>
+    <span
+        class="tag__modern"
+        [ngStyle]="getStyleStatus(ticketProfile.status)"
+        *ngIf="ticketProfile.status === 'IN_PROGRESS'"
+        ngbDropdownToggle
+    >
+        {{(!ticketProfile.customStatus) ? 'In Progress' : ticketProfile.customStatus}}
+    </span>
+    <span
+        class="tag__modern"
+        [ngStyle]="getStyleStatus(ticketProfile.status)"
+        *ngIf="ticketProfile.status === 'COMPLETED'"
+    >
+        Completed
+    </span>
+    <span
+        class="tag__modern"
+        [ngStyle]="getStyleStatus(ticketProfile.status)"
+        *ngIf="ticketProfile.status === null"
+    >
+        Unassigned
+    </span>
+    <span
+        class="tag__modern"
+        [ngStyle]="getStyleStatus(ticketProfile.status)"
+        *ngIf="ticketProfile.status === 'ON_HOLD'"
+        ngbDropdownToggle
+    >
+        On Hold
+    </span>
+    <div
+        ngbDropdownMenu
+        aria-labelledby="dropdown1"
+    >
+        <div class="dropdown-menu-qt">
+            <ul>
+                <ng-template
+                    ngFor
+                    let-item
+                    [ngForOf]="ticketsStatus"
+                    let-i="index"
+                >
+                    <li
+                        ngbDropdownItem
+                        class
+                        [textContent]="item.name"
+                        (click)="changeTicketStatus(item)"
+                    ></li>
+                </ng-template>
+            </ul>
+        </div>
+    </div>
 </div>

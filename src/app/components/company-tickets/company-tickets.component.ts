@@ -14,6 +14,7 @@ import { LeftPanelService } from '../../services/left-panel/left-panel.service';
 import { TicketStateService } from '../tickets/tickets/ticket-edit-aside/services/ticket-state.service';
 import { UsersStateService } from '../../states/users/users-state.service';
 import { ActivatedRoute } from '@angular/router';
+import { TicketStatus } from '../setting/customizable-lists/class/ticket-status';
 
 @Component({
   selector: 'company-tickets',
@@ -34,7 +35,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
   showPendingPreloader: boolean = false;
   idEditTicket: string = '';
   @ViewChild('header') header: TicketsHeaderComponent;
-
+  ticketsStatus: Array<TicketStatus> = [];
 
   constructor(private ticketsService: TicketsService,
     private ticketsListService: TicketsListService,
@@ -121,6 +122,11 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
       this.onScroll();
     });
     this.sub.add(subscription);
+    this.ticketsStatus = this.ticketsStateService.getTicketsStatus();
+    let onGetTicketsStatus = this.ticketsStateService.onGetTicketsStatus.subscribe(data => {
+      this.ticketsStatus = data;
+    })
+    this.sub.add(onGetTicketsStatus);
   }
   private getCount() {
     this.ticketsService.getCount(this.ticketsFilter.getDataForRequest()).subscribe(data => {

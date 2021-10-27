@@ -56,6 +56,10 @@ export class CustomizableListsComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
+    let onGetTicketsStatus = this.ticketsStateService.onGetTicketsStatus.subscribe(data => {
+      this.ticketsStatus = data;
+    })
+    this.sub.add(onGetTicketsStatus);
   }
   create() {
     if (this.activeTab === "productCategories") this.showAddCategory = true;
@@ -106,11 +110,7 @@ export class CustomizableListsComponent implements OnInit, OnDestroy {
       this.categoriesProducts = this.inventoryStateService.getCategories();
     } else if (data['nextId'] === 'ticketStatus') {
       this.getColors();
-      this.ticketsService.getTicketStatus().subscribe((res: any) => {
-        console.log("res", res);
-        this.ticketsStatus = res.map(item => new TicketStatus(item));
-      })
-
+      this.ticketsStatus = this.ticketsStateService.getTicketsStatus();
     } else if (data['nextId'] === 'tab3') {
 
     }

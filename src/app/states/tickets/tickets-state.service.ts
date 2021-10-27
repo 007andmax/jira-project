@@ -34,10 +34,12 @@ export class TicketsStateService {
   toggleAddTicket: EventEmitter<any> = new EventEmitter();
   typeFilter: EventEmitter<any> = new EventEmitter();
   tagsFilter: EventEmitter<any> = new EventEmitter();
+  onGetTicketsStatus: EventEmitter<any> = new EventEmitter();
   leftPanelFilter: EventEmitter<any> = new EventEmitter();
   ticketChangedActions = ['ASSIGNED_USER', 'PRIORITY_CHANGED', 'STATUS', 'TRASH', 'REPORT_AS_SPAM', 'RESTORE_FROM_SPAM', 'TICKET_SHARE', 'MARKED_AS_SPAM', 'EDITED_TICKET'];
   listStatusColor: Array<StatusColor> = [];
   ticketsColor: TicketsColor;
+  ticketsStatus: Array<TicketStatus> = [];
   constructor(private ticketsRealTimeService: TicketsRealTimeService,
     private ticketsService: TicketsService) { }
 
@@ -69,8 +71,14 @@ export class TicketsStateService {
       }
       if (newChange.action === 'DISCOUNT_CHANGED') this.changeFieldTicket.emit(new TicketChangeField("discount", newChange.data.id, newChange.data.discount));
     })
+    this.ticketsService.getTicketStatus().subscribe((data: any) => {
+      this.ticketsStatus = data.map(item => new TicketStatus(item));
+      this.onGetTicketsStatus.emit(this.ticketsStatus);
+    })
 
-
+  }
+  public getTicketsStatus() {
+    return this.ticketsStatus;
   }
   public setTicketStatusForRemove(data) {
     this.ticketStatusForRemove = data;

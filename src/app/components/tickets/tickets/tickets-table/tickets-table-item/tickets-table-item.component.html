@@ -1,81 +1,160 @@
-<!--<tr [ngClass]="{'&#45;&#45;selected': selected}">-->
-<!--  <td class="ticket-table__requested-by">-->
-<!--    <div class="d-f ai-c h100">-->
-<!--       <div class="qt-table-modern__circle-avatar" [ngClass]="!getNameForAvatar().length ? 'transparent-text' : ''" [textContent]="getNameForAvatar()"-->
-<!--        [ngStyle]="{'background': ticketsListService.getStyleAvatar(requestedUser,listColorNoAvatar[indexNoAvatar]) }"></div>-->
+<!-- <tr [ngClass]="{'&#45;&#45;selected': selected}"> -->
+<!-- <td class="ticket-table__requested-by"> -->
+<!-- <div class="d-f ai-c h100"> -->
+<!-- <div class="qt-table-modern__circle-avatar" [ngClass]="!getNameForAvatar().length ? 'transparent-text' : ''" [textContent]="getNameForAvatar()" -->
+<!-- [ngStyle]="{'background': ticketsListService.getStyleAvatar(requestedUser,listColorNoAvatar[indexNoAvatar]) }"></div> -->
 
 
-<!--      <div [textContent]="getUserName(requestedUser)" class="ellipsis"></div>-->
-<!--    </div>-->
-<!--  </td>-->
-<!--  <td class="&#45;&#45;strong ticket-table__subject">-->
-<!--      {{'Tkt# ' + ticket.number + ' - ' + ticket.subject}} <span [ngClass]="getClassType()"></span>-->
-<!--  </td>-->
-<!--  <td class="ticket-table__company" [textContent]="getCompanyName()"></td>-->
 
-<!--  <td class="ticket-table__assignee" *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length > 0">-->
 
-<!--      <div class="d-f">-->
-<!--        <ng-template ngFor let-user [ngForOf]="ticket.multiAssignedUsers" [ngForTrackBy]="trackById">-->
-<!--        <div class="qt-table-modern__circle-avatar" [textContent]="getAssignedUserNameForAvatar(user)"-->
-<!--          [ngStyle]="{'background': ticketsListService.getStyleAvatar(user,listColorNoAvatar[indexNoAvatar]) }"></div>-->
-<!--      </ng-template>-->
-<!--      </div>-->
-<!--  </td>-->
-<!--  <td class="ticket-table__assignee" *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length === 0 || !ticket.assignedUserId && !ticket.multiAssignedUsers"></td>-->
-<!--  <td class="ticket-table__assignee" *ngIf="ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length === 0 || ticket.assignedUserId && !ticket.multiAssignedUsers">-->
-<!--    <div class="d-f">-->
-<!--      <div class="qt-table-modern__circle-avatar" [textContent]="getAssignedUserNameForAvatar(assignedUser)"-->
-<!--        [ngStyle]="{'background': ticketsListService.getStyleAvatar(assignedUser,listColorNoAvatar[indexNoAvatar])}"></div>-->
-<!--      <div [textContent]="getUserName(assignedUser)"></div>-->
-<!--    </div>-->
-<!--  </td>-->
-<!--  <td class="ticket-table__status" >-->
-<!--    <span class="tag__modern" [ngStyle]="getStyleStatus('inProgress')" *ngIf="ticket.status === 'IN_PROGRESS'">In Progress</span>-->
-<!--    <span class="tag__modern" [ngStyle]="getStyleStatus('completed')" *ngIf="ticket.status === 'COMPLETED'">Completed</span>-->
-<!--    <span class="tag__modern" [ngStyle]="getStyleStatus('unassigned')" *ngIf="ticket.status === null">Unassigned</span>-->
-<!--    <span class="tag__modern" [ngStyle]="getStyleStatus('onHold')" *ngIf="ticket.status === 'ON_HOLD'">On Hold</span>-->
-<!--  </td>-->
-<!--  <td class="ticket-table__created-date" [textContent]="getCreateAt()"></td>-->
-<!--</tr>-->
+
+
+
+<!-- <div [textContent]="getUserName(requestedUser)" class="ellipsis"></div> -->
+<!-- </div> -->
+<!-- </td> -->
+<!-- <td class="&#45;&#45;strong ticket-table__subject"> -->
+<!-- {{'Tkt# ' + ticket.number + ' - ' + ticket.subject}} <span [ngClass]="getClassType()"></span> -->
+<!-- </td> -->
+<!-- <td class="ticket-table__company" [textContent]="getCompanyName()"></td> -->
+
+
+
+
+
+
+<!-- <td class="ticket-table__assignee" *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length > 0"> -->
+
+
+
+
+
+
+<!-- <div class="d-f"> -->
+<!-- <ng-template ngFor let-user [ngForOf]="ticket.multiAssignedUsers" [ngForTrackBy]="trackById"> -->
+<!-- <div class="qt-table-modern__circle-avatar" [textContent]="getAssignedUserNameForAvatar(user)" -->
+<!-- [ngStyle]="{'background': ticketsListService.getStyleAvatar(user,listColorNoAvatar[indexNoAvatar]) }"></div> -->
+<!-- </ng-template> -->
+<!-- </div> -->
+<!-- </td> -->
+<!-- <td class="ticket-table__assignee" *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length === 0 || !ticket.assignedUserId && !ticket.multiAssignedUsers"></td> -->
+<!-- <td class="ticket-table__assignee" *ngIf="ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length === 0 || ticket.assignedUserId && !ticket.multiAssignedUsers"> -->
+<!-- <div class="d-f"> -->
+<!-- <div class="qt-table-modern__circle-avatar" [textContent]="getAssignedUserNameForAvatar(assignedUser)" -->
+<!-- [ngStyle]="{'background': ticketsListService.getStyleAvatar(assignedUser,listColorNoAvatar[indexNoAvatar])}"></div> -->
+<!-- <div [textContent]="getUserName(assignedUser)"></div> -->
+<!-- </div> -->
+<!-- </td> -->
+<!-- <td class="ticket-table__status" > -->
+<!-- <span class="tag__modern" [ngStyle]="getStyleStatus('inProgress')" *ngIf="ticket.status === 'IN_PROGRESS'">In Progress</span> -->
+<!-- <span class="tag__modern" [ngStyle]="getStyleStatus('completed')" *ngIf="ticket.status === 'COMPLETED'">Completed</span> -->
+<!-- <span class="tag__modern" [ngStyle]="getStyleStatus('unassigned')" *ngIf="ticket.status === null">Unassigned</span> -->
+<!-- <span class="tag__modern" [ngStyle]="getStyleStatus('onHold')" *ngIf="ticket.status === 'ON_HOLD'">On Hold</span> -->
+<!-- </td> -->
+<!-- <td class="ticket-table__created-date" [textContent]="getCreateAt()"></td> -->
+<!-- </tr> -->
+
+
+
+
+
 
 <div
-  [ngClass]="{'--selected': selected}"
-  class="qt-table-modern__row"
+    [ngClass]="{'--selected': selected}"
+    class="qt-table-modern__row"
 >
-  <div class="ticket-table__requested-by">
-    <div class="d-f ai-c">
-      <div class="qt-table-modern__circle-avatar" [ngClass]="!getNameForAvatar().length ? 'transparent-text' : ''" [textContent]="getNameForAvatar()" [ngStyle]="{'background': ticketsListService.getStyleAvatar(requestedUser,listColorNoAvatar[indexNoAvatar]) }"></div>
-      <div [textContent]="getUserName(requestedUser)" class="ellipsis"></div>
+    <div class="ticket-table__requested-by">
+        <div class="d-f ai-c">
+            <div
+                class="qt-table-modern__circle-avatar"
+                [ngClass]="!getNameForAvatar().length ? 'transparent-text' : ''"
+                [textContent]="getNameForAvatar()"
+                [ngStyle]="{'background': ticketsListService.getStyleAvatar(requestedUser,listColorNoAvatar[indexNoAvatar]) }"
+            ></div>
+            <div
+                [textContent]="getUserName(requestedUser)"
+                class="ellipsis"
+            ></div>
+        </div>
     </div>
-  </div>
-  <div class="--strong ticket-table__subject">
-    <div class="ellipsis">
-      {{'Tkt# ' + ticket.number + ' - ' + ticket.subject}} <span [ngClass]="getClassType()"></span>
+    <div class="--strong ticket-table__subject">
+        <div class="ellipsis">
+            {{'Tkt# ' + ticket.number + ' - ' + ticket.subject}}
+            <span [ngClass]="getClassType()"></span>
+        </div>
     </div>
-  </div>
-  <div class="ticket-table__company" [textContent]="getCompanyName()"></div>
-  <div class="ticket-table__assignee" *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length > 0">
-    <div class="d-f">
-      <ng-template ngFor let-user [ngForOf]="ticket.multiAssignedUsers" [ngForTrackBy]="trackById">
-        <div class="qt-table-modern__circle-avatar" [textContent]="getAssignedUserNameForAvatar(user)"
-             [ngStyle]="{'background': ticketsListService.getStyleAvatar(user,listColorNoAvatar[indexNoAvatar]) }"></div>
-      </ng-template>
+    <div
+        class="ticket-table__company"
+        [textContent]="getCompanyName()"
+    ></div>
+    <div
+        class="ticket-table__assignee"
+        *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length > 0"
+    >
+        <div class="d-f">
+            <ng-template
+                ngFor
+                let-user
+                [ngForOf]="ticket.multiAssignedUsers"
+                [ngForTrackBy]="trackById"
+            >
+                <div
+                    class="qt-table-modern__circle-avatar"
+                    [textContent]="getAssignedUserNameForAvatar(user)"
+                    [ngStyle]="{'background': ticketsListService.getStyleAvatar(user,listColorNoAvatar[indexNoAvatar]) }"
+                ></div>
+            </ng-template>
+        </div>
     </div>
-  </div>
-  <div class="ticket-table__assignee" *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length === 0 || !ticket.assignedUserId && !ticket.multiAssignedUsers"></div>
-  <div class="ticket-table__assignee" *ngIf="ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length === 0 || ticket.assignedUserId && !ticket.multiAssignedUsers">
-    <div class="d-f">
-      <div class="qt-table-modern__circle-avatar" [textContent]="getAssignedUserNameForAvatar(assignedUser)"
-           [ngStyle]="{'background': ticketsListService.getStyleAvatar(assignedUser,listColorNoAvatar[indexNoAvatar])}"></div>
-      <div [textContent]="getUserName(assignedUser)"></div>
+    <div
+        class="ticket-table__assignee"
+        *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length === 0 || !ticket.assignedUserId && !ticket.multiAssignedUsers"
+    ></div>
+    <div
+        class="ticket-table__assignee"
+        *ngIf="ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length === 0 || ticket.assignedUserId && !ticket.multiAssignedUsers"
+    >
+        <div class="d-f">
+            <div
+                class="qt-table-modern__circle-avatar"
+                [textContent]="getAssignedUserNameForAvatar(assignedUser)"
+                [ngStyle]="{'background': ticketsListService.getStyleAvatar(assignedUser,listColorNoAvatar[indexNoAvatar])}"
+            ></div>
+            <div [textContent]="getUserName(assignedUser)"></div>
+        </div>
     </div>
-  </div>
-  <div class="ticket-table__status" >
-    <span class="tag__modern" [ngStyle]="getStyleStatus('inProgress')" *ngIf="ticket.status === 'IN_PROGRESS'">In Progress</span>
-    <span class="tag__modern" [ngStyle]="getStyleStatus('completed')" *ngIf="ticket.status === 'COMPLETED'">Completed</span>
-    <span class="tag__modern" [ngStyle]="getStyleStatus('unassigned')" *ngIf="ticket.status === null">Unassigned</span>
-    <span class="tag__modern" [ngStyle]="getStyleStatus('onHold')" *ngIf="ticket.status === 'ON_HOLD'">On Hold</span>
-  </div>
-  <div class="ticket-table__created-date" [textContent]="getCreateAt()"></div>
+    <div class="ticket-table__status">
+        <span
+            class="tag__modern"
+            [ngStyle]="getStyleStatus(ticket.status)"
+            *ngIf="ticket.status === 'IN_PROGRESS'"
+        >
+            {{(!ticket.customStatus) ? 'In Progress' : ticket.customStatus}}
+        </span>
+        <span
+            class="tag__modern"
+            [ngStyle]="getStyleStatus(ticket.status)"
+            *ngIf="ticket.status === 'COMPLETED'"
+        >
+            Completed
+        </span>
+        <span
+            class="tag__modern"
+            [ngStyle]="getStyleStatus('UNASSIGNED')"
+            *ngIf="ticket.status === null"
+        >
+            Unassigned
+        </span>
+        <span
+            class="tag__modern"
+            [ngStyle]="getStyleStatus(ticket.status)"
+            *ngIf="ticket.status === 'ON_HOLD'"
+        >
+            On Hold
+        </span>
+    </div>
+    <div
+        class="ticket-table__created-date"
+        [textContent]="getCreateAt()"
+    ></div>
 </div>
