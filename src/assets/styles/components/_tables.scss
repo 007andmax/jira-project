@@ -197,7 +197,6 @@ table.qt-table-modern {
         width: calc(166px - 40px);
       }
 
-
       @media (max-width: 767px) {
         flex: 1 0 60%;
         order: 1;
@@ -209,7 +208,7 @@ table.qt-table-modern {
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
-
+      max-width: 345px;
 
       @media (max-width: 767px) {
         flex: 100%;

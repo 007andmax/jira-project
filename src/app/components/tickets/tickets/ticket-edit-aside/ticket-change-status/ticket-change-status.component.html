@@ -16,7 +16,7 @@
     </span>
     <span
         class="tag__modern"
-        [ngStyle]="getStyleStatus(ticketProfile.status)"
+        [ngStyle]="getStyleStatus('UNASSIGNED')"
         *ngIf="ticketProfile.status === null"
     >
         Unassigned
