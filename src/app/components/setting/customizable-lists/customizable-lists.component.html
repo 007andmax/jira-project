@@ -129,6 +129,7 @@
                                         <td class="rate">
                                             <i
                                                 class="tag-color"
+                                                *ngIf="statusColors"
                                                 [ngStyle]="{'background-color':statusColors[item.color].borderColor ,
                             'border-color': statusColors[item.color].backgroundColor}"
                                             ></i>
@@ -178,6 +179,7 @@
                 </ng-template>
             </ngb-tab>
         </ngb-tabset>
+
 
 
 

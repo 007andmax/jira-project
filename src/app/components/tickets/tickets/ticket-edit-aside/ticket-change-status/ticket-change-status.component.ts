@@ -48,6 +48,11 @@ export class TicketChangeStatusComponent implements OnInit, OnDestroy {
     })
 
   }
+  parseStatus(name) {
+    if (name === "IN_PROGRESS") return "In progress";
+    if (name === "ON_HOLD") return "On hold";
+    return name;
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

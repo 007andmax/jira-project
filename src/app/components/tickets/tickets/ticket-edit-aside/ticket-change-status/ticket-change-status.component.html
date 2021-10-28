@@ -5,7 +5,7 @@
         *ngIf="ticketProfile.status === 'IN_PROGRESS'"
         ngbDropdownToggle
     >
-        {{(!ticketProfile.customStatus) ? 'In Progress' : ticketProfile.customStatus}}
+        {{(!ticketProfile.customStatus) ? 'In Progress' : parseStatus(ticketProfile.customStatus)}}
     </span>
     <span
         class="tag__modern"
@@ -44,7 +44,8 @@
                     <li
                         ngbDropdownItem
                         class
-                        [textContent]="item.name"
+                        [textContent]="parseStatus(item.name)"
+                        *ngIf="item.name !== 'COMPLETED' && item.name !== 'UNASSIGNED'"
                         (click)="changeTicketStatus(item)"
                     ></li>
                 </ng-template>

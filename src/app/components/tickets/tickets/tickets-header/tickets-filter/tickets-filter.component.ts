@@ -15,6 +15,8 @@ import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service'
 import { AppService } from 'src/app/states/app/app.service';
 import { TicketsFilterTagsComponent } from './tickets-filter-tags/tickets-filter-tags.component';
 import { StatusColor } from '../../../class/status-color';
+import { TicketStatus } from 'src/app/components/setting/customizable-lists/class/ticket-status';
+import { TicketStatusFilter } from '../class/ticket-status-filter';
 
 @Component({
   selector: 'app-tickets-filter',
@@ -39,7 +41,8 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   listsStatus = [new ItemStatus('Unassigned', 'unassigned', 'UNASSIGNED'),
   new ItemStatus('Completed', 'completed', 'CLOSED'),
   new ItemStatus('In Progress', 'inProgress', 'OPEN'),
-  new ItemStatus('On Hold', 'onHold', 'ON_HOLD')]
+  new ItemStatus('On Hold', 'onHold', 'ON_HOLD')];
+  ticketsStatus: Array<TicketStatusFilter> = [];
   blockFilterUser: boolean = false;
   ticketsCounts: TicketsCounts;
   sub: Subscription = new Subscription();
@@ -103,8 +106,11 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
     this.sub.add(getOnUpdateCounts);
-
-
+    this.ticketsStatus = this.ticketsStateService.getTicketsStatus().map(item => new TicketStatusFilter(item));
+    let onGetTicketsStatus = this.ticketsStateService.onGetTicketsStatus.subscribe(data => {
+      this.ticketsStatus = data.map(item => new TicketStatusFilter(item));
+    })
+    this.sub.add(onGetTicketsStatus);
   }
   public onClearAll() {
 
@@ -228,13 +234,22 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   }
 
   public onSelectStatus(item) {
+    console.log("item", item);
     if (!item) {
       this.setTypeFilter("ALL");
       this.ticketsFilter.setStatus(null);
 
     } else {
-      this.ticketsFilter.setStatus(item.status);
-      this.setTypeFilter(item.status);
+      this.ticketsFilter.setStatus(item.name);
+      let findStatus = this.listsStatus.find(status => status.title === item.title);
+      if (findStatus) {
+        this.ticketsFilter.setCustomStatus(false);
+        this.setTypeFilter(findStatus.status);
+      } else {
+        this.ticketsFilter.setCustomStatus(true);
+        this.setTypeFilter("OPEN");
+      }
+
     }
     this.onChangeCounterFilter();
     this.ticketsStateService.onChangeLeftPanelFilter(this.listType);
