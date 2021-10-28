@@ -85,6 +85,7 @@ export class CustomizableListsComponent implements OnInit, OnDestroy {
 
     })
   }
+
   editCategoryProduct(data) {
     const modalRef = this.modalService.open(ModalEditCategoryProductComponent, { windowClass: 'quote-send-modal' });
     modalRef.componentInstance.categoryProduct = data;
@@ -121,6 +122,7 @@ export class CustomizableListsComponent implements OnInit, OnDestroy {
     return (this.statusColors.length > 0) ? this.statusColors[i].borderColor : "";
   }
   ngOnDestroy(): void {
+    $('body').removeClass('ng7');
     this.sub.unsubscribe();
   }
 }

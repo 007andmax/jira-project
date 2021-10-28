@@ -128,7 +128,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.techUsersDp.clearWithOutChanges();
     this.statusDp.clearWithOutChanges();
     this.tagsDp.clearWithOutChanges();
-
+    this.ticketsFilter.setCustomStatus(false);
     //  this.listType = "ALL";
     // this.ticketsFilter.setListType("ALL");
     this.ticketsStateService.onInitFilter(this.ticketsFilter);
@@ -237,7 +237,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     if (!item) {
       this.setTypeFilter("ALL");
       this.ticketsFilter.setStatus(null);
-
+      this.ticketsFilter.setCustomStatus(false);
     } else {
       this.ticketsFilter.setStatus(item.name);
       let findStatus = this.listsStatus.find(status => status.title === item.title);
