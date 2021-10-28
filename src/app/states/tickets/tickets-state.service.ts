@@ -48,6 +48,22 @@ export class TicketsStateService {
     })
     this.ticketsRealTimeService.changeTickets.subscribe(newChange => {
 
+      if (newChange.action === 'TICKET_STATUS_REMOVED') {
+        let index = this.ticketsStatus.findIndex(item => item.id === newChange.data);
+        this.ticketsStatus.splice(index, 1);
+        this.onGetTicketsStatus.emit(this.ticketsStatus);
+      }
+      if (newChange.action === 'TICKET_STATUS_EDITED') {
+        let index = this.ticketsStatus.findIndex(item => item.id === newChange.data.id);
+        if (index > -1) this.ticketsStatus[index] = new TicketStatus(newChange.data);
+        this.onGetTicketsStatus.emit(this.ticketsStatus);
+      }
+      if (newChange.action === 'TICKET_STATUS_SAVED') {
+
+        this.ticketsStatus.push(new TicketStatus(newChange.data))
+        this.onGetTicketsStatus.emit(this.ticketsStatus);
+      }
+
       if (newChange.action === 'CREATED_TICKET') {
         this.addTicket.emit(newChange.data);
       }
