@@ -56,4 +56,7 @@ export class Ticket {
     public setAssignedUserId(id) {
         this.assignedUserId = id;
     }
+    public setCustomStatus(data) {
+        this.customStatus = data;
+    }
 }

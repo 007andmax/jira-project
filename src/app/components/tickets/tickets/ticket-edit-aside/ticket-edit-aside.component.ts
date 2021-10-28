@@ -31,6 +31,7 @@ import { TicketProfileEditFormUpdateComponent } from './ticket-profile-edit-form
 import { AddUsersNotifyStateService } from 'src/app/services/modal/modal-add-users-notify/state/add-users-notify-state.service';
 import { USERS_TO_EDIT_TICKET } from 'src/app/const/add-users-notify';
 import { StatusColor } from '../../class/status-color';
+import { find } from 'rxjs-compat/operator/find';
 @Component({
   selector: 'app-ticket-edit-aside',
   templateUrl: './ticket-edit-aside.component.html',
@@ -117,6 +118,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
 
       if (this.opened) {
         let ticket = new Ticket(data);
+        ticket.setCustomStatus(this.ticketsStateService.getTicketsStatus().find(item => item.id === data.customStatus));
         if (this.ticketProfile.id === ticket.id) {
           this.ticketProfile.update(data);
           this.elRef.nativeElement.querySelector("#ticket-note").innerHTML = this.ticketProfile.note;
