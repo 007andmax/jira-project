@@ -118,7 +118,6 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
 
       if (this.opened) {
         let ticket = new Ticket(data);
-        ticket.setCustomStatus(this.ticketsStateService.getTicketsStatus().find(item => item.id === data.customStatus));
         if (this.ticketProfile.id === ticket.id) {
           this.ticketProfile.update(data);
           this.elRef.nativeElement.querySelector("#ticket-note").innerHTML = this.ticketProfile.note;
