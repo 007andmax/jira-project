@@ -234,7 +234,6 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   }
 
   public onSelectStatus(item) {
-    console.log("item", item);
     if (!item) {
       this.setTypeFilter("ALL");
       this.ticketsFilter.setStatus(null);

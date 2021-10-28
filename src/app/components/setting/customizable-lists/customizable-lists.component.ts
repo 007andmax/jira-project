@@ -43,7 +43,6 @@ export class CustomizableListsComponent implements OnInit, OnDestroy {
     this.categoriesProducts = this.inventoryStateService.getCategories();
     this.inventoryStateService.onGetCategories.subscribe(data => {
       this.categoriesProducts = data;
-      console.log("this.categoriesProducts", this.categoriesProducts);
     })
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
@@ -75,7 +74,6 @@ export class CustomizableListsComponent implements OnInit, OnDestroy {
     } else {
       this.statusColors = this.ticketsStateService.getListStatusColor();
     }
-    console.log("this.statusColors", this.statusColors);
   }
   onRemoveCategoryProduct(id) {
     this.productService.removeCategory(id).subscribe(data => {

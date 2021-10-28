@@ -34,7 +34,6 @@ export class TicketsTableItemComponent implements OnInit {
     private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
-    console.log("listColors", this.listColors);
     this.indexNoAvatar = this.ticketsListService.randomInteger(0, 3);
   }
   public getUserName(user) {
@@ -67,7 +66,6 @@ export class TicketsTableItemComponent implements OnInit {
   }
   getStyleStatus(name) {
     let find = this.ticketsStatus.find(item => item.name == name);
-    console.log("find", find);
     return { 'border-color': (this.listColors) ? this.listColors[find.color].borderColor : null, 'color': (this.listColors) ? this.listColors[find.color].borderColor : null }
   }
   getClassType() {
