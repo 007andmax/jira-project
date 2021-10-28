@@ -1,7 +1,7 @@
 <div ngbDropdown>
     <span
         class="tag__modern"
-        [ngStyle]="getStyleStatus(ticketProfile.status)"
+        [ngStyle]="getStyleStatus((ticketProfile.customStatus) ? ticketProfile.customStatus : ticketProfile.status)"
         *ngIf="ticketProfile.status === 'IN_PROGRESS'"
         ngbDropdownToggle
     >

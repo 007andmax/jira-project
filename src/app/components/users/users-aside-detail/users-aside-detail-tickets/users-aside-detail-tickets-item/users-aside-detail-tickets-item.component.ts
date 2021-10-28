@@ -37,7 +37,7 @@ export class UsersAsideDetailTicketsItemComponent implements OnInit {
 
   getStyleStatus(name) {
     let find = this.ticketsStatus.find(item => item.name == name);
-    return { 'border-color': (this.listColors) ? this.listColors[find.color].borderColor : null, 'background-color': (this.listColors) ? this.listColors[find.color].backgroundColor : null, 'color': (this.listColors) ? this.listColors[find.color].borderColor : null }
+    return { 'border-color': (this.listColors) ? this.listColors[find.color].borderColor : null, 'color': (this.listColors) ? this.listColors[find.color].borderColor : null }
   }
   getClassType() {
     return `priority-icon ${(this.ticket.priorityLevel && this.ticket.priorityLevel !== "MEDIUM") ? '--' + this.ticket.priorityLevel.toLowerCase() : ''}`;

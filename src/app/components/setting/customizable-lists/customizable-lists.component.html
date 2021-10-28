@@ -131,7 +131,7 @@
                                                 class="tag-color"
                                                 *ngIf="statusColors"
                                                 [ngStyle]="{'background-color':statusColors[item.color].borderColor ,
-                            'border-color': statusColors[item.color].backgroundColor}"
+                            'border-color': statusColors[item.color].borderColor}"
                                             ></i>
                                         </td>
                                         <td class="action">
@@ -179,6 +179,7 @@
                 </ng-template>
             </ngb-tab>
         </ngb-tabset>
+
 
 
 

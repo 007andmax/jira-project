@@ -8,7 +8,7 @@
     <td class="ticket-table__status">
         <span
             class="tag__modern"
-            [ngStyle]="getStyleStatus(ticket.status)"
+            [ngStyle]="getStyleStatus((ticket.customStatus) ? ticket.customStatus : ticket.status)"
             *ngIf="ticket.status === 'IN_PROGRESS'"
         >
             {{(!ticket.customStatus) ? 'In Progress' : ticket.customStatus}}

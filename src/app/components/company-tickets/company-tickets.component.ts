@@ -54,7 +54,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     })
     this.leftPanelService.getColors().subscribe((data: any) => {
       let listColors = data.map(item => {
-        return new StatusColor(item.backgroundColor, item.borderColor);
+        return new StatusColor(item.borderColor);
       })
       this.ticketsStateService.onColorStatus(listColors);
     })
