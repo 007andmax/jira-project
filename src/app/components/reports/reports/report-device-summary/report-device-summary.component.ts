@@ -35,9 +35,9 @@ export class ReportDeviceSummaryComponent implements OnInit {
   loading = false;
   selectedClient = null;
   orientation: string = "PORTRAIT";
-  report: string = "";
+  report: string = "report-device-summary";
   template: string = "PDF_TEMPLATE";
-  fileName: string = "";
+  fileName: string = "device-summary-report";
   accountType = "CLIENT";
 
   constructor(
@@ -246,7 +246,7 @@ export class ReportDeviceSummaryComponent implements OnInit {
       ` - Device Summary Report</p>
                   <p style="line-height:1.5;color:#364656;margin:3px 0;font-size: 13px;font-family: Arial, Helvetica, sans-serif;font-weight:400;">Summary of ` +
       this.clientName +
-      ` Device installed (` +
+      ` Devices installed (` +
       pdfList.length +
       ` items)</p>
                   <p style="margin:0;line-height:1;color:#4f5f79;font-size:11px;line-height: 1.09;font-family: Arial, Helvetica, sans-serif;font-weight:400;">Generated on ` +
