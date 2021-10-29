@@ -215,7 +215,7 @@
                                         Remote Access
                                     </ng-template>
                                     <div
-                                        [hidden]="!(asset.online)"
+                                        [hidden]="!(asset.online) || (asset.CanRemoteControl)"
                                         class="
                       qt-ic-c
                       icon__quick-connect
