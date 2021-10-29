@@ -58,6 +58,8 @@ export class CompanyDeviceBetaComponent implements OnInit {
     this.setPreviewDataDevice();
     this.onPowerShellCommand();
     this.onAck();
+    this.onInstallRemoteAgentCommand();
+    this.onUninstallRemoteAgentCommand();
   }
 
   setPreviewDataDevice() {
@@ -235,6 +237,19 @@ export class CompanyDeviceBetaComponent implements OnInit {
     if (command === "ar") {
       this.agentService.UninstallAgent(assetId);
     }
+    if(command === 'ura') {
+      this.temporaryCommand = command;
+      data.AssetID = assetId;
+      data.MessageType = "UninstallRemoteAgent";
+      this.agentService.SendPowerShellCommand(data);
+    }
+    if(command === 'ira') {
+      this.temporaryCommand = command;
+      data.AssetID = assetId;
+      data.MessageType = "InstallRemoteAgent";
+      this.agentService.SendPowerShellCommand(data);
+    }
+
   }
 
   remoteAccess(connectionType, guid) {
@@ -319,6 +334,36 @@ export class CompanyDeviceBetaComponent implements OnInit {
       this.decline();
       this.toastr.success("Shutting down computer now.");
     }
+  }
+
+  onInstallRemoteAgentCommand() {
+    this.kafkaStateService.onInstallRemoteAgent.subscribe((resp) => {
+      console.log("onInstallRemoteAgent");
+      let item = resp.find((x) => x.key == this.assetId);
+      if (item) {
+        this.kafkaMessage = item.Value;
+        this.powershellmsg = this.kafkaMessage;
+        this.ngZone.run(() => {
+          this.toastr.success(`${this.powershellmsg}`);
+          this.setPreviewDataDevice();
+        });
+      }
+    });
+  }
+
+  onUninstallRemoteAgentCommand() {
+    this.kafkaStateService.onUninstallRemoteAgent.subscribe((resp) => {
+      console.log("onUninstallRemoteAgent");
+      let item = resp.find((x) => x.key == this.assetId);
+      if (item) {
+        this.kafkaMessage = item.Value;
+        this.powershellmsg = this.kafkaMessage;
+        this.ngZone.run(() => {
+          this.toastr.success(`${this.powershellmsg}`);
+          this.setPreviewDataDevice();
+        });
+      }
+    });
   }
 
   decline() {

@@ -474,7 +474,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
           this.kafkaMessage = item.Value;
           this.powershellmsg = this.kafkaMessage;
           this.ngZone.run(() => {
-            this.toastr.success(`${this.powershellmsg}`);            
+            this.toastr.success(`${this.powershellmsg}`);
           });
         });
       }

@@ -297,6 +297,24 @@
                                             <div class="icon__remove qt-bg-contain qt-sz-16 qt-mr-8"></div>
                                             Remove
                                         </li>
+                                        <li
+                                          *ngIf="!asset.CanRemoteControl && asset.online"
+                                          class="pointer"
+                                          (click)="sendCommand('ira', asset.ID)"
+                                          ngbDropdownItem
+                                        >
+                                          <div class="icon__restart qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                          Install Remote Agent
+                                      </li>
+                                        <li
+                                          *ngIf="asset.CanRemoteControl && asset.online"
+                                          class="pointer"
+                                          (click)="sendCommand('ura', asset.ID)"
+                                          ngbDropdownItem
+                                        >
+                                        <div class="icon__remove qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                        Uninstall Remote Agent
+                                      </li>
                                     </ul>
                                 </div>
                             </td>
