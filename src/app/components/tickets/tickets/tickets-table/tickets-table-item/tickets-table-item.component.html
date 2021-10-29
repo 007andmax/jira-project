@@ -23,9 +23,13 @@
         </div>
     </div>
     <div
-        class="ticket-table__company"
-        [textContent]="getCompanyName()"
-    ></div>
+        class="ticket-table__company">
+          <div
+            class="ellipsis"
+            [textContent]="getCompanyName()"
+          >
+          </div>
+        </div>
     <div
         class="ticket-table__assignee"
         *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length > 0"
