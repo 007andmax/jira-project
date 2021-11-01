@@ -61,6 +61,7 @@ import { DocumentPreviewComponent } from './components/documents/document-previe
 import { CompanyDocumentsComponent } from './components/companies/company-documents/company-documents.component';
 import { HomeComponent } from './components/home/home.component';
 import { CustomizableListsComponent } from './components/setting/customizable-lists/customizable-lists.component';
+import { TicketSettingsPageComponent } from './components/setting/ticket-settings-page/ticket-settings-page.component';
 
 const routes: Routes = [
 
@@ -162,6 +163,11 @@ const routes: Routes = [
   {
     path: ':company/setting/glnumber',
     component: GlNumberSettingsComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: ':company/setting/ticket-settings',
+    component: TicketSettingsPageComponent,
     pathMatch: 'full',
   },
   {

@@ -1,28 +1,34 @@
-<div class="page-insider invoice-ticket">
+<div class="page-insider invoice-ticket ticket-settings-container">
     <div class="cmn-area in-ticks">
         <form
             [formGroup]="ticketForm"
             (ngSubmit)="onSubmit()"
         >
             <div class="f-row">
-                <div class="f-col col-33">
+                <div class="f-col col-50">
                     <label>Starting ticket number</label>
-                    <div class="form-row">
+                    <div class="form-row ticket-number">
                         <input
                             type="text"
                             numbersOnly
                             formControlName="ticketCount"
+                            [ngClass]="{'--input-error' : submitted && f.ticketCount.errors}"
                             class="form-input"
                             placeholder="Enter Starting ticket number"
                             value="Starting ticket number"
                         >
-                        <div
-                            *ngIf="submitted && f.ticketCount.errors"
-                            class="invalid-feedback"
+                        <mat-error
+                            class="qt-tooltip-error"
+                            *ngIf="submitted && f.ticketCount.errors && f.ticketCount.errors.required"
                         >
-                            <div *ngIf="f.ticketCount.errors.required">Starting ticket number is required</div>
-                            <div *ngIf="f.ticketCount.errors.pattern">Only Number is allowed</div>
-                        </div>
+                            Starting ticket number is required
+                        </mat-error>
+                        <mat-error
+                            class="qt-tooltip-error"
+                            *ngIf="submitted && f.ticketCount.errors && f.ticketCount.errors.pattern"
+                        >
+                            Only Number is allowed
+                        </mat-error>
                         <label
                             class="control-label"
                             *ngIf="used"
@@ -44,56 +50,58 @@
                                 min="1"
                                 onkeypress="return event.charCode != 45"
                                 formControlName="outliersTime"
+                                [ngClass]="{'--input-error' : submitted && f.outliersTime.errors}"
                                 class="number"
                             >
-                            <div
-                                *ngIf="submitted && f.outliersTime.errors"
-                                class="invalid-feedback"
+                            <mat-error
+                                class="qt-tooltip-error"
+                                *ngIf="submitted && f.outliersTime.errors && f.outliersTime.errors.required"
                             >
-                                <div *ngIf="f.outliersTime.errors.required">OutliersTime is required</div>
-                            </div>
+                                OutliersTime is required
+                            </mat-error>
                         </span>
                     </div>
                 </div>
-                <div class="f-col col-33">
+                <div class="f-col col-50">
                     <label>Timepicker type</label>
                     <div class="form-row">
-                        <select
-                            class="cmn-select form-input"
-                            formControlName="timepickerType"
-                            (change)="onChangeType()"
+                        <app-drop-down
+                            [class]="['light-dropdown', 'qt-select-input-40']"
+                            [placeholder]="'Select Company Type'"
+                            [field]="'title'"
+                            [editItem]="getSelectedTimepickerType()"
+                            [isBlockClear]="true"
+                            [list]="timepickerTypes"
+                            (onSelectedItem)="onChangeType($event)"
                         >
-                            <option value="TIME_PICKER">Start-End time picker</option>
-                            <option value="DURATION_PICKER">Duration picker</option>
-                        </select>
+                        </app-drop-down>
                     </div>
                 </div>
                 <div class="f-col col-50">
                     <label>Interval</label>
                     <div class="form-row interval-container">
-                        <select
-                            class="cmn-select form-input"
-                            formControlName="interval"
+                        <app-drop-down
+                            #intervalsDp
+                            [class]="['light-dropdown', 'qt-select-input-40']"
+                            [placeholder]="'Select Company Type'"
+                            [editItem]="getSelectedInterval()"
+                            [isBlockClear]="true"
+                            [field]="'title'"
+                            [list]="intervals"
+                            (onSelectedItem)="onChangeInterval($event)"
                         >
-                            <option
-                                value="ONE_MINUTE"
-                                *ngIf="ticketForm.value.timepickerType === 'TIME_PICKER'"
-                            >
-                                1 minute
-                            </option>
-                            <option value="FIVE_MINUTES">5 minutes</option>
-                            <option value="TEN_MINUTES">10 minutes</option>
-                            <option value="FIFTEEN_MINUTES">15 minutes</option>
-                        </select>
+                        </app-drop-down>
                     </div>
                 </div>
             </div>
-            <input
-                type="submit"
-                class="btn btn-primary"
-                value="Save Changes"
-            >
+            <div class="qt-df">
+                <button
+                    type="submit"
+                    class="qt-button qt-mr-12"
+                >
+                    Save Changes
+                </button>
+            </div>
         </form>
     </div>
-    <!-- <div class="loading" *ngIf="loading"></div> -->
 </div>

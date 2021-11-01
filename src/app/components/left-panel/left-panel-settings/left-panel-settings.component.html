@@ -14,6 +14,8 @@
 
 
 
+
+
 <ul
     class="app-left-panel__menu-expand top-menu"
     [ngClass]="{'menu-expand-show': open, 'menu-expand-hide': !open}"
@@ -81,6 +83,12 @@
         (click)="goToState('email-templete-component')"
     >
         Email Templetes
+    </li>
+    <li
+        [ngClass]="{'--active':activePage === 'ticket-settings'}"
+        (click)="goToState('ticket-settings')"
+    >
+        Ticket Settings
     </li>
     <li
         [ngClass]="{'--active':activePage === 'integrations-component'}"

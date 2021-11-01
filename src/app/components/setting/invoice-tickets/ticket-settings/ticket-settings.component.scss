@@ -9,7 +9,7 @@
     margin-bottom: 80px;
     .input-number {
         float: left;
-        width: 128px;
+        width: 100%;
         position: relative;
         padding: 0;
         border: none;
@@ -107,6 +107,7 @@
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
+            overflow: visible;
             .cmn-checkbox {
                 margin-top: 11px;
                 margin-bottom: 35px;
@@ -117,9 +118,23 @@
         }
     }
 }
-.interval-container {
-    width: 128px !important;
-}
 .invalid-feedback {
     margin-bottom: 10px;
+}
+.ticket-number {
+    position: relative;
+}
+.f-col {
+    label {
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+}
+.ticket-settings-container {
+    /deep/.light-dropdown {
+        height: 40px;
+    }
+    .f-row {
+        overflow: visible !important;
+    }
 }

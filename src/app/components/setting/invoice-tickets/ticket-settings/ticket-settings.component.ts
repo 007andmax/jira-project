@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { InvoiceTicketsService } from '../invoice-tickets.service';
 import { UsersService } from 'src/app/services/users/users.service';
@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CompanySetting } from 'src/app/components/companies/class/company-setting';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 
 @Component({
   selector: 'app-ticket-settings',
@@ -17,6 +18,9 @@ export class TicketSettingsComponent implements OnInit {
   new CompanySetting('5 minutes', 'FIVE_MINUTES'),
   new CompanySetting('10 minutes', 'TEN_MINUTES'),
   new CompanySetting('15 minutes', 'FIFTEEN_MINUTES')];
+  timepickerTypes = [new CompanySetting('Start-End time picker', 'TIME_PICKER'),
+  new CompanySetting('Duration picker', 'DURATION_PICKER')];
+  @ViewChild('intervalsDp') intervalsDp: DropDownComponent;
   loading = false;
   submitted = false;
   used = false;
@@ -174,10 +178,34 @@ export class TicketSettingsComponent implements OnInit {
     );
   }
 
-  onChangeType() {
+  onChangeType(data) {
     this.ticketForm.patchValue({
-      interval: this.ticketForm.value.timepickerType === 'DURATION_PICKER' ? 'FIVE_MINUTES' : 'ONE_MINUTE'
+      timepickerType: data.value,
+      interval: data.value === 'DURATION_PICKER' ? 'FIVE_MINUTES' : 'ONE_MINUTE'
     });
+    if (this.ticketForm.value.timepickerType === 'TIME_PICKER') {
+      this.intervals = [new CompanySetting('1 minute', 'ONE_MINUTE'),
+      new CompanySetting('5 minutes', 'FIVE_MINUTES'),
+      new CompanySetting('10 minutes', 'TEN_MINUTES'),
+      new CompanySetting('15 minutes', 'FIFTEEN_MINUTES')];
+    } else {
+      this.intervals = [
+        new CompanySetting('5 minutes', 'FIVE_MINUTES'),
+        new CompanySetting('10 minutes', 'TEN_MINUTES'),
+        new CompanySetting('15 minutes', 'FIFTEEN_MINUTES')];
+    }
+    this.intervalsDp.reset(this.intervals);
+  }
+  onChangeInterval(data) {
+    this.ticketForm.patchValue({
+      interval: data.value
+    });
+  }
+  getSelectedInterval() {
+    return this.intervals.find(item => item.value === this.ticketForm.value.interval);
+  }
+  getSelectedTimepickerType() {
+    return this.timepickerTypes.find(item => item.value === this.ticketForm.value.timepickerType);
   }
   /**
    * saved

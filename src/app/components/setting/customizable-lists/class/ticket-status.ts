@@ -1,9 +1,9 @@
 export class TicketStatus {
-    color: number;
+    color: number = 0;
     custom: boolean;
     id: string;
-    name: string;
-    constructor(data) {
+    name: string = "";
+    constructor(data = null) {
         if (data) {
             for (const key in data) {
                 this[key] = data[key];

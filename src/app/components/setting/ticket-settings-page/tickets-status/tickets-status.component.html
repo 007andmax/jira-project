@@ -1,0 +1,112 @@
+<div class="cmn-area">
+    <div class="data-table-wrap">
+        <table
+            class="display dataTable"
+            style="width:100%"
+        >
+            <thead>
+                <tr>
+                    <th class="tax-name">Status</th>
+                    <th class="rate">Color</th>
+                    <th class="action">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="showAddStatus">
+                    <td class="tax-name">
+                        <input
+                            type="text"
+                            class="form-input"
+                            placeholder="Enter Name Status"
+                            [(ngModel)]="addStatus.name"
+                            (blur)="onAddTicketStatus()"
+                            maxlength="20"
+                        >
+                    </td>
+                    <td class="rate">
+                        <div
+                            class="form-row"
+                            ngbDropdown
+                            container="body"
+                        >
+                            <div
+                                class="tag-color-item"
+                                id="dropdownBasic1"
+                                ngbDropdownToggle
+                            >
+                                <i
+                                    class="tag-color"
+                                    [ngStyle]="{'background-color':statusColors[addStatus.color].borderColor ,
+                            'border-color': statusColors[addStatus.color].borderColor}"
+                                ></i>
+                            </div>
+                            <div
+                                ngbDropdownMenu
+                                aria-labelledby="dropdownBasic1"
+                            >
+                                <div class="status-container">
+                                    <div
+                                        class="tag-color-item"
+                                        *ngFor="let tagColor of statusColors; let i = index"
+                                        (click)="setColor(i)"
+                                        ngbDropdownItem
+                                    >
+                                        <i
+                                            class="tag-color"
+                                            [ngStyle]="{'background-color':tagColor.borderColor ,
+                            'border-color': tagColor.borderColor}"
+                                        ></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="action"></td>
+                </tr>
+                <tr *ngFor="let item of ticketsStatus; let i = index">
+                    <td
+                        class="tax-name"
+                        [textContent]="item.name"
+                    >
+                    </td>
+                    <td class="rate">
+                        <i
+                            class="tag-color"
+                            *ngIf="statusColors.length > 0"
+                            [ngStyle]="{'background-color':  statusColors[item.color].borderColor ,
+                            'border-color':  statusColors[item.color].borderColor}"
+                        ></i>
+                    </td>
+                    <td class="action">
+                        <a
+                            href="javascript:;"
+                            data-tooltip="Edit"
+                            (click)="editTicketsStatus = item"
+                            class="edit"
+                        >
+                            <img
+                                src="/html/assets/img/icons/edit.svg"
+                                alt="Edit"
+                            >
+                        </a>
+                        <a
+                            href="javascript:;"
+                            data-tooltip="Remove"
+                            class="remove"
+                            (click)="removeTicketStatus(item)"
+                            *ngIf="item.custom"
+                        >
+                            <div class="icon__remove qt-sz-16 qt-bg-contain"></div>
+                        </a>
+                        <edit-ticket-status
+                            *ngIf="editTicketsStatus && editTicketsStatus.id === item.id"
+                            [ticketStatus]="item"
+                            [statusColors]="statusColors"
+                            (onClose)="resetEditTicketsStatus()"
+                        ></edit-ticket-status>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

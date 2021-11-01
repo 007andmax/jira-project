@@ -1,0 +1,47 @@
+<!-- Middle Wrapper -->
+<div class="page-container">
+    <div class="page-insider invoice-ticket">
+        <div class="heading">
+            <h5 class="qt-fw-600">Ticket Settings</h5>
+            <div class="heading-serach add-category-container">
+                <a
+                    href="javascript:;"
+                    class="btn-outline"
+                    (click)="create()"
+                >
+                    Create
+                </a>
+            </div>
+        </div>
+        <ngb-tabset>
+            <!-- Ticket Settings -->
+            <ngb-tab
+                title="Ticket Settings"
+                id="tab1"
+            >
+                <ng-template ngbTabContent>
+                    <app-ticket-settings
+                        [taxIdDescInput]="taxIdDescription"
+                        [taxIdInput]="taxId"
+                        [conditionInput]="condition"
+                        *ngIf="showTab == true && showTerm == true"
+                    ></app-ticket-settings>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab title="Ticket Status">
+                <ng-template ngbTabContent>
+                    <tickets-status
+                        #ticketsStatus
+                        *ngIf="showTab == true && showTerm == true"
+                    ></tickets-status>
+                </ng-template>
+            </ngb-tab>
+            <!-- Quotes Settings -->
+            <ngb-tab title="Quotes settings">
+                <ng-template ngbTabContent>
+                    <app-quotes-settings></app-quotes-settings>
+                </ng-template>
+            </ngb-tab>
+        </ngb-tabset>
+    </div>
+</div>

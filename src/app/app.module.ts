@@ -468,6 +468,8 @@ import { CustomizableListsComponent } from './components/setting/customizable-li
 import { ModalEditCategoryProductComponent } from './services/modal/modal-edit-category-product/modal-edit-category-product.component';
 import { AddTicketStatusComponent } from './components/setting/customizable-lists/add-ticket-status/add-ticket-status.component';
 import { EditTicketStatusComponent } from './components/setting/customizable-lists/edit-ticket-status/edit-ticket-status.component';
+import { TicketSettingsPageComponent } from './components/setting/ticket-settings-page/ticket-settings-page.component';
+import { TicketsStatusComponent } from './components/setting/ticket-settings-page/tickets-status/tickets-status.component';
 
 
 declare var $: any;
@@ -893,7 +895,9 @@ declare var $: any;
     CustomizableListsComponent,
     ModalEditCategoryProductComponent,
     AddTicketStatusComponent,
-    EditTicketStatusComponent
+    EditTicketStatusComponent,
+    TicketSettingsPageComponent,
+    TicketsStatusComponent
   ],
   imports: [
     BrowserModule,

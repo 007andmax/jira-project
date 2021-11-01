@@ -1,0 +1,110 @@
+/*** All css files include ***/
+@import "./src/assets/styles/variable";
+@import "./src/assets/scss/mixin";
+@import "./src/assets/scss/custom";
+
+.modal-content {
+    @media only screen and (max-width: 768px) {
+        form {
+            .form-row {
+                margin-bottom: 10px;
+            }
+        }
+    }
+}
+.cmn-area {
+    padding-top: 0;
+    .modal-content {
+        right: 15px;
+        top: 40px;
+    }
+    @media only screen and (max-width: 768px) {
+        padding: 25px;
+        table {
+            th {
+                padding-right: 5px;
+            }
+        }
+    }
+    .tax-name {
+        width: 260px;
+        @media only screen and (max-width: 576px) {
+            width: 105px;
+        }
+    }
+    .rate {
+        width: 170px;
+        @media only screen and (max-width: 576px) {
+            width: 55px;
+        }
+    }
+    .default {
+        width: 100px;
+        text-align: center;
+        text-transform: none;
+        @media only screen and (max-width: 576px) {
+            width: 90px;
+        }
+        .cmn-checkbox {
+            display: inline-block;
+        }
+    }
+    .action {
+        width: 118px;
+        position: relative;
+        @media only screen and (max-width: 576px) {
+            width: 50px;
+        }
+    }
+}
+.check-area {
+    margin-top: -10px;
+    margin-bottom: 18px;
+    @media only screen and (max-width: 1280px) {
+        margin-top: 0;
+    }
+    .cmn-checkbox {
+        label {
+            text-transform: none;
+        }
+    }
+}
+.modal-body {
+    .f-row {
+        margin-bottom: 0;
+    }
+}
+
+.remove {
+    margin-top: 0px !important;
+}
+
+.error-text-align {
+    text-align: left !important;
+}
+.add-category-container {
+    /deep/ .add-tax-dropdown {
+        right: 0px;
+        &:after {
+            right: 14px;
+            left: auto;
+        }
+    }
+}
+.tag-color {
+    display: block;
+    width: 16px;
+    height: 16px;
+    border-radius: 40px;
+}
+.tag-color-item {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+}
+.status-container {
+    padding: 16px;
+    max-width: 200px;
+    display: block;
+}
