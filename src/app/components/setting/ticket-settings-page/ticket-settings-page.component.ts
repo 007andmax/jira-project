@@ -16,6 +16,7 @@ export class TicketSettingsPageComponent implements OnInit, OnDestroy {
   showTerm = false;
   term: any;
   condition: any;
+  activeTab: string = "ticketSettings";
   @ViewChild('ticketsStatus') ticketsStatus: TicketsStatusComponent;
   constructor(private invoiceTicketsService: InvoiceTicketsService,
     private settingStateService: SettingStateService) { }
@@ -33,7 +34,9 @@ export class TicketSettingsPageComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     $('body').removeClass('ng7');
   }
-
+  setTab(data) {
+    this.activeTab = data['nextId'];
+  }
   onBackMenu() {
     let body = document.getElementsByTagName("body")[0];
     body.classList.remove("backMenu"); //remove the class

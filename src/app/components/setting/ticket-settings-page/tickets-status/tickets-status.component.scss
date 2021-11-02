@@ -14,6 +14,13 @@
 }
 .cmn-area {
     padding-top: 0;
+    thead {
+        th {
+            padding: 10px 10px 10px 0px !important;
+            background-color: #f9fafb;
+            text-transform: uppercase;
+        }
+    }
     .modal-content {
         right: 15px;
         top: 40px;
@@ -32,10 +39,31 @@
             width: 105px;
         }
     }
+    .checkbox {
+        margin: 0px;
+        padding: 12px 15px 12px 24px;
+        input {
+            width: 16px;
+            height: 16px;
+            position: unset;
+            margin: 0px;
+            border: solid 1px #c4cbd5;
+        }
+    }
     .rate {
         width: 170px;
+        text-align: center;
         @media only screen and (max-width: 576px) {
             width: 55px;
+        }
+        .tag-color {
+            position: relative;
+            &::after {
+                position: absolute;
+                content: "\2713";
+                color: white;
+                left: 3px;
+            }
         }
     }
     .default {
@@ -52,8 +80,23 @@
     .action {
         width: 118px;
         position: relative;
+        padding: 12px 24px 12px 15px;
         @media only screen and (max-width: 576px) {
             width: 50px;
+        }
+    }
+    .preview-container {
+        height: 20px;
+        padding: 5px 6px;
+        border-radius: 3px;
+        border: solid 1px $primary-1;
+        display: flex;
+        width: max-content;
+        align-items: center;
+        span {
+            font-size: 9px;
+            font-weight: 600;
+            text-transform: uppercase;
         }
     }
 }
@@ -93,18 +136,36 @@
 }
 .tag-color {
     display: block;
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
     border-radius: 40px;
 }
 .tag-color-item {
     display: inline-block;
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
     margin-right: 10px;
 }
 .status-container {
     padding: 16px;
     max-width: 200px;
     display: block;
+}
+.tag-color-container {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+.add-status-name {
+    input {
+        border: 1px solid transparent;
+        border-radius: 4px;
+        outline: none;
+        padding: 2px 2px 2px 8px;
+        outline: none;
+        &:hover,
+        &:focus {
+            border-color: #dfe3e8;
+        }
+    }
 }

@@ -29,8 +29,7 @@ export class TicketsStatusComponent implements OnInit, OnDestroy {
     private leftPanelService: LeftPanelService,) { }
 
   ngOnInit() {
-    $('body').addClass('ng7');
-    $('body').removeClass('backMenu');
+
     this.ticketsStatus = this.ticketsStateService.getTicketsStatus();
     let onGetTicketsStatus = this.ticketsStateService.onGetTicketsStatus.subscribe(data => {
       this.ticketsStatus = data;
@@ -85,7 +84,7 @@ export class TicketsStatusComponent implements OnInit, OnDestroy {
     }
   }
   ngOnDestroy(): void {
-    $('body').removeClass('ng7');
+
     this.sub.unsubscribe();
   }
 }

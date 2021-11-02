@@ -1,7 +1,10 @@
 <!-- Middle Wrapper -->
 <div class="page-container">
     <div class="page-insider invoice-ticket">
-        <div class="heading">
+        <div
+            class="heading"
+            [ngClass]="{'heading-tickets-status':activeTab === 'ticketStatus'}"
+        >
             <h5 class="qt-fw-600">Ticket Settings</h5>
             <div class="heading-serach add-category-container">
                 <a
@@ -13,11 +16,14 @@
                 </a>
             </div>
         </div>
-        <ngb-tabset>
+        <ngb-tabset
+            (tabChange)="setTab($event)"
+            [ngClass]="{'clear-padding' :activeTab === 'ticketStatus'}"
+        >
             <!-- Ticket Settings -->
             <ngb-tab
                 title="Ticket Settings"
-                id="tab1"
+                id="ticketSettings"
             >
                 <ng-template ngbTabContent>
                     <app-ticket-settings
@@ -28,7 +34,10 @@
                     ></app-ticket-settings>
                 </ng-template>
             </ngb-tab>
-            <ngb-tab title="Ticket Status">
+            <ngb-tab
+                title="Ticket Status"
+                id="ticketStatus"
+            >
                 <ng-template ngbTabContent>
                     <tickets-status
                         #ticketsStatus

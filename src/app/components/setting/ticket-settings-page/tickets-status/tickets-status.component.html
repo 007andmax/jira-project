@@ -6,14 +6,17 @@
         >
             <thead>
                 <tr>
-                    <th class="tax-name">Status</th>
-                    <th class="rate">Color</th>
+                    <th></th>
+                    <th class="tax-name">Ticket Status</th>
+                    <th class="rate">Set Color</th>
+                    <th>Preview</th>
                     <th class="action">&nbsp;</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngIf="showAddStatus">
-                    <td class="tax-name">
+                    <td></td>
+                    <td class="tax-name add-status-name">
                         <input
                             type="text"
                             class="form-input"
@@ -25,12 +28,11 @@
                     </td>
                     <td class="rate">
                         <div
-                            class="form-row"
+                            class="form-row tag-color-container"
                             ngbDropdown
                             container="body"
                         >
                             <div
-                                class="tag-color-item"
                                 id="dropdownBasic1"
                                 ngbDropdownToggle
                             >
@@ -61,21 +63,48 @@
                             </div>
                         </div>
                     </td>
+                    <td class="preview">
+                        <div
+                            class="preview-container"
+                            [ngStyle]="{'border-color':  statusColors[addStatus.color].borderColor}"
+                        >
+                            <span
+                                [ngStyle]="{'color':  statusColors[addStatus.color].borderColor}"
+                                [textContent]="addStatus.name"
+                            ></span>
+                        </div>
+                    </td>
                     <td class="action"></td>
                 </tr>
                 <tr *ngFor="let item of ticketsStatus; let i = index">
+                    <td class="checkbox">
+                        <input type="checkbox">
+                    </td>
                     <td
                         class="tax-name"
                         [textContent]="item.name"
                     >
                     </td>
                     <td class="rate">
-                        <i
-                            class="tag-color"
-                            *ngIf="statusColors.length > 0"
-                            [ngStyle]="{'background-color':  statusColors[item.color].borderColor ,
+                        <div class="tag-color-container">
+                            <i
+                                class="tag-color"
+                                *ngIf="statusColors.length > 0"
+                                [ngStyle]="{'background-color':  statusColors[item.color].borderColor ,
                             'border-color':  statusColors[item.color].borderColor}"
-                        ></i>
+                            ></i>
+                        </div>
+                    </td>
+                    <td class="preview">
+                        <div
+                            class="preview-container"
+                            [ngStyle]="{'border-color':  statusColors[item.color].borderColor}"
+                        >
+                            <span
+                                [ngStyle]="{'color':  statusColors[item.color].borderColor}"
+                                [textContent]="item.name"
+                            ></span>
+                        </div>
                     </td>
                     <td class="action">
                         <a

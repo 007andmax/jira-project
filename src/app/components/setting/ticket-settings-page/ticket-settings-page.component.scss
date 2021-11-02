@@ -1,0 +1,13 @@
+.page-insider {
+    /deep/ .clear-padding {
+        .tab-content {
+            padding: 0px !important;
+        }
+        ul.nav-tabs {
+            padding: 0px 24px;
+        }
+    }
+    /deep/.heading-tickets-status {
+        padding: 24px !important;
+    }
+}
