@@ -14,7 +14,15 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngIf="showAddStatus">
+                <tr
+                    *ngIf="showAddStatus"
+                    class="add-ticket-container"
+                    appClickOtside
+                    #addStatusBtn="click"
+                    [init]="true"
+                    [class]="'.add-ticket-container'"
+                    (onOutSide)="onAddTicketStatus()"
+                >
                     <td></td>
                     <td class="tax-name add-status-name">
                         <input
@@ -22,7 +30,6 @@
                             class="form-input"
                             placeholder="Enter Name Status"
                             [(ngModel)]="addStatus.name"
-                            (blur)="onAddTicketStatus()"
                             maxlength="20"
                         >
                     </td>
@@ -30,7 +37,6 @@
                         <div
                             class="form-row tag-color-container"
                             ngbDropdown
-                            container="body"
                         >
                             <div
                                 id="dropdownBasic1"
@@ -76,23 +82,61 @@
                     </td>
                     <td class="action"></td>
                 </tr>
-                <tr *ngFor="let item of ticketsStatus; let i = index">
+                <tr
+                    *ngFor="let item of ticketsStatus; let i = index"
+                    appClickOtside
+                    [init]="item.isInitEdit"
+                    [ngClass]="'edit-ticket-container-' + i"
+                    [class]="'.edit-ticket-container-' + i"
+                    (onOutSide)="onEditTicketStatus(item)"
+                >
                     <td class="checkbox">
                         <input type="checkbox">
                     </td>
-                    <td
-                        class="tax-name"
-                        [textContent]="item.name"
-                    >
+                    <td class="tax-name add-status-name">
+                        <input
+                            type="text"
+                            class="form-input"
+                            placeholder="Enter Name Status"
+                            [(ngModel)]="item.name"
+                            maxlength="20"
+                            (input)="item.onInitEdit(true)"
+                        >
                     </td>
                     <td class="rate">
-                        <div class="tag-color-container">
-                            <i
-                                class="tag-color"
-                                *ngIf="statusColors.length > 0"
-                                [ngStyle]="{'background-color':  statusColors[item.color].borderColor ,
-                            'border-color':  statusColors[item.color].borderColor}"
-                            ></i>
+                        <div
+                            class="form-row tag-color-container"
+                            ngbDropdown
+                        >
+                            <div
+                                id="dropdownBasic1"
+                                ngbDropdownToggle
+                            >
+                                <i
+                                    class="tag-color"
+                                    [ngStyle]="{'background-color':statusColors[item.color].borderColor ,
+                            'border-color': statusColors[item.color].borderColor}"
+                                ></i>
+                            </div>
+                            <div
+                                ngbDropdownMenu
+                                aria-labelledby="dropdownBasic1"
+                            >
+                                <div class="status-container">
+                                    <div
+                                        class="tag-color-item"
+                                        *ngFor="let tagColor of statusColors; let i = index"
+                                        (click)="setColor(i)"
+                                        ngbDropdownItem
+                                    >
+                                        <i
+                                            class="tag-color"
+                                            [ngStyle]="{'background-color':tagColor.borderColor ,
+                            'border-color': tagColor.borderColor}"
+                                        ></i>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </td>
                     <td class="preview">

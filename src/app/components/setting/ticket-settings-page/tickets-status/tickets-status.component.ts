@@ -1,10 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { StatusColor } from 'src/app/components/tickets/class/status-color';
 import { DELETE_TICKET_STATUS } from 'src/app/const/confirm';
+import { ClickOtsideDirective } from 'src/app/directives/click-otside.directive';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
@@ -21,6 +22,7 @@ export class TicketsStatusComponent implements OnInit, OnDestroy {
   ticketsStatus: Array<TicketStatus> = [];
   statusColors: Array<StatusColor> = [];
   editTicketsStatus: TicketStatus;
+  @ViewChild('addStatusBtn') addStatusBtn: ClickOtsideDirective;
   sub: Subscription = new Subscription();
   constructor(private ticketsStateService: TicketsStateService,
     private ticketsService: TicketsService,
@@ -56,11 +58,20 @@ export class TicketsStatusComponent implements OnInit, OnDestroy {
   setColor(i) {
     this.addStatus.color = i;
   }
+  onEditTicketStatus(item) {
+    if (item.isInitEdit) {
+      console.log("item", item);
+    }
+  }
   onAddTicketStatus() {
-    if (this.addStatus.name.length === 0) return;
+    console.log("addStatusBtn", this.addStatusBtn);
+    if (this.addStatus.name.length === 0 || !this.addStatusBtn.getInit()) return;
+    this.addStatusBtn.setInit(false);
     this.ticketsService.addStatus(this.addStatus.name, this.addStatus.color).subscribe(data => {
       this.showAddStatus = false;
       this.addStatus = new TicketStatus();
+    }, err => {
+      setTimeout(() => this.addStatusBtn.setInit(true), 2000);
     })
   }
   resetEditTicketsStatus() {

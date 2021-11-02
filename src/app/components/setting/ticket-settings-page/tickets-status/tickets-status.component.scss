@@ -156,7 +156,8 @@
     align-items: center;
     justify-content: center;
 }
-.add-status-name {
+.add-status-name,
+.edit-status-name {
     input {
         border: 1px solid transparent;
         border-radius: 4px;
@@ -167,5 +168,11 @@
         &:focus {
             border-color: #dfe3e8;
         }
+    }
+}
+.add-ticket-container {
+    td {
+        padding: 7px 15px 7px 0;
+        background-color: #f4fbff !important;
     }
 }

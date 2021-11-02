@@ -3,6 +3,7 @@ export class TicketStatus {
     custom: boolean;
     id: string;
     name: string = "";
+    isInitEdit: boolean = false;
     constructor(data = null) {
         if (data) {
             for (const key in data) {
@@ -24,4 +25,8 @@ export class TicketStatus {
             color: color
         }
     }
+    public onInitEdit(data) {
+        this.isInitEdit = data;
+    }
+
 }
