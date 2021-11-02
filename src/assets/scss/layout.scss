@@ -587,10 +587,10 @@ body {
                 th {
                     padding: 0 15px 12px 0;
                     border-bottom: 1px solid $background;
-                    font-size: 12px;
-                    font-weight: 500;
+                    font-size: 11px;
+                    font-weight: 600;
                     font-style: normal;
-                    line-height: 1.33;
+                    line-height: 16px;
                     letter-spacing: normal;
                     color: $primary-2;
                     text-transform: capitalize;
@@ -1090,6 +1090,58 @@ body {
         }
     }
 
+    .ticket-settings-page-container {
+      .page-insider .heading {
+        padding: 20px 24px !important;
+        height: 74px;
+      }
+      ngb-tabset ul.nav-tabs {
+        padding: 0 24px;
+      }
+      ngb-tabset .tab-content {
+        padding: 24px;
+      }
+      .tab-pane td {
+        height: 40px;
+        padding: 0 15px 0 0;
+      }
+      .tax-name {
+        width: 314px !important;
+      }
+      .page-insider .heading .heading-serach.--hidden {
+        display: none;
+      }
+      form .form-row {
+        margin: 0 0 20px 0;
+      }
+      ngb-tabset ul.nav-tabs .nav-item {
+        margin: 0 24px 0 0;
+      }
+      .checkbox {
+        padding: 0 15px 0 24px !important;
+        display: table-cell;
+        input {
+          transform: translateY(3px);
+        }
+      }
+      .action {
+        padding: 0 24px 0 15px !important;
+        width: 90px !important;
+      }
+      .tag-color {
+        &::after {
+          content: "" !important;
+          position: absolute;
+          left: 50% !important;
+          top: 50% !important;
+          transform: translate(-50%, -50%);
+          background: url("/assets/img/icons/check-mark.svg") no-repeat center / contain;
+          width: 8px;
+          height: 6px;
+        }
+      }
+    }
+
     /*** Common Tabbings ***/
     ngb-tabset {
         float: left;
@@ -1124,12 +1176,12 @@ body {
                     padding: 0;
                     @include border-radius(0);
                     border: 0;
-                    padding-bottom: 13px;
-                    font-size: 12px;
+                    padding-bottom: 12px;
+                    line-height: 20px;
+                    font-size: 13px;
                     font-weight: 600;
-                    line-height: normal;
                     letter-spacing: normal;
-                    color: $gray-800;
+                    color: $primary-2;
                     display: block;
                     text-transform: capitalize;
                     @include transition(0.4s);
