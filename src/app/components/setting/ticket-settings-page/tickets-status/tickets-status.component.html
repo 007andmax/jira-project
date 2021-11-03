@@ -117,6 +117,7 @@
                         <input
                             type="checkbox"
                             [(ngModel)]="item.selected"
+                            (change)="onSelect()"
                         >
                     </td>
                     <td
@@ -134,7 +135,7 @@
                     </td>
                     <td
                         class="tax-name add-status-name"
-                        [textContent]="item.name"
+                        [textContent]="parseStatus(item.name)"
                         *ngIf="!item.custom"
                     >
 

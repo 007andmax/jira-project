@@ -53,6 +53,7 @@ export class TicketsStateService {
         let index = this.ticketsStatus.findIndex(item => item.id === newChange.data);
         this.ticketsStatus.splice(index, 1);
         this.onGetTicketsStatus.emit(this.ticketsStatus);
+        console.log("this.ticketsStatus", this.ticketsStatus);
       }
       if (newChange.action === 'TICKET_STATUS_EDITED') {
         let index = this.ticketsStatus.findIndex(item => item.id === newChange.data.id);

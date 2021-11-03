@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { forkJoin, Subscription } from 'rxjs';
 import { DELETE_LIST_TICKET_STATUS } from 'src/app/const/confirm';
@@ -30,6 +30,7 @@ export class TicketSettingsPageComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     private ticketsService: TicketsService,
+    public cd: ChangeDetectorRef,
     private ticketsStateService: TicketsStateService,
     private settingStateService: SettingStateService) { }
 
@@ -52,6 +53,7 @@ export class TicketSettingsPageComponent implements OnInit, OnDestroy {
     this.ticketsStatus.toggleAddStatus(true);
   }
   ngOnDestroy() {
+    this.sub.unsubscribe();
     $('body').removeClass('ng7');
   }
   setTab(data) {
@@ -69,7 +71,7 @@ export class TicketSettingsPageComponent implements OnInit, OnDestroy {
     forkJoin(this.ticketsStateService.getListTicketStatusForRemove().map(item => this.ticketsService.removeTicketStatus(item.id)))
       .subscribe(
         () => {
-
+          this.cd.detectChanges();
         },
         error => {
         }

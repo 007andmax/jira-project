@@ -51,8 +51,15 @@ export class TicketsStatusComponent implements OnInit, OnDestroy {
   }
   onRemoveTicketStatus(id) {
     this.ticketsService.removeTicketStatus(id).subscribe(data => {
-
+      this.cd.detectChanges();
     })
+  }
+  parseStatus(name) {
+    if (name === "IN_PROGRESS") return "In progress";
+    if (name === "ON_HOLD") return "On hold";
+    if (name === "UNASSIGNED") return "Unassigned";
+    if (name === "COMPLETED") return "Completed";
+    return name;
   }
   toggleAddStatus(data) {
     this.showAddStatus = data;
@@ -83,6 +90,9 @@ export class TicketsStatusComponent implements OnInit, OnDestroy {
     }, err => {
       setTimeout(() => this.addStatusBtn.setInit(true), 2000);
     })
+  }
+  onSelect() {
+    this.cd.detectChanges();
   }
   resetEditTicketsStatus() {
     this.editTicketsStatus = null;
