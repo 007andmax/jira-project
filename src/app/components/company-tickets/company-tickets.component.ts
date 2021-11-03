@@ -12,7 +12,7 @@ import { LeftPanelService } from '../../services/left-panel/left-panel.service';
 import { TicketStateService } from '../tickets/tickets/ticket-edit-aside/services/ticket-state.service';
 import { UsersStateService } from '../../states/users/users-state.service';
 import { ActivatedRoute } from '@angular/router';
-import { TicketStatus } from '../setting/customizable-lists/class/ticket-status';
+import { TicketStatus } from '../setting/products-settings/class/ticket-status';
 import { StatusColor } from '../tickets/class/status-color';
 
 @Component({

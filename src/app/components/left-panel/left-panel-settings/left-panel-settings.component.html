@@ -7,15 +7,6 @@
     <div class="app-left-panel__menu-title">Settings</div>
     <div class="app-left-panel__menu-arrow"></div>
 </div>
-
-
-
-
-
-
-
-
-
 <ul
     class="app-left-panel__menu-expand top-menu"
     [ngClass]="{'menu-expand-show': open, 'menu-expand-hide': !open}"
@@ -32,13 +23,6 @@
         (click)="goToState('manage-tags-component')"
     >
         Manage Tags
-    </li>
-    <li
-        [ngClass]="{'--active':activePage === 'customizable-lists'}"
-        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TAGS_SETTINGS')"
-        (click)="goToState('customizable-lists')"
-    >
-        Customizable lists
     </li>
     <li
         [ngClass]="{'--active':activePage === 'glnumber-component'}"
@@ -101,6 +85,13 @@
         (click)="goToState('invoice-ticket-component')"
     >
         Invoice and Ticket
+    </li>
+    <li
+        [ngClass]="{'--active':activePage === 'products-settings'}"
+        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TAGS_SETTINGS')"
+        (click)="goToState('products-settings')"
+    >
+        Products
     </li>
     <li
         [ngClass]="{'--active':activePage === 'commission-component'}"

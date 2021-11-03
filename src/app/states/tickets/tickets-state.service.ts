@@ -6,7 +6,7 @@ import { TicketChangeField } from '../../components/tickets/tickets/class/ticket
 import { WebsocketService } from '../../services/websocket/websocket.service';
 import { TicketsService } from '../../services/tickets/tickets.service';
 import { TicketsCounts } from '../../components/tickets/tickets/class/tickets-counts';
-import { TicketStatus } from 'src/app/components/setting/customizable-lists/class/ticket-status';
+import { TicketStatus } from 'src/app/components/setting/products-settings/class/ticket-status';
 import { StatusColor } from 'src/app/components/tickets/class/status-color';
 
 @Injectable({

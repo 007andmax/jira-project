@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import * as moment from 'moment';
-import { TicketStatus } from 'src/app/components/setting/customizable-lists/class/ticket-status';
+import { TicketStatus } from 'src/app/components/setting/products-settings/class/ticket-status';
 import { StatusColor } from 'src/app/components/tickets/class/status-color';
 import { Ticket } from 'src/app/components/tickets/class/ticket';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';

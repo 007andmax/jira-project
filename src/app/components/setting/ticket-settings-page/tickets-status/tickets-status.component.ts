@@ -9,7 +9,7 @@ import { ClickOtsideDirective } from 'src/app/directives/click-otside.directive'
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
-import { TicketStatus } from '../../customizable-lists/class/ticket-status';
+import { TicketStatus } from '../../products-settings/class/ticket-status';
 
 @Component({
   selector: 'tickets-status',
@@ -91,7 +91,15 @@ export class TicketsStatusComponent implements OnInit, OnDestroy {
       setTimeout(() => this.addStatusBtn.setInit(true), 2000);
     })
   }
-  onSelect() {
+  onSelect(event, item) {
+    if (event.target.checked) {
+      this.ticketsStateService.getListTicketStatusForRemove().push(item);
+    } else {
+      let list = this.ticketsStateService.getListTicketStatusForRemove();
+      let index = list.findIndex(item => item.id === item.id);
+      if (index > -1) list.splice(index, 1);
+      this.ticketsStateService.setListTicketStatusForRemove(list);
+    }
     this.cd.detectChanges();
   }
   resetEditTicketsStatus() {

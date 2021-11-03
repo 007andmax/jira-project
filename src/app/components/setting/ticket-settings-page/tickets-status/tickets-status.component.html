@@ -117,7 +117,7 @@
                         <input
                             type="checkbox"
                             [(ngModel)]="item.selected"
-                            (change)="onSelect()"
+                            (change)="onSelect($event,item)"
                         >
                     </td>
                     <td

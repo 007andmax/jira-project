@@ -150,7 +150,7 @@ import { ToastrModule } from 'ngx-toastr';
 // import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { IncomingEmailComponent } from './components/setting/email-setting/incoming-email/incoming-email.component';
 import { OutgoingEmailComponent } from './components/setting/email-setting/outgoing-email/outgoing-email.component';
-import { TicketSettingsComponent } from './components/setting/invoice-tickets/ticket-settings/ticket-settings.component';
+import { TicketSettingsComponent } from './components/setting/ticket-settings-page/ticket-settings/ticket-settings.component';
 import { InvoiceSettingsComponent } from './components/setting/invoice-tickets/invoice-settings/invoice-settings.component';
 import { QuotesSettingsComponent } from './components/setting/invoice-tickets/quotes-settings/quotes-settings.component';
 import { GlNumberSettingsComponent } from './components/setting/gl-number/gl-number.component';
@@ -464,12 +464,10 @@ import { ModalAddUsersNotifyComponent } from './services/modal/modal-add-users-n
 import { TicketProfileEditFormUpdateComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-edit-form-update/ticket-profile-edit-form-update.component';
 import { TicketProfileEditFormUpdateProductsComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-edit-form-update/ticket-profile-edit-form-update-products/ticket-profile-edit-form-update-products.component';
 import { TicketProfileEditFormUpdateServicesComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-edit-form-update/ticket-profile-edit-form-update-services/ticket-profile-edit-form-update-services.component';
-import { CustomizableListsComponent } from './components/setting/customizable-lists/customizable-lists.component';
 import { ModalEditCategoryProductComponent } from './services/modal/modal-edit-category-product/modal-edit-category-product.component';
-import { AddTicketStatusComponent } from './components/setting/customizable-lists/add-ticket-status/add-ticket-status.component';
-import { EditTicketStatusComponent } from './components/setting/customizable-lists/edit-ticket-status/edit-ticket-status.component';
 import { TicketSettingsPageComponent } from './components/setting/ticket-settings-page/ticket-settings-page.component';
 import { TicketsStatusComponent } from './components/setting/ticket-settings-page/tickets-status/tickets-status.component';
+import { ProductsSettingsComponent } from './components/setting/products-settings/products-settings.component';
 
 
 declare var $: any;
@@ -892,12 +890,10 @@ declare var $: any;
     TicketProfileEditFormUpdateComponent,
     TicketProfileEditFormUpdateProductsComponent,
     TicketProfileEditFormUpdateServicesComponent,
-    CustomizableListsComponent,
     ModalEditCategoryProductComponent,
-    AddTicketStatusComponent,
-    EditTicketStatusComponent,
     TicketSettingsPageComponent,
-    TicketsStatusComponent
+    TicketsStatusComponent,
+    ProductsSettingsComponent
   ],
   imports: [
     BrowserModule,

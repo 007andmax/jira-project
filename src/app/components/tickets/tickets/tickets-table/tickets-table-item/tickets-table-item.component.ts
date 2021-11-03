@@ -5,7 +5,7 @@ import { User } from 'src/app/components/users/class/user';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import * as moment from "moment";
 import { TicketsListService } from '../../services/tickets-list.service';
-import { TicketStatus } from 'src/app/components/setting/customizable-lists/class/ticket-status';
+import { TicketStatus } from 'src/app/components/setting/products-settings/class/ticket-status';
 import { StatusColor } from '../../../class/status-color';
 
 @Component({

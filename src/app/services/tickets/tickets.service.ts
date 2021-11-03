@@ -56,7 +56,12 @@ export class TicketsService {
     return this.http.put(this.apiUrl + `v2/tickets/edit`, data);
   }
   public removeTicketStatus(ticket_id) {
-    return this.http.delete(this.apiUrl + `ticket/status/${ticket_id}`);
+    return this.http.delete(this.apiUrl + `ticket/status/${ticket_id}`).pipe(
+      tap(data => {
+        this.toastrService.success("Status removed successfully");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public restoreFromSpam(id, value) {
     let data = { value: value };

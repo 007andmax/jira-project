@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { InvoiceTicketsService } from '../invoice-tickets.service';
+import { InvoiceTicketsService } from '../../invoice-tickets/invoice-tickets.service';
 import { UsersService } from 'src/app/services/users/users.service';
 import { ToastrService } from 'ngx-toastr';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';

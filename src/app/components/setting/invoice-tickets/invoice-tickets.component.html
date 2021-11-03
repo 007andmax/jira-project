@@ -2,23 +2,9 @@
 <div class="page-container">
     <div class="page-insider invoice-ticket">
         <div class="heading">
-            <h5 class="qt-fw-600">Invoice and Ticket</h5>
+            <h5 class="qt-fw-600">Invoice</h5>
         </div>
         <ngb-tabset>
-            <!-- Ticket Settings -->
-            <ngb-tab
-                title="Ticket Settings"
-                id="tab1"
-            >
-                <ng-template ngbTabContent>
-                    <app-ticket-settings
-                        [taxIdDescInput]="taxIdDescription"
-                        [taxIdInput]="taxId"
-                        [conditionInput]="condition"
-                        *ngIf="showTab == true && showTerm == true"
-                    ></app-ticket-settings>
-                </ng-template>
-            </ngb-tab>
             <!-- Invoice Settings -->
             <ngb-tab title="Invoice Settings">
                 <ng-template ngbTabContent>

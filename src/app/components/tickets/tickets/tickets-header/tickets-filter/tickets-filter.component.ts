@@ -15,7 +15,7 @@ import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service'
 import { AppService } from 'src/app/states/app/app.service';
 import { TicketsFilterTagsComponent } from './tickets-filter-tags/tickets-filter-tags.component';
 import { StatusColor } from '../../../class/status-color';
-import { TicketStatus } from 'src/app/components/setting/customizable-lists/class/ticket-status';
+import { TicketStatus } from 'src/app/components/setting/products-settings/class/ticket-status';
 import { TicketStatusFilter } from '../class/ticket-status-filter';
 
 @Component({

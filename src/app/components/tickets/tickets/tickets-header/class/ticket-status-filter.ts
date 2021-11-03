@@ -1,4 +1,4 @@
-import { TicketStatus } from "src/app/components/setting/customizable-lists/class/ticket-status";
+import { TicketStatus } from "src/app/components/setting/products-settings/class/ticket-status";
 import { ItemStatus } from "../../../class/item-status";
 
 export class TicketStatusFilter extends TicketStatus {

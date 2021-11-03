@@ -5,7 +5,7 @@ import { TitleListType } from '../../tickets-header/class/title-list-type';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
-import { TicketStatus } from 'src/app/components/setting/customizable-lists/class/ticket-status';
+import { TicketStatus } from 'src/app/components/setting/products-settings/class/ticket-status';
 import { Subscription } from 'rxjs';
 import { StatusColor } from '../../../class/status-color';
 

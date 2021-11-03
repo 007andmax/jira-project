@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 
 import { Subscription } from 'rxjs';
-import { TicketStatus } from 'src/app/components/setting/customizable-lists/class/ticket-status';
+import { TicketStatus } from 'src/app/components/setting/products-settings/class/ticket-status';
 import { StatusColor } from 'src/app/components/tickets/class/status-color';
 import { Ticket } from 'src/app/components/tickets/class/ticket';
 import { TicketsFilter } from 'src/app/components/tickets/tickets/class/tickets-filter';

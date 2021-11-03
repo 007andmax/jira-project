@@ -81,7 +81,7 @@ export class TicketSettingsPageComponent implements OnInit, OnDestroy {
     this.confirmStateService.setConfirmAction(DELETE_LIST_TICKET_STATUS);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
     modalRef.componentInstance.message = `Do you want to delete statuses?`;
-    this.ticketsStateService.setListTicketStatusForRemove(this.ticketsStatus.ticketsStatus.filter(item => item.selected));
+    //this.ticketsStateService.setListTicketStatusForRemove(this.ticketsStatus.ticketsStatus.filter(item => item.selected));
   }
   getTaxNumber() {
     this.loading = true; $(".loading").css("display", "block");
