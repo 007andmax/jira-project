@@ -17,6 +17,7 @@ export class TicketsStateService {
   ticketsCounts: TicketsCounts;
   isMoveToTickets: boolean = false;
   ticketStatusForRemove: TicketStatus = null;
+  listTicketStatusForRemove: Array<TicketStatus> = [];
   clearFormUpdate: EventEmitter<any> = new EventEmitter();
   actualNumber: EventEmitter<any> = new EventEmitter();
   addTicket: EventEmitter<any> = new EventEmitter();
@@ -88,7 +89,12 @@ export class TicketsStateService {
       this.ticketsStatus = data.map(item => new TicketStatus(item));
       this.onGetTicketsStatus.emit(this.ticketsStatus);
     })
-
+  }
+  public getListTicketStatusForRemove() {
+    return this.listTicketStatusForRemove;
+  }
+  public setListTicketStatusForRemove(data) {
+    this.listTicketStatusForRemove = data;
   }
   public getTicketsStatus() {
     return this.ticketsStatus;

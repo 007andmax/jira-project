@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild, ViewChildren } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
@@ -28,6 +28,7 @@ export class TicketsStatusComponent implements OnInit, OnDestroy {
     private ticketsService: TicketsService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
+    public cd: ChangeDetectorRef,
     private leftPanelService: LeftPanelService,) { }
 
   ngOnInit() {
@@ -35,6 +36,7 @@ export class TicketsStatusComponent implements OnInit, OnDestroy {
     this.ticketsStatus = this.ticketsStateService.getTicketsStatus();
     let onGetTicketsStatus = this.ticketsStateService.onGetTicketsStatus.subscribe(data => {
       this.ticketsStatus = data;
+      this.cd.detectChanges();
     })
     this.sub.add(onGetTicketsStatus);
     this.getColors();
@@ -61,7 +63,15 @@ export class TicketsStatusComponent implements OnInit, OnDestroy {
   onEditTicketStatus(item) {
     if (item.isInitEdit) {
       console.log("item", item);
+      if (item.length === 0) return;
+      this.ticketsService.editStatus(item.getDataForEdit(item.name, item.color)).subscribe(data => {
+        item.onInitEdit(false);
+      })
     }
+  }
+  editColor(i, item) {
+    item.color = i;
+    item.onInitEdit(true);
   }
   onAddTicketStatus() {
     console.log("addStatusBtn", this.addStatusBtn);

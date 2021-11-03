@@ -6,7 +6,23 @@
             [ngClass]="{'heading-tickets-status':activeTab === 'ticketStatus'}"
         >
             <h6 class="qt-fw-600 qt-color-dark">Ticket Settings</h6>
-            <div class="heading-serach add-category-container">
+            <div
+                class="heading-serach add-category-container"
+                [ngClass]="{'--hidden':activeTab === 'ticketSettings'}"
+            >
+                <div
+                    class="tickets-status-header-buttons"
+                    *ngIf="getSelectedCount() > 0"
+                >
+                    <div [textContent]="getSelectedCount() + ' Status Selected'"></div>
+                    <div
+                        class="qt-ml-16 qt-fw-600 qt-df qt-color-info qt-ai-c qt-pointer"
+                        (click)="removeTicketsStatus()"
+                    >
+                        <div class="icon__remove-blue qt-sz-16 qt-bg-contain qt-ic-c qt-mr-6"></div>
+                        <div>Delete</div>
+                    </div>
+                </div>
                 <a
                     href="javascript:;"
                     class="btn-outline"

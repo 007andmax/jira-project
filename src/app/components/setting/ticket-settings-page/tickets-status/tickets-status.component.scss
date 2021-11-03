@@ -177,3 +177,11 @@
         background-color: #f4fbff !important;
     }
 }
+.status-container-db {
+    width: 200px;
+}
+.icon__info-question {
+    &::after {
+        display: none !important;
+    }
+}

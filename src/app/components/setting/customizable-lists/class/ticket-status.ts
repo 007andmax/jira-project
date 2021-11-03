@@ -4,6 +4,7 @@ export class TicketStatus {
     id: string;
     name: string = "";
     isInitEdit: boolean = false;
+    selected: boolean = false;
     constructor(data = null) {
         if (data) {
             for (const key in data) {

@@ -7,7 +7,20 @@
             <thead>
                 <tr>
                     <th></th>
-                    <th class="tax-name">Ticket Status</th>
+                    <th class="tax-name">
+                        Ticket Status
+                        <ng-template
+                            #tipContent
+                            class="tooltip"
+                        >
+                            The maximum number of custom statuses is 10
+                        </ng-template>
+                        <span
+                            class="icon__info-question default-services-page__question-icon qt-sz-12 qt-ic-c"
+                            placement="top"
+                            [ngbTooltip]="tipContent"
+                        ></span>
+                    </th>
                     <th class="rate">Set Color</th>
                     <th>Preview</th>
                     <th class="action">&nbsp;</th>
@@ -50,6 +63,7 @@
                             </div>
                             <div
                                 ngbDropdownMenu
+                                class="status-container-db"
                                 aria-labelledby="dropdownBasic1"
                             >
                                 <div class="status-container">
@@ -90,10 +104,25 @@
                     [class]="'.edit-ticket-container-' + i"
                     (onOutSide)="onEditTicketStatus(item)"
                 >
-                    <td class="checkbox">
-                        <input type="checkbox">
+                    <td
+                        class="checkbox"
+                        *ngIf="!item.custom"
+                    >
+
                     </td>
-                    <td class="tax-name add-status-name">
+                    <td
+                        class="checkbox"
+                        *ngIf="item.custom"
+                    >
+                        <input
+                            type="checkbox"
+                            [(ngModel)]="item.selected"
+                        >
+                    </td>
+                    <td
+                        class="tax-name add-status-name"
+                        *ngIf="item.custom"
+                    >
                         <input
                             type="text"
                             class="form-input"
@@ -103,9 +132,28 @@
                             (input)="item.onInitEdit(true)"
                         >
                     </td>
+                    <td
+                        class="tax-name add-status-name"
+                        [textContent]="item.name"
+                        *ngIf="!item.custom"
+                    >
+
+                    </td>
                     <td class="rate">
                         <div
+                            class="tag-color-container"
+                            *ngIf="!item.custom"
+                        >
+                            <i
+                                class="tag-color"
+                                *ngIf="statusColors.length > 0"
+                                [ngStyle]="{'background-color':  statusColors[item.color].borderColor ,	
+                             'border-color':  statusColors[item.color].borderColor}"
+                            ></i>
+                        </div>
+                        <div
                             class="form-row tag-color-container"
+                            *ngIf="item.custom"
                             ngbDropdown
                         >
                             <div
@@ -120,13 +168,14 @@
                             </div>
                             <div
                                 ngbDropdownMenu
+                                class="status-container-db"
                                 aria-labelledby="dropdownBasic1"
                             >
                                 <div class="status-container">
                                     <div
                                         class="tag-color-item"
                                         *ngFor="let tagColor of statusColors; let i = index"
-                                        (click)="setColor(i)"
+                                        (click)="editColor(i,item)"
                                         ngbDropdownItem
                                     >
                                         <i
@@ -153,17 +202,6 @@
                     <td class="action">
                         <a
                             href="javascript:;"
-                            data-tooltip="Edit"
-                            (click)="editTicketsStatus = item"
-                            class="edit"
-                        >
-                            <img
-                                src="/html/assets/img/icons/edit.svg"
-                                alt="Edit"
-                            >
-                        </a>
-                        <a
-                            href="javascript:;"
                             data-tooltip="Remove"
                             class="remove"
                             (click)="removeTicketStatus(item)"
@@ -171,12 +209,6 @@
                         >
                             <div class="icon__remove qt-sz-16 qt-bg-contain"></div>
                         </a>
-                        <edit-ticket-status
-                            *ngIf="editTicketsStatus && editTicketsStatus.id === item.id"
-                            [ticketStatus]="item"
-                            [statusColors]="statusColors"
-                            (onClose)="resetEditTicketsStatus()"
-                        ></edit-ticket-status>
                     </td>
                 </tr>
             </tbody>
