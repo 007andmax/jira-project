@@ -69,7 +69,6 @@ export class TicketsStatusComponent implements OnInit, OnDestroy {
   }
   onEditTicketStatus(item) {
     if (item.isInitEdit) {
-      console.log("item", item);
       if (item.length === 0) return;
       this.ticketsService.editStatus(item.getDataForEdit(item.name, item.color)).subscribe(data => {
         item.onInitEdit(false);
@@ -81,7 +80,6 @@ export class TicketsStatusComponent implements OnInit, OnDestroy {
     item.onInitEdit(true);
   }
   onAddTicketStatus() {
-    console.log("addStatusBtn", this.addStatusBtn);
     if (this.addStatus.name.length === 0 || !this.addStatusBtn.getInit()) return;
     this.addStatusBtn.setInit(false);
     this.ticketsService.addStatus(this.addStatus.name, this.addStatus.color).subscribe(data => {
