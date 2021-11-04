@@ -1060,11 +1060,11 @@ table {
                     @include border-radius(0);
                     border: 0;
                     padding-bottom: 13px;
-                    font-size: 12px;
+                    font-size: 13px;
                     font-weight: 600;
                     line-height: normal;
                     letter-spacing: normal;
-                    color: $gray-800;
+                    color: $primary-2;
                     display: block;
                     text-transform: capitalize;
                     @include transition(0.4s);

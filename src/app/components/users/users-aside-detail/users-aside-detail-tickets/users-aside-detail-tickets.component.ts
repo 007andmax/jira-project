@@ -1,8 +1,8 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 
 import { Subscription } from 'rxjs';
-import { StatusColor } from 'src/app/components/left-panel/left-panel-tickets/tickets-status/class/status-color';
-import { TicketsColor } from 'src/app/components/left-panel/left-panel-tickets/tickets-status/class/tickets-color';
+import { TicketStatus } from 'src/app/components/setting/products-settings/class/ticket-status';
+import { StatusColor } from 'src/app/components/tickets/class/status-color';
 import { Ticket } from 'src/app/components/tickets/class/ticket';
 import { TicketsFilter } from 'src/app/components/tickets/tickets/class/tickets-filter';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
@@ -30,10 +30,9 @@ export class UsersAsideDetailTicketsComponent implements OnInit {
   tickets: Array<Ticket> = [];
   sub: Subscription = new Subscription();
   listColors: Array<StatusColor> = [];
-  statusColor: TicketsColor;
   offset: number = 15;
   showPendingPreloader: boolean = false;
-
+  ticketsStatus: Array<TicketStatus> = [];
   constructor(private ticketsService: TicketsService,
     private ticketsListService: TicketsListService,
     private ticketStateService: TicketStateService,
@@ -53,7 +52,7 @@ export class UsersAsideDetailTicketsComponent implements OnInit {
       this.ticketsFilter.onSetSizeAll();
     }
     this.listColors = this.ticketsStateService.getListStatusColor();
-    this.statusColor = this.ticketsStateService.getTicketsColor();
+
     let getOnAddTicket = this.ticketsStateService.getOnAddTicket().subscribe(data => {
       if (this.ticketsListService.isTicketMatchesFilters(this.ticketsFilter, data)) {
         this.tickets.unshift(data);
@@ -84,10 +83,11 @@ export class UsersAsideDetailTicketsComponent implements OnInit {
     this.ticketsStateService.getOnInitColor().subscribe(data => {
       this.listColors = data;
     })
-    this.ticketsStateService.getOnInitStatus().subscribe(data => {
-      this.statusColor = data;
+    this.ticketsStatus = this.ticketsStateService.getTicketsStatus();
+    let onGetTicketsStatus = this.ticketsStateService.onGetTicketsStatus.subscribe(data => {
+      this.ticketsStatus = data;
     })
-
+    this.sub.add(onGetTicketsStatus);
   }
   getWidth() {
     return Math.max(

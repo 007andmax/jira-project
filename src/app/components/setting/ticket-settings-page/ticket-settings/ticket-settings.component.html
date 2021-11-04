@@ -1,0 +1,107 @@
+<div class="page-insider invoice-ticket ticket-settings-container">
+    <div class="cmn-area in-ticks">
+        <form
+            [formGroup]="ticketForm"
+            (ngSubmit)="onSubmit()"
+        >
+            <div class="f-row">
+                <div class="f-col col-50">
+                    <label>Starting ticket number</label>
+                    <div class="form-row ticket-number">
+                        <input
+                            type="text"
+                            numbersOnly
+                            formControlName="ticketCount"
+                            [ngClass]="{'--input-error' : submitted && f.ticketCount.errors}"
+                            class="form-input"
+                            placeholder="Enter Starting ticket number"
+                            value="Starting ticket number"
+                        >
+                        <mat-error
+                            class="qt-tooltip-error"
+                            *ngIf="submitted && f.ticketCount.errors && f.ticketCount.errors.required"
+                        >
+                            Starting ticket number is required
+                        </mat-error>
+                        <mat-error
+                            class="qt-tooltip-error"
+                            *ngIf="submitted && f.ticketCount.errors && f.ticketCount.errors.pattern"
+                        >
+                            Only Number is allowed
+                        </mat-error>
+                        <label
+                            class="control-label"
+                            *ngIf="used"
+                        >
+                            Already used. Next free is
+                            <span class="free-number-link">
+                                <!-- {{ ticketConfig.nextValid }} -->
+                            </span>
+                            .
+                        </label>
+                    </div>
+                </div>
+                <div class="f-col col-50">
+                    <label>Outliers Time</label>
+                    <div class="form-row outliersTime">
+                        <span class="input-number">
+                            <input
+                                type="number"
+                                min="1"
+                                onkeypress="return event.charCode != 45"
+                                formControlName="outliersTime"
+                                [ngClass]="{'--input-error' : submitted && f.outliersTime.errors}"
+                                class="number"
+                            >
+                            <mat-error
+                                class="qt-tooltip-error"
+                                *ngIf="submitted && f.outliersTime.errors && f.outliersTime.errors.required"
+                            >
+                                OutliersTime is required
+                            </mat-error>
+                        </span>
+                    </div>
+                </div>
+                <div class="f-col col-50">
+                    <label>Timepicker type</label>
+                    <div class="form-row">
+                        <app-drop-down
+                            [class]="['light-dropdown', 'qt-select-input-40']"
+                            [placeholder]="'Select Company Type'"
+                            [field]="'title'"
+                            [editItem]="getSelectedTimepickerType()"
+                            [isBlockClear]="true"
+                            [list]="timepickerTypes"
+                            (onSelectedItem)="onChangeType($event)"
+                        >
+                        </app-drop-down>
+                    </div>
+                </div>
+                <div class="f-col col-50">
+                    <label>Interval</label>
+                    <div class="form-row interval-container">
+                        <app-drop-down
+                            #intervalsDp
+                            [class]="['light-dropdown', 'qt-select-input-40']"
+                            [placeholder]="'Select Company Type'"
+                            [editItem]="getSelectedInterval()"
+                            [isBlockClear]="true"
+                            [field]="'title'"
+                            [list]="intervals"
+                            (onSelectedItem)="onChangeInterval($event)"
+                        >
+                        </app-drop-down>
+                    </div>
+                </div>
+            </div>
+            <div class="qt-df">
+                <button
+                    type="submit"
+                    class="qt-button qt-mr-12"
+                >
+                    Save Changes
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

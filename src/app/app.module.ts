@@ -150,7 +150,7 @@ import { ToastrModule } from 'ngx-toastr';
 // import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { IncomingEmailComponent } from './components/setting/email-setting/incoming-email/incoming-email.component';
 import { OutgoingEmailComponent } from './components/setting/email-setting/outgoing-email/outgoing-email.component';
-import { TicketSettingsComponent } from './components/setting/invoice-tickets/ticket-settings/ticket-settings.component';
+import { TicketSettingsComponent } from './components/setting/ticket-settings-page/ticket-settings/ticket-settings.component';
 import { InvoiceSettingsComponent } from './components/setting/invoice-tickets/invoice-settings/invoice-settings.component';
 import { QuotesSettingsComponent } from './components/setting/invoice-tickets/quotes-settings/quotes-settings.component';
 import { GlNumberSettingsComponent } from './components/setting/gl-number/gl-number.component';
@@ -168,7 +168,6 @@ import { TicketsTableItemComponent } from './components/tickets/tickets/tickets-
 import { TicketEditAsideCompanyInfoComponent } from './components/tickets/tickets/ticket-edit-aside-company-info/ticket-edit-aside-company-info.component';
 import { TicketEditAsideDevicesComponent } from './components/tickets/tickets/ticket-edit-aside-devices/ticket-edit-aside-devices.component';
 import { TicketEditAsideUsersComponent } from './components/tickets/tickets/ticket-edit-aside-users/ticket-edit-aside-users.component';
-import { TicketsStatusComponent } from './components/left-panel/left-panel-tickets/tickets-status/tickets-status.component';
 import { UploadAreaProgressComponent } from './components/shared/upload-area/upload-area-progress/upload-area-progress.component';
 import { DndDirective } from './directives/dnd.directive';
 import { AddAssignedUserComponent } from './components/tickets/tickets/ticket-edit-aside/add-assigned-user/add-assigned-user.component';
@@ -465,6 +464,10 @@ import { ModalAddUsersNotifyComponent } from './services/modal/modal-add-users-n
 import { TicketProfileEditFormUpdateComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-edit-form-update/ticket-profile-edit-form-update.component';
 import { TicketProfileEditFormUpdateProductsComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-edit-form-update/ticket-profile-edit-form-update-products/ticket-profile-edit-form-update-products.component';
 import { TicketProfileEditFormUpdateServicesComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-edit-form-update/ticket-profile-edit-form-update-services/ticket-profile-edit-form-update-services.component';
+import { ModalEditCategoryProductComponent } from './services/modal/modal-edit-category-product/modal-edit-category-product.component';
+import { TicketSettingsPageComponent } from './components/setting/ticket-settings-page/ticket-settings-page.component';
+import { TicketsStatusComponent } from './components/setting/ticket-settings-page/tickets-status/tickets-status.component';
+import { ProductsSettingsComponent } from './components/setting/products-settings/products-settings.component';
 
 
 declare var $: any;
@@ -616,7 +619,6 @@ declare var $: any;
     TicketEditAsideCompanyInfoComponent,
     TicketEditAsideDevicesComponent,
     TicketEditAsideUsersComponent,
-    TicketsStatusComponent,
     UploadAreaProgressComponent,
     DndDirective,
     AddAssignedUserComponent,
@@ -887,7 +889,11 @@ declare var $: any;
     ModalAddUsersNotifyComponent,
     TicketProfileEditFormUpdateComponent,
     TicketProfileEditFormUpdateProductsComponent,
-    TicketProfileEditFormUpdateServicesComponent
+    TicketProfileEditFormUpdateServicesComponent,
+    ModalEditCategoryProductComponent,
+    TicketSettingsPageComponent,
+    TicketsStatusComponent,
+    ProductsSettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -941,7 +947,8 @@ declare var $: any;
     ModalSessionScreenComponent,
     ModalAddUpdateTicketComponent,
     ModalAgentLinkComponent,
-    ModalAddUsersNotifyComponent
+    ModalAddUsersNotifyComponent,
+    ModalEditCategoryProductComponent
     // RecurringTicketsComponent
   ],
   exports: [

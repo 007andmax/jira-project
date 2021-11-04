@@ -10,9 +10,7 @@ import { TicketsStateService } from 'src/app/states/tickets/tickets-state.servic
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { PhoneNumber } from 'src/class/phone-number';
 import { CompanySubscriptionStateService } from '../../companies/company-subscription/class/company-subscription-state.service';
-import { StatusColor } from '../../left-panel/left-panel-tickets/tickets-status/class/status-color';
-import { TicketsColor } from '../../left-panel/left-panel-tickets/tickets-status/class/tickets-color';
-
+import { StatusColor } from '../../tickets/class/status-color';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { User } from '../class/user';
 import { UserProfile } from '../class/user-profile';
@@ -67,15 +65,11 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
     this.sub.add(openDetailAside);
     this.leftPanelService.getColors().subscribe((data: any) => {
       let listColors = data.map(item => {
-        return new StatusColor(item.backgroundColor, item.borderColor);
+        return new StatusColor(item.borderColor);
       })
       this.ticketsStateService.onColorStatus(listColors);
     })
-    this.leftPanelService.getTicketsStatus().subscribe((data: any) => {
 
-      let ticketsColor = new TicketsColor(data);
-      this.ticketsStateService.onInitStatus(ticketsColor);
-    })
     if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.getClientsList(data);

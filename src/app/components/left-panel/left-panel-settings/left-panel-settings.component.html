@@ -7,11 +7,6 @@
     <div class="app-left-panel__menu-title">Settings</div>
     <div class="app-left-panel__menu-arrow"></div>
 </div>
-
-
-
-
-
 <ul
     class="app-left-panel__menu-expand top-menu"
     [ngClass]="{'menu-expand-show': open, 'menu-expand-hide': !open}"
@@ -74,6 +69,12 @@
         Email Templetes
     </li>
     <li
+        [ngClass]="{'--active':activePage === 'ticket-settings'}"
+        (click)="goToState('ticket-settings')"
+    >
+        Ticket Settings
+    </li>
+    <li
         [ngClass]="{'--active':activePage === 'integrations-component'}"
         (click)="goToState('integrations-component')"
     >
@@ -84,6 +85,13 @@
         (click)="goToState('invoice-ticket-component')"
     >
         Invoice and Ticket
+    </li>
+    <li
+        [ngClass]="{'--active':activePage === 'products-settings'}"
+        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TAGS_SETTINGS')"
+        (click)="goToState('products-settings')"
+    >
+        Products
     </li>
     <li
         [ngClass]="{'--active':activePage === 'commission-component'}"

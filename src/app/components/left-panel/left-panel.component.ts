@@ -91,6 +91,7 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/password-manager`)) this.state = 'password-manager';
           if (window.location.href.includes(`/setting/myprofile`)) this.state = 'myprofile-component';
           if (window.location.href.includes(`/setting/tags`)) this.state = 'manage-tags-component';
+          if (window.location.href.includes(`/setting/products-settings`)) this.state = 'products-settings';
           if (window.location.href.includes(`/setting/glnumber`)) this.state = 'glnumber-component';
           if (window.location.href.includes(`/setting/companyprofile`)) this.state = 'company-profile-component';
           if (window.location.href.includes(`/setting/techUsers`)) this.state = 'tech-component';
@@ -102,6 +103,7 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/setting/invoiceTickets`)) this.state = 'invoice-ticket-component';
           if (window.location.href.includes(`/setting/commission`)) this.state = 'commission-component';
           if (window.location.href.includes(`/setting/subscription`)) this.state = 'subscription-component';
+          if (window.location.href.includes(`/setting/ticket-settings`)) this.state = 'ticket-settings';
           if (window.location.href.includes(`/users`)) this.state = 'new-users';
           if (window.location.href.includes(`/reports`)) this.state = 'new-reports';
           if (window.location.href.includes(`/tickets-dashboard`)) this.state = 'new-tickets-dashboard';
@@ -209,6 +211,7 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'password-manager') this.goToLink(`password-manager`);
       if (this.state === 'myprofile-component') this.goToLink('setting/myprofile');
       if (this.state === 'manage-tags-component') this.goToLink('setting/tags');
+      if (this.state === 'products-settings') this.goToLink('setting/products-settings');
       if (this.state === 'glnumber-component') this.goToLink('setting/glnumber');
       if (this.state === 'company-profile-component') this.goToLink('setting/companyprofile');
       if (this.state === 'tech-component') this.goToLink('setting/techUsers');
@@ -220,6 +223,7 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'invoice-ticket-component') this.goToLink('setting/invoiceTickets');
       if (this.state === 'commission-component') this.goToLink('setting/commission');
       if (this.state === 'subscription-component') this.goToLink('setting/subscription');
+      if (this.state === 'ticket-settings') this.goToLink('setting/ticket-settings');
       if (this.state === 'new-users') this.goToLink('users');
       if (this.state === 'new-reports') this.goToLink('reports');
       if (this.state === 'new-tickets-dashboard') this.goToLink('tickets-dashboard');

@@ -1,0 +1,105 @@
+<!-- Middle Wrapper -->
+<div class="page-container products-settings-page-container">
+    <div class="page-insider manage-taxes">
+        <div class="heading">
+            <h6 class="qt-fw-600 qt-color-dark">Products</h6>
+            <div class="heading-serach add-category-container">
+                <a
+                    href="javascript:;"
+                    class="btn-outline"
+                    (click)="create()"
+                >
+                    Create
+                </a>
+                <inventory-add-category
+                    *ngIf="showAddCategory"
+                    (onClose)="showAddCategory = false"
+                ></inventory-add-category>
+            </div>
+        </div>
+        <ngb-tabset
+            (tabChange)="setTab($event)"
+            #tabset="ngbTabset"
+            [destroyOnHide]="false"
+        >
+            <ngb-tab
+                title="Product Category"
+                id="productCategories"
+            >
+                <ng-template ngbTabContent>
+                    <div class="cmn-area">
+                        <div class="data-table-wrap">
+                            <table
+                                class="display dataTable"
+                                style="width:100%"
+                            >
+                                <thead>
+                                    <tr>
+                                        <th class="tax-name">
+                                          Category Name
+                                          <div class="qt-table-modern__sorting"></div>
+                                        </th>
+                                        <th class="rate">
+                                          Count
+                                          <div class="qt-table-modern__sorting"></div>
+                                        </th>
+                                        <th class="action">&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of categoriesProducts; let i = index">
+                                        <td
+                                            class="tax-name"
+                                            [textContent]="item.name"
+                                        >
+                                        </td>
+                                        <td
+                                            class="rate"
+                                            [textContent]="item.productsAmount"
+                                        ></td>
+                                        <td class="action">
+                                            <a
+                                                href="javascript:;"
+                                                data-tooltip="Edit"
+                                                (click)="editCategoryProduct(item)"
+                                                class="edit"
+                                            >
+                                                <img
+                                                    src="/html/assets/img/icons/edit.svg"
+                                                    alt="Edit"
+                                                >
+                                            </a>
+                                            <a
+                                                href="javascript:;"
+                                                data-tooltip="Remove"
+                                                class="remove"
+                                                (click)="removeCategoryProduct(item)"
+                                                *ngIf="item.productsAmount === 0"
+                                            >
+                                                <div class="icon__remove qt-sz-16 qt-bg-contain"></div>
+                                            </a>
+                                            <app-dynamic-tooltip
+                                                [content]="'You cannot delete category with existing products'"
+                                                [position]="'top'"
+                                                #deleteTooltip
+                                            ></app-dynamic-tooltip>
+                                            <a
+                                                href="javascript:;"
+                                                (mouseenter)="deleteTooltip.show($event.target)"
+                                                (mouseleave)="deleteTooltip.hide()"
+                                                class="remove"
+                                                *ngIf="item.productsAmount > 0"
+                                            >
+                                                <div class="icon__remove-disabled qt-sz-16 qt-bg-contain"></div>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </ng-template>
+            </ngb-tab>
+        </ngb-tabset>
+    </div>
+</div>

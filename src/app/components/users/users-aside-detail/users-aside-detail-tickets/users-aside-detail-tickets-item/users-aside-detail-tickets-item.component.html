@@ -1,33 +1,35 @@
 <tr [ngClass]="{'--selected': selected}">
     <td class="--strong ticket-table__subject">
-        <div class="ellipsis">{{'Tkt# ' + ticket.number + ' - ' + ticket.subject}}</div>
+        <div class="ellipsis">
+            {{'Tkt# ' + ticket.number + ' - ' + ticket.subject}}
+        </div>
         <span [ngClass]="getClassType()"></span>
     </td>
     <td class="ticket-table__status">
         <span
             class="tag__modern"
-            [ngStyle]="getStyleStatus('inProgress')"
+            [ngStyle]="getStyleStatus((ticket.customStatus) ? ticket.customStatus : ticket.status)"
             *ngIf="ticket.status === 'IN_PROGRESS'"
         >
-            In Progress
+            {{(!ticket.customStatus) ? 'In Progress' : ticket.customStatus}}
         </span>
         <span
             class="tag__modern"
-            [ngStyle]="getStyleStatus('completed')"
+            [ngStyle]="getStyleStatus(ticket.status)"
             *ngIf="ticket.status === 'COMPLETED'"
         >
             Completed
         </span>
         <span
             class="tag__modern"
-            [ngStyle]="getStyleStatus('unassigned')"
+            [ngStyle]="getStyleStatus('UNASSIGNED')"
             *ngIf="ticket.status === null"
         >
             Unassigned
         </span>
         <span
             class="tag__modern"
-            [ngStyle]="getStyleStatus('onHold')"
+            [ngStyle]="getStyleStatus(ticket.status)"
             *ngIf="ticket.status === 'ON_HOLD'"
         >
             On Hold

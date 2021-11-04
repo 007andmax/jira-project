@@ -19,9 +19,7 @@ export class LeftPanelService {
     private http: HttpClient,
 
   ) { }
-  public getTicketsStatus() {
-    return this.http.get(this.apiUrl + 'customStorage/user?customKey=ticketsTagsColors');
-  }
+
   public getColors() {
     return this.http.get(this.apiUrl + 'data/getColors');
   }

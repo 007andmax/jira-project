@@ -187,6 +187,16 @@
   &__remove {
     background-image: url("/assets/img/icons/remove.svg");
   }
+  &__remove-disabled {
+    background-color: #919eab;
+    -webkit-mask-image: url("/assets/img/icons/remove.svg");
+    mask-image: url("/assets/img/icons/remove.svg");
+  }
+  &__remove-blue {
+    background-color: #16a4fa;
+    -webkit-mask-image: url("/assets/img/icons/remove.svg");
+    mask-image: url("/assets/img/icons/remove.svg");
+  }
   &__attachment {
     background-image: url("/assets/img/icons/attachment.svg");
   }

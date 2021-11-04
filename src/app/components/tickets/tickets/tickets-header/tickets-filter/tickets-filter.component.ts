@@ -8,14 +8,15 @@ import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
-import { StatusColor } from 'src/app/components/left-panel/left-panel-tickets/tickets-status/class/status-color';
-import { TicketsColor } from 'src/app/components/left-panel/left-panel-tickets/tickets-status/class/tickets-color';
 import { SelectSearchComponent } from 'src/app/components/shared/select-search/select-search.component';
-import { ItemStatus } from 'src/app/components/left-panel/left-panel-tickets/tickets-status/class/item-status';
+import { ItemStatus } from 'src/app/components/tickets/class/item-status';
 import { Subscribable, Subscription } from 'rxjs';
 import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service';
 import { AppService } from 'src/app/states/app/app.service';
 import { TicketsFilterTagsComponent } from './tickets-filter-tags/tickets-filter-tags.component';
+import { StatusColor } from '../../../class/status-color';
+import { TicketStatus } from 'src/app/components/setting/products-settings/class/ticket-status';
+import { TicketStatusFilter } from '../class/ticket-status-filter';
 
 @Component({
   selector: 'app-tickets-filter',
@@ -40,7 +41,8 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   listsStatus = [new ItemStatus('Unassigned', 'unassigned', 'UNASSIGNED'),
   new ItemStatus('Completed', 'completed', 'CLOSED'),
   new ItemStatus('In Progress', 'inProgress', 'OPEN'),
-  new ItemStatus('On Hold', 'onHold', 'ON_HOLD')]
+  new ItemStatus('On Hold', 'onHold', 'ON_HOLD')];
+  ticketsStatus: Array<TicketStatusFilter> = [];
   blockFilterUser: boolean = false;
   ticketsCounts: TicketsCounts;
   sub: Subscription = new Subscription();
@@ -91,15 +93,11 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.sub.add(getOnCompanies);
     this.leftPanelService.getColors().subscribe((data: any) => {
       let listColors = data.map(item => {
-        return new StatusColor(item.backgroundColor, item.borderColor);
+        return new StatusColor(item.borderColor);
       })
       this.ticketsStateService.onColorStatus(listColors);
     })
-    this.leftPanelService.getTicketsStatus().subscribe((data: any) => {
 
-      let ticketsColor = new TicketsColor(data);
-      this.ticketsStateService.onInitStatus(ticketsColor);
-    })
     //    this.getCounts();
 
     let getOnUpdateCounts = this.ticketsStateService.getOnUpdateCounts().subscribe(data => {
@@ -108,8 +106,11 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
     this.sub.add(getOnUpdateCounts);
-
-
+    this.ticketsStatus = this.ticketsStateService.getTicketsStatus().map(item => new TicketStatusFilter(item));
+    let onGetTicketsStatus = this.ticketsStateService.onGetTicketsStatus.subscribe(data => {
+      this.ticketsStatus = data.map(item => new TicketStatusFilter(item));
+    })
+    this.sub.add(onGetTicketsStatus);
   }
   public onClearAll() {
 
@@ -127,7 +128,7 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     this.techUsersDp.clearWithOutChanges();
     this.statusDp.clearWithOutChanges();
     this.tagsDp.clearWithOutChanges();
-
+    this.ticketsFilter.setCustomStatus(false);
     //  this.listType = "ALL";
     // this.ticketsFilter.setListType("ALL");
     this.ticketsStateService.onInitFilter(this.ticketsFilter);
@@ -236,10 +237,18 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
     if (!item) {
       this.setTypeFilter("ALL");
       this.ticketsFilter.setStatus(null);
-
+      this.ticketsFilter.setCustomStatus(false);
     } else {
-      this.ticketsFilter.setStatus(item.status);
-      this.setTypeFilter(item.status);
+      this.ticketsFilter.setStatus(item.name);
+      let findStatus = this.listsStatus.find(status => status.title === item.title);
+      if (findStatus) {
+        this.ticketsFilter.setCustomStatus(false);
+        this.setTypeFilter(findStatus.status);
+      } else {
+        this.ticketsFilter.setCustomStatus(true);
+        this.setTypeFilter("OPEN");
+      }
+
     }
     this.onChangeCounterFilter();
     this.ticketsStateService.onChangeLeftPanelFilter(this.listType);

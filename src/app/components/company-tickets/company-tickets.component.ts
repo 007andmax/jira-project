@@ -3,8 +3,6 @@ import { TicketsListService } from '../tickets/tickets/services/tickets-list.ser
 import { TicketsFilter } from '../tickets/tickets/class/tickets-filter';
 import { Ticket } from '../tickets/class/ticket';
 import { Subscription } from 'rxjs';
-import { StatusColor } from '../left-panel/left-panel-tickets/tickets-status/class/status-color';
-import { TicketsColor } from '../left-panel/left-panel-tickets/tickets-status/class/tickets-color';
 import { TicketsService } from '../../services/tickets/tickets.service';
 import { TicketsStateService } from '../../states/tickets/tickets-state.service';
 import { CompaniesStateService } from '../../states/company/companies-state.service';
@@ -14,6 +12,8 @@ import { LeftPanelService } from '../../services/left-panel/left-panel.service';
 import { TicketStateService } from '../tickets/tickets/ticket-edit-aside/services/ticket-state.service';
 import { UsersStateService } from '../../states/users/users-state.service';
 import { ActivatedRoute } from '@angular/router';
+import { TicketStatus } from '../setting/products-settings/class/ticket-status';
+import { StatusColor } from '../tickets/class/status-color';
 
 @Component({
   selector: 'company-tickets',
@@ -29,12 +29,11 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
   tickets: Array<Ticket> = [];
   sub: Subscription = new Subscription();
   listColors: Array<StatusColor> = [];
-  statusColor: TicketsColor;
   offset: number = 15;
   showPendingPreloader: boolean = false;
   idEditTicket: string = '';
   @ViewChild('header') header: TicketsHeaderComponent;
-
+  ticketsStatus: Array<TicketStatus> = [];
 
   constructor(private ticketsService: TicketsService,
     private ticketsListService: TicketsListService,
@@ -55,14 +54,9 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     })
     this.leftPanelService.getColors().subscribe((data: any) => {
       let listColors = data.map(item => {
-        return new StatusColor(item.backgroundColor, item.borderColor);
+        return new StatusColor(item.borderColor);
       })
       this.ticketsStateService.onColorStatus(listColors);
-    })
-    this.leftPanelService.getTicketsStatus().subscribe((data: any) => {
-
-      let ticketsColor = new TicketsColor(data);
-      this.ticketsStateService.onInitStatus(ticketsColor);
     })
     this.ticketsStateService.getOnAddTicket().subscribe(data => {
       if (this.ticketsListService.isTicketMatchesFilters(this.ticketsFilter, data)) {
@@ -98,9 +92,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     this.ticketsStateService.getOnInitColor().subscribe(data => {
       this.listColors = data;
     })
-    this.ticketsStateService.getOnInitStatus().subscribe(data => {
-      this.statusColor = data;
-    })
+
     this.header.setTitle("All Tickets");
     let id = this.activateRoute.snapshot.params['id'];
     let subscription = this.activateRoute.params.subscribe(params => {
@@ -121,6 +113,11 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
       this.onScroll();
     });
     this.sub.add(subscription);
+    this.ticketsStatus = this.ticketsStateService.getTicketsStatus();
+    let onGetTicketsStatus = this.ticketsStateService.onGetTicketsStatus.subscribe(data => {
+      this.ticketsStatus = data;
+    })
+    this.sub.add(onGetTicketsStatus);
   }
   private getCount() {
     this.ticketsService.getCount(this.ticketsFilter.getDataForRequest()).subscribe(data => {

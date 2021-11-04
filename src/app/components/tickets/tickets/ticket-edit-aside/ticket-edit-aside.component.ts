@@ -3,8 +3,6 @@ import { TicketsStateService } from 'src/app/states/tickets/tickets-state.servic
 import { TicketProfile } from '../class/ticket-profile';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import * as moment from "moment";
-import { StatusColor } from '../../../left-panel/left-panel-tickets/tickets-status/class/status-color';
-import { TicketsColor } from '../../../left-panel/left-panel-tickets/tickets-status/class/tickets-color';
 import { CurrentUser } from 'src/class/current-user/current-user';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
@@ -32,6 +30,8 @@ import { ModalAddUsersNotifyComponent } from 'src/app/services/modal/modal-add-u
 import { TicketProfileEditFormUpdateComponent } from './ticket-profile-edit-form-update/ticket-profile-edit-form-update.component';
 import { AddUsersNotifyStateService } from 'src/app/services/modal/modal-add-users-notify/state/add-users-notify-state.service';
 import { USERS_TO_EDIT_TICKET } from 'src/app/const/add-users-notify';
+import { StatusColor } from '../../class/status-color';
+import { find } from 'rxjs-compat/operator/find';
 @Component({
   selector: 'app-ticket-edit-aside',
   templateUrl: './ticket-edit-aside.component.html',
@@ -55,7 +55,6 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
   showAddAssignedUser = false;
   showPreloader: boolean = true;
   listColors: Array<StatusColor> = [];
-  statusColor: TicketsColor;
   listAssignedUser: Array<CurrentUser> = [];
   lisUpdateUser: Array<CurrentUser> = [];
   sub: Subscription = new Subscription();
@@ -102,9 +101,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     this.ticketsStateService.getOnInitColor().subscribe(data => {
       this.listColors = data;
     })
-    this.ticketsStateService.getOnInitStatus().subscribe(data => {
-      this.statusColor = data;
-    })
+
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === DELETE_FOREVER) {
@@ -394,9 +391,6 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     let hours = (date.getHours() > 12) ? date.getHours() - 12 : date.getHours();
     let type = (date.getHours() >= 12) ? 'pm' : 'am';
     return `${moment(date).format('DD MMM YYYY')}, ${(hours < 10 ? '0' + hours : hours)}:${(date.getMinutes() < 10) ? '0' + date.getMinutes() : date.getMinutes()} ${type}`
-  }
-  getStyleStatus(field) {
-    return { 'border-color': (this.statusColor && this.listColors) ? this.listColors[this.statusColor[field]].borderColor : null, 'background-color': (this.statusColor && this.listColors) ? this.listColors[this.statusColor[field]].backgroundColor : null, 'color': (this.statusColor && this.listColors) ? this.listColors[this.statusColor[field]].borderColor : null }
   }
   parseTicketSource() {
     if (!this.ticketProfile.ticketSource) {

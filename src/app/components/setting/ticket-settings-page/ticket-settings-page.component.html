@@ -1,0 +1,66 @@
+<!-- Middle Wrapper -->
+<div class="page-container ticket-settings-page-container">
+    <div class="page-insider invoice-ticket">
+        <div
+            class="heading"
+            [ngClass]="{'heading-tickets-status':activeTab === 'ticketStatus'}"
+        >
+            <h6 class="qt-fw-600 qt-color-dark">Ticket Settings</h6>
+            <div
+                class="heading-serach add-category-container"
+                [ngClass]="{'--hidden':activeTab === 'ticketSettings'}"
+            >
+                <div
+                    class="tickets-status-header-buttons"
+                    *ngIf="getSelectedCount() > 0"
+                >
+                    <div [textContent]="getSelectedCount() + ' Status Selected'"></div>
+                    <div
+                        class="qt-ml-16 qt-fw-600 qt-df qt-color-info qt-ai-c qt-pointer"
+                        (click)="removeTicketsStatus()"
+                    >
+                        <div class="icon__remove-blue qt-sz-16 qt-bg-contain qt-ic-c qt-mr-6"></div>
+                        <div>Delete</div>
+                    </div>
+                </div>
+                <a
+                    href="javascript:;"
+                    class="btn-outline"
+                    (click)="create()"
+                >
+                    Create
+                </a>
+            </div>
+        </div>
+        <ngb-tabset
+            (tabChange)="setTab($event)"
+            [ngClass]="{'clear-padding' :activeTab === 'ticketStatus'}"
+        >
+            <!-- Ticket Settings -->
+            <ngb-tab
+                title="Ticket Settings"
+                id="ticketSettings"
+            >
+                <ng-template ngbTabContent>
+                    <app-ticket-settings
+                        [taxIdDescInput]="taxIdDescription"
+                        [taxIdInput]="taxId"
+                        [conditionInput]="condition"
+                        *ngIf="showTab == true && showTerm == true"
+                    ></app-ticket-settings>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab
+                title="Ticket Status"
+                id="ticketStatus"
+            >
+                <ng-template ngbTabContent>
+                    <tickets-status
+                        #ticketsStatus
+                        *ngIf="showTab == true && showTerm == true"
+                    ></tickets-status>
+                </ng-template>
+            </ngb-tab>
+        </ngb-tabset>
+    </div>
+</div>

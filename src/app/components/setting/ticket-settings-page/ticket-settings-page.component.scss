@@ -1,0 +1,25 @@
+@import "./src/assets/styles/variable";
+
+.page-insider {
+    /deep/ .clear-padding {
+        .tab-content {
+            padding: 0px !important;
+        }
+        ul.nav-tabs {
+            padding: 0px 24px;
+        }
+    }
+    /deep/.heading-tickets-status {
+        padding: 24px !important;
+    }
+}
+.tickets-status-header-buttons {
+    display: flex;
+    padding: 8px 16px;
+    border-radius: 4px;
+    background-color: #ffffff;
+    font-size: 12px;
+    color: $gray-800;
+    line-height: 1.33;
+    border: 1px solid $gray-400;
+}

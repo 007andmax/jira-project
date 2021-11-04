@@ -197,7 +197,6 @@ table.qt-table-modern {
         width: calc(166px - 40px);
       }
 
-
       @media (max-width: 767px) {
         flex: 1 0 60%;
         order: 1;
@@ -209,7 +208,6 @@ table.qt-table-modern {
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
-
 
       @media (max-width: 767px) {
         flex: 100%;
@@ -235,9 +233,10 @@ table.qt-table-modern {
 
     &__company {
       flex: 1 0 148px;
+      min-width: 0;
 
       @media (max-width: 767px) {
-        flex: 1 0 60%;
+        flex: 1 1 142px;
         order: -1;
         color: $gray-700;
       }
@@ -252,16 +251,16 @@ table.qt-table-modern {
     }
 
     &__status {
-      flex: 1 0 100px;
+      flex: 0 0 136px;
 
       @media (max-width: 767px) {
-        flex: 1 0 88px;
+        flex: 1;
         order: -1;
         justify-content: flex-end;
       }
     }
     &__created-date {
-      flex: 1 0 100px;
+      flex: 0 0 120px;
 
       @media (max-width: 767px) {
         flex: 1 0 88px;

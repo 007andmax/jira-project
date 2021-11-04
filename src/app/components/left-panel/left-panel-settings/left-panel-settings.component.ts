@@ -45,6 +45,7 @@ export class LeftPanelSettingsComponent implements OnInit {
   public isSettingsPage(state) {
     return (state === 'myprofile-component'
       || state === 'manage-tags-component'
+      || state === 'products-settings'
       || state === 'glnumber-component'
       || state === 'company-profile-component'
       || state === 'tech-component'
@@ -55,6 +56,7 @@ export class LeftPanelSettingsComponent implements OnInit {
       || state === 'integrations-component'
       || state === 'invoice-ticket-component'
       || state === 'commission-component'
+      || state === 'ticket-settings'
       || state === 'subscription-component')
   }
   openPanel() {
