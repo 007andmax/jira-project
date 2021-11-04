@@ -108,20 +108,19 @@
                         class="checkbox"
                         *ngIf="!item.custom"
                     >
-
                     </td>
                     <td
                         class="checkbox"
                         *ngIf="item.custom"
                     >
-                      <label class="qt-checkbox">
-                        <input
-                          type="checkbox"
-                          [(ngModel)]="item.selected"
-                          (change)="onSelect($event,item)"
-                        >
-                        <span></span>
-                      </label>
+                        <label class="qt-checkbox">
+                            <input
+                                type="checkbox"
+                                [(ngModel)]="item.selected"
+                                (change)="onSelect($event,item)"
+                            >
+                            <span></span>
+                        </label>
                     </td>
                     <td
                         class="tax-name add-status-name"
@@ -141,23 +140,10 @@
                         [textContent]="parseStatus(item.name)"
                         *ngIf="!item.custom"
                     >
-
                     </td>
                     <td class="rate">
                         <div
-                            class="tag-color-container"
-                            *ngIf="!item.custom"
-                        >
-                            <i
-                                class="tag-color"
-                                *ngIf="statusColors.length > 0"
-                                [ngStyle]="{'background-color':  statusColors[item.color].borderColor ,
-                             'border-color':  statusColors[item.color].borderColor}"
-                            ></i>
-                        </div>
-                        <div
                             class="form-row tag-color-container"
-                            *ngIf="item.custom"
                             ngbDropdown
                         >
                             <div

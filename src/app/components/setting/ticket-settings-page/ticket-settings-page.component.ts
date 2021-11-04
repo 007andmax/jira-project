@@ -71,6 +71,7 @@ export class TicketSettingsPageComponent implements OnInit, OnDestroy {
     forkJoin(this.ticketsStateService.getListTicketStatusForRemove().map(item => this.ticketsService.removeTicketStatus(item.id)))
       .subscribe(
         () => {
+          this.ticketsStateService.setListTicketStatusForRemove([]);
           this.cd.detectChanges();
         },
         error => {
