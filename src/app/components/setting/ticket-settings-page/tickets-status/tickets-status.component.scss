@@ -149,8 +149,12 @@
 }
 .status-container {
     padding: 16px;
-    max-width: 200px;
-    display: block;
+    //max-width: 200px;
+    //display: block;
+    display: grid;
+    grid-template-columns: repeat(5, 20px);
+    gap: 10px 10px;
+    justify-content: center;
 }
 .tag-color-container {
     display: flex !important;
@@ -176,9 +180,6 @@
         padding: 7px 15px 7px 0;
         background-color: #f4fbff !important;
     }
-}
-.status-container-db {
-    width: 200px;
 }
 .icon__info-question {
     &::after {

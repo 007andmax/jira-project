@@ -1140,6 +1140,58 @@ body {
           height: 6px;
         }
       }
+      .qt-checkbox {
+        margin: 0;
+        padding: 0;
+
+        input {
+          position: absolute !important;
+        }
+
+        span {
+          margin-top: 5px;
+        }
+      }
+    }
+
+    .products-settings-page-container {
+      .page-insider .heading {
+        padding: 20px 24px !important;
+        height: 74px;
+      }
+      ngb-tabset {
+        ul.nav-tabs {
+          padding: 0 24px;
+        }
+        .tab-content {
+          padding: 0;
+        }
+      }
+      .tab-pane td {
+        height: 40px;
+        padding: 0 15px 0 0;
+      }
+      .manage-taxes .cmn-area th {
+        padding: 10px 10px 10px 6px !important;
+        background-color: $gray-100;
+        text-transform: uppercase;
+      }
+      .manage-taxes .cmn-area .rate {
+        width: 36px !important;
+        padding: 10px 10px 10px 6px !important;
+      }
+      .manage-taxes .cmn-area .action {
+        width: 32px !important;
+        padding: 0 24px 0 0 !important;
+      }
+      .manage-taxes .cmn-area .tax-name {
+        width: 300px !important;
+        padding: 0 15px 0 24px !important;
+        font-weight: 600;
+      }
+      .qt-table-modern__sorting {
+        top: 2px;
+      }
     }
 
     /*** Common Tabbings ***/
