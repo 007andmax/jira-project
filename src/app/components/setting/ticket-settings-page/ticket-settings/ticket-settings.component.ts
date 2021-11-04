@@ -28,9 +28,6 @@ export class TicketSettingsComponent implements OnInit {
   nextValid: '';
   public currentUser: any;
   currentCompany: any;
-  @Input() taxIdDescInput: any;
-  @Input() taxIdInput: any;
-  @Input() conditionInput: any;
   constructor(
     private formBuilder: FormBuilder,
     private invoiceTicketsService: InvoiceTicketsService,
@@ -88,13 +85,6 @@ export class TicketSettingsComponent implements OnInit {
     this.getActualNumber();
     // this.getTaxNumber();
     // this.getTermsAndConditions();
-    this.ticketForm.patchValue({
-      taxId: this.taxIdInput,
-      taxIdDescription: this.taxIdDescInput
-    });
-    this.ticketForm.patchValue({
-      conditions: this.conditionInput
-    });
   }
 
   // convenience getter for easy access to form fields
@@ -139,44 +129,6 @@ export class TicketSettingsComponent implements OnInit {
     );
   }
 
-  /**
-   * get tax number
-   */
-  getTaxNumber() {
-    this.loading = true; $(".loading").css("display", "block");
-    this.invoiceTicketsService.getTaxNumber().subscribe(
-      (res: any) => {
-        this.loading = false; $(".loading").css("display", "none");
-        if (res) {
-          this.ticketForm.patchValue({
-            taxId: res.taxId,
-            taxIdDescription: res.taxIdDescription
-          });
-        }
-      },
-      error => {
-        this.loading = false; $(".loading").css("display", "none");
-      }
-    );
-  }
-
-  /**
-   * get terms and conditions
-   */
-  getTermsAndConditions() {
-    this.loading = true; $(".loading").css("display", "block");
-    this.invoiceTicketsService.termsAndConditions().subscribe(
-      (res: any) => {
-        this.loading = false; $(".loading").css("display", "none");
-        this.ticketForm.patchValue({
-          conditions: res.conditions
-        });
-      },
-      error => {
-        this.loading = false; $(".loading").css("display", "none");
-      }
-    );
-  }
 
   onChangeType(data) {
     this.ticketForm.patchValue({
@@ -222,11 +174,6 @@ export class TicketSettingsComponent implements OnInit {
         count: this.ticketForm.value.ticketCount,
         prefix: '',
         type: 'TICKET',
-        termsAndConditions: this.ticketForm.value.conditions
-      },
-      taxNumber: {
-        taxIdDescription: this.ticketForm.value.taxIdDescription,
-        taxId: this.ticketForm.value.taxId
       },
       serviceExpenseDurationDto: {
         presentation: this.ticketForm.value.timepickerType,

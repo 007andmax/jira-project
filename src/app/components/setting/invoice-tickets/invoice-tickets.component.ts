@@ -42,10 +42,13 @@ export class InvoiceTicketsComponent implements OnInit, OnDestroy {
     this.invoiceTicketsService.getTaxNumber().subscribe(
       (res: any) => {
         if (res) {
-          this.showTab = true;
           this.taxId = res.taxId;
           this.taxIdDescription = res.taxIdDescription;
+        } else {
+          this.taxId = "";
+          this.taxIdDescription = "";
         }
+        this.showTab = true;
       },
       error => {
         this.showTab = true;
@@ -61,8 +64,11 @@ export class InvoiceTicketsComponent implements OnInit, OnDestroy {
         if (res) {
           this.term = res.term;
           this.condition = res.conditions;
-          this.showTerm = true;
+        } else {
+          this.term = "";
+          this.condition = "";
         }
+        this.showTerm = true;
       },
       error => {
         this.showTerm = true;

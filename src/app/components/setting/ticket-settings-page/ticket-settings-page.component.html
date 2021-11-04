@@ -42,12 +42,7 @@
                 id="ticketSettings"
             >
                 <ng-template ngbTabContent>
-                    <app-ticket-settings
-                        [taxIdDescInput]="taxIdDescription"
-                        [taxIdInput]="taxId"
-                        [conditionInput]="condition"
-                        *ngIf="showTab == true && showTerm == true"
-                    ></app-ticket-settings>
+                    <app-ticket-settings></app-ticket-settings>
                 </ng-template>
             </ngb-tab>
             <ngb-tab
@@ -55,10 +50,7 @@
                 id="ticketStatus"
             >
                 <ng-template ngbTabContent>
-                    <tickets-status
-                        #ticketsStatus
-                        *ngIf="showTab == true && showTerm == true"
-                    ></tickets-status>
+                    <tickets-status #ticketsStatus></tickets-status>
                 </ng-template>
             </ngb-tab>
         </ngb-tabset>
