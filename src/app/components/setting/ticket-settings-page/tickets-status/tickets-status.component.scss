@@ -35,9 +35,20 @@
     }
     .tax-name {
         width: 260px;
+        font-weight: 600;
         @media only screen and (max-width: 576px) {
             width: 105px;
         }
+        input {
+          padding-left: 0;
+          font-weight: 600;
+        }
+    }
+    .dataTable {
+      .tax-name,
+      .tax-preview {
+        padding-left: 0 !important;
+      }
     }
     .checkbox {
         margin: 0px;
