@@ -4879,3 +4879,11 @@ input.--input-error {
     display: none !important;
   }
 }
+add-category-product {
+  display: contents;
+  .add-category-container {
+    td {
+      background-color: #f4fbff !important;
+    }
+  }
+}

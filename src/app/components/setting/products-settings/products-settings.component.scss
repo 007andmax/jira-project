@@ -99,3 +99,24 @@
     height: 16px;
     border-radius: 40px;
 }
+.edit-category-name {
+    input {
+        border: 1px solid transparent;
+        border-radius: 4px;
+        outline: none;
+        padding: 2px 2px 2px 8px;
+        outline: none;
+        &:hover,
+        &:focus {
+            border-color: #dfe3e8;
+        }
+    }
+}
+add-category-product {
+    display: contents;
+    /deep/ .add-category-container {
+        td {
+            background-color: #f4fbff !important;
+        }
+    }
+}

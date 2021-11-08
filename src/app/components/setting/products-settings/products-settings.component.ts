@@ -8,6 +8,8 @@ import { ProductService } from 'src/app/services/product/product.service';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
+import { CategoryProductSettings } from './class/category-product-settings';
+import { ProductsCategoryFilter } from './class/products-category-filter';
 
 @Component({
   selector: 'products-settings',
@@ -17,7 +19,9 @@ import { ConfirmStateService } from '../../shared/confirm/services/confirm-state
 export class ProductsSettingsComponent implements OnInit, OnDestroy {
   activeTab: string = "productCategories";
   showAddCategory: boolean = false;
-  categoriesProducts: Array<CategoryProduct> = [];
+  filter: ProductsCategoryFilter = new ProductsCategoryFilter();
+  categoriesProducts: Array<CategoryProductSettings> = [];
+
   sub: Subscription = new Subscription();
   constructor(private inventoryStateService: InventoryStateService,
     private confirmStateService: ConfirmStateService,
@@ -28,9 +32,9 @@ export class ProductsSettingsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     $('body').addClass('ng7');
     $('body').removeClass('backMenu');
-    this.categoriesProducts = this.inventoryStateService.getCategories();
+    this.getCategories(this.inventoryStateService.getCategories());
     this.inventoryStateService.onGetCategories.subscribe(data => {
-      this.categoriesProducts = data;
+      this.getCategories(data);
     })
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
@@ -41,8 +45,16 @@ export class ProductsSettingsComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getConfirm);
   }
+  public getCategories(data) {
+    this.categoriesProducts = JSON.parse(JSON.stringify(data)).map(item => new CategoryProductSettings(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+  }
+  onFilter(field) {
+    this.filter.onFilter(field, this.categoriesProducts);
+  }
   create() {
     if (this.activeTab === "productCategories") this.showAddCategory = true;
+
   }
 
   onRemoveCategoryProduct(id) {
@@ -50,11 +62,15 @@ export class ProductsSettingsComponent implements OnInit, OnDestroy {
 
     })
   }
-
-  editCategoryProduct(data) {
-    const modalRef = this.modalService.open(ModalEditCategoryProductComponent, { windowClass: 'quote-send-modal' });
-    modalRef.componentInstance.categoryProduct = data;
+  onEditCategory(item) {
+    if (item.isInitEdit) {
+      if (item.length === 0) return;
+      this.productService.editCategory(item.id, item.name).subscribe(data => {
+        item.onInitEdit(false);
+      })
+    }
   }
+
   removeCategoryProduct(data) {
     this.confirmStateService.setConfirmAction(DELETE_CATEGORY_PRODUCT);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
@@ -62,12 +78,6 @@ export class ProductsSettingsComponent implements OnInit, OnDestroy {
     this.inventoryStateService.setCategoryForDelete(data);
   }
 
-  setTab(data) {
-    this.activeTab = data['nextId'];
-    if (data['nextId'] === 'productCategories') {
-      this.categoriesProducts = this.inventoryStateService.getCategories();
-    }
-  }
 
 
   ngOnDestroy(): void {

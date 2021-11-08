@@ -1,0 +1,30 @@
+<tr
+    class="add-category-container"
+    appClickOtside
+    #addStatusBtn="click"
+    [init]="true"
+    [class]="'.add-category-container'"
+    (onOutSide)="save()"
+>
+    <td
+        class="tax-name add-category-name"
+        [ngClass]="{'--input-error' : disableCreateCategory}"
+    >
+        <mat-error
+            class="qt-tooltip-error"
+            *ngIf="disableCreateCategory"
+        >
+            This category name is already occupied
+        </mat-error>
+        <input
+            type="text"
+            class="form-input"
+            placeholder="Enter Name Category"
+            [(ngModel)]="name"
+            (input)="checkDublicateCategory()"
+            required
+        >
+    </td>
+    <td class="rate"></td>
+    <td class="action"></td>
+</tr>

@@ -115,7 +115,6 @@ import { InventoryTableComponent } from './components/inventory/inventory-table/
 import { InventoryAddAsideComponent } from './components/inventory/inventory-add-aside/inventory-add-aside.component';
 import { InventoryEditAsideComponent } from './components/inventory/inventory-edit-aside/inventory-edit-aside.component';
 import { LeftPanelInventoryComponent } from './components/left-panel/left-panel-inventory/left-panel-inventory.component';
-import { AddCategoryProductComponent } from './components/left-panel/left-panel-inventory/add-category-product/add-category-product.component';
 import { MyProfileComponent } from './components/setting/my-profile/my-profile.component';
 import { SettingComponent } from './components/setting/setting.component';
 import { ManageTagsComponent } from './components/setting/manage-tags/manage-tags.component';
@@ -468,6 +467,7 @@ import { ModalEditCategoryProductComponent } from './services/modal/modal-edit-c
 import { TicketSettingsPageComponent } from './components/setting/ticket-settings-page/ticket-settings-page.component';
 import { TicketsStatusComponent } from './components/setting/ticket-settings-page/tickets-status/tickets-status.component';
 import { ProductsSettingsComponent } from './components/setting/products-settings/products-settings.component';
+import { AddCategoryProductComponent } from './components/setting/products-settings/add-category-product/add-category-product.component';
 
 
 declare var $: any;

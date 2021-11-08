@@ -1,0 +1,27 @@
+.tax-name {
+    width: 260px;
+    @media only screen and (max-width: 576px) {
+        width: 105px;
+    }
+}
+.add-category-name {
+    position: relative;
+    input {
+        margin: 6px 0px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        outline: none;
+        padding: 2px 2px 2px 8px;
+        outline: none;
+        &:hover,
+        &:focus {
+            border-color: #dfe3e8;
+        }
+    }
+}
+tr {
+    td {
+        border-bottom: 1px solid #edf2f6 !important;
+        padding: 7px 15px 7px 0;
+    }
+}
