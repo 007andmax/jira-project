@@ -647,7 +647,7 @@ body {
                         line-height: 1.54;
                         letter-spacing: normal;
                         color: $gray-800;
-                        background-color: $white !important;
+                        background-color: $white;
                         word-break: break-word;
                         &.action {
                             padding-right: 0;
@@ -1092,21 +1092,18 @@ body {
 
     .ticket-settings-page-container {
       .page-insider .heading {
-        padding: 20px 24px !important;
+        padding: 20px 24px;
         height: 74px;
       }
       ngb-tabset ul.nav-tabs {
         padding: 0 24px;
       }
       ngb-tabset .tab-content {
-        padding: 24px;
+        padding: 24px 24px 0;
       }
       .tab-pane td {
         height: 40px;
         padding: 0 15px 0 0;
-      }
-      .tax-name {
-        width: 314px !important;
       }
       .page-insider .heading .heading-serach.--hidden {
         display: none;
@@ -1118,26 +1115,9 @@ body {
         margin: 0 24px 0 0;
       }
       .checkbox {
-        padding: 0 15px 0 24px !important;
         display: table-cell;
         input {
           transform: translateY(3px);
-        }
-      }
-      .action {
-        padding: 0 24px 0 15px !important;
-        width: 90px !important;
-      }
-      .tag-color {
-        &::after {
-          content: "" !important;
-          position: absolute;
-          left: 50% !important;
-          top: 50% !important;
-          transform: translate(-50%, -50%);
-          background: url("/assets/img/icons/check-mark.svg") no-repeat center / contain;
-          width: 8px;
-          height: 6px;
         }
       }
       .qt-checkbox {
@@ -1145,18 +1125,25 @@ body {
         padding: 0;
 
         input {
-          position: absolute !important;
+          position: absolute;
         }
 
         span {
           margin-top: 5px;
         }
       }
+      .page-insider {
+        padding-bottom: 24px;
+
+        table.dataTable tbody tr:last-child td {
+          border-bottom: 1px solid #edf2f6;
+        }
+      }
     }
 
     .products-settings-page-container {
       .page-insider .heading {
-        padding: 20px 24px !important;
+        padding: 20px 24px;
         height: 74px;
       }
       ngb-tabset {
@@ -1169,28 +1156,64 @@ body {
       }
       .tab-pane td {
         height: 40px;
-        padding: 0 15px 0 0;
+        padding: 0 15px 0 24px;
       }
       .manage-taxes .cmn-area th {
-        padding: 10px 10px 10px 6px !important;
+        padding: 10px 10px 10px 6px;
         background-color: $gray-100;
         text-transform: uppercase;
       }
       .manage-taxes .cmn-area .rate {
-        width: 40px !important;
-        padding: 10px 10px 10px 6px !important;
+        padding: 10px 10px 10px 6px;
       }
       .manage-taxes .cmn-area .action {
-        width: 32px !important;
-        padding: 0 24px 0 0 !important;
+        padding: 0 24px 0 0;
       }
-      .manage-taxes .cmn-area .tax-name {
-        width: 296px !important;
-        padding: 0 15px 0 24px !important;
-        font-weight: 600;
+      .manage-taxes .cmn-area {
+        .tax-name {
+          padding: 0;
+          font-weight: 600;
+        }
+        th.tax-name {
+          padding-left: 8px;
+        }
+      }
+      .manage-taxes .cmn-area .checkbox {
+        width: 56px;
+        display: table-cell;
+
+        .qt-checkbox {
+          margin-top: 11px;
+        }
       }
       .qt-table-modern__sorting {
         top: 2px;
+      }
+      .add-category-name {
+        width: auto;
+      }
+      .add-category-container {
+        td {
+          background-color: #f4fbff;
+        }
+      }
+      .tickets-status-header-buttons {
+        display: flex;
+        align-items: center;
+        padding: 8px 16px;
+        border-radius: 4px;
+        background-color: $white;
+        font-size: 12px;
+        color: $gray-800;
+        line-height: 1.33;
+        border: 1px solid $gray-400;
+      }
+      .page-insider {
+        padding-bottom: 24px;
+
+        table.dataTable tbody tr:last-child td {
+          border-bottom: 1px solid #edf2f6;
+        }
       }
     }
 

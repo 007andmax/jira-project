@@ -28,13 +28,13 @@
             }
         }
         .tax-name {
-            width: 260px;
+            width: auto;
             @media only screen and (max-width: 576px) {
                 width: 105px;
             }
         }
         .rate {
-            width: 170px !important;
+            width: 80px;
             @media only screen and (max-width: 576px) {
                 width: 55px;
             }
@@ -51,7 +51,7 @@
             }
         }
         .action {
-            width: 118px;
+            width: 32px;
             position: relative;
             @media only screen and (max-width: 576px) {
                 width: 50px;
@@ -124,13 +124,12 @@ add-category-product {
 }
 .checkbox {
     margin: 0px;
-    padding: 0 15px 0 24px !important;
     input {
         width: 16px;
         height: 16px;
         margin: 0px;
         border: solid 1px #c4cbd5;
-        position: absolute !important;
+        position: absolute;
         transform: translateY(3px);
     }
 }
