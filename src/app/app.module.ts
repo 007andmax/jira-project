@@ -452,6 +452,7 @@ import { CompanyDeviceBetaComponent } from './components/company-device-beta/com
 import { DeviceBeta } from './pipe/device-beta.pipe';
 import { SoftwareSummaryReport1Component } from './components/reports/reports/software-summary-report1/software-summary-report1.component';
 import { ReportDeviceSummaryComponent } from './components/reports/reports/report-device-summary/report-device-summary.component';
+import { ReportDeviceWarrantyComponent } from './components/reports/reports/report-device-warranty/report-device-warranty.component';
 
 
 declare var $: any;
@@ -861,6 +862,7 @@ declare var $: any;
     DeviceBeta,
     SoftwareSummaryReport1Component,
     ReportDeviceSummaryComponent,
+    ReportDeviceWarrantyComponent,
   ],
   imports: [
     BrowserModule,
