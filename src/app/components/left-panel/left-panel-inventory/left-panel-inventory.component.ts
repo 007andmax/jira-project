@@ -34,7 +34,9 @@ export class LeftPanelInventoryComponent implements OnInit {
       this.cd.detectChanges();
     })
   }
-
+  public goToState() {
+    this.onChangeState.emit('inventory');
+  }
   selectCategory(category) {
     this.sortCategoty = category;
     this.inventoryStateService.setSortCategory(category);

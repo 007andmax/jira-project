@@ -134,7 +134,7 @@ export class TicketsStatusComponent implements OnInit, OnDestroy {
     }
   }
   ngOnDestroy(): void {
-
+    this.ticketsStateService.setListTicketStatusForRemove([]);
     this.sub.unsubscribe();
   }
 }

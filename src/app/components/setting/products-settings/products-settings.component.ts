@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Subscription } from 'rxjs';
-import { DELETE_CATEGORY_PRODUCT } from 'src/app/const/confirm';
+import { forkJoin, Subscription } from 'rxjs';
+import { DELETE_CATEGORIES_PRODUCT, DELETE_CATEGORY_PRODUCT } from 'src/app/const/confirm';
 import { CategoryProduct } from 'src/app/interfaces/product/category-product';
 import { ModalEditCategoryProductComponent } from 'src/app/services/modal/modal-edit-category-product/modal-edit-category-product.component';
 import { ProductService } from 'src/app/services/product/product.service';
@@ -26,6 +26,7 @@ export class ProductsSettingsComponent implements OnInit, OnDestroy {
   constructor(private inventoryStateService: InventoryStateService,
     private confirmStateService: ConfirmStateService,
     private productService: ProductService,
+    public cd: ChangeDetectorRef,
     private modalService: NgbModal,) { }
 
 
@@ -41,13 +42,30 @@ export class ProductsSettingsComponent implements OnInit, OnDestroy {
         if (this.confirmStateService.getConfirmAction() === DELETE_CATEGORY_PRODUCT) {
           this.onRemoveCategoryProduct(this.inventoryStateService.getCategoryForDelete().id);
         }
+        if (this.confirmStateService.getConfirmAction() === DELETE_CATEGORIES_PRODUCT) {
+          this.onRemoveCategoriesProduct();
+        }
       }
     })
     this.sub.add(getConfirm);
   }
+  onSelect(event, item) {
+    if (event.target.checked) {
+      this.inventoryStateService.getListCategoriesForRemove().push(item);
+    } else {
+      let list = this.inventoryStateService.getListCategoriesForRemove();
+      let index = list.findIndex(item => item.id === item.id);
+      if (index > -1) list.splice(index, 1);
+      this.inventoryStateService.setListCategoriesForRemove(list);
+    }
+    this.cd.detectChanges();
+  }
   public getCategories(data) {
     this.categoriesProducts = JSON.parse(JSON.stringify(data)).map(item => new CategoryProductSettings(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+  }
+  getSelectedCount() {
+    return this.inventoryStateService.getListCategoriesForRemove().length;
   }
   onFilter(field) {
     this.filter.onFilter(field, this.categoriesProducts);
@@ -56,7 +74,17 @@ export class ProductsSettingsComponent implements OnInit, OnDestroy {
     if (this.activeTab === "productCategories") this.showAddCategory = true;
 
   }
-
+  onRemoveCategoriesProduct() {
+    forkJoin(this.inventoryStateService.getListCategoriesForRemove().map(item => this.productService.removeCategory(item.id)))
+      .subscribe(
+        () => {
+          this.inventoryStateService.setListCategoriesForRemove([]);
+          this.cd.detectChanges();
+        },
+        error => {
+        }
+      );
+  }
   onRemoveCategoryProduct(id) {
     this.productService.removeCategory(id).subscribe(data => {
 
@@ -70,7 +98,12 @@ export class ProductsSettingsComponent implements OnInit, OnDestroy {
       })
     }
   }
+  removeCategoriesStatus() {
+    this.confirmStateService.setConfirmAction(DELETE_CATEGORIES_PRODUCT);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    modalRef.componentInstance.message = `Do you want to delete categories?`;
 
+  }
   removeCategoryProduct(data) {
     this.confirmStateService.setConfirmAction(DELETE_CATEGORY_PRODUCT);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
@@ -82,6 +115,7 @@ export class ProductsSettingsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     $('body').removeClass('ng7');
+    this.inventoryStateService.setListCategoriesForRemove([]);
     this.sub.unsubscribe();
   }
 }

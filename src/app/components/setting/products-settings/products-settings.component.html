@@ -4,12 +4,25 @@
         <div class="heading">
             <h6 class="qt-fw-600 qt-color-dark">Products</h6>
             <div class="heading-serach add-category-container">
+                <div
+                    class="tickets-status-header-buttons"
+                    *ngIf="getSelectedCount() > 0"
+                >
+                    <div [textContent]="getSelectedCount() + ' Categories Selected'"></div>
+                    <div
+                        class="qt-ml-16 qt-fw-600 qt-df qt-color-info qt-ai-c qt-pointer"
+                        (click)="removeCategoriesStatus()"
+                    >
+                        <div class="icon__remove-blue qt-sz-16 qt-bg-contain qt-ic-c qt-mr-6"></div>
+                        <div>Delete</div>
+                    </div>
+                </div>
                 <a
                     href="javascript:;"
                     class="btn-outline"
                     (click)="create()"
                 >
-                    Create
+                    Add category
                 </a>
             </div>
         </div>
@@ -30,15 +43,16 @@
                             >
                                 <thead>
                                     <tr>
+                                        <th class="checkbox-header"></th>
                                         <th
-                                            class="tax-name"
+                                            class="tax-name pointer"
                                             (click)="onFilter('name')"
                                         >
                                             Category Name
                                             <div class="qt-table-modern__sorting"></div>
                                         </th>
                                         <th
-                                            class="rate"
+                                            class="rate pointer"
                                             (click)="onFilter('count')"
                                         >
                                             Count
@@ -60,6 +74,16 @@
                                         [class]="'.edit-category-container-' + i"
                                         (onOutSide)="onEditCategory(item)"
                                     >
+                                        <td class="checkbox">
+                                            <label class="qt-checkbox">
+                                                <input
+                                                    type="checkbox"
+                                                    [(ngModel)]="item.selected"
+                                                    (change)="onSelect($event,item)"
+                                                >
+                                                <span></span>
+                                            </label>
+                                        </td>
                                         <td class="tax-name edit-category-name">
                                             <input
                                                 type="text"

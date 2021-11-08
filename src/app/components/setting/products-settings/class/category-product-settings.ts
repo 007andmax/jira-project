@@ -10,6 +10,7 @@ export class CategoryProductSettings implements CategoryProduct {
     products: Product[];
     productsAmount: number;
     isInitEdit: boolean = false;
+    selected: boolean = false;
     constructor(data) {
         if (data) {
             for (const key in data) {

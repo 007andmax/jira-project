@@ -53,7 +53,7 @@ export class TicketSettingsPageComponent implements OnInit, OnDestroy {
     this.activeTab = data['nextId'];
   }
   getSelectedCount() {
-    return (this.ticketsStatus) ? this.ticketsStatus.ticketsStatus.filter(item => item.selected).length : 0;
+    return this.ticketsStateService.getListTicketStatusForRemove().length;
   }
   onBackMenu() {
     let body = document.getElementsByTagName("body")[0];

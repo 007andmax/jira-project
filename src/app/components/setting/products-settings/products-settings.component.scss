@@ -34,7 +34,7 @@
             }
         }
         .rate {
-            width: 170px;
+            width: 170px !important;
             @media only screen and (max-width: 576px) {
                 width: 55px;
             }
@@ -76,7 +76,9 @@
         }
     }
 }
-
+.checkbox-header {
+    width: 46px;
+}
 .remove {
     margin-top: 0px !important;
 }
@@ -119,4 +121,20 @@ add-category-product {
             background-color: #f4fbff !important;
         }
     }
+}
+.checkbox {
+    margin: 0px;
+    padding: 0 15px 0 24px !important;
+    input {
+        width: 16px;
+        height: 16px;
+        margin: 0px;
+        border: solid 1px #c4cbd5;
+        position: absolute !important;
+        transform: translateY(3px);
+    }
+}
+.qt-checkbox {
+    margin: 0;
+    padding: 0;
 }
