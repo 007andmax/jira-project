@@ -189,7 +189,7 @@
                         >
                             <span
                                 [ngStyle]="{'color':  statusColors[item.color].borderColor}"
-                                [textContent]="item.name"
+                                [textContent]="parseStatus(item.name)"
                             ></span>
                         </div>
                     </td>
