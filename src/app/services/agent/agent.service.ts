@@ -66,6 +66,15 @@ export class AgentService {
     this.AccessToken = data;
   }
 
+  public getDeviceAntivirusByGuid(companyGuid) {
+    return this.http
+      .get(`${this.apiAgent}report/DeviceAntivirus/${companyGuid}`,{
+          headers: this.getHeader(),
+          responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
   public getDeviceWarrantyByGuid(companyGuid) {
     return this.http
       .get(`${this.apiAgent}report/DeviceWarranty/${companyGuid}`,{

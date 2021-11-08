@@ -359,7 +359,7 @@ export class ReportDeviceWarrantyComponent implements OnInit {
         element.HardwareType.replace(",", "") || "N/A",
         element.Model.replace(",", " ") || "N/A",
         element.SerialNumber || "N/A",
-        element.WarrantyExpires || "N/A",
+        this.pipe.transform(element.WarrantyExpires, "dd/MM/yyyy") || "N/A",
       ]);
     });
     let fileName = "Device Warranty Report List";

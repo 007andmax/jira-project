@@ -453,6 +453,7 @@ import { DeviceBeta } from './pipe/device-beta.pipe';
 import { SoftwareSummaryReport1Component } from './components/reports/reports/software-summary-report1/software-summary-report1.component';
 import { ReportDeviceSummaryComponent } from './components/reports/reports/report-device-summary/report-device-summary.component';
 import { ReportDeviceWarrantyComponent } from './components/reports/reports/report-device-warranty/report-device-warranty.component';
+import { ReportDeviceAntivirusComponent } from './components/reports/reports/report-device-antivirus/report-device-antivirus.component';
 
 
 declare var $: any;
@@ -863,6 +864,7 @@ declare var $: any;
     SoftwareSummaryReport1Component,
     ReportDeviceSummaryComponent,
     ReportDeviceWarrantyComponent,
+    ReportDeviceAntivirusComponent,
   ],
   imports: [
     BrowserModule,

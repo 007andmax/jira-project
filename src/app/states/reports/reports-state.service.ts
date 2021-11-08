@@ -27,7 +27,7 @@ export class ReportsStateService {
   }
 
   public parseReportContent(report) {
-    if (report == "software-summary" || report == "report-device-summary" || report == "report-warranty-summary") {
+    if (report == "software-summary" || report == "report-device-summary" || report == "report-warranty-summary" || report == "report-antivirus-summary") {
       var source = $("#product-list-ticket-data");
       var target = source.clone();
       var row = target.find("th");
@@ -43,6 +43,9 @@ export class ReportsStateService {
       }
       if (report =="report-warranty-summary"){
         installed ="Warrantys";
+      }
+      if (report =="report-antivirus-summary"){
+        installed ="Antivirus";
       }
       let html =
         `

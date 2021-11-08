@@ -19,6 +19,8 @@ export class ExcelService {
       [(typeArr = ["Device Name", "Manufacturer", "Model", "SerialNumber"])];
     } else if (type === "devicewarrantyreport") {
       [(typeArr = ["Device Name", "Manufacturer", "Device Type", "Model", "SerialNumber", "Warranty Date"])];
+    } else if (type === "deviceantivirusreport") {
+      [(typeArr = ["Device Name"])];
     } else
       [(typeArr = ["Software Name", "Publisher", "Version", "Installed On"])];
     let csvData = this.ConvertToCSV(data, typeArr, type);
@@ -50,7 +52,8 @@ export class ExcelService {
       type === "software" ||
       type === "softwaresummaryreport" ||
       type === "devicesummaryreport" ||
-      type === "devicewarrantyreport"
+      type === "devicewarrantyreport" ||
+      type === "deviceantivirusreport"
     ) {
       row = "S.No,";
 
@@ -63,7 +66,8 @@ export class ExcelService {
       type === "software" ||
       type === "softwaresummaryreport" ||
       type === "devicesummaryreport" ||
-      type === "devicewarrantyreport"
+      type === "devicewarrantyreport" ||
+      type === "deviceantivirusreport"
     ) {
       str += row + "\r\n";
     }
@@ -73,7 +77,8 @@ export class ExcelService {
         type === "software" ||
         type === "softwaresummaryreport" ||
         type === "devicesummaryreport" ||
-        type === "devicewarrantyreport"
+        type === "devicewarrantyreport" ||
+        type === "deviceantivirusreport"
       )
         [(line = i + 1 + "")];
       for (let index in headerList) {
@@ -84,7 +89,8 @@ export class ExcelService {
           type === "software" ||
           type === "softwaresummaryreport" ||
           type === "devicesummaryreport" ||
-          type === "devicewarrantyreport"
+          type === "devicewarrantyreport" ||
+          type === "deviceantivirusreport"
         ) {
           line += "," + array[i][index];
         } else {
