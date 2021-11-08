@@ -19,8 +19,10 @@ export class ExcelService {
       [(typeArr = ["Device Name", "Manufacturer", "Model", "SerialNumber"])];
     } else if (type === "devicewarrantyreport") {
       [(typeArr = ["Device Name", "Manufacturer", "Device Type", "Model", "SerialNumber", "Warranty Date"])];
-    } else if (type === "deviceantivirusreport") {
+    } else if (type === "deviceantivirusreport"){
       [(typeArr = ["Device Name"])];
+    } else if (type === "networkIPreport") {
+      [(typeArr = ["Device Name", "Domain", "IPAddress", "Subnet", "Gateway", "ExternalIP"])];
     } else
       [(typeArr = ["Software Name", "Publisher", "Version", "Installed On"])];
     let csvData = this.ConvertToCSV(data, typeArr, type);
@@ -53,7 +55,8 @@ export class ExcelService {
       type === "softwaresummaryreport" ||
       type === "devicesummaryreport" ||
       type === "devicewarrantyreport" ||
-      type === "deviceantivirusreport"
+      type === "deviceantivirusreport" ||
+      type === "networkIPreport"
     ) {
       row = "S.No,";
 
@@ -67,7 +70,8 @@ export class ExcelService {
       type === "softwaresummaryreport" ||
       type === "devicesummaryreport" ||
       type === "devicewarrantyreport" ||
-      type === "deviceantivirusreport"
+      type === "deviceantivirusreport"||
+      type === "networkIPreport"
     ) {
       str += row + "\r\n";
     }
@@ -78,7 +82,8 @@ export class ExcelService {
         type === "softwaresummaryreport" ||
         type === "devicesummaryreport" ||
         type === "devicewarrantyreport" ||
-        type === "deviceantivirusreport"
+        type === "deviceantivirusreport" ||
+        type === "networkIPreport"
       )
         [(line = i + 1 + "")];
       for (let index in headerList) {
@@ -90,7 +95,8 @@ export class ExcelService {
           type === "softwaresummaryreport" ||
           type === "devicesummaryreport" ||
           type === "devicewarrantyreport" ||
-          type === "deviceantivirusreport"
+          type === "deviceantivirusreport" ||
+          type === "networkIPreport"
         ) {
           line += "," + array[i][index];
         } else {

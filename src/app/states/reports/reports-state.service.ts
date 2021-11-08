@@ -27,7 +27,7 @@ export class ReportsStateService {
   }
 
   public parseReportContent(report) {
-    if (report == "software-summary" || report == "report-device-summary" || report == "report-warranty-summary" || report == "report-antivirus-summary") {
+    if (report == "software-summary" || report == "report-device-summary" || report == "report-warranty-summary" || report == "report-antivirus-summary" || report == "network-ip-report") {
       var source = $("#product-list-ticket-data");
       var target = source.clone();
       var row = target.find("th");
@@ -47,6 +47,10 @@ export class ReportsStateService {
       if (report =="report-antivirus-summary"){
         installed ="Antivirus";
       }
+      if (report =="network-ip-report"){
+        installed ="NetworkIP"
+      }
+
       let html =
         `
       <style>

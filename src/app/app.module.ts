@@ -454,6 +454,7 @@ import { SoftwareSummaryReport1Component } from './components/reports/reports/so
 import { ReportDeviceSummaryComponent } from './components/reports/reports/report-device-summary/report-device-summary.component';
 import { ReportDeviceWarrantyComponent } from './components/reports/reports/report-device-warranty/report-device-warranty.component';
 import { ReportDeviceAntivirusComponent } from './components/reports/reports/report-device-antivirus/report-device-antivirus.component';
+import { NetworkIpReportComponent } from './components/reports/reports/network-ip-report/network-ip-report.component';
 
 
 declare var $: any;
@@ -865,6 +866,7 @@ declare var $: any;
     ReportDeviceSummaryComponent,
     ReportDeviceWarrantyComponent,
     ReportDeviceAntivirusComponent,
+    NetworkIpReportComponent,
   ],
   imports: [
     BrowserModule,
