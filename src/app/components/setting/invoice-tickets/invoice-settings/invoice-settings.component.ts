@@ -22,7 +22,7 @@ export class InvoiceSettingsComponent implements OnInit {
     private formBuilder: FormBuilder,
     private invoiceTicketsService: InvoiceTicketsService,
     private toaster: ToastrService
-  ) {}
+  ) { }
 
   ngOnInit() {
     const emailPattern =
@@ -120,7 +120,7 @@ export class InvoiceSettingsComponent implements OnInit {
   }
 
   getConditions() {
-    this.loading = true;$(".loading").css("display", "block");
+    this.loading = true; $(".loading").css("display", "block");
     this.invoiceTicketsService.termsAndConditions().subscribe(
       (res: any) => {
         this.invoiceForm.patchValue({
@@ -131,7 +131,7 @@ export class InvoiceSettingsComponent implements OnInit {
   }
 
   getTaxNumber() {
-    this.loading = true;$(".loading").css("display", "block");
+    this.loading = true; $(".loading").css("display", "block");
     this.invoiceTicketsService.getTaxNumber().subscribe(
       (res: any) => {
         if (res) {
@@ -141,7 +141,7 @@ export class InvoiceSettingsComponent implements OnInit {
           });
         }
       },
-      error => {}
+      error => { }
     );
   }
 
@@ -151,10 +151,10 @@ export class InvoiceSettingsComponent implements OnInit {
   getInvoiceContact() {
     // this.getTaxNumber();
     // this.getConditions();
-    this.loading = true;$(".loading").css("display", "block");
+    this.loading = true; $(".loading").css("display", "block");
     this.invoiceTicketsService.getInvoiceContact().subscribe(
       (res: any) => {
-        this.loading = false;$(".loading").css("display", "none");
+        this.loading = false; $(".loading").css("display", "none");
         if (res) {
           this.isDisable = res.enabled;
           const state = !this.isDisable ? 'disable' : 'enable';
@@ -163,7 +163,10 @@ export class InvoiceSettingsComponent implements OnInit {
               if (
                 controlName !== 'invoiceCount' &&
                 controlName !== 'invoiceTerms' &&
-                controlName !== 'enableInvoiceContact'
+                controlName !== 'enableInvoiceContact' &&
+                controlName !== 'taxIdDescription' &&
+                controlName !== 'taxId' &&
+                controlName !== 'conditions'
               ) {
                 this.invoiceForm.controls[controlName][state](); // disables/enables each form control based on 'this.formDisabled'
               }
@@ -200,7 +203,7 @@ export class InvoiceSettingsComponent implements OnInit {
         }
       },
       error => {
-        this.loading = false;$(".loading").css("display", "none");
+        this.loading = false; $(".loading").css("display", "none");
       }
     );
   }
@@ -210,10 +213,10 @@ export class InvoiceSettingsComponent implements OnInit {
    */
 
   getTermsAndConditions() {
-    this.loading = true;$(".loading").css("display", "block");
+    this.loading = true; $(".loading").css("display", "block");
     this.invoiceTicketsService.termsAndConditions().subscribe(
       (res: any) => {
-        this.loading = false;$(".loading").css("display", "none");
+        this.loading = false; $(".loading").css("display", "none");
         if (res) {
           this.invoiceForm.patchValue({
             invoiceTerms: res.term
@@ -221,7 +224,7 @@ export class InvoiceSettingsComponent implements OnInit {
         }
       },
       error => {
-        this.loading = false;$(".loading").css("display", "none");
+        this.loading = false; $(".loading").css("display", "none");
       }
     );
   }
@@ -230,10 +233,10 @@ export class InvoiceSettingsComponent implements OnInit {
    * get invoice number
    */
   getActualNumber() {
-    this.loading = true;$(".loading").css("display", "block");
+    this.loading = true; $(".loading").css("display", "block");
     this.invoiceTicketsService.actualNumber('INVOICE').subscribe(
       (res: any) => {
-        this.loading = false;$(".loading").css("display", "none");
+        this.loading = false; $(".loading").css("display", "none");
         if (res) {
           this.invoiceForm.patchValue({
             invoiceCount: res.number
@@ -241,20 +244,26 @@ export class InvoiceSettingsComponent implements OnInit {
         }
       },
       error => {
-        this.loading = false;$(".loading").css("display", "none");
+        this.loading = false; $(".loading").css("display", "none");
       }
     );
   }
 
-  onEnableInvoice() {
-    const enable = this.invoiceForm.value.enableInvoiceContact;
-    this.isDisable = enable;
+  onEnableInvoice(data) {
+    this.invoiceForm.patchValue({
+      enableInvoiceContact: data
+    });
+    this.isDisable = data;
+    const enable = data;
     const state = !enable ? 'disable' : 'enable';
     Object.keys(this.invoiceForm.controls).forEach(controlName => {
       if (
         controlName !== 'invoiceCount' &&
         controlName !== 'invoiceTerms' &&
-        controlName !== 'enableInvoiceContact'
+        controlName !== 'enableInvoiceContact' &&
+        controlName !== 'taxIdDescription' &&
+        controlName !== 'taxId' &&
+        controlName !== 'conditions'
       ) {
         this.invoiceForm.controls[controlName][state](); // disables/enables each form control based on 'this.formDisabled'
       }
@@ -283,9 +292,8 @@ export class InvoiceSettingsComponent implements OnInit {
         termsAndConditions: this.invoiceForm.value.conditions,
         type: 'INVOICE'
       },
-      enableInvoiceContact: this.invoiceForm.value.enableInvoiceContact,
       invoiceContactDto: {
-        enabled: true,
+        enabled: this.invoiceForm.value.enableInvoiceContact,
         firstName: this.invoiceForm.value.firstName,
         lastName: this.invoiceForm.value.lastName,
         email: this.invoiceForm.value.email,
@@ -315,14 +323,14 @@ export class InvoiceSettingsComponent implements OnInit {
     }
     objInvoice.invoiceContactDto.phoneNumbers = phoneNumbers;
 
-    this.loading = true;$(".loading").css("display", "block");
+    this.loading = true; $(".loading").css("display", "block");
     this.invoiceTicketsService.updateInvoiceContact(objInvoice).subscribe(
       res => {
-        this.loading = false;$(".loading").css("display", "none");
+        this.loading = false; $(".loading").css("display", "none");
         this.toaster.success('Saved Successfully.');
       },
       error => {
-        this.loading = false;$(".loading").css("display", "none");
+        this.loading = false; $(".loading").css("display", "none");
         this.toaster.error('Bad Request');
       }
     );

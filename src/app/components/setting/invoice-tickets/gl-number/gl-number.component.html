@@ -1,7 +1,7 @@
 <!-- Middle Wrapper -->
 <div class="page-container">
     <div class="page-insider manage-taxes">
-        <div class="heading">
+        <!-- <div class="heading">
             <h5 class="qt-fw-600">Manage Income Account Numbers</h5>
             <div class="heading-serach">
                 <a
@@ -11,7 +11,6 @@
                 >
                     Create
                 </a>
-                <!-- Modal create Tags -->
                 <div
                     class="modal-content toggle-area"
                     [class.opened]="create"
@@ -88,7 +87,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="cmn-area">
             <div class="data-table-wrap">
                 <table
@@ -103,7 +102,18 @@
                         </tr>
                     </thead>
                     <tbody *ngIf="numberList">
-                        <tr *ngFor="let gl of numberList; let i = index">
+                        <add-gl-number
+                            *ngIf="showAddGl"
+                            (onClose)="toggleShowAddGL(false)"
+                        ></add-gl-number>
+                        <tr
+                            *ngFor="let gl of numberList; let i = index"
+                            appClickOtside
+                            [init]="item.isInitEdit"
+                            [ngClass]="'edit-gl-container-' + i"
+                            [class]="'.edit-gl-container-' + i"
+                            (onOutSide)="onEditTicketStatus(item)"
+                        >
                             <td class="tax-name">{{ gl.glNumber }}</td>
                             <td class="rate">{{ gl.description }}</td>
                             <td class="action">

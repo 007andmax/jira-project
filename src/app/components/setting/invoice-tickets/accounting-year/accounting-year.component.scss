@@ -1,0 +1,22 @@
+@import "./src/assets/styles/variable";
+
+.date-area {
+    position: relative;
+    a {
+        position: absolute;
+        top: 0;
+        right: 15px;
+    }
+}
+input.form-control.sub-label-field,
+select.cmn-select {
+    background-color: $white;
+    &[disabled] {
+        cursor: not-allowed;
+        background-color: $background;
+        border-color: $background;
+    }
+}
+.--required {
+    position: relative;
+}

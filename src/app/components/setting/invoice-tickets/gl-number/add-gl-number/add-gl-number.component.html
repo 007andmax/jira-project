@@ -1,0 +1,37 @@
+<tr
+    class="add-gl-container"
+    appClickOtside
+    #addStatusBtn="click"
+    [init]="true"
+    [class]="'.add-gl-container'"
+    (onOutSide)="onAddGL()"
+>
+    <td
+        class="tax-name"
+        [ngClass]="{'--input-error' : !validateShort  }"
+    >
+        <input
+            type="text"
+            class="form-input"
+            placeholder="Enter Name Status"
+            [(ngModel)]="addGl.glNumber"
+            (input)="resetValidate()"
+        >
+        <mat-error
+            class="qt-tooltip-error"
+            *ngIf="!validateShort"
+        >
+            Income Account Number is too short.
+        </mat-error>
+    </td>
+    <td class="rate">
+        <input
+            type="text"
+            class="form-input"
+            placeholder="Enter Name Status"
+            [(ngModel)]="addGl.description"
+            maxlength="100"
+        >
+    </td>
+    <td class="action"></td>
+</tr>

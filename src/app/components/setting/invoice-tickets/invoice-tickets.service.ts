@@ -1,15 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { GlNumberSettingsComponent } from './gl-number/gl-number.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InvoiceTicketsService {
   private apiUrl = environment.apiUrl;
-
   constructor(private http: HttpClient) { }
 
   /**

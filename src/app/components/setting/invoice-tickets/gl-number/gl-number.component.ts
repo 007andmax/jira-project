@@ -4,6 +4,7 @@ import { ToastrService } from "ngx-toastr";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { map } from "rxjs/operators";
 import { SettingStateService } from "src/app/states/setting/setting-state.service";
+import { GlNumber } from "src/class/gl-number/gl-number";
 declare var $: any;
 @Component({
   selector: "app-gl-number-settings",
@@ -14,12 +15,14 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
   loading = false;
   create = false;
   selectedIdx = -1;
-  numberList: any[] = [];
+  numberList: Array<GlNumber> = [];
   eGL: any;
   submitted = false;
   glForm: FormGroup;
   gl: any;
   popup: boolean;
+  showAddGl: boolean = false;
+
   constructor(
     private glNumberService: GlNumberService,
     private toastrService: ToastrService,
@@ -51,7 +54,10 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    $('body').removeClass('ng7');
+
+  }
+  toggleShowAddGL(data) {
+    this.showAddGl = data;
   }
 
   // convenience getter for easy access to form fields
@@ -69,7 +75,7 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
       .pipe(
         map((res: any) => {
           if (res) {
-            this.numberList = res;
+            this.numberList = res.map(item => new GlNumber(item));
             this.numberList.sort((a, b) => a.glNumber.localeCompare(b.glNumber));
           }
           this.loading = false; $(".loading").css("display", "none");
@@ -168,7 +174,7 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
           map((res: any) => {
             this.loading = false; $(".loading").css("display", "none");
             this.toastrService.success("GL Number Saved Successfully");
-            this.numberList.push(res);
+            this.numberList.push(new GlNumber(res));
             this.numberList.sort((a, b) => a.glNumber.localeCompare(b.glNumber));
             this.create = false;
           })

@@ -19,7 +19,7 @@ import { SubscriptionComponent } from './components/setting/subscription/subscri
 import { CompanyPasswordManagerComponent } from './components/company-password-manager/company-password-manager.component';
 import { CompanyUserComponent } from './components/company-user/company-user.component';
 import { RecurringTicketsComponent } from './components/tickets/recurring-tickets/recurring-tickets.component';
-import { GlNumberSettingsComponent } from './components/setting/gl-number/gl-number.component';
+import { GlNumberSettingsComponent } from './components/setting/invoice-tickets/gl-number/gl-number.component';
 import { CompaniesComponent } from './components/companies/companies.component';
 import { UsersComponent } from './components/users/users.component';
 import { ReportsComponent } from './components/reports/reports.component';
@@ -160,11 +160,6 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: ':company/setting/glnumber',
-    component: GlNumberSettingsComponent,
-    pathMatch: 'full',
-  },
-  {
     path: ':company/setting/ticket-settings',
     component: TicketSettingsPageComponent,
     pathMatch: 'full',
@@ -185,7 +180,7 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: ':company/setting/invoiceTickets',
+    path: ':company/setting/accounting',
     component: InvoiceTicketsComponent,
     pathMatch: 'full',
   },

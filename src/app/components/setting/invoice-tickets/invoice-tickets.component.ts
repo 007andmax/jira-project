@@ -1,5 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { SettingStateService } from 'src/app/states/setting/setting-state.service';
+import { GlNumberSettingsComponent } from './gl-number/gl-number.component';
 import { InvoiceTicketsService } from './invoice-tickets.service';
 declare var $: any;
 @Component({
@@ -15,7 +16,8 @@ export class InvoiceTicketsComponent implements OnInit, OnDestroy {
   showTerm = false;
   term: any;
   condition: any;
-
+  activeTab: string = "invoiceSettings";
+  @ViewChild('glNumber') glNumber: GlNumberSettingsComponent;
   constructor(private invoiceTicketsService: InvoiceTicketsService,
     private settingStateService: SettingStateService) { }
 
@@ -55,7 +57,12 @@ export class InvoiceTicketsComponent implements OnInit, OnDestroy {
       }
     );
   }
-
+  setTab(data) {
+    this.activeTab = data['nextId'];
+  }
+  create() {
+    if (this.activeTab === "gLNumbers") this.glNumber.toggleShowAddGL(true);
+  }
   getTermsAndConditions() {
     this.loading = true; $(".loading").css("display", "block");
     this.invoiceTicketsService.termsAndConditions().subscribe(
