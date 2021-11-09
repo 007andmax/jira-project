@@ -2,6 +2,7 @@
 @import "./src/assets/styles/variable";
 @import "../../../../assets/scss/mixin";
 @import "../../../../assets/scss/custom";
+@import "./src/assets/styles/fonts";
 
 .manage-taxes {
     .modal-content {
@@ -108,10 +109,14 @@
         outline: none;
         padding: 2px 2px 2px 8px;
         outline: none;
-        font-weight: 600;
+        font-weight: 500;
+        color: $primary-2;
         &:hover,
         &:focus {
             border-color: #dfe3e8;
+        }
+        &::placeholder {
+          font-weight: 400;
         }
     }
 }

@@ -1,3 +1,5 @@
+@import "./src/assets/styles/variable";
+
 .tax-name {
     width: 260px;
     @media only screen and (max-width: 576px) {
@@ -13,9 +15,14 @@
         outline: none;
         padding: 2px 2px 2px 8px;
         outline: none;
+        font-weight: 500;
+        color: $primary-2;
         &:hover,
         &:focus {
             border-color: #dfe3e8;
+        }
+        &::placeholder {
+          font-weight: 400;
         }
     }
 }

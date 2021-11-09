@@ -4,8 +4,12 @@
     position: relative;
     a {
         position: absolute;
-        top: 0;
+        top: 2px;
         right: 15px;
+        color: $primary-1;
+        font-size: 12px;
+        line-height: 16px;
+        font-weight: 500;
     }
 }
 input.form-control.sub-label-field,
@@ -13,8 +17,8 @@ select.cmn-select {
     background-color: $white;
     &[disabled] {
         cursor: not-allowed;
-        background-color: $background;
-        border-color: $background;
+        background-color: $gray-200;
+        border-color: $gray-200;
     }
 }
 .--required {

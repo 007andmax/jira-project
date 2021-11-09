@@ -313,11 +313,11 @@ body {
         background-color: $white;
         padding: 9px 14px;
         font-size: 13px;
+        color: $primary-2;
         font-weight: normal;
         font-weight: 400;
         line-height: 1.54;
         letter-spacing: normal;
-        color: $gray-800;
         outline: none !important;
         height: auto;
         &:focus {
@@ -469,9 +469,8 @@ body {
         font-size: 12px;
         font-weight: 500;
         line-height: 1.33;
-        letter-spacing: -0.3px;
         color: $primary-1;
-        text-decoration: none !important;
+        text-decoration: none;
         &:hover {
             // color: $primary-1;
         }
@@ -485,7 +484,7 @@ body {
         .form-row {
             float: left;
             width: 100%;
-            margin: 0 0 25px 0;
+            margin: 0 0 24px 0;
             @media only screen and (max-width: 576px) {
                 margin-bottom: 12px;
             }
@@ -1217,6 +1216,50 @@ body {
       }
     }
 
+    .app-invoice-tickets-page-container {
+      .heading {
+        padding: 20px 24px;
+        height: 74px;
+      }
+      ngb-tabset {
+        ul.nav-tabs {
+          padding: 0 24px;
+        }
+        .tab-content {
+          padding: 24px;
+        }
+      }
+      label {
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: $primary-2;
+      }
+      .qt-checkbox {
+        span {
+          margin-top: 6px;
+          margin-right: 6px;
+        }
+        &__text {
+          font-size: 13px;
+          line-height: 20px;
+          letter-spacing: 0;
+          color: $gray-800;
+        }
+      }
+      .form-control {
+        height: 40px;
+        font-size: 13px;
+        line-height: 20px;
+        font-weight: 500;
+        color: $primary-2;
+      }
+      .page-insider.invoice-ticket {
+        .f-row {
+          overflow: unset;
+        }
+      }
+    }
+
     /*** Common Tabbings ***/
     ngb-tabset {
         float: left;
@@ -1238,7 +1281,7 @@ body {
             }
             .nav-item {
                 padding: 0;
-                margin: 0 32px 0 0;
+                margin: 0 24px 0 0;
                 display: inline-block;
                 @media only screen and (max-width: 768px) {
                     margin: 0 24px 0 0;
@@ -1312,9 +1355,6 @@ body {
                     justify-content: space-between;
                     border-radius: 4px;
                     overflow: hidden;
-                }
-                .form-input {
-                    margin-bottom: 5px;
                 }
             }
         }

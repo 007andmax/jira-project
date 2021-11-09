@@ -5,7 +5,7 @@
             (ngSubmit)="onSubmit()"
         >
             <div class="f-row">
-                <div class="f-col col-33">
+                <div class="f-col col-50">
                     <label>Starting Invoice number</label>
                     <div class="form-row">
                         <input
@@ -46,7 +46,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="f-col col-33">
+                <div class="f-col col-50">
                     <label>Tax ID description</label>
                     <div class="form-row">
                         <input
@@ -64,7 +64,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="f-col col-33">
+                <div class="f-col col-50">
                     <label>Tax ID</label>
                     <div class="form-row">
                         <input
@@ -269,10 +269,22 @@
                         </select>
                     </div>
                 </div>
+                <div
+                  class="f-col col-100 qt-mt-12"
+                  [hidden]="!invoiceForm.value.enableInvoiceContact"
+                >
+                  <div class="qt-df qt-ai-c">
+                    <label class="qt-checkbox qt-mb-0 pointer" for="accounting-active">
+                      <input id="accounting-active" type="checkbox">
+                      <span></span>
+                    </label>
+                    <div class="qt-checkbox__text">Send copy of all invoices to this address</div>
+                  </div>
+                </div>
             </div>
             <input
                 type="submit"
-                class="btn btn-primary"
+                class="qt-button qt-mt-32"
                 value="Save Changes"
             >
         </form>

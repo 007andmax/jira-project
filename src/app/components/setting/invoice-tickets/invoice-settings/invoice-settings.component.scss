@@ -64,11 +64,12 @@
         }
     }
     textarea {
-        height: 65px;
+        height: 80px;
         resize: none;
     }
     .input-select {
-        width: 160px;
+        //width: 160px;
+        width: 100%;
     }
     .invoice {
         .f-row {
@@ -95,10 +96,12 @@
     margin-bottom: 5px;
 }
 .accounting-contact-header {
-    margin: 0px 0px 24px 0px;
+    margin: 0 0 24px 0;
     h3 {
         font-size: 11px;
         font-weight: 600;
+        line-height: 16px;
         text-transform: uppercase;
+        color: $primary-2;
     }
 }
