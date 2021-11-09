@@ -126,6 +126,10 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/report/network-ip-report`)) this.state = 'network-ip-report';
           if (window.location.href.includes(`/report/device-ip-summary`)) this.state = 'device-ip-summary';
           if (window.location.href.includes(`/report/report-device-summary`)) this.state = 'report-device-summary';
+          if (window.location.href.includes(`/report/network-detail-report`)) this.state = 'network-detail-report';
+          if (window.location.href.includes(`/report/network-adapter-report`)) this.state = 'network-adapter-report';
+          if (window.location.href.includes(`/report/report-device-deploymentwarranty`)) this.state = 'report-device-deploymentwarranty';
+          if (window.location.href.includes(`/report/report-device-processorram`)) this.state = 'report-device-processorram';
           if (window.location.href.includes(`/report/tech-sales`)) this.state = 'tech-sales';
           if (window.location.href.includes(`/report/tech-ticket`)) this.state = 'tech-ticket';
           if (window.location.href.includes(`/report/tech-service`)) this.state = 'tech-service';
@@ -236,6 +240,10 @@ export class LeftPanelComponent implements OnInit {
         this.state === 'report-device-warranty'||
         this.state === 'report-device-antivirus'||
         this.state === 'network-ip-report'||
+        this.state === 'network-detail-report' ||
+        this.state === 'network-adapter-report' ||
+        this.state === 'report-device-deploymentwarranty' ||
+        this.state === 'report-device-processorram' ||
         this.state === 'tech-sales' ||
         this.state === 'tech-ticket' ||
         this.state === 'tech-service' ||

@@ -66,6 +66,42 @@ export class AgentService {
     this.AccessToken = data;
   }
 
+  public getDeviceProcessorRamByGuid(companyGuid) {
+    return this.http
+      .get(`${this.apiAgent}report/DeviceProcessorRam/${companyGuid}`,{
+          headers: this.getHeader(),
+          responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
+  public getDeviceDeploymentWarrantyByGuid(companyGuid) {
+    return this.http
+      .get(`${this.apiAgent}report/DeviceDeploymentWarranty/${companyGuid}`,{
+          headers: this.getHeader(),
+          responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
+  public getDeviceNetworkAdapterByGuid(companyGuid) {
+    return this.http
+      .get(`${this.apiAgent}report/DeviceNetworkAdapter/${companyGuid}`,{
+          headers: this.getHeader(),
+          responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
+  public getDeviceNetworkDetailByGuid(companyGuid) {
+    return this.http
+      .get(`${this.apiAgent}report/DeviceNetworkDetailed/${companyGuid}`,{
+          headers: this.getHeader(),
+          responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
   public getDeviceNetworkIPByGuid(companyGuid) {
     return this.http
       .get(`${this.apiAgent}report/DeviceNetworkIP/${companyGuid}`,{

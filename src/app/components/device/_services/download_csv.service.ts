@@ -23,6 +23,12 @@ export class ExcelService {
       [(typeArr = ["Device Name"])];
     } else if (type === "networkIPreport") {
       [(typeArr = ["Device Name", "Domain", "IPAddress", "Subnet", "Gateway", "ExternalIP"])];
+    } else if (type === "deviceprocessorramreport") {
+      [(typeArr = ["Device Name", "Manufacturer", "Model", "ProcessorType", "MemoryGB"])];
+    } else if (type === "devicenetworkadapterreport"){
+      [(typeArr = ["Device Name", "Adapter", "Link Speed", "Driver Version"])];
+    } else if (type === "devicenetworkdetailreport"){
+      [(typeArr = ["Device Name", "Domain", "Manufacturer", "Type", "Mac","IP","Subnet"])];
     } else
       [(typeArr = ["Software Name", "Publisher", "Version", "Installed On"])];
     let csvData = this.ConvertToCSV(data, typeArr, type);
@@ -56,7 +62,10 @@ export class ExcelService {
       type === "devicesummaryreport" ||
       type === "devicewarrantyreport" ||
       type === "deviceantivirusreport" ||
-      type === "networkIPreport"
+      type === "networkIPreport"||
+      type === "deviceprocessorramreport" ||
+      type === "devicenetworkadapterreport" ||
+      type === "devicenetworkdetailreport"
     ) {
       row = "S.No,";
 
@@ -71,7 +80,10 @@ export class ExcelService {
       type === "devicesummaryreport" ||
       type === "devicewarrantyreport" ||
       type === "deviceantivirusreport"||
-      type === "networkIPreport"
+      type === "networkIPreport" ||
+      type === "deviceprocessorramreport" ||
+      type === "devicenetworkadapterreport" ||
+      type === "devicenetworkdetailreport"
     ) {
       str += row + "\r\n";
     }
@@ -83,7 +95,10 @@ export class ExcelService {
         type === "devicesummaryreport" ||
         type === "devicewarrantyreport" ||
         type === "deviceantivirusreport" ||
-        type === "networkIPreport"
+        type === "networkIPreport" ||
+        type === "deviceprocessorramreport" ||
+        type === "devicenetworkadapterreport" ||
+        type === "devicenetworkdetailreport"
       )
         [(line = i + 1 + "")];
       for (let index in headerList) {
@@ -96,7 +111,10 @@ export class ExcelService {
           type === "devicesummaryreport" ||
           type === "devicewarrantyreport" ||
           type === "deviceantivirusreport" ||
-          type === "networkIPreport"
+          type === "networkIPreport" ||
+          type === "deviceprocessorramreport" ||
+          type === "devicenetworkadapterreport" ||
+          type === "devicenetworkdetailreport"
         ) {
           line += "," + array[i][index];
         } else {

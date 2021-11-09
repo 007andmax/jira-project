@@ -27,7 +27,7 @@ export class ReportsStateService {
   }
 
   public parseReportContent(report) {
-    if (report == "software-summary" || report == "report-device-summary" || report == "report-warranty-summary" || report == "report-antivirus-summary" || report == "network-ip-report") {
+    if (report == "software-summary" || report == "report-device-summary" || report == "report-warranty-summary" || report == "report-antivirus-summary" || report == "network-ip-report" || report =="device-processorram-report" || report =="network-adapter-report" || report == "network-detail-report") {
       var source = $("#product-list-ticket-data");
       var target = source.clone();
       var row = target.find("th");
@@ -48,7 +48,19 @@ export class ReportsStateService {
         installed ="Antivirus";
       }
       if (report =="network-ip-report"){
-        installed ="NetworkIP"
+        installed ="NetworkIP";
+      }
+      if (report =="device-processorram-report")
+      {
+        installed ="ProcessorRam";
+      }
+      if (report =="network-adapter-report")
+      {
+        installed ="Network Adapter";
+      }
+      if (report =="network-detail-report")
+      {
+        installed ="Network Detail";
       }
 
       let html =

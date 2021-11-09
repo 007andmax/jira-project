@@ -455,6 +455,10 @@ import { ReportDeviceSummaryComponent } from './components/reports/reports/repor
 import { ReportDeviceWarrantyComponent } from './components/reports/reports/report-device-warranty/report-device-warranty.component';
 import { ReportDeviceAntivirusComponent } from './components/reports/reports/report-device-antivirus/report-device-antivirus.component';
 import { NetworkIpReportComponent } from './components/reports/reports/network-ip-report/network-ip-report.component';
+import { NetworkDetailReportComponent } from './components/reports/reports/network-detail-report/network-detail-report.component';
+import { NetworkAdapterReportComponent } from './components/reports/reports/network-adapter-report/network-adapter-report.component';
+import { ReportDeviceDeploymentwarrantyComponent } from './components/reports/reports/report-device-deploymentwarranty/report-device-deploymentwarranty.component';
+import { ReportDeviceProcessorramComponent } from './components/reports/reports/report-device-processorram/report-device-processorram.component';
 
 
 declare var $: any;
@@ -867,6 +871,10 @@ declare var $: any;
     ReportDeviceWarrantyComponent,
     ReportDeviceAntivirusComponent,
     NetworkIpReportComponent,
+    NetworkDetailReportComponent,
+    NetworkAdapterReportComponent,
+    ReportDeviceDeploymentwarrantyComponent,
+    ReportDeviceProcessorramComponent,
   ],
   imports: [
     BrowserModule,
