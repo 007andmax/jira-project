@@ -1,6 +1,15 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { forkJoin, of, Subscription } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { DELETE_LIST_GL_NUMBERS } from 'src/app/const/confirm';
+
+import { GlNumberStateService } from 'src/app/states/gl-number/gl-number-state.service';
 import { SettingStateService } from 'src/app/states/setting/setting-state.service';
+import { ConfirmComponent } from '../../shared/confirm/confirm.component';
+import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { GlNumberSettingsComponent } from './gl-number/gl-number.component';
+import { GlNumberService } from './gl-number/gl-number.service';
 import { InvoiceTicketsService } from './invoice-tickets.service';
 declare var $: any;
 @Component({
@@ -17,8 +26,14 @@ export class InvoiceTicketsComponent implements OnInit, OnDestroy {
   term: any;
   condition: any;
   activeTab: string = "invoiceSettings";
+  sub: Subscription = new Subscription();
   @ViewChild('glNumber') glNumber: GlNumberSettingsComponent;
   constructor(private invoiceTicketsService: InvoiceTicketsService,
+    private glNumberStateService: GlNumberStateService,
+    private confirmStateService: ConfirmStateService,
+    private modalService: NgbModal,
+    private glNumberService: GlNumberService,
+    public cd: ChangeDetectorRef,
     private settingStateService: SettingStateService) { }
 
   ngOnInit() {
@@ -27,10 +42,19 @@ export class InvoiceTicketsComponent implements OnInit, OnDestroy {
     this.getTaxNumber();
     this.getTermsAndConditions();
     this.settingStateService.setComponentName('InvoiceTicketsComponent');
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === DELETE_LIST_GL_NUMBERS) {
+          this.onRemoveGlNumbers();
+        }
+      }
+    })
+    this.sub.add(getConfirm);
   }
 
   ngOnDestroy() {
     $('body').removeClass('ng7');
+    this.sub.unsubscribe();
   }
 
   onBackMenu() {
@@ -38,6 +62,7 @@ export class InvoiceTicketsComponent implements OnInit, OnDestroy {
     body.classList.remove("backMenu"); //remove the class
     body.classList.add("backMenu");
   }
+
 
   getTaxNumber() {
     this.loading = true; $(".loading").css("display", "block");
@@ -57,11 +82,31 @@ export class InvoiceTicketsComponent implements OnInit, OnDestroy {
       }
     );
   }
+  onRemoveGlNumbers() {
+    forkJoin(this.glNumberStateService.getListGlNumbersForRemove().map(item => this.glNumberService.delete(item.id).pipe(map((res) => res),
+      catchError(error => of(undefined)))))
+      .subscribe(
+        () => {
+          this.glNumberStateService.setListGlNumbersForRemove([]);
+          this.cd.detectChanges();
+        },
+        error => {
+        }
+      );
+  }
+  removeGls() {
+    this.confirmStateService.setConfirmAction(DELETE_LIST_GL_NUMBERS);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    modalRef.componentInstance.message = `Do you want to delete Gl Numbers?`;
+  }
+  getSelectedCount() {
+    return this.glNumberStateService.getListGlNumbersForRemove().length;
+  }
   setTab(data) {
     this.activeTab = data['nextId'];
   }
   create() {
-    if (this.activeTab === "gLNumbers") this.glNumber.toggleShowAddGL(true);
+    this.glNumber.toggleShowAddGL(true);
   }
   getTermsAndConditions() {
     this.loading = true; $(".loading").css("display", "block");

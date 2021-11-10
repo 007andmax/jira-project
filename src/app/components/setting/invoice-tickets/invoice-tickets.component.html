@@ -3,15 +3,34 @@
     <div class="page-insider invoice-ticket">
         <div class="heading">
             <h6 class="qt-fw-600 qt-color-dark">Accounting</h6>
-            <a
-                href="javascript:;"
-                class="btn-outline"
-                (click)="create()"
-            >
-                Add
-            </a>
+            <div class="heading-serach add-category-container">
+                <div
+                    class="gl-numbers-header-buttons"
+                    *ngIf="getSelectedCount() > 0"
+                >
+                    <div [textContent]="getSelectedCount() + ' Gl Numbers Selected'"></div>
+                    <div
+                        class="qt-ml-16 qt-fw-600 qt-df qt-color-info qt-ai-c qt-pointer"
+                        (click)="removeGls()"
+                    >
+                        <div class="icon__remove-blue qt-sz-16 qt-bg-contain qt-ic-c qt-mr-6"></div>
+                        <div>Delete</div>
+                    </div>
+                </div>
+                <a
+                    href="javascript:;"
+                    class="btn-outline"
+                    (click)="create()"
+                    *ngIf="activeTab === 'gLNumbers'"
+                >
+                    Add GL Number
+                </a>
+            </div>
         </div>
-        <ngb-tabset (tabChange)="setTab($event)">
+        <ngb-tabset
+            (tabChange)="setTab($event)"
+            [ngClass]="{'clear-padding':activeTab === 'gLNumbers'}"
+        >
             <!-- Invoice Settings -->
             <ngb-tab
                 title="Invoice Settings"

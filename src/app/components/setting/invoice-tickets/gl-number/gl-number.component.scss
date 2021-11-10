@@ -22,6 +22,20 @@
         text-transform: uppercase;
       }
     }
+    .checkboxes {
+      width: 50px;
+    }
+    .edit-gl-container {
+      td {
+        background-color: #f4fbff !important;
+      }
+    }
+    tbody {
+      td {
+        padding: 0 15px 0 0;
+        height: 40px;
+      }
+    }
     .modal-content {
       right: 15px;
       top: 40px;
@@ -35,15 +49,43 @@
       }
     }
     .tax-name {
-      width: 260px;
+      width: 117px;
       @media only screen and (max-width: 576px) {
         width: 105px;
+      }
+      input {
+        padding-left: 0;
+        font-weight: 500;
+        color: #212b36;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        outline: none;
+        padding: 2px 2px 2px 8px;
+        &:hover,
+        &:focus {
+          border-color: #919eab;
+        }
+        &:fouces {
+        }
       }
     }
     .rate {
       width: 170px;
       @media only screen and (max-width: 576px) {
         width: 55px;
+      }
+      input {
+        padding-left: 0;
+        font-weight: 500;
+        color: #212b36;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        outline: none;
+        padding: 2px 2px 2px 8px;
+        &:hover,
+        &:focus {
+          border-color: #919eab;
+        }
       }
     }
     .default {
@@ -62,6 +104,25 @@
       position: relative;
       @media only screen and (max-width: 576px) {
         width: 50px;
+      }
+    }
+    .checkbox {
+      margin: 0;
+      padding: 0 15px 0 24px !important;
+      width: 16px;
+      label {
+        margin: 0;
+        padding: 0;
+      }
+      input {
+        width: 16px;
+        height: 16px;
+        margin: 0;
+        border: solid 1px #c4cbd5;
+      }
+      span {
+        margin-top: 12px !important;
+        margin-right: 0px !important;
       }
     }
   }
@@ -90,4 +151,7 @@
 
 .error-text-align {
   text-align: left !important;
+}
+add-gl-number {
+  display: contents;
 }

@@ -6,6 +6,7 @@
     [class]="'.add-gl-container'"
     (onOutSide)="onAddGL()"
 >
+    <td class="checkbox"></td>
     <td
         class="tax-name"
         [ngClass]="{'--input-error' : !validateShort  }"
@@ -13,9 +14,10 @@
         <input
             type="text"
             class="form-input"
-            placeholder="Enter Name Status"
+            placeholder="Enter GL Number"
             [(ngModel)]="addGl.glNumber"
             (input)="resetValidate()"
+            maxlength="50"
         >
         <mat-error
             class="qt-tooltip-error"
@@ -28,9 +30,9 @@
         <input
             type="text"
             class="form-input"
-            placeholder="Enter Name Status"
+            placeholder="Enter Description"
             [(ngModel)]="addGl.description"
-            maxlength="100"
+            maxlength="50"
         >
     </td>
     <td class="action"></td>

@@ -82,7 +82,7 @@ export class TicketsStatusComponent implements OnInit, OnDestroy {
   }
   onEditTicketStatus(item) {
     if (item.isInitEdit) {
-      if (item.length === 0) return;
+      if (item.name.length === 0) return;
       this.ticketsService.editStatus(item.getDataForEdit(item.name, item.color)).subscribe(data => {
         item.onInitEdit(false);
       })

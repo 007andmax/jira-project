@@ -20,4 +20,14 @@ export class GlNumber {
             glNumber: this.glNumber,
         }
     }
+    public getDataForEdit() {
+        return {
+            id: this.id,
+            description: this.description,
+            glNumber: this.glNumber,
+        }
+    }
+    public onInitEdit(data) {
+        this.isInitEdit = data;
+    }
 }

@@ -1,10 +1,11 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from "@angular/core";
 import { GlNumberService } from "./gl-number.service";
 import { ToastrService } from "ngx-toastr";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { map } from "rxjs/operators";
 import { SettingStateService } from "src/app/states/setting/setting-state.service";
 import { GlNumber } from "src/class/gl-number/gl-number";
+import { GlNumberStateService } from "src/app/states/gl-number/gl-number-state.service";
 declare var $: any;
 @Component({
   selector: "app-gl-number-settings",
@@ -14,11 +15,11 @@ declare var $: any;
 export class GlNumberSettingsComponent implements OnInit, OnDestroy {
   loading = false;
   create = false;
-  selectedIdx = -1;
+
   numberList: Array<GlNumber> = [];
   eGL: any;
   submitted = false;
-  glForm: FormGroup;
+
   gl: any;
   popup: boolean;
   showAddGl: boolean = false;
@@ -27,7 +28,9 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
     private glNumberService: GlNumberService,
     private toastrService: ToastrService,
     private formBuilder: FormBuilder,
-    private settingStateService: SettingStateService
+    private settingStateService: SettingStateService,
+    private glNumberStateService: GlNumberStateService,
+    public cd: ChangeDetectorRef,
   ) { }
 
   /**
@@ -37,17 +40,7 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
     $('body').addClass('ng7');
     $('body').removeClass('backMenu');
     this.numberList = [];
-    this.glForm = this.formBuilder.group({
-      glNumber: [
-        "",
-        [Validators.required, Validators.minLength(5)]
-      ],
-      description: [
-        "",
-        [Validators.maxLength(100)]
-      ],
-      id: [""]
-    });
+
 
     this.getGL();
     this.settingStateService.setComponentName('GlNumberSettingsComponent');
@@ -61,9 +54,7 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
   }
 
   // convenience getter for easy access to form fields
-  get f() {
-    return this.glForm.controls;
-  }
+
 
   /**
    * get numberList
@@ -76,8 +67,9 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
         map((res: any) => {
           if (res) {
             this.numberList = res.map(item => new GlNumber(item));
-            this.numberList.sort((a, b) => a.glNumber.localeCompare(b.glNumber));
+            this.numberList.sort((a, b) => a.glNumber.toLowerCase().localeCompare(b.glNumber.toLowerCase()));
           }
+          console.log("this.numberList", this.numberList);
           this.loading = false; $(".loading").css("display", "none");
         })
       )
@@ -108,55 +100,25 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  /**
-   * open model
-   * @param isCreated
-   * @param index
-   * @param gl
-   */
-  openModel(isCreated: boolean, index: number, glDetail: any) {
-    this.glForm.reset();
-    this.submitted = false;
-    this.create = isCreated;
-    this.selectedIdx = -1;
-
-    if (!isCreated) {
-      this.eGL = glDetail;
-      this.selectedIdx = index;
-      this.glForm.patchValue({
-        glNumber: glDetail.glNumber,
-        description: glDetail.description,
-        id: glDetail.id
-      });
+  onSelect(event, item) {
+    if (event.target.checked) {
+      this.glNumberStateService.getListGlNumbersForRemove().push(item);
+    } else {
+      let list = this.glNumberStateService.getListGlNumbersForRemove();
+      let index = list.findIndex(item => item.id === item.id);
+      if (index > -1) list.splice(index, 1);
+      this.glNumberStateService.setListGlNumbersForRemove(list);
     }
+    this.cd.detectChanges();
   }
 
-  /**
-   * saved form
-   */
-  onSubmit() {
-    this.submitted = true;
 
-    // stop here if form is invalid
-    if (this.glForm.invalid) {
-      return;
-    }
-
-    if (this.glForm.value.id) {
-      // edit
-      this.loading = true; $(".loading").css("display", "block");
+  onEditGl(item) {
+    console.log("item", item);
+    if (item.isInitEdit) {
+      if (item.glNumber.length === 0) return;
       this.glNumberService
-        .editGL(this.glForm.value)
-        .pipe(
-          map((res: any) => {
-            this.loading = false; $(".loading").css("display", "none");
-            if (res) {
-              let itemIndex = this.numberList.findIndex(item => item.id == res.id);
-              this.numberList[itemIndex] = res;
-              this.selectedIdx = -1;
-            }
-          })
-        )
+        .editGL(item.getDataForEdit())
         .subscribe(
           () => {
             this.toastrService.success("GL Number Updated Successfully");
@@ -165,24 +127,8 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
             this.loading = false; $(".loading").css("display", "none");
           }
         );
-    } else {
-      // add
-      this.loading = true; $(".loading").css("display", "block");
-      this.glNumberService
-        .saveGL(this.glForm.value)
-        .pipe(
-          map((res: any) => {
-            this.loading = false; $(".loading").css("display", "none");
-            this.toastrService.success("GL Number Saved Successfully");
-            this.numberList.push(new GlNumber(res));
-            this.numberList.sort((a, b) => a.glNumber.localeCompare(b.glNumber));
-            this.create = false;
-          })
-        )
-        .subscribe();
     }
   }
-
   onBackMenu() {
     let body = document.getElementsByTagName("body")[0];
     body.classList.remove("backMenu"); //remove the class
