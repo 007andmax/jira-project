@@ -47,7 +47,6 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
     this.ticketsStateService.getOnUpdateCounts().subscribe(data => {
       this.ticketsCounts = new TicketsCounts(data);
       this.ticketsStateService.onInitCount(this.ticketsCounts[(this.listType === 'USERS') ? 'USER' : this.listType]);
-      this.cd.detectChanges();
     })
     if (window.innerWidth < 1280) $("app-left-panel-tickets .left-panel-ng2").css({ zIndex: 990 });
     /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */

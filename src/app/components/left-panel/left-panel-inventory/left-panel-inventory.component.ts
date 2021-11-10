@@ -33,7 +33,6 @@ export class LeftPanelInventoryComponent implements OnInit {
     if (this.inventoryStateService.getCategories().length > 0) this.inventoryCategoryList = this.inventoryStateService.getCategories();
     this.inventoryStateService.getOnCategries().subscribe((data) => {
       this.inventoryCategoryList = data;
-      this.cd.detectChanges();
     })
   }
 

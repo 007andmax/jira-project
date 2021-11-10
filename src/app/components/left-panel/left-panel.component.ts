@@ -141,7 +141,6 @@ export class LeftPanelComponent implements OnInit {
 
           this.leftPanelStateService.firstOpen(this.state);
           this.leftPanelStateService.changeState(this.state);
-          this.cd.detectChanges();
         }
 
       });

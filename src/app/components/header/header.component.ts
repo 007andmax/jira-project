@@ -30,7 +30,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.leftPanelStateService.onToggleLeftPanel.subscribe(data => {
       this.toggleLeftPanel = data;
-      this.cd.detectChanges();
     })
     this.currentCompany = this.companiesStateService.getCurrentCompany();
     this.companiesStateService.getOnCurrentCompany().subscribe(data => {
