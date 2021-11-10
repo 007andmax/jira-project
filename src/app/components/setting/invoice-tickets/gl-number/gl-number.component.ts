@@ -6,6 +6,7 @@ import { map } from "rxjs/operators";
 import { SettingStateService } from "src/app/states/setting/setting-state.service";
 import { GlNumber } from "src/class/gl-number/gl-number";
 import { GlNumberStateService } from "src/app/states/gl-number/gl-number-state.service";
+import { Subscription } from "rxjs";
 declare var $: any;
 @Component({
   selector: "app-gl-number-settings",
@@ -23,7 +24,7 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
   gl: any;
   popup: boolean;
   showAddGl: boolean = false;
-
+  sub: Subscription = new Subscription();
   constructor(
     private glNumberService: GlNumberService,
     private toastrService: ToastrService,
@@ -42,12 +43,24 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
     this.numberList = [];
 
 
-    this.getGL();
+
     this.settingStateService.setComponentName('GlNumberSettingsComponent');
+    this.loading = true; $(".loading").css("display", "block");
+    if (this.glNumberStateService.getGLNumbers().length > 0) {
+      this.numberList = this.glNumberStateService.getGLNumbers().sort((a, b) => a.glNumber.toLowerCase().localeCompare(b.glNumber.toLowerCase()));
+      this.loading = false; $(".loading").css("display", "none");
+    }
+    let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe(data => {
+      this.numberList = data.sort((a, b) => a.glNumber.toLowerCase().localeCompare(b.glNumber.toLowerCase()));
+      console.log("this.numberList", this.numberList);
+      this.loading = false; $(".loading").css("display", "none");
+    })
+    this.sub.add(getOnGlNumbers);
+
   }
 
   ngOnDestroy() {
-
+    this.sub.unsubscribe();
   }
   toggleShowAddGL(data) {
     this.showAddGl = data;
@@ -56,25 +69,7 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
   // convenience getter for easy access to form fields
 
 
-  /**
-   * get numberList
-   */
-  getGL() {
-    this.loading = true; $(".loading").css("display", "block");
-    this.glNumberService
-      .getGL()
-      .pipe(
-        map((res: any) => {
-          if (res) {
-            this.numberList = res.map(item => new GlNumber(item));
-            this.numberList.sort((a, b) => a.glNumber.toLowerCase().localeCompare(b.glNumber.toLowerCase()));
-          }
-          console.log("this.numberList", this.numberList);
-          this.loading = false; $(".loading").css("display", "none");
-        })
-      )
-      .subscribe();
-  }
+
 
   removeConfirm(gl: any) {
     this.gl = gl;
@@ -93,7 +88,6 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
         map(res => {
           this.loading = false; $(".loading").css("display", "none");
           this.popup = false;
-          this.numberList = this.numberList.filter(t => t.id !== this.gl.id);
           this.toastrService.success(`${this.gl.glNumber} is Deleted Successfully.`);
         })
       )
