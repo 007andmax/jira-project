@@ -28,7 +28,7 @@ export class ExcelService {
     } else if (type === "devicenetworkadapterreport"){
       [(typeArr = ["Device Name", "Adapter", "Link Speed", "Driver Version"])];
     } else if (type === "devicenetworkdetailreport"){
-      [(typeArr = ["Device Name", "Domain", "Manufacturer", "Type", "Mac","IP","Subnet"])];
+      [(typeArr = ["Device Name", "Domain", "Manufacturer", "Type", "Mac","IP","Subnet","Gateway","Dns1","Dns2"])];
     } else
       [(typeArr = ["Software Name", "Publisher", "Version", "Installed On"])];
     let csvData = this.ConvertToCSV(data, typeArr, type);

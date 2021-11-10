@@ -100,6 +100,9 @@
                       <th class="mac">MAC</th>
                       <th class="ip">IP</th>
                       <th class="subnet">SUBNET</th>
+                      <th class="gateway">GATEWAY</th>
+                      <th class="dns1">DNS1</th>
+                      <th class="dns2">DNS2</th>
                   </tr>
               </thead>
               <tbody class="network-ip-report-table">
@@ -107,10 +110,13 @@
                       <td class="device">{{ networkDetail.Name }}</td>
                       <td class="domain">{{networkDetail.Domain}}</td>
                       <td class="manufacturer">{{ networkDetail.NicName }}</td>
-                      <td class="type">{{networkDetail.SubnetMask}}</td>
+                      <td class="type">{{networkDetail.NicType}}</td>
                       <td class="mac">{{networkDetail.MACAddress}}</td>
-                      <td class="IP">{{networkDetail.IPAddress}}</td>
-                      <td class="subnet">{{networkDetail.SubnetMask}}</td>
+                      <td class="IP">{{addNewlines(networkDetail.IPAddress)}}</td>
+                      <td class="subnet">{{addNewlines(networkDetail.SubnetMask)}}</td>
+                      <td class="gateway">{{addNewlines(networkDetail.Gateway)}}</td>
+                      <td class="dns1">{{addNewlines(networkDetail.DNS1)}}</td>
+                      <td class="dns2">{{addNewlines(networkDetail.DNS2)}}</td>
                   </tr>
               </tbody>
           </table>

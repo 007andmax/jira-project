@@ -3,7 +3,7 @@
     width: 100%;
     border-collapse: collapse;
     .device {
-      width: 20% !important;
+      width: 15% !important;
       padding: 0 18px 0 18px;
       background-color: white;
       height: 40px;
@@ -17,7 +17,7 @@
       padding: 0px;
     }
     .type {
-      width: 15% !important;
+      width: 10% !important;
       padding: 0px;
     }
     .mac {
@@ -25,11 +25,23 @@
       padding: 0px;
     }
     .ip {
-      width: 10% !important;
+      width: 7% !important;
       padding: 0px;
     }
     .subnet {
-      width: 10% !important;
+      width: 7% !important;
+      padding: 0px;
+    }
+    .gateway {
+      width: 6% !important;
+      padding: 0px;
+    }
+    .dns1 {
+      width: 5% !important;
+      padding: 0px;
+    }
+    .dns1 {
+      width: 5% !important;
       padding: 0px;
     }
     thead {
