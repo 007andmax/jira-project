@@ -54,6 +54,7 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
       this.numberList = data.sort((a, b) => a.glNumber.toLowerCase().localeCompare(b.glNumber.toLowerCase()));
       console.log("this.numberList", this.numberList);
       this.loading = false; $(".loading").css("display", "none");
+      this.cd.detectChanges();
     })
     this.sub.add(getOnGlNumbers);
 
