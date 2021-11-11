@@ -1132,11 +1132,12 @@ body {
         }
       }
       .page-insider {
-        padding-bottom: 24px;
-
         table.dataTable tbody tr:last-child td {
           border-bottom: 1px solid #edf2f6;
         }
+      }
+      > .invoice-ticket {
+        padding-bottom: 24px;
       }
     }
 
@@ -1217,6 +1218,13 @@ body {
     }
 
     .app-invoice-tickets-page-container {
+      > .page-insider {
+        padding-bottom: 24px;
+
+        table.dataTable tbody tr:last-child td {
+          border-bottom: 1px solid #edf2f6;
+        }
+      }
       .heading {
         padding: 20px 24px;
         height: 74px;
@@ -1226,7 +1234,7 @@ body {
           padding: 0 24px;
         }
         .tab-content {
-          padding: 24px;
+          padding: 24px 24px 0;
         }
       }
       label {
@@ -1256,6 +1264,23 @@ body {
       .page-insider.invoice-ticket {
         .f-row {
           overflow: unset;
+        }
+      }
+      .manage-taxes .cmn-area {
+
+        .checkbox {
+          width: 56px;
+          display: table-cell;
+        }
+
+        .rate,
+        .tax-name {
+          padding: 0 15px 0 0;
+        }
+
+        .ng7 .products-settings-page-container .manage-taxes .cmn-area .tax-name {
+          padding: 0;
+          font-weight: 600;
         }
       }
     }
@@ -1970,6 +1995,9 @@ body {
     }
 
     .img-croparea {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         position: fixed;
         top: 0;
         left: 0;
@@ -2871,8 +2899,49 @@ div#editor.angular-editor-textarea {
                 right: 0;
             }
         }
+        .cropping .close-ico {
+          position: absolute;
+          top: 0;
+          right: 0;
+        }
+        p {
+          font-weight: 400;
+          font-size: 13px;
+          line-height: 1.54;
+          max-width: 398px;
+          color: $gray-700;
+        }
+        h3 {
+          font-weight: 600;
+          font-size: 20px;
+          line-height: 1.4;
+          color: $primary-2;
+          position: relative;
+          margin: 0;
+        }
+        .btn-crops {
+          display: flex;
+          justify-content: end;
+
+          .btn-secondary,
+          .btn-primary {
+            height: 40px;
+            border-radius: 4px;
+            padding: 0 20px;
+          }
+          .btn-secondary {
+            background: $white;
+            border: 1px solid $gray-500;
+          }
+          .btn-primary {
+            background-color: $error;
+            background-color: $error;
+            border: none;
+            margin-right: 16px;
+          }
+        }
         .crop-inner {
-            padding: 40px 24px 40px 40px;
+            padding: 24px;
             width: 488px;
             .popup-message {
                 display: -ms-flexbox;
