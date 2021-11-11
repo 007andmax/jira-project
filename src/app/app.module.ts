@@ -134,7 +134,6 @@ import { TaxesSettingsComponent } from './components/setting/taxes/taxes.compone
 import { PermissionManageComponent } from './components/setting/permission-manage/permission-manage.component';
 import { EmailTempleteComponent } from './components/setting/email-templete/email-templete.component';
 import { IntegrationsComponent } from './components/setting/integrations/integrations.component';
-import { InvoiceTicketsComponent } from './components/setting/invoice-tickets/invoice-tickets.component';
 import { CommissionComponent } from './components/setting/commission/commission.component';
 import { SubscriptionComponent } from './components/setting/subscription/subscription.component';
 import { DataTablesModule } from 'angular-datatables';
@@ -470,6 +469,7 @@ import { ProductsSettingsComponent } from './components/setting/products-setting
 import { AddCategoryProductComponent } from './components/setting/products-settings/add-category-product/add-category-product.component';
 import { AccountingYearComponent } from './components/setting/invoice-tickets/accounting-year/accounting-year.component';
 import { AddGlNumberComponent } from './components/setting/invoice-tickets/gl-number/add-gl-number/add-gl-number.component';
+import { AccountingSettingsComponent } from './components/setting/invoice-tickets/accounting-settings.component';
 
 
 declare var $: any;
@@ -560,7 +560,7 @@ declare var $: any;
     PermissionManageComponent,
     EmailTempleteComponent,
     IntegrationsComponent,
-    InvoiceTicketsComponent,
+    AccountingSettingsComponent,
     CommissionComponent,
     SubscriptionComponent,
     AccountComponent,

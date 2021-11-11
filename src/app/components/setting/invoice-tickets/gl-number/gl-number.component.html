@@ -111,7 +111,7 @@
                             *ngFor="let gl of numberList; let i = index"
                             appClickOtside
                             [init]="gl.isInitEdit"
-                            [ngClass]="['edit-gl-container-' + i,  gl.isInitEdit ? 'edit-gl-container' : '']"
+                            [ngClass]="['edit-gl-container-' + i]"
                             [class]="'.edit-gl-container-' + i"
                             (onOutSide)="onEditGl(gl)"
                         >

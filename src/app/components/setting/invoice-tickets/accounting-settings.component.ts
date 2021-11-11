@@ -10,14 +10,14 @@ import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { GlNumberSettingsComponent } from './gl-number/gl-number.component';
 import { GlNumberService } from './gl-number/gl-number.service';
-import { InvoiceTicketsService } from './invoice-tickets.service';
+import { InvoiceTicketsService } from './accounting-settings.service';
 declare var $: any;
 @Component({
-  selector: 'app-invoice-tickets',
-  templateUrl: './invoice-tickets.component.html',
-  styleUrls: ['./invoice-tickets.component.scss']
+  selector: 'app-accounting-settings',
+  templateUrl: './accounting-settings.component.html',
+  styleUrls: ['./accounting-settings.component.scss']
 })
-export class InvoiceTicketsComponent implements OnInit, OnDestroy {
+export class AccountingSettingsComponent implements OnInit, OnDestroy {
   loading = false;
   taxId: any;
   taxIdDescription: any;

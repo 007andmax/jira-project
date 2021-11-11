@@ -122,7 +122,7 @@
                             type="text"
                             class="form-input"
                             formControlName="firstName"
-                            placeholder="Enter Your Full name"
+                            placeholder="Enter Your First name"
                         >
                         <div
                             *ngIf="submitted && f.firstName.errors"
@@ -144,7 +144,7 @@
                             type="text"
                             class="form-input"
                             formControlName="lastName"
-                            placeholder="Enter Your Full name"
+                            placeholder="Enter Your Last Name"
                         >
                         <div
                             *ngIf="submitted && f.lastName.errors"
@@ -270,16 +270,24 @@
                     </div>
                 </div>
                 <div
-                  class="f-col col-100 qt-mt-12"
-                  [hidden]="!invoiceForm.value.enableInvoiceContact"
+                    class="f-col col-100 qt-mt-12"
+                    [hidden]="!invoiceForm.value.enableInvoiceContact"
                 >
-                  <div class="qt-df qt-ai-c">
-                    <label class="qt-checkbox qt-mb-0 pointer" for="accounting-active">
-                      <input id="accounting-active" type="checkbox">
-                      <span></span>
-                    </label>
-                    <div class="qt-checkbox__text">Send copy of all invoices to this address</div>
-                  </div>
+                    <div class="qt-df qt-ai-c">
+                        <label
+                            class="qt-checkbox qt-mb-0 pointer"
+                            for="accounting-active"
+                        >
+                            <input
+                                id="accounting-active"
+                                type="checkbox"
+                            >
+                            <span></span>
+                        </label>
+                        <div class="qt-checkbox__text">
+                            Send copy of all invoices to this address
+                        </div>
+                    </div>
                 </div>
             </div>
             <input

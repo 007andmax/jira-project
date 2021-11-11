@@ -13,7 +13,6 @@ import { TaxesSettingsComponent } from './components/setting/taxes/taxes.compone
 import { PermissionManageComponent } from './components/setting/permission-manage/permission-manage.component';
 import { EmailTempleteComponent } from './components/setting/email-templete/email-templete.component';
 import { IntegrationsComponent } from './components/setting/integrations/integrations.component';
-import { InvoiceTicketsComponent } from './components/setting/invoice-tickets/invoice-tickets.component';
 import { CommissionComponent } from './components/setting/commission/commission.component';
 import { SubscriptionComponent } from './components/setting/subscription/subscription.component';
 import { CompanyPasswordManagerComponent } from './components/company-password-manager/company-password-manager.component';
@@ -61,6 +60,7 @@ import { DocumentPreviewComponent } from './components/documents/document-previe
 import { CompanyDocumentsComponent } from './components/companies/company-documents/company-documents.component';
 import { TicketSettingsPageComponent } from './components/setting/ticket-settings-page/ticket-settings-page.component';
 import { ProductsSettingsComponent } from './components/setting/products-settings/products-settings.component';
+import { AccountingSettingsComponent } from './components/setting/invoice-tickets/accounting-settings.component';
 
 const routes: Routes = [
 
@@ -181,7 +181,7 @@ const routes: Routes = [
   },
   {
     path: ':company/setting/accounting',
-    component: InvoiceTicketsComponent,
+    component: AccountingSettingsComponent,
     pathMatch: 'full',
   },
   {

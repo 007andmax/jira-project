@@ -74,7 +74,10 @@
                                         [class]="'.edit-category-container-' + i"
                                         (onOutSide)="onEditCategory(item)"
                                     >
-                                        <td class="checkbox">
+                                        <td
+                                            class="checkbox"
+                                            *ngIf="item.productsAmount === 0"
+                                        >
                                             <label class="qt-checkbox">
                                                 <input
                                                     type="checkbox"
@@ -84,6 +87,10 @@
                                                 <span></span>
                                             </label>
                                         </td>
+                                        <td
+                                            class="checkbox"
+                                            *ngIf="item.productsAmount > 0"
+                                        ></td>
                                         <td class="tax-name edit-category-name">
                                             <input
                                                 type="text"
