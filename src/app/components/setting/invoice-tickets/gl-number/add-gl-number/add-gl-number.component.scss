@@ -1,3 +1,5 @@
+@import "./src/assets/styles/variable";
+
 .tax-name {
     position: relative;
 }
@@ -36,16 +38,14 @@ td {
     input {
         padding-left: 0;
         font-weight: 500;
-        color: #212b36;
+        color: $gray-800;
         border: 1px solid transparent;
         border-radius: 4px;
         outline: none;
         padding: 2px 2px 2px 8px;
         &:hover,
         &:focus {
-            border-color: #919eab;
-        }
-        &:fouces {
+            border-color: $gray-600;
         }
     }
 }
@@ -64,7 +64,7 @@ td {
         padding: 2px 2px 2px 8px;
         &:hover,
         &:focus {
-            border-color: #919eab;
+            border-color: $gray-600;
         }
     }
 }
