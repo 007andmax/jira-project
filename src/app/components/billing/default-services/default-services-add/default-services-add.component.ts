@@ -39,6 +39,7 @@ export class DefaultServicesAddComponent implements OnInit {
     if (this.glNumberStateService.getGLNumbers().length > 0) this.glNumbers = this.sortGlNumbers(this.glNumberStateService.getGLNumbers());
     let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe((data) => {
       this.glNumbers = this.sortGlNumbers(data);
+      this.cd.detectChanges();
     })
     this.sub.add(getOnGlNumbers);
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
