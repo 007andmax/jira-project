@@ -14,12 +14,10 @@ export class ProductsCategoryFilter {
             let sort = this.filter[index].filter;
             if (field === 'name') {
                 this.clearFilter();
-                console.log("3", sort);
                 if (sort === '' || sort === 'DESC') {
                     this.filter[index].filter = 'ASC';
                     this.onFilterName(list);
                 } else {
-                    console.log("4");
                     this.filter[index].filter = 'DESC';
                     list.reverse();
                 }
@@ -34,7 +32,6 @@ export class ProductsCategoryFilter {
                     list.reverse();
                 }
             }
-            console.log("list", list);
         }
     }
     private clearFilter() {
