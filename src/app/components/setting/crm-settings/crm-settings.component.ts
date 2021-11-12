@@ -6,6 +6,7 @@ import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { CrmCompanyIndustryComponent } from './crm-company-industry/crm-company-industry.component';
 import { CrmCompanyJobTitleComponent } from './crm-company-job-title/crm-company-job-title.component';
+import { CrmCompanyServiceTypeComponent } from './crm-company-service-type/crm-company-service-type.component';
 
 @Component({
   selector: 'crm-settings',
@@ -16,6 +17,7 @@ export class CrmSettingsComponent implements OnInit, OnDestroy {
   activeTab: string = "companyIndustry";
   @ViewChild("industry") industry: CrmCompanyIndustryComponent;
   @ViewChild("jobTitle") jobTitle: CrmCompanyJobTitleComponent;
+  @ViewChild("serviceType") serviceType: CrmCompanyServiceTypeComponent;
   constructor(private crmStateService: CrmStateService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal) { }
@@ -27,11 +29,13 @@ export class CrmSettingsComponent implements OnInit, OnDestroy {
   parseAddText() {
     if (this.activeTab === "companyIndustry") return "Add Industry";
     if (this.activeTab === "userJobTitle") return "Add Job Title";
+    if (this.activeTab === "serviceType") return "Add Service Type";
     return "";
   }
   create() {
     if (this.activeTab === "companyIndustry") this.industry.toggleShowAdd(true);
     if (this.activeTab === "userJobTitle") this.jobTitle.toggleShowAdd(true);
+    if (this.activeTab === "serviceType") this.serviceType.toggleShowAdd(true);
   }
   setTab(data) {
     this.activeTab = data['nextId'];
@@ -43,6 +47,8 @@ export class CrmSettingsComponent implements OnInit, OnDestroy {
   getSelectedCount() {
     if (this.activeTab === "companyIndustry") return this.crmStateService.getListIndustriesForRemove().length;
     if (this.activeTab === "userJobTitle") return this.crmStateService.getListJobTitleForRemove().length;
+    //if (this.activeTab === "serviceType") return this.crmStateService.getListJobTitleForRemove().length;
+
   }
   removeList() {
     if (this.activeTab === "companyIndustry") {

@@ -475,6 +475,8 @@ import { CrmCompanyIndustryComponent } from './components/setting/crm-settings/c
 import { AddCrmCompanyIndustryComponent } from './components/setting/crm-settings/crm-company-industry/add-crm-company-industry/add-crm-company-industry.component';
 import { CrmCompanyJobTitleComponent } from './components/setting/crm-settings/crm-company-job-title/crm-company-job-title.component';
 import { AddCrmCompanyJobTitleComponent } from './components/setting/crm-settings/crm-company-job-title/add-crm-company-job-title/add-crm-company-job-title.component';
+import { CrmCompanyServiceTypeComponent } from './components/setting/crm-settings/crm-company-service-type/crm-company-service-type.component';
+import { AddCrmCompanyServiceTypeComponent } from './components/setting/crm-settings/crm-company-service-type/add-crm-company-service-type/add-crm-company-service-type.component';
 
 
 declare var $: any;
@@ -907,7 +909,9 @@ declare var $: any;
     CrmCompanyIndustryComponent,
     AddCrmCompanyIndustryComponent,
     CrmCompanyJobTitleComponent,
-    AddCrmCompanyJobTitleComponent
+    AddCrmCompanyJobTitleComponent,
+    CrmCompanyServiceTypeComponent,
+    AddCrmCompanyServiceTypeComponent
   ],
   imports: [
     BrowserModule,
