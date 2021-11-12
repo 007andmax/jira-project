@@ -44,7 +44,7 @@ export class ProductsCategoryFilter {
         list.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
             1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
     }
-    private onFilterCount(list) {
+    public onFilterCount(list) {
         list.sort((a, b) => (a.productsAmount > b.productsAmount) ?
             1 : ((b.productsAmount > a.productsAmount) ? -1 : 0));
     }

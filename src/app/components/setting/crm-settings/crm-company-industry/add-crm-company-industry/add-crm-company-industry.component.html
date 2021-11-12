@@ -1,0 +1,21 @@
+<tr
+    class="add-crm-industry-container"
+    appClickOtside
+    #addStatusBtn="click"
+    [init]="true"
+    [class]="'.add-crm-industry-container'"
+    (onOutSide)="save()"
+>
+    <td></td>
+    <td class="tax-name add-industry-name">
+        <input
+            type="text"
+            class="form-input"
+            placeholder="Enter Name Category"
+            [(ngModel)]="name"
+            required
+        >
+    </td>
+    <td class="rate"></td>
+    <td class="action"></td>
+</tr>

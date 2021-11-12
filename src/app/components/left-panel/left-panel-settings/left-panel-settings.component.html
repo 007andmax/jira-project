@@ -63,6 +63,12 @@
         Email Templetes
     </li>
     <li
+        [ngClass]="{'--active':activePage === 'crm-settings'}"
+        (click)="goToState('crm-settings')"
+    >
+        CRM Settings
+    </li>
+    <li
         [ngClass]="{'--active':activePage === 'ticket-settings'}"
         (click)="goToState('ticket-settings')"
     >

@@ -470,6 +470,11 @@ import { AddCategoryProductComponent } from './components/setting/products-setti
 import { AccountingYearComponent } from './components/setting/invoice-tickets/accounting-year/accounting-year.component';
 import { AddGlNumberComponent } from './components/setting/invoice-tickets/gl-number/add-gl-number/add-gl-number.component';
 import { AccountingSettingsComponent } from './components/setting/invoice-tickets/accounting-settings.component';
+import { CrmSettingsComponent } from './components/setting/crm-settings/crm-settings.component';
+import { CrmCompanyIndustryComponent } from './components/setting/crm-settings/crm-company-industry/crm-company-industry.component';
+import { AddCrmCompanyIndustryComponent } from './components/setting/crm-settings/crm-company-industry/add-crm-company-industry/add-crm-company-industry.component';
+import { CrmCompanyJobTitleComponent } from './components/setting/crm-settings/crm-company-job-title/crm-company-job-title.component';
+import { AddCrmCompanyJobTitleComponent } from './components/setting/crm-settings/crm-company-job-title/add-crm-company-job-title/add-crm-company-job-title.component';
 
 
 declare var $: any;
@@ -897,7 +902,12 @@ declare var $: any;
     TicketsStatusComponent,
     ProductsSettingsComponent,
     AccountingYearComponent,
-    AddGlNumberComponent
+    AddGlNumberComponent,
+    CrmSettingsComponent,
+    CrmCompanyIndustryComponent,
+    AddCrmCompanyIndustryComponent,
+    CrmCompanyJobTitleComponent,
+    AddCrmCompanyJobTitleComponent
   ],
   imports: [
     BrowserModule,

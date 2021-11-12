@@ -61,6 +61,7 @@ import { CompanyDocumentsComponent } from './components/companies/company-docume
 import { TicketSettingsPageComponent } from './components/setting/ticket-settings-page/ticket-settings-page.component';
 import { ProductsSettingsComponent } from './components/setting/products-settings/products-settings.component';
 import { AccountingSettingsComponent } from './components/setting/invoice-tickets/accounting-settings.component';
+import { CrmSettingsComponent } from './components/setting/crm-settings/crm-settings.component';
 
 const routes: Routes = [
 
@@ -182,6 +183,11 @@ const routes: Routes = [
   {
     path: ':company/setting/accounting',
     component: AccountingSettingsComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: ':company/setting/crm',
+    component: CrmSettingsComponent,
     pathMatch: 'full',
   },
   {

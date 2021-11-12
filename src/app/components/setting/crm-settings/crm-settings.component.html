@@ -1,0 +1,52 @@
+<!-- Middle Wrapper -->
+<div class="page-container products-settings-page-container">
+    <div class="page-insider manage-taxes">
+        <div class="heading">
+            <h6 class="qt-fw-600 qt-color-dark">CRM Settings</h6>
+            <div class="heading-serach add-category-container">
+                <div
+                    class="tickets-status-header-buttons"
+                    *ngIf="getSelectedCount() > 0"
+                >
+                    <div [textContent]="getSelectedCount() + ' Selected'"></div>
+                    <div
+                        class="qt-ml-16 qt-fw-600 qt-df qt-color-info qt-ai-c qt-pointer"
+                        (click)="removeList()"
+                    >
+                        <div class="icon__remove-blue qt-sz-16 qt-bg-contain qt-ic-c qt-mr-6"></div>
+                        <div>Delete</div>
+                    </div>
+                </div>
+                <a
+                    href="javascript:;"
+                    class="btn-outline"
+                    (click)="create()"
+                    [textContent]="parseAddText()"
+                >
+                </a>
+            </div>
+        </div>
+        <ngb-tabset
+            #tabset="ngbTabset"
+            (tabChange)="setTab($event)"
+            [destroyOnHide]="true"
+        >
+            <ngb-tab
+                title="Company Industry"
+                id="companyIndustry"
+            >
+                <ng-template ngbTabContent>
+                    <crm-company-industry #industry></crm-company-industry>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab
+                title="User Job Title"
+                id="userJobTitle"
+            >
+                <ng-template ngbTabContent>
+                    <crm-company-job-title #jobTitle></crm-company-job-title>
+                </ng-template>
+            </ngb-tab>
+        </ngb-tabset>
+    </div>
+</div>

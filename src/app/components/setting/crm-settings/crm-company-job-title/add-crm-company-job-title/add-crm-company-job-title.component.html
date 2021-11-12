@@ -1,0 +1,20 @@
+<tr
+    class="add-crm-job-title-container"
+    appClickOtside
+    #addStatusBtn="click"
+    [init]="true"
+    [class]="'.add-crm-job-title-container'"
+    (onOutSide)="save()"
+>
+    <td></td>
+    <td class="tax-name add-job-title-name">
+        <input
+            type="text"
+            class="form-input"
+            placeholder="Enter Name Category"
+            [(ngModel)]="name"
+            required
+        >
+    </td>
+    <td class="action"></td>
+</tr>

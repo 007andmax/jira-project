@@ -104,6 +104,8 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/setting/commission`)) this.state = 'commission-component';
           if (window.location.href.includes(`/setting/subscription`)) this.state = 'subscription-component';
           if (window.location.href.includes(`/setting/ticket-settings`)) this.state = 'ticket-settings';
+          if (window.location.href.includes(`/setting/crm`)) this.state = 'crm-settings';
+
           if (window.location.href.includes(`/users`)) this.state = 'new-users';
           if (window.location.href.includes(`/reports`)) this.state = 'new-reports';
           if (window.location.href.includes(`/tickets-dashboard`)) this.state = 'new-tickets-dashboard';
@@ -221,6 +223,7 @@ export class LeftPanelComponent implements OnInit {
       if (this.state === 'email-templete-component') this.goToLink('setting/emailTemplete');
       if (this.state === 'integrations-component') this.goToLink('setting/integration');
       if (this.state === 'invoice-ticket-component') this.goToLink('setting/accounting');
+      if (this.state === 'crm-settings') this.goToLink('setting/crm');
       if (this.state === 'commission-component') this.goToLink('setting/commission');
       if (this.state === 'subscription-component') this.goToLink('setting/subscription');
       if (this.state === 'ticket-settings') this.goToLink('setting/ticket-settings');
