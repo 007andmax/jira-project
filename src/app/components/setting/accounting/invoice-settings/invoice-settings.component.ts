@@ -183,6 +183,7 @@ export class InvoiceSettingsComponent implements OnInit {
 
           const phoneNumbers = res.phoneNumbers || [];
           if (phoneNumbers) {
+            console.log("phoneNumbers", phoneNumbers);
             phoneNumbers.forEach((phone, i) => {
               if (i === 0) {
                 this.invoiceForm.patchValue({
@@ -199,6 +200,12 @@ export class InvoiceSettingsComponent implements OnInit {
                 });
               }
             });
+            if (phoneNumbers.length === 0) {
+              this.invoiceForm.patchValue({
+                primaryPhone: "",
+                primaryPhoneType: "OFFICE"
+              });
+            }
           }
         }
       },
