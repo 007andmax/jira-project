@@ -7,7 +7,7 @@ import { SettingStateService } from 'src/app/states/setting/setting-state.servic
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
-import { InvoiceTicketsService } from '../invoice-tickets/accounting-settings.service';
+import { InvoiceTicketsService } from '../accounting/accounting-settings.service';
 import { TicketsStatusComponent } from './tickets-status/tickets-status.component';
 declare var $: any;
 @Component({

@@ -174,13 +174,16 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
           if (techUsers) {
             this.techUsers = techUsers;
             this.techUserIdList = techUsers.map(({ id }) => id);
+            console.log("this.techUserIdList", this.techUserIdList);
             var IdList1 = [];
             if (this.techUserIdList) {
               // this.emailNotification(this.techUserIdList);
               IdList1 = this.IdList.concat(this.techUserIdList);
             }
+            this.emailNotification(this.techUserIdList);
+            //  this.allEmailNotification(IdList1);
           }
-          this.allEmailNotification(IdList1);
+
         },
         error => {
           this.loading = false; $(".loading").css("display", "none");
@@ -198,7 +201,14 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       .pipe(
         map(eNotifications => {
           if (eNotifications) {
+            console.log("eNotifications", eNotifications);
             this.techUseremailNotificationList = eNotifications;
+            /* this.techUseremailNotificationList = [];
+             techUserIdList.forEach(element => {
+ 
+               this.techUseremailNotificationList.push(eNotifications[element]);
+             });*/
+            console.log("this.techUseremailNotificationList", this.techUseremailNotificationList);
           }
         })
 
@@ -229,9 +239,13 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
             this.IdList.forEach(element => {
               this.archivedtechUseremailNotificationList.push(eNotifications[element]);
             });
-            this.techUserIdList.forEach(element => {
-              this.techUseremailNotificationList.push(eNotifications[element]);
-            });
+            console.log("eNotifications", eNotifications);
+            this.techUseremailNotificationList = eNotifications;
+            /* this.techUserIdList.forEach(element => {
+ 
+               this.techUseremailNotificationList[element] = eNotifications[element];
+             });*/
+            console.log("this.techUseremailNotificationList", this.techUseremailNotificationList);
           }
         })
       )
@@ -303,6 +317,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
    */
 
   editTechUser(techUser) {
+    console.log("editTechUser", techUser);
     if (techUser === null) {
       return;
     }
@@ -310,7 +325,9 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
 
     this.selectedTechUser = techUser;
     if (techUser) {
+      console.log("this.techUseremailNotificationList", this.techUseremailNotificationList);
       const notification = this.techUseremailNotificationList[techUser.id];
+      console.log("notification", notification);
       this.techUserForm.patchValue({
         firstName: techUser.firstName,
         lastName: techUser.lastName,
@@ -736,6 +753,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
    */
 
   saveUsersEmailNotifications(techUserId: string) {
+    console.log("techUserId", techUserId);
     if (techUserId) {
       const notificationSetting = {
         newDevice: this.techUserForm.value.newDevice,

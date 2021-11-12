@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnDestro
 import { Subscription } from 'rxjs';
 import { CompanyProfile } from 'src/app/components/companies/class/company-profile';
 import { CompanyUpdate } from 'src/app/components/companies/class/company-update';
-import { InvoiceTicketsService } from 'src/app/components/setting/invoice-tickets/accounting-settings.service';
+import { InvoiceTicketsService } from 'src/app/components/setting/accounting/accounting-settings.service';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { BillableService } from 'src/app/services/billable/billable.service';
 import { CompaniesService } from 'src/app/services/company/companies.service';

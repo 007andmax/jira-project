@@ -149,9 +149,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { IncomingEmailComponent } from './components/setting/email-setting/incoming-email/incoming-email.component';
 import { OutgoingEmailComponent } from './components/setting/email-setting/outgoing-email/outgoing-email.component';
 import { TicketSettingsComponent } from './components/setting/ticket-settings-page/ticket-settings/ticket-settings.component';
-import { InvoiceSettingsComponent } from './components/setting/invoice-tickets/invoice-settings/invoice-settings.component';
-import { QuotesSettingsComponent } from './components/setting/invoice-tickets/quotes-settings/quotes-settings.component';
-import { GlNumberSettingsComponent } from './components/setting/invoice-tickets/gl-number/gl-number.component';
+import { InvoiceSettingsComponent } from './components/setting/accounting/invoice-settings/invoice-settings.component';
+import { QuotesSettingsComponent } from './components/setting/accounting/quotes-settings/quotes-settings.component';
+import { GlNumberSettingsComponent } from './components/setting/accounting/gl-number/gl-number.component';
 import { Onlynumber } from './helpers/Onlynumber';
 import { CompanyComponent } from './components/setting/commission/company/company.component';
 import { ProductComponent } from './components/setting/commission/product/product.component';
@@ -467,9 +467,9 @@ import { TicketSettingsPageComponent } from './components/setting/ticket-setting
 import { TicketsStatusComponent } from './components/setting/ticket-settings-page/tickets-status/tickets-status.component';
 import { ProductsSettingsComponent } from './components/setting/products-settings/products-settings.component';
 import { AddCategoryProductComponent } from './components/setting/products-settings/add-category-product/add-category-product.component';
-import { AccountingYearComponent } from './components/setting/invoice-tickets/accounting-year/accounting-year.component';
-import { AddGlNumberComponent } from './components/setting/invoice-tickets/gl-number/add-gl-number/add-gl-number.component';
-import { AccountingSettingsComponent } from './components/setting/invoice-tickets/accounting-settings.component';
+import { AccountingYearComponent } from './components/setting/accounting/accounting-year/accounting-year.component';
+import { AddGlNumberComponent } from './components/setting/accounting/gl-number/add-gl-number/add-gl-number.component';
+import { AccountingSettingsComponent } from './components/setting/accounting/accounting-settings.component';
 
 
 declare var $: any;

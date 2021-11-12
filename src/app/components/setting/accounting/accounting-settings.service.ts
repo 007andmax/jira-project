@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { GlNumberSettingsComponent } from './gl-number/gl-number.component';
+
 
 @Injectable({
   providedIn: 'root'

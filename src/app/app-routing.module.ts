@@ -18,7 +18,7 @@ import { SubscriptionComponent } from './components/setting/subscription/subscri
 import { CompanyPasswordManagerComponent } from './components/company-password-manager/company-password-manager.component';
 import { CompanyUserComponent } from './components/company-user/company-user.component';
 import { RecurringTicketsComponent } from './components/tickets/recurring-tickets/recurring-tickets.component';
-import { GlNumberSettingsComponent } from './components/setting/invoice-tickets/gl-number/gl-number.component';
+import { GlNumberSettingsComponent } from './components/setting/accounting/gl-number/gl-number.component';
 import { CompaniesComponent } from './components/companies/companies.component';
 import { UsersComponent } from './components/users/users.component';
 import { ReportsComponent } from './components/reports/reports.component';
@@ -60,7 +60,7 @@ import { DocumentPreviewComponent } from './components/documents/document-previe
 import { CompanyDocumentsComponent } from './components/companies/company-documents/company-documents.component';
 import { TicketSettingsPageComponent } from './components/setting/ticket-settings-page/ticket-settings-page.component';
 import { ProductsSettingsComponent } from './components/setting/products-settings/products-settings.component';
-import { AccountingSettingsComponent } from './components/setting/invoice-tickets/accounting-settings.component';
+import { AccountingSettingsComponent } from './components/setting/accounting/accounting-settings.component';
 
 const routes: Routes = [
 
