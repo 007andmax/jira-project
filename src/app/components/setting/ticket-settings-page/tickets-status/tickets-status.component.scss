@@ -16,10 +16,13 @@
     padding-top: 0;
     thead {
         th {
-            padding: 10px 10px 10px 6px !important;
+            padding: 10px 10px 10px 6px;
             background-color: #f9fafb;
             text-transform: uppercase;
         }
+      .tax-name {
+        padding-left: 0;
+      }
     }
     .modal-content {
         right: 15px;
@@ -34,19 +37,34 @@
         }
     }
     .tax-name {
-        width: 260px;
+        width: 314px;
+        font-weight: 600;
+        color: $primary-2;
+        text-indent: 8px;
         @media only screen and (max-width: 576px) {
             width: 105px;
         }
+        input {
+          font-weight: 500;
+          color: $primary-2;
+          &::placeholder {
+            font-weight: 400;
+            color: $gray-600;
+          }
+        }
+    }
+    .dataTable {
+      .tax-preview {
+        padding-left: 0;
+      }
     }
     .checkbox {
-        margin: 0px;
-        padding: 12px 15px 12px 24px;
+        margin: 0;
+        padding: 0 15px 0 24px;
         input {
             width: 16px;
             height: 16px;
-            position: unset;
-            margin: 0px;
+            margin: 0;
             border: solid 1px #c4cbd5;
         }
     }
@@ -59,10 +77,14 @@
         .tag-color {
             position: relative;
             &::after {
-                position: absolute;
-                content: "\2713";
-                color: white;
-                left: 3px;
+              content: "";
+              position: absolute;
+              left: 50%;
+              top: 50%;
+              transform: translate(-50%, -50%);
+              background: url("/assets/img/icons/check-mark.svg") no-repeat center / contain;
+              width: 8px;
+              height: 6px;
             }
         }
     }
@@ -78,9 +100,9 @@
         }
     }
     .action {
-        width: 118px;
+        width: 90px;
         position: relative;
-        padding: 12px 24px 12px 15px;
+        padding: 0 24px 0 15px;;
         @media only screen and (max-width: 576px) {
             width: 50px;
         }
@@ -171,7 +193,11 @@
         outline: none;
         &:hover,
         &:focus {
-            border-color: #dfe3e8;
+            border-color: $gray-600;
+        }
+        &::placeholder {
+          font-weight: 400;
+          color: $gray-600;
         }
     }
 }

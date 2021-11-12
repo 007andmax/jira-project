@@ -1,0 +1,76 @@
+<!-- Middle Wrapper -->
+<div class="page-container app-invoice-tickets-page-container">
+    <div class="page-insider invoice-ticket">
+        <div class="heading">
+            <h6 class="qt-fw-600 qt-color-dark">Accounting</h6>
+            <div class="heading-serach add-category-container">
+                <div
+                    class="gl-numbers-header-buttons"
+                    *ngIf="getSelectedCount() > 0"
+                >
+                    <div [textContent]="getSelectedCount() + ' Gl Numbers Selected'"></div>
+                    <div
+                        class="qt-ml-16 qt-fw-600 qt-df qt-color-info qt-ai-c qt-pointer"
+                        (click)="removeGls()"
+                    >
+                        <div class="icon__remove-blue qt-sz-16 qt-bg-contain qt-ic-c qt-mr-6"></div>
+                        <div>Delete</div>
+                    </div>
+                </div>
+                <a
+                    href="javascript:;"
+                    class="btn-outline"
+                    (click)="create()"
+                    *ngIf="activeTab === 'gLNumbers'"
+                >
+                    Add GL Number
+                </a>
+            </div>
+        </div>
+        <ngb-tabset
+            (tabChange)="setTab($event)"
+            [ngClass]="{'clear-padding':activeTab === 'gLNumbers'}"
+        >
+            <!-- Invoice Settings -->
+            <ngb-tab
+                title="Invoice Settings"
+                id="invoiceSettings"
+            >
+                <ng-template ngbTabContent>
+                    <app-invoice-settings
+                        [taxIdDescInput]="taxIdDescription"
+                        [taxIdInput]="taxId"
+                        [termInput]="term"
+                        [conditionInput]="condition"
+                        *ngIf="showTab == true && showTerm == true"
+                    ></app-invoice-settings>
+                </ng-template>
+            </ngb-tab>
+            <!-- Quotes Settings -->
+            <ngb-tab
+                title="Quote settings"
+                id="quoteSettings"
+            >
+                <ng-template ngbTabContent>
+                    <app-quotes-settings></app-quotes-settings>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab
+                title="GL Numbers"
+                id="gLNumbers"
+            >
+                <ng-template ngbTabContent>
+                    <app-gl-number-settings #glNumber></app-gl-number-settings>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab
+                title="Accounting Year"
+                id="accountingYear"
+            >
+                <ng-template ngbTabContent>
+                    <accounting-year></accounting-year>
+                </ng-template>
+            </ngb-tab>
+        </ngb-tabset>
+    </div>
+</div>

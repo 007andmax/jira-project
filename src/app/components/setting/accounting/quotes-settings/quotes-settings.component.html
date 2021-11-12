@@ -1,0 +1,35 @@
+<div class="page-insider invoice-ticket">
+    <div class="cmn-area invoice">
+        <form
+            [formGroup]="quotesForm"
+            (ngSubmit)="onSubmit()"
+        >
+            <div class="f-row">
+                <div class="f-col col-50">
+                    <label>Starting Quote Number</label>
+                    <div class="form-row">
+                        <input
+                            type="text"
+                            formControlName="count"
+                            class="form-input"
+                            [ngClass]="{ 'is-invalid': submitted && f.count.errors }"
+                            placeholder="Enter Starting ticket number"
+                        >
+                        <div
+                            *ngIf="submitted && f.count.errors"
+                            class="invalid-feedback"
+                        >
+                            <div *ngIf="f.count.errors.required">Ticket Number is required</div>
+                            <div *ngIf="f.count.errors.pattern">Only Number is allowed</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input
+                type="submit"
+                class="qt-button qt-mt-16"
+                value="Save Changes"
+            >
+        </form>
+    </div>
+</div>

@@ -2,6 +2,7 @@
 @import "./src/assets/styles/variable";
 @import "../../../../assets/scss/mixin";
 @import "../../../../assets/scss/custom";
+@import "./src/assets/styles/fonts";
 
 .manage-taxes {
     .modal-content {
@@ -28,13 +29,13 @@
             }
         }
         .tax-name {
-            width: 260px;
+            width: auto;
             @media only screen and (max-width: 576px) {
                 width: 105px;
             }
         }
         .rate {
-            width: 170px;
+            width: 80px;
             @media only screen and (max-width: 576px) {
                 width: 55px;
             }
@@ -51,7 +52,7 @@
             }
         }
         .action {
-            width: 118px;
+            width: 32px;
             position: relative;
             @media only screen and (max-width: 576px) {
                 width: 50px;
@@ -76,7 +77,9 @@
         }
     }
 }
-
+.checkbox-header {
+    width: 46px;
+}
 .remove {
     margin-top: 0px !important;
 }
@@ -98,4 +101,45 @@
     width: 16px;
     height: 16px;
     border-radius: 40px;
+}
+.edit-category-name {
+    input {
+        border: 1px solid transparent;
+        border-radius: 4px;
+        outline: none;
+        padding: 2px 2px 2px 8px;
+        outline: none;
+        font-weight: 500;
+        color: $primary-2;
+        &:hover,
+        &:focus {
+            border-color: $gray-600;
+        }
+        &::placeholder {
+          font-weight: 400;
+        }
+    }
+}
+add-category-product {
+    display: contents;
+    /deep/ .add-category-container {
+        td {
+            background-color: #f4fbff !important;
+        }
+    }
+}
+.checkbox {
+    margin: 0px;
+    input {
+        width: 16px;
+        height: 16px;
+        margin: 0px;
+        border: solid 1px #c4cbd5;
+        position: absolute;
+        transform: translateY(3px);
+    }
+}
+.qt-checkbox {
+    margin: 0;
+    padding: 0;
 }

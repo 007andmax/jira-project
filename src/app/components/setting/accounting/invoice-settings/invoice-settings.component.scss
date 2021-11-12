@@ -1,10 +1,9 @@
 /*** All css files include ***/
 @import "./src/assets/styles/variable";
-@import '../../../../assets/scss/mixin';
-@import '../../../../assets/scss/custom';
+@import "../../../../../assets/scss/mixin";
+@import "../../../../../assets/scss/custom";
 
-.invoice-ticket{
-    margin-bottom: 80px;
+.invoice-ticket {
     .input-number {
         float: left;
         width: 128px;
@@ -33,16 +32,16 @@
                 line-height: 15px;
                 height: 8px;
                 width: 8px;
-                right:5px;
+                right: 5px;
                 position: absolute;
-                &.plus{
-                    background: url("../../../../assets/img/filter-dropdown-up.svg") no-repeat center;
-                    top:5px;
+                &.plus {
+                    background: url("../../../../../assets/img/filter-dropdown-up.svg") no-repeat center;
+                    top: 5px;
                     background-size: 8px auto;
                 }
-                &.minus{
-                    background: url("../../../../assets/img/filter-dropdown-down.svg") no-repeat center;
-                    top:15px;
+                &.minus {
+                    background: url("../../../../../assets/img/filter-dropdown-down.svg") no-repeat center;
+                    top: 15px;
                     background-size: 8px auto;
                 }
             }
@@ -58,37 +57,50 @@
             margin-left: 2px;
         }
     }
-    .heading{
-        h1{
+    .heading {
+        h1 {
             text-transform: none;
         }
     }
-    textarea{
-        height: 65px;
+    textarea {
+        height: 80px;
         resize: none;
     }
-  .input-select{
-      width: 160px;
-  }
-  .invoice{
-      .f-row{
-        -webki-display: flex;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        .cmn-checkbox {
-            margin-top: 11px;
-            margin-bottom: 35px;
-            label{
-                text-transform: none;
+    .input-select {
+        //width: 160px;
+        width: 100%;
+    }
+    .invoice {
+        .f-row {
+            -webki-display: flex;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            .cmn-checkbox {
+                margin-top: 11px;
+                margin-bottom: 35px;
+                label {
+                    text-transform: none;
+                }
             }
         }
-      }
-  }
-  .form-row{
-    &.primary-phone{
-        margin-bottom: 5px;
     }
 }
+
+.invalid-feedback {
+    margin-bottom: 10px;
 }
 
+.invoice-ticket .form-row.primary-phone {
+    margin-bottom: 5px;
+}
+.accounting-contact-header {
+    margin: 0 0 24px 0;
+    h3 {
+        font-size: 11px;
+        font-weight: 600;
+        line-height: 16px;
+        text-transform: uppercase;
+        color: $primary-2;
+    }
+}

@@ -13,13 +13,12 @@ import { TaxesSettingsComponent } from './components/setting/taxes/taxes.compone
 import { PermissionManageComponent } from './components/setting/permission-manage/permission-manage.component';
 import { EmailTempleteComponent } from './components/setting/email-templete/email-templete.component';
 import { IntegrationsComponent } from './components/setting/integrations/integrations.component';
-import { InvoiceTicketsComponent } from './components/setting/invoice-tickets/invoice-tickets.component';
 import { CommissionComponent } from './components/setting/commission/commission.component';
 import { SubscriptionComponent } from './components/setting/subscription/subscription.component';
 import { CompanyPasswordManagerComponent } from './components/company-password-manager/company-password-manager.component';
 import { CompanyUserComponent } from './components/company-user/company-user.component';
 import { RecurringTicketsComponent } from './components/tickets/recurring-tickets/recurring-tickets.component';
-import { GlNumberSettingsComponent } from './components/setting/gl-number/gl-number.component';
+import { GlNumberSettingsComponent } from './components/setting/accounting/gl-number/gl-number.component';
 import { CompaniesComponent } from './components/companies/companies.component';
 import { UsersComponent } from './components/users/users.component';
 import { ReportsComponent } from './components/reports/reports.component';
@@ -61,6 +60,7 @@ import { DocumentPreviewComponent } from './components/documents/document-previe
 import { CompanyDocumentsComponent } from './components/companies/company-documents/company-documents.component';
 import { TicketSettingsPageComponent } from './components/setting/ticket-settings-page/ticket-settings-page.component';
 import { ProductsSettingsComponent } from './components/setting/products-settings/products-settings.component';
+import { AccountingSettingsComponent } from './components/setting/accounting/accounting-settings.component';
 
 const routes: Routes = [
 
@@ -160,11 +160,6 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: ':company/setting/glnumber',
-    component: GlNumberSettingsComponent,
-    pathMatch: 'full',
-  },
-  {
     path: ':company/setting/ticket-settings',
     component: TicketSettingsPageComponent,
     pathMatch: 'full',
@@ -185,8 +180,8 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: ':company/setting/invoiceTickets',
-    component: InvoiceTicketsComponent,
+    path: ':company/setting/accounting',
+    component: AccountingSettingsComponent,
     pathMatch: 'full',
   },
   {

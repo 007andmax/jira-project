@@ -4,21 +4,29 @@
         <div class="heading">
             <h6 class="qt-fw-600 qt-color-dark">Products</h6>
             <div class="heading-serach add-category-container">
+                <div
+                    class="tickets-status-header-buttons"
+                    *ngIf="getSelectedCount() > 0"
+                >
+                    <div [textContent]="getSelectedCount() + ' Categories Selected'"></div>
+                    <div
+                        class="qt-ml-16 qt-fw-600 qt-df qt-color-info qt-ai-c qt-pointer"
+                        (click)="removeCategoriesStatus()"
+                    >
+                        <div class="icon__remove-blue qt-sz-16 qt-bg-contain qt-ic-c qt-mr-6"></div>
+                        <div>Delete</div>
+                    </div>
+                </div>
                 <a
                     href="javascript:;"
                     class="btn-outline"
                     (click)="create()"
                 >
-                    Create
+                    Add category
                 </a>
-                <inventory-add-category
-                    *ngIf="showAddCategory"
-                    (onClose)="showAddCategory = false"
-                ></inventory-add-category>
             </div>
         </div>
         <ngb-tabset
-            (tabChange)="setTab($event)"
             #tabset="ngbTabset"
             [destroyOnHide]="false"
         >
@@ -35,40 +43,69 @@
                             >
                                 <thead>
                                     <tr>
-                                        <th class="tax-name">
-                                          Category Name
-                                          <div class="qt-table-modern__sorting"></div>
+                                        <th class="checkbox-header"></th>
+                                        <th
+                                            class="tax-name pointer"
+                                            (click)="onFilter('name')"
+                                        >
+                                            Category Name
+                                            <div class="qt-table-modern__sorting"></div>
                                         </th>
-                                        <th class="rate">
-                                          Count
-                                          <div class="qt-table-modern__sorting"></div>
+                                        <th
+                                            class="rate pointer"
+                                            (click)="onFilter('count')"
+                                        >
+                                            Count
+                                            <div class="qt-table-modern__sorting"></div>
                                         </th>
                                         <th class="action">&nbsp;</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let item of categoriesProducts; let i = index">
+                                    <add-category-product
+                                        *ngIf="showAddCategory"
+                                        (onClose)="showAddCategory = false"
+                                    ></add-category-product>
+                                    <tr
+                                        *ngFor="let item of categoriesProducts; let i = index"
+                                        appClickOtside
+                                        [init]="item.isInitEdit"
+                                        [ngClass]="'edit-category-container-' + i"
+                                        [class]="'.edit-category-container-' + i"
+                                        (onOutSide)="onEditCategory(item)"
+                                    >
                                         <td
-                                            class="tax-name"
-                                            [textContent]="item.name"
+                                            class="checkbox"
+                                            *ngIf="item.productsAmount === 0"
                                         >
+                                            <label class="qt-checkbox">
+                                                <input
+                                                    type="checkbox"
+                                                    [(ngModel)]="item.selected"
+                                                    (change)="onSelect($event,item)"
+                                                >
+                                                <span></span>
+                                            </label>
+                                        </td>
+                                        <td
+                                            class="checkbox"
+                                            *ngIf="item.productsAmount > 0"
+                                        ></td>
+                                        <td class="tax-name edit-category-name">
+                                            <input
+                                                type="text"
+                                                class="form-input"
+                                                placeholder="Enter Name Category"
+                                                [(ngModel)]="item.name"
+                                                maxlength="20"
+                                                (input)="item.onInitEdit(true)"
+                                            >
                                         </td>
                                         <td
                                             class="rate"
                                             [textContent]="item.productsAmount"
                                         ></td>
                                         <td class="action">
-                                            <a
-                                                href="javascript:;"
-                                                data-tooltip="Edit"
-                                                (click)="editCategoryProduct(item)"
-                                                class="edit"
-                                            >
-                                                <img
-                                                    src="/html/assets/img/icons/edit.svg"
-                                                    alt="Edit"
-                                                >
-                                            </a>
                                             <a
                                                 href="javascript:;"
                                                 data-tooltip="Remove"

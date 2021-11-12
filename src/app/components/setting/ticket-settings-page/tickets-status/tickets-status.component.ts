@@ -22,6 +22,7 @@ export class TicketsStatusComponent implements OnInit, OnDestroy {
   ticketsStatus: Array<TicketStatus> = [];
   statusColors: Array<StatusColor> = [];
   editTicketsStatus: TicketStatus;
+  sort = "ASC";
   @ViewChild('addStatusBtn') addStatusBtn: ClickOtsideDirective;
   sub: Subscription = new Subscription();
   constructor(private ticketsStateService: TicketsStateService,
@@ -33,9 +34,11 @@ export class TicketsStatusComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.ticketsStatus = this.ticketsStateService.getTicketsStatus();
+    this.ticketsStatus = this.ticketsStateService.getTicketsStatus().sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
     let onGetTicketsStatus = this.ticketsStateService.onGetTicketsStatus.subscribe(data => {
-      this.ticketsStatus = data;
+      this.ticketsStatus = data.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+        1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));;
       this.cd.detectChanges();
     })
     this.sub.add(onGetTicketsStatus);
@@ -48,6 +51,16 @@ export class TicketsStatusComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
+  }
+  sortByTicketName() {
+    if (this.sort === 'DESC') {
+      this.sort = 'ASC';
+      this.ticketsStatus = this.ticketsStateService.getTicketsStatus().sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+        1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+    } else {
+      this.sort = 'DESC';
+      this.ticketsStatus.reverse();
+    }
   }
   onRemoveTicketStatus(id) {
     this.ticketsService.removeTicketStatus(id).subscribe(data => {
@@ -69,7 +82,7 @@ export class TicketsStatusComponent implements OnInit, OnDestroy {
   }
   onEditTicketStatus(item) {
     if (item.isInitEdit) {
-      if (item.length === 0) return;
+      if (item.name.length === 0) return;
       this.ticketsService.editStatus(item.getDataForEdit(item.name, item.color)).subscribe(data => {
         item.onInitEdit(false);
       })
@@ -121,7 +134,7 @@ export class TicketsStatusComponent implements OnInit, OnDestroy {
     }
   }
   ngOnDestroy(): void {
-
+    this.ticketsStateService.setListTicketStatusForRemove([]);
     this.sub.unsubscribe();
   }
 }

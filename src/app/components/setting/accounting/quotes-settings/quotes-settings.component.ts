@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { InvoiceTicketsService } from '../invoice-tickets.service';
+import { InvoiceTicketsService } from '../accounting-settings.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -17,7 +17,7 @@ export class QuotesSettingsComponent implements OnInit {
     private formBuilder: FormBuilder,
     private invoiceTicketsService: InvoiceTicketsService,
     private toastr: ToastrService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.getActualNumber();
@@ -44,10 +44,10 @@ export class QuotesSettingsComponent implements OnInit {
    * get quote number
    */
   getActualNumber() {
-    this.loading = true;$(".loading").css("display", "block");
+    this.loading = true; $(".loading").css("display", "block");
     this.invoiceTicketsService.actualNumber('SALE_QUOTE').subscribe(
       (res: any) => {
-        this.loading = false;$(".loading").css("display", "none");
+        this.loading = false; $(".loading").css("display", "none");
         if (res) {
           this.quotesForm.patchValue({
             count: res.number
@@ -55,7 +55,7 @@ export class QuotesSettingsComponent implements OnInit {
         }
       },
       error => {
-        this.loading = false;$(".loading").css("display", "none");
+        this.loading = false; $(".loading").css("display", "none");
       }
     );
   }
@@ -74,14 +74,14 @@ export class QuotesSettingsComponent implements OnInit {
         type: 'SALE_QUOTE'
       }
     };
-    this.loading = true;$(".loading").css("display", "block");
+    this.loading = true; $(".loading").css("display", "block");
     this.invoiceTicketsService
       .updateQuotesSettings(objQuotes)
       .subscribe(res => {
-        this.loading = false;$(".loading").css("display", "none");
+        this.loading = false; $(".loading").css("display", "none");
         this.toastr.success('Saved Successfully');
       }, error => {
-        this.loading = false;$(".loading").css("display", "none");
+        this.loading = false; $(".loading").css("display", "none");
         this.toastr.error('Bad Request');
       });
   }

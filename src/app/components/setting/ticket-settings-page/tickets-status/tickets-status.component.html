@@ -7,7 +7,10 @@
             <thead>
                 <tr>
                     <th></th>
-                    <th class="tax-name">
+                    <th
+                        class="tax-name pointer"
+                        (click)="sortByTicketName()"
+                    >
                         Ticket Status
                         <ng-template
                             #tipContent
@@ -22,7 +25,7 @@
                         ></span>
                     </th>
                     <th class="rate">Set Color</th>
-                    <th>Preview</th>
+                    <th class="tax-preview">Preview</th>
                     <th class="action">&nbsp;</th>
                 </tr>
             </thead>
@@ -186,7 +189,7 @@
                         >
                             <span
                                 [ngStyle]="{'color':  statusColors[item.color].borderColor}"
-                                [textContent]="item.name"
+                                [textContent]="parseStatus(item.name)"
                             ></span>
                         </div>
                     </td>

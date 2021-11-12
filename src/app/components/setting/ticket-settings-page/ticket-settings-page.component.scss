@@ -10,11 +10,12 @@
         }
     }
     /deep/.heading-tickets-status {
-        padding: 24px !important;
+        padding: 24px;
     }
 }
 .tickets-status-header-buttons {
     display: flex;
+    align-items: center;
     padding: 8px 16px;
     border-radius: 4px;
     background-color: #ffffff;

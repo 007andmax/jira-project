@@ -18,6 +18,7 @@ export class InventoryStateService {
   onGetCategories: EventEmitter<any> = new EventEmitter();
   onGetProducts: EventEmitter<any> = new EventEmitter();
   onChangeProducts: EventEmitter<InventoryChange> = new EventEmitter();
+  listCategoriesForRemove = [];
   categories = [];
   productList: Array<CategoryProductitem> = [];
   constructor(private productService: ProductService,
@@ -59,6 +60,12 @@ export class InventoryStateService {
       this.setproducts(res);
       this.onInitGetProducts(this.productList);
     });
+  }
+  public setListCategoriesForRemove(data) {
+    this.listCategoriesForRemove = data;
+  }
+  public getListCategoriesForRemove() {
+    return this.listCategoriesForRemove;
   }
   public getListProducts() {
     return this.productList;

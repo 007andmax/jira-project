@@ -25,12 +25,6 @@
         Manage Tags
     </li>
     <li
-        [ngClass]="{'--active':activePage === 'glnumber-component'}"
-        (click)="goToState('glnumber-component')"
-    >
-        Manage GL number
-    </li>
-    <li
         [ngClass]="{'--active':activePage === 'company-profile-component'}"
         (click)="goToState('company-profile-component')"
         *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_COMPANY_PROFILE_SETTINGS')"
@@ -84,7 +78,7 @@
         [ngClass]="{'--active':activePage === 'invoice-ticket-component'}"
         (click)="goToState('invoice-ticket-component')"
     >
-        Invoice and Ticket
+        Accounting
     </li>
     <li
         [ngClass]="{'--active':activePage === 'products-settings'}"

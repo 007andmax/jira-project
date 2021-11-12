@@ -115,7 +115,6 @@ import { InventoryTableComponent } from './components/inventory/inventory-table/
 import { InventoryAddAsideComponent } from './components/inventory/inventory-add-aside/inventory-add-aside.component';
 import { InventoryEditAsideComponent } from './components/inventory/inventory-edit-aside/inventory-edit-aside.component';
 import { LeftPanelInventoryComponent } from './components/left-panel/left-panel-inventory/left-panel-inventory.component';
-import { AddCategoryProductComponent } from './components/left-panel/left-panel-inventory/add-category-product/add-category-product.component';
 import { MyProfileComponent } from './components/setting/my-profile/my-profile.component';
 import { SettingComponent } from './components/setting/setting.component';
 import { ManageTagsComponent } from './components/setting/manage-tags/manage-tags.component';
@@ -135,7 +134,6 @@ import { TaxesSettingsComponent } from './components/setting/taxes/taxes.compone
 import { PermissionManageComponent } from './components/setting/permission-manage/permission-manage.component';
 import { EmailTempleteComponent } from './components/setting/email-templete/email-templete.component';
 import { IntegrationsComponent } from './components/setting/integrations/integrations.component';
-import { InvoiceTicketsComponent } from './components/setting/invoice-tickets/invoice-tickets.component';
 import { CommissionComponent } from './components/setting/commission/commission.component';
 import { SubscriptionComponent } from './components/setting/subscription/subscription.component';
 import { DataTablesModule } from 'angular-datatables';
@@ -151,9 +149,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { IncomingEmailComponent } from './components/setting/email-setting/incoming-email/incoming-email.component';
 import { OutgoingEmailComponent } from './components/setting/email-setting/outgoing-email/outgoing-email.component';
 import { TicketSettingsComponent } from './components/setting/ticket-settings-page/ticket-settings/ticket-settings.component';
-import { InvoiceSettingsComponent } from './components/setting/invoice-tickets/invoice-settings/invoice-settings.component';
-import { QuotesSettingsComponent } from './components/setting/invoice-tickets/quotes-settings/quotes-settings.component';
-import { GlNumberSettingsComponent } from './components/setting/gl-number/gl-number.component';
+import { InvoiceSettingsComponent } from './components/setting/accounting/invoice-settings/invoice-settings.component';
+import { QuotesSettingsComponent } from './components/setting/accounting/quotes-settings/quotes-settings.component';
+import { GlNumberSettingsComponent } from './components/setting/accounting/gl-number/gl-number.component';
 import { Onlynumber } from './helpers/Onlynumber';
 import { CompanyComponent } from './components/setting/commission/company/company.component';
 import { ProductComponent } from './components/setting/commission/product/product.component';
@@ -468,6 +466,10 @@ import { ModalEditCategoryProductComponent } from './services/modal/modal-edit-c
 import { TicketSettingsPageComponent } from './components/setting/ticket-settings-page/ticket-settings-page.component';
 import { TicketsStatusComponent } from './components/setting/ticket-settings-page/tickets-status/tickets-status.component';
 import { ProductsSettingsComponent } from './components/setting/products-settings/products-settings.component';
+import { AddCategoryProductComponent } from './components/setting/products-settings/add-category-product/add-category-product.component';
+import { AccountingYearComponent } from './components/setting/accounting/accounting-year/accounting-year.component';
+import { AddGlNumberComponent } from './components/setting/accounting/gl-number/add-gl-number/add-gl-number.component';
+import { AccountingSettingsComponent } from './components/setting/accounting/accounting-settings.component';
 
 
 declare var $: any;
@@ -558,7 +560,7 @@ declare var $: any;
     PermissionManageComponent,
     EmailTempleteComponent,
     IntegrationsComponent,
-    InvoiceTicketsComponent,
+    AccountingSettingsComponent,
     CommissionComponent,
     SubscriptionComponent,
     AccountComponent,
@@ -893,7 +895,9 @@ declare var $: any;
     ModalEditCategoryProductComponent,
     TicketSettingsPageComponent,
     TicketsStatusComponent,
-    ProductsSettingsComponent
+    ProductsSettingsComponent,
+    AccountingYearComponent,
+    AddGlNumberComponent
   ],
   imports: [
     BrowserModule,
