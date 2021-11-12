@@ -146,9 +146,9 @@ export class NetworkAdapterReportComponent implements OnInit {
     this.networkAdapterList.forEach((element) => {
       pdfList.push([
         element.Name.replace(",", " ") || "N/A",
-        element.NicName.replace(",", " ") || "N/A",
+        "N/A",
         element.Speed,
-        element.NicType || "N/A",
+        "N/A",
       ]);
     });
     let html =
@@ -332,9 +332,9 @@ export class NetworkAdapterReportComponent implements OnInit {
     this.networkAdapterList.forEach((element) => {
       downloadCsvList.push([
         element.Name.replace(",", " ") || "N/A",
-        element.NicName.replace(",", " ") || "N/A",
+        "N/A",
         element.Speed,
-        element.NicType || "N/A",
+        "N/A",
       ]);
     });
     let fileName = "Device Network Adapter List";
