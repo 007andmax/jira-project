@@ -9,8 +9,15 @@ export class CrmStateService {
   serviceTypeForRemove;
   listIndustriesForRemove = [];
   listJobTitleForRemove = [];
+  listServiceTypeForRemove = [];
   constructor() { }
 
+  public getListServiceTypeForRemove() {
+    return this.listServiceTypeForRemove;
+  }
+  public setListServiceTypeForRemove(data) {
+    this.listServiceTypeForRemove = data;
+  }
   public getServiceTypeForRemove() {
     return this.serviceTypeForRemove;
   }

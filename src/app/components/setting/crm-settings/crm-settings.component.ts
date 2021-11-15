@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DELETE_CRM_INDUSTRIES, DELETE_CRM_JOB_TITLIES } from 'src/app/const/confirm';
+import { DELETE_CRM_INDUSTRIES, DELETE_CRM_JOB_TITLIES, DELETE_CRM_SERVICE_TYPIES } from 'src/app/const/confirm';
 import { CrmStateService } from 'src/app/services/crm/crm-state.service';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
@@ -47,7 +47,7 @@ export class CrmSettingsComponent implements OnInit, OnDestroy {
   getSelectedCount() {
     if (this.activeTab === "companyIndustry") return this.crmStateService.getListIndustriesForRemove().length;
     if (this.activeTab === "userJobTitle") return this.crmStateService.getListJobTitleForRemove().length;
-    //if (this.activeTab === "serviceType") return this.crmStateService.getListJobTitleForRemove().length;
+    if (this.activeTab === "serviceType") return this.crmStateService.getListServiceTypeForRemove().length;
 
   }
   removeList() {
@@ -61,6 +61,12 @@ export class CrmSettingsComponent implements OnInit, OnDestroy {
       this.confirmStateService.setConfirmAction(DELETE_CRM_JOB_TITLIES);
       const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
       modalRef.componentInstance.message = `Do you want to delete job titlies?`;
+
+    }
+    if (this.activeTab === "serviceType") {
+      this.confirmStateService.setConfirmAction(DELETE_CRM_SERVICE_TYPIES);
+      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+      modalRef.componentInstance.message = `Do you want to delete service typies?`;
 
     }
   }

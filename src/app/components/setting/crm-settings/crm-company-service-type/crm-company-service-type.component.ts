@@ -4,11 +4,12 @@ import { forkJoin, of, Subscription } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
-import { DELETE_CRM_INDUSTRY, DELETE_CRM_INDUSTRIES, DELETE_CRM_SERVICE_TYPE } from 'src/app/const/confirm';
+import { DELETE_CRM_INDUSTRY, DELETE_CRM_INDUSTRIES, DELETE_CRM_SERVICE_TYPE, DELETE_CRM_SERVICE_TYPIES } from 'src/app/const/confirm';
 import { CrmStateService } from 'src/app/services/crm/crm-state.service';
 import { CrmService } from 'src/app/services/crm/crm.service';
 import { CrmCompanyIndustry } from '../crm-company-industry/class/crm-company-industry';
 import { CrmCompanyServiceType } from './class/crm-company-service-type';
+import { CrmCompanyServiceTypeFilter } from './class/crm-company-service-type-filter';
 
 @Component({
   selector: 'crm-company-service-type',
@@ -19,7 +20,7 @@ export class CrmCompanyServiceTypeComponent implements OnInit, OnDestroy {
 
   serviceTypeList: Array<CrmCompanyServiceType> = [];
   showAdd: boolean = false;
-  // filter: CrmCompanyIndustryFilter = new CrmCompanyIndustryFilter();
+  filter: CrmCompanyServiceTypeFilter = new CrmCompanyServiceTypeFilter();
   sub: Subscription = new Subscription();
   constructor(private crmService: CrmService,
     private confirmStateService: ConfirmStateService,
@@ -38,8 +39,8 @@ export class CrmCompanyServiceTypeComponent implements OnInit, OnDestroy {
         if (this.confirmStateService.getConfirmAction() === DELETE_CRM_SERVICE_TYPE) {
           this.removeServiceType(this.crmStateService.getServiceTypeForRemove().id);
         }
-        if (this.confirmStateService.getConfirmAction() === DELETE_CRM_INDUSTRIES) {
-          this.onRemoveIndustries();
+        if (this.confirmStateService.getConfirmAction() === DELETE_CRM_SERVICE_TYPIES) {
+          this.onRemoveServiceTypies();
         }
       }
     })
@@ -49,7 +50,7 @@ export class CrmCompanyServiceTypeComponent implements OnInit, OnDestroy {
     this.showAdd = data;
   }
   onFilter(field) {
-    // this.filter.onFilter(field, this.industryList);
+    this.filter.onFilter(field, this.serviceTypeList);
   }
   onEditServiceType(item) {
     if (item.isInitEdit) {
@@ -59,12 +60,12 @@ export class CrmCompanyServiceTypeComponent implements OnInit, OnDestroy {
       })
     }
   }
-  onRemoveIndustries() {
-    forkJoin(this.crmStateService.getListIndustriesForRemove().map(item => this.crmService.removeIndustry(item.id).pipe(map((res) => res),
+  onRemoveServiceTypies() {
+    forkJoin(this.crmStateService.getListServiceTypeForRemove().map(item => this.crmService.removeServiceType(item.id).pipe(map((res) => res),
       catchError(error => of(undefined)))))
       .subscribe(
         () => {
-          this.crmStateService.setListIndustriesForRemove([]);
+          this.crmStateService.setListServiceTypeForRemove([]);
           this.cd.detectChanges();
         },
         error => {
@@ -78,12 +79,12 @@ export class CrmCompanyServiceTypeComponent implements OnInit, OnDestroy {
   }
   onSelect(event, item) {
     if (event.target.checked) {
-      this.crmStateService.getListIndustriesForRemove().push(item);
+      this.crmStateService.getListServiceTypeForRemove().push(item);
     } else {
-      let list = this.crmStateService.getListIndustriesForRemove();
+      let list = this.crmStateService.getListServiceTypeForRemove();
       let index = list.findIndex(item => item.id === item.id);
       if (index > -1) list.splice(index, 1);
-      this.crmStateService.setListIndustriesForRemove(list);
+      this.crmStateService.setListServiceTypeForRemove(list);
     }
     this.cd.detectChanges();
   }
