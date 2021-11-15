@@ -3,6 +3,7 @@
         <table
             class="display dataTable"
             style="width:100%"
+            [ngClass]="{'cleat-height-dataTable':!showPreloader}"
         >
             <thead>
                 <tr>
@@ -24,7 +25,7 @@
                     <th class="action">&nbsp;</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody *ngIf="!showPreloader">
                 <add-crm-company-industry
                     *ngIf="showAdd"
                     (onClose)="showAdd = false"
@@ -71,6 +72,10 @@
                     </td>
                 </tr>
             </tbody>
+            <div
+                class="loading"
+                *ngIf="showPreloader"
+            ></div>
         </table>
     </div>
 </div>

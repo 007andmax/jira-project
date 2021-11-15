@@ -19,6 +19,7 @@ export class CrmCompanyIndustryComponent implements OnInit, OnDestroy {
   industryList: Array<CrmCompanyIndustry> = [];
   showAdd: boolean = false;
   filter: CrmCompanyIndustryFilter = new CrmCompanyIndustryFilter();
+  showPreloader: boolean = true;
   sub: Subscription = new Subscription();
   constructor(private crmService: CrmService,
     private confirmStateService: ConfirmStateService,
@@ -31,6 +32,7 @@ export class CrmCompanyIndustryComponent implements OnInit, OnDestroy {
       console.log("data", data);
       this.industryList = data.map(item => new CrmCompanyIndustry(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
         1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+      this.showPreloader = false;
     })
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {

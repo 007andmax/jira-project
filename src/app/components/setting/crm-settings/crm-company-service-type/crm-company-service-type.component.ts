@@ -21,6 +21,7 @@ export class CrmCompanyServiceTypeComponent implements OnInit, OnDestroy {
   serviceTypeList: Array<CrmCompanyServiceType> = [];
   showAdd: boolean = false;
   filter: CrmCompanyServiceTypeFilter = new CrmCompanyServiceTypeFilter();
+  showPreloader: boolean = true;
   sub: Subscription = new Subscription();
   constructor(private crmService: CrmService,
     private confirmStateService: ConfirmStateService,
@@ -33,6 +34,7 @@ export class CrmCompanyServiceTypeComponent implements OnInit, OnDestroy {
       console.log("data", data);
       this.serviceTypeList = data.map(item => new CrmCompanyServiceType(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
         1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+      this.showPreloader = false;
     })
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {

@@ -20,6 +20,7 @@ export class CrmCompanyJobTypeComponent implements OnInit {
   jobTypeList: Array<CrmCompanyJobType> = [];
   showAdd: boolean = false;
   filter: CrmCompanyIndustryFilter = new CrmCompanyIndustryFilter();
+  showPreloader: boolean = true;
   sub: Subscription = new Subscription();
   constructor(private crmService: CrmService,
     private confirmStateService: ConfirmStateService,
@@ -32,6 +33,7 @@ export class CrmCompanyJobTypeComponent implements OnInit {
       console.log("data", data);
       this.jobTypeList = data.map(item => new CrmCompanyJobType(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
         1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+      this.showPreloader = false;
     })
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {

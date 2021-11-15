@@ -20,6 +20,7 @@ export class CrmCompanyJobTitleComponent implements OnInit {
   jobTitleList: Array<CrmCompanyJobTitle> = [];
   showAdd: boolean = false;
   filter: CrmCompanyJobTitleFilter = new CrmCompanyJobTitleFilter();
+  showPreloader: boolean = true;
   sub: Subscription = new Subscription();
   constructor(private crmService: CrmService,
     private confirmStateService: ConfirmStateService,
@@ -32,6 +33,7 @@ export class CrmCompanyJobTitleComponent implements OnInit {
       console.log("data", data);
       this.jobTitleList = data.map(item => new CrmCompanyJobTitle(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
         1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+      this.showPreloader = false;
     })
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
