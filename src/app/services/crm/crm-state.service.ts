@@ -7,11 +7,25 @@ export class CrmStateService {
   industryForRemove;
   jobTitleForRemove;
   serviceTypeForRemove;
+  jobTypeForRemove;
+  listJobTypeForRemove = [];
   listIndustriesForRemove = [];
   listJobTitleForRemove = [];
   listServiceTypeForRemove = [];
   constructor() { }
 
+  public getListJobTypeForRemove() {
+    return this.listJobTypeForRemove;
+  }
+  public setListJobTypeForRemove(data) {
+    this.listJobTypeForRemove = data;
+  }
+  public setJobTypeForRemove(data) {
+    this.jobTypeForRemove = data;
+  }
+  public getJobTypeForRemove() {
+    return this.jobTypeForRemove;
+  }
   public getListServiceTypeForRemove() {
     return this.listServiceTypeForRemove;
   }

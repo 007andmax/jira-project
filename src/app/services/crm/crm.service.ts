@@ -20,6 +20,9 @@ export class CrmService {
   public getIndustryList() {
     return this.http.get(this.apiUrl + `crm/settings/industry`);
   }
+  public getJobTypeList() {
+    return this.http.get(this.apiUrl + `crm/settings/jobType`);
+  }
   public getServiceTypeList() {
     return this.http.get(this.apiUrl + `crm/settings/serviceType`);
   }
@@ -28,6 +31,9 @@ export class CrmService {
   }
   public addIndustry(name) {
     return this.http.post(this.apiUrl + `crm/settings/industry`, { name: name });
+  }
+  public addJobType(name) {
+    return this.http.post(this.apiUrl + `crm/settings/jobType`, { name: name });
   }
   public addServiceType(name) {
     return this.http.post(this.apiUrl + `crm/settings/serviceType`, { name: name });
@@ -38,14 +44,21 @@ export class CrmService {
   public editIndustry(industry_id, name) {
     return this.http.put(this.apiUrl + `crm/settings/industry/${industry_id}`, { name: name });
   }
+  public editJobType(type_id, name) {
+    return this.http.put(this.apiUrl + `crm/settings/jobType/${type_id}`, { name: name });
+  }
   public editServiceType(industry_id, name) {
     return this.http.put(this.apiUrl + `crm/settings/serviceType/${industry_id}`, { name: name });
   }
   public editJobTitle(title_id, name) {
     return this.http.put(this.apiUrl + `crm/settings/jobTitle/${title_id}`, { name: name });
   }
+
   public removeIndustry(industry_id) {
     return this.http.delete(this.apiUrl + `crm/settings/industry/${industry_id}`);
+  }
+  public removeJobType(type_id) {
+    return this.http.delete(this.apiUrl + `crm/settings/jobType/${type_id}`);
   }
   public removeServiceType(serviceType) {
     return this.http.delete(this.apiUrl + `crm/settings/serviceType/${serviceType}`);

@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DELETE_CRM_INDUSTRIES, DELETE_CRM_JOB_TITLIES, DELETE_CRM_SERVICE_TYPIES } from 'src/app/const/confirm';
+import { DELETE_CRM_INDUSTRIES, DELETE_CRM_JOB_TITLIES, DELETE_CRM_JOB_TYPIES, DELETE_CRM_SERVICE_TYPIES } from 'src/app/const/confirm';
 import { CrmStateService } from 'src/app/services/crm/crm-state.service';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { CrmCompanyIndustryComponent } from './crm-company-industry/crm-company-industry.component';
 import { CrmCompanyJobTitleComponent } from './crm-company-job-title/crm-company-job-title.component';
+import { CrmCompanyJobTypeComponent } from './crm-company-job-type/crm-company-job-type.component';
 import { CrmCompanyServiceTypeComponent } from './crm-company-service-type/crm-company-service-type.component';
 
 @Component({
@@ -18,6 +19,7 @@ export class CrmSettingsComponent implements OnInit, OnDestroy {
   @ViewChild("industry") industry: CrmCompanyIndustryComponent;
   @ViewChild("jobTitle") jobTitle: CrmCompanyJobTitleComponent;
   @ViewChild("serviceType") serviceType: CrmCompanyServiceTypeComponent;
+  @ViewChild("jobType") jobType: CrmCompanyJobTypeComponent;
   constructor(private crmStateService: CrmStateService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal) { }
@@ -30,12 +32,14 @@ export class CrmSettingsComponent implements OnInit, OnDestroy {
     if (this.activeTab === "companyIndustry") return "Add Industry";
     if (this.activeTab === "userJobTitle") return "Add Job Title";
     if (this.activeTab === "serviceType") return "Add Service Type";
+    if (this.activeTab === "jobType") return "Add User Type";
     return "";
   }
   create() {
     if (this.activeTab === "companyIndustry") this.industry.toggleShowAdd(true);
     if (this.activeTab === "userJobTitle") this.jobTitle.toggleShowAdd(true);
     if (this.activeTab === "serviceType") this.serviceType.toggleShowAdd(true);
+    if (this.activeTab === "jobType") this.jobType.toggleShowAdd(true);
   }
   setTab(data) {
     this.activeTab = data['nextId'];
@@ -48,6 +52,7 @@ export class CrmSettingsComponent implements OnInit, OnDestroy {
     if (this.activeTab === "companyIndustry") return this.crmStateService.getListIndustriesForRemove().length;
     if (this.activeTab === "userJobTitle") return this.crmStateService.getListJobTitleForRemove().length;
     if (this.activeTab === "serviceType") return this.crmStateService.getListServiceTypeForRemove().length;
+    if (this.activeTab === "jobType") return this.crmStateService.getListJobTypeForRemove().length;
 
   }
   removeList() {
@@ -67,6 +72,12 @@ export class CrmSettingsComponent implements OnInit, OnDestroy {
       this.confirmStateService.setConfirmAction(DELETE_CRM_SERVICE_TYPIES);
       const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
       modalRef.componentInstance.message = `Do you want to delete service typies?`;
+
+    }
+    if (this.activeTab === "jobType") {
+      this.confirmStateService.setConfirmAction(DELETE_CRM_JOB_TYPIES);
+      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+      modalRef.componentInstance.message = `Do you want to delete job typies?`;
 
     }
   }

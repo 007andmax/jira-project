@@ -1,0 +1,65 @@
+<div class="cmn-area">
+    <div class="data-table-wrap">
+        <table
+            class="display dataTable"
+            style="width:100%"
+        >
+            <thead>
+                <tr>
+                    <th class="checkbox-header"></th>
+                    <th
+                        class="tax-name pointer"
+                        (click)="onFilter('name')"
+                    >
+                        User Type
+                        <div class="qt-table-modern__sorting"></div>
+                    </th>
+                    <th class="action">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <add-crm-company-job-type
+                    *ngIf="showAdd"
+                    (onClose)="showAdd = false"
+                ></add-crm-company-job-type>
+                <tr
+                    *ngFor="let item of jobTypeList; let i = index"
+                    appClickOtside
+                    [init]="item.isInitEdit"
+                    [ngClass]="'edit-crm-container-' + i"
+                    [class]="'.edit-crm-container-' + i"
+                    (onOutSide)="onEditJobType(item)"
+                >
+                    <td class="checkbox">
+                        <label class="qt-checkbox">
+                            <input
+                                type="checkbox"
+                                (change)="onSelect($event,item)"
+                            >
+                            <span></span>
+                        </label>
+                    </td>
+                    <td class="tax-name edit-category-name">
+                        <input
+                            type="text"
+                            class="form-input"
+                            placeholder="Enter Name Category"
+                            [(ngModel)]="item.name"
+                            (input)="item.onInitEdit(true)"
+                        >
+                    </td>
+                    <td class="action">
+                        <a
+                            href="javascript:;"
+                            data-tooltip="Remove"
+                            class="remove"
+                            (click)="remove(item)"
+                        >
+                            <div class="icon__remove qt-sz-16 qt-bg-contain"></div>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
