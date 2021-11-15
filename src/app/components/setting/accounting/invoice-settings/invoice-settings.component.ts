@@ -38,6 +38,8 @@ export class InvoiceSettingsComponent implements OnInit {
       ],
       invoiceTerms: ['', Validators.required],
       enableInvoiceContact: [false],
+      enableOwnerSending: [false],
+      enableContactSending: [false],
       firstName: [
         { value: '', disabled: this.isDisable },
         [Validators.required, Validators.minLength(2), Validators.maxLength(15)]
@@ -74,8 +76,7 @@ export class InvoiceSettingsComponent implements OnInit {
       primaryPhone: [
         '',
         Validators.compose([
-          Validators.required,
-          Validators.pattern(/^\+?[0-9\s\-\+\(\)\.\,]{1,20}$/)
+          Validators.required
         ])
       ],
       primaryPhoneType: [''],
@@ -94,6 +95,7 @@ export class InvoiceSettingsComponent implements OnInit {
       invoiceTerms: this.termInput,
       conditions: this.conditionInput
     });
+    console.log("this.invoiceForm", this.invoiceForm);
   }
 
   // convenience getter for easy access to form fields
@@ -156,7 +158,7 @@ export class InvoiceSettingsComponent implements OnInit {
       (res: any) => {
         this.loading = false; $(".loading").css("display", "none");
         if (res) {
-          this.isDisable = res.enabled;
+          this.isDisable = res.invoiceContact.enabled;
           const state = !this.isDisable ? 'disable' : 'enable';
           if (!this.isDisable) {
             Object.keys(this.invoiceForm.controls).forEach(controlName => {
@@ -174,14 +176,16 @@ export class InvoiceSettingsComponent implements OnInit {
           }
 
           this.invoiceForm.patchValue({
-            designation: res.designation,
-            email: res.email,
-            enableInvoiceContact: res.enabled,
-            firstName: res.firstName,
-            lastName: res.lastName
+            designation: res.invoiceContact.designation,
+            email: res.invoiceContact.email,
+            enableInvoiceContact: res.invoiceContact.enabled,
+            enableOwnerSending: res.enableOwnerSending,
+            firstName: res.invoiceContact.firstName,
+            lastName: res.invoiceContact.lastName,
+            enableContactSending: res.invoiceContact.enableContactSending,
           });
-
-          const phoneNumbers = res.phoneNumbers || [];
+          (<any>document.body.querySelector("#accounting-active")).checked = res.invoiceContact.enableContactSending;
+          const phoneNumbers = res.invoiceContact.phoneNumbers || [];
           if (phoneNumbers) {
             console.log("phoneNumbers", phoneNumbers);
             phoneNumbers.forEach((phone, i) => {
@@ -276,7 +280,17 @@ export class InvoiceSettingsComponent implements OnInit {
       }
     });
   }
+  onEnableOwnerSending(data) {
+    this.invoiceForm.patchValue({
+      enableOwnerSending: data
+    });
+  }
+  changeEnableContactSending(event) {
+    this.invoiceForm.patchValue({
+      enableContactSending: event.target.checked
+    });
 
+  }
   /**
    *  saved records.
    */
@@ -284,20 +298,23 @@ export class InvoiceSettingsComponent implements OnInit {
     this.submitted = true;
 
     // stop here if form is invalid
+    console.log("this.invoiceForm", this.invoiceForm);
+    console.log("this.invoiceForm.invalid", this.invoiceForm.invalid);
     if (this.invoiceForm.invalid) {
       return;
     }
-
+    console.log("1");
     if (!this.invoiceForm.value.invoiceCount.trim()) {
       return;
     }
-
+    console.log("2");
     const objInvoice = {
       emailSettingPageNumberFormDto: {
         count: this.invoiceForm.value.invoiceCount,
         term: this.invoiceForm.value.invoiceTerms,
         termsAndConditions: this.invoiceForm.value.conditions,
-        type: 'INVOICE'
+        type: 'INVOICE',
+        enableOwnerSending: this.invoiceForm.value.enableOwnerSending,
       },
       invoiceContactDto: {
         enabled: this.invoiceForm.value.enableInvoiceContact,
@@ -305,7 +322,8 @@ export class InvoiceSettingsComponent implements OnInit {
         lastName: this.invoiceForm.value.lastName,
         email: this.invoiceForm.value.email,
         designation: this.invoiceForm.value.designation,
-        phoneNumbers: []
+        phoneNumbers: [],
+        enableContactSending: this.invoiceForm.value.enableContactSending,
       },
       taxNumber: {
         taxIdDescription: this.invoiceForm.value.taxIdDescription,

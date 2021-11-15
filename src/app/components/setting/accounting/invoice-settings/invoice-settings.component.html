@@ -93,16 +93,30 @@
                     </div>
                 </div>
                 <div class="f-col col-100">
-                    <div class="qt-df qt-mb-16">
-                        <div
-                            class="qt-toggle qt-mr-8"
-                            [ngClass]="{'--on':invoiceForm.value.enableInvoiceContact}"
-                            (click)="onEnableInvoice(!invoiceForm.value.enableInvoiceContact)"
-                        >
-                            <div class="qt-toggle__circle"></div>
+                    <div class="qt-df qt-mb-16 enables-invoice-settings">
+                        <div class="qt-df">
+                            <div
+                                class="qt-toggle qt-mr-8"
+                                [ngClass]="{'--on':invoiceForm.value.enableInvoiceContact}"
+                                (click)="onEnableInvoice(!invoiceForm.value.enableInvoiceContact)"
+                            >
+                                <div class="qt-toggle__circle"></div>
+                            </div>
+                            <div>
+                                <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-dark-light">Set custom Invoice contact</div>
+                            </div>
                         </div>
-                        <div>
-                            <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-dark-light">Set custom Invoice contact</div>
+                        <div class="qt-df">
+                            <div
+                                class="qt-toggle qt-mr-8"
+                                [ngClass]="{'--on':invoiceForm.value.enableOwnerSending}"
+                                (click)="onEnableOwnerSending(!invoiceForm.value.enableOwnerSending)"
+                            >
+                                <div class="qt-toggle__circle"></div>
+                            </div>
+                            <div>
+                                <div class="qt-fs-13 qt-fw-600 qt-lh-154 qt-color-dark-light">CC invoice copies to tech company owner</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -285,6 +299,7 @@
                             <input
                                 id="accounting-active"
                                 type="checkbox"
+                                (change)="changeEnableContactSending($event)"
                             >
                             <span></span>
                         </label>
