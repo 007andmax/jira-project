@@ -130,6 +130,8 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/report/network-adapter-report`)) this.state = 'network-adapter-report';
           if (window.location.href.includes(`/report/report-device-deploymentwarranty`)) this.state = 'report-device-deploymentwarranty';
           if (window.location.href.includes(`/report/report-device-processorram`)) this.state = 'report-device-processorram';
+          if (window.location.href.includes(`/report/report-device-diskspace`)) this.state = 'report-device-diskspace';
+          if (window.location.href.includes(`/report/applicationbycompany-report`)) this.state = 'applicationbycompany-report';
           if (window.location.href.includes(`/report/tech-sales`)) this.state = 'tech-sales';
           if (window.location.href.includes(`/report/tech-ticket`)) this.state = 'tech-ticket';
           if (window.location.href.includes(`/report/tech-service`)) this.state = 'tech-service';
@@ -247,11 +249,13 @@ export class LeftPanelComponent implements OnInit {
         this.state === 'network-adapter-report' ||
         this.state === 'report-device-deploymentwarranty' ||
         this.state === 'report-device-processorram' ||
+        this.state === 'applicationbycompany-report' ||
         this.state === 'tech-sales' ||
         this.state === 'tech-ticket' ||
         this.state === 'tech-service' ||
         this.state === 'ticket-report' ||
         this.state === 'service-report' ||
+        this.state === 'report-device-diskspace'||
         this.state === 'income-accounts') this.goToLink('report/' + this.state);
 
 

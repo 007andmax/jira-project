@@ -32,7 +32,7 @@ export class ReportsComponent implements OnInit {
     if (type === 'COMMISSIONS') return ['Common report', 'Detailed report'];
     if (type === 'FINANCIAL') return ['Accounts receivable report', 'Accounting report'];
     if (type === 'REMOTE_ACCESS') return ['Remote connection report'];
-    if (type === 'DEVICES') return ['Device Summary report', 'Software Summary report', 'Hardware Summary reports', 'Device IP Summary report', 'Device Warranty report','Device Antivirus report', 'Network IP report', 'Network Detail report', 'Network Adapter report', 'Device Deployment Warranty report', 'Device Processor Ram report'];
+    if (type === 'DEVICES') return ['Device Summary report', 'Software Summary report', 'Hardware Summary reports', 'Device IP Summary report', 'Device Warranty report','Device Antivirus report', 'Network IP report', 'Network Detail report', 'Network Adapter report', 'Device Deployment Warranty report', 'Device Processor Ram report', 'Device Disk Space report', 'Application By Company report'];
     if (type === 'PERFORMANCE') return ['Tech sales report', 'Tech ticket report', 'Tech service report'];
     if (type === 'TICKETS') return ['Tickets report', 'Service report'];
     if (type === 'INCOME_ACCOUNTS') return ['Income account report'];
@@ -43,7 +43,7 @@ export class ReportsComponent implements OnInit {
     if (type === 'COMMISSIONS') return ['common-commissions', 'detailed-commissions'];
     if (type === 'FINANCIAL') return ['accounts-receivable', 'accounting-report'];
     if (type === 'REMOTE_ACCESS') return ['remote-access'];
-    if (type === 'DEVICES') return ['report-device-summary', 'software-summary', 'hardware-summary', 'device-ip-summary', 'report-device-warranty', 'report-device-antivirus', 'network-ip-report', 'network-detail-report', 'network-adapter-report', 'report-device-deploymentwarranty', 'report-device-processorram'];
+    if (type === 'DEVICES') return ['report-device-summary', 'software-summary', 'hardware-summary', 'device-ip-summary', 'report-device-warranty', 'report-device-antivirus', 'network-ip-report', 'network-detail-report', 'network-adapter-report', 'report-device-deploymentwarranty', 'report-device-processorram', 'report-device-diskspace', 'applicationbycompany-report'];
     if (type === 'PERFORMANCE') return ['tech-sales', 'tech-ticket', 'tech-service'];
     if (type === 'TICKETS') return ['ticket-report', 'service-report'];
     if (type === 'INCOME_ACCOUNTS') return ['income-accounts'];

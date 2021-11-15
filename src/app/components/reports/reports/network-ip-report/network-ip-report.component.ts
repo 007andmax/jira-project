@@ -350,7 +350,7 @@ export class NetworkIpReportComponent implements OnInit {
         element.InternalIPAddress || "N/A",
         element.SubnetMask || "N/A",
         element.DefaultGateway || "N/A",
-        element.ExternalIPAddress || "N/A",
+        element.ExternalIPAddress.trim() || "N/A",
       ]);
     });
     let fileName = "Network IP Report List";

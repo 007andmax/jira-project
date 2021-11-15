@@ -1,6 +1,5 @@
 import { Injectable, EventEmitter } from "@angular/core";
 import * as moment from "moment";
-import { CompaniesStateService } from "../company/companies-state.service";
 declare var canvg: any;
 @Injectable({
   providedIn: "root",
@@ -27,7 +26,7 @@ export class ReportsStateService {
   }
 
   public parseReportContent(report) {
-    if (report == "software-summary" || report == "report-device-summary" || report == "report-warranty-summary" || report == "report-antivirus-summary" || report == "network-ip-report" || report =="device-processorram-report" || report =="network-adapter-report" || report == "network-detail-report") {
+    if (report == "software-summary" || report == "report-device-summary" || report == "report-warranty-summary" || report == "report-antivirus-summary" || report == "network-ip-report" || report =="device-processorram-report" || report =="network-adapter-report" || report == "network-detail-report" || report == "applicationbyCompany-report") {
       var source = $("#product-list-ticket-data");
       var target = source.clone();
       var row = target.find("th");
@@ -61,6 +60,10 @@ export class ReportsStateService {
       if (report =="network-detail-report")
       {
         installed ="Network Detail";
+      }
+      if (report =="applicationbyCompany-report")
+      {
+        installed ="Application By Company";
       }
 
       let html =

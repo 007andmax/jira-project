@@ -29,6 +29,8 @@ export class ExcelService {
       [(typeArr = ["Device Name", "Adapter", "Link Speed", "Driver Version"])];
     } else if (type === "devicenetworkdetailreport"){
       [(typeArr = ["Device Name", "Domain", "Manf(nic)", "Type", "Mac","IP","Subnet","Gateway","Dns1","Dns2"])];
+    } else if (type === "applicationbycompanyreport"){
+      [(typeArr = ["Device Name", "Version", "Device Count"])];
     } else
       [(typeArr = ["Software Name", "Publisher", "Version", "Installed On"])];
     let csvData = this.ConvertToCSV(data, typeArr, type);
@@ -65,7 +67,8 @@ export class ExcelService {
       type === "networkIPreport"||
       type === "deviceprocessorramreport" ||
       type === "devicenetworkadapterreport" ||
-      type === "devicenetworkdetailreport"
+      type === "devicenetworkdetailreport" ||
+      type === "applicationbycompanyreport"
     ) {
       row = "S.No,";
 
@@ -83,7 +86,8 @@ export class ExcelService {
       type === "networkIPreport" ||
       type === "deviceprocessorramreport" ||
       type === "devicenetworkadapterreport" ||
-      type === "devicenetworkdetailreport"
+      type === "devicenetworkdetailreport" ||
+      type === "applicationbycompanyreport"
     ) {
       str += row + "\r\n";
     }
@@ -98,7 +102,8 @@ export class ExcelService {
         type === "networkIPreport" ||
         type === "deviceprocessorramreport" ||
         type === "devicenetworkadapterreport" ||
-        type === "devicenetworkdetailreport"
+        type === "devicenetworkdetailreport" ||
+        type === "applicationbycompanyreport"
       )
         [(line = i + 1 + "")];
       for (let index in headerList) {
@@ -114,7 +119,8 @@ export class ExcelService {
           type === "networkIPreport" ||
           type === "deviceprocessorramreport" ||
           type === "devicenetworkadapterreport" ||
-          type === "devicenetworkdetailreport"
+          type === "devicenetworkdetailreport" ||
+          type === "applicationbycompanyreport"
         ) {
           line += "," + array[i][index];
         } else {

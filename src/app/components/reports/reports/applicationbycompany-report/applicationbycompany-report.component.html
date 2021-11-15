@@ -1,0 +1,117 @@
+<div>
+    <div class="report-menu">
+        <div class="run-report-content col-md-11 left">
+            <div class="grey-dropdown form-group content select-users-list">
+                <app-drop-down
+                    [placeholder]="'All Companies'"
+                    [list]="companies"
+                    [errorMessage]="'Please select the company name'"
+                    [field]="'name'"
+                    [search]="true"
+                    [change]="true"
+                    (onSelectedItem)="selectClient($event)"
+                ></app-drop-down>
+            </div>
+            <div class="form-group content custom-width dropdown-height">
+                <app-drop-down
+                    [sort]="true"
+                    [search]="true"
+                    [change]="true"
+                    [placeholder]="'All devices'"
+                    [isDisabled]="!applicationByCompanyReport.companyId"
+                    [dropdownHeight]="'300px'"
+                    [list]="devices"
+                    (onSelectedItem)="onSelectDevice($event)"
+                ></app-drop-down>
+            </div>
+            <button
+                class="qt-btn --outline-blue qt-ml-8"
+                (click)="getReportApplicationByCompany()"
+            >
+                Get Report
+            </button>
+            <button class="qt-btn --outline-white qt-ml-8">
+                <i
+                    class="
+        icon__email-dark
+        qt-za-16 qt-sz-16 qt-bg-contain qt-mr-6
+        summaryemail
+      "
+                    (click)="sendEmail()"
+                ></i>
+            </button>
+            <button
+                class="qt-btn --outline-white qt-ml-8"
+                (click)="printPdf()"
+            >
+                <i class="icon__print qt-sz-16 qt-bg-contain qt-mr-8 summaryprint"></i>
+            </button>
+            <button
+                class="qt-btn --outline-white qt-ml-8"
+                (click)="downloadCsv()"
+            >
+                <i class="
+        icon__download
+        qt-za-16 qt-sz-16 qt-dib qt-bg-contain
+        summarydownload
+      "></i>
+            </button>
+        </div>
+        <div class="run-report-content col-md-1 right">
+            <div
+                class="header-close icon__close"
+                (click)="goToReportList()"
+            ></div>
+        </div>
+    </div>
+</div>
+<div id="product-list-ticket-data">
+    <div class="device-header">
+        <div>
+            <span>{{ clientName }}</span>
+        </div>
+        <div>
+            <span>
+                <b>{{ "Appliction By Company Report" }}</b>
+            </span>
+        </div>
+        <div>
+            <span>
+                {{ "As on" + " " + (date | date: DateFormat) }}
+            </span>
+        </div>
+    </div>
+
+    <div class="contant-area">
+        <div class="table-wrap">
+            <table class="dataTable cmn-tab-head">
+                <thead>
+                    <tr>
+                        <th
+                            class="device"
+                            (click)="onFilter('AssetNames')"
+                        >
+                            Device
+                            <span class="qt-table-modern__sorting"></span>
+                        </th>
+                        <th class="version">VERSION</th>
+                        <th class="deviceCount">DEVICE COUNT</th>
+                    </tr>
+                </thead>
+                <tbody class="applicationbycompany-report-table">
+                    <tr *ngFor="let applicationByCompany of applicationByCompanyList">
+                        <td class="device">{{applicationByCompany.AssetNames}}</td>
+                        <td class="version">
+                            {{ applicationByCompany.DisplayVersion }}
+                        </td>
+                        <td class="deviceCount">{{applicationByCompany.AssetCount}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div
+    class="loading"
+    *ngIf="loading"
+></div>
