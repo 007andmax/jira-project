@@ -95,7 +95,6 @@ export class InvoiceSettingsComponent implements OnInit {
       invoiceTerms: this.termInput,
       conditions: this.conditionInput
     });
-    console.log("this.invoiceForm", this.invoiceForm);
   }
 
   // convenience getter for easy access to form fields
@@ -297,16 +296,12 @@ export class InvoiceSettingsComponent implements OnInit {
     this.submitted = true;
 
     // stop here if form is invalid
-    console.log("this.invoiceForm", this.invoiceForm);
-    console.log("this.invoiceForm.invalid", this.invoiceForm.invalid);
     if (this.invoiceForm.invalid) {
       return;
     }
-    console.log("1");
     if (!this.invoiceForm.value.invoiceCount.trim()) {
       return;
     }
-    console.log("2");
     const objInvoice = {
       emailSettingPageNumberFormDto: {
         count: this.invoiceForm.value.invoiceCount,
