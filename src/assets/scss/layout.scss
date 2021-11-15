@@ -1158,13 +1158,13 @@ body {
         height: 40px;
         padding: 0 15px 0 24px;
       }
-      .manage-taxes .cmn-area th {
-        padding: 10px 10px 10px 6px;
+      .cmn-area th {
+        padding: 8px 10px 8px 6px;
         background-color: $gray-100;
         text-transform: uppercase;
       }
       .manage-taxes .cmn-area .rate {
-        padding: 10px 10px 10px 6px;
+        padding: 8px 10px 8px 6px;
       }
       .manage-taxes .cmn-area .action {
         padding: 0 24px 0 0;
@@ -1215,6 +1215,13 @@ body {
           border-bottom: 1px solid #edf2f6;
         }
       }
+      .tab-content {
+        .cmn-area-header__job-title,
+        .cmn-area-header__user-type {
+          padding: 8px 10px 8px 9px;
+        }
+      }
+
     }
 
     .app-invoice-tickets-page-container {
