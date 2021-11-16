@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable, Observer } from 'rxjs';
 
@@ -10,6 +10,7 @@ import { SettingService } from 'src/app/services/setting/setting.service';
 import { map } from 'rxjs/operators';
 import { SettingStateService } from 'src/app/states/setting/setting-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn.directive';
 
 declare var $;
 
@@ -46,6 +47,9 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
   deletepopup: boolean;
   userId: any;
   IdList: any;
+  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
+  @ViewChild('editBtn') editBtn: DisabledBtnDirective;
+
   constructor(
     private techUsersService: TechUsersService,
     private formBuilder: FormBuilder,
@@ -532,8 +536,10 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
         subscription: {}
       };
       this.loading = true; $(".loading").css("display", "block");
+      this.addBtn.setDisabled(true);
       this.techUsersService.createUser(objTechUser).subscribe(
         (savedTechUsre: any) => {
+          this.addBtn.setDisabled(false);
           this.toastr.success('Saved Successfully');
           this.loading = false; $(".loading").css("display", "none");
           this.create = false;
@@ -541,12 +547,15 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
           if (savedTechUsre && savedTechUsre.id) {
             this.saveUsersEmailNotifications(savedTechUsre.id);
           }
+
         },
         error => {
+          this.addBtn.setDisabled(false);
           this.create = false;
           this.loading = false; $(".loading").css("display", "none");
           const er = error.error.validationResults;
           this.toastr.error(er.techRole || 'Bad Request');
+
         }
       );
     } else {
@@ -704,11 +713,13 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       : null;
 
     this.loading = true; $(".loading").css("display", "block");
+    this.editBtn.setDisabled(true);
     this.techUsersService
       .updateTechUsers(this.selectedTechUser.id, this.selectedTechUser)
       .subscribe(
         res => {
           // this.getUsers();
+          this.editBtn.setDisabled(false);
           this.toastr.success('Updated Successfully');
           this.techUserForm.reset();
           if (this.techUserIdList) {
@@ -718,12 +729,15 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
           this.selectedTechUser = null;
           this.loading = false; $(".loading").css("display", "none");
           this.edit = false;
+
         },
         error => {
+          this.editBtn.setDisabled(false);
           this.loading = false; $(".loading").css("display", "none");
           this.edit = false;
           const er = error.error.validationResults;
           this.toastr.error(er.techRole || 'Bad Request');
+
         }
       );
 

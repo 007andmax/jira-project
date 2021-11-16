@@ -359,28 +359,6 @@
         </div>
         <!-- <div class="loading" *ngIf="loading"></div> -->
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </div>
 <!-- sidebar popup -->
 <div
@@ -593,9 +571,12 @@
         <div class="qt-df">
             <button
                 class="qt-button qt-mr-12"
-                (click)="onCreateSubmit()"
+                (onClick)="onCreateSubmit()"
+                appDisabledBtn
+                #addBtn="disabled"
             >
-                Save
+                <span *ngIf="!addBtn.isBlock()">Save</span>
+                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
             </button>
             <button
                 class="qt-button --gray"
@@ -906,9 +887,12 @@
         <div class="qt-df">
             <button
                 class="qt-button qt-mr-12"
-                (click)="onSubmit()"
+                appDisabledBtn
+                #editBtn="disabled"
+                (onClick)="onSubmit()"
             >
-                Save
+                <span *ngIf="!editBtn.isBlock()">Save</span>
+                <app-preloader-ticket *ngIf="editBtn.isBlock()"></app-preloader-ticket>
             </button>
             <button
                 class="qt-button --gray"
