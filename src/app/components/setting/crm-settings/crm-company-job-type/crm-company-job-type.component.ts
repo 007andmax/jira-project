@@ -7,6 +7,7 @@ import { ConfirmStateService } from 'src/app/components/shared/confirm/services/
 import { DELETE_CRM_INDUSTRY, DELETE_CRM_INDUSTRIES, DELETE_CRM_JOB_TYPE, DELETE_CRM_JOB_TYPIES } from 'src/app/const/confirm';
 import { CrmStateService } from 'src/app/services/crm/crm-state.service';
 import { CrmService } from 'src/app/services/crm/crm.service';
+import { CrmRealTimeService } from 'src/app/states/crm/crm-real-time.service';
 import { CrmCompanyIndustry } from '../crm-company-industry/class/crm-company-industry';
 import { CrmCompanyIndustryFilter } from '../crm-company-industry/class/crm-company-industry-filter';
 import { CrmCompanyJobType } from './class/crm-company-job-type';
@@ -26,6 +27,7 @@ export class CrmCompanyJobTypeComponent implements OnInit {
   constructor(private crmService: CrmService,
     private confirmStateService: ConfirmStateService,
     private crmStateService: CrmStateService,
+    private crmRealTimeService: CrmRealTimeService,
     public cd: ChangeDetectorRef,
     private modalService: NgbModal) { }
 
@@ -47,6 +49,19 @@ export class CrmCompanyJobTypeComponent implements OnInit {
       }
     })
     this.sub.add(getConfirm);
+    let changeCrmArray = this.crmRealTimeService.changeCrmArray.subscribe(data => {
+      if (data.action === "JOB_TYPE_SAVED") this.jobTypeList.push(new CrmCompanyJobType(data.data));
+      if (data.action === "JOB_TYPE_EDITED") {
+        let index = this.jobTypeList.findIndex(item => item.id === data.data);
+        if (index > -1) this.jobTypeList[index].onUpdate(data.data);
+      }
+      if (data.action === "JOB_TYPE_REMOVED") {
+        let index = this.jobTypeList.findIndex(item => item.id === data.data);
+        if (index > -1) this.jobTypeList.splice(index, 1);
+      }
+      this.cd.detectChanges();
+    })
+    this.sub.add(changeCrmArray);
   }
   public toggleShowAdd(data) {
     this.showAdd = data;

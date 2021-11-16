@@ -7,6 +7,7 @@ import { ConfirmStateService } from 'src/app/components/shared/confirm/services/
 import { DELETE_CRM_INDUSTRIES, DELETE_CRM_INDUSTRY } from 'src/app/const/confirm';
 import { CrmStateService } from 'src/app/services/crm/crm-state.service';
 import { CrmService } from 'src/app/services/crm/crm.service';
+import { CrmRealTimeService } from 'src/app/states/crm/crm-real-time.service';
 import { CrmCompanyIndustry } from './class/crm-company-industry';
 import { CrmCompanyIndustryFilter } from './class/crm-company-industry-filter';
 
@@ -25,6 +26,7 @@ export class CrmCompanyIndustryComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService,
     private crmStateService: CrmStateService,
     public cd: ChangeDetectorRef,
+    private crmRealTimeService: CrmRealTimeService,
     private modalService: NgbModal) { }
 
   ngOnInit() {
@@ -45,6 +47,19 @@ export class CrmCompanyIndustryComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
+    let changeCrmArray = this.crmRealTimeService.changeCrmArray.subscribe(data => {
+      if (data.action === "INDUSTRY_SAVED") this.industryList.push(new CrmCompanyIndustry(data.data));
+      if (data.action === "INDUSTRY_EDITED") {
+        let index = this.industryList.findIndex(item => item.id === data.data.id);
+        if (index > -1) this.industryList[index].onUpdate(data.data);
+      }
+      if (data.action === "INDUSTRY_REMOVED") {
+        let index = this.industryList.findIndex(item => item.id === data.data);
+        if (index > -1) this.industryList.splice(index, 1);
+      }
+      this.cd.detectChanges();
+    })
+    this.sub.add(changeCrmArray);
   }
   public toggleShowAdd(data) {
     this.showAdd = data;

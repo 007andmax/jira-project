@@ -6,9 +6,13 @@ export class CrmCompanyIndustry {
     constructor(data) {
         this.id = data.id;
         this.name = data.name;
-        this.usageCounter = data.usageCounter;
+        this.usageCounter = data.usageCounter | 0;
     }
     public onInitEdit(data) {
         this.isInitEdit = data;
+    }
+    public onUpdate(data) {
+        this.name = data.name;
+        this.usageCounter = data.usageCounter | this.usageCounter;
     }
 }
