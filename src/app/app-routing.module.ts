@@ -186,7 +186,7 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: ':company/setting/crm',
+    path: ':company/setting/crm-settings',
     component: CrmSettingsComponent,
     pathMatch: 'full',
   },
