@@ -1221,7 +1221,17 @@ body {
           padding: 8px 10px 8px 9px;
         }
       }
-
+      .add-crm-industry-container,
+      .add-crm-service-type-container,
+      .add-crm-job-title-container,
+      .add-crm-job-type-container {
+        td {
+          background-color: #f4fbff;
+        }
+      }
+      .checkbox-header {
+        width: 56px;
+      }
     }
 
     .app-invoice-tickets-page-container {
@@ -3039,7 +3049,7 @@ div#editor.angular-editor-textarea {
             margin: 0;
             left: 50%;
             top: 50%;
-            max-width: 360px;
+            max-width: 488px;
             @media (max-width: 767px) {
               width: calc(100% - 32px);
             }

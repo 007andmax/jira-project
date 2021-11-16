@@ -1146,7 +1146,7 @@ h6,
 .modal-content {
   .archive-modal .close-modal,
   .image-confirm-modal .close-modal {
-    background-image: url("/assets/img/icons/close-16.png");
+    background-image: url("/assets/img/icons/close.svg");
     position: absolute;
     //right: 45px;
     right: 24px;
@@ -1159,6 +1159,14 @@ h6,
       top: 16px;
       right: 16px;
     }
+  }
+  .disabled {
+    &:hover {
+      background-color: $white;
+    }
+  }
+  .btn-primary {
+    min-width: 140px;
   }
 }
 /* End Btn closed */
