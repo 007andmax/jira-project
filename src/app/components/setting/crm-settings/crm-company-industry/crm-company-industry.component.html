@@ -28,6 +28,7 @@
             <tbody *ngIf="!showPreloader">
                 <add-crm-company-industry
                     *ngIf="showAdd"
+                    [industryList]="industryList"
                     (onClose)="showAdd = false"
                 ></add-crm-company-industry>
                 <tr

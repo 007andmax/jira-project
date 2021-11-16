@@ -21,6 +21,7 @@
             <tbody *ngIf="!showPreloader">
                 <add-crm-company-job-type
                     *ngIf="showAdd"
+                    [jobTypeList]="jobTypeList"
                     (onClose)="showAdd = false"
                 ></add-crm-company-job-type>
                 <tr

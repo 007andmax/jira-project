@@ -7,12 +7,22 @@
     (onOutSide)="save()"
 >
     <td></td>
-    <td class="tax-name add-industry-name">
+    <td
+        class="tax-name add-industry-name"
+        [ngClass]="{'--input-error' : disableCreate}"
+    >
+        <mat-error
+            class="qt-tooltip-error"
+            *ngIf="disableCreate"
+        >
+            This industry is already occupied
+        </mat-error>
         <input
             type="text"
             class="form-input"
             placeholder="Enter Name Category"
             [(ngModel)]="name"
+            (input)="checkDublicate()"
             required
         >
     </td>

@@ -28,6 +28,7 @@
             <tbody *ngIf="!showPreloader">
                 <add-crm-company-service-type
                     *ngIf="showAdd"
+                    [serviceTypeList]="serviceTypeList"
                     (onClose)="showAdd = false"
                 ></add-crm-company-service-type>
                 <tr

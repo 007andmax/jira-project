@@ -10,6 +10,7 @@ import { CrmService } from 'src/app/services/crm/crm.service';
 import { CrmCompanyIndustry } from '../crm-company-industry/class/crm-company-industry';
 import { CrmCompanyIndustryFilter } from '../crm-company-industry/class/crm-company-industry-filter';
 import { CrmCompanyJobType } from './class/crm-company-job-type';
+import { CrmCompanyJobTypeFilter } from './class/crm-company-job-type-filter';
 
 @Component({
   selector: 'crm-company-job-type',
@@ -19,7 +20,7 @@ import { CrmCompanyJobType } from './class/crm-company-job-type';
 export class CrmCompanyJobTypeComponent implements OnInit {
   jobTypeList: Array<CrmCompanyJobType> = [];
   showAdd: boolean = false;
-  filter: CrmCompanyIndustryFilter = new CrmCompanyIndustryFilter();
+  filter: CrmCompanyJobTypeFilter = new CrmCompanyJobTypeFilter();
   showPreloader: boolean = true;
   sub: Subscription = new Subscription();
   constructor(private crmService: CrmService,
@@ -51,7 +52,7 @@ export class CrmCompanyJobTypeComponent implements OnInit {
     this.showAdd = data;
   }
   onFilter(field) {
-    //this.filter.onFilter(field, this.industryList);
+    this.filter.onFilter(field, this.jobTypeList);
   }
   onEditJobType(item) {
     if (item.isInitEdit) {
