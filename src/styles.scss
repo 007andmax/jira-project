@@ -798,8 +798,11 @@ documents-edit-info {
 }
 .archive-modal,
 .image-confirm-modal {
+  background-color: $white;
   padding: 24px;
   position: relative;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,.20);
   &.confirm-user-modal {
     h3 {
       font-weight: 400;
@@ -831,7 +834,7 @@ documents-edit-info {
       line-height: 1.4;
       color: $primary-2;
       position: relative;
-      margin: 0;
+      margin-right: 26px;
     }
     p {
       font-weight: 400;

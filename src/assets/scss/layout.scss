@@ -2952,7 +2952,6 @@ div#editor.angular-editor-textarea {
           }
           .btn-primary {
             background-color: $error;
-            background-color: $error;
             border: none;
             margin-right: 16px;
           }
@@ -2981,7 +2980,7 @@ div#editor.angular-editor-textarea {
                     border-radius: 50%;
                 }
                 .message-right {
-                    width: calc(100% - 64px);
+                    width: calc(100% - 26px);
                     h1 {
                         margin-bottom: 0;
                     }
@@ -3037,9 +3036,9 @@ div#editor.angular-editor-textarea {
         }
     }
     .modal-backdrop {
-        background-color: $primary-2;
+        background-color: rgba(54, 70, 86, 0.8);
         &.show {
-            opacity: 0.8;
+            opacity: 1;
             filter: alpha(opacity=80);
         }
     }
