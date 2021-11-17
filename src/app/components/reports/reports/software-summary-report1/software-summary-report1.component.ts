@@ -22,6 +22,7 @@ export class SoftwareSummaryReport1Component implements OnInit {
   tempararyDeviceList: any = [];
   tempararySoftwareList: any = [];
   softwareReportList: any = [];
+  temp: any = [];
   tempReport: any = [];
   tempDevice: any = [];
   companies = [];
@@ -98,6 +99,7 @@ export class SoftwareSummaryReport1Component implements OnInit {
       .subscribe((resp) => {
         this.tempReport = [];
         this.software = [];
+        this.tempDevice = [];
         if (resp.length > 0) {
           for (let i = 0; i < resp.length; i++) {
             if (resp[i].DisplayName != "") {
@@ -197,6 +199,7 @@ export class SoftwareSummaryReport1Component implements OnInit {
         );
         if (filter.length > 0) {
           this.softwareReportList = [];
+          this.tempDevice = [];
           this.softwareReportList = this.tempReport.filter(
             ((x) =>
               x.AssetNames == this.softwareSummaryReport.deviceName) &&
@@ -204,8 +207,10 @@ export class SoftwareSummaryReport1Component implements OnInit {
                 x.DisplayName ==
                 this.softwareSummaryReport.softwareSummarySoft)
           );
+          this.tempDevice = this.softwareReportList;
         } else {
           this.softwareReportList = [];
+          this.tempDevice = [];
           this.softwareReportList = this.tempReport.filter(
             ((x) =>
               x.AssetNames == this.softwareSummaryReport.deviceName) &&
@@ -213,16 +218,23 @@ export class SoftwareSummaryReport1Component implements OnInit {
                 x.Publisher ==
                 this.softwareSummaryReport.softwareSummarySoft)
           );
+          this.tempDevice = this.softwareReportList;
         }
       }
     }  else {
       if(!this.softwareSummaryReport.deviceName)
       {
-        this.softwareReportList = this.tempReport;
+        this.temp = this.tempReport;
+        this.softwareReportList = this.temp;
+      }
+      if(this.softwareSummaryReport.deviceName)
+      {
+         this.temp = this.tempReport;
+         this.softwareReportList = this.temp.filter((x)=>x.AssetNames == this.softwareSummaryReport.deviceName);
       }
       else
       {
-        this.softwareReportList = this.tempararySoftwareList;
+        this.softwareReportList = this.tempReport;
       }
       this.software = this.tempSoftware
               .map((item) => item.DisplayName)
@@ -233,36 +245,11 @@ export class SoftwareSummaryReport1Component implements OnInit {
   onSelectDevice(data) {
     this.softwareSummaryReport.setDeviceName(data ? data: null);
     if (data) {
+      if(this.softwareSummaryReport.deviceName && this.softwareSummaryReport.softwareSummarySoft)
+      {
+        this.softwareReportList = this.tempDevice.filter((x)=>x.AssetNames == this.softwareSummaryReport.deviceName);
+      }
       if (
-        this.softwareSummaryReport.deviceName &&
-        this.softwareSummaryReport.softwareSummarySoft
-      ) {
-        let filter = this.tempReport.filter(
-          ((x) => x.AssetNames == this.softwareSummaryReport.deviceName) &&
-            ((x) =>
-              x.DisplayName ==
-              this.softwareSummaryReport.softwareSummarySoft)
-        );
-        if (filter.length > 0) {
-          this.softwareReportList = [];
-          this.softwareReportList = this.tempReport.filter(
-            ((x) =>
-              x.AssetNames == this.softwareSummaryReport.deviceName) &&
-              ((x) =>
-                x.DisplayName ==
-                this.softwareSummaryReport.softwareSummarySoft)
-          );
-        } else {
-          this.softwareReportList = [];
-          this.softwareReportList = this.tempReport.filter(
-            ((x) =>
-              x.AssetNames == this.softwareSummaryReport.deviceName) &&
-              ((x) =>
-                x.Publisher ==
-                this.softwareSummaryReport.softwareSummarySoft)
-          );
-        }
-      } if (
         this.softwareSummaryReport.deviceName &&
         !this.softwareSummaryReport.softwareSummarySoft
       ) {
@@ -272,7 +259,39 @@ export class SoftwareSummaryReport1Component implements OnInit {
         this.tempararySoftwareList = this.softwareReportList;
       }
     } else {
-      this.softwareReportList = this.tempReport;
+      if (
+        !this.softwareSummaryReport.deviceName &&
+        this.softwareSummaryReport.softwareSummarySoft
+      ) {
+        let filter = this.tempReport.filter(
+            ((x) =>
+              x.DisplayName ==
+              this.softwareSummaryReport.softwareSummarySoft)
+        );
+        if (filter.length > 0) {
+          this.softwareReportList = [];
+          this.tempDevice = [];
+          this.softwareReportList = this.tempReport.filter(
+              ((x) =>
+                x.DisplayName ==
+                this.softwareSummaryReport.softwareSummarySoft)
+          );
+          this.tempDevice = this.softwareReportList;
+        } else {
+          this.softwareReportList = [];
+          this.tempDevice = [];
+          this.softwareReportList = this.tempReport.filter(
+              ((x) =>
+                x.Publisher ==
+                this.softwareSummaryReport.softwareSummarySoft)
+          );
+          this.tempDevice = this.softwareReportList;
+        }
+      }
+      else
+      {
+        this.softwareReportList = this.tempReport;
+      }
       this.devices = this.tempReport
       .map((item) => item.AssetNames)
       .filter((value, index, self) => self.indexOf(value) === index);
