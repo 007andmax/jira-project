@@ -2,48 +2,21 @@
   table {
     width: 100%;
     border-collapse: collapse;
-    .device {
-      width: 15% !important;
-      padding: 0 18px 0 18px;
+    .dns1, .dns2, .gateway, .subnet, .ip, .mac, .type, .domain, .device{
+      width:240px;
+      min-width: 240px;
+      height:40px;
       background-color: white;
-      height: 40px;
-    }
-    .domain {
-      width: 15% !important;
-      padding: 0px;
-    }
-    .manufacturer {
-      width: 20% !important;
-      padding: 0px;
-    }
-    .type {
-      width: 10% !important;
-      padding: 0px;
-    }
-    .mac {
-      width: 10% !important;
-      padding: 0px;
-    }
-    .ip {
-      width: 7% !important;
-      padding: 0px;
-    }
-    .subnet {
-      width: 7% !important;
-      padding: 0px;
-    }
-    .gateway {
-      width: 6% !important;
-      padding: 0px;
-    }
-    .dns1 {
-      width: 5% !important;
-      padding: 0px;
-    }
-    .dns1 {
-      width: 5% !important;
-      padding: 0px;
-    }
+      padding: 0 18px 0 18px;
+  }
+  .manufacturer
+  {
+    width:400px;
+    min-width:400px;
+    height:40px;
+    background-color: white;
+    padding: 0 18px 0 18px;
+  }
     thead {
       th {
         background-color: #f4f6f8 !important;

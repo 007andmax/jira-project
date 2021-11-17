@@ -1,21 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import * as moment from 'moment';
-import { ToastrService } from 'ngx-toastr';
-import { CONFIGCONSTANTS } from 'src/app/components/device/config/app-constants';
-import { CommonHttpServices } from 'src/app/components/device/_services/common_http.service';
-import { ExcelService } from 'src/app/components/device/_services/download_csv.service';
-import { AgentService } from 'src/app/services/agent/agent.service';
-import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
-import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
-import { NetworkDetailReport } from '../../class/network-detail-report';
-import { ReportSendEmailComponent } from '../../report-additional-actions/report-send-email/report-send-email.component';
-import { DeviceNetworkDetailReportFilter } from './Class/network-detail-report';
+import { Component, OnInit } from "@angular/core";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import * as moment from "moment";
+import { ToastrService } from "ngx-toastr";
+import { CONFIGCONSTANTS } from "src/app/components/device/config/app-constants";
+import { CommonHttpServices } from "src/app/components/device/_services/common_http.service";
+import { ExcelService } from "src/app/components/device/_services/download_csv.service";
+import { AgentService } from "src/app/services/agent/agent.service";
+import { CompaniesStateService } from "src/app/states/company/companies-state.service";
+import { LeftPanelStateService } from "src/app/states/left-panel/left-panel-state.service";
+import { NetworkDetailReport } from "../../class/network-detail-report";
+import { ReportSendEmailComponent } from "../../report-additional-actions/report-send-email/report-send-email.component";
+import { DeviceNetworkDetailReportFilter } from "./Class/network-detail-report";
 
 @Component({
-  selector: 'network-detail-report',
-  templateUrl: './network-detail-report.component.html',
-  styleUrls: ['./network-detail-report.component.scss']
+  selector: "network-detail-report",
+  templateUrl: "./network-detail-report.component.html",
+  styleUrls: ["./network-detail-report.component.scss"],
 })
 export class NetworkDetailReportComponent implements OnInit {
   clientName: string;
@@ -27,7 +27,8 @@ export class NetworkDetailReportComponent implements OnInit {
   loading = false;
   devices = [];
   tempararyDeviceList: any = [];
-  filter: DeviceNetworkDetailReportFilter = new DeviceNetworkDetailReportFilter();
+  filter: DeviceNetworkDetailReportFilter =
+    new DeviceNetworkDetailReportFilter();
   selectedClient = null;
   orientation: string = "LANDSCAPE";
   report: string = "network-detail-report";
@@ -44,7 +45,7 @@ export class NetworkDetailReportComponent implements OnInit {
     private commonHttpServices: CommonHttpServices,
     private toastr: ToastrService,
     private excelService: ExcelService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.clientName = "All Companies";
@@ -123,11 +124,9 @@ export class NetworkDetailReportComponent implements OnInit {
     }
   }
 
-  getReportByNetworkDetail(){
+  getReportByNetworkDetail() {}
 
-  }
-
-  sendEmail(){
+  sendEmail() {
     const modalRef = this.modalService.open(ReportSendEmailComponent, null);
     modalRef.componentInstance.selectedClient = this.selectedClient;
     modalRef.componentInstance.orientation = this.orientation;
@@ -137,7 +136,7 @@ export class NetworkDetailReportComponent implements OnInit {
     modalRef.componentInstance.accountType = this.accountType;
   }
 
-  printPdf(){
+  printPdf() {
     this.getPdfData();
   }
 
@@ -227,7 +226,7 @@ export class NetworkDetailReportComponent implements OnInit {
             <div class="reports-head" style="width:585px;text-align:center;color: #364656;float:left;margin-left:-105px;">
                   <p style="margin:0;line-height:1.2;color:#364656;font-size:16px;font-family: Arial, Helvetica, sans-serif;font-weight:600;">` +
       localStorage.getItem("currentCompanyName") +
-      ` - Device Network Deatil Report</p>
+      ` - Device Network Detail Report</p>
                   <p style="line-height:1.5;color:#364656;margin:3px 0;font-size: 13px;font-family: Arial, Helvetica, sans-serif;font-weight:400;">Summary of ` +
       this.clientName +
       ` Devices installed (` +
@@ -346,7 +345,7 @@ export class NetworkDetailReportComponent implements OnInit {
       content: html,
       id: "",
       fileName: "Device Network Detail Report",
-      orientation: "PORTRAIT",
+      orientation: "LANDSCAPE",
     };
     this.loading = true;
     this.commonHttpServices
@@ -378,7 +377,7 @@ export class NetworkDetailReportComponent implements OnInit {
     return result;
   }
 
-  downloadCsv(){
+  downloadCsv() {
     let downloadCsvList = [];
     this.networkDetailList.forEach((element) => {
       downloadCsvList.push([
@@ -402,12 +401,11 @@ export class NetworkDetailReportComponent implements OnInit {
     );
   }
 
-  goToReportList(){
+  goToReportList() {
     this.leftPanelStateService.goToState("new-reports");
   }
 
-  onFilter(field){
+  onFilter(field) {
     this.filter.onFilter(field, this.networkDetailList);
   }
-
 }
