@@ -3,6 +3,7 @@ export class ContractsBlockTimeService {
     rate: string;
     validate: boolean = true;
     validateDuplicated: boolean = true;
+    descriptionValidate: string;
     constructor(name, rate) {
         this.name = name;
         this.rate = rate;

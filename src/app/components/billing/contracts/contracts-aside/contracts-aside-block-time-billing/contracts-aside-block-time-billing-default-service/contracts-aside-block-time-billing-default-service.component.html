@@ -5,7 +5,7 @@
             class="qt-tooltip-error qt-w-auto-important"
             *ngIf="!service.validate"
         >
-            The selected service is existing on another contract with the same dates.
+            The selected service is used in the contract - "{{service.descriptionValidate}}" with the same dates.
         </mat-error>
         <mat-error
             class="qt-tooltip-error qt-w-auto-important"
