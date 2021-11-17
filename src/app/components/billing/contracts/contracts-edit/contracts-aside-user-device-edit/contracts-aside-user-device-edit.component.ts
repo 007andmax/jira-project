@@ -136,7 +136,6 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit {
             if (find) {
               item.validate = false;
               item.descriptionValidate = data[item.name];
-              console.log("item", item);
             }
           })
         }
