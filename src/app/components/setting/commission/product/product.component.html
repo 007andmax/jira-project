@@ -97,62 +97,6 @@
 </div>
 <div
     class="img-croparea deletePopup"
-    *ngIf="deletePopup"
->
-    <div class="crop-inner">
-        <div class="cropping">
-            <div class="popup-message">
-                <span class="icon-part">
-                    <img
-                        src="/html/assets/img/device/delete-red.svg"
-                        alt="delete"
-                    >
-                </span>
-                <div class="message-right">
-                    <h5 class="qt-fw-600">Delete Commission Rate</h5>
-                    <p>
-                        Are you sure you want {{category.name}} commission rate to zero?
-                    </p>
-                </div>
-                <a
-                    class="close-ico"
-                    href="javascript:;"
-                    (click)="deletePopup = false"
-                >
-                    <img
-                        src="/html/assets/img/icons/close.svg"
-                        alt="close"
-                    >
-                </a>
-            </div>
-            <div class="btn-crops">
-                <button
-                    type="button"
-                    class="btn btn-primary"
-                    (click)="deletePopup = false;removeProduct()"
-                >
-                    Yes, I am sure
-                </button>
-                <button
-                    type="button"
-                    class="btn btn-secondary"
-                    (click)="deletePopup = false"
-                >
-                    Cancel
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-
-
-
-<div
-    class="img-croparea deletePopup"
     *ngIf="confirmPopup"
 >
     <div class="crop-inner">
