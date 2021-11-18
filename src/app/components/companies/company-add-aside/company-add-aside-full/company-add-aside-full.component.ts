@@ -54,6 +54,11 @@ export class CompanyAddAsideFullComponent implements OnInit {
       this.industries = data;
     })
     this.sub.add(onGetIndustry);
+    this.allTitles = this.crmStateService.getJobTitleList().map(item => item.name);
+    let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
+      this.allTitles = data.map(item => item.name);
+    })
+    this.sub.add(onGetJobTitle);
     if (this.crmStateService.getServiceTypeList().length === 0) {
       this.crmStateService.onInitGetServiceTypeList();
     } else {
@@ -65,11 +70,9 @@ export class CompanyAddAsideFullComponent implements OnInit {
     this.sub.add(onGetServiceType);
     if (this.usersStateService.getAllUsers().length > 0) {
       this.getTehusers(this.usersStateService.getAllUsers());
-      this.getUsersTitle(this.usersStateService.getAllUsers());
     }
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.getTehusers(data);
-      this.getUsersTitle(data);
     })
     this.sub.add(getOnUsers);
     this.onCroppImage();
@@ -90,23 +93,7 @@ export class CompanyAddAsideFullComponent implements OnInit {
       }
     })
   }
-  getUsersTitle(allUsers) {
-    this.allTitles = allUsers
-      .map((user) => {
-        return user.designation;
-      })
-      .reduce((acc, title) => {
-        let index = acc.findIndex((el) => {
-          return (el || '').toLowerCase() === (title || '').toLowerCase();
-        })
-        if (index === -1 && title) {
-          acc.push(title);
-        }
-        return acc;
-      }, []).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
-        1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
 
-  }
   public uploadFileOnBrower(event) {
     if (event.target.value) {
       const file = event.target.files[0];

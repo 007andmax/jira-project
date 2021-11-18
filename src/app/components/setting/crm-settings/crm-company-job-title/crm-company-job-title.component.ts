@@ -31,12 +31,13 @@ export class CrmCompanyJobTitleComponent implements OnInit {
     private modalService: NgbModal) { }
 
   ngOnInit() {
-    this.crmService.getJobTitleList().subscribe((data: any) => {
-      console.log("data", data);
-      this.jobTitleList = data.map(item => new CrmCompanyJobTitle(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-        1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+    this.jobTitleList = this.crmStateService.getJobTitleList();
+    if (this.jobTitleList.length > 0) this.showPreloader = false;
+    let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
+      this.jobTitleList = data;
       this.showPreloader = false;
     })
+    this.sub.add(onGetJobTitle);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === DELETE_CRM_JOB_TITLE) {
@@ -48,19 +49,7 @@ export class CrmCompanyJobTitleComponent implements OnInit {
       }
     })
     this.sub.add(getConfirm);
-    let changeCrmArray = this.crmRealTimeService.changeCrmArray.subscribe(data => {
-      if (data.action === "JOB_TITLE_SAVED") this.jobTitleList.push(new CrmCompanyJobTitle(data.data));
-      if (data.action === "JOB_TITLE_EDITED") {
-        let index = this.jobTitleList.findIndex(item => item.id === data.data);
-        if (index > -1) this.jobTitleList[index] = new CrmCompanyJobTitle(data.data);
-      }
-      if (data.action === "JOB_TITLE_REMOVED") {
-        let index = this.jobTitleList.findIndex(item => item.id === data.data);
-        if (index > -1) this.jobTitleList.splice(index, 1);
-      }
-      this.cd.detectChanges();
-    })
-    this.sub.add(changeCrmArray);
+
   }
   public toggleShowAdd(data) {
     this.showAdd = data;

@@ -54,7 +54,6 @@ export class CrmCompanyServiceTypeComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
-
   }
   public toggleShowAdd(data) {
     this.showAdd = data;

@@ -27,6 +27,7 @@ import { AppService } from 'src/app/states/app/app.service';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { CrmCompanyIndustry } from '../../setting/crm-settings/crm-company-industry/class/crm-company-industry';
 import { CrmCompanyServiceType } from '../../setting/crm-settings/crm-company-service-type/class/crm-company-service-type';
+import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 
 @Component({
   selector: 'app-company-edit-aside',
@@ -87,6 +88,11 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
       this.industries = data;
     })
     this.sub.add(onGetIndustry);
+    this.allTitles = this.crmStateService.getJobTitleList().map(item => item.name);
+    let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
+      this.allTitles = data.map(item => item.name);
+    })
+    this.sub.add(onGetJobTitle);
     if (this.crmStateService.getServiceTypeList().length === 0) {
       this.crmStateService.onInitGetServiceTypeList();
     } else {
@@ -98,32 +104,15 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     this.sub.add(onGetServiceType);
     if (this.usersStateService.getAllUsers().length > 0) {
       this.getTehusers(this.usersStateService.getAllUsers());
-      this.getUsersTitle(this.usersStateService.getAllUsers());
     }
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.getTehusers(data);
-      this.getUsersTitle(data);
     })
     this.sub.add(getOnUsers);
     this.onCroppImage();
     this.onEditCompany();
   }
-  getUsersTitle(allUsers) {
-    this.allTitles = allUsers
-      .map((user) => {
-        return user.designation;
-      })
-      .reduce((acc, title) => {
-        let index = acc.findIndex((el) => {
-          return (el || '').toLowerCase() === (title || '').toLowerCase();
-        })
-        if (index === -1 && title) {
-          acc.push(title);
-        }
-        return acc;
-      }, []).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
-        1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
-  }
+
 
   getSelectedPaymentMethod() {
     let index = this.paymentMethods.findIndex(item => item.value === this.company.defaultPaymentMethod);

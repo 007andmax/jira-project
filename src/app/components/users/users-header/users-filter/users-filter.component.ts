@@ -28,10 +28,11 @@ export class UsersFilterComponent implements OnInit {
     private usersStateService: UsersStateService,) { }
 
   ngOnInit() {
-    if (this.usersStateService.getAllUsers().length > 0) this.getUsersTitle(this.usersStateService.getAllUsers());
-    let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
-      this.getUsersTitle(data);
+    this.allTitles = this.crmStateService.getJobTitleList().map(item => item.name);
+    let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
+      this.allTitles = data.map(item => item.name);
     })
+    this.sub.add(onGetJobTitle);
     if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
     let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
       this.getClientsList(data);
@@ -43,25 +44,7 @@ export class UsersFilterComponent implements OnInit {
     })
     this.sub.add(onGetIndustry);
   }
-  getUsersTitle(allUsers) {
-    this.allTitles = allUsers
-      .map((user) => {
-        return user.designation;
-      })
-      .reduce((acc, title) => {
-        let index = acc.findIndex((el) => {
-          return (el || '').toLowerCase() === (title || '').toLowerCase();
-        })
 
-        if (index === -1 && title) {
-          acc.push(title);
-        }
-
-        return acc;
-      }, []).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
-        1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
-
-  }
   public onClearAll() {
 
     if (!this.companiesDp.isDisabled) this.filter.setCompany(null);

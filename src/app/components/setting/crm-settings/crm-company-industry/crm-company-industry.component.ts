@@ -29,12 +29,6 @@ export class CrmCompanyIndustryComponent implements OnInit, OnDestroy {
     private modalService: NgbModal) { }
 
   ngOnInit() {
-    this.crmService.getIndustryList().subscribe((data: any) => {
-      console.log("data", data);
-      this.industryList = data.map(item => new CrmCompanyIndustry(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-        1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-
-    })
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === DELETE_CRM_INDUSTRY) {

@@ -1,5 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { CrmCompanyIndustry } from 'src/app/components/setting/crm-settings/crm-company-industry/class/crm-company-industry';
+import { CrmCompanyJobTitle } from 'src/app/components/setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
+import { CrmCompanyJobType } from 'src/app/components/setting/crm-settings/crm-company-job-type/class/crm-company-job-type';
 import { CrmCompanyServiceType } from 'src/app/components/setting/crm-settings/crm-company-service-type/class/crm-company-service-type';
 import { CrmService } from 'src/app/services/crm/crm.service';
 import { CrmRealTimeService } from 'src/app/states/crm/crm-real-time.service';
@@ -18,9 +20,13 @@ export class CrmStateService {
   listJobTitleForRemove = [];
   listServiceTypeForRemove = [];
   serviceTypeList: Array<CrmCompanyServiceType> = [];
+  jobTitleList: Array<CrmCompanyJobTitle> = [];
   industryList: Array<CrmCompanyIndustry> = [];
+  jobTypeList: Array<CrmCompanyJobType> = [];
   onGetIndustry: EventEmitter<any> = new EventEmitter();
   onGetServiceType: EventEmitter<any> = new EventEmitter();
+  onGetJobTitle: EventEmitter<any> = new EventEmitter();
+  onGetJobType: EventEmitter<any> = new EventEmitter();
   constructor(private crmService: CrmService,
     private crmRealTimeService: CrmRealTimeService) { }
 
@@ -30,7 +36,12 @@ export class CrmStateService {
         1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
       this.onGetIndustry.emit(this.industryList);
     })
-
+    this.crmService.getJobTitleList().subscribe((data: any) => {
+      console.log("data", data);
+      this.jobTitleList = data.map(item => new CrmCompanyJobTitle(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+        1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+      this.onGetJobTitle.emit(this.jobTitleList);
+    })
     this.crmRealTimeService.changeCrmArray.subscribe(data => {
       if (data.action === "INDUSTRY_SAVED") this.industryList.push(new CrmCompanyIndustry(data.data));
       if (data.action === "INDUSTRY_EDITED") {
@@ -41,8 +52,22 @@ export class CrmStateService {
         let index = this.industryList.findIndex(item => item.id === data.data);
         if (index > -1) this.industryList.splice(index, 1);
       }
-      this.onGetIndustry.emit(this.industryList);
+
+      if (data.action === "JOB_TITLE_SAVED") this.jobTitleList.push(new CrmCompanyJobTitle(data.data));
+      if (data.action === "JOB_TITLE_EDITED") {
+        let index = this.jobTitleList.findIndex(item => item.id === data.data);
+        if (index > -1) this.jobTitleList[index] = new CrmCompanyJobTitle(data.data);
+      }
+      if (data.action === "JOB_TITLE_REMOVED") {
+        let index = this.jobTitleList.findIndex(item => item.id === data.data);
+        if (index > -1) this.jobTitleList.splice(index, 1);
+      }
+      if (data.action === "INDUSTRY_SAVED" || data.action === "INDUSTRY_EDITED" || data.action === "INDUSTRY_REMOVED") this.onGetIndustry.emit(this.industryList);
+      if (data.action === "JOB_TITLE_SAVED" || data.action === "JOB_TITLE_EDITED" || data.action === "JOB_TITLE_REMOVED") this.onGetJobTitle.emit(this.jobTitleList);
     })
+  }
+  public getJobTitleList() {
+    return this.jobTitleList;
   }
   public getServiceTypeList() {
     return this.serviceTypeList;
@@ -66,6 +91,29 @@ export class CrmStateService {
       }
       this.onGetServiceType.emit(data);
     })
+  }
+  public onInitGetJobTypeList() {
+    this.crmService.getJobTypeList().subscribe((data: any) => {
+      console.log("data", data);
+      this.jobTypeList = data.map(item => new CrmCompanyJobType(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+        1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+      this.onGetJobType.emit(this.jobTypeList);
+    })
+    this.crmRealTimeService.changeCrmArray.subscribe(data => {
+      if (data.action === "JOB_TYPE_SAVED") this.jobTypeList.push(new CrmCompanyJobType(data.data));
+      if (data.action === "JOB_TYPE_EDITED") {
+        let index = this.jobTypeList.findIndex(item => item.id === data.data);
+        if (index > -1) this.jobTypeList[index].onUpdate(data.data);
+      }
+      if (data.action === "JOB_TYPE_REMOVED") {
+        let index = this.jobTypeList.findIndex(item => item.id === data.data);
+        if (index > -1) this.jobTypeList.splice(index, 1);
+      }
+      this.onGetJobType.emit(this.jobTypeList);
+    })
+  }
+  public getJobTypeList() {
+    return this.jobTypeList;
   }
   public getIndustryList() {
     return this.industryList;
