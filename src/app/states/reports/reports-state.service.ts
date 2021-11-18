@@ -26,7 +26,7 @@ export class ReportsStateService {
   }
 
   public parseReportContent(report) {
-    if (report == "software-summary" || report == "report-device-summary" || report == "report-warranty-summary" || report == "report-antivirus-summary" || report == "network-ip-report" || report =="device-processorram-report" || report =="network-adapter-report" || report == "network-detail-report" || report == "applicationbyCompany-report") {
+    if (report == "software-summary" || report == "report-device-summary" || report == "report-warranty-summary" || report == "report-antivirus-summary" || report == "network-ip-report" || report =="device-processorram-report" || report =="network-adapter-report" || report == "network-detail-report" || report == "applicationbyCompany-report" || report == "device-diskspace-report") {
       var source = $("#product-list-ticket-data");
       var target = source.clone();
       var row = target.find("th");
@@ -64,6 +64,10 @@ export class ReportsStateService {
       if (report =="applicationbyCompany-report")
       {
         installed ="Application By Company";
+      }
+      if (report =="device-diskspace-report")
+      {
+        installed ="Disk Space"
       }
 
       let html =

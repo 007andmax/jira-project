@@ -66,6 +66,15 @@ export class AgentService {
     this.AccessToken = data;
   }
 
+  public getDeviceDiskDriveByGuid(companyGuid) {
+    return this.http
+      .get(`${this.apiAgent}report/DeviceDiskDrive/${companyGuid}`,{
+          headers: this.getHeader(),
+          responseType: "text",
+      })
+      .pipe(map((data: string) => this.decrypt128(data, this.key)));
+  }
+
   public getDeviceProcessorRamByGuid(companyGuid) {
     return this.http
       .get(`${this.apiAgent}report/DeviceProcessorRam/${companyGuid}`,{

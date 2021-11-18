@@ -31,6 +31,8 @@ export class ExcelService {
       [(typeArr = ["Device Name", "Domain", "Manf(nic)", "Type", "Mac","IP","Subnet","Gateway","Dns1","Dns2"])];
     } else if (type === "applicationbycompanyreport"){
       [(typeArr = ["Device Name", "Version", "Device Count"])];
+    } else if (type === "devicediskspacereport"){
+      [(typeArr = ["Device Name", "Drive Letter", "Total Space","Used", "Free"])];
     } else
       [(typeArr = ["Software Name", "Publisher", "Version", "Installed On"])];
     let csvData = this.ConvertToCSV(data, typeArr, type);
@@ -68,7 +70,8 @@ export class ExcelService {
       type === "deviceprocessorramreport" ||
       type === "devicenetworkadapterreport" ||
       type === "devicenetworkdetailreport" ||
-      type === "applicationbycompanyreport"
+      type === "applicationbycompanyreport" ||
+      type === "devicediskspacereport"
     ) {
       row = "S.No,";
 
@@ -87,7 +90,8 @@ export class ExcelService {
       type === "deviceprocessorramreport" ||
       type === "devicenetworkadapterreport" ||
       type === "devicenetworkdetailreport" ||
-      type === "applicationbycompanyreport"
+      type === "applicationbycompanyreport" ||
+      type === "devicediskspacereport"
     ) {
       str += row + "\r\n";
     }
@@ -103,7 +107,8 @@ export class ExcelService {
         type === "deviceprocessorramreport" ||
         type === "devicenetworkadapterreport" ||
         type === "devicenetworkdetailreport" ||
-        type === "applicationbycompanyreport"
+        type === "applicationbycompanyreport" ||
+        type === "devicediskspacereport"
       )
         [(line = i + 1 + "")];
       for (let index in headerList) {
@@ -120,7 +125,8 @@ export class ExcelService {
           type === "deviceprocessorramreport" ||
           type === "devicenetworkadapterreport" ||
           type === "devicenetworkdetailreport" ||
-          type === "applicationbycompanyreport"
+          type === "applicationbycompanyreport" ||
+          type === "devicediskspacereport"
         ) {
           line += "," + array[i][index];
         } else {

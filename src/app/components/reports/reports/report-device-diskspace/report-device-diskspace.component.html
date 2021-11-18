@@ -103,10 +103,10 @@
                 <tbody class="device-diskspace-report-table">
                     <tr *ngFor="let deviceDiskSpace of deviceDiskSpaceList">
                         <td class="device">{{ deviceDiskSpace.Name }}</td>
-                        <td class="driveLetter">{{deviceDiskSpace.Manufacturer}}</td>
-                        <td class="totalSpace">{{ deviceDiskSpace.Model }}</td>
-                        <td class="used">{{deviceDiskSpace.ProcessorType}}</td>
-                        <td class="free">{{ deviceDiskSpace.MemorySize }}</td>
+                        <td class="driveLetter">{{deviceDiskSpace.DriveLetter}}</td>
+                        <td class="totalSpace">{{ deviceDiskSpace.size }}</td>
+                        <td class="used">{{deviceDiskSpace.UsedSpace}}</td>
+                        <td class="free">{{ deviceDiskSpace.FreeSpace }}</td>
                     </tr>
                 </tbody>
             </table>
