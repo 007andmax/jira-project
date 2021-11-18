@@ -7,6 +7,10 @@ import { SettingStateService } from "src/app/states/setting/setting-state.servic
 import { GlNumber } from "src/class/gl-number/gl-number";
 import { GlNumberStateService } from "src/app/states/gl-number/gl-number-state.service";
 import { Subscription } from "rxjs";
+import { ConfirmStateService } from "src/app/components/shared/confirm/services/confirm-state.service";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { DELETE_GL_NUMBER } from "src/app/const/confirm";
+import { ConfirmComponent } from "src/app/components/shared/confirm/confirm.component";
 declare var $: any;
 @Component({
   selector: "app-gl-number-settings",
@@ -32,6 +36,8 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
     private settingStateService: SettingStateService,
     private glNumberStateService: GlNumberStateService,
     public cd: ChangeDetectorRef,
+    private confirmStateService: ConfirmStateService,
+    private modalService: NgbModal
   ) { }
 
   /**
@@ -57,6 +63,15 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
     this.sub.add(getOnGlNumbers);
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      console.log("data", data);
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === DELETE_GL_NUMBER) {
+          this.removeGL();
+        }
+      }
+    })
+    this.sub.add(getConfirm);
 
   }
 
@@ -75,6 +90,10 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
   removeConfirm(gl: any) {
     this.gl = gl;
     this.popup = true;
+    this.confirmStateService.setConfirmAction(DELETE_GL_NUMBER);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    modalRef.componentInstance.message = `Are you sure you want to delete?`;
+
   }
 
   /**
