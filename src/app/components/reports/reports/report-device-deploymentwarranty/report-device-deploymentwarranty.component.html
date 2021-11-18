@@ -95,7 +95,7 @@
                           <span class="qt-table-modern__sorting"></span>
                       </th>
                       <th class="domain">DOMAIN</th>
-                      <th class="ipAddress">MANUFACTURER</th>
+                      <th class="manufacturer">MANUFACTURER</th>
                       <th class="subnet">SUBNET</th>
                       <th class="gateway">GATEWAY</th>
                       <th class="externalIP">EXTERNAL IP</th>
@@ -105,7 +105,7 @@
                   <tr *ngFor="let deviceDeploymentWarranty of deviceDeploymentWarrantyList">
                       <td class="device">{{ deviceDeploymentWarranty.Name }}</td>
                       <td class="domain">{{deviceDeploymentWarranty.Domain}}</td>
-                      <td class="ipAddress">{{ deviceDeploymentWarranty.InternalIPAddress }}</td>
+                      <td class="manufacturer">{{ deviceDeploymentWarranty.Manufacturer }}</td>
                       <td class="subnet">{{deviceDeploymentWarranty.SubnetMask}}</td>
                       <td class="gateway">{{ deviceDeploymentWarranty.DefaultGateway }}</td>
                       <td class="externalIP">{{ deviceDeploymentWarranty.ExternalIPAddress }}</td>
