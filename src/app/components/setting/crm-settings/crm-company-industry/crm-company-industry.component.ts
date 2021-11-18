@@ -5,9 +5,9 @@ import { catchError, map } from 'rxjs/operators';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { DELETE_CRM_INDUSTRIES, DELETE_CRM_INDUSTRY } from 'src/app/const/confirm';
-import { CrmStateService } from 'src/app/services/crm/crm-state.service';
 import { CrmService } from 'src/app/services/crm/crm.service';
 import { CrmRealTimeService } from 'src/app/states/crm/crm-real-time.service';
+import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { CrmCompanyIndustry } from './class/crm-company-industry';
 import { CrmCompanyIndustryFilter } from './class/crm-company-industry-filter';
 
@@ -26,7 +26,6 @@ export class CrmCompanyIndustryComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService,
     private crmStateService: CrmStateService,
     public cd: ChangeDetectorRef,
-    private crmRealTimeService: CrmRealTimeService,
     private modalService: NgbModal) { }
 
   ngOnInit() {
@@ -34,7 +33,7 @@ export class CrmCompanyIndustryComponent implements OnInit, OnDestroy {
       console.log("data", data);
       this.industryList = data.map(item => new CrmCompanyIndustry(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
         1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-      this.showPreloader = false;
+
     })
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
@@ -47,19 +46,13 @@ export class CrmCompanyIndustryComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
-    let changeCrmArray = this.crmRealTimeService.changeCrmArray.subscribe(data => {
-      if (data.action === "INDUSTRY_SAVED") this.industryList.push(new CrmCompanyIndustry(data.data));
-      if (data.action === "INDUSTRY_EDITED") {
-        let index = this.industryList.findIndex(item => item.id === data.data.id);
-        if (index > -1) this.industryList[index].onUpdate(data.data);
-      }
-      if (data.action === "INDUSTRY_REMOVED") {
-        let index = this.industryList.findIndex(item => item.id === data.data);
-        if (index > -1) this.industryList.splice(index, 1);
-      }
-      this.cd.detectChanges();
+    this.industryList = this.crmStateService.getIndustryList();
+    if (this.industryList.length > 0) this.showPreloader = false;
+    let onGetIndustry = this.crmStateService.onGetIndustry.subscribe(data => {
+      this.industryList = data;
+      this.showPreloader = false;
     })
-    this.sub.add(changeCrmArray);
+    this.sub.add(onGetIndustry);
   }
   public toggleShowAdd(data) {
     this.showAdd = data;

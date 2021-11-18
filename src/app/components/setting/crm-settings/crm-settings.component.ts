@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DELETE_CRM_INDUSTRIES, DELETE_CRM_JOB_TITLIES, DELETE_CRM_JOB_TYPIES, DELETE_CRM_SERVICE_TYPIES } from 'src/app/const/confirm';
-import { CrmStateService } from 'src/app/services/crm/crm-state.service';
+import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { CrmCompanyIndustryComponent } from './crm-company-industry/crm-company-industry.component';

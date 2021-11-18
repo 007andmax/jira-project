@@ -5,9 +5,9 @@ import { catchError, map } from 'rxjs/operators';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { DELETE_CRM_INDUSTRY, DELETE_CRM_INDUSTRIES, DELETE_CRM_SERVICE_TYPE, DELETE_CRM_SERVICE_TYPIES } from 'src/app/const/confirm';
-import { CrmStateService } from 'src/app/services/crm/crm-state.service';
 import { CrmService } from 'src/app/services/crm/crm.service';
 import { CrmRealTimeService } from 'src/app/states/crm/crm-real-time.service';
+import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { CrmCompanyIndustry } from '../crm-company-industry/class/crm-company-industry';
 import { CrmCompanyServiceType } from './class/crm-company-service-type';
 import { CrmCompanyServiceTypeFilter } from './class/crm-company-service-type-filter';
@@ -32,12 +32,17 @@ export class CrmCompanyServiceTypeComponent implements OnInit, OnDestroy {
     private modalService: NgbModal) { }
 
   ngOnInit() {
-    this.crmService.getServiceTypeList().subscribe((data: any) => {
-      console.log("data", data);
-      this.serviceTypeList = data.map(item => new CrmCompanyServiceType(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-        1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+    if (this.crmStateService.getServiceTypeList().length === 0) {
+      this.crmStateService.onInitGetServiceTypeList();
+    } else {
+      this.serviceTypeList = this.crmStateService.getServiceTypeList();
+      this.showPreloader = false;
+    }
+    let onGetServiceType = this.crmStateService.onGetServiceType.subscribe(data => {
+      this.serviceTypeList = data;
       this.showPreloader = false;
     })
+    this.sub.add(onGetServiceType);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === DELETE_CRM_SERVICE_TYPE) {
@@ -49,19 +54,7 @@ export class CrmCompanyServiceTypeComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
-    let changeCrmArray = this.crmRealTimeService.changeCrmArray.subscribe(data => {
-      if (data.action === "SERVICE_TYPE_SAVED") this.serviceTypeList.push(new CrmCompanyServiceType(data.data));
-      if (data.action === "SERVICE_TYPE_EDITED") {
-        let index = this.serviceTypeList.findIndex(item => item.id === data.data);
-        if (index > -1) this.serviceTypeList[index].onUpdate(data.data);
-      }
-      if (data.action === "SERVICE_TYPE_REMOVED") {
-        let index = this.serviceTypeList.findIndex(item => item.id === data.data);
-        if (index > -1) this.serviceTypeList.splice(index, 1);
-      }
-      this.cd.detectChanges();
-    })
-    this.sub.add(changeCrmArray);
+
   }
   public toggleShowAdd(data) {
     this.showAdd = data;

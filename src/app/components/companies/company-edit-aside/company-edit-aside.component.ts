@@ -24,6 +24,9 @@ import { CompanyTagsComponent } from '../company-tags/company-tags.component';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 import { CompanyAssociateComponent } from '../../company-dashboard/company-dash-associate/company-associate/company-associate.component';
 import { AppService } from 'src/app/states/app/app.service';
+import { CrmStateService } from 'src/app/states/crm/crm-state.service';
+import { CrmCompanyIndustry } from '../../setting/crm-settings/crm-company-industry/class/crm-company-industry';
+import { CrmCompanyServiceType } from '../../setting/crm-settings/crm-company-service-type/class/crm-company-service-type';
 
 @Component({
   selector: 'app-company-edit-aside',
@@ -33,12 +36,12 @@ import { AppService } from 'src/app/states/app/app.service';
 export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   opened = false;
   company: CompanyProfile = new CompanyProfile();
-  industries: Array<CompanyIndustry> = [];
+  industries: Array<CrmCompanyIndustry> = [];
   selectedTechLead: ItemFilterPerson;
   companyTypes = [new CompanySetting('Client', 'CLIENT'), new CompanySetting('Lead', 'LEAD'), new CompanySetting('Vendor', 'VENDOR'), new CompanySetting('Supplier', 'SUPPLIER')];
   phoneTypes = ['Office', 'Mobile', 'Fax'];
   paymentTerms = [new CompanySetting('COD', 0), new CompanySetting('7 days', 7), new CompanySetting('15 days', 15), new CompanySetting('30 days', 30)];
-  serviceTypes = [new CompanySetting('Hourly', 'HOURLY'), new CompanySetting('Block time', 'BLOCK_TIME'), new CompanySetting('Semi managed', 'SEMI_MANAGED'), new CompanySetting('Fully managed', 'FULLY_MANAGED')];
+  serviceTypes: Array<CrmCompanyServiceType> = [];
   paymentMethods = [new CompanySetting('Cash', 'CASH'),
   new CompanySetting('Cheque', 'CHEQUE'),
   new CompanySetting('Debit Card', 'DEBIT_CARD'),
@@ -74,14 +77,25 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     private modalImageCropperStateService: ModalImageCropperStateService,
     private tagsState: CompanyTagsStateService,
     public appService: AppService,
+    private crmStateService: CrmStateService,
     public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.company.fullVersion();
-    this.industries = this.companiesStateService.getIndustries();
-    this.companiesStateService.onGetIndustries.subscribe(data => {
+    this.industries = this.crmStateService.getIndustryList();
+    let onGetIndustry = this.crmStateService.onGetIndustry.subscribe(data => {
       this.industries = data;
     })
+    this.sub.add(onGetIndustry);
+    if (this.crmStateService.getServiceTypeList().length === 0) {
+      this.crmStateService.onInitGetServiceTypeList();
+    } else {
+      this.serviceTypes = this.crmStateService.getServiceTypeList();
+    }
+    let onGetServiceType = this.crmStateService.onGetServiceType.subscribe(data => {
+      this.serviceTypes = data;
+    })
+    this.sub.add(onGetServiceType);
     if (this.usersStateService.getAllUsers().length > 0) {
       this.getTehusers(this.usersStateService.getAllUsers());
       this.getUsersTitle(this.usersStateService.getAllUsers());
@@ -158,7 +172,6 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     this.company = new CompanyProfile();
     this.companyTypes.forEach(item => item.selected = false);
     this.paymentTerms.forEach(item => item.selected = false);
-    this.serviceTypes.forEach(item => item.selected = false);
     this.subscriptions.forEach(item => item.selected = false);
     this.selectedTechLead = null;
     this.validate = new CompanyValdiate();
@@ -177,7 +190,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
       this.companyTimeZoneState.onEditMode(this.company.addresses[0].timeZone);
       let indexTerms = this.paymentTerms.findIndex(item => item.value === this.company.paymentTerms);
       if (indexTerms > -1) this.onSelectPaymentTerms(this.paymentTerms[indexTerms]);
-      let indexServiceType = this.serviceTypes.findIndex(item => item.value === this.company.serviceType);
+      let indexServiceType = this.serviceTypes.findIndex(item => item.name === this.company.serviceType);
       if (indexServiceType > -1) this.onSelectServiceTypes(this.serviceTypes[indexServiceType]);
       let indexPersone = this.listPersons.findIndex(item => item.id === this.company.techLeadId);
       if (indexPersone > -1) this.selectedTechLead = this.listPersons[indexPersone];
@@ -220,7 +233,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     this.company.paymentTerms = item.value;
   }
   public onSelectServiceTypes(item) {
-    this.company.serviceType = item.value;
+    this.company.serviceType = item.name;
   }
   onCheckEmail() {
     if (this.company.contacts[0].primaryEmail && this.company.contacts[0].primaryEmail.length > 0) this.onCheckValidPrimaryEmail();
@@ -332,7 +345,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     return null;
   }
   getSelectedServiceType() {
-    let index = this.serviceTypes.findIndex(item => item.value === this.company.serviceType);
+    let index = this.serviceTypes.findIndex(item => item.name === this.company.serviceType);
     if (index > -1) return this.serviceTypes[index];
     return "";
   }

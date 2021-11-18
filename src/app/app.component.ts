@@ -23,6 +23,7 @@ import { PAGE_DEVICE, PAGE_MAIN } from './const/app';
 import { TagsStateService } from './states/tags/tags-state.service';
 import { DocumentsStateService } from './states/documents/documents-state.service';
 import { AppStateService } from './states/app/app-state.service';
+import { CrmStateService } from './states/crm/crm-state.service';
 
 
 /**
@@ -76,7 +77,8 @@ export class AppComponent implements OnInit {
     private modalService: NgbModal,
     private router: Router,
     public cd: ChangeDetectorRef,
-    private appStateService: AppStateService
+    private appStateService: AppStateService,
+    private crmStateService: CrmStateService,
 
   ) { }
 
@@ -103,6 +105,7 @@ export class AppComponent implements OnInit {
     this.constantsStateService.onInit();
     this.tagsStateService.onInit();
     this.documentsStateService.onInit();
+    this.crmStateService.onInit();
     //  this.userService.getCurrentUser();
 
     this.websocketService.initializeWebSocketConnection();

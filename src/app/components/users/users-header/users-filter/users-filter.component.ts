@@ -1,7 +1,9 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { CrmCompanyIndustry } from 'src/app/components/setting/crm-settings/crm-company-industry/class/crm-company-industry';
 import { CompanyIndustry } from 'src/app/interfaces/company/company-industry';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { DropDownComponent } from '../../../shared/drop-down/drop-down.component';
 import { UserFilter } from '../../class/user-filter';
@@ -16,12 +18,13 @@ export class UsersFilterComponent implements OnInit {
   @ViewChild('companiesDp') companiesDp: DropDownComponent;
   @ViewChild('industriesDp') industriesDp: DropDownComponent;
   companies = [];
-  industries: Array<CompanyIndustry> = [];
+  industries: Array<CrmCompanyIndustry> = [];
   allTitles: Array<string> = [];
   public filter: UserFilter = new UserFilter();
   sub: Subscription = new Subscription();
   @Output() changeCountFilter = new EventEmitter<any>();
   constructor(private companiesState: CompaniesStateService,
+    private crmStateService: CrmStateService,
     private usersStateService: UsersStateService,) { }
 
   ngOnInit() {
@@ -34,10 +37,11 @@ export class UsersFilterComponent implements OnInit {
       this.getClientsList(data);
     })
     this.sub.add(getOnCompanies);
-    this.industries = this.companiesState.getIndustries();
-    this.companiesState.onGetIndustries.subscribe(data => {
+    this.industries = this.crmStateService.getIndustryList();
+    let onGetIndustry = this.crmStateService.onGetIndustry.subscribe(data => {
       this.industries = data;
     })
+    this.sub.add(onGetIndustry);
   }
   getUsersTitle(allUsers) {
     this.allTitles = allUsers
