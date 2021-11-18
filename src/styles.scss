@@ -2835,7 +2835,7 @@ app-quotes-item {
   .company-time-zone-drop-down {
     .report-caret-icon {
       position: absolute;
-      right: 4px;
+      right: 12px;
       top: calc(50% - 2px);
 
       @media (max-width: 767px) {
@@ -2867,7 +2867,7 @@ app-quotes-item {
   //}
 
   .light-dropdown .report-caret-icon {
-    right: 15px;
+    right: 12px;
   }
 
   .details-divider {
@@ -4568,6 +4568,14 @@ app-ticket-edit-aside-devices {
     margin-bottom: 8px;
     @extend %body-m-sb;
     font-weight: 700;
+  }
+  .create-product__col {
+    label {
+      margin-bottom: 0;
+    }
+  }
+  .add-tax-dropdown form {
+    float: none;
   }
 }
 

@@ -595,7 +595,8 @@ textarea {
   }
 
   .app-drop-down__right-icon {
-    right: 15px;
+    //right: 15px; // TODO check arrow
+    right: 0;
 
     @media (max-width: 767px) {
       right: 0;

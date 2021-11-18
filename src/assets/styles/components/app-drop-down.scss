@@ -29,7 +29,8 @@ app-drop-down {
 .app-drop-down {
   &__right-icon {
     position: absolute;
-    right: 10px;
+    //right: 10px; // TODO check arrow
+    right: 0;
     transform: translateY(50%);
   }
 
@@ -73,5 +74,22 @@ app-drop-down {
       }
     }
 
+  }
+}
+.users-page__aside {
+  app-drop-down {
+    form {
+      float: unset;
+    }
+  }
+ .qt-input-block {
+   label {
+     margin-bottom: 8px;
+     line-height: 20px;
+   }
+ }
+  .report-caret-icon {
+    position: absolute;
+    right: 12px;
   }
 }
