@@ -174,8 +174,8 @@
         right: 4px;
 
         @media (max-width: 767px) {
-          top: calc(50% - 15px) !important;
-          right: 13px;
+            top: calc(50% - 15px) !important;
+            right: 13px;
         }
     }
 
@@ -438,7 +438,7 @@
                     padding-bottom: 24px;
 
                     @media (max-width: 767px) {
-                      padding: 0 16px 24px 16px;
+                        padding: 0 16px 24px 16px;
                     }
                     .small-title {
                         font-size: 11px;
@@ -460,7 +460,7 @@
                         align-items: flex-start;
                         justify-content: flex-start;
                         @media (max-width: 767px) {
-                          padding: 16px;
+                            padding: 16px;
                         }
                         .other-info-col {
                             width: 100%;
@@ -513,7 +513,7 @@
                         padding: 16px 0;
                         align-items: flex-start;
                         @media (max-width: 767px) {
-                          padding: 16px;
+                            padding: 16px;
                         }
                         .small-title {
                             margin-bottom: 12px;
@@ -573,7 +573,7 @@
                         align-items: flex-start;
                         border-bottom: none;
                         @media (max-width: 767px) {
-                          padding: 16px;
+                            padding: 16px;
                         }
                         .small-title {
                             width: 100%;
@@ -630,9 +630,9 @@
                         right: 16px;
                     }
                     @media (max-width: 767px) {
-                      position: static;
-                      width: 100%;
-                      padding: 0 16px 16px;
+                        position: static;
+                        width: 100%;
+                        padding: 0 16px 16px;
                     }
                     .btn {
                         margin: 0 4px;
@@ -2039,9 +2039,9 @@
                         padding: 70px 16px 58px;
                     }
                     &.company-dashboard-add-tag {
-                      @media (max-width: 767px) {
-                        padding: 32px 16px 16px;
-                      }
+                        @media (max-width: 767px) {
+                            padding: 32px 16px 16px;
+                        }
                     }
                 }
                 .modal-header {
@@ -2084,32 +2084,6 @@
                         z-index: 1;
                     }
                 }
-            }
-        }
-    }
-}
-
-.ui-timepicker-wrapper {
-    width: 120px !important;
-    max-height: 176px;
-    @include border-radius(4px);
-    @include box-shadow(0, 2px, 20px, 10px rgba(0, 0, 0, 0.05));
-    border: solid 1px $gray-400;
-    background-color: $white;
-    overflow-x: hidden;
-    .ui-timepicker-list {
-        width: 100%;
-        padding: 8px 0;
-        li {
-            font-size: 13px;
-            line-height: 1.54;
-            letter-spacing: normal;
-            color: $gray-800;
-            font-weight: 400;
-            text-transform: uppercase;
-            &:hover {
-                background-color: rgba(237, 242, 246, 0.5);
-                color: $gray-800;
             }
         }
     }
