@@ -4,6 +4,7 @@
 
 
 
+
 <div class="page-container">
     <div class="page-insider manage-taxes">
         <div class="heading">
@@ -118,6 +119,7 @@
 
 
 
+
         <div class="cmn-area">
             <div class="data-table-wrap">
                 <table
@@ -170,6 +172,7 @@
                                         alt="Remove"
                                     >
                                 </a>
+
 
 
 
@@ -277,62 +280,5 @@
         </div>
         <!-- <div class="loading" *ngIf="loading"></div> -->
     </div>
-
-
-
-
-
 </div>
-
-
-
-
-
 <!-- tag delete popup -->
-<div
-    class="img-croparea deletePopup"
-    *ngIf="popup"
->
-    <div class="crop-inner">
-        <div class="cropping">
-            <div class="popup-message">
-                <span class="icon-part">
-                    <img
-                        src="/html/assets/img/device/delete-red.svg"
-                        alt="delete"
-                    >
-                </span>
-                <div class="message-right">
-                    <h5 class="qt-fw-600">Delete Tax</h5>
-                    <p>Are you sure you want to delete?</p>
-                </div>
-                <a
-                    class="close-ico"
-                    href="javascript:;"
-                    (click)="popup = false"
-                >
-                    <img
-                        src="/html/assets/img/icons/close.svg"
-                        alt="close"
-                    >
-                </a>
-            </div>
-            <div class="btn-crops">
-                <button
-                    type="button"
-                    class="btn btn-primary"
-                    (click)="removeTax()"
-                >
-                    Yes, I am sure
-                </button>
-                <button
-                    type="button"
-                    class="btn btn-secondary"
-                    (click)="popup = false"
-                >
-                    Cancel
-                </button>
-            </div>
-        </div>
-    </div>
-</div>

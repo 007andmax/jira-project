@@ -381,6 +381,7 @@
 
 
 
+
 </div>
 <!-- sidebar popup -->
 <div
@@ -959,53 +960,6 @@
                     type="button"
                     class="btn btn-secondary"
                     (click)="popup = false"
-                >
-                    Cancel
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-<div
-    class="img-croparea deletePopup"
-    *ngIf="deletepopup"
->
-    <div class="crop-inner">
-        <div class="cropping">
-            <div class="popup-message">
-                <span class="icon-part">
-                    <img
-                        src="/html/assets/img/device/delete-red.svg"
-                        alt="delete"
-                    >
-                </span>
-                <div class="message-right">
-                    <h1>Delete User</h1>
-                    <p>Are you sure you want to delete?</p>
-                </div>
-                <a
-                    class="close-ico"
-                    href="javascript:;"
-                    (click)="deletepopup = false"
-                >
-                    <img
-                        src="/html/assets/img/icons/close.svg"
-                        alt="close"
-                    >
-                </a>
-            </div>
-            <div class="btn-crops">
-                <button
-                    type="button"
-                    class="btn btn-primary"
-                    (click)="removeTechUser()"
-                >
-                    Yes, I am sure
-                </button>
-                <button
-                    type="button"
-                    class="btn btn-secondary"
-                    (click)="deletepopup = false"
                 >
                     Cancel
                 </button>

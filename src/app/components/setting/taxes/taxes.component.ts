@@ -4,6 +4,11 @@ import { ToastrService } from "ngx-toastr";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { map } from "rxjs/operators";
 import { SettingStateService } from "src/app/states/setting/setting-state.service";
+import { ConfirmStateService } from "../../shared/confirm/services/confirm-state.service";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { DELETE_TAX } from "src/app/const/confirm";
+import { ConfirmComponent } from "../../shared/confirm/confirm.component";
+import { Subscription } from "rxjs";
 declare var $: any;
 @Component({
   selector: "app-taxes-settings",
@@ -20,12 +25,14 @@ export class TaxesSettingsComponent implements OnInit, OnDestroy {
   submitted = false;
   taxForm: FormGroup;
   tax: any;
-  popup: boolean;
+  sub: Subscription = new Subscription();
   constructor(
     private taxesService: TaxesService,
     private toastrService: ToastrService,
     private formBuilder: FormBuilder,
-    private settingStateService: SettingStateService
+    private settingStateService: SettingStateService,
+    private confirmStateService: ConfirmStateService,
+    private modalService: NgbModal,
   ) { }
 
   /**
@@ -50,10 +57,20 @@ export class TaxesSettingsComponent implements OnInit, OnDestroy {
 
     this.getTaxes();
     this.settingStateService.setComponentName('TaxesSettingsComponent');
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      console.log("data", data);
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === DELETE_TAX) {
+          this.removeTax();
+        }
+      }
+    })
+    this.sub.add(getConfirm);
   }
 
   ngOnDestroy() {
     $('body').removeClass('ng7');
+    this.sub.unsubscribe();
   }
 
   // convenience getter for easy access to form fields
@@ -135,7 +152,9 @@ export class TaxesSettingsComponent implements OnInit, OnDestroy {
 
   removeConfirm(tax: any) {
     this.tax = tax;
-    this.popup = true;
+    this.confirmStateService.setConfirmAction(DELETE_TAX);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    modalRef.componentInstance.message = `Are you sure you want to delete?`;
   }
 
   /**
@@ -149,7 +168,6 @@ export class TaxesSettingsComponent implements OnInit, OnDestroy {
       .pipe(
         map(res => {
           this.loading = false; $(".loading").css("display", "none");
-          this.popup = false;
           this.taxes = this.taxes.filter(t => t.id !== this.tax.id);
           this.toastrService.success(`${this.tax.name} is Deleted Successfully.`);
         })

@@ -48,6 +48,25 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+
+    this.allTitles = this.crmStateService.getJobTitleList().map(item => item.name);
+    let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
+      this.allTitles = data.map(item => item.name);
+    })
+    this.sub.add(onGetJobTitle);
+    this.onCroppImage();
+    this.usersStateService.getOpenAside().subscribe(data => {
+      this.getJobTypeList();
+      this.opened = true;
+      this.companySubscriptionState.onEditMode(this.user.subscription);
+    })
+    if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
+    let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
+      this.getClientsList(data);
+    })
+
+  }
+  getJobTypeList() {
     if (this.crmStateService.getJobTypeList().length === 0) {
       this.crmStateService.onInitGetJobTypeList();
     } else {
@@ -57,22 +76,6 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
       this.userTypes = data;
     })
     this.sub.add(onGetJobType);
-    this.allTitles = this.crmStateService.getJobTitleList().map(item => item.name);
-    let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
-      this.allTitles = data.map(item => item.name);
-    })
-    this.sub.add(onGetJobTitle);
-    this.onCroppImage();
-    this.usersStateService.getOpenAside().subscribe(data => {
-
-      this.opened = true;
-      this.companySubscriptionState.onEditMode(this.user.subscription);
-    })
-    if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
-    let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
-      this.getClientsList(data);
-    })
-
   }
   getClientsList(data) {
     this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?

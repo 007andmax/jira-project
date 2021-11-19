@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Observable, Observer } from 'rxjs';
+import { Observable, Observer, Subscription } from 'rxjs';
 
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { ToastrService } from 'ngx-toastr';
@@ -10,6 +10,10 @@ import { SettingService } from 'src/app/services/setting/setting.service';
 import { map } from 'rxjs/operators';
 import { SettingStateService } from 'src/app/states/setting/setting-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { DELETE_TECH_USER } from 'src/app/const/confirm';
+import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 
 declare var $;
 
@@ -43,9 +47,9 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
   cropAvatar: any;
   fileAvatar: any = null; // return result when first time image upload
   popup: boolean;
-  deletepopup: boolean;
   userId: any;
   IdList: any;
+  sub: Subscription = new Subscription();
   constructor(
     private techUsersService: TechUsersService,
     private formBuilder: FormBuilder,
@@ -54,6 +58,8 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     private settingStateService: SettingStateService,
     public cd: ChangeDetectorRef,
     private companiesStateService: CompaniesStateService,
+    private confirmStateService: ConfirmStateService,
+    private modalService: NgbModal,
   ) {
 
     if (this.companiesStateService.getCurrentCompany()) this.currentCompany(this.companiesStateService.getCurrentCompany());
@@ -98,6 +104,15 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     this.getUsers();
     this.getRoleNames();
     this.settingStateService.setComponentName('TechUsersComponent');
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      console.log("data", data);
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === DELETE_TECH_USER) {
+          this.removeTechUser();
+        }
+      }
+    })
+    this.sub.add(getConfirm);
   }
 
   ngAfterViewInit(): void { }
@@ -327,7 +342,9 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
 
   removeUserConfirm(techuser: any) {
     this.userId = techuser;
-    this.deletepopup = true;
+    this.confirmStateService.setConfirmAction(DELETE_TECH_USER);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    modalRef.componentInstance.message = `Are you sure you want to delete?`;
     this.cd.detectChanges();
   }
 
@@ -344,7 +361,6 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
         .pipe(
           map(archiveUser => {
             this.loading = false; $(".loading").css("display", "none");
-            this.deletepopup = false;
             // deleted techuser.
             // if (this.techUsers.find((x: any) => x.id === this.userId.id)) {
             //   this.techUsers.splice(
@@ -755,6 +771,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     $('body').removeClass('ng7');
+    this.sub.unsubscribe();
     // Do not forget to unsubscribe the event
   }
 

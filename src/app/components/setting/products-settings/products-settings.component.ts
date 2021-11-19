@@ -88,16 +88,25 @@ export class ProductsSettingsComponent implements OnInit, OnDestroy {
       );
   }
   onRemoveCategoryProduct(id) {
-    this.productService.removeCategory(id).subscribe(data => {
+    this.productService.removeCategory(id).pipe(map((res) => res),
+      catchError(error => of(undefined)))
+      .subscribe(
+        () => {
 
-    })
+        },
+        error => {
+        }
+      )
   }
   onEditCategory(item) {
     if (item.isInitEdit) {
       if (item.length === 0) return;
-      this.productService.editCategory(item.id, item.name).subscribe(data => {
-        item.onInitEdit(false);
-      })
+      this.productService.editCategory(item.id, item.name).pipe(map((res) => res),
+        catchError(error => of(undefined)))
+        .subscribe(
+          () => {
+            item.onInitEdit(false);
+          })
     }
   }
   removeCategoriesStatus() {

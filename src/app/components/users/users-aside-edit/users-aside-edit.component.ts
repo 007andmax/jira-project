@@ -55,15 +55,6 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
-    if (this.crmStateService.getJobTypeList().length === 0) {
-      this.crmStateService.onInitGetJobTypeList();
-    } else {
-      this.userTypes = this.crmStateService.getJobTypeList();
-    }
-    let onGetJobType = this.crmStateService.onGetJobType.subscribe(data => {
-      this.userTypes = data;
-    })
-    this.sub.add(onGetJobType);
     this.allTitles = this.crmStateService.getJobTitleList().map(item => item.name);
     let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
       this.allTitles = data.map(item => item.name);
@@ -72,6 +63,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     this.onCroppImage();
     this.usersStateService.getOpenEditAside().subscribe(data => {
       this.opened = true;
+      this.getJobTypeList();
       this.user.onEdit(this.usersStateService.getuserForEdit());
       this.companyTags.setSelectedTag(this.user.tags);
       this.selectedUserType = this.userTypes.find(item => item.name === this.user.role);
@@ -86,6 +78,17 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
   }
   public onChangeTags(tags) {
     this.user.setTags(tags);
+  }
+  getJobTypeList() {
+    if (this.crmStateService.getJobTypeList().length === 0) {
+      this.crmStateService.onInitGetJobTypeList();
+    } else {
+      this.userTypes = this.crmStateService.getJobTypeList();
+    }
+    let onGetJobType = this.crmStateService.onGetJobType.subscribe(data => {
+      this.userTypes = data;
+    })
+    this.sub.add(onGetJobType);
   }
   getClientsList(data) {
     this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
