@@ -57,7 +57,6 @@ export class PermissionManageService {
       'MANAGE_PRODUCTS',
       'VIEW_PRODUCT_COST',
       'MANAGE_SERVICES',
-      'VIEW_ACCOUNTING_SETTINGS',
       'DELETE_SERVICE_AGREEMENTS',
       'VIEW_SERVICE_AGREEMENTS',
       'VIEW_ACCOUNTING_DASHBOARD'
@@ -86,7 +85,11 @@ export class PermissionManageService {
       'VIEW_EMAIL_SETTINGS',
       'VIEW_TAXES_SETTINGS',
       'VIEW_EMAIL_TEMPLATES_SETTINGS',
-      'VIEW_TAGS_SETTINGS'
+      'VIEW_TAGS_SETTINGS',
+      'VIEW_TICKET_SETTINGS',
+      'VIEW_PRODUCT_CATEGORY_SETTINGS',
+      'VIEW_CRM_SETTINGS',
+      'VIEW_ACCOUNTING_SETTINGS'
     ],
     Documents: [
       'VIEW_DOCUMENT',
