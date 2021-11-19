@@ -65,12 +65,14 @@
     <li
         [ngClass]="{'--active':activePage === 'crm-settings'}"
         (click)="goToState('crm-settings')"
+        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_CRM_SETTINGS')"
     >
         CRM Settings
     </li>
     <li
         [ngClass]="{'--active':activePage === 'ticket-settings'}"
         (click)="goToState('ticket-settings')"
+        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TICKET_SETTINGS')"
     >
         Ticket Settings
     </li>
@@ -83,12 +85,13 @@
     <li
         [ngClass]="{'--active':activePage === 'invoice-ticket-component'}"
         (click)="goToState('invoice-ticket-component')"
+        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_ACCOUNTING_SETTINGS')"
     >
         Accounting
     </li>
     <li
         [ngClass]="{'--active':activePage === 'products-settings'}"
-        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TAGS_SETTINGS')"
+        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_PRODUCT_CATEGORY_SETTINGS')"
         (click)="goToState('products-settings')"
     >
         Products

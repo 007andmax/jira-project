@@ -62,6 +62,11 @@ import { TicketSettingsPageComponent } from './components/setting/ticket-setting
 import { ProductsSettingsComponent } from './components/setting/products-settings/products-settings.component';
 import { AccountingSettingsComponent } from './components/setting/invoice-tickets/accounting-settings.component';
 import { CrmSettingsComponent } from './components/setting/crm-settings/crm-settings.component';
+import { PermissionAccountingSettingsService } from './components/setting/invoice-tickets/permission-accounting-settings.service';
+import { PermissionManageTagsService } from './components/setting/manage-tags/permission-manage-tags.service';
+import { PermissionTicketSettingsService } from './components/setting/ticket-settings-page/permission-ticket-settings.service';
+import { PermissionProductsSettingsService } from './components/setting/products-settings/permission-products-settings.service';
+import { PermissionCrmSettingsService } from './components/setting/crm-settings/permission-crm-settings.service';
 
 const routes: Routes = [
 
@@ -132,13 +137,14 @@ const routes: Routes = [
     path: ':company/setting/tags',
     component: ManageTagsComponent,
     pathMatch: 'full',
+    canActivate: [PermissionManageTagsService]
 
   },
   {
     path: ':company/setting/products-settings',
     component: ProductsSettingsComponent,
     pathMatch: 'full',
-
+    canActivate: [PermissionProductsSettingsService]
   },
   {
     path: ':company/setting/companyprofile',
@@ -164,6 +170,7 @@ const routes: Routes = [
     path: ':company/setting/ticket-settings',
     component: TicketSettingsPageComponent,
     pathMatch: 'full',
+    canActivate: [PermissionTicketSettingsService]
   },
   {
     path: ':company/setting/permission',
@@ -184,11 +191,13 @@ const routes: Routes = [
     path: ':company/setting/accounting',
     component: AccountingSettingsComponent,
     pathMatch: 'full',
+    canActivate: [PermissionAccountingSettingsService]
   },
   {
     path: ':company/setting/crm-settings',
     component: CrmSettingsComponent,
     pathMatch: 'full',
+    canActivate: [PermissionCrmSettingsService]
   },
   {
     path: ':company/setting/commission',
