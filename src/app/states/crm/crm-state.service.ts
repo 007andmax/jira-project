@@ -77,7 +77,7 @@ export class CrmStateService {
       console.log("data", data);
       this.serviceTypeList = data.map(item => new CrmCompanyServiceType(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
         1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-      this.onGetServiceType.emit(data)
+      this.onGetServiceType.emit(this.serviceTypeList)
     })
     this.crmRealTimeService.changeCrmArray.subscribe(data => {
       if (data.action === "SERVICE_TYPE_SAVED") this.serviceTypeList.push(new CrmCompanyServiceType(data.data));
@@ -89,7 +89,7 @@ export class CrmStateService {
         let index = this.serviceTypeList.findIndex(item => item.id === data.data);
         if (index > -1) this.serviceTypeList.splice(index, 1);
       }
-      this.onGetServiceType.emit(data);
+      this.onGetServiceType.emit(this.serviceTypeList);
     })
   }
   public onInitGetJobTypeList() {

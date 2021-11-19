@@ -479,6 +479,15 @@ import { CrmCompanyServiceTypeComponent } from './components/setting/crm-setting
 import { AddCrmCompanyServiceTypeComponent } from './components/setting/crm-settings/crm-company-service-type/add-crm-company-service-type/add-crm-company-service-type.component';
 import { CrmCompanyJobTypeComponent } from './components/setting/crm-settings/crm-company-job-type/crm-company-job-type.component';
 import { AddCrmCompanyJobTypeComponent } from './components/setting/crm-settings/crm-company-job-type/add-crm-company-job-type/add-crm-company-job-type.component';
+import { PermissionCrmSettingsService } from './components/setting/crm-settings/permission-crm-settings.service';
+import { PermissionEmailSettingService } from './components/setting/email-setting/permission-email-setting.service';
+import { PermissionEmailTempleteService } from './components/setting/email-templete/permission-email-templete.service';
+import { PermissionAccountingSettingsService } from './components/setting/invoice-tickets/permission-accounting-settings.service';
+import { PermissionManageTagsService } from './components/setting/manage-tags/permission-manage-tags.service';
+import { PermissionProductsSettingsService } from './components/setting/products-settings/permission-products-settings.service';
+import { PermissionTaxesSettingsService } from './components/setting/taxes/permission-taxes-settings.service';
+import { PermissionsTechUsersService } from './components/setting/tech-users/permissions-tech-users.service';
+import { PermissionTicketSettingsService } from './components/setting/ticket-settings-page/permission-ticket-settings.service';
 
 
 declare var $: any;
@@ -983,6 +992,15 @@ declare var $: any;
       multi: true,
     },
     PermissionDasnboardBillingService,
+    PermissionManageTagsService,
+    PermissionProductsSettingsService,
+    PermissionsTechUsersService,
+    PermissionEmailSettingService,
+    PermissionTaxesSettingsService,
+    PermissionTicketSettingsService,
+    PermissionEmailTempleteService,
+    PermissionAccountingSettingsService,
+    PermissionCrmSettingsService
   ],
   bootstrap: [AppComponent]
 })

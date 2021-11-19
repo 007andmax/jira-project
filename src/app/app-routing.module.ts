@@ -67,6 +67,10 @@ import { PermissionManageTagsService } from './components/setting/manage-tags/pe
 import { PermissionTicketSettingsService } from './components/setting/ticket-settings-page/permission-ticket-settings.service';
 import { PermissionProductsSettingsService } from './components/setting/products-settings/permission-products-settings.service';
 import { PermissionCrmSettingsService } from './components/setting/crm-settings/permission-crm-settings.service';
+import { PermissionsTechUsersService } from './components/setting/tech-users/permissions-tech-users.service';
+import { PermissionEmailSettingService } from './components/setting/email-setting/permission-email-setting.service';
+import { PermissionTaxesSettingsService } from './components/setting/taxes/permission-taxes-settings.service';
+import { PermissionEmailTempleteService } from './components/setting/email-templete/permission-email-templete.service';
 
 const routes: Routes = [
 
@@ -155,16 +159,19 @@ const routes: Routes = [
     path: ':company/setting/techUsers',
     component: TechUsersComponent,
     pathMatch: 'full',
+    canActivate: [PermissionsTechUsersService]
   },
   {
     path: ':company/setting/emailSetting',
     component: EmailSettingComponent,
     pathMatch: 'full',
+    canActivate: [PermissionEmailSettingService]
   },
   {
     path: ':company/setting/taxes',
     component: TaxesSettingsComponent,
     pathMatch: 'full',
+    canActivate: [PermissionTaxesSettingsService]
   },
   {
     path: ':company/setting/ticket-settings',
@@ -181,6 +188,7 @@ const routes: Routes = [
     path: ':company/setting/emailTemplete',
     component: EmailTempleteComponent,
     pathMatch: 'full',
+    canActivate: [PermissionEmailTempleteService]
   },
   {
     path: ':company/setting/integration',
