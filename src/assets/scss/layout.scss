@@ -299,10 +299,8 @@ body {
         font-weight: 600;
         font-size: 13px;
         font-style: normal;
-        line-height: 1.4;
-        letter-spacing: -0.3px;
-        // color: $primary-2;
-        margin: 0 0 20px 0;
+        line-height: 20px;
+        margin: 0 0 8px 0; // TODO check property
         text-transform: capitalize;
     }
     .form-input {
@@ -480,7 +478,7 @@ body {
 
     form {
         width: 100%;
-        float: left;
+        //float: left; // TODO check property
         position: relative;
         .form-row {
             float: left;
@@ -499,8 +497,7 @@ body {
             line-height: 1.54;
             letter-spacing: normal;
             text-transform: capitalize;
-            margin-bottom: 10px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             display: flex;
             -webkit-display: flex;
             justify-content: space-between;

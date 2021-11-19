@@ -2823,10 +2823,6 @@ app-quotes-item {
   }
 }
 .new-companies-content__modal {
-  .app-drop-down__title {
-    margin-bottom: 8px;
-    //line-height: 24px;
-  }
   .icn-product-save {
     position: absolute;
     top: calc(50% - 4px) !important;
@@ -2834,9 +2830,6 @@ app-quotes-item {
   }
   .company-time-zone-drop-down {
     .report-caret-icon {
-      position: absolute;
-      right: 12px;
-      top: calc(50% - 2px);
 
       @media (max-width: 767px) {
         right: 15px;
@@ -4573,9 +4566,6 @@ app-ticket-edit-aside-devices {
     label {
       margin-bottom: 0;
     }
-  }
-  .add-tax-dropdown form {
-    float: none;
   }
 }
 

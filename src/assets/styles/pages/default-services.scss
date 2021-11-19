@@ -144,23 +144,11 @@
 }
 // add aside
 .default-services-page__aside {
-  .qt-input-block label {
-    margin-bottom: 8px;
-  }
   .qt-checkbox {
     margin-bottom: 0;
   }
   .add-tax-dropdown label .control-indicator {
     top: 2px;
-  }
-  .qt-aside-modern__content form {
-    float: none;
-  }
-  .app-drop-down__right-icon {
-    i {
-      right: 12px;
-      position: absolute;
-    }
   }
   .add-tax-btn {
     line-height: 1;
