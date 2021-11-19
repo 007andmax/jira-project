@@ -39,6 +39,7 @@ export class User {
     selected: boolean = false;
     tags: Array<Tag> = [];
     jobDescription: string;
+    jobType: string;
     constructor(data = null) {
         if (data) {
             for (const key in data) {

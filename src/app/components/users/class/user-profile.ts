@@ -21,6 +21,7 @@ export class UserProfile {
     companyId: string;
     tags: Array<Tag> = [];
     jobDescription: string;
+    jobType: string;
     constructor() {
         this.subscription = {
             invoice: false, ticket: true, ticketManager: false
@@ -75,6 +76,9 @@ export class UserProfile {
     }
     public setRole(data) {
         this.role = data;
+    }
+    public setJobType(data) {
+        this.jobType = data;
     }
     public getRole() {
         return this.role;

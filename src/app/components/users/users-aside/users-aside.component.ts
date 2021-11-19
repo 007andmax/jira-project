@@ -133,7 +133,7 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
   }
   onSelectRole(data) {
     this.selectedUserType = data;
-    this.user.setRole(data.name);
+    this.user.setJobType(data.name);
   }
   onChangeFistname() {
     this.validate.checkValidFirstName(this.user.firstName);

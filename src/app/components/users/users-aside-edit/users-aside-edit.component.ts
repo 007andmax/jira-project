@@ -66,7 +66,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
       this.getJobTypeList();
       this.user.onEdit(this.usersStateService.getuserForEdit());
       this.companyTags.setSelectedTag(this.user.tags);
-      this.selectedUserType = this.userTypes.find(item => item.name === this.user.role);
+      this.selectedUserType = this.userTypes.find(item => item.name === this.user.jobType);
       this.validate.addPhoneNumbers(this.user.phoneNumbers);
       this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.user.companyId);
       this.companySubscriptionState.onEditMode(this.user.subscription);
@@ -147,7 +147,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
   }
   onSelectRole(data) {
     this.selectedUserType = data;
-    this.user.setRole(data.name);
+    this.user.setJobType(data.name);
   }
   onChangeFistname() {
     this.validate.checkValidFirstName(this.user.firstName);
