@@ -64,9 +64,10 @@ export class CrmCompanyServiceTypeComponent implements OnInit, OnDestroy {
   onEditServiceType(item) {
     if (item.isInitEdit) {
       if (item.length === 0) return;
-      this.crmService.editServiceType(item.id, item.name).subscribe(data => {
-        item.onInitEdit(false);
-      })
+      this.crmService.editServiceType(item.id, item.name).pipe(map((res) => res),
+        catchError(error => of(undefined))).subscribe(data => {
+          item.onInitEdit(false);
+        })
     }
   }
   onRemoveServiceTypies() {

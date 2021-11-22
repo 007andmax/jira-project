@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Subscription } from 'rxjs';
+import { of, Subscription } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { StatusColor } from 'src/app/components/tickets/class/status-color';
@@ -83,9 +84,10 @@ export class TicketsStatusComponent implements OnInit, OnDestroy {
   onEditTicketStatus(item) {
     if (item.isInitEdit) {
       if (item.name.length === 0) return;
-      this.ticketsService.editStatus(item.getDataForEdit(item.name, item.color)).subscribe(data => {
-        item.onInitEdit(false);
-      })
+      this.ticketsService.editStatus(item.getDataForEdit(item.name, item.color)).pipe(map((res) => res),
+        catchError(error => of(undefined))).subscribe(data => {
+          item.onInitEdit(false);
+        })
     }
   }
   editColor(i, item) {
@@ -95,12 +97,13 @@ export class TicketsStatusComponent implements OnInit, OnDestroy {
   onAddTicketStatus() {
     if (this.addStatus.name.length === 0 || !this.addStatusBtn.getInit()) return;
     this.addStatusBtn.setInit(false);
-    this.ticketsService.addStatus(this.addStatus.name, this.addStatus.color).subscribe(data => {
-      this.showAddStatus = false;
-      this.addStatus = new TicketStatus();
-    }, err => {
-      setTimeout(() => this.addStatusBtn.setInit(true), 2000);
-    })
+    this.ticketsService.addStatus(this.addStatus.name, this.addStatus.color).pipe(map((res) => res),
+      catchError(error => of(undefined))).subscribe(data => {
+        this.showAddStatus = false;
+        this.addStatus = new TicketStatus();
+      }, err => {
+        setTimeout(() => this.addStatusBtn.setInit(true), 2000);
+      })
   }
   onSelect(event, item) {
     if (event.target.checked) {
