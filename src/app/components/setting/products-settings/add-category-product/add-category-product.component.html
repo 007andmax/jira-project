@@ -23,6 +23,7 @@
             placeholder="Enter Name Category"
             [(ngModel)]="name"
             (input)="checkDublicateCategory()"
+            (keyup)="onKeyUp($event)"
             required
         >
     </td>

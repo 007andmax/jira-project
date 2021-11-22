@@ -54,7 +54,7 @@ export class UserProfile {
         this.companyId = user.company.id;
         this.tags = user.tags;
         this.jobDescription = user.jobDescription;
-
+        this.jobType = user.jobType;
     }
     public editLogo(data) {
         this.avatar = data;

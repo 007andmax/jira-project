@@ -40,4 +40,7 @@ export class AddCrmCompanyIndustryComponent implements OnInit {
         }
       );
   }
+  onKeyUp(event) {
+    if (event.keyCode === 13) this.save();
+  }
 }

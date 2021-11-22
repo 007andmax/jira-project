@@ -104,6 +104,7 @@ export class UsersComponent implements OnInit {
         }
         const userIndex = this.users.findIndex((item) => item.id === data.data.id);
         if (userIndex > -1) this.users[userIndex] = new User(data.data);
+        console.log("this.users[userIndex]", this.users[userIndex]);
 
         if (!this.showArchivedUsers && data.action === 'USER_ARCHIVED') {
           const userIndex = this.users.findIndex((item) => item.id === data.data.id);

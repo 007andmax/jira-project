@@ -46,6 +46,7 @@
                             class="form-input"
                             placeholder="Enter Name Status"
                             [(ngModel)]="addStatus.name"
+                            (keyup)="onKeyUp($event)"
                             maxlength="20"
                         >
                     </td>

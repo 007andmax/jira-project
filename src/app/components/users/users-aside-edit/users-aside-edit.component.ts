@@ -69,8 +69,8 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
       this.getJobTypeList();
       this.user.onEdit(this.usersStateService.getuserForEdit());
       this.companyTags.setSelectedTag(this.user.tags);
-      this.selectedUserType = this.userTypes.find(item => item.name === this.user.jobType);
-      this.selectedUserTitle = this.allTitles.find(item => item === this.user.designation);
+      this.selectedUserType = this.userTypes.find(item => item.name == this.user.jobType);
+      this.selectedUserTitle = this.allTitles.find(item => item == this.user.designation);
       this.validate.addPhoneNumbers(this.user.phoneNumbers);
       this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.user.companyId);
       this.companySubscriptionState.onEditMode(this.user.subscription);
@@ -91,6 +91,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     }
     let onGetJobType = this.crmStateService.onGetJobType.subscribe(data => {
       this.userTypes = data;
+      if (!this.selectedUserType && this.opened) this.selectedUserType = this.userTypes.find(item => item.name == this.user.jobType);
       if (this.jobTypeDp) this.jobTypeDp.reset(this.userTypes);
     })
     this.sub.add(onGetJobType);

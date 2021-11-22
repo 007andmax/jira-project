@@ -94,6 +94,9 @@ export class TicketsStatusComponent implements OnInit, OnDestroy {
     item.color = i;
     item.onInitEdit(true);
   }
+  onKeyUp(event) {
+    if (event.keyCode === 13) this.onAddTicketStatus();
+  }
   onAddTicketStatus() {
     if (this.addStatus.name.length === 0 || !this.addStatusBtn.getInit()) return;
     this.addStatusBtn.setInit(false);
