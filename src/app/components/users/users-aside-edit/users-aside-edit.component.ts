@@ -42,7 +42,8 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
   userTypes: Array<CrmCompanyJobType> = [];
   sub: Subscription = new Subscription();
   @ViewChild('companyTags') companyTags: CompanyTagsComponent;
-  @ViewChild('designationDp') designationDp: DropDownComponent;
+  @ViewChild('jobTitleDp') jobTitleDp: DropDownComponent;
+  @ViewChild('jobTypeDp') jobTypeDp: DropDownComponent;
   constructor(private imageCropperStateService: ImageCropperStateService, private usersStateService: UsersStateService,
     private usersAsideService: UsersAsideService,
     private usersService: UsersService,
@@ -58,6 +59,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     this.allTitles = this.crmStateService.getJobTitleList().map(item => item.name);
     let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
       this.allTitles = data.map(item => item.name);
+      this.jobTitleDp.reset(this.allTitles);
     })
     this.sub.add(onGetJobTitle);
     this.onCroppImage();
@@ -87,6 +89,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     }
     let onGetJobType = this.crmStateService.onGetJobType.subscribe(data => {
       this.userTypes = data;
+      this.jobTypeDp.reset(this.userTypes);
     })
     this.sub.add(onGetJobType);
   }
@@ -142,7 +145,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     this.validate.checkValidPhoneNumber(i, this.user.phoneNumbers[i].number);
 
   }
-  onSelectDesignation(data) {
+  onSelectJobTitle(data) {
     this.user.setDesignation(data);
   }
   onSelectRole(data) {
@@ -224,7 +227,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     this.user = new UserProfile();
     this.validate = new UserValidate();
     this.companiesState.onInitClear();
-    this.designationDp.clearWithOutChanges();
+    this.jobTitleDp.clearWithOutChanges();
     if (!this.cd['destroyed']) {
       this.cd.detectChanges();
     }

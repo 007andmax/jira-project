@@ -59,7 +59,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   @ViewChild('companyTags') companyTags: CompanyTagsComponent;
   @ViewChild('addresstext') addresstext: any;
   @ViewChild('clientType') clientType: DropDownComponent;
-  @ViewChild('designation') designation: DropDownComponent;
+  @ViewChild('jobTitleDp') jobTitleDp: DropDownComponent;
   @ViewChild('paymentTerm') paymentTerm: DropDownComponent;
   @ViewChild('paymentMethod') paymentMethod: DropDownComponent;
   @ViewChild('serviceType') serviceType: DropDownComponent;
@@ -100,6 +100,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     }
     let onGetServiceType = this.crmStateService.onGetServiceType.subscribe(data => {
       this.serviceTypes = data;
+      this.serviceType.reset(this.serviceTypes);
     })
     this.sub.add(onGetServiceType);
     if (this.usersStateService.getAllUsers().length > 0) {
@@ -119,7 +120,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     if (index > -1) return this.paymentMethods[index];
     return null;
   }
-  onSelectDesignation(data) {
+  onSelectJobTitle(data) {
     this.company.contacts[0].designation = data;
   }
   private getPlaceAutocomplete() {
@@ -165,7 +166,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     this.selectedTechLead = null;
     this.validate = new CompanyValdiate();
     this.clientType.clearWithOutChanges();
-    this.designation.clearWithOutChanges();
+    this.jobTitleDp.clearWithOutChanges();
     this.paymentTerm.clearWithOutChanges();
     this.paymentMethod.clearWithOutChanges();
     this.serviceType.clearWithOutChanges();
@@ -222,7 +223,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     this.company.paymentTerms = item.value;
   }
   public onSelectServiceTypes(item) {
-    this.company.serviceType = item.name;
+    this.company.serviceType = (item) ? item.name : null;
   }
   onCheckEmail() {
     if (this.company.contacts[0].primaryEmail && this.company.contacts[0].primaryEmail.length > 0) this.onCheckValidPrimaryEmail();

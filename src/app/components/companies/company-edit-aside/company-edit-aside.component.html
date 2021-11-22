@@ -182,17 +182,17 @@
         </div>
         <div class="col-md-6">
             <app-drop-down
-                #designation
+                #jobTitleDp
                 [class]="['light-dropdown', 'qt-select-input-40']"
-                [placeholder]="'Select Designation'"
+                [placeholder]="'Select Job title'"
                 [editItem]="(company.contacts[0].designation) ? company.contacts[0].designation : null"
                 [list]="allTitles"
                 [search]="true"
                 [change]="true"
-                [title]="'Designation'"
+                [title]="'Job title'"
                 [maxlength]="30"
                 [add]="true"
-                (onSelectedItem)="onSelectDesignation($event)"
+                (onSelectedItem)="onSelectJobTitle($event)"
             >
             </app-drop-down>
         </div>

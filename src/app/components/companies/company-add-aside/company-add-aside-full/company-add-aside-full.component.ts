@@ -16,6 +16,7 @@ import { CompanyIndustry } from 'src/app/interfaces/company/company-industry';
 import { CrmCompanyIndustry } from 'src/app/components/setting/crm-settings/crm-company-industry/class/crm-company-industry';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { CrmCompanyServiceType } from 'src/app/components/setting/crm-settings/crm-company-service-type/class/crm-company-service-type';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 
 @Component({
   selector: 'company-add-aside-full',
@@ -39,6 +40,7 @@ export class CompanyAddAsideFullComponent implements OnInit {
   listPersons: Array<ItemFilterPerson> = [];
   @Input() validate: CompanyValdiate = new CompanyValdiate();
   @Input() company: CompanyProfile = new CompanyProfile();
+  @Input() serviceTypeDp: DropDownComponent;
   sub: Subscription = new Subscription();
   constructor(
     private usersStateService: UsersStateService,
@@ -66,6 +68,7 @@ export class CompanyAddAsideFullComponent implements OnInit {
     }
     let onGetServiceType = this.crmStateService.onGetServiceType.subscribe(data => {
       this.serviceTypes = data;
+      this.serviceTypeDp.reset(this.serviceTypes);
     })
     this.sub.add(onGetServiceType);
     if (this.usersStateService.getAllUsers().length > 0) {
@@ -202,7 +205,7 @@ export class CompanyAddAsideFullComponent implements OnInit {
   public onChangeFirstName() {
     this.validate.checkValidFirstname(this.company.contacts[0].firstName);
   }
-  onSelectDesignation(data) {
+  onSelectJobTitle(data) {
     this.company.contacts[0].designation = data;
   }
   public onChangePrimaryEmail() {
@@ -221,7 +224,7 @@ export class CompanyAddAsideFullComponent implements OnInit {
     this.company.defaultPaymentMethod = item.value;
   }
   public onSelectServiceTypes(item) {
-    this.company.serviceType = item.name;
+    this.company.serviceType = (item) ? item.name : null;
   }
   public onSelectTechLead(event) {
     this.company.techLeadId = (event) ? event.id : null;

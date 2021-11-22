@@ -95,13 +95,14 @@
             </div>
             <div class="qt-w50">
                 <app-drop-down
-                    [title]="'Designation'"
-                    [placeholder]="'Select Designation'"
+                    #jobTitleDp
+                    [title]="'Job title'"
+                    [placeholder]="'Select Job title'"
                     [list]="allTitles"
                     [search]="true"
                     [change]="true"
                     [add]="true"
-                    (onSelectedItem)="onSelectDesignation($event)"
+                    (onSelectedItem)="onSelectJobTitle($event)"
                 ></app-drop-down>
             </div>
         </div>
@@ -276,6 +277,7 @@
             </div>
             <div class="qt-w50">
                 <app-drop-down
+                    #jobTypeDp
                     [title]="'User Type'"
                     [field]="'name'"
                     [placeholder]="'Select User Type'"

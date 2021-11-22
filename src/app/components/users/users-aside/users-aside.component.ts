@@ -16,6 +16,8 @@ import { TitleListType } from '../../tickets/tickets/tickets-header/class/title-
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { Subscription } from 'rxjs';
 import { CrmCompanyJobType } from '../../setting/crm-settings/crm-company-job-type/class/crm-company-job-type';
+import { Input } from 'hammerjs';
+import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 
 @Component({
   selector: 'app-users-aside',
@@ -34,6 +36,8 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
   selectedUserType: CrmCompanyJobType;
   userTypes: Array<CrmCompanyJobType> = [];
   phoneTypes = ['Office', 'Mobile', 'Fax'];
+  @ViewChild('jobTypeDp') jobTypeDp: DropDownComponent;
+  @ViewChild('jobTitleDp') jobTitleDp: DropDownComponent;
   sub: Subscription = new Subscription();
   constructor(private imageCropperStateService: ImageCropperStateService,
     private usersStateService: UsersStateService,
@@ -52,6 +56,7 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
     this.allTitles = this.crmStateService.getJobTitleList().map(item => item.name);
     let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
       this.allTitles = data.map(item => item.name);
+      this.jobTitleDp.reset(this.allTitles);
     })
     this.sub.add(onGetJobTitle);
     this.onCroppImage();
@@ -74,6 +79,7 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
     }
     let onGetJobType = this.crmStateService.onGetJobType.subscribe(data => {
       this.userTypes = data;
+      this.jobTypeDp.reset(this.userTypes);
     })
     this.sub.add(onGetJobType);
   }
@@ -117,18 +123,15 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
   }
   onCheckValidPrimaryEmail() {
     this.usersService.checkValidPrimaryEmail(this.user.primaryEmail, this.user.companyId).subscribe((data: any) => {
-
       this.validate.setExistPrimaryContactEmail(data.value);
       this.cd.detectChanges();
     })
   }
   onCheckPhoneNumber(i) {
     this.validate.checkValidPhoneNumber(i, this.user.phoneNumbers[i].number);
-
   }
 
-  onSelectDesignation(data) {
-
+  onSelectJobTitle(data) {
     this.user.setDesignation(data);
   }
   onSelectRole(data) {

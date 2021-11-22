@@ -55,7 +55,7 @@ export class CrmStateService {
 
       if (data.action === "JOB_TITLE_SAVED") this.jobTitleList.push(new CrmCompanyJobTitle(data.data));
       if (data.action === "JOB_TITLE_EDITED") {
-        let index = this.jobTitleList.findIndex(item => item.id === data.data);
+        let index = this.jobTitleList.findIndex(item => item.id === data.data.id);
         if (index > -1) this.jobTitleList[index] = new CrmCompanyJobTitle(data.data);
       }
       if (data.action === "JOB_TITLE_REMOVED") {
@@ -82,7 +82,7 @@ export class CrmStateService {
     this.crmRealTimeService.changeCrmArray.subscribe(data => {
       if (data.action === "SERVICE_TYPE_SAVED") this.serviceTypeList.push(new CrmCompanyServiceType(data.data));
       if (data.action === "SERVICE_TYPE_EDITED") {
-        let index = this.serviceTypeList.findIndex(item => item.id === data.data);
+        let index = this.serviceTypeList.findIndex(item => item.id === data.data.id);
         if (index > -1) this.serviceTypeList[index].onUpdate(data.data);
       }
       if (data.action === "SERVICE_TYPE_REMOVED") {
@@ -102,7 +102,7 @@ export class CrmStateService {
     this.crmRealTimeService.changeCrmArray.subscribe(data => {
       if (data.action === "JOB_TYPE_SAVED") this.jobTypeList.push(new CrmCompanyJobType(data.data));
       if (data.action === "JOB_TYPE_EDITED") {
-        let index = this.jobTypeList.findIndex(item => item.id === data.data);
+        let index = this.jobTypeList.findIndex(item => item.id === data.data.id);
         if (index > -1) this.jobTypeList[index].onUpdate(data.data);
       }
       if (data.action === "JOB_TYPE_REMOVED") {
