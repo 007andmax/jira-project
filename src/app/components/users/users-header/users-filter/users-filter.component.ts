@@ -31,8 +31,7 @@ export class UsersFilterComponent implements OnInit {
     this.allTitles = this.crmStateService.getJobTitleList().map(item => item.name);
     let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
       this.allTitles = data.map(item => item.name);
-      this.titlesDp.reset(this.allTitles);
-      console.log("this.allTitles", this.allTitles);
+      if (this.titlesDp) this.titlesDp.reset(this.allTitles);
     })
     this.sub.add(onGetJobTitle);
     if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());

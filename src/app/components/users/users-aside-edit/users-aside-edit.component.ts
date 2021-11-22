@@ -39,6 +39,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
   validate: UserValidate = new UserValidate();
   phoneTypes = ['Office', 'Mobile', 'Fax'];
   selectedUserType: CrmCompanyJobType;
+  selectedUserTitle: string;
   userTypes: Array<CrmCompanyJobType> = [];
   sub: Subscription = new Subscription();
   @ViewChild('companyTags') companyTags: CompanyTagsComponent;
@@ -59,7 +60,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     this.allTitles = this.crmStateService.getJobTitleList().map(item => item.name);
     let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
       this.allTitles = data.map(item => item.name);
-      this.jobTitleDp.reset(this.allTitles);
+      if (this.jobTitleDp) this.jobTitleDp.reset(this.allTitles);
     })
     this.sub.add(onGetJobTitle);
     this.onCroppImage();
@@ -69,6 +70,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
       this.user.onEdit(this.usersStateService.getuserForEdit());
       this.companyTags.setSelectedTag(this.user.tags);
       this.selectedUserType = this.userTypes.find(item => item.name === this.user.jobType);
+      this.selectedUserTitle = this.allTitles.find(item => item === this.user.designation);
       this.validate.addPhoneNumbers(this.user.phoneNumbers);
       this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.user.companyId);
       this.companySubscriptionState.onEditMode(this.user.subscription);
@@ -89,7 +91,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     }
     let onGetJobType = this.crmStateService.onGetJobType.subscribe(data => {
       this.userTypes = data;
-      this.jobTypeDp.reset(this.userTypes);
+      if (this.jobTypeDp) this.jobTypeDp.reset(this.userTypes);
     })
     this.sub.add(onGetJobType);
   }
@@ -146,6 +148,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
 
   }
   onSelectJobTitle(data) {
+    this.selectedUserTitle = data;
     this.user.setDesignation(data);
   }
   onSelectRole(data) {
@@ -227,7 +230,10 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     this.user = new UserProfile();
     this.validate = new UserValidate();
     this.companiesState.onInitClear();
+    this.selectedUserTitle = null;
+    this.selectedUserType = null;
     this.jobTitleDp.clearWithOutChanges();
+    this.jobTypeDp.clearWithOutChanges();
     if (!this.cd['destroyed']) {
       this.cd.detectChanges();
     }

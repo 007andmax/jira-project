@@ -56,7 +56,7 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
     this.allTitles = this.crmStateService.getJobTitleList().map(item => item.name);
     let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
       this.allTitles = data.map(item => item.name);
-      this.jobTitleDp.reset(this.allTitles);
+      if (this.jobTitleDp) this.jobTitleDp.reset(this.allTitles);
     })
     this.sub.add(onGetJobTitle);
     this.onCroppImage();
@@ -79,7 +79,7 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
     }
     let onGetJobType = this.crmStateService.onGetJobType.subscribe(data => {
       this.userTypes = data;
-      this.jobTypeDp.reset(this.userTypes);
+      if (this.jobTypeDp) this.jobTypeDp.reset(this.userTypes);
     })
     this.sub.add(onGetJobType);
   }

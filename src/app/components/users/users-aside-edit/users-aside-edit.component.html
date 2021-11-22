@@ -102,7 +102,7 @@
                     [search]="true"
                     [change]="true"
                     [add]="true"
-                    [editItem]="(user.designation) ? user.designation : null"
+                    [editItem]="selectedUserTitle"
                     (onSelectedItem)="onSelectJobTitle($event)"
                 ></app-drop-down>
             </div>
@@ -281,9 +281,9 @@
             <div class="qt-w50">
                 <app-drop-down
                     #jobTypeDp
-                    [title]="'User Type'"
+                    [title]="'Job Type'"
                     [field]="'name'"
-                    [placeholder]="'Select User Type'"
+                    [placeholder]="'Select Job Type'"
                     [list]="userTypes"
                     [editItem]="selectedUserType"
                     [isBlockClear]="true"

@@ -100,7 +100,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     }
     let onGetServiceType = this.crmStateService.onGetServiceType.subscribe(data => {
       this.serviceTypes = data;
-      this.serviceType.reset(this.serviceTypes);
+      if (this.serviceType) this.serviceType.reset(this.serviceTypes);
     })
     this.sub.add(onGetServiceType);
     if (this.usersStateService.getAllUsers().length > 0) {

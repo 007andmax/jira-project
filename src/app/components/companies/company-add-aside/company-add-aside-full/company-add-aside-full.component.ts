@@ -68,7 +68,7 @@ export class CompanyAddAsideFullComponent implements OnInit {
     }
     let onGetServiceType = this.crmStateService.onGetServiceType.subscribe(data => {
       this.serviceTypes = data;
-      this.serviceTypeDp.reset(this.serviceTypes);
+      if (this.serviceTypeDp) this.serviceTypeDp.reset(this.serviceTypes);
     })
     this.sub.add(onGetServiceType);
     if (this.usersStateService.getAllUsers().length > 0) {
