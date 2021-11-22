@@ -1,4 +1,4 @@
-@import './src/assets/styles/variable';
+@import "./src/assets/styles/variable";
 
 .quotes-page {
   .quotes-company-filter {
@@ -17,7 +17,6 @@
     width: 23%;
     max-width: 216px;
   }
-
 
   .quotes-table {
     td {
@@ -75,7 +74,7 @@
       padding-right: 8px;
     }
     td.quotes-table__number {
-     font-weight: $fw-medium;
+      font-weight: $fw-medium;
       color: $primary-1;
       padding-top: 14px;
     }
@@ -101,7 +100,6 @@
     td.quotes-table__status {
       padding-top: 12px;
     }
-
 
     &__valid {
       max-width: 100px;
@@ -161,7 +159,7 @@
       bottom: 85px !important;
     }
 
-    app-invoice-regular-note .dropdown-menu{
+    app-invoice-regular-note .dropdown-menu {
       min-height: 190px;
       app-invoice-select-note {
         min-width: 100%;
@@ -206,7 +204,8 @@
       margin-right: -20px;
     }
     .new-quote-table {
-      td, th {
+      td,
+      th {
         padding-left: 10px;
         padding-right: 10px;
       }
@@ -252,8 +251,7 @@
         &__col-unit-price,
         &__col-markup,
         &__col-sales-price,
-        &__col-quantify
-        {
+        &__col-quantify {
           padding-left: 0;
           padding-right: 0;
         }
@@ -263,7 +261,6 @@
         padding-left: 10px !important;
         padding-right: 10px !important;
       }
-
     }
 
     app-product-list-quote {
@@ -311,7 +308,6 @@
         max-width: 541px;
       }
     }
-
 
     .aside-body-container {
       height: 100%;
@@ -376,14 +372,14 @@
       opacity: 1;
     }
     .mat-chip-remove:before {
-      content: '';
+      content: "";
       position: absolute;
       top: 1px;
       right: -4px;
       width: 18px;
       height: 18px;
       background-size: contain;
-      filter: brightness(.5);
+      filter: brightness(0.5);
     }
   }
   .quote-text-block {
@@ -392,7 +388,7 @@
     background-color: $white;
     padding: 10px 14px;
     font-size: 13px;
-    height: 104px;
+    min-height: 104px;
     &::placeholder {
       color: $gray-600;
     }
@@ -438,7 +434,6 @@
     padding-left: 0;
   }
 }
-
 
 @media (max-height: 900px) {
   .quotes-page__aside {
