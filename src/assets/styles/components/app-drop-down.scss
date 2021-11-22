@@ -76,20 +76,3 @@ app-drop-down {
 
   }
 }
-.users-page__aside {
-  app-drop-down {
-    form {
-      float: unset;
-    }
-  }
- .qt-input-block {
-   label {
-     margin-bottom: 8px;
-     line-height: 20px;
-   }
- }
-  .report-caret-icon {
-    position: absolute;
-    right: 12px;
-  }
-}
