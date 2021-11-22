@@ -60,9 +60,10 @@ export class CrmCompanyJobTitleComponent implements OnInit {
   onEditJobTitle(item) {
     if (item.isInitEdit) {
       if (item.length === 0) return;
-      this.crmService.editJobTitle(item.id, item.name).subscribe(data => {
-        item.onInitEdit(false);
-      })
+      this.crmService.editJobTitle(item.id, item.name).pipe(map((res) => res),
+        catchError(error => of(undefined))).subscribe(data => {
+          item.onInitEdit(false);
+        })
     }
   }
   onRemoveJobTitlies() {

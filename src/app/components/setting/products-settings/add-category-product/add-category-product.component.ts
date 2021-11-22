@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { of, Subscription } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { CategoryProduct } from 'src/app/interfaces/product/category-product';
 import { ProductService } from 'src/app/services/product/product.service';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
@@ -40,9 +41,10 @@ export class AddCategoryProductComponent implements OnInit {
   };
   public save() {
     if (this.name.length === 0 || this.disableCreateCategory) return;
-    this.productService.addCategory(this.name).subscribe(data => {
-      this.close();
-    })
+    this.productService.addCategory(this.name).pipe(map((res) => res),
+      catchError(error => of(undefined))).subscribe(data => {
+        this.close();
+      })
 
   }
   public close() {

@@ -57,9 +57,11 @@ export class CrmCompanyIndustryComponent implements OnInit, OnDestroy {
   onEditIndustry(item) {
     if (item.isInitEdit) {
       if (item.length === 0) return;
-      this.crmService.editIndustry(item.id, item.name).subscribe(data => {
-        item.onInitEdit(false);
-      })
+      this.crmService.editIndustry(item.id, item.name).pipe(map((res) => res),
+        catchError(error => of(undefined)))
+        .subscribe(data => {
+          item.onInitEdit(false);
+        })
     }
   }
   onRemoveIndustries() {
