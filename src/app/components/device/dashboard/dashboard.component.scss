@@ -780,4 +780,19 @@
     }
 }
 
+.msg{
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  font-size: 12px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+}
+
 

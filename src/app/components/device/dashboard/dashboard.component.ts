@@ -468,8 +468,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   tooltip(txtLength: number, value?: string) {
     if (value !== undefined && value !== null && value !== "") {
       return value.length > txtLength ? value : null;
-    } else {
-      return value;
     }
   }
 

@@ -226,6 +226,9 @@
                                         </div>
                                     </li>
                                 </ul>
+                                <div *ngIf="logicalDisk?.length == 0">
+                                  <span class="msg">{{'No Disk'}}</span>
+                                </div>
                             </div>
                             <div class="dashboard-col col-50 services">
                                 <h2>Services</h2>
@@ -264,7 +267,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="dashboard-col col-50 tags">
+                            <div class="dashboard-col col-50 tags" id="elementID">
                                 <div class="col-title">
                                     <h2>Tags</h2>
                                 </div>
@@ -283,7 +286,7 @@
                                                 <mat-icon matChipRemove>cancel</mat-icon>
                                             </mat-chip>
                                         </mat-chip-list>
-                                        <input
+                                        <input autofocus
                                             id="dropdownServices"
                                             [(ngModel)]="tagFilterValue"
                                             ngbDropdownToggle
@@ -394,6 +397,9 @@
                                         </div>
                                     </li>
                                 </ul>
+                                <div *ngIf="assetNotes?.length==0">
+                                  <span class="msg">{{"No Notes"}}</span>
+                                </div>
                             </div>
                         </div>
                     </div>

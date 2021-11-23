@@ -61,7 +61,7 @@
             <div class="qt-page-list__body-table-container">
                 <table class="qt-page-list__body-tbody qt-table-modern company-devices-table">
                     <tbody>
-                        <tr *ngFor="let asset of assetList | beta: search; let i = index">
+                        <tr class="company-device-hover" *ngFor="let asset of assetList | beta: search; let i = index">
                             <td class="company-devices-table__check">
                                 <div class="d-f">
                                     <label class="qt-checkbox">
@@ -185,8 +185,50 @@
                                     ></span>
                                 </div>
                             </td>
-                            <td class="company-devices-table__windows">{{ asset.Caption || "N/A" }}</td>
-                            <td class="company-devices-table__ip-address">{{ asset.InternalIPAddress || "N/A" }}</td>
+                            <td class="company-devices-table__windows">
+                              <span
+                                  class="company-devices-table__ip-windows-text"
+                                  [textContent]="asset.Caption"
+                              ></span>
+                              <div class="company-devices-table__system-network-buttons">
+                                  <div
+                                      class="qt-df qt-ai-c qt-mr-20 qt-pointer"
+                                      (click)="openAside('SYSTEM')"
+                                  >
+                                      <div class="icon__system qt-ic-c qt-mr-6 qt-sz-16"></div>
+                                      <div>System</div>
+                                  </div>
+                                  <div
+                                      class="qt-df qt-ai-c qt-pointer"
+                                      (click)="openAside('NETWORK')"
+                                  >
+                                      <div class="icon__network qt-ic-c qt-mr-6 qt-sz-16"></div>
+                                      <div>Network</div>
+                                  </div>
+                              </div>
+                          </td>
+                            <td class="company-devices-table__ip-address">
+                              <span
+                                  class="qt-pl-30 company-devices-table__ip-address-text"
+                                  [textContent]="asset.InternalIPAddress"
+                              ></span>
+                              <div class="company-devices-table__ip-address-buttons qt-pl-15">
+                                  <div
+                                      class="qt-df qt-ai-c qt-mr-20 qt-pointer"
+                                      (click)="openAside('SOFTWARE')"
+                                  >
+                                      <div class="icon__software qt-ic-c qt-mr-6 qt-sz-16"></div>
+                                      <div>Software</div>
+                                  </div>
+                                  <div
+                                      class="qt-df qt-ai-c qt-pointer"
+                                      (click)="openAside('UPDATES')"
+                                  >
+                                      <div class="icon__updates qt-ic-c qt-mr-6 qt-sz-16"></div>
+                                      <div>Updates</div>
+                                  </div>
+                              </div>
+                          </td>
                             <td class="company-devices-table__go-to">
                                 <ng-template
                                     #tipDeviceDetail

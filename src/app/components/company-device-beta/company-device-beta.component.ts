@@ -369,4 +369,8 @@ export class CompanyDeviceBetaComponent implements OnInit {
   decline() {
     this.modalService.dismissAll();
   }
+
+  openAside(){
+
+  }
 }
