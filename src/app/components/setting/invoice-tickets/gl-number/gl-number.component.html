@@ -1,93 +1,6 @@
 <!-- Middle Wrapper -->
 <div class="page-container">
     <div class="page-insider manage-taxes">
-        <!-- <div class="heading">
-            <h5 class="qt-fw-600">Manage Income Account Numbers</h5>
-            <div class="heading-serach">
-                <a
-                    href="javascript:;"
-                    class="btn-outline"
-                    (click)="openModel(true, 0, {})"
-                >
-                    Create
-                </a>
-                <div
-                    class="modal-content toggle-area"
-                    [class.opened]="create"
-                >
-                    <div class="modal-wrapper">
-                        <div class="toggle-header">
-                            <h6 class="qt-fw-600 qt-color-dark qt-mb-16">Create Income Account Number</h6>
-                        </div>
-                        <div class="modal-body">
-                            <form
-                                [formGroup]="glForm"
-                                (ngSubmit)="onSubmit()"
-                            >
-                                <div class="f-row">
-                                    <div class="f-col col-100">
-                                        <label>Income Account Number</label>
-                                        <div class="form-row">
-                                            <input
-                                                type="text"
-                                                class="form-input"
-                                                formControlName="glNumber"
-                                                placeholder="Enter Income Account Number"
-                                                #glNumber
-                                                [ngClass]="{ 'is-invalid': submitted && f.glNumber.errors }"
-                                            >
-                                            <div
-                                                *ngIf="submitted && f.glNumber.errors"
-                                                class="invalid-feedback"
-                                            >
-                                                <div *ngIf="f.glNumber.errors.required">Income Account Number is required</div>
-                                                <div *ngIf="f.glNumber.errors.minlength">Income Account Number is too short.</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="f-col col-100">
-                                        <label>Description</label>
-                                        <div class="form-row">
-                                            <textarea
-                                                type="text"
-                                                formControlName="description"
-                                                class="form-input"
-                                                placeholder="Enter Description"
-                                                #description
-                                                [ngClass]="{ 'is-invalid': submitted && f.description.errors }"
-                                            ></textarea>
-                                            <div
-                                                *ngIf="submitted && f.description.errors"
-                                                class="invalid-feedback"
-                                            >
-                                                <div *ngIf="f.description.errors.maxlength">Description is too large.</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="m-btn-row">
-                                        <div class="m-btn-col">
-                                            <input
-                                                type="submit"
-                                                value="Save"
-                                                class="btn btn-primary"
-                                            >
-                                            <a
-                                                href="javascript:;"
-                                                class="btn btn-secondary"
-                                                aria-label="Close"
-                                                (click)="create = !create"
-                                            >
-                                                Cancel
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
         <div class="cmn-area">
             <div class="data-table-wrap">
                 <table
@@ -105,6 +18,7 @@
                     <tbody *ngIf="numberList">
                         <add-gl-number
                             *ngIf="showAddGl"
+                            [numberList]="numberList"
                             (onClose)="toggleShowAddGL(false)"
                         ></add-gl-number>
                         <tr
@@ -124,15 +38,26 @@
                                     <span></span>
                                 </label>
                             </td>
-                            <td class="tax-name">
+                            <td
+                                class="tax-name"
+                                [ngClass]="{'--input-error' :  gl.disableUpdate  }"
+                            >
                                 <input
                                     type="text"
                                     class="form-input"
                                     placeholder="Enter GL Number"
                                     [(ngModel)]="gl.glNumber"
-                                    (input)="gl.onInitEdit(true)"
+                                    appKeyUpEnter
+                                    (onChange)="onEditGl(gl)"
+                                    (input)="gl.onInitEdit(true);gl.checkDublicate(numberList)"
                                     maxlength="50"
                                 >
+                                <mat-error
+                                    class="qt-tooltip-error"
+                                    *ngIf="gl.disableUpdate"
+                                >
+                                    This Gl Number is already occupied
+                                </mat-error>
                             </td>
                             <td class="rate">
                                 <input

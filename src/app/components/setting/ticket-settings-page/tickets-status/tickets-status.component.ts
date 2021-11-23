@@ -98,7 +98,7 @@ export class TicketsStatusComponent implements OnInit, OnDestroy {
     if (event.keyCode === 13) this.onAddTicketStatus();
   }
   onAddTicketStatus() {
-    if (this.addStatus.name.length === 0 || !this.addStatusBtn.getInit()) return;
+    if (this.addStatus.name.length === 0 || !this.addStatusBtn.getInit() || this.addStatus.disableCreate) return;
     this.addStatusBtn.setInit(false);
     this.ticketsService.addStatus(this.addStatus.name, this.addStatus.color).pipe(map((res) => res),
       catchError(error => of(undefined))).subscribe(data => {

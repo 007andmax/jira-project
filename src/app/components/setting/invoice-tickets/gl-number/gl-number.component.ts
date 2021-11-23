@@ -19,12 +19,7 @@ declare var $: any;
 })
 export class GlNumberSettingsComponent implements OnInit, OnDestroy {
   loading = false;
-  create = false;
-
   numberList: Array<GlNumber> = [];
-  eGL: any;
-  submitted = false;
-
   gl: any;
   popup: boolean;
   showAddGl: boolean = false;
@@ -130,7 +125,7 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
   onEditGl(item) {
     console.log("item", item);
     if (item.isInitEdit) {
-      if (item.glNumber.length === 0) return;
+      if (item.glNumber.length === 0 || item.disableUpdate) return;
       this.glNumberService
         .editGL(item.getDataForEdit())
         .subscribe(

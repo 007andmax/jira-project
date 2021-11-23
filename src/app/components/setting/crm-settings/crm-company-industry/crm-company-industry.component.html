@@ -54,6 +54,8 @@
                             class="form-input"
                             placeholder="Enter Name Category"
                             [(ngModel)]="item.name"
+                            appKeyUpEnter
+                            (onChange)="onEditIndustry(item)"
                             maxlength="30"
                             (input)="item.onInitEdit(true)"
                         >

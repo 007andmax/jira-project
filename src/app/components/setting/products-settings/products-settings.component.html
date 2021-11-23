@@ -98,6 +98,8 @@
                                                 placeholder="Enter Name Category"
                                                 [(ngModel)]="item.name"
                                                 maxlength="20"
+                                                appKeyUpEnter
+                                                (onChange)="onEditCategory(item)"
                                                 (input)="item.onInitEdit(true)"
                                             >
                                         </td>

@@ -45,7 +45,8 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
   @ViewChild('companyTags') companyTags: CompanyTagsComponent;
   @ViewChild('jobTitleDp') jobTitleDp: DropDownComponent;
   @ViewChild('jobTypeDp') jobTypeDp: DropDownComponent;
-  constructor(private imageCropperStateService: ImageCropperStateService, private usersStateService: UsersStateService,
+  constructor(private imageCropperStateService: ImageCropperStateService,
+    private usersStateService: UsersStateService,
     private usersAsideService: UsersAsideService,
     private usersService: UsersService,
     private companiesState: SelectClientCompanyStateService,

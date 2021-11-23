@@ -5,6 +5,7 @@ export class TicketStatus {
     name: string = "";
     isInitEdit: boolean = false;
     selected: boolean = false;
+    disableCreate: boolean = false;
     constructor(data = null) {
         if (data) {
             for (const key in data) {
@@ -13,6 +14,16 @@ export class TicketStatus {
 
         }
     }
+    checkDublicate(list) {
+        var duplicate = list.filter((item) => {
+            return item.name.toLowerCase() === this.name.toLowerCase();
+        });
+        if (duplicate && duplicate[0]) {
+            return this.disableCreate = true;
+        } else {
+            return this.disableCreate = false;
+        }
+    };
     public getDataForEdit(name, color) {
         if (!this.custom) {
             return {
