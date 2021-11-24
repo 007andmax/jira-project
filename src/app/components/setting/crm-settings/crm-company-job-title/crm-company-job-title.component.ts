@@ -93,7 +93,6 @@ export class CrmCompanyJobTitleComponent implements OnInit {
       this.crmStateService.setListJobTitleForRemove(list);
     }
     this.cd.detectChanges();
-    console.log("this.crmStateService.getListJobTitleForRemove().length", this.crmStateService.getListJobTitleForRemove().length);
   }
   removeJobTitle(item) {
     this.confirmStateService.setConfirmAction(DELETE_CRM_JOB_TITLE);

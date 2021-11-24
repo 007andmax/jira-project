@@ -6,7 +6,6 @@ import { UserAvatar } from './user-avatar';
 import { UserProfile } from './user-profile';
 
 export class UserAdd {
-  role: string = 'USER';
   phoneNumbers: Array<PhoneNumber> = [new PhoneNumber('OFFICE')];
   subscription: Subscriptions;
   welcomeEmail: boolean = true;
@@ -21,7 +20,6 @@ export class UserAdd {
   jobTitleId: string;
   jobTypeId: string;
   constructor(data: UserProfile) {
-    this.role = data.role;
     if (data.phoneNumbers.length === 1 && data.phoneNumbers[0].number === '') {
       this.phoneNumbers = [];
 

@@ -105,7 +105,6 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     this.getRoleNames();
     this.settingStateService.setComponentName('TechUsersComponent');
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
-      console.log("data", data);
       if (data) {
         if (this.confirmStateService.getConfirmAction() === DELETE_TECH_USER) {
           this.removeTechUser();

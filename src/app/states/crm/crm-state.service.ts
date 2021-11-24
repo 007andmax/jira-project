@@ -37,7 +37,6 @@ export class CrmStateService {
       this.onGetIndustry.emit(this.industryList);
     })
     this.crmService.getJobTitleList().subscribe((data: any) => {
-      console.log("data", data);
       this.jobTitleList = data.map(item => new CrmCompanyJobTitle(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
         1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
       this.onGetJobTitle.emit(this.jobTitleList);
@@ -74,7 +73,6 @@ export class CrmStateService {
   }
   public onInitGetServiceTypeList() {
     this.crmService.getServiceTypeList().subscribe((data: any) => {
-      console.log("data", data);
       this.serviceTypeList = data.map(item => new CrmCompanyServiceType(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
         1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
       this.onGetServiceType.emit(this.serviceTypeList)
@@ -94,7 +92,6 @@ export class CrmStateService {
   }
   public onInitGetJobTypeList() {
     this.crmService.getJobTypeList().subscribe((data: any) => {
-      console.log("data", data);
       this.jobTypeList = data.map(item => new CrmCompanyJobType(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
         1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
       this.onGetJobType.emit(this.jobTypeList);

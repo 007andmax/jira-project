@@ -52,7 +52,6 @@ export class ContractComponent implements OnInit, OnDestroy {
     this.rate = '';
     this.getAgreementsRates();
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
-      console.log("data", data);
       if (data) {
         if (this.confirmStateService.getConfirmAction() === DELETE_COMMISSION_CONTRACT) {
           this.removeContract()

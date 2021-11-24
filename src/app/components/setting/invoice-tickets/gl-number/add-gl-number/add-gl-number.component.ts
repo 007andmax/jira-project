@@ -33,7 +33,6 @@ export class AddGlNumberComponent implements OnInit {
     }
   };
   onAddGL() {
-    console.log("onAddGL");
     if (this.addGl.glNumber.length === 0 || this.disableCreate) return;
     if (this.addGl.glNumber.length < 1) this.validateShort = false;
 

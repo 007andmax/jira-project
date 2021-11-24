@@ -34,7 +34,6 @@ export class ProductComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getCategories();
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
-      console.log("data", data);
       if (data) {
         if (this.confirmStateService.getConfirmAction() === DELETE_COMMISSION_PRODUCT) {
           this.removeProduct()
@@ -75,8 +74,6 @@ export class ProductComponent implements OnInit, OnDestroy {
    * @param category
    */
   removeProduct() {
-    console.log("removeProduct");
-    console.log("this.category", this.category);
     if (this.category && this.category.commissionRate) {
       this.loading = true; $(".loading").css("display", "block");
       this.commissionService

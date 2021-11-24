@@ -41,7 +41,6 @@ export class ServiceComponent implements OnInit, OnDestroy {
     this.getServices();
     this.getSpecialService();
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
-      console.log("data", data);
       if (data) {
         if (this.confirmStateService.getConfirmAction() === DELETE_COMMISSION_SERVICE) {
           this.deleteServicePopup = false;

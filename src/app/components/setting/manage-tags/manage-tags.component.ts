@@ -97,7 +97,6 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     this.getAllTags();
     this.settingStateService.setComponentName('ManageTagsComponent');
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
-      console.log("data", data);
       if (data) {
         if (this.confirmStateService.getConfirmAction() === DELETE_MANAGE_TAG) {
           this.removeCompanyTag()

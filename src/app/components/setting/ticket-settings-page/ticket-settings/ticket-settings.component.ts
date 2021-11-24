@@ -163,7 +163,6 @@ export class TicketSettingsComponent implements OnInit {
    * saved
    */
   onSubmit() {
-    console.log("onSubmit");
     this.submitted = true;
     // stop here if form is invalid
     if (this.ticketForm.invalid) {

@@ -43,7 +43,6 @@ export class CrmSettingsComponent implements OnInit, OnDestroy {
   }
   setTab(data) {
     this.activeTab = data['nextId'];
-    console.log("this.activeTab", this.activeTab);
   }
   ngOnDestroy(): void {
     $('body').removeClass('ng7');

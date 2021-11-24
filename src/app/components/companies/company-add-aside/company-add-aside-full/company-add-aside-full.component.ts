@@ -208,7 +208,6 @@ export class CompanyAddAsideFullComponent implements OnInit {
   }
   onSelectJobTitle(data) {
     this.company.contacts[0].jobTitleId = (data) ? data.id : null;
-    console.log("this.company", this.company);
   }
   public onChangePrimaryEmail() {
     this.validate.checkValidPrimaryEmail(this.company.contacts[0].primaryEmail);

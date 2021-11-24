@@ -150,12 +150,10 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
 
   }
   onSelectJobTitle(data) {
-    console.log("data", data);
     this.selectedUserTitle = data;
     this.user.setJobTitleId(data.id);
   }
   onSelectRole(data) {
-    console.log("data", data);
     this.selectedUserType = data;
     this.user.setJobTypeId(data.id);
   }

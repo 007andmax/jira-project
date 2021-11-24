@@ -58,7 +58,6 @@ export class TaxesSettingsComponent implements OnInit, OnDestroy {
     this.getTaxes();
     this.settingStateService.setComponentName('TaxesSettingsComponent');
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
-      console.log("data", data);
       if (data) {
         if (this.confirmStateService.getConfirmAction() === DELETE_TAX) {
           this.removeTax();

@@ -53,13 +53,11 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
     }
     let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe(data => {
       this.numberList = data.sort((a, b) => a.glNumber.toLowerCase().localeCompare(b.glNumber.toLowerCase()));
-      console.log("this.numberList", this.numberList);
       this.loading = false; $(".loading").css("display", "none");
       this.cd.detectChanges();
     })
     this.sub.add(getOnGlNumbers);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
-      console.log("data", data);
       if (data) {
         if (this.confirmStateService.getConfirmAction() === DELETE_GL_NUMBER) {
           this.removeGL();
@@ -123,7 +121,6 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
 
 
   onEditGl(item) {
-    console.log("item", item);
     if (item.isInitEdit) {
       if (item.glNumber.length === 0 || item.disableUpdate) return;
       this.glNumberService
