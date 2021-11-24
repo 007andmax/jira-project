@@ -12,6 +12,10 @@ import { UserChange } from './class/user-change';
 import { WebsocketService } from '../../services/websocket/websocket.service';
 import { DraftEmailStateService } from '../../states/draft-email/draft-email-state.service';
 import { TYPE_LIST_ALL_USERS } from '../../const/users';
+import { CrmStateService } from 'src/app/states/crm/crm-state.service';
+import { CrmCompanyJobTitle } from '../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
+import { CrmCompanyJobType } from '../setting/crm-settings/crm-company-job-type/class/crm-company-job-type';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-users',
@@ -31,7 +35,9 @@ export class UsersComponent implements OnInit {
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
   count: number = 0;
+  jobTitleList: Array<CrmCompanyJobTitle> = [];
   TYPE_LIST_ALL_USERS = TYPE_LIST_ALL_USERS;
+  sub: Subscription = new Subscription();
   constructor(private usersStateService: UsersStateService,
     private userListService: UserListService,
     private companiesStateService: CompaniesStateService,
@@ -39,6 +45,7 @@ export class UsersComponent implements OnInit {
     private usersService: UsersService,
     public cd: ChangeDetectorRef,
     private draftEmailStateService: DraftEmailStateService,
+    private crmStateService: CrmStateService,
     private websocketService: WebsocketService) { }
 
   ngOnInit() {
@@ -140,7 +147,14 @@ export class UsersComponent implements OnInit {
       this.setIdDetailUser('');
     })
     this.onInitSubscribe();
+    this.jobTitleList = this.crmStateService.getJobTitleList();
+    let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
+      this.jobTitleList = data;
+    })
+    this.sub.add(onGetJobTitle);
+
   }
+
   private onArchiveUsers(ids) {
 
     let archiveUser = this.usersService.onArchiveUsers(ids).subscribe(data => {

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CrmCompanyIndustry } from 'src/app/components/setting/crm-settings/crm-company-industry/class/crm-company-industry';
+import { CrmCompanyJobTitle } from 'src/app/components/setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 import { CompanyIndustry } from 'src/app/interfaces/company/company-industry';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
@@ -19,7 +20,7 @@ export class UsersFilterComponent implements OnInit {
   @ViewChild('industriesDp') industriesDp: DropDownComponent;
   companies = [];
   industries: Array<CrmCompanyIndustry> = [];
-  allTitles: Array<string> = [];
+  jobTitleList: Array<CrmCompanyJobTitle> = [];
   public filter: UserFilter = new UserFilter();
   sub: Subscription = new Subscription();
   @Output() changeCountFilter = new EventEmitter<any>();
@@ -28,10 +29,10 @@ export class UsersFilterComponent implements OnInit {
     private usersStateService: UsersStateService,) { }
 
   ngOnInit() {
-    this.allTitles = this.crmStateService.getJobTitleList().map(item => item.name);
+    this.jobTitleList = this.crmStateService.getJobTitleList();
     let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
-      this.allTitles = data.map(item => item.name);
-      if (this.titlesDp) this.titlesDp.reset(this.allTitles);
+      this.jobTitleList = data;
+      if (this.titlesDp) this.titlesDp.reset(this.jobTitleList);
     })
     this.sub.add(onGetJobTitle);
     if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());

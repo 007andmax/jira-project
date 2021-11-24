@@ -18,7 +18,8 @@ export class UserAdd {
   companyId: string;
   jobDescription: string;
   tags: Array<any> = [];
-  jobType: string;
+  jobTitleId: string;
+  jobTypeId: string;
   constructor(data: UserProfile) {
     this.role = data.role;
     if (data.phoneNumbers.length === 1 && data.phoneNumbers[0].number === '') {
@@ -40,7 +41,8 @@ export class UserAdd {
       return { id: item.id };
     })
     this.jobDescription = data.jobDescription;
-    this.jobType = data.jobType;
+    this.jobTypeId = data.jobTypeId;
+    this.jobTitleId = data.jobTitleId;
 
   }
 }

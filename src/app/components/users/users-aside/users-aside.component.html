@@ -98,7 +98,8 @@
                     #jobTitleDp
                     [title]="'Job title'"
                     [placeholder]="'Select Job title'"
-                    [list]="allTitles"
+                    [list]="jobTitleList"
+                    [field]="'name'"
                     [search]="true"
                     [change]="true"
                     [add]="true"
@@ -282,7 +283,6 @@
                     [field]="'name'"
                     [placeholder]="'Select User Type'"
                     [list]="userTypes"
-                    [editItem]="selectedUserType"
                     [isBlockClear]="true"
                     (onSelectedItem)="onSelectRole($event)"
                 ></app-drop-down>

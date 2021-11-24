@@ -23,7 +23,8 @@ export class UserUpdate {
   userEnabled: boolean;
   tags: Array<any> = [];
   jobDescription: string;
-  jobType: string;
+  jobTitleId: string;
+  jobTypeId: string;
   constructor(data: UserProfile, user: User) {
     this.role = data.role;
     this.phoneNumbers = data.phoneNumbers.map((item, index) => {
@@ -55,6 +56,7 @@ export class UserUpdate {
       return { id: item.id }
     })
     this.jobDescription = data.jobDescription;
-    this.jobType = data.jobType;
+    this.jobTitleId = data.jobTitleId;
+    this.jobTypeId = data.jobTypeId;
   }
 }

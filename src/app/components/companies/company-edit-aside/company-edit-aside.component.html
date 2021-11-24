@@ -185,8 +185,9 @@
                 #jobTitleDp
                 [class]="['light-dropdown', 'qt-select-input-40']"
                 [placeholder]="'Select Job title'"
-                [editItem]="(company.contacts[0].designation) ? company.contacts[0].designation : null"
-                [list]="allTitles"
+                [editItem]="selectedJobTitle"
+                [list]="jobTitleList"
+                [field]="'name'"
                 [search]="true"
                 [change]="true"
                 [title]="'Job title'"

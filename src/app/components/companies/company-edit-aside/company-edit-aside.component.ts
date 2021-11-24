@@ -56,6 +56,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   validate: CompanyValdiate = new CompanyValdiate();
   sub: Subscription = new Subscription();
   locationIsinit: boolean = false;
+  selectedJobTitle: CrmCompanyJobTitle;
   @ViewChild('companyTags') companyTags: CompanyTagsComponent;
   @ViewChild('addresstext') addresstext: any;
   @ViewChild('clientType') clientType: DropDownComponent;
@@ -64,7 +65,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   @ViewChild('paymentMethod') paymentMethod: DropDownComponent;
   @ViewChild('serviceType') serviceType: DropDownComponent;
   @ViewChild('companyAssociate') companyAssociate: CompanyAssociateComponent;
-  allTitles: Array<string> = [];
+  jobTitleList: Array<CrmCompanyJobTitle> = [];
   constructor(private companiesStateService: CompaniesStateService,
     private companiesService: CompaniesService,
     private usersStateService: UsersStateService,
@@ -88,9 +89,9 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
       this.industries = data;
     })
     this.sub.add(onGetIndustry);
-    this.allTitles = this.crmStateService.getJobTitleList().map(item => item.name);
+    this.jobTitleList = this.crmStateService.getJobTitleList();
     let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
-      this.allTitles = data.map(item => item.name);
+      this.jobTitleList = data;
     })
     this.sub.add(onGetJobTitle);
     if (this.crmStateService.getServiceTypeList().length === 0) {
@@ -121,7 +122,8 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     return null;
   }
   onSelectJobTitle(data) {
-    this.company.contacts[0].designation = data;
+    this.company.contacts[0].jobTitleId = (data) ? data.id : null;
+    this.selectedJobTitle = data;
   }
   private getPlaceAutocomplete() {
     this.locationIsinit = true;
@@ -186,6 +188,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
       if (indexPersone > -1) this.selectedTechLead = this.listPersons[indexPersone];
       let indexType = this.companyTypes.findIndex(item => item.value === this.company.clientType);
       if (indexType > -1) this.onSelectCompanyTypes(this.companyTypes[indexType]);
+      this.selectedJobTitle = this.jobTitleList.find(item => item.id === this.company.contacts[0].jobTitleId);
       this.companyTags.setSelectedTag(this.company.tags);
       this.elRef.nativeElement.querySelector("#company-description").value = this.company.description;
       this.opened = true;

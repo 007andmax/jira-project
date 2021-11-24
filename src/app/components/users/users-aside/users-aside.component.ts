@@ -18,6 +18,7 @@ import { Subscription } from 'rxjs';
 import { CrmCompanyJobType } from '../../setting/crm-settings/crm-company-job-type/class/crm-company-job-type';
 import { Input } from 'hammerjs';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
+import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 
 @Component({
   selector: 'app-users-aside',
@@ -30,10 +31,9 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   public opened = false;
   user: UserProfile = new UserProfile();
-  allTitles: Array<string> = [];
+  jobTitleList: Array<CrmCompanyJobTitle> = [];
   companies = [];
   validate: UserValidate = new UserValidate();
-  selectedUserType: CrmCompanyJobType;
   userTypes: Array<CrmCompanyJobType> = [];
   phoneTypes = ['Office', 'Mobile', 'Fax'];
   @ViewChild('jobTypeDp') jobTypeDp: DropDownComponent;
@@ -53,10 +53,9 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.allTitles = this.crmStateService.getJobTitleList().map(item => item.name);
+    this.jobTitleList = this.crmStateService.getJobTitleList();
     let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
-      this.allTitles = data.map(item => item.name);
-      if (this.jobTitleDp) this.jobTitleDp.reset(this.allTitles);
+      this.jobTitleList = data;
     })
     this.sub.add(onGetJobTitle);
     this.onCroppImage();
@@ -132,11 +131,10 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
   }
 
   onSelectJobTitle(data) {
-    this.user.setDesignation(data);
+    this.user.setJobTitleId(data.id);
   }
   onSelectRole(data) {
-    this.selectedUserType = data;
-    this.user.setJobType(data.name);
+    this.user.setJobTypeId(data.id);
   }
   onChangeFistname() {
     this.validate.checkValidFirstName(this.user.firstName);

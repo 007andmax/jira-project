@@ -17,6 +17,7 @@ import { CrmCompanyIndustry } from 'src/app/components/setting/crm-settings/crm-
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { CrmCompanyServiceType } from 'src/app/components/setting/crm-settings/crm-company-service-type/class/crm-company-service-type';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
+import { CrmCompanyJobTitle } from 'src/app/components/setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 
 @Component({
   selector: 'company-add-aside-full',
@@ -36,7 +37,7 @@ export class CompanyAddAsideFullComponent implements OnInit {
   @ViewChild('addresstext') addresstext: any;
   industries: Array<CrmCompanyIndustry> = [];
   locationIsinit: boolean = false;
-  allTitles: Array<string> = [];
+  jobTitleList: Array<CrmCompanyJobTitle> = [];
   listPersons: Array<ItemFilterPerson> = [];
   @Input() validate: CompanyValdiate = new CompanyValdiate();
   @Input() company: CompanyProfile = new CompanyProfile();
@@ -56,9 +57,9 @@ export class CompanyAddAsideFullComponent implements OnInit {
       this.industries = data;
     })
     this.sub.add(onGetIndustry);
-    this.allTitles = this.crmStateService.getJobTitleList().map(item => item.name);
+    this.jobTitleList = this.crmStateService.getJobTitleList();
     let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
-      this.allTitles = data.map(item => item.name);
+      this.jobTitleList = data;
     })
     this.sub.add(onGetJobTitle);
     if (this.crmStateService.getServiceTypeList().length === 0) {
@@ -206,7 +207,8 @@ export class CompanyAddAsideFullComponent implements OnInit {
     this.validate.checkValidFirstname(this.company.contacts[0].firstName);
   }
   onSelectJobTitle(data) {
-    this.company.contacts[0].designation = data;
+    this.company.contacts[0].jobTitleId = (data) ? data.id : null;
+    console.log("this.company", this.company);
   }
   public onChangePrimaryEmail() {
     this.validate.checkValidPrimaryEmail(this.company.contacts[0].primaryEmail);

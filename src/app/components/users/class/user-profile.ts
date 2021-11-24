@@ -21,7 +21,8 @@ export class UserProfile {
     companyId: string;
     tags: Array<Tag> = [];
     jobDescription: string;
-    jobType: string;
+    jobTitleId: string;
+    jobTypeId: string;
     constructor() {
         this.subscription = {
             invoice: false, ticket: true, ticketManager: false
@@ -54,7 +55,8 @@ export class UserProfile {
         this.companyId = user.company.id;
         this.tags = user.tags;
         this.jobDescription = user.jobDescription;
-        this.jobType = user.jobType;
+        this.jobTitleId = user.jobTitleId;
+        this.jobTypeId = user.jobTypeId;
     }
     public editLogo(data) {
         this.avatar = data;
@@ -77,8 +79,11 @@ export class UserProfile {
     public setRole(data) {
         this.role = data;
     }
-    public setJobType(data) {
-        this.jobType = data;
+    public setJobTitleId(data) {
+        this.jobTitleId = data;
+    }
+    public setJobTypeId(data) {
+        this.jobTypeId = data;
     }
     public getRole() {
         return this.role;

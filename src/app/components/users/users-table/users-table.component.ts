@@ -15,6 +15,8 @@ import { UsersTableService } from './services/users-table.service';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
 import { USERS } from 'src/app/const/emails';
 import { TYPE_LIST_ALL_USERS, TYPE_LIST_COMPANY_USERS } from 'src/app/const/users';
+import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
+import { CrmCompanyJobType } from '../../setting/crm-settings/crm-company-job-type/class/crm-company-job-type';
 
 @Component({
   selector: 'app-users-table',
@@ -28,6 +30,7 @@ export class UsersTableComponent implements OnInit {
   @Input() type: string;
   @Input() showArchivedUsers: boolean;
   @Output() onSelectUser = new EventEmitter<any>();
+  @Input() jobTitleList: Array<CrmCompanyJobTitle> = [];
   companies: Array<Company> = [];
   currentUser: CurrentUser = new CurrentUser();
   TYPE_LIST_ALL_USERS = TYPE_LIST_ALL_USERS;
@@ -47,6 +50,10 @@ export class UsersTableComponent implements OnInit {
 
       this.user.subscription = data;
     })
+  }
+  getJobTitle() {
+    let find = this.jobTitleList.find(item => item.id === this.user.jobTitleId);
+    return (find) ? find.name : '';
   }
   getNameForAvatar() {
     if (!this.user.avatar) return `${(this.user.firstName) ? this.user.firstName[0].toUpperCase() : ''}${(this.user.lastName) ? this.user.lastName[0].toUpperCase() : ''}`;

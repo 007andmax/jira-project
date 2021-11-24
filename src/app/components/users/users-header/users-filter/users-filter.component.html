@@ -3,7 +3,8 @@
         #titlesDp
         class="qt-w100 qt-mr-8"
         [placeholder]="'Select Title'"
-        [list]="allTitles"
+        [list]="jobTitleList"
+        [field]="'name'"
         [search]="true"
         [change]="true"
         (onSelectedItem)="onSelectTitle($event)"

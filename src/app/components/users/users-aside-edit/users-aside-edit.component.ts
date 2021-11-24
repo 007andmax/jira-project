@@ -23,6 +23,7 @@ import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { Subscription } from 'rxjs';
 import { CrmCompanyJobType } from '../../setting/crm-settings/crm-company-job-type/class/crm-company-job-type';
+import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 
 @Component({
   selector: 'users-aside-edit',
@@ -33,13 +34,13 @@ import { CrmCompanyJobType } from '../../setting/crm-settings/crm-company-job-ty
 export class UsersAsideEditComponent implements OnInit, OnDestroy {
   public opened = false;
   user: UserProfile = new UserProfile();
-  allTitles: Array<string> = [];
+  jobTitleList: Array<CrmCompanyJobTitle> = [];
   selectedCompany: Company;
   companies = [];
   validate: UserValidate = new UserValidate();
   phoneTypes = ['Office', 'Mobile', 'Fax'];
   selectedUserType: CrmCompanyJobType;
-  selectedUserTitle: string;
+  selectedUserTitle: CrmCompanyJobTitle;
   userTypes: Array<CrmCompanyJobType> = [];
   sub: Subscription = new Subscription();
   @ViewChild('companyTags') companyTags: CompanyTagsComponent;
@@ -58,10 +59,9 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
-    this.allTitles = this.crmStateService.getJobTitleList().map(item => item.name);
+    this.jobTitleList = this.crmStateService.getJobTitleList();
     let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
-      this.allTitles = data.map(item => item.name);
-      if (this.jobTitleDp) this.jobTitleDp.reset(this.allTitles);
+      this.jobTitleList = data;
     })
     this.sub.add(onGetJobTitle);
     this.onCroppImage();
@@ -70,8 +70,8 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
       this.getJobTypeList();
       this.user.onEdit(this.usersStateService.getuserForEdit());
       this.companyTags.setSelectedTag(this.user.tags);
-      this.selectedUserType = this.userTypes.find(item => item.name == this.user.jobType);
-      this.selectedUserTitle = this.allTitles.find(item => item == this.user.designation);
+      this.selectedUserType = this.userTypes.find(item => item.id == this.user.jobTypeId);
+      this.selectedUserTitle = this.jobTitleList.find(item => item.id == this.user.jobTitleId);
       this.validate.addPhoneNumbers(this.user.phoneNumbers);
       this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.user.companyId);
       this.companySubscriptionState.onEditMode(this.user.subscription);
@@ -92,7 +92,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     }
     let onGetJobType = this.crmStateService.onGetJobType.subscribe(data => {
       this.userTypes = data;
-      if (!this.selectedUserType && this.opened) this.selectedUserType = this.userTypes.find(item => item.name == this.user.jobType);
+      if (!this.selectedUserType && this.opened) this.selectedUserType = this.userTypes.find(item => item.id == this.user.jobTypeId);
       if (this.jobTypeDp) this.jobTypeDp.reset(this.userTypes);
     })
     this.sub.add(onGetJobType);
@@ -150,12 +150,14 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
 
   }
   onSelectJobTitle(data) {
+    console.log("data", data);
     this.selectedUserTitle = data;
-    this.user.setDesignation(data);
+    this.user.setJobTitleId(data.id);
   }
   onSelectRole(data) {
+    console.log("data", data);
     this.selectedUserType = data;
-    this.user.setJobType(data.name);
+    this.user.setJobTypeId(data.id);
   }
   onChangeFistname() {
     this.validate.checkValidFirstName(this.user.firstName);
