@@ -99,10 +99,7 @@
             </div>
         </div>
     </div>
-    <form
-        [formGroup]="profileForm"
-        (ngSubmit)="onSubmit()"
-    >
+    <form [formGroup]="profileForm">
         <div class="f-row">
             <div class="f-col col-50">
                 <label>First Name</label>
@@ -180,7 +177,6 @@
                         [field]="'name'"
                         [search]="true"
                         [change]="true"
-                        [isBlockClear]="true"
                         (onSelectedItem)="onSelectRole($event)"
                     ></app-drop-down>
                 </div>
@@ -303,6 +299,7 @@
             type="submit"
             class="btn btn-primary"
             value="Save Changes"
+            (click)="onSubmit()"
         >
     </form>
 </div>

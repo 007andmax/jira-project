@@ -96,13 +96,12 @@
             <div class="qt-w50">
                 <app-drop-down
                     #jobTitleDp
-                    [title]="'Job title'"
-                    [placeholder]="'Select Job title'"
+                    [title]="'Job Title'"
+                    [placeholder]="'Select Job Title'"
                     [list]="jobTitleList"
                     [field]="'name'"
                     [search]="true"
                     [change]="true"
-                    [add]="true"
                     [editItem]="selectedUserTitle"
                     (onSelectedItem)="onSelectJobTitle($event)"
                 ></app-drop-down>
