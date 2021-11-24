@@ -36,6 +36,11 @@ export class CompanyDeviceBetaComponent implements OnInit {
   restServerAddress = "";
   remoteConnectPort = 0;
   guid: number;
+  toggleWindowSpecifications: boolean = false;
+  toggleDeviceSpecifications: boolean = false;
+  open: boolean = false;
+  tab: string = "SYSTEM";
+  assetData: any = undefined;
 
   constructor(
     private leftPanelStateService: LeftPanelStateService,
@@ -370,7 +375,15 @@ export class CompanyDeviceBetaComponent implements OnInit {
     this.modalService.dismissAll();
   }
 
-  openAside(){
+  openAside(type,asset){
+    this.open = true;
+    this.tab = type;
+    this.showPreloader = false;
+    this.assetData = this.assetList.find((x)=>x.Guid === asset.Guid);
+  }
 
+  menuclose(){
+    this.open = false;
+    this.tab = "SYSTEM";
   }
 }
