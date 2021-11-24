@@ -100,7 +100,7 @@ export class UsersComponent implements OnInit {
 
     let getChangeCompanies = this.usersStateService.getChangeUsers().subscribe((data: UserChange) => {
 
-      if (data.action === 'USER_SAVED' || data.action === 'USER_ARCHIVED') {
+      if ((data.action === 'USER_SAVED' || data.action === 'USER_ARCHIVED') && data.data.accountType !== "TECH") {
 
         const reqIndex = this.reqUsers.findIndex((item) => item.id === data.data.id);
         if (reqIndex > -1) this.reqUsers[reqIndex] = new User(data.data);
@@ -118,7 +118,7 @@ export class UsersComponent implements OnInit {
       }
 
 
-      if (data.action === 'USERS_DEARCHIVED') {
+      if (data.action === 'USERS_DEARCHIVED' && data.data.accountType !== "TECH") {
 
         data.data.forEach(user => {
           const reqIndex = this.reqUsers.findIndex((item) => item.id === user.id);
@@ -131,7 +131,7 @@ export class UsersComponent implements OnInit {
         })
 
       }
-      if (data.action === 'USER_SUBMITTED_TICKET') {
+      if (data.action === 'USER_SUBMITTED_TICKET' && data.data.accountType !== "TECH") {
         const reqIndex = this.reqUsers.findIndex((item) => item.id === data.data.id);
         const Index = this.users.findIndex((item) => item.id === data.data.id);
         var prevValue = this.reqUsers[reqIndex].userStatistic.ticketsSubmitted || 0;
