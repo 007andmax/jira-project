@@ -1,0 +1,33 @@
+<tr
+    class="add-crm-industry-container"
+    appClickOtside
+    #addStatusBtn="click"
+    [init]="true"
+    [class]="'.add-crm-industry-container'"
+    (onOutSide)="save()"
+>
+    <td></td>
+    <td
+        class="tax-name add-industry-name"
+        [ngClass]="{'--input-error' : disableCreate}"
+    >
+        <mat-error
+            class="qt-tooltip-error"
+            *ngIf="disableCreate"
+        >
+            This industry is already occupied
+        </mat-error>
+        <input
+            type="text"
+            class="form-input"
+            placeholder="Enter Name Category"
+            [(ngModel)]="name"
+            (input)="checkDublicate()"
+            (keyup)="onKeyUp($event)"
+            maxlength="30"
+            required
+        >
+    </td>
+    <td class="rate"></td>
+    <td class="action"></td>
+</tr>

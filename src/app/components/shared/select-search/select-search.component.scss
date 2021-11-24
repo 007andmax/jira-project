@@ -88,13 +88,8 @@
     position: absolute;
     cursor: pointer;
   }
-  .report-caret-icon {
-    top: calc(50% - 2px) !important;
-    right: 15px;
-  }
   .icn-remove-old {
-    //top: calc(50% - 5px) !important;
-    top: calc(50% - 8px) !important;
+    top: calc(50% - 6px);
     right: 12px;
 
     @media (max-width: 767px) {

@@ -1,9 +1,6 @@
 <div class="page-insider invoice-ticket ticket-settings-container">
     <div class="cmn-area in-ticks">
-        <form
-            [formGroup]="ticketForm"
-            (ngSubmit)="onSubmit()"
-        >
+        <form [formGroup]="ticketForm">
             <div class="f-row">
                 <div class="f-col col-50">
                     <label>Starting ticket number</label>
@@ -86,6 +83,7 @@
                             [placeholder]="'Select Company Type'"
                             [editItem]="getSelectedInterval()"
                             [isBlockClear]="true"
+                            [sort]="false"
                             [field]="'title'"
                             [list]="intervals"
                             (onSelectedItem)="onChangeInterval($event)"
@@ -98,6 +96,7 @@
                 <button
                     type="submit"
                     class="qt-button qt-mr-12"
+                    (click)="onSubmit()"
                 >
                     Save Changes
                 </button>

@@ -798,8 +798,11 @@ documents-edit-info {
 }
 .archive-modal,
 .image-confirm-modal {
+  background-color: $white;
   padding: 24px;
   position: relative;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,.20);
   &.confirm-user-modal {
     h3 {
       font-weight: 400;
@@ -831,7 +834,7 @@ documents-edit-info {
       line-height: 1.4;
       color: $primary-2;
       position: relative;
-      margin: 0;
+      margin-right: 26px;
     }
     p {
       font-weight: 400;
@@ -2820,10 +2823,6 @@ app-quotes-item {
   }
 }
 .new-companies-content__modal {
-  .app-drop-down__title {
-    margin-bottom: 8px;
-    //line-height: 24px;
-  }
   .icn-product-save {
     position: absolute;
     top: calc(50% - 4px) !important;
@@ -2831,9 +2830,6 @@ app-quotes-item {
   }
   .company-time-zone-drop-down {
     .report-caret-icon {
-      position: absolute;
-      right: 4px;
-      top: calc(50% - 2px);
 
       @media (max-width: 767px) {
         right: 15px;
@@ -2864,7 +2860,7 @@ app-quotes-item {
   //}
 
   .light-dropdown .report-caret-icon {
-    right: 15px;
+    right: 12px;
   }
 
   .details-divider {
@@ -4565,6 +4561,11 @@ app-ticket-edit-aside-devices {
     margin-bottom: 8px;
     @extend %body-m-sb;
     font-weight: 700;
+  }
+  .create-product__col {
+    label {
+      margin-bottom: 0;
+    }
   }
 }
 

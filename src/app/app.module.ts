@@ -467,9 +467,27 @@ import { TicketSettingsPageComponent } from './components/setting/ticket-setting
 import { TicketsStatusComponent } from './components/setting/ticket-settings-page/tickets-status/tickets-status.component';
 import { ProductsSettingsComponent } from './components/setting/products-settings/products-settings.component';
 import { AddCategoryProductComponent } from './components/setting/products-settings/add-category-product/add-category-product.component';
+import { CrmSettingsComponent } from './components/setting/crm-settings/crm-settings.component';
+import { CrmCompanyIndustryComponent } from './components/setting/crm-settings/crm-company-industry/crm-company-industry.component';
+import { AddCrmCompanyIndustryComponent } from './components/setting/crm-settings/crm-company-industry/add-crm-company-industry/add-crm-company-industry.component';
+import { CrmCompanyJobTitleComponent } from './components/setting/crm-settings/crm-company-job-title/crm-company-job-title.component';
+import { AddCrmCompanyJobTitleComponent } from './components/setting/crm-settings/crm-company-job-title/add-crm-company-job-title/add-crm-company-job-title.component';
+import { CrmCompanyServiceTypeComponent } from './components/setting/crm-settings/crm-company-service-type/crm-company-service-type.component';
+import { AddCrmCompanyServiceTypeComponent } from './components/setting/crm-settings/crm-company-service-type/add-crm-company-service-type/add-crm-company-service-type.component';
+import { CrmCompanyJobTypeComponent } from './components/setting/crm-settings/crm-company-job-type/crm-company-job-type.component';
+import { AddCrmCompanyJobTypeComponent } from './components/setting/crm-settings/crm-company-job-type/add-crm-company-job-type/add-crm-company-job-type.component';
+import { PermissionCrmSettingsService } from './components/setting/crm-settings/permission-crm-settings.service';
+import { PermissionEmailSettingService } from './components/setting/email-setting/permission-email-setting.service';
+import { PermissionEmailTempleteService } from './components/setting/email-templete/permission-email-templete.service';
+import { PermissionManageTagsService } from './components/setting/manage-tags/permission-manage-tags.service';
+import { PermissionProductsSettingsService } from './components/setting/products-settings/permission-products-settings.service';
+import { PermissionTaxesSettingsService } from './components/setting/taxes/permission-taxes-settings.service';
+import { PermissionsTechUsersService } from './components/setting/tech-users/permissions-tech-users.service';
+import { PermissionTicketSettingsService } from './components/setting/ticket-settings-page/permission-ticket-settings.service';
+import { AccountingSettingsComponent } from './components/setting/accounting/accounting-settings.component';
 import { AccountingYearComponent } from './components/setting/accounting/accounting-year/accounting-year.component';
 import { AddGlNumberComponent } from './components/setting/accounting/gl-number/add-gl-number/add-gl-number.component';
-import { AccountingSettingsComponent } from './components/setting/accounting/accounting-settings.component';
+import { PermissionAccountingSettingsService } from './components/setting/accounting/permission-accounting-settings.service';
 
 
 declare var $: any;
@@ -897,7 +915,16 @@ declare var $: any;
     TicketsStatusComponent,
     ProductsSettingsComponent,
     AccountingYearComponent,
-    AddGlNumberComponent
+    AddGlNumberComponent,
+    CrmSettingsComponent,
+    CrmCompanyIndustryComponent,
+    AddCrmCompanyIndustryComponent,
+    CrmCompanyJobTitleComponent,
+    AddCrmCompanyJobTitleComponent,
+    CrmCompanyServiceTypeComponent,
+    AddCrmCompanyServiceTypeComponent,
+    CrmCompanyJobTypeComponent,
+    AddCrmCompanyJobTypeComponent
   ],
   imports: [
     BrowserModule,
@@ -965,6 +992,15 @@ declare var $: any;
       multi: true,
     },
     PermissionDasnboardBillingService,
+    PermissionManageTagsService,
+    PermissionProductsSettingsService,
+    PermissionsTechUsersService,
+    PermissionEmailSettingService,
+    PermissionTaxesSettingsService,
+    PermissionTicketSettingsService,
+    PermissionEmailTempleteService,
+    PermissionAccountingSettingsService,
+    PermissionCrmSettingsService
   ],
   bootstrap: [AppComponent]
 })

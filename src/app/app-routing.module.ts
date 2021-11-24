@@ -61,6 +61,16 @@ import { CompanyDocumentsComponent } from './components/companies/company-docume
 import { TicketSettingsPageComponent } from './components/setting/ticket-settings-page/ticket-settings-page.component';
 import { ProductsSettingsComponent } from './components/setting/products-settings/products-settings.component';
 import { AccountingSettingsComponent } from './components/setting/accounting/accounting-settings.component';
+import { CrmSettingsComponent } from './components/setting/crm-settings/crm-settings.component';
+import { PermissionManageTagsService } from './components/setting/manage-tags/permission-manage-tags.service';
+import { PermissionTicketSettingsService } from './components/setting/ticket-settings-page/permission-ticket-settings.service';
+import { PermissionProductsSettingsService } from './components/setting/products-settings/permission-products-settings.service';
+import { PermissionCrmSettingsService } from './components/setting/crm-settings/permission-crm-settings.service';
+import { PermissionsTechUsersService } from './components/setting/tech-users/permissions-tech-users.service';
+import { PermissionEmailSettingService } from './components/setting/email-setting/permission-email-setting.service';
+import { PermissionTaxesSettingsService } from './components/setting/taxes/permission-taxes-settings.service';
+import { PermissionEmailTempleteService } from './components/setting/email-templete/permission-email-templete.service';
+import { PermissionAccountingSettingsService } from './components/setting/accounting/permission-accounting-settings.service';
 
 const routes: Routes = [
 
@@ -131,13 +141,14 @@ const routes: Routes = [
     path: ':company/setting/tags',
     component: ManageTagsComponent,
     pathMatch: 'full',
+    canActivate: [PermissionManageTagsService]
 
   },
   {
     path: ':company/setting/products-settings',
     component: ProductsSettingsComponent,
     pathMatch: 'full',
-
+    canActivate: [PermissionProductsSettingsService]
   },
   {
     path: ':company/setting/companyprofile',
@@ -148,21 +159,25 @@ const routes: Routes = [
     path: ':company/setting/techUsers',
     component: TechUsersComponent,
     pathMatch: 'full',
+    canActivate: [PermissionsTechUsersService]
   },
   {
     path: ':company/setting/emailSetting',
     component: EmailSettingComponent,
     pathMatch: 'full',
+    canActivate: [PermissionEmailSettingService]
   },
   {
     path: ':company/setting/taxes',
     component: TaxesSettingsComponent,
     pathMatch: 'full',
+    canActivate: [PermissionTaxesSettingsService]
   },
   {
     path: ':company/setting/ticket-settings',
     component: TicketSettingsPageComponent,
     pathMatch: 'full',
+    canActivate: [PermissionTicketSettingsService]
   },
   {
     path: ':company/setting/permission',
@@ -173,6 +188,7 @@ const routes: Routes = [
     path: ':company/setting/emailTemplete',
     component: EmailTempleteComponent,
     pathMatch: 'full',
+    canActivate: [PermissionEmailTempleteService]
   },
   {
     path: ':company/setting/integration',
@@ -183,6 +199,13 @@ const routes: Routes = [
     path: ':company/setting/accounting',
     component: AccountingSettingsComponent,
     pathMatch: 'full',
+    canActivate: [PermissionAccountingSettingsService]
+  },
+  {
+    path: ':company/setting/crm-settings',
+    component: CrmSettingsComponent,
+    pathMatch: 'full',
+    canActivate: [PermissionCrmSettingsService]
   },
   {
     path: ':company/setting/commission',

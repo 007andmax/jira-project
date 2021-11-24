@@ -40,14 +40,25 @@
                     (onOutSide)="onAddTicketStatus()"
                 >
                     <td></td>
-                    <td class="tax-name add-status-name">
+                    <td
+                        class="tax-name add-status-name"
+                        [ngClass]="{'--input-error' : addStatus.disableCreate}"
+                    >
                         <input
                             type="text"
                             class="form-input"
                             placeholder="Enter Name Status"
                             [(ngModel)]="addStatus.name"
+                            (keyup)="onKeyUp($event)"
+                            (input)="addStatus.checkDublicate(ticketsStatus)"
                             maxlength="20"
                         >
+                        <mat-error
+                            class="qt-tooltip-error"
+                            *ngIf="addStatus.disableCreate"
+                        >
+                            This Ticket Status is already occupied
+                        </mat-error>
                     </td>
                     <td class="rate">
                         <div
@@ -135,6 +146,8 @@
                             placeholder="Enter Name Status"
                             [(ngModel)]="item.name"
                             maxlength="20"
+                            appKeyUpEnter
+                            (onChange)="onEditTicketStatus(item)"
                             (input)="item.onInitEdit(true)"
                         >
                     </td>

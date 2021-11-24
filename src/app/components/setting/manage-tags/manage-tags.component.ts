@@ -12,13 +12,16 @@ import { forkJoin, Observable, Subject, Subscription } from "rxjs";
 import { map } from "rxjs/operators";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
-import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { SettingStateService } from "src/app/states/setting/setting-state.service";
 import { CompaniesStateService } from "src/app/states/company/companies-state.service";
 import { TagsService } from "src/app/services/tags/tags.service";
 import { DataTableDirective } from "angular-datatables";
 import { ManageTagsListService } from "./services/manage-tags-list.service";
 import { TagsRealTimeService } from "src/app/states/tags/tags-real-time.service";
+import { ConfirmStateService } from "../../shared/confirm/services/confirm-state.service";
+import { DELETE_MANAGE_TAG } from "src/app/const/confirm";
+import { ConfirmComponent } from "../../shared/confirm/confirm.component";
 declare var $: any;
 @Component({
   selector: "app-manage-tags",
@@ -46,7 +49,6 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
   selectedIdx = -1;
   setActiveTab = "company";
   private tagId: string;
-  public deletePopup = false;
   public loading = false;
   dtOptions: DataTables.Settings = {
     searching: false,
@@ -71,6 +73,8 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     private companiesStateService: CompaniesStateService,
     private manageTagsListService: ManageTagsListService,
     private tagsRealTimeService: TagsRealTimeService,
+    private confirmStateService: ConfirmStateService,
+    private modalService: NgbModal,
     public cd: ChangeDetectorRef,
   ) { }
 
@@ -92,7 +96,14 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     this.serviceAllTickets = this.tagsService.getAllTickets();
     this.getAllTags();
     this.settingStateService.setComponentName('ManageTagsComponent');
-
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === DELETE_MANAGE_TAG) {
+          this.removeCompanyTag()
+        }
+      }
+    })
+    this.sub.add(getConfirm);
     let changeTagsArray = this.tagsRealTimeService.changeTagsArray.subscribe((data: any) => {
       if (data.action === "TAG_SAVED") {
         let index = this.ticketTags.findIndex(item => item.id === data.data.id);
@@ -275,7 +286,10 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
 
   ConfirmDelete(tID: string) {
     this.tagId = tID;
-    this.deletePopup = true;
+    this.confirmStateService.setConfirmAction(DELETE_MANAGE_TAG);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    modalRef.componentInstance.message = `Are you sure you want to delete?`;
+
   }
 
   /**
@@ -288,7 +302,6 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       res => {
         this.tagId = null;
         this.loading = false; $(".loading").css("display", "none");
-        this.deletePopup = false;
         this.toaster.success("Tag Removed Successfully");
         /*  if (this.setActiveTab === "ticket") {
             this.getAllTickets();
@@ -298,7 +311,6 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       },
       error => {
         this.loading = false; $(".loading").css("display", "none");
-        this.deletePopup = false;
       }
     );
   }

@@ -49,7 +49,7 @@ export class PasswoordManagerFiltersComponent implements OnInit {
     this.categories = this.passwordManagerStateService.getCategories();
     this.passwordManagerStateService.onGetCategories.subscribe((data: Array<PasswordRecordCategories>) => {
       this.categories = data;
-      this.categoriesSelect.reset(this.categories);
+      if (this.categoriesSelect) this.categoriesSelect.reset(this.categories);
     })
   }
   public onClearAll() {

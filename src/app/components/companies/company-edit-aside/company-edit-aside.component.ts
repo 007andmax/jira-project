@@ -24,6 +24,10 @@ import { CompanyTagsComponent } from '../company-tags/company-tags.component';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 import { CompanyAssociateComponent } from '../../company-dashboard/company-dash-associate/company-associate/company-associate.component';
 import { AppService } from 'src/app/states/app/app.service';
+import { CrmStateService } from 'src/app/states/crm/crm-state.service';
+import { CrmCompanyIndustry } from '../../setting/crm-settings/crm-company-industry/class/crm-company-industry';
+import { CrmCompanyServiceType } from '../../setting/crm-settings/crm-company-service-type/class/crm-company-service-type';
+import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 
 @Component({
   selector: 'app-company-edit-aside',
@@ -33,12 +37,12 @@ import { AppService } from 'src/app/states/app/app.service';
 export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   opened = false;
   company: CompanyProfile = new CompanyProfile();
-  industries: Array<CompanyIndustry> = [];
+  industries: Array<CrmCompanyIndustry> = [];
   selectedTechLead: ItemFilterPerson;
   companyTypes = [new CompanySetting('Client', 'CLIENT'), new CompanySetting('Lead', 'LEAD'), new CompanySetting('Vendor', 'VENDOR'), new CompanySetting('Supplier', 'SUPPLIER')];
   phoneTypes = ['Office', 'Mobile', 'Fax'];
   paymentTerms = [new CompanySetting('COD', 0), new CompanySetting('7 days', 7), new CompanySetting('15 days', 15), new CompanySetting('30 days', 30)];
-  serviceTypes = [new CompanySetting('Hourly', 'HOURLY'), new CompanySetting('Block time', 'BLOCK_TIME'), new CompanySetting('Semi managed', 'SEMI_MANAGED'), new CompanySetting('Fully managed', 'FULLY_MANAGED')];
+  serviceTypes: Array<CrmCompanyServiceType> = [];
   paymentMethods = [new CompanySetting('Cash', 'CASH'),
   new CompanySetting('Cheque', 'CHEQUE'),
   new CompanySetting('Debit Card', 'DEBIT_CARD'),
@@ -52,15 +56,16 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   validate: CompanyValdiate = new CompanyValdiate();
   sub: Subscription = new Subscription();
   locationIsinit: boolean = false;
+  selectedJobTitle: CrmCompanyJobTitle;
   @ViewChild('companyTags') companyTags: CompanyTagsComponent;
   @ViewChild('addresstext') addresstext: any;
   @ViewChild('clientType') clientType: DropDownComponent;
-  @ViewChild('designation') designation: DropDownComponent;
+  @ViewChild('jobTitleDp') jobTitleDp: DropDownComponent;
   @ViewChild('paymentTerm') paymentTerm: DropDownComponent;
   @ViewChild('paymentMethod') paymentMethod: DropDownComponent;
   @ViewChild('serviceType') serviceType: DropDownComponent;
   @ViewChild('companyAssociate') companyAssociate: CompanyAssociateComponent;
-  allTitles: Array<string> = [];
+  jobTitleList: Array<CrmCompanyJobTitle> = [];
   constructor(private companiesStateService: CompaniesStateService,
     private companiesService: CompaniesService,
     private usersStateService: UsersStateService,
@@ -74,50 +79,51 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     private modalImageCropperStateService: ModalImageCropperStateService,
     private tagsState: CompanyTagsStateService,
     public appService: AppService,
+    private crmStateService: CrmStateService,
     public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.company.fullVersion();
-    this.industries = this.companiesStateService.getIndustries();
-    this.companiesStateService.onGetIndustries.subscribe(data => {
+    this.industries = this.crmStateService.getIndustryList();
+    let onGetIndustry = this.crmStateService.onGetIndustry.subscribe(data => {
       this.industries = data;
     })
+    this.sub.add(onGetIndustry);
+    this.jobTitleList = this.crmStateService.getJobTitleList();
+    let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
+      this.jobTitleList = data;
+    })
+    this.sub.add(onGetJobTitle);
+    if (this.crmStateService.getServiceTypeList().length === 0) {
+      this.crmStateService.onInitGetServiceTypeList();
+    } else {
+      this.serviceTypes = this.crmStateService.getServiceTypeList();
+    }
+    let onGetServiceType = this.crmStateService.onGetServiceType.subscribe(data => {
+      this.serviceTypes = data;
+      if (this.serviceType) this.serviceType.reset(this.serviceTypes);
+    })
+    this.sub.add(onGetServiceType);
     if (this.usersStateService.getAllUsers().length > 0) {
       this.getTehusers(this.usersStateService.getAllUsers());
-      this.getUsersTitle(this.usersStateService.getAllUsers());
     }
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.getTehusers(data);
-      this.getUsersTitle(data);
     })
     this.sub.add(getOnUsers);
     this.onCroppImage();
     this.onEditCompany();
   }
-  getUsersTitle(allUsers) {
-    this.allTitles = allUsers
-      .map((user) => {
-        return user.designation;
-      })
-      .reduce((acc, title) => {
-        let index = acc.findIndex((el) => {
-          return (el || '').toLowerCase() === (title || '').toLowerCase();
-        })
-        if (index === -1 && title) {
-          acc.push(title);
-        }
-        return acc;
-      }, []).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
-        1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
-  }
+
 
   getSelectedPaymentMethod() {
     let index = this.paymentMethods.findIndex(item => item.value === this.company.defaultPaymentMethod);
     if (index > -1) return this.paymentMethods[index];
     return null;
   }
-  onSelectDesignation(data) {
-    this.company.contacts[0].designation = data;
+  onSelectJobTitle(data) {
+    this.company.contacts[0].jobTitleId = (data) ? data.id : null;
+    this.selectedJobTitle = data;
   }
   private getPlaceAutocomplete() {
     this.locationIsinit = true;
@@ -158,12 +164,11 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     this.company = new CompanyProfile();
     this.companyTypes.forEach(item => item.selected = false);
     this.paymentTerms.forEach(item => item.selected = false);
-    this.serviceTypes.forEach(item => item.selected = false);
     this.subscriptions.forEach(item => item.selected = false);
     this.selectedTechLead = null;
     this.validate = new CompanyValdiate();
     this.clientType.clearWithOutChanges();
-    this.designation.clearWithOutChanges();
+    this.jobTitleDp.clearWithOutChanges();
     this.paymentTerm.clearWithOutChanges();
     this.paymentMethod.clearWithOutChanges();
     this.serviceType.clearWithOutChanges();
@@ -177,12 +182,13 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
       this.companyTimeZoneState.onEditMode(this.company.addresses[0].timeZone);
       let indexTerms = this.paymentTerms.findIndex(item => item.value === this.company.paymentTerms);
       if (indexTerms > -1) this.onSelectPaymentTerms(this.paymentTerms[indexTerms]);
-      let indexServiceType = this.serviceTypes.findIndex(item => item.value === this.company.serviceType);
+      let indexServiceType = this.serviceTypes.findIndex(item => item.name === this.company.serviceType);
       if (indexServiceType > -1) this.onSelectServiceTypes(this.serviceTypes[indexServiceType]);
       let indexPersone = this.listPersons.findIndex(item => item.id === this.company.techLeadId);
       if (indexPersone > -1) this.selectedTechLead = this.listPersons[indexPersone];
       let indexType = this.companyTypes.findIndex(item => item.value === this.company.clientType);
       if (indexType > -1) this.onSelectCompanyTypes(this.companyTypes[indexType]);
+      this.selectedJobTitle = this.jobTitleList.find(item => item.id === this.company.contacts[0].jobTitleId);
       this.companyTags.setSelectedTag(this.company.tags);
       this.elRef.nativeElement.querySelector("#company-description").value = this.company.description;
       this.opened = true;
@@ -220,7 +226,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     this.company.paymentTerms = item.value;
   }
   public onSelectServiceTypes(item) {
-    this.company.serviceType = item.value;
+    this.company.serviceType = (item) ? item.name : null;
   }
   onCheckEmail() {
     if (this.company.contacts[0].primaryEmail && this.company.contacts[0].primaryEmail.length > 0) this.onCheckValidPrimaryEmail();
@@ -332,7 +338,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     return null;
   }
   getSelectedServiceType() {
-    let index = this.serviceTypes.findIndex(item => item.value === this.company.serviceType);
+    let index = this.serviceTypes.findIndex(item => item.name === this.company.serviceType);
     if (index > -1) return this.serviceTypes[index];
     return "";
   }

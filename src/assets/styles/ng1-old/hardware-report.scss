@@ -513,6 +513,9 @@
   height: 12px;
 }
 .report-caret-icon {
+  position: absolute;
+  right: 12px;
+  top: calc(50% - 2px);
   width: 10px;
   height: 6px;
   background: url("/assets/img/icons/report-caret.png");

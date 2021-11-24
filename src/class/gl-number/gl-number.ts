@@ -5,6 +5,7 @@ export class GlNumber {
     blockTime: boolean;
     serviceContract: boolean;
     isInitEdit: boolean = false;
+    disableUpdate: boolean = false;
     constructor(data = null) {
         if (data) {
             this.id = data.id;
@@ -14,6 +15,16 @@ export class GlNumber {
             this.serviceContract = data.serviceContract;
         }
     }
+    public checkDublicate(list) {
+        var duplicate = list.filter((item) => {
+            return item.glNumber.toLowerCase() === this.glNumber.toLowerCase() && item.id !== this.id;
+        });
+        if (duplicate && duplicate[0]) {
+            return this.disableUpdate = true;
+        } else {
+            return this.disableUpdate = false;
+        }
+    };
     public getDataForAdd() {
         return {
             description: this.description,

@@ -5,7 +5,6 @@ import { User } from './user';
 import { UserProfile } from './user-profile';
 
 export class UserUpdate {
-  role: string;
   phoneNumbers: Array<UserPhoneNumber>;
   subscription: UserSubscription;
   welcomeEmail: boolean = true;
@@ -23,8 +22,9 @@ export class UserUpdate {
   userEnabled: boolean;
   tags: Array<any> = [];
   jobDescription: string;
+  jobTitleId: string;
+  jobTypeId: string;
   constructor(data: UserProfile, user: User) {
-    this.role = data.role;
     this.phoneNumbers = data.phoneNumbers.map((item, index) => {
       if (!user.phoneNumbers || user.phoneNumbers && user.phoneNumbers.length === 0) {
         return new UserPhoneNumber(null, item.number, item.typeNumber, null);
@@ -54,5 +54,7 @@ export class UserUpdate {
       return { id: item.id }
     })
     this.jobDescription = data.jobDescription;
+    this.jobTitleId = data.jobTitleId;
+    this.jobTypeId = data.jobTypeId;
   }
 }

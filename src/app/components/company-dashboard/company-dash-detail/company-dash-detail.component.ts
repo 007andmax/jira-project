@@ -20,6 +20,8 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { AppService } from 'src/app/states/app/app.service';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
 import { USERS } from 'src/app/const/emails';
+import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
+import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 
 @Component({
   selector: 'app-company-dash-detail',
@@ -272,7 +274,7 @@ export class CompanyDashDetailComponent implements OnInit {
   unSelectedRating = 0;
   ratingSaved: boolean = false;
   usersList = [];
-
+  jobTitleList: Array<CrmCompanyJobTitle> = [];
   public constructor(private companiesService: CompaniesService,
     private toaster: ToastrService,
     private downloadAgentStateService: DownloadAgentStateService,
@@ -285,6 +287,7 @@ export class CompanyDashDetailComponent implements OnInit {
     private usersStateService: UsersStateService,
     public appService: AppService,
     private draftEmailStateService: DraftEmailStateService,
+    private crmStateService: CrmStateService,
     public cd: ChangeDetectorRef
   ) { }
 
@@ -304,6 +307,11 @@ export class CompanyDashDetailComponent implements OnInit {
     })
     this.sub.add(onChangeCompanies);
     this.currentService = new TicketProfileFormService();
+    this.jobTitleList = this.crmStateService.getJobTitleList();
+    let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
+      this.jobTitleList = data;
+    })
+    this.sub.add(onGetJobTitle);
   }
 
   public onChangeStartTimePicker(data) {
@@ -321,8 +329,13 @@ export class CompanyDashDetailComponent implements OnInit {
   setTab(data) {
     this.tab = data;
     if (this.tab === 'users') {
-      this.usersList = this.usersStateService.getAllUsers().filter(item => (!item.deletedAt) && item.accountType !== "TECH" && item.company.id === this.companyDetail.id);
+      this.usersList = this.usersStateService.getAllUsers().filter(item => (!item.deletedAt) && item.accountType !== "TECH" && item.company.id === this.companyDetail.id).sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?
+        1 : ((`${b.firstName} ${b.lastName}`.toLowerCase() > `${a.firstName} ${a.lastName}`.toLowerCase()) ? -1 : 0));
     }
+  }
+  public getJobTitle(user) {
+    let find = this.jobTitleList.find(item => item.id === user.jobTitleId);
+    return (find) ? find.name : "";
   }
   getUserAvatarUrl(user) {
     if (!(user && user.avatar)) return '';

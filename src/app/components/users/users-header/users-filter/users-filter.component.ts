@@ -1,7 +1,10 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { CrmCompanyIndustry } from 'src/app/components/setting/crm-settings/crm-company-industry/class/crm-company-industry';
+import { CrmCompanyJobTitle } from 'src/app/components/setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 import { CompanyIndustry } from 'src/app/interfaces/company/company-industry';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { DropDownComponent } from '../../../shared/drop-down/drop-down.component';
 import { UserFilter } from '../../class/user-filter';
@@ -16,48 +19,34 @@ export class UsersFilterComponent implements OnInit {
   @ViewChild('companiesDp') companiesDp: DropDownComponent;
   @ViewChild('industriesDp') industriesDp: DropDownComponent;
   companies = [];
-  industries: Array<CompanyIndustry> = [];
-  allTitles: Array<string> = [];
+  industries: Array<CrmCompanyIndustry> = [];
+  jobTitleList: Array<CrmCompanyJobTitle> = [];
   public filter: UserFilter = new UserFilter();
   sub: Subscription = new Subscription();
   @Output() changeCountFilter = new EventEmitter<any>();
   constructor(private companiesState: CompaniesStateService,
+    private crmStateService: CrmStateService,
     private usersStateService: UsersStateService,) { }
 
   ngOnInit() {
-    if (this.usersStateService.getAllUsers().length > 0) this.getUsersTitle(this.usersStateService.getAllUsers());
-    let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
-      this.getUsersTitle(data);
+    this.jobTitleList = this.crmStateService.getJobTitleList();
+    let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
+      this.jobTitleList = data;
+      if (this.titlesDp) this.titlesDp.reset(this.jobTitleList);
     })
+    this.sub.add(onGetJobTitle);
     if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
     let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
       this.getClientsList(data);
     })
     this.sub.add(getOnCompanies);
-    this.industries = this.companiesState.getIndustries();
-    this.companiesState.onGetIndustries.subscribe(data => {
+    this.industries = this.crmStateService.getIndustryList();
+    let onGetIndustry = this.crmStateService.onGetIndustry.subscribe(data => {
       this.industries = data;
     })
+    this.sub.add(onGetIndustry);
   }
-  getUsersTitle(allUsers) {
-    this.allTitles = allUsers
-      .map((user) => {
-        return user.designation;
-      })
-      .reduce((acc, title) => {
-        let index = acc.findIndex((el) => {
-          return (el || '').toLowerCase() === (title || '').toLowerCase();
-        })
 
-        if (index === -1 && title) {
-          acc.push(title);
-        }
-
-        return acc;
-      }, []).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
-        1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
-
-  }
   public onClearAll() {
 
     if (!this.companiesDp.isDisabled) this.filter.setCompany(null);

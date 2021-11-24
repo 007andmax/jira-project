@@ -299,10 +299,8 @@ body {
         font-weight: 600;
         font-size: 13px;
         font-style: normal;
-        line-height: 1.4;
-        letter-spacing: -0.3px;
-        // color: $primary-2;
-        margin: 0 0 20px 0;
+        line-height: 20px;
+        margin: 0 0 8px 0; // TODO check property
         text-transform: capitalize;
     }
     .form-input {
@@ -480,7 +478,8 @@ body {
 
     form {
         width: 100%;
-        float: left;
+        //float: left; // TODO check property
+        position: relative;
         .form-row {
             float: left;
             width: 100%;
@@ -498,8 +497,7 @@ body {
             line-height: 1.54;
             letter-spacing: normal;
             text-transform: capitalize;
-            margin-bottom: 10px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             display: flex;
             -webkit-display: flex;
             justify-content: space-between;
@@ -1158,13 +1156,13 @@ body {
         height: 40px;
         padding: 0 15px 0 24px;
       }
-      .manage-taxes .cmn-area th {
-        padding: 10px 10px 10px 6px;
+      .cmn-area th {
+        padding: 8px 10px 8px 6px;
         background-color: $gray-100;
         text-transform: uppercase;
       }
       .manage-taxes .cmn-area .rate {
-        padding: 10px 10px 10px 6px;
+        padding: 8px 10px 8px 6px;
       }
       .manage-taxes .cmn-area .action {
         padding: 0 24px 0 0;
@@ -1214,6 +1212,23 @@ body {
         table.dataTable tbody tr:last-child td {
           border-bottom: 1px solid #edf2f6;
         }
+      }
+      .tab-content {
+        .cmn-area-header__job-title,
+        .cmn-area-header__user-type {
+          padding: 8px 10px 8px 9px;
+        }
+      }
+      .add-crm-industry-container,
+      .add-crm-service-type-container,
+      .add-crm-job-title-container,
+      .add-crm-job-type-container {
+        td {
+          background-color: #f4fbff;
+        }
+      }
+      .checkbox-header {
+        width: 56px;
       }
     }
 
@@ -2935,7 +2950,6 @@ div#editor.angular-editor-textarea {
           }
           .btn-primary {
             background-color: $error;
-            background-color: $error;
             border: none;
             margin-right: 16px;
           }
@@ -2964,7 +2978,7 @@ div#editor.angular-editor-textarea {
                     border-radius: 50%;
                 }
                 .message-right {
-                    width: calc(100% - 64px);
+                    width: calc(100% - 26px);
                     h1 {
                         margin-bottom: 0;
                     }
@@ -3020,9 +3034,9 @@ div#editor.angular-editor-textarea {
         }
     }
     .modal-backdrop {
-        background-color: $primary-2;
+        background-color: rgba(54, 70, 86, 0.8);
         &.show {
-            opacity: 0.8;
+            opacity: 1;
             filter: alpha(opacity=80);
         }
     }
@@ -3032,7 +3046,7 @@ div#editor.angular-editor-textarea {
             margin: 0;
             left: 50%;
             top: 50%;
-            max-width: 360px;
+            max-width: 488px;
             @media (max-width: 767px) {
               width: calc(100% - 32px);
             }

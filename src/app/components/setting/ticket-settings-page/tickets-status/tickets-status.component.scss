@@ -20,9 +20,9 @@
             background-color: #f9fafb;
             text-transform: uppercase;
         }
-      .tax-name {
-        padding-left: 0;
-      }
+        .tax-name {
+            padding-left: 0;
+        }
     }
     .modal-content {
         right: 15px;
@@ -41,22 +41,23 @@
         font-weight: 600;
         color: $primary-2;
         text-indent: 8px;
+        position: relative;
         @media only screen and (max-width: 576px) {
             width: 105px;
         }
         input {
-          font-weight: 500;
-          color: $primary-2;
-          &::placeholder {
-            font-weight: 400;
-            color: $gray-600;
-          }
+            font-weight: 500;
+            color: $primary-2;
+            &::placeholder {
+                font-weight: 400;
+                color: $gray-600;
+            }
         }
     }
     .dataTable {
-      .tax-preview {
-        padding-left: 0;
-      }
+        .tax-preview {
+            padding-left: 0;
+        }
     }
     .checkbox {
         margin: 0;
@@ -77,14 +78,14 @@
         .tag-color {
             position: relative;
             &::after {
-              content: "";
-              position: absolute;
-              left: 50%;
-              top: 50%;
-              transform: translate(-50%, -50%);
-              background: url("/assets/img/icons/check-mark.svg") no-repeat center / contain;
-              width: 8px;
-              height: 6px;
+                content: "";
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                background: url("/assets/img/icons/check-mark.svg") no-repeat center / contain;
+                width: 8px;
+                height: 6px;
             }
         }
     }
@@ -102,7 +103,7 @@
     .action {
         width: 90px;
         position: relative;
-        padding: 0 24px 0 15px;;
+        padding: 0 24px 0 15px;
         @media only screen and (max-width: 576px) {
             width: 50px;
         }
@@ -196,8 +197,8 @@
             border-color: $gray-600;
         }
         &::placeholder {
-          font-weight: 400;
-          color: $gray-600;
+            font-weight: 400;
+            color: $gray-600;
         }
     }
 }

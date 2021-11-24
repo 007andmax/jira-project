@@ -1,6 +1,7 @@
 import { FilterListTop } from 'src/class/list/filter-list-top';
 import { User } from './user';
 import { Company } from 'src/app/interfaces/company/company';
+import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 
 export class UserFilter {
     filterTop: Array<FilterListTop> = [new FilterListTop('name', 'ASC'),
@@ -11,7 +12,7 @@ export class UserFilter {
     clientType: string;
     company: string;
     clientIndustry: string;
-    title: string;
+    title: CrmCompanyJobTitle;
     constructor() { }
 
     public setLeftFilters(clientType, company, clientIndustry, title) {
@@ -41,7 +42,7 @@ export class UserFilter {
             if (indexCompany > -1 && this.clientType === companies[indexCompany].clientType) clientType = true;
             if (indexCompany > -1 && this.clientIndustry === ((companies[indexCompany].clientIndustry) ? companies[indexCompany].clientIndustry.name : '')) clientIndustry = true;
 
-            if (((this.clientType) ? clientType === true : true) && ((this.title) ? item.designation === this.title : true) && ((this.company) ? this.company === item.company.id : true) && ((this.clientIndustry) ? clientIndustry === true : true)) {
+            if (((this.clientType) ? clientType === true : true) && ((this.title) ? item.jobTitleId === this.title.id : true) && ((this.company) ? this.company === item.company.id : true) && ((this.clientIndustry) ? clientIndustry === true : true)) {
                 return true;
             } else {
                 return false;

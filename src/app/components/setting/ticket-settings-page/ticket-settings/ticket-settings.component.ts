@@ -146,7 +146,7 @@ export class TicketSettingsComponent implements OnInit {
         new CompanySetting('10 minutes', 'TEN_MINUTES'),
         new CompanySetting('15 minutes', 'FIFTEEN_MINUTES')];
     }
-    this.intervalsDp.reset(this.intervals);
+    if (this.intervalsDp) this.intervalsDp.reset(this.intervals);
   }
   onChangeInterval(data) {
     this.ticketForm.patchValue({

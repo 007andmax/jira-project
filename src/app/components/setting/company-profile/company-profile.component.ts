@@ -97,16 +97,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   shortCity = '';
   longState = '';
   shortState = '';
-  accountingStartDate: NgbDateStruct = {
-    "day": 0,
-    "month": 0,
-    "year": 0,
-  };
-  accountingEndDate: NgbDateStruct = {
-    "day": new Date().getDate(),
-    "month": new Date().getMonth() + 1,
-    "year": new Date().getFullYear(),
-  };
   @ViewChild('search')
   public searchElementRef: ElementRef;
 
@@ -136,7 +126,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
       timeSettings: { workingDays: [], outliersSeconds: 0 },
       supportMailBox: ''
     };
-    this.getAccountingStartDate();
     this.createCProfileForm();
 
     if (this.companiesStateService.getCurrentCompany()) this.getCurrentCompany(this.companiesStateService.getCurrentCompany());
@@ -174,20 +163,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     // this.ngZone.run(() => this.formattedAddress = place['formatted_address']);
   }
 
-  getAccountingStartDate() {
-    this.companyProfileService.getAccountingStartDate().subscribe(
-      (res: any) => {
-        if (res.accountingStartDate !== null) {
-          this.accountingStartDate = {
-            "day": new Date(res.accountingStartDate).getDate(),
-            "month": new Date(res.accountingStartDate).getMonth() + 1,
-            "year": new Date(res.accountingStartDate).getFullYear(),
-          };
-        }
-      },
-      error => { }
-    );
-  }
+
 
   getAddressAutocomplete() {
     // load address Autocomplete
@@ -1052,28 +1028,5 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     const body = document.getElementsByTagName('body')[0];
     body.classList.remove('backMenu'); // remove the class
     body.classList.add('backMenu');
-  }
-
-  saveAccountingDate() {
-    let data = new Date(this.accountingStartDate.month + '/' + this.accountingStartDate.day + '/' + this.accountingStartDate.year).getTime()
-    this.companyProfileService.setAccountingStartDate(data).subscribe(
-      (res: any) => {
-        this.toaster.success('Accounting date updated successfully', null, {
-          timeOut: 3000
-        });
-      },
-      error => { }
-    );
-  }
-
-  resetAccountingDate() {
-    this.companyProfileService.resetAccountingStartDate().subscribe(
-      (res: any) => {
-        this.toaster.success('Accounting date reset successfully', null, {
-          timeOut: 3000
-        });
-      },
-      error => { }
-    );
   }
 }

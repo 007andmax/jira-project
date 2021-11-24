@@ -76,6 +76,10 @@
                 class="quote-text-block"
                 placeholder="Write message here…"
                 [(ngModel)]="message"
+                appTextArea
+                [maxLines]="10"
+                cols="5"
+                rows="1"
                 (ngModelChange)="setMessage($event)"
             ></textarea>
         </div>

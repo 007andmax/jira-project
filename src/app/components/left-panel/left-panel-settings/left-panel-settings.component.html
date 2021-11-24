@@ -34,18 +34,21 @@
     <li
         [ngClass]="{'--active':activePage === 'tech-component'}"
         (click)="goToState('tech-component')"
+        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TECH_USERS_SETTINGS')"
     >
         Manage Tech Users
     </li>
     <li
         [ngClass]="{'--active':activePage === 'email-setting-component'}"
         (click)="goToState('email-setting-component')"
+        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_EMAIL_SETTINGS')"
     >
         Email Settings
     </li>
     <li
         [ngClass]="{'--active':activePage === 'taxes-component'}"
         (click)="goToState('taxes-component')"
+        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TAXES_SETTINGS')"
     >
         Taxes
     </li>
@@ -59,12 +62,21 @@
     <li
         [ngClass]="{'--active':activePage === 'email-templete-component'}"
         (click)="goToState('email-templete-component')"
+        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_EMAIL_TEMPLATES_SETTINGS')"
     >
         Email Templetes
     </li>
     <li
+        [ngClass]="{'--active':activePage === 'crm-settings'}"
+        (click)="goToState('crm-settings')"
+        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_CRM_SETTINGS')"
+    >
+        CRM Settings
+    </li>
+    <li
         [ngClass]="{'--active':activePage === 'ticket-settings'}"
         (click)="goToState('ticket-settings')"
+        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TICKET_SETTINGS')"
     >
         Ticket Settings
     </li>
@@ -77,12 +89,13 @@
     <li
         [ngClass]="{'--active':activePage === 'invoice-ticket-component'}"
         (click)="goToState('invoice-ticket-component')"
+        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_ACCOUNTING_SETTINGS')"
     >
         Accounting
     </li>
     <li
         [ngClass]="{'--active':activePage === 'products-settings'}"
-        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TAGS_SETTINGS')"
+        *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_PRODUCT_CATEGORY_SETTINGS')"
         (click)="goToState('products-settings')"
     >
         Products

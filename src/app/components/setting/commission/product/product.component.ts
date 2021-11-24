@@ -1,40 +1,59 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommissionService, ICategory } from '../commission.service';
 import { ToastrService } from 'ngx-toastr';
+import { DELETE_COMMISSION_PRODUCT } from 'src/app/const/confirm';
+import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
+import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss']
 })
-export class ProductComponent implements OnInit {
+export class ProductComponent implements OnInit, OnDestroy {
   loading = false;
   categories: any;
   edit = false;
   selectedIdx = -1;
-  public deletePopup = false;	
-  public confirmPopup = false;	
-  rate: any;	
-  id: string;	
-  category: any;	
+  public confirmPopup = false;
+  rate: any;
+  id: string;
+  category: any;
   factItem = false;
+  sub: Subscription = new Subscription();
   constructor(
     private commissionService: CommissionService,
-    private toastrService: ToastrService
-  ) {}
+    private toastrService: ToastrService,
+    private confirmStateService: ConfirmStateService,
+    private modalService: NgbModal
+  ) { }
+
 
   ngOnInit() {
     this.getCategories();
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === DELETE_COMMISSION_PRODUCT) {
+          this.removeProduct()
+        }
+      }
+    })
+    this.sub.add(getConfirm);
   }
 
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
   /**
    * get categories
    */
   getCategories() {
-    this.loading = true;$(".loading").css("display", "block");
+    this.loading = true; $(".loading").css("display", "block");
     this.commissionService.getCategories().subscribe(
       res => {
-        this.loading = false;$(".loading").css("display", "none");
+        this.loading = false; $(".loading").css("display", "none");
         if (res && res.length > 0) {
           this.categories = res;
           for (const cat of this.categories) {
@@ -45,7 +64,7 @@ export class ProductComponent implements OnInit {
         }
       },
       error => {
-        this.loading = false;$(".loading").css("display", "none");
+        this.loading = false; $(".loading").css("display", "none");
       }
     );
   }
@@ -54,26 +73,24 @@ export class ProductComponent implements OnInit {
    * set product rate zero
    * @param category
    */
-  removeProduct() {	
-    if (this.category && this.category.commissionRate) {	
-      this.loading = true;$(".loading").css("display", "block");	
-      this.commissionService	
-        .setCategoryRate(this.category.id, '0', false)	
-        .subscribe(	
-          res => {	
-            this.toastrService.success('Removed Successfully')	
-            this.selectedIdx = -1;	
-            this.loading = false;$(".loading").css("display", "none");	
-            this.category.commissionRate = null;	
-            this.deletePopup = false;	
-          },	
-          error => {	
-            this.deletePopup = false;	
-            this.toastrService.error('Bad Request')	
-            this.loading = false;$(".loading").css("display", "none");	
-          }	
-        );	
-      }
+  removeProduct() {
+    if (this.category && this.category.commissionRate) {
+      this.loading = true; $(".loading").css("display", "block");
+      this.commissionService
+        .setCategoryRate(this.category.id, '0', false)
+        .subscribe(
+          res => {
+            this.toastrService.success('Removed Successfully')
+            this.selectedIdx = -1;
+            this.loading = false; $(".loading").css("display", "none");
+            this.category.commissionRate = null;
+          },
+          error => {
+            this.toastrService.error('Bad Request')
+            this.loading = false; $(".loading").css("display", "none");
+          }
+        );
+    }
   }
 
   editProduct(i: number) {
@@ -103,13 +120,13 @@ export class ProductComponent implements OnInit {
           data.setForOldExpenses = true;
         }
       }
-      this.loading = true;$(".loading").css("display", "block");
+      this.loading = true; $(".loading").css("display", "block");
       this.commissionService
         .setCategoryRate(this.id, data.rate, data.setForOldExpenses)
         .subscribe(
           (res: any) => {
             this.toastrService.success(`Commission Rate Changed Successfully`);
-            this.loading = false;$(".loading").css("display", "none");
+            this.loading = false; $(".loading").css("display", "none");
             this.category.commissionRate = res.commissionRate.toFixed(2);
             this.selectedIdx = -1;
             this.factItem = false;
@@ -117,7 +134,7 @@ export class ProductComponent implements OnInit {
           },
           error => {
             this.selectedIdx = -1;
-            this.loading = false;$(".loading").css("display", "none");
+            this.loading = false; $(".loading").css("display", "none");
             this.toastrService.error('Bad Request');
             this.factItem = false;
             this.confirmPopup = false;
@@ -128,12 +145,14 @@ export class ProductComponent implements OnInit {
     }
   }
 
-  confirmDelete(data: any){
+  confirmDelete(data: any) {
     this.category = data;
-    this.deletePopup = true;
+    this.confirmStateService.setConfirmAction(DELETE_COMMISSION_PRODUCT);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    modalRef.componentInstance.message = `Are you sure you want ${this.category.name} commission rate to zero?`;
   }
 
-  confirmEdit(rate, id: string, category: any){
+  confirmEdit(rate, id: string, category: any) {
     this.rate = rate;
     this.id = id;
     this.category = category;
@@ -144,6 +163,6 @@ export class ProductComponent implements OnInit {
       this.factItem = false;
       this.setCategoryRate();
     }
-    
+
   }
 }

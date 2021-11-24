@@ -14,11 +14,9 @@ import { CompanyIndustry } from 'src/app/interfaces/company/company-industry';
 })
 export class CompaniesStateService {
   allCompanies = [];
-  industries: Array<CompanyIndustry> = [];
   selectedCompanyId: string = null;
   onChangeSelectedCompanyId: EventEmitter<any> = new EventEmitter();
   onGetCompanies: EventEmitter<any> = new EventEmitter();
-  onGetIndustries: EventEmitter<any> = new EventEmitter();
   onChangeCompanies: EventEmitter<CompanyUpdate> = new EventEmitter();
   showAsideForAdd: EventEmitter<any> = new EventEmitter();
   onEditCompany: EventEmitter<CompanyProfile> = new EventEmitter();
@@ -52,11 +50,6 @@ export class CompaniesStateService {
         if (Index > -1) this.allCompanies[Index] = newChange.data;
       }
       this.onChangeCompanies.emit(new CompanyUpdate(newChange.action, newChange.data, this.allCompanies));
-    })
-    this.companiesService.getIndustries().subscribe((data: Array<CompanyIndustry>) => {
-      this.industries = data.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-        1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-      this.onGetIndustries.emit(this.industries);
     })
   }
   public onInitGetCurrentCompany() {
@@ -92,9 +85,6 @@ export class CompaniesStateService {
   }
   public getCurrentCompany() {
     return this.currentCompany;
-  }
-  public getIndustries() {
-    return this.industries;
   }
   public getChangeCompanies() {
     return this.onChangeCompanies;

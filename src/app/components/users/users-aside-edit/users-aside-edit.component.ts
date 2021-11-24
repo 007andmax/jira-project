@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, OnDestroy } from '@angular/core';
 import { UserProfile } from '../class/user-profile';
 import { UserValidate } from '../class/user-validate';
 import { ImageCropperStateService } from 'src/app/states/image-cropper/image-cropper-state.service';
@@ -20,6 +20,10 @@ import { TitleListType } from '../../tickets/tickets/tickets-header/class/title-
 import { CompanyTagsStateService } from '../../companies/company-tags/states/company-tags-state.service';
 import { CompanyTagsComponent } from '../../companies/company-tags/company-tags.component';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
+import { CrmStateService } from 'src/app/states/crm/crm-state.service';
+import { Subscription } from 'rxjs';
+import { CrmCompanyJobType } from '../../setting/crm-settings/crm-company-job-type/class/crm-company-job-type';
+import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 
 @Component({
   selector: 'users-aside-edit',
@@ -27,20 +31,23 @@ import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
   styleUrls: ['./users-aside-edit.component.scss'],
   providers: [UsersAsideService]
 })
-export class UsersAsideEditComponent implements OnInit {
+export class UsersAsideEditComponent implements OnInit, OnDestroy {
   public opened = false;
   user: UserProfile = new UserProfile();
-  allTitles: Array<string> = [];
+  jobTitleList: Array<CrmCompanyJobTitle> = [];
   selectedCompany: Company;
   companies = [];
   validate: UserValidate = new UserValidate();
   phoneTypes = ['Office', 'Mobile', 'Fax'];
-  selectedUserType = new TitleListType('Standar User', 'USER');
-  userTypes: Array<TitleListType> = [new TitleListType('Standar User', 'USER'),
-  new TitleListType('Manager', 'ADMIN')];
+  selectedUserType: CrmCompanyJobType;
+  selectedUserTitle: CrmCompanyJobTitle;
+  userTypes: Array<CrmCompanyJobType> = [];
+  sub: Subscription = new Subscription();
   @ViewChild('companyTags') companyTags: CompanyTagsComponent;
-  @ViewChild('designationDp') designationDp: DropDownComponent;
-  constructor(private imageCropperStateService: ImageCropperStateService, private usersStateService: UsersStateService,
+  @ViewChild('jobTitleDp') jobTitleDp: DropDownComponent;
+  @ViewChild('jobTypeDp') jobTypeDp: DropDownComponent;
+  constructor(private imageCropperStateService: ImageCropperStateService,
+    private usersStateService: UsersStateService,
     private usersAsideService: UsersAsideService,
     private usersService: UsersService,
     private companiesState: SelectClientCompanyStateService,
@@ -48,20 +55,23 @@ export class UsersAsideEditComponent implements OnInit {
     private modalImageCropperStateService: ModalImageCropperStateService,
     private tagsState: CompanyTagsStateService,
     private companySubscriptionState: CompanySubscriptionStateService,
+    private crmStateService: CrmStateService,
     public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
-    if (this.usersStateService.getAllUsers().length > 0) this.getUsersTitle(this.usersStateService.getAllUsers());
-    let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
-      this.getUsersTitle(data);
+    this.jobTitleList = this.crmStateService.getJobTitleList();
+    let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
+      this.jobTitleList = data;
     })
-    this.usersAsideService.addSubscription(getOnUsers);
+    this.sub.add(onGetJobTitle);
     this.onCroppImage();
     this.usersStateService.getOpenEditAside().subscribe(data => {
       this.opened = true;
+      this.getJobTypeList();
       this.user.onEdit(this.usersStateService.getuserForEdit());
       this.companyTags.setSelectedTag(this.user.tags);
-      this.selectedUserType = this.userTypes.find(item => item.type === this.user.role);
+      this.selectedUserType = this.userTypes.find(item => item.id == this.user.jobTypeId);
+      this.selectedUserTitle = this.jobTitleList.find(item => item.id == this.user.jobTitleId);
       this.validate.addPhoneNumbers(this.user.phoneNumbers);
       this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.user.companyId);
       this.companySubscriptionState.onEditMode(this.user.subscription);
@@ -73,6 +83,19 @@ export class UsersAsideEditComponent implements OnInit {
   }
   public onChangeTags(tags) {
     this.user.setTags(tags);
+  }
+  getJobTypeList() {
+    if (this.crmStateService.getJobTypeList().length === 0) {
+      this.crmStateService.onInitGetJobTypeList();
+    } else {
+      this.userTypes = this.crmStateService.getJobTypeList();
+    }
+    let onGetJobType = this.crmStateService.onGetJobType.subscribe(data => {
+      this.userTypes = data;
+      if (!this.selectedUserType && this.opened) this.selectedUserType = this.userTypes.find(item => item.id == this.user.jobTypeId);
+      if (this.jobTypeDp) this.jobTypeDp.reset(this.userTypes);
+    })
+    this.sub.add(onGetJobType);
   }
   getClientsList(data) {
     this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
@@ -90,25 +113,6 @@ export class UsersAsideEditComponent implements OnInit {
   }
   onChangeJobDescription(event) {
     this.user.jobDescription = event.target.value;
-  }
-  getUsersTitle(allUsers) {
-    this.allTitles = allUsers
-      .map((user) => {
-        return user.designation;
-      })
-      .reduce((acc, title) => {
-        let index = acc.findIndex((el) => {
-          return (el || '').toLowerCase() === (title || '').toLowerCase();
-        })
-
-        if (index === -1 && title) {
-          acc.push(title);
-        }
-
-        return acc;
-      }, []).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
-        1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
-
   }
   getLogoUrl() {
     if (this.user && this.user.avatar && this.user.avatar && this.user.avatar.base64 && !this.user.avatar.cropped) return this.user.avatar.base64;
@@ -145,12 +149,13 @@ export class UsersAsideEditComponent implements OnInit {
     this.validate.checkValidPhoneNumber(i, this.user.phoneNumbers[i].number);
 
   }
-  onSelectDesignation(data) {
-    this.user.setDesignation(data);
+  onSelectJobTitle(data) {
+    this.selectedUserTitle = data;
+    this.user.setJobTitleId(data.id);
   }
   onSelectRole(data) {
     this.selectedUserType = data;
-    this.user.setRole(data.type);
+    this.user.setJobTypeId(data.id);
   }
   onChangeFistname() {
     this.validate.checkValidFirstName(this.user.firstName);
@@ -227,7 +232,10 @@ export class UsersAsideEditComponent implements OnInit {
     this.user = new UserProfile();
     this.validate = new UserValidate();
     this.companiesState.onInitClear();
-    this.designationDp.clearWithOutChanges();
+    this.selectedUserTitle = null;
+    this.selectedUserType = null;
+    this.jobTitleDp.clearWithOutChanges();
+    this.jobTypeDp.clearWithOutChanges();
     if (!this.cd['destroyed']) {
       this.cd.detectChanges();
     }
@@ -238,4 +246,8 @@ export class UsersAsideEditComponent implements OnInit {
   public trackById(index, item) {
     return item.id;
   }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
 }

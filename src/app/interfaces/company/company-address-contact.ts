@@ -6,7 +6,8 @@ export interface CompanyAndressContact {
     company: CompanyAndressAcount;
     contact: any;
     deletedAt: any;
-    designation: any;
+    jobTitleId: string;
+    jobTypeId: string;
     firstName: string;
     id: string;
     isContact: any;
