@@ -3,29 +3,29 @@
     width: 100%;
     border-collapse: collapse;
     .device {
-      width: 20% !important;
+      width: 15% !important;
       padding: 0 18px 0 18px;
       background-color: white;
       height: 40px;
-    }
-    .domain {
-      width: 15% !important;
-      padding: 0px;
     }
     .manufacturer {
       width: 25% !important;
       padding: 0px;
     }
-    .subnet {
+    .model {
       width: 15% !important;
       padding: 0px;
     }
-    .gateway {
+    .installdate {
       width: 15% !important;
       padding: 0px;
     }
-    .externalIP {
-      width: 10% !important;
+    .warranty {
+      width: 15% !important;
+      padding: 0px;
+    }
+    .renewdate {
+      width: 15% !important;
       padding: 0px;
     }
     thead {

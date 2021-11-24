@@ -87,6 +87,7 @@
             <table class="dataTable cmn-tab-head">
                 <thead>
                     <tr>
+                        <th class="application">APPLICATION</th>
                         <th
                             class="device"
                             (click)="onFilter('AssetNames')"
@@ -100,6 +101,7 @@
                 </thead>
                 <tbody class="applicationbycompany-report-table">
                     <tr *ngFor="let applicationByCompany of applicationByCompanyList">
+                        <td class="application">{{applicationByCompany.DisplayName}}</td>
                         <td class="device">{{applicationByCompany.AssetNames}}</td>
                         <td class="version">
                             {{ applicationByCompany.DisplayVersion }}

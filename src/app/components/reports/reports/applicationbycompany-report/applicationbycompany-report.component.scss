@@ -2,18 +2,22 @@
   table {
     width: 100%;
     border-collapse: collapse;
-    .device{
-      width: 30% !important;
+    .application{
+      width: 40% !important;
       padding: 0 18px 0 18px;
       background-color: white;
       height: 40px;
     }
+    .device{
+      width:25% !important;
+      padding: 0px;
+    }
     .version {
-      width: 30% !important;
+      width: 25% !important;
       padding: 0px;
     }
     .deviceCount {
-      width: 40% !important;
+      width: 10% !important;
     }
     thead {
       th {

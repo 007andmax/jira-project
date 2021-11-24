@@ -154,6 +154,7 @@ export class NetworkDetailReportComponent implements OnInit {
         this.addNewlines(element.Gateway) || "N/A",
         this.addNewlines(element.DNS1) || "N/A",
         this.addNewlines(element.DNS2) || "N/A",
+        "N/A",
       ]);
     });
     let html =
@@ -257,6 +258,7 @@ export class NetworkDetailReportComponent implements OnInit {
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 10%;">Gateway</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 8%;">Dns1</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 8%;">Dns2</th>
+                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 10%;">Ext IP</th>
                         </tr>
                     </thead>
                     <tbody>`;
@@ -311,6 +313,11 @@ export class NetworkDetailReportComponent implements OnInit {
         html +
         `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 8%;vertical-align: top;">` +
         element[9] +
+        `</td>`;
+      html =
+        html +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 8%;vertical-align: top;">` +
+        element[10] +
         `</td></tr>`;
     });
     html =
@@ -391,6 +398,7 @@ export class NetworkDetailReportComponent implements OnInit {
         element.Gateway || "N/A",
         element.DNS1 || "N/A",
         element.DNS2 || "N/A",
+        "N/A",
       ]);
     });
     let fileName = "Device Network Detail Report List";

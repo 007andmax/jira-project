@@ -2,7 +2,7 @@
   table {
     width: 100%;
     border-collapse: collapse;
-    .dns1, .dns2, .gateway, .subnet, .ip, .mac, .type, .domain, .device{
+    .dns1, .dns2, .gateway, .subnet, .ip, .mac, .type, .domain, .device, .extIP{
       width:240px;
       min-width: 240px;
       height:40px;

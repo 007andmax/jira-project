@@ -102,7 +102,7 @@
               <tbody class="network-adapter-report-table">
                   <tr *ngFor="let networkAdapter of networkAdapterList">
                       <td class="device">{{ networkAdapter.Name }}</td>
-                      <td class="adapter"></td>
+                      <td class="adapter">{{ networkAdapter.NicName }}</td>
                       <td class="linkspeed">{{ networkAdapter.Speed }}</td>
                       <td class="driverversion"></td>
                   </tr>

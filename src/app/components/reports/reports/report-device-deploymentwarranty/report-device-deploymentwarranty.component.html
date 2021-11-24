@@ -94,21 +94,21 @@
                           DEVICE NAME
                           <span class="qt-table-modern__sorting"></span>
                       </th>
-                      <th class="domain">DOMAIN</th>
                       <th class="manufacturer">MANUFACTURER</th>
-                      <th class="subnet">SUBNET</th>
-                      <th class="gateway">GATEWAY</th>
-                      <th class="externalIP">EXTERNAL IP</th>
+                      <th class="model">MODEL</th>
+                      <th class="installdate">INSTALL DATE</th>
+                      <th class="warranty">WARRANTY</th>
+                      <th class="renewdate">RENEW DATE</th>
                   </tr>
               </thead>
               <tbody class="network-ip-report-table">
                   <tr *ngFor="let deviceDeploymentWarranty of deviceDeploymentWarrantyList">
                       <td class="device">{{ deviceDeploymentWarranty.Name }}</td>
-                      <td class="domain">{{deviceDeploymentWarranty.Domain}}</td>
-                      <td class="manufacturer">{{ deviceDeploymentWarranty.Manufacturer }}</td>
-                      <td class="subnet">{{deviceDeploymentWarranty.SubnetMask}}</td>
-                      <td class="gateway">{{ deviceDeploymentWarranty.DefaultGateway }}</td>
-                      <td class="externalIP">{{ deviceDeploymentWarranty.ExternalIPAddress }}</td>
+                      <td class="manufacturer">{{deviceDeploymentWarranty.Manufacturer}}</td>
+                      <td class="model">{{ deviceDeploymentWarranty.Model }}</td>
+                      <td class="installdate">{{deviceDeploymentWarranty.InstallDate | date: DateFormat}}</td>
+                      <td class="warranty">{{ deviceDeploymentWarranty.WarrantyExpires | date: DateFormat }}</td>
+                      <td class="renewdate">{{ deviceDeploymentWarranty.RenewDate | date: DateFormat }}</td>
                   </tr>
               </tbody>
           </table>

@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
@@ -34,6 +35,7 @@ export class ReportDeviceDeploymentwarrantyComponent implements OnInit {
   template: string = "PDF_TEMPLATE";
   fileName: string = "device-deploymentwarranty-report";
   accountType = "CLIENT";
+  pipe = new DatePipe("en-US");
 
   constructor(
     private agentService: AgentService,
@@ -43,7 +45,7 @@ export class ReportDeviceDeploymentwarrantyComponent implements OnInit {
     private modalService: NgbModal,
     private commonHttpServices: CommonHttpServices,
     private toastr: ToastrService,
-    private excelService: ExcelService
+    private excelService: ExcelService,
   ) { }
 
   ngOnInit() {
@@ -146,11 +148,11 @@ export class ReportDeviceDeploymentwarrantyComponent implements OnInit {
     this.deviceDeploymentWarrantyList.forEach((element) => {
       pdfList.push([
         element.Name.replace(",", " ") || "N/A",
-        element.Domain || "N/A",
         element.Manufacturer || "N/A",
-        element.SubnetMask || "N/A",
-        element.DefaultGateway || "N/A",
-        element.ExternalIPAddress || "N/A",
+        element.Model || "N/A",
+        this.pipe.transform(element.InstallDate, "dd/MM/yyyy") || "N/A",
+        this.pipe.transform(element.WarrantyExpires, "dd/MM/yyyy") || "N/A",
+        this.pipe.transform(element.RenewDate, "dd/MM/yyyy") || "N/A"
       ]);
     });
     let html =
@@ -244,12 +246,12 @@ export class ReportDeviceDeploymentwarrantyComponent implements OnInit {
                <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;table-layout:fixed;">
                     <thead>
                         <tr>
-                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 20%;">Device Name</th>
-                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 15%;">Domain</th>
+                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 15%;">Device Name</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 25%;">Manufacturer</th>
-                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 15%;">Subnet</th>
-                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 15%;">Gateway</th>
-                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 10%;">ExternalIP</th>
+                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 15%;">Model</th>
+                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 15%;">Install Date</th>
+                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 15%;">Warranty</th>
+                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 15%;">Renew Date</th>
                         </tr>
                     </thead>
                     <tbody>`;
@@ -257,17 +259,17 @@ export class ReportDeviceDeploymentwarrantyComponent implements OnInit {
       html =
         html +
         `<tr style="width: 100%;">
-          <td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 20%;vertical-align: top;">` +
+          <td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 15%;vertical-align: top;">` +
         element[0] +
         `</td>`;
       html =
         html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 15%;vertical-align: top;">` +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 25%;vertical-align: top;">` +
         element[1] +
         `</td>`;
       html =
         html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 25%;vertical-align: top;">` +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 15%;vertical-align: top;">` +
         element[2] +
         `</td>`;
       html =
@@ -282,7 +284,7 @@ export class ReportDeviceDeploymentwarrantyComponent implements OnInit {
         `</td>`;
       html =
         html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 10%;vertical-align: top;">` +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 15%;vertical-align: top;">` +
         element[5] +
         `</td></tr>`;
     });
@@ -346,11 +348,11 @@ export class ReportDeviceDeploymentwarrantyComponent implements OnInit {
     this.deviceDeploymentWarrantyList.forEach((element) => {
       downloadCsvList.push([
         element.Name.replace(",", " ") || "N/A",
-        element.Domain || "N/A",
-        element.Manufacturer.replace(",", " ") || "N/A",
-        element.SubnetMask || "N/A",
-        element.DefaultGateway || "N/A",
-        element.ExternalIPAddress || "N/A",
+        element.Manufacturer.replace(","," ") || "N/A",
+        element.Model || "N/A",
+        this.pipe.transform(element.InstallDate, "dd/MM/yyyy") || "N/A",
+        this.pipe.transform(element.WarrantyExpires, "dd/MM/yyyy") || "N/A",
+        this.pipe.transform(element.RenewDate, "dd/MM/yyyy") || "N/A"
       ]);
     });
     let fileName = "Device Deployment/Warranty Report List";

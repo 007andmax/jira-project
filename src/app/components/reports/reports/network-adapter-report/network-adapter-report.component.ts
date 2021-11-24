@@ -146,7 +146,7 @@ export class NetworkAdapterReportComponent implements OnInit {
     this.networkAdapterList.forEach((element) => {
       pdfList.push([
         element.Name.replace(",", " ") || "N/A",
-        "N/A",
+        element.NicName || "N/A",
         element.Speed,
         "N/A",
       ]);
@@ -332,7 +332,7 @@ export class NetworkAdapterReportComponent implements OnInit {
     this.networkAdapterList.forEach((element) => {
       downloadCsvList.push([
         element.Name.replace(",", " ") || "N/A",
-        "N/A",
+        element.NicName || "N/A",
         element.Speed,
         "N/A",
       ]);
