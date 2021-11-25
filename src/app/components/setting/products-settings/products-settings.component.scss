@@ -30,6 +30,7 @@
         }
         .tax-name {
             width: auto;
+            position: relative;
             @media only screen and (max-width: 576px) {
                 width: 105px;
             }
@@ -116,7 +117,7 @@
             border-color: $gray-600;
         }
         &::placeholder {
-          font-weight: 400;
+            font-weight: 400;
         }
     }
 }

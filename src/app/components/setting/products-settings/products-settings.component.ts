@@ -22,7 +22,6 @@ export class ProductsSettingsComponent implements OnInit, OnDestroy {
   showAddCategory: boolean = false;
   filter: ProductsCategoryFilter = new ProductsCategoryFilter();
   categoriesProducts: Array<CategoryProductSettings> = [];
-
   sub: Subscription = new Subscription();
   constructor(private inventoryStateService: InventoryStateService,
     private confirmStateService: ConfirmStateService,
@@ -100,7 +99,7 @@ export class ProductsSettingsComponent implements OnInit, OnDestroy {
   }
   onEditCategory(item) {
     if (item.isInitEdit) {
-      if (item.length === 0) return;
+      if (item.length === 0 || item.disableUpdate) return;
       this.productService.editCategory(item.id, item.name).pipe(map((res) => res),
         catchError(error => of(undefined)))
         .subscribe(

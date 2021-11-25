@@ -10,7 +10,7 @@ import { ClickOtsideDirective } from 'src/app/directives/click-otside.directive'
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
-import { TicketStatus } from '../../products-settings/class/ticket-status';
+import { TicketStatus } from './class/ticket-status';
 
 @Component({
   selector: 'tickets-status',
@@ -83,7 +83,7 @@ export class TicketsStatusComponent implements OnInit, OnDestroy {
   }
   onEditTicketStatus(item) {
     if (item.isInitEdit) {
-      if (item.name.length === 0) return;
+      if (item.name.length === 0 || item.disableUpdate) return;
       this.ticketsService.editStatus(item.getDataForEdit(item.name, item.color)).pipe(map((res) => res),
         catchError(error => of(undefined))).subscribe(data => {
           item.onInitEdit(false);

@@ -6,7 +6,7 @@ import { Ticket } from '../../class/ticket';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { Subscription } from 'rxjs';
 import { TicketStateService } from '../ticket-edit-aside/services/ticket-state.service';
-import { TicketStatus } from 'src/app/components/setting/products-settings/class/ticket-status';
+import { TicketStatus } from 'src/app/components/setting/ticket-settings-page/tickets-status/class/ticket-status';
 import { StatusColor } from '../../class/status-color';
 
 
