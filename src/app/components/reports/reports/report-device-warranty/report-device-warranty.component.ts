@@ -1,5 +1,5 @@
 import { DatePipe } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
@@ -19,6 +19,7 @@ import { DeviceWarrantyReportFilter } from "./Class/device-warranty-report";
   styleUrls: ["./report-device-warranty.component.scss"],
 })
 export class ReportDeviceWarrantyComponent implements OnInit {
+  @ViewChild('dropdownDevice') dropdownDevice : any;
   clientName: string;
   companies = [];
   deviceWarrantyList: any = [];
@@ -45,7 +46,8 @@ export class ReportDeviceWarrantyComponent implements OnInit {
     private modalService: NgbModal,
     private commonHttpServices: CommonHttpServices,
     private toastr: ToastrService,
-    private excelService: ExcelService
+    private excelService: ExcelService,
+    public elRef: ElementRef
   ) {}
 
   ngOnInit() {
@@ -101,6 +103,7 @@ export class ReportDeviceWarrantyComponent implements OnInit {
     } else {
       this.deviceWarrantyReport.setCompanyId(null);
       this.devices = [];
+      this.dropdownDevice.elRef.nativeElement.querySelector('#dropdown1').value ="All devices";
       this.clientName = "All Companies";
       this.deviceWarrantyList = [];
     }

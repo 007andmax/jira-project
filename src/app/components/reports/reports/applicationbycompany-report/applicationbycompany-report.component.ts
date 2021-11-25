@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
@@ -19,6 +19,7 @@ import { ApplicationByCompanyReportFilter } from "./Class/applicationbycompanyRe
   styleUrls: ["./applicationbycompany-report.component.scss"],
 })
 export class ApplicationbycompanyReportComponent implements OnInit {
+  @ViewChild('dropdownDevice') dropdownDevice : any;
   clientName: string;
   companies = [];
   application = [];
@@ -46,7 +47,8 @@ export class ApplicationbycompanyReportComponent implements OnInit {
     private modalService: NgbModal,
     private commonHttpServices: CommonHttpServices,
     private toastr: ToastrService,
-    private excelService: ExcelService
+    private excelService: ExcelService,
+    public elRef: ElementRef
   ) {}
 
   ngOnInit() {
@@ -110,6 +112,7 @@ export class ApplicationbycompanyReportComponent implements OnInit {
     } else {
       this.applicationByCompanyReport.setCompanyId(null);
       this.application = [];
+      this.dropdownDevice.elRef.nativeElement.querySelector('#dropdown1').value ="All Application";
       this.clientName = "All Companies";
       this.applicationByCompanyList = [];
     }
