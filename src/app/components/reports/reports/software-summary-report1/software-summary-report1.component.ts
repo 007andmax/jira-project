@@ -145,7 +145,7 @@ export class SoftwareSummaryReport1Component implements OnInit {
           .map((item) => item.AssetNames)
           .filter((value, index, self) => self.indexOf(value) === index);
 
-          this.softwareReportList = this.tempReport;
+          this.softwareReportList = this.tempReport.sort((a,b)=>a.AssetNames.toLowerCase()>b.AssetNames.toLowerCase()?1:b.AssetNames.toLowerCase()>a.AssetNames.toLowerCase()?-1:0);
         }
         else
         {
