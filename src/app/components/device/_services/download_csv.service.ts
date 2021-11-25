@@ -30,7 +30,7 @@ export class ExcelService {
     } else if (type === "devicenetworkdetailreport"){
       [(typeArr = ["Device Name", "Domain", "Manf(nic)", "Type", "Mac","IP","Subnet","Gateway","Dns1","Dns2","ExtIP"])];
     } else if (type === "applicationbycompanyreport"){
-      [(typeArr = ["Application", "Device Name", "Version", "Device Count"])];
+      [(typeArr = ["Application", "Version", "Device Count"])];
     } else if (type === "devicediskspacereport"){
       [(typeArr = ["Device Name", "Drive Letter", "Total Space","Used", "Free"])];
     } else if (type === "devicedeploymentwarrantyreport"){

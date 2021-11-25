@@ -21,19 +21,15 @@ import { ApplicationByCompanyReportFilter } from "./Class/applicationbycompanyRe
 export class ApplicationbycompanyReportComponent implements OnInit {
   clientName: string;
   companies = [];
-  software = [];
-  tempReport: any = [];
-  tempDevice: any = [];
-  tempSoftware = [];
+  application = [];
+  temparyApplicationList=[];
   applicationByCompanyList: any = [];
   applicationByCompanyReport: DeviceApplictionByCompanyReport =
     new DeviceApplictionByCompanyReport();
   date = new Date();
   DateFormat = CONFIGCONSTANTS.DateFormat1;
   loading = false;
-  devices = [];
   validate: ApplicationByCompanyValidate = new ApplicationByCompanyValidate();
-  tempararyDeviceList: any = [];
   filter: ApplicationByCompanyReportFilter =
     new ApplicationByCompanyReportFilter();
   selectedClient = null;
@@ -95,53 +91,10 @@ export class ApplicationbycompanyReportComponent implements OnInit {
     this.agentService
       .getCompanyApplicationByGuid(this.applicationByCompanyReport.companyId)
       .subscribe((resp) => {
-        this.tempReport = [];
-        this.software = [];
         if (resp.length > 0) {
-          for (let i = 0; i < resp.length; i++) {
-            if (resp[i].DisplayName != "") {
-              let data = {
-                DisplayName: resp[i].DisplayName,
-              };
-              this.tempSoftware.push(data);
-            }
-            if (resp[i].Publisher != "") {
-              let data = {
-                DisplayName: resp[i].Publisher,
-              };
-              this.tempSoftware.push(data);
-            }
-            this.software = this.tempSoftware
-              .map((item) => item.DisplayName)
-              .filter((value, index, self) => self.indexOf(value) === index);
-
-            if (resp[i].AssetCount > 1) {
-              let Name = resp[i].AssetNames;
-              for (let j = 0; j < Name.length; j++) {
-                let data = {
-                  DisplayName: resp[i].DisplayName,
-                  DisplayVersion: resp[i].DisplayVersion,
-                  Publisher: resp[i].Publisher,
-                  AssetCount: resp[i].AssetCount,
-                  AssetNames: Name[j],
-                };
-                this.tempReport.push(data);
-              }
-            } else {
-              let data = {
-                DisplayName: resp[i].DisplayName,
-                DisplayVersion: resp[i].DisplayVersion,
-                Publisher: resp[i].Publisher,
-                AssetCount: resp[i].AssetCount,
-                AssetNames: resp[i].AssetNames[0],
-              };
-              this.tempReport.push(data);
-            }
-          }
-          this.devices = this.tempReport
-            .map((item) => item.AssetNames)
-            .filter((value, index, self) => self.indexOf(value) === index);
-          this.applicationByCompanyList = this.tempReport;
+          this.applicationByCompanyList = resp;
+          this.temparyApplicationList = resp;
+          this.application = this.temparyApplicationList.map((item)=>item.DisplayName).filter((value,index,self)=>self.indexOf(value)=== index);
         } else {
           this.applicationByCompanyList = [];
         }
@@ -156,25 +109,28 @@ export class ApplicationbycompanyReportComponent implements OnInit {
       this.getReportByCompanyApplication();
     } else {
       this.applicationByCompanyReport.setCompanyId(null);
-      this.devices = [];
+      this.application = [];
       this.clientName = "All Companies";
       this.applicationByCompanyList = [];
     }
   }
 
-  onSelectDevice(data) {
+  onSelectApplication(data) {
     this.applicationByCompanyReport.setDeviceName(data ? data : null);
     if (data) {
       if (
         this.applicationByCompanyReport.companyId &&
         this.applicationByCompanyReport.deviceName
       ) {
-        this.applicationByCompanyList = this.tempReport.filter(
-          (x) => x.AssetNames == data
+        this.applicationByCompanyList = this.temparyApplicationList.filter(
+          (x) => x.DisplayName == data
         );
       }
     } else {
-      this.applicationByCompanyList = this.tempReport;
+      this.applicationByCompanyList = this.temparyApplicationList;
+      this.application = this.temparyApplicationList
+        .map((item) => item.DisplayName)
+        .filter((value, index, self) => self.indexOf(value) === index);
     }
   }
 
@@ -195,7 +151,6 @@ export class ApplicationbycompanyReportComponent implements OnInit {
     this.applicationByCompanyList.forEach((element) => {
       pdfList.push([
         element.DisplayName.replace(","," ") || "N/A",
-        element.AssetNames.replace(",", " ") || "N/A",
         element.DisplayVersion || "N/A",
         element.AssetCount || "N/A",
       ]);
@@ -291,9 +246,8 @@ export class ApplicationbycompanyReportComponent implements OnInit {
                <table style="width: 100%;border: solid 1px #dfe3e8;border-collapse: collapse;text-align: left;table-layout:fixed;">
                     <thead>
                         <tr>
-                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 40%;">Application</th>
-                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 25%;">Device Name</th>
-                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 25%;">Version</th>
+                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 60%;">Application</th>
+                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 30%;">Version</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 10%;">Device Count</th>
                         </tr>
                     </thead>
@@ -302,23 +256,18 @@ export class ApplicationbycompanyReportComponent implements OnInit {
       html =
         html +
         `<tr style="width: 100%;">
-          <td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 40%;vertical-align: top;">` +
+          <td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 60%;vertical-align: top;">` +
         element[0] +
         `</td>`;
       html =
         html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 25%;vertical-align: top;">` +
+        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 30%;vertical-align: top;">` +
         element[1] +
         `</td>`;
       html =
         html +
-        `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 25%;vertical-align: top;">` +
-        element[2] +
-        `</td>`;
-      html =
-        html +
         `<td style="border: solid 1px #dfe3e8;background-color: #ffffff;font-size: 11px;color: #4f5f79;font-family: Arial, Helvetica, sans-serif;padding: 8px 12px;text-align: left;width: 10%;vertical-align: top;">` +
-        element[3] +
+        element[2] +
         `</td></tr>`;
     });
     html =
@@ -385,7 +334,6 @@ export class ApplicationbycompanyReportComponent implements OnInit {
     this.applicationByCompanyList.forEach((element) => {
       downloadCsvList.push([
         element.DisplayName.replace(","," ") || "N/A",
-        element.AssetNames.replace(",", " ") || "N/A",
         element.DisplayVersion || "N/A",
         element.AssetCount || "N/A",
       ]);
