@@ -2,7 +2,7 @@ import { FilterListTop } from "src/class/list/filter-list-top";
 
 export class ApplicationByCompanyReportFilter {
   filterTop: Array<FilterListTop> = [
-    new FilterListTop("AssetNames", "ASC"),
+    new FilterListTop("DisplayName", "ASC"),
   ];
   constructor() {}
 
@@ -10,7 +10,7 @@ export class ApplicationByCompanyReportFilter {
     let index = this.filterTop.findIndex((item) => item.field === field);
     if (index > -1) {
       let sort = this.filterTop[index].filter;
-      if (field === "AssetNames") {
+      if (field === "DisplayName") {
         this.clearFilter();
         if (sort === "" || sort === "DESC") {
           this.filterTop[index].filter = "ASC";

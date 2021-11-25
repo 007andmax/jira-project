@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
@@ -18,6 +18,7 @@ import { DeviceNetworkDetailReportFilter } from "./Class/network-detail-report";
   styleUrls: ["./network-detail-report.component.scss"],
 })
 export class NetworkDetailReportComponent implements OnInit {
+  @ViewChild('dropdownDevice') dropdownDevice : any;
   clientName: string;
   companies = [];
   networkDetailList: any = [];
@@ -44,7 +45,8 @@ export class NetworkDetailReportComponent implements OnInit {
     private modalService: NgbModal,
     private commonHttpServices: CommonHttpServices,
     private toastr: ToastrService,
-    private excelService: ExcelService
+    private excelService: ExcelService,
+    public elRef: ElementRef
   ) {}
 
   ngOnInit() {
@@ -100,6 +102,7 @@ export class NetworkDetailReportComponent implements OnInit {
     } else {
       this.deviceNetworkDetailReport.setCompanyId(null);
       this.devices = [];
+      this.dropdownDevice.elRef.nativeElement.querySelector('#dropdown1').value ="All devices";
       this.clientName = "All Companies";
       this.networkDetailList = [];
     }

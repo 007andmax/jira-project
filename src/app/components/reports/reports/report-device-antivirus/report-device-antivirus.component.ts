@@ -1,5 +1,5 @@
 import { DatePipe } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
@@ -19,6 +19,7 @@ import { DeviceAntivirusReportFilter } from "./Class/device-antivirus-report";
   styleUrls: ["./report-device-antivirus.component.scss"],
 })
 export class ReportDeviceAntivirusComponent implements OnInit {
+  @ViewChild('dropdownDevice') dropdownDevice : any;
   clientName: string;
   companies = [];
   deviceAntivirusList: any = [];
@@ -45,7 +46,8 @@ export class ReportDeviceAntivirusComponent implements OnInit {
     private modalService: NgbModal,
     private commonHttpServices: CommonHttpServices,
     private toastr: ToastrService,
-    private excelService: ExcelService
+    private excelService: ExcelService,
+    public elRef: ElementRef
   ) {}
 
   ngOnInit() {
@@ -101,6 +103,7 @@ export class ReportDeviceAntivirusComponent implements OnInit {
     } else {
       this.deviceAntivirusReport.setCompanyId(null);
       this.devices = [];
+      this.dropdownDevice.elRef.nativeElement.querySelector('#dropdown1').value ="All devices";
       this.clientName = "All Companies";
       this.deviceAntivirusList = [];
     }

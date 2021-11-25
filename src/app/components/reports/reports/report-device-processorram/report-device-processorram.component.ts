@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
@@ -18,6 +18,7 @@ import { DeviceProcessorRamReportFilter } from "./Class/device-processorram-repo
   styleUrls: ["./report-device-processorram.component.scss"],
 })
 export class ReportDeviceProcessorramComponent implements OnInit {
+  @ViewChild('dropdownDevice') dropdownDevice : any;
   clientName: string;
   companies = [];
   deviceProcessorRamList: any = [];
@@ -42,7 +43,8 @@ export class ReportDeviceProcessorramComponent implements OnInit {
     private modalService: NgbModal,
     private commonHttpServices: CommonHttpServices,
     private toastr: ToastrService,
-    private excelService: ExcelService
+    private excelService: ExcelService,
+    public elRef: ElementRef
   ) {}
 
   ngOnInit() {
@@ -98,6 +100,7 @@ export class ReportDeviceProcessorramComponent implements OnInit {
     } else {
       this.deviceProcessorRamReport.setCompanyId(null);
       this.devices = [];
+      this.dropdownDevice.elRef.nativeElement.querySelector('#dropdown1').value ="All devices";
       this.clientName = "All Companies";
       this.deviceProcessorRamList = [];
     }
