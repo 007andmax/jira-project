@@ -61,6 +61,7 @@ import { DocumentPreviewComponent } from './components/documents/document-previe
 import { CompanyDocumentsComponent } from './components/companies/company-documents/company-documents.component';
 import { HomeComponent } from './components/home/home.component';
 import { CompanyDeviceBetaComponent } from './components/company-device-beta/company-device-beta.component';
+import { DeviceComponent } from './components/device/device.component';
 
 const routes: Routes = [
 
@@ -249,44 +250,50 @@ const routes: Routes = [
     component: PaymentsComponent,
   },
   {
-    path: ':company/device/dashboard/:type/:id',
-    component: DashboardComponent
-  },
-  {
-    path: ':company/device/hardware/:type/:id',
-    component: HardwareComponent
-  },
-  {
-    path: ':company/device/software/:type/:id',
-    component: SoftwareComponent
-  },
-  {
-    path: ':company/device/service/:type/:id',
-    component: ServicesComponent
-  },
-  {
-    path: ':company/device/antivirus/:type/:id',
-    component: AntivirusComponent
-  },
-  {
-    path: ':company/device/terminal/:type/:id',
-    component: TerminalComponent
-  },
-  {
-    path: ':company/device/password/:type/:id',
-    component: PasswordComponent
-  },
-  {
-    path: ':company/device/window/:type/:id',
-    component: WindowsComponent
-  },
-  {
-    path: ':company/device/startup/:type/:id',
-    component: StartupComponent
-  },
-  {
-    path: ':company/device/file/:type/:id',
-    component: FileComponent
+    path: ':company/device',
+    component: DeviceComponent,
+    children: [
+      {
+        path: 'dashboard/:type/:id',
+        component: DashboardComponent,
+      },
+      {
+        path: 'hardware/:type/:id',
+        component: HardwareComponent,
+      },
+      {
+        path: 'software/:type/:id',
+        component: SoftwareComponent,
+      },
+      {
+        path: 'service/:type/:id',
+        component: ServicesComponent
+      },
+      {
+        path: 'antivirus/:type/:id',
+        component: AntivirusComponent
+      },
+      {
+        path: 'terminal/:type/:id',
+        component: TerminalComponent
+      },
+      {
+        path: 'password/:type/:id',
+        component: PasswordComponent
+      },
+      {
+        path: 'window/:type/:id',
+        component: WindowsComponent
+      },
+      {
+        path: 'startup/:type/:id',
+        component: StartupComponent
+      },
+      {
+        path: 'file/:type/:id',
+        component: FileComponent
+      },
+    ]
   },
   {
     path: ':company/billing-dashboard',
@@ -339,7 +346,7 @@ const routes: Routes = [
  */
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { useHash: true }),
+    RouterModule.forRoot(routes, { useHash: true, }),
   ],
   exports: [RouterModule],
 })

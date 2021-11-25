@@ -1,4 +1,3 @@
-<app-device-root *ngIf="main_page === PAGE_DEVICE"></app-device-root>
 <div
     class="main-page-container"
     *ngIf="main_page === PAGE_MAIN"
@@ -46,6 +45,9 @@
             </div>
         </div>
     </div>
+</div>
+<div *ngIf="main_page === PAGE_DEVICE">
+    <router-outlet></router-outlet>
 </div>
 <modal-lock-screen
     #contentLockScreenModal

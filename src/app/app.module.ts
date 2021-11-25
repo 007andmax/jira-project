@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, NgZone } from '@angular/core';
-import { UrlHandlingStrategy } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { NgxMaskModule } from 'ngx-mask'
 // @ts-ignore
@@ -462,7 +461,6 @@ import { ReportDeviceProcessorramComponent } from './components/reports/reports/
 import { ReportDeviceDiskspaceComponent } from './components/reports/reports/report-device-diskspace/report-device-diskspace.component';
 import { ApplicationbycompanyReportComponent } from './components/reports/reports/applicationbycompany-report/applicationbycompany-report.component';
 
-
 declare var $: any;
 /**
  * This module represents the main application module
@@ -878,7 +876,7 @@ declare var $: any;
     ReportDeviceDeploymentwarrantyComponent,
     ReportDeviceProcessorramComponent,
     ReportDeviceDiskspaceComponent,
-    ApplicationbycompanyReportComponent,
+    ApplicationbycompanyReportComponent
   ],
   imports: [
     BrowserModule,
