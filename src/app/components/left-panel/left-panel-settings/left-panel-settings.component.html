@@ -22,7 +22,7 @@
         *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TAGS_SETTINGS')"
         (click)="goToState('manage-tags-component')"
     >
-        Manage Tags
+        Tags
     </li>
     <li
         [ngClass]="{'--active':activePage === 'company-profile-component'}"

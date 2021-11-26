@@ -29,6 +29,7 @@
         </div>
         <ngb-tabset
             (tabChange)="setTab($event)"
+            [destroyOnHide]="true"
             [ngClass]="{'clear-padding':activeTab === 'gLNumbers'}"
         >
             <!-- Invoice Settings -->
@@ -37,13 +38,7 @@
                 id="invoiceSettings"
             >
                 <ng-template ngbTabContent>
-                    <app-invoice-settings
-                        [taxIdDescInput]="taxIdDescription"
-                        [taxIdInput]="taxId"
-                        [termInput]="term"
-                        [conditionInput]="condition"
-                        *ngIf="showTab == true && showTerm == true"
-                    ></app-invoice-settings>
+                    <app-invoice-settings></app-invoice-settings>
                 </ng-template>
             </ngb-tab>
             <!-- Quotes Settings -->

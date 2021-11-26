@@ -38,8 +38,11 @@ export class UsersService {
       map((data: any) => data.map((item) => new User(item))));
   }
 
-  public changeUserRole(userId, roleName) {
-    return this.http.put(this.apiUrl + '/users/updateRole/' + userId + '?role=' + roleName.toUpperCase(), {});
+  public changeUserRole(userId, jobTypeId) {
+    return this.http.put(this.apiUrl + '/users/jobType', {
+      "userId": userId,
+      "jobTypeId": jobTypeId
+    });
 
   }
 

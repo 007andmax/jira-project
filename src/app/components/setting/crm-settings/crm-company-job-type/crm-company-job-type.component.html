@@ -41,7 +41,10 @@
                             <span></span>
                         </label>
                     </td>
-                    <td class="tax-name edit-category-name">
+                    <td
+                        class="tax-name edit-category-name"
+                        [ngClass]="{'--input-error' :  item.disableUpdate  }"
+                    >
                         <input
                             type="text"
                             class="form-input"
@@ -49,9 +52,15 @@
                             [(ngModel)]="item.name"
                             appKeyUpEnter
                             (onChange)="onEditJobType(item)"
-                            (input)="item.onInitEdit(true)"
+                            (input)="item.onInitEdit(true);item.checkDublicate(jobTypeList)"
                             maxlength="30"
                         >
+                        <mat-error
+                            class="qt-tooltip-error"
+                            *ngIf="item.disableUpdate"
+                        >
+                            This Job Type is already occupied
+                        </mat-error>
                     </td>
                     <td class="action">
                         <a

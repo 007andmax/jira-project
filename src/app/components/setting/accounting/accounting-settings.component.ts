@@ -19,12 +19,6 @@ declare var $: any;
 })
 export class AccountingSettingsComponent implements OnInit, OnDestroy {
   loading = false;
-  taxId: any;
-  taxIdDescription: any;
-  showTab = false;
-  showTerm = false;
-  term: any;
-  condition: any;
   activeTab: string = "invoiceSettings";
   sub: Subscription = new Subscription();
   @ViewChild('glNumber') glNumber: GlNumberSettingsComponent;
@@ -39,8 +33,7 @@ export class AccountingSettingsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     $('body').addClass('ng7');
     $('body').removeClass('backMenu');
-    this.getTaxNumber();
-    this.getTermsAndConditions();
+
     this.settingStateService.setComponentName('InvoiceTicketsComponent');
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
@@ -61,26 +54,6 @@ export class AccountingSettingsComponent implements OnInit, OnDestroy {
     let body = document.getElementsByTagName("body")[0];
     body.classList.remove("backMenu"); //remove the class
     body.classList.add("backMenu");
-  }
-
-
-  getTaxNumber() {
-    this.loading = true; $(".loading").css("display", "block");
-    this.invoiceTicketsService.getTaxNumber().subscribe(
-      (res: any) => {
-        if (res) {
-          this.taxId = res.taxId;
-          this.taxIdDescription = res.taxIdDescription;
-        } else {
-          this.taxId = "";
-          this.taxIdDescription = "";
-        }
-        this.showTab = true;
-      },
-      error => {
-        this.showTab = true;
-      }
-    );
   }
   onRemoveGlNumbers() {
     forkJoin(this.glNumberStateService.getListGlNumbersForRemove().map(item => this.glNumberService.delete(item.id).pipe(map((res) => res),
@@ -107,26 +80,6 @@ export class AccountingSettingsComponent implements OnInit, OnDestroy {
   }
   create() {
     this.glNumber.toggleShowAddGL(true);
-  }
-  getTermsAndConditions() {
-    this.loading = true; $(".loading").css("display", "block");
-    this.invoiceTicketsService.termsAndConditions().subscribe(
-      (res: any) => {
-        this.loading = false; $(".loading").css("display", "none");
-        if (res) {
-          this.term = res.term;
-          this.condition = res.conditions;
-        } else {
-          this.term = "";
-          this.condition = "";
-        }
-        this.showTerm = true;
-      },
-      error => {
-        this.showTerm = true;
-        this.loading = false; $(".loading").css("display", "none");
-      }
-    );
   }
 
 }

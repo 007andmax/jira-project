@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { InvoiceTicketsService } from '../accounting-settings.service';
 import { ToastrService } from 'ngx-toastr';
+import { forkJoin, of } from 'rxjs';
+import { catchError, map, mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-invoice-settings',
@@ -83,18 +85,30 @@ export class InvoiceSettingsComponent implements OnInit {
       secondaryPhone: [''],
       secondaryPhoneType: ['']
     });
+    this.loading = true; $(".loading").css("display", "block");
+    const source = [this.invoiceTicketsService.getInvoiceContact().pipe(catchError(error => of(undefined))),
+    this.invoiceTicketsService.termsAndConditions().pipe(catchError(error => of(undefined))),
+    this.invoiceTicketsService.actualNumber('INVOICE').pipe(catchError(error => of(undefined))),
+    this.invoiceTicketsService.getTaxNumber().pipe(catchError(error => of(undefined)))];
+    forkJoin(source)
+      .subscribe(
+        (data) => {
+          console.log("data", data);
+          if (data[0]) this.getInvoiceContact(data[0]);
+          if (data[1]) this.getTermsAndConditions(data[1]);
+          if (data[2]) this.getActualNumber(data[2]);
+          if (data[3]) this.getTaxNumber(data[3]);
+          this.loading = false; $(".loading").css("display", "none");
+        },
+        error => {
+        }
+      );
+    /*  this.getInvoiceContact();
+      this.getTermsAndConditions();
+      this.getActualNumber();
+      this.getTaxNumber();*/
 
-    this.getInvoiceContact();
-    // this.getTermsAndConditions();
-    this.getActualNumber();
-    this.invoiceForm.patchValue({
-      taxId: this.taxIdInput,
-      taxIdDescription: this.taxIdDescInput
-    });
-    this.invoiceForm.patchValue({
-      invoiceTerms: this.termInput,
-      conditions: this.conditionInput
-    });
+
   }
 
   // convenience getter for easy access to form fields
@@ -131,131 +145,100 @@ export class InvoiceSettingsComponent implements OnInit {
     );
   }
 
-  getTaxNumber() {
-    this.loading = true; $(".loading").css("display", "block");
-    this.invoiceTicketsService.getTaxNumber().subscribe(
-      (res: any) => {
-        if (res) {
-          this.invoiceForm.patchValue({
-            taxId: res.taxId,
-            taxIdDescription: res.taxIdDescription
-          });
-        }
-      },
-      error => { }
-    );
+  getTaxNumber(res) {
+    if (res) {
+      this.invoiceForm.patchValue({
+        taxId: res.taxId,
+        taxIdDescription: res.taxIdDescription
+      });
+    }
   }
 
   /**
    * get invoice contact details
    */
-  getInvoiceContact() {
+  getInvoiceContact(res: any) {
     // this.getTaxNumber();
     // this.getConditions();
-    this.loading = true; $(".loading").css("display", "block");
-    this.invoiceTicketsService.getInvoiceContact().subscribe(
-      (res: any) => {
-        this.loading = false; $(".loading").css("display", "none");
-        if (res) {
-          this.isDisable = res.invoiceContact.enabled;
-          const state = !this.isDisable ? 'disable' : 'enable';
-          if (!this.isDisable) {
-            Object.keys(this.invoiceForm.controls).forEach(controlName => {
-              if (
-                controlName !== 'invoiceCount' &&
-                controlName !== 'invoiceTerms' &&
-                controlName !== 'enableInvoiceContact' &&
-                controlName !== 'taxIdDescription' &&
-                controlName !== 'taxId' &&
-                controlName !== 'conditions'
-              ) {
-                this.invoiceForm.controls[controlName][state](); // disables/enables each form control based on 'this.formDisabled'
-              }
-            });
+    if (res) {
+      this.isDisable = res.invoiceContact.enabled;
+      const state = !this.isDisable ? 'disable' : 'enable';
+      if (!this.isDisable) {
+        Object.keys(this.invoiceForm.controls).forEach(controlName => {
+          if (
+            controlName !== 'invoiceCount' &&
+            controlName !== 'invoiceTerms' &&
+            controlName !== 'enableInvoiceContact' &&
+            controlName !== 'taxIdDescription' &&
+            controlName !== 'taxId' &&
+            controlName !== 'conditions'
+          ) {
+            this.invoiceForm.controls[controlName][state](); // disables/enables each form control based on 'this.formDisabled'
           }
-
-          this.invoiceForm.patchValue({
-            designation: res.invoiceContact.designation,
-            email: res.invoiceContact.email,
-            enableInvoiceContact: res.invoiceContact.enabled,
-            enableOwnerSending: res.enableOwnerSending,
-            firstName: res.invoiceContact.firstName,
-            lastName: res.invoiceContact.lastName,
-            enableContactSending: res.invoiceContact.enableContactSending,
-          });
-          (<any>document.body.querySelector("#accounting-active")).checked = res.invoiceContact.enableContactSending;
-          const phoneNumbers = res.invoiceContact.phoneNumbers || [];
-          if (phoneNumbers) {
-            phoneNumbers.forEach((phone, i) => {
-              if (i === 0) {
-                this.invoiceForm.patchValue({
-                  primaryPhone: phone.number,
-                  primaryPhoneType: phone.typeNumber
-                });
-              }
-
-              if (i === 1) {
-                this.isAddPhone = true;
-                this.invoiceForm.patchValue({
-                  secondaryPhone: phone.number,
-                  secondaryPhoneType: phone.typeNumber
-                });
-              }
-            });
-            if (phoneNumbers.length === 0) {
-              this.invoiceForm.patchValue({
-                primaryPhone: "",
-                primaryPhoneType: "OFFICE"
-              });
-            }
-          }
-        }
-      },
-      error => {
-        this.loading = false; $(".loading").css("display", "none");
+        });
       }
-    );
+
+      this.invoiceForm.patchValue({
+        designation: res.invoiceContact.designation,
+        email: res.invoiceContact.email,
+        enableInvoiceContact: res.invoiceContact.enabled,
+        enableOwnerSending: res.enableOwnerSending,
+        firstName: res.invoiceContact.firstName,
+        lastName: res.invoiceContact.lastName,
+        enableContactSending: (!res.invoiceContact.enabled) ? true : res.invoiceContact.enableContactSending,
+      });
+      (<any>document.body.querySelector("#accounting-active")).checked = (!res.invoiceContact.enabled) ? true : res.invoiceContact.enableContactSending;
+      const phoneNumbers = res.invoiceContact.phoneNumbers || [];
+      if (phoneNumbers) {
+        phoneNumbers.forEach((phone, i) => {
+          if (i === 0) {
+            this.invoiceForm.patchValue({
+              primaryPhone: phone.number,
+              primaryPhoneType: phone.typeNumber
+            });
+          }
+
+          if (i === 1) {
+            this.isAddPhone = true;
+            this.invoiceForm.patchValue({
+              secondaryPhone: phone.number,
+              secondaryPhoneType: phone.typeNumber
+            });
+          }
+        });
+        if (phoneNumbers.length === 0) {
+          this.invoiceForm.patchValue({
+            primaryPhone: "",
+            primaryPhoneType: "OFFICE"
+          });
+        }
+      }
+    }
+
   }
 
   /**
    * get invoice terms
    */
 
-  getTermsAndConditions() {
-    this.loading = true; $(".loading").css("display", "block");
-    this.invoiceTicketsService.termsAndConditions().subscribe(
-      (res: any) => {
-        this.loading = false; $(".loading").css("display", "none");
-        if (res) {
-          this.invoiceForm.patchValue({
-            invoiceTerms: res.term
-          });
-        }
-      },
-      error => {
-        this.loading = false; $(".loading").css("display", "none");
-      }
-    );
+  getTermsAndConditions(res) {
+    if (res) {
+      this.invoiceForm.patchValue({
+        invoiceTerms: res.term,
+        conditions: res.conditions
+      });
+    }
   }
 
   /**
    * get invoice number
    */
-  getActualNumber() {
-    this.loading = true; $(".loading").css("display", "block");
-    this.invoiceTicketsService.actualNumber('INVOICE').subscribe(
-      (res: any) => {
-        this.loading = false; $(".loading").css("display", "none");
-        if (res) {
-          this.invoiceForm.patchValue({
-            invoiceCount: res.number
-          });
-        }
-      },
-      error => {
-        this.loading = false; $(".loading").css("display", "none");
-      }
-    );
+  getActualNumber(res) {
+    if (res) {
+      this.invoiceForm.patchValue({
+        invoiceCount: res.number
+      });
+    }
   }
 
   onEnableInvoice(data) {

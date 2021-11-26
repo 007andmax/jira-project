@@ -48,7 +48,10 @@
                             <span></span>
                         </label>
                     </td>
-                    <td class="tax-name edit-category-name">
+                    <td
+                        class="tax-name edit-category-name"
+                        [ngClass]="{'--input-error' :  item.disableUpdate  }"
+                    >
                         <input
                             type="text"
                             class="form-input"
@@ -57,8 +60,14 @@
                             appKeyUpEnter
                             (onChange)="onEditIndustry(item)"
                             maxlength="30"
-                            (input)="item.onInitEdit(true)"
+                            (input)="item.onInitEdit(true);item.checkDublicate(industryList)"
                         >
+                        <mat-error
+                            class="qt-tooltip-error"
+                            *ngIf="item.disableUpdate"
+                        >
+                            This Industry is already occupied
+                        </mat-error>
                     </td>
                     <td
                         class="rate"

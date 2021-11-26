@@ -3,6 +3,7 @@ export class CrmCompanyJobType {
     name: string;
     usageCounter: number;
     isInitEdit: boolean = false;
+    disableUpdate: boolean = false;
     constructor(data) {
         this.id = data.id;
         this.name = data.name;
@@ -15,4 +16,15 @@ export class CrmCompanyJobType {
         this.name = data.name;
         this.usageCounter = data.usageCounter | this.usageCounter;
     }
+    public checkDublicate(list) {
+        var duplicate = list.filter((item) => {
+            return item.name.toLowerCase() === this.name.toLowerCase() && item.id !== this.id;
+        });
+        console.log("duplicate", duplicate);
+        if (duplicate && duplicate[0]) {
+            return this.disableUpdate = true;
+        } else {
+            return this.disableUpdate = false;
+        }
+    };
 }

@@ -29,6 +29,7 @@
     }
     .tax-name {
         width: auto;
+        position: relative;
         @media only screen and (max-width: 576px) {
             width: 105px;
         }

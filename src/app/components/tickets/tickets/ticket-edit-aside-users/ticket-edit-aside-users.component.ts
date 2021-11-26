@@ -8,6 +8,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ARCHIVE_USER } from 'src/app/const/confirm';
 import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
 import { Subscription } from 'rxjs';
+import { CrmCompanyJobType } from 'src/app/components/setting/crm-settings/crm-company-job-type/class/crm-company-job-type';
+import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 
 @Component({
   selector: 'app-ticket-edit-aside-users',
@@ -24,6 +26,7 @@ export class TicketEditAsideUsersComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   lastCompanyId: string = '';
   isOpenDropDown: boolean = false;
+  userTypes: Array<CrmCompanyJobType> = [];
   @Input() set setCompanyId(value) {
     this.companyId = value;
     this.onGetUsers();
@@ -33,6 +36,7 @@ export class TicketEditAsideUsersComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     private elRef: ElementRef,
+    private crmStateService: CrmStateService,
     public ticketsListService: TicketsListService,) { }
 
 
@@ -52,6 +56,18 @@ export class TicketEditAsideUsersComponent implements OnInit, OnDestroy {
       });
       this.isOpenDropDown = false;
     });
+    this.getJobTypeList();
+  }
+  getJobTypeList() {
+    if (this.crmStateService.getJobTypeList().length === 0) {
+      this.crmStateService.onInitGetJobTypeList();
+    } else {
+      this.userTypes = this.crmStateService.getJobTypeList();
+    }
+    let onGetJobType = this.crmStateService.onGetJobType.subscribe(data => {
+      this.userTypes = data;
+    })
+    this.sub.add(onGetJobType);
   }
   onOpenDropDown(input, dropDown) {
     let list = this.elRef.nativeElement.querySelectorAll('.dropdown-menu-qt');
@@ -91,8 +107,8 @@ export class TicketEditAsideUsersComponent implements OnInit, OnDestroy {
   sendEmail(user) {
     window.open("mailto:" + user.primaryEmail, '_parent');
   }
-  changeUserRole(user, userRole) {
-    this.usersService.changeUserRole(user.id, userRole).subscribe(data => {
+  changeUserRole(user, jobTypeId) {
+    this.usersService.changeUserRole(user.id, jobTypeId).subscribe(data => {
 
     })
   };
