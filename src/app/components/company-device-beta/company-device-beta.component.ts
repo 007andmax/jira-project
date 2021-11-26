@@ -386,4 +386,14 @@ export class CompanyDeviceBetaComponent implements OnInit {
     this.open = false;
     this.tab = "SYSTEM";
   }
+
+  updateAsset(){
+    this.agentService.overrideAsset(this.assetData).subscribe(
+      (resp) => {
+      },
+      (error) => {
+        this.toastr.error("Something went wrong please try again.");
+      }
+    );
+  }
 }

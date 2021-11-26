@@ -490,27 +490,37 @@
                 <div>
                     <div class="sidebar-system__info edit-field">
                         <div class="sidebar-system__info-title">Name</div>
+                        <input
+                        type="text"
+                        class="device-table__input-name"
+                        [(ngModel)]="assetData.Title"
+                        (blur)="updateAsset()"
+                        >
                     </div>
-                </div>
-                <div>
+                  </div>
+              <div>
                     <div class="sidebar-system__info">
                         <div class="sidebar-system__info-title">Asset Tag</div>
+                        <input type="text" class="device-table__input-name" [(ngModel)]="assetData.Tag" (blur)="updateAsset()" >
                     </div>
                 </div>
                 <div>
                     <div class="sidebar-system__info">
                         <div class="sidebar-system__info-title">Manufacturer</div>
+                        <input type="text" class="device-table__input-name" [(ngModel)]="assetData.Manufacturer" (blur)="updateAsset()">
                     </div>
                 </div>
                 <div class="sidebar-system__info">
                     <div class="sidebar-system__info-title">IP address</div>
                     <div
                         class="sidebar-system__info-text"
+                        [textContent]="assetData.InternalIPAddress"
                     ></div>
                 </div>
                 <div>
                     <div class="sidebar-system__info">
                         <div class="sidebar-system__info-title">Computer Model</div>
+                        <input type="text" class="device-table__input-name" [(ngModel)]="assetData.Model" (blur)="updateAsset()">
                     </div>
                 </div>
             </div>

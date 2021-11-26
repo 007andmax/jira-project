@@ -117,3 +117,15 @@
     margin: 0px 0px 0px 20px;
   }
 }
+
+.device-table__input-name {
+  width: 100%;
+  border: 1px solid #dfe3e8;
+  border-radius: 4px;
+  outline: none;
+  border-color: transparent;
+  &:hover, &:focus {
+    border-color:#dfe3e8;
+    outline: none;
+  }
+}
