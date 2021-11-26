@@ -111,8 +111,9 @@ export class ApplicationbycompanyReportComponent implements OnInit {
       this.getReportByCompanyApplication();
     } else {
       this.applicationByCompanyReport.setCompanyId(null);
+      this.applicationByCompanyReport.setDeviceName(null);
       this.application = [];
-      this.dropdownDevice.elRef.nativeElement.querySelector('#dropdown1').value ="All Application";
+      this.dropdownDevice.elRef.nativeElement.querySelector('#dropdown1').value =null;
       this.clientName = "All Companies";
       this.applicationByCompanyList = [];
     }

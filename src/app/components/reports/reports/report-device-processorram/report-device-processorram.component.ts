@@ -99,8 +99,9 @@ export class ReportDeviceProcessorramComponent implements OnInit {
       this.getAllCompanyList(selectClient.id);
     } else {
       this.deviceProcessorRamReport.setCompanyId(null);
+      this.deviceProcessorRamReport.setDeviceName(null);
       this.devices = [];
-      this.dropdownDevice.elRef.nativeElement.querySelector('#dropdown1').value ="All devices";
+      this.dropdownDevice.elRef.nativeElement.querySelector('#dropdown1').value =null;
       this.clientName = "All Companies";
       this.deviceProcessorRamList = [];
     }

@@ -102,8 +102,9 @@ export class ReportDeviceWarrantyComponent implements OnInit {
       this.getAllCompanyList(selectClient.id);
     } else {
       this.deviceWarrantyReport.setCompanyId(null);
+      this.deviceWarrantyReport.setDeviceName(null);
       this.devices = [];
-      this.dropdownDevice.elRef.nativeElement.querySelector('#dropdown1').value ="All devices";
+      this.dropdownDevice.elRef.nativeElement.querySelector('#dropdown1').value =null;
       this.clientName = "All Companies";
       this.deviceWarrantyList = [];
     }

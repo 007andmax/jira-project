@@ -102,8 +102,9 @@ export class NetworkIpReportComponent implements OnInit {
       this.getAllCompanyList(selectClient.id);
     } else {
       this.deviceNetworkIpReport.setCompanyId(null);
+      this.deviceNetworkIpReport.setDeviceName(null);
       this.devices = [];
-      this.dropdownDevice.elRef.nativeElement.querySelector('#dropdown1').value ="All devices";
+      this.dropdownDevice.elRef.nativeElement.querySelector('#dropdown1').value =null;
       this.clientName = "All Companies";
       this.networkipList = [];
     }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
@@ -19,6 +19,8 @@ import { SoftwareSummaryReportFilter } from "./Class/software-summary-report1-fi
   styleUrls: ["./software-summary-report1.component.scss"],
 })
 export class SoftwareSummaryReport1Component implements OnInit {
+  @ViewChild('dropdownDevice') dropdownDevice : any;
+  @ViewChild('dropdownSoftware') dropdownSoftware : any;
   tempararyDeviceList: any = [];
   tempararySoftwareList: any = [];
   softwareReportList: any = [];
@@ -54,6 +56,7 @@ export class SoftwareSummaryReport1Component implements OnInit {
     private companiesState: CompaniesStateService,
     public leftPanelStateService: LeftPanelStateService,
     private modalService: NgbModal,
+    public elRef: ElementRef
   ) {}
 
   ngOnInit() {
@@ -155,7 +158,7 @@ export class SoftwareSummaryReport1Component implements OnInit {
   }
 
   onSelectSoftware(data) {
-    this.softwareSummaryReport.setSoftwareSoft(data);
+    this.softwareSummaryReport.setSoftwareSoft(data ? data : null);
     if (data) {
       if (
         this.softwareSummaryReport.deviceName &&
@@ -307,7 +310,11 @@ export class SoftwareSummaryReport1Component implements OnInit {
       this.getReportBySoftwareSummary();
     } else {
       this.softwareSummaryReport.setCompanyId(null);
+      this.softwareSummaryReport.setDeviceName(null);
+      this.softwareSummaryReport.setSoftwareSoft(null);
       this.softwareReportList = [];
+      this.dropdownDevice.elRef.nativeElement.querySelector('#dropdown1').value=null;
+      this.dropdownSoftware.elRef.nativeElement.querySelector('#dropdown1').value=null;
     }
   }
 

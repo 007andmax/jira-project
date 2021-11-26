@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
@@ -19,6 +19,7 @@ import { DeviceSummaryReportFilter } from "./Class/device-summary-report";
   styleUrls: ["./report-device-summary.component.scss"],
 })
 export class ReportDeviceSummaryComponent implements OnInit {
+  @ViewChild('dropdownDevice') dropdownDevice : any;
   tempararyDeviceList: any = [];
   tempararyDevice: any = [];
   deviceSummaryList: any = [];
@@ -48,7 +49,8 @@ export class ReportDeviceSummaryComponent implements OnInit {
     private excelService: ExcelService,
     private companiesState: CompaniesStateService,
     public leftPanelStateService: LeftPanelStateService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    public elRef: ElementRef
   ) {}
 
   ngOnInit() {
@@ -153,7 +155,9 @@ export class ReportDeviceSummaryComponent implements OnInit {
       this.getReportByDeviceSummary();
     } else {
       this.deviceSummaryReport.setCompanyId(null);
+      this.deviceSummaryReport.setDeviceName(null);
       this.devices = [];
+      this.dropdownDevice.elRef.nativeElement.querySelector('#dropdown1').value=null;
       this.clientName = "All Companies";
       this.getAllCompanyList();
     }

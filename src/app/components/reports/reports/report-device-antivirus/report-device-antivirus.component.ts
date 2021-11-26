@@ -102,8 +102,9 @@ export class ReportDeviceAntivirusComponent implements OnInit {
       this.getAllCompanyList(selectClient.id);
     } else {
       this.deviceAntivirusReport.setCompanyId(null);
+      this.deviceAntivirusReport.setDeviceName(null);
       this.devices = [];
-      this.dropdownDevice.elRef.nativeElement.querySelector('#dropdown1').value ="All devices";
+      this.dropdownDevice.elRef.nativeElement.querySelector('#dropdown1').value =null;
       this.clientName = "All Companies";
       this.deviceAntivirusList = [];
     }

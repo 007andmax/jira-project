@@ -99,8 +99,9 @@ export class ReportDeviceDiskspaceComponent implements OnInit {
       this.getAllCompanyList(selectClient.id);
     } else {
       this.deviceDiskSpaceReport.setCompanyId(null);
+      this.deviceDiskSpaceReport.setDeviceName(null);
       this.devices = [];
-      this.dropdownDevice.elRef.nativeElement.querySelector('#dropdown1').value ="All devices";
+      this.dropdownDevice.elRef.nativeElement.querySelector('#dropdown1').value =null;
       this.clientName = "All Companies";
       this.deviceDiskSpaceList = [];
     }

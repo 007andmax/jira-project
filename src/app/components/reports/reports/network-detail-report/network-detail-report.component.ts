@@ -101,8 +101,9 @@ export class NetworkDetailReportComponent implements OnInit {
       this.getAllCompanyList(selectClient.id);
     } else {
       this.deviceNetworkDetailReport.setCompanyId(null);
+      this.deviceNetworkDetailReport.setDeviceName(null);
       this.devices = [];
-      this.dropdownDevice.elRef.nativeElement.querySelector('#dropdown1').value ="All devices";
+      this.dropdownDevice.elRef.nativeElement.querySelector('#dropdown1').value =null;
       this.clientName = "All Companies";
       this.networkDetailList = [];
     }

@@ -15,6 +15,7 @@
             </div>
             <div class="form-group content custom-width dropdown-height">
                 <app-drop-down
+                    #dropdownDevice
                     [sort]="true"
                     [search]="true"
                     [change]="true"
@@ -27,6 +28,7 @@
             </div>
             <div class="form-group content">
                 <app-drop-down
+                    #dropdownSoftware
                     [sort]="true"
                     [placeholder]="'Search software / publisher'"
                     [dropdownHeight]="'300px'"
