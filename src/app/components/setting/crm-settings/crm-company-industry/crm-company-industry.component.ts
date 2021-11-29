@@ -46,6 +46,7 @@ export class CrmCompanyIndustryComponent implements OnInit, OnDestroy {
       this.industryList = data.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
         1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
       this.showPreloader = false;
+      this.cd.detectChanges();
     })
     this.sub.add(onGetIndustry);
   }
@@ -55,13 +56,14 @@ export class CrmCompanyIndustryComponent implements OnInit, OnDestroy {
   onFilter(field) {
     this.filter.onFilter(field, this.industryList);
   }
-  onEditIndustry(item) {
+  onEditIndustry(item, event) {
     if (item.isInitEdit) {
       if (item.length === 0 || item.disableUpdate) return;
       this.crmService.editIndustry(item.id, item.name).pipe(map((res) => res),
         catchError(error => of(undefined)))
         .subscribe(data => {
           item.onInitEdit(false);
+          if (event) event.target.blur();
         })
     }
   }

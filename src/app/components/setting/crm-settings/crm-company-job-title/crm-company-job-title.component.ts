@@ -58,12 +58,13 @@ export class CrmCompanyJobTitleComponent implements OnInit {
   onFilter(field) {
     this.filter.onFilter(field, this.jobTitleList);
   }
-  onEditJobTitle(item) {
+  onEditJobTitle(item, event) {
     if (item.isInitEdit) {
       if (item.length === 0 || item.disableUpdate) return;
       this.crmService.editJobTitle(item.id, item.name).pipe(map((res) => res),
         catchError(error => of(undefined))).subscribe(data => {
           item.onInitEdit(false);
+          if (event) event.target.blur();
         })
     }
   }

@@ -26,25 +26,7 @@ export class PasswordRecord {
     password: string;
     selected: boolean = false;
     constructor(data) {
-        this.companyId = data.companyId;
-        this.companyName = data.companyName;
-        this.expiredDate = data.expiredDate;
-        this.histories = data.histories;
-        this.id = data.id;
-        this.links = data.links;
-        this.template = new PasswordRecordCategories(data.template);
-        this.username = data.username;
-        this.description = data.description;
-        this.ssid = data.ssid;
-        this.key = data.key;
-        this.url = data.url;
-        this.code = data.code;
-        this.ipAdres = data.ipAdres;
-        this.port = data.port;
-        this.https = data.https;
-        this.ssh = data.ssh;
-        this.telnet = data.telnet;
-        this.note = data.note;
+        this.onUpdate(data);
     }
     public isDefaultType() {
         return this.template.default;
@@ -125,5 +107,26 @@ export class PasswordRecord {
             data.note = this.note;
         }
         return data;
+    }
+    public onUpdate(data) {
+        this.companyId = data.companyId;
+        this.companyName = data.companyName;
+        this.expiredDate = data.expiredDate;
+        this.histories = data.histories;
+        this.id = data.id;
+        this.links = data.links;
+        this.template = new PasswordRecordCategories(data.template);
+        this.username = data.username;
+        this.description = data.description;
+        this.ssid = data.ssid;
+        this.key = data.key;
+        this.url = data.url;
+        this.code = data.code;
+        this.ipAdres = data.ipAdres;
+        this.port = data.port;
+        this.https = data.https;
+        this.ssh = data.ssh;
+        this.telnet = data.telnet;
+        this.note = data.note;
     }
 }

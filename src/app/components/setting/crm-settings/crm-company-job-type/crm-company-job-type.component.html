@@ -30,7 +30,7 @@
                     [init]="item.isInitEdit"
                     [ngClass]="'edit-crm-container-' + i"
                     [class]="'.edit-crm-container-' + i"
-                    (onOutSide)="onEditJobType(item)"
+                    (onOutSide)="onEditJobType(item,$event)"
                 >
                     <td class="checkbox">
                         <label class="qt-checkbox">
@@ -51,7 +51,7 @@
                             placeholder="Enter Name Category"
                             [(ngModel)]="item.name"
                             appKeyUpEnter
-                            (onChange)="onEditJobType(item)"
+                            (onChange)="onEditJobType(item,$event)"
                             (input)="item.onInitEdit(true);item.checkDublicate(jobTypeList)"
                             maxlength="30"
                         >

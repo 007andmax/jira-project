@@ -37,7 +37,7 @@
                     [init]="item.isInitEdit"
                     [ngClass]="'edit-crm-container-' + i"
                     [class]="'.edit-crm-container-' + i"
-                    (onOutSide)="onEditServiceType(item)"
+                    (onOutSide)="onEditServiceType(item,$event)"
                 >
                     <td class="checkbox">
                         <label class="qt-checkbox">
@@ -58,7 +58,7 @@
                             placeholder="Enter Name Category"
                             [(ngModel)]="item.name"
                             appKeyUpEnter
-                            (onChange)="onEditServiceType(item)"
+                            (onChange)="onEditServiceType(item,$event)"
                             (input)="item.onInitEdit(true);item.checkDublicate(serviceTypeList)"
                             maxlength="30"
                         >
