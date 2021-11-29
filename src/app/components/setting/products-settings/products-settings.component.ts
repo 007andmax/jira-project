@@ -111,13 +111,13 @@ export class ProductsSettingsComponent implements OnInit, OnDestroy {
   removeCategoriesStatus() {
     this.confirmStateService.setConfirmAction(DELETE_CATEGORIES_PRODUCT);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
-    modalRef.componentInstance.message = `Do you want to delete categories?`;
+    modalRef.componentInstance.message = `Remove Product Category`;
 
   }
   removeCategoryProduct(data) {
     this.confirmStateService.setConfirmAction(DELETE_CATEGORY_PRODUCT);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
-    modalRef.componentInstance.message = `Do you want to delete this category?`;
+    modalRef.componentInstance.message = `Remove Product Category`;
     this.inventoryStateService.setCategoryForDelete(data);
   }
 

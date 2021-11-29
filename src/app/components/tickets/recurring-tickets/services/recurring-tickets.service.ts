@@ -108,7 +108,7 @@ export class RecurringTicketsService {
 * Clear description
 */
   public clearData() {
-    this.elRef.nativeElement.querySelector('#service-description').value = '';
+    if (this.elRef.nativeElement.querySelector('#service-description')) this.elRef.nativeElement.querySelector('#service-description').value = '';
   }
 
   /**
@@ -152,9 +152,9 @@ export class RecurringTicketsService {
  * Reset additional options for add
  */
   public resetAddAdditionalOptions() {
-    this.elRef.nativeElement.querySelector('#requireUpdate-add').checked = false;
-    this.elRef.nativeElement.querySelector('#quickClose-add').checked = false;
-    this.elRef.nativeElement.querySelector('#createTask-add').checked = false;
+    if (this.elRef.nativeElement.querySelector('#requireUpdate-add')) this.elRef.nativeElement.querySelector('#requireUpdate-add').checked = false;
+    if (this.elRef.nativeElement.querySelector('#quickClose-add')) this.elRef.nativeElement.querySelector('#quickClose-add').checked = false;
+    if (this.elRef.nativeElement.querySelector('#createTask-add')) this.elRef.nativeElement.querySelector('#createTask-add').checked = false;
   }
 
   /**

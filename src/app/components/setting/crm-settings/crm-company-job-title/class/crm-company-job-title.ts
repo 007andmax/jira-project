@@ -14,7 +14,6 @@ export class CrmCompanyJobTitle {
         var duplicate = list.filter((item) => {
             return item.name.toLowerCase() === this.name.toLowerCase() && item.id !== this.id;
         });
-        console.log("duplicate", duplicate);
         if (duplicate && duplicate[0]) {
             return this.disableUpdate = true;
         } else {

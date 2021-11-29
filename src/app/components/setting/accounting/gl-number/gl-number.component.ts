@@ -85,7 +85,7 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
     this.popup = true;
     this.confirmStateService.setConfirmAction(DELETE_GL_NUMBER);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
-    modalRef.componentInstance.message = `Are you sure you want to delete?`;
+    modalRef.componentInstance.message = `Remove Income Account Number`;
 
   }
 

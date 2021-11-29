@@ -43,7 +43,8 @@ export class CrmCompanyIndustryComponent implements OnInit, OnDestroy {
     this.industryList = this.crmStateService.getIndustryList();
     if (this.industryList.length > 0) this.showPreloader = false;
     let onGetIndustry = this.crmStateService.onGetIndustry.subscribe(data => {
-      this.industryList = data;
+      this.industryList = data.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+        1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
       this.showPreloader = false;
     })
     this.sub.add(onGetIndustry);
@@ -95,7 +96,7 @@ export class CrmCompanyIndustryComponent implements OnInit, OnDestroy {
   removeIndustry(item) {
     this.confirmStateService.setConfirmAction(DELETE_CRM_INDUSTRY);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
-    modalRef.componentInstance.message = `Do you want to delete industry?`;
+    modalRef.componentInstance.message = `Remove Industry`;
     this.crmStateService.setIndustryForRemove(item);
   }
   ngOnDestroy(): void {

@@ -35,11 +35,12 @@ export class CrmCompanyJobTypeComponent implements OnInit {
     if (this.crmStateService.getJobTypeList().length === 0) {
       this.crmStateService.onInitGetJobTypeList();
     } else {
-      this.jobTypeList = this.crmStateService.getJobTypeList();
+      this.jobTypeList = JSON.parse(JSON.stringify(this.crmStateService.getJobTypeList())).map(item => new CrmCompanyJobType(item));
       this.showPreloader = false;
     }
     let onGetJobType = this.crmStateService.onGetJobType.subscribe(data => {
-      this.jobTypeList = data;
+      this.jobTypeList = JSON.parse(JSON.stringify(data)).map(item => new CrmCompanyJobType(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+        1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
       this.showPreloader = false;
     })
     this.sub.add(onGetJobType);
@@ -102,7 +103,7 @@ export class CrmCompanyJobTypeComponent implements OnInit {
   remove(item) {
     this.confirmStateService.setConfirmAction(DELETE_CRM_JOB_TYPE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
-    modalRef.componentInstance.message = `Do you want to delete job type?`;
+    modalRef.componentInstance.message = `Remove Job Type`;
     this.crmStateService.setJobTypeForRemove(item);
   }
   ngOnDestroy(): void {

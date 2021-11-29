@@ -93,7 +93,6 @@ export class InvoiceSettingsComponent implements OnInit {
     forkJoin(source)
       .subscribe(
         (data) => {
-          console.log("data", data);
           if (data[0]) this.getInvoiceContact(data[0]);
           if (data[1]) this.getTermsAndConditions(data[1]);
           if (data[2]) this.getActualNumber(data[2]);

@@ -58,25 +58,25 @@ export class CrmSettingsComponent implements OnInit, OnDestroy {
     if (this.activeTab === "companyIndustry") {
       this.confirmStateService.setConfirmAction(DELETE_CRM_INDUSTRIES);
       const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
-      modalRef.componentInstance.message = `Do you want to delete industries?`;
+      modalRef.componentInstance.message = `Remove Industry`;
 
     }
     if (this.activeTab === "userJobTitle") {
       this.confirmStateService.setConfirmAction(DELETE_CRM_JOB_TITLIES);
       const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
-      modalRef.componentInstance.message = `Do you want to delete job titlies?`;
+      modalRef.componentInstance.message = `Remove Job Title`;
 
     }
     if (this.activeTab === "serviceType") {
       this.confirmStateService.setConfirmAction(DELETE_CRM_SERVICE_TYPIES);
       const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
-      modalRef.componentInstance.message = `Do you want to delete service typies?`;
+      modalRef.componentInstance.message = `Remove Service Type`;
 
     }
     if (this.activeTab === "jobType") {
       this.confirmStateService.setConfirmAction(DELETE_CRM_JOB_TYPIES);
       const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
-      modalRef.componentInstance.message = `Do you want to delete job typies?`;
+      modalRef.componentInstance.message = `Remove Job Type`;
 
     }
   }

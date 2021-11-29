@@ -31,10 +31,11 @@ export class CrmCompanyJobTitleComponent implements OnInit {
     private modalService: NgbModal) { }
 
   ngOnInit() {
-    this.jobTitleList = this.crmStateService.getJobTitleList();
+    this.jobTitleList = JSON.parse(JSON.stringify(this.crmStateService.getJobTitleList())).map(item => new CrmCompanyJobTitle(item));
     if (this.jobTitleList.length > 0) this.showPreloader = false;
     let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
-      this.jobTitleList = data;
+      this.jobTitleList = JSON.parse(JSON.stringify(data)).map(item => new CrmCompanyJobTitle(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+        1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));;
       this.showPreloader = false;
     })
     this.sub.add(onGetJobTitle);
@@ -97,7 +98,7 @@ export class CrmCompanyJobTitleComponent implements OnInit {
   removeJobTitle(item) {
     this.confirmStateService.setConfirmAction(DELETE_CRM_JOB_TITLE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
-    modalRef.componentInstance.message = `Do you want to delete job title?`;
+    modalRef.componentInstance.message = `Remove Job Title`;
     this.crmStateService.setJobTitleForRemove(item);
   }
   ngOnDestroy(): void {

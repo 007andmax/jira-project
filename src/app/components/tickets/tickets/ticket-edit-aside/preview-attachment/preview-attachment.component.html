@@ -1,4 +1,12 @@
-<div class="preview-attachment" *ngIf="show">
-  <button class="closed" (click)="show = false">Closed</button>
-  <img [src]="src" />
+<div
+    class="preview-attachment"
+    *ngIf="show"
+>
+    <button
+        class="qt-button --gray closed"
+        (click)="show = false"
+    >
+        Close
+    </button>
+    <img [src]="src">
 </div>
