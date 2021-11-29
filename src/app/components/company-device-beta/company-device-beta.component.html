@@ -413,6 +413,7 @@
                   <li
                       class="pointer"
                       ngbDropdownItem
+                      (click)="gotiDetailDevice(assetData.Guid)"
                   >
                       <div class="qt-ic-c icon__go-to qt-pointer qt-sz-16 qt-mr-8"></div>
                       Device Detail
@@ -420,6 +421,7 @@
                   <li
                       class="pointer"
                       ngbDropdownItem
+                      (click)="sendCommand('r', assetData.ID)"
                   >
                       <div class="icon__restart qt-bg-contain qt-sz-16 qt-mr-8"></div>
                       Restart
@@ -427,6 +429,7 @@
                   <li
                       class="pointer"
                       ngbDropdownItem
+                      (click)="sendCommand('s', assetData.ID)"
                   >
                       <div class="icon__shutdown qt-bg-contain qt-sz-16 qt-mr-8"></div>
                       Shutdown
@@ -440,6 +443,7 @@
                   </li>
                   <li
                       class="pointer"
+                      (click)="sendCommand('ar', assetData.ID)"
                   >
                       <div class="icon__remove pointer qt-bg-contain qt-sz-16 qt-mr-8"></div>
                       Remove
@@ -475,7 +479,7 @@
             ></div>
         </div>
         <div class="company-device-aside__body">
-          <div class="sidebar-system qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
+          <div *ngIf="tab==='SYSTEM'" class="sidebar-system qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
             <div
                 class="company-device-aside__info-block"
                 [ngClass]="{'--collapsed' :toggleDeviceSpecifications}"
@@ -538,20 +542,141 @@
                 </div>
                 <div class="sidebar-system__info warranty-info">
                     <div class="sidebar-system__info-title">Warranty</div>
+                    <app-date-picker
+                    [type]="'INPUT'"
+                    [editMode]="true"
+                    [editDate]="assetData.WarrantyExpires || getToDayDate()"
+                    [useMinDate]="false"
+                    [placement]="'top-right'"
+                    (onChange)="onOperatingSystem(parseDateFromDatePicker($event),'Warranty')"
+                ></app-date-picker>
                 </div>
                 <div class="sidebar-system__info">
                     <div class="sidebar-system__info-title">Windows Info</div>
                     <div
                         class="sidebar-system__info-text"
+                        [textContent]="assetData.Caption"
                     ></div>
                 </div>
                 <div class="sidebar-system__info installed-info">
                     <div class="sidebar-system__info-title">Installed on</div>
+                    <app-date-picker
+                    [type]="'INPUT'"
+                    [editMode]="true"
+                    [editDate]="assetData.InstallDate || getToDayDate()"
+                    [useMinDate]="false"
+                    [placement]="'top-right'"
+                    (onChange)="onOperatingSystem(parseDateFromDatePicker($event),'Install')"
+                ></app-date-picker>
                 </div>
                 <div>
                     <div class="sidebar-system__info">
                         <div class="sidebar-system__info-title">System Type</div>
+                        <input type="text" class="device-table__input-name" [(ngModel)]="assetData.OSArchitecture" (blur)="updateOperationgSystem(assetData.ID,assetData)">
                     </div>
+                </div>
+            </div>
+          </div>
+          <div *ngIf="tab==='NETWORK'" class="sidebar-network qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
+            <div
+                class="company-device-aside__info-block"
+                [ngClass]="{'--collapsed' :toggleIpSettings}"
+            >
+                <div class="qt-df qt-jc-sb">
+                    <div class="sidebar-network__title qt-ff-sb">IP Settings</div>
+                    <div
+                        class="company-device-aside__expand-collapse qt-sz-16"
+                        (click)="toggleIpSettings = !toggleIpSettings"
+                    ></div>
+                </div>
+                <div class="sidebar-network__info">
+                    <div class="sidebar-network__info-title">Model(s):</div>
+                    <div
+                        class="sidebar-network__info-text"
+                        [textContent]="chackDefaultValue(networkData.Name)"
+                    ></div>
+                </div>
+                <div class="sidebar-network__info">
+                    <div class="sidebar-network__info-title">IP:</div>
+                    <div
+                        class="sidebar-network__info-text"
+                        [textContent]="chackDefaultValue(networkData.IPAddress)"
+                    ></div>
+                </div>
+                <div class="sidebar-network__info">
+                    <div class="sidebar-network__info-title">Subnet Mask:</div>
+                    <div
+                        class="sidebar-network__info-text"
+                        [textContent]="chackDefaultValue(networkData.Subnet)"
+                    ></div>
+                </div>
+                <div class="sidebar-network__info">
+                    <div class="sidebar-network__info-title">DNS 1:</div>
+                    <div
+                        class="sidebar-network__info-text"
+                        [textContent]="chackDefaultValue(networkData.DNS1)"
+                    ></div>
+                </div>
+                <div class="sidebar-network__info">
+                    <div class="sidebar-network__info-title">Link Speed:</div>
+                    <div
+                        class="sidebar-network__info-text"
+                        [textContent]="getLinkSpeed(networkData.Speed) + ' (MegaBit)'"
+                    ></div>
+                </div>
+                <div class="sidebar-network__info">
+                    <div class="sidebar-network__info-title">MAC:</div>
+                    <div
+                        class="sidebar-network__info-text"
+                        [textContent]="chackDefaultValue(formatMacAddress(networkData.MACAddress))"
+                    >
+                    </div>
+                </div>
+                <div class="sidebar-network__info">
+                    <div class="sidebar-network__info-title">DHCP:</div>
+                    <div
+                        class="sidebar-network__info-text"
+                        [textContent]="chackDefaultValue(networkData.DHCPEnabled)"
+                    ></div>
+                </div>
+            </div>
+            <div class="qt-divider qt-mt-24 qt-mb-24"></div>
+        </div>
+          <div *ngIf="tab==='SOFTWARE'" class="sidebar-software qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
+          <div class="qt-df qt-jc-sb">
+              <div class="sidebar-software__title qt-ff-sb">Softwares</div>
+          </div>
+          <ng-template
+              ngFor
+              let-item
+              [ngForOf]="softwareList"
+          >
+              <div class="sidebar-software__row">
+                  <div>
+                      <div
+                          class="sidebar-software__row-title"
+                          [textContent]="item.DisplayName"
+                      ></div>
+                      <div
+                          class="sidebar-software__date"
+                          [textContent]="getDate(item.InstallDate) + getVersion(item.DisplayVersion)"
+                      ></div>
+                  </div>
+              </div>
+          </ng-template>
+          </div>
+          <div *ngIf="tab==='UPDATES'" class="sidebar-updates qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24">
+            <div class="qt-df qt-jc-sb">
+                <div class="sidebar-updates__tab-title qt-ff-sb">UPDATES</div>
+            </div>
+            <div class="sidebar-updates__items">
+                <div class="sidebar-updates__item">
+                    <div
+                        class="sidebar-updates__icon icon__virus-protection icon "
+                        [ngClass]="{'--updated': assetData.VirusProtectionInstalled == true, '--alert': assetData.VirusProtectionInstalled == false}"
+                    ></div>
+                    <div class="sidebar-updates__title">Virus Protection</div>
+                    <div class="sidebar-updates__subtitle">Up-to-date</div>
                 </div>
             </div>
         </div>

@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, NgZone, OnInit, ViewChild,} from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
 import { AgentService } from "src/app/services/agent/agent.service";
 import { CompaniesStateService } from "src/app/states/company/companies-state.service";
@@ -41,6 +42,11 @@ export class CompanyDeviceBetaComponent implements OnInit {
   open: boolean = false;
   tab: string = "SYSTEM";
   assetData: any = undefined;
+  softwareList: any = undefined;
+  toggleIpSettings: boolean = false;
+  networkData: any = undefined;
+  operatingSystem: any = undefined;
+  windowSystem: any = undefined;
 
   constructor(
     private leftPanelStateService: LeftPanelStateService,
@@ -104,6 +110,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   }
 
   AssetDetail() {
+    this.operatingSystem = [];
     this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {
       this.assetList = resp;
       this.HardwareTypeList(resp[0].TechCompanyGuid);
@@ -121,12 +128,14 @@ export class CompanyDeviceBetaComponent implements OnInit {
   OperatingSystem(value: any, index: any) {
     this.agentService.getOperatingSystemByAssetId(value).subscribe((resp) => {
       if (resp && resp.length > 0 && resp[0].Caption) {
+        this.operatingSystem.push(resp[0]);
         this.assetList[index].Caption =
           resp[0].Caption.replace("Microsoft", "") +
           " " +
           resp[0].OSArchitecture +
           " " +
           resp[0].Version;
+        this.assetList[index].OSArchitecture = resp[0].OSArchitecture;
       }
     });
   }
@@ -380,6 +389,9 @@ export class CompanyDeviceBetaComponent implements OnInit {
     this.tab = type;
     this.showPreloader = false;
     this.assetData = this.assetList.find((x)=>x.Guid === asset.Guid);
+    this.getSoftwareDetail(asset);
+    this.getNetworkDetail(asset);
+
   }
 
   menuclose(){
@@ -395,5 +407,122 @@ export class CompanyDeviceBetaComponent implements OnInit {
         this.toastr.error("Something went wrong please try again.");
       }
     );
+    if (this.minDate(this.assetData.WarrantyExpires)) {
+      this.assetData.WarrantyExpires = "";
+    }
+
+    if (this.minDate(this.assetData.InstallDate)) {
+      this.assetData.InstallDate = "";
+    }
   }
+
+  minDate(dateVal: any) {
+    var minDate = moment.utc("0001-01-01");
+    var receiveDate = moment(dateVal);
+    if (moment.utc(receiveDate).isAfter(minDate)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  updateOperationgSystem(id,asset){
+    let data = this.operatingSystem.find((x)=>x.AssetID === id);
+    data.OSArchitecture = asset.OSArchitecture;
+    this.agentService.overrideOperationSystem(data).subscribe(
+      (resp)=>{
+        this.setPreviewDataDevice();
+    },
+    (error)=>{
+      this.toastr.error("Something went wrong please try again.");
+    }
+    );
+
+  }
+
+  getSoftwareDetail(asset) {
+    this.agentService.getSoftwareListByAssetId(asset.ID).subscribe((resp) => {
+      if(resp.length>0)
+      {
+        this.softwareList = resp;
+      }
+    });
+  }
+
+  public getDate(date) {
+    return (date !== "" && date !== null) ? moment(date).format('YYYY-MM-DD') : "No installed date";
+  }
+  public getVersion(softVersion) {
+    return (softVersion !== "") ? `, version - ${softVersion}` : ', No version';
+  }
+
+  getNetworkDetail(asset) {
+    this.agentService.getNetworkAdapter(asset.ID).subscribe((resp) => {
+      if (resp.length > 0) {
+        this.networkData = resp[0];
+      }
+    });
+  }
+
+  public chackDefaultValue(value) {
+    return (!value || value === "") ? "N\A" : value.replace("Microsoft","");
+  }
+
+  getLinkSpeed(value) {
+    return ((value != 0)) ? (Number(value / 1000000)) : 0;
+  }
+  formatMacAddress(mac: any) {
+    if (mac) {
+      return mac.match(/.{1,2}/g).join(' ');
+    } else {
+      return 'N/A';
+    }
+  };
+
+  serviceClass(update: boolean, alert: boolean) {
+    return { updated: update == true, alert: alert == true };
+  }
+
+  getToDayDate() {
+    return Date.now();
+  }
+
+  onOperatingSystem(data,type) {
+    if(type === "Warranty")
+    {
+      this.assetData.WarrantyExpires = data || '0001-01-01';
+    }
+    if(type === "Install")
+    {
+      this.assetData.InstallDate = data || '0001-01-01';
+    }
+    this.agentService.overrideAsset(this.assetData).subscribe(
+      (resp) => {
+      },
+      (error) => {
+        this.toastr.error("Something went wrong please try again.");
+      }
+    );
+    if (this.minDate(this.assetData.WarrantyExpires)) {
+      this.assetData.WarrantyExpires = "";
+    }
+
+    if (this.minDate(this.assetData.InstallDate)) {
+      this.assetData.InstallDate = "";
+    }
+  }
+
+  parseDateFromDatePicker(value) {
+    return moment(new Date(value.year, value.month - 1, value.day)).format('YYYY/MM/DD');
+  }
+
+  gotiDetailDevice(Guid:string){
+    localStorage.setItem("company_id", this.companyId);
+    const type = "workstation";
+    var url = `/#/${this.companiesStateService
+      .getCurrentCompany()
+      .name.replaceAll(" ", "")}/device/dashboard/${type}/${Guid}`;
+    window.open(url, "_blank");
+  }
+
 }
