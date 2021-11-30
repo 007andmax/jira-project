@@ -23,6 +23,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   assetID: any[] = [];
   system: any;
   showPreloader: boolean = true;
+  Preloader: boolean = true;
   search = "";
   filter: CompanyDeviceBetaFilter = new CompanyDeviceBetaFilter();
   selected: boolean = false;
@@ -387,11 +388,10 @@ export class CompanyDeviceBetaComponent implements OnInit {
   openAside(type,asset){
     this.open = true;
     this.tab = type;
-    this.showPreloader = false;
     this.assetData = this.assetList.find((x)=>x.Guid === asset.Guid);
     this.getSoftwareDetail(asset);
     this.getNetworkDetail(asset);
-
+    this.Preloader = false;
   }
 
   menuclose(){
@@ -441,6 +441,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   }
 
   getSoftwareDetail(asset) {
+    this.softwareList = [];
     this.agentService.getSoftwareListByAssetId(asset.ID).subscribe((resp) => {
       if(resp.length>0)
       {
@@ -457,6 +458,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
   }
 
   getNetworkDetail(asset) {
+    this.networkData = [];
     this.agentService.getNetworkAdapter(asset.ID).subscribe((resp) => {
       if (resp.length > 0) {
         this.networkData = resp[0];
@@ -465,11 +467,11 @@ export class CompanyDeviceBetaComponent implements OnInit {
   }
 
   public chackDefaultValue(value) {
-    return (!value || value === "") ? "N\A" : value.replace("Microsoft","");
+    return (!value || value === "") ? "N/A" : value.replace("Microsoft","");
   }
 
   getLinkSpeed(value) {
-    return ((value != 0)) ? (Number(value / 1000000)) : 0;
+    return ((value != 0 && value != undefined)) ? (Number(value / 1000000)) : 0;
   }
   formatMacAddress(mac: any) {
     if (mac) {

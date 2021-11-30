@@ -376,9 +376,34 @@
 >
     <div
         class="loading"
-        *ngIf="showPreloader"
+        *ngIf="Preloader"
     ></div>
-    <div *ngIf="!showPreloader">
+    <div *ngIf="!Preloader">
+      <div class="company-device-aside__menu">
+        <div
+        class="company-device-aside__menu-item qt-pointer"
+        [ngClass]="{'--active': assetData.ID === assetData.ID}"
+    >
+        <ng-template
+            #asideMenuItem
+            class="tooltip"
+        >
+            {{assetData.Title}}
+        </ng-template>
+        <div
+            placement="left"
+            [ngbTooltip]="asideMenuItem"
+            class="qt-sz-24"
+            [ngClass]="{ icon__computer:
+              assetData.iconName === 'Workstation' || !assetData.iconName,
+            icon__tablet: assetData.iconName === 'Networking Hardware',
+            icon__printer: assetData.iconName === 'Printer',
+            icon__server: assetData.iconName === 'Server',
+            '--offline': !assetData.online,
+            '--online':assetData.online }"
+        ></div>
+    </div>
+    </div>
     <div class="company-device-aside__header qt-df qt-ai-c qt-jc-sb">
         <div class="qt-df qt-ai-c">
           <div
