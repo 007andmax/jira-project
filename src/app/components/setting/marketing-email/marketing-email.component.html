@@ -35,7 +35,10 @@
                 id="subscriptionType"
             >
                 <ng-template ngbTabContent>
-                    <marketing-subscription-type #subscriptionType></marketing-subscription-type>
+                    <marketing-subscription-type
+                        #subscriptionType
+                        (onSelect)="onSelect($event)"
+                    ></marketing-subscription-type>
                 </ng-template>
             </ngb-tab>
         </ngb-tabset>

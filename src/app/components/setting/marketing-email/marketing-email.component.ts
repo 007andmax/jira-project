@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DELETE_SUBSCRIPTION_TYPIES } from 'src/app/const/confirm';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
@@ -20,6 +20,7 @@ export class MarketingEmailComponent implements OnInit, OnDestroy {
   constructor(private crmStateService: CrmStateService,
     private confirmStateService: ConfirmStateService,
     private marketingEmailStateService: MarketingEmailStateService,
+    public cd: ChangeDetectorRef,
     private modalService: NgbModal) { }
 
   ngOnInit() {
@@ -40,6 +41,18 @@ export class MarketingEmailComponent implements OnInit, OnDestroy {
   getSelectedCount() {
     return this.marketingEmailStateService.getListSubscriptionTypeForRemove().length;
 
+  }
+  onSelect(data) {
+    if (data.event.target.checked) {
+      this.marketingEmailStateService.getListSubscriptionTypeForRemove().push(data.item);
+    } else {
+      let list = this.marketingEmailStateService.getListSubscriptionTypeForRemove();
+      let index = list.findIndex(item => item.id === data.item.id);
+      if (index > -1) list.splice(index, 1);
+      this.marketingEmailStateService.setListSubscriptionTypeForRemove(list);
+    }
+    // console.log("this.marketingEmailStateService.getListSubscriptionTypeForRemove()", this.marketingEmailStateService.getListSubscriptionTypeForRemove());
+    this.cd.detectChanges();
   }
   removeList() {
 

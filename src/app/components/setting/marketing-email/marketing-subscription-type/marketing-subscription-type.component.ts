@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { forkJoin, of, Subscription } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -22,6 +22,7 @@ export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
   filter: MarketingSubscriptionTypeFilter = new MarketingSubscriptionTypeFilter();
   showPreloader: boolean = true;
   sub: Subscription = new Subscription();
+  @Output() onSelect: EventEmitter<any> = new EventEmitter();
   constructor(private marketingEmailService: MarketingEmailService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
@@ -102,16 +103,17 @@ export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
   }
-  onSelect(event, item) {
-    if (event.target.checked) {
-      this.marketingEmailStateService.getListSubscriptionTypeForRemove().push(item);
-    } else {
-      let list = this.marketingEmailStateService.getListSubscriptionTypeForRemove();
-      let index = list.findIndex(item => item.id === item.id);
-      if (index > -1) list.splice(index, 1);
-      this.marketingEmailStateService.setListSubscriptionTypeForRemove(list);
-    }
-    this.cd.detectChanges();
+  select(event, item) {
+    this.onSelect.emit({ event: event, item: item });
+    /* if (event.target.checked) {
+       this.marketingEmailStateService.getListSubscriptionTypeForRemove().push(selected);
+     } else {
+       let list = this.marketingEmailStateService.getListSubscriptionTypeForRemove();
+       let index = list.findIndex(item => item.id === selected.id);
+       if (index > -1) list.splice(index, 1);
+       this.marketingEmailStateService.setListSubscriptionTypeForRemove(list);
+     }
+     this.cd.detectChanges();*/
   }
   removeSubscription(item) {
     this.confirmStateService.setConfirmAction(DELETE_SUBSCRIPTION_TYPE);
