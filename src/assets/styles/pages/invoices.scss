@@ -666,10 +666,15 @@ app-invoices-item,app-payment-item {
       }
 
       &:last-child {
-
         &::after {
           left: 0;
           width: calc(100% - 16px);
+        }
+        &.messages-table__account {
+          &::after {
+            left: 16px;
+            width: calc(100% - 32px);
+          }
         }
       }
     }
@@ -680,6 +685,13 @@ app-invoices-item,app-payment-item {
         line-height: 20px;
         color: #212b36;
         font-weight: 500;
+      }
+      &:last-child {
+        td {
+          &::after {
+            display: none;
+          }
+        }
       }
     }
   }
@@ -776,4 +788,26 @@ app-invoices-item,app-payment-item {
 
 .invoice-preview-notes {
   max-width: 530px;
+}
+
+.messages-table__account {
+  padding: 16px;
+  &-header {
+    color: $secondary-1;
+    display: inline-block;
+    background-color: rgba(7,71,166,.06);
+    padding: 5px 6px;
+    font-size: 9px;
+    line-height: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  &-data {
+    font-weight: 500;
+    color: $primary-2;
+    margin: 12px 0 4px;
+  }
+  &-text {
+    color: $primary-2;
+  }
 }
