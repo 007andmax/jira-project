@@ -107,6 +107,12 @@
         Commissions
     </li>
     <li
+        [ngClass]="{'--active':activePage === 'marketing-email'}"
+        (click)="goToState('marketing-email')"
+    >
+        Marketing Email
+    </li>
+    <li
         [ngClass]="{'--active':activePage === 'subscription-component'}"
         (click)="goToState('subscription-component')"
     >

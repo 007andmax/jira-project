@@ -488,6 +488,9 @@ import { AccountingSettingsComponent } from './components/setting/accounting/acc
 import { AccountingYearComponent } from './components/setting/accounting/accounting-year/accounting-year.component';
 import { AddGlNumberComponent } from './components/setting/accounting/gl-number/add-gl-number/add-gl-number.component';
 import { PermissionAccountingSettingsService } from './components/setting/accounting/permission-accounting-settings.service';
+import { MarketingEmailComponent } from './components/setting/marketing-email/marketing-email.component';
+import { MarketingSubscriptionTypeComponent } from './components/setting/marketing-email/marketing-subscription-type/marketing-subscription-type.component';
+import { AddMarketingSubscriptionTypeComponent } from './components/setting/marketing-email/marketing-subscription-type/add-marketing-subscription-type/add-marketing-subscription-type.component';
 
 
 declare var $: any;
@@ -924,7 +927,10 @@ declare var $: any;
     CrmCompanyServiceTypeComponent,
     AddCrmCompanyServiceTypeComponent,
     CrmCompanyJobTypeComponent,
-    AddCrmCompanyJobTypeComponent
+    AddCrmCompanyJobTypeComponent,
+    MarketingEmailComponent,
+    MarketingSubscriptionTypeComponent,
+    AddMarketingSubscriptionTypeComponent
   ],
   imports: [
     BrowserModule,

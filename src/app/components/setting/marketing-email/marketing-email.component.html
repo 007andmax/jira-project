@@ -1,0 +1,43 @@
+<!-- Middle Wrapper -->
+<div class="page-container products-settings-page-container">
+    <div class="page-insider manage-taxes">
+        <div class="heading">
+            <h6 class="qt-fw-600 qt-color-dark">Marketing Email</h6>
+            <div class="heading-serach add-category-container">
+                <div
+                    class="tickets-status-header-buttons"
+                    *ngIf="getSelectedCount() > 0"
+                >
+                    <div [textContent]="getSelectedCount() + ' Selected'"></div>
+                    <div
+                        class="qt-ml-16 qt-fw-600 qt-df qt-color-info qt-ai-c qt-pointer"
+                        (click)="removeList()"
+                    >
+                        <div class="icon__remove-blue qt-sz-16 qt-bg-contain qt-ic-c qt-mr-6"></div>
+                        <div>Delete</div>
+                    </div>
+                </div>
+                <a
+                    href="javascript:;"
+                    class="btn-outline"
+                    (click)="create()"
+                >
+                    Add Subscription Type
+                </a>
+            </div>
+        </div>
+        <ngb-tabset
+            #tabset="ngbTabset"
+            [destroyOnHide]="true"
+        >
+            <ngb-tab
+                title="Subscription Type"
+                id="subscriptionType"
+            >
+                <ng-template ngbTabContent>
+                    <marketing-subscription-type #subscriptionType></marketing-subscription-type>
+                </ng-template>
+            </ngb-tab>
+        </ngb-tabset>
+    </div>
+</div>
