@@ -59,6 +59,9 @@ export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
         let index = this.marketingSubscriptionList.findIndex(item => item.id === data.data.id);
         if (index > -1) this.marketingSubscriptionList[index].onUpdate(data.data);
       }
+      this.marketingSubscriptionList.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+        1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+      this.cd.detectChanges();
 
     })
     this.sub.add(changeCrmArray);
