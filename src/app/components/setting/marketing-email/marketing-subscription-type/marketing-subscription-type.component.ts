@@ -6,6 +6,7 @@ import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.comp
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { DELETE_SUBSCRIPTION_TYPE, DELETE_SUBSCRIPTION_TYPIES } from 'src/app/const/confirm';
 import { MarketingEmailService } from 'src/app/services/marketing-email/marketing-email.service';
+import { MarketingEmailRealTimeService } from 'src/app/states/marketing-email/marketing-email-real-time.service';
 import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
 import { MarketingSubscriptionType } from './class/marketing-subscription-type';
 import { MarketingSubscriptionTypeFilter } from './class/marketing-subscription-type-filter';
@@ -25,6 +26,7 @@ export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     private marketingEmailStateService: MarketingEmailStateService,
+    private marketingEmailRealTimeService: MarketingEmailRealTimeService,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
@@ -46,7 +48,20 @@ export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
       this.showPreloader = false;
       this.cd.detectChanges();
     })
+    let changeCrmArray = this.marketingEmailRealTimeService.changeCrmArray.subscribe(data => {
+      console.log("data", data);
+      if (data.action === "CUSTOM_SUBSCRIPTION_CREATED") this.marketingSubscriptionList.push(new MarketingSubscriptionType(data.data));
+      if (data.action === "CUSTOM_SUBSCRIPTION_DELETED") {
+        let index = this.marketingSubscriptionList.findIndex(item => item.id === data.data);
+        if (index > -1) this.marketingSubscriptionList.splice(index, 1);
+      }
+      if (data.action === "CUSTOM_SUBSCRIPTION_EDITED") {
+        let index = this.marketingSubscriptionList.findIndex(item => item.id === data.data.id);
+        if (index > -1) this.marketingSubscriptionList[index].onUpdate(data.data);
+      }
 
+    })
+    this.sub.add(changeCrmArray);
   }
   public toggleShowAdd(data) {
     this.showAdd = data;
@@ -61,6 +76,7 @@ export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
         catchError(error => of(undefined)))
         .subscribe(data => {
           item.onInitEdit(false);
+          console.log("event", event);
           if (event) event.target.blur();
         })
     }

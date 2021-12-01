@@ -29,6 +29,7 @@ import { environment } from 'src/environments/environment';
 import * as SockJS from 'sockjs-client';
 import { ConstantsService } from '../constants/constants.service';
 import { CrmRealTimeService } from 'src/app/states/crm/crm-real-time.service';
+import { MarketingEmailRealTimeService } from 'src/app/states/marketing-email/marketing-email-real-time.service';
 
 
 /**
@@ -74,7 +75,8 @@ export class WebsocketService {
     private tagsRealTimeService: TagsRealTimeService,
     private documentsRealTimeService: DocumentsRealTimeService,
     private constantsService: ConstantsService,
-    private crmRealTimeService: CrmRealTimeService
+    private crmRealTimeService: CrmRealTimeService,
+    private marketingEmailRealTimeService: MarketingEmailRealTimeService
 
   ) {
   }
@@ -114,6 +116,7 @@ export class WebsocketService {
       that.subsribeToDocuments();
       that.subsribeToDocumentsCategory();
       that.subsribeToCrm();
+      that.subsribeToCustomSubscription();
     }
     this.stompClient.debug = (data) => {
       console.log("debug", data);
@@ -500,6 +503,19 @@ export class WebsocketService {
       this.stompClient.subscribe(`/user/watch/tagManagement`, (message) => {
         var newChange = JSON.parse(message.body);
         this.tagsRealTimeService.handleRealTimeChanges(newChange);
+
+      });
+
+    }, 3000);
+  }
+
+  public subsribeToCustomSubscription() {
+
+    setTimeout(() => {
+
+      this.stompClient.subscribe(`/user/watch/customSubscription`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.marketingEmailRealTimeService.handleRealTimeChanges(newChange);
 
       });
 

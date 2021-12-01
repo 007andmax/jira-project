@@ -64,7 +64,9 @@ export class ConfirmComponent implements OnInit {
       this.action === 'DELETE_TICKET_STATUS' ||
       this.action === 'DELETE_LIST_TICKET_STATUS' ||
       this.action === 'DELETE_CATEGORIES_PRODUCT' ||
-      this.action === 'DELETE_CATEGORY_PRODUCT'
+      this.action === 'DELETE_CATEGORY_PRODUCT' ||
+      this.action === 'DELETE_SUBSCRIPTION_TYPE' ||
+      this.action === 'DELETE_SUBSCRIPTION_TYPIES'
   }
 
 }
