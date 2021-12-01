@@ -98,7 +98,8 @@ export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
   }
   onRemoveSubscription(id) {
     this.marketingEmailService.removeSubscriptionType(id).subscribe(data => {
-
+      this.marketingEmailStateService.setListSubscriptionTypeForRemove([]);
+      this.cd.detectChanges();
     })
   }
   onSelect(event, item) {

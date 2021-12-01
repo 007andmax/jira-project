@@ -87,7 +87,8 @@ export class CrmCompanyJobTypeComponent implements OnInit {
   }
   onRemoveJobType(id) {
     this.crmService.removeJobType(id).subscribe(data => {
-
+      this.crmStateService.setListJobTypeForRemove([]);
+      this.cd.detectChanges();
     })
   }
   onSelect(event, item) {
