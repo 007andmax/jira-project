@@ -491,6 +491,10 @@ import { PermissionAccountingSettingsService } from './components/setting/accoun
 import { MarketingEmailComponent } from './components/setting/marketing-email/marketing-email.component';
 import { MarketingSubscriptionTypeComponent } from './components/setting/marketing-email/marketing-subscription-type/marketing-subscription-type.component';
 import { AddMarketingSubscriptionTypeComponent } from './components/setting/marketing-email/marketing-subscription-type/add-marketing-subscription-type/add-marketing-subscription-type.component';
+import { MarketingEmailUsersComponent } from './components/setting/marketing-email/marketing-email-users/marketing-email-users.component';
+import { UsersAsideDetailMessagesComponent } from './components/users/users-aside-detail/users-aside-detail-messages/users-aside-detail-messages.component';
+import { MarketingEmailUsersItemComponent } from './components/setting/marketing-email/marketing-email-users/marketing-email-users-item/marketing-email-users-item.component';
+import { MarketingEmailUsersAddComponent } from './components/setting/marketing-email/marketing-email-users/marketing-email-users-add/marketing-email-users-add.component';
 
 
 declare var $: any;
@@ -930,7 +934,11 @@ declare var $: any;
     AddCrmCompanyJobTypeComponent,
     MarketingEmailComponent,
     MarketingSubscriptionTypeComponent,
-    AddMarketingSubscriptionTypeComponent
+    AddMarketingSubscriptionTypeComponent,
+    MarketingEmailUsersComponent,
+    UsersAsideDetailMessagesComponent,
+    MarketingEmailUsersItemComponent,
+    MarketingEmailUsersAddComponent
   ],
   imports: [
     BrowserModule,

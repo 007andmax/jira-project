@@ -19,7 +19,12 @@ export class MarketingEmailService {
     private http: HttpClient,
 
   ) { }
-
+  public getUsersList(subscription_id) {
+    return this.http.get(this.apiUrl + `users/byCustomSubscription?subscriptionId=${subscription_id}`);
+  }
+  public removeUser(user_id, subscription_id) {
+    return this.http.delete(this.apiUrl + `users/customSubscription/${user_id}?subscriptionId=${subscription_id}`);
+  }
   public getList() {
     return this.http.get(this.apiUrl + 'subscription/customSubscription');
   }

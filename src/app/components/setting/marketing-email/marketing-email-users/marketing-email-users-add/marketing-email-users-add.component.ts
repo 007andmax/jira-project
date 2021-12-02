@@ -1,0 +1,87 @@
+import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/components/users/class/user';
+import { UserListService } from 'src/app/components/users/services/user-list.service';
+import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
+
+@Component({
+  selector: 'marketing-email-users-add',
+  templateUrl: './marketing-email-users-add.component.html',
+  styleUrls: ['./marketing-email-users-add.component.scss'],
+  providers: [UserListService]
+})
+export class MarketingEmailUsersAddComponent implements OnInit {
+  opened: boolean = false;
+  users: Array<User> = [];
+  reqUsers: Array<User> = [];
+  search: string = "";
+  public page_number: number = 0;
+  public infiniteScrollDisabled = false;
+
+  constructor(private marketingEmailStateService: MarketingEmailStateService,
+    private userListService: UserListService,
+    private usersStateService: UsersStateService,) { }
+
+  ngOnInit() {
+
+    if (this.usersStateService.getAllUsers().length > 0) this.getUsersList(this.usersStateService.getAllUsers());
+    let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
+      this.getUsersList(data);
+    })
+
+  }
+  onSearch() {
+    this.userListService.setBlockList(false);
+    this.page_number = 0;
+    this.users = [];
+    this.onScroll();
+  }
+  private getUsersList(data) {
+
+    this.reqUsers = data.filter(item => !item.deletedAt && item.accountType !== "TECH");
+
+    // this.onInirCalculate();
+    this.reqUsers.sort((a, b) => ((a.firstName + a.lastName).toLowerCase() > (b.firstName + b.lastName).toLowerCase()) ?
+      1 : (((b.firstName + b.lastName).toLowerCase() > (a.firstName + a.lastName).toLowerCase()) ? -1 : 0));
+    this.onScroll();
+
+  }
+  public onScroll() {
+    this.infiniteScrollDisabled = true;
+    this.getUsers();
+
+  }
+  onAdd() {
+
+  }
+  onSelect(user) {
+
+    this.reqUsers.find(item => item.id === user.id).selected = user.selected;
+
+  }
+  private getUsers() {
+
+    if (this.userListService.getBlockList()) {
+      this.infiniteScrollDisabled = false;
+      return;
+    }
+    this.page_number += 1;
+
+    let listFilter = this.reqUsers.filter(item => `${item.firstName} ${item.lastName}`.toLowerCase().includes(this.search));
+
+
+    let start = (this.page_number - 1) * 30;
+    let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;
+    let usersList = [];
+    for (let i = start; i < end; i++) {
+      usersList.push(listFilter[i]);
+    }
+    this.users = [...this.users, ...usersList.map(item => new User(JSON.parse(JSON.stringify(item))))];
+
+    this.infiniteScrollDisabled = false;
+    if ((this.page_number * 30) > listFilter.length) this.userListService.setBlockList(true);
+
+
+  }
+
+}

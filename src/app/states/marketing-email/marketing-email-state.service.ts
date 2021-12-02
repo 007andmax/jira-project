@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { MarketingEmailRealTimeService } from './marketing-email-real-time.service';
 
 @Injectable({
@@ -8,9 +8,12 @@ export class MarketingEmailStateService {
 
   subscriptionTypeForRemove;
   listSubscriptionTypeForRemove = [];
+  openAside: EventEmitter<any> = new EventEmitter();
   constructor() { }
 
-
+  public onOpenAsige(data) {
+    this.openAside.emit(data);
+  }
   public setListSubscriptionTypeForRemove(data) {
     this.listSubscriptionTypeForRemove = data;
   }

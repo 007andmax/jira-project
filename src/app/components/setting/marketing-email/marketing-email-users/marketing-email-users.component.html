@@ -1,0 +1,91 @@
+<div
+    class="qt-aside-modern users-page__aside"
+    *ngIf="opened"
+>
+    <div class="qt-aside-modern__header">
+        <div class="qt-aside-modern__header-title">Users</div>
+        <div
+            class="qt-aside-modern__header-close icon__close"
+            (click)="close()"
+        ></div>
+    </div>
+    <div class="qt-aside-modern__content">
+        <div class="assign-ticket-content">
+            <div class="assign-ticket-header">
+                <div
+                    class="clearfix"
+                    ngbDropdown
+                >
+                    <div class="form-group">
+                        <input
+                            class="form-control"
+                            placeholder="Search Users"
+                            value
+                            autocomplete="off"
+                            (input)="onSearch($event)"
+                        >
+                    </div>
+                    <button
+                        class="qt-button qt-mr-12"
+                        ngbDropdownToggle
+                    >
+                        Add User
+                    </button>
+                    <marketing-email-users-add ngbDropdownMenu></marketing-email-users-add>
+                </div>
+            </div>
+            <div class="users-list custom-scroll">
+                <ng-template
+                    ngFor
+                    let-user
+                    [ngForOf]="users"
+                    let-i="index"
+                    [ngForTrackBy]="trackByIndex"
+                >
+                    <div class="user-item">
+                        <a
+                            href="javascript:void(0)"
+                            [id]="user.id"
+                            class="dropdown-link"
+                        >
+                            <div
+                                class="default-user-avatar avatar-background-color-odd ng-scope"
+                                *ngIf="!user.avatar"
+                            >
+                                <span [textContent]="(user.firstName) ? user.firstName[0].toUpperCase() : ''"></span>
+                                <span [textContent]="(user.lastName) ? user.lastName[0].toUpperCase() : ''"></span>
+                            </div>
+                            <div
+                                class="default-user-avatar avatar-background-color-odd ng-scope"
+                                *ngIf="user.avatar"
+                            >
+                                <img
+                                    ng-if="user.avatar"
+                                    class="img-circle avatar-26"
+                                    style="margin: 0;"
+                                    [src]="'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')"
+                                    alt="..."
+                                >
+                            </div>
+                            <span>
+                                <p [textContent]="user.firstName + ' ' + user.lastName"></p>
+                                <p
+                                    [textContent]="user.primaryEmail"
+                                    style="margin: 0;"
+                                ></p>
+                            </span>
+                            <a
+                                href="javascript:;"
+                                data-tooltip="Remove"
+                                class="remove"
+                                (click)="remove(user)"
+                            >
+                                <div class="icon__remove qt-sz-16 qt-bg-contain"></div>
+                            </a>
+                        </a>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>

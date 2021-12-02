@@ -1,0 +1,15 @@
+.job-description {
+    width: 100%;
+}
+marketing-email-users-item,
+marketing-email-users-add {
+    display: contents;
+}
+marketing-email-users-add {
+    display: none;
+    overflow: hidden;
+    border-radius: 3px;
+    z-index: 9999;
+    height: 400px;
+    max-height: fit-content;
+}

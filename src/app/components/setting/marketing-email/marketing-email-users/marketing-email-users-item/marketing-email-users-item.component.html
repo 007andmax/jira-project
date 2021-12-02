@@ -1,0 +1,51 @@
+<div
+    class="user-item"
+    (click)="selectUser()"
+    [ngClass]="(user.selected) ? 'active' : ''"
+>
+    <a
+        href="javascript:void(0)"
+        [id]="user.id"
+        class="dropdown-link"
+    >
+        <div
+            class="default-user-avatar avatar-background-color-odd ng-scope"
+            *ngIf="!user.avatar"
+        >
+            <span [textContent]="(user.firstName) ? user.firstName[0].toUpperCase() : ''"></span>
+            <span [textContent]="(user.lastName) ? user.lastName[0].toUpperCase() : ''"></span>
+        </div>
+        <div
+            class="default-user-avatar avatar-background-color-odd ng-scope"
+            *ngIf="user.avatar"
+        >
+            <img
+                ng-if="user.avatar"
+                class="img-circle avatar-26"
+                style="margin: 0;"
+                [src]="'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')"
+                alt="..."
+            >
+        </div>
+        <span>
+            <p [textContent]="user.firstName + ' ' + user.lastName"></p>
+            <p
+                [textContent]="user.primaryEmail"
+                style="margin: 0;"
+            ></p>
+        </span>
+        <div class="d-f">
+            <label
+                class="qt-checkbox"
+                [attr.for]="'user-' + user.id"
+            >
+                <input
+                    [attr.id]="'user-' + user.id"
+                    [(ngModel)]="user.selected"
+                    type="checkbox"
+                >
+                <span></span>
+            </label>
+        </div>
+    </a>
+</div>
