@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
+import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
+import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { User } from 'src/app/components/users/class/user';
 import { UserListService } from 'src/app/components/users/services/user-list.service';
+import { DELETE_SUBSCRIPTION_USER } from 'src/app/const/confirm';
 import { MarketingEmailService } from 'src/app/services/marketing-email/marketing-email.service';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
@@ -14,16 +19,21 @@ import { MarketingEmailUsers } from './class/marketing-email-user';
   styleUrls: ['./marketing-email-users.component.scss'],
   providers: [UserListService]
 })
-export class MarketingEmailUsersComponent implements OnInit {
+export class MarketingEmailUsersComponent implements OnInit, OnDestroy {
   opened: boolean = false;
   users: Array<MarketingEmailUsers> = [];
   marketingSubscription: MarketingSubscriptionType;
+  sub: Subscription = new Subscription();
   constructor(private marketingEmailStateService: MarketingEmailStateService,
     private marketingEmailService: MarketingEmailService,
+    private confirmStateService: ConfirmStateService,
+    private modalService: NgbModal,
+    public cd: ChangeDetectorRef,
+
   ) { }
 
   ngOnInit() {
-    this.marketingEmailStateService.openAside.subscribe(data => {
+    let openAside = this.marketingEmailStateService.openAside.subscribe(data => {
       this.marketingSubscription = data;
       this.opened = true;
       this.marketingEmailService.getUsersList(data.id).subscribe((res: any) => {
@@ -31,15 +41,35 @@ export class MarketingEmailUsersComponent implements OnInit {
         this.users = res.map(item => new MarketingEmailUsers(item));
       })
     })
-
+    this.sub.add(openAside);
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === DELETE_SUBSCRIPTION_USER) {
+          this.onRemove(this.marketingEmailStateService.getSubscriptionUserForRemove().id);
+        }
+      }
+    })
+    this.sub.add(getConfirm);
 
   }
-  remove(user) {
-    this.marketingEmailService.removeUser(user.id, this.marketingSubscription.id).subscribe(data => {
+  onRemove(id) {
+    this.marketingEmailService.removeUser(id, this.marketingSubscription.id).subscribe(data => {
 
     })
+  }
+  remove(user) {
+    this.confirmStateService.setConfirmAction(DELETE_SUBSCRIPTION_USER);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    modalRef.componentInstance.message = `Remove user`;
+    this.marketingEmailStateService.setSubscriptionUserForRemove(user);
+
+
   }
   close() {
     this.opened = false;
   }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
 }

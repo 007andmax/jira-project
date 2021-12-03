@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { User } from 'src/app/components/users/class/user';
 import { UserListService } from 'src/app/components/users/services/user-list.service';
+import { MarketingEmailService } from 'src/app/services/marketing-email/marketing-email.service';
 import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { MarketingSubscriptionType } from '../../marketing-subscription-type/class/marketing-subscription-type';
 
 @Component({
   selector: 'marketing-email-users-add',
@@ -15,11 +17,13 @@ export class MarketingEmailUsersAddComponent implements OnInit {
   users: Array<User> = [];
   reqUsers: Array<User> = [];
   search: string = "";
+  @Input() marketingSubscription: MarketingSubscriptionType;
   public page_number: number = 0;
   public infiniteScrollDisabled = false;
 
   constructor(private marketingEmailStateService: MarketingEmailStateService,
     private userListService: UserListService,
+    private marketingEmailService: MarketingEmailService,
     private usersStateService: UsersStateService,) { }
 
   ngOnInit() {
@@ -52,7 +56,11 @@ export class MarketingEmailUsersAddComponent implements OnInit {
 
   }
   onAdd() {
+    if (this.reqUsers.filter(item => item.selected).length > 0) {
+      this.marketingEmailService.addUsers(this.marketingSubscription.id, this.reqUsers.filter(item => item.selected).map(item => item.id)).subscribe(data => {
 
+      })
+    }
   }
   onSelect(user) {
 

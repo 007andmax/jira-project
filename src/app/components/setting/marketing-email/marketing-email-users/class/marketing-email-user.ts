@@ -6,11 +6,13 @@ export class MarketingEmailUsers {
     firstName: string;
     id: string;
     lastName: string;
+    email: string;
     constructor(data) {
         this.accountType = data.accountType;
         this.avatar = data.avatar;
         this.firstName = data.firstName;
         this.id = data.id;
         this.lastName = data.lastName;
+        this.email = data.email;
     }
 }

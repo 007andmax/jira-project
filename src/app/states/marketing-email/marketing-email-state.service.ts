@@ -7,12 +7,19 @@ import { MarketingEmailRealTimeService } from './marketing-email-real-time.servi
 export class MarketingEmailStateService {
 
   subscriptionTypeForRemove;
+  subscriptionUserForRemove;
   listSubscriptionTypeForRemove = [];
   openAside: EventEmitter<any> = new EventEmitter();
   constructor() { }
 
   public onOpenAsige(data) {
     this.openAside.emit(data);
+  }
+  public setSubscriptionUserForRemove(data) {
+    this.subscriptionUserForRemove = data;
+  }
+  public getSubscriptionUserForRemove() {
+    return this.subscriptionUserForRemove;
   }
   public setListSubscriptionTypeForRemove(data) {
     this.listSubscriptionTypeForRemove = data;

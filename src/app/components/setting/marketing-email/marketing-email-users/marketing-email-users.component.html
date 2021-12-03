@@ -17,24 +17,29 @@
                     ngbDropdown
                 >
                     <div class="qt-df qt-ai-c qt-mb-16">
-                      <span class="qt-input-search qt-f-1">
-                        <input
-                          class="form-control"
-                          placeholder="Search Users"
-                          value
-                          autocomplete="off"
-                          (input)="onSearch($event)"
+                        <span class="qt-input-search qt-f-1">
+                            <input
+                                class="form-control"
+                                placeholder="Search Users"
+                                value
+                                autocomplete="off"
+                                (input)="onSearch($event)"
+                            >
+                        </span>
+                        <button
+                            class="qt-btn --outline-blue qt-fs-0 qt-ml-8"
+                            ngbDropdownToggle
                         >
-                      </span>
-                      <button
-                        class="qt-btn --outline-blue qt-fs-0 qt-ml-8"
-                        ngbDropdownToggle
-                      >
-                        Add User
-                      </button>
+                            Add User
+                        </button>
                     </div>
 
-                    <marketing-email-users-add ngbDropdownMenu></marketing-email-users-add>
+
+
+                    <marketing-email-users-add
+                        ngbDropdownMenu
+                        [marketingSubscription]="marketingSubscription"
+                    ></marketing-email-users-add>
                 </div>
             </div>
             <div class="users-list custom-scroll">
@@ -72,12 +77,13 @@
                             </div>
                             <span class="qt-f-1 ellipsis">
                                 <div
-                                  class="qt-fw-500 qt-color-dark ellipsis"
-                                  [textContent]="user.firstName + ' ' + user.lastName">
+                                    class="qt-fw-500 qt-color-dark ellipsis"
+                                    [textContent]="user.firstName + ' ' + user.lastName"
+                                >
                                 </div>
                                 <div
                                     class="qt-color-gray-700 qt-fs-12 qt-lh-133 ellipsis"
-                                    [textContent]="user.primaryEmail"
+                                    [textContent]="user.email"
                                 ></div>
                             </span>
                             <a

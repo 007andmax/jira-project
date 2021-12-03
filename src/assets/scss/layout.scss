@@ -1088,221 +1088,215 @@ body {
     }
 
     .ticket-settings-page-container {
-      .page-insider .heading {
-        padding: 20px 24px;
-        height: 74px;
-      }
-      ngb-tabset ul.nav-tabs {
-        padding: 0 24px;
-      }
-      ngb-tabset .tab-content {
-        padding: 24px 24px 0;
-      }
-      .tab-pane td {
-        height: 40px;
-        padding: 0 15px 0 0;
-      }
-      .page-insider .heading .heading-serach.--hidden {
-        display: none;
-      }
-      form .form-row {
-        margin: 0 0 20px 0;
-      }
-      ngb-tabset ul.nav-tabs .nav-item {
-        margin: 0 24px 0 0;
-      }
-      .checkbox {
-        display: table-cell;
-        input {
-          transform: translateY(3px);
+        .page-insider .heading {
+            padding: 20px 24px;
+            height: 74px;
         }
-      }
-      .qt-checkbox {
-        margin: 0;
-        padding: 0;
+        ngb-tabset ul.nav-tabs {
+            padding: 0 24px;
+        }
+        ngb-tabset .tab-content {
+            padding: 24px 24px 0;
+        }
+        .tab-pane td {
+            height: 40px;
+            padding: 0 15px 0 0;
+        }
+        .page-insider .heading .heading-serach.--hidden {
+            display: none;
+        }
+        form .form-row {
+            margin: 0 0 20px 0;
+        }
+        ngb-tabset ul.nav-tabs .nav-item {
+            margin: 0 24px 0 0;
+        }
+        .checkbox {
+            display: table-cell;
+            input {
+                transform: translateY(3px);
+            }
+        }
+        .qt-checkbox {
+            margin: 0;
+            padding: 0;
 
-        input {
-          position: absolute;
-        }
+            input {
+                position: absolute;
+            }
 
-        span {
-          margin-top: 5px;
+            span {
+                margin-top: 5px;
+            }
         }
-      }
-      .page-insider {
-        table.dataTable tbody tr:last-child td {
-          border-bottom: 1px solid #edf2f6;
+        .page-insider {
+            table.dataTable tbody tr:last-child td {
+                border-bottom: 1px solid #edf2f6;
+            }
         }
-      }
-      > .invoice-ticket {
-        padding-bottom: 24px;
-      }
+        > .invoice-ticket {
+            padding-bottom: 24px;
+        }
     }
 
     .products-settings-page-container {
-      .page-insider .heading {
-        padding: 20px 24px;
-        height: 74px;
-      }
-      .page-insider-marketing-email {
-        .rate {
-          color: $primary-1;
+        .page-insider .heading {
+            padding: 20px 24px;
+            height: 74px;
         }
-      }
-      ngb-tabset {
-        ul.nav-tabs {
-          padding: 0 24px;
+        ngb-tabset {
+            ul.nav-tabs {
+                padding: 0 24px;
+            }
+            .tab-content {
+                padding: 0;
+            }
+        }
+        .tab-pane td {
+            height: 40px;
+            padding: 0 15px 0 24px;
+        }
+        .cmn-area th {
+            padding: 8px 10px 8px 6px;
+            background-color: $gray-100;
+            text-transform: uppercase;
+        }
+        .manage-taxes .cmn-area .rate {
+            padding: 8px 10px 8px 6px;
+        }
+        .manage-taxes .cmn-area .action {
+            padding: 0 24px 0 0;
+        }
+        .manage-taxes .cmn-area {
+            .tax-name {
+                padding: 0;
+                font-weight: 600;
+            }
+            th.tax-name {
+                padding-left: 8px;
+            }
+        }
+        .manage-taxes .cmn-area .checkbox {
+            width: 56px;
+            display: table-cell;
+
+            .qt-checkbox {
+                margin-top: 11px;
+            }
+        }
+        .qt-table-modern__sorting {
+            top: 2px;
+        }
+        .add-category-name {
+            width: auto;
+        }
+        .add-category-container {
+            td {
+                background-color: #f4fbff;
+            }
+        }
+        .tickets-status-header-buttons {
+            display: flex;
+            align-items: center;
+            padding: 8px 16px;
+            border-radius: 4px;
+            background-color: $white;
+            font-size: 12px;
+            color: $gray-800;
+            line-height: 1.33;
+            border: 1px solid $gray-400;
+        }
+        .page-insider {
+            padding-bottom: 24px;
+
+            table.dataTable tbody tr:last-child td {
+                border-bottom: 1px solid #edf2f6;
+            }
         }
         .tab-content {
-          padding: 0;
+            .cmn-area-header__job-title,
+            .cmn-area-header__user-type {
+                padding: 8px 10px 8px 9px;
+            }
         }
-      }
-      .tab-pane td {
-        height: 40px;
-        padding: 0 15px 0 24px;
-      }
-      .cmn-area th {
-        padding: 8px 10px 8px 6px;
-        background-color: $gray-100;
-        text-transform: uppercase;
-      }
-      .manage-taxes .cmn-area .rate {
-        padding: 8px 10px 8px 6px;
-      }
-      .manage-taxes .cmn-area .action {
-        padding: 0 24px 0 0;
-      }
-      .manage-taxes .cmn-area {
-        .tax-name {
-          padding: 0;
-          font-weight: 600;
+        .add-crm-industry-container,
+        .add-crm-service-type-container,
+        .add-crm-job-title-container,
+        .add-crm-job-type-container {
+            td {
+                background-color: #f4fbff;
+            }
         }
-        th.tax-name {
-          padding-left: 8px;
+        .checkbox-header {
+            width: 56px;
         }
-      }
-      .manage-taxes .cmn-area .checkbox {
-        width: 56px;
-        display: table-cell;
-
-        .qt-checkbox {
-          margin-top: 11px;
-        }
-      }
-      .qt-table-modern__sorting {
-        top: 2px;
-      }
-      .add-category-name {
-        width: auto;
-      }
-      .add-category-container {
-        td {
-          background-color: #f4fbff;
-        }
-      }
-      .tickets-status-header-buttons {
-        display: flex;
-        align-items: center;
-        padding: 8px 16px;
-        border-radius: 4px;
-        background-color: $white;
-        font-size: 12px;
-        color: $gray-800;
-        line-height: 1.33;
-        border: 1px solid $gray-400;
-      }
-      .page-insider {
-        padding-bottom: 24px;
-
-        table.dataTable tbody tr:last-child td {
-          border-bottom: 1px solid #edf2f6;
-        }
-      }
-      .tab-content {
-        .cmn-area-header__job-title,
-        .cmn-area-header__user-type {
-          padding: 8px 10px 8px 9px;
-        }
-      }
-      .add-crm-industry-container,
-      .add-crm-service-type-container,
-      .add-crm-job-title-container,
-      .add-crm-job-type-container {
-        td {
-          background-color: #f4fbff;
-        }
-      }
-      .checkbox-header {
-        width: 56px;
-      }
     }
 
     .app-invoice-tickets-page-container {
-      > .page-insider {
-        padding-bottom: 24px;
+        > .page-insider {
+            padding-bottom: 24px;
 
-        table.dataTable tbody tr:last-child td {
-          border-bottom: 1px solid #edf2f6;
+            table.dataTable tbody tr:last-child td {
+                border-bottom: 1px solid #edf2f6;
+            }
         }
-      }
-      .heading {
-        padding: 20px 24px;
-        height: 74px;
-      }
-      ngb-tabset {
-        ul.nav-tabs {
-          padding: 0 24px;
+        .heading {
+            padding: 20px 24px;
+            height: 74px;
         }
-        .tab-content {
-          padding: 24px 24px 0;
+        ngb-tabset {
+            ul.nav-tabs {
+                padding: 0 24px;
+            }
+            .tab-content {
+                padding: 24px 24px 0;
+            }
         }
-      }
-      label {
-        font-weight: 600;
-        margin-bottom: 8px;
-        color: $primary-2;
-      }
-      .qt-checkbox {
-        span {
-          margin-top: 6px;
-          margin-right: 6px;
+        label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: $primary-2;
         }
-        &__text {
-          font-size: 13px;
-          line-height: 20px;
-          letter-spacing: 0;
-          color: $gray-800;
+        .qt-checkbox {
+            span {
+                margin-top: 6px;
+                margin-right: 6px;
+            }
+            &__text {
+                font-size: 13px;
+                line-height: 20px;
+                letter-spacing: 0;
+                color: $gray-800;
+            }
         }
-      }
-      .form-control {
-        height: 40px;
-        font-size: 13px;
-        line-height: 20px;
-        font-weight: 500;
-        color: $primary-2;
-      }
-      .page-insider.invoice-ticket {
-        .f-row {
-          overflow: unset;
+        .form-control {
+            height: 40px;
+            font-size: 13px;
+            line-height: 20px;
+            font-weight: 500;
+            color: $primary-2;
         }
-      }
-      .manage-taxes .cmn-area {
+        .page-insider.invoice-ticket {
+            .f-row {
+                overflow: unset;
+            }
+        }
+        .manage-taxes .cmn-area {
+            .checkbox {
+                width: 56px;
+                display: table-cell;
+            }
 
-        .checkbox {
-          width: 56px;
-          display: table-cell;
-        }
+            .rate,
+            .tax-name {
+                padding: 0 15px 0 0;
+            }
 
-        .rate,
-        .tax-name {
-          padding: 0 15px 0 0;
+            .ng7 .products-settings-page-container .manage-taxes .cmn-area .tax-name {
+                padding: 0;
+                font-weight: 600;
+            }
         }
-
-        .ng7 .products-settings-page-container .manage-taxes .cmn-area .tax-name {
-          padding: 0;
-          font-weight: 600;
-        }
-      }
     }
 
     /*** Common Tabbings ***/
@@ -2819,26 +2813,26 @@ body {
     margin-bottom: 0 !important;
 
     .angular-editor-button {
-      @media (max-width: 767px) {
-        min-width: 1rem !important;
-      }
+        @media (max-width: 767px) {
+            min-width: 1rem !important;
+        }
     }
 
     &:nth-child(7) {
-      @media (max-width: 767px) {
-        width: 100%;
-        order: -1;
-      }
-
-      select {
         @media (max-width: 767px) {
-          width: 100% !important;
-          background-color: transparent !important;
-          padding: 8px 12px;
-          margin-bottom: 8px;
-          font-size: 12px;
+            width: 100%;
+            order: -1;
         }
-      }
+
+        select {
+            @media (max-width: 767px) {
+                width: 100% !important;
+                background-color: transparent !important;
+                padding: 8px 12px;
+                margin-bottom: 8px;
+                font-size: 12px;
+            }
+        }
     }
 }
 .angular-editor-toolbar-set label.block-label {
@@ -2860,7 +2854,6 @@ body {
     color: $gray-800;
 }
 .angular-editor .angular-editor-wrapper {
-
     .angular-editor-textarea {
         background-color: transparent !important;
         padding: 15px 16px !important;
@@ -2870,9 +2863,9 @@ body {
     }
 
     .angular-editor-placeholder {
-      padding: 18px 16px !important;
-      color: $gray-600 !important;
-      @extend %body-m;
+        padding: 18px 16px !important;
+        color: $gray-600 !important;
+        @extend %body-m;
     }
 }
 .angular-editor-toolbar .angular-editor-toolbar-set .angular-editor-button {
@@ -2920,44 +2913,44 @@ div#editor.angular-editor-textarea {
             }
         }
         .cropping .close-ico {
-          position: absolute;
-          top: 0;
-          right: 0;
+            position: absolute;
+            top: 0;
+            right: 0;
         }
         p {
-          font-weight: 400;
-          font-size: 13px;
-          line-height: 1.54;
-          max-width: 398px;
-          color: $gray-700;
+            font-weight: 400;
+            font-size: 13px;
+            line-height: 1.54;
+            max-width: 398px;
+            color: $gray-700;
         }
         h3 {
-          font-weight: 600;
-          font-size: 20px;
-          line-height: 1.4;
-          color: $primary-2;
-          position: relative;
-          margin: 0;
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 1.4;
+            color: $primary-2;
+            position: relative;
+            margin: 0;
         }
         .btn-crops {
-          display: flex;
-          justify-content: end;
+            display: flex;
+            justify-content: end;
 
-          .btn-secondary,
-          .btn-primary {
-            height: 40px;
-            border-radius: 4px;
-            padding: 0 20px;
-          }
-          .btn-secondary {
-            background: $white;
-            border: 1px solid $gray-500;
-          }
-          .btn-primary {
-            background-color: $error;
-            border: none;
-            margin-right: 16px;
-          }
+            .btn-secondary,
+            .btn-primary {
+                height: 40px;
+                border-radius: 4px;
+                padding: 0 20px;
+            }
+            .btn-secondary {
+                background: $white;
+                border: 1px solid $gray-500;
+            }
+            .btn-primary {
+                background-color: $error;
+                border: none;
+                margin-right: 16px;
+            }
         }
         .crop-inner {
             padding: 24px;
@@ -3053,18 +3046,18 @@ div#editor.angular-editor-textarea {
             top: 50%;
             max-width: 488px;
             @media (max-width: 767px) {
-              width: calc(100% - 32px);
+                width: calc(100% - 32px);
             }
 
             .modal-content {
-              padding: 0;
+                padding: 0;
             }
-          .qt-button {
-            @media (max-width: 767px) {
-              width: 100%;
-              justify-content: center;
+            .qt-button {
+                @media (max-width: 767px) {
+                    width: 100%;
+                    justify-content: center;
+                }
             }
-          }
         }
     }
     .modal-dialog {
