@@ -1,8 +1,11 @@
 .scroll-pane {
     overflow: scroll;
-    padding: 0px;
-    height: 300px;
+    padding: 0;
+    height: calc(100% - 128px);
 }
 .custom-scroll {
     height: 100%;
+}
+.assign-ticket-content {
+  height: 100%;
 }

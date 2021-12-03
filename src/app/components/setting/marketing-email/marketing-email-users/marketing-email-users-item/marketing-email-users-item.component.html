@@ -27,16 +27,19 @@
                 alt="..."
             >
         </div>
-        <span>
-            <p [textContent]="user.firstName + ' ' + user.lastName"></p>
-            <p
+        <span class="qt-f-1 ellipsis">
+            <div
+              class="qt-fw-500 qt-color-dark ellipsis"
+              [textContent]="user.firstName + ' ' + user.lastName">
+            </div>
+            <div
+                class="qt-color-gray-700 qt-fs-12 qt-lh-133 ellipsis"
                 [textContent]="user.primaryEmail"
-                style="margin: 0;"
-            ></p>
+            ></div>
         </span>
         <div class="d-f">
             <label
-                class="qt-checkbox"
+                class="qt-checkbox --circle"
                 [attr.for]="'user-' + user.id"
             >
                 <input

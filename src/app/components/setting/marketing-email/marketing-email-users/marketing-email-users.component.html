@@ -16,21 +16,24 @@
                     class="clearfix"
                     ngbDropdown
                 >
-                    <div class="form-group">
+                    <div class="qt-df qt-ai-c qt-mb-16">
+                      <span class="qt-input-search qt-f-1">
                         <input
-                            class="form-control"
-                            placeholder="Search Users"
-                            value
-                            autocomplete="off"
-                            (input)="onSearch($event)"
+                          class="form-control"
+                          placeholder="Search Users"
+                          value
+                          autocomplete="off"
+                          (input)="onSearch($event)"
                         >
-                    </div>
-                    <button
-                        class="qt-button qt-mr-12"
+                      </span>
+                      <button
+                        class="qt-btn --outline-blue qt-fs-0 qt-ml-8"
                         ngbDropdownToggle
-                    >
+                      >
                         Add User
-                    </button>
+                      </button>
+                    </div>
+
                     <marketing-email-users-add ngbDropdownMenu></marketing-email-users-add>
                 </div>
             </div>
@@ -43,7 +46,7 @@
                     [ngForTrackBy]="trackByIndex"
                 >
                     <div class="user-item">
-                        <a
+                        <div
                             href="javascript:void(0)"
                             [id]="user.id"
                             class="dropdown-link"
@@ -67,12 +70,15 @@
                                     alt="..."
                                 >
                             </div>
-                            <span>
-                                <p [textContent]="user.firstName + ' ' + user.lastName"></p>
-                                <p
+                            <span class="qt-f-1 ellipsis">
+                                <div
+                                  class="qt-fw-500 qt-color-dark ellipsis"
+                                  [textContent]="user.firstName + ' ' + user.lastName">
+                                </div>
+                                <div
+                                    class="qt-color-gray-700 qt-fs-12 qt-lh-133 ellipsis"
                                     [textContent]="user.primaryEmail"
-                                    style="margin: 0;"
-                                ></p>
+                                ></div>
                             </span>
                             <a
                                 href="javascript:;"
@@ -82,7 +88,7 @@
                             >
                                 <div class="icon__remove qt-sz-16 qt-bg-contain"></div>
                             </a>
-                        </a>
+                        </div>
                     </div>
                 </ng-template>
             </div>

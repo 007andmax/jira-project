@@ -19,7 +19,12 @@
     border: none;
     padding-bottom: 128px;
   }
-
+  &.users-page__aside {
+    max-width: 480px;
+    .qt-aside-modern__content {
+      padding: 16px 32px;
+    }
+  }
   &.password-edit-aside {
     .qt-aside-modern__header {
       @media (max-width: 767px) {

@@ -1144,6 +1144,11 @@ body {
         padding: 20px 24px;
         height: 74px;
       }
+      .page-insider-marketing-email {
+        .rate {
+          color: $primary-1;
+        }
+      }
       ngb-tabset {
         ul.nav-tabs {
           padding: 0 24px;

@@ -1,7 +1,7 @@
 <div class="assign-ticket-content">
     <div class="assign-ticket-header">
         <div class="clearfix">
-            <div class="form-group">
+            <span class="qt-input-search">
                 <input
                     class="form-control"
                     placeholder="Search Users"
@@ -9,7 +9,7 @@
                     [(ngModel)]="search"
                     (input)="onSearch($event)"
                 >
-            </div>
+            </span>
         </div>
     </div>
     <div
@@ -39,7 +39,7 @@
             </ng-template>
         </div>
     </div>
-    <div class="qt-df">
+    <div class="qt-df qt-pl-16 qt-pr-16 qt-pt-16 qt-pb-16 qt-bg-white">
         <button
             class="qt-button qt-mr-12"
             ngbDropdownItem
