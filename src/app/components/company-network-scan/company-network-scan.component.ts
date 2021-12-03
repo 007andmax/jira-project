@@ -1,7 +1,9 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AgentService } from 'src/app/services/agent/agent.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { KafkaStateService } from 'src/app/states/kafka/kafka-state.service';
 import { NETWORK_REMOVE_DEVICE } from '../../const/confirm';
 import { DisabledBtnDirective } from '../../directives/disabled-btn.directive';
 import { DevicesService } from '../../services/devices/devices.service';
@@ -44,6 +46,12 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
   isScaning: boolean = false;
   networkScanFilter: NetworkScanFilter = new NetworkScanFilter(new CompanyNetworkScanService);
   sub: Subscription = new Subscription();
+  assetList: any[] = [];
+  kafkaMessage: any;
+  networkvalue: [] = [];
+  nets: [] = [];
+  asset: any;
+  assetName: any;
   constructor(private devicesStateService: DevicesStateService,
     private devicesService: DevicesService,
     private permissionsService: PermissionsService,
@@ -56,9 +64,15 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     private leftPanelStateService: LeftPanelStateService,
     private companiesStateService: CompaniesStateService,
     private websocketService: WebsocketService,
-    public cd: ChangeDetectorRef,) { }
+    private agentService: AgentService,
+    public cd: ChangeDetectorRef,
+    private kafkaStateService: KafkaStateService,
+    private ngZone: NgZone) { }
 
   ngOnInit() {
+    this.kafkaStateService.onNetworkScan.subscribe((resp) =>{
+      this.onNetworkScan(resp)
+      });
     this.leftPanelStateService.changeStateWithoutNavigate('company-network-scan');
     let id = this.activateRoute.snapshot.params['id'];
     let subscription = this.activateRoute.params.subscribe(params => {
@@ -66,6 +80,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
       this.companiesStateService.setSelectedCompanyId(id);
       this.companyId = id;
       this.devicesStateService.subsribeToNetScan(this.companyId);
+      this.setPreviewDataDevice();
       this.getDevices();
     });
     this.sub.add(subscription);
@@ -143,6 +158,41 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getConfirm);
   }
+
+  setPreviewDataDevice() {
+    this.agentService
+      .getAgentToken(
+        "QuickTech",
+        "s8Y1IuPCUUYlSLMbFijHvut5uOi/KnKNqOLtn57CBlw="
+      )
+      .subscribe((data) => {
+        this.agentService.setAccessToken(data.AccessToken);
+        this.AssetDetail();
+      });
+  }
+
+  AssetDetail() {
+    this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {
+      this.assetList = resp;
+    })
+  }
+  selectMasterNetwork(Id){
+    this.asset = this.assetList.find((x)=>x.ID == Id);
+    this.assetName = this.asset.Name;
+    let data: any = {};
+    data.AssetID = Id;
+    data.MessageType = "NetworkScan";
+    this.agentService.SendNetworkCommand(data);
+  }
+
+
+  onNetworkScan(resp: any){
+    this.ngZone.run(() => {
+      this.networkvalue = JSON.parse(resp[0].Value);
+    });
+  }
+
+
   getDevices() {
     if (this.devicesStateService.getAllDevices()) {
       this.devices = (this.devicesStateService.getAllDevices()[this.companyId]) ? JSON.parse(JSON.stringify(this.devicesStateService.getAllDevices()[this.companyId])).map(item => new Device(item)) : [];
@@ -236,14 +286,14 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     })
   }
   findMasterAgent() {
-    let find = this.devices.find(item => item.agentId === this.networkScanSomeInfoForDevice.masterAgentId);
-    if (find) {
-      this.masterAgent = find;
-    } else {
-      let agentsSortedByCreatedAtDate = this.devices.sort((a, b) => (new Date(a.createdAt) > new Date(b.createdAt)) ?
-        1 : ((new Date(b.createdAt) > new Date(a.createdAt)) ? -1 : 0));
-      this.masterAgent = agentsSortedByCreatedAtDate[0];
-    }
+    // let find = this.devices.find(item => item.agentId === this.networkScanSomeInfoForDevice.masterAgentId);
+    // if (find) {
+    //   this.masterAgent = find;
+    // } else {
+    //   let agentsSortedByCreatedAtDate = this.devices.sort((a, b) => (new Date(a.createdAt) > new Date(b.createdAt)) ?
+    //     1 : ((new Date(b.createdAt) > new Date(a.createdAt)) ? -1 : 0));
+    //   this.masterAgent = agentsSortedByCreatedAtDate[0];
+    // }
   }
   public trackById(index, item) {
     return item.id;

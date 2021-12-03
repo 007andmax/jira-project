@@ -389,7 +389,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   onDateChange(newDate: Date) {}
 
   updateAsset() {
-    debugger;
     this.asset.InstallDate =this.asset.InstallDate || '0001-01-01';
     this.asset.LastRebootDate =this.asset.LastRebootDate || '0001-01-01';
     this.asset.DeploymentDate =this.asset.DeploymentDate || '0001-01-01';

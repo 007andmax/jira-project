@@ -14,6 +14,7 @@ export class KafkaStateService {
   onUpdateAgent: EventEmitter<any> = new EventEmitter();
   onUninstallRemoteAgent: EventEmitter<any> = new EventEmitter();
   onInstallRemoteAgent: EventEmitter<any> = new EventEmitter();
+  onNetworkScan: EventEmitter<any> = new EventEmitter();
 
   constructor(private kafkaRealTimeService: KafkaRealTimeService) { }
 
@@ -47,6 +48,9 @@ export class KafkaStateService {
           break;
         case "UninstallRemoteAgent":
           this.handleUninstallRemoteAgent(newChange);
+          break;
+        case "NetworkScan":
+          this.handleNetworkScanCommand(newChange);
           break;
       }
     });
@@ -166,5 +170,21 @@ export class KafkaStateService {
       Value: newChange.data.Value,
     });
     this.onUninstallRemoteAgent.emit(this.assetConfigMessage);
+  }
+
+  private handleNetworkScanCommand(newChange: any) {
+    if (this.assetConfigMessage.length > 0) {
+      let index = this.assetConfigMessage.findIndex(
+        (x) => (x.key = newChange.data.AssetID)
+      );
+      if (index != -1) {
+        this.assetConfigMessage.splice(index, 1);
+      }
+    }
+    this.assetConfigMessage.push({
+      key: newChange.data.AssetID,
+      Value: newChange.data.Value,
+    });
+    this.onNetworkScan.emit(this.assetConfigMessage);
   }
 }
