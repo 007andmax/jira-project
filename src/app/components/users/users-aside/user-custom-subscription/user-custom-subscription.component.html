@@ -16,10 +16,14 @@
             let-i="index"
             [ngForTrackBy]="trackById"
         >
-            <div
-                [ngClass]="{'active':custom.activated}"
-                [textContent]="custom.name"
-            ></div>
+            <div [ngClass]="{'active':custom.activated,
+            'no-active':!custom.activated}">
+                <i
+                    class="qt-sz-16 qt-bg-contain qt-dib"
+                    [ngClass]="{'icon__unsubscribe-user':!custom.activated,'icon__subscribe-user':custom.activated}"
+                ></i>
+                {{custom.name}}
+            </div>
         </ng-template>
     </div>
     <ul
