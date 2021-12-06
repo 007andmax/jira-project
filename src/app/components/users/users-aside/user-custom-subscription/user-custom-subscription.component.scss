@@ -9,9 +9,12 @@
         color: $primary-2;
     }
 }
+
 .active {
-    background-color: #2ec866;
+    background-color: rgba($success, .1);
+    color: $success;
 }
 .no-active {
-    background-color: #ff5263;
+    background-color: rgba($error, .1);
+    color: $error;
 }
