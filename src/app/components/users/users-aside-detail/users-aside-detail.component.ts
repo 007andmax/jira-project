@@ -50,7 +50,7 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
   ngOnInit() {
     let openDetailAside = this.usersStateService.openDetailAside.subscribe(data => {
       this.usersStateService.setUserForEdit(data);
-      this.companySubscriptionState.onEditMode(this.user.subscription);
+      //   this.companySubscriptionState.onEditMode(this.user.subscription);
       this.user.onEdit(data);
       this.tab = 'tickets';
       this.cd.detectChanges();
@@ -143,16 +143,16 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
     })
   }
   onChangeSubscriptions(data) {
-    let subscription = {
-      id: this.usersStateService.getuserForEdit().subscription.id,
-      invoice: true,
-      ticket: true,
-      ticketManager: true,
-    }
-    data.forEach(item => subscription[item.field] = item.selected);
-    this.usersService.setSubscriptions(subscription).subscribe(res => {
-
-    })
+    /*  let subscription = {
+        id: this.usersStateService.getuserForEdit().subscription.id,
+        invoice: true,
+        ticket: true,
+        ticketManager: true,
+      }
+      data.forEach(item => subscription[item.field] = item.selected);
+      this.usersService.setSubscriptions(subscription).subscribe(res => {
+  
+      })*/
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

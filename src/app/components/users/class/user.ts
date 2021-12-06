@@ -4,6 +4,8 @@ import { UserSubscription } from './user-subscription';
 import { UserStatistic } from './user-statistic';
 import { ImageCropper } from '../../shared/image-cropper/class/image-cropper';
 import { Tag } from 'src/app/interfaces/tag/tag';
+import { UserDefaultSubscription } from './user-default-subscription';
+import { UserCustomSubscription } from './user-custom-subscription';
 
 export class User {
     accountType: string;
@@ -31,7 +33,8 @@ export class User {
     secondaryEmail: any;
     startPage: any;
     status: any;
-    subscription: UserSubscription;
+    defaultSubscriptions: UserDefaultSubscription;
+    customSubscriptions: Array<UserCustomSubscription>;
     techRole: any;
     twoFactorAuthType: string;
     userEnabled: boolean;
@@ -49,9 +52,11 @@ export class User {
         }
 
     }
-
-    public changeSubscriptions(data) {
-        this.subscription = new UserSubscription(data.id, data.invoice, data.ticket, data.ticketManager);
+    public changeDefaultSubscriptions(data) {
+        this.defaultSubscriptions = data;
     }
+    /*  public changeSubscriptions(data) {
+          this.subscription = new UserSubscription(data.id, data.invoice, data.ticket, data.ticketManager);
+      }*/
 
 }

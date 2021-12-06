@@ -250,7 +250,7 @@
   }
   .qt-input-search {
     &::before {
-      background: url('/assets/img/icons/online-search.svg') no-repeat center / contain;
+      background: url("/assets/img/icons/online-search.svg") no-repeat center / contain;
       left: 12px;
     }
     input {
@@ -315,7 +315,7 @@
       .qt-input-search {
         display: block;
         &::before {
-          background-image: url(/assets/img/icons/search.png)
+          background-image: url(/assets/img/icons/search.png);
         }
       }
     }
@@ -539,7 +539,9 @@ draft-email-user-recipients .mat-form-field-appearance-legacy {
   }
 }
 users-aside-detail {
-  app-company-subscription {
+  app-company-subscription,
+  user-default-subscription,
+  user-custom-subscription {
     .user-subscription {
       border: none;
       flex-direction: row;

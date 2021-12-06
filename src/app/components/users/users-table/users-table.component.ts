@@ -45,10 +45,16 @@ export class UsersTableComponent implements OnInit {
     public cd: ChangeDetectorRef,
     private elRef: ElementRef) { }
 
-  onChangeSubscriptions(data) {
+  onChangeDefaultSubscriptions(data) {
     this.usersService.setSubscriptions(data).subscribe(res => {
 
-      this.user.subscription = data;
+      this.user.defaultSubscriptions = data;
+    })
+  }
+  onChangeCustomSubscriptions(data) {
+    this.usersService.setSubscriptions(data).subscribe(res => {
+
+      this.user.defaultSubscriptions = data;
     })
   }
   getJobTitle() {

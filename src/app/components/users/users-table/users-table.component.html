@@ -82,8 +82,10 @@
     <td class="users-table__subscription">
         <app-user-table-subscription
             class="users-table__subscription--dropdown"
-            (onChange)="onChangeSubscriptions($event)"
-            [subscription]="user.subscription"
+            (onChangeDefault)="onChangeDefaultSubscriptions($event)"
+            (onChangeCustom)="onChangeCustomSubscriptions($event)"
+            [defaultSubscriptions]="user.defaultSubscriptions"
+            [customSubscriptions]="user.customSubscriptions"
         >
         </app-user-table-subscription>
     </td>

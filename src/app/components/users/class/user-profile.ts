@@ -6,12 +6,15 @@ import { User } from './user';
 import { UserUpdate } from './user-update';
 import { UserAdd } from './user-add';
 import { Tag } from 'src/app/interfaces/tag/tag';
+import { UserCustomSubscription } from './user-custom-subscription';
+import { UserDefaultSubscription } from './user-default-subscription';
 
 export class UserProfile {
     id: string;
     role: string = 'USER';
     phoneNumbers: Array<PhoneNumber> = [new PhoneNumber('OFFICE')];
-    subscription: Subscriptions;
+    customSubscriptions: Array<UserCustomSubscription> = [];
+    defaultSubscriptions: UserDefaultSubscription = new UserDefaultSubscription();
     welcomeEmail: boolean = true;
     avatar: UserAvatar;
     firstName: string;
@@ -24,9 +27,7 @@ export class UserProfile {
     jobTitleId: string;
     jobTypeId: string;
     constructor() {
-        this.subscription = {
-            invoice: false, ticket: true, ticketManager: false
-        }
+
     }
     public setTags(data) {
         this.tags = data;
@@ -43,9 +44,8 @@ export class UserProfile {
                 return new PhoneNumber(item.typeNumber, number);
             })
         }
-        this.subscription = {
-            invoice: user.subscription.invoice, ticket: user.subscription.ticket, ticketManager: user.subscription.ticketManager
-        }
+        this.customSubscriptions = user.customSubscriptions;
+        this.defaultSubscriptions = user.defaultSubscriptions;
         this.welcomeEmail = user.isEmailVerified;
         this.avatar = user.avatar;
         this.firstName = user.firstName;
@@ -94,8 +94,11 @@ export class UserProfile {
     public setDesignation(data) {
         this.designation = data;
     }
-    public setSubscriptions(data) {
-        this.subscription = data;
+    public setCustomSubscriptions(data) {
+        this.customSubscriptions = data;
+    }
+    public setDefaultSubscriptions(data) {
+        this.defaultSubscriptions = data;
     }
     public getUserForUpdate(user: User) {
 

@@ -62,7 +62,6 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
     this.usersStateService.getOpenAside().subscribe(data => {
       this.getJobTypeList();
       this.opened = true;
-      this.companySubscriptionState.onEditMode(this.user.subscription);
     })
     if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
@@ -110,10 +109,11 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
   public onChangeTags(tags) {
     this.user.setTags(tags);
   }
-  onChangeSubscriptions(data) {
-
-    data.forEach(item => this.user.subscription[item.field] = item.selected);
-    //  this.user.setSubscriptions(data);
+  onChangeDefaultSubscriptions(data) {
+    this.user.setDefaultSubscriptions(data);
+  }
+  onChangeCustomSubscriptions(data) {
+    this.user.setCustomSubscriptions(data);
   }
   onCheckEmail() {
 

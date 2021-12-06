@@ -1,0 +1,55 @@
+<div
+    class="grey-dropdown"
+    ngbDropdown
+    container="body"
+>
+    <i class="icn-sm report-caret-icon"></i>
+    <div
+        class="user-subscription"
+        id="dropdownServices"
+        ngbDropdownToggle
+    >
+        <div
+            *ngIf="defaultSubscriptions.invoiceSubscription.enabled"
+            [ngClass]="{'active':defaultSubscriptions.invoiceSubscription.activated}"
+        >
+            Invoice
+        </div>
+        <div
+            *ngIf="defaultSubscriptions.ticketSubscription.enabled"
+            [ngClass]="{'active':defaultSubscriptions.ticketSubscription.activated}"
+        >
+            Ticket
+        </div>
+        <div
+            *ngIf="defaultSubscriptions.ticketManagerSubscription.enabled"
+            [ngClass]="{'active':defaultSubscriptions.ticketManagerSubscription.activated}"
+        >
+            Ticket Manager
+        </div>
+    </div>
+    <ul
+        class="qt-dropdown-menu company-subscription-dropdown"
+        ngbDropdownMenu
+        aria-labelledby="dropdownServices"
+    >
+        <li
+            ngbDropdownItem
+            (click)="selected('invoiceSubscription')"
+        >
+            Invoice
+        </li>
+        <li
+            ngbDropdownItem
+            (click)="selected('ticketSubscription')"
+        >
+            Ticket
+        </li>
+        <li
+            ngbDropdownItem
+            (click)="selected('ticketManagerSubscription')"
+        >
+            Ticket Manager
+        </li>
+    </ul>
+</div>

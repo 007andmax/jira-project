@@ -69,12 +69,13 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
       this.opened = true;
       this.getJobTypeList();
       this.user.onEdit(this.usersStateService.getuserForEdit());
+      console.log("this.user", this.user);
       this.companyTags.setSelectedTag(this.user.tags);
       this.selectedUserType = this.userTypes.find(item => item.id == this.user.jobTypeId);
       this.selectedUserTitle = this.jobTitleList.find(item => item.id == this.user.jobTitleId);
       this.validate.addPhoneNumbers(this.user.phoneNumbers);
       this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.user.companyId);
-      this.companySubscriptionState.onEditMode(this.user.subscription);
+      //     this.companySubscriptionState.onEditMode(this.user.subscription);
     })
     if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
@@ -111,6 +112,12 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     })
     this.usersAsideService.addSubscription(getConfirm);
   }
+  onChangeDefaultSubscriptions(data) {
+    this.user.setDefaultSubscriptions(data);
+  }
+  onChangeCustomSubscriptions(data) {
+    this.user.setCustomSubscriptions(data);
+  }
   onChangeJobDescription(event) {
     this.user.jobDescription = event.target.value;
   }
@@ -128,11 +135,6 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
   addPhoneNumber() {
     this.user.addPhoneNumber();
     this.validate.addPhoneNumber();
-  }
-  onChangeSubscriptions(data) {
-
-    data.forEach(item => this.user.subscription[item.field] = item.selected);
-    // this.user.setSubscriptions(data);
   }
   onCheckEmail() {
     if (this.user.primaryEmail && this.user.primaryEmail.length > 0) this.validate.checkValidPrimaryEmail(this.user.primaryEmail);

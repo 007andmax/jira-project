@@ -150,9 +150,9 @@ export class CompanyUserComponent implements OnInit {
 
         if (newChange.action === 'SUBSCRIPTION_SAVED') {
           const reqIndex = this.reqUsers.findIndex((item) => item.id === newChange.data.user.id);
-          if (reqIndex > -1) this.reqUsers[reqIndex].changeSubscriptions(newChange.data);
+          //  if (reqIndex > -1) this.reqUsers[reqIndex].changeSubscriptions(newChange.data);
           const userIndex = this.users.findIndex((item) => item.id === newChange.data.user.id);
-          if (userIndex > -1) this.users[userIndex].changeSubscriptions(newChange.data);
+          //  if (userIndex > -1) this.users[userIndex].changeSubscriptions(newChange.data);
           this.cd.detectChanges();
         }
       });
