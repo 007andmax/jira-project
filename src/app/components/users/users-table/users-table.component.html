@@ -80,14 +80,20 @@
         </ng-template>
     </td>
     <td class="users-table__subscription">
-        <app-user-table-subscription
+        <user-table-default-subscription
             class="users-table__subscription--dropdown"
             (onChangeDefault)="onChangeDefaultSubscriptions($event)"
-            (onChangeCustom)="onChangeCustomSubscriptions($event)"
             [defaultSubscriptions]="user.defaultSubscriptions"
+        >
+        </user-table-default-subscription>
+    </td>
+    <td class="users-table__subscription">
+        <user-table-custom-subscription
+            class="users-table__subscription--dropdown"
+            (onChangeCustom)="onChangeCustomSubscriptions($event)"
             [customSubscriptions]="user.customSubscriptions"
         >
-        </app-user-table-subscription>
+        </user-table-custom-subscription>
     </td>
     <td
         class="users-table__tickets"

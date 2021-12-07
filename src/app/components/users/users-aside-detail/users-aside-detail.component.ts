@@ -142,17 +142,11 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
 
     })
   }
-  onChangeSubscriptions(data) {
-    /*  let subscription = {
-        id: this.usersStateService.getuserForEdit().subscription.id,
-        invoice: true,
-        ticket: true,
-        ticketManager: true,
-      }
-      data.forEach(item => subscription[item.field] = item.selected);
-      this.usersService.setSubscriptions(subscription).subscribe(res => {
-  
-      })*/
+  onChangeDefaultSubscriptions(data) {
+    this.user.setDefaultSubscriptions(data);
+  }
+  onChangeCustomSubscriptions(data) {
+    this.user.setCustomSubscriptions(data);
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

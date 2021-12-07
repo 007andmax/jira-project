@@ -9,6 +9,7 @@ import { UserCustomSubscription } from '../../class/user-custom-subscription';
 })
 export class UserCustomSubscriptionComponent implements OnInit {
   @Input() customSubscriptions: Array<UserCustomSubscription> = [];
+  @Input() classDropDown: string;
   @Output() onChange = new EventEmitter();
   list: Array<UserCustomSubscription> = [];
   constructor(private marketingEmailService: MarketingEmailService) { }

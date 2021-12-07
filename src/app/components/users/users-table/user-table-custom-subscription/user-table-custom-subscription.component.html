@@ -1,0 +1,50 @@
+<div
+    ngbDropdown
+    container="body"
+>
+    <div class="grey-dropdown">
+        <div
+            class="pointer subs-list"
+            id="dropdownBasic"
+            ngbDropdownToggle
+        >
+            <ng-template
+                ngFor
+                let-custom
+                [ngForOf]="customSubscriptions"
+                let-i="index"
+                [ngForTrackBy]="trackById"
+            >
+                <div
+                    [ngClass]="{'active':custom.activated}"
+                    [textContent]="custom.name"
+                >
+                    <div class="icn-remove"></div>
+                </div>
+            </ng-template>
+            <i class="icn-sm report-caret-icon"></i>
+        </div>
+        <ul
+            class="qt-dropdown-menu"
+            ngbDropdownMenu
+            aria-labelledby="dropdownBasic"
+            *ngIf="false"
+        >
+            <ng-template
+                ngFor
+                let-custom
+                [ngForOf]="customSubscriptions"
+                let-i="index"
+                [ngForTrackBy]="trackById"
+            >
+                <li
+                    ngbDropdownItem
+                    [ngClass]="{'active':custom.activated}"
+                    (click)="updateCustom(i)"
+                    [textContent]="custom.name"
+                >
+                </li>
+            </ng-template>
+        </ul>
+    </div>
+</div>

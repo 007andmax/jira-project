@@ -497,6 +497,8 @@ import { MarketingEmailUsersItemComponent } from './components/setting/marketing
 import { MarketingEmailUsersAddComponent } from './components/setting/marketing-email/marketing-email-users/marketing-email-users-add/marketing-email-users-add.component';
 import { UserDefaultSubscriptionComponent } from './components/users/users-aside/user-default-subscription/user-default-subscription.component';
 import { UserCustomSubscriptionComponent } from './components/users/users-aside/user-custom-subscription/user-custom-subscription.component';
+import { UserTableDefaultSubscriptionComponent } from './components/users/users-table/user-table-default-subscription/user-table-default-subscription.component';
+import { UserTableCustomSubscriptionComponent } from './components/users/users-table/user-table-custom-subscription/user-table-custom-subscription.component';
 
 
 declare var $: any;
@@ -942,7 +944,9 @@ declare var $: any;
     MarketingEmailUsersItemComponent,
     MarketingEmailUsersAddComponent,
     UserDefaultSubscriptionComponent,
-    UserCustomSubscriptionComponent
+    UserCustomSubscriptionComponent,
+    UserTableDefaultSubscriptionComponent,
+    UserTableCustomSubscriptionComponent
   ],
   imports: [
     BrowserModule,

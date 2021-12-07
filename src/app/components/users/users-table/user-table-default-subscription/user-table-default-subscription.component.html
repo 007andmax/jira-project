@@ -1,0 +1,64 @@
+<div
+    ngbDropdown
+    container="body"
+>
+    <div class="grey-dropdown">
+        <div
+            class="pointer subs-list"
+            id="dropdownBasic"
+            ngbDropdownToggle
+        >
+            <div
+                *ngIf="defaultSubscriptions && defaultSubscriptions.invoiceSubscription && defaultSubscriptions.invoiceSubscription.enabled"
+                [ngClass]="{'active':defaultSubscriptions.invoiceSubscription.activated}"
+                class="selected-item"
+            >
+                Invoice
+                <div class="icn-remove"></div>
+            </div>
+            <div
+                class
+                *ngIf="defaultSubscriptions && defaultSubscriptions.ticketSubscription && defaultSubscriptions.ticketSubscription.enabled"
+                [ngClass]="{'active':defaultSubscriptions.ticketSubscription.activated}"
+            >
+                Ticket
+                <div class="icn-remove"></div>
+            </div>
+            <div
+                class
+                *ngIf="defaultSubscriptions && defaultSubscriptions.ticketManagerSubscription && defaultSubscriptions.ticketManagerSubscription.enabled"
+                [ngClass]="{'active':defaultSubscriptions.ticketManagerSubscription.activated}"
+            >
+                Ticket Manager
+                <div class="icn-remove"></div>
+            </div>
+
+            <i class="icn-sm report-caret-icon"></i>
+        </div>
+        <ul
+            class="qt-dropdown-menu"
+            ngbDropdownMenu
+            aria-labelledby="dropdownBasic"
+            *ngIf="false"
+        >
+            <li
+                ngbDropdownItem
+                (click)="updateDefault('invoiceSubscription')"
+            >
+                Invoice
+            </li>
+            <li
+                ngbDropdownItem
+                (click)="updateDefault('ticketSubscription')"
+            >
+                Ticket
+            </li>
+            <li
+                ngbDropdownItem
+                (click)="updateDefault('ticketManagerSubscription')"
+            >
+                Ticket Manager
+            </li>
+        </ul>
+    </div>
+</div>

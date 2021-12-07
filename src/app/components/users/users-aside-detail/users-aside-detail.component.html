@@ -111,18 +111,24 @@
             <div class="user-detail__row-info">
                 <div class="user-detail__row-info-line user-detail-aside-subscription">
                     <div class="qt-df qt-jc-sb qt-ai-c qt-mb-8">
-                        <div class="user-detail__row-info-label">Subscription</div>
+                        <div class="user-detail__row-info-label">Updates</div>
                         <div class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"></div>
                     </div>
-                    <app-company-subscription
-                        [editItem]="user.subscription"
-                        (subscribeChange)="onChangeSubscriptions($event)"
-                    ></app-company-subscription>
-                    <!-- <app-user-table-subscription
-                        class="users-table__subscription--dropdown"
-                        [subscription]="user.subscription"
-                        (onChange)="onChangeSubscriptions($event)"
-                    ></app-user-table-subscription> -->
+                    <user-default-subscription
+                        [defaultSubscriptions]="user.defaultSubscriptions"
+                        (onChange)="onChangeDefaultSubscriptions($event)"
+                    ></user-default-subscription>
+                </div>
+                <div class="user-detail__row-info-line user-detail-aside-subscription">
+                    <div class="qt-df qt-jc-sb qt-ai-c qt-mb-8">
+                        <div class="user-detail__row-info-label">Marketing</div>
+                        <div class="icon__edit-gray qt-za-16 qt-sz-16 qt-bg-contain pointer"></div>
+                    </div>
+                    <user-custom-subscription
+                        [classDropDown]="'user-aside-detail-custom-subscription'"
+                        [customSubscriptions]="user.customSubscriptions"
+                        (onChange)="onChangeCustomSubscriptions($event)"
+                    ></user-custom-subscription>
                 </div>
                 <div class="user-detail__row-info-line">
                     <div class="user-detail__row-info-label qt-mb-4">Job description</div>
