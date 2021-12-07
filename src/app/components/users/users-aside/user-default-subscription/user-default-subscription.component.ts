@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MODE_EDIT_SUBSCRIPTION, MODE_HIDE_ACTIVE } from 'src/app/const/users';
 import { UserDefaultSubscription } from '../../class/user-default-subscription';
 
 
@@ -8,7 +9,10 @@ import { UserDefaultSubscription } from '../../class/user-default-subscription';
   styleUrls: ['./user-default-subscription.component.scss']
 })
 export class UserDefaultSubscriptionComponent implements OnInit {
+  MODE_HIDE_ACTIVE = MODE_HIDE_ACTIVE;
+  MODE_EDIT_SUBSCRIPTION = MODE_EDIT_SUBSCRIPTION;
   @Input() defaultSubscriptions: UserDefaultSubscription;
+  @Input() mode: string;
   @Output() onChange = new EventEmitter();
   constructor() { }
 
@@ -18,6 +22,8 @@ export class UserDefaultSubscriptionComponent implements OnInit {
   selected(field) {
     let subscription = JSON.parse(JSON.stringify(this.defaultSubscriptions));
     subscription[field].enabled = !subscription[field].enabled;
+    subscription[field].isExist = false;
+    //  if (this.mode === MODE_EDIT_SUBSCRIPTION && subscription[field].enabled) subscription[field].active = undefined;
     this.onChange.emit(subscription);
   }
 }

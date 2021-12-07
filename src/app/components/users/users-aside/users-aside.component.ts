@@ -19,6 +19,7 @@ import { CrmCompanyJobType } from '../../setting/crm-settings/crm-company-job-ty
 import { Input } from 'hammerjs';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
+import { MODE_HIDE_ACTIVE } from 'src/app/const/users';
 
 @Component({
   selector: 'app-users-aside',
@@ -33,6 +34,7 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
   user: UserProfile = new UserProfile();
   jobTitleList: Array<CrmCompanyJobTitle> = [];
   companies = [];
+  MODE_HIDE_ACTIVE = MODE_HIDE_ACTIVE;
   validate: UserValidate = new UserValidate();
   userTypes: Array<CrmCompanyJobType> = [];
   phoneTypes = ['Office', 'Mobile', 'Fax'];

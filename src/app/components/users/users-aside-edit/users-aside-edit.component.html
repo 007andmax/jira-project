@@ -294,6 +294,7 @@
         <div class="qt-w100 qt-input-block qt-mb-24">
             <label>Subscription</label>
             <user-default-subscription
+                [mode]="MODE_EDIT_SUBSCRIPTION"
                 [defaultSubscriptions]="user.defaultSubscriptions"
                 (onChange)="onChangeDefaultSubscriptions($event)"
             ></user-default-subscription>

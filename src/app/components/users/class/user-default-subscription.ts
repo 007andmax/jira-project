@@ -6,13 +6,16 @@ export class UserDefaultSubscription {
     ticketManagerSubscription: UserDefaultSubscriptionItem;
     constructor(data = null) {
         if (data) {
-            this.invoiceSubscription = new UserDefaultSubscriptionItem(data.invoice);
-            this.ticketSubscription = new UserDefaultSubscriptionItem(data.ticket);
-            this.ticketManagerSubscription = new UserDefaultSubscriptionItem(data.ticketManager);
+            this.invoiceSubscription = new UserDefaultSubscriptionItem(data.invoiceSubscription);
+            this.ticketSubscription = new UserDefaultSubscriptionItem(data.ticketSubscription);
+            this.ticketManagerSubscription = new UserDefaultSubscriptionItem(data.ticketManagerSubscription);
         } else {
-            this.invoiceSubscription = new UserDefaultSubscriptionItem({ enabled: true, activated: true });
-            this.ticketSubscription = new UserDefaultSubscriptionItem({ enabled: true, activated: true });
-            this.ticketManagerSubscription = new UserDefaultSubscriptionItem({ enabled: true, activated: true });
+            this.invoiceSubscription = new UserDefaultSubscriptionItem({ enabled: false, activated: true, });
+            this.invoiceSubscription.setSsExist(false);
+            this.ticketSubscription = new UserDefaultSubscriptionItem({ enabled: true, activated: true, });
+            this.ticketSubscription.setSsExist(false);
+            this.ticketManagerSubscription = new UserDefaultSubscriptionItem({ enabled: false, activated: true, });
+            this.ticketManagerSubscription.setSsExist(false);
         }
 
     }

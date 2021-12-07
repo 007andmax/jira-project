@@ -13,7 +13,7 @@
                 [ngClass]="{'active':defaultSubscriptions.invoiceSubscription.activated}"
                 class="selected-item"
             >
-                Invoice
+                Invoice Updates
                 <div class="icn-remove"></div>
             </div>
             <div
@@ -21,7 +21,7 @@
                 *ngIf="defaultSubscriptions && defaultSubscriptions.ticketSubscription && defaultSubscriptions.ticketSubscription.enabled"
                 [ngClass]="{'active':defaultSubscriptions.ticketSubscription.activated}"
             >
-                Ticket
+                Ticket Updates
                 <div class="icn-remove"></div>
             </div>
             <div
@@ -45,13 +45,13 @@
                 ngbDropdownItem
                 (click)="updateDefault('invoiceSubscription')"
             >
-                Invoice
+                Invoice Updates
             </li>
             <li
                 ngbDropdownItem
                 (click)="updateDefault('ticketSubscription')"
             >
-                Ticket
+                Ticket Updates
             </li>
             <li
                 ngbDropdownItem

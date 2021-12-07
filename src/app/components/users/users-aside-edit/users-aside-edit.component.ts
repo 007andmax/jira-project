@@ -24,6 +24,7 @@ import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { Subscription } from 'rxjs';
 import { CrmCompanyJobType } from '../../setting/crm-settings/crm-company-job-type/class/crm-company-job-type';
 import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
+import { MODE_EDIT_SUBSCRIPTION, MODE_HIDE_ACTIVE } from 'src/app/const/users';
 
 @Component({
   selector: 'users-aside-edit',
@@ -43,6 +44,7 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
   selectedUserTitle: CrmCompanyJobTitle;
   userTypes: Array<CrmCompanyJobType> = [];
   sub: Subscription = new Subscription();
+  MODE_EDIT_SUBSCRIPTION = MODE_EDIT_SUBSCRIPTION;
   @ViewChild('companyTags') companyTags: CompanyTagsComponent;
   @ViewChild('jobTitleDp') jobTitleDp: DropDownComponent;
   @ViewChild('jobTypeDp') jobTypeDp: DropDownComponent;

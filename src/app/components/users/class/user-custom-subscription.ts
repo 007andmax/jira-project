@@ -3,7 +3,7 @@ export class UserCustomSubscription {
     name: string;
     usersCount: number;
     activated: boolean;
-
+    isExist: boolean = true;
     constructor(data) {
         this.id = data.id;
         this.name = data.name;

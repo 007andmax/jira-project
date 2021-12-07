@@ -11,30 +11,36 @@
     >
         <div
             *ngIf="defaultSubscriptions.invoiceSubscription.enabled"
-            [ngClass]="{'active':defaultSubscriptions.invoiceSubscription.activated,'no-active':!defaultSubscriptions.invoiceSubscription.activated}"
+            [ngClass]="{'active':defaultSubscriptions.invoiceSubscription.activated && defaultSubscriptions.invoiceSubscription.isExist,
+            'no-active':!defaultSubscriptions.invoiceSubscription.activated && defaultSubscriptions.invoiceSubscription.isExist}"
         >
             <i
                 class="qt-sz-16 qt-bg-contain qt-dib"
+                *ngIf="defaultSubscriptions.invoiceSubscription.isExist"
                 [ngClass]="{'icon__unsubscribe-user':!defaultSubscriptions.invoiceSubscription.activated,'icon__subscribe-user':defaultSubscriptions.invoiceSubscription.activated}"
             ></i>
-            Invoice
+            Invoice Updates
         </div>
         <div
             *ngIf="defaultSubscriptions.ticketSubscription.enabled"
-            [ngClass]="{'active':defaultSubscriptions.ticketSubscription.activated,'no-active':!defaultSubscriptions.ticketSubscription.activated}"
+            [ngClass]="{'active':defaultSubscriptions.ticketSubscription.activated && defaultSubscriptions.ticketSubscription.isExist,
+            'no-active':!defaultSubscriptions.ticketSubscription.activated && defaultSubscriptions.ticketSubscription.isExist}"
         >
             <i
                 class="qt-sz-16 qt-bg-contain qt-dib"
+                *ngIf="defaultSubscriptions.ticketSubscription.isExist"
                 [ngClass]="{'icon__unsubscribe-user':!defaultSubscriptions.ticketSubscription.activated,'icon__subscribe-user':defaultSubscriptions.ticketSubscription.activated}"
             ></i>
-            Ticket
+            Ticket Updates
         </div>
         <div
             *ngIf="defaultSubscriptions.ticketManagerSubscription.enabled"
-            [ngClass]="{'active':defaultSubscriptions.ticketManagerSubscription.activated,'no-active':!defaultSubscriptions.ticketManagerSubscription.activated}"
+            [ngClass]="{'active':defaultSubscriptions.ticketManagerSubscription.activated && defaultSubscriptions.ticketManagerSubscription.isExist,
+            'no-active':!defaultSubscriptions.ticketManagerSubscription.activated && defaultSubscriptions.ticketManagerSubscription.isExist}"
         >
             <i
                 class="qt-sz-16 qt-bg-contain qt-dib"
+                *ngIf="defaultSubscriptions.ticketManagerSubscription.isExist"
                 [ngClass]="{'icon__unsubscribe-user':!defaultSubscriptions.ticketManagerSubscription.activated,'icon__subscribe-user':defaultSubscriptions.ticketManagerSubscription.activated}"
             ></i>
             Ticket Manager
@@ -49,13 +55,13 @@
             ngbDropdownItem
             (click)="selected('invoiceSubscription')"
         >
-            Invoice
+            Invoice Updates
         </li>
         <li
             ngbDropdownItem
             (click)="selected('ticketSubscription')"
         >
-            Ticket
+            Ticket Updates
         </li>
         <li
             ngbDropdownItem
