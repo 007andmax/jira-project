@@ -31,4 +31,7 @@ export class UserDefaultSubscriptionComponent implements OnInit {
     //  if (this.mode === MODE_EDIT_SUBSCRIPTION && subscription[field].enabled) subscription[field].active = undefined;
     this.onChange.emit(subscription);
   }
+  isSeleted(field) {
+    return this.defaultSubscriptions[field].enabled;
+  }
 }

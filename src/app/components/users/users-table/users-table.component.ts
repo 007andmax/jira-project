@@ -17,6 +17,8 @@ import { USERS } from 'src/app/const/emails';
 import { TYPE_LIST_ALL_USERS, TYPE_LIST_COMPANY_USERS } from 'src/app/const/users';
 import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 import { CrmCompanyJobType } from '../../setting/crm-settings/crm-company-job-type/class/crm-company-job-type';
+import { UserDefaultSubscriptionAdd } from '../class/user-default-subscription-add';
+import { UserDefaultSubscription } from '../class/user-default-subscription';
 
 @Component({
   selector: 'app-users-table',
@@ -45,17 +47,20 @@ export class UsersTableComponent implements OnInit {
     public cd: ChangeDetectorRef,
     private elRef: ElementRef) { }
 
-  onChangeDefaultSubscriptions(data) {
-    this.usersService.setSubscriptions(data).subscribe(res => {
+  onChangeDefaultSubscriptions(subscriptions) {
+    this.usersService.setDefaultSubscriptions(subscriptions.id,
+      new UserDefaultSubscriptionAdd(subscriptions.ticketSubscription.enabled,
+        subscriptions.ticketManagerSubscription.enabled,
+        subscriptions.invoiceSubscription.enabled)).subscribe(res => {
 
-      this.user.defaultSubscriptions = data;
-    })
+          this.user.defaultSubscriptions = new UserDefaultSubscription(subscriptions);
+        })
   }
   onChangeCustomSubscriptions(data) {
-    this.usersService.setSubscriptions(data).subscribe(res => {
-
-      this.user.defaultSubscriptions = data;
-    })
+    /* this.usersService.setSubscriptions(data).subscribe(res => {
+ 
+       this.user.defaultSubscriptions = data;
+     })*/
   }
   getJobTitle() {
     let find = this.jobTitleList.find(item => item.id === this.user.jobTitleId);

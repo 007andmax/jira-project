@@ -35,30 +35,67 @@
 
             <i class="icn-sm report-caret-icon"></i>
         </div>
-        <ul
-            class="qt-dropdown-menu"
-            ngbDropdownMenu
-            aria-labelledby="dropdownBasic"
-            *ngIf="false"
+    </div>
+    <div
+        class="select-wrapper"
+        ngbDropdownMenu
+        aria-labelledby="dropdownServices"
+    >
+        <div
+            class="content"
+            (click)="$event.preventDefault()"
         >
-            <li
-                ngbDropdownItem
+            <div
                 (click)="updateDefault('invoiceSubscription')"
+                class="company-tag-item"
+                [ngClass]="{'is-hover':isSeleted('invoiceSubscription')}"
             >
-                Invoice Updates
-            </li>
-            <li
-                ngbDropdownItem
+                <label class="qt-checkbox pointer">
+                    <input
+                        type="checkbox"
+                        [checked]="isSeleted('invoiceSubscription')"
+                        readonly
+                    >
+                    <span></span>
+                    <div class="text-content">
+                        <div class="name">Invoice Updates</div>
+                    </div>
+                </label>
+            </div>
+            <div
                 (click)="updateDefault('ticketSubscription')"
+                class="company-tag-item"
+                [ngClass]="{'is-hover':isSeleted('ticketSubscription')}"
             >
-                Ticket Updates
-            </li>
-            <li
-                ngbDropdownItem
+                <label class="qt-checkbox pointer">
+                    <input
+                        type="checkbox"
+                        [checked]="isSeleted('ticketSubscription')"
+                        readonly
+                    >
+                    <span></span>
+                    <div class="text-content">
+                        <div class="name">Ticket Updates</div>
+                    </div>
+                </label>
+            </div>
+            <div
                 (click)="updateDefault('ticketManagerSubscription')"
+                class="company-tag-item"
+                [ngClass]="{'is-hover':isSeleted('ticketManagerSubscription')}"
             >
-                Ticket Manager
-            </li>
-        </ul>
+                <label class="qt-checkbox pointer">
+                    <input
+                        type="checkbox"
+                        [checked]="isSeleted('ticketManagerSubscription')"
+                        readonly
+                    >
+                    <span></span>
+                    <div class="text-content">
+                        <div class="name">Ticket Manager</div>
+                    </div>
+                </label>
+            </div>
+        </div>
     </div>
 </div>

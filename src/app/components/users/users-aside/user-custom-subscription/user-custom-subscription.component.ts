@@ -31,6 +31,9 @@ export class UserCustomSubscriptionComponent implements OnInit {
     }
     this.onChange.emit(this.customSubscriptions);
   }
+  isSeleted(subscription) {
+    return this.customSubscriptions.find(item => item.id === subscription.id);
+  }
   public showPlaceholder() {
     return this.customSubscriptions.length > 0
   }

@@ -115,10 +115,10 @@ export class TicketEditAsideUsersComponent implements OnInit, OnDestroy {
   onChangeSubscriptions(field, user) {
     let subscription = JSON.parse(JSON.stringify(user.subscription));
     subscription[field] = !subscription[field];
-    this.usersService.setSubscriptions(subscription).subscribe(res => {
-
-      user.subscription = subscription;
-    })
+    /* this.usersService.setSubscriptions(subscription).subscribe(res => {
+ 
+       user.subscription = subscription;
+     })*/
   }
 
   getStyleAvatar(user) {

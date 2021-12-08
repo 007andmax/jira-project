@@ -19,10 +19,12 @@ export class UserTableDefaultSubscriptionComponent implements OnInit {
 
   updateDefault(field) {
     let subscription = JSON.parse(JSON.stringify(this.defaultSubscriptions));
-    subscription[field].activated = !subscription[field].activated;
+    subscription[field].enabled = !subscription[field].enabled;
     this.onChangeDefault.emit(subscription);
 
   }
 
-
+  isSeleted(field) {
+    return this.defaultSubscriptions[field].enabled;
+  }
 }

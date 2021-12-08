@@ -1,11 +1,13 @@
 import { UserDefaultSubscriptionItem } from "./user-default-subscription-item";
 
 export class UserDefaultSubscription {
+    id: string;
     invoiceSubscription: UserDefaultSubscriptionItem;
     ticketSubscription: UserDefaultSubscriptionItem;
     ticketManagerSubscription: UserDefaultSubscriptionItem;
     constructor(data = null) {
         if (data) {
+            this.id = data.id;
             this.invoiceSubscription = new UserDefaultSubscriptionItem(data.invoiceSubscription);
             this.ticketSubscription = new UserDefaultSubscriptionItem(data.ticketSubscription);
             this.ticketManagerSubscription = new UserDefaultSubscriptionItem(data.ticketManagerSubscription);
