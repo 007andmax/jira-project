@@ -274,11 +274,6 @@
       max-width: 100%;
       padding-right: 0;
     }
-    marketing-email-users-item:nth-of-type(even) {
-      .user-item {
-        background: $gray-200;
-      }
-    }
     .user-item {
       width: 100%;
       padding: 10px 0;
@@ -305,6 +300,9 @@
       }
       .user-item {
         padding: 10px 16px;
+        &.active {
+          background-color: $gray-200;
+        }
       }
       .qt-checkbox {
         margin: 0;

@@ -1,7 +1,7 @@
 .scroll-pane {
   overflow: scroll;
   padding: 0;
-  height: 300px;
+  height: calc(100% - 126px);
 }
 .custom-scroll {
   height: 100%;

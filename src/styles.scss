@@ -491,6 +491,11 @@ app-left-panel-tags {
     margin-right: 4px;
   }
 }
+.user-detail-info {
+  .user-subscription {
+    padding: 0;
+  }
+}
 .left-panel-ng2.new-users {
   .left-panel-ng2__content--tags {
     app-select-search {
@@ -799,9 +804,12 @@ documents-edit-info {
     background: $gray-100;
     border: 1px solid $background;
     border-radius: 3px;
-    i {
+    .icon__subscribe-user {
       margin-top: -1px;
       margin-right: 4px;
+    }
+    .icn-remove {
+      transform: translateX(2px);
     }
   }
 }
