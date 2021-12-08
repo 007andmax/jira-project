@@ -3,7 +3,10 @@
     *ngIf="opened"
 >
     <div class="qt-aside-modern__header">
-        <div class="qt-aside-modern__header-title">Users</div>
+        <div
+            class="qt-aside-modern__header-title"
+            [textContent]="parseNameAside()"
+        ></div>
         <div
             class="qt-aside-modern__header-close icon__close"
             (click)="close()"
@@ -33,6 +36,8 @@
                             Add User
                         </button>
                     </div>
+
+
 
 
 

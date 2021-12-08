@@ -103,7 +103,8 @@ export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
   }
-  openAside(item) {
+  openAside(item, subscribed) {
+    item.setSubscribed(subscribed);
     this.marketingEmailStateService.onOpenAsige(item);
   }
   select(event, item) {

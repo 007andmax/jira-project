@@ -19,6 +19,11 @@ export class UserDefaultSubscriptionComponent implements OnInit {
   ngOnInit() {
     console.log("defaultSubscriptions", this.defaultSubscriptions);
   }
+  public showPlaceholder() {
+    return this.defaultSubscriptions.invoiceSubscription.enabled ||
+      this.defaultSubscriptions.ticketSubscription.enabled ||
+      this.defaultSubscriptions.ticketManagerSubscription.enabled
+  }
   selected(field) {
     let subscription = JSON.parse(JSON.stringify(this.defaultSubscriptions));
     subscription[field].enabled = !subscription[field].enabled;

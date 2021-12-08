@@ -8,6 +8,7 @@
         class="user-subscription"
         id="dropdownServices"
         ngbDropdownToggle
+        [ngClass]="{'placeholder-subscription': !showPlaceholder()}"
     >
         <div
             *ngIf="defaultSubscriptions.invoiceSubscription.enabled"

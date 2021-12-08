@@ -36,7 +36,7 @@ export class MarketingEmailUsersComponent implements OnInit, OnDestroy {
     let openAside = this.marketingEmailStateService.openAside.subscribe(data => {
       this.marketingSubscription = data;
       this.opened = true;
-      this.marketingEmailService.getUsersList(data.id).subscribe((res: any) => {
+      this.marketingEmailService.getUsersList(data.id, data.getSubscribed()).subscribe((res: any) => {
         console.log("res", res);
         this.users = res.map(item => new MarketingEmailUsers(item));
       })
@@ -51,6 +51,9 @@ export class MarketingEmailUsersComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getConfirm);
 
+  }
+  parseNameAside() {
+    return `${this.marketingSubscription.name} - ${this.marketingSubscription.getSubscribed() ? 'Subscribed  Users' : 'Unsubscribed  Users'}`;
   }
   onRemove(id) {
     this.marketingEmailService.removeUser(id, this.marketingSubscription.id).subscribe(data => {
@@ -67,6 +70,7 @@ export class MarketingEmailUsersComponent implements OnInit, OnDestroy {
   }
   close() {
     this.opened = false;
+    this.marketingSubscription = null;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

@@ -13,6 +13,7 @@
         }
     }
 }
+
 .cmn-area {
     padding-top: 0;
     .modal-content {
@@ -35,7 +36,8 @@
         }
     }
     .rate {
-        width: 80px;
+        width: 170px;
+        text-align: center;
         @media only screen and (max-width: 576px) {
             width: 55px;
         }

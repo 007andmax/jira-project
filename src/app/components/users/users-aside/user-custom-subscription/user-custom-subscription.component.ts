@@ -31,5 +31,7 @@ export class UserCustomSubscriptionComponent implements OnInit {
     }
     this.onChange.emit(this.customSubscriptions);
   }
-
+  public showPlaceholder() {
+    return this.customSubscriptions.length > 0
+  }
 }

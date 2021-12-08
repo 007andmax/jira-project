@@ -19,8 +19,8 @@ export class MarketingEmailService {
     private http: HttpClient,
 
   ) { }
-  public getUsersList(subscription_id) {
-    return this.http.get(this.apiUrl + `users/byCustomSubscription?subscriptionId=${subscription_id}`);
+  public getUsersList(subscription_id, subscribed) {
+    return this.http.get(this.apiUrl + `users/byCustomSubscription?subscriptionId=${subscription_id}&subscribed=${subscribed}`);
   }
   public addUsers(subscription_id, data) {
     return this.http.put(this.apiUrl + `users/customSubscription/${subscription_id}`, data);

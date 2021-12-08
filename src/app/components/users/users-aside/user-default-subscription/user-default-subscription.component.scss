@@ -2,19 +2,30 @@
 @import "./src/assets/styles/fonts";
 
 .company-subscription-dropdown {
-    width: 310px;
+  width: 310px;
 
-    li {
-        font-weight: $fw-medium;
-        color: $primary-2;
-    }
+  li {
+    font-weight: $fw-medium;
+    color: $primary-2;
+  }
 }
 
 .active {
-  background-color: rgba($success, .1);
+  background-color: rgba($success, 0.1);
   color: $success;
 }
 .no-active {
-  background-color: rgba($error, .1);
+  background-color: rgba($error, 0.1);
   color: $error;
+}
+.placeholder-subscription {
+  position: relative;
+  &:after {
+    content: "Select default subscription";
+    position: absolute;
+    top: 7px;
+    left: 15px;
+    color: $gray-600;
+    font-size: 13px;
+  }
 }

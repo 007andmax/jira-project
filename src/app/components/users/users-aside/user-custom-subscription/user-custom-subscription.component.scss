@@ -11,10 +11,21 @@
 }
 
 .active {
-    background-color: rgba($success, .1);
+    background-color: rgba($success, 0.1);
     color: $success;
 }
 .no-active {
-    background-color: rgba($error, .1);
+    background-color: rgba($error, 0.1);
     color: $error;
+}
+.placeholder-subscription {
+    position: relative;
+    &:after {
+        content: "Select marketing subscription";
+        position: absolute;
+        top: 7px;
+        left: 15px;
+        color: $gray-600;
+        font-size: 13px;
+    }
 }
