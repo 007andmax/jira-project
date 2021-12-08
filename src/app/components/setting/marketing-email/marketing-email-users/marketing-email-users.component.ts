@@ -22,6 +22,7 @@ import { MarketingEmailUsers } from './class/marketing-email-user';
 export class MarketingEmailUsersComponent implements OnInit, OnDestroy {
   opened: boolean = false;
   users: Array<MarketingEmailUsers> = [];
+  reqUsers: Array<MarketingEmailUsers> = [];
   marketingSubscription: MarketingSubscriptionType;
   sub: Subscription = new Subscription();
   constructor(private marketingEmailStateService: MarketingEmailStateService,
@@ -39,6 +40,7 @@ export class MarketingEmailUsersComponent implements OnInit, OnDestroy {
       this.marketingEmailService.getUsersList(data.id, data.getSubscribed()).subscribe((res: any) => {
         console.log("res", res);
         this.users = res.map(item => new MarketingEmailUsers(item));
+        this.reqUsers = res.map(item => new MarketingEmailUsers(item));
       })
     })
     this.sub.add(openAside);
@@ -51,6 +53,9 @@ export class MarketingEmailUsersComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getConfirm);
 
+  }
+  onSearch(event) {
+    this.users = this.reqUsers.filter(item => `${item.firstName} ${item.lastName}`.toLowerCase().includes(event.target.value));
   }
   parseNameAside() {
     return `${this.marketingSubscription.name} - ${this.marketingSubscription.getSubscribed() ? 'Subscribed  Users' : 'Unsubscribed  Users'}`;

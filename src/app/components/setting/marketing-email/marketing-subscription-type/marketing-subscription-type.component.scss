@@ -157,3 +157,10 @@ add-marketing-subscription-type {
     left: calc(50% - 25px) !important;
     right: auto !important;
 }
+tbody {
+    tr {
+        .rate {
+            color: #16a4fa;
+        }
+    }
+}
