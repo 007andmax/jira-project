@@ -18,13 +18,13 @@
                 <div
                     class="clearfix"
                     ngbDropdown
+                    (openChange)="addUserDP.checkClearSelectedUsers($event)"
                 >
                     <div class="qt-df qt-ai-c qt-mb-16">
                         <span class="qt-input-search qt-f-1">
                             <input
                                 class="form-control"
                                 placeholder="Search Users"
-                                value
                                 autocomplete="off"
                                 (input)="onSearch($event)"
                             >
@@ -37,6 +37,7 @@
                         </button>
                     </div>
                     <marketing-email-users-add
+                        #addUserDP
                         ngbDropdownMenu
                         [marketingSubscription]="marketingSubscription"
                     ></marketing-email-users-add>

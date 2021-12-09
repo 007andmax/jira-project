@@ -76,16 +76,20 @@
                             This Industry is already occupied
                         </mat-error>
                     </td>
-                    <td
-                        class="rate pointer"
-                        [textContent]="item.subscribedCount"
-                        (click)="openAside(item,true)"
-                    ></td>
-                    <td
-                        class="rate pointer"
-                        [textContent]="item.unsubscribedCount"
-                        (click)="openAside(item,false)"
-                    ></td>
+                    <td class="rate ">
+                        <span
+                            class="pointer"
+                            (click)="openAside(item,true)"
+                            [textContent]="item.subscribedCount"
+                        ></span>
+                    </td>
+                    <td class="rate ">
+                        <span
+                            class="pointer"
+                            [textContent]="item.unsubscribedCount"
+                            (click)="openAside(item,false)"
+                        ></span>
+                    </td>
                     <td class="action">
                         <a
                             href="javascript:;"

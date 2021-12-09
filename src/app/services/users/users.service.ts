@@ -63,6 +63,13 @@ export class UsersService {
     return this.http.put(this.apiUrl + `subscription/${id}`, subscriptions);
   }
 
+  public addCustomSubscriptions(id, usersId) {
+    return this.http.put(this.apiUrl + `users/customSubscription/${id}`, usersId);
+  }
+  public removeCustomSubscriptions(subscription_id, user_id) {
+    return this.http.delete(this.apiUrl + `users/customSubscription/${user_id}?subscriptionId=${subscription_id}`);
+  }
+
   public addUser(data) {
 
     return this.http.post(this.apiUrl + `users`, data).pipe(

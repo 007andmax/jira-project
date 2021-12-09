@@ -9,19 +9,27 @@ import { UserDefaultSubscription } from '../../class/user-default-subscription';
 })
 export class UserTableCustomSubscriptionComponent implements OnInit {
   @Input() customSubscriptions: Array<UserCustomSubscription> = [];
-  @Output() onChangeCustom = new EventEmitter();
-
+  @Output() onAddCustom = new EventEmitter();
+  @Output() onRemoveCustom = new EventEmitter();
+  @Input() listCustomSubscription: Array<UserCustomSubscription> = [];
   constructor() { }
 
   ngOnInit() {
 
   }
 
+  selected(item) {
+    let index = this.customSubscriptions.findIndex(custom => custom.id === item.id);
+    if (index > -1) {
+      this.onRemoveCustom.emit(item);
+    }
+    if (index == -1) {
 
-  updateCustom(i) {
-    let subscription = JSON.parse(JSON.stringify(this.customSubscriptions));
-    subscription[i].activated = !subscription[i].activated;
-    this.onChangeCustom.emit(subscription);
+      this.onAddCustom.emit(item);
+    }
 
+  }
+  isSeleted(subscription) {
+    return this.customSubscriptions.find(item => item.id === subscription.id);
   }
 }

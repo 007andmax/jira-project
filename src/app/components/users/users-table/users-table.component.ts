@@ -19,6 +19,7 @@ import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-t
 import { CrmCompanyJobType } from '../../setting/crm-settings/crm-company-job-type/class/crm-company-job-type';
 import { UserDefaultSubscriptionAdd } from '../class/user-default-subscription-add';
 import { UserDefaultSubscription } from '../class/user-default-subscription';
+import { UserCustomSubscription } from '../class/user-custom-subscription';
 
 @Component({
   selector: 'app-users-table',
@@ -33,6 +34,7 @@ export class UsersTableComponent implements OnInit {
   @Input() showArchivedUsers: boolean;
   @Output() onSelectUser = new EventEmitter<any>();
   @Input() jobTitleList: Array<CrmCompanyJobTitle> = [];
+  @Input() listCustomSubscription: Array<UserCustomSubscription> = [];
   companies: Array<Company> = [];
   currentUser: CurrentUser = new CurrentUser();
   TYPE_LIST_ALL_USERS = TYPE_LIST_ALL_USERS;
@@ -56,11 +58,15 @@ export class UsersTableComponent implements OnInit {
           this.user.defaultSubscriptions = new UserDefaultSubscription(subscriptions);
         })
   }
-  onChangeCustomSubscriptions(data) {
-    /* this.usersService.setSubscriptions(data).subscribe(res => {
- 
-       this.user.defaultSubscriptions = data;
-     })*/
+  onChangeCustomSubscriptions(data, isAdd) {
+    console.log("data", data);
+    if (isAdd) this.usersService.addCustomSubscriptions(data.id, [this.user.id]).subscribe(res => {
+      this.user.customSubscriptions.push(new UserCustomSubscription(data));
+    })
+    if (!isAdd) this.usersService.removeCustomSubscriptions(data.id, this.user.id).subscribe(res => {
+      let index = this.user.customSubscriptions.findIndex(item => item.id === data.id);
+      if (index > -1) this.user.customSubscriptions.splice(index, 1);
+    })
   }
   getJobTitle() {
     let find = this.jobTitleList.find(item => item.id === this.user.jobTitleId);

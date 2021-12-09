@@ -16,6 +16,8 @@ import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { CrmCompanyJobTitle } from '../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 import { CrmCompanyJobType } from '../setting/crm-settings/crm-company-job-type/class/crm-company-job-type';
 import { Subscription } from 'rxjs';
+import { UserCustomSubscription } from './class/user-custom-subscription';
+import { MarketingEmailService } from 'src/app/services/marketing-email/marketing-email.service';
 
 @Component({
   selector: 'app-users',
@@ -38,6 +40,7 @@ export class UsersComponent implements OnInit {
   jobTitleList: Array<CrmCompanyJobTitle> = [];
   TYPE_LIST_ALL_USERS = TYPE_LIST_ALL_USERS;
   sub: Subscription = new Subscription();
+  listCustomSubscription: Array<UserCustomSubscription> = [];
   constructor(private usersStateService: UsersStateService,
     private userListService: UserListService,
     private companiesStateService: CompaniesStateService,
@@ -46,6 +49,7 @@ export class UsersComponent implements OnInit {
     public cd: ChangeDetectorRef,
     private draftEmailStateService: DraftEmailStateService,
     private crmStateService: CrmStateService,
+    private marketingEmailService: MarketingEmailService,
     private websocketService: WebsocketService) { }
 
   ngOnInit() {
@@ -150,7 +154,9 @@ export class UsersComponent implements OnInit {
       this.jobTitleList = data;
     })
     this.sub.add(onGetJobTitle);
-
+    this.marketingEmailService.getList().subscribe((data: any) => {
+      this.listCustomSubscription = data.map(item => new UserCustomSubscription(item));
+    });
   }
 
   private onArchiveUsers(ids) {

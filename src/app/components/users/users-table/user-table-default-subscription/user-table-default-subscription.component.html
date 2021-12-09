@@ -2,38 +2,46 @@
     ngbDropdown
     container="body"
 >
-    <div class="grey-dropdown">
+    <div class="list-default-subscriptions">
         <div
-            class="pointer subs-list"
+            *ngIf="defaultSubscriptions && defaultSubscriptions.invoiceSubscription && defaultSubscriptions.invoiceSubscription.enabled"
+            [ngClass]="{'active':defaultSubscriptions.invoiceSubscription.activated}"
+            class="selected-item"
+        >
+            Invoice Updates
+            <div
+                class="icn-sm icn-remove qt-bg-contain qt-dib"
+                (click)="updateDefault('invoiceSubscription')"
+            ></div>
+        </div>
+        <div
+            class="selected-item"
+            *ngIf="defaultSubscriptions && defaultSubscriptions.ticketSubscription && defaultSubscriptions.ticketSubscription.enabled"
+            [ngClass]="{'active':defaultSubscriptions.ticketSubscription.activated}"
+        >
+            Ticket Updates
+            <div
+                class="icn-sm icn-remove qt-bg-contain qt-dib"
+                (click)="updateDefault('ticketSubscription')"
+            ></div>
+        </div>
+        <div
+            class="selected-item"
+            *ngIf="defaultSubscriptions && defaultSubscriptions.ticketManagerSubscription && defaultSubscriptions.ticketManagerSubscription.enabled"
+            [ngClass]="{'active':defaultSubscriptions.ticketManagerSubscription.activated}"
+        >
+            Ticket Manager
+            <div
+                class="icn-sm icn-remove qt-bg-contain qt-dib"
+                (click)="updateDefault('ticketManagerSubscription')"
+            ></div>
+        </div>
+        <div
+            class="container-caret"
             id="dropdownBasic"
             ngbDropdownToggle
         >
-            <div
-                *ngIf="defaultSubscriptions && defaultSubscriptions.invoiceSubscription && defaultSubscriptions.invoiceSubscription.enabled"
-                [ngClass]="{'active':defaultSubscriptions.invoiceSubscription.activated}"
-                class="selected-item"
-            >
-                Invoice Updates
-                <div class="icn-remove"></div>
-            </div>
-            <div
-                class
-                *ngIf="defaultSubscriptions && defaultSubscriptions.ticketSubscription && defaultSubscriptions.ticketSubscription.enabled"
-                [ngClass]="{'active':defaultSubscriptions.ticketSubscription.activated}"
-            >
-                Ticket Updates
-                <div class="icn-remove"></div>
-            </div>
-            <div
-                class
-                *ngIf="defaultSubscriptions && defaultSubscriptions.ticketManagerSubscription && defaultSubscriptions.ticketManagerSubscription.enabled"
-                [ngClass]="{'active':defaultSubscriptions.ticketManagerSubscription.activated}"
-            >
-                Ticket Manager
-                <div class="icn-remove"></div>
-            </div>
-
-            <i class="icn-sm report-caret-icon"></i>
+            <i class="icn-sm icn-report-caret qt-bg-contain"></i>
         </div>
     </div>
     <div

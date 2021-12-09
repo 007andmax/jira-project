@@ -42,7 +42,7 @@ export class MarketingEmailUsersAddComponent implements OnInit {
   }
   private getUsersList(data) {
 
-    this.reqUsers = data.filter(item => !item.deletedAt && item.accountType !== "TECH");
+    this.reqUsers = JSON.parse(JSON.stringify(data)).filter(item => !item.deletedAt && item.accountType !== "TECH");
 
     // this.onInirCalculate();
     this.reqUsers.sort((a, b) => ((a.firstName + a.lastName).toLowerCase() > (b.firstName + b.lastName).toLowerCase()) ?
@@ -54,6 +54,15 @@ export class MarketingEmailUsersAddComponent implements OnInit {
     this.infiniteScrollDisabled = true;
     this.getUsers();
 
+  }
+  public checkClearSelectedUsers(data) {
+
+    if (data) {
+      if (this.usersStateService.getAllUsers().length > 0) this.getUsersList(this.usersStateService.getAllUsers());
+      this.onSearch();
+    } else {
+      this.userListService.setBlockList(true);
+    }
   }
   onAdd() {
     if (this.reqUsers.filter(item => item.selected).length > 0) {
@@ -85,11 +94,13 @@ export class MarketingEmailUsersAddComponent implements OnInit {
       usersList.push(listFilter[i]);
     }
     this.users = [...this.users, ...usersList.map(item => new User(JSON.parse(JSON.stringify(item))))];
-
+    console.log("this.users", this.users);
     this.infiniteScrollDisabled = false;
     if ((this.page_number * 30) > listFilter.length) this.userListService.setBlockList(true);
 
 
   }
-
+  public trackById(index, item) {
+    return item.id;
+  }
 }

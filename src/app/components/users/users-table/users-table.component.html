@@ -90,7 +90,9 @@
     <td class="users-table__subscription">
         <user-table-custom-subscription
             class="users-table__subscription--dropdown"
-            (onChangeCustom)="onChangeCustomSubscriptions($event)"
+            (onAddCustom)="onChangeCustomSubscriptions($event,true)"
+            (onRemoveCustom)="onChangeCustomSubscriptions($event,false)"
+            [listCustomSubscription]="listCustomSubscription"
             [customSubscriptions]="user.customSubscriptions"
         >
         </user-table-custom-subscription>
