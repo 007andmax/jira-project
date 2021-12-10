@@ -193,7 +193,7 @@ export class UsersComponent implements OnInit {
           if (userIndex > -1) {
 
             this.users[userIndex].changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
-            this.users[userIndex].changeDefaultSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item));
+            this.users[userIndex].changeDefaultSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
 
           }
           this.cd.detectChanges();
