@@ -187,13 +187,13 @@ export class UsersComponent implements OnInit {
           const reqIndex = this.reqUsers.findIndex((item) => item.id === newChange.data.userId);
           if (reqIndex > -1) {
             this.reqUsers[reqIndex].changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
-            this.reqUsers[reqIndex].changeDefaultSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
+            this.reqUsers[reqIndex].changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
           }
           const userIndex = this.users.findIndex((item) => item.id === newChange.data.userId);
           if (userIndex > -1) {
             console.log("newChange.data", newChange.data);
             this.users[userIndex].changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
-            this.users[userIndex].changeDefaultSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
+            this.users[userIndex].changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
             console.log("this.users[userIndex]", this.users[userIndex]);
           }
           this.cd.detectChanges();
