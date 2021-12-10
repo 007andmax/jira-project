@@ -58,7 +58,6 @@ export class MarketingEmailUsersComponent implements OnInit, OnDestroy {
     let onUpdateUsersListInAside = this.marketingEmailStateService.onUpdateUsersListInAside.subscribe(res => {
       console.log("res", res);
       if (this.opened) {
-        this.users = res.map(item => new MarketingEmailUsers(item));
         this.reqUsers = res.map(item => new MarketingEmailUsers(item));
       }
     })

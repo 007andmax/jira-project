@@ -63,6 +63,7 @@ export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
       if (data.action === "MODIFIED_USERS_LIST") {
         let index = this.marketingSubscriptionList.findIndex(item => item.id === data.data.subscription.id);
         if (index > -1) this.marketingSubscriptionList[index].onUpdate(data.data.subscription);
+        console.log("this.marketingSubscriptionList[index]", this.marketingSubscriptionList[index]);
         this.marketingEmailStateService.updateUsersListInAside(data.data.users);
       }
       this.marketingSubscriptionList.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
