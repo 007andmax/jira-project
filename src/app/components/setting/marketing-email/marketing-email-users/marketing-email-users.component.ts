@@ -44,6 +44,10 @@ export class MarketingEmailUsersComponent implements OnInit, OnDestroy {
         console.log("res", res);
         this.users = res.map(item => new MarketingEmailUsers(item));
         this.reqUsers = res.map(item => new MarketingEmailUsers(item));
+        this.users.sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?
+          1 : ((`${b.firstName} ${b.lastName}`.toLowerCase() > `${a.firstName} ${a.lastName}`.toLowerCase()) ? -1 : 0));
+        this.reqUsers.sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?
+          1 : ((`${b.firstName} ${b.lastName}`.toLowerCase() > `${a.firstName} ${a.lastName}`.toLowerCase()) ? -1 : 0));
       })
     })
     this.sub.add(openAside);
@@ -58,7 +62,14 @@ export class MarketingEmailUsersComponent implements OnInit, OnDestroy {
     let onUpdateUsersListInAside = this.marketingEmailStateService.onUpdateUsersListInAside.subscribe(res => {
       console.log("res", res);
       if (this.opened) {
+        this.users.forEach((item, index) => {
+          let find = res.find(resItem => resItem.id === item.id);
+          if (!find) this.users.splice(index, 1);
+        })
         this.reqUsers = res.map(item => new MarketingEmailUsers(item));
+        this.reqUsers.sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?
+          1 : ((`${b.firstName} ${b.lastName}`.toLowerCase() > `${a.firstName} ${a.lastName}`.toLowerCase()) ? -1 : 0));
+
       }
     })
     this.sub.add(onUpdateUsersListInAside);
