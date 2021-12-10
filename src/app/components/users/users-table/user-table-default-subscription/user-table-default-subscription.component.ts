@@ -21,7 +21,6 @@ export class UserTableDefaultSubscriptionComponent implements OnInit {
     let subscription = JSON.parse(JSON.stringify(this.defaultSubscriptions));
     subscription[field].enabled = !subscription[field].enabled;
     this.onChangeDefault.emit(subscription);
-
   }
 
   isSeleted(field) {

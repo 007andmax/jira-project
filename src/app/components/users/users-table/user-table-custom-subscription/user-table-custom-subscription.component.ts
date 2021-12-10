@@ -9,8 +9,7 @@ import { UserDefaultSubscription } from '../../class/user-default-subscription';
 })
 export class UserTableCustomSubscriptionComponent implements OnInit {
   @Input() customSubscriptions: Array<UserCustomSubscription> = [];
-  @Output() onAddCustom = new EventEmitter();
-  @Output() onRemoveCustom = new EventEmitter();
+  @Output() onChangeCustom = new EventEmitter();
   @Input() listCustomSubscription: Array<UserCustomSubscription> = [];
   constructor() { }
 
@@ -20,12 +19,14 @@ export class UserTableCustomSubscriptionComponent implements OnInit {
 
   selected(item) {
     let index = this.customSubscriptions.findIndex(custom => custom.id === item.id);
+    let customSubscriptions = JSON.parse(JSON.stringify(this.customSubscriptions));
     if (index > -1) {
-      this.onRemoveCustom.emit(item);
+      customSubscriptions.splice(index, 1);
+      this.onChangeCustom.emit(customSubscriptions);
     }
     if (index == -1) {
-
-      this.onAddCustom.emit(item);
+      customSubscriptions.push(item);
+      this.onChangeCustom.emit(customSubscriptions);
     }
 
   }

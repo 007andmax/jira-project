@@ -13,6 +13,7 @@ import { CompanySubscriptionStateService } from '../../companies/company-subscri
 import { StatusColor } from '../../tickets/class/status-color';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { User } from '../class/user';
+import { UserDefaultSubscriptionAdd } from '../class/user-default-subscription-add';
 import { UserProfile } from '../class/user-profile';
 import { UserValidate } from '../class/user-validate';
 import { UsersAsideDetailTicketsComponent } from './users-aside-detail-tickets/users-aside-detail-tickets.component';
@@ -143,10 +144,26 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
     })
   }
   onChangeDefaultSubscriptions(data) {
-    this.user.setDefaultSubscriptions(data);
+
+    this.usersService.setSubscriptions(data.id, {
+      ...new UserDefaultSubscriptionAdd(data.ticketSubscription.enabled,
+        data.ticketManagerSubscription.enabled,
+        data.invoiceSubscription.enabled)
+      , customSubscriptionIds: this.user.customSubscriptions.map(item => item.id)
+    }).subscribe(data => {
+
+    })
   }
   onChangeCustomSubscriptions(data) {
-    this.user.setCustomSubscriptions(data);
+
+    this.usersService.setSubscriptions(this.user.defaultSubscriptions.id, {
+      ...new UserDefaultSubscriptionAdd(this.user.defaultSubscriptions.ticketSubscription.enabled,
+        this.user.defaultSubscriptions.ticketManagerSubscription.enabled,
+        this.user.defaultSubscriptions.invoiceSubscription.enabled)
+      , customSubscriptionIds: data.map(item => item.id)
+    }).subscribe(data => {
+
+    })
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

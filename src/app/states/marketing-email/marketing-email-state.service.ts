@@ -10,8 +10,12 @@ export class MarketingEmailStateService {
   subscriptionUserForRemove;
   listSubscriptionTypeForRemove = [];
   openAside: EventEmitter<any> = new EventEmitter();
+  onUpdateUsersListInAside: EventEmitter<any> = new EventEmitter();
   constructor() { }
 
+  public updateUsersListInAside(data) {
+    this.onUpdateUsersListInAside.emit(data);
+  }
   public onOpenAsige(data) {
     this.openAside.emit(data);
   }

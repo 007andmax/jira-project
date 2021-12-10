@@ -50,23 +50,39 @@ export class UsersTableComponent implements OnInit {
     private elRef: ElementRef) { }
 
   onChangeDefaultSubscriptions(subscriptions) {
-    this.usersService.setDefaultSubscriptions(subscriptions.id,
-      new UserDefaultSubscriptionAdd(subscriptions.ticketSubscription.enabled,
+    this.usersService.setSubscriptions(subscriptions.id, {
+      ...new UserDefaultSubscriptionAdd(subscriptions.ticketSubscription.enabled,
         subscriptions.ticketManagerSubscription.enabled,
-        subscriptions.invoiceSubscription.enabled)).subscribe(res => {
+        subscriptions.invoiceSubscription.enabled)
+      , customSubscriptionIds: this.user.customSubscriptions.map(item => item.id)
+    }).subscribe(data => {
 
-          this.user.defaultSubscriptions = new UserDefaultSubscription(subscriptions);
-        })
+    })
+    /* this.usersService.setDefaultSubscriptions(subscriptions.id,
+       new UserDefaultSubscriptionAdd(subscriptions.ticketSubscription.enabled,
+         subscriptions.ticketManagerSubscription.enabled,
+         subscriptions.invoiceSubscription.enabled)).subscribe(res => {
+ 
+           this.user.defaultSubscriptions = new UserDefaultSubscription(subscriptions);
+         })*/
   }
-  onChangeCustomSubscriptions(data, isAdd) {
+  onChangeCustomSubscriptions(data) {
     console.log("data", data);
-    if (isAdd) this.usersService.addCustomSubscriptions(data.id, [this.user.id]).subscribe(res => {
-      this.user.customSubscriptions.push(new UserCustomSubscription(data));
+    this.usersService.setSubscriptions(this.user.defaultSubscriptions.id, {
+      ...new UserDefaultSubscriptionAdd(this.user.defaultSubscriptions.ticketSubscription.enabled,
+        this.user.defaultSubscriptions.ticketManagerSubscription.enabled,
+        this.user.defaultSubscriptions.invoiceSubscription.enabled)
+      , customSubscriptionIds: data.map(item => item.id)
+    }).subscribe(data => {
+
     })
-    if (!isAdd) this.usersService.removeCustomSubscriptions(data.id, this.user.id).subscribe(res => {
-      let index = this.user.customSubscriptions.findIndex(item => item.id === data.id);
-      if (index > -1) this.user.customSubscriptions.splice(index, 1);
-    })
+    /* if (isAdd) this.usersService.addCustomSubscriptions(data.id, [this.user.id]).subscribe(res => {
+       this.user.customSubscriptions.push(new UserCustomSubscription(data));
+     })
+     if (!isAdd) this.usersService.removeCustomSubscriptions(data.id, this.user.id).subscribe(res => {
+       let index = this.user.customSubscriptions.findIndex(item => item.id === data.id);
+       if (index > -1) this.user.customSubscriptions.splice(index, 1);
+     })*/
   }
   getJobTitle() {
     let find = this.jobTitleList.find(item => item.id === this.user.jobTitleId);

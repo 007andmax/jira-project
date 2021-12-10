@@ -18,7 +18,7 @@
                 <div
                     class="clearfix"
                     ngbDropdown
-                    (openChange)="addUserDP.checkClearSelectedUsers($event)"
+                    (openChange)="onOpenChange($event)"
                 >
                     <div class="qt-df qt-ai-c qt-mb-16">
                         <span class="qt-input-search qt-f-1">
@@ -26,8 +26,14 @@
                                 class="form-control"
                                 placeholder="Search Users"
                                 autocomplete="off"
+                                [(ngModel)]="word"
                                 (input)="onSearch($event)"
                             >
+                            <span
+                                class="global-search__close icon__close-round"
+                                *ngIf="word.length > 0"
+                                (click)="clearWord()"
+                            ></span>
                         </span>
                         <button
                             class="qt-btn --outline-blue qt-fs-0 qt-ml-8"

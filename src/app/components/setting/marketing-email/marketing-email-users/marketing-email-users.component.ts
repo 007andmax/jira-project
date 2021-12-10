@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
@@ -12,6 +12,7 @@ import { MarketingEmailStateService } from 'src/app/states/marketing-email/marke
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { MarketingSubscriptionType } from '../marketing-subscription-type/class/marketing-subscription-type';
 import { MarketingEmailUsers } from './class/marketing-email-user';
+import { MarketingEmailUsersAddComponent } from './marketing-email-users-add/marketing-email-users-add.component';
 
 @Component({
   selector: 'marketing-email-users',
@@ -25,6 +26,8 @@ export class MarketingEmailUsersComponent implements OnInit, OnDestroy {
   reqUsers: Array<MarketingEmailUsers> = [];
   marketingSubscription: MarketingSubscriptionType;
   sub: Subscription = new Subscription();
+  word: string = "";
+  @ViewChild('addUserDP') addUserDP: MarketingEmailUsersAddComponent;
   constructor(private marketingEmailStateService: MarketingEmailStateService,
     private marketingEmailService: MarketingEmailService,
     private confirmStateService: ConfirmStateService,
@@ -52,6 +55,18 @@ export class MarketingEmailUsersComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
+    let onUpdateUsersListInAside = this.marketingEmailStateService.onUpdateUsersListInAside.subscribe(res => {
+      console.log("res", res);
+      if (this.opened) {
+        this.users = res.map(item => new MarketingEmailUsers(item));
+        this.reqUsers = res.map(item => new MarketingEmailUsers(item));
+      }
+    })
+    this.sub.add(onUpdateUsersListInAside);
+  }
+  clearWord() {
+    this.word = "";
+    this.users = this.reqUsers.filter(item => `${item.firstName} ${item.lastName}`.toLowerCase().includes(""));
 
   }
   onSearch(event) {
@@ -72,6 +87,10 @@ export class MarketingEmailUsersComponent implements OnInit, OnDestroy {
     this.marketingEmailStateService.setSubscriptionUserForRemove(user);
 
 
+  }
+  onOpenChange(data) {
+    this.addUserDP.checkClearSelectedUsers(data);
+    this.cd.detectChanges();
   }
   close() {
     this.opened = false;

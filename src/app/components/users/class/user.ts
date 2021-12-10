@@ -57,6 +57,9 @@ export class User {
     public changeDefaultSubscriptions(data) {
         this.defaultSubscriptions = data;
     }
+    public changeCustomSubscriptions(data) {
+        this.customSubscriptions = data;
+    }
     /*  public changeSubscriptions(data) {
           this.subscription = new UserSubscription(data.id, data.invoice, data.ticket, data.ticketManager);
       }*/

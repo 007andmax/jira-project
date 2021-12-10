@@ -18,6 +18,7 @@ import { CrmCompanyJobType } from '../setting/crm-settings/crm-company-job-type/
 import { Subscription } from 'rxjs';
 import { UserCustomSubscription } from './class/user-custom-subscription';
 import { MarketingEmailService } from 'src/app/services/marketing-email/marketing-email.service';
+import { UserDefaultSubscription } from './class/user-default-subscription';
 
 @Component({
   selector: 'app-users',
@@ -183,10 +184,18 @@ export class UsersComponent implements OnInit {
         var newChange = JSON.parse(message.body);
 
         if (newChange.action === 'SUBSCRIPTION_SAVED') {
-          const reqIndex = this.reqUsers.findIndex((item) => item.id === newChange.data.user.id);
-          if (reqIndex > -1) this.reqUsers[reqIndex].changeDefaultSubscriptions(newChange.data);
-          const userIndex = this.users.findIndex((item) => item.id === newChange.data.user.id);
-          if (userIndex > -1) this.users[userIndex].changeDefaultSubscriptions(newChange.data);
+          const reqIndex = this.reqUsers.findIndex((item) => item.id === newChange.data.userId);
+          if (reqIndex > -1) {
+            this.reqUsers[reqIndex].changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
+            this.reqUsers[reqIndex].changeDefaultSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
+          }
+          const userIndex = this.users.findIndex((item) => item.id === newChange.data.userId);
+          if (userIndex > -1) {
+
+            this.users[userIndex].changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
+            this.users[userIndex].changeDefaultSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item));
+
+          }
           this.cd.detectChanges();
         }
       });

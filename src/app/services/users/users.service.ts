@@ -62,6 +62,10 @@ export class UsersService {
   public setDefaultSubscriptions(id, subscriptions) {
     return this.http.put(this.apiUrl + `subscription/${id}`, subscriptions);
   }
+  public setSubscriptions(id, subscriptions) {
+    return this.http.put(this.apiUrl + `subscription/${id}`, subscriptions);
+  }
+
 
   public addCustomSubscriptions(id, usersId) {
     return this.http.put(this.apiUrl + `users/customSubscription/${id}`, usersId);
