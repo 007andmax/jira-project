@@ -120,6 +120,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
       if (resp.length > 0) {
         this.asset = resp[0];
+        localStorage.setItem(
+          "deviceDetail_" + this._id,
+          JSON.stringify( this.asset)
+        );
         this.asset.IsUpdated = true;
 
         if (this.minDate(this.asset.WarrantyExpires)) {
@@ -150,6 +154,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   AddTags(Tag) {
+    //return if no tag
+    if(!Tag) {
+      return;
+    }
     const newTag: any = { AssetID: this.asset.ID, Name: Tag };
     this.agentService.addNewTag(newTag).subscribe(
       (res) => {

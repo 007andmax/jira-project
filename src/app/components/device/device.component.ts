@@ -151,7 +151,7 @@ export class DeviceComponent implements OnInit, OnDestroy {
       .pipe(first())
       .subscribe(
         (resp) => {
-          this.getDevicesByCompany();
+          //this.getDevicesByCompany();
         },
         (error) => {
           this.toastr.error("Something went wrong please try again.");

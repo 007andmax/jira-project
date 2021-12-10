@@ -48,7 +48,7 @@ export class SoftwareComponent implements OnInit, OnDestroy {
     private agentService: AgentService,
     private modalService: NgbModal,
     public activateRoute: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.type = this.activateRoute.snapshot.params["type"];
@@ -96,7 +96,7 @@ export class SoftwareComponent implements OnInit, OnDestroy {
     });
   }
 
-  onDateChange(newDate: Date) {}
+  onDateChange(newDate: Date) { }
 
   selectedRecord(flag: string, index) {
     if (flag == "single") {
@@ -276,8 +276,8 @@ export class SoftwareComponent implements OnInit, OnDestroy {
       <tr style="width: 100%;font-family: Arial, Helvetica, sans-serif;">
           <th style="width:100px;text-align: left;color: #fff;padding: 15px 24px 15px;vertical-align: middle;font-family: Arial, Helvetica, sans-serif;background-color: #fff;" >
               <img src="/file/${localStorage.getItem(
-                "imId"
-              )}.jpg" alt="Logo" title="logo" style="max-width:100px;height:auto;"/>
+        "imId"
+      )}.jpg" alt="Logo" title="logo" style="max-width:100px;height:auto;"/>
           </th>
           <th align="left" style="text-align:left;font-size: 16px;line-height: 1.33;color: #000;padding:15px 0 15px 70px;vertical-align: middle;font-family: Arial, Helvetica, sans-serif;background-color: #fff;">
             <div class="reports-head" style="width:585px;text-align:center;color: #364656;float:left;margin-left:-105px;">
@@ -285,7 +285,7 @@ export class SoftwareComponent implements OnInit, OnDestroy {
       localStorage.getItem("currentCompanyName") +
       ` - Software Summary Report</p>
                   <p style="line-height:1.5;color:#364656;margin:3px 0;font-size: 13px;font-family: Arial, Helvetica, sans-serif;font-weight:400;">Summary of ` +
-      this.deviceDetail.report.deviceName +
+      (this.deviceDetail.Title || this.deviceDetail.Name)  +
       ` softwares installed (` +
       pdfList.length +
       ` items)</p>
