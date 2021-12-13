@@ -26,6 +26,7 @@ export class MarketingEmailUsersComponent implements OnInit, OnDestroy {
   reqUsers: Array<MarketingEmailUsers> = [];
   marketingSubscription: MarketingSubscriptionType;
   sub: Subscription = new Subscription();
+  toggleShowAddUser = false;
   word: string = "";
   @ViewChild('addUserDP') addUserDP: MarketingEmailUsersAddComponent;
   constructor(private marketingEmailStateService: MarketingEmailStateService,
@@ -62,14 +63,12 @@ export class MarketingEmailUsersComponent implements OnInit, OnDestroy {
     let onUpdateUsersListInAside = this.marketingEmailStateService.onUpdateUsersListInAside.subscribe(res => {
       console.log("res", res);
       if (this.opened) {
-        this.users.forEach((item, index) => {
-          let find = res.find(resItem => resItem.id === item.id);
-          if (!find) this.users.splice(index, 1);
-        })
+
         this.reqUsers = res.map(item => new MarketingEmailUsers(item));
         this.reqUsers.sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?
           1 : ((`${b.firstName} ${b.lastName}`.toLowerCase() > `${a.firstName} ${a.lastName}`.toLowerCase()) ? -1 : 0));
-
+        this.users = this.reqUsers.filter(item => `${item.firstName} ${item.lastName}`.toLowerCase().includes(this.word));
+        this.cd.detectChanges();
       }
     })
     this.sub.add(onUpdateUsersListInAside);

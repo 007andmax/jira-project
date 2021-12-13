@@ -1,13 +1,9 @@
 <div
     class="user-item"
     (click)="selectUser()"
-    [ngClass]="(user.selected) ? 'active' : ''"
+    [ngClass]="{'active':user.selected}"
 >
-    <a
-        href="javascript:void(0)"
-        [id]="user.id"
-        class="dropdown-link"
-    >
+    <div class="dropdown-link">
         <div
             class="default-user-avatar avatar-background-color-odd ng-scope"
             *ngIf="!user.avatar"
@@ -30,7 +26,7 @@
         <span class="qt-f-1 ellipsis">
             <div
                 class="qt-fw-500 qt-color-dark ellipsis"
-                [textContent]="user.firstName + ' ' + user.lastName"
+                [textContent]="parseNameUser(user)"
             >
             </div>
             <div
@@ -45,11 +41,11 @@
             >
                 <input
                     [attr.id]="'user-' + user.id"
-                    [(ngModel)]="user.selected"
+                    [checked]="user.selected"
                     type="checkbox"
                 >
                 <span></span>
             </label>
         </div>
-    </a>
+    </div>
 </div>

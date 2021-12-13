@@ -1,10 +1,11 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { User } from 'src/app/components/users/class/user';
 
 @Component({
   selector: 'marketing-email-users-item',
   templateUrl: './marketing-email-users-item.component.html',
-  styleUrls: ['./marketing-email-users-item.component.scss']
+  styleUrls: ['./marketing-email-users-item.component.scss'],
+
 })
 export class MarketingEmailUsersItemComponent implements OnInit {
   @Input() user: User;
@@ -17,7 +18,10 @@ export class MarketingEmailUsersItemComponent implements OnInit {
     console.log("selectUser");
     this.user.selected = !this.user.selected;
     this.onSelect.emit(this.user);
-    this.cd.detectChanges();
+
+  }
+  parseNameUser(user) {
+    return `${this.user.firstName} ${user.lastName}`;
   }
 
 }

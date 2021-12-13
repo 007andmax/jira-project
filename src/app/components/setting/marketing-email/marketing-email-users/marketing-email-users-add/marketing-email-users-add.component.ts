@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { User } from 'src/app/components/users/class/user';
 import { UserListService } from 'src/app/components/users/services/user-list.service';
 import { MarketingEmailService } from 'src/app/services/marketing-email/marketing-email.service';
@@ -10,13 +10,16 @@ import { MarketingSubscriptionType } from '../../marketing-subscription-type/cla
   selector: 'marketing-email-users-add',
   templateUrl: './marketing-email-users-add.component.html',
   styleUrls: ['./marketing-email-users-add.component.scss'],
-  providers: [UserListService]
+  providers: [UserListService],
+
+
 })
 export class MarketingEmailUsersAddComponent implements OnInit {
   opened: boolean = false;
   users: Array<User> = [];
   reqUsers: Array<User> = [];
   search: string = "";
+  @Output() onClose: EventEmitter<any> = new EventEmitter();
   @Input() marketingSubscription: MarketingSubscriptionType;
   public page_number: number = 0;
   public infiniteScrollDisabled = false;
@@ -24,6 +27,7 @@ export class MarketingEmailUsersAddComponent implements OnInit {
   constructor(private marketingEmailStateService: MarketingEmailStateService,
     private userListService: UserListService,
     private marketingEmailService: MarketingEmailService,
+    private cd: ChangeDetectorRef,
     private usersStateService: UsersStateService,) { }
 
   ngOnInit() {
@@ -41,14 +45,12 @@ export class MarketingEmailUsersAddComponent implements OnInit {
     this.onScroll();
   }
   private getUsersList(data) {
-
     this.reqUsers = JSON.parse(JSON.stringify(data)).filter(item => !item.deletedAt && item.accountType !== "TECH");
-
-    // this.onInirCalculate();
     this.reqUsers.sort((a, b) => ((a.firstName + a.lastName).toLowerCase() > (b.firstName + b.lastName).toLowerCase()) ?
       1 : (((b.firstName + b.lastName).toLowerCase() > (a.firstName + a.lastName).toLowerCase()) ? -1 : 0));
     this.onScroll();
 
+    this.cd.markForCheck();
   }
   public onScroll() {
     this.infiniteScrollDisabled = true;
@@ -67,14 +69,17 @@ export class MarketingEmailUsersAddComponent implements OnInit {
   onAdd() {
     if (this.reqUsers.filter(item => item.selected).length > 0) {
       this.marketingEmailService.addUsers(this.marketingSubscription.id, this.reqUsers.filter(item => item.selected).map(item => item.id)).subscribe(data => {
-
+        this.close();
       })
     }
   }
   onSelect(user) {
 
     this.reqUsers.find(item => item.id === user.id).selected = user.selected;
-
+    this.cd.markForCheck();
+  }
+  close() {
+    this.onClose.emit(null);
   }
   private getUsers() {
 

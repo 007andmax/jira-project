@@ -12,19 +12,19 @@
             </span>
         </div>
     </div>
-    <div
-        class="scroll-pane"
-        #content
-        (click)="$event.preventDefault()"
-        infiniteScroll
-        [infiniteScrollContainer]="content"
-        [infiniteScrollDistance]="2"
-        [infiniteScrollThrottle]="50"
-        [infiniteScrollDisabled]="infiniteScrollDisabled"
-        [fromRoot]="true"
-        (scrolled)="onScroll()"
-    >
-        <div class="users-list custom-scroll">
+    <div class="scroll-pane">
+        <div
+            class="users-list custom-scroll"
+            #content
+            (click)="$event.preventDefault()"
+            infiniteScroll
+            [infiniteScrollContainer]="content"
+            [infiniteScrollDistance]="2"
+            [infiniteScrollThrottle]="50"
+            [infiniteScrollDisabled]="infiniteScrollDisabled"
+            [fromRoot]="true"
+            (scrolled)="onScroll()"
+        >
             <ng-template
                 ngFor
                 let-user
@@ -50,6 +50,7 @@
         <button
             class="qt-button --gray"
             ngbDropdownItem
+            (click)="close()"
         >
             Cancel
         </button>

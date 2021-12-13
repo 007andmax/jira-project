@@ -15,12 +15,7 @@
     <div class="qt-aside-modern__content">
         <div class="assign-ticket-content">
             <div class="assign-ticket-header">
-                <div
-                    class="clearfix"
-                    ngbDropdown
-                    [placement]="'left-top'"
-                    (openChange)="onOpenChange($event)"
-                >
+                <div class="clearfix">
                     <div class="qt-df qt-ai-c qt-mb-16">
                         <span class="qt-input-search qt-f-1">
                             <input
@@ -38,14 +33,15 @@
                         </span>
                         <button
                             class="qt-btn --outline-blue qt-fs-0 qt-ml-8"
-                            ngbDropdownToggle
+                            (click)="toggleShowAddUser = !toggleShowAddUser"
                         >
                             Add User
                         </button>
                     </div>
                     <marketing-email-users-add
+                        *ngIf="toggleShowAddUser"
+                        (onClose)="toggleShowAddUser = false"
                         #addUserDP
-                        ngbDropdownMenu
                         [marketingSubscription]="marketingSubscription"
                     ></marketing-email-users-add>
                 </div>
