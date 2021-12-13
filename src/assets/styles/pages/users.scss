@@ -48,6 +48,7 @@
     &__company {
       color: $gray-800;
       width: max-content;
+      min-width: 88px;
     }
 
     &__contract-no {
@@ -81,9 +82,9 @@
     }
 
     &__tickets {
-      width: 75px;
-      max-width: 75px;
-      min-width: 75px;
+      width: 80px;
+      max-width: 80px;
+      min-width: 80px;
       color: $gray-800;
     }
 
@@ -98,6 +99,14 @@
       max-width: 38px;
       min-width: 38px;
       padding: 23px 16px 23px 8px;
+    }
+  }
+  .qt-table-modern__sorting {
+    transform: translateY(2px);
+  }
+  tbody {
+    .users-table__subscription {
+      vertical-align: top;
     }
   }
 }
