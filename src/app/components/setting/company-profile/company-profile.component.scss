@@ -10,6 +10,7 @@
     }
     .cmn-area {
         .dp-area {
+            float: none !important;
             .dp-info {
                 @media only screen and (max-width: 768px) {
                     width: calc(100% - 200px);

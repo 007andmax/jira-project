@@ -5,7 +5,8 @@
     <div class="list-default-subscriptions">
         <div
             *ngIf="defaultSubscriptions && defaultSubscriptions.invoiceSubscription && defaultSubscriptions.invoiceSubscription.enabled"
-            [ngClass]="{'active':defaultSubscriptions.invoiceSubscription.activated}"
+            [ngClass]="{'active':defaultSubscriptions.invoiceSubscription.activated,
+        'no-active': !defaultSubscriptions.invoiceSubscription.activated}"
             class="selected-item"
         >
             Invoice Updates
@@ -17,7 +18,8 @@
         <div
             class="selected-item"
             *ngIf="defaultSubscriptions && defaultSubscriptions.ticketSubscription && defaultSubscriptions.ticketSubscription.enabled"
-            [ngClass]="{'active':defaultSubscriptions.ticketSubscription.activated}"
+            [ngClass]="{'active':defaultSubscriptions.ticketSubscription.activated,
+        'no-active': !defaultSubscriptions.ticketSubscription.activated}"
         >
             Ticket Updates
             <div
@@ -28,7 +30,8 @@
         <div
             class="selected-item"
             *ngIf="defaultSubscriptions && defaultSubscriptions.ticketManagerSubscription && defaultSubscriptions.ticketManagerSubscription.enabled"
-            [ngClass]="{'active':defaultSubscriptions.ticketManagerSubscription.activated}"
+            [ngClass]="{'active':defaultSubscriptions.ticketManagerSubscription.activated,
+        'no-active': !defaultSubscriptions.ticketManagerSubscription.activated}"
         >
             Ticket Manager
             <div

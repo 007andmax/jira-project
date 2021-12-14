@@ -12,7 +12,8 @@
         >
             <div
                 class="selected-item"
-                [ngClass]="{'active':custom.activated}"
+                [ngClass]="{'active':custom.activated,
+            'no-active':!custom.activated}"
             >
                 {{custom.name}}
                 <div
