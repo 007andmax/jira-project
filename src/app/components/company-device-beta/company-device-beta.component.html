@@ -324,6 +324,7 @@
                                             *ngIf="asset.online"
                                             class="pointer"
                                             ngbDropdownItem
+                                            (click)="sendCommand('m', asset.Guid)"
                                         >
                                             <div class="
                           icon__master-agent

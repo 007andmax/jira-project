@@ -341,6 +341,17 @@ export class AgentService {
     }
   }
 
+  public SendSetMasterAgent(data: any) {
+    if (this.wsService.IsKafkaConnected) {
+      console.log("sending network command:" + data);
+      this.http
+        .post(this.apiurl + "sendMessageToKafka", data)
+        .subscribe(() => {});
+    } else {
+      setTimeout(() => this.SendNetworkCommand(data), 3000);
+    }
+  }
+  
   public addNewTag(Tag) {
     return this.http
       .put(

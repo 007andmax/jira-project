@@ -48,7 +48,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   assetList: any[] = [];
   kafkaMessage: any;
-  networkvalue: [] = [];
+  networkvalue: any[] = [];
   nets: [] = [];
   asset: any;
   assetName: any;
@@ -70,9 +70,9 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     private ngZone: NgZone) { }
 
   ngOnInit() {
-    this.kafkaStateService.onNetworkScan.subscribe((resp) =>{
+    this.kafkaStateService.onNetworkScan.subscribe((resp) => {
       this.onNetworkScan(resp)
-      });
+    });
     this.leftPanelStateService.changeStateWithoutNavigate('company-network-scan');
     let id = this.activateRoute.snapshot.params['id'];
     let subscription = this.activateRoute.params.subscribe(params => {
@@ -176,8 +176,8 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
       this.assetList = resp;
     })
   }
-  selectMasterNetwork(Id){
-    this.asset = this.assetList.find((x)=>x.ID == Id);
+  selectMasterNetwork(Id) {
+    this.asset = this.assetList.find((x) => x.ID == Id);
     this.assetName = this.asset.Name;
     let data: any = {};
     data.AssetID = Id;
@@ -185,10 +185,14 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     this.agentService.SendNetworkCommand(data);
   }
 
-
-  onNetworkScan(resp: any){
+  onNetworkScan(resp: any) {
     this.ngZone.run(() => {
-      this.networkvalue = JSON.parse(resp[0].Value);
+      let data = JSON.parse(resp[0].Value);
+      let createdOn = data[0].CreatedOn;
+      this.networkvalue = data.filter(x => x.CreatedOn == createdOn);
+      for (let i = 0; i < this.networkvalue.length; i++) {
+        this.networkvalue[i].selected = false;
+      }
     });
   }
 
@@ -210,12 +214,27 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
   }
   installAgent() {
     this.btnInstallAgent.setDisabled(true);
-    this.devicesService.remoteInstall(this.networkScanInstallAgent.getDataForInstall(this.companyId, this.networkScanDevices.devices.filter(item => item.selected).map(item => item.id), this.masterAgent.agentId)).subscribe(data => {
+    
+    /*this.devicesService.remoteInstall(this.networkScanInstallAgent.getDataForInstall(this.companyId, this.networkScanDevices.devices.filter(item => item.selected).map(item => item.id), this.masterAgent.agentId)).subscribe(data => {
       setTimeout(() => {
         this.btnInstallAgent.setDisabled(false);
         this.cd.detectChanges();
       }, 3000);
-    })
+    })*/
+    let selectedAsset = this.networkvalue.find(x=> x.selected == true);
+    var cred = this.networkScanInstallAgent.getCredential();
+    let data: any = {};    
+    data.MessageType = "NetworkScan";
+    data.Username = cred.username;
+    data.Password = cred.password;
+    data.RemoteAgentItem = [];
+    let item: any = {};
+    item.IP = selectedAsset.IP;
+    item.HostName = selectedAsset.HostName;
+    item.ReturnMessage  = "";
+    item.success ="";
+    data.RemoteAgentItem.push(item);
+    this.agentService.SendNetworkCommand(data);
   }
   onSelectCredential(data) {
     this.networkScanInstallAgent.setCredential(data);
@@ -231,7 +250,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     this.cd.detectChanges();
   }
   checkSelected() {
-    return (!this.networkScanDevices) ? false : this.networkScanDevices.devices.find(item => item.selected);
+    return (!this.networkvalue) ? false : this.networkvalue.find(item => item.selected);
   }
   onToggleAll(event) {
     this.networkScanDevices.devices.forEach(item => {
@@ -286,6 +305,12 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     })
   }
   findMasterAgent() {
+    debugger;
+    this.masterAgent = this.assetList.find(x => x.IsMasterAgent == true);    
+    //TODO: figure out better way to do this.
+    if(this.masterAgent) {
+      this.masterAgent.online = true;
+    }
     // let find = this.devices.find(item => item.agentId === this.networkScanSomeInfoForDevice.masterAgentId);
     // if (find) {
     //   this.masterAgent = find;

@@ -264,6 +264,17 @@ export class CompanyDeviceBetaComponent implements OnInit {
       data.MessageType = "InstallRemoteAgent";
       this.agentService.SendPowerShellCommand(data);
     }
+    if(command === 'm') {
+      this.agentService.getAssetByGuid(assetId).subscribe((resp) => {      
+        let cAsset = resp[0];
+        cAsset.IsMasterAgent = true;
+
+        this.agentService.overrideAsset(cAsset).subscribe( result => {
+          this.toastr.success('Device set as master agent');
+        });
+
+      });
+    }
 
   }
 
