@@ -80,84 +80,11 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
       this.companiesStateService.setSelectedCompanyId(id);
       this.companyId = id;
       this.devicesStateService.subsribeToNetScan(this.companyId);
-      this.setPreviewDataDevice();
       this.getDevices();
     });
-    this.sub.add(subscription);
-    let getOnDevices = this.devicesStateService.getOnDevices().subscribe(data => {
-      this.devices = (data[this.companyId]) ? JSON.parse(JSON.stringify(data[this.companyId])).map(item => new Device(item)) : [];
-      this.companyNetworkScanService.onFilterName(this.devices);
-      if (this.devices.length > 0 && !this.isGetDevices) this.getSomeInfoForDevices().then(result => {
-        if (this.getPermissions('NETWORK_SCAN_CLIENTS') && this.masterAgent.online) this.runScanDevices();
-      });
-      this.cd.detectChanges();
-      this.showPreloader = false;
-    })
-    this.sub.add(getOnDevices);
-    let getOnChangeInfoForDevice = this.devicesStateService.getOnChangeInfoForDevice().subscribe(data => {
-      if (!this.masterAgent || data.masterAgentId != this.masterAgent.agentId) {
-        this.selectAllDevices = false;
-        this.networkScanSomeInfoForDevice = new NetworkScanSomeInfoForDevice(data);
-        if (this.getPermissions('NETWORK_SCAN_CLIENTS')) {
-          if (this.masterAgent.online) this.runScanDevices();
-          if (!this.masterAgent.online) this.networkScanDevices.devices = [];
-        }
-      }
-    })
-    this.sub.add(getOnChangeInfoForDevice);
-    let netScanArray = this.devicesRealTimeService.netScanArray.subscribe(newChange => {
-      if (newChange.action === 'NETWORK_SCAN') {
-        if (newChange.data.status === 'Scanning') this.isScaning = true;
-        if (newChange.data.status === 'Finished') this.isScaning = false;
-        newChange.data.deviceList.forEach(element => {
-          let findIndex = this.networkScanDevices.devices.findIndex(item => item.id === element.id);
-          if (findIndex > -1) {
-            this.networkScanDevices.devices[findIndex].update(element);
-          } else {
-            this.networkScanDevices.devices.push(new NetworkScanDevice(element));
-          }
-        });
-        this.networkScanFilter.sortByCurrentFilter(this.networkScanDevices.devices);
-      }
-      if (newChange.action === 'REMOTE_INSTALL' || newChange.action === 'REMOTE_INSTALL_INFO') {
-        let findIndex = this.networkScanDevices.devices.findIndex(item => item.id === newChange.data.netScanId);
-        if (findIndex > -1) {
-          let statusName = newChange.data.status;
-          let status = installationStatuses[statusName];
-          if (statusName === 'MANAGED') {
-            this.networkScanDevices.devices[findIndex].setAgentStatus('managed');
-            this.networkScanDevices.devices[findIndex].setMessage(status.message);
-          } else {
-            this.networkScanDevices.devices[findIndex].setAgentStatus(status.status);
-            this.networkScanDevices.devices[findIndex].setMessage(status.message);
-          }
-        }
-      }
-      if (newChange.action === 'AGENT_PASSWORDS_CHANGED') {
-        newChange.data.forEach(element => {
-          let findIndex = this.networkScanDevices.devices.findIndex(item => item.deviceId === element.deviceId);
-          if (findIndex > -1) this.networkScanDevices.devices[findIndex].setAgentPassword(element);
-        });
-      }
-      if (newChange.action === 'NETWORK_DEVICE_DESCRIPTON') {
-        let findIndex = this.networkScanDevices.devices.findIndex(item => item.deviceId === newChange.data.deviceId);
-        if (findIndex > -1) this.networkScanDevices.devices[findIndex].setDescription(newChange.data.description);
-      }
-      this.cd.detectChanges();
-    })
-    this.sub.add(netScanArray);
-    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
-      if (data) {
-        if (this.confirmStateService.getConfirmAction() === NETWORK_REMOVE_DEVICE) {
-          this.devicesService.sendUninstallAgentRequest(this.companyId, [this.networkScanStateService.getDeviceForRemove().deviceId]).subscribe(data => {
-          })
-        }
-      }
-    })
-    this.sub.add(getConfirm);
   }
 
-  setPreviewDataDevice() {
+  getDevices() {
     this.agentService
       .getAgentToken(
         "QuickTech",
@@ -171,13 +98,21 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
 
   AssetDetail() {
     this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {
-      this.assetList = resp;
-      this.masterAgent = this.assetList.find(x => x.IsMasterAgent == true);
-      if (this.masterAgent) {
-        this.masterAgent.online = true;
+      if (resp.length > 0) {
+        this.isGetDevices = true
+        this.assetList = resp;
+        this.masterAgent = this.assetList.find(x => x.IsMasterAgent == true);
+        if (this.masterAgent) {
+          this.masterAgent.online = true;
+        }
       }
+      else {
+        this.isGetDevices = false;
+      }
+      this.showPreloader =false;
     })
   }
+
   selectMasterNetwork(Id) {
     this.asset = this.assetList.find((x) => x.ID == Id);
     this.assetName = this.asset.Name;
@@ -200,35 +135,17 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
   }
 
 
-  getDevices() {
-    if (this.devicesStateService.getAllDevices()) {
-      this.devices = (this.devicesStateService.getAllDevices()[this.companyId]) ? JSON.parse(JSON.stringify(this.devicesStateService.getAllDevices()[this.companyId])).map(item => new Device(item)) : [];
-      this.companyNetworkScanService.onFilterName(this.devices);
-      if (this.devices.length > 0) this.getSomeInfoForDevices().then(result => {
-        if (this.getPermissions('NETWORK_SCAN_CLIENTS') && this.masterAgent.online) this.runScanDevices();
-      });
-      this.showPreloader = false;
-      this.cd.detectChanges();
-    }
-  }
   checkCanInstallAgent() {
     return this.checkSelected() && this.networkScanInstallAgent.getCredential();
   }
   installAgent() {
     this.btnInstallAgent.setDisabled(true);
-
-    /*this.devicesService.remoteInstall(this.networkScanInstallAgent.getDataForInstall(this.companyId, this.networkScanDevices.devices.filter(item => item.selected).map(item => item.id), this.masterAgent.agentId)).subscribe(data => {
-      setTimeout(() => {
-        this.btnInstallAgent.setDisabled(false);
-        this.cd.detectChanges();
-      }, 3000);
-    })*/
     let selectedAsset = this.networkvalue.find(x => x.selected == true);
     var cred = this.networkScanInstallAgent.getCredential();
     let data: any = {};
     data.MessageType = "NetworkScan";
-    data.Username = "ft04\\admin";//cred.username;
-    data.Password = "admin@123";//cred.password;
+    data.Username = cred.username;
+    data.Password = cred.password;
     data.RemoteAgentItem = [];
     let item: any = {};
     item.IP = selectedAsset.IP;
@@ -265,20 +182,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
       this.isScaning = true;
     })
   }
-  private getLastScanDevices() {
-    this.showMinPreloader = true;
-    this.noExistDevices = false;
-    this.devicesService.getLastScanDevices(this.companyId).subscribe((res: any) => {
-      let networkScan = JSON.parse(res.networkScan);
-      this.networkScanDevices = new NetworkScanDevices(networkScan);
-      this.showMinPreloader = false;
-      this.networkScanFilter.sortByCurrentFilter(this.networkScanDevices.devices);
-      this.cd.detectChanges();
-    }, err => {
-      this.showMinPreloader = false;
-      this.noExistDevices = true;
-    })
-  }
+
   setSort(data) {
     this.networkScanFilter.onSort(data, this.networkScanDevices.devices);
     if (!this.cd['destroyed']) {

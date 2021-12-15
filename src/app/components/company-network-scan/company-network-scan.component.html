@@ -1,9 +1,9 @@
 <div class="network-scan-page">
     <div class="network-scan-page__content">
         <div class="network-scan-page__header-title qt-ff-gm">Network Scan</div>
-        <app-company-network-scan-no-exist-devices *ngIf="!showPreloader && devices.length === 0"
+        <app-company-network-scan-no-exist-devices *ngIf="!showPreloader && assetList.length === 0"
             [companyId]="companyId"></app-company-network-scan-no-exist-devices>
-        <div class="network-steps qt-mb-30" *ngIf="!showPreloader && devices.length > 0">
+        <div class="network-steps qt-mb-30" *ngIf="!showPreloader && assetList.length > 0">
             <div class="network-step">
                 <div class="circle-number qt-mb-8">
                     <div class="circle-number__inner">1</div>
@@ -63,7 +63,7 @@
         </div>
         <div class="network-scan-page__table-container">
             <div class="loading" *ngIf="showPreloader"></div>
-            <table class="network-scan-table qt-w100" *ngIf="!showPreloader && devices.length > 0">
+            <table class="network-scan-table qt-w100" *ngIf="!showPreloader && assetList.length > 0">
                 <thead>
                     <tr>
                         <th class="network-scan-table__check">
@@ -101,7 +101,7 @@
                 <tbody *ngFor="let network of networkvalue">
                     <tr>
                         <td class="network-scan-table__check">
-                            <div class="d-f" *ngIf="networkScanSomeInfoForDevice.allowAgentInstall">
+                            <div class="d-f" *ngIf="!network.IsAgentInstalled">
                                 <label class="qt-checkbox" [attr.for]="'device-' + network.ID">
                                     <input type="checkbox" [attr.id]="'device-' + network.ID"
                                         [(ngModel)]="network.selected" (change)="onSelectDevice()">

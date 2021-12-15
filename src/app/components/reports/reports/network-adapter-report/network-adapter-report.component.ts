@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CONFIGCONSTANTS } from 'src/app/components/device/config/app-constants';
 import { CommonHttpServices } from 'src/app/components/device/_services/common_http.service';
 import { ExcelService } from 'src/app/components/device/_services/download_csv.service';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { AgentService } from 'src/app/services/agent/agent.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
@@ -18,7 +19,7 @@ import { DeviceNetworkAdapterReportFilter } from './Class/network-adapter-report
   styleUrls: ['./network-adapter-report.component.scss']
 })
 export class NetworkAdapterReportComponent implements OnInit {
-  @ViewChild('dropdownDevice') dropdownDevice : any;
+  @ViewChild('dropdownDevice') dropdownDevice : DropDownComponent;
   clientName: string;
   companies = [];
   networkAdapterList: any = [];
@@ -102,7 +103,7 @@ export class NetworkAdapterReportComponent implements OnInit {
       this.deviceNetworkAdapterReport.setCompanyId(null);
       this.deviceNetworkAdapterReport.setDeviceName(null);
       this.devices = [];
-      this.dropdownDevice.elRef.nativeElement.querySelector('#dropdown1').value =null;
+      this.dropdownDevice.clearWithOutChanges();
       this.clientName = "All Companies";
       this.networkAdapterList = [];
     }

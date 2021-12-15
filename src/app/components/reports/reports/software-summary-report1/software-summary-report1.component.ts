@@ -5,6 +5,7 @@ import { ToastrService } from "ngx-toastr";
 import { CONFIGCONSTANTS } from "src/app/components/device/config/app-constants";
 import { CommonHttpServices } from "src/app/components/device/_services/common_http.service";
 import { ExcelService } from "src/app/components/device/_services/download_csv.service";
+import { DropDownComponent } from "src/app/components/shared/drop-down/drop-down.component";
 import { AgentService } from "src/app/services/agent/agent.service";
 import { CompaniesStateService } from "src/app/states/company/companies-state.service";
 import { LeftPanelStateService } from "src/app/states/left-panel/left-panel-state.service";
@@ -19,8 +20,8 @@ import { SoftwareSummaryReportFilter } from "./Class/software-summary-report1-fi
   styleUrls: ["./software-summary-report1.component.scss"],
 })
 export class SoftwareSummaryReport1Component implements OnInit {
-  @ViewChild('dropdownDevice') dropdownDevice : any;
-  @ViewChild('dropdownSoftware') dropdownSoftware : any;
+  @ViewChild('dropdownDevice') dropdownDevice : DropDownComponent;
+  @ViewChild('dropdownSoftware') dropdownSoftware : DropDownComponent;
   tempararyDeviceList: any = [];
   tempararySoftwareList: any = [];
   softwareReportList: any = [];
@@ -313,8 +314,8 @@ export class SoftwareSummaryReport1Component implements OnInit {
       this.softwareSummaryReport.setDeviceName(null);
       this.softwareSummaryReport.setSoftwareSoft(null);
       this.softwareReportList = [];
-      this.dropdownDevice.elRef.nativeElement.querySelector('#dropdown1').value=null;
-      this.dropdownSoftware.elRef.nativeElement.querySelector('#dropdown1').value=null;
+      this.dropdownDevice.clearWithOutChanges();
+      this.dropdownSoftware.clearWithOutChanges();
     }
   }
 
