@@ -499,6 +499,7 @@ import { UserDefaultSubscriptionComponent } from './components/users/users-aside
 import { UserCustomSubscriptionComponent } from './components/users/users-aside/user-custom-subscription/user-custom-subscription.component';
 import { UserTableDefaultSubscriptionComponent } from './components/users/users-table/user-table-default-subscription/user-table-default-subscription.component';
 import { UserTableCustomSubscriptionComponent } from './components/users/users-table/user-table-custom-subscription/user-table-custom-subscription.component';
+import { UsersFilterSubscriptionsComponent } from './components/users/users-header/users-filter/users-filter-subscriptions/users-filter-subscriptions.component';
 
 
 declare var $: any;
@@ -946,7 +947,8 @@ declare var $: any;
     UserDefaultSubscriptionComponent,
     UserCustomSubscriptionComponent,
     UserTableDefaultSubscriptionComponent,
-    UserTableCustomSubscriptionComponent
+    UserTableCustomSubscriptionComponent,
+    UsersFilterSubscriptionsComponent
   ],
   imports: [
     BrowserModule,

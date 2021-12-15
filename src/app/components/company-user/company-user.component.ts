@@ -58,7 +58,7 @@ export class CompanyUserComponent implements OnInit {
 
 
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
-      this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title);
+      this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title, data.defaultSubscriptions, data.customSubscriptions);
       this.setDefaultScoll();
       this.onScroll();
     })
@@ -136,7 +136,7 @@ export class CompanyUserComponent implements OnInit {
     this.header.filter.companiesDp.editItem = company;
     this.header.filter.filter.setCompany(id);
     this.header.filter.onChangeCounterFilter();
-    this.filter.setLeftFilters(null, id, null, null);
+    this.filter.setLeftFilters(null, id, null, null, null, null);
     this.cd.detectChanges();
   }
   showMobileFilter() {

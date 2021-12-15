@@ -2,6 +2,8 @@ import { FilterListTop } from 'src/class/list/filter-list-top';
 import { User } from './user';
 import { Company } from 'src/app/interfaces/company/company';
 import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
+import { UserDefaultSubscription } from './user-default-subscription';
+import { UserCustomSubscription } from './user-custom-subscription';
 
 export class UserFilter {
     filterTop: Array<FilterListTop> = [new FilterListTop('name', 'ASC'),
@@ -13,13 +15,24 @@ export class UserFilter {
     company: string;
     clientIndustry: string;
     title: CrmCompanyJobTitle;
-    constructor() { }
+    defaultSubscriptions: UserDefaultSubscription;
+    customSubscriptions: Array<UserCustomSubscription> = [];
+    constructor() {
 
-    public setLeftFilters(clientType, company, clientIndustry, title) {
+    }
+    public setDefaultSubscriptions(data) {
+        this.defaultSubscriptions = data;
+    }
+    public setCustomSubscriptions(data) {
+        this.customSubscriptions = data;
+    }
+    public setLeftFilters(clientType, company, clientIndustry, title, defaultSubscriptions, customSubscriptions) {
         this.clientType = clientType;
         this.company = company;
         this.clientIndustry = clientIndustry;
         this.title = title;
+        this.defaultSubscriptions = defaultSubscriptions;
+        this.customSubscriptions = customSubscriptions;
     }
     public setCompany(data) {
         this.company = data;
@@ -39,10 +52,11 @@ export class UserFilter {
             let indexCompany = companies.findIndex(company => company.id === item.company.id);
             let clientType: boolean = false;
             let clientIndustry: boolean = false;
+
             if (indexCompany > -1 && this.clientType === companies[indexCompany].clientType) clientType = true;
             if (indexCompany > -1 && this.clientIndustry === ((companies[indexCompany].clientIndustry) ? companies[indexCompany].clientIndustry.name : '')) clientIndustry = true;
 
-            if (((this.clientType) ? clientType === true : true) && ((this.title) ? item.jobTitleId === this.title.id : true) && ((this.company) ? this.company === item.company.id : true) && ((this.clientIndustry) ? clientIndustry === true : true)) {
+            if (((this.clientType) ? clientType === true : true) && ((this.title) ? item.jobTitleId === this.title.id : true) && ((this.company) ? this.company === item.company.id : true) && ((this.clientIndustry) ? clientIndustry === true : true) && this.isUserDefaultSubscription(item.defaultSubscriptions) && this.isUserCustomSubscription(item.customSubscriptions)) {
                 return true;
             } else {
                 return false;
@@ -52,7 +66,21 @@ export class UserFilter {
         return list;
 
     }
+    public isUserCustomSubscription(list) {
+        let isExist = true;
 
+        this.customSubscriptions.forEach(subscription => {
+            let find = list.find(subscriptionUser => subscriptionUser.id === subscription.id);
+            if (!find) isExist = false;
+        })
+        return isExist;
+    }
+    public isUserDefaultSubscription(item) {
+        if (!this.defaultSubscriptions) return true;
+        return (this.defaultSubscriptions.invoiceSubscription.enabled === item.invoiceSubscription.enabled &&
+            this.defaultSubscriptions.ticketManagerSubscription.enabled === item.ticketManagerSubscription.enabled &&
+            this.defaultSubscriptions.ticketSubscription.enabled === item.ticketSubscription.enabled)
+    }
     public setClientIndustry(data) {
         this.clientIndustry = data;
     }

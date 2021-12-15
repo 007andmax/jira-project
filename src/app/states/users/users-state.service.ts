@@ -9,6 +9,7 @@ import { UsersRealTimeService } from './users-real-time.service';
 import { UserChange } from '../../components/users/class/user-change';
 import { UserFilter } from '../../components/users/class/user-filter';
 import { AppService } from '../app/app.service';
+import { UserCustomSubscription } from 'src/app/components/users/class/user-custom-subscription';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,8 @@ export class UsersStateService {
   openDetailAside: EventEmitter<any> = new EventEmitter();
   closeDetailAside: EventEmitter<any> = new EventEmitter();
   onChangeUserPermissions: EventEmitter<any> = new EventEmitter();
+  onGetListCustomSubscription: EventEmitter<any> = new EventEmitter();
+  listCustomSubscription: Array<UserCustomSubscription> = [];
   userForArchive: User = null;
   usersForArchive: Array<User> = [];
   userForDeArchive: User = null;
@@ -78,6 +81,13 @@ export class UsersStateService {
 
       this.onChangeUserPermissions.emit(newChange.data.permissions);
     });
+  }
+  public getListCustomSubscription() {
+    return this.listCustomSubscription;
+  }
+  public setListCustomSubscription(data) {
+    this.listCustomSubscription = data;
+    this.onGetListCustomSubscription.emit(data);
   }
   public onInitGetCurrentUser() {
     this.userService.getCurrentUser().subscribe((data: any) => {

@@ -69,7 +69,7 @@ export class UsersComponent implements OnInit {
 
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
       window.scrollTo(0, 0);
-      this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title);
+      this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title, data.defaultSubscriptions, data.customSubscriptions);
       this.selectAll = false;
       this.reqUsers.forEach(item => item.selected = false);
       this.setDefaultScoll();
@@ -157,6 +157,7 @@ export class UsersComponent implements OnInit {
     this.sub.add(onGetJobTitle);
     this.marketingEmailService.getList().subscribe((data: any) => {
       this.listCustomSubscription = data.map(item => new UserCustomSubscription(item));
+      this.usersStateService.setListCustomSubscription(data.map(item => new UserCustomSubscription(item)));
     });
   }
 

@@ -13,6 +13,7 @@ import { CompanySubscriptionStateService } from '../../companies/company-subscri
 import { StatusColor } from '../../tickets/class/status-color';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { User } from '../class/user';
+import { UserDefaultSubscription } from '../class/user-default-subscription';
 import { UserDefaultSubscriptionAdd } from '../class/user-default-subscription-add';
 import { UserProfile } from '../class/user-profile';
 import { UserValidate } from '../class/user-validate';
@@ -150,8 +151,14 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
         data.ticketManagerSubscription.enabled,
         data.invoiceSubscription.enabled)
       , customSubscriptionIds: this.user.customSubscriptions.map(item => item.id)
-    }).subscribe(data => {
-
+    }).subscribe(res => {
+      this.user.setDefaultSubscriptions(new UserDefaultSubscription(data));
+      let keys = Object.keys(this.user.defaultSubscriptions);
+      console.log("keys", keys);
+      console.log("this.user.defaultSubscriptions", this.user.defaultSubscriptions);
+      for (let i = 0; i < keys.length; i++) {
+        if (keys[i] != "id") this.user.defaultSubscriptions[keys[i]].setIsExist(true);
+      }
     })
   }
   onChangeCustomSubscriptions(data) {
@@ -161,8 +168,11 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
         this.user.defaultSubscriptions.ticketManagerSubscription.enabled,
         this.user.defaultSubscriptions.invoiceSubscription.enabled)
       , customSubscriptionIds: data.map(item => item.id)
-    }).subscribe(data => {
-
+    }).subscribe(res => {
+      this.user.setCustomSubscriptions(data);
+      this.user.customSubscriptions.forEach(item => {
+        item.setIsExist(true);
+      })
     })
   }
   ngOnDestroy(): void {

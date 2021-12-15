@@ -46,7 +46,16 @@ export class UsersFilterComponent implements OnInit {
     })
     this.sub.add(onGetIndustry);
   }
-
+  public onChangeDefaultSubscription(data) {
+    this.filter.setDefaultSubscriptions(data);
+    this.usersStateService.onInitFilter(this.filter);
+    this.onChangeCounterFilter();
+  }
+  onChangeCustomSubscription(data) {
+    this.filter.setCustomSubscriptions(data);
+    this.usersStateService.onInitFilter(this.filter);
+    this.onChangeCounterFilter();
+  }
   public onClearAll() {
 
     if (!this.companiesDp.isDisabled) this.filter.setCompany(null);

@@ -13,12 +13,17 @@ export class UserDefaultSubscription {
             this.ticketManagerSubscription = new UserDefaultSubscriptionItem(data.ticketManagerSubscription);
         } else {
             this.invoiceSubscription = new UserDefaultSubscriptionItem({ enabled: false, activated: true, });
-            this.invoiceSubscription.setSsExist(false);
+            this.invoiceSubscription.setIsExist(false);
             this.ticketSubscription = new UserDefaultSubscriptionItem({ enabled: true, activated: true, });
-            this.ticketSubscription.setSsExist(false);
+            this.ticketSubscription.setIsExist(false);
             this.ticketManagerSubscription = new UserDefaultSubscriptionItem({ enabled: false, activated: true, });
-            this.ticketManagerSubscription.setSsExist(false);
+            this.ticketManagerSubscription.setIsExist(false);
         }
 
+    }
+    public clearEnabledAll() {
+        this.invoiceSubscription.enabled = false;
+        this.ticketSubscription.enabled = false;
+        this.ticketManagerSubscription.enabled = false;
     }
 }

@@ -19,6 +19,10 @@
         [change]="true"
         (onSelectedItem)="onSelectCompany($event)"
     ></app-drop-down>
+    <users-filter-subscriptions
+        (onChangeDefault)="onChangeDefaultSubscription($event)"
+        (onChangeCustom)="onChangeCustomSubscription($event)"
+    ></users-filter-subscriptions>
     <app-drop-down
         #industriesDp
         class="qt-w100"

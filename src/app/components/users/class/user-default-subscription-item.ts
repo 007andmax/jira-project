@@ -7,7 +7,7 @@ export class UserDefaultSubscriptionItem {
         this.activated = data.activated;
 
     }
-    public setSsExist(data) {
+    public setIsExist(data) {
         this.isExist = data;
     }
 }

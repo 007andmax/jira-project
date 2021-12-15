@@ -15,6 +15,7 @@ import { CurrentUser } from 'src/class/current-user/current-user';
 import { TicketsFilterComponent } from '../../tickets/tickets/tickets-header/tickets-filter/tickets-filter.component';
 import { UsersFilterComponent } from './users-filter/users-filter.component';
 import { TYPE_LIST_ALL_USERS, TYPE_LIST_COMPANY_USERS } from 'src/app/const/users';
+import { UserCustomSubscription } from '../class/user-custom-subscription';
 
 
 
