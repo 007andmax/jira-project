@@ -88,7 +88,6 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
       this.devices = (data[this.companyId]) ? JSON.parse(JSON.stringify(data[this.companyId])).map(item => new Device(item)) : [];
       this.companyNetworkScanService.onFilterName(this.devices);
       if (this.devices.length > 0 && !this.isGetDevices) this.getSomeInfoForDevices().then(result => {
-        this.findMasterAgent();
         if (this.getPermissions('NETWORK_SCAN_CLIENTS') && this.masterAgent.online) this.runScanDevices();
       });
       this.cd.detectChanges();
@@ -100,7 +99,6 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
         this.selectAllDevices = false;
         this.networkScanSomeInfoForDevice = new NetworkScanSomeInfoForDevice(data);
         if (this.getPermissions('NETWORK_SCAN_CLIENTS')) {
-          this.findMasterAgent();
           if (this.masterAgent.online) this.runScanDevices();
           if (!this.masterAgent.online) this.networkScanDevices.devices = [];
         }
@@ -174,6 +172,10 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
   AssetDetail() {
     this.agentService.getAssetsByCompanyId(this.companyId).subscribe((resp) => {
       this.assetList = resp;
+      this.masterAgent = this.assetList.find(x => x.IsMasterAgent == true);
+      if (this.masterAgent) {
+        this.masterAgent.online = true;
+      }
     })
   }
   selectMasterNetwork(Id) {
@@ -191,6 +193,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
       let createdOn = data[0].CreatedOn;
       this.networkvalue = data.filter(x => x.CreatedOn == createdOn);
       for (let i = 0; i < this.networkvalue.length; i++) {
+        this.networkvalue[i].ID = i + 1;
         this.networkvalue[i].selected = false;
       }
     });
@@ -202,7 +205,6 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
       this.devices = (this.devicesStateService.getAllDevices()[this.companyId]) ? JSON.parse(JSON.stringify(this.devicesStateService.getAllDevices()[this.companyId])).map(item => new Device(item)) : [];
       this.companyNetworkScanService.onFilterName(this.devices);
       if (this.devices.length > 0) this.getSomeInfoForDevices().then(result => {
-        this.findMasterAgent();
         if (this.getPermissions('NETWORK_SCAN_CLIENTS') && this.masterAgent.online) this.runScanDevices();
       });
       this.showPreloader = false;
@@ -214,25 +216,25 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
   }
   installAgent() {
     this.btnInstallAgent.setDisabled(true);
-    
+
     /*this.devicesService.remoteInstall(this.networkScanInstallAgent.getDataForInstall(this.companyId, this.networkScanDevices.devices.filter(item => item.selected).map(item => item.id), this.masterAgent.agentId)).subscribe(data => {
       setTimeout(() => {
         this.btnInstallAgent.setDisabled(false);
         this.cd.detectChanges();
       }, 3000);
     })*/
-    let selectedAsset = this.networkvalue.find(x=> x.selected == true);
+    let selectedAsset = this.networkvalue.find(x => x.selected == true);
     var cred = this.networkScanInstallAgent.getCredential();
-    let data: any = {};    
+    let data: any = {};
     data.MessageType = "NetworkScan";
-    data.Username = cred.username;
-    data.Password = cred.password;
+    data.Username = "ft04\\admin";//cred.username;
+    data.Password = "admin@123";//cred.password;
     data.RemoteAgentItem = [];
     let item: any = {};
     item.IP = selectedAsset.IP;
     item.HostName = selectedAsset.HostName;
-    item.ReturnMessage  = "";
-    item.success ="";
+    item.ReturnMessage = "";
+    item.success = "";
     data.RemoteAgentItem.push(item);
     this.agentService.SendNetworkCommand(data);
   }
@@ -304,22 +306,7 @@ export class CompanyNetworkScanComponent implements OnInit, OnDestroy {
     this.devicesService.markDeviceAsMaster(this.companyId, device.agentId).subscribe(data => {
     })
   }
-  findMasterAgent() {
-    debugger;
-    this.masterAgent = this.assetList.find(x => x.IsMasterAgent == true);    
-    //TODO: figure out better way to do this.
-    if(this.masterAgent) {
-      this.masterAgent.online = true;
-    }
-    // let find = this.devices.find(item => item.agentId === this.networkScanSomeInfoForDevice.masterAgentId);
-    // if (find) {
-    //   this.masterAgent = find;
-    // } else {
-    //   let agentsSortedByCreatedAtDate = this.devices.sort((a, b) => (new Date(a.createdAt) > new Date(b.createdAt)) ?
-    //     1 : ((new Date(b.createdAt) > new Date(a.createdAt)) ? -1 : 0));
-    //   this.masterAgent = agentsSortedByCreatedAtDate[0];
-    // }
-  }
+
   public trackById(index, item) {
     return item.id;
   }
