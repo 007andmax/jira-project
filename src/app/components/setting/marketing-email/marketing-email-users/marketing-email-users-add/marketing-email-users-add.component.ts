@@ -82,7 +82,7 @@ export class MarketingEmailUsersAddComponent implements OnInit {
     this.onClose.emit(null);
   }
   private getUsers() {
-
+    console.log("getUsers");
     if (this.userListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;
@@ -100,6 +100,7 @@ export class MarketingEmailUsersAddComponent implements OnInit {
     }
     this.users = [...this.users, ...usersList.map(item => new User(JSON.parse(JSON.stringify(item))))];
     console.log("this.users", this.users);
+    console.log("listFilter", listFilter.length);
     this.infiniteScrollDisabled = false;
     if ((this.page_number * 30) > listFilter.length) this.userListService.setBlockList(true);
 
