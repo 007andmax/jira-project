@@ -1,47 +1,131 @@
-/*** All css files include ***/
-@import '../../../../assets/scss/device/variable';
-@import '../../../../assets/scss/device/mixin';
-@import '../../../../assets/scss/device/custom';
+.user-list-info{
+    margin-top: 8px;
+    margin-bottom: 38px;
+}
 
-
-
-.software-programes {
-    .page-header {
-        .selected-item {
-            a {
-                margin-left: 16px;
-                margin-top: -2px;
-            }
+li.add-user {
+    .cmn-dropdown {
+        .cmn-dropdon-list {
+            top: auto;
+            bottom: 42px;
         }
-    }
-    table{
-        &:last-child{
-            .action{
-                ul.dropdown-menu{
-                    bottom: 40px !important;
-                    top: auto !important;
-                }
-            }
-        }
-        .Status {
-            width: 20%;
-        }
-        .Impact {
-            width: 17%;
-        }
-        .s-name{
-            width: 29%;
-        }
-        .pulisher{
-            width: 24%;
-        }
-        .action {
-            width: 5%;
-            .more {
-                width: 15px;
-                display: inline-block;
-            }
-           
     }
 }
-} 
+
+.startup-table {
+  th {
+   white-space: nowrap;
+  }
+ td {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    background-color: white;
+  }
+  tr {
+    td {
+      background: #ffffff;
+      padding: 0 8px 0 8px;
+      height: 48px;
+      border-top: 1px solid transparent;
+      border-bottom: 1px solid transparent;
+      vertical-align: middle;
+      &:last-child {
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        border-right: 1px solid transparent;
+        padding-right: 16px;
+      }
+      &:first-child {
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        border-left: 1px solid transparent;
+        padding-left: 16px;
+      }
+    }
+  }
+}
+
+.download-print {
+    display: flex;
+    align-items: center;
+    a {
+        border: solid 1px #dfe3e8;
+        background: #fff;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 32px;
+        width: 32px;
+        cursor: pointer;
+        position: relative;
+    }
+    a::before {
+        position: absolute;
+        padding: 9px 7px;
+        content: attr(data-tooltip);
+        text-align: center;
+        width: 70px;
+        border-radius: 3px;
+        background-color: #4f5f79;
+        font-size: 12px;
+        font-weight: 500;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.33;
+        letter-spacing: normal;
+        color: #ffffff;
+        left: -22px;
+        top: -40px;
+        visibility: hidden;
+        z-index: 999;
+    }
+    a:last-child::before {
+        width: max-content;
+        left: -34px;
+    }
+    a:hover::before, a:hover::after {
+        visibility: visible;
+    }
+
+    a::after {
+        top: auto;
+        left: 50%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+        border-color: rgba(79, 95, 121, 0);
+        border-top-color: #4f5f79;
+        border-width: 6px;
+        margin-left: -6px;
+        bottom: 25px;
+        z-index: 1;
+        visibility: hidden;
+    }
+    a:nth-child(2) {
+        margin-right: 8px;
+    }
+    form {
+        width: unset;
+        margin-right: 8px;
+        .form-input {
+            padding: 7px 14px 7px 34px;
+            background: url(/assets/img/search-ico.svg) no-repeat 12px center;
+            font-size: 12px;
+            line-height: 1.67;
+            background-color: #ffffff;
+            width: 200px;
+        }
+    }
+}
+
+.disabled-link {
+  pointer-events: none;
+}
+
+
+

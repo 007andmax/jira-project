@@ -532,4 +532,34 @@ export class AgentService {
       )
       .pipe(map((data: string) => this.decrypt128(data, this.key)));
   }
+
+  public GetService(asset_ID) {
+    const data = {
+      AssetID: asset_ID,
+      MessageType: "GetService",
+    };
+
+    if (this.wsService.IsKafkaConnected) {
+      this.http
+        .post(this.apiurl + "sendMessageToKafka", data)
+        .subscribe(() => {});
+    } else {
+      setTimeout(() => this.GetCurrentConfig(asset_ID), 3000);
+    }
+  }
+
+  public GetStartupPrograms(asset_ID) {
+    const data = {
+      AssetID: asset_ID,
+      MessageType: "GetStartupPrograms",
+    };
+
+    if (this.wsService.IsKafkaConnected) {
+      this.http
+        .post(this.apiurl + "sendMessageToKafka", data)
+        .subscribe(() => {});
+    } else {
+      setTimeout(() => this.GetCurrentConfig(asset_ID), 3000);
+    }
+  }
 }

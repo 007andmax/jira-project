@@ -6,6 +6,7 @@ import { KafkaRealTimeService } from "./kafka-real-time.service";
 })
 export class KafkaStateService {
   assetConfigMessage = [];
+
   onCurrentConfig: EventEmitter<any> = new EventEmitter();
   onPowerShellCommand: EventEmitter<any> = new EventEmitter();
   onAck: EventEmitter<any> = new EventEmitter();
@@ -15,6 +16,8 @@ export class KafkaStateService {
   onUninstallRemoteAgent: EventEmitter<any> = new EventEmitter();
   onInstallRemoteAgent: EventEmitter<any> = new EventEmitter();
   onNetworkScan: EventEmitter<any> = new EventEmitter();
+  onGetService: EventEmitter<any> = new EventEmitter();
+  onGetStartupPrograms: EventEmitter<any> = new EventEmitter();
 
   constructor(private kafkaRealTimeService: KafkaRealTimeService) { }
 
@@ -51,6 +54,12 @@ export class KafkaStateService {
           break;
         case "NetworkScan":
           this.handleNetworkScanCommand(newChange);
+          break;
+        case "GetService":
+          this.handleGetService(newChange);
+          break;
+        case "GetStartupPrograms":
+          this.handleGetStartupPrograms(newChange);
           break;
       }
     });
@@ -186,5 +195,37 @@ export class KafkaStateService {
       Value: newChange.data.Value,
     });
     this.onNetworkScan.emit(this.assetConfigMessage);
+  }
+
+  private handleGetService(newChange: any) {
+    if (this.assetConfigMessage.length > 0) {
+      let index = this.assetConfigMessage.findIndex(
+        (x) => (x.key = newChange.data.AssetID)
+      );
+      if (index != -1) {
+        this.assetConfigMessage.splice(index, 1);
+      }
+    }
+    this.assetConfigMessage.push({
+      key: newChange.data.AssetID,
+      Value: newChange.data.Value,
+    });
+    this.onGetService.emit(this.assetConfigMessage);
+  }
+
+  private handleGetStartupPrograms(newChange: any) {
+    if (this.assetConfigMessage.length > 0) {
+      let index = this.assetConfigMessage.findIndex(
+        (x) => (x.key = newChange.data.AssetID)
+      );
+      if (index != -1) {
+        this.assetConfigMessage.splice(index, 1);
+      }
+    }
+    this.assetConfigMessage.push({
+      key: newChange.data.AssetID,
+      Value: newChange.data.Value,
+    });
+    this.onGetStartupPrograms.emit(this.assetConfigMessage);
   }
 }
