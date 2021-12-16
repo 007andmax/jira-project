@@ -99,6 +99,7 @@ export class UsersFilterSubscriptionsComponent implements OnInit {
 
   }
   toggleSubscription(item) {
+    this.tagCtrl.setValue(null);
     if (item.type === USER_SUBSCRIPTION_TYPE_DEFAULT) this.updateDefault(item.id, item);
     if (item.type === USER_SUBSCRIPTION_TYPE_CUSTOM) this.updateCustom(this.listCustomSubscriptions.find(subscription => subscription.id === item.id), item);
   }

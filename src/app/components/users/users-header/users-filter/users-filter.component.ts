@@ -63,6 +63,8 @@ export class UsersFilterComponent implements OnInit {
     if (!this.companiesDp.isDisabled) this.filter.setCompany(null);
     this.filter.setClientIndustry(null);
     this.filter.setTitle(null);
+    this.filter.setDefaultSubscriptions(null);
+    this.filter.setCustomSubscriptions([]);
     this.titlesDp.clearWithOutChanges();
     this.industriesDp.clearWithOutChanges();
     this.subscriptionDp.clearWithOutChanges();
