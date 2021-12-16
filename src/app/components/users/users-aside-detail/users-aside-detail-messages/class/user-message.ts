@@ -1,0 +1,15 @@
+export class UserMessage {
+    createdAt: string;
+    subject: string;
+    type: string;
+    body: string;
+    emailFrom: string;
+    senderName: string;
+    constructor(data) {
+        if (data) {
+            for (const key in data) {
+                this[key] = data[key];
+            }
+        }
+    }
+}

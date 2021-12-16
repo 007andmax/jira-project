@@ -225,7 +225,10 @@
                 *ngIf="tab === 'passwords'"
                 [user]="user"
             ></users-aside-detail-passwords>
-            <users-aside-detail-messages *ngIf="tab === 'messages'"></users-aside-detail-messages>
+            <users-aside-detail-messages
+                *ngIf="tab === 'messages'"
+                [user]="user"
+            ></users-aside-detail-messages>
         </div>
     </div>
 </div>

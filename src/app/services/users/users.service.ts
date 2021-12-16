@@ -52,6 +52,11 @@ export class UsersService {
   public getCurrentUser() {
     return this.http.get(this.apiUrl + 'users/current');
   }
+
+  public getMessagesUser(id, page) {
+    return this.http.get(this.apiUrl + `email/${id}/user?size=20&page=${page}`);
+  }
+
   public resetPrimaryContact(userId) {
     return this.http.get(this.apiUrl + '/company/resetPrimaryContact?userId=' + userId);
   }
