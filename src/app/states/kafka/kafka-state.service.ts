@@ -55,10 +55,10 @@ export class KafkaStateService {
         case "NetworkScan":
           this.handleNetworkScanCommand(newChange);
           break;
-        case "GetService":
+        case "GetServices":
           this.handleGetService(newChange);
           break;
-        case "GetStartupPrograms":
+        case "GetStartupProgram":
           this.handleGetStartupPrograms(newChange);
           break;
       }

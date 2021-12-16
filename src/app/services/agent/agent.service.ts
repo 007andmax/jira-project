@@ -536,7 +536,7 @@ export class AgentService {
   public GetService(asset_ID) {
     const data = {
       AssetID: asset_ID,
-      MessageType: "GetService",
+      MessageType: "GetServices",
     };
 
     if (this.wsService.IsKafkaConnected) {
@@ -544,14 +544,14 @@ export class AgentService {
         .post(this.apiurl + "sendMessageToKafka", data)
         .subscribe(() => {});
     } else {
-      setTimeout(() => this.GetCurrentConfig(asset_ID), 3000);
+      setTimeout(() => this.GetService(asset_ID), 3000);
     }
   }
 
   public GetStartupPrograms(asset_ID) {
     const data = {
       AssetID: asset_ID,
-      MessageType: "GetStartupPrograms",
+      MessageType: "GetStartupProgram",
     };
 
     if (this.wsService.IsKafkaConnected) {
@@ -559,7 +559,7 @@ export class AgentService {
         .post(this.apiurl + "sendMessageToKafka", data)
         .subscribe(() => {});
     } else {
-      setTimeout(() => this.GetCurrentConfig(asset_ID), 3000);
+      setTimeout(() => this.GetStartupPrograms(asset_ID), 3000);
     }
   }
 }
