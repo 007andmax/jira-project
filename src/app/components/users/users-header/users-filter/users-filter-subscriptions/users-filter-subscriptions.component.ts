@@ -17,6 +17,7 @@ export class UsersFilterSubscriptionsComponent implements OnInit {
   customSubscriptions: Array<UserCustomSubscription> = [];
   listCustomSubscriptions: Array<UserCustomSubscription> = [];
   subscriptions: Array<UsersFilterSubscriptionsItem> = [];
+  reqSubscriptions: Array<UsersFilterSubscriptionsItem> = [];
   selectedSubscriptions: Array<UsersFilterSubscriptionsItem> = [];
   @Output() onChangeDefault = new EventEmitter();
   @Output() onChangeCustom = new EventEmitter();
@@ -34,20 +35,32 @@ export class UsersFilterSubscriptionsComponent implements OnInit {
   ngOnInit() {
 
     this.defaultSubscriptions.clearEnabledAll();
-    this.subscriptions.push(new UsersFilterSubscriptionsItem("invoiceSubscription", USER_SUBSCRIPTION_TYPE_DEFAULT, "Invoice Updates"));
-    this.subscriptions.push(new UsersFilterSubscriptionsItem("ticketSubscription", USER_SUBSCRIPTION_TYPE_DEFAULT, "Ticket Updates"));
-    this.subscriptions.push(new UsersFilterSubscriptionsItem("ticketManagerSubscription", USER_SUBSCRIPTION_TYPE_DEFAULT, "Ticket Manager"));
+    let subscriptions = [];
+    subscriptions.push(new UsersFilterSubscriptionsItem("invoiceSubscription", USER_SUBSCRIPTION_TYPE_DEFAULT, "Invoice Updates"));
+    subscriptions.push(new UsersFilterSubscriptionsItem("ticketSubscription", USER_SUBSCRIPTION_TYPE_DEFAULT, "Ticket Updates"));
+    subscriptions.push(new UsersFilterSubscriptionsItem("ticketManagerSubscription", USER_SUBSCRIPTION_TYPE_DEFAULT, "Ticket Manager"));
     this.listCustomSubscriptions = this.usersStateService.getListCustomSubscription();
     console.log("this.listCustomSubscriptions", this.listCustomSubscriptions);
     this.usersStateService.onGetListCustomSubscription.subscribe(data => {
       this.listCustomSubscriptions = data;
       this.listCustomSubscriptions.forEach(item => {
-        this.subscriptions.push(new UsersFilterSubscriptionsItem(item.id, USER_SUBSCRIPTION_TYPE_CUSTOM, item.name));
+        subscriptions.push(new UsersFilterSubscriptionsItem(item.id, USER_SUBSCRIPTION_TYPE_CUSTOM, item.name));
       })
-      this.subscriptions.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+      subscriptions.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
         1 : (b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 0));
+      this.subscriptions = subscriptions.map(item => new UsersFilterSubscriptionsItem(item.id, item.type, item.name));
+      this.reqSubscriptions = subscriptions.map(item => new UsersFilterSubscriptionsItem(item.id, item.type, item.name));
 
     })
+  }
+  onSearch(event) {
+    this.subscriptions = this.reqSubscriptions.filter(item => item.name.toLowerCase().includes(event.target.value.toLowerCase()));
+  }
+  public clearWithOutChanges() {
+    this.selectedSubscriptions = [];
+    this.defaultSubscriptions = new UserDefaultSubscription();
+    this.defaultSubscriptions.clearEnabledAll();
+    this.customSubscriptions = [];
   }
   updateDefault(field, subscription) {
     let index = this.selectedSubscriptions.findIndex(custom => custom.id === subscription.id);

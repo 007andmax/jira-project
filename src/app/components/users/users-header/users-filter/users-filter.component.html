@@ -20,6 +20,7 @@
         (onSelectedItem)="onSelectCompany($event)"
     ></app-drop-down>
     <users-filter-subscriptions
+        #subscriptionDp
         (onChangeDefault)="onChangeDefaultSubscription($event)"
         (onChangeCustom)="onChangeCustomSubscription($event)"
     ></users-filter-subscriptions>
