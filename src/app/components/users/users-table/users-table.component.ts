@@ -121,7 +121,7 @@ export class UsersTableComponent implements OnInit {
     })
   }
   edit() {
-    this.usersStateService.setUserForEdit(this.user);
+    this.usersStateService.setUserForEdit(new User(JSON.parse(JSON.stringify(this.user))));
     this.usersStateService.onOpenEditAsige();
   }
   ngOnInit() {

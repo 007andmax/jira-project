@@ -7,12 +7,14 @@ import { UsersService } from 'src/app/services/users/users.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
+import { UsersRealTimeService } from 'src/app/states/users/users-real-time.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { PhoneNumber } from 'src/class/phone-number';
 import { CompanySubscriptionStateService } from '../../companies/company-subscription/class/company-subscription-state.service';
 import { StatusColor } from '../../tickets/class/status-color';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { User } from '../class/user';
+import { UserCustomSubscription } from '../class/user-custom-subscription';
 import { UserDefaultSubscription } from '../class/user-default-subscription';
 import { UserDefaultSubscriptionAdd } from '../class/user-default-subscription-add';
 import { UserProfile } from '../class/user-profile';
@@ -34,7 +36,6 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
   tab: string = 'tickets';
   companies = [];
   selectedCompany = null;
-
   @ViewChild('ticketsDetail') ticketsDetail: UsersAsideDetailTicketsComponent;
   sub: Subscription = new Subscription();
   constructor(public ticketsListService: TicketsListService,
@@ -46,6 +47,7 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
     private ticketsStateService: TicketsStateService,
     private draftEmailStateService: DraftEmailStateService,
     private companySubscriptionState: CompanySubscriptionStateService,
+    private usersRealTimeService: UsersRealTimeService,
     private companiesStateService: CompaniesStateService,) { }
 
 
@@ -76,6 +78,18 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.getClientsList(data);
     })
+    let stompClient = this.usersRealTimeService.changeSubscriptionsUsers.subscribe(newChange => {
+      if (!this.open) return;
+      if (newChange.action === 'SUBSCRIPTION_SAVED') {
+        if (this.user.id === newChange.data.userId) {
+          this.user.setDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
+          this.user.setCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
+          console.log("this.user", this.user);
+        }
+        this.cd.detectChanges();
+      }
+    });
+    this.sub.add(stompClient);
   }
   onChangeJobDescription(event) {
     this.user.jobDescription = event.target.value;
@@ -152,13 +166,13 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
         data.invoiceSubscription.enabled)
       , customSubscriptionIds: this.user.customSubscriptions.map(item => item.id)
     }).subscribe(res => {
-      this.user.setDefaultSubscriptions(new UserDefaultSubscription(data));
-      let keys = Object.keys(this.user.defaultSubscriptions);
-      console.log("keys", keys);
-      console.log("this.user.defaultSubscriptions", this.user.defaultSubscriptions);
-      for (let i = 0; i < keys.length; i++) {
-        if (keys[i] != "id") this.user.defaultSubscriptions[keys[i]].setIsExist(true);
-      }
+      /* this.user.setDefaultSubscriptions(new UserDefaultSubscription(data));
+       let keys = Object.keys(this.user.defaultSubscriptions);
+       console.log("keys", keys);
+       console.log("this.user.defaultSubscriptions", this.user.defaultSubscriptions);
+       for (let i = 0; i < keys.length; i++) {
+         if (keys[i] != "id") this.user.defaultSubscriptions[keys[i]].setIsExist(true);
+       }*/
     })
   }
   onChangeCustomSubscriptions(data) {
@@ -169,10 +183,10 @@ export class UsersAsideDetailComponent implements OnInit, OnDestroy {
         this.user.defaultSubscriptions.invoiceSubscription.enabled)
       , customSubscriptionIds: data.map(item => item.id)
     }).subscribe(res => {
-      this.user.setCustomSubscriptions(data);
-      this.user.customSubscriptions.forEach(item => {
-        item.setIsExist(true);
-      })
+      /*  this.user.setCustomSubscriptions(data);
+        this.user.customSubscriptions.forEach(item => {
+          item.setIsExist(true);
+        })*/
     })
   }
   ngOnDestroy(): void {

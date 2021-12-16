@@ -226,6 +226,20 @@ export class WebsocketService {
     }, 3000);
   }
 
+  public subsribeToUserSubscriptions(id) {
+
+    setTimeout(() => {
+      this.stompClient.subscribe(`/user/watch/subscription/${id}`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.usersRealTimeService.handleRealTimeSubscriptions(newChange);
+        if (message.body) {
+
+        }
+      });
+    }, 3000);
+  }
+
+
   /**
   * subscribe to recurring tickets realtime
   */

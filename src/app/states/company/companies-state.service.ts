@@ -8,6 +8,7 @@ import { CompanyUpdate } from '../../components/companies/class/company-update';
 import { User } from '../../components/users/class/user';
 import { WebsocketService } from '../../services/websocket/websocket.service';
 import { CompanyIndustry } from 'src/app/interfaces/company/company-industry';
+import { UsersStateService } from '../users/users-state.service';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,7 @@ export class CompaniesStateService {
   isInitCurrentCompany: boolean = false;
   constructor(private companiesService: CompaniesService,
     private companiesRealTimeService: CompaniesRealTimeService,
+    private usersStateService: UsersStateService,
     private websocketService: WebsocketService) {
   }
   public onInit() {
@@ -60,6 +62,7 @@ export class CompaniesStateService {
         this.websocketService.subsribeToGlNumber(this.currentCompany.id);
         this.websocketService.subsribeToQuote(this.currentCompany.id);
         this.websocketService.subsribeToRecurringTickets(this.currentCompany.id);
+        this.websocketService.subsribeToUserSubscriptions(this.currentCompany.id);
       }
       this.isInitCurrentCompany = true;
     })

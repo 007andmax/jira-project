@@ -29,6 +29,7 @@ export class UserProfile {
     constructor() {
 
     }
+
     public setTags(data) {
         this.tags = data;
     }

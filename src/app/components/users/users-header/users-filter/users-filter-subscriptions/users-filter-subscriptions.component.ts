@@ -57,10 +57,12 @@ export class UsersFilterSubscriptionsComponent implements OnInit {
     this.subscriptions = this.reqSubscriptions.filter(item => item.name.toLowerCase().includes(event.target.value.toLowerCase()));
   }
   public clearWithOutChanges() {
+    this.tagCtrl.setValue(null);
     this.selectedSubscriptions = [];
     this.defaultSubscriptions = new UserDefaultSubscription();
     this.defaultSubscriptions.clearEnabledAll();
     this.customSubscriptions = [];
+    this.subscriptions = this.reqSubscriptions.filter(item => item.name.toLowerCase().includes(""));
   }
   updateDefault(field, subscription) {
     let index = this.selectedSubscriptions.findIndex(custom => custom.id === subscription.id);
@@ -100,6 +102,7 @@ export class UsersFilterSubscriptionsComponent implements OnInit {
   }
   toggleSubscription(item) {
     this.tagCtrl.setValue(null);
+    this.subscriptions = this.reqSubscriptions.filter(item => item.name.toLowerCase().includes(""));
     if (item.type === USER_SUBSCRIPTION_TYPE_DEFAULT) this.updateDefault(item.id, item);
     if (item.type === USER_SUBSCRIPTION_TYPE_CUSTOM) this.updateCustom(this.listCustomSubscriptions.find(subscription => subscription.id === item.id), item);
   }

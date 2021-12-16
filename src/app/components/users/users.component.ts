@@ -19,6 +19,7 @@ import { Subscription } from 'rxjs';
 import { UserCustomSubscription } from './class/user-custom-subscription';
 import { MarketingEmailService } from 'src/app/services/marketing-email/marketing-email.service';
 import { UserDefaultSubscription } from './class/user-default-subscription';
+import { UsersRealTimeService } from 'src/app/states/users/users-real-time.service';
 
 @Component({
   selector: 'app-users',
@@ -51,6 +52,7 @@ export class UsersComponent implements OnInit {
     private draftEmailStateService: DraftEmailStateService,
     private crmStateService: CrmStateService,
     private marketingEmailService: MarketingEmailService,
+    private usersRealTimeService: UsersRealTimeService,
     private websocketService: WebsocketService) { }
 
   ngOnInit() {
@@ -181,9 +183,7 @@ export class UsersComponent implements OnInit {
   private onInitSubscribe() {
     setTimeout(() => {
 
-      let stompClient = this.websocketService.getClient().subscribe(`/user/watch/subscription/${this.companiesStateService.getCurrentCompany().id}`, (message) => {
-        var newChange = JSON.parse(message.body);
-
+      let stompClient = this.usersRealTimeService.changeSubscriptionsUsers.subscribe(newChange => {
         if (newChange.action === 'SUBSCRIPTION_SAVED') {
           const reqIndex = this.reqUsers.findIndex((item) => item.id === newChange.data.userId);
           if (reqIndex > -1) {
