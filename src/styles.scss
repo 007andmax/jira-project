@@ -1754,6 +1754,10 @@ app-quotes-item {
 .companies-page {
   background: $background;
 
+  .qt-page-list__header-filters {
+    align-items: flex-start;
+  }
+
   &.qt-page-list {
     @media (max-width: 767px) {
       padding: 0;
@@ -1977,7 +1981,7 @@ app-quotes-item {
       }
 
       .filter-tags-body {
-        height: 36px;
+        min-height: 36px;
       }
 
       .mat-chip-list-wrapper input.mat-input-element {

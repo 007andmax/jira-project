@@ -109,6 +109,54 @@
       vertical-align: top;
     }
   }
+  .qt-page-list__header-filters {
+    align-items: flex-start;
+    .filter-tags-body {
+      min-height: 36px;
+    }
+    mat-form-field {
+      max-width: 100%;
+      width: 100%;
+    }
+    .mat-form-field-appearance-legacy {
+      .mat-form-field-wrapper {
+        padding-bottom: 0;
+        height: 100%;
+      }
+      .mat-form-field-infix {
+        padding: 0;
+        background-color: $white;
+        z-index: 1;
+        border: 1px solid #c4cbd5;
+        border-radius: 4px;
+      }
+      .mat-form-field-label {
+        padding: 7px 10px 9px 12px;
+        color: #9ea6b7;
+        top: 12px;
+      }
+    }
+    .mat-chip-list-wrapper {
+      margin: 0;
+      input.mat-chip-input {
+        padding: 0 0 0 12px;
+        margin: 2px;
+        top: 0;
+        flex: 1;
+        height: 30px;
+        width: 100%;
+      }
+    }
+    .mat-form-field-appearance-legacy .mat-form-field-underline,
+    .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+      display: none;
+    }
+    .mat-standard-chip.mat-chip-with-trailing-icon {
+      padding-top: 5px;
+      padding-bottom: 5px;
+      margin: 2px;
+    }
+  }
 }
 
 .users-page__aside {
