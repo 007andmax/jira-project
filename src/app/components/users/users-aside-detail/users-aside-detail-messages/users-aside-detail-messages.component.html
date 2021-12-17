@@ -35,7 +35,7 @@
                                 <time
                                     datetime="2021-03-20"
                                     class="messages-table__account-date"
-                                    [textContent]="getDate(message.createdAt)"
+                                    [textContent]="getDate(message.createdAt) + ' '"
                                 >
                                 </time>
                                 <time
@@ -51,10 +51,8 @@
                                     [textContent]="'Sender email - ' + message.emailFrom"
                                 ></span>
                             </div>
-                            <div
-                                class="messages-table__account-text"
-                                [innerHTML]="message.body"
-                            >
+                            <div class="messages-table__account-text">
+                                <span [innerHTML]="message.subject"></span>
                             </div>
                         </td>
                     </tr>

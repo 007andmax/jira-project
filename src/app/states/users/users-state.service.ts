@@ -150,7 +150,9 @@ export class UsersStateService {
   public getUserForDeArchive() {
     return this.userForDeArchive;
   }
-
+  public clearFilter() {
+    this.filter = new UserFilter();
+  }
   public onInitFilter(data) {
     this.filter = data;
     this.onFilter.emit(data);

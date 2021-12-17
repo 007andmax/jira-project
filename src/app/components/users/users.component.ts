@@ -313,5 +313,14 @@ export class UsersComponent implements OnInit {
   }
   ngOnDestroy(): void {
     this.userListService.onUnsubscribe();
+    this.selectAll = false;
+    this.users.forEach(item => {
+      item.selected = false;
+    })
+    this.reqUsers.forEach(item => {
+      item.selected = false;
+    })
+    this.draftEmailStateService.resetSelectedUsers();
+    this.usersStateService.clearFilter();
   }
 }

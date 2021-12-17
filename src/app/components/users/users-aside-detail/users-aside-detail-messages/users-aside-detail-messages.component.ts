@@ -4,6 +4,7 @@ import { User } from '../../class/user';
 import { UserListService } from '../../services/user-list.service';
 import { UserMessage } from './class/user-message';
 import * as moment from "moment";
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'users-aside-detail-messages',
@@ -18,6 +19,7 @@ export class UsersAsideDetailMessagesComponent implements OnInit {
   public page_number: number = 0;
   public infiniteScrollDisabled = false;
   constructor(private usersService: UsersService,
+    private sanitized: DomSanitizer,
     private userListService: UserListService,) { }
 
   ngOnInit() {
@@ -43,6 +45,7 @@ export class UsersAsideDetailMessagesComponent implements OnInit {
       if (data.totalElements === this.messages.length) this.userListService.setBlockList(true);
     })
   }
+
   public getDate(date) {
     return moment(new Date(date)).format('DD/MM/YYYY');
   }

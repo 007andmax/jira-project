@@ -15,6 +15,12 @@ import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.
 import { UsersHeaderComponent } from '../users/users-header/users-header.component';
 import { TYPE_LIST_COMPANY_USERS } from '../../const/users';
 import { ActivatedRoute } from '@angular/router';
+import { MarketingEmailService } from 'src/app/services/marketing-email/marketing-email.service';
+import { UsersRealTimeService } from 'src/app/states/users/users-real-time.service';
+import { UserCustomSubscription } from '../users/class/user-custom-subscription';
+import { UserDefaultSubscription } from '../users/class/user-default-subscription';
+import { CrmStateService } from 'src/app/states/crm/crm-state.service';
+import { CrmCompanyJobTitle } from '../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 
 @Component({
   selector: 'company-user',
@@ -33,6 +39,8 @@ export class CompanyUserComponent implements OnInit {
   public page_number: number = 0;
   count: number = 0;
   TYPE_LIST_COMPANY_USERS = TYPE_LIST_COMPANY_USERS;
+  jobTitleList: Array<CrmCompanyJobTitle> = [];
+  listCustomSubscription: Array<UserCustomSubscription> = [];
   @ViewChild('header') header: UsersHeaderComponent;
   constructor(private usersStateService: UsersStateService,
     private userListService: UserListService,
@@ -41,8 +49,11 @@ export class CompanyUserComponent implements OnInit {
     private usersService: UsersService,
     public cd: ChangeDetectorRef,
     public activateRoute: ActivatedRoute,
+    private crmStateService: CrmStateService,
     private draftEmailStateService: DraftEmailStateService,
     private leftPanelStateService: LeftPanelStateService,
+    private marketingEmailService: MarketingEmailService,
+    private usersRealTimeService: UsersRealTimeService,
     private websocketService: WebsocketService) { }
 
   ngOnInit() {
@@ -128,6 +139,15 @@ export class CompanyUserComponent implements OnInit {
 
     })
     this.userListService.addSubscription(getChangeCompanies);
+    this.jobTitleList = this.crmStateService.getJobTitleList();
+    let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
+      this.jobTitleList = data;
+    })
+    this.userListService.addSubscription(onGetJobTitle);
+    this.marketingEmailService.getList().subscribe((data: any) => {
+      this.listCustomSubscription = data.map(item => new UserCustomSubscription(item));
+      this.usersStateService.setListCustomSubscription(data.map(item => new UserCustomSubscription(item)));
+    });
     this.onInitSubscribe();
   }
   public onInitFilters(id) {
@@ -145,14 +165,21 @@ export class CompanyUserComponent implements OnInit {
   private onInitSubscribe() {
     setTimeout(() => {
 
-      let stompClient = this.websocketService.getClient().subscribe(`/user/watch/subscription/${this.companiesStateService.getCurrentCompany().id}`, (message) => {
-        var newChange = JSON.parse(message.body);
+      let stompClient = this.usersRealTimeService.changeSubscriptionsUsers.subscribe(newChange => {
 
         if (newChange.action === 'SUBSCRIPTION_SAVED') {
-          const reqIndex = this.reqUsers.findIndex((item) => item.id === newChange.data.user.id);
-          //  if (reqIndex > -1) this.reqUsers[reqIndex].changeSubscriptions(newChange.data);
-          const userIndex = this.users.findIndex((item) => item.id === newChange.data.user.id);
-          //  if (userIndex > -1) this.users[userIndex].changeSubscriptions(newChange.data);
+          const reqIndex = this.reqUsers.findIndex((item) => item.id === newChange.data.userId);
+          if (reqIndex > -1) {
+            this.reqUsers[reqIndex].changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
+            this.reqUsers[reqIndex].changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
+          }
+          const userIndex = this.users.findIndex((item) => item.id === newChange.data.userId);
+          if (userIndex > -1) {
+            console.log("newChange.data", newChange.data);
+            this.users[userIndex].changeDefaultSubscriptions(new UserDefaultSubscription(newChange.data.defaultSubscriptions));
+            this.users[userIndex].changeCustomSubscriptions(newChange.data.customSubscriptions.map(item => new UserCustomSubscription(item)));
+            console.log("this.users[userIndex]", this.users[userIndex]);
+          }
           this.cd.detectChanges();
         }
       });
@@ -264,6 +291,14 @@ export class CompanyUserComponent implements OnInit {
   }
   ngOnDestroy(): void {
     this.userListService.onUnsubscribe();
+    this.users.forEach(item => {
+      item.selected = false;
+    })
+    this.reqUsers.forEach(item => {
+      item.selected = false;
+    })
+    this.draftEmailStateService.resetSelectedUsers();
+    this.usersStateService.clearFilter();
   }
 
 }
