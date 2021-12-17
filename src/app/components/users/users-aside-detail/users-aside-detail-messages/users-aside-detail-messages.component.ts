@@ -45,7 +45,9 @@ export class UsersAsideDetailMessagesComponent implements OnInit {
       if (data.totalElements === this.messages.length) this.userListService.setBlockList(true);
     })
   }
-
+  public getHtml(text) {
+    return this.sanitized.bypassSecurityTrustHtml(text);
+  }
   public getDate(date) {
     return moment(new Date(date)).format('DD/MM/YYYY');
   }

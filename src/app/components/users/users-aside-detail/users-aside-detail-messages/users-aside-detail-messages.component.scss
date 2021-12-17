@@ -14,3 +14,9 @@
 .qt-page-list__body {
     position: relative;
 }
+.messages-table__account-text {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
