@@ -136,7 +136,7 @@ export class CompanyUserComponent implements OnInit {
     this.header.filter.companiesDp.editItem = company;
     this.header.filter.filter.setCompany(id);
     this.header.filter.onChangeCounterFilter();
-    this.filter.setLeftFilters(null, id, null, null, null, null);
+    this.filter.setLeftFilters(null, id, null, null, null, []);
     this.cd.detectChanges();
   }
   showMobileFilter() {

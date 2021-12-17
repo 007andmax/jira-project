@@ -30,6 +30,7 @@ import * as SockJS from 'sockjs-client';
 import { ConstantsService } from '../constants/constants.service';
 import { CrmRealTimeService } from 'src/app/states/crm/crm-real-time.service';
 import { MarketingEmailRealTimeService } from 'src/app/states/marketing-email/marketing-email-real-time.service';
+import { WebsocketStateService } from 'src/app/states/websocket/websocket-state.service';
 
 
 /**
@@ -76,7 +77,8 @@ export class WebsocketService {
     private documentsRealTimeService: DocumentsRealTimeService,
     private constantsService: ConstantsService,
     private crmRealTimeService: CrmRealTimeService,
-    private marketingEmailRealTimeService: MarketingEmailRealTimeService
+    private marketingEmailRealTimeService: MarketingEmailRealTimeService,
+    private websocketStateService: WebsocketStateService,
 
   ) {
   }
@@ -117,6 +119,8 @@ export class WebsocketService {
       that.subsribeToDocumentsCategory();
       that.subsribeToCrm();
       that.subsribeToCustomSubscription();
+      console.log('1 ---------------', data);
+      if (data.command === "CONNECTED") this.websocketStateService.initConnection();
     }
     this.stompClient.debug = (data) => {
       console.log("debug", data);
