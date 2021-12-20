@@ -130,6 +130,7 @@ export class InvoicesAsideComponent implements OnInit {
   }
   public getUnUsedAmountReceived() {
     let totalPayment = this.getTotalPayment();
+    console.log("(this.amountReceived - totalPayment).toFixed(2)", (this.amountReceived - totalPayment).toFixed(2));
     return (this.amountReceived - totalPayment).toFixed(2);
   }
   getRemainingBalance() {

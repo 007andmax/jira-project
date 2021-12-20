@@ -32,6 +32,7 @@ import { AddUsersNotifyStateService } from 'src/app/services/modal/modal-add-use
 import { USERS_TO_EDIT_TICKET } from 'src/app/const/add-users-notify';
 import { StatusColor } from '../../class/status-color';
 import { find } from 'rxjs-compat/operator/find';
+import { TicketProfileUpdatesComponent } from './ticket-profile-updates/ticket-profile-updates.component';
 @Component({
   selector: 'app-ticket-edit-aside',
   templateUrl: './ticket-edit-aside.component.html',
@@ -45,6 +46,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
   @ViewChild('editUpdateForm') editUpdateForm: TicketProfileEditFormUpdateComponent;
   @ViewChild('rightPanel') rightPanel: TicketEditAsideRightPanelComponent;
   @ViewChild('ticketMessage') ticketMessage: TicketMessageComponent;
+  @ViewChild('ticketProfileUpdates') ticketProfileUpdates: TicketProfileUpdatesComponent;
 
   ticketProfile: TicketProfile = new TicketProfile();
   opened = false;
@@ -424,6 +426,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     this.ticketStateService.onTicketClosed();
     this.ticketMessage.reset();
     this.appService.toggleMobileAside(false);
+    this.ticketProfileUpdates.resetShowLoadMoreUpdates();
     if (!this.cd['destroyed']) {
       this.cd.detectChanges();
     }

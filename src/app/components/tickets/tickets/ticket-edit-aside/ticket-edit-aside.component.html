@@ -197,6 +197,7 @@
             ></app-ticket-message>
             <app-ticket-profile-attachments [attachments]="ticketProfile.attachments"></app-ticket-profile-attachments>
             <app-ticket-profile-updates
+                #ticketProfileUpdates
                 [hidden]="!ticketProfile.updates || ticketProfile.updates.length === 0"
                 (onFetchUpdates)="onFetchUpdates($event)"
                 [ticketProfile]="ticketProfile"

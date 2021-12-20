@@ -45,6 +45,7 @@ export class CompanyDashInvoiceComponent implements OnInit {
   }
 
   getRecentInvoiceList(companyName: string) {
+    this.recentInvoiceList = [];
     let getInvoice = this.companiesService.getRecentInvoice(companyName).subscribe((data: any) => {
       data.forEach(element => {
         let obj = element;

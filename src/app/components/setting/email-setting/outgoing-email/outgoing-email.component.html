@@ -203,14 +203,16 @@
             </div>
             <div class="f-col col-50 test-server">
                 <!-- <a href="javascript:;" class="btn-outline" >Test Server</a> -->
-                <input
+                <button
                     type="button"
                     class="btn-outline"
-                    value="Test Server"
                     appDisabledBtn
                     #testServerBtn="disabled"
                     (onClick)="checkTestServer()"
                 >
+                    <span *ngIf="!testServerBtn.isBlock()">Test Server</span>
+                    <app-preloader-ticket *ngIf="testServerBtn.isBlock()"></app-preloader-ticket>
+                </button>
                 <!-- disabled="{{ !smtp.useSMTP || smtpForm.invalid || !smtp.isValid }}" -->
             </div>
         </div>
