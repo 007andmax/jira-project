@@ -8,6 +8,7 @@ import { DraftEmailService } from 'src/app/services/draft-email/draft-email.serv
 import { User } from '../../users/class/user';
 import { Company } from 'src/app/interfaces/company/company';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { DraftEmailValidate } from './class/draft-email-validate';
 @Component({
   selector: 'app-draft-email',
   templateUrl: './draft-email.component.html',
@@ -60,6 +61,7 @@ export class DraftEmailComponent implements OnInit {
   action: string = null;
   tab: string = 'plain';
   draftEmail: DraftEmail = new DraftEmail();
+  validate: DraftEmailValidate = new DraftEmailValidate();
   uploadFiles: Array<File> = [];
   filesInfo: FilesInfo = new FilesInfo();
   usersSelected: Array<User> = [];
@@ -154,6 +156,8 @@ export class DraftEmailComponent implements OnInit {
     this.filesInfo.files.forEach(item => {
       if (!item.error) this.draftEmail.setAttachment(item.id)
     });
+
+    if (!this.validate.isValidate(this.draftEmail)) return;
     this.draftEmailService.sendMessage(this.draftEmail).subscribe((data) => {
       this.close();
       if (!this.cd['destroyed']) {

@@ -10,13 +10,24 @@
         ></div>
     </div>
     <div class="qt-aside-modern__content new-companies-content__modal--content">
-        <div class="qt-input-block">
+        <div
+            class="qt-input-block"
+            [ngClass]="{'--input-error':!validate.getSubject()}"
+        >
             <label>Subject</label>
             <input
                 [(ngModel)]="draftEmail.subject"
                 type="text"
+                maxlength="250"
                 placeholder="Write Subject line"
+                (input)="validate.resetSubject()"
             >
+            <mat-error
+                class="qt-tooltip-error"
+                *ngIf="!validate.getSubject()"
+            >
+                Subject is required
+            </mat-error>
         </div>
         <div class="draft-email-sidebar__select-users-container">
             <app-draft-email-recipients
