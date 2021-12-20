@@ -789,7 +789,14 @@ app-invoices-item,app-payment-item {
 .invoice-preview-notes {
   max-width: 530px;
 }
-
+.invoices-page__aside {
+  .messages-table__account {
+    white-space: unset;
+    text-overflow: unset;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+}
 .messages-table__account {
   padding: 16px;
   &-header {
