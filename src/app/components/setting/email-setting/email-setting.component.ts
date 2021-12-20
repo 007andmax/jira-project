@@ -80,6 +80,7 @@ export class EmailSettingComponent implements OnInit, OnDestroy {
           this.smtpSettings = response.smtpSettings;
           this.supportMailBox = response.supportMailBox;
           this.smtp = response.smtpSettings;
+          this.smtp.sendTestEmail = (response.smtpSettings.sendTestEmail) ? response.smtpSettings.sendTestEmail : false;
           this.supportMailBox = response.supportMailBox;
 
           this.smtp.testEmail = response.login;

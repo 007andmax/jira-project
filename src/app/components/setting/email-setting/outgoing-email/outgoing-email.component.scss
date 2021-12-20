@@ -20,7 +20,7 @@
     margin-bottom: 0;
     .f-col {
       width: 416px;
-      @media only screen and (max-width: 768px){
+      @media only screen and (max-width: 768px) {
         width: 100%;
       }
     }
@@ -31,18 +31,18 @@
 }
 
 .cmn-area.outgoing-email {
-  form{
-    @media only screen and (max-width: 768px){
+  form {
+    @media only screen and (max-width: 768px) {
       padding-bottom: 40px;
-      .btn{
-            position: fixed;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 1;
-            width: 100%;
-          }
-        }
+      .btn {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+        width: 100%;
+      }
+    }
   }
   margin-top: 3px;
   p {
@@ -58,7 +58,7 @@
   .f-col {
     &.col-25 {
       width: 25%;
-      @media only screen and (max-width: 576px){
+      @media only screen and (max-width: 576px) {
         width: 50%;
       }
     }
@@ -87,12 +87,12 @@
 .test-server {
   text-align: right;
   margin-top: -15px;
-  @media only screen and (max-width: 768px){
+  @media only screen and (max-width: 768px) {
     text-align: left;
   }
   .btn-outline {
     display: inline-block;
-    @media only screen and (max-width: 768px){
+    @media only screen and (max-width: 768px) {
       margin-left: 0;
       margin-top: 15px;
     }
@@ -100,7 +100,7 @@
 }
 
 .invalid-feedback {
-  margin-top: .25rem;
+  margin-top: 0.25rem;
   font-size: 80%;
   color: $error;
 }
@@ -121,3 +121,14 @@ input.ng-invalid.is-invalid {
 //   display: inline-block !important;
 //   opacity: 1 !important;
 // }
+.send-test-email {
+  min-height: 50px;
+}
+.test-server {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  input {
+    height: 36px;
+  }
+}
