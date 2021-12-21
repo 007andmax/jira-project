@@ -1,0 +1,85 @@
+<h3>Save to Subscription</h3>
+<table
+    class="display dataTable"
+    style="width:100%"
+>
+    <tbody>
+        <!-- <add-marketing-subscription-type
+            *ngIf="showAdd"
+            [marketingSubscriptionList]="marketingSubscriptionList"
+            (onClose)="showAdd = false"
+        ></add-marketing-subscription-type> -->
+        <tr
+            *ngFor="let item of marketingSubscriptionList; let i = index"
+            appClickOtside
+            [init]="item.isInitEdit && isEditMode"
+            [ngClass]="'edit-crm-container-' + i"
+            [class]="'.edit-crm-container-' + i"
+            (onOutSide)="onEditSubscription(item,$event)"
+            (click)="onSelectSubscription(item)"
+        >
+            <td
+                class="tax-name edit-category-name"
+                [ngClass]="{'--input-error' :  item.disableUpdate  }"
+            >
+                <input
+                    type="text"
+                    class="form-input"
+                    placeholder="Enter Name Category"
+                    [(ngModel)]="item.name"
+                    appKeyUpEnter
+                    (onChange)="onEditSubscription(item,$event)"
+                    maxlength="30"
+                    (input)="item.onInitEdit(true);item.checkDublicate(marketingSubscriptionList)"
+                >
+                <mat-error
+                    class="qt-tooltip-error"
+                    *ngIf="item.disableUpdate"
+                >
+                    This Industry is already occupied
+                </mat-error>
+            </td>
+            <td
+                class="action"
+                *ngIf="isEditMode"
+            >
+                <a
+                    href="javascript:;"
+                    data-tooltip="Remove"
+                    class="remove"
+                    (click)="removeSubscription(item)"
+                >
+                    <div class="icon__remove qt-sz-16 qt-bg-contain"></div>
+                </a>
+            </td>
+        </tr>
+    </tbody>
+    <button
+        class="qt-mb-24 qt-btn --outline --small"
+        (click)="showAddService = true"
+    >
+        Create Subscription
+    </button>
+    <button
+        class="qt-mb-24 qt-btn --outline --small"
+        (click)="showAddService = true"
+    >
+        Manage Subscription
+    </button>
+    <div class="qt-aside-modern__footer">
+        <div class="qt-df">
+            <button
+                class="qt-button qt-mr-12"
+                (click)="save()"
+            >
+                Save
+            </button>
+            <button
+                class="qt-button --gray"
+                (click)="close()"
+            >
+                Cancel
+            </button>
+        </div>
+    </div>
+</table>

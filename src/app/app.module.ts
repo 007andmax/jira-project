@@ -500,6 +500,7 @@ import { UserCustomSubscriptionComponent } from './components/users/users-aside/
 import { UserTableDefaultSubscriptionComponent } from './components/users/users-table/user-table-default-subscription/user-table-default-subscription.component';
 import { UserTableCustomSubscriptionComponent } from './components/users/users-table/user-table-custom-subscription/user-table-custom-subscription.component';
 import { UsersFilterSubscriptionsComponent } from './components/users/users-header/users-filter/users-filter-subscriptions/users-filter-subscriptions.component';
+import { AddUserToSubscribeComponent } from './components/users/add-user-to-subscribe/add-user-to-subscribe.component';
 
 
 declare var $: any;
@@ -948,7 +949,8 @@ declare var $: any;
     UserCustomSubscriptionComponent,
     UserTableDefaultSubscriptionComponent,
     UserTableCustomSubscriptionComponent,
-    UsersFilterSubscriptionsComponent
+    UsersFilterSubscriptionsComponent,
+    AddUserToSubscribeComponent
   ],
   imports: [
     BrowserModule,
@@ -1003,7 +1005,8 @@ declare var $: any;
     ModalAddUpdateTicketComponent,
     ModalAgentLinkComponent,
     ModalAddUsersNotifyComponent,
-    ModalEditCategoryProductComponent
+    ModalEditCategoryProductComponent,
+    AddUserToSubscribeComponent
     // RecurringTicketsComponent
   ],
   exports: [

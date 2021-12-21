@@ -16,6 +16,7 @@ import { TicketsFilterComponent } from '../../tickets/tickets/tickets-header/tic
 import { UsersFilterComponent } from './users-filter/users-filter.component';
 import { TYPE_LIST_ALL_USERS, TYPE_LIST_COMPANY_USERS } from 'src/app/const/users';
 import { UserCustomSubscription } from '../class/user-custom-subscription';
+import { AddUserToSubscribeComponent } from '../add-user-to-subscribe/add-user-to-subscribe.component';
 
 
 
@@ -80,6 +81,10 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   }
   isExistPrimaryContact() {
     return this._users.filter(item => item.selected).find(item => item.isContact);
+  }
+  showAddToSubscription() {
+    const modalRef = this.modalService.open(AddUserToSubscribeComponent, { windowClass: 'xs-modal' });
+    modalRef.componentInstance.users = this.reqUsers.filter(item => item.selected);
   }
   toggleAllUser(data) {
     this.selectAll = true;
