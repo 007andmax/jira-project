@@ -206,6 +206,7 @@ import { CompanyTicketsComponent } from './components/company-tickets/company-ti
 import { CompanyDashboardComponent } from './components/company-dashboard/company-dashboard.component';
 import { InventoryAddBodyComponent } from './components/inventory/inventory-add-aside/inventory-add-body/inventory-add-body.component';
 import { ServicePipe } from './pipe/service.pipe';
+import { DeviceServicePipe } from './pipe/device-service.pipe';
 import { LeftPanelSettingsComponent } from './components/left-panel/left-panel-settings/left-panel-settings.component';
 import { BillableComponent } from './components/billing/billable/billable.component';
 import { BillableItemComponent } from './components/billing/billable/billable-item/billable-item.component';
@@ -648,6 +649,7 @@ declare var $: any;
     CompanyDashboardComponent,
     InventoryAddBodyComponent,
     ServicePipe,
+    DeviceServicePipe,
     LeftPanelSettingsComponent,
     BillableComponent,
     BillableItemComponent,

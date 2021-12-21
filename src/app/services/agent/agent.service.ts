@@ -551,7 +551,7 @@ export class AgentService {
   public GetStartupPrograms(asset_ID) {
     const data = {
       AssetID: asset_ID,
-      MessageType: "GetStartupProgram",
+      MessageType: "GetStartupPrograms",
     };
 
     if (this.wsService.IsKafkaConnected) {

@@ -46,21 +46,21 @@
                               <tr>
                                   <th
                                       class="s-name"
-                                      (click)="onFilter('name')"
+                                      (click)="onFilter('Name')"
                                   >
                                       Name
                                       <span class="qt-table-modern__sorting"></span>
                                   </th>
                                   <th
                                       class="command"
-                                      (click)="onFilter('command')"
+                                      (click)="onFilter('Command')"
                                   >
                                       Command
                                       <span class="qt-table-modern__sorting"></span>
                                   </th>
                                   <th
                                       class="user"
-                                      (click)="onFilter('user')"
+                                      (click)="onFilter('User')"
                                   >
                                       User
                                       <span class="qt-table-modern__sorting"></span>
@@ -68,7 +68,7 @@
                               </tr>
                           </thead>
                           <tbody class="startup-table">
-                              <tr *ngFor="let item of startupList | soft: search; let i = index;">
+                              <tr *ngFor="let item of startupList | serv: search; let i = index;">
                                   
                                   <td class="s-name">
                                       <h5>{{item.Name || 'N/A'}}</h5>

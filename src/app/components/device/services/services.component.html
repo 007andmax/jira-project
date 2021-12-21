@@ -15,7 +15,7 @@
                               class="form-input"
                               [(ngModel)]="search"
                               name="search"
-                              placeholder="Search Software…"
+                              placeholder="Search service…"
                               autocomplete="off"
                           >
                       </form>
@@ -46,21 +46,21 @@
                               <tr>
                                   <th
                                       class="s-name"
-                                      (click)="onFilter('name')"
+                                      (click)="onFilter('Name')"
                                   >
                                       Service Name
                                       <span class="qt-table-modern__sorting"></span>
                                   </th>
                                   <th
                                       class="description"
-                                      (click)="onFilter('description')"
+                                      (click)="onFilter('Description')"
                                   >
                                       Description
                                       <span class="qt-table-modern__sorting"></span>
                                   </th>
                                   <th
                                       class="status"
-                                      (click)="onFilter('status')"
+                                      (click)="onFilter('Status')"
                                   >
                                       Status
                                       <span class="qt-table-modern__sorting"></span>
@@ -68,13 +68,13 @@
                               </tr>
                           </thead>
                           <tbody class="service-table">
-                              <tr *ngFor="let service of serviceList | soft: search; let i = index;">
+                              <tr *ngFor="let service of serviceList | serv: search; let i = index;">
                                   
                                   <td class="s-name">
                                       <h5>{{service.Name || 'N/A'}}</h5>
                                   </td>
                                   <td class="description">{{service.Description || 'N/A'}}</td>
-                                  <td class="status">{{service.Status || 'N/A'}}</td>
+                                  <td class="status">{{ (service.Started ? 'Running' : 'Stopped')}}</td>
                                   
                               </tr>
                           </tbody>

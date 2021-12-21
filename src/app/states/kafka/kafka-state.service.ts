@@ -58,7 +58,7 @@ export class KafkaStateService {
         case "GetServices":
           this.handleGetService(newChange);
           break;
-        case "GetStartupProgram":
+        case "GetStartupPrograms":
           this.handleGetStartupPrograms(newChange);
           break;
       }
