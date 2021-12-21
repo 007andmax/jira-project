@@ -4,16 +4,17 @@
     style="width:100%"
 >
     <tbody>
-        <!-- <add-marketing-subscription-type
+        <add-marketing-subscription-type
             *ngIf="showAdd"
+            [mode]="MODE_ADD_BY_MODAL"
             [marketingSubscriptionList]="marketingSubscriptionList"
             (onClose)="showAdd = false"
-        ></add-marketing-subscription-type> -->
+        ></add-marketing-subscription-type>
         <tr
             *ngFor="let item of marketingSubscriptionList; let i = index"
             appClickOtside
-            [init]="item.isInitEdit && isEditMode"
-            [ngClass]="'edit-crm-container-' + i"
+            [init]="item.isInitEdit && isSelectedForEdit(item)"
+            [ngClass]="['edit-crm-container-' + i , isSelected(item) ? 'selected' : '']"
             [class]="'.edit-crm-container-' + i"
             (onOutSide)="onEditSubscription(item,$event)"
             (click)="onSelectSubscription(item)"
@@ -22,7 +23,12 @@
                 class="tax-name edit-category-name"
                 [ngClass]="{'--input-error' :  item.disableUpdate  }"
             >
+                <span
+                    *ngIf="!isSelectedForEdit(item)"
+                    [textContent]="item.name"
+                ></span>
                 <input
+                    *ngIf="isSelectedForEdit(item)"
                     type="text"
                     class="form-input"
                     placeholder="Enter Name Category"
@@ -45,6 +51,14 @@
             >
                 <a
                     href="javascript:;"
+                    data-tooltip="Edit"
+                    class="edit"
+                    (click)="editSubscription(item)"
+                >
+                    <div class="icon__edit qt-bg-contain  qt-sz-16"></div>
+                </a>
+                <a
+                    href="javascript:;"
                     data-tooltip="Remove"
                     class="remove"
                     (click)="removeSubscription(item)"
@@ -54,31 +68,43 @@
             </td>
         </tr>
     </tbody>
+    <div
+        class="loading"
+        *ngIf="showPreloader"
+    ></div>
     <button
         class="qt-mb-24 qt-btn --outline --small"
-        (click)="showAddService = true"
+        (click)="showAdd = true"
     >
         Create Subscription
     </button>
     <button
         class="qt-mb-24 qt-btn --outline --small"
-        (click)="showAddService = true"
+        (click)="toggleEditMode(!isEditMode)"
     >
         Manage Subscription
     </button>
     <div class="qt-aside-modern__footer">
         <div class="qt-df">
             <button
-                class="qt-button qt-mr-12"
-                (click)="save()"
+                *ngIf="isEditMode"
+                class="qt-button --gray qt-mr-12"
+                (click)="toggleEditMode(!isEditMode)"
             >
-                Save
+                Back
             </button>
             <button
-                class="qt-button --gray"
+                *ngIf="!isEditMode"
+                class="qt-button --gray qt-mr-12"
                 (click)="close()"
             >
                 Cancel
+            </button>
+            <button
+                class="qt-button "
+                (click)="save()"
+            >
+                Save
             </button>
         </div>
     </div>

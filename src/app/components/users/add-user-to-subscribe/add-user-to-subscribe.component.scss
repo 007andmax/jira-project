@@ -1,0 +1,123 @@
+/*** All css files include ***/
+@import "./src/assets/styles/variable";
+@import "./src/assets/scss/mixin";
+@import "./src/assets/scss/custom";
+@import "./src/assets/styles/fonts";
+
+.tax-name {
+    width: auto;
+    position: relative;
+    @media only screen and (max-width: 576px) {
+        width: 105px;
+    }
+}
+.rate {
+    width: 170px;
+    text-align: center;
+    @media only screen and (max-width: 576px) {
+        width: 55px;
+    }
+}
+.default {
+    width: 100px;
+    text-align: center;
+    text-transform: none;
+    @media only screen and (max-width: 576px) {
+        width: 90px;
+    }
+    .cmn-checkbox {
+        display: inline-block;
+    }
+}
+.action {
+    width: 40px;
+    position: relative;
+    @media only screen and (max-width: 576px) {
+        width: 50px;
+    }
+}
+.modal-body {
+    .f-row {
+        margin-bottom: 0;
+    }
+}
+
+.checkbox-header {
+    width: 46px;
+}
+.remove {
+    margin-top: 0px !important;
+}
+
+.error-text-align {
+    text-align: left !important;
+}
+.add-category-container {
+    /deep/ .add-tax-dropdown {
+        right: 0px;
+        &:after {
+            right: 14px;
+            left: auto;
+        }
+    }
+}
+.tag-color {
+    display: block;
+    width: 16px;
+    height: 16px;
+    border-radius: 40px;
+}
+.edit-category-name {
+    input {
+        border: 1px solid transparent;
+        border-radius: 4px;
+        outline: none;
+        padding: 2px 2px 2px 8px;
+        outline: none;
+        font-weight: 500;
+        color: $primary-2;
+        &:hover,
+        &:focus {
+            border-color: $gray-600;
+        }
+        &::placeholder {
+            font-weight: 400;
+        }
+    }
+}
+add-marketing-subscription-type {
+    display: contents;
+    /deep/ .add-category-container {
+        td {
+            background-color: #f4fbff !important;
+        }
+    }
+}
+.qt-checkbox {
+    margin: 0;
+    padding: 0;
+}
+.dataTable {
+    position: relative;
+    min-height: 200px;
+}
+.cleat-height-dataTable {
+    min-height: auto;
+}
+.loading {
+    top: calc(50% - 25px) !important;
+    left: calc(50% - 25px) !important;
+    right: auto !important;
+}
+tbody {
+    tr {
+        .rate {
+            color: #16a4fa;
+        }
+    }
+}
+.selected {
+    td {
+        background: #f4fbff;
+    }
+}

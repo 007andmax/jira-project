@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { MODE_ADD_BY_MODAL } from 'src/app/const/user-subscription';
 import { MarketingEmailService } from 'src/app/services/marketing-email/marketing-email.service';
 import { MarketingSubscriptionType } from '../class/marketing-subscription-type';
 
@@ -10,9 +11,10 @@ import { MarketingSubscriptionType } from '../class/marketing-subscription-type'
   styleUrls: ['./add-marketing-subscription-type.component.scss']
 })
 export class AddMarketingSubscriptionTypeComponent implements OnInit {
-
+  MODE_ADD_BY_MODAL = MODE_ADD_BY_MODAL;
   name: string = "";
   disableCreate: boolean = false;
+  @Input() mode: string;
   @Input() marketingSubscriptionList: Array<MarketingSubscriptionType> = [];
   @Output() onClose: EventEmitter<any> = new EventEmitter();
   constructor(private marketingEmailService: MarketingEmailService) { }

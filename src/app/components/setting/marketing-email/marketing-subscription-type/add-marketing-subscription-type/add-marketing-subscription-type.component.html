@@ -6,7 +6,7 @@
     [class]="'.add-crm-industry-container'"
     (onOutSide)="save()"
 >
-    <td></td>
+    <td *ngIf="mode !== MODE_ADD_BY_MODAL"></td>
     <td
         class="tax-name add-industry-name"
         [ngClass]="{'--input-error' : disableCreate}"
@@ -28,6 +28,12 @@
             required
         >
     </td>
-    <td class="rate"></td>
-    <td class="action"></td>
+    <td
+        *ngIf="mode !== MODE_ADD_BY_MODAL"
+        class="rate"
+    ></td>
+    <td
+        *ngIf="mode !== MODE_ADD_BY_MODAL"
+        class="action"
+    ></td>
 </tr>
