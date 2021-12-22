@@ -6,7 +6,7 @@ import { UsersHeaderService } from './services/users-header.service';
 import { User } from '../class/user';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ARCHIVE_USER, ARCHIVE_USERS } from 'src/app/const/confirm';
+import { ARCHIVE_USER, ARCHIVE_USERS, MULTI_DELETE_USER_FROM_SUBSCRIPTION } from 'src/app/const/confirm';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { UsersService } from 'src/app/services/users/users.service';
@@ -17,6 +17,9 @@ import { UsersFilterComponent } from './users-filter/users-filter.component';
 import { TYPE_LIST_ALL_USERS, TYPE_LIST_COMPANY_USERS } from 'src/app/const/users';
 import { UserCustomSubscription } from '../class/user-custom-subscription';
 import { AddUserToSubscribeComponent } from '../add-user-to-subscribe/add-user-to-subscribe.component';
+import { MarketingEmailService } from 'src/app/services/marketing-email/marketing-email.service';
+import { forkJoin, of, Subscription } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 
 
@@ -39,6 +42,7 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   @Input() count: number = 0;
   @Input() type: string;
   @ViewChild('filter') filter: UsersFilterComponent;
+  sub: Subscription = new Subscription();
   countFilter: number = 0;
   toggleFilter: boolean = true;
   currentUser: CurrentUser = new CurrentUser();
@@ -50,10 +54,19 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     private usersService: UsersService,
+    private marketingEmailService: MarketingEmailService,
     private usersHeaderService: UsersHeaderService) {
   }
 
   ngOnInit() {
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === MULTI_DELETE_USER_FROM_SUBSCRIPTION) {
+          this.onRemoveUsersFromSubscription();
+        }
+      }
+    })
+    this.sub.add(getConfirm);
     this.currentUser = this.usersStateService.getCurrentUser();
   }
   public showAsideForDraftEmail() {
@@ -102,10 +115,35 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   addUser() {
     this.usersStateService.onOpenAsige();
   }
+  isUserOneCustomSubscription() {
+    return this.filter.filter.customSubscriptions.length === 1;
+  }
+  removeUsersFromSubscription() {
+    this.confirmStateService.setConfirmAction(MULTI_DELETE_USER_FROM_SUBSCRIPTION);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    modalRef.componentInstance.message = `Remove subscription`;
+
+
+  }
+  onRemoveUsersFromSubscription() {
+    let users = this.reqUsers.filter(item => item.selected);
+    forkJoin(users.map(item => this.marketingEmailService.removeUser(item.id, this.filter.filter.customSubscriptions[0].id).pipe(map((res) => res),
+      catchError(error => of(undefined)))))
+      .subscribe(
+        () => {
+          this.selectAll = false;
+          this._users.forEach(item => item.selected = false);
+          this.reqUsers.forEach(item => item.selected = false);
+        },
+        error => {
+        }
+      );
+  }
   onChangeCountFilter(data) {
     this.countFilter = data;
   }
   ngOnDestroy(): void {
+    this.sub.unsubscribe();
     this.usersHeaderService.onUnsubscribe();
   }
 }

@@ -45,11 +45,16 @@ export class UsersAsideDetailMessagesComponent implements OnInit {
       if (data.totalElements === this.messages.length) this.userListService.setBlockList(true);
     })
   }
+  getBody(val) {
+    let value = val;
+    if (val && val.length >= 180) return value.substring(0, 180);
+    return val;
+  }
   public getHtml(text) {
     return this.sanitized.bypassSecurityTrustHtml(text);
   }
   public getDate(date) {
-    return moment(new Date(date)).format('DD/MM/YYYY');
+    return moment(new Date(date)).format('DD MMM');
   }
   public getTime(date) {
     return moment(new Date(date)).format('HH:MM A');

@@ -20,3 +20,55 @@
     -ms-user-select: text;
     user-select: text;
 }
+.messages-table-user {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    .messages-table-user-name {
+        font-size: 12px;
+        color: #212b36;
+    }
+    .messages-table-user-email {
+        font-size: 12px;
+        color: #637382;
+    }
+}
+.messages-table-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    &::after {
+        position: absolute;
+        content: " ";
+        height: 1px;
+        background: #edf0f2;
+        right: 0px;
+        left: 0px;
+        bottom: 0px;
+    }
+}
+.messages-table__account-date,
+.messages-table__account-time {
+    font-size: 11px;
+    color: #919eab;
+}
+h3 {
+    font-size: 16px;
+    font-weight: 500;
+    font-family: "Inter", sans-serif;
+    line-height: 1.5;
+    color: #212b36;
+}
+.messages-table__account-text {
+    font-size: 13px;
+    font-family: "Inter", sans-serif;
+    color: #212b36;
+}
+.messages-table__account {
+    &::after {
+        display: none;
+    }
+}
