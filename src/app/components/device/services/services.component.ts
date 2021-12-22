@@ -80,7 +80,6 @@ export class ServicesComponent implements OnInit {
   }
 
   public searchServices(e) {
-    debugger;
     if(!this.search) {
       this.serviceList = Object.assign([], this.origList);
       return;
@@ -98,7 +97,7 @@ export class ServicesComponent implements OnInit {
       ]);
     });
     let fileName = "Services";
-    this.excelService.generateExcel(downloadCsvList, fileName, "Services");
+    this.excelService.generateExcel(downloadCsvList, fileName, "services");
   }
 
   public getPdfData() {
@@ -203,7 +202,7 @@ export class ServicesComponent implements OnInit {
                         <tr>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 20%;">Name</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 45%;">Description</th>
-                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 14%;">Status</th>                            
+                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 14%;">Status</th>
                         </tr>
                     </thead>
                     <tbody>`;

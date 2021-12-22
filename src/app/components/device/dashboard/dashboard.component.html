@@ -49,7 +49,7 @@
                                             <div>{{ displayValue(20,asset.Name) }}</div>
                                         </span>
                                     </li>
-                                    <li>
+                                    <li style="width:28%">
                                         <span>Warranty Date</span>
                                         <span class="edit-field">
                                             <input
@@ -63,13 +63,13 @@
                                             >
                                         </span>
                                     </li>
-                                    <li>
+                                    <li style="width:37%">
                                         <span>Window Version</span>
                                         <span
                                             class="edit-field"
-                                            [attr.data-tooltip]="tooltip(20,caption)"
+                                            [attr.data-tooltip]="tooltip(27,caption)"
                                         >
-                                            <div>{{ displayValue(20,caption) }}</div>
+                                            <div style="width: 125%;">{{ displayValue(27,caption) }}</div>
                                         </span>
                                     </li>
                                     <li>
@@ -83,7 +83,7 @@
                                             >
                                         </span>
                                     </li>
-                                    <li>
+                                    <li style="width:28%">
                                         <span>Deployment Date</span>
                                         <span class="edit-field">
                                             <input
@@ -97,7 +97,7 @@
                                             >
                                         </span>
                                     </li>
-                                    <li>
+                                    <li style="width:37%">
                                         <span>Manufacturer</span>
                                         <span class="edit-field">
                                             <input
@@ -119,7 +119,7 @@
                                             >
                                         </span>
                                     </li>
-                                    <li>
+                                    <li style="width:28%">
                                         <span>Install Date</span>
                                         <span class="edit-field">
                                             <input
@@ -133,7 +133,7 @@
                                             >
                                         </span>
                                     </li>
-                                    <li>
+                                    <li style="width:37%">
                                         <span>Model</span>
                                         <span class="edit-field">
                                             <input
@@ -150,13 +150,13 @@
                                             <div>{{ asset.AgentVersion }}</div>
                                         </span>
                                     </li>
-                                    <li>
+                                    <li style="width:28%">
                                         <span>Last Reboot</span>
                                         <div>
                                             {{ asset.LastRebootDate | date: DateTimeFormat }}
                                         </div>
                                     </li>
-                                    <li>
+                                    <li style="width:37%">
                                         <span>Serial Number</span>
                                         <span class="edit-field">
                                             <input

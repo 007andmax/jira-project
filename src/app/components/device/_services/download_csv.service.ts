@@ -35,6 +35,10 @@ export class ExcelService {
       [(typeArr = ["Device Name", "Drive Letter", "Total Space","Used", "Free"])];
     } else if (type === "devicedeploymentwarrantyreport"){
       [(typeArr = ["Device Name", "Domain", "Manufacturer","Subnet", "Gateway", "ExternalIP"])];
+    } else if (type === "services"){
+      [(typeArr = ["Services Name", "Description", "Status"])];
+    } else if (type === "startupprogrammes"){
+      [(typeArr = ["Name", "Command", "User"])];
     } else
       [(typeArr = ["Software Name", "Publisher", "Version", "Installed On"])];
     let csvData = this.ConvertToCSV(data, typeArr, type);
@@ -74,7 +78,9 @@ export class ExcelService {
       type === "devicenetworkdetailreport" ||
       type === "applicationbycompanyreport" ||
       type === "devicediskspacereport" ||
-      type === "devicedeploymentwarrantyreport"
+      type === "devicedeploymentwarrantyreport" ||
+      type === "services" ||
+      type === "startupprogrammes"
     ) {
       row = "S.No,";
 
@@ -95,7 +101,9 @@ export class ExcelService {
       type === "devicenetworkdetailreport" ||
       type === "applicationbycompanyreport" ||
       type === "devicediskspacereport" ||
-      type === "devicedeploymentwarrantyreport"
+      type === "devicedeploymentwarrantyreport" ||
+      type === "services" ||
+      type === "startupprogrammes"
     ) {
       str += row + "\r\n";
     }
@@ -113,7 +121,9 @@ export class ExcelService {
         type === "devicenetworkdetailreport" ||
         type === "applicationbycompanyreport" ||
         type === "devicediskspacereport" ||
-        type === "devicedeploymentwarrantyreport"
+        type === "devicedeploymentwarrantyreport" ||
+        type === "services" ||
+        type === "startupprogrammes"
       )
         [(line = i + 1 + "")];
       for (let index in headerList) {
@@ -132,7 +142,9 @@ export class ExcelService {
           type === "devicenetworkdetailreport" ||
           type === "applicationbycompanyreport" ||
           type === "devicediskspacereport" ||
-          type === "devicedeploymentwarrantyreport"
+          type === "devicedeploymentwarrantyreport" ||
+          type === "services" ||
+          type === "startupprogrammes"
         ) {
           line += "," + array[i][index];
         } else {

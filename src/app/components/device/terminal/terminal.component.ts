@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef, ChangeDetectorRef, NgZone } from '@angular/core';
 import { TerminalService } from '../_services/terminal.service';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
@@ -94,6 +94,7 @@ export class TerminalComponent implements OnInit {
   type: string = '';
   DateTimeHistoryFormat = CONFIGCONSTANTS.DateTimeHistoryFormat;
   asset: any = undefined;
+  kafkaMessage: any;
   constructor(private terminalService: TerminalService,
     private toastr: ToastrService,
     private modalService: NgbModal,
@@ -103,7 +104,7 @@ export class TerminalComponent implements OnInit {
     private shellStateService: ShellStateService,
     public cd: ChangeDetectorRef,
     private agentService: AgentService,
-    private kafkaStateService: KafkaStateService,
+    private kafkaStateService: KafkaStateService
   ) { }
 
   ngOnInit() {
@@ -135,8 +136,30 @@ export class TerminalComponent implements OnInit {
         this.agentService.setAccessToken(data.AccessToken);
         this.agentService.getAssetByGuid(this._id).subscribe((resp) => {
           this.asset = resp[0];
+          this.GetCurrentConfig(resp[0].ID);
+          this.CurrentUser();
         });
       });
+  }
+
+  GetCurrentConfig(assetID: any) {
+    this.agentService.GetCurrentConfig(assetID);
+  }
+
+  CurrentUser() {
+    this.kafkaStateService.onCurrentConfig.subscribe((resp) => {
+      if (resp.length > 0) {
+        if (this.asset.ID === resp[0].key) {
+          this.kafkaMessage = JSON.parse(resp[0].Value);
+          this.asset.CurrentUser = this.kafkaMessage.CurrentLoggedInUser;
+          if (this.kafkaMessage.IdleTime != null) {
+            let Time = this.kafkaMessage.IdleTime.split("Idle for");
+            this.asset.IdelTime = Time[1] != "" ? Time[1] : "";
+          }
+        }
+        this.asset.online = true;
+      }
+    });
   }
 
   onTerminalPowershall()
@@ -585,18 +608,16 @@ export class TerminalComponent implements OnInit {
   }
 
   copyToTerminal(cmd, type, file) {
-    if (JSON.parse(localStorage.getItem('deviceDetail_' + this._id)).online === true) {
-      this.finalCommand = cmd;
-      // let arr = cmd.split(/\r*\n/)
-      // this.splitCommand[this.splitCommand.length - 1] = this.splitCommand[this.splitCommand.length - 1] + arr[0];
-      // if (arr.splice(0, 1).length > 0) {
-      //   this.splitCommand = this.splitCommand.concat(arr.splice(0, 1));
-      // }
-      this.sessionId = localStorage.getItem('uuid_' + this._id);
-      this.sendCommand(type, file);
-    } else {
-      this.toastr.error('The device is offline');
-    }
+      if(this.asset.online === true)
+      {
+        this.finalCommand = cmd;
+        this.sessionId = localStorage.getItem('uuid_' + this._id);
+        this.sendCommand(type, file);
+      }
+      else
+      {
+        this.toastr.error('The device is offline');
+      }
 
   }
 
@@ -605,7 +626,7 @@ export class TerminalComponent implements OnInit {
       "companyId": localStorage.getItem('company_id'),
       "agentId": this._id,
       "sessionId": this.sessionId,
-      "scriptType": type === '' ? this.scriptTyped.toLowerCase() : type.toLowerCase(), // 'powershell'
+      "scriptType": type === '' || type === null ? this.scriptTyped.toLowerCase() : type.toLowerCase(), // 'powershell'
       "script": this.finalCommand,
       "file": file,
       "keepOpen": true

@@ -93,8 +93,8 @@ export class StartupComponent implements OnInit {
         element.User || "N/A"
       ]);
     });
-    let fileName = "Services";
-    this.excelService.generateExcel(downloadCsvList, fileName, "Services");
+    let fileName = "Startup Programmes";
+    this.excelService.generateExcel(downloadCsvList, fileName, "startupprogrammes");
   }
 
   public getPdfData() {
@@ -199,7 +199,7 @@ export class StartupComponent implements OnInit {
                         <tr>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 20%;">Name</th>
                             <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 45%;">Description</th>
-                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 14%;">Status</th>                            
+                            <th style="border: solid 1px #dfe3e8;background-color: #f9fafb;font-size: 11px;color: #364656;font-family: Arial, Helvetica, sans-serif;padding: 10px 12px;text-align: left;width: 14%;">Status</th>
                         </tr>
                     </thead>
                     <tbody>`;
