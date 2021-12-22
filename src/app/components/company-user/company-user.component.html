@@ -6,6 +6,8 @@
         [count]="count"
         (onChangeFilterField)="onFilter($event)"
         [users]="users"
+        [reqUsers]="reqUsers"
+        [selectAll]="selectAll"
         (onSelectAllUser)="onSelectAllUser($event)"
     ></app-users-header>
     <div class="qt-page-list__body">
@@ -30,6 +32,7 @@
                             [jobTitleList]="jobTitleList"
                             [showArchivedUsers]="showArchivedUsers"
                             [user]="user"
+                            (onSelectUser)="onSelectUser($event)"
                         ></app-users-table>
                     </ng-template>
                 </tbody>

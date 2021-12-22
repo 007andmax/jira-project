@@ -38,6 +38,7 @@ export class CompanyUserComponent implements OnInit {
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
   count: number = 0;
+  selectAll: boolean = false;
   TYPE_LIST_COMPANY_USERS = TYPE_LIST_COMPANY_USERS;
   jobTitleList: Array<CrmCompanyJobTitle> = [];
   listCustomSubscription: Array<UserCustomSubscription> = [];
@@ -70,6 +71,8 @@ export class CompanyUserComponent implements OnInit {
 
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
       this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title, data.defaultSubscriptions, data.customSubscriptions);
+      this.selectAll = false;
+      this.reqUsers.forEach(item => item.selected = false);
       this.setDefaultScoll();
       this.onScroll();
     })
@@ -162,6 +165,36 @@ export class CompanyUserComponent implements OnInit {
   showMobileFilter() {
     document.body.querySelector('app-left-panel-users').classList.add('show');
   }
+  onSelectAllUser(event) {
+    if (event.target.checked) {
+      this.selectAll = true;
+      this.users.forEach(item => {
+        item.selected = true;
+      })
+
+      this.draftEmailStateService.resetSelectedUsers();
+      this.filter.getFilterList(this.reqUsers, this.companies).forEach(item => {
+        this.reqUsers.find(user => user.id === item.id).selected = true;
+      })
+
+      this.reqUsers.forEach(user => {
+        if (user.selected) this.draftEmailStateService.addSelectedUser(user);
+      })
+    } else {
+      this.selectAll = false;
+      this.users.forEach(item => {
+        item.selected = false;
+      })
+      this.reqUsers.forEach(item => {
+        item.selected = false;
+      })
+      this.draftEmailStateService.resetSelectedUsers();
+    }
+  }
+  onSelectUser(user) {
+    this.reqUsers.find(item => item.id === user.id).selected = user.selected;
+    this.selectAll = (this.filter.getFilterList(this.reqUsers, this.companies).find(item => !item.selected)) ? false : true;
+  }
   private onInitSubscribe() {
     setTimeout(() => {
 
@@ -186,32 +219,6 @@ export class CompanyUserComponent implements OnInit {
       this.userListService.addSubscription(stompClient);
 
     }, 3000);
-  }
-  onSelectAllUser(event) {
-    if (event.target.checked) {
-      this.users.forEach(item => {
-        item.selected = true;
-      })
-      /* let list_user_table = document.body.querySelectorAll('app-users-table');
-       list_user_table.forEach(item => {
-         (<any>item.querySelector('input[type="checkbox"]')).checked = true;
- 
-       });*/
-      this.draftEmailStateService.resetSelectedUsers();
-      this.users.forEach(user => {
-        this.draftEmailStateService.addSelectedUser(user);
-      })
-    } else {
-      this.users.forEach(item => {
-        item.selected = false;
-      })
-      this.draftEmailStateService.resetSelectedUsers();
-      /* let list_user_table = document.body.querySelectorAll('app-users-table');
-       list_user_table.forEach(item => {
-         (<any>item.querySelector('input[type="checkbox"]')).checked = false;
- 
-       });*/
-    }
   }
   private onDeArchiveUser(id) {
     let ids = [];
