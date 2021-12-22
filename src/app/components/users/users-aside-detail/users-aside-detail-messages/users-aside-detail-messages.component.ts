@@ -5,6 +5,7 @@ import { UserListService } from '../../services/user-list.service';
 import { UserMessage } from './class/user-message';
 import * as moment from "moment";
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
   selector: 'users-aside-detail-messages',
@@ -20,6 +21,7 @@ export class UsersAsideDetailMessagesComponent implements OnInit {
   public infiniteScrollDisabled = false;
   constructor(private usersService: UsersService,
     private sanitized: DomSanitizer,
+    private usersStateService: UsersStateService,
     private userListService: UserListService,) { }
 
   ngOnInit() {
@@ -44,6 +46,9 @@ export class UsersAsideDetailMessagesComponent implements OnInit {
       this.showPreloader = false;
       if (data.totalElements === this.messages.length) this.userListService.setBlockList(true);
     })
+  }
+  showFullMessage(data) {
+    this.usersStateService.showMessageAside(data);
   }
   getBody(val) {
     let value = val;

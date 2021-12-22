@@ -21,7 +21,7 @@
                     let-i="index"
                     [ngForTrackBy]="trackById"
                 >
-                    <tr>
+                    <tr (click)="showFullMessage(message)">
                         <td class="messages-table__account">
                             <div class="messages-table-header">
                                 <div class="messages-table-user">

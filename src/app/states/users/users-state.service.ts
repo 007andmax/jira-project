@@ -24,6 +24,7 @@ export class UsersStateService {
   onFilter: EventEmitter<any> = new EventEmitter();
   openAside: EventEmitter<any> = new EventEmitter();
   openEditAside: EventEmitter<any> = new EventEmitter();
+  openMessageAside: EventEmitter<any> = new EventEmitter();
   openDetailAside: EventEmitter<any> = new EventEmitter();
   closeDetailAside: EventEmitter<any> = new EventEmitter();
   onChangeUserPermissions: EventEmitter<any> = new EventEmitter();
@@ -94,6 +95,9 @@ export class UsersStateService {
       this.currentUser = new CurrentUser(data);
       this.onInitCurrentUser(data);
     })
+  }
+  showMessageAside(data) {
+    this.openMessageAside.emit(data);
   }
   public setShowArchivedCompanies(data) {
     this.showArchivedCompanies = data;
