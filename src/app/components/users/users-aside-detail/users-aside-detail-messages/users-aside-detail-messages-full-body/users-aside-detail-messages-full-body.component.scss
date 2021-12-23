@@ -1,0 +1,133 @@
+.qt-aside-modern {
+    width: 600px;
+}
+.qt-aside-modern__content {
+    padding: 0px !important;
+    background-color: #f9fafb;
+    height: 100% !important;
+}
+.message-full-user {
+    display: flex;
+    align-items: flex-start;
+    font-family: "Inter", sans-serif;
+    .message-full-user-name {
+        font-size: 13px;
+        color: #212b36;
+        font-weight: 600;
+        margin-right: 4px;
+    }
+    .message-full-user-email {
+        font-size: 13px;
+        color: #637382;
+        font-weight: 400;
+    }
+}
+.message-full-from {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+.message-full-header {
+    padding: 16px 24px;
+    background-color: #fff;
+}
+.message-full__account-date {
+    font-size: 11px;
+    color: #919eab;
+    text-transform: uppercase;
+}
+.message-full__account-data {
+    justify-content: flex-end;
+    display: flex;
+    align-items: center;
+}
+h3 {
+    font-size: 20px;
+    font-weight: 600;
+    font-family: "Inter", sans-serif;
+    line-height: 1.5;
+    color: #212b36;
+}
+.message-full__account-text {
+    font-size: 13px;
+    font-family: "Inter", sans-serif;
+    color: #212b36;
+}
+.message-full__account {
+    &::after {
+        display: none;
+    }
+}
+.message-full__account-header {
+    color: #0747a6;
+    display: inline-block;
+    background-color: rgba(7, 71, 166, 0.06);
+    padding: 5px 6px;
+    font-size: 9px;
+    line-height: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.users-table__name--avatar {
+    height: 24px;
+    width: 24px;
+    min-width: 24px;
+    border-radius: 50%;
+    background-color: #7c77cb;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    margin-right: 10px;
+    font-weight: 600;
+}
+.users-table__name--user-name {
+    font-size: 12px;
+    color: #212b36;
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+}
+.users-table__name--email {
+    font-size: 12px;
+    color: #637382;
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+}
+.message-full-to-list-item {
+    display: inline-block;
+    padding: 6px 8px;
+    border-radius: 8px;
+    border: solid 1px #edf2f6;
+    margin-right: 4px;
+}
+.message-full-to-list {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.message-full-to {
+    display: flex;
+    align-items: center;
+    .message-full-to-text {
+        margin: 0px 25px 0px 0px;
+    }
+}
+.message-full-to-list-item-info {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.33;
+}
+.message-full-body {
+    border-radius: 12px;
+    border: solid 1px #edf0f2;
+    margin: 24px;
+    padding: 16px;
+    background-color: #fff;
+}
+.messages-table__account-text {
+    font-size: 14px;
+    font-family: "Inter", sans-serif;
+    color: #454f5b;
+}
