@@ -66,6 +66,42 @@ export class AgentService {
     this.AccessToken = data;
   }
 
+  public servicePauseCommand(data:any)
+  {
+    if (this.wsService.IsKafkaConnected) {
+      console.log("sending servicepause command:" + data.Value);
+      this.http
+        .post(this.apiurl + "sendMessageToKafka", data)
+        .subscribe(() => {});
+    } else {
+      setTimeout(() => this.servicePauseCommand(data), 3000);
+    }
+  }
+
+  public serviceRestartCommand(data:any)
+  {
+    if (this.wsService.IsKafkaConnected) {
+      console.log("sending servicerestart command:" + data.Value);
+      this.http
+        .post(this.apiurl + "sendMessageToKafka", data)
+        .subscribe(() => {});
+    } else {
+      setTimeout(() => this.serviceRestartCommand(data), 3000);
+    }
+  }
+
+  public serviceStartCommand(data:any)
+  {
+    if (this.wsService.IsKafkaConnected) {
+      console.log("sending servicestart command:" + data.Value);
+      this.http
+        .post(this.apiurl + "sendMessageToKafka", data)
+        .subscribe(() => {});
+    } else {
+      setTimeout(() => this.serviceStartCommand(data), 3000);
+    }
+  }
+
   public getDeviceDiskDriveByGuid(companyGuid) {
     return this.http
       .get(`${this.apiAgent}report/DeviceDiskDrive/${companyGuid}`,{
@@ -351,7 +387,7 @@ export class AgentService {
       setTimeout(() => this.SendNetworkCommand(data), 3000);
     }
   }
-  
+
   public addNewTag(Tag) {
     return this.http
       .put(

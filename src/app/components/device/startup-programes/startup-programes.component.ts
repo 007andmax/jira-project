@@ -16,6 +16,7 @@ import * as moment from 'moment';
 })
 export class StartupComponent implements OnInit {
 
+  public search:string;
   public startupList: any[] = [];
   public loading: boolean;
   public Id: string;

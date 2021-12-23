@@ -15,6 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ServicesComponent implements OnInit {
 
+  public search: string;
   public serviceList: any[] = [];
   public loading: boolean;
   public Id: string;
@@ -270,5 +271,29 @@ export class ServicesComponent implements OnInit {
 
   printPdf() {
     window.open(this.pdfUrl, "_blank");
+  }
+
+  servicePlay(serviceName:string){
+    let data: any = {};
+    data.AssetID = this.assetId;
+    data.MessageType = "StartService";
+    data.Value = serviceName;
+    this.agentService.serviceStartCommand(data);
+  }
+
+  serviceRestart(serviceName:string){
+    let data: any = {};
+    data.AssetID = this.assetId;
+    data.MessageType = "RestartService";
+    data.Value = serviceName;
+    this.agentService.serviceRestartCommand(data);
+  }
+
+  servicePause(serviceName:string){
+    let data: any = {};
+    data.AssetID = this.assetId;
+    data.MessageType = "StopService";
+    data.Value = serviceName;
+    this.agentService.servicePauseCommand(data);
   }
 }

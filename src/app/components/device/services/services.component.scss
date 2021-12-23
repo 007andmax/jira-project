@@ -1,3 +1,43 @@
+.table-wrap {
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    .s-name {
+      width: 30% !important;
+      padding: 0 18px 0 18px;
+      background-color: white;
+      height: 40px;
+    }
+    .description {
+      width: 37% !important;
+      padding: 0px;
+    }
+    .status {
+      width: 10% !important;
+      padding: 0px;
+    }
+    .start{
+      width:6% !important;
+      padding: 0px;
+    }
+    .restart{
+      width:6% !important;
+      padding: 0px;
+    }
+    .pause{
+      width:6% !important;
+      padding: 0px;
+    }
+    thead {
+      th {
+        background-color: #f4f6f8 !important;
+      }
+    }
+  }
+}
+
+
+
 .user-list-info{
     margin-top: 8px;
     margin-bottom: 38px;

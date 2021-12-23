@@ -6,7 +6,6 @@
               <div class="page-header">
                   <h3>Services</h3>
                   <div class="page-header-opt">
-                      
                   </div>
                   <div class="download-print">
                       <form method="GET">
@@ -64,18 +63,28 @@
                                   >
                                       Status
                                       <span class="qt-table-modern__sorting"></span>
-                                  </th>                                 
+                                  </th>
+                                  <th class="start"></th>
+                                  <th class="restart"></th>
+                                  <th class="pause"></th>
                               </tr>
                           </thead>
                           <tbody class="service-table">
                               <tr *ngFor="let service of serviceList | serv: search; let i = index;">
-                                  
                                   <td class="s-name">
                                       <h5>{{service.Name || 'N/A'}}</h5>
                                   </td>
                                   <td class="description">{{service.Description || 'N/A'}}</td>
                                   <td class="status">{{ (service.Started ? 'Running' : 'Stopped')}}</td>
-                                  
+                                  <td *ngIf="service.Started" class="start">
+                                    <div class="icon__play qt-bg-contain qt-sz-16 qt-mr-8" (click)="servicePlay(service.Name)"></div>
+                                  </td>
+                                  <td *ngIf="service.Started" class="restart" >
+                                    <div class="icon__restart qt-bg-contain qt-sz-16 qt-mr-8" (click)="serviceRestart(service.Name)"></div>
+                                  </td>
+                                  <td *ngIf="service.Started" class="pause">
+                                    <div class="icon__restart qt-bg-contain qt-sz-16 qt-mr-8" (click)="servicePause(service.Name)"></div>
+                                  </td>
                               </tr>
                           </tbody>
                       </table>
