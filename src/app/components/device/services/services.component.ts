@@ -15,9 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ServicesComponent implements OnInit {
 
-  public search: string = "";
   public serviceList: any[] = [];
-  public origList: any[] = [];
   public loading: boolean;
   public Id: string;
   public assetId: number;
@@ -62,7 +60,6 @@ export class ServicesComponent implements OnInit {
     let item = resp.find((x) => x.key == this.assetId);
     if (item) {
       this.serviceList = JSON.parse(item.Value);
-      this.origList = Object.assign([], this.serviceList);
     }
     this.loading = false;
     if (this.cd) {
@@ -79,20 +76,12 @@ export class ServicesComponent implements OnInit {
     this.filter.onFilter(field, this.serviceList);
   }
 
-  public searchServices(e) {
-    if(!this.search) {
-      this.serviceList = Object.assign([], this.origList);
-      return;
-    }
-    this.serviceList = this.serviceList.filter(x=> x.Name.indexOf(this.search)> -1 || ( x.Description && x.Description.indexOf(this.search) > -1) );
-  }
-
   public downloadCsv() {
     let downloadCsvList = [];
     this.serviceList.forEach((element) => {
       downloadCsvList.push([
         (element.Name ? element.Name.replace(",", " ") : "N/A"),
-        (element.Description ? element.Description.replace(",", " ") :""),
+        (element.Description ? element.Description.replaceAll(",", " ") :""),
         (element.Started ? "Running" : "Stopped"),
       ]);
     });
