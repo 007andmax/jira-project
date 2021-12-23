@@ -1,11 +1,6 @@
 import { StartupFilter } from './class/startup-filters';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { EventEmitter } from '@angular/core';
-import { UploadOutput, UploadInput, UploadFile, humanizeBytes, UploaderOptions, } from 'ngx-uploader';
 import { ToastrService } from 'ngx-toastr';
-import { startupService } from '../_services/startup.service';
-import { first } from 'rxjs/operators';
-import { environment } from './../../../../environments/environment';
 import { AgentService } from 'src/app/services/agent/agent.service';
 import { KafkaStateService } from 'src/app/states/kafka/kafka-state.service';
 import { ActivatedRoute } from '@angular/router';
@@ -21,7 +16,6 @@ import * as moment from 'moment';
 })
 export class StartupComponent implements OnInit {
 
-  public search: string;
   public startupList: any[] = [];
   public loading: boolean;
   public Id: string;
