@@ -1,0 +1,34 @@
+<div
+    class="app-left-panel__menu"
+    [ngClass]="{'--active': open}"
+    (click)="open = !open;openPanel()"
+>
+    <div class="app-left-panel__menu-icon --users"></div>
+    <div class="app-left-panel__menu-title">Marketing</div>
+    <div class="app-left-panel__menu-arrow"></div>
+</div>
+<ul
+    class="app-left-panel__menu-expand top-menu"
+    [ngClass]="{'menu-expand-show': open, 'menu-expand-hide': !open}"
+>
+    <li
+        [ngClass]="{'--active':  activePage === 'marketing'}"
+        (click)="goToState()"
+    >
+        All Users
+    </li>
+    <ng-template
+        ngFor
+        let-subscription
+        [ngForOf]="listCustomSubscription"
+        [ngForTrackBy]="trackById"
+    >
+        <li
+            [ngClass]="{'--active': getSelecteSubscription() && getSelecteSubscription().id === subscription.id && activePage === 'marketing'}"
+            (click)="goToState();onChangeCustomSubscription(subscription)"
+            [textContent]="subscription.name"
+        >
+
+        </li>
+    </ng-template>
+</ul>

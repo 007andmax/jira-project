@@ -13,7 +13,7 @@ import { ARCHIVE_USER, DEARCHIVE_USER } from '../../const/confirm';
 import { UserChange } from '../users/class/user-change';
 import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
 import { UsersHeaderComponent } from '../users/users-header/users-header.component';
-import { TYPE_LIST_COMPANY_USERS } from '../../const/users';
+import { MODE_USERS_LIST, TYPE_LIST_COMPANY_USERS } from '../../const/users';
 import { ActivatedRoute } from '@angular/router';
 import { MarketingEmailService } from 'src/app/services/marketing-email/marketing-email.service';
 import { UsersRealTimeService } from 'src/app/states/users/users-real-time.service';
@@ -59,7 +59,7 @@ export class CompanyUserComponent implements OnInit {
 
   ngOnInit() {
     this.leftPanelStateService.changeStateWithoutNavigate('company-user');
-
+    this.usersStateService.setModeUserFilterSubscription(MODE_USERS_LIST);
     let id = this.activateRoute.snapshot.params['id'];
     let subscription = this.activateRoute.params.subscribe(params => {
       this.showPreloader = true;

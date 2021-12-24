@@ -10,11 +10,13 @@ import { UserChange } from '../../components/users/class/user-change';
 import { UserFilter } from '../../components/users/class/user-filter';
 import { AppService } from '../app/app.service';
 import { UserCustomSubscription } from 'src/app/components/users/class/user-custom-subscription';
+import { MODE_USERS_LIST } from 'src/app/const/users';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersStateService {
+  modeUserFilterSubscription: string = MODE_USERS_LIST;
   allUsers: Array<User> = [];
   currentUser: CurrentUser;
   userForEdit: User = null;
@@ -22,6 +24,7 @@ export class UsersStateService {
   onGetCurrentUser: EventEmitter<any> = new EventEmitter();
   onShowArchived: EventEmitter<any> = new EventEmitter();
   onFilter: EventEmitter<any> = new EventEmitter();
+  onLeftPanelMarketingFilter: EventEmitter<any> = new EventEmitter();
   openAside: EventEmitter<any> = new EventEmitter();
   openEditAside: EventEmitter<any> = new EventEmitter();
   openMessageAside: EventEmitter<any> = new EventEmitter();
@@ -82,6 +85,12 @@ export class UsersStateService {
 
       this.onChangeUserPermissions.emit(newChange.data.permissions);
     });
+  }
+  public setModeUserFilterSubscription(data) {
+    this.modeUserFilterSubscription = data;
+  }
+  public getModeUserFilterSubscription() {
+    return this.modeUserFilterSubscription;
   }
   public getListCustomSubscription() {
     return this.listCustomSubscription;
@@ -156,6 +165,9 @@ export class UsersStateService {
   }
   public clearFilter() {
     this.filter = new UserFilter();
+  }
+  public onInitLeftPanelMarketingFilter(data) {
+    this.onLeftPanelMarketingFilter.emit(data);
   }
   public onInitFilter(data) {
     this.filter = data;

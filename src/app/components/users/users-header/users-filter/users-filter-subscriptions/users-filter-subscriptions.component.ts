@@ -2,6 +2,7 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { USER_SUBSCRIPTION_TYPE_CUSTOM, USER_SUBSCRIPTION_TYPE_DEFAULT } from 'src/app/const/user-subscription';
+import { MODE_MARKETING_USERS_LIST, MODE_USERS_LIST } from 'src/app/const/users';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { UserCustomSubscription } from '../../../class/user-custom-subscription';
 import { UserDefaultSubscription } from '../../../class/user-default-subscription';
@@ -27,6 +28,7 @@ export class UsersFilterSubscriptionsComponent implements OnInit {
   addOnBlur = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   tagCtrl = new FormControl();
+
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @ViewChild('dp') dp: any;
   @Output() tagsChange = new EventEmitter();
@@ -39,19 +41,27 @@ export class UsersFilterSubscriptionsComponent implements OnInit {
     subscriptions.push(new UsersFilterSubscriptionsItem("invoiceSubscription", USER_SUBSCRIPTION_TYPE_DEFAULT, "Invoice Updates"));
     subscriptions.push(new UsersFilterSubscriptionsItem("ticketSubscription", USER_SUBSCRIPTION_TYPE_DEFAULT, "Ticket Updates"));
     subscriptions.push(new UsersFilterSubscriptionsItem("ticketManagerSubscription", USER_SUBSCRIPTION_TYPE_DEFAULT, "Ticket Manager"));
-    this.listCustomSubscriptions = this.usersStateService.getListCustomSubscription();
-    console.log("this.listCustomSubscriptions", this.listCustomSubscriptions);
-    this.usersStateService.onGetListCustomSubscription.subscribe(data => {
-      this.listCustomSubscriptions = data;
-      this.listCustomSubscriptions.forEach(item => {
-        subscriptions.push(new UsersFilterSubscriptionsItem(item.id, USER_SUBSCRIPTION_TYPE_CUSTOM, item.name));
+    if (this.usersStateService.getModeUserFilterSubscription() === MODE_USERS_LIST) {
+      this.listCustomSubscriptions = this.usersStateService.getListCustomSubscription();
+      console.log("this.listCustomSubscriptions", this.listCustomSubscriptions);
+      this.usersStateService.onGetListCustomSubscription.subscribe(data => {
+        this.listCustomSubscriptions = data;
+        this.listCustomSubscriptions.forEach(item => {
+          subscriptions.push(new UsersFilterSubscriptionsItem(item.id, USER_SUBSCRIPTION_TYPE_CUSTOM, item.name));
+        })
+        subscriptions.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+          1 : (b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 0));
+        this.subscriptions = subscriptions.map(item => new UsersFilterSubscriptionsItem(item.id, item.type, item.name));
+        this.reqSubscriptions = subscriptions.map(item => new UsersFilterSubscriptionsItem(item.id, item.type, item.name));
+
       })
+    }
+    if (this.usersStateService.getModeUserFilterSubscription() === MODE_MARKETING_USERS_LIST) {
       subscriptions.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
         1 : (b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 0));
       this.subscriptions = subscriptions.map(item => new UsersFilterSubscriptionsItem(item.id, item.type, item.name));
       this.reqSubscriptions = subscriptions.map(item => new UsersFilterSubscriptionsItem(item.id, item.type, item.name));
-
-    })
+    }
   }
   onSearch(event) {
     this.subscriptions = this.reqSubscriptions.filter(item => item.name.toLowerCase().includes(event.target.value.toLowerCase()));

@@ -11,7 +11,7 @@ import { UsersService } from '../../services/users/users.service';
 import { UserChange } from './class/user-change';
 import { WebsocketService } from '../../services/websocket/websocket.service';
 import { DraftEmailStateService } from '../../states/draft-email/draft-email-state.service';
-import { TYPE_LIST_ALL_USERS } from '../../const/users';
+import { MODE_MARKETING_USERS_LIST, MODE_USERS_LIST, TYPE_LIST_ALL_USERS } from '../../const/users';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { CrmCompanyJobTitle } from '../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 import { CrmCompanyJobType } from '../setting/crm-settings/crm-company-job-type/class/crm-company-job-type';
@@ -57,6 +57,7 @@ export class UsersComponent implements OnInit {
 
   ngOnInit() {
     window.scrollTo(0, 0);
+    this.usersStateService.setModeUserFilterSubscription(MODE_USERS_LIST);
     this.showArchivedUsers = this.usersStateService.getShowArchivedCompanies();
     this.filter = this.usersStateService.getFilter();
     let getOnShowArchived = this.usersStateService.getOnShowArchived().subscribe(data => {

@@ -84,7 +84,9 @@ export class UserFilter {
     public setClientIndustry(data) {
         this.clientIndustry = data;
     }
-
+    public getCustomSubscriptions() {
+        return this.customSubscriptions;
+    }
 
     public clearFilter() {
         this.filterTop.forEach(item => item.filter = '');

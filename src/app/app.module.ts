@@ -502,6 +502,9 @@ import { UserTableCustomSubscriptionComponent } from './components/users/users-t
 import { UsersFilterSubscriptionsComponent } from './components/users/users-header/users-filter/users-filter-subscriptions/users-filter-subscriptions.component';
 import { AddUserToSubscribeComponent } from './components/users/add-user-to-subscribe/add-user-to-subscribe.component';
 import { UsersAsideDetailMessagesFullBodyComponent } from './components/users/users-aside-detail/users-aside-detail-messages/users-aside-detail-messages-full-body/users-aside-detail-messages-full-body.component';
+import { MarketingComponent } from './components/marketing/marketing.component';
+import { UsersTableMarketingComponent } from './components/marketing/users-table-marketing/users-table-marketing.component';
+import { LeftPanelMarketingComponent } from './components/left-panel/left-panel-marketing/left-panel-marketing.component';
 
 
 declare var $: any;
@@ -952,7 +955,10 @@ declare var $: any;
     UserTableCustomSubscriptionComponent,
     UsersFilterSubscriptionsComponent,
     AddUserToSubscribeComponent,
-    UsersAsideDetailMessagesFullBodyComponent
+    UsersAsideDetailMessagesFullBodyComponent,
+    MarketingComponent,
+    UsersTableMarketingComponent,
+    LeftPanelMarketingComponent
   ],
   imports: [
     BrowserModule,
