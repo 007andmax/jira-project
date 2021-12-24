@@ -17,18 +17,20 @@
     >
         All Users
     </li>
-    <ng-template
-        ngFor
-        let-subscription
-        [ngForOf]="listCustomSubscription"
-        [ngForTrackBy]="trackById"
-    >
-        <li
-            [ngClass]="{'--active': getSelecteSubscription() && getSelecteSubscription().id === subscription.id && activePage === 'marketing'}"
-            (click)="goToState();onChangeCustomSubscription(subscription)"
-            [textContent]="subscription.name"
+    <div class="list-marketing-container">
+        <ng-template
+            ngFor
+            let-subscription
+            [ngForOf]="listCustomSubscription"
+            [ngForTrackBy]="trackById"
         >
+            <li
+                [ngClass]="{'--active': getSelecteSubscription() && getSelecteSubscription().id === subscription.id && activePage === 'marketing'}"
+                (click)="goToState();onChangeCustomSubscription(subscription)"
+                [textContent]="subscription.name"
+            >
 
-        </li>
-    </ng-template>
+            </li>
+        </ng-template>
+    </div>
 </ul>

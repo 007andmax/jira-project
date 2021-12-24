@@ -38,6 +38,8 @@ export class LeftPanelMarketingComponent implements OnInit {
     this.listCustomSubscription = this.usersStateService.getListCustomSubscription();
     this.usersStateService.onGetListCustomSubscription.subscribe(data => {
       this.listCustomSubscription = data;
+      this.listCustomSubscription.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+        1 : (b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 0));
     })
     this.usersStateService.getOnFilter().subscribe((data) => {
 

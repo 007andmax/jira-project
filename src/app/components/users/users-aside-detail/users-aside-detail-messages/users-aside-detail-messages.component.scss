@@ -1,32 +1,32 @@
-@import './src/assets/styles/variable';
-@import './src/assets/styles/fonts';
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
 
 .qt-page-list__body-tbody {
     min-width: auto !important;
     border-spacing: 0;
     padding: 16px;
     tr {
-      display: block;
-      padding: 12px 16px;
-      border: 1px solid $gray-300;
-      border-radius: 12px;
-      background-color: $white;
-      cursor: pointer;
-      &:not(:last-child) {
-        margin-bottom: 16px;
-      }
-      &:hover {
-        border-color: $gray-500;
-        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
-      }
-      &:hover h3 {
-        color: $primary-1;
-      }
+        display: block;
+        padding: 12px 16px;
+        border: 1px solid $gray-300;
+        border-radius: 12px;
+        background-color: $white;
+        cursor: pointer;
+        &:not(:last-child) {
+            margin-bottom: 16px;
+        }
+        &:hover {
+            border-color: $gray-500;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+        }
+        &:hover h3 {
+            color: $primary-1;
+        }
     }
     td {
-      display: block;
-      height: auto;
-      padding: 0;
+        display: block;
+        height: auto;
+        padding: 0;
     }
 }
 .qt-page-list__body-table-container {
@@ -59,6 +59,7 @@
     .messages-table-user-email {
         font-size: 12px;
         color: #637382;
+        font-weight: 500;
     }
 }
 .messages-table-header {
@@ -84,6 +85,7 @@
     line-height: 16px;
     color: $gray-600;
     font-weight: 600;
+    text-transform: uppercase;
 }
 h3 {
     font-size: 16px;
@@ -103,15 +105,15 @@ h3 {
     }
 }
 .messages-table__account-data {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
 }
 .order-id {
-  color: $primary-1;
-  font-size: 11px;
-  line-height: 16px;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
+    color: $primary-1;
+    font-size: 11px;
+    line-height: 16px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
 }

@@ -94,6 +94,7 @@ export class AddUserToSubscribeComponent implements OnInit {
   }
   toggleEditMode(data) {
     this.isEditMode = data;
+    this.selectedSubscriptions = [];
     this.editSubscription(null);
   }
   editSubscription(item) {
