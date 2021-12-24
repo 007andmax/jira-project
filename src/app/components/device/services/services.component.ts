@@ -83,7 +83,7 @@ export class ServicesComponent implements OnInit {
       downloadCsvList.push([
         (element.Name ? element.Name.replace(",", " ") : "N/A"),
         (element.Description ? element.Description.replaceAll(",", " ") :""),
-        (element.Started ? "Running" : "Stopped"),
+        (element.Started=='True' ? "Running" : "Stopped"),
       ]);
     });
     let fileName = "Services";
@@ -96,7 +96,7 @@ export class ServicesComponent implements OnInit {
       pdfList.push([
         element.Name.replace(",", " ") || "N/A",
         element.Description? element.Description.replace(",", " ") : "N/A",
-        element.Started ? "Running" : "Stopped"
+        element.Started=='True' ? "Running" : "Stopped"
       ]);
     });
     let html =
@@ -279,6 +279,7 @@ export class ServicesComponent implements OnInit {
     data.MessageType = "StartService";
     data.Value = serviceName;
     this.agentService.serviceStartCommand(data);
+    this.getAllServicesList();
   }
 
   serviceRestart(serviceName:string){
@@ -287,6 +288,7 @@ export class ServicesComponent implements OnInit {
     data.MessageType = "RestartService";
     data.Value = serviceName;
     this.agentService.serviceRestartCommand(data);
+    this.getAllServicesList();
   }
 
   servicePause(serviceName:string){
@@ -295,5 +297,11 @@ export class ServicesComponent implements OnInit {
     data.MessageType = "StopService";
     data.Value = serviceName;
     this.agentService.servicePauseCommand(data);
+    this.getAllServicesList();
   }
+
+  trackByMethod(index:number, service:any): string {
+    return service.Name;
+  }
+
 }
