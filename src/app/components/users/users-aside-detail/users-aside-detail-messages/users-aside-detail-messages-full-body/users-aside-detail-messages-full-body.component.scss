@@ -1,3 +1,6 @@
+@import './src/assets/styles/variable';
+@import './src/assets/styles/fonts';
+
 .qt-aside-modern {
     width: 600px;
 }
@@ -7,14 +10,14 @@
     height: 100% !important;
 }
 .message-full-user {
-    display: flex;
-    align-items: flex-start;
     font-family: "Inter", sans-serif;
+    margin-right: 14px;
     .message-full-user-name {
         font-size: 13px;
         color: #212b36;
         font-weight: 600;
         margin-right: 4px;
+        flex-shrink: 0;
     }
     .message-full-user-email {
         font-size: 13px;
@@ -24,7 +27,7 @@
 }
 .message-full-from {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     margin-bottom: 8px;
 }
@@ -41,17 +44,17 @@
     justify-content: flex-end;
     display: flex;
     align-items: center;
+    flex-shrink: 0;
 }
 h3 {
     font-size: 20px;
     font-weight: 600;
-    font-family: "Inter", sans-serif;
-    line-height: 1.5;
+    line-height: 28px;
     color: #212b36;
+    margin-bottom: 8px;
 }
 .message-full__account-text {
     font-size: 13px;
-    font-family: "Inter", sans-serif;
     color: #212b36;
 }
 .message-full__account {
@@ -86,13 +89,11 @@ h3 {
 .users-table__name--user-name {
     font-size: 12px;
     color: #212b36;
-    font-family: "Inter", sans-serif;
     font-weight: 500;
 }
 .users-table__name--email {
     font-size: 12px;
     color: #637382;
-    font-family: "Inter", sans-serif;
     font-weight: 400;
 }
 .message-full-to-list-item {
@@ -100,18 +101,23 @@ h3 {
     padding: 6px 8px;
     border-radius: 8px;
     border: solid 1px #edf2f6;
-    margin-right: 4px;
+    min-height: 46px;
+    margin: 2px 4px 2px 0;
 }
 .message-full-to-list {
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    flex-wrap: wrap;
 }
 .message-full-to {
     display: flex;
     align-items: center;
     .message-full-to-text {
-        margin: 0px 25px 0px 0px;
+        margin: 0 25px 0 0;
+        font-size: 12px;
+        line-height: 16px;
+        color: $gray-700;
     }
 }
 .message-full-to-list-item-info {
@@ -128,6 +134,6 @@ h3 {
 }
 .messages-table__account-text {
     font-size: 14px;
-    font-family: "Inter", sans-serif;
-    color: #454f5b;
+    line-height: 20px;
+    color: $gray-800;
 }

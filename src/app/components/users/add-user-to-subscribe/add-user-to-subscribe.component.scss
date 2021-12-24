@@ -7,6 +7,9 @@
 .tax-name {
     width: auto;
     position: relative;
+    font-weight: 600;
+    padding: 8px 30px 8px 16px;
+    color: $primary-2;
     @media only screen and (max-width: 576px) {
         width: 105px;
     }
@@ -69,6 +72,7 @@
 }
 .edit-category-name {
     input {
+        width: 100%;
         border: 1px solid transparent;
         border-radius: 4px;
         outline: none;
@@ -99,7 +103,79 @@ add-marketing-subscription-type {
 }
 .dataTable {
     position: relative;
-    min-height: 200px;
+    min-height: 201px;
+
+   tbody {
+      display: block;
+      max-height: 236px;
+      overflow: auto;
+   }
+    tr {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 8px 0;
+      border-radius: 4px;
+      &:first-child {
+        margin-top: 0;
+      }
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      &.manage-subscription-selected {
+        background-color: #f9fafb;
+        td {
+          background-color: #f9fafb;
+        }
+        &.selected {
+          td::after {
+            content: none;
+          }
+        }
+        .tax-name {
+          padding: 8px 16px 8px 16px;
+        }
+      }
+    }
+    .tax-name {
+      flex: 100%;
+    }
+    .action {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1 0 76px;
+    }
+    td {
+      display: block;
+      border-radius: 4px;
+      .edit {
+        margin-right: 12px;
+      }
+    }
+    .qt-aside-modern__footer {
+      position: relative;
+      padding: 24px 0;
+      margin-top: 24px;
+      border-top: 1px solid rgba(0,0,0,.1);
+
+      &::before,
+      &::after {
+        position: absolute;
+        content: "";
+        top: -1px;
+        height: 1px;
+        width: 24px;
+        border-top: 1px solid rgba(0,0,0,.1);
+      }
+      &::before {
+        left: -24px;
+      }
+      &::after {
+        right: -24px;
+      }
+    }
 }
 .cleat-height-dataTable {
     min-height: auto;
@@ -116,8 +192,27 @@ tbody {
         }
     }
 }
-.selected {
+td {
+  &:hover {
+    background-color: #f9fafb;
+  }
+}
+tr.selected {
     td {
-        background: #f4fbff;
+        background-color: #e9f7ff;
+        position: relative;
+        border-radius: 4px;
+        cursor: pointer;
+
+        &::after {
+          position: absolute;
+          content: "";
+          width: 16px;
+          height: 16px;
+          background-image: url("/assets/img/icons/check-blue.svg");
+          top: 50%;
+          right: 12px;
+          transform: translateY(-50%);
+        }
     }
 }

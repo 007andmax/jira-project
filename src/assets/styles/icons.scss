@@ -152,7 +152,12 @@
   &__assign-user {
     background-image: url("/assets/img/icons/assign-user.svg");
   }
-
+  &__remove-user {
+    background-image: url("/assets/img/icons/remove-user.svg");
+  }
+  &__list {
+    background-image: url("/assets/img/icons/list.svg");
+  }
   &__task-pending {
     background-image: url("/assets/img/icons/task-pending.svg");
     &.--done {
@@ -340,6 +345,12 @@
   }
   &__email-blue {
     background-image: url("/assets/img/icons/email-blue.svg");
+  }
+  &__manage {
+    background-image: url("/assets/img/icons/manage.svg");
+  }
+  &__create-list {
+    background-image: url("/assets/img/icons/create-list.svg");
   }
   &__upload-company-logo {
     background-image: url("/assets/img/icons/upload-company-logo.svg");
@@ -661,6 +672,9 @@
   }
   &__go-to {
     background-image: url("/assets/img/icons/go-to.svg");
+  }
+  &__go-to-blue {
+    background-image: url("/assets/img/icons/go-to-blue.svg");
   }
   &__network {
     background-image: url("/assets/img/icons/network.svg");
