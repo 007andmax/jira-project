@@ -14,7 +14,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { CurrentUser } from 'src/class/current-user/current-user';
 import { TicketsFilterComponent } from '../../tickets/tickets/tickets-header/tickets-filter/tickets-filter.component';
 import { UsersFilterComponent } from './users-filter/users-filter.component';
-import { TYPE_LIST_ALL_USERS, TYPE_LIST_COMPANY_USERS } from 'src/app/const/users';
+import { TYPE_LIST_ALL_USERS, TYPE_LIST_COMPANY_USERS, TYPE_LIST_MARKETING_USERS } from 'src/app/const/users';
 import { UserCustomSubscription } from '../class/user-custom-subscription';
 import { AddUserToSubscribeComponent } from '../add-user-to-subscribe/add-user-to-subscribe.component';
 import { MarketingEmailService } from 'src/app/services/marketing-email/marketing-email.service';
@@ -46,6 +46,7 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   countFilter: number = 0;
   toggleFilter: boolean = true;
   currentUser: CurrentUser = new CurrentUser();
+  TYPE_LIST_MARKETING_USERS = TYPE_LIST_MARKETING_USERS;
   TYPE_LIST_ALL_USERS = TYPE_LIST_ALL_USERS;
   TYPE_LIST_COMPANY_USERS = TYPE_LIST_COMPANY_USERS;
   constructor(private usersStateService: UsersStateService,

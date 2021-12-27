@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ARCHIVE_USER, DEARCHIVE_USER, ARCHIVE_USERS } from 'src/app/const/confirm';
-import { MODE_MARKETING_USERS_LIST } from 'src/app/const/users';
+import { MODE_MARKETING_USERS_LIST, TYPE_LIST_MARKETING_USERS } from 'src/app/const/users';
 import { Company } from 'src/app/interfaces/company/company';
 import { MarketingEmailService } from 'src/app/services/marketing-email/marketing-email.service';
 import { UsersService } from 'src/app/services/users/users.service';
@@ -39,7 +39,7 @@ export class MarketingComponent implements OnInit {
   public page_number: number = 0;
   count: number = 0;
   jobTitleList: Array<CrmCompanyJobTitle> = [];
-
+  TYPE_LIST_MARKETING_USERS = TYPE_LIST_MARKETING_USERS;
   sub: Subscription = new Subscription();
   listCustomSubscription: Array<UserCustomSubscription> = [];
   constructor(private usersStateService: UsersStateService,

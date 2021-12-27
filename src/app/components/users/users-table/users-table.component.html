@@ -39,7 +39,7 @@
     </td>
     <td
         class="users-table__company"
-        *ngIf="type === TYPE_LIST_ALL_USERS"
+        *ngIf="type === TYPE_LIST_ALL_USERS || type === TYPE_LIST_MARKETING_USERS"
         (click)="showDetailUser()"
     >
         <span>{{ getUserCompanyName() }}</span>
@@ -87,7 +87,10 @@
         >
         </user-table-default-subscription>
     </td>
-    <td class="users-table__subscription">
+    <td
+        class="users-table__subscription"
+        *ngIf="type === TYPE_LIST_MARKETING_USERS"
+    >
         <user-table-custom-subscription
             class="users-table__subscription--dropdown"
             (onChangeCustom)="onChangeCustomSubscriptions($event)"

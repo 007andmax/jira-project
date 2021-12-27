@@ -50,7 +50,6 @@ export class LeftPanelMarketingComponent implements OnInit {
   onChangeCustomSubscription(data) {
     this.usersStateService.onInitLeftPanelMarketingFilter(data);
     this.filter.setCustomSubscriptions([data]);
-    this.filter.setDefaultSubscriptions(null);
     this.usersStateService.onInitFilter(this.filter);
 
   }
@@ -74,9 +73,15 @@ export class LeftPanelMarketingComponent implements OnInit {
     event.target.parentNode.classList.toggle('show-filter');
   }
   getSelecteSubscription() {
-    return (this.filter.getCustomSubscriptions().length > 0) ? this.filter.getCustomSubscriptions()[0] : null;
+    return (this.filter.getCustomSubscriptions().length === 1) ? this.filter.getCustomSubscriptions()[0] : null;
   }
-
+  clearSubscription() {
+    if (this.filter.getCustomSubscriptions().length === 1) {
+      this.usersStateService.onInitLeftPanelMarketingFilter(null);
+      this.filter.setCustomSubscriptions([]);
+      this.usersStateService.onInitFilter(this.filter);
+    }
+  }
   public trackByIndex(index, item) {
     return index;
   }

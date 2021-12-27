@@ -41,27 +41,27 @@ export class UsersFilterSubscriptionsComponent implements OnInit {
     subscriptions.push(new UsersFilterSubscriptionsItem("invoiceSubscription", USER_SUBSCRIPTION_TYPE_DEFAULT, "Invoice Updates"));
     subscriptions.push(new UsersFilterSubscriptionsItem("ticketSubscription", USER_SUBSCRIPTION_TYPE_DEFAULT, "Ticket Updates"));
     subscriptions.push(new UsersFilterSubscriptionsItem("ticketManagerSubscription", USER_SUBSCRIPTION_TYPE_DEFAULT, "Ticket Manager"));
-    if (this.usersStateService.getModeUserFilterSubscription() === MODE_USERS_LIST) {
-      this.listCustomSubscriptions = this.usersStateService.getListCustomSubscription();
-      console.log("this.listCustomSubscriptions", this.listCustomSubscriptions);
-      this.usersStateService.onGetListCustomSubscription.subscribe(data => {
-        this.listCustomSubscriptions = data;
-        this.listCustomSubscriptions.forEach(item => {
-          subscriptions.push(new UsersFilterSubscriptionsItem(item.id, USER_SUBSCRIPTION_TYPE_CUSTOM, item.name));
-        })
-        subscriptions.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-          1 : (b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 0));
-        this.subscriptions = subscriptions.map(item => new UsersFilterSubscriptionsItem(item.id, item.type, item.name));
-        this.reqSubscriptions = subscriptions.map(item => new UsersFilterSubscriptionsItem(item.id, item.type, item.name));
 
+    this.listCustomSubscriptions = this.usersStateService.getListCustomSubscription();
+    console.log("this.listCustomSubscriptions", this.listCustomSubscriptions);
+    this.usersStateService.onGetListCustomSubscription.subscribe(data => {
+      this.listCustomSubscriptions = data;
+      this.listCustomSubscriptions.forEach(item => {
+        subscriptions.push(new UsersFilterSubscriptionsItem(item.id, USER_SUBSCRIPTION_TYPE_CUSTOM, item.name));
       })
-    }
-    if (this.usersStateService.getModeUserFilterSubscription() === MODE_MARKETING_USERS_LIST) {
       subscriptions.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
         1 : (b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 0));
       this.subscriptions = subscriptions.map(item => new UsersFilterSubscriptionsItem(item.id, item.type, item.name));
       this.reqSubscriptions = subscriptions.map(item => new UsersFilterSubscriptionsItem(item.id, item.type, item.name));
-    }
+
+    })
+    /*   }
+       if (this.usersStateService.getModeUserFilterSubscription() === MODE_MARKETING_USERS_LIST) {
+         subscriptions.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+           1 : (b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 0));
+         this.subscriptions = subscriptions.map(item => new UsersFilterSubscriptionsItem(item.id, item.type, item.name));
+         this.reqSubscriptions = subscriptions.map(item => new UsersFilterSubscriptionsItem(item.id, item.type, item.name));
+       }*/
   }
   onSearch(event) {
     this.subscriptions = this.reqSubscriptions.filter(item => item.name.toLowerCase().includes(event.target.value.toLowerCase()));
@@ -71,6 +71,12 @@ export class UsersFilterSubscriptionsComponent implements OnInit {
     this.selectedSubscriptions = [];
     this.defaultSubscriptions = new UserDefaultSubscription();
     this.defaultSubscriptions.clearEnabledAll();
+    this.customSubscriptions = [];
+    this.subscriptions = this.reqSubscriptions.filter(item => item.name.toLowerCase().includes(""));
+  }
+  public clearCustomSubscription() {
+    this.tagCtrl.setValue(null);
+    this.selectedSubscriptions = this.selectedSubscriptions.filter(item => item.type === USER_SUBSCRIPTION_TYPE_DEFAULT);
     this.customSubscriptions = [];
     this.subscriptions = this.reqSubscriptions.filter(item => item.name.toLowerCase().includes(""));
   }
@@ -111,6 +117,7 @@ export class UsersFilterSubscriptionsComponent implements OnInit {
 
   }
   toggleSubscription(item) {
+    console.log("item", item);
     this.tagCtrl.setValue(null);
     this.subscriptions = this.reqSubscriptions.filter(item => item.name.toLowerCase().includes(""));
     if (item.type === USER_SUBSCRIPTION_TYPE_DEFAULT) this.updateDefault(item.id, item);

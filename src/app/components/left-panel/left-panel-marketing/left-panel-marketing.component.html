@@ -13,7 +13,7 @@
 >
     <li
         [ngClass]="{'--active':  activePage === 'marketing'}"
-        (click)="goToState()"
+        (click)="goToState();clearSubscription()"
     >
         All Users
     </li>
@@ -29,6 +29,8 @@
                 (click)="goToState();onChangeCustomSubscription(subscription)"
                 [textContent]="subscription.name"
             >
+
+
 
             </li>
         </ng-template>
