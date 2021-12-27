@@ -82,7 +82,8 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
   ngOnInit() {
     if (this.appService.checkMobile()) this.tab = null;
     this.currentUser = this.usersStateService.getCurrentUser();
-    this.supportStateService.getHandleSendMode().subscribe(data => {
+    /*this.supportStateService.getHandleSendMode().subscribe(data => {
+      console.log("data", data);
       let draftEmail: DraftEmail = new DraftEmail();
       draftEmail.setContent(data.message);
       draftEmail.setSubject(data.subject);
@@ -92,7 +93,7 @@ export class TicketProfileFormUpdateComponent implements OnInit, OnDestroy {
           this.cd.detectChanges();
         }
       })
-    })
+    })*/
     let oneTimeConnectionArray = this.devicesRealTimeService.oneTimeConnectionArray.subscribe(newChange => {
       if (newChange.action === 'ONE_TIME_DOWNLOADED' || newChange.action === 'ONE_TIME_INSTALLED' || newChange.action === 'ONE_TIME_CONNECTION_OPEN' || newChange.action === 'ONE_TIME_URL_GENERATED' || newChange.action === 'ONE_TIME_URL_OPEN' || newChange.action === 'ONE_TIME_ONLINE' || newChange.action === 'ONE_TIME_OFFLINE') {
         if (newChange.data.oneTime) {
