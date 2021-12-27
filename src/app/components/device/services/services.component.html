@@ -77,13 +77,13 @@
                                   <td class="description">{{service.Description || 'N/A'}}</td>
                                   <td class="status">{{ (service.Started=='True' ? 'Running' : 'Stopped')}}</td>
                                   <td class="start">
-                                    <div *ngIf="service.Started=='False'" class="icon__play qt-bg-contain qt-sz-16 qt-mr-8"  (click)="servicePlay(service.Name)" title="Play"></div>
+                                    <div *ngIf="service.Started=='False'" [ngClass]="service.Loaded=='False' ? 'icon__play qt-bg-contain qt-sz-16 qt-mr-8' : 'icon__locked qt-bg-contain qt-sz-16 qt-mr-8'"  (click)="servicePlay(service.Name,i)"></div>
                                   </td>
                                   <td class="restart" >
-                                    <div *ngIf="service.Started=='True'" class="icon__restart qt-bg-contain qt-sz-16 qt-mr-8" (click)="serviceRestart(service.Name)" title="Restart"></div>
+                                    <div *ngIf="service.Started=='True'" [ngClass]="service.Loaded=='False' ? 'icon__restart qt-bg-contain qt-sz-16 qt-mr-8' : 'icon__locked qt-bg-contain qt-sz-16 qt-mr-8'"  (click)="serviceRestart(service.Name,i)"></div>
                                   </td>
                                   <td  class="pause">
-                                    <div *ngIf="service.Started=='True'" class="icon__restart qt-bg-contain qt-sz-16 qt-mr-8" (click)="servicePause(service.Name)" title="Pause"></div>
+                                    <div *ngIf="service.Started=='True'" [ngClass]="service.Loaded=='False' ? 'icon__restart qt-bg-contain qt-sz-16 qt-mr-8' : 'icon__locked qt-bg-contain qt-sz-16 qt-mr-8'"  (click)="servicePause(service.Name,i)"></div>
                                   </td>
                               </tr>
                           </tbody>

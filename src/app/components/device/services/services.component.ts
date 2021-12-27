@@ -24,6 +24,7 @@ export class ServicesComponent implements OnInit {
   public filter: ServiceFilter = new ServiceFilter();
   pdfUrl = "";
 
+
   constructor(
     private agentService: AgentService,
     private kafkaStateService: KafkaStateService,
@@ -36,8 +37,8 @@ export class ServicesComponent implements OnInit {
 
   ngOnInit() {
     this.Id = this.activateRoute.snapshot.params["id"];
-    this.kafkaStateService.onGetService.subscribe((resp) => this.onGetService(resp), (e) => this.onGetServiceError(e));
     this.loading = true;
+    this.kafkaStateService.onGetService.subscribe((resp) => this.onGetService(resp), (e) => this.onGetServiceError(e));
     this.getAllServicesList();
   }
 
@@ -53,6 +54,7 @@ export class ServicesComponent implements OnInit {
           this.asset = resp[0];
           this.assetId = this.asset.ID;
           this.agentService.GetService(this.assetId);
+          this.getReload(null);
         });
       });
   }
@@ -61,6 +63,10 @@ export class ServicesComponent implements OnInit {
     let item = resp.find((x) => x.key == this.assetId);
     if (item) {
       this.serviceList = JSON.parse(item.Value);
+      for(let i=0;i<this.serviceList.length;i++)
+      {
+        this.serviceList[i] = Object.assign(this.serviceList[i],{Loaded:'False'});
+      }
     }
     this.loading = false;
     if (this.cd) {
@@ -273,30 +279,46 @@ export class ServicesComponent implements OnInit {
     window.open(this.pdfUrl, "_blank");
   }
 
-  servicePlay(serviceName:string){
+  public getReload(res:any){
+    if(res!=null)
+    {
+      this.serviceList = res;
+    }
+    if (this.cd) {
+      this.cd.detectChanges();
+    }
+  }
+
+  servicePlay(serviceName:string,index:number){
+    this.serviceList[index] = Object.assign(this.serviceList[index],{Loaded:'True'});
     let data: any = {};
     data.AssetID = this.assetId;
     data.MessageType = "StartService";
     data.Value = serviceName;
     this.agentService.serviceStartCommand(data);
+    this.getReload(this.serviceList);
     this.getAllServicesList();
   }
 
-  serviceRestart(serviceName:string){
+  serviceRestart(serviceName:string,index:number){
+    this.serviceList[index] = Object.assign(this.serviceList[index],{Loaded:'True'});
     let data: any = {};
     data.AssetID = this.assetId;
     data.MessageType = "RestartService";
     data.Value = serviceName;
     this.agentService.serviceRestartCommand(data);
+    this.getReload(this.serviceList);
     this.getAllServicesList();
   }
 
-  servicePause(serviceName:string){
+  servicePause(serviceName:string,index:number){
+    this.serviceList[index] = Object.assign(this.serviceList[index],{Loaded:'True'});
     let data: any = {};
     data.AssetID = this.assetId;
     data.MessageType = "StopService";
     data.Value = serviceName;
     this.agentService.servicePauseCommand(data);
+    this.getReload(this.serviceList);
     this.getAllServicesList();
   }
 
