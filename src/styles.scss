@@ -2997,8 +2997,10 @@ app-quotes-item {
   transition: none;
   background: rgba(16, 24, 39, 0.4);
 }
-.modal-content {
-  padding: 24px 24px 0;
+.modal-dialog__save-to-subscription {
+  .modal-content {
+    padding: 24px 24px 0;
+  }
 }
 .cdk-overlay-container {
   z-index: 99999999;
