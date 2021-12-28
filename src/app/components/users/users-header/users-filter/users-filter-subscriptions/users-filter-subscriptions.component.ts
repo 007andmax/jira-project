@@ -40,20 +40,21 @@ export class UsersFilterSubscriptionsComponent implements OnInit {
   ngOnInit() {
 
     this.defaultSubscriptions.clearEnabledAll();
+
+
+    this.listCustomSubscriptions = this.marketingEmailStateService.getListCustomSubscription();
+    if (this.listCustomSubscriptions.length > 0) this.setSubscriptions();
+    let onGetListCustomSubscription = this.marketingEmailStateService.onGetListCustomSubscription.subscribe(data => {
+      this.listCustomSubscriptions = data;
+      this.setSubscriptions();
+    })
+    this.sub.add(onGetListCustomSubscription);
+  }
+  setSubscriptions() {
     let subscriptions = [];
     subscriptions.push(new UsersFilterSubscriptionsItem("invoiceSubscription", USER_SUBSCRIPTION_TYPE_DEFAULT, "Invoice Updates"));
     subscriptions.push(new UsersFilterSubscriptionsItem("ticketSubscription", USER_SUBSCRIPTION_TYPE_DEFAULT, "Ticket Updates"));
     subscriptions.push(new UsersFilterSubscriptionsItem("ticketManagerSubscription", USER_SUBSCRIPTION_TYPE_DEFAULT, "Ticket Manager"));
-
-    this.listCustomSubscriptions = this.marketingEmailStateService.getListCustomSubscription();
-    if (this.listCustomSubscriptions.length > 0) this.setSubscriptions(subscriptions);
-    let onGetListCustomSubscription = this.marketingEmailStateService.onGetListCustomSubscription.subscribe(data => {
-      this.listCustomSubscriptions = data;
-      this.setSubscriptions(subscriptions);
-    })
-    this.sub.add(onGetListCustomSubscription);
-  }
-  setSubscriptions(subscriptions) {
     this.listCustomSubscriptions.forEach(item => {
       subscriptions.push(new UsersFilterSubscriptionsItem(item.id, USER_SUBSCRIPTION_TYPE_CUSTOM, item.name));
     })

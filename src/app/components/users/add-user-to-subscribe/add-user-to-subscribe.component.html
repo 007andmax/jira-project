@@ -50,6 +50,10 @@
                 >
                     This Industry is already occupied
                 </mat-error>
+                <div
+                    *ngIf="!isEditMode && isSelected(item)"
+                    class="icon__active_subscription qt-sz-16 qt-bg-contain"
+                ></div>
             </td>
             <td
                 class="action"

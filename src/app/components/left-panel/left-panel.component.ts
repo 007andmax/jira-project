@@ -108,7 +108,7 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/setting/marketing-email`)) this.state = 'marketing-email';
 
           if (window.location.href.includes(`/users`)) this.state = 'new-users';
-          if (window.location.href.includes(`/marketing`)) this.state = 'marketing';
+          if (!window.location.href.includes(`/setting/marketing-email`) && window.location.href.includes(`/marketing`)) this.state = 'marketing';
           if (window.location.href.includes(`/reports`)) this.state = 'new-reports';
           if (window.location.href.includes(`/tickets-dashboard`)) this.state = 'new-tickets-dashboard';
           if (window.location.href.includes(`/tickets`)) this.state = 'new-tickets';
@@ -144,7 +144,7 @@ export class LeftPanelComponent implements OnInit {
           if (window.location.href.includes(`/report/service-report`)) this.state = 'service-report';
           if (window.location.href.includes(`/report/income-accounts`)) this.state = 'income-accounts';
 
-
+          console.log("this.state", this.state);
 
           this.leftPanelStateService.firstOpen(this.state);
           this.leftPanelStateService.changeState(this.state);

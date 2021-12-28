@@ -49,12 +49,13 @@
                 <div
                     (click)="selected(custom)"
                     class="company-tag-item"
-                    [ngClass]="{'is-hover':isSeleted(custom)}"
+                    [ngClass]="{'is-hover':isSeleted(custom),'is-update':isUpdate}"
                 >
                     <label class="qt-checkbox pointer">
                         <input
                             type="checkbox"
                             [checked]="isSeleted(custom)"
+                            [disabled]="isUpdate"
                             readonly
                         >
                         <span></span>
@@ -70,5 +71,4 @@
             </ng-template>
         </div>
     </ul>
-
 </div>

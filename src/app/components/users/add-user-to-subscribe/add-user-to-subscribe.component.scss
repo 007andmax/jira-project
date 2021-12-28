@@ -5,192 +5,192 @@
 @import "./src/assets/styles/fonts";
 
 .tax-name {
-    width: auto;
-    position: relative;
-    font-weight: 600;
-    padding: 8px 30px 8px 16px;
-    color: $primary-2;
-    @media only screen and (max-width: 576px) {
-        width: 105px;
-    }
+  width: auto;
+  position: relative;
+  font-weight: 600;
+  padding: 8px 30px 8px 16px;
+  color: $primary-2;
+  @media only screen and (max-width: 576px) {
+    width: 105px;
+  }
 }
 .rate {
-    width: 170px;
-    text-align: center;
-    @media only screen and (max-width: 576px) {
-        width: 55px;
-    }
+  width: 170px;
+  text-align: center;
+  @media only screen and (max-width: 576px) {
+    width: 55px;
+  }
 }
 .default {
-    width: 100px;
-    text-align: center;
-    text-transform: none;
-    @media only screen and (max-width: 576px) {
-        width: 90px;
-    }
-    .cmn-checkbox {
-        display: inline-block;
-    }
+  width: 100px;
+  text-align: center;
+  text-transform: none;
+  @media only screen and (max-width: 576px) {
+    width: 90px;
+  }
+  .cmn-checkbox {
+    display: inline-block;
+  }
 }
 .action {
-    width: 40px;
-    position: relative;
-    @media only screen and (max-width: 576px) {
-        width: 50px;
-    }
+  width: 40px;
+  position: relative;
+  @media only screen and (max-width: 576px) {
+    width: 50px;
+  }
 }
 .modal-body {
-    .f-row {
-        margin-bottom: 0;
-    }
+  .f-row {
+    margin-bottom: 0;
+  }
 }
 
 .checkbox-header {
-    width: 46px;
+  width: 46px;
 }
 .remove {
-    margin-top: 0px !important;
+  margin-top: 0px !important;
 }
 
 .error-text-align {
-    text-align: left !important;
+  text-align: left !important;
 }
 .add-category-container {
-    /deep/ .add-tax-dropdown {
-        right: 0px;
-        &:after {
-            right: 14px;
-            left: auto;
-        }
+  /deep/ .add-tax-dropdown {
+    right: 0px;
+    &:after {
+      right: 14px;
+      left: auto;
     }
+  }
 }
 .tag-color {
-    display: block;
-    width: 16px;
-    height: 16px;
-    border-radius: 40px;
+  display: block;
+  width: 16px;
+  height: 16px;
+  border-radius: 40px;
 }
 .edit-category-name {
-    input {
-        width: 100%;
-        border: 1px solid transparent;
-        border-radius: 4px;
-        outline: none;
-        padding: 2px 2px 2px 8px;
-        outline: none;
-        font-weight: 500;
-        color: $primary-2;
-        &:hover,
-        &:focus {
-            border-color: $gray-600;
-        }
-        &::placeholder {
-            font-weight: 400;
-        }
+  input {
+    width: 100%;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    outline: none;
+    padding: 2px 2px 2px 8px;
+    outline: none;
+    font-weight: 500;
+    color: $primary-2;
+    &:hover,
+    &:focus {
+      border-color: $gray-600;
     }
+    &::placeholder {
+      font-weight: 400;
+    }
+  }
 }
 add-marketing-subscription-type {
-    display: contents;
-    /deep/ .add-category-container {
-        td {
-            background-color: #f4fbff !important;
-        }
+  display: contents;
+  /deep/ .add-category-container {
+    td {
+      background-color: #f4fbff !important;
     }
+  }
 }
 .qt-checkbox {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 .dataTable {
-    position: relative;
-    min-height: 201px;
+  position: relative;
+  min-height: 201px;
 
-   tbody {
-      display: block;
-      max-height: 236px;
-      overflow: auto;
-   }
-    tr {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin: 8px 0;
-      border-radius: 4px;
-      &:first-child {
-        margin-top: 0;
-      }
-      &:last-child {
-        margin-bottom: 0;
-      }
+  tbody {
+    display: block;
+    max-height: 236px;
+    overflow: auto;
+  }
+  tr {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 8px 0;
+    border-radius: 4px;
+    &:first-child {
+      margin-top: 0;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
 
-      &.manage-subscription-selected {
+    &.manage-subscription-selected {
+      background-color: #f9fafb;
+      td {
         background-color: #f9fafb;
-        td {
-          background-color: #f9fafb;
-        }
-        &.selected {
-          td::after {
-            content: none;
-          }
-        }
-        .tax-name {
-          padding: 8px 16px 8px 16px;
+      }
+      &.selected {
+        td::after {
+          content: none;
         }
       }
-    }
-    .tax-name {
-      flex: 100%;
-    }
-    .action {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex: 1 0 76px;
-    }
-    td {
-      display: block;
-      border-radius: 4px;
-      .edit {
-        margin-right: 12px;
+      .tax-name {
+        padding: 8px 16px 8px 16px;
       }
     }
-    .qt-aside-modern__footer {
-      position: relative;
-      padding: 24px 0;
-      margin-top: 24px;
-      border-top: 1px solid rgba(0,0,0,.1);
+  }
+  .tax-name {
+    flex: 100%;
+  }
+  .action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1 0 76px;
+  }
+  td {
+    display: block;
+    border-radius: 4px;
+    .edit {
+      margin-right: 12px;
+    }
+  }
+  .qt-aside-modern__footer {
+    position: relative;
+    padding: 24px 0;
+    margin-top: 24px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
 
-      &::before,
-      &::after {
-        position: absolute;
-        content: "";
-        top: -1px;
-        height: 1px;
-        width: 24px;
-        border-top: 1px solid rgba(0,0,0,.1);
-      }
-      &::before {
-        left: -24px;
-      }
-      &::after {
-        right: -24px;
-      }
+    &::before,
+    &::after {
+      position: absolute;
+      content: "";
+      top: -1px;
+      height: 1px;
+      width: 24px;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
     }
+    &::before {
+      left: -24px;
+    }
+    &::after {
+      right: -24px;
+    }
+  }
 }
 .cleat-height-dataTable {
-    min-height: auto;
+  min-height: auto;
 }
 .loading {
-    top: calc(50% - 25px) !important;
-    left: calc(50% - 25px) !important;
-    right: auto !important;
+  top: calc(50% - 25px) !important;
+  left: calc(50% - 25px) !important;
+  right: auto !important;
 }
 tbody {
-    tr {
-        .rate {
-            color: #16a4fa;
-        }
+  tr {
+    .rate {
+      color: #16a4fa;
     }
+  }
 }
 td {
   &:hover {
@@ -198,21 +198,26 @@ td {
   }
 }
 tr.selected {
-    td {
-        background-color: #e9f7ff;
-        position: relative;
-        border-radius: 4px;
-        cursor: pointer;
+  td {
+    background-color: #e9f7ff;
+    position: relative;
+    border-radius: 4px;
+    cursor: pointer;
 
-        &::after {
-          position: absolute;
-          content: "";
-          width: 16px;
-          height: 16px;
-          background-image: url("/assets/img/icons/check-blue.svg");
-          top: 50%;
-          right: 12px;
-          transform: translateY(-50%);
-        }
+    &::after {
+      position: absolute;
+      content: "";
+      width: 16px;
+      height: 16px;
+      background-image: url("/assets/img/icons/check-blue.svg");
+      top: 50%;
+      right: 12px;
+      transform: translateY(-50%);
     }
+  }
+}
+.icon__active_subscription {
+  position: absolute;
+  top: 12px;
+  right: 12px;
 }

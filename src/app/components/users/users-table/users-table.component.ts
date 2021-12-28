@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ChangeDetectorRef, Output, EventEmitter, ViewChild } from '@angular/core';
 import { User } from '../class/user';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { Company } from 'src/app/interfaces/company/company';
@@ -20,6 +20,7 @@ import { CrmCompanyJobType } from '../../setting/crm-settings/crm-company-job-ty
 import { UserDefaultSubscriptionAdd } from '../class/user-default-subscription-add';
 import { UserDefaultSubscription } from '../class/user-default-subscription';
 import { UserCustomSubscription } from '../class/user-custom-subscription';
+import { UserTableCustomSubscriptionComponent } from './user-table-custom-subscription/user-table-custom-subscription.component';
 
 @Component({
   selector: 'app-users-table',
@@ -35,6 +36,7 @@ export class UsersTableComponent implements OnInit {
   @Output() onSelectUser = new EventEmitter<any>();
   @Input() jobTitleList: Array<CrmCompanyJobTitle> = [];
   @Input() listCustomSubscription: Array<UserCustomSubscription> = [];
+  @ViewChild('customSubscription') customSubscription: UserTableCustomSubscriptionComponent;
   companies: Array<Company> = [];
   currentUser: CurrentUser = new CurrentUser();
   TYPE_LIST_ALL_USERS = TYPE_LIST_ALL_USERS;
@@ -59,13 +61,6 @@ export class UsersTableComponent implements OnInit {
     }).subscribe(data => {
 
     })
-    /* this.usersService.setDefaultSubscriptions(subscriptions.id,
-       new UserDefaultSubscriptionAdd(subscriptions.ticketSubscription.enabled,
-         subscriptions.ticketManagerSubscription.enabled,
-         subscriptions.invoiceSubscription.enabled)).subscribe(res => {
- 
-           this.user.defaultSubscriptions = new UserDefaultSubscription(subscriptions);
-         })*/
   }
   onChangeCustomSubscriptions(data) {
     console.log("data", data);
@@ -75,15 +70,8 @@ export class UsersTableComponent implements OnInit {
         this.user.defaultSubscriptions.invoiceSubscription.enabled)
       , customSubscriptionIds: data.map(item => item.id)
     }).subscribe(data => {
-
+      this.customSubscription.toggleIsUpdate(false);
     })
-    /* if (isAdd) this.usersService.addCustomSubscriptions(data.id, [this.user.id]).subscribe(res => {
-       this.user.customSubscriptions.push(new UserCustomSubscription(data));
-     })
-     if (!isAdd) this.usersService.removeCustomSubscriptions(data.id, this.user.id).subscribe(res => {
-       let index = this.user.customSubscriptions.findIndex(item => item.id === data.id);
-       if (index > -1) this.user.customSubscriptions.splice(index, 1);
-     })*/
   }
   getJobTitle() {
     let find = this.jobTitleList.find(item => item.id === this.user.jobTitleId);

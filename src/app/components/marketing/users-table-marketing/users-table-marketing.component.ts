@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ARCHIVE_USER, DEARCHIVE_USER } from 'src/app/const/confirm';
 import { USERS } from 'src/app/const/emails';
@@ -16,6 +16,7 @@ import { User } from '../../users/class/user';
 import { UserCustomSubscription } from '../../users/class/user-custom-subscription';
 import { UserDefaultSubscriptionAdd } from '../../users/class/user-default-subscription-add';
 import { UsersTableService } from '../../users/users-table/services/users-table.service';
+import { UserTableCustomSubscriptionComponent } from '../../users/users-table/user-table-custom-subscription/user-table-custom-subscription.component';
 
 @Component({
   selector: 'users-table-marketing',
@@ -26,7 +27,7 @@ import { UsersTableService } from '../../users/users-table/services/users-table.
 export class UsersTableMarketingComponent implements OnInit {
   @Input() selected: boolean = false;
   @Input() user: User;
-
+  @ViewChild('customSubscription') customSubscription: UserTableCustomSubscriptionComponent;
   @Output() onSelectUser = new EventEmitter<any>();
   @Input() jobTitleList: Array<CrmCompanyJobTitle> = [];
   @Input() listCustomSubscription: Array<UserCustomSubscription> = [];
@@ -60,7 +61,7 @@ export class UsersTableMarketingComponent implements OnInit {
         this.user.defaultSubscriptions.invoiceSubscription.enabled)
       , customSubscriptionIds: data.map(item => item.id)
     }).subscribe(data => {
-
+      this.customSubscription.toggleIsUpdate(false);
     })
   }
   getJobTitle() {

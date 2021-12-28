@@ -11,13 +11,17 @@ export class UserTableCustomSubscriptionComponent implements OnInit {
   @Input() customSubscriptions: Array<UserCustomSubscription> = [];
   @Output() onChangeCustom = new EventEmitter();
   @Input() listCustomSubscription: Array<UserCustomSubscription> = [];
+  isUpdate: boolean = false;
   constructor() { }
 
   ngOnInit() {
 
   }
-
+  toggleIsUpdate(data) {
+    this.isUpdate = data;
+  }
   selected(item) {
+    if (this.isUpdate) return;
     let index = this.customSubscriptions.findIndex(custom => custom.id === item.id);
     let customSubscriptions = JSON.parse(JSON.stringify(this.customSubscriptions));
     if (index > -1) {
@@ -28,7 +32,7 @@ export class UserTableCustomSubscriptionComponent implements OnInit {
       customSubscriptions.push(item);
       this.onChangeCustom.emit(customSubscriptions);
     }
-
+    this.isUpdate = true;
   }
   isSeleted(subscription) {
     return this.customSubscriptions.find(item => item.id === subscription.id);

@@ -92,6 +92,7 @@
         *ngIf="type === TYPE_LIST_MARKETING_USERS"
     >
         <user-table-custom-subscription
+            #customSubscription
             class="users-table__subscription--dropdown"
             (onChangeCustom)="onChangeCustomSubscriptions($event)"
             [listCustomSubscription]="listCustomSubscription"
