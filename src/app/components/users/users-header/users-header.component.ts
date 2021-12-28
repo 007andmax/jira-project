@@ -97,7 +97,7 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
     return this._users.filter(item => item.selected).find(item => item.isContact);
   }
   showAddToSubscription() {
-    const modalRef = this.modalService.open(AddUserToSubscribeComponent, { windowClass: 'xs-modal' });
+    const modalRef = this.modalService.open(AddUserToSubscribeComponent, { windowClass: 'xs-modal modal-dialog__save-to-subscription' });
     modalRef.componentInstance.users = this.reqUsers.filter(item => item.selected);
   }
   toggleAllUser(data) {

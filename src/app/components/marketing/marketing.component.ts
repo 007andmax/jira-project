@@ -9,9 +9,11 @@ import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
+import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
 import { UsersRealTimeService } from 'src/app/states/users/users-real-time.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CrmCompanyJobTitle } from '../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
+import { MarketingSubscriptionType } from '../setting/marketing-email/marketing-subscription-type/class/marketing-subscription-type';
 import { ConfirmStateService } from '../shared/confirm/services/confirm-state.service';
 import { User } from '../users/class/user';
 import { UserChange } from '../users/class/user-change';
@@ -41,7 +43,7 @@ export class MarketingComponent implements OnInit {
   jobTitleList: Array<CrmCompanyJobTitle> = [];
   TYPE_LIST_MARKETING_USERS = TYPE_LIST_MARKETING_USERS;
   sub: Subscription = new Subscription();
-  listCustomSubscription: Array<UserCustomSubscription> = [];
+  listCustomSubscription: Array<MarketingSubscriptionType> = [];
   constructor(private usersStateService: UsersStateService,
     private userListService: UserListService,
     private companiesStateService: CompaniesStateService,
@@ -52,6 +54,7 @@ export class MarketingComponent implements OnInit {
     private crmStateService: CrmStateService,
     private marketingEmailService: MarketingEmailService,
     private usersRealTimeService: UsersRealTimeService,
+    private marketingEmailStateService: MarketingEmailStateService,
     private websocketService: WebsocketService) { }
 
   ngOnInit() {
@@ -141,10 +144,11 @@ export class MarketingComponent implements OnInit {
       this.jobTitleList = data;
     })
     this.sub.add(onGetJobTitle);
-    this.marketingEmailService.getList().subscribe((data: any) => {
-      this.listCustomSubscription = data.map(item => new UserCustomSubscription(item));
-      this.usersStateService.setListCustomSubscription(data.map(item => new UserCustomSubscription(item)));
-    });
+    this.listCustomSubscription = this.marketingEmailStateService.getListCustomSubscription();
+    let onGetListCustomSubscription = this.marketingEmailStateService.onGetListCustomSubscription.subscribe(data => {
+      this.listCustomSubscription = data;
+    })
+    this.sub.add(onGetListCustomSubscription);
   }
 
   private onArchiveUsers(ids) {

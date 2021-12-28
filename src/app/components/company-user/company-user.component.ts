@@ -21,6 +21,8 @@ import { UserCustomSubscription } from '../users/class/user-custom-subscription'
 import { UserDefaultSubscription } from '../users/class/user-default-subscription';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { CrmCompanyJobTitle } from '../setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
+import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
+import { MarketingSubscriptionType } from '../setting/marketing-email/marketing-subscription-type/class/marketing-subscription-type';
 
 @Component({
   selector: 'company-user',
@@ -41,7 +43,7 @@ export class CompanyUserComponent implements OnInit {
   selectAll: boolean = false;
   TYPE_LIST_COMPANY_USERS = TYPE_LIST_COMPANY_USERS;
   jobTitleList: Array<CrmCompanyJobTitle> = [];
-  listCustomSubscription: Array<UserCustomSubscription> = [];
+  listCustomSubscription: Array<MarketingSubscriptionType> = [];
   @ViewChild('header') header: UsersHeaderComponent;
   constructor(private usersStateService: UsersStateService,
     private userListService: UserListService,
@@ -55,6 +57,7 @@ export class CompanyUserComponent implements OnInit {
     private leftPanelStateService: LeftPanelStateService,
     private marketingEmailService: MarketingEmailService,
     private usersRealTimeService: UsersRealTimeService,
+    private marketingEmailStateService: MarketingEmailStateService,
     private websocketService: WebsocketService) { }
 
   ngOnInit() {
@@ -147,10 +150,11 @@ export class CompanyUserComponent implements OnInit {
       this.jobTitleList = data;
     })
     this.userListService.addSubscription(onGetJobTitle);
-    this.marketingEmailService.getList().subscribe((data: any) => {
-      this.listCustomSubscription = data.map(item => new UserCustomSubscription(item));
-      this.usersStateService.setListCustomSubscription(data.map(item => new UserCustomSubscription(item)));
-    });
+    this.listCustomSubscription = this.marketingEmailStateService.getListCustomSubscription();
+    let onGetListCustomSubscription = this.marketingEmailStateService.onGetListCustomSubscription.subscribe(data => {
+      this.listCustomSubscription = data;
+    })
+    this.userListService.addSubscription(onGetListCustomSubscription);
     this.onInitSubscribe();
   }
   public onInitFilters(id) {

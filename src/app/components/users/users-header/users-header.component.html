@@ -140,6 +140,7 @@
                     <th
                         class="users-table__tickets pointer"
                         (click)="onFilter('tickets')"
+                        *ngIf="type === TYPE_LIST_ALL_USERS || type === TYPE_LIST_COMPANY_USERS"
                     >
                         Tickets
                         <span class="qt-table-modern__sorting"></span>

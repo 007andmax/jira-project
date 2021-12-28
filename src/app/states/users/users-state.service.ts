@@ -31,8 +31,6 @@ export class UsersStateService {
   openDetailAside: EventEmitter<any> = new EventEmitter();
   closeDetailAside: EventEmitter<any> = new EventEmitter();
   onChangeUserPermissions: EventEmitter<any> = new EventEmitter();
-  onGetListCustomSubscription: EventEmitter<any> = new EventEmitter();
-  listCustomSubscription: Array<UserCustomSubscription> = [];
   userForArchive: User = null;
   usersForArchive: Array<User> = [];
   userForDeArchive: User = null;
@@ -91,13 +89,6 @@ export class UsersStateService {
   }
   public getModeUserFilterSubscription() {
     return this.modeUserFilterSubscription;
-  }
-  public getListCustomSubscription() {
-    return this.listCustomSubscription;
-  }
-  public setListCustomSubscription(data) {
-    this.listCustomSubscription = data;
-    this.onGetListCustomSubscription.emit(data);
   }
   public onInitGetCurrentUser() {
     this.userService.getCurrentUser().subscribe((data: any) => {

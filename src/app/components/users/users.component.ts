@@ -20,6 +20,8 @@ import { UserCustomSubscription } from './class/user-custom-subscription';
 import { MarketingEmailService } from 'src/app/services/marketing-email/marketing-email.service';
 import { UserDefaultSubscription } from './class/user-default-subscription';
 import { UsersRealTimeService } from 'src/app/states/users/users-real-time.service';
+import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
+import { MarketingSubscriptionType } from '../setting/marketing-email/marketing-subscription-type/class/marketing-subscription-type';
 
 @Component({
   selector: 'app-users',
@@ -42,7 +44,7 @@ export class UsersComponent implements OnInit {
   jobTitleList: Array<CrmCompanyJobTitle> = [];
   TYPE_LIST_ALL_USERS = TYPE_LIST_ALL_USERS;
   sub: Subscription = new Subscription();
-  listCustomSubscription: Array<UserCustomSubscription> = [];
+  listCustomSubscription: Array<MarketingSubscriptionType> = [];
   constructor(private usersStateService: UsersStateService,
     private userListService: UserListService,
     private companiesStateService: CompaniesStateService,
@@ -53,6 +55,7 @@ export class UsersComponent implements OnInit {
     private crmStateService: CrmStateService,
     private marketingEmailService: MarketingEmailService,
     private usersRealTimeService: UsersRealTimeService,
+    private marketingEmailStateService: MarketingEmailStateService,
     private websocketService: WebsocketService) { }
 
   ngOnInit() {
@@ -158,10 +161,11 @@ export class UsersComponent implements OnInit {
       this.jobTitleList = data;
     })
     this.sub.add(onGetJobTitle);
-    this.marketingEmailService.getList().subscribe((data: any) => {
-      this.listCustomSubscription = data.map(item => new UserCustomSubscription(item));
-      this.usersStateService.setListCustomSubscription(data.map(item => new UserCustomSubscription(item)));
-    });
+    this.listCustomSubscription = this.marketingEmailStateService.getListCustomSubscription();
+    let onGetListCustomSubscription = this.marketingEmailStateService.onGetListCustomSubscription.subscribe(data => {
+      this.listCustomSubscription = data;
+    })
+    this.sub.add(onGetListCustomSubscription);
   }
 
   private onArchiveUsers(ids) {

@@ -1,6 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { MarketingSubscriptionType } from 'src/app/components/setting/marketing-email/marketing-subscription-type/class/marketing-subscription-type';
 import { MODE_HIDE_ACTIVE } from 'src/app/const/users';
 import { MarketingEmailService } from 'src/app/services/marketing-email/marketing-email.service';
+import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
 import { UserCustomSubscription } from '../../class/user-custom-subscription';
 
 @Component({
@@ -14,13 +17,16 @@ export class UserCustomSubscriptionComponent implements OnInit {
   @Input() customSubscriptions: Array<UserCustomSubscription> = [];
   @Input() classDropDown: string;
   @Output() onChange = new EventEmitter();
-  list: Array<UserCustomSubscription> = [];
-  constructor(private marketingEmailService: MarketingEmailService) { }
+  list: Array<MarketingSubscriptionType> = [];
+  sub: Subscription = new Subscription();
+  constructor(private marketingEmailStateService: MarketingEmailStateService) { }
 
   ngOnInit() {
-    this.marketingEmailService.getList().subscribe((data: any) => {
-      this.list = data.map(item => new UserCustomSubscription(item));
-    });
+    this.list = this.marketingEmailStateService.getListCustomSubscription();
+    let onGetListCustomSubscription = this.marketingEmailStateService.onGetListCustomSubscription.subscribe(data => {
+      this.list = data;
+    })
+    this.sub.add(onGetListCustomSubscription);
   }
   selected(item) {
     let index = this.customSubscriptions.findIndex(custom => custom.id === item.id);

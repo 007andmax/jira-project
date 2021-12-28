@@ -1,6 +1,9 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { MarketingSubscriptionType } from '../../setting/marketing-email/marketing-subscription-type/class/marketing-subscription-type';
 import { UserCustomSubscription } from '../../users/class/user-custom-subscription';
 import { UserFilter } from '../../users/class/user-filter';
 import { LeftPanelUsersService } from '../left-panel-users/services/left-panel-users.service';
@@ -14,14 +17,16 @@ import { LeftPanelUsersService } from '../left-panel-users/services/left-panel-u
 export class LeftPanelMarketingComponent implements OnInit {
   open: boolean = false;
   filter: UserFilter = new UserFilter();
-  listCustomSubscription: Array<UserCustomSubscription> = [];
+  listCustomSubscription: Array<MarketingSubscriptionType> = [];
   @Input() activePage: string = "";
   @Output() onChangeState = new EventEmitter();
   @Output() onGoToLink = new EventEmitter();
   @Output() onOpenPanel = new EventEmitter();
+  sub: Subscription = new Subscription();
   constructor(private usersStateService: UsersStateService,
     private leftPanelUsersService: LeftPanelUsersService,
     public cd: ChangeDetectorRef,
+    private marketingEmailStateService: MarketingEmailStateService,
     private leftPanelStateService: LeftPanelStateService,
   ) { }
 
@@ -35,12 +40,11 @@ export class LeftPanelMarketingComponent implements OnInit {
     this.leftPanelStateService.onFirstOpen.subscribe(data => {
       if (this.isMarketingPage(data)) this.open = true;
     })
-    this.listCustomSubscription = this.usersStateService.getListCustomSubscription();
-    this.usersStateService.onGetListCustomSubscription.subscribe(data => {
+    this.listCustomSubscription = this.marketingEmailStateService.getListCustomSubscription();
+    let onGetListCustomSubscription = this.marketingEmailStateService.onGetListCustomSubscription.subscribe(data => {
       this.listCustomSubscription = data;
-      this.listCustomSubscription.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-        1 : (b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 0));
     })
+    this.sub.add(onGetListCustomSubscription);
     this.usersStateService.getOnFilter().subscribe((data) => {
 
       this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title, data.defaultSubscriptions, data.customSubscriptions);

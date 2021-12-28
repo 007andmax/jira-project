@@ -45,12 +45,16 @@ export class AddUserToSubscribeComponent implements OnInit {
       }
     })
     this.sub.add(getConfirm);
-    this.marketingEmailService.getList().subscribe((data: any) => {
-      this.marketingSubscriptionList = data.map(item => new MarketingSubscriptionType(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-        1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+    this.marketingSubscriptionList = this.marketingEmailStateService.getListCustomSubscription();
+    if (this.marketingSubscriptionList.length > 0) this.showPreloader = false;
+    let onGetListCustomSubscription = this.marketingEmailStateService.onGetListCustomSubscription.subscribe(data => {
+      this.marketingSubscriptionList = data;
       this.showPreloader = false;
       this.cd.detectChanges();
     })
+    this.sub.add(onGetListCustomSubscription);
+
+
     let changeCrmArray = this.marketingEmailRealTimeService.changeCrmArray.subscribe(data => {
       console.log("data", data);
       if (data.action === "CUSTOM_SUBSCRIPTION_CREATED") this.marketingSubscriptionList.push(new MarketingSubscriptionType(data.data));
