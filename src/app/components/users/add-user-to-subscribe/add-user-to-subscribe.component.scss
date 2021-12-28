@@ -101,6 +101,9 @@ add-marketing-subscription-type {
   margin: 0;
   padding: 0;
 }
+.modal-dialog__save-to-subscription {
+
+}
 .dataTable {
   position: relative;
   min-height: 201px;
@@ -146,6 +149,7 @@ add-marketing-subscription-type {
     align-items: center;
     justify-content: center;
     flex: 1 0 76px;
+    align-self: stretch;
   }
   td {
     display: block;
@@ -190,6 +194,11 @@ tbody {
     .rate {
       color: #16a4fa;
     }
+  }
+}
+tr:hover {
+  td {
+    background-color: #f9fafb;
   }
 }
 td {

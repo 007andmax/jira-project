@@ -7,30 +7,6 @@
     }
 }
 .add-industry-name {
-    position: relative;
     width: auto;
-    input {
-        width: 100%;
-        border: 1px solid transparent;
-        border-radius: 4px;
-        outline: none;
-        padding: 7px 16px;
-        outline: none;
-        font-weight: 500;
-        color: $primary-2;
-        &:hover,
-        &:focus {
-            border-color: $gray-600;
-        }
-        &::placeholder {
-            font-weight: 400;
-            color: $gray-600;
-        }
-    }
 }
-tr {
-  display: block;
-    td {
-      display: block;
-    }
-}
+

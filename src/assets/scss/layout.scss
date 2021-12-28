@@ -355,6 +355,16 @@ body {
             resize: none;
         }
     }
+   .dataTable {
+     input {
+       border-color: transparent;
+       background-color: transparent;
+       &:hover,
+       &:focus {
+         border-color: transparent;
+       }
+     }
+   }
     select.cmn-select {
         @include app-none();
         background: url("/assets/img/selct-arrow.svg") no-repeat right 15px center;
