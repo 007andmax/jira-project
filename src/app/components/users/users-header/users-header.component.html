@@ -22,7 +22,7 @@
                     <div [textContent]="getSelectedCount() + ' Users Selected'"></div>
                     <div
                         class="qt-ml-20 qt-fw-500 qt-df qt-ai-c qt-color-info qt-ai-c qt-pointer"
-                        *ngIf="!isExistArchiveUser()"
+                        *ngIf="!isExistArchiveUser() && (type === TYPE_LIST_MARKETING_USERS || type === TYPE_LIST_COMPANY_USERS)"
                         (click)="showAsideForDraftEmail()"
                     >
                         <div class="icon__email-blue qt-sz-16 qt-ic-c qt-mr-6"></div>
@@ -30,7 +30,7 @@
                     </div>
                     <div
                         class="qt-ml-20 qt-fw-500 qt-df qt-ai-c qt-color-info qt-ai-c qt-pointer"
-                        *ngIf="!isExistArchiveUser()"
+                        *ngIf="!isExistArchiveUser() && (type === TYPE_LIST_MARKETING_USERS || type === TYPE_LIST_COMPANY_USERS)"
                         (click)="showAddToSubscription()"
                     >
                         <div class="icon__list qt-sz-16 qt-ic-c qt-mr-6"></div>
@@ -130,7 +130,12 @@
                         Contact No
                         <span class="qt-table-modern__sorting"></span>
                     </th>
-                    <th class="users-table__subscription">Subscription</th>
+                    <th
+                        class="users-table__subscription"
+                        *ngIf="type === TYPE_LIST_ALL_USERS || type === TYPE_LIST_COMPANY_USERS"
+                    >
+                        Subscription
+                    </th>
                     <th
                         class="users-table__subscription"
                         *ngIf="type === TYPE_LIST_MARKETING_USERS"

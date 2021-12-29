@@ -38,19 +38,17 @@ export class UsersFilterSubscriptionsComponent implements OnInit {
   constructor(private marketingEmailStateService: MarketingEmailStateService,) { }
 
   ngOnInit() {
-
-    this.defaultSubscriptions.clearEnabledAll();
-
-
     this.listCustomSubscriptions = this.marketingEmailStateService.getListCustomSubscription();
     if (this.listCustomSubscriptions.length > 0) this.setSubscriptions();
     let onGetListCustomSubscription = this.marketingEmailStateService.onGetListCustomSubscription.subscribe(data => {
       this.listCustomSubscriptions = data;
+      console.log("this.listCustomSubscriptions", this.listCustomSubscriptions);
       this.setSubscriptions();
     })
     this.sub.add(onGetListCustomSubscription);
   }
   setSubscriptions() {
+    this.defaultSubscriptions.clearEnabledAll();
     let subscriptions = [];
     subscriptions.push(new UsersFilterSubscriptionsItem("invoiceSubscription", USER_SUBSCRIPTION_TYPE_DEFAULT, "Invoice Updates"));
     subscriptions.push(new UsersFilterSubscriptionsItem("ticketSubscription", USER_SUBSCRIPTION_TYPE_DEFAULT, "Ticket Updates"));

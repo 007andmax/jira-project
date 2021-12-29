@@ -79,7 +79,10 @@
             </div>
         </ng-template>
     </td>
-    <td class="users-table__subscription">
+    <td
+        class="users-table__subscription"
+        *ngIf="type === TYPE_LIST_ALL_USERS || type === TYPE_LIST_COMPANY_USERS"
+    >
         <user-table-default-subscription
             class="users-table__subscription--dropdown"
             (onChangeDefault)="onChangeDefaultSubscriptions($event)"

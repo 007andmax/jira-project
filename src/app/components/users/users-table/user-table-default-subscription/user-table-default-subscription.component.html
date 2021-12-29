@@ -2,7 +2,11 @@
     ngbDropdown
     container="body"
 >
-    <div class="list-default-subscriptions">
+    <div
+        class="list-default-subscriptions"
+        id="dropdownBasic"
+        ngbDropdownToggle
+    >
         <div
             *ngIf="defaultSubscriptions && defaultSubscriptions.invoiceSubscription && defaultSubscriptions.invoiceSubscription.enabled"
             [ngClass]="{'active':defaultSubscriptions.invoiceSubscription.activated,
@@ -38,13 +42,6 @@
                 class="icn-sm icn-remove qt-bg-contain qt-dib"
                 (click)="updateDefault('ticketManagerSubscription')"
             ></div>
-        </div>
-        <div
-            class="container-caret"
-            id="dropdownBasic"
-            ngbDropdownToggle
-        >
-            <i class="icn-sm icn-report-caret qt-bg-contain"></i>
         </div>
     </div>
     <div

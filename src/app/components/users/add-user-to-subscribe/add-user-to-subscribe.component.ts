@@ -25,6 +25,7 @@ export class AddUserToSubscribeComponent implements OnInit {
   showAdd: boolean = false;
   selectedForEditSubscription: MarketingSubscriptionType;
   showPreloader: boolean = true;
+  isAddNewSubscription: boolean = false;
   @Input() users: Array<User> = [];
   sub: Subscription = new Subscription();
   constructor(private marketingEmailService: MarketingEmailService,
@@ -53,30 +54,6 @@ export class AddUserToSubscribeComponent implements OnInit {
       this.cd.detectChanges();
     })
     this.sub.add(onGetListCustomSubscription);
-
-
-    let changeCrmArray = this.marketingEmailRealTimeService.changeCrmArray.subscribe(data => {
-      console.log("data", data);
-      if (data.action === "CUSTOM_SUBSCRIPTION_CREATED") this.marketingSubscriptionList.push(new MarketingSubscriptionType(data.data));
-      if (data.action === "CUSTOM_SUBSCRIPTION_DELETED") {
-        let index = this.marketingSubscriptionList.findIndex(item => item.id === data.data);
-        if (index > -1) this.marketingSubscriptionList.splice(index, 1);
-      }
-      if (data.action === "CUSTOM_SUBSCRIPTION_EDITED") {
-        let index = this.marketingSubscriptionList.findIndex(item => item.id === data.data.id);
-        if (index > -1) this.marketingSubscriptionList[index].onUpdate(data.data);
-      }
-      if (data.action === "MODIFIED_USERS_LIST") {
-        let index = this.marketingSubscriptionList.findIndex(item => item.id === data.data.subscription.id);
-        if (index > -1) this.marketingSubscriptionList[index].onUpdate(data.data.subscription);
-        console.log("this.marketingSubscriptionList[index]", this.marketingSubscriptionList[index]);
-      }
-      this.marketingSubscriptionList.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-        1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-      this.cd.detectChanges();
-
-    })
-    this.sub.add(changeCrmArray);
   }
   onRemoveSubscription(id) {
     this.marketingEmailService.removeSubscriptionType(id).subscribe(data => {
@@ -127,12 +104,21 @@ export class AddUserToSubscribeComponent implements OnInit {
     this.activeModal.close();
 
   }
+  onAddedSubscription(data) {
+    let subscription = new MarketingSubscriptionType(data);
+    if (this.isAddNewSubscription) {
+      this.onSelectSubscription(subscription);
+      this.save();
+      this.isAddNewSubscription = false;
+    }
+  }
   save() {
     let subscriptions = [];
     this.selectedSubscriptions.forEach(subscription => {
       let users = this.users.filter(user => !user.customSubscriptions.find(customSubscription => customSubscription.id === subscription.id))
       if (users.length > 0) subscriptions.push({ id: subscription.id, users: users.map(user => user.id) })
     })
+    if (this.showAdd) this.isAddNewSubscription = true;
     if (subscriptions.length > 0) {
       forkJoin(subscriptions.map(item => this.marketingEmailService.addUsers(item.id, item.users).pipe(map((res) => res),
         catchError(error => of(undefined)))))

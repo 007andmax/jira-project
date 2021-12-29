@@ -17,6 +17,7 @@ export class AddMarketingSubscriptionTypeComponent implements OnInit {
   @Input() mode: string;
   @Input() marketingSubscriptionList: Array<MarketingSubscriptionType> = [];
   @Output() onClose: EventEmitter<any> = new EventEmitter();
+  @Output() onAdded: EventEmitter<any> = new EventEmitter();
   constructor(private marketingEmailService: MarketingEmailService) { }
 
   ngOnInit() {
@@ -36,7 +37,8 @@ export class AddMarketingSubscriptionTypeComponent implements OnInit {
     this.marketingEmailService.addSubscriptionType(this.name).pipe(map((res) => res),
       catchError(error => of(undefined)))
       .subscribe(
-        () => {
+        (data) => {
+          this.onAdded.emit(data);
           this.onClose.emit(null);
         },
         error => {
