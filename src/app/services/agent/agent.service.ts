@@ -50,7 +50,6 @@ export class AgentService {
       mode: CryptoJS.mode.CBC,
       padding: CryptoJS.pad.Pkcs7,
     });
-
     return JSON.parse(decrypted.toString(CryptoJS.enc.Utf8));
   }
 
@@ -64,6 +63,16 @@ export class AgentService {
 
   public setAccessToken(data) {
     this.AccessToken = data;
+  }
+
+  public searchDeviceWithTag(data) {
+    return this.http
+      .post(
+        `${this.apiAgent}agent/Asset/GetBySearch`,
+        this.encrypt128(this.key, JSON.stringify(data)),
+        { headers: this.getHeader(), responseType: "text" }
+      )
+      .pipe(map((data: string) => data));
   }
 
   public servicePauseCommand(data:any)

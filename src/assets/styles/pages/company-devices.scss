@@ -166,6 +166,30 @@
           overflow: hidden;
           position: relative;
         }
+        &__device-agent {
+          width: 105px;
+          max-width: 105px;
+          min-width: 105px;
+          padding: 12px 8px 12px 8px;
+          color: #4f5f79;
+          vertical-align: top;
+          .agent-tag {
+            border: solid 1px #2ec866;
+            line-height: 1;
+            width: fit-content;
+            padding: 2px 4px;
+            border-radius: 3px;
+            color: #2ec866;
+            background-color: #ffffff;
+            letter-spacing: 0.3px;
+            font-size: 8px;
+            text-transform: uppercase;
+            &.--offline {
+              color: #ff5263;
+              border: solid 1px #ff5263;
+            }
+          }
+        }
         &__go-to {
           width: 30px;
           max-width: 30px;
@@ -195,7 +219,7 @@
         vertical-align: middle !important;
         .company-devices-table {
           &__check, &__device-type, &__device-name, &__logged-user,
-          &__up-time, &__windows, &__ip-address, &__go-to, &__connect, &__menu {
+          &__up-time, &__windows, &__ip-address, &__device-agent, &__go-to, &__connect, &__menu {
             padding-top: 4px;
             padding-bottom: 4px;
             vertical-align: middle;

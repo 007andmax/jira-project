@@ -3,29 +3,21 @@
     width: 100%;
     border-collapse: collapse;
     .s-name {
-      width: 30% !important;
+      width: 35% !important;
       padding: 0 18px 0 18px;
       background-color: white;
       height: 40px;
     }
     .description {
-      width: 37% !important;
+      width: 50% !important;
       padding: 0px;
     }
     .status {
       width: 10% !important;
       padding: 0px;
     }
-    .start{
-      width:6% !important;
-      padding: 0px;
-    }
-    .restart{
-      width:6% !important;
-      padding: 0px;
-    }
-    .pause{
-      width:6% !important;
+    .action{
+      width:5% !important;
       padding: 0px;
     }
     thead {
@@ -166,6 +158,24 @@ li.add-user {
 .disabled-link {
   pointer-events: none;
 }
+
+.service-loader {
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  border: 0.35rem solid rgba(0, 0, 0, 0.2);
+  border-top-color: black;
+  animation: spin 1s infinite linear;
+  margin-right: 8px
+}
+
+.service-button{
+  float: left;
+  margin-left: 20px;
+}
+
+
 
 
 

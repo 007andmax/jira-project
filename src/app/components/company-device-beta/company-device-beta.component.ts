@@ -265,7 +265,7 @@ export class CompanyDeviceBetaComponent implements OnInit {
       this.agentService.SendPowerShellCommand(data);
     }
     if(command === 'm') {
-      this.agentService.getAssetByGuid(assetId).subscribe((resp) => {      
+      this.agentService.getAssetByGuid(assetId).subscribe((resp) => {
         let cAsset = resp[0];
         cAsset.IsMasterAgent = true;
 

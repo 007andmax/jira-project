@@ -65,7 +65,7 @@ export class ServicesComponent implements OnInit {
       this.serviceList = JSON.parse(item.Value);
       for(let i=0;i<this.serviceList.length;i++)
       {
-        this.serviceList[i] = Object.assign(this.serviceList[i],{Loaded:'False'});
+        this.serviceList[i] = Object.assign(this.serviceList[i],{Loaded:'False',RestartLoaded:'False',StopLoaded:'False'});
       }
     }
     this.loading = false;
@@ -290,7 +290,7 @@ export class ServicesComponent implements OnInit {
   }
 
   servicePlay(serviceName:string,index:number){
-    this.serviceList[index] = Object.assign(this.serviceList[index],{Loaded:'True'});
+    this.serviceList[index] = Object.assign(this.serviceList[index],{Loaded:'True',RestartLoaded:'False',StopLoaded:'False'});
     let data: any = {};
     data.AssetID = this.assetId;
     data.MessageType = "StartService";
@@ -301,7 +301,7 @@ export class ServicesComponent implements OnInit {
   }
 
   serviceRestart(serviceName:string,index:number){
-    this.serviceList[index] = Object.assign(this.serviceList[index],{Loaded:'True'});
+    this.serviceList[index] = Object.assign(this.serviceList[index],{Loaded:'True',RestartLoaded:'True',StopLoaded:'False'});
     let data: any = {};
     data.AssetID = this.assetId;
     data.MessageType = "RestartService";
@@ -312,7 +312,7 @@ export class ServicesComponent implements OnInit {
   }
 
   servicePause(serviceName:string,index:number){
-    this.serviceList[index] = Object.assign(this.serviceList[index],{Loaded:'True'});
+    this.serviceList[index] = Object.assign(this.serviceList[index],{Loaded:'True',RestartLoaded:'False',StopLoaded:'True' });
     let data: any = {};
     data.AssetID = this.assetId;
     data.MessageType = "StopService";

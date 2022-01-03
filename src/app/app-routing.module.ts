@@ -62,6 +62,7 @@ import { CompanyDocumentsComponent } from './components/companies/company-docume
 import { HomeComponent } from './components/home/home.component';
 import { CompanyDeviceBetaComponent } from './components/company-device-beta/company-device-beta.component';
 import { DeviceComponent } from './components/device/device.component';
+import { DevicesComponent } from './components/devices/devices.component';
 
 const routes: Routes = [
 
@@ -321,6 +322,10 @@ const routes: Routes = [
   {
     path: ':company/company/:id/devices-beta',
     component: CompanyDeviceBetaComponent,
+  },
+  {
+    path: ':company/company/:id/newdevices',
+    component: DevicesComponent,
   },
   {
     path: ':company/quickSupport',

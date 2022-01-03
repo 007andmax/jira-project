@@ -1,0 +1,471 @@
+<div class="qt-page-list company-devices-page">
+  <div class="qt-page-list__header --sticky">
+      <div class="qt-page-list__header-title-line--left">
+          <h3
+              class="qt-page-list__header-title"
+              [textContent]="'Devices'"
+          ></h3>
+                <div class="Rectangle">
+                    <img src="/assets/img/icons/search.svg"
+                  class="Online-Search">
+                  <div class="SearchRectangle">
+                    <mat-form-field class="example-chip-list" appearance="none">
+                      <mat-chip-list #chipList>
+                          <mat-chip *ngFor="let tag of selectedTag; let i=index" [selectable]="selectable" [removable]="removable" (removed)="remove(i)">
+                            {{tag.Name}}
+                            <mat-icon
+                          matChipRemove
+                          *ngIf="removable"
+                      >
+                          cancel
+                      </mat-icon>
+                          </mat-chip>
+                          <input autofocus
+                  id="dropdownServices"
+                  [(ngModel)]="tagFilterValue"
+                  class="pointer"
+                  [matChipInputFor]="chipList"
+                  (keyup.enter)="add($event.target.value)"
+
+              >
+                      </mat-chip-list>
+                    </mat-form-field>
+                  </div>
+                  <div class="StarRectangle">
+                    <img src="/assets/img/device/favourite.svg"
+     class="Favourite">
+                  </div>
+                </div>
+      </div>
+
+      <div class="qt-page-list__header-thead-container">
+          <table class="qt-table-modern qt-page-list__header-thead">
+              <thead>
+                  <tr>
+                      <th class="company-devices-table__check">
+                          <div class="d-f">
+                              <label class="qt-checkbox">
+                                  <input
+                                      type="checkbox"
+                                      [(ngModel)]="selectAllDevices"
+                                      (change)="toogleDevices()"
+                                  >
+                                  <span></span>
+                              </label>
+                          </div>
+                      </th>
+                      <th class="company-devices-table__device-type"></th>
+                      <th
+                          class="company-devices-table__device-name pointer"
+                          (click)="onFilter('Name')"
+                      >
+                          Device Name
+                          <span class="qt-table-modern__sorting"></span>
+                      </th>
+                      <th class="company-devices-table__logged-user pointer">Logged in user</th>
+                      <th class="company-devices-table__up-time">Up time</th>
+                      <th class="company-devices-table__windows">Windows</th>
+                      <th class="company-devices-table__ip-address">
+                          <span class="qt-pl-30">IP address</span>
+                      </th>
+                      <th class="company-devices-table__device-agent">Agent</th>
+                      <th class="company-devices-table__go-to"></th>
+                      <th class="company-devices-table__connect"></th>
+                      <th class="company-devices-table__menu"></th>
+                  </tr>
+              </thead>
+          </table>
+      </div>
+  </div>
+  <div class="qt-df qt-fd-c qt-jc-sb">
+      <div class="qt-page-list__body">
+          <div class="qt-page-list__body-table-container">
+              <table class="qt-page-list__body-tbody qt-table-modern company-devices-table">
+                  <tbody>
+                      <tr class="company-device-hover" *ngFor="let asset of assetList | beta: search; let i = index">
+                          <td class="company-devices-table__check">
+                              <div class="d-f">
+                                  <label class="qt-checkbox">
+                                      <input
+                                          type="checkbox"
+                                          [(ngModel)]="asset.selected"
+                                          (change)="onSelectDevice()"
+                                      >
+                                      <span></span>
+                                  </label>
+                              </div>
+                          </td>
+                          <td class="company-devices-table__device-type">
+                              <div
+                                  ngbDropdown
+                                  placement="bottom-left"
+                                  container="body"
+                                  class="qt-ic-c qt-pointer device-type-icon qt-sz-24"
+                                  [ngClass]="{
+                  icon__computer:
+                  asset.iconName === 'Workstation' || !asset.iconName,
+                  icon__tablet: asset.iconName === 'Networking Hardware',
+                  icon__printer: asset.iconName === 'Printer',
+                  icon__server: asset.iconName === 'Server',
+                  '--ofline': !asset.online
+                }"
+                                  ngbDropdownToggle
+                              >
+                                  <div ngbDropdownMenu>
+                                      <ul class="
+                      icon-list
+                      qt-dropdown-menu
+                      --dropdown-icons
+                      device-type-dropdown
+                    ">
+                                          <li
+                                              *ngFor="let hardwar of hardwareTypes"
+                                              (click)="setIcon(asset.ID, hardwar.ID)"
+                                          >
+                                              <span>
+                                                  <i
+                                                      class="qt-ic-c qt-pointer device-type-icon qt-sz-24"
+                                                      ngbDropdownItem
+                                                      [ngClass]="{
+                            icon__computer:
+                              hardwar.Name === 'Workstation' || !hardwar.Name,
+                            icon__tablet:
+                              hardwar.Name === 'Networking Hardware',
+                            icon__printer: hardwar.Name === 'Printer',
+                            icon__server: hardwar.Name === 'Server'
+                          }"
+                                                  ></i>
+                                              </span>
+                                          </li>
+                                      </ul>
+                                  </div>
+                              </div>
+                          </td>
+                          <td class="company-devices-table__device-name">
+                              <div>
+                                  <div class="qt-df qt-fd-c">
+                                      <div class="
+                      company-devices-table-device-name
+                      qt-ff-gm qt-df qt-ai-c
+                    ">
+                                          <span [textContent]="asset.Title"></span>
+                                      </div>
+                                      <span
+                                          class="company-device-desc"
+                                          [textContent]
+                                      ></span>
+                                  </div>
+                              </div>
+                          </td>
+                          <td class="company-devices-table__logged-user">
+                              <div class="qt-df qt-fd-c">
+                                  <span
+                                      class="logged-name qt-ff-gm"
+                                      [textContent]="asset.CurrentUser || ''"
+                                  ></span>
+                                  <span
+                                      class="logged-time"
+                                      *ngIf="asset.IdelTime"
+                                  >
+                                      Idle:
+                                      <span>{{ asset.IdelTime }}</span>
+                                  </span>
+                              </div>
+                          </td>
+                          <td class="company-devices-table__up-time">
+                              <div class="qt-df qt-fd-c">
+                                  <span>
+                                      <span>{{ asset.IdelTime }}</span>
+                                      <ng-template
+                                          #tipOfflineDevice
+                                          class="tooltip"
+                                      >
+                                          <span>{{ asset.IdelTime }}</span>
+                                      </ng-template>
+                                  </span>
+                                  <span
+                                      *ngIf="
+                    asset.IdelTime != '' &&
+                    asset.IdelTime != undefined &&
+                    asset.IdelTime != null
+                  "
+                                      class="uptime-tag qt-ff-gm"
+                                      [textContent]="'Online'"
+                                  ></span>
+                                  <span
+                                      *ngIf="
+                    asset.IdelTime == '' ||
+                    asset.IdelTime == undefined ||
+                    asset.IdelTime == null
+                  "
+                                      placement="top"
+                                      container="body"
+                                      [ngbTooltip]="tipOfflineDevice"
+                                      class="uptime-tag qt-ff-gm --offline"
+                                      [textContent]="'Offline'"
+                                  ></span>
+                              </div>
+                          </td>
+                          <td class="company-devices-table__windows">
+                            <span
+                                class="company-devices-table__ip-windows-text"
+                                [textContent]="asset.Caption"
+                            ></span>
+                            <div class="company-devices-table__system-network-buttons">
+                                <div
+                                    class="qt-df qt-ai-c qt-mr-20 qt-pointer"
+                                    (click)="openAside('SYSTEM',asset)"
+                                >
+                                    <div class="icon__system qt-ic-c qt-mr-6 qt-sz-16"></div>
+                                    <div>System</div>
+                                </div>
+                                <div
+                                    class="qt-df qt-ai-c qt-pointer"
+                                    (click)="openAside('NETWORK',asset)"
+                                >
+                                    <div class="icon__network qt-ic-c qt-mr-6 qt-sz-16"></div>
+                                    <div>Network</div>
+                                </div>
+                            </div>
+                        </td>
+                          <td class="company-devices-table__ip-address">
+                            <span
+                                class="qt-pl-30 company-devices-table__ip-address-text"
+                                [textContent]="asset.InternalIPAddress"
+                            ></span>
+                            <div class="company-devices-table__ip-address-buttons qt-pl-15">
+                                <div
+                                    class="qt-df qt-ai-c qt-mr-20 qt-pointer"
+                                    (click)="openAside('SOFTWARE',asset)"
+                                >
+                                    <div class="icon__software qt-ic-c qt-mr-6 qt-sz-16"></div>
+                                    <div>Software</div>
+                                </div>
+                                <div
+                                    class="qt-df qt-ai-c qt-pointer"
+                                    (click)="openAside('UPDATES',asset)"
+                                >
+                                    <div class="icon__updates qt-ic-c qt-mr-6 qt-sz-16"></div>
+                                    <div>Updates</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="company-devices-table__device-agent">
+                          <div class="qt-df qt-fd-c">
+                            <span>
+                              <span>{{ asset.InstallDate | date: 'dd/MM/yyyy' }}</span>
+                          </span>
+                          <span
+                              *ngIf="asset.IsAgentCurrent"
+                              class="agent-tag qt-ff-gm"
+                          >{{asset.CurrentVersion}}</span>
+                          <span
+                              *ngIf="!asset.IsAgentCurrent"
+                              class="agent-tag qt-ff-gm --offline"
+                          >{{asset.CurrentVersion}}</span>
+
+                        </div>
+                        </td>
+                          <td class="company-devices-table__go-to">
+                              <ng-template
+                                  #tipDeviceDetail
+                                  class="tooltip"
+                              >
+                                  Device Detail
+                              </ng-template>
+                              <div
+                                  class="qt-ic-c icon__go-to qt-pointer qt-sz-24 qt-bgsz-16"
+                                  placement="top"
+                                  *ngIf="asset.ID"
+                                  [ngbTooltip]="tipDeviceDetail"
+                                  (click)="gotoDetailDevice(asset.Guid)"
+                              ></div>
+                          </td>
+                          <td class="company-devices-table__connect">
+                              <div
+                                  ngbDropdown
+                                  container="body"
+                                  placement="bottom-right"
+                              >
+                                  <ng-template
+                                      #tipRemoteAccess
+                                      class="tooltip"
+                                  >
+                                      Remote Access
+                                  </ng-template>
+                                  <div
+                                      [hidden]="!(asset.online) || (asset.CanRemoteControl)"
+                                      class="
+                    qt-ic-c
+                    icon__quick-connect
+                    qt-pointer qt-sz-24 qt-bg-contain
+                  "
+                                      placement="top"
+                                      container="body"
+                                      [ngbTooltip]="tipRemoteAccess"
+                                      ngbDropdownToggle
+                                  >
+                                      <div ngbDropdownMenu>
+                                          <ul class="qt-dropdown-menu">
+                                              <li
+                                                  (click)="remoteAccess('CSS', asset.Guid)"
+                                                  ngbDropdownItem
+                                              >
+                                                  QuickTech Connect
+                                              </li>
+                                              <li
+                                                  (click)="remoteAccess('RDP', asset.Guid)"
+                                                  ngbDropdownItem
+                                              >
+                                                  Remote Desktop
+                                              </li>
+                                          </ul>
+                                      </div>
+                                  </div>
+                              </div>
+                          </td>
+                          <td class="company-devices-table__menu">
+                              <div
+                                  class="company-devices-table__menu-body"
+                                  ngbDropdown
+                                  placement="bottom-right"
+                                  container="body"
+                              >
+                                  <div
+                                      class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"
+                                      ngbDropdownToggle
+                                  ></div>
+                                  <ul
+                                      class="qt-dropdown-menu invoice-items-dropdown"
+                                      ngbDropdownMenu
+                                  >
+                                      <li
+                                          *ngIf="asset.online"
+                                          class="pointer"
+                                          ngbDropdownItem
+                                          (click)="sendCommand('r', asset.ID)"
+                                      >
+                                          <div class="icon__restart qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                          Restart
+                                      </li>
+                                      <li
+                                          *ngIf="asset.online"
+                                          class="pointer"
+                                          ngbDropdownItem
+                                          (click)="sendCommand('s', asset.ID)"
+                                      >
+                                          <div class="icon__shutdown qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                          Shutdown
+                                      </li>
+                                      <li
+                                          *ngIf="asset.online"
+                                          class="pointer"
+                                          ngbDropdownItem
+                                          (click)="sendCommand('m', asset.Guid)"
+                                      >
+                                          <div class="
+                        icon__master-agent
+                        qt-bg-contain qt-sz-16 qt-mr-8
+                      "></div>
+                                          Set as Master Agent
+                                      </li>
+                                      <li
+                                          class="pointer"
+                                          (click)="sendCommand('ar', asset.ID)"
+                                          ngbDropdownItem
+                                      >
+                                          <div class="icon__remove qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                          Remove
+                                      </li>
+                                      <li
+                                        *ngIf="!asset.CanRemoteControl && asset.online"
+                                        class="pointer"
+                                        (click)="sendCommand('ira', asset.ID)"
+                                        ngbDropdownItem
+                                      >
+                                        <div class="icon__restart qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                        Install Remote Agent
+                                    </li>
+                                      <li
+                                        *ngIf="asset.CanRemoteControl && asset.online"
+                                        class="pointer"
+                                        (click)="sendCommand('ura', asset.ID)"
+                                        ngbDropdownItem
+                                      >
+                                      <div class="icon__remove qt-bg-contain qt-sz-16 qt-mr-8"></div>
+                                      Uninstall Remote Agent
+                                    </li>
+                                  </ul>
+                              </div>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+          <div
+              class="loading"
+              *ngIf="showPreloader"
+          ></div>
+      </div>
+  </div>
+  <div
+  class="company-devices-page__aside company-device-aside"
+  *ngIf="open"
+>
+  <div
+      class="loading"
+      *ngIf="Preloader"
+  ></div>
+  <div *ngIf="!Preloader">
+    <div class="company-device-aside__menu">
+      <div
+      class="company-device-aside__menu-item qt-pointer"
+      [ngClass]="{'--active': assetData.ID === assetData.ID}"
+  >
+      <ng-template
+          #asideMenuItem
+          class="tooltip"
+      >
+          {{assetData.Title}}
+      </ng-template>
+      <div
+          placement="left"
+          [ngbTooltip]="asideMenuItem"
+          class="qt-sz-24"
+          [ngClass]="{ icon__computer:
+            assetData.iconName === 'Workstation' || !assetData.iconName,
+          icon__tablet: assetData.iconName === 'Networking Hardware',
+          icon__printer: assetData.iconName === 'Printer',
+          icon__server: assetData.iconName === 'Server',
+          '--offline': !assetData.online,
+          '--online':assetData.online }"
+      ></div>
+  </div>
+  </div>
+  <div class="company-device-aside__header qt-df qt-ai-c qt-jc-sb">
+      <div class="qt-df qt-ai-c">
+        <div
+        class="icon qt-sz-24 qt-mr-12"
+        [ngClass]="{ icon__computer:
+          assetData.iconName === 'Workstation' || !assetData.iconName,
+        icon__tablet: assetData.iconName === 'Networking Hardware',
+        icon__printer: assetData.iconName === 'Printer',
+        icon__server: assetData.iconName === 'Server',
+        '--offline': !assetData.online,
+        '--online':assetData.online }"
+    ></div>
+    <div
+    class="qt-fs-13 qt-ff-sb qt-lh-154 company-device-aside__header-title"
+    [textContent]="assetData.Title"
+  >
+  </div>
+      </div>
+
+  </div>
+  </div>
+</div>
+</div>
+
+
+
+

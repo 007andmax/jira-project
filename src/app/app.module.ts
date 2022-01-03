@@ -461,6 +461,7 @@ import { ReportDeviceDeploymentwarrantyComponent } from './components/reports/re
 import { ReportDeviceProcessorramComponent } from './components/reports/reports/report-device-processorram/report-device-processorram.component';
 import { ReportDeviceDiskspaceComponent } from './components/reports/reports/report-device-diskspace/report-device-diskspace.component';
 import { ApplicationbycompanyReportComponent } from './components/reports/reports/applicationbycompany-report/applicationbycompany-report.component';
+import { DevicesComponent } from './components/devices/devices.component';
 
 declare var $: any;
 /**
@@ -878,7 +879,8 @@ declare var $: any;
     ReportDeviceDeploymentwarrantyComponent,
     ReportDeviceProcessorramComponent,
     ReportDeviceDiskspaceComponent,
-    ApplicationbycompanyReportComponent
+    ApplicationbycompanyReportComponent,
+    DevicesComponent
   ],
   imports: [
     BrowserModule,

@@ -55,6 +55,12 @@
         <div>Devices Beta</div>
     </li>
     <li
+        [ngClass]="{'--active':activePage === 'newdevices'}"
+        (click)="goToCompanySection('newdevices')"
+    >
+        <div>New Devices</div>
+    </li>
+    <li
         [ngClass]="{'--active':activePage === 'company-network-scan'}"
         (click)="goToCompanySection('network-scan')"
     >

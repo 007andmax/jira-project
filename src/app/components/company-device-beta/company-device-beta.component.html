@@ -46,8 +46,9 @@
                         <th class="company-devices-table__up-time">Up time</th>
                         <th class="company-devices-table__windows">Windows</th>
                         <th class="company-devices-table__ip-address">
-                            <span class="qt-pl-30">Ip address</span>
+                            <span class="qt-pl-30">IP address</span>
                         </th>
+                        <th class="company-devices-table__device-agent">Agent</th>
                         <th class="company-devices-table__go-to"></th>
                         <th class="company-devices-table__connect"></th>
                         <th class="company-devices-table__menu"></th>
@@ -228,6 +229,22 @@
                                       <div>Updates</div>
                                   </div>
                               </div>
+                          </td>
+                          <td class="company-devices-table__device-agent">
+                            <div class="qt-df qt-fd-c">
+                              <span>
+                                <span>{{ asset.InstallDate | date: 'dd/MM/yyyy' }}</span>
+                            </span>
+                            <span
+                                *ngIf="asset.IsAgentCurrent"
+                                class="agent-tag qt-ff-gm"
+                            >{{asset.CurrentVersion}}</span>
+                            <span
+                                *ngIf="!asset.IsAgentCurrent"
+                                class="agent-tag qt-ff-gm --offline"
+                            >{{asset.CurrentVersion}}</span>
+
+                          </div>
                           </td>
                             <td class="company-devices-table__go-to">
                                 <ng-template
