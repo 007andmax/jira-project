@@ -52,8 +52,8 @@ export class DevicesComponent implements OnInit {
   removable = true;
   tagCtrl = new FormControl();
   filteredTag = [];
-  tagFilterValue: string ="";
-  tag : any[] = [];
+  tagFilterValue: string = "";
+  tag: any[] = [];
   constructor(
     private leftPanelStateService: LeftPanelStateService,
     private agentService: AgentService,
@@ -69,7 +69,8 @@ export class DevicesComponent implements OnInit {
     this.leftPanelStateService.changeStateWithoutNavigate(
       "newdevices"
     );
-    this.setPreviewDataDevice();
+    //this.setPreviewDataDevice();
+    this.add(undefined);
   }
 
   setPreviewDataDevice() {
@@ -183,10 +184,10 @@ export class DevicesComponent implements OnInit {
     this.selectAllDevices = find ? false : true;
   }
 
-  openAside(type,asset){
+  openAside(type, asset) {
     this.open = true;
     this.tab = type;
-    this.assetData = this.assetList.find((x)=>x.Guid === asset.Guid);
+    this.assetData = this.assetList.find((x) => x.Guid === asset.Guid);
     this.Preloader = false;
   }
 
@@ -206,28 +207,41 @@ export class DevicesComponent implements OnInit {
   }
 
 
-  remove(index){
-    this.selectedTag.splice(index,1);
+  remove(index) {
+    this.selectedTag.splice(index, 1);
   }
 
-  onSelectTag(){
+  onSelectTag() {
 
   }
 
 
   add(Tag): void {
     this.tagFilterValue = "";
-    let Tags : any ={}
-    Tags.Name=Tag;
-    this.selectedTag.push(Tags);
-    this.tag.push(Tag);
-    let req : any = {};
+    let Tags: any = {}
+
+    if (Tag) {
+      Tags.Name = Tag;
+      this.selectedTag.push(Tags);
+      this.tag.push(Tag);
+    }
+
+    let req: any = {};
     req.TechCompanyGuid = '73221c72-f87c-4519-8235-c4b57ad1cc19';
     req.Criteria = this.tag;
+    debugger;
 
-    this.agentService.searchDeviceWithTag(req).subscribe((resp)=>{
-       console.log(resp);
-    })
+    this.agentService
+      .getAgentToken(
+        "QuickTech",
+        "s8Y1IuPCUUYlSLMbFijHvut5uOi/KnKNqOLtn57CBlw="
+      )
+      .subscribe((data) => {
+        this.agentService.setAccessToken(data.AccessToken);
+        this.agentService.searchDeviceWithTag(req).subscribe((resp) => {
+          console.log(resp);
+        });
+      });
 
   }
 

@@ -72,7 +72,7 @@ export class AgentService {
         this.encrypt128(this.key, JSON.stringify(data)),
         { headers: this.getHeader(), responseType: "text" }
       )
-      .pipe(map((data: string) => data));
+      .pipe(map((data: string) =>  this.decrypt128(data, this.key)));
   }
 
   public servicePauseCommand(data:any)
